@@ -257,6 +257,14 @@ components:
       type: object
       required: [messages]
       properties:
+        botToken:
+          type: string
+          maxLength: 4096
+          description: Cloudflare Turnstile token, required on the first message of a conversation
+        session:
+          type: string
+          maxLength: 512
+          description: Signed chat session stamp returned after successful bot verification
         messages:
           type: array
           maxItems: 30
@@ -279,6 +287,9 @@ components:
           type: string
         complete:
           type: boolean
+        session:
+          type: string
+          description: Signed chat session stamp; echo it back in subsequent messages
     LeadInput:
       type: object
       required: [name, email, message]

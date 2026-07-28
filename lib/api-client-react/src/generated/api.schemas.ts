@@ -81,6 +81,16 @@ export type CallbackChatInputMessagesItem = {
 };
 
 export interface CallbackChatInput {
+  /**
+     * Cloudflare Turnstile token, required on the first message of a conversation
+     * @maxLength 4096
+     */
+  botToken?: string;
+  /**
+     * Signed chat session stamp returned after successful bot verification
+     * @maxLength 512
+     */
+  session?: string;
   /** @maxItems 30 */
   messages: CallbackChatInputMessagesItem[];
 }
@@ -88,6 +98,8 @@ export interface CallbackChatInput {
 export interface CallbackChatReply {
   reply: string;
   complete: boolean;
+  /** Signed chat session stamp; echo it back in subsequent messages */
+  session?: string;
 }
 
 export interface LeadInput {

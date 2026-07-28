@@ -4,6 +4,7 @@ import { db, leadsTable } from "@workspace/db";
 import { CallbackChatBody, CallbackChatResponse } from "@workspace/api-zod";
 import { openai } from "@workspace/integrations-openai-ai-server";
 import { sendLeadNotificationEmail } from "../lib/leadNotifications";
+import { verifyTurnstileToken, mintChatSession, isValidChatSession } from "../lib/botVerification";
 
 const router: IRouter = Router();
 
@@ -71,6 +72,26 @@ router.post("/callback-chat", async (req, res): Promise<void> => {
     res.status(400).json({ error: parsed.error.message });
     return;
   }
+  // Bot gate: every request needs either a valid signed session stamp
+  // (issued after a successful challenge) or a fresh Turnstile token.
+  const { session, botToken } = parsed.data;
+  let chatSession = session && isValidChatSession(session, ip) ? session : null;
+  if (!chatSession) {
+    let verified = false;
+    if (botToken) {
+      try {
+        verified = await verifyTurnstileToken(botToken, ip);
+      } catch (err) {
+        req.log.error({ err }, "Turnstile verification request failed");
+      }
+    }
+    if (!verified) {
+      res.status(403).json({ error: "Bot verification failed" });
+      return;
+    }
+    chatSession = mintChatSession(ip);
+  }
+
   // Cap conversation length regardless of client behavior
   const turns = parsed.data.messages.slice(-20);
 
@@ -170,6 +191,7 @@ router.post("/callback-chat", async (req, res): Promise<void> => {
           out.reply ??
           "Sorry, something went wrong on our end — please call us at (480) 490-0064.",
         complete,
+        session: chatSession,
       }),
     );
   } catch (err) {

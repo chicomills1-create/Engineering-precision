@@ -9,4 +9,6 @@
 export interface CallbackChatReply {
   reply: string;
   complete: boolean;
+  /** Signed chat session stamp; echo it back in subsequent messages */
+  session?: string;
 }

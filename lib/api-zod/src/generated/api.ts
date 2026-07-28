@@ -102,6 +102,10 @@ export const CreateSubscriberResponse = zod.object({
  * Sends the visitor's conversation to the AI callback assistant. When name and phone are captured, a callback lead is created and the team is notified.
  * @summary AI callback assistant chat turn
  */
+export const callbackChatBodyBotTokenMax = 4096;
+
+export const callbackChatBodySessionMax = 512;
+
 export const callbackChatBodyMessagesItemContentMax = 2000;
 
 export const callbackChatBodyMessagesMax = 30;
@@ -109,6 +113,8 @@ export const callbackChatBodyMessagesMax = 30;
 
 
 export const CallbackChatBody = zod.object({
+  "botToken": zod.string().max(callbackChatBodyBotTokenMax).optional().describe('Cloudflare Turnstile token, required on the first message of a conversation'),
+  "session": zod.string().max(callbackChatBodySessionMax).optional().describe('Signed chat session stamp returned after successful bot verification'),
   "messages": zod.array(zod.object({
   "role": zod.enum(['user', 'assistant']),
   "content": zod.string().min(1).max(callbackChatBodyMessagesItemContentMax)
@@ -117,7 +123,8 @@ export const CallbackChatBody = zod.object({
 
 export const CallbackChatResponse = zod.object({
   "reply": zod.string(),
-  "complete": zod.boolean()
+  "complete": zod.boolean(),
+  "session": zod.string().optional().describe('Signed chat session stamp; echo it back in subsequent messages')
 })
 
 

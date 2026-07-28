@@ -5,6 +5,47 @@ type Msg = { role: "user" | "assistant"; content: string };
 
 const API_BASE = `${import.meta.env.BASE_URL}api`;
 
+// Cloudflare Turnstile invisible bot challenge.
+// Falls back to Cloudflare's documented always-pass test site key in dev.
+const TURNSTILE_SITE_KEY =
+  (import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined) || "1x00000000000000000000AA";
+const TURNSTILE_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (
+        el: HTMLElement,
+        opts: {
+          sitekey: string;
+          size?: string;
+          callback: (token: string) => void;
+          "error-callback"?: () => void;
+        },
+      ) => string;
+      reset: (widgetId: string) => void;
+    };
+  }
+}
+
+function loadTurnstileScript(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (window.turnstile) return resolve();
+    const existing = document.querySelector<HTMLScriptElement>(`script[src="${TURNSTILE_SRC}"]`);
+    if (existing) {
+      existing.addEventListener("load", () => resolve());
+      existing.addEventListener("error", () => reject(new Error("turnstile load failed")));
+      return;
+    }
+    const s = document.createElement("script");
+    s.src = TURNSTILE_SRC;
+    s.async = true;
+    s.onload = () => resolve();
+    s.onerror = () => reject(new Error("turnstile load failed"));
+    document.head.appendChild(s);
+  });
+}
+
 const GREETING: Msg = {
   role: "assistant",
   content:
@@ -18,10 +59,37 @@ export function CallbackWidget() {
   const [sending, setSending] = useState(false);
   const [complete, setComplete] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const tokenPromiseRef = useRef<Promise<string | null> | null>(null);
+  const sessionRef = useRef<string | null>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, open]);
+
+  // Kick off the invisible bot challenge as soon as the widget opens so the
+  // token is usually ready before the visitor finishes typing.
+  useEffect(() => {
+    if (!open || sessionRef.current || tokenPromiseRef.current) return;
+    tokenPromiseRef.current = (async () => {
+      try {
+        await loadTurnstileScript();
+        return await new Promise<string | null>((resolve) => {
+          const el = turnstileRef.current;
+          if (!el || !window.turnstile) return resolve(null);
+          window.turnstile.render(el, {
+            sitekey: TURNSTILE_SITE_KEY,
+            callback: (token) => resolve(token),
+            "error-callback": () => resolve(null),
+          });
+          // Don't hang forever if the challenge never resolves
+          setTimeout(() => resolve(null), 20_000);
+        });
+      } catch {
+        return null;
+      }
+    })();
+  }, [open]);
 
   const send = async () => {
     const text = input.trim();
@@ -31,14 +99,25 @@ export function CallbackWidget() {
     setInput("");
     setSending(true);
     try {
+      // First message: wait for the invisible bot challenge token.
+      let botToken: string | null = null;
+      if (!sessionRef.current) {
+        botToken = (await tokenPromiseRef.current) ?? null;
+        tokenPromiseRef.current = null;
+      }
       const res = await fetch(`${API_BASE}/callback-chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // Send the conversation minus the canned greeting; keep last 20 turns
-        body: JSON.stringify({ messages: next.slice(1).slice(-20) }),
+        body: JSON.stringify({
+          messages: next.slice(1).slice(-20),
+          ...(sessionRef.current ? { session: sessionRef.current } : {}),
+          ...(botToken ? { botToken } : {}),
+        }),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data: { reply: string; complete: boolean } = await res.json();
+      const data: { reply: string; complete: boolean; session?: string } = await res.json();
+      if (data.session) sessionRef.current = data.session;
       setMessages((m) => [...m, { role: "assistant", content: data.reply }]);
       if (data.complete) setComplete(true);
     } catch {
@@ -57,6 +136,8 @@ export function CallbackWidget() {
 
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
+      {/* Invisible Turnstile bot-challenge container */}
+      <div ref={turnstileRef} className="hidden" aria-hidden="true" />
       {open && (
         <div className="w-[min(92vw,380px)] bg-card border border-border shadow-2xl shadow-black/60 flex flex-col overflow-hidden rounded-[2px]">
           <div className="flex items-center justify-between bg-primary px-4 py-3">
