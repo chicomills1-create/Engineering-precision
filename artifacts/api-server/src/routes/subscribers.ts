@@ -6,6 +6,7 @@ import {
   ListSubscribersResponse,
   UnsubscribeSubscriberBody,
   UnsubscribeSubscriberResponse,
+  DeleteSubscriberParams,
   DeleteSubscriberResponse,
 } from "@workspace/api-zod";
 import { requireAuth } from "../middlewares/requireAuth";
@@ -33,15 +34,13 @@ router.get("/subscribers", requireAuth, async (_req, res): Promise<void> => {
 });
 
 router.post("/subscribers", async (req, res): Promise<void> => {
-    const parsed = UnsubscribeSubscriberBody.safeParse(req.body);
-    if (!parsed.success) {
-      res.status(400).json({ error: parsed.error.message });
-      return;
-    }
+  const parsed = CreateSubscriberBody.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: parsed.error.message });
+    return;
+  }
 
-    const email = parsed.data.email.trim().toLowerCase();
-
-    const parsedParams = DeleteSubscriberParams.safeParse(req.params);
+  const email = parsed.data.email.trim().toLowerCase();
 
   // New signups insert; re-subscribing after an unsubscribe clears the flag.
   const inserted = await db
@@ -78,15 +77,13 @@ router.post("/subscribers", async (req, res): Promise<void> => {
 });
 
 router.post("/subscribers/unsubscribe", async (req, res): Promise<void> => {
-    const parsed = UnsubscribeSubscriberBody.safeParse(req.body);
-    if (!parsed.success) {
-      res.status(400).json({ error: parsed.error.message });
-      return;
-    }
+  const parsed = UnsubscribeSubscriberBody.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: parsed.error.message });
+    return;
+  }
 
-    const email = parsed.data.email.trim().toLowerCase();
-
-    const parsedParams = DeleteSubscriberParams.safeParse(req.params);
+  const email = parsed.data.email.trim().toLowerCase();
   const token = parsed.data.token;
 
   // Tokenized links must verify; a bad token is rejected outright so
@@ -109,7 +106,8 @@ router.delete(
   "/subscribers/:id",
   requireAuth,
   async (req, res): Promise<void> => {
-    if (!Number.isInteger(id) || id <= 0) {
+    const parsedParams = DeleteSubscriberParams.safeParse(req.params);
+    if (!parsedParams.success) {
       res.status(400).json({ error: "Invalid subscriber id" });
       return;
     }
