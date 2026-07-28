@@ -1,5 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { Logo } from "@/components/Logo";
 import { useState, useEffect } from "react";
 
 export function Shell({ children }: { children: React.ReactNode }) {
@@ -40,9 +41,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
         <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Link href="/" className="group flex items-center gap-3">
-              <div className="w-8 h-8 bg-primary rounded-[2px] flex items-center justify-center">
-                <div className="w-3 h-3 border-2 border-white" />
-              </div>
+              <Logo className="w-9 h-9 text-primary group-hover:scale-105 transition-transform" />
               <div className="flex flex-col">
                 <span className="font-display font-bold text-lg leading-none tracking-tight group-hover:text-primary transition-colors">
                   APEX GRID
@@ -167,9 +166,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
             <div className="lg:col-span-2">
               <Link href="/" className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-8 bg-primary rounded-[2px] flex items-center justify-center">
-                  <div className="w-3 h-3 border-2 border-white" />
-                </div>
+                <Logo className="w-9 h-9 text-primary" />
                 <span className="font-display font-bold text-xl tracking-tight">
                   APEX GRID
                 </span>
