@@ -174,8 +174,8 @@ export function Shell({ children }: { children: React.ReactNode }) {
               <p className="text-muted-foreground text-sm max-w-sm mb-8 leading-relaxed">
                 De-risking projects from concept to permit. Integrated MEP, Structural, and Civil engineering backed by licensed professionals.
               </p>
-              <a href="mailto:plans@apexgrid.eng" className="inline-flex h-12 px-6 bg-secondary text-foreground font-semibold text-sm items-center justify-center rounded-[2px] hover:bg-white/10 transition-colors">
-                plans@apexgrid.eng
+              <a href="mailto:info@apexgrideng.com" className="inline-flex h-12 px-6 bg-secondary text-foreground font-semibold text-sm items-center justify-center rounded-[2px] hover:bg-white/10 transition-colors">
+                info@apexgrideng.com
               </a>
             </div>
             
@@ -203,8 +203,8 @@ export function Shell({ children }: { children: React.ReactNode }) {
               <h4 className="font-display font-semibold mb-6 text-sm uppercase tracking-wider text-muted-foreground">Contact</h4>
               <ul className="space-y-4 text-sm text-foreground/80">
                 <li>
-                  <span className="block font-medium text-foreground mb-1">National HQ</span>
-                  1450 Technical Parkway<br />Suite 400<br />San Jose, CA 95134
+                  <span className="block font-medium text-foreground mb-1">Headquarters</span>
+                  22475 E Quintero Rd<br />Queen Creek, AZ 85142
                 </li>
                 <li className="pt-4 border-t border-border/50">
                   <a href="tel:+18005550199" className="hover:text-primary transition-colors font-medium">

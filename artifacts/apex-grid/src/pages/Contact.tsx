@@ -258,15 +258,21 @@ export default function Contact() {
                 <div className="space-y-8">
                   <div>
                     <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Bidding & Proposals</h4>
-                    <a href="mailto:bids@apexgrid.eng" className="text-primary hover:underline">bids@apexgrid.eng</a>
+                    <a href="mailto:info@apexgrideng.com" className="text-primary hover:underline">info@apexgrideng.com</a>
                   </div>
                   
                   <div>
                     <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">General Inquiries</h4>
-                    <p className="text-foreground">info@apexgrid.eng</p>
+                    <p className="text-foreground">info@apexgrideng.com</p>
                     <p className="text-foreground">+1 (800) 555-0199</p>
                   </div>
                   
+                  <div>
+                    <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Headquarters</h4>
+                    <p className="text-foreground">22475 E Quintero Rd</p>
+                    <p className="text-foreground">Queen Creek, AZ 85142</p>
+                  </div>
+
                   <div className="pt-8 border-t border-border">
                     <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-4">Response Time</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
