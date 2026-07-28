@@ -1,4 +1,4 @@
 - [Orval zod codegen](orval-zod-codegen.md) — OpenAPI `type: integer` breaks generated zod (v4 `zod.int()` vs lib's zod v3); use `type: number` in the spec.
 - [Post-merge frontend crashes](post-merge-checks.md) — after task merges touching App.tsx, check for module-level TDZ (consts referenced before declaration) and rerun api-spec codegen; verify with typecheck + PORT/BASE_PATH-prefixed vite build.
-- [Static SEO pages](seo-static-pages.md) — 251 generated pages in public/locations/; regenerate via seo:generate then restart web workflow (Vite dev caches public-dir listing).
+- [Static SEO pages](seo-static-pages.md) — 341 generated pages (states + 18 city metros) in public/locations/; regenerate via seo:generate then restart web workflow (Vite dev caches public-dir listing).
 - [SendGrid lead emails](sendgrid-lead-emails.md) — from-address must be a SendGrid-verified sender or sends 403; config via LEAD_NOTIFY_EMAIL / LEAD_NOTIFY_FROM_EMAIL env vars.
