@@ -29,6 +29,10 @@ const queryClient = new QueryClient({
   },
 });
 
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const clerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
+
 const clerkPubKey = publishableKeyFromHost(
   window.location.hostname,
   import.meta.env.VITE_CLERK_PUBLISHABLE_KEY,
@@ -195,10 +199,6 @@ function SignUpPage() {
     </div>
   );
 }
-
-const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
-
-const clerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
 
 function stripBase(path: string): string {
   return basePath && path.startsWith(basePath)
