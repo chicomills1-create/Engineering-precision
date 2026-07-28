@@ -69,7 +69,7 @@
   --elevate-1: rgba(0, 0, 0, 0.03);
   --elevate-2: rgba(0, 0, 0, 0.08);
 
-  --background: 230 25% 6%;
+  --background: 0 0% 98%;
   --foreground: 230 10% 90%;
   --border: 230 15% 15%;
   --card: 230 20% 10%;
@@ -78,18 +78,18 @@
   --popover: 230 20% 10%;
   --popover-foreground: 230 10% 90%;
   --popover-border: 230 15% 15%;
-  --primary: 43 65% 53%;
-  --primary-foreground: 230 25% 6%;
+  --primary: 0 72% 45%;
+  --primary-foreground: 0 0% 5%;
   --secondary: 230 25% 15%;
   --secondary-foreground: 230 10% 90%;
   --muted: 230 25% 15%;
   --muted-foreground: 230 10% 65%;
-  --accent: 43 65% 53%;
-  --accent-foreground: 230 25% 6%;
+  --accent: 0 72% 45%;
+  --accent-foreground: 0 0% 5%;
   --destructive: 0 62% 30%;
   --destructive-foreground: 0 0% 100%;
   --input: 230 15% 20%;
-  --ring: 43 65% 53%;
+  --ring: 0 72% 45%;
 
   --app-font-sans: 'Inter', sans-serif;
   --app-font-display: 'Space Grotesk', sans-serif;
@@ -105,27 +105,27 @@
   --elevate-1: rgba(255, 255, 255, 0.04);
   --elevate-2: rgba(255, 255, 255, 0.09);
 
-  --background: 230 25% 6%;
-  --foreground: 230 10% 90%;
-  --border: 230 15% 15%;
-  --card: 230 20% 10%;
-  --card-foreground: 230 10% 90%;
-  --card-border: 230 15% 15%;
-  --popover: 230 20% 10%;
-  --popover-foreground: 230 10% 90%;
-  --popover-border: 230 15% 15%;
-  --primary: 43 65% 53%;
-  --primary-foreground: 230 25% 6%;
-  --secondary: 230 25% 15%;
-  --secondary-foreground: 230 10% 90%;
-  --muted: 230 25% 15%;
-  --muted-foreground: 230 10% 65%;
-  --accent: 43 65% 53%;
-  --accent-foreground: 230 25% 6%;
+  --background: 0 0% 4%;
+  --foreground: 0 0% 92%;
+  --border: 0 0% 14%;
+  --card: 0 0% 8%;
+  --card-foreground: 0 0% 92%;
+  --card-border: 0 0% 14%;
+  --popover: 0 0% 8%;
+  --popover-foreground: 0 0% 92%;
+  --popover-border: 0 0% 14%;
+  --primary: 0 72% 48%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 13%;
+  --secondary-foreground: 0 0% 92%;
+  --muted: 0 0% 13%;
+  --muted-foreground: 0 0% 62%;
+  --accent: 0 72% 48%;
+  --accent-foreground: 0 0% 100%;
   --destructive: 0 62% 30%;
   --destructive-foreground: 0 0% 100%;
-  --input: 230 15% 20%;
-  --ring: 43 65% 53%;
+  --input: 0 0% 20%;
+  --ring: 0 72% 48%;
 }
 
 @layer base {
