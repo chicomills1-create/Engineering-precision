@@ -11,6 +11,7 @@ import Portfolio from '@/pages/Portfolio';
 import Industries from '@/pages/Industries';
 import Resources from '@/pages/Resources';
 import About from '@/pages/About';
+import Team from '@/pages/Team';
 import Contact from '@/pages/Contact';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
@@ -60,6 +61,7 @@ function Router() {
         <Route path="/industries" component={Industries} />
         <Route path="/resources" component={Resources} />
         <Route path="/about" component={About} />
+        <Route path="/team" component={Team} />
         <Route path="/contact" component={Contact} />
         <Route path="/admin">
           <LazyClerk page="admin" />

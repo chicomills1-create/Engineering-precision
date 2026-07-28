@@ -70,6 +70,7 @@ const orgSchema = {
   name: "Apex Grid Engineering",
   url: SITE,
   email: "info@apexgrideng.com",
+  telephone: "+1-480-490-0064",
   address: {
     "@type": "PostalAddress",
     streetAddress: "22475 E Quintero Rd",
@@ -272,6 +273,7 @@ function writeSitemap(states: StateData[]) {
     ["/industries", "0.7", "monthly"],
     ["/resources", "0.7", "weekly"],
     ["/about", "0.6", "monthly"],
+    ["/team", "0.6", "monthly"],
     ["/contact", "0.7", "monthly"],
   ];
   const urls: string[] = core.map(

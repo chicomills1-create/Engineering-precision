@@ -86,7 +86,7 @@ function footer(): string {
     </div>
     <div><h4>Firm</h4><ul><li><a href="/about">About Us</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/resources">Resources</a></li><li><a href="/locations/">Service Areas</a></li><li><a href="/contact">Contact</a></li></ul></div>
     <div><h4>Services</h4><ul><li><a href="/services/mep">MEP Engineering</a></li><li><a href="/services/structural">Structural Design</a></li><li><a href="/services/civil">Civil Engineering</a></li><li><a href="/services/assessments">Building Assessments</a></li></ul></div>
-    <div><h4>Contact</h4><ul><li>22475 E Quintero Rd<br/>Queen Creek, AZ 85142</li><li><a href="mailto:info@apexgrideng.com">info@apexgrideng.com</a></li><li><a href="tel:+18005550199">+1 (800) 555-0199</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li>22475 E Quintero Rd<br/>Queen Creek, AZ 85142</li><li><a href="mailto:info@apexgrideng.com">info@apexgrideng.com</a></li><li><a href="tel:+14804900064">(480) 490-0064</a></li></ul></div>
   </div>
   <div class="fbottom"><p>© ${year} Apex Grid Engineering. All rights reserved.</p><p><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></p></div>
 </div></footer>`;

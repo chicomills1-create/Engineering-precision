@@ -19,6 +19,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
   const navigation = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
+    { name: "Team", href: "/team" },
     { name: "Portfolio", href: "/portfolio" },
     { name: "Industries", href: "/industries" },
     { name: "Resources", href: "/resources" },
@@ -183,6 +184,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
               <h4 className="font-display font-semibold mb-6 text-sm uppercase tracking-wider text-muted-foreground">Firm</h4>
               <ul className="space-y-4 text-sm text-foreground/80">
                 <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
+                <li><Link href="/team" className="hover:text-primary transition-colors">Team</Link></li>
                 <li><Link href="/portfolio" className="hover:text-primary transition-colors">Portfolio</Link></li>
                 <li><Link href="/resources" className="hover:text-primary transition-colors">Resources</Link></li>
                 <li><a href="/locations/" className="hover:text-primary transition-colors">Service Areas</a></li>
@@ -208,8 +210,8 @@ export function Shell({ children }: { children: React.ReactNode }) {
                   22475 E Quintero Rd<br />Queen Creek, AZ 85142
                 </li>
                 <li className="pt-4 border-t border-border/50">
-                  <a href="tel:+18005550199" className="hover:text-primary transition-colors font-medium">
-                    +1 (800) 555-0199
+                  <a href="tel:+14804900064" className="hover:text-primary transition-colors font-medium">
+                    (480) 490-0064
                   </a>
                 </li>
               </ul>

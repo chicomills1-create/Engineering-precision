@@ -264,7 +264,7 @@ export default function Contact() {
                   <div>
                     <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">General Inquiries</h4>
                     <p className="text-foreground">info@apexgrideng.com</p>
-                    <p className="text-foreground">+1 (800) 555-0199</p>
+                    <p className="text-foreground">(480) 490-0064</p>
                   </div>
                   
                   <div>
