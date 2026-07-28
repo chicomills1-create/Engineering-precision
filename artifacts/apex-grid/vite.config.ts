@@ -63,6 +63,26 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, 'dist/public'),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return undefined;
+          // Keep Clerk in its own lazy-loaded chunk graph
+          if (id.includes('@clerk')) return undefined;
+          if (
+            id.includes('/react/') ||
+            id.includes('/react-dom/') ||
+            id.includes('/scheduler/')
+          ) {
+            return 'react-vendor';
+          }
+          if (id.includes('@radix-ui')) return 'radix';
+          if (id.includes('lucide-react')) return 'icons';
+          if (id.includes('framer-motion')) return 'motion';
+          return undefined;
+        },
+      },
+    },
   },
   server: {
     port,
