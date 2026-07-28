@@ -8,7 +8,11 @@ import { useEffect } from 'react';
 import { Shell } from '@/components/layout/Shell';
 import Home from '@/pages/Home';
 import Services from '@/pages/Services';
-import Projects from '@/pages/Projects';
+import ServiceDetail from '@/pages/ServiceDetail';
+import Legal from '@/pages/Legal';
+import Portfolio from '@/pages/Portfolio';
+import Industries from '@/pages/Industries';
+import Resources from '@/pages/Resources';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
 
@@ -27,7 +31,16 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/services" component={Services} />
-        <Route path="/projects" component={Projects} />
+        <Route path="/services/:id" component={ServiceDetail} />
+        <Route path="/privacy">
+          <Legal page="privacy" />
+        </Route>
+        <Route path="/terms">
+          <Legal page="terms" />
+        </Route>
+        <Route path="/portfolio" component={Portfolio} />
+        <Route path="/industries" component={Industries} />
+        <Route path="/resources" component={Resources} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route component={NotFound} />
