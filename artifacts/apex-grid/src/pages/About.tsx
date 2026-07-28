@@ -1,5 +1,5 @@
 import { usePageMeta } from "@/lib/seo";
-import officeImg from "@assets/generated_images/office.jpg";
+import officeImg from "@assets/generated_images/office.webp";
 
 export default function About() {
   usePageMeta(PAGE_META);

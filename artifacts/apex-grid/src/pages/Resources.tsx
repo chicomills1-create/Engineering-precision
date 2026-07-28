@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation, useSearch } from "wouter";
 import { ArrowRight, Clock, Tag, X } from "lucide-react";
-import resourcesBg from "@assets/generated_images/resources-bg.jpg";
+import resourcesBg from "@assets/generated_images/resources-bg.webp";
 
 const articles = [
   {

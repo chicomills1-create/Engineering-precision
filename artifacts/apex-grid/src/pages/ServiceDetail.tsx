@@ -1,9 +1,9 @@
 import { Link, useParams } from "wouter";
 import { ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
-import mepBg from "@assets/generated_images/mep-bg.jpg";
-import structuralBg from "@assets/generated_images/structural-bg.jpg";
-import civilBg from "@assets/generated_images/civil-bg.jpg";
-import assessmentBg from "@assets/generated_images/assessment-bg.jpg";
+import mepBg from "@assets/generated_images/mep-bg.webp";
+import structuralBg from "@assets/generated_images/structural-bg.webp";
+import civilBg from "@assets/generated_images/civil-bg.webp";
+import assessmentBg from "@assets/generated_images/assessment-bg.webp";
 import NotFound from "./not-found";
 
 const servicesData = {

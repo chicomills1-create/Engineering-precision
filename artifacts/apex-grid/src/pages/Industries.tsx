@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import industriesBg from "@assets/generated_images/industries-bg.jpg";
+import industriesBg from "@assets/generated_images/industries-bg.webp";
 
 export default function Industries() {
   const sectors = [

@@ -1,8 +1,8 @@
 import { Link } from "wouter";
-import project1 from "@assets/generated_images/project-1.jpg";
-import project2 from "@assets/generated_images/project-2.jpg";
-import project3 from "@assets/generated_images/project-3.jpg";
-import portfolioBg from "@assets/generated_images/portfolio-bg.jpg";
+import project1 from "@assets/generated_images/project-1.webp";
+import project2 from "@assets/generated_images/project-2.webp";
+import project3 from "@assets/generated_images/project-3.webp";
+import portfolioBg from "@assets/generated_images/portfolio-bg.webp";
 
 export default function Portfolio() {
   const projects = [

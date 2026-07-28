@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { ArrowRight, ChevronRight, FileCheck, Layers, ShieldCheck, Zap } from "lucide-react";
-import heroBg from "@assets/generated_images/hero-bg2.jpg";
+import heroBg from "@assets/generated_images/hero-bg2.webp";
 import { useEffect, useState } from "react";
 import { usePageMeta } from "@/lib/seo";
 
