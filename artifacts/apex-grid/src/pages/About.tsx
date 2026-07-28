@@ -42,7 +42,7 @@ export default function About() {
                 As an integrated design firm—housing Structural, MEP, and Civil engineering under one roof—we eliminate the friction of coordinating between disconnected consultants. We handle the heavy technical lifting so architects can focus on vision and contractors can focus on execution.
               </p>
               <p>
-                We are not an outsourced drafting service. Every project is engineered domestically and stamped by our in-house Professional Engineers, licensed in all 50 states.
+                We are not an outsourced drafting service. With a team of in-house Professional Engineers and more than 20 engineers on staff, every project is engineered domestically and stamped by PEs licensed in all 50 states — and we're built to take on jobs of any size, with fast quote turnaround on every request.
               </p>
             </div>
             

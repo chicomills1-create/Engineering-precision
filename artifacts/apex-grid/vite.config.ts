@@ -27,9 +27,40 @@ if (!basePath) {
   );
 }
 
+/** Dev-only: resolve directory URLs under /locations/ to their static index.html
+ * (Vite's SPA fallback would otherwise swallow them). Static hosting handles this in production. */
+function staticDirIndex() {
+  return {
+    name: 'static-dir-index',
+    configureServer(server: {
+      middlewares: {
+        use: (
+          fn: (req: { url?: string }, res: unknown, next: () => void) => void,
+        ) => void;
+      };
+    }) {
+      server.middlewares.use((req, _res, next) => {
+        if (req.url) {
+          const [pathname, query] = req.url.split('?');
+          if (/^\/locations(\/|$)/.test(pathname)) {
+            const rewritten = pathname.endsWith('/')
+              ? `${pathname}index.html`
+              : !path.extname(pathname)
+                ? `${pathname}/index.html`
+                : pathname;
+            req.url = query ? `${rewritten}?${query}` : rewritten;
+          }
+        }
+        next();
+      });
+    },
+  };
+}
+
 export default defineConfig({
   base: basePath,
   plugins: [
+    staticDirIndex(),
     react(),
     tailwindcss({ optimize: false }),
     runtimeErrorOverlay(),
