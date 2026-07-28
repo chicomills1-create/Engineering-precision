@@ -18,6 +18,23 @@ export const HealthCheckResponse = zod.object({
 
 
 /**
+ * @summary List all leads (admin only)
+ */
+export const ListLeadsResponseItem = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "email": zod.string(),
+  "company": zod.string().nullish(),
+  "phone": zod.string().nullish(),
+  "projectType": zod.string().nullish(),
+  "services": zod.string().nullish(),
+  "message": zod.string(),
+  "createdAt": zod.string()
+})
+export const ListLeadsResponse = zod.array(ListLeadsResponseItem)
+
+
+/**
  * @summary Submit a project inquiry / lead
  */
 

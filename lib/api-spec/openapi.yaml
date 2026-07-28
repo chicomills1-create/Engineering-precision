@@ -27,6 +27,25 @@ paths:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
   /leads:
+    get:
+      operationId: listLeads
+      tags: [leads]
+      summary: List all leads (admin only)
+      responses:
+        "200":
+          description: All leads, newest first
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Lead"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
     post:
       operationId: createLead
       tags: [leads]

@@ -131,6 +131,83 @@ export function useHealthCheck<TData = Awaited<ReturnType<typeof healthCheck>>, 
 
 
 
+export const getListLeadsUrl = () => {
+
+
+
+
+  return `/api/leads`
+}
+
+/**
+ * @summary List all leads (admin only)
+ */
+export const listLeads = async ( options?: Parameters<typeof customFetch>[1]): Promise<Lead[]> => {
+
+  return customFetch<Lead[]>(getListLeadsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListLeadsQueryKey = () => {
+    return [
+    `/api/leads`
+    ] as const;
+    }
+
+
+export const getListLeadsQueryOptions = <TData = Awaited<ReturnType<typeof listLeads>>, TError = ErrorType<ErrorMessage>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLeads>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListLeadsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listLeads>>> = ({ signal }) => listLeads({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listLeads>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListLeadsQueryResult = NonNullable<Awaited<ReturnType<typeof listLeads>>>
+export type ListLeadsQueryError = ErrorType<ErrorMessage>
+
+
+/**
+ * @summary List all leads (admin only)
+ */
+
+export function useListLeads<TData = Awaited<ReturnType<typeof listLeads>>, TError = ErrorType<ErrorMessage>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLeads>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListLeadsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
 export const getCreateLeadUrl = () => {
 
 
