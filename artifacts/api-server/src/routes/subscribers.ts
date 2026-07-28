@@ -4,10 +4,13 @@ import {
   CreateSubscriberBody,
   CreateSubscriberResponse,
   ListSubscribersResponse,
+  UnsubscribeSubscriberBody,
+  UnsubscribeSubscriberResponse,
+  DeleteSubscriberResponse,
 } from "@workspace/api-zod";
 import { requireAuth } from "../middlewares/requireAuth";
 import { sendWelcomeEmail } from "../lib/welcomeEmail";
-import { desc, eq, isNull } from "drizzle-orm";
+import { desc, eq, isNull, sql } from "drizzle-orm";
 
 const router: IRouter = Router();
 
@@ -29,7 +32,7 @@ router.get("/subscribers", requireAuth, async (_req, res): Promise<void> => {
 });
 
 router.post("/subscribers", async (req, res): Promise<void> => {
-  const parsed = UnsubscribeSubscriberBody.safeParse(req.body);
+  const parsed = CreateSubscriberBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: parsed.error.message });
     return;
@@ -37,16 +40,23 @@ router.post("/subscribers", async (req, res): Promise<void> => {
 
   const email = parsed.data.email.trim().toLowerCase();
 
-    const id = Number(req.params.id);
+  // New signups insert; re-subscribing after an unsubscribe clears the flag.
   const inserted = await db
     .insert(subscribersTable)
     .values({ email })
-    .onConflictDoNothing({ target: subscribersTable.email })
+    .onConflictDoUpdate({
+      target: subscribersTable.email,
+      set: { unsubscribedAt: null },
+      setWhere: sql`${subscribersTable.unsubscribedAt} is not null`,
+    })
     .returning();
 
-  // Only new subscribers (not repeat signups) get a welcome email.
+  // Only first-time signups get a welcome email.
   // Fire-and-forget: email failures must never break signup.
-  if (inserted.length > 0) {
+  const isNew =
+    inserted.length > 0 && inserted[0].unsubscribedAt === null &&
+    Math.abs(inserted[0].createdAt.getTime() - Date.now()) < 5000;
+  if (isNew) {
     sendWelcomeEmail(email)
       .then((result) => {
         if (!result.ok) {
@@ -63,9 +73,40 @@ router.post("/subscribers", async (req, res): Promise<void> => {
   res.status(201).json(CreateSubscriberResponse.parse({ ok: true }));
 });
 
-export default router;
+router.post("/subscribers/unsubscribe", async (req, res): Promise<void> => {
+  const parsed = UnsubscribeSubscriberBody.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: parsed.error.message });
+    return;
+  }
 
-    const deleted = await db
-      .delete(subscribersTable)
-      .where(eq(subscribersTable.id, id))
-      .returning({ id: subscribersTable.id });
+  const email = parsed.data.email.trim().toLowerCase();
+  await db
+    .update(subscribersTable)
+    .set({ unsubscribedAt: new Date() })
+    .where(eq(subscribersTable.email, email));
+
+  res.json(UnsubscribeSubscriberResponse.parse({ ok: true }));
+});
+
+router.delete("/subscribers/:id", requireAuth, async (req, res): Promise<void> => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id) || id <= 0) {
+    res.status(400).json({ error: "Invalid subscriber id" });
+    return;
+  }
+
+  const deleted = await db
+    .delete(subscribersTable)
+    .where(eq(subscribersTable.id, id))
+    .returning({ id: subscribersTable.id });
+
+  if (deleted.length === 0) {
+    res.status(404).json({ error: "Subscriber not found" });
+    return;
+  }
+
+  res.json(DeleteSubscriberResponse.parse({ ok: true }));
+});
+
+export default router;
