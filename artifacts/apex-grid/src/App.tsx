@@ -13,6 +13,7 @@ import Resources from '@/pages/Resources';
 import About from '@/pages/About';
 import Team from '@/pages/Team';
 import Contact from '@/pages/Contact';
+import Unsubscribe from '@/pages/Unsubscribe';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
 import { lazy, Suspense, useEffect } from 'react';
@@ -63,6 +64,7 @@ function Router() {
         <Route path="/about" component={About} />
         <Route path="/team" component={Team} />
         <Route path="/contact" component={Contact} />
+        <Route path="/unsubscribe" component={Unsubscribe} />
         <Route path="/admin">
           <LazyClerk page="admin" />
         </Route>

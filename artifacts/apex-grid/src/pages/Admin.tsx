@@ -6,10 +6,12 @@ import {
   useListLeads,
   useListSubscribers,
   useUpdateLead,
+  useDeleteSubscriber,
   getListLeadsQueryKey,
+  getListSubscribersQueryKey,
   LeadStatus,
 } from '@workspace/api-client-react';
-import { Download, Inbox, LogOut, Mail, Phone, ShieldAlert, Users } from 'lucide-react';
+import { Download, Inbox, LogOut, Mail, Phone, ShieldAlert, Trash2, Users } from 'lucide-react';
 
 const STATUSES = [LeadStatus.new, LeadStatus.contacted, LeadStatus.closed] as const;
 
@@ -227,6 +229,14 @@ function LeadsList() {
 
 function SubscribersSection() {
   const { data: subscribers, isLoading, error } = useListSubscribers();
+  const queryClient = useQueryClient();
+  const deleteSubscriber = useDeleteSubscriber({
+    mutation: {
+      onSuccess: () => {
+        void queryClient.invalidateQueries({ queryKey: getListSubscribersQueryKey() });
+      },
+    },
+  });
 
   const exportCsv = () => {
     if (!subscribers) return;
@@ -297,9 +307,25 @@ function SubscribersSection() {
                   <Mail className="w-3.5 h-3.5 shrink-0" />
                   {s.email}
                 </a>
-                <time className="text-xs text-muted-foreground whitespace-nowrap">
-                  {formatDate(s.createdAt)}
-                </time>
+                <div className="flex items-center gap-4 shrink-0">
+                  <time className="text-xs text-muted-foreground whitespace-nowrap">
+                    {formatDate(s.createdAt)}
+                  </time>
+                  <button
+                    type="button"
+                    disabled={deleteSubscriber.isPending}
+                    onClick={() => {
+                      if (window.confirm(`Remove ${s.email} from the subscriber list?`)) {
+                        deleteSubscriber.mutate({ id: s.id });
+                      }
+                    }}
+                    className="text-muted-foreground hover:text-destructive transition-colors disabled:opacity-50"
+                    aria-label={`Remove ${s.email}`}
+                    title="Remove subscriber"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
               </li>
             ))}
           </ul>

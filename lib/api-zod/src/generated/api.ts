@@ -99,6 +99,37 @@ export const CreateSubscriberResponse = zod.object({
 
 
 /**
+ * @summary Unsubscribe an email from the newsletter
+ */
+export const unsubscribeSubscriberBodyEmailMin = 5;
+export const unsubscribeSubscriberBodyEmailMax = 320;
+
+
+export const unsubscribeSubscriberBodyEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+
+
+export const UnsubscribeSubscriberBody = zod.object({
+  "email": zod.string().min(unsubscribeSubscriberBodyEmailMin).max(unsubscribeSubscriberBodyEmailMax).regex(unsubscribeSubscriberBodyEmailRegExp)
+})
+
+export const UnsubscribeSubscriberResponse = zod.object({
+  "ok": zod.boolean()
+})
+
+
+/**
+ * @summary Remove a subscriber (admin only)
+ */
+export const DeleteSubscriberParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const DeleteSubscriberResponse = zod.object({
+  "ok": zod.boolean()
+})
+
+
+/**
  * Sends the visitor's conversation to the AI callback assistant. When name and phone are captured, a callback lead is created and the team is notified.
  * @summary AI callback assistant chat turn
  */

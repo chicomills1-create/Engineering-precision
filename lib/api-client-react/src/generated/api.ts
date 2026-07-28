@@ -433,6 +433,148 @@ export const useCreateSubscriber = <TError = ErrorType<ErrorMessage>,
       return useMutation(getCreateSubscriberMutationOptions(options));
     }
 
+export const getUnsubscribeSubscriberUrl = () => {
+
+
+
+
+  return `/api/subscribers/unsubscribe`
+}
+
+/**
+ * @summary Unsubscribe an email from the newsletter
+ */
+export const unsubscribeSubscriber = async (subscriberInput: SubscriberInput, options?: Parameters<typeof customFetch>[1]): Promise<SubscribeResult> => {
+
+  return customFetch<SubscribeResult>(getUnsubscribeSubscriberUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(subscriberInput)
+  }
+);}
+
+
+
+
+
+export const getUnsubscribeSubscriberMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof unsubscribeSubscriber>>, TError,{data: BodyType<SubscriberInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof unsubscribeSubscriber>>, TError,{data: BodyType<SubscriberInput>}, TContext> => {
+
+const mutationKey = ['unsubscribeSubscriber'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof unsubscribeSubscriber>>, {data: BodyType<SubscriberInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  unsubscribeSubscriber(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UnsubscribeSubscriberMutationResult = NonNullable<Awaited<ReturnType<typeof unsubscribeSubscriber>>>
+    export type UnsubscribeSubscriberMutationBody = BodyType<SubscriberInput>
+    export type UnsubscribeSubscriberMutationError = ErrorType<ErrorMessage>
+
+    /**
+ * @summary Unsubscribe an email from the newsletter
+ */
+export const useUnsubscribeSubscriber = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof unsubscribeSubscriber>>, TError,{data: BodyType<SubscriberInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof unsubscribeSubscriber>>,
+        TError,
+        {data: BodyType<SubscriberInput>},
+        TContext
+      > => {
+      return useMutation(getUnsubscribeSubscriberMutationOptions(options));
+    }
+
+export const getDeleteSubscriberUrl = (id: number,) => {
+
+
+
+
+  return `/api/subscribers/${id}`
+}
+
+/**
+ * @summary Remove a subscriber (admin only)
+ */
+export const deleteSubscriber = async (id: number, options?: Parameters<typeof customFetch>[1]): Promise<SubscribeResult> => {
+
+  return customFetch<SubscribeResult>(getDeleteSubscriberUrl(id),
+  {
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+
+export const getDeleteSubscriberMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteSubscriber>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteSubscriber>>, TError,{id: number}, TContext> => {
+
+const mutationKey = ['deleteSubscriber'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteSubscriber>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  deleteSubscriber(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteSubscriberMutationResult = NonNullable<Awaited<ReturnType<typeof deleteSubscriber>>>
+
+    export type DeleteSubscriberMutationError = ErrorType<ErrorMessage>
+
+    /**
+ * @summary Remove a subscriber (admin only)
+ */
+export const useDeleteSubscriber = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteSubscriber>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof deleteSubscriber>>,
+        TError,
+        {id: number},
+        TContext
+      > => {
+      return useMutation(getDeleteSubscriberMutationOptions(options));
+    }
+
 export const getCallbackChatUrl = () => {
 
 
