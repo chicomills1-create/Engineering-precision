@@ -77,3 +77,4 @@ channel = "stable-25_05"
 [userenv.shared]
 LEAD_NOTIFY_EMAIL = "info@apexgrideng.com"
 VITE_SITE_URL = "https://apexgrideng.com"
+LEAD_NOTIFY_FROM_EMAIL = "I dont know what this means"
