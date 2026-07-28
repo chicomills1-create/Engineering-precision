@@ -19,6 +19,7 @@ import { useEffect, useRef } from 'react';
 import { ClerkProvider, SignIn, SignUp, useClerk } from '@clerk/react';
 import { publishableKeyFromHost } from '@clerk/react/internal';
 import { dark } from '@clerk/themes';
+import Admin from '@/pages/Admin';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -114,7 +115,6 @@ function App() {
 }
 
 export default App;
-
 const clerkAppearance = {
   theme: dark,
   cssLayerName: 'clerk',
