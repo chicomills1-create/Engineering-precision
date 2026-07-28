@@ -7,6 +7,7 @@ import {
   ListSubscribersResponse,
 } from "@workspace/api-zod";
 import { requireAuth } from "../middlewares/requireAuth";
+import { sendWelcomeEmail } from "../lib/welcomeEmail";
 
 const router: IRouter = Router();
 
@@ -34,10 +35,27 @@ router.post("/subscribers", async (req, res): Promise<void> => {
   }
 
   const email = parsed.data.email.trim().toLowerCase();
-  await db
+  const inserted = await db
     .insert(subscribersTable)
     .values({ email })
-    .onConflictDoNothing({ target: subscribersTable.email });
+    .onConflictDoNothing({ target: subscribersTable.email })
+    .returning();
+
+  // Only new subscribers (not repeat signups) get a welcome email.
+  // Fire-and-forget: email failures must never break signup.
+  if (inserted.length > 0) {
+    sendWelcomeEmail(email)
+      .then((result) => {
+        if (!result.ok) {
+          req.log.error({ error: result.error }, "Welcome email failed");
+        } else {
+          req.log.info("Welcome email sent");
+        }
+      })
+      .catch((err) => {
+        req.log.error({ err }, "Welcome email failed");
+      });
+  }
 
   res.status(201).json(CreateSubscriberResponse.parse({ ok: true }));
 });
