@@ -12,6 +12,7 @@ import Industries from '@/pages/Industries';
 import Resources from '@/pages/Resources';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
+import Admin from '@/pages/Admin';
 import { QueryClient, QueryClientProvider, useQueryClient } from '@tanstack/react-query';
 import { Route, Switch, Router as WouterRouter, useLocation } from 'wouter';
 import { useEffect, useRef } from 'react';
