@@ -46,3 +46,16 @@ export function makeUnsubscribeUrl(email: string): string | undefined {
   const params = new URLSearchParams({ email: email.trim().toLowerCase(), token });
   return `${base}/unsubscribe?${params.toString()}`;
 }
+
+/**
+ * API endpoint URL for RFC 8058 one-click unsubscribe headers. Mail providers
+ * POST to this URL in the background (no JSON body), so it must hit the API
+ * server directly rather than the human-facing /unsubscribe page.
+ */
+export function makeOneClickUnsubscribeUrl(email: string): string | undefined {
+  const token = makeUnsubscribeToken(email);
+  if (!token) return undefined;
+  const base = getPublicBaseUrl();
+  const params = new URLSearchParams({ email: email.trim().toLowerCase(), token });
+  return `${base}/api/subscribers/one-click-unsubscribe?${params.toString()}`;
+}

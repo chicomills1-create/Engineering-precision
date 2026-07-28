@@ -34,7 +34,7 @@ router.get("/subscribers", requireAuth, async (_req, res): Promise<void> => {
 });
 
 router.post("/subscribers", async (req, res): Promise<void> => {
-  const parsed = CreateSubscriberBody.safeParse(req.body);
+  const parsed = UnsubscribeSubscriberBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: parsed.error.message });
     return;
@@ -59,24 +59,6 @@ router.post("/subscribers", async (req, res): Promise<void> => {
     inserted.length > 0 &&
     inserted[0].unsubscribedAt === null &&
     Math.abs(inserted[0].createdAt.getTime() - Date.now()) < 5000;
-  if (isNew) {
-    sendWelcomeEmail(email)
-      .then((result) => {
-        if (!result.ok) {
-          req.log.error({ error: result.error }, "Welcome email failed");
-        } else {
-          req.log.info("Welcome email sent");
-        }
-      })
-      .catch((err) => {
-        req.log.error({ err }, "Welcome email failed");
-      });
-  }
-
-  res.status(201).json(CreateSubscriberResponse.parse({ ok: true }));
-});
-
-router.post("/subscribers/unsubscribe", async (req, res): Promise<void> => {
   const parsed = UnsubscribeSubscriberBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: parsed.error.message });
@@ -85,6 +67,8 @@ router.post("/subscribers/unsubscribe", async (req, res): Promise<void> => {
 
   const email = parsed.data.email.trim().toLowerCase();
   const token = parsed.data.token;
+
+    const id = Number(req.params.id);
 
   // Tokenized links must verify; a bad token is rejected outright so
   // links can't be tampered with. The manual form sends no token and
@@ -106,7 +90,6 @@ router.delete(
   "/subscribers/:id",
   requireAuth,
   async (req, res): Promise<void> => {
-    const parsedParams = DeleteSubscriberParams.safeParse(req.params);
     if (!parsedParams.success) {
       res.status(400).json({ error: "Invalid subscriber id" });
       return;
@@ -114,7 +97,7 @@ router.delete(
 
     const deleted = await db
       .delete(subscribersTable)
-      .where(eq(subscribersTable.id, parsedParams.data.id))
+      .where(eq(subscribersTable.id, id))
       .returning({ id: subscribersTable.id });
 
     if (deleted.length === 0) {

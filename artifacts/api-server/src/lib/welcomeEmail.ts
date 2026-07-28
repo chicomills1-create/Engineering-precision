@@ -1,5 +1,8 @@
 import { ReplitConnectors } from "@replit/connectors-sdk";
-import { makeUnsubscribeUrl } from "./unsubscribeToken";
+import {
+  makeUnsubscribeUrl,
+  makeOneClickUnsubscribeUrl,
+} from "./unsubscribeToken";
 
 /**
  * Sends a branded welcome/confirmation email to a new subscriber via the
@@ -20,8 +23,11 @@ export async function sendWelcomeEmail(
     };
   }
 
-  // Signed one-click unsubscribe link (undefined when no signing secret set)
+  // Signed unsubscribe links (undefined when no signing secret set).
+  // unsubscribeUrl is the human-facing page for the email body;
+  // oneClickUrl is the API endpoint mail providers POST to (RFC 8058).
   const unsubscribeUrl = makeUnsubscribeUrl(subscriberEmail);
+  const oneClickUrl = makeOneClickUnsubscribeUrl(subscriberEmail);
 
   const text = [
     "Welcome to Apex Grid Engineering updates!",
@@ -46,10 +52,10 @@ export async function sendWelcomeEmail(
     body: JSON.stringify({
       personalizations: [{ to: [{ email: subscriberEmail }] }],
       // RFC 8058 one-click unsubscribe headers for Gmail/Outlook compliance
-      ...(unsubscribeUrl
+      ...(oneClickUrl
         ? {
             headers: {
-              "List-Unsubscribe": `<${unsubscribeUrl}>`,
+              "List-Unsubscribe": `<${oneClickUrl}>`,
               "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
             },
           }
