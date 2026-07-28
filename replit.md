@@ -34,6 +34,12 @@ _Populate as you build — non-obvious choices a reader couldn't infer from the 
 - `/admin` — Clerk-protected admin page listing all inquiries (newest first) via `GET /api/leads` (401 without a session). Auth is Replit-managed Clerk: proxy middleware + `clerkMiddleware` in `artifacts/api-server/src/app.ts`, `requireAuth` in `src/middlewares/requireAuth.ts`, sign-in/sign-up routes + themed Clerk UI in `artifacts/apex-grid/src/App.tsx`.
 - Design: dark by default, near-black neutral bg (HSL 0 0% 4%), red accent (HSL 0 72% 48%), Space Grotesk headings / Inter body, 4px radius — user changed the original gold/navy palette to red and black; keep this look.
 
+## Quarterly state-data review
+
+- `pnpm --filter @workspace/apex-grid run seo:review` — console report flagging state code data not verified in 9+ months (`artifacts/apex-grid/seo/review-report.ts`; shared logic in `seo/review-core.ts`)
+- `pnpm --filter @workspace/apex-grid run seo:review:email` — same check, emails the result via the SendGrid connector (`seo/review-email.ts`; supports `--dry-run`). Recipient: `REVIEW_NOTIFY_EMAIL` → falls back to `LEAD_NOTIFY_EMAIL`; sender: `REVIEW_NOTIFY_FROM_EMAIL` → `LEAD_NOTIFY_FROM_EMAIL` → recipient. Sender must be SendGrid-verified or SendGrid returns 403.
+- To run it quarterly: create a Scheduled Deployment in the Publishing tool with schedule "9am on the 1st of January, April, July, and October" (cron `0 9 1 1,4,7,10 *`) and run command `pnpm --filter @workspace/apex-grid run seo:review:email`.
+
 ## User preferences
 
 _Populate as you build — explicit user instructions worth remembering across sessions._
