@@ -16,5 +16,6 @@ export * from './lead';
 export * from './leadInput';
 export * from './leadStatus';
 export * from './leadUpdateInput';
+export * from './subscriber';
 export * from './subscribeResult';
 export * from './subscriberInput';

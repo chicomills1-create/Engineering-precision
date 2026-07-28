@@ -69,6 +69,17 @@ export const CreateLeadResponse = zod.object({
 
 
 /**
+ * @summary List all newsletter subscribers (admin only)
+ */
+export const ListSubscribersResponseItem = zod.object({
+  "id": zod.number(),
+  "email": zod.string(),
+  "createdAt": zod.string()
+})
+export const ListSubscribersResponse = zod.array(ListSubscribersResponseItem)
+
+
+/**
  * @summary Subscribe to the newsletter
  */
 export const createSubscriberBodyEmailMin = 5;

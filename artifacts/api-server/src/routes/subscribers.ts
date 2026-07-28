@@ -1,8 +1,30 @@
 import { Router, type IRouter } from "express";
+import { desc } from "drizzle-orm";
 import { db, subscribersTable } from "@workspace/db";
-import { CreateSubscriberBody, CreateSubscriberResponse } from "@workspace/api-zod";
+import {
+  CreateSubscriberBody,
+  CreateSubscriberResponse,
+  ListSubscribersResponse,
+} from "@workspace/api-zod";
+import { requireAuth } from "../middlewares/requireAuth";
 
 const router: IRouter = Router();
+
+router.get("/subscribers", requireAuth, async (_req, res): Promise<void> => {
+  const subscribers = await db
+    .select()
+    .from(subscribersTable)
+    .orderBy(desc(subscribersTable.createdAt));
+
+  res.json(
+    ListSubscribersResponse.parse(
+      subscribers.map((s) => ({
+        ...s,
+        createdAt: s.createdAt.toISOString(),
+      })),
+    ),
+  );
+});
 
 router.post("/subscribers", async (req, res): Promise<void> => {
   const parsed = CreateSubscriberBody.safeParse(req.body);

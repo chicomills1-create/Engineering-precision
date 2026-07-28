@@ -44,6 +44,12 @@ export interface LeadUpdateInput {
   status: LeadStatus;
 }
 
+export interface Subscriber {
+  id: number;
+  email: string;
+  createdAt: string;
+}
+
 export interface SubscriberInput {
   /**
      * @minLength 5

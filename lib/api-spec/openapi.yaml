@@ -70,6 +70,25 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorMessage"
   /subscribers:
+    get:
+      operationId: listSubscribers
+      tags: [leads]
+      summary: List all newsletter subscribers (admin only)
+      responses:
+        "200":
+          description: All subscribers, newest first
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Subscriber"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
     post:
       operationId: createSubscriber
       tags: [leads]
@@ -209,6 +228,16 @@ components:
       properties:
         status:
           $ref: "#/components/schemas/LeadStatus"
+    Subscriber:
+      type: object
+      required: [id, email, createdAt]
+      properties:
+        id:
+          type: number
+        email:
+          type: string
+        createdAt:
+          type: string
     SubscriberInput:
       type: object
       required: [email]

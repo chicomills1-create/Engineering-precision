@@ -28,6 +28,7 @@ import type {
   LeadInput,
   LeadUpdateInput,
   SubscribeResult,
+  Subscriber,
   SubscriberInput
 } from './api.schemas';
 
@@ -283,6 +284,83 @@ export const useCreateLead = <TError = ErrorType<ErrorMessage>,
       > => {
       return useMutation(getCreateLeadMutationOptions(options));
     }
+
+export const getListSubscribersUrl = () => {
+
+
+
+
+  return `/api/subscribers`
+}
+
+/**
+ * @summary List all newsletter subscribers (admin only)
+ */
+export const listSubscribers = async ( options?: Parameters<typeof customFetch>[1]): Promise<Subscriber[]> => {
+
+  return customFetch<Subscriber[]>(getListSubscribersUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListSubscribersQueryKey = () => {
+    return [
+    `/api/subscribers`
+    ] as const;
+    }
+
+
+export const getListSubscribersQueryOptions = <TData = Awaited<ReturnType<typeof listSubscribers>>, TError = ErrorType<ErrorMessage>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listSubscribers>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListSubscribersQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listSubscribers>>> = ({ signal }) => listSubscribers({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listSubscribers>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListSubscribersQueryResult = NonNullable<Awaited<ReturnType<typeof listSubscribers>>>
+export type ListSubscribersQueryError = ErrorType<ErrorMessage>
+
+
+/**
+ * @summary List all newsletter subscribers (admin only)
+ */
+
+export function useListSubscribers<TData = Awaited<ReturnType<typeof listSubscribers>>, TError = ErrorType<ErrorMessage>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listSubscribers>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListSubscribersQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
 
 export const getCreateSubscriberUrl = () => {
 

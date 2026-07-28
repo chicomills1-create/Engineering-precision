@@ -4,11 +4,12 @@ import { Redirect } from 'wouter';
 import { useQueryClient } from '@tanstack/react-query';
 import {
   useListLeads,
+  useListSubscribers,
   useUpdateLead,
   getListLeadsQueryKey,
   LeadStatus,
 } from '@workspace/api-client-react';
-import { Inbox, LogOut, Mail, Phone, ShieldAlert } from 'lucide-react';
+import { Download, Inbox, LogOut, Mail, Phone, ShieldAlert, Users } from 'lucide-react';
 
 const STATUSES = [LeadStatus.new, LeadStatus.contacted, LeadStatus.closed] as const;
 
@@ -224,11 +225,95 @@ function LeadsList() {
   );
 }
 
+function SubscribersSection() {
+  const { data: subscribers, isLoading, error } = useListSubscribers();
+
+  const exportCsv = () => {
+    if (!subscribers) return;
+    const rows = [
+      ['email', 'signed_up'],
+      ...subscribers.map((s) => [s.email, new Date(s.createdAt).toISOString()]),
+    ];
+    const csv = rows
+      .map((row) => row.map((v) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v)).join(','))
+      .join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `subscribers-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <div className="container mx-auto px-4 md:px-8 pb-16">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+        <div>
+          <p className="text-xs uppercase tracking-[0.2em] text-primary mb-2">Newsletter</p>
+          <h2 className="font-display text-2xl md:text-3xl font-bold">Subscribers</h2>
+        </div>
+        {subscribers && subscribers.length > 0 && (
+          <button
+            type="button"
+            onClick={exportCsv}
+            className="inline-flex items-center gap-2 h-10 px-4 border border-primary/50 text-sm text-primary hover:bg-primary/10 rounded-[2px] transition-colors self-start md:self-auto"
+          >
+            <Download className="w-4 h-4" />
+            Export CSV
+          </button>
+        )}
+      </div>
+
+      {isLoading && <p className="text-muted-foreground">Loading subscribers…</p>}
+
+      {error && (
+        <div className="border border-destructive/50 bg-destructive/10 p-6 rounded-[2px] text-sm">
+          Failed to load subscribers. Please refresh and try again.
+        </div>
+      )}
+
+      {subscribers && subscribers.length === 0 && (
+        <div className="border border-border bg-card p-10 rounded-[2px] text-center">
+          <Users className="w-8 h-8 text-muted-foreground mx-auto mb-4" />
+          <p className="text-muted-foreground">
+            No subscribers yet. Newsletter signups from the Resources page will appear here.
+          </p>
+        </div>
+      )}
+
+      {subscribers && subscribers.length > 0 && (
+        <div className="border border-border bg-card rounded-[2px]">
+          <div className="px-6 py-3 border-b border-border text-sm text-muted-foreground">
+            {subscribers.length} {subscribers.length === 1 ? 'subscriber' : 'subscribers'}
+          </div>
+          <ul className="divide-y divide-border">
+            {subscribers.map((s) => (
+              <li key={s.id} className="flex items-center justify-between gap-4 px-6 py-3">
+                <a
+                  href={`mailto:${s.email}`}
+                  className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline truncate"
+                >
+                  <Mail className="w-3.5 h-3.5 shrink-0" />
+                  {s.email}
+                </a>
+                <time className="text-xs text-muted-foreground whitespace-nowrap">
+                  {formatDate(s.createdAt)}
+                </time>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
 export default function Admin() {
   return (
     <>
       <Show when="signed-in">
         <LeadsList />
+        <SubscribersSection />
       </Show>
       <Show when="signed-out">
         <Redirect to="/sign-in" />
