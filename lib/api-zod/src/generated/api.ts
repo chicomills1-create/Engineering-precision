@@ -99,6 +99,7 @@ export const CreateSubscriberResponse = zod.object({
 
 
 /**
+ * Accepts a signed per-subscriber token for one-click links; token is optional for the manual fallback form.
  * @summary Unsubscribe an email from the newsletter
  */
 export const unsubscribeSubscriberBodyEmailMin = 5;
@@ -106,10 +107,13 @@ export const unsubscribeSubscriberBodyEmailMax = 320;
 
 
 export const unsubscribeSubscriberBodyEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+export const unsubscribeSubscriberBodyTokenMax = 128;
+
 
 
 export const UnsubscribeSubscriberBody = zod.object({
-  "email": zod.string().min(unsubscribeSubscriberBodyEmailMin).max(unsubscribeSubscriberBodyEmailMax).regex(unsubscribeSubscriberBodyEmailRegExp)
+  "email": zod.string().min(unsubscribeSubscriberBodyEmailMin).max(unsubscribeSubscriberBodyEmailMax).regex(unsubscribeSubscriberBodyEmailRegExp),
+  "token": zod.string().max(unsubscribeSubscriberBodyTokenMax).optional().describe('Signed unsubscribe token from an email link; verified server-side when present')
 })
 
 export const UnsubscribeSubscriberResponse = zod.object({

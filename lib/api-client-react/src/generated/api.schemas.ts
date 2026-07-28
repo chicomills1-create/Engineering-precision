@@ -59,6 +59,20 @@ export interface SubscriberInput {
   email: string;
 }
 
+export interface UnsubscribeInput {
+  /**
+     * @minLength 5
+     * @maxLength 320
+     * @pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$
+     */
+  email: string;
+  /**
+     * Signed unsubscribe token from an email link; verified server-side when present
+     * @maxLength 128
+     */
+  token?: string;
+}
+
 export interface SubscribeResult {
   ok: boolean;
 }

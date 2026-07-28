@@ -10,6 +10,7 @@ import {
 } from "@workspace/api-zod";
 import { requireAuth } from "../middlewares/requireAuth";
 import { sendWelcomeEmail } from "../lib/welcomeEmail";
+import { verifyUnsubscribeToken } from "../lib/unsubscribeToken";
 import { desc, eq, isNull, sql } from "drizzle-orm";
 
 const router: IRouter = Router();
@@ -54,7 +55,8 @@ router.post("/subscribers", async (req, res): Promise<void> => {
   // Only first-time signups get a welcome email.
   // Fire-and-forget: email failures must never break signup.
   const isNew =
-    inserted.length > 0 && inserted[0].unsubscribedAt === null &&
+    inserted.length > 0 &&
+    inserted[0].unsubscribedAt === null &&
     Math.abs(inserted[0].createdAt.getTime() - Date.now()) < 5000;
   if (isNew) {
     sendWelcomeEmail(email)
@@ -81,6 +83,16 @@ router.post("/subscribers/unsubscribe", async (req, res): Promise<void> => {
   }
 
   const email = parsed.data.email.trim().toLowerCase();
+  const token = parsed.data.token;
+
+  // Tokenized links must verify; a bad token is rejected outright so
+  // links can't be tampered with. The manual form sends no token and
+  // remains an idempotent fallback.
+  if (token !== undefined && !verifyUnsubscribeToken(email, token)) {
+    res.status(400).json({ error: "Invalid unsubscribe link" });
+    return;
+  }
+
   await db
     .update(subscribersTable)
     .set({ unsubscribedAt: new Date() })
@@ -89,24 +101,28 @@ router.post("/subscribers/unsubscribe", async (req, res): Promise<void> => {
   res.json(UnsubscribeSubscriberResponse.parse({ ok: true }));
 });
 
-router.delete("/subscribers/:id", requireAuth, async (req, res): Promise<void> => {
-  const id = Number(req.params.id);
-  if (!Number.isInteger(id) || id <= 0) {
-    res.status(400).json({ error: "Invalid subscriber id" });
-    return;
-  }
+router.delete(
+  "/subscribers/:id",
+  requireAuth,
+  async (req, res): Promise<void> => {
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id) || id <= 0) {
+      res.status(400).json({ error: "Invalid subscriber id" });
+      return;
+    }
 
-  const deleted = await db
-    .delete(subscribersTable)
-    .where(eq(subscribersTable.id, id))
-    .returning({ id: subscribersTable.id });
+    const deleted = await db
+      .delete(subscribersTable)
+      .where(eq(subscribersTable.id, id))
+      .returning({ id: subscribersTable.id });
 
-  if (deleted.length === 0) {
-    res.status(404).json({ error: "Subscriber not found" });
-    return;
-  }
+    if (deleted.length === 0) {
+      res.status(404).json({ error: "Subscriber not found" });
+      return;
+    }
 
-  res.json(DeleteSubscriberResponse.parse({ ok: true }));
-});
+    res.json(DeleteSubscriberResponse.parse({ ok: true }));
+  },
+);
 
 export default router;

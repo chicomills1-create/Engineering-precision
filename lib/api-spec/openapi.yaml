@@ -117,12 +117,13 @@ paths:
       operationId: unsubscribeSubscriber
       tags: [leads]
       summary: Unsubscribe an email from the newsletter
+      description: Accepts a signed per-subscriber token for one-click links; token is optional for the manual fallback form.
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SubscriberInput"
+              $ref: "#/components/schemas/UnsubscribeInput"
       responses:
         "200":
           description: Unsubscribed (idempotent — unknown emails succeed silently)
@@ -301,6 +302,19 @@ components:
           minLength: 5
           maxLength: 320
           pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+    UnsubscribeInput:
+      type: object
+      required: [email]
+      properties:
+        email:
+          type: string
+          minLength: 5
+          maxLength: 320
+          pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+        token:
+          type: string
+          maxLength: 128
+          description: Signed unsubscribe token from an email link; verified server-side when present
     SubscribeResult:
       type: object
       required: [ok]

@@ -19,3 +19,4 @@ export * from './leadUpdateInput';
 export * from './subscriber';
 export * from './subscribeResult';
 export * from './subscriberInput';
+export * from './unsubscribeInput';
