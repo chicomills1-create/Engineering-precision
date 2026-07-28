@@ -8,7 +8,7 @@ import {
   getListLeadsQueryKey,
   LeadStatus,
 } from '@workspace/api-client-react';
-import { Inbox, LogOut, Mail, Phone } from 'lucide-react';
+import { Inbox, LogOut, Mail, Phone, ShieldAlert } from 'lucide-react';
 
 const STATUSES = [LeadStatus.new, LeadStatus.contacted, LeadStatus.closed] as const;
 
@@ -95,7 +95,23 @@ function LeadsList() {
         <p className="text-muted-foreground">Loading inquiries…</p>
       )}
 
-      {error && (
+      {error && (error as { status?: number }).status === 403 && (
+        <div className="border border-destructive/50 bg-destructive/10 p-8 rounded-[2px]">
+          <div className="flex items-start gap-3">
+            <ShieldAlert className="w-5 h-5 text-destructive mt-0.5 shrink-0" />
+            <div>
+              <h2 className="font-display font-semibold text-lg mb-1">Access denied</h2>
+              <p className="text-sm text-muted-foreground">
+                Your account isn't authorized to view inquiries. This page is
+                limited to approved team members. If you believe this is a
+                mistake, contact the site administrator.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {error && (error as { status?: number }).status !== 403 && (
         <div className="border border-destructive/50 bg-destructive/10 p-6 rounded-[2px] text-sm">
           Failed to load inquiries. Please refresh and try again.
         </div>
