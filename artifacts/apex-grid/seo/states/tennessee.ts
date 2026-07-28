@@ -4,6 +4,7 @@ export const tennessee: StateData = {
   slug: "tennessee",
   name: "Tennessee",
   abbrev: "TN",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "2018 International Building Code adopted as the statewide commercial baseline by the State Fire Marshal's Office",
     baseCode: "2018 IBC with Tennessee amendments (statewide commercial minimum)",

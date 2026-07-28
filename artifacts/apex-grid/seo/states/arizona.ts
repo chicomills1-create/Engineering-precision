@@ -4,6 +4,7 @@ export const arizona: StateData = {
   slug: "arizona",
   name: "Arizona",
   abbrev: "AZ",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Local adoption of the International Building Code (most jurisdictions on 2018 IBC)",
     baseCode: "IBC with local amendments; no statewide mandatory building code",

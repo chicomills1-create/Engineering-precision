@@ -4,6 +4,7 @@ export const maryland: StateData = {
   slug: "maryland",
   name: "Maryland",
   abbrev: "MD",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Maryland Building Performance Standards (MBPS) — statewide baseline, based on the 2021 I-Codes",
     baseCode: "2021 IBC with Maryland amendments (adopted as the MBPS)",

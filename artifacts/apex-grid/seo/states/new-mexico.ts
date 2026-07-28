@@ -4,6 +4,7 @@ export const newMexico: StateData = {
   slug: "new-mexico",
   name: "New Mexico",
   abbrev: "NM",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "New Mexico Commercial Building Code (state-adopted IBC with New Mexico amendments)",
     baseCode: "2021 IBC with New Mexico amendments (2015 IBC base in some prior cycles)",

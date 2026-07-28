@@ -4,6 +4,7 @@ export const texas: StateData = {
   slug: "texas",
   name: "Texas",
   abbrev: "TX",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Locally adopted International Building Code (editions vary; many major cities on 2021 IBC, others on 2018 or 2015)",
     baseCode: "IBC with local amendments; no mandatory statewide commercial building code",

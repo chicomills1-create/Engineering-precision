@@ -4,6 +4,7 @@ export const kentucky: StateData = {
   slug: "kentucky",
   name: "Kentucky",
   abbrev: "KY",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Kentucky Building Code (based on the International Building Code) enforced statewide as a mandatory minimum",
     baseCode: "IBC with Kentucky amendments (2015 IBC base in the current Kentucky Building Code, adopted statewide)",

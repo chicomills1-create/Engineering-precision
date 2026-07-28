@@ -4,6 +4,7 @@ export const minnesota: StateData = {
   slug: "minnesota",
   name: "Minnesota",
   abbrev: "MN",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Minnesota State Building Code (2020 edition, based on the 2018 IBC with amendments)",
     baseCode: "2018 IBC with Minnesota amendments",

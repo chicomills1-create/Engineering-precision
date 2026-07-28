@@ -4,6 +4,7 @@ export const newJersey: StateData = {
   slug: "new-jersey",
   name: "New Jersey",
   abbrev: "NJ",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "New Jersey Uniform Construction Code (UCC) — statewide, adopting the 2021 I-Codes",
     baseCode: "2021 IBC with New Jersey amendments (N.J.A.C. 5:23)",

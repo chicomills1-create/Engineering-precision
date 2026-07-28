@@ -4,6 +4,7 @@ export const kansas: StateData = {
   slug: "kansas",
   name: "Kansas",
   abbrev: "KS",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "No statewide commercial building code — local adoption of the IBC",
     baseCode: "IBC with local amendments; editions vary by jurisdiction",

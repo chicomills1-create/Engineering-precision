@@ -4,6 +4,7 @@ export const newYork: StateData = {
   slug: "new-york",
   name: "New York",
   abbrev: "NY",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "2020 Uniform Code (Building Code of New York State) — statewide, based on the 2018 I-Codes",
     baseCode: "2018 IBC with New York State amendments",

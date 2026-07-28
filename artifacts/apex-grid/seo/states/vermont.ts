@@ -4,6 +4,7 @@ export const vermont: StateData = {
   slug: "vermont",
   name: "Vermont",
   abbrev: "VT",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Vermont Fire and Building Safety Code — statewide for commercial (public) buildings, based on the 2015 IBC/NFPA framework",
     baseCode: "2015 IBC (as referenced in the state Fire and Building Safety Code) with Vermont amendments",

@@ -4,6 +4,7 @@ export const rhodeIsland: StateData = {
   slug: "rhode-island",
   name: "Rhode Island",
   abbrev: "RI",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Rhode Island State Building Code (SBC-1) — statewide, based on the 2018 I-Codes",
     baseCode: "2018 IBC with Rhode Island amendments",

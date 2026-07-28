@@ -4,6 +4,7 @@ export const alabama: StateData = {
   slug: "alabama",
   name: "Alabama",
   abbrev: "AL",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Locally adopted International Building Code (2015 IBC is the state-referenced edition; many jurisdictions on 2015/2018/2021)",
     baseCode: "IBC with local adoption; the state references a base edition but municipalities adopt their own",

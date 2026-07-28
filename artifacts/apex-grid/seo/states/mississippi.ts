@@ -4,6 +4,7 @@ export const mississippi: StateData = {
   slug: "mississippi",
   name: "Mississippi",
   abbrev: "MS",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Locally adopted International Building Code (statewide minimum in coastal counties; editions vary elsewhere)",
     baseCode: "IBC with local adoption; statewide commercial baseline is limited, with mandatory codes concentrated in the coastal region",

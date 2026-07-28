@@ -4,6 +4,7 @@ export const utah: StateData = {
   slug: "utah",
   name: "Utah",
   abbrev: "UT",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "State-adopted International Building Code (2021 IBC with Utah amendments)",
     baseCode: "2021 IBC with statewide Utah amendments",

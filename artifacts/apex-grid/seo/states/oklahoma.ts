@@ -4,6 +4,7 @@ export const oklahoma: StateData = {
   slug: "oklahoma",
   name: "Oklahoma",
   abbrev: "OK",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "2018 International Building Code adopted statewide by the Oklahoma Uniform Building Code Commission",
     baseCode: "2018 IBC with Oklahoma amendments",

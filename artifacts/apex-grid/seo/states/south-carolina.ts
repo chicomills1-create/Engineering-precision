@@ -4,6 +4,7 @@ export const southCarolina: StateData = {
   slug: "south-carolina",
   name: "South Carolina",
   abbrev: "SC",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "South Carolina Building Codes (mandatory statewide minimum), based on the 2021 I-Codes",
     baseCode: "2021 IBC with South Carolina modifications",

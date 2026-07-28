@@ -4,6 +4,7 @@ export const northCarolina: StateData = {
   slug: "north-carolina",
   name: "North Carolina",
   abbrev: "NC",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "North Carolina State Building Code (NC Building Code), maintained by the NC Building Code Council",
     baseCode: "IBC-derived with extensive North Carolina amendments; the state develops its own edition on its own cycle rather than adopting an I-Code year wholesale",

@@ -4,6 +4,7 @@ export const louisiana: StateData = {
   slug: "louisiana",
   name: "Louisiana",
   abbrev: "LA",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Louisiana State Uniform Construction Code (LSUCC), based on the 2021 IBC",
     baseCode: "2021 IBC with Louisiana amendments (statewide via the LSUCC Council)",

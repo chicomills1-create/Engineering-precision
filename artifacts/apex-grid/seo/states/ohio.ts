@@ -4,6 +4,7 @@ export const ohio: StateData = {
   slug: "ohio",
   name: "Ohio",
   abbrev: "OH",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Ohio Building Code (OBC) — 2024 edition based on the 2021 IBC",
     baseCode: "2021 IBC with Ohio amendments",

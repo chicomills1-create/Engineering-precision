@@ -4,6 +4,7 @@ export const westVirginia: StateData = {
   slug: "west-virginia",
   name: "West Virginia",
   abbrev: "WV",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "West Virginia State Building Code, based on the 2015 I-Codes (adopted by the State Fire Commission)",
     baseCode: "2015 IBC with West Virginia amendments",

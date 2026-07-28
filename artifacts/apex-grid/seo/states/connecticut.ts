@@ -4,6 +4,7 @@ export const connecticut: StateData = {
   slug: "connecticut",
   name: "Connecticut",
   abbrev: "CT",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "2022 Connecticut State Building Code — statewide, based on the 2021 I-Codes",
     baseCode: "2021 IBC with Connecticut amendments",

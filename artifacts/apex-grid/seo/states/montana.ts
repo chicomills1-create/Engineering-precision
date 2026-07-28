@@ -4,6 +4,7 @@ export const montana: StateData = {
   slug: "montana",
   name: "Montana",
   abbrev: "MT",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Montana state-adopted International Building Code (administered by the Department of Labor & Industry)",
     baseCode: "IBC with Montana amendments (recent cycles based on the 2021 IBC)",

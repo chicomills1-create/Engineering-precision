@@ -4,6 +4,7 @@ export const wisconsin: StateData = {
   slug: "wisconsin",
   name: "Wisconsin",
   abbrev: "WI",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Wisconsin Commercial Building Code (SPS 361–366) based on the IBC",
     baseCode: "IBC with Wisconsin amendments (SPS chapters), historically a 2015 IBC vintage",

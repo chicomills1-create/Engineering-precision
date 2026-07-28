@@ -4,6 +4,7 @@ export const pennsylvania: StateData = {
   slug: "pennsylvania",
   name: "Pennsylvania",
   abbrev: "PA",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Pennsylvania Uniform Construction Code (UCC) — statewide, referencing the 2018 I-Codes",
     baseCode: "2018 IBC with Pennsylvania amendments (34 Pa. Code Chapter 401 et seq.)",

@@ -4,6 +4,7 @@ export const indiana: StateData = {
   slug: "indiana",
   name: "Indiana",
   abbrev: "IN",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Indiana Building Code (675 IAC 13) based on the 2012 IBC with amendments",
     baseCode: "2012 IBC with extensive Indiana amendments",

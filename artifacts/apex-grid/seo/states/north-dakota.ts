@@ -4,6 +4,7 @@ export const northDakota: StateData = {
   slug: "north-dakota",
   name: "North Dakota",
   abbrev: "ND",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "North Dakota State Building Code, based on the 2018 IBC",
     baseCode: "2018 IBC with North Dakota amendments",

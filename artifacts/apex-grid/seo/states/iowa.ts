@@ -4,6 +4,7 @@ export const iowa: StateData = {
   slug: "iowa",
   name: "Iowa",
   abbrev: "IA",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Iowa State Building Code based on the IBC (applies to state-owned and certain buildings; local adoption elsewhere)",
     baseCode: "IBC with Iowa amendments; adoption reach varies by jurisdiction",

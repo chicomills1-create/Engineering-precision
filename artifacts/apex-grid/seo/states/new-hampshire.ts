@@ -4,6 +4,7 @@ export const newHampshire: StateData = {
   slug: "new-hampshire",
   name: "New Hampshire",
   abbrev: "NH",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "New Hampshire State Building Code (RSA 155-A) — statewide, referencing the 2018 I-Codes",
     baseCode: "2018 IBC with New Hampshire amendments (per the State Building Code Review Board)",

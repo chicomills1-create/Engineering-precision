@@ -4,6 +4,7 @@ export const michigan: StateData = {
   slug: "michigan",
   name: "Michigan",
   abbrev: "MI",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Michigan Building Code (2015 edition, based on the 2015 IBC)",
     baseCode: "2015 IBC with Michigan amendments",

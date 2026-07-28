@@ -4,6 +4,7 @@ export const colorado: StateData = {
   slug: "colorado",
   name: "Colorado",
   abbrev: "CO",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Local adoption of the International Building Code (most Front Range jurisdictions on 2018 or 2021 IBC)",
     baseCode: "IBC with local amendments; no statewide mandatory commercial building code",

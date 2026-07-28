@@ -4,6 +4,7 @@ export const arkansas: StateData = {
   slug: "arkansas",
   name: "Arkansas",
   abbrev: "AR",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Arkansas Fire Prevention Code, Volume II (based on the International Building Code) enforced statewide",
     baseCode: "IBC via the Arkansas Fire Prevention Code (2021 IBC base in the current edition) with state amendments",

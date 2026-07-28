@@ -4,6 +4,7 @@ export const florida: StateData = {
   slug: "florida",
   name: "Florida",
   abbrev: "FL",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Florida Building Code, 8th Edition (2023)",
     baseCode: "2021 IBC with extensive Florida amendments (mandatory statewide)",

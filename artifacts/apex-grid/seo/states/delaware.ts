@@ -4,6 +4,7 @@ export const delaware: StateData = {
   slug: "delaware",
   name: "Delaware",
   abbrev: "DE",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Local adoption of the International Building Code — most jurisdictions on the 2018 IBC (New Castle County, Wilmington, and others)",
     baseCode: "2018 IBC with local amendments; no single statewide mandatory building code for all occupancies",

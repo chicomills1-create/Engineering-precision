@@ -4,6 +4,7 @@ export const nebraska: StateData = {
   slug: "nebraska",
   name: "Nebraska",
   abbrev: "NE",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Nebraska State Building Code based on the IBC (default statewide; local jurisdictions may adopt and amend)",
     baseCode: "IBC adopted as the State Building Code; local adoption and enforcement vary",

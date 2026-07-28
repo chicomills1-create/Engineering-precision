@@ -4,6 +4,7 @@ export const oregon: StateData = {
   slug: "oregon",
   name: "Oregon",
   abbrev: "OR",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Oregon Structural Specialty Code (OSSC), 2022 edition",
     baseCode: "2021 IBC with extensive Oregon amendments",

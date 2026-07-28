@@ -4,6 +4,7 @@ export const georgia: StateData = {
   slug: "georgia",
   name: "Georgia",
   abbrev: "GA",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Georgia State Minimum Standard Codes (International Building Code with Georgia amendments)",
     baseCode: "2018 IBC with Georgia state amendments (adopted statewide by DCA)",

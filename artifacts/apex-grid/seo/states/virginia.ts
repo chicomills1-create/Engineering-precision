@@ -4,6 +4,7 @@ export const virginia: StateData = {
   slug: "virginia",
   name: "Virginia",
   abbrev: "VA",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Virginia Uniform Statewide Building Code (USBC), 2021 edition",
     baseCode: "2021 IBC with Virginia amendments",

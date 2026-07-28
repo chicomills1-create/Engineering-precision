@@ -4,6 +4,7 @@ export const idaho: StateData = {
   slug: "idaho",
   name: "Idaho",
   abbrev: "ID",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Idaho state-adopted International Building Code (2018 IBC with Idaho amendments)",
     baseCode: "2018 IBC with Idaho amendments",

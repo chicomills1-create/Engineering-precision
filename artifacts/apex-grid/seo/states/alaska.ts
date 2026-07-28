@@ -4,6 +4,7 @@ export const alaska: StateData = {
   slug: "alaska",
   name: "Alaska",
   abbrev: "AK",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "No mandatory statewide building code for general private construction — adoption and enforcement are local (Anchorage and other municipalities enforce recent IBC editions)",
     baseCode: "IBC with local amendments where adopted; the state applies codes to state-owned and certain public buildings",

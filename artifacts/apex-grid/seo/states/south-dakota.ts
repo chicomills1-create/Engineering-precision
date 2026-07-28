@@ -4,6 +4,7 @@ export const southDakota: StateData = {
   slug: "south-dakota",
   name: "South Dakota",
   abbrev: "SD",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "No mandatory statewide building code — adoption and enforcement are local (many jurisdictions on the 2015 or 2018 IBC)",
     baseCode: "IBC with local amendments where adopted; no statewide mandate",

@@ -4,6 +4,7 @@ export const maine: StateData = {
   slug: "maine",
   name: "Maine",
   abbrev: "ME",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Maine Uniform Building and Energy Code (MUBEC) — statewide framework, based on the 2015 I-Codes",
     baseCode: "2015 IBC with Maine amendments (MUBEC, adopted by the Bureau of Building Codes and Standards / BBCS)",

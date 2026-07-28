@@ -4,6 +4,7 @@ export const hawaii: StateData = {
   slug: "hawaii",
   name: "Hawaii",
   abbrev: "HI",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Hawaii State Building Code (based on the 2018 IBC), adopted and administered by each county",
     baseCode: "2018 IBC with state and county amendments",

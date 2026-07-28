@@ -4,6 +4,7 @@ export const massachusetts: StateData = {
   slug: "massachusetts",
   name: "Massachusetts",
   abbrev: "MA",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Massachusetts State Building Code, 9th Edition (780 CMR) — statewide, based on the 2015 IBC",
     baseCode: "2015 IBC with extensive Massachusetts amendments (780 CMR)",

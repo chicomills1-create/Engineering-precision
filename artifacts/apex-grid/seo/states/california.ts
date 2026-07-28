@@ -4,6 +4,7 @@ export const california: StateData = {
   slug: "california",
   name: "California",
   abbrev: "CA",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "2022 California Building Code (Title 24, Part 2)",
     baseCode: "2021 IBC with extensive California amendments",

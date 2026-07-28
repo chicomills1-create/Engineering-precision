@@ -4,6 +4,7 @@ export const washington: StateData = {
   slug: "washington",
   name: "Washington",
   abbrev: "WA",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Washington State Building Code (2021 IBC as amended by the State Building Code Council)",
     baseCode: "2021 IBC with Washington State amendments",

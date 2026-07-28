@@ -4,6 +4,7 @@ export const wyoming: StateData = {
   slug: "wyoming",
   name: "Wyoming",
   abbrev: "WY",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "Local adoption of the International Building Code (no statewide mandatory commercial building code)",
     baseCode: "IBC with local amendments; editions vary by jurisdiction",

@@ -4,6 +4,7 @@ export const illinois: StateData = {
   slug: "illinois",
   name: "Illinois",
   abbrev: "IL",
+  lastVerified: "2026-07-28",
   buildingCode: {
     name: "No single statewide commercial building code — local adoption of the IBC (Chicago runs its own code)",
     baseCode: "IBC with local amendments; Chicago Construction Codes are a customized IBC-based system",

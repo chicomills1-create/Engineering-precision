@@ -6,6 +6,9 @@ export interface StateData {
   slug: string; // kebab-case, e.g. "north-carolina"
   name: string; // "North Carolina"
   abbrev: string; // "NC"
+  /** ISO date (YYYY-MM-DD) when the code/adoption facts were last verified against current sources.
+   * Update whenever a quarterly review confirms or corrects the data. */
+  lastVerified: string;
   /** Adopted commercial building code */
   buildingCode: {
     name: string; // e.g. "Florida Building Code, 8th Edition (2023)"
