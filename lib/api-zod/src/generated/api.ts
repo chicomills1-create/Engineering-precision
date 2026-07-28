@@ -23,7 +23,7 @@ export const HealthCheckResponse = zod.object({
 export const ListLeadsResponseItem = zod.object({
   "id": zod.number(),
   "name": zod.string(),
-  "email": zod.string(),
+  "email": zod.string().nullish(),
   "company": zod.string().nullish(),
   "phone": zod.string().nullish(),
   "projectType": zod.string().nullish(),
@@ -57,7 +57,7 @@ export const CreateLeadBody = zod.object({
 export const CreateLeadResponse = zod.object({
   "id": zod.number(),
   "name": zod.string(),
-  "email": zod.string(),
+  "email": zod.string().nullish(),
   "company": zod.string().nullish(),
   "phone": zod.string().nullish(),
   "projectType": zod.string().nullish(),
@@ -65,6 +65,48 @@ export const CreateLeadResponse = zod.object({
   "message": zod.string(),
   "status": zod.enum(['new', 'contacted', 'closed']),
   "createdAt": zod.string()
+})
+
+
+/**
+ * @summary Subscribe to the newsletter
+ */
+export const createSubscriberBodyEmailMin = 5;
+export const createSubscriberBodyEmailMax = 320;
+
+
+export const createSubscriberBodyEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+
+
+export const CreateSubscriberBody = zod.object({
+  "email": zod.string().min(createSubscriberBodyEmailMin).max(createSubscriberBodyEmailMax).regex(createSubscriberBodyEmailRegExp)
+})
+
+export const CreateSubscriberResponse = zod.object({
+  "ok": zod.boolean()
+})
+
+
+/**
+ * Sends the visitor's conversation to the AI callback assistant. When name and phone are captured, a callback lead is created and the team is notified.
+ * @summary AI callback assistant chat turn
+ */
+export const callbackChatBodyMessagesItemContentMax = 2000;
+
+export const callbackChatBodyMessagesMax = 30;
+
+
+
+export const CallbackChatBody = zod.object({
+  "messages": zod.array(zod.object({
+  "role": zod.enum(['user', 'assistant']),
+  "content": zod.string().min(1).max(callbackChatBodyMessagesItemContentMax)
+})).max(callbackChatBodyMessagesMax)
+})
+
+export const CallbackChatResponse = zod.object({
+  "reply": zod.string(),
+  "complete": zod.boolean()
 })
 
 
@@ -82,7 +124,7 @@ export const UpdateLeadBody = zod.object({
 export const UpdateLeadResponse = zod.object({
   "id": zod.number(),
   "name": zod.string(),
-  "email": zod.string(),
+  "email": zod.string().nullish(),
   "company": zod.string().nullish(),
   "phone": zod.string().nullish(),
   "projectType": zod.string().nullish(),

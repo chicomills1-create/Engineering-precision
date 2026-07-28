@@ -11,7 +11,7 @@ import {
 
 const STATS = [
   { value: "20+", label: "Engineers on Staff" },
-  { value: "50", label: "States with PE Licensure" },
+  { value: "49", label: "States with PE Licensure" },
   { value: "3", label: "Core Disciplines In-House" },
   { value: "48hr", label: "Typical Quote Turnaround" },
 ];
@@ -42,7 +42,7 @@ const GROUPS = [
     icon: ClipboardCheck,
     title: "Energy & Code Compliance",
     lead: "Energy analysts & code specialists",
-    body: "Dedicated specialists who keep current on all 50 states' adopted codes — IECC, ASHRAE 90.1, and state programs like California Title 24 — and produce the compliance documentation reviewers accept the first time.",
+    body: "Dedicated specialists who keep current on every adopted state code — IECC, ASHRAE 90.1, and state programs like California Title 24 — and produce the compliance documentation reviewers accept the first time.",
     scope: ["IECC / ASHRAE 90.1 compliance", "Title 24 & state programs", "ComCheck / ResCheck documentation"],
   },
   {
@@ -55,7 +55,7 @@ const GROUPS = [
   {
     icon: Stamp,
     title: "Licensed Professional Engineers",
-    lead: "In-house PEs, licensed in all 50 states",
+    lead: "In-house PEs, licensed in 49 states",
     body: "Every project is reviewed and stamped by our in-house Professional Engineers — never outsourced. Multi-state licensure means one firm can carry your project anywhere in the country.",
     scope: ["Plan review & stamping", "Jurisdiction correspondence", "Multi-state licensure management"],
   },
@@ -127,7 +127,7 @@ export default function Team() {
             Put the Team on Your Project
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-            Send us your scope and get a clear proposal fast — deliverables, timeline, and fee. Any size job, any of the 50 states.
+            Send us your scope and get a clear proposal fast — deliverables, timeline, and fee. Any size job, across 49 states.
           </p>
           <Link
             href="/contact"
@@ -142,7 +142,7 @@ export default function Team() {
 }
 
 const PAGE_META = {
-  title: "Our Engineering Team | 20+ Engineers, PEs in All 50 States | Apex Grid",
-  description: "Apex Grid Engineering's team: 20+ engineers and in-house Professional Engineers licensed in all 50 states, organized across structural, MEP, civil, and energy code disciplines.",
+  title: "Our Engineering Team | 20+ Engineers, PEs in 49 States | Apex Grid",
+  description: "Apex Grid Engineering's team: 20+ engineers and in-house Professional Engineers licensed in 49 states, organized across structural, MEP, civil, and energy code disciplines.",
   path: "/team",
 };

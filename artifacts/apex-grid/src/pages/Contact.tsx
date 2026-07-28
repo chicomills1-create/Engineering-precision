@@ -25,7 +25,7 @@ type LeadFormValues = z.infer<typeof leadSchema>;
 
 const PAGE_META = {
   title: "Contact Us | Request an Engineering Proposal | Apex Grid",
-  description: "Start your project with Apex Grid Engineering. Request a proposal for MEP, structural, or civil design services — we respond within one business day.",
+  description: "Start your project with Apex Grid Engineering. Request a proposal for MEP, structural, or civil design services — initial review response within 12-24 hours.",
   path: "/contact",
 };
 
@@ -72,7 +72,7 @@ export default function Contact() {
           </div>
           <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">Request Received</h1>
           <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
-            Your project details have been logged in our system. A lead engineer will review your requirements and contact you within 24 hours.
+            Your project details have been logged in our system. A lead engineer will review your requirements and contact you within 12–24 hours.
           </p>
           <button 
             onClick={() => {
@@ -276,7 +276,7 @@ export default function Contact() {
                   <div className="pt-8 border-t border-border">
                     <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-4">Response Time</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Our intake team processes new project submissions daily. You can expect a response or preliminary proposal within 1 business day for most standard requests.
+                      Our intake team processes new project submissions daily. You can expect an initial review response within 12–24 hours for most standard requests.
                     </p>
                   </div>
                 </div>

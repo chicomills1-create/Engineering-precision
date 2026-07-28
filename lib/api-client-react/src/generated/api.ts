@@ -20,11 +20,15 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  CallbackChatInput,
+  CallbackChatReply,
   ErrorMessage,
   HealthStatus,
   Lead,
   LeadInput,
-  LeadUpdateInput
+  LeadUpdateInput,
+  SubscribeResult,
+  SubscriberInput
 } from './api.schemas';
 
 import { customFetch } from '../custom-fetch';
@@ -278,6 +282,149 @@ export const useCreateLead = <TError = ErrorType<ErrorMessage>,
         TContext
       > => {
       return useMutation(getCreateLeadMutationOptions(options));
+    }
+
+export const getCreateSubscriberUrl = () => {
+
+
+
+
+  return `/api/subscribers`
+}
+
+/**
+ * @summary Subscribe to the newsletter
+ */
+export const createSubscriber = async (subscriberInput: SubscriberInput, options?: Parameters<typeof customFetch>[1]): Promise<SubscribeResult> => {
+
+  return customFetch<SubscribeResult>(getCreateSubscriberUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(subscriberInput)
+  }
+);}
+
+
+
+
+
+export const getCreateSubscriberMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createSubscriber>>, TError,{data: BodyType<SubscriberInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createSubscriber>>, TError,{data: BodyType<SubscriberInput>}, TContext> => {
+
+const mutationKey = ['createSubscriber'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createSubscriber>>, {data: BodyType<SubscriberInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createSubscriber(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateSubscriberMutationResult = NonNullable<Awaited<ReturnType<typeof createSubscriber>>>
+    export type CreateSubscriberMutationBody = BodyType<SubscriberInput>
+    export type CreateSubscriberMutationError = ErrorType<ErrorMessage>
+
+    /**
+ * @summary Subscribe to the newsletter
+ */
+export const useCreateSubscriber = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createSubscriber>>, TError,{data: BodyType<SubscriberInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createSubscriber>>,
+        TError,
+        {data: BodyType<SubscriberInput>},
+        TContext
+      > => {
+      return useMutation(getCreateSubscriberMutationOptions(options));
+    }
+
+export const getCallbackChatUrl = () => {
+
+
+
+
+  return `/api/callback-chat`
+}
+
+/**
+ * Sends the visitor's conversation to the AI callback assistant. When name and phone are captured, a callback lead is created and the team is notified.
+ * @summary AI callback assistant chat turn
+ */
+export const callbackChat = async (callbackChatInput: CallbackChatInput, options?: Parameters<typeof customFetch>[1]): Promise<CallbackChatReply> => {
+
+  return customFetch<CallbackChatReply>(getCallbackChatUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(callbackChatInput)
+  }
+);}
+
+
+
+
+
+export const getCallbackChatMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof callbackChat>>, TError,{data: BodyType<CallbackChatInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof callbackChat>>, TError,{data: BodyType<CallbackChatInput>}, TContext> => {
+
+const mutationKey = ['callbackChat'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof callbackChat>>, {data: BodyType<CallbackChatInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  callbackChat(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CallbackChatMutationResult = NonNullable<Awaited<ReturnType<typeof callbackChat>>>
+    export type CallbackChatMutationBody = BodyType<CallbackChatInput>
+    export type CallbackChatMutationError = ErrorType<ErrorMessage>
+
+    /**
+ * @summary AI callback assistant chat turn
+ */
+export const useCallbackChat = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof callbackChat>>, TError,{data: BodyType<CallbackChatInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof callbackChat>>,
+        TError,
+        {data: BodyType<CallbackChatInput>},
+        TContext
+      > => {
+      return useMutation(getCallbackChatMutationOptions(options));
     }
 
 export const getUpdateLeadUrl = (id: number,) => {

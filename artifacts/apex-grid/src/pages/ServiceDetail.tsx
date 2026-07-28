@@ -223,7 +223,7 @@ export default function ServiceDetail() {
                 <div className="w-12 h-1 bg-primary mb-6"></div>
                 <h3 className="font-display font-bold text-2xl mb-4">Engage Our Team</h3>
                 <p className="text-muted-foreground mb-8 text-sm leading-relaxed">
-                  Provide your architectural backgrounds or conceptual narrative. We will return a comprehensive, fixed-fee engineering proposal within 24 hours.
+                  Provide your architectural backgrounds or conceptual narrative. Our team completes an initial review and responds within 12–24 hours, with a comprehensive, fixed-fee engineering proposal typically within 48 hours.
                 </p>
                 <ul className="space-y-4 mb-10 text-sm font-medium border-t border-border pt-8">
                   <li className="flex items-center gap-3">

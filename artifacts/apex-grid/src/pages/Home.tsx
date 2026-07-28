@@ -18,8 +18,8 @@ export default function Home() {
   const stats = [
     { label: "Disciplines Under One Roof", value: "3" },
     { label: "Initial Review Response", value: "24h" },
-    { label: "States Licensed", value: "50+" },
-    { label: "Projects Permitted", value: "10k" }
+    { label: "States Licensed", value: "49" },
+    { label: "Initial Review Response", value: "12-24hr" }
   ];
 
   const processes = [
@@ -122,7 +122,7 @@ export default function Home() {
               </div>
               <ul className="mt-10 space-y-4">
                 {[
-                  "In-house PE stamps for 50 states",
+                  "In-house PE stamps in 49 states",
                   "Clash-free multi-discipline coordination",
                   "Practical, value-engineered detailing"
                 ].map((item, i) => (
@@ -263,7 +263,7 @@ export default function Home() {
               Engineering Value.
             </h2>
             <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
-              We beat most firm quotes — guaranteed. Get a comprehensive, multi-discipline engineering proposal for your project within 24 hours. No pressure, no endless follow-up emails. Just solid numbers.
+              We beat most firm quotes — guaranteed. Get a comprehensive, multi-discipline engineering proposal for your project with an initial review response within 12–24 hours and a full proposal typically within 48 hours. No pressure, no endless follow-up emails. Just solid numbers.
             </p>
             <div className="flex justify-center">
               <Link 

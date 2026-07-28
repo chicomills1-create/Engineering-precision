@@ -69,6 +69,55 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorMessage"
+  /subscribers:
+    post:
+      operationId: createSubscriber
+      tags: [leads]
+      summary: Subscribe to the newsletter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubscriberInput"
+      responses:
+        "201":
+          description: Subscribed (idempotent — repeat emails succeed silently)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscribeResult"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+  /callback-chat:
+    post:
+      operationId: callbackChat
+      tags: [leads]
+      summary: AI callback assistant chat turn
+      description: Sends the visitor's conversation to the AI callback assistant. When name and phone are captured, a callback lead is created and the team is notified.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CallbackChatInput"
+      responses:
+        "200":
+          description: Assistant reply
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CallbackChatReply"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
   /leads/{id}:
     patch:
       operationId: updateLead
@@ -129,14 +178,14 @@ components:
         - error
     Lead:
       type: object
-      required: [id, name, email, message, status, createdAt]
+      required: [id, name, message, status, createdAt]
       properties:
         id:
           type: number
         name:
           type: string
         email:
-          type: string
+          type: ["string", "null"]
         company:
           type: ["string", "null"]
         phone:
@@ -160,6 +209,47 @@ components:
       properties:
         status:
           $ref: "#/components/schemas/LeadStatus"
+    SubscriberInput:
+      type: object
+      required: [email]
+      properties:
+        email:
+          type: string
+          minLength: 5
+          maxLength: 320
+          pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+    SubscribeResult:
+      type: object
+      required: [ok]
+      properties:
+        ok:
+          type: boolean
+    CallbackChatInput:
+      type: object
+      required: [messages]
+      properties:
+        messages:
+          type: array
+          maxItems: 30
+          items:
+            type: object
+            required: [role, content]
+            properties:
+              role:
+                type: string
+                enum: [user, assistant]
+              content:
+                type: string
+                minLength: 1
+                maxLength: 2000
+    CallbackChatReply:
+      type: object
+      required: [reply, complete]
+      properties:
+        reply:
+          type: string
+        complete:
+          type: boolean
     LeadInput:
       type: object
       required: [name, email, message]

@@ -168,13 +168,20 @@ function LeadsList() {
               </div>
 
               <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm mb-4">
-                <a
-                  href={`mailto:${lead.email}`}
-                  className="inline-flex items-center gap-1.5 text-primary hover:underline"
-                >
-                  <Mail className="w-3.5 h-3.5" />
-                  {lead.email}
-                </a>
+                {lead.email && (
+                  <a
+                    href={`mailto:${lead.email}`}
+                    className="inline-flex items-center gap-1.5 text-primary hover:underline"
+                  >
+                    <Mail className="w-3.5 h-3.5" />
+                    {lead.email}
+                  </a>
+                )}
+                {lead.projectType === "callback-request" && (
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-primary">
+                    Callback ASAP
+                  </span>
+                )}
                 {lead.phone && (
                   <a
                     href={`tel:${lead.phone}`}

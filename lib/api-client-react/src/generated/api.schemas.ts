@@ -25,7 +25,8 @@ export const LeadStatus = {
 export interface Lead {
   id: number;
   name: string;
-  email: string;
+  /** @nullable */
+  email?: string | null;
   /** @nullable */
   company?: string | null;
   /** @nullable */
@@ -41,6 +42,46 @@ export interface Lead {
 
 export interface LeadUpdateInput {
   status: LeadStatus;
+}
+
+export interface SubscriberInput {
+  /**
+     * @minLength 5
+     * @maxLength 320
+     * @pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$
+     */
+  email: string;
+}
+
+export interface SubscribeResult {
+  ok: boolean;
+}
+
+export type CallbackChatInputMessagesItemRole = typeof CallbackChatInputMessagesItemRole[keyof typeof CallbackChatInputMessagesItemRole];
+
+
+export const CallbackChatInputMessagesItemRole = {
+  user: 'user',
+  assistant: 'assistant',
+} as const;
+
+export type CallbackChatInputMessagesItem = {
+  role: CallbackChatInputMessagesItemRole;
+  /**
+     * @minLength 1
+     * @maxLength 2000
+     */
+  content: string;
+};
+
+export interface CallbackChatInput {
+  /** @maxItems 30 */
+  messages: CallbackChatInputMessagesItem[];
+}
+
+export interface CallbackChatReply {
+  reply: string;
+  complete: boolean;
 }
 
 export interface LeadInput {

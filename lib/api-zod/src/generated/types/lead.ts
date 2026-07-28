@@ -10,7 +10,8 @@ import type { LeadStatus } from './leadStatus';
 export interface Lead {
   id: number;
   name: string;
-  email: string;
+  /** @nullable */
+  email?: string | null;
   /** @nullable */
   company?: string | null;
   /** @nullable */

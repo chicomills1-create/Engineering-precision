@@ -12,7 +12,9 @@ export default function Industries() {
     { name: "Retail & Hospitality", desc: "Brand-compliant aesthetic integration, commercial kitchens, and guest comfort systems." },
     { name: "Education", desc: "DSA compliance, laboratory ventilation, and campus-wide utility infrastructure." },
     { name: "Life Science", desc: "Clean rooms, fume hood exhaust, specialized lab gas systems, and vibration-sensitive structural design." },
-    { name: "Government & Civic", desc: "High-security structural hardening, ATFP compliance, and stringent energy mandates." }
+    { name: "Government & Civic", desc: "High-security structural hardening, ATFP compliance, and stringent energy mandates." },
+    { name: "Religious & Worship Facilities", desc: "Long-span column-free sanctuaries, assembly occupancy ventilation, acoustic-sensitive MEP, and event-day site and parking design." },
+    { name: "Commercial Office", desc: "Core-and-shell engineering, tenant-ready MEP infrastructure, and flexible floor plates designed for future build-outs." }
   ];
 
   return (

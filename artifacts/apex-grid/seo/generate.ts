@@ -232,7 +232,7 @@ ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
   <p class="kicker">Nationwide Coverage</p>
   <h1>Service <span class="dim">Areas</span></h1>
-  <p class="lede">Apex Grid provides MEP, structural, civil, and energy-compliance engineering across all 50 states through multi-state PE licensure. Every state page below covers the adopted codes, climate drivers, and permitting landscape that shape design there.</p>
+  <p class="lede">Apex Grid provides MEP, structural, civil, and energy-compliance engineering across 49 states through multi-state PE licensure — backed by over 15 years of expertise. Every state page below covers the adopted codes, climate drivers, and permitting landscape that shape design there.</p>
 </div></section>
 <section class="block"><div class="container">
   <h2>Choose a <em>State</em></h2>
@@ -251,9 +251,9 @@ ${breadcrumb(crumbs)}
 </div></section>`;
 
   return htmlShell({
-    title: "Service Areas | Engineering Services in All 50 States | Apex Grid",
+    title: "Service Areas | Engineering Services in 49 States | Apex Grid",
     description:
-      "Apex Grid Engineering provides licensed MEP, structural, civil, and energy code compliance services across all 50 US states. Find your state's codes and requirements.",
+      "Apex Grid Engineering provides licensed MEP, structural, civil, and energy code compliance services across 49 US states. Find your state's codes and requirements.",
     canonical: `${SITE}/locations/`,
     schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
     body,

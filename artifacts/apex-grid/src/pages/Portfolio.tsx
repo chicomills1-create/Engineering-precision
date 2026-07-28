@@ -2,6 +2,12 @@ import { Link } from "wouter";
 import project1 from "@assets/generated_images/project-1.webp";
 import project2 from "@assets/generated_images/project-2.webp";
 import project3 from "@assets/generated_images/project-3.webp";
+import project4 from "@assets/generated_images/project-4.webp";
+import project5 from "@assets/generated_images/project-5.webp";
+import project6 from "@assets/generated_images/project-6.webp";
+import project7 from "@assets/generated_images/project-7.webp";
+import project8 from "@assets/generated_images/project-8.webp";
+import project9 from "@assets/generated_images/project-9.webp";
 import portfolioBg from "@assets/generated_images/portfolio-bg.webp";
 
 export default function Portfolio() {
@@ -58,7 +64,7 @@ export default function Portfolio() {
       location: "Reno, NV",
       year: "2022",
       disciplines: ["Structural", "Civil", "Title 24"],
-      image: null,
+      image: project4,
       description: "A massive logistics facility utilizing tilt-up concrete construction. Optimized for rapid deployment, the structural design minimized steel tonnage while supporting extensive rooftop solar arrays. Civil engineering handled heavy-duty pavement design for 24/7 autonomous truck traffic.",
       stats: [
         { label: "Scale", value: "500K sq ft" },
@@ -70,15 +76,75 @@ export default function Portfolio() {
       id: 5,
       title: "The Foundry Lofts",
       sector: "Multifamily Residential",
-      location: "Austin, CO",
+      location: "Austin, TX",
       year: "2023",
       disciplines: ["Structural", "MEP"],
-      image: null,
+      image: project5,
       description: "A 5-over-2 podium construction project in a dense urban infill site. Structural engineering navigated complex foundation underpinning adjacent to historic structures. MEP systems utilized highly efficient centralized VRF systems to maximize ceiling heights in the residential units.",
       stats: [
         { label: "Units", value: "245" },
         { label: "Levels", value: "7" },
         { label: "Efficiency", value: "LEED Gold" }
+      ]
+    },
+    {
+      id: 6,
+      title: "Summit Ridge Worship Center",
+      sector: "Religious / Assembly",
+      location: "Gilbert, AZ",
+      year: "2024",
+      disciplines: ["Structural", "MEP", "Civil"],
+      image: project6,
+      description: "A 1,800-seat worship facility with long-span steel roof framing over a column-free sanctuary. Assembly occupancy drove the engineering: high-volume ventilation sized for peak occupancy swings, acoustic-sensitive duct routing to keep mechanical noise out of the sanctuary, and site design for surge parking and traffic flow on event days.",
+      stats: [
+        { label: "Seats", value: "1,800" },
+        { label: "Clear Span", value: "140 ft" },
+        { label: "Site Area", value: "11 Acres" }
+      ]
+    },
+    {
+      id: 7,
+      title: "Meridian Corporate Center",
+      sector: "Commercial Office",
+      location: "Dallas, TX",
+      year: "2023",
+      disciplines: ["MEP", "Structural"],
+      image: project7,
+      description: "Core-and-shell engineering for a Class A office campus, with tenant-ready MEP infrastructure designed for flexible floor-plate demising. Right-sized central plant capacity, vertical distribution planned around future tenant improvements, and structural framing optimized for open floor plates and rooftop amenity loads.",
+      stats: [
+        { label: "Scale", value: "310K sq ft" },
+        { label: "Floors", value: "12" },
+        { label: "Parking", value: "5-Level Garage" }
+      ]
+    },
+    {
+      id: 8,
+      title: "The Marketplace at Sonoran Crossing",
+      sector: "Retail / Hospitality",
+      location: "Phoenix, AZ",
+      year: "2022",
+      disciplines: ["Civil", "MEP", "Structural"],
+      image: project8,
+      description: "A multi-building open-air retail and restaurant center. Civil scope covered full site development — grading, shared stormwater retention, and utility distribution to nine pads. Restaurant tenants required commercial kitchen ventilation, grease systems, and heavy electrical services coordinated across shell buildings.",
+      stats: [
+        { label: "Buildings", value: "9" },
+        { label: "Scale", value: "185K sq ft" },
+        { label: "Restaurant Pads", value: "6" }
+      ]
+    },
+    {
+      id: 9,
+      title: "Copper Trail STEM Academy",
+      sector: "Education",
+      location: "Mesa, AZ",
+      year: "2024",
+      disciplines: ["Structural", "MEP", "Civil"],
+      image: project9,
+      description: "A two-story K-8 academic building with laboratory classrooms. Engineering emphasized lab ventilation and fume exhaust, campus-wide utility infrastructure, and shaded outdoor learning courtyards. Structural design accommodated phased construction so the existing campus could stay in session through the build.",
+      stats: [
+        { label: "Students", value: "1,200" },
+        { label: "Scale", value: "95K sq ft" },
+        { label: "Classrooms", value: "48" }
       ]
     }
   ];

@@ -1,6 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { CallbackWidget } from "@/components/CallbackWidget";
 import { useState, useEffect } from "react";
 
 export function Shell({ children }: { children: React.ReactNode }) {
@@ -161,6 +162,8 @@ export function Shell({ children }: { children: React.ReactNode }) {
       </header>
 
       <main className="flex-grow">{children}</main>
+
+      <CallbackWidget />
 
       <footer className="border-t border-border bg-card">
         <div className="container mx-auto px-4 md:px-8 py-20">

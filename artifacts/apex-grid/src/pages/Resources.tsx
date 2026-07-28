@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useSearch } from "wouter";
 import { ArrowRight, Clock, Tag, X } from "lucide-react";
 import resourcesBg from "@assets/generated_images/resources-bg.webp";
@@ -68,6 +68,30 @@ const articles = [
 
 export default function Resources() {
   const search = useSearch();
+  const [subscribeEmail, setSubscribeEmail] = useState("");
+  const [subscribing, setSubscribing] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
+  const [subscribeError, setSubscribeError] = useState<string | null>(null);
+
+  const handleSubscribe = async () => {
+    const email = subscribeEmail.trim();
+    if (!email || subscribing) return;
+    setSubscribing(true);
+    setSubscribeError(null);
+    try {
+      const res = await fetch(`${import.meta.env.BASE_URL}api/subscribers`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setSubscribed(true);
+    } catch {
+      setSubscribeError("Couldn't subscribe right now — please try again or email info@apexgrideng.com.");
+    } finally {
+      setSubscribing(false);
+    }
+  };
   const [, setLocation] = useLocation();
   const articleParam = new URLSearchParams(search).get("article");
   const activeArticle = articleParam ? Number(articleParam) : null;
@@ -190,16 +214,36 @@ export default function Resources() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">Code Updates directly to your inbox.</h2>
           <p className="text-white/80 mb-10 max-w-xl mx-auto text-lg">We don't spam. We only send critical updates on building code changes, material cost trends, and engineering methodologies.</p>
-          <form className="max-w-md mx-auto flex gap-2" onSubmit={(e) => e.preventDefault()}>
-            <input 
-              type="email" 
-              placeholder="Email address" 
-              className="flex-grow h-14 px-4 bg-background border-none outline-none text-foreground placeholder:text-muted-foreground"
-            />
-            <button type="submit" className="h-14 px-8 bg-black text-white font-bold text-sm uppercase tracking-wider hover:bg-black/80 transition-colors shadow-xl">
-              Subscribe
-            </button>
-          </form>
+          {subscribed ? (
+            <p className="max-w-md mx-auto text-white font-semibold text-lg">✓ You're subscribed — we'll keep you posted.</p>
+          ) : (
+            <form
+              className="max-w-md mx-auto flex gap-2"
+              onSubmit={(e) => {
+                e.preventDefault();
+                void handleSubscribe();
+              }}
+            >
+              <input
+                type="email"
+                required
+                value={subscribeEmail}
+                onChange={(e) => setSubscribeEmail(e.target.value)}
+                placeholder="Email address"
+                className="flex-grow h-14 px-4 bg-background border-none outline-none text-foreground placeholder:text-muted-foreground"
+              />
+              <button
+                type="submit"
+                disabled={subscribing}
+                className="h-14 px-8 bg-black text-white font-bold text-sm uppercase tracking-wider hover:bg-black/80 transition-colors shadow-xl disabled:opacity-60"
+              >
+                {subscribing ? "…" : "Subscribe"}
+              </button>
+            </form>
+          )}
+          {subscribeError && (
+            <p className="mt-4 text-white/90 text-sm">{subscribeError}</p>
+          )}
         </div>
       </section>
     </div>

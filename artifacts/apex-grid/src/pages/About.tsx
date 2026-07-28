@@ -42,7 +42,7 @@ export default function About() {
                 As an integrated design firm—housing Structural, MEP, and Civil engineering under one roof—we eliminate the friction of coordinating between disconnected consultants. We handle the heavy technical lifting so architects can focus on vision and contractors can focus on execution.
               </p>
               <p>
-                We are not an outsourced drafting service. With a team of in-house Professional Engineers and more than 20 engineers on staff, every project is engineered domestically and stamped by PEs licensed in all 50 states — and we're built to take on jobs of any size, with fast quote turnaround on every request.
+                We are not an outsourced drafting service. With a team of in-house Professional Engineers and more than 20 engineers on staff, every project is engineered domestically and stamped by PEs licensed in 49 states — and we're built to take on jobs of any size, with fast quote turnaround on every request.
               </p>
             </div>
             
@@ -50,16 +50,16 @@ export default function About() {
               <h3 className="font-display font-bold text-2xl mb-8">By The Numbers</h3>
               <div className="grid grid-cols-2 gap-8">
                 <div>
-                  <div className="text-5xl font-display font-bold text-primary mb-2">50+</div>
+                  <div className="text-5xl font-display font-bold text-primary mb-2">49</div>
                   <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">States Licensed</div>
                 </div>
                 <div>
-                  <div className="text-5xl font-display font-bold text-primary mb-2">10k</div>
-                  <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Projects Permitted</div>
+                  <div className="text-5xl font-display font-bold text-primary mb-2">12-24hr</div>
+                  <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Initial Review Response</div>
                 </div>
                 <div>
                   <div className="text-5xl font-display font-bold text-primary mb-2">15</div>
-                  <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Years Active</div>
+                  <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Years of Expertise</div>
                 </div>
                 <div>
                   <div className="text-5xl font-display font-bold text-primary mb-2">3</div>
