@@ -8,4 +8,6 @@ description: Lessons from task-agent merges breaking the apex-grid frontend
 
 **How to apply:** Any time automatic_updates report a task merge, typecheck + build the affected artifact before assuming the preview/production is healthy. Note vite.config requires PORT and BASE_PATH env vars even for builds.
 
+**Also:** Merges can land botched route files (compile errors, orphaned code) — run the api-server typecheck too. And if a merged task changed the drizzle schema, run `pnpm --filter @workspace/db run push` or every affected endpoint 500s with "column does not exist".
+
 **Status (2026-07-28):** Automated. The post-merge script now runs codegen, typecheck, and a production build (fail-fast), and matching validation commands (`codegen`, `typecheck`, `build`) are registered. If a merge breaks the site, post-merge setup fails loudly instead of shipping a black site.

@@ -33,13 +33,15 @@ router.get("/subscribers", requireAuth, async (_req, res): Promise<void> => {
 });
 
 router.post("/subscribers", async (req, res): Promise<void> => {
-  const parsed = CreateSubscriberBody.safeParse(req.body);
-  if (!parsed.success) {
-    res.status(400).json({ error: parsed.error.message });
-    return;
-  }
+    const parsed = UnsubscribeSubscriberBody.safeParse(req.body);
+    if (!parsed.success) {
+      res.status(400).json({ error: parsed.error.message });
+      return;
+    }
 
-  const email = parsed.data.email.trim().toLowerCase();
+    const email = parsed.data.email.trim().toLowerCase();
+
+    const parsedParams = DeleteSubscriberParams.safeParse(req.params);
 
   // New signups insert; re-subscribing after an unsubscribe clears the flag.
   const inserted = await db
@@ -76,13 +78,15 @@ router.post("/subscribers", async (req, res): Promise<void> => {
 });
 
 router.post("/subscribers/unsubscribe", async (req, res): Promise<void> => {
-  const parsed = UnsubscribeSubscriberBody.safeParse(req.body);
-  if (!parsed.success) {
-    res.status(400).json({ error: parsed.error.message });
-    return;
-  }
+    const parsed = UnsubscribeSubscriberBody.safeParse(req.body);
+    if (!parsed.success) {
+      res.status(400).json({ error: parsed.error.message });
+      return;
+    }
 
-  const email = parsed.data.email.trim().toLowerCase();
+    const email = parsed.data.email.trim().toLowerCase();
+
+    const parsedParams = DeleteSubscriberParams.safeParse(req.params);
   const token = parsed.data.token;
 
   // Tokenized links must verify; a bad token is rejected outright so
@@ -105,7 +109,6 @@ router.delete(
   "/subscribers/:id",
   requireAuth,
   async (req, res): Promise<void> => {
-    const id = Number(req.params.id);
     if (!Number.isInteger(id) || id <= 0) {
       res.status(400).json({ error: "Invalid subscriber id" });
       return;
@@ -113,7 +116,7 @@ router.delete(
 
     const deleted = await db
       .delete(subscribersTable)
-      .where(eq(subscribersTable.id, id))
+      .where(eq(subscribersTable.id, parsedParams.data.id))
       .returning({ id: subscribersTable.id });
 
     if (deleted.length === 0) {
