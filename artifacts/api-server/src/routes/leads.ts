@@ -7,6 +7,7 @@ import {
   ListLeadsResponse,
 } from "@workspace/api-zod";
 import { requireAuth } from "../middlewares/requireAuth";
+import { sendLeadNotificationEmail } from "../lib/leadNotifications";
 
 const router: IRouter = Router();
 
@@ -35,6 +36,19 @@ router.post("/leads", async (req, res): Promise<void> => {
   }
 
   const [lead] = await db.insert(leadsTable).values(parsed.data).returning();
+
+  // Fire-and-forget: email failures must never break lead submission.
+  sendLeadNotificationEmail(parsed.data)
+    .then((result) => {
+      if (!result.ok) {
+        req.log.error({ error: result.error }, "Lead notification email failed");
+      } else {
+        req.log.info("Lead notification email sent");
+      }
+    })
+    .catch((err) => {
+      req.log.error({ err }, "Lead notification email failed");
+    });
 
   res.status(201).json(
     CreateLeadResponse.parse({

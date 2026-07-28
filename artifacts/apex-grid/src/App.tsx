@@ -30,7 +30,6 @@ const queryClient = new QueryClient({
 });
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
-
 const clerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
 
 const clerkPubKey = publishableKeyFromHost(
