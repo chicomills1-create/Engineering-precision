@@ -3,8 +3,11 @@ import project1 from "@assets/generated_images/project-1.jpg";
 import project2 from "@assets/generated_images/project-2.jpg";
 import project3 from "@assets/generated_images/project-3.jpg";
 import portfolioBg from "@assets/generated_images/portfolio-bg.jpg";
+import { usePageMeta } from "@/lib/seo";
 
 export default function Portfolio() {
+  usePageMeta(PAGE_META);
+
   const projects = [
     {
       id: 1,
@@ -134,3 +137,11 @@ export default function Portfolio() {
     </div>
   );
 }
+
+const PAGE_META = {
+  title: "Portfolio | Engineering Projects & Case Studies | Apex Grid",
+  description: "Selected projects: high-rise structural and MEP design, mission-critical data centers, healthcare campuses, and industrial facilities across the US.",
+  path: "/portfolio",
+};
+
+// hint: Structural and logic conflict. Both design and behavior differ.

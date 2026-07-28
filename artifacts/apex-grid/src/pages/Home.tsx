@@ -2,8 +2,11 @@ import { Link } from "wouter";
 import { ArrowRight, ChevronRight, FileCheck, Layers, ShieldCheck, Zap } from "lucide-react";
 import heroBg from "@assets/generated_images/hero-bg2.jpg";
 import { useEffect, useState } from "react";
+import { usePageMeta } from "@/lib/seo";
 
 export default function Home() {
+  usePageMeta(PAGE_META);
+
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -277,3 +280,9 @@ export default function Home() {
     </div>
   );
 }
+
+const PAGE_META = {
+  title: "Apex Grid Engineering | MEP, Structural & Civil Design",
+  description: "Full-service engineering design firm: MEP, structural, and civil/site engineering plus Title 24 energy compliance for commercial, industrial, and healthcare projects.",
+  path: "/",
+};

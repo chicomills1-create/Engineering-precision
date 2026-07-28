@@ -1,2 +1,5 @@
 User-agent: *
 Allow: /
+
+# Update with the published site URL after deployment:
+# Sitemap: https://yourdomain.com/sitemap.xml

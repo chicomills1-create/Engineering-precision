@@ -1,3 +1,4 @@
+import { usePageMeta } from "@/lib/seo";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,7 +23,15 @@ const leadSchema = z.object({
 
 type LeadFormValues = z.infer<typeof leadSchema>;
 
+const PAGE_META = {
+  title: "Contact Us | Request an Engineering Proposal | Apex Grid",
+  description: "Start your project with Apex Grid Engineering. Request a proposal for MEP, structural, or civil design services — we respond within one business day.",
+  path: "/contact",
+};
+
 export default function Contact() {
+  usePageMeta(PAGE_META);
+
   const { toast } = useToast();
   const [isSuccess, setIsSuccess] = useState(false);
   const createLead = useCreateLead();

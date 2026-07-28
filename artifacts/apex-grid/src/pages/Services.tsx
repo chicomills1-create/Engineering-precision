@@ -4,6 +4,7 @@ import mepBg from "@assets/generated_images/mep-bg.jpg";
 import structuralBg from "@assets/generated_images/structural-bg.jpg";
 import civilBg from "@assets/generated_images/civil-bg.jpg";
 import assessmentBg from "@assets/generated_images/assessment-bg.jpg";
+import { usePageMeta } from "@/lib/seo";
 
 const services = [
   {
@@ -37,6 +38,8 @@ const services = [
 ];
 
 export default function Services() {
+  usePageMeta(PAGE_META);
+
   return (
     <div className="flex flex-col">
       <section className="relative pt-40 pb-24 overflow-hidden bg-background">
@@ -122,3 +125,9 @@ export default function Services() {
     </div>
   );
 }
+
+const PAGE_META = {
+  title: "Engineering Services | MEP, Structural, Civil | Apex Grid",
+  description: "Explore our MEP engineering, structural design, civil/site design, and Title 24 energy compliance services — from HVAC load calcs to seismic retrofitting.",
+  path: "/services",
+};

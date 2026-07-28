@@ -1,6 +1,9 @@
+import { usePageMeta } from "@/lib/seo";
 import officeImg from "@assets/generated_images/office.jpg";
 
 export default function About() {
+  usePageMeta(PAGE_META);
+
   return (
     <div className="flex flex-col">
       <section className="relative pt-40 pb-32 overflow-hidden bg-background">
@@ -110,3 +113,9 @@ export default function About() {
     </div>
   );
 }
+
+const PAGE_META = {
+  title: "About Our Engineering Firm | Apex Grid Engineering",
+  description: "Meet Apex Grid Engineering — a multidisciplinary design firm delivering precise, code-compliant MEP, structural, and civil engineering solutions.",
+  path: "/about",
+};
