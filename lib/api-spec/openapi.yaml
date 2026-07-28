@@ -69,6 +69,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorMessage"
+  /leads/{id}:
+    patch:
+      operationId: updateLead
+      tags: [leads]
+      summary: Update a lead's status (admin only)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LeadUpdateInput"
+      responses:
+        "200":
+          description: Updated lead
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lead"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "404":
+          description: Lead not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
 components:
   schemas:
     HealthStatus:
@@ -87,7 +129,7 @@ components:
         - error
     Lead:
       type: object
-      required: [id, name, email, message, createdAt]
+      required: [id, name, email, message, status, createdAt]
       properties:
         id:
           type: number
@@ -105,8 +147,19 @@ components:
           type: ["string", "null"]
         message:
           type: string
+        status:
+          $ref: "#/components/schemas/LeadStatus"
         createdAt:
           type: string
+    LeadStatus:
+      type: string
+      enum: [new, contacted, closed]
+    LeadUpdateInput:
+      type: object
+      required: [status]
+      properties:
+        status:
+          $ref: "#/components/schemas/LeadStatus"
     LeadInput:
       type: object
       required: [name, email, message]

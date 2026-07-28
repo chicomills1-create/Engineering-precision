@@ -10,3 +10,5 @@ export * from './errorMessage';
 export * from './healthStatus';
 export * from './lead';
 export * from './leadInput';
+export * from './leadStatus';
+export * from './leadUpdateInput';

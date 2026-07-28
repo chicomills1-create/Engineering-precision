@@ -29,6 +29,7 @@ export const ListLeadsResponseItem = zod.object({
   "projectType": zod.string().nullish(),
   "services": zod.string().nullish(),
   "message": zod.string(),
+  "status": zod.enum(['new', 'contacted', 'closed']),
   "createdAt": zod.string()
 })
 export const ListLeadsResponse = zod.array(ListLeadsResponseItem)
@@ -62,6 +63,32 @@ export const CreateLeadResponse = zod.object({
   "projectType": zod.string().nullish(),
   "services": zod.string().nullish(),
   "message": zod.string(),
+  "status": zod.enum(['new', 'contacted', 'closed']),
+  "createdAt": zod.string()
+})
+
+
+/**
+ * @summary Update a lead's status (admin only)
+ */
+export const UpdateLeadParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const UpdateLeadBody = zod.object({
+  "status": zod.enum(['new', 'contacted', 'closed'])
+})
+
+export const UpdateLeadResponse = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "email": zod.string(),
+  "company": zod.string().nullish(),
+  "phone": zod.string().nullish(),
+  "projectType": zod.string().nullish(),
+  "services": zod.string().nullish(),
+  "message": zod.string(),
+  "status": zod.enum(['new', 'contacted', 'closed']),
   "createdAt": zod.string()
 })
 

@@ -1,7 +1,22 @@
+import { useState } from 'react';
 import { Show, useClerk, useUser } from '@clerk/react';
 import { Redirect } from 'wouter';
-import { useListLeads } from '@workspace/api-client-react';
+import { useQueryClient } from '@tanstack/react-query';
+import {
+  useListLeads,
+  useUpdateLead,
+  getListLeadsQueryKey,
+  LeadStatus,
+} from '@workspace/api-client-react';
 import { Inbox, LogOut, Mail, Phone } from 'lucide-react';
+
+const STATUSES = [LeadStatus.new, LeadStatus.contacted, LeadStatus.closed] as const;
+
+const statusStyles: Record<LeadStatus, string> = {
+  new: 'bg-primary/15 text-primary border-primary/40',
+  contacted: 'bg-amber-500/10 text-amber-400 border-amber-500/40',
+  closed: 'bg-muted text-muted-foreground border-border',
+};
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -15,10 +30,44 @@ function formatDate(iso: string): string {
   });
 }
 
+function StatusControl({ leadId, status }: { leadId: number; status: LeadStatus }) {
+  const queryClient = useQueryClient();
+  const updateLead = useUpdateLead({
+    mutation: {
+      onSuccess: () => {
+        void queryClient.invalidateQueries({ queryKey: getListLeadsQueryKey() });
+      },
+    },
+  });
+
+  return (
+    <div className="flex items-center gap-1">
+      {STATUSES.map((s) => (
+        <button
+          key={s}
+          type="button"
+          disabled={updateLead.isPending || s === status}
+          onClick={() => updateLead.mutate({ id: leadId, data: { status: s } })}
+          className={`text-xs px-2.5 py-1 border rounded-[2px] uppercase tracking-wider transition-colors disabled:cursor-default ${
+            s === status
+              ? statusStyles[s]
+              : 'border-border text-muted-foreground hover:text-foreground hover:border-primary/50'
+          }`}
+        >
+          {s}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 function LeadsList() {
   const { data: leads, isLoading, error } = useListLeads();
   const { signOut } = useClerk();
   const { user } = useUser();
+  const [filter, setFilter] = useState<LeadStatus | 'all'>('all');
+
+  const filteredLeads = leads?.filter((lead) => filter === 'all' || lead.status === filter);
 
   return (
     <div className="container mx-auto px-4 md:px-8 py-16 min-h-[70vh]">
@@ -59,12 +108,36 @@ function LeadsList() {
         </div>
       )}
 
-      {leads && leads.length > 0 && (
+      {leads && leads.length > 0 && filteredLeads && (
         <div className="space-y-4">
-          <p className="text-sm text-muted-foreground">
-            {leads.length} {leads.length === 1 ? 'inquiry' : 'inquiries'}
-          </p>
-          {leads.map((lead) => (
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <p className="text-sm text-muted-foreground">
+              {filteredLeads.length} {filteredLeads.length === 1 ? 'inquiry' : 'inquiries'}
+              {filter !== 'all' && ` (${filter})`}
+            </p>
+            <div className="flex items-center gap-1">
+              {(['all', ...STATUSES] as const).map((f) => (
+                <button
+                  key={f}
+                  type="button"
+                  onClick={() => setFilter(f)}
+                  className={`text-xs px-3 py-1.5 border rounded-[2px] uppercase tracking-wider transition-colors ${
+                    filter === f
+                      ? 'border-primary/60 text-primary bg-primary/10'
+                      : 'border-border text-muted-foreground hover:text-foreground hover:border-primary/50'
+                  }`}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
+          </div>
+          {filteredLeads.length === 0 && (
+            <div className="border border-border bg-card p-8 rounded-[2px] text-center text-sm text-muted-foreground">
+              No {filter} inquiries.
+            </div>
+          )}
+          {filteredLeads.map((lead) => (
             <div key={lead.id} className="border border-border bg-card p-6 rounded-[2px]">
               <div className="flex flex-col md:flex-row md:items-start justify-between gap-2 mb-3">
                 <div>
@@ -115,9 +188,11 @@ function LeadsList() {
                 </div>
               )}
 
-              <p className="text-sm text-foreground/85 leading-relaxed whitespace-pre-wrap">
+              <p className="text-sm text-foreground/85 leading-relaxed whitespace-pre-wrap mb-4">
                 {lead.message}
               </p>
+
+              <StatusControl leadId={lead.id} status={lead.status} />
             </div>
           ))}
         </div>

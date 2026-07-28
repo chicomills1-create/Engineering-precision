@@ -5,6 +5,7 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { LeadStatus } from './leadStatus';
 
 export interface Lead {
   id: number;
@@ -19,5 +20,6 @@ export interface Lead {
   /** @nullable */
   services?: string | null;
   message: string;
+  status: LeadStatus;
   createdAt: string;
 }

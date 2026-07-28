@@ -13,6 +13,15 @@ export interface ErrorMessage {
   error: string;
 }
 
+export type LeadStatus = typeof LeadStatus[keyof typeof LeadStatus];
+
+
+export const LeadStatus = {
+  new: 'new',
+  contacted: 'contacted',
+  closed: 'closed',
+} as const;
+
 export interface Lead {
   id: number;
   name: string;
@@ -26,7 +35,12 @@ export interface Lead {
   /** @nullable */
   services?: string | null;
   message: string;
+  status: LeadStatus;
   createdAt: string;
+}
+
+export interface LeadUpdateInput {
+  status: LeadStatus;
 }
 
 export interface LeadInput {

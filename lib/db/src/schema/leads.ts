@@ -11,12 +11,14 @@ export const leadsTable = pgTable("leads", {
   projectType: text("project_type"),
   services: text("services"),
   message: text("message").notNull(),
+  status: text("status").notNull().default("new"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
 export const insertLeadSchema = createInsertSchema(leadsTable).omit({
   id: true,
   createdAt: true,
+  status: true,
 });
 export type InsertLead = z.infer<typeof insertLeadSchema>;
 export type Lead = typeof leadsTable.$inferSelect;
