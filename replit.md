@@ -1,6 +1,6 @@
-# [Project name]
+# Apex Grid Engineering
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Marketing website for Apex Grid Engineering — a licensed engineering firm (MEP, Structural, Civil, Fire Protection, Title 24 / Energy Compliance, Architectural support) with a lead intake form.
 
 ## Run & Operate
 
@@ -30,7 +30,8 @@ _Populate as you build — non-obvious choices a reader couldn't infer from the 
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- `artifacts/apex-grid` — dark, premium marketing site at `/` (Home, Services, Projects, About, Contact). Contact form posts to `POST /api/leads` (stored in `leads` table).
+- Design: dark by default, deep slate/navy bg (HSL 230 25% 6%), gold accent (HSL 43 65% 53%), Space Grotesk headings / Inter body, 4px radius — per explicit user direction; keep this look.
 
 ## User preferences
 
