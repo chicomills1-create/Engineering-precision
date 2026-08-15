@@ -1,5 +1,6 @@
 import { usePageMeta } from "@/lib/seo";
 import officeImg from "@assets/generated_images/office.webp";
+import jeremyImg from "@assets/generated_images/jeremy-mills.webp";
 
 export default function About() {
   usePageMeta(PAGE_META);
@@ -81,8 +82,13 @@ export default function About() {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
               <div className="bg-card p-10">
-                <div className="aspect-[4/3] bg-secondary border border-border mb-8 flex items-center justify-center">
-                  <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Photo Coming Soon</span>
+                <div className="aspect-[4/3] bg-secondary border border-border mb-8 overflow-hidden">
+                  <img
+                    src={jeremyImg}
+                    alt="Jeremy Mills, Co-Founder & CEO of Apex Grid Engineering"
+                    className="w-full h-full object-cover object-top"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="w-12 h-[2px] bg-primary mb-6" />
                 <h3 className="text-2xl font-display font-bold mb-1">Jeremy Mills</h3>
