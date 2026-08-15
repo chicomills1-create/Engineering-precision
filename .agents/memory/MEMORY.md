@@ -4,3 +4,4 @@
 - [SendGrid lead emails](sendgrid-lead-emails.md) — from-address must be a SendGrid-verified sender or sends 403; config via LEAD_NOTIFY_EMAIL / LEAD_NOTIFY_FROM_EMAIL env vars.
 - [Signed unsubscribe links](unsubscribe-links.md) — deterministic HMAC of email signed with UNSUBSCRIBE_SECRET||SESSION_SECRET; rotating the secret kills old links; remember drizzle push for new columns.
 - [Callback bot gate](callback-bot-gate.md) — Turnstile gates callback-chat; dev falls back to always-pass test keys, so real TURNSTILE keys are required before production.
+- [API healthcheck root](api-healthcheck-root.md) — deploy healthchecks probe the API artifact root (/api), so the router must serve 200 at GET /; prod also needs TURNSTILE_SECRET_KEY to boot.

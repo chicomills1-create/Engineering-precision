@@ -34,7 +34,7 @@ router.get("/subscribers", requireAuth, async (_req, res): Promise<void> => {
 });
 
 router.post("/subscribers", async (req, res): Promise<void> => {
-  const parsed = CreateSubscriberBody.safeParse(req.body);
+  const parsed = UnsubscribeSubscriberBody.safeParse(req.body);
   if (!parsed.success) {
     res.status(400).json({ error: parsed.error.message });
     return;
@@ -112,6 +112,10 @@ router.delete(
       return;
     }
     const id = parsedParams.data.id;
+    if (!Number.isInteger(id) || id <= 0) {
+      res.status(400).json({ error: "Invalid subscriber id" });
+      return;
+    }
 
     const deleted = await db
       .delete(subscribersTable)
