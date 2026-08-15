@@ -273,6 +273,25 @@ export default function Contact() {
                     <p className="text-foreground">Queen Creek, AZ 85142</p>
                   </div>
 
+                  <div>
+                    <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-3">Regional Offices</h4>
+                    <ul className="space-y-2 text-sm text-foreground/80">
+                      <li className="flex items-start gap-2">
+                        <span className="text-primary mt-[3px]">▸</span>
+                        <span>Los Angeles, CA</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-primary mt-[3px]">▸</span>
+                        <span>Miami, FL</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-primary mt-[3px]">▸</span>
+                        <span>Houston, TX</span>
+                      </li>
+                    </ul>
+                    <p className="text-xs text-muted-foreground mt-3">By appointment</p>
+                  </div>
+
                   <div className="pt-8 border-t border-border">
                     <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-4">Response Time</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
