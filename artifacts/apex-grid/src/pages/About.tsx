@@ -72,40 +72,29 @@ export default function About() {
         </div>
       </section>
 
-      {/* Co-Founders */}
+      {/* Founder */}
       <section className="py-32 bg-background border-b border-border">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-center">Our Co-Founders</h2>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-center">Our Founder</h2>
             <p className="text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-16">
-              Apex Grid Engineering is founder-led — the people who started the firm still stand behind every set of drawings.
+              Apex Grid Engineering is founder-led — the person who started the firm still stands behind every set of drawings.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
-              <div className="bg-card p-10">
-                <div className="aspect-[4/3] bg-secondary border border-border mb-8 overflow-hidden">
-                  <img
-                    src={jeremyImg}
-                    alt="Jeremy Mills, Co-Founder & CEO of Apex Grid Engineering"
-                    className="w-full h-full object-cover object-top"
-                    loading="lazy"
-                  />
-                </div>
+            <div className="max-w-3xl mx-auto bg-card border border-border p-10 md:grid md:grid-cols-[280px_1fr] md:gap-10 md:items-start">
+              <div className="aspect-[4/5] bg-secondary border border-border mb-8 md:mb-0 overflow-hidden">
+                <img
+                  src={jeremyImg}
+                  alt="Jeremy Mills, Founder & CEO of Apex Grid Engineering"
+                  className="w-full h-full object-cover object-top"
+                  loading="lazy"
+                />
+              </div>
+              <div>
                 <div className="w-12 h-[2px] bg-primary mb-6" />
                 <h3 className="text-2xl font-display font-bold mb-1">Jeremy Mills</h3>
-                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Co-Founder &amp; CEO · Disabled U.S. Veteran</div>
+                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Founder &amp; CEO · Disabled U.S. Veteran</div>
                 <p className="text-muted-foreground leading-relaxed">
                   Jeremy leads Apex Grid with the same mission-first discipline he carried in uniform. As a disabled veteran, he built the firm around accountability, clear communication, and delivering for clients the way you deliver for your unit — no excuses, no surprises.
-                </p>
-              </div>
-              <div className="bg-card p-10">
-                <div className="aspect-[4/3] bg-secondary border border-border mb-8 flex items-center justify-center">
-                  <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Photo Coming Soon</span>
-                </div>
-                <div className="w-12 h-[2px] bg-primary mb-6" />
-                <h3 className="text-2xl font-display font-bold mb-1">Jason Luhn, PE</h3>
-                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Co-Founder · Professional Engineer</div>
-                <p className="text-muted-foreground leading-relaxed">
-                  Jason is the firm's technical anchor. A licensed Professional Engineer, he sets the engineering standard across every discipline — insisting on constructable drawings, code-first design, and documents that pass review the first time.
                 </p>
               </div>
             </div>

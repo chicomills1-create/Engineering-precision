@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { ArrowRight, Shield, Star, Flag, Award, FileCheck, Users } from "lucide-react";
 import militaryBg from "@assets/generated_images/military-hero.jpg";
+import jeremyImg from "@assets/generated_images/jeremy-mills.webp";
 import { usePageMeta } from "@/lib/seo";
 
 export default function Military() {
@@ -38,7 +39,19 @@ export default function Military() {
       {/* Jeremy's story */}
       <section className="py-24 bg-background border-b border-border">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-5xl mx-auto md:grid md:grid-cols-[300px_1fr] md:gap-12 md:items-start">
+            <div className="mb-10 md:mb-0">
+              <div className="aspect-[4/5] bg-secondary border border-border overflow-hidden">
+                <img
+                  src={jeremyImg}
+                  alt="Jeremy Mills, Founder & CEO of Apex Grid Engineering, U.S. Air Force veteran"
+                  className="w-full h-full object-cover object-top"
+                  loading="lazy"
+                />
+              </div>
+              <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground mt-4">Jeremy Mills · Founder &amp; CEO</div>
+            </div>
+            <div>
             <span className="font-mono text-xs uppercase tracking-widest text-primary mb-6 block">A Note from our CEO</span>
             <blockquote className="border-l-4 border-primary pl-8 space-y-5">
               <p className="text-xl leading-relaxed text-foreground/90">
@@ -54,6 +67,7 @@ export default function Military() {
                 — Jeremy, Founder &amp; CEO · USAF Veteran
               </footer>
             </blockquote>
+            </div>
           </div>
         </div>
       </section>
