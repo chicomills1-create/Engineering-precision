@@ -15,7 +15,7 @@ const STATS = [
   { value: "20+", label: "Engineers on Staff" },
   { value: "49", label: "States with PE Licensure" },
   { value: "4", label: "Core Disciplines In-House" },
-  { value: "48hr", label: "Typical Quote Turnaround" },
+  { value: "12-24hr", label: "Typical Quote Turnaround" },
 ];
 
 const GROUPS = [

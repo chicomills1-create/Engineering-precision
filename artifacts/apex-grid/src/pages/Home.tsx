@@ -17,7 +17,7 @@ export default function Home() {
 
   const stats = [
     { label: "Disciplines Under One Roof", value: "4" },
-    { label: "Typical Quote Turnaround", value: "48hr" },
+    { label: "Typical Quote Turnaround", value: "12-24hr" },
     { label: "States Licensed", value: "49" },
     { label: "Initial Review Response", value: "12-24hr" }
   ];
@@ -264,7 +264,7 @@ export default function Home() {
               Engineering Value.
             </h2>
             <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
-              We beat most firm quotes — guaranteed. Get a comprehensive, multi-discipline engineering proposal for your project with an initial review response within 12–24 hours and a full proposal typically within 48 hours. No pressure, no endless follow-up emails. Just solid numbers.
+              We beat most firm quotes — guaranteed. Get a comprehensive, multi-discipline engineering proposal for your project with an initial review response and a full proposal typically within 12–24 hours. No pressure, no endless follow-up emails. Just solid numbers.
             </p>
             <div className="flex justify-center">
               <Link 
