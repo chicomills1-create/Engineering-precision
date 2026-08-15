@@ -9,6 +9,7 @@ import ServiceDetail from '@/pages/ServiceDetail';
 import Legal from '@/pages/Legal';
 import Portfolio from '@/pages/Portfolio';
 import Industries from '@/pages/Industries';
+import Military from '@/pages/Military';
 import Resources from '@/pages/Resources';
 import About from '@/pages/About';
 import Team from '@/pages/Team';
@@ -60,6 +61,7 @@ function Router() {
         </Route>
         <Route path="/portfolio" component={Portfolio} />
         <Route path="/industries" component={Industries} />
+        <Route path="/military" component={Military} />
         <Route path="/resources" component={Resources} />
         <Route path="/about" component={About} />
         <Route path="/team" component={Team} />

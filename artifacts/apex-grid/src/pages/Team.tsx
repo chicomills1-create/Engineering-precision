@@ -7,12 +7,13 @@ import {
   ClipboardCheck,
   Layers,
   Stamp,
+  PenTool,
 } from "lucide-react";
 
 const STATS = [
   { value: "20+", label: "Engineers on Staff" },
   { value: "49", label: "States with PE Licensure" },
-  { value: "3", label: "Core Disciplines In-House" },
+  { value: "4", label: "Core Disciplines In-House" },
   { value: "48hr", label: "Typical Quote Turnaround" },
 ];
 
@@ -23,6 +24,13 @@ const GROUPS = [
     lead: "Led by licensed Structural PEs",
     body: "Gravity and lateral system design for steel, concrete, masonry, and wood structures. This group owns load path resolution, foundation design, seismic and wind analysis, and structural peer review.",
     scope: ["New structures & additions", "Seismic / wind / snow analysis", "Foundation & retaining design"],
+  },
+  {
+    icon: PenTool,
+    title: "Architectural Design Studio",
+    lead: "Led by Jason Mitchell, Architect",
+    body: "Full architectural design — concept, space planning, and permit-ready construction documents — produced in the same office as the engineering, so the architecture and the systems behind it never fall out of sync.",
+    scope: ["Concept & schematic design", "Construction documents", "Code & accessibility compliance"],
   },
   {
     icon: Zap,
@@ -143,6 +151,6 @@ export default function Team() {
 
 const PAGE_META = {
   title: "Our Engineering Team | 20+ Engineers, PEs in 49 States | Apex Grid",
-  description: "Apex Grid Engineering's team: 20+ engineers and in-house Professional Engineers licensed in 49 states, organized across structural, MEP, civil, and energy code disciplines.",
+  description: "Apex Grid Engineering's team: 20+ engineers and in-house Professional Engineers licensed in 49 states, organized across architectural, structural, MEP, civil, and energy code disciplines.",
   path: "/team",
 };

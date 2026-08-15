@@ -4,6 +4,7 @@ import mepBg from "@assets/generated_images/mep-bg.webp";
 import structuralBg from "@assets/generated_images/structural-bg.webp";
 import civilBg from "@assets/generated_images/civil-bg.webp";
 import assessmentBg from "@assets/generated_images/assessment-bg.webp";
+import architectureBg from "@assets/generated_images/architecture-bg.webp";
 import NotFound from "./not-found";
 
 const servicesData = {
@@ -122,6 +123,35 @@ const servicesData = {
       }
     ],
     sectors: []
+  },
+  "architecture": {
+    title: "Architectural Design",
+    bg: architectureBg,
+    desc: "Full architectural design services led by our in-house architect, Jason Mitchell. From concept and space planning through permit-ready construction documents — designed alongside our engineers, not handed off to them.",
+    problemSection: {
+      headline: "Architecture and Engineering. One Roof. One Vision.",
+      content: "Most projects bounce between an architecture firm and separate engineering consultants — and every handoff introduces delay, miscommunication, and redesign. Our architectural practice, led by Jason Mitchell, works in the same model as our structural, MEP, and civil teams from the first sketch. The result is a design that's beautiful, buildable, and coordinated before it ever reaches plan check."
+    },
+    scopeHeadline: "Architectural Services",
+    scopes: [
+      {
+        title: "Concept & Schematic Design",
+        desc: "Site-responsive massing, space planning, and schematic layouts that balance program requirements, budget, and code constraints from the very first pass."
+      },
+      {
+        title: "Design Development",
+        desc: "Materials, building envelope, interior layouts, and accessibility — developed in lockstep with structural and MEP systems so nothing gets value-engineered out later."
+      },
+      {
+        title: "Construction Documents",
+        desc: "Complete, permit-ready architectural drawing sets — floor plans, elevations, sections, details, and schedules — coordinated sheet-by-sheet with our engineering documents."
+      },
+      {
+        title: "Code & Accessibility Compliance",
+        desc: "Building code analysis, egress planning, ADA compliance, and jurisdiction-specific requirements resolved during design, not during plan check corrections."
+      }
+    ],
+    sectors: ["Residential", "Commercial", "Mixed-Use", "Institutional"]
   }
 };
 

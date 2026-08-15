@@ -42,7 +42,7 @@ function staticDirIndex() {
       server.middlewares.use((req, _res, next) => {
         if (req.url) {
           const [pathname, query] = req.url.split('?');
-          if (/^\/locations(\/|$)/.test(pathname)) {
+          if (/^\/(locations|blog)(\/|$)/.test(pathname)) {
             const rewritten = pathname.endsWith('/')
               ? `${pathname}index.html`
               : !path.extname(pathname)

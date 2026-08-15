@@ -4,6 +4,7 @@ import mepBg from "@assets/generated_images/mep-bg.webp";
 import structuralBg from "@assets/generated_images/structural-bg.webp";
 import civilBg from "@assets/generated_images/civil-bg.webp";
 import assessmentBg from "@assets/generated_images/assessment-bg.webp";
+import architectureBg from "@assets/generated_images/architecture-bg.webp";
 import { usePageMeta } from "@/lib/seo";
 
 const services = [
@@ -35,6 +36,13 @@ const services = [
     desc: "Independent judgment and reporting when conditions change, damage is suspected, or verification is required.",
     bg: assessmentBg,
   },
+  {
+    id: "architecture",
+    num: "05",
+    title: "Architectural Design",
+    desc: "Full architectural design services led by our in-house architect — space planning, building design, and permit-ready architectural documents coordinated with our engineering disciplines from day one.",
+    bg: architectureBg,
+  },
 ];
 
 export default function Services() {
@@ -54,13 +62,13 @@ export default function Services() {
             One Firm.
             <br />
             <span className="text-muted-foreground italic">
-              Four Lines Of Service.
+              Five Lines Of Service.
             </span>
           </h1>
           <p className="mt-8 max-w-2xl text-lg text-foreground/80 border-l-2 border-primary pl-6">
-            MEP design, structural and civil engineering, and building
-            assessments — so you don't have to coordinate multiple firms to get
-            one project across the line.
+            Architectural design, MEP design, structural and civil engineering,
+            and building assessments — so you don't have to coordinate multiple
+            firms to get one project across the line.
           </p>
         </div>
       </section>
@@ -127,7 +135,7 @@ export default function Services() {
 }
 
 const PAGE_META = {
-  title: "Engineering Services | MEP, Structural, Civil | Apex Grid",
-  description: "Explore our MEP engineering, structural design, civil/site design, and Title 24 energy compliance services — from HVAC load calcs to seismic retrofitting.",
+  title: "Services | Architecture, MEP, Structural, Civil | Apex Grid",
+  description: "Explore our architectural design, MEP engineering, structural design, civil/site design, and Title 24 energy compliance services — from HVAC load calcs to seismic retrofitting.",
   path: "/services",
 };

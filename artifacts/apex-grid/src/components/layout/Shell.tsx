@@ -23,6 +23,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
     { name: "Team", href: "/team" },
     { name: "Portfolio", href: "/portfolio" },
     { name: "Industries", href: "/industries" },
+    { name: "Military", href: "/military" },
     { name: "Resources", href: "/resources" },
   ];
 
@@ -31,6 +32,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
     { name: "Structural Design & Engineering", href: "/services/structural" },
     { name: "Civil Engineering", href: "/services/civil" },
     { name: "Building Assessments", href: "/services/assessments" },
+    { name: "Architectural Design", href: "/services/architecture" },
   ];
 
   return (
@@ -176,7 +178,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 </span>
               </Link>
               <p className="text-muted-foreground text-sm max-w-sm mb-8 leading-relaxed">
-                De-risking projects from concept to permit. Integrated MEP, Structural, and Civil engineering backed by licensed professionals.
+                De-risking projects from concept to permit. Integrated Architecture, MEP, Structural, and Civil design backed by licensed professionals.
               </p>
               <a href="mailto:info@apexgrideng.com" className="inline-flex h-12 px-6 bg-secondary text-foreground font-semibold text-sm items-center justify-center rounded-[2px] hover:bg-white/10 transition-colors">
                 info@apexgrideng.com
@@ -190,6 +192,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 <li><Link href="/team" className="hover:text-primary transition-colors">Team</Link></li>
                 <li><Link href="/portfolio" className="hover:text-primary transition-colors">Portfolio</Link></li>
                 <li><Link href="/resources" className="hover:text-primary transition-colors">Resources</Link></li>
+                <li><a href="/blog/" className="hover:text-primary transition-colors">Blog</a></li>
                 <li><a href="/locations/" className="hover:text-primary transition-colors">Service Areas</a></li>
                 <li><Link href="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
               </ul>
@@ -202,6 +205,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 <li><Link href="/services/structural" className="hover:text-primary transition-colors">Structural Design</Link></li>
                 <li><Link href="/services/civil" className="hover:text-primary transition-colors">Civil Engineering</Link></li>
                 <li><Link href="/services/assessments" className="hover:text-primary transition-colors">Building Assessments</Link></li>
+                <li><Link href="/services/architecture" className="hover:text-primary transition-colors">Architectural Design</Link></li>
               </ul>
             </div>
             

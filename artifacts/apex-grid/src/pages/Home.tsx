@@ -16,8 +16,8 @@ export default function Home() {
   }, []);
 
   const stats = [
-    { label: "Disciplines Under One Roof", value: "3" },
-    { label: "Initial Review Response", value: "24h" },
+    { label: "Disciplines Under One Roof", value: "4" },
+    { label: "Typical Quote Turnaround", value: "48hr" },
     { label: "States Licensed", value: "49" },
     { label: "Initial Review Response", value: "12-24hr" }
   ];
@@ -63,7 +63,7 @@ export default function Home() {
             </h1>
             
             <p className="text-xl md:text-2xl text-foreground/80 max-w-2xl mb-12 leading-relaxed border-l-4 border-primary pl-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both">
-              From concept to approved permit. We deliver integrated Structural, MEP, and Civil engineering that passes review and practically builds itself.
+              From concept to approved permit. We deliver integrated Architecture, Structural, MEP, and Civil design that passes review and practically builds itself.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both">
@@ -140,7 +140,7 @@ export default function Home() {
                 <div className="bg-card p-8 border border-border group hover:border-primary/50 transition-colors">
                   <Layers className="w-8 h-8 text-primary mb-6" />
                   <h3 className="font-display font-bold text-xl mb-3">Integrated Focus</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">Structural, MEP, and Civil engineered in harmony.</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">Architecture, structural, MEP, and civil designed in harmony.</p>
                 </div>
                 <div className="bg-card p-8 border border-border group hover:border-primary/50 transition-colors">
                   <Zap className="w-8 h-8 text-primary mb-6" />
@@ -180,7 +180,8 @@ export default function Home() {
               { num: "01", name: "MEP Design & Engineering", desc: "High-efficiency Mechanical, Electrical, and Plumbing systems. Title 24 compliance built in.", link: "/services/mep" },
               { num: "02", name: "Structural Design", desc: "Rigorous frameworks from high-rise commercial to complex seismic retrofits.", link: "/services/structural" },
               { num: "03", name: "Civil Engineering", desc: "Site feasibility, grading, drainage, and utilities designed for optimal constructability.", link: "/services/civil" },
-              { num: "04", name: "Building Assessments", desc: "Independent engineering judgment, forensic analysis, and due diligence reporting.", link: "/services/assessments" }
+              { num: "04", name: "Building Assessments", desc: "Independent engineering judgment, forensic analysis, and due diligence reporting.", link: "/services/assessments" },
+              { num: "05", name: "Architectural Design", desc: "In-house architectural design — concept through permit-ready documents, coordinated with engineering from day one.", link: "/services/architecture" }
             ].map((srv) => (
               <Link key={srv.num} href={srv.link} className="group bg-background p-12 hover:bg-secondary transition-colors relative overflow-hidden flex flex-col justify-between min-h-[360px]">
                 <div className="text-7xl font-display font-bold text-border group-hover:text-primary/10 transition-colors mb-8">
@@ -282,7 +283,7 @@ export default function Home() {
 }
 
 const PAGE_META = {
-  title: "Apex Grid Engineering | MEP, Structural & Civil Design",
-  description: "Full-service engineering design firm: MEP, structural, and civil/site engineering plus Title 24 energy compliance for commercial, industrial, and healthcare projects.",
+  title: "Apex Grid Engineering | Architecture, MEP, Structural & Civil Design",
+  description: "Full-service design firm: architectural design, MEP, structural, and civil/site engineering plus Title 24 energy compliance for commercial, industrial, and healthcare projects.",
   path: "/",
 };

@@ -70,7 +70,7 @@ function header(): string {
   return `<header><div class="container nav">
   <a class="brand" href="/">${LOGO_SVG}<span>APEX GRID<small>ENGINEERING</small></span></a>
   <nav class="navlinks">
-    <a href="/about">About Us</a><a href="/portfolio">Portfolio</a><a href="/industries">Industries</a><a href="/services">Services</a><a href="/resources">Resources</a><a href="/locations/">Service Areas</a>
+    <a href="/about">About Us</a><a href="/portfolio">Portfolio</a><a href="/industries">Industries</a><a href="/services">Services</a><a href="/resources">Resources</a><a href="/blog/">Blog</a><a href="/locations/">Service Areas</a>
     <a class="cta" href="/contact">Contact Us</a>
   </nav>
 </div></header>`;
@@ -82,10 +82,10 @@ function footer(): string {
   <div class="fgrid">
     <div>
       <a class="brand" href="/" style="margin-bottom:18px">${LOGO_SVG}<span>APEX GRID</span></a>
-      <p style="color:var(--muted);max-width:340px;margin-top:16px">De-risking projects from concept to permit. Integrated MEP, Structural, and Civil engineering backed by licensed professionals.</p>
+      <p style="color:var(--muted);max-width:340px;margin-top:16px">De-risking projects from concept to permit. Integrated Architecture, MEP, Structural, and Civil design backed by licensed professionals.</p>
     </div>
-    <div><h4>Firm</h4><ul><li><a href="/about">About Us</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/resources">Resources</a></li><li><a href="/locations/">Service Areas</a></li><li><a href="/contact">Contact</a></li></ul></div>
-    <div><h4>Services</h4><ul><li><a href="/services/mep">MEP Engineering</a></li><li><a href="/services/structural">Structural Design</a></li><li><a href="/services/civil">Civil Engineering</a></li><li><a href="/services/assessments">Building Assessments</a></li></ul></div>
+    <div><h4>Firm</h4><ul><li><a href="/about">About Us</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/resources">Resources</a></li><li><a href="/blog/">Blog</a></li><li><a href="/locations/">Service Areas</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div><h4>Services</h4><ul><li><a href="/services/mep">MEP Engineering</a></li><li><a href="/services/structural">Structural Design</a></li><li><a href="/services/civil">Civil Engineering</a></li><li><a href="/services/assessments">Building Assessments</a></li><li><a href="/services/architecture">Architectural Design</a></li></ul></div>
     <div><h4>Contact</h4><ul><li>22475 E Quintero Rd<br/>Queen Creek, AZ 85142</li><li><a href="mailto:info@apexgrideng.com">info@apexgrideng.com</a></li><li><a href="tel:+14804900064">(480) 490-0064</a></li></ul></div>
   </div>
   <div class="fbottom"><p>© ${year} Apex Grid Engineering. All rights reserved.</p><p><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></p></div>

@@ -14,7 +14,7 @@ export default function Portfolio() {
   const projects = [
     {
       id: 1,
-      title: "Nexus Commercial Tower",
+      title: "Kestrel Point Tower",
       sector: "Mixed-Use High Rise",
       location: "Seattle, WA",
       year: "2023",
@@ -29,7 +29,7 @@ export default function Portfolio() {
     },
     {
       id: 2,
-      title: "Veridian Data Center",
+      title: "Bluewire Data Campus",
       sector: "Mission Critical / Industrial",
       location: "Ashburn, VA",
       year: "2023",
@@ -44,7 +44,7 @@ export default function Portfolio() {
     },
     {
       id: 3,
-      title: "Desert Sky Medical Campus",
+      title: "Saguaro Gate Medical Campus",
       sector: "Healthcare",
       location: "Queen Creek, AZ",
       year: "2024",
@@ -59,7 +59,7 @@ export default function Portfolio() {
     },
     {
       id: 4,
-      title: "Aero Logistics Hub",
+      title: "Windlass Logistics Hub",
       sector: "Industrial Warehouse",
       location: "Reno, NV",
       year: "2022",
@@ -74,7 +74,7 @@ export default function Portfolio() {
     },
     {
       id: 5,
-      title: "The Foundry Lofts",
+      title: "The Ironquill Lofts",
       sector: "Multifamily Residential",
       location: "Austin, TX",
       year: "2023",
@@ -89,9 +89,9 @@ export default function Portfolio() {
     },
     {
       id: 6,
-      title: "Summit Ridge Worship Center",
+      title: "Alpenlight Worship Center",
       sector: "Religious / Assembly",
-      location: "Gilbert, AZ",
+      location: "Colorado Springs, CO",
       year: "2024",
       disciplines: ["Structural", "MEP", "Civil"],
       image: project6,
@@ -104,9 +104,9 @@ export default function Portfolio() {
     },
     {
       id: 7,
-      title: "Meridian Corporate Center",
+      title: "Cumberland Forge Corporate Center",
       sector: "Commercial Office",
-      location: "Dallas, TX",
+      location: "Nashville, TN",
       year: "2023",
       disciplines: ["MEP", "Structural"],
       image: project7,
@@ -119,7 +119,7 @@ export default function Portfolio() {
     },
     {
       id: 8,
-      title: "The Marketplace at Sonoran Crossing",
+      title: "The Marketplace at Cholla Verde",
       sector: "Retail / Hospitality",
       location: "Phoenix, AZ",
       year: "2022",
@@ -134,9 +134,9 @@ export default function Portfolio() {
     },
     {
       id: 9,
-      title: "Copper Trail STEM Academy",
+      title: "Basalt Bend STEM Academy",
       sector: "Education",
-      location: "Mesa, AZ",
+      location: "Boise, ID",
       year: "2024",
       disciplines: ["Structural", "MEP", "Civil"],
       image: project9,
