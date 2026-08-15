@@ -156,7 +156,7 @@ export default function Team() {
                   With 17 years of experience, Jason has actively participated in projects throughout the world, ranging from single-family residential to multi-billion-dollar commercial developments. Beyond design, his background includes roles in construction and in various development capacities.
                 </p>
                 <p>
-                  Jason has been appointed to numerous development, political, charitable, and philanthropic boards. He currently heads our Los Angeles, Miami, and Houston offices.
+                  Jason has been appointed to numerous development, political, charitable, and philanthropic boards. He currently leads our architectural work across the Los Angeles, Miami, and Houston markets.
                 </p>
               </div>
             </div>

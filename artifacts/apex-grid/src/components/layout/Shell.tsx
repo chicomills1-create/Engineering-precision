@@ -220,7 +220,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                   22475 E Quintero Rd<br />Queen Creek, AZ 85142
                 </li>
                 <li className="pt-4 border-t border-border/50">
-                  <span className="block font-medium text-foreground mb-2">Regional Offices</span>
+                  <span className="block font-medium text-foreground mb-2">Service Areas</span>
                   <ul className="space-y-1 text-foreground/70">
                     <li>Los Angeles, CA</li>
                     <li>Miami, FL</li>

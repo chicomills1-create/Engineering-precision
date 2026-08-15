@@ -274,7 +274,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-3">Regional Offices</h4>
+                    <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-3">Key Service Areas</h4>
                     <ul className="space-y-2 text-sm text-foreground/80">
                       <li className="flex items-start gap-2">
                         <span className="text-primary mt-[3px]">▸</span>
@@ -289,7 +289,7 @@ export default function Contact() {
                         <span>Houston, TX</span>
                       </li>
                     </ul>
-                    <p className="text-xs text-muted-foreground mt-3">By appointment</p>
+                    <p className="text-xs text-muted-foreground mt-3">Serving clients in all 49 licensed states</p>
                   </div>
 
                   <div className="pt-8 border-t border-border">
