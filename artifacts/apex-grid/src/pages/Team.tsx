@@ -1,5 +1,6 @@
 import { usePageMeta } from "@/lib/seo";
 import { Link } from "wouter";
+import jasonImg from "@assets/generated_images/jason-mitchell.webp";
 import {
   DraftingCompass,
   Zap,
@@ -105,7 +106,7 @@ export default function Team() {
           <div className="max-w-3xl mb-16">
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">How We're Organized</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              We don't publish individual bios — our clients hire the discipline, not the headshot. Every group below works under the direct review of our in-house Professional Engineers.
+              Our clients hire the discipline, not the headshot. Every group below works under the direct review of our in-house Professional Engineers.
             </p>
           </div>
 
@@ -129,7 +130,41 @@ export default function Team() {
         </div>
       </section>
 
+      {/* Studio lead spotlight */}
       <section className="py-24 bg-card border-t border-border">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-5xl mx-auto md:grid md:grid-cols-[300px_1fr] md:gap-12 md:items-start">
+            <div className="mb-10 md:mb-0">
+              <div className="aspect-[4/5] bg-secondary border border-border overflow-hidden">
+                <img
+                  src={jasonImg}
+                  alt="Jason Mitchell, Lead Architect at Apex Grid Engineering"
+                  className="w-full h-full object-cover object-top"
+                  loading="lazy"
+                />
+              </div>
+              <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground mt-4">Jason Mitchell · Lead Architect</div>
+            </div>
+            <div>
+              <span className="font-mono text-xs uppercase tracking-widest text-primary mb-6 block">Architectural Design Studio Lead</span>
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">Jason Mitchell</h2>
+              <div className="space-y-5 text-muted-foreground leading-relaxed">
+                <p>
+                  Jason Mitchell is a native of Rochester, New York. He holds a Professional Degree of Architecture with Honors from the Illinois Institute of Technology in Chicago, Illinois, and is a licensed architect in Florida, California, Louisiana, Texas, Alabama, and Illinois.
+                </p>
+                <p>
+                  With 17 years of experience, Jason has actively participated in projects throughout the world, ranging from single-family residential to multi-billion-dollar commercial developments. Beyond design, his background includes roles in construction and in various development capacities.
+                </p>
+                <p>
+                  Jason has been appointed to numerous development, political, charitable, and philanthropic boards. He currently heads our Los Angeles, Miami, and Houston offices.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-background border-t border-border">
         <div className="container mx-auto px-4 md:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
             Put the Team on Your Project
