@@ -1,7 +1,10 @@
 import { Link, useLocation } from "wouter";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { CallbackWidget } from "@/components/CallbackWidget";
+// Callback assistant temporarily disabled (Aug 2026) until Turnstile bot
+// protection is configured. Re-enable by restoring this import and the
+// <CallbackWidget /> render below.
+// import { CallbackWidget } from "@/components/CallbackWidget";
 import { useState, useEffect } from "react";
 
 export function Shell({ children }: { children: React.ReactNode }) {
@@ -165,7 +168,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
       <main className="flex-grow">{children}</main>
 
-      <CallbackWidget />
+      {/* <CallbackWidget /> — disabled until bot protection is configured */}
 
       <footer className="border-t border-border bg-card">
         <div className="container mx-auto px-4 md:px-8 py-20">

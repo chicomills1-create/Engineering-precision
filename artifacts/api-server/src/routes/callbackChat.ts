@@ -4,9 +4,23 @@ import { db, leadsTable } from "@workspace/db";
 import { CallbackChatBody, CallbackChatResponse } from "@workspace/api-zod";
 import { openai } from "@workspace/integrations-openai-ai-server";
 import { sendLeadNotificationEmail } from "../lib/leadNotifications";
-import { verifyTurnstileToken, mintChatSession, isValidChatSession } from "../lib/botVerification";
+import {
+  verifyTurnstileToken,
+  mintChatSession,
+  isValidChatSession,
+  CALLBACK_ASSISTANT_ENABLED,
+} from "../lib/botVerification";
 
 const router: IRouter = Router();
+
+// Assistant disabled (e.g. Turnstile not configured in production): reject cleanly.
+router.use("/callback-chat", (_req, res, next) => {
+  if (!CALLBACK_ASSISTANT_ENABLED) {
+    res.status(503).json({ error: "Callback assistant is currently unavailable." });
+    return;
+  }
+  next();
+});
 
 // --- Simple in-memory per-IP rate limiter (no extra deps) ---
 const WINDOW_MS = 60_000;

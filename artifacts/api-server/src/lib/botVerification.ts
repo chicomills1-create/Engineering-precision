@@ -14,18 +14,30 @@ import { createHmac, createHash, randomBytes, timingSafeEqual } from "node:crypt
  *    scale: it is IP-bound and capped at a per-conversation turn budget.
  *
  * In production (NODE_ENV=production), TURNSTILE_SECRET_KEY and
- * SESSION_SECRET are required — startup fails loudly if either is missing.
- * In development, Cloudflare's official "always passes" test secret is used
- * so local work needs zero setup.
+ * SESSION_SECRET are required for the assistant to be enabled; if either is
+ * missing, the server still boots but the assistant routes return 503 (see
+ * CALLBACK_ASSISTANT_ENABLED below). In development, Cloudflare's official
+ * "always passes" test secret is used so local work needs zero setup.
  */
 
 // Cloudflare's documented always-pass test secret (dev fallback only)
 const TURNSTILE_TEST_SECRET = "1x0000000000000000000000000000000AA";
 const IS_PROD = process.env.NODE_ENV === "production";
 
-if (IS_PROD && (!process.env.TURNSTILE_SECRET_KEY || !process.env.SESSION_SECRET)) {
-  throw new Error(
-    "Bot verification misconfigured: TURNSTILE_SECRET_KEY and SESSION_SECRET are required in production.",
+/**
+ * The callback assistant is only enabled when bot protection is properly
+ * configured. In production, missing TURNSTILE_SECRET_KEY/SESSION_SECRET
+ * disables the assistant (its routes return 503) instead of failing boot —
+ * per owner decision (Aug 2026) to launch without the assistant for now.
+ * Set both secrets in production to re-enable it.
+ */
+export const CALLBACK_ASSISTANT_ENABLED =
+  !IS_PROD || Boolean(process.env.TURNSTILE_SECRET_KEY && process.env.SESSION_SECRET);
+
+if (!CALLBACK_ASSISTANT_ENABLED) {
+  console.warn(
+    "Callback assistant disabled: TURNSTILE_SECRET_KEY and/or SESSION_SECRET missing in production. " +
+      "Set both secrets to re-enable the bot-protected callback assistant.",
   );
 }
 
