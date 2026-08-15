@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { ArrowRight, Shield, Star, Flag, Award, FileCheck, Users } from "lucide-react";
-import militaryBg from "@assets/generated_images/military-bg.webp";
+import militaryBg from "@assets/generated_images/military-hero.jpg";
 import { usePageMeta } from "@/lib/seo";
 
 export default function Military() {
@@ -31,6 +31,29 @@ export default function Military() {
             <p className="text-xl md:text-2xl text-foreground/80 leading-relaxed border-l-4 border-primary pl-6">
               Apex Grid Engineering is led by a disabled U.S. Air Force veteran. Service isn't a marketing line for us — it's where our discipline, accountability, and mission-first mindset come from.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Jeremy's story */}
+      <section className="py-24 bg-background border-b border-border">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mx-auto">
+            <span className="font-mono text-xs uppercase tracking-widest text-primary mb-6 block">A Note from our CEO</span>
+            <blockquote className="border-l-4 border-primary pl-8 space-y-5">
+              <p className="text-xl leading-relaxed text-foreground/90">
+                "I enlisted in the United States Air Force straight out of high school and spent the better part of a decade maintaining aircraft and systems where a checklist skipped or a torque spec missed could end a mission — or worse. That kind of accountability gets into your bones.
+              </p>
+              <p className="text-lg leading-relaxed text-foreground/80">
+                When I transitioned out as a disabled veteran and eventually founded Apex Grid, I brought the same mindset to engineering documents: every calculation gets checked, every drawing gets a second set of eyes, and we don't call something done until it can survive scrutiny. The Air Force didn't let us say 'close enough,' and neither do we.
+              </p>
+              <p className="text-lg leading-relaxed text-foreground/80">
+                Serving military clients and veteran-owned businesses isn't a niche for us — it's personal. We know what's at stake, and we're honored to bring our service-driven standards to every project that crosses our desk."
+              </p>
+              <footer className="pt-2 text-sm text-muted-foreground font-mono uppercase tracking-widest">
+                — Jeremy, Founder &amp; CEO · USAF Veteran
+              </footer>
+            </blockquote>
           </div>
         </div>
       </section>
