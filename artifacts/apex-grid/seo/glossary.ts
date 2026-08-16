@@ -1072,6 +1072,129 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
 
 ];
 
+/**
+ * Keyword → glossary term slug mapping.
+ * Keys are lower-case words that appear in page slugs, categories, or discipline labels.
+ * Values are ordered arrays of term slugs to consider — earlier entries are preferred.
+ */
+const GLOSSARY_KEYWORD_MAP: Record<string, string[]> = {
+  // Structural sub-topics
+  lintel:           ["lintel", "beam", "cmu", "dead-load"],
+  header:           ["lintel", "beam", "dead-load"],
+  wall:             ["shear-wall", "lintel", "cmu"],
+  opening:          ["lintel", "beam", "shear-wall"],
+  masonry:          ["cmu", "lintel", "anchor-bolt"],
+  cmu:              ["cmu", "lintel", "shear-wall"],
+  beam:             ["beam", "dead-load", "live-load", "column"],
+  replacement:      ["beam", "dead-load", "live-load"],
+  removal:          ["beam", "column", "shear-wall", "dead-load"],
+  rooftop:          ["rtu", "dead-load", "seismic-load", "wind-load"],
+  rtu:              ["rtu", "hvac", "dead-load", "seismic-load"],
+  hvac:             ["hvac", "vav", "vrf", "rtu"],
+  solar:            ["dead-load", "wind-load", "asce-7", "seismic-load"],
+  "solar-pv":       ["solar-pv", "dead-load", "wind-load"],
+  mezzanine:        ["live-load", "beam", "column", "dead-load"],
+  platform:         ["dead-load", "live-load", "beam", "anchor-bolt"],
+  generator:        ["generator", "anchor-bolt", "seismic-load", "dead-load"],
+  transformer:      ["anchor-bolt", "seismic-load", "nec"],
+  bess:             ["anchor-bolt", "seismic-load", "dead-load"],
+  battery:          ["seismic-load", "anchor-bolt", "dead-load"],
+  carport:          ["dead-load", "wind-load", "seismic-load"],
+  canopy:           ["dead-load", "wind-load", "asce-7"],
+  parking:          ["dead-load", "wind-load", "asce-7"],
+  occupancy:        ["change-of-occupancy", "ibc", "ahj"],
+  settlement:       ["settlement", "allowable-bearing-pressure", "soil-boring"],
+  foundation:       ["foundation", "footing", "allowable-bearing-pressure", "settlement"],
+  footing:          ["footing", "foundation", "allowable-bearing-pressure"],
+  crack:            ["settlement", "foundation", "expansive-soil"],
+  report:           ["pe", "ibc", "ahj", "permit-drawings"],
+  structural:       ["ibc", "asce-7", "pe", "shear-wall"],
+  seismic:          ["seismic-load", "seismic-design-category", "asce-7"],
+  retrofit:         ["seismic-retrofit", "seismic-load", "seismic-design-category"],
+  // MEP
+  mep:              ["mep", "hvac", "nec", "ibc"],
+  electrical:       ["nec", "one-line-diagram", "panel-schedule", "mep"],
+  mechanical:       ["hvac", "ashrae", "load-calculation", "mep"],
+  plumbing:         ["domestic-water", "sanitary-riser", "mep"],
+  restaurant:       ["grease-exhaust", "make-up-air", "hvac", "mep"],
+  kitchen:          ["grease-exhaust", "make-up-air", "mep"],
+  exhaust:          ["grease-exhaust", "make-up-air", "hvac"],
+  grease:           ["grease-exhaust", "make-up-air", "hvac"],
+  makeup:           ["make-up-air", "grease-exhaust", "hvac"],
+  fitness:          ["hvac", "load-calculation", "ashrae"],
+  gym:              ["hvac", "load-calculation", "mep"],
+  medical:          ["medical-gas", "hvac", "mep", "ashrae"],
+  multifamily:      ["mep", "nec", "iecc"],
+  ev:               ["ev-charging", "nec", "mep"],
+  energy:           ["iecc", "ashrae", "title-24"],
+  tenant:           ["tenant-improvement", "mep", "ibc"],
+  improvement:      ["tenant-improvement", "ibc", "mep"],
+  // Civil
+  civil:            ["drainage", "grading", "stormwater", "retaining-wall"],
+  drainage:         ["drainage", "stormwater", "grading"],
+  grading:          ["grading", "drainage", "compaction"],
+  stormwater:       ["stormwater", "drainage", "grading"],
+  retaining:        ["retaining-wall", "drainage", "foundation"],
+  paving:           ["grading", "drainage", "compaction"],
+  site:             ["grading", "drainage", "stormwater"],
+  // Geotechnical
+  geotech:          ["soil-boring", "allowable-bearing-pressure", "settlement"],
+  geotechnical:     ["soil-boring", "allowable-bearing-pressure", "settlement"],
+  soil:             ["soil-boring", "compaction", "allowable-bearing-pressure"],
+  compaction:       ["compaction", "grading", "soil-boring"],
+  // Permit / code
+  permit:           ["ahj", "pe", "ibc", "permit-drawings"],
+  code:             ["ibc", "ahj", "pe"],
+  // Industry keywords
+  healthcare:       ["medical-gas", "hvac", "mep", "ashrae"],
+  hospital:         ["medical-gas", "hvac", "mep"],
+  warehouse:        ["dead-load", "live-load", "hvac", "ibc"],
+  industrial:       ["dead-load", "live-load", "mep", "ibc"],
+  retail:           ["hvac", "mep", "ibc", "tenant-improvement"],
+  office:           ["hvac", "mep", "vav", "ibc"],
+  "data-center":    ["ups", "nec", "hvac", "mep"],
+  military:         ["ufc", "atfp", "pe", "asce-7"],
+  government:       ["ufc", "pe", "ibc", "asce-7"],
+  defense:          ["ufc", "atfp", "pe"],
+  education:        ["dsa", "ibc", "mep"],
+  school:           ["dsa", "ibc", "mep"],
+  hospitality:      ["hvac", "mep", "ibc"],
+  hotel:            ["hvac", "mep", "ibc"],
+};
+
+/**
+ * Return 2–4 glossary terms relevant to a page, derived from keyword hints
+ * (typically the page slug words + category/discipline words, all lowercased).
+ * Falls back to ibc + pe if no hints match.
+ */
+export function relatedGlossaryTerms(hints: string[]): GlossaryTerm[] {
+  const termMap = new Map(GLOSSARY_TERMS.map((t) => [t.slug, t]));
+  const seen = new Set<string>();
+  const results: GlossaryTerm[] = [];
+
+  for (const hint of hints) {
+    const candidates = GLOSSARY_KEYWORD_MAP[hint] ?? [];
+    for (const slug of candidates) {
+      if (!seen.has(slug) && termMap.has(slug)) {
+        seen.add(slug);
+        results.push(termMap.get(slug)!);
+        if (results.length >= 4) return results;
+      }
+    }
+  }
+
+  // Fallback: ensure at least 2 terms
+  for (const fallback of ["ibc", "pe", "ahj", "asce-7"]) {
+    if (results.length >= 2) break;
+    if (!seen.has(fallback) && termMap.has(fallback)) {
+      seen.add(fallback);
+      results.push(termMap.get(fallback)!);
+    }
+  }
+
+  return results;
+}
+
 /** Return all glossary terms sorted alphabetically by slug */
 export function sortedGlossaryTerms(): GlossaryTerm[] {
   return [...GLOSSARY_TERMS].sort((a, b) => a.slug.localeCompare(b.slug));

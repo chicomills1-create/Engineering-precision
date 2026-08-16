@@ -25,7 +25,7 @@ import { STATIC_STANDALONE_PAGES, type StaticPageDef } from "./static-pages";
 import { DISCIPLINES, type DisciplineDef } from "./disciplines";
 import { ALL_INDUSTRIES } from "../src/data/industries";
 import { RESOURCE_ARTICLES, RESOURCE_DISCIPLINES, disciplineOf, resourceUrl, type ResourceArticle, type ResourceDiscipline } from "./resources";
-import { GLOSSARY_TERMS, sortedGlossaryTerms, glossaryByLetter, type GlossaryTerm } from "./glossary";
+import { GLOSSARY_TERMS, sortedGlossaryTerms, glossaryByLetter, relatedGlossaryTerms, type GlossaryTerm } from "./glossary";
 
 /** Lightweight city-directory entry sourced from US Census population estimates. */
 interface DirectoryCity {
@@ -1214,6 +1214,12 @@ function industryDisciplinePage(page: IndustryDisciplinePage): string {
     (p) => p.industrySlug === page.industrySlug && p !== page,
   ).slice(0, 4);
 
+  // Derive keyword hints from industry slug words + discipline label words
+  const industryWords = page.industrySlug.split("-");
+  const disciplineWords = page.disciplineLabel.toLowerCase().split(/[\s-]+/);
+  const glossaryHints = [...new Set([...industryWords, ...disciplineWords])];
+  const glossaryTerms = relatedGlossaryTerms(glossaryHints);
+
   const pageSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -1255,6 +1261,12 @@ ${siblings.length ? `<section class="block"><div class="container">
   ${siblings.map((s) => `<a class="card" href="${getIndustryDisciplineUrl(s)}"><div class="label">${esc(s.kicker)}</div><h3>${esc(s.h1)}</h3><p>${esc(s.lede.slice(0, 120))}…</p></a>`).join("")}
   </div>
   <div class="linkrow" style="margin-top:20px"><a href="/industries/${esc(page.industrySlug)}/">Back to ${esc(toTitle(page.industrySlug))} Engineering</a></div>
+</div></section>` : ""}
+
+${glossaryTerms.length ? `<section class="block"><div class="container">
+  <h2>Glossary <em>References</em></h2>
+  <p class="note">Key terms used in this engineering discipline:</p>
+  <div class="linkrow">${glossaryTerms.map((t) => `<a href="/engineering-glossary/${t.slug}/">${esc(t.term)}</a>`).join("")}</div>
 </div></section>` : ""}
 
 <section class="ctaband"><div class="container">
@@ -1380,6 +1392,13 @@ function solutionPage(page: SolutionPage): string {
     .slice(0, 4)
     .map((s) => `<a class="card" href="/solutions/${s}/"><h3>${toTitle(s).replace(/Engineering$/, "").trim()}</h3></a>`)
     .join("\n          ");
+
+  // Derive keyword hints from the page slug words + category words
+  const slugWords = page.slug.split("-");
+  const categoryWords = page.category.toLowerCase().split(/[\s-]+/);
+  const glossaryHints = [...new Set([...slugWords, ...categoryWords])];
+  const glossaryTerms = relatedGlossaryTerms(glossaryHints);
+
   const body = `
     <div class="hero hero--page">
       <div class="hero-inner">
@@ -1419,6 +1438,15 @@ function solutionPage(page: SolutionPage): string {
         <div class="card-grid card-grid--4">
           ${relatedLinks}
         </div>
+      </div>
+    </section>` : ""}
+
+    ${glossaryTerms.length ? `
+    <section class="section section--light">
+      <div class="container container--narrow">
+        <h2>Glossary References</h2>
+        <p class="note">Key terms used in this engineering scope:</p>
+        <div class="linkrow">${glossaryTerms.map((t) => `<a href="/engineering-glossary/${t.slug}/">${esc(t.term)}</a>`).join("")}</div>
       </div>
     </section>` : ""}
 
