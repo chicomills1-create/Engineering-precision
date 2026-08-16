@@ -2685,6 +2685,33 @@ export const LOCATION_SERVICE_PAGES: LocationServicePage[] = [
     relatedServiceSlugs: ["structural-engineering", "civil-engineering"],
   },
 
+  {
+    stateSlug: "virginia", stateName: "Virginia", stateAbbrev: "VA",
+    citySlug: "norfolk", cityName: "Norfolk", county: "City of Norfolk",
+    serviceSlug: "civil-engineering",
+    title: "Civil Engineering Norfolk, VA | Sea-Level Rise & Site Development | Apex Grid",
+    h1: "Civil Engineering in Norfolk",
+    kicker: "Norfolk, VA · Civil Engineering",
+    lede: "Norfolk civil engineering confronts one of the most acute sea-level rise challenges on the US East Coast — tidal stormwater systems, HRSD SWIFT recharge well coordination, port and maritime site development, and flood-resilient site grading for a city where land subsidence and accelerating tidal flooding are reshaping how infrastructure is designed.",
+    ahj: "City of Norfolk Permits and Inspections Division / Norfolk Department of Public Works",
+    buildingCode: "2021 Virginia Construction Code (2018 IBC with Virginia amendments) with City of Norfolk amendments",
+    energyCode: "N/A",
+    marketNote: "Norfolk's Resilient Norfolk initiative and the broader Hampton Roads Planning District Commission sea-level rise adaptation program are driving a new generation of infrastructure investment — civil engineers working in Norfolk must understand both the regulatory overlay (FEMA SFHA mapping, Virginia DEQ stormwater permits) and the practical design implications of a city where 100-year flood elevations shift measurably between project generations.",
+    climateNote: "Zone 4A coastal; Norfolk has experienced roughly 1.5 feet of relative sea-level rise since 1930 (land subsidence plus eustatic rise); tidal flooding in Ghent, Larchmont, and downtown occurs dozens of times per year; stormwater design must account for elevated tailwater conditions that reduce gravity outfall capacity.",
+    topics: [
+      "Tidal stormwater management — design for elevated tailwater and sea-level rise",
+      "HRSD SWIFT project coordination — groundwater recharge well infrastructure",
+      "Port and maritime industrial site civil engineering",
+      "FEMA flood zone grading and floodproofing documentation",
+      "Hampton Roads Sanitation District sewer connection and capacity coordination",
+      "Utility relocation and underground infrastructure design for Norfolk infill",
+      "ADA accessible site design for Norfolk commercial and public projects",
+      "Erosion and sediment control under Virginia DEQ General Permit",
+      "City of Norfolk civil permit package — grading, drainage, and utility plans",
+    ],
+    relatedServiceSlugs: ["structural-engineering", "mep-engineering"],
+  },
+
   // ─── VIRGINIA — ALEXANDRIA ───────────────────────────────────────────────
 
   {
@@ -2737,5 +2764,32 @@ export const LOCATION_SERVICE_PAGES: LocationServicePage[] = [
       "City of Alexandria MEP permit package preparation",
     ],
     relatedServiceSlugs: ["structural-engineering", "civil-engineering"],
+  },
+
+  {
+    stateSlug: "virginia", stateName: "Virginia", stateAbbrev: "VA",
+    citySlug: "alexandria", cityName: "Alexandria", county: "City of Alexandria",
+    serviceSlug: "civil-engineering",
+    title: "Civil Engineering Alexandria, VA | Urban Infill & Site Development | Apex Grid",
+    h1: "Civil Engineering in Alexandria",
+    kicker: "Alexandria, VA · Civil Engineering",
+    lede: "Alexandria civil engineering navigates one of Northern Virginia's most complex urban development environments — Old Town infill grading in a tightly constrained historic grid, National Landing site development adjacent to Amazon HQ2, WMATA tunnel zone restrictions on underground utilities, and NVRC/DCR stormwater management requirements for the Potomac River watershed.",
+    ahj: "City of Alexandria Department of Transportation & Environmental Services / Department of Planning & Zoning",
+    buildingCode: "2021 Virginia Construction Code (2018 IBC with Virginia amendments) with City of Alexandria amendments",
+    energyCode: "N/A",
+    marketNote: "National Landing (the branded development zone spanning parts of Alexandria and Arlington anchored by Amazon HQ2) is generating major civil engineering demand — large mixed-use sites, underground parking, streetscape improvements, and utility extensions in an environment with active WMATA infrastructure beneath many parcels. Old Town's historic grid simultaneously produces a steady stream of infill and adaptive reuse civil scopes requiring careful coordination with Alexandria's Heritage Resource staff.",
+    climateNote: "Zone 4A mixed-humid; Potomac River proximity creates flood zone constraints for Old Town Waterfront and low-lying parcels; annual rainfall of ~40 inches and Chesapeake Bay watershed designation require Virginia DEQ-compliant stormwater management for virtually all disturbed-area thresholds; impervious cover limits apply in many zoning overlay districts.",
+    topics: [
+      "National Landing site civil engineering — grading, utilities, and streetscape",
+      "Old Town Alexandria urban infill civil design within the historic street grid",
+      "WMATA tunnel zone utility coordination and underground infrastructure clearances",
+      "Stormwater management — Virginia DEQ General Permit and Chesapeake Bay Act compliance",
+      "NVRC/DCR nutrient credit and stormwater quality compliance for Potomac watershed",
+      "Utility design — Alexandria Renew Enterprises sewer connections and AWCSA water service",
+      "Parking structure and below-grade civil coordination",
+      "ADA accessible site design and pedestrian improvement plans",
+      "City of Alexandria civil permit package — site plan, grading, and utility construction drawings",
+    ],
+    relatedServiceSlugs: ["structural-engineering", "mep-engineering"],
   },
 ];

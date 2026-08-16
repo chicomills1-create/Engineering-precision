@@ -781,6 +781,291 @@ const BASE_RESOURCE_ARTICLES: ResourceArticle[] = [
   },
 ];
 
+/** Legacy root-level resource articles that pre-date the discipline subdirectory structure.
+ * Added here so the generator owns and regenerates them under the correct discipline paths. */
+const LEGACY_RESOURCE_ARTICLES: ResourceArticle[] = [
+  {
+    slug: "ashrae-90-1-vs-iecc-commercial-energy-code",
+    title: "ASHRAE 90.1 vs. IECC: Which Commercial Energy Code Applies? | Apex Grid",
+    tag: "Permit Engineering",
+    h1: "ASHRAE 90.1 vs. IECC: Which Commercial Energy Code Applies to Your Project?",
+    description: "Understand the difference between ASHRAE 90.1 and the International Energy Conservation Code, and how to determine which one your jurisdiction enforces.",
+    minutes: 8,
+    html: `
+<p>Two energy codes dominate commercial construction in the United States: ASHRAE Standard 90.1 and the International Energy Conservation Code (IECC). They cover similar ground — building envelope, lighting, HVAC, and service water heating — but they are different documents, maintained by different organizations, and adopted differently by states and municipalities. Knowing which one governs your project determines your compliance obligations before design begins.</p>
+
+<h2>What Is ASHRAE 90.1?</h2>
+<p>ASHRAE Standard 90.1, <em>Energy Standard for Sites and Buildings Except Low-Rise Residential Buildings</em>, is published by the American Society of Heating, Refrigerating and Air-Conditioning Engineers. It is a consensus standard, not a building code — but it is adopted by reference in the IECC and directly by many states as the commercial energy compliance path. ASHRAE 90.1 is updated on a roughly three-year cycle; current widely-adopted editions include 2019 and 2022.</p>
+
+<h2>What Is the IECC?</h2>
+<p>The International Energy Conservation Code is published by the International Code Council (ICC) — the same body that produces the IBC and IPC. The IECC has two distinct parts: a residential section and a commercial section. For commercial buildings, the IECC's commercial provisions are technically equivalent to ASHRAE 90.1 in most editions — the IECC often simply adopts 90.1 by reference for commercial projects, or runs a parallel prescriptive path that achieves the same energy targets.</p>
+
+<h2>How Are They Related?</h2>
+<p>The short answer: they are closely aligned but not identical. The IECC commercial provisions and ASHRAE 90.1 have been explicitly coordinated since the 2015 cycle so that compliance with one generally satisfies the other. However, differences exist in specific table values, mandatory measures, and how climate zones are defined. When a state adopts the IECC with local amendments, those amendments may further diverge from ASHRAE 90.1.</p>
+
+<h2>Which Code Applies to My Project?</h2>
+<p>The answer depends on your jurisdiction:</p>
+<ul>
+  <li><strong>State adoption</strong> — each state adopts a base energy code (either ASHRAE 90.1, the IECC commercial provisions, or a state-specific code like California's Title 24) and may amend it.</li>
+  <li><strong>Federal projects</strong> — federally owned or leased buildings must comply with 10 CFR Part 433, which references ASHRAE 90.1 at the edition specified by the Department of Energy.</li>
+  <li><strong>HUD and USDA programs</strong> — projects receiving federal housing funding often have energy code requirements tied to specific IECC or ASHRAE editions.</li>
+  <li><strong>Utility incentive programs</strong> — programs offering rebates for above-code performance typically reference ASHRAE 90.1 as the baseline.</li>
+</ul>
+
+<h2>ASHRAE 90.1 Climate Zones vs. IECC Climate Zones</h2>
+<p>Both standards use the same eight-zone climate classification system (Zones 1–8, with moisture designations A/B/C). The county-level zone assignments are largely consistent between them, though differences exist in a handful of locations. Your MEP engineer or energy modeler will confirm the correct zone assignment for your building address before beginning compliance analysis.</p>
+
+<h2>Prescriptive vs. Performance in Each Code</h2>
+<p>Both ASHRAE 90.1 and the IECC offer prescriptive and performance compliance paths:</p>
+<ul>
+  <li><strong>Prescriptive</strong> — each system must individually meet minimum requirements; no trade-offs between systems</li>
+  <li><strong>Performance (Energy Cost Budget in 90.1; Total Building Performance in IECC)</strong> — energy modeling demonstrates that the proposed building's energy cost or use equals or beats a code-compliant baseline</li>
+  <li><strong>ASHRAE 90.1 Appendix G</strong> — the LEED energy credit baseline; used for above-code certifications, not for permit compliance</li>
+</ul>
+
+<h2>What Your Engineer Needs to Know</h2>
+<p>When you engage an MEP engineer for a commercial project, they need to confirm: (1) the adopted code and edition in your jurisdiction, (2) any local amendments that modify the base code, (3) whether the project qualifies for any exceptions, and (4) the compliance path best suited to the project design.</p>
+
+<h2>Bottom Line</h2>
+<p>For most commercial projects outside California, you're working with either ASHRAE 90.1 or the IECC commercial provisions — and in many states they're functionally equivalent. What matters is knowing which edition your jurisdiction has adopted and what local amendments are in effect. Your MEP engineer should make this determination at project kickoff, not at permit submission.</p>
+    `,
+  },
+  {
+    slug: "commercial-building-permit-process-what-engineers-deliver",
+    title: "The Commercial Building Permit Process: What Engineers Deliver | Apex Grid",
+    tag: "Permit Engineering",
+    h1: "The Commercial Building Permit Process: What Engineers Deliver",
+    description: "A step-by-step look at how commercial building permits work, what engineering documents are required, and how MEP and structural engineers support the process.",
+    minutes: 8,
+    html: `
+<p>Pulling a commercial building permit is not a single transaction — it's a multi-stage process involving multiple consultants, plan check reviewers across several city departments, and (for larger projects) third-party special inspectors. Engineers don't just "stamp drawings." They produce specific deliverables at each stage that the building department uses to verify code compliance.</p>
+
+<h2>The Sequence of a Commercial Permit</h2>
+<h3>1. Pre-Application / Pre-Design</h3>
+<p>Before drawings are produced, many jurisdictions offer pre-application meetings where the design team can ask the building department about code interpretation, zoning issues, or process requirements. An early structural or MEP consultation can surface constraints that affect the architectural design.</p>
+<h3>2. Design and Document Preparation</h3>
+<p>The design team prepares construction documents — the complete set of drawings and specifications that describe the project. Engineering documents in the permit set typically include structural drawings, mechanical drawings, electrical drawings (panel schedules, one-line diagrams, lighting plans, load calculations), plumbing drawings, and civil drawings covering site grading, drainage, and utility connections.</p>
+<h3>3. Permit Submission</h3>
+<p>The completed document set is submitted to the building department. Most jurisdictions now accept digital submissions through an online portal. The submittal package includes the permit application, full drawing set stamped by licensed engineers and architect, energy compliance reports, soils report, and a special inspection program if required.</p>
+<h3>4. Plan Check (Plan Review)</h3>
+<p>Building department plan checkers review submitted drawings for compliance with the IBC (or CBC in California), mechanical, electrical, and plumbing codes, fire code, and energy code. Plan check may be conducted by city staff or a third-party firm. Large projects undergo parallel reviews across Building, Fire, Planning/Zoning, Public Works, and Environmental Health.</p>
+<h3>5. Plan Check Comments and Responses</h3>
+<p>Plan checkers rarely approve a set on first submission. They issue a corrections list identifying non-compliant or unclear elements. Engineers respond by revising drawings or providing written justification. This back-and-forth may happen one to several rounds before approval.</p>
+<h3>6. Permit Issuance and Inspections</h3>
+<p>Once all corrections are resolved, the permit is issued. The building department requires inspections at defined milestones: foundation before concrete pour, framing before insulation and drywall, rough-in MEP before walls are closed, and final inspection before occupancy.</p>
+
+<h2>Common Engineering Deliverables Required for Permit</h2>
+<table>
+  <thead>
+    <tr><th>Discipline</th><th>Key Permit Deliverables</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Structural</td><td>Foundation plan, framing plans, connection details, structural calculations, geotechnical report response</td></tr>
+    <tr><td>Mechanical</td><td>HVAC plans, equipment schedules, energy compliance forms, exhaust calculations</td></tr>
+    <tr><td>Electrical</td><td>Panel schedules, one-line diagram, lighting plans, load calculations</td></tr>
+    <tr><td>Plumbing</td><td>Fixture plans, riser diagrams, gas sizing calculations</td></tr>
+    <tr><td>Civil</td><td>Grading and drainage plan, utility laterals, erosion control plan</td></tr>
+  </tbody>
+</table>
+
+<h2>Accelerating the Permit Process</h2>
+<p>The fastest path through permitting is a complete, well-coordinated first submittal. Projects that go in with incomplete drawings, missing energy compliance documents, or unresolved coordination conflicts between disciplines generate long correction lists and multiple resubmittals. Engaging all disciplines early and running coordination before the first submittal is the most reliable way to compress permit timelines.</p>
+    `,
+  },
+  {
+    slug: "how-much-does-mep-engineering-cost",
+    title: "How Much Does MEP Engineering Cost? A Commercial Guide | Apex Grid",
+    tag: "MEP Engineering",
+    h1: "How Much Does MEP Engineering Cost? A Commercial Guide",
+    description: "Realistic fee ranges for mechanical, electrical, and plumbing engineering on commercial projects, and the factors that drive costs up or down.",
+    minutes: 7,
+    html: `
+<p>MEP engineering fees are one of the most opaque line items in a commercial construction budget. Owners often receive a lump-sum number with little explanation of how it was derived. This guide breaks down how MEP engineers price their services, what factors move the number, and what realistic ranges look like for common project types.</p>
+
+<h2>How MEP Engineers Structure Their Fees</h2>
+<p>Most commercial MEP firms price projects one of three ways:</p>
+<ul>
+  <li><strong>Percentage of construction cost</strong> — the most common method for new construction. MEP fees typically run 2–5% of the total construction cost, depending on complexity.</li>
+  <li><strong>Lump sum / fixed fee</strong> — common for well-defined scopes like tenant improvements or single-system replacements.</li>
+  <li><strong>Hourly / time and materials</strong> — used for feasibility studies, due diligence, or projects with unclear scope. Rates for licensed engineers typically range $150–$250/hr.</li>
+</ul>
+
+<h2>Typical Fee Ranges by Project Type</h2>
+<h3>Office Tenant Improvements (5,000–50,000 SF)</h3>
+<p>MEP fees for office TIs typically run $1.50–$4.00 per square foot for full mechanical, electrical, and plumbing design. A 10,000 SF office TI might carry $20,000–$40,000 in MEP fees.</p>
+<h3>Retail / Restaurant</h3>
+<p>Restaurant MEP is among the most expensive per-square-foot because of hood exhaust, makeup air, grease interceptors, high-draw electrical, and commercial kitchen coordination. Fees of $4–$8 per square foot are common for full-service restaurants. Retail without food service runs $1.50–$3.00/SF.</p>
+<h3>Healthcare / Medical Office</h3>
+<p>Medical and clinical projects carry MEP premiums due to infection control ventilation, medical gas systems, redundant power, and code requirements from NFPA 99 and FGI Guidelines. Expect 4–7% of construction cost, or $5–$12/SF depending on acuity level.</p>
+<h3>New Ground-Up Commercial (Multistory)</h3>
+<p>Full-service MEP engineering for new multistory office, mixed-use, or hospitality typically runs 3–5% of construction cost.</p>
+
+<h2>What Drives Fees Higher</h2>
+<ul>
+  <li><strong>System complexity</strong> — VRF systems, central plant chilled water, or complex electrical distribution cost more to engineer than simple packaged rooftop systems</li>
+  <li><strong>Tight schedule</strong> — accelerated design timelines require more staff hours in fewer calendar weeks</li>
+  <li><strong>Existing building conditions</strong> — renovation work requires field investigation, as-built documentation, and coordination with unknown existing conditions</li>
+  <li><strong>Permit jurisdiction complexity</strong> — projects in jurisdictions with lengthy plan check processes or energy compliance requirements require more documentation</li>
+  <li><strong>Construction administration</strong> — RFI responses, submittal reviews, and site observation add to the fee</li>
+</ul>
+
+<h2>What Drives Fees Lower</h2>
+<ul>
+  <li><strong>Repeat project type</strong> — prototype retail, franchise restaurant, or repeat tenant improvement for a known client allows reuse of prior design work</li>
+  <li><strong>Simple occupancy</strong> — a warehouse with basic utilities and minimal HVAC is straightforward to engineer</li>
+</ul>
+
+<h2>How to Get an Accurate Quote</h2>
+<p>To receive a meaningful fee proposal, provide the MEP firm with: project address and jurisdiction, gross square footage and number of stories, occupancy type, anticipated HVAC system type, existing conditions and as-built drawings (for renovations), and target permit submission date. A reputable MEP firm will return a fee proposal within a week.</p>
+    `,
+  },
+  {
+    slug: "title-24-energy-compliance-commercial-buildings",
+    title: "Title 24 Energy Compliance for Commercial Buildings | Apex Grid",
+    tag: "Permit Engineering",
+    h1: "Title 24 Energy Compliance: A Complete Guide for Commercial Buildings",
+    description: "Everything engineers and owners need to know about California's Title 24 energy code for commercial construction and major renovations.",
+    minutes: 10,
+    html: `
+<p>Title 24, Part 6 is California's Building Energy Efficiency Standards — among the most stringent commercial energy codes in the United States. If you're building, expanding, or significantly renovating a commercial building in California, you'll need a compliant energy design before the building department issues a permit.</p>
+
+<h2>What Is Title 24, Part 6?</h2>
+<p>Title 24 is the California Code of Regulations governing building standards. Part 6 covers energy efficiency for both residential and nonresidential buildings. The California Energy Commission (CEC) updates the standards on an approximately three-year cycle. The 2022 Standards (effective January 2023) are currently enforced and include expanded requirements for solar-ready construction, heat pump readiness, and EV charging infrastructure.</p>
+
+<h2>When Does Title 24 Apply?</h2>
+<p>Title 24 energy compliance is required for: new construction (all new nonresidential buildings), additions (new conditioned floor area), alterations (work that modifies HVAC, lighting, or envelope systems beyond prescriptive thresholds), and change of occupancy when more restrictive energy requirements are triggered.</p>
+
+<h2>Prescriptive vs. Performance Compliance</h2>
+<h3>Prescriptive Path</h3>
+<p>The prescriptive path requires that each building system (envelope, lighting, HVAC) individually meet minimum efficiency requirements listed in the standards. It is straightforward but inflexible — you can't trade efficiency gains in one system against deficiencies in another.</p>
+<h3>Performance Path</h3>
+<p>The performance path uses CEC-approved energy modeling software (typically EnergyPro or CBECC-Com) to demonstrate that the proposed building's total energy use is equal to or less than a code-compliant reference building. This path allows trade-offs and is used by most large or complex projects.</p>
+
+<h2>Key Systems Covered</h2>
+<h3>Building Envelope</h3>
+<p>Roof insulation, wall insulation, fenestration (windows and skylights), and air sealing are all regulated. Climate zone determines the minimum R-values and maximum U-factors and solar heat gain coefficients (SHGC) for glazing.</p>
+<h3>Lighting</h3>
+<p>Indoor and outdoor lighting must meet power density limits (watts per square foot by space type) and include occupancy controls, daylight controls, and demand response capability in many applications.</p>
+<h3>HVAC</h3>
+<p>Equipment efficiency (EER, COP, IEER) must meet minimum values. Controls including economizers, demand-controlled ventilation (DCV), and setback thermostats are often required. The 2022 Standards push harder toward heat pump technology and refrigerant transition.</p>
+
+<h2>What the Compliance Package Includes</h2>
+<ul>
+  <li>CF-1N forms (project overview and compliance summary)</li>
+  <li>Envelope compliance forms (roof, walls, fenestration schedules)</li>
+  <li>Lighting compliance forms (indoor and outdoor power allowance calculations)</li>
+  <li>Mechanical compliance forms (equipment schedules and controls)</li>
+  <li>Energy model output if using the performance path</li>
+  <li>Certificate of Compliance posted at the job site</li>
+</ul>
+
+<h2>Climate Zone Impact</h2>
+<p>California has 16 climate zones, and Title 24 requirements vary significantly by zone. Zone 6 (coastal Los Angeles) has very different envelope and HVAC requirements than Zone 14 (high desert). Your energy engineer must use the correct climate zone data — misidentification is a common error that causes plan check rejections.</p>
+
+<h2>Common Compliance Pitfalls</h2>
+<ul>
+  <li><strong>Starting too late</strong> — energy analysis informs architectural decisions; beginning after design is finalized often forces expensive redesigns</li>
+  <li><strong>Wrong climate zone</strong> — building location must be assigned to the correct CEC climate zone</li>
+  <li><strong>Missing mandatory measures</strong> — some requirements apply regardless of compliance path and cannot be traded away</li>
+  <li><strong>Outdated software</strong> — compliance software must match the active code cycle</li>
+</ul>
+
+<h2>Title 24 and LEED</h2>
+<p>Title 24 compliance is a prerequisite for all California projects, not a substitute for LEED. LEED's energy credit measures improvement above a baseline that must already meet Title 24. In high-performance projects, the Title 24 performance compliance path and the LEED energy model are often run in parallel by the MEP engineer.</p>
+
+<h2>Next Steps</h2>
+<p>Engage your MEP engineer as early as schematic design. Compliance analysis that begins at design development or later limits your options and increases the risk of plan check delays.</p>
+    `,
+  },
+  {
+    slug: "vrf-vs-rooftop-unit-commercial-hvac",
+    title: "VRF vs. Rooftop Unit: Choosing the Right Commercial HVAC System | Apex Grid",
+    tag: "MEP Engineering",
+    h1: "VRF vs. Rooftop Unit: Choosing the Right Commercial HVAC System",
+    description: "A side-by-side comparison of VRF and packaged rooftop units for commercial buildings — efficiency, cost, space requirements, and when each system makes sense.",
+    minutes: 8,
+    html: `
+<p>The choice between Variable Refrigerant Flow (VRF) and packaged rooftop units (RTUs) is one of the most consequential HVAC decisions made early in commercial design. Both systems are proven in the field and capable of meeting energy codes — but they serve different building types and performance goals.</p>
+
+<h2>What Is a Rooftop Unit (RTU)?</h2>
+<p>A packaged rooftop unit is a self-contained HVAC system — compressor, condenser, evaporator coil, air handling section, and often the gas heat exchanger housed in a single cabinet on the roof. Conditioned air is distributed through ductwork. RTUs are the workhorses of low-rise commercial construction: retail, restaurants, single-story office, light industrial. They are straightforward to install, service, and replace, and most HVAC technicians are familiar with them.</p>
+
+<h2>What Is a VRF System?</h2>
+<p>Variable Refrigerant Flow systems use refrigerant as the heat transfer medium, distributed from outdoor condensing units through refrigerant piping to multiple indoor fan coil units (FCUs). Each FCU conditions a separate zone independently. VRF heat recovery systems can simultaneously cool and heat different zones from the same outdoor unit — the defining advantage for mixed-use and multistory applications.</p>
+
+<h2>Efficiency</h2>
+<p>VRF systems typically have higher part-load efficiency than RTUs. VRF compressors modulate continuously to match demand, minimizing cycling losses. Modern RTUs with variable-speed compressors have narrowed the gap, but VRF heat recovery systems that reclaim heat from interior zones to heat perimeter spaces can achieve very high overall system efficiency.</p>
+
+<h2>First Cost</h2>
+<p>RTUs have lower first cost in almost every scenario. A 5-ton RTU with installation runs roughly $8,000–$15,000 per unit. VRF systems typically cost 20–40% more than equivalent RTU capacity on first install. For simple low-rise applications, the VRF premium rarely pays back through energy savings within a reasonable period.</p>
+
+<h2>Space Requirements</h2>
+<p>RTUs require roof penetrations for ductwork, significant roof area, and structural support. VRF indoor units are typically compact fan coils mounted in the ceiling, connected by refrigerant lines smaller in diameter than ductwork — making VRF attractive where ceiling height is constrained or the owner wants zone flexibility without major ductwork demolition.</p>
+
+<h2>Maintenance</h2>
+<p>RTUs are simpler to service: familiar to every commercial HVAC technician, with widely available replacement parts. VRF systems require technicians trained in VRF refrigerant circuit diagnostics; manufacturer service contracts are common for VRF installations.</p>
+
+<h2>Decision Framework</h2>
+<table>
+  <thead>
+    <tr><th>Scenario</th><th>Likely Better Fit</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Single-story retail or restaurant</td><td>RTU</td></tr>
+    <tr><td>Low-rise office with open floor plate</td><td>RTU with VAV, or VRF</td></tr>
+    <tr><td>Multistory mixed-use with diverse zone loads</td><td>VRF heat recovery</td></tr>
+    <tr><td>Budget-constrained project</td><td>RTU</td></tr>
+    <tr><td>High-end TI with limited ceiling height</td><td>VRF</td></tr>
+    <tr><td>Building with interior heat sources (data rooms, dense retail)</td><td>VRF heat recovery</td></tr>
+  </tbody>
+</table>
+
+<h2>The Engineer's Role</h2>
+<p>System selection should be driven by a mechanical engineer who has modeled the building loads, reviewed the architectural program, and evaluated the life-cycle cost of each option. Owners who commit to a system type before engaging mechanical engineering sometimes find it doesn't fit the building — either physically or thermally. Early mechanical engineering engagement avoids these surprises.</p>
+    `,
+  },
+  {
+    slug: "what-does-a-structural-engineer-do-that-an-architect-doesnt",
+    title: "What Does a Structural Engineer Do That an Architect Doesn't? | Apex Grid",
+    tag: "Structural Engineering",
+    h1: "What Does a Structural Engineer Do That an Architect Doesn't?",
+    description: "A clear explanation of how structural engineers and architects divide responsibility on commercial projects, and why you need both.",
+    minutes: 6,
+    html: `
+<p>Owners new to commercial construction sometimes ask why they need both an architect and a structural engineer. The short answer: architects and structural engineers have different training, different licenses, and legally distinct scopes of responsibility.</p>
+
+<h2>What Architects Are Trained and Licensed to Do</h2>
+<p>Architects are trained in building design: space planning, code compliance for life safety and accessibility, material selection, aesthetics, and the coordination of all consultants (structural, MEP, civil, landscape). The architect is typically the prime professional on a commercial project. Architectural licensure does not authorize the practice of structural engineering — an architect cannot stamp structural calculations or structural drawings in most U.S. states.</p>
+
+<h2>What Structural Engineers Are Trained and Licensed to Do</h2>
+<p>Structural engineers are trained in the analysis and design of load-carrying systems: how forces move through a building, what size members resist those forces, and how connections transfer load from one element to another. The structural engineer of record designs and takes legal responsibility for the structural system — the foundation, framing, connections, and lateral force-resisting system that keeps the building standing in wind and seismic events.</p>
+
+<h2>The Formal Division of Responsibility</h2>
+<p>On a commercial building permit set, architectural sheets (A-series) are signed by the architect and cover floor plans, elevations, sections, details, finish schedules, and code analysis. Structural sheets (S-series) are signed by the structural engineer and cover foundation plans, framing plans, connection details, and structural notes.</p>
+
+<h2>Specific Things Only a Structural Engineer Delivers</h2>
+<ul>
+  <li><strong>Gravity load design</strong> — sizing beams, columns, and slabs to carry dead and live loads to the foundation</li>
+  <li><strong>Lateral system design</strong> — designing shear walls, moment frames, or braced frames that resist wind and seismic forces</li>
+  <li><strong>Foundation design</strong> — selecting and sizing spread footings, grade beams, piles, or mat slabs based on soil conditions and structural loads</li>
+  <li><strong>Structural calculations</strong> — the engineering analysis that backs up every structural member size on the drawings</li>
+  <li><strong>Connection details</strong> — specifying how beams connect to columns, how shear walls anchor to foundations</li>
+  <li><strong>Geotechnical coordination</strong> — incorporating allowable bearing capacities, liquefaction risk, and expansive soil data into the foundation design</li>
+  <li><strong>Special inspection program</strong> — defining which work during construction requires special inspection</li>
+</ul>
+
+<h2>Where the Two Disciplines Overlap</h2>
+<p>The two disciplines must be tightly coordinated because architectural decisions drive structural requirements and vice versa. Column locations, floor-to-floor height, shear wall placement, large openings, and rooftop equipment loads all require negotiation between architect and structural engineer early in design.</p>
+
+<h2>Can the Architect Be the Structural Engineer?</h2>
+<p>In a few states, architects with additional credentials can stamp certain structural drawings for simple residential construction. For commercial buildings, this is not permitted — you need a separately licensed structural engineer or civil engineer practicing structural engineering to stamp and sign the structural documents. Building departments will reject commercial structural drawings stamped only by an architect.</p>
+
+<h2>The Bottom Line</h2>
+<p>The architect designs the building; the structural engineer ensures it stands up. These are complementary but legally distinct roles, each backed by a separate professional license and separate legal accountability. On any permitted commercial project, you need both — and the earlier they coordinate, the fewer expensive surprises appear in plan check or during construction.</p>
+    `,
+  },
+];
+
 export const RESOURCE_ARTICLES: ResourceArticle[] = [
   ...BASE_RESOURCE_ARTICLES,
   ...STRUCTURAL_RESOURCE_ARTICLES,
@@ -788,6 +1073,7 @@ export const RESOURCE_ARTICLES: ResourceArticle[] = [
   ...CIVIL_RESOURCE_ARTICLES,
   ...GEOTECHNICAL_RESOURCE_ARTICLES,
   ...PERMIT_RESOURCE_ARTICLES,
+  ...LEGACY_RESOURCE_ARTICLES,
 ];
 
 // Guard against duplicate slugs across files.
