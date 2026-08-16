@@ -1,0 +1,150 @@
+I took a look at Apex Grid Engineering and also checked how much of the domain Google-style search is currently surfacing. The biggest issue is not that the site looks bad—it’s that the search footprint is extremely thin right now. Searches specifically for the domain/company returned essentially no meaningful indexed service-page results beyond the homepage.
+
+My current SEO score: 54/100
+
+That’s an SEO/readiness score, not a Google penalty score. The homepage is crawlable and has a decent title — “Apex Grid Engineering | MEP, Structural & Civil Design” — which is a good start. But right now I would consider the site underdeveloped for actually competing for engineering searches.
+
+Area	Score	What I see
+Homepage targeting	7/10	MEP, Structural & Civil are immediately identified
+Keyword targeting	6/10	Good broad terms, but needs much deeper service/location targeting
+Indexability/visibility	4/10	Very little of the domain is surfacing in search
+Service-page depth	5/10	Needs dedicated pages built around each engineering discipline
+Local SEO	4/10	Major opportunity
+Content authority	4/10	Needs engineering-specific authoritative content
+Conversion SEO	7/10	Can be strengthened around quote/project-intake intent
+Technical SEO	6/10	Homepage is crawlable, but I'd want Search Console/PageSpeed data before scoring this higher
+AI/AEO readiness	5/10	Needs stronger structured company/service/location/entity information
+Overall	54/100	Good foundation, but a lot of ranking potential is unused
+What I would change first
+
+The biggest improvement would be turning Apex Grid from essentially a company website into an engineering search engine footprint.
+
+Instead of trying to make the homepage rank for everything, build strong dedicated pages such as:
+
+/structural-engineering/
+/mep-engineering/
+/civil-engineering/
+/mechanical-engineering/
+/electrical-engineering/
+/plumbing-engineering/
+/commercial-engineering/
+/multifamily-engineering/
+/residential-engineering/
+/permit-engineering/
+
+Then each page needs actual engineering substance—not 300 words of generic marketing copy.
+
+For example, the Structural page should naturally discuss things prospective clients actually search for: structural calculations, foundation design, framing design, seismic design, existing-building modifications, additions, load-bearing wall modifications, structural inspections, permit drawings, PE-stamped plans, plan-check corrections, etc.
+
+That gives Google dozens of signals about what Apex actually does rather than asking one homepage to establish all of that authority.
+
+Location SEO could become huge.
+
+If Apex serves multiple states/cities, I would build legitimate location/service pages around where you actually perform work.
+
+For example:
+
+Structural Engineer Phoenix AZ
+MEP Engineering Phoenix AZ
+Structural Engineer Los Angeles CA
+MEP Engineering Dallas TX
+Commercial Structural Engineering Arizona
+
+But they cannot simply be identical pages with the city changed. Each should contain jurisdiction information, project types, codes/services, permitting context and relevant projects.
+
+That's how I'd start attacking searches with actual purchasing intent:
+
+structural engineer near me
+structural engineer Phoenix
+MEP engineer Phoenix
+commercial MEP engineering
+multifamily MEP engineer
+PE stamped structural plans
+structural engineering for architects
+engineering firm for general contractors
+
+Those visitors are substantially more valuable than somebody searching a broad informational engineering term.
+
+There's another opportunity I really like for this company
+
+Build pages specifically around who hires you.
+
+For example:
+
+Engineering for Architects
+Engineering for General Contractors
+Engineering for Developers
+Engineering for Property Managers
+Engineering for Multifamily Projects
+
+That matches the actual buying process much better than simply saying “We provide engineering.”
+
+Someone searching:
+
+“MEP engineering firm for architects”
+
+is probably considerably closer to hiring than someone searching:
+
+“what is MEP engineering?”
+
+Projects should become SEO assets too.
+
+Instead of just having a generic portfolio, individual completed-project pages can establish expertise:
+
+Multifamily MEP Engineering – Dallas, Texas
+Residential Structural Engineering – Phoenix, Arizona
+Commercial Tenant Improvement MEP – Los Angeles, California
+
+Each case study can explain the project, engineering disciplines, challenge, solution, jurisdiction and deliverables without disclosing anything confidential.
+
+That simultaneously helps Google, prospective clients, and AI search systems understand what Apex actually has experience doing.
+
+Technical work I'd have the developer check immediately
+
+I'd specifically tell whoever built the site to verify Google Search Console, XML sitemap submission, robots.txt, canonical URLs, unique title tags, unique meta descriptions, H1/H2 hierarchy, image alt text, image compression, Core Web Vitals, mobile performance, internal linking, redirects, Organization schema, ProfessionalService schema, Service schema, Breadcrumb schema and LocalBusiness schema where appropriate.
+
+I'd also connect:
+
+Google Search Console + GA4 + Bing Webmaster Tools.
+
+Until Search Console is connected, we're partly flying blind. It will tell you which Apex pages Google has indexed, which it hasn't, what searches are already generating impressions, and whether Google sees technical problems.
+
+The homepage itself
+
+I'd make the title more commercially targeted depending on where the company operates.
+
+Something closer to:
+
+Structural, MEP & Civil Engineering Services | Apex Grid Engineering
+
+And the H1 could be:
+
+Full-Service Structural, MEP & Civil Engineering
+
+Then immediately underneath:
+
+Permit-ready engineering for architects, contractors, developers and property owners.
+
+Then strong pathways:
+
+Structural Engineering | MEP Engineering | Civil Engineering | Request a Proposal
+
+That tells a human—and Google—exactly what the company is within seconds.
+
+Where I think you can realistically take it
+
+With the right buildout:
+
+Current: ~54/100
+
+After technical/on-page cleanup: 70–75
+
+After dedicated service + industry + location pages: 80–88
+
+After accumulating case studies, backlinks, Google authority and useful engineering content: 90+
+
+The part I would not do is dump 100 generic AI-written blogs onto it. For an engineering company, authority matters. I'd rather publish 10 excellent technical pages written around real engineering experience than 100 articles saying “5 Reasons You Need a Structural Engineer.”
+
+And there's an important clue from my search: the domain currently has very little visible indexed footprint. That means there is a lot of low-hanging fruit here rather than trying to fix a site with years of bad SEO history.
+
+If you want, I can go considerably deeper and give you a page-by-page Apex Grid SEO rebuild plan—including the exact pages, URL structure, H1s, page titles, keywords, meta descriptions, schema, and copy sections to tell Replit exactly what to change.

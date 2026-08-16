@@ -283,7 +283,7 @@ export default function Home() {
 }
 
 const PAGE_META = {
-  title: "Apex Grid Engineering | Architecture, MEP, Structural & Civil Design",
-  description: "Full-service design firm: architectural design, MEP, structural, and civil/site engineering plus Title 24 energy compliance for commercial, industrial, and healthcare projects.",
+  title: "MEP, Structural & Civil Engineering Firm | Apex Grid Engineering",
+  description: "Permit-ready MEP, structural, and civil engineering for architects, contractors, and developers. 20+ engineers, 49-state PE licensure, 12–24 hr quote turnaround.",
   path: "/",
 };

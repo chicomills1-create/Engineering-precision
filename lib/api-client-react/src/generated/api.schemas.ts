@@ -116,6 +116,21 @@ export interface CallbackChatReply {
   session?: string;
 }
 
+export interface UploadUrlRequest {
+  /** @minLength 1 */
+  name: string;
+  /** @minimum 1 */
+  size: number;
+  /** @minLength 1 */
+  contentType: string;
+}
+
+export interface UploadUrlResponse {
+  uploadURL: string;
+  objectPath: string;
+  metadata?: UploadUrlRequest;
+}
+
 export interface LeadInput {
   /** @minLength 1 */
   name: string;
@@ -127,5 +142,7 @@ export interface LeadInput {
   services?: string;
   /** @minLength 1 */
   message: string;
+  /** Object paths of uploaded files attached to the inquiry. */
+  attachments?: string[];
 }
 

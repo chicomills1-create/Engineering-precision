@@ -8,6 +8,21 @@ import type { StateData, CityData } from "./types";
 import { SERVICES, type ServiceDef } from "./services";
 import { htmlShell, SITE } from "./shell";
 import { BLOG_POSTS, type BlogPost } from "./blog";
+import { RESOURCE_ARTICLES, type ResourceArticle } from "./resources";
+import { CLIENT_PAGES, WHO_WE_WORK_WITH_HUB, type ClientPage } from "./client-pages";
+import { PROJECT_TYPE_PAGES, PROJECT_TYPES_HUB, type ProjectTypePage } from "./project-type-pages";
+import { EXISTING_BUILDING_PAGES, EXISTING_BUILDING_HUB, type ExistingBuildingPage } from "./existing-building-pages";
+import { PERMIT_PAGES, PERMIT_HUB, type PermitPage } from "./permit-pages";
+import { INDUSTRY_DISCIPLINE_PAGES, getIndustryDisciplineUrl, type IndustryDisciplinePage } from "./industry-discipline-pages";
+import { LOCATION_SERVICE_PAGES, type LocationServicePage } from "./location-service-pages";
+import { SOLUTION_PAGES, type SolutionPage } from "./solutions-pages";
+import { GUIDE_PAGES, GUIDES_HUB, type GuidePage } from "./guides-pages";
+import { DISCIPLINE_HUBS, type DisciplineHub, type DisciplineSubpage } from "./discipline-pages";
+import { MISC_PAGES, type MiscPage } from "./misc-pages";
+import { STRUCTURAL_EXTENDED_PAGES, type StructuralExtendedPage } from "./structural-extended-pages";
+import { TITLE_24_HUB, TITLE_24_PAGES, type Title24Page } from "./title-24-pages";
+import { PROJECTS_HUB, PROJECT_CATEGORY_PAGES, type ProjectCategoryPage } from "./projects-pages";
+import { STATIC_STANDALONE_PAGES, type StaticPageDef } from "./static-pages";
 
 /** Lightweight city-directory entry sourced from US Census population estimates. */
 interface DirectoryCity {
@@ -530,8 +545,1554 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const p of BLOG_POSTS) {
     urls.push(`  <url><loc>${SITE}/blog/${p.slug}/</loc><lastmod>${p.date}</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>`);
   }
+  // Resources
+  urls.push(`  <url><loc>${SITE}/resources/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  for (const a of RESOURCE_ARTICLES) {
+    urls.push(`  <url><loc>${SITE}/resources/${a.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+  }
+  // Who We Work With
+  urls.push(`  <url><loc>${SITE}/who-we-work-with/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  for (const cp of CLIENT_PAGES) {
+    urls.push(`  <url><loc>${SITE}/who-we-work-with/${cp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+  }
+  // Project Types
+  urls.push(`  <url><loc>${SITE}/project-types/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  for (const pt of PROJECT_TYPE_PAGES) {
+    urls.push(`  <url><loc>${SITE}/project-types/${pt.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+  }
+  // Existing Building Engineering
+  urls.push(`  <url><loc>${SITE}/existing-building-engineering/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  for (const eb of EXISTING_BUILDING_PAGES) {
+    urls.push(`  <url><loc>${SITE}/existing-building-engineering/${eb.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+  }
+  // Permit Engineering
+  urls.push(`  <url><loc>${SITE}/permit-engineering/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  for (const pp of PERMIT_PAGES) {
+    urls.push(`  <url><loc>${SITE}/permit-engineering/${pp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+  }
+  // Industry × Discipline pages
+  for (const idp of INDUSTRY_DISCIPLINE_PAGES) {
+    const url = getIndustryDisciplineUrl(idp);
+    urls.push(`  <url><loc>${SITE}${url}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  }
+  // Location × Service pages
+  for (const lsp of LOCATION_SERVICE_PAGES) {
+    urls.push(`  <url><loc>${SITE}/locations/${lsp.stateSlug}/${lsp.citySlug}/${lsp.serviceSlug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+  }
+  // Solutions hub + individual pages
+  urls.push(`  <url><loc>${SITE}/solutions/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  urls.push(`  <url><loc>${SITE}/government/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  for (const sp of SOLUTION_PAGES) {
+    urls.push(`  <url><loc>${SITE}/${sp.dir}/${sp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+  }
+  // Guides hub + individual pages
+  urls.push(`  <url><loc>${SITE}/guides/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  for (const gp of GUIDE_PAGES) {
+    urls.push(`  <url><loc>${SITE}/guides/${gp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+  }
+  // Structural extended subpages
+  for (const sp of STRUCTURAL_EXTENDED_PAGES) {
+    urls.push(`  <url><loc>${SITE}/structural-engineering/${sp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  }
+  // Title 24 hub + subpages
+  urls.push(`  <url><loc>${SITE}/title-24/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>`);
+  for (const tp of TITLE_24_PAGES) {
+    urls.push(`  <url><loc>${SITE}/title-24/${tp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  }
+  // Projects hub + category pages
+  urls.push(`  <url><loc>${SITE}/projects/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  for (const cat of PROJECT_CATEGORY_PAGES) {
+    urls.push(`  <url><loc>${SITE}/projects/${cat.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+  }
+  // Static standalone pages
+  for (const sp of STATIC_STANDALONE_PAGES) {
+    urls.push(`  <url><loc>${SITE}/${sp.dir}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  }
+  // HTML sitemap
+  urls.push(`  <url><loc>${SITE}/sitemap/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>`);
+  // Discipline hub + subservice pages
+  for (const hub of DISCIPLINE_HUBS) {
+    urls.push(`  <url><loc>${SITE}/${hub.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>`);
+    for (const sp of hub.subpages) {
+      urls.push(`  <url><loc>${SITE}/${hub.slug}/${sp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+    }
+  }
+  // Misc standalone pages
+  for (const mp of MISC_PAGES) {
+    urls.push(`  <url><loc>${SITE}/${mp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  }
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`;
   fs.writeFileSync(path.join(PUBLIC, "sitemap.xml"), xml);
+}
+
+// ─── Resource Articles ─────────────────────────────────────────────────────
+
+function resourceArticlePage(article: ResourceArticle): string {
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Resources", href: "/resources/" },
+    { name: article.h1 },
+  ];
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.h1,
+    description: article.description,
+    author: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
+    publisher: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
+    mainEntityOfPage: `${SITE}/resources/${article.slug}/`,
+  };
+  const others = RESOURCE_ARTICLES.filter((a) => a.slug !== article.slug && a.tag === article.tag).slice(0, 3);
+  const fallbacks = RESOURCE_ARTICLES.filter((a) => a.slug !== article.slug).slice(0, 3 - others.length);
+  const related = [...others, ...fallbacks].slice(0, 3);
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">${esc(article.tag)} · ${article.minutes} min read</p>
+  <h1>${esc(article.h1)}</h1>
+  <p class="lede">${esc(article.description)}</p>
+</div></section>
+<section class="block"><div class="container"><div class="prose">${article.html}</div></div></section>
+${related.length ? `<section class="block"><div class="container">
+  <h2>More from <em>Resources</em></h2>
+  <div class="grid3">
+  ${related.map((a) => `<a class="card" href="/resources/${a.slug}/"><div class="label">${esc(a.tag)}</div><h3>${esc(a.h1)}</h3><p>${esc(a.description)}</p></a>`).join("")}
+  </div>
+</div></section>` : ""}
+<section class="ctaband"><div class="container">
+  <h2>Have a Project in Mind?</h2>
+  <p>Integrated structural, MEP, civil, and geotechnical engineering — licensed in 49 states. Send us your scope and get a clear proposal within 24 hours.</p>
+  <a class="cta" href="/contact">Request a Proposal</a>
+</div></section>`;
+  return htmlShell({
+    title: article.title,
+    description: article.description,
+    canonical: `${SITE}/resources/${article.slug}/`,
+    schemaJson: [orgSchema, articleSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+function resourcesHubPage(): string {
+  const crumbs = [{ name: "Home", href: "/" }, { name: "Resources" }];
+  const byTag: Record<string, ResourceArticle[]> = {};
+  for (const a of RESOURCE_ARTICLES) {
+    (byTag[a.tag] ||= []).push(a);
+  }
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">Engineering Knowledge Center</p>
+  <h1>Engineering <span class="dim">Resources</span></h1>
+  <p class="lede">Practical answers to the questions architects, contractors, property owners, and developers ask most — written by licensed engineers who do the work.</p>
+</div></section>
+${Object.entries(byTag).map(([tag, articles]) => `
+<section class="block"><div class="container">
+  <h2>${esc(tag)} <em>Guides</em></h2>
+  <div class="grid2">
+  ${articles.map((a) => `<a class="card" href="/resources/${a.slug}/"><div class="label">${esc(a.tag)} · ${a.minutes} min</div><h3>${esc(a.h1)}</h3><p>${esc(a.description)}</p></a>`).join("")}
+  </div>
+</div></section>`).join("")}
+<section class="ctaband"><div class="container">
+  <h2>Ready to Start Your Project?</h2>
+  <p>Licensed structural, MEP, civil, and geotechnical engineering in 49 states — with fast quote turnaround.</p>
+  <a class="cta" href="/contact">Request a Proposal</a>
+</div></section>`;
+  return htmlShell({
+    title: "Engineering Resources & Guides | Apex Grid Engineering",
+    description: "Practical engineering guides on structural, MEP, civil, and permit topics — written by licensed professional engineers at Apex Grid Engineering.",
+    canonical: `${SITE}/resources/`,
+    schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+// ─── Who We Work With ──────────────────────────────────────────────────────
+
+function clientPage(page: ClientPage): string {
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Who We Work With", href: "/who-we-work-with/" },
+    { name: page.h1 },
+  ];
+  const svcSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: page.h1,
+    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    serviceType: "Engineering Consulting",
+  };
+  const others = CLIENT_PAGES.filter((p) => p.slug !== page.slug).slice(0, 4);
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">${esc(page.kicker)}</p>
+  <h1>${esc(page.h1)}</h1>
+  <p class="lede">${esc(page.lede)}</p>
+</div></section>
+${page.sections.map((s) => `
+<section class="block"><div class="container">
+  <h2>${esc(s.heading)}</h2>
+  <div class="prose"><p>${esc(s.body)}</p></div>
+</div></section>`).join("")}
+<section class="block"><div class="container">
+  <h2>Other <em>Clients We Serve</em></h2>
+  <div class="grid2">
+  ${others.map((p) => `<a class="card" href="/who-we-work-with/${p.slug}/"><div class="label">Engineering For</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 120))}…</p></a>`).join("")}
+  </div>
+</div></section>
+<section class="ctaband"><div class="container">
+  <h2>Start Working With Apex Grid</h2>
+  <p>Licensed in 49 states, 20+ engineers on staff, 12–24 hour quote turnaround. Tell us about your project and we'll respond fast.</p>
+  <a class="cta" href="${esc(page.ctaHref)}">${esc(page.cta)}</a>
+</div></section>`;
+  return htmlShell({
+    title: page.title,
+    description: page.description,
+    canonical: `${SITE}/who-we-work-with/${page.slug}/`,
+    schemaJson: [orgSchema, svcSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+function whoWeWorkWithHubPage(): string {
+  const crumbs = [{ name: "Home", href: "/" }, { name: "Who We Work With" }];
+  const hub = WHO_WE_WORK_WITH_HUB;
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">Our Clients & Partners</p>
+  <h1>${esc(hub.h1)}</h1>
+  <p class="lede">${esc(hub.lede)}</p>
+</div></section>
+<section class="block"><div class="container">
+  <h2>Choose <em>Your Role</em></h2>
+  <div class="grid2">
+  ${CLIENT_PAGES.map((p) => `<a class="card" href="/who-we-work-with/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 130))}…</p></a>`).join("")}
+  </div>
+</div></section>
+<section class="ctaband"><div class="container">
+  <h2>Not Sure Where to Start?</h2>
+  <p>Tell us about your project and we'll take it from there — clear proposal, fast turnaround, licensed engineers in 49 states.</p>
+  <a class="cta" href="/contact">Contact Us</a>
+</div></section>`;
+  return htmlShell({
+    title: hub.title,
+    description: hub.description,
+    canonical: `${SITE}/who-we-work-with/`,
+    schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+// ─── Project Type Pages ────────────────────────────────────────────────────
+
+function projectTypePage(page: ProjectTypePage): string {
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Project Types", href: "/project-types/" },
+    { name: page.h1 },
+  ];
+  const svcSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: page.h1,
+    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    serviceType: page.h1,
+  };
+  const others = PROJECT_TYPE_PAGES.filter((p) => p.slug !== page.slug)
+    .filter((p) => page.relatedSlugs.includes(p.slug) || true)
+    .slice(0, 4);
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">${esc(page.kicker)}</p>
+  <h1>${esc(page.h1)}</h1>
+  <p class="lede">${esc(page.lede)}</p>
+</div></section>
+<section class="block"><div class="container">
+  <h2>Engineering <em>Disciplines Involved</em></h2>
+  <ul class="scope">${page.disciplines.map((d) => `<li>${esc(d)}</li>`).join("")}</ul>
+</div></section>
+<section class="block"><div class="container">
+  <h2>What This <em>Scope Includes</em></h2>
+  <ul class="scope">${page.topics.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
+</div></section>
+<section class="block"><div class="container">
+  <h2>Related <em>Project Types</em></h2>
+  <div class="grid2">
+  ${others.map((p) => `<a class="card" href="/project-types/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 120))}…</p></a>`).join("")}
+  </div>
+</div></section>
+<section class="ctaband"><div class="container">
+  <h2>Start Your Project</h2>
+  <p>Licensed structural, MEP, civil, and geotechnical engineering in 49 states — with fast quote turnaround. Send us your scope and get a clear proposal.</p>
+  <a class="cta" href="/contact">Request a Proposal</a>
+</div></section>`;
+  return htmlShell({
+    title: page.title,
+    description: page.description,
+    canonical: `${SITE}/project-types/${page.slug}/`,
+    schemaJson: [orgSchema, svcSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+function projectTypesHubPage(): string {
+  const crumbs = [{ name: "Home", href: "/" }, { name: "Project Types" }];
+  const hub = PROJECT_TYPES_HUB;
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">Engineering by Project Stage</p>
+  <h1>${esc(hub.h1)}</h1>
+  <p class="lede">${esc(hub.lede)}</p>
+</div></section>
+<section class="block"><div class="container">
+  <div class="grid2">
+  ${PROJECT_TYPE_PAGES.map((p) => `<a class="card" href="/project-types/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 130))}…</p></a>`).join("")}
+  </div>
+</div></section>
+<section class="ctaband"><div class="container">
+  <h2>Ready to Get Started?</h2>
+  <p>Tell us what stage your project is in and we'll match the right engineering services to your scope and schedule.</p>
+  <a class="cta" href="/contact">Request a Proposal</a>
+</div></section>`;
+  return htmlShell({
+    title: hub.title,
+    description: hub.description,
+    canonical: `${SITE}/project-types/`,
+    schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+// ─── Existing Building Pages ───────────────────────────────────────────────
+
+function existingBuildingPage(page: ExistingBuildingPage): string {
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Existing Building Engineering", href: "/existing-building-engineering/" },
+    { name: page.h1 },
+  ];
+  const svcSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: page.h1,
+    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    serviceType: page.h1,
+  };
+  const others = EXISTING_BUILDING_PAGES.filter((p) => p.slug !== page.slug).slice(0, 4);
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">${esc(page.kicker)}</p>
+  <h1>${esc(page.h1)}</h1>
+  <p class="lede">${esc(page.lede)}</p>
+</div></section>
+<section class="block"><div class="container">
+  <h2>Scope of <em>Services</em></h2>
+  <ul class="scope">${page.topics.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
+  ${page.note ? `<p class="note" style="margin-top:20px">${esc(page.note)}</p>` : ""}
+</div></section>
+<section class="block"><div class="container">
+  <h2>Related <em>Existing Building Services</em></h2>
+  <div class="grid2">
+  ${others.map((p) => `<a class="card" href="/existing-building-engineering/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 120))}…</p></a>`).join("")}
+  </div>
+</div></section>
+<section class="ctaband"><div class="container">
+  <h2>Tell Us About Your Building</h2>
+  <p>Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs. Fast quotes, no runaround.</p>
+  <a class="cta" href="/contact">Request a Proposal</a>
+</div></section>`;
+  return htmlShell({
+    title: page.title,
+    description: page.description,
+    canonical: `${SITE}/existing-building-engineering/${page.slug}/`,
+    schemaJson: [orgSchema, svcSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+function existingBuildingHubPage(): string {
+  const crumbs = [{ name: "Home", href: "/" }, { name: "Existing Building Engineering" }];
+  const hub = EXISTING_BUILDING_HUB;
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">Existing Building Engineering</p>
+  <h1>${esc(hub.h1)}</h1>
+  <p class="lede">${esc(hub.lede)}</p>
+</div></section>
+<section class="block"><div class="container">
+  <div class="grid2">
+  ${EXISTING_BUILDING_PAGES.map((p) => `<a class="card" href="/existing-building-engineering/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 130))}…</p></a>`).join("")}
+  </div>
+</div></section>
+<section class="ctaband"><div class="container">
+  <h2>Send Us What You Have</h2>
+  <p>No drawings? No problem. Send photos, measurements, and a project description. We'll review what you have and tell you what engineering is needed.</p>
+  <a class="cta" href="/contact">Contact Us</a>
+</div></section>`;
+  return htmlShell({
+    title: hub.title,
+    description: hub.description,
+    canonical: `${SITE}/existing-building-engineering/`,
+    schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+// ─── Permit Engineering Pages ──────────────────────────────────────────────
+
+function permitPage(page: PermitPage): string {
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Permit Engineering", href: "/permit-engineering/" },
+    { name: page.h1 },
+  ];
+  const svcSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: page.h1,
+    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    serviceType: "Permit Engineering",
+  };
+  const others = PERMIT_PAGES.filter((p) => p.slug !== page.slug).slice(0, 4);
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">${esc(page.kicker)}</p>
+  <h1>${esc(page.h1)}</h1>
+  <p class="lede">${esc(page.lede)}</p>
+</div></section>
+<section class="block"><div class="container">
+  <h2>What This <em>Service Includes</em></h2>
+  <ul class="scope">${page.topics.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
+  ${page.note ? `<p class="note" style="margin-top:20px">${esc(page.note)}</p>` : ""}
+</div></section>
+<section class="block"><div class="container">
+  <h2>Related <em>Permit Services</em></h2>
+  <div class="grid2">
+  ${others.map((p) => `<a class="card" href="/permit-engineering/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 120))}…</p></a>`).join("")}
+  </div>
+</div></section>
+<section class="ctaband"><div class="container">
+  <h2>Ready to Submit for Permit?</h2>
+  <p>We produce complete, PE-stamped permit packages and support the submittal through final approval. Fast turnaround, 49-state licensure.</p>
+  <a class="cta" href="/contact">Request a Proposal</a>
+</div></section>`;
+  return htmlShell({
+    title: page.title,
+    description: page.description,
+    canonical: `${SITE}/permit-engineering/${page.slug}/`,
+    schemaJson: [orgSchema, svcSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+function permitHubPage(): string {
+  const crumbs = [{ name: "Home", href: "/" }, { name: "Permit Engineering" }];
+  const hub = PERMIT_HUB;
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">Permit Engineering Services</p>
+  <h1>${esc(hub.h1)}</h1>
+  <p class="lede">${esc(hub.lede)}</p>
+</div></section>
+<section class="block"><div class="container">
+  <div class="grid2">
+  ${PERMIT_PAGES.map((p) => `<a class="card" href="/permit-engineering/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 130))}…</p></a>`).join("")}
+  </div>
+</div></section>
+<section class="ctaband"><div class="container">
+  <h2>Need Engineering for a Permit?</h2>
+  <p>Licensed in 49 states. PE-stamped structural, MEP, and civil engineering for building permits — complete packages delivered on your schedule.</p>
+  <a class="cta" href="/contact">Request a Proposal</a>
+</div></section>`;
+  return htmlShell({
+    title: hub.title,
+    description: hub.description,
+    canonical: `${SITE}/permit-engineering/`,
+    schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+// ─── Industry × Discipline Pages ──────────────────────────────────────────
+
+function industryDisciplinePage(page: IndustryDisciplinePage): string {
+  const url = getIndustryDisciplineUrl(page);
+  // Build breadcrumb from segments
+  const crumbs: { name: string; href?: string }[] = [{ name: "Home", href: "/" }, { name: "Industries", href: "/industries/" }];
+  if (page.segments.length > 2) {
+    // sub-industry path: e.g. ["healthcare","hospitals","mep-engineering"]
+    crumbs.push({ name: toTitle(page.segments[1]), href: `/industries/${page.segments[0]}/` });
+  } else {
+    crumbs.push({ name: toTitle(page.segments[0]), href: `/industries/${page.industrySlug}/` });
+  }
+  crumbs.push({ name: page.disciplineLabel });
+
+  // Related pages: same industry, different discipline
+  const siblings = INDUSTRY_DISCIPLINE_PAGES.filter(
+    (p) => p.industrySlug === page.industrySlug && p !== page,
+  ).slice(0, 4);
+
+  const pageSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: page.h1,
+    description: page.description,
+    provider: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
+    url: `${SITE}${url}`,
+    areaServed: { "@type": "Country", name: "United States" },
+  };
+
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">${esc(page.kicker)}</p>
+  <h1>${esc(page.h1)}</h1>
+  <p class="lede">${esc(page.lede)}</p>
+</div></section>
+
+<section class="block"><div class="container">
+  <h2>What We <em>Engineer</em></h2>
+  <ul class="scope">
+    ${page.topics.map((t) => `<li>${esc(t)}</li>`).join("\n    ")}
+  </ul>
+</div></section>
+
+<section class="block"><div class="container">
+  <h2>Why Apex Grid for <em>${esc(page.disciplineLabel)}</em>?</h2>
+  <div class="grid2">
+    <div class="card"><div class="label">Licensed in 49 States</div><p>Our engineers hold PE licensure across the continental US, so your project can start without waiting on out-of-state licensing delays.</p></div>
+    <div class="card"><div class="label">20+ Engineers On Staff</div><p>Structural, MEP, civil, and geotech disciplines under one roof means coordinated deliverables and no finger-pointing between firms.</p></div>
+    <div class="card"><div class="label">Fast Turnaround</div><p>We quote within 24 hours and structure deliverable milestones around your permit or construction schedule — not ours.</p></div>
+    <div class="card"><div class="label">15+ Years of Project Experience</div><p>Across hundreds of commercial, industrial, healthcare, and government projects — we've seen the permitting challenges your project will face.</p></div>
+  </div>
+</div></section>
+
+${siblings.length ? `<section class="block"><div class="container">
+  <h2>More <em>Engineering Services</em> for This Sector</h2>
+  <div class="grid2">
+  ${siblings.map((s) => `<a class="card" href="${getIndustryDisciplineUrl(s)}"><div class="label">${esc(s.kicker)}</div><h3>${esc(s.h1)}</h3><p>${esc(s.lede.slice(0, 120))}…</p></a>`).join("")}
+  </div>
+  <div class="linkrow" style="margin-top:20px"><a href="/industries/${esc(page.industrySlug)}/">Back to ${esc(toTitle(page.industrySlug))} Engineering</a></div>
+</div></section>` : ""}
+
+<section class="ctaband"><div class="container">
+  <h2>Start Your Project</h2>
+  <p>Licensed PEs, 20+ engineers, and fast proposals. Send us your scope and get a clear quote: deliverables, schedule, and fee — usually within 24 hours.</p>
+  <a class="cta" href="/contact">Request a Proposal</a>
+</div></section>`;
+
+  return htmlShell({
+    title: page.title,
+    description: page.description,
+    canonical: `${SITE}${url}`,
+    schemaJson: [orgSchema, pageSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+/** Convert a slug like "military-defense" → "Military Defense" for display */
+function toTitle(slug: string): string {
+  return slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+// ─── Location × Service Pages ─────────────────────────────────────────────
+
+function locationServicePage(page: LocationServicePage): string {
+  const url = `/locations/${page.stateSlug}/${page.citySlug}/${page.serviceSlug}/`;
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Locations", href: "/locations/" },
+    { name: page.stateName, href: `/locations/${page.stateSlug}/` },
+    { name: page.cityName, href: `/locations/${page.stateSlug}/${page.citySlug}/` },
+    { name: toTitle(page.serviceSlug) },
+  ];
+  const relatedLinks = page.relatedServiceSlugs
+    .slice(0, 3)
+    .map((s) => `<a href="/locations/${page.stateSlug}/${page.citySlug}/${s}/">${toTitle(s)}</a>`)
+    .join(" · ");
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">${esc(page.kicker)}</div>
+        <h1>${esc(page.h1)}</h1>
+        <p class="lede">${esc(page.lede)}</p>
+        <a class="btn btn--primary" href="/contact/">Request a Proposal</a>
+      </div>
+    </div>
+
+    ${breadcrumb(crumbs)}
+
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <h2>What We Engineer</h2>
+        <ul class="check-list">
+          ${page.topics.map((t) => `<li>${esc(t)}</li>`).join("\n          ")}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--light">
+      <div class="container container--narrow">
+        <h2>Local Engineering Context</h2>
+        <dl class="detail-list">
+          <dt>Authority Having Jurisdiction</dt><dd>${esc(page.ahj)}</dd>
+          <dt>Building Code</dt><dd>${esc(page.buildingCode)}</dd>
+          <dt>Energy Code</dt><dd>${esc(page.energyCode)}</dd>
+          <dt>Local Market</dt><dd>${esc(page.marketNote)}</dd>
+          <dt>Climate &amp; Engineering Conditions</dt><dd>${esc(page.climateNote)}</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <h2>About Apex Grid Engineering</h2>
+        <p>Apex Grid Engineering is a multi-discipline engineering firm licensed in 49 states and headquartered in Queen Creek, Arizona. We provide structural, MEP, civil, and geotechnical engineering for commercial, industrial, multifamily, and government clients — with 15+ years of experience and 20+ licensed engineers on staff.</p>
+        <p>We work from architectural PDFs, CAD files, or field measurements, and we're set up to turn projects around on compressed schedules when the situation calls for it.</p>
+        ${relatedLinks ? `<p>Related services in ${esc(page.cityName)}: ${relatedLinks}</p>` : ""}
+      </div>
+    </section>
+
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>Ready to Start in ${esc(page.cityName)}?</h2>
+        <p>Send us your drawings or describe your project and we'll respond within one business day.</p>
+        <a class="btn btn--primary" href="/contact/">Get a Proposal</a>
+        <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
+      </div>
+    </section>`;
+
+  const svcSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Apex Grid Engineering",
+    "description": page.lede,
+    "url": `${SITE}${url}`,
+    "telephone": "+14804900064",
+    "address": { "@type": "PostalAddress", "addressLocality": "Queen Creek", "addressRegion": "AZ", "postalCode": "85142" },
+    "areaServed": { "@type": "City", "name": page.cityName },
+    "serviceType": toTitle(page.serviceSlug),
+  };
+
+  return htmlShell({
+    title: page.title,
+    description: page.lede,
+    canonical: `${SITE}${url}`,
+    schemaJson: [svcSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+// ─── Solution Pages ────────────────────────────────────────────────────────
+
+function solutionPage(page: SolutionPage): string {
+  const url = `/${page.dir}/${page.slug}/`;
+  const dirLabel = page.dir === "solutions" ? "Solutions" : "Government Engineering";
+  const dirHref = `/${page.dir}/`;
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: dirLabel, href: dirHref },
+    { name: page.h1 },
+  ];
+  const relatedLinks = page.relatedSlugs
+    .slice(0, 4)
+    .map((s) => `<a class="card" href="/solutions/${s}/"><h3>${toTitle(s).replace(/Engineering$/, "").trim()}</h3></a>`)
+    .join("\n          ");
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">${esc(page.kicker)}</div>
+        <h1>${esc(page.h1)}</h1>
+        <p class="lede">${esc(page.lede)}</p>
+        <a class="btn btn--primary" href="/contact/">Request Engineering Support</a>
+      </div>
+    </div>
+
+    ${breadcrumb(crumbs)}
+
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <h2>What This Engineering Scope Covers</h2>
+        <ul class="check-list">
+          ${page.topics.map((t) => `<li>${esc(t)}</li>`).join("\n          ")}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--light">
+      <div class="container container--narrow">
+        <h2>How Apex Grid Handles This</h2>
+        <p>Apex Grid Engineering is a multi-discipline firm licensed in 49 states — we engineer ${esc(page.category.toLowerCase())} scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package. Our engineers have direct experience with this type of work across commercial, industrial, multifamily, government, and military projects.</p>
+        <p>We work from architectural PDFs, contractor sketches, or existing CAD files and produce stamped engineering documents, permit drawings, and calculations that building departments accept the first time.</p>
+        <h3>Get Started</h3>
+        <p>Send us a brief description of your project or attach your drawings. We'll review the scope and respond with a proposal within one business day.</p>
+        <a class="btn btn--primary" href="/contact/">Send Project Details</a>
+      </div>
+    </section>
+
+    ${relatedLinks ? `
+    <section class="section section--white">
+      <div class="container">
+        <h2>Related Engineering Solutions</h2>
+        <div class="card-grid card-grid--4">
+          ${relatedLinks}
+        </div>
+      </div>
+    </section>` : ""}
+
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>Ready to Move Forward?</h2>
+        <p>PE-stamped engineering documents, delivered on your schedule, from engineers who've solved this problem before.</p>
+        <a class="btn btn--primary" href="/contact/">Get a Proposal</a>
+        <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
+      </div>
+    </section>`;
+
+  const spSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Apex Grid Engineering",
+    "description": page.lede,
+    "url": `${SITE}${url}`,
+    "telephone": "+14804900064",
+    "address": { "@type": "PostalAddress", "addressLocality": "Queen Creek", "addressRegion": "AZ", "postalCode": "85142" },
+    "serviceType": page.category,
+  };
+
+  return htmlShell({
+    title: page.title,
+    description: page.lede,
+    canonical: `${SITE}${url}`,
+    schemaJson: [spSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+function solutionsHubPage(): string {
+  const categories = [...new Set(SOLUTION_PAGES.filter((p) => p.dir === "solutions").map((p) => p.category))];
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">Engineering Solutions</div>
+        <h1>Engineering Solutions for Common Construction Problems</h1>
+        <p class="lede">PE-stamped engineering for the structural, MEP, electrical, plumbing, civil, and geotechnical problems that come up on commercial, industrial, and residential projects — described in plain terms, engineered properly.</p>
+        <a class="btn btn--primary" href="/contact/">Talk to an Engineer</a>
+      </div>
+    </div>
+
+    ${breadcrumb([{ name: "Home", href: "/" }, { name: "Solutions" }])}
+
+    ${categories.map((cat) => {
+      const catPages = SOLUTION_PAGES.filter((p) => p.dir === "solutions" && p.category === cat);
+      return `
+    <section class="section section--white">
+      <div class="container">
+        <h2>${esc(cat)}</h2>
+        <div class="card-grid card-grid--3">
+          ${catPages.map((p) => `<a class="card" href="/solutions/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 110))}…</p></a>`).join("\n          ")}
+        </div>
+      </div>
+    </section>`;
+    }).join("")}
+
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>Don't See Your Problem?</h2>
+        <p>We engineer across all disciplines — describe your project and we'll tell you how we can help.</p>
+        <a class="btn btn--primary" href="/contact/">Ask an Engineer</a>
+      </div>
+    </section>`;
+
+  return htmlShell({
+    title: "Engineering Solutions | Structural, MEP, Civil & Geotechnical | Apex Grid",
+    description: "Engineering solutions for common construction problems — structural, MEP, electrical, plumbing, civil, and geotechnical. PE-stamped drawings and calculations from licensed engineers.",
+    canonical: `${SITE}/solutions/`,
+    schemaJson: [],
+    body,
+  });
+}
+
+function governmentHubPage(): string {
+  const govPages = SOLUTION_PAGES.filter((p) => p.dir === "government");
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">Government Engineering</div>
+        <h1>Engineering for Government and Federal Facilities</h1>
+        <p class="lede">Apex Grid Engineering provides structural, MEP, civil, and geotechnical engineering for federal facilities, military installations, and public works projects — following UFC design criteria, GSA standards, and federal documentation requirements.</p>
+        <a class="btn btn--primary" href="/contact/">Request a Proposal</a>
+      </div>
+    </div>
+
+    ${breadcrumb([{ name: "Home", href: "/" }, { name: "Government Engineering" }])}
+
+    <section class="section section--white">
+      <div class="container">
+        <div class="card-grid card-grid--2">
+          ${govPages.map((p) => `<a class="card" href="/government/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 130))}…</p></a>`).join("\n          ")}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>Licensed in 49 States. Ready for Federal Work.</h2>
+        <p>Apex Grid Engineering — SDVOSB-eligible, multi-discipline, and experienced in UFC and federal engineering documentation standards.</p>
+        <a class="btn btn--primary" href="/contact/">Start a Conversation</a>
+      </div>
+    </section>`;
+
+  return htmlShell({
+    title: "Government & Federal Facility Engineering | Apex Grid Engineering",
+    description: "Structural, MEP, civil, and geotechnical engineering for federal facilities, military installations, and public works projects. UFC criteria, GSA standards, and EISA compliance.",
+    canonical: `${SITE}/government/`,
+    schemaJson: [],
+    body,
+  });
+}
+
+// ─── Guide Pages ──────────────────────────────────────────────────────────
+
+function guidePage(page: GuidePage): string {
+  const url = `/guides/${page.slug}/`;
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Engineering Guides", href: "/guides/" },
+    { name: page.h1 },
+  ];
+  const sectionsHtml = page.sections
+    .map(
+      (s) => `
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <h2>${esc(s.heading)}</h2>
+        <ul class="check-list">
+          ${s.points.map((p) => `<li>${esc(p)}</li>`).join("\n          ")}
+        </ul>
+      </div>
+    </section>`,
+    )
+    .join("");
+
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">${esc(page.kicker)}</div>
+        <h1>${esc(page.h1)}</h1>
+        <p class="lede">${esc(page.shortAnswer)}</p>
+        <a class="btn btn--primary" href="${esc(page.ctaHref)}">${esc(page.ctaText)}</a>
+      </div>
+    </div>
+
+    ${breadcrumb(crumbs)}
+
+    ${sectionsHtml}
+
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>Ready to Get Started?</h2>
+        <p>Send us your project details and we'll respond with a proposal within one business day.</p>
+        <a class="btn btn--primary" href="${esc(page.ctaHref)}">${esc(page.ctaText)}</a>
+        <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
+      </div>
+    </section>`;
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: page.sections.flatMap((s) =>
+      s.points.map((p) => ({
+        "@type": "Question",
+        name: s.heading,
+        acceptedAnswer: { "@type": "Answer", text: p },
+      })),
+    ).slice(0, 10),
+  };
+
+  return htmlShell({
+    title: page.title,
+    description: page.description,
+    canonical: `${SITE}${url}`,
+    schemaJson: [faqSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+function guidesHubPage(): string {
+  const categories: Record<string, GuidePage[]> = {};
+  for (const p of GUIDE_PAGES) {
+    const cat = p.kicker.split(" · ")[0];
+    if (!categories[cat]) categories[cat] = [];
+    categories[cat].push(p);
+  }
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">Engineering Guides</div>
+        <h1>${esc(GUIDES_HUB.h1)}</h1>
+        <p class="lede">${esc(GUIDES_HUB.lede)}</p>
+        <a class="btn btn--primary" href="/contact/">Talk to an Engineer</a>
+      </div>
+    </div>
+
+    ${breadcrumb([{ name: "Home", href: "/" }, { name: "Engineering Guides" }])}
+
+    ${Object.entries(categories).map(([cat, pages]) => `
+    <section class="section section--white">
+      <div class="container">
+        <h2>${esc(cat)}</h2>
+        <div class="card-grid card-grid--3">
+          ${pages.map((p) => `<a class="card" href="/guides/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.shortAnswer.slice(0, 110))}…</p></a>`).join("\n          ")}
+        </div>
+      </div>
+    </section>`).join("")}
+
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>Have a Question Not Covered Here?</h2>
+        <p>We engineer across every building discipline — ask us anything about your project.</p>
+        <a class="btn btn--primary" href="/contact/">Ask an Engineer</a>
+      </div>
+    </section>`;
+
+  return htmlShell({
+    title: GUIDES_HUB.title,
+    description: GUIDES_HUB.description,
+    canonical: `${SITE}/guides/`,
+    schemaJson: [],
+    body,
+  });
+}
+
+// ─── Structural Extended Subpage Renderer ────────────────────────────────
+
+function structuralExtendedPage(page: StructuralExtendedPage): string {
+  const url = `/structural-engineering/${page.slug}/`;
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Structural Engineering", href: "/structural-engineering/" },
+    { name: page.h1 },
+  ];
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">${esc(page.kicker)}</div>
+        <h1>${esc(page.h1)}</h1>
+        <p class="lede">${esc(page.lede)}</p>
+        <a class="btn btn--primary" href="/contact/">Request Engineering Support</a>
+      </div>
+    </div>
+    ${breadcrumb(crumbs)}
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <h2>What This Engineering Scope Covers</h2>
+        <ul class="check-list">
+          ${page.topics.map((t) => `<li>${esc(t)}</li>`).join("\n          ")}
+        </ul>
+      </div>
+    </section>
+    <section class="section section--light">
+      <div class="container container--narrow">
+        <h2>Why Work With Apex Grid</h2>
+        <p>Apex Grid Engineering is a multi-discipline firm licensed in 49 states — headquartered in Queen Creek, Arizona. We provide ${esc(page.h1.toLowerCase())} as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract. Our engineers produce PE-stamped permit packages and respond to plan check comments as part of the scope.</p>
+        <a class="btn btn--primary" href="/contact/">${esc(page.ctaText)}</a>
+      </div>
+    </section>
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>Ready to Move Forward?</h2>
+        <p>PE-stamped structural engineering, on your schedule, from engineers who've done this before.</p>
+        <a class="btn btn--primary" href="/contact/">Get a Proposal</a>
+        <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
+      </div>
+    </section>`;
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Apex Grid Engineering",
+    "description": page.lede,
+    "url": `${SITE}${url}`,
+    "telephone": "+14804900064",
+    "serviceType": page.h1,
+  };
+  return htmlShell({ title: page.title, description: page.description, canonical: `${SITE}${url}`, schemaJson: [schema, breadcrumbSchema(crumbs)], body });
+}
+
+// ─── Title 24 Renderers ───────────────────────────────────────────────────
+
+function title24HubPage(): string {
+  const url = `/title-24/`;
+  const crumbs = [{ name: "Home", href: "/" }, { name: "Title 24 Compliance" }];
+  const subpageCards = TITLE_24_PAGES.map(
+    (p) =>
+      `<a class="card" href="/title-24/${p.slug}/"><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 120))}…</p></a>`,
+  ).join("\n          ");
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">${esc(TITLE_24_HUB.kicker)}</div>
+        <h1>${esc(TITLE_24_HUB.h1)}</h1>
+        <p class="lede">${esc(TITLE_24_HUB.lede)}</p>
+        <a class="btn btn--primary" href="/contact/">Request Title 24 Compliance Support</a>
+      </div>
+    </div>
+    ${breadcrumb(crumbs)}
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <h2>What Title 24 Covers</h2>
+        <p>${esc(TITLE_24_HUB.intro)}</p>
+        <ul class="check-list">
+          ${TITLE_24_HUB.topics.map((t) => `<li>${esc(t)}</li>`).join("\n          ")}
+        </ul>
+      </div>
+    </section>
+    <section class="section section--light">
+      <div class="container">
+        <h2>Title 24 Services</h2>
+        <div class="card-grid card-grid--2">
+          ${subpageCards}
+        </div>
+      </div>
+    </section>
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>Need Title 24 Compliance for a California Project?</h2>
+        <p>Send us your project details — we respond with a fee proposal within one business day.</p>
+        <a class="btn btn--primary" href="/contact/">Contact Us</a>
+        <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
+      </div>
+    </section>`;
+  const schema = { "@context": "https://schema.org", "@type": "ProfessionalService", "name": "Apex Grid Engineering", "description": TITLE_24_HUB.lede, "url": `${SITE}${url}`, "telephone": "+14804900064", "areaServed": "California", "serviceType": "Title 24 Energy Compliance" };
+  return htmlShell({ title: TITLE_24_HUB.title, description: TITLE_24_HUB.description, canonical: `${SITE}${url}`, schemaJson: [schema, breadcrumbSchema(crumbs)], body });
+}
+
+function title24SubpagePage(page: Title24Page): string {
+  const url = `/title-24/${page.slug}/`;
+  const crumbs = [{ name: "Home", href: "/" }, { name: "Title 24", href: "/title-24/" }, { name: page.h1 }];
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">${esc(page.kicker)}</div>
+        <h1>${esc(page.h1)}</h1>
+        <p class="lede">${esc(page.lede)}</p>
+        <a class="btn btn--primary" href="/contact/">Get Compliance Support</a>
+      </div>
+    </div>
+    ${breadcrumb(crumbs)}
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <h2>What This Covers</h2>
+        <p>${esc(page.intro)}</p>
+        <ul class="check-list">
+          ${page.topics.map((t) => `<li>${esc(t)}</li>`).join("\n          ")}
+        </ul>
+      </div>
+    </section>
+    <section class="section section--light">
+      <div class="container container--narrow">
+        <h2>How Apex Grid Helps</h2>
+        <p>Apex Grid produces Title 24 compliance documentation as part of a full MEP engineering package or as a standalone compliance service. Our engineers are familiar with California's compliance software (CBECC-Com and CBECC-Res), coordinate with the mechanical, electrical, and architectural design, and respond to plan-check comments on compliance issues.</p>
+        <a class="btn btn--primary" href="/contact/">${esc(page.ctaText)}</a>
+      </div>
+    </section>
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>California Project Ready to Move Forward?</h2>
+        <p>We respond within one business day with a fee proposal.</p>
+        <a class="btn btn--primary" href="/contact/">Contact Us</a>
+        <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
+      </div>
+    </section>`;
+  const schema = { "@context": "https://schema.org", "@type": "ProfessionalService", "name": "Apex Grid Engineering", "description": page.lede, "url": `${SITE}${url}`, "telephone": "+14804900064", "areaServed": "California", "serviceType": page.h1 };
+  return htmlShell({ title: page.title, description: page.description, canonical: `${SITE}${url}`, schemaJson: [schema, breadcrumbSchema(crumbs)], body });
+}
+
+// ─── Projects Portfolio Renderers ─────────────────────────────────────────
+
+function projectsHubPage(): string {
+  const url = `/projects/`;
+  const crumbs = [{ name: "Home", href: "/" }, { name: "Projects" }];
+  const catCards = PROJECT_CATEGORY_PAGES.map(
+    (p) =>
+      `<a class="card" href="/projects/${p.slug}/"><h3>${esc(p.h1)}</h3><p>${esc(p.disciplines.join(", "))}</p></a>`,
+  ).join("\n          ");
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">${esc(PROJECTS_HUB.kicker)}</div>
+        <h1>${esc(PROJECTS_HUB.h1)}</h1>
+        <p class="lede">${esc(PROJECTS_HUB.lede)}</p>
+        <a class="btn btn--primary" href="/contact/">Start Your Project</a>
+      </div>
+    </div>
+    ${breadcrumb(crumbs)}
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <p>${esc(PROJECTS_HUB.intro)}</p>
+      </div>
+    </section>
+    <section class="section section--light">
+      <div class="container">
+        <h2>Project Experience by Category</h2>
+        <div class="card-grid card-grid--3">
+          ${catCards}
+        </div>
+      </div>
+    </section>
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>Tell Us About Your Project</h2>
+        <p>Send us your drawings, RFP, or project description and we'll respond with a fee proposal within one business day.</p>
+        <a class="btn btn--primary" href="/contact/">Contact Us</a>
+        <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
+      </div>
+    </section>`;
+  const schema = { "@context": "https://schema.org", "@type": "CollectionPage", "name": PROJECTS_HUB.h1, "description": PROJECTS_HUB.lede, "url": `${SITE}${url}`, "publisher": { "@type": "Organization", "name": "Apex Grid Engineering", "url": SITE } };
+  return htmlShell({ title: PROJECTS_HUB.title, description: PROJECTS_HUB.description, canonical: `${SITE}${url}`, schemaJson: [schema, breadcrumbSchema(crumbs)], body });
+}
+
+function projectCategoryPage(cat: ProjectCategoryPage): string {
+  const url = `/projects/${cat.slug}/`;
+  const crumbs = [{ name: "Home", href: "/" }, { name: "Projects", href: "/projects/" }, { name: cat.h1 }];
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">${esc(cat.kicker)}</div>
+        <h1>${esc(cat.h1)}</h1>
+        <p class="lede">${esc(cat.lede)}</p>
+        <a class="btn btn--primary" href="/contact/">Discuss Your Project</a>
+      </div>
+    </div>
+    ${breadcrumb(crumbs)}
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <h2>Types of Projects</h2>
+        <ul class="check-list">
+          ${cat.projectTypes.map((t) => `<li>${esc(t)}</li>`).join("\n          ")}
+        </ul>
+        ${cat.note ? `<p class="note"><em>${esc(cat.note)}</em></p>` : ""}
+      </div>
+    </section>
+    <section class="section section--light">
+      <div class="container container--narrow">
+        <h2>Engineering Disciplines</h2>
+        <p>This project category involves: ${esc(cat.disciplines.join(", "))}. Apex Grid provides these as coordinated multi-discipline services or as individual discipline engagements depending on project scope.</p>
+        <a class="btn btn--primary" href="/contact/">Send Us Your Project</a>
+      </div>
+    </section>
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>Ready to Work Together?</h2>
+        <p>We respond within one business day with a fee proposal. No project too large or too small.</p>
+        <a class="btn btn--primary" href="/contact/">Contact Us</a>
+        <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
+      </div>
+    </section>`;
+  const schema = { "@context": "https://schema.org", "@type": "ProfessionalService", "name": "Apex Grid Engineering", "description": cat.lede, "url": `${SITE}${url}`, "telephone": "+14804900064", "serviceType": cat.h1 };
+  return htmlShell({ title: cat.title, description: cat.description, canonical: `${SITE}${url}`, schemaJson: [schema, breadcrumbSchema(crumbs)], body });
+}
+
+// ─── Static Standalone Page Renderer ─────────────────────────────────────
+
+function staticStandalonePage(page: StaticPageDef): string {
+  const url = `/${page.dir}/`;
+  const crumbs = [{ name: "Home", href: "/" }, { name: page.h1 }];
+  const sectionsHtml = page.sections
+    .map(
+      (s) => `
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <h2>${esc(s.heading)}</h2>
+        <p>${esc(s.content)}</p>
+        ${s.bullets ? `<ul class="check-list">${s.bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>` : ""}
+      </div>
+    </section>`,
+    )
+    .join("");
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">${esc(page.kicker)}</div>
+        <h1>${esc(page.h1)}</h1>
+        <p class="lede">${esc(page.lede)}</p>
+        <a class="btn btn--primary" href="/contact/">Contact Us</a>
+      </div>
+    </div>
+    ${breadcrumb(crumbs)}
+    ${sectionsHtml}
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>${esc(page.ctaHeading)}</h2>
+        <p>${esc(page.ctaText)}</p>
+        <a class="btn btn--primary" href="/contact/">Get in Touch</a>
+        <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
+      </div>
+    </section>`;
+  const schema = { "@context": "https://schema.org", "@type": "WebPage", "name": page.h1, "description": page.description, "url": `${SITE}${url}`, "publisher": { "@type": "Organization", "name": "Apex Grid Engineering", "url": SITE } };
+  return htmlShell({ title: page.title, description: page.description, canonical: `${SITE}${url}`, schemaJson: [schema, breadcrumbSchema(crumbs)], body });
+}
+
+// ─── HTML Sitemap Renderer ────────────────────────────────────────────────
+
+function htmlSitemapPage(): string {
+  const url = `/sitemap/`;
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">Navigation</div>
+        <h1>Site Map</h1>
+        <p class="lede">A complete index of Apex Grid Engineering's pages, organized by section.</p>
+      </div>
+    </div>
+    <section class="section section--white">
+      <div class="container">
+        <div class="sitemap-grid">
+          <div class="sitemap-col">
+            <h2>Engineering Services</h2>
+            <ul>
+              <li><a href="/structural-engineering/">Structural Engineering</a></li>
+              <li><a href="/mep-engineering/">MEP Engineering</a></li>
+              <li><a href="/mechanical-engineering/">Mechanical Engineering</a></li>
+              <li><a href="/electrical-engineering/">Electrical Engineering</a></li>
+              <li><a href="/plumbing-engineering/">Plumbing Engineering</a></li>
+              <li><a href="/civil-engineering/">Civil Engineering</a></li>
+              <li><a href="/geotechnical-engineering/">Geotechnical Engineering</a></li>
+              <li><a href="/title-24/">California Title 24</a></li>
+              <li><a href="/permit-engineering/">Permit Engineering</a></li>
+              <li><a href="/existing-building-engineering/">Existing Buildings</a></li>
+              <li><a href="/engineering-reports/">Engineering Reports</a></li>
+            </ul>
+            <h2>Industries</h2>
+            <ul>
+              <li><a href="/industries/">All Industries</a></li>
+              <li><a href="/industries/healthcare/">Healthcare</a></li>
+              <li><a href="/industries/multifamily/">Multifamily</a></li>
+              <li><a href="/industries/restaurants/">Restaurants</a></li>
+              <li><a href="/industries/industrial-warehouse/">Industrial &amp; Warehouse</a></li>
+              <li><a href="/industries/data-centers/">Data Centers</a></li>
+              <li><a href="/industries/retail/">Retail</a></li>
+              <li><a href="/industries/government/">Government</a></li>
+              <li><a href="/industries/military-defense/">Military &amp; Defense</a></li>
+              <li><a href="/industries/renewable-energy/">Solar &amp; Renewable Energy</a></li>
+              <li><a href="/industries/commercial-office/">Commercial Office</a></li>
+              <li><a href="/industries/hospitality/">Hospitality</a></li>
+              <li><a href="/industries/education/">Education</a></li>
+              <li><a href="/industries/life-science/">Life Science</a></li>
+              <li><a href="/industries/senior-living/">Senior Living</a></li>
+              <li><a href="/industries/cold-storage/">Cold Storage</a></li>
+            </ul>
+          </div>
+          <div class="sitemap-col">
+            <h2>Who We Work With</h2>
+            <ul>
+              <li><a href="/who-we-work-with/">All Partners</a></li>
+              <li><a href="/who-we-work-with/architects/">Architects</a></li>
+              <li><a href="/who-we-work-with/general-contractors/">General Contractors</a></li>
+              <li><a href="/who-we-work-with/developers/">Developers</a></li>
+              <li><a href="/who-we-work-with/property-managers/">Property Managers</a></li>
+              <li><a href="/who-we-work-with/government-contractors/">Government Contractors</a></li>
+            </ul>
+            <h2>Project Types</h2>
+            <ul>
+              <li><a href="/project-types/">All Project Types</a></li>
+              <li><a href="/project-types/new-construction/">New Construction</a></li>
+              <li><a href="/project-types/tenant-improvements/">Tenant Improvements</a></li>
+              <li><a href="/project-types/renovations/">Renovations</a></li>
+              <li><a href="/project-types/adaptive-reuse/">Adaptive Reuse</a></li>
+            </ul>
+            <h2>Projects</h2>
+            <ul>
+              <li><a href="/projects/">Project Experience</a></li>
+              <li><a href="/projects/structural/">Structural Projects</a></li>
+              <li><a href="/projects/mep/">MEP Projects</a></li>
+              <li><a href="/projects/civil/">Civil Projects</a></li>
+              <li><a href="/projects/government/">Government Projects</a></li>
+              <li><a href="/projects/military/">Military Projects</a></li>
+              <li><a href="/projects/healthcare/">Healthcare Projects</a></li>
+              <li><a href="/projects/multifamily/">Multifamily Projects</a></li>
+              <li><a href="/projects/industrial/">Industrial Projects</a></li>
+            </ul>
+            <h2>Resources</h2>
+            <ul>
+              <li><a href="/resources/">Engineering Resources</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/guides/">Engineering Guides</a></li>
+              <li><a href="/engineering-glossary/">Engineering Glossary</a></li>
+            </ul>
+          </div>
+          <div class="sitemap-col">
+            <h2>Key Locations</h2>
+            <ul>
+              <li><a href="/locations/">All Service Areas</a></li>
+              <li><a href="/locations/arizona/">Arizona</a></li>
+              <li><a href="/locations/california/">California</a></li>
+              <li><a href="/locations/texas/">Texas</a></li>
+              <li><a href="/locations/florida/">Florida</a></li>
+              <li><a href="/locations/virginia/">Virginia</a></li>
+              <li><a href="/locations/north-carolina/">North Carolina</a></li>
+              <li><a href="/locations/arizona/phoenix/">Phoenix</a></li>
+              <li><a href="/locations/arizona/scottsdale/">Scottsdale</a></li>
+              <li><a href="/locations/california/los-angeles/">Los Angeles</a></li>
+              <li><a href="/locations/california/san-diego/">San Diego</a></li>
+              <li><a href="/locations/texas/dallas/">Dallas</a></li>
+              <li><a href="/locations/texas/houston/">Houston</a></li>
+              <li><a href="/locations/texas/austin/">Austin</a></li>
+              <li><a href="/locations/florida/miami/">Miami</a></li>
+              <li><a href="/locations/virginia/northern-virginia/">Northern Virginia</a></li>
+            </ul>
+            <h2>About &amp; Company</h2>
+            <ul>
+              <li><a href="/about/">About Apex Grid</a></li>
+              <li><a href="/military/">Military &amp; Veterans</a></li>
+              <li><a href="/capabilities/">Capabilities</a></li>
+              <li><a href="/government-contracting/">Government Contracting</a></li>
+              <li><a href="/professional-engineering/">Professional Engineering</a></li>
+              <li><a href="/quality-control/">Quality Control</a></li>
+              <li><a href="/engineering-process/">Our Process</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
+              <li><a href="/intake-requirements/">Intake Requirements</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>`;
+  const schema = { "@context": "https://schema.org", "@type": "WebPage", "name": "Site Map | Apex Grid Engineering", "url": `${SITE}${url}`, "publisher": { "@type": "Organization", "name": "Apex Grid Engineering", "url": SITE } };
+  return htmlShell({ title: "Site Map | Apex Grid Engineering", description: "Complete index of Apex Grid Engineering pages — engineering services, industries, locations, resources, and company information.", canonical: `${SITE}${url}`, schemaJson: [schema], body });
+}
+
+// ─── Discipline Hub + Subpage Renderers ───────────────────────────────────
+
+function disciplineHubPage(hub: DisciplineHub): string {
+  const url = `/${hub.slug}/`;
+  const crumbs = [{ name: "Home", href: "/" }, { name: hub.h1 }];
+  const subpageCards = hub.subpages
+    .map(
+      (sp) =>
+        `<a class="card" href="/${hub.slug}/${sp.slug}/"><div class="label">${esc(sp.kicker)}</div><h3>${esc(sp.h1)}</h3><p>${esc(sp.lede.slice(0, 120))}…</p></a>`,
+    )
+    .join("\n          ");
+
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">${esc(hub.kicker)}</div>
+        <h1>${esc(hub.h1)}</h1>
+        <p class="lede">${esc(hub.lede)}</p>
+        <a class="btn btn--primary" href="/contact/">Request Engineering Support</a>
+      </div>
+    </div>
+
+    ${breadcrumb(crumbs)}
+
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <h2>What We Engineer</h2>
+        <p>${esc(hub.intro)}</p>
+        <ul class="check-list">
+          ${hub.capabilities.map((c) => `<li>${esc(c)}</li>`).join("\n          ")}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--light">
+      <div class="container">
+        <h2>${esc(hub.h1)} Services</h2>
+        <div class="card-grid card-grid--3">
+          ${subpageCards}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <h2>About Apex Grid Engineering</h2>
+        <p>Apex Grid Engineering is a multi-discipline firm licensed in 49 states — headquartered in Queen Creek, Arizona, with 20+ licensed professional engineers across structural, MEP, civil, and geotechnical disciplines. We provide ${esc(hub.h1.toLowerCase())} as a standalone service or as part of a coordinated multi-discipline package.</p>
+        <p>We work from architectural PDFs, contractor sketches, or existing CAD files and produce stamped engineering documents and permit packages that building departments accept. One business day turnaround on fee proposals.</p>
+        <a class="btn btn--primary" href="/contact/">Get a Proposal</a>
+      </div>
+    </section>
+
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>Ready to Start?</h2>
+        <p>Send us your drawings or describe your project — we respond with a fee proposal within one business day.</p>
+        <a class="btn btn--primary" href="/contact/">Contact Us</a>
+        <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
+      </div>
+    </section>`;
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Apex Grid Engineering",
+    "description": hub.lede,
+    "url": `${SITE}${url}`,
+    "telephone": "+14804900064",
+    "address": { "@type": "PostalAddress", "addressLocality": "Queen Creek", "addressRegion": "AZ", "postalCode": "85142" },
+    "serviceType": hub.h1,
+  };
+
+  return htmlShell({
+    title: hub.title,
+    description: hub.description,
+    canonical: `${SITE}${url}`,
+    schemaJson: [schema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+function disciplineSubpagePage(hub: DisciplineHub, sp: DisciplineSubpage): string {
+  const url = `/${hub.slug}/${sp.slug}/`;
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: hub.h1, href: `/${hub.slug}/` },
+    { name: sp.h1 },
+  ];
+  const otherSubpages = hub.subpages.filter((s) => s.slug !== sp.slug).slice(0, 4);
+  const relatedLinks = otherSubpages
+    .map((s) => `<a class="card" href="/${hub.slug}/${s.slug}/"><h3>${esc(s.h1)}</h3></a>`)
+    .join("\n          ");
+
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">${esc(sp.kicker)}</div>
+        <h1>${esc(sp.h1)}</h1>
+        <p class="lede">${esc(sp.lede)}</p>
+        <a class="btn btn--primary" href="/contact/">Request Engineering Support</a>
+      </div>
+    </div>
+
+    ${breadcrumb(crumbs)}
+
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <h2>What This Engineering Scope Covers</h2>
+        <ul class="check-list">
+          ${sp.scope.map((s) => `<li>${esc(s)}</li>`).join("\n          ")}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--light">
+      <div class="container container--narrow">
+        <h2>What You Get</h2>
+        <ul class="check-list">
+          ${sp.deliverables.map((d) => `<li>${esc(d)}</li>`).join("\n          ")}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <h2>How Apex Grid Handles This</h2>
+        <p>Apex Grid Engineering is a multi-discipline firm licensed in 49 states. We provide ${esc(sp.h1.toLowerCase())} as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract. Our engineers produce PE-stamped permit packages that building departments accept — and we respond to plan check comments as part of the scope.</p>
+        <a class="btn btn--primary" href="/contact/">Send Your Project Details</a>
+      </div>
+    </section>
+
+    ${relatedLinks ? `
+    <section class="section section--light">
+      <div class="container">
+        <h2>More ${esc(hub.h1)} Services</h2>
+        <div class="card-grid card-grid--4">
+          ${relatedLinks}
+        </div>
+      </div>
+    </section>` : ""}
+
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>Ready to Move Forward?</h2>
+        <p>PE-stamped engineering, on your schedule, from engineers who've done this before.</p>
+        <a class="btn btn--primary" href="/contact/">Get a Proposal</a>
+        <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
+      </div>
+    </section>`;
+
+  const svcSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Apex Grid Engineering",
+    "description": sp.lede,
+    "url": `${SITE}${url}`,
+    "telephone": "+14804900064",
+    "address": { "@type": "PostalAddress", "addressLocality": "Queen Creek", "addressRegion": "AZ", "postalCode": "85142" },
+    "serviceType": sp.h1,
+  };
+
+  return htmlShell({
+    title: sp.title,
+    description: sp.description,
+    canonical: `${SITE}${url}`,
+    schemaJson: [svcSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+function miscPage(page: MiscPage): string {
+  const url = `/${page.slug}/`;
+  const crumbs = [{ name: "Home", href: "/" }, { name: page.h1 }];
+  const sectionsHtml = page.sections
+    .map(
+      (s) => `
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <h2>${esc(s.heading)}</h2>
+        <p>${esc(s.content)}</p>
+        ${s.bullets ? `<ul class="check-list">${s.bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>` : ""}
+      </div>
+    </section>`,
+    )
+    .join("");
+
+  const body = `
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">${esc(page.kicker)}</div>
+        <h1>${esc(page.h1)}</h1>
+        <p class="lede">${esc(page.lede)}</p>
+        <a class="btn btn--primary" href="/contact/">Contact Us</a>
+      </div>
+    </div>
+
+    ${breadcrumb(crumbs)}
+    ${sectionsHtml}
+
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>${esc(page.ctaHeading)}</h2>
+        <p>${esc(page.ctaText)}</p>
+        <a class="btn btn--primary" href="/contact/">Get in Touch</a>
+        <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
+      </div>
+    </section>`;
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": page.h1,
+    "description": page.description,
+    "url": `${SITE}${url}`,
+    "publisher": { "@type": "Organization", "name": "Apex Grid Engineering", "url": SITE },
+  };
+
+  return htmlShell({
+    title: page.title,
+    description: page.description,
+    canonical: `${SITE}${url}`,
+    schemaJson: [schema, breadcrumbSchema(crumbs)],
+    body,
+  });
 }
 
 async function main() {
@@ -600,9 +2161,218 @@ async function main() {
     fs.writeFileSync(path.join(pdir, "index.html"), blogPostPage(p));
     pages++;
   }
+  // Resources / Knowledge Center
+  const resourcesDir = path.join(PUBLIC, "resources");
+  fs.rmSync(resourcesDir, { recursive: true, force: true });
+  fs.mkdirSync(resourcesDir, { recursive: true });
+  fs.writeFileSync(path.join(resourcesDir, "index.html"), resourcesHubPage());
+  pages++;
+  for (const article of RESOURCE_ARTICLES) {
+    assertSlug(article.slug);
+    const adir = path.join(resourcesDir, article.slug);
+    fs.mkdirSync(adir, { recursive: true });
+    fs.writeFileSync(path.join(adir, "index.html"), resourceArticlePage(article));
+    pages++;
+  }
+
+  // Who We Work With
+  const wwwDir = path.join(PUBLIC, "who-we-work-with");
+  fs.rmSync(wwwDir, { recursive: true, force: true });
+  fs.mkdirSync(wwwDir, { recursive: true });
+  fs.writeFileSync(path.join(wwwDir, "index.html"), whoWeWorkWithHubPage());
+  pages++;
+  for (const cp of CLIENT_PAGES) {
+    assertSlug(cp.slug);
+    const cdir = path.join(wwwDir, cp.slug);
+    fs.mkdirSync(cdir, { recursive: true });
+    fs.writeFileSync(path.join(cdir, "index.html"), clientPage(cp));
+    pages++;
+  }
+
+  // Project Types
+  const ptDir = path.join(PUBLIC, "project-types");
+  fs.rmSync(ptDir, { recursive: true, force: true });
+  fs.mkdirSync(ptDir, { recursive: true });
+  fs.writeFileSync(path.join(ptDir, "index.html"), projectTypesHubPage());
+  pages++;
+  for (const pt of PROJECT_TYPE_PAGES) {
+    assertSlug(pt.slug);
+    const pdir = path.join(ptDir, pt.slug);
+    fs.mkdirSync(pdir, { recursive: true });
+    fs.writeFileSync(path.join(pdir, "index.html"), projectTypePage(pt));
+    pages++;
+  }
+
+  // Existing Building Engineering
+  const ebDir = path.join(PUBLIC, "existing-building-engineering");
+  fs.rmSync(ebDir, { recursive: true, force: true });
+  fs.mkdirSync(ebDir, { recursive: true });
+  fs.writeFileSync(path.join(ebDir, "index.html"), existingBuildingHubPage());
+  pages++;
+  for (const eb of EXISTING_BUILDING_PAGES) {
+    assertSlug(eb.slug);
+    const edir = path.join(ebDir, eb.slug);
+    fs.mkdirSync(edir, { recursive: true });
+    fs.writeFileSync(path.join(edir, "index.html"), existingBuildingPage(eb));
+    pages++;
+  }
+
+  // Permit Engineering
+  const peDir = path.join(PUBLIC, "permit-engineering");
+  fs.rmSync(peDir, { recursive: true, force: true });
+  fs.mkdirSync(peDir, { recursive: true });
+  fs.writeFileSync(path.join(peDir, "index.html"), permitHubPage());
+  pages++;
+  for (const pp of PERMIT_PAGES) {
+    assertSlug(pp.slug);
+    const pdir = path.join(peDir, pp.slug);
+    fs.mkdirSync(pdir, { recursive: true });
+    fs.writeFileSync(path.join(pdir, "index.html"), permitPage(pp));
+    pages++;
+  }
+
+  // Industry × Discipline pages
+  const indDisciplineDir = path.join(PUBLIC, "industries");
+  // Don't wipe the whole /industries dir — the React SPA may also serve routes
+  // under it. Instead write only the sub-paths we own.
+  for (const idp of INDUSTRY_DISCIPLINE_PAGES) {
+    const segments = idp.segments;
+    const dir = path.join(indDisciplineDir, ...segments);
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, "index.html"), industryDisciplinePage(idp));
+    pages++;
+  }
+
+  // Location × Service pages (non-curated cities + new service slugs)
+  for (const lsp of LOCATION_SERVICE_PAGES) {
+    assertSlug(lsp.stateSlug);
+    assertSlug(lsp.citySlug);
+    assertSlug(lsp.serviceSlug);
+    const dir = path.join(OUT, lsp.stateSlug, lsp.citySlug, lsp.serviceSlug);
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, "index.html"), locationServicePage(lsp));
+    pages++;
+  }
+
+  // Guides pages
+  const guidesDir = path.join(PUBLIC, "guides");
+  fs.rmSync(guidesDir, { recursive: true, force: true });
+  fs.mkdirSync(guidesDir, { recursive: true });
+  fs.writeFileSync(path.join(guidesDir, "index.html"), guidesHubPage());
+  pages++;
+  for (const gp of GUIDE_PAGES) {
+    assertSlug(gp.slug);
+    const dir = path.join(guidesDir, gp.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, "index.html"), guidePage(gp));
+    pages++;
+  }
+
+  // Solutions pages
+  const solutionsDir = path.join(PUBLIC, "solutions");
+  fs.rmSync(solutionsDir, { recursive: true, force: true });
+  fs.mkdirSync(solutionsDir, { recursive: true });
+  fs.writeFileSync(path.join(solutionsDir, "index.html"), solutionsHubPage());
+  pages++;
+  const governmentDir = path.join(PUBLIC, "government");
+  fs.rmSync(governmentDir, { recursive: true, force: true });
+  fs.mkdirSync(governmentDir, { recursive: true });
+  fs.writeFileSync(path.join(governmentDir, "index.html"), governmentHubPage());
+  pages++;
+  for (const sp of SOLUTION_PAGES) {
+    assertSlug(sp.slug);
+    assertSlug(sp.dir);
+    const dir = path.join(PUBLIC, sp.dir, sp.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, "index.html"), solutionPage(sp));
+    pages++;
+  }
+
+  // Structural extended subpages (additional spec-slug pages under /structural-engineering/)
+  const structuralHubDir = path.join(PUBLIC, "structural-engineering");
+  for (const sp of STRUCTURAL_EXTENDED_PAGES) {
+    assertSlug(sp.slug);
+    const spDir = path.join(structuralHubDir, sp.slug);
+    if (!fs.existsSync(spDir)) fs.mkdirSync(spDir, { recursive: true });
+    fs.writeFileSync(path.join(spDir, "index.html"), structuralExtendedPage(sp));
+    pages++;
+  }
+
+  // Title 24 hub + subpages
+  const title24Dir = path.join(PUBLIC, "title-24");
+  fs.rmSync(title24Dir, { recursive: true, force: true });
+  fs.mkdirSync(title24Dir, { recursive: true });
+  fs.writeFileSync(path.join(title24Dir, "index.html"), title24HubPage());
+  pages++;
+  for (const tp of TITLE_24_PAGES) {
+    assertSlug(tp.slug);
+    const tpDir = path.join(title24Dir, tp.slug);
+    fs.mkdirSync(tpDir, { recursive: true });
+    fs.writeFileSync(path.join(tpDir, "index.html"), title24SubpagePage(tp));
+    pages++;
+  }
+
+  // Projects portfolio hub + category pages
+  const projectsDir = path.join(PUBLIC, "projects");
+  fs.rmSync(projectsDir, { recursive: true, force: true });
+  fs.mkdirSync(projectsDir, { recursive: true });
+  fs.writeFileSync(path.join(projectsDir, "index.html"), projectsHubPage());
+  pages++;
+  for (const cat of PROJECT_CATEGORY_PAGES) {
+    assertSlug(cat.slug);
+    const catDir = path.join(projectsDir, cat.slug);
+    fs.mkdirSync(catDir, { recursive: true });
+    fs.writeFileSync(path.join(catDir, "index.html"), projectCategoryPage(cat));
+    pages++;
+  }
+
+  // Static standalone pages (engineering-reports, etc.)
+  for (const sp of STATIC_STANDALONE_PAGES) {
+    const spDir = path.join(PUBLIC, sp.dir);
+    fs.rmSync(spDir, { recursive: true, force: true });
+    fs.mkdirSync(spDir, { recursive: true });
+    fs.writeFileSync(path.join(spDir, "index.html"), staticStandalonePage(sp));
+    pages++;
+  }
+
+  // HTML sitemap page
+  const sitemapPageDir = path.join(PUBLIC, "sitemap");
+  fs.rmSync(sitemapPageDir, { recursive: true, force: true });
+  fs.mkdirSync(sitemapPageDir, { recursive: true });
+  fs.writeFileSync(path.join(sitemapPageDir, "index.html"), htmlSitemapPage());
+  pages++;
+
+  // Discipline hub + subservice pages
+  for (const hub of DISCIPLINE_HUBS) {
+    assertSlug(hub.slug);
+    const hubDir = path.join(PUBLIC, hub.slug);
+    fs.rmSync(hubDir, { recursive: true, force: true });
+    fs.mkdirSync(hubDir, { recursive: true });
+    fs.writeFileSync(path.join(hubDir, "index.html"), disciplineHubPage(hub));
+    pages++;
+    for (const sp of hub.subpages) {
+      assertSlug(sp.slug);
+      const spDir = path.join(hubDir, sp.slug);
+      fs.mkdirSync(spDir, { recursive: true });
+      fs.writeFileSync(path.join(spDir, "index.html"), disciplineSubpagePage(hub, sp));
+      pages++;
+    }
+  }
+
+  // Misc standalone pages (capabilities, government-contracting, trust pages)
+  for (const mp of MISC_PAGES) {
+    assertSlug(mp.slug);
+    const mpDir = path.join(PUBLIC, mp.slug);
+    fs.rmSync(mpDir, { recursive: true, force: true });
+    fs.mkdirSync(mpDir, { recursive: true });
+    fs.writeFileSync(path.join(mpDir, "index.html"), miscPage(mp));
+    pages++;
+  }
+
   writeSitemap(states, cities, directory);
   const dirCount = Object.values(directory).reduce((a, v) => a + v.length, 0);
-  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${BLOG_POSTS.length} blog posts + sitemap.xml`);
+  const disciplineSubpageCount = DISCIPLINE_HUBS.reduce((a, h) => a + h.subpages.length, 0);
+  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${INDUSTRY_DISCIPLINE_PAGES.length} industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, 1 sitemap page + sitemap.xml`);
 }
 
 main().catch((e) => {

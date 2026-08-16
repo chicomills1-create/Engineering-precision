@@ -5,3 +5,4 @@
 - [Signed unsubscribe links](unsubscribe-links.md) — deterministic HMAC of email signed with UNSUBSCRIBE_SECRET||SESSION_SECRET; rotating the secret kills old links; remember drizzle push for new columns.
 - [Callback bot gate](callback-bot-gate.md) — Turnstile gates callback-chat; dev falls back to always-pass test keys, so real TURNSTILE keys are required before production.
 - [API healthcheck root](api-healthcheck-root.md) — deploy healthchecks probe the API artifact root (/api), so the router must serve 200 at GET /; prod also needs TURNSTILE_SECRET_KEY to boot.
+- [Wikipedia image download](wikipedia-image-download.md) — Wikimedia CDN thumb URLs 400/403 in Replit; use Wikipedia API imageinfo to get canonical file URL, then fetch that; add 1-2s delays to avoid 429.

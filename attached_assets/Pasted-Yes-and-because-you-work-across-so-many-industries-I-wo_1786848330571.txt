@@ -1,0 +1,1332 @@
+Yes — and because you work across so many industries, I would not build Apex Grid like a normal 10-page engineering website. I would build it like a national engineering authority platform with three major SEO layers working together:
+
+Services → Industries → Locations
+
+That gives you hundreds of legitimate search combinations without turning the site into spam.
+
+Right now, the public site mainly presents Apex Grid as an integrated Structural, MEP, and Civil engineering firm, which is a strong foundation, but the indexed footprint is still very small. The opportunity is to take that broad positioning and turn it into dozens of highly specific commercial-intent pages.
+
+The SEO structure I would build
+
+Think of the site as four interconnected pillars:
+
+1. Core engineering services
+2. Industries / project types
+3. Locations / jurisdictions
+4. Authority content / projects / resources
+
+Every important page should connect into the other three.
+
+So somebody landing on:
+
+Healthcare Engineering
+
+should naturally be able to reach:
+
+Healthcare MEP Engineering
+Healthcare Structural Engineering
+Healthcare Civil Engineering
+Healthcare Engineering in California
+Healthcare Engineering in Arizona
+Hospital MEP Engineering
+Medical Office Building Engineering
+Healthcare Project Case Studies
+
+That creates real topical depth.
+
+1. CORE SERVICE ARCHITECTURE
+
+Your primary service hierarchy should be much deeper than Structural / MEP / Civil.
+
+I would create this:
+
+Structural Engineering
+
+/structural-engineering/
+
+Then supporting pages:
+
+/structural-engineering/structural-design/
+/structural-engineering/seismic-engineering/
+/structural-engineering/seismic-retrofit/
+/structural-engineering/foundation-design/
+/structural-engineering/structural-calculations/
+/structural-engineering/existing-building-evaluation/
+/structural-engineering/structural-inspections/
+/structural-engineering/load-bearing-wall-removal/
+/structural-engineering/steel-design/
+/structural-engineering/concrete-design/
+/structural-engineering/wood-framing/
+/structural-engineering/masonry-design/
+/structural-engineering/tenant-improvement/
+/structural-engineering/additions-renovations/
+/structural-engineering/equipment-anchorage/
+/structural-engineering/solar-structural-analysis/
+/structural-engineering/permit-plans/
+
+These are not blog articles. These are money pages.
+
+Someone searching “structural engineer for wall removal Phoenix” should land on a page built to convert them.
+
+2. MEP SHOULD BE ITS OWN LARGE SILO
+
+Use:
+
+/mep-engineering/
+
+Then:
+
+/mechanical-engineering/
+/electrical-engineering/
+/plumbing-engineering/
+
+And under Mechanical:
+
+/mechanical-engineering/hvac-design/
+/mechanical-engineering/load-calculations/
+/mechanical-engineering/ventilation-design/
+/mechanical-engineering/exhaust-systems/
+/mechanical-engineering/commercial-kitchen-ventilation/
+/mechanical-engineering/industrial-ventilation/
+/mechanical-engineering/cleanroom-hvac/
+/mechanical-engineering/data-center-cooling/
+
+Electrical:
+
+/electrical-engineering/power-distribution/
+/electrical-engineering/load-calculations/
+/electrical-engineering/lighting-design/
+/electrical-engineering/one-line-diagrams/
+/electrical-engineering/emergency-power/
+/electrical-engineering/generator-design/
+/electrical-engineering/ev-charging/
+/electrical-engineering/solar-pv/
+/electrical-engineering/battery-storage/
+
+Plumbing:
+
+/plumbing-engineering/domestic-water/
+/plumbing-engineering/sanitary-waste/
+/plumbing-engineering/gas-piping/
+/plumbing-engineering/medical-gas/
+/plumbing-engineering/commercial-kitchen-plumbing/
+/plumbing-engineering/hot-water-systems/
+
+And then combined pages:
+
+/mep-engineering/multifamily/
+/mep-engineering/tenant-improvement/
+/mep-engineering/commercial/
+/mep-engineering/healthcare/
+/mep-engineering/industrial/
+
+3. CIVIL NEEDS THE SAME DEPTH
+
+Your Civil section should not simply say “Civil Engineering.”
+
+Use:
+
+/civil-engineering/
+
+Then:
+
+/civil-engineering/site-development/
+/civil-engineering/grading-drainage/
+/civil-engineering/stormwater/
+/civil-engineering/utility-design/
+/civil-engineering/parking-lot-design/
+/civil-engineering/roadway-design/
+/civil-engineering/erosion-control/
+/civil-engineering/site-plans/
+/civil-engineering/land-development/
+/civil-engineering/ada-site-compliance/
+
+If you coordinate survey work:
+
+/land-survey-coordination/
+
+I would be careful not to call Apex Grid a surveying firm unless you are actually offering surveying under the proper licensing structure. Position that one accurately.
+
+4. GEOTECHNICAL SHOULD BECOME A FULL SERVICE CATEGORY TOO
+
+Because you're increasingly bidding geotechnical work, I would absolutely give that its own SEO silo:
+
+/geotechnical-engineering/
+
+Supporting pages:
+
+/geotechnical-engineering/soil-borings/
+/geotechnical-engineering/subsurface-investigation/
+/geotechnical-engineering/foundation-recommendations/
+/geotechnical-engineering/pavement-design/
+/geotechnical-engineering/soil-testing/
+/geotechnical-engineering/earthwork-compaction/
+/geotechnical-engineering/geotechnical-reports/
+/geotechnical-engineering/commercial-development/
+/geotechnical-engineering/multifamily/
+/geotechnical-engineering/government-projects/
+
+5. TITLE 24 / ENERGY COMPLIANCE
+
+I would also create:
+
+/title-24/
+
+Then:
+
+/title-24/residential/
+/title-24/commercial/
+/energy-compliance/
+
+This gives you a strong California acquisition channel.
+
+6. YOUR INDUSTRY SECTION SHOULD BE MASSIVE
+
+This is where Apex can really separate itself.
+
+The industries you gave me are already an excellent base.
+
+I would create:
+
+/industries/healthcare/
+/industries/data-centers/
+/industries/tenant-improvement/
+/industries/industrial-warehouse/
+/industries/multifamily/
+/industries/retail-hospitality/
+/industries/education/
+/industries/life-science/
+/industries/government-civic/
+/industries/military-defense/
+/industries/religious-worship/
+/industries/commercial-office/
+/industries/restaurants-food-service/
+/industries/senior-living/
+/industries/solar-renewable-energy/
+/industries/ev-charging-automotive/
+/industries/cold-storage-food-processing/
+/industries/self-storage/
+/industries/parking-structures/
+/industries/aviation-hangars/
+/industries/fitness-recreation/
+/industries/breweries-beverage/
+/industries/telecommunications/
+/industries/agriculture-cannabis/
+
+And yes, we can add quite a few more.
+
+I would also add:
+
+Hotels & Resorts
+Mixed-Use Development
+Affordable Housing
+Student Housing
+Manufacturing
+Distribution Centers
+Logistics Facilities
+Mission-Critical Facilities
+Public Safety / Fire Stations
+Police & Emergency Operations Centers
+Courthouses
+Correctional Facilities
+Municipal Buildings
+Federal Facilities
+Veterans Facilities
+Sports Facilities
+Stadiums & Arenas
+Aquatic Centers
+Church Schools / Religious Campuses
+Grocery Stores
+Convenience Stores / Fuel Stations
+Car Dealerships
+Auto Repair / Service Centers
+Laboratories
+Pharmaceutical Manufacturing
+Semiconductor / Advanced Manufacturing
+Microelectronics
+Water / Wastewater Facilities
+Utility Infrastructure
+Pump Stations
+Fire Stations
+Emergency Response Facilities
+Banks / Financial Institutions
+Cannabis Cultivation
+Food Manufacturing
+Commercial Laundries
+Veterinary Facilities
+Dental Offices
+Urgent Care
+Surgery Centers
+Behavioral Health Facilities
+Skilled Nursing Facilities
+Childcare / Daycare
+Community Centers
+Museums & Cultural Facilities
+Entertainment Venues
+
+You don't necessarily need all 60 live immediately.
+
+Build the strongest 20–25 first, then expand.
+
+7. HOW EACH INDUSTRY PAGE SHOULD BE BUILT
+
+This is where most engineering websites fail.
+
+They make a page that says:
+
+We provide engineering solutions for healthcare.
+
+Then 300 words of generic fluff.
+
+Do not do that.
+
+Each industry page should have actual engineering depth.
+
+For example:
+
+Healthcare Engineering
+
+H1:
+Integrated Structural, MEP & Civil Engineering for Healthcare Facilities
+
+Then:
+
+Healthcare facilities we support
+
+Hospitals
+Medical office buildings
+Outpatient clinics
+Urgent care
+Ambulatory surgery centers
+Imaging centers
+Dental facilities
+Behavioral health
+Skilled nursing
+Specialty clinics
+
+Structural engineering
+
+Equipment support
+Rooftop equipment
+Structural modifications
+Seismic upgrades
+Equipment anchorage
+Renovations
+Existing-condition evaluation
+
+Mechanical
+
+HVAC zoning
+Outside-air requirements
+Pressure relationships
+Isolation spaces
+Exhaust
+Equipment cooling
+Redundancy considerations
+
+Electrical
+
+Essential power
+Emergency systems
+Lighting
+Load calculations
+Distribution
+Generator integration
+Medical equipment power
+
+Plumbing
+
+Domestic water
+Sanitary systems
+Hot water
+Medical gas where applicable
+Specialty waste systems
+
+Civil
+
+Site accessibility
+Drainage
+Utilities
+Parking
+Emergency access
+
+Project types
+
+New construction
+Renovation
+Tenant improvement
+Expansion
+Equipment replacement
+Code upgrades
+
+Deliverables
+
+Permit drawings
+Calculations
+Specifications where applicable
+Plan-check responses
+Signed and sealed engineering documents
+
+CTA
+
+Need engineering for a healthcare facility? Upload your drawings for a scope and fee review.
+
+That page can rank for dozens of related terms naturally.
+
+8. DO THIS FOR EVERY INDUSTRY
+
+Your current descriptions are perfect opening positioning lines, not entire pages.
+
+Example:
+
+Data Centers
+
+Your current statement:
+
+N+1 cooling redundancy, high-density power distribution, and pre-action fire suppression.
+
+Keep that.
+
+Then expand it into sections around:
+
+Structural
+Electrical
+Mechanical
+Civil
+Redundancy
+UPS/generator systems
+Equipment loads
+Cooling systems
+Equipment anchorage
+Battery systems
+Floor loading
+Utility coordination
+Expansion planning
+
+Military & Defense
+
+This one could become extremely valuable.
+
+You already have:
+
+Veteran-owned firm engineering to UFC criteria — ATFP standoff and hardening, secure facilities, and DoD energy mandates for installations and support facilities.
+
+Build that into a full section:
+
+/industries/military-defense/
+
+Then potentially:
+
+/military-engineering/structural/
+/military-engineering/mep/
+/military-engineering/civil/
+/military-engineering/geotechnical/
+
+And pages around project types:
+
+Barracks
+Dormitories
+Hangars
+Training facilities
+Administrative buildings
+Vehicle maintenance
+Parking/lot improvements
+Security facilities
+Utility infrastructure
+Youth/community facilities
+Warehouses
+
+Given your pursuit of federal work, I would make Government and Military two of the strongest sections on the entire site.
+
+9. BUILD A CLIENT-TYPE SEO SECTION
+
+This is one of the highest-value additions.
+
+Create:
+
+/who-we-work-with/architects/
+/who-we-work-with/general-contractors/
+/who-we-work-with/developers/
+/who-we-work-with/property-managers/
+/who-we-work-with/builders/
+/who-we-work-with/owners/
+/who-we-work-with/government-contractors/
+/who-we-work-with/design-build-firms/
+
+This targets the people who actually award engineering work.
+
+For example:
+
+Engineering Support for Architects
+
+H1:
+
+Structural, MEP & Civil Engineering for Architectural Firms
+
+Content:
+
+Coordinated CAD/Revit workflow
+Design-development support
+Permit packages
+Redlines
+City comments
+RFI support
+Multi-discipline coordination
+PE stamping/sealing
+Overflow engineering support
+Recurring project relationships
+
+CTA:
+
+Send us your architectural set for review.
+
+10. LOCATION SEO
+
+This is where you can eventually build enormous search visibility.
+
+Do not start with 1,000 city pages.
+
+Start with the states and metros where you actually pursue work.
+
+Example structure:
+
+/locations/arizona/
+/locations/california/
+/locations/texas/
+/locations/florida/
+/locations/virginia/
+/locations/north-carolina/
+
+Then:
+
+/locations/arizona/phoenix/
+/locations/arizona/scottsdale/
+/locations/arizona/paradise-valley/
+/locations/arizona/tucson/
+
+California:
+
+Los Angeles
+San Diego
+Sacramento
+San Francisco
+Orange County
+Palo Alto
+
+Texas:
+
+Dallas
+Austin
+San Antonio
+Houston
+Fort Worth
+
+Florida:
+
+Miami
+Tampa
+Orlando
+Jacksonville
+
+Each city page should be real.
+
+Not:
+
+Apex Grid provides engineering in Phoenix.
+
+Instead:
+
+Structural Engineering in Phoenix
+
+Types of projects
+Typical local project needs
+Renovations
+Additions
+Commercial
+Multifamily
+Tenant improvements
+Industrial
+Site development
+
+Then link:
+
+Structural Engineering
+MEP
+Civil
+Geotechnical
+Industries
+Projects in Arizona
+
+11. DON'T BUILD EVERY SERVICE × CITY COMBINATION YET
+
+Eventually you could have:
+
+/phoenix-structural-engineer/
+
+but I would first establish:
+
+State page → City page → Service page
+
+before generating hundreds of combinations.
+
+Otherwise you risk creating thin pages.
+
+12. PROJECT CASE STUDIES
+
+This could become your strongest SEO asset.
+
+Every meaningful project should eventually get a page.
+
+Example:
+
+/projects/multifamily-structural-mep-paradise-valley-az/
+
+Page structure:
+
+Project Type
+Multifamily Residential
+
+Location
+Paradise Valley, Arizona
+
+Engineering Disciplines
+Structural + MEP
+
+Project Challenge
+
+Our Engineering Scope
+
+Structural Solution
+
+MEP Solution
+
+Coordination
+
+Deliverables
+
+Outcome
+
+Then links to:
+
+Multifamily Engineering
+Arizona Engineering
+Structural Engineering
+MEP Engineering
+
+This creates an internal authority web.
+
+13. BUILD PROJECT FILTERS
+
+On /projects/ allow users to filter by:
+
+Industry
+Discipline
+State
+Project type
+
+Example:
+
+Industry: Healthcare
+Service: MEP
+State: California
+
+This isn't only user-friendly; it reinforces your site's information architecture.
+
+14. HOMEPAGE SEO REBUILD
+
+The homepage title currently does a decent job communicating MEP, Structural and Civil.
+
+I would strengthen it to:
+
+Structural, MEP, Civil & Geotechnical Engineering | Apex Grid Engineering
+
+H1:
+
+Integrated Engineering for Projects That Need to Get Built
+
+Subheading:
+
+Structural, MEP, Civil and Geotechnical engineering for commercial, residential, industrial, healthcare, government and specialty facilities nationwide.
+
+Buttons:
+
+Request a Proposal
+Explore Engineering Services
+
+Then immediately:
+
+Engineering disciplines
+
+Structural
+Mechanical
+Electrical
+Plumbing
+Civil
+Geotechnical
+Title 24 / Energy
+
+Then:
+
+Industries
+
+Show 8–10 major industries, not all 40.
+
+Then:
+
+View All Industries
+
+Then:
+
+Who We Work With
+
+Architects
+General Contractors
+Developers
+Property Managers
+Government Contractors
+Owners
+
+Then:
+
+Project Experience
+
+Then:
+
+Where We Work
+
+Then:
+
+Why Apex Grid
+
+Fast proposal review
+Multi-discipline coordination
+Permit-focused engineering
+Licensed PE review
+Responsive communication
+
+Don't make claims you cannot prove.
+
+15. YOUR NAVIGATION SHOULD CHANGE
+
+I would use:
+
+Services
+Industries
+Projects
+Locations
+About
+Resources
+Request Proposal
+
+Inside Services mega-menu:
+
+Structural
+MEP
+Mechanical
+Electrical
+Plumbing
+Civil
+Geotechnical
+Title 24
+
+Inside Industries:
+
+Commercial
+Multifamily
+Healthcare
+Industrial
+Government
+Military
+Data Centers
+Retail
+Education
+Life Science
+Hospitality
+View All
+
+16. REQUEST A PROPOSAL SHOULD BE A REAL SEO/CONVERSION PAGE
+
+Use:
+
+/request-proposal/
+
+Fields:
+
+Name
+Company
+Email
+Phone
+Project Address
+City/State
+Project Type
+Engineering Disciplines Needed
+Project Size
+Target Start
+Target Permit Date
+Upload PDF
+Upload CAD/DWG
+Upload existing structural
+Upload survey
+Upload geotechnical
+Notes
+
+Checkboxes:
+
+Structural
+Mechanical
+Electrical
+Plumbing
+Civil
+Geotechnical
+Title 24
+Not Sure
+
+This helps qualify leads before your team spends time reviewing them.
+
+17. BUILD A “WHAT WE NEED TO QUOTE” PAGE
+
+This could save you a lot of wasted time.
+
+URL:
+
+/project-intake-requirements/
+
+Sections:
+
+Structural
+
+Architectural PDF/CAD
+Existing structural
+Geotechnical
+Site photos
+Scope description
+
+MEP
+
+Architectural PDF/CAD
+Electrical service information
+HVAC equipment
+Plumbing fixtures
+Utilities
+Equipment schedule
+
+Civil
+
+Survey
+Site plan
+Utility information
+Grading information
+
+Geotechnical
+
+Site plan
+Proposed building
+Foundation loading if available
+Project type
+
+Then tell clients:
+
+More complete project information = faster and more accurate proposals.
+
+18. CONTENT STRATEGY
+
+Don't chase useless traffic.
+
+Write content people search before hiring an engineer.
+
+Examples:
+
+How Much Does Structural Engineering Cost for a Commercial Project?
+
+What Does an MEP Engineer Need From an Architect?
+
+When Do You Need a Structural Engineer for a Remodel?
+
+What Is Included in Permit-Ready MEP Drawings?
+
+Structural Engineering for Tenant Improvements
+
+What Documents Are Needed for a Geotechnical Proposal?
+
+MEP Engineering for Multifamily Buildings
+
+Structural Engineering for Existing Buildings
+
+How Long Does Engineering Plan Review Take?
+
+What Happens After a City Plan Check?
+
+These bring actual leads.
+
+19. BUILD CODE / PERMIT CONTENT CAREFULLY
+
+You can also create useful resources around:
+
+IBC
+IRC
+IECC
+NEC
+ASHRAE
+California Title 24
+Seismic design
+Energy compliance
+
+But date them clearly.
+
+Codes change.
+
+Don't create evergreen-looking pages that quietly become outdated.
+
+20. INTERNAL LINKING
+
+This is hugely important.
+
+Every page should intentionally link sideways.
+
+For example:
+
+Multifamily Engineering
+
+links to:
+
+Structural Engineering
+MEP Engineering
+Civil Engineering
+Geotechnical Engineering
+Parking Structures
+EV Charging
+Arizona
+Texas
+California
+Multifamily projects
+
+Google's own SEO guidance emphasizes building crawlable, logical site structures and descriptive content.
+
+21. TITLE TAG SYSTEM
+
+Don't improvise each title.
+
+Use templates.
+
+Service
+
+Structural Engineering Services | Apex Grid Engineering
+
+Industry
+
+Healthcare Engineering Services | Structural, MEP & Civil | Apex Grid
+
+City
+
+Engineering Firm in Phoenix, AZ | Structural, MEP & Civil | Apex Grid
+
+Service + location
+
+Structural Engineer Phoenix, AZ | Apex Grid Engineering
+
+Project
+
+Multifamily Structural & MEP Engineering – Paradise Valley, AZ | Apex Grid
+
+Google uses page titles and other page signals to generate search-result title links, so titles should be specific, readable, and unique.
+
+22. META DESCRIPTIONS
+
+Every important page gets a custom one.
+
+Example:
+
+Healthcare
+
+Structural, MEP, civil and geotechnical engineering for hospitals, clinics, medical offices and healthcare renovations. Request a project review from Apex Grid Engineering.
+
+Google may use meta descriptions as search-result snippets when they accurately summarize the page.
+
+23. SCHEMA
+
+One correction from my earlier quick review: I would not build around ProfessionalService schema now, because Schema.org currently marks that general type as deprecated. Use Organization, appropriate LocalBusiness/business types when applicable, and Service entities for individual service offerings instead.
+
+I would use:
+
+Organization
+
+Company name
+Logo
+Website
+Phone
+Social profiles
+Founders where appropriate
+Service areas
+
+Then:
+
+Service
+
+Structural Engineering
+MEP Engineering
+Civil Engineering
+Geotechnical Engineering
+
+Then:
+
+BreadcrumbList
+
+for every deep page.
+
+Then relevant structured data for articles/projects where supported.
+
+Google explicitly says structured data helps it understand what a page represents, although markup must correspond to visible page content.
+
+24. GOOGLE BUSINESS PROFILE
+
+If Apex has a legitimate office or eligible service-area presence, optimize that profile thoroughly.
+
+Add:
+
+Services
+Description
+Website
+Phone
+Hours
+Photos
+Projects
+Reviews
+
+Google allows service businesses to specify accurate service areas, but don't use fake offices or addresses simply to rank in additional cities.
+
+25. REVIEWS
+
+Engineering reviews should mention real work naturally.
+
+Not:
+
+Great company!
+
+Better:
+
+Apex Grid completed structural and MEP engineering for our commercial tenant improvement and helped us address city plan-check comments.
+
+Don't script fake keywords for customers.
+
+But detailed genuine reviews naturally reinforce expertise.
+
+26. IMAGE SEO
+
+Your engineering drawings, site photos, finished projects, BIM screenshots and diagrams can also rank.
+
+Filename:
+
+multifamily-mep-engineering-dallas-tx.webp
+
+rather than:
+
+IMG_1038.jpg
+
+Alt:
+
+MEP engineering layout for multifamily residential project in Dallas
+
+Google recommends descriptive filenames, nearby relevant content and useful alt text for image understanding.
+
+27. SPEED / CORE WEB VITALS
+
+Get these into the good range:
+
+LCP: ≤ 2.5 seconds
+INP: < 200 ms
+
+Google documents those as good user-experience thresholds for Core Web Vitals.
+
+Focus on:
+
+WebP/AVIF images
+Lazy-loading
+Smaller JS bundles
+Font loading
+Server caching
+CDN
+Avoid oversized hero videos
+Avoid layout shift
+Preload critical assets
+
+Google also emphasizes overall page experience rather than chasing a perfect isolated score.
+
+28. MOBILE MUST CONTAIN THE SAME IMPORTANT CONTENT
+
+Don't create detailed desktop pages and then hide half of them on mobile.
+
+Google uses mobile-first indexing, meaning the mobile version is what primarily feeds indexing and ranking.
+
+Accordions are fine.
+
+Deleting content from mobile is not.
+
+29. SEARCH CONSOLE
+
+This is mandatory.
+
+Track:
+
+Indexed pages
+Non-indexed pages
+Clicks
+Impressions
+Queries
+CTR
+Average position
+Core Web Vitals
+Sitemap processing
+Manual actions
+Crawl issues
+
+And submit:
+
+/sitemap.xml
+
+30. CREATE MULTIPLE SITEMAPS
+
+As the site grows:
+
+sitemap-services.xml
+
+sitemap-industries.xml
+
+sitemap-locations.xml
+
+sitemap-projects.xml
+
+sitemap-articles.xml
+
+Then reference them in the sitemap index.
+
+31. AI SEARCH / AEO
+
+This site should also be written so ChatGPT, Google AI results, Bing/Copilot and other systems can understand Apex.
+
+Be explicit.
+
+Instead of:
+
+Solutions built for tomorrow.
+
+Say:
+
+Apex Grid Engineering provides structural, mechanical, electrical, plumbing, civil and geotechnical engineering for commercial, residential, industrial, healthcare and government projects.
+
+Machines love explicit entities and relationships.
+
+32. CREATE AN “ENGINEERING CAPABILITIES” PAGE
+
+URL:
+
+/capabilities/
+
+This should become a master reference.
+
+Include:
+
+Disciplines
+Industries
+Project types
+Software
+Codes
+States served
+Deliverables
+Client types
+Project phases
+
+Excellent for procurement officers too.
+
+33. CREATE A DOWNLOADABLE CAPABILITIES STATEMENT
+
+Especially useful for Government / Military.
+
+PDF title:
+
+Apex Grid Engineering – Engineering Capabilities Statement
+
+Include:
+
+Company overview
+Core competencies
+Structural
+MEP
+Civil
+Geotechnical
+Markets
+Licensing
+Federal experience
+Military experience
+NAICS codes if applicable
+UEI / CAGE if applicable
+Veteran ownership/status only if formally accurate
+Contact
+
+And make the HTML page contain the same important information; don't bury everything in the PDF.
+
+34. NATIONAL SEO
+
+Don't make the homepage say “nationwide” 40 times.
+
+Create:
+
+/locations/
+
+Then explain where Apex is licensed and where it operates.
+
+If licensure differs by discipline/state, make that transparent.
+
+That builds trust.
+
+35. STRONGER HOMEPAGE INDUSTRIES
+
+Your homepage should probably show:
+
+Healthcare
+Multifamily
+Commercial
+Industrial
+Government
+Military
+Data Centers
+Retail & Hospitality
+Education
+Life Science
+Energy
+
+Then:
+
+Explore All Industries
+
+36. YOUR ULTIMATE SITE SIZE
+
+I could realistically see Apex Grid becoming a 150–250 high-quality page website over time.
+
+Not fluff.
+
+Something like:
+
+30 service pages
+40 industry pages
+30 location pages
+40 project case studies
+25 high-intent resources
+10 company/conversion pages
+
+That's an actual SEO asset.
+
+37. 90-DAY PRIORITY
+Weeks 1–2
+
+Fix technical foundation.
+
+Search Console
+GA4
+Sitemap
+Robots
+Titles
+Descriptions
+Canonical tags
+Schema
+Core Web Vitals
+Navigation
+
+Weeks 3–4
+
+Build core service pages.
+
+Structural
+MEP
+Mechanical
+Electrical
+Plumbing
+Civil
+Geotechnical
+Title 24
+
+Month 2
+
+Build top industry pages.
+
+Healthcare
+Multifamily
+Tenant Improvement
+Industrial
+Government
+Military
+Data Centers
+Retail/Hospitality
+Education
+Life Science
+Restaurants
+Senior Living
+
+Month 3
+
+Build:
+
+Locations
+Projects
+Architect page
+GC page
+Developer page
+Property manager page
+Project intake
+Proposal form
+
+Then expand industry-by-industry.
+
+38. WHAT I WOULD AIM FOR
+
+The strategy should make Apex show up for combinations such as:
+
+structural engineering firm for multifamily
+
+MEP engineering for architects
+
+healthcare MEP engineering
+
+commercial structural engineer Phoenix
+
+tenant improvement MEP engineer
+
+data center electrical engineering
+
+military engineering consultant
+
+geotechnical engineer Texas
+
+restaurant MEP engineering
+
+multifamily MEP engineering Dallas
+
+structural engineer for commercial renovation
+
+civil engineering parking lot design
+
+That is the traffic you want.
+
+Not millions of readers.
+
+Hundreds of architects, developers, contractors, owners, facility managers and procurement people who actually need engineering.
+
+Revised score potential
+
+I would still put the current publicly visible SEO footprint around the mid-50s, primarily because the domain currently appears to have very little indexed depth beyond the main site positioning.
+
+But with the architecture above:
+
+Technical foundation: 90+
+On-page SEO: 90+
+Topical authority: 95 potential
+Industry coverage: 95+
+Commercial intent coverage: 95+
+National organic opportunity: very strong
+
+The biggest competitive advantage isn't going to be some SEO trick.
+
+It is that Apex can credibly say:
+
+“We don't only understand one building type.”
+
+You can build a massive matrix of discipline + industry + location + project type, and because you actually work across those areas, those pages can contain real engineering substance instead of SEO filler.

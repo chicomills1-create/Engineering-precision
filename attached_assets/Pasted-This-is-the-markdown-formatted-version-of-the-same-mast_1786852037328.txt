@@ -1,0 +1,40 @@
+This is the markdown-formatted version of the same master spec — same content, cleaner structure. The key addition is the phase roadmap at the end and section 241 requesting a current-state inventory before major changes.
+
+Let me save it and read the follow-up tasks skill:
+
+
+
+3 actions
+This second file is the markdown-formatted version of the same spec — same content, better structured, with the addition of a 12-phase rollout roadmap and section 241 (current-state audit requirement). The phase roadmap confirms the priority order:
+
+Phase 3 (current): Service discipline hubs (structural, MEP, mechanical, electrical, plumbing, civil, geo) + capabilities page
+Phases 4–5: Deep industry pages + client pages
+Phases 7–10: Resource center, location SEO, industry×service, solution SEO
+Phase 12: Search Console-driven expansion
+
+The discipline hub pages (Task #46, currently merging) are the most critical gap — every other page eventually links to them. The three biggest unaddressed spec items after that are the engineering resource center (discipline-specific Q&A articles), the engineering glossary, and the remaining location × service pairs the spec explicitly names.
+
+
+
+2 actions
+Both spec files are read, saved to .local/seo-briefs/, and digested. Three follow-up tasks are now in the queue based on the biggest unaddressed gaps from the spec:
+
+#66 — Resource center: 60+ discipline Q&A articles (structural, MEP, civil, geotechnical, permit)
+#67 — Engineering glossary: 80+ term pages for AI/informational search
+#68 — Remaining location × service pairs (Charlotte, Fort Worth, additional FL/VA markets, etc.)
+To directly answer the spec's section 241 (current-state inventory before large-scale changes) — here's where things actually stand:
+
+Item	Status
+Framework	Vite SPA + Express API, pnpm monorepo
+Static pages	3,856 pre-rendered HTML files in public/
+Sitemap	Auto-generated public/sitemap.xml (3,870 URLs)
+Robots	Standard, no noindex rules yet
+Canonical	On every static page, full URL
+Schema	Organization + Service + BreadcrumbList JSON-LD on all pages
+OG metadata	Title + description + canonical on every page
+Analytics	Not yet connected (GA4, Search Console — open items)
+Service hubs	/structural-engineering/, /mep-engineering/ etc. — not yet built (Task #46, currently merging)
+Capabilities page	Not yet built (Task #59)
+Engineering glossary	Not yet built (Task #67)
+Resource center	20 generic articles — needs 60+ discipline-specific (Task #66)
+The biggest structural gap matching the spec's Phase 3 priority is the service discipline hubs — that's what Task #46 (currently merging) delivers. Once that lands, the site will have the full Tier 1 spine in place.

@@ -20,6 +20,19 @@ export async function sendLeadNotificationEmail(
     };
   }
 
+  const baseUrl = process.env.PUBLIC_SITE_URL || "https://apexgrideng.com";
+
+  const attachmentLines =
+    lead.attachments && lead.attachments.length > 0
+      ? [
+          "",
+          `Attachments (${lead.attachments.length}):`,
+          ...lead.attachments.map(
+            (p, i) => `  ${i + 1}. ${baseUrl}/api${p}`,
+          ),
+        ]
+      : [];
+
   const lines = [
     `Name: ${lead.name}`,
     `Email: ${lead.email}`,
@@ -30,6 +43,7 @@ export async function sendLeadNotificationEmail(
     "",
     "Message:",
     lead.message,
+    ...attachmentLines,
   ].filter((line): line is string => line !== null);
 
   const connectors = new ReplitConnectors();

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Engineering Guides: Cost, Timeline, and Professional Roles | Apex Grid</title>
+<meta name="description" content="Practical engineering guides covering cost and timeline expectations, when engineering is required, what information engineers need, professional role comparisons, and PE licensing education." />
+<link rel="canonical" href="https://apexgrideng.com/guides/" />
+<meta property="og:title" content="Engineering Guides: Cost, Timeline, and Professional Roles | Apex Grid" />
+<meta property="og:description" content="Practical engineering guides covering cost and timeline expectations, when engineering is required, what information engineers need, professional role comparisons, and PE licensing education." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://apexgrideng.com/guides/" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:hsl(0 0% 3%);--card:hsl(0 0% 5%);--border:hsl(0 0% 12%);--fg:hsl(0 0% 92%);--muted:hsl(0 0% 62%);--primary:hsl(0 72% 48%);--primary-fg:#fff}
+body{background:var(--bg);color:var(--fg);font-family:'Inter',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.display{font-family:'Space Grotesk',sans-serif;line-height:1.15;letter-spacing:-0.01em}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--border);background:hsl(0 0% 3%/.95);position:sticky;top:0;z-index:50;backdrop-filter:blur(8px)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+.brand{display:flex;align-items:center;gap:12px;font-family:'Space Grotesk';font-weight:700;font-size:19px;letter-spacing:-.01em}
+.brand small{display:block;font-size:9px;letter-spacing:.3em;color:var(--muted);font-weight:500}
+.navlinks{display:flex;gap:28px;font-size:14px;color:hsl(0 0% 80%);align-items:center}
+.navlinks a:hover{color:var(--primary)}
+.cta{background:var(--primary);color:var(--primary-fg);font-weight:700;font-size:14px;padding:12px 24px;border-radius:2px}
+.cta:hover{background:hsl(0 72% 42%)}
+.hero{padding:96px 0 64px;border-bottom:1px solid var(--border);position:relative}
+.hero .kicker{color:var(--primary);font-family:'Space Grotesk';font-size:12px;letter-spacing:.25em;text-transform:uppercase;margin-bottom:20px;font-weight:600}
+.hero h1{font-size:clamp(34px,5vw,58px);font-weight:700;margin-bottom:24px}
+.hero h1 .dim{color:var(--muted)}
+.hero .lede{font-size:19px;color:hsl(0 0% 78%);max-width:760px;border-left:4px solid var(--primary);padding-left:22px}
+.breadcrumb{padding:20px 0 0;font-size:12px;font-family:'Space Grotesk';text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.breadcrumb a:hover{color:var(--primary)}
+.breadcrumb span{margin:0 8px;color:hsl(0 0% 30%)}
+section.block{padding:56px 0;border-bottom:1px solid var(--border)}
+section.block h2{font-size:28px;margin-bottom:20px}
+section.block h2 em{color:var(--primary);font-style:normal}
+.prose p{color:hsl(0 0% 74%);margin-bottom:18px;max-width:820px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--border);padding:26px}
+.card h3{font-size:16px;margin-bottom:10px;color:var(--fg)}
+.card p{font-size:14px;color:var(--muted)}
+.card .label{font-family:'Space Grotesk';font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--primary);margin-bottom:12px;font-weight:600}
+ul.scope{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;max-width:900px}
+ul.scope li{background:var(--card);border:1px solid var(--border);padding:14px 18px;font-size:14px;color:hsl(0 0% 78%);border-left:3px solid var(--primary)}
+.faq{max-width:860px}
+.faq details{border:1px solid var(--border);background:var(--card);margin-bottom:10px}
+.faq summary{cursor:pointer;padding:18px 22px;font-family:'Space Grotesk';font-weight:600;font-size:15px}
+.faq .a{padding:0 22px 18px;color:var(--muted);font-size:14.5px}
+.linkrow{display:flex;flex-wrap:wrap;gap:10px}
+.linkrow a{border:1px solid var(--border);background:var(--card);padding:10px 16px;font-size:13px;color:hsl(0 0% 78%)}
+.linkrow a:hover{border-color:var(--primary);color:var(--primary)}
+.ctaband{padding:72px 0;text-align:left}
+.ctaband h2{font-size:32px;margin-bottom:14px}
+.ctaband p{color:var(--muted);margin-bottom:28px;max-width:640px}
+footer{border-top:1px solid var(--border);background:var(--card);padding:64px 0 32px;font-size:14px}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
+@media(max-width:800px){.fgrid{grid-template-columns:1fr 1fr}}
+footer h4{font-family:'Space Grotesk';font-size:12px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:18px}
+footer ul{list-style:none}
+footer li{margin-bottom:12px;color:hsl(0 0% 78%)}
+footer a:hover{color:var(--primary)}
+.fbottom{margin-top:48px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted)}
+.note{font-size:12.5px;color:hsl(0 0% 45%);max-width:820px;margin-top:8px}
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.statgrid .cell{background:var(--bg);padding:22px}
+.statgrid .cell .k{font-family:'Space Grotesk';font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);margin-bottom:8px;font-weight:600}
+.statgrid .cell .v{font-size:14.5px;color:hsl(0 0% 80%)}
+</style>
+</head>
+<body>
+<header><div class="container nav">
+  <a class="brand" href="/"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;color:hsl(0 72% 48%)"><path d="M50 8L8 88h12l30-58 30 58h12L50 8z" fill="currentColor"/><path d="M50 40L30 78h8l12-24 12 24h8L50 40z" fill="currentColor" opacity="0.7"/><path d="M32 74h36v6H32z" fill="currentColor"/></svg><span>APEX GRID<small>ENGINEERING</small></span></a>
+  <nav class="navlinks">
+    <a href="/about">About Us</a><a href="/portfolio">Portfolio</a><a href="/industries">Industries</a><a href="/services">Services</a><a href="/resources">Resources</a><a href="/blog/">Blog</a><a href="/locations/">Service Areas</a>
+    <a class="cta" href="/contact">Contact Us</a>
+  </nav>
+</div></header>
+
+    <div class="hero hero--page">
+      <div class="hero-inner">
+        <div class="kicker">Engineering Guides</div>
+        <h1>Engineering Guides</h1>
+        <p class="lede">Practical answers to the most common questions about engineering costs, schedules, professional roles, and when engineering is required — written for architects, contractors, developers, and building owners.</p>
+        <a class="btn btn--primary" href="/contact/">Talk to an Engineer</a>
+      </div>
+    </div>
+
+    <nav class="breadcrumb container"><a href="/">Home</a><span>/</span>Engineering Guides</nav>
+
+    
+    <section class="section section--white">
+      <div class="container">
+        <h2>Structural Engineering</h2>
+        <div class="card-grid card-grid--3">
+          <a class="card" href="/guides/structural-engineering-cost/"><div class="label">Structural Engineering · Cost Guide</div><h3>How Much Does Structural Engineering Cost?</h3><p>Structural engineering fees vary based on project scope, complexity, building type, and deliverables required.…</p></a>
+          <a class="card" href="/guides/structural-engineering-timeline/"><div class="label">Structural Engineering · Schedule Guide</div><h3>How Long Does Structural Engineering Take?</h3><p>Structural engineering timelines depend on project complexity, available information, and deliverable scope. S…</p></a>
+          <a class="card" href="/guides/do-i-need-structural-engineer-remodel/"><div class="label">Structural Engineering · Remodel</div><h3>Do I Need a Structural Engineer for a Remodel?</h3><p>Many remodels require structural engineering — particularly when the work involves removing or modifying walls…</p></a>
+          <a class="card" href="/guides/do-i-need-structural-engineer-addition/"><div class="label">Structural Engineering · Addition</div><h3>Do I Need a Structural Engineer for an Addition?</h3><p>Yes — building additions almost always require structural engineering. An addition adds new structural loads t…</p></a>
+          <a class="card" href="/guides/do-i-need-structural-engineer-wall-removal/"><div class="label">Structural Engineering · Wall Removal</div><h3>Do I Need a Structural Engineer for a Wall Removal?</h3><p>Yes — if the wall is load-bearing, you need a structural engineer before removing it. Load-bearing walls carry…</p></a>
+          <a class="card" href="/guides/do-i-need-structural-rooftop-hvac/"><div class="label">Structural Engineering · Rooftop HVAC</div><h3>Do I Need Structural Engineering for Rooftop HVAC?</h3><p>Yes — adding or replacing rooftop HVAC equipment usually requires structural engineering. The roof framing mus…</p></a>
+          <a class="card" href="/guides/what-does-structural-engineer-need/"><div class="label">Structural Engineering · Project Information</div><h3>What Does a Structural Engineer Need to Start?</h3><p>Structural engineering typically requires architectural plans showing the proposed scope, existing building in…</p></a>
+        </div>
+      </div>
+    </section>
+    <section class="section section--white">
+      <div class="container">
+        <h2>MEP Engineering</h2>
+        <div class="card-grid card-grid--3">
+          <a class="card" href="/guides/mep-engineering-cost/"><div class="label">MEP Engineering · Cost Guide</div><h3>How Much Does MEP Engineering Cost?</h3><p>MEP engineering fees depend on the building type, which disciplines are included (mechanical, electrical, and/…</p></a>
+          <a class="card" href="/guides/mep-engineering-timeline/"><div class="label">MEP Engineering · Schedule Guide</div><h3>How Long Does MEP Engineering Take?</h3><p>MEP engineering timelines depend on building type, disciplines involved, and system complexity. Simple single-…</p></a>
+          <a class="card" href="/guides/do-i-need-mep-plans-restaurant/"><div class="label">MEP Engineering · Restaurant</div><h3>Do I Need MEP Plans for a Restaurant?</h3><p>Yes — virtually every restaurant permit requires MEP engineering plans. Restaurant commercial kitchens involve…</p></a>
+          <a class="card" href="/guides/what-does-mep-engineer-need/"><div class="label">MEP Engineering · Project Information</div><h3>What Does an MEP Engineer Need?</h3><p>MEP engineering requires architectural plans showing the building layout, a description of the building use an…</p></a>
+        </div>
+      </div>
+    </section>
+    <section class="section section--white">
+      <div class="container">
+        <h2>Civil Engineering</h2>
+        <div class="card-grid card-grid--3">
+          <a class="card" href="/guides/civil-engineering-cost/"><div class="label">Civil Engineering · Cost Guide</div><h3>How Much Does Civil Engineering Cost?</h3><p>Civil engineering fees for commercial site work depend on project scope, site complexity, jurisdiction require…</p></a>
+        </div>
+      </div>
+    </section>
+    <section class="section section--white">
+      <div class="container">
+        <h2>Geotechnical Engineering</h2>
+        <div class="card-grid card-grid--3">
+          <a class="card" href="/guides/geotechnical-engineering-cost/"><div class="label">Geotechnical Engineering · Cost Guide</div><h3>How Much Does Geotechnical Engineering Cost?</h3><p>Geotechnical engineering costs depend on the number and depth of soil borings, laboratory testing, site access…</p></a>
+          <a class="card" href="/guides/geotechnical-report-timeline/"><div class="label">Geotechnical Engineering · Schedule Guide</div><h3>How Long Does a Geotechnical Report Take?</h3><p>A geotechnical investigation and report typically takes three to six weeks from notice to proceed. The timelin…</p></a>
+          <a class="card" href="/guides/do-i-need-geotechnical-report/"><div class="label">Geotechnical Engineering · Requirements</div><h3>Do I Need a Geotechnical Report?</h3><p>Most commercial construction projects require a geotechnical report. Building departments typically require ge…</p></a>
+        </div>
+      </div>
+    </section>
+    <section class="section section--white">
+      <div class="container">
+        <h2>Permit Engineering</h2>
+        <div class="card-grid card-grid--3">
+          <a class="card" href="/guides/plan-check-timeline/"><div class="label">Permit Engineering · Plan Check</div><h3>How Long Does Plan Check Take?</h3><p>Plan check timelines vary widely by jurisdiction and are outside the engineer&#39;s direct control. Over-the-count…</p></a>
+        </div>
+      </div>
+    </section>
+    <section class="section section--white">
+      <div class="container">
+        <h2>Engineering</h2>
+        <div class="card-grid card-grid--3">
+          <a class="card" href="/guides/what-delays-engineering/"><div class="label">Engineering · Schedule Management</div><h3>What Delays Engineering Projects?</h3><p>The most common engineering delays are not caused by the engineer — they come from incomplete information at p…</p></a>
+          <a class="card" href="/guides/do-i-need-engineering-change-of-occupancy/"><div class="label">Engineering · Change of Occupancy</div><h3>Do I Need Engineering for a Change of Occupancy?</h3><p>Yes — a change of occupancy almost always requires engineering. The building code applies different structural…</p></a>
+          <a class="card" href="/guides/do-engineers-need-cad-files/"><div class="label">Engineering · Project Files</div><h3>Do Engineers Need CAD Files?</h3><p>No — engineers can work from PDF drawings in most cases. CAD or Revit files speed up coordination and reduce e…</p></a>
+          <a class="card" href="/guides/can-engineers-work-from-pdfs/"><div class="label">Engineering · Project Files</div><h3>Can Engineers Work From PDFs?</h3><p>Yes — PDF is the most common format for engineering project initiation. Structural, MEP, civil, and geotechnic…</p></a>
+        </div>
+      </div>
+    </section>
+    <section class="section section--white">
+      <div class="container">
+        <h2>Commercial Engineering</h2>
+        <div class="card-grid card-grid--3">
+          <a class="card" href="/guides/do-i-need-engineering-commercial-remodel/"><div class="label">Commercial Engineering · Remodel</div><h3>Do I Need Engineering for a Commercial Remodel?</h3><p>Commercial remodels almost always require engineering. Most commercial building permits require stamped struct…</p></a>
+        </div>
+      </div>
+    </section>
+    <section class="section section--white">
+      <div class="container">
+        <h2>Electrical Engineering</h2>
+        <div class="card-grid card-grid--3">
+          <a class="card" href="/guides/do-i-need-engineering-ev-chargers/"><div class="label">Electrical Engineering · EV Charging</div><h3>Do I Need Engineering for EV Charging?</h3><p>Commercial EV charging typically requires electrical engineering — a load study, service capacity evaluation, …</p></a>
+        </div>
+      </div>
+    </section>
+    <section class="section section--white">
+      <div class="container">
+        <h2>Existing Building</h2>
+        <div class="card-grid card-grid--3">
+          <a class="card" href="/guides/what-photos-to-send-engineer/"><div class="label">Existing Building · Contractor Documentation</div><h3>What Photos Should a Contractor Send an Engineer?</h3><p>For existing-building structural engineering, contractors should send photos that show framing member sizes, c…</p></a>
+        </div>
+      </div>
+    </section>
+    <section class="section section--white">
+      <div class="container">
+        <h2>Engineering Education</h2>
+        <div class="card-grid card-grid--3">
+          <a class="card" href="/guides/structural-engineer-vs-architect/"><div class="label">Engineering Education · Roles</div><h3>Structural Engineer vs Architect</h3><p>Architects design buildings — their form, function, and occupant experience. Structural engineers design the s…</p></a>
+          <a class="card" href="/guides/structural-engineer-vs-civil-engineer/"><div class="label">Engineering Education · Roles</div><h3>Structural Engineer vs Civil Engineer</h3><p>Structural engineers specialize in buildings and structures — designing the framing, foundations, and connecti…</p></a>
+          <a class="card" href="/guides/civil-engineer-vs-surveyor/"><div class="label">Engineering Education · Roles</div><h3>Civil Engineer vs Land Surveyor</h3><p>A land surveyor measures and documents existing property boundaries, topography, and physical features of a si…</p></a>
+          <a class="card" href="/guides/mechanical-engineer-vs-hvac-contractor/"><div class="label">Engineering Education · Roles</div><h3>Mechanical Engineer vs HVAC Contractor</h3><p>A mechanical engineer designs the HVAC system — calculating loads, selecting equipment, designing ductwork, an…</p></a>
+          <a class="card" href="/guides/electrical-engineer-vs-electrician/"><div class="label">Engineering Education · Roles</div><h3>Electrical Engineer vs Electrician</h3><p>An electrical engineer designs the electrical system — load calculations, service sizing, panel schedules, one…</p></a>
+          <a class="card" href="/guides/geotechnical-engineer-vs-structural-engineer/"><div class="label">Engineering Education · Roles</div><h3>Geotechnical Engineer vs Structural Engineer</h3><p>Geotechnical engineers investigate subsurface conditions — soil types, bearing capacity, groundwater, and eart…</p></a>
+          <a class="card" href="/guides/full-service-firm-vs-separate-consultants/"><div class="label">Engineering Education · Project Delivery</div><h3>Full-Service Engineering Firm vs Separate Consultants</h3><p>A full-service multi-discipline engineering firm provides structural, MEP, civil, and geotechnical engineering…</p></a>
+          <a class="card" href="/guides/what-is-a-professional-engineer/"><div class="label">Engineering Education · PE Licensing</div><h3>What Is a Professional Engineer (PE)?</h3><p>A Professional Engineer (PE) is a licensed engineer who has passed the Fundamentals of Engineering exam, gaine…</p></a>
+          <a class="card" href="/guides/what-does-pe-stamp-mean/"><div class="label">Engineering Education · PE Stamp</div><h3>What Does a PE Stamp Mean?</h3><p>A PE stamp (or PE seal) on engineering drawings means that a licensed Professional Engineer has reviewed the w…</p></a>
+          <a class="card" href="/guides/what-is-responsible-charge/"><div class="label">Engineering Education · Professional Standards</div><h3>What Is Responsible Charge in Engineering?</h3><p>Responsible charge means that the professional engineer who stamps a set of engineering drawings was in direct…</p></a>
+          <a class="card" href="/guides/why-engineers-cannot-rubber-stamp/"><div class="label">Engineering Education · Professional Ethics</div><h3>Why Engineers Cannot Simply Rubber Stamp Third-Party Plans</h3><p>A licensed professional engineer cannot legally or ethically stamp drawings they did not engineer. Stamping en…</p></a>
+          <a class="card" href="/guides/what-is-engineering-quality-control/"><div class="label">Engineering Education · Quality</div><h3>What Is Engineering Quality Control?</h3><p>Engineering quality control (QA/QC) is the internal review process engineering firms use to verify that drawin…</p></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--dark cta-band">
+      <div class="container">
+        <h2>Have a Question Not Covered Here?</h2>
+        <p>We engineer across every building discipline — ask us anything about your project.</p>
+        <a class="btn btn--primary" href="/contact/">Ask an Engineer</a>
+      </div>
+    </section>
+<footer><div class="container">
+  <div class="fgrid">
+    <div>
+      <a class="brand" href="/" style="margin-bottom:18px"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;color:hsl(0 72% 48%)"><path d="M50 8L8 88h12l30-58 30 58h12L50 8z" fill="currentColor"/><path d="M50 40L30 78h8l12-24 12 24h8L50 40z" fill="currentColor" opacity="0.7"/><path d="M32 74h36v6H32z" fill="currentColor"/></svg><span>APEX GRID</span></a>
+      <p style="color:var(--muted);max-width:340px;margin-top:16px">De-risking projects from concept to permit. Integrated Architecture, MEP, Structural, and Civil design backed by licensed professionals.</p>
+    </div>
+    <div><h4>Firm</h4><ul><li><a href="/about">About Us</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/resources">Resources</a></li><li><a href="/blog/">Blog</a></li><li><a href="/locations/">Service Areas</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div><h4>Services</h4><ul><li><a href="/services/mep">MEP Engineering</a></li><li><a href="/services/structural">Structural Design</a></li><li><a href="/services/civil">Civil Engineering</a></li><li><a href="/services/assessments">Building Assessments</a></li><li><a href="/services/architecture">Architectural Design</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li>22475 E Quintero Rd<br/>Queen Creek, AZ 85142</li><li><a href="mailto:info@apexgrideng.com">info@apexgrideng.com</a></li><li><a href="tel:+14804900064">(480) 490-0064</a></li></ul></div>
+  </div>
+  <div class="fbottom"><p>© 2026 Apex Grid Engineering. All rights reserved.</p><p><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></p></div>
+</div></footer>
+</body>
+</html>

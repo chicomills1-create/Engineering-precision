@@ -17,4 +17,6 @@ export interface LeadInput {
   services?: string;
   /** @minLength 1 */
   message: string;
+  /** Object paths of uploaded files attached to the inquiry. */
+  attachments?: string[];
 }

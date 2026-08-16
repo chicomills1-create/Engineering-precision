@@ -1,0 +1,5353 @@
+APEX GRID ENGINEERING
+MASTER SEO + WEBSITE EXPANSION SPECIFICATION
+FULL REPLIT BUILD DIRECTIVE
+
+This document is the master specification for rebuilding and expanding Apex Grid Engineering into a large-scale national engineering website designed for:
+
+Organic Google search
+AI search / answer engines
+Local search
+Commercial lead generation
+RFP/RFQ acquisition
+Architect relationships
+General contractor relationships
+Developer relationships
+Property-management relationships
+Government and military opportunities
+Existing-building engineering
+Repeat portfolio clients
+Engineering authority and trust
+
+This is NOT an instruction to blindly create thousands of low-quality SEO pages.
+
+The purpose is to build a scalable engineering-content platform capable of supporting hundreds or eventually more than one thousand valuable pages.
+
+Every published page must have a real reason to exist.
+
+1. PRIMARY BUSINESS POSITIONING
+
+Apex Grid Engineering should be positioned as an integrated engineering firm capable of supporting projects across multiple disciplines and industries.
+
+Primary engineering categories:
+
+Structural Engineering
+Mechanical Engineering
+Electrical Engineering
+Plumbing Engineering
+MEP Engineering
+Civil Engineering
+Geotechnical Engineering
+Energy / Title 24 where applicable
+Existing-Building Engineering
+Permit Engineering
+Engineering Calculations
+Professional Engineering Review
+Engineering Coordination
+Construction Administration where offered
+Site / Existing Condition Evaluation where applicable
+
+Do not claim a discipline, license, certification, jurisdiction, service, or professional responsibility that Apex Grid cannot legally provide.
+
+The website architecture should support adding additional disciplines later.
+
+2. SITE PHILOSOPHY
+
+The website should answer five questions extremely quickly:
+
+What engineering does Apex Grid provide?
+What industries does Apex Grid understand?
+What types of projects can Apex Grid handle?
+Where can Apex Grid perform the work?
+How can a client send Apex Grid a project immediately?
+
+The site should feel like a serious national engineering organization, not a generic marketing template.
+
+3. MAIN NAVIGATION
+
+Use the following primary navigation:
+
+Services
+
+Industries
+
+Projects
+
+Who We Work With
+
+Locations
+
+Resources
+
+About
+
+Request a Proposal
+
+Use mega menus.
+
+Do not put hundreds of links visibly across the navigation.
+
+4. SERVICES MASTER TAXONOMY
+
+Create a top-level Services page:
+
+/services/
+
+Then create the following major service hubs.
+
+STRUCTURAL ENGINEERING
+
+/structural-engineering/
+
+Subservices:
+
+Structural Design
+Structural Analysis
+Structural Calculations
+Foundation Design
+Seismic Engineering
+Seismic Retrofit
+Structural Repairs
+Existing-Building Structural Engineering
+Structural Inspections
+Structural Condition Assessments
+Renovation Engineering
+Addition Engineering
+Tenant Improvement Structural Engineering
+Load-Bearing Wall Engineering
+Wall Opening Engineering
+Header / Lintel Engineering
+Beam Design
+Column Design
+Steel Design
+Concrete Design
+Masonry Design
+Wood Framing Design
+Tilt-Up Design
+Post-Tensioned Concrete
+Equipment Anchorage
+Equipment Support
+Rooftop Equipment Engineering
+RTU Structural Analysis
+Generator Support
+Transformer Pads
+Battery Storage Structural Support
+Solar Structural Analysis
+Solar Carports
+Parking Canopies
+Mezzanines
+Platforms
+Stairs
+Retaining Walls
+Structural Permit Plans
+Structural Plan-Check Responses
+Structural Repair Details
+5. MECHANICAL ENGINEERING
+
+/mechanical-engineering/
+
+Subservices:
+
+HVAC Design
+Heating Load Calculations
+Cooling Load Calculations
+HVAC Equipment Selection
+Duct Design
+Outside Air Design
+Ventilation
+Exhaust Systems
+Make-Up Air
+Commercial Kitchen Ventilation
+Grease Exhaust
+Industrial Ventilation
+Warehouse Ventilation
+Healthcare HVAC
+Isolation Rooms
+Negative-Pressure Rooms
+Laboratory Ventilation
+Fume Hood Exhaust
+Cleanroom HVAC
+Data Center Cooling
+Server Room Cooling
+Dehumidification
+Natatorium / Pool HVAC
+VRF Systems
+Heat Pump Systems
+Rooftop Unit Replacement
+Mechanical Permit Plans
+Mechanical Equipment Coordination
+6. ELECTRICAL ENGINEERING
+
+/electrical-engineering/
+
+Subservices:
+
+Power Distribution
+Service Sizing
+Electrical Load Calculations
+Electrical Load Studies
+Panel Schedules
+One-Line Diagrams
+Lighting Design
+Lighting Calculations
+Emergency Lighting
+Emergency Power
+Standby Power
+Generator Engineering
+UPS Systems
+Mission-Critical Power
+Data Center Power
+Switchgear Replacement
+Panel Replacement
+Transformer Coordination
+EV Charging
+Fleet Charging
+DC Fast Charging
+Multifamily EV Charging
+Solar PV Electrical
+Utility Interconnection
+Battery Energy Storage
+Commercial Electrical Engineering
+Industrial Electrical Engineering
+Multifamily Electrical Engineering
+Electrical Permit Plans
+7. PLUMBING ENGINEERING
+
+/plumbing-engineering/
+
+Subservices:
+
+Domestic Water Design
+Sanitary Waste Design
+Plumbing Vent Systems
+Plumbing Riser Design
+Storm Drainage
+Natural Gas Piping
+Hot Water Systems
+Hot Water Recirculation
+Water Heater Engineering
+Commercial Kitchen Plumbing
+Grease Waste
+Grease Interceptors
+Medical Gas where applicable
+Laboratory Plumbing
+Specialty Waste
+Industrial Plumbing
+Multifamily Plumbing
+Healthcare Plumbing
+Restaurant Plumbing
+Plumbing Fixture Calculations
+Water Efficiency
+Plumbing Permit Plans
+8. MEP ENGINEERING
+
+/mep-engineering/
+
+This should serve as the combined Mechanical + Electrical + Plumbing hub.
+
+Subpages:
+
+Commercial MEP
+Multifamily MEP
+Restaurant MEP
+Healthcare MEP
+Industrial MEP
+Warehouse MEP
+Retail MEP
+Hospitality MEP
+Office MEP
+Tenant Improvement MEP
+Life Science MEP
+Data Center MEP
+Government MEP
+Military MEP
+Education MEP
+Senior Living MEP
+Fitness MEP
+Existing-Building MEP
+MEP Permit Drawings
+MEP Renovations
+MEP Equipment Replacement
+9. CIVIL ENGINEERING
+
+/civil-engineering/
+
+Subservices:
+
+Site Development
+Land Development
+Site Plans
+Grading
+Drainage
+Stormwater
+Hydrology / Hydraulic Coordination where offered
+Utility Design
+Domestic Water Service
+Sanitary Sewer
+Storm Sewer
+Parking Lots
+Parking Expansions
+Roadway Improvements
+Turn Lanes
+Commercial Driveways
+ADA Site Improvements
+Accessible Routes
+Erosion Control
+Commercial Site Development
+Multifamily Site Development
+Industrial Site Development
+Civil Permit Plans
+10. GEOTECHNICAL ENGINEERING
+
+/geotechnical-engineering/
+
+Subservices:
+
+Geotechnical Investigations
+Subsurface Investigations
+Soil Borings
+Soil Testing
+Laboratory Testing
+Geotechnical Reports
+Foundation Recommendations
+Bearing Capacity
+Settlement Analysis
+Expansive Soil Evaluation
+Groundwater Evaluation
+Earthwork Recommendations
+Compaction Recommendations
+Pavement Recommendations
+Pavement Subgrade Evaluation
+Retaining Wall Parameters
+Slope Stability where offered
+Commercial Geotechnical
+Multifamily Geotechnical
+Industrial Geotechnical
+Government Geotechnical
+Military Geotechnical
+Roadway Geotechnical
+Parking Lot Geotechnical
+11. ENERGY / TITLE 24
+
+Create:
+
+/energy-compliance/
+
+and:
+
+/title-24/
+
+Potential pages:
+
+Commercial Title 24
+Residential Title 24
+Energy Code Compliance
+Energy Modeling
+Building Envelope Coordination
+HVAC Energy Compliance
+Lighting Energy Compliance
+Electrification
+High-Performance Buildings
+Building Decarbonization
+Solar / Storage Coordination
+
+Only advertise jurisdiction-specific compliance services where professionally supported.
+
+12. EXISTING-BUILDING ENGINEERING
+
+Create a major hub:
+
+/existing-building-engineering/
+
+Pages:
+
+Existing Condition Assessments
+Existing Building Structural Engineering
+Existing MEP Evaluation
+Existing Electrical Capacity
+Existing HVAC Evaluation
+Existing Plumbing Evaluation
+Existing Foundation Evaluation
+Existing Wall Openings
+Existing Roof Modifications
+Rooftop Equipment Evaluation
+Change of Occupancy
+Adaptive Reuse
+Building Conversions
+Building Additions
+Building Renovations
+Structural Repairs
+Seismic Retrofit
+No Existing Plans
+Field Verification
+Contractor-Assisted Field Verification
+Site Visits
+Matterport / Digital Scan Coordination
+Engineering From Field Photos
+Engineering From City Records
+13. PERMIT ENGINEERING
+
+Create:
+
+/permit-engineering/
+
+Subpages:
+
+Permit-Ready Engineering
+Structural Permit Drawings
+MEP Permit Drawings
+Civil Permit Drawings
+Engineering Calculations
+PE-Reviewed Drawings
+PE-Stamped Structural Plans
+PE-Reviewed MEP Plans
+Plan-Check Responses
+City Comments
+County Comments
+Permit Revisions
+Engineering Redlines
+Permit Corrections
+Engineering Reports
+
+The site must NEVER imply that Apex sells engineering stamps.
+
+Use language explaining that licensed professional engineers must perform the required review/design and accept appropriate professional responsibility.
+
+14. INDUSTRIES MASTER HUB
+
+Create:
+
+/industries/
+
+Organize industries into logical groups.
+
+15. HEALTHCARE
+
+/industries/healthcare/
+
+Include:
+
+Hospitals
+Medical Office Buildings
+Clinics
+Outpatient Clinics
+Urgent Care
+Ambulatory Surgery Centers
+Imaging Centers
+Dental Offices
+Behavioral Health
+Rehabilitation Facilities
+Skilled Nursing
+Veterinary Facilities
+
+Potential engineering topics:
+
+Structural modifications
+Equipment support
+Seismic
+HVAC
+Pressure relationships
+Negative-pressure rooms
+Emergency power
+Medical gas
+Plumbing
+Accessibility
+Utilities
+16. DATA CENTERS
+
+/industries/data-centers/
+
+Include:
+
+Hyperscale
+Colocation
+Enterprise
+Edge Data Centers
+Server Rooms
+Mission-Critical Facilities
+
+Topics:
+
+N+1 cooling
+High-density electrical distribution
+UPS
+Generators
+Battery storage
+Equipment anchorage
+Structural floor loads
+Civil utilities
+Geotechnical
+Resilience
+17. TENANT IMPROVEMENT
+
+/industries/tenant-improvement/
+
+Include:
+
+Office TI
+Retail TI
+Restaurant TI
+Medical TI
+Warehouse TI
+Industrial TI
+Fitness TI
+Salon / Spa TI
+Commercial TI
+Change of Occupancy
+18. INDUSTRIAL / WAREHOUSE
+
+/industries/industrial-warehouse/
+
+Include:
+
+Warehouses
+Distribution Centers
+Fulfillment Centers
+Manufacturing
+Light Industrial
+Heavy Industrial
+High-Bay
+Logistics
+Equipment Platforms
+Process Facilities
+19. MULTIFAMILY
+
+/industries/multifamily/
+
+Include:
+
+Apartments
+Condominiums
+Townhomes
+Affordable Housing
+Workforce Housing
+Student Housing
+Senior Apartments
+Luxury Apartments
+Low-Rise
+Mid-Rise
+High-Rise
+Podium
+Multifamily Renovation
+Mixed-Use Residential
+20. RETAIL
+
+/industries/retail/
+
+Include:
+
+Shopping Centers
+Retail Stores
+Big-Box Retail
+Grocery
+Convenience
+Shopping Mall TI
+Ground-Up Retail
+Retail Renovation
+21. HOSPITALITY
+
+/industries/hospitality/
+
+Include:
+
+Hotels
+Resorts
+Motels
+Extended Stay
+Boutique Hotels
+Conference Centers
+Ballrooms
+Amenity Areas
+Pools
+Hotel Renovation
+22. RESTAURANTS / FOOD SERVICE
+
+/industries/restaurants/
+
+Include:
+
+Restaurants
+Fast Casual
+Quick Service
+Fine Dining
+Bars
+Coffee Shops
+Bakeries
+Ghost Kitchens
+Food Halls
+Commercial Kitchens
+
+Key engineering topics:
+
+Kitchen exhaust
+Make-up air
+Grease exhaust
+Gas piping
+Grease waste
+Electrical loads
+HVAC
+Equipment support
+Rooftop equipment
+23. EDUCATION
+
+/industries/education/
+
+Include:
+
+K-12
+Charter Schools
+Private Schools
+Colleges
+Universities
+Community Colleges
+Vocational Schools
+Student Housing
+Laboratories
+Athletic Facilities
+Campus Utilities
+24. LIFE SCIENCE
+
+/industries/life-science/
+
+Include:
+
+Laboratories
+Biotech
+Pharmaceutical
+Research Facilities
+Cleanrooms
+Vivariums
+Testing Laboratories
+Medical Research
+Specialty Gas Systems
+Controlled Environments
+25. GOVERNMENT
+
+/industries/government/
+
+Include:
+
+Federal
+State
+County
+Municipal
+Courthouses
+Civic Centers
+Libraries
+Community Centers
+Public Works
+Police
+Fire
+Emergency Operations
+Administrative Buildings
+26. MILITARY & DEFENSE
+
+/industries/military-defense/
+
+Include:
+
+Air Force Facilities
+Army Facilities
+Navy Facilities
+Marine Corps Facilities
+National Guard
+Barracks
+Dormitories
+Hangars
+Vehicle Maintenance
+Training Facilities
+Administrative Buildings
+Warehouses
+Security Facilities
+Parking
+Utilities
+Recreation Facilities
+Site Improvements
+
+Potential engineering topics:
+
+UFC criteria
+ATFP
+Structural hardening
+Existing facilities
+Mission-critical power
+Resilience
+MEP
+Civil
+Geotechnical
+
+Never imply military or federal endorsement.
+
+27. RELIGIOUS / WORSHIP
+
+/industries/religious-worship/
+
+Include:
+
+Churches
+Sanctuaries
+Mosques
+Synagogues
+Temples
+Fellowship Halls
+Religious Schools
+Worship Campuses
+
+Topics:
+
+Long-span framing
+Assembly occupancy
+HVAC
+Acoustic-sensitive systems
+Lighting
+Site / parking
+Accessibility
+28. COMMERCIAL OFFICE
+
+/industries/commercial-office/
+
+Include:
+
+Corporate HQ
+Office Buildings
+Professional Offices
+Coworking
+Core & Shell
+Office TI
+Flexible Office
+Renovation
+29. SENIOR LIVING
+
+/industries/senior-living/
+
+Include:
+
+Assisted Living
+Independent Living
+Memory Care
+Skilled Nursing
+Continuing Care
+Senior Apartments
+30. SOLAR / RENEWABLE ENERGY
+
+/industries/renewable-energy/
+
+Include:
+
+Rooftop PV
+Ground-Mount PV
+Solar Carports
+Battery Storage
+Microgrids
+EV + Solar
+Structural Solar
+Electrical Solar
+Utility Interconnection
+31. EV / AUTOMOTIVE
+
+/industries/ev-automotive/
+
+Include:
+
+DC Fast Charging
+Level 2 Charging
+Fleet Electrification
+Dealerships
+Service Centers
+Auto Repair
+Parking Garage Charging
+Multifamily Charging
+32. COLD STORAGE / FOOD PROCESSING
+
+/industries/cold-storage/
+
+Include:
+
+Refrigerated Warehouses
+Freezers
+Food Distribution
+Food Processing
+Cold Rooms
+Blast Freezers
+Refrigeration Facilities
+33. SELF-STORAGE
+
+/industries/self-storage/
+
+Include:
+
+Single Story
+Multi-Story
+Climate-Controlled
+Conversions
+Site Development
+34. PARKING
+
+/industries/parking/
+
+Include:
+
+Parking Structures
+Parking Garages
+Surface Lots
+Parking Expansions
+Parking Rehabilitation
+EV-Ready Parking
+Parking Canopies
+Solar Carports
+35. AVIATION
+
+/industries/aviation/
+
+Include:
+
+Aircraft Hangars
+Maintenance Hangars
+FBO Facilities
+Airport Support Buildings
+Terminals
+Aviation Warehouses
+Apron Support
+Airport Utilities
+36. FITNESS / RECREATION
+
+/industries/fitness-recreation/
+
+Include:
+
+Fitness Clubs
+Gyms
+Recreation Centers
+Aquatic Centers
+Sports Complexes
+Indoor Sports
+Training Facilities
+Climbing Gyms
+Yoga / Pilates
+37. BREWERIES / BEVERAGE
+
+/industries/breweries-beverage/
+
+Include:
+
+Breweries
+Taprooms
+Beverage Production
+Distillery-type facilities only where appropriate
+Process piping
+Tank loads
+Floor drainage
+CO2 monitoring
+Assembly occupancy conversions
+38. TELECOMMUNICATIONS
+
+/industries/telecommunications/
+
+Include:
+
+Cell Towers
+Rooftop Telecom
+Equipment Shelters
+Small Cell
+Wireless Infrastructure
+Backup Power
+Equipment Cooling
+39. AGRICULTURE
+
+/industries/agriculture/
+
+Include:
+
+Greenhouses
+Controlled-Environment Agriculture
+Indoor Agriculture
+Agricultural Processing
+Agricultural Warehouses
+Utility Facilities
+40. CANNABIS
+
+/industries/cannabis/
+
+Include where legally/professionally appropriate:
+
+Cultivation
+Processing
+Manufacturing
+Dispensaries
+Indoor Grow
+High-Density Lighting
+Dehumidification
+Electrical Service
+Hazardous Process Coordination
+41. ADDITIONAL INDUSTRIES
+
+Build the architecture for all of the following.
+
+Do not necessarily publish every page immediately.
+
+Mixed-Use Development
+Student Housing
+Affordable Housing
+Manufacturing
+Advanced Manufacturing
+Semiconductor
+Microelectronics
+Robotics
+Aerospace Manufacturing
+Pharmaceutical Manufacturing
+Food Manufacturing
+Distribution Centers
+Logistics
+Water Facilities
+Wastewater Facilities
+Pump Stations
+Utility Infrastructure
+Fire Stations
+Police Stations
+Emergency Operations Centers
+Courthouses
+Correctional Facilities
+Public Safety
+Banks
+Financial Institutions
+Museums
+Performing Arts
+Entertainment Venues
+Stadiums
+Arenas
+Community Centers
+Childcare
+Daycare
+Veterinary Clinics
+Dental Offices
+Urgent Care
+Surgery Centers
+Imaging Centers
+Behavioral Health
+Grocery Stores
+Convenience Stores
+Fuel Stations
+Car Washes
+Auto Dealerships
+Auto Service Centers
+Fleet Maintenance
+Transit Facilities
+Rail Facilities
+Bus Maintenance
+Ports
+Marinas
+Casinos
+Resorts
+Commercial Laundry
+Aquatic Centers
+Sports Facilities
+Rehabilitation Facilities
+Skilled Nursing
+Clean Manufacturing
+Mission-Critical Facilities
+Secure Facilities
+Disaster Recovery Facilities
+42. INDUSTRY × DISCIPLINE SYSTEM
+
+For major industries, support dedicated pages combining the industry with the engineering discipline.
+
+Examples:
+
+/industries/healthcare/structural-engineering/
+
+/industries/healthcare/mep-engineering/
+
+/industries/healthcare/mechanical-engineering/
+
+/industries/healthcare/electrical-engineering/
+
+/industries/healthcare/plumbing-engineering/
+
+/industries/healthcare/civil-engineering/
+
+/industries/healthcare/geotechnical-engineering/
+
+Repeat this model where enough unique content exists for:
+
+Healthcare
+Hospitals
+Medical Office
+Multifamily
+Apartments
+Student Housing
+Data Centers
+Industrial
+Warehouse
+Manufacturing
+Restaurant
+Commercial Kitchen
+Retail
+Hospitality
+Hotels
+Senior Living
+Education
+Life Science
+Laboratories
+Government
+Military
+Religious
+Office
+Solar
+EV
+Cold Storage
+Parking
+Aviation
+Telecom
+Cannabis
+Agriculture
+Semiconductor
+Pharmaceutical
+Food Processing
+Public Safety
+Veterinary
+Dental
+Grocery
+Automotive
+
+Only publish combinations that can support meaningful unique content.
+
+43. WHO WE WORK WITH
+
+Create:
+
+/who-we-work-with/
+
+Pages:
+
+Architects
+General Contractors
+Developers
+Property Managers
+Builders
+Owners
+Owner Representatives
+Facility Managers
+Construction Managers
+Design-Build Firms
+Government Contractors
+Real Estate Investors
+Multi-Site Clients
+Portfolio Clients
+National Accounts
+44. ARCHITECTS PAGE
+
+/who-we-work-with/architects/
+
+Primary intent:
+
+Engineering firm for architects.
+
+Discuss:
+
+Structural partnership
+MEP partnership
+Civil
+Geotechnical
+CAD
+Revit
+BIM
+Design development
+Redlines
+Permit sets
+Plan-check responses
+PE review
+Repeat project workflow
+
+CTA:
+
+Send Us Your Architectural Set
+
+45. GENERAL CONTRACTORS
+
+/who-we-work-with/general-contractors/
+
+Discuss:
+
+Existing conditions
+Structural modifications
+RFIs
+Field verification
+MEP coordination
+Equipment changes
+Permit revisions
+Design-build support
+46. DEVELOPERS
+
+/who-we-work-with/developers/
+
+Discuss:
+
+Feasibility
+Site development
+Structural systems
+MEP infrastructure
+Civil
+Geotechnical
+Utility planning
+Value engineering
+Portfolio development
+47. PROPERTY MANAGERS
+
+/who-we-work-with/property-managers/
+
+This should be a major sales page.
+
+Discuss:
+
+Aging communities
+Structural assessments
+HVAC replacement
+Electrical upgrades
+Plumbing
+Parking lots
+Drainage
+Capital improvements
+Building repairs
+Portfolio engineering
+48. GOVERNMENT CONTRACTORS
+
+/who-we-work-with/government-contractors/
+
+Discuss:
+
+Federal projects
+Military projects
+Engineering design support
+RFP/RFQ packages
+Structural
+MEP
+Civil
+Geotechnical
+Existing facility upgrades
+49. PROJECT TYPES
+
+Create:
+
+/project-types/
+
+Pages:
+
+New Construction
+Additions
+Renovations
+Tenant Improvements
+Adaptive Reuse
+Change of Occupancy
+Building Conversions
+Retrofits
+Seismic Retrofits
+Equipment Replacement
+Facility Upgrades
+Capital Improvements
+Site Expansions
+Parking Expansions
+Utility Upgrades
+Energy Upgrades
+Accessibility Upgrades
+Building Repairs
+Code Compliance Upgrades
+Permit Corrections
+Plan-Check Responses
+50. SOLUTIONS / PROBLEM-BASED SEO
+
+Create:
+
+/solutions/
+
+This section targets very specific engineering problems.
+
+Pages should include:
+
+Structural Engineer for Wall Opening
+Masonry Wall Opening Engineering
+Lintel Engineering
+Header Engineering
+Load-Bearing Wall Removal
+Beam Replacement
+Foundation Repair
+Structural Crack Evaluation
+Building Settlement
+Rooftop HVAC Structural Analysis
+RTU Replacement
+Generator Structural Support
+Equipment Pad Engineering
+Transformer Pad Engineering
+BESS Structural Engineering
+Rooftop Solar Structural Analysis
+Solar Carport Engineering
+Parking Canopy Engineering
+Mezzanine Engineering
+Equipment Platform Engineering
+Change-of-Occupancy Structural Engineering
+City-Required Structural Report
+Existing Building Structural Report
+Commercial MEP Permit Plans
+Restaurant MEP Plans
+Tenant Improvement MEP Plans
+Multifamily MEP Plans
+Medical Office MEP Plans
+Fitness Club MEP Plans
+Commercial Kitchen Exhaust
+Kitchen Make-Up Air
+Grease Exhaust
+Commercial Kitchen Gas Piping
+HVAC Replacement
+Warehouse HVAC
+Warehouse Ventilation
+Gym HVAC
+Pool Dehumidification
+Negative-Pressure Rooms
+Laboratory Exhaust
+Fume Hood Exhaust
+Data Center Cooling
+Server Room Cooling
+Electrical Service Upgrade
+Electrical Load Study
+EV Load Study
+Fleet Charging
+Multifamily EV Charging
+Generator Installation
+Emergency Power
+UPS Systems
+Switchgear Replacement
+Electrical Panel Replacement
+Solar Interconnection
+Battery Storage Electrical Engineering
+Plumbing Riser Design
+Domestic Water Sizing
+Water Heater Engineering
+Grease Interceptor Engineering
+Medical Gas Coordination
+Parking Lot Engineering
+Parking Lot Expansion
+Gravel Parking
+Turn Lane Engineering
+Commercial Driveway Engineering
+Site Drainage
+Stormwater
+Utility Connections
+Commercial Geotechnical Report
+Multifamily Geotechnical Report
+Parking Lot Geotechnical
+Commercial Soil Borings
+Multifamily Soil Borings
+Foundation Soil Recommendations
+Pavement Subgrade
+Expansive Soil
+Settlement Analysis
+Retaining Wall Geotechnical Parameters
+Engineering for City Comments
+PE-Reviewed Structural Plans
+PE-Reviewed MEP Plans
+Engineering Redlines
+Permit Corrections
+Engineering From Architectural Plans
+Engineering Without CAD
+Matterport Engineering Coordination
+Engineering From Contractor Photos
+Aging Community Engineering
+Portfolio Engineering Support
+Capital Improvement Engineering
+Aging HVAC
+Aging Electrical
+Parking Rehabilitation
+Federal Facility Renovation
+Military Dorm Renovation
+Military Parking Improvements
+Military Recreation Site Engineering
+Federal Switchgear Replacement
+Public Works Engineering
+Federally Funded Engineering
+51. LOCATION ARCHITECTURE
+
+Create:
+
+/locations/
+
+Do not claim nationwide licensure unless verified.
+
+Display licensing/service availability accurately.
+
+State hubs should exist only where business/licensing strategy supports them.
+
+Potential priority state hubs:
+
+Arizona
+California
+Texas
+Florida
+Virginia
+North Carolina
+
+Expand additional states based on licensing and Search Console demand.
+
+52. ARIZONA LOCATIONS
+
+Potential:
+
+Phoenix
+Scottsdale
+Paradise Valley
+Glendale
+Mesa
+Chandler
+Gilbert
+Queen Creek
+Tempe
+Peoria
+Goodyear
+Surprise
+Tucson
+Flagstaff
+53. CALIFORNIA LOCATIONS
+
+Potential:
+
+Los Angeles
+San Diego
+Orange County
+Irvine
+Anaheim
+Sacramento
+San Francisco
+San Jose
+Palo Alto
+Oakland
+Long Beach
+Pasadena
+Santa Monica
+Beverly Hills
+Burbank
+Riverside
+San Bernardino
+Inland Empire
+Fresno
+Bay Area
+54. TEXAS LOCATIONS
+
+Potential:
+
+Dallas
+Fort Worth
+Austin
+San Antonio
+Houston
+Plano
+Frisco
+Arlington
+Irving
+Round Rock
+Leander
+El Paso
+55. FLORIDA LOCATIONS
+
+Potential:
+
+Miami
+Fort Lauderdale
+West Palm Beach
+Orlando
+Tampa
+Jacksonville
+Naples
+Fort Myers
+Tallahassee
+56. VIRGINIA LOCATIONS
+
+Potential:
+
+Northern Virginia
+Richmond
+Virginia Beach
+Norfolk
+Arlington
+Alexandria
+Manassas
+Quantico
+57. NORTH CAROLINA LOCATIONS
+
+Potential:
+
+Charlotte
+Raleigh
+Durham
+Greensboro
+Winston-Salem
+Wilmington
+58. LOCATION × SERVICE SYSTEM
+
+Where enough unique local information exists, create pages like:
+
+/locations/arizona/phoenix/structural-engineering/
+
+/locations/arizona/phoenix/mep-engineering/
+
+/locations/arizona/phoenix/mechanical-engineering/
+
+/locations/arizona/phoenix/electrical-engineering/
+
+/locations/arizona/phoenix/plumbing-engineering/
+
+/locations/arizona/phoenix/civil-engineering/
+
+/locations/arizona/phoenix/geotechnical-engineering/
+
+Repeat selectively for major markets.
+
+Priority combinations:
+
+Phoenix Structural
+Phoenix MEP
+Phoenix Civil
+Phoenix Geotechnical
+
+Scottsdale Structural
+Scottsdale MEP
+
+Paradise Valley Structural
+Paradise Valley MEP
+Paradise Valley Custom Home Engineering
+
+Glendale Structural
+Glendale MEP
+Glendale Structural Reports
+
+Tucson Structural
+Tucson MEP
+
+Los Angeles Structural
+Los Angeles MEP
+Los Angeles Civil
+Los Angeles Title 24
+Los Angeles Seismic Retrofit
+Los Angeles Multifamily MEP
+
+San Diego Structural
+San Diego MEP
+
+Orange County Structural
+Orange County MEP
+
+San Francisco Structural
+San Francisco MEP
+
+Dallas Structural
+Dallas MEP
+Dallas Mechanical
+Dallas Electrical
+Dallas Plumbing
+Dallas Civil
+Dallas Geotechnical
+Dallas Restaurant MEP
+Dallas Fitness MEP
+
+Austin Structural
+Austin MEP
+Austin Civil
+Austin Geotechnical
+Austin Multifamily
+
+San Antonio Structural
+San Antonio MEP
+San Antonio Civil
+San Antonio Geotechnical
+San Antonio Military Engineering
+
+Houston Structural
+Houston MEP
+Houston Civil
+Houston Geotechnical
+
+Miami Structural
+Miami MEP
+Miami Civil
+Miami Multifamily Structural
+
+Northern Virginia Structural
+Northern Virginia MEP
+Northern Virginia Government Engineering
+
+Charlotte Structural
+Charlotte MEP
+Charlotte Civil
+
+Raleigh Structural
+Raleigh MEP
+Raleigh Civil
+
+59. LOCATION × INDUSTRY × SERVICE
+
+Support these pages in the architecture.
+
+Do NOT automatically publish every combination.
+
+Examples worth considering:
+
+Dallas Restaurant MEP
+Dallas Fitness MEP
+Phoenix Multifamily MEP
+Phoenix Structural Inspections
+Scottsdale Custom Home Structural
+Paradise Valley Custom Home Engineering
+Los Angeles Multifamily MEP
+Los Angeles Seismic Retrofit
+San Antonio Commercial Geotechnical
+San Antonio Military Geotechnical
+Austin Multifamily Engineering
+Miami Multifamily Structural
+California Healthcare MEP
+Arizona Healthcare Engineering
+Texas Industrial Engineering
+
+Only publish when unique content and commercial justification exist.
+
+60. PROJECT CASE STUDIES
+
+Create:
+
+/projects/
+
+Project filters:
+
+Discipline
+Industry
+State
+Project Type
+
+Individual project template:
+
+Project Title
+
+Location
+
+Industry
+
+Building Type
+
+Project Size if public
+
+Disciplines
+
+Project Need
+
+Existing Conditions
+
+Engineering Challenges
+
+Structural Approach
+
+Mechanical Approach
+
+Electrical Approach
+
+Plumbing Approach
+
+Civil Approach
+
+Geotechnical Approach
+
+Coordination
+
+Permit / AHJ Considerations
+
+Deliverables
+
+Outcome
+
+Related Services
+
+Related Industry
+
+Related Location
+
+CTA
+
+Do not reveal confidential information.
+
+Project pages may be anonymized.
+
+Example:
+
+/projects/22000-sf-fitness-facility-dallas/
+
+rather than exposing a client when permission has not been granted.
+
+61. RESOURCE CENTER
+
+Create:
+
+/resources/
+
+Categories:
+
+Structural
+MEP
+Mechanical
+Electrical
+Plumbing
+Civil
+Geotechnical
+Permit
+Existing Buildings
+Architects
+Contractors
+Developers
+Property Managers
+Government
+62. STRUCTURAL RESOURCE ARTICLES
+
+Create content covering:
+
+When Do You Need a Structural Engineer?
+How Much Does Structural Engineering Cost?
+What Does a Structural Engineer Need to Start?
+Structural Engineer vs Architect
+Structural Engineer vs Civil Engineer
+What Is Included in Structural Drawings?
+What Are Structural Calculations?
+Can Engineering Proceed Without Original Plans?
+When Is a Structural Site Visit Required?
+What Field Information Does a Structural Engineer Need?
+How to Photograph Existing Conditions
+Do You Need an Engineer to Remove a Load-Bearing Wall?
+Does a Remodel Need Structural Engineering?
+Do Additions Need Structural Engineering?
+Does Rooftop HVAC Need Structural Review?
+What Is Equipment Anchorage?
+What Is a Structural Inspection Report?
+When Should Building Cracks Be Evaluated?
+When Should Foundation Problems Be Evaluated?
+When Are Structural Permit Plans Required?
+63. MEP RESOURCE ARTICLES
+
+Include:
+
+What Is MEP Engineering?
+How Much Does MEP Engineering Cost?
+What Is Included in MEP Drawings?
+What Does an MEP Engineer Need?
+What Should Architects Send Their MEP Engineer?
+When Are MEP Plans Required?
+How Long Does MEP Engineering Take?
+Does a Commercial Remodel Need MEP?
+What MEP Is Needed for Tenant Improvement?
+What MEP Plans Does a Restaurant Need?
+How Is Commercial Kitchen Exhaust Designed?
+What Is Make-Up Air?
+What Is an HVAC Load Calculation?
+What Is an Electrical Load Calculation?
+How Is Electrical Service Size Determined?
+What Is a One-Line Diagram?
+What Are Plumbing Fixture Calculations?
+Does HVAC Replacement Require Engineering?
+When Does a Generator Need Engineering?
+What Engineering Is Needed for EV Charging?
+64. CIVIL RESOURCE ARTICLES
+
+Include:
+
+What Does a Civil Engineer Need to Begin Site Design?
+What Is a Grading Plan?
+What Is a Drainage Plan?
+When Is a Drainage Report Required?
+What Is a Civil Site Plan?
+What Engineering Is Needed for a Parking Lot?
+What Is Utility Coordination?
+Civil Engineer vs Land Surveyor
+What Is Stormwater Engineering?
+Engineering for Commercial Site Development
+Engineering for Parking Expansions
+Engineering for Turn Lanes
+65. GEOTECHNICAL RESOURCE ARTICLES
+
+Include:
+
+What Is Geotechnical Engineering?
+What Is a Geotechnical Report?
+When Is a Geotechnical Report Required?
+How Much Does Geotechnical Investigation Cost?
+What Is a Soil Boring?
+How Many Soil Borings Are Needed?
+What Is Allowable Soil Bearing Pressure?
+Why Does a Structural Engineer Need a Geotechnical Report?
+What Is Pavement Geotechnical Engineering?
+What Are Earthwork Recommendations?
+What Are Compaction Recommendations?
+What Are Expansive Soils?
+What Is Settlement Analysis?
+66. PERMIT / PE RESOURCE ARTICLES
+
+Include:
+
+What Does a PE Stamp Mean?
+When Are PE-Stamped Drawings Required?
+Can an Engineer Stamp Someone Else's Drawings?
+What Is Responsible Charge?
+What Happens During Engineering Plan Check?
+How Do Engineers Respond to City Comments?
+What Is a Permit-Ready Engineering Package?
+Do Engineering Drawings Guarantee Permit Approval?
+What Happens After Permit Submission?
+What Does a City Typically Request From an Engineer?
+67. ARCHITECT RESOURCE CENTER
+
+Create:
+
+/resources/architects/
+
+Articles:
+
+Engineering Coordination Checklist
+Structural Engineering Handoff Checklist
+MEP Engineering Handoff Checklist
+What CAD Files Should Architects Send?
+PDF vs DWG vs Revit
+When Should Structural Engineering Begin?
+When Should MEP Engineering Begin?
+How Architects Can Reduce RFIs
+How to Coordinate Rooftop Equipment
+How to Coordinate Lighting With Electrical
+How to Coordinate Plumbing Fixtures
+How to Coordinate MEP Shafts
+How to Prepare an Architectural Set for Engineering
+68. CONTRACTOR RESOURCE CENTER
+
+Create:
+
+/resources/contractors/
+
+Articles:
+
+Field Verification Checklist
+What Photos Should Contractors Send?
+How to Measure Existing Openings
+When Is an Exploratory Opening Needed?
+What Existing Framing Information Is Needed?
+How to Document Existing Conditions
+When Does a Contractor Need an Engineer?
+What Is a Structural RFI?
+When Does a Field Change Need Engineering?
+How to Request an Engineering Revision
+69. DEVELOPER RESOURCE CENTER
+
+Create:
+
+/resources/developers/
+
+Articles:
+
+Engineering Due Diligence
+How to Budget Engineering
+Engineering Checklist Before Property Purchase
+Structural Due Diligence
+MEP Due Diligence
+Evaluating Electrical Capacity
+Evaluating HVAC Infrastructure
+When to Order Geotechnical
+Adaptive Reuse Engineering
+Documents Developers Should Obtain Before Design
+70. PROPERTY MANAGEMENT RESOURCE CENTER
+
+Create:
+
+/resources/property-managers/
+
+Articles:
+
+Engineering for Aging Communities
+Structural Cracks in Aging Buildings
+HVAC Replacement Planning
+Electrical Capacity Upgrades
+Parking Lot Rehabilitation
+Drainage Problems
+Building Condition Assessments
+Capital Improvement Engineering
+Portfolio Engineering
+Rooftop Equipment Replacement
+Structural Repair Planning
+71. ENGINEERING GLOSSARY
+
+Create:
+
+/engineering-glossary/
+
+Create individual glossary pages for important terms.
+
+Examples:
+
+AHJ
+ATFP
+BABA
+BIM
+CAD
+CMU
+DSA
+HVAC
+IBC
+IECC
+MEP
+NEC
+PE
+RFI
+RTU
+Seismic Design Category
+Shear Wall
+Title 24
+UFC
+UPS
+VAV
+VRF
+Allowable Bearing Pressure
+Anchor Bolt
+Beam
+Column
+Diaphragm
+Foundation
+Footing
+Grade Beam
+Holdown
+Lintel
+Live Load
+Dead Load
+Wind Load
+Seismic Load
+Moment Frame
+Braced Frame
+Shear Wall
+Joist
+Truss
+Slab
+Mat Foundation
+Pier
+Retaining Wall
+Soil Boring
+Compaction
+Settlement
+Expansive Soil
+Panel Schedule
+One-Line Diagram
+Load Calculation
+Make-Up Air
+Grease Exhaust
+Domestic Water
+Sanitary Riser
+Medical Gas
+Stormwater
+Grading
+Drainage
+
+Create 100+ glossary terms over time.
+
+72. CODE / STANDARD EDUCATION CENTER
+
+Create explanatory pages for:
+
+IBC
+IRC
+IECC
+NEC / NFPA 70
+ASHRAE 62.1
+ASHRAE 90.1
+California Title 24
+UFC
+ADA Accessibility
+Seismic Design Categories
+
+Do NOT reproduce copyrighted codes.
+
+Explain application at a high level.
+
+Always include:
+
+Applicable codes depend on jurisdiction, project type, occupancy, adopted code edition, and scope.
+
+73. ENGINEERING CAPABILITIES PAGE
+
+Create:
+
+/capabilities/
+
+Include:
+
+Engineering Disciplines
+Industries
+Project Types
+Deliverables
+Software
+States / Jurisdictions Served
+Professional Licensure
+Government Capabilities
+Quality Control
+Project Intake
+Contact
+
+This page should be procurement-friendly.
+
+74. GOVERNMENT PROCUREMENT SECTION
+
+Create:
+
+/government-contracting/
+
+and:
+
+/procurement/
+
+Potential information where applicable:
+
+Legal company name
+Company overview
+Core competencies
+Service areas
+Engineering disciplines
+NAICS
+UEI
+CAGE
+Certifications
+Veteran-owned status
+Service-disabled veteran status
+Insurance
+W-9 availability
+Vendor contact
+Capabilities statement
+
+Only publish verified information.
+
+75. RFP / RFQ SUBMISSION PAGE
+
+Create:
+
+/rfp-rfq/
+
+Form fields:
+
+Project Name
+
+Company
+
+Contact
+
+Email
+
+Phone
+
+Project Location
+
+Solicitation Number
+
+Due Date
+
+Requested Discipline
+
+Prime Contractor
+
+Project Description
+
+Upload Solicitation
+
+Upload Plans
+
+Upload Specifications
+
+Upload Addenda
+
+Upload Scope
+
+Notes
+
+CTA:
+
+Submit Bid Package for Engineering Review
+
+76. REQUEST A PROPOSAL
+
+Create:
+
+/request-proposal/
+
+This should be one of the most important pages.
+
+Step 1:
+
+What engineering do you need?
+
+Structural
+Mechanical
+Electrical
+Plumbing
+MEP
+Civil
+Geotechnical
+Energy / Title 24
+Multiple
+Not Sure
+
+Step 2:
+
+Project type.
+
+New Construction
+Addition
+Renovation
+Tenant Improvement
+Existing Building
+Repair
+Retrofit
+Site Development
+Equipment Upgrade
+Other
+
+Step 3:
+
+Industry.
+
+Use industry taxonomy.
+
+Step 4:
+
+Project info.
+
+Address
+City
+State
+Square Footage
+Stories
+Units
+Target Start
+Target Permit Date
+
+Step 5:
+
+Document status.
+
+Ask:
+
+Architectural PDF available?
+CAD available?
+Revit available?
+Existing structural available?
+Survey available?
+Geotechnical available?
+Site photos available?
+City comments available?
+
+Step 6:
+
+Uploads.
+
+Allow:
+
+PDF
+DWG
+DXF
+RVT
+ZIP
+Images
+Reports
+
+Step 7:
+
+Notes.
+
+77. PROJECT INTAKE REQUIREMENTS
+
+Create:
+
+/project-intake-requirements/
+
+Break down by discipline.
+
+Structural:
+
+Architectural PDF
+CAD/Revit
+Existing structural
+Geotechnical
+Photos
+Scope
+
+MEP:
+
+Architectural plans
+CAD/Revit
+Electrical service
+HVAC equipment
+Water heater
+Plumbing fixtures
+Equipment schedule
+Utilities
+Envelope information
+
+Civil:
+
+Survey
+Site plan
+Utility information
+Grading information
+Existing site conditions
+
+Geotechnical:
+
+Site plan
+Building footprint
+Building type
+Stories
+Proposed foundation concept if available
+Paving/site scope
+78. ENGINEERING PROCESS PAGE
+
+Create:
+
+/engineering-process/
+
+Process:
+
+Submit project information
+Engineering review
+Scope and fee
+Proposal authorization
+Project kickoff
+Design development
+Coordination
+QA/QC
+PE review
+Permit package
+Plan-check responses where included
+Final delivery
+
+Do not promise permit approval.
+
+79. QUALITY CONTROL PAGE
+
+Create:
+
+/quality-control/
+
+Explain actual process.
+
+Possible workflow:
+
+Design preparation
+Internal engineering review
+Multidiscipline coordination
+Calculations
+PE review
+QA/QC
+Client review
+Final issue
+
+Only describe real processes.
+
+80. PROFESSIONAL RESPONSIBILITY PAGE
+
+Create:
+
+/professional-engineering/
+
+Explain:
+
+What PE review means
+Responsible charge
+Engineering calculations
+Design responsibility
+Stamp / seal process
+Why ethical firms do not “rubber stamp”
+Why third-party plans may require redesign/review
+
+This page can create significant trust.
+
+81. TEAM PAGES
+
+Create:
+
+/team/
+
+Each engineer/leader may have profile pages showing:
+
+Name
+Role
+Discipline
+Licenses
+States
+Education
+Experience
+Industries
+Expertise
+Selected Projects
+Technical Articles Reviewed
+
+Never publish license information without verifying accuracy.
+
+82. AUTHOR / REVIEWER SYSTEM
+
+For technical resources, support:
+
+Written by:
+Marketing/technical author
+
+Technical review by:
+Licensed engineer where applicable
+
+Last technical review:
+Date
+
+Do not fake reviewer information.
+
+83. PAGE CONTENT MODEL
+
+Every CMS page record should support:
+
+Page ID
+Page Type
+Title
+Slug
+Parent
+H1
+SEO Title
+Meta Description
+Primary Keyword
+Secondary Keywords
+Search Intent
+Intro
+Body Sections
+FAQs
+Related Services
+Related Industries
+Related Locations
+Related Projects
+Related Resources
+CTA
+CTA Link
+Featured Image
+OG Image
+Canonical URL
+Schema Type
+Published
+Indexable
+Last Updated
+Technical Reviewer
+Author
+84. PAGE TEMPLATES
+
+Create reusable components:
+
+ServicePage
+
+IndustryPage
+
+IndustryServicePage
+
+LocationPage
+
+LocationServicePage
+
+ProjectTypePage
+
+SolutionPage
+
+ProjectPage
+
+ResourcePage
+
+ClientTypePage
+
+GlossaryPage
+
+TeamPage
+
+GovernmentPage
+
+Do NOT manually hard-code hundreds of pages.
+
+85. SERVICE PAGE TEMPLATE
+
+Structure:
+
+Breadcrumb
+
+H1
+
+Concise introduction
+
+What the service is
+
+When it is required
+
+Services included
+
+Project types
+
+Industries served
+
+Deliverables
+
+Engineering process
+
+Information required
+
+Applicable standards
+
+Relevant projects
+
+Related services
+
+Related locations
+
+FAQs
+
+CTA
+
+86. INDUSTRY PAGE TEMPLATE
+
+Structure:
+
+Breadcrumb
+
+H1
+
+Industry overview
+
+Facility types
+
+Industry engineering challenges
+
+Structural
+
+Mechanical
+
+Electrical
+
+Plumbing
+
+Civil
+
+Geotechnical
+
+Energy
+
+New construction
+
+Renovation
+
+Existing facilities
+
+Compliance considerations
+
+Related projects
+
+Related resources
+
+FAQ
+
+CTA
+
+87. LOCATION PAGE TEMPLATE
+
+Structure:
+
+Breadcrumb
+
+H1
+
+Engineering services in location
+
+Disciplines
+
+Industries
+
+Project types
+
+Jurisdiction overview
+
+Local engineering considerations
+
+Relevant projects
+
+Nearby markets
+
+License availability
+
+FAQs
+
+CTA
+
+Every location page must contain unique location-specific information.
+
+88. INDUSTRY × SERVICE TEMPLATE
+
+Example:
+
+Healthcare MEP Engineering.
+
+Structure:
+
+Industry need
+
+Relevant MEP systems
+
+Mechanical
+
+Electrical
+
+Plumbing
+
+Codes/standards
+
+Facility types
+
+Renovations
+
+New construction
+
+Existing buildings
+
+Project workflow
+
+Related healthcare projects
+
+FAQ
+
+CTA
+
+89. SOLUTION PAGE TEMPLATE
+
+Structure:
+
+Problem
+
+Why engineering may be required
+
+What Apex reviews
+
+Required field information
+
+Engineering analysis
+
+Possible deliverables
+
+Coordination
+
+Permit considerations
+
+FAQ
+
+CTA
+
+90. PROJECT PAGE TEMPLATE
+
+Structure:
+
+Project overview
+
+Location
+
+Industry
+
+Building type
+
+Project type
+
+Disciplines
+
+Client need
+
+Engineering challenge
+
+Approach
+
+Deliverables
+
+Coordination
+
+Outcome
+
+Related services
+
+Related industry
+
+Related location
+
+CTA
+
+91. RESOURCE ARTICLE TEMPLATE
+
+Structure:
+
+Question-focused H1
+
+Short answer
+
+Detailed explanation
+
+When this applies
+
+What information is needed
+
+Process
+
+Common mistakes
+
+When to call an engineer
+
+Related services
+
+Related resources
+
+FAQ
+
+CTA
+
+92. SEO TITLE RULES
+
+Titles should be specific.
+
+Examples:
+
+Structural Engineering Services | Apex Grid Engineering
+
+Healthcare MEP Engineering | Apex Grid Engineering
+
+Structural Engineer Phoenix, AZ | Apex Grid Engineering
+
+Restaurant MEP Engineering Dallas, TX | Apex Grid
+
+What Is a Geotechnical Report? | Apex Grid Engineering
+
+Avoid generic titles such as:
+
+Engineering Excellence
+
+93. META DESCRIPTION RULES
+
+Write custom descriptions.
+
+Do not automatically keyword-stuff.
+
+Typical format:
+
+[Service] for [project type/industry/location]. [Important capabilities]. Send Apex Grid your plans for engineering scope review.
+
+94. HEADING RULES
+
+Use one primary H1.
+
+H2 sections should describe real page topics.
+
+Avoid meaningless headings such as:
+
+Innovating Tomorrow
+
+Prefer:
+
+Structural Engineering for Existing Buildings
+
+95. INTERNAL LINKING ENGINE
+
+The CMS should automatically generate related links based on tags.
+
+Example:
+
+A project tagged:
+
+Dallas
+Fitness
+MEP
+
+should appear on:
+
+Dallas
+
+Fitness
+
+MEP
+
+Texas
+
+Fitness MEP
+
+Dallas MEP
+
+Project pages
+
+Resource pages
+
+96. BREADCRUMBS
+
+Automatically generate.
+
+Examples:
+
+Home → Services → Structural Engineering → Seismic Retrofit
+
+Home → Industries → Healthcare → MEP Engineering
+
+Home → Locations → Arizona → Phoenix → Structural Engineering
+
+Home → Projects → Multifamily → Project
+
+97. URL RULES
+
+URLs must be:
+
+lowercase
+descriptive
+short
+hyphenated
+permanent
+
+Good:
+
+/industries/healthcare/mep-engineering/
+
+Bad:
+
+/page?id=67493
+
+98. CANONICAL RULES
+
+Each page has one canonical URL.
+
+Prevent duplicated:
+
+query-string pages
+filtered pages
+tracking URLs
+alternate slugs
+print pages
+
+Use 301 redirects when URLs change.
+
+99. FILTER SEO
+
+Project filters and search filters must not accidentally create unlimited indexable URLs.
+
+Example:
+
+?industry=healthcare&state=az&page=2
+
+should generally not become an independent indexed landing page.
+
+Curated landing pages should handle commercial search intent.
+
+100. TECHNICAL SEO
+
+Implement:
+
+SSR or pre-rendered crawlable HTML
+Unique titles
+Unique meta descriptions
+Canonical tags
+Robots meta
+XML sitemaps
+Robots.txt
+Open Graph
+Twitter/X metadata
+Structured data
+Breadcrumbs
+Image alt
+WebP / AVIF
+Lazy loading
+Responsive images
+Fast JavaScript
+CDN
+Compression
+Caching
+Mobile optimization
+Accessibility
+HTTPS
+101. CORE WEB VITALS
+
+Optimize aggressively.
+
+Avoid:
+
+giant hero video
+excessive animation
+massive client JS bundles
+huge image files
+layout shifts
+third-party script overload
+
+The website should feel extremely fast.
+
+102. MOBILE-FIRST
+
+Mobile must contain the same meaningful content as desktop.
+
+Use accordions where needed.
+
+Do not remove substantial SEO content from mobile.
+
+103. STRUCTURED DATA
+
+Support JSON-LD.
+
+Use appropriate types such as:
+
+Organization
+LocalBusiness where actually applicable
+Service
+Person
+Article
+BreadcrumbList
+
+Do not add unsupported/fake structured data.
+
+104. ORGANIZATION ENTITY
+
+Maintain a centralized company entity object containing verified:
+
+Name
+Legal Name
+Logo
+Website
+Phone
+Email
+Address
+Founders
+Leadership
+Social Links
+Service Areas
+Licensing Information
+
+Every page should reference the same entity data.
+
+105. XML SITEMAPS
+
+Automatically generate:
+
+sitemap-index.xml
+
+with:
+
+sitemap-services.xml
+
+sitemap-industries.xml
+
+sitemap-locations.xml
+
+sitemap-projects.xml
+
+sitemap-resources.xml
+
+sitemap-solutions.xml
+
+sitemap-team.xml
+
+sitemap-glossary.xml
+
+Only include:
+
+published = true
+
+and:
+
+indexable = true
+
+106. HTML SITEMAP
+
+Create:
+
+/sitemap/
+
+Organize by:
+
+Services
+
+Industries
+
+Locations
+
+Solutions
+
+Projects
+
+Resources
+
+Company
+
+107. ROBOTS / INDEX CONTROL
+
+Noindex:
+
+Admin
+Staging
+Search results
+Internal dashboards
+Account pages
+Thank-you pages
+Private uploads
+Proposal confirmation pages
+Duplicate filtered views
+108. 404 HANDLING
+
+Create useful 404.
+
+Search.
+
+Services.
+
+Industries.
+
+Request Proposal.
+
+Do not redirect every 404 to homepage.
+
+109. REDIRECT SYSTEM
+
+CMS must support:
+
+old URL → 301 → new URL
+
+Maintain redirect database.
+
+110. IMAGE STRATEGY
+
+Use real:
+
+buildings
+job sites
+engineering drawings
+BIM
+CAD
+calculations
+framing
+equipment
+completed projects
+site conditions
+
+Avoid filling the site with generic stock engineers wearing hard hats.
+
+111. IMAGE SEO
+
+Image names:
+
+multifamily-mep-engineering-dallas.webp
+
+rather than:
+
+IMG92383.jpg
+
+Alt:
+
+MEP engineering plans for a multifamily project in Dallas
+
+Alt text must describe actual image content.
+
+112. VIDEO STRATEGY
+
+Potential videos:
+
+How Our Engineering Process Works
+What We Need to Quote Your Project
+What Architects Should Send Engineers
+Structural Site Visit Explained
+MEP Engineering Explained
+Structural Engineering Explained
+Geotechnical Engineering Explained
+
+Include transcripts.
+
+113. DOWNLOAD CENTER
+
+Create useful PDFs:
+
+Structural Intake Checklist
+MEP Intake Checklist
+Civil Intake Checklist
+Geotechnical Intake Checklist
+Architect Coordination Checklist
+Contractor Field Verification Checklist
+Developer Engineering Checklist
+Property Manager Engineering Checklist
+Capabilities Statement
+
+Do not hide critical SEO content exclusively in PDF files.
+
+114. SEARCH
+
+Build internal search across:
+
+Services
+Industries
+Locations
+Projects
+Resources
+Solutions
+Glossary
+
+Search should understand synonyms.
+
+Examples:
+
+HVAC → mechanical
+
+STR → structural
+
+electrical load → electrical calculations
+
+soil report → geotechnical
+
+115. SITE-WIDE CTA SYSTEM
+
+Primary CTA:
+
+Request a Proposal
+
+Contextual CTAs:
+
+Send Us Your Plans
+
+Upload Project Files
+
+Request Structural Review
+
+Request MEP Review
+
+Submit RFP / RFQ
+
+Talk to an Engineer
+
+Do not use aggressive sales popups.
+
+116. CONTACT FORM ROUTING
+
+Form should route based on discipline.
+
+Example:
+
+Structural selected → Structural intake queue.
+
+MEP → MEP.
+
+Federal → Government opportunity queue.
+
+RFP → Bid review queue.
+
+117. CRM / LEAD RECORD
+
+Capture:
+
+Name
+Company
+Email
+Phone
+Project
+Address
+State
+Discipline
+Industry
+Project Type
+Budget if volunteered
+Target date
+Source URL
+Organic/referral/direct
+UTM
+Uploaded files
+Submission timestamp
+118. ANALYTICS
+
+Connect:
+
+Google Analytics 4
+Google Search Console
+Bing Webmaster Tools
+
+Track events:
+
+Proposal request
+Phone click
+Email click
+Upload start
+Upload complete
+RFP submission
+Capabilities download
+Contact submission
+Project viewed
+Service viewed
+Industry viewed
+119. SEO REPORTING
+
+Dashboard should track:
+
+Organic clicks
+
+Organic impressions
+
+Average ranking
+
+CTR
+
+Indexed pages
+
+Non-indexed pages
+
+Leads
+
+Proposal submissions
+
+Lead source
+
+Discipline
+
+Industry
+
+Location
+
+Revenue pipeline where CRM data exists
+
+120. SEARCH CONSOLE-DRIVEN EXPANSION
+
+Do not guess indefinitely.
+
+After initial launch, use Search Console.
+
+If Apex begins receiving impressions for:
+
+restaurant MEP engineer Dallas
+
+strengthen that cluster.
+
+If:
+
+structural engineer Phoenix wall opening
+
+appears, expand that cluster.
+
+Future content should follow real market demand.
+
+121. CONTENT QUALITY RULE
+
+Never produce a page simply because a keyword combination exists.
+
+Require one or more of:
+
+substantial unique subject matter
+actual project experience
+unique jurisdiction information
+unique industry information
+unique technical information
+strong commercial intent
+actual client demand
+122. DO NOT MASS-PUBLISH EMPTY CITY PAGES
+
+A city page must contain:
+
+real services
+relevant industries
+real local considerations
+project examples where available
+applicable licensing
+jurisdiction information
+unique copy
+
+Do not swap city names into identical content.
+
+123. DO NOT MASS-PUBLISH EVERY MATRIX COMBINATION
+
+The system should support:
+
+Service × Industry × Location
+
+but publication should require editorial approval.
+
+Example:
+
+Dallas Restaurant MEP = legitimate.
+
+Random low-value combinations should remain unpublished.
+
+124. CONTENT APPROVAL WORKFLOW
+
+Statuses:
+
+Draft
+
+Technical Review
+
+SEO Review
+
+Approved
+
+Published
+
+Archived
+
+A technical page cannot publish until approved.
+
+125. TECHNICAL REVIEW
+
+Technical claims should be reviewed by appropriate engineering personnel where necessary.
+
+The CMS should support reviewer assignment.
+
+126. UPDATE TRACKING
+
+Technical pages should contain:
+
+Last reviewed date.
+
+Do not automatically change dates simply to appear fresh.
+
+127. LOCAL SEO
+
+Where Apex has legitimate locations/service areas:
+
+Support localized business information.
+
+Never create fake addresses.
+
+Never pretend virtual offices are engineering offices.
+
+128. REVIEWS
+
+Create a testimonials section.
+
+Only legitimate client reviews.
+
+Prefer detailed project-relevant testimonials.
+
+Do not fabricate.
+
+129. TRUST ELEMENTS
+
+Potential:
+
+PE licensing
+Project experience
+Disciplines
+Industries
+Professional team
+Quality control
+Response process
+Client types
+Government capabilities
+
+Do not use unverifiable statistics.
+
+130. HOMEPAGE FINAL STRUCTURE
+
+Hero:
+
+Integrated Engineering. One Team.
+
+Subheading:
+
+Structural, Mechanical, Electrical, Plumbing, Civil and Geotechnical engineering for projects across a wide range of industries.
+
+CTA:
+
+Request a Proposal
+
+Secondary:
+
+Explore Services
+
+Then:
+
+Engineering Disciplines
+
+Industries
+
+Who We Work With
+
+Featured Projects
+
+Existing-Building Engineering
+
+Government / Military
+
+Locations
+
+Engineering Process
+
+Technical Resources
+
+Final CTA
+
+131. SERVICE MEGA MENU
+
+Structural
+
+Mechanical
+
+Electrical
+
+Plumbing
+
+MEP
+
+Civil
+
+Geotechnical
+
+Energy / Title 24
+
+Existing Buildings
+
+Permit Engineering
+
+132. INDUSTRY MEGA MENU
+
+Show priority industries:
+
+Healthcare
+
+Multifamily
+
+Data Centers
+
+Industrial
+
+Tenant Improvement
+
+Government
+
+Military
+
+Retail
+
+Hospitality
+
+Restaurants
+
+Education
+
+Life Science
+
+Senior Living
+
+Renewable Energy
+
+View All Industries
+
+133. PROJECTS MEGA MENU
+
+By:
+
+Discipline
+
+Industry
+
+Location
+
+Project Type
+
+134. WHO WE WORK WITH MENU
+
+Architects
+
+General Contractors
+
+Developers
+
+Property Managers
+
+Owners
+
+Facility Managers
+
+Government Contractors
+
+Design-Build
+
+135. RESOURCES MENU
+
+Engineering Guides
+
+Structural
+
+MEP
+
+Civil
+
+Geotechnical
+
+Permit
+
+Architect Resources
+
+Contractor Resources
+
+Developer Resources
+
+Property Manager Resources
+
+Glossary
+
+136. FOOTER
+
+Keep concise.
+
+Columns:
+
+Services
+
+Industries
+
+Company
+
+Resources
+
+Locations
+
+Contact
+
+Request Proposal
+
+Do not dump 700 links into footer.
+
+137. ADVANCED INDUSTRY EXPANSION
+
+After core pages are strong, build dedicated pages for:
+
+MANUFACTURING
+
+Manufacturing Engineering
+Manufacturing Structural
+Manufacturing MEP
+Manufacturing Mechanical
+Manufacturing Electrical
+Manufacturing Civil
+Manufacturing Geotechnical
+
+SEMICONDUCTOR
+
+Semiconductor Facility Engineering
+Semiconductor MEP
+Semiconductor Electrical
+Semiconductor Mechanical
+Semiconductor Structural
+
+PHARMACEUTICAL
+
+Pharmaceutical Engineering
+Pharmaceutical MEP
+Pharmaceutical HVAC
+Pharmaceutical Structural
+
+FOOD PROCESSING
+
+Food Processing Engineering
+Food Processing MEP
+Food Processing Structural
+Food Processing Plumbing
+Food Processing Refrigeration Coordination
+
+DISTRIBUTION
+
+Distribution Center Engineering
+Distribution Structural
+Distribution MEP
+Distribution Civil
+
+WATER / WASTEWATER
+
+Water Facility Engineering
+Wastewater Facility Engineering
+Pump Station Engineering
+Utility Infrastructure Engineering
+
+Only if within actual capabilities.
+
+138. PUBLIC SAFETY EXPANSION
+
+Pages:
+
+Fire Station Engineering
+Fire Station MEP
+Fire Station Structural
+
+Police Station Engineering
+Police Station MEP
+Police Station Structural
+
+Emergency Operations Center Engineering
+Public Safety Facility Engineering
+
+139. HEALTHCARE SPECIALTY EXPANSION
+
+Pages:
+
+Dental Office MEP
+Dental Office Structural
+
+Urgent Care MEP
+
+Ambulatory Surgery Center MEP
+
+Imaging Center Engineering
+
+Behavioral Health Engineering
+
+Rehabilitation Engineering
+
+Veterinary MEP
+
+Veterinary Structural
+
+Skilled Nursing Engineering
+
+140. RETAIL SPECIALTY EXPANSION
+
+Pages:
+
+Grocery Store MEP
+
+Grocery Store Structural
+
+Convenience Store Engineering
+
+Fuel Station Civil
+
+Fuel Station Structural Canopies
+
+Shopping Center MEP
+
+Shopping Center Civil
+
+Car Dealership MEP
+
+Car Dealership Structural
+
+Auto Service MEP
+
+Car Wash Engineering
+
+141. TRANSPORTATION FACILITIES
+
+Potential:
+
+Transit Facility Engineering
+
+Bus Maintenance Engineering
+
+Fleet Maintenance Engineering
+
+Rail Support Facilities
+
+Parking / Transit Integration
+
+Aviation Support Facilities
+
+Ports / Marine Facilities
+
+Only publish where capabilities exist.
+
+142. ENTERTAINMENT / CULTURE
+
+Potential:
+
+Museum Engineering
+
+Performing Arts Engineering
+
+Theater MEP
+
+Arena Engineering
+
+Stadium Engineering
+
+Entertainment Venue MEP
+
+Community Center Engineering
+
+Aquatic Center Engineering
+
+Sports Complex Engineering
+
+143. COMMERCIAL SPECIALTY
+
+Potential:
+
+Bank Engineering
+
+Financial Office Engineering
+
+Commercial Laundry Engineering
+
+Salon / Spa MEP
+
+Daycare Engineering
+
+Childcare Facility MEP
+
+Coworking Engineering
+
+Commercial Conversion Engineering
+
+144. EXISTING BUILDING SPECIALTY PAGES
+
+Create over time:
+
+Structural Engineering for Older Homes
+
+Structural Engineering for Historic Buildings
+
+Commercial Building Structural Assessment
+
+Apartment Structural Assessment
+
+Warehouse Structural Assessment
+
+Roof Framing Evaluation
+
+Floor Load Evaluation
+
+Balcony Structural Evaluation
+
+Stair Structural Evaluation
+
+Foundation Condition Report
+
+Masonry Condition Assessment
+
+Concrete Condition Assessment
+
+Steel Condition Assessment
+
+145. EQUIPMENT ENGINEERING EXPANSION
+
+Create pages around:
+
+RTUs
+
+AHUs
+
+Chillers
+
+Cooling Towers
+
+Generators
+
+Transformers
+
+Switchgear
+
+Battery Storage
+
+Industrial Equipment
+
+Storage Tanks
+
+Telecom Equipment
+
+Solar Panels
+
+Solar Carports
+
+Mechanical Equipment Platforms
+
+146. PROJECT DELIVERY PAGES
+
+Potential:
+
+Engineering Design-Build Support
+
+Engineering for Fast-Track Projects
+
+Engineering for Phased Projects
+
+Engineering for Portfolio Rollouts
+
+Prototype Engineering
+
+Multi-Site Engineering
+
+Repeat Client Engineering
+
+Engineering Overflow Support for Architects
+
+Engineering Production Support
+
+147. GOVERNMENT PROJECT CONTENT
+
+Create educational pages about:
+
+Engineering for Federal Projects
+
+Engineering for Military Renovations
+
+Engineering for Public Works
+
+Engineering for Federally Funded Projects
+
+Engineering for Davis-Bacon Projects
+
+BABA Design Considerations
+
+UFC Engineering Coordination
+
+ATFP Engineering
+
+Federal Facility Upgrades
+
+Government Bid Engineering Support
+
+Do not give legal/procurement advice beyond appropriate engineering context.
+
+148. RFP / BID RESOURCE ARTICLES
+
+Potential:
+
+How to Scope Engineering From an RFP
+
+What Engineers Review in Bid Documents
+
+Engineering Scope vs Construction Scope
+
+How Addenda Affect Engineering Proposals
+
+How to Review Engineering Bid Requirements
+
+What Is Construction Administration?
+
+Engineering During Construction
+
+What Is Shop Drawing Review?
+
+What Is Submittal Review?
+
+What Is an Engineering RFI?
+
+149. CONSTRUCTION ADMINISTRATION
+
+If Apex provides this service, create:
+
+/construction-administration/
+
+Pages:
+
+Engineering Construction Administration
+
+Structural CA
+
+MEP CA
+
+Submittal Review
+
+Shop Drawing Review
+
+RFI Support
+
+Site Observation
+
+Design Revisions During Construction
+
+Closeout Support
+
+Clearly distinguish CA from contractor means/methods and inspections where applicable.
+
+150. DIGITAL ENGINEERING / BIM
+
+If actual capabilities support it:
+
+BIM Coordination
+
+Revit Engineering
+
+CAD Engineering
+
+MEP Coordination
+
+Clash Coordination
+
+Digital Existing Conditions
+
+Matterport Coordination
+
+Scan-to-Engineering Workflow
+
+151. SEO PAGE PRIORITY CLASSIFICATION
+
+Each page should have a priority.
+
+Tier 1
+
+Major services
+
+Major industries
+
+Major cities
+
+Proposal pages
+
+Tier 2
+
+Subservices
+
+Industry + service
+
+Client types
+
+Existing building
+
+Tier 3
+
+Resources
+
+Solutions
+
+Secondary cities
+
+Tier 4
+
+Long-tail combinations
+
+Glossary
+
+152. INITIAL PUBLICATION PRIORITY
+
+Do NOT launch 1,000 pages on day one.
+
+Phase 1:
+
+Homepage
+
+Core Services
+
+Top Industries
+
+Client Pages
+
+Major Locations
+
+Request Proposal
+
+Projects
+
+About
+
+Capabilities
+
+Process
+
+Around 40–60 strong pages.
+
+Phase 2:
+
+Subservices
+
+Industry-service pages
+
+Existing-building pages
+
+Solutions
+
+Resources
+
+Around 100–150 additional pages.
+
+Phase 3:
+
+Location-service pages
+
+Projects
+
+Specialty industries
+
+Around 100–200 additional pages.
+
+Phase 4:
+
+Search Console-driven long-tail expansion.
+
+153. LONG-TERM PAGE CAPACITY
+
+The architecture should support:
+
+60–100 service pages
+
+75–150 industry pages
+
+50–150 industry-service pages
+
+50–200 location pages
+
+50–150 location-service pages
+
+100–300 project pages
+
+100–300 resource pages
+
+100+ glossary pages
+
+50–150 solution pages
+
+20–40 client/project-type pages
+
+That means the system should comfortably scale beyond 1,000 quality URLs without a redesign.
+
+154. AI SEARCH OPTIMIZATION
+
+Write direct factual statements.
+
+Good:
+
+Apex Grid Engineering provides structural, mechanical, electrical, plumbing, civil and geotechnical engineering for commercial, multifamily, industrial, healthcare, government and specialty projects.
+
+Bad:
+
+Engineering tomorrow through innovation and synergy.
+
+AI systems need explicit relationships between:
+
+Company
+
+Service
+
+Industry
+
+Location
+
+Project type
+
+Expert
+
+155. ANSWER-FIRST CONTENT
+
+Resource articles should answer the title question immediately.
+
+Example:
+
+Can Structural Engineering Be Completed Without Original Plans?
+
+Opening:
+
+Yes, in many projects structural engineering can proceed without original structural drawings, but the engineer may require field verification, photographs, measurements, exploratory openings or a site visit to establish existing conditions.
+
+Then expand.
+
+This makes content useful for AI search and featured results.
+
+156. FAQ CONTENT
+
+Every page needs relevant FAQs.
+
+Do not reuse identical FAQs everywhere.
+
+Example Healthcare:
+
+Does a medical office renovation require MEP engineering?
+
+What information does a healthcare MEP engineer need?
+
+Can existing HVAC systems be reused?
+
+Example Structural:
+
+Can you engineer a building without original plans?
+
+Is a site visit required?
+
+What is included in structural calculations?
+
+157. CONTENT VOICE
+
+Professional.
+
+Confident.
+
+Clear.
+
+Not academic.
+
+Not overly salesy.
+
+Not generic AI language.
+
+Avoid phrases such as:
+
+“cutting-edge solutions”
+
+“world-class innovation”
+
+“revolutionizing engineering”
+
+unless there is specific evidence.
+
+Speak like experienced engineers communicating with architects, contractors, owners and developers.
+
+158. CONVERSION PRINCIPLE
+
+Every SEO page should answer:
+
+What should I do next?
+
+Examples:
+
+Send plans.
+
+Upload RFP.
+
+Request structural review.
+
+Request MEP proposal.
+
+Talk with engineering team.
+
+159. PROJECT UPLOAD EXPERIENCE
+
+Uploads should display:
+
+Filename
+
+Size
+
+Progress
+
+Success
+
+Failure
+
+Allow multiple files.
+
+Allow ZIP packages.
+
+Use secure storage.
+
+Do not expose uploads publicly.
+
+160. AUTOMATED LEAD SUMMARY
+
+When a proposal form is submitted, generate a structured internal summary:
+
+Project
+
+Client
+
+Location
+
+Industry
+
+Disciplines
+
+Project type
+
+Size
+
+Schedule
+
+Files
+
+Missing information
+
+This helps the engineering team review opportunities quickly.
+
+161. OPTIONAL FUTURE AI PROJECT INTAKE
+
+The architecture may later support an AI intake assistant that helps clients identify missing project information.
+
+It should NOT provide engineering design.
+
+It can ask:
+
+Do you have architectural drawings?
+
+Do you have CAD?
+
+Is this new or existing?
+
+Do you have a survey?
+
+Do you have a geotechnical report?
+
+Then route to human review.
+
+162. DO NOT AUTO-QUOTE ENGINEERING
+
+Do not build an AI instant-pricing engine without explicit company approval.
+
+Engineering fees depend on:
+
+scope
+
+jurisdiction
+
+size
+
+complexity
+
+schedule
+
+existing conditions
+
+deliverables
+
+site visits
+
+professional liability
+
+163. PROJECT / INDUSTRY TAGGING
+
+Every project should support tags:
+
+Discipline
+
+Industry
+
+State
+
+City
+
+Project Type
+
+Building Type
+
+New / Existing
+
+Public / Private
+
+Government / Commercial
+
+This powers related content.
+
+164. DYNAMIC RELATED CONTENT
+
+Example:
+
+Healthcare MEP page automatically shows:
+
+Healthcare MEP projects
+
+Healthcare resources
+
+Healthcare locations
+
+Mechanical
+
+Electrical
+
+Plumbing
+
+Request Proposal
+
+165. SEARCH INTENT LABEL
+
+Every page record should contain:
+
+Commercial
+
+Transactional
+
+Informational
+
+Navigational
+
+Procurement
+
+Local
+
+This helps SEO planning.
+
+166. DUPLICATE CONTENT DETECTION
+
+Before publishing, system should warn editors if page content is overly similar to an existing page.
+
+Particularly for:
+
+locations
+
+industry-service pages
+
+solutions
+
+167. MINIMUM CONTENT STANDARDS
+
+Do not use arbitrary word counts as the only quality metric.
+
+But require enough substance to answer search intent.
+
+A service/location page should usually include:
+
+unique intro
+
+unique services
+
+unique industry context
+
+local information
+
+FAQs
+
+internal links
+
+CTA
+
+A thin 150-word page should generally not be published.
+
+168. PROGRAMMATIC SEO SAFETY
+
+Templates may create structure.
+
+They must not automatically create public pages just because every combination exists.
+
+Example database could theoretically generate:
+
+Phoenix + Brewery + Geotechnical.
+
+Do not publish unless approved.
+
+169. LOCAL LICENSE LANGUAGE
+
+Every location page should be capable of displaying:
+
+Professional engineering services are provided where Apex Grid maintains applicable licensure or through appropriately licensed professionals for the project jurisdiction. Availability varies by discipline and location.
+
+Customize based on actual company structure.
+
+170. GOVERNMENT DISCLAIMER
+
+Government/military pages should never imply:
+
+government endorsement
+
+military endorsement
+
+contract award
+
+certification
+
+clearance
+
+unless factually verified.
+
+171. SAFETY / HEALTHCARE CLAIMS
+
+Do not overstate:
+
+OSHPD/HCAI
+
+DSA
+
+cleanroom certification
+
+medical gas certification
+
+ATFP
+
+UFC
+
+hazardous-location expertise
+
+unless verified.
+
+Page architecture may support those concepts, but content must reflect actual company capability.
+
+172. BLOG VS RESOURCE CENTER
+
+Do not make “Blog” the primary identity.
+
+Use:
+
+Engineering Resources
+
+This sounds more authoritative and relevant.
+
+173. NEWS SECTION
+
+Optionally create:
+
+/news/
+
+for:
+
+Company announcements
+
+New licenses
+
+New hires
+
+Projects
+
+Capabilities
+
+Industry events
+
+Do not mix news with evergreen resources.
+
+174. CAREERS
+
+Create:
+
+/careers/
+
+Only if hiring.
+
+Potential landing pages:
+
+Structural Engineer Jobs
+
+MEP Engineer Jobs
+
+Civil Engineer Jobs
+
+Engineering Drafter Jobs
+
+Revit / BIM Jobs
+
+But do not publish empty job pages.
+
+175. ABOUT PAGE
+
+Create:
+
+/about/
+
+Sections:
+
+Who We Are
+
+Engineering Philosophy
+
+Industries
+
+Disciplines
+
+Leadership
+
+Quality
+
+Client Relationships
+
+Where We Work
+
+CTA
+
+176. LEADERSHIP
+
+Create:
+
+/leadership/
+
+Use professional biographies.
+
+177. CONTACT
+
+Create:
+
+/contact/
+
+Phone
+
+Email
+
+Office information
+
+General inquiry
+
+Project inquiry
+
+Vendor inquiry
+
+Careers
+
+RFP/RFQ
+
+178. TECHNICAL SECURITY
+
+Project uploads require:
+
+Secure object storage
+
+Non-public files
+
+Signed URLs
+
+Virus scanning where practical
+
+File validation
+
+Maximum upload size
+
+Access controls
+
+Retention policy
+
+179. PERFORMANCE FOR LARGE SITE
+
+Do not load full CMS dataset to client.
+
+Use:
+
+Server rendering
+
+Pagination
+
+Incremental static generation / caching where appropriate
+
+Lazy loading
+
+Search index
+
+CDN
+
+180. SITE SEARCH INDEX
+
+Search index fields:
+
+Title
+
+H1
+
+Page type
+
+Keywords
+
+Industry
+
+Service
+
+Location
+
+Description
+
+Search synonyms
+
+181. ACCESSIBILITY
+
+Support:
+
+Semantic HTML
+
+Keyboard navigation
+
+Focus states
+
+Contrast
+
+Alt text
+
+Form labels
+
+Error messaging
+
+Accessible menus
+
+Skip links
+
+182. CTA ANALYTICS
+
+Track which pages produce:
+
+Phone calls
+
+Proposal forms
+
+Uploads
+
+Emails
+
+RFP submissions
+
+Then prioritize SEO around pages producing qualified leads.
+
+183. SEO BUSINESS REPORT
+
+Monthly report should answer:
+
+Which engineering discipline generated most traffic?
+
+Which industry generated most inquiries?
+
+Which states generated most leads?
+
+Which landing pages converted?
+
+Which keywords are growing?
+
+Which pages are indexed?
+
+Which pages are underperforming?
+
+184. CONTENT GAP REPORT
+
+Automatically identify:
+
+Industry with no projects
+
+Service with no resources
+
+Location with no case studies
+
+High impressions but low CTR
+
+High traffic but low conversion
+
+Use those to decide next content.
+
+185. PROJECT CASE STUDY WORKFLOW
+
+When project closes:
+
+Internal admin asks:
+
+Can this be publicly shown?
+
+Yes / anonymized / no.
+
+If yes:
+
+Create project record.
+
+Add disciplines.
+
+Industry.
+
+Location.
+
+Project type.
+
+Images.
+
+Summary.
+
+Then automatically connect it throughout site.
+
+186. CONTENT FLYWHEEL
+
+A single project may strengthen:
+
+Project page
+
+Industry page
+
+Service page
+
+Location page
+
+Industry-service page
+
+Resource content
+
+Social media
+
+Capabilities statement
+
+That is how the site grows authority.
+
+187. BACKLINK STRATEGY SUPPORT
+
+Create pages worth linking to.
+
+Especially:
+
+Technical guides
+
+Checklists
+
+Case studies
+
+Engineering calculators only if professionally reviewed
+
+Glossary
+
+Project resources
+
+Do not participate in spam link schemes.
+
+188. PARTNER LINKS
+
+Architects / GCs may legitimately link to project pages.
+
+Encourage real project collaboration links.
+
+189. SOCIAL PREVIEW
+
+Generate OG metadata.
+
+Projects should display:
+
+Project title
+
+Industry
+
+Location
+
+Discipline
+
+Resources should display:
+
+Question/title
+
+Apex branding
+
+190. SITE-WIDE SEARCH ENGINE BRAND LANGUAGE
+
+Preferred terminology:
+
+Apex Grid Engineering
+
+Structural Engineering
+
+MEP Engineering
+
+Mechanical Engineering
+
+Electrical Engineering
+
+Plumbing Engineering
+
+Civil Engineering
+
+Geotechnical Engineering
+
+Permit Engineering
+
+Existing Building Engineering
+
+Use consistent naming.
+
+191. STOP WORDING VARIATION THAT CONFUSES USERS
+
+Do not randomly call the same service:
+
+Building systems engineering
+
+MEP consulting
+
+MEP design
+
+Integrated systems
+
+across different pages without establishing relationships.
+
+Use clear canonical service names.
+
+192. PROJECT DISCIPLINE BADGES
+
+Use badges:
+
+STR
+
+MECH
+
+ELEC
+
+PLBG
+
+CIVIL
+
+GEO
+
+ENERGY
+
+but always show full names nearby.
+
+193. INDUSTRY CARDS
+
+Each should contain:
+
+Industry name
+
+Short engineering-specific description
+
+Relevant disciplines
+
+CTA
+
+194. SERVICE CARDS
+
+Each:
+
+Service name
+
+One-sentence description
+
+Key subservices
+
+Explore Service
+
+195. LOCATION CARDS
+
+State / City
+
+Services available
+
+View location
+
+Do not show fake addresses.
+
+196. CLIENT-TYPE CARDS
+
+Architects
+
+Contractors
+
+Developers
+
+Property Managers
+
+Government
+
+Owners
+
+Explain exactly how Apex supports each.
+
+197. HOMEPAGE TRUST SECTION
+
+Potential:
+
+Professional engineering review
+
+Multiple engineering disciplines
+
+Commercial and residential
+
+Existing and new construction
+
+Public and private projects
+
+Repeat professional relationships
+
+Do not invent:
+
+Years
+
+Project counts
+
+Close rates
+
+States served
+
+unless verified.
+
+198. NO FAKE COUNTERS
+
+Do not generate:
+
+10,000+ projects
+
+50 states
+
+500 clients
+
+99% approval
+
+unless Apex provides verified data.
+
+199. NO FAKE TESTIMONIALS
+
+Testimonials must come from real clients.
+
+200. NO FAKE PROJECTS
+
+Do not create fictitious case studies simply to populate industries.
+
+201. FUTURE CALCULATORS
+
+Possible tools after professional review:
+
+Electrical Load Estimate Intake
+
+HVAC Project Intake
+
+Structural Project Intake
+
+Geotechnical Boring Scope Questionnaire
+
+Not engineering calculators unless reviewed and approved.
+
+202. INTERACTIVE SERVICE FINDER
+
+Question:
+
+What are you working on?
+
+Then:
+
+Industry
+
+Project Type
+
+Problem
+
+Location
+
+System recommends relevant Apex services.
+
+Example:
+
+Restaurant → Tenant Improvement → New Kitchen
+
+Suggest:
+
+Mechanical
+
+Electrical
+
+Plumbing
+
+Structural rooftop equipment
+
+203. INTERACTIVE DOCUMENT CHECKLIST
+
+Ask discipline.
+
+Then show documents needed.
+
+Allow user to upload directly.
+
+204. MULTI-SITE CLIENT EXPERIENCE
+
+Build page:
+
+/portfolio-engineering/
+
+For clients with:
+
+10+
+
+50+
+
+100+
+
+properties.
+
+Discuss repeat workflows, standardized intake and project tracking where available.
+
+205. RECURRING ARCHITECT PARTNERSHIPS
+
+Build:
+
+/architect-engineering-partnerships/
+
+Position Apex as recurring engineering partner rather than one-off consultant.
+
+206. OVERFLOW ENGINEERING
+
+If provided:
+
+/engineering-production-support/
+
+Target architecture and engineering firms needing temporary production capacity.
+
+207. COMMERCIAL DUE DILIGENCE
+
+Create:
+
+/engineering-due-diligence/
+
+Potential pages:
+
+Structural Due Diligence
+
+MEP Due Diligence
+
+Site Due Diligence
+
+Existing Building Due Diligence
+
+208. REAL ESTATE ACQUISITION ENGINEERING
+
+Potential:
+
+/pre-purchase-engineering-review/
+
+Only if actually offered.
+
+209. EMERGENCY ENGINEERING
+
+Do not advertise 24/7 emergency response unless capability truly exists.
+
+If available, create appropriately.
+
+210. SPECIALTY SERVICE DIRECTORY
+
+Long-term, organize all subservices under:
+
+/services/all/
+
+Allow filtering.
+
+211. INDUSTRY DIRECTORY
+
+/industries/all/
+
+Filter:
+
+Residential
+
+Commercial
+
+Industrial
+
+Healthcare
+
+Institutional
+
+Government
+
+Specialty
+
+212. LOCATION DIRECTORY
+
+/locations/all/
+
+Filter by state.
+
+213. PROJECT DIRECTORY
+
+/projects/all/
+
+Filters.
+
+Pagination.
+
+SEO-friendly main hubs.
+
+214. RESOURCE DIRECTORY
+
+/resources/all/
+
+Search/filter.
+
+215. GLOSSARY DIRECTORY
+
+Alphabetical.
+
+Search.
+
+Internal links.
+
+216. PUBLISHING RULE
+
+No page is indexable until:
+
+Content completed
+
+Metadata completed
+
+Internal links exist
+
+CTA exists
+
+Technical review if needed
+
+Canonical exists
+
+No duplicate conflict
+
+217. TECHNICAL QA
+
+Automated checks:
+
+Missing title
+
+Duplicate title
+
+Missing meta
+
+Duplicate meta
+
+Missing H1
+
+Multiple H1
+
+Broken links
+
+Missing alt
+
+Missing canonical
+
+Orphan page
+
+No internal links
+
+Oversized image
+
+Slow response
+
+218. SEO QA DASHBOARD
+
+Show editors:
+
+Green
+
+Yellow
+
+Red
+
+for page readiness.
+
+219. ORPHAN PAGE DETECTION
+
+Every indexable page must have at least one internal link from another relevant page.
+
+220. INTERNAL LINK RECOMMENDATION ENGINE
+
+CMS should recommend likely links.
+
+Example article about rooftop HVAC:
+
+Structural Rooftop Equipment
+
+Mechanical HVAC Replacement
+
+Existing Building
+
+Relevant projects
+
+221. PROJECT LOCATION LINKING
+
+Every project should link to its city/state page when one exists.
+
+222. PROJECT INDUSTRY LINKING
+
+Every project links to industry.
+
+223. PROJECT SERVICE LINKING
+
+Every project links to every discipline used.
+
+224. RESOURCE SERVICE LINKING
+
+Every technical article links to appropriate service.
+
+225. RESOURCE CTA
+
+Informational pages should still convert.
+
+Example:
+
+Reading:
+
+Can Structural Engineering Proceed Without Original Plans?
+
+CTA:
+
+Have an existing building without structural drawings? Send us your plans, photos and project information for review.
+
+226. CITY PAGE CTA
+
+Need engineering in Phoenix? Send us your project documents.
+
+227. INDUSTRY CTA
+
+Planning a healthcare project? Send us your architectural set for engineering review.
+
+228. ARCHITECT CTA
+
+Need an engineering partner for an active project? Upload your PDF and CAD set.
+
+229. CONTRACTOR CTA
+
+Need engineering for an existing condition or field change? Send photos, dimensions and drawings.
+
+230. GOVERNMENT CTA
+
+Have an active RFP or solicitation? Send us the bid package for engineering scope review.
+
+231. PROJECT PAGE CTA
+
+Planning a similar project? Request an engineering proposal.
+
+232. CONTENT FRESHNESS
+
+Pages requiring periodic review:
+
+Codes
+
+Title 24
+
+Energy
+
+UFC
+
+Federal
+
+Government procurement
+
+Healthcare regulations
+
+Accessibility
+
+Keep reviewer/date.
+
+233. ARCHIVE POLICY
+
+Outdated content may be:
+
+Updated
+
+Redirected
+
+Archived
+
+Noindexed
+
+Do not leave misleading technical pages indexed indefinitely.
+
+234. MULTILINGUAL FUTURE SUPPORT
+
+Architecture may support Spanish later.
+
+Do not auto-translate technical pages without human quality review.
+
+235. INTERNATIONAL
+
+Do not build international engineering pages unless Apex Grid actually intends/licensed to provide services there.
+
+236. FINAL TARGET ARCHITECTURE
+
+The site should ultimately be capable of supporting:
+
+Services: 75+
+
+Industries: 75+
+
+Industry + discipline: 150+
+
+Who we work with: 15+
+
+Project types: 30+
+
+Existing building: 30+
+
+Solutions: 100+
+
+Locations: 100+
+
+Location + service: 150+
+
+Projects: unlimited
+
+Resources: 250+
+
+Glossary: 100+
+
+Government / procurement: 20+
+
+Potential long-term quality footprint:
+
+1,000–1,500+ URLs
+
+But only substantive pages should be published.
+
+237. MOST IMPORTANT SEO PRINCIPLE
+
+Do not build this as:
+
+1,000 pages designed to trick Google.
+
+Build this as:
+
+The most useful online engineering resource for architects, contractors, developers, owners and facility managers who are trying to determine what engineering their project needs and who can provide it.
+
+238. MOST IMPORTANT BUSINESS PRINCIPLE
+
+Apex does not need millions of random visitors.
+
+The website should attract:
+
+Architects
+
+General Contractors
+
+Developers
+
+Property Managers
+
+Owners
+
+Facilities Teams
+
+Government Contractors
+
+Federal Procurement
+
+Builders
+
+Commercial Real Estate
+
+People actively needing engineering.
+
+A single qualified engineering lead can be worth far more than thousands of general blog visitors.
+
+239. MOST IMPORTANT REPLIT DEVELOPMENT PRINCIPLE
+
+DO NOT manually hard-code 1,000 independent pages.
+
+Build:
+
+Data models
+
+Templates
+
+Taxonomy
+
+Relationships
+
+CMS
+
+SEO engine
+
+Internal-link engine
+
+Sitemap generator
+
+Schema generator
+
+Content workflow
+
+Analytics
+
+Then populate approved content.
+
+240. REQUIRED REPLIT BUILD ORDER
+PHASE 1 — AUDIT
+
+Before changing the live site:
+
+Audit existing:
+
+URLs
+
+titles
+
+metadata
+
+content
+
+links
+
+performance
+
+technology
+
+forms
+
+analytics
+
+existing rankings
+
+redirect requirements
+
+Do not delete existing URLs blindly.
+
+PHASE 2 — CORE ARCHITECTURE
+
+Build:
+
+CMS
+
+Taxonomy
+
+Templates
+
+Navigation
+
+Breadcrumbs
+
+Sitemap system
+
+Schema system
+
+Redirect system
+
+SEO metadata
+
+PHASE 3 — CORE PAGES
+
+Publish:
+
+Homepage
+
+Structural
+
+MEP
+
+Mechanical
+
+Electrical
+
+Plumbing
+
+Civil
+
+Geotechnical
+
+Existing Building
+
+Permit Engineering
+
+Capabilities
+
+Industries
+
+Projects
+
+Locations
+
+Who We Work With
+
+Request Proposal
+
+PHASE 4 — PRIORITY INDUSTRIES
+
+Healthcare
+
+Multifamily
+
+Data Centers
+
+Industrial
+
+Tenant Improvement
+
+Government
+
+Military
+
+Restaurants
+
+Retail
+
+Hospitality
+
+Education
+
+Life Science
+
+Senior Living
+
+Renewable Energy
+
+PHASE 5 — CLIENT PAGES
+
+Architects
+
+GCs
+
+Developers
+
+Property Managers
+
+Government Contractors
+
+Owners
+
+PHASE 6 — PROJECT INTAKE
+
+Upload system
+
+Proposal request
+
+RFP submission
+
+Document checklist
+
+Lead routing
+
+PHASE 7 — RESOURCES
+
+Begin technical knowledge center.
+
+PHASE 8 — LOCATION SEO
+
+Publish only top legitimate markets.
+
+PHASE 9 — INDUSTRY × SERVICE
+
+Publish strongest combinations.
+
+PHASE 10 — SOLUTION SEO
+
+Publish high-intent problem pages.
+
+PHASE 11 — PROJECT CASE STUDIES
+
+Create continuously.
+
+PHASE 12 — SEARCH CONSOLE EXPANSION
+
+Use ranking/impression data to determine what gets built next.
+
+241. BEFORE REPLIT MAKES LARGE-SCALE CHANGES
+
+Replit must first report:
+
+Current framework
+Current routes
+Existing CMS/data architecture
+Current indexed pages
+Existing sitemap
+Current robots configuration
+Current canonical structure
+Existing schema
+Analytics status
+Search Console status
+Current performance bottlenecks
+Existing redirects required
+Current forms
+Existing project data
+Current service data
+Proposed new CMS architecture
+Migration strategy
+Rollback strategy
+
+Then begin implementation.
+
+242. FINAL REPLIT COMMAND
+
+Treat Apex Grid Engineering as a growing national engineering knowledge and lead-generation platform.
+
+The website must be capable of clearly communicating:
+
+what engineering we provide,
+
+what industries we understand,
+
+what project problems we solve,
+
+where we can provide those services,
+
+what work we have completed,
+
+and
+
+how a prospective client can immediately send us a project.
+
+Do not rebuild the website simply to look prettier.
+
+Do not create shallow SEO pages.
+
+Do not bury engineering information behind vague marketing language.
+
+Do not invent company experience, projects, licenses, certifications, statistics or testimonials.
+
+Do not automatically publish every possible keyword combination.
+
+Build the technical infrastructure, content system, taxonomy, page templates, internal-linking system, schema, sitemaps, proposal intake, project system, location system, resource center and SEO controls required for Apex Grid Engineering to grow into a 1,000+ page professional engineering authority site over time.
+
+The final website should feel equally useful to:
+
+an architect sending CAD files,
+
+a GC with a structural field condition,
+
+a developer starting a multifamily project,
+
+a property manager dealing with an aging building,
+
+a restaurant owner needing MEP plans,
+
+a hospital planning an upgrade,
+
+a federal contractor reviewing an RFP,
+
+a developer needing geotechnical engineering,
+
+or
+
+an owner whose city told them they need a structural engineer.
+
+Every one of those people should immediately understand:
+
+Apex Grid can review the project, identify the engineering scope, and tell them what is needed to move forward.
+
+That is the site being built.

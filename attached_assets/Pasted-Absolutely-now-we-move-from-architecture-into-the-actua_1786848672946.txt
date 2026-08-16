@@ -1,0 +1,1700 @@
+Absolutely — now we move from architecture into the actual page specification system.
+
+What follows is the beginning of the master SEO blueprint you can hand to Replit. I would have Replit build the CMS/content model and then create these as structured page entries, not hard-coded one-offs.
+
+APEX GRID ENGINEERING — MASTER PAGE SPECIFICATION
+PAGE 001 — HOMEPAGE
+
+URL: /
+
+SEO Title:
+Structural, MEP, Civil & Geotechnical Engineering | Apex Grid Engineering
+
+Meta Description:
+Integrated structural, MEP, civil and geotechnical engineering for commercial, residential, industrial, healthcare, government and specialty projects.
+
+H1:
+Integrated Structural, MEP, Civil & Geotechnical Engineering
+
+Primary Search Intent:
+Broad commercial engineering firm discovery
+
+Primary Keywords:
+engineering firm
+structural engineering firm
+MEP engineering firm
+civil engineering firm
+geotechnical engineering firm
+
+Secondary Topics:
+commercial engineering
+multifamily engineering
+healthcare engineering
+government engineering
+industrial engineering
+permit engineering
+
+Required Sections:
+
+Hero
+Engineering Services
+Industries Served
+Who We Work With
+Featured Projects
+Existing Building Engineering
+Government & Military
+Nationwide Capabilities
+How Our Process Works
+Request a Proposal
+
+Primary CTA:
+Request a Proposal
+
+Secondary CTA:
+Explore Engineering Services
+
+Internal Links:
+Structural
+MEP
+Civil
+Geotechnical
+Industries
+Projects
+Architects
+GCs
+Locations
+
+PAGE 002 — STRUCTURAL ENGINEERING
+
+URL:
+/structural-engineering/
+
+SEO Title:
+Structural Engineering Services | Apex Grid Engineering
+
+Meta:
+Structural engineering for new construction, renovations, additions, existing buildings, seismic retrofits and commercial projects.
+
+H1:
+Structural Engineering Services
+
+Primary Keywords:
+structural engineering services
+structural engineering firm
+structural engineer
+commercial structural engineering
+
+Supporting Keywords:
+structural calculations
+foundation design
+framing design
+seismic engineering
+structural repairs
+existing buildings
+
+Required H2s:
+
+Structural Design Services
+
+Structural Engineering for New Construction
+
+Existing Building Engineering
+
+Structural Renovations & Additions
+
+Seismic Design & Retrofit
+
+Structural Calculations
+
+Foundation Design
+
+Structural Inspections & Assessments
+
+Commercial Structural Engineering
+
+Multifamily Structural Engineering
+
+Industrial Structural Engineering
+
+Structural Permit Drawings
+
+What We Need to Start
+
+Structural Engineering Deliverables
+
+Frequently Asked Questions
+
+CTA:
+Send Us Your Plans for Structural Review
+
+PAGE 003 — STRUCTURAL DESIGN
+
+URL:
+/structural-engineering/structural-design/
+
+SEO Title:
+Structural Design Services | Apex Grid Engineering
+
+H1:
+Structural Design for New and Existing Buildings
+
+Primary Keywords:
+structural design services
+building structural design
+structural design engineer
+
+Sections:
+
+Building Framing
+
+Foundation Systems
+
+Gravity Design
+
+Lateral Design
+
+Steel
+
+Concrete
+
+Wood
+
+Masonry
+
+Existing Buildings
+
+Coordination With Architecture & MEP
+
+Calculations
+
+Permit Drawings
+
+PE Review
+
+CTA
+
+PAGE 004 — STRUCTURAL CALCULATIONS
+
+URL:
+/structural-engineering/structural-calculations/
+
+SEO Title:
+Structural Engineering Calculations | Apex Grid Engineering
+
+H1:
+Structural Calculations for Permit and Design
+
+Primary Keywords:
+structural calculations
+structural engineering calculations
+PE structural calculations
+
+Sections:
+
+What Structural Calculations Include
+
+Gravity Loads
+
+Wind Loads
+
+Seismic Loads
+
+Member Design
+
+Foundation Design
+
+Connection Design
+
+Existing Building Evaluation
+
+Permit Submittals
+
+When Calculations Are Required
+
+PAGE 005 — FOUNDATION DESIGN
+
+URL:
+/structural-engineering/foundation-design/
+
+SEO Title:
+Foundation Engineering & Structural Design | Apex Grid
+
+H1:
+Structural Foundation Design
+
+Topics:
+
+Spread Footings
+
+Continuous Footings
+
+Mat Foundations
+
+Grade Beams
+
+Pier Foundations
+
+Equipment Pads
+
+Retaining Structures
+
+Soil Coordination
+
+Geotechnical Recommendations
+
+Existing Foundation Modifications
+
+PAGE 006 — SEISMIC ENGINEERING
+
+URL:
+/structural-engineering/seismic-design/
+
+SEO Title:
+Seismic Structural Engineering | Apex Grid Engineering
+
+H1:
+Seismic Design and Structural Engineering
+
+Topics:
+
+Seismic Design Categories
+
+Lateral Systems
+
+Shear Walls
+
+Braced Frames
+
+Moment Frames
+
+Diaphragms
+
+Collectors
+
+Anchorage
+
+Existing Structures
+
+Retrofits
+
+California Projects
+
+PAGE 007 — SEISMIC RETROFIT
+
+URL:
+/structural-engineering/seismic-retrofit/
+
+SEO Title:
+Seismic Retrofit Engineering | Existing Buildings | Apex Grid
+
+H1:
+Seismic Retrofit Engineering for Existing Buildings
+
+Topics:
+
+Existing Condition Review
+
+Seismic Vulnerabilities
+
+Strengthening
+
+Wall Bracing
+
+Foundation Upgrades
+
+Diaphragm Improvements
+
+Connections
+
+Public Buildings
+
+Commercial Buildings
+
+Historic/Older Structures
+
+PAGE 008 — STRUCTURAL REPAIRS
+
+URL:
+/structural-engineering/structural-repairs/
+
+SEO Title:
+Structural Repair Engineering | Apex Grid Engineering
+
+H1:
+Structural Repair Engineering
+
+Primary Keywords:
+structural repair engineer
+building repair engineering
+structural damage assessment
+
+Sections:
+
+Cracking
+
+Settlement
+
+Wood Damage
+
+Steel Corrosion
+
+Concrete Damage
+
+Masonry Damage
+
+Framing Repairs
+
+Foundation Repairs
+
+Localized Reinforcement
+
+Permit Details
+
+PAGE 009 — EXISTING BUILDINGS
+
+URL:
+/structural-engineering/existing-buildings/
+
+SEO Title:
+Existing Building Structural Engineering | Apex Grid
+
+H1:
+Structural Engineering for Existing Buildings
+
+This should be a major revenue page.
+
+Topics:
+
+Existing Condition Assessments
+
+Renovations
+
+Additions
+
+Wall Openings
+
+Roof Changes
+
+Equipment Installation
+
+Floor Load Changes
+
+Change of Occupancy
+
+Adaptive Reuse
+
+Structural Repairs
+
+Historic Structures
+
+Field Verification
+
+No Existing Plans
+
+PAGE 010 — LOAD-BEARING WALL REMOVAL
+
+URL:
+/structural-engineering/load-bearing-wall-removal/
+
+SEO Title:
+Load-Bearing Wall Removal Engineering | Apex Grid
+
+H1:
+Structural Engineering for Load-Bearing Wall Removal
+
+Sections:
+
+How We Determine Load-Bearing Conditions
+
+Existing Wall Verification
+
+Beam Design
+
+Header Design
+
+Posts
+
+Footings
+
+Connections
+
+Field Photos
+
+Permit Drawings
+
+Residential
+
+Commercial
+
+PAGE 011 — STRUCTURAL INSPECTIONS
+
+URL:
+/structural-engineering/structural-inspections/
+
+SEO Title:
+Structural Engineering Inspections & Reports | Apex Grid
+
+H1:
+Structural Inspections and Engineering Reports
+
+Topics:
+
+City-Required Structural Reports
+
+Existing Building Inspections
+
+Remodel Inspections
+
+Structural Deficiency Reports
+
+Cracks
+
+Settlement
+
+Framing
+
+Foundation
+
+Repair Recommendations
+
+Permit Reports
+
+PAGE 012 — STRUCTURAL CONDITION ASSESSMENTS
+
+URL:
+/structural-engineering/condition-assessments/
+
+SEO Title:
+Structural Condition Assessment Services | Apex Grid
+
+H1:
+Structural Condition Assessments
+
+Target Clients:
+Owners
+Property Managers
+Developers
+Commercial Buyers
+Facility Managers
+
+Sections:
+
+Visual Assessment
+
+Existing Structural Systems
+
+Observed Deficiencies
+
+Repair Priorities
+
+Capital Planning
+
+Engineering Report
+
+Follow-Up Design
+
+PAGE 013 — COMMERCIAL STRUCTURAL ENGINEERING
+
+URL:
+/structural-engineering/commercial/
+
+SEO Title:
+Commercial Structural Engineering | Apex Grid
+
+H1:
+Commercial Structural Engineering
+
+Topics:
+
+Office
+
+Retail
+
+Restaurant
+
+Warehouse
+
+Healthcare
+
+TI
+
+New Construction
+
+Renovation
+
+Equipment
+
+Roof Framing
+
+Structural Modifications
+
+PAGE 014 — MULTIFAMILY STRUCTURAL ENGINEERING
+
+URL:
+/structural-engineering/multifamily/
+
+SEO Title:
+Multifamily Structural Engineering | Apex Grid
+
+H1:
+Structural Engineering for Multifamily Buildings
+
+Topics:
+
+Apartments
+
+Townhomes
+
+Low Rise
+
+Mid Rise
+
+Podium
+
+Wood Framing
+
+Concrete
+
+Steel
+
+Foundations
+
+Balconies
+
+Stairs
+
+Parking
+
+Renovations
+
+PAGE 015 — INDUSTRIAL STRUCTURAL ENGINEERING
+
+URL:
+/structural-engineering/industrial/
+
+SEO Title:
+Industrial Structural Engineering | Apex Grid
+
+H1:
+Structural Engineering for Industrial Facilities
+
+Topics:
+
+Warehouses
+
+Manufacturing
+
+Equipment Loads
+
+Mezzanines
+
+Platforms
+
+High-Bay
+
+Tilt-Up
+
+Steel
+
+Foundations
+
+Equipment Anchorage
+
+Roof Loads
+
+PAGE 016 — TENANT IMPROVEMENT STRUCTURAL
+
+URL:
+/structural-engineering/tenant-improvements/
+
+SEO Title:
+Tenant Improvement Structural Engineering | Apex Grid
+
+H1:
+Structural Engineering for Tenant Improvements
+
+Topics:
+
+New Openings
+
+RTUs
+
+Equipment
+
+Interior Wall Removal
+
+Ceiling Support
+
+Kitchen Equipment
+
+Structural Modifications
+
+Existing Conditions
+
+Fast Permit Turnaround
+
+PAGE 017 — STEEL DESIGN
+
+URL:
+/structural-engineering/steel-design/
+
+H1:
+Structural Steel Design
+
+Topics:
+
+Beams
+
+Columns
+
+Frames
+
+Connections
+
+Canopies
+
+Mezzanines
+
+Platforms
+
+Industrial
+
+Commercial
+
+Equipment Support
+
+PAGE 018 — CONCRETE DESIGN
+
+URL:
+/structural-engineering/concrete-design/
+
+H1:
+Concrete Structural Engineering
+
+Topics:
+
+Slabs
+
+Foundations
+
+Walls
+
+Columns
+
+Beams
+
+Elevated Slabs
+
+Parking Structures
+
+Equipment Pads
+
+Retrofit
+
+PAGE 019 — WOOD FRAMING
+
+URL:
+/structural-engineering/wood-framing/
+
+H1:
+Wood Framing Structural Engineering
+
+Topics:
+
+Residential
+
+Multifamily
+
+Roof Framing
+
+Floor Framing
+
+Shear Walls
+
+Headers
+
+Beams
+
+Posts
+
+Holdowns
+
+Connections
+
+PAGE 020 — MASONRY DESIGN
+
+URL:
+/structural-engineering/masonry-design/
+
+H1:
+Masonry Structural Engineering
+
+Topics:
+
+CMU
+
+Brick
+
+Lintels
+
+Reinforcement
+
+Bond Beams
+
+Wall Openings
+
+Existing Masonry
+
+Retrofits
+
+PAGE 021 — EQUIPMENT SUPPORT
+
+URL:
+/structural-engineering/equipment-support/
+
+SEO Title:
+Structural Equipment Support & Anchorage | Apex Grid
+
+H1:
+Structural Engineering for Equipment Support
+
+Targets:
+
+RTUs
+
+Mechanical Equipment
+
+Generators
+
+Transformers
+
+Battery Systems
+
+Industrial Equipment
+
+Solar
+
+Telecom
+
+PAGE 022 — ROOFTOP EQUIPMENT STRUCTURAL
+
+URL:
+/structural-engineering/rooftop-equipment/
+
+H1:
+Structural Engineering for Rooftop Equipment
+
+Topics:
+
+RTU Replacement
+
+New RTUs
+
+Curbs
+
+Roof Framing
+
+Reinforcement
+
+Load Evaluation
+
+Equipment Anchorage
+
+PAGE 023 — CANOPY ENGINEERING
+
+URL:
+/structural-engineering/canopies/
+
+H1:
+Structural Engineering for Canopies
+
+Targets:
+
+Parking
+
+Solar
+
+Pedestrian
+
+Commercial Entry
+
+Fuel Stations
+
+Military
+
+PAGE 024 — MEZZANINE ENGINEERING
+
+URL:
+/structural-engineering/mezzanines/
+
+H1:
+Mezzanine Structural Engineering
+
+Targets:
+
+Warehouse
+
+Industrial
+
+Storage
+
+Commercial
+
+Manufacturing
+
+PAGE 025 — RETAINING WALLS
+
+URL:
+/structural-engineering/retaining-walls/
+
+H1:
+Retaining Wall Structural Engineering
+
+Topics:
+
+Concrete
+
+CMU
+
+Cantilever
+
+Site Coordination
+
+Drainage
+
+Geotechnical Parameters
+
+PAGE 026 — MEP ENGINEERING
+
+URL:
+/mep-engineering/
+
+SEO Title:
+MEP Engineering Services | Mechanical, Electrical & Plumbing | Apex Grid
+
+H1:
+MEP Engineering Services
+
+Primary Keywords:
+
+MEP engineering
+MEP engineering firm
+MEP design services
+commercial MEP engineer
+
+Sections:
+
+Mechanical Engineering
+
+Electrical Engineering
+
+Plumbing Engineering
+
+Integrated Coordination
+
+New Construction
+
+Renovations
+
+Tenant Improvements
+
+Multifamily
+
+Healthcare
+
+Industrial
+
+Restaurants
+
+Permit Drawings
+
+Calculations
+
+PE Review
+
+PAGE 027 — MECHANICAL ENGINEERING
+
+URL:
+/mechanical-engineering/
+
+SEO Title:
+Mechanical & HVAC Engineering Services | Apex Grid
+
+H1:
+Mechanical Engineering and HVAC Design
+
+Topics:
+
+HVAC
+
+Ventilation
+
+Load Calculations
+
+Equipment Selection
+
+Duct Design
+
+Exhaust
+
+Make-Up Air
+
+Energy Compliance
+
+Commercial
+
+Multifamily
+
+Industrial
+
+Healthcare
+
+PAGE 028 — HVAC DESIGN
+
+URL:
+/mechanical-engineering/hvac-design/
+
+H1:
+Commercial HVAC Engineering & Design
+
+Topics:
+
+Systems Selection
+
+RTU
+
+Split Systems
+
+VRF
+
+Heat Pumps
+
+Ductwork
+
+Outside Air
+
+Zoning
+
+Controls Coordination
+
+PAGE 029 — HVAC LOAD CALCULATIONS
+
+URL:
+/mechanical-engineering/load-calculations/
+
+SEO Title:
+HVAC Load Calculations | Mechanical Engineering | Apex Grid
+
+H1:
+HVAC Heating and Cooling Load Calculations
+
+Topics:
+
+Cooling Loads
+
+Heating Loads
+
+Occupancy
+
+Envelope
+
+Ventilation
+
+Equipment Sizing
+
+PAGE 030 — VENTILATION DESIGN
+
+URL:
+/mechanical-engineering/ventilation/
+
+H1:
+Commercial Ventilation Engineering
+
+Targets:
+
+Office
+
+Restaurants
+
+Gyms
+
+Warehouses
+
+Healthcare
+
+Labs
+
+PAGE 031 — COMMERCIAL KITCHEN VENTILATION
+
+URL:
+/mechanical-engineering/commercial-kitchen-ventilation/
+
+SEO Title:
+Commercial Kitchen Ventilation & Exhaust Engineering | Apex Grid
+
+H1:
+Commercial Kitchen Exhaust and Make-Up Air Engineering
+
+High-value page.
+
+Topics:
+
+Type I Hoods
+
+Type II Hoods
+
+Grease Exhaust
+
+Make-Up Air
+
+Duct Routing
+
+Roof Equipment
+
+Gas Appliances
+
+Electrical Coordination
+
+Structural Coordination
+
+PAGE 032 — INDUSTRIAL VENTILATION
+
+URL:
+/mechanical-engineering/industrial-ventilation/
+
+H1:
+Industrial Ventilation Engineering
+
+Topics:
+
+Heat Removal
+
+Process Exhaust
+
+Warehouse Ventilation
+
+Equipment Exhaust
+
+Make-Up Air
+
+High-Bay Facilities
+
+PAGE 033 — DATA CENTER COOLING
+
+URL:
+/mechanical-engineering/data-center-cooling/
+
+H1:
+Data Center Cooling Engineering
+
+Topics:
+
+Redundancy
+
+Precision Cooling
+
+High Density
+
+Heat Rejection
+
+N+1
+
+Airflow
+
+Mechanical Resilience
+
+PAGE 034 — HEALTHCARE HVAC
+
+URL:
+/mechanical-engineering/healthcare-hvac/
+
+H1:
+Healthcare HVAC Engineering
+
+Topics:
+
+Pressure Relationships
+
+Isolation Rooms
+
+Ventilation
+
+Filtration
+
+Redundancy
+
+Temperature/Humidity
+
+Clinics
+
+Hospitals
+
+Medical Offices
+
+PAGE 035 — ELECTRICAL ENGINEERING
+
+URL:
+/electrical-engineering/
+
+SEO Title:
+Electrical Engineering Services | Apex Grid Engineering
+
+H1:
+Electrical Engineering Services
+
+Topics:
+
+Power Distribution
+
+Load Calculations
+
+Service Design
+
+Panel Schedules
+
+Lighting
+
+One-Lines
+
+Emergency Power
+
+Generators
+
+EV
+
+Solar
+
+Battery Storage
+
+PAGE 036 — ELECTRICAL LOAD CALCULATIONS
+
+/electrical-engineering/load-calculations/
+
+H1:
+Electrical Load Calculations and Service Sizing
+
+PAGE 037 — POWER DISTRIBUTION
+
+/electrical-engineering/power-distribution/
+
+H1:
+Electrical Power Distribution Engineering
+
+PAGE 038 — ONE-LINE DIAGRAMS
+
+/electrical-engineering/one-line-diagrams/
+
+H1:
+Electrical One-Line Diagram Engineering
+
+PAGE 039 — LIGHTING DESIGN
+
+/electrical-engineering/lighting-design/
+
+H1:
+Commercial Lighting Design and Electrical Engineering
+
+PAGE 040 — EMERGENCY POWER
+
+/electrical-engineering/emergency-power/
+
+H1:
+Emergency and Standby Power Engineering
+
+PAGE 041 — GENERATOR ENGINEERING
+
+/electrical-engineering/generators/
+
+H1:
+Generator and Standby Power Engineering
+
+PAGE 042 — UPS SYSTEMS
+
+/electrical-engineering/ups-systems/
+
+H1:
+UPS and Critical Power Engineering
+
+PAGE 043 — EV CHARGING
+
+/electrical-engineering/ev-charging/
+
+SEO Title:
+EV Charging Electrical Engineering | Apex Grid
+
+H1:
+EV Charging Infrastructure Engineering
+
+PAGE 044 — SOLAR PV ELECTRICAL
+
+/electrical-engineering/solar-pv/
+
+H1:
+Solar PV Electrical Engineering
+
+PAGE 045 — BATTERY STORAGE
+
+/electrical-engineering/battery-storage/
+
+H1:
+Battery Energy Storage Engineering
+
+PAGE 046 — PLUMBING ENGINEERING
+
+/plumbing-engineering/
+
+SEO Title:
+Plumbing Engineering Services | Apex Grid Engineering
+
+H1:
+Plumbing Engineering Services
+
+PAGE 047 — DOMESTIC WATER
+
+/plumbing-engineering/domestic-water/
+
+H1:
+Domestic Water System Engineering
+
+PAGE 048 — SANITARY WASTE
+
+/plumbing-engineering/sanitary-waste/
+
+H1:
+Sanitary Waste and Vent Engineering
+
+PAGE 049 — GAS PIPING
+
+/plumbing-engineering/gas-piping/
+
+H1:
+Natural Gas Piping Engineering
+
+PAGE 050 — COMMERCIAL KITCHEN PLUMBING
+
+/plumbing-engineering/commercial-kitchen/
+
+H1:
+Commercial Kitchen Plumbing Engineering
+
+PAGE 051 — MEDICAL GAS
+
+/plumbing-engineering/medical-gas/
+
+H1:
+Medical Gas Engineering Coordination
+
+Important: wording should match actual licensing/capabilities.
+
+PAGE 052 — CIVIL ENGINEERING
+
+/civil-engineering/
+
+SEO Title:
+Civil Engineering & Site Development Services | Apex Grid
+
+H1:
+Civil Engineering and Site Development
+
+PAGE 053 — GRADING & DRAINAGE
+
+/civil-engineering/grading-drainage/
+
+H1:
+Grading and Drainage Engineering
+
+PAGE 054 — SITE DEVELOPMENT
+
+/civil-engineering/site-development/
+
+H1:
+Civil Site Development Engineering
+
+PAGE 055 — STORMWATER
+
+/civil-engineering/stormwater/
+
+H1:
+Stormwater and Drainage Engineering
+
+PAGE 056 — UTILITY DESIGN
+
+/civil-engineering/utilities/
+
+H1:
+Civil Utility Engineering
+
+PAGE 057 — PARKING LOT DESIGN
+
+/civil-engineering/parking-lots/
+
+H1:
+Parking Lot Civil Engineering
+
+PAGE 058 — ROADWAY / TURN LANE
+
+/civil-engineering/roadway-improvements/
+
+H1:
+Roadway and Turn Lane Engineering
+
+PAGE 059 — ADA SITE ENGINEERING
+
+/civil-engineering/ada-site-compliance/
+
+H1:
+Accessible Site and ADA Civil Engineering
+
+PAGE 060 — GEOTECHNICAL ENGINEERING
+
+/geotechnical-engineering/
+
+SEO Title:
+Geotechnical Engineering Services | Apex Grid Engineering
+
+H1:
+Geotechnical Engineering Services
+
+PAGE 061 — SOIL BORINGS
+
+/geotechnical-engineering/soil-borings/
+
+H1:
+Soil Borings and Subsurface Exploration
+
+PAGE 062 — GEOTECHNICAL REPORTS
+
+/geotechnical-engineering/geotechnical-reports/
+
+H1:
+Geotechnical Engineering Reports
+
+PAGE 063 — FOUNDATION RECOMMENDATIONS
+
+/geotechnical-engineering/foundation-recommendations/
+
+H1:
+Geotechnical Foundation Recommendations
+
+PAGE 064 — PAVEMENT GEOTECHNICAL
+
+/geotechnical-engineering/pavement-design/
+
+H1:
+Geotechnical Engineering for Pavement and Parking Areas
+
+PAGE 065 — EARTHWORK
+
+/geotechnical-engineering/earthwork-compaction/
+
+H1:
+Earthwork and Compaction Recommendations
+
+PAGE 066 — TITLE 24
+
+/title-24/
+
+SEO Title:
+California Title 24 Energy Compliance | Apex Grid Engineering
+
+H1:
+California Title 24 Energy Compliance
+
+PAGE 067 — COMMERCIAL TITLE 24
+
+/title-24/commercial/
+
+H1:
+Commercial Title 24 Compliance
+
+PAGE 068 — RESIDENTIAL TITLE 24
+
+/title-24/residential/
+
+H1:
+Residential Title 24 Compliance
+
+PAGE 069 — INDUSTRIES HUB
+
+/industries/
+
+SEO Title:
+Industries We Serve | Apex Grid Engineering
+
+H1:
+Engineering Across Industries
+
+Organize visually by:
+
+Commercial
+Residential
+Institutional
+Industrial
+Government
+Mission Critical
+Specialty
+
+PAGE 070 — HEALTHCARE
+
+/industries/healthcare/
+
+SEO Title:
+Healthcare Engineering | Structural, MEP & Civil | Apex Grid
+
+H1:
+Engineering for Healthcare Facilities
+
+Subpages eventually:
+
+Hospitals
+Medical Offices
+Clinics
+Urgent Care
+Surgery Centers
+Dental
+Behavioral Health
+Skilled Nursing
+
+PAGE 071 — HOSPITALS
+
+/industries/healthcare/hospitals/
+
+H1:
+Hospital Engineering Services
+
+PAGE 072 — MEDICAL OFFICE
+
+/industries/healthcare/medical-office-buildings/
+
+H1:
+Medical Office Building Engineering
+
+PAGE 073 — DATA CENTERS
+
+/industries/data-centers/
+
+SEO Title:
+Data Center Engineering | Structural, Mechanical & Electrical | Apex Grid
+
+H1:
+Data Center Engineering
+
+PAGE 074 — TENANT IMPROVEMENT
+
+/industries/tenant-improvement/
+
+H1:
+Tenant Improvement Engineering
+
+PAGE 075 — INDUSTRIAL / WAREHOUSE
+
+/industries/industrial-warehouse/
+
+H1:
+Industrial and Warehouse Engineering
+
+PAGE 076 — MULTIFAMILY
+
+/industries/multifamily/
+
+H1:
+Multifamily Engineering Services
+
+PAGE 077 — RETAIL
+
+/industries/retail/
+
+H1:
+Retail Engineering Services
+
+PAGE 078 — HOSPITALITY
+
+/industries/hospitality/
+
+H1:
+Hotel and Hospitality Engineering
+
+PAGE 079 — RESTAURANTS
+
+/industries/restaurants/
+
+H1:
+Restaurant and Food Service Engineering
+
+PAGE 080 — EDUCATION
+
+/industries/education/
+
+H1:
+Engineering for Schools and Educational Facilities
+
+PAGE 081 — LIFE SCIENCE
+
+/industries/life-science/
+
+H1:
+Life Science and Laboratory Engineering
+
+PAGE 082 — GOVERNMENT
+
+/industries/government/
+
+H1:
+Government and Civic Engineering
+
+PAGE 083 — MILITARY
+
+/industries/military-defense/
+
+SEO Title:
+Military & Defense Engineering Services | Apex Grid
+
+H1:
+Engineering for Military and Defense Facilities
+
+PAGE 084 — WORSHIP FACILITIES
+
+/industries/religious-worship/
+
+H1:
+Engineering for Churches and Worship Facilities
+
+PAGE 085 — COMMERCIAL OFFICE
+
+/industries/commercial-office/
+
+H1:
+Commercial Office Engineering
+
+PAGE 086 — SENIOR LIVING
+
+/industries/senior-living/
+
+H1:
+Senior Living and Assisted Care Engineering
+
+PAGE 087 — SOLAR / RENEWABLE
+
+/industries/renewable-energy/
+
+H1:
+Solar and Renewable Energy Engineering
+
+PAGE 088 — AUTOMOTIVE / EV
+
+/industries/ev-automotive/
+
+H1:
+EV Charging and Automotive Facility Engineering
+
+PAGE 089 — COLD STORAGE
+
+/industries/cold-storage/
+
+H1:
+Cold Storage and Food Processing Engineering
+
+PAGE 090 — SELF-STORAGE
+
+/industries/self-storage/
+
+H1:
+Self-Storage Facility Engineering
+
+PAGE 091 — PARKING STRUCTURES
+
+/industries/parking/
+
+H1:
+Parking Structure and Parking Facility Engineering
+
+PAGE 092 — AVIATION
+
+/industries/aviation/
+
+H1:
+Aviation and Hangar Engineering
+
+PAGE 093 — FITNESS
+
+/industries/fitness-recreation/
+
+H1:
+Fitness and Recreation Facility Engineering
+
+PAGE 094 — BREWERIES
+
+/industries/breweries-beverage/
+
+H1:
+Brewery and Beverage Facility Engineering
+
+PAGE 095 — TELECOM
+
+/industries/telecommunications/
+
+H1:
+Telecommunications Infrastructure Engineering
+
+PAGE 096 — AGRICULTURE
+
+/industries/agriculture/
+
+H1:
+Agricultural and Controlled-Environment Engineering
+
+PAGE 097 — CANNABIS
+
+/industries/cannabis/
+
+H1:
+Cannabis Facility Engineering
+
+PAGE 098 — MIXED USE
+
+/industries/mixed-use/
+
+H1:
+Mixed-Use Development Engineering
+
+PAGE 099 — STUDENT HOUSING
+
+/industries/student-housing/
+
+H1:
+Student Housing Engineering
+
+PAGE 100 — AFFORDABLE HOUSING
+
+/industries/affordable-housing/
+
+H1:
+Affordable Housing Engineering
+
+That gets us to 100 defined commercial landing pages, and we still haven't touched the major location, client, project type and resource ecosystems in detail.
+
+The next major block I’d build is Pages 101–200, covering:
+
+architects
+GCs
+developers
+property managers
+federal contractors
+new construction
+remodels
+adaptive reuse
+permit engineering
+PE stamped plans
+site visits
+field verification
+bid/RFP support
+Arizona
+California
+Texas
+Florida
+Virginia
+dozens of city pages
+project case-study templates
+detailed high-intent SEO resource pages
+
+That’s where the website starts becoming truly massive rather than merely having a lot of service pages.

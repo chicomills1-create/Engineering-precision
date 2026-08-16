@@ -51,7 +51,8 @@ export const CreateLeadBody = zod.object({
   "phone": zod.string().optional(),
   "projectType": zod.string().optional(),
   "services": zod.string().optional(),
-  "message": zod.string().min(1)
+  "message": zod.string().min(1),
+  "attachments": zod.array(zod.string()).optional().describe('Object paths of uploaded files attached to the inquiry.')
 })
 
 export const CreateLeadResponse = zod.object({
@@ -186,5 +187,45 @@ export const UpdateLeadResponse = zod.object({
   "status": zod.enum(['new', 'contacted', 'closed']),
   "createdAt": zod.string()
 })
+
+
+/**
+ * @summary Request a presigned URL for file upload
+ */
+
+
+
+
+
+export const RequestUploadUrlBody = zod.object({
+  "name": zod.string().min(1),
+  "size": zod.number().min(1),
+  "contentType": zod.string().min(1)
+})
+
+
+
+
+
+
+export const RequestUploadUrlResponse = zod.object({
+  "uploadURL": zod.string(),
+  "objectPath": zod.string(),
+  "metadata": zod.object({
+  "name": zod.string().min(1),
+  "size": zod.number().min(1),
+  "contentType": zod.string().min(1)
+}).optional()
+})
+
+
+/**
+ * @summary Serve an uploaded file
+ */
+export const GetStorageObjectParams = zod.object({
+  "objectPath": zod.coerce.string()
+})
+
+export const GetStorageObjectResponse = zod.unknown()
 
 

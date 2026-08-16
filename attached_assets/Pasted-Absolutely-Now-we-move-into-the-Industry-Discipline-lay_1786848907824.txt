@@ -1,0 +1,904 @@
+Absolutely. Now we move into the Industry × Discipline layer, which is where the site starts owning much more specific commercial searches.
+
+The goal here is to create pages that answer searches like “hospital MEP engineer,” “multifamily structural engineer,” “warehouse civil engineer,” “restaurant mechanical engineer,” “military geotechnical engineer,” and similar high-intent combinations.
+
+APEX GRID ENGINEERING — MASTER SEO BLUEPRINT
+Pages 301–400: Industry × Engineering Discipline
+PAGE 301 — HEALTHCARE STRUCTURAL ENGINEERING
+
+URL: /industries/healthcare/structural-engineering/
+
+SEO Title:
+Healthcare Structural Engineering | Apex Grid Engineering
+
+H1:
+Structural Engineering for Healthcare Facilities
+
+Primary Intent:
+Hospital and medical facility structural design, renovation, equipment support and existing-building modifications.
+
+Core Topics:
+Equipment anchorage, rooftop equipment, wall modifications, structural renovations, seismic upgrades, medical equipment support, structural repairs, existing-building analysis, foundation modifications, canopy/support structures.
+
+Internal Links:
+Healthcare Engineering
+Healthcare MEP
+Structural Engineering
+Seismic Retrofit
+Equipment Anchorage
+Medical Office Projects
+
+PAGE 302 — HEALTHCARE MEP ENGINEERING
+
+URL: /industries/healthcare/mep-engineering/
+
+SEO Title:
+Healthcare MEP Engineering | Hospitals, Clinics & Medical Facilities
+
+H1:
+MEP Engineering for Healthcare Facilities
+
+Core Topics:
+HVAC zoning, pressure relationships, ventilation, emergency power, equipment loads, medical gas coordination, domestic water, sanitary systems, lighting, electrical distribution, redundancy.
+
+PAGE 303 — HEALTHCARE MECHANICAL ENGINEERING
+
+URL: /industries/healthcare/mechanical-engineering/
+
+H1:
+Mechanical Engineering for Healthcare Facilities
+
+Topics:
+HVAC, ventilation, negative pressure, isolation rooms, filtration, humidity control, exhaust systems, equipment cooling, redundancy.
+
+PAGE 304 — HEALTHCARE ELECTRICAL ENGINEERING
+
+URL: /industries/healthcare/electrical-engineering/
+
+H1:
+Electrical Engineering for Healthcare Facilities
+
+Topics:
+Emergency power, essential systems, generators, service calculations, lighting, equipment circuits, medical equipment, redundancy, panel design.
+
+PAGE 305 — HEALTHCARE PLUMBING ENGINEERING
+
+URL: /industries/healthcare/plumbing-engineering/
+
+H1:
+Plumbing Engineering for Healthcare Facilities
+
+Topics:
+Domestic water, sanitary, medical gas where applicable, hot water, specialty waste, fixture requirements, infection-control considerations.
+
+PAGE 306 — HEALTHCARE CIVIL ENGINEERING
+
+URL: /industries/healthcare/civil-engineering/
+
+H1:
+Civil Engineering for Healthcare Facilities
+
+Topics:
+Site access, utilities, parking, drainage, accessible routes, emergency vehicle access, site improvements.
+
+PAGE 307 — HEALTHCARE GEOTECHNICAL ENGINEERING
+
+URL: /industries/healthcare/geotechnical-engineering/
+
+H1:
+Geotechnical Engineering for Healthcare Development
+
+Topics:
+Foundations, equipment loads, settlement, soil borings, site preparation, pavement recommendations, expansion projects.
+
+PAGE 308 — HOSPITAL MEP ENGINEERING
+
+URL: /industries/healthcare/hospitals/mep-engineering/
+
+SEO Title:
+Hospital MEP Engineering Services | Apex Grid
+
+H1:
+MEP Engineering for Hospitals
+
+This should be one of the deeper healthcare pages because hospital intent is more specialized than generic healthcare.
+
+PAGE 309 — MEDICAL OFFICE MEP ENGINEERING
+
+URL: /industries/healthcare/medical-office-buildings/mep-engineering/
+
+H1:
+MEP Engineering for Medical Office Buildings
+
+Targets smaller medical developments, renovations and TI work.
+
+PAGE 310 — OUTPATIENT CLINIC MEP
+
+URL: /industries/healthcare/clinics/mep-engineering/
+
+H1:
+MEP Engineering for Outpatient Clinics
+
+PAGE 311 — MULTIFAMILY STRUCTURAL ENGINEERING
+
+URL: /industries/multifamily/structural-engineering/
+
+SEO Title:
+Multifamily Structural Engineering | Apartments & Residential Buildings
+
+H1:
+Structural Engineering for Multifamily Buildings
+
+Topics:
+Wood framing, concrete podiums, steel framing, foundations, balconies, stairs, shear walls, roof framing, lateral systems, renovations.
+
+PAGE 312 — MULTIFAMILY MEP ENGINEERING
+
+URL: /industries/multifamily/mep-engineering/
+
+SEO Title:
+Multifamily MEP Engineering | Apartments & Residential Buildings
+
+H1:
+MEP Engineering for Multifamily Developments
+
+Topics:
+Centralized vs distributed systems, electrical services, unit panels, domestic water, sanitary, ventilation, common areas, amenity spaces.
+
+PAGE 313 — MULTIFAMILY MECHANICAL ENGINEERING
+
+URL: /industries/multifamily/mechanical-engineering/
+
+H1:
+Mechanical Engineering for Multifamily Buildings
+
+PAGE 314 — MULTIFAMILY ELECTRICAL ENGINEERING
+
+URL: /industries/multifamily/electrical-engineering/
+
+H1:
+Electrical Engineering for Multifamily Buildings
+
+PAGE 315 — MULTIFAMILY PLUMBING ENGINEERING
+
+URL: /industries/multifamily/plumbing-engineering/
+
+H1:
+Plumbing Engineering for Multifamily Buildings
+
+PAGE 316 — MULTIFAMILY CIVIL ENGINEERING
+
+URL: /industries/multifamily/civil-engineering/
+
+H1:
+Civil Engineering for Multifamily Development
+
+Topics:
+Grading, drainage, utilities, parking, ADA routes, stormwater, site development.
+
+PAGE 317 — MULTIFAMILY GEOTECHNICAL ENGINEERING
+
+URL: /industries/multifamily/geotechnical-engineering/
+
+H1:
+Geotechnical Engineering for Multifamily Development
+
+PAGE 318 — APARTMENT MEP ENGINEERING
+
+URL: /industries/multifamily/apartments/mep-engineering/
+
+H1:
+MEP Engineering for Apartment Buildings
+
+PAGE 319 — APARTMENT STRUCTURAL ENGINEERING
+
+URL: /industries/multifamily/apartments/structural-engineering/
+
+H1:
+Structural Engineering for Apartment Buildings
+
+PAGE 320 — STUDENT HOUSING MEP ENGINEERING
+
+URL: /industries/student-housing/mep-engineering/
+
+H1:
+MEP Engineering for Student Housing
+
+PAGE 321 — DATA CENTER STRUCTURAL ENGINEERING
+
+URL: /industries/data-centers/structural-engineering/
+
+SEO Title:
+Data Center Structural Engineering | Apex Grid
+
+H1:
+Structural Engineering for Data Centers
+
+Topics:
+Equipment loads, rooftop equipment, generators, battery systems, raised floors, equipment pads, structural redundancy, anchorage.
+
+PAGE 322 — DATA CENTER MEP ENGINEERING
+
+URL: /industries/data-centers/mep-engineering/
+
+SEO Title:
+Data Center MEP Engineering | Critical Power & Cooling
+
+H1:
+MEP Engineering for Data Centers
+
+PAGE 323 — DATA CENTER MECHANICAL ENGINEERING
+
+URL: /industries/data-centers/mechanical-engineering/
+
+H1:
+Mechanical Engineering for Data Centers
+
+Topics:
+N+1 cooling, high-density cooling, containment, airflow, heat rejection, resilience.
+
+PAGE 324 — DATA CENTER ELECTRICAL ENGINEERING
+
+URL: /industries/data-centers/electrical-engineering/
+
+SEO Title:
+Data Center Electrical Engineering | Critical Power Systems
+
+H1:
+Electrical Engineering for Data Centers
+
+Topics:
+UPS, generators, high-density distribution, redundant feeds, switchgear, one-lines, battery systems.
+
+PAGE 325 — DATA CENTER CIVIL ENGINEERING
+
+URL: /industries/data-centers/civil-engineering/
+
+H1:
+Civil Engineering for Data Center Campuses
+
+PAGE 326 — DATA CENTER GEOTECHNICAL ENGINEERING
+
+URL: /industries/data-centers/geotechnical-engineering/
+
+H1:
+Geotechnical Engineering for Data Center Development
+
+PAGE 327 — MISSION-CRITICAL ELECTRICAL ENGINEERING
+
+URL: /industries/mission-critical/electrical-engineering/
+
+H1:
+Electrical Engineering for Mission-Critical Facilities
+
+PAGE 328 — MISSION-CRITICAL MECHANICAL ENGINEERING
+
+URL: /industries/mission-critical/mechanical-engineering/
+
+H1:
+Mechanical Engineering for Mission-Critical Facilities
+
+PAGE 329 — INDUSTRIAL STRUCTURAL ENGINEERING
+
+URL: /industries/industrial-warehouse/structural-engineering/
+
+SEO Title:
+Industrial Structural Engineering | Warehouses & Manufacturing
+
+H1:
+Structural Engineering for Industrial Facilities
+
+PAGE 330 — INDUSTRIAL MEP ENGINEERING
+
+URL: /industries/industrial-warehouse/mep-engineering/
+
+H1:
+MEP Engineering for Industrial Facilities
+
+PAGE 331 — INDUSTRIAL MECHANICAL ENGINEERING
+
+URL: /industries/industrial-warehouse/mechanical-engineering/
+
+H1:
+Mechanical Engineering for Industrial Facilities
+
+PAGE 332 — INDUSTRIAL ELECTRICAL ENGINEERING
+
+URL: /industries/industrial-warehouse/electrical-engineering/
+
+H1:
+Electrical Engineering for Industrial Facilities
+
+PAGE 333 — INDUSTRIAL PLUMBING ENGINEERING
+
+URL: /industries/industrial-warehouse/plumbing-engineering/
+
+H1:
+Plumbing Engineering for Industrial Facilities
+
+PAGE 334 — INDUSTRIAL CIVIL ENGINEERING
+
+URL: /industries/industrial-warehouse/civil-engineering/
+
+H1:
+Civil Engineering for Industrial Development
+
+PAGE 335 — INDUSTRIAL GEOTECHNICAL ENGINEERING
+
+URL: /industries/industrial-warehouse/geotechnical-engineering/
+
+H1:
+Geotechnical Engineering for Industrial Facilities
+
+PAGE 336 — WAREHOUSE STRUCTURAL ENGINEERING
+
+URL: /industries/industrial-warehouse/warehouse-structural-engineering/
+
+H1:
+Structural Engineering for Warehouse Buildings
+
+PAGE 337 — WAREHOUSE MEP ENGINEERING
+
+URL: /industries/industrial-warehouse/warehouse-mep-engineering/
+
+H1:
+MEP Engineering for Warehouses
+
+PAGE 338 — MANUFACTURING MEP ENGINEERING
+
+URL: /industries/manufacturing/mep-engineering/
+
+H1:
+MEP Engineering for Manufacturing Facilities
+
+PAGE 339 — MANUFACTURING STRUCTURAL ENGINEERING
+
+URL: /industries/manufacturing/structural-engineering/
+
+H1:
+Structural Engineering for Manufacturing Facilities
+
+PAGE 340 — DISTRIBUTION CENTER ENGINEERING
+
+URL: /industries/distribution-centers/engineering/
+
+H1:
+Engineering for Distribution Centers
+
+PAGE 341 — RESTAURANT STRUCTURAL ENGINEERING
+
+URL: /industries/restaurants/structural-engineering/
+
+H1:
+Structural Engineering for Restaurants
+
+Topics:
+Roof equipment, wall openings, grease hood support, equipment support, remodels, tenant conversions.
+
+PAGE 342 — RESTAURANT MEP ENGINEERING
+
+URL: /industries/restaurants/mep-engineering/
+
+SEO Title:
+Restaurant MEP Engineering | Commercial Kitchen Design
+
+H1:
+MEP Engineering for Restaurants and Commercial Kitchens
+
+This should be a high-priority page.
+
+PAGE 343 — RESTAURANT MECHANICAL ENGINEERING
+
+URL: /industries/restaurants/mechanical-engineering/
+
+H1:
+Mechanical Engineering for Restaurants
+
+Topics:
+Kitchen exhaust, make-up air, HVAC, dining-area comfort, hood coordination.
+
+PAGE 344 — RESTAURANT ELECTRICAL ENGINEERING
+
+URL: /industries/restaurants/electrical-engineering/
+
+H1:
+Electrical Engineering for Restaurants
+
+PAGE 345 — RESTAURANT PLUMBING ENGINEERING
+
+URL: /industries/restaurants/plumbing-engineering/
+
+H1:
+Plumbing Engineering for Restaurants
+
+PAGE 346 — COMMERCIAL KITCHEN MEP ENGINEERING
+
+URL: /industries/restaurants/commercial-kitchen-mep/
+
+H1:
+MEP Engineering for Commercial Kitchens
+
+PAGE 347 — RETAIL STRUCTURAL ENGINEERING
+
+URL: /industries/retail/structural-engineering/
+
+H1:
+Structural Engineering for Retail Projects
+
+PAGE 348 — RETAIL MEP ENGINEERING
+
+URL: /industries/retail/mep-engineering/
+
+H1:
+MEP Engineering for Retail Spaces
+
+PAGE 349 — RETAIL CIVIL ENGINEERING
+
+URL: /industries/retail/civil-engineering/
+
+H1:
+Civil Engineering for Retail Development
+
+PAGE 350 — SHOPPING CENTER ENGINEERING
+
+URL: /industries/retail/shopping-centers/engineering/
+
+H1:
+Engineering for Shopping Centers
+
+PAGE 351 — HOTEL STRUCTURAL ENGINEERING
+
+URL: /industries/hospitality/structural-engineering/
+
+H1:
+Structural Engineering for Hotels and Hospitality
+
+PAGE 352 — HOTEL MEP ENGINEERING
+
+URL: /industries/hospitality/mep-engineering/
+
+SEO Title:
+Hotel MEP Engineering | Hospitality Engineering | Apex Grid
+
+H1:
+MEP Engineering for Hotels and Hospitality
+
+PAGE 353 — HOTEL MECHANICAL ENGINEERING
+
+URL: /industries/hospitality/mechanical-engineering/
+
+H1:
+Mechanical Engineering for Hotels
+
+PAGE 354 — HOTEL ELECTRICAL ENGINEERING
+
+URL: /industries/hospitality/electrical-engineering/
+
+H1:
+Electrical Engineering for Hotels
+
+PAGE 355 — HOTEL PLUMBING ENGINEERING
+
+URL: /industries/hospitality/plumbing-engineering/
+
+H1:
+Plumbing Engineering for Hotels
+
+PAGE 356 — SENIOR LIVING STRUCTURAL ENGINEERING
+
+URL: /industries/senior-living/structural-engineering/
+
+H1:
+Structural Engineering for Senior Living Facilities
+
+PAGE 357 — SENIOR LIVING MEP ENGINEERING
+
+URL: /industries/senior-living/mep-engineering/
+
+SEO Title:
+Senior Living MEP Engineering | Apex Grid
+
+H1:
+MEP Engineering for Senior Living and Assisted Care
+
+PAGE 358 — SENIOR LIVING ELECTRICAL ENGINEERING
+
+URL: /industries/senior-living/electrical-engineering/
+
+H1:
+Electrical Engineering for Senior Living Facilities
+
+PAGE 359 — SENIOR LIVING MECHANICAL ENGINEERING
+
+URL: /industries/senior-living/mechanical-engineering/
+
+H1:
+Mechanical Engineering for Senior Living Facilities
+
+PAGE 360 — EDUCATION STRUCTURAL ENGINEERING
+
+URL: /industries/education/structural-engineering/
+
+H1:
+Structural Engineering for Educational Facilities
+
+PAGE 361 — EDUCATION MEP ENGINEERING
+
+URL: /industries/education/mep-engineering/
+
+H1:
+MEP Engineering for Schools and Educational Facilities
+
+PAGE 362 — SCHOOL HVAC ENGINEERING
+
+URL: /industries/education/mechanical-engineering/
+
+H1:
+Mechanical Engineering for Schools
+
+PAGE 363 — SCHOOL ELECTRICAL ENGINEERING
+
+URL: /industries/education/electrical-engineering/
+
+H1:
+Electrical Engineering for Schools
+
+PAGE 364 — EDUCATION CIVIL ENGINEERING
+
+URL: /industries/education/civil-engineering/
+
+H1:
+Civil Engineering for Educational Campuses
+
+PAGE 365 — LIFE SCIENCE STRUCTURAL ENGINEERING
+
+URL: /industries/life-science/structural-engineering/
+
+H1:
+Structural Engineering for Life Science Facilities
+
+PAGE 366 — LIFE SCIENCE MEP ENGINEERING
+
+URL: /industries/life-science/mep-engineering/
+
+SEO Title:
+Life Science MEP Engineering | Labs & Research Facilities
+
+H1:
+MEP Engineering for Life Science Facilities
+
+PAGE 367 — LAB MECHANICAL ENGINEERING
+
+URL: /industries/life-science/mechanical-engineering/
+
+H1:
+Mechanical Engineering for Laboratories
+
+PAGE 368 — LAB ELECTRICAL ENGINEERING
+
+URL: /industries/life-science/electrical-engineering/
+
+H1:
+Electrical Engineering for Laboratories
+
+PAGE 369 — LAB PLUMBING ENGINEERING
+
+URL: /industries/life-science/plumbing-engineering/
+
+H1:
+Plumbing and Specialty Utility Engineering for Laboratories
+
+PAGE 370 — CLEANROOM MEP ENGINEERING
+
+URL: /industries/life-science/cleanroom-mep-engineering/
+
+H1:
+MEP Engineering for Cleanrooms
+
+PAGE 371 — GOVERNMENT STRUCTURAL ENGINEERING
+
+URL: /industries/government/structural-engineering/
+
+H1:
+Structural Engineering for Government Facilities
+
+PAGE 372 — GOVERNMENT MEP ENGINEERING
+
+URL: /industries/government/mep-engineering/
+
+H1:
+MEP Engineering for Government Facilities
+
+PAGE 373 — GOVERNMENT CIVIL ENGINEERING
+
+URL: /industries/government/civil-engineering/
+
+H1:
+Civil Engineering for Government Facilities
+
+PAGE 374 — GOVERNMENT GEOTECHNICAL ENGINEERING
+
+URL: /industries/government/geotechnical-engineering/
+
+H1:
+Geotechnical Engineering for Government Projects
+
+PAGE 375 — MILITARY STRUCTURAL ENGINEERING
+
+URL: /industries/military-defense/structural-engineering/
+
+SEO Title:
+Military Structural Engineering | UFC & Federal Facilities
+
+H1:
+Structural Engineering for Military Facilities
+
+PAGE 376 — MILITARY MEP ENGINEERING
+
+URL: /industries/military-defense/mep-engineering/
+
+SEO Title:
+Military MEP Engineering | DoD Facility Engineering | Apex Grid
+
+H1:
+MEP Engineering for Military and Defense Facilities
+
+PAGE 377 — MILITARY CIVIL ENGINEERING
+
+URL: /industries/military-defense/civil-engineering/
+
+H1:
+Civil Engineering for Military Facilities
+
+PAGE 378 — MILITARY GEOTECHNICAL ENGINEERING
+
+URL: /industries/military-defense/geotechnical-engineering/
+
+SEO Title:
+Military Geotechnical Engineering | Apex Grid
+
+H1:
+Geotechnical Engineering for Military Projects
+
+PAGE 379 — MILITARY ELECTRICAL ENGINEERING
+
+URL: /industries/military-defense/electrical-engineering/
+
+H1:
+Electrical Engineering for Military Facilities
+
+PAGE 380 — MILITARY MECHANICAL ENGINEERING
+
+URL: /industries/military-defense/mechanical-engineering/
+
+H1:
+Mechanical Engineering for Military Facilities
+
+PAGE 381 — CHURCH STRUCTURAL ENGINEERING
+
+URL: /industries/religious-worship/structural-engineering/
+
+H1:
+Structural Engineering for Churches and Worship Facilities
+
+PAGE 382 — CHURCH MEP ENGINEERING
+
+URL: /industries/religious-worship/mep-engineering/
+
+H1:
+MEP Engineering for Churches and Worship Facilities
+
+PAGE 383 — COMMERCIAL OFFICE STRUCTURAL ENGINEERING
+
+URL: /industries/commercial-office/structural-engineering/
+
+H1:
+Structural Engineering for Office Buildings
+
+PAGE 384 — COMMERCIAL OFFICE MEP ENGINEERING
+
+URL: /industries/commercial-office/mep-engineering/
+
+H1:
+MEP Engineering for Office Buildings
+
+PAGE 385 — SOLAR STRUCTURAL ENGINEERING
+
+URL: /industries/renewable-energy/structural-engineering/
+
+SEO Title:
+Solar Structural Engineering | Rooftop & Carport PV | Apex Grid
+
+H1:
+Structural Engineering for Solar PV Systems
+
+Topics:
+Rooftop loading, carports, foundations, attachment design, existing structures.
+
+PAGE 386 — SOLAR ELECTRICAL ENGINEERING
+
+URL: /industries/renewable-energy/electrical-engineering/
+
+H1:
+Electrical Engineering for Solar PV Systems
+
+PAGE 387 — BATTERY STORAGE STRUCTURAL ENGINEERING
+
+URL: /industries/renewable-energy/battery-storage-structural/
+
+H1:
+Structural Engineering for Battery Energy Storage Systems
+
+PAGE 388 — BATTERY STORAGE ELECTRICAL ENGINEERING
+
+URL: /industries/renewable-energy/battery-storage-electrical/
+
+H1:
+Electrical Engineering for Battery Energy Storage Systems
+
+PAGE 389 — EV CHARGING ELECTRICAL ENGINEERING
+
+URL: /industries/ev-automotive/electrical-engineering/
+
+SEO Title:
+EV Charging Electrical Engineering | Commercial & Fleet Charging
+
+H1:
+Electrical Engineering for EV Charging Infrastructure
+
+PAGE 390 — EV CHARGING CIVIL ENGINEERING
+
+URL: /industries/ev-automotive/civil-engineering/
+
+H1:
+Civil Engineering for EV Charging Sites
+
+PAGE 391 — COLD STORAGE STRUCTURAL ENGINEERING
+
+URL: /industries/cold-storage/structural-engineering/
+
+H1:
+Structural Engineering for Cold Storage Facilities
+
+PAGE 392 — COLD STORAGE MEP ENGINEERING
+
+URL: /industries/cold-storage/mep-engineering/
+
+H1:
+MEP Engineering for Cold Storage and Refrigerated Facilities
+
+PAGE 393 — PARKING STRUCTURAL ENGINEERING
+
+URL: /industries/parking/structural-engineering/
+
+H1:
+Structural Engineering for Parking Structures
+
+PAGE 394 — PARKING MEP ENGINEERING
+
+URL: /industries/parking/mep-engineering/
+
+H1:
+MEP Engineering for Parking Structures
+
+Topics:
+Lighting, ventilation, CO monitoring, EV infrastructure, drainage coordination.
+
+PAGE 395 — AVIATION STRUCTURAL ENGINEERING
+
+URL: /industries/aviation/structural-engineering/
+
+H1:
+Structural Engineering for Aviation and Hangar Facilities
+
+PAGE 396 — AVIATION MEP ENGINEERING
+
+URL: /industries/aviation/mep-engineering/
+
+H1:
+MEP Engineering for Aviation Facilities and Hangars
+
+PAGE 397 — TELECOM STRUCTURAL ENGINEERING
+
+URL: /industries/telecommunications/structural-engineering/
+
+H1:
+Structural Engineering for Telecommunications Infrastructure
+
+PAGE 398 — TELECOM ELECTRICAL ENGINEERING
+
+URL: /industries/telecommunications/electrical-engineering/
+
+H1:
+Electrical Engineering for Telecommunications Facilities
+
+PAGE 399 — CANNABIS MEP ENGINEERING
+
+URL: /industries/cannabis/mep-engineering/
+
+H1:
+MEP Engineering for Cannabis Facilities
+
+Topics:
+High-density electrical loads, dehumidification, ventilation, indoor grow environments, process coordination, emergency systems.
+
+PAGE 400 — AGRICULTURAL MEP ENGINEERING
+
+URL: /industries/agriculture/mep-engineering/
+
+H1:
+MEP Engineering for Agricultural and Controlled-Environment Facilities
+
+WHAT WE HAVE NOW
+
+At 400 page concepts, Apex starts to look less like a website and more like a true engineering search platform.
+
+But the next stage is where SEO becomes even more commercially precise.
+
+Pages 401–500 should be Location × Service
+
+For example:
+
+Phoenix Structural Engineering
+
+Phoenix MEP Engineering
+
+Phoenix Civil Engineering
+
+Scottsdale Structural Engineering
+
+Los Angeles Structural Engineering
+
+Los Angeles MEP Engineering
+
+Dallas MEP Engineering
+
+Dallas Structural Engineering
+
+San Antonio Geotechnical Engineering
+
+Austin Civil Engineering
+
+Miami Structural Engineering
+
+Miami MEP Engineering
+
+And these pages should not just say:
+
+We offer MEP engineering in Dallas.
+
+They need sections unique to local intent:
+
+Services in Dallas
+
+Project Types
+
+Industries
+
+Existing-Building Work
+
+Permit Engineering
+
+Texas PE Availability
+
+Relevant Projects
+
+Nearby Markets
+
+Request a Dallas Project Review
+
+That next 100-page block is probably one of the strongest commercial acquisition layers in the entire strategy.
+
+After that, I would build Pages 501–600 around specialty project problems and high-intent engineering searches, such as:
+
+Rooftop unit structural analysis
+Commercial kitchen MEP plans
+Electrical service upgrade engineering
+Existing building structural report
+Parking lot geotechnical report
+Seismic retrofit engineering
+Solar carport structural engineering
+EV charging load study
+Restaurant grease exhaust engineering
+Warehouse ventilation engineering
+Multifamily electrical load calculations
