@@ -47,6 +47,7 @@ type AwaitedInput<T> = PromiseLike<T> | T;
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
 
+
 const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKey: K } => {
   const result = { queryKey } as T & { queryKey: K };
   for (const key of Object.keys(query)) {
@@ -63,6 +64,8 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
 };
 
 export const getHealthCheckUrl = () => {
+
+
 
 
   return `/api/healthz`
@@ -84,6 +87,9 @@ export const healthCheck = async ( options?: Parameters<typeof customFetch>[1]):
 );}
 
 
+
+
+
 export const getHealthCheckQueryKey = () => {
     return [
     `/api/healthz`
@@ -99,7 +105,11 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
   const queryKey =  queryOptions?.queryKey ?? getHealthCheckQueryKey();
 
 
+
     const queryFn: QueryFunction<Awaited<ReturnType<typeof healthCheck>>> = ({ signal }) => healthCheck({ signal, ...requestOptions });
+
+
+
 
 
    return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof healthCheck>>, TError, TData> & { queryKey: QueryKey }
@@ -126,7 +136,14 @@ export function useHealthCheck<TData = Awaited<ReturnType<typeof healthCheck>>, 
 }
 
 
+
+
+
+
+
 export const getListLeadsUrl = () => {
+
+
 
 
   return `/api/leads`
@@ -147,6 +164,9 @@ export const listLeads = async ( options?: Parameters<typeof customFetch>[1]): P
 );}
 
 
+
+
+
 export const getListLeadsQueryKey = () => {
     return [
     `/api/leads`
@@ -162,7 +182,11 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
   const queryKey =  queryOptions?.queryKey ?? getListLeadsQueryKey();
 
 
+
     const queryFn: QueryFunction<Awaited<ReturnType<typeof listLeads>>> = ({ signal }) => listLeads({ signal, ...requestOptions });
+
+
+
 
 
    return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listLeads>>, TError, TData> & { queryKey: QueryKey }
@@ -189,7 +213,14 @@ export function useListLeads<TData = Awaited<ReturnType<typeof listLeads>>, TErr
 }
 
 
+
+
+
+
+
 export const getCreateLeadUrl = () => {
+
+
 
 
   return `/api/leads`
@@ -210,6 +241,9 @@ export const createLead = async (leadInput: LeadInput, options?: Parameters<type
 );}
 
 
+
+
+
 export const getCreateLeadMutationOptions = <TError = ErrorType<ErrorMessage>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLead>>, TError,{data: BodyType<LeadInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
 ): UseMutationOptions<Awaited<ReturnType<typeof createLead>>, TError,{data: BodyType<LeadInput>}, TContext> => {
@@ -222,11 +256,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       : {mutation: { mutationKey, }, request: undefined};
 
 
+
+
       const mutationFn: MutationFunction<Awaited<ReturnType<typeof createLead>>, {data: BodyType<LeadInput>}> = (props) => {
           const {data} = props ?? {};
 
           return  createLead(data,requestOptions)
         }
+
+
+
+
 
 
   return  { mutationFn, ...mutationOptions }}
@@ -252,6 +292,8 @@ export const useCreateLead = <TError = ErrorType<ErrorMessage>,
 export const getListSubscribersUrl = () => {
 
 
+
+
   return `/api/subscribers`
 }
 
@@ -270,6 +312,9 @@ export const listSubscribers = async ( options?: Parameters<typeof customFetch>[
 );}
 
 
+
+
+
 export const getListSubscribersQueryKey = () => {
     return [
     `/api/subscribers`
@@ -285,7 +330,11 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
   const queryKey =  queryOptions?.queryKey ?? getListSubscribersQueryKey();
 
 
+
     const queryFn: QueryFunction<Awaited<ReturnType<typeof listSubscribers>>> = ({ signal }) => listSubscribers({ signal, ...requestOptions });
+
+
+
 
 
    return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listSubscribers>>, TError, TData> & { queryKey: QueryKey }
@@ -312,7 +361,14 @@ export function useListSubscribers<TData = Awaited<ReturnType<typeof listSubscri
 }
 
 
+
+
+
+
+
 export const getCreateSubscriberUrl = () => {
+
+
 
 
   return `/api/subscribers`
@@ -333,6 +389,9 @@ export const createSubscriber = async (subscriberInput: SubscriberInput, options
 );}
 
 
+
+
+
 export const getCreateSubscriberMutationOptions = <TError = ErrorType<ErrorMessage>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createSubscriber>>, TError,{data: BodyType<SubscriberInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
 ): UseMutationOptions<Awaited<ReturnType<typeof createSubscriber>>, TError,{data: BodyType<SubscriberInput>}, TContext> => {
@@ -345,11 +404,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       : {mutation: { mutationKey, }, request: undefined};
 
 
+
+
       const mutationFn: MutationFunction<Awaited<ReturnType<typeof createSubscriber>>, {data: BodyType<SubscriberInput>}> = (props) => {
           const {data} = props ?? {};
 
           return  createSubscriber(data,requestOptions)
         }
+
+
+
+
 
 
   return  { mutationFn, ...mutationOptions }}
@@ -375,6 +440,8 @@ export const useCreateSubscriber = <TError = ErrorType<ErrorMessage>,
 export const getUnsubscribeSubscriberUrl = () => {
 
 
+
+
   return `/api/subscribers/unsubscribe`
 }
 
@@ -394,6 +461,9 @@ export const unsubscribeSubscriber = async (unsubscribeInput: UnsubscribeInput, 
 );}
 
 
+
+
+
 export const getUnsubscribeSubscriberMutationOptions = <TError = ErrorType<ErrorMessage>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof unsubscribeSubscriber>>, TError,{data: BodyType<UnsubscribeInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
 ): UseMutationOptions<Awaited<ReturnType<typeof unsubscribeSubscriber>>, TError,{data: BodyType<UnsubscribeInput>}, TContext> => {
@@ -406,11 +476,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       : {mutation: { mutationKey, }, request: undefined};
 
 
+
+
       const mutationFn: MutationFunction<Awaited<ReturnType<typeof unsubscribeSubscriber>>, {data: BodyType<UnsubscribeInput>}> = (props) => {
           const {data} = props ?? {};
 
           return  unsubscribeSubscriber(data,requestOptions)
         }
+
+
+
+
 
 
   return  { mutationFn, ...mutationOptions }}
@@ -436,6 +512,8 @@ export const useUnsubscribeSubscriber = <TError = ErrorType<ErrorMessage>,
 export const getDeleteSubscriberUrl = (id: number,) => {
 
 
+
+
   return `/api/subscribers/${id}`
 }
 
@@ -454,6 +532,9 @@ export const deleteSubscriber = async (id: number, options?: Parameters<typeof c
 );}
 
 
+
+
+
 export const getDeleteSubscriberMutationOptions = <TError = ErrorType<ErrorMessage>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteSubscriber>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
 ): UseMutationOptions<Awaited<ReturnType<typeof deleteSubscriber>>, TError,{id: number}, TContext> => {
@@ -466,11 +547,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       : {mutation: { mutationKey, }, request: undefined};
 
 
+
+
       const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteSubscriber>>, {id: number}> = (props) => {
           const {id} = props ?? {};
 
           return  deleteSubscriber(id,requestOptions)
         }
+
+
+
+
 
 
   return  { mutationFn, ...mutationOptions }}
@@ -496,6 +583,8 @@ export const useDeleteSubscriber = <TError = ErrorType<ErrorMessage>,
 export const getCallbackChatUrl = () => {
 
 
+
+
   return `/api/callback-chat`
 }
 
@@ -515,6 +604,9 @@ export const callbackChat = async (callbackChatInput: CallbackChatInput, options
 );}
 
 
+
+
+
 export const getCallbackChatMutationOptions = <TError = ErrorType<ErrorMessage>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof callbackChat>>, TError,{data: BodyType<CallbackChatInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
 ): UseMutationOptions<Awaited<ReturnType<typeof callbackChat>>, TError,{data: BodyType<CallbackChatInput>}, TContext> => {
@@ -527,11 +619,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       : {mutation: { mutationKey, }, request: undefined};
 
 
+
+
       const mutationFn: MutationFunction<Awaited<ReturnType<typeof callbackChat>>, {data: BodyType<CallbackChatInput>}> = (props) => {
           const {data} = props ?? {};
 
           return  callbackChat(data,requestOptions)
         }
+
+
+
+
 
 
   return  { mutationFn, ...mutationOptions }}
@@ -557,6 +655,8 @@ export const useCallbackChat = <TError = ErrorType<ErrorMessage>,
 export const getUpdateLeadUrl = (id: number,) => {
 
 
+
+
   return `/api/leads/${id}`
 }
 
@@ -576,6 +676,9 @@ export const updateLead = async (id: number,
 );}
 
 
+
+
+
 export const getUpdateLeadMutationOptions = <TError = ErrorType<ErrorMessage>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateLead>>, TError,{id: number;data: BodyType<LeadUpdateInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
 ): UseMutationOptions<Awaited<ReturnType<typeof updateLead>>, TError,{id: number;data: BodyType<LeadUpdateInput>}, TContext> => {
@@ -588,11 +691,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       : {mutation: { mutationKey, }, request: undefined};
 
 
+
+
       const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateLead>>, {id: number;data: BodyType<LeadUpdateInput>}> = (props) => {
           const {id,data} = props ?? {};
 
           return  updateLead(id,data,requestOptions)
         }
+
+
+
+
 
 
   return  { mutationFn, ...mutationOptions }}
@@ -615,13 +724,9 @@ export const useUpdateLead = <TError = ErrorType<ErrorMessage>,
       return useMutation(getUpdateLeadMutationOptions(options));
     }
 
-export const getRequestUploadUrlUrl = () => {
-
-
-  return `/api/storage/uploads/request-url`
-}
-
 export const getUploadStorageObjectUrl = () => {
+
+
 
 
   return `/api/storage/uploads`
@@ -642,6 +747,9 @@ export const uploadStorageObject = async (uploadStorageObjectBody: Blob, options
 );}
 
 
+
+
+
 export const getUploadStorageObjectMutationOptions = <TError = ErrorType<ErrorMessage>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof uploadStorageObject>>, TError,{data: BodyType<Blob>}, TContext>, request?: SecondParameter<typeof customFetch>}
 ): UseMutationOptions<Awaited<ReturnType<typeof uploadStorageObject>>, TError,{data: BodyType<Blob>}, TContext> => {
@@ -654,11 +762,17 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       : {mutation: { mutationKey, }, request: undefined};
 
 
+
+
       const mutationFn: MutationFunction<Awaited<ReturnType<typeof uploadStorageObject>>, {data: BodyType<Blob>}> = (props) => {
           const {data} = props ?? {};
 
           return  uploadStorageObject(data,requestOptions)
         }
+
+
+
+
 
 
   return  { mutationFn, ...mutationOptions }}
@@ -681,7 +795,80 @@ export const useUploadStorageObject = <TError = ErrorType<ErrorMessage>,
       return useMutation(getUploadStorageObjectMutationOptions(options));
     }
 
+export const getRequestUploadUrlUrl = () => {
+
+
+
+
+  return `/api/storage/uploads/request-url`
+}
+
+/**
+ * @summary Request a presigned URL for file upload
+ */
+export const requestUploadUrl = async (uploadUrlRequest: UploadUrlRequest, options?: Parameters<typeof customFetch>[1]): Promise<UploadUrlResponse> => {
+
+  return customFetch<UploadUrlResponse>(getRequestUploadUrlUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(uploadUrlRequest)
+  }
+);}
+
+
+
+
+
+export const getRequestUploadUrlMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof requestUploadUrl>>, TError,{data: BodyType<UploadUrlRequest>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof requestUploadUrl>>, TError,{data: BodyType<UploadUrlRequest>}, TContext> => {
+
+const mutationKey = ['requestUploadUrl'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof requestUploadUrl>>, {data: BodyType<UploadUrlRequest>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  requestUploadUrl(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type RequestUploadUrlMutationResult = NonNullable<Awaited<ReturnType<typeof requestUploadUrl>>>
+    export type RequestUploadUrlMutationBody = BodyType<UploadUrlRequest>
+    export type RequestUploadUrlMutationError = ErrorType<ErrorMessage>
+
+    /**
+ * @summary Request a presigned URL for file upload
+ */
+export const useRequestUploadUrl = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof requestUploadUrl>>, TError,{data: BodyType<UploadUrlRequest>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof requestUploadUrl>>,
+        TError,
+        {data: BodyType<UploadUrlRequest>},
+        TContext
+      > => {
+      return useMutation(getRequestUploadUrlMutationOptions(options));
+    }
+
 export const getGetStorageObjectUrl = (objectPath: string,) => {
+
+
 
 
   return `/api/storage/objects/${objectPath}`
@@ -702,6 +889,9 @@ export const getStorageObject = async (objectPath: string, options?: Parameters<
 );}
 
 
+
+
+
 export const getGetStorageObjectQueryKey = (objectPath: string,) => {
     return [
     `/api/storage/objects/${objectPath}`
@@ -717,7 +907,11 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
   const queryKey =  queryOptions?.queryKey ?? getGetStorageObjectQueryKey(objectPath);
 
 
+
     const queryFn: QueryFunction<Awaited<ReturnType<typeof getStorageObject>>> = ({ signal }) => getStorageObject(objectPath, { signal, ...requestOptions });
+
+
+
 
 
    return  { queryKey, queryFn, enabled: objectPath !== null && objectPath !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getStorageObject>>, TError, TData> & { queryKey: QueryKey }
@@ -744,57 +938,8 @@ export function useGetStorageObject<TData = Awaited<ReturnType<typeof getStorage
 }
 
 
-    export type RequestUploadUrlMutationResult = NonNullable<Awaited<ReturnType<typeof requestUploadUrl>>>
-
-    export type RequestUploadUrlMutationError = ErrorType<ErrorMessage>
-
-    /**
- * @summary Request a presigned URL for file upload
- */
-export const useRequestUploadUrl = <TError = ErrorType<ErrorMessage>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof requestUploadUrl>>, TError,{data: BodyType<UploadUrlRequest>}, TContext>, request?: SecondParameter<typeof customFetch>}
- ): UseMutationResult<
-        Awaited<ReturnType<typeof requestUploadUrl>>,
-        TError,
-        {data: BodyType<UploadUrlRequest>},
-        TContext
-      > => {
-      return useMutation(getRequestUploadUrlMutationOptions(options));
-    }
-
-    export type RequestUploadUrlMutationBody = BodyType<UploadUrlRequest>
-
-export const getRequestUploadUrlMutationOptions = <TError = ErrorType<ErrorMessage>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof requestUploadUrl>>, TError,{data: BodyType<UploadUrlRequest>}, TContext>, request?: SecondParameter<typeof customFetch>}
-): UseMutationOptions<Awaited<ReturnType<typeof requestUploadUrl>>, TError,{data: BodyType<UploadUrlRequest>}, TContext> => {
-
-const mutationKey = ['requestUploadUrl'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof requestUploadUrl>>, {data: BodyType<UploadUrlRequest>}> = (props) => {
-          const {data} = props ?? {};
-
-          return  requestUploadUrl(data,requestOptions)
-        }
 
 
-  return  { mutationFn, ...mutationOptions }}
 
-/**
- * @summary Request a presigned URL for file upload
- */
-export const requestUploadUrl = async (uploadUrlRequest: UploadUrlRequest, options?: Parameters<typeof customFetch>[1]): Promise<UploadUrlResponse> => {
-
-  return customFetch<UploadUrlResponse>(getRequestUploadUrlUrl(),
-  {
-    ...options,
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', ...options?.headers },
-    body: JSON.stringify(uploadUrlRequest)
-  }
-);}
