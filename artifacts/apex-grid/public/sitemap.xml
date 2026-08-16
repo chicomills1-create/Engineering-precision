@@ -20,6 +20,10 @@
   <url><loc>https://apexgrideng.com/about</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/team</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/for-architects</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://apexgrideng.com/for-contractors</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://apexgrideng.com/for-developers</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://apexgrideng.com/for-property-managers</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://apexgrideng.com/industries/healthcare-engineering</loc><lastmod>2026-08-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://apexgrideng.com/industries/military-defense-engineering</loc><lastmod>2026-08-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://apexgrideng.com/industries/government-civic-engineering</loc><lastmod>2026-08-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>

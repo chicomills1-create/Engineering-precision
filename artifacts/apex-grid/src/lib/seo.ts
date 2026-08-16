@@ -21,24 +21,6 @@ function setMeta(attr: "name" | "property", key: string, content: string) {
   el.setAttribute("content", content);
 }
 
-/**
- * Injects a JSON-LD structured-data script for the current page and removes
- * it on unmount/route change.
- */
-export function useJsonLd(data: object | null) {
-  useEffect(() => {
-    if (!data) return;
-    const el = document.createElement("script");
-    el.type = "application/ld+json";
-    el.setAttribute("data-page-jsonld", "true");
-    el.textContent = JSON.stringify(data);
-    document.head.appendChild(el);
-    return () => {
-      el.remove();
-    };
-  }, [JSON.stringify(data)]);
-}
-
 export function usePageMeta({ title, description, path }: PageMeta) {
   useEffect(() => {
     document.title = title;
@@ -68,8 +50,9 @@ export function usePageMeta({ title, description, path }: PageMeta) {
  * Injects a JSON-LD structured data script into <head>.
  * One script per @type — re-running with a different schema replaces the old one.
  */
-export function useJsonLd(schema: Record<string, unknown>) {
+export function useJsonLd(schema: Record<string, unknown> | null) {
   useEffect(() => {
+    if (!schema) return;
     const type = String(schema["@type"] ?? "unknown");
     const id = `jsonld-${type.toLowerCase()}`;
     let script = document.getElementById(id) as HTMLScriptElement | null;
