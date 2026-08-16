@@ -25,6 +25,7 @@ import { STATIC_STANDALONE_PAGES, type StaticPageDef } from "./static-pages";
 import { DISCIPLINES, type DisciplineDef } from "./disciplines";
 import { ALL_INDUSTRIES } from "../src/data/industries";
 import { RESOURCE_ARTICLES, RESOURCE_DISCIPLINES, disciplineOf, resourceUrl, type ResourceArticle, type ResourceDiscipline } from "./resources";
+import { GLOSSARY_TERMS, sortedGlossaryTerms, glossaryByLetter, type GlossaryTerm } from "./glossary";
 
 /** Lightweight city-directory entry sourced from US Census population estimates. */
 interface DirectoryCity {
@@ -677,6 +678,11 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   urls.push(`  <url><loc>${SITE}/government/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
   for (const sp of SOLUTION_PAGES) {
     urls.push(`  <url><loc>${SITE}/${sp.dir}/${sp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+  }
+  // Engineering Glossary hub + individual pages
+  urls.push(`  <url><loc>${SITE}/engineering-glossary/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  for (const gt of GLOSSARY_TERMS) {
+    urls.push(`  <url><loc>${SITE}/engineering-glossary/${gt.slug}/</loc><lastmod>${today}</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>`);
   }
   // Guides hub + individual pages
   urls.push(`  <url><loc>${SITE}/guides/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
@@ -1495,8 +1501,14 @@ function governmentHubPage(): string {
   });
 }
 
-// ─── Guide Pages ──────────────────────────────────────────────────────────
-
+const CATEGORY_LABEL: Record<GlossaryTerm["category"], string> = {
+  structural: "Structural Engineering",
+  mep: "MEP Engineering",
+  civil: "Civil Engineering",
+  geotech: "Geotechnical Engineering",
+  permit: "Permitting & Codes",
+  general: "General Engineering",
+};
 function guidePage(page: GuidePage): string {
   const url = `/guides/${page.slug}/`;
   const crumbs = [
@@ -2439,6 +2451,20 @@ async function main() {
     pages++;
   }
 
+  // Engineering Glossary pages
+  const glossaryDir = path.join(PUBLIC, "engineering-glossary");
+  fs.rmSync(glossaryDir, { recursive: true, force: true });
+  fs.mkdirSync(glossaryDir, { recursive: true });
+  fs.writeFileSync(path.join(glossaryDir, "index.html"), glossaryHubPage());
+  pages++;
+  for (const gt of GLOSSARY_TERMS) {
+    assertSlug(gt.slug);
+    const dir = path.join(glossaryDir, gt.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, "index.html"), glossaryPage(gt));
+    pages++;
+  }
+
   // Structural extended subpages (additional spec-slug pages under /structural-engineering/)
   const structuralHubDir = path.join(PUBLIC, "structural-engineering");
   for (const sp of STRUCTURAL_EXTENDED_PAGES) {
@@ -2523,7 +2549,7 @@ async function main() {
   writeSitemap(states, cities, directory);
   const dirCount = Object.values(directory).reduce((a, v) => a + v.length, 0);
   const disciplineSubpageCount = DISCIPLINE_HUBS.reduce((a, h) => a + h.subpages.length, 0);
-  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${INDUSTRY_DISCIPLINE_PAGES.length} industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, 1 sitemap page + sitemap.xml`);
+  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${INDUSTRY_DISCIPLINE_PAGES.length} industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, 1 sitemap page + sitemap.xml`);
 }
 
 main().catch((e) => {
@@ -2684,6 +2710,136 @@ ${breadcrumb(crumbs)}
     description: `Licensed MEP, structural, civil, and energy-compliance engineering in ${city.name}, ${state.abbrev}. Permitting through ${city.ahj.office} under the ${city.codes.building.split(",")[0].split("(")[0].trim()}.`,
     canonical: `${SITE}/locations/${state.slug}/${city.slug}/`,
     schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+function glossaryHubPage(): string {
+  const crumbs = [{ name: "Home", href: "/" }, { name: "Engineering Glossary" }];
+  const byLetter = glossaryByLetter();
+  const letters = Object.keys(byLetter).sort();
+
+  const letterNav = letters
+    .map((l) => `<a href="#letter-${l}" style="border:1px solid var(--border);background:var(--card);padding:8px 14px;font-family:'Space Grotesk';font-weight:700;font-size:14px">${l}</a>`)
+    .join("");
+
+  const sections = letters
+    .map((l) => {
+      const terms = byLetter[l];
+      const cards = terms
+        .map(
+          (t) =>
+            `<a class="card" href="/engineering-glossary/${t.slug}/"><div class="label">${esc(CATEGORY_LABEL[t.category])}</div><h3>${esc(t.term)}</h3><p>${esc(t.definition.slice(0, 100))}…</p></a>`,
+        )
+        .join("");
+      return `<div id="letter-${l}" style="margin-bottom:48px">
+  <h2 style="font-size:36px;border-bottom:2px solid var(--primary);padding-bottom:12px;margin-bottom:20px">${l}</h2>
+  <div class="grid3">${cards}</div>
+</div>`;
+    })
+    .join("\n");
+
+  const totalTerms = GLOSSARY_TERMS.length;
+
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">Reference · ${totalTerms}+ Terms</p>
+  <h1>Engineering <span class="dim">Glossary</span></h1>
+  <p class="lede">Plain-language definitions for structural, MEP, civil, geotechnical, and permitting terms used in commercial and industrial engineering — written by licensed professional engineers.</p>
+</div></section>
+
+<section class="block"><div class="container">
+  <h2>Browse <em>by Letter</em></h2>
+  <div class="linkrow" style="margin-bottom:32px">${letterNav}</div>
+  ${sections}
+</div></section>
+
+<section class="ctaband"><div class="container">
+  <h2>Questions About Your Project?</h2>
+  <p>If you encountered a term that isn't in the glossary, or have engineering questions specific to your project, our team of licensed PEs is happy to help.</p>
+  <a class="cta" href="/contact">Talk to an Engineer</a>
+</div></section>`;
+
+  return htmlShell({
+    title: "Engineering Glossary | Structural, MEP, Civil & Code Terms | Apex Grid",
+    description: `Definitions for ${totalTerms}+ structural, MEP, civil, geotechnical, and permitting engineering terms — written by licensed professional engineers at Apex Grid.`,
+    canonical: `${SITE}/engineering-glossary/`,
+    schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+function glossaryPage(term: GlossaryTerm): string {
+  const url = `/engineering-glossary/${term.slug}/`;
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Engineering Glossary", href: "/engineering-glossary/" },
+    { name: term.term },
+  ];
+  const categoryLabel = CATEGORY_LABEL[term.category];
+
+  const relatedTermLinks = term.relatedTerms
+    .slice(0, 6)
+    .map((s) => {
+      const found = GLOSSARY_TERMS.find((t) => t.slug === s);
+      const label = found ? found.term : s;
+      return `<a href="/engineering-glossary/${s}/">${esc(label)}</a>`;
+    })
+    .join("");
+
+  const relatedServiceLinks = term.relatedServices
+    .map((rs) => `<a class="card" href="${esc(rs.href)}"><div class="label">${esc(categoryLabel)}</div><h3>${esc(rs.label)}</h3></a>`)
+    .join("");
+
+  const definitionSchema = {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    name: term.term,
+    description: term.definition,
+    inDefinedTermSet: `${SITE}/engineering-glossary/`,
+  };
+
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">${esc(categoryLabel)} · Engineering Glossary</p>
+  <h1>${esc(term.term)}</h1>
+  <p class="lede">${esc(term.definition)}</p>
+</div></section>
+
+<section class="block"><div class="container">
+  <h2>What Engineers Mean by <em>${esc(term.term)}</em></h2>
+  <div class="prose"><p>${esc(term.extended)}</p></div>
+</div></section>
+
+${relatedServiceLinks ? `<section class="block"><div class="container">
+  <h2>Related <em>Engineering Services</em></h2>
+  <div class="grid2">${relatedServiceLinks}</div>
+</div></section>` : ""}
+
+${relatedTermLinks ? `<section class="block"><div class="container">
+  <h2>Related <em>Glossary Terms</em></h2>
+  <div class="linkrow">${relatedTermLinks}</div>
+</div></section>` : ""}
+
+<section class="block"><div class="container">
+  <h2>Browse the <em>Full Glossary</em></h2>
+  <p class="prose" style="color:var(--muted);margin-bottom:20px">Apex Grid Engineering maintains this glossary as a resource for architects, contractors, developers, and property owners who encounter unfamiliar engineering terminology on their projects.</p>
+  <a class="cta" href="/engineering-glossary/" style="display:inline-block">View All Engineering Terms</a>
+</div></section>
+
+<section class="ctaband"><div class="container">
+  <h2>Have a Project That Involves ${esc(term.term)}?</h2>
+  <p>Apex Grid's licensed PEs provide ${esc(categoryLabel.toLowerCase())} services across 49 states — with fast quote turnaround and permit-ready documents.</p>
+  <a class="cta" href="/contact">Request a Proposal</a>
+</div></section>`;
+
+  return htmlShell({
+    title: `${term.term} | Engineering Glossary | Apex Grid`,
+    description: `${term.definition.slice(0, 155)}`,
+    canonical: `${SITE}${url}`,
+    schemaJson: [orgSchema, definitionSchema, breadcrumbSchema(crumbs)],
     body,
   });
 }
