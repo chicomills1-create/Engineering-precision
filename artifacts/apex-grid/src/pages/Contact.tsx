@@ -1,4 +1,3 @@
-import { usePageMeta } from "@/lib/seo";
 import { useCallback, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,8 +8,15 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Check, Upload, X, FileText, Loader2 } from "lucide-react";
-import { useUpload } from "@workspace/object-storage-web";
+import { usePageMeta, useJsonLd } from "@/lib/seo";
+import { Check, FileText, Loader2, Upload, X } from "lucide-react";
+
+const ACCEPTED_TYPES = ".pdf,.dwg,.dxf,.rvt,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.jpg,.jpeg,.png,.tif,.tiff";
+
+interface UploadedFile {
+  name: string;
+  objectPath: string;
+}
 
 const leadSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -23,11 +29,6 @@ const leadSchema = z.object({
 });
 
 type LeadFormValues = z.infer<typeof leadSchema>;
-
-interface UploadedFile {
-  name: string;
-  objectPath: string;
-}
 
 const PAGE_META = {
   title: "Contact Us | Request an Engineering Proposal | Apex Grid",
@@ -46,10 +47,40 @@ const DOCUMENT_CHECKLIST = [
   "Desired project schedule and permit jurisdiction",
 ];
 
-const ACCEPTED_TYPES = ".pdf,.dwg,.dxf,.rvt,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.jpg,.jpeg,.png,.tif,.tiff";
-
 export default function Contact() {
   usePageMeta(PAGE_META);
+
+  useJsonLd({
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Apex Grid Engineering",
+    "url": "https://apexgrideng.com/",
+    "email": "info@apexgrideng.com",
+    "telephone": "+1-480-490-0064",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "22475 E Quintero Rd",
+      "addressLocality": "Queen Creek",
+      "addressRegion": "AZ",
+      "postalCode": "85142",
+      "addressCountry": "US",
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 33.2303,
+      "longitude": -111.6105,
+    },
+    "areaServed": [
+      "United States",
+      "Arizona",
+      "California",
+      "Texas",
+      "Florida",
+      "Nevada",
+    ],
+    "priceRange": "$$",
+    "openingHours": "Mo-Fr 08:00-18:00",
+  });
 
   const { toast } = useToast();
   const [isSuccess, setIsSuccess] = useState(false);
@@ -59,7 +90,20 @@ export default function Contact() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const createLead = useCreateLead();
-  const { uploadFile } = useUpload();
+
+  /** Upload a file directly through the server (proxied — no presigned URL). */
+  const uploadFileDirect = useCallback(async (file: File): Promise<{ objectPath: string } | null> => {
+    const response = await fetch("/api/storage/uploads", {
+      method: "POST",
+      headers: { "x-file-name": encodeURIComponent(file.name) },
+      body: file,
+    });
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({})) as { error?: string };
+      throw new Error(err.error ?? "Upload failed");
+    }
+    return response.json() as Promise<{ objectPath: string }>;
+  }, []);
 
   const form = useForm<LeadFormValues>({
     resolver: zodResolver(leadSchema),
@@ -85,19 +129,20 @@ export default function Contact() {
       const key = `${file.name}-${file.size}`;
       setUploadingFiles(prev => new Set(prev).add(key));
       try {
-        const result = await uploadFile(file);
+        const result = await uploadFileDirect(file);
         if (result) {
           setUploadedFiles(prev => [...prev, { name: file.name, objectPath: result.objectPath }]);
         } else {
           toast({ variant: "destructive", title: "Upload Failed", description: `Could not upload ${file.name}. Please try again.` });
         }
-      } catch {
-        toast({ variant: "destructive", title: "Upload Failed", description: `Could not upload ${file.name}. Please try again.` });
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : `Could not upload ${file.name}.`;
+        toast({ variant: "destructive", title: "Upload Failed", description: msg });
       } finally {
         setUploadingFiles(prev => { const next = new Set(prev); next.delete(key); return next; });
       }
     }
-  }, [uploadFile, toast]);
+  }, [uploadFileDirect, toast]);
 
   const onDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -119,7 +164,7 @@ export default function Contact() {
       });
       setIsSuccess(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (error) {
+    } catch {
       toast({
         variant: "destructive",
         title: "Submission Failed",

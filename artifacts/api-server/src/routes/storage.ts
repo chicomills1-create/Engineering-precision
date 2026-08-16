@@ -10,34 +10,14 @@ import {
   ObjectNotFoundError,
   ObjectStorageService,
 } from '../lib/objectStorage';
-import { requireAuth } from '../middlewares/requireAuth';
+import { verifyDownloadToken } from '../lib/downloadToken';
 
 const router: IRouter = Router();
 const objectStorageService = new ObjectStorageService();
+/** 20 MB server-side cap — enforced on the actual byte stream. */
+const MAX_UPLOAD_BYTES = 20 * 1024 * 1024;
 
-function hasAuthenticatedSession(
-  req: Request,
-): req is Request & { isAuthenticated: () => boolean } {
-  if (
-    !('isAuthenticated' in req) ||
-    typeof req.isAuthenticated !== 'function'
-  ) {
-    return false;
-  }
-
-  return req.isAuthenticated();
-}
-
-/** Server-enforced limits for public (contact-form) uploads.
- * Enforcement happens on the actual byte stream (the file is proxied through
- * this server), which enforces the size cap and extension allowlist on
- * the actual payload before writing it to the private bucket. Clients never
- * receive a write-capable presigned URL, so limits cannot be bypassed.
- */
-const MAX_UPLOAD_BYTES = 20 * 1024 * 1024; // 20 MB
-/** Extension allowlist — must stay in sync with ACCEPTED_TYPES in the contact
- * form UI. Extensions (not MIME types) are the primary control because
- * browsers report empty or generic MIME types for CAD formats. */
+/** Extension allowlist — more reliable than MIME for CAD formats. */
 const ALLOWED_EXTENSIONS = new Set([
   'pdf',
   'dwg',
@@ -57,8 +37,8 @@ const ALLOWED_EXTENSIONS = new Set([
   'tiff',
 ]);
 
-/** Simple in-memory per-IP rate limiter for minting upload URLs. */
-const RATE_LIMIT = 10; // URLs per window per IP
+/** Simple in-memory per-IP rate limiter for upload requests. */
+const RATE_LIMIT = 10; // requests per window per IP
 const RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour
 const uploadRateBuckets = new Map<string, { count: number; resetAt: number }>();
 function uploadRateLimited(ip: string): boolean {
@@ -81,12 +61,15 @@ function uploadRateLimited(ip: string): boolean {
 /**
  * POST /storage/uploads
  *
- * Proxied upload for contact-form attachments. The file bytes are streamed
- * through this server, which enforces the size cap and extension allowlist on
- * the actual payload before writing it to the private bucket. Clients never
- * receive a write-capable presigned URL, so limits cannot be bypassed.
+ * Server-proxied upload for contact-form attachments.  File bytes are read
+ * through this server (via express.raw), validated for extension and size,
+ * then written to the private GCS bucket via an internally-generated presigned
+ * PUT URL.  Clients never receive a write-capable URL, so limits cannot be
+ * bypassed.
  *
  * The filename is passed via the `x-file-name` header (URI-encoded).
+ *
+ * Returns { objectPath, name } on success.
  */
 router.post(
   '/storage/uploads',
@@ -94,9 +77,7 @@ router.post(
   async (req: Request, res: Response) => {
     const ip = req.ip ?? 'unknown';
     if (uploadRateLimited(ip)) {
-      res
-        .status(429)
-        .json({ error: 'Too many upload requests. Try again later.' });
+      res.status(429).json({ error: 'Too many upload requests. Try again later.' });
       return;
     }
 
@@ -109,8 +90,7 @@ router.post(
     const ext = name.includes('.') ? name.split('.').pop()!.toLowerCase() : '';
     if (!name || !ALLOWED_EXTENSIONS.has(ext)) {
       res.status(400).json({
-        error:
-          'File type not accepted. Upload PDFs, images, CAD files, or office documents.',
+        error: 'File type not accepted. Upload PDFs, images, CAD files, or office documents.',
       });
       return;
     }
@@ -127,7 +107,7 @@ router.post(
 
     try {
       const { uploadURL, objectPath } =
-        await objectStorageService.getObjectEntityUploadInfo();
+        await objectStorageService.getObjectEntityUploadURL();
 
       const putResponse = await fetch(uploadURL, {
         method: 'PUT',
@@ -156,14 +136,13 @@ router.post(
  * GET /storage/public-objects/*
  *
  * Serve public assets from PUBLIC_OBJECT_SEARCH_PATHS.
- * These are unconditionally public — no authentication or ACL checks.
- * IMPORTANT: Always provide this endpoint when object storage is set up.
+ * Unconditionally public — no authentication or ACL checks.
  */
 router.get(
   '/storage/public-objects/*filePath',
   async (req: Request, res: Response) => {
     try {
-      const raw = req.params.filePath;
+  const raw = req.params.path;
       const filePath = Array.isArray(raw) ? raw.join('/') : raw;
       const file = await objectStorageService.searchPublicObject(filePath);
       if (!file) {
@@ -171,15 +150,14 @@ router.get(
         return;
       }
 
-      const response = await objectStorageService.downloadObject(file);
-
+    const response = await objectStorageService.downloadObject(objectFile);
       res.status(response.status);
       response.headers.forEach((value, key) => res.setHeader(key, value));
 
       if (response.body) {
-        const nodeStream = Readable.fromWeb(
-          response.body as ReadableStream<Uint8Array>,
-        );
+      const nodeStream = Readable.fromWeb(
+        response.body as ReadableStream<Uint8Array>,
+      );
         nodeStream.pipe(res);
       } else {
         res.end();
@@ -194,45 +172,54 @@ router.get(
 /**
  * GET /storage/objects/*
  *
- * Serve object entities from PRIVATE_OBJECT_DIR.
- * These are private lead attachments (engineering documents uploaded with
- * inquiries), so access requires an authenticated admin — the same allowlist
- * that protects the leads inbox.
+ * Serve private object entities from PRIVATE_OBJECT_DIR.
+ * Requires a time-limited HMAC download token in the `token` query param.
+ * Generate tokens with signDownloadPath() from lib/downloadToken.ts.
+ *
+ * Responses are forced to Content-Disposition: attachment +
+ * Content-Type: application/octet-stream + X-Content-Type-Options: nosniff.
  */
-router.get(
-  '/storage/objects/*path',
-  requireAuth,
-  async (req: Request, res: Response) => {
-    try {
-      const raw = req.params.path;
-      const wildcardPath = Array.isArray(raw) ? raw.join('/') : raw;
-      const objectPath = `/objects/${wildcardPath}`;
-      const objectFile =
-        await objectStorageService.getObjectEntityFile(objectPath);
+router.get('/storage/objects/*path', async (req: Request, res: Response) => {
+  const raw = req.params.path;
+  const wildcardPath = Array.isArray(raw) ? raw.join('/') : raw;
+  const objectPath = `/objects/${wildcardPath}`;
 
-      const response = await objectStorageService.downloadObject(objectFile);
+  const token = typeof req.query.token === 'string' ? req.query.token : '';
+  if (!token || !verifyDownloadToken(objectPath, token)) {
+    res.status(401).json({ error: 'Missing or invalid download token' });
+    return;
+  }
 
-      res.status(response.status);
-      response.headers.forEach((value, key) => res.setHeader(key, value));
+  try {
+    const objectFile = await objectStorageService.getObjectEntityFile(objectPath);
+    const response = await objectStorageService.downloadObject(objectFile);
 
-      if (response.body) {
-        const nodeStream = Readable.fromWeb(
-          response.body as ReadableStream<Uint8Array>,
-        );
-        nodeStream.pipe(res);
-      } else {
-        res.end();
-      }
-    } catch (error) {
-      if (error instanceof ObjectNotFoundError) {
-        req.log.warn({ err: error }, 'Object not found');
-        res.status(404).json({ error: 'Object not found' });
-        return;
-      }
-      req.log.error({ err: error }, 'Error serving object');
-      res.status(500).json({ error: 'Failed to serve object' });
+    res.status(response.status);
+    response.headers.forEach((value, key) => res.setHeader(key, value));
+
+    const rawFilename = wildcardPath.split('/').pop() ?? 'attachment';
+    const safeFilename = rawFilename.replace(/[^a-zA-Z0-9._-]/g, '_');
+    res.setHeader('Content-Type', 'application/octet-stream');
+    res.setHeader('Content-Disposition', `attachment; filename="${safeFilename}"`);
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+
+    if (response.body) {
+      const nodeStream = Readable.fromWeb(
+        response.body as ReadableStream<Uint8Array>,
+      );
+      nodeStream.pipe(res);
+    } else {
+      res.end();
     }
-  },
-);
+  } catch (error) {
+    if (error instanceof ObjectNotFoundError) {
+      req.log.warn({ err: error }, 'Object not found');
+      res.status(404).json({ error: 'Object not found' });
+      return;
+    }
+    req.log.error({ err: error }, 'Error serving object');
+    res.status(500).json({ error: 'Failed to serve object' });
+  }
+});
 
 export default router;

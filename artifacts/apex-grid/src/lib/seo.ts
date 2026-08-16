@@ -63,3 +63,26 @@ export function usePageMeta({ title, description, path }: PageMeta) {
     }
   }, [title, description, path]);
 }
+
+/**
+ * Injects a JSON-LD structured data script into <head>.
+ * One script per @type — re-running with a different schema replaces the old one.
+ */
+export function useJsonLd(schema: Record<string, unknown>) {
+  useEffect(() => {
+    const type = String(schema["@type"] ?? "unknown");
+    const id = `jsonld-${type.toLowerCase()}`;
+    let script = document.getElementById(id) as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.id = id;
+      document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(schema);
+    return () => {
+      document.getElementById(id)?.remove();
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(schema)]);
+}

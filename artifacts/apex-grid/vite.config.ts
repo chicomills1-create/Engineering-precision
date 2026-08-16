@@ -21,12 +21,22 @@ if (Number.isNaN(port) || port <= 0) {
 
 const basePath = process.env.BASE_PATH;
 
-if (!basePath) {
-  throw new Error(
-    'BASE_PATH environment variable is required but was not provided.',
-  );
+/** Injects the Google Search Console verification <meta> tag into <head> at
+ *  build/dev time when VITE_GOOGLE_SITE_VERIFICATION is set. This ensures
+ *  Googlebot sees the tag on every page load without waiting for JS. */
+function gscVerificationPlugin() {
+  const code = process.env.VITE_GOOGLE_SITE_VERIFICATION;
+  return {
+    name: 'gsc-verification',
+    transformIndexHtml(html: string) {
+      if (!code) return html;
+      return html.replace(
+        '<meta charset="UTF-8" />',
+        `<meta charset="UTF-8" />\n    <meta name="google-site-verification" content="${code}" />`,
+      );
+    },
+  };
 }
-
 /** Dev-only: resolve directory URLs under /locations/ to their static index.html
  * (Vite's SPA fallback would otherwise swallow them). Static hosting handles this in production. */
 function staticDirIndex() {
@@ -60,6 +70,7 @@ function staticDirIndex() {
 export default defineConfig({
   base: basePath,
   plugins: [
+    gscVerificationPlugin(),
     staticDirIndex(),
     react(),
     tailwindcss({ optimize: false }),

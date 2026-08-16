@@ -7,6 +7,7 @@ import assessmentBg from "@assets/generated_images/assessment-bg.webp";
 import architectureBg from "@assets/generated_images/architecture-bg.webp";
 import NotFound from "./not-found";
 import { INDUSTRIES_BY_CLUSTER } from "@/data/industries";
+import { usePageMeta, useJsonLd, SITE_URL } from "@/lib/seo";
 
 const servicesData = {
   "mep": {
@@ -156,10 +157,55 @@ const servicesData = {
   }
 };
 
+const servicePageMeta: Record<string, { title: string; description: string }> = {
+  mep: {
+    title: "MEP Design & Engineering | Apex Grid Engineering",
+    description: "Clash-free mechanical, electrical, and plumbing engineering for commercial and industrial projects. Title 24 energy compliance included in-house.",
+  },
+  structural: {
+    title: "Structural Design & Engineering | Apex Grid Engineering",
+    description: "PE-stamped structural drawings built for first-pass permit approval — from new commercial builds to complex seismic retrofits.",
+  },
+  civil: {
+    title: "Civil Engineering | Apex Grid Engineering",
+    description: "Site feasibility, grading, stormwater management, and utility coordination. We bridge raw land to vertical construction.",
+  },
+  assessments: {
+    title: "Building Assessments | Apex Grid Engineering",
+    description: "Condition reports, MEP life-expectancy analysis, seismic PML studies, and code violation reviews for acquisitions and renovations.",
+  },
+  architecture: {
+    title: "Architectural Design | Apex Grid Engineering",
+    description: "Full architectural services from concept through permit-ready construction documents — coordinated alongside our engineering disciplines under one roof.",
+  },
+};
 export default function ServiceDetail() {
   const params = useParams();
   const serviceId = params.id as keyof typeof servicesData;
   const service = servicesData[serviceId];
+  const meta = servicePageMeta[serviceId];
+
+  usePageMeta(
+    meta
+      ? { ...meta, path: `/services/${serviceId}` }
+      : { title: "Engineering Services | Apex Grid Engineering", description: "Integrated architecture, MEP, structural, and civil engineering.", path: "/services" }
+  );
+
+  useJsonLd({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": service?.title ?? "Engineering Services",
+    "description": service?.desc ?? "",
+    "provider": {
+      "@type": "ProfessionalService",
+      "@id": "https://apexgrideng.com/#service",
+      "name": "Apex Grid Engineering",
+      "url": "https://apexgrideng.com/",
+    },
+    "url": `${SITE_URL || "https://apexgrideng.com"}/services/${serviceId}`,
+    "areaServed": "United States",
+    "serviceType": service?.title ?? "Engineering",
+  });
 
   if (!service) return <NotFound />;
 

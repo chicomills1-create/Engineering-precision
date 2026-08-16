@@ -111,9 +111,22 @@ export class ObjectStorageService {
     return new Response(webStream, { headers });
   }
 
-  async getObjectEntityUploadURL(): Promise<string> {
-    const { uploadURL } = await this.getObjectEntityUploadInfo();
-    return uploadURL;
+  async getObjectEntityUploadURL(): Promise<{ uploadURL: string; objectPath: string }> {
+    const privateObjectDir = this.getPrivateObjectDir();
+
+    const objectId = randomUUID();
+    const fullPath = `${privateObjectDir}/uploads/${objectId}`;
+    const objectPath = `/objects/uploads/${objectId}`;
+
+    const { bucketName, objectName } = parseObjectPath(fullPath);
+    const uploadURL = await signObjectURL({
+      bucketName,
+      objectName,
+      method: 'PUT',
+      ttlSec: 900,
+    });
+
+    return { uploadURL, objectPath };
   }
 
   async getObjectEntityUploadInfo(): Promise<{
@@ -220,6 +233,7 @@ export class ObjectStorageService {
       requestedPermission: requestedPermission ?? ObjectPermission.READ,
     });
   }
+
 }
 
 function parseObjectPath(path: string): {
