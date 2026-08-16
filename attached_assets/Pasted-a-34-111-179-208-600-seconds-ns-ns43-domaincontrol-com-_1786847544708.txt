@@ -1,0 +1,255 @@
+a
+@
+34.111.179.208
+600 seconds
+
+
+
+
+ns
+@
+ns43.domaincontrol.com.
+1 Hour
+
+
+
+
+
+
+ns
+@
+ns44.domaincontrol.com.
+1 Hour
+
+
+
+
+
+
+cname
+accounts
+accounts.clerk.services.
+600 seconds
+
+
+
+
+cname
+autodiscover
+autodiscover.outlook.com.
+1 Hour
+
+
+
+
+cname
+clerk
+frontend-api.clerk.services.
+600 seconds
+
+
+
+
+cname
+clk._domainkey
+dkim1.x36cbzhb8u4e.clerk.services.
+600 seconds
+
+
+
+
+cname
+clk2._domainkey
+dkim2.x36cbzhb8u4e.clerk.services.
+600 seconds
+
+
+
+
+cname
+clkmail
+mail.x36cbzhb8u4e.clerk.services.
+600 seconds
+
+
+
+
+cname
+em5956
+u105839578.wl079.sendgrid.net.
+1/2 Hour
+
+
+
+
+cname
+email
+email.secureserver.net.
+1 Hour
+
+
+
+
+cname
+lyncdiscover
+webdir.online.lync.com.
+1 Hour
+
+
+
+
+cname
+msoid
+clientconfig.microsoftonline-p.net.
+1 Hour
+
+
+
+
+cname
+pay
+paylinks.commerce.godaddy.com.
+1 Hour
+
+
+
+
+cname
+s1._domainkey
+s1.domainkey.u105839578.wl079.sendgrid.net.
+1/2 Hour
+
+
+
+
+cname
+s2._domainkey
+s2.domainkey.u105839578.wl079.sendgrid.net.
+1 Hour
+
+
+
+
+cname
+selector1._domainkey
+selector1-apexgrideng-com._domainkey.netorgft20971506.r-v1.dkim.mail.microsoft.
+1 Hour
+
+
+
+
+cname
+selector2._domainkey
+selector2-apexgrideng-com._domainkey.netorgft20971506.r-v1.dkim.mail.microsoft.
+1 Hour
+
+
+
+
+cname
+sip
+sipdir.online.lync.com.
+1 Hour
+
+
+
+
+cname
+_domainconnect
+_domainconnect.gd.domaincontrol.com.
+1 Hour
+
+
+
+
+soa
+@
+Primary nameserver: ns43.domaincontrol.com.
+1 Hour
+
+
+
+
+
+
+mx
+@
+apexgrideng-com.mail.protection.outlook.com. (Priority: 0)
+1 Hour
+
+
+
+
+txt
+@
+NETORGFT20971506.onmicrosoft.com
+1 Hour
+
+
+
+
+txt
+@
+replit-verify=665246ac-e3fe-4402-b00b-8349e04fb07b
+600 seconds
+
+
+
+
+txt
+@
+v=spf1 include:secureserver.net include:sendgrid.net -all
+1 Hour
+
+
+
+
+txt
+_dmarc
+v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:dmarc_rua@onsecureserver.net;
+1 Hour
+
+
+
+
+srv
+_sip._tls.@
+100 1 443 sipdir.online.lync.com.
+1 Hour
+
+
+
+
+srv
+_sipfederationtls._tcp.@
+100 1 5061 sipfed.online.lync.com.
+1 Hour
+
+
+
+
+
+
+1
+
+
+50
+Set up your free social media subdomain!
+Your domain comes with free, customizable subdomains  such as facebook.apexgrideng.com to link to your social media page.
+Improved SEO
+Social subdomains can help your website rank higher in search engines.
+Promote your social page
+Anybody visiting your social subdomain such as facebook.apexgrideng.com will see your social media page.
+Add to your main domain
+Creating a social subdomain won't affect anything currently connected to apexgrideng.com.
+Choose a platform to start:
+
+Instagram
+
+Facebook
+
+Yelp
+
+Google
+
+Other

@@ -1,14 +1,13 @@
 ---
-name: SendGrid lead notification emails
-description: Constraints and config for inquiry notification emails via the SendGrid connector
+name: SendGrid lead emails
+description: Deliverability setup and gotchas for lead-notification emails sent via the SendGrid connector
 ---
 
-- Lead notification addresses come from env vars `LEAD_NOTIFY_EMAIL` (to) and `LEAD_NOTIFY_FROM_EMAIL` (from, defaults to recipient).
-- **Rule:** SendGrid only sends from verified sender identities; unverified senders get a 403 (logged, non-fatal — the lead is still stored).
-- **Why:** SendGrid sender-identity policy; cannot be bypassed in code.
-- **How to apply:** If lead emails aren't arriving, check verified senders via connector proxy `GET /v3/verified_senders` from the api-server package dir (the sandbox's `listConnections('sendgrid')` returns empty in this project).
-- `/v3/mail/send` success is 202 with an empty body — never call `.json()` on it.
-- If SendGrid returns 400 "from email does not contain a valid address", check `LEAD_NOTIFY_FROM_EMAIL` in `.replit`/env for a malformed value before touching code — the send path is fine.
-- Subscriber welcome emails reuse the same from-address env vars; sent fire-and-forget only on first-time signups (insert `.returning()` detects duplicates).
-- The quarterly state-review email (apex-grid `seo:review:email`) reuses the same connector and falls back to the same env vars; it hits the same sender-verification 403 until a verified sender is configured.
-- api-zod uses composite TS project refs: after api-zod schema changes, rebuild declarations with `tsc -b lib/api-zod` or dependent typechecks fail on stale `dist/` d.ts files.
+# SendGrid lead emails
+
+- Recipients/config via `LEAD_NOTIFY_EMAIL` / `LEAD_NOTIFY_FROM_EMAIL` env vars (both info@apexgrideng.com). From-address must be a SendGrid-verified sender or sends 403.
+- **Domain authentication is DONE and validated** (SendGrid whitelabel domain id 32391469, `automatic_security: true`): CNAMEs `em5956`, `s1._domainkey`, `s2._domainkey` → sendgrid.net live in GoDaddy DNS. SPF TXT includes `include:sendgrid.net`.
+- **Why it was needed:** domain DMARC is `p=quarantine`; Microsoft 365 silently quarantined mail "from" the domain sent via SendGrid without aligned DKIM (not even in Junk — hidden quarantine at security.microsoft.com). SPF include alone does NOT fix DMARC alignment; SendGrid signs with sendgrid.net unless domain auth exists.
+- **GoDaddy Conversations gotcha:** the user's GoDaddy Websites+Marketing "Conversations" feature had the info@ mailbox connected as a receiving channel — it intercepted ALL inbound mail before Outlook and re-notified the owner's personal Gmail (headers show notifications@mail.conversations.godaddy.com). Fixed by disconnecting the email channel in Conversations → Settings → Channels.
+- Mailbox is Microsoft 365 via GoDaddy (MX apexgrideng-com.mail.protection.outlook.com). SendGrid account is shared across the user's other businesses — suppression lists contain unrelated domains.
+- To debug delivery: connector proxy GET /v3/suppression/{blocks,bounces,spam_reports} and /v3/whitelabel/domains.
