@@ -2,6 +2,14 @@ import { Router } from "express";
 import { requireAuth } from "../middlewares/requireAuth";
 import { readFile, access } from "fs/promises";
 import path from "path";
+import {
+  getCachedResult,
+  getCacheStats,
+  inspectBatch,
+  isGscConfigured,
+  isQuotaExhausted,
+  type GscVerdict,
+} from "../lib/gscInspection";
 
 const router = Router();
 
@@ -32,7 +40,21 @@ interface SitemapEntry {
   softFourOhFourRisk: boolean;
   robotsBlocked: boolean;
   isHighPriority: boolean;
+  gscVerdict: GscVerdict;
+  gscCoverageState: string | null;
+  gscCheckedAt: string | null;
 }
+
+type ParsedEntry = Omit<
+  SitemapEntry,
+  | "hasStaticFile"
+  | "softFourOhFourRisk"
+  | "robotsBlocked"
+  | "isHighPriority"
+  | "gscVerdict"
+  | "gscCoverageState"
+  | "gscCheckedAt"
+>;
 
 // ── Robots.txt parsing ────────────────────────────────────────────────────────
 
@@ -113,9 +135,8 @@ function parseUrlEntries(
   xml: string,
   sitemapFile: string,
   category: SitemapCategory,
-): Omit<SitemapEntry, "hasStaticFile" | "softFourOhFourRisk" | "robotsBlocked" | "isHighPriority">[] {
-  const entries: Omit<SitemapEntry, "hasStaticFile" | "softFourOhFourRisk" | "robotsBlocked" | "isHighPriority">[] =
-    [];
+): ParsedEntry[] {
+  const entries: ParsedEntry[] = [];
   const urlPattern = /<url>([\s\S]*?)<\/url>/g;
   let match: RegExpExecArray | null;
 
@@ -202,6 +223,7 @@ router.get(
           );
           batch.forEach((entry, j) => {
             const has = results[j];
+            const gsc = getCachedResult(entry.url);
             const softFourOhFourRisk = !entry.hasTrailingSlash && !has;
             const robotsBlocked = isPathBlocked(robotsRules, entry.path);
             withStatic.push({
@@ -212,6 +234,9 @@ router.get(
               // Blocked by robots.txt while listed in sitemap = high-priority conflict
               robotsBlocked,
               isHighPriority: softFourOhFourRisk || robotsBlocked,
+              gscVerdict: gsc?.verdict ?? "unknown",
+              gscCoverageState: gsc?.coverageState ?? null,
+              gscCheckedAt: gsc?.checkedAt ?? null,
             });
           });
         }
@@ -219,10 +244,74 @@ router.get(
         allEntries.push(...withStatic);
       }
 
-      res.json(allEntries);
+      res.json({
+        entries: allEntries,
+        gsc: {
+          configured: isGscConfigured(),
+          quotaExhausted: isQuotaExhausted(),
+          checkedCount: getCacheStats().checked,
+        },
+      });
     } catch (err) {
       req.log.error({ err }, "Failed to build SEO status");
       res.status(500).json({ error: "Failed to build SEO status" });
+    }
+  },
+);
+
+// Inspect a capped batch of not-yet-checked URLs against the GSC
+// URL Inspection API. Batches stay small because of GSC quota limits
+// (2,000/day). Highest-priority URLs are checked first.
+router.post(
+  "/seo-status/inspect",
+  requireAuth,
+  async (req, res): Promise<void> => {
+    try {
+      if (!isGscConfigured()) {
+        res.status(409).json({
+          error:
+            "Google Search Console is not configured. Set the GOOGLE_SERVICE_ACCOUNT_KEY secret and add the service account to the Search Console property.",
+        });
+        return;
+      }
+
+      const rawLimit = Number(req.body?.limit);
+      const limit = Math.min(
+        Number.isFinite(rawLimit) && rawLimit > 0 ? Math.floor(rawLimit) : 50,
+        100,
+      );
+
+      // Gather all sitemap URLs, highest priority first.
+      const urls: { url: string; priority: number }[] = [];
+      for (const { file, category } of SITEMAP_FILES) {
+        const xmlPath = path.join(PUBLIC_DIR, file);
+        let xml: string;
+        try {
+          xml = await readFile(xmlPath, "utf-8");
+        } catch {
+          continue;
+        }
+        for (const entry of parseUrlEntries(xml, file, category)) {
+          urls.push({
+            url: entry.url,
+            priority: parseFloat(entry.priority) || 0,
+          });
+        }
+      }
+      urls.sort((a, b) => b.priority - a.priority);
+
+      const outcome = await inspectBatch(
+        urls.map((u) => u.url),
+        limit,
+      );
+
+      res.json({
+        ...outcome,
+        checkedCount: getCacheStats().checked,
+      });
+    } catch (err) {
+      req.log.error({ err }, "GSC batch inspection failed");
+      res.status(500).json({ error: "GSC batch inspection failed" });
     }
   },
 );

@@ -142,7 +142,7 @@ router.get(
   '/storage/public-objects/*filePath',
   async (req: Request, res: Response) => {
     try {
-  const raw = req.params.path;
+      const raw = req.params.filePath;
       const filePath = Array.isArray(raw) ? raw.join('/') : raw;
       const file = await objectStorageService.searchPublicObject(filePath);
       if (!file) {
@@ -150,7 +150,7 @@ router.get(
         return;
       }
 
-    const response = await objectStorageService.downloadObject(objectFile);
+      const response = await objectStorageService.downloadObject(file);
       res.status(response.status);
       response.headers.forEach((value, key) => res.setHeader(key, value));
 

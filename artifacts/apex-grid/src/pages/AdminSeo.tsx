@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Show } from '@clerk/react';
 import { Redirect, Link } from 'wouter';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   AlertTriangle,
   CheckCircle2,
@@ -28,8 +28,19 @@ interface SitemapEntry {
   softFourOhFourRisk: boolean;
   robotsBlocked: boolean;
   isHighPriority: boolean;
+  gscVerdict: 'indexed' | 'not_indexed' | 'unknown';
+  gscCoverageState: string | null;
+  gscCheckedAt: string | null;
 }
 
+interface SeoStatusResponse {
+  entries: SitemapEntry[];
+  gsc: {
+    configured: boolean;
+    quotaExhausted: boolean;
+    checkedCount: number;
+  };
+}
 const CATEGORIES = ['all', 'core', 'services', 'industries', 'solutions', 'resources', 'locations'] as const;
 type CategoryFilter = (typeof CATEGORIES)[number];
 
@@ -41,6 +52,36 @@ function gscLink(url: string): string {
   return `${GSC_INSPECT_BASE}${encodeURIComponent(url)}`;
 }
 
+function GscBadge({ entry }: { entry: SitemapEntry }) {
+  if (entry.gscVerdict === 'indexed') {
+    return (
+      <span
+        className="inline-block text-xs px-2 py-0.5 border rounded-[2px] bg-emerald-500/15 text-emerald-400 border-emerald-500/30"
+        title={entry.gscCoverageState ?? undefined}
+      >
+        Indexed
+      </span>
+    );
+  }
+  if (entry.gscVerdict === 'not_indexed') {
+    return (
+      <span
+        className="inline-block text-xs px-2 py-0.5 border rounded-[2px] bg-red-500/10 text-red-400 border-red-500/30"
+        title={entry.gscCoverageState ?? undefined}
+      >
+        Not indexed
+      </span>
+    );
+  }
+  return (
+    <span
+      className="inline-block text-xs px-2 py-0.5 border rounded-[2px] bg-muted text-muted-foreground border-border"
+      title="Not checked yet, or GSC quota exceeded"
+    >
+      Unknown
+    </span>
+  );
+}
 function PriorityBadge({ value }: { value: string }) {
   const num = parseFloat(value);
   const color =
@@ -79,13 +120,36 @@ function SeoStatusTable() {
   const [search, setSearch] = useState('');
   const [flaggedOnly, setFlaggedOnly] = useState(false);
   const [page, setPage] = useState(1);
+  const queryClient = useQueryClient();
 
-  const { data, isLoading, error } = useQuery<SitemapEntry[]>({
+  const { data: response, isLoading, error } = useQuery<SeoStatusResponse>({
     queryKey: ['seo-status'],
     queryFn: async () => {
       const res = await fetch(`${apiBase}/seo-status`, { credentials: 'include' });
       if (!res.ok) throw Object.assign(new Error('Failed'), { status: res.status });
-      return res.json() as Promise<SitemapEntry[]>;
+      return res.json() as Promise<SeoStatusResponse>;
+    },
+  });
+
+  const data = response?.entries;
+  const gsc = response?.gsc;
+
+  const inspectMutation = useMutation({
+    mutationFn: async () => {
+      const res = await fetch(`${apiBase}/seo-status/inspect`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ limit: 50 }),
+      });
+      if (!res.ok) {
+        const body = (await res.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(body?.error ?? 'Batch check failed');
+      }
+      return res.json() as Promise<{ checked: number; quotaExhausted: boolean }>;
+    },
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['seo-status'] });
     },
   });
 
@@ -145,12 +209,16 @@ function SeoStatusTable() {
 
       {/* Stats bar */}
       {data && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
           {[
             { label: 'Total URLs', value: data.length.toLocaleString() },
             { label: 'With Static File', value: data.filter((e) => e.hasStaticFile).length.toLocaleString() },
             { label: 'Soft-404 Risk', value: flaggedCount.toLocaleString(), danger: flaggedCount > 0 },
             { label: 'Robots Blocked', value: robotsBlockedCount.toLocaleString(), danger: robotsBlockedCount > 0 },
+            {
+              label: 'GSC Indexed',
+              value: `${data.filter((e) => e.gscVerdict === 'indexed').length.toLocaleString()} / ${(gsc?.checkedCount ?? 0).toLocaleString()} checked`,
+            },
           ].map(({ label, value, danger }) => (
             <div key={label} className="border border-border bg-card p-4 rounded-[2px]">
               <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-1">{label}</p>
@@ -185,7 +253,7 @@ function SeoStatusTable() {
           ))}
         </div>
 
-        {/* Search + flagged toggle */}
+        {/* Search + GSC batch check + flagged toggle */}
         <div className="flex flex-col sm:flex-row gap-2">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
@@ -206,6 +274,22 @@ function SeoStatusTable() {
               </button>
             )}
           </div>
+          <button
+            type="button"
+            onClick={() => inspectMutation.mutate()}
+            disabled={inspectMutation.isPending || !gsc?.configured || gsc?.quotaExhausted}
+            title={
+              !gsc?.configured
+                ? 'Google Search Console credentials are not configured'
+                : gsc?.quotaExhausted
+                  ? 'GSC API quota exceeded — try again later'
+                  : 'Check the next 50 unchecked URLs against Google Search Console'
+            }
+            className="inline-flex items-center gap-2 h-9 px-3 border rounded-[2px] text-sm transition-colors whitespace-nowrap border-border text-muted-foreground hover:text-foreground hover:border-primary/50 disabled:opacity-40 disabled:cursor-default"
+          >
+            <FileSearch className="w-3.5 h-3.5" />
+            {inspectMutation.isPending ? 'Checking…' : 'Check 50 in GSC'}
+          </button>
           <button
             type="button"
             onClick={() => handleFlaggedOnly(!flaggedOnly)}
@@ -258,7 +342,7 @@ function SeoStatusTable() {
             </div>
           ) : (
             <div className="border border-border bg-card rounded-[2px] overflow-x-auto">
-              <table className="w-full text-sm min-w-[700px]">
+              <table className="w-full text-sm min-w-[820px]">
                 <thead>
                   <tr className="border-b border-border text-xs uppercase tracking-wider text-muted-foreground">
                     <th className="text-left px-4 py-3 font-medium">URL</th>
@@ -267,6 +351,7 @@ function SeoStatusTable() {
                     <th className="text-left px-4 py-3 font-medium w-28">Last Modified</th>
                     <th className="text-left px-4 py-3 font-medium w-24">Static File</th>
                     <th className="text-left px-4 py-3 font-medium w-28">Robots</th>
+                    <th className="text-left px-4 py-3 font-medium w-28">GSC Index</th>
                     <th className="text-left px-4 py-3 font-medium w-20">Inspect</th>
                   </tr>
                 </thead>
@@ -321,6 +406,9 @@ function SeoStatusTable() {
                         ) : (
                           <span className="text-xs text-emerald-400">✓ Allowed</span>
                         )}
+                      </td>
+                      <td className="px-4 py-3">
+                        <GscBadge entry={entry} />
                       </td>
                       <td className="px-4 py-3">
                         <a

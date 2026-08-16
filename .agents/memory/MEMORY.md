@@ -8,4 +8,5 @@
 - [Callback bot gate](callback-bot-gate.md) — Turnstile gates callback-chat; dev falls back to always-pass test keys, so real TURNSTILE keys are required before production.
 - [Public upload security](upload-security.md) — unauthenticated uploads must be proxied server-side; presigned PUT URLs bind no size/type and are bypassable.
 - [API healthcheck root](api-healthcheck-root.md) — deploy healthchecks probe the API artifact root (/api), so the router must serve 200 at GET /; prod also needs TURNSTILE_SECRET_KEY to boot.
+- [GSC URL inspection](gsc-url-inspection.md) — indexing verdicts come from a service-account key (GOOGLE_SERVICE_ACCOUNT_KEY) added as a GSC property user; quota 2k/day forces capped batches + 1h in-memory cache.
 - [Wikipedia image download](wikipedia-image-download.md) — Wikimedia CDN thumb URLs 400/403 in Replit; use Wikipedia API imageinfo to get canonical file URL, then fetch that; add 1-2s delays to avoid 429.
