@@ -26,6 +26,8 @@ interface SitemapEntry {
   hasTrailingSlash: boolean;
   hasStaticFile: boolean | null;
   softFourOhFourRisk: boolean;
+  robotsBlocked: boolean;
+  isHighPriority: boolean;
 }
 
 const CATEGORIES = ['all', 'core', 'services', 'industries', 'solutions', 'resources', 'locations'] as const;
@@ -91,7 +93,7 @@ function SeoStatusTable() {
     if (!data) return [];
     return data.filter((e) => {
       if (category !== 'all' && e.category !== category) return false;
-      if (flaggedOnly && !e.softFourOhFourRisk) return false;
+      if (flaggedOnly && !e.isHighPriority) return false;
       if (search) {
         const q = search.toLowerCase();
         if (!e.url.toLowerCase().includes(q)) return false;
@@ -105,6 +107,7 @@ function SeoStatusTable() {
   const pageSlice = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
   const flaggedCount = data?.filter((e) => e.softFourOhFourRisk).length ?? 0;
+  const robotsBlockedCount = data?.filter((e) => e.robotsBlocked).length ?? 0;
 
   function handleCategoryChange(c: CategoryFilter) {
     setCategory(c);
@@ -147,7 +150,7 @@ function SeoStatusTable() {
             { label: 'Total URLs', value: data.length.toLocaleString() },
             { label: 'With Static File', value: data.filter((e) => e.hasStaticFile).length.toLocaleString() },
             { label: 'Soft-404 Risk', value: flaggedCount.toLocaleString(), danger: flaggedCount > 0 },
-            { label: 'Sitemaps', value: '6' },
+            { label: 'Robots Blocked', value: robotsBlockedCount.toLocaleString(), danger: robotsBlockedCount > 0 },
           ].map(({ label, value, danger }) => (
             <div key={label} className="border border-border bg-card p-4 rounded-[2px]">
               <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-1">{label}</p>
@@ -213,7 +216,7 @@ function SeoStatusTable() {
             }`}
           >
             <AlertTriangle className="w-3.5 h-3.5" />
-            Soft-404 risks only
+            Issues only
           </button>
         </div>
       </div>
@@ -263,6 +266,7 @@ function SeoStatusTable() {
                     <th className="text-left px-4 py-3 font-medium w-20">Priority</th>
                     <th className="text-left px-4 py-3 font-medium w-28">Last Modified</th>
                     <th className="text-left px-4 py-3 font-medium w-24">Static File</th>
+                    <th className="text-left px-4 py-3 font-medium w-28">Robots</th>
                     <th className="text-left px-4 py-3 font-medium w-20">Inspect</th>
                   </tr>
                 </thead>
@@ -271,12 +275,18 @@ function SeoStatusTable() {
                     <tr
                       key={entry.url}
                       className={`hover:bg-white/[0.02] transition-colors ${
-                        entry.softFourOhFourRisk ? 'bg-amber-500/5' : ''
+                        entry.robotsBlocked
+                          ? 'bg-red-500/5'
+                          : entry.softFourOhFourRisk
+                            ? 'bg-amber-500/5'
+                            : ''
                       }`}
                     >
                       <td className="px-4 py-3 font-mono text-xs text-foreground/90 max-w-[380px]">
                         <div className="flex items-start gap-2">
-                          {entry.softFourOhFourRisk ? (
+                          {entry.robotsBlocked ? (
+                            <AlertTriangle className="w-3.5 h-3.5 text-red-400 shrink-0 mt-0.5" />
+                          ) : entry.softFourOhFourRisk ? (
                             <AlertTriangle className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
                           ) : (
                             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500/50 shrink-0 mt-0.5" />
@@ -300,6 +310,16 @@ function SeoStatusTable() {
                           <span className="text-xs text-muted-foreground">— no</span>
                         ) : (
                           <span className="text-xs text-muted-foreground">?</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3">
+                        {entry.robotsBlocked ? (
+                          <span className="inline-flex items-center gap-1 text-xs text-red-400 font-medium">
+                            <AlertTriangle className="w-3 h-3" />
+                            Blocked
+                          </span>
+                        ) : (
+                          <span className="text-xs text-emerald-400">✓ Allowed</span>
                         )}
                       </td>
                       <td className="px-4 py-3">
