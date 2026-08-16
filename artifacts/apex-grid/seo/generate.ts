@@ -8,7 +8,6 @@ import type { StateData, CityData } from "./types";
 import { SERVICES, type ServiceDef } from "./services";
 import { htmlShell, SITE } from "./shell";
 import { BLOG_POSTS, type BlogPost } from "./blog";
-import { RESOURCE_ARTICLES, type ResourceArticle } from "./resources";
 import { CLIENT_PAGES, WHO_WE_WORK_WITH_HUB, type ClientPage } from "./client-pages";
 import { PROJECT_TYPE_PAGES, PROJECT_TYPES_HUB, type ProjectTypePage } from "./project-type-pages";
 import { EXISTING_BUILDING_PAGES, EXISTING_BUILDING_HUB, type ExistingBuildingPage } from "./existing-building-pages";
@@ -25,6 +24,7 @@ import { PROJECTS_HUB, PROJECT_CATEGORY_PAGES, type ProjectCategoryPage } from "
 import { STATIC_STANDALONE_PAGES, type StaticPageDef } from "./static-pages";
 import { DISCIPLINES, type DisciplineDef } from "./disciplines";
 import { ALL_INDUSTRIES } from "../src/data/industries";
+import { RESOURCE_ARTICLES, RESOURCE_DISCIPLINES, disciplineOf, resourceUrl, type ResourceArticle, type ResourceDiscipline } from "./resources";
 
 /** Lightweight city-directory entry sourced from US Census population estimates. */
 interface DirectoryCity {
@@ -637,8 +637,11 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   }
   // Resources
   urls.push(`  <url><loc>${SITE}/resources/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  for (const d of RESOURCE_DISCIPLINES) {
+    urls.push(`  <url><loc>${SITE}/resources/${d.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+  }
   for (const a of RESOURCE_ARTICLES) {
-    urls.push(`  <url><loc>${SITE}/resources/${a.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+    urls.push(`  <url><loc>${SITE}${resourceUrl(a)}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
   }
   // Who We Work With
   urls.push(`  <url><loc>${SITE}/who-we-work-with/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
@@ -718,9 +721,12 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
 // ─── Resource Articles ─────────────────────────────────────────────────────
 
 function resourceArticlePage(article: ResourceArticle): string {
+  const disc = disciplineOf(article);
+  const url = resourceUrl(article);
   const crumbs = [
     { name: "Home", href: "/" },
     { name: "Resources", href: "/resources/" },
+    { name: disc.name, href: `/resources/${disc.slug}/` },
     { name: article.h1 },
   ];
   const articleSchema = {
@@ -730,7 +736,7 @@ function resourceArticlePage(article: ResourceArticle): string {
     description: article.description,
     author: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
     publisher: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
-    mainEntityOfPage: `${SITE}/resources/${article.slug}/`,
+    mainEntityOfPage: `${SITE}${url}`,
   };
   const others = RESOURCE_ARTICLES.filter((a) => a.slug !== article.slug && a.tag === article.tag).slice(0, 3);
   const fallbacks = RESOURCE_ARTICLES.filter((a) => a.slug !== article.slug).slice(0, 3 - others.length);
@@ -746,7 +752,7 @@ ${breadcrumb(crumbs)}
 ${related.length ? `<section class="block"><div class="container">
   <h2>More from <em>Resources</em></h2>
   <div class="grid3">
-  ${related.map((a) => `<a class="card" href="/resources/${a.slug}/"><div class="label">${esc(a.tag)}</div><h3>${esc(a.h1)}</h3><p>${esc(a.description)}</p></a>`).join("")}
+  ${related.map((a) => `<a class="card" href="${resourceUrl(a)}"><div class="label">${esc(a.tag)}</div><h3>${esc(a.h1)}</h3><p>${esc(a.description)}</p></a>`).join("")}
   </div>
 </div></section>` : ""}
 <section class="ctaband"><div class="container">
@@ -757,32 +763,71 @@ ${related.length ? `<section class="block"><div class="container">
   return htmlShell({
     title: article.title,
     description: article.description,
-    canonical: `${SITE}/resources/${article.slug}/`,
+    canonical: `${SITE}${url}`,
     schemaJson: [orgSchema, articleSchema, breadcrumbSchema(crumbs)],
     body,
   });
 }
 
+/** Category index page at /resources/{discipline}/ listing all articles in that discipline. */
+function resourceDisciplinePage(disc: ResourceDiscipline): string {
+  const articles = RESOURCE_ARTICLES.filter((a) => a.tag === disc.tag);
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Resources", href: "/resources/" },
+    { name: disc.name },
+  ];
+  const otherDiscs = RESOURCE_DISCIPLINES.filter((d) => d.slug !== disc.slug);
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">Engineering Knowledge Center</p>
+  <h1>${esc(disc.name)} <span class="dim">Resources</span></h1>
+  <p class="lede">${esc(disc.blurb)} ${articles.length} guides written by the licensed engineers who do the work.</p>
+</div></section>
+<section class="block"><div class="container">
+  <div class="grid2">
+  ${articles.map((a) => `<a class="card" href="${resourceUrl(a)}"><div class="label">${esc(a.tag)} · ${a.minutes} min</div><h3>${esc(a.h1)}</h3><p>${esc(a.description)}</p></a>`).join("")}
+  </div>
+</div></section>
+<section class="block"><div class="container">
+  <h2>Browse Other <em>Topics</em></h2>
+  <div class="linkrow">${otherDiscs.map((d) => `<a href="/resources/${d.slug}/">${esc(d.name)} Resources</a>`).join("")}<a href="/resources/">All Resources</a></div>
+</div></section>
+<section class="ctaband"><div class="container">
+  <h2>Ready to Start Your Project?</h2>
+  <p>Licensed structural, MEP, civil, and geotechnical engineering in 49 states — with fast quote turnaround.</p>
+  <a class="cta" href="/contact">Request a Proposal</a>
+</div></section>`;
+  return htmlShell({
+    title: `${disc.name} Engineering Resources & Guides | Apex Grid Engineering`,
+    description: `${disc.blurb} Practical ${disc.name.toLowerCase()} guides written by licensed professional engineers at Apex Grid Engineering.`,
+    canonical: `${SITE}/resources/${disc.slug}/`,
+    schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
 function resourcesHubPage(): string {
   const crumbs = [{ name: "Home", href: "/" }, { name: "Resources" }];
-  const byTag: Record<string, ResourceArticle[]> = {};
-  for (const a of RESOURCE_ARTICLES) {
-    (byTag[a.tag] ||= []).push(a);
-  }
   const body = `
 ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
   <p class="kicker">Engineering Knowledge Center</p>
   <h1>Engineering <span class="dim">Resources</span></h1>
-  <p class="lede">Practical answers to the questions architects, contractors, property owners, and developers ask most — written by licensed engineers who do the work.</p>
+  <p class="lede">Practical answers to the questions architects, contractors, property owners, and developers ask most — ${RESOURCE_ARTICLES.length} guides across structural, MEP, civil, geotechnical, and permit engineering, written by licensed engineers who do the work.</p>
 </div></section>
-${Object.entries(byTag).map(([tag, articles]) => `
+${RESOURCE_DISCIPLINES.map((disc) => {
+  const articles = RESOURCE_ARTICLES.filter((a) => a.tag === disc.tag);
+  if (!articles.length) return "";
+  return `
 <section class="block"><div class="container">
-  <h2>${esc(tag)} <em>Guides</em></h2>
+  <h2>${esc(disc.name)} <em>Guides</em></h2>
+  <p class="note" style="margin-bottom:16px">${esc(disc.blurb)} <a href="/resources/${disc.slug}/">View all ${articles.length} ${esc(disc.name)} guides →</a></p>
   <div class="grid2">
-  ${articles.map((a) => `<a class="card" href="/resources/${a.slug}/"><div class="label">${esc(a.tag)} · ${a.minutes} min</div><h3>${esc(a.h1)}</h3><p>${esc(a.description)}</p></a>`).join("")}
+  ${articles.map((a) => `<a class="card" href="${resourceUrl(a)}"><div class="label">${esc(a.tag)} · ${a.minutes} min</div><h3>${esc(a.h1)}</h3><p>${esc(a.description)}</p></a>`).join("")}
   </div>
-</div></section>`).join("")}
+</div></section>`;
+}).join("")}
 <section class="ctaband"><div class="container">
   <h2>Ready to Start Your Project?</h2>
   <p>Licensed structural, MEP, civil, and geotechnical engineering in 49 states — with fast quote turnaround.</p>
@@ -790,7 +835,7 @@ ${Object.entries(byTag).map(([tag, articles]) => `
 </div></section>`;
   return htmlShell({
     title: "Engineering Resources & Guides | Apex Grid Engineering",
-    description: "Practical engineering guides on structural, MEP, civil, and permit topics — written by licensed professional engineers at Apex Grid Engineering.",
+    description: "Practical engineering guides on structural, MEP, civil, geotechnical, and permit topics — written by licensed professional engineers at Apex Grid Engineering.",
     canonical: `${SITE}/resources/`,
     schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
     body,
@@ -2266,9 +2311,16 @@ async function main() {
   fs.mkdirSync(resourcesDir, { recursive: true });
   fs.writeFileSync(path.join(resourcesDir, "index.html"), resourcesHubPage());
   pages++;
+  for (const disc of RESOURCE_DISCIPLINES) {
+    assertSlug(disc.slug);
+    const ddir = path.join(resourcesDir, disc.slug);
+    fs.mkdirSync(ddir, { recursive: true });
+    fs.writeFileSync(path.join(ddir, "index.html"), resourceDisciplinePage(disc));
+    pages++;
+  }
   for (const article of RESOURCE_ARTICLES) {
     assertSlug(article.slug);
-    const adir = path.join(resourcesDir, article.slug);
+    const adir = path.join(resourcesDir, disciplineOf(article).slug, article.slug);
     fs.mkdirSync(adir, { recursive: true });
     fs.writeFileSync(path.join(adir, "index.html"), resourceArticlePage(article));
     pages++;
