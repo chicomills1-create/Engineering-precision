@@ -690,6 +690,17 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const a of RESOURCE_ARTICLES) {
     resourcesUrls.push(u(`${SITE}${resourceUrl(a)}`, today, "monthly", "0.7"));
   }
+  // Legacy resource pages — pre-reorganisation URLs preserved at their original paths
+  for (const slug of [
+    "how-much-does-mep-engineering-cost",
+    "ashrae-90-1-vs-iecc-commercial-energy-code",
+    "commercial-building-permit-process-what-engineers-deliver",
+    "title-24-energy-compliance-commercial-buildings",
+    "vrf-vs-rooftop-unit-commercial-hvac",
+    "what-does-a-structural-engineer-do-that-an-architect-doesnt",
+  ]) {
+    resourcesUrls.push(u(`${SITE}/resources/${slug}/`, today, "monthly", "0.7"));
+  }
   resourcesUrls.push(u(`${SITE}/guides/`, today, "monthly", "0.8"));
   for (const gp of GUIDE_PAGES) {
     resourcesUrls.push(u(`${SITE}/guides/${gp.slug}/`, today, "monthly", "0.7"));
@@ -2397,6 +2408,27 @@ async function main() {
     fs.mkdirSync(adir, { recursive: true });
     fs.writeFileSync(path.join(adir, "index.html"), resourceArticlePage(article));
     pages++;
+  }
+  // Legacy resource pages — pre-reorganisation URLs preserved at their original paths so
+  // indexed links remain reachable.  Source files live in seo/legacy-resources/ and are
+  // copied here on every generation run so they survive the rmSync above.
+  const LEGACY_RESOURCE_SLUGS_GEN = [
+    "how-much-does-mep-engineering-cost",
+    "ashrae-90-1-vs-iecc-commercial-energy-code",
+    "commercial-building-permit-process-what-engineers-deliver",
+    "title-24-energy-compliance-commercial-buildings",
+    "vrf-vs-rooftop-unit-commercial-hvac",
+    "what-does-a-structural-engineer-do-that-an-architect-doesnt",
+  ];
+  const legacySourceDir = path.join(__dirname, "legacy-resources");
+  for (const slug of LEGACY_RESOURCE_SLUGS_GEN) {
+    const src = path.join(legacySourceDir, `${slug}.html`);
+    if (fs.existsSync(src)) {
+      const dest = path.join(resourcesDir, slug);
+      fs.mkdirSync(dest, { recursive: true });
+      fs.copyFileSync(src, path.join(dest, "index.html"));
+      pages++;
+    }
   }
 
   // Who We Work With
