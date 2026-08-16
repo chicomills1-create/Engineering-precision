@@ -2651,6 +2651,49 @@ async function main() {
     console.log("Bing ping skipped (no network).");
   }
 
+  // IndexNow: submit all generated URLs to Bing/Yandex for instant discovery.
+  // The API key file must be reachable at https://{host}/{key}.txt — served statically
+  // from public/. Submissions are silently skipped when no network is available.
+  const INDEXNOW_KEY = "b3d4e5f6a7c8d9e0f1a2b3c4d5e6f7a8";
+  const INDEXNOW_HOST = new URL(SITE).hostname; // "apexgrideng.com"
+  try {
+    // Collect all <loc> values from every sitemap file the index references.
+    const indexXml = fs.readFileSync(path.join(PUBLIC, "sitemap_index.xml"), "utf8");
+    const sitemapNames = [...indexXml.matchAll(/<loc>[^<]*\/([^/<]+\.xml)<\/loc>/g)].map((m) => m[1]);
+    const allUrls: string[] = [];
+    for (const name of sitemapNames) {
+      const filePath = path.join(PUBLIC, name);
+      if (!fs.existsSync(filePath)) continue;
+      const xml = fs.readFileSync(filePath, "utf8");
+      const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+      allUrls.push(...locs);
+    }
+    if (allUrls.length === 0) {
+      console.log("IndexNow skipped (no URLs found in sitemaps).");
+    } else {
+      const BATCH = 10_000;
+      let submitted = 0;
+      for (let i = 0; i < allUrls.length; i += BATCH) {
+        const batch = allUrls.slice(i, i + BATCH);
+        const res = await fetch("https://api.indexnow.org/indexnow", {
+          method: "POST",
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+          body: JSON.stringify({
+            host: INDEXNOW_HOST,
+            key: INDEXNOW_KEY,
+            keyLocation: `${SITE}/${INDEXNOW_KEY}.txt`,
+            urlList: batch,
+          }),
+        });
+        submitted += batch.length;
+        console.log(`IndexNow batch ${Math.ceil((i + BATCH) / BATCH)}: ${res.status} (${batch.length} URLs)`);
+      }
+      console.log(`IndexNow: submitted ${submitted} URLs total.`);
+    }
+  } catch {
+    console.log("IndexNow skipped (no network).");
+  }
+
   const dirCount = Object.values(directory).reduce((a, v) => a + v.length, 0);
   const disciplineSubpageCount = DISCIPLINE_HUBS.reduce((a, h) => a + h.subpages.length, 0);
   console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${INDUSTRY_DISCIPLINE_PAGES.length} industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, 1 sitemap page + sitemap.xml`);
