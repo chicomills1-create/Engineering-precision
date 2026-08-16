@@ -12,6 +12,7 @@ import {
   LeadStatus,
 } from '@workspace/api-client-react';
 import { Download, Inbox, LogOut, Mail, Phone, ShieldAlert, Trash2, Users } from 'lucide-react';
+import { Link } from 'wouter';
 
 const STATUSES = [LeadStatus.new, LeadStatus.contacted, LeadStatus.closed] as const;
 
@@ -84,14 +85,22 @@ function LeadsList() {
             </p>
           )}
         </div>
-        <button
-          type="button"
-          onClick={() => signOut({ redirectUrl: basePath || '/' })}
-          className="inline-flex items-center gap-2 h-10 px-4 border border-border text-sm text-muted-foreground hover:text-foreground hover:border-primary/50 rounded-[2px] transition-colors self-start md:self-auto"
-        >
-          <LogOut className="w-4 h-4" />
-          Sign out
-        </button>
+        <div className="flex items-center gap-2 self-start md:self-auto">
+          <Link
+            to="/admin/seo"
+            className="inline-flex items-center gap-2 h-10 px-4 border border-border text-sm text-muted-foreground hover:text-foreground hover:border-primary/50 rounded-[2px] transition-colors"
+          >
+            SEO Status →
+          </Link>
+          <button
+            type="button"
+            onClick={() => signOut({ redirectUrl: basePath || '/' })}
+            className="inline-flex items-center gap-2 h-10 px-4 border border-border text-sm text-muted-foreground hover:text-foreground hover:border-primary/50 rounded-[2px] transition-colors"
+          >
+            <LogOut className="w-4 h-4" />
+            Sign out
+          </button>
+        </div>
       </div>
 
       {isLoading && (

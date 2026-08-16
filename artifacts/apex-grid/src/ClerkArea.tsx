@@ -1,4 +1,5 @@
 import Admin from '@/pages/Admin';
+import AdminSeo from '@/pages/AdminSeo';
 import { useQueryClient } from '@tanstack/react-query';
 import { useLocation } from 'wouter';
 import { useEffect, useRef } from 'react';
@@ -104,7 +105,7 @@ function SignUpPage() {
   );
 }
 
-export type ClerkAreaPage = 'admin' | 'sign-in' | 'sign-up';
+export type ClerkAreaPage = 'admin' | 'admin-seo' | 'sign-in' | 'sign-up';
 
 export default function ClerkArea({ page }: { page: ClerkAreaPage }) {
   const [, setLocation] = useLocation();
@@ -135,6 +136,7 @@ export default function ClerkArea({ page }: { page: ClerkAreaPage }) {
     >
       <ClerkQueryClientCacheInvalidator />
       {page === 'admin' && <Admin />}
+      {page === 'admin-seo' && <AdminSeo />}
       {page === 'sign-in' && <SignInPage />}
       {page === 'sign-up' && <SignUpPage />}
     </ClerkProvider>

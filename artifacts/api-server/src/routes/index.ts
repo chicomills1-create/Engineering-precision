@@ -4,6 +4,7 @@ import leadsRouter from "./leads";
 import callbackChatRouter from "./callbackChat";
 import subscribersRouter from "./subscribers";
 import storageRouter from "./storage";
+import seoStatusRouter from "./seoStatus";
 
 const router: IRouter = Router();
 
@@ -12,5 +13,6 @@ router.use(leadsRouter);
 router.use(callbackChatRouter);
 router.use(subscribersRouter);
 router.use(storageRouter);
+router.use(seoStatusRouter);
 
 export default router;
