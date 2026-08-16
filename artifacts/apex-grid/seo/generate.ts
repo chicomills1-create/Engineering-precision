@@ -2866,11 +2866,25 @@ ${breadcrumb(crumbs)}
   <a class="cta" href="/contact">Talk to an Engineer</a>
 </div></section>`;
 
+  const definedTermSetSchema = {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "@id": `${SITE}/engineering-glossary/`,
+    name: "Apex Grid Engineering Glossary",
+    description: `Plain-language definitions for structural, MEP, civil, geotechnical, and permitting terms used in commercial and industrial engineering — written by licensed professional engineers.`,
+    url: `${SITE}/engineering-glossary/`,
+    hasDefinedTerm: sortedGlossaryTerms().map((t) => ({
+      "@type": "DefinedTerm",
+      name: t.term,
+      url: `${SITE}/engineering-glossary/${t.slug}/`,
+    })),
+  };
+
   return htmlShell({
     title: "Engineering Glossary | Structural, MEP, Civil & Code Terms | Apex Grid",
     description: `Definitions for ${totalTerms}+ structural, MEP, civil, geotechnical, and permitting engineering terms — written by licensed professional engineers at Apex Grid.`,
     canonical: `${SITE}/engineering-glossary/`,
-    schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [orgSchema, definedTermSetSchema, breadcrumbSchema(crumbs)],
     body,
   });
 }

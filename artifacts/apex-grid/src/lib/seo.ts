@@ -50,10 +50,11 @@ export function usePageMeta({ title, description, path }: PageMeta) {
  * Injects a JSON-LD structured data script into <head>.
  * One script per @type — re-running with a different schema replaces the old one.
  */
-export function useJsonLd(schema: Record<string, unknown> | null) {
+export function useJsonLd(schema: Record<string, unknown> | object | null) {
   useEffect(() => {
     if (!schema) return;
-    const type = String(schema["@type"] ?? "unknown");
+    const s = schema as Record<string, unknown>;
+    const type = String(s["@type"] ?? "unknown");
     const id = `jsonld-${type.toLowerCase()}`;
     let script = document.getElementById(id) as HTMLScriptElement | null;
     if (!script) {

@@ -1,5 +1,6 @@
 import { ReplitConnectors } from "@replit/connectors-sdk";
 import type { LeadInput } from "@workspace/api-zod";
+import { signDownloadPath } from "./downloadToken";
 
 /**
  * Sends a notification email about a new lead via the SendGrid connector.
@@ -22,6 +23,23 @@ export async function sendLeadNotificationEmail(
 
   const baseUrl = process.env.PUBLIC_SITE_URL || "https://apexgrideng.com";
 
+  const attachmentLines: string[] = [];
+  if (lead.attachments && lead.attachments.length > 0) {
+    attachmentLines.push("", "Attachments:");
+    for (const objectPath of lead.attachments) {
+      try {
+        const token = signDownloadPath(objectPath);
+        // objectPath is like /objects/contact-uploads/filename.pdf
+        const wildcard = objectPath.replace(/^\/objects\//, "");
+        const url = `${baseUrl}/api/storage/objects/${wildcard}?token=${token}`;
+        const filename = objectPath.split("/").pop() ?? objectPath;
+        attachmentLines.push(`  ${filename}: ${url}`);
+      } catch {
+        attachmentLines.push(`  ${objectPath} (download link unavailable — SESSION_SECRET not configured)`);
+      }
+    }
+  }
+
   const lines = [
     `Name: ${lead.name}`,
     `Email: ${lead.email}`,
@@ -32,6 +50,7 @@ export async function sendLeadNotificationEmail(
     "",
     "Message:",
     lead.message,
+    ...attachmentLines,
   ].filter((line): line is string => line !== null);
 
   const connectors = new ReplitConnectors();
