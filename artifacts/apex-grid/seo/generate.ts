@@ -585,143 +585,176 @@ ${d.sections
     body,
   });
 }
+function u(loc: string, lastmod: string, changefreq: string, priority: string): string {
+  return `  <url><loc>${loc}</loc><lastmod>${lastmod}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`;
+}
+
+function writeSingleSitemap(filename: string, urls: string[]): void {
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`;
+  fs.writeFileSync(path.join(PUBLIC, filename), xml);
+}
+
 function writeSitemap(states: StateData[], cities: CityData[], directory: CityDirectory) {
   const today = new Date().toISOString().slice(0, 10);
-  const core = [
-    ["/", "1.0", "weekly"],
-    ["/services", "0.9", "monthly"],
-    ["/services/mep", "0.8", "monthly"],
-    ["/services/structural", "0.8", "monthly"],
-    ["/services/civil", "0.8", "monthly"],
-    ["/services/assessments", "0.8", "monthly"],
-    ["/services/architecture", "0.8", "monthly"],
-    ...DISCIPLINES.map((d) => [`/${d.slug}/`, "0.9", "monthly"] as [string, string, string]),
-    ["/portfolio", "0.8", "monthly"],
-    ["/industries", "0.7", "monthly"],
-    ["/military", "0.7", "monthly"],
-    ["/resources", "0.7", "weekly"],
-    ["/about", "0.6", "monthly"],
-    ["/team", "0.6", "monthly"],
-    ["/contact", "0.7", "monthly"],
-    ["/for-architects", "0.8", "monthly"],
-    ["/for-contractors", "0.8", "monthly"],
-    ["/for-developers", "0.8", "monthly"],
-    ["/for-property-managers", "0.8", "monthly"],
+
+  // ── Tier 1: Core revenue pages ──────────────────────────────────────────
+  const coreUrls: string[] = [
+    u(`${SITE}/`, today, "weekly", "1.0"),
+    u(`${SITE}/services`, today, "monthly", "0.9"),
+    u(`${SITE}/services/mep`, today, "monthly", "0.8"),
+    u(`${SITE}/services/structural`, today, "monthly", "0.8"),
+    u(`${SITE}/services/civil`, today, "monthly", "0.8"),
+    u(`${SITE}/services/assessments`, today, "monthly", "0.8"),
+    u(`${SITE}/services/architecture`, today, "monthly", "0.8"),
+    u(`${SITE}/portfolio`, today, "monthly", "0.8"),
+    u(`${SITE}/military`, today, "monthly", "0.7"),
+    u(`${SITE}/about`, today, "monthly", "0.6"),
+    u(`${SITE}/team`, today, "monthly", "0.6"),
+    u(`${SITE}/contact`, today, "monthly", "0.7"),
+    u(`${SITE}/for-architects`, today, "monthly", "0.8"),
+    u(`${SITE}/for-contractors`, today, "monthly", "0.8"),
+    u(`${SITE}/for-developers`, today, "monthly", "0.8"),
+    u(`${SITE}/for-property-managers`, today, "monthly", "0.8"),
+    u(`${SITE}/sitemap/`, today, "monthly", "0.3"),
   ];
-  const urls: string[] = core.map(
-    ([p, pr, cf]) => `  <url><loc>${SITE}${p}</loc><changefreq>${cf}</changefreq><priority>${pr}</priority></url>`,
-  );
+
+  // ── Tier 1-2: Service discipline hubs + deep subpages ───────────────────
+  const servicesUrls: string[] = [];
+  for (const hub of DISCIPLINE_HUBS) {
+    servicesUrls.push(u(`${SITE}/${hub.slug}/`, today, "monthly", "0.9"));
+    for (const sp of hub.subpages) {
+      servicesUrls.push(u(`${SITE}/${hub.slug}/${sp.slug}/`, today, "monthly", "0.8"));
+    }
+  }
+  for (const sp of STRUCTURAL_EXTENDED_PAGES) {
+    servicesUrls.push(u(`${SITE}/structural-engineering/${sp.slug}/`, today, "monthly", "0.8"));
+  }
+  servicesUrls.push(u(`${SITE}/title-24/`, today, "monthly", "0.9"));
+  for (const tp of TITLE_24_PAGES) {
+    servicesUrls.push(u(`${SITE}/title-24/${tp.slug}/`, today, "monthly", "0.8"));
+  }
+  servicesUrls.push(u(`${SITE}/permit-engineering/`, today, "monthly", "0.8"));
+  for (const pp of PERMIT_PAGES) {
+    servicesUrls.push(u(`${SITE}/permit-engineering/${pp.slug}/`, today, "monthly", "0.7"));
+  }
+  servicesUrls.push(u(`${SITE}/existing-building-engineering/`, today, "monthly", "0.8"));
+  for (const eb of EXISTING_BUILDING_PAGES) {
+    servicesUrls.push(u(`${SITE}/existing-building-engineering/${eb.slug}/`, today, "monthly", "0.7"));
+  }
+
+  // ── Tier 2: Industries ───────────────────────────────────────────────────
+  const industriesUrls: string[] = [
+    u(`${SITE}/industries`, today, "monthly", "0.7"),
+  ];
   for (const ind of ALL_INDUSTRIES) {
-    urls.push(`  <url><loc>${SITE}/industries/${ind.slug}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+    industriesUrls.push(u(`${SITE}/industries/${ind.slug}`, today, "monthly", "0.8"));
   }
-  urls.push(`  <url><loc>${SITE}/locations/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
-  for (const s of states) {
-    urls.push(`  <url><loc>${SITE}/locations/${s.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>`);
-    for (const svc of SERVICES) {
-      urls.push(`  <url><loc>${SITE}/locations/${s.slug}/${svc.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
-    }
-    for (const c of cities.filter((c) => c.stateSlug === s.slug)) {
-      urls.push(`  <url><loc>${SITE}/locations/${s.slug}/${c.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
-      for (const svc of SERVICES) {
-        urls.push(`  <url><loc>${SITE}/locations/${s.slug}/${c.slug}/${svc.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
-      }
-    }
-    const curatedSlugs = new Set(cities.filter((c) => c.stateSlug === s.slug).map((c) => c.slug));
-    for (const d of directory[s.slug] ?? []) {
-      if (curatedSlugs.has(d.slug)) continue;
-      urls.push(`  <url><loc>${SITE}/locations/${s.slug}/${d.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>`);
-    }
+  for (const idp of INDUSTRY_DISCIPLINE_PAGES) {
+    industriesUrls.push(u(`${SITE}${getIndustryDisciplineUrl(idp)}`, today, "monthly", "0.8"));
   }
-  urls.push(`  <url><loc>${SITE}/blog/</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>`);
-  for (const p of BLOG_POSTS) {
-    urls.push(`  <url><loc>${SITE}/blog/${p.slug}/</loc><lastmod>${p.date}</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>`);
+
+  // ── Tier 3: Solutions ────────────────────────────────────────────────────
+  const solutionsUrls: string[] = [
+    u(`${SITE}/solutions/`, today, "monthly", "0.8"),
+    u(`${SITE}/government/`, today, "monthly", "0.8"),
+  ];
+  for (const sp of SOLUTION_PAGES) {
+    solutionsUrls.push(u(`${SITE}/${sp.dir}/${sp.slug}/`, today, "monthly", "0.7"));
   }
-  // Resources
-  urls.push(`  <url><loc>${SITE}/resources/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  solutionsUrls.push(u(`${SITE}/project-types/`, today, "monthly", "0.8"));
+  for (const pt of PROJECT_TYPE_PAGES) {
+    solutionsUrls.push(u(`${SITE}/project-types/${pt.slug}/`, today, "monthly", "0.7"));
+  }
+  solutionsUrls.push(u(`${SITE}/who-we-work-with/`, today, "monthly", "0.8"));
+  for (const cp of CLIENT_PAGES) {
+    solutionsUrls.push(u(`${SITE}/who-we-work-with/${cp.slug}/`, today, "monthly", "0.7"));
+  }
+  solutionsUrls.push(u(`${SITE}/projects/`, today, "monthly", "0.8"));
+  for (const cat of PROJECT_CATEGORY_PAGES) {
+    solutionsUrls.push(u(`${SITE}/projects/${cat.slug}/`, today, "monthly", "0.7"));
+  }
+  for (const sp of STATIC_STANDALONE_PAGES) {
+    solutionsUrls.push(u(`${SITE}/${sp.dir}/`, today, "monthly", "0.8"));
+  }
+  for (const mp of MISC_PAGES) {
+    solutionsUrls.push(u(`${SITE}/${mp.slug}/`, today, "monthly", "0.8"));
+  }
+
+  // ── Tier 5: Resources (blog, guides, resource articles, glossary) ────────
+  const resourcesUrls: string[] = [
+    u(`${SITE}/resources/`, today, "monthly", "0.8"),
+  ];
   for (const d of RESOURCE_DISCIPLINES) {
-    urls.push(`  <url><loc>${SITE}/resources/${d.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+    resourcesUrls.push(u(`${SITE}/resources/${d.slug}/`, today, "monthly", "0.7"));
   }
   for (const a of RESOURCE_ARTICLES) {
-    urls.push(`  <url><loc>${SITE}${resourceUrl(a)}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+    resourcesUrls.push(u(`${SITE}${resourceUrl(a)}`, today, "monthly", "0.7"));
   }
-  // Who We Work With
-  urls.push(`  <url><loc>${SITE}/who-we-work-with/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
-  for (const cp of CLIENT_PAGES) {
-    urls.push(`  <url><loc>${SITE}/who-we-work-with/${cp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
-  }
-  // Project Types
-  urls.push(`  <url><loc>${SITE}/project-types/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
-  for (const pt of PROJECT_TYPE_PAGES) {
-    urls.push(`  <url><loc>${SITE}/project-types/${pt.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
-  }
-  // Existing Building Engineering
-  urls.push(`  <url><loc>${SITE}/existing-building-engineering/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
-  for (const eb of EXISTING_BUILDING_PAGES) {
-    urls.push(`  <url><loc>${SITE}/existing-building-engineering/${eb.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
-  }
-  // Permit Engineering
-  urls.push(`  <url><loc>${SITE}/permit-engineering/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
-  for (const pp of PERMIT_PAGES) {
-    urls.push(`  <url><loc>${SITE}/permit-engineering/${pp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
-  }
-  // Industry × Discipline pages
-  for (const idp of INDUSTRY_DISCIPLINE_PAGES) {
-    const url = getIndustryDisciplineUrl(idp);
-    urls.push(`  <url><loc>${SITE}${url}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
-  }
-  // Location × Service pages
-  for (const lsp of LOCATION_SERVICE_PAGES) {
-    urls.push(`  <url><loc>${SITE}/locations/${lsp.stateSlug}/${lsp.citySlug}/${lsp.serviceSlug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
-  }
-  // Solutions hub + individual pages
-  urls.push(`  <url><loc>${SITE}/solutions/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
-  urls.push(`  <url><loc>${SITE}/government/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
-  for (const sp of SOLUTION_PAGES) {
-    urls.push(`  <url><loc>${SITE}/${sp.dir}/${sp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
-  }
-  // Engineering Glossary hub + individual pages
-  urls.push(`  <url><loc>${SITE}/engineering-glossary/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
-  for (const gt of GLOSSARY_TERMS) {
-    urls.push(`  <url><loc>${SITE}/engineering-glossary/${gt.slug}/</loc><lastmod>${today}</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>`);
-  }
-  // Guides hub + individual pages
-  urls.push(`  <url><loc>${SITE}/guides/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  resourcesUrls.push(u(`${SITE}/guides/`, today, "monthly", "0.8"));
   for (const gp of GUIDE_PAGES) {
-    urls.push(`  <url><loc>${SITE}/guides/${gp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
+    resourcesUrls.push(u(`${SITE}/guides/${gp.slug}/`, today, "monthly", "0.7"));
   }
-  // Structural extended subpages
-  for (const sp of STRUCTURAL_EXTENDED_PAGES) {
-    urls.push(`  <url><loc>${SITE}/structural-engineering/${sp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  resourcesUrls.push(u(`${SITE}/blog/`, today, "weekly", "0.7"));
+  for (const p of BLOG_POSTS) {
+    resourcesUrls.push(u(`${SITE}/blog/${p.slug}/`, p.date, "yearly", "0.6"));
   }
-  // Title 24 hub + subpages
-  urls.push(`  <url><loc>${SITE}/title-24/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>`);
-  for (const tp of TITLE_24_PAGES) {
-    urls.push(`  <url><loc>${SITE}/title-24/${tp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  resourcesUrls.push(u(`${SITE}/engineering-glossary/`, today, "monthly", "0.8"));
+  for (const gt of GLOSSARY_TERMS) {
+    resourcesUrls.push(u(`${SITE}/engineering-glossary/${gt.slug}/`, today, "yearly", "0.6"));
   }
-  // Projects hub + category pages
-  urls.push(`  <url><loc>${SITE}/projects/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
-  for (const cat of PROJECT_CATEGORY_PAGES) {
-    urls.push(`  <url><loc>${SITE}/projects/${cat.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`);
-  }
-  // Static standalone pages
-  for (const sp of STATIC_STANDALONE_PAGES) {
-    urls.push(`  <url><loc>${SITE}/${sp.dir}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
-  }
-  // HTML sitemap
-  urls.push(`  <url><loc>${SITE}/sitemap/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>`);
-  // Discipline hub + subservice pages
-  for (const hub of DISCIPLINE_HUBS) {
-    urls.push(`  <url><loc>${SITE}/${hub.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>`);
-    for (const sp of hub.subpages) {
-      urls.push(`  <url><loc>${SITE}/${hub.slug}/${sp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+
+  // ── Tier 4: Locations ────────────────────────────────────────────────────
+  const locationsUrls: string[] = [
+    u(`${SITE}/locations/`, today, "monthly", "0.8"),
+  ];
+  for (const s of states) {
+    locationsUrls.push(u(`${SITE}/locations/${s.slug}/`, today, "monthly", "0.6"));
+    for (const svc of SERVICES) {
+      locationsUrls.push(u(`${SITE}/locations/${s.slug}/${svc.slug}/`, today, "monthly", "0.7"));
+    }
+    const curatedSlugs = new Set(cities.filter((c) => c.stateSlug === s.slug).map((c) => c.slug));
+    for (const c of cities.filter((c) => c.stateSlug === s.slug)) {
+      locationsUrls.push(u(`${SITE}/locations/${s.slug}/${c.slug}/`, today, "monthly", "0.7"));
+      for (const svc of SERVICES) {
+        locationsUrls.push(u(`${SITE}/locations/${s.slug}/${c.slug}/${svc.slug}/`, today, "monthly", "0.7"));
+      }
+    }
+    for (const d of directory[s.slug] ?? []) {
+      if (curatedSlugs.has(d.slug)) continue;
+      locationsUrls.push(u(`${SITE}/locations/${s.slug}/${d.slug}/`, today, "monthly", "0.5"));
     }
   }
-  // Misc standalone pages
-  for (const mp of MISC_PAGES) {
-    urls.push(`  <url><loc>${SITE}/${mp.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  for (const lsp of LOCATION_SERVICE_PAGES) {
+    locationsUrls.push(u(`${SITE}/locations/${lsp.stateSlug}/${lsp.citySlug}/${lsp.serviceSlug}/`, today, "monthly", "0.7"));
   }
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`;
-  fs.writeFileSync(path.join(PUBLIC, "sitemap.xml"), xml);
+
+  // ── Write individual sitemaps ────────────────────────────────────────────
+  const sitemaps: Array<{ name: string; urls: string[] }> = [
+    { name: "sitemap-core.xml",       urls: coreUrls },
+    { name: "sitemap-services.xml",   urls: servicesUrls },
+    { name: "sitemap-industries.xml", urls: industriesUrls },
+    { name: "sitemap-solutions.xml",  urls: solutionsUrls },
+    { name: "sitemap-resources.xml",  urls: resourcesUrls },
+    { name: "sitemap-locations.xml",  urls: locationsUrls },
+  ];
+  for (const { name, urls } of sitemaps) {
+    writeSingleSitemap(name, urls);
+  }
+
+  // ── Write sitemap index ──────────────────────────────────────────────────
+  const indexXml = `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemaps.map(({ name }) => `  <sitemap>\n    <loc>${SITE}/${name}</loc>\n    <lastmod>${today}</lastmod>\n  </sitemap>`).join("\n")}
+</sitemapindex>\n`;
+  fs.writeFileSync(path.join(PUBLIC, "sitemap_index.xml"), indexXml);
+  // Keep sitemap.xml as the index for backward compat with GSC submissions
+  fs.writeFileSync(path.join(PUBLIC, "sitemap.xml"), indexXml);
+
+  const totalUrls = sitemaps.reduce((n, s) => n + s.urls.length, 0);
+  console.log(`Sitemap index: ${sitemaps.length} sitemaps, ${totalUrls} total URLs`);
+  for (const { name, urls } of sitemaps) {
+    console.log(`  ${name}: ${urls.length} URLs`);
+  }
 }
 
 // ─── Resource Articles ─────────────────────────────────────────────────────
@@ -2547,6 +2580,18 @@ async function main() {
   }
 
   writeSitemap(states, cities, directory);
+
+  // Ping Bing (and legacy Google endpoint) so crawlers know the sitemap changed immediately.
+  // Google deprecated their ping URL in 2023 — GSC + robots.txt Sitemap directive is the
+  // correct Google discovery path. Bing's ping is still active and supported.
+  const sitemapIndexUrl = `${SITE}/sitemap_index.xml`;
+  try {
+    const bingRes = await fetch(`https://www.bing.com/ping?sitemap=${encodeURIComponent(sitemapIndexUrl)}`);
+    console.log(`Bing ping: ${bingRes.status}`);
+  } catch {
+    console.log("Bing ping skipped (no network).");
+  }
+
   const dirCount = Object.values(directory).reduce((a, v) => a + v.length, 0);
   const disciplineSubpageCount = DISCIPLINE_HUBS.reduce((a, h) => a + h.subpages.length, 0);
   console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${INDUSTRY_DISCIPLINE_PAGES.length} industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, 1 sitemap page + sitemap.xml`);

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://apexgrideng.com/sitemap_index.xml
 Sitemap: https://apexgrideng.com/sitemap.xml
