@@ -602,6 +602,10 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     ["/about", "0.6", "monthly"],
     ["/team", "0.6", "monthly"],
     ["/contact", "0.7", "monthly"],
+    ["/for-architects", "0.8", "monthly"],
+    ["/for-contractors", "0.8", "monthly"],
+    ["/for-developers", "0.8", "monthly"],
+    ["/for-property-managers", "0.8", "monthly"],
   ];
   const urls: string[] = core.map(
     ([p, pr, cf]) => `  <url><loc>${SITE}${p}</loc><changefreq>${cf}</changefreq><priority>${pr}</priority></url>`,

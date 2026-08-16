@@ -251,7 +251,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
       <footer className="border-t border-border bg-card">
         <div className="container mx-auto px-4 md:px-8 py-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8">
             <div className="lg:col-span-2">
               <Link href="/" className="flex items-center gap-3 mb-6">
                 <Logo className="w-9 h-9 text-primary" />
@@ -300,6 +300,16 @@ export function Shell({ children }: { children: React.ReactNode }) {
               </ul>
             </div>
             
+            <div>
+              <h4 className="font-display font-semibold mb-6 text-sm uppercase tracking-wider text-muted-foreground">Who We Serve</h4>
+              <ul className="space-y-4 text-sm text-foreground/80">
+                <li><Link href="/for-architects" className="hover:text-primary transition-colors">For Architects</Link></li>
+                <li><Link href="/for-contractors" className="hover:text-primary transition-colors">For Contractors</Link></li>
+                <li><Link href="/for-developers" className="hover:text-primary transition-colors">For Developers</Link></li>
+                <li><Link href="/for-property-managers" className="hover:text-primary transition-colors">For Property Managers</Link></li>
+              </ul>
+            </div>
+
             <div>
               <h4 className="font-display font-semibold mb-6 text-sm uppercase tracking-wider text-muted-foreground">Contact</h4>
               <ul className="space-y-4 text-sm text-foreground/80">
