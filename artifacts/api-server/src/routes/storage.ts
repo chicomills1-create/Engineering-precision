@@ -15,10 +15,24 @@ import { requireAuth } from '../middlewares/requireAuth';
 const router: IRouter = Router();
 const objectStorageService = new ObjectStorageService();
 
+function hasAuthenticatedSession(
+  req: Request,
+): req is Request & { isAuthenticated: () => boolean } {
+  if (
+    !('isAuthenticated' in req) ||
+    typeof req.isAuthenticated !== 'function'
+  ) {
+    return false;
+  }
+
+  return req.isAuthenticated();
+}
+
 /** Server-enforced limits for public (contact-form) uploads.
  * Enforcement happens on the actual byte stream (the file is proxied through
- * this server), not on client-supplied metadata — a caller cannot claim a
- * small PDF and then upload something else.
+ * this server), which enforces the size cap and extension allowlist on
+ * the actual payload before writing it to the private bucket. Clients never
+ * receive a write-capable presigned URL, so limits cannot be bypassed.
  */
 const MAX_UPLOAD_BYTES = 20 * 1024 * 1024; // 20 MB
 /** Extension allowlist — must stay in sync with ACCEPTED_TYPES in the contact
@@ -112,9 +126,8 @@ router.post(
     }
 
     try {
-      const uploadURL = await objectStorageService.getObjectEntityUploadURL();
-      const objectPath =
-        objectStorageService.normalizeObjectEntityPath(uploadURL);
+      const { uploadURL, objectPath } =
+        await objectStorageService.getObjectEntityUploadInfo();
 
       const putResponse = await fetch(uploadURL, {
         method: 'PUT',
@@ -190,35 +203,36 @@ router.get(
   '/storage/objects/*path',
   requireAuth,
   async (req: Request, res: Response) => {
-  try {
-    const raw = req.params.path;
-    const wildcardPath = Array.isArray(raw) ? raw.join('/') : raw;
-    const objectPath = `/objects/${wildcardPath}`;
-    const objectFile =
-      await objectStorageService.getObjectEntityFile(objectPath);
+    try {
+      const raw = req.params.path;
+      const wildcardPath = Array.isArray(raw) ? raw.join('/') : raw;
+      const objectPath = `/objects/${wildcardPath}`;
+      const objectFile =
+        await objectStorageService.getObjectEntityFile(objectPath);
 
-    const response = await objectStorageService.downloadObject(objectFile);
+      const response = await objectStorageService.downloadObject(objectFile);
 
-    res.status(response.status);
-    response.headers.forEach((value, key) => res.setHeader(key, value));
+      res.status(response.status);
+      response.headers.forEach((value, key) => res.setHeader(key, value));
 
-    if (response.body) {
-      const nodeStream = Readable.fromWeb(
-        response.body as ReadableStream<Uint8Array>,
-      );
-      nodeStream.pipe(res);
-    } else {
-      res.end();
+      if (response.body) {
+        const nodeStream = Readable.fromWeb(
+          response.body as ReadableStream<Uint8Array>,
+        );
+        nodeStream.pipe(res);
+      } else {
+        res.end();
+      }
+    } catch (error) {
+      if (error instanceof ObjectNotFoundError) {
+        req.log.warn({ err: error }, 'Object not found');
+        res.status(404).json({ error: 'Object not found' });
+        return;
+      }
+      req.log.error({ err: error }, 'Error serving object');
+      res.status(500).json({ error: 'Failed to serve object' });
     }
-  } catch (error) {
-    if (error instanceof ObjectNotFoundError) {
-      req.log.warn({ err: error }, 'Object not found');
-      res.status(404).json({ error: 'Object not found' });
-      return;
-    }
-    req.log.error({ err: error }, 'Error serving object');
-    res.status(500).json({ error: 'Failed to serve object' });
-  }
-});
+  },
+);
 
 export default router;

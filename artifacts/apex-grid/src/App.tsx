@@ -20,6 +20,7 @@ import Audience from '@/pages/Audience';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
 import { lazy, Suspense, useEffect } from 'react';
+import Capabilities from '@/pages/Capabilities';
 
 const ClerkArea = lazy(() => import('@/ClerkArea'));
 
@@ -71,6 +72,7 @@ function Router() {
         <Route path="/team" component={Team} />
         <Route path="/contact" component={Contact} />
         <Route path="/unsubscribe" component={Unsubscribe} />
+        <Route path="/capabilities" component={Capabilities} />
         <Route path="/for-architects">
           <Audience audience="architects" />
         </Route>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capabilities Statement — Apex Grid Engineering</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 10pt;
+      color: #1a1a1a;
+      background: #fff;
+      line-height: 1.5;
+    }
+
+    @media print {
+      body { font-size: 9pt; }
+      .no-print { display: none; }
+      @page { margin: 0.6in 0.65in; size: letter; }
+    }
+
+    .page {
+      max-width: 8.5in;
+      margin: 0 auto;
+      padding: 0.5in 0.65in;
+    }
+
+    /* Print CTA */
+    .print-bar {
+      background: #0066cc;
+      color: #fff;
+      text-align: center;
+      padding: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .print-bar button {
+      background: #fff;
+      color: #0066cc;
+      border: none;
+      padding: 6px 18px;
+      margin-left: 12px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 3px solid #0066cc;
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+    .firm-name {
+      font-size: 22pt;
+      font-weight: 900;
+      color: #0a0a0a;
+      letter-spacing: -0.5px;
+      line-height: 1;
+    }
+    .firm-tagline {
+      font-size: 9pt;
+      color: #555;
+      margin-top: 4px;
+      letter-spacing: 0.04em;
+    }
+    .contact-block {
+      text-align: right;
+      font-size: 8.5pt;
+      color: #333;
+      line-height: 1.7;
+    }
+    .contact-block a { color: #0066cc; text-decoration: none; }
+
+    /* Section */
+    h2 {
+      font-size: 9pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #0066cc;
+      border-bottom: 1px solid #cce0ff;
+      padding-bottom: 3px;
+      margin-bottom: 8px;
+      margin-top: 16px;
+    }
+
+    /* Intro */
+    .intro {
+      font-size: 9.5pt;
+      color: #222;
+      margin-bottom: 4px;
+      line-height: 1.55;
+    }
+
+    /* 2-col layout */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* KPI row */
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .kpi {
+      background: #f0f6ff;
+      border-left: 3px solid #0066cc;
+      padding: 8px 10px;
+    }
+    .kpi-value {
+      font-size: 17pt;
+      font-weight: 900;
+      color: #0066cc;
+      line-height: 1;
+    }
+    .kpi-label {
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #555;
+      margin-top: 2px;
+    }
+
+    /* Bullet list */
+    ul.compact {
+      list-style: none;
+      padding: 0;
+    }
+    ul.compact li {
+      padding: 2px 0 2px 12px;
+      font-size: 8.5pt;
+      color: #1a1a1a;
+      position: relative;
+    }
+    ul.compact li::before {
+      content: '▸';
+      color: #0066cc;
+      position: absolute;
+      left: 0;
+      font-size: 8pt;
+    }
+
+    /* NAICS table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8.5pt;
+    }
+    th {
+      background: #0066cc;
+      color: #fff;
+      padding: 5px 8px;
+      text-align: left;
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    td {
+      padding: 4px 8px;
+      border-bottom: 1px solid #e5e5e5;
+      color: #1a1a1a;
+    }
+    tr:nth-child(even) td { background: #f7faff; }
+
+    /* Check list */
+    ul.checks {
+      list-style: none;
+      padding: 0;
+      columns: 2;
+      column-gap: 20px;
+    }
+    ul.checks li {
+      padding: 2px 0 2px 14px;
+      font-size: 8pt;
+      color: #1a1a1a;
+      position: relative;
+      break-inside: avoid;
+    }
+    ul.checks li::before {
+      content: '✓';
+      color: #0066cc;
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+    }
+
+    /* Veteran badge */
+    .sdvosb {
+      background: #f0f6ff;
+      border: 1px solid #cce0ff;
+      border-left: 4px solid #0066cc;
+      padding: 10px 14px;
+      border-radius: 2px;
+      font-size: 8.5pt;
+      margin-top: 8px;
+    }
+    .sdvosb strong { color: #0066cc; }
+
+    /* Footer */
+    .footer {
+      margin-top: 20px;
+      border-top: 2px solid #0066cc;
+      padding-top: 8px;
+      font-size: 7.5pt;
+      color: #555;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+<div class="print-bar no-print">
+  Print this page to save as PDF.
+  <button onclick="window.print()">Print / Save as PDF</button>
+</div>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <div class="firm-name">APEX GRID ENGINEERING</div>
+      <div class="firm-tagline">Multidisciplinary Architecture &amp; Engineering · Veteran-Owned</div>
+    </div>
+    <div class="contact-block">
+      22475 E Quintero Rd, Queen Creek, AZ 85142<br />
+      <a href="tel:+14804900064">(480) 490-0064</a> &nbsp;|&nbsp; <a href="mailto:info@apexgrideng.com">info@apexgrideng.com</a><br />
+      <a href="https://apexgrideng.com">apexgrideng.com</a>
+    </div>
+  </div>
+
+  <!-- Company Overview -->
+  <p class="intro">
+    Apex Grid Engineering is a multidisciplinary firm delivering integrated Architecture, Structural Engineering, MEP Engineering, and Civil Engineering under one contract and one point of accountability. The firm is led by Jeremy Mills, a service-disabled U.S. Air Force veteran, and engineered to the standards required for federal, military, and large commercial project delivery. PE-licensed in 49 states with 15+ years of experience across commercial, industrial, healthcare, government, and military project types.
+  </p>
+
+  <!-- Key Numbers -->
+  <div class="kpis">
+    <div class="kpi">
+      <div class="kpi-value">49</div>
+      <div class="kpi-label">States PE-Licensed</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-value">15+</div>
+      <div class="kpi-label">Years Experience</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-value">4</div>
+      <div class="kpi-label">Core Disciplines</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-value">12–24hr</div>
+      <div class="kpi-label">Quote Turnaround</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+
+      <!-- Core Competencies -->
+      <h2>Core Competencies</h2>
+      <ul class="compact">
+        <li>Architectural Design — SD, DD, CD, Permit Packages</li>
+        <li>Structural Engineering — Gravity, Lateral, Seismic, Blast</li>
+        <li>MEP Engineering — HVAC, Electrical, Plumbing, Fire Alarm</li>
+        <li>Civil Engineering — Grading, Drainage, Utilities, Access</li>
+        <li>Building Assessments &amp; Condition Surveys</li>
+        <li>UFC / ATFP Antiterrorism Force Protection Design</li>
+        <li>Mission-Critical &amp; Secure Facility Design (SOC / EOC / SCIF)</li>
+        <li>Code Compliance &amp; ADA Remediation</li>
+        <li>Peer Review &amp; Third-Party Engineering</li>
+        <li>Construction Administration (RFI, Submittal Review, Field Obs.)</li>
+      </ul>
+
+      <!-- Markets Served -->
+      <h2>Markets Served</h2>
+      <ul class="compact">
+        <li>Military &amp; Defense (DoD / VA / All Branches)</li>
+        <li>Federal &amp; State Government</li>
+        <li>Commercial Office &amp; Mixed-Use</li>
+        <li>Industrial &amp; Manufacturing</li>
+        <li>Healthcare &amp; Medical</li>
+        <li>Education &amp; Higher Ed</li>
+        <li>Data Centers &amp; Mission-Critical</li>
+        <li>Retail, Hospitality &amp; Entertainment</li>
+        <li>Multi-Family Residential</li>
+        <li>Religious &amp; Institutional</li>
+      </ul>
+
+      <!-- Client Types -->
+      <h2>Client Types</h2>
+      <ul class="compact">
+        <li>Architecture Firms (sub-consultant)</li>
+        <li>General Contractors &amp; Design-Build Teams</li>
+        <li>Prime Contractors (teaming / subcontracting)</li>
+        <li>Federal Agencies &amp; DoD</li>
+        <li>Real Estate Developers &amp; REITs</li>
+        <li>Owner-Builders &amp; Property Managers</li>
+      </ul>
+
+    </div>
+    <div>
+
+      <!-- Service Phases -->
+      <h2>Service Phases</h2>
+      <ul class="compact">
+        <li><strong>Pre-Design:</strong> Feasibility, assessments, programming, code review</li>
+        <li><strong>Schematic Design (SD):</strong> Concept layouts and system selection</li>
+        <li><strong>Design Development (DD):</strong> Coordinated design, specs, outline</li>
+        <li><strong>Construction Documents (CD):</strong> Permit-ready, fully coordinated</li>
+        <li><strong>Permitting Support:</strong> AHJ responses, resubmittals</li>
+        <li><strong>Construction Administration (CA):</strong> RFIs, submittals, field obs.</li>
+        <li><strong>Close-Out:</strong> As-built documentation, O&amp;M manuals</li>
+      </ul>
+
+      <!-- Software -->
+      <h2>Software Platforms</h2>
+      <ul class="compact">
+        <li>Revit (BIM) · AutoCAD · Civil 3D</li>
+        <li>ETABS · RISA-3D · RAM Structural</li>
+        <li>Trane Trace · eQUEST (Energy Modeling)</li>
+        <li>StormCAD · Procore · Bluebeam Revu</li>
+        <li>SketchUp · Navisworks (clash detection)</li>
+      </ul>
+
+      <!-- Codes & Standards -->
+      <h2>Codes &amp; Standards</h2>
+      <ul class="compact">
+        <li>IBC / IFC (current adopted edition)</li>
+        <li>NEC / NFPA 70, 72, 13, 101</li>
+        <li>ASCE 7 · ACI 318 · AISC 360 / 341</li>
+        <li>ASHRAE 90.1 (Energy)</li>
+        <li>ADA / Architectural Barriers Act (ABA)</li>
+        <li>UFC 4-010-01 (ATFP) · UFC 1-200-02</li>
+        <li>All applicable UFC series</li>
+        <li>State-specific amendments (per jurisdiction)</li>
+      </ul>
+
+      <!-- Veteran Ownership -->
+      <h2>Ownership &amp; Socioeconomic Status</h2>
+      <div class="sdvosb">
+        <strong>Service-Disabled Veteran-Owned Small Business (SDVOSB)</strong><br />
+        Majority owned and operated by Jeremy Mills, disabled U.S. Air Force veteran. Qualifies for SDVOSB set-asides, small business subcontracting plan credit, and federal evaluation preference programs where applicable.
+      </div>
+
+    </div>
+  </div>
+
+  <!-- NAICS Codes -->
+  <h2>Primary NAICS Codes</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>NAICS Code</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>541330</td><td>Engineering Services</td></tr>
+      <tr><td>541310</td><td>Architectural Services</td></tr>
+      <tr><td>237310</td><td>Highway, Street &amp; Bridge Construction</td></tr>
+      <tr><td>237990</td><td>Other Heavy Civil Engineering Construction</td></tr>
+      <tr><td>236220</td><td>Commercial &amp; Institutional Building Construction</td></tr>
+      <tr><td>541620</td><td>Environmental Consulting Services</td></tr>
+    </tbody>
+  </table>
+
+  <!-- PE Licensing -->
+  <h2>PE Licensure — 49 States</h2>
+  <p style="font-size:8.5pt;color:#1a1a1a;margin-bottom:6px;">
+    Apex Grid engineers hold Professional Engineer licenses in 49 U.S. states, enabling permit-ready stamped documents for projects across nearly every jurisdiction in the country. Contact us to confirm licensure in your specific state.
+  </p>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>Apex Grid Engineering &nbsp;·&nbsp; 22475 E Quintero Rd, Queen Creek, AZ 85142 &nbsp;·&nbsp; (480) 490-0064 &nbsp;·&nbsp; info@apexgrideng.com</span>
+    <span>apexgrideng.com/capabilities &nbsp;·&nbsp; SDVOSB</span>
+  </div>
+
+</div>
+</body>
+</html>

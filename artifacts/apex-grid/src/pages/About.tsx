@@ -1,3 +1,5 @@
+import { Link } from "wouter";
+import { ArrowRight } from "lucide-react";
 import { usePageMeta } from "@/lib/seo";
 import officeImg from "@assets/generated_images/office.webp";
 import jeremyImg from "@assets/generated_images/jeremy-mills.webp";
@@ -156,6 +158,22 @@ export default function About() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Capabilities CTA */}
+      <section className="py-20 bg-card border-t border-border text-center">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-display font-bold mb-4">Procurement &amp; Government Clients</h2>
+          <p className="text-muted-foreground max-w-xl mx-auto mb-8">
+            Contracting officers and prime contractors can review our full capabilities reference — disciplines, NAICS codes, 49-state PE licensure, and downloadable capabilities statement.
+          </p>
+          <Link
+            href="/capabilities"
+            className="inline-flex h-12 px-8 bg-primary text-white font-bold text-sm uppercase tracking-wider items-center justify-center gap-3 rounded-[2px] hover:bg-primary/90 transition-colors"
+          >
+            View Firm Capabilities <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
     </div>

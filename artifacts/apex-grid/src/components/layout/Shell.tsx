@@ -274,6 +274,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 <li><Link href="/team" className="hover:text-primary transition-colors">Team</Link></li>
                 <li><Link href="/portfolio" className="hover:text-primary transition-colors">Portfolio</Link></li>
                 <li><Link href="/resources" className="hover:text-primary transition-colors">Resources</Link></li>
+                <li><Link href="/capabilities" className="hover:text-primary transition-colors">Capabilities</Link></li>
                 <li><a href="/blog/" className="hover:text-primary transition-colors">Blog</a></li>
                 <li><a href="/locations/" className="hover:text-primary transition-colors">Service Areas</a></li>
                 <li><Link href="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
