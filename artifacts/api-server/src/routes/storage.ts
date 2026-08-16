@@ -1,67 +1,140 @@
 import { Readable } from 'stream';
-import {
-  RequestUploadUrlBody,
-  RequestUploadUrlResponse,
-} from '@workspace/api-zod';
-import { Router, type IRouter, type Request, type Response } from 'express';
+import express, {
+  Router,
+  type IRouter,
+  type Request,
+  type Response,
+} from 'express';
 
-import { ObjectPermission } from '../lib/objectAcl';
 import {
   ObjectNotFoundError,
   ObjectStorageService,
 } from '../lib/objectStorage';
+import { requireAuth } from '../middlewares/requireAuth';
 
 const router: IRouter = Router();
 const objectStorageService = new ObjectStorageService();
 
-function hasAuthenticatedSession(
-  req: Request,
-): req is Request & { isAuthenticated: () => boolean } {
-  if (
-    !('isAuthenticated' in req) ||
-    typeof req.isAuthenticated !== 'function'
-  ) {
+/** Server-enforced limits for public (contact-form) uploads.
+ * Enforcement happens on the actual byte stream (the file is proxied through
+ * this server), not on client-supplied metadata — a caller cannot claim a
+ * small PDF and then upload something else.
+ */
+const MAX_UPLOAD_BYTES = 20 * 1024 * 1024; // 20 MB
+/** Extension allowlist — must stay in sync with ACCEPTED_TYPES in the contact
+ * form UI. Extensions (not MIME types) are the primary control because
+ * browsers report empty or generic MIME types for CAD formats. */
+const ALLOWED_EXTENSIONS = new Set([
+  'pdf',
+  'dwg',
+  'dxf',
+  'rvt',
+  'doc',
+  'docx',
+  'xls',
+  'xlsx',
+  'ppt',
+  'pptx',
+  'zip',
+  'jpg',
+  'jpeg',
+  'png',
+  'tif',
+  'tiff',
+]);
+
+/** Simple in-memory per-IP rate limiter for minting upload URLs. */
+const RATE_LIMIT = 10; // URLs per window per IP
+const RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const uploadRateBuckets = new Map<string, { count: number; resetAt: number }>();
+function uploadRateLimited(ip: string): boolean {
+  const now = Date.now();
+  // Opportunistic cleanup to keep the map bounded.
+  if (uploadRateBuckets.size > 10_000) {
+    for (const [k, v] of uploadRateBuckets) {
+      if (v.resetAt <= now) uploadRateBuckets.delete(k);
+    }
+  }
+  const bucket = uploadRateBuckets.get(ip);
+  if (!bucket || bucket.resetAt <= now) {
+    uploadRateBuckets.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
     return false;
   }
-
-  return req.isAuthenticated();
+  bucket.count += 1;
+  return bucket.count > RATE_LIMIT;
 }
 
 /**
- * POST /storage/uploads/request-url
+ * POST /storage/uploads
  *
- * Request a presigned URL for file upload.
- * The client sends JSON metadata (name, size, contentType) — NOT the file.
- * Then uploads the file directly to the returned presigned URL.
- * Requires auth middleware so public callers cannot mint write-capable URLs.
+ * Proxied upload for contact-form attachments. The file bytes are streamed
+ * through this server, which enforces the size cap and extension allowlist on
+ * the actual payload before writing it to the private bucket. Clients never
+ * receive a write-capable presigned URL, so limits cannot be bypassed.
+ *
+ * The filename is passed via the `x-file-name` header (URI-encoded).
  */
 router.post(
-  '/storage/uploads/request-url',
+  '/storage/uploads',
+  express.raw({ type: () => true, limit: MAX_UPLOAD_BYTES }),
   async (req: Request, res: Response) => {
-    // Contact form uploads are intentionally public — no auth required.
-    const parsed = RequestUploadUrlBody.safeParse(req.body);
-    if (!parsed.success) {
-      res.status(400).json({ error: 'Missing or invalid required fields' });
+    const ip = req.ip ?? 'unknown';
+    if (uploadRateLimited(ip)) {
+      res
+        .status(429)
+        .json({ error: 'Too many upload requests. Try again later.' });
+      return;
+    }
+
+    let name = '';
+    try {
+      name = decodeURIComponent(String(req.headers['x-file-name'] ?? ''));
+    } catch {
+      /* fall through to validation below */
+    }
+    const ext = name.includes('.') ? name.split('.').pop()!.toLowerCase() : '';
+    if (!name || !ALLOWED_EXTENSIONS.has(ext)) {
+      res.status(400).json({
+        error:
+          'File type not accepted. Upload PDFs, images, CAD files, or office documents.',
+      });
+      return;
+    }
+
+    const body = req.body as unknown;
+    if (!Buffer.isBuffer(body) || body.length === 0) {
+      res.status(400).json({ error: 'No file content received' });
+      return;
+    }
+    if (body.length > MAX_UPLOAD_BYTES) {
+      res.status(413).json({ error: 'File exceeds the 20 MB upload limit' });
       return;
     }
 
     try {
-      const { name, size, contentType } = parsed.data;
-
       const uploadURL = await objectStorageService.getObjectEntityUploadURL();
       const objectPath =
         objectStorageService.normalizeObjectEntityPath(uploadURL);
 
-      res.json(
-        RequestUploadUrlResponse.parse({
-          uploadURL,
-          objectPath,
-          metadata: { name, size, contentType },
-        }),
-      );
+      const putResponse = await fetch(uploadURL, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/octet-stream' },
+        body,
+        signal: AbortSignal.timeout(60_000),
+      });
+      if (!putResponse.ok) {
+        req.log.error(
+          { status: putResponse.status },
+          'Storage PUT failed for proxied upload',
+        );
+        res.status(502).json({ error: 'Failed to store file' });
+        return;
+      }
+
+      res.json({ objectPath, name });
     } catch (error) {
-      req.log.error({ err: error }, 'Error generating upload URL');
-      res.status(500).json({ error: 'Failed to generate upload URL' });
+      req.log.error({ err: error }, 'Error handling proxied upload');
+      res.status(500).json({ error: 'Failed to store file' });
     }
   },
 );
@@ -109,31 +182,20 @@ router.get(
  * GET /storage/objects/*
  *
  * Serve object entities from PRIVATE_OBJECT_DIR.
- * These are served from a separate path from /public-objects and can optionally
- * be protected with authentication or ACL checks based on the use case.
+ * These are private lead attachments (engineering documents uploaded with
+ * inquiries), so access requires an authenticated admin — the same allowlist
+ * that protects the leads inbox.
  */
-router.get('/storage/objects/*path', async (req: Request, res: Response) => {
+router.get(
+  '/storage/objects/*path',
+  requireAuth,
+  async (req: Request, res: Response) => {
   try {
     const raw = req.params.path;
     const wildcardPath = Array.isArray(raw) ? raw.join('/') : raw;
     const objectPath = `/objects/${wildcardPath}`;
     const objectFile =
       await objectStorageService.getObjectEntityFile(objectPath);
-
-    // --- Protected route example (uncomment when using replit-auth) ---
-    // if (!req.isAuthenticated()) {
-    //   res.status(401).json({ error: "Unauthorized" });
-    //   return;
-    // }
-    // const canAccess = await objectStorageService.canAccessObjectEntity({
-    //   userId: req.user.id,
-    //   objectFile,
-    //   requestedPermission: ObjectPermission.READ,
-    // });
-    // if (!canAccess) {
-    //   res.status(403).json({ error: "Forbidden" });
-    //   return;
-    // }
 
     const response = await objectStorageService.downloadObject(objectFile);
 

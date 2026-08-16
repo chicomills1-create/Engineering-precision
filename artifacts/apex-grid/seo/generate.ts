@@ -23,6 +23,7 @@ import { STRUCTURAL_EXTENDED_PAGES, type StructuralExtendedPage } from "./struct
 import { TITLE_24_HUB, TITLE_24_PAGES, type Title24Page } from "./title-24-pages";
 import { PROJECTS_HUB, PROJECT_CATEGORY_PAGES, type ProjectCategoryPage } from "./projects-pages";
 import { STATIC_STANDALONE_PAGES, type StaticPageDef } from "./static-pages";
+import { DISCIPLINES, type DisciplineDef } from "./disciplines";
 
 /** Lightweight city-directory entry sourced from US Census population estimates. */
 interface DirectoryCity {
@@ -502,6 +503,86 @@ ${breadcrumb(crumbs)}
   });
 }
 
+/** Top-level, content-rich discipline page (e.g. /structural-engineering/). */
+function disciplinePage(d: DisciplineDef): string {
+  const url = `/${d.slug}/`;
+  const crumbs = [{ name: "Home", href: "/" }, { name: d.name }];
+  const others = DISCIPLINES.filter((x) => x.slug !== d.slug);
+  const svcSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: d.name,
+    serviceType: d.name,
+    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    areaServed: { "@type": "Country", name: "United States" },
+    url: `${SITE}${url}`,
+    description: d.metaDescription,
+  };
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: d.faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">${esc(d.kicker)}</p>
+  <h1>${esc(d.h1)}</h1>
+  <p class="lede">${esc(d.lede)}</p>
+</div></section>
+
+${d.sections
+  .map(
+    (s) => `<section class="block"><div class="container">
+  <h2>${esc(s.heading)}</h2>
+  <div class="prose">${s.paragraphs.map((p) => `<p>${esc(p)}</p>`).join("")}</div>
+</div></section>`,
+  )
+  .join("\n")}
+
+<section class="block"><div class="container">
+  <h2>What You <em>Receive</em></h2>
+  <div class="grid2">${d.deliverables
+    .map((x) => `<div class="card"><div class="label">Deliverable</div><h3>${esc(x.title)}</h3><p>${esc(x.desc)}</p></div>`)
+    .join("")}</div>
+</div></section>
+
+<section class="block"><div class="container">
+  <h2>Common <em>Project Types</em></h2>
+  <ul class="scope">${d.useCases.map((u) => `<li>${esc(u)}</li>`).join("")}</ul>
+</div></section>
+
+<section class="block"><div class="container faq">
+  <h2>${esc(d.shortName)} Engineering <em>FAQs</em></h2>
+  ${d.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="a">${esc(f.a)}</div></details>`).join("")}
+</div></section>
+
+<section class="block"><div class="container">
+  <h2>Related <em>Disciplines &amp; Resources</em></h2>
+  <div class="linkrow" style="margin-bottom:16px">${others
+    .map((o) => `<a href="/${o.slug}/">${esc(o.name)}</a>`)
+    .join("")}</div>
+  <div class="linkrow"><a href="/services">All Services</a><a href="/locations/">Service Areas (49 States)</a><a href="/blog/">Engineering Blog</a><a href="/portfolio">Portfolio</a></div>
+</div></section>
+
+<section class="ctaband"><div class="container">
+  <h2>Put a Licensed ${esc(d.shortName)} Engineer on Your Project</h2>
+  <p>Send us your backgrounds or a project description. With licensed PEs in 49 states and 20+ engineers on staff, we return a fixed-fee proposal — deliverables, timeline, and fee — typically within 12–24 hours.</p>
+  <a class="cta" href="/contact">Request a Proposal</a>
+</div></section>`;
+
+  return htmlShell({
+    title: d.metaTitle,
+    description: d.metaDescription,
+    canonical: `${SITE}${url}`,
+    schemaJson: [orgSchema, svcSchema, faqSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
 function writeSitemap(states: StateData[], cities: CityData[], directory: CityDirectory) {
   const today = new Date().toISOString().slice(0, 10);
   const core = [
@@ -512,6 +593,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     ["/services/civil", "0.8", "monthly"],
     ["/services/assessments", "0.8", "monthly"],
     ["/services/architecture", "0.8", "monthly"],
+    ...DISCIPLINES.map((d) => [`/${d.slug}/`, "0.9", "monthly"] as [string, string, string]),
     ["/portfolio", "0.8", "monthly"],
     ["/industries", "0.7", "monthly"],
     ["/military", "0.7", "monthly"],
@@ -2147,6 +2229,15 @@ async function main() {
       fs.writeFileSync(path.join(cdir, "index.html"), cityLitePage(s, d, dirCities, cities));
       pages++;
     }
+  }
+  // Top-level discipline pages
+  for (const d of DISCIPLINES) {
+    assertSlug(d.slug);
+    const ddir = path.join(PUBLIC, d.slug);
+    fs.rmSync(ddir, { recursive: true, force: true });
+    fs.mkdirSync(ddir, { recursive: true });
+    fs.writeFileSync(path.join(ddir, "index.html"), disciplinePage(d));
+    pages++;
   }
   // Blog
   const blogDir = path.join(PUBLIC, "blog");

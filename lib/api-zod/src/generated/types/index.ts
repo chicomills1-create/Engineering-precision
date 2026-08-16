@@ -20,5 +20,4 @@ export * from './subscriber';
 export * from './subscribeResult';
 export * from './subscriberInput';
 export * from './unsubscribeInput';
-export * from './uploadUrlRequest';
-export * from './uploadUrlResponse';
+export * from './uploadResponse';

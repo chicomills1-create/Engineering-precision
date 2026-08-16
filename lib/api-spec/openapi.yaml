@@ -236,26 +236,46 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorMessage"
-  /storage/uploads/request-url:
+  /storage/uploads:
     post:
       tags: [Storage]
-      operationId: requestUploadUrl
-      summary: Request a presigned URL for file upload
+      operationId: uploadStorageObject
+      summary: Upload a file (proxied through the server, which enforces size and type limits)
+      parameters:
+        - name: x-file-name
+          in: header
+          required: true
+          schema:
+            type: string
+          description: URI-encoded original filename; extension must be on the server allowlist
       requestBody:
         required: true
         content:
-          application/json:
+          application/octet-stream:
             schema:
-              $ref: '#/components/schemas/UploadUrlRequest'
+              type: string
+              format: binary
       responses:
         '200':
-          description: Presigned upload URL generated.
+          description: File stored.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UploadUrlResponse'
+                $ref: '#/components/schemas/UploadResponse'
         '400':
-          description: Missing or invalid required fields.
+          description: Missing file, disallowed file type, or invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '413':
+          description: File exceeds the upload size limit.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '429':
+          description: Rate limit exceeded.
           content:
             application/json:
               schema:
@@ -409,29 +429,14 @@ components:
         session:
           type: string
           description: Signed chat session stamp; echo it back in subsequent messages
-    UploadUrlRequest:
+    UploadResponse:
       type: object
-      required: [name, size, contentType]
+      required: [objectPath, name]
       properties:
-        name:
-          type: string
-          minLength: 1
-        size:
-          type: number
-          minimum: 1
-        contentType:
-          type: string
-          minLength: 1
-    UploadUrlResponse:
-      type: object
-      required: [uploadURL, objectPath]
-      properties:
-        uploadURL:
-          type: string
         objectPath:
           type: string
-        metadata:
-          $ref: '#/components/schemas/UploadUrlRequest'
+        name:
+          type: string
     LeadInput:
       type: object
       required: [name, email, message]

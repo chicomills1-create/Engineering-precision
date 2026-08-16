@@ -7,6 +7,12 @@
   <url><loc>https://apexgrideng.com/services/civil</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://apexgrideng.com/services/assessments</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://apexgrideng.com/services/architecture</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://apexgrideng.com/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://apexgrideng.com/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://apexgrideng.com/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://apexgrideng.com/mechanical-engineering/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://apexgrideng.com/electrical-engineering/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://apexgrideng.com/plumbing-engineering/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://apexgrideng.com/portfolio</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://apexgrideng.com/industries</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/military</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>

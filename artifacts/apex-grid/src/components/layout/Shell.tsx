@@ -38,6 +38,17 @@ export function Shell({ children }: { children: React.ReactNode }) {
     { name: "Architectural Design", href: "/services/architecture" },
   ];
 
+  // Static, content-rich discipline pages (generated into public/) — plain
+  // anchors so the browser loads the static HTML instead of the SPA router.
+  const disciplines = [
+    { name: "Structural Engineering", href: "/structural-engineering/" },
+    { name: "MEP Engineering", href: "/mep-engineering/" },
+    { name: "Civil Engineering", href: "/civil-engineering/" },
+    { name: "Mechanical (HVAC)", href: "/mechanical-engineering/" },
+    { name: "Electrical Engineering", href: "/electrical-engineering/" },
+    { name: "Plumbing Engineering", href: "/plumbing-engineering/" },
+  ];
+
   return (
     <div className="min-h-screen flex flex-col font-sans">
       <header 
@@ -92,6 +103,18 @@ export function Shell({ children }: { children: React.ReactNode }) {
                               {service.name}
                             </Link>
                           ))}
+                          <div className="border-t border-border mt-1 pt-2">
+                            <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground px-4 pb-1">Disciplines</div>
+                            {disciplines.map(d => (
+                              <a
+                                key={d.href}
+                                href={d.href}
+                                className="block text-sm px-4 py-2.5 hover:bg-background hover:text-primary transition-colors text-muted-foreground font-medium rounded-[2px]"
+                              >
+                                {d.name}
+                              </a>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -151,6 +174,17 @@ export function Shell({ children }: { children: React.ReactNode }) {
                         {service.name}
                       </Link>
                     ))}
+                    <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground p-2 mt-2">Disciplines</div>
+                    {disciplines.map(d => (
+                      <a
+                        key={d.href}
+                        href={d.href}
+                        className="text-base text-muted-foreground p-2 hover:text-primary"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {d.name}
+                      </a>
+                    ))}
                   </div>
                 )}
               </div>
@@ -209,6 +243,15 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 <li><Link href="/services/civil" className="hover:text-primary transition-colors">Civil Engineering</Link></li>
                 <li><Link href="/services/assessments" className="hover:text-primary transition-colors">Building Assessments</Link></li>
                 <li><Link href="/services/architecture" className="hover:text-primary transition-colors">Architectural Design</Link></li>
+              </ul>
+              <h4 className="font-display font-semibold mb-4 mt-8 text-sm uppercase tracking-wider text-muted-foreground">Disciplines</h4>
+              <ul className="space-y-3 text-sm text-foreground/80">
+                <li><a href="/structural-engineering/" className="hover:text-primary transition-colors">Structural Engineering</a></li>
+                <li><a href="/mep-engineering/" className="hover:text-primary transition-colors">MEP Engineering</a></li>
+                <li><a href="/civil-engineering/" className="hover:text-primary transition-colors">Civil Engineering</a></li>
+                <li><a href="/mechanical-engineering/" className="hover:text-primary transition-colors">Mechanical (HVAC)</a></li>
+                <li><a href="/electrical-engineering/" className="hover:text-primary transition-colors">Electrical Engineering</a></li>
+                <li><a href="/plumbing-engineering/" className="hover:text-primary transition-colors">Plumbing Engineering</a></li>
               </ul>
             </div>
             

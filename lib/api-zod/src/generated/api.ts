@@ -190,32 +190,15 @@ export const UpdateLeadResponse = zod.object({
 
 
 /**
- * @summary Request a presigned URL for file upload
+ * @summary Upload a file (proxied through the server, which enforces size and type limits)
  */
-
-
-
-
-
-export const RequestUploadUrlBody = zod.object({
-  "name": zod.string().min(1),
-  "size": zod.number().min(1),
-  "contentType": zod.string().min(1)
+export const UploadStorageObjectHeader = zod.object({
+  "x-file-name": zod.string().describe('URI-encoded original filename; extension must be on the server allowlist')
 })
 
-
-
-
-
-
-export const RequestUploadUrlResponse = zod.object({
-  "uploadURL": zod.string(),
+export const UploadStorageObjectResponse = zod.object({
   "objectPath": zod.string(),
-  "metadata": zod.object({
-  "name": zod.string().min(1),
-  "size": zod.number().min(1),
-  "contentType": zod.string().min(1)
-}).optional()
+  "name": zod.string()
 })
 
 

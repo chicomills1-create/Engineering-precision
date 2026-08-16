@@ -116,19 +116,9 @@ export interface CallbackChatReply {
   session?: string;
 }
 
-export interface UploadUrlRequest {
-  /** @minLength 1 */
-  name: string;
-  /** @minimum 1 */
-  size: number;
-  /** @minLength 1 */
-  contentType: string;
-}
-
-export interface UploadUrlResponse {
-  uploadURL: string;
+export interface UploadResponse {
   objectPath: string;
-  metadata?: UploadUrlRequest;
+  name: string;
 }
 
 export interface LeadInput {
