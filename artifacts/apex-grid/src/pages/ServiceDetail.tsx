@@ -6,6 +6,7 @@ import civilBg from "@assets/generated_images/civil-bg.webp";
 import assessmentBg from "@assets/generated_images/assessment-bg.webp";
 import architectureBg from "@assets/generated_images/architecture-bg.webp";
 import NotFound from "./not-found";
+import { INDUSTRIES_BY_CLUSTER } from "@/data/industries";
 
 const servicesData = {
   "mep": {
@@ -275,6 +276,35 @@ export default function ServiceDetail() {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* Industry cross-links */}
+      <section className="py-24 bg-card border-t border-border">
+        <div className="container mx-auto px-4 md:px-8">
+          <h2 className="text-3xl font-display font-bold mb-4">Industries We Serve</h2>
+          <p className="text-muted-foreground max-w-3xl mb-12">
+            {service.title} scoped and coordinated for the specific codes, systems, and review agencies of your sector.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10">
+            {INDUSTRIES_BY_CLUSTER.map(({ cluster, industries }) => (
+              <div key={cluster.id}>
+                <div className="text-xs font-mono uppercase tracking-widest text-primary mb-4">{cluster.name}</div>
+                <ul className="space-y-2">
+                  {industries.map((industry) => (
+                    <li key={industry.slug}>
+                      <Link
+                        href={`/industries/${industry.slug}`}
+                        className="text-sm text-foreground/80 hover:text-primary transition-colors font-medium"
+                      >
+                        {industry.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>

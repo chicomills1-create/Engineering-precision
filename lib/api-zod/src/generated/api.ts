@@ -42,8 +42,6 @@ export const ListLeadsResponse = zod.array(ListLeadsResponseItem)
 export const createLeadBodyEmailMin = 3;
 
 
-
-
 export const CreateLeadBody = zod.object({
   "name": zod.string().min(1),
   "email": zod.string().min(createLeadBodyEmailMin),
@@ -111,7 +109,6 @@ export const unsubscribeSubscriberBodyEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s
 export const unsubscribeSubscriberBodyTokenMax = 128;
 
 
-
 export const UnsubscribeSubscriberBody = zod.object({
   "email": zod.string().min(unsubscribeSubscriberBodyEmailMin).max(unsubscribeSubscriberBodyEmailMax).regex(unsubscribeSubscriberBodyEmailRegExp),
   "token": zod.string().max(unsubscribeSubscriberBodyTokenMax).optional().describe('Signed unsubscribe token from an email link; verified server-side when present')
@@ -145,7 +142,6 @@ export const callbackChatBodySessionMax = 512;
 export const callbackChatBodyMessagesItemContentMax = 2000;
 
 export const callbackChatBodyMessagesMax = 30;
-
 
 
 export const CallbackChatBody = zod.object({
@@ -188,6 +184,12 @@ export const UpdateLeadResponse = zod.object({
   "createdAt": zod.string()
 })
 
+export const RequestUploadUrlBody = zod.object({
+  "name": zod.string().min(1),
+  "size": zod.number().min(1),
+  "contentType": zod.string().min(1)
+})
+
 
 /**
  * @summary Upload a file (proxied through the server, which enforces size and type limits)
@@ -212,3 +214,12 @@ export const GetStorageObjectParams = zod.object({
 export const GetStorageObjectResponse = zod.unknown()
 
 
+export const RequestUploadUrlResponse = zod.object({
+  "uploadURL": zod.string(),
+  "objectPath": zod.string(),
+  "metadata": zod.object({
+  "name": zod.string().min(1),
+  "size": zod.number().min(1),
+  "contentType": zod.string().min(1)
+}).optional()
+})

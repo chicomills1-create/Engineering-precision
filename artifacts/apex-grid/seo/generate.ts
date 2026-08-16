@@ -24,6 +24,7 @@ import { TITLE_24_HUB, TITLE_24_PAGES, type Title24Page } from "./title-24-pages
 import { PROJECTS_HUB, PROJECT_CATEGORY_PAGES, type ProjectCategoryPage } from "./projects-pages";
 import { STATIC_STANDALONE_PAGES, type StaticPageDef } from "./static-pages";
 import { DISCIPLINES, type DisciplineDef } from "./disciplines";
+import { ALL_INDUSTRIES } from "../src/data/industries";
 
 /** Lightweight city-directory entry sourced from US Census population estimates. */
 interface DirectoryCity {
@@ -605,6 +606,9 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   const urls: string[] = core.map(
     ([p, pr, cf]) => `  <url><loc>${SITE}${p}</loc><changefreq>${cf}</changefreq><priority>${pr}</priority></url>`,
   );
+  for (const ind of ALL_INDUSTRIES) {
+    urls.push(`  <url><loc>${SITE}/industries/${ind.slug}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
+  }
   urls.push(`  <url><loc>${SITE}/locations/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`);
   for (const s of states) {
     urls.push(`  <url><loc>${SITE}/locations/${s.slug}/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>`);

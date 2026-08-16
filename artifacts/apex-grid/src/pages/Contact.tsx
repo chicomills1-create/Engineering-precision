@@ -76,7 +76,12 @@ export default function Contact() {
 
   const handleFiles = useCallback(async (files: FileList | File[]) => {
     const fileArray = Array.from(files);
+    const MAX_UPLOAD_BYTES = 20 * 1024 * 1024;
     for (const file of fileArray) {
+      if (file.size > MAX_UPLOAD_BYTES) {
+        toast({ variant: "destructive", title: "File Too Large", description: `${file.name} exceeds the 20 MB limit.` });
+        continue;
+      }
       const key = `${file.name}-${file.size}`;
       setUploadingFiles(prev => new Set(prev).add(key));
       try {
@@ -341,7 +346,7 @@ export default function Contact() {
                           Drag & drop files here, or click to browse
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          PDF, DWG, DXF, RVT, DOC, XLS, ZIP, images — up to 100 MB each
+                          PDF, DWG, DXF, RVT, DOC, XLS, ZIP, images — up to 20 MB each
                         </p>
                       </div>
                     </div>

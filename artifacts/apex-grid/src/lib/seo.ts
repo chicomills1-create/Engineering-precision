@@ -21,6 +21,24 @@ function setMeta(attr: "name" | "property", key: string, content: string) {
   el.setAttribute("content", content);
 }
 
+/**
+ * Injects a JSON-LD structured-data script for the current page and removes
+ * it on unmount/route change.
+ */
+export function useJsonLd(data: object | null) {
+  useEffect(() => {
+    if (!data) return;
+    const el = document.createElement("script");
+    el.type = "application/ld+json";
+    el.setAttribute("data-page-jsonld", "true");
+    el.textContent = JSON.stringify(data);
+    document.head.appendChild(el);
+    return () => {
+      el.remove();
+    };
+  }, [JSON.stringify(data)]);
+}
+
 export function usePageMeta({ title, description, path }: PageMeta) {
   useEffect(() => {
     document.title = title;

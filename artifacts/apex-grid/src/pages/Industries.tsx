@@ -2,34 +2,16 @@ import { Link } from "wouter";
 import { ArrowRight, Flag } from "lucide-react";
 import industriesBg from "@assets/generated_images/industries-bg.webp";
 import militaryBg from "@assets/generated_images/military-bg.webp";
+import { INDUSTRIES_BY_CLUSTER } from "@/data/industries";
+import { usePageMeta } from "@/lib/seo";
 
 export default function Industries() {
-  const sectors = [
-    { name: "Healthcare", desc: "OSHPD compliance, medical gas, negative pressure isolation rooms, and resilient power for clinics and hospitals." },
-    { name: "Data Centers", desc: "N+1 cooling redundancy, high-density power distribution, and pre-action fire suppression." },
-    { name: "Tenant Improvement", desc: "Rapid turnaround structural and MEP modifications for retail, office, and restaurant build-outs." },
-    { name: "Industrial / Warehouse", desc: "Tilt-up concrete structures, high-bay lighting, and large-scale ventilation." },
-    { name: "Multifamily Residential", desc: "Optimized structural framing and highly efficient centralized or distributed MEP systems." },
-    { name: "Retail & Hospitality", desc: "Brand-compliant aesthetic integration, commercial kitchens, and guest comfort systems." },
-    { name: "Education", desc: "DSA compliance, laboratory ventilation, and campus-wide utility infrastructure." },
-    { name: "Life Science", desc: "Clean rooms, fume hood exhaust, specialized lab gas systems, and vibration-sensitive structural design." },
-    { name: "Government & Civic", desc: "High-security structural hardening, ATFP compliance, and stringent energy mandates." },
-    { name: "Military & Defense", desc: "Veteran-owned firm engineering to UFC criteria — ATFP standoff and hardening, secure facilities, and DoD energy mandates for installations and support facilities." },
-    { name: "Religious & Worship Facilities", desc: "Long-span column-free sanctuaries, assembly occupancy ventilation, acoustic-sensitive MEP, and event-day site and parking design." },
-    { name: "Commercial Office", desc: "Core-and-shell engineering, tenant-ready MEP infrastructure, and flexible floor plates designed for future build-outs." },
-    { name: "Restaurants & Food Service", desc: "Commercial kitchen ventilation, grease exhaust and make-up air, health-code plumbing, and fast-track tenant conversions." },
-    { name: "Senior Living & Assisted Care", desc: "Licensing-driven life-safety design, emergency and standby power for required critical loads, accessibility compliance, and resident comfort systems." },
-    { name: "Solar & Renewable Energy", desc: "Rooftop and carport PV structural analysis, battery energy storage systems, and utility interconnection coordination." },
-    { name: "EV Charging & Automotive", desc: "DC fast-charge power distribution, service and dealership facilities, and load studies for electrified fleets." },
-    { name: "Cold Storage & Food Processing", desc: "Low-temperature envelope and refrigeration engineering, freezer slab design, and process spaces engineered to support food-safety and sanitation requirements." },
-    { name: "Self-Storage", desc: "Efficient structural systems for single and multi-story facilities, climate-controlled zoning, and phased site development." },
-    { name: "Parking Structures", desc: "Post-tensioned and precast structural design, ventilation and CO monitoring, and EV-ready electrical infrastructure." },
-    { name: "Aviation & Hangars", desc: "Long-span hangar structures, fire suppression coordination, hazardous-location electrical design where fuel operations require it, and apron drainage." },
-    { name: "Fitness & Recreation", desc: "Long-span gymnasium and pool structures, high-ventilation and dehumidification systems, and vibration-tolerant floor design." },
-    { name: "Breweries & Beverage", desc: "Process piping and floor drainage, heavy tank loading, CO2 monitoring, and taproom assembly-occupancy conversions." },
-    { name: "Telecommunications", desc: "Tower and rooftop mount structural analysis, equipment shelter design, and resilient DC power and cooling systems." },
-    { name: "Agriculture & Cannabis", desc: "Controlled-environment growing facilities, high-density lighting and dehumidification loads, and hazardous-process extraction design coordinated with fire and building officials." }
-  ];
+  usePageMeta({
+    title: "Industries We Serve | Structural, MEP, Civil & Geotechnical | Apex Grid",
+    description:
+      "Deep engineering expertise across 24 industries — healthcare, data centers, military, multifamily, industrial, and more. Explore sector-specific capabilities.",
+    path: "/industries",
+  });
 
   return (
     <div className="flex flex-col">
@@ -59,18 +41,34 @@ export default function Industries() {
       </section>
 
       <section className="py-24 bg-card">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
-            {sectors.map((sector, idx) => (
-              <div key={idx} className="bg-background p-10 hover:bg-secondary/50 transition-colors group">
-                <div className="w-12 h-[2px] bg-primary mb-6 transition-all group-hover:w-16" />
-                <h3 className="text-2xl font-display font-bold mb-4">{sector.name}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {sector.desc}
-                </p>
+        <div className="container mx-auto px-4 md:px-8 flex flex-col gap-20">
+          {INDUSTRIES_BY_CLUSTER.map(({ cluster, industries }) => (
+            <div key={cluster.id}>
+              <div className="flex items-center gap-4 mb-8">
+                <span className="font-mono text-xs uppercase tracking-widest text-primary">0{cluster.id}</span>
+                <h2 className="text-2xl md:text-3xl font-display font-bold">{cluster.name}</h2>
+                <div className="flex-grow h-px bg-border" />
               </div>
-            ))}
-          </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
+                {industries.map((industry) => (
+                  <Link
+                    key={industry.slug}
+                    href={`/industries/${industry.slug}`}
+                    className="bg-background p-10 hover:bg-secondary/50 transition-colors group flex flex-col"
+                  >
+                    <div className="w-12 h-[2px] bg-primary mb-6 transition-all group-hover:w-16" />
+                    <h3 className="text-2xl font-display font-bold mb-4 group-hover:text-primary transition-colors">{industry.name}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                      {industry.cardBlurb}
+                    </p>
+                    <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                      View Capabilities <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
