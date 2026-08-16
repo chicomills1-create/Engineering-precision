@@ -490,6 +490,13 @@ ${breadcrumb(crumbs)}
     .join("")}
   </div>
 </div></section>
+<section class="block"><div class="container">
+  <h2>More <em>Engineering Resources</em></h2>
+  <div class="grid2">
+    <a class="card" href="/engineering-glossary/"><div class="label">Reference</div><h3>Engineering Glossary</h3><p>Plain-language definitions for 80+ structural, MEP, civil, and geotechnical terms — from load path to ASHRAE 90.1.</p></a>
+    <a class="card" href="/resources/"><div class="label">Resource Center</div><h3>Engineering Guides</h3><p>Practical answers to the questions architects, contractors, and developers ask most — ${RESOURCE_ARTICLES.length} guides across every discipline.</p></a>
+  </div>
+</div></section>
 <section class="ctaband"><div class="container">
   <h2>Questions About Your Jurisdiction?</h2>
   <p>We track code adoptions across 49 states. Tell us where you're building and we'll confirm what applies.</p>
@@ -878,6 +885,13 @@ ${RESOURCE_DISCIPLINES.map((disc) => {
   </div>
 </div></section>`;
 }).join("")}
+<section class="block"><div class="container">
+  <h2>More <em>Reference Tools</em></h2>
+  <div class="grid2">
+    <a class="card" href="/engineering-glossary/"><div class="label">Glossary</div><h3>Engineering Glossary</h3><p>Definitions for 80+ structural, MEP, civil, and geotechnical engineering terms — written for architects, contractors, and owners who encounter unfamiliar language on drawings and specs.</p></a>
+    <a class="card" href="/guides/"><div class="label">Guides</div><h3>Engineering Guides</h3><p>Step-by-step guides covering permit submittals, code compliance, coordination workflows, and what to expect at each phase of a project.</p></a>
+  </div>
+</div></section>
 <section class="ctaband"><div class="container">
   <h2>Ready to Start Your Project?</h2>
   <p>Licensed structural, MEP, civil, and geotechnical engineering in 49 states — with fast quote turnaround.</p>
@@ -2409,26 +2423,11 @@ async function main() {
     fs.writeFileSync(path.join(adir, "index.html"), resourceArticlePage(article));
     pages++;
   }
-  // Legacy resource pages — pre-reorganisation URLs preserved at their original paths so
-  // indexed links remain reachable.  Source files live in seo/legacy-resources/ and are
-  // copied here on every generation run so they survive the rmSync above.
-  const LEGACY_RESOURCE_SLUGS_GEN = [
-    "how-much-does-mep-engineering-cost",
-    "ashrae-90-1-vs-iecc-commercial-energy-code",
-    "commercial-building-permit-process-what-engineers-deliver",
-    "title-24-energy-compliance-commercial-buildings",
-    "vrf-vs-rooftop-unit-commercial-hvac",
-    "what-does-a-structural-engineer-do-that-an-architect-doesnt",
-  ];
-  const legacySourceDir = path.join(__dirname, "legacy-resources");
-  for (const slug of LEGACY_RESOURCE_SLUGS_GEN) {
-    const src = path.join(legacySourceDir, `${slug}.html`);
-    if (fs.existsSync(src)) {
-      const dest = path.join(resourcesDir, slug);
-      fs.mkdirSync(dest, { recursive: true });
-      fs.copyFileSync(src, path.join(dest, "index.html"));
-      pages++;
-    }
+  // Legacy /resources/{slug}/ redirect stubs (URLs moved to discipline subdirs)
+  for (const r of LEGACY_RESOURCE_REDIRECTS) {
+    const rdir = path.join(resourcesDir, r.slug);
+    fs.mkdirSync(rdir, { recursive: true });
+    fs.writeFileSync(path.join(rdir, "index.html"), redirectPage(r.newPath, r.title));
   }
 
   // Who We Work With
@@ -2819,6 +2818,19 @@ ${breadcrumb(crumbs)}
   });
 }
 
+/** HTML meta-refresh redirect page for a legacy URL that moved to a new path. */
+function redirectPage(newUrl: string, title: string): string {
+  const full = `${SITE}${newUrl}`;
+  return `<!doctype html><html lang="en"><head>
+<meta charset="utf-8">
+<title>${esc(title)}</title>
+<link rel="canonical" href="${esc(full)}">
+<meta http-equiv="refresh" content="0;url=${esc(full)}">
+<meta name="robots" content="noindex">
+</head><body>
+<p>This page has moved. <a href="${esc(full)}">Click here to continue.</a></p>
+</body></html>`;
+}
 function glossaryHubPage(): string {
   const crumbs = [{ name: "Home", href: "/" }, { name: "Engineering Glossary" }];
   const byLetter = glossaryByLetter();
@@ -2962,3 +2974,14 @@ ${relatedTermLinks ? `<section class="block"><div class="container">
     body,
   });
 }
+
+/** Legacy top-level /resources/{slug}/ pages that were reorganised into discipline
+ * subdirectories. We write permanent redirect stubs so indexed URLs stay live. */
+const LEGACY_RESOURCE_REDIRECTS: Array<{ slug: string; newPath: string; title: string }> = [
+  { slug: "how-much-does-mep-engineering-cost",                       newPath: "/resources/mep/mep-engineering-cost/",                title: "How Much Does MEP Engineering Cost?" },
+  { slug: "what-does-a-structural-engineer-do-that-an-architect-doesnt", newPath: "/resources/structural/structural-engineer-vs-architect/", title: "Structural Engineer vs. Architect" },
+  { slug: "ashrae-90-1-vs-iecc-commercial-energy-code",               newPath: "/resources/mep/",                                    title: "Commercial Energy Code — MEP Resources" },
+  { slug: "commercial-building-permit-process-what-engineers-deliver", newPath: "/resources/permit/permit-ready-engineering-package/", title: "The Commercial Building Permit Process" },
+  { slug: "title-24-energy-compliance-commercial-buildings",           newPath: "/title-24/",                                         title: "California Title 24 Energy Compliance" },
+  { slug: "vrf-vs-rooftop-unit-commercial-hvac",                      newPath: "/resources/mep/hvac-load-calculation/",               title: "VRF vs. Rooftop Unit — HVAC Resources" },
+];
