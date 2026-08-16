@@ -1,3 +1,6 @@
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs";
 import express, { type Express } from "express";
 import cors from "cors";
 import pinoHttp from "pino-http";
@@ -10,6 +13,11 @@ import {
 } from "./middlewares/clerkProxyMiddleware";
 import router from "./routes";
 import { logger } from "./lib/logger";
+
+// In both dev and production builds, dist/index.mjs lives at
+// artifacts/api-server/dist/ — so apex-grid's static output is two levels up.
+const __apiDir = path.dirname(fileURLToPath(import.meta.url));
+const staticRoot = path.resolve(__apiDir, "../../apex-grid/dist/public");
 
 const app: Express = express();
 
@@ -51,6 +59,24 @@ app.use(
   })),
 );
 
+// Serve pre-rendered SEO pages with proper directory-index resolution.
+// express.static resolves /structural-engineering/ → dist/public/structural-engineering/index.html
+// before Express falls through to the SPA catch-all below.
+if (fs.existsSync(staticRoot)) {
+  app.use(express.static(staticRoot, { index: "index.html", redirect: false }));
+}
+
 app.use("/api", router);
+
+// SPA catch-all: any path not matched by static files or /api routes gets
+// the React app shell so client-side routing works for non-static pages.
+const indexHtml = path.join(staticRoot, "index.html");
+app.use((_req, res) => {
+  if (fs.existsSync(indexHtml)) {
+    res.sendFile(indexHtml);
+  } else {
+    res.status(404).send("Not found");
+  }
+});
 
 export default app;
