@@ -1,46 +1,43 @@
 ---
 name: Static page production serving
-description: Why all 4,200 static SEO pages were soft-404ing in production and how the fix works.
+description: Why all 4,200 static SEO pages were soft-404ing in production and the definitive fix.
 ---
 
 # Static Page Production Serving
 
-## The Problem
-Replit's `kind: web` static handler (registered as `publicDir=artifacts/apex-grid/dist/public path=/`) does **SPA-fallback only** — for any URL that doesn't match an exact file path, it returns the root `index.html`. It does NOT do directory-index resolution (`/structural-engineering/` → `/structural-engineering/index.html`).
+## The Problem (Root Cause — Confirmed Aug 2026)
+Replit's `kind:web` artifact with `serve = "static"` registers a static handler at the artifact's path. This handler:
+- Serves exact file paths correctly (`/structural-engineering/index.html` → 200 ✓)
+- Does NOT do directory-index resolution (`/structural-engineering/` → cannot find index.html inside)
+- Falls through to the `[[services.production.rewrites]]` rule, which had `/* → /index.html`
+- Result: every directory-style URL returned the SPA shell — a soft 404 to Google
 
-This meant every static SEO page except the homepage was returning the React SPA shell (5,501 bytes) to Googlebot, causing Google to classify them all as soft 404s.
+This was masked in dev because curl tests hit `localhost:8080` directly (the API server), where `express.static` works correctly. The production proxy intercepts `/structural-engineering/` at the static handler before port 8080 ever sees it.
 
-**Why:**
-- Exact file `GET /locations/texas/index.html` → 200, correct 15KB page ✓
-- Directory `GET /locations/texas/` → 200, SPA shell ✗
-- The static handler knows directories exist (it 301-redirects `/structural-engineering` → `/structural-engineering/`) but then returns root `index.html` for the trailing-slash URL
+## The Definitive Fix (Applied Aug 2026)
+Two coordinated artifact.toml changes via `verifyAndReplaceArtifactToml`:
 
-## The Fix
-Added `express.static` to `artifacts/api-server/src/app.ts` **before** the `/api` router:
+**apex-grid** (`artifacts/apex-grid/.replit-artifact/artifact.toml`):
+- Removed `serve = "static"`, `publicDir`, and the `[[services.production.rewrites]]` block
+- Kept only the `build` step: `pnpm --filter @workspace/apex-grid run build`
+- apex-grid still generates `dist/public/` during deployment, but registers no static handler
 
-```typescript
-const __apiDir = path.dirname(fileURLToPath(import.meta.url));
-const staticRoot = path.resolve(__apiDir, "../../apex-grid/dist/public");
-
-if (fs.existsSync(staticRoot)) {
-  app.use(express.static(staticRoot, { index: "index.html", redirect: false }));
-}
-app.use("/api", router);
-
-// SPA catch-all for React client-side routes
-app.use((_req, res) => {
-  const indexHtml = path.join(staticRoot, "index.html");
-  res.sendFile(indexHtml);
-});
-```
-
-**Why this works:** All traffic goes through the API server (port 8080). `express.static` resolves directory requests to `index.html` in that directory before Express falls through. `/api/*` is handled by the router. Everything else gets the React SPA shell via the catch-all.
-
-## Path Resolution
-`import.meta.url` in the bundled `dist/index.mjs` always points to `artifacts/api-server/dist/index.mjs` regardless of whether the process is run from the workspace root or the artifact dir. So `../../apex-grid/dist/public` reliably resolves to the static output directory.
+**api-server** (`artifacts/api-server/.replit-artifact/artifact.toml`):
+- Changed `paths = ["/api"]` → `paths = ["/"]`
+- ALL production traffic now routes to port 8080 (Express)
+- `express.static(staticRoot)` resolves `/structural-engineering/` → `dist/public/structural-engineering/index.html` ✓
+- `/api/*` routes through the Express router ✓
+- SPA catch-all serves `dist/public/index.html` for React client-side routes ✓
+- Healthcheck path: `path = "/api/healthz"` — still works since Express handles all paths now
 
 ## How to Apply
-- After any change to `app.ts`, rebuild the API server: `pnpm --filter @workspace/api-server run build`
-- The vite.config `staticDirIndex` middleware regex still applies for **dev** (Vite dev server, not API server)
-- After adding new static top-level directories, verify they're in the vite.config regex for dev parity
-- A redeploy is required after the app.ts change for production to pick it up
+- **Never add `serve = "static"` + SPA rewrite to apex-grid** — it will break production static serving again
+- The `express.static` middleware in `api-server/src/app.ts` MUST come before `app.use("/api", router)`
+- `staticRoot` is resolved via `import.meta.url`: `path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../apex-grid/dist/public")`
+- If apex-grid production config is ever changed, verify `serve` is NOT set to `"static"` with a catch-all rewrite
+- Dev still works: apex-grid Vite dev server handles `/` in dev; api-server handles `/api` in dev. Dev and prod routing differ — always verify static page serving in production via GSC Live Test after deploys, not just curl to port 8080.
+
+## Verification
+After any deploy, confirm in GSC URL Inspection → Live Test:
+- `https://apexgrideng.com/structural-engineering/` must show the real page title (not "MEP, Structural & Civil Engineering Firm"), 
+- `Page availability` must say "Page is available to Google" (not Soft 404)
