@@ -1,0 +1,412 @@
+Original Message
+Message ID	<9x9Fo8PeSOSmmBzb0Z4WVg@geopod-ismtpd-22>
+Created at:	Sat, Aug 15, 2026 at 6:53 PM (Delivered after 3 seconds)
+From:	Test Lead <notifications@mail.conversations.godaddy.com>
+To:	Apex Grid Engineering <chicomills1@gmail.com>
+Subject:	New message for Apex Grid Engineering
+SPF:	PASS with IP 72.167.168.118 Learn more
+DKIM:	'PASS' with domain mail.conversations.godaddy.com Learn more
+DMARC:	'PASS' Learn more
+
+
+Download Original	Copy to clipboard	
+Delivered-To: chicomills1@gmail.com
+Received: by 2002:a05:612c:1690:b0:5d8:ee27:b18a with SMTP id fv16csp1291220vqb; Sat, 15 Aug 2026 18:53:39 -0700 (PDT)
+X-Received: by 2002:a05:6a00:1810:b0:837:f79d:909 with SMTP id d2e1a72fcca58-84fde2defa1mr15783343b3a.39.1786845218770; Sat, 15 Aug 2026 18:53:38 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786845218; cv=none; d=google.com; s=arc-20260327; b=E+SsddorB70uyoCI+U14PsCz47oOxOv4R/Cojgif8cnAO7RLhb0Cf6BJRKRZDXRpMo R/r+wfI1mYAtsyyQeQyBiCOUvhFplJBhVA1p239HFbHKghmsOxHhPsbEV0qwHr/HvC+7 b/NVirH94j6A2OBJrhLZjTjvt2Gu7K+JjHivpzXbtQjj1eKpXNLhKWtSd+YN0V38crRw 3w/o342cUcQZBeK7teHwekMu0m3MB5R/De0zlZ6tNYs8x9VMR5oN6CCR4FckBe2k/Tnk 4BFMcFG4zKJhwiYz/A9BhCQhftPcKdaYhssVNKOtlrfiLMqdPnaMQlv6VoPYMHUzkFVH 2LIA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327; h=auto-submitted:content-transfer-encoding:mime-version:subject :in-reply-to:message-id:to:reply-to:from:date:dkim-signature :dkim-signature; bh=oYWaMUOEiE8Q/T08cTVo4UypW98Lq5OhHCRp9K6EQ8k=; fh=xqfBKXllBWWrtfn9U09FcQAV+wrnGRqjmxOiMSrp6MI=; b=aWaO/IVOnZOourm3h5qopXeN/Ac3TE4fey45X2EDQarNKkbSkSKmTFhoW1/OhDTMAt UhlQd1ZtWoV3/fQarVEYlg646/XRzmZik/RWKPEyKYi/AtInEJrQVJmBEyKwQwFltcfz Q3iXJ/vyAMEHWxfyDQ5s0NYNQV4t3+iq9Oir0V4wVSKhU2YhyHb6KNd7lbpgDkCOBmYH IRRwy6LHunc0LAFhO+bA+gKEWnt1WgwFwvr6ygKvY3R/261Lbb12+uteU0b0S+rzf3TQ /FxDUvWAJlVyzFj60eQCjvqWYnOxcTJZHtO2itIuXT2TmV3XbuMCf+lZCHrJS37EcUjv 8TPw==; dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com; dkim=pass header.i=@mail.conversations.godaddy.com header.s=sable.cloud header.b=n4dGY8sr; dkim=pass header.i=@cloud.em.secureserver.net header.s=jan10em header.b=FAfpb6Ui; spf=pass (google.com: domain of spc_87004.62190784.1.20ceb4a151adc8c2158d6e7b407bd1e5@bounces.cloud.em.mail.conversations.godaddy.com designates 72.167.168.118 as permitted sender) smtp.mailfrom=spc_87004.62190784.1.20ceb4a151adc8c2158d6e7b407bd1e5@bounces.cloud.em.mail.conversations.godaddy.com; dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=godaddy.com
+Return-Path: <spc_87004.62190784.1.20ceb4a151adc8c2158d6e7b407bd1e5@bounces.cloud.em.mail.conversations.godaddy.com>
+Received: from m118.cloud.em.secureserver.net (m118.cloud.em.secureserver.net. [72.167.168.118]) by mx.google.com with ESMTPS id 41be03b00d2f7-cc095906642si8631948a12.91.2026.08.15.18.53.38 for <chicomills1@gmail.com> (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256); Sat, 15 Aug 2026 18:53:38 -0700 (PDT)
+Received-SPF: pass (google.com: domain of spc_87004.62190784.1.20ceb4a151adc8c2158d6e7b407bd1e5@bounces.cloud.em.mail.conversations.godaddy.com designates 72.167.168.118 as permitted sender) client-ip=72.167.168.118;
+Authentication-Results: mx.google.com; dkim=pass header.i=@mail.conversations.godaddy.com header.s=sable.cloud header.b=n4dGY8sr; dkim=pass header.i=@cloud.em.secureserver.net header.s=jan10em header.b=FAfpb6Ui; spf=pass (google.com: domain of spc_87004.62190784.1.20ceb4a151adc8c2158d6e7b407bd1e5@bounces.cloud.em.mail.conversations.godaddy.com designates 72.167.168.118 as permitted sender) smtp.mailfrom=spc_87004.62190784.1.20ceb4a151adc8c2158d6e7b407bd1e5@bounces.cloud.em.mail.conversations.godaddy.com; dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=godaddy.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=sable.cloud; d=mail.conversations.godaddy.com; h=Date:From:Reply-To:To:Message-ID:In-Reply-To:Subject:MIME-Version: Content-Type:Content-Transfer-Encoding; i=notifications@mail.conversations.godaddy.com; bh=oYWaMUOEiE8Q/T08cTVo4UypW98Lq5OhHCRp9K6EQ8k=; b=n4dGY8sr6UzFwiH+plsOjhQBYX/7+NBqWGzC3rA1c3QSOrda2xitcKVPG/YOSzPTcjAW4HeUdY3k QvCn75+JeuIH2xRpdhcw7D7yT0IKwvc8UZMIWWsNf5YG0ehbzPQaBxmKR7+hdihdWWXuPb0zm1St BTYqwYc5PPfpVsLINYVrj4hUvwfXgD/iiGJw+QlMV6vfQxLvfqGi4kBUGJUJ8Znrd7QrkZVe6mSn RHRvdrozXZAQyfskFG139mT0wKcU6EgBoqo++cLbKwJjS50obo3aySYcsiTcaJdkkByVG+z5DN07 mIvbMJ0CIOMJHo1QSuieXVrNz+D9vFxdSknQ1A==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=jan10em; d=cloud.em.secureserver.net; h=Date:From:Reply-To:To:Message-ID:In-Reply-To:Subject:MIME-Version: Content-Type:Content-Transfer-Encoding; bh=oYWaMUOEiE8Q/T08cTVo4UypW98Lq5OhHCRp9K6EQ8k=; b=FAfpb6UiUg+g4kPvwBNjGqk7ZwW+Xorhtr9cDoVashK5js44LY9K5heShw/neRES0Tcyx/jEb7sX 7byFU3GpjII7VsXgCXcz2W5DYXMZuDHaL1sU7CrGD3S5z+YrgRaJl7XwB2p3Yx4bUgmX/wrtzAPz YoWJRzYotC0utg4MqwTWU8z3erGRmTzGyXaxJa6gd8KuILgvyT/WbcGATA+Xx5sDPa8lEtYGGnXH rlVEz71ECvKD7rdN0OsWLBB+Mh2CgyGmXv6c+IUzhsUjbULzEObEDd7yEg1VBZW/l1Px0MYZqS4t j048Pbsa96883fJ/mePXGBVa56aN4lBmfBHmCA==
+Received: by m118.cloud.em.secureserver.net id hg4c243dam8l for <chicomills1@gmail.com>; Sun, 16 Aug 2026 01:53:35 +0000 (envelope-from <spc_87004.62190784.1.20ceb4a151adc8c2158d6e7b407bd1e5@bounces.cloud.em.mail.conversations.godaddy.com>)
+Return-Path: <spc_87004.62190784.1.20ceb4a151adc8c2158d6e7b407bd1e5@bounces.cloud.em.mail.conversations.godaddy.com>
+Date: Sun, 16 Aug 2026 01:53:35 +0000
+From: Test Lead <notifications@mail.conversations.godaddy.com>
+Reply-To: Reply to Conversation <c965486743h2057b1fadfaf3m2135127784@173f1308-b020-4cc3-8c9b-081bc1dbac8b.mail.conversations.godaddy.com>
+To: Apex Grid Engineering <chicomills1@gmail.com>
+Message-ID: <9x9Fo8PeSOSmmBzb0Z4WVg@geopod-ismtpd-22>
+In-Reply-To: <9x9Fo8PeSOSmmBzb0Z4WVg@geopod-ismtpd-22>
+Subject: New message for Apex Grid Engineering
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="--==_mimepart_6a81181f1bda6_18e001757113"
+Content-Transfer-Encoding: 7bit
+X-Reamaze-Tag: rmz-gd-staff-notification
+X-Mailgun-Tag: rmz-gd-staff-notification
+Auto-Submitted: auto-generated
+X-Auto-Response-Suppress: All
+X-Reamaze-Trace: 173f1308-b020-4cc3-8c9b-081bc1dbac8b.reamaze.com
+X-Sable-Metadata: {"host":"173f1308-b020-4cc3-8c9b-081bc1dbac8b.reamaze.com","mid":2135127784}
+X-Sable-ID: spc_87004.62190784.1.20ceb4a151adc8c2158d6e7b407bd1e5
+X-Report-Abuse: Report abuse here: https://email.cloud.secureclick.net/abuse/new?id=87004.62190784.1.20ceb4a151adc8c2158d6e7b407bd1e5
+X-Virtual-MTA: m118
+
+----==_mimepart_6a81181f1bda6_18e001757113
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Apex Grid Engineering has received a new  message.
+
+----------
+
+
+
+    From Test Lead:
+
+
+
+Name: Test Lead
+
+Email: test@example.com
+
+
+
+Message:
+
+Testing that inquiry emails deliver to info@apexgrideng.com =E2=80=94 safe =
+to ignore.
+
+
+
+
+
+
+
+
+
+----------
+
+
+
+Open Conversations: https://conversations.godaddy.com/conversations/173f130=
+8-b020-4cc3-8c9b-081bc1dbac8b?conversation=3D965486743&ref=3Demail_notifica=
+tion
+
+
+
+Want to forward this message to your team?
+
+Invite them to join your Conversations inbox instead: https://dashboard.god=
+addy.com/venture/users?ventureId=3Db10e213c-03f6-45ac-b3e7-21c59f7179a1
+
+
+
+
+
+
+
+
+
+----------
+
+Sent to GoDaddy Websites + Marketing | Manage Emails
+
+
+
+
+
+---
+
+A customer has left a new message. Replying to this email will send a respo=
+nse.
+
+
+
+
+
+See the conversation here:
+
+Open Conversations: https://conversations.godaddy.com/conversations/173f130=
+8-b020-4cc3-8c9b-081bc1dbac8b?conversation=3D965486743&ref=3Demail_notifica=
+tion
+
+
+----==_mimepart_6a81181f1bda6_18e001757113
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.=
+w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns=3D"http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta name=3D"viewport" content=3D"width=3Ddevice-width" />
+
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DUTF-8" />
+
+<link href=3D"https://cdn.reamaze.com/assets/fonts.css" rel=3D"stylesheet" =
+type=3D"text/css">
+
+<style>
+
+  body {
+
+    font-family: "Arial, sans-serif";
+
+  }
+
+
+
+  @media only screen and (max-device-width: 480px) {
+
+    table[class=3Dcontenttable] {
+
+      width: 320px !important;
+
+    }
+
+  }
+
+
+
+  pre {
+
+    word-break: break-all;
+
+    word-wrap: break-word;
+
+    white-space: pre-wrap;
+
+  }
+
+</style>
+
+</head>
+
+
+
+<body bgcolor=3D"#f3f3f3"><p style=3D"mso-hide:all;font-size:0px;background=
+-color:transparent;position:absolute;height:1px"><img src=3D"https://email.=
+cloud.secureclick.net/view?id=3D87004.62190784.1.20ceb4a151adc8c2158d6e7b40=
+7bd1e5" alt=3D"" border=3D"0" width=3D"0" height=3D"0"></p>
+
+    <div style=3D"display:none;font-size:1px;color:white;line-height:1px;ma=
+x-height:0px;max-width:0px;opacity:0;overflow:hidden;">
+
+      Name: Test Lead
+
+Email: test@example.com
+
+
+
+Message:
+
+Testing that inquiry emails deliver to info@apexgrideng.com =E2=80=94 safe =
+to ignore.
+
+
+
+
+
+    </div>
+
+
+
+      <style>
+
+  .message-bubble p, .message-bubble div {
+
+    display: inline-block;
+
+    margin: 0px;
+
+  }
+
+</style>
+
+
+
+<table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" style=3D"width: 95%=
+; margin: auto; margin-top: 5%; padding: 4%; background: #ffffff; text-alig=
+n: left; font-family: Arial, sans-serif; border-spacing: 0 1em;">
+
+
+
+  <tr>
+
+    <td>
+
+        <h1 style=3D"text-align: center; font-family: Arial, sans-serif;">
+
+          Apex Grid Engineering received a new message.
+
+        </h1>
+
+    </td>
+
+  </tr>
+
+
+
+  <tr>
+
+    <td>
+
+        <p style=3D"font-size: 20px; font-family: Arial, sans-serif; max-wi=
+dth: 600px; margin: auto;">
+
+            <b> From Test Lead:</b>
+
+        </p>
+
+
+
+        <div class=3D"message-bubble" style=3D"width: 100%; max-width: 600p=
+x; margin: 0.5em auto; background: #f3f3f3; padding: 1em; border-radius: 10=
+px; box-sizing: border-box; font-family: Arial, sans-serif;">
+
+            <p>Name: Test Lead
+
+<br />Email: <a href=3D"mailto:test@example.com" target=3D"_blank">test@exa=
+mple.com</a></p>
+
+
+
+<p>Message:
+
+<br />Testing that inquiry emails deliver to <a href=3D"mailto:info@apexgri=
+deng.com" target=3D"_blank">info@apexgrideng.com</a> =E2=80=94 safe to igno=
+re.
+
+</p>
+
+        </div>
+
+    </td>
+
+  </tr>
+
+
+
+
+
+  <tr>
+
+    <td>
+
+      <div style=3D"width: 100%; max-width: 600px; margin: auto; box-sizing=
+: border-box;">
+
+       =20
+
+      </div>
+
+    </td>
+
+  </tr>
+
+
+
+  <tr style=3D"text-align: center;">
+
+    <td>
+
+      <div style=3D"justify-items: center;">
+
+        <div style=3D"padding-top: 1em; margin: auto; width: max-content; t=
+ext-align: center;">
+
+  <a style=3D"display: inline-block; color: white; background-color: #00000=
+0; padding: 12px 24px; text-decoration: none; cursor: pointer; border-radiu=
+s: 6px; font-family: Arial, sans-serif;" href=3D"https://conversations.goda=
+ddy.com/conversations/173f1308-b020-4cc3-8c9b-081bc1dbac8b?conversation=3D9=
+65486743&amp;ref=3Demail_notification">
+
+        Open Conversations
+
+    <img style=3D"height: 1em; width: 1em; margin-left: 0.5em; vertical-ali=
+gn: middle;" alt=3D"Open Conversations" src=3D"https://cdn.reamaze.com/asse=
+ts/external/external-link-alt-04bc9fca7b85209a53898afa15f666ae26c7b22175080=
+dc5b73d67bdee6646f9.png" />
+
+</a></div>
+
+
+
+  <div style=3D"text-align: center; margin-top: 35px;">
+
+    <p style=3D"color: #333333; font-family: Arial, sans-serif; margin: 0 0=
+ 10px 0;">
+
+        Want to forward this message to your team?
+
+    </p>
+
+    <a style=3D"color: #000000; text-decoration: underline; font-family: Ar=
+ial, sans-serif;" href=3D"https://dashboard.godaddy.com/venture/users?ventu=
+reId=3Db10e213c-03f6-45ac-b3e7-21c59f7179a1">
+
+          Invite them to join your Conversations inbox instead
+
+</a>  </div>
+
+
+
+      </div>
+
+    </td>
+
+  </tr>
+
+</table>
+
+
+
+    <table cellpadding=3D"2em" cellspacing=3D"0" border=3D"0" style=3D"widt=
+h: 95%; margin: auto; font: small/ 1.5 Arial,Helvetica,sans-serif; font-siz=
+e: 12px; color: #767676; margin-top: 3em; margin-bottom: 4em; border-spacin=
+g: 0 1em;">
+
+    <tr>
+
+      <td>
+
+          This message came from your email, <a target=3D"_blank" rel=3D"no=
+opener noreferrer" href=3D"https://conversations.godaddy.com/conversations/=
+173f1308-b020-4cc3-8c9b-081bc1dbac8b">Apex Grid Engineering</a>
+
+      </td>
+
+    </tr>
+
+    <tr>
+
+      <td>
+
+          Download the Conversations mobile app for <a href=3D"https://apps=
+.apple.com/app/apple-store/id1510644564?pt=3D141856&ct=3Demail_notification=
+&mt=3D8" target=3D"_blank">iOS</a> or <a href=3D"https://play.google.com/st=
+ore/apps/details?id=3Dcom.godaddy.conversations" target=3D"_blank">Android<=
+/a> to access and respond to messages on the go
+
+      </td>
+
+    </tr>
+
+  <tr>
+
+    <td>
+
+        Sent to GoDaddy Websites + Marketing | Manage Emails
+
+    </td>
+
+  </tr>
+
+</table>
+
+
+
+</body>
+
+
+
+</html>
+
+
+----==_mimepart_6a81181f1bda6_18e001757113--
