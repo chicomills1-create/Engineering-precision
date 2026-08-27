@@ -23,6 +23,7 @@ import { TITLE_24_HUB, TITLE_24_PAGES, type Title24Page } from "./title-24-pages
 import { PROJECTS_HUB, PROJECT_CATEGORY_PAGES, type ProjectCategoryPage } from "./projects-pages";
 import { STATIC_STANDALONE_PAGES, type StaticPageDef } from "./static-pages";
 import { DISCIPLINES, type DisciplineDef } from "./disciplines";
+import { PARTNER_PAGES, type PartnerPage } from "./partner-pages";
 import { ALL_INDUSTRIES } from "../src/data/industries";
 import { RESOURCE_ARTICLES, RESOURCE_DISCIPLINES, disciplineOf, resourceUrl, type ResourceArticle, type ResourceDiscipline } from "./resources";
 import { GLOSSARY_TERMS, sortedGlossaryTerms, glossaryByLetter, relatedGlossaryTerms, type GlossaryTerm } from "./glossary";
@@ -676,6 +677,9 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const cp of CLIENT_PAGES) {
     solutionsUrls.push(u(`${SITE}/who-we-work-with/${cp.slug}/`, today, "monthly", "0.7"));
   }
+  for (const pp of PARTNER_PAGES) {
+    solutionsUrls.push(u(`${SITE}/partners/${pp.slug}/`, today, "monthly", "0.7"));
+  }
   solutionsUrls.push(u(`${SITE}/projects/`, today, "monthly", "0.8"));
   for (const cat of PROJECT_CATEGORY_PAGES) {
     solutionsUrls.push(u(`${SITE}/projects/${cat.slug}/`, today, "monthly", "0.7"));
@@ -970,6 +974,12 @@ ${breadcrumb(crumbs)}
   ${CLIENT_PAGES.map((p) => `<a class="card" href="/who-we-work-with/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 130))}…</p></a>`).join("")}
   </div>
 </div></section>
+<section class="block"><div class="container">
+  <h2>Construction <em>Partners</em></h2>
+  <div class="grid2">
+  ${PARTNER_PAGES.map((p) => `<a class="card" href="/partners/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.companyName)}</h3><p>${esc(p.lede.slice(0, 160))}…</p></a>`).join("")}
+  </div>
+</div></section>
 <section class="ctaband"><div class="container">
   <h2>Not Sure Where to Start?</h2>
   <p>Tell us about your project and we'll take it from there — clear proposal, fast turnaround, licensed engineers in 49 states.</p>
@@ -980,6 +990,119 @@ ${breadcrumb(crumbs)}
     description: hub.description,
     canonical: `${SITE}/who-we-work-with/`,
     schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+// ─── Construction Partners ──────────────────────────────────────────────────
+
+function partnerPage(page: PartnerPage): string {
+  const url = `/partners/${page.slug}/`;
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Who We Work With", href: "/who-we-work-with/" },
+    { name: page.companyName },
+  ];
+  const companySchema = {
+    "@context": "https://schema.org",
+    "@type": "Contractor",
+    name: page.companyName,
+    url: page.website,
+    telephone: page.phone,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Los Angeles",
+      addressRegion: "CA",
+      addressCountry: "US",
+    },
+  };
+  const partnershipSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: page.h1,
+    description: page.description,
+    url: `${SITE}${url}`,
+    about: { "@type": "Organization", name: page.companyName, url: page.website },
+    publisher: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
+  };
+  const body = `
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">${esc(page.kicker)}</p>
+  <h1>${esc(page.h1)}</h1>
+  <p class="lede">${esc(page.lede)}</p>
+</div></section>
+
+<section class="block"><div class="container">
+  <div class="statgrid">
+    ${page.highlights.map((item) => `<div class="cell"><div class="v">${esc(item.value)}</div><div class="k">${esc(item.label)}</div></div>`).join("")}
+  </div>
+</div></section>
+
+<section class="block"><div class="container">
+  <h2>Construction <em>Delivery Alongside Engineering</em></h2>
+  <div class="prose">
+    <p>Apex Grid provides the engineering, code coordination, and permit-ready design. PCM brings construction delivery, pre-construction planning, and field execution for commercial projects that need a capable general contractor at the table.</p>
+    <p>That combination gives owners, developers, and contracting teams one coordinated path from early scope and budget decisions through construction — while keeping each company's role clear.</p>
+  </div>
+</div></section>
+
+<section class="block"><div class="container">
+  <h2>PCM <em>Services</em></h2>
+  <ul class="scope">${page.services.map((service) => `<li>${esc(service)}</li>`).join("")}</ul>
+</div></section>
+
+<section class="block"><div class="container">
+  <h2>Business <em>Sectors</em></h2>
+  <div class="linkrow">${page.sectors.map((sector) => `<span class="card" style="display:inline-block">${esc(sector)}</span>`).join("")}</div>
+</div></section>
+
+<section class="block"><div class="container">
+  <h2>Selected <em>Experience</em></h2>
+  <div class="grid2">
+    ${page.experience.map((item) => `<div class="card"><h3>${esc(item.title)}</h3><p>${esc(item.detail)}</p></div>`).join("")}
+  </div>
+</div></section>
+
+<section class="block"><div class="container">
+  <h2>PCM <em>Leadership</em></h2>
+  <div class="grid2">
+    ${page.leadership.map((person) => `<div class="card"><div class="label">${esc(person.role)}</div><h3>${esc(person.name)}</h3><p>${esc(person.bio)}</p></div>`).join("")}
+  </div>
+</div></section>
+
+<section class="block"><div class="container">
+  <div class="grid2">
+    <div class="card">
+      <div class="label">Licenses</div>
+      <ul class="scope">${page.licenses.map((license) => `<li>${esc(license)}</li>`).join("")}</ul>
+    </div>
+    <div class="card">
+      <div class="label">Certifications</div>
+      <ul class="scope">${page.certifications.map((certification) => `<li>${esc(certification)}</li>`).join("")}</ul>
+    </div>
+  </div>
+</div></section>
+
+<section class="block"><div class="container">
+  <h2>Company <em>Information</em></h2>
+  <div class="grid2">
+    <div class="card"><div class="label">Headquarters</div><p>${esc(page.location)}<br />515 S. Flower Street, Suite 1020<br />Los Angeles, CA 90071</p></div>
+    <div class="card"><div class="label">Contact</div><p><a href="tel:+13104141800">${esc(page.phone)}</a><br /><a href="${esc(page.website)}" rel="noopener noreferrer">${esc(page.website.replace(/^https?:\/\//, ""))}</a></p></div>
+  </div>
+  <p class="note">PCM details on this page are summarized from the firm's Statement of Qualifications dated August 25, 2026. License and certification status should be verified with the issuing agency before award.</p>
+</div></section>
+
+<section class="ctaband"><div class="container">
+  <h2>Bring Engineering and Construction Together</h2>
+  <p>Tell Apex Grid about your project. We can help define the engineering scope and coordinate with PCM when construction delivery support is the right fit.</p>
+  <a class="cta" href="/contact">Start a Project Conversation</a>
+</div></section>`;
+  return htmlShell({
+    title: page.title,
+    description: page.description,
+    canonical: `${SITE}${url}`,
+    schemaJson: [orgSchema, companySchema, partnershipSchema, breadcrumbSchema(crumbs)],
     body,
   });
 }
@@ -2444,6 +2567,18 @@ async function main() {
     pages++;
   }
 
+  // Construction partners
+  const partnersDir = path.join(PUBLIC, "partners");
+  fs.rmSync(partnersDir, { recursive: true, force: true });
+  fs.mkdirSync(partnersDir, { recursive: true });
+  for (const pp of PARTNER_PAGES) {
+    assertSlug(pp.slug);
+    const pdir = path.join(partnersDir, pp.slug);
+    fs.mkdirSync(pdir, { recursive: true });
+    fs.writeFileSync(path.join(pdir, "index.html"), partnerPage(pp));
+    pages++;
+  }
+
   // Project Types
   const ptDir = path.join(PUBLIC, "project-types");
   fs.rmSync(ptDir, { recursive: true, force: true });
@@ -2696,7 +2831,7 @@ async function main() {
 
   const dirCount = Object.values(directory).reduce((a, v) => a + v.length, 0);
   const disciplineSubpageCount = DISCIPLINE_HUBS.reduce((a, h) => a + h.subpages.length, 0);
-  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${INDUSTRY_DISCIPLINE_PAGES.length} industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, 1 sitemap page + sitemap.xml`);
+  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PARTNER_PAGES.length} construction partner pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${INDUSTRY_DISCIPLINE_PAGES.length} industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, 1 sitemap page + sitemap.xml`);
 }
 
 main().catch((e) => {
