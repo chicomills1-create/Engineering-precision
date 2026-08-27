@@ -2,14 +2,14 @@ import { Link } from "wouter";
 import { ArrowRight, Flag } from "lucide-react";
 import industriesBg from "@assets/generated_images/industries-bg.webp";
 import militaryBg from "@assets/generated_images/military-bg.webp";
-import { INDUSTRIES_BY_CLUSTER } from "@/data/industries";
+import { FEATURED_INDUSTRIES, INDUSTRIES_BY_CLUSTER } from "@/data/industries";
 import { usePageMeta } from "@/lib/seo";
 
 export default function Industries() {
   usePageMeta({
     title: "Industries We Serve | Structural, MEP, Civil & Geotechnical | Apex Grid",
     description:
-      "Deep engineering expertise across 24 industries — healthcare, data centers, military, multifamily, industrial, and more. Explore sector-specific capabilities.",
+      "Deep engineering expertise across 24 industries — healthcare, data centers, military, multifamily, industrial, and more. Start with featured sectors or browse the full directory.",
     path: "/industries",
   });
 
@@ -34,7 +34,7 @@ export default function Industries() {
               Sector <span className="text-muted-foreground">Expertise</span>
             </h1>
             <p className="text-xl md:text-2xl text-foreground/80 leading-relaxed">
-              Engineering isn't one-size-fits-all. Different industries require entirely different code knowledge and design philosophies. We bring specialized experience to the sectors below.
+              Engineering isn't one-size-fits-all. Different industries require entirely different code knowledge and design philosophies. Start with our most requested sectors, then browse the full directory organized by practice group.
             </p>
           </div>
         </div>
@@ -42,33 +42,59 @@ export default function Industries() {
 
       <section className="py-24 bg-card">
         <div className="container mx-auto px-4 md:px-8 flex flex-col gap-20">
-          {INDUSTRIES_BY_CLUSTER.map(({ cluster, industries }) => (
-            <div key={cluster.id}>
-              <div className="flex items-center gap-4 mb-8">
-                <span className="font-mono text-xs uppercase tracking-widest text-primary">0{cluster.id}</span>
-                <h2 className="text-2xl md:text-3xl font-display font-bold">{cluster.name}</h2>
-                <div className="flex-grow h-px bg-border" />
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
-                {industries.map((industry) => (
-                  <Link
-                    key={industry.slug}
-                    href={`/industries/${industry.slug}`}
-                    className="bg-background p-10 hover:bg-secondary/50 transition-colors group flex flex-col"
-                  >
-                    <div className="w-12 h-[2px] bg-primary mb-6 transition-all group-hover:w-16" />
-                    <h3 className="text-2xl font-display font-bold mb-4 group-hover:text-primary transition-colors">{industry.name}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                      {industry.cardBlurb}
-                    </p>
-                    <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                      View Capabilities <ArrowRight className="w-4 h-4" />
-                    </span>
-                  </Link>
-                ))}
-              </div>
+          <div>
+            <div className="flex items-center gap-4 mb-8">
+              <span className="font-mono text-xs uppercase tracking-widest text-primary">01</span>
+              <h2 className="text-2xl md:text-3xl font-display font-bold">Featured <span className="text-muted-foreground">Sectors</span></h2>
+              <div className="flex-grow h-px bg-border" />
             </div>
-          ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
+              {FEATURED_INDUSTRIES.map((industry) => (
+                <Link
+                  key={industry.slug}
+                  href={`/industries/${industry.slug}`}
+                  className="bg-background p-10 hover:bg-secondary/50 transition-colors group flex flex-col"
+                >
+                  <div className="w-12 h-[2px] bg-primary mb-6 transition-all group-hover:w-16" />
+                  <h3 className="text-2xl font-display font-bold mb-4 group-hover:text-primary transition-colors">{industry.name}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                    {industry.cardBlurb}
+                  </p>
+                  <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    View Capabilities <ArrowRight className="w-4 h-4" />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <details className="group">
+            <summary className="flex items-center justify-between cursor-pointer list-none border border-border bg-background px-6 py-5 hover:border-primary/60 transition-colors">
+              <span>
+                <span className="block font-mono text-xs uppercase tracking-widest text-primary mb-2">02 · Full Directory</span>
+                <span className="text-2xl font-display font-bold">Browse all 24 industries</span>
+              </span>
+              <span className="text-primary text-2xl transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+            </summary>
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 pt-8">
+              {INDUSTRIES_BY_CLUSTER.map(({ cluster, industries }) => (
+                <div key={cluster.id} className="border border-border bg-background p-6">
+                  <div className="font-mono text-xs uppercase tracking-widest text-primary mb-4">{cluster.name}</div>
+                  <div className="flex flex-col gap-2">
+                    {industries.map((industry) => (
+                      <Link
+                        key={industry.slug}
+                        href={`/industries/${industry.slug}`}
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        {industry.name} <span aria-hidden="true">→</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </details>
         </div>
       </section>
 

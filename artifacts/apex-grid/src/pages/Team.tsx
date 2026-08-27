@@ -1,6 +1,7 @@
-import { usePageMeta } from "@/lib/seo";
+import { useJsonLd, usePageMeta } from "@/lib/seo";
 import { Link } from "wouter";
 import jasonImg from "@assets/generated_images/jason-mitchell.webp";
+import jamesImg from "@assets/IMG_5014_1787872200800.jpg";
 import {
   DraftingCompass,
   Zap,
@@ -29,7 +30,7 @@ const GROUPS = [
   {
     icon: PenTool,
     title: "Architectural Design Studio",
-    lead: "Led by Jason Mitchell, Architect",
+    lead: "Registered architects with multi-state licensure",
     body: "Full architectural design — concept, space planning, and permit-ready construction documents — produced in the same office as the engineering, so the architecture and the systems behind it never fall out of sync.",
     scope: ["Concept & schematic design", "Construction documents", "Code & accessibility compliance"],
   },
@@ -72,6 +73,7 @@ const GROUPS = [
 
 export default function Team() {
   usePageMeta(PAGE_META);
+  useJsonLd(TEAM_SCHEMA);
 
   return (
     <div className="flex flex-col">
@@ -130,35 +132,68 @@ export default function Team() {
         </div>
       </section>
 
-      {/* Studio lead spotlight */}
+      {/* Architecture team */}
       <section className="py-24 bg-card border-t border-border">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="max-w-5xl mx-auto md:grid md:grid-cols-[300px_1fr] md:gap-12 md:items-start">
-            <div className="mb-10 md:mb-0">
-              <div className="aspect-[4/5] bg-secondary border border-border overflow-hidden">
-                <img
-                  src={jasonImg}
-                  alt="Jason Mitchell, Lead Architect at Apex Grid Engineering"
-                  className="w-full h-full object-cover object-top"
-                  loading="lazy"
-                />
-              </div>
-              <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground mt-4">Jason Mitchell · Lead Architect</div>
+          <div className="max-w-6xl mx-auto">
+            <div className="max-w-3xl mb-16">
+              <span className="font-mono text-xs uppercase tracking-widest text-primary mb-4 block">Architectural Design Studio</span>
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">Architecture <span className="text-muted-foreground">Leadership</span></h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Our registered architects bring design leadership and permit-ready documentation to the same coordinated team as Apex Grid's structural, MEP, and civil engineers.
+              </p>
             </div>
-            <div>
-              <span className="font-mono text-xs uppercase tracking-widest text-primary mb-6 block">Architectural Design Studio Lead</span>
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">Jason Mitchell</h2>
-              <div className="space-y-5 text-muted-foreground leading-relaxed">
-                <p>
-                  Jason Mitchell is a native of Rochester, New York. He holds a Professional Degree of Architecture with Honors from the Illinois Institute of Technology in Chicago, Illinois, and is a licensed architect in Florida, California, Louisiana, Texas, Alabama, and Illinois.
-                </p>
-                <p>
-                  With 17 years of experience, Jason has actively participated in projects throughout the world, ranging from single-family residential to multi-billion-dollar commercial developments. Beyond design, his background includes roles in construction and in various development capacities.
-                </p>
-                <p>
-                  Jason has been appointed to numerous development, political, charitable, and philanthropic boards. He currently leads our architectural work across the Los Angeles, Miami, and Houston markets.
-                </p>
-              </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <article className="bg-background border border-border p-8">
+                <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden">
+                  <img
+                    src={jasonImg}
+                    alt="Jason Mitchell, Lead Architect at Apex Grid Engineering"
+                    className="w-full h-full object-cover object-top"
+                    loading="lazy"
+                  />
+                </div>
+                <span className="font-mono text-xs uppercase tracking-widest text-primary mb-4 block">Lead Architect</span>
+                <h3 className="text-3xl font-display font-bold mb-6">Jason Mitchell</h3>
+                <div className="space-y-5 text-muted-foreground leading-relaxed">
+                  <p>
+                    Jason Mitchell is a native of Rochester, New York. He holds a Professional Degree of Architecture with Honors from the Illinois Institute of Technology in Chicago, Illinois, and is a licensed architect in Florida, California, Louisiana, Texas, Alabama, and Illinois.
+                  </p>
+                  <p>
+                    With 17 years of experience, Jason has actively participated in projects throughout the world, ranging from single-family residential to multi-billion-dollar commercial developments. Beyond design, his background includes roles in construction and in various development capacities.
+                  </p>
+                  <p>
+                    Jason has been appointed to numerous development, political, charitable, and philanthropic boards. He currently leads our architectural work across the Los Angeles, Miami, and Houston markets.
+                  </p>
+                </div>
+              </article>
+              <article className="bg-background border border-border p-8">
+                <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden">
+                  <img
+                    src={jamesImg}
+                    alt="James Spencer, Registered Architect and NCARB certificate holder"
+                    className="w-full h-full object-cover object-top"
+                    loading="lazy"
+                  />
+                </div>
+                <span className="font-mono text-xs uppercase tracking-widest text-primary mb-4 block">Registered Architect · NCARB</span>
+                <h3 className="text-3xl font-display font-bold mb-6">James Spencer</h3>
+                <div className="space-y-5 text-muted-foreground leading-relaxed">
+                  <p>
+                    James Spencer is a registered architect and NCARB certificate holder supporting Apex Grid's architectural practice.
+                  </p>
+                  <p>
+                    James is licensed to practice architecture in California, Arizona, Texas, and Washington, extending the team's architectural coverage across key project markets.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-8 pt-6 border-t border-border">
+                  {["California", "Arizona", "Texas", "Washington"].map((state) => (
+                    <span key={state} className="px-3 py-1.5 bg-secondary text-xs font-bold uppercase tracking-wider text-foreground">
+                      {state}
+                    </span>
+                  ))}
+                </div>
+              </article>
             </div>
           </div>
         </div>
@@ -185,7 +220,34 @@ export default function Team() {
 }
 
 const PAGE_META = {
-  title: "Our Engineering Team | 20+ Engineers, PEs in 49 States | Apex Grid",
-  description: "Apex Grid Engineering's team: 20+ engineers and in-house Professional Engineers licensed in 49 states, organized across architectural, structural, MEP, civil, and energy code disciplines.",
+  title: "Our Engineering & Architecture Team | PEs in 49 States | Apex Grid",
+  description: "Meet Apex Grid Engineering's architecture and engineering team, including registered architects Jason Mitchell and James Spencer, 20+ engineers, and in-house Professional Engineers licensed in 49 states.",
   path: "/team",
+};
+
+const TEAM_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: PAGE_META.title,
+  description: PAGE_META.description,
+  mainEntity: {
+    "@type": "Organization",
+    name: "Apex Grid Engineering",
+    employee: [
+      {
+        "@type": "Person",
+        name: "Jason Mitchell",
+        jobTitle: "Lead Architect",
+        worksFor: { "@type": "Organization", name: "Apex Grid Engineering" },
+      },
+      {
+        "@type": "Person",
+        name: "James Spencer",
+        jobTitle: "Registered Architect",
+        hasCredential: { "@type": "EducationalOccupationalCredential", credentialCategory: "NCARB Certificate" },
+        worksFor: { "@type": "Organization", name: "Apex Grid Engineering" },
+        knowsAbout: ["Architecture", "California architecture", "Arizona architecture", "Texas architecture", "Washington architecture"],
+      },
+    ],
+  },
 };

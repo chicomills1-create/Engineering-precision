@@ -6,7 +6,7 @@ import { Logo } from "@/components/Logo";
 // <CallbackWidget /> render below.
 // import { CallbackWidget } from "@/components/CallbackWidget";
 import { useState, useEffect } from "react";
-import { INDUSTRIES_BY_CLUSTER } from "@/data/industries";
+import { FEATURED_INDUSTRIES } from "@/data/industries";
 
 export function Shell({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -89,27 +89,24 @@ export function Shell({ children }: { children: React.ReactNode }) {
                       </Link>
                       <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[min(1100px,95vw)] opacity-0 pointer-events-none group-hover/ind:opacity-100 group-hover/ind:pointer-events-auto transition-all translate-y-2 group-hover/ind:translate-y-0">
                         <div className="bg-card border border-border p-8 shadow-2xl rounded-[2px] grid grid-cols-3 gap-x-10 gap-y-8">
-                          {INDUSTRIES_BY_CLUSTER.map(({ cluster, industries }) => (
-                            <div key={cluster.id}>
-                              <div className="text-[11px] font-mono uppercase tracking-widest text-primary mb-3">
-                                {cluster.name}
-                              </div>
-                              <div className="flex flex-col gap-1">
-                                {industries.map((industry) => (
-                                  <Link
-                                    key={industry.slug}
-                                    href={`/industries/${industry.slug}`}
-                                    className="text-sm py-1.5 text-muted-foreground hover:text-primary transition-colors font-medium"
-                                  >
-                                    {industry.name}
-                                  </Link>
-                                ))}
-                              </div>
+                          <div className="col-span-3">
+                            <div className="text-[11px] font-mono uppercase tracking-widest text-primary mb-3">Featured Industries</div>
+                            <div className="grid grid-cols-2 gap-x-8 gap-y-1">
+                              {FEATURED_INDUSTRIES.slice(0, 8).map((industry) => (
+                                <Link
+                                  key={industry.slug}
+                                  href={`/industries/${industry.slug}`}
+                                  className="text-sm py-1.5 text-muted-foreground hover:text-primary transition-colors font-medium"
+                                >
+                                  {industry.name}
+                                </Link>
+                              ))}
                             </div>
-                          ))}
-                          <div className="col-span-3 pt-4 border-t border-border">
+                          </div>
+                          <div className="col-span-3 pt-4 border-t border-border flex items-center justify-between">
+                            <span className="text-xs text-muted-foreground">24 sectors organized by practice group</span>
                             <Link href="/industries" className="text-sm font-semibold text-primary hover:underline">
-                              View All Industries →
+                              Browse All Industries →
                             </Link>
                           </div>
                         </div>
@@ -193,21 +190,26 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 </Link>
                 {item.name === "Industries" && (
                   <div className="pl-4 flex flex-col gap-2 mt-2">
-                    {INDUSTRIES_BY_CLUSTER.map(({ cluster, industries }) => (
-                      <div key={cluster.id} className="flex flex-col gap-1">
-                        <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground p-2">{cluster.name}</div>
-                        {industries.map((industry) => (
-                          <Link
-                            key={industry.slug}
-                            href={`/industries/${industry.slug}`}
-                            className="text-base text-muted-foreground p-2 hover:text-primary"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                          >
-                            {industry.name}
-                          </Link>
-                        ))}
-                      </div>
-                    ))}
+                    <div className="flex flex-col gap-1">
+                      <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground p-2">Featured Industries</div>
+                      {FEATURED_INDUSTRIES.slice(0, 8).map((industry) => (
+                        <Link
+                          key={industry.slug}
+                          href={`/industries/${industry.slug}`}
+                          className="text-base text-muted-foreground p-2 hover:text-primary"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {industry.name}
+                        </Link>
+                      ))}
+                      <Link
+                        href="/industries"
+                        className="text-base text-primary font-semibold p-2 hover:text-primary/80"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        Browse All 24 Industries →
+                      </Link>
+                    </div>
                     <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground p-2 mt-2 border-t border-border/50 pt-4">Services</div>
                     {services.map(service => (
                       <Link 

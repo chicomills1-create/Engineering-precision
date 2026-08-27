@@ -21,6 +21,26 @@ export const ALL_INDUSTRIES: Industry[] = [
 
 const bySlug = new Map(ALL_INDUSTRIES.map((i) => [i.slug, i]));
 
+/** Priority sectors shown on the main Industries page before the full directory. */
+export const FEATURED_INDUSTRY_SLUGS = [
+  "healthcare-engineering",
+  "military-defense-engineering",
+  "government-civic-engineering",
+  "educational-facility-engineering",
+  "data-center-engineering",
+  "industrial-warehouse-engineering",
+  "life-science-cleanroom-engineering",
+  "tenant-improvement-engineering",
+  "commercial-office-engineering",
+  "retail-hospitality-engineering",
+  "multifamily-residential-engineering",
+  "aviation-hangar-engineering",
+] as const;
+
+export const FEATURED_INDUSTRIES = FEATURED_INDUSTRY_SLUGS
+  .map((slug) => bySlug.get(slug))
+  .filter((industry): industry is Industry => Boolean(industry));
+
 export function getIndustry(slug: string): Industry | undefined {
   return bySlug.get(slug);
 }
