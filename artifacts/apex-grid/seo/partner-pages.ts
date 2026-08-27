@@ -1,4 +1,4 @@
-/** Construction partner profiles sourced from partner-provided qualifications packages. */
+/** Construction delivery branch profiles sourced from company-provided qualifications packages. */
 
 export interface PartnerPage {
   slug: string;
@@ -26,13 +26,13 @@ export interface PartnerPage {
 export const PARTNER_PAGES: PartnerPage[] = [
   {
     slug: "phoenix-construction-management",
-    title: "Phoenix Construction & Management | Apex Grid Engineering Partner",
+    title: "Phoenix Construction & Management | Apex Grid Construction Delivery Branch",
     description:
-      "Meet Phoenix Construction & Management, Apex Grid Engineering's construction delivery partner for commercial tenant improvements, banking facilities, rollouts, and building renovations.",
+      "Meet Phoenix Construction & Management (PCM), Apex Grid Engineering's construction delivery branch for commercial tenant improvements, banking facilities, rollouts, and building renovations.",
     h1: "Phoenix Construction & Management",
-    kicker: "Apex Grid Construction Partner · PCM",
+    kicker: "Apex Grid Construction Delivery Branch · PCM",
     lede:
-      "When a project needs both coordinated engineering and experienced construction delivery, Apex Grid works with Phoenix Construction & Management (PCM) — a California-based general contractor and construction-management firm with deep commercial, banking, and tenant-improvement experience.",
+      "Phoenix Construction & Management (PCM) is Apex Grid Engineering's construction delivery branch — a California-based general contractor and construction-management team with deep commercial, banking, and tenant-improvement experience.",
     companyName: "Phoenix Construction & Management, Inc.",
     location: "Los Angeles, California",
     website: "https://www.phoenixcm.net",

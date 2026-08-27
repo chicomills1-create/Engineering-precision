@@ -1,5 +1,6 @@
 import { useJsonLd, usePageMeta } from "@/lib/seo";
 import { Link } from "wouter";
+import { useEffect } from "react";
 import jasonImg from "@assets/generated_images/jason-mitchell.webp";
 import jamesImg from "@assets/IMG_5014_1787872200800.jpg";
 import {
@@ -74,6 +75,12 @@ const GROUPS = [
 export default function Team() {
   usePageMeta(PAGE_META);
   useJsonLd(TEAM_SCHEMA);
+  useEffect(() => {
+    if (window.location.hash !== "#construction-delivery") return;
+    window.requestAnimationFrame(() => {
+      document.getElementById("construction-delivery")?.scrollIntoView({ block: "start" });
+    });
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -84,7 +91,7 @@ export default function Team() {
               The <span className="text-primary">Team</span>
             </h1>
             <p className="text-xl md:text-2xl text-foreground/80 leading-relaxed border-l-4 border-primary pl-6">
-              A team of licensed Professional Engineers and more than 20 engineers on staff — organized by discipline, built to take on jobs of any size, with fast quote turnaround on every request.
+              A multifaceted organization spanning Engineering, Architecture, and General Contracting — with more than 20 engineers on staff and construction delivery through PCM.
             </p>
           </div>
         </div>
@@ -108,7 +115,7 @@ export default function Team() {
           <div className="max-w-3xl mb-16">
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">How We're Organized</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Our clients hire the discipline, not the headshot. Every group below works under the direct review of our in-house Professional Engineers.
+              Our clients can keep the full build lifecycle under one accountable organization: Engineering, Architecture, and General Contracting. Every design group below works under the direct review of our in-house Professional Engineers.
             </p>
           </div>
 
@@ -199,6 +206,37 @@ export default function Team() {
         </div>
       </section>
 
+      <section id="construction-delivery" className="py-24 bg-card border-t border-border scroll-mt-24">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-6xl mx-auto">
+            <div className="max-w-3xl mb-16">
+              <span className="font-mono text-xs uppercase tracking-widest text-primary mb-4 block">Apex Grid Construction Delivery Branch</span>
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">PCM <span className="text-muted-foreground">Team</span></h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Phoenix Construction &amp; Management keeps its established PCM identity while serving as Apex Grid Engineering's construction delivery branch. This team extends our coordinated service from engineering and pre-construction through field execution.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
+              {PCM_TEAM.map((person) => (
+                <article key={person.name} className="bg-background p-8">
+                  <span className="font-mono text-xs uppercase tracking-widest text-primary mb-4 block">{person.role}</span>
+                  <h3 className="text-2xl font-display font-bold mb-4">{person.name}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{person.bio}</p>
+                </article>
+              ))}
+            </div>
+            <div className="mt-10">
+              <a
+                href="/partners/phoenix-construction-management/"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+              >
+                View the PCM branch profile <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 bg-background border-t border-border">
         <div className="container mx-auto px-4 md:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
@@ -221,7 +259,7 @@ export default function Team() {
 
 const PAGE_META = {
   title: "Our Engineering & Architecture Team | PEs in 49 States | Apex Grid",
-  description: "Meet Apex Grid Engineering's architecture and engineering team, including registered architects Jason Mitchell and James Spencer, 20+ engineers, and in-house Professional Engineers licensed in 49 states.",
+  description: "Meet Apex Grid Engineering's architecture and engineering team, including registered architects Jason Mitchell and James Spencer, plus the PCM construction delivery branch.",
   path: "/team",
 };
 
@@ -233,6 +271,12 @@ const TEAM_SCHEMA = {
   mainEntity: {
     "@type": "Organization",
     name: "Apex Grid Engineering",
+    subOrganization: {
+      "@type": "Contractor",
+      name: "Phoenix Construction & Management, Inc.",
+      alternateName: "PCM",
+      description: "Apex Grid Engineering's construction delivery branch",
+    },
     employee: [
       {
         "@type": "Person",
@@ -251,3 +295,26 @@ const TEAM_SCHEMA = {
     ],
   },
 };
+
+const PCM_TEAM = [
+  {
+    name: "Molly Zbojniewicz",
+    role: "Founding Partner · Client Relations",
+    bio: "Molly brings 30 years of experience in commercial construction and client leadership, leading client relationships, pre-construction coordination, contract administration, and consultant coordination.",
+  },
+  {
+    name: "Rick Coleman, AIA, LEED",
+    role: "Partner · Pre-Construction Services",
+    bio: "Rick is a licensed architect with more than 25 years in architecture, construction management, and real estate development. He leads pre-construction planning, budgeting, scheduling, approvals, and project management.",
+  },
+  {
+    name: "Tom Bell",
+    role: "Project Executive",
+    bio: "Tom brings extensive tenant-improvement and general-construction experience for financial institutions and retail environments, focusing on project management, schedule and budget oversight, and quality control.",
+  },
+  {
+    name: "Doug Brown",
+    role: "Project Executive",
+    bio: "Doug brings more than 27 years of commercial construction experience, specializing in tenant improvements and commercial renovations. He leads execution, field coordination, budgeting, and client relations.",
+  },
+];

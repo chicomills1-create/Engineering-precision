@@ -40,10 +40,10 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             <div className="text-lg text-muted-foreground leading-relaxed space-y-6">
               <p>
-                We serve as the technical backbone for architecture firms and contractors nationwide. While others focus purely on theory, we focus on constructability. A design is only as good as the contractor's ability to build it.
+                Apex Grid is a multifaceted organization built around three connected capabilities: Engineering, Architecture, and General Contracting. We serve as the technical and delivery backbone for owners, architects, developers, and contractors nationwide.
               </p>
               <p>
-                As an integrated design firm—housing Structural, MEP, and Civil engineering under one roof—we eliminate the friction of coordinating between disconnected consultants. We handle the heavy technical lifting so architects can focus on vision and contractors can focus on execution.
+                As an integrated design firm—housing Structural, MEP, Civil, and Architectural services under one roof—we eliminate the friction of coordinating between disconnected consultants. Through Phoenix Construction &amp; Management (PCM), our construction delivery branch also carries that coordination into pre-construction and field execution.
               </p>
               <p>
                 We are not an outsourced drafting service. With a team of in-house Professional Engineers and more than 20 engineers on staff, every project is engineered domestically and stamped by PEs licensed in 49 states — and we're built to take on jobs of any size, with fast quote turnaround on every request.
@@ -71,6 +71,27 @@ export default function About() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-card border-y border-border">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mb-14">
+            <span className="font-mono text-xs tracking-widest text-primary uppercase">Apex Grid Organization</span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mt-4 mb-6">Three capabilities. <span className="text-muted-foreground">One accountable team.</span></h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
+            {[
+              ["Engineering", "Structural, MEP, civil, and assessment services designed for code compliance and constructability."],
+              ["Architecture", "Concept through permit-ready documents, coordinated directly with the engineering team."],
+              ["General Contracting", "Construction delivery through Phoenix Construction & Management (PCM), our construction branch."],
+            ].map(([title, description]) => (
+              <div key={title} className="bg-background p-8">
+                <h3 className="text-2xl font-display font-bold mb-4">{title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

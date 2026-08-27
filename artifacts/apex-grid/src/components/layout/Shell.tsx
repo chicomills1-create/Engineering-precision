@@ -27,6 +27,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
     { name: "Team", href: "/team" },
     { name: "Portfolio", href: "/portfolio" },
     { name: "Industries", href: "/industries" },
+    { name: "General Contracting", href: "/team#construction-delivery" },
     { name: "Military", href: "/military" },
     { name: "Resources", href: "/resources" },
   ];
@@ -37,6 +38,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
     { name: "Civil Engineering", href: "/services/civil" },
     { name: "Building Assessments", href: "/services/assessments" },
     { name: "Architectural Design", href: "/services/architecture" },
+    { name: "General Contracting · PCM", href: "/team#construction-delivery" },
   ];
 
   // Static, content-rich discipline pages (generated into public/) — plain
@@ -65,8 +67,8 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 <span className="font-display font-bold text-lg leading-none tracking-tight group-hover:text-primary transition-colors">
                   APEX GRID
                 </span>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground leading-none mt-1">
-                  Engineering
+                <span className="text-[8px] uppercase tracking-[0.12em] text-muted-foreground leading-none mt-1 whitespace-nowrap">
+                  Engineering · Architecture · General Contracting
                 </span>
               </div>
             </Link>

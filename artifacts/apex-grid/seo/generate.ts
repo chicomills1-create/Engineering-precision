@@ -975,7 +975,7 @@ ${breadcrumb(crumbs)}
   </div>
 </div></section>
 <section class="block"><div class="container">
-  <h2>Construction <em>Partners</em></h2>
+  <h2>Apex Grid <em>Construction Delivery Branch</em></h2>
   <div class="grid2">
   ${PARTNER_PAGES.map((p) => `<a class="card" href="/partners/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.companyName)}</h3><p>${esc(p.lede.slice(0, 160))}…</p></a>`).join("")}
   </div>
@@ -1009,6 +1009,7 @@ function partnerPage(page: PartnerPage): string {
     name: page.companyName,
     url: page.website,
     telephone: page.phone,
+    parentOrganization: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
     address: {
       "@type": "PostalAddress",
       addressLocality: "Los Angeles",
@@ -1040,10 +1041,10 @@ ${breadcrumb(crumbs)}
 </div></section>
 
 <section class="block"><div class="container">
-  <h2>Construction <em>Delivery Alongside Engineering</em></h2>
+  <h2>Apex Grid <em>Construction Delivery Branch</em></h2>
   <div class="prose">
-    <p>Apex Grid provides the engineering, code coordination, and permit-ready design. PCM brings construction delivery, pre-construction planning, and field execution for commercial projects that need a capable general contractor at the table.</p>
-    <p>That combination gives owners, developers, and contracting teams one coordinated path from early scope and budget decisions through construction — while keeping each company's role clear.</p>
+    <p>Apex Grid provides the engineering, code coordination, and permit-ready design. PCM extends the company into construction delivery, pre-construction planning, and field execution for commercial projects.</p>
+    <p>PCM keeps its established name and construction identity while operating as Apex Grid's construction delivery branch, giving owners, developers, and contracting teams one coordinated path from early scope and budget decisions through construction.</p>
   </div>
 </div></section>
 
@@ -1065,7 +1066,7 @@ ${breadcrumb(crumbs)}
 </div></section>
 
 <section class="block"><div class="container">
-  <h2>PCM <em>Leadership</em></h2>
+  <h2>PCM <em>Team</em></h2>
   <div class="grid2">
     ${page.leadership.map((person) => `<div class="card"><div class="label">${esc(person.role)}</div><h3>${esc(person.name)}</h3><p>${esc(person.bio)}</p></div>`).join("")}
   </div>
@@ -1095,7 +1096,7 @@ ${breadcrumb(crumbs)}
 
 <section class="ctaband"><div class="container">
   <h2>Bring Engineering and Construction Together</h2>
-  <p>Tell Apex Grid about your project. We can help define the engineering scope and coordinate with PCM when construction delivery support is the right fit.</p>
+  <p>Tell Apex Grid about your project. Our engineering team and PCM construction delivery branch can carry the work from early scope through field execution.</p>
   <a class="cta" href="/contact">Start a Project Conversation</a>
 </div></section>`;
   return htmlShell({

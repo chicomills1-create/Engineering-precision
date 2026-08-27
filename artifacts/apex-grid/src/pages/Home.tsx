@@ -16,7 +16,7 @@ export default function Home() {
   }, []);
 
   const stats = [
-    { label: "Disciplines Under One Roof", value: "4" },
+    { label: "Integrated Divisions", value: "3" },
     { label: "Typical Quote Turnaround", value: "12-24hr" },
     { label: "States Licensed", value: "49" },
     { label: "Initial Review Response", value: "12-24hr" }
@@ -53,7 +53,7 @@ export default function Home() {
             <div className="flex items-center gap-4 mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
               <div className="w-12 h-[2px] bg-primary"></div>
               <span className="font-mono text-sm tracking-widest text-primary uppercase font-bold">
-                Permit-Ready Engineering
+                Engineering · Architecture · General Contracting
               </span>
             </div>
             
@@ -63,7 +63,7 @@ export default function Home() {
             </h1>
             
             <p className="text-xl md:text-2xl text-foreground/80 max-w-2xl mb-12 leading-relaxed border-l-4 border-primary pl-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both">
-              From concept to approved permit. We deliver integrated Architecture, Structural, MEP, and Civil design that passes review and practically builds itself.
+              One multifaceted organization for the full build lifecycle: Apex Grid Engineering, Architectural Design, and General Contracting through our PCM construction delivery branch.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both">
@@ -81,6 +81,55 @@ export default function Home() {
                 View Portfolio
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Three divisions */}
+      <section className="py-24 bg-card border-y border-border">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mb-14">
+            <span className="font-mono text-xs tracking-widest text-primary uppercase">One Organization · Three Divisions</span>
+            <h2 className="text-4xl md:text-6xl font-display font-bold mt-4 mb-6">
+              From <span className="text-muted-foreground">design</span> to delivery.
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Keep engineering, architecture, and construction aligned under one accountable organization—so decisions made in design hold up in the field.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
+            {[
+              {
+                num: "01",
+                title: "Engineering",
+                desc: "Structural, MEP, civil, and building assessment services engineered for constructability and permit approval.",
+                href: "/services/mep",
+                cta: "Explore Engineering",
+              },
+              {
+                num: "02",
+                title: "Architecture",
+                desc: "Concept, space planning, and permit-ready architectural documents coordinated directly with the engineering team.",
+                href: "/services/architecture",
+                cta: "Explore Architecture",
+              },
+              {
+                num: "03",
+                title: "General Contracting",
+                desc: "Construction delivery, pre-construction planning, and field execution through Phoenix Construction & Management (PCM).",
+                href: "/team#construction-delivery",
+                cta: "Meet the PCM Team",
+              },
+            ].map((division) => (
+              <Link key={division.num} href={division.href} className="group bg-background p-8 md:p-10 hover:bg-secondary transition-colors">
+                <div className="text-6xl font-display font-bold text-border group-hover:text-primary/20 transition-colors mb-10">{division.num}</div>
+                <h3 className="text-2xl font-display font-bold mb-4 group-hover:text-primary transition-colors">{division.title}</h3>
+                <p className="text-muted-foreground leading-relaxed mb-8">{division.desc}</p>
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-primary font-bold">
+                  {division.cta} <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
