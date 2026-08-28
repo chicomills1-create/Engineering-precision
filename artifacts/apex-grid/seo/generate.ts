@@ -24,22 +24,38 @@ import { PROJECTS_HUB, PROJECT_CATEGORY_PAGES, type ProjectCategoryPage } from "
 import { STATIC_STANDALONE_PAGES, type StaticPageDef } from "./static-pages";
 import { DISCIPLINES, type DisciplineDef } from "./disciplines";
 import { PARTNER_PAGES, type PartnerPage } from "./partner-pages";
+import {
+  LOCATION_VERTICALS,
+  type DirectoryCity,
+  verticalAvailableInState,
+  verticalCityPage,
+  verticalCityUrl,
+  verticalHubPage,
+  verticalLandingPage,
+  verticalStatePage,
+  verticalStateUrl,
+  verticalsForState,
+} from "./location-verticals";
+import {
+  LEGACY_LOCATION_REDIRECTS,
+  RETAINED_LEGACY_LOCATIONS,
+} from "./legacy-locations";
 import { ALL_INDUSTRIES } from "../src/data/industries";
 import { RESOURCE_ARTICLES, RESOURCE_DISCIPLINES, disciplineOf, resourceUrl, type ResourceArticle, type ResourceDiscipline } from "./resources";
 import { GLOSSARY_TERMS, sortedGlossaryTerms, glossaryByLetter, relatedGlossaryTerms, type GlossaryTerm } from "./glossary";
 
-/** Lightweight city-directory entry sourced from US Census population estimates. */
-interface DirectoryCity {
-  slug: string;
-  name: string;
-  pop: number;
-}
 type CityDirectory = Record<string, DirectoryCity[]>; // stateSlug -> cities
 
 function loadDirectory(): CityDirectory {
   const p = path.join(__dirname, "cities-directory.json");
   if (!fs.existsSync(p)) return {};
-  return JSON.parse(fs.readFileSync(p, "utf8")) as CityDirectory;
+  const directory = JSON.parse(fs.readFileSync(p, "utf8")) as CityDirectory;
+  for (const { stateSlug, city } of RETAINED_LEGACY_LOCATIONS) {
+    const entries = directory[stateSlug] ?? [];
+    if (!entries.some((entry) => entry.slug === city.slug)) entries.push(city);
+    directory[stateSlug] = entries;
+  }
+  return directory;
 }
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -88,6 +104,69 @@ const esc = (s: string) =>
 /** Slugs go into URLs/paths — restrict to safe charset. */
 function assertSlug(slug: string) {
   if (!/^[a-z0-9-]+$/.test(slug)) throw new Error(`Invalid slug: ${slug}`);
+}
+
+function validateDirectory(directory: CityDirectory, states: StateData[]): void {
+  const knownStates = new Set(states.map((state) => state.slug));
+  for (const [stateSlug, entries] of Object.entries(directory)) {
+    if (!knownStates.has(stateSlug) && stateSlug !== "alaska") {
+      throw new Error(`City directory references unknown state: ${stateSlug}`);
+    }
+    const seen = new Set<string>();
+    for (const city of entries) {
+      assertSlug(city.slug);
+      if (!city.name.trim()) throw new Error(`City directory has an empty name in ${stateSlug}`);
+      if (seen.has(city.slug)) throw new Error(`Duplicate city slug in ${stateSlug}: ${city.slug}`);
+      seen.add(city.slug);
+      if (city.pop !== undefined && (!Number.isFinite(city.pop) || city.pop < 0)) {
+        throw new Error(`Invalid population for ${stateSlug}/${city.slug}`);
+      }
+      if (city.lat !== undefined && (!Number.isFinite(city.lat) || city.lat < -90 || city.lat > 90)) {
+        throw new Error(`Invalid latitude for ${stateSlug}/${city.slug}`);
+      }
+      if (city.lng !== undefined && (!Number.isFinite(city.lng) || city.lng < -180 || city.lng > 180)) {
+        throw new Error(`Invalid longitude for ${stateSlug}/${city.slug}`);
+      }
+    }
+  }
+}
+
+function allDirectoryCitiesForState(state: StateData, directory: CityDirectory, curated: CityData[]): DirectoryCity[] {
+  const bySlug = new Map<string, DirectoryCity>();
+  for (const city of directory[state.slug] ?? []) bySlug.set(city.slug, city);
+  for (const city of curated.filter((entry) => entry.stateSlug === state.slug)) {
+    const existing = bySlug.get(city.slug);
+    bySlug.set(city.slug, {
+      ...existing,
+      slug: city.slug,
+      name: city.name,
+      designation: existing?.designation ?? "City",
+    });
+  }
+  return [...bySlug.values()].sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function legacyLocationRedirectPage(fromPath: string, toPath: string): string {
+  const canonical = `${SITE}${toPath}`;
+  const body = `<section class="hero"><div class="container">
+  <p class="kicker">Location URL Updated</p>
+  <h1>This Apex Grid Location Page Has Moved</h1>
+  <p class="lede">The U.S. Census place name and URL were normalized. Continue to the current canonical Apex Grid service-area page.</p>
+  <a class="cta" href="${esc(toPath)}" style="display:inline-block;margin-top:28px">Open Current Location Page</a>
+</div></section>`;
+  return htmlShell({
+    title: "Location Page Moved | Apex Grid Engineering",
+    description: "This Apex Grid location page has moved to its current canonical Census-normalized URL.",
+    canonical,
+    schemaJson: [{
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      url: canonical,
+      name: "Apex Grid Engineering Location Page",
+    }],
+    extraHead: `<meta name="robots" content="noindex,follow" /><meta http-equiv="refresh" content="0;url=${esc(toPath)}" />`,
+    body: `${body}<span hidden data-legacy-location="${esc(fromPath)}"></span>`,
+  });
 }
 
 /** Non-HTML data fields must not contain markup. */
@@ -241,6 +320,7 @@ function assertNoMarkupCity(city: CityData) {
 }
 function statePage(state: StateData, cities: CityData[]): string {
   const stateCities = cities.filter((c) => c.stateSlug === state.slug);
+  const availableVerticals = verticalsForState(state.slug);
   const crumbs = [
     { name: "Home", href: "/" },
     { name: "Service Areas", href: "/locations/" },
@@ -261,6 +341,15 @@ ${breadcrumb(crumbs)}
   ).join("")}
   </div>
 </div></section>
+${availableVerticals.length ? `<section class="block"><div class="container">
+  <h2>Architecture &amp; Construction <em>Coverage</em></h2>
+  <div class="grid2">${availableVerticals
+    .map(
+      (vertical) =>
+        `<a class="card" href="${verticalStateUrl(vertical, state.slug)}"><div class="label">${esc(vertical.shortName)}</div><h3>${esc(vertical.name)} in ${esc(state.name)}</h3><p>Browse incorporated-city service areas backed by verified ${vertical.slug === "architecture" ? "architect" : "contractor"} credentials.</p></a>`,
+    )
+    .join("")}</div>
+</div></section>` : ""}
 <section class="block"><div class="container">
   <h2>${esc(state.name)} <em>Design Environment</em></h2>
   <div class="statgrid">
@@ -310,6 +399,14 @@ ${breadcrumb(crumbs)}
   <p class="lede">Apex Grid provides MEP, structural, civil, and energy-compliance engineering across 49 states through multi-state PE licensure — backed by over 15 years of expertise. Every state page below covers the adopted codes, climate drivers, and permitting landscape that shape design there.</p>
 </div></section>
 <section class="block"><div class="container">
+  <h2>One Organization, <em>Three Divisions</em></h2>
+  <div class="grid3">
+    <a class="card" href="/locations/"><div class="label">Engineering</div><h3>Engineering Service Areas</h3><p>MEP, structural, civil, and energy-code services across 49 licensed states.</p></a>
+    <a class="card" href="/architecture/locations/"><div class="label">Architecture</div><h3>Architectural Design Locations</h3><p>City and state pages where supplied architect credentials support regulated design services.</p></a>
+    <a class="card" href="/general-contracting/locations/"><div class="label">PCM Construction Delivery</div><h3>General Contracting Locations</h3><p>Commercial construction service areas backed by PCM's supplied contractor licenses.</p></a>
+  </div>
+</div></section>
+<section class="block"><div class="container">
   <h2>Major <em>Metro Markets</em></h2>
   <div class="grid3">
   ${cities
@@ -354,10 +451,46 @@ function cityLitePage(state: StateData, city: DirectoryCity, siblings: Directory
     { name: state.name, href: `/locations/${state.slug}/` },
     { name: city.name },
   ];
-  const idx = siblings.findIndex((c) => c.slug === city.slug);
-  const nearby = siblings.filter((_, i) => i !== idx && Math.abs(i - idx) <= 5).slice(0, 10);
+  const nearby =
+    Number.isFinite(city.lat) && Number.isFinite(city.lng)
+      ? siblings
+          .filter((item) => item.slug !== city.slug && Number.isFinite(item.lat) && Number.isFinite(item.lng))
+          .map((item) => ({
+            city: item,
+            distance: Math.hypot((item.lat ?? 0) - (city.lat ?? 0), (item.lng ?? 0) - (city.lng ?? 0)),
+          }))
+          .sort((a, b) => a.distance - b.distance)
+          .slice(0, 10)
+          .map(({ city: item }) => item)
+      : siblings.filter((item) => item.slug !== city.slug).slice(0, 10);
   const curatedInState = curated.filter((c) => c.stateSlug === state.slug);
-  const popStr = city.pop.toLocaleString("en-US");
+  const populationContext = city.pop ? ` (population approximately ${city.pop.toLocaleString("en-US")})` : "";
+  const availableVerticals = verticalsForState(state.slug);
+  const faqs = [
+    {
+      q: `Does Apex Grid provide engineering services in ${city.name}, ${state.abbrev}?`,
+      a: `Yes. Apex Grid provides MEP, structural, civil, and energy-code engineering for qualifying ${city.name} projects under its multi-state PE licensure. The team confirms the applicable local code editions, amendments, and permit requirements before design begins.`,
+    },
+    {
+      q: `Which building code applies to a project in ${city.name}?`,
+      a: `${state.name}'s researched statewide baseline is ${state.buildingCode.baseCode}. ${city.name} may enforce local amendments or a different adoption schedule, so Apex Grid verifies the governing code directly with the local permitting jurisdiction at project kickoff.`,
+    },
+    {
+      q: `Can Apex Grid coordinate engineering with architecture or construction in ${city.name}?`,
+      a: availableVerticals.length
+        ? `Yes. In ${state.name}, Apex Grid can coordinate engineering with ${availableVerticals.map((vertical) => vertical.shortName.toLowerCase()).join(" and ")} where the supplied professional and contractor credentials support the regulated scope.`
+        : `Apex Grid coordinates engineering with the project's architect and contractor. Regulated architecture and construction services are offered only after the team confirms credential coverage for the project state and scope.`,
+    },
+  ];
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
+    })),
+  };
   const svcSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -371,7 +504,23 @@ ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
   <p class="kicker">${esc(state.name)} Service Area</p>
   <h1>Engineering Services <span class="dim">in ${esc(city.name)}, ${esc(state.abbrev)}</span></h1>
-  <p class="lede">Licensed MEP, structural, civil, and energy-compliance engineering for ${esc(city.name)} projects (pop. ${popStr}) — designed to the ${esc(state.buildingCode.baseCode)} and permitted with the local jurisdiction. We confirm ${esc(city.name)}'s governing code editions and any local amendments with the permit office at project kickoff.</p>
+  <p class="lede">Licensed MEP, structural, civil, and energy-compliance engineering for ${esc(city.name)} projects${esc(populationContext)} — designed to the ${esc(state.buildingCode.baseCode)} and permitted with the local jurisdiction. We confirm ${esc(city.name)}'s governing code editions and any local amendments with the permit office at project kickoff.</p>
+</div></section>
+<section class="block"><div class="container">
+  <h2>One Organization, <em>Connected Delivery</em></h2>
+  <div class="grid3">
+    <a class="card" href="/locations/${state.slug}/${city.slug}/"><div class="label">Engineering</div><h3>Engineering in ${esc(city.name)}</h3><p>MEP, structural, civil, and energy-code services.</p></a>
+    ${availableVerticals
+      .map(
+        (vertical) =>
+          `<a class="card" href="${verticalCityUrl(vertical, state.slug, city.slug)}"><div class="label">${esc(vertical.shortName)}</div><h3>${esc(vertical.name)} in ${esc(city.name)}</h3><p>Verified regulated-service coverage in ${esc(state.name)}.</p></a>`,
+      )
+      .join("")}
+  </div>
+</div></section>
+<section class="block"><div class="container faq">
+  <h2>${esc(city.name)} Engineering <em>FAQs</em></h2>
+  ${faqs.map((faq) => `<details><summary>${esc(faq.q)}</summary><div class="a">${esc(faq.a)}</div></details>`).join("")}
 </div></section>
 <section class="block"><div class="container">
   <h2>Services for <em>${esc(city.name)}</em> Projects</h2>
@@ -418,7 +567,7 @@ ${breadcrumb(crumbs)}
     title: `Engineering Services in ${city.name}, ${state.abbrev} | MEP, Structural, Civil | Apex Grid`,
     description: `Licensed MEP, structural, civil, and energy-compliance engineering serving ${city.name}, ${state.abbrev} under the ${state.buildingCode.baseCode}. Fast quotes, permit-ready documents.`,
     canonical: `${SITE}/locations/${state.slug}/${city.slug}/`,
-    schemaJson: [orgSchema, svcSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [orgSchema, svcSchema, faqSchema, breadcrumbSchema(crumbs)],
     body,
   });
 }
@@ -432,14 +581,27 @@ function blogPostPage(post: BlogPost): string {
   const dateStr = new Date(post.date + "T12:00:00Z").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
     datePublished: post.date,
+    dateModified: post.date,
+    articleSection: post.tag,
     author: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
     publisher: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
     mainEntityOfPage: `${SITE}/blog/${post.slug}/`,
   };
+  const faqSchema = post.faqs?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: post.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.q,
+          acceptedAnswer: { "@type": "Answer", text: faq.a },
+        })),
+      }
+    : null;
   const others = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 3);
   const body = `
 ${breadcrumb(crumbs)}
@@ -449,6 +611,10 @@ ${breadcrumb(crumbs)}
   <p class="lede">${esc(post.description)}</p>
 </div></section>
 <section class="block"><div class="container"><div class="prose">${post.html}</div></div></section>
+${post.faqs?.length ? `<section class="block"><div class="container faq">
+  <h2>Quick <em>Answers</em></h2>
+  ${post.faqs.map((faq) => `<details><summary>${esc(faq.q)}</summary><div class="a">${esc(faq.a)}</div></details>`).join("")}
+</div></section>` : ""}
 <section class="block"><div class="container">
   <h2>More from the <em>Blog</em></h2>
   <div class="grid3">
@@ -466,7 +632,7 @@ ${breadcrumb(crumbs)}
     title: `${post.title} | Apex Grid Engineering Blog`,
     description: post.description,
     canonical: `${SITE}/blog/${post.slug}/`,
-    schemaJson: [orgSchema, articleSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [orgSchema, articleSchema, ...(faqSchema ? [faqSchema] : []), breadcrumbSchema(crumbs)],
     body,
   });
 }
@@ -479,7 +645,7 @@ ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
   <p class="kicker">Insights &amp; Guidance</p>
   <h1>The Apex Grid <span class="dim">Blog</span></h1>
-  <p class="lede">Practical engineering guidance on codes, permitting, coordination, and multi-state design — written by the team that stamps the drawings.</p>
+   <p class="lede">Practical guidance on architecture, engineering, construction delivery, codes, permitting, coordination, and multi-state design — written by the team doing the work.</p>
 </div></section>
 <section class="block"><div class="container">
   <div class="grid2">
@@ -506,7 +672,7 @@ ${breadcrumb(crumbs)}
   return htmlShell({
     title: "Blog | Engineering, Codes & Permitting Insights | Apex Grid",
     description:
-      "Practical articles on building codes, energy compliance, MEP coordination, structural design, and multi-state permitting from Apex Grid Engineering.",
+       "Practical articles on architecture, engineering, construction delivery, building codes, energy compliance, MEP coordination, and multi-state permitting from Apex Grid.",
     canonical: `${SITE}/blog/`,
     schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
     body,
@@ -598,6 +764,9 @@ function u(loc: string, lastmod: string, changefreq: string, priority: string): 
 }
 
 function writeSingleSitemap(filename: string, urls: string[]): void {
+  if (urls.length > 50_000) {
+    throw new Error(`${filename} exceeds the 50,000-URL sitemap limit (${urls.length})`);
+  }
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`;
   fs.writeFileSync(path.join(PUBLIC, filename), xml);
 }
@@ -750,6 +919,21 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     locationsUrls.push(u(`${SITE}/locations/${lsp.stateSlug}/${lsp.citySlug}/${lsp.serviceSlug}/`, today, "monthly", "0.7"));
   }
 
+  const verticalLocationUrls = new Map<string, string[]>();
+  for (const vertical of LOCATION_VERTICALS) {
+    const urls = [
+      u(`${SITE}/${vertical.slug}/`, today, "monthly", "0.9"),
+      u(`${SITE}/${vertical.slug}/locations/`, today, "monthly", "0.8"),
+    ];
+    for (const state of states.filter((entry) => verticalAvailableInState(vertical, entry.slug))) {
+      urls.push(u(`${SITE}${verticalStateUrl(vertical, state.slug)}`, today, "monthly", "0.7"));
+      for (const city of allDirectoryCitiesForState(state, directory, cities)) {
+        urls.push(u(`${SITE}${verticalCityUrl(vertical, state.slug, city.slug)}`, today, "monthly", "0.6"));
+      }
+    }
+    verticalLocationUrls.set(vertical.slug, urls);
+  }
+
   // ── Write individual sitemaps ────────────────────────────────────────────
   const sitemaps: Array<{ name: string; urls: string[] }> = [
     { name: "sitemap-core.xml",       urls: coreUrls },
@@ -758,7 +942,32 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     { name: "sitemap-solutions.xml",  urls: solutionsUrls },
     { name: "sitemap-resources.xml",  urls: resourcesUrls },
     { name: "sitemap-locations.xml",  urls: locationsUrls },
+    {
+      name: "sitemap-architecture-locations.xml",
+      urls: verticalLocationUrls.get("architecture") ?? [],
+    },
+    {
+      name: "sitemap-general-contracting-locations.xml",
+      urls: verticalLocationUrls.get("general-contracting") ?? [],
+    },
   ];
+  const seenUrls = new Set<string>();
+  const duplicateUrls: string[] = [];
+  for (const sitemap of sitemaps) {
+    sitemap.urls = sitemap.urls.filter((entry) => {
+      const loc = entry.match(/<loc>([^<]+)<\/loc>/)?.[1];
+      if (!loc) throw new Error(`Malformed sitemap URL entry in ${sitemap.name}`);
+      if (seenUrls.has(loc)) {
+        duplicateUrls.push(loc);
+        return false;
+      }
+      seenUrls.add(loc);
+      return true;
+    });
+  }
+  if (duplicateUrls.length) {
+    console.log(`Sitemap quality check: removed ${duplicateUrls.length} duplicate URL entries.`);
+  }
   for (const { name, urls } of sitemaps) {
     writeSingleSitemap(name, urls);
   }
@@ -2456,6 +2665,7 @@ async function main() {
   const states = await loadStates();
   const cities = await loadCities();
   const directory = loadDirectory();
+  validateDirectory(directory, states);
   const serviceSlugs = new Set(SERVICES.map((s) => s.slug));
   for (const s of states) {
     assertSlug(s.slug);
@@ -2467,6 +2677,11 @@ async function main() {
     if (serviceSlugs.has(c.slug)) throw new Error(`City slug collides with a service slug: ${c.slug}`);
     if (!states.some((s) => s.slug === c.stateSlug)) throw new Error(`City ${c.slug} references unknown state: ${c.stateSlug}`);
   }
+  fs.mkdirSync(PUBLIC, { recursive: true });
+  fs.writeFileSync(
+    path.join(PUBLIC, "legacy-location-redirects.json"),
+    `${JSON.stringify(LEGACY_LOCATION_REDIRECTS, null, 2)}\n`,
+  );
   fs.rmSync(OUT, { recursive: true, force: true });
   fs.mkdirSync(OUT, { recursive: true });
   fs.writeFileSync(path.join(OUT, "index.html"), hubPage(states, cities));
@@ -2503,6 +2718,55 @@ async function main() {
       fs.mkdirSync(cdir, { recursive: true });
       fs.writeFileSync(path.join(cdir, "index.html"), cityLitePage(s, d, dirCities, cities));
       pages++;
+    }
+  }
+  for (const [fromPath, toPath] of Object.entries(LEGACY_LOCATION_REDIRECTS)) {
+    const legacyDir = path.join(PUBLIC, fromPath.replace(/^\/|\/$/g, ""));
+    fs.mkdirSync(legacyDir, { recursive: true });
+    fs.writeFileSync(path.join(legacyDir, "index.html"), legacyLocationRedirectPage(fromPath, toPath));
+    pages++;
+  }
+  let verticalPages = 0;
+  for (const vertical of LOCATION_VERTICALS) {
+    const verticalDir = path.join(PUBLIC, vertical.slug);
+    fs.rmSync(verticalDir, { recursive: true, force: true });
+    fs.mkdirSync(verticalDir, { recursive: true });
+    fs.writeFileSync(path.join(verticalDir, "index.html"), verticalLandingPage(vertical));
+    pages++;
+    verticalPages++;
+
+    const locationsDir = path.join(verticalDir, "locations");
+    fs.mkdirSync(locationsDir, { recursive: true });
+    const cityCountByState = Object.fromEntries(
+      states
+        .filter((state) => verticalAvailableInState(vertical, state.slug))
+        .map((state) => [state.slug, allDirectoryCitiesForState(state, directory, cities).length]),
+    );
+    fs.writeFileSync(path.join(locationsDir, "index.html"), verticalHubPage(vertical, states, cityCountByState));
+    pages++;
+    verticalPages++;
+
+    for (const state of states.filter((entry) => verticalAvailableInState(vertical, entry.slug))) {
+      const stateCities = allDirectoryCitiesForState(state, directory, cities);
+      const stateDir = path.join(locationsDir, state.slug);
+      fs.mkdirSync(stateDir, { recursive: true });
+      fs.writeFileSync(path.join(stateDir, "index.html"), verticalStatePage(vertical, state, stateCities));
+      pages++;
+      verticalPages++;
+
+      const curatedBySlug = new Map(
+        cities.filter((city) => city.stateSlug === state.slug).map((city) => [city.slug, city]),
+      );
+      for (const city of stateCities) {
+        const cityDir = path.join(stateDir, city.slug);
+        fs.mkdirSync(cityDir, { recursive: true });
+        fs.writeFileSync(
+          path.join(cityDir, "index.html"),
+          verticalCityPage(vertical, state, city, stateCities, curatedBySlug.get(city.slug)),
+        );
+        pages++;
+        verticalPages++;
+      }
     }
   }
   // Top-level discipline pages
@@ -2776,23 +3040,23 @@ async function main() {
 
   writeSitemap(states, cities, directory);
 
-  // Ping Bing (and legacy Google endpoint) so crawlers know the sitemap changed immediately.
-  // Google deprecated their ping URL in 2023 — GSC + robots.txt Sitemap directive is the
-  // correct Google discovery path. Bing's ping is still active and supported.
-  const sitemapIndexUrl = `${SITE}/sitemap_index.xml`;
-  try {
-    const bingRes = await fetch(`https://www.bing.com/ping?sitemap=${encodeURIComponent(sitemapIndexUrl)}`);
-    console.log(`Bing ping: ${bingRes.status}`);
-  } catch {
-    console.log("Bing ping skipped (no network).");
-  }
+  if (process.env.SKIP_SEARCH_ENGINE_SUBMISSION === "1") {
+    console.log("Search-engine submission skipped by SKIP_SEARCH_ENGINE_SUBMISSION=1.");
+  } else {
+    // Google deprecated their ping URL in 2023. GSC and the robots.txt sitemap
+    // directive are the correct Google discovery paths; Bing still accepts a ping.
+    const sitemapIndexUrl = `${SITE}/sitemap_index.xml`;
+    try {
+      const bingRes = await fetch(`https://www.bing.com/ping?sitemap=${encodeURIComponent(sitemapIndexUrl)}`);
+      console.log(`Bing ping: ${bingRes.status}`);
+    } catch {
+      console.log("Bing ping skipped (no network).");
+    }
 
-  // IndexNow: submit all generated URLs to Bing/Yandex for instant discovery.
-  // The API key file must be reachable at https://{host}/{key}.txt — served statically
-  // from public/. Submissions are silently skipped when no network is available.
-  const INDEXNOW_KEY = "b3d4e5f6a7c8d9e0f1a2b3c4d5e6f7a8";
-  const INDEXNOW_HOST = new URL(SITE).hostname; // "apexgrideng.com"
-  try {
+    // Submit all generated URLs to IndexNow in protocol-safe batches.
+    const INDEXNOW_KEY = "b3d4e5f6a7c8d9e0f1a2b3c4d5e6f7a8";
+    const INDEXNOW_HOST = new URL(SITE).hostname;
+    try {
     // Collect all <loc> values from every sitemap file the index references.
     const indexXml = fs.readFileSync(path.join(PUBLIC, "sitemap_index.xml"), "utf8");
     const sitemapNames = [...indexXml.matchAll(/<loc>[^<]*\/([^/<]+\.xml)<\/loc>/g)].map((m) => m[1]);
@@ -2826,13 +3090,14 @@ async function main() {
       }
       console.log(`IndexNow: submitted ${submitted} URLs total.`);
     }
-  } catch {
-    console.log("IndexNow skipped (no network).");
+    } catch {
+      console.log("IndexNow skipped (no network).");
+    }
   }
 
   const dirCount = Object.values(directory).reduce((a, v) => a + v.length, 0);
   const disciplineSubpageCount = DISCIPLINE_HUBS.reduce((a, h) => a + h.subpages.length, 0);
-  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PARTNER_PAGES.length} construction partner pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${INDUSTRY_DISCIPLINE_PAGES.length} industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, 1 sitemap page + sitemap.xml`);
+  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${verticalPages} architecture/GC vertical pages, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PARTNER_PAGES.length} construction partner pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${INDUSTRY_DISCIPLINE_PAGES.length} industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, 1 sitemap page + sitemap.xml`);
 }
 
 main().catch((e) => {
@@ -2951,6 +3216,24 @@ function cityPage(state: StateData, city: CityData, siblingCities: CityData[]): 
     { name: city.name },
   ];
   const nearby = siblingCities.filter((c) => c.slug !== city.slug);
+  const availableVerticals = verticalsForState(state.slug);
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: city.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
+    })),
+  };
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `Engineering Services in ${city.name}, ${state.abbrev}`,
+    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    areaServed: { "@type": "City", name: `${city.name}, ${state.abbrev}` },
+    serviceType: "MEP, structural, civil, and energy-code engineering",
+  };
   const body = `
 ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
@@ -2977,6 +3260,22 @@ ${breadcrumb(crumbs)}
   <div class="prose" style="margin-top:24px"><p>${esc(city.codes.amendments)}</p><p>${esc(city.marketNotes)}</p></div>
 </div></section>
 <section class="block"><div class="container">
+  <h2>One Organization, <em>Connected Delivery</em></h2>
+  <div class="grid3">
+    <a class="card" href="/locations/${state.slug}/${city.slug}/"><div class="label">Engineering</div><h3>Engineering in ${esc(city.name)}</h3><p>MEP, structural, civil, and energy-code services.</p></a>
+    ${availableVerticals
+      .map(
+        (vertical) =>
+          `<a class="card" href="${verticalCityUrl(vertical, state.slug, city.slug)}"><div class="label">${esc(vertical.shortName)}</div><h3>${esc(vertical.name)} in ${esc(city.name)}</h3><p>Verified regulated-service coverage in ${esc(state.name)}.</p></a>`,
+      )
+      .join("")}
+  </div>
+</div></section>
+<section class="block"><div class="container faq">
+  <h2>${esc(city.name)} Engineering <em>FAQs</em></h2>
+  ${city.faqs.map((faq) => `<details><summary>${esc(faq.q)}</summary><div class="a">${esc(faq.a)}</div></details>`).join("")}
+</div></section>
+<section class="block"><div class="container">
   <h2>More <em>Locations</em></h2>
   <div class="linkrow">${nearby
     .map((n) => `<a href="/locations/${n.stateSlug}/${n.slug}/">${esc(n.name)}</a>`)
@@ -2992,7 +3291,7 @@ ${breadcrumb(crumbs)}
     title: `Engineering Services in ${city.name}, ${state.abbrev} | MEP, Structural, Civil, Energy | Apex Grid`,
     description: `Licensed MEP, structural, civil, and energy-compliance engineering in ${city.name}, ${state.abbrev}. Permitting through ${city.ahj.office} under the ${city.codes.building.split(",")[0].split("(")[0].trim()}.`,
     canonical: `${SITE}/locations/${state.slug}/${city.slug}/`,
-    schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [orgSchema, serviceSchema, faqSchema, breadcrumbSchema(crumbs)],
     body,
   });
 }

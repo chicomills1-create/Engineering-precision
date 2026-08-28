@@ -63,6 +63,13 @@ app.use(
 // express.static resolves /structural-engineering/ → dist/public/structural-engineering/index.html
 // before Express falls through to the SPA catch-all below.
 if (fs.existsSync(staticRoot)) {
+  const legacyRedirectsPath = path.join(staticRoot, "legacy-location-redirects.json");
+  if (fs.existsSync(legacyRedirectsPath)) {
+    const legacyRedirects = JSON.parse(fs.readFileSync(legacyRedirectsPath, "utf8")) as Record<string, string>;
+    for (const [from, to] of Object.entries(legacyRedirects)) {
+      app.get(from, (_req, res) => res.redirect(301, to));
+    }
+  }
   app.use(express.static(staticRoot, { index: "index.html", redirect: false }));
 }
 

@@ -9,6 +9,8 @@ export interface BlogPost {
   minutes: number;
   /** HTML body — trusted authored content (no user input). */
   html: string;
+  /** Optional answer-focused FAQ block rendered visibly and in FAQPage JSON-LD. */
+  faqs?: Array<{ q: string; a: string }>;
 }
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -165,5 +167,115 @@ export const BLOG_POSTS: BlogPost[] = [
 <p>Successful programs split the drawing set into a protected core — the brand-critical layout and systems concept — and a localization layer that is expected to change: foundations, lateral systems, envelope insulation, equipment efficiencies, and site design. Each new jurisdiction gets a code study before drawings move: adopted editions, local amendments, AHJ submittal quirks, and utility requirements, documented once and reused across every site in that territory.</p>
 <h2>Licensure is the quiet constraint</h2>
 <p>Every sheet needs a stamp from an engineer licensed in that state. Programs that rely on ad-hoc local engineers per site trade away consistency and schedule; programs that work with a multi-state licensed firm keep one engineering voice across the whole map. With PE licensure across 49 states, that is precisely the model we run — one team, one standard of documentation, localized correctly for wherever the next site lands.</p>`,
+  },
+  {
+    slug: "architectural-design-vs-engineering-commercial-projects",
+    title: "Architecture vs. Engineering: Who Owns What on a Commercial Project?",
+    description:
+      "A practical guide to the difference between architectural design and engineering—and why coordinating both teams early makes commercial projects easier to permit and build.",
+    date: "2026-08-27",
+    tag: "Architecture",
+    minutes: 7,
+    html: `
+<p>Commercial projects rarely fail because the architect or engineer does not know their discipline. They fail when the handoff between disciplines happens too late. Understanding who owns which decision helps an owner assemble the right team, set a realistic schedule, and avoid discovering coordination problems after the drawings are already in plan check.</p>
+<h2>What the architect typically leads</h2>
+<p>Architecture typically leads programming, space planning, the building's appearance and user experience, materials, room layouts, doors and finishes, occupancy planning, accessibility coordination, and the overall construction-document set. The architect coordinates the permit set as a whole; that does not mean the architect performs every engineering calculation. It means the drawings need to read as one project, with aligned room names, rated assemblies, ceiling heights, equipment clearances, and life-safety information.</p>
+<h2>What the engineers typically lead</h2>
+<p>Engineers design the systems that make a building safe, durable, comfortable, and code-compliant. Structural engineering addresses gravity and lateral loads, foundations, framing, and existing-building capacity. Mechanical engineering addresses heating, cooling, ventilation, controls, and equipment. Electrical engineering covers service sizing, distribution, lighting, emergency power, and coordination. Civil engineering addresses grading, drainage, utilities, paving, and site access. Energy-code documentation connects several of those decisions to the adopted compliance path.</p>
+<p>Those responsibilities meet at important interfaces. A wall layout affects beam spans. Ceiling height affects duct routing. Window proportions affect energy performance. Equipment locations affect structure, fire access, and electrical distribution. The best teams treat those interfaces as design decisions, not as tasks passed from one consultant to another.</p>
+<h2>What owners should coordinate early</h2>
+<p>Require the team to address the code and occupancy strategy, structural grid and major openings, mechanical and electrical equipment zones, and civil utility approach before schematic design becomes expensive to change. For an existing building, add field verification of clear heights, framing, electrical service, rooftop equipment, utility entries, and accessible routes. A short site investigation can prevent a long change-order conversation.</p>
+<h2>The value of one coordinated team</h2>
+<p>Architecture and engineering remain distinct professional responsibilities, but they do not need to be separate project conversations. When the disciplines work under one accountable organization, conflicts can be resolved while the design is still flexible. Apex Grid coordinates architecture with structural, MEP, civil, and energy-code engineers so owners receive a coherent permit package rather than a stack of documents reconciled in the field.</p>`,
+    faqs: [
+      {
+        q: "What is the difference between architecture and engineering on a commercial project?",
+        a: "Architecture leads the building program, space planning, appearance, materials, life-safety coordination, and overall construction-document set. Engineering designs structural, mechanical, electrical, civil, and energy-code systems and verifies their technical performance and code requirements.",
+      },
+      {
+        q: "Should an architect and engineer be hired at the same time?",
+        a: "Usually, yes. Bringing engineering disciplines in during schematic design helps coordinate structure, equipment, utilities, energy performance, and accessibility before those decisions become expensive to revise.",
+      },
+      {
+        q: "Can one firm provide both architectural design and engineering?",
+        a: "Some firms, including Apex Grid for qualifying project scopes and states, coordinate architecture and engineering under one organization. The team should still identify each licensed professional's responsibility and confirm the governing jurisdiction's requirements before work begins.",
+      },
+    ],
+  },
+  {
+    slug: "commercial-general-contractor-preconstruction-checklist",
+    title: "Commercial General Contractor Pre-Construction Checklist",
+    description:
+      "The pre-construction decisions that protect a commercial project's budget and schedule before a general contractor mobilizes to the site.",
+    date: "2026-08-27",
+    tag: "Construction Delivery",
+    minutes: 8,
+    html: `
+<p>Pre-construction is where a commercial project earns or loses its schedule. A general contractor can build efficiently only after the team has clarified the scope, existing conditions, permit path, budget, long-lead items, and decision owners. This checklist is designed for owners, developers, and facilities teams evaluating a tenant improvement, renovation, or multi-site rollout.</p>
+<h2>1. Confirm the project brief</h2>
+<p>Write down what the finished space must do before discussing finishes. Include occupancy, headcount, equipment, hours of operation, security, technology, storage, accessibility, phasing, and turnover requirements. For an occupied facility, document which areas must remain open and what temporary protection, dust control, shutdown, or after-hours work the operation requires.</p>
+<h2>2. Verify existing conditions</h2>
+<p>Previous drawings are useful evidence, not proof. Walk the site and compare the documents to field conditions. Verify ceiling heights, structure, electrical service, HVAC capacity, plumbing locations, fire protection, utility entries, hazardous-material information, and material access. Unknown conditions should appear as explicit allowances or investigation items in the budget.</p>
+<h2>3. Establish a permit-ready scope</h2>
+<p>Define which drawings and calculations are included, who owns each discipline, and which jurisdiction reviews the work. The permit set should coordinate architecture, structural, MEP, civil, accessibility, energy code, fire-life-safety, and special inspections where applicable. A contractor estimate is only as reliable as the scope it prices; incomplete documents produce a low first number followed by change orders.</p>
+<h2>4. Build the budget around risk</h2>
+<p>Separate known scope, allowances, alternates, escalation assumptions, owner-furnished items, and contingency. Identify cost drivers such as electrical service upgrades, HVAC replacement, structural reinforcement, hazardous materials, utility relocation, long-lead equipment, occupied areas, and local permit conditions. A useful budget explains uncertainty instead of hiding it inside one large contingency.</p>
+<h2>5. Lock the schedule logic</h2>
+<p>Map design completion, permit submission, plan review, procurement, fabrication, mobilization, inspections, commissioning, and turnover. Identify long-lead equipment before publishing the final schedule. If the project is phased, show the handoffs between phases and the protection measures needed to keep the facility operational. Name the dates the owner must make decisions; silent decisions are a frequent source of delay.</p>
+<h2>6. Choose the delivery relationship</h2>
+<p>Ask whether the project needs a traditional general contractor, construction management, program management, or a combination. The answer depends on the owner's in-house capacity, how much design remains open, the number of locations, and how much early estimating and constructability review the project needs. PCM, Apex Grid's construction delivery branch, evaluates those factors before proposing a delivery path for a commercial project.</p>
+<h2>Pre-construction is a decision process</h2>
+<p>The most valuable pre-construction deliverable is a current record of scope, assumptions, risks, decisions, and next actions that the design and field teams can use. When the owner, architect, engineers, and contractor review that record together, the project starts with fewer surprises and a clearer path to turnover.</p>`,
+    faqs: [
+      {
+        q: "What should a commercial general contractor review before giving a final price?",
+        a: "The contractor should review current drawings and specifications, existing conditions, permit scope, phasing and occupancy constraints, long-lead items, owner-furnished equipment, allowances, site access, and the schedule assumptions that drive labor and procurement.",
+      },
+      {
+        q: "Why is pre-construction important for a tenant improvement?",
+        a: "Tenant-improvement projects often depend on existing structure and building systems. Early field verification and constructability review can identify service-capacity limits, hidden conditions, shutdown requirements, and phasing constraints before they become change orders.",
+      },
+      {
+        q: "What does PCM do before construction starts?",
+        a: "PCM, Apex Grid's construction delivery branch, can evaluate scope, constructability, budget, schedule, procurement, phasing, and jurisdictional requirements before proposing the appropriate commercial construction-delivery path.",
+      },
+    ],
+  },
+  {
+    slug: "permit-ready-commercial-construction-documents",
+    title: "What Makes Commercial Construction Documents Permit-Ready?",
+    description:
+      "A practical review of the drawings, calculations, coordination, and jurisdiction checks that make a commercial permit package easier to review.",
+    date: "2026-08-27",
+    tag: "Permitting",
+    minutes: 7,
+    html: `
+<p>“Permit-ready” does not mean every reviewer will approve a set without comments. It means the package is complete, internally coordinated, legible, and based on the code and submittal requirements that actually govern the project. A complete first submission gives the jurisdiction something it can review, while a collection of partial drawings creates avoidable rounds of questions.</p>
+<h2>Start with the jurisdiction, not a template</h2>
+<p>Before drawing, confirm the project address, reviewing authority, occupancy, construction type, scope, adopted building and energy codes, zoning constraints, accessibility requirements, fire-life-safety process, utility requirements, and digital submittal rules. State-level information is a starting point only. Cities and counties can adopt amendments, use different checklists, or require separate approvals.</p>
+<h2>Coordinate the core drawing set</h2>
+<p>The permit package should tell one consistent story. The cover sheet, code analysis, life-safety plans, floor plans, reflected ceiling plans, elevations, sections, details, schedules, and specifications should use the same room names, areas, door numbers, rated assemblies, and equipment designations. Structural, mechanical, electrical, plumbing, civil, and architectural sheets should agree on penetrations, equipment locations, clearances, utility routes, and accessible paths.</p>
+<h2>Include the calculations reviewers need</h2>
+<p>Depending on the scope, that can include structural calculations, HVAC loads, energy-code compliance, electrical loads, lighting controls, plumbing fixture counts, fire-flow or site calculations, stormwater documentation, accessibility analysis, and special-inspection information. The exact list depends on the adopted code and jurisdiction. A transmittal that indexes the calculations helps the reviewer find the evidence behind the drawings.</p>
+<h2>Resolve interface details before submittal</h2>
+<p>Focused review should cover rated wall and floor penetrations, shaft details, roof and parapet conditions, accessible routes, restroom clearances, equipment disconnects, electrical working clearances, drainage slopes, utility connections, and energy-code control sequences. These details deserve an interdisciplinary review instead of being left to a generic checklist.</p>
+<h2>Make review easy to follow</h2>
+<p>Use a consistent sheet index, revision block, graphic scale, north arrow, keynotes, legends, and detail references. Name digital files as the jurisdiction requests and keep calculations, specifications, and forms organized. When comments return, respond with a numbered matrix identifying the comment, answer, revised sheet, and revision explanation.</p>
+<h2>Permit-ready is a team outcome</h2>
+<p>Architecture, engineering, and construction delivery each see different risks in a permit set. Apex Grid coordinates architecture with structural, MEP, civil, and energy-code engineering, while PCM can review constructability and delivery implications for qualifying construction scopes. That connected review does not remove jurisdictional discretion, but it gives the reviewer a clearer and more reliable package.</p>`,
+    faqs: [
+      {
+        q: "What does permit-ready mean for commercial construction documents?",
+        a: "Permit-ready means the package is complete, internally coordinated, legible, and based on the governing jurisdiction's current code and submittal requirements. It does not guarantee approval without comments, because the authority having jurisdiction makes the final determination.",
+      },
+      {
+        q: "What drawings are usually included in a commercial permit set?",
+        a: "The set commonly includes architectural, life-safety, structural, mechanical, electrical, plumbing, civil, accessibility, energy-code, and fire-protection information as required by the project scope and reviewing jurisdiction.",
+      },
+      {
+        q: "Who verifies local permit requirements?",
+        a: "The project team should verify exact requirements with the authority having jurisdiction before submittal. Apex Grid uses state-level researched code data as a planning baseline and confirms local amendments, forms, digital file rules, and review requirements for the specific project.",
+      },
+    ],
   },
 ];

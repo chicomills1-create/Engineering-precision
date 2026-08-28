@@ -332,7 +332,7 @@ export default function Home() {
 }
 
 const PAGE_META = {
-  title: "MEP, Structural & Civil Engineering Firm | Apex Grid Engineering",
-  description: "Permit-ready MEP, structural, and civil engineering for architects, contractors, and developers. 20+ engineers, 49-state PE licensure, 12–24 hr quote turnaround.",
+  title: "Engineering, Architecture & General Contracting | Apex Grid",
+  description: "Engineering, architectural design, and general contracting through PCM under one organization. Permit-ready coordination from concept through construction.",
   path: "/",
 };

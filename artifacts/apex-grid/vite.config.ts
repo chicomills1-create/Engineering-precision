@@ -52,7 +52,7 @@ function staticDirIndex() {
       server.middlewares.use((req, _res, next) => {
         if (req.url) {
           const [pathname, query] = req.url.split('?');
-          if (/^\/(locations|blog|resources|who-we-work-with|project-types|existing-building-engineering|permit-engineering|industries|solutions|government|guides|structural-engineering|mep-engineering|mechanical-engineering|electrical-engineering|plumbing-engineering|civil-engineering|geotechnical-engineering|capabilities|government-contracting|engineering-process|quality-control|professional-engineering|title-24|projects|engineering-reports|sitemap|engineering-glossary)(\/|$)/.test(pathname)) {
+          if (/^\/(locations|architecture|general-contracting|blog|resources|who-we-work-with|project-types|existing-building-engineering|permit-engineering|industries|solutions|government|guides|structural-engineering|mep-engineering|mechanical-engineering|electrical-engineering|plumbing-engineering|civil-engineering|geotechnical-engineering|capabilities|government-contracting|engineering-process|quality-control|professional-engineering|title-24|projects|engineering-reports|sitemap|engineering-glossary)(\/|$)/.test(pathname)) {
             const rewritten = pathname.endsWith('/')
               ? `${pathname}index.html`
               : !path.extname(pathname)
@@ -131,6 +131,15 @@ export default defineConfig({
     strictPort: true,
     host: '0.0.0.0',
     allowedHosts: true,
+    // Keep generated SEO routes previewable without asking Linux to watch
+    // tens of thousands of static HTML files for hot-reload changes.
+    watch: {
+      ignored: [
+        '**/public/locations/**',
+        '**/public/architecture/**',
+        '**/public/general-contracting/**',
+      ],
+    },
     fs: {
       strict: true,
     },

@@ -16,6 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Apex Grid Engineering","url":"https://apexgrideng.com","email":"info@apexgrideng.com","telephone":"+1-480-490-0064","address":{"@type":"PostalAddress","streetAddress":"22475 E Quintero Rd","addressLocality":"Queen Creek","addressRegion":"AZ","postalCode":"85142","addressCountry":"US"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Engineering Services in River Falls, WI","provider":{"@type":"ProfessionalService","name":"Apex Grid Engineering","url":"https://apexgrideng.com"},"areaServed":{"@type":"City","name":"River Falls, WI"},"serviceType":"Architectural, MEP, structural, civil, and energy-compliance design"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Apex Grid provide engineering services in River Falls, WI?","acceptedAnswer":{"@type":"Answer","text":"Yes. Apex Grid provides MEP, structural, civil, and energy-code engineering for qualifying River Falls projects under its multi-state PE licensure. The team confirms the applicable local code editions, amendments, and permit requirements before design begins."}},{"@type":"Question","name":"Which building code applies to a project in River Falls?","acceptedAnswer":{"@type":"Answer","text":"Wisconsin's researched statewide baseline is IBC with Wisconsin amendments (SPS chapters), historically a 2015 IBC vintage. River Falls may enforce local amendments or a different adoption schedule, so Apex Grid verifies the governing code directly with the local permitting jurisdiction at project kickoff."}},{"@type":"Question","name":"Can Apex Grid coordinate engineering with architecture or construction in River Falls?","acceptedAnswer":{"@type":"Answer","text":"Apex Grid coordinates engineering with the project's architect and contractor. Regulated architecture and construction services are offered only after the team confirms credential coverage for the project state and scope."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://apexgrideng.com/"},{"@type":"ListItem","position":2,"name":"Service Areas","item":"https://apexgrideng.com/locations/"},{"@type":"ListItem","position":3,"name":"Wisconsin","item":"https://apexgrideng.com/locations/wisconsin/"},{"@type":"ListItem","position":4,"name":"River Falls"}]}</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -28,7 +29,7 @@ header{border-bottom:1px solid var(--border);background:hsl(0 0% 3%/.95);positio
 .nav{display:flex;align-items:center;justify-content:space-between;height:76px}
 .brand{display:flex;align-items:center;gap:12px;font-family:'Space Grotesk';font-weight:700;font-size:19px;letter-spacing:-.01em}
 .brand small{display:block;font-size:9px;letter-spacing:.3em;color:var(--muted);font-weight:500}
-.navlinks{display:flex;gap:28px;font-size:14px;color:hsl(0 0% 80%);align-items:center}
+.navlinks{display:flex;gap:18px;font-size:13px;color:hsl(0 0% 80%);align-items:center}
 .navlinks a:hover{color:var(--primary)}
 .cta{background:var(--primary);color:var(--primary-fg);font-weight:700;font-size:14px;padding:12px 24px;border-radius:2px}
 .cta:hover{background:hsl(0 72% 42%)}
@@ -37,7 +38,7 @@ header{border-bottom:1px solid var(--border);background:hsl(0 0% 3%/.95);positio
 .hero h1{font-size:clamp(34px,5vw,58px);font-weight:700;margin-bottom:24px}
 .hero h1 .dim{color:var(--muted)}
 .hero .lede{font-size:19px;color:hsl(0 0% 78%);max-width:760px;border-left:4px solid var(--primary);padding-left:22px}
-.breadcrumb{padding:20px 0 0;font-size:12px;font-family:'Space Grotesk';text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.breadcrumb{padding:20px 0 0;font-size:12px;font-family:'Space Grotesk';text-transform:uppercase;letter-spacing:.12em;color:var(--muted);overflow-wrap:anywhere}
 .breadcrumb a:hover{color:var(--primary)}
 .breadcrumb span{margin:0 8px;color:hsl(0 0% 30%)}
 section.block{padding:56px 0;border-bottom:1px solid var(--border)}
@@ -64,6 +65,14 @@ ul.scope li{background:var(--card);border:1px solid var(--border);padding:14px 1
 .ctaband p{color:var(--muted);margin-bottom:28px;max-width:640px}
 footer{border-top:1px solid var(--border);background:var(--card);padding:64px 0 32px;font-size:14px}
 .fgrid{display:grid;grid-template-columns:2fr 1fr 1.2fr 1fr 1fr;gap:32px}
+@media(max-width:1000px){.navlinks>a:not(.cta){display:none}}
+@media(max-width:600px){
+  .topbar .container{width:calc(100% - 24px)}
+  .brand small{display:none}
+  .navlinks{gap:8px}
+  .navlinks .cta{padding:10px 13px;font-size:11px;letter-spacing:.06em}
+  .hero h1{overflow-wrap:anywhere}
+}
 @media(max-width:800px){.fgrid{grid-template-columns:1fr 1fr}}
 footer h4{font-family:'Space Grotesk';font-size:12px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:18px}
 footer ul{list-style:none}
@@ -79,9 +88,9 @@ footer a:hover{color:var(--primary)}
 </head>
 <body>
 <header><div class="container nav">
-  <a class="brand" href="/"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;color:hsl(0 72% 48%)"><path d="M50 8L8 88h12l30-58 30 58h12L50 8z" fill="currentColor"/><path d="M50 40L30 78h8l12-24 12 24h8L50 40z" fill="currentColor" opacity="0.7"/><path d="M32 74h36v6H32z" fill="currentColor"/></svg><span>APEX GRID<small>ENGINEERING</small></span></a>
+  <a class="brand" href="/"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;color:hsl(0 72% 48%)"><path d="M50 8L8 88h12l30-58 30 58h12L50 8z" fill="currentColor"/><path d="M50 40L30 78h8l12-24 12 24h8L50 40z" fill="currentColor" opacity="0.7"/><path d="M32 74h36v6H32z" fill="currentColor"/></svg><span>APEX GRID<small>ENGINEERING · ARCHITECTURE · GC</small></span></a>
   <nav class="navlinks">
-    <a href="/about">About Us</a><a href="/portfolio">Portfolio</a><a href="/industries">Industries</a><a href="/services">Services</a><a href="/resources">Resources</a><a href="/blog/">Blog</a><a href="/locations/">Service Areas</a>
+    <a href="/services">Engineering</a><a href="/architecture/">Architecture</a><a href="/general-contracting/">General Contracting</a><a href="/industries">Industries</a><a href="/resources">Resources</a><a href="/locations/">Service Areas</a>
     <a class="cta" href="/contact">Contact Us</a>
   </nav>
 </div></header>
@@ -90,7 +99,18 @@ footer a:hover{color:var(--primary)}
 <section class="hero"><div class="container">
   <p class="kicker">Wisconsin Service Area</p>
   <h1>Engineering Services <span class="dim">in River Falls, WI</span></h1>
-  <p class="lede">Licensed MEP, structural, civil, and energy-compliance engineering for River Falls projects (pop. 17,802) — designed to the IBC with Wisconsin amendments (SPS chapters), historically a 2015 IBC vintage and permitted with the local jurisdiction. We confirm River Falls's governing code editions and any local amendments with the permit office at project kickoff.</p>
+  <p class="lede">Licensed MEP, structural, civil, and energy-compliance engineering for River Falls projects (population approximately 17,802) — designed to the IBC with Wisconsin amendments (SPS chapters), historically a 2015 IBC vintage and permitted with the local jurisdiction. We confirm River Falls's governing code editions and any local amendments with the permit office at project kickoff.</p>
+</div></section>
+<section class="block"><div class="container">
+  <h2>One Organization, <em>Connected Delivery</em></h2>
+  <div class="grid3">
+    <a class="card" href="/locations/wisconsin/river-falls/"><div class="label">Engineering</div><h3>Engineering in River Falls</h3><p>MEP, structural, civil, and energy-code services.</p></a>
+    
+  </div>
+</div></section>
+<section class="block"><div class="container faq">
+  <h2>River Falls Engineering <em>FAQs</em></h2>
+  <details><summary>Does Apex Grid provide engineering services in River Falls, WI?</summary><div class="a">Yes. Apex Grid provides MEP, structural, civil, and energy-code engineering for qualifying River Falls projects under its multi-state PE licensure. The team confirms the applicable local code editions, amendments, and permit requirements before design begins.</div></details><details><summary>Which building code applies to a project in River Falls?</summary><div class="a">Wisconsin&#39;s researched statewide baseline is IBC with Wisconsin amendments (SPS chapters), historically a 2015 IBC vintage. River Falls may enforce local amendments or a different adoption schedule, so Apex Grid verifies the governing code directly with the local permitting jurisdiction at project kickoff.</div></details><details><summary>Can Apex Grid coordinate engineering with architecture or construction in River Falls?</summary><div class="a">Apex Grid coordinates engineering with the project&#39;s architect and contractor. Regulated architecture and construction services are offered only after the team confirms credential coverage for the project state and scope.</div></details>
 </div></section>
 <section class="block"><div class="container">
   <h2>Services for <em>River Falls</em> Projects</h2>
@@ -119,7 +139,7 @@ footer a:hover{color:var(--primary)}
 </div></section>
 <section class="block"><div class="container">
   <h2>More <em>Wisconsin Locations</em></h2>
-  <div class="linkrow"><a href="/locations/wisconsin/fox-crossing/">Fox Crossing</a><a href="/locations/wisconsin/marshfield/">Marshfield</a><a href="/locations/wisconsin/wisconsin-rapids/">Wisconsin Rapids</a><a href="/locations/wisconsin/menasha/">Menasha</a><a href="/locations/wisconsin/kaukauna/">Kaukauna</a><a href="/locations/wisconsin/cudahy/">Cudahy</a><a href="/locations/wisconsin/ashwaubenon/">Ashwaubenon</a><a href="/locations/wisconsin/verona/">Verona</a><a href="/locations/wisconsin/bellevue/">Bellevue</a><a href="/locations/wisconsin/menomonie/">Menomonie</a><a href="/locations/wisconsin/">Wisconsin (statewide)</a></div>
+  <div class="linkrow"><a href="/locations/wisconsin/roberts/">Roberts</a><a href="/locations/wisconsin/hudson/">Hudson</a><a href="/locations/wisconsin/north-hudson/">North Hudson</a><a href="/locations/wisconsin/ellsworth/">Ellsworth</a><a href="/locations/wisconsin/prescott/">Prescott</a><a href="/locations/wisconsin/hammond/">Hammond</a><a href="/locations/wisconsin/somerset/">Somerset</a><a href="/locations/wisconsin/baldwin/">Baldwin</a><a href="/locations/wisconsin/new-richmond/">New Richmond</a><a href="/locations/wisconsin/bay-city/">Bay City</a><a href="/locations/wisconsin/">Wisconsin (statewide)</a></div>
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Build in River Falls with Apex Grid</h2>
@@ -130,10 +150,10 @@ footer a:hover{color:var(--primary)}
   <div class="fgrid">
     <div>
       <a class="brand" href="/" style="margin-bottom:18px"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;color:hsl(0 72% 48%)"><path d="M50 8L8 88h12l30-58 30 58h12L50 8z" fill="currentColor"/><path d="M50 40L30 78h8l12-24 12 24h8L50 40z" fill="currentColor" opacity="0.7"/><path d="M32 74h36v6H32z" fill="currentColor"/></svg><span>APEX GRID</span></a>
-      <p style="color:var(--muted);max-width:340px;margin-top:16px">De-risking projects from concept to permit. Integrated Architecture, MEP, Structural, and Civil design backed by licensed professionals.</p>
+       <p style="color:var(--muted);max-width:340px;margin-top:16px">Engineering, Architecture, and General Contracting under one organization—from concept and permit documents through construction delivery.</p>
     </div>
     <div><h4>Firm</h4><ul><li><a href="/about">About Us</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/resources">Resources</a></li><li><a href="/blog/">Blog</a></li><li><a href="/locations/">Service Areas</a></li><li><a href="/contact">Contact</a></li></ul></div>
-    <div><h4>Services</h4><ul><li><a href="/services/mep">MEP Engineering</a></li><li><a href="/services/structural">Structural Design</a></li><li><a href="/services/civil">Civil Engineering</a></li><li><a href="/services/assessments">Building Assessments</a></li><li><a href="/services/architecture">Architectural Design</a></li></ul></div>
+    <div><h4>Services</h4><ul><li><a href="/services/mep">MEP Engineering</a></li><li><a href="/services/structural">Structural Design</a></li><li><a href="/services/civil">Civil Engineering</a></li><li><a href="/architecture/">Architectural Design</a></li><li><a href="/general-contracting/">General Contracting</a></li></ul></div>
     <div><h4>Disciplines</h4><ul><li><a href="/structural-engineering/">Structural Engineering</a></li><li><a href="/mep-engineering/">MEP Engineering</a></li><li><a href="/civil-engineering/">Civil Engineering</a></li><li><a href="/mechanical-engineering/">Mechanical (HVAC)</a></li><li><a href="/electrical-engineering/">Electrical Engineering</a></li><li><a href="/plumbing-engineering/">Plumbing Engineering</a></li></ul></div>
     <div><h4>Contact</h4><ul><li>22475 E Quintero Rd<br/>Queen Creek, AZ 85142</li><li><a href="mailto:info@apexgrideng.com">info@apexgrideng.com</a></li><li><a href="tel:+14804900064">(480) 490-0064</a></li></ul></div>
   </div>
