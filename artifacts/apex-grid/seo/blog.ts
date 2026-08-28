@@ -278,4 +278,109 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "seismic-retrofit-older-commercial-buildings",
+    title: "Seismic Retrofit for Older Commercial Buildings: Where to Start",
+    description:
+      "A practical first look at seismic retrofit decisions for older commercial buildings, from existing-condition review to a prioritized strengthening plan.",
+    date: "2026-08-27",
+    tag: "Structural",
+    minutes: 8,
+    html: `
+<p>Owners of older commercial buildings often know a seismic upgrade may be needed but do not know which investigation should come first. The right starting point is not a list of universal retrofit details. It is a disciplined review of the building's age, structural system, alterations, observed distress, occupancy, and the performance objective the owner actually needs.</p>
+<h2>Start with the building's story</h2>
+<p>Collect original drawings, prior repair documents, permit history, tenant-improvement plans, and records of changes to the roof, mezzanines, equipment, and exterior walls. Then compare those documents with field conditions. Missing drawings are common; they are not a reason to guess. A focused field investigation can identify the framing system, diaphragm materials, collectors, shear walls or frames, foundations, and irregularities that control the evaluation.</p>
+<h2>Look for the weak links in the load path</h2>
+<p>Seismic forces travel through a continuous path from the roof and floors into the vertical lateral system and then into the foundation and soil. Retrofit discussions often focus on adding a new brace or wall, but the connection between each part matters just as much. Common questions include whether the diaphragm can transfer force, whether collectors are continuous, whether existing connections have adequate capacity, and whether the foundation can accept the new reactions.</p>
+<h2>Prioritize life safety and operations</h2>
+<p>A retrofit plan should identify more than a structural demand-to-capacity ratio. Nonstructural components such as ceilings, partitions, cladding, mechanical equipment, electrical equipment, and piping can create major hazards or business interruptions. The owner should decide whether the objective is life-safety improvement, reduced repair time, continued occupancy, protection of critical operations, or a combination. That objective affects both the engineering scope and the construction sequence.</p>
+<h2>Coordinate retrofit work with capital plans</h2>
+<p>The least disruptive retrofit is often the one coordinated with a roof replacement, façade work, tenant improvement, equipment upgrade, or change of occupancy. Structural reinforcement can affect architecture, fire-rated assemblies, MEP routing, accessibility, and finishes. Bringing those disciplines in early can turn a required upgrade into a planned capital project instead of a separate emergency mobilization.</p>
+<h2>What a useful first deliverable contains</h2>
+<p>An initial evaluation should state the available information, observed conditions, assumptions, limitations, governing criteria, likely deficiencies, and recommended next steps. It should distinguish a screening opinion from a detailed analysis and explain what additional testing or drawings would change the conclusion. Apex Grid's structural team uses that decision record to help owners choose between monitoring, targeted strengthening, a broader retrofit, or additional investigation.</p>`,
+    faqs: [
+      {
+        q: "How do I know whether an older commercial building needs seismic evaluation?",
+        a: "Age, structural system, past alterations, visible distress, occupancy, local retrofit requirements, and the owner's performance goals all matter. A licensed structural engineer should review available drawings and field conditions rather than relying on building age alone.",
+      },
+      {
+        q: "What is the first step in a seismic retrofit?",
+        a: "The first step is usually an existing-condition and structural-system review: collect records, verify the building in the field, trace the lateral load path, identify irregularities, and define the owner's performance objective before selecting retrofit measures.",
+      },
+      {
+        q: "Can seismic retrofit be coordinated with a tenant improvement?",
+        a: "Yes. Coordinating retrofit work with a tenant improvement, roof project, equipment replacement, or other capital work can reduce disruption and help resolve impacts to architecture, fire-rated assemblies, MEP systems, accessibility, and finishes.",
+      },
+    ],
+  },
+  {
+    slug: "commercial-ev-charging-site-engineering",
+    title: "Commercial EV Charging Site Design: The Engineering Decisions That Matter",
+    description:
+      "A commercial EV charging project depends on more than chargers: electrical capacity, civil layout, drainage, accessibility, protection, and future expansion all need to work together.",
+    date: "2026-08-27",
+    tag: "Electrical & Civil",
+    minutes: 7,
+    html: `
+<p>Commercial EV charging projects are often described as an equipment purchase, but the charger is only one part of the site. The project may require a new electrical service, transformer, switchgear, trenching, pavement work, stormwater coordination, lighting, signage, accessible routes, protective bollards, and a plan for future load growth. Early engineering determines whether the site can support the desired charging experience without expensive rework.</p>
+<h2>Begin with the charging use case</h2>
+<p>Define who will charge, when vehicles arrive, how long they stay, and what level of charging service the site needs. Workplace, fleet, retail, multifamily, hotel, and highway-oriented sites have different dwell times and utilization patterns. The load profile—not just the nameplate rating of one charger—drives the electrical design, utility conversation, and operating-cost analysis.</p>
+<h2>Check existing electrical capacity</h2>
+<p>Review the existing service, transformer, switchgear, distribution equipment, demand history, spare capacity, and available fault-current information. A site with enough panel space may still lack service capacity. The design should account for continuous charging loads, load management, emergency power interactions where relevant, metering, disconnects, equipment clearances, and the utility's service requirements.</p>
+<h2>Make the civil layout work for drivers and the site</h2>
+<p>Charger placement affects turning movements, queueing, accessible parking, pedestrian routes, cable reach, snow or heat exposure, lighting, drainage, and protection from vehicle impact. Trenching and conduit routes should be coordinated with existing utilities and pavement restoration. A charging layout that fits on a plan but creates backing conflicts or blocks an accessible route is not a complete site design.</p>
+<h2>Design for the next phase</h2>
+<p>Many owners install a small first phase and later discover that the service, transformer pad, duct bank, or switchgear cannot support expansion. Even when all chargers are not installed on day one, reserve space and capacity where the business case supports it. Document the phase-one and ultimate conditions so future work does not require tearing up a recently completed site.</p>
+<h2>Coordinate permits and procurement</h2>
+<p>EV charging projects can involve building, electrical, civil, accessibility, fire, zoning, utility, and sometimes environmental or transportation reviews. The equipment manufacturer also has installation and network requirements that affect the construction documents. Apex Grid coordinates electrical and civil engineering with the site and building team so the design can be priced, permitted, procured, and constructed as one project.</p>`,
+    faqs: [
+      {
+        q: "What engineering is needed for commercial EV charging stations?",
+        a: "Depending on the site, engineering can include electrical service and distribution, load calculations, utility coordination, civil layout and trenching, drainage, pavement, lighting, accessibility, protective equipment, and coordination with building or fire requirements.",
+      },
+      {
+        q: "How do I know if an existing commercial property has enough power for EV chargers?",
+        a: "Review the existing service, transformer, switchgear, demand history, spare capacity, fault-current data, and utility requirements. Panel space alone does not prove that the property can support the charging load.",
+      },
+      {
+        q: "Should a commercial EV charging site be designed for future expansion?",
+        a: "Often, yes. Reserving practical space and capacity for a planned second phase can avoid future trenching, pavement demolition, service changes, or equipment replacement, provided the expansion assumptions are documented and financially justified.",
+      },
+    ],
+  },
+  {
+    slug: "commercial-tenant-improvement-delivery-guide",
+    title: "Commercial Tenant Improvement Delivery: From Test Fit to Turnover",
+    description:
+      "How owners can connect test-fit planning, permit documents, estimating, construction, and turnover for a smoother commercial tenant improvement.",
+    date: "2026-08-27",
+    tag: "Construction Delivery",
+    minutes: 7,
+    html: `
+<p>A commercial tenant improvement moves through several handoffs: a test fit, a lease decision, design development, permit documents, pricing, construction, inspections, and turnover. Problems arise when each handoff resets the project instead of carrying forward the same assumptions. A connected delivery process keeps the scope, budget, schedule, and operational requirements visible from the first layout through the final punch list.</p>
+<h2>Use the test fit to expose constraints</h2>
+<p>A test fit should answer more than whether desks or workstations fit. It should identify occupancy, egress, accessible routes, restroom needs, electrical and HVAC implications, structural constraints, fire protection, technology, storage, and the relationship to the base building. Label assumptions clearly so the owner knows which decisions still need field verification or landlord approval.</p>
+<h2>Verify the existing shell before design hardens</h2>
+<p>Confirm ceiling heights, structural framing, roof or exterior conditions, electrical service, HVAC capacity, plumbing locations, fire alarm and sprinkler infrastructure, utility entries, and the condition of finishes that will remain. Existing drawings may not show undocumented work. Early verification costs less than redesign after permit review or demolition.</p>
+<h2>Price the scope owners will actually build</h2>
+<p>Early estimates should identify inclusions, exclusions, allowances, alternates, owner-furnished equipment, escalation assumptions, and contingency. Separate base-building work from tenant work and identify landlord standards. If the design is still developing, the estimate should show how each open decision changes cost rather than presenting false precision.</p>
+<h2>Plan the permit and construction sequence together</h2>
+<p>The permit schedule, procurement schedule, and field schedule are connected. Long-lead electrical equipment, specialty millwork, storefront systems, controls, and owner-furnished items can become critical-path items. In an occupied building, add shutdown planning, temporary barriers, dust and noise control, after-hours work, and communication with neighboring tenants before mobilization.</p>
+<h2>Define turnover before construction starts</h2>
+<p>Turnover should include more than a clean space and a certificate of occupancy. Define commissioning, training, warranties, attic stock, as-built documents, equipment schedules, closeout photographs, keys, controls settings, and the owner's acceptance process. PCM, Apex Grid's construction delivery branch, uses those requirements to align pre-construction planning with the field team's final handoff.</p>`,
+    faqs: [
+      {
+        q: "What should a commercial tenant-improvement test fit include?",
+        a: "A useful test fit addresses program and layout, occupancy, egress, accessibility, base-building constraints, HVAC and electrical implications, plumbing, fire protection, technology, storage, and assumptions that still require field verification or landlord approval.",
+      },
+      {
+        q: "When should a contractor be involved in a tenant improvement?",
+        a: "Early involvement is valuable when the schedule is tight, existing conditions are uncertain, the building remains occupied, long-lead items matter, or the owner needs constructability and budget feedback before the permit set is complete.",
+      },
+      {
+        q: "What should be included in tenant-improvement project turnover?",
+        a: "Turnover should define inspections, commissioning, training, warranties, closeout documents, as-builts, equipment schedules, controls settings, keys, attic stock, photographs, and the owner's acceptance process—not just the finished appearance of the space.",
+      },
+    ],
+  },
 ];
