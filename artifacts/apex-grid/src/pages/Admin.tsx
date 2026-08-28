@@ -5,6 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import {
   useListLeads,
   useListSubscribers,
+  useDeleteLead,
   useUpdateLead,
   useDeleteSubscriber,
   getListLeadsQueryKey,
@@ -69,7 +70,20 @@ function StatusControl({ leadId, status }: { leadId: number; status: LeadStatus 
 function LeadsList() {
   const { data: leads, isLoading, error } = useListLeads();
   const { user } = useUser();
+  const queryClient = useQueryClient();
   const [filter, setFilter] = useState<LeadStatus | 'all'>('all');
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+  const deleteLead = useDeleteLead({
+    mutation: {
+      onSuccess: () => {
+        setDeleteError(null);
+        void queryClient.invalidateQueries({ queryKey: getListLeadsQueryKey() });
+      },
+      onError: () => {
+        setDeleteError('Unable to delete that inquiry. Please try again.');
+      },
+    },
+  });
 
   const filteredLeads = leads?.filter((lead) => filter === 'all' || lead.status === filter);
 
@@ -112,6 +126,12 @@ function LeadsList() {
       {error && (error as { status?: number }).status !== 403 && (
         <div className="border border-destructive/50 bg-destructive/10 p-6 rounded-[2px] text-sm">
           Failed to load inquiries. Please refresh and try again.
+        </div>
+      )}
+
+      {deleteError && (
+        <div className="border border-destructive/50 bg-destructive/10 p-4 rounded-[2px] text-sm mb-4" role="alert">
+          {deleteError}
         </div>
       )}
 
@@ -213,7 +233,28 @@ function LeadsList() {
                 {lead.message}
               </p>
 
-              <StatusControl leadId={lead.id} status={lead.status} />
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <StatusControl leadId={lead.id} status={lead.status} />
+                <button
+                  type="button"
+                  disabled={deleteLead.isPending}
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        `Delete the inquiry from ${lead.name}? This cannot be undone.`,
+                      )
+                    ) {
+                      deleteLead.mutate({ id: lead.id });
+                    }
+                  }}
+                  className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-muted-foreground hover:text-destructive transition-colors disabled:opacity-50"
+                  aria-label={`Delete inquiry from ${lead.name}`}
+                  title="Delete inquiry"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>

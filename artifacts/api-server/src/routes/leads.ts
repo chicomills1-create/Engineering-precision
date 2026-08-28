@@ -4,6 +4,8 @@ import { db, leadsTable } from "@workspace/db";
 import {
   CreateLeadBody,
   CreateLeadResponse,
+  DeleteLeadParams,
+  DeleteLeadResponse,
   ListLeadsResponse,
   UpdateLeadBody,
   UpdateLeadResponse,
@@ -90,6 +92,32 @@ router.patch("/leads/:id", requireAuth, async (req, res): Promise<void> => {
       createdAt: lead.createdAt.toISOString(),
     }),
   );
+});
+
+router.delete("/leads/:id", requireAuth, async (req, res): Promise<void> => {
+  const parsedParams = DeleteLeadParams.safeParse(req.params);
+  if (!parsedParams.success) {
+    res.status(400).json({ error: "Invalid lead id" });
+    return;
+  }
+
+  const id = parsedParams.data.id;
+  if (!Number.isInteger(id) || id <= 0) {
+    res.status(400).json({ error: "Invalid lead id" });
+    return;
+  }
+
+  const deleted = await db
+    .delete(leadsTable)
+    .where(eq(leadsTable.id, id))
+    .returning({ id: leadsTable.id });
+
+  if (deleted.length === 0) {
+    res.status(404).json({ error: "Lead not found" });
+    return;
+  }
+
+  res.json(DeleteLeadResponse.parse({ ok: true }));
 });
 
 export default router;

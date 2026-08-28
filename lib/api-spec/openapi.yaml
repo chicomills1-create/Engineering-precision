@@ -240,6 +240,35 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorMessage"
+    delete:
+      operationId: deleteLead
+      tags: [leads]
+      summary: Remove a lead inquiry (admin only)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        "200":
+          description: Removed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscribeResult"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "404":
+          description: Lead not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
   /client/jobs:
     get:
       operationId: listClientJobs

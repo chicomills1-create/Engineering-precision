@@ -190,6 +190,18 @@ export const UpdateLeadResponse = zod.object({
 
 
 /**
+ * @summary Remove a lead inquiry (admin only)
+ */
+export const DeleteLeadParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const DeleteLeadResponse = zod.object({
+  "ok": zod.boolean()
+})
+
+
+/**
  * @summary List jobs for the signed-in client company
  */
 export const ListClientJobsResponseItem = zod.object({

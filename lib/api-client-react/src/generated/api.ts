@@ -745,6 +745,77 @@ export const useUpdateLead = <TError = ErrorType<ErrorMessage>,
       return useMutation(getUpdateLeadMutationOptions(options));
     }
 
+export const getDeleteLeadUrl = (id: number,) => {
+
+
+
+
+  return `/api/leads/${id}`
+}
+
+/**
+ * @summary Remove a lead inquiry (admin only)
+ */
+export const deleteLead = async (id: number, options?: Parameters<typeof customFetch>[1]): Promise<SubscribeResult> => {
+
+  return customFetch<SubscribeResult>(getDeleteLeadUrl(id),
+  {
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+
+export const getDeleteLeadMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteLead>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteLead>>, TError,{id: number}, TContext> => {
+
+const mutationKey = ['deleteLead'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteLead>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  deleteLead(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteLeadMutationResult = NonNullable<Awaited<ReturnType<typeof deleteLead>>>
+
+    export type DeleteLeadMutationError = ErrorType<ErrorMessage>
+
+    /**
+ * @summary Remove a lead inquiry (admin only)
+ */
+export const useDeleteLead = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteLead>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof deleteLead>>,
+        TError,
+        {id: number},
+        TContext
+      > => {
+      return useMutation(getDeleteLeadMutationOptions(options));
+    }
+
 export const getListClientJobsUrl = () => {
 
 
