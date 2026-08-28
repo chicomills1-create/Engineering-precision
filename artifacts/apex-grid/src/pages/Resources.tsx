@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useLocation, useSearch } from "wouter";
 import { ArrowRight, Clock, Tag, X } from "lucide-react";
 import resourcesBg from "@assets/generated_images/resources-bg.webp";
+import { useJsonLd, usePageMeta } from "@/lib/seo";
+import { APEX_GRID_BUSINESS_SCHEMA } from "@/lib/business-schema";
 
 const articles = [
   {
@@ -67,6 +69,12 @@ const articles = [
 ];
 
 export default function Resources() {
+  usePageMeta({
+    title: "Engineering Resources & Answers | Apex Grid Engineering",
+    description: "Answer-first guides on structural, MEP, civil, geotechnical, PE stamping, Title 24, and municipal plan-check requirements.",
+    path: "/resources/",
+  });
+  useJsonLd(APEX_GRID_BUSINESS_SCHEMA);
   const search = useSearch();
   const [subscribeEmail, setSubscribeEmail] = useState("");
   const [subscribing, setSubscribing] = useState(false);
@@ -124,10 +132,10 @@ export default function Resources() {
         <div className="container mx-auto px-4 md:px-8 relative z-20">
           <div className="max-w-4xl">
             <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight mb-8">
-              Technical <span className="text-muted-foreground">Insights</span>
+              Engineering <span className="text-muted-foreground">Resources &amp; Answers</span>
             </h1>
             <p className="text-xl text-foreground/80 leading-relaxed max-w-2xl border-l-4 border-primary pl-6">
-              Practical guides, code breakdowns, and cost analyses. Written by licensed engineers to help developers and architects make informed decisions.
+              Direct answers on structural stamps, commercial MEP design, Title 24, civil and geotechnical scope, and municipal plan-check requirements.
             </p>
           </div>
         </div>
@@ -138,7 +146,7 @@ export default function Resources() {
           
           {/* Article Reader View */}
           {selectedArticle ? (
-            <div className="max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <article className="max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
               <button 
                 onClick={() => setActiveArticle(null)}
                 className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors mb-12"
@@ -172,7 +180,7 @@ export default function Resources() {
                   Back to All Insights
                 </button>
               </div>
-            </div>
+            </article>
           ) : (
             /* Grid View */
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-in fade-in duration-500">

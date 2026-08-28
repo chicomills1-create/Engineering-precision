@@ -1,33 +1,12 @@
 import { Link } from "wouter";
 import { ArrowRight, Download, Shield, Zap, Layers, HardHat, Building2, FileCheck, Award, Globe } from "lucide-react";
-import { usePageMeta } from "@/lib/seo";
-import { useEffect } from "react";
+import { useJsonLd, usePageMeta } from "@/lib/seo";
+import { APEX_GRID_BUSINESS_SCHEMA } from "@/lib/business-schema";
 
 export default function Capabilities() {
   usePageMeta(PAGE_META);
-
-  // Inject BreadcrumbList schema
-  useEffect(() => {
-    const id = "breadcrumb-schema-capabilities";
-    let el = document.getElementById(id);
-    if (!el) {
-      el = document.createElement("script");
-      el.id = id;
-      el.setAttribute("type", "application/ld+json");
-      document.head.appendChild(el);
-    }
-    el.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://apexgrideng.com/" },
-        { "@type": "ListItem", position: 2, name: "Capabilities", item: "https://apexgrideng.com/capabilities/" },
-      ],
-    });
-    return () => {
-      document.getElementById(id)?.remove();
-    };
-  }, []);
+  useJsonLd(APEX_GRID_BUSINESS_SCHEMA);
+  useJsonLd(CAPABILITIES_BREADCRUMB_SCHEMA);
 
   return (
     <div className="flex flex-col">
@@ -70,13 +49,13 @@ export default function Capabilities() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div className="space-y-4 text-foreground/80 leading-relaxed">
                 <p>
-                  Apex Grid Engineering is a multidisciplinary engineering and architecture firm headquartered in Queen Creek, Arizona. We deliver integrated Architecture, Structural, MEP, and Civil design under one roof — a single contract, a single point of accountability.
+                  Apex Grid Engineering is a multidisciplinary engineering and architecture firm headquartered in Queen Creek, Arizona. We deliver PE-stamped structural engineering, commercial MEP design, civil engineering, building assessments, and geotechnical coordination under one roof.
                 </p>
                 <p>
                   The firm is led by Jeremy Mills, a U.S. Air Force veteran who served in Aerospace Medical Service and deployed to Iraq in support of Operation Iraqi Freedom. That service background defines how the firm operates: documented processes, zero tolerance for "close enough," and drawings that survive the full government QA cycle.
                 </p>
                 <p>
-                  Apex Grid is PE-licensed in 49 states and has engineers with 15+ years of experience across commercial, industrial, healthcare, government, and military project types.
+                  Apex Grid is PE-licensed in 49 states and supports projects across Arizona, California, New Mexico, and nationwide. Our permit-ready work includes municipal plan-check navigation and California Title 24 coordination where applicable.
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-px bg-border">
@@ -100,7 +79,7 @@ export default function Capabilities() {
               <div className="w-8 h-[1px] bg-primary" />
               <span className="font-mono text-xs uppercase tracking-widest text-primary">Core Disciplines</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-10">Engineering &amp; Design Services</h2>
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-10">PE-Stamped Engineering &amp; Design Services</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
               {DISCIPLINES.map(({ icon: Icon, title, body, deliverables }) => (
                 <div key={title} className="bg-card p-8">
@@ -353,6 +332,15 @@ const SNAPSHOT = [
   { label: "Core Disciplines", value: "4" },
   { label: "Quote Turnaround", value: "12–24hr" },
 ];
+
+const CAPABILITIES_BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://apexgrideng.com/" },
+    { "@type": "ListItem", position: 2, name: "Capabilities", item: "https://apexgrideng.com/capabilities/" },
+  ],
+};
 
 const DISCIPLINES = [
   {

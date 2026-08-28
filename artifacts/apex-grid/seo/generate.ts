@@ -43,6 +43,7 @@ import {
 import { ALL_INDUSTRIES } from "../src/data/industries";
 import { RESOURCE_ARTICLES, RESOURCE_DISCIPLINES, disciplineOf, resourceUrl, type ResourceArticle, type ResourceDiscipline } from "./resources";
 import { GLOSSARY_TERMS, sortedGlossaryTerms, glossaryByLetter, relatedGlossaryTerms, type GlossaryTerm } from "./glossary";
+import { APEX_GRID_BUSINESS_SCHEMA } from "../src/lib/business-schema";
 
 type CityDirectory = Record<string, DirectoryCity[]>; // stateSlug -> cities
 
@@ -196,22 +197,7 @@ function breadcrumbSchema(items: { name: string; href?: string }[]) {
   };
 }
 
-const orgSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Apex Grid Engineering",
-  url: SITE,
-  email: "info@apexgrideng.com",
-  telephone: "+1-480-490-0064",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "22475 E Quintero Rd",
-    addressLocality: "Queen Creek",
-    addressRegion: "AZ",
-    postalCode: "85142",
-    addressCountry: "US",
-  },
-};
+const orgSchema = APEX_GRID_BUSINESS_SCHEMA;
 
 function servicePage(state: StateData, svc: ServiceDef, allStates: StateData[]): string {
   const url = `/locations/${state.slug}/${svc.slug}/`;
@@ -1009,10 +995,27 @@ function resourceArticlePage(article: ResourceArticle): string {
     "@type": "Article",
     headline: article.h1,
     description: article.description,
-    author: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
-    publisher: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
+    author: { "@id": `${SITE}/#business` },
+    publisher: { "@id": `${SITE}/#business` },
     mainEntityOfPage: `${SITE}${url}`,
   };
+  const faqMatches = [...article.html.matchAll(/<h3>([^<]+)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)]
+    .filter((match) => article.html.slice(0, match.index).includes("<h2>Frequently Asked Questions</h2>"))
+    .map((match) => ({
+      q: match[1].replace(/<[^>]+>/g, "").trim(),
+      a: match[2].replace(/<[^>]+>/g, "").trim(),
+    }));
+  const faqSchema = faqMatches.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqMatches.map(({ q, a }) => ({
+          "@type": "Question",
+          name: q,
+          acceptedAnswer: { "@type": "Answer", text: a },
+        })),
+      }
+    : null;
   const others = RESOURCE_ARTICLES.filter((a) => a.slug !== article.slug && a.tag === article.tag).slice(0, 3);
   const fallbacks = RESOURCE_ARTICLES.filter((a) => a.slug !== article.slug).slice(0, 3 - others.length);
   const related = [...others, ...fallbacks].slice(0, 3);
@@ -1023,7 +1026,7 @@ ${breadcrumb(crumbs)}
   <h1>${esc(article.h1)}</h1>
   <p class="lede">${esc(article.description)}</p>
 </div></section>
-<section class="block"><div class="container"><div class="prose">${article.html}</div></div></section>
+<section class="block"><div class="container"><article class="prose">${article.html}</article></div></section>
 ${related.length ? `<section class="block"><div class="container">
   <h2>More from <em>Resources</em></h2>
   <div class="grid3">
@@ -1039,7 +1042,7 @@ ${related.length ? `<section class="block"><div class="container">
     title: article.title,
     description: article.description,
     canonical: `${SITE}${url}`,
-    schemaJson: [orgSchema, articleSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [orgSchema, articleSchema, ...(faqSchema ? [faqSchema] : []), breadcrumbSchema(crumbs)],
     body,
   });
 }

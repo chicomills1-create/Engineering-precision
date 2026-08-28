@@ -18,38 +18,12 @@
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://apexgrideng.com/#organization",
+          "@type": "ProfessionalService",
+          "@id": "https://apexgrideng.com/#business",
           "name": "Apex Grid Engineering",
+          "legalName": "Apex Grid Engineering",
           "url": "https://apexgrideng.com/",
-          "logo": "https://apexgrideng.com/favicon.svg",
-          "email": "info@apexgrideng.com",
-          "telephone": "+1-480-490-0064",
-          "foundingDate": "2009",
-          "numberOfEmployees": { "@type": "QuantitativeValue", "value": 20 },
-          "description": "Full-service engineering firm providing MEP, structural, architectural, and civil engineering for commercial, industrial, healthcare, and military projects across 49 licensed states.",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "22475 E Quintero Rd",
-            "addressLocality": "Queen Creek",
-            "addressRegion": "AZ",
-            "postalCode": "85142",
-            "addressCountry": "US"
-          },
-          "areaServed": {
-            "@type": "Country",
-            "name": "United States"
-          },
-          "sameAs": [
-            "https://www.linkedin.com/company/apex-grid-engineering"
-          ]
-        },
-        {
-          "@type": ["LocalBusiness", "EngineeringOffice"],
-          "@id": "https://apexgrideng.com/#localbusiness",
-          "name": "Apex Grid Engineering",
-          "url": "https://apexgrideng.com/",
-          "description": "Integrated architecture, MEP, structural, and civil engineering design firm. We de-risk projects from concept to permit with licensed professionals across all disciplines under one roof.",
+          "description": "Multi-discipline professional engineering firm providing PE-stamped structural, MEP, civil, geotechnical, building-assessment, energy-compliance, and municipal plan-check support.",
           "telephone": "+1-480-490-0064",
           "email": "info@apexgrideng.com",
           "priceRange": "$$",
@@ -64,14 +38,8 @@
           },
           "geo": {
             "@type": "GeoCoordinates",
-            "latitude": 33.2148,
-            "longitude": -111.5623
-          },
-          "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-            "opens": "08:00",
-            "closes": "17:00"
+            "latitude": 33.2519632,
+            "longitude": -111.5985155
           },
           "hasOfferCatalog": {
             "@type": "OfferCatalog",
@@ -79,17 +47,37 @@
             "itemListElement": [
               { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "MEP Engineering" } },
               { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Structural Engineering" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Architectural Design" } },
               { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Civil Engineering" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Geotechnical Engineering" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Building Assessments" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "PE Stamping and Sealing" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Municipal Plan-Check Navigation" } },
               { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Title 24 Energy Compliance" } }
             ]
           },
           "knowsAbout": [
             "MEP Engineering", "Structural Engineering", "Civil Engineering",
-            "Architectural Design", "Title 24 Energy Compliance", "UFC Military Design",
-            "Seismic Retrofitting", "Stormwater Management", "ATFP Force Protection"
+            "Geotechnical Engineering", "Building Assessments", "PE Stamping",
+            "Municipal Plan-Check Navigation", "Commercial MEP Design in Arizona",
+            "California Title 24 Energy Compliance", "Seismic Retrofit Engineering"
           ],
-          "areaServed": "United States"
+          "areaServed": [
+            { "@type": "State", "name": "Arizona" },
+            { "@type": "State", "name": "California" },
+            { "@type": "State", "name": "New Mexico" },
+            { "@type": "City", "name": "Phoenix, Arizona" },
+            { "@type": "City", "name": "Scottsdale, Arizona" },
+            { "@type": "City", "name": "Mesa, Arizona" },
+            { "@type": "City", "name": "Chandler, Arizona" },
+            { "@type": "City", "name": "Tempe, Arizona" },
+            { "@type": "City", "name": "Queen Creek, Arizona" },
+            { "@type": "City", "name": "Tucson, Arizona" },
+            { "@type": "City", "name": "Albuquerque, New Mexico" },
+            { "@type": "City", "name": "Santa Fe, New Mexico" },
+            { "@type": "City", "name": "Los Angeles, California" },
+            { "@type": "City", "name": "San Diego, California" }
+          ],
+          "sameAs": ["https://www.linkedin.com/company/apex-grid-engineering"]
         }
       ]
     }

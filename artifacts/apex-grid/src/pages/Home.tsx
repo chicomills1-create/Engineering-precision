@@ -2,10 +2,12 @@ import { Link } from "wouter";
 import { ArrowRight, ChevronRight, FileCheck, Layers, ShieldCheck, Zap } from "lucide-react";
 import heroBg from "@assets/generated_images/hero-bg2.webp";
 import { useEffect, useState } from "react";
-import { usePageMeta } from "@/lib/seo";
+import { useJsonLd, usePageMeta } from "@/lib/seo";
+import { APEX_GRID_BUSINESS_SCHEMA } from "@/lib/business-schema";
 
 export default function Home() {
   usePageMeta(PAGE_META);
+  useJsonLd(APEX_GRID_BUSINESS_SCHEMA);
 
   const [scrollY, setScrollY] = useState(0);
 
@@ -63,7 +65,7 @@ export default function Home() {
             </h1>
             
             <p className="text-xl md:text-2xl text-foreground/80 max-w-2xl mb-12 leading-relaxed border-l-4 border-primary pl-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both">
-              One multifaceted organization for the full build lifecycle: Apex Grid Engineering, Architectural Design, and General Contracting through our PCM construction delivery branch.
+              PE-stamped structural, commercial MEP, civil, and building-assessment engineering from our Arizona headquarters—coordinated with architectural design and PCM construction delivery.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both">
@@ -102,7 +104,7 @@ export default function Home() {
               {
                 num: "01",
                 title: "Engineering",
-                desc: "Structural, MEP, civil, and building assessment services engineered for constructability and permit approval.",
+                desc: "PE-stamped structural, commercial MEP, civil, geotechnical coordination, and building-assessment services engineered for constructability and municipal plan-check approval.",
                 href: "/services/mep",
                 cta: "Explore Engineering",
               },
@@ -163,10 +165,10 @@ export default function Home() {
               </h2>
               <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
                 <p>
-                  A design is only as good as the contractor's ability to build it. We don't just produce drawings; we engineer solutions that make sense in the field.
+                  From commercial MEP design in Arizona to California Title 24 compliance and PE-stamped structural packages, we engineer solutions that make sense in the field.
                 </p>
                 <p>
-                  Every project is led by a licensed Professional Engineer. No opaque outsourcing chains, no endless RFI loops. We stamp what we design, and we stand behind every calculation.
+                  Every project is led by a licensed Professional Engineer. We design for the governing code, navigate municipal plan-check comments, stamp what we design, and stand behind every calculation.
                 </p>
               </div>
               <ul className="mt-10 space-y-4">
@@ -221,13 +223,13 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">Core Disciplines</h2>
-            <p className="text-lg text-muted-foreground">Comprehensive engineering expertise under a single, accountable roof.</p>
+            <p className="text-lg text-muted-foreground">PE-stamped structural, MEP, civil, assessment, and energy-compliance expertise under a single accountable roof.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
             {[
-              { num: "01", name: "MEP Design & Engineering", desc: "High-efficiency Mechanical, Electrical, and Plumbing systems. Title 24 compliance built in.", link: "/services/mep" },
-              { num: "02", name: "Structural Design", desc: "Rigorous frameworks from high-rise commercial to complex seismic retrofits.", link: "/services/structural" },
+              { num: "01", name: "Commercial MEP Design", desc: "Mechanical, electrical, and plumbing systems for Arizona and nationwide projects, with California Title 24 compliance when applicable.", link: "/services/mep" },
+              { num: "02", name: "PE-Stamped Structural Engineering", desc: "Permit-ready structural calculations and drawings from commercial buildings to complex seismic retrofits.", link: "/services/structural" },
               { num: "03", name: "Civil Engineering", desc: "Site feasibility, grading, drainage, and utilities designed for optimal constructability.", link: "/services/civil" },
               { num: "04", name: "Building Assessments", desc: "Independent engineering judgment, forensic analysis, and due diligence reporting.", link: "/services/assessments" },
               { num: "05", name: "Architectural Design", desc: "In-house architectural design — concept through permit-ready documents, coordinated with engineering from day one.", link: "/services/architecture" }
@@ -332,7 +334,7 @@ export default function Home() {
 }
 
 const PAGE_META = {
-  title: "Engineering, Architecture & General Contracting | Apex Grid",
-  description: "Engineering, architectural design, and general contracting through PCM under one organization. Permit-ready coordination from concept through construction.",
+  title: "PE-Stamped MEP & Structural Engineering | Apex Grid",
+  description: "PE-stamped structural, commercial MEP, civil, and building-assessment engineering from Arizona, with Title 24 and municipal plan-check support.",
   path: "/",
 };

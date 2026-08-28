@@ -55,7 +55,8 @@ export function useJsonLd(schema: Record<string, unknown> | object | null) {
     if (!schema) return;
     const s = schema as Record<string, unknown>;
     const type = String(s["@type"] ?? "unknown");
-    const id = `jsonld-${type.toLowerCase()}`;
+    const entityId = typeof s["@id"] === "string" ? s["@id"] : "";
+    const id = `jsonld-${(entityId || type).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
     let script = document.getElementById(id) as HTMLScriptElement | null;
     if (!script) {
       script = document.createElement("script");
