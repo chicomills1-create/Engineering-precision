@@ -238,6 +238,23 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 )}
               </div>
             ))}
+            <div className="flex items-center gap-3 border-t border-border/50 pt-4">
+              <Link
+                href="/client-portal"
+                className="text-base text-muted-foreground p-2 hover:text-primary"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Client Portal
+              </Link>
+              <span className="text-border">/</span>
+              <Link
+                href="/admin/outreach"
+                className="text-base text-muted-foreground p-2 hover:text-primary"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Employee Access
+              </Link>
+            </div>
             <Link
               href="/submit-project"
               className="h-14 w-full mt-4 bg-primary text-white font-bold flex items-center justify-center rounded-[2px]"
@@ -282,7 +299,11 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 <li><a href="/blog/" className="hover:text-primary transition-colors">Blog</a></li>
                 <li><a href="/locations/" className="hover:text-primary transition-colors">Service Areas</a></li>
                 <li><Link href="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
-                <li><Link href="/client-portal" className="hover:text-primary transition-colors">Client Portal</Link></li>
+                <li className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <Link href="/client-portal" className="hover:text-primary transition-colors">Client Portal</Link>
+                  <span className="text-border">/</span>
+                  <Link href="/admin/outreach" className="hover:text-primary transition-colors">Employee Access</Link>
+                </li>
               </ul>
             </div>
             
