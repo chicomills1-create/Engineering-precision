@@ -602,7 +602,10 @@ function blogPostPage(post: BlogPost): string {
         })),
       }
     : null;
-  const others = BLOG_POSTS.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const others = BLOG_POSTS
+    .filter((p) => p.slug !== post.slug)
+    .sort((a, b) => Number(b.tag === post.tag) - Number(a.tag === post.tag))
+    .slice(0, 3);
   const body = `
 ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
@@ -625,7 +628,9 @@ ${post.faqs?.length ? `<section class="block"><div class="container faq">
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Have a Project in Mind?</h2>
-  <p>Architectural, MEP, structural, and civil design under one roof — licensed in 49 states, with fast quote turnaround.</p>
+  <p>${post.tag === "South Africa"
+    ? "Planning a South Africa opportunity? We can help define the cross-border brief and identify the local registrations and partnerships that must be verified."
+    : "Architectural, MEP, structural, and civil design under one roof — licensed in 49 states, with fast quote turnaround."}</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
   return htmlShell({
@@ -2633,6 +2638,10 @@ function miscPage(page: MiscPage): string {
 
     ${breadcrumb(crumbs)}
     ${sectionsHtml}
+    ${page.relatedLinks?.length ? `<section class="section section--white"><div class="container container--narrow">
+      <h2>South Africa Insights</h2>
+      <div class="linkrow">${page.relatedLinks.map((link) => `<a href="${esc(link.href)}">${esc(link.label)}</a>`).join("")}</div>
+    </div></section>` : ""}
 
     <section class="section section--dark cta-band">
       <div class="container">

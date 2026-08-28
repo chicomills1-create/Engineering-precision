@@ -11,3 +11,4 @@
 - [GSC URL inspection](gsc-url-inspection.md) — indexing verdicts come from a service-account key (GOOGLE_SERVICE_ACCOUNT_KEY) added as a GSC property user; quota 2k/day forces capped batches + 1h in-memory cache.
 - [Wikipedia image download](wikipedia-image-download.md) — Wikimedia CDN thumb URLs 400/403 in Replit; use Wikipedia API imageinfo to get canonical file URL, then fetch that; add 1-2s delays to avoid 429.
 - [Large static corpus in Vite](large-static-corpus-vite.md) — 25k+ generated SEO files exceed Linux watcher limits; exclude generated trees from Vite watch without disabling static serving.
+- [South Africa positioning](south-africa-positioning.md) — build authority with informational content; publish local commercial-service claims only after credentials and partners are verified.

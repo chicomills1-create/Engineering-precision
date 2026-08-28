@@ -10,6 +10,7 @@ export interface MiscPage {
   kicker: string;
   lede: string;
   sections: { heading: string; content: string; bullets?: string[] }[];
+  relatedLinks?: { label: string; href: string }[];
   ctaHeading: string;
   ctaText: string;
 }
@@ -400,5 +401,57 @@ export const MISC_PAGES: MiscPage[] = [
     ],
     ctaHeading: "Work With Professional Engineers Who Take It Seriously",
     ctaText: "Contact Apex Grid Engineering for PE-stamped engineering on your next project.",
+  },
+  {
+    slug: "south-africa",
+    title: "South Africa Commercial Building Insights | Apex Grid",
+    description:
+      "South Africa commercial architecture, engineering, energy, procurement, and cross-border project guidance from Apex Grid. Informational resources for owners evaluating market entry.",
+    h1: "South Africa Commercial Building Insights",
+    kicker: "International Growth",
+    lede:
+      "Apex Grid is developing the knowledge and professional relationships needed to support future commercial projects connected to South Africa. These resources help owners plan cross-border architecture, engineering, approvals, energy, and construction-delivery decisions without overstating local credentials.",
+    sections: [
+      {
+        heading: "A Responsible Market-Entry Approach",
+        content:
+          "We are building topical expertise and relationships before making local service claims. Apex Grid does not currently represent this page as evidence of a South African office, professional registration, or contractor registration.",
+        bullets: [
+          "International owner and prototype-program planning",
+          "Cross-border architecture and engineering coordination",
+          "Early regulatory and approvals research",
+          "Collaboration with appropriately registered South African professionals",
+          "Commercial service pages only after credentials and delivery authority are verified",
+        ],
+      },
+      {
+        heading: "South African Project Context",
+        content:
+          "Commercial projects should reconcile the National Building Regulations and relevant SANS standards with municipal approvals, professional appointments, utility conditions, procurement requirements, site constraints, and owner standards.",
+        bullets: [
+          "SANS 10400 and project-specific compliance planning",
+          "SACAP and ECSA professional-registration considerations",
+          "Commercial building energy strategy and SANS 10400-XA context",
+          "CIDB and construction-procurement considerations where applicable",
+          "Local municipality, zoning, fire, utility, and submission verification",
+        ],
+      },
+      {
+        heading: "For U.S. and International Owners",
+        content:
+          "A successful cross-border project preserves the owner's brand and operating requirements while localizing professional responsibility, codes and standards, climate assumptions, utilities, materials, procurement, and construction details.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Planning a Commercial Building Project in South Africa", href: "/blog/south-africa-commercial-building-project-guide/" },
+      { label: "SANS 10400 Commercial Building Overview", href: "/blog/sans-10400-commercial-building-design-overview/" },
+      { label: "Commercial Building Energy Efficiency", href: "/blog/south-africa-commercial-building-energy-efficiency/" },
+      { label: "Architect vs. Engineer in South Africa", href: "/blog/architect-vs-engineer-south-africa-commercial-projects/" },
+      { label: "Construction Procurement and CIDB", href: "/blog/south-africa-construction-procurement-cidb-guide/" },
+      { label: "U.S.–South Africa Cross-Border Delivery", href: "/blog/us-south-africa-cross-border-project-delivery/" },
+    ],
+    ctaHeading: "Discuss a South Africa Opportunity",
+    ctaText:
+      "Tell Apex Grid about the owner, site, project type, and local team. We will identify where cross-border coordination may help and what South African registrations or partners must be verified before proceeding.",
   },
 ];
