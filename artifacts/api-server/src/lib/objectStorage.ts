@@ -158,6 +158,28 @@ export class ObjectStorageService {
   }
 
   async getObjectEntityFile(objectPath: string): Promise<File> {
+    const objectFile = this.getObjectEntityFileHandle(objectPath);
+    const [exists] = await objectFile.exists();
+    if (!exists) {
+      throw new ObjectNotFoundError();
+    }
+    return objectFile;
+  }
+
+  /**
+   * Delete a private object entity.
+   *
+   * Deletion deliberately ignores a missing object so callers can safely
+   * retry cleanup after a previous attempt removed the object but did not
+   * finish its metadata transaction.
+   */
+  async deleteObjectEntity(rawPath: string): Promise<void> {
+    const objectPath = this.normalizeObjectEntityPath(rawPath);
+    const objectFile = this.getObjectEntityFileHandle(objectPath);
+    await objectFile.delete({ ignoreNotFound: true });
+  }
+
+  private getObjectEntityFileHandle(objectPath: string): File {
     if (!objectPath.startsWith('/objects/')) {
       throw new ObjectNotFoundError();
     }
@@ -175,12 +197,7 @@ export class ObjectStorageService {
     const objectEntityPath = `${entityDir}${entityId}`;
     const { bucketName, objectName } = parseObjectPath(objectEntityPath);
     const bucket = objectStorageClient.bucket(bucketName);
-    const objectFile = bucket.file(objectName);
-    const [exists] = await objectFile.exists();
-    if (!exists) {
-      throw new ObjectNotFoundError();
-    }
-    return objectFile;
+    return bucket.file(objectName);
   }
 
   normalizeObjectEntityPath(rawPath: string): string {
