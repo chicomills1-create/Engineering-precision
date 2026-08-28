@@ -6,6 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { ProspectInputAudience } from './prospectInputAudience';
+import type { ProspectInputContactConfidence } from './prospectInputContactConfidence';
 import type { ProspectInputEmailStatus } from './prospectInputEmailStatus';
 import type { ProspectInputState } from './prospectInputState';
 import type { ProspectInputStatus } from './prospectInputStatus';
@@ -25,11 +26,27 @@ export interface ProspectInput {
      * @maximum 100
      */
   fitScore?: number;
-  /** @minLength 1 */
-  contactName: string;
+  /**
+     * @minimum 0
+     * @maximum 100
+     */
+  needScore?: number;
+  needSignals?: string;
+  /**
+     * @minLength 1
+     * @nullable
+     */
+  contactName?: string | null;
   contactTitle?: string;
-  /** @pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$ */
-  contactEmail: string;
+  /**
+     * @nullable
+     * @pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$
+     */
+  contactEmail?: string | null;
+  contactConfidence?: ProspectInputContactConfidence;
+  contactSourceUrl?: string;
+  dedupeKey?: string;
+  researchRunId?: number;
   emailStatus?: ProspectInputEmailStatus;
   status?: ProspectInputStatus;
 }

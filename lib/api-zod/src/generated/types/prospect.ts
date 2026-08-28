@@ -6,6 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { ProspectAudience } from './prospectAudience';
+import type { ProspectContactConfidence } from './prospectContactConfidence';
 import type { ProspectEmailStatus } from './prospectEmailStatus';
 import type { ProspectState } from './prospectState';
 import type { ProspectStatus } from './prospectStatus';
@@ -27,10 +28,26 @@ export interface Prospect {
      * @maximum 100
      */
   fitScore: number;
-  contactName: string;
+  /**
+     * @minimum 0
+     * @maximum 100
+     */
+  needScore: number;
+  /** @nullable */
+  needSignals?: string | null;
+  /** @nullable */
+  contactName?: string | null;
   /** @nullable */
   contactTitle?: string | null;
-  contactEmail: string;
+  /** @nullable */
+  contactEmail?: string | null;
+  contactConfidence?: ProspectContactConfidence;
+  /** @nullable */
+  contactSourceUrl?: string | null;
+  /** @nullable */
+  dedupeKey?: string | null;
+  /** @nullable */
+  researchRunId?: number | null;
   emailStatus: ProspectEmailStatus;
   status: ProspectStatus;
   createdAt: string;

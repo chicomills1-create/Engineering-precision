@@ -12,6 +12,7 @@ export type OutreachMessageStatus = typeof OutreachMessageStatus[keyof typeof Ou
 export const OutreachMessageStatus = {
   draft: 'draft',
   approved: 'approved',
+  sending: 'sending',
   sent: 'sent',
   delivered: 'delivered',
   bounced: 'bounced',

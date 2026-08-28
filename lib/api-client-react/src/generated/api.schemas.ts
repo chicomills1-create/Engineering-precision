@@ -153,6 +153,16 @@ export const ProspectAudience = {
   builder: 'builder',
 } as const;
 
+export type ProspectContactConfidence = typeof ProspectContactConfidence[keyof typeof ProspectContactConfidence];
+
+
+export const ProspectContactConfidence = {
+  unknown: 'unknown',
+  low: 'low',
+  medium: 'medium',
+  high: 'high',
+} as const;
+
 export type ProspectEmailStatus = typeof ProspectEmailStatus[keyof typeof ProspectEmailStatus];
 
 
@@ -192,10 +202,26 @@ export interface Prospect {
      * @maximum 100
      */
   fitScore: number;
-  contactName: string;
+  /**
+     * @minimum 0
+     * @maximum 100
+     */
+  needScore: number;
+  /** @nullable */
+  needSignals?: string | null;
+  /** @nullable */
+  contactName?: string | null;
   /** @nullable */
   contactTitle?: string | null;
-  contactEmail: string;
+  /** @nullable */
+  contactEmail?: string | null;
+  contactConfidence?: ProspectContactConfidence;
+  /** @nullable */
+  contactSourceUrl?: string | null;
+  /** @nullable */
+  dedupeKey?: string | null;
+  /** @nullable */
+  researchRunId?: number | null;
   emailStatus: ProspectEmailStatus;
   status: ProspectStatus;
   createdAt: string;
@@ -217,6 +243,16 @@ export type ProspectInputAudience = typeof ProspectInputAudience[keyof typeof Pr
 export const ProspectInputAudience = {
   architect: 'architect',
   builder: 'builder',
+} as const;
+
+export type ProspectInputContactConfidence = typeof ProspectInputContactConfidence[keyof typeof ProspectInputContactConfidence];
+
+
+export const ProspectInputContactConfidence = {
+  unknown: 'unknown',
+  low: 'low',
+  medium: 'medium',
+  high: 'high',
 } as const;
 
 export type ProspectInputEmailStatus = typeof ProspectInputEmailStatus[keyof typeof ProspectInputEmailStatus];
@@ -256,11 +292,27 @@ export interface ProspectInput {
      * @maximum 100
      */
   fitScore?: number;
-  /** @minLength 1 */
-  contactName: string;
+  /**
+     * @minimum 0
+     * @maximum 100
+     */
+  needScore?: number;
+  needSignals?: string;
+  /**
+     * @minLength 1
+     * @nullable
+     */
+  contactName?: string | null;
   contactTitle?: string;
-  /** @pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$ */
-  contactEmail: string;
+  /**
+     * @nullable
+     * @pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$
+     */
+  contactEmail?: string | null;
+  contactConfidence?: ProspectInputContactConfidence;
+  contactSourceUrl?: string;
+  dedupeKey?: string;
+  researchRunId?: number;
   emailStatus?: ProspectInputEmailStatus;
   status?: ProspectInputStatus;
 }
@@ -362,6 +414,7 @@ export type OutreachMessageStatus = typeof OutreachMessageStatus[keyof typeof Ou
 export const OutreachMessageStatus = {
   draft: 'draft',
   approved: 'approved',
+  sending: 'sending',
   sent: 'sent',
   delivered: 'delivered',
   bounced: 'bounced',
@@ -392,14 +445,6 @@ export interface OutreachMessage {
   updatedAt: string;
 }
 
-export type OutreachMessageInputStatus = typeof OutreachMessageInputStatus[keyof typeof OutreachMessageInputStatus];
-
-
-export const OutreachMessageInputStatus = {
-  draft: 'draft',
-  approved: 'approved',
-} as const;
-
 export interface OutreachMessageInput {
   prospectId: number;
   campaignId?: number;
@@ -409,7 +454,6 @@ export interface OutreachMessageInput {
   subject: string;
   /** @minLength 1 */
   body: string;
-  status?: OutreachMessageInputStatus;
   scheduledAt?: string;
 }
 
@@ -449,5 +493,77 @@ export interface OutreachDashboard {
   messages: number;
   sentToday: number;
   replies: number;
+  deliveryEventsReady: boolean;
+  replyWebhookReady: boolean;
+  automationReady: boolean;
+}
+
+export type ResearchRunState = typeof ResearchRunState[keyof typeof ResearchRunState];
+
+
+export const ResearchRunState = {
+  AZ: 'AZ',
+  CA: 'CA',
+  TX: 'TX',
+} as const;
+
+export type ResearchRunAudience = typeof ResearchRunAudience[keyof typeof ResearchRunAudience];
+
+
+export const ResearchRunAudience = {
+  architect: 'architect',
+  builder: 'builder',
+} as const;
+
+export type ResearchRunStatus = typeof ResearchRunStatus[keyof typeof ResearchRunStatus];
+
+
+export const ResearchRunStatus = {
+  running: 'running',
+  completed: 'completed',
+  failed: 'failed',
+} as const;
+
+export interface ResearchRun {
+  id: number;
+  state: ResearchRunState;
+  audience: ResearchRunAudience;
+  query: string;
+  status: ResearchRunStatus;
+  resultCount: number;
+  /** @nullable */
+  error?: string | null;
+  createdAt: string;
+  /** @nullable */
+  completedAt?: string | null;
+}
+
+export type ResearchRunInputState = typeof ResearchRunInputState[keyof typeof ResearchRunInputState];
+
+
+export const ResearchRunInputState = {
+  AZ: 'AZ',
+  CA: 'CA',
+  TX: 'TX',
+} as const;
+
+export type ResearchRunInputAudience = typeof ResearchRunInputAudience[keyof typeof ResearchRunInputAudience];
+
+
+export const ResearchRunInputAudience = {
+  architect: 'architect',
+  builder: 'builder',
+} as const;
+
+export interface ResearchRunInput {
+  state: ResearchRunInputState;
+  audience: ResearchRunInputAudience;
+  /** @maxLength 200 */
+  query?: string;
+}
+
+export interface ResearchRunResponse {
+  run: ResearchRun;
+  prospects: Prospect[];
 }
 

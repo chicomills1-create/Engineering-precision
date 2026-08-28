@@ -39,6 +39,9 @@ import type {
   Prospect,
   ProspectInput,
   ProspectUpdate,
+  ResearchRun,
+  ResearchRunInput,
+  ResearchRunResponse,
   SubscribeResult,
   Subscriber,
   SubscriberInput,
@@ -1223,6 +1226,71 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       return useMutation(getGenerateOutreachDraftMutationOptions(options));
     }
 
+export const getMarkOutreachProspectRepliedUrl = (id: number,) => {
+
+
+
+
+  return `/api/outreach/prospects/${id}/replied`
+}
+
+export const markOutreachProspectReplied = async (id: number, options?: Parameters<typeof customFetch>[1]): Promise<Prospect> => {
+
+  return customFetch<Prospect>(getMarkOutreachProspectRepliedUrl(id),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+
+export const getMarkOutreachProspectRepliedMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof markOutreachProspectReplied>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof markOutreachProspectReplied>>, TError,{id: number}, TContext> => {
+
+const mutationKey = ['markOutreachProspectReplied'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof markOutreachProspectReplied>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  markOutreachProspectReplied(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type MarkOutreachProspectRepliedMutationResult = NonNullable<Awaited<ReturnType<typeof markOutreachProspectReplied>>>
+
+    export type MarkOutreachProspectRepliedMutationError = ErrorType<unknown>
+
+    export const useMarkOutreachProspectReplied = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof markOutreachProspectReplied>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof markOutreachProspectReplied>>,
+        TError,
+        {id: number},
+        TContext
+      > => {
+      return useMutation(getMarkOutreachProspectRepliedMutationOptions(options));
+    }
+
 export const getListCampaignsUrl = () => {
 
 
@@ -1820,6 +1888,213 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
         TContext
       > => {
       return useMutation(getSuppressOutreachAddressMutationOptions(options));
+    }
+
+export const getListOutreachSuppressionsUrl = () => {
+
+
+
+
+  return `/api/outreach/suppressions`
+}
+
+export const listOutreachSuppressions = async ( options?: Parameters<typeof customFetch>[1]): Promise<Suppression[]> => {
+
+  return customFetch<Suppression[]>(getListOutreachSuppressionsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListOutreachSuppressionsQueryKey = () => {
+    return [
+    `/api/outreach/suppressions`
+    ] as const;
+    }
+
+
+export const getListOutreachSuppressionsQueryOptions = <TData = Awaited<ReturnType<typeof listOutreachSuppressions>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listOutreachSuppressions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListOutreachSuppressionsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listOutreachSuppressions>>> = ({ signal }) => listOutreachSuppressions({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listOutreachSuppressions>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListOutreachSuppressionsQueryResult = NonNullable<Awaited<ReturnType<typeof listOutreachSuppressions>>>
+export type ListOutreachSuppressionsQueryError = ErrorType<unknown>
+
+
+
+export function useListOutreachSuppressions<TData = Awaited<ReturnType<typeof listOutreachSuppressions>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listOutreachSuppressions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListOutreachSuppressionsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getListOutreachResearchRunsUrl = () => {
+
+
+
+
+  return `/api/outreach/research-runs`
+}
+
+export const listOutreachResearchRuns = async ( options?: Parameters<typeof customFetch>[1]): Promise<ResearchRun[]> => {
+
+  return customFetch<ResearchRun[]>(getListOutreachResearchRunsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListOutreachResearchRunsQueryKey = () => {
+    return [
+    `/api/outreach/research-runs`
+    ] as const;
+    }
+
+
+export const getListOutreachResearchRunsQueryOptions = <TData = Awaited<ReturnType<typeof listOutreachResearchRuns>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listOutreachResearchRuns>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListOutreachResearchRunsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listOutreachResearchRuns>>> = ({ signal }) => listOutreachResearchRuns({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listOutreachResearchRuns>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListOutreachResearchRunsQueryResult = NonNullable<Awaited<ReturnType<typeof listOutreachResearchRuns>>>
+export type ListOutreachResearchRunsQueryError = ErrorType<unknown>
+
+
+
+export function useListOutreachResearchRuns<TData = Awaited<ReturnType<typeof listOutreachResearchRuns>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listOutreachResearchRuns>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListOutreachResearchRunsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getRunOutreachResearchUrl = () => {
+
+
+
+
+  return `/api/outreach/research-runs`
+}
+
+export const runOutreachResearch = async (researchRunInput: ResearchRunInput, options?: Parameters<typeof customFetch>[1]): Promise<ResearchRunResponse> => {
+
+  return customFetch<ResearchRunResponse>(getRunOutreachResearchUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(researchRunInput)
+  }
+);}
+
+
+
+
+
+export const getRunOutreachResearchMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof runOutreachResearch>>, TError,{data: BodyType<ResearchRunInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof runOutreachResearch>>, TError,{data: BodyType<ResearchRunInput>}, TContext> => {
+
+const mutationKey = ['runOutreachResearch'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof runOutreachResearch>>, {data: BodyType<ResearchRunInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  runOutreachResearch(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type RunOutreachResearchMutationResult = NonNullable<Awaited<ReturnType<typeof runOutreachResearch>>>
+    export type RunOutreachResearchMutationBody = BodyType<ResearchRunInput>
+    export type RunOutreachResearchMutationError = ErrorType<unknown>
+
+    export const useRunOutreachResearch = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof runOutreachResearch>>, TError,{data: BodyType<ResearchRunInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof runOutreachResearch>>,
+        TError,
+        {data: BodyType<ResearchRunInput>},
+        TContext
+      > => {
+      return useMutation(getRunOutreachResearchMutationOptions(options));
     }
 
 export const getUnsubscribeOutreachAddressUrl = () => {

@@ -24,6 +24,11 @@ export async function requireAuth(
 
   const allowedEmails = getAllowedEmails();
   if (allowedEmails.size === 0) {
+    if (process.env.NODE_ENV === "development") {
+      req.log.warn({ userId }, "ADMIN_EMAILS is not configured; allowing authenticated development user");
+      next();
+      return;
+    }
     req.log.warn(
       "ADMIN_EMAILS is not configured; denying access to admin endpoint",
     );

@@ -44,6 +44,10 @@ app.use(
 app.use(CLERK_PROXY_PATH, clerkProxyMiddleware());
 
 app.use(cors({ credentials: true, origin: true }));
+app.use(
+  "/api/outreach/webhooks/sendgrid-events",
+  express.raw({ type: "application/json", limit: "1mb" }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

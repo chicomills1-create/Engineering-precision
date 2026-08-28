@@ -22,13 +22,35 @@ export function DashboardStats() {
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8" data-testid="outreach-dashboard-stats">
-      {items.map((item) => (
-        <div key={item.label} className="border border-border bg-card p-4 rounded-[2px]" data-testid={`stat-${item.label.toLowerCase().replace(' ', '-')}`}>
-          <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-1">{item.label}</p>
-          <p className="font-display text-2xl font-bold" data-testid={`stat-value-${item.label.toLowerCase().replace(' ', '-')}`}>{item.value.toLocaleString()}</p>
-        </div>
-      ))}
+    <div className="space-y-3 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3" data-testid="outreach-dashboard-stats">
+        {items.map((item) => (
+          <div key={item.label} className="border border-border bg-card p-4 rounded-[2px]" data-testid={`stat-${item.label.toLowerCase().replace(' ', '-')}`}>
+            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-1">{item.label}</p>
+            <p className="font-display text-2xl font-bold" data-testid={`stat-value-${item.label.toLowerCase().replace(' ', '-')}`}>{item.value.toLocaleString()}</p>
+          </div>
+        ))}
+      </div>
+      <div
+        className={`border px-4 py-3 rounded-[2px] text-sm ${
+          stats.automationReady
+            ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+            : 'border-amber-500/30 bg-amber-500/10 text-amber-200'
+        }`}
+        data-testid="status-outreach-automation"
+      >
+        <span className="font-medium">
+          {stats.automationReady ? 'Automatic follow-ups armed.' : 'Controlled manual sending is active.'}
+        </span>{' '}
+        {!stats.automationReady && (
+          <span>
+            Automatic follow-ups stay off until delivery events and reply-stop signals are both configured.
+          </span>
+        )}
+        <span className="ml-2 text-xs opacity-75">
+          Delivery events: {stats.deliveryEventsReady ? 'ready' : 'not configured'} · Reply stop: {stats.replyWebhookReady ? 'ready' : 'manual only'}
+        </span>
+      </div>
     </div>
   );
 }

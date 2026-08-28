@@ -341,6 +341,13 @@ paths:
       requestBody: { required: false, content: { application/json: { schema: { $ref: "#/components/schemas/DraftGenerationInput" } } } }
       responses:
         "201": { description: Drafts created, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/OutreachMessage" } } } } }
+  /outreach/prospects/{id}/replied:
+    post:
+      operationId: markOutreachProspectReplied
+      tags: [outreach]
+      parameters: [{ name: id, in: path, required: true, schema: { type: number } }]
+      responses:
+        "200": { description: Prospect marked replied, content: { application/json: { schema: { $ref: "#/components/schemas/Prospect" } } } }
   /outreach/campaigns:
     get:
       operationId: listCampaigns
@@ -402,6 +409,23 @@ paths:
       requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/SuppressionInput" } } } }
       responses:
         "201": { description: Suppressed, content: { application/json: { schema: { $ref: "#/components/schemas/Suppression" } } } }
+    get:
+      operationId: listOutreachSuppressions
+      tags: [outreach]
+      responses:
+        "200": { description: Suppression records, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/Suppression" } } } } }
+  /outreach/research-runs:
+    get:
+      operationId: listOutreachResearchRuns
+      tags: [outreach]
+      responses:
+        "200": { description: Research runs, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/ResearchRun" } } } } }
+    post:
+      operationId: runOutreachResearch
+      tags: [outreach]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/ResearchRunInput" } } } }
+      responses:
+        "201": { description: Research run completed, content: { application/json: { schema: { $ref: "#/components/schemas/ResearchRunResponse" } } } }
   /outreach/unsubscribe:
     post:
       operationId: unsubscribeOutreachAddress
@@ -569,7 +593,7 @@ components:
             type: string
     Prospect:
       type: object
-      required: [id, companyName, city, state, audience, fitScore, contactName, contactEmail, emailStatus, status, createdAt, updatedAt]
+      required: [id, companyName, city, state, audience, fitScore, needScore, emailStatus, status, createdAt, updatedAt]
       properties:
         id: { type: number }
         companyName: { type: string }
@@ -580,16 +604,22 @@ components:
         sourceUrl: { type: [string, "null"] }
         researchNotes: { type: [string, "null"] }
         fitScore: { type: number, minimum: 0, maximum: 100 }
-        contactName: { type: string }
+        needScore: { type: number, minimum: 0, maximum: 100 }
+        needSignals: { type: [string, "null"] }
+        contactName: { type: [string, "null"] }
         contactTitle: { type: [string, "null"] }
-        contactEmail: { type: string }
+        contactEmail: { type: [string, "null"] }
+        contactConfidence: { type: string, enum: [unknown, low, medium, high] }
+        contactSourceUrl: { type: [string, "null"] }
+        dedupeKey: { type: [string, "null"] }
+        researchRunId: { type: [number, "null"] }
         emailStatus: { type: string, enum: [unverified, verified, invalid] }
         status: { type: string, enum: [new, review, approved, contacted, replied, not_a_fit, suppressed] }
         createdAt: { type: string }
         updatedAt: { type: string }
     ProspectInput:
       type: object
-      required: [companyName, city, state, audience, contactName, contactEmail]
+      required: [companyName, city, state, audience]
       properties:
         companyName: { type: string, minLength: 1 }
         website: { type: string }
@@ -599,9 +629,15 @@ components:
         sourceUrl: { type: string }
         researchNotes: { type: string }
         fitScore: { type: number, minimum: 0, maximum: 100 }
-        contactName: { type: string, minLength: 1 }
+        needScore: { type: number, minimum: 0, maximum: 100 }
+        needSignals: { type: string }
+        contactName: { type: [string, "null"], minLength: 1 }
         contactTitle: { type: string }
-        contactEmail: { type: string, pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$" }
+        contactEmail: { type: [string, "null"], pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$" }
+        contactConfidence: { type: string, enum: [unknown, low, medium, high] }
+        contactSourceUrl: { type: string }
+        dedupeKey: { type: string }
+        researchRunId: { type: number }
         emailStatus: { type: string, enum: [unverified, verified, invalid] }
         status: { type: string, enum: [new, review, approved, contacted, replied, not_a_fit, suppressed] }
     ProspectUpdate:
@@ -643,7 +679,7 @@ components:
         sequenceNumber: { type: number, minimum: 1 }
         subject: { type: string }
         body: { type: string }
-        status: { type: string, enum: [draft, approved, sent, delivered, bounced, replied, unsubscribed, failed] }
+        status: { type: string, enum: [draft, approved, sending, sent, delivered, bounced, replied, unsubscribed, failed] }
         scheduledAt: { type: [string, "null"] }
         sentAt: { type: [string, "null"] }
         providerMessageId: { type: [string, "null"] }
@@ -659,7 +695,6 @@ components:
         sequenceNumber: { type: number, minimum: 1 }
         subject: { type: string, minLength: 1 }
         body: { type: string, minLength: 1 }
-        status: { type: string, enum: [draft, approved] }
         scheduledAt: { type: string }
     OutreachMessageUpdate:
       allOf: [{ $ref: "#/components/schemas/OutreachMessageInput" }]
@@ -689,10 +724,41 @@ components:
         token: { type: string, minLength: 1, maxLength: 128 }
     OutreachDashboard:
       type: object
-      required: [prospects, campaigns, messages, sentToday, replies]
+      required: [prospects, campaigns, messages, sentToday, replies, deliveryEventsReady, replyWebhookReady, automationReady]
       properties:
         prospects: { type: number }
         campaigns: { type: number }
         messages: { type: number }
         sentToday: { type: number }
         replies: { type: number }
+        deliveryEventsReady: { type: boolean }
+        replyWebhookReady: { type: boolean }
+        automationReady: { type: boolean }
+    ResearchRun:
+      type: object
+      required: [id, state, audience, query, status, resultCount, createdAt]
+      properties:
+        id: { type: number }
+        state: { type: string, enum: [AZ, CA, TX] }
+        audience: { type: string, enum: [architect, builder] }
+        query: { type: string }
+        status: { type: string, enum: [running, completed, failed] }
+        resultCount: { type: number }
+        error: { type: [string, "null"] }
+        createdAt: { type: string }
+        completedAt: { type: [string, "null"] }
+    ResearchRunInput:
+      type: object
+      required: [state, audience]
+      properties:
+        state: { type: string, enum: [AZ, CA, TX] }
+        audience: { type: string, enum: [architect, builder] }
+        query: { type: string, maxLength: 200 }
+    ResearchRunResponse:
+      type: object
+      required: [run, prospects]
+      properties:
+        run: { $ref: "#/components/schemas/ResearchRun" }
+        prospects:
+          type: array
+          items: { $ref: "#/components/schemas/Prospect" }

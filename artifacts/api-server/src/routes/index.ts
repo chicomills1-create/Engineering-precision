@@ -6,6 +6,7 @@ import subscribersRouter from "./subscribers";
 import storageRouter from "./storage";
 import seoStatusRouter from "./seoStatus";
 import outreachRouter from "./outreach";
+import outreachWebhooksRouter from "./outreachWebhooks";
 
 const router: IRouter = Router();
 
@@ -16,5 +17,6 @@ router.use(subscribersRouter);
 router.use(storageRouter);
 router.use(seoStatusRouter);
 router.use(outreachRouter);
+router.use(outreachWebhooksRouter);
 
 export default router;
