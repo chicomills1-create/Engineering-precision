@@ -420,8 +420,12 @@ export const GetOutreachDashboardResponse = zod.object({
   "messages": zod.number(),
   "sentToday": zod.number(),
   "replies": zod.number(),
+  "adminAllowlistReady": zod.boolean(),
+  "productionConfigReady": zod.boolean(),
+  "sendgridDeliveryPathReady": zod.boolean(),
   "deliveryEventsReady": zod.boolean(),
   "replyWebhookReady": zod.boolean(),
+  "automationEnabled": zod.boolean(),
   "automationReady": zod.boolean()
 })
 

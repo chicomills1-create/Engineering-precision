@@ -25,7 +25,7 @@ import { requireAuth } from "../middlewares/requireAuth";
 import { generateProspectDraft, sendApprovedOutreach } from "../lib/outreach";
 import { verifyUnsubscribeToken } from "../lib/unsubscribeToken";
 import { discoverPublicProspects } from "../lib/publicResearch";
-import { isOutreachAutomationReady } from "../lib/outreachWorker";
+import { getOutreachAutomationStatus } from "../lib/outreachWorker";
 
 const router: IRouter = Router();
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
@@ -39,6 +39,7 @@ const researchRunJson = (run: typeof outreachResearchRunsTable.$inferSelect) => 
 });
 
 router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> => {
+  const automationStatus = getOutreachAutomationStatus();
   const start = new Date(); start.setHours(0, 0, 0, 0);
   const [[prospects], [campaigns], [messages], [sentToday], [replies]] = await Promise.all([
     db.select({ value: count() }).from(prospectsTable), db.select({ value: count() }).from(campaignsTable),
@@ -52,9 +53,7 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     messages: messages?.value ?? 0,
     sentToday: sentToday?.value ?? 0,
     replies: replies?.value ?? 0,
-    deliveryEventsReady: Boolean(process.env.SENDGRID_EVENT_WEBHOOK_PUBLIC_KEY),
-    replyWebhookReady: Boolean(process.env.OUTREACH_REPLY_WEBHOOK_TOKEN),
-    automationReady: isOutreachAutomationReady(),
+    ...automationStatus,
   }));
 });
 router.get("/outreach/prospects", requireAuth, async (_req, res): Promise<void> => { const rows = await db.select().from(prospectsTable).orderBy(desc(prospectsTable.createdAt)); res.json(ListProspectsResponse.parse(rows.map(prospectJson))); });

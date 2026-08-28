@@ -48,6 +48,10 @@ app.use(
   "/api/outreach/webhooks/sendgrid-events",
   express.raw({ type: "application/json", limit: "1mb" }),
 );
+app.use(
+  "/api/outreach/webhooks/inbound-reply",
+  express.raw({ type: "multipart/form-data", limit: "10mb" }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

@@ -945,15 +945,19 @@ components:
         token: { type: string, minLength: 1, maxLength: 128 }
     OutreachDashboard:
       type: object
-      required: [prospects, campaigns, messages, sentToday, replies, deliveryEventsReady, replyWebhookReady, automationReady]
+      required: [prospects, campaigns, messages, sentToday, replies, adminAllowlistReady, productionConfigReady, sendgridDeliveryPathReady, deliveryEventsReady, replyWebhookReady, automationEnabled, automationReady]
       properties:
         prospects: { type: number }
         campaigns: { type: number }
         messages: { type: number }
         sentToday: { type: number }
         replies: { type: number }
+        adminAllowlistReady: { type: boolean }
+        productionConfigReady: { type: boolean }
+        sendgridDeliveryPathReady: { type: boolean }
         deliveryEventsReady: { type: boolean }
         replyWebhookReady: { type: boolean }
+        automationEnabled: { type: boolean }
         automationReady: { type: boolean }
     ResearchRun:
       type: object

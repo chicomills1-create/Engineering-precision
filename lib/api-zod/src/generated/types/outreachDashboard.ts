@@ -12,7 +12,11 @@ export interface OutreachDashboard {
   messages: number;
   sentToday: number;
   replies: number;
+  adminAllowlistReady: boolean;
+  productionConfigReady: boolean;
+  sendgridDeliveryPathReady: boolean;
   deliveryEventsReady: boolean;
   replyWebhookReady: boolean;
+  automationEnabled: boolean;
   automationReady: boolean;
 }

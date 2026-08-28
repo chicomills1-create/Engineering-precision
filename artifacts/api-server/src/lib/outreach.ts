@@ -113,12 +113,15 @@ export async function sendApprovedOutreach(message: OutreachMessage, prospect: P
   const body = `${message.body}\n\n— Apex Grid Engineering\n22475 E Quintero Rd, Queen Creek, AZ 85142\n\nUnsubscribe: ${unsubscribe}`;
   const from = process.env.OUTREACH_FROM_EMAIL;
   if (!from) throw new Error("OUTREACH_FROM_EMAIL is not configured");
+  const replyTo = process.env.OUTREACH_REPLY_TO_EMAIL?.trim() || from;
+  const dedicatedSendGridKey = process.env.SENDGRID_ISOLATION_VERIFIED === "true"
+    ? process.env.SENDGRID_DEDICATED_API_KEY?.trim()
+    : undefined;
+  const sendgridSubuser = process.env.SENDGRID_SUBUSER_USERNAME?.trim();
   const reservationId = await reserveDailySend(message, currentCampaign);
   let response: Awaited<ReturnType<ReplitConnectors["proxy"]>>;
   try {
-    response = await new ReplitConnectors().proxy("sendgrid", "/v3/mail/send", {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    const requestBody = JSON.stringify({
       personalizations: [{
         to: [{ email }],
         headers: {
@@ -131,11 +134,27 @@ export async function sendApprovedOutreach(message: OutreachMessage, prospect: P
         },
       }],
       from: { email: from, name: "Apex Grid Engineering" },
-      reply_to: { email: from, name: "Apex Grid Engineering" },
+      reply_to: { email: replyTo, name: "Apex Grid Engineering" },
       subject: message.subject,
       content: [{ type: "text/plain", value: body }],
-      }),
     });
+    response = dedicatedSendGridKey
+      ? await fetch("https://api.sendgrid.com/v3/mail/send", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${dedicatedSendGridKey}`,
+          },
+          body: requestBody,
+        })
+      : await new ReplitConnectors().proxy("sendgrid", "/v3/mail/send", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(sendgridSubuser ? { "on-behalf-of": sendgridSubuser } : {}),
+          },
+          body: requestBody,
+        });
   } catch {
     throw new Error("SendGrid dispatch result is unknown; message requires reconciliation before retry");
   }

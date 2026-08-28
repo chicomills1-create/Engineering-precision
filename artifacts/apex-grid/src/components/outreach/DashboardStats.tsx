@@ -44,11 +44,16 @@ export function DashboardStats() {
         </span>{' '}
         {!stats.automationReady && (
           <span>
-            Automatic follow-ups stay off until delivery events and reply-stop signals are both configured.
+            Automatic follow-ups stay off until production safety checks and reply-stop signals are verified.
           </span>
         )}
         <span className="ml-2 text-xs opacity-75">
-          Delivery events: {stats.deliveryEventsReady ? 'ready' : 'not configured'} · Reply stop: {stats.replyWebhookReady ? 'ready' : 'manual only'}
+          Admin allowlist: {stats.adminAllowlistReady ? 'ready' : 'not configured'} ·{' '}
+          Production URL: {stats.productionConfigReady ? 'ready' : 'not configured'} ·{' '}
+          SendGrid delivery path: {stats.sendgridDeliveryPathReady ? 'verified' : 'not verified'} ·{' '}
+          Delivery events: {stats.deliveryEventsReady ? 'ready' : 'not configured'} ·{' '}
+          Reply stop: {stats.replyWebhookReady ? 'ready' : 'manual only'} ·{' '}
+          Automation flag: {stats.automationEnabled ? 'on' : 'off'}
         </span>
       </div>
     </div>

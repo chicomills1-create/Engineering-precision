@@ -1,4 +1,5 @@
-import { timingSafeEqual, verify } from "node:crypto";
+import { createHmac, timingSafeEqual, verify } from "node:crypto";
+import { ReplitConnectors } from "@replit/connectors-sdk";
 import { and, eq, inArray, isNull } from "drizzle-orm";
 import {
   db,
@@ -19,6 +20,20 @@ export type SendGridEvent = {
   outreach_message_id?: string;
   outreach_prospect_id?: string;
 };
+
+function getReplyWebhookToken(): string | undefined {
+  const explicit = process.env.OUTREACH_REPLY_WEBHOOK_TOKEN?.trim();
+  if (explicit) return explicit;
+  const sessionSecret = process.env.SESSION_SECRET?.trim();
+  if (!sessionSecret) return undefined;
+  return createHmac("sha256", sessionSecret)
+    .update("apex-grid-outreach-inbound-reply-v1")
+    .digest("hex");
+}
+
+export function isReplyWebhookConfigured(): boolean {
+  return Boolean(getReplyWebhookToken());
+}
 
 function normalizeProviderMessageId(value: string | undefined): string | null {
   if (!value) return null;
@@ -44,11 +59,39 @@ export function verifySendGridEventSignature(rawBody: Buffer, headers: {
 }
 
 export function verifyReplyWebhookToken(candidate: string | undefined): boolean {
-  const expected = process.env.OUTREACH_REPLY_WEBHOOK_TOKEN;
+  const expected = getReplyWebhookToken();
   if (!candidate || !expected) return false;
   const left = Buffer.from(candidate);
   const right = Buffer.from(expected);
   return left.length === right.length && timingSafeEqual(left, right);
+}
+
+export async function forwardInboundReplyToApex(input: {
+  from: string;
+  subject: string;
+  text: string;
+}): Promise<boolean> {
+  const to = process.env.OUTREACH_FROM_EMAIL?.trim();
+  if (!to) return false;
+  const response = await new ReplitConnectors().proxy("sendgrid", "/v3/mail/send", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      personalizations: [{ to: [{ email: to }] }],
+      from: { email: to, name: "Apex Grid Outreach Replies" },
+      reply_to: { email: input.from },
+      subject: input.subject ? `Re: ${input.subject}` : `Outreach reply from ${input.from}`,
+      content: [{
+        type: "text/plain",
+        value: [
+          `Reply received from: ${input.from}`,
+          "",
+          input.text || "(No plain-text reply body was provided.)",
+        ].join("\n"),
+      }],
+    }),
+  });
+  return response.ok;
 }
 
 async function stopPendingMessages(prospectId: number, status: "bounced" | "unsubscribed" | "replied", reason: string): Promise<void> {

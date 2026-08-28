@@ -8,11 +8,77 @@ import {
 } from "@workspace/db";
 import { logger } from "./logger";
 import { sendApprovedOutreach } from "./outreach";
+import { isReplyWebhookConfigured } from "./outreachEvents";
+
+const ADMIN_EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+export type OutreachAutomationStatus = {
+  adminAllowlistReady: boolean;
+  productionConfigReady: boolean;
+  sendgridDeliveryPathReady: boolean;
+  deliveryEventsReady: boolean;
+  replyWebhookReady: boolean;
+  automationEnabled: boolean;
+  automationReady: boolean;
+};
+
+function hasConfiguredAdminEmail(): boolean {
+  return (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((email) => email.trim())
+    .some((email) => ADMIN_EMAIL_PATTERN.test(email));
+}
+
+function hasPublishedProductionUrl(): boolean {
+  const configuredUrl = process.env.PUBLIC_SITE_URL?.trim();
+  if (!configuredUrl || process.env.NODE_ENV !== "production") return false;
+
+  try {
+    const url = new URL(configuredUrl);
+    return url.protocol === "https:" && !url.username && !url.password;
+  } catch {
+    return false;
+  }
+}
+
+export function getOutreachAutomationStatus(): OutreachAutomationStatus {
+  const adminAllowlistReady = hasConfiguredAdminEmail();
+  const productionConfigReady = hasPublishedProductionUrl();
+  const dedicatedAccountReady = Boolean(process.env.SENDGRID_DEDICATED_API_KEY?.trim())
+    && process.env.SENDGRID_ISOLATION_VERIFIED === "true";
+  const eventRelayReady = Boolean(process.env.SENDGRID_EVENT_FORWARD_URL?.trim())
+    && process.env.SENDGRID_EVENT_RELAY_VERIFIED === "true";
+  const sendgridDeliveryPathReady = Boolean(
+    (process.env.SENDGRID_SUBUSER_USERNAME?.trim()
+      && process.env.SENDGRID_SUBUSER_VERIFIED === "true")
+    || dedicatedAccountReady
+    || eventRelayReady,
+  );
+  const deliveryEventsReady = Boolean(process.env.SENDGRID_EVENT_WEBHOOK_PUBLIC_KEY)
+    && process.env.SENDGRID_EVENT_PATH_VERIFIED === "true";
+  const replyWebhookReady = isReplyWebhookConfigured()
+    && Boolean(process.env.OUTREACH_REPLY_TO_EMAIL?.trim())
+    && process.env.OUTREACH_REPLY_PATH_VERIFIED === "true";
+  const automationEnabled = process.env.OUTREACH_AUTOMATION_ENABLED === "true";
+
+  return {
+    adminAllowlistReady,
+    productionConfigReady,
+    sendgridDeliveryPathReady,
+    deliveryEventsReady,
+    replyWebhookReady,
+    automationEnabled,
+    automationReady: adminAllowlistReady
+      && productionConfigReady
+      && sendgridDeliveryPathReady
+      && deliveryEventsReady
+      && replyWebhookReady
+      && automationEnabled,
+  };
+}
 
 export function isOutreachAutomationReady(): boolean {
-  return process.env.OUTREACH_AUTOMATION_ENABLED === "true"
-    && Boolean(process.env.SENDGRID_EVENT_WEBHOOK_PUBLIC_KEY)
-    && Boolean(process.env.OUTREACH_REPLY_WEBHOOK_TOKEN);
+  return getOutreachAutomationStatus().automationReady;
 }
 
 async function sendClaimedMessage(message: OutreachMessage): Promise<void> {
@@ -70,8 +136,16 @@ export async function processDueOutreachMessages(): Promise<number> {
 }
 
 export function startOutreachWorker(): void {
-  if (!isOutreachAutomationReady()) {
-    logger.info("Outreach scheduler disabled until delivery and reply webhooks are configured");
+  const status = getOutreachAutomationStatus();
+  if (!status.automationReady) {
+    logger.info({
+      adminAllowlistReady: status.adminAllowlistReady,
+      productionConfigReady: status.productionConfigReady,
+      sendgridDeliveryPathReady: status.sendgridDeliveryPathReady,
+      deliveryEventsReady: status.deliveryEventsReady,
+      replyWebhookReady: status.replyWebhookReady,
+      automationEnabled: status.automationEnabled,
+    }, "Outreach scheduler disabled until production safety checks pass");
     return;
   }
   const timer = setInterval(() => {

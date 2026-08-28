@@ -84,3 +84,7 @@ ADMIN_EMAILS = "chicomills1@gmail.com"
 
 [userenv.production]
 PUBLIC_SITE_URL = "https://apexgrideng.com"
+ADMIN_EMAILS = "Chicomills1@gmail.com"
+SENDGRID_EVENT_FORWARD_URL = "https://api.kairobot.ai/api/outbound/sendgrid-webhook"
+SENDGRID_EVENT_WEBHOOK_PUBLIC_KEY = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEOal9bSguzz66dobt/GtFFFWcc4Ugn9gwvgQX4EiPcpNeb1DhHVdG6E6kfndTHbyupFsYsTJnhiBbG7NQ3v4Csg=="
+OUTREACH_REPLY_TO_EMAIL = "replies@reply.apexgrideng.com"
