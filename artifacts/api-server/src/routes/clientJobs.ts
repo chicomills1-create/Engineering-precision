@@ -2,7 +2,7 @@ import { Readable } from "stream";
 import { createHash, randomBytes } from "crypto";
 import { clerkClient, getAuth } from "@clerk/express";
 import express, { Router, type IRouter, type Request, type Response } from "express";
-import { and, desc, eq, inArray, isNull } from "drizzle-orm";
+import { and, desc, eq, inArray, isNull, sql } from "drizzle-orm";
 import {
   clientCompaniesTable,
   clientJobDocumentsTable,
@@ -114,6 +114,8 @@ function jobJson(
       audience === "admin" && job.statusNotificationSentAt
         ? job.statusNotificationSentAt.toISOString()
         : null,
+    archivedAt: job.archivedAt?.toISOString() ?? null,
+    monthlyEmailOptedAt: job.monthlyEmailOptedAt?.toISOString() ?? null,
     documents: documents
       .filter((document) => document.jobId === job.id)
       .map((document) => ({
@@ -244,6 +246,10 @@ router.post("/client/jobs", async (req, res): Promise<void> => {
   }
 
   const data = parsed.data;
+  if (!data.scope.trim()) {
+    res.status(400).json({ error: "A clear project scope or description is required." });
+    return;
+  }
 
   try {
     const userId = authUserId(req);
@@ -439,11 +445,44 @@ router.patch("/client/jobs/:id", requireAuth, async (req, res): Promise<void> =>
     return;
   }
 
-  const [job] = await db
-    .update(clientJobsTable)
-    .set(body.data)
-    .where(eq(clientJobsTable.id, params.data.id))
-    .returning();
+  const current = await db.select().from(clientJobsTable).where(eq(clientJobsTable.id, params.data.id)).limit(1);
+  if (!current[0]) {
+    res.status(404).json({ error: "Project not found." });
+    return;
+  }
+  const update = {
+    ...(body.data.status !== undefined ? { status: body.data.status } : {}),
+    ...(body.data.internalNotes !== undefined ? { internalNotes: body.data.internalNotes } : {}),
+    ...(body.data.archived !== undefined
+      ? { archivedAt: body.data.archived ? new Date() : null }
+      : {}),
+    ...(body.data.monthlyEmailOptIn !== undefined
+      ? {
+          monthlyEmailOptIn: body.data.monthlyEmailOptIn,
+          monthlyEmailOptedAt: body.data.monthlyEmailOptIn ? new Date() : null,
+        }
+      : {}),
+  };
+  let job: JobRow | undefined;
+  if (body.data.monthlyEmailOptIn !== undefined) {
+    const updated = await db.transaction(async (tx) => {
+      await tx.update(clientJobsTable).set({
+        monthlyEmailOptIn: body.data.monthlyEmailOptIn,
+        monthlyEmailOptedAt: body.data.monthlyEmailOptIn ? new Date() : null,
+      }).where(sql`lower(trim(${clientJobsTable.submitterEmail})) = lower(trim(${current[0]!.submitterEmail}))`);
+      return tx.update(clientJobsTable)
+        .set(update)
+        .where(eq(clientJobsTable.id, params.data.id))
+        .returning();
+    });
+    job = updated[0];
+  } else {
+    [job] = await db
+      .update(clientJobsTable)
+      .set(update)
+      .where(eq(clientJobsTable.id, params.data.id))
+      .returning();
+  }
   if (!job) {
     res.status(404).json({ error: "Project not found." });
     return;

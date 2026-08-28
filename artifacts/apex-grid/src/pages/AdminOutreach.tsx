@@ -5,6 +5,7 @@ import { DashboardStats } from '@/components/outreach/DashboardStats';
 import { ProspectsTab } from '@/components/outreach/ProspectsTab';
 import { CampaignsTab } from '@/components/outreach/CampaignsTab';
 import { MessagesTab } from '@/components/outreach/MessagesTab';
+import { ClientSafeListTab } from '@/components/outreach/ClientSafeListTab';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function AdminOutreach() {
@@ -37,6 +38,9 @@ export default function AdminOutreach() {
               <TabsTrigger value="messages" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary" data-testid="tab-messages">
                 Outreach Queue
               </TabsTrigger>
+              <TabsTrigger value="past-clients" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary" data-testid="tab-past-clients">
+                Past Clients
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="prospects" className="mt-0">
@@ -50,6 +54,9 @@ export default function AdminOutreach() {
             <TabsContent value="messages" className="mt-0">
               <MessagesTab />
             </TabsContent>
+              <TabsContent value="past-clients" className="mt-0">
+                <ClientSafeListTab />
+              </TabsContent>
           </Tabs>
         </div>
       </Show>

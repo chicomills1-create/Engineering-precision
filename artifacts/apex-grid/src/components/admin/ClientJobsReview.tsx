@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import {
   ClientJobStatus,
+  getListClientMonthlySafeListQueryKey,
   getListClientJobsForReviewQueryKey,
   useListClientJobsForReview,
   usePreviewClientJobStatusNotification,
@@ -10,6 +11,7 @@ import {
   type ClientJob,
 } from '@workspace/api-client-react';
 import {
+  Archive,
   CalendarClock,
   Download,
   FileText,
@@ -18,6 +20,7 @@ import {
   MapPin,
   Phone,
   Save,
+  RotateCcw,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -68,6 +71,9 @@ function ReviewCard({ job }: { job: ClientJob }) {
       onSuccess: () => {
         void queryClient.invalidateQueries({
           queryKey: getListClientJobsForReviewQueryKey(),
+        });
+        void queryClient.invalidateQueries({
+          queryKey: getListClientMonthlySafeListQueryKey(),
         });
       },
     },
@@ -228,6 +234,41 @@ function ReviewCard({ job }: { job: ClientJob }) {
           </Button>
           {updateJob.isError && <span className="text-xs text-destructive">Update failed. Try again.</span>}
         </div>
+        <div className="mt-5 flex flex-col gap-3 border-t border-border pt-5 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold">Monthly past-client email</p>
+            <p className="text-xs text-muted-foreground">
+              Explicitly opt this contact in only after confirming permission.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {job.archivedAt && (
+              <Button
+                size="sm"
+                variant={job.monthlyEmailOptIn ? 'default' : 'outline'}
+                disabled={updateJob.isPending}
+                onClick={() => updateJob.mutate({
+                  id: job.id,
+                  data: { monthlyEmailOptIn: !job.monthlyEmailOptIn },
+                })}
+              >
+                {job.monthlyEmailOptIn ? 'Opted in' : 'Opt in'}
+              </Button>
+            )}
+            <Button
+              size="sm"
+              variant="outline"
+              disabled={updateJob.isPending}
+              onClick={() => updateJob.mutate({
+                id: job.id,
+                data: { archived: !job.archivedAt },
+              })}
+            >
+              {job.archivedAt ? <RotateCcw /> : <Archive />}
+              {job.archivedAt ? 'Restore request' : 'Archive request'}
+            </Button>
+          </div>
+        </div>
         {job.statusNotificationStatus && (
           <div
             className={`mt-4 border px-3 py-2 text-xs ${
@@ -332,6 +373,8 @@ function ReviewCard({ job }: { job: ClientJob }) {
 
 export function ClientJobsReview() {
   const { data: jobs, isLoading, error } = useListClientJobsForReview();
+  const activeJobs = jobs?.filter((job) => !job.archivedAt) ?? [];
+  const archivedJobs = jobs?.filter((job) => Boolean(job.archivedAt)) ?? [];
 
   return (
     <section className="container mx-auto px-4 pb-16 md:px-8">
@@ -355,8 +398,26 @@ export function ClientJobsReview() {
         </div>
       )}
       {jobs && jobs.length > 0 && (
-        <div className="space-y-4">
-          {jobs.map((job) => <ReviewCard key={job.id} job={job} />)}
+        <div className="space-y-10">
+          <section>
+            <h3 className="mb-4 font-display text-xl font-bold">Active requests ({activeJobs.length})</h3>
+            {activeJobs.length > 0 ? (
+              <div className="space-y-4">
+                {activeJobs.map((job) => <ReviewCard key={job.id} job={job} />)}
+              </div>
+            ) : <p className="text-sm text-muted-foreground">No active requests.</p>}
+          </section>
+          <section>
+            <h3 className="mb-2 font-display text-xl font-bold">Archived requests ({archivedJobs.length})</h3>
+            <p className="mb-4 text-sm text-muted-foreground">
+              Past requests remain available with their notes and private documents.
+            </p>
+            {archivedJobs.length > 0 ? (
+              <div className="space-y-4">
+                {archivedJobs.map((job) => <ReviewCard key={job.id} job={job} />)}
+              </div>
+            ) : <p className="text-sm text-muted-foreground">No archived requests.</p>}
+          </section>
         </div>
       )}
     </section>

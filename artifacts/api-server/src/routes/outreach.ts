@@ -10,6 +10,7 @@ import {
 } from "@workspace/db";
 import {
   ApproveOutreachMessageParams, ApproveOutreachMessageResponse, CreateCampaignBody, CreateCampaignResponse,
+  ListClientMonthlySafeListResponse, SendClientMonthlyEmailBody, SendClientMonthlyEmailResponse,
   CreateOutreachMessageBody, CreateOutreachMessageResponse, CreateProspectBody, CreateProspectResponse,
   GenerateOutreachDraftBody, GenerateOutreachDraftParams, GenerateOutreachDraftResponse,
   GetOutreachDashboardResponse, ListCampaignsResponse, ListOutreachMessagesResponse, ListProspectsResponse,
@@ -26,6 +27,12 @@ import { generateProspectDraft, sendApprovedOutreach } from "../lib/outreach";
 import { verifyUnsubscribeToken } from "../lib/unsubscribeToken";
 import { discoverPublicProspects } from "../lib/publicResearch";
 import { getOutreachAutomationStatus } from "../lib/outreachWorker";
+import {
+  claimClientMonthlyDelivery,
+  finishClientMonthlyDelivery,
+  getClientMonthlySafeList,
+  sendClientMonthlyMessage,
+} from "../lib/clientMonthlyOutreach";
 
 const router: IRouter = Router();
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
@@ -54,6 +61,59 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     sentToday: sentToday?.value ?? 0,
     replies: replies?.value ?? 0,
     ...automationStatus,
+  }));
+});
+router.get("/outreach/client-safe-list", requireAuth, async (_req, res): Promise<void> => {
+  const contacts = await getClientMonthlySafeList();
+  res.json(ListClientMonthlySafeListResponse.parse(contacts));
+});
+router.post("/outreach/client-monthly-send", requireAuth, async (req, res): Promise<void> => {
+  const parsed = SendClientMonthlyEmailBody.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: parsed.error.message });
+    return;
+  }
+  const requested = [...new Set(parsed.data.recipientEmails.map(normalizeEmail))];
+  const eligible = new Map((await getClientMonthlySafeList()).map((contact) => [contact.email, contact]));
+  const results: Array<{ email: string; status: "sent" | "failed" | "ineligible"; error: string | null }> = [];
+  for (const email of requested) {
+    const contact = eligible.get(email);
+    if (!contact) {
+      results.push({ email, status: "ineligible", error: "Contact is no longer on the safe list" });
+      continue;
+    }
+    const deliveryId = await claimClientMonthlyDelivery(
+      contact,
+      parsed.data.subject.trim(),
+      parsed.data.body.trim(),
+    );
+    if (!deliveryId) {
+      results.push({ email, status: "ineligible", error: "A monthly email was already claimed for this address this month" });
+      continue;
+    }
+    try {
+      const sent = await sendClientMonthlyMessage(contact, parsed.data.subject.trim(), parsed.data.body.trim());
+      await finishClientMonthlyDelivery({
+        deliveryId,
+        status: "sent",
+        providerMessageId: sent.providerMessageId,
+      });
+      results.push({ email, status: "sent", error: null });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unable to send";
+      await finishClientMonthlyDelivery({
+        deliveryId,
+        status: "failed",
+        error: message,
+      });
+      results.push({ email, status: "failed", error: message });
+    }
+  }
+  const sent = results.filter((result) => result.status === "sent").length;
+  res.json(SendClientMonthlyEmailResponse.parse({
+    sent,
+    failed: results.length - sent,
+    results,
   }));
 });
 router.get("/outreach/prospects", requireAuth, async (_req, res): Promise<void> => { const rows = await db.select().from(prospectsTable).orderBy(desc(prospectsTable.createdAt)); res.json(ListProspectsResponse.parse(rows.map(prospectJson))); });

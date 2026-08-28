@@ -7,6 +7,7 @@ import {
   uniqueIndex,
 } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
+import { sql } from "drizzle-orm";
 import { z } from "zod/v4";
 
 export const outreachResearchRunsTable = pgTable("outreach_research_runs", {
@@ -105,6 +106,26 @@ export const outreachSendReservationsTable = pgTable("outreach_send_reservations
   uniqueIndex("outreach_send_reservation_quota_slot_unique").on(table.quotaKey, table.slot),
 ]);
 
+export const clientMonthlyEmailDeliveriesTable = pgTable("client_monthly_email_deliveries", {
+  id: serial("id").primaryKey(),
+  clientJobId: integer("client_job_id"),
+  recipientName: text("recipient_name").notNull(),
+  recipientEmail: text("recipient_email").notNull(),
+  periodKey: text("period_key").notNull(),
+  subject: text("subject").notNull(),
+  body: text("body").notNull(),
+  status: text("status").notNull().default("sent"),
+  providerMessageId: text("provider_message_id"),
+  error: text("error"),
+  sentAt: timestamp("sent_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [
+  uniqueIndex("client_monthly_delivery_email_period_unique").on(
+    sql`lower(trim(${table.recipientEmail}))`,
+    table.periodKey,
+  ),
+]);
+
 export const insertResearchRunSchema = createInsertSchema(outreachResearchRunsTable).omit({ id: true, createdAt: true, completedAt: true });
 export const insertProspectSchema = createInsertSchema(prospectsTable).omit({ id: true, createdAt: true, updatedAt: true });
 export const insertCampaignSchema = createInsertSchema(campaignsTable).omit({ id: true, createdAt: true, updatedAt: true });
@@ -112,6 +133,7 @@ export const insertOutreachMessageSchema = createInsertSchema(outreachMessagesTa
 export const insertOutreachSuppressionSchema = createInsertSchema(outreachSuppressionsTable).omit({ id: true, createdAt: true });
 export const insertOutreachDeliveryEventSchema = createInsertSchema(outreachDeliveryEventsTable).omit({ id: true, createdAt: true });
 export const insertOutreachSendReservationSchema = createInsertSchema(outreachSendReservationsTable).omit({ id: true, createdAt: true });
+export const insertClientMonthlyEmailDeliverySchema = createInsertSchema(clientMonthlyEmailDeliveriesTable).omit({ id: true, createdAt: true });
 export type ResearchRun = typeof outreachResearchRunsTable.$inferSelect;
 export type InsertResearchRun = z.infer<typeof insertResearchRunSchema>;
 export type InsertProspect = z.infer<typeof insertProspectSchema>;
@@ -124,3 +146,4 @@ export type InsertOutreachSuppression = z.infer<typeof insertOutreachSuppression
 export type OutreachSuppression = typeof outreachSuppressionsTable.$inferSelect;
 export type InsertOutreachDeliveryEvent = z.infer<typeof insertOutreachDeliveryEventSchema>;
 export type OutreachDeliveryEvent = typeof outreachDeliveryEventsTable.$inferSelect;
+export type ClientMonthlyEmailDelivery = typeof clientMonthlyEmailDeliveriesTable.$inferSelect;

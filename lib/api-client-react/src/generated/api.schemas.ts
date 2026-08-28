@@ -218,6 +218,11 @@ export interface ClientJob {
   statusNotificationError?: string | null;
   /** @nullable */
   statusNotificationSentAt?: string | null;
+  /** @nullable */
+  archivedAt: string | null;
+  monthlyEmailOptIn: boolean;
+  /** @nullable */
+  monthlyEmailOptedAt: string | null;
   documents: ClientJobDocument[];
   createdAt: string;
   updatedAt: string;
@@ -274,6 +279,61 @@ export interface ClientJobUpdate {
      * @nullable
      */
   internalNotes?: string | null;
+  /** Archive or restore this request without deleting it */
+  archived?: boolean;
+  /** Explicit consent choice for monthly past-client emails */
+  monthlyEmailOptIn?: boolean;
+}
+
+export interface ClientMonthlySafeListContact {
+  jobId: number;
+  name: string;
+  email: string;
+  /** @nullable */
+  companyName: string | null;
+  archivedAt: string;
+  optedAt: string;
+}
+
+export interface ClientMonthlyEmailInput {
+  /**
+     * @minItems 1
+     * @maxItems 100
+     * @items.pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$
+     */
+  recipientEmails: string[];
+  /**
+     * @minLength 1
+     * @maxLength 200
+     */
+  subject: string;
+  /**
+     * @minLength 1
+     * @maxLength 10000
+     */
+  body: string;
+}
+
+export type ClientMonthlyEmailDeliveryResultStatus = typeof ClientMonthlyEmailDeliveryResultStatus[keyof typeof ClientMonthlyEmailDeliveryResultStatus];
+
+
+export const ClientMonthlyEmailDeliveryResultStatus = {
+  sent: 'sent',
+  failed: 'failed',
+  ineligible: 'ineligible',
+} as const;
+
+export interface ClientMonthlyEmailDeliveryResult {
+  email: string;
+  status: ClientMonthlyEmailDeliveryResultStatus;
+  /** @nullable */
+  error?: string | null;
+}
+
+export interface ClientMonthlyEmailResult {
+  sent: number;
+  failed: number;
+  results: ClientMonthlyEmailDeliveryResult[];
 }
 
 export interface ClientJobNotificationPreview {

@@ -14,4 +14,8 @@ export interface ClientJobUpdate {
      * @nullable
      */
   internalNotes?: string | null;
+  /** Archive or restore this request without deleting it */
+  archived?: boolean;
+  /** Explicit consent choice for monthly past-client emails */
+  monthlyEmailOptIn?: boolean;
 }

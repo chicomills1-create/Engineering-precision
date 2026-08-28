@@ -36,6 +36,11 @@ export interface ClientJob {
   statusNotificationError?: string | null;
   /** @nullable */
   statusNotificationSentAt?: string | null;
+  /** @nullable */
+  archivedAt: string | null;
+  monthlyEmailOptIn: boolean;
+  /** @nullable */
+  monthlyEmailOptedAt: string | null;
   documents: ClientJobDocument[];
   createdAt: string;
   updatedAt: string;

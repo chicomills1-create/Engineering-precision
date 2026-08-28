@@ -65,9 +65,16 @@ function JobCard({ job }: { job: ClientJob }) {
             </span>
           </div>
         </div>
-        <span className={`w-fit border px-3 py-1.5 text-xs font-semibold uppercase tracking-wider ${statusStyle[job.status]}`}>
-          {statusLabel[job.status]}
-        </span>
+        <div className="flex flex-wrap gap-2">
+          {job.archivedAt && (
+            <span className="w-fit border border-border bg-secondary px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Archived
+            </span>
+          )}
+          <span className={`w-fit border px-3 py-1.5 text-xs font-semibold uppercase tracking-wider ${statusStyle[job.status]}`}>
+            {statusLabel[job.status]}
+          </span>
+        </div>
       </div>
       <div className="grid gap-6 pt-5 md:grid-cols-[1fr_0.8fr]">
         <div>
@@ -125,6 +132,8 @@ export default function ClientPortal() {
       enabled: Boolean(isLoaded && isSignedIn),
     },
   });
+  const activeJobs = jobs?.filter((job) => !job.archivedAt) ?? [];
+  const archivedJobs = jobs?.filter((job) => Boolean(job.archivedAt)) ?? [];
 
   if (!isLoaded) {
     return (
@@ -215,8 +224,30 @@ export default function ClientPortal() {
           </div>
         )}
         {jobs && jobs.length > 0 && (
-          <div className="space-y-5">
-            {jobs.map((job) => <JobCard key={job.id} job={job} />)}
+          <div className="space-y-12">
+            <section>
+              <h2 className="mb-4 font-display text-2xl font-bold">Current projects</h2>
+              {activeJobs.length > 0 ? (
+                <div className="space-y-5">
+                  {activeJobs.map((job) => <JobCard key={job.id} job={job} />)}
+                </div>
+              ) : (
+                <p className="border border-border bg-card p-6 text-sm text-muted-foreground">
+                  No current projects. Your past requests remain available below.
+                </p>
+              )}
+            </section>
+            {archivedJobs.length > 0 && (
+              <section>
+                <h2 className="mb-2 font-display text-2xl font-bold">Past requests</h2>
+                <p className="mb-4 text-sm text-muted-foreground">
+                  Archived requests and their private documents remain available for your records.
+                </p>
+                <div className="space-y-5">
+                  {archivedJobs.map((job) => <JobCard key={job.id} job={job} />)}
+                </div>
+              </section>
+            )}
           </div>
         )}
       </div>

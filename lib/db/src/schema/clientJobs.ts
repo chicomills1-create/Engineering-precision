@@ -1,4 +1,5 @@
 import {
+  boolean,
   integer,
   pgTable,
   serial,
@@ -47,6 +48,9 @@ export const clientJobsTable = pgTable("client_jobs", {
   statusNotificationStatus: text("status_notification_status"),
   statusNotificationError: text("status_notification_error"),
   statusNotificationSentAt: timestamp("status_notification_sent_at", { withTimezone: true }),
+  archivedAt: timestamp("archived_at", { withTimezone: true }),
+  monthlyEmailOptIn: boolean("monthly_email_opt_in").notNull().default(false),
+  monthlyEmailOptedAt: timestamp("monthly_email_opted_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
 });

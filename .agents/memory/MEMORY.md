@@ -14,3 +14,4 @@
 - [South Africa positioning](south-africa-positioning.md) — build authority with informational content; publish local commercial-service claims only after credentials and partners are verified.
 - [Outreach automation safety](outreach-automation-safety.md) — keep follow-ups manual until delivery events and reply detection can stop sequences reliably.
 - [Private upload claims](private-upload-claims.md) — private object paths are not ownership; bind uploads to one-time claims and consume them atomically with the owning record.
+- [Past-client monthly outreach](past-client-monthly-outreach.md) — consent is canonical per normalized email; claim one send per Phoenix month before provider dispatch.

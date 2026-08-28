@@ -31,6 +31,9 @@ import type {
   ClientJobStatusNotificationInput,
   ClientJobUpdate,
   ClientJobUploadResponse,
+  ClientMonthlyEmailInput,
+  ClientMonthlyEmailResult,
+  ClientMonthlySafeListContact,
   DraftGenerationInput,
   ErrorMessage,
   HealthStatus,
@@ -1112,6 +1115,154 @@ export function useListClientJobsForReview<TData = Awaited<ReturnType<typeof lis
 
 
 
+
+export const getListClientMonthlySafeListUrl = () => {
+
+
+
+
+  return `/api/outreach/client-safe-list`
+}
+
+/**
+ * @summary List archived client contacts eligible for monthly outreach
+ */
+export const listClientMonthlySafeList = async ( options?: Parameters<typeof customFetch>[1]): Promise<ClientMonthlySafeListContact[]> => {
+
+  return customFetch<ClientMonthlySafeListContact[]>(getListClientMonthlySafeListUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListClientMonthlySafeListQueryKey = () => {
+    return [
+    `/api/outreach/client-safe-list`
+    ] as const;
+    }
+
+
+export const getListClientMonthlySafeListQueryOptions = <TData = Awaited<ReturnType<typeof listClientMonthlySafeList>>, TError = ErrorType<ErrorMessage>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listClientMonthlySafeList>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListClientMonthlySafeListQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listClientMonthlySafeList>>> = ({ signal }) => listClientMonthlySafeList({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listClientMonthlySafeList>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListClientMonthlySafeListQueryResult = NonNullable<Awaited<ReturnType<typeof listClientMonthlySafeList>>>
+export type ListClientMonthlySafeListQueryError = ErrorType<ErrorMessage>
+
+
+/**
+ * @summary List archived client contacts eligible for monthly outreach
+ */
+
+export function useListClientMonthlySafeList<TData = Awaited<ReturnType<typeof listClientMonthlySafeList>>, TError = ErrorType<ErrorMessage>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listClientMonthlySafeList>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListClientMonthlySafeListQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getSendClientMonthlyEmailUrl = () => {
+
+
+
+
+  return `/api/outreach/client-monthly-send`
+}
+
+/**
+ * @summary Manually send an approved monthly email to selected safe-list contacts
+ */
+export const sendClientMonthlyEmail = async (clientMonthlyEmailInput: ClientMonthlyEmailInput, options?: Parameters<typeof customFetch>[1]): Promise<ClientMonthlyEmailResult> => {
+
+  return customFetch<ClientMonthlyEmailResult>(getSendClientMonthlyEmailUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(clientMonthlyEmailInput)
+  }
+);}
+
+
+
+
+
+export const getSendClientMonthlyEmailMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof sendClientMonthlyEmail>>, TError,{data: BodyType<ClientMonthlyEmailInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof sendClientMonthlyEmail>>, TError,{data: BodyType<ClientMonthlyEmailInput>}, TContext> => {
+
+const mutationKey = ['sendClientMonthlyEmail'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof sendClientMonthlyEmail>>, {data: BodyType<ClientMonthlyEmailInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  sendClientMonthlyEmail(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type SendClientMonthlyEmailMutationResult = NonNullable<Awaited<ReturnType<typeof sendClientMonthlyEmail>>>
+    export type SendClientMonthlyEmailMutationBody = BodyType<ClientMonthlyEmailInput>
+    export type SendClientMonthlyEmailMutationError = ErrorType<ErrorMessage>
+
+    /**
+ * @summary Manually send an approved monthly email to selected safe-list contacts
+ */
+export const useSendClientMonthlyEmail = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof sendClientMonthlyEmail>>, TError,{data: BodyType<ClientMonthlyEmailInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof sendClientMonthlyEmail>>,
+        TError,
+        {data: BodyType<ClientMonthlyEmailInput>},
+        TContext
+      > => {
+      return useMutation(getSendClientMonthlyEmailMutationOptions(options));
+    }
 
 export const getUpdateClientJobUrl = (id: number,) => {
 

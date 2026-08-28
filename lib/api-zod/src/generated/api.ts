@@ -222,6 +222,9 @@ export const ListClientJobsResponseItem = zod.object({
   "statusNotificationStatus": zod.union([zod.literal('sent'),zod.literal('failed'),zod.literal(null)]).nullish(),
   "statusNotificationError": zod.string().nullish(),
   "statusNotificationSentAt": zod.string().nullish(),
+  "archivedAt": zod.string().nullable(),
+  "monthlyEmailOptIn": zod.boolean(),
+  "monthlyEmailOptedAt": zod.string().nullable(),
   "documents": zod.array(zod.object({
   "id": zod.number(),
   "name": zod.string(),
@@ -309,6 +312,9 @@ export const CreateClientJobResponse = zod.object({
   "statusNotificationStatus": zod.union([zod.literal('sent'),zod.literal('failed'),zod.literal(null)]).nullish(),
   "statusNotificationError": zod.string().nullish(),
   "statusNotificationSentAt": zod.string().nullish(),
+  "archivedAt": zod.string().nullable(),
+  "monthlyEmailOptIn": zod.boolean(),
+  "monthlyEmailOptedAt": zod.string().nullable(),
   "documents": zod.array(zod.object({
   "id": zod.number(),
   "name": zod.string(),
@@ -356,6 +362,9 @@ export const ListClientJobsForReviewResponseItem = zod.object({
   "statusNotificationStatus": zod.union([zod.literal('sent'),zod.literal('failed'),zod.literal(null)]).nullish(),
   "statusNotificationError": zod.string().nullish(),
   "statusNotificationSentAt": zod.string().nullish(),
+  "archivedAt": zod.string().nullable(),
+  "monthlyEmailOptIn": zod.boolean(),
+  "monthlyEmailOptedAt": zod.string().nullable(),
   "documents": zod.array(zod.object({
   "id": zod.number(),
   "name": zod.string(),
@@ -367,6 +376,49 @@ export const ListClientJobsForReviewResponseItem = zod.object({
   "updatedAt": zod.string()
 })
 export const ListClientJobsForReviewResponse = zod.array(ListClientJobsForReviewResponseItem)
+
+
+/**
+ * @summary List archived client contacts eligible for monthly outreach
+ */
+export const ListClientMonthlySafeListResponseItem = zod.object({
+  "jobId": zod.number(),
+  "name": zod.string(),
+  "email": zod.string(),
+  "companyName": zod.string().nullable(),
+  "archivedAt": zod.string(),
+  "optedAt": zod.string()
+})
+export const ListClientMonthlySafeListResponse = zod.array(ListClientMonthlySafeListResponseItem)
+
+
+/**
+ * @summary Manually send an approved monthly email to selected safe-list contacts
+ */
+export const sendClientMonthlyEmailBodyRecipientEmailsItemRegExp = new RegExp('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+export const sendClientMonthlyEmailBodyRecipientEmailsMax = 100;
+
+export const sendClientMonthlyEmailBodySubjectMax = 200;
+
+export const sendClientMonthlyEmailBodyBodyMax = 10000;
+
+
+
+export const SendClientMonthlyEmailBody = zod.object({
+  "recipientEmails": zod.array(zod.string().regex(sendClientMonthlyEmailBodyRecipientEmailsItemRegExp)).min(1).max(sendClientMonthlyEmailBodyRecipientEmailsMax),
+  "subject": zod.string().min(1).max(sendClientMonthlyEmailBodySubjectMax),
+  "body": zod.string().min(1).max(sendClientMonthlyEmailBodyBodyMax)
+})
+
+export const SendClientMonthlyEmailResponse = zod.object({
+  "sent": zod.number(),
+  "failed": zod.number(),
+  "results": zod.array(zod.object({
+  "email": zod.string(),
+  "status": zod.enum(['sent', 'failed', 'ineligible']),
+  "error": zod.string().nullish()
+}))
+})
 
 
 /**
@@ -382,7 +434,9 @@ export const updateClientJobBodyInternalNotesMax = 10000;
 
 export const UpdateClientJobBody = zod.object({
   "status": zod.enum(['submitted', 'reviewing', 'needs_information', 'quoted', 'accepted', 'declined']).optional(),
-  "internalNotes": zod.string().max(updateClientJobBodyInternalNotesMax).nullish()
+  "internalNotes": zod.string().max(updateClientJobBodyInternalNotesMax).nullish(),
+  "archived": zod.boolean().optional().describe('Archive or restore this request without deleting it'),
+  "monthlyEmailOptIn": zod.boolean().optional().describe('Explicit consent choice for monthly past-client emails')
 })
 
 export const UpdateClientJobResponse = zod.object({
@@ -403,6 +457,9 @@ export const UpdateClientJobResponse = zod.object({
   "statusNotificationStatus": zod.union([zod.literal('sent'),zod.literal('failed'),zod.literal(null)]).nullish(),
   "statusNotificationError": zod.string().nullish(),
   "statusNotificationSentAt": zod.string().nullish(),
+  "archivedAt": zod.string().nullable(),
+  "monthlyEmailOptIn": zod.boolean(),
+  "monthlyEmailOptedAt": zod.string().nullable(),
   "documents": zod.array(zod.object({
   "id": zod.number(),
   "name": zod.string(),
@@ -464,6 +521,9 @@ export const SendClientJobStatusNotificationResponse = zod.object({
   "statusNotificationStatus": zod.union([zod.literal('sent'),zod.literal('failed'),zod.literal(null)]).nullish(),
   "statusNotificationError": zod.string().nullish(),
   "statusNotificationSentAt": zod.string().nullish(),
+  "archivedAt": zod.string().nullable(),
+  "monthlyEmailOptIn": zod.boolean(),
+  "monthlyEmailOptedAt": zod.string().nullable(),
   "documents": zod.array(zod.object({
   "id": zod.number(),
   "name": zod.string(),

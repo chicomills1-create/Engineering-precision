@@ -30,6 +30,11 @@ const SERVICES = [
   'Architectural design',
   'General contracting',
 ];
+const MAX_FILE_BYTES = 20 * 1024 * 1024;
+const ALLOWED_FILE_EXTENSIONS = new Set([
+  'pdf', 'dwg', 'dxf', 'rvt', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx',
+  'zip', 'jpg', 'jpeg', 'png', 'tif', 'tiff',
+]);
 
 type IntakeForm = {
   submitterName: string;
@@ -129,6 +134,13 @@ export default function ProjectIntake() {
     try {
       const uploaded: ClientJobDocumentInput[] = [];
       for (const file of Array.from(files)) {
+        const extension = file.name.split('.').pop()?.toLowerCase() || '';
+        if (!ALLOWED_FILE_EXTENSIONS.has(extension)) {
+          throw new Error(`${file.name} is not supported. Use PDF, DWG, DXF, Revit, image, Office, or ZIP files.`);
+        }
+        if (file.size > MAX_FILE_BYTES) {
+          throw new Error(`${file.name} exceeds the 20 MB per-file limit.`);
+        }
         const response = await fetch('/api/client/uploads', {
           method: 'POST',
           headers: {
@@ -378,7 +390,7 @@ export default function ProjectIntake() {
             </fieldset>
 
             <div className="mt-7 grid gap-6">
-              <Field label="Scope and current need" required>
+              <Field label="Project scope or description" required>
                 <Textarea
                   required
                   rows={7}
@@ -412,7 +424,8 @@ export default function ProjectIntake() {
                 <div>
                   <p className="text-sm font-semibold">Plans and supporting documents</p>
                   <p className="mt-1 text-xs text-muted-foreground">
-                    Up to 20 MB each. PDF, CAD, Revit, images, Office, or ZIP.
+                    Up to 20 MB each. Architectural plans and project files: PDF,
+                    DWG, DXF, Revit (.rvt), images, Office, or ZIP.
                   </p>
                 </div>
                 <Button

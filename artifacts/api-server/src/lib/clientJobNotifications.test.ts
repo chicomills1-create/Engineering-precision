@@ -7,6 +7,9 @@ import {
 } from "./clientJobNotifications";
 
 const job: ClientJob = {
+  archivedAt: null,
+  monthlyEmailOptIn: false,
+  monthlyEmailOptedAt: null,
   id: 42,
   companyId: 7,
   membershipId: 9,

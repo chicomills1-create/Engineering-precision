@@ -370,6 +370,56 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorMessage"
+  /outreach/client-safe-list:
+    get:
+      operationId: listClientMonthlySafeList
+      tags: [outreach]
+      summary: List archived client contacts eligible for monthly outreach
+      responses:
+        "200":
+          description: Deduplicated eligible contacts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ClientMonthlySafeListContact"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+  /outreach/client-monthly-send:
+    post:
+      operationId: sendClientMonthlyEmail
+      tags: [outreach]
+      summary: Manually send an approved monthly email to selected safe-list contacts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientMonthlyEmailInput"
+      responses:
+        "200":
+          description: Per-recipient delivery results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientMonthlyEmailResult"
+        "400":
+          description: Invalid or ineligible recipients
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
   /client/jobs/{id}:
     patch:
       operationId: updateClientJob
@@ -874,7 +924,7 @@ components:
         createdAt: { type: string }
     ClientJob:
       type: object
-      required: [id, submitterName, submitterEmail, projectType, projectLocation, scope, services, status, documents, createdAt, updatedAt]
+      required: [id, submitterName, submitterEmail, projectType, projectLocation, scope, services, status, archivedAt, monthlyEmailOptIn, monthlyEmailOptedAt, documents, createdAt, updatedAt]
       properties:
         id: { type: number }
         companyId: { type: [number, "null"] }
@@ -894,6 +944,9 @@ components:
         statusNotificationStatus: { type: [string, "null"], enum: [sent, failed, null] }
         statusNotificationError: { type: [string, "null"] }
         statusNotificationSentAt: { type: [string, "null"] }
+        archivedAt: { type: [string, "null"] }
+        monthlyEmailOptIn: { type: boolean }
+        monthlyEmailOptedAt: { type: [string, "null"] }
         documents:
           type: array
           items:
@@ -928,6 +981,50 @@ components:
         status:
           $ref: "#/components/schemas/ClientJobStatus"
         internalNotes: { type: ["string", "null"], maxLength: 10000 }
+        archived:
+          type: boolean
+          description: Archive or restore this request without deleting it
+        monthlyEmailOptIn:
+          type: boolean
+          description: Explicit consent choice for monthly past-client emails
+    ClientMonthlySafeListContact:
+      type: object
+      required: [jobId, name, email, companyName, archivedAt, optedAt]
+      properties:
+        jobId: { type: number }
+        name: { type: string }
+        email: { type: string }
+        companyName: { type: [string, "null"] }
+        archivedAt: { type: string }
+        optedAt: { type: string }
+    ClientMonthlyEmailInput:
+      type: object
+      required: [recipientEmails, subject, body]
+      properties:
+        recipientEmails:
+          type: array
+          minItems: 1
+          maxItems: 100
+          items: { type: string, pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$" }
+        subject: { type: string, minLength: 1, maxLength: 200 }
+        body: { type: string, minLength: 1, maxLength: 10000 }
+    ClientMonthlyEmailDeliveryResult:
+      type: object
+      required: [email, status]
+      properties:
+        email: { type: string }
+        status: { type: string, enum: [sent, failed, ineligible] }
+        error: { type: [string, "null"] }
+    ClientMonthlyEmailResult:
+      type: object
+      required: [sent, failed, results]
+      properties:
+        sent: { type: number }
+        failed: { type: number }
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/ClientMonthlyEmailDeliveryResult"
     ClientJobNotificationPreview:
       type: object
       required: [status, recipient, subject, body, portalUrl]
