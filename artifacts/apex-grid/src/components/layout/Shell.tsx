@@ -248,7 +248,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
               </Link>
               <span className="text-border">/</span>
               <Link
-                href="/admin/outreach"
+                href="/admin"
                 className="text-base text-muted-foreground p-2 hover:text-primary"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -302,7 +302,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 <li className="flex flex-wrap items-center gap-x-3 gap-y-1">
                   <Link href="/client-portal" className="hover:text-primary transition-colors">Client Portal</Link>
                   <span className="text-border">/</span>
-                  <Link href="/admin/outreach" className="hover:text-primary transition-colors">Employee Access</Link>
+                  <Link href="/admin" className="hover:text-primary transition-colors">Employee Access</Link>
                 </li>
               </ul>
             </div>

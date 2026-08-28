@@ -9,9 +9,9 @@ export function AdminNav() {
   const { signOut } = useClerk();
 
   const links = [
-    { href: '/admin', label: 'Inquiries' },
+    { href: '/admin', label: 'Jobs & Inquiries' },
     { href: '/admin/seo', label: 'SEO' },
-    { href: '/admin/outreach', label: 'Outreach' },
+    { href: '/admin/outreach', label: 'Email Approvals' },
   ];
 
   return (

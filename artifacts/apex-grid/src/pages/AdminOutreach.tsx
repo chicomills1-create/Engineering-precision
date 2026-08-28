@@ -15,10 +15,10 @@ export default function AdminOutreach() {
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
             <div>
-              <p className="text-xs uppercase tracking-[0.2em] text-primary mb-2">Admin</p>
-              <h1 className="font-display text-3xl md:text-4xl font-bold">Outreach Workspace</h1>
+              <p className="text-xs uppercase tracking-[0.2em] text-primary mb-2">Employee Portal</p>
+              <h1 className="font-display text-3xl md:text-4xl font-bold">Email approvals & outreach</h1>
               <p className="text-sm text-muted-foreground mt-2">
-                Manage commercial architect & builder campaigns.
+                Review prospects, approve drafts, and manage sends from your personal workspace.
               </p>
             </div>
           </div>

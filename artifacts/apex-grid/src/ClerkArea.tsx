@@ -121,14 +121,14 @@ export default function ClerkArea({ page }: { page: ClerkAreaPage }) {
       localization={{
         signIn: {
           start: {
-            title: 'Admin access',
-            subtitle: 'Sign in to view project inquiries',
+            title: 'Employee portal access',
+            subtitle: 'Sign in to manage jobs and outreach approvals',
           },
         },
         signUp: {
           start: {
             title: 'Create your account',
-            subtitle: 'Apex Grid Engineering admin',
+            subtitle: 'Apex Grid Engineering employee portal',
           },
         },
       }}

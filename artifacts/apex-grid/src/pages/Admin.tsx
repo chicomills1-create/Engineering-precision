@@ -77,11 +77,11 @@ function LeadsList() {
     <div className="container mx-auto px-4 md:px-8 py-16 min-h-[70vh]">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-primary mb-2">Admin</p>
-          <h1 className="font-display text-3xl md:text-4xl font-bold">Project Inquiries</h1>
+          <p className="text-xs uppercase tracking-[0.2em] text-primary mb-2">Employee Portal</p>
+          <h1 className="font-display text-3xl md:text-4xl font-bold">Jobs, inquiries & workspace</h1>
           {user && (
             <p className="text-sm text-muted-foreground mt-2">
-              Signed in as {user.primaryEmailAddress?.emailAddress ?? user.fullName}
+              Your personal operations dashboard · signed in as {user.primaryEmailAddress?.emailAddress ?? user.fullName}
             </p>
           )}
         </div>
