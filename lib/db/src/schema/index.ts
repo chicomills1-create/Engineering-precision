@@ -19,3 +19,4 @@
 
 export * from "./leads";
 export * from "./subscribers";
+export * from "./outreach";

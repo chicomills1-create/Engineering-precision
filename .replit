@@ -79,6 +79,7 @@ packages = ["freetype", "gumbo", "harfbuzz", "jbig2dec", "libjpeg_turbo", "mupdf
 LEAD_NOTIFY_EMAIL = "info@apexgrideng.com"
 VITE_SITE_URL = "https://apexgrideng.com"
 LEAD_NOTIFY_FROM_EMAIL = "info@apexgrideng.com"
+OUTREACH_FROM_EMAIL = "info@apexgrideng.com"
 
 [userenv.production]
 PUBLIC_SITE_URL = "https://apexgrideng.com"

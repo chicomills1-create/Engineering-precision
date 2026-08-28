@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Show, useClerk, useUser } from '@clerk/react';
+import { Show, useUser } from '@clerk/react';
 import { Redirect } from 'wouter';
 import { useQueryClient } from '@tanstack/react-query';
 import {
@@ -11,8 +11,8 @@ import {
   getListSubscribersQueryKey,
   LeadStatus,
 } from '@workspace/api-client-react';
-import { Download, Inbox, LogOut, Mail, Phone, ShieldAlert, Trash2, Users } from 'lucide-react';
-import { Link } from 'wouter';
+import { Download, Inbox, Mail, Phone, ShieldAlert, Trash2, Users } from 'lucide-react';
+import { AdminNav } from '@/components/layout/AdminNav';
 
 const STATUSES = [LeadStatus.new, LeadStatus.contacted, LeadStatus.closed] as const;
 
@@ -67,7 +67,6 @@ function StatusControl({ leadId, status }: { leadId: number; status: LeadStatus 
 
 function LeadsList() {
   const { data: leads, isLoading, error } = useListLeads();
-  const { signOut } = useClerk();
   const { user } = useUser();
   const [filter, setFilter] = useState<LeadStatus | 'all'>('all');
 
@@ -75,7 +74,7 @@ function LeadsList() {
 
   return (
     <div className="container mx-auto px-4 md:px-8 py-16 min-h-[70vh]">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-primary mb-2">Admin</p>
           <h1 className="font-display text-3xl md:text-4xl font-bold">Project Inquiries</h1>
@@ -85,23 +84,9 @@ function LeadsList() {
             </p>
           )}
         </div>
-        <div className="flex items-center gap-2 self-start md:self-auto">
-          <Link
-            to="/admin/seo"
-            className="inline-flex items-center gap-2 h-10 px-4 border border-border text-sm text-muted-foreground hover:text-foreground hover:border-primary/50 rounded-[2px] transition-colors"
-          >
-            SEO Status →
-          </Link>
-          <button
-            type="button"
-            onClick={() => signOut({ redirectUrl: basePath || '/' })}
-            className="inline-flex items-center gap-2 h-10 px-4 border border-border text-sm text-muted-foreground hover:text-foreground hover:border-primary/50 rounded-[2px] transition-colors"
-          >
-            <LogOut className="w-4 h-4" />
-            Sign out
-          </button>
-        </div>
       </div>
+      
+      <AdminNav />
 
       {isLoading && (
         <p className="text-muted-foreground">Loading inquiries…</p>

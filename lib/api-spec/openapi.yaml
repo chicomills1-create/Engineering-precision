@@ -14,6 +14,8 @@ tags:
     description: Lead / contact form operations
   - name: Storage
     description: Object storage upload and serving endpoints.
+  - name: outreach
+    description: Authenticated B2B outreach management.
 paths:
   /healthz:
     get:
@@ -305,6 +307,108 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+  /outreach/dashboard:
+    get:
+      operationId: getOutreachDashboard
+      tags: [outreach]
+      responses:
+        "200": { description: Summary, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachDashboard" } } } }
+  /outreach/prospects:
+    get:
+      operationId: listProspects
+      tags: [outreach]
+      responses:
+        "200": { description: Prospects, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/Prospect" } } } } }
+    post:
+      operationId: createProspect
+      tags: [outreach]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/ProspectInput" } } } }
+      responses:
+        "201": { description: Created, content: { application/json: { schema: { $ref: "#/components/schemas/Prospect" } } } }
+  /outreach/prospects/{id}:
+    patch:
+      operationId: updateProspect
+      tags: [outreach]
+      parameters: [{ name: id, in: path, required: true, schema: { type: number } }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/ProspectUpdate" } } } }
+      responses:
+        "200": { description: Updated, content: { application/json: { schema: { $ref: "#/components/schemas/Prospect" } } } }
+  /outreach/prospects/{id}/draft:
+    post:
+      operationId: generateOutreachDraft
+      tags: [outreach]
+      parameters: [{ name: id, in: path, required: true, schema: { type: number } }]
+      requestBody: { required: false, content: { application/json: { schema: { $ref: "#/components/schemas/DraftGenerationInput" } } } }
+      responses:
+        "201": { description: Drafts created, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/OutreachMessage" } } } } }
+  /outreach/campaigns:
+    get:
+      operationId: listCampaigns
+      tags: [outreach]
+      responses:
+        "200": { description: Campaigns, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/Campaign" } } } } }
+    post:
+      operationId: createCampaign
+      tags: [outreach]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/CampaignInput" } } } }
+      responses:
+        "201": { description: Created, content: { application/json: { schema: { $ref: "#/components/schemas/Campaign" } } } }
+  /outreach/campaigns/{id}:
+    patch:
+      operationId: updateCampaign
+      tags: [outreach]
+      parameters: [{ name: id, in: path, required: true, schema: { type: number } }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/CampaignUpdate" } } } }
+      responses:
+        "200": { description: Updated, content: { application/json: { schema: { $ref: "#/components/schemas/Campaign" } } } }
+  /outreach/messages:
+    get:
+      operationId: listOutreachMessages
+      tags: [outreach]
+      responses:
+        "200": { description: Messages, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/OutreachMessage" } } } } }
+    post:
+      operationId: createOutreachMessage
+      tags: [outreach]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachMessageInput" } } } }
+      responses:
+        "201": { description: Created, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachMessage" } } } }
+  /outreach/messages/{id}:
+    patch:
+      operationId: updateOutreachMessage
+      tags: [outreach]
+      parameters: [{ name: id, in: path, required: true, schema: { type: number } }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachMessageUpdate" } } } }
+      responses:
+        "200": { description: Updated, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachMessage" } } } }
+  /outreach/messages/{id}/approve:
+    post:
+      operationId: approveOutreachMessage
+      tags: [outreach]
+      parameters: [{ name: id, in: path, required: true, schema: { type: number } }]
+      responses:
+        "200": { description: Approved, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachMessage" } } } }
+  /outreach/messages/{id}/send:
+    post:
+      operationId: sendOutreachMessage
+      tags: [outreach]
+      parameters: [{ name: id, in: path, required: true, schema: { type: number } }]
+      responses:
+        "200": { description: Sent, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachMessage" } } } }
+  /outreach/suppressions:
+    post:
+      operationId: suppressOutreachAddress
+      tags: [outreach]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/SuppressionInput" } } } }
+      responses:
+        "201": { description: Suppressed, content: { application/json: { schema: { $ref: "#/components/schemas/Suppression" } } } }
+  /outreach/unsubscribe:
+    post:
+      operationId: unsubscribeOutreachAddress
+      tags: [outreach]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachUnsubscribeInput" } } } }
+      responses:
+        "200": { description: Unsubscribed, content: { application/json: { schema: { $ref: "#/components/schemas/SubscribeResult" } } } }
 components:
   schemas:
     HealthStatus:
@@ -463,3 +567,132 @@ components:
           description: Object paths of uploaded files attached to the inquiry.
           items:
             type: string
+    Prospect:
+      type: object
+      required: [id, companyName, city, state, audience, fitScore, contactName, contactEmail, emailStatus, status, createdAt, updatedAt]
+      properties:
+        id: { type: number }
+        companyName: { type: string }
+        website: { type: [string, "null"] }
+        city: { type: string }
+        state: { type: string, enum: [AZ, CA, TX] }
+        audience: { type: string, enum: [architect, builder] }
+        sourceUrl: { type: [string, "null"] }
+        researchNotes: { type: [string, "null"] }
+        fitScore: { type: number, minimum: 0, maximum: 100 }
+        contactName: { type: string }
+        contactTitle: { type: [string, "null"] }
+        contactEmail: { type: string }
+        emailStatus: { type: string, enum: [unverified, verified, invalid] }
+        status: { type: string, enum: [new, review, approved, contacted, replied, not_a_fit, suppressed] }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+    ProspectInput:
+      type: object
+      required: [companyName, city, state, audience, contactName, contactEmail]
+      properties:
+        companyName: { type: string, minLength: 1 }
+        website: { type: string }
+        city: { type: string, minLength: 1 }
+        state: { type: string, enum: [AZ, CA, TX] }
+        audience: { type: string, enum: [architect, builder] }
+        sourceUrl: { type: string }
+        researchNotes: { type: string }
+        fitScore: { type: number, minimum: 0, maximum: 100 }
+        contactName: { type: string, minLength: 1 }
+        contactTitle: { type: string }
+        contactEmail: { type: string, pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$" }
+        emailStatus: { type: string, enum: [unverified, verified, invalid] }
+        status: { type: string, enum: [new, review, approved, contacted, replied, not_a_fit, suppressed] }
+    ProspectUpdate:
+      allOf: [{ $ref: "#/components/schemas/ProspectInput" }]
+    Campaign:
+      type: object
+      required: [id, name, audience, states, dailyLimit, status, createdAt, updatedAt]
+      properties:
+        id: { type: number }
+        name: { type: string }
+        audience: { type: string, enum: [architect, builder] }
+        states: { type: array, items: { type: string, enum: [AZ, CA, TX] } }
+        dailyLimit: { type: number, minimum: 1, maximum: 100 }
+        status: { type: string, enum: [draft, active, paused] }
+        subjectTemplate: { type: [string, "null"] }
+        bodyTemplate: { type: [string, "null"] }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+    CampaignInput:
+      type: object
+      required: [name, audience, states]
+      properties:
+        name: { type: string, minLength: 1 }
+        audience: { type: string, enum: [architect, builder] }
+        states: { type: array, minItems: 1, items: { type: string, enum: [AZ, CA, TX] } }
+        dailyLimit: { type: number, minimum: 1, maximum: 100, default: 10 }
+        status: { type: string, enum: [draft, active, paused] }
+        subjectTemplate: { type: string }
+        bodyTemplate: { type: string }
+    CampaignUpdate:
+      allOf: [{ $ref: "#/components/schemas/CampaignInput" }]
+    OutreachMessage:
+      type: object
+      required: [id, prospectId, sequenceNumber, subject, body, status, createdAt, updatedAt]
+      properties:
+        id: { type: number }
+        prospectId: { type: number }
+        campaignId: { type: [number, "null"] }
+        sequenceNumber: { type: number, minimum: 1 }
+        subject: { type: string }
+        body: { type: string }
+        status: { type: string, enum: [draft, approved, sent, delivered, bounced, replied, unsubscribed, failed] }
+        scheduledAt: { type: [string, "null"] }
+        sentAt: { type: [string, "null"] }
+        providerMessageId: { type: [string, "null"] }
+        error: { type: [string, "null"] }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+    OutreachMessageInput:
+      type: object
+      required: [prospectId, sequenceNumber, subject, body]
+      properties:
+        prospectId: { type: number }
+        campaignId: { type: number }
+        sequenceNumber: { type: number, minimum: 1 }
+        subject: { type: string, minLength: 1 }
+        body: { type: string, minLength: 1 }
+        status: { type: string, enum: [draft, approved] }
+        scheduledAt: { type: string }
+    OutreachMessageUpdate:
+      allOf: [{ $ref: "#/components/schemas/OutreachMessageInput" }]
+    DraftGenerationInput:
+      type: object
+      properties:
+        campaignId: { type: number }
+    Suppression:
+      type: object
+      required: [id, email, reason, createdAt]
+      properties:
+        id: { type: number }
+        email: { type: string }
+        reason: { type: string }
+        createdAt: { type: string }
+    SuppressionInput:
+      type: object
+      required: [email, reason]
+      properties:
+        email: { type: string, pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$" }
+        reason: { type: string, minLength: 1 }
+    OutreachUnsubscribeInput:
+      type: object
+      required: [email, token]
+      properties:
+        email: { type: string, pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$" }
+        token: { type: string, minLength: 1, maxLength: 128 }
+    OutreachDashboard:
+      type: object
+      required: [prospects, campaigns, messages, sentToday, replies]
+      properties:
+        prospects: { type: number }
+        campaigns: { type: number }
+        messages: { type: number }
+        sentToday: { type: number }
+        replies: { type: number }

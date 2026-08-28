@@ -5,6 +5,7 @@ import callbackChatRouter from "./callbackChat";
 import subscribersRouter from "./subscribers";
 import storageRouter from "./storage";
 import seoStatusRouter from "./seoStatus";
+import outreachRouter from "./outreach";
 
 const router: IRouter = Router();
 
@@ -14,5 +15,6 @@ router.use(callbackChatRouter);
 router.use(subscribersRouter);
 router.use(storageRouter);
 router.use(seoStatusRouter);
+router.use(outreachRouter);
 
 export default router;

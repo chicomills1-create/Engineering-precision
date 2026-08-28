@@ -136,3 +136,318 @@ export interface LeadInput {
   attachments?: string[];
 }
 
+export type ProspectState = typeof ProspectState[keyof typeof ProspectState];
+
+
+export const ProspectState = {
+  AZ: 'AZ',
+  CA: 'CA',
+  TX: 'TX',
+} as const;
+
+export type ProspectAudience = typeof ProspectAudience[keyof typeof ProspectAudience];
+
+
+export const ProspectAudience = {
+  architect: 'architect',
+  builder: 'builder',
+} as const;
+
+export type ProspectEmailStatus = typeof ProspectEmailStatus[keyof typeof ProspectEmailStatus];
+
+
+export const ProspectEmailStatus = {
+  unverified: 'unverified',
+  verified: 'verified',
+  invalid: 'invalid',
+} as const;
+
+export type ProspectStatus = typeof ProspectStatus[keyof typeof ProspectStatus];
+
+
+export const ProspectStatus = {
+  new: 'new',
+  review: 'review',
+  approved: 'approved',
+  contacted: 'contacted',
+  replied: 'replied',
+  not_a_fit: 'not_a_fit',
+  suppressed: 'suppressed',
+} as const;
+
+export interface Prospect {
+  id: number;
+  companyName: string;
+  /** @nullable */
+  website?: string | null;
+  city: string;
+  state: ProspectState;
+  audience: ProspectAudience;
+  /** @nullable */
+  sourceUrl?: string | null;
+  /** @nullable */
+  researchNotes?: string | null;
+  /**
+     * @minimum 0
+     * @maximum 100
+     */
+  fitScore: number;
+  contactName: string;
+  /** @nullable */
+  contactTitle?: string | null;
+  contactEmail: string;
+  emailStatus: ProspectEmailStatus;
+  status: ProspectStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type ProspectInputState = typeof ProspectInputState[keyof typeof ProspectInputState];
+
+
+export const ProspectInputState = {
+  AZ: 'AZ',
+  CA: 'CA',
+  TX: 'TX',
+} as const;
+
+export type ProspectInputAudience = typeof ProspectInputAudience[keyof typeof ProspectInputAudience];
+
+
+export const ProspectInputAudience = {
+  architect: 'architect',
+  builder: 'builder',
+} as const;
+
+export type ProspectInputEmailStatus = typeof ProspectInputEmailStatus[keyof typeof ProspectInputEmailStatus];
+
+
+export const ProspectInputEmailStatus = {
+  unverified: 'unverified',
+  verified: 'verified',
+  invalid: 'invalid',
+} as const;
+
+export type ProspectInputStatus = typeof ProspectInputStatus[keyof typeof ProspectInputStatus];
+
+
+export const ProspectInputStatus = {
+  new: 'new',
+  review: 'review',
+  approved: 'approved',
+  contacted: 'contacted',
+  replied: 'replied',
+  not_a_fit: 'not_a_fit',
+  suppressed: 'suppressed',
+} as const;
+
+export interface ProspectInput {
+  /** @minLength 1 */
+  companyName: string;
+  website?: string;
+  /** @minLength 1 */
+  city: string;
+  state: ProspectInputState;
+  audience: ProspectInputAudience;
+  sourceUrl?: string;
+  researchNotes?: string;
+  /**
+     * @minimum 0
+     * @maximum 100
+     */
+  fitScore?: number;
+  /** @minLength 1 */
+  contactName: string;
+  contactTitle?: string;
+  /** @pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$ */
+  contactEmail: string;
+  emailStatus?: ProspectInputEmailStatus;
+  status?: ProspectInputStatus;
+}
+
+export type ProspectUpdate = ProspectInput;
+
+export type CampaignAudience = typeof CampaignAudience[keyof typeof CampaignAudience];
+
+
+export const CampaignAudience = {
+  architect: 'architect',
+  builder: 'builder',
+} as const;
+
+export type CampaignStatesItem = typeof CampaignStatesItem[keyof typeof CampaignStatesItem];
+
+
+export const CampaignStatesItem = {
+  AZ: 'AZ',
+  CA: 'CA',
+  TX: 'TX',
+} as const;
+
+export type CampaignStatus = typeof CampaignStatus[keyof typeof CampaignStatus];
+
+
+export const CampaignStatus = {
+  draft: 'draft',
+  active: 'active',
+  paused: 'paused',
+} as const;
+
+export interface Campaign {
+  id: number;
+  name: string;
+  audience: CampaignAudience;
+  states: CampaignStatesItem[];
+  /**
+     * @minimum 1
+     * @maximum 100
+     */
+  dailyLimit: number;
+  status: CampaignStatus;
+  /** @nullable */
+  subjectTemplate?: string | null;
+  /** @nullable */
+  bodyTemplate?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type CampaignInputAudience = typeof CampaignInputAudience[keyof typeof CampaignInputAudience];
+
+
+export const CampaignInputAudience = {
+  architect: 'architect',
+  builder: 'builder',
+} as const;
+
+export type CampaignInputStatesItem = typeof CampaignInputStatesItem[keyof typeof CampaignInputStatesItem];
+
+
+export const CampaignInputStatesItem = {
+  AZ: 'AZ',
+  CA: 'CA',
+  TX: 'TX',
+} as const;
+
+export type CampaignInputStatus = typeof CampaignInputStatus[keyof typeof CampaignInputStatus];
+
+
+export const CampaignInputStatus = {
+  draft: 'draft',
+  active: 'active',
+  paused: 'paused',
+} as const;
+
+export interface CampaignInput {
+  /** @minLength 1 */
+  name: string;
+  audience: CampaignInputAudience;
+  /** @minItems 1 */
+  states: CampaignInputStatesItem[];
+  /**
+     * @minimum 1
+     * @maximum 100
+     */
+  dailyLimit?: number;
+  status?: CampaignInputStatus;
+  subjectTemplate?: string;
+  bodyTemplate?: string;
+}
+
+export type CampaignUpdate = CampaignInput;
+
+export type OutreachMessageStatus = typeof OutreachMessageStatus[keyof typeof OutreachMessageStatus];
+
+
+export const OutreachMessageStatus = {
+  draft: 'draft',
+  approved: 'approved',
+  sent: 'sent',
+  delivered: 'delivered',
+  bounced: 'bounced',
+  replied: 'replied',
+  unsubscribed: 'unsubscribed',
+  failed: 'failed',
+} as const;
+
+export interface OutreachMessage {
+  id: number;
+  prospectId: number;
+  /** @nullable */
+  campaignId?: number | null;
+  /** @minimum 1 */
+  sequenceNumber: number;
+  subject: string;
+  body: string;
+  status: OutreachMessageStatus;
+  /** @nullable */
+  scheduledAt?: string | null;
+  /** @nullable */
+  sentAt?: string | null;
+  /** @nullable */
+  providerMessageId?: string | null;
+  /** @nullable */
+  error?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type OutreachMessageInputStatus = typeof OutreachMessageInputStatus[keyof typeof OutreachMessageInputStatus];
+
+
+export const OutreachMessageInputStatus = {
+  draft: 'draft',
+  approved: 'approved',
+} as const;
+
+export interface OutreachMessageInput {
+  prospectId: number;
+  campaignId?: number;
+  /** @minimum 1 */
+  sequenceNumber: number;
+  /** @minLength 1 */
+  subject: string;
+  /** @minLength 1 */
+  body: string;
+  status?: OutreachMessageInputStatus;
+  scheduledAt?: string;
+}
+
+export type OutreachMessageUpdate = OutreachMessageInput;
+
+export interface DraftGenerationInput {
+  campaignId?: number;
+}
+
+export interface Suppression {
+  id: number;
+  email: string;
+  reason: string;
+  createdAt: string;
+}
+
+export interface SuppressionInput {
+  /** @pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$ */
+  email: string;
+  /** @minLength 1 */
+  reason: string;
+}
+
+export interface OutreachUnsubscribeInput {
+  /** @pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$ */
+  email: string;
+  /**
+     * @minLength 1
+     * @maxLength 128
+     */
+  token: string;
+}
+
+export interface OutreachDashboard {
+  prospects: number;
+  campaigns: number;
+  messages: number;
+  sentToday: number;
+  replies: number;
+}
+

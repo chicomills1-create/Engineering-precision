@@ -11,6 +11,7 @@ import {
   SlidersHorizontal,
   X,
 } from 'lucide-react';
+import { AdminNav } from '@/components/layout/AdminNav';
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 const apiBase = import.meta.env.VITE_API_BASE_URL ?? '/api';
@@ -191,7 +192,7 @@ function SeoStatusTable() {
   return (
     <div className="container mx-auto px-4 md:px-8 py-16 min-h-[70vh]">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-primary mb-2">Admin</p>
           <h1 className="font-display text-3xl md:text-4xl font-bold">SEO Status</h1>
@@ -199,13 +200,9 @@ function SeoStatusTable() {
             Sitemap coverage and indexing health across all pages
           </p>
         </div>
-        <Link
-          to="/admin"
-          className="inline-flex items-center gap-2 h-10 px-4 border border-border text-sm text-muted-foreground hover:text-foreground hover:border-primary/50 rounded-[2px] transition-colors self-start md:self-auto"
-        >
-          ← Leads &amp; Subscribers
-        </Link>
       </div>
+      
+      <AdminNav />
 
       {/* Stats bar */}
       {data && (

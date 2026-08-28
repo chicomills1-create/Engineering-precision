@@ -212,3 +212,439 @@ export const GetStorageObjectParams = zod.object({
 export const GetStorageObjectResponse = zod.unknown()
 
 
+export const GetOutreachDashboardResponse = zod.object({
+  "prospects": zod.number(),
+  "campaigns": zod.number(),
+  "messages": zod.number(),
+  "sentToday": zod.number(),
+  "replies": zod.number()
+})
+
+
+export const listProspectsResponseFitScoreMin = 0;
+export const listProspectsResponseFitScoreMax = 100;
+
+
+
+export const ListProspectsResponseItem = zod.object({
+  "id": zod.number(),
+  "companyName": zod.string(),
+  "website": zod.string().nullish(),
+  "city": zod.string(),
+  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "audience": zod.enum(['architect', 'builder']),
+  "sourceUrl": zod.string().nullish(),
+  "researchNotes": zod.string().nullish(),
+  "fitScore": zod.number().min(listProspectsResponseFitScoreMin).max(listProspectsResponseFitScoreMax),
+  "contactName": zod.string(),
+  "contactTitle": zod.string().nullish(),
+  "contactEmail": zod.string(),
+  "emailStatus": zod.enum(['unverified', 'verified', 'invalid']),
+  "status": zod.enum(['new', 'review', 'approved', 'contacted', 'replied', 'not_a_fit', 'suppressed']),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const ListProspectsResponse = zod.array(ListProspectsResponseItem)
+
+
+
+
+export const createProspectBodyFitScoreMin = 0;
+export const createProspectBodyFitScoreMax = 100;
+
+
+export const createProspectBodyContactEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+
+
+export const CreateProspectBody = zod.object({
+  "companyName": zod.string().min(1),
+  "website": zod.string().optional(),
+  "city": zod.string().min(1),
+  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "audience": zod.enum(['architect', 'builder']),
+  "sourceUrl": zod.string().optional(),
+  "researchNotes": zod.string().optional(),
+  "fitScore": zod.number().min(createProspectBodyFitScoreMin).max(createProspectBodyFitScoreMax).optional(),
+  "contactName": zod.string().min(1),
+  "contactTitle": zod.string().optional(),
+  "contactEmail": zod.string().regex(createProspectBodyContactEmailRegExp),
+  "emailStatus": zod.enum(['unverified', 'verified', 'invalid']).optional(),
+  "status": zod.enum(['new', 'review', 'approved', 'contacted', 'replied', 'not_a_fit', 'suppressed']).optional()
+})
+
+export const createProspectResponseFitScoreMin = 0;
+export const createProspectResponseFitScoreMax = 100;
+
+
+
+export const CreateProspectResponse = zod.object({
+  "id": zod.number(),
+  "companyName": zod.string(),
+  "website": zod.string().nullish(),
+  "city": zod.string(),
+  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "audience": zod.enum(['architect', 'builder']),
+  "sourceUrl": zod.string().nullish(),
+  "researchNotes": zod.string().nullish(),
+  "fitScore": zod.number().min(createProspectResponseFitScoreMin).max(createProspectResponseFitScoreMax),
+  "contactName": zod.string(),
+  "contactTitle": zod.string().nullish(),
+  "contactEmail": zod.string(),
+  "emailStatus": zod.enum(['unverified', 'verified', 'invalid']),
+  "status": zod.enum(['new', 'review', 'approved', 'contacted', 'replied', 'not_a_fit', 'suppressed']),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const UpdateProspectParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+
+
+export const updateProspectBodyOneFitScoreMin = 0;
+export const updateProspectBodyOneFitScoreMax = 100;
+
+
+export const updateProspectBodyOneContactEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+
+
+export const UpdateProspectBody = zod.object({
+  "companyName": zod.string().min(1),
+  "website": zod.string().optional(),
+  "city": zod.string().min(1),
+  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "audience": zod.enum(['architect', 'builder']),
+  "sourceUrl": zod.string().optional(),
+  "researchNotes": zod.string().optional(),
+  "fitScore": zod.number().min(updateProspectBodyOneFitScoreMin).max(updateProspectBodyOneFitScoreMax).optional(),
+  "contactName": zod.string().min(1),
+  "contactTitle": zod.string().optional(),
+  "contactEmail": zod.string().regex(updateProspectBodyOneContactEmailRegExp),
+  "emailStatus": zod.enum(['unverified', 'verified', 'invalid']).optional(),
+  "status": zod.enum(['new', 'review', 'approved', 'contacted', 'replied', 'not_a_fit', 'suppressed']).optional()
+})
+
+export const updateProspectResponseFitScoreMin = 0;
+export const updateProspectResponseFitScoreMax = 100;
+
+
+
+export const UpdateProspectResponse = zod.object({
+  "id": zod.number(),
+  "companyName": zod.string(),
+  "website": zod.string().nullish(),
+  "city": zod.string(),
+  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "audience": zod.enum(['architect', 'builder']),
+  "sourceUrl": zod.string().nullish(),
+  "researchNotes": zod.string().nullish(),
+  "fitScore": zod.number().min(updateProspectResponseFitScoreMin).max(updateProspectResponseFitScoreMax),
+  "contactName": zod.string(),
+  "contactTitle": zod.string().nullish(),
+  "contactEmail": zod.string(),
+  "emailStatus": zod.enum(['unverified', 'verified', 'invalid']),
+  "status": zod.enum(['new', 'review', 'approved', 'contacted', 'replied', 'not_a_fit', 'suppressed']),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const GenerateOutreachDraftParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const GenerateOutreachDraftBody = zod.object({
+  "campaignId": zod.number().optional()
+})
+
+
+
+
+export const GenerateOutreachDraftResponseItem = zod.object({
+  "id": zod.number(),
+  "prospectId": zod.number(),
+  "campaignId": zod.number().nullish(),
+  "sequenceNumber": zod.number().min(1),
+  "subject": zod.string(),
+  "body": zod.string(),
+  "status": zod.enum(['draft', 'approved', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
+  "scheduledAt": zod.string().nullish(),
+  "sentAt": zod.string().nullish(),
+  "providerMessageId": zod.string().nullish(),
+  "error": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const GenerateOutreachDraftResponse = zod.array(GenerateOutreachDraftResponseItem)
+
+
+export const listCampaignsResponseDailyLimitMax = 100;
+
+
+
+export const ListCampaignsResponseItem = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "audience": zod.enum(['architect', 'builder']),
+  "states": zod.array(zod.enum(['AZ', 'CA', 'TX'])),
+  "dailyLimit": zod.number().min(1).max(listCampaignsResponseDailyLimitMax),
+  "status": zod.enum(['draft', 'active', 'paused']),
+  "subjectTemplate": zod.string().nullish(),
+  "bodyTemplate": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const ListCampaignsResponse = zod.array(ListCampaignsResponseItem)
+
+
+
+
+export const createCampaignBodyDailyLimitDefault = 10;
+export const createCampaignBodyDailyLimitMax = 100;
+
+
+
+export const CreateCampaignBody = zod.object({
+  "name": zod.string().min(1),
+  "audience": zod.enum(['architect', 'builder']),
+  "states": zod.array(zod.enum(['AZ', 'CA', 'TX'])).min(1),
+  "dailyLimit": zod.number().min(1).max(createCampaignBodyDailyLimitMax).default(createCampaignBodyDailyLimitDefault),
+  "status": zod.enum(['draft', 'active', 'paused']).optional(),
+  "subjectTemplate": zod.string().optional(),
+  "bodyTemplate": zod.string().optional()
+})
+
+export const createCampaignResponseDailyLimitMax = 100;
+
+
+
+export const CreateCampaignResponse = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "audience": zod.enum(['architect', 'builder']),
+  "states": zod.array(zod.enum(['AZ', 'CA', 'TX'])),
+  "dailyLimit": zod.number().min(1).max(createCampaignResponseDailyLimitMax),
+  "status": zod.enum(['draft', 'active', 'paused']),
+  "subjectTemplate": zod.string().nullish(),
+  "bodyTemplate": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const UpdateCampaignParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+
+
+export const updateCampaignBodyOneDailyLimitDefault = 10;
+export const updateCampaignBodyOneDailyLimitMax = 100;
+
+
+
+export const UpdateCampaignBody = zod.object({
+  "name": zod.string().min(1),
+  "audience": zod.enum(['architect', 'builder']),
+  "states": zod.array(zod.enum(['AZ', 'CA', 'TX'])).min(1),
+  "dailyLimit": zod.number().min(1).max(updateCampaignBodyOneDailyLimitMax).default(updateCampaignBodyOneDailyLimitDefault),
+  "status": zod.enum(['draft', 'active', 'paused']).optional(),
+  "subjectTemplate": zod.string().optional(),
+  "bodyTemplate": zod.string().optional()
+})
+
+export const updateCampaignResponseDailyLimitMax = 100;
+
+
+
+export const UpdateCampaignResponse = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "audience": zod.enum(['architect', 'builder']),
+  "states": zod.array(zod.enum(['AZ', 'CA', 'TX'])),
+  "dailyLimit": zod.number().min(1).max(updateCampaignResponseDailyLimitMax),
+  "status": zod.enum(['draft', 'active', 'paused']),
+  "subjectTemplate": zod.string().nullish(),
+  "bodyTemplate": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+
+
+
+export const ListOutreachMessagesResponseItem = zod.object({
+  "id": zod.number(),
+  "prospectId": zod.number(),
+  "campaignId": zod.number().nullish(),
+  "sequenceNumber": zod.number().min(1),
+  "subject": zod.string(),
+  "body": zod.string(),
+  "status": zod.enum(['draft', 'approved', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
+  "scheduledAt": zod.string().nullish(),
+  "sentAt": zod.string().nullish(),
+  "providerMessageId": zod.string().nullish(),
+  "error": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const ListOutreachMessagesResponse = zod.array(ListOutreachMessagesResponseItem)
+
+
+
+
+
+
+
+export const CreateOutreachMessageBody = zod.object({
+  "prospectId": zod.number(),
+  "campaignId": zod.number().optional(),
+  "sequenceNumber": zod.number().min(1),
+  "subject": zod.string().min(1),
+  "body": zod.string().min(1),
+  "status": zod.enum(['draft', 'approved']).optional(),
+  "scheduledAt": zod.string().optional()
+})
+
+
+
+
+export const CreateOutreachMessageResponse = zod.object({
+  "id": zod.number(),
+  "prospectId": zod.number(),
+  "campaignId": zod.number().nullish(),
+  "sequenceNumber": zod.number().min(1),
+  "subject": zod.string(),
+  "body": zod.string(),
+  "status": zod.enum(['draft', 'approved', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
+  "scheduledAt": zod.string().nullish(),
+  "sentAt": zod.string().nullish(),
+  "providerMessageId": zod.string().nullish(),
+  "error": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const UpdateOutreachMessageParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+
+
+
+
+
+export const UpdateOutreachMessageBody = zod.object({
+  "prospectId": zod.number(),
+  "campaignId": zod.number().optional(),
+  "sequenceNumber": zod.number().min(1),
+  "subject": zod.string().min(1),
+  "body": zod.string().min(1),
+  "status": zod.enum(['draft', 'approved']).optional(),
+  "scheduledAt": zod.string().optional()
+})
+
+
+
+
+export const UpdateOutreachMessageResponse = zod.object({
+  "id": zod.number(),
+  "prospectId": zod.number(),
+  "campaignId": zod.number().nullish(),
+  "sequenceNumber": zod.number().min(1),
+  "subject": zod.string(),
+  "body": zod.string(),
+  "status": zod.enum(['draft', 'approved', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
+  "scheduledAt": zod.string().nullish(),
+  "sentAt": zod.string().nullish(),
+  "providerMessageId": zod.string().nullish(),
+  "error": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const ApproveOutreachMessageParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+
+
+
+export const ApproveOutreachMessageResponse = zod.object({
+  "id": zod.number(),
+  "prospectId": zod.number(),
+  "campaignId": zod.number().nullish(),
+  "sequenceNumber": zod.number().min(1),
+  "subject": zod.string(),
+  "body": zod.string(),
+  "status": zod.enum(['draft', 'approved', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
+  "scheduledAt": zod.string().nullish(),
+  "sentAt": zod.string().nullish(),
+  "providerMessageId": zod.string().nullish(),
+  "error": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const SendOutreachMessageParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+
+
+
+export const SendOutreachMessageResponse = zod.object({
+  "id": zod.number(),
+  "prospectId": zod.number(),
+  "campaignId": zod.number().nullish(),
+  "sequenceNumber": zod.number().min(1),
+  "subject": zod.string(),
+  "body": zod.string(),
+  "status": zod.enum(['draft', 'approved', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
+  "scheduledAt": zod.string().nullish(),
+  "sentAt": zod.string().nullish(),
+  "providerMessageId": zod.string().nullish(),
+  "error": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const suppressOutreachAddressBodyEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+
+
+
+export const SuppressOutreachAddressBody = zod.object({
+  "email": zod.string().regex(suppressOutreachAddressBodyEmailRegExp),
+  "reason": zod.string().min(1)
+})
+
+export const SuppressOutreachAddressResponse = zod.object({
+  "id": zod.number(),
+  "email": zod.string(),
+  "reason": zod.string(),
+  "createdAt": zod.string()
+})
+
+
+export const unsubscribeOutreachAddressBodyEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+export const unsubscribeOutreachAddressBodyTokenMax = 128;
+
+
+
+export const UnsubscribeOutreachAddressBody = zod.object({
+  "email": zod.string().regex(unsubscribeOutreachAddressBodyEmailRegExp),
+  "token": zod.string().min(1).max(unsubscribeOutreachAddressBodyTokenMax)
+})
+
+export const UnsubscribeOutreachAddressResponse = zod.object({
+  "ok": zod.boolean()
+})
+
+

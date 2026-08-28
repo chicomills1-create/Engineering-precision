@@ -22,14 +22,28 @@ import type {
 import type {
   CallbackChatInput,
   CallbackChatReply,
+  Campaign,
+  CampaignInput,
+  CampaignUpdate,
+  DraftGenerationInput,
   ErrorMessage,
   HealthStatus,
   Lead,
   LeadInput,
   LeadUpdateInput,
+  OutreachDashboard,
+  OutreachMessage,
+  OutreachMessageInput,
+  OutreachMessageUpdate,
+  OutreachUnsubscribeInput,
+  Prospect,
+  ProspectInput,
+  ProspectUpdate,
   SubscribeResult,
   Subscriber,
   SubscriberInput,
+  Suppression,
+  SuppressionInput,
   UnsubscribeInput,
   UploadResponse
 } from './api.schemas';
@@ -869,4 +883,1007 @@ export function useGetStorageObject<TData = Awaited<ReturnType<typeof getStorage
 
 
 
+
+export const getGetOutreachDashboardUrl = () => {
+
+
+
+
+  return `/api/outreach/dashboard`
+}
+
+export const getOutreachDashboard = async ( options?: Parameters<typeof customFetch>[1]): Promise<OutreachDashboard> => {
+
+  return customFetch<OutreachDashboard>(getGetOutreachDashboardUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetOutreachDashboardQueryKey = () => {
+    return [
+    `/api/outreach/dashboard`
+    ] as const;
+    }
+
+
+export const getGetOutreachDashboardQueryOptions = <TData = Awaited<ReturnType<typeof getOutreachDashboard>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getOutreachDashboard>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetOutreachDashboardQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getOutreachDashboard>>> = ({ signal }) => getOutreachDashboard({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getOutreachDashboard>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetOutreachDashboardQueryResult = NonNullable<Awaited<ReturnType<typeof getOutreachDashboard>>>
+export type GetOutreachDashboardQueryError = ErrorType<unknown>
+
+
+
+export function useGetOutreachDashboard<TData = Awaited<ReturnType<typeof getOutreachDashboard>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getOutreachDashboard>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetOutreachDashboardQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getListProspectsUrl = () => {
+
+
+
+
+  return `/api/outreach/prospects`
+}
+
+export const listProspects = async ( options?: Parameters<typeof customFetch>[1]): Promise<Prospect[]> => {
+
+  return customFetch<Prospect[]>(getListProspectsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListProspectsQueryKey = () => {
+    return [
+    `/api/outreach/prospects`
+    ] as const;
+    }
+
+
+export const getListProspectsQueryOptions = <TData = Awaited<ReturnType<typeof listProspects>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listProspects>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListProspectsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listProspects>>> = ({ signal }) => listProspects({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listProspects>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListProspectsQueryResult = NonNullable<Awaited<ReturnType<typeof listProspects>>>
+export type ListProspectsQueryError = ErrorType<unknown>
+
+
+
+export function useListProspects<TData = Awaited<ReturnType<typeof listProspects>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listProspects>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListProspectsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getCreateProspectUrl = () => {
+
+
+
+
+  return `/api/outreach/prospects`
+}
+
+export const createProspect = async (prospectInput: ProspectInput, options?: Parameters<typeof customFetch>[1]): Promise<Prospect> => {
+
+  return customFetch<Prospect>(getCreateProspectUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(prospectInput)
+  }
+);}
+
+
+
+
+
+export const getCreateProspectMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createProspect>>, TError,{data: BodyType<ProspectInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createProspect>>, TError,{data: BodyType<ProspectInput>}, TContext> => {
+
+const mutationKey = ['createProspect'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createProspect>>, {data: BodyType<ProspectInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createProspect(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateProspectMutationResult = NonNullable<Awaited<ReturnType<typeof createProspect>>>
+    export type CreateProspectMutationBody = BodyType<ProspectInput>
+    export type CreateProspectMutationError = ErrorType<unknown>
+
+    export const useCreateProspect = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createProspect>>, TError,{data: BodyType<ProspectInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createProspect>>,
+        TError,
+        {data: BodyType<ProspectInput>},
+        TContext
+      > => {
+      return useMutation(getCreateProspectMutationOptions(options));
+    }
+
+export const getUpdateProspectUrl = (id: number,) => {
+
+
+
+
+  return `/api/outreach/prospects/${id}`
+}
+
+export const updateProspect = async (id: number,
+    prospectUpdate: ProspectUpdate, options?: Parameters<typeof customFetch>[1]): Promise<Prospect> => {
+
+  return customFetch<Prospect>(getUpdateProspectUrl(id),
+  {
+    ...options,
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(prospectUpdate)
+  }
+);}
+
+
+
+
+
+export const getUpdateProspectMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateProspect>>, TError,{id: number;data: BodyType<ProspectUpdate>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateProspect>>, TError,{id: number;data: BodyType<ProspectUpdate>}, TContext> => {
+
+const mutationKey = ['updateProspect'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateProspect>>, {id: number;data: BodyType<ProspectUpdate>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateProspect(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateProspectMutationResult = NonNullable<Awaited<ReturnType<typeof updateProspect>>>
+    export type UpdateProspectMutationBody = BodyType<ProspectUpdate>
+    export type UpdateProspectMutationError = ErrorType<unknown>
+
+    export const useUpdateProspect = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateProspect>>, TError,{id: number;data: BodyType<ProspectUpdate>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateProspect>>,
+        TError,
+        {id: number;data: BodyType<ProspectUpdate>},
+        TContext
+      > => {
+      return useMutation(getUpdateProspectMutationOptions(options));
+    }
+
+export const getGenerateOutreachDraftUrl = (id: number,) => {
+
+
+
+
+  return `/api/outreach/prospects/${id}/draft`
+}
+
+export const generateOutreachDraft = async (id: number,
+    draftGenerationInput?: DraftGenerationInput, options?: Parameters<typeof customFetch>[1]): Promise<OutreachMessage[]> => {
+
+  return customFetch<OutreachMessage[]>(getGenerateOutreachDraftUrl(id),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(draftGenerationInput)
+  }
+);}
+
+
+
+
+
+export const getGenerateOutreachDraftMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof generateOutreachDraft>>, TError,{id: number;data?: BodyType<DraftGenerationInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof generateOutreachDraft>>, TError,{id: number;data?: BodyType<DraftGenerationInput>}, TContext> => {
+
+const mutationKey = ['generateOutreachDraft'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof generateOutreachDraft>>, {id: number;data?: BodyType<DraftGenerationInput>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  generateOutreachDraft(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type GenerateOutreachDraftMutationResult = NonNullable<Awaited<ReturnType<typeof generateOutreachDraft>>>
+    export type GenerateOutreachDraftMutationBody = BodyType<DraftGenerationInput> | undefined
+    export type GenerateOutreachDraftMutationError = ErrorType<unknown>
+
+    export const useGenerateOutreachDraft = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof generateOutreachDraft>>, TError,{id: number;data?: BodyType<DraftGenerationInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof generateOutreachDraft>>,
+        TError,
+        {id: number;data?: BodyType<DraftGenerationInput>},
+        TContext
+      > => {
+      return useMutation(getGenerateOutreachDraftMutationOptions(options));
+    }
+
+export const getListCampaignsUrl = () => {
+
+
+
+
+  return `/api/outreach/campaigns`
+}
+
+export const listCampaigns = async ( options?: Parameters<typeof customFetch>[1]): Promise<Campaign[]> => {
+
+  return customFetch<Campaign[]>(getListCampaignsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListCampaignsQueryKey = () => {
+    return [
+    `/api/outreach/campaigns`
+    ] as const;
+    }
+
+
+export const getListCampaignsQueryOptions = <TData = Awaited<ReturnType<typeof listCampaigns>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listCampaigns>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListCampaignsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listCampaigns>>> = ({ signal }) => listCampaigns({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listCampaigns>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListCampaignsQueryResult = NonNullable<Awaited<ReturnType<typeof listCampaigns>>>
+export type ListCampaignsQueryError = ErrorType<unknown>
+
+
+
+export function useListCampaigns<TData = Awaited<ReturnType<typeof listCampaigns>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listCampaigns>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListCampaignsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getCreateCampaignUrl = () => {
+
+
+
+
+  return `/api/outreach/campaigns`
+}
+
+export const createCampaign = async (campaignInput: CampaignInput, options?: Parameters<typeof customFetch>[1]): Promise<Campaign> => {
+
+  return customFetch<Campaign>(getCreateCampaignUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(campaignInput)
+  }
+);}
+
+
+
+
+
+export const getCreateCampaignMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createCampaign>>, TError,{data: BodyType<CampaignInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createCampaign>>, TError,{data: BodyType<CampaignInput>}, TContext> => {
+
+const mutationKey = ['createCampaign'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createCampaign>>, {data: BodyType<CampaignInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createCampaign(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateCampaignMutationResult = NonNullable<Awaited<ReturnType<typeof createCampaign>>>
+    export type CreateCampaignMutationBody = BodyType<CampaignInput>
+    export type CreateCampaignMutationError = ErrorType<unknown>
+
+    export const useCreateCampaign = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createCampaign>>, TError,{data: BodyType<CampaignInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createCampaign>>,
+        TError,
+        {data: BodyType<CampaignInput>},
+        TContext
+      > => {
+      return useMutation(getCreateCampaignMutationOptions(options));
+    }
+
+export const getUpdateCampaignUrl = (id: number,) => {
+
+
+
+
+  return `/api/outreach/campaigns/${id}`
+}
+
+export const updateCampaign = async (id: number,
+    campaignUpdate: CampaignUpdate, options?: Parameters<typeof customFetch>[1]): Promise<Campaign> => {
+
+  return customFetch<Campaign>(getUpdateCampaignUrl(id),
+  {
+    ...options,
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(campaignUpdate)
+  }
+);}
+
+
+
+
+
+export const getUpdateCampaignMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCampaign>>, TError,{id: number;data: BodyType<CampaignUpdate>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateCampaign>>, TError,{id: number;data: BodyType<CampaignUpdate>}, TContext> => {
+
+const mutationKey = ['updateCampaign'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateCampaign>>, {id: number;data: BodyType<CampaignUpdate>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateCampaign(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateCampaignMutationResult = NonNullable<Awaited<ReturnType<typeof updateCampaign>>>
+    export type UpdateCampaignMutationBody = BodyType<CampaignUpdate>
+    export type UpdateCampaignMutationError = ErrorType<unknown>
+
+    export const useUpdateCampaign = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCampaign>>, TError,{id: number;data: BodyType<CampaignUpdate>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateCampaign>>,
+        TError,
+        {id: number;data: BodyType<CampaignUpdate>},
+        TContext
+      > => {
+      return useMutation(getUpdateCampaignMutationOptions(options));
+    }
+
+export const getListOutreachMessagesUrl = () => {
+
+
+
+
+  return `/api/outreach/messages`
+}
+
+export const listOutreachMessages = async ( options?: Parameters<typeof customFetch>[1]): Promise<OutreachMessage[]> => {
+
+  return customFetch<OutreachMessage[]>(getListOutreachMessagesUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListOutreachMessagesQueryKey = () => {
+    return [
+    `/api/outreach/messages`
+    ] as const;
+    }
+
+
+export const getListOutreachMessagesQueryOptions = <TData = Awaited<ReturnType<typeof listOutreachMessages>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listOutreachMessages>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListOutreachMessagesQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listOutreachMessages>>> = ({ signal }) => listOutreachMessages({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listOutreachMessages>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListOutreachMessagesQueryResult = NonNullable<Awaited<ReturnType<typeof listOutreachMessages>>>
+export type ListOutreachMessagesQueryError = ErrorType<unknown>
+
+
+
+export function useListOutreachMessages<TData = Awaited<ReturnType<typeof listOutreachMessages>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listOutreachMessages>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListOutreachMessagesQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getCreateOutreachMessageUrl = () => {
+
+
+
+
+  return `/api/outreach/messages`
+}
+
+export const createOutreachMessage = async (outreachMessageInput: OutreachMessageInput, options?: Parameters<typeof customFetch>[1]): Promise<OutreachMessage> => {
+
+  return customFetch<OutreachMessage>(getCreateOutreachMessageUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(outreachMessageInput)
+  }
+);}
+
+
+
+
+
+export const getCreateOutreachMessageMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createOutreachMessage>>, TError,{data: BodyType<OutreachMessageInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createOutreachMessage>>, TError,{data: BodyType<OutreachMessageInput>}, TContext> => {
+
+const mutationKey = ['createOutreachMessage'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createOutreachMessage>>, {data: BodyType<OutreachMessageInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createOutreachMessage(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateOutreachMessageMutationResult = NonNullable<Awaited<ReturnType<typeof createOutreachMessage>>>
+    export type CreateOutreachMessageMutationBody = BodyType<OutreachMessageInput>
+    export type CreateOutreachMessageMutationError = ErrorType<unknown>
+
+    export const useCreateOutreachMessage = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createOutreachMessage>>, TError,{data: BodyType<OutreachMessageInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createOutreachMessage>>,
+        TError,
+        {data: BodyType<OutreachMessageInput>},
+        TContext
+      > => {
+      return useMutation(getCreateOutreachMessageMutationOptions(options));
+    }
+
+export const getUpdateOutreachMessageUrl = (id: number,) => {
+
+
+
+
+  return `/api/outreach/messages/${id}`
+}
+
+export const updateOutreachMessage = async (id: number,
+    outreachMessageUpdate: OutreachMessageUpdate, options?: Parameters<typeof customFetch>[1]): Promise<OutreachMessage> => {
+
+  return customFetch<OutreachMessage>(getUpdateOutreachMessageUrl(id),
+  {
+    ...options,
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(outreachMessageUpdate)
+  }
+);}
+
+
+
+
+
+export const getUpdateOutreachMessageMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateOutreachMessage>>, TError,{id: number;data: BodyType<OutreachMessageUpdate>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateOutreachMessage>>, TError,{id: number;data: BodyType<OutreachMessageUpdate>}, TContext> => {
+
+const mutationKey = ['updateOutreachMessage'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateOutreachMessage>>, {id: number;data: BodyType<OutreachMessageUpdate>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateOutreachMessage(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateOutreachMessageMutationResult = NonNullable<Awaited<ReturnType<typeof updateOutreachMessage>>>
+    export type UpdateOutreachMessageMutationBody = BodyType<OutreachMessageUpdate>
+    export type UpdateOutreachMessageMutationError = ErrorType<unknown>
+
+    export const useUpdateOutreachMessage = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateOutreachMessage>>, TError,{id: number;data: BodyType<OutreachMessageUpdate>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateOutreachMessage>>,
+        TError,
+        {id: number;data: BodyType<OutreachMessageUpdate>},
+        TContext
+      > => {
+      return useMutation(getUpdateOutreachMessageMutationOptions(options));
+    }
+
+export const getApproveOutreachMessageUrl = (id: number,) => {
+
+
+
+
+  return `/api/outreach/messages/${id}/approve`
+}
+
+export const approveOutreachMessage = async (id: number, options?: Parameters<typeof customFetch>[1]): Promise<OutreachMessage> => {
+
+  return customFetch<OutreachMessage>(getApproveOutreachMessageUrl(id),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+
+export const getApproveOutreachMessageMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof approveOutreachMessage>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof approveOutreachMessage>>, TError,{id: number}, TContext> => {
+
+const mutationKey = ['approveOutreachMessage'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof approveOutreachMessage>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  approveOutreachMessage(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type ApproveOutreachMessageMutationResult = NonNullable<Awaited<ReturnType<typeof approveOutreachMessage>>>
+
+    export type ApproveOutreachMessageMutationError = ErrorType<unknown>
+
+    export const useApproveOutreachMessage = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof approveOutreachMessage>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof approveOutreachMessage>>,
+        TError,
+        {id: number},
+        TContext
+      > => {
+      return useMutation(getApproveOutreachMessageMutationOptions(options));
+    }
+
+export const getSendOutreachMessageUrl = (id: number,) => {
+
+
+
+
+  return `/api/outreach/messages/${id}/send`
+}
+
+export const sendOutreachMessage = async (id: number, options?: Parameters<typeof customFetch>[1]): Promise<OutreachMessage> => {
+
+  return customFetch<OutreachMessage>(getSendOutreachMessageUrl(id),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+
+export const getSendOutreachMessageMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof sendOutreachMessage>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof sendOutreachMessage>>, TError,{id: number}, TContext> => {
+
+const mutationKey = ['sendOutreachMessage'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof sendOutreachMessage>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  sendOutreachMessage(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type SendOutreachMessageMutationResult = NonNullable<Awaited<ReturnType<typeof sendOutreachMessage>>>
+
+    export type SendOutreachMessageMutationError = ErrorType<unknown>
+
+    export const useSendOutreachMessage = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof sendOutreachMessage>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof sendOutreachMessage>>,
+        TError,
+        {id: number},
+        TContext
+      > => {
+      return useMutation(getSendOutreachMessageMutationOptions(options));
+    }
+
+export const getSuppressOutreachAddressUrl = () => {
+
+
+
+
+  return `/api/outreach/suppressions`
+}
+
+export const suppressOutreachAddress = async (suppressionInput: SuppressionInput, options?: Parameters<typeof customFetch>[1]): Promise<Suppression> => {
+
+  return customFetch<Suppression>(getSuppressOutreachAddressUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(suppressionInput)
+  }
+);}
+
+
+
+
+
+export const getSuppressOutreachAddressMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof suppressOutreachAddress>>, TError,{data: BodyType<SuppressionInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof suppressOutreachAddress>>, TError,{data: BodyType<SuppressionInput>}, TContext> => {
+
+const mutationKey = ['suppressOutreachAddress'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof suppressOutreachAddress>>, {data: BodyType<SuppressionInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  suppressOutreachAddress(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type SuppressOutreachAddressMutationResult = NonNullable<Awaited<ReturnType<typeof suppressOutreachAddress>>>
+    export type SuppressOutreachAddressMutationBody = BodyType<SuppressionInput>
+    export type SuppressOutreachAddressMutationError = ErrorType<unknown>
+
+    export const useSuppressOutreachAddress = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof suppressOutreachAddress>>, TError,{data: BodyType<SuppressionInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof suppressOutreachAddress>>,
+        TError,
+        {data: BodyType<SuppressionInput>},
+        TContext
+      > => {
+      return useMutation(getSuppressOutreachAddressMutationOptions(options));
+    }
+
+export const getUnsubscribeOutreachAddressUrl = () => {
+
+
+
+
+  return `/api/outreach/unsubscribe`
+}
+
+export const unsubscribeOutreachAddress = async (outreachUnsubscribeInput: OutreachUnsubscribeInput, options?: Parameters<typeof customFetch>[1]): Promise<SubscribeResult> => {
+
+  return customFetch<SubscribeResult>(getUnsubscribeOutreachAddressUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(outreachUnsubscribeInput)
+  }
+);}
+
+
+
+
+
+export const getUnsubscribeOutreachAddressMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof unsubscribeOutreachAddress>>, TError,{data: BodyType<OutreachUnsubscribeInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof unsubscribeOutreachAddress>>, TError,{data: BodyType<OutreachUnsubscribeInput>}, TContext> => {
+
+const mutationKey = ['unsubscribeOutreachAddress'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof unsubscribeOutreachAddress>>, {data: BodyType<OutreachUnsubscribeInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  unsubscribeOutreachAddress(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UnsubscribeOutreachAddressMutationResult = NonNullable<Awaited<ReturnType<typeof unsubscribeOutreachAddress>>>
+    export type UnsubscribeOutreachAddressMutationBody = BodyType<OutreachUnsubscribeInput>
+    export type UnsubscribeOutreachAddressMutationError = ErrorType<unknown>
+
+    export const useUnsubscribeOutreachAddress = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof unsubscribeOutreachAddress>>, TError,{data: BodyType<OutreachUnsubscribeInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof unsubscribeOutreachAddress>>,
+        TError,
+        {data: BodyType<OutreachUnsubscribeInput>},
+        TContext
+      > => {
+      return useMutation(getUnsubscribeOutreachAddressMutationOptions(options));
+    }
 
