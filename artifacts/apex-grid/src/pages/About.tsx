@@ -169,6 +169,18 @@ export default function About() {
                 <p className="text-muted-foreground leading-relaxed">
                   Jeremy leads Apex Grid with the same mission-first discipline he developed in uniform. As an Aerospace Medical Service Journeyman who deployed to Iraq in support of Operation Iraqi Freedom, he built the firm around accountability, clear communication, and delivering for clients the way you deliver for your unit — no excuses, no surprises.
                 </p>
+                <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+                  Outside Apex Grid, Jeremy is also the Founder and Senior Pastor of{" "}
+                  <a
+                    href="https://163faith.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-primary hover:underline underline-offset-4"
+                  >
+                    16:3 Faith
+                  </a>
+                  , a separate faith-centered community focused on Scripture, prayer, and daily discipleship.
+                </p>
               </div>
               <div className="bg-card p-10">
                 <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden">
