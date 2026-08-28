@@ -75,6 +75,55 @@ export default function About() {
         </div>
       </section>
 
+      <section className="py-24 bg-background border-y border-border">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mb-14">
+            <span className="font-mono text-xs tracking-widest text-primary uppercase">
+              Apex Grid Advantage
+            </span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mt-4 mb-6">
+              Why Top Developers Choose Apex Grid
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Our PEs take on jobs directly, so technical leadership is present
+              from scoping through final submission—not added only at the end.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
+            <div className="bg-card p-8">
+              <h3 className="text-2xl font-display font-bold mb-4">
+                Direct PE Accountability
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Every project is overseen and stamped by a licensed
+                Professional Engineer (PE) to ensure absolute compliance and
+                zero-correction submittals.
+              </p>
+            </div>
+            <div className="bg-card p-8">
+              <h3 className="text-2xl font-display font-bold mb-4">
+                Unmatched Engineering Scale
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                With a powerful internal roster of 20+ licensed engineers, we
+                provide senior-level oversight without the project delays
+                typical of smaller boutique firms.
+              </p>
+            </div>
+            <div className="bg-card p-8">
+              <h3 className="text-2xl font-display font-bold mb-4">
+                Nationwide Agility, Regional Mastery
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Licensed in 49 states with dedicated local hubs across the
+                Southwest, delivering cross-country reach with deep municipal
+                expertise.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 bg-card border-y border-border">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-3xl mb-14">
