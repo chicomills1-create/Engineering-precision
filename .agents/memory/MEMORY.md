@@ -13,3 +13,4 @@
 - [Large static corpus in Vite](large-static-corpus-vite.md) — 25k+ generated SEO files exceed Linux watcher limits; exclude generated trees from Vite watch without disabling static serving.
 - [South Africa positioning](south-africa-positioning.md) — build authority with informational content; publish local commercial-service claims only after credentials and partners are verified.
 - [Outreach automation safety](outreach-automation-safety.md) — keep follow-ups manual until delivery events and reply detection can stop sequences reliably.
+- [Private upload claims](private-upload-claims.md) — private object paths are not ownership; bind uploads to one-time claims and consume them atomically with the owning record.

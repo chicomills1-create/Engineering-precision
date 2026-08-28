@@ -15,6 +15,20 @@
       "when": 1787954162640,
       "tag": "0001_aromatic_dreaming_celestial",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1787956280592,
+      "tag": "0002_robust_eternity",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1787956683490,
+      "tag": "0003_nosy_purifiers",
+      "breakpoints": true
     }
   ]
 }

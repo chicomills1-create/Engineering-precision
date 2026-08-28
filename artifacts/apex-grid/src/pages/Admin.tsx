@@ -13,6 +13,7 @@ import {
 } from '@workspace/api-client-react';
 import { Download, Inbox, Mail, Phone, ShieldAlert, Trash2, Users } from 'lucide-react';
 import { AdminNav } from '@/components/layout/AdminNav';
+import { ClientJobsReview } from '@/components/admin/ClientJobsReview';
 
 const STATUSES = [LeadStatus.new, LeadStatus.contacted, LeadStatus.closed] as const;
 
@@ -333,6 +334,7 @@ export default function Admin() {
     <>
       <Show when="signed-in">
         <LeadsList />
+        <ClientJobsReview />
         <SubscribersSection />
       </Show>
       <Show when="signed-out">

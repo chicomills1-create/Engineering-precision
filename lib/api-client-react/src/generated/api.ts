@@ -25,6 +25,10 @@ import type {
   Campaign,
   CampaignInput,
   CampaignUpdate,
+  ClientJob,
+  ClientJobInput,
+  ClientJobUpdate,
+  ClientJobUploadResponse,
   DraftGenerationInput,
   ErrorMessage,
   HealthStatus,
@@ -737,6 +741,375 @@ export const useUpdateLead = <TError = ErrorType<ErrorMessage>,
         TContext
       > => {
       return useMutation(getUpdateLeadMutationOptions(options));
+    }
+
+export const getListClientJobsUrl = () => {
+
+
+
+
+  return `/api/client/jobs`
+}
+
+/**
+ * @summary List jobs for the signed-in client company
+ */
+export const listClientJobs = async ( options?: Parameters<typeof customFetch>[1]): Promise<ClientJob[]> => {
+
+  return customFetch<ClientJob[]>(getListClientJobsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListClientJobsQueryKey = () => {
+    return [
+    `/api/client/jobs`
+    ] as const;
+    }
+
+
+export const getListClientJobsQueryOptions = <TData = Awaited<ReturnType<typeof listClientJobs>>, TError = ErrorType<ErrorMessage>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listClientJobs>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListClientJobsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listClientJobs>>> = ({ signal }) => listClientJobs({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listClientJobs>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListClientJobsQueryResult = NonNullable<Awaited<ReturnType<typeof listClientJobs>>>
+export type ListClientJobsQueryError = ErrorType<ErrorMessage>
+
+
+/**
+ * @summary List jobs for the signed-in client company
+ */
+
+export function useListClientJobs<TData = Awaited<ReturnType<typeof listClientJobs>>, TError = ErrorType<ErrorMessage>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listClientJobs>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListClientJobsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getCreateClientJobUrl = () => {
+
+
+
+
+  return `/api/client/jobs`
+}
+
+/**
+ * Public submissions are accepted without sign-in. When signed in, the submission is associated with the caller's client company.
+ * @summary Submit a new project for review
+ */
+export const createClientJob = async (clientJobInput: ClientJobInput, options?: Parameters<typeof customFetch>[1]): Promise<ClientJob> => {
+
+  return customFetch<ClientJob>(getCreateClientJobUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(clientJobInput)
+  }
+);}
+
+
+
+
+
+export const getCreateClientJobMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createClientJob>>, TError,{data: BodyType<ClientJobInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createClientJob>>, TError,{data: BodyType<ClientJobInput>}, TContext> => {
+
+const mutationKey = ['createClientJob'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createClientJob>>, {data: BodyType<ClientJobInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createClientJob(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateClientJobMutationResult = NonNullable<Awaited<ReturnType<typeof createClientJob>>>
+    export type CreateClientJobMutationBody = BodyType<ClientJobInput>
+    export type CreateClientJobMutationError = ErrorType<ErrorMessage>
+
+    /**
+ * @summary Submit a new project for review
+ */
+export const useCreateClientJob = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createClientJob>>, TError,{data: BodyType<ClientJobInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createClientJob>>,
+        TError,
+        {data: BodyType<ClientJobInput>},
+        TContext
+      > => {
+      return useMutation(getCreateClientJobMutationOptions(options));
+    }
+
+export const getUploadClientJobDocumentUrl = () => {
+
+
+
+
+  return `/api/client/uploads`
+}
+
+/**
+ * @summary Upload a document for a pending client job submission
+ */
+export const uploadClientJobDocument = async (uploadClientJobDocumentBody: Blob, options?: Parameters<typeof customFetch>[1]): Promise<ClientJobUploadResponse> => {
+
+  return customFetch<ClientJobUploadResponse>(getUploadClientJobDocumentUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/octet-stream', ...options?.headers },
+    body: uploadClientJobDocumentBody
+  }
+);}
+
+
+
+
+
+export const getUploadClientJobDocumentMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof uploadClientJobDocument>>, TError,{data: BodyType<Blob>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof uploadClientJobDocument>>, TError,{data: BodyType<Blob>}, TContext> => {
+
+const mutationKey = ['uploadClientJobDocument'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof uploadClientJobDocument>>, {data: BodyType<Blob>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  uploadClientJobDocument(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UploadClientJobDocumentMutationResult = NonNullable<Awaited<ReturnType<typeof uploadClientJobDocument>>>
+    export type UploadClientJobDocumentMutationBody = BodyType<Blob>
+    export type UploadClientJobDocumentMutationError = ErrorType<ErrorMessage>
+
+    /**
+ * @summary Upload a document for a pending client job submission
+ */
+export const useUploadClientJobDocument = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof uploadClientJobDocument>>, TError,{data: BodyType<Blob>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof uploadClientJobDocument>>,
+        TError,
+        {data: BodyType<Blob>},
+        TContext
+      > => {
+      return useMutation(getUploadClientJobDocumentMutationOptions(options));
+    }
+
+export const getListClientJobsForReviewUrl = () => {
+
+
+
+
+  return `/api/client/jobs/review`
+}
+
+/**
+ * @summary List all client project submissions for internal review
+ */
+export const listClientJobsForReview = async ( options?: Parameters<typeof customFetch>[1]): Promise<ClientJob[]> => {
+
+  return customFetch<ClientJob[]>(getListClientJobsForReviewUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListClientJobsForReviewQueryKey = () => {
+    return [
+    `/api/client/jobs/review`
+    ] as const;
+    }
+
+
+export const getListClientJobsForReviewQueryOptions = <TData = Awaited<ReturnType<typeof listClientJobsForReview>>, TError = ErrorType<ErrorMessage>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listClientJobsForReview>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListClientJobsForReviewQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listClientJobsForReview>>> = ({ signal }) => listClientJobsForReview({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listClientJobsForReview>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListClientJobsForReviewQueryResult = NonNullable<Awaited<ReturnType<typeof listClientJobsForReview>>>
+export type ListClientJobsForReviewQueryError = ErrorType<ErrorMessage>
+
+
+/**
+ * @summary List all client project submissions for internal review
+ */
+
+export function useListClientJobsForReview<TData = Awaited<ReturnType<typeof listClientJobsForReview>>, TError = ErrorType<ErrorMessage>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listClientJobsForReview>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListClientJobsForReviewQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getUpdateClientJobUrl = (id: number,) => {
+
+
+
+
+  return `/api/client/jobs/${id}`
+}
+
+/**
+ * @summary Update a client project review status or internal note
+ */
+export const updateClientJob = async (id: number,
+    clientJobUpdate: ClientJobUpdate, options?: Parameters<typeof customFetch>[1]): Promise<ClientJob> => {
+
+  return customFetch<ClientJob>(getUpdateClientJobUrl(id),
+  {
+    ...options,
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(clientJobUpdate)
+  }
+);}
+
+
+
+
+
+export const getUpdateClientJobMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateClientJob>>, TError,{id: number;data: BodyType<ClientJobUpdate>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateClientJob>>, TError,{id: number;data: BodyType<ClientJobUpdate>}, TContext> => {
+
+const mutationKey = ['updateClientJob'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateClientJob>>, {id: number;data: BodyType<ClientJobUpdate>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateClientJob(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateClientJobMutationResult = NonNullable<Awaited<ReturnType<typeof updateClientJob>>>
+    export type UpdateClientJobMutationBody = BodyType<ClientJobUpdate>
+    export type UpdateClientJobMutationError = ErrorType<ErrorMessage>
+
+    /**
+ * @summary Update a client project review status or internal note
+ */
+export const useUpdateClientJob = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateClientJob>>, TError,{id: number;data: BodyType<ClientJobUpdate>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateClientJob>>,
+        TError,
+        {id: number;data: BodyType<ClientJobUpdate>},
+        TContext
+      > => {
+      return useMutation(getUpdateClientJobMutationOptions(options));
     }
 
 export const getUploadStorageObjectUrl = () => {

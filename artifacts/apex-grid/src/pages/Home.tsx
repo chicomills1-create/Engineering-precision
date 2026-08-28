@@ -70,7 +70,7 @@ export default function Home() {
             
             <div className="flex flex-col sm:flex-row gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both">
               <Link 
-                href="/contact" 
+                href="/submit-project" 
                 className="h-16 px-10 bg-primary text-white font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-3 rounded-[2px] hover:bg-primary/90 transition-all group hover:shadow-[0_0_30px_rgba(184,0,0,0.3)]"
               >
                 Start Your Project

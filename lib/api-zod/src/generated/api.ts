@@ -190,6 +190,208 @@ export const UpdateLeadResponse = zod.object({
 
 
 /**
+ * @summary List jobs for the signed-in client company
+ */
+export const ListClientJobsResponseItem = zod.object({
+  "id": zod.number(),
+  "companyId": zod.number().nullish(),
+  "submitterName": zod.string(),
+  "submitterEmail": zod.string(),
+  "submitterPhone": zod.string().nullish(),
+  "companyName": zod.string().nullish(),
+  "projectType": zod.string(),
+  "projectLocation": zod.string(),
+  "scope": zod.string(),
+  "timeline": zod.string().nullish(),
+  "budgetContext": zod.string().nullish(),
+  "services": zod.string(),
+  "status": zod.enum(['submitted', 'reviewing', 'needs_information', 'quoted', 'accepted', 'declined']),
+  "internalNotes": zod.string().nullish(),
+  "documents": zod.array(zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "objectPath": zod.string(),
+  "downloadUrl": zod.string(),
+  "createdAt": zod.string()
+})),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const ListClientJobsResponse = zod.array(ListClientJobsResponseItem)
+
+
+/**
+ * Public submissions are accepted without sign-in. When signed in, the submission is associated with the caller's client company.
+ * @summary Submit a new project for review
+ */
+export const createClientJobBodySubmitterNameMax = 160;
+
+export const createClientJobBodySubmitterEmailMin = 5;
+export const createClientJobBodySubmitterEmailMax = 320;
+
+
+export const createClientJobBodySubmitterEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+export const createClientJobBodySubmitterPhoneMax = 40;
+
+export const createClientJobBodyCompanyNameMax = 200;
+
+export const createClientJobBodyProjectTypeMax = 120;
+
+export const createClientJobBodyProjectLocationMax = 240;
+
+export const createClientJobBodyScopeMax = 10000;
+
+export const createClientJobBodyTimelineMax = 500;
+
+export const createClientJobBodyBudgetContextMax = 500;
+
+export const createClientJobBodyServicesMax = 1000;
+
+export const createClientJobBodyDocumentsItemNameMax = 255;
+
+export const createClientJobBodyDocumentsItemObjectPathMax = 512;
+
+export const createClientJobBodyDocumentsItemUploadTokenMin = 32;
+export const createClientJobBodyDocumentsItemUploadTokenMax = 128;
+
+export const createClientJobBodyDocumentsMax = 20;
+
+
+
+export const CreateClientJobBody = zod.object({
+  "submitterName": zod.string().min(1).max(createClientJobBodySubmitterNameMax),
+  "submitterEmail": zod.string().min(createClientJobBodySubmitterEmailMin).max(createClientJobBodySubmitterEmailMax).regex(createClientJobBodySubmitterEmailRegExp),
+  "submitterPhone": zod.string().max(createClientJobBodySubmitterPhoneMax).optional(),
+  "companyName": zod.string().max(createClientJobBodyCompanyNameMax).optional(),
+  "projectType": zod.string().min(1).max(createClientJobBodyProjectTypeMax),
+  "projectLocation": zod.string().min(1).max(createClientJobBodyProjectLocationMax),
+  "scope": zod.string().min(1).max(createClientJobBodyScopeMax),
+  "timeline": zod.string().max(createClientJobBodyTimelineMax).optional(),
+  "budgetContext": zod.string().max(createClientJobBodyBudgetContextMax).optional(),
+  "services": zod.string().min(1).max(createClientJobBodyServicesMax),
+  "documents": zod.array(zod.object({
+  "name": zod.string().min(1).max(createClientJobBodyDocumentsItemNameMax),
+  "objectPath": zod.string().min(1).max(createClientJobBodyDocumentsItemObjectPathMax),
+  "uploadToken": zod.string().min(createClientJobBodyDocumentsItemUploadTokenMin).max(createClientJobBodyDocumentsItemUploadTokenMax)
+})).max(createClientJobBodyDocumentsMax).optional()
+})
+
+export const CreateClientJobResponse = zod.object({
+  "id": zod.number(),
+  "companyId": zod.number().nullish(),
+  "submitterName": zod.string(),
+  "submitterEmail": zod.string(),
+  "submitterPhone": zod.string().nullish(),
+  "companyName": zod.string().nullish(),
+  "projectType": zod.string(),
+  "projectLocation": zod.string(),
+  "scope": zod.string(),
+  "timeline": zod.string().nullish(),
+  "budgetContext": zod.string().nullish(),
+  "services": zod.string(),
+  "status": zod.enum(['submitted', 'reviewing', 'needs_information', 'quoted', 'accepted', 'declined']),
+  "internalNotes": zod.string().nullish(),
+  "documents": zod.array(zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "objectPath": zod.string(),
+  "downloadUrl": zod.string(),
+  "createdAt": zod.string()
+})),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+/**
+ * @summary Upload a document for a pending client job submission
+ */
+export const UploadClientJobDocumentHeader = zod.object({
+  "x-file-name": zod.string()
+})
+
+export const UploadClientJobDocumentResponse = zod.object({
+  "name": zod.string(),
+  "objectPath": zod.string(),
+  "uploadToken": zod.string()
+})
+
+
+/**
+ * @summary List all client project submissions for internal review
+ */
+export const ListClientJobsForReviewResponseItem = zod.object({
+  "id": zod.number(),
+  "companyId": zod.number().nullish(),
+  "submitterName": zod.string(),
+  "submitterEmail": zod.string(),
+  "submitterPhone": zod.string().nullish(),
+  "companyName": zod.string().nullish(),
+  "projectType": zod.string(),
+  "projectLocation": zod.string(),
+  "scope": zod.string(),
+  "timeline": zod.string().nullish(),
+  "budgetContext": zod.string().nullish(),
+  "services": zod.string(),
+  "status": zod.enum(['submitted', 'reviewing', 'needs_information', 'quoted', 'accepted', 'declined']),
+  "internalNotes": zod.string().nullish(),
+  "documents": zod.array(zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "objectPath": zod.string(),
+  "downloadUrl": zod.string(),
+  "createdAt": zod.string()
+})),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const ListClientJobsForReviewResponse = zod.array(ListClientJobsForReviewResponseItem)
+
+
+/**
+ * @summary Update a client project review status or internal note
+ */
+export const UpdateClientJobParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const updateClientJobBodyInternalNotesMax = 10000;
+
+
+
+export const UpdateClientJobBody = zod.object({
+  "status": zod.enum(['submitted', 'reviewing', 'needs_information', 'quoted', 'accepted', 'declined']).optional(),
+  "internalNotes": zod.string().max(updateClientJobBodyInternalNotesMax).nullish()
+})
+
+export const UpdateClientJobResponse = zod.object({
+  "id": zod.number(),
+  "companyId": zod.number().nullish(),
+  "submitterName": zod.string(),
+  "submitterEmail": zod.string(),
+  "submitterPhone": zod.string().nullish(),
+  "companyName": zod.string().nullish(),
+  "projectType": zod.string(),
+  "projectLocation": zod.string(),
+  "scope": zod.string(),
+  "timeline": zod.string().nullish(),
+  "budgetContext": zod.string().nullish(),
+  "services": zod.string(),
+  "status": zod.enum(['submitted', 'reviewing', 'needs_information', 'quoted', 'accepted', 'declined']),
+  "internalNotes": zod.string().nullish(),
+  "documents": zod.array(zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "objectPath": zod.string(),
+  "downloadUrl": zod.string(),
+  "createdAt": zod.string()
+})),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+/**
  * @summary Upload a file (proxied through the server, which enforces size and type limits)
  */
 export const UploadStorageObjectHeader = zod.object({

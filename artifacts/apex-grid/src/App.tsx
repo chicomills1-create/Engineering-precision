@@ -23,6 +23,7 @@ import { lazy, Suspense, useEffect } from 'react';
 import Capabilities from '@/pages/Capabilities';
 
 const ClerkArea = lazy(() => import('@/ClerkArea'));
+const ClientArea = lazy(() => import('@/ClientArea'));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,6 +50,20 @@ function LazyClerk({ page }: { page: 'admin' | 'admin-seo' | 'admin-outreach' | 
   );
 }
 
+function LazyClient({ page }: { page: 'submit' | 'portal' }) {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-[70vh] items-center justify-center bg-background text-muted-foreground">
+          Loading…
+        </div>
+      }
+    >
+      <ClientArea page={page} />
+    </Suspense>
+  );
+}
+
 function Router() {
   return (
     <Shell>
@@ -71,6 +86,12 @@ function Router() {
         <Route path="/about" component={About} />
         <Route path="/team" component={Team} />
         <Route path="/contact" component={Contact} />
+        <Route path="/submit-project">
+          <LazyClient page="submit" />
+        </Route>
+        <Route path="/client-portal">
+          <LazyClient page="portal" />
+        </Route>
         <Route path="/unsubscribe" component={Unsubscribe} />
         <Route path="/capabilities" component={Capabilities} />
         <Route path="/for-architects">

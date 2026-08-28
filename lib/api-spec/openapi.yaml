@@ -16,6 +16,8 @@ tags:
     description: Object storage upload and serving endpoints.
   - name: outreach
     description: Authenticated B2B outreach management.
+  - name: client-jobs
+    description: Public project intake and authenticated client job history.
 paths:
   /healthz:
     get:
@@ -234,6 +236,149 @@ paths:
                 $ref: "#/components/schemas/ErrorMessage"
         "404":
           description: Lead not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+  /client/jobs:
+    get:
+      operationId: listClientJobs
+      tags: [client-jobs]
+      summary: List jobs for the signed-in client company
+      responses:
+        "200":
+          description: Jobs belonging to the signed-in client company
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ClientJob"
+        "401":
+          description: Sign-in required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+    post:
+      operationId: createClientJob
+      tags: [client-jobs]
+      summary: Submit a new project for review
+      description: Public submissions are accepted without sign-in. When signed in, the submission is associated with the caller's client company.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientJobInput"
+      responses:
+        "201":
+          description: Project submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientJob"
+        "400":
+          description: Invalid project details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+  /client/uploads:
+    post:
+      operationId: uploadClientJobDocument
+      tags: [client-jobs]
+      summary: Upload a document for a pending client job submission
+      parameters:
+        - name: x-file-name
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        "200":
+          description: Document uploaded with a one-time claim token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientJobUploadResponse"
+        "400":
+          description: Invalid file
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "413":
+          description: File too large
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+  /client/jobs/review:
+    get:
+      operationId: listClientJobsForReview
+      tags: [client-jobs]
+      summary: List all client project submissions for internal review
+      responses:
+        "200":
+          description: All project submissions, newest first
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ClientJob"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+  /client/jobs/{id}:
+    patch:
+      operationId: updateClientJob
+      tags: [client-jobs]
+      summary: Update a client project review status or internal note
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientJobUpdate"
+      responses:
+        "200":
+          description: Updated project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientJob"
+        "400":
+          description: Invalid update
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "404":
+          description: Project not found
           content:
             application/json:
               schema:
@@ -591,6 +736,82 @@ components:
           description: Object paths of uploaded files attached to the inquiry.
           items:
             type: string
+    ClientJobDocumentInput:
+      type: object
+      required: [name, objectPath, uploadToken]
+      properties:
+        name: { type: string, minLength: 1, maxLength: 255 }
+        objectPath: { type: string, minLength: 1, maxLength: 512 }
+        uploadToken: { type: string, minLength: 32, maxLength: 128 }
+    ClientJobUploadResponse:
+      type: object
+      required: [name, objectPath, uploadToken]
+      properties:
+        name: { type: string }
+        objectPath: { type: string }
+        uploadToken: { type: string }
+    ClientJobDocument:
+      type: object
+      required: [id, name, objectPath, downloadUrl, createdAt]
+      properties:
+        id: { type: number }
+        name: { type: string }
+        objectPath: { type: string }
+        downloadUrl: { type: string }
+        createdAt: { type: string }
+    ClientJob:
+      type: object
+      required: [id, submitterName, submitterEmail, projectType, projectLocation, scope, services, status, documents, createdAt, updatedAt]
+      properties:
+        id: { type: number }
+        companyId: { type: [number, "null"] }
+        submitterName: { type: string }
+        submitterEmail: { type: string }
+        submitterPhone: { type: [string, "null"] }
+        companyName: { type: [string, "null"] }
+        projectType: { type: string }
+        projectLocation: { type: string }
+        scope: { type: string }
+        timeline: { type: [string, "null"] }
+        budgetContext: { type: [string, "null"] }
+        services: { type: string }
+        status:
+          $ref: "#/components/schemas/ClientJobStatus"
+        internalNotes: { type: [string, "null"] }
+        documents:
+          type: array
+          items:
+            $ref: "#/components/schemas/ClientJobDocument"
+        createdAt: { type: string }
+        updatedAt: { type: string }
+    ClientJobStatus:
+      type: string
+      enum: [submitted, reviewing, needs_information, quoted, accepted, declined]
+    ClientJobInput:
+      type: object
+      required: [submitterName, submitterEmail, projectType, projectLocation, scope, services]
+      properties:
+        submitterName: { type: string, minLength: 1, maxLength: 160 }
+        submitterEmail: { type: string, minLength: 5, maxLength: 320, pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$" }
+        submitterPhone: { type: string, maxLength: 40 }
+        companyName: { type: string, maxLength: 200 }
+        projectType: { type: string, minLength: 1, maxLength: 120 }
+        projectLocation: { type: string, minLength: 1, maxLength: 240 }
+        scope: { type: string, minLength: 1, maxLength: 10000 }
+        timeline: { type: string, maxLength: 500 }
+        budgetContext: { type: string, maxLength: 500 }
+        services: { type: string, minLength: 1, maxLength: 1000 }
+        documents:
+          type: array
+          maxItems: 20
+          items:
+            $ref: "#/components/schemas/ClientJobDocumentInput"
+    ClientJobUpdate:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/ClientJobStatus"
+        internalNotes: { type: ["string", "null"], maxLength: 10000 }
     Prospect:
       type: object
       required: [id, companyName, city, state, audience, fitScore, needScore, emailStatus, status, createdAt, updatedAt]

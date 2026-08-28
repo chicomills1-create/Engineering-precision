@@ -163,10 +163,10 @@ export function Shell({ children }: { children: React.ReactNode }) {
               );
             })}
             <Link
-              href="/contact"
+              href="/submit-project"
               className="h-10 px-6 bg-primary text-white font-semibold text-sm flex items-center justify-center rounded-[2px] hover:bg-primary/90 transition-colors"
             >
-              Contact Us
+              Submit a Project
             </Link>
           </nav>
 
@@ -239,11 +239,11 @@ export function Shell({ children }: { children: React.ReactNode }) {
               </div>
             ))}
             <Link
-              href="/contact"
+              href="/submit-project"
               className="h-14 w-full mt-4 bg-primary text-white font-bold flex items-center justify-center rounded-[2px]"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Contact Us
+              Submit a Project
             </Link>
           </div>
         )}
@@ -282,6 +282,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 <li><a href="/blog/" className="hover:text-primary transition-colors">Blog</a></li>
                 <li><a href="/locations/" className="hover:text-primary transition-colors">Service Areas</a></li>
                 <li><Link href="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
+                <li><Link href="/client-portal" className="hover:text-primary transition-colors">Client Portal</Link></li>
               </ul>
             </div>
             

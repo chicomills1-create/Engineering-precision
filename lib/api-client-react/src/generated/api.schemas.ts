@@ -136,6 +136,129 @@ export interface LeadInput {
   attachments?: string[];
 }
 
+export interface ClientJobDocumentInput {
+  /**
+     * @minLength 1
+     * @maxLength 255
+     */
+  name: string;
+  /**
+     * @minLength 1
+     * @maxLength 512
+     */
+  objectPath: string;
+  /**
+     * @minLength 32
+     * @maxLength 128
+     */
+  uploadToken: string;
+}
+
+export interface ClientJobUploadResponse {
+  name: string;
+  objectPath: string;
+  uploadToken: string;
+}
+
+export interface ClientJobDocument {
+  id: number;
+  name: string;
+  objectPath: string;
+  downloadUrl: string;
+  createdAt: string;
+}
+
+export type ClientJobStatus = typeof ClientJobStatus[keyof typeof ClientJobStatus];
+
+
+export const ClientJobStatus = {
+  submitted: 'submitted',
+  reviewing: 'reviewing',
+  needs_information: 'needs_information',
+  quoted: 'quoted',
+  accepted: 'accepted',
+  declined: 'declined',
+} as const;
+
+export interface ClientJob {
+  id: number;
+  /** @nullable */
+  companyId?: number | null;
+  submitterName: string;
+  submitterEmail: string;
+  /** @nullable */
+  submitterPhone?: string | null;
+  /** @nullable */
+  companyName?: string | null;
+  projectType: string;
+  projectLocation: string;
+  scope: string;
+  /** @nullable */
+  timeline?: string | null;
+  /** @nullable */
+  budgetContext?: string | null;
+  services: string;
+  status: ClientJobStatus;
+  /** @nullable */
+  internalNotes?: string | null;
+  documents: ClientJobDocument[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ClientJobInput {
+  /**
+     * @minLength 1
+     * @maxLength 160
+     */
+  submitterName: string;
+  /**
+     * @minLength 5
+     * @maxLength 320
+     * @pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$
+     */
+  submitterEmail: string;
+  /** @maxLength 40 */
+  submitterPhone?: string;
+  /** @maxLength 200 */
+  companyName?: string;
+  /**
+     * @minLength 1
+     * @maxLength 120
+     */
+  projectType: string;
+  /**
+     * @minLength 1
+     * @maxLength 240
+     */
+  projectLocation: string;
+  /**
+     * @minLength 1
+     * @maxLength 10000
+     */
+  scope: string;
+  /** @maxLength 500 */
+  timeline?: string;
+  /** @maxLength 500 */
+  budgetContext?: string;
+  /**
+     * @minLength 1
+     * @maxLength 1000
+     */
+  services: string;
+  /** @maxItems 20 */
+  documents?: ClientJobDocumentInput[];
+}
+
+export interface ClientJobUpdate {
+  status?: ClientJobStatus;
+  /**
+     * @maxLength 10000
+     * @nullable
+     */
+  internalNotes?: string | null;
+}
+
 export type ProspectState = typeof ProspectState[keyof typeof ProspectState];
 
 

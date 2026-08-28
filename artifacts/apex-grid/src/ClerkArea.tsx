@@ -8,15 +8,15 @@ import { ClerkProvider, SignIn, SignUp, useClerk } from '@clerk/react';
 import { publishableKeyFromHost } from '@clerk/react/internal';
 import { dark } from '@clerk/themes';
 
-const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
-const clerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
+export const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+export const clerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
 
-const clerkPubKey = publishableKeyFromHost(
+export const clerkPubKey = publishableKeyFromHost(
   window.location.hostname,
   import.meta.env.VITE_CLERK_PUBLISHABLE_KEY,
 );
 
-const clerkAppearance = {
+export const clerkAppearance = {
   theme: dark,
   cssLayerName: 'clerk',
   options: {
@@ -65,13 +65,13 @@ const clerkAppearance = {
   },
 };
 
-function stripBase(path: string): string {
+export function stripBase(path: string): string {
   return basePath && path.startsWith(basePath)
     ? path.slice(basePath.length) || '/'
     : path;
 }
 
-function ClerkQueryClientCacheInvalidator() {
+export function ClerkQueryClientCacheInvalidator() {
   const { addListener } = useClerk();
   const qc = useQueryClient();
   const prevUserIdRef = useRef<string | null | undefined>(undefined);
