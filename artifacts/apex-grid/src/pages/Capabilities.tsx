@@ -73,7 +73,7 @@ export default function Capabilities() {
                   Apex Grid Engineering is a multidisciplinary engineering and architecture firm headquartered in Queen Creek, Arizona. We deliver integrated Architecture, Structural, MEP, and Civil design under one roof — a single contract, a single point of accountability.
                 </p>
                 <p>
-                  The firm is led by Jeremy Mills, a disabled U.S. Air Force veteran. That service background defines how the firm operates: documented processes, zero tolerance for "close enough," and drawings that survive the full government QA cycle.
+                  The firm is led by Jeremy Mills, a U.S. Air Force veteran who served in Aerospace Medical Service and deployed to Iraq in support of Operation Iraqi Freedom. That service background defines how the firm operates: documented processes, zero tolerance for "close enough," and drawings that survive the full government QA cycle.
                 </p>
                 <p>
                   Apex Grid is PE-licensed in 49 states and has engineers with 15+ years of experience across commercial, industrial, healthcare, government, and military project types.

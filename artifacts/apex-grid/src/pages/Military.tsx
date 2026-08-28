@@ -24,13 +24,13 @@ export default function Military() {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-3 border border-primary/60 bg-primary/10 px-4 py-2 mb-8">
               <Flag className="w-4 h-4 text-primary" />
-              <span className="font-mono text-xs uppercase tracking-widest text-primary">Veteran-Owned &amp; Operated</span>
+              <span className="font-mono text-xs uppercase tracking-widest text-primary">Veteran-Led &amp; Operated</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight mb-8">
               We Support Our <span className="text-primary">Troops</span>
             </h1>
             <p className="text-xl md:text-2xl text-foreground/80 leading-relaxed border-l-4 border-primary pl-6">
-              Apex Grid Engineering is led by a disabled U.S. Air Force veteran. Service isn't a marketing line for us — it's where our discipline, accountability, and mission-first mindset come from.
+              Apex Grid Engineering is led by a U.S. Air Force veteran who served honorably in Aerospace Medical Service and deployed to Iraq in support of Operation Iraqi Freedom. Service isn't a marketing line for us — it's where our discipline, accountability, and mission-first mindset come from.
             </p>
           </div>
         </div>
@@ -55,10 +55,10 @@ export default function Military() {
               <span className="font-mono text-xs uppercase tracking-widest text-primary mb-6 block">A Note from our CEO</span>
               <blockquote className="border-l-4 border-primary pl-8 space-y-5">
                 <p className="text-xl leading-relaxed text-foreground/90">
-                  "I enlisted in the United States Air Force straight out of high school and spent the better part of a decade maintaining aircraft and systems where a checklist skipped or a torque spec missed could end a mission — or worse. That kind of accountability gets into your bones.
+                  "I enlisted in the United States Air Force straight out of high school and served as an Aerospace Medical Service Journeyman with the 60th Medical Operations Squadron. I deployed to Iraq in support of Operation Iraqi Freedom, where readiness, disciplined procedures, and taking care of the mission and the people around you were not abstract ideas — they were the work.
                 </p>
                 <p className="text-lg leading-relaxed text-foreground/80">
-                  When I transitioned out as a disabled veteran and eventually founded Apex Grid, I brought the same mindset to engineering documents: every calculation gets checked, every drawing gets a second set of eyes, and we don't call something done until it can survive scrutiny. The Air Force didn't let us say 'close enough,' and neither do we.
+                  When I transitioned out of the Air Force and eventually founded Apex Grid, I brought that same mindset to engineering documents: every calculation gets checked, every drawing gets a second set of eyes, and we don't call something done until it can survive scrutiny. The Air Force didn't let us say 'close enough,' and neither do we.
                 </p>
                 <p className="text-lg leading-relaxed text-foreground/80">
                   Serving military clients and veteran-owned businesses isn't a niche for us — it's personal. We know what's at stake, and we're honored to bring our service-driven standards to every project that crosses our desk."
@@ -67,6 +67,45 @@ export default function Military() {
                   — Jeremy, Co-Founder &amp; CEO · USAF Veteran
                 </footer>
               </blockquote>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Service record */}
+      <section className="py-24 bg-card border-b border-border">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-8 h-[1px] bg-primary" />
+              <span className="font-mono text-xs uppercase tracking-widest text-primary">Service &amp; Mission Background</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">A Readiness Mindset Built in Uniform</h2>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-12 max-w-3xl">
+              Jeremy's military experience gives clients more than a veteran-owned designation. It brings a practical understanding of readiness, documentation, coordination, and accountability when the work has to perform under pressure.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
+              <div className="bg-background p-8">
+                <Flag className="w-6 h-6 text-primary mb-4" />
+                <div className="font-display font-bold text-lg mb-3">U.S. Air Force Service</div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Honorable active-duty service shaped a mission-first approach to standards, teamwork, and follow-through.
+                </p>
+              </div>
+              <div className="bg-background p-8">
+                <Shield className="w-6 h-6 text-primary mb-4" />
+                <div className="font-display font-bold text-lg mb-3">Aerospace Medical Service</div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  As an Aerospace Medical Service Journeyman, Jeremy worked in a technical environment where preparation, precision, and care matter.
+                </p>
+              </div>
+              <div className="bg-background p-8">
+                <Award className="w-6 h-6 text-primary mb-4" />
+                <div className="font-display font-bold text-lg mb-3">Operation Iraqi Freedom</div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Deployment to Iraq reinforced the calm coordination and field-ready judgment he brings to complex projects today.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -120,10 +159,10 @@ export default function Military() {
           <div className="grid md:grid-cols-2 gap-16 items-start">
             <div>
               <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
-                From the Flight Line to the <span className="text-primary">Drafting Table</span>
+                From Expeditionary Medicine to <span className="text-primary">Engineering Delivery</span>
               </h2>
               <p className="text-lg text-foreground/80 leading-relaxed mb-6">
-                Our CEO's Air Force service shaped how this firm runs: clear chains of responsibility, checklists that get followed, documentation that holds up to inspection, and zero tolerance for "close enough." We are proud to put those values to work for the military community, and we love doing design work for military organizations.
+                Our CEO's Air Force service — including Aerospace Medical Service training and deployment to Iraq — shaped how this firm runs: clear chains of responsibility, checklists that get followed, documentation that holds up to inspection, and zero tolerance for "close enough." We are proud to put those values to work for the military community, and we love doing design work for military organizations.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 Our engineers design to Department of Defense requirements, including Unified Facilities Criteria (UFC), ATFP standoff and progressive-collapse provisions, secure and mission-critical facility standards, and federal energy mandates. From installation support facilities to reserve centers, armories, and defense-contractor sites, we deliver permit-ready documents engineered to meet government review standards.
@@ -143,7 +182,7 @@ export default function Military() {
               <div className="bg-card p-8">
                 <Flag className="w-6 h-6 text-primary mb-4" />
                 <div className="font-bold mb-2">Veteran-Led Delivery</div>
-                <p className="text-sm text-muted-foreground">Disabled-veteran leadership that understands the mission and the chain of command.</p>
+                 <p className="text-sm text-muted-foreground">Veteran-led delivery shaped by mission readiness, technical discipline, and clear responsibility.</p>
               </div>
             </div>
           </div>
@@ -378,7 +417,7 @@ const NAICS_CODES = [
 ];
 
 const PAGE_META = {
-  title: "Military & Defense Engineering | Veteran-Owned Firm | Apex Grid",
-  description: "Veteran-owned engineering firm led by a disabled U.S. Air Force veteran. UFC and ATFP design, mission-critical MEP, and permit-ready documents for military and defense facilities.",
+  title: "Military & Defense Engineering | Veteran-Led Firm | Apex Grid",
+  description: "Veteran-led engineering firm shaped by U.S. Air Force Aerospace Medical Service and Operation Iraqi Freedom experience. UFC and ATFP design, mission-critical MEP, and permit-ready documents for military and defense facilities.",
   path: "/military",
 };

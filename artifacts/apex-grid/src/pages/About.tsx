@@ -165,9 +165,9 @@ export default function About() {
                 </div>
                 <div className="w-12 h-[2px] bg-primary mb-6" />
                 <h3 className="text-2xl font-display font-bold mb-1">Jeremy Mills</h3>
-                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Co-Founder &amp; CEO · Disabled U.S. Veteran</div>
+                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Co-Founder &amp; CEO · U.S. Air Force Veteran</div>
                 <p className="text-muted-foreground leading-relaxed">
-                  Jeremy leads Apex Grid with the same mission-first discipline he carried in uniform. As a disabled veteran, he built the firm around accountability, clear communication, and delivering for clients the way you deliver for your unit — no excuses, no surprises.
+                  Jeremy leads Apex Grid with the same mission-first discipline he developed in uniform. As an Aerospace Medical Service Journeyman who deployed to Iraq in support of Operation Iraqi Freedom, he built the firm around accountability, clear communication, and delivering for clients the way you deliver for your unit — no excuses, no surprises.
                 </p>
               </div>
               <div className="bg-card p-10">
