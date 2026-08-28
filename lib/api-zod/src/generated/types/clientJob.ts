@@ -7,6 +7,7 @@
  */
 import type { ClientJobDocument } from './clientJobDocument';
 import type { ClientJobStatus } from './clientJobStatus';
+import type { ClientJobStatusNotificationStatus } from './clientJobStatusNotificationStatus';
 
 export interface ClientJob {
   id: number;
@@ -29,6 +30,12 @@ export interface ClientJob {
   status: ClientJobStatus;
   /** @nullable */
   internalNotes?: string | null;
+  /** @nullable */
+  statusNotificationStatus?: ClientJobStatusNotificationStatus;
+  /** @nullable */
+  statusNotificationError?: string | null;
+  /** @nullable */
+  statusNotificationSentAt?: string | null;
   documents: ClientJobDocument[];
   createdAt: string;
   updatedAt: string;

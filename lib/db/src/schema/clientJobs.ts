@@ -44,6 +44,9 @@ export const clientJobsTable = pgTable("client_jobs", {
   services: text("services").notNull(),
   status: text("status").notNull().default("submitted"),
   internalNotes: text("internal_notes"),
+  statusNotificationStatus: text("status_notification_status"),
+  statusNotificationError: text("status_notification_error"),
+  statusNotificationSentAt: timestamp("status_notification_sent_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
 });

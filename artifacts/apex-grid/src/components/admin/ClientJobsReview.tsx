@@ -4,6 +4,8 @@ import {
   ClientJobStatus,
   getListClientJobsForReviewQueryKey,
   useListClientJobsForReview,
+  usePreviewClientJobStatusNotification,
+  useSendClientJobStatusNotification,
   useUpdateClientJob,
   type ClientJob,
 } from '@workspace/api-client-react';
@@ -18,6 +20,14 @@ import {
   Save,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 
 const statuses = [
@@ -51,6 +61,8 @@ function formatDate(iso: string) {
 function ReviewCard({ job }: { job: ClientJob }) {
   const queryClient = useQueryClient();
   const [notes, setNotes] = useState(job.internalNotes || '');
+  const [notificationTarget, setNotificationTarget] = useState<ClientJobStatus | null>(null);
+  const [sendError, setSendError] = useState<string | null>(null);
   const updateJob = useUpdateClientJob({
     mutation: {
       onSuccess: () => {
@@ -60,9 +72,44 @@ function ReviewCard({ job }: { job: ClientJob }) {
       },
     },
   });
+  const preview = usePreviewClientJobStatusNotification();
+  const sendNotification = useSendClientJobStatusNotification({
+    mutation: {
+      onSuccess: (updatedJob) => {
+        void queryClient.invalidateQueries({
+          queryKey: getListClientJobsForReviewQueryKey(),
+        });
+        if (updatedJob.statusNotificationStatus === 'failed') {
+          setSendError(updatedJob.statusNotificationError || 'The email could not be sent.');
+        } else {
+          setNotificationTarget(null);
+        }
+      },
+    },
+  });
+
+  const handleStatusChange = (status: ClientJobStatus) => {
+    if (status === job.status || updateJob.isPending || sendNotification.isPending) return;
+    if (status === ClientJobStatus.needs_information || status === ClientJobStatus.quoted) {
+      setSendError(null);
+      setNotificationTarget(status);
+      preview.mutate({ id: job.id, data: { status } });
+      return;
+    }
+    updateJob.mutate({ id: job.id, data: { status } });
+  };
+
+  const closeNotificationPreview = () => {
+    if (!sendNotification.isPending) {
+      setNotificationTarget(null);
+      setSendError(null);
+      preview.reset();
+    }
+  };
 
   return (
-    <article className="border border-border bg-card p-6 rounded-[2px]">
+    <>
+      <article className="border border-border bg-card p-6 rounded-[2px]">
       <div className="flex flex-col gap-4 border-b border-border pb-5 md:flex-row md:items-start md:justify-between">
         <div>
           <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
@@ -143,7 +190,7 @@ function ReviewCard({ job }: { job: ClientJob }) {
               key={status}
               type="button"
               disabled={updateJob.isPending || status === job.status}
-              onClick={() => updateJob.mutate({ id: job.id, data: { status } })}
+              onClick={() => handleStatusChange(status)}
               className={`border px-2.5 py-1.5 text-[11px] uppercase tracking-wider transition-colors ${
                 status === job.status
                   ? 'border-primary/60 bg-primary/10 text-primary'
@@ -181,8 +228,105 @@ function ReviewCard({ job }: { job: ClientJob }) {
           </Button>
           {updateJob.isError && <span className="text-xs text-destructive">Update failed. Try again.</span>}
         </div>
+        {job.statusNotificationStatus && (
+          <div
+            className={`mt-4 border px-3 py-2 text-xs ${
+              job.statusNotificationStatus === 'sent'
+                ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-200'
+                : 'border-destructive/40 bg-destructive/10 text-destructive'
+            }`}
+          >
+            <strong>
+              Status email {job.statusNotificationStatus === 'sent' ? 'sent' : 'failed'}.
+            </strong>
+            {job.statusNotificationSentAt && ` ${formatDate(job.statusNotificationSentAt)}`}
+            {job.statusNotificationError && (
+              <span className="mt-1 block">{job.statusNotificationError}</span>
+            )}
+          </div>
+        )}
       </div>
-    </article>
+      </article>
+
+      <Dialog
+        open={notificationTarget !== null}
+        onOpenChange={(open) => !open && closeNotificationPreview()}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Preview client status email</DialogTitle>
+            <DialogDescription>
+              Review the client-safe message before changing this project to{' '}
+              {notificationTarget === ClientJobStatus.needs_information
+                ? 'Needs information'
+                : 'Quoted'}.
+            </DialogDescription>
+          </DialogHeader>
+          {preview.isPending && <p className="text-sm text-muted-foreground">Loading preview…</p>}
+          {preview.isError && (
+            <p className="text-sm text-destructive">
+              Could not load the preview. Close this window and try again.
+            </p>
+          )}
+          {preview.data && (
+            <div className="space-y-4 text-sm">
+              <div className="border border-border bg-card p-4">
+                <p className="text-xs text-muted-foreground">To</p>
+                <p className="break-all">{preview.data.recipient}</p>
+                <p className="mt-3 text-xs text-muted-foreground">Subject</p>
+                <p>{preview.data.subject}</p>
+              </div>
+              <div className="max-h-64 overflow-y-auto whitespace-pre-wrap border border-border bg-background p-4 leading-relaxed">
+                {preview.data.body}
+              </div>
+              <p className="text-xs text-muted-foreground">
+                The email links to <span className="text-foreground">{preview.data.portalUrl}</span>{' '}
+                and asks the client to sign in before viewing the portal.
+              </p>
+            </div>
+          )}
+          {sendError && (
+            <p className="border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
+              Status changed, but the email failed: {sendError}
+            </p>
+          )}
+          <DialogFooter>
+            <Button
+              variant="outline"
+              disabled={sendNotification.isPending}
+              onClick={() => {
+                if (notificationTarget) {
+                  updateJob.mutate(
+                    { id: job.id, data: { status: notificationTarget } },
+                    { onSuccess: closeNotificationPreview },
+                  );
+                }
+              }}
+            >
+              Change without emailing
+            </Button>
+            <Button
+              disabled={
+                !preview.data ||
+                preview.isPending ||
+                sendNotification.isPending ||
+                updateJob.isPending
+              }
+              onClick={() => {
+                if (notificationTarget) {
+                  sendNotification.mutate({
+                    id: job.id,
+                    data: { status: notificationTarget },
+                  });
+                }
+              }}
+            >
+              {sendNotification.isPending ? 'Sending…' : 'Confirm & send'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
 

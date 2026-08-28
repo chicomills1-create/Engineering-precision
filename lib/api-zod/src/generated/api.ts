@@ -207,6 +207,9 @@ export const ListClientJobsResponseItem = zod.object({
   "services": zod.string(),
   "status": zod.enum(['submitted', 'reviewing', 'needs_information', 'quoted', 'accepted', 'declined']),
   "internalNotes": zod.string().nullish(),
+  "statusNotificationStatus": zod.union([zod.literal('sent'),zod.literal('failed'),zod.literal(null)]).nullish(),
+  "statusNotificationError": zod.string().nullish(),
+  "statusNotificationSentAt": zod.string().nullish(),
   "documents": zod.array(zod.object({
   "id": zod.number(),
   "name": zod.string(),
@@ -291,6 +294,9 @@ export const CreateClientJobResponse = zod.object({
   "services": zod.string(),
   "status": zod.enum(['submitted', 'reviewing', 'needs_information', 'quoted', 'accepted', 'declined']),
   "internalNotes": zod.string().nullish(),
+  "statusNotificationStatus": zod.union([zod.literal('sent'),zod.literal('failed'),zod.literal(null)]).nullish(),
+  "statusNotificationError": zod.string().nullish(),
+  "statusNotificationSentAt": zod.string().nullish(),
   "documents": zod.array(zod.object({
   "id": zod.number(),
   "name": zod.string(),
@@ -335,6 +341,9 @@ export const ListClientJobsForReviewResponseItem = zod.object({
   "services": zod.string(),
   "status": zod.enum(['submitted', 'reviewing', 'needs_information', 'quoted', 'accepted', 'declined']),
   "internalNotes": zod.string().nullish(),
+  "statusNotificationStatus": zod.union([zod.literal('sent'),zod.literal('failed'),zod.literal(null)]).nullish(),
+  "statusNotificationError": zod.string().nullish(),
+  "statusNotificationSentAt": zod.string().nullish(),
   "documents": zod.array(zod.object({
   "id": zod.number(),
   "name": zod.string(),
@@ -379,6 +388,70 @@ export const UpdateClientJobResponse = zod.object({
   "services": zod.string(),
   "status": zod.enum(['submitted', 'reviewing', 'needs_information', 'quoted', 'accepted', 'declined']),
   "internalNotes": zod.string().nullish(),
+  "statusNotificationStatus": zod.union([zod.literal('sent'),zod.literal('failed'),zod.literal(null)]).nullish(),
+  "statusNotificationError": zod.string().nullish(),
+  "statusNotificationSentAt": zod.string().nullish(),
+  "documents": zod.array(zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "objectPath": zod.string(),
+  "downloadUrl": zod.string(),
+  "createdAt": zod.string()
+})),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+/**
+ * @summary Preview a client project status notification
+ */
+export const PreviewClientJobStatusNotificationParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const PreviewClientJobStatusNotificationBody = zod.object({
+  "status": zod.enum(['submitted', 'reviewing', 'needs_information', 'quoted', 'accepted', 'declined'])
+})
+
+export const PreviewClientJobStatusNotificationResponse = zod.object({
+  "status": zod.enum(['submitted', 'reviewing', 'needs_information', 'quoted', 'accepted', 'declined']),
+  "recipient": zod.string(),
+  "subject": zod.string(),
+  "body": zod.string(),
+  "portalUrl": zod.string()
+})
+
+
+/**
+ * @summary Update a client project status and send its notification
+ */
+export const SendClientJobStatusNotificationParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const SendClientJobStatusNotificationBody = zod.object({
+  "status": zod.enum(['submitted', 'reviewing', 'needs_information', 'quoted', 'accepted', 'declined'])
+})
+
+export const SendClientJobStatusNotificationResponse = zod.object({
+  "id": zod.number(),
+  "companyId": zod.number().nullish(),
+  "submitterName": zod.string(),
+  "submitterEmail": zod.string(),
+  "submitterPhone": zod.string().nullish(),
+  "companyName": zod.string().nullish(),
+  "projectType": zod.string(),
+  "projectLocation": zod.string(),
+  "scope": zod.string(),
+  "timeline": zod.string().nullish(),
+  "budgetContext": zod.string().nullish(),
+  "services": zod.string(),
+  "status": zod.enum(['submitted', 'reviewing', 'needs_information', 'quoted', 'accepted', 'declined']),
+  "internalNotes": zod.string().nullish(),
+  "statusNotificationStatus": zod.union([zod.literal('sent'),zod.literal('failed'),zod.literal(null)]).nullish(),
+  "statusNotificationError": zod.string().nullish(),
+  "statusNotificationSentAt": zod.string().nullish(),
   "documents": zod.array(zod.object({
   "id": zod.number(),
   "name": zod.string(),

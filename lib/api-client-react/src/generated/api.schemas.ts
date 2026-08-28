@@ -168,6 +168,17 @@ export interface ClientJobDocument {
   createdAt: string;
 }
 
+/**
+ * @nullable
+ */
+export type ClientJobStatusNotificationStatus = typeof ClientJobStatusNotificationStatus[keyof typeof ClientJobStatusNotificationStatus] | null;
+
+
+export const ClientJobStatusNotificationStatus = {
+  sent: 'sent',
+  failed: 'failed',
+} as const;
+
 export type ClientJobStatus = typeof ClientJobStatus[keyof typeof ClientJobStatus];
 
 
@@ -201,6 +212,12 @@ export interface ClientJob {
   status: ClientJobStatus;
   /** @nullable */
   internalNotes?: string | null;
+  /** @nullable */
+  statusNotificationStatus?: ClientJobStatusNotificationStatus;
+  /** @nullable */
+  statusNotificationError?: string | null;
+  /** @nullable */
+  statusNotificationSentAt?: string | null;
   documents: ClientJobDocument[];
   createdAt: string;
   updatedAt: string;
@@ -257,6 +274,18 @@ export interface ClientJobUpdate {
      * @nullable
      */
   internalNotes?: string | null;
+}
+
+export interface ClientJobNotificationPreview {
+  status: ClientJobStatus;
+  recipient: string;
+  subject: string;
+  body: string;
+  portalUrl: string;
+}
+
+export interface ClientJobStatusNotificationInput {
+  status: ClientJobStatus;
 }
 
 export type ProspectState = typeof ProspectState[keyof typeof ProspectState];

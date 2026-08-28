@@ -383,6 +383,90 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorMessage"
+  /client/jobs/{id}/notification-preview:
+    post:
+      operationId: previewClientJobStatusNotification
+      tags: [client-jobs]
+      summary: Preview a client project status notification
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientJobStatusNotificationInput"
+      responses:
+        "200":
+          description: Client-safe notification preview
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientJobNotificationPreview"
+        "400":
+          description: Invalid notification status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "404":
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+  /client/jobs/{id}/notification:
+    post:
+      operationId: sendClientJobStatusNotification
+      tags: [client-jobs]
+      summary: Update a client project status and send its notification
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientJobStatusNotificationInput"
+      responses:
+        "200":
+          description: Updated project; notification failures are recorded in the response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientJob"
+        "400":
+          description: Invalid notification status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "404":
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
   /storage/uploads:
     post:
       tags: [Storage]
@@ -778,6 +862,9 @@ components:
         status:
           $ref: "#/components/schemas/ClientJobStatus"
         internalNotes: { type: [string, "null"] }
+        statusNotificationStatus: { type: [string, "null"], enum: [sent, failed, null] }
+        statusNotificationError: { type: [string, "null"] }
+        statusNotificationSentAt: { type: [string, "null"] }
         documents:
           type: array
           items:
@@ -812,6 +899,22 @@ components:
         status:
           $ref: "#/components/schemas/ClientJobStatus"
         internalNotes: { type: ["string", "null"], maxLength: 10000 }
+    ClientJobNotificationPreview:
+      type: object
+      required: [status, recipient, subject, body, portalUrl]
+      properties:
+        status:
+          $ref: "#/components/schemas/ClientJobStatus"
+        recipient: { type: string }
+        subject: { type: string }
+        body: { type: string }
+        portalUrl: { type: string }
+    ClientJobStatusNotificationInput:
+      type: object
+      required: [status]
+      properties:
+        status:
+          $ref: "#/components/schemas/ClientJobStatus"
     Prospect:
       type: object
       required: [id, companyName, city, state, audience, fitScore, needScore, emailStatus, status, createdAt, updatedAt]

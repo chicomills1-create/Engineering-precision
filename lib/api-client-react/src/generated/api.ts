@@ -27,6 +27,8 @@ import type {
   CampaignUpdate,
   ClientJob,
   ClientJobInput,
+  ClientJobNotificationPreview,
+  ClientJobStatusNotificationInput,
   ClientJobUpdate,
   ClientJobUploadResponse,
   DraftGenerationInput,
@@ -1110,6 +1112,150 @@ export const useUpdateClientJob = <TError = ErrorType<ErrorMessage>,
         TContext
       > => {
       return useMutation(getUpdateClientJobMutationOptions(options));
+    }
+
+export const getPreviewClientJobStatusNotificationUrl = (id: number,) => {
+
+
+
+
+  return `/api/client/jobs/${id}/notification-preview`
+}
+
+/**
+ * @summary Preview a client project status notification
+ */
+export const previewClientJobStatusNotification = async (id: number,
+    clientJobStatusNotificationInput: ClientJobStatusNotificationInput, options?: Parameters<typeof customFetch>[1]): Promise<ClientJobNotificationPreview> => {
+
+  return customFetch<ClientJobNotificationPreview>(getPreviewClientJobStatusNotificationUrl(id),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(clientJobStatusNotificationInput)
+  }
+);}
+
+
+
+
+
+export const getPreviewClientJobStatusNotificationMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof previewClientJobStatusNotification>>, TError,{id: number;data: BodyType<ClientJobStatusNotificationInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof previewClientJobStatusNotification>>, TError,{id: number;data: BodyType<ClientJobStatusNotificationInput>}, TContext> => {
+
+const mutationKey = ['previewClientJobStatusNotification'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof previewClientJobStatusNotification>>, {id: number;data: BodyType<ClientJobStatusNotificationInput>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  previewClientJobStatusNotification(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PreviewClientJobStatusNotificationMutationResult = NonNullable<Awaited<ReturnType<typeof previewClientJobStatusNotification>>>
+    export type PreviewClientJobStatusNotificationMutationBody = BodyType<ClientJobStatusNotificationInput>
+    export type PreviewClientJobStatusNotificationMutationError = ErrorType<ErrorMessage>
+
+    /**
+ * @summary Preview a client project status notification
+ */
+export const usePreviewClientJobStatusNotification = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof previewClientJobStatusNotification>>, TError,{id: number;data: BodyType<ClientJobStatusNotificationInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof previewClientJobStatusNotification>>,
+        TError,
+        {id: number;data: BodyType<ClientJobStatusNotificationInput>},
+        TContext
+      > => {
+      return useMutation(getPreviewClientJobStatusNotificationMutationOptions(options));
+    }
+
+export const getSendClientJobStatusNotificationUrl = (id: number,) => {
+
+
+
+
+  return `/api/client/jobs/${id}/notification`
+}
+
+/**
+ * @summary Update a client project status and send its notification
+ */
+export const sendClientJobStatusNotification = async (id: number,
+    clientJobStatusNotificationInput: ClientJobStatusNotificationInput, options?: Parameters<typeof customFetch>[1]): Promise<ClientJob> => {
+
+  return customFetch<ClientJob>(getSendClientJobStatusNotificationUrl(id),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(clientJobStatusNotificationInput)
+  }
+);}
+
+
+
+
+
+export const getSendClientJobStatusNotificationMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof sendClientJobStatusNotification>>, TError,{id: number;data: BodyType<ClientJobStatusNotificationInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof sendClientJobStatusNotification>>, TError,{id: number;data: BodyType<ClientJobStatusNotificationInput>}, TContext> => {
+
+const mutationKey = ['sendClientJobStatusNotification'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof sendClientJobStatusNotification>>, {id: number;data: BodyType<ClientJobStatusNotificationInput>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  sendClientJobStatusNotification(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type SendClientJobStatusNotificationMutationResult = NonNullable<Awaited<ReturnType<typeof sendClientJobStatusNotification>>>
+    export type SendClientJobStatusNotificationMutationBody = BodyType<ClientJobStatusNotificationInput>
+    export type SendClientJobStatusNotificationMutationError = ErrorType<ErrorMessage>
+
+    /**
+ * @summary Update a client project status and send its notification
+ */
+export const useSendClientJobStatusNotification = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof sendClientJobStatusNotification>>, TError,{id: number;data: BodyType<ClientJobStatusNotificationInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof sendClientJobStatusNotification>>,
+        TError,
+        {id: number;data: BodyType<ClientJobStatusNotificationInput>},
+        TContext
+      > => {
+      return useMutation(getSendClientJobStatusNotificationMutationOptions(options));
     }
 
 export const getUploadStorageObjectUrl = () => {

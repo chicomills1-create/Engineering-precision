@@ -16,6 +16,10 @@ import {
   CreateClientJobResponse,
   ListClientJobsForReviewResponse,
   ListClientJobsResponse,
+  PreviewClientJobStatusNotificationBody,
+  PreviewClientJobStatusNotificationResponse,
+  SendClientJobStatusNotificationBody,
+  SendClientJobStatusNotificationResponse,
   UpdateClientJobBody,
   UpdateClientJobParams,
   UpdateClientJobResponse,
@@ -24,7 +28,12 @@ import {
 import { requireAuth } from "../middlewares/requireAuth";
 import { ObjectNotFoundError, ObjectStorageService } from "../lib/objectStorage";
 import { signDownloadPath } from "../lib/downloadToken";
-import { sendClientJobNotificationEmail } from "../lib/clientJobNotifications";
+import {
+  buildClientJobNotificationPreview,
+  isClientNotificationStatus,
+  sendClientJobNotificationEmail,
+  sendClientJobStatusNotificationEmail,
+} from "../lib/clientJobNotifications";
 
 const router: IRouter = Router();
 const objectStorageService = new ObjectStorageService();
@@ -97,6 +106,14 @@ function jobJson(
   return {
     ...job,
     internalNotes: audience === "admin" ? job.internalNotes : null,
+    statusNotificationStatus:
+      audience === "admin" ? job.statusNotificationStatus : null,
+    statusNotificationError:
+      audience === "admin" ? job.statusNotificationError : null,
+    statusNotificationSentAt:
+      audience === "admin" && job.statusNotificationSentAt
+        ? job.statusNotificationSentAt.toISOString()
+        : null,
     documents: documents
       .filter((document) => document.jobId === job.id)
       .map((document) => ({
@@ -381,6 +398,39 @@ router.get("/client/jobs/review", requireAuth, async (_req, res): Promise<void> 
   );
 });
 
+router.post(
+  "/client/jobs/:id/notification-preview",
+  requireAuth,
+  async (req, res): Promise<void> => {
+    const params = UpdateClientJobParams.safeParse(req.params);
+    const body = PreviewClientJobStatusNotificationBody.safeParse(req.body);
+    if (
+      !params.success ||
+      !body.success ||
+      !isClientNotificationStatus(body.data.status)
+    ) {
+      res.status(400).json({ error: "Choose Needs information or Quoted." });
+      return;
+    }
+    const status = body.data.status;
+
+    const [job] = await db
+      .select()
+      .from(clientJobsTable)
+      .where(eq(clientJobsTable.id, params.data.id));
+    if (!job) {
+      res.status(404).json({ error: "Project not found." });
+      return;
+    }
+
+    res.json(
+      PreviewClientJobStatusNotificationResponse.parse(
+        buildClientJobNotificationPreview(job, status),
+      ),
+    );
+  },
+);
+
 router.patch("/client/jobs/:id", requireAuth, async (req, res): Promise<void> => {
   const params = UpdateClientJobParams.safeParse(req.params);
   const body = UpdateClientJobBody.safeParse(req.body);
@@ -401,6 +451,84 @@ router.patch("/client/jobs/:id", requireAuth, async (req, res): Promise<void> =>
   const documents = await documentsForJobs([job.id]);
   res.json(UpdateClientJobResponse.parse(jobJson(job, documents, "admin")));
 });
+
+router.post(
+  "/client/jobs/:id/notification",
+  requireAuth,
+  async (req, res): Promise<void> => {
+    const params = UpdateClientJobParams.safeParse(req.params);
+    const body = SendClientJobStatusNotificationBody.safeParse(req.body);
+    if (
+      !params.success ||
+      !body.success ||
+      !isClientNotificationStatus(body.data.status)
+    ) {
+      res.status(400).json({ error: "Choose Needs information or Quoted." });
+      return;
+    }
+    const status = body.data.status;
+
+    const [jobToNotify] = await db
+      .update(clientJobsTable)
+      .set({
+        status,
+        statusNotificationStatus: null,
+        statusNotificationError: null,
+        statusNotificationSentAt: null,
+      })
+      .where(eq(clientJobsTable.id, params.data.id))
+      .returning();
+    if (!jobToNotify) {
+      res.status(404).json({ error: "Project not found." });
+      return;
+    }
+
+    let notificationStatus: "sent" | "failed" = "failed";
+    let notificationError: string | null = null;
+    let notificationSentAt: Date | null = null;
+    try {
+      const result = await sendClientJobStatusNotificationEmail(jobToNotify, status);
+      if (result.ok) {
+        notificationStatus = "sent";
+        notificationSentAt = new Date();
+      } else {
+        notificationError = result.error;
+      }
+    } catch (error) {
+      notificationError =
+        error instanceof Error ? error.message : "Unable to send client status notification";
+    }
+
+    const [job] = await db
+      .update(clientJobsTable)
+      .set({
+        statusNotificationStatus: notificationStatus,
+        statusNotificationError: notificationError,
+        statusNotificationSentAt: notificationSentAt,
+      })
+      .where(eq(clientJobsTable.id, jobToNotify.id))
+      .returning();
+    const updatedJob = job ?? {
+      ...jobToNotify,
+      statusNotificationStatus: notificationStatus,
+      statusNotificationError: notificationError,
+      statusNotificationSentAt: notificationSentAt,
+    };
+    if (notificationError) {
+      req.log.warn(
+        { jobId: updatedJob.id, error: notificationError },
+        "Client status notification failed after status update",
+      );
+    }
+
+    const documents = await documentsForJobs([updatedJob.id]);
+    res.json(
+      SendClientJobStatusNotificationResponse.parse(
+        jobJson(updatedJob, documents, "admin"),
+      ),
+    );
+  },
+);
 
 router.get(
   "/client/jobs/:jobId/documents/:documentId/download",
