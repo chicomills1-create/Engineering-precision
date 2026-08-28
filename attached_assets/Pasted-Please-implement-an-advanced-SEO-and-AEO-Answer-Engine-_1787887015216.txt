@@ -1,0 +1,20 @@
+Please implement an advanced SEO and AEO (Answer Engine Optimization) optimization framework across our website. 
+
+Large corporate engineering websites rank for broad terms, but we want to dominate local intent and AI search engines (like ChatGPT, Claude, and Gemini) for multi-discipline engineering in our target markets. 
+
+Please execute the following three technical updates:
+
+1. GENERATE ADVANCED SEMANTIC SCHEMA (JSON-LD)
+Inject a highly detailed 'EngineeringBusiness' or 'LocalBusiness' JSON-LD schema into the head of our main pages. Do not use generic organization tags. The schema must explicitly define our entities for search crawlers and LLM scrapers:
+- legalName: Apex Grid Engineering
+- areaServed: [Define Arizona, California, New Mexico, and your target Southwest cities]
+- knowsAbout: [Explicitly list: MEP Engineering, Structural Engineering, Civil Engineering, Geotechnical Engineering, Building Assessments, PE Stamping, Municipal Plan-Check Navigation]
+- address, geo-coordinates, and telephone numbers for our main regional hubs.
+
+2. BUILD AN OVERVIEW OR 'RESOURCES' INFRASTRUCTURE FOR AEO TACTICAL CONTENT
+Set up the routing/file structure for a tactical Q&A or Resources hub designed to capture long-tail AI search queries. Ensure the pages use semantically clear HTML5 (using <article>, <h2> for questions, <p> for direct answers) so AI scrapers can easily extract text blocks. The layout should be built to answer specific regional building code, structural stamp, and plan-check questions.
+
+3. OPTIMIZE ONSITE COPY FOR ENTITY-BASED SEO
+Audit our existing homepage and capabilities text. Wherever we mention generic terms like "engineering services," semantically update them to include geo-specific and discipline-specific entities (e.g., "PE-stamped structural engineering," "commercial MEP design in Arizona," "Title 24 compliance"). Ensure the hierarchy uses clear H1, H2, and H3 tags.
+
+Please let me know which files you modify and provide a code snippet preview of the JSON-LD schema before you deploy it.
