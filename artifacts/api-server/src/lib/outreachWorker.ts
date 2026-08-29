@@ -18,7 +18,7 @@ import { processDueOutreachResearchSchedules } from "./outreachResearchScheduler
 
 const ADMIN_EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const SEND_REVIEW_AFTER_MS = 15 * 60 * 1000;
-const MAX_SCHEDULED_MESSAGES_PER_RUN = 167;
+const MAX_SCHEDULED_MESSAGES_PER_RUN = 150;
 
 export type OutreachAutomationStatus = {
   adminAllowlistReady: boolean;

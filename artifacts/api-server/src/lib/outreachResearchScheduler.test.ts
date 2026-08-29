@@ -42,9 +42,9 @@ test("runs only enabled schedules on active campaigns after the local hour", () 
   assert.equal(isResearchScheduleDue(schedule as any, { status: "paused" } as any, atEight), false);
 });
 
-test("caps daily scheduled research at the 167-per-day monthly target", () => {
-  assert.equal(MAX_DAILY_RESEARCH_PROSPECTS, 167);
-  assert.equal(getDailyResearchTarget(10, 167), 167);
-  assert.equal(getDailyResearchTarget(167, 500), 167);
+test("caps daily scheduled research at the 150-per-day monthly-safe target", () => {
+  assert.equal(MAX_DAILY_RESEARCH_PROSPECTS, 150);
+  assert.equal(getDailyResearchTarget(10, 167), 150);
+  assert.equal(getDailyResearchTarget(167, 500), 150);
   assert.equal(getDailyResearchTarget(5, 5), 5);
 });

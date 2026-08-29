@@ -23,7 +23,7 @@ Maintain two ordered library lanes: Personal and Public. Personal holds named in
 
 If a reputable direct person cannot be confirmed or their individual email cannot be obtained responsibly, retain the company in the Public lane and save any official company email found there. Never spend repeated credits trying to force a personal address, and never discard the company or its public email.
 
-The daily operating target is 167 new eligible recipients at 8:00 AM America/Phoenix time. Enforce a hard monthly ceiling of 5,000 sends; 167 per day would otherwise exceed that ceiling in a 30-day month. Every daily selection must exclude prior sends and all bounce, complaint, unsubscribe, and reply suppressions.
+The daily operating ceiling is 150 new eligible recipients at 8:00 AM America/Phoenix time. Enforce a hard monthly ceiling of 5,000 sends; 150 per day leaves a 350-500 message cushion in 30- and 31-day months. Every daily selection must exclude prior sends and all bounce, complaint, unsubscribe, and reply suppressions.
 
 **Why:** Paid enrichment credits are finite, while the requested company coverage is broader than the immediately sendable list. Separating the company universe from email enrichment prevents low-yield lookups from silently hiding legitimate prospects.
 

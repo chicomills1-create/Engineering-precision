@@ -39,23 +39,23 @@ export async function seedVerifiedOutreachBatch(options: {
       name: CAMPAIGN_NAME,
       audience: "mixed",
       states: ["AZ"],
-      dailyLimit: 167,
+      dailyLimit: 150,
       status: "active",
       subjectTemplate: SUBJECT,
       bodyTemplate: "Approved personalized Apex Grid outreach copy",
     }).returning();
   }
   if (!campaign) throw new Error("Unable to create the verified outreach campaign");
-  if (campaign.dailyLimit !== 167 || campaign.audience !== "mixed") {
+  if (campaign.dailyLimit !== 150 || campaign.audience !== "mixed") {
     const [updatedCampaign] = await db.update(campaignsTable)
-      .set({ dailyLimit: 167, audience: "mixed" })
+      .set({ dailyLimit: 150, audience: "mixed" })
       .where(eq(campaignsTable.id, campaign.id))
       .returning();
     if (!updatedCampaign) throw new Error("Unable to set the outreach campaign daily limit");
     campaign = updatedCampaign;
   }
   await db.update(outreachResearchSchedulesTable)
-    .set({ targetCount: 167 })
+    .set({ targetCount: 150 })
     .where(eq(outreachResearchSchedulesTable.campaignId, campaign.id));
 
   const scheduledAt = getNextPhoenixEightAm(options.now);

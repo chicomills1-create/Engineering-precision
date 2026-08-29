@@ -36,7 +36,7 @@ export function isDefinitiveSendGridRejection(status: number): boolean {
     && ![408, 409, 425, 429].includes(status);
 }
 
-const INITIAL_RAMP_DAILY_LIMIT = 167;
+const INITIAL_RAMP_DAILY_LIMIT = 150;
 const INITIAL_RAMP_ACTIVE_DAYS = 3;
 
 export class DailySendLimitError extends Error {
@@ -73,9 +73,10 @@ function phoenixDateKey(date = new Date()): string {
 
 export function getOutreachDailyLimit(configuredLimit: number | undefined, activeSendDays: number): number {
   const limit = configuredLimit ?? INITIAL_RAMP_DAILY_LIMIT;
-  return activeSendDays < INITIAL_RAMP_ACTIVE_DAYS
+  const rampLimit = activeSendDays < INITIAL_RAMP_ACTIVE_DAYS
     ? Math.min(limit, INITIAL_RAMP_DAILY_LIMIT)
     : limit;
+  return Math.min(rampLimit, INITIAL_RAMP_DAILY_LIMIT);
 }
 
 async function getCampaignActiveSendDays(campaignId: number): Promise<number> {

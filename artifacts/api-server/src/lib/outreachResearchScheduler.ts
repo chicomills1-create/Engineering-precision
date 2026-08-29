@@ -19,7 +19,7 @@ import {
 
 export const OUTREACH_RESEARCH_TIMEZONE = "America/Phoenix";
 export const OUTREACH_RESEARCH_LOCAL_HOUR = 8;
-export const MAX_DAILY_RESEARCH_PROSPECTS = 167;
+export const MAX_DAILY_RESEARCH_PROSPECTS = 150;
 
 const DATE_FORMATTER = new Intl.DateTimeFormat("en-CA", {
   timeZone: OUTREACH_RESEARCH_TIMEZONE,
