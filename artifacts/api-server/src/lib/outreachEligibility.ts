@@ -1,4 +1,5 @@
 import type { Campaign, OutreachMessage, Prospect } from "@workspace/db";
+import { assertOutreachContactData } from "./outreachContactValidation";
 
 const EXCLUDED_OUTREACH_CONTACTS = new Map([
   ["atmosphere architects", new Set(["tim boyle", "mike hudson"])],
@@ -28,7 +29,7 @@ export function assertOutreachEligibilityBase(
   if (isOutreachContactExcluded(prospect)) {
     throw new Error("Contact is excluded from outreach per client relationship");
   }
-  if (!prospect.contactEmail?.trim()) throw new Error("Prospect does not have a business email");
+  assertOutreachContactData(prospect);
   if (options.requireApprovedMessage !== false && message.status !== "approved") {
     throw new Error("Message must be approved before sending");
   }
@@ -50,7 +51,7 @@ export function assertOutreachEligibilityBase(
       throw new Error("Campaign targeting does not match the prospect");
     }
   }
-  return prospect.contactEmail.trim().toLowerCase();
+  return prospect.contactEmail!.trim().toLowerCase();
 }
 
 export function assertSequenceDeliveryReady(sequenceNumber: number, previousStatus?: string): void {

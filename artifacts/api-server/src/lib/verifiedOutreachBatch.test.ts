@@ -4,12 +4,17 @@ import {
   approvedOutreachBody,
   VERIFIED_OUTREACH_CONTACTS,
 } from "./verifiedOutreachBatch";
+import {
+  assertOutreachContactData,
+  assertVerifiedOutreachBatch,
+  isUsableBusinessEmail,
+} from "./outreachContactValidation";
 
-test("the verified morning batch contains unique, sourced contacts", () => {
+test("the verified morning batch contains exactly 167 unique, valid contacts", () => {
   const domains = VERIFIED_OUTREACH_CONTACTS.map((contact) =>
     new URL(contact.website).hostname.replace(/^www\./, "").toLowerCase()
   );
-  assert.ok(VERIFIED_OUTREACH_CONTACTS.length > 0);
+  assert.equal(VERIFIED_OUTREACH_CONTACTS.length, 167);
   assert.equal(new Set(VERIFIED_OUTREACH_CONTACTS.map((contact) => contact.contactEmail)).size, VERIFIED_OUTREACH_CONTACTS.length);
   assert.equal(new Set(domains).size, VERIFIED_OUTREACH_CONTACTS.length);
   assert.ok(VERIFIED_OUTREACH_CONTACTS.some((contact) => contact.audience === "architect"));
@@ -19,6 +24,32 @@ test("the verified morning batch contains unique, sourced contacts", () => {
     && contact.sourceUrl.startsWith("https://")
     && contact.contactEmail.includes("@")
   ));
+  assert.doesNotThrow(() => assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS));
+});
+
+test("legacy placeholders cannot enter seed or approval paths", () => {
+  assert.equal(isUsableBusinessEmail("null"), false);
+  assert.equal(isUsableBusinessEmail("info@company.com"), false);
+  assert.throws(
+    () => assertOutreachContactData({
+      companyName: "[object Object]",
+      contactEmail: "info@company.com",
+      sourceUrl: "",
+    }),
+    /usable company name, real business email, public source URL/,
+  );
+});
+
+test("the seed validator quarantines duplicate identities before database writes", () => {
+  const contact = VERIFIED_OUTREACH_CONTACTS[0]!;
+  const duplicateBatch = [
+    ...VERIFIED_OUTREACH_CONTACTS.slice(0, -1),
+    { ...contact, dedupeKey: `${contact.dedupeKey}-copy` },
+  ];
+  assert.throws(
+    () => assertVerifiedOutreachBatch(duplicateBatch),
+    /duplicate email/,
+  );
 });
 
 test("the approved body uses only the approved pipeline closing", () => {

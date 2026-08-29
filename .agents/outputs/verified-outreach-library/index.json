@@ -12,7 +12,10 @@
     "personal": 190,
     "public": 99,
     "total": 289,
-    "pausedAutoReplyRecords": 2
+    "pausedAutoReplyRecords": 2,
+    "publicSeedValidated": 4,
+    "publicManualReviewRequired": 74,
+    "publicQuarantined": 21
   },
   "lastFreePublicPass": {
     "sitesChecked": 10,
@@ -34,7 +37,27 @@
     "paidCreditsUsed": 0
   },
   "dataQualityNotes": {
-    "legacyMalformedPublicRecordsRequireAudit": true,
-    "offTargetEmailAttributionGuardEnabled": true
+    "legacyMalformedPublicRecordsRequireAudit": false,
+    "offTargetEmailAttributionGuardEnabled": true,
+    "lastPublicAudit": "2026-08-29",
+    "publicAuditReasons": {
+      "duplicateCompany": 12,
+      "publisherAddress": 4,
+      "placeholderEmail": 2,
+      "nullEmail": 1,
+      "thirdPartyPlatformAddress": 1,
+      "thirdPartyGovernmentAddress": 1,
+      "directoryAddress": 1
+    },
+    "companyUniverseCoverage": {
+      "total": 643,
+      "publicEmailSaved": 80,
+      "unresolved": 563,
+      "publicCheckedNoEmail": 340,
+      "domainFound": 197,
+      "publicSiteUnavailable": 10,
+      "publicCheckedNoQualifyingEmail": 10,
+      "domainNeedsPublicLookup": 6
+    }
   }
 }

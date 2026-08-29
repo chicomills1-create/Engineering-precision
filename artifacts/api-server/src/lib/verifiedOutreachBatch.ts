@@ -7,6 +7,7 @@ import {
   prospectsTable,
 } from "@workspace/db";
 import { getNextPhoenixEightAm } from "./outreachEligibility";
+import { assertVerifiedOutreachBatch } from "./outreachContactValidation";
 import { VERIFIED_OUTREACH_CONTACTS } from "./verifiedOutreachContacts";
 
 const CAMPAIGN_NAME = "Approved 8 AM Outreach - August 2026";
@@ -30,6 +31,7 @@ export async function seedVerifiedOutreachBatch(options: {
 } = {}): Promise<{ state: "skipped" | "ready"; queued: number }> {
   const enabled = options.enabled ?? process.env.OUTREACH_SEED_VERIFIED_BATCH === "true";
   if (!enabled) return { state: "skipped", queued: 0 };
+  assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS);
 
   let [campaign] = await db.select().from(campaignsTable)
     .where(eq(campaignsTable.name, CAMPAIGN_NAME))

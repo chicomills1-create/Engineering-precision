@@ -2119,5 +2119,57 @@ export const VERIFIED_OUTREACH_CONTACTS = [
     "contactSourceUrl": "https://www.linkedin.com/in/wendy-silva-a0b3b297",
     "sourceUrl": "https://www.copperstatepavement.com/",
     "needSignals": "Public company evidence: Top Asphalt & Concrete Paving Company in Phoenix, AZ | Copper State\n\n4.7\n\n# Paving Company in Phoenix, AZ That You Can Depend On \n\nCopper State Pavement is the market leader for commercial, industrial, and municipal properties needing concrete or asphalt pavement maintenance services in Phoenix, Arizona and beyond.\n\n We're Obsessed with Asphalt! \n\n## Unmatched Asphalt Paving Services in Phoenix, AZ \n\n### Asphalt Paving \n\n### Asphalt Sealcoating \n\n### Cracksealing Services \n\n### Concrete \n\n### Parking Lot Striping \n\n### Asphalt Patching \n\n### Asphalt Milling \n\n### Grading and Excavation \n\n### Why Choose Copper State Pavement? \n\n#### Capabilities \n\nFrom concrete and asphalt to crack sealing and more, we do it all!\n\n#### Veteran-Owned \n\nOur company is veteran-owned and operated. Support a vet"
+  },
+  {
+    "dedupeKey": "verified-2026-08-29-eccyuma-com",
+    "companyName": "Eckard Commercial Construction",
+    "website": "https://eccyuma.com/",
+    "city": "Yuma",
+    "audience": "builder",
+    "contactName": "Troy Eckard",
+    "contactTitle": "President",
+    "contactEmail": "troy@eccyuma.com",
+    "contactSourceUrl": "https://www.eccyuma.com/",
+    "sourceUrl": "https://www.linkedin.com/in/troy-eckard-0b6ab6158",
+    "needSignals": "Public search evidence identifies this company as an Arizona commercial construction firm; the company source was reviewed before FindyMail enrichment."
+  },
+  {
+    "dedupeKey": "verified-2026-08-29-pcco-us",
+    "companyName": "Pilkington Construction",
+    "website": "https://pcco.us/",
+    "city": "Yuma",
+    "audience": "builder",
+    "contactName": "Clint Harrington",
+    "contactTitle": "President",
+    "contactEmail": "clint@pcco.us",
+    "contactSourceUrl": "https://www.pcco.us/",
+    "sourceUrl": "https://www.linkedin.com/in/clint-harrington-5602b5156",
+    "needSignals": "Public search evidence identifies this company as an Arizona commercial construction firm; the company source was reviewed before FindyMail enrichment."
+  },
+  {
+    "dedupeKey": "verified-2026-08-29-fransconstruction-com",
+    "companyName": "Frans Construction",
+    "website": "https://fransconstruction.com/",
+    "city": "Scottsdale",
+    "audience": "builder",
+    "contactName": "Erich Verheijen",
+    "contactTitle": "President",
+    "contactEmail": "everheijen@fransconstruction.com",
+    "contactSourceUrl": "https://www.linkedin.com/in/erich-verheijen-9a74a31a",
+    "sourceUrl": "https://www.linkedin.com/in/erich-verheijen-9a74a31a",
+    "needSignals": "Public evidence identifies this Arizona commercial construction firm and names this decision-maker in a relevant role."
+  },
+  {
+    "dedupeKey": "verified-2026-08-29-wds-architecture",
+    "companyName": "WDS Architecture",
+    "website": "https://wdsarch.com/",
+    "city": "Phoenix",
+    "audience": "architect",
+    "contactName": "Mike Marden",
+    "contactTitle": "Company Owner",
+    "contactEmail": "mike@wds.build",
+    "contactSourceUrl": "https://wdsarch.com/",
+    "sourceUrl": "https://wdsarch.com/",
+    "needSignals": "The official company site identifies WDS Architecture as an Arizona commercial architecture firm and publishes the owner's business email."
   }
 ] as const;

@@ -60,23 +60,26 @@
     "laneReason": "role_based_company_mailbox"
   },
   {
-    "dedupeKey": "public-2026-08-29-crosspointcontracting-com-null",
-    "companyName": "[object Object]",
+    "dedupeKey": "public-2026-08-29-crosspointcontracting-com-unresolved",
+    "companyName": "Crosspoint Contracting",
     "website": "https://crosspointcontracting.com/",
     "city": "Phoenix",
     "audience": "builder",
     "contactName": "Clifford Zillweger",
     "contactTitle": "Company Owner",
-    "contactEmail": "null",
+    "contactEmail": null,
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://crosspointcontracting.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "unresolved_email",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "null_email"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-wdsarch-com-mike",
-    "companyName": "[object Object]",
+    "companyName": "WDS Architecture",
     "website": "https://wdsarch.com/",
     "city": "Phoenix",
     "audience": "architect",
@@ -91,7 +94,7 @@
   },
   {
     "dedupeKey": "public-2026-08-29-wdsarch-com-architecture",
-    "companyName": "[object Object]",
+    "companyName": "WDS Architecture",
     "website": "https://wdsarch.com/",
     "city": "Phoenix",
     "audience": "architect",
@@ -102,11 +105,14 @@
     "emailSource": "official_company_website",
     "sourceUrl": "https://wdsarch.com/",
     "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "duplicate_company"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-wdsarch-com-accounting",
-    "companyName": "[object Object]",
+    "companyName": "WDS Architecture",
     "website": "https://wdsarch.com/",
     "city": "Phoenix",
     "audience": "architect",
@@ -117,11 +123,14 @@
     "emailSource": "official_company_website",
     "sourceUrl": "https://wdsarch.com/",
     "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "duplicate_company"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-jsra-com-info",
-    "companyName": "[object Object]",
+    "companyName": "JSRa Architects",
     "website": "https://jsra.com/",
     "city": "Arizona",
     "audience": "architect",
@@ -136,18 +145,21 @@
   },
   {
     "dedupeKey": "public-2026-08-29-whitneybellperry-com-info",
-    "companyName": "[object Object]",
+    "companyName": "Whitneybell Perry Architects",
     "website": "https://whitneybellperry.com/",
     "city": "Arizona",
     "audience": "architect",
     "contactName": null,
     "contactTitle": null,
-    "contactEmail": "info@company.com",
+    "contactEmail": null,
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://whitneybellperry.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "unresolved_email",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "placeholder_email"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-joelwesterveltarchitect-com-jw",
@@ -341,8 +353,11 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://exdllc.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_duplicate",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "duplicate_company"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-remote-enterprises-com-jacob",
@@ -446,8 +461,11 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://rkarch.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_duplicate",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "duplicate_company"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-integratedmasonry-com-info",
@@ -491,8 +509,11 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://starkweatherroof.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_duplicate",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "duplicate_company"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-xbuiltroofing-com-info",
@@ -600,7 +621,7 @@
     "sendEligibility": "manual_review_required"
   },
   {
-    "dedupeKey": "public-2026-08-29-diamondbackmechanical-com-service",
+    "dedupeKey": "public-2026-08-29-diamondbackmechanical-com-plumbing-service",
     "companyName": "Plumbing Services for Multi-Family & Commercial | Diamondback Plumbing | Phoenix, AZ",
     "website": "https://diamondbackmechanical.com/",
     "city": "Arizona",
@@ -626,8 +647,11 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://diamondbackmechanical.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_duplicate",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "duplicate_company"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-flagstaffchamber-chambermaster-com-support",
@@ -641,8 +665,11 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://flagstaffchamber.chambermaster.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_off_target",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "third_party_platform_address"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-rcibuilt-com-support",
@@ -660,7 +687,7 @@
     "sendEligibility": "manual_review_required"
   },
   {
-    "dedupeKey": "public-2026-08-29-rcibuilt-com-support",
+    "dedupeKey": "public-2026-08-29-rcibuilt-com-property-enterprises",
     "companyName": "Aviation - RCI | Richmond Construction & Infrastructure",
     "website": "https://rcibuilt.com/",
     "city": "Arizona",
@@ -671,8 +698,11 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://rcibuilt.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_duplicate",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "duplicate_company"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-azairports-org-info",
@@ -716,8 +746,11 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://governmentbidders.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_off_target",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "third_party_government_address"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-bannonconstruction-com-info",
@@ -772,12 +805,15 @@
     "audience": "builder",
     "contactName": null,
     "contactTitle": null,
-    "contactEmail": "info@example.com",
+    "contactEmail": null,
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://sunvalleycommercialflooring.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "unresolved_email",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "placeholder_email"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-qualityfloorsaz-com-info",
@@ -881,8 +917,11 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://srarchinc.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_duplicate",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "duplicate_company"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-hadley-design-com-info",
@@ -956,8 +995,11 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://apexfireprotection.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_duplicate",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "duplicate_company"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-firstdemoaz-com-info",
@@ -1121,8 +1163,11 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://arizcc.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_off_target",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "publisher_address"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-acppubs-com-jhoover",
@@ -1136,8 +1181,11 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://acppubs.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_off_target",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "publisher_address"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-acppubs-com-info",
@@ -1151,8 +1199,12 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://acppubs.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_off_target",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "publisher_address",
+      "duplicate_company"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-rebusinessonline-com-jlackey",
@@ -1166,8 +1218,11 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://rebusinessonline.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_off_target",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "publisher_address"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-kenzyarchitects-com-info",
@@ -1196,8 +1251,11 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://christyandco.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_duplicate",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "duplicate_company"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-christyandco-com-christy",
@@ -1346,8 +1404,11 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://downtobid.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_off_target",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "directory_address"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-jointventuredesign-com-jvd",
@@ -1466,8 +1527,11 @@
     "emailLane": "public",
     "emailSource": "official_company_website",
     "sourceUrl": "https://innov-r-llc.com/",
-    "verificationStatus": "public_source_saved",
-    "sendEligibility": "manual_review_required"
+    "verificationStatus": "rejected_duplicate",
+    "sendEligibility": "quarantined",
+    "quarantineReasons": [
+      "duplicate_company"
+    ]
   },
   {
     "dedupeKey": "public-2026-08-29-sterncoengineers-com-info",

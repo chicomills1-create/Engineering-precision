@@ -38,6 +38,7 @@ async function createFixture(status = "approved") {
     city: "Phoenix",
     state: "AZ",
     audience: "architect",
+    sourceUrl: "https://example.com/projects",
     contactEmail: `reconciliation-${suffix}@example.com`,
     contactName: "Test Contact",
     contactTitle: "Principal",

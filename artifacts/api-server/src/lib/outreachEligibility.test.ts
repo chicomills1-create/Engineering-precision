@@ -12,7 +12,7 @@ import {
 } from "./outreachEligibility";
 import { getOutreachDailyLimit } from "./outreach";
 
-const now = new Date();
+  const now = new Date("2026-08-28T12:00:00.000Z");
 const eligibleProspect: Prospect = {
   id: 1,
   campaignId: null,
@@ -147,7 +147,7 @@ test("enforces the 150-per-day campaign ceiling from the first send day", () => 
 });
 
 const blockedCases: Array<[string, Partial<Prospect>, Partial<OutreachMessage>, Partial<Campaign>, string]> = [
-  ["missing email", { contactEmail: null }, {}, {}, "does not have a business email"],
+  ["missing email", { contactEmail: null }, {}, {}, "real business email"],
   ["unapproved message", {}, { status: "draft" }, {}, "must be approved"],
   ["unapproved prospect", { status: "review" }, {}, {}, "Prospect must be approved"],
   ["low fit", { fitScore: 59 }, {}, {}, "enough evidence"],
@@ -174,6 +174,22 @@ for (const [name, prospectPatch, messagePatch, campaignPatch, expected] of block
     );
   });
 }
+
+test("blocks malformed legacy Public values before approval", () => {
+  assert.throws(
+    () => assertOutreachEligibilityBase(
+      approvedMessage,
+      {
+        ...eligibleProspect,
+        companyName: "[object Object]",
+        contactEmail: "info@company.com",
+        sourceUrl: "",
+      },
+      activeCampaign,
+    ),
+    /usable company name, real business email, public source URL/,
+  );
+});
 
 test("initial outreach does not require a prior delivery", () => {
   assert.doesNotThrow(() => assertSequenceDeliveryReady(1));
