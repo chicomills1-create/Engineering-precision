@@ -21,6 +21,14 @@ Keep the public person, role, company domain, source URL, and enrichment status 
 
 Maintain two ordered library lanes: Personal and Public. Personal holds named individual contacts obtained through a single paid lookup after public qualification; Public holds company-published business emails found without finder credits. Work through Personal first, then revisit unresolved companies for the Public lane.
 
+The operating priority is Personal first: spend at most one Finder credit on one publicly confirmed reputable person and matching domain, never retry a failed lookup or switch to another person to force a result. Save all other clearly attributed official-site emails in Public without paid credits. Prepare the next day's batch only after the current 150-send window, and do not mix in Public recipients until the Personal pool is exhausted or the owner explicitly approves a mixed batch.
+
+Do not increase the daily ceiling solely because messages appear delivered. Review at least seven calendar days of bounce, complaint, unsubscribe, reply-stop, and provider-reconciliation evidence before a ramp. If the next approved target is 200 total, the arithmetic mix is 150 Personal plus 50 Public; 150 Personal plus 59 Public is 209 total and must be treated as a separate target.
+
+**Why:** Named, publicly confirmed decision-makers are the highest-confidence audience, while company inboxes are useful as a later lane but carry different attribution and response risk. A staged ramp protects sender reputation and keeps the 5,000/month ceiling intact.
+
+**How to apply:** Maintain separate Personal/Public counts and statuses, preserve paid-credit usage per lookup, stage tomorrow's messages for the next Phoenix 8:00 AM window, and require an explicit clean-delivery review before changing the 150/day ceiling.
+
 If a reputable direct person cannot be confirmed or their individual email cannot be obtained responsibly, retain the company in the Public lane and save any official company email found there. Never spend repeated credits trying to force a personal address, and never discard the company or its public email.
 
 The daily operating ceiling is 150 new eligible recipients at 8:00 AM America/Phoenix time. Enforce a hard monthly ceiling of 5,000 sends; 150 per day leaves a 350-500 message cushion in 30- and 31-day months. Every daily selection must exclude prior sends and all bounce, complaint, unsubscribe, and reply suppressions.
