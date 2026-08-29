@@ -21,6 +21,18 @@ export interface Lead {
   /** @nullable */
   services?: string | null;
   message: string;
+  /** @nullable */
+  source?: string | null;
+  /** @nullable */
+  medium?: string | null;
+  /** @nullable */
+  campaign?: string | null;
+  /** @nullable */
+  landingPath?: string | null;
+  /** @nullable */
+  referrer?: string | null;
+  /** @nullable */
+  referralPartnerId?: number | null;
   status: LeadStatus;
   createdAt: string;
 }

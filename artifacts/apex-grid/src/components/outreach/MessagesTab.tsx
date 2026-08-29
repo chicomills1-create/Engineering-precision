@@ -33,6 +33,12 @@ import { useToast } from '@/hooks/use-toast';
 
 const generateSchema = z.object({
   prospectId: z.coerce.number().min(1, 'Prospect is required'),
+  sourceType: z.enum(['lead', 'referral_partner', 'public_opportunity']).optional(),
+  sourceId: z.coerce.number().int().positive().optional(),
+}).superRefine((data, ctx) => {
+  if (data.sourceType && !data.sourceId) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sourceId'], message: 'Source record ID is required' });
+  }
 });
 type GenerateFormValues = z.infer<typeof generateSchema>;
 
@@ -129,12 +135,21 @@ export function MessagesTab() {
     }
   });
 
-  const generateForm = useForm<GenerateFormValues>({ resolver: zodResolver(generateSchema) });
+  const generateForm = useForm<GenerateFormValues>({
+    resolver: zodResolver(generateSchema),
+    defaultValues: { sourceType: undefined, sourceId: undefined },
+  });
   const editForm = useForm<EditMessageFormValues>({ resolver: zodResolver(editMessageSchema) });
   const suppressForm = useForm<SuppressFormValues>({ resolver: zodResolver(suppressSchema) });
 
   function onGenerate(data: GenerateFormValues) {
-    generateMutation.mutate({ id: data.prospectId, data: {} });
+    generateMutation.mutate({
+      id: data.prospectId,
+      data: {
+        sourceType: data.sourceType,
+        sourceId: data.sourceType ? data.sourceId : undefined,
+      },
+    });
   }
 
   function onEdit(data: EditMessageFormValues) {
@@ -148,6 +163,8 @@ export function MessagesTab() {
         subject: data.subject,
         body: data.body,
         scheduledAt: isEditOpen.scheduledAt || undefined,
+        sourceType: isEditOpen.sourceType || undefined,
+        sourceId: isEditOpen.sourceId || undefined,
       }
     });
   }
@@ -273,6 +290,50 @@ export function MessagesTab() {
                       <FormMessage />
                     </FormItem>
                   )} />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-border pt-4">
+                    <FormField control={generateForm.control} name="sourceType" render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Attribution Source</FormLabel>
+                        <Select
+                          value={field.value ?? 'none'}
+                          onValueChange={(value) => {
+                            field.onChange(value === 'none' ? undefined : value);
+                            if (value === 'none') generateForm.setValue('sourceId', undefined);
+                          }}
+                        >
+                          <FormControl>
+                            <SelectTrigger data-testid="select-generate-source-type">
+                              <SelectValue />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="none">No linked source</SelectItem>
+                            <SelectItem value="lead">Website inquiry</SelectItem>
+                            <SelectItem value="referral_partner">Referral partner</SelectItem>
+                            <SelectItem value="public_opportunity">Public opportunity</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )} />
+                    <FormField control={generateForm.control} name="sourceId" render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Source Record ID</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            min={1}
+                            disabled={!generateForm.watch('sourceType')}
+                            value={field.value ?? ''}
+                            onChange={(event) => field.onChange(event.target.value || undefined)}
+                            placeholder="Record ID"
+                            data-testid="input-generate-source-id"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )} />
+                  </div>
                   <DialogFooter className="mt-6">
                     <DialogClose asChild><Button variant="outline" type="button">Cancel</Button></DialogClose>
                     <Button type="submit" disabled={generateMutation.isPending} data-testid="button-submit-generate">

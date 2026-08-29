@@ -71,6 +71,20 @@
       "when": 1787966348118,
       "tag": "0009_single_enabled_research_schedule",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1787973489934,
+      "tag": "0010_cold_greymalkin",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1787974711754,
+      "tag": "0011_magenta_silver_fox",
+      "breakpoints": true
     }
   ]
 }

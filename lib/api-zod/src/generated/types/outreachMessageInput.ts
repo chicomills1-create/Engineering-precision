@@ -5,6 +5,7 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { OutreachMessageInputSourceType } from './outreachMessageInputSourceType';
 
 export interface OutreachMessageInput {
   prospectId: number;
@@ -16,4 +17,6 @@ export interface OutreachMessageInput {
   /** @minLength 1 */
   body: string;
   scheduledAt?: string;
+  sourceType?: OutreachMessageInputSourceType;
+  sourceId?: number;
 }

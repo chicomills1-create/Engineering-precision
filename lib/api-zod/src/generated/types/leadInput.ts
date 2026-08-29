@@ -19,4 +19,19 @@ export interface LeadInput {
   message: string;
   /** Object paths of uploaded files attached to the inquiry. */
   attachments?: string[];
+  /** @maxLength 120 */
+  source?: string;
+  /** @maxLength 120 */
+  medium?: string;
+  /** @maxLength 200 */
+  campaign?: string;
+  /** @maxLength 500 */
+  landingPath?: string;
+  /** @maxLength 1000 */
+  referrer?: string;
+  /**
+     * @minLength 20
+     * @maxLength 64
+     */
+  referralPartnerCode?: string;
 }

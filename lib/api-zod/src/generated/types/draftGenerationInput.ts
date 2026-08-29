@@ -5,7 +5,10 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { DraftGenerationInputSourceType } from './draftGenerationInputSourceType';
 
 export interface DraftGenerationInput {
   campaignId?: number;
+  sourceType?: DraftGenerationInputSourceType;
+  sourceId?: number;
 }

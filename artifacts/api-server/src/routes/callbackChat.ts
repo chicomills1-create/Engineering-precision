@@ -172,6 +172,16 @@ router.post("/callback-chat", async (req, res): Promise<void> => {
           phone: phoneDigits,
           projectType: "callback-request",
           message: messageLines.join("\n"),
+          source: "callback_assistant",
+          medium: "website",
+          landingPath: (() => {
+            try {
+              return new URL(req.get("referer") ?? "").pathname;
+            } catch {
+              return null;
+            }
+          })(),
+          referrer: req.get("referer")?.slice(0, 1000) ?? null,
         };
 
         await db.insert(leadsTable).values(leadData);

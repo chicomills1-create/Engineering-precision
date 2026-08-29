@@ -36,6 +36,18 @@ export interface Lead {
   /** @nullable */
   services?: string | null;
   message: string;
+  /** @nullable */
+  source?: string | null;
+  /** @nullable */
+  medium?: string | null;
+  /** @nullable */
+  campaign?: string | null;
+  /** @nullable */
+  landingPath?: string | null;
+  /** @nullable */
+  referrer?: string | null;
+  /** @nullable */
+  referralPartnerId?: number | null;
   status: LeadStatus;
   createdAt: string;
 }
@@ -134,6 +146,21 @@ export interface LeadInput {
   message: string;
   /** Object paths of uploaded files attached to the inquiry. */
   attachments?: string[];
+  /** @maxLength 120 */
+  source?: string;
+  /** @maxLength 120 */
+  medium?: string;
+  /** @maxLength 200 */
+  campaign?: string;
+  /** @maxLength 500 */
+  landingPath?: string;
+  /** @maxLength 1000 */
+  referrer?: string;
+  /**
+     * @minLength 20
+     * @maxLength 64
+     */
+  referralPartnerCode?: string;
 }
 
 export interface ClientJobDocumentInput {
@@ -637,6 +664,18 @@ export const OutreachMessageStatus = {
   failed: 'failed',
 } as const;
 
+/**
+ * @nullable
+ */
+export type OutreachMessageSourceType = typeof OutreachMessageSourceType[keyof typeof OutreachMessageSourceType] | null;
+
+
+export const OutreachMessageSourceType = {
+  lead: 'lead',
+  referral_partner: 'referral_partner',
+  public_opportunity: 'public_opportunity',
+} as const;
+
 export interface OutreachMessage {
   id: number;
   prospectId: number;
@@ -655,9 +694,22 @@ export interface OutreachMessage {
   providerMessageId?: string | null;
   /** @nullable */
   error?: string | null;
+  /** @nullable */
+  sourceType?: OutreachMessageSourceType;
+  /** @nullable */
+  sourceId?: number | null;
   createdAt: string;
   updatedAt: string;
 }
+
+export type OutreachMessageInputSourceType = typeof OutreachMessageInputSourceType[keyof typeof OutreachMessageInputSourceType];
+
+
+export const OutreachMessageInputSourceType = {
+  lead: 'lead',
+  referral_partner: 'referral_partner',
+  public_opportunity: 'public_opportunity',
+} as const;
 
 export interface OutreachMessageInput {
   prospectId: number;
@@ -669,12 +721,25 @@ export interface OutreachMessageInput {
   /** @minLength 1 */
   body: string;
   scheduledAt?: string;
+  sourceType?: OutreachMessageInputSourceType;
+  sourceId?: number;
 }
 
 export type OutreachMessageUpdate = OutreachMessageInput;
 
+export type DraftGenerationInputSourceType = typeof DraftGenerationInputSourceType[keyof typeof DraftGenerationInputSourceType];
+
+
+export const DraftGenerationInputSourceType = {
+  lead: 'lead',
+  referral_partner: 'referral_partner',
+  public_opportunity: 'public_opportunity',
+} as const;
+
 export interface DraftGenerationInput {
   campaignId?: number;
+  sourceType?: DraftGenerationInputSourceType;
+  sourceId?: number;
 }
 
 export interface Suppression {
@@ -716,6 +781,247 @@ export interface OutreachDashboard {
   automationReady: boolean;
   researchAutomationEnabled: boolean;
   researchAutomationReady: boolean;
+}
+
+export type ReferralPartnerRelationshipStatus = typeof ReferralPartnerRelationshipStatus[keyof typeof ReferralPartnerRelationshipStatus];
+
+
+export const ReferralPartnerRelationshipStatus = {
+  prospect: 'prospect',
+  active: 'active',
+  paused: 'paused',
+  former: 'former',
+} as const;
+
+export interface ReferralPartner {
+  id: number;
+  referralCode: string;
+  companyName: string;
+  /** @nullable */
+  contactName?: string | null;
+  /** @nullable */
+  contactEmail?: string | null;
+  /** @nullable */
+  contactPhone?: string | null;
+  /** @nullable */
+  website?: string | null;
+  source: string;
+  relationshipStatus: ReferralPartnerRelationshipStatus;
+  /** @nullable */
+  notes?: string | null;
+  /** @nullable */
+  nextFollowUpAt?: string | null;
+  referralCount: number;
+  convertedCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type ReferralPartnerInputRelationshipStatus = typeof ReferralPartnerInputRelationshipStatus[keyof typeof ReferralPartnerInputRelationshipStatus];
+
+
+export const ReferralPartnerInputRelationshipStatus = {
+  prospect: 'prospect',
+  active: 'active',
+  paused: 'paused',
+  former: 'former',
+} as const;
+
+export interface ReferralPartnerInput {
+  /**
+     * @minLength 1
+     * @maxLength 200
+     */
+  companyName: string;
+  /** @maxLength 160 */
+  contactName?: string;
+  /**
+     * @maxLength 320
+     * @pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$
+     */
+  contactEmail?: string;
+  /** @maxLength 40 */
+  contactPhone?: string;
+  /** @maxLength 500 */
+  website?: string;
+  /**
+     * @minLength 1
+     * @maxLength 200
+     */
+  source: string;
+  relationshipStatus?: ReferralPartnerInputRelationshipStatus;
+  /** @maxLength 4000 */
+  notes?: string;
+  nextFollowUpAt?: string;
+}
+
+export type ReferralPartnerUpdate = ReferralPartnerInput;
+
+export type PublicOpportunityUrgency = typeof PublicOpportunityUrgency[keyof typeof PublicOpportunityUrgency];
+
+
+export const PublicOpportunityUrgency = {
+  low: 'low',
+  normal: 'normal',
+  high: 'high',
+  deadline: 'deadline',
+} as const;
+
+export type PublicOpportunityPipelineStatus = typeof PublicOpportunityPipelineStatus[keyof typeof PublicOpportunityPipelineStatus];
+
+
+export const PublicOpportunityPipelineStatus = {
+  research: 'research',
+  qualified: 'qualified',
+  proposal: 'proposal',
+  won: 'won',
+  lost: 'lost',
+} as const;
+
+export interface PublicOpportunity {
+  id: number;
+  title: string;
+  sourceUrl: string;
+  projectLocation: string;
+  buyerOrFirm: string;
+  disciplineFit: string;
+  urgency: PublicOpportunityUrgency;
+  evidenceNotes: string;
+  /** @nullable */
+  owner?: string | null;
+  pipelineStatus: PublicOpportunityPipelineStatus;
+  /** @nullable */
+  nextAction?: string | null;
+  /** @nullable */
+  nextActionAt?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type PublicOpportunityInputUrgency = typeof PublicOpportunityInputUrgency[keyof typeof PublicOpportunityInputUrgency];
+
+
+export const PublicOpportunityInputUrgency = {
+  low: 'low',
+  normal: 'normal',
+  high: 'high',
+  deadline: 'deadline',
+} as const;
+
+export type PublicOpportunityInputPipelineStatus = typeof PublicOpportunityInputPipelineStatus[keyof typeof PublicOpportunityInputPipelineStatus];
+
+
+export const PublicOpportunityInputPipelineStatus = {
+  research: 'research',
+  qualified: 'qualified',
+  proposal: 'proposal',
+  won: 'won',
+  lost: 'lost',
+} as const;
+
+export interface PublicOpportunityInput {
+  /**
+     * @minLength 1
+     * @maxLength 300
+     */
+  title: string;
+  /**
+     * @minLength 1
+     * @maxLength 1000
+     */
+  sourceUrl: string;
+  /**
+     * @minLength 1
+     * @maxLength 200
+     */
+  projectLocation: string;
+  /**
+     * @minLength 1
+     * @maxLength 200
+     */
+  buyerOrFirm: string;
+  /**
+     * @minLength 1
+     * @maxLength 500
+     */
+  disciplineFit: string;
+  urgency?: PublicOpportunityInputUrgency;
+  /**
+     * @minLength 1
+     * @maxLength 4000
+     */
+  evidenceNotes: string;
+  /** @maxLength 160 */
+  owner?: string;
+  pipelineStatus?: PublicOpportunityInputPipelineStatus;
+  /** @maxLength 500 */
+  nextAction?: string;
+  nextActionAt?: string;
+}
+
+export type PublicOpportunityUpdate = PublicOpportunityInput;
+
+export type OpportunityResearchInputState = typeof OpportunityResearchInputState[keyof typeof OpportunityResearchInputState];
+
+
+export const OpportunityResearchInputState = {
+  AZ: 'AZ',
+  CA: 'CA',
+  TX: 'TX',
+} as const;
+
+export type OpportunityResearchInputAudience = typeof OpportunityResearchInputAudience[keyof typeof OpportunityResearchInputAudience];
+
+
+export const OpportunityResearchInputAudience = {
+  architect: 'architect',
+  builder: 'builder',
+} as const;
+
+export interface OpportunityResearchInput {
+  state: OpportunityResearchInputState;
+  audience: OpportunityResearchInputAudience;
+  /** @maxLength 200 */
+  query?: string;
+}
+
+export type GrowthPipelineItemEntityType = typeof GrowthPipelineItemEntityType[keyof typeof GrowthPipelineItemEntityType];
+
+
+export const GrowthPipelineItemEntityType = {
+  lead: 'lead',
+  referral_partner: 'referral_partner',
+  public_opportunity: 'public_opportunity',
+} as const;
+
+export interface GrowthPipelineItem {
+  id: number;
+  entityType: GrowthPipelineItemEntityType;
+  title: string;
+  /** @nullable */
+  subtitle?: string | null;
+  stage: string;
+  source: string;
+  /** @nullable */
+  nextAction?: string | null;
+  /** @nullable */
+  nextActionAt?: string | null;
+  createdAt: string;
+  responseAgeHours: number;
+}
+
+export type GrowthDashboardStageCounts = {[key: string]: number};
+
+export type GrowthDashboardSourceCounts = {[key: string]: number};
+
+export type GrowthDashboardTotals = {[key: string]: number};
+
+export interface GrowthDashboard {
+  pipeline: GrowthPipelineItem[];
+  stageCounts: GrowthDashboardStageCounts;
+  sourceCounts: GrowthDashboardSourceCounts;
+  dueNextActions: GrowthPipelineItem[];
+  totals: GrowthDashboardTotals;
 }
 
 export type ResearchRunAudience = typeof ResearchRunAudience[keyof typeof ResearchRunAudience];

@@ -29,6 +29,12 @@ export const ListLeadsResponseItem = zod.object({
   "projectType": zod.string().nullish(),
   "services": zod.string().nullish(),
   "message": zod.string(),
+  "source": zod.string().nullish(),
+  "medium": zod.string().nullish(),
+  "campaign": zod.string().nullish(),
+  "landingPath": zod.string().nullish(),
+  "referrer": zod.string().nullish(),
+  "referralPartnerId": zod.number().nullish(),
   "status": zod.enum(['new', 'contacted', 'closed']),
   "createdAt": zod.string()
 })
@@ -42,6 +48,19 @@ export const ListLeadsResponse = zod.array(ListLeadsResponseItem)
 export const createLeadBodyEmailMin = 3;
 
 
+export const createLeadBodySourceMax = 120;
+
+export const createLeadBodyMediumMax = 120;
+
+export const createLeadBodyCampaignMax = 200;
+
+export const createLeadBodyLandingPathMax = 500;
+
+export const createLeadBodyReferrerMax = 1000;
+
+export const createLeadBodyReferralPartnerCodeMin = 20;
+export const createLeadBodyReferralPartnerCodeMax = 64;
+
 
 
 export const CreateLeadBody = zod.object({
@@ -52,7 +71,13 @@ export const CreateLeadBody = zod.object({
   "projectType": zod.string().optional(),
   "services": zod.string().optional(),
   "message": zod.string().min(1),
-  "attachments": zod.array(zod.string()).optional().describe('Object paths of uploaded files attached to the inquiry.')
+  "attachments": zod.array(zod.string()).optional().describe('Object paths of uploaded files attached to the inquiry.'),
+  "source": zod.string().max(createLeadBodySourceMax).optional(),
+  "medium": zod.string().max(createLeadBodyMediumMax).optional(),
+  "campaign": zod.string().max(createLeadBodyCampaignMax).optional(),
+  "landingPath": zod.string().max(createLeadBodyLandingPathMax).optional(),
+  "referrer": zod.string().max(createLeadBodyReferrerMax).optional(),
+  "referralPartnerCode": zod.string().min(createLeadBodyReferralPartnerCodeMin).max(createLeadBodyReferralPartnerCodeMax).optional()
 })
 
 export const CreateLeadResponse = zod.object({
@@ -64,6 +89,12 @@ export const CreateLeadResponse = zod.object({
   "projectType": zod.string().nullish(),
   "services": zod.string().nullish(),
   "message": zod.string(),
+  "source": zod.string().nullish(),
+  "medium": zod.string().nullish(),
+  "campaign": zod.string().nullish(),
+  "landingPath": zod.string().nullish(),
+  "referrer": zod.string().nullish(),
+  "referralPartnerId": zod.number().nullish(),
   "status": zod.enum(['new', 'contacted', 'closed']),
   "createdAt": zod.string()
 })
@@ -184,6 +215,12 @@ export const UpdateLeadResponse = zod.object({
   "projectType": zod.string().nullish(),
   "services": zod.string().nullish(),
   "message": zod.string(),
+  "source": zod.string().nullish(),
+  "medium": zod.string().nullish(),
+  "campaign": zod.string().nullish(),
+  "landingPath": zod.string().nullish(),
+  "referrer": zod.string().nullish(),
+  "referralPartnerId": zod.number().nullish(),
   "status": zod.enum(['new', 'contacted', 'closed']),
   "createdAt": zod.string()
 })
@@ -760,7 +797,9 @@ export const GenerateOutreachDraftParams = zod.object({
 })
 
 export const GenerateOutreachDraftBody = zod.object({
-  "campaignId": zod.number().optional()
+  "campaignId": zod.number().optional(),
+  "sourceType": zod.enum(['lead', 'referral_partner', 'public_opportunity']).optional(),
+  "sourceId": zod.number().optional()
 })
 
 
@@ -778,6 +817,8 @@ export const GenerateOutreachDraftResponseItem = zod.object({
   "sentAt": zod.string().nullish(),
   "providerMessageId": zod.string().nullish(),
   "error": zod.string().nullish(),
+  "sourceType": zod.union([zod.literal('lead'),zod.literal('referral_partner'),zod.literal('public_opportunity'),zod.literal(null)]).nullish(),
+  "sourceId": zod.number().nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -992,6 +1033,8 @@ export const ListOutreachMessagesResponseItem = zod.object({
   "sentAt": zod.string().nullish(),
   "providerMessageId": zod.string().nullish(),
   "error": zod.string().nullish(),
+  "sourceType": zod.union([zod.literal('lead'),zod.literal('referral_partner'),zod.literal('public_opportunity'),zod.literal(null)]).nullish(),
+  "sourceId": zod.number().nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -1009,7 +1052,9 @@ export const CreateOutreachMessageBody = zod.object({
   "sequenceNumber": zod.number().min(1),
   "subject": zod.string().min(1),
   "body": zod.string().min(1),
-  "scheduledAt": zod.string().optional()
+  "scheduledAt": zod.string().optional(),
+  "sourceType": zod.enum(['lead', 'referral_partner', 'public_opportunity']).optional(),
+  "sourceId": zod.number().optional()
 })
 
 
@@ -1027,6 +1072,8 @@ export const CreateOutreachMessageResponse = zod.object({
   "sentAt": zod.string().nullish(),
   "providerMessageId": zod.string().nullish(),
   "error": zod.string().nullish(),
+  "sourceType": zod.union([zod.literal('lead'),zod.literal('referral_partner'),zod.literal('public_opportunity'),zod.literal(null)]).nullish(),
+  "sourceId": zod.number().nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -1047,7 +1094,9 @@ export const UpdateOutreachMessageBody = zod.object({
   "sequenceNumber": zod.number().min(1),
   "subject": zod.string().min(1),
   "body": zod.string().min(1),
-  "scheduledAt": zod.string().optional()
+  "scheduledAt": zod.string().optional(),
+  "sourceType": zod.enum(['lead', 'referral_partner', 'public_opportunity']).optional(),
+  "sourceId": zod.number().optional()
 })
 
 
@@ -1065,6 +1114,8 @@ export const UpdateOutreachMessageResponse = zod.object({
   "sentAt": zod.string().nullish(),
   "providerMessageId": zod.string().nullish(),
   "error": zod.string().nullish(),
+  "sourceType": zod.union([zod.literal('lead'),zod.literal('referral_partner'),zod.literal('public_opportunity'),zod.literal(null)]).nullish(),
+  "sourceId": zod.number().nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -1089,6 +1140,8 @@ export const ApproveOutreachMessageResponse = zod.object({
   "sentAt": zod.string().nullish(),
   "providerMessageId": zod.string().nullish(),
   "error": zod.string().nullish(),
+  "sourceType": zod.union([zod.literal('lead'),zod.literal('referral_partner'),zod.literal('public_opportunity'),zod.literal(null)]).nullish(),
+  "sourceId": zod.number().nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -1113,6 +1166,8 @@ export const SendOutreachMessageResponse = zod.object({
   "sentAt": zod.string().nullish(),
   "providerMessageId": zod.string().nullish(),
   "error": zod.string().nullish(),
+  "sourceType": zod.union([zod.literal('lead'),zod.literal('referral_partner'),zod.literal('public_opportunity'),zod.literal(null)]).nullish(),
+  "sourceId": zod.number().nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -1233,5 +1288,328 @@ export const UnsubscribeOutreachAddressBody = zod.object({
 export const UnsubscribeOutreachAddressResponse = zod.object({
   "ok": zod.boolean()
 })
+
+
+/**
+ * @summary Get the protected growth pipeline and source metrics
+ */
+export const GetGrowthDashboardResponse = zod.object({
+  "pipeline": zod.array(zod.object({
+  "id": zod.number(),
+  "entityType": zod.enum(['lead', 'referral_partner', 'public_opportunity']),
+  "title": zod.string(),
+  "subtitle": zod.string().nullish(),
+  "stage": zod.string(),
+  "source": zod.string(),
+  "nextAction": zod.string().nullish(),
+  "nextActionAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "responseAgeHours": zod.number()
+})),
+  "stageCounts": zod.record(zod.string(), zod.number()),
+  "sourceCounts": zod.record(zod.string(), zod.number()),
+  "dueNextActions": zod.array(zod.object({
+  "id": zod.number(),
+  "entityType": zod.enum(['lead', 'referral_partner', 'public_opportunity']),
+  "title": zod.string(),
+  "subtitle": zod.string().nullish(),
+  "stage": zod.string(),
+  "source": zod.string(),
+  "nextAction": zod.string().nullish(),
+  "nextActionAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "responseAgeHours": zod.number()
+})),
+  "totals": zod.record(zod.string(), zod.number())
+})
+
+
+/**
+ * @summary List referral partners
+ */
+export const ListReferralPartnersResponseItem = zod.object({
+  "id": zod.number(),
+  "referralCode": zod.string(),
+  "companyName": zod.string(),
+  "contactName": zod.string().nullish(),
+  "contactEmail": zod.string().nullish(),
+  "contactPhone": zod.string().nullish(),
+  "website": zod.string().nullish(),
+  "source": zod.string(),
+  "relationshipStatus": zod.enum(['prospect', 'active', 'paused', 'former']),
+  "notes": zod.string().nullish(),
+  "nextFollowUpAt": zod.string().nullish(),
+  "referralCount": zod.number(),
+  "convertedCount": zod.number(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const ListReferralPartnersResponse = zod.array(ListReferralPartnersResponseItem)
+
+
+/**
+ * @summary Create a referral partner
+ */
+export const createReferralPartnerBodyCompanyNameMax = 200;
+
+export const createReferralPartnerBodyContactNameMax = 160;
+
+export const createReferralPartnerBodyContactEmailMax = 320;
+
+
+export const createReferralPartnerBodyContactEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+export const createReferralPartnerBodyContactPhoneMax = 40;
+
+export const createReferralPartnerBodyWebsiteMax = 500;
+
+export const createReferralPartnerBodySourceMax = 200;
+
+export const createReferralPartnerBodyNotesMax = 4000;
+
+
+
+export const CreateReferralPartnerBody = zod.object({
+  "companyName": zod.string().min(1).max(createReferralPartnerBodyCompanyNameMax),
+  "contactName": zod.string().max(createReferralPartnerBodyContactNameMax).optional(),
+  "contactEmail": zod.string().max(createReferralPartnerBodyContactEmailMax).regex(createReferralPartnerBodyContactEmailRegExp).optional(),
+  "contactPhone": zod.string().max(createReferralPartnerBodyContactPhoneMax).optional(),
+  "website": zod.string().max(createReferralPartnerBodyWebsiteMax).optional(),
+  "source": zod.string().min(1).max(createReferralPartnerBodySourceMax),
+  "relationshipStatus": zod.enum(['prospect', 'active', 'paused', 'former']).optional(),
+  "notes": zod.string().max(createReferralPartnerBodyNotesMax).optional(),
+  "nextFollowUpAt": zod.coerce.date().optional()
+})
+
+export const CreateReferralPartnerResponse = zod.object({
+  "id": zod.number(),
+  "referralCode": zod.string(),
+  "companyName": zod.string(),
+  "contactName": zod.string().nullish(),
+  "contactEmail": zod.string().nullish(),
+  "contactPhone": zod.string().nullish(),
+  "website": zod.string().nullish(),
+  "source": zod.string(),
+  "relationshipStatus": zod.enum(['prospect', 'active', 'paused', 'former']),
+  "notes": zod.string().nullish(),
+  "nextFollowUpAt": zod.string().nullish(),
+  "referralCount": zod.number(),
+  "convertedCount": zod.number(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const UpdateReferralPartnerParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const updateReferralPartnerBodyOneCompanyNameMax = 200;
+
+export const updateReferralPartnerBodyOneContactNameMax = 160;
+
+export const updateReferralPartnerBodyOneContactEmailMax = 320;
+
+
+export const updateReferralPartnerBodyOneContactEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+export const updateReferralPartnerBodyOneContactPhoneMax = 40;
+
+export const updateReferralPartnerBodyOneWebsiteMax = 500;
+
+export const updateReferralPartnerBodyOneSourceMax = 200;
+
+export const updateReferralPartnerBodyOneNotesMax = 4000;
+
+
+
+export const UpdateReferralPartnerBody = zod.object({
+  "companyName": zod.string().min(1).max(updateReferralPartnerBodyOneCompanyNameMax),
+  "contactName": zod.string().max(updateReferralPartnerBodyOneContactNameMax).optional(),
+  "contactEmail": zod.string().max(updateReferralPartnerBodyOneContactEmailMax).regex(updateReferralPartnerBodyOneContactEmailRegExp).optional(),
+  "contactPhone": zod.string().max(updateReferralPartnerBodyOneContactPhoneMax).optional(),
+  "website": zod.string().max(updateReferralPartnerBodyOneWebsiteMax).optional(),
+  "source": zod.string().min(1).max(updateReferralPartnerBodyOneSourceMax),
+  "relationshipStatus": zod.enum(['prospect', 'active', 'paused', 'former']).optional(),
+  "notes": zod.string().max(updateReferralPartnerBodyOneNotesMax).optional(),
+  "nextFollowUpAt": zod.coerce.date().optional()
+})
+
+export const UpdateReferralPartnerResponse = zod.object({
+  "id": zod.number(),
+  "referralCode": zod.string(),
+  "companyName": zod.string(),
+  "contactName": zod.string().nullish(),
+  "contactEmail": zod.string().nullish(),
+  "contactPhone": zod.string().nullish(),
+  "website": zod.string().nullish(),
+  "source": zod.string(),
+  "relationshipStatus": zod.enum(['prospect', 'active', 'paused', 'former']),
+  "notes": zod.string().nullish(),
+  "nextFollowUpAt": zod.string().nullish(),
+  "referralCount": zod.number(),
+  "convertedCount": zod.number(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+/**
+ * @summary List public project and RFQ opportunities
+ */
+export const ListPublicOpportunitiesResponseItem = zod.object({
+  "id": zod.number(),
+  "title": zod.string(),
+  "sourceUrl": zod.string(),
+  "projectLocation": zod.string(),
+  "buyerOrFirm": zod.string(),
+  "disciplineFit": zod.string(),
+  "urgency": zod.enum(['low', 'normal', 'high', 'deadline']),
+  "evidenceNotes": zod.string(),
+  "owner": zod.string().nullish(),
+  "pipelineStatus": zod.enum(['research', 'qualified', 'proposal', 'won', 'lost']),
+  "nextAction": zod.string().nullish(),
+  "nextActionAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const ListPublicOpportunitiesResponse = zod.array(ListPublicOpportunitiesResponseItem)
+
+
+/**
+ * @summary Record a public opportunity for review
+ */
+export const createPublicOpportunityBodyTitleMax = 300;
+
+export const createPublicOpportunityBodySourceUrlMax = 1000;
+
+export const createPublicOpportunityBodyProjectLocationMax = 200;
+
+export const createPublicOpportunityBodyBuyerOrFirmMax = 200;
+
+export const createPublicOpportunityBodyDisciplineFitMax = 500;
+
+export const createPublicOpportunityBodyEvidenceNotesMax = 4000;
+
+export const createPublicOpportunityBodyOwnerMax = 160;
+
+export const createPublicOpportunityBodyNextActionMax = 500;
+
+
+
+export const CreatePublicOpportunityBody = zod.object({
+  "title": zod.string().min(1).max(createPublicOpportunityBodyTitleMax),
+  "sourceUrl": zod.string().min(1).max(createPublicOpportunityBodySourceUrlMax),
+  "projectLocation": zod.string().min(1).max(createPublicOpportunityBodyProjectLocationMax),
+  "buyerOrFirm": zod.string().min(1).max(createPublicOpportunityBodyBuyerOrFirmMax),
+  "disciplineFit": zod.string().min(1).max(createPublicOpportunityBodyDisciplineFitMax),
+  "urgency": zod.enum(['low', 'normal', 'high', 'deadline']).optional(),
+  "evidenceNotes": zod.string().min(1).max(createPublicOpportunityBodyEvidenceNotesMax),
+  "owner": zod.string().max(createPublicOpportunityBodyOwnerMax).optional(),
+  "pipelineStatus": zod.enum(['research', 'qualified', 'proposal', 'won', 'lost']).optional(),
+  "nextAction": zod.string().max(createPublicOpportunityBodyNextActionMax).optional(),
+  "nextActionAt": zod.coerce.date().optional()
+})
+
+export const CreatePublicOpportunityResponse = zod.object({
+  "id": zod.number(),
+  "title": zod.string(),
+  "sourceUrl": zod.string(),
+  "projectLocation": zod.string(),
+  "buyerOrFirm": zod.string(),
+  "disciplineFit": zod.string(),
+  "urgency": zod.enum(['low', 'normal', 'high', 'deadline']),
+  "evidenceNotes": zod.string(),
+  "owner": zod.string().nullish(),
+  "pipelineStatus": zod.enum(['research', 'qualified', 'proposal', 'won', 'lost']),
+  "nextAction": zod.string().nullish(),
+  "nextActionAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const UpdatePublicOpportunityParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const updatePublicOpportunityBodyOneTitleMax = 300;
+
+export const updatePublicOpportunityBodyOneSourceUrlMax = 1000;
+
+export const updatePublicOpportunityBodyOneProjectLocationMax = 200;
+
+export const updatePublicOpportunityBodyOneBuyerOrFirmMax = 200;
+
+export const updatePublicOpportunityBodyOneDisciplineFitMax = 500;
+
+export const updatePublicOpportunityBodyOneEvidenceNotesMax = 4000;
+
+export const updatePublicOpportunityBodyOneOwnerMax = 160;
+
+export const updatePublicOpportunityBodyOneNextActionMax = 500;
+
+
+
+export const UpdatePublicOpportunityBody = zod.object({
+  "title": zod.string().min(1).max(updatePublicOpportunityBodyOneTitleMax),
+  "sourceUrl": zod.string().min(1).max(updatePublicOpportunityBodyOneSourceUrlMax),
+  "projectLocation": zod.string().min(1).max(updatePublicOpportunityBodyOneProjectLocationMax),
+  "buyerOrFirm": zod.string().min(1).max(updatePublicOpportunityBodyOneBuyerOrFirmMax),
+  "disciplineFit": zod.string().min(1).max(updatePublicOpportunityBodyOneDisciplineFitMax),
+  "urgency": zod.enum(['low', 'normal', 'high', 'deadline']).optional(),
+  "evidenceNotes": zod.string().min(1).max(updatePublicOpportunityBodyOneEvidenceNotesMax),
+  "owner": zod.string().max(updatePublicOpportunityBodyOneOwnerMax).optional(),
+  "pipelineStatus": zod.enum(['research', 'qualified', 'proposal', 'won', 'lost']).optional(),
+  "nextAction": zod.string().max(updatePublicOpportunityBodyOneNextActionMax).optional(),
+  "nextActionAt": zod.coerce.date().optional()
+})
+
+export const UpdatePublicOpportunityResponse = zod.object({
+  "id": zod.number(),
+  "title": zod.string(),
+  "sourceUrl": zod.string(),
+  "projectLocation": zod.string(),
+  "buyerOrFirm": zod.string(),
+  "disciplineFit": zod.string(),
+  "urgency": zod.enum(['low', 'normal', 'high', 'deadline']),
+  "evidenceNotes": zod.string(),
+  "owner": zod.string().nullish(),
+  "pipelineStatus": zod.enum(['research', 'qualified', 'proposal', 'won', 'lost']),
+  "nextAction": zod.string().nullish(),
+  "nextActionAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+/**
+ * @summary Prepare review-only opportunities from public web research
+ */
+export const preparePublicOpportunitiesBodyQueryMax = 200;
+
+
+
+export const PreparePublicOpportunitiesBody = zod.object({
+  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "audience": zod.enum(['architect', 'builder']),
+  "query": zod.string().max(preparePublicOpportunitiesBodyQueryMax).optional()
+})
+
+export const PreparePublicOpportunitiesResponseItem = zod.object({
+  "id": zod.number(),
+  "title": zod.string(),
+  "sourceUrl": zod.string(),
+  "projectLocation": zod.string(),
+  "buyerOrFirm": zod.string(),
+  "disciplineFit": zod.string(),
+  "urgency": zod.enum(['low', 'normal', 'high', 'deadline']),
+  "evidenceNotes": zod.string(),
+  "owner": zod.string().nullish(),
+  "pipelineStatus": zod.enum(['research', 'qualified', 'proposal', 'won', 'lost']),
+  "nextAction": zod.string().nullish(),
+  "nextActionAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const PreparePublicOpportunitiesResponse = zod.array(PreparePublicOpportunitiesResponseItem)
 
 

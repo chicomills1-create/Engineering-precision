@@ -5,6 +5,7 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { OutreachMessageSourceType } from './outreachMessageSourceType';
 import type { OutreachMessageStatus } from './outreachMessageStatus';
 
 export interface OutreachMessage {
@@ -25,6 +26,10 @@ export interface OutreachMessage {
   providerMessageId?: string | null;
   /** @nullable */
   error?: string | null;
+  /** @nullable */
+  sourceType?: OutreachMessageSourceType;
+  /** @nullable */
+  sourceId?: number | null;
   createdAt: string;
   updatedAt: string;
 }

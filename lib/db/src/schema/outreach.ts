@@ -109,6 +109,8 @@ export const outreachMessagesTable = pgTable("outreach_messages", {
   sentAt: timestamp("sent_at", { withTimezone: true }),
   providerMessageId: text("provider_message_id"),
   error: text("error"),
+  sourceType: text("source_type"),
+  sourceId: integer("source_id"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
 });

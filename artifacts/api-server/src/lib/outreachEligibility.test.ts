@@ -47,6 +47,8 @@ const approvedMessage: OutreachMessage = {
   sentAt: null,
   providerMessageId: null,
   error: null,
+  sourceType: null,
+  sourceId: null,
   createdAt: now,
   updatedAt: now,
 };

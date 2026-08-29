@@ -756,6 +756,124 @@ paths:
       requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachUnsubscribeInput" } } } }
       responses:
         "200": { description: Unsubscribed, content: { application/json: { schema: { $ref: "#/components/schemas/SubscribeResult" } } } }
+  /growth/dashboard:
+    get:
+      operationId: getGrowthDashboard
+      tags: [growth]
+      summary: Get the protected growth pipeline and source metrics
+      responses:
+        "200":
+          description: Growth pipeline summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GrowthDashboard"
+  /growth/partners:
+    get:
+      operationId: listReferralPartners
+      tags: [growth]
+      summary: List referral partners
+      responses:
+        "200":
+          description: Referral partners
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/ReferralPartner" }
+    post:
+      operationId: createReferralPartner
+      tags: [growth]
+      summary: Create a referral partner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReferralPartnerInput" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReferralPartner" }
+  /growth/partners/{id}:
+    patch:
+      operationId: updateReferralPartner
+      tags: [growth]
+      parameters: [{ name: id, in: path, required: true, schema: { type: number } }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReferralPartnerUpdate" }
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReferralPartner" }
+  /growth/opportunities:
+    get:
+      operationId: listPublicOpportunities
+      tags: [growth]
+      summary: List public project and RFQ opportunities
+      responses:
+        "200":
+          description: Public opportunities
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/PublicOpportunity" }
+    post:
+      operationId: createPublicOpportunity
+      tags: [growth]
+      summary: Record a public opportunity for review
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PublicOpportunityInput" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PublicOpportunity" }
+  /growth/opportunities/{id}:
+    patch:
+      operationId: updatePublicOpportunity
+      tags: [growth]
+      parameters: [{ name: id, in: path, required: true, schema: { type: number } }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PublicOpportunityUpdate" }
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PublicOpportunity" }
+  /growth/opportunities/research:
+    post:
+      operationId: preparePublicOpportunities
+      tags: [growth]
+      summary: Prepare review-only opportunities from public web research
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OpportunityResearchInput" }
+      responses:
+        "201":
+          description: Review records prepared
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/PublicOpportunity" }
 components:
   schemas:
     HealthStatus:
@@ -792,6 +910,12 @@ components:
           type: ["string", "null"]
         message:
           type: string
+        source: { type: [string, "null"] }
+        medium: { type: [string, "null"] }
+        campaign: { type: [string, "null"] }
+        landingPath: { type: [string, "null"] }
+        referrer: { type: [string, "null"] }
+        referralPartnerId: { type: [number, "null"] }
         status:
           $ref: "#/components/schemas/LeadStatus"
         createdAt:
@@ -914,6 +1038,12 @@ components:
           description: Object paths of uploaded files attached to the inquiry.
           items:
             type: string
+        source: { type: string, maxLength: 120 }
+        medium: { type: string, maxLength: 120 }
+        campaign: { type: string, maxLength: 200 }
+        landingPath: { type: string, maxLength: 500 }
+        referrer: { type: string, maxLength: 1000 }
+        referralPartnerCode: { type: string, minLength: 20, maxLength: 64 }
     ClientJobDocumentInput:
       type: object
       required: [name, objectPath, uploadToken]
@@ -1150,6 +1280,8 @@ components:
         sentAt: { type: [string, "null"] }
         providerMessageId: { type: [string, "null"] }
         error: { type: [string, "null"] }
+        sourceType: { type: [string, "null"], enum: [lead, referral_partner, public_opportunity, null] }
+        sourceId: { type: [number, "null"] }
         createdAt: { type: string }
         updatedAt: { type: string }
     OutreachMessageInput:
@@ -1162,12 +1294,16 @@ components:
         subject: { type: string, minLength: 1 }
         body: { type: string, minLength: 1 }
         scheduledAt: { type: string }
+        sourceType: { type: string, enum: [lead, referral_partner, public_opportunity] }
+        sourceId: { type: number }
     OutreachMessageUpdate:
       allOf: [{ $ref: "#/components/schemas/OutreachMessageInput" }]
     DraftGenerationInput:
       type: object
       properties:
         campaignId: { type: number }
+        sourceType: { type: string, enum: [lead, referral_partner, public_opportunity] }
+        sourceId: { type: number }
     Suppression:
       type: object
       required: [id, email, reason, createdAt]
@@ -1206,6 +1342,115 @@ components:
         automationReady: { type: boolean }
         researchAutomationEnabled: { type: boolean }
         researchAutomationReady: { type: boolean }
+    ReferralPartner:
+      type: object
+      required: [id, referralCode, companyName, source, relationshipStatus, referralCount, convertedCount, createdAt, updatedAt]
+      properties:
+        id: { type: number }
+        referralCode: { type: string }
+        companyName: { type: string }
+        contactName: { type: [string, "null"] }
+        contactEmail: { type: [string, "null"] }
+        contactPhone: { type: [string, "null"] }
+        website: { type: [string, "null"] }
+        source: { type: string }
+        relationshipStatus: { type: string, enum: [prospect, active, paused, former] }
+        notes: { type: [string, "null"] }
+        nextFollowUpAt: { type: [string, "null"] }
+        referralCount: { type: number }
+        convertedCount: { type: number }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+    ReferralPartnerInput:
+      type: object
+      required: [companyName, source]
+      properties:
+        companyName: { type: string, minLength: 1, maxLength: 200 }
+        contactName: { type: string, maxLength: 160 }
+        contactEmail: { type: string, maxLength: 320, pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$" }
+        contactPhone: { type: string, maxLength: 40 }
+        website: { type: string, maxLength: 500 }
+        source: { type: string, minLength: 1, maxLength: 200 }
+        relationshipStatus: { type: string, enum: [prospect, active, paused, former] }
+        notes: { type: string, maxLength: 4000 }
+        nextFollowUpAt: { type: string, format: date-time }
+    ReferralPartnerUpdate:
+      allOf: [{ $ref: "#/components/schemas/ReferralPartnerInput" }]
+    PublicOpportunity:
+      type: object
+      required: [id, title, sourceUrl, projectLocation, buyerOrFirm, disciplineFit, urgency, evidenceNotes, pipelineStatus, createdAt, updatedAt]
+      properties:
+        id: { type: number }
+        title: { type: string }
+        sourceUrl: { type: string }
+        projectLocation: { type: string }
+        buyerOrFirm: { type: string }
+        disciplineFit: { type: string }
+        urgency: { type: string, enum: [low, normal, high, deadline] }
+        evidenceNotes: { type: string }
+        owner: { type: [string, "null"] }
+        pipelineStatus: { type: string, enum: [research, qualified, proposal, won, lost] }
+        nextAction: { type: [string, "null"] }
+        nextActionAt: { type: [string, "null"] }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+    PublicOpportunityInput:
+      type: object
+      required: [title, sourceUrl, projectLocation, buyerOrFirm, disciplineFit, evidenceNotes]
+      properties:
+        title: { type: string, minLength: 1, maxLength: 300 }
+        sourceUrl: { type: string, minLength: 1, maxLength: 1000 }
+        projectLocation: { type: string, minLength: 1, maxLength: 200 }
+        buyerOrFirm: { type: string, minLength: 1, maxLength: 200 }
+        disciplineFit: { type: string, minLength: 1, maxLength: 500 }
+        urgency: { type: string, enum: [low, normal, high, deadline] }
+        evidenceNotes: { type: string, minLength: 1, maxLength: 4000 }
+        owner: { type: string, maxLength: 160 }
+        pipelineStatus: { type: string, enum: [research, qualified, proposal, won, lost] }
+        nextAction: { type: string, maxLength: 500 }
+        nextActionAt: { type: string, format: date-time }
+    PublicOpportunityUpdate:
+      allOf: [{ $ref: "#/components/schemas/PublicOpportunityInput" }]
+    OpportunityResearchInput:
+      type: object
+      required: [state, audience]
+      properties:
+        state: { type: string, enum: [AZ, CA, TX] }
+        audience: { type: string, enum: [architect, builder] }
+        query: { type: string, maxLength: 200 }
+    GrowthPipelineItem:
+      type: object
+      required: [id, entityType, title, stage, source, createdAt, responseAgeHours]
+      properties:
+        id: { type: number }
+        entityType: { type: string, enum: [lead, referral_partner, public_opportunity] }
+        title: { type: string }
+        subtitle: { type: [string, "null"] }
+        stage: { type: string }
+        source: { type: string }
+        nextAction: { type: [string, "null"] }
+        nextActionAt: { type: [string, "null"] }
+        createdAt: { type: string }
+        responseAgeHours: { type: number }
+    GrowthDashboard:
+      type: object
+      required: [pipeline, stageCounts, sourceCounts, dueNextActions, totals]
+      properties:
+        pipeline:
+          type: array
+          items: { $ref: "#/components/schemas/GrowthPipelineItem" }
+        stageCounts:
+          type: object
+          additionalProperties: { type: number }
+        sourceCounts:
+          type: object
+          additionalProperties: { type: number }
+        dueNextActions:
+          type: array
+          items: { $ref: "#/components/schemas/GrowthPipelineItem" }
+        totals:
+          type: object
+          additionalProperties: { type: number }
     ResearchRun:
       type: object
       required: [id, campaignId, state, audience, query, status, resultCount, skippedCount, createdAt]

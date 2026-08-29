@@ -21,3 +21,4 @@ export * from "./leads";
 export * from "./subscribers";
 export * from "./outreach";
 export * from "./clientJobs";
+export * from "./growth";

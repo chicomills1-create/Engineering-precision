@@ -3,12 +3,15 @@ import { and, count, desc, eq, gte, inArray } from "drizzle-orm";
 import {
   campaignsTable,
   db,
+  leadsTable,
   outreachMessagesTable,
   outreachResearchRunsTable,
   outreachResearchScheduleRunsTable,
   outreachResearchSchedulesTable,
   outreachSuppressionsTable,
   prospectsTable,
+  publicOpportunitiesTable,
+  referralPartnersTable,
   type ResearchScheduleRun,
 } from "@workspace/db";
 import {
@@ -46,12 +49,21 @@ import {
   getClientMonthlySafeList,
   sendClientMonthlyMessage,
 } from "../lib/clientMonthlyOutreach";
+import { validateAttributionPair, type AttributionSourceType } from "../lib/growthAttribution";
 
 const router: IRouter = Router();
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
 const prospectJson = (p: typeof prospectsTable.$inferSelect) => ({ ...p, createdAt: p.createdAt.toISOString(), updatedAt: p.updatedAt.toISOString() });
 const campaignJson = (c: typeof campaignsTable.$inferSelect) => ({ ...c, createdAt: c.createdAt.toISOString(), updatedAt: c.updatedAt.toISOString() });
 const messageJson = (m: typeof outreachMessagesTable.$inferSelect) => ({ ...m, scheduledAt: m.scheduledAt?.toISOString() ?? null, sentAt: m.sentAt?.toISOString() ?? null, createdAt: m.createdAt.toISOString(), updatedAt: m.updatedAt.toISOString() });
+async function validateAttribution(sourceType?: AttributionSourceType, sourceId?: number): Promise<string | null> {
+  const pairError = validateAttributionPair(sourceType, sourceId);
+  if (pairError) return pairError;
+  if (!sourceType || !sourceId) return null;
+  const table = sourceType === "lead" ? leadsTable : sourceType === "referral_partner" ? referralPartnersTable : publicOpportunitiesTable;
+  const [source] = await db.select({ id: table.id }).from(table).where(eq(table.id, sourceId)).limit(1);
+  return source ? null : `The selected ${sourceType} source does not exist`;
+}
 const researchRunJson = (run: typeof outreachResearchRunsTable.$inferSelect) => ({
   ...run,
   createdAt: run.createdAt.toISOString(),
@@ -223,11 +235,13 @@ router.put("/outreach/campaigns/:id/research-schedule", requireAuth, async (req,
   res.json(UpdateOutreachResearchScheduleResponse.parse(researchScheduleJson(schedule!, latestRun)));
 });
 router.get("/outreach/messages", requireAuth, async (_req, res): Promise<void> => { const rows = await db.select().from(outreachMessagesTable).orderBy(desc(outreachMessagesTable.createdAt)); res.json(ListOutreachMessagesResponse.parse(rows.map(messageJson))); });
-router.post("/outreach/messages", requireAuth, async (req, res): Promise<void> => { const data = CreateOutreachMessageBody.safeParse(req.body); if (!data.success) { res.status(400).json({ error: data.error.message }); return; } const [row] = await db.insert(outreachMessagesTable).values({ ...data.data, status: "draft", scheduledAt: data.data.scheduledAt ? new Date(data.data.scheduledAt) : undefined }).returning(); res.status(201).json(CreateOutreachMessageResponse.parse(messageJson(row!))); });
-router.patch("/outreach/messages/:id", requireAuth, async (req, res): Promise<void> => { const p = UpdateOutreachMessageParams.safeParse(req.params), data = UpdateOutreachMessageBody.safeParse(req.body); if (!p.success || !data.success) { res.status(400).json({ error: "Invalid request" }); return; } const [row] = await db.update(outreachMessagesTable).set({ ...data.data, status: "draft", scheduledAt: data.data.scheduledAt ? new Date(data.data.scheduledAt) : undefined }).where(and(eq(outreachMessagesTable.id, p.data.id), eq(outreachMessagesTable.status, "draft"))).returning(); if (!row) { res.status(409).json({ error: "Only draft messages can be edited" }); return; } res.json(UpdateOutreachMessageResponse.parse(messageJson(row))); });
+router.post("/outreach/messages", requireAuth, async (req, res): Promise<void> => { const data = CreateOutreachMessageBody.safeParse(req.body); if (!data.success) { res.status(400).json({ error: data.error.message }); return; } const attributionError = await validateAttribution(data.data.sourceType, data.data.sourceId); if (attributionError) { res.status(400).json({ error: attributionError }); return; } const [row] = await db.insert(outreachMessagesTable).values({ ...data.data, status: "draft", scheduledAt: data.data.scheduledAt ? new Date(data.data.scheduledAt) : undefined }).returning(); res.status(201).json(CreateOutreachMessageResponse.parse(messageJson(row!))); });
+router.patch("/outreach/messages/:id", requireAuth, async (req, res): Promise<void> => { const p = UpdateOutreachMessageParams.safeParse(req.params), data = UpdateOutreachMessageBody.safeParse(req.body); if (!p.success || !data.success) { res.status(400).json({ error: "Invalid request" }); return; } const attributionError = await validateAttribution(data.data.sourceType, data.data.sourceId); if (attributionError) { res.status(400).json({ error: attributionError }); return; } const [row] = await db.update(outreachMessagesTable).set({ ...data.data, status: "draft", scheduledAt: data.data.scheduledAt ? new Date(data.data.scheduledAt) : undefined }).where(and(eq(outreachMessagesTable.id, p.data.id), eq(outreachMessagesTable.status, "draft"))).returning(); if (!row) { res.status(409).json({ error: "Only draft messages can be edited" }); return; } res.json(UpdateOutreachMessageResponse.parse(messageJson(row))); });
 router.post("/outreach/prospects/:id/draft", requireAuth, async (req, res): Promise<void> => {
   const p = GenerateOutreachDraftParams.safeParse(req.params), input = GenerateOutreachDraftBody.safeParse(req.body ?? {});
   if (!p.success || !input.success) { res.status(400).json({ error: "Invalid request" }); return; }
+  const attributionError = await validateAttribution(input.data.sourceType, input.data.sourceId);
+  if (attributionError) { res.status(400).json({ error: attributionError }); return; }
   const [prospect] = await db.select().from(prospectsTable).where(eq(prospectsTable.id, p.data.id));
   if (!prospect) { res.status(404).json({ error: "Prospect not found" }); return; }
   if (input.data.campaignId) { const [campaign] = await db.select().from(campaignsTable).where(eq(campaignsTable.id, input.data.campaignId)); if (!campaign) { res.status(404).json({ error: "Campaign not found" }); return; } }
@@ -240,6 +254,8 @@ router.post("/outreach/prospects/:id/draft", requireAuth, async (req, res): Prom
         sequenceNumber: 1,
         subject: draft.subject,
         body: draft.body,
+        sourceType: input.data.sourceType,
+        sourceId: input.data.sourceId,
       },
       ...draft.followUps.map((followUp, index) => ({
           prospectId: prospect.id,
@@ -248,6 +264,8 @@ router.post("/outreach/prospects/:id/draft", requireAuth, async (req, res): Prom
           subject: followUp.subject,
           body: followUp.body,
           scheduledAt: null,
+          sourceType: input.data.sourceType,
+          sourceId: input.data.sourceId,
       })),
     ]).returning();
     res.status(201).json(GenerateOutreachDraftResponse.parse(rows.map(messageJson)));

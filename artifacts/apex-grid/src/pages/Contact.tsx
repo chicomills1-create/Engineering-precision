@@ -156,10 +156,18 @@ export default function Contact() {
 
   const onSubmit = async (data: LeadFormValues) => {
     try {
+      const params = new URLSearchParams(window.location.search);
+      const partnerCode = params.get("partner") || undefined;
       await createLead.mutateAsync({
         data: {
           ...data,
           attachments: uploadedFiles.map(f => f.objectPath),
+          source: params.get("utm_source") || (document.referrer ? "referral" : "direct"),
+          medium: params.get("utm_medium") || undefined,
+          campaign: params.get("utm_campaign") || undefined,
+          landingPath: `${window.location.pathname}${window.location.search}`,
+          referrer: document.referrer || undefined,
+          referralPartnerCode: partnerCode,
         },
       });
       setIsSuccess(true);
