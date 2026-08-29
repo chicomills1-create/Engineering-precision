@@ -61,6 +61,11 @@ export const prospectsTable = pgTable("outreach_prospects", {
   researchRunId: integer("research_run_id").references(() => outreachResearchRunsTable.id, { onDelete: "set null" }),
   emailStatus: text("email_status").notNull().default("unverified"),
   status: text("status").notNull().default("new"),
+  contactStatus: text("contact_status").notNull().default("active"),
+  contactEvidenceType: text("contact_evidence_type"),
+  contactEvidence: text("contact_evidence"),
+  contactEvidenceAt: timestamp("contact_evidence_at", { withTimezone: true }),
+  contactReviewAt: timestamp("contact_review_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
 }, (table) => [

@@ -7,6 +7,8 @@
  */
 import type { ProspectAudience } from './prospectAudience';
 import type { ProspectContactConfidence } from './prospectContactConfidence';
+import type { ProspectContactEvidenceType } from './prospectContactEvidenceType';
+import type { ProspectContactStatus } from './prospectContactStatus';
 import type { ProspectEmailStatus } from './prospectEmailStatus';
 import type { ProspectState } from './prospectState';
 import type { ProspectStatus } from './prospectStatus';
@@ -52,6 +54,15 @@ export interface Prospect {
   researchRunId?: number | null;
   emailStatus: ProspectEmailStatus;
   status: ProspectStatus;
+  contactStatus: ProspectContactStatus;
+  /** @nullable */
+  contactEvidenceType: ProspectContactEvidenceType;
+  /** @nullable */
+  contactEvidence: string | null;
+  /** @nullable */
+  contactEvidenceAt: string | null;
+  /** @nullable */
+  contactReviewAt: string | null;
   createdAt: string;
   updatedAt: string;
 }

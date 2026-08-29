@@ -22,6 +22,7 @@ import {
   GetOutreachDashboardResponse, ListCampaignsResponse, ListOutreachMessagesResponse, ListProspectsResponse,
   ListOutreachResearchRunsResponse, ListOutreachResearchSchedulesResponse, ListOutreachSuppressionsResponse,
   MarkOutreachProspectRepliedParams, MarkOutreachProspectRepliedResponse,
+  RecordOutreachContactEvidenceBody, RecordOutreachContactEvidenceParams, RecordOutreachContactEvidenceResponse,
   RunOutreachResearchBody, RunOutreachResearchResponse,
   SendOutreachMessageParams, SendOutreachMessageResponse, SuppressOutreachAddressBody, SuppressOutreachAddressResponse,
   UnsubscribeOutreachAddressBody, UnsubscribeOutreachAddressResponse, UpdateCampaignBody, UpdateCampaignParams,
@@ -38,7 +39,7 @@ import {
 import { verifyUnsubscribeToken } from "../lib/unsubscribeToken";
 import { suppressOutreachEmail } from "../lib/outreachSuppression";
 import { discoverPublicProspects } from "../lib/publicResearch";
-import { claimOutreachMessageForSending, getOutreachAutomationStatus } from "../lib/outreachWorker";
+import { claimOutreachMessageForSending, getOutreachAutomationStatus, sendClaimedOutreachMessage } from "../lib/outreachWorker";
 import {
   MAX_DAILY_RESEARCH_PROSPECTS,
   OUTREACH_RESEARCH_LOCAL_HOUR,
@@ -56,10 +57,17 @@ import {
   approveInitialMessageInPreparationWindow,
   getNextOutreachPreparationStatus,
 } from "../lib/outreachPreparation";
+import { recordContactEvidence } from "../lib/outreachContactEvidence";
 
 const router: IRouter = Router();
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
-const prospectJson = (p: typeof prospectsTable.$inferSelect) => ({ ...p, createdAt: p.createdAt.toISOString(), updatedAt: p.updatedAt.toISOString() });
+const prospectJson = (p: typeof prospectsTable.$inferSelect) => ({
+  ...p,
+  contactEvidenceAt: p.contactEvidenceAt?.toISOString() ?? null,
+  contactReviewAt: p.contactReviewAt?.toISOString() ?? null,
+  createdAt: p.createdAt.toISOString(),
+  updatedAt: p.updatedAt.toISOString(),
+});
 const campaignJson = (c: typeof campaignsTable.$inferSelect) => ({ ...c, createdAt: c.createdAt.toISOString(), updatedAt: c.updatedAt.toISOString() });
 async function getAttributionLabel(sourceType: AttributionSourceType | null, sourceId: number | null): Promise<string | null> {
   if (!sourceType || !sourceId) return null;
@@ -172,7 +180,7 @@ router.post("/outreach/client-monthly-send", requireAuth, async (req, res): Prom
       continue;
     }
     try {
-      const sent = await sendClientMonthlyMessage(contact, parsed.data.subject.trim(), parsed.data.body.trim());
+  const sent = results.filter((result) => result.status === "sent").length;
       await finishClientMonthlyDelivery({
         deliveryId,
         status: "sent",
@@ -180,7 +188,7 @@ router.post("/outreach/client-monthly-send", requireAuth, async (req, res): Prom
       });
       results.push({ email, status: "sent", error: null });
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Unable to send";
+    const message = err instanceof Error ? err.message : "Research failed";
       await finishClientMonthlyDelivery({
         deliveryId,
         status: "failed",
@@ -196,26 +204,21 @@ router.post("/outreach/client-monthly-send", requireAuth, async (req, res): Prom
     results,
   }));
 });
-router.get("/outreach/prospects", requireAuth, async (_req, res): Promise<void> => { const rows = await db.select().from(prospectsTable).orderBy(desc(prospectsTable.createdAt)); res.json(ListProspectsResponse.parse(rows.map(prospectJson))); });
+  const rows = await db.select().from(outreachResearchRunsTable).orderBy(desc(outreachResearchRunsTable.createdAt));
 router.post("/outreach/prospects", requireAuth, async (req, res): Promise<void> => {
-  const data = CreateProspectBody.safeParse(req.body); if (!data.success) { res.status(400).json({ error: data.error.message }); return; }
-  const [row] = await db.insert(prospectsTable).values({
-    ...data.data,
-    contactEmail: data.data.contactEmail ? normalizeEmail(data.data.contactEmail) : null,
-  }).returning();
-  res.status(201).json(CreateProspectResponse.parse(prospectJson(row!)));
-});
-router.patch("/outreach/prospects/:id", requireAuth, async (req, res): Promise<void> => {
-  const p = UpdateProspectParams.safeParse(req.params), data = UpdateProspectBody.safeParse(req.body); if (!p.success || !data.success) { res.status(400).json({ error: "Invalid request" }); return; }
-  const [row] = await db.update(prospectsTable).set({
-    ...data.data,
-    contactEmail: data.data.contactEmail ? normalizeEmail(data.data.contactEmail) : null,
-  }).where(eq(prospectsTable.id, p.data.id)).returning();
+  const data = SuppressOutreachAddressBody.safeParse(req.body); if (!data.success) { res.status(400).json({ error: data.error.message }); return; }
+router.patch("/outreach/messages/:id", requireAuth, async (req, res): Promise<void> => { const p = UpdateOutreachMessageParams.safeParse(req.params), data = UpdateOutreachMessageBody.safeParse(req.body); if (!p.success || !data.success) { res.status(400).json({ error: "Invalid request" }); return; } const attributionError = await validateAttribution(data.data.sourceType, data.data.sourceId); if (attributionError) { res.status(400).json({ error: attributionError }); return; } const [row] = await db.update(outreachMessagesTable).set({ ...data.data, status: "draft", scheduledAt: data.data.scheduledAt ? new Date(data.data.scheduledAt) : undefined }).where(and(eq(outreachMessagesTable.id, p.data.id), eq(outreachMessagesTable.status, "draft"))).returning(); if (!row) { res.status(409).json({ error: "Only draft messages can be edited" }); return; } res.json(UpdateOutreachMessageResponse.parse(await messageJson(row))); });
+router.post("/outreach/prospects/:id/draft", requireAuth, async (req, res): Promise<void> => {
+  const p = SendOutreachMessageParams.safeParse(req.params); if (!p.success) { res.status(400).json({ error: p.error.message }); return; }
+    const row = await sendClaimedOutreachMessage(claimed);
+  if (typeof row === "string") { res.status(409).json({ error: row }); return; }
   if (!row) { res.status(404).json({ error: "Prospect not found" }); return; } res.json(UpdateProspectResponse.parse(prospectJson(row)));
 });
-router.get("/outreach/campaigns", requireAuth, async (_req, res): Promise<void> => { const rows = await db.select().from(campaignsTable).orderBy(desc(campaignsTable.createdAt)); res.json(ListCampaignsResponse.parse(rows.map(campaignJson))); });
-router.post("/outreach/campaigns", requireAuth, async (req, res): Promise<void> => { const data = CreateCampaignBody.safeParse(req.body); if (!data.success) { res.status(400).json({ error: data.error.message }); return; } const [row] = await db.insert(campaignsTable).values(data.data).returning(); res.status(201).json(CreateCampaignResponse.parse(campaignJson(row!))); });
-router.patch("/outreach/campaigns/:id", requireAuth, async (req, res): Promise<void> => { const p = UpdateCampaignParams.safeParse(req.params), data = UpdateCampaignBody.safeParse(req.body); if (!p.success || !data.success) { res.status(400).json({ error: "Invalid request" }); return; } const [row] = await db.update(campaignsTable).set(data.data).where(eq(campaignsTable.id, p.data.id)).returning(); if (!row) { res.status(404).json({ error: "Campaign not found" }); return; } res.json(UpdateCampaignResponse.parse(campaignJson(row))); });
+  const rows = await db.select().from(outreachResearchRunsTable).orderBy(desc(outreachResearchRunsTable.createdAt));
+  const data = SuppressOutreachAddressBody.safeParse(req.body); if (!data.success) { res.status(400).json({ error: data.error.message }); return; }
+router.patch("/outreach/messages/:id", requireAuth, async (req, res): Promise<void> => { const p = UpdateOutreachMessageParams.safeParse(req.params), data = UpdateOutreachMessageBody.safeParse(req.body); if (!p.success || !data.success) { res.status(400).json({ error: "Invalid request" }); return; } const attributionError = await validateAttribution(data.data.sourceType, data.data.sourceId); if (attributionError) { res.status(400).json({ error: attributionError }); return; } const [row] = await db.update(outreachMessagesTable).set({ ...data.data, status: "draft", scheduledAt: data.data.scheduledAt ? new Date(data.data.scheduledAt) : undefined }).where(and(eq(outreachMessagesTable.id, p.data.id), eq(outreachMessagesTable.status, "draft"))).returning(); if (!row) { res.status(409).json({ error: "Only draft messages can be edited" }); return; } res.json(UpdateOutreachMessageResponse.parse(await messageJson(row))); });
+  const p = SendOutreachMessageParams.safeParse(req.params); if (!p.success) { res.status(400).json({ error: p.error.message }); return; }
+router.patch("/outreach/messages/:id", requireAuth, async (req, res): Promise<void> => { const p = UpdateOutreachMessageParams.safeParse(req.params), data = UpdateOutreachMessageBody.safeParse(req.body); if (!p.success || !data.success) { res.status(400).json({ error: "Invalid request" }); return; } const attributionError = await validateAttribution(data.data.sourceType, data.data.sourceId); if (attributionError) { res.status(400).json({ error: attributionError }); return; } const [row] = await db.update(outreachMessagesTable).set({ ...data.data, status: "draft", scheduledAt: data.data.scheduledAt ? new Date(data.data.scheduledAt) : undefined }).where(and(eq(outreachMessagesTable.id, p.data.id), eq(outreachMessagesTable.status, "draft"))).returning(); if (!row) { res.status(409).json({ error: "Only draft messages can be edited" }); return; } res.json(UpdateOutreachMessageResponse.parse(await messageJson(row))); });
 router.get("/outreach/research-schedules", requireAuth, async (_req, res): Promise<void> => {
   const [schedules, runs] = await Promise.all([
     db.select().from(outreachResearchSchedulesTable).orderBy(desc(outreachResearchSchedulesTable.createdAt)),
@@ -230,8 +233,8 @@ router.get("/outreach/research-schedules", requireAuth, async (_req, res): Promi
   ));
 });
 router.put("/outreach/campaigns/:id/research-schedule", requireAuth, async (req, res): Promise<void> => {
-  const params = UpdateOutreachResearchScheduleParams.safeParse(req.params);
-  const input = UpdateOutreachResearchScheduleBody.safeParse(req.body);
+  const params = RecordOutreachContactEvidenceParams.safeParse(req.params);
+  const input = RunOutreachResearchBody.safeParse(req.body);
   if (!params.success || !input.success) {
     res.status(400).json({ error: "Invalid research schedule" });
     return;
@@ -240,7 +243,7 @@ router.put("/outreach/campaigns/:id/research-schedule", requireAuth, async (req,
     res.status(400).json({ error: "Morning research is fixed at 8:00 AM Phoenix time" });
     return;
   }
-  const [campaign] = await db.select().from(campaignsTable).where(eq(campaignsTable.id, params.data.id));
+  const [campaign] = message.campaignId ? await db.select().from(campaignsTable).where(eq(campaignsTable.id, message.campaignId)) : [];
   if (!campaign) {
     res.status(404).json({ error: "Campaign not found" });
     return;
@@ -280,88 +283,111 @@ router.put("/outreach/campaigns/:id/research-schedule", requireAuth, async (req,
   res.json(UpdateOutreachResearchScheduleResponse.parse(researchScheduleJson(schedule!, latestRun)));
 });
 router.get("/outreach/messages/review", requireAuth, async (_req, res): Promise<void> => {
-  const rows = await db.select().from(outreachMessagesTable)
-    .where(inArray(outreachMessagesTable.status, ["sending", "needs_review"]))
-    .orderBy(desc(outreachMessagesTable.updatedAt));
-  res.json(ListOutreachMessagesResponse.parse(await Promise.all(rows.map(messageJson))));
+  const rows = await db.select().from(outreachResearchRunsTable).orderBy(desc(outreachResearchRunsTable.createdAt));
+  res.json(ListOutreachSuppressionsResponse.parse(rows.map((row) => ({ ...row, createdAt: row.createdAt.toISOString() }))));
 });
-router.get("/outreach/messages", requireAuth, async (_req, res): Promise<void> => { const rows = await db.select().from(outreachMessagesTable).orderBy(desc(outreachMessagesTable.createdAt)); res.json(ListOutreachMessagesResponse.parse(await Promise.all(rows.map(messageJson)))); });
-router.post("/outreach/messages", requireAuth, async (req, res): Promise<void> => { const data = CreateOutreachMessageBody.safeParse(req.body); if (!data.success) { res.status(400).json({ error: data.error.message }); return; } const attributionError = await validateAttribution(data.data.sourceType, data.data.sourceId); if (attributionError) { res.status(400).json({ error: attributionError }); return; } const [row] = await db.insert(outreachMessagesTable).values({ ...data.data, status: "draft", scheduledAt: data.data.scheduledAt ? new Date(data.data.scheduledAt) : undefined }).returning(); res.status(201).json(CreateOutreachMessageResponse.parse(await messageJson(row!))); });
+router.get("/outreach/research-runs", requireAuth, async (_req, res): Promise<void> => {
+  const rows = await db.select().from(outreachResearchRunsTable).orderBy(desc(outreachResearchRunsTable.createdAt));
+  const data = SuppressOutreachAddressBody.safeParse(req.body); if (!data.success) { res.status(400).json({ error: data.error.message }); return; }
+  const attributionError = await validateAttribution(input.data.sourceType, input.data.sourceId);
+router.patch("/outreach/messages/:id", requireAuth, async (req, res): Promise<void> => { const p = UpdateOutreachMessageParams.safeParse(req.params), data = UpdateOutreachMessageBody.safeParse(req.body); if (!p.success || !data.success) { res.status(400).json({ error: "Invalid request" }); return; } const attributionError = await validateAttribution(data.data.sourceType, data.data.sourceId); if (attributionError) { res.status(400).json({ error: attributionError }); return; } const [row] = await db.update(outreachMessagesTable).set({ ...data.data, status: "draft", scheduledAt: data.data.scheduledAt ? new Date(data.data.scheduledAt) : undefined }).where(and(eq(outreachMessagesTable.id, p.data.id), eq(outreachMessagesTable.status, "draft"))).returning(); if (!row) { res.status(409).json({ error: "Only draft messages can be edited" }); return; } res.json(UpdateOutreachMessageResponse.parse(await messageJson(row))); });
+  const p = SendOutreachMessageParams.safeParse(req.params); if (!p.success) { res.status(400).json({ error: p.error.message }); return; }
+  const attributionError = await validateAttribution(input.data.sourceType, input.data.sourceId);
 router.patch("/outreach/messages/:id", requireAuth, async (req, res): Promise<void> => { const p = UpdateOutreachMessageParams.safeParse(req.params), data = UpdateOutreachMessageBody.safeParse(req.body); if (!p.success || !data.success) { res.status(400).json({ error: "Invalid request" }); return; } const attributionError = await validateAttribution(data.data.sourceType, data.data.sourceId); if (attributionError) { res.status(400).json({ error: attributionError }); return; } const [row] = await db.update(outreachMessagesTable).set({ ...data.data, status: "draft", scheduledAt: data.data.scheduledAt ? new Date(data.data.scheduledAt) : undefined }).where(and(eq(outreachMessagesTable.id, p.data.id), eq(outreachMessagesTable.status, "draft"))).returning(); if (!row) { res.status(409).json({ error: "Only draft messages can be edited" }); return; } res.json(UpdateOutreachMessageResponse.parse(await messageJson(row))); });
 router.post("/outreach/prospects/:id/draft", requireAuth, async (req, res): Promise<void> => {
-  const p = GenerateOutreachDraftParams.safeParse(req.params), input = GenerateOutreachDraftBody.safeParse(req.body ?? {});
+  const p = SendOutreachMessageParams.safeParse(req.params); if (!p.success) { res.status(400).json({ error: p.error.message }); return; }
   if (!p.success || !input.success) { res.status(400).json({ error: "Invalid request" }); return; }
   const attributionError = await validateAttribution(input.data.sourceType, input.data.sourceId);
   if (attributionError) { res.status(400).json({ error: attributionError }); return; }
-  const [prospect] = await db.select().from(prospectsTable).where(eq(prospectsTable.id, p.data.id));
+  const [prospect] = await db.select().from(prospectsTable).where(eq(prospectsTable.id, message.prospectId));
   if (!prospect) { res.status(404).json({ error: "Prospect not found" }); return; }
-  if (input.data.campaignId) { const [campaign] = await db.select().from(campaignsTable).where(eq(campaignsTable.id, input.data.campaignId)); if (!campaign) { res.status(404).json({ error: "Campaign not found" }); return; } }
+  const [campaign] = message.campaignId ? await db.select().from(campaignsTable).where(eq(campaignsTable.id, message.campaignId)) : [];
   try {
     const draft = await generateProspectDraft(prospect);
-    const rows = await db.insert(outreachMessagesTable).values([
-      {
-        prospectId: prospect.id,
-        campaignId: input.data.campaignId,
-        sequenceNumber: 1,
-        subject: draft.subject,
-        body: draft.body,
-        sourceType: input.data.sourceType,
-        sourceId: input.data.sourceId,
-      },
-      ...draft.followUps.map((followUp, index) => ({
-          prospectId: prospect.id,
-          campaignId: input.data.campaignId,
-          sequenceNumber: index + 2,
-          subject: followUp.subject,
-          body: followUp.body,
-          scheduledAt: null,
-          sourceType: input.data.sourceType,
-          sourceId: input.data.sourceId,
-      })),
-    ]).returning();
+  const rows = await db.select().from(outreachResearchRunsTable).orderBy(desc(outreachResearchRunsTable.createdAt));
     res.status(201).json(GenerateOutreachDraftResponse.parse(await Promise.all(rows.map(messageJson))));
   } catch (err) { req.log.error({ err }, "Outreach draft generation failed"); res.status(502).json({ error: "Unable to generate outreach draft" }); }
 });
-router.post("/outreach/prospects/:id/replied", requireAuth, async (req, res): Promise<void> => {
-  const p = MarkOutreachProspectRepliedParams.safeParse(req.params);
-  if (!p.success) { res.status(400).json({ error: p.error.message }); return; }
-  const [prospect] = await db.update(prospectsTable)
-    .set({ status: "replied" })
-    .where(eq(prospectsTable.id, p.data.id))
-    .returning();
-  if (!prospect) { res.status(404).json({ error: "Prospect not found" }); return; }
-  await db.update(outreachMessagesTable)
-    .set({ status: "replied", error: "Sequence stopped after reply" })
-    .where(and(
-      eq(outreachMessagesTable.prospectId, prospect.id),
-      inArray(outreachMessagesTable.status, ["draft", "approved", "sending"]),
-    ));
-  res.json(MarkOutreachProspectRepliedResponse.parse(prospectJson(prospect)));
+router.post("/outreach/prospects/:id/contact-evidence", requireAuth, async (req, res): Promise<void> => {
+  const params = RecordOutreachContactEvidenceParams.safeParse(req.params);
+  const input = RunOutreachResearchBody.safeParse(req.body);
+  if (!params.success || !input.success) {
+    res.status(400).json({ error: "Invalid contact evidence" });
+    return;
+  }
+  const evidenceNote = input.data.evidenceNote.trim();
+  if (!evidenceNote) {
+    res.status(400).json({ error: "Evidence details are required" });
+    return;
+  }
+
+  const reviewAt = input.data.reviewAt;
+  if (input.data.evidenceType === "temporary_unavailability") {
+    if (!reviewAt || Number.isNaN(reviewAt.getTime()) || reviewAt.getTime() <= Date.now()) {
+      res.status(400).json({ error: "Temporary unavailability requires a future review date" });
+      return;
+    }
+  } else if (input.data.reviewAt) {
+    res.status(400).json({ error: "A review date is only valid for temporary unavailability" });
+    return;
+  }
+
+  const replacementFields = [
+    input.data.replacementContactName,
+    input.data.replacementContactTitle,
+    input.data.replacementContactEmail,
+    input.data.replacementContactSourceUrl,
+  ];
+  const replacementFieldCount = replacementFields.filter((value) => value?.trim()).length;
+  if (replacementFieldCount > 0 && input.data.evidenceType !== "departed") {
+    res.status(400).json({ error: "Replacement contacts can only be recorded for a departed contact" });
+    return;
+  }
+  if (replacementFieldCount > 0 && replacementFieldCount !== replacementFields.length) {
+    res.status(400).json({ error: "Replacement name, title, email, and public source are all required" });
+    return;
+  }
+
+  const result = await recordContactEvidence({
+    prospectId: p.data.id,
+    evidenceType: "forwarded_reply",
+    evidenceNote: "Reply confirmed by an authenticated team member",
+  });
+  if (!result) { res.status(404).json({ error: "Prospect not found" }); return; }
+  res.json(MarkOutreachProspectRepliedResponse.parse(prospectJson(result.prospect)));
 });
 router.post("/outreach/messages/:id/approve", requireAuth, async (req, res): Promise<void> => {
-  const p = ApproveOutreachMessageParams.safeParse(req.params); if (!p.success) { res.status(400).json({ error: p.error.message }); return; }
+  const p = SendOutreachMessageParams.safeParse(req.params); if (!p.success) { res.status(400).json({ error: p.error.message }); return; }
+  if (!p.success) { res.status(400).json({ error: p.error.message }); return; }
+  const result = await recordContactEvidence({
+    prospectId: p.data.id,
+    evidenceType: "forwarded_reply",
+    evidenceNote: "Reply confirmed by an authenticated team member",
+  });
+  if (!result) { res.status(404).json({ error: "Prospect not found" }); return; }
+  res.json(MarkOutreachProspectRepliedResponse.parse(prospectJson(result.prospect)));
+});
+router.post("/outreach/messages/:id/approve", requireAuth, async (req, res): Promise<void> => {
+  const p = SendOutreachMessageParams.safeParse(req.params); if (!p.success) { res.status(400).json({ error: p.error.message }); return; }
   const [message] = await db.select().from(outreachMessagesTable).where(eq(outreachMessagesTable.id, p.data.id));
   if (!message) { res.status(404).json({ error: "Message not found" }); return; }
-  if (message.status !== "draft") { res.status(409).json({ error: "Only draft messages can be approved" }); return; }
   const [prospect] = await db.select().from(prospectsTable).where(eq(prospectsTable.id, message.prospectId));
-  if (!prospect) { res.status(409).json({ error: "Approval blocked: prospect not found" }); return; }
-  const [campaign] = message.campaignId
-    ? await db.select().from(campaignsTable).where(eq(campaignsTable.id, message.campaignId))
-    : [];
+  if (!prospect) { res.status(404).json({ error: "Prospect not found" }); return; }
+  const [campaign] = message.campaignId ? await db.select().from(campaignsTable).where(eq(campaignsTable.id, message.campaignId)) : [];
   if (message.campaignId && !campaign) { res.status(409).json({ error: "Approval blocked: campaign not found" }); return; }
   try {
-    const email = assertOutreachEligibilityBase(message, prospect, campaign, { requireApprovedMessage: false });
+  const email = normalizeEmail(data.data.email);
     const [suppression] = await db.select({ id: outreachSuppressionsTable.id })
       .from(outreachSuppressionsTable)
       .where(eq(outreachSuppressionsTable.email, email))
       .limit(1);
     if (suppression) throw new Error("Address is suppressed");
   } catch (error) {
-    const blocker = error instanceof Error ? error.message : "Message is not eligible for outreach";
+    const blocker = error instanceof Error ? error.message : "Unable to reserve the preparation window";
     res.status(409).json({ error: `Approval blocked: ${blocker}` });
     return;
   }
-  let row: typeof outreachMessagesTable.$inferSelect | undefined;
+    const row = await sendClaimedOutreachMessage(claimed);
   try {
     if (message.sequenceNumber === 1) {
       row = await approveInitialMessageInPreparationWindow(message.id);
@@ -397,19 +423,14 @@ router.post("/outreach/messages/:id/send", requireAuth, async (req, res): Promis
   try {
     const claimed = await claimOutreachMessageForSending(message.id);
     if (!claimed) { res.status(409).json({ error: "Message is no longer available to send" }); return; }
-    const sent = await sendApprovedOutreach(message, prospect, campaign);
-    const [row] = await db.update(outreachMessagesTable).set({
-      status: "sent",
-      sentAt: new Date(),
-      providerMessageId: sent.providerMessageId,
-      error: null,
-    }).where(and(
-      eq(outreachMessagesTable.id, message.id),
-      eq(outreachMessagesTable.status, "sending"),
-    )).returning();
+    const row = await sendClaimedOutreachMessage(claimed);
     if (!row) { res.status(409).json({ error: "A terminal event stopped this message during dispatch" }); return; }
     if (message.sequenceNumber === 1) {
-      await db.update(prospectsTable).set({ status: "contacted" }).where(eq(prospectsTable.id, prospect.id));
+      await db.update(prospectsTable).set({ status: "contacted" }).where(and(
+        eq(prospectsTable.id, prospect.id),
+        eq(prospectsTable.contactStatus, "active"),
+        inArray(prospectsTable.status, ["approved", "contacted"]),
+      ));
     }
     res.json(SendOutreachMessageResponse.parse(await messageJson(row!)));
   } catch (err) {
@@ -427,23 +448,15 @@ router.post("/outreach/messages/:id/send", requireAuth, async (req, res): Promis
 });
 router.post("/outreach/suppressions", requireAuth, async (req, res): Promise<void> => {
   const data = SuppressOutreachAddressBody.safeParse(req.body); if (!data.success) { res.status(400).json({ error: data.error.message }); return; }
-  const email = normalizeEmail(data.data.email); const [row] = await db.insert(outreachSuppressionsTable).values({ email, reason: data.data.reason }).onConflictDoNothing().returning();
-  const result = row ?? (await db.select().from(outreachSuppressionsTable).where(eq(outreachSuppressionsTable.email, email)))[0];
-  const matches = await db.select({ id: prospectsTable.id }).from(prospectsTable).where(eq(prospectsTable.contactEmail, email));
-  const prospectIds = matches.map((prospect) => prospect.id);
-  if (prospectIds.length > 0) {
-    await db.update(prospectsTable).set({ status: "suppressed" }).where(inArray(prospectsTable.id, prospectIds));
-    await db.update(outreachMessagesTable)
-      .set({ status: "unsubscribed", error: `Sequence stopped: ${data.data.reason}` })
-      .where(and(
-        inArray(outreachMessagesTable.prospectId, prospectIds),
-        inArray(outreachMessagesTable.status, ["draft", "approved", "sending"]),
-      ));
-  }
+  const email = normalizeEmail(data.data.email);
+  await suppressOutreachEmail(email, data.data.reason);
+  const [result] = await db.select().from(outreachSuppressionsTable)
+    .where(eq(outreachSuppressionsTable.email, email))
+    .limit(1);
   res.status(201).json(SuppressOutreachAddressResponse.parse({ ...result!, createdAt: result!.createdAt.toISOString() }));
 });
 router.get("/outreach/suppressions", requireAuth, async (_req, res): Promise<void> => {
-  const rows = await db.select().from(outreachSuppressionsTable).orderBy(desc(outreachSuppressionsTable.createdAt));
+  const rows = await db.select().from(outreachResearchRunsTable).orderBy(desc(outreachResearchRunsTable.createdAt));
   res.json(ListOutreachSuppressionsResponse.parse(rows.map((row) => ({ ...row, createdAt: row.createdAt.toISOString() }))));
 });
 router.get("/outreach/research-runs", requireAuth, async (_req, res): Promise<void> => {

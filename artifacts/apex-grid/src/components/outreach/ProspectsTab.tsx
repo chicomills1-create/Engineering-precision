@@ -7,9 +7,12 @@ import {
   useCreateProspect,
   useUpdateProspect,
   useRunOutreachResearch,
+  useRecordOutreachContactEvidence,
   useListOutreachResearchRuns,
   getListProspectsQueryKey,
   getListOutreachResearchRunsQueryKey,
+  getListOutreachMessagesQueryKey,
+  getListOutreachSuppressionsQueryKey,
   getGetOutreachDashboardQueryKey,
   Prospect,
   ProspectStatus,
@@ -59,6 +62,35 @@ const researchSchema = z.object({
 
 type ResearchFormValues = z.infer<typeof researchSchema>;
 
+const contactEvidenceSchema = z.object({
+  evidenceType: z.enum(['forwarded_reply', 'temporary_unavailability', 'departed']),
+  evidenceNote: z.string().min(1, 'Evidence details are required').max(4000),
+  reviewAt: z.string().optional(),
+  replacementContactName: z.string().max(160).optional(),
+  replacementContactTitle: z.string().max(160).optional(),
+  replacementContactEmail: z.union([z.string().email('Enter a valid replacement email'), z.literal('')]).optional(),
+  replacementContactSourceUrl: z.string().max(1000).optional(),
+}).superRefine((data, ctx) => {
+  if (data.evidenceType === 'temporary_unavailability' && !data.reviewAt) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['reviewAt'], message: 'Choose a review date' });
+  }
+  const replacementValues = [
+    data.replacementContactName,
+    data.replacementContactTitle,
+    data.replacementContactEmail,
+    data.replacementContactSourceUrl,
+  ].map(value => value?.trim() || '');
+  const completed = replacementValues.filter(Boolean).length;
+  if (completed > 0 && data.evidenceType !== 'departed') {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['replacementContactName'], message: 'Replacement details are only for departed contacts' });
+  }
+  if (completed > 0 && completed !== replacementValues.length) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['replacementContactName'], message: 'Complete all four replacement contact fields' });
+  }
+});
+
+type ContactEvidenceFormValues = z.infer<typeof contactEvidenceSchema>;
+
 function normalizeNullable(prospect: Prospect) {
   return {
     ...prospect,
@@ -85,6 +117,7 @@ export function ProspectsTab() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [editingProspect, setEditingProspect] = useState<Prospect | null>(null);
   const [isResearchOpen, setIsResearchOpen] = useState(false);
+  const [evidenceProspect, setEvidenceProspect] = useState<Prospect | null>(null);
 
   const createMutation = useCreateProspect({
     mutation: {
@@ -131,6 +164,32 @@ export function ProspectsTab() {
     }
   });
 
+  const evidenceMutation = useRecordOutreachContactEvidence({
+    mutation: {
+      onSuccess: (result) => {
+        queryClient.invalidateQueries({ queryKey: getListProspectsQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getListOutreachMessagesQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getListOutreachSuppressionsQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetOutreachDashboardQueryKey() });
+        setEvidenceProspect(null);
+        evidenceForm.reset();
+        toast({
+          title: 'Evidence recorded. Outreach stopped.',
+          description: result.replacementPending
+            ? 'The replacement recipient is pending manual review and approval.'
+            : result.suppressedEmail
+              ? 'The departed contact address is now suppressed.'
+              : `${result.stoppedMessageCount} pending message${result.stoppedMessageCount === 1 ? '' : 's'} stopped.`,
+        });
+      },
+      onError: (error: any) => toast({
+        title: 'Unable to record evidence',
+        description: error?.body?.error || error?.message || 'Please review the details.',
+        variant: 'destructive',
+      }),
+    },
+  });
+
   const form = useForm<ProspectFormValues>({
     resolver: zodResolver(prospectSchema),
     defaultValues: {
@@ -144,6 +203,20 @@ export function ProspectsTab() {
     resolver: zodResolver(researchSchema),
     defaultValues: { state: 'TX', audience: 'architect', query: '' },
   });
+
+  const evidenceForm = useForm<ContactEvidenceFormValues>({
+    resolver: zodResolver(contactEvidenceSchema),
+    defaultValues: {
+      evidenceType: 'forwarded_reply',
+      evidenceNote: '',
+      reviewAt: '',
+      replacementContactName: '',
+      replacementContactTitle: '',
+      replacementContactEmail: '',
+      replacementContactSourceUrl: '',
+    },
+  });
+  const evidenceType = evidenceForm.watch('evidenceType');
 
   function onSubmit(data: ProspectFormValues) {
     if (editingProspect) {
@@ -195,6 +268,25 @@ export function ProspectsTab() {
         audience: data.audience,
         query: data.query || undefined
       }
+    });
+  }
+
+  function onEvidenceSubmit(data: ContactEvidenceFormValues) {
+    if (!evidenceProspect) return;
+    const hasReplacement = data.evidenceType === 'departed' && Boolean(data.replacementContactName?.trim());
+    evidenceMutation.mutate({
+      id: evidenceProspect.id,
+      data: {
+        evidenceType: data.evidenceType,
+        evidenceNote: data.evidenceNote.trim(),
+        reviewAt: data.evidenceType === 'temporary_unavailability' && data.reviewAt
+          ? new Date(data.reviewAt).toISOString()
+          : undefined,
+        replacementContactName: hasReplacement ? data.replacementContactName?.trim() : undefined,
+        replacementContactTitle: hasReplacement ? data.replacementContactTitle?.trim() : undefined,
+        replacementContactEmail: hasReplacement ? data.replacementContactEmail?.trim().toLowerCase() : undefined,
+        replacementContactSourceUrl: hasReplacement ? data.replacementContactSourceUrl?.trim() : undefined,
+      },
     });
   }
 
@@ -458,6 +550,93 @@ export function ProspectsTab() {
         </div>
       )}
 
+      <Dialog open={!!evidenceProspect} onOpenChange={(open) => {
+        if (!open) {
+          setEvidenceProspect(null);
+          evidenceForm.reset();
+        }
+      }}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Record forwarded reply evidence</DialogTitle>
+            <div className="text-sm text-muted-foreground mt-1">
+              This immediately stops pending outreach for {evidenceProspect?.contactName || evidenceProspect?.companyName}.
+            </div>
+          </DialogHeader>
+          <Form {...evidenceForm}>
+            <form onSubmit={evidenceForm.handleSubmit(onEvidenceSubmit)} className="space-y-4" data-testid="form-contact-evidence">
+              <FormField control={evidenceForm.control} name="evidenceType" render={({ field }) => (
+                <FormItem>
+                  <FormLabel>What did the forwarded message confirm?</FormLabel>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <FormControl><SelectTrigger data-testid="select-contact-evidence-type"><SelectValue /></SelectTrigger></FormControl>
+                    <SelectContent>
+                      <SelectItem value="forwarded_reply">A reply was received</SelectItem>
+                      <SelectItem value="temporary_unavailability">Temporary auto-reply / out of office</SelectItem>
+                      <SelectItem value="departed">Contact retired or left the company</SelectItem>
+                    </SelectContent>
+                  </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField control={evidenceForm.control} name="evidenceNote" render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Evidence details</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      className="min-h-28"
+                      placeholder="Summarize the forwarded message and who received it."
+                      {...field}
+                      data-testid="input-contact-evidence-note"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )} />
+              {evidenceType === 'temporary_unavailability' && (
+                <FormField control={evidenceForm.control} name="reviewAt" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Review after</FormLabel>
+                    <FormControl><Input type="datetime-local" {...field} data-testid="input-contact-review-at" /></FormControl>
+                    <p className="text-xs text-muted-foreground">The address stays unsuppressed, but the sequence remains stopped until reviewed.</p>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+              )}
+              {evidenceType === 'departed' && (
+                <div className="space-y-4 border border-border p-4 rounded-[2px]">
+                  <div>
+                    <p className="text-sm font-medium">Replacement contact (optional)</p>
+                    <p className="text-xs text-muted-foreground">If entered, all fields are required. The new recipient stays unverified and pending manual approval.</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <FormField control={evidenceForm.control} name="replacementContactName" render={({ field }) => (
+                      <FormItem><FormLabel>Name</FormLabel><FormControl><Input {...field} data-testid="input-replacement-name" /></FormControl><FormMessage /></FormItem>
+                    )} />
+                    <FormField control={evidenceForm.control} name="replacementContactTitle" render={({ field }) => (
+                      <FormItem><FormLabel>Title</FormLabel><FormControl><Input {...field} data-testid="input-replacement-title" /></FormControl><FormMessage /></FormItem>
+                    )} />
+                    <FormField control={evidenceForm.control} name="replacementContactEmail" render={({ field }) => (
+                      <FormItem><FormLabel>Email</FormLabel><FormControl><Input type="email" {...field} data-testid="input-replacement-email" /></FormControl><FormMessage /></FormItem>
+                    )} />
+                    <FormField control={evidenceForm.control} name="replacementContactSourceUrl" render={({ field }) => (
+                      <FormItem><FormLabel>Public source</FormLabel><FormControl><Input placeholder="https://company.com/team" {...field} data-testid="input-replacement-source" /></FormControl><FormMessage /></FormItem>
+                    )} />
+                  </div>
+                </div>
+              )}
+              <DialogFooter>
+                <DialogClose asChild><Button variant="outline" type="button">Cancel</Button></DialogClose>
+                <Button type="submit" disabled={evidenceMutation.isPending} data-testid="button-submit-contact-evidence">
+                  {evidenceMutation.isPending ? 'Stopping outreach...' : 'Record evidence & stop outreach'}
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
+
       <div className="border border-border rounded-[2px] overflow-hidden bg-card">
         {(!prospects || prospects.length === 0) ? (
           <div className="p-8 text-center text-muted-foreground" data-testid="empty-prospects">
@@ -527,6 +706,16 @@ export function ProspectsTab() {
                         <Badge variant={p.status === 'new' ? 'secondary' : p.status === 'suppressed' ? 'destructive' : 'default'} data-testid={`status-prospect-${p.id}`}>
                           {p.status.replace(/_/g, ' ')}
                         </Badge>
+                        {p.contactStatus !== 'active' && (
+                          <div className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground" data-testid={`contact-status-prospect-${p.id}`}>
+                            {p.contactStatus.replace(/_/g, ' ')}
+                          </div>
+                        )}
+                        {p.contactReviewAt && (
+                          <div className="mt-1 text-[10px] text-amber-500">
+                            Review {new Date(p.contactReviewAt).toLocaleDateString()}
+                          </div>
+                        )}
                       </ResponsiveTableCell>
                       <ResponsiveTableCell mobileLabel="Actions" className="text-right align-top max-md:text-left max-md:flex max-md:gap-2">
                         <DropdownMenu>
@@ -538,6 +727,7 @@ export function ProspectsTab() {
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end" className="max-md:w-[90vw]">
                              <DropdownMenuItem onClick={() => openEditProspect(p)} data-testid={`action-prospect-edit-${p.id}`}>Review & Edit Details</DropdownMenuItem>
+                             <DropdownMenuItem onClick={() => setEvidenceProspect(p)} data-testid={`action-prospect-evidence-${p.id}`}>Record Reply / Availability Evidence</DropdownMenuItem>
                             <DropdownMenuItem onClick={() => updateStatus(p, 'review')} data-testid={`action-prospect-review-${p.id}`}>Mark for Review</DropdownMenuItem>
                             <DropdownMenuItem 
                               onClick={() => updateStatus(p, 'approved')} 

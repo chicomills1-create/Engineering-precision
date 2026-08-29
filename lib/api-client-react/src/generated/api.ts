@@ -34,6 +34,8 @@ import type {
   ClientMonthlyEmailInput,
   ClientMonthlyEmailResult,
   ClientMonthlySafeListContact,
+  ContactEvidenceInput,
+  ContactEvidenceResult,
   DraftGenerationInput,
   ErrorMessage,
   GrowthDashboard,
@@ -1979,6 +1981,78 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
         TContext
       > => {
       return useMutation(getGenerateOutreachDraftMutationOptions(options));
+    }
+
+export const getRecordOutreachContactEvidenceUrl = (id: number,) => {
+
+
+
+
+  return `/api/outreach/prospects/${id}/contact-evidence`
+}
+
+/**
+ * @summary Record forwarded reply or contact availability evidence
+ */
+export const recordOutreachContactEvidence = async (id: number,
+    contactEvidenceInput: ContactEvidenceInput, options?: Parameters<typeof customFetch>[1]): Promise<ContactEvidenceResult> => {
+
+  return customFetch<ContactEvidenceResult>(getRecordOutreachContactEvidenceUrl(id),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(contactEvidenceInput)
+  }
+);}
+
+
+
+
+
+export const getRecordOutreachContactEvidenceMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof recordOutreachContactEvidence>>, TError,{id: number;data: BodyType<ContactEvidenceInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof recordOutreachContactEvidence>>, TError,{id: number;data: BodyType<ContactEvidenceInput>}, TContext> => {
+
+const mutationKey = ['recordOutreachContactEvidence'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof recordOutreachContactEvidence>>, {id: number;data: BodyType<ContactEvidenceInput>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  recordOutreachContactEvidence(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type RecordOutreachContactEvidenceMutationResult = NonNullable<Awaited<ReturnType<typeof recordOutreachContactEvidence>>>
+    export type RecordOutreachContactEvidenceMutationBody = BodyType<ContactEvidenceInput>
+    export type RecordOutreachContactEvidenceMutationError = ErrorType<ErrorMessage>
+
+    /**
+ * @summary Record forwarded reply or contact availability evidence
+ */
+export const useRecordOutreachContactEvidence = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof recordOutreachContactEvidence>>, TError,{id: number;data: BodyType<ContactEvidenceInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof recordOutreachContactEvidence>>,
+        TError,
+        {id: number;data: BodyType<ContactEvidenceInput>},
+        TContext
+      > => {
+      return useMutation(getRecordOutreachContactEvidenceMutationOptions(options));
     }
 
 export const getMarkOutreachProspectRepliedUrl = (id: number,) => {

@@ -5,10 +5,11 @@ import {
   db,
   outreachDeliveryEventsTable,
   outreachMessagesTable,
-  outreachSuppressionsTable,
   prospectsTable,
 } from "@workspace/db";
 import { getFollowUpScheduledAt } from "./outreachEligibility";
+import { recordContactEvidence } from "./outreachContactEvidence";
+import { suppressOutreachEmail } from "./outreachSuppression";
 
 export type SendGridEvent = {
   email?: string;
@@ -180,15 +181,6 @@ async function stopPendingMessages(prospectId: number, status: "bounced" | "unsu
     ));
 }
 
-async function suppressEmail(email: string, reason: string): Promise<void> {
-  await db.insert(outreachSuppressionsTable)
-    .values({ email, reason })
-    .onConflictDoUpdate({
-      target: outreachSuppressionsTable.email,
-      set: { reason },
-    });
-}
-
 export async function processSendGridEvents(events: SendGridEvent[]): Promise<number> {
   let processed = 0;
   for (const event of events) {
@@ -279,24 +271,18 @@ export async function processSendGridEvents(events: SendGridEvent[]): Promise<nu
 
     if (["bounce", "blocked", "dropped"].includes(eventType)) {
       if (messageWhere) await db.update(outreachMessagesTable).set({ status: "bounced", error: reason ?? "Delivery failed" }).where(messageWhere);
-      const prospect = Number.isInteger(prospectId)
-        ? (await db.select().from(prospectsTable).where(eq(prospectsTable.id, prospectId)))[0]
-        : (await db.select().from(prospectsTable).where(eq(prospectsTable.contactEmail, email)))[0];
-      if (prospect) {
-        await db.update(prospectsTable).set({ status: "suppressed", emailStatus: "invalid" }).where(eq(prospectsTable.id, prospect.id));
-        await stopPendingMessages(prospect.id, "bounced", reason ?? "Sequence stopped after delivery failure");
-      }
-      await suppressEmail(email, eventType);
+      await suppressOutreachEmail(email, eventType, {
+        pendingStatus: "bounced",
+        pendingError: reason ?? "Sequence stopped after delivery failure",
+        emailStatus: "invalid",
+      });
     }
 
     if (["spamreport", "unsubscribe", "group_unsubscribe"].includes(eventType)) {
       if (messageWhere) await db.update(outreachMessagesTable).set({ status: "unsubscribed", error: reason }).where(messageWhere);
-      const matches = await db.select({ id: prospectsTable.id }).from(prospectsTable).where(eq(prospectsTable.contactEmail, email));
-      for (const prospect of matches) {
-        await db.update(prospectsTable).set({ status: "suppressed" }).where(eq(prospectsTable.id, prospect.id));
-        await stopPendingMessages(prospect.id, "unsubscribed", `Sequence stopped after ${eventType}`);
-      }
-      await suppressEmail(email, eventType);
+      await suppressOutreachEmail(email, eventType, {
+        pendingError: `Sequence stopped after ${eventType}`,
+      });
     }
     processed += 1;
   }
@@ -307,8 +293,11 @@ export async function processInboundReply(email: string): Promise<number> {
   const normalized = email.trim().toLowerCase();
   const prospects = await db.select().from(prospectsTable).where(eq(prospectsTable.contactEmail, normalized));
   for (const prospect of prospects) {
-    await db.update(prospectsTable).set({ status: "replied" }).where(eq(prospectsTable.id, prospect.id));
-    await stopPendingMessages(prospect.id, "replied", "Sequence stopped after reply");
+    await recordContactEvidence({
+      prospectId: prospect.id,
+      evidenceType: "forwarded_reply",
+      evidenceNote: "Inbound reply received by the protected reply webhook",
+    });
   }
   return prospects.length;
 }

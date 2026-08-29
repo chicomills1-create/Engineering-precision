@@ -1,9 +1,10 @@
-import { and, eq } from "drizzle-orm";
+import { and, eq, notInArray, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
   outreachMessagesTable,
   outreachResearchSchedulesTable,
+  outreachSuppressionsTable,
   prospectsTable,
 } from "@workspace/db";
 import { getNextPhoenixEightAm } from "./outreachEligibility";
@@ -66,7 +67,16 @@ export async function seedVerifiedOutreachBatch(options: {
 
   const scheduledAt = getNextPhoenixEightAm(options.now);
   for (const contact of VERIFIED_OUTREACH_CONTACTS) {
-    const [prospect] = await db.insert(prospectsTable).values({
+    await db.transaction(async (tx) => {
+      const normalizedEmail = contact.contactEmail.toLowerCase();
+      await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${normalizedEmail}, 0))`);
+      const [existingSuppression] = await tx.select({ id: outreachSuppressionsTable.id })
+        .from(outreachSuppressionsTable)
+        .where(eq(outreachSuppressionsTable.email, normalizedEmail))
+        .limit(1);
+      if (existingSuppression) return;
+
+      const [prospect] = await tx.insert(prospectsTable).values({
       campaignId: campaign.id,
       companyName: contact.companyName,
       website: contact.website,
@@ -80,7 +90,7 @@ export async function seedVerifiedOutreachBatch(options: {
       needSignals: contact.needSignals,
       contactName: contact.contactName,
       contactTitle: contact.contactTitle,
-      contactEmail: contact.contactEmail.toLowerCase(),
+      contactEmail: normalizedEmail,
       contactConfidence: "high",
       contactSourceUrl: contact.contactSourceUrl,
       dedupeKey: contact.dedupeKey,
@@ -94,26 +104,44 @@ export async function seedVerifiedOutreachBatch(options: {
         needSignals: contact.needSignals,
         contactName: contact.contactName,
         contactTitle: contact.contactTitle,
-        contactEmail: contact.contactEmail.toLowerCase(),
+        contactEmail: normalizedEmail,
         contactConfidence: "high",
         contactSourceUrl: contact.contactSourceUrl,
         emailStatus: "verified",
-        status: "approved",
+        status: sql`case when ${prospectsTable.status} = 'contacted' then ${prospectsTable.status} else 'approved' end`,
         updatedAt: new Date(),
       },
+      setWhere: and(
+        eq(prospectsTable.contactStatus, "active"),
+        notInArray(prospectsTable.status, ["review", "replied", "not_a_fit", "suppressed"]),
+      ),
     }).returning();
-    if (!prospect) throw new Error(`Unable to prepare ${contact.companyName}`);
+      if (!prospect) return;
 
-    const [existing] = await db.select({ id: outreachMessagesTable.id })
-      .from(outreachMessagesTable)
-      .where(and(
-        eq(outreachMessagesTable.prospectId, prospect.id),
-        eq(outreachMessagesTable.campaignId, campaign.id),
-        eq(outreachMessagesTable.sequenceNumber, 1),
-      ))
-      .limit(1);
-    if (!existing) {
-      await db.insert(outreachMessagesTable).values({
+      const [current] = await tx.select().from(prospectsTable)
+        .where(eq(prospectsTable.id, prospect.id))
+        .for("update");
+      const [suppression] = await tx.select({ id: outreachSuppressionsTable.id })
+        .from(outreachSuppressionsTable)
+        .where(eq(outreachSuppressionsTable.email, normalizedEmail))
+        .limit(1);
+      if (
+        !current
+        || suppression
+        || current.contactStatus !== "active"
+        || !["approved", "contacted"].includes(current.status)
+      ) return;
+
+      const [existingMessage] = await tx.select({ id: outreachMessagesTable.id })
+        .from(outreachMessagesTable)
+        .where(and(
+          eq(outreachMessagesTable.prospectId, prospect.id),
+          eq(outreachMessagesTable.campaignId, campaign.id),
+          eq(outreachMessagesTable.sequenceNumber, 1),
+        ))
+        .limit(1);
+      if (!existingMessage) {
+        await tx.insert(outreachMessagesTable).values({
         prospectId: prospect.id,
         campaignId: campaign.id,
         sequenceNumber: 1,
@@ -122,7 +150,8 @@ export async function seedVerifiedOutreachBatch(options: {
         status: "approved",
         scheduledAt,
       });
-    }
+      }
+    });
   }
 
   const queued = await db.select({ id: outreachMessagesTable.id })
@@ -131,8 +160,5 @@ export async function seedVerifiedOutreachBatch(options: {
       eq(outreachMessagesTable.campaignId, campaign.id),
       eq(outreachMessagesTable.status, "approved"),
     ));
-  if (queued.length !== VERIFIED_OUTREACH_CONTACTS.length) {
-    throw new Error(`Expected ${VERIFIED_OUTREACH_CONTACTS.length} approved messages, found ${queued.length}`);
-  }
   return { state: "ready", queued: queued.length };
 }

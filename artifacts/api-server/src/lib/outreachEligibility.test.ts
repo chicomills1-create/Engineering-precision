@@ -35,6 +35,11 @@ const eligibleProspect: Prospect = {
   researchRunId: null,
   emailStatus: "verified",
   status: "approved",
+  contactStatus: "active",
+  contactEvidenceType: null,
+  contactEvidence: null,
+  contactEvidenceAt: null,
+  contactReviewAt: null,
   createdAt: now,
   updatedAt: now,
 };
@@ -248,4 +253,17 @@ test("uses Phoenix midnight for dashboard daily counts", () => {
     getPhoenixCalendarDayStart(new Date("2026-08-29T08:30:00.000Z")).toISOString(),
     "2026-08-29T07:00:00.000Z",
   );
+});
+
+test("blocks every contact with recorded reply, availability, departure, or replacement evidence", () => {
+  for (const contactStatus of ["replied", "temporary_unavailable", "departed", "replacement_pending"] as const) {
+    assert.throws(
+      () => assertOutreachEligibilityBase(
+        approvedMessage,
+        { ...eligibleProspect, contactStatus },
+        activeCampaign,
+      ),
+      /requiring review/,
+    );
+  }
 });

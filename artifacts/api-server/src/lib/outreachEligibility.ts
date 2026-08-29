@@ -29,6 +29,9 @@ export function assertOutreachEligibilityBase(
   if (isOutreachContactExcluded(prospect)) {
     throw new Error("Contact is excluded from outreach per client relationship");
   }
+  if (prospect.contactStatus !== "active") {
+    throw new Error("Contact has reply, availability, or replacement evidence requiring review");
+  }
   assertOutreachContactData(prospect);
   if (options.requireApprovedMessage !== false && message.status !== "approved") {
     throw new Error("Message must be approved before sending");

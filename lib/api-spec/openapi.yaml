@@ -649,6 +649,25 @@ paths:
       requestBody: { required: false, content: { application/json: { schema: { $ref: "#/components/schemas/DraftGenerationInput" } } } }
       responses:
         "201": { description: Drafts created, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/OutreachMessage" } } } } }
+  /outreach/prospects/{id}/contact-evidence:
+    post:
+      operationId: recordOutreachContactEvidence
+      tags: [outreach]
+      summary: Record forwarded reply or contact availability evidence
+      parameters: [{ name: id, in: path, required: true, schema: { type: number } }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ContactEvidenceInput" }
+      responses:
+        "200":
+          description: Evidence recorded and outreach sequence updated
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ContactEvidenceResult" }
+        "400": { description: Invalid evidence, content: { application/json: { schema: { $ref: "#/components/schemas/ErrorMessage" } } } }
+        "404": { description: Prospect not found, content: { application/json: { schema: { $ref: "#/components/schemas/ErrorMessage" } } } }
   /outreach/prospects/{id}/replied:
     post:
       operationId: markOutreachProspectReplied
@@ -1256,7 +1275,7 @@ components:
           $ref: "#/components/schemas/ClientJobStatus"
     Prospect:
       type: object
-      required: [id, campaignId, companyName, city, state, audience, fitScore, needScore, emailStatus, status, createdAt, updatedAt]
+      required: [id, campaignId, companyName, city, state, audience, fitScore, needScore, emailStatus, status, contactStatus, contactEvidenceType, contactEvidence, contactEvidenceAt, contactReviewAt, createdAt, updatedAt]
       properties:
         id: { type: number }
         campaignId: { type: [number, "null"] }
@@ -1279,6 +1298,11 @@ components:
         researchRunId: { type: [number, "null"] }
         emailStatus: { type: string, enum: [unverified, verified, invalid] }
         status: { type: string, enum: [new, review, approved, contacted, replied, not_a_fit, suppressed] }
+        contactStatus: { type: string, enum: [active, replied, temporary_unavailable, departed, replacement_pending] }
+        contactEvidenceType: { type: [string, "null"], enum: [forwarded_reply, temporary_unavailability, departed, null] }
+        contactEvidence: { type: [string, "null"] }
+        contactEvidenceAt: { type: [string, "null"] }
+        contactReviewAt: { type: [string, "null"] }
         createdAt: { type: string }
         updatedAt: { type: string }
     ProspectInput:
@@ -1306,6 +1330,25 @@ components:
         status: { type: string, enum: [new, review, approved, contacted, replied, not_a_fit, suppressed] }
     ProspectUpdate:
       allOf: [{ $ref: "#/components/schemas/ProspectInput" }]
+    ContactEvidenceInput:
+      type: object
+      required: [evidenceType, evidenceNote]
+      properties:
+        evidenceType: { type: string, enum: [forwarded_reply, temporary_unavailability, departed] }
+        evidenceNote: { type: string, minLength: 1, maxLength: 4000 }
+        reviewAt: { type: string, format: date-time }
+        replacementContactName: { type: string, maxLength: 160 }
+        replacementContactTitle: { type: string, maxLength: 160 }
+        replacementContactEmail: { type: string, maxLength: 320, pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$" }
+        replacementContactSourceUrl: { type: string, maxLength: 1000 }
+    ContactEvidenceResult:
+      type: object
+      required: [prospect, stoppedMessageCount, suppressedEmail, replacementPending]
+      properties:
+        prospect: { $ref: "#/components/schemas/Prospect" }
+        stoppedMessageCount: { type: number }
+        suppressedEmail: { type: [string, "null"] }
+        replacementPending: { type: boolean }
     Campaign:
       type: object
       required: [id, name, audience, states, dailyLimit, status, createdAt, updatedAt]

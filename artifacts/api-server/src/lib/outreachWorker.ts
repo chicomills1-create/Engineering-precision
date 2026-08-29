@@ -116,24 +116,40 @@ export function getSendFailureStatus(error: unknown): "failed" | "needs_review" 
   return isUnknownSendResultError(error) ? "needs_review" : "failed";
 }
 
-async function sendClaimedMessage(message: OutreachMessage): Promise<void> {
-  const [prospect] = await db.select().from(prospectsTable).where(eq(prospectsTable.id, message.prospectId));
-  if (!prospect) throw new Error("Prospect not found");
-  const [campaign] = message.campaignId
-    ? await db.select().from(campaignsTable).where(eq(campaignsTable.id, message.campaignId))
-    : [];
-  const sent = await sendApprovedOutreach({ ...message, status: "approved" }, prospect, campaign);
-  await db.update(outreachMessagesTable).set({
-    status: "sent",
-    sentAt: new Date(),
-    providerMessageId: sent.providerMessageId,
-    error: null,
-  }).where(and(
-    eq(outreachMessagesTable.id, message.id),
-    eq(outreachMessagesTable.status, "sending"),
-  ));
+export async function sendClaimedOutreachMessage(message: OutreachMessage): Promise<OutreachMessage | undefined> {
+  const [candidate] = await db.select({ contactEmail: prospectsTable.contactEmail })
+    .from(prospectsTable)
+    .where(eq(prospectsTable.id, message.prospectId))
+    .limit(1);
+  if (!candidate) throw new Error("Prospect not found");
+  const candidateEmail = candidate.contactEmail?.trim().toLowerCase() || null;
+  return db.transaction(async (tx) => {
+    if (candidateEmail) {
+      await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${candidateEmail}, 0))`);
+    }
+    const [prospect] = await tx.select().from(prospectsTable)
+      .where(eq(prospectsTable.id, message.prospectId))
+      .for("update");
+    if (!prospect) throw new Error("Prospect not found");
+    if ((prospect.contactEmail?.trim().toLowerCase() || null) !== candidateEmail) {
+      throw new Error("Contact changed while dispatch was starting; please retry");
+    }
+    const [campaign] = message.campaignId
+      ? await tx.select().from(campaignsTable).where(eq(campaignsTable.id, message.campaignId))
+      : [];
+    const sent = await sendApprovedOutreach({ ...message, status: "approved" }, prospect, campaign);
+    const [updated] = await tx.update(outreachMessagesTable).set({
+      status: "sent",
+      sentAt: new Date(),
+      providerMessageId: sent.providerMessageId,
+      error: null,
+    }).where(and(
+      eq(outreachMessagesTable.id, message.id),
+      eq(outreachMessagesTable.status, "sending"),
+    )).returning();
+    return updated;
+  });
 }
-
 export async function reconcileSendingOutreachMessages(
   now = new Date(),
   reviewAfterMs = SEND_REVIEW_AFTER_MS,
@@ -209,7 +225,7 @@ export async function processDueOutreachMessages(): Promise<number> {
     const claimed = await claimOutreachMessageForSending(message.id);
     if (!claimed) continue;
     try {
-      await sendClaimedMessage(claimed);
+      await sendClaimedOutreachMessage(claimed);
       sentCount += 1;
     } catch (err) {
       const error = err instanceof Error ? err.message : "Scheduled send failed";

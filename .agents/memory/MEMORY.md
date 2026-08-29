@@ -23,3 +23,4 @@
 - [Client outreach exclusions](client-outreach-exclusions.md) — Atmosphere Architects clients Tim Boyle and Mike Hudson must never receive Apex Grid outreach.
 - [Exact-time outreach scheduling](exact-time-outreach-scheduling.md) — an autoscaling web interval is not a durable 8 AM scheduler; use an external scheduled trigger and transactional leases.
 - [Verified outreach library](verified-outreach-library.md) — build an auditable AZ-first, then CA prospect pool; cap daily sends at 150 under a hard 5,000 monthly ceiling.
+- [Outreach stop serialization](outreach-stop-serialization.md) — evidence, suppression, sending, and seeding must share database locks so a stopped contact cannot be revived by a race.
