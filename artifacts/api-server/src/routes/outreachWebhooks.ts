@@ -40,11 +40,21 @@ async function parseInboundReply(body: unknown, contentType: string): Promise<{
 
 router.post("/outreach/webhooks/sendgrid-events", async (req, res): Promise<void> => {
   const rawBody = Buffer.isBuffer(req.body) ? req.body : Buffer.from(JSON.stringify(req.body ?? []));
+  const signature = req.get("X-Twilio-Email-Event-Webhook-Signature") ?? undefined;
+  const timestamp = req.get("X-Twilio-Email-Event-Webhook-Timestamp") ?? undefined;
   const valid = verifySendGridEventSignature(rawBody, {
-    signature: req.get("X-Twilio-Email-Event-Webhook-Signature") ?? undefined,
-    timestamp: req.get("X-Twilio-Email-Event-Webhook-Timestamp") ?? undefined,
+    signature,
+    timestamp,
   });
   if (!valid) {
+    req.log.warn({
+      bodyIsBuffer: Buffer.isBuffer(req.body),
+      bodyBytes: rawBody.length,
+      contentType: req.get("Content-Type") ?? null,
+      signaturePresent: Boolean(signature),
+      signatureBytes: signature ? Buffer.from(signature, "base64").length : 0,
+      timestampPresent: Boolean(timestamp),
+    }, "Rejected SendGrid event webhook signature");
     res.status(401).json({ error: "Invalid webhook signature" });
     return;
   }
