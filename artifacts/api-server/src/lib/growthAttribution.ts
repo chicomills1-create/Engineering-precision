@@ -10,6 +10,17 @@ export function validateAttributionPair(
   return null;
 }
 
+export function validateAttributionSourceStatus(
+  sourceType: AttributionSourceType,
+  status: string,
+): string | null {
+  const isEligible =
+    (sourceType === "lead" && status === "contacted") ||
+    (sourceType === "referral_partner" && status === "active") ||
+    (sourceType === "public_opportunity" && ["qualified", "proposal"].includes(status));
+  return isEligible ? null : "Only qualified growth sources can be used for outreach";
+}
+
 export function getReferralConversionDelta(previousStatus: string, nextStatus: string): -1 | 0 | 1 {
   if (previousStatus === nextStatus) return 0;
   if (nextStatus === "closed") return 1;

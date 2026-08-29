@@ -30,6 +30,8 @@ export interface OutreachMessage {
   sourceType?: OutreachMessageSourceType;
   /** @nullable */
   sourceId?: number | null;
+  /** @nullable */
+  sourceLabel?: string | null;
   createdAt: string;
   updatedAt: string;
 }

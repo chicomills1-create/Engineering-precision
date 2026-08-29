@@ -14,10 +14,9 @@ import { useToast } from '@/hooks/use-toast';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Search, Plus, ExternalLink, MapPin, Building, Target, Clock, Edit3, ShieldAlert, CheckCircle2, RotateCw, MailPlus } from 'lucide-react';
+import { Search, Plus, ExternalLink, MapPin, Building, Target, Clock, Edit3, ShieldAlert, CheckCircle2, RotateCw, Send } from 'lucide-react';
 import { format } from 'date-fns';
-
-const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+import { OutreachSource } from '@/components/outreach/OutreachComposerDialog';
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required").max(300),
@@ -39,7 +38,11 @@ const researchSchema = z.object({
   query: z.string().max(200).optional(),
 });
 
-export function PublicOpportunitiesTab() {
+interface PublicOpportunitiesTabProps {
+  onCreateOutreach: (source: OutreachSource) => void;
+}
+
+export function PublicOpportunitiesTab({ onCreateOutreach }: PublicOpportunitiesTabProps) {
   const { data: opportunities, isLoading } = useListPublicOpportunities();
   const queryClient = useQueryClient();
   const { toast } = useToast();
@@ -293,13 +296,22 @@ export function PublicOpportunitiesTab() {
                   </div>
                   
                   <div className="flex flex-col gap-2 mt-6">
-                    <a
-                      href={`${basePath}/admin/outreach?sourceType=public_opportunity&sourceId=${opp.id}`}
-                      className="inline-flex items-center justify-start whitespace-nowrap rounded-[2px] text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 h-8 px-4 w-full"
-                    >
-                      <MailPlus className="h-3 w-3 mr-2" />
-                      Create Outreach Draft
-                    </a>
+                    {(opp.pipelineStatus === 'qualified' || opp.pipelineStatus === 'proposal') && (
+                      <Button
+                        type="button"
+                        className="w-full justify-start rounded-[2px] h-8 text-xs"
+                        onClick={() => onCreateOutreach({
+                          sourceType: 'public_opportunity',
+                          sourceId: opp.id,
+                          label: opp.title,
+                          detail: opp.buyerOrFirm,
+                        })}
+                        data-testid={`button-create-outreach-public_opportunity-${opp.id}`}
+                      >
+                        <Send className="h-3 w-3 mr-2" />
+                        Create Outreach
+                      </Button>
+                    )}
                     <Button 
                       variant="outline" 
                       className="w-full justify-start rounded-[2px] h-8 text-xs"

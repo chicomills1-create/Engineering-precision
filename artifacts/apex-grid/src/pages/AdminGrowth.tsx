@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Show } from '@clerk/react';
 import { Redirect } from 'wouter';
 import { AdminNav } from '@/components/layout/AdminNav';
@@ -5,8 +6,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { GrowthOverviewTab } from '@/components/growth/GrowthOverviewTab';
 import { ReferralPartnersTab } from '@/components/growth/ReferralPartnersTab';
 import { PublicOpportunitiesTab } from '@/components/growth/PublicOpportunitiesTab';
+import { OutreachComposerDialog, OutreachSource } from '@/components/outreach/OutreachComposerDialog';
 
 export default function AdminGrowth() {
+  const [outreachSource, setOutreachSource] = useState<OutreachSource | null>(null);
+
   return (
     <>
       <Show when="signed-in">
@@ -37,17 +41,25 @@ export default function AdminGrowth() {
             </TabsList>
 
             <TabsContent value="overview" className="mt-0 outline-none">
-              <GrowthOverviewTab />
+              <GrowthOverviewTab onCreateOutreach={setOutreachSource} />
             </TabsContent>
             
             <TabsContent value="referrals" className="mt-0 outline-none">
-              <ReferralPartnersTab />
+              <ReferralPartnersTab onCreateOutreach={setOutreachSource} />
             </TabsContent>
             
             <TabsContent value="public" className="mt-0 outline-none">
-              <PublicOpportunitiesTab />
+              <PublicOpportunitiesTab onCreateOutreach={setOutreachSource} />
             </TabsContent>
           </Tabs>
+
+          <OutreachComposerDialog
+            open={outreachSource !== null}
+            onOpenChange={(open) => {
+              if (!open) setOutreachSource(null);
+            }}
+            source={outreachSource ?? undefined}
+          />
         </div>
       </Show>
       <Show when="signed-out">

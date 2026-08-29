@@ -2,10 +2,16 @@ import { useGetGrowthDashboard, GrowthPipelineItem, GrowthPipelineItemEntityType
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
-import { Building2, Network, UserPlus, Search, Clock, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { Building2, Network, UserPlus, Search, Clock, AlertTriangle, CheckCircle2, Send } from 'lucide-react';
+import { OutreachSource } from '@/components/outreach/OutreachComposerDialog';
 
-export function GrowthOverviewTab() {
+interface GrowthOverviewTabProps {
+  onCreateOutreach: (source: OutreachSource) => void;
+}
+
+export function GrowthOverviewTab({ onCreateOutreach }: GrowthOverviewTabProps) {
   const { data: dashboard, isLoading, isError } = useGetGrowthDashboard();
 
   if (isLoading) {
@@ -47,6 +53,21 @@ export function GrowthOverviewTab() {
     if (s.includes('lost') || s.includes('former')) return 'bg-muted text-muted-foreground border-border';
     if (s.includes('proposal') || s.includes('qualified')) return 'bg-primary/10 text-primary border-primary/20';
     return 'bg-secondary text-secondary-foreground border-border';
+  };
+
+  const canCreateOutreach = (item: GrowthPipelineItem) => {
+    if (item.entityType === 'lead') return item.stage === 'contacted';
+    if (item.entityType === 'referral_partner') return item.stage === 'active';
+    return item.stage === 'qualified' || item.stage === 'proposal';
+  };
+
+  const createOutreach = (item: GrowthPipelineItem) => {
+    onCreateOutreach({
+      sourceType: item.entityType,
+      sourceId: item.id,
+      label: item.title,
+      detail: item.subtitle,
+    });
   };
 
   return (
@@ -148,12 +169,13 @@ export function GrowthOverviewTab() {
                   <th className="px-4 py-3 font-medium">Stage</th>
                   <th className="px-4 py-3 font-medium">Next Action</th>
                   <th className="px-4 py-3 font-medium text-right">Age</th>
+                  <th className="px-4 py-3 font-medium text-right">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
                 {pipeline.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="px-4 py-12 text-center text-muted-foreground">
+                    <td colSpan={5} className="px-4 py-12 text-center text-muted-foreground">
                       <div className="flex flex-col items-center">
                         <CheckCircle2 className="h-10 w-10 text-muted mb-4" />
                         <p>No active pipeline items.</p>
@@ -202,6 +224,21 @@ export function GrowthOverviewTab() {
                           <span className="font-mono text-foreground/80">{Math.floor(item.responseAgeHours / 24)}d</span>
                           <span className="text-[10px] text-muted-foreground mt-1 tracking-wider uppercase">Active</span>
                         </div>
+                      </td>
+                      <td className="px-4 py-4 align-top text-right whitespace-nowrap">
+                        {canCreateOutreach(item) && (
+                          <Button
+                            type="button"
+                            size="sm"
+                            variant="outline"
+                            className="h-8 rounded-[2px] text-xs"
+                            onClick={() => createOutreach(item)}
+                            data-testid={`button-create-outreach-${item.entityType}-${item.id}`}
+                          >
+                            <Send className="mr-2 h-3.5 w-3.5" />
+                            Create Outreach
+                          </Button>
+                        )}
                       </td>
                     </tr>
                   ))

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -25,22 +25,11 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Plus, MoreHorizontal, Send, ShieldOff, Sparkles, CheckCircle2, MessageSquareReply, AlertTriangle } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { useToast } from '@/hooks/use-toast';
-
-const generateSchema = z.object({
-  prospectId: z.coerce.number().min(1, 'Prospect is required'),
-  sourceType: z.enum(['lead', 'referral_partner', 'public_opportunity']).optional(),
-  sourceId: z.coerce.number().int().positive().optional(),
-}).superRefine((data, ctx) => {
-  if (data.sourceType && !data.sourceId) {
-    ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['sourceId'], message: 'Source record ID is required' });
-  }
-});
-type GenerateFormValues = z.infer<typeof generateSchema>;
+import { MoreHorizontal, Send, ShieldOff, Sparkles, CheckCircle2, MessageSquareReply, AlertTriangle } from 'lucide-react';
+import { OutreachComposerDialog } from '@/components/outreach/OutreachComposerDialog';
 
 const editMessageSchema = z.object({
   subject: z.string().min(1, 'Subject is required'),
@@ -66,17 +55,6 @@ export function MessagesTab() {
   const [isGenerateOpen, setIsGenerateOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState<OutreachMessage | null>(null);
   const [isSuppressOpen, setIsSuppressOpen] = useState(false);
-
-  const generateMutation = useGenerateOutreachDraft({
-    mutation: {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: getListOutreachMessagesQueryKey() });
-        queryClient.invalidateQueries({ queryKey: getGetOutreachDashboardQueryKey() });
-        setIsGenerateOpen(false);
-        toast({ title: 'Drafts generated successfully' });
-      },
-    }
-  });
 
   const updateMutation = useUpdateOutreachMessage({
     mutation: {
@@ -135,37 +113,8 @@ export function MessagesTab() {
     }
   });
 
-  const generateForm = useForm<GenerateFormValues>({
-    resolver: zodResolver(generateSchema),
-    defaultValues: { sourceType: undefined, sourceId: undefined },
-  });
   const editForm = useForm<EditMessageFormValues>({ resolver: zodResolver(editMessageSchema) });
   const suppressForm = useForm<SuppressFormValues>({ resolver: zodResolver(suppressSchema) });
-  const sourcePrefillApplied = useRef(false);
-
-  useEffect(() => {
-    if (sourcePrefillApplied.current) return;
-    const params = new URLSearchParams(window.location.search);
-    const sourceType = params.get('sourceType');
-    const sourceId = Number(params.get('sourceId'));
-    if (sourceType === 'public_opportunity' && Number.isInteger(sourceId) && sourceId > 0) {
-      sourcePrefillApplied.current = true;
-      generateForm.setValue('sourceType', sourceType);
-      generateForm.setValue('sourceId', sourceId);
-      setIsGenerateOpen(true);
-    }
-  }, [generateForm]);
-
-  function onGenerate(data: GenerateFormValues) {
-    generateMutation.mutate({
-      id: data.prospectId,
-      data: {
-        sourceType: data.sourceType,
-        sourceId: data.sourceType ? data.sourceId : undefined,
-      },
-    });
-  }
-
   function onEdit(data: EditMessageFormValues) {
     if (!isEditOpen) return;
     updateMutation.mutate({
@@ -270,94 +219,16 @@ export function MessagesTab() {
             </DialogContent>
           </Dialog>
 
-          <Dialog open={isGenerateOpen} onOpenChange={(open) => {
-            if (!open) generateForm.reset();
-            setIsGenerateOpen(open);
-          }}>
-            <DialogTrigger asChild>
+          <OutreachComposerDialog
+            open={isGenerateOpen}
+            onOpenChange={(open) => setIsGenerateOpen(open)}
+            trigger={(
               <Button data-testid="button-open-generate">
                 <Sparkles className="w-4 h-4 mr-2" />
                 Generate Sequence
               </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Generate Outreach Drafts</DialogTitle>
-              </DialogHeader>
-              <Form {...generateForm}>
-                <form onSubmit={generateForm.handleSubmit(onGenerate)} className="space-y-4" data-testid="form-generate-sequence">
-                  <FormField control={generateForm.control} name="prospectId" render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Select Prospect</FormLabel>
-                      <Select onValueChange={field.onChange}>
-                        <FormControl>
-                          <SelectTrigger data-testid="select-generate-prospect"><SelectValue placeholder="Select..." /></SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {prospects?.filter(p => p.status === 'approved' || p.status === 'review').map(p => (
-                            <SelectItem key={p.id} value={p.id.toString()}>
-                              {p.companyName} {p.contactName ? `(${p.contactName})` : ''}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )} />
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-border pt-4">
-                    <FormField control={generateForm.control} name="sourceType" render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Attribution Source</FormLabel>
-                        <Select
-                          value={field.value ?? 'none'}
-                          onValueChange={(value) => {
-                            field.onChange(value === 'none' ? undefined : value);
-                            if (value === 'none') generateForm.setValue('sourceId', undefined);
-                          }}
-                        >
-                          <FormControl>
-                            <SelectTrigger data-testid="select-generate-source-type">
-                              <SelectValue />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="none">No linked source</SelectItem>
-                            <SelectItem value="lead">Website inquiry</SelectItem>
-                            <SelectItem value="referral_partner">Referral partner</SelectItem>
-                            <SelectItem value="public_opportunity">Public opportunity</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )} />
-                    <FormField control={generateForm.control} name="sourceId" render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Source Record ID</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="number"
-                            min={1}
-                            disabled={!generateForm.watch('sourceType')}
-                            value={field.value ?? ''}
-                            onChange={(event) => field.onChange(event.target.value || undefined)}
-                            placeholder="Record ID"
-                            data-testid="input-generate-source-id"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )} />
-                  </div>
-                  <DialogFooter className="mt-6">
-                    <DialogClose asChild><Button variant="outline" type="button">Cancel</Button></DialogClose>
-                    <Button type="submit" disabled={generateMutation.isPending} data-testid="button-submit-generate">
-                      {generateMutation.isPending ? 'Generating...' : 'Generate AI Drafts'}
-                    </Button>
-                  </DialogFooter>
-                </form>
-              </Form>
-            </DialogContent>
-          </Dialog>
+            )}
+          />
         </div>
       </div>
 
@@ -431,6 +302,11 @@ export function MessagesTab() {
                       </td>
                       <td className="px-4 py-3 align-top">
                         <div className="font-medium truncate max-w-[300px]" title={m.subject}>{m.subject}</div>
+                        {m.sourceType && (
+                          <div className="mt-1 text-xs text-primary/80" data-testid={`message-origin-${m.id}`}>
+                            Origin: {m.sourceLabel || `${m.sourceType.replace('_', ' ')}`}
+                          </div>
+                        )}
                       </td>
                       <td className="px-4 py-3 text-center align-top">
                         <Badge variant={m.status === 'sent' || m.status === 'delivered' ? 'default' : m.status === 'failed' || m.status === 'bounced' ? 'destructive' : m.status === 'replied' ? 'default' : 'secondary'} data-testid={`status-message-${m.id}`}>

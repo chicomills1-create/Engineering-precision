@@ -14,8 +14,9 @@ import { useToast } from '@/hooks/use-toast';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Network, Plus, Search, Building2, Phone, Mail, Globe, Clock, ChevronRight, Edit3, UserPlus } from 'lucide-react';
+import { Network, Plus, Search, Building2, Phone, Mail, Globe, Clock, ChevronRight, Edit3, UserPlus, Send } from 'lucide-react';
 import { format } from 'date-fns';
+import { OutreachSource } from '@/components/outreach/OutreachComposerDialog';
 
 const formSchema = z.object({
   companyName: z.string().min(1, "Company name is required").max(200),
@@ -29,7 +30,11 @@ const formSchema = z.object({
   nextFollowUpAt: z.string().optional().or(z.literal('')),
 });
 
-export function ReferralPartnersTab() {
+interface ReferralPartnersTabProps {
+  onCreateOutreach: (source: OutreachSource) => void;
+}
+
+export function ReferralPartnersTab({ onCreateOutreach }: ReferralPartnersTabProps) {
   const { data: partners, isLoading } = useListReferralPartners();
   const queryClient = useQueryClient();
   const { toast } = useToast();
@@ -223,6 +228,23 @@ export function ReferralPartnersTab() {
                   <Clock className="h-3.5 w-3.5 text-primary" />
                   <span className="text-primary font-medium">Follow up: {format(new Date(partner.nextFollowUpAt), 'MMM d, yyyy')}</span>
                 </div>
+              )}
+              {partner.relationshipStatus === 'active' && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="mt-4 w-full rounded-[2px]"
+                  onClick={() => onCreateOutreach({
+                    sourceType: 'referral_partner',
+                    sourceId: partner.id,
+                    label: partner.companyName,
+                    detail: partner.contactName,
+                  })}
+                  data-testid={`button-create-outreach-referral_partner-${partner.id}`}
+                >
+                  <Send className="mr-2 h-4 w-4" />
+                  Create Outreach
+                </Button>
               )}
             </CardContent>
           </Card>
