@@ -8,7 +8,7 @@
     "contactTitle": "Vice President",
     "personSourceUrl": "https://www.linkedin.com/in/kevin-freis-8b9935112",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "crosspointcontracting.com",
@@ -18,8 +18,8 @@
     "contactName": "Clifford Zillweger",
     "contactTitle": "Company Owner",
     "personSourceUrl": "https://www.linkedin.com/in/cliffordzillweger",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "publicEmail": "null",
+    "emailStatus": "published_on_official_site"
   },
   {
     "companyDomain": "crosspointcontracting.com",
@@ -30,7 +30,7 @@
     "contactTitle": "Head Of Stratigic Partnerships",
     "personSourceUrl": "https://www.linkedin.com/in/bryce-zillweger-b8b0742bb",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "bjerkbuilders.com",
@@ -74,7 +74,7 @@
     "contactTitle": "President",
     "personSourceUrl": "https://www.linkedin.com/in/chris-bridge-329362198",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "fransconstruction.com",
@@ -140,7 +140,7 @@
     "contactTitle": "Owner",
     "personSourceUrl": "https://www.linkedin.com/in/janelle-cunningham-aa36194",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "solidangleinc.com",
@@ -151,7 +151,7 @@
     "contactTitle": "President",
     "personSourceUrl": "https://www.linkedin.com/in/clint-caldwell-5643b518b",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "official_site_unavailable_public_fallback"
   },
   {
     "companyDomain": "solidangleinc.com",
@@ -206,7 +206,7 @@
     "contactTitle": "Company Owner",
     "personSourceUrl": "https://www.linkedin.com/in/mike-marden-050783270",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "personal_lookup_no_result_public_fallback"
   },
   {
     "companyDomain": "rwiconstruction.com",
@@ -249,8 +249,8 @@
     "contactName": "Mike Marden",
     "contactTitle": "Company Owner",
     "personSourceUrl": "https://www.linkedin.com/in/mikemarden",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "publicEmail": "mike@wds.build",
+    "emailStatus": "published_on_official_site"
   },
   {
     "companyDomain": "salustroarchitects.com",
@@ -283,7 +283,7 @@
     "contactTitle": "President",
     "personSourceUrl": "https://www.linkedin.com/in/erikpetersonaia",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "architectsup.com",
@@ -294,7 +294,7 @@
     "contactTitle": "Owner",
     "personSourceUrl": "https://www.linkedin.com/in/justin-gregonis-aia-ncarb-leed-ga-32793011",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "architectsup.com",
@@ -305,7 +305,7 @@
     "contactTitle": "President",
     "personSourceUrl": "https://www.linkedin.com/in/alan-jorgensen-01a23217",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "architectsup.com",
@@ -404,7 +404,7 @@
     "contactTitle": "Owner",
     "personSourceUrl": "https://www.linkedin.com/in/dominic-ballesteros-40a31929",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "cokerconstruction.com",
@@ -415,7 +415,7 @@
     "contactTitle": "Independent Business Owner",
     "personSourceUrl": "https://www.linkedin.com/in/jacob-coker-2112a821",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "personal_lookup_no_result_public_fallback"
   },
   {
     "companyDomain": "cokerconstruction.com",
@@ -426,7 +426,7 @@
     "contactTitle": "CEO",
     "personSourceUrl": "https://www.linkedin.com/in/mark-coker-81178698",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "cavecreekcontracting.com",
@@ -437,7 +437,7 @@
     "contactTitle": "Business Owner",
     "personSourceUrl": "https://www.linkedin.com/in/gavin-smith-314a4119",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "personal_lookup_pending_public_fallback"
   },
   {
     "companyDomain": "arizona-experts.com",
@@ -459,7 +459,7 @@
     "contactTitle": "Company Owner",
     "personSourceUrl": "https://www.linkedin.com/in/francisco-javier-rodriguez-976068a8",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "official_site_unavailable_public_fallback"
   },
   {
     "companyDomain": "rodriguezgeneralcontractingllc.com",
@@ -481,7 +481,7 @@
     "contactTitle": "President",
     "personSourceUrl": "https://www.linkedin.com/in/multiple-builders-40944a176",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "bscontractorsllc.com",
@@ -503,7 +503,7 @@
     "contactTitle": "President",
     "personSourceUrl": "https://www.linkedin.com/in/nicholas-sommer-99496726b",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "nobleconstructionco.com",
@@ -514,7 +514,7 @@
     "contactTitle": "Regional Vice President Operations Western Canada",
     "personSourceUrl": "https://www.linkedin.com/in/jim-leonard-717296aa",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "freedomconstructionanddesign.com",
@@ -524,8 +524,8 @@
     "contactName": "Melissa Obermeyer",
     "contactTitle": "Chief Executive Officer",
     "personSourceUrl": "https://www.linkedin.com/in/melissa-obermeyer-797a28254",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "publicEmail": "null",
+    "emailStatus": "published_on_official_site"
   },
   {
     "companyDomain": "phoenicianconstruction.com",
@@ -536,7 +536,7 @@
     "contactTitle": "Owner",
     "personSourceUrl": "https://www.linkedin.com/in/ross-defiel-22264024",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "jwlconstruction.co",
@@ -547,7 +547,7 @@
     "contactTitle": "president",
     "personSourceUrl": "https://www.linkedin.com/in/john-lockard-a659b41a",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "dbmcaz.com",
@@ -558,7 +558,7 @@
     "contactTitle": "President CEO",
     "personSourceUrl": "https://www.linkedin.com/in/eneas-kane-39552236",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "dbmcaz.com",
@@ -591,7 +591,7 @@
     "contactTitle": "Director of Preconstruction",
     "personSourceUrl": "https://www.linkedin.com/in/todd-steffen-1235446",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "coreconstruction.com",
@@ -613,7 +613,7 @@
     "contactTitle": "Executive Vice President",
     "personSourceUrl": "https://www.linkedin.com/in/andrew-geier-184040b5",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "laytonconstruction.com",
@@ -646,7 +646,7 @@
     "contactTitle": "Director of Business Development",
     "personSourceUrl": "https://www.linkedin.com/in/mina-wassef1",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "orascom.com",
@@ -668,7 +668,7 @@
     "contactTitle": "Senior Vice President, Hyperscale",
     "personSourceUrl": "https://www.linkedin.com/in/stacymedeiros",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "aligneddc.com",

@@ -10,7 +10,20 @@
   },
   "counts": {
     "personal": 190,
-    "public": 4,
-    "total": 194
+    "public": 8,
+    "total": 198
+  },
+  "lastFreePublicPass": {
+    "sitesChecked": 10,
+    "publicEmailsAdded": 0,
+    "unresolvedMovedToPublic": 10,
+    "creditsUsed": 0
+  },
+  "lastPersonalPass": {
+    "officialSitesChecked": 10,
+    "freeOfficialEmailsSaved": 0,
+    "paidLookups": 1,
+    "paidEmailsReturned": 0,
+    "verifiedPersonalAdded": 0
   }
 }
