@@ -73,7 +73,7 @@ export const outreachResearchSchedulesTable = pgTable("outreach_research_schedul
   enabled: boolean("enabled").notNull().default(false),
   timezone: text("timezone").notNull().default("America/Phoenix"),
   localHour: integer("local_hour").notNull().default(8),
-  targetCount: integer("target_count").notNull().default(10),
+  targetCount: integer("target_count").notNull().default(100),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
 }, (table) => [

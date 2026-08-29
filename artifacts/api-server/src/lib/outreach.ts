@@ -37,7 +37,6 @@ export function isDefinitiveSendGridRejection(status: number): boolean {
 }
 
 const INITIAL_RAMP_DAILY_LIMIT = 100;
-const RAMPED_DAILY_LIMIT = 250;
 const INITIAL_RAMP_ACTIVE_DAYS = 3;
 
 export class DailySendLimitError extends Error {
@@ -76,7 +75,7 @@ export function getOutreachDailyLimit(configuredLimit: number | undefined, activ
   const limit = configuredLimit ?? INITIAL_RAMP_DAILY_LIMIT;
   return activeSendDays < INITIAL_RAMP_ACTIVE_DAYS
     ? Math.min(limit, INITIAL_RAMP_DAILY_LIMIT)
-    : Math.max(limit, RAMPED_DAILY_LIMIT);
+    : limit;
 }
 
 async function getCampaignActiveSendDays(campaignId: number): Promise<number> {

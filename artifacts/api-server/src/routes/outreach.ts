@@ -40,6 +40,7 @@ import { suppressOutreachEmail } from "../lib/outreachSuppression";
 import { discoverPublicProspects } from "../lib/publicResearch";
 import { claimOutreachMessageForSending, getOutreachAutomationStatus } from "../lib/outreachWorker";
 import {
+  MAX_DAILY_RESEARCH_PROSPECTS,
   OUTREACH_RESEARCH_LOCAL_HOUR,
   OUTREACH_RESEARCH_TIMEZONE,
 } from "../lib/outreachResearchScheduler";
@@ -232,6 +233,10 @@ router.put("/outreach/campaigns/:id/research-schedule", requireAuth, async (req,
     res.status(404).json({ error: "Campaign not found" });
     return;
   }
+  const targetCount = Math.min(
+    MAX_DAILY_RESEARCH_PROSPECTS,
+    Math.max(1, input.data.targetCount ?? campaign.dailyLimit),
+  );
   const [schedule] = await db.transaction(async (tx) => {
     if (input.data.enabled) {
       await tx.update(outreachResearchSchedulesTable).set({
@@ -244,14 +249,14 @@ router.put("/outreach/campaigns/:id/research-schedule", requireAuth, async (req,
       enabled: input.data.enabled,
       timezone: OUTREACH_RESEARCH_TIMEZONE,
       localHour: OUTREACH_RESEARCH_LOCAL_HOUR,
-      targetCount: Math.min(10, input.data.targetCount ?? 10),
+      targetCount,
     }).onConflictDoUpdate({
       target: outreachResearchSchedulesTable.campaignId,
       set: {
         enabled: input.data.enabled,
         timezone: OUTREACH_RESEARCH_TIMEZONE,
         localHour: OUTREACH_RESEARCH_LOCAL_HOUR,
-        targetCount: Math.min(10, input.data.targetCount ?? 10),
+        targetCount,
         updatedAt: new Date(),
       },
     }).returning();

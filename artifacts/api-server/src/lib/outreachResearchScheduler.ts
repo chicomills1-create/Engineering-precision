@@ -19,7 +19,7 @@ import {
 
 export const OUTREACH_RESEARCH_TIMEZONE = "America/Phoenix";
 export const OUTREACH_RESEARCH_LOCAL_HOUR = 8;
-export const MAX_DAILY_RESEARCH_PROSPECTS = 10;
+export const MAX_DAILY_RESEARCH_PROSPECTS = 100;
 
 const DATE_FORMATTER = new Intl.DateTimeFormat("en-CA", {
   timeZone: OUTREACH_RESEARCH_TIMEZONE,
@@ -49,6 +49,13 @@ export function isResearchScheduleDue(
 ): boolean {
   if (!schedule.enabled || campaign.status !== "active") return false;
   return getPhoenixResearchWindow(now).localHour >= OUTREACH_RESEARCH_LOCAL_HOUR;
+}
+
+export function getDailyResearchTarget(scheduleTarget: number, campaignLimit: number): number {
+  return Math.min(
+    MAX_DAILY_RESEARCH_PROSPECTS,
+    Math.max(1, scheduleTarget, campaignLimit),
+  );
 }
 
 function validStates(states: string[]): ResearchState[] {
@@ -101,10 +108,7 @@ async function completeScheduledResearch(
         .from(prospectsTable)
         .where(inArray(prospectsTable.dedupeKey, candidates.map((candidate) => candidate.dedupeKey)));
     const existing = new Set(existingRows.map((row) => row.dedupeKey));
-    const targetCount = Math.min(
-      MAX_DAILY_RESEARCH_PROSPECTS,
-      Math.max(1, schedule.targetCount),
-    );
+    const targetCount = getDailyResearchTarget(schedule.targetCount, campaign.dailyLimit);
     const newCandidates = candidates
       .filter((candidate) => !existing.has(candidate.dedupeKey))
       .slice(0, targetCount);

@@ -40,7 +40,7 @@ export function DashboardStats() {
         data-testid="status-outreach-automation"
       >
         <span className="font-medium">
-          {stats.automationReady ? 'Automatic follow-ups armed.' : 'Controlled manual sending is active.'}
+          {stats.automationReady ? 'Scheduled outreach is armed.' : 'Controlled manual sending is active.'}
         </span>{' '}
         {!stats.automationReady && (
           <span>
@@ -70,7 +70,9 @@ export function DashboardStats() {
             : 'Morning research is waiting for production enablement.'}
         </span>{' '}
         <span>
-          It only creates review records; approval and sending stay manual.
+          {stats.automationReady
+            ? ' Research creates review records; approved messages send automatically at their scheduled time.'
+            : ' It only creates review records; approval and sending stay manual.'}
         </span>
       </div>
     </div>

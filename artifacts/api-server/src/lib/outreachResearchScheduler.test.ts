@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
+  getDailyResearchTarget,
   getPhoenixResearchWindow,
   isResearchScheduleDue,
   MAX_DAILY_RESEARCH_PROSPECTS,
@@ -41,6 +42,9 @@ test("runs only enabled schedules on active campaigns after the local hour", () 
   assert.equal(isResearchScheduleDue(schedule as any, { status: "paused" } as any, atEight), false);
 });
 
-test("caps daily scheduled research at ten prospects", () => {
-  assert.equal(MAX_DAILY_RESEARCH_PROSPECTS, 10);
+test("caps daily scheduled research at one hundred prospects", () => {
+  assert.equal(MAX_DAILY_RESEARCH_PROSPECTS, 100);
+  assert.equal(getDailyResearchTarget(10, 100), 100);
+  assert.equal(getDailyResearchTarget(100, 500), 100);
+  assert.equal(getDailyResearchTarget(5, 5), 5);
 });

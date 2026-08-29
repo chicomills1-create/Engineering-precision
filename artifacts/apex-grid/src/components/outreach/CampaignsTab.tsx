@@ -124,7 +124,7 @@ export function CampaignsTab() {
       data: {
         enabled: !schedule?.enabled,
         localHour: 8,
-        targetCount: Math.min(10, campaign.dailyLimit),
+        targetCount: Math.min(100, campaign.dailyLimit),
       },
     });
   }

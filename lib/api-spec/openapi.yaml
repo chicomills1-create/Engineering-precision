@@ -1551,7 +1551,7 @@ components:
         enabled: { type: boolean }
         timezone: { type: string, enum: [America/Phoenix] }
         localHour: { type: number, enum: [8] }
-        targetCount: { type: number, minimum: 1, maximum: 10 }
+        targetCount: { type: number, minimum: 1, maximum: 100 }
         createdAt: { type: string }
         updatedAt: { type: string }
         lastRunDate: { type: [string, "null"] }
@@ -1566,7 +1566,7 @@ components:
       properties:
         enabled: { type: boolean }
         localHour: { type: number, enum: [8], default: 8 }
-        targetCount: { type: number, minimum: 1, maximum: 10, default: 10 }
+        targetCount: { type: number, minimum: 1, maximum: 100, default: 100 }
     ResearchRunResponse:
       type: object
       required: [run, prospects]
