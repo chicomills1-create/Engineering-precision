@@ -2407,5 +2407,70 @@
     "contactSourceUrl": "https://www.linkedin.com/in/brian-bombardieri-718bb03b",
     "sourceUrl": "https://www.linkedin.com/in/brian-bombardieri-718bb03b",
     "needSignals": "Public evidence identifies this Arizona commercial construction firm and names this decision-maker in a relevant role."
+  },
+  {
+    "dedupeKey": "verified-2026-08-29-dbcarchitectbuilder-com",
+    "companyName": "DesignBuild Collaborative",
+    "website": "http://www.dbcarchitectbuilder.com/",
+    "city": "Arizona",
+    "audience": "builder",
+    "contactName": "Paul Weiner",
+    "contactTitle": "Architect",
+    "contactEmail": "pweiner@dbcarchitectbuilder.com",
+    "contactSourceUrl": "http://www.dbcarchitectbuilder.com/",
+    "sourceUrl": "http://www.dbcarchitectbuilder.com/",
+    "needSignals": "The firm's official website identifies this person in a relevant senior role; the business email is verified and domain-matched."
+  },
+  {
+    "dedupeKey": "verified-2026-08-29-art-team-com",
+    "companyName": "ART Architects",
+    "website": "http://www.art-team.com/",
+    "city": "Arizona",
+    "audience": "architect",
+    "contactName": "Doug McCord",
+    "contactTitle": "Principal",
+    "contactEmail": "dmccord@art-team.com",
+    "contactSourceUrl": "http://www.art-team.com/",
+    "sourceUrl": "http://www.art-team.com/",
+    "needSignals": "The firm's official website identifies this person in a relevant senior role; the business email is verified and domain-matched."
+  },
+  {
+    "dedupeKey": "verified-2026-08-29-cdg-architects-com",
+    "companyName": "CDG Architects",
+    "website": "http://www.cdg-architects.com/",
+    "city": "Arizona",
+    "audience": "architect",
+    "contactName": "Frank Mascia",
+    "contactTitle": "FAIA",
+    "contactEmail": "frank@cdg-architects.com",
+    "contactSourceUrl": "http://www.cdg-architects.com/",
+    "sourceUrl": "http://www.cdg-architects.com/",
+    "needSignals": "The firm's official website identifies this person in a relevant senior role; the business email is verified and domain-matched."
+  },
+  {
+    "dedupeKey": "verified-2026-08-29-cornellarchitecture-com",
+    "companyName": "Cornell Architecture",
+    "website": "http://www.cornellarchitecture.com/",
+    "city": "Arizona",
+    "audience": "architect",
+    "contactName": "Greg Cornell",
+    "contactTitle": "Architect",
+    "contactEmail": "greg@cornellarchitecture.com",
+    "contactSourceUrl": "http://www.cornellarchitecture.com/",
+    "sourceUrl": "http://www.cornellarchitecture.com/",
+    "needSignals": "The firm's official website identifies this person in a relevant senior role; the business email is verified and domain-matched."
+  },
+  {
+    "dedupeKey": "verified-2026-08-29-designlinkarchitecture-com",
+    "companyName": "Design Link Architecture and Planning",
+    "website": "http://www.designlinkarchitecture.com/",
+    "city": "Arizona",
+    "audience": "architect",
+    "contactName": "Debra Weisberg",
+    "contactTitle": "Registered Architect and founding partner",
+    "contactEmail": "debra@designlinkarchitecture.com",
+    "contactSourceUrl": "http://www.designlinkarchitecture.com/",
+    "sourceUrl": "http://www.designlinkarchitecture.com/",
+    "needSignals": "The firm's official website identifies this person in a relevant senior role; the business email is verified and domain-matched."
   }
 ]

@@ -1,0 +1,618 @@
+[
+  {
+    "name": "180 Degrees Design + Build",
+    "website": "",
+    "audience": "builder",
+    "sourceUrl": "https://aia-arizona.org/architect/",
+    "coverageStatus": "domain_needs_public_lookup"
+  },
+  {
+    "name": "4Line Studio",
+    "website": "",
+    "audience": "architect",
+    "sourceUrl": "https://aia-arizona.org/architect/",
+    "coverageStatus": "domain_needs_public_lookup"
+  },
+  {
+    "name": "A-I-R (Architecture-Infrastructure-Research, Inc.)",
+    "website": "",
+    "audience": "architect",
+    "sourceUrl": "https://aia-arizona.org/architect/",
+    "coverageStatus": "domain_needs_public_lookup"
+  },
+  {
+    "name": "Adaptive Architects",
+    "website": "",
+    "audience": "architect",
+    "sourceUrl": "https://aia-arizona.org/architect/",
+    "coverageStatus": "domain_needs_public_lookup"
+  },
+  {
+    "name": "ADM Group Inc.",
+    "website": "",
+    "audience": "architect",
+    "sourceUrl": "https://aia-arizona.org/architect/",
+    "coverageStatus": "domain_needs_public_lookup"
+  },
+  {
+    "name": "Allen+Philp Partners",
+    "website": "",
+    "audience": "architect",
+    "sourceUrl": "https://aia-arizona.org/architect/",
+    "coverageStatus": "domain_needs_public_lookup"
+  },
+  {
+    "name": "180 Degrees Design + Build",
+    "website": "https://www.180degreesinc.com/",
+    "audience": "builder",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "named_person_unresolved"
+  },
+  {
+    "name": "Archicon L. C.",
+    "website": "http://www.archicon.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "named_person_unresolved"
+  },
+  {
+    "name": "Architekton",
+    "website": "http://www.architekton.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "named_person_unresolved"
+  },
+  {
+    "name": "Armin Widmann",
+    "website": "http://www.arminwidmann.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "named_person_email_unresolved"
+  },
+  {
+    "name": "Arrington Watkins Architects",
+    "website": "http://www.awarch.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "ART Architects",
+    "website": "http://www.art-team.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "named_person_email_unresolved"
+  },
+  {
+    "name": "CCBG Architects",
+    "website": "http://ccbgarchitects.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "named_person_unresolved"
+  },
+  {
+    "name": "CDG Architects",
+    "website": "http://www.cdg-architects.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "named_person_email_unresolved"
+  },
+  {
+    "name": "Coe & Van Loo Consultants",
+    "website": "http://www.cvlci.com/",
+    "audience": "unknown",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Cornell Architecture",
+    "website": "http://www.cornellarchitecture.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "named_person_email_unresolved"
+  },
+  {
+    "name": "Cuningham Hamilton Quiter, P.A.",
+    "website": "https://cuningham.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "named_person_unresolved"
+  },
+  {
+    "name": "DesignBuild Collaborative",
+    "website": "http://www.dbcarchitectbuilder.com/",
+    "audience": "builder",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "named_person_email_unresolved"
+  },
+  {
+    "name": "Design Link Architecture and Planning",
+    "website": "http://www.designlinkarchitecture.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Design Workshop",
+    "website": "http://www.designworkshop.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Devenney Group Limited",
+    "website": "https://devenneygroup.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Dick & Fritsche Design Group",
+    "website": "http://www.dfdg.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "DLR Group",
+    "website": "http://www.dlrgroup.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Eden Architects",
+    "website": "http://www.edenarchitects.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "HNTB Architecture",
+    "website": "http://www.hntb.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Joel Westervelt Architect",
+    "website": "http://www.joelwesterveltarchitect.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "John T. Pela and Associates",
+    "website": "http://www.jpelaarchitect.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Kenneth C. Bartels & Associates",
+    "website": "http://www.kcba-arch.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Kevin B Howard Architects",
+    "website": "http://www.kbharchitect.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Leo A Daly",
+    "website": "https://leoadaly.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Michael Rust – Architect",
+    "website": "http://www.rust-architect.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Michael Wilson Kelly – Architects",
+    "website": "http://www.mwkarch.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Orcutt/Winslow Partnership",
+    "website": "http://www.owp.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Ravenscroft Architects",
+    "website": "http://www.ravenscroftarchitectsltd.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "SDB",
+    "website": "https://sdb.com/",
+    "audience": "builder",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Soloway Designs",
+    "website": "http://www.soloway-designs.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Sonoran Design Group",
+    "website": "http://www.sonorandesigngroup.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "SpaceLine Design",
+    "website": "http://sldarc.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Stickley Design Group Architects",
+    "website": "http://www.stickleydesign.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Swaback Partners",
+    "website": "https://www.swaback.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Swaim Associates",
+    "website": "https://swaimaia.com/",
+    "audience": "architect",
+    "sourceUrl": "https://builderszone.com/directory/architecture/",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Baxley Architectural and Consulting",
+    "website": "http://www.bax-az.com/",
+    "audience": "architect",
+    "sourceUrl": "https://members.hbaca.org/member-directory/Search/architects-277767",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "BSB Design, Inc.",
+    "website": "http://www.bsbdesign.com/",
+    "audience": "architect",
+    "sourceUrl": "https://members.hbaca.org/member-directory/Search/architects-277767",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Felten Group, Inc.",
+    "website": "http://www.feltengroup.com/",
+    "audience": "architect",
+    "sourceUrl": "https://members.hbaca.org/member-directory/Search/architects-277767",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "J.Cor Architecture",
+    "website": "http://www.jcor-architecture.com/",
+    "audience": "architect",
+    "sourceUrl": "https://members.hbaca.org/member-directory/Search/architects-277767",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "KTGY Architecture + Planning",
+    "website": "http://www.ktgy.com/",
+    "audience": "architect",
+    "sourceUrl": "https://members.hbaca.org/member-directory/Search/architects-277767",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Linderoth Associates Architects, Inc.",
+    "website": "http://www.linderoth.com/",
+    "audience": "architect",
+    "sourceUrl": "https://members.hbaca.org/member-directory/Search/architects-277767",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "PBLA Surveying Inc",
+    "website": "http://pbla.biz/",
+    "audience": "architect",
+    "sourceUrl": "https://members.hbaca.org/member-directory/Search/architects-277767",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Alala Brothers Wall Partitions LLC",
+    "website": "https://network.procore.com/p/alala-brothers-wall-partitions-llc-buckeye",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "MTN INC AZ",
+    "website": "https://network.procore.com/p/mtn-inc-az-gilbert",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Luxelocker",
+    "website": "https://network.procore.com/p/luxelocker-lake-havasu-city",
+    "audience": "unknown",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Empire Power Systems",
+    "website": "https://network.procore.com/p/empire-power-systems-mesa",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Premise One",
+    "website": "https://network.procore.com/p/premise-one-tempe-1",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "DBM",
+    "website": "https://network.procore.com/p/dbm-peoria",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Beyond Security LLC",
+    "website": "https://network.procore.com/p/beyond-security-llc-scottsdale",
+    "audience": "unknown",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Horizon",
+    "website": "https://network.procore.com/p/horizon-phoenix",
+    "audience": "unknown",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Climatec",
+    "website": "https://network.procore.com/p/climatec-phoenix-1",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Manning Group",
+    "website": "https://network.procore.com/p/manning-group-phoenix",
+    "audience": "unknown",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Desert Road Plumbing",
+    "website": "https://network.procore.com/p/desert-road-plumbing-goodyear-1",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Insure Compliance",
+    "website": "https://network.procore.com/p/insure-compliance-mesa",
+    "audience": "unknown",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "L3 Inspection Services",
+    "website": "https://network.procore.com/p/l3-inspection-services-goodyear",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "FASTSIGNS",
+    "website": "https://network.procore.com/p/fastsigns-tucson",
+    "audience": "unknown",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "L and L Kitchen Designs",
+    "website": "https://network.procore.com/p/l-and-l-kitchen-designs-phoenix",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "AWP Safety",
+    "website": "https://network.procore.com/p/awp-safety-phoenix",
+    "audience": "unknown",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Royal B Excavation & Grading LLC",
+    "website": "https://network.procore.com/p/royal-b-excavation-and-grading-llc-queen-creek",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Tp acoustics",
+    "website": "https://network.procore.com/p/tp-acoustics-phoenix-2",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Vive Development",
+    "website": "https://network.procore.com/p/vive-development-phoenix",
+    "audience": "unknown",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Foundation Building Materials",
+    "website": "https://network.procore.com/p/foundation-building-materials-phoenix",
+    "audience": "unknown",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Heka Demo LLC",
+    "website": "https://network.procore.com/p/heka-demo-llc-phoenix",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Print Smart",
+    "website": "https://network.procore.com/p/print-smart-phoenix",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Alliance Lumber",
+    "website": "https://network.procore.com/p/alliance-lumber-mesa",
+    "audience": "unknown",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Acme Towing",
+    "website": "https://network.procore.com/p/acme-towing-phoenix",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Duck Press Media Solutions",
+    "website": "https://network.procore.com/p/duck-press-media-solutions-tucson",
+    "audience": "unknown",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Martens Development Company",
+    "website": "https://network.procore.com/p/martens-development-company-scottsdale",
+    "audience": "unknown",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "P W Feenstra Construction Inc",
+    "website": "https://network.procore.com/p/p-w-feenstra-construction-inc-queen-creek",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Tori Nichols",
+    "website": "https://network.procore.com/p/tori-nichols-chandler",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "A-1 Desert Electric",
+    "website": "https://network.procore.com/p/a-1-desert-electric-goodyear",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "JD Sun mechanical",
+    "website": "https://network.procore.com/p/jd-sun-mechanical-phoenix",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "J & M",
+    "website": "https://network.procore.com/p/j-and-m-mesa",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Oranje Commercial Janitorial in Phoenix",
+    "website": "https://network.procore.com/p/oranje-commercial-janitorial-in-phoenix-phoenix",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "southwest striping & sealcoating",
+    "website": "https://network.procore.com/p/southwest-striping-and-sealcoating-yuma",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Jbc Mechanical llc",
+    "website": "https://network.procore.com/p/jbc-mechanical-llc-chandler",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Leona Group Schools",
+    "website": "https://network.procore.com/p/leona-group-schools-phoenix",
+    "audience": "unknown",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Green Valley Recreation, Inc.",
+    "website": "https://network.procore.com/p/green-valley-recreation-inc-green-valley",
+    "audience": "unknown",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Pest Control Services",
+    "website": "https://network.procore.com/p/bucksworth-home-services-phoenix",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Larson Excavating",
+    "website": "https://network.procore.com/p/larson-excavating-cave-creek",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "The Landscape Broker LLC",
+    "website": "https://network.procore.com/p/the-landscape-broker-llc-phoenix",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  },
+  {
+    "name": "Starz, LLC DBA Standard Restaurant Supply",
+    "website": "https://network.procore.com/p/starz-llc-dba-standard-restaurant-supply-mesa",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
+    "coverageStatus": "domain_found"
+  }
+]
