@@ -13,6 +13,7 @@ export function AdminNav() {
     { href: '/admin/seo', label: 'SEO' },
     { href: '/admin/outreach', label: 'Email Approvals' },
     { href: '/admin/growth', label: 'Growth & Pipeline' },
+    { href: '/admin/reviews', label: 'Review Generator' },
     { href: '/admin/payroll', label: 'Payroll' },
   ];
 

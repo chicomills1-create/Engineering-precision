@@ -3,6 +3,7 @@ import AdminSeo from '@/pages/AdminSeo';
 import AdminOutreach from '@/pages/AdminOutreach';
 import AdminGrowth from '@/pages/AdminGrowth';
 import AdminPayroll from '@/pages/AdminPayroll';
+import AdminReviews from '@/pages/AdminReviews';
 import { useQueryClient } from '@tanstack/react-query';
 import { useLocation } from 'wouter';
 import { useEffect, useRef } from 'react';
@@ -108,7 +109,7 @@ function SignUpPage() {
   );
 }
 
-export type ClerkAreaPage = 'admin' | 'admin-seo' | 'admin-outreach' | 'admin-growth' | 'admin-payroll' | 'sign-in' | 'sign-up';
+export type ClerkAreaPage = 'admin' | 'admin-seo' | 'admin-outreach' | 'admin-growth' | 'admin-payroll' | 'admin-reviews' | 'sign-in' | 'sign-up';
 
 export default function ClerkArea({ page }: { page: ClerkAreaPage }) {
   const [, setLocation] = useLocation();
@@ -143,6 +144,7 @@ export default function ClerkArea({ page }: { page: ClerkAreaPage }) {
       {page === 'admin-outreach' && <AdminOutreach />}
       {page === 'admin-growth' && <AdminGrowth />}
       {page === 'admin-payroll' && <AdminPayroll />}
+      {page === 'admin-reviews' && <AdminReviews />}
       {page === 'sign-in' && <SignInPage />}
       {page === 'sign-up' && <SignUpPage />}
     </ClerkProvider>
