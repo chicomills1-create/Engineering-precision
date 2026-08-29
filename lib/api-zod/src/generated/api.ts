@@ -571,7 +571,9 @@ export const GetOutreachDashboardResponse = zod.object({
   "deliveryEventsReady": zod.boolean(),
   "replyWebhookReady": zod.boolean(),
   "automationEnabled": zod.boolean(),
-  "automationReady": zod.boolean()
+  "automationReady": zod.boolean(),
+  "researchAutomationEnabled": zod.boolean(),
+  "researchAutomationReady": zod.boolean()
 })
 
 
@@ -585,6 +587,7 @@ export const listProspectsResponseNeedScoreMax = 100;
 
 export const ListProspectsResponseItem = zod.object({
   "id": zod.number(),
+  "campaignId": zod.number().nullable(),
   "companyName": zod.string(),
   "website": zod.string().nullish(),
   "city": zod.string(),
@@ -654,6 +657,7 @@ export const createProspectResponseNeedScoreMax = 100;
 
 export const CreateProspectResponse = zod.object({
   "id": zod.number(),
+  "campaignId": zod.number().nullable(),
   "companyName": zod.string(),
   "website": zod.string().nullish(),
   "city": zod.string(),
@@ -726,6 +730,7 @@ export const updateProspectResponseNeedScoreMax = 100;
 
 export const UpdateProspectResponse = zod.object({
   "id": zod.number(),
+  "campaignId": zod.number().nullable(),
   "companyName": zod.string(),
   "website": zod.string().nullish(),
   "city": zod.string(),
@@ -793,6 +798,7 @@ export const markOutreachProspectRepliedResponseNeedScoreMax = 100;
 
 export const MarkOutreachProspectRepliedResponse = zod.object({
   "id": zod.number(),
+  "campaignId": zod.number().nullable(),
   "companyName": zod.string(),
   "website": zod.string().nullish(),
   "city": zod.string(),
@@ -907,6 +913,67 @@ export const UpdateCampaignResponse = zod.object({
   "bodyTemplate": zod.string().nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
+})
+
+
+export const listOutreachResearchSchedulesResponseTargetCountMax = 10;
+
+
+
+export const ListOutreachResearchSchedulesResponseItem = zod.object({
+  "id": zod.number(),
+  "campaignId": zod.number(),
+  "enabled": zod.boolean(),
+  "timezone": zod.enum(['America/Phoenix']),
+  "localHour": zod.literal(8),
+  "targetCount": zod.number().min(1).max(listOutreachResearchSchedulesResponseTargetCountMax),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string(),
+  "lastRunDate": zod.string().nullable(),
+  "lastRunStatus": zod.union([zod.literal('running'),zod.literal('completed'),zod.literal('failed'),zod.literal(null)]).nullable(),
+  "lastRunResultCount": zod.number().nullable(),
+  "lastRunSkippedCount": zod.number().nullable(),
+  "lastRunError": zod.string().nullable(),
+  "lastRunCompletedAt": zod.string().nullable()
+})
+export const ListOutreachResearchSchedulesResponse = zod.array(ListOutreachResearchSchedulesResponseItem)
+
+
+export const UpdateOutreachResearchScheduleParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const updateOutreachResearchScheduleBodyLocalHourDefault = 8;
+export const updateOutreachResearchScheduleBodyTargetCountDefault = 10;
+export const updateOutreachResearchScheduleBodyTargetCountMax = 10;
+
+
+
+export const UpdateOutreachResearchScheduleBody = zod.object({
+  "enabled": zod.boolean(),
+  "localHour": zod.literal(8).default(updateOutreachResearchScheduleBodyLocalHourDefault),
+  "targetCount": zod.number().min(1).max(updateOutreachResearchScheduleBodyTargetCountMax).default(updateOutreachResearchScheduleBodyTargetCountDefault)
+})
+
+export const updateOutreachResearchScheduleResponseTargetCountMax = 10;
+
+
+
+export const UpdateOutreachResearchScheduleResponse = zod.object({
+  "id": zod.number(),
+  "campaignId": zod.number(),
+  "enabled": zod.boolean(),
+  "timezone": zod.enum(['America/Phoenix']),
+  "localHour": zod.literal(8),
+  "targetCount": zod.number().min(1).max(updateOutreachResearchScheduleResponseTargetCountMax),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string(),
+  "lastRunDate": zod.string().nullable(),
+  "lastRunStatus": zod.union([zod.literal('running'),zod.literal('completed'),zod.literal('failed'),zod.literal(null)]).nullable(),
+  "lastRunResultCount": zod.number().nullable(),
+  "lastRunSkippedCount": zod.number().nullable(),
+  "lastRunError": zod.string().nullable(),
+  "lastRunCompletedAt": zod.string().nullable()
 })
 
 
@@ -1079,11 +1146,13 @@ export const ListOutreachSuppressionsResponse = zod.array(ListOutreachSuppressio
 
 export const ListOutreachResearchRunsResponseItem = zod.object({
   "id": zod.number(),
-  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "campaignId": zod.number().nullable(),
+  "state": zod.string(),
   "audience": zod.enum(['architect', 'builder']),
   "query": zod.string(),
   "status": zod.enum(['running', 'completed', 'failed']),
   "resultCount": zod.number(),
+  "skippedCount": zod.number(),
   "error": zod.string().nullish(),
   "createdAt": zod.string(),
   "completedAt": zod.string().nullish()
@@ -1112,17 +1181,20 @@ export const runOutreachResearchResponseProspectsItemNeedScoreMax = 100;
 export const RunOutreachResearchResponse = zod.object({
   "run": zod.object({
   "id": zod.number(),
-  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "campaignId": zod.number().nullable(),
+  "state": zod.string(),
   "audience": zod.enum(['architect', 'builder']),
   "query": zod.string(),
   "status": zod.enum(['running', 'completed', 'failed']),
   "resultCount": zod.number(),
+  "skippedCount": zod.number(),
   "error": zod.string().nullish(),
   "createdAt": zod.string(),
   "completedAt": zod.string().nullish()
 }),
   "prospects": zod.array(zod.object({
   "id": zod.number(),
+  "campaignId": zod.number().nullable(),
   "companyName": zod.string(),
   "website": zod.string().nullish(),
   "city": zod.string(),

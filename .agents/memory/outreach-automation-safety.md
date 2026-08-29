@@ -14,3 +14,9 @@ When one SendGrid account already serves another system, preserve its single eve
 **Why:** A shared SendGrid account supports only one event destination, while moving the primary domain's MX would risk interrupting ordinary business email.
 
 **How to apply:** Publish and verify the relay before switching the provider URL. Require a signed test event plus real reply, bounce, and unsubscribe tests before setting the relay-verification and automation flags.
+
+Automated prospecting may prepare a conservative daily review list, but it must optimize for low bounce and low spam risk rather than filling a quota. Research automation must never approve prospects, verify guessed addresses, approve messages, or send email.
+
+**Why:** The owner explicitly prioritizes sender reputation and non-spam outreach over volume; an incomplete list is safer than weak-fit organizations or uncertain addresses.
+
+**How to apply:** Require public need evidence and deduplication, cap daily imports, leave contacts unverified, and keep approval and sending as separate employee actions.

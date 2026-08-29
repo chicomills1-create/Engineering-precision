@@ -19,4 +19,6 @@ export interface OutreachDashboard {
   replyWebhookReady: boolean;
   automationEnabled: boolean;
   automationReady: boolean;
+  researchAutomationEnabled: boolean;
+  researchAutomationReady: boolean;
 }

@@ -141,7 +141,7 @@ export async function discoverPublicProspects(input: {
           "Use only URLs and facts present in the supplied search results. Never invent a company, contact, project, location, email, or claim.",
           "Do not return personal contacts or email addresses.",
           "Each item must contain companyName, website, city, state, audience, sourceUrl, researchNotes, fitScore, needScore, needSignals.",
-          "Scores are integers from 0 to 100. Return only candidates with needScore >= 60 and fitScore >= 60. Return at most 8.",
+           "Scores are integers from 0 to 100. Return only candidates with needScore >= 60 and fitScore >= 60. Return at most 10.",
         ].join(" "),
       },
       {
@@ -162,7 +162,7 @@ export async function discoverPublicProspects(input: {
     .filter((candidate) => candidate.state === input.state && candidate.audience === input.audience)
     .filter((candidate) => candidate.needScore >= 60 && candidate.fitScore >= 60)
     .filter((candidate) => allowedUrls.has(candidate.sourceUrl))
-    .slice(0, 8)
+     .slice(0, 10)
     .map((candidate) => ({
       ...candidate,
       fitScore: Math.max(0, Math.min(100, Math.round(candidate.fitScore))),

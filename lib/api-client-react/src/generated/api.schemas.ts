@@ -399,6 +399,8 @@ export const ProspectStatus = {
 
 export interface Prospect {
   id: number;
+  /** @nullable */
+  campaignId: number | null;
   companyName: string;
   /** @nullable */
   website?: string | null;
@@ -712,16 +714,9 @@ export interface OutreachDashboard {
   replyWebhookReady: boolean;
   automationEnabled: boolean;
   automationReady: boolean;
+  researchAutomationEnabled: boolean;
+  researchAutomationReady: boolean;
 }
-
-export type ResearchRunState = typeof ResearchRunState[keyof typeof ResearchRunState];
-
-
-export const ResearchRunState = {
-  AZ: 'AZ',
-  CA: 'CA',
-  TX: 'TX',
-} as const;
 
 export type ResearchRunAudience = typeof ResearchRunAudience[keyof typeof ResearchRunAudience];
 
@@ -742,11 +737,14 @@ export const ResearchRunStatus = {
 
 export interface ResearchRun {
   id: number;
-  state: ResearchRunState;
+  /** @nullable */
+  campaignId: number | null;
+  state: string;
   audience: ResearchRunAudience;
   query: string;
   status: ResearchRunStatus;
   resultCount: number;
+  skippedCount: number;
   /** @nullable */
   error?: string | null;
   createdAt: string;
@@ -776,6 +774,76 @@ export interface ResearchRunInput {
   audience: ResearchRunInputAudience;
   /** @maxLength 200 */
   query?: string;
+}
+
+export type ResearchScheduleTimezone = typeof ResearchScheduleTimezone[keyof typeof ResearchScheduleTimezone];
+
+
+export const ResearchScheduleTimezone = {
+  'America/Phoenix': 'America/Phoenix',
+} as const;
+
+export type ResearchScheduleLocalHour = typeof ResearchScheduleLocalHour[keyof typeof ResearchScheduleLocalHour];
+
+
+export const ResearchScheduleLocalHour = {
+  NUMBER_8: 8,
+} as const;
+
+/**
+ * @nullable
+ */
+export type ResearchScheduleLastRunStatus = typeof ResearchScheduleLastRunStatus[keyof typeof ResearchScheduleLastRunStatus] | null;
+
+
+export const ResearchScheduleLastRunStatus = {
+  running: 'running',
+  completed: 'completed',
+  failed: 'failed',
+} as const;
+
+export interface ResearchSchedule {
+  id: number;
+  campaignId: number;
+  enabled: boolean;
+  timezone: ResearchScheduleTimezone;
+  localHour: ResearchScheduleLocalHour;
+  /**
+     * @minimum 1
+     * @maximum 10
+     */
+  targetCount: number;
+  createdAt: string;
+  updatedAt: string;
+  /** @nullable */
+  lastRunDate: string | null;
+  /** @nullable */
+  lastRunStatus: ResearchScheduleLastRunStatus;
+  /** @nullable */
+  lastRunResultCount: number | null;
+  /** @nullable */
+  lastRunSkippedCount: number | null;
+  /** @nullable */
+  lastRunError: string | null;
+  /** @nullable */
+  lastRunCompletedAt: string | null;
+}
+
+export type ResearchScheduleInputLocalHour = typeof ResearchScheduleInputLocalHour[keyof typeof ResearchScheduleInputLocalHour];
+
+
+export const ResearchScheduleInputLocalHour = {
+  NUMBER_8: 8,
+} as const;
+
+export interface ResearchScheduleInput {
+  enabled: boolean;
+  localHour?: ResearchScheduleInputLocalHour;
+  /**
+     * @minimum 1
+     * @maximum 10
+     */
+  targetCount?: number;
 }
 
 export interface ResearchRunResponse {

@@ -676,6 +676,21 @@ paths:
       requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/CampaignUpdate" } } } }
       responses:
         "200": { description: Updated, content: { application/json: { schema: { $ref: "#/components/schemas/Campaign" } } } }
+  /outreach/research-schedules:
+    get:
+      operationId: listOutreachResearchSchedules
+      tags: [outreach]
+      responses:
+        "200": { description: Scheduled research configuration and latest run status, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/ResearchSchedule" } } } } }
+  /outreach/campaigns/{id}/research-schedule:
+    put:
+      operationId: updateOutreachResearchSchedule
+      tags: [outreach]
+      parameters: [{ name: id, in: path, required: true, schema: { type: number } }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/ResearchScheduleInput" } } } }
+      responses:
+        "200": { description: Schedule updated, content: { application/json: { schema: { $ref: "#/components/schemas/ResearchSchedule" } } } }
+        "404": { description: Campaign not found, content: { application/json: { schema: { $ref: "#/components/schemas/ErrorMessage" } } } }
   /outreach/messages:
     get:
       operationId: listOutreachMessages
@@ -1043,9 +1058,10 @@ components:
           $ref: "#/components/schemas/ClientJobStatus"
     Prospect:
       type: object
-      required: [id, companyName, city, state, audience, fitScore, needScore, emailStatus, status, createdAt, updatedAt]
+      required: [id, campaignId, companyName, city, state, audience, fitScore, needScore, emailStatus, status, createdAt, updatedAt]
       properties:
         id: { type: number }
+        campaignId: { type: [number, "null"] }
         companyName: { type: string }
         website: { type: [string, "null"] }
         city: { type: string }
@@ -1174,7 +1190,7 @@ components:
         token: { type: string, minLength: 1, maxLength: 128 }
     OutreachDashboard:
       type: object
-      required: [prospects, campaigns, messages, sentToday, replies, adminAllowlistReady, productionConfigReady, sendgridDeliveryPathReady, deliveryEventsReady, replyWebhookReady, automationEnabled, automationReady]
+      required: [prospects, campaigns, messages, sentToday, replies, adminAllowlistReady, productionConfigReady, sendgridDeliveryPathReady, deliveryEventsReady, replyWebhookReady, automationEnabled, automationReady, researchAutomationEnabled, researchAutomationReady]
       properties:
         prospects: { type: number }
         campaigns: { type: number }
@@ -1188,16 +1204,20 @@ components:
         replyWebhookReady: { type: boolean }
         automationEnabled: { type: boolean }
         automationReady: { type: boolean }
+        researchAutomationEnabled: { type: boolean }
+        researchAutomationReady: { type: boolean }
     ResearchRun:
       type: object
-      required: [id, state, audience, query, status, resultCount, createdAt]
+      required: [id, campaignId, state, audience, query, status, resultCount, skippedCount, createdAt]
       properties:
         id: { type: number }
-        state: { type: string, enum: [AZ, CA, TX] }
+        campaignId: { type: [number, "null"] }
+        state: { type: string }
         audience: { type: string, enum: [architect, builder] }
         query: { type: string }
         status: { type: string, enum: [running, completed, failed] }
         resultCount: { type: number }
+        skippedCount: { type: number }
         error: { type: [string, "null"] }
         createdAt: { type: string }
         completedAt: { type: [string, "null"] }
@@ -1208,6 +1228,31 @@ components:
         state: { type: string, enum: [AZ, CA, TX] }
         audience: { type: string, enum: [architect, builder] }
         query: { type: string, maxLength: 200 }
+    ResearchSchedule:
+      type: object
+      required: [id, campaignId, enabled, timezone, localHour, targetCount, createdAt, updatedAt, lastRunDate, lastRunStatus, lastRunResultCount, lastRunSkippedCount, lastRunError, lastRunCompletedAt]
+      properties:
+        id: { type: number }
+        campaignId: { type: number }
+        enabled: { type: boolean }
+        timezone: { type: string, enum: [America/Phoenix] }
+        localHour: { type: number, enum: [8] }
+        targetCount: { type: number, minimum: 1, maximum: 10 }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+        lastRunDate: { type: [string, "null"] }
+        lastRunStatus: { type: [string, "null"], enum: [running, completed, failed, null] }
+        lastRunResultCount: { type: [number, "null"] }
+        lastRunSkippedCount: { type: [number, "null"] }
+        lastRunError: { type: [string, "null"] }
+        lastRunCompletedAt: { type: [string, "null"] }
+    ResearchScheduleInput:
+      type: object
+      required: [enabled]
+      properties:
+        enabled: { type: boolean }
+        localHour: { type: number, enum: [8], default: 8 }
+        targetCount: { type: number, minimum: 1, maximum: 10, default: 10 }
     ResearchRunResponse:
       type: object
       required: [run, prospects]

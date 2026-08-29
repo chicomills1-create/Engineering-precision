@@ -56,6 +56,23 @@ export function DashboardStats() {
           Automation flag: {stats.automationEnabled ? 'on' : 'off'}
         </span>
       </div>
+      <div
+        className={`border px-4 py-3 rounded-[2px] text-sm ${
+          stats.researchAutomationReady
+            ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+            : 'border-muted bg-muted/20 text-muted-foreground'
+        }`}
+        data-testid="status-outreach-research-automation"
+      >
+        <span className="font-medium">
+          {stats.researchAutomationReady
+            ? 'The 8:00 AM Phoenix research worker is ready.'
+            : 'Morning research is waiting for production enablement.'}
+        </span>{' '}
+        <span>
+          It only creates review records; approval and sending stay manual.
+        </span>
+      </div>
     </div>
   );
 }

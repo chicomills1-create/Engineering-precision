@@ -6,16 +6,18 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { ResearchRunAudience } from './researchRunAudience';
-import type { ResearchRunState } from './researchRunState';
 import type { ResearchRunStatus } from './researchRunStatus';
 
 export interface ResearchRun {
   id: number;
-  state: ResearchRunState;
+  /** @nullable */
+  campaignId: number | null;
+  state: string;
   audience: ResearchRunAudience;
   query: string;
   status: ResearchRunStatus;
   resultCount: number;
+  skippedCount: number;
   /** @nullable */
   error?: string | null;
   createdAt: string;

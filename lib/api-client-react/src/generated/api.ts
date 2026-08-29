@@ -51,6 +51,8 @@ import type {
   ResearchRun,
   ResearchRunInput,
   ResearchRunResponse,
+  ResearchSchedule,
+  ResearchScheduleInput,
   SubscribeResult,
   Subscriber,
   SubscriberInput,
@@ -2232,6 +2234,143 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
         TContext
       > => {
       return useMutation(getUpdateCampaignMutationOptions(options));
+    }
+
+export const getListOutreachResearchSchedulesUrl = () => {
+
+
+
+
+  return `/api/outreach/research-schedules`
+}
+
+export const listOutreachResearchSchedules = async ( options?: Parameters<typeof customFetch>[1]): Promise<ResearchSchedule[]> => {
+
+  return customFetch<ResearchSchedule[]>(getListOutreachResearchSchedulesUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListOutreachResearchSchedulesQueryKey = () => {
+    return [
+    `/api/outreach/research-schedules`
+    ] as const;
+    }
+
+
+export const getListOutreachResearchSchedulesQueryOptions = <TData = Awaited<ReturnType<typeof listOutreachResearchSchedules>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listOutreachResearchSchedules>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListOutreachResearchSchedulesQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listOutreachResearchSchedules>>> = ({ signal }) => listOutreachResearchSchedules({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listOutreachResearchSchedules>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListOutreachResearchSchedulesQueryResult = NonNullable<Awaited<ReturnType<typeof listOutreachResearchSchedules>>>
+export type ListOutreachResearchSchedulesQueryError = ErrorType<unknown>
+
+
+
+export function useListOutreachResearchSchedules<TData = Awaited<ReturnType<typeof listOutreachResearchSchedules>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listOutreachResearchSchedules>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListOutreachResearchSchedulesQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getUpdateOutreachResearchScheduleUrl = (id: number,) => {
+
+
+
+
+  return `/api/outreach/campaigns/${id}/research-schedule`
+}
+
+export const updateOutreachResearchSchedule = async (id: number,
+    researchScheduleInput: ResearchScheduleInput, options?: Parameters<typeof customFetch>[1]): Promise<ResearchSchedule> => {
+
+  return customFetch<ResearchSchedule>(getUpdateOutreachResearchScheduleUrl(id),
+  {
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(researchScheduleInput)
+  }
+);}
+
+
+
+
+
+export const getUpdateOutreachResearchScheduleMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateOutreachResearchSchedule>>, TError,{id: number;data: BodyType<ResearchScheduleInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateOutreachResearchSchedule>>, TError,{id: number;data: BodyType<ResearchScheduleInput>}, TContext> => {
+
+const mutationKey = ['updateOutreachResearchSchedule'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateOutreachResearchSchedule>>, {id: number;data: BodyType<ResearchScheduleInput>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateOutreachResearchSchedule(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateOutreachResearchScheduleMutationResult = NonNullable<Awaited<ReturnType<typeof updateOutreachResearchSchedule>>>
+    export type UpdateOutreachResearchScheduleMutationBody = BodyType<ResearchScheduleInput>
+    export type UpdateOutreachResearchScheduleMutationError = ErrorType<ErrorMessage>
+
+    export const useUpdateOutreachResearchSchedule = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateOutreachResearchSchedule>>, TError,{id: number;data: BodyType<ResearchScheduleInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateOutreachResearchSchedule>>,
+        TError,
+        {id: number;data: BodyType<ResearchScheduleInput>},
+        TContext
+      > => {
+      return useMutation(getUpdateOutreachResearchScheduleMutationOptions(options));
     }
 
 export const getListOutreachMessagesUrl = () => {

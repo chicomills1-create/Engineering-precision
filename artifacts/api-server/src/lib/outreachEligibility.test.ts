@@ -11,6 +11,7 @@ import {
 const now = new Date();
 const eligibleProspect: Prospect = {
   id: 1,
+  campaignId: null,
   companyName: "Qualified Commercial Firm",
   website: "https://example.com",
   city: "Phoenix",

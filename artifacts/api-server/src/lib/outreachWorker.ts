@@ -9,6 +9,7 @@ import {
 import { logger } from "./logger";
 import { sendApprovedOutreach } from "./outreach";
 import { isReplyWebhookConfigured } from "./outreachEvents";
+import { processDueOutreachResearchSchedules } from "./outreachResearchScheduler";
 
 const ADMIN_EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
@@ -20,6 +21,8 @@ export type OutreachAutomationStatus = {
   replyWebhookReady: boolean;
   automationEnabled: boolean;
   automationReady: boolean;
+  researchAutomationEnabled: boolean;
+  researchAutomationReady: boolean;
 };
 
 function hasConfiguredAdminEmail(): boolean {
@@ -60,6 +63,7 @@ export function getOutreachAutomationStatus(): OutreachAutomationStatus {
     && Boolean(process.env.OUTREACH_REPLY_TO_EMAIL?.trim())
     && process.env.OUTREACH_REPLY_PATH_VERIFIED === "true";
   const automationEnabled = process.env.OUTREACH_AUTOMATION_ENABLED === "true";
+  const researchAutomationEnabled = process.env.OUTREACH_RESEARCH_AUTOMATION_ENABLED === "true";
 
   return {
     adminAllowlistReady,
@@ -68,6 +72,10 @@ export function getOutreachAutomationStatus(): OutreachAutomationStatus {
     deliveryEventsReady,
     replyWebhookReady,
     automationEnabled,
+    researchAutomationEnabled,
+    researchAutomationReady: adminAllowlistReady
+      && productionConfigReady
+      && researchAutomationEnabled,
     automationReady: adminAllowlistReady
       && productionConfigReady
       && sendgridDeliveryPathReady
@@ -79,6 +87,10 @@ export function getOutreachAutomationStatus(): OutreachAutomationStatus {
 
 export function isOutreachAutomationReady(): boolean {
   return getOutreachAutomationStatus().automationReady;
+}
+
+export function isOutreachResearchAutomationReady(): boolean {
+  return getOutreachAutomationStatus().researchAutomationReady;
 }
 
 async function sendClaimedMessage(message: OutreachMessage): Promise<void> {
@@ -137,7 +149,7 @@ export async function processDueOutreachMessages(): Promise<number> {
 
 export function startOutreachWorker(): void {
   const status = getOutreachAutomationStatus();
-  if (!status.automationReady) {
+  if (!status.automationReady && !status.researchAutomationReady) {
     logger.info({
       adminAllowlistReady: status.adminAllowlistReady,
       productionConfigReady: status.productionConfigReady,
@@ -145,16 +157,36 @@ export function startOutreachWorker(): void {
       deliveryEventsReady: status.deliveryEventsReady,
       replyWebhookReady: status.replyWebhookReady,
       automationEnabled: status.automationEnabled,
-    }, "Outreach scheduler disabled until production safety checks pass");
+      researchAutomationEnabled: status.researchAutomationEnabled,
+    }, "Outreach schedulers disabled until production safety checks pass");
     return;
   }
-  const timer = setInterval(() => {
-    void processDueOutreachMessages()
-      .then((sentCount) => {
-        if (sentCount > 0) logger.info({ sentCount }, "Processed scheduled outreach messages");
-      })
-      .catch((err: unknown) => logger.error({ err }, "Outreach scheduler failed"));
-  }, 60_000);
-  timer.unref();
-  logger.info("Outreach scheduler enabled");
+
+  if (status.automationReady) {
+    const sendTimer = setInterval(() => {
+      void processDueOutreachMessages()
+        .then((sentCount) => {
+          if (sentCount > 0) logger.info({ sentCount }, "Processed scheduled outreach messages");
+        })
+        .catch((err: unknown) => logger.error({ err }, "Outreach send scheduler failed"));
+    }, 60_000);
+    sendTimer.unref();
+    logger.info("Outreach send scheduler enabled");
+  }
+
+  if (status.researchAutomationReady) {
+    const runResearch = () => {
+      void processDueOutreachResearchSchedules()
+        .then((completedCount) => {
+          if (completedCount > 0) {
+            logger.info({ completedCount }, "Prepared scheduled outreach research lists");
+          }
+        })
+        .catch((err: unknown) => logger.error({ err }, "Outreach research scheduler failed"));
+    };
+    runResearch();
+    const researchTimer = setInterval(runResearch, 60_000);
+    researchTimer.unref();
+    logger.info("Outreach research scheduler enabled");
+  }
 }

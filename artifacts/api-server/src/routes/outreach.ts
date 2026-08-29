@@ -5,8 +5,11 @@ import {
   db,
   outreachMessagesTable,
   outreachResearchRunsTable,
+  outreachResearchScheduleRunsTable,
+  outreachResearchSchedulesTable,
   outreachSuppressionsTable,
   prospectsTable,
+  type ResearchScheduleRun,
 } from "@workspace/db";
 import {
   ApproveOutreachMessageParams, ApproveOutreachMessageResponse, CreateCampaignBody, CreateCampaignResponse,
@@ -14,12 +17,13 @@ import {
   CreateOutreachMessageBody, CreateOutreachMessageResponse, CreateProspectBody, CreateProspectResponse,
   GenerateOutreachDraftBody, GenerateOutreachDraftParams, GenerateOutreachDraftResponse,
   GetOutreachDashboardResponse, ListCampaignsResponse, ListOutreachMessagesResponse, ListProspectsResponse,
-  ListOutreachResearchRunsResponse, ListOutreachSuppressionsResponse,
+  ListOutreachResearchRunsResponse, ListOutreachResearchSchedulesResponse, ListOutreachSuppressionsResponse,
   MarkOutreachProspectRepliedParams, MarkOutreachProspectRepliedResponse,
   RunOutreachResearchBody, RunOutreachResearchResponse,
   SendOutreachMessageParams, SendOutreachMessageResponse, SuppressOutreachAddressBody, SuppressOutreachAddressResponse,
   UnsubscribeOutreachAddressBody, UnsubscribeOutreachAddressResponse, UpdateCampaignBody, UpdateCampaignParams,
   UpdateCampaignResponse, UpdateOutreachMessageBody, UpdateOutreachMessageParams, UpdateOutreachMessageResponse,
+  UpdateOutreachResearchScheduleBody, UpdateOutreachResearchScheduleParams, UpdateOutreachResearchScheduleResponse,
   UpdateProspectBody, UpdateProspectParams, UpdateProspectResponse,
 } from "@workspace/api-zod";
 import { requireAuth } from "../middlewares/requireAuth";
@@ -27,6 +31,10 @@ import { generateProspectDraft, sendApprovedOutreach } from "../lib/outreach";
 import { verifyUnsubscribeToken } from "../lib/unsubscribeToken";
 import { discoverPublicProspects } from "../lib/publicResearch";
 import { getOutreachAutomationStatus } from "../lib/outreachWorker";
+import {
+  OUTREACH_RESEARCH_LOCAL_HOUR,
+  OUTREACH_RESEARCH_TIMEZONE,
+} from "../lib/outreachResearchScheduler";
 import {
   claimClientMonthlyDelivery,
   finishClientMonthlyDelivery,
@@ -43,6 +51,20 @@ const researchRunJson = (run: typeof outreachResearchRunsTable.$inferSelect) => 
   ...run,
   createdAt: run.createdAt.toISOString(),
   completedAt: run.completedAt?.toISOString() ?? null,
+});
+const researchScheduleJson = (
+  schedule: typeof outreachResearchSchedulesTable.$inferSelect,
+  latestRun?: ResearchScheduleRun,
+) => ({
+  ...schedule,
+  createdAt: schedule.createdAt.toISOString(),
+  updatedAt: schedule.updatedAt.toISOString(),
+  lastRunDate: latestRun?.runDate ?? null,
+  lastRunStatus: latestRun?.status ?? null,
+  lastRunResultCount: latestRun?.resultCount ?? null,
+  lastRunSkippedCount: latestRun?.skippedCount ?? null,
+  lastRunError: latestRun?.error ?? null,
+  lastRunCompletedAt: latestRun?.completedAt?.toISOString() ?? null,
 });
 
 router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> => {
@@ -136,6 +158,65 @@ router.patch("/outreach/prospects/:id", requireAuth, async (req, res): Promise<v
 router.get("/outreach/campaigns", requireAuth, async (_req, res): Promise<void> => { const rows = await db.select().from(campaignsTable).orderBy(desc(campaignsTable.createdAt)); res.json(ListCampaignsResponse.parse(rows.map(campaignJson))); });
 router.post("/outreach/campaigns", requireAuth, async (req, res): Promise<void> => { const data = CreateCampaignBody.safeParse(req.body); if (!data.success) { res.status(400).json({ error: data.error.message }); return; } const [row] = await db.insert(campaignsTable).values(data.data).returning(); res.status(201).json(CreateCampaignResponse.parse(campaignJson(row!))); });
 router.patch("/outreach/campaigns/:id", requireAuth, async (req, res): Promise<void> => { const p = UpdateCampaignParams.safeParse(req.params), data = UpdateCampaignBody.safeParse(req.body); if (!p.success || !data.success) { res.status(400).json({ error: "Invalid request" }); return; } const [row] = await db.update(campaignsTable).set(data.data).where(eq(campaignsTable.id, p.data.id)).returning(); if (!row) { res.status(404).json({ error: "Campaign not found" }); return; } res.json(UpdateCampaignResponse.parse(campaignJson(row))); });
+router.get("/outreach/research-schedules", requireAuth, async (_req, res): Promise<void> => {
+  const [schedules, runs] = await Promise.all([
+    db.select().from(outreachResearchSchedulesTable).orderBy(desc(outreachResearchSchedulesTable.createdAt)),
+    db.select().from(outreachResearchScheduleRunsTable).orderBy(desc(outreachResearchScheduleRunsTable.startedAt)),
+  ]);
+  const latestBySchedule = new Map<number, ResearchScheduleRun>();
+  for (const run of runs) {
+    if (!latestBySchedule.has(run.scheduleId)) latestBySchedule.set(run.scheduleId, run);
+  }
+  res.json(ListOutreachResearchSchedulesResponse.parse(
+    schedules.map((schedule) => researchScheduleJson(schedule, latestBySchedule.get(schedule.id))),
+  ));
+});
+router.put("/outreach/campaigns/:id/research-schedule", requireAuth, async (req, res): Promise<void> => {
+  const params = UpdateOutreachResearchScheduleParams.safeParse(req.params);
+  const input = UpdateOutreachResearchScheduleBody.safeParse(req.body);
+  if (!params.success || !input.success) {
+    res.status(400).json({ error: "Invalid research schedule" });
+    return;
+  }
+  if (input.data.localHour !== undefined && input.data.localHour !== OUTREACH_RESEARCH_LOCAL_HOUR) {
+    res.status(400).json({ error: "Morning research is fixed at 8:00 AM Phoenix time" });
+    return;
+  }
+  const [campaign] = await db.select().from(campaignsTable).where(eq(campaignsTable.id, params.data.id));
+  if (!campaign) {
+    res.status(404).json({ error: "Campaign not found" });
+    return;
+  }
+  const [schedule] = await db.transaction(async (tx) => {
+    if (input.data.enabled) {
+      await tx.update(outreachResearchSchedulesTable).set({
+        enabled: false,
+        updatedAt: new Date(),
+      }).where(eq(outreachResearchSchedulesTable.enabled, true));
+    }
+    return tx.insert(outreachResearchSchedulesTable).values({
+      campaignId: campaign.id,
+      enabled: input.data.enabled,
+      timezone: OUTREACH_RESEARCH_TIMEZONE,
+      localHour: OUTREACH_RESEARCH_LOCAL_HOUR,
+      targetCount: Math.min(10, input.data.targetCount ?? 10),
+    }).onConflictDoUpdate({
+      target: outreachResearchSchedulesTable.campaignId,
+      set: {
+        enabled: input.data.enabled,
+        timezone: OUTREACH_RESEARCH_TIMEZONE,
+        localHour: OUTREACH_RESEARCH_LOCAL_HOUR,
+        targetCount: Math.min(10, input.data.targetCount ?? 10),
+        updatedAt: new Date(),
+      },
+    }).returning();
+  });
+  const [latestRun] = await db.select().from(outreachResearchScheduleRunsTable)
+    .where(eq(outreachResearchScheduleRunsTable.scheduleId, schedule!.id))
+    .orderBy(desc(outreachResearchScheduleRunsTable.startedAt))
+    .limit(1);
+  res.json(UpdateOutreachResearchScheduleResponse.parse(researchScheduleJson(schedule!, latestRun)));
+});
 router.get("/outreach/messages", requireAuth, async (_req, res): Promise<void> => { const rows = await db.select().from(outreachMessagesTable).orderBy(desc(outreachMessagesTable.createdAt)); res.json(ListOutreachMessagesResponse.parse(rows.map(messageJson))); });
 router.post("/outreach/messages", requireAuth, async (req, res): Promise<void> => { const data = CreateOutreachMessageBody.safeParse(req.body); if (!data.success) { res.status(400).json({ error: data.error.message }); return; } const [row] = await db.insert(outreachMessagesTable).values({ ...data.data, status: "draft", scheduledAt: data.data.scheduledAt ? new Date(data.data.scheduledAt) : undefined }).returning(); res.status(201).json(CreateOutreachMessageResponse.parse(messageJson(row!))); });
 router.patch("/outreach/messages/:id", requireAuth, async (req, res): Promise<void> => { const p = UpdateOutreachMessageParams.safeParse(req.params), data = UpdateOutreachMessageBody.safeParse(req.body); if (!p.success || !data.success) { res.status(400).json({ error: "Invalid request" }); return; } const [row] = await db.update(outreachMessagesTable).set({ ...data.data, status: "draft", scheduledAt: data.data.scheduledAt ? new Date(data.data.scheduledAt) : undefined }).where(and(eq(outreachMessagesTable.id, p.data.id), eq(outreachMessagesTable.status, "draft"))).returning(); if (!row) { res.status(409).json({ error: "Only draft messages can be edited" }); return; } res.json(UpdateOutreachMessageResponse.parse(messageJson(row))); });
@@ -286,6 +367,7 @@ router.post("/outreach/research-runs", requireAuth, async (req, res): Promise<vo
       query: discovery.query,
       status: "completed",
       resultCount: inserted.length,
+      skippedCount: Math.max(0, discovery.prospects.length - inserted.length),
       completedAt: new Date(),
     }).where(eq(outreachResearchRunsTable.id, run!.id)).returning();
     res.status(201).json(RunOutreachResearchResponse.parse({

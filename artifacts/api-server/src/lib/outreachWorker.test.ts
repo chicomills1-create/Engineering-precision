@@ -3,6 +3,7 @@ import { afterEach, test } from "node:test";
 import {
   getOutreachAutomationStatus,
   isOutreachAutomationReady,
+  isOutreachResearchAutomationReady,
 } from "./outreachWorker";
 
 const CONFIG_KEYS = [
@@ -22,6 +23,7 @@ const CONFIG_KEYS = [
   "OUTREACH_REPLY_PATH_VERIFIED",
   "SESSION_SECRET",
   "OUTREACH_AUTOMATION_ENABLED",
+  "OUTREACH_RESEARCH_AUTOMATION_ENABLED",
 ] as const;
 const originalConfig = Object.fromEntries(
   CONFIG_KEYS.map((key) => [key, process.env[key]]),
@@ -47,6 +49,7 @@ function configureProduction(overrides: Record<string, string> = {}): void {
   process.env.OUTREACH_REPLY_TO_EMAIL = "replies@reply.apexgrideng.com";
   process.env.OUTREACH_REPLY_PATH_VERIFIED = "true";
   process.env.OUTREACH_AUTOMATION_ENABLED = "true";
+  process.env.OUTREACH_RESEARCH_AUTOMATION_ENABLED = "true";
   Object.assign(process.env, overrides);
 }
 
@@ -147,6 +150,23 @@ test("arms only when the explicit automation flag is enabled", () => {
 
   configureProduction();
   assert.equal(isOutreachAutomationReady(), true);
+});
+
+test("research automation requires production, an admin, and its own explicit flag", () => {
+  configureProduction();
+  assert.equal(isOutreachResearchAutomationReady(), true);
+
+  configureProduction({ OUTREACH_RESEARCH_AUTOMATION_ENABLED: "false" });
+  assert.equal(isOutreachResearchAutomationReady(), false);
+
+  configureProduction({
+    OUTREACH_RESEARCH_AUTOMATION_ENABLED: "true",
+    SENDGRID_EVENT_WEBHOOK_PUBLIC_KEY: "",
+    OUTREACH_REPLY_WEBHOOK_TOKEN: "",
+    SESSION_SECRET: "",
+  });
+  assert.equal(isOutreachResearchAutomationReady(), true);
+  assert.equal(isOutreachAutomationReady(), false);
 });
 
 test("rejects a non-HTTPS or credential-bearing production URL", () => {

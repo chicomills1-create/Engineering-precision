@@ -13,6 +13,8 @@ import type { ProspectStatus } from './prospectStatus';
 
 export interface Prospect {
   id: number;
+  /** @nullable */
+  campaignId: number | null;
   companyName: string;
   /** @nullable */
   website?: string | null;

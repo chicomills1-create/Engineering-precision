@@ -6,7 +6,10 @@ import {
   useListCampaigns,
   useCreateCampaign,
   useUpdateCampaign,
+  useListOutreachResearchSchedules,
+  useUpdateOutreachResearchSchedule,
   getListCampaignsQueryKey,
+  getListOutreachResearchSchedulesQueryKey,
   Campaign,
 } from '@workspace/api-client-react';
 import { useQueryClient } from '@tanstack/react-query';
@@ -17,8 +20,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Play, Pause, Plus, MoreHorizontal } from 'lucide-react';
+import { CalendarClock, Play, Pause, Plus, MoreHorizontal } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { useToast } from '@/hooks/use-toast';
 
 const campaignSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -33,7 +37,9 @@ type CampaignFormValues = z.infer<typeof campaignSchema>;
 
 export function CampaignsTab() {
   const { data: campaigns, isLoading } = useListCampaigns();
+  const { data: researchSchedules } = useListOutreachResearchSchedules();
   const queryClient = useQueryClient();
+  const { toast } = useToast();
   const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   const createMutation = useCreateCampaign({
@@ -49,6 +55,27 @@ export function CampaignsTab() {
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getListCampaignsQueryKey() });
+      },
+    },
+  });
+
+  const updateScheduleMutation = useUpdateOutreachResearchSchedule({
+    mutation: {
+      onSuccess: (schedule) => {
+        queryClient.invalidateQueries({ queryKey: getListOutreachResearchSchedulesQueryKey() });
+        toast({
+          title: schedule.enabled ? 'Morning list enabled' : 'Morning list paused',
+          description: schedule.enabled
+            ? `Up to ${schedule.targetCount} qualified organizations will be added at 8:00 AM Phoenix time.`
+            : 'No automatic research will run for this campaign.',
+        });
+      },
+      onError: (error: any) => {
+        toast({
+          title: 'Unable to update schedule',
+          description: error?.body?.error || error?.message || 'Please try again.',
+          variant: 'destructive',
+        });
       },
     },
   });
@@ -84,6 +111,18 @@ export function CampaignsTab() {
     });
   }
 
+  function toggleMorningList(campaign: Campaign) {
+    const schedule = researchSchedules?.find((item) => item.campaignId === campaign.id);
+    updateScheduleMutation.mutate({
+      id: campaign.id,
+      data: {
+        enabled: !schedule?.enabled,
+        localHour: 8,
+        targetCount: Math.min(10, campaign.dailyLimit),
+      },
+    });
+  }
+
   if (isLoading) {
     return <div className="text-muted-foreground p-8" data-testid="campaigns-loading">Loading campaigns...</div>;
   }
@@ -93,7 +132,7 @@ export function CampaignsTab() {
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-lg font-display font-semibold">Outreach Campaigns</h2>
-          <p className="text-sm text-muted-foreground">Manage audiences, daily limits, and templates.</p>
+          <p className="text-sm text-muted-foreground">Manage audiences, limits, and the approval-only morning research list.</p>
         </div>
         <Dialog open={isCreateOpen} onOpenChange={(open) => {
           if (!open) form.reset();
@@ -217,19 +256,23 @@ export function CampaignsTab() {
             No campaigns yet. Create one to start outreach.
           </div>
         ) : (
-          <table className="w-full text-sm">
+          <div className="overflow-x-auto">
+          <table className="w-full min-w-[980px] text-sm">
             <thead>
               <tr className="border-b border-border bg-muted/20 text-muted-foreground">
                 <th className="text-left px-4 py-3 font-medium">Name</th>
                 <th className="text-left px-4 py-3 font-medium">Audience</th>
                 <th className="text-left px-4 py-3 font-medium">States</th>
                 <th className="text-left px-4 py-3 font-medium text-right">Daily Limit</th>
+                 <th className="text-left px-4 py-3 font-medium">8 AM Approval List</th>
                 <th className="text-left px-4 py-3 font-medium text-center">Status</th>
                 <th className="text-left px-4 py-3 font-medium text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
-              {campaigns.map(campaign => (
+              {campaigns.map(campaign => {
+                const schedule = researchSchedules?.find((item) => item.campaignId === campaign.id);
+                return (
                 <tr key={campaign.id} className="hover:bg-white/[0.02]" data-testid={`row-campaign-${campaign.id}`}>
                   <td className="px-4 py-3 font-medium text-foreground">{campaign.name}</td>
                   <td className="px-4 py-3 capitalize">{campaign.audience}</td>
@@ -239,6 +282,26 @@ export function CampaignsTab() {
                     </div>
                   </td>
                   <td className="px-4 py-3 text-right">{campaign.dailyLimit}</td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-2">
+                      <Badge variant={schedule?.enabled ? 'default' : 'outline'} data-testid={`research-schedule-${campaign.id}`}>
+                        {schedule?.enabled ? 'Enabled' : 'Off'}
+                      </Badge>
+                      <span className="text-xs text-muted-foreground">
+                        {schedule?.enabled ? `8:00 AM Phoenix · up to ${schedule.targetCount}` : 'Approval only'}
+                      </span>
+                    </div>
+                    {schedule?.lastRunDate && (
+                      <div className={`mt-1 text-xs ${schedule.lastRunStatus === 'failed' ? 'text-destructive' : 'text-muted-foreground'}`}>
+                        {schedule.lastRunDate}: {schedule.lastRunStatus === 'failed'
+                          ? schedule.lastRunError || 'Research failed'
+                          : `${schedule.lastRunResultCount ?? 0} added · ${schedule.lastRunSkippedCount ?? 0} skipped`}
+                      </div>
+                    )}
+                    {schedule?.enabled && campaign.status !== 'active' && (
+                      <div className="mt-1 text-xs text-amber-500">Waiting for campaign activation</div>
+                    )}
+                  </td>
                   <td className="px-4 py-3 text-center">
                     <Badge variant={campaign.status === 'active' ? 'default' : campaign.status === 'paused' ? 'outline' : 'secondary'} data-testid={`status-campaign-${campaign.id}`}>
                       {campaign.status}
@@ -252,6 +315,17 @@ export function CampaignsTab() {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
+                         <DropdownMenuItem
+                           onClick={() => toggleMorningList(campaign)}
+                           disabled={updateScheduleMutation.isPending}
+                           data-testid={`action-toggle-research-schedule-${campaign.id}`}
+                         >
+                           {schedule?.enabled ? (
+                             <><Pause className="w-4 h-4 mr-2" /> Pause 8 AM List</>
+                           ) : (
+                             <><CalendarClock className="w-4 h-4 mr-2" /> Enable 8 AM List</>
+                           )}
+                         </DropdownMenuItem>
                         {campaign.status !== 'draft' && (
                           <DropdownMenuItem
                             onClick={() => setCampaignStatus(campaign, campaign.status === 'active' ? 'paused' : 'active')}
@@ -273,10 +347,14 @@ export function CampaignsTab() {
                     </DropdownMenu>
                   </td>
                 </tr>
-              ))}
+              )})}
             </tbody>
           </table>
+          </div>
         )}
+      </div>
+      <div className="border border-emerald-500/25 bg-emerald-500/5 px-4 py-3 text-sm text-muted-foreground rounded-[2px]">
+        Morning research only adds evidence-backed organizations for review. It never approves a prospect, creates an approved email, or sends outreach automatically.
       </div>
     </div>
   );

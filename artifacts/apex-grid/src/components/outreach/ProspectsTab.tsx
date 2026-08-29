@@ -417,7 +417,12 @@ export function ProspectsTab() {
                 <div key={run.id} className="flex items-center gap-2 text-muted-foreground">
                   <span>{run.state} {run.audience}</span>
                   <Badge variant="outline" className="text-[10px] uppercase h-5">{run.status}</Badge>
-                  {run.status === 'completed' && <span>({run.resultCount} found)</span>}
+                   {run.status === 'completed' && (
+                     <span>({run.resultCount} added · {run.skippedCount} skipped)</span>
+                   )}
+                   {run.status === 'failed' && run.error && (
+                     <span className="text-destructive truncate max-w-[280px]" title={run.error}>{run.error}</span>
+                   )}
                 </div>
               ))}
             </div>
