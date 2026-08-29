@@ -1,4 +1,4 @@
-import { createHmac, timingSafeEqual, verify } from "node:crypto";
+import { createHmac, createPublicKey, timingSafeEqual, verify } from "node:crypto";
 import { ReplitConnectors } from "@replit/connectors-sdk";
 import { and, eq, inArray, isNull } from "drizzle-orm";
 import {
@@ -115,10 +115,18 @@ export function verifySendGridEventSignature(rawBody: Buffer, headers: {
   const publicKey = process.env.SENDGRID_EVENT_WEBHOOK_PUBLIC_KEY;
   if (!publicKey || !headers.signature || !headers.timestamp) return false;
   try {
+    const normalizedKey = publicKey.replace(/\\n/g, "\n").trim();
+    const verificationKey = normalizedKey.includes("BEGIN PUBLIC KEY")
+      ? normalizedKey
+      : createPublicKey({
+          key: Buffer.from(normalizedKey, "base64"),
+          format: "der",
+          type: "spki",
+        });
     return verify(
       "sha256",
       Buffer.concat([Buffer.from(headers.timestamp), rawBody]),
-      publicKey.replace(/\\n/g, "\n"),
+      verificationKey,
       Buffer.from(headers.signature, "base64"),
     );
   } catch {

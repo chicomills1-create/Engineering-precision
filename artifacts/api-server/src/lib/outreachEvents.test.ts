@@ -32,6 +32,17 @@ test("accepts a valid SendGrid-style ECDSA SHA-256 signature and rejects tamperi
   assert.equal(verifySendGridEventSignature(Buffer.from(`${body.toString()}x`), { timestamp, signature }), false);
 });
 
+test("accepts the base64 DER public-key format returned by SendGrid", () => {
+  const { publicKey, privateKey } = generateKeyPairSync("ec", { namedCurve: "prime256v1" });
+  process.env.SENDGRID_EVENT_WEBHOOK_PUBLIC_KEY = publicKey
+    .export({ type: "spki", format: "der" })
+    .toString("base64");
+  const timestamp = "1787970001";
+  const body = Buffer.from('[{"event":"delivered","email":"test@example.com"}]');
+  const signature = sign("sha256", Buffer.concat([Buffer.from(timestamp), body]), privateKey).toString("base64");
+  assert.equal(verifySendGridEventSignature(body, { timestamp, signature }), true);
+});
+
 async function createEventFixture() {
   const suffix = randomUUID();
   const email = `outreach-test-${suffix}@example.com`;
