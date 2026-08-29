@@ -656,6 +656,7 @@ export const OutreachMessageStatus = {
   draft: 'draft',
   approved: 'approved',
   sending: 'sending',
+  needs_review: 'needs_review',
   sent: 'sent',
   delivered: 'delivered',
   bounced: 'bounced',

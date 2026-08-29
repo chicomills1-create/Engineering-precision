@@ -812,7 +812,7 @@ export const GenerateOutreachDraftResponseItem = zod.object({
   "sequenceNumber": zod.number().min(1),
   "subject": zod.string(),
   "body": zod.string(),
-  "status": zod.enum(['draft', 'approved', 'sending', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
+  "status": zod.enum(['draft', 'approved', 'sending', 'needs_review', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
   "scheduledAt": zod.string().nullish(),
   "sentAt": zod.string().nullish(),
   "providerMessageId": zod.string().nullish(),
@@ -1029,7 +1029,7 @@ export const ListOutreachMessagesResponseItem = zod.object({
   "sequenceNumber": zod.number().min(1),
   "subject": zod.string(),
   "body": zod.string(),
-  "status": zod.enum(['draft', 'approved', 'sending', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
+  "status": zod.enum(['draft', 'approved', 'sending', 'needs_review', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
   "scheduledAt": zod.string().nullish(),
   "sentAt": zod.string().nullish(),
   "providerMessageId": zod.string().nullish(),
@@ -1069,7 +1069,7 @@ export const CreateOutreachMessageResponse = zod.object({
   "sequenceNumber": zod.number().min(1),
   "subject": zod.string(),
   "body": zod.string(),
-  "status": zod.enum(['draft', 'approved', 'sending', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
+  "status": zod.enum(['draft', 'approved', 'sending', 'needs_review', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
   "scheduledAt": zod.string().nullish(),
   "sentAt": zod.string().nullish(),
   "providerMessageId": zod.string().nullish(),
@@ -1080,6 +1080,30 @@ export const CreateOutreachMessageResponse = zod.object({
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
+
+
+
+
+
+export const ListOutreachMessagesForReviewResponseItem = zod.object({
+  "id": zod.number(),
+  "prospectId": zod.number(),
+  "campaignId": zod.number().nullish(),
+  "sequenceNumber": zod.number().min(1),
+  "subject": zod.string(),
+  "body": zod.string(),
+  "status": zod.enum(['draft', 'approved', 'sending', 'needs_review', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
+  "scheduledAt": zod.string().nullish(),
+  "sentAt": zod.string().nullish(),
+  "providerMessageId": zod.string().nullish(),
+  "error": zod.string().nullish(),
+  "sourceType": zod.union([zod.literal('lead'),zod.literal('referral_partner'),zod.literal('public_opportunity'),zod.literal(null)]).nullish(),
+  "sourceId": zod.number().nullish(),
+  "sourceLabel": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const ListOutreachMessagesForReviewResponse = zod.array(ListOutreachMessagesForReviewResponseItem)
 
 
 export const UpdateOutreachMessageParams = zod.object({
@@ -1112,7 +1136,7 @@ export const UpdateOutreachMessageResponse = zod.object({
   "sequenceNumber": zod.number().min(1),
   "subject": zod.string(),
   "body": zod.string(),
-  "status": zod.enum(['draft', 'approved', 'sending', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
+  "status": zod.enum(['draft', 'approved', 'sending', 'needs_review', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
   "scheduledAt": zod.string().nullish(),
   "sentAt": zod.string().nullish(),
   "providerMessageId": zod.string().nullish(),
@@ -1139,7 +1163,7 @@ export const ApproveOutreachMessageResponse = zod.object({
   "sequenceNumber": zod.number().min(1),
   "subject": zod.string(),
   "body": zod.string(),
-  "status": zod.enum(['draft', 'approved', 'sending', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
+  "status": zod.enum(['draft', 'approved', 'sending', 'needs_review', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
   "scheduledAt": zod.string().nullish(),
   "sentAt": zod.string().nullish(),
   "providerMessageId": zod.string().nullish(),
@@ -1166,7 +1190,7 @@ export const SendOutreachMessageResponse = zod.object({
   "sequenceNumber": zod.number().min(1),
   "subject": zod.string(),
   "body": zod.string(),
-  "status": zod.enum(['draft', 'approved', 'sending', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
+  "status": zod.enum(['draft', 'approved', 'sending', 'needs_review', 'sent', 'delivered', 'bounced', 'replied', 'unsubscribed', 'failed']),
   "scheduledAt": zod.string().nullish(),
   "sentAt": zod.string().nullish(),
   "providerMessageId": zod.string().nullish(),

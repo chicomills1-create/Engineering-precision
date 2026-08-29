@@ -703,6 +703,12 @@ paths:
       requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachMessageInput" } } } }
       responses:
         "201": { description: Created, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachMessage" } } } }
+  /outreach/messages/review:
+    get:
+      operationId: listOutreachMessagesForReview
+      tags: [outreach]
+      responses:
+        "200": { description: Messages with unresolved provider outcomes, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/OutreachMessage" } } } } }
   /outreach/messages/{id}:
     patch:
       operationId: updateOutreachMessage
@@ -1337,7 +1343,7 @@ components:
         sequenceNumber: { type: number, minimum: 1 }
         subject: { type: string }
         body: { type: string }
-        status: { type: string, enum: [draft, approved, sending, sent, delivered, bounced, replied, unsubscribed, failed] }
+        status: { type: string, enum: [draft, approved, sending, needs_review, sent, delivered, bounced, replied, unsubscribed, failed] }
         scheduledAt: { type: [string, "null"] }
         sentAt: { type: [string, "null"] }
         providerMessageId: { type: [string, "null"] }

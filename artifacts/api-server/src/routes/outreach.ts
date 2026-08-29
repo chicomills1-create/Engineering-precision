@@ -38,7 +38,7 @@ import {
 import { verifyUnsubscribeToken } from "../lib/unsubscribeToken";
 import { suppressOutreachEmail } from "../lib/outreachSuppression";
 import { discoverPublicProspects } from "../lib/publicResearch";
-import { getOutreachAutomationStatus } from "../lib/outreachWorker";
+import { claimOutreachMessageForSending, getOutreachAutomationStatus } from "../lib/outreachWorker";
 import {
   OUTREACH_RESEARCH_LOCAL_HOUR,
   OUTREACH_RESEARCH_TIMEZONE,
@@ -262,6 +262,12 @@ router.put("/outreach/campaigns/:id/research-schedule", requireAuth, async (req,
     .limit(1);
   res.json(UpdateOutreachResearchScheduleResponse.parse(researchScheduleJson(schedule!, latestRun)));
 });
+router.get("/outreach/messages/review", requireAuth, async (_req, res): Promise<void> => {
+  const rows = await db.select().from(outreachMessagesTable)
+    .where(inArray(outreachMessagesTable.status, ["sending", "needs_review"]))
+    .orderBy(desc(outreachMessagesTable.updatedAt));
+  res.json(ListOutreachMessagesResponse.parse(await Promise.all(rows.map(messageJson))));
+});
 router.get("/outreach/messages", requireAuth, async (_req, res): Promise<void> => { const rows = await db.select().from(outreachMessagesTable).orderBy(desc(outreachMessagesTable.createdAt)); res.json(ListOutreachMessagesResponse.parse(await Promise.all(rows.map(messageJson)))); });
 router.post("/outreach/messages", requireAuth, async (req, res): Promise<void> => { const data = CreateOutreachMessageBody.safeParse(req.body); if (!data.success) { res.status(400).json({ error: data.error.message }); return; } const attributionError = await validateAttribution(data.data.sourceType, data.data.sourceId); if (attributionError) { res.status(400).json({ error: attributionError }); return; } const [row] = await db.insert(outreachMessagesTable).values({ ...data.data, status: "draft", scheduledAt: data.data.scheduledAt ? new Date(data.data.scheduledAt) : undefined }).returning(); res.status(201).json(CreateOutreachMessageResponse.parse(await messageJson(row!))); });
 router.patch("/outreach/messages/:id", requireAuth, async (req, res): Promise<void> => { const p = UpdateOutreachMessageParams.safeParse(req.params), data = UpdateOutreachMessageBody.safeParse(req.body); if (!p.success || !data.success) { res.status(400).json({ error: "Invalid request" }); return; } const attributionError = await validateAttribution(data.data.sourceType, data.data.sourceId); if (attributionError) { res.status(400).json({ error: attributionError }); return; } const [row] = await db.update(outreachMessagesTable).set({ ...data.data, status: "draft", scheduledAt: data.data.scheduledAt ? new Date(data.data.scheduledAt) : undefined }).where(and(eq(outreachMessagesTable.id, p.data.id), eq(outreachMessagesTable.status, "draft"))).returning(); if (!row) { res.status(409).json({ error: "Only draft messages can be edited" }); return; } res.json(UpdateOutreachMessageResponse.parse(await messageJson(row))); });
@@ -334,13 +340,7 @@ router.post("/outreach/messages/:id/send", requireAuth, async (req, res): Promis
   const [campaign] = message.campaignId ? await db.select().from(campaignsTable).where(eq(campaignsTable.id, message.campaignId)) : [];
   if (message.campaignId && !campaign) { res.status(409).json({ error: "Campaign not found" }); return; }
   try {
-    const [claimed] = await db.update(outreachMessagesTable)
-      .set({ status: "sending", error: null })
-      .where(and(
-        eq(outreachMessagesTable.id, message.id),
-        eq(outreachMessagesTable.status, "approved"),
-      ))
-      .returning();
+    const claimed = await claimOutreachMessageForSending(message.id);
     if (!claimed) { res.status(409).json({ error: "Message is no longer available to send" }); return; }
     const sent = await sendApprovedOutreach(message, prospect, campaign);
     const [row] = await db.update(outreachMessagesTable).set({
@@ -360,7 +360,7 @@ router.post("/outreach/messages/:id/send", requireAuth, async (req, res): Promis
   } catch (err) {
     const error = err instanceof Error ? err.message : "Unable to send message";
     await db.update(outreachMessagesTable).set({
-      status: isUnknownSendResultError(err) ? "sending" : "failed",
+      status: isUnknownSendResultError(err) ? "needs_review" : "failed",
       error,
     }).where(and(
       eq(outreachMessagesTable.id, message.id),

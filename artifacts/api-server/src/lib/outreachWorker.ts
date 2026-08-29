@@ -1,7 +1,8 @@
-import { and, asc, eq, lte } from "drizzle-orm";
+import { and, asc, desc, eq, lte, or, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
+  outreachDeliveryEventsTable,
   outreachMessagesTable,
   prospectsTable,
   type OutreachMessage,
@@ -16,6 +17,7 @@ import {
 import { processDueOutreachResearchSchedules } from "./outreachResearchScheduler";
 
 const ADMIN_EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+const SEND_REVIEW_AFTER_MS = 15 * 60 * 1000;
 
 export type OutreachAutomationStatus = {
   adminAllowlistReady: boolean;
@@ -97,6 +99,21 @@ export function isOutreachResearchAutomationReady(): boolean {
   return getOutreachAutomationStatus().researchAutomationReady;
 }
 
+export async function claimOutreachMessageForSending(messageId: number): Promise<OutreachMessage | undefined> {
+  const [claimed] = await db.update(outreachMessagesTable)
+    .set({ status: "sending", error: null })
+    .where(and(
+      eq(outreachMessagesTable.id, messageId),
+      eq(outreachMessagesTable.status, "approved"),
+    ))
+    .returning();
+  return claimed;
+}
+
+export function getSendFailureStatus(error: unknown): "failed" | "needs_review" {
+  return isUnknownSendResultError(error) ? "needs_review" : "failed";
+}
+
 async function sendClaimedMessage(message: OutreachMessage): Promise<void> {
   const [prospect] = await db.select().from(prospectsTable).where(eq(prospectsTable.id, message.prospectId));
   if (!prospect) throw new Error("Prospect not found");
@@ -115,8 +132,69 @@ async function sendClaimedMessage(message: OutreachMessage): Promise<void> {
   ));
 }
 
+export async function reconcileSendingOutreachMessages(
+  now = new Date(),
+  reviewAfterMs = SEND_REVIEW_AFTER_MS,
+): Promise<number> {
+  const messages = await db.select().from(outreachMessagesTable)
+    .where(eq(outreachMessagesTable.status, "sending"));
+  let reconciledCount = 0;
+  for (const message of messages) {
+    const evidence = await db.select().from(outreachDeliveryEventsTable)
+      .where(or(
+        eq(outreachDeliveryEventsTable.outreachMessageId, message.id),
+        ...(message.providerReconciliationKey
+          ? [eq(outreachDeliveryEventsTable.reconciliationKey, message.providerReconciliationKey)]
+          : []),
+      ))
+      .orderBy(desc(outreachDeliveryEventsTable.occurredAt));
+    const terminalFailure = evidence.find((event) =>
+      ["bounce", "blocked", "dropped"].includes(event.eventType)
+    );
+    const delivered = evidence.find((event) => event.eventType === "delivered");
+    const accepted = evidence[0];
+    const decisiveEvent = terminalFailure ?? delivered ?? accepted;
+    if (decisiveEvent) {
+      const status = terminalFailure ? "bounced" : delivered ? "delivered" : "sent";
+      const [updated] = await db.update(outreachMessagesTable)
+        .set({
+          status,
+          sentAt: status === "sent" || status === "delivered"
+            ? sql`coalesce(${outreachMessagesTable.sentAt}, ${decisiveEvent.occurredAt})`
+            : undefined,
+          providerMessageId: decisiveEvent.providerMessageId ?? undefined,
+          error: terminalFailure
+            ? terminalFailure.reason ?? "Delivery failed"
+            : null,
+        })
+        .where(and(
+          eq(outreachMessagesTable.id, message.id),
+          eq(outreachMessagesTable.status, "sending"),
+        ))
+        .returning({ id: outreachMessagesTable.id });
+      if (updated) reconciledCount += 1;
+      continue;
+    }
+
+    if (now.getTime() - message.updatedAt.getTime() < reviewAfterMs) continue;
+    const [updated] = await db.update(outreachMessagesTable)
+      .set({
+        status: "needs_review",
+        error: "SendGrid dispatch result is unresolved; review provider activity before taking any action",
+      })
+      .where(and(
+        eq(outreachMessagesTable.id, message.id),
+        eq(outreachMessagesTable.status, "sending"),
+      ))
+      .returning({ id: outreachMessagesTable.id });
+    if (updated) reconciledCount += 1;
+  }
+  return reconciledCount;
+}
+
 export async function processDueOutreachMessages(): Promise<number> {
   if (!isOutreachAutomationReady()) return 0;
+  await reconcileSendingOutreachMessages();
   const due = await db.select().from(outreachMessagesTable)
     .where(and(
       eq(outreachMessagesTable.status, "approved"),
@@ -126,13 +204,7 @@ export async function processDueOutreachMessages(): Promise<number> {
     .limit(10);
   let sentCount = 0;
   for (const message of due) {
-    const [claimed] = await db.update(outreachMessagesTable)
-      .set({ status: "sending", error: null })
-      .where(and(
-        eq(outreachMessagesTable.id, message.id),
-        eq(outreachMessagesTable.status, "approved"),
-      ))
-      .returning();
+    const claimed = await claimOutreachMessageForSending(message.id);
     if (!claimed) continue;
     try {
       await sendClaimedMessage(claimed);
@@ -154,7 +226,7 @@ export async function processDueOutreachMessages(): Promise<number> {
         continue;
       }
       await db.update(outreachMessagesTable)
-        .set({ status: isUnknownSendResultError(err) ? "sending" : "failed", error })
+        .set({ status: getSendFailureStatus(err), error })
         .where(and(
           eq(outreachMessagesTable.id, claimed.id),
           eq(outreachMessagesTable.status, "sending"),

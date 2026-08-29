@@ -1,6 +1,7 @@
 import {
   boolean,
   integer,
+  index,
   pgTable,
   serial,
   text,
@@ -108,12 +109,29 @@ export const outreachMessagesTable = pgTable("outreach_messages", {
   scheduledAt: timestamp("scheduled_at", { withTimezone: true }),
   sentAt: timestamp("sent_at", { withTimezone: true }),
   providerMessageId: text("provider_message_id"),
+  providerReconciliationKey: text("provider_reconciliation_key"),
   error: text("error"),
   sourceType: text("source_type"),
   sourceId: integer("source_id"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
 });
+
+export const outreachSequenceSendClaimsTable = pgTable("outreach_sequence_send_claims", {
+  id: serial("id").primaryKey(),
+  messageId: integer("message_id").notNull().references(() => outreachMessagesTable.id, { onDelete: "cascade" }),
+  prospectId: integer("prospect_id").notNull().references(() => prospectsTable.id, { onDelete: "cascade" }),
+  campaignScope: text("campaign_scope").notNull(),
+  sequenceNumber: integer("sequence_number").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [
+  uniqueIndex("outreach_sequence_send_claim_message_unique").on(table.messageId),
+  uniqueIndex("outreach_sequence_send_claim_scope_unique").on(
+    table.prospectId,
+    table.campaignScope,
+    table.sequenceNumber,
+  ),
+]);
 
 export const outreachSuppressionsTable = pgTable("outreach_suppressions", {
   id: serial("id").primaryKey(),
@@ -129,9 +147,12 @@ export const outreachDeliveryEventsTable = pgTable("outreach_delivery_events", {
   eventType: text("event_type").notNull(),
   reason: text("reason"),
   occurredAt: timestamp("occurred_at", { withTimezone: true }).notNull(),
+  outreachMessageId: integer("outreach_message_id").references(() => outreachMessagesTable.id, { onDelete: "set null" }),
+  reconciliationKey: text("reconciliation_key"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 }, (table) => [
   uniqueIndex("outreach_delivery_events_dedupe").on(table.providerMessageId, table.eventType, table.occurredAt),
+  index("outreach_delivery_events_message_idx").on(table.outreachMessageId),
 ]);
 
 export const outreachSendReservationsTable = pgTable("outreach_send_reservations", {
@@ -171,6 +192,7 @@ export const insertCampaignSchema = createInsertSchema(campaignsTable).omit({ id
 export const insertResearchScheduleSchema = createInsertSchema(outreachResearchSchedulesTable).omit({ id: true, createdAt: true, updatedAt: true });
 export const insertResearchScheduleRunSchema = createInsertSchema(outreachResearchScheduleRunsTable).omit({ id: true, startedAt: true, completedAt: true });
 export const insertOutreachMessageSchema = createInsertSchema(outreachMessagesTable).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertOutreachSequenceSendClaimSchema = createInsertSchema(outreachSequenceSendClaimsTable).omit({ id: true, createdAt: true });
 export const insertOutreachSuppressionSchema = createInsertSchema(outreachSuppressionsTable).omit({ id: true, createdAt: true });
 export const insertOutreachDeliveryEventSchema = createInsertSchema(outreachDeliveryEventsTable).omit({ id: true, createdAt: true });
 export const insertOutreachSendReservationSchema = createInsertSchema(outreachSendReservationsTable).omit({ id: true, createdAt: true });

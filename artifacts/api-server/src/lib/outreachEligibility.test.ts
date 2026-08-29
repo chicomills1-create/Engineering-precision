@@ -47,6 +47,7 @@ const approvedMessage: OutreachMessage = {
   scheduledAt: null,
   sentAt: null,
   providerMessageId: null,
+  providerReconciliationKey: null,
   error: null,
   sourceType: null,
   sourceId: null,

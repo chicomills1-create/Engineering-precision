@@ -2521,6 +2521,77 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       return useMutation(getCreateOutreachMessageMutationOptions(options));
     }
 
+export const getListOutreachMessagesForReviewUrl = () => {
+
+
+
+
+  return `/api/outreach/messages/review`
+}
+
+export const listOutreachMessagesForReview = async ( options?: Parameters<typeof customFetch>[1]): Promise<OutreachMessage[]> => {
+
+  return customFetch<OutreachMessage[]>(getListOutreachMessagesForReviewUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListOutreachMessagesForReviewQueryKey = () => {
+    return [
+    `/api/outreach/messages/review`
+    ] as const;
+    }
+
+
+export const getListOutreachMessagesForReviewQueryOptions = <TData = Awaited<ReturnType<typeof listOutreachMessagesForReview>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listOutreachMessagesForReview>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListOutreachMessagesForReviewQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listOutreachMessagesForReview>>> = ({ signal }) => listOutreachMessagesForReview({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listOutreachMessagesForReview>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListOutreachMessagesForReviewQueryResult = NonNullable<Awaited<ReturnType<typeof listOutreachMessagesForReview>>>
+export type ListOutreachMessagesForReviewQueryError = ErrorType<unknown>
+
+
+
+export function useListOutreachMessagesForReview<TData = Awaited<ReturnType<typeof listOutreachMessagesForReview>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listOutreachMessagesForReview>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListOutreachMessagesForReviewQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
 export const getUpdateOutreachMessageUrl = (id: number,) => {
 
 

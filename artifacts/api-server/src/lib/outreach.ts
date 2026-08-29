@@ -1,11 +1,12 @@
 import { ReplitConnectors } from "@replit/connectors-sdk";
 import { openai } from "@workspace/integrations-openai-ai-server";
-import { and, eq, isNotNull, isNull } from "drizzle-orm";
+import { and, eq, isNotNull, isNull, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
   outreachMessagesTable,
   outreachSendReservationsTable,
+  outreachSequenceSendClaimsTable,
   outreachSuppressionsTable,
   prospectsTable,
   type Campaign,
@@ -29,6 +30,12 @@ export function isUnknownSendResultError(error: unknown): boolean {
   return error instanceof Error && error.message.includes("dispatch result is unknown");
 }
 
+export function isDefinitiveSendGridRejection(status: number): boolean {
+  return status >= 400
+    && status < 500
+    && ![408, 409, 425, 429].includes(status);
+}
+
 const INITIAL_RAMP_DAILY_LIMIT = 10;
 const RAMPED_DAILY_LIMIT = 20;
 const INITIAL_RAMP_ACTIVE_DAYS = 3;
@@ -38,6 +45,20 @@ export class DailySendLimitError extends Error {
     super("Daily send limit reached");
     this.name = "DailySendLimitError";
   }
+}
+
+export async function ensureProviderReconciliationKey(messageId: number): Promise<string> {
+  const fallbackKey = `outreach-message-${messageId}`;
+  const [row] = await db.update(outreachMessagesTable)
+    .set({
+      providerReconciliationKey: sql`coalesce(${outreachMessagesTable.providerReconciliationKey}, ${fallbackKey})`,
+    })
+    .where(eq(outreachMessagesTable.id, messageId))
+    .returning({ providerReconciliationKey: outreachMessagesTable.providerReconciliationKey });
+  if (!row?.providerReconciliationKey) {
+    throw new Error("Unable to establish an outreach provider reconciliation key");
+  }
+  return row.providerReconciliationKey;
 }
 
 function phoenixDateKey(date = new Date()): string {
@@ -80,6 +101,22 @@ async function reserveDailySend(message: OutreachMessage, campaign: Campaign | u
     if (inserted[0]) return inserted[0].id;
   }
   throw new DailySendLimitError();
+}
+
+export async function reserveSequenceSend(message: OutreachMessage): Promise<number> {
+  const [inserted] = await db.insert(outreachSequenceSendClaimsTable)
+    .values({
+      messageId: message.id,
+      prospectId: message.prospectId,
+      campaignScope: message.campaignId ? `campaign:${message.campaignId}` : "standalone",
+      sequenceNumber: message.sequenceNumber,
+    })
+    .onConflictDoNothing()
+    .returning({ id: outreachSequenceSendClaimsTable.id });
+  if (!inserted) {
+    throw new Error("This campaign sequence is already reserved or was sent to this prospect");
+  }
+  return inserted.id;
 }
 
 export async function generateProspectDraft(prospect: Prospect): Promise<GeneratedDraft> {
@@ -153,7 +190,15 @@ export async function sendApprovedOutreach(message: OutreachMessage, prospect: P
     ? process.env.SENDGRID_DEDICATED_API_KEY?.trim()
     : undefined;
   const sendgridSubuser = process.env.SENDGRID_SUBUSER_USERNAME?.trim();
-  const reservationId = await reserveDailySend(message, currentCampaign);
+  const providerReconciliationKey = await ensureProviderReconciliationKey(message.id);
+  const sequenceClaimId = await reserveSequenceSend(message);
+  let reservationId: number;
+  try {
+    reservationId = await reserveDailySend(message, currentCampaign);
+  } catch (error) {
+    await db.delete(outreachSequenceSendClaimsTable).where(eq(outreachSequenceSendClaimsTable.id, sequenceClaimId));
+    throw error;
+  }
   let response: Awaited<ReturnType<ReplitConnectors["proxy"]>>;
   try {
     const requestBody = JSON.stringify({
@@ -166,6 +211,7 @@ export async function sendApprovedOutreach(message: OutreachMessage, prospect: P
         custom_args: {
           outreach_message_id: String(message.id),
           outreach_prospect_id: String(prospect.id),
+          outreach_reconciliation_key: providerReconciliationKey,
         },
       }],
       from: { email: from, name: "Apex Grid Engineering" },
@@ -197,8 +243,14 @@ export async function sendApprovedOutreach(message: OutreachMessage, prospect: P
     throw new Error("SendGrid dispatch result is unknown; message requires reconciliation before retry");
   }
   if (!response.ok) {
-    await db.delete(outreachSendReservationsTable).where(eq(outreachSendReservationsTable.id, reservationId));
-    throw new Error(`SendGrid rejected the message with status ${response.status}`);
+    if (isDefinitiveSendGridRejection(response.status)) {
+      await Promise.all([
+        db.delete(outreachSendReservationsTable).where(eq(outreachSendReservationsTable.id, reservationId)),
+        db.delete(outreachSequenceSendClaimsTable).where(eq(outreachSequenceSendClaimsTable.id, sequenceClaimId)),
+      ]);
+      throw new Error(`SendGrid rejected the message with status ${response.status}`);
+    }
+    throw new Error(`SendGrid dispatch result is unknown after status ${response.status}; message requires reconciliation before retry`);
   }
   return { providerMessageId: response.headers.get("x-message-id") ?? undefined };
 }

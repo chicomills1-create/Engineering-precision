@@ -47,6 +47,9 @@ export function MessagesTab() {
   const { data: messages, isLoading: messagesLoading } = useListOutreachMessages();
   const { data: prospects, isLoading: prospectsLoading } = useListProspects();
   const { data: campaigns } = useListCampaigns();
+  const unresolvedMessages = messages?.filter((message) =>
+    message.status === 'sending' || message.status === 'needs_review'
+  ) ?? [];
   const { data: suppressions } = useListOutreachSuppressions();
   
   const queryClient = useQueryClient();
@@ -248,6 +251,18 @@ export function MessagesTab() {
         </div>
       )}
 
+      {unresolvedMessages.length > 0 && (
+        <div
+          className="border border-amber-500/30 bg-amber-500/10 px-4 py-3 rounded-[2px] text-sm text-amber-200"
+          data-testid="outreach-unresolved-send-review"
+        >
+          <span className="font-medium">
+            {unresolvedMessages.length} send {unresolvedMessages.length === 1 ? 'needs' : 'need'} provider review.
+          </span>{' '}
+          Do not resend these messages until their SendGrid activity has been checked.
+        </div>
+      )}
+
       <Dialog open={!!isEditOpen} onOpenChange={(open) => !open && setIsEditOpen(null)}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
@@ -309,12 +324,17 @@ export function MessagesTab() {
                         )}
                       </td>
                       <td className="px-4 py-3 text-center align-top">
-                        <Badge variant={m.status === 'sent' || m.status === 'delivered' ? 'default' : m.status === 'failed' || m.status === 'bounced' ? 'destructive' : m.status === 'replied' ? 'default' : 'secondary'} data-testid={`status-message-${m.id}`}>
+                        <Badge variant={m.status === 'sent' || m.status === 'delivered' ? 'default' : m.status === 'failed' || m.status === 'bounced' || m.status === 'needs_review' ? 'destructive' : m.status === 'replied' ? 'default' : 'secondary'} data-testid={`status-message-${m.id}`}>
                           {m.status}
                         </Badge>
                       </td>
                       <td className="px-4 py-3 text-xs align-top">
                         {m.error && <div className="text-destructive font-medium mb-1 line-clamp-2" title={m.error}>Error: {m.error}</div>}
+                        {(m.status === 'sending' || m.status === 'needs_review') && (
+                          <div className="text-amber-500 font-medium mb-1">
+                            Provider outcome unresolved — do not resend.
+                          </div>
+                        )}
                         {m.sentAt && <div className="text-muted-foreground mb-1">Sent: {new Date(m.sentAt).toLocaleDateString()}</div>}
                         
                         {(m.status === 'draft' || m.status === 'approved') && blockers.length > 0 && (

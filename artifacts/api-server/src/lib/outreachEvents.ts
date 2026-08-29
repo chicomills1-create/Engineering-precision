@@ -1,6 +1,6 @@
 import { createHmac, createPublicKey, timingSafeEqual, verify } from "node:crypto";
 import { ReplitConnectors } from "@replit/connectors-sdk";
-import { and, eq, inArray, isNull } from "drizzle-orm";
+import { and, eq, inArray, isNull, sql } from "drizzle-orm";
 import {
   db,
   outreachDeliveryEventsTable,
@@ -19,6 +19,7 @@ export type SendGridEvent = {
   sg_message_id?: string;
   outreach_message_id?: string;
   outreach_prospect_id?: string;
+  outreach_reconciliation_key?: string;
 };
 
 function getReplyWebhookToken(): string | undefined {
@@ -195,31 +196,64 @@ export async function processSendGridEvents(events: SendGridEvent[]): Promise<nu
     const eventType = event.event?.trim().toLowerCase();
     if (!email || !eventType || !event.timestamp) continue;
     const providerMessageId = normalizeProviderMessageId(event.sg_message_id);
+    const reconciliationKey = event.outreach_reconciliation_key?.trim() || null;
     const occurredAt = new Date(event.timestamp * 1000);
     const reason = (event.reason || event.response || "").slice(0, 500) || null;
+    const requestedMessageId = Number(event.outreach_message_id);
+    let matchedMessage = Number.isInteger(requestedMessageId)
+      ? (await db.select().from(outreachMessagesTable).where(eq(outreachMessagesTable.id, requestedMessageId)).limit(1))[0]
+      : undefined;
+    if (!matchedMessage && reconciliationKey) {
+      [matchedMessage] = await db.select().from(outreachMessagesTable)
+        .where(eq(outreachMessagesTable.providerReconciliationKey, reconciliationKey))
+        .limit(1);
+    }
+    if (!matchedMessage && providerMessageId) {
+      [matchedMessage] = await db.select().from(outreachMessagesTable)
+        .where(eq(outreachMessagesTable.providerMessageId, providerMessageId))
+        .limit(1);
+    }
     const inserted = await db.insert(outreachDeliveryEventsTable).values({
       providerMessageId,
       email,
       eventType,
       reason,
       occurredAt,
+      outreachMessageId: matchedMessage?.id ?? null,
+      reconciliationKey: reconciliationKey ?? matchedMessage?.providerReconciliationKey ?? null,
     }).onConflictDoNothing().returning({ id: outreachDeliveryEventsTable.id });
     if (inserted.length === 0) continue;
 
-    const messageId = Number(event.outreach_message_id);
     const prospectId = Number(event.outreach_prospect_id);
-    const messageWhere = Number.isInteger(messageId)
-      ? eq(outreachMessagesTable.id, messageId)
-      : providerMessageId
-        ? eq(outreachMessagesTable.providerMessageId, providerMessageId)
-        : undefined;
+    const messageWhere = matchedMessage
+      ? eq(outreachMessagesTable.id, matchedMessage.id)
+      : undefined;
+
+    if (messageWhere && ["processed", "deferred"].includes(eventType)) {
+      await db.update(outreachMessagesTable)
+        .set({
+          status: "sent",
+          sentAt: sql`coalesce(${outreachMessagesTable.sentAt}, ${occurredAt})`,
+          providerMessageId: providerMessageId ?? undefined,
+          error: null,
+        })
+        .where(and(
+          messageWhere,
+          inArray(outreachMessagesTable.status, ["sending", "needs_review"]),
+        ));
+    }
 
     if (messageWhere && eventType === "delivered") {
       const [deliveredMessage] = await db.update(outreachMessagesTable)
-        .set({ status: "delivered", error: null })
+        .set({
+          status: "delivered",
+          sentAt: sql`coalesce(${outreachMessagesTable.sentAt}, ${occurredAt})`,
+          providerMessageId: providerMessageId ?? undefined,
+          error: null,
+        })
         .where(and(
           messageWhere,
-          inArray(outreachMessagesTable.status, ["sent", "sending"]),
+          inArray(outreachMessagesTable.status, ["sent", "sending", "needs_review"]),
         ))
         .returning();
       if (deliveredMessage?.sequenceNumber === 1) {
