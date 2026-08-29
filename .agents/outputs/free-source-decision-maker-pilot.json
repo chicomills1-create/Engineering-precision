@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-08-29T21:00:00-07:00",
+  "method": "Free-first public research; FindyMail only for confirmed named decision-makers without a public direct email",
+  "productionDeduplicationChecked": true,
+  "productionSuppressionsChecked": true,
+  "leads": [
+    {
+      "name": "Anthony Jeffers",
+      "company": "Hensel Phelps",
+      "title": "Project Development Director",
+      "email": "ajeffers@henselphelps.com",
+      "city": "Phoenix",
+      "state": "AZ",
+      "audience": "builder",
+      "companyWebsite": "https://www.henselphelps.com/",
+      "sourceUrl": "https://www.henselphelps.com/contact-us/southwest/",
+      "contactSourceUrl": "https://www.henselphelps.com/contact-us/southwest/",
+      "emailSource": "Official firm page",
+      "needEvidence": "Official Southwest regional page invites construction opportunities and lists active commercial projects in Gilbert and Paradise Valley.",
+      "approvalStatus": "preapproved_candidate",
+      "existingProspect": false,
+      "suppressed": false
+    },
+    {
+      "name": "Jason Ploszaj",
+      "company": "RSP Architects",
+      "title": "Principal / Phoenix Design Principal",
+      "email": "jploszaj@rsparch.com",
+      "city": "Phoenix",
+      "state": "AZ",
+      "audience": "architect",
+      "companyWebsite": "https://rsparch.com/",
+      "sourceUrl": "https://rsparch.com/location/phoenix-az/",
+      "contactSourceUrl": "https://rsparch.com/person/jason-ploszaj/",
+      "emailSource": "FindyMail targeted name/domain result",
+      "needEvidence": "Official Phoenix office and principal pages show active Arizona commercial, higher-education, hospitality, and mixed-use project work.",
+      "approvalStatus": "preapproved_candidate",
+      "existingProspect": false,
+      "suppressed": false
+    },
+    {
+      "name": "James A. Favata",
+      "company": "Dekker",
+      "title": "Principal / Design Leader",
+      "email": "jamesf@dekkerdesign.org",
+      "city": "Phoenix",
+      "state": "AZ",
+      "audience": "architect",
+      "companyWebsite": "https://www.dekkerdesign.org/",
+      "sourceUrl": "https://www.dekkerdesign.org/arizona-architecture-firm/",
+      "contactSourceUrl": "https://www.dekkerdesign.org/arizona-architecture-firm/",
+      "emailSource": "FindyMail targeted name/domain result",
+      "needEvidence": "Official Arizona page names Favata as a Phoenix principal and describes active civic, healthcare, higher-education, and public-safety work across the Southwest.",
+      "approvalStatus": "preapproved_candidate",
+      "existingProspect": false,
+      "suppressed": false
+    },
+    {
+      "name": "Bill Johal",
+      "company": "Kitchell",
+      "title": "Senior Vice President / Northern California Region",
+      "email": "bjohal@kitchell.com",
+      "city": "Sacramento",
+      "state": "CA",
+      "audience": "builder",
+      "companyWebsite": "https://www.kitchell.com/",
+      "sourceUrl": "https://www.kitchell.com/about-us/leadership/",
+      "contactSourceUrl": "https://www.kitchell.com/about-us/leadership/",
+      "emailSource": "FindyMail targeted name/domain result",
+      "needEvidence": "Official Kitchell leadership content identifies Johal as a senior executive and documents substantial public-safety construction across California and the Southwest.",
+      "approvalStatus": "preapproved_candidate",
+      "existingProspect": false,
+      "suppressed": false
+    }
+  ],
+  "findyMailCreditsRemaining": {
+    "finder": 4437,
+    "verifier": 4965
+  }
+}
