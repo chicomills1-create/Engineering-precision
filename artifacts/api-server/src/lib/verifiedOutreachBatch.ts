@@ -159,7 +159,7 @@ export async function seedVerifiedOutreachBatch(options: {
       name: CAMPAIGN_NAME,
       audience: "architect",
       states: ["AZ"],
-      dailyLimit: 100,
+      dailyLimit: 167,
       status: "active",
       subjectTemplate: SUBJECT,
       bodyTemplate: "Approved personalized Apex Grid outreach copy",

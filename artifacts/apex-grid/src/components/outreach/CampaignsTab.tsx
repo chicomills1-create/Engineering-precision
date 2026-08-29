@@ -92,7 +92,7 @@ export function CampaignsTab() {
       name: '',
       audience: 'architect',
       states: [],
-      dailyLimit: 100,
+       dailyLimit: 167,
       subjectTemplate: '',
       bodyTemplate: '',
     },
@@ -124,7 +124,7 @@ export function CampaignsTab() {
       data: {
         enabled: !schedule?.enabled,
         localHour: 8,
-        targetCount: Math.min(100, campaign.dailyLimit),
+         targetCount: Math.min(167, campaign.dailyLimit),
       },
     });
   }
