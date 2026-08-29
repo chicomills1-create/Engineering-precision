@@ -15,3 +15,4 @@
 - [Outreach automation safety](outreach-automation-safety.md) — keep follow-ups manual until delivery events and reply detection can stop sequences reliably.
 - [Private upload claims](private-upload-claims.md) — private object paths are not ownership; bind uploads to one-time claims and consume them atomically with the owning record.
 - [Past-client monthly outreach](past-client-monthly-outreach.md) — consent is canonical per normalized email; claim one send per Phoenix month before provider dispatch.
+- [Outbound proof environments](outbound-proof-environments.md) — send proofs from the same environment whose webhook updates are being verified; provider delivery alone does not prove app state.

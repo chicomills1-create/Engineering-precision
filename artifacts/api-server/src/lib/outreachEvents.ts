@@ -27,7 +27,7 @@ function getReplyWebhookToken(): string | undefined {
   const sessionSecret = process.env.SESSION_SECRET?.trim();
   if (!sessionSecret) return undefined;
   return createHmac("sha256", sessionSecret)
-    .update("apex-grid-outreach-inbound-reply-v1")
+    .update("apex-grid-outreach-inbound-reply-v2")
     .digest("hex");
 }
 
