@@ -12,7 +12,7 @@ export interface ResearchScheduleInput {
   localHour?: ResearchScheduleInputLocalHour;
   /**
      * @minimum 1
-     * @maximum 100
+     * @maximum 167
      */
   targetCount?: number;
 }

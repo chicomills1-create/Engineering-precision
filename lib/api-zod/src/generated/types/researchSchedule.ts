@@ -17,7 +17,7 @@ export interface ResearchSchedule {
   localHour: ResearchScheduleLocalHour;
   /**
      * @minimum 1
-     * @maximum 100
+     * @maximum 167
      */
   targetCount: number;
   createdAt: string;

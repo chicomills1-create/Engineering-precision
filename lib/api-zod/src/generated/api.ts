@@ -958,7 +958,7 @@ export const UpdateCampaignResponse = zod.object({
 })
 
 
-export const listOutreachResearchSchedulesResponseTargetCountMax = 100;
+export const listOutreachResearchSchedulesResponseTargetCountMax = 167;
 
 
 
@@ -986,8 +986,8 @@ export const UpdateOutreachResearchScheduleParams = zod.object({
 })
 
 export const updateOutreachResearchScheduleBodyLocalHourDefault = 8;
-export const updateOutreachResearchScheduleBodyTargetCountDefault = 100;
-export const updateOutreachResearchScheduleBodyTargetCountMax = 100;
+export const updateOutreachResearchScheduleBodyTargetCountDefault = 167;
+export const updateOutreachResearchScheduleBodyTargetCountMax = 167;
 
 
 
@@ -997,7 +997,7 @@ export const UpdateOutreachResearchScheduleBody = zod.object({
   "targetCount": zod.number().min(1).max(updateOutreachResearchScheduleBodyTargetCountMax).default(updateOutreachResearchScheduleBodyTargetCountDefault)
 })
 
-export const updateOutreachResearchScheduleResponseTargetCountMax = 100;
+export const updateOutreachResearchScheduleResponseTargetCountMax = 167;
 
 
 
