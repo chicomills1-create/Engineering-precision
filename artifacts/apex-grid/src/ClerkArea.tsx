@@ -1,6 +1,7 @@
 import Admin from '@/pages/Admin';
 import AdminSeo from '@/pages/AdminSeo';
 import AdminOutreach from '@/pages/AdminOutreach';
+import AdminLinkedin from '@/pages/AdminLinkedin';
 import AdminGrowth from '@/pages/AdminGrowth';
 import AdminPayroll from '@/pages/AdminPayroll';
 import AdminReviews from '@/pages/AdminReviews';
@@ -109,7 +110,7 @@ function SignUpPage() {
   );
 }
 
-export type ClerkAreaPage = 'admin' | 'admin-seo' | 'admin-outreach' | 'admin-growth' | 'admin-payroll' | 'admin-reviews' | 'sign-in' | 'sign-up';
+export type ClerkAreaPage = 'admin' | 'admin-seo' | 'admin-outreach' | 'admin-linkedin' | 'admin-growth' | 'admin-payroll' | 'admin-reviews' | 'sign-in' | 'sign-up';
 
 export default function ClerkArea({ page }: { page: ClerkAreaPage }) {
   const [, setLocation] = useLocation();
@@ -142,6 +143,7 @@ export default function ClerkArea({ page }: { page: ClerkAreaPage }) {
       {page === 'admin' && <Admin />}
       {page === 'admin-seo' && <AdminSeo />}
       {page === 'admin-outreach' && <AdminOutreach />}
+      {page === 'admin-linkedin' && <AdminLinkedin />}
       {page === 'admin-growth' && <AdminGrowth />}
       {page === 'admin-payroll' && <AdminPayroll />}
       {page === 'admin-reviews' && <AdminReviews />}

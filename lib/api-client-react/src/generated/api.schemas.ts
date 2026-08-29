@@ -1542,6 +1542,353 @@ export interface SeoDashboard {
   openIssues: SeoAuditIssue[];
 }
 
+export interface LinkedinCompany {
+  id: number;
+  name: string;
+  normalizedName: string;
+  /** @nullable */
+  website?: string | null;
+  /** @nullable */
+  domain?: string | null;
+  /** @nullable */
+  linkedinUrl?: string | null;
+  /** @nullable */
+  geography?: string | null;
+  /** @nullable */
+  disciplineFit?: string | null;
+  /** @nullable */
+  evidence?: string | null;
+  /** @nullable */
+  sourceUrl?: string | null;
+  confidence: number;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface LinkedinPerson {
+  id: number;
+  /** @nullable */
+  companyId?: number | null;
+  name: string;
+  normalizedName: string;
+  /** @nullable */
+  role?: string | null;
+  /** @nullable */
+  linkedinUrl?: string | null;
+  /** @nullable */
+  geography?: string | null;
+  /** @nullable */
+  disciplineFit?: string | null;
+  /** @nullable */
+  evidence?: string | null;
+  /** @nullable */
+  sourceUrl?: string | null;
+  confidence: number;
+  status: string;
+  /** @nullable */
+  retentionUntil?: string | null;
+  /** @nullable */
+  legalBasisNote?: string | null;
+  /** @nullable */
+  consentNote?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface LinkedinSignal {
+  id: number;
+  /** @nullable */
+  personId: number | null;
+  /** @nullable */
+  companyId: number | null;
+  kind: string;
+  title: string;
+  sourceUrl: string;
+  evidence: string;
+  observedAt: string;
+  confidence: number;
+  status: string;
+  createdAt: string;
+}
+
+export type LinkedinActionActionType = typeof LinkedinActionActionType[keyof typeof LinkedinActionActionType];
+
+
+export const LinkedinActionActionType = {
+  connection_note: 'connection_note',
+  direct_message: 'direct_message',
+  follow_up: 'follow_up',
+  comment_idea: 'comment_idea',
+  talking_points: 'talking_points',
+} as const;
+
+export interface LinkedinAction {
+  id: number;
+  /** @nullable */
+  personId?: number | null;
+  /** @nullable */
+  companyId?: number | null;
+  /** @nullable */
+  signalId?: number | null;
+  /** @nullable */
+  campaignId?: number | null;
+  /** @nullable */
+  contentItemId?: number | null;
+  actionType: LinkedinActionActionType;
+  /** @nullable */
+  draftCopy?: string | null;
+  /** @nullable */
+  approvedCopy?: string | null;
+  /** @nullable */
+  directActionUrl?: string | null;
+  /** @nullable */
+  owner?: string | null;
+  /** @nullable */
+  dueAt?: string | null;
+  status: string;
+  /** @nullable */
+  legalBasisNote?: string | null;
+  /** @nullable */
+  completedAt?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface LinkedinSuppression {
+  id: number;
+  /** @nullable */
+  personId?: number | null;
+  /** @nullable */
+  companyId?: number | null;
+  normalizedTarget: string;
+  reason: string;
+  createdAt: string;
+}
+
+export interface LinkedinContentItem {
+  id: number;
+  /** @nullable */
+  campaignId?: number | null;
+  title: string;
+  pillar: string;
+  /** @nullable */
+  sourceUrl?: string | null;
+  /** @nullable */
+  evidence?: string | null;
+  /** @nullable */
+  draftCopy?: string | null;
+  /** @nullable */
+  approvedCopy?: string | null;
+  /** @nullable */
+  scheduledFor?: string | null;
+  /** @nullable */
+  owner?: string | null;
+  status: string;
+  /** @nullable */
+  publishedUrl?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface LinkedinCampaign {
+  id: number;
+  name: string;
+  objective: string;
+  status: string;
+  /** @nullable */
+  owner?: string | null;
+  dailyActionLimit: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type LinkedinOutcomeOutcomeType = typeof LinkedinOutcomeOutcomeType[keyof typeof LinkedinOutcomeOutcomeType];
+
+
+export const LinkedinOutcomeOutcomeType = {
+  visit: 'visit',
+  reply: 'reply',
+  meeting: 'meeting',
+  proposal: 'proposal',
+  win: 'win',
+} as const;
+
+export interface LinkedinOutcome {
+  id: number;
+  /** @nullable */
+  actionId?: number | null;
+  /** @nullable */
+  campaignId?: number | null;
+  /** @nullable */
+  personId?: number | null;
+  /** @nullable */
+  companyId?: number | null;
+  /** @nullable */
+  contentItemId?: number | null;
+  outcomeType: LinkedinOutcomeOutcomeType;
+  /** @nullable */
+  value?: number | null;
+  count: number;
+  /** @nullable */
+  notes?: string | null;
+  /** @nullable */
+  sourceUrl?: string | null;
+  occurredAt: string;
+  createdAt: string;
+}
+
+export interface LinkedinCompanyInput {
+  name: string;
+  website?: string;
+  linkedinUrl?: string;
+  geography?: string;
+  disciplineFit?: string;
+  evidence?: string;
+  sourceUrl?: string;
+  confidence?: number;
+}
+
+export interface LinkedinPersonInput {
+  name: string;
+  companyId?: number;
+  role?: string;
+  linkedinUrl?: string;
+  geography?: string;
+  disciplineFit?: string;
+  evidence?: string;
+  sourceUrl?: string;
+  confidence?: number;
+  retentionUntil?: string;
+  legalBasisNote: string;
+  consentNote?: string;
+}
+
+export interface LinkedinSignalInput {
+  personId?: number;
+  companyId?: number;
+  kind: string;
+  title: string;
+  sourceUrl: string;
+  evidence: string;
+  observedAt: string;
+  confidence?: number;
+}
+
+export interface LinkedinActionInput {
+  personId?: number;
+  companyId?: number;
+  campaignId?: number;
+  actionType: string;
+  draftCopy?: string;
+  status?: string;
+}
+
+export interface LinkedinActionPrepareInput {
+  personId: number;
+  campaignId?: number;
+  actionType: string;
+}
+
+export interface LinkedinActionUpdateInput {
+  draftCopy?: string;
+  approvedCopy?: string;
+  owner?: string;
+  dueAt?: string;
+  legalBasisNote?: string;
+}
+
+export interface LinkedinTransition {
+  status: string;
+  note?: string;
+}
+
+export interface LinkedinSuppressionInput {
+  personId?: number;
+  companyId?: number;
+  profileUrl?: string;
+  reason: string;
+}
+
+export interface LinkedinCampaignInput {
+  name: string;
+  objective: string;
+  owner?: string;
+  dailyActionLimit?: number;
+}
+
+export interface LinkedinContentInput {
+  campaignId?: number;
+  title: string;
+  pillar: string;
+  sourceUrl: string;
+  evidence: string;
+  draftCopy?: string;
+  owner?: string;
+  scheduledFor?: string;
+}
+
+export interface LinkedinContentUpdateInput {
+  campaignId?: number;
+  title?: string;
+  pillar?: string;
+  draftCopy?: string;
+  approvedCopy?: string;
+  owner?: string;
+  sourceUrl?: string;
+  evidence?: string;
+  scheduledFor?: string;
+}
+
+export type LinkedinOutcomeInputOutcomeType = typeof LinkedinOutcomeInputOutcomeType[keyof typeof LinkedinOutcomeInputOutcomeType];
+
+
+export const LinkedinOutcomeInputOutcomeType = {
+  visit: 'visit',
+  reply: 'reply',
+  meeting: 'meeting',
+  proposal: 'proposal',
+  win: 'win',
+} as const;
+
+export interface LinkedinOutcomeInput {
+  actionId?: number;
+  campaignId?: number;
+  personId?: number;
+  companyId?: number;
+  contentItemId?: number;
+  outcomeType: LinkedinOutcomeInputOutcomeType;
+  value?: number;
+  count?: number;
+  notes?: string;
+  sourceUrl?: string;
+  occurredAt: string;
+}
+
+export type LinkedinProviderCapabilities = {[key: string]: boolean};
+
+export interface LinkedinProvider {
+  name: string;
+  capabilities: LinkedinProviderCapabilities;
+}
+
+export type LinkedinDashboardOutcomeRollups = {[key: string]: number};
+
+export interface LinkedinDashboard {
+  people: number;
+  companies: number;
+  actions: number;
+  completedToday: number;
+  contentItems: number;
+  publishedToday: number;
+  outcomeRollups: LinkedinDashboardOutcomeRollups;
+  provider: LinkedinProvider;
+}
+
+export interface LinkedinRetentionResult {
+  expiredPeople: number;
+}
+
 export type ListSeoAuditIssuesParams = {
 severity?: string;
 status?: string;

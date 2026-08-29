@@ -18,6 +18,8 @@ tags:
     description: Authenticated B2B outreach management.
   - name: client-jobs
     description: Public project intake and authenticated client job history.
+  - name: linkedin
+    description: Authenticated, manual-only LinkedIn research and review workflow.
 paths:
   /healthz:
     get:
@@ -992,6 +994,47 @@ paths:
         - { name: limit, in: query, schema: { type: number, minimum: 1, maximum: 500 } }
       responses:
         "200": { description: Latest audit issues, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/SeoAuditIssue" } } } } }
+  /linkedin/dashboard:
+    get: { operationId: getLinkedinDashboard, tags: [linkedin], responses: { "200": { description: Dashboard, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinDashboard" } } } } } }
+  /linkedin/provider:
+    get: { operationId: getLinkedinProvider, tags: [linkedin], responses: { "200": { description: Manual provider capabilities, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinProvider" } } } } } }
+  /linkedin/companies:
+    get: { operationId: listLinkedinCompanies, tags: [linkedin], responses: { "200": { description: Companies, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/LinkedinCompany" } } } } } } }
+    post: { operationId: createLinkedinCompany, tags: [linkedin], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinCompanyInput" } } } }, responses: { "201": { description: Created, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinCompany" } } } } } }
+  /linkedin/people:
+    get: { operationId: listLinkedinPeople, tags: [linkedin], responses: { "200": { description: People, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/LinkedinPerson" } } } } } } }
+    post: { operationId: createLinkedinPerson, tags: [linkedin], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinPersonInput" } } } }, responses: { "201": { description: Created, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinPerson" } } } } } }
+  /linkedin/signals:
+    get: { operationId: listLinkedinSignals, tags: [linkedin], responses: { "200": { description: Signals, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/LinkedinSignal" } } } } } } }
+    post: { operationId: createLinkedinSignal, tags: [linkedin], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinSignalInput" } } } }, responses: { "201": { description: Created, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinSignal" } } } } } }
+  /linkedin/actions:
+    get: { operationId: listLinkedinActions, tags: [linkedin], responses: { "200": { description: Actions, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/LinkedinAction" } } } } } } }
+    post: { operationId: createLinkedinAction, tags: [linkedin], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinActionInput" } } } }, responses: { "201": { description: Created, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinAction" } } } } } }
+  /linkedin/actions/prepare:
+    post: { operationId: prepareLinkedinAction, tags: [linkedin], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinActionPrepareInput" } } } }, responses: { "201": { description: Prepared pending review, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinAction" } } } } } }
+  /linkedin/actions/{id}:
+    patch: { operationId: updateLinkedinAction, tags: [linkedin], parameters: [{ name: id, in: path, required: true, schema: { type: number } }], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinActionUpdateInput" } } } }, responses: { "200": { description: Updated, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinAction" } } } } } }
+  /linkedin/actions/{id}/transition:
+    post: { operationId: transitionLinkedinAction, tags: [linkedin], parameters: [{ name: id, in: path, required: true, schema: { type: number } }], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinTransition" } } } }, responses: { "200": { description: Transitioned, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinAction" } } } } } }
+  /linkedin/suppressions:
+    get: { operationId: listLinkedinSuppressions, tags: [linkedin], responses: { "200": { description: Suppressions, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/LinkedinSuppression" } } } } } } }
+    post: { operationId: createLinkedinSuppression, tags: [linkedin], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinSuppressionInput" } } } }, responses: { "201": { description: Suppressed, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinSuppression" } } } } } }
+  /linkedin/content:
+    get: { operationId: listLinkedinContent, tags: [linkedin], responses: { "200": { description: Content, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/LinkedinContentItem" } } } } } } }
+    post: { operationId: createLinkedinContent, tags: [linkedin], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinContentInput" } } } }, responses: { "201": { description: Created, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinContentItem" } } } } } }
+  /linkedin/content/{id}:
+    patch: { operationId: updateLinkedinContent, tags: [linkedin], parameters: [{ name: id, in: path, required: true, schema: { type: number } }], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinContentUpdateInput" } } } }, responses: { "200": { description: Updated, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinContentItem" } } } } } }
+  /linkedin/content/{id}/transition:
+    post: { operationId: transitionLinkedinContent, tags: [linkedin], parameters: [{ name: id, in: path, required: true, schema: { type: number } }], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinTransition" } } } }, responses: { "200": { description: Transitioned, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinContentItem" } } } } } }
+  /linkedin/campaigns:
+    get: { operationId: listLinkedinCampaigns, tags: [linkedin], responses: { "200": { description: Campaigns, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/LinkedinCampaign" } } } } } } }
+    post: { operationId: createLinkedinCampaign, tags: [linkedin], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinCampaignInput" } } } }, responses: { "201": { description: Created, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinCampaign" } } } } } }
+  /linkedin/outcomes:
+    get: { operationId: listLinkedinOutcomes, tags: [linkedin], responses: { "200": { description: Outcomes, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/LinkedinOutcome" } } } } } } }
+    post: { operationId: createLinkedinOutcome, tags: [linkedin], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinOutcomeInput" } } } }, responses: { "201": { description: Created, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinOutcome" } } } } } }
+  /linkedin/retention/run:
+    post: { operationId: runLinkedinRetention, tags: [linkedin], responses: { "200": { description: Expired people stopped, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinRetentionResult" } } } } } }
+
 components:
   schemas:
     HealthStatus:
@@ -1816,3 +1859,104 @@ components:
         landingPath: { type: ["string", "null"] }
         referrer: { type: ["string", "null"] }
         count: { type: number }
+
+    LinkedinCompany:
+      type: object
+      required: [id, name, normalizedName, confidence, status, createdAt, updatedAt]
+      properties: { id: { type: number }, name: { type: string }, normalizedName: { type: string }, website: { type: [string, "null"] }, domain: { type: [string, "null"] }, linkedinUrl: { type: [string, "null"] }, geography: { type: [string, "null"] }, disciplineFit: { type: [string, "null"] }, evidence: { type: [string, "null"] }, sourceUrl: { type: [string, "null"] }, confidence: { type: number }, status: { type: string }, createdAt: { type: string }, updatedAt: { type: string } }
+    LinkedinPerson:
+      type: object
+      required: [id, name, normalizedName, confidence, status, createdAt, updatedAt]
+      properties: { id: { type: number }, companyId: { type: [number, "null"] }, name: { type: string }, normalizedName: { type: string }, role: { type: [string, "null"] }, linkedinUrl: { type: [string, "null"] }, geography: { type: [string, "null"] }, disciplineFit: { type: [string, "null"] }, evidence: { type: [string, "null"] }, sourceUrl: { type: [string, "null"] }, confidence: { type: number }, status: { type: string }, retentionUntil: { type: [string, "null"] }, legalBasisNote: { type: [string, "null"] }, consentNote: { type: [string, "null"] }, createdAt: { type: string }, updatedAt: { type: string } }
+    LinkedinSignal:
+      type: object
+      required: [id, kind, title, sourceUrl, evidence, observedAt, confidence, status, personId, companyId, createdAt]
+      properties: { id: { type: number }, personId: { type: [number, "null"] }, companyId: { type: [number, "null"] }, kind: { type: string }, title: { type: string }, sourceUrl: { type: string }, evidence: { type: string }, observedAt: { type: string }, confidence: { type: number }, status: { type: string }, createdAt: { type: string } }
+    LinkedinAction:
+      type: object
+      required: [id, actionType, status, createdAt, updatedAt]
+      properties: { id: { type: number }, personId: { type: [number, "null"] }, companyId: { type: [number, "null"] }, signalId: { type: [number, "null"] }, campaignId: { type: [number, "null"] }, contentItemId: { type: [number, "null"] }, actionType: { type: string, enum: [connection_note, direct_message, follow_up, comment_idea, talking_points] }, draftCopy: { type: [string, "null"] }, approvedCopy: { type: [string, "null"] }, directActionUrl: { type: [string, "null"] }, owner: { type: [string, "null"] }, dueAt: { type: [string, "null"] }, status: { type: string }, legalBasisNote: { type: [string, "null"] }, completedAt: { type: [string, "null"] }, createdAt: { type: string }, updatedAt: { type: string } }
+    LinkedinSuppression:
+      type: object
+      required: [id, normalizedTarget, reason, createdAt]
+      properties: { id: { type: number }, personId: { type: [number, "null"] }, companyId: { type: [number, "null"] }, normalizedTarget: { type: string }, reason: { type: string }, createdAt: { type: string } }
+    LinkedinContentItem:
+      type: object
+      required: [id, title, pillar, status, createdAt, updatedAt]
+      properties: { id: { type: number }, campaignId: { type: [number, "null"] }, title: { type: string }, pillar: { type: string }, sourceUrl: { type: [string, "null"] }, evidence: { type: [string, "null"] }, draftCopy: { type: [string, "null"] }, approvedCopy: { type: [string, "null"] }, scheduledFor: { type: [string, "null"] }, owner: { type: [string, "null"] }, status: { type: string }, publishedUrl: { type: [string, "null"] }, createdAt: { type: string }, updatedAt: { type: string } }
+    LinkedinCampaign:
+      type: object
+      required: [id, name, objective, status, dailyActionLimit, createdAt, updatedAt]
+      properties: { id: { type: number }, name: { type: string }, objective: { type: string }, status: { type: string }, owner: { type: [string, "null"] }, dailyActionLimit: { type: number }, createdAt: { type: string }, updatedAt: { type: string } }
+    LinkedinOutcome:
+      type: object
+      required: [id, outcomeType, count, occurredAt, createdAt]
+      properties: { id: { type: number }, actionId: { type: [number, "null"] }, campaignId: { type: [number, "null"] }, personId: { type: [number, "null"] }, companyId: { type: [number, "null"] }, contentItemId: { type: [number, "null"] }, outcomeType: { type: string, enum: [visit, reply, meeting, proposal, win] }, value: { type: [number, "null"] }, count: { type: number }, notes: { type: [string, "null"] }, sourceUrl: { type: [string, "null"] }, occurredAt: { type: string }, createdAt: { type: string } }
+    LinkedinCompanyInput:
+      type: object
+      required: [name]
+      properties: { name: { type: string }, website: { type: string }, linkedinUrl: { type: string }, geography: { type: string }, disciplineFit: { type: string }, evidence: { type: string }, sourceUrl: { type: string }, confidence: { type: number } }
+    LinkedinPersonInput:
+      type: object
+      required: [name, legalBasisNote]
+      properties: { name: { type: string }, companyId: { type: number }, role: { type: string }, linkedinUrl: { type: string }, geography: { type: string }, disciplineFit: { type: string }, evidence: { type: string }, sourceUrl: { type: string }, confidence: { type: number }, retentionUntil: { type: string }, legalBasisNote: { type: string }, consentNote: { type: string } }
+    LinkedinSignalInput:
+      type: object
+      required: [kind, title, sourceUrl, evidence, observedAt]
+      properties: { personId: { type: number }, companyId: { type: number }, kind: { type: string }, title: { type: string }, sourceUrl: { type: string }, evidence: { type: string }, observedAt: { type: string }, confidence: { type: number } }
+    LinkedinActionInput:
+      type: object
+      required: [actionType]
+      properties: { personId: { type: number }, companyId: { type: number }, campaignId: { type: number }, actionType: { type: string }, draftCopy: { type: string }, status: { type: string } }
+    LinkedinActionPrepareInput:
+      type: object
+      required: [personId, actionType]
+      properties: { personId: { type: number }, campaignId: { type: number }, actionType: { type: string } }
+    LinkedinActionUpdateInput:
+      type: object
+      properties: { draftCopy: { type: string }, approvedCopy: { type: string }, owner: { type: string }, dueAt: { type: string }, legalBasisNote: { type: string } }
+    LinkedinTransition:
+      type: object
+      required: [status]
+      properties: { status: { type: string }, note: { type: string } }
+    LinkedinSuppressionInput:
+      type: object
+      required: [reason]
+      properties: { personId: { type: number }, companyId: { type: number }, profileUrl: { type: string }, reason: { type: string } }
+    LinkedinCampaignInput:
+      type: object
+      required: [name, objective]
+      properties: { name: { type: string }, objective: { type: string }, owner: { type: string }, dailyActionLimit: { type: number } }
+    LinkedinContentInput:
+      type: object
+      required: [title, pillar, sourceUrl, evidence]
+      properties: { campaignId: { type: number }, title: { type: string }, pillar: { type: string }, sourceUrl: { type: string }, evidence: { type: string }, draftCopy: { type: string }, owner: { type: string }, scheduledFor: { type: string } }
+    LinkedinContentUpdateInput:
+      type: object
+      properties: { campaignId: { type: number }, title: { type: string }, pillar: { type: string }, draftCopy: { type: string }, approvedCopy: { type: string }, owner: { type: string }, sourceUrl: { type: string }, evidence: { type: string }, scheduledFor: { type: string } }
+    LinkedinOutcomeInput:
+      type: object
+      required: [outcomeType, occurredAt]
+      properties: { actionId: { type: number }, campaignId: { type: number }, personId: { type: number }, companyId: { type: number }, contentItemId: { type: number }, outcomeType: { type: string, enum: [visit, reply, meeting, proposal, win] }, value: { type: number }, count: { type: number }, notes: { type: string }, sourceUrl: { type: string }, occurredAt: { type: string } }
+    LinkedinProvider:
+      type: object
+      required: [name, capabilities]
+      properties: { name: { type: string }, capabilities: { type: object, additionalProperties: { type: boolean } } }
+    LinkedinDashboard:
+      type: object
+      required: [people, companies, actions, completedToday, contentItems, publishedToday, outcomeRollups, provider]
+      properties:
+        people: { type: number }
+        companies: { type: number }
+        actions: { type: number }
+        completedToday: { type: number }
+        contentItems: { type: number }
+        publishedToday: { type: number }
+        outcomeRollups:
+          type: object
+          additionalProperties: { type: number }
+        provider: { $ref: "#/components/schemas/LinkedinProvider" }
+    LinkedinRetentionResult:
+      type: object
+      required: [expiredPeople]
+      properties: { expiredPeople: { type: number } }

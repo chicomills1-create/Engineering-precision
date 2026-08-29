@@ -12,6 +12,7 @@ export function AdminNav() {
     { href: '/admin', label: 'Jobs & Inquiries' },
     { href: '/admin/seo', label: 'SEO' },
     { href: '/admin/outreach', label: 'Email Approvals' },
+    { href: '/admin/linkedin', label: 'LinkedIn B2B' },
     { href: '/admin/growth', label: 'Growth & Pipeline' },
     { href: '/admin/reviews', label: 'Review Generator' },
     { href: '/admin/payroll', label: 'Payroll' },

@@ -43,6 +43,29 @@ import type {
   Lead,
   LeadInput,
   LeadUpdateInput,
+  LinkedinAction,
+  LinkedinActionInput,
+  LinkedinActionPrepareInput,
+  LinkedinActionUpdateInput,
+  LinkedinCampaign,
+  LinkedinCampaignInput,
+  LinkedinCompany,
+  LinkedinCompanyInput,
+  LinkedinContentInput,
+  LinkedinContentItem,
+  LinkedinContentUpdateInput,
+  LinkedinDashboard,
+  LinkedinOutcome,
+  LinkedinOutcomeInput,
+  LinkedinPerson,
+  LinkedinPersonInput,
+  LinkedinProvider,
+  LinkedinRetentionResult,
+  LinkedinSignal,
+  LinkedinSignalInput,
+  LinkedinSuppression,
+  LinkedinSuppressionInput,
+  LinkedinTransition,
   ListSeoAuditIssuesParams,
   OpportunityResearchInput,
   OutreachDashboard,
@@ -4327,4 +4350,1628 @@ export function useListSeoAuditIssues<TData = Awaited<ReturnType<typeof listSeoA
 
 
 
+
+export const getGetLinkedinDashboardUrl = () => {
+
+
+
+
+  return `/api/linkedin/dashboard`
+}
+
+export const getLinkedinDashboard = async ( options?: Parameters<typeof customFetch>[1]): Promise<LinkedinDashboard> => {
+
+  return customFetch<LinkedinDashboard>(getGetLinkedinDashboardUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetLinkedinDashboardQueryKey = () => {
+    return [
+    `/api/linkedin/dashboard`
+    ] as const;
+    }
+
+
+export const getGetLinkedinDashboardQueryOptions = <TData = Awaited<ReturnType<typeof getLinkedinDashboard>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getLinkedinDashboard>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetLinkedinDashboardQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getLinkedinDashboard>>> = ({ signal }) => getLinkedinDashboard({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getLinkedinDashboard>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetLinkedinDashboardQueryResult = NonNullable<Awaited<ReturnType<typeof getLinkedinDashboard>>>
+export type GetLinkedinDashboardQueryError = ErrorType<unknown>
+
+
+
+export function useGetLinkedinDashboard<TData = Awaited<ReturnType<typeof getLinkedinDashboard>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getLinkedinDashboard>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetLinkedinDashboardQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getGetLinkedinProviderUrl = () => {
+
+
+
+
+  return `/api/linkedin/provider`
+}
+
+export const getLinkedinProvider = async ( options?: Parameters<typeof customFetch>[1]): Promise<LinkedinProvider> => {
+
+  return customFetch<LinkedinProvider>(getGetLinkedinProviderUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetLinkedinProviderQueryKey = () => {
+    return [
+    `/api/linkedin/provider`
+    ] as const;
+    }
+
+
+export const getGetLinkedinProviderQueryOptions = <TData = Awaited<ReturnType<typeof getLinkedinProvider>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getLinkedinProvider>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetLinkedinProviderQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getLinkedinProvider>>> = ({ signal }) => getLinkedinProvider({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getLinkedinProvider>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetLinkedinProviderQueryResult = NonNullable<Awaited<ReturnType<typeof getLinkedinProvider>>>
+export type GetLinkedinProviderQueryError = ErrorType<unknown>
+
+
+
+export function useGetLinkedinProvider<TData = Awaited<ReturnType<typeof getLinkedinProvider>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getLinkedinProvider>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetLinkedinProviderQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getListLinkedinCompaniesUrl = () => {
+
+
+
+
+  return `/api/linkedin/companies`
+}
+
+export const listLinkedinCompanies = async ( options?: Parameters<typeof customFetch>[1]): Promise<LinkedinCompany[]> => {
+
+  return customFetch<LinkedinCompany[]>(getListLinkedinCompaniesUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListLinkedinCompaniesQueryKey = () => {
+    return [
+    `/api/linkedin/companies`
+    ] as const;
+    }
+
+
+export const getListLinkedinCompaniesQueryOptions = <TData = Awaited<ReturnType<typeof listLinkedinCompanies>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinCompanies>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListLinkedinCompaniesQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listLinkedinCompanies>>> = ({ signal }) => listLinkedinCompanies({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listLinkedinCompanies>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListLinkedinCompaniesQueryResult = NonNullable<Awaited<ReturnType<typeof listLinkedinCompanies>>>
+export type ListLinkedinCompaniesQueryError = ErrorType<unknown>
+
+
+
+export function useListLinkedinCompanies<TData = Awaited<ReturnType<typeof listLinkedinCompanies>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinCompanies>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListLinkedinCompaniesQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getCreateLinkedinCompanyUrl = () => {
+
+
+
+
+  return `/api/linkedin/companies`
+}
+
+export const createLinkedinCompany = async (linkedinCompanyInput: LinkedinCompanyInput, options?: Parameters<typeof customFetch>[1]): Promise<LinkedinCompany> => {
+
+  return customFetch<LinkedinCompany>(getCreateLinkedinCompanyUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(linkedinCompanyInput)
+  }
+);}
+
+
+
+
+
+export const getCreateLinkedinCompanyMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinCompany>>, TError,{data: BodyType<LinkedinCompanyInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createLinkedinCompany>>, TError,{data: BodyType<LinkedinCompanyInput>}, TContext> => {
+
+const mutationKey = ['createLinkedinCompany'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createLinkedinCompany>>, {data: BodyType<LinkedinCompanyInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createLinkedinCompany(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateLinkedinCompanyMutationResult = NonNullable<Awaited<ReturnType<typeof createLinkedinCompany>>>
+    export type CreateLinkedinCompanyMutationBody = BodyType<LinkedinCompanyInput>
+    export type CreateLinkedinCompanyMutationError = ErrorType<unknown>
+
+    export const useCreateLinkedinCompany = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinCompany>>, TError,{data: BodyType<LinkedinCompanyInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createLinkedinCompany>>,
+        TError,
+        {data: BodyType<LinkedinCompanyInput>},
+        TContext
+      > => {
+      return useMutation(getCreateLinkedinCompanyMutationOptions(options));
+    }
+
+export const getListLinkedinPeopleUrl = () => {
+
+
+
+
+  return `/api/linkedin/people`
+}
+
+export const listLinkedinPeople = async ( options?: Parameters<typeof customFetch>[1]): Promise<LinkedinPerson[]> => {
+
+  return customFetch<LinkedinPerson[]>(getListLinkedinPeopleUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListLinkedinPeopleQueryKey = () => {
+    return [
+    `/api/linkedin/people`
+    ] as const;
+    }
+
+
+export const getListLinkedinPeopleQueryOptions = <TData = Awaited<ReturnType<typeof listLinkedinPeople>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinPeople>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListLinkedinPeopleQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listLinkedinPeople>>> = ({ signal }) => listLinkedinPeople({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listLinkedinPeople>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListLinkedinPeopleQueryResult = NonNullable<Awaited<ReturnType<typeof listLinkedinPeople>>>
+export type ListLinkedinPeopleQueryError = ErrorType<unknown>
+
+
+
+export function useListLinkedinPeople<TData = Awaited<ReturnType<typeof listLinkedinPeople>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinPeople>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListLinkedinPeopleQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getCreateLinkedinPersonUrl = () => {
+
+
+
+
+  return `/api/linkedin/people`
+}
+
+export const createLinkedinPerson = async (linkedinPersonInput: LinkedinPersonInput, options?: Parameters<typeof customFetch>[1]): Promise<LinkedinPerson> => {
+
+  return customFetch<LinkedinPerson>(getCreateLinkedinPersonUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(linkedinPersonInput)
+  }
+);}
+
+
+
+
+
+export const getCreateLinkedinPersonMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinPerson>>, TError,{data: BodyType<LinkedinPersonInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createLinkedinPerson>>, TError,{data: BodyType<LinkedinPersonInput>}, TContext> => {
+
+const mutationKey = ['createLinkedinPerson'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createLinkedinPerson>>, {data: BodyType<LinkedinPersonInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createLinkedinPerson(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateLinkedinPersonMutationResult = NonNullable<Awaited<ReturnType<typeof createLinkedinPerson>>>
+    export type CreateLinkedinPersonMutationBody = BodyType<LinkedinPersonInput>
+    export type CreateLinkedinPersonMutationError = ErrorType<unknown>
+
+    export const useCreateLinkedinPerson = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinPerson>>, TError,{data: BodyType<LinkedinPersonInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createLinkedinPerson>>,
+        TError,
+        {data: BodyType<LinkedinPersonInput>},
+        TContext
+      > => {
+      return useMutation(getCreateLinkedinPersonMutationOptions(options));
+    }
+
+export const getListLinkedinSignalsUrl = () => {
+
+
+
+
+  return `/api/linkedin/signals`
+}
+
+export const listLinkedinSignals = async ( options?: Parameters<typeof customFetch>[1]): Promise<LinkedinSignal[]> => {
+
+  return customFetch<LinkedinSignal[]>(getListLinkedinSignalsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListLinkedinSignalsQueryKey = () => {
+    return [
+    `/api/linkedin/signals`
+    ] as const;
+    }
+
+
+export const getListLinkedinSignalsQueryOptions = <TData = Awaited<ReturnType<typeof listLinkedinSignals>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinSignals>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListLinkedinSignalsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listLinkedinSignals>>> = ({ signal }) => listLinkedinSignals({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listLinkedinSignals>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListLinkedinSignalsQueryResult = NonNullable<Awaited<ReturnType<typeof listLinkedinSignals>>>
+export type ListLinkedinSignalsQueryError = ErrorType<unknown>
+
+
+
+export function useListLinkedinSignals<TData = Awaited<ReturnType<typeof listLinkedinSignals>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinSignals>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListLinkedinSignalsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getCreateLinkedinSignalUrl = () => {
+
+
+
+
+  return `/api/linkedin/signals`
+}
+
+export const createLinkedinSignal = async (linkedinSignalInput: LinkedinSignalInput, options?: Parameters<typeof customFetch>[1]): Promise<LinkedinSignal> => {
+
+  return customFetch<LinkedinSignal>(getCreateLinkedinSignalUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(linkedinSignalInput)
+  }
+);}
+
+
+
+
+
+export const getCreateLinkedinSignalMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinSignal>>, TError,{data: BodyType<LinkedinSignalInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createLinkedinSignal>>, TError,{data: BodyType<LinkedinSignalInput>}, TContext> => {
+
+const mutationKey = ['createLinkedinSignal'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createLinkedinSignal>>, {data: BodyType<LinkedinSignalInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createLinkedinSignal(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateLinkedinSignalMutationResult = NonNullable<Awaited<ReturnType<typeof createLinkedinSignal>>>
+    export type CreateLinkedinSignalMutationBody = BodyType<LinkedinSignalInput>
+    export type CreateLinkedinSignalMutationError = ErrorType<unknown>
+
+    export const useCreateLinkedinSignal = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinSignal>>, TError,{data: BodyType<LinkedinSignalInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createLinkedinSignal>>,
+        TError,
+        {data: BodyType<LinkedinSignalInput>},
+        TContext
+      > => {
+      return useMutation(getCreateLinkedinSignalMutationOptions(options));
+    }
+
+export const getListLinkedinActionsUrl = () => {
+
+
+
+
+  return `/api/linkedin/actions`
+}
+
+export const listLinkedinActions = async ( options?: Parameters<typeof customFetch>[1]): Promise<LinkedinAction[]> => {
+
+  return customFetch<LinkedinAction[]>(getListLinkedinActionsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListLinkedinActionsQueryKey = () => {
+    return [
+    `/api/linkedin/actions`
+    ] as const;
+    }
+
+
+export const getListLinkedinActionsQueryOptions = <TData = Awaited<ReturnType<typeof listLinkedinActions>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinActions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListLinkedinActionsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listLinkedinActions>>> = ({ signal }) => listLinkedinActions({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listLinkedinActions>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListLinkedinActionsQueryResult = NonNullable<Awaited<ReturnType<typeof listLinkedinActions>>>
+export type ListLinkedinActionsQueryError = ErrorType<unknown>
+
+
+
+export function useListLinkedinActions<TData = Awaited<ReturnType<typeof listLinkedinActions>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinActions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListLinkedinActionsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getCreateLinkedinActionUrl = () => {
+
+
+
+
+  return `/api/linkedin/actions`
+}
+
+export const createLinkedinAction = async (linkedinActionInput: LinkedinActionInput, options?: Parameters<typeof customFetch>[1]): Promise<LinkedinAction> => {
+
+  return customFetch<LinkedinAction>(getCreateLinkedinActionUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(linkedinActionInput)
+  }
+);}
+
+
+
+
+
+export const getCreateLinkedinActionMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinAction>>, TError,{data: BodyType<LinkedinActionInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createLinkedinAction>>, TError,{data: BodyType<LinkedinActionInput>}, TContext> => {
+
+const mutationKey = ['createLinkedinAction'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createLinkedinAction>>, {data: BodyType<LinkedinActionInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createLinkedinAction(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateLinkedinActionMutationResult = NonNullable<Awaited<ReturnType<typeof createLinkedinAction>>>
+    export type CreateLinkedinActionMutationBody = BodyType<LinkedinActionInput>
+    export type CreateLinkedinActionMutationError = ErrorType<unknown>
+
+    export const useCreateLinkedinAction = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinAction>>, TError,{data: BodyType<LinkedinActionInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createLinkedinAction>>,
+        TError,
+        {data: BodyType<LinkedinActionInput>},
+        TContext
+      > => {
+      return useMutation(getCreateLinkedinActionMutationOptions(options));
+    }
+
+export const getPrepareLinkedinActionUrl = () => {
+
+
+
+
+  return `/api/linkedin/actions/prepare`
+}
+
+export const prepareLinkedinAction = async (linkedinActionPrepareInput: LinkedinActionPrepareInput, options?: Parameters<typeof customFetch>[1]): Promise<LinkedinAction> => {
+
+  return customFetch<LinkedinAction>(getPrepareLinkedinActionUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(linkedinActionPrepareInput)
+  }
+);}
+
+
+
+
+
+export const getPrepareLinkedinActionMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof prepareLinkedinAction>>, TError,{data: BodyType<LinkedinActionPrepareInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof prepareLinkedinAction>>, TError,{data: BodyType<LinkedinActionPrepareInput>}, TContext> => {
+
+const mutationKey = ['prepareLinkedinAction'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof prepareLinkedinAction>>, {data: BodyType<LinkedinActionPrepareInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  prepareLinkedinAction(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type PrepareLinkedinActionMutationResult = NonNullable<Awaited<ReturnType<typeof prepareLinkedinAction>>>
+    export type PrepareLinkedinActionMutationBody = BodyType<LinkedinActionPrepareInput>
+    export type PrepareLinkedinActionMutationError = ErrorType<unknown>
+
+    export const usePrepareLinkedinAction = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof prepareLinkedinAction>>, TError,{data: BodyType<LinkedinActionPrepareInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof prepareLinkedinAction>>,
+        TError,
+        {data: BodyType<LinkedinActionPrepareInput>},
+        TContext
+      > => {
+      return useMutation(getPrepareLinkedinActionMutationOptions(options));
+    }
+
+export const getUpdateLinkedinActionUrl = (id: number,) => {
+
+
+
+
+  return `/api/linkedin/actions/${id}`
+}
+
+export const updateLinkedinAction = async (id: number,
+    linkedinActionUpdateInput: LinkedinActionUpdateInput, options?: Parameters<typeof customFetch>[1]): Promise<LinkedinAction> => {
+
+  return customFetch<LinkedinAction>(getUpdateLinkedinActionUrl(id),
+  {
+    ...options,
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(linkedinActionUpdateInput)
+  }
+);}
+
+
+
+
+
+export const getUpdateLinkedinActionMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateLinkedinAction>>, TError,{id: number;data: BodyType<LinkedinActionUpdateInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateLinkedinAction>>, TError,{id: number;data: BodyType<LinkedinActionUpdateInput>}, TContext> => {
+
+const mutationKey = ['updateLinkedinAction'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateLinkedinAction>>, {id: number;data: BodyType<LinkedinActionUpdateInput>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateLinkedinAction(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateLinkedinActionMutationResult = NonNullable<Awaited<ReturnType<typeof updateLinkedinAction>>>
+    export type UpdateLinkedinActionMutationBody = BodyType<LinkedinActionUpdateInput>
+    export type UpdateLinkedinActionMutationError = ErrorType<unknown>
+
+    export const useUpdateLinkedinAction = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateLinkedinAction>>, TError,{id: number;data: BodyType<LinkedinActionUpdateInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateLinkedinAction>>,
+        TError,
+        {id: number;data: BodyType<LinkedinActionUpdateInput>},
+        TContext
+      > => {
+      return useMutation(getUpdateLinkedinActionMutationOptions(options));
+    }
+
+export const getTransitionLinkedinActionUrl = (id: number,) => {
+
+
+
+
+  return `/api/linkedin/actions/${id}/transition`
+}
+
+export const transitionLinkedinAction = async (id: number,
+    linkedinTransition: LinkedinTransition, options?: Parameters<typeof customFetch>[1]): Promise<LinkedinAction> => {
+
+  return customFetch<LinkedinAction>(getTransitionLinkedinActionUrl(id),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(linkedinTransition)
+  }
+);}
+
+
+
+
+
+export const getTransitionLinkedinActionMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof transitionLinkedinAction>>, TError,{id: number;data: BodyType<LinkedinTransition>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof transitionLinkedinAction>>, TError,{id: number;data: BodyType<LinkedinTransition>}, TContext> => {
+
+const mutationKey = ['transitionLinkedinAction'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof transitionLinkedinAction>>, {id: number;data: BodyType<LinkedinTransition>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  transitionLinkedinAction(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type TransitionLinkedinActionMutationResult = NonNullable<Awaited<ReturnType<typeof transitionLinkedinAction>>>
+    export type TransitionLinkedinActionMutationBody = BodyType<LinkedinTransition>
+    export type TransitionLinkedinActionMutationError = ErrorType<unknown>
+
+    export const useTransitionLinkedinAction = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof transitionLinkedinAction>>, TError,{id: number;data: BodyType<LinkedinTransition>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof transitionLinkedinAction>>,
+        TError,
+        {id: number;data: BodyType<LinkedinTransition>},
+        TContext
+      > => {
+      return useMutation(getTransitionLinkedinActionMutationOptions(options));
+    }
+
+export const getListLinkedinSuppressionsUrl = () => {
+
+
+
+
+  return `/api/linkedin/suppressions`
+}
+
+export const listLinkedinSuppressions = async ( options?: Parameters<typeof customFetch>[1]): Promise<LinkedinSuppression[]> => {
+
+  return customFetch<LinkedinSuppression[]>(getListLinkedinSuppressionsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListLinkedinSuppressionsQueryKey = () => {
+    return [
+    `/api/linkedin/suppressions`
+    ] as const;
+    }
+
+
+export const getListLinkedinSuppressionsQueryOptions = <TData = Awaited<ReturnType<typeof listLinkedinSuppressions>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinSuppressions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListLinkedinSuppressionsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listLinkedinSuppressions>>> = ({ signal }) => listLinkedinSuppressions({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listLinkedinSuppressions>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListLinkedinSuppressionsQueryResult = NonNullable<Awaited<ReturnType<typeof listLinkedinSuppressions>>>
+export type ListLinkedinSuppressionsQueryError = ErrorType<unknown>
+
+
+
+export function useListLinkedinSuppressions<TData = Awaited<ReturnType<typeof listLinkedinSuppressions>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinSuppressions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListLinkedinSuppressionsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getCreateLinkedinSuppressionUrl = () => {
+
+
+
+
+  return `/api/linkedin/suppressions`
+}
+
+export const createLinkedinSuppression = async (linkedinSuppressionInput: LinkedinSuppressionInput, options?: Parameters<typeof customFetch>[1]): Promise<LinkedinSuppression> => {
+
+  return customFetch<LinkedinSuppression>(getCreateLinkedinSuppressionUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(linkedinSuppressionInput)
+  }
+);}
+
+
+
+
+
+export const getCreateLinkedinSuppressionMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinSuppression>>, TError,{data: BodyType<LinkedinSuppressionInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createLinkedinSuppression>>, TError,{data: BodyType<LinkedinSuppressionInput>}, TContext> => {
+
+const mutationKey = ['createLinkedinSuppression'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createLinkedinSuppression>>, {data: BodyType<LinkedinSuppressionInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createLinkedinSuppression(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateLinkedinSuppressionMutationResult = NonNullable<Awaited<ReturnType<typeof createLinkedinSuppression>>>
+    export type CreateLinkedinSuppressionMutationBody = BodyType<LinkedinSuppressionInput>
+    export type CreateLinkedinSuppressionMutationError = ErrorType<unknown>
+
+    export const useCreateLinkedinSuppression = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinSuppression>>, TError,{data: BodyType<LinkedinSuppressionInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createLinkedinSuppression>>,
+        TError,
+        {data: BodyType<LinkedinSuppressionInput>},
+        TContext
+      > => {
+      return useMutation(getCreateLinkedinSuppressionMutationOptions(options));
+    }
+
+export const getListLinkedinContentUrl = () => {
+
+
+
+
+  return `/api/linkedin/content`
+}
+
+export const listLinkedinContent = async ( options?: Parameters<typeof customFetch>[1]): Promise<LinkedinContentItem[]> => {
+
+  return customFetch<LinkedinContentItem[]>(getListLinkedinContentUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListLinkedinContentQueryKey = () => {
+    return [
+    `/api/linkedin/content`
+    ] as const;
+    }
+
+
+export const getListLinkedinContentQueryOptions = <TData = Awaited<ReturnType<typeof listLinkedinContent>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinContent>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListLinkedinContentQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listLinkedinContent>>> = ({ signal }) => listLinkedinContent({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listLinkedinContent>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListLinkedinContentQueryResult = NonNullable<Awaited<ReturnType<typeof listLinkedinContent>>>
+export type ListLinkedinContentQueryError = ErrorType<unknown>
+
+
+
+export function useListLinkedinContent<TData = Awaited<ReturnType<typeof listLinkedinContent>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinContent>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListLinkedinContentQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getCreateLinkedinContentUrl = () => {
+
+
+
+
+  return `/api/linkedin/content`
+}
+
+export const createLinkedinContent = async (linkedinContentInput: LinkedinContentInput, options?: Parameters<typeof customFetch>[1]): Promise<LinkedinContentItem> => {
+
+  return customFetch<LinkedinContentItem>(getCreateLinkedinContentUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(linkedinContentInput)
+  }
+);}
+
+
+
+
+
+export const getCreateLinkedinContentMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinContent>>, TError,{data: BodyType<LinkedinContentInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createLinkedinContent>>, TError,{data: BodyType<LinkedinContentInput>}, TContext> => {
+
+const mutationKey = ['createLinkedinContent'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createLinkedinContent>>, {data: BodyType<LinkedinContentInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createLinkedinContent(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateLinkedinContentMutationResult = NonNullable<Awaited<ReturnType<typeof createLinkedinContent>>>
+    export type CreateLinkedinContentMutationBody = BodyType<LinkedinContentInput>
+    export type CreateLinkedinContentMutationError = ErrorType<unknown>
+
+    export const useCreateLinkedinContent = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinContent>>, TError,{data: BodyType<LinkedinContentInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createLinkedinContent>>,
+        TError,
+        {data: BodyType<LinkedinContentInput>},
+        TContext
+      > => {
+      return useMutation(getCreateLinkedinContentMutationOptions(options));
+    }
+
+export const getUpdateLinkedinContentUrl = (id: number,) => {
+
+
+
+
+  return `/api/linkedin/content/${id}`
+}
+
+export const updateLinkedinContent = async (id: number,
+    linkedinContentUpdateInput: LinkedinContentUpdateInput, options?: Parameters<typeof customFetch>[1]): Promise<LinkedinContentItem> => {
+
+  return customFetch<LinkedinContentItem>(getUpdateLinkedinContentUrl(id),
+  {
+    ...options,
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(linkedinContentUpdateInput)
+  }
+);}
+
+
+
+
+
+export const getUpdateLinkedinContentMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateLinkedinContent>>, TError,{id: number;data: BodyType<LinkedinContentUpdateInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateLinkedinContent>>, TError,{id: number;data: BodyType<LinkedinContentUpdateInput>}, TContext> => {
+
+const mutationKey = ['updateLinkedinContent'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateLinkedinContent>>, {id: number;data: BodyType<LinkedinContentUpdateInput>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateLinkedinContent(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateLinkedinContentMutationResult = NonNullable<Awaited<ReturnType<typeof updateLinkedinContent>>>
+    export type UpdateLinkedinContentMutationBody = BodyType<LinkedinContentUpdateInput>
+    export type UpdateLinkedinContentMutationError = ErrorType<unknown>
+
+    export const useUpdateLinkedinContent = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateLinkedinContent>>, TError,{id: number;data: BodyType<LinkedinContentUpdateInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateLinkedinContent>>,
+        TError,
+        {id: number;data: BodyType<LinkedinContentUpdateInput>},
+        TContext
+      > => {
+      return useMutation(getUpdateLinkedinContentMutationOptions(options));
+    }
+
+export const getTransitionLinkedinContentUrl = (id: number,) => {
+
+
+
+
+  return `/api/linkedin/content/${id}/transition`
+}
+
+export const transitionLinkedinContent = async (id: number,
+    linkedinTransition: LinkedinTransition, options?: Parameters<typeof customFetch>[1]): Promise<LinkedinContentItem> => {
+
+  return customFetch<LinkedinContentItem>(getTransitionLinkedinContentUrl(id),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(linkedinTransition)
+  }
+);}
+
+
+
+
+
+export const getTransitionLinkedinContentMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof transitionLinkedinContent>>, TError,{id: number;data: BodyType<LinkedinTransition>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof transitionLinkedinContent>>, TError,{id: number;data: BodyType<LinkedinTransition>}, TContext> => {
+
+const mutationKey = ['transitionLinkedinContent'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof transitionLinkedinContent>>, {id: number;data: BodyType<LinkedinTransition>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  transitionLinkedinContent(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type TransitionLinkedinContentMutationResult = NonNullable<Awaited<ReturnType<typeof transitionLinkedinContent>>>
+    export type TransitionLinkedinContentMutationBody = BodyType<LinkedinTransition>
+    export type TransitionLinkedinContentMutationError = ErrorType<unknown>
+
+    export const useTransitionLinkedinContent = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof transitionLinkedinContent>>, TError,{id: number;data: BodyType<LinkedinTransition>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof transitionLinkedinContent>>,
+        TError,
+        {id: number;data: BodyType<LinkedinTransition>},
+        TContext
+      > => {
+      return useMutation(getTransitionLinkedinContentMutationOptions(options));
+    }
+
+export const getListLinkedinCampaignsUrl = () => {
+
+
+
+
+  return `/api/linkedin/campaigns`
+}
+
+export const listLinkedinCampaigns = async ( options?: Parameters<typeof customFetch>[1]): Promise<LinkedinCampaign[]> => {
+
+  return customFetch<LinkedinCampaign[]>(getListLinkedinCampaignsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListLinkedinCampaignsQueryKey = () => {
+    return [
+    `/api/linkedin/campaigns`
+    ] as const;
+    }
+
+
+export const getListLinkedinCampaignsQueryOptions = <TData = Awaited<ReturnType<typeof listLinkedinCampaigns>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinCampaigns>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListLinkedinCampaignsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listLinkedinCampaigns>>> = ({ signal }) => listLinkedinCampaigns({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listLinkedinCampaigns>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListLinkedinCampaignsQueryResult = NonNullable<Awaited<ReturnType<typeof listLinkedinCampaigns>>>
+export type ListLinkedinCampaignsQueryError = ErrorType<unknown>
+
+
+
+export function useListLinkedinCampaigns<TData = Awaited<ReturnType<typeof listLinkedinCampaigns>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinCampaigns>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListLinkedinCampaignsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getCreateLinkedinCampaignUrl = () => {
+
+
+
+
+  return `/api/linkedin/campaigns`
+}
+
+export const createLinkedinCampaign = async (linkedinCampaignInput: LinkedinCampaignInput, options?: Parameters<typeof customFetch>[1]): Promise<LinkedinCampaign> => {
+
+  return customFetch<LinkedinCampaign>(getCreateLinkedinCampaignUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(linkedinCampaignInput)
+  }
+);}
+
+
+
+
+
+export const getCreateLinkedinCampaignMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinCampaign>>, TError,{data: BodyType<LinkedinCampaignInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createLinkedinCampaign>>, TError,{data: BodyType<LinkedinCampaignInput>}, TContext> => {
+
+const mutationKey = ['createLinkedinCampaign'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createLinkedinCampaign>>, {data: BodyType<LinkedinCampaignInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createLinkedinCampaign(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateLinkedinCampaignMutationResult = NonNullable<Awaited<ReturnType<typeof createLinkedinCampaign>>>
+    export type CreateLinkedinCampaignMutationBody = BodyType<LinkedinCampaignInput>
+    export type CreateLinkedinCampaignMutationError = ErrorType<unknown>
+
+    export const useCreateLinkedinCampaign = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinCampaign>>, TError,{data: BodyType<LinkedinCampaignInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createLinkedinCampaign>>,
+        TError,
+        {data: BodyType<LinkedinCampaignInput>},
+        TContext
+      > => {
+      return useMutation(getCreateLinkedinCampaignMutationOptions(options));
+    }
+
+export const getListLinkedinOutcomesUrl = () => {
+
+
+
+
+  return `/api/linkedin/outcomes`
+}
+
+export const listLinkedinOutcomes = async ( options?: Parameters<typeof customFetch>[1]): Promise<LinkedinOutcome[]> => {
+
+  return customFetch<LinkedinOutcome[]>(getListLinkedinOutcomesUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListLinkedinOutcomesQueryKey = () => {
+    return [
+    `/api/linkedin/outcomes`
+    ] as const;
+    }
+
+
+export const getListLinkedinOutcomesQueryOptions = <TData = Awaited<ReturnType<typeof listLinkedinOutcomes>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinOutcomes>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListLinkedinOutcomesQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listLinkedinOutcomes>>> = ({ signal }) => listLinkedinOutcomes({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listLinkedinOutcomes>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListLinkedinOutcomesQueryResult = NonNullable<Awaited<ReturnType<typeof listLinkedinOutcomes>>>
+export type ListLinkedinOutcomesQueryError = ErrorType<unknown>
+
+
+
+export function useListLinkedinOutcomes<TData = Awaited<ReturnType<typeof listLinkedinOutcomes>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listLinkedinOutcomes>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListLinkedinOutcomesQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getCreateLinkedinOutcomeUrl = () => {
+
+
+
+
+  return `/api/linkedin/outcomes`
+}
+
+export const createLinkedinOutcome = async (linkedinOutcomeInput: LinkedinOutcomeInput, options?: Parameters<typeof customFetch>[1]): Promise<LinkedinOutcome> => {
+
+  return customFetch<LinkedinOutcome>(getCreateLinkedinOutcomeUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(linkedinOutcomeInput)
+  }
+);}
+
+
+
+
+
+export const getCreateLinkedinOutcomeMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinOutcome>>, TError,{data: BodyType<LinkedinOutcomeInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createLinkedinOutcome>>, TError,{data: BodyType<LinkedinOutcomeInput>}, TContext> => {
+
+const mutationKey = ['createLinkedinOutcome'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createLinkedinOutcome>>, {data: BodyType<LinkedinOutcomeInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createLinkedinOutcome(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateLinkedinOutcomeMutationResult = NonNullable<Awaited<ReturnType<typeof createLinkedinOutcome>>>
+    export type CreateLinkedinOutcomeMutationBody = BodyType<LinkedinOutcomeInput>
+    export type CreateLinkedinOutcomeMutationError = ErrorType<unknown>
+
+    export const useCreateLinkedinOutcome = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createLinkedinOutcome>>, TError,{data: BodyType<LinkedinOutcomeInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createLinkedinOutcome>>,
+        TError,
+        {data: BodyType<LinkedinOutcomeInput>},
+        TContext
+      > => {
+      return useMutation(getCreateLinkedinOutcomeMutationOptions(options));
+    }
+
+export const getRunLinkedinRetentionUrl = () => {
+
+
+
+
+  return `/api/linkedin/retention/run`
+}
+
+export const runLinkedinRetention = async ( options?: Parameters<typeof customFetch>[1]): Promise<LinkedinRetentionResult> => {
+
+  return customFetch<LinkedinRetentionResult>(getRunLinkedinRetentionUrl(),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+
+export const getRunLinkedinRetentionMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof runLinkedinRetention>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof runLinkedinRetention>>, TError,void, TContext> => {
+
+const mutationKey = ['runLinkedinRetention'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof runLinkedinRetention>>, void> = () => {
+
+
+          return  runLinkedinRetention(requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type RunLinkedinRetentionMutationResult = NonNullable<Awaited<ReturnType<typeof runLinkedinRetention>>>
+
+    export type RunLinkedinRetentionMutationError = ErrorType<unknown>
+
+    export const useRunLinkedinRetention = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof runLinkedinRetention>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof runLinkedinRetention>>,
+        TError,
+        void,
+        TContext
+      > => {
+      return useMutation(getRunLinkedinRetentionMutationOptions(options));
+    }
 

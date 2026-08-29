@@ -2076,3 +2076,537 @@ export const ListSeoAuditIssuesResponseItem = zod.object({
 export const ListSeoAuditIssuesResponse = zod.array(ListSeoAuditIssuesResponseItem)
 
 
+export const GetLinkedinDashboardResponse = zod.object({
+  "people": zod.number(),
+  "companies": zod.number(),
+  "actions": zod.number(),
+  "completedToday": zod.number(),
+  "contentItems": zod.number(),
+  "publishedToday": zod.number(),
+  "outcomeRollups": zod.record(zod.string(), zod.number()),
+  "provider": zod.object({
+  "name": zod.string(),
+  "capabilities": zod.record(zod.string(), zod.boolean())
+})
+})
+
+
+export const GetLinkedinProviderResponse = zod.object({
+  "name": zod.string(),
+  "capabilities": zod.record(zod.string(), zod.boolean())
+})
+
+
+export const ListLinkedinCompaniesResponseItem = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "normalizedName": zod.string(),
+  "website": zod.string().nullish(),
+  "domain": zod.string().nullish(),
+  "linkedinUrl": zod.string().nullish(),
+  "geography": zod.string().nullish(),
+  "disciplineFit": zod.string().nullish(),
+  "evidence": zod.string().nullish(),
+  "sourceUrl": zod.string().nullish(),
+  "confidence": zod.number(),
+  "status": zod.string(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const ListLinkedinCompaniesResponse = zod.array(ListLinkedinCompaniesResponseItem)
+
+
+export const CreateLinkedinCompanyBody = zod.object({
+  "name": zod.string(),
+  "website": zod.string().optional(),
+  "linkedinUrl": zod.string().optional(),
+  "geography": zod.string().optional(),
+  "disciplineFit": zod.string().optional(),
+  "evidence": zod.string().optional(),
+  "sourceUrl": zod.string().optional(),
+  "confidence": zod.number().optional()
+})
+
+export const CreateLinkedinCompanyResponse = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "normalizedName": zod.string(),
+  "website": zod.string().nullish(),
+  "domain": zod.string().nullish(),
+  "linkedinUrl": zod.string().nullish(),
+  "geography": zod.string().nullish(),
+  "disciplineFit": zod.string().nullish(),
+  "evidence": zod.string().nullish(),
+  "sourceUrl": zod.string().nullish(),
+  "confidence": zod.number(),
+  "status": zod.string(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const ListLinkedinPeopleResponseItem = zod.object({
+  "id": zod.number(),
+  "companyId": zod.number().nullish(),
+  "name": zod.string(),
+  "normalizedName": zod.string(),
+  "role": zod.string().nullish(),
+  "linkedinUrl": zod.string().nullish(),
+  "geography": zod.string().nullish(),
+  "disciplineFit": zod.string().nullish(),
+  "evidence": zod.string().nullish(),
+  "sourceUrl": zod.string().nullish(),
+  "confidence": zod.number(),
+  "status": zod.string(),
+  "retentionUntil": zod.string().nullish(),
+  "legalBasisNote": zod.string().nullish(),
+  "consentNote": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const ListLinkedinPeopleResponse = zod.array(ListLinkedinPeopleResponseItem)
+
+
+export const CreateLinkedinPersonBody = zod.object({
+  "name": zod.string(),
+  "companyId": zod.number().optional(),
+  "role": zod.string().optional(),
+  "linkedinUrl": zod.string().optional(),
+  "geography": zod.string().optional(),
+  "disciplineFit": zod.string().optional(),
+  "evidence": zod.string().optional(),
+  "sourceUrl": zod.string().optional(),
+  "confidence": zod.number().optional(),
+  "retentionUntil": zod.string().optional(),
+  "legalBasisNote": zod.string(),
+  "consentNote": zod.string().optional()
+})
+
+export const CreateLinkedinPersonResponse = zod.object({
+  "id": zod.number(),
+  "companyId": zod.number().nullish(),
+  "name": zod.string(),
+  "normalizedName": zod.string(),
+  "role": zod.string().nullish(),
+  "linkedinUrl": zod.string().nullish(),
+  "geography": zod.string().nullish(),
+  "disciplineFit": zod.string().nullish(),
+  "evidence": zod.string().nullish(),
+  "sourceUrl": zod.string().nullish(),
+  "confidence": zod.number(),
+  "status": zod.string(),
+  "retentionUntil": zod.string().nullish(),
+  "legalBasisNote": zod.string().nullish(),
+  "consentNote": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const ListLinkedinSignalsResponseItem = zod.object({
+  "id": zod.number(),
+  "personId": zod.number().nullable(),
+  "companyId": zod.number().nullable(),
+  "kind": zod.string(),
+  "title": zod.string(),
+  "sourceUrl": zod.string(),
+  "evidence": zod.string(),
+  "observedAt": zod.string(),
+  "confidence": zod.number(),
+  "status": zod.string(),
+  "createdAt": zod.string()
+})
+export const ListLinkedinSignalsResponse = zod.array(ListLinkedinSignalsResponseItem)
+
+
+export const CreateLinkedinSignalBody = zod.object({
+  "personId": zod.number().optional(),
+  "companyId": zod.number().optional(),
+  "kind": zod.string(),
+  "title": zod.string(),
+  "sourceUrl": zod.string(),
+  "evidence": zod.string(),
+  "observedAt": zod.string(),
+  "confidence": zod.number().optional()
+})
+
+export const CreateLinkedinSignalResponse = zod.object({
+  "id": zod.number(),
+  "personId": zod.number().nullable(),
+  "companyId": zod.number().nullable(),
+  "kind": zod.string(),
+  "title": zod.string(),
+  "sourceUrl": zod.string(),
+  "evidence": zod.string(),
+  "observedAt": zod.string(),
+  "confidence": zod.number(),
+  "status": zod.string(),
+  "createdAt": zod.string()
+})
+
+
+export const ListLinkedinActionsResponseItem = zod.object({
+  "id": zod.number(),
+  "personId": zod.number().nullish(),
+  "companyId": zod.number().nullish(),
+  "signalId": zod.number().nullish(),
+  "campaignId": zod.number().nullish(),
+  "contentItemId": zod.number().nullish(),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points']),
+  "draftCopy": zod.string().nullish(),
+  "approvedCopy": zod.string().nullish(),
+  "directActionUrl": zod.string().nullish(),
+  "owner": zod.string().nullish(),
+  "dueAt": zod.string().nullish(),
+  "status": zod.string(),
+  "legalBasisNote": zod.string().nullish(),
+  "completedAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const ListLinkedinActionsResponse = zod.array(ListLinkedinActionsResponseItem)
+
+
+export const CreateLinkedinActionBody = zod.object({
+  "personId": zod.number().optional(),
+  "companyId": zod.number().optional(),
+  "campaignId": zod.number().optional(),
+  "actionType": zod.string(),
+  "draftCopy": zod.string().optional(),
+  "status": zod.string().optional()
+})
+
+export const CreateLinkedinActionResponse = zod.object({
+  "id": zod.number(),
+  "personId": zod.number().nullish(),
+  "companyId": zod.number().nullish(),
+  "signalId": zod.number().nullish(),
+  "campaignId": zod.number().nullish(),
+  "contentItemId": zod.number().nullish(),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points']),
+  "draftCopy": zod.string().nullish(),
+  "approvedCopy": zod.string().nullish(),
+  "directActionUrl": zod.string().nullish(),
+  "owner": zod.string().nullish(),
+  "dueAt": zod.string().nullish(),
+  "status": zod.string(),
+  "legalBasisNote": zod.string().nullish(),
+  "completedAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const PrepareLinkedinActionBody = zod.object({
+  "personId": zod.number(),
+  "campaignId": zod.number().optional(),
+  "actionType": zod.string()
+})
+
+export const PrepareLinkedinActionResponse = zod.object({
+  "id": zod.number(),
+  "personId": zod.number().nullish(),
+  "companyId": zod.number().nullish(),
+  "signalId": zod.number().nullish(),
+  "campaignId": zod.number().nullish(),
+  "contentItemId": zod.number().nullish(),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points']),
+  "draftCopy": zod.string().nullish(),
+  "approvedCopy": zod.string().nullish(),
+  "directActionUrl": zod.string().nullish(),
+  "owner": zod.string().nullish(),
+  "dueAt": zod.string().nullish(),
+  "status": zod.string(),
+  "legalBasisNote": zod.string().nullish(),
+  "completedAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const UpdateLinkedinActionParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const UpdateLinkedinActionBody = zod.object({
+  "draftCopy": zod.string().optional(),
+  "approvedCopy": zod.string().optional(),
+  "owner": zod.string().optional(),
+  "dueAt": zod.string().optional(),
+  "legalBasisNote": zod.string().optional()
+})
+
+export const UpdateLinkedinActionResponse = zod.object({
+  "id": zod.number(),
+  "personId": zod.number().nullish(),
+  "companyId": zod.number().nullish(),
+  "signalId": zod.number().nullish(),
+  "campaignId": zod.number().nullish(),
+  "contentItemId": zod.number().nullish(),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points']),
+  "draftCopy": zod.string().nullish(),
+  "approvedCopy": zod.string().nullish(),
+  "directActionUrl": zod.string().nullish(),
+  "owner": zod.string().nullish(),
+  "dueAt": zod.string().nullish(),
+  "status": zod.string(),
+  "legalBasisNote": zod.string().nullish(),
+  "completedAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const TransitionLinkedinActionParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const TransitionLinkedinActionBody = zod.object({
+  "status": zod.string(),
+  "note": zod.string().optional()
+})
+
+export const TransitionLinkedinActionResponse = zod.object({
+  "id": zod.number(),
+  "personId": zod.number().nullish(),
+  "companyId": zod.number().nullish(),
+  "signalId": zod.number().nullish(),
+  "campaignId": zod.number().nullish(),
+  "contentItemId": zod.number().nullish(),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points']),
+  "draftCopy": zod.string().nullish(),
+  "approvedCopy": zod.string().nullish(),
+  "directActionUrl": zod.string().nullish(),
+  "owner": zod.string().nullish(),
+  "dueAt": zod.string().nullish(),
+  "status": zod.string(),
+  "legalBasisNote": zod.string().nullish(),
+  "completedAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const ListLinkedinSuppressionsResponseItem = zod.object({
+  "id": zod.number(),
+  "personId": zod.number().nullish(),
+  "companyId": zod.number().nullish(),
+  "normalizedTarget": zod.string(),
+  "reason": zod.string(),
+  "createdAt": zod.string()
+})
+export const ListLinkedinSuppressionsResponse = zod.array(ListLinkedinSuppressionsResponseItem)
+
+
+export const CreateLinkedinSuppressionBody = zod.object({
+  "personId": zod.number().optional(),
+  "companyId": zod.number().optional(),
+  "profileUrl": zod.string().optional(),
+  "reason": zod.string()
+})
+
+export const CreateLinkedinSuppressionResponse = zod.object({
+  "id": zod.number(),
+  "personId": zod.number().nullish(),
+  "companyId": zod.number().nullish(),
+  "normalizedTarget": zod.string(),
+  "reason": zod.string(),
+  "createdAt": zod.string()
+})
+
+
+export const ListLinkedinContentResponseItem = zod.object({
+  "id": zod.number(),
+  "campaignId": zod.number().nullish(),
+  "title": zod.string(),
+  "pillar": zod.string(),
+  "sourceUrl": zod.string().nullish(),
+  "evidence": zod.string().nullish(),
+  "draftCopy": zod.string().nullish(),
+  "approvedCopy": zod.string().nullish(),
+  "scheduledFor": zod.string().nullish(),
+  "owner": zod.string().nullish(),
+  "status": zod.string(),
+  "publishedUrl": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const ListLinkedinContentResponse = zod.array(ListLinkedinContentResponseItem)
+
+
+export const CreateLinkedinContentBody = zod.object({
+  "campaignId": zod.number().optional(),
+  "title": zod.string(),
+  "pillar": zod.string(),
+  "sourceUrl": zod.string(),
+  "evidence": zod.string(),
+  "draftCopy": zod.string().optional(),
+  "owner": zod.string().optional(),
+  "scheduledFor": zod.string().optional()
+})
+
+export const CreateLinkedinContentResponse = zod.object({
+  "id": zod.number(),
+  "campaignId": zod.number().nullish(),
+  "title": zod.string(),
+  "pillar": zod.string(),
+  "sourceUrl": zod.string().nullish(),
+  "evidence": zod.string().nullish(),
+  "draftCopy": zod.string().nullish(),
+  "approvedCopy": zod.string().nullish(),
+  "scheduledFor": zod.string().nullish(),
+  "owner": zod.string().nullish(),
+  "status": zod.string(),
+  "publishedUrl": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const UpdateLinkedinContentParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const UpdateLinkedinContentBody = zod.object({
+  "campaignId": zod.number().optional(),
+  "title": zod.string().optional(),
+  "pillar": zod.string().optional(),
+  "draftCopy": zod.string().optional(),
+  "approvedCopy": zod.string().optional(),
+  "owner": zod.string().optional(),
+  "sourceUrl": zod.string().optional(),
+  "evidence": zod.string().optional(),
+  "scheduledFor": zod.string().optional()
+})
+
+export const UpdateLinkedinContentResponse = zod.object({
+  "id": zod.number(),
+  "campaignId": zod.number().nullish(),
+  "title": zod.string(),
+  "pillar": zod.string(),
+  "sourceUrl": zod.string().nullish(),
+  "evidence": zod.string().nullish(),
+  "draftCopy": zod.string().nullish(),
+  "approvedCopy": zod.string().nullish(),
+  "scheduledFor": zod.string().nullish(),
+  "owner": zod.string().nullish(),
+  "status": zod.string(),
+  "publishedUrl": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const TransitionLinkedinContentParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const TransitionLinkedinContentBody = zod.object({
+  "status": zod.string(),
+  "note": zod.string().optional()
+})
+
+export const TransitionLinkedinContentResponse = zod.object({
+  "id": zod.number(),
+  "campaignId": zod.number().nullish(),
+  "title": zod.string(),
+  "pillar": zod.string(),
+  "sourceUrl": zod.string().nullish(),
+  "evidence": zod.string().nullish(),
+  "draftCopy": zod.string().nullish(),
+  "approvedCopy": zod.string().nullish(),
+  "scheduledFor": zod.string().nullish(),
+  "owner": zod.string().nullish(),
+  "status": zod.string(),
+  "publishedUrl": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const ListLinkedinCampaignsResponseItem = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "objective": zod.string(),
+  "status": zod.string(),
+  "owner": zod.string().nullish(),
+  "dailyActionLimit": zod.number(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const ListLinkedinCampaignsResponse = zod.array(ListLinkedinCampaignsResponseItem)
+
+
+export const CreateLinkedinCampaignBody = zod.object({
+  "name": zod.string(),
+  "objective": zod.string(),
+  "owner": zod.string().optional(),
+  "dailyActionLimit": zod.number().optional()
+})
+
+export const CreateLinkedinCampaignResponse = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "objective": zod.string(),
+  "status": zod.string(),
+  "owner": zod.string().nullish(),
+  "dailyActionLimit": zod.number(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const ListLinkedinOutcomesResponseItem = zod.object({
+  "id": zod.number(),
+  "actionId": zod.number().nullish(),
+  "campaignId": zod.number().nullish(),
+  "personId": zod.number().nullish(),
+  "companyId": zod.number().nullish(),
+  "contentItemId": zod.number().nullish(),
+  "outcomeType": zod.enum(['visit', 'reply', 'meeting', 'proposal', 'win']),
+  "value": zod.number().nullish(),
+  "count": zod.number(),
+  "notes": zod.string().nullish(),
+  "sourceUrl": zod.string().nullish(),
+  "occurredAt": zod.string(),
+  "createdAt": zod.string()
+})
+export const ListLinkedinOutcomesResponse = zod.array(ListLinkedinOutcomesResponseItem)
+
+
+export const CreateLinkedinOutcomeBody = zod.object({
+  "actionId": zod.number().optional(),
+  "campaignId": zod.number().optional(),
+  "personId": zod.number().optional(),
+  "companyId": zod.number().optional(),
+  "contentItemId": zod.number().optional(),
+  "outcomeType": zod.enum(['visit', 'reply', 'meeting', 'proposal', 'win']),
+  "value": zod.number().optional(),
+  "count": zod.number().optional(),
+  "notes": zod.string().optional(),
+  "sourceUrl": zod.string().optional(),
+  "occurredAt": zod.string()
+})
+
+export const CreateLinkedinOutcomeResponse = zod.object({
+  "id": zod.number(),
+  "actionId": zod.number().nullish(),
+  "campaignId": zod.number().nullish(),
+  "personId": zod.number().nullish(),
+  "companyId": zod.number().nullish(),
+  "contentItemId": zod.number().nullish(),
+  "outcomeType": zod.enum(['visit', 'reply', 'meeting', 'proposal', 'win']),
+  "value": zod.number().nullish(),
+  "count": zod.number(),
+  "notes": zod.string().nullish(),
+  "sourceUrl": zod.string().nullish(),
+  "occurredAt": zod.string(),
+  "createdAt": zod.string()
+})
+
+
+export const RunLinkedinRetentionResponse = zod.object({
+  "expiredPeople": zod.number()
+})
+
+

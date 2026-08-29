@@ -10,6 +10,7 @@ import outreachWebhooksRouter from "./outreachWebhooks";
 import clientJobsRouter from "./clientJobs";
 import growthRouter from "./growth";
 import payrollRouter from "./payroll";
+import linkedinRouter from "./linkedin";
 
 const router: IRouter = Router();
 
@@ -24,5 +25,6 @@ router.use(outreachWebhooksRouter);
 router.use(clientJobsRouter);
 router.use(growthRouter);
 router.use(payrollRouter);
+router.use(linkedinRouter);
 
 export default router;
