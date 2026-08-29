@@ -176,7 +176,9 @@ export default function Contact() {
       toast({
         variant: "destructive",
         title: "Submission Failed",
-        description: "There was an error submitting your request. Please try again.",
+        description: uploadedFiles.length > 0
+          ? "Your uploaded documents are still attached. Please try submitting again."
+          : "There was an error submitting your request. Please try again.",
       });
     }
   };
@@ -383,6 +385,10 @@ export default function Contact() {
 
                     {/* Drop zone */}
                     <div
+                      role="button"
+                      tabIndex={0}
+                      aria-label="Upload project documents"
+                      data-testid="button-upload-project-documents"
                       className={`border-2 border-dashed transition-colors cursor-pointer ${
                         isDragging
                           ? "border-primary bg-primary/5"
@@ -392,6 +398,12 @@ export default function Contact() {
                       onDragLeave={() => setIsDragging(false)}
                       onDrop={onDrop}
                       onClick={() => fileInputRef.current?.click()}
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter" || event.key === " ") {
+                          event.preventDefault();
+                          fileInputRef.current?.click();
+                        }
+                      }}
                     >
                       <div className="flex flex-col items-center justify-center py-10 px-6 text-center">
                         <Upload className="w-8 h-8 text-muted-foreground mb-3" />

@@ -4,7 +4,8 @@ const CONTACT_NAME = "Jeremy Mills";
 const CONTACT_TITLE = "CEO · USAF Veteran";
 const CONTACT_PHONE = "480-490-0064";
 const COMPANY_SITE = "https://apexgrideng.com";
-const COMPANY_LOGO = `${COMPANY_SITE}/logo.svg`;
+// Email clients inconsistently render SVGs, so use the deployed PNG logo.
+const COMPANY_LOGO = `${COMPANY_SITE}/logo.png`;
 
 export function escapeEmailHtml(value: string): string {
   return value
@@ -39,8 +40,40 @@ function renderBodyHtml(body: string): string {
     .trim()
     .split(/\n{2,}/)
     .filter(Boolean)
-    .map((paragraph) => `<p style="margin:0 0 18px;color:#273449;font-size:16px;line-height:1.65;">${escapeEmailHtml(paragraph).replaceAll("\n", "<br>")}</p>`)
+    .map((paragraph) => `<p style="margin:0 0 18px;color:#273449;font-size:16px;line-height:1.65;word-break:break-word;overflow-wrap:anywhere;">${escapeEmailHtml(paragraph).replaceAll("\n", "<br>")}</p>`)
     .join("");
+}
+
+export function validateMarketingUnsubscribeUrl(unsubscribeUrl: string): URL {
+  let url: URL;
+  try {
+    url = new URL(unsubscribeUrl);
+  } catch {
+    throw new Error("Unsubscribe URL must be a valid HTTPS Apex Grid URL");
+  }
+  const allowedHosts = new Set([new URL(COMPANY_SITE).hostname]);
+  const configuredSite = process.env.PUBLIC_SITE_URL
+    || process.env.REPLIT_DOMAINS?.split(",")[0]
+    || process.env.REPLIT_DEV_DOMAIN;
+  if (configuredSite) {
+    try {
+      const configuredUrl = new URL(
+        configuredSite.startsWith("http") ? configuredSite : `https://${configuredSite}`,
+      );
+      allowedHosts.add(configuredUrl.hostname);
+    } catch {
+      // An invalid configured origin must not weaken the production-host check.
+    }
+  }
+  if (url.protocol !== "https:" || !allowedHosts.has(url.hostname) || url.pathname !== "/unsubscribe") {
+    throw new Error("Unsubscribe URL must be a valid HTTPS Apex Grid URL");
+  }
+  return url;
+}
+
+function normalizedPreheader(body: string): string {
+  const summary = body.replace(/\s+/g, " ").trim().slice(0, 90);
+  return summary ? `Apex Grid Engineering: ${summary}` : "Apex Grid Engineering project update.";
 }
 
 export function renderBrandedEmail(body: string, unsubscribeUrl: string, recipientName?: string): {
@@ -48,7 +81,7 @@ export function renderBrandedEmail(body: string, unsubscribeUrl: string, recipie
   html: string;
 } {
   const personalizedBody = personalizeBody(body, recipientName);
-  const safeUnsubscribeUrl = escapeEmailHtml(unsubscribeUrl);
+  const safeUnsubscribeUrl = escapeEmailHtml(validateMarketingUnsubscribeUrl(unsubscribeUrl).toString());
   const plainText = `${personalizedBody}\n\nBest regards,\n${CONTACT_NAME}\n${CONTACT_TITLE}\n${LEGAL_COMPANY_NAME}\nVeteran-owned engineering company\n${CONTACT_PHONE}\n${COMPANY_SITE}\n\nUnsubscribe: ${unsubscribeUrl}`;
   const html = `<!doctype html>
 <html lang="en">
@@ -56,21 +89,32 @@ export function renderBrandedEmail(body: string, unsubscribeUrl: string, recipie
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${COMPANY_NAME}</title>
+    <style>
+      @media only screen and (max-width:600px) {
+        .email-shell { padding:20px 14px 26px !important; }
+        .email-content { width:100% !important; }
+        .email-copy { font-size:16px !important; line-height:1.6 !important; }
+      }
+      @media (prefers-color-scheme:dark) {
+        .email-body, .email-content { background-color:#ffffff !important; color:#202124 !important; }
+        .email-copy { color:#273449 !important; }
+      }
+    </style>
   </head>
-  <body style="margin:0;padding:0;background:#ffffff;color:#202124;">
-    <div style="display:none;max-height:0;overflow:hidden;opacity:0;">${escapeEmailHtml(personalizedBody.slice(0, 120))}</div>
+  <body class="email-body" style="margin:0;padding:0;background:#ffffff;color:#202124;">
+    <div style="display:none;max-height:0;max-width:0;overflow:hidden;mso-hide:all;opacity:0;">${escapeEmailHtml(normalizedPreheader(personalizedBody))}&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;</div>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;background:#ffffff;">
       <tr>
-        <td align="left" style="padding:24px 18px 32px;">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:640px;">
+        <td class="email-shell" align="left" style="padding:24px 18px 32px;">
+          <table class="email-content" role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:640px;">
             <tr>
               <td style="padding:0;font-family:Arial,Helvetica,sans-serif;">
-                ${renderBodyHtml(personalizedBody)}
+                <div class="email-copy">${renderBodyHtml(personalizedBody)}</div>
                 <p style="margin:28px 0 12px;color:#202124;font-size:16px;line-height:1.5;">Best regards,</p>
                 <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0;">
                   <tr>
                     <td valign="top" style="padding:0 13px 0 0;">
-                      <img src="${COMPANY_LOGO}" width="48" height="48" alt="Apex Grid Engineering logo" style="display:block;width:48px;height:48px;">
+                      <img src="${COMPANY_LOGO}" width="48" height="48" alt="Apex Grid Engineering logo" style="display:block;width:48px;height:48px;border:0;outline:none;text-decoration:none;">
                     </td>
                     <td valign="top" style="padding:0;border-left:1px solid #d9dee5;">
                       <div style="padding-left:13px;color:#202124;font-size:16px;font-weight:700;line-height:1.4;">${CONTACT_NAME}</div>

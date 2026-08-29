@@ -1,3 +1,5 @@
+import { usePageMeta } from "@/lib/seo";
+
 const content = {
   privacy: {
     title: "Privacy Policy",
@@ -37,6 +39,13 @@ const content = {
 
 export default function Legal({ page }: { page: "privacy" | "terms" }) {
   const data = content[page];
+  usePageMeta({
+    title: `${data.title} | Apex Grid Engineering`,
+    description: page === "privacy"
+      ? "How Apex Grid Engineering collects, uses, and protects information submitted through its website."
+      : "Terms governing use of the Apex Grid Engineering website and project inquiry process.",
+    path: page === "privacy" ? "/privacy" : "/terms",
+  });
   return (
     <div className="flex flex-col">
       <section className="pt-40 pb-16">

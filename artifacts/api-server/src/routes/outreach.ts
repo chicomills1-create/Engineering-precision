@@ -50,7 +50,7 @@ import {
   sendClientMonthlyMessage,
 } from "../lib/clientMonthlyOutreach";
 import { validateAttributionPair, validateAttributionSourceStatus, type AttributionSourceType } from "../lib/growthAttribution";
-import { getNextPhoenixEightAm } from "../lib/outreachEligibility";
+import { assertOutreachEligibilityBase, getNextPhoenixEightAm, getPhoenixCalendarDayStart } from "../lib/outreachEligibility";
 
 const router: IRouter = Router();
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
@@ -114,7 +114,7 @@ const researchScheduleJson = (
 
 router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> => {
   const automationStatus = getOutreachAutomationStatus();
-  const start = new Date(); start.setHours(0, 0, 0, 0);
+  const start = getPhoenixCalendarDayStart();
   const [[prospects], [campaigns], [messages], [sentToday], [replies]] = await Promise.all([
     db.select({ value: count() }).from(prospectsTable), db.select({ value: count() }).from(campaignsTable),
     db.select({ value: count() }).from(outreachMessagesTable),
@@ -323,6 +323,27 @@ router.post("/outreach/prospects/:id/replied", requireAuth, async (req, res): Pr
 });
 router.post("/outreach/messages/:id/approve", requireAuth, async (req, res): Promise<void> => {
   const p = ApproveOutreachMessageParams.safeParse(req.params); if (!p.success) { res.status(400).json({ error: p.error.message }); return; }
+  const [message] = await db.select().from(outreachMessagesTable).where(eq(outreachMessagesTable.id, p.data.id));
+  if (!message) { res.status(404).json({ error: "Message not found" }); return; }
+  if (message.status !== "draft") { res.status(409).json({ error: "Only draft messages can be approved" }); return; }
+  const [prospect] = await db.select().from(prospectsTable).where(eq(prospectsTable.id, message.prospectId));
+  if (!prospect) { res.status(409).json({ error: "Approval blocked: prospect not found" }); return; }
+  const [campaign] = message.campaignId
+    ? await db.select().from(campaignsTable).where(eq(campaignsTable.id, message.campaignId))
+    : [];
+  if (message.campaignId && !campaign) { res.status(409).json({ error: "Approval blocked: campaign not found" }); return; }
+  try {
+    const email = assertOutreachEligibilityBase(message, prospect, campaign, { requireApprovedMessage: false });
+    const [suppression] = await db.select({ id: outreachSuppressionsTable.id })
+      .from(outreachSuppressionsTable)
+      .where(eq(outreachSuppressionsTable.email, email))
+      .limit(1);
+    if (suppression) throw new Error("Address is suppressed");
+  } catch (error) {
+    const blocker = error instanceof Error ? error.message : "Message is not eligible for outreach";
+    res.status(409).json({ error: `Approval blocked: ${blocker}` });
+    return;
+  }
   const [row] = await db.update(outreachMessagesTable).set({ status: "approved", scheduledAt: getNextPhoenixEightAm() }).where(and(eq(outreachMessagesTable.id, p.data.id), eq(outreachMessagesTable.status, "draft"))).returning();
   if (!row) { res.status(409).json({ error: "Only draft messages can be approved" }); return; } res.json(ApproveOutreachMessageResponse.parse(await messageJson(row)));
 });

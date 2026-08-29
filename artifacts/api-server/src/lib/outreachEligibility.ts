@@ -23,20 +23,23 @@ export function assertOutreachEligibilityBase(
   message: OutreachMessage,
   prospect: Prospect,
   campaign: Campaign | undefined,
+  options: { requireApprovedMessage?: boolean } = {},
 ): string {
   if (isOutreachContactExcluded(prospect)) {
     throw new Error("Contact is excluded from outreach per client relationship");
   }
-  if (!prospect.contactEmail) throw new Error("Prospect does not have a business email");
-  if (message.status !== "approved") throw new Error("Message must be approved before sending");
+  if (!prospect.contactEmail?.trim()) throw new Error("Prospect does not have a business email");
+  if (options.requireApprovedMessage !== false && message.status !== "approved") {
+    throw new Error("Message must be approved before sending");
+  }
   if (!["approved", "contacted"].includes(prospect.status)) throw new Error("Prospect must be approved before sending");
-  if (prospect.fitScore < 60 || prospect.needScore < 60 || !prospect.needSignals) {
+  if (prospect.fitScore < 60 || prospect.needScore < 60 || !prospect.needSignals?.trim()) {
     throw new Error("Prospect does not have enough evidence of current need");
   }
-  if (!prospect.contactName || !prospect.contactTitle || prospect.contactConfidence !== "high") {
+  if (!prospect.contactName?.trim() || !prospect.contactTitle?.trim() || prospect.contactConfidence !== "high") {
     throw new Error("A high-confidence named decision-maker is required");
   }
-  if (!prospect.contactSourceUrl) throw new Error("A public source for the named contact is required");
+  if (!prospect.contactSourceUrl?.trim()) throw new Error("A public source for the named contact is required");
   if (prospect.emailStatus !== "verified") throw new Error("Prospect email must be verified before sending");
   if (campaign) {
     if (campaign.status !== "active") throw new Error("Campaign must be active before sending");
@@ -85,4 +88,15 @@ export function getNextPhoenixEightAm(now = new Date()): Date {
   return todayAtEight.getTime() > now.getTime()
     ? todayAtEight
     : new Date(todayAtEight.getTime() + 24 * 60 * 60 * 1000);
+}
+
+export function getPhoenixCalendarDayStart(now = new Date()): Date {
+  const dateParts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Phoenix",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(now);
+  const values = Object.fromEntries(dateParts.map((part) => [part.type, part.value]));
+  return new Date(`${values.year}-${values.month}-${values.day}T00:00:00-07:00`);
 }

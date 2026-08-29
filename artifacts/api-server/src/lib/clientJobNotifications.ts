@@ -4,6 +4,7 @@ import type {
   ClientJobDocument,
 } from "@workspace/db";
 import { signDownloadPath } from "./downloadToken";
+import { escapeEmailHtml } from "./emailMarkup";
 
 export const CLIENT_NOTIFICATION_STATUSES = ["needs_information", "quoted"] as const;
 export type ClientNotificationStatus = (typeof CLIENT_NOTIFICATION_STATUSES)[number];
@@ -59,6 +60,40 @@ export function buildClientJobNotificationPreview(
     subject,
     body,
     portalUrl: clientPortalUrl(),
+  };
+}
+
+export function buildClientJobNotificationHtml(
+  preview: ReturnType<typeof buildClientJobNotificationPreview>,
+): string {
+  const paragraphs = preview.body.split("\n\n").map((paragraph) => {
+    const safeParagraph = escapeEmailHtml(paragraph).replaceAll("\n", "<br>");
+    return `<p style="margin:0 0 18px;color:#273449;font-size:16px;line-height:1.6;word-break:break-word;overflow-wrap:anywhere;">${safeParagraph}</p>`;
+  }).join("");
+  const safePortalUrl = escapeEmailHtml(preview.portalUrl);
+  return `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<style>@media only screen and (max-width:600px){.email-shell{padding:20px 14px !important;}.email-content{width:100% !important;}}</style>
+</head><body style="margin:0;padding:0;background:#ffffff;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="email-shell" style="padding:28px 18px;"><table class="email-content" role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:640px;"><tr><td style="font-family:Arial,Helvetica,sans-serif;">
+${paragraphs}
+<p style="margin:0;"><a href="${safePortalUrl}" style="color:#245b8f;font-size:16px;font-weight:700;">View your project</a></p>
+</td></tr></table></td></tr></table></body></html>`;
+}
+
+export function buildClientJobStatusNotificationPayload(
+  preview: ReturnType<typeof buildClientJobNotificationPreview>,
+  from: string,
+  replyTo: string,
+) {
+  return {
+    personalizations: [{ to: [{ email: preview.recipient }] }],
+    from: { email: from, name: "Apex Grid Engineering Client Portal" },
+    reply_to: { email: replyTo, name: "Apex Grid Engineering" },
+    subject: preview.subject,
+    content: [
+      { type: "text/plain", value: preview.body },
+      { type: "text/html", value: buildClientJobNotificationHtml(preview) },
+    ],
   };
 }
 
@@ -137,16 +172,14 @@ export async function sendClientJobStatusNotificationEmail(
   }
 
   const preview = buildClientJobNotificationPreview(job, status);
+  const replyTo = process.env.STATUS_NOTIFICATION_REPLY_TO_EMAIL?.trim()
+    || process.env.OUTREACH_REPLY_TO_EMAIL?.trim()
+    || from;
   try {
     const response = await new ReplitConnectors().proxy("sendgrid", "/v3/mail/send", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        personalizations: [{ to: [{ email: preview.recipient }] }],
-        from: { email: from, name: "Apex Grid Engineering Client Portal" },
-        subject: preview.subject,
-        content: [{ type: "text/plain", value: preview.body }],
-      }),
+      body: JSON.stringify(buildClientJobStatusNotificationPayload(preview, from, replyTo)),
     });
     if (!response.ok) {
       const errorBody = await response.text().catch(() => "");

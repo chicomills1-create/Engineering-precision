@@ -24,6 +24,8 @@ import { CalendarClock, Play, Pause, Plus, MoreHorizontal } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useToast } from '@/hooks/use-toast';
 
+import { ResponsiveTableContainer, ResponsiveTable, ResponsiveTableHeader, ResponsiveTableBody, ResponsiveTableRow, ResponsiveTableHead, ResponsiveTableCell } from '@/components/outreach/ResponsiveTable';
+
 const campaignSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   audience: z.enum(['architect', 'builder']),
@@ -36,7 +38,7 @@ const campaignSchema = z.object({
 type CampaignFormValues = z.infer<typeof campaignSchema>;
 
 export function CampaignsTab() {
-  const { data: campaigns, isLoading } = useListCampaigns();
+  const { data: campaigns, isLoading, error: campaignsError } = useListCampaigns();
   const { data: researchSchedules } = useListOutreachResearchSchedules();
   const queryClient = useQueryClient();
   const { toast } = useToast();
@@ -47,7 +49,9 @@ export function CampaignsTab() {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getListCampaignsQueryKey() });
         setIsCreateOpen(false);
+        toast({ title: 'Campaign created' });
       },
+      onError: (error: any) => toast({ title: 'Unable to create campaign', description: error?.body?.error || error?.message || 'Please try again.', variant: 'destructive' }),
     },
   });
 
@@ -55,7 +59,9 @@ export function CampaignsTab() {
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getListCampaignsQueryKey() });
+        toast({ title: 'Campaign updated' });
       },
+      onError: (error: any) => toast({ title: 'Unable to update campaign', description: error?.body?.error || error?.message || 'Please try again.', variant: 'destructive' }),
     },
   });
 
@@ -127,6 +133,27 @@ export function CampaignsTab() {
     return <div className="text-muted-foreground p-8" data-testid="campaigns-loading">Loading campaigns...</div>;
   }
 
+  if ((campaignsError as { status?: number })?.status === 403) {
+    return (
+      <div className="border border-destructive/50 bg-destructive/10 p-8 rounded-[2px]" data-testid="error-access-denied">
+        <div className="flex items-start gap-3">
+          <CalendarClock className="w-5 h-5 text-destructive mt-0.5 shrink-0" />
+          <div>
+            <h2 className="font-display font-semibold text-lg mb-1">Access denied</h2>
+            <p className="text-sm text-muted-foreground">
+              Your account isn't authorized to view outreach campaigns. This page is
+              limited to approved team members. If you believe this is a
+              mistake, contact the site administrator.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (campaignsError) {
+    return <div className="p-8 text-sm text-destructive" data-testid="campaigns-error">Campaigns could not be loaded. Please refresh and try again.</div>;
+  }
+
   return (
     <div className="space-y-6" data-testid="tab-content-campaigns">
       <div className="flex justify-between items-center">
@@ -163,7 +190,7 @@ export function CampaignsTab() {
                     </FormItem>
                   )}
                 />
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="audience"
@@ -190,9 +217,9 @@ export function CampaignsTab() {
                     name="dailyLimit"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Daily Limit (1-100)</FormLabel>
+                        <FormLabel>Daily Limit (1-500)</FormLabel>
                         <FormControl>
-                          <Input type="number" min={1} max={100} {...field} data-testid="input-campaign-limit" />
+                          <Input type="number" min={1} max={500} {...field} data-testid="input-campaign-limit" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -256,33 +283,33 @@ export function CampaignsTab() {
             No campaigns yet. Create one to start outreach.
           </div>
         ) : (
-          <div className="overflow-x-auto">
-          <table className="w-full min-w-[980px] text-sm">
-            <thead>
-              <tr className="border-b border-border bg-muted/20 text-muted-foreground">
-                <th className="text-left px-4 py-3 font-medium">Name</th>
-                <th className="text-left px-4 py-3 font-medium">Audience</th>
-                <th className="text-left px-4 py-3 font-medium">States</th>
-                <th className="text-left px-4 py-3 font-medium text-right">Daily Limit</th>
-                 <th className="text-left px-4 py-3 font-medium">8 AM Approval List</th>
-                <th className="text-left px-4 py-3 font-medium text-center">Status</th>
-                <th className="text-left px-4 py-3 font-medium text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border">
+          <ResponsiveTableContainer>
+          <ResponsiveTable>
+            <ResponsiveTableHeader>
+              <ResponsiveTableRow className="bg-muted/20 hover:bg-muted/20">
+                <ResponsiveTableHead>Name</ResponsiveTableHead>
+                <ResponsiveTableHead>Audience</ResponsiveTableHead>
+                <ResponsiveTableHead>States</ResponsiveTableHead>
+                <ResponsiveTableHead className="text-right">Daily Limit</ResponsiveTableHead>
+                 <ResponsiveTableHead>8 AM Approval List</ResponsiveTableHead>
+                <ResponsiveTableHead className="text-center">Status</ResponsiveTableHead>
+                <ResponsiveTableHead className="text-right">Actions</ResponsiveTableHead>
+              </ResponsiveTableRow>
+            </ResponsiveTableHeader>
+            <ResponsiveTableBody>
               {campaigns.map(campaign => {
                 const schedule = researchSchedules?.find((item) => item.campaignId === campaign.id);
                 return (
-                <tr key={campaign.id} className="hover:bg-white/[0.02]" data-testid={`row-campaign-${campaign.id}`}>
-                  <td className="px-4 py-3 font-medium text-foreground">{campaign.name}</td>
-                  <td className="px-4 py-3 capitalize">{campaign.audience}</td>
-                  <td className="px-4 py-3">
-                    <div className="flex gap-1">
+                <ResponsiveTableRow key={campaign.id} className="hover:bg-white/[0.02]" data-testid={`row-campaign-${campaign.id}`}>
+                  <ResponsiveTableCell mobileLabel="Name" className="font-medium text-foreground align-top">{campaign.name}</ResponsiveTableCell>
+                  <ResponsiveTableCell mobileLabel="Audience" className="capitalize align-top">{campaign.audience}</ResponsiveTableCell>
+                  <ResponsiveTableCell mobileLabel="States" className="align-top">
+                    <div className="flex gap-1 flex-wrap">
                       {campaign.states.map(s => <Badge key={s} variant="secondary" className="text-[10px] uppercase">{s}</Badge>)}
                     </div>
-                  </td>
-                  <td className="px-4 py-3 text-right">{campaign.dailyLimit}</td>
-                  <td className="px-4 py-3">
+                  </ResponsiveTableCell>
+                  <ResponsiveTableCell mobileLabel="Daily Limit" className="text-right align-top max-md:text-left">{campaign.dailyLimit}</ResponsiveTableCell>
+                  <ResponsiveTableCell mobileLabel="8 AM Approval List" className="align-top">
                     <div className="flex items-center gap-2">
                       <Badge variant={schedule?.enabled ? 'default' : 'outline'} data-testid={`research-schedule-${campaign.id}`}>
                         {schedule?.enabled ? 'Enabled' : 'Off'}
@@ -301,20 +328,21 @@ export function CampaignsTab() {
                     {schedule?.enabled && campaign.status !== 'active' && (
                       <div className="mt-1 text-xs text-amber-500">Waiting for campaign activation</div>
                     )}
-                  </td>
-                  <td className="px-4 py-3 text-center">
+                  </ResponsiveTableCell>
+                  <ResponsiveTableCell mobileLabel="Status" className="text-center align-top max-md:text-left">
                     <Badge variant={campaign.status === 'active' ? 'default' : campaign.status === 'paused' ? 'outline' : 'secondary'} data-testid={`status-campaign-${campaign.id}`}>
                       {campaign.status}
                     </Badge>
-                  </td>
-                  <td className="px-4 py-3 text-right">
+                  </ResponsiveTableCell>
+                  <ResponsiveTableCell mobileLabel="Actions" className="text-right align-top max-md:text-left max-md:flex max-md:gap-2">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon" className="h-8 w-8" data-testid={`menu-campaign-${campaign.id}`}>
+                        <Button variant="outline" size="sm" className="h-8 max-md:w-full max-md:justify-between md:border-transparent md:bg-transparent md:w-8 md:p-0" data-testid={`menu-campaign-${campaign.id}`}>
+                          <span className="md:hidden">Actions</span>
                           <MoreHorizontal className="w-4 h-4" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
+                      <DropdownMenuContent align="end" className="max-md:w-[90vw]">
                          <DropdownMenuItem
                            onClick={() => toggleMorningList(campaign)}
                            disabled={updateScheduleMutation.isPending}
@@ -345,12 +373,12 @@ export function CampaignsTab() {
                         )}
                       </DropdownMenuContent>
                     </DropdownMenu>
-                  </td>
-                </tr>
+                  </ResponsiveTableCell>
+                </ResponsiveTableRow>
               )})}
-            </tbody>
-          </table>
-          </div>
+            </ResponsiveTableBody>
+          </ResponsiveTable>
+          </ResponsiveTableContainer>
         )}
       </div>
       <div className="border border-emerald-500/25 bg-emerald-500/5 px-4 py-3 text-sm text-muted-foreground rounded-[2px]">

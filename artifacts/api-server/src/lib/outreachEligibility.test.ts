@@ -7,6 +7,7 @@ import {
   assertSequenceDeliveryReady,
   getFollowUpScheduledAt,
   getNextPhoenixEightAm,
+  getPhoenixCalendarDayStart,
   isOutreachContactExcluded,
 } from "./outreachEligibility";
 import { getOutreachDailyLimit } from "./outreach";
@@ -70,6 +71,46 @@ const activeCampaign: Campaign = {
 
 test("eligible outreach returns a normalized email", () => {
   assert.equal(assertOutreachEligibilityBase(approvedMessage, eligibleProspect, activeCampaign), "alex@example.com");
+});
+
+test("draft approval validates sending safeguards without requiring prior approval", () => {
+  assert.equal(
+    assertOutreachEligibilityBase(
+      { ...approvedMessage, status: "draft" },
+      eligibleProspect,
+      activeCampaign,
+      { requireApprovedMessage: false },
+    ),
+    "alex@example.com",
+  );
+  assert.throws(
+    () => assertOutreachEligibilityBase(
+      { ...approvedMessage, status: "draft" },
+      { ...eligibleProspect, emailStatus: "unverified" },
+      activeCampaign,
+      { requireApprovedMessage: false },
+    ),
+    /must be verified/,
+  );
+});
+
+test("rejects whitespace-only outreach evidence", () => {
+  assert.throws(
+    () => assertOutreachEligibilityBase(
+      approvedMessage,
+      { ...eligibleProspect, needSignals: "   " },
+      activeCampaign,
+    ),
+    /current need/,
+  );
+  assert.throws(
+    () => assertOutreachEligibilityBase(
+      approvedMessage,
+      { ...eligibleProspect, contactSourceUrl: "   " },
+      activeCampaign,
+    ),
+    /public source/,
+  );
 });
 
 test("excludes current client contacts by name and company", () => {
@@ -171,5 +212,16 @@ test("queues approved outreach for the next 8 AM Phoenix window", () => {
   assert.equal(
     getNextPhoenixEightAm(new Date("2026-08-29T15:01:00.000Z")).toISOString(),
     "2026-08-30T15:00:00.000Z",
+  );
+});
+
+test("uses Phoenix midnight for dashboard daily counts", () => {
+  assert.equal(
+    getPhoenixCalendarDayStart(new Date("2026-08-29T05:30:00.000Z")).toISOString(),
+    "2026-08-28T07:00:00.000Z",
+  );
+  assert.equal(
+    getPhoenixCalendarDayStart(new Date("2026-08-29T08:30:00.000Z")).toISOString(),
+    "2026-08-29T07:00:00.000Z",
   );
 });

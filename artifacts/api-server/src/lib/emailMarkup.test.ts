@@ -5,7 +5,7 @@ import { renderBrandedEmail } from "./emailMarkup";
 test("renders outreach as readable HTML while retaining a plain-text fallback", () => {
   const content = renderBrandedEmail(
     "Hello <Principal>.\n\nWe can help with the current review.",
-    "https://example.com/unsubscribe?email=test%40example.com&token=long-token",
+    "https://apexgrideng.com/unsubscribe?email=test%40example.com&token=long-token",
   );
 
   assert.match(content.html, /Hello &lt;Principal&gt;\.<\/p>/);
@@ -14,19 +14,21 @@ test("renders outreach as readable HTML while retaining a plain-text fallback", 
   assert.match(content.html, /CEO · USAF Veteran/);
   assert.match(content.html, /Veteran-owned engineering company/);
   assert.match(content.html, /href="https:\/\/apexgrideng\.com"[^>]*>apexgrideng\.com<\/a>/);
-  assert.match(content.html, /https:\/\/apexgrideng\.com\/logo\.svg/);
+  assert.match(content.html, /https:\/\/apexgrideng\.com\/logo\.png/);
   assert.doesNotMatch(content.html, /Quintero/);
   assert.doesNotMatch(content.plainText, /Quintero/);
   assert.match(content.html, />Unsubscribe<\/a>/);
-  assert.match(content.html, /href="https:\/\/example\.com\/unsubscribe/);
-  assert.match(content.plainText, /Unsubscribe: https:\/\/example\.com/);
+  assert.match(content.html, /href="https:\/\/apexgrideng\.com\/unsubscribe/);
+  assert.match(content.plainText, /Unsubscribe: https:\/\/apexgrideng\.com/);
   assert.doesNotMatch(content.html, /Hello <Principal>/);
+  assert.match(content.html, /@media only screen and \(max-width:600px\)/);
+  assert.match(content.html, /overflow-wrap:anywhere/);
 });
 
 test("uses the named recipient instead of a generic greeting", () => {
   const content = renderBrandedEmail(
     "Hi there,\n\nWe can help with the current review.",
-    "https://example.com/unsubscribe",
+    "https://apexgrideng.com/unsubscribe",
     "Ernesto Garcia",
   );
 
@@ -38,8 +40,38 @@ test("uses the named recipient instead of a generic greeting", () => {
 test("does not include a sender email address in the signature", () => {
   const content = renderBrandedEmail(
     "We can help with the current review.",
-    "https://example.com/unsubscribe",
+    "https://apexgrideng.com/unsubscribe",
   );
 
   assert.doesNotMatch(content.html, /mailto:/);
+});
+
+test("rejects unsubscribe URLs outside the secure Apex Grid host", () => {
+  assert.throws(
+    () => renderBrandedEmail("Body", "http://apexgrideng.com/unsubscribe"),
+    /valid HTTPS Apex Grid URL/,
+  );
+  assert.throws(
+    () => renderBrandedEmail("Body", "https://example.com/unsubscribe"),
+    /valid HTTPS Apex Grid URL/,
+  );
+});
+
+test("keeps outreach copy and approved signature wording in the plain-text alternative", () => {
+  const content = renderBrandedEmail(
+    "Project review support is available.",
+    "https://apexgrideng.com/unsubscribe?token=signed",
+  );
+  for (const value of [
+    "Project review support is available.",
+    "Best regards,",
+    "Jeremy Mills",
+    "CEO · USAF Veteran",
+    "Apex Grid Engineering PLLC",
+    "Veteran-owned engineering company",
+    "480-490-0064",
+    "https://apexgrideng.com",
+  ]) {
+    assert.match(content.plainText, new RegExp(value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
 });

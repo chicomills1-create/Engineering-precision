@@ -47,7 +47,7 @@ function StatusControl({ leadId, status }: { leadId: number; status: LeadStatus 
   });
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex flex-wrap items-center gap-1">
       {STATUSES.map((s) => (
         <button
           key={s}
@@ -108,7 +108,7 @@ function LeadsList() {
       )}
 
       {error && (error as { status?: number }).status === 403 && (
-        <div className="border border-destructive/50 bg-destructive/10 p-8 rounded-[2px]">
+        <div className="border border-destructive/50 bg-destructive/10 p-8 rounded-[2px]" data-testid="error-access-denied">
           <div className="flex items-start gap-3">
             <ShieldAlert className="w-5 h-5 text-destructive mt-0.5 shrink-0" />
             <div>
@@ -149,7 +149,7 @@ function LeadsList() {
               {filteredLeads.length} {filteredLeads.length === 1 ? 'inquiry' : 'inquiries'}
               {filter !== 'all' && ` (${filter})`}
             </p>
-            <div className="flex items-center gap-1">
+            <div className="flex flex-wrap items-center gap-1">
               {(['all', ...STATUSES] as const).map((f) => (
                 <button
                   key={f}

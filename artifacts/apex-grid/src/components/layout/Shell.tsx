@@ -5,13 +5,14 @@ import { Logo } from "@/components/Logo";
 // protection is configured. Re-enable by restoring this import and the
 // <CallbackWidget /> render below.
 // import { CallbackWidget } from "@/components/CallbackWidget";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FEATURED_INDUSTRIES } from "@/data/industries";
 
 export function Shell({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +21,22 @@ export function Shell({ children }: { children: React.ReactNode }) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMobileMenuOpen(false);
+        mobileMenuButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isMobileMenuOpen]);
 
   const navigation = [
     { name: "Home", href: "/" },
@@ -80,7 +97,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
               if (item.name === "Industries") {
                 return (
                   <div key="services-group" className="flex items-center gap-8">
-                    <div className="group/ind">
+                     <div className="group/ind">
                       <Link
                         href={item.href}
                         className={`flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary ${
@@ -89,7 +106,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                       >
                         {item.name} <ChevronDown className="w-4 h-4 opacity-50 group-hover/ind:rotate-180 transition-transform" />
                       </Link>
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[min(1100px,95vw)] opacity-0 pointer-events-none group-hover/ind:opacity-100 group-hover/ind:pointer-events-auto transition-all translate-y-2 group-hover/ind:translate-y-0">
+                       <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[min(1100px,95vw)] opacity-0 pointer-events-none group-hover/ind:opacity-100 group-hover/ind:pointer-events-auto group-focus-within/ind:opacity-100 group-focus-within/ind:pointer-events-auto transition-all translate-y-2 group-hover/ind:translate-y-0 group-focus-within/ind:translate-y-0">
                         <div className="bg-card border border-border p-8 shadow-2xl rounded-[2px] grid grid-cols-3 gap-x-10 gap-y-8">
                           <div className="col-span-3">
                             <div className="text-[11px] font-mono uppercase tracking-widest text-primary mb-3">Featured Industries</div>
@@ -116,12 +133,15 @@ export function Shell({ children }: { children: React.ReactNode }) {
                     </div>
                     
                     <div className="relative group/nav">
-                      <button className={`flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary ${
+                       <button
+                         type="button"
+                         aria-haspopup="menu"
+                         className={`flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary ${
                         location.startsWith("/services") ? "text-primary" : "text-muted-foreground"
-                      }`}>
+                       }`}>
                         Services <ChevronDown className="w-4 h-4 opacity-50 group-hover/nav:rotate-180 transition-transform" />
                       </button>
-                      <div className="absolute top-full left-0 pt-6 w-64 opacity-0 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:pointer-events-auto transition-all translate-y-2 group-hover/nav:translate-y-0">
+                       <div className="absolute top-full left-0 pt-6 w-64 opacity-0 pointer-events-none group-hover/nav:opacity-100 group-hover/nav:pointer-events-auto group-focus-within/nav:opacity-100 group-focus-within/nav:pointer-events-auto transition-all translate-y-2 group-hover/nav:translate-y-0 group-focus-within/nav:translate-y-0">
                         <div className="bg-card border border-border p-2 shadow-2xl flex flex-col gap-1 rounded-[2px]">
                           {services.map(service => (
                             <Link 
@@ -171,8 +191,14 @@ export function Shell({ children }: { children: React.ReactNode }) {
           </nav>
 
           <button
+            ref={mobileMenuButtonRef}
+            type="button"
             className="xl:hidden p-2 text-muted-foreground hover:text-foreground"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation"
+            data-testid="button-mobile-navigation"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -180,7 +206,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="xl:hidden absolute top-full left-0 w-full bg-background border-b border-border p-4 flex flex-col gap-4 max-h-[80vh] overflow-y-auto">
+           <div id="mobile-navigation" className="xl:hidden absolute top-full left-0 w-full bg-background border-b border-border p-4 flex flex-col gap-4 max-h-[80vh] overflow-y-auto">
             {navigation.map((item) => (
               <div key={item.name} className="flex flex-col gap-2">
                 <Link

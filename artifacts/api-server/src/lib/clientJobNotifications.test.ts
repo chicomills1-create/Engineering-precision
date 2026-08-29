@@ -3,6 +3,8 @@ import test from "node:test";
 import type { ClientJob } from "@workspace/db";
 import {
   buildClientJobNotificationPreview,
+  buildClientJobStatusNotificationPayload,
+  buildClientJobNotificationHtml,
   isClientNotificationStatus,
 } from "./clientJobNotifications";
 
@@ -57,4 +59,21 @@ test("quoted preview clearly identifies a ready quote", () => {
   assert.match(preview.subject, /quote is ready/i);
   assert.match(preview.body, /Quote ready/);
   assert.match(preview.body, /sign in to your client portal/i);
+});
+
+test("client status payload uses configured reply mailbox and branded text-equivalent HTML", () => {
+  const preview = buildClientJobNotificationPreview(job, "needs_information");
+  const payload = buildClientJobStatusNotificationPayload(
+    preview,
+    "notifications@apexgrideng.com",
+    "replies@apexgrideng.com",
+  );
+
+  assert.deepEqual(payload.reply_to, { email: "replies@apexgrideng.com", name: "Apex Grid Engineering" });
+  assert.equal(payload.content[0]?.type, "text/plain");
+  assert.equal(payload.content[1]?.type, "text/html");
+  const html = buildClientJobNotificationHtml(preview);
+  assert.match(html, /Needs information/);
+  assert.match(html, /client-portal/);
+  assert.doesNotMatch(html, /Unsubscribe/);
 });

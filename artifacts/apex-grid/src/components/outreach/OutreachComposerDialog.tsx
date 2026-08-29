@@ -243,7 +243,7 @@ export function OutreachComposerDialog({ open, onOpenChange, source, trigger }: 
         ) : (
           <Form {...prospectForm}>
             <form onSubmit={prospectForm.handleSubmit(onCreateProspect)} className="space-y-4" data-testid="form-create-prospect-inline">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FormField control={prospectForm.control} name="companyName" render={({ field }) => (
                   <FormItem className="col-span-2"><FormLabel>Company name</FormLabel><FormControl><Input {...field} placeholder="Acme Architects" /></FormControl><FormMessage /></FormItem>
                 )} />

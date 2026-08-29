@@ -39,6 +39,23 @@ export function ClientSafeListTab() {
   });
 
   if (isLoading) return <p className="text-sm text-muted-foreground">Loading safe list…</p>;
+  if ((error as { status?: number })?.status === 403) {
+    return (
+      <div className="border border-destructive/50 bg-destructive/10 p-8 rounded-[2px]" data-testid="error-access-denied">
+        <div className="flex items-start gap-3">
+          <ShieldCheck className="w-5 h-5 text-destructive mt-0.5 shrink-0" />
+          <div>
+            <h2 className="font-display font-semibold text-lg mb-1">Access denied</h2>
+            <p className="text-sm text-muted-foreground">
+              Your account isn't authorized to view the client safe list. This page is
+              limited to approved team members. If you believe this is a
+              mistake, contact the site administrator.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
   if (error) return <p className="text-sm text-destructive">Could not load the client safe list.</p>;
 
   return (

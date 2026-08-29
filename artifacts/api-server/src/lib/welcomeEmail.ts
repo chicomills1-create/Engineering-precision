@@ -3,7 +3,62 @@ import {
   makeUnsubscribeUrl,
   makeOneClickUnsubscribeUrl,
 } from "./unsubscribeToken";
-import { renderBrandedEmail } from "./emailMarkup";
+import { renderBrandedEmail, validateMarketingUnsubscribeUrl } from "./emailMarkup";
+
+export function buildWelcomeEmailPayload(
+  subscriberEmail: string,
+  from: string,
+  unsubscribeUrl: string | undefined,
+  oneClickUrl: string | undefined,
+) {
+  if (!unsubscribeUrl || !oneClickUrl) {
+    return { ok: false as const, error: "Unsubscribe signing is not configured; welcome email was not sent" };
+  }
+  let unsubscribe: URL;
+  let oneClick: URL;
+  try {
+    unsubscribe = validateMarketingUnsubscribeUrl(unsubscribeUrl);
+    oneClick = new URL(oneClickUrl);
+    if (
+      oneClick.protocol !== "https:"
+      || oneClick.hostname !== unsubscribe.hostname
+      || oneClick.pathname !== "/api/subscribers/one-click-unsubscribe"
+    ) {
+      throw new Error("Invalid one-click unsubscribe URL");
+    }
+  } catch {
+    return { ok: false as const, error: "Secure unsubscribe links are unavailable; welcome email was not sent" };
+  }
+  const text = [
+    "Welcome to Apex Grid Engineering updates!",
+    "",
+    "Thanks for subscribing on our Resources page. You're confirmed, and",
+    "you'll now receive occasional updates on electrical code changes,",
+    "engineering resources, and industry news — no spam, just the",
+    "information that matters for your projects.",
+    "",
+    "If you didn't sign up, you can safely ignore this email.",
+    "",
+    "— The Apex Grid Engineering Team",
+  ].join("\n");
+  const emailContent = renderBrandedEmail(text, unsubscribe.toString());
+  return {
+    ok: true as const,
+    payload: {
+      personalizations: [{ to: [{ email: subscriberEmail }] }],
+      headers: {
+        "List-Unsubscribe": `<${oneClick.toString()}>`,
+        "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+      },
+      from: { email: from, name: "Apex Grid Engineering" },
+      subject: "Welcome — you're subscribed to Apex Grid updates",
+      content: [
+        { type: "text/plain", value: emailContent.plainText },
+        { type: "text/html" as const, value: emailContent.html },
+      ],
+    },
+  };
+}
 
 /**
  * Sends a branded welcome/confirmation email to a new subscriber via the
@@ -30,44 +85,14 @@ export async function sendWelcomeEmail(
   const unsubscribeUrl = makeUnsubscribeUrl(subscriberEmail);
   const oneClickUrl = makeOneClickUnsubscribeUrl(subscriberEmail);
 
-  const text = [
-    "Welcome to Apex Grid Engineering updates!",
-    "",
-    "Thanks for subscribing on our Resources page. You're confirmed, and",
-    "you'll now receive occasional updates on electrical code changes,",
-    "engineering resources, and industry news — no spam, just the",
-    "information that matters for your projects.",
-    "",
-    "If you didn't sign up, you can safely ignore this email.",
-    "",
-    "— The Apex Grid Engineering Team",
-  ].join("\n");
-  const emailContent = unsubscribeUrl
-    ? renderBrandedEmail(text, unsubscribeUrl)
-    : { plainText: text, html: undefined };
+  const built = buildWelcomeEmailPayload(subscriberEmail, from, unsubscribeUrl, oneClickUrl);
+  if (!built.ok) return built;
 
   const connectors = new ReplitConnectors();
   const response = await connectors.proxy("sendgrid", "/v3/mail/send", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      personalizations: [{ to: [{ email: subscriberEmail }] }],
-      // RFC 8058 one-click unsubscribe headers for Gmail/Outlook compliance
-      ...(oneClickUrl
-        ? {
-            headers: {
-              "List-Unsubscribe": `<${oneClickUrl}>`,
-              "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
-            },
-          }
-        : {}),
-      from: { email: from, name: "Apex Grid Engineering" },
-      subject: "Welcome — you're subscribed to Apex Grid updates",
-      content: [
-        { type: "text/plain", value: emailContent.plainText },
-        ...(emailContent.html ? [{ type: "text/html" as const, value: emailContent.html }] : []),
-      ],
-    }),
+    body: JSON.stringify(built.payload),
   });
 
   // POST /v3/mail/send returns 202 with an empty body on success —

@@ -9,8 +9,14 @@ import project7 from "@assets/generated_images/project-7.webp";
 import project8 from "@assets/generated_images/project-8.webp";
 import project9 from "@assets/generated_images/project-9.webp";
 import portfolioBg from "@assets/generated_images/portfolio-bg.webp";
+import { usePageMeta } from "@/lib/seo";
 
 export default function Portfolio() {
+  usePageMeta({
+    title: "Engineering Project Portfolio | Apex Grid Engineering",
+    description: "Explore Apex Grid Engineering work across commercial structural, civil, MEP, architecture, and building-assessment projects.",
+    path: "/portfolio",
+  });
   const projects = [
     {
       id: 1,

@@ -29,6 +29,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/hooks/use-toast';
 
+import { ResponsiveTableContainer, ResponsiveTable, ResponsiveTableHeader, ResponsiveTableBody, ResponsiveTableRow, ResponsiveTableHead, ResponsiveTableCell } from '@/components/outreach/ResponsiveTable';
+
 const prospectSchema = z.object({
   companyName: z.string().min(1, 'Company name required'),
   website: z.string().optional(),
@@ -75,7 +77,7 @@ function normalizeNullable(prospect: Prospect) {
 }
 
 export function ProspectsTab() {
-  const { data: prospects, isLoading } = useListProspects();
+  const { data: prospects, isLoading, error: prospectsError } = useListProspects();
   const { data: researchRuns } = useListOutreachResearchRuns();
   const queryClient = useQueryClient();
   const { toast } = useToast();
@@ -94,6 +96,7 @@ export function ProspectsTab() {
         setIsCreateOpen(false);
         toast({ title: 'Prospect added successfully' });
       },
+      onError: (error: any) => toast({ title: 'Unable to save prospect', description: error?.body?.error || error?.message || 'Please review the details.', variant: 'destructive' }),
     },
   });
 
@@ -101,7 +104,11 @@ export function ProspectsTab() {
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getListProspectsQueryKey() });
+        setIsCreateOpen(false);
+        setEditingProspect(null);
+        toast({ title: 'Prospect updated' });
       },
+      onError: (error: any) => toast({ title: 'Unable to update prospect', description: error?.body?.error || error?.message || 'Please try again.', variant: 'destructive' }),
     },
   });
 
@@ -233,6 +240,27 @@ export function ProspectsTab() {
     return <div className="text-muted-foreground p-8" data-testid="prospects-loading">Loading prospects...</div>;
   }
 
+  if ((prospectsError as { status?: number })?.status === 403) {
+    return (
+      <div className="border border-destructive/50 bg-destructive/10 p-8 rounded-[2px]" data-testid="error-access-denied">
+        <div className="flex items-start gap-3">
+          <AlertCircle className="w-5 h-5 text-destructive mt-0.5 shrink-0" />
+          <div>
+            <h2 className="font-display font-semibold text-lg mb-1">Access denied</h2>
+            <p className="text-sm text-muted-foreground">
+              Your account isn't authorized to view prospect research. This page is
+              limited to approved team members. If you believe this is a
+              mistake, contact the site administrator.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (prospectsError) {
+    return <div className="p-8 text-sm text-destructive" data-testid="prospects-error">Prospects could not be loaded. Please refresh and try again.</div>;
+  }
+
   return (
     <div className="space-y-8" data-testid="tab-content-prospects">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -261,7 +289,7 @@ export function ProspectsTab() {
               </DialogHeader>
               <Form {...researchForm}>
                 <form onSubmit={researchForm.handleSubmit(onResearchSubmit)} className="space-y-4" data-testid="form-run-research">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <FormField control={researchForm.control} name="state" render={({ field }) => (
                       <FormItem>
                         <FormLabel>State</FormLabel>
@@ -315,7 +343,7 @@ export function ProspectsTab() {
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" data-testid="form-create-prospect">
                   <ScrollArea className="h-[60vh] pr-4">
                     <div className="space-y-4 pb-4">
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <FormField control={form.control} name="companyName" render={({ field }) => (
                           <FormItem><FormLabel>Company Name</FormLabel><FormControl><Input {...field} data-testid="input-prospect-company" /></FormControl><FormMessage /></FormItem>
                         )} />
@@ -331,7 +359,7 @@ export function ProspectsTab() {
                           <FormMessage />
                         </FormItem>
                       )} />
-                      <div className="grid grid-cols-3 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <FormField control={form.control} name="city" render={({ field }) => (
                           <FormItem><FormLabel>City</FormLabel><FormControl><Input {...field} data-testid="input-prospect-city" /></FormControl><FormMessage /></FormItem>
                         )} />
@@ -356,7 +384,7 @@ export function ProspectsTab() {
                           </FormItem>
                         )} />
                       </div>
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <FormField control={form.control} name="contactName" render={({ field }) => (
                           <FormItem><FormLabel>Contact Name</FormLabel><FormControl><Input {...field} data-testid="input-prospect-contact" /></FormControl><FormMessage /></FormItem>
                         )} />
@@ -364,7 +392,7 @@ export function ProspectsTab() {
                           <FormItem><FormLabel>Contact Title</FormLabel><FormControl><Input {...field} data-testid="input-prospect-title" /></FormControl><FormMessage /></FormItem>
                         )} />
                       </div>
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <FormField control={form.control} name="contactEmail" render={({ field }) => (
                           <FormItem><FormLabel>Email Address</FormLabel><FormControl><Input type="email" {...field} data-testid="input-prospect-email" /></FormControl><FormMessage /></FormItem>
                         )} />
@@ -436,18 +464,18 @@ export function ProspectsTab() {
             No prospects found. Try running research to find high-intent firms.
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm min-w-[1000px]">
-              <thead>
-                <tr className="border-b border-border bg-muted/20 text-muted-foreground">
-                  <th className="text-left px-4 py-3 font-medium w-[220px]">Company</th>
-                  <th className="text-left px-4 py-3 font-medium w-[260px]">Contact Info</th>
-                  <th className="text-left px-4 py-3 font-medium w-[220px]">Intent & Fit</th>
-                  <th className="text-center px-4 py-3 font-medium w-[120px]">Workflow</th>
-                  <th className="text-right px-4 py-3 font-medium w-[80px]">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
+          <ResponsiveTableContainer>
+            <ResponsiveTable>
+              <ResponsiveTableHeader>
+                <ResponsiveTableRow className="bg-muted/20 hover:bg-muted/20">
+                  <ResponsiveTableHead className="w-[220px]">Company</ResponsiveTableHead>
+                  <ResponsiveTableHead className="w-[260px]">Contact Info</ResponsiveTableHead>
+                  <ResponsiveTableHead className="w-[220px]">Intent & Fit</ResponsiveTableHead>
+                  <ResponsiveTableHead className="w-[120px] text-center">Workflow</ResponsiveTableHead>
+                  <ResponsiveTableHead className="w-[80px] text-right">Actions</ResponsiveTableHead>
+                </ResponsiveTableRow>
+              </ResponsiveTableHeader>
+              <ResponsiveTableBody>
                 {prospects.map(p => {
                   const hasContact = p.contactName && p.contactName.trim().length > 0;
                    const isReadyForApproval = Boolean(
@@ -457,18 +485,18 @@ export function ProspectsTab() {
                    );
                   
                   return (
-                    <tr key={p.id} className="hover:bg-white/[0.02]" data-testid={`row-prospect-${p.id}`}>
-                      <td className="px-4 py-3 align-top">
+                    <ResponsiveTableRow key={p.id} className="hover:bg-white/[0.02]" data-testid={`row-prospect-${p.id}`}>
+                      <ResponsiveTableCell mobileLabel="Company" className="align-top">
                         <div className="font-medium text-foreground">{p.companyName}</div>
                         <div className="text-xs text-muted-foreground mt-0.5 capitalize">{p.audience} &bull; {p.city}, {p.state}</div>
-                      </td>
-                      <td className="px-4 py-3 align-top">
+                      </ResponsiveTableCell>
+                      <ResponsiveTableCell mobileLabel="Contact Info" className="align-top">
                         {hasContact ? (
                           <>
                             <div className="font-medium">{p.contactName} {p.contactTitle && <span className="text-muted-foreground font-normal text-xs ml-1">({p.contactTitle})</span>}</div>
                             <div className="text-xs flex items-center gap-1.5 mt-0.5">
                               <EmailStatusIcon status={p.emailStatus} />
-                              <span className="text-muted-foreground truncate max-w-[200px]">{p.contactEmail || 'No email'}</span>
+                              <span className="text-muted-foreground truncate max-w-[200px] max-md:max-w-none">{p.contactEmail || 'No email'}</span>
                             </div>
                             <div className="text-[10px] text-muted-foreground mt-1 uppercase tracking-wider">
                               Confidence: <span className={p.contactConfidence === 'high' ? 'text-emerald-500' : 'text-amber-500'}>{p.contactConfidence}</span>
@@ -479,8 +507,8 @@ export function ProspectsTab() {
                             <AlertCircle className="w-3 h-3" /> Contact research needed
                           </div>
                         )}
-                      </td>
-                      <td className="px-4 py-3 align-top">
+                      </ResponsiveTableCell>
+                      <ResponsiveTableCell mobileLabel="Intent & Fit" className="align-top">
                         <div className="flex gap-2 mb-1">
                           <Badge variant="outline" className={p.needScore >= 60 ? 'border-primary/50 text-primary' : ''} title="Need Score">
                             N: {p.needScore}
@@ -490,24 +518,25 @@ export function ProspectsTab() {
                           </Badge>
                         </div>
                         {p.needSignals && (
-                          <div className="text-xs text-muted-foreground truncate max-w-[200px]" title={p.needSignals}>
+                          <div className="text-xs text-muted-foreground truncate max-w-[200px] max-md:max-w-none max-md:whitespace-normal" title={p.needSignals}>
                             {p.needSignals}
                           </div>
                         )}
-                      </td>
-                      <td className="px-4 py-3 text-center align-top">
+                      </ResponsiveTableCell>
+                      <ResponsiveTableCell mobileLabel="Workflow" className="text-center align-top max-md:text-left">
                         <Badge variant={p.status === 'new' ? 'secondary' : p.status === 'suppressed' ? 'destructive' : 'default'} data-testid={`status-prospect-${p.id}`}>
                           {p.status.replace(/_/g, ' ')}
                         </Badge>
-                      </td>
-                      <td className="px-4 py-3 text-right align-top">
+                      </ResponsiveTableCell>
+                      <ResponsiveTableCell mobileLabel="Actions" className="text-right align-top max-md:text-left max-md:flex max-md:gap-2">
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon" className="h-8 w-8" data-testid={`menu-prospect-${p.id}`}>
+                            <Button variant="outline" size="sm" className="h-8 max-md:w-full max-md:justify-between md:border-transparent md:bg-transparent md:w-8 md:p-0" data-testid={`menu-prospect-${p.id}`}>
+                              <span className="md:hidden">Actions</span>
                               <MoreHorizontal className="w-4 h-4" />
                             </Button>
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
+                          <DropdownMenuContent align="end" className="max-md:w-[90vw]">
                              <DropdownMenuItem onClick={() => openEditProspect(p)} data-testid={`action-prospect-edit-${p.id}`}>Review & Edit Details</DropdownMenuItem>
                             <DropdownMenuItem onClick={() => updateStatus(p, 'review')} data-testid={`action-prospect-review-${p.id}`}>Mark for Review</DropdownMenuItem>
                             <DropdownMenuItem 
@@ -532,13 +561,13 @@ export function ProspectsTab() {
                             <DropdownMenuItem onClick={() => updateEmailStatus(p, 'invalid')} data-testid={`action-prospect-email-invalid-${p.id}`}>Set Invalid</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
-                      </td>
-                    </tr>
+                      </ResponsiveTableCell>
+                    </ResponsiveTableRow>
                   );
                 })}
-              </tbody>
-            </table>
-          </div>
+              </ResponsiveTableBody>
+            </ResponsiveTable>
+          </ResponsiveTableContainer>
         )}
       </div>
     </div>
