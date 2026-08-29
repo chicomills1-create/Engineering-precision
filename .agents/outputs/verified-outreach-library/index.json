@@ -10,13 +10,14 @@
   },
   "counts": {
     "personal": 190,
-    "public": 8,
-    "total": 198
+    "public": 99,
+    "total": 289,
+    "pausedAutoReplyRecords": 2
   },
   "lastFreePublicPass": {
     "sitesChecked": 10,
-    "publicEmailsAdded": 0,
-    "unresolvedMovedToPublic": 10,
+    "publicEmailsAdded": 5,
+    "rejectedOffTargetEmails": 0,
     "creditsUsed": 0
   },
   "lastPersonalPass": {
@@ -25,5 +26,15 @@
     "paidLookups": 1,
     "paidEmailsReturned": 0,
     "verifiedPersonalAdded": 0
+  },
+  "contactCorrections": {
+    "temporaryAutoReplies": [
+      "annie.lamerand@omniapartners.com"
+    ],
+    "paidCreditsUsed": 0
+  },
+  "dataQualityNotes": {
+    "legacyMalformedPublicRecordsRequireAudit": true,
+    "offTargetEmailAttributionGuardEnabled": true
   }
 }

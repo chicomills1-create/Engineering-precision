@@ -37,17 +37,6 @@
     "companyName": "[object Object]",
     "audience": "builder",
     "market": "Phoenix",
-    "contactName": "Nate Lowrie",
-    "contactTitle": "Chief Executive Officer",
-    "personSourceUrl": "https://www.linkedin.com/in/nate-lowrie-859880a4",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "bjerkbuilders.com",
-    "companyName": "[object Object]",
-    "audience": "builder",
-    "market": "Phoenix",
     "contactName": "Kate Perrin",
     "contactTitle": "Director of Business Development",
     "personSourceUrl": "https://www.linkedin.com/in/kateperrin0501",
@@ -103,17 +92,6 @@
     "companyName": "[object Object]",
     "audience": "builder",
     "market": "Tucson",
-    "contactName": "LEED AP William C. Goodin",
-    "contactTitle": "Director of Development",
-    "personSourceUrl": "https://www.linkedin.com/in/william-charles-goodin",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "terrapincg.com",
-    "companyName": "[object Object]",
-    "audience": "builder",
-    "market": "Tucson",
     "contactName": "Steve Merritt",
     "contactTitle": "VP Specialty Markets",
     "personSourceUrl": "https://www.linkedin.com/in/greenwaveconsulting",
@@ -147,44 +125,11 @@
     "companyName": "[object Object]",
     "audience": "builder",
     "market": "Mesa-Chandler",
-    "contactName": "Clint Caldwell",
-    "contactTitle": "President",
-    "personSourceUrl": "https://www.linkedin.com/in/clint-caldwell-5643b518b",
-    "publicEmail": "",
-    "emailStatus": "official_site_unavailable_public_fallback"
-  },
-  {
-    "companyDomain": "solidangleinc.com",
-    "companyName": "[object Object]",
-    "audience": "builder",
-    "market": "Mesa-Chandler",
-    "contactName": "Ed Carpenter",
-    "contactTitle": "COO and VP Business Development",
-    "personSourceUrl": "https://www.linkedin.com/in/ed-carpenter-b2167541",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "solidangleinc.com",
-    "companyName": "[object Object]",
-    "audience": "builder",
-    "market": "Mesa-Chandler",
-    "contactName": "LEED AP Dev Pawar",
-    "contactTitle": "Principal, Director of Operations",
-    "personSourceUrl": "https://www.linkedin.com/in/dev-pawar-aia-leed-ap-edac-lfa-9252a99",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "solidangleinc.com",
-    "companyName": "[object Object]",
-    "audience": "builder",
-    "market": "Mesa-Chandler",
     "contactName": "Ryan Littlefield",
     "contactTitle": "President",
     "personSourceUrl": "https://www.linkedin.com/in/ryan-littlefield-a1787282",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "official_site_unavailable_public_fallback"
   },
   {
     "companyDomain": "wassoncc.com",
@@ -224,17 +169,6 @@
     "companyName": "[object Object]",
     "audience": "architect",
     "market": "Phoenix",
-    "contactName": "Alex Ramon CDP LEED AP",
-    "contactTitle": "Managing Partner",
-    "personSourceUrl": "https://www.linkedin.com/in/alex-ramon-cdp-leed-ap-9296216b",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "ramondesigngroup.com",
-    "companyName": "[object Object]",
-    "audience": "architect",
-    "market": "Phoenix",
     "contactName": "Justen Cassidy",
     "contactTitle": "Partner - Director of Operations",
     "personSourceUrl": "https://www.linkedin.com/in/justen-cassidy-b2958465",
@@ -257,17 +191,6 @@
     "companyName": "[object Object]",
     "audience": "architect",
     "market": "Scottsdale",
-    "contactName": "John Salustro",
-    "contactTitle": "Partner",
-    "personSourceUrl": "https://www.linkedin.com/in/john-salustro-7a1b8b14",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "salustroarchitects.com",
-    "companyName": "[object Object]",
-    "audience": "architect",
-    "market": "Scottsdale",
     "contactName": "Connie Salustro",
     "contactTitle": "Partner",
     "personSourceUrl": "https://www.linkedin.com/in/connie-salustro-30b14626",
@@ -279,44 +202,11 @@
     "companyName": "[object Object]",
     "audience": "architect",
     "market": "Scottsdale",
-    "contactName": "Erik Peterson",
-    "contactTitle": "President",
-    "personSourceUrl": "https://www.linkedin.com/in/erikpetersonaia",
-    "publicEmail": "",
-    "emailStatus": "public_fallback_pending"
-  },
-  {
-    "companyDomain": "architectsup.com",
-    "companyName": "[object Object]",
-    "audience": "architect",
-    "market": "Scottsdale",
-    "contactName": "Justin Gregonis",
-    "contactTitle": "Owner",
-    "personSourceUrl": "https://www.linkedin.com/in/justin-gregonis-aia-ncarb-leed-ga-32793011",
-    "publicEmail": "",
-    "emailStatus": "public_fallback_pending"
-  },
-  {
-    "companyDomain": "architectsup.com",
-    "companyName": "[object Object]",
-    "audience": "architect",
-    "market": "Scottsdale",
-    "contactName": "Alan Jorgensen",
-    "contactTitle": "President",
-    "personSourceUrl": "https://www.linkedin.com/in/alan-jorgensen-01a23217",
-    "publicEmail": "",
-    "emailStatus": "public_fallback_pending"
-  },
-  {
-    "companyDomain": "architectsup.com",
-    "companyName": "[object Object]",
-    "audience": "architect",
-    "market": "Scottsdale",
     "contactName": "Lee Hutchison",
     "contactTitle": "Owner",
     "personSourceUrl": "https://www.linkedin.com/in/lee-hutchison-aia-77746b24",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "648arch.com",
@@ -356,39 +246,6 @@
     "companyName": "[object Object]",
     "audience": "builder",
     "market": "Glendale-Peoria",
-    "contactName": "Toby Pugh",
-    "contactTitle": "President",
-    "personSourceUrl": "https://www.linkedin.com/in/toby-pugh",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "apglobalcontractors.com",
-    "companyName": "[object Object]",
-    "audience": "builder",
-    "market": "Glendale-Peoria",
-    "contactName": "Jim Rogers",
-    "contactTitle": "Director of Preconstruction, Estimating, Buisness Development",
-    "personSourceUrl": "https://www.linkedin.com/in/jim-rogers-168b81246",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "apglobalcontractors.com",
-    "companyName": "[object Object]",
-    "audience": "builder",
-    "market": "Glendale-Peoria",
-    "contactName": "Erik Mathiason",
-    "contactTitle": "Executive Vice President",
-    "personSourceUrl": "https://www.linkedin.com/in/erik-mathiason",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "apglobalcontractors.com",
-    "companyName": "[object Object]",
-    "audience": "builder",
-    "market": "Glendale-Peoria",
     "contactName": "Geoffrey Sylvester",
     "contactTitle": "Regional Director - AZ & TX",
     "personSourceUrl": "https://www.linkedin.com/in/geoff-sylvester",
@@ -405,17 +262,6 @@
     "personSourceUrl": "https://www.linkedin.com/in/dominic-ballesteros-40a31929",
     "publicEmail": "",
     "emailStatus": "public_fallback_pending"
-  },
-  {
-    "companyDomain": "cokerconstruction.com",
-    "companyName": "[object Object]",
-    "audience": "builder",
-    "market": "Goodyear-Buckeye",
-    "contactName": "Jacob Coker",
-    "contactTitle": "Independent Business Owner",
-    "personSourceUrl": "https://www.linkedin.com/in/jacob-coker-2112a821",
-    "publicEmail": "",
-    "emailStatus": "personal_lookup_no_result_public_fallback"
   },
   {
     "companyDomain": "cokerconstruction.com",
@@ -455,22 +301,11 @@
     "companyName": "[object Object]",
     "audience": "builder",
     "market": "Goodyear-Buckeye",
-    "contactName": "Francisco Javier Rodriguez",
-    "contactTitle": "Company Owner",
-    "personSourceUrl": "https://www.linkedin.com/in/francisco-javier-rodriguez-976068a8",
-    "publicEmail": "",
-    "emailStatus": "official_site_unavailable_public_fallback"
-  },
-  {
-    "companyDomain": "rodriguezgeneralcontractingllc.com",
-    "companyName": "[object Object]",
-    "audience": "builder",
-    "market": "Goodyear-Buckeye",
     "contactName": "Samuel Rodriguez",
     "contactTitle": "Owner",
     "personSourceUrl": "https://www.linkedin.com/in/samuel-rodriguez-213061a3",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "official_site_unavailable_public_fallback"
   },
   {
     "companyDomain": "multiplebuildersinc.com",
@@ -493,17 +328,6 @@
     "personSourceUrl": "https://www.linkedin.com/in/brian-bombardieri-718bb03b",
     "publicEmail": "",
     "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "nobleconstructionco.com",
-    "companyName": "[object Object]",
-    "audience": "builder",
-    "market": "Prescott",
-    "contactName": "Nicholas Sommer",
-    "contactTitle": "President",
-    "personSourceUrl": "https://www.linkedin.com/in/nicholas-sommer-99496726b",
-    "publicEmail": "",
-    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "nobleconstructionco.com",
@@ -554,22 +378,11 @@
     "companyName": "[object Object]",
     "audience": "builder",
     "market": "Arizona",
-    "contactName": "Eneas Kane",
-    "contactTitle": "President CEO",
-    "personSourceUrl": "https://www.linkedin.com/in/eneas-kane-39552236",
-    "publicEmail": "",
-    "emailStatus": "public_fallback_pending"
-  },
-  {
-    "companyDomain": "dbmcaz.com",
-    "companyName": "[object Object]",
-    "audience": "builder",
-    "market": "Arizona",
     "contactName": "Brent Herrington",
     "contactTitle": "President and Chief Executive Officer",
     "personSourceUrl": "https://www.linkedin.com/in/brent-herrington-16bb9a11",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "dbmcaz.com",
@@ -579,19 +392,8 @@
     "contactName": "Daniel Kelly",
     "contactTitle": "Senior Vice President, General Manager",
     "personSourceUrl": "https://www.linkedin.com/in/daniel-kelly-531b887",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "coreconstruction.com",
-    "companyName": "[object Object]",
-    "audience": "builder",
-    "market": "Arizona",
-    "contactName": "Todd Steffen",
-    "contactTitle": "Director of Preconstruction",
-    "personSourceUrl": "https://www.linkedin.com/in/todd-steffen-1235446",
-    "publicEmail": "",
-    "emailStatus": "public_fallback_pending"
+    "publicEmail": "null",
+    "emailStatus": "published_on_official_site"
   },
   {
     "companyDomain": "coreconstruction.com",
@@ -602,29 +404,7 @@
     "contactTitle": "BD Preconstruction Services",
     "personSourceUrl": "https://www.linkedin.com/in/gary-jackson-4b30738a",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "laytonconstruction.com",
-    "companyName": "[object Object]",
-    "audience": "builder",
-    "market": "Arizona",
-    "contactName": "Andrew Geier",
-    "contactTitle": "Executive Vice President",
-    "personSourceUrl": "https://www.linkedin.com/in/andrew-geier-184040b5",
-    "publicEmail": "",
     "emailStatus": "public_fallback_pending"
-  },
-  {
-    "companyDomain": "laytonconstruction.com",
-    "companyName": "[object Object]",
-    "audience": "builder",
-    "market": "Arizona",
-    "contactName": "Ashley Hoffman",
-    "contactTitle": "Director Of Business Development",
-    "personSourceUrl": "https://www.linkedin.com/in/ashley-hoffman-349906b",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
   },
   {
     "companyDomain": "laytonconstruction.com",
@@ -635,7 +415,7 @@
     "contactTitle": "Executive Vice President",
     "personSourceUrl": "https://www.linkedin.com/in/dave-blaser-7107295",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "orascom.com",
@@ -656,8 +436,8 @@
     "contactName": "Tamer Shafik",
     "contactTitle": "Vice President",
     "personSourceUrl": "https://www.linkedin.com/in/tamer-shafik-101867106",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "publicEmail": "null",
+    "emailStatus": "published_on_official_site"
   },
   {
     "companyDomain": "streamdatacenters.com",
@@ -678,8 +458,8 @@
     "contactName": "Greg Davit",
     "contactTitle": "Vice President Business Development",
     "personSourceUrl": "https://www.linkedin.com/in/gregdavit",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "publicEmail": "null",
+    "emailStatus": "published_on_official_site"
   },
   {
     "companyDomain": "generalcontractors.org",
@@ -690,7 +470,7 @@
     "contactTitle": "Co-Founder & CEO",
     "personSourceUrl": "https://www.linkedin.com/in/rajab-fidai-6b80a42b",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "upwardarchitects.com",
@@ -701,7 +481,7 @@
     "contactTitle": "Owner",
     "personSourceUrl": "https://www.linkedin.com/in/justin-gregonis-aia-ncarb-leed-ga-32793011",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "exchange.construction",
@@ -712,7 +492,7 @@
     "contactTitle": "Owner",
     "personSourceUrl": "https://www.linkedin.com/in/rebekahmorris1",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "reecestudioarchitects.com",
@@ -723,7 +503,7 @@
     "contactTitle": "PRINCIPAL ARCHITECT",
     "personSourceUrl": "https://www.linkedin.com/in/ty-reece-3930b766",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "nankearchitecture.studio",
@@ -734,7 +514,7 @@
     "contactTitle": "President",
     "personSourceUrl": "https://www.linkedin.com/in/john-nanke-748562181",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "official_site_unavailable_public_fallback"
   },
   {
     "companyDomain": "omzarchitects.com",
@@ -745,7 +525,7 @@
     "contactTitle": "Founder",
     "personSourceUrl": "https://www.linkedin.com/in/meredith-zoe",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "livingsystemsarchitecture.com",
@@ -756,7 +536,7 @@
     "contactTitle": "Owner",
     "personSourceUrl": "https://www.linkedin.com/in/michael-frerking-b1705011",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "ldgi-ae.com",
@@ -767,18 +547,7 @@
     "contactTitle": "President CEO",
     "personSourceUrl": "https://www.linkedin.com/in/arnaud-longeaura",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "cottonarchitecture.com",
-    "companyName": "[object Object]",
-    "audience": "architect",
-    "market": "Arizona",
-    "contactName": "Steve Goodman",
-    "contactTitle": "Principal Founding Member",
-    "personSourceUrl": "https://www.linkedin.com/in/stevegoodmanarchitect",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "cottonarchitecture.com",
@@ -789,7 +558,7 @@
     "contactTitle": "Architect, Principal Founding Member",
     "personSourceUrl": "https://www.linkedin.com/in/ryan-short-9764a916",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "jsra.com",
@@ -799,19 +568,8 @@
     "contactName": "Bill Draper",
     "contactTitle": "Architect Project Manager",
     "personSourceUrl": "https://www.linkedin.com/in/bill-draper-06725814",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "architechnologyaz.com",
-    "companyName": "[object Object]",
-    "audience": "architect",
-    "market": "Arizona",
-    "contactName": "Larry Lind",
-    "contactTitle": "President Principal Architect",
-    "personSourceUrl": "https://www.linkedin.com/in/larry-lind-04624319",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "publicEmail": "info@jsrarchinc.com",
+    "emailStatus": "published_on_official_site"
   },
   {
     "companyDomain": "architechnologyaz.com",
@@ -822,7 +580,7 @@
     "contactTitle": "Principal Vice President of Operations",
     "personSourceUrl": "https://www.linkedin.com/in/pat-prince-808ba6ab",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "az-built.com",
@@ -833,29 +591,7 @@
     "contactTitle": "President",
     "personSourceUrl": "https://www.linkedin.com/in/byron-bourg-60b1bb8a",
     "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "ppsphx.com",
-    "companyName": "[object Object]",
-    "audience": "architect",
-    "market": "Arizona",
-    "contactName": "Brian Grindel",
-    "contactTitle": "CEO",
-    "personSourceUrl": "https://www.linkedin.com/in/ppsphx",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "ppsphx.com",
-    "companyName": "[object Object]",
-    "audience": "architect",
-    "market": "Arizona",
-    "contactName": "Andrew Goodwin",
-    "contactTitle": "President",
-    "personSourceUrl": "https://www.linkedin.com/in/andrew-goodwin-479771a1",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "emailStatus": "public_fallback_pending"
   },
   {
     "companyDomain": "ppsphx.com",
@@ -873,21 +609,66 @@
     "companyName": "[object Object]",
     "audience": "architect",
     "market": "Arizona",
-    "contactName": "Douglas Whitneybell",
-    "contactTitle": "Owner",
-    "personSourceUrl": "https://www.linkedin.com/in/douglas-whitneybell-25267b10",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
-  },
-  {
-    "companyDomain": "whitneybellperry.com",
-    "companyName": "[object Object]",
-    "audience": "architect",
-    "market": "Arizona",
     "contactName": "Mike Perry",
     "contactTitle": "Principal",
     "personSourceUrl": "https://www.linkedin.com/in/mike-perry-8022a634",
-    "publicEmail": "",
-    "emailStatus": "needs_email_source"
+    "publicEmail": "info@company.com",
+    "emailStatus": "published_on_official_site"
+  },
+  {
+    "companyDomain": "amerisconstruction.com",
+    "companyName": "Ameris Construction",
+    "audience": "builder",
+    "market": "Arizona",
+    "contactName": "Chris Jones",
+    "contactTitle": null,
+    "personSourceUrl": null,
+    "publicEmail": "cjones@amerisconstruction.com",
+    "emailStatus": "user_provided_reply_replacement",
+    "approvalStatus": "pending_manual_review",
+    "sourceType": "inbound_reply",
+    "sourceNote": "Provided in reply stating David Lugo is no longer with Ameris Construction."
+  },
+  {
+    "companyDomain": "ewingconstruction.com",
+    "companyName": "Robert N. Ewing General Contractor, Inc.",
+    "audience": "builder",
+    "market": "Arizona",
+    "contactName": "Ben Klein",
+    "contactTitle": null,
+    "personSourceUrl": null,
+    "publicEmail": "benk@ewingconstruction.com",
+    "emailStatus": "user_provided_reply_replacement",
+    "approvalStatus": "pending_manual_review",
+    "sourceType": "inbound_reply",
+    "sourceNote": "Provided in reply after Steve Davis reported retirement; one of two replacement options."
+  },
+  {
+    "companyDomain": "ewingconstruction.com",
+    "companyName": "Robert N. Ewing General Contractor, Inc.",
+    "audience": "builder",
+    "market": "Arizona",
+    "contactName": "Ryan Davis",
+    "contactTitle": null,
+    "personSourceUrl": null,
+    "publicEmail": "ryand@ewingconstruction.com",
+    "emailStatus": "user_provided_reply_replacement",
+    "approvalStatus": "pending_manual_review",
+    "sourceType": "inbound_reply",
+    "sourceNote": "Provided in reply after Steve Davis reported retirement; one of two replacement options."
+  },
+  {
+    "companyDomain": "aia-arizona.org",
+    "companyName": "AIA Arizona | A Component of the American Institute of Architects",
+    "audience": "architect",
+    "market": "Arizona",
+    "contactName": "Sarah Levi",
+    "contactTitle": "Urgent matters contact",
+    "personSourceUrl": null,
+    "publicEmail": "sarah@aia-arizona.org",
+    "emailStatus": "user_provided_reply_urgent_only",
+    "approvalStatus": "pending_manual_review",
+    "sourceType": "inbound_reply",
+    "sourceNote": "Provided as the urgent-matters contact while John Czarnecki is away through September 1; not treated as a normal campaign replacement."
   }
 ]

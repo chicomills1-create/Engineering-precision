@@ -732,7 +732,27 @@
     "sourceUrl": "https://www.ewingconstruction.com/about-us/",
     "needSignals": "Public company evidence: About Us | Robert N. Ewing General Contractor\n\nAbout Us | Robert N. Ewing General Contractor\n* [Home](/)\n* [Services](/services/)\n* [Industrial & Commercial Facility Services](/services/industrial-and-commercial-facility-services/)\n* [Engineering & Design](https://www.ewingconstruction.com/services/engineering-design/)\n* [General Contracting](https://www.ewingconstruction.com/services/general-contracting/)\n* [Fabrication & Installation](https://www.ewingconstruction.com/services/fabrication-installation/)\n* [Concrete](https://www.ewingconstruction.com/services/concrete/)\n* [About Us](https://www.ewingconstruction.com/about-us/)\n* [Projects](https://www.ewingconstruction.com/projects/)\n* [Photo Gallery](https://www.ewingconstruction.com/photo-gallery/)\n* [Contact Us](https://www.ewingconstr",
     "emailLane": "personal",
-    "laneReason": "named_individual_mailbox"
+    "laneReason": "named_individual_mailbox",
+    "contactStatus": "retired",
+    "sendEligibility": "suppressed",
+    "suppressionReason": "Inbound reply says the contact has retired from Ewing Construction.",
+    "replacementContacts": [
+      {
+        "name": "Ben Klein",
+        "email": "benk@ewingconstruction.com",
+        "scope": "replacement_contact",
+        "approvalStatus": "pending_manual_review",
+        "source": "inbound_reply"
+      },
+      {
+        "name": "Ryan Davis",
+        "email": "ryand@ewingconstruction.com",
+        "scope": "replacement_contact",
+        "approvalStatus": "pending_manual_review",
+        "source": "inbound_reply"
+      }
+    ],
+    "replacementSelectionStatus": "needs_selection"
   },
   {
     "dedupeKey": "findymail-glhn.com",
@@ -1032,7 +1052,19 @@
     "sourceUrl": "https://aia-arizona.org/architect/",
     "needSignals": "Public company evidence: Architects Directory - AIA Arizona\n\n# AIA Arizona Architecture Firm Directory\n\nFind Arizona-based architecture firms listed alphabetically, by location, or by project type.\n\nNo matter the firm size, each firm in the directory has at least one AIA-member licensed architect.\n\nThis directory of Arizona architecture firms is supported by the Arizona Architecture Foundation.\n\nProject Types\n\n### 180 Degrees Design + Build\n\nPhoenix, AZ\n\n180 Degrees Design + Build is an architect-led design-build firm specializing in innovative, sustainable, and high-end residential, commercial, and public...\n\n### 4Line Studio\n\nScottsdale, AZ\n\n4Line Studio was formed in 2021 around the belief that successful public projects are delivered through a balanced, interdisciplinary process...\n\n### A-I-R (Architecture-Inf",
     "emailLane": "personal",
-    "laneReason": "named_individual_mailbox"
+    "laneReason": "named_individual_mailbox",
+    "contactStatus": "temporarily_unavailable",
+    "sendEligibility": "paused_after_auto_reply",
+    "suppressionReason": "Auto-reply says John Czarnecki is away through September 1 and returns September 2.",
+    "replacementContacts": [
+      {
+        "name": "Sarah Levi",
+        "email": "sarah@aia-arizona.org",
+        "scope": "urgent_only",
+        "approvalStatus": "pending_manual_review",
+        "source": "inbound_reply"
+      }
+    ]
   },
   {
     "dedupeKey": "findymail-banicki.com",
@@ -1422,7 +1454,19 @@
     "sourceUrl": "https://amerisconstruction.com/",
     "needSignals": "Public company evidence: Ameris Construction\n\nPrescott - Coming Soon Montezuma Scottsdale Airpark Nest Hangars Learn more about this project! Phoenix, Arizona The Edison Learn more about this project! Phoenix, Arizona Verde Park Learn more about this project! True Net-Zero Ready! Phoenix, Arizona McKinley Row Learn more about this project! Scottsdale, Arizona MZ II Townhomes Learn more about this project! True Net-Zero Ready! Scottsdale, Arizona DUSK True Net-Zero Construction! Learn more about this project Scottsdale, Arizona MZ Townhomes Learn more about this project True Net-Zero Ready! Scottsdale, Arizona Circle Lofts Learn more about this project Phoenix, Arizona ARRIVE Hotel Learn more about this project Glendale Arizona 70% Net Solar Construction! Learn more about this project GEN-TECH\n\n## Preeminent Builde",
     "emailLane": "personal",
-    "laneReason": "named_individual_mailbox"
+    "laneReason": "named_individual_mailbox",
+    "contactStatus": "no_longer_with_company",
+    "sendEligibility": "suppressed",
+    "suppressionReason": "Inbound reply says David Lugo is no longer with Ameris Construction.",
+    "replacementContacts": [
+      {
+        "name": "Chris Jones",
+        "email": "cjones@amerisconstruction.com",
+        "scope": "replacement_contact",
+        "approvalStatus": "pending_manual_review",
+        "source": "inbound_reply"
+      }
+    ]
   },
   {
     "dedupeKey": "findymail-arcodb.com",
@@ -1797,7 +1841,12 @@
     "sourceUrl": "https://www.omniapartners.com/suppliers-files/A-D/BWS_Architects/Assets/2025.08_BWS_Architects_Cobranded.pdf",
     "needSignals": "Public company evidence: FIRM OVERVIEW \nIn business since 1992, BWS Architects is a firm of 25, which includes ten registered architects, and \nhas sustained an Arizona state-wide practice built on a foundation of education and public service \nprojects. A Certified Woman Owned Small Business, BWS Architects provides timeless, responsive, \nand beautiful professional design services to change what is possible for you and your community. \nEvery space should emulate your ultimate vision and priorities to enhance the community it is \ndesigned to serve. We use an inclusive and interactive design process to capture our client’s \naspirations fully. \nPRINCIPAL LEADERSHIP + COMMITTED PROFESSIONALS \nFirm principals Robin Shambach, Frank Slingerland, Sue Gray, and Chris Pinkerton have crafted an \nagile firm dedicated to design",
     "emailLane": "personal",
-    "laneReason": "named_individual_mailbox"
+    "laneReason": "named_individual_mailbox",
+    "contactStatus": "temporarily_unavailable",
+    "sendEligibility": "paused_after_auto_reply",
+    "autoReplySource": "attached_assets/Screenshot_20260829-090007_1788019219279.jpg",
+    "autoReplyReturnWindow": "Away through Monday, August 31 with very limited email access; expects to respond as soon as possible.",
+    "sourceType": "attached_screenshot"
   },
   {
     "dedupeKey": "findymail-perlmanarchitects.com",

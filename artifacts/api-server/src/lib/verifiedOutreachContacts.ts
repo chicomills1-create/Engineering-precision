@@ -678,19 +678,6 @@ export const VERIFIED_OUTREACH_CONTACTS = [
     "needSignals": "Public company evidence: VERVE Tempe - ESG Architecture & Design\n\n# VERVE Tempe\n\n LOCATION: Tempe, Arizona\n\n STATUS: In Construction\n\n SCOPE: Architecture, Interior Design\n\n CLIENT: Subtext\n\n SCALE: 479,388 SF\n\n NO. UNITS: 240; 769 Beds\n\nVerve Tempe is a large-scale, transit-oriented student housing development ideally located along the Valley Metro A light rail line in Tempe, Arizona. ESG worked closely with the city to create a development that meets density and urban design goals while also reducing resident reliance on automobiles. The design uses subtraction and subsidence concepts to shape the exterior, resulting in a compelling composition of differently colored metal panel clad volumes. The double-height first floor actively engages the street with a resident lobby, covered vehicle drop-off and commercial "
   },
   {
-    "dedupeKey": "findymail-ewingconstruction.com",
-    "companyName": "Robert N. Ewing General Contractor, Inc.",
-    "website": "https://ewingconstruction.com/",
-    "city": "Arizona",
-    "audience": "builder",
-    "contactName": "Steve Davis",
-    "contactTitle": "President",
-    "contactEmail": "steved@ewingconstruction.com",
-    "contactSourceUrl": "https://www.linkedin.com/in/steve-davis-05a75958",
-    "sourceUrl": "https://www.ewingconstruction.com/about-us/",
-    "needSignals": "Public company evidence: About Us | Robert N. Ewing General Contractor\n\nAbout Us | Robert N. Ewing General Contractor\n* [Home](/)\n* [Services](/services/)\n* [Industrial & Commercial Facility Services](/services/industrial-and-commercial-facility-services/)\n* [Engineering & Design](https://www.ewingconstruction.com/services/engineering-design/)\n* [General Contracting](https://www.ewingconstruction.com/services/general-contracting/)\n* [Fabrication & Installation](https://www.ewingconstruction.com/services/fabrication-installation/)\n* [Concrete](https://www.ewingconstruction.com/services/concrete/)\n* [About Us](https://www.ewingconstruction.com/about-us/)\n* [Projects](https://www.ewingconstruction.com/projects/)\n* [Photo Gallery](https://www.ewingconstruction.com/photo-gallery/)\n* [Contact Us](https://www.ewingconstr"
-  },
-  {
     "dedupeKey": "findymail-glhn.com",
     "companyName": "GLHN Architects & Engineers, Inc",
     "website": "https://glhn.com/",
@@ -936,19 +923,6 @@ export const VERIFIED_OUTREACH_CONTACTS = [
     "contactSourceUrl": "https://www.linkedin.com/in/bill-dehaven-2439b34b",
     "sourceUrl": "https://afsteelfab.com/",
     "needSignals": "Public company evidence: Home - AF Steel Fabricators\n\n# Welcome to Arizona’s Leading Steel Fabricator and Erector.\n\nFounded in 1984, we deliver a complete, end-to-end experience—from initial concept through final completion. Backed by an experienced management team and highly skilled tradesmen, we’ve successfully executed high-profile projects across Arizona, earning a reputation for reliability, precision, and performance.\n\nWe don’t just fabricate steel—we keep your project moving. We understand the pressures of tight schedules, strict budgets, and complex trade coordination. That’s why we operate with urgency, clear communication, and full accountability at every stage. With the expertise, capability, and commitment to deliver on time and exceed expectations, we help eliminate the obstacles that slow projects do"
-  },
-  {
-    "dedupeKey": "findymail-aia-arizona.org",
-    "companyName": "AIA Arizona | A Component of the American Institute of Architects",
-    "website": "https://aia-arizona.org/",
-    "city": "Arizona",
-    "audience": "architect",
-    "contactName": "John Czarnecki",
-    "contactTitle": "Executive Director",
-    "contactEmail": "john@aia-arizona.org",
-    "contactSourceUrl": "https://www.linkedin.com/in/ACwAAAAHBpEBY7hNX-P1MSn6ll6epndnSTKAyuY",
-    "sourceUrl": "https://aia-arizona.org/architect/",
-    "needSignals": "Public company evidence: Architects Directory - AIA Arizona\n\n# AIA Arizona Architecture Firm Directory\n\nFind Arizona-based architecture firms listed alphabetically, by location, or by project type.\n\nNo matter the firm size, each firm in the directory has at least one AIA-member licensed architect.\n\nThis directory of Arizona architecture firms is supported by the Arizona Architecture Foundation.\n\nProject Types\n\n### 180 Degrees Design + Build\n\nPhoenix, AZ\n\n180 Degrees Design + Build is an architect-led design-build firm specializing in innovative, sustainable, and high-end residential, commercial, and public...\n\n### 4Line Studio\n\nScottsdale, AZ\n\n4Line Studio was formed in 2021 around the belief that successful public projects are delivered through a balanced, interdisciplinary process...\n\n### A-I-R (Architecture-Inf"
   },
   {
     "dedupeKey": "findymail-banicki.com",
@@ -1276,19 +1250,6 @@ export const VERIFIED_OUTREACH_CONTACTS = [
     "needSignals": "Public company evidence: ---\ndescription: We are cleanroom experts, specializing in the design, manufacturing and installation of modular cleanrooms. Licensed in Arizona.\ntitle: Modular Cleanroom Manufacturing in Arizona\n---\n\n \n\n \n\n# Modular Cleanroom Manufacturing in Arizona\n\n# Cleanroom Design & Manufacturing\n\n## American Cleanrooms Systems is an Arizona Licensed General Contractor Specializing in Cleanrooms\n\nAmerican Cleanroom Systems is a certified team of experts, that has been specializing in the manufacturing and installation of quality class 100-100k/ ISO5-8 modular cleanrooms since 1976.\n\nFrom Planning to Building, American Cleanroom Systems is your trusted partner offering services ranging from Cleanroom Design and Engineering to Modular Cleanroom Manufacturing, Construction and Installation for highly s"
   },
   {
-    "dedupeKey": "findymail-amerisconstruction.com",
-    "companyName": "Ameris Construction",
-    "website": "https://amerisconstruction.com/",
-    "city": "Arizona",
-    "audience": "builder",
-    "contactName": "David Lugo",
-    "contactTitle": "Director of Construction",
-    "contactEmail": "dlugo@amerisconstruction.com",
-    "contactSourceUrl": "https://www.linkedin.com/in/ACwAABiZ-1wBDzNaxQttJ-HzFOlS5OxW-gOyxrY",
-    "sourceUrl": "https://amerisconstruction.com/",
-    "needSignals": "Public company evidence: Ameris Construction\n\nPrescott - Coming Soon Montezuma Scottsdale Airpark Nest Hangars Learn more about this project! Phoenix, Arizona The Edison Learn more about this project! Phoenix, Arizona Verde Park Learn more about this project! True Net-Zero Ready! Phoenix, Arizona McKinley Row Learn more about this project! Scottsdale, Arizona MZ II Townhomes Learn more about this project! True Net-Zero Ready! Scottsdale, Arizona DUSK True Net-Zero Construction! Learn more about this project Scottsdale, Arizona MZ Townhomes Learn more about this project True Net-Zero Ready! Scottsdale, Arizona Circle Lofts Learn more about this project Phoenix, Arizona ARRIVE Hotel Learn more about this project Glendale Arizona 70% Net Solar Construction! Learn more about this project GEN-TECH\n\n## Preeminent Builde"
-  },
-  {
     "dedupeKey": "findymail-arcodb.com",
     "companyName": "ARCO Design/Build",
     "website": "https://arcodb.com/",
@@ -1599,19 +1560,6 @@ export const VERIFIED_OUTREACH_CONTACTS = [
     "contactSourceUrl": "https://www.linkedin.com/in/doug-ingle-8298987",
     "sourceUrl": "https://nationsroof.com/locations/phoenix-az-commercial-roofing",
     "needSignals": "Public company evidence: Phoenix, AZ Commercial Roofing Contractors | Nations Roof\n\nNations Roof - Navigation\n\n# Commercial Roofing Services Phoenix, AZ\n\n---\n\nGreater Phoenix continues to grow as a hub for advanced manufacturing, semiconductors, logistics, healthcare, and large corporate campuses. Expanding industrial facilities across the West Valley and East Valley rely on durable roofing systems that can handle extreme desert heat, UV exposure, and seasonal monsoon storms.\n\nNations Roof supports commercial properties throughout Phoenix and the surrounding metro area with dependable roofing services, experienced local crews, and the backing of national resources. From preventative maintenance and complex repairs to full roof replacements, we help property teams protect their buildings, improve energy efficiency,"
-  },
-  {
-    "dedupeKey": "findymail-omniapartners.com",
-    "companyName": "OMNIA Partners",
-    "website": "https://omniapartners.com/",
-    "city": "Arizona",
-    "audience": "architect",
-    "contactName": "Annie Lamerand",
-    "contactTitle": "Senior Regional Director",
-    "contactEmail": "annie.lamerand@omniapartners.com",
-    "contactSourceUrl": "https://www.linkedin.com/in/ACwAAASano0BxJ_xYNBlErLjbRVIJs0ADsB7BFo",
-    "sourceUrl": "https://www.omniapartners.com/suppliers-files/A-D/BWS_Architects/Assets/2025.08_BWS_Architects_Cobranded.pdf",
-    "needSignals": "Public company evidence: FIRM OVERVIEW \nIn business since 1992, BWS Architects is a firm of 25, which includes ten registered architects, and \nhas sustained an Arizona state-wide practice built on a foundation of education and public service \nprojects. A Certified Woman Owned Small Business, BWS Architects provides timeless, responsive, \nand beautiful professional design services to change what is possible for you and your community. \nEvery space should emulate your ultimate vision and priorities to enhance the community it is \ndesigned to serve. We use an inclusive and interactive design process to capture our client’s \naspirations fully. \nPRINCIPAL LEADERSHIP + COMMITTED PROFESSIONALS \nFirm principals Robin Shambach, Frank Slingerland, Sue Gray, and Chris Pinkerton have crafted an \nagile firm dedicated to design"
   },
   {
     "dedupeKey": "findymail-perlmanarchitects.com",

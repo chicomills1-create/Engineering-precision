@@ -53,7 +53,8 @@
     "host": "180degreesinc.com",
     "audience": "builder",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Archicon L. C.",
@@ -61,7 +62,8 @@
     "host": "archicon.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Architekton",
@@ -69,7 +71,8 @@
     "host": "architekton.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Armin Widmann",
@@ -77,7 +80,8 @@
     "host": "arminwidmann.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arrington Watkins Architects",
@@ -101,7 +105,8 @@
     "host": "ccbgarchitects.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "CDG Architects",
@@ -117,7 +122,8 @@
     "host": "cvlci.com",
     "audience": "unknown",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Cornell Architecture",
@@ -133,7 +139,8 @@
     "host": "cuningham.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "DesignBuild Collaborative",
@@ -157,7 +164,8 @@
     "host": "designworkshop.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Devenney Group Limited",
@@ -165,7 +173,8 @@
     "host": "devenneygroup.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Dick & Fritsche Design Group",
@@ -189,7 +198,8 @@
     "host": "edenarchitects.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "HNTB Architecture",
@@ -197,7 +207,8 @@
     "host": "hntb.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Joel Westervelt Architect",
@@ -205,7 +216,8 @@
     "host": "joelwesterveltarchitect.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "John T. Pela and Associates",
@@ -213,7 +225,8 @@
     "host": "jpelaarchitect.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Kenneth C. Bartels & Associates",
@@ -221,7 +234,8 @@
     "host": "kcba-arch.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Kevin B Howard Architects",
@@ -229,7 +243,8 @@
     "host": "kbharchitect.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Leo A Daly",
@@ -237,7 +252,8 @@
     "host": "leoadaly.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Michael Rust – Architect",
@@ -253,7 +269,8 @@
     "host": "mwkarch.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_site_unavailable",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Orcutt/Winslow Partnership",
@@ -269,7 +286,8 @@
     "host": "ravenscroftarchitectsltd.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "SDB",
@@ -285,7 +303,8 @@
     "host": "soloway-designs.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Sonoran Design Group",
@@ -293,7 +312,8 @@
     "host": "sonorandesigngroup.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "SpaceLine Design",
@@ -301,7 +321,8 @@
     "host": "sldarc.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Stickley Design Group Architects",
@@ -309,7 +330,8 @@
     "host": "stickleydesign.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Swaback Partners",
@@ -317,7 +339,8 @@
     "host": "swaback.com",
     "audience": "architect",
     "sourceUrl": "https://builderszone.com/directory/architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Swaim Associates",
@@ -341,7 +364,8 @@
     "host": "bsbdesign.com",
     "audience": "architect",
     "sourceUrl": "https://members.hbaca.org/member-directory/Search/architects-277767",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Felten Group, Inc.",
@@ -349,7 +373,8 @@
     "host": "feltengroup.com",
     "audience": "architect",
     "sourceUrl": "https://members.hbaca.org/member-directory/Search/architects-277767",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "J.Cor Architecture",
@@ -357,7 +382,8 @@
     "host": "jcor-architecture.com",
     "audience": "architect",
     "sourceUrl": "https://members.hbaca.org/member-directory/Search/architects-277767",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "KTGY Architecture + Planning",
@@ -365,7 +391,8 @@
     "host": "ktgy.com",
     "audience": "architect",
     "sourceUrl": "https://members.hbaca.org/member-directory/Search/architects-277767",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Linderoth Associates Architects, Inc.",
@@ -373,7 +400,8 @@
     "host": "linderoth.com",
     "audience": "architect",
     "sourceUrl": "https://members.hbaca.org/member-directory/Search/architects-277767",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "PBLA Surveying Inc",
@@ -381,7 +409,8 @@
     "host": "pbla.biz",
     "audience": "architect",
     "sourceUrl": "https://members.hbaca.org/member-directory/Search/architects-277767",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Alala Brothers Wall Partitions LLC",
@@ -389,7 +418,8 @@
     "host": "network.procore.com",
     "audience": "builder",
     "sourceUrl": "https://network.procore.com/us/az?sectors=commercial",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Phoenix - McCarthy Building Companies",
@@ -421,7 +451,8 @@
     "host": "hitt.com",
     "audience": "builder",
     "sourceUrl": "https://www.hitt.com/locations/phoenix/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial General Contractor In Arizona and California",
@@ -493,7 +524,8 @@
     "host": "az-cb.com",
     "audience": "builder",
     "sourceUrl": "https://az-cb.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Construction Arizona",
@@ -509,7 +541,8 @@
     "host": "carlobuilders.com",
     "audience": "builder",
     "sourceUrl": "https://carlobuilders.com/commercial-residential-contractors-in-scottsdale.html",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "AZBUILT",
@@ -517,7 +550,8 @@
     "host": "azbuiltconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://www.azbuiltconstruction.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial General Contractor in Arizona | Canyon Building & Design",
@@ -557,7 +591,8 @@
     "host": "caldwellcontractors.com",
     "audience": "builder",
     "sourceUrl": "http://caldwellcontractors.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_site_unavailable",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Caylor Design & Construction",
@@ -589,7 +624,8 @@
     "host": "gandjdevelopment.com",
     "audience": "builder",
     "sourceUrl": "https://gandjdevelopment.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Strategic Construction & Building Services | SCBS LLC",
@@ -605,7 +641,8 @@
     "host": "solidangleinc.com",
     "audience": "builder",
     "sourceUrl": "https://solidangleinc.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_site_unavailable",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Wasson Commercial Contracting is a leader in Commercial, Industrial, Office, and Retail Construction in Mesa, Scottsdale, and the Phoenix area.",
@@ -621,7 +658,8 @@
     "host": "wdscom.com",
     "audience": "builder",
     "sourceUrl": "https://wdscom.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "JJ Benett Construction | Commercial Construction Contractors",
@@ -629,7 +667,8 @@
     "host": "jjbenettconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://jjbenettconstruction.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home - RWI Construction LLC",
@@ -741,7 +780,8 @@
     "host": "architectsup.com",
     "audience": "architect",
     "sourceUrl": "https://www.architectsup.com/426/suite-6-architecture",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Aline Architecture Concepts: Architecture Firm Phoenix ...",
@@ -805,7 +845,8 @@
     "host": "allbiz.com",
     "audience": "architect",
     "sourceUrl": "https://www.allbiz.com/business/sbbl-architecture-planning",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Which Tucson Architecture Firms Lead in 2026?",
@@ -893,7 +934,8 @@
     "host": "qualigconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://qualigconstruction.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Construction Company - Rocinante Companies",
@@ -901,7 +943,8 @@
     "host": "rocinanteconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://rocinanteconstruction.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "General Contractor | Coker Construction GoodYear Arizona",
@@ -909,7 +952,8 @@
     "host": "cokerconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://cokerconstruction.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Goodyear, AZ's General Contractor",
@@ -925,7 +969,8 @@
     "host": "hibbsconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://www.hibbsconstruction.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Contractor Services Goodyear AZ | Cave Creek Contracting",
@@ -933,7 +978,8 @@
     "host": "cavecreekcontracting.com",
     "audience": "builder",
     "sourceUrl": "https://cavecreekcontracting.com/service-areas/goodyear-az",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "General Contractor Goodyear AZ | HOA & Commercial Experts – Arizona Experts",
@@ -949,7 +995,8 @@
     "host": "diamondgcontracting.com",
     "audience": "builder",
     "sourceUrl": "https://www.diamondgcontracting.com/service-area/buckeye-az",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Rodriguez General Contracting LLC – General Contracting",
@@ -957,7 +1004,8 @@
     "host": "rodriguezgeneralcontractingllc.com",
     "audience": "builder",
     "sourceUrl": "https://rodriguezgeneralcontractingllc.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_site_unavailable",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "General Contractor Goodyear ,AZ – Construction And More",
@@ -965,7 +1013,8 @@
     "host": "constructionandmore.us",
     "audience": "builder",
     "sourceUrl": "https://www.constructionandmore.us/general-contractor-goodyear-az/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Flagstaff Builders: Commercial Construction Company",
@@ -973,7 +1022,8 @@
     "host": "flagstaffbuildersllc.com",
     "audience": "builder",
     "sourceUrl": "https://flagstaffbuildersllc.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "About Straightline Builders, Inc. in Flagstaff, Arizona",
@@ -989,7 +1039,8 @@
     "host": "multiplebuildersinc.com",
     "audience": "builder",
     "sourceUrl": "https://multiplebuildersinc.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "BWC Enterprises Inc., dba Woodruff Construction",
@@ -997,7 +1048,8 @@
     "host": "woodruffaz.com",
     "audience": "builder",
     "sourceUrl": "http://www.woodruffaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Commercial Construction | JB Construction and Landscape, LLC",
@@ -1005,7 +1057,8 @@
     "host": "jbcl-az.com",
     "audience": "builder",
     "sourceUrl": "https://jbcl-az.com/commercial-construction/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "About - Kinney",
@@ -1037,7 +1090,8 @@
     "host": "jebcoconstructioncompanies.com",
     "audience": "builder",
     "sourceUrl": "http://jebcoconstructioncompanies.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_site_unavailable",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home - Noble Construction Company",
@@ -1045,7 +1099,8 @@
     "host": "nobleconstructionco.com",
     "audience": "builder",
     "sourceUrl": "https://www.nobleconstructionco.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Prescott AZ General Contractor - Custom Home Builder | PCC",
@@ -1053,7 +1108,8 @@
     "host": "prescottcultureconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://www.prescottcultureconstruction.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Haley Construction Home | Haley Construction",
@@ -1069,7 +1125,8 @@
     "host": "stazbuilder.com",
     "audience": "builder",
     "sourceUrl": "https://www.stazbuilder.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Top Residential Construction in Prescott, AZ | Freedom Construction & Design",
@@ -1077,7 +1134,8 @@
     "host": "freedomconstructionanddesign.com",
     "audience": "builder",
     "sourceUrl": "https://www.freedomconstructionanddesign.com/prescott/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Kenson Construction Company",
@@ -1085,7 +1143,8 @@
     "host": "kensonconstructionco.com",
     "audience": "builder",
     "sourceUrl": "https://kensonconstructionco.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "General Contractor in Prescott, AZ | Phoenician Construction",
@@ -1093,7 +1152,8 @@
     "host": "phoenicianconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://phoenicianconstruction.com/locations/prescott/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Eckard Commercial Construction, Inc. | Commercial ...",
@@ -1117,7 +1177,8 @@
     "host": "jwlconstruction.co",
     "audience": "builder",
     "sourceUrl": "https://www.jwlconstruction.co/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Taylor Engineering General Contractor in Yuma, AZ",
@@ -1125,7 +1186,8 @@
     "host": "tegc.us",
     "audience": "builder",
     "sourceUrl": "https://tegc.us/index.html",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_site_unavailable",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Piramide Contractors | construction company | Yuma, AZ, USA",
@@ -1133,7 +1195,8 @@
     "host": "piramidecontractors.com",
     "audience": "builder",
     "sourceUrl": "https://www.piramidecontractors.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Yuma General Contractor for Commercial Businesses | Andrew's",
@@ -1149,7 +1212,8 @@
     "host": "westernergc.net",
     "audience": "builder",
     "sourceUrl": "https://www.westernergc.net/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "DBM Construction – Built to Perform. Built to Last.",
@@ -1157,7 +1221,8 @@
     "host": "dbmcaz.com",
     "audience": "builder",
     "sourceUrl": "https://dbmcaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Venn Construction | Arizona General Contractor",
@@ -1181,7 +1246,8 @@
     "host": "coreconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://coreconstruction.com/locations/arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Southwest Design Building",
@@ -1189,7 +1255,8 @@
     "host": "southwestdesignbuild.com",
     "audience": "builder",
     "sourceUrl": "https://www.southwestdesignbuild.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Industrial / Manufacturing - Barker Contracting, Inc.",
@@ -1205,7 +1272,26 @@
     "host": "ewingconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://www.ewingconstruction.com/about-us/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "domain_found",
+    "contactStatus": "retired",
+    "contactCorrectionSource": "inbound_reply",
+    "replacementContacts": [
+      {
+        "name": "Ben Klein",
+        "email": "benk@ewingconstruction.com",
+        "scope": "replacement_contact",
+        "approvalStatus": "pending_manual_review",
+        "source": "inbound_reply"
+      },
+      {
+        "name": "Ryan Davis",
+        "email": "ryand@ewingconstruction.com",
+        "scope": "replacement_contact",
+        "approvalStatus": "pending_manual_review",
+        "source": "inbound_reply"
+      }
+    ],
+    "replacementSelectionStatus": "needs_selection"
   },
   {
     "name": "Data Center in Goodyear, AZ | Layton Construction",
@@ -1213,7 +1299,8 @@
     "host": "laytonconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://www.laytonconstruction.com/portfolio/mission-critical/data-center-goodyear/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Speedie & Associates: Browse Our Project Gallery",
@@ -1221,7 +1308,8 @@
     "host": "speedie.net",
     "audience": "builder",
     "sourceUrl": "https://www.speedie.net/market.php?pID=274",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Vantage AZ1",
@@ -1237,7 +1325,8 @@
     "host": "edgecore.com",
     "audience": "builder",
     "sourceUrl": "https://edgecore.com/locations/phoenix-data-center",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_site_unavailable",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Data Center (Arizona)",
@@ -1245,7 +1334,8 @@
     "host": "orascom.com",
     "audience": "builder",
     "sourceUrl": "https://orascom.com/projects/confidential-data-center-arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Phoenix Data Center - Stream Data Centers in Arizona",
@@ -1253,7 +1343,8 @@
     "host": "streamdatacenters.com",
     "audience": "builder",
     "sourceUrl": "https://www.streamdatacenters.com/locations/phoenix/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Scalable and Adaptive Data Centers in Phoenix, AZ | Aligned",
@@ -1261,7 +1352,8 @@
     "host": "aligneddc.com",
     "audience": "builder",
     "sourceUrl": "https://aligneddc.com/phoenix-data-centers/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "The 7 Best Commercial Architects in Peoria, Arizona",
@@ -1269,7 +1361,8 @@
     "host": "generalcontractors.org",
     "audience": "architect",
     "sourceUrl": "https://www.generalcontractors.org/the-best-commercial-architects-in-peoria-arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Upward Architects | Commercial Architecture in Arizona",
@@ -1277,7 +1370,8 @@
     "host": "upwardarchitects.com",
     "audience": "architect",
     "sourceUrl": "https://upwardarchitects.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "DFDG Architecture — Architect in Phoenix - Exchange",
@@ -1285,7 +1379,8 @@
     "host": "exchange.construction",
     "audience": "architect",
     "sourceUrl": "https://exchange.construction/contractors/architect/dfdg-architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Architectural Services in Arizona | Integrated A&E Design - ARUSI",
@@ -1301,7 +1396,8 @@
     "host": "smith-arc.com",
     "audience": "architect",
     "sourceUrl": "https://www.smith-arc.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "About | Reece Studio Architects - Custom Architectural Design and Remodels",
@@ -1309,7 +1405,8 @@
     "host": "reecestudioarchitects.com",
     "audience": "architect",
     "sourceUrl": "https://www.reecestudioarchitects.com/about/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Headwaters Architecture: Home",
@@ -1317,7 +1414,8 @@
     "host": "headwatersarch.com",
     "audience": "architect",
     "sourceUrl": "https://headwatersarch.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "find your form with our architects in Prescott, AZ",
@@ -1325,7 +1423,8 @@
     "host": "nankearchitecture.studio",
     "audience": "architect",
     "sourceUrl": "https://www.nankearchitecture.studio/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_site_unavailable",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "FLAGSTAFF ARCHITECT - OMZ architects",
@@ -1333,7 +1432,8 @@
     "host": "omzarchitects.com",
     "audience": "architect",
     "sourceUrl": "https://omzarchitects.com/flagstaff-architect/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Our People - PWMA Authentic Architecture | Paul Wm Moore Architect Flagstaff, AZ",
@@ -1341,7 +1441,8 @@
     "host": "pwmarchitect.com",
     "audience": "architect",
     "sourceUrl": "https://pwmarchitect.com/our-people/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Architect in Prescott, AZ - Living Systems, Your Design & Build Resource",
@@ -1349,7 +1450,8 @@
     "host": "livingsystemsarchitecture.com",
     "audience": "architect",
     "sourceUrl": "https://livingsystemsarchitecture.com/architect-prescott-az/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "About Architectural Design Studio | Flagstaff Home Design Studio",
@@ -1357,7 +1459,8 @@
     "host": "archdstudio.com",
     "audience": "architect",
     "sourceUrl": "https://archdstudio.com/about/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Leading Healthcare Architecture Firm",
@@ -1365,7 +1468,8 @@
     "host": "ldgi-ae.com",
     "audience": "architect",
     "sourceUrl": "https://ldgi-ae.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Healthcare | Transform Healthcare Spaces - Get Expert Design — Cotton Architecture + Design",
@@ -1373,7 +1477,8 @@
     "host": "cottonarchitecture.com",
     "audience": "architect",
     "sourceUrl": "https://www.cottonarchitecture.com/healthcare",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "JSRa Architects",
@@ -1429,7 +1534,8 @@
     "host": "architechnologyaz.com",
     "audience": "architect",
     "sourceUrl": "https://www.architechnologyaz.com/architectural-services/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Education",
@@ -1437,7 +1543,8 @@
     "host": "ariaarchitecture.com",
     "audience": "architect",
     "sourceUrl": "https://ariaarchitecture.com/education",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home - CSDA",
@@ -1477,7 +1584,8 @@
     "host": "az-built.com",
     "audience": "architect",
     "sourceUrl": "https://www.az-built.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Industrial Design Services in Phoenix, AZ | Engineering Experts",
@@ -1485,7 +1593,8 @@
     "host": "ppsphx.com",
     "audience": "architect",
     "sourceUrl": "https://www.ppsphx.com/services/design/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Mycroft Consultant | Architecture & Design Consulting",
@@ -1517,7 +1626,8 @@
     "host": "kephart.com",
     "audience": "architect",
     "sourceUrl": "https://kephart.com/kephart-in-phoenix/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Forty600 Multifamily - Merge Architectural Group",
@@ -1525,7 +1635,8 @@
     "host": "mergeag.com",
     "audience": "architect",
     "sourceUrl": "https://www.mergeag.com/project/forty600-multifamily/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Multifamily Housing Design | Dekker",
@@ -1533,7 +1644,8 @@
     "host": "dekkerdesign.org",
     "audience": "architect",
     "sourceUrl": "https://www.dekkerdesign.org/expertise/multi-family-communities/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home Page - DMS design, llc",
@@ -1581,7 +1693,8 @@
     "host": "phoenixremodel.net",
     "audience": "builder",
     "sourceUrl": "https://phoenixremodel.net/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Surprise, AZ - Rocab Constructions",
@@ -1589,7 +1702,8 @@
     "host": "rocabconstructions.com",
     "audience": "builder",
     "sourceUrl": "https://rocabconstructions.com/location/surprise-az/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Surprise, AZ",
@@ -1597,7 +1711,8 @@
     "host": "advbld.com",
     "audience": "builder",
     "sourceUrl": "https://www.advbld.com/surprise-az.cfm?LL=12",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Gallo Construction | Casa Grande Commercial & Residential ...",
@@ -1605,7 +1720,8 @@
     "host": "galloconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://galloconstruction.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Capital R Construction",
@@ -1613,7 +1729,8 @@
     "host": "capitalrinc.com",
     "audience": "builder",
     "sourceUrl": "https://capitalrinc.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home - Arenas Contracting",
@@ -1621,7 +1738,8 @@
     "host": "arenas-contracting.com",
     "audience": "builder",
     "sourceUrl": "https://arenas-contracting.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Maricopa Contractors Llc — Lic #325390 — Casa Grande, Arizona — General Contractor | NCI",
@@ -1629,7 +1747,8 @@
     "host": "nationalcontractorindex.com",
     "audience": "builder",
     "sourceUrl": "https://nationalcontractorindex.com/contractors/maricopa-contractors-llc/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Government Remodeling Contractor Casa Grande | Pinal Construction",
@@ -1637,7 +1756,8 @@
     "host": "pinalconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://pinalconstruction.com/government-remodeling-contractor-casa-grande/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Construction in San Tan Valley, AZ",
@@ -1645,7 +1765,8 @@
     "host": "desertpinecontracting.com",
     "audience": "builder",
     "sourceUrl": "https://desertpinecontracting.com/construction-san-tan-valley-az/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Construction Company in San Tan Valley, AZ",
@@ -1661,7 +1782,8 @@
     "host": "mcconstructionaz.com",
     "audience": "builder",
     "sourceUrl": "https://mcconstructionaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "General Contractor in San Tan Valley, AZ",
@@ -1669,7 +1791,8 @@
     "host": "erc.build",
     "audience": "builder",
     "sourceUrl": "https://erc.build/near-me/san-tan-valley/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "General Contractor Services in San Tan Valley, AZ | FAST TRACK",
@@ -1677,7 +1800,8 @@
     "host": "ftpbhomes.com",
     "audience": "builder",
     "sourceUrl": "https://ftpbhomes.com/general-contractor-services/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Drywall San Tan Valley & Queen Creek AZ | Next Gen Drywall",
@@ -1685,7 +1809,8 @@
     "host": "nextgen-drywall.com",
     "audience": "builder",
     "sourceUrl": "https://nextgen-drywall.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Excavation Company in San Tan Valley, AZ | Mirage Excavation",
@@ -1693,7 +1818,8 @@
     "host": "mirage-x.com",
     "audience": "builder",
     "sourceUrl": "https://www.mirage-x.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Find Commercial Contractors in Queen Creek, AZ",
@@ -1709,7 +1835,8 @@
     "host": "arsbuilders.net",
     "audience": "builder",
     "sourceUrl": "https://www.arsbuilders.net/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Edge General Contracting: Home Page",
@@ -1717,7 +1844,8 @@
     "host": "azegc.com",
     "audience": "builder",
     "sourceUrl": "https://azegc.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "JSL Builders LLC — Arizona's Premier General Contractor",
@@ -1725,7 +1853,8 @@
     "host": "jsl-builders.com",
     "audience": "builder",
     "sourceUrl": "https://jsl-builders.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Lake Havasu | Canyon State Enterprises | Roofing Contractors | Kingman, AZ",
@@ -1741,7 +1870,8 @@
     "host": "exdllc.com",
     "audience": "builder",
     "sourceUrl": "https://exdllc.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "K&B Construction, Inc.",
@@ -1749,7 +1879,8 @@
     "host": "kandbinc.com",
     "audience": "builder",
     "sourceUrl": "http://kandbinc.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_site_unavailable",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "MC Building Group",
@@ -1757,7 +1888,8 @@
     "host": "mcbuildinggroup.com",
     "audience": "builder",
     "sourceUrl": "https://mcbuildinggroup.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "General Contractors in Lake Havasu City, AZ | (928) 260 - 6152 | JSE Construction",
@@ -1765,7 +1897,8 @@
     "host": "jseenterprisesaz.com",
     "audience": "builder",
     "sourceUrl": "https://jseenterprisesaz.com/lake-havasu-city/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Government Contractor: General Commercial Contractor Sierra Vista",
@@ -1773,7 +1906,8 @@
     "host": "cochisetech.net",
     "audience": "builder",
     "sourceUrl": "https://cochisetech.net/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Stronghold Construction: Construction Company",
@@ -1781,7 +1915,8 @@
     "host": "strongholdconstructionaz.com",
     "audience": "builder",
     "sourceUrl": "https://www.strongholdconstructionaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Sierra Vista Construction Services - MM Stewart Construction, Inc.",
@@ -1789,7 +1924,8 @@
     "host": "mmstewart.net",
     "audience": "builder",
     "sourceUrl": "https://mmstewart.net/service-areas/sierra-vista-az",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Remote Enterprises, LLC Construction | Sierra Vista, AZ",
@@ -1797,7 +1933,8 @@
     "host": "remote-enterprises.com",
     "audience": "builder",
     "sourceUrl": "https://remote-enterprises.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Remodeling & Repair Systems, LLC | ROC# 305763",
@@ -1805,7 +1942,8 @@
     "host": "remodelingrepairsystems.com",
     "audience": "builder",
     "sourceUrl": "https://remodelingrepairsystems.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Mr. Fix It | General Contractor",
@@ -1813,7 +1951,8 @@
     "host": "mrfixitsv.com",
     "audience": "builder",
     "sourceUrl": "https://www.mrfixitsv.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Prestige Remodeling & Restoration LLC – Making your dreams come true, one room at a time.",
@@ -1821,7 +1960,8 @@
     "host": "prestigesierravista.com",
     "audience": "builder",
     "sourceUrl": "https://prestigesierravista.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Structural Concrete Contractor in Arizona | 3B Concrete, Inc.",
@@ -1829,7 +1969,8 @@
     "host": "3bconcrete.com",
     "audience": "builder",
     "sourceUrl": "https://3bconcrete.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home - L.R. Cowan Concrete Co.",
@@ -1837,7 +1978,8 @@
     "host": "lrcowan.com",
     "audience": "builder",
     "sourceUrl": "https://lrcowan.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Suntec Concrete",
@@ -1853,7 +1995,8 @@
     "host": "metroconcreteaz.com",
     "audience": "builder",
     "sourceUrl": "https://metroconcreteaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Concrete Contractors Phoenix, Arizona - Concrete Sub ...",
@@ -1861,7 +2004,8 @@
     "host": "osoconcrete.com",
     "audience": "builder",
     "sourceUrl": "https://osoconcrete.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Monroy Construction: Trusted Concrete & Masonry",
@@ -1885,7 +2029,8 @@
     "host": "aeconcrete.net",
     "audience": "builder",
     "sourceUrl": "https://www.aeconcrete.net/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Hardrock Concrete – Commercial Concrete Subcontractor",
@@ -1893,7 +2038,8 @@
     "host": "hrconcrete.com",
     "audience": "builder",
     "sourceUrl": "https://hrconcrete.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Home - AF Steel Fabricators",
@@ -1909,7 +2055,8 @@
     "host": "skycesteel.com",
     "audience": "builder",
     "sourceUrl": "https://skycesteel.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "shsteelaz.com",
@@ -1933,7 +2080,8 @@
     "host": "djbsteel.com",
     "audience": "builder",
     "sourceUrl": "https://www.djbsteel.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Agate Steel Builders | Build Safe, Build Smart, Build Quality",
@@ -1957,7 +2105,8 @@
     "host": "milestoneindustrial.net",
     "audience": "builder",
     "sourceUrl": "https://milestoneindustrial.net/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Ellyson Enterprises",
@@ -1965,7 +2114,8 @@
     "host": "ellysonenterprises.com",
     "audience": "builder",
     "sourceUrl": "https://ellysonenterprises.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Architectural Metalwork: Custom Fabrication Experts - Magnum Companies",
@@ -1973,7 +2123,8 @@
     "host": "magnumcompanies.net",
     "audience": "builder",
     "sourceUrl": "https://magnumcompanies.net/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Commercial Tenant Improvements Phoenix | CMP General Contracting",
@@ -1981,7 +2132,8 @@
     "host": "cmprosaz.com",
     "audience": "builder",
     "sourceUrl": "https://cmprosaz.com/commercial-tenant-improvements-phoenix/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Tenant Improvement Contractor in Arizona",
@@ -2005,7 +2157,8 @@
     "host": "mciphx.com",
     "audience": "builder",
     "sourceUrl": "https://www.mciphx.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home | Nesbitt Contracting Co., Inc.",
@@ -2013,7 +2166,8 @@
     "host": "nesbitts.com",
     "audience": "builder",
     "sourceUrl": "https://www.nesbitts.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Achen-Gardner Construction - Heavy Civil General Contractor",
@@ -2037,7 +2191,8 @@
     "host": "taliscorporation.com",
     "audience": "builder",
     "sourceUrl": "https://taliscorporation.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home - KE&G Construction, Inc.",
@@ -2061,7 +2216,8 @@
     "host": "dwullc.com",
     "audience": "builder",
     "sourceUrl": "https://dwullc.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Verde Building Corporation – Arizona Restaurant & Retail Construction",
@@ -2069,7 +2225,8 @@
     "host": "verdebuild.com",
     "audience": "builder",
     "sourceUrl": "https://verdebuild.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "BuildAZ | Arizona Land Development, Hotel & Commercial Construction",
@@ -2077,7 +2234,8 @@
     "host": "buildaz.com",
     "audience": "builder",
     "sourceUrl": "https://www.buildaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home - PWI Construction, Inc.",
@@ -2101,7 +2259,8 @@
     "host": "lea-architects.com",
     "audience": "architect",
     "sourceUrl": "http://lea-architects.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home - DWL Architects",
@@ -2117,7 +2276,8 @@
     "host": "pmm.design",
     "audience": "architect",
     "sourceUrl": "https://www.pmm.design/approach",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Civic — Studio of Architecture – Tucson, Arizona",
@@ -2125,7 +2285,8 @@
     "host": "soaltd.com",
     "audience": "architect",
     "sourceUrl": "https://www.soaltd.com/civic",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "House of Form: Commercial Interior Design in Phoenix",
@@ -2133,7 +2294,8 @@
     "host": "houseofform.com",
     "audience": "architect",
     "sourceUrl": "https://www.houseofform.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Pinnacle Point - Galloway Architecture, Engineering & Survey",
@@ -2141,7 +2303,8 @@
     "host": "gallowayus.com",
     "audience": "architect",
     "sourceUrl": "https://gallowayus.com/project/3rd-ave-industrial/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Easton Architects | Industrial Warehouse",
@@ -2149,7 +2312,8 @@
     "host": "easton.studio",
     "audience": "architect",
     "sourceUrl": "https://easton.studio/2026/03/13/industrial-warehouse-distribution-center/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Phoenix, AZ | Shive-Hattery Architecture and Engineering",
@@ -2165,7 +2329,18 @@
     "host": "aia-arizona.org",
     "audience": "architect",
     "sourceUrl": "https://aia-arizona.org/architect/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "domain_found",
+    "contactStatus": "temporarily_unavailable",
+    "contactCorrectionSource": "inbound_reply",
+    "replacementContacts": [
+      {
+        "name": "Sarah Levi",
+        "email": "sarah@aia-arizona.org",
+        "scope": "urgent_only",
+        "approvalStatus": "pending_manual_review",
+        "source": "inbound_reply"
+      }
+    ]
   },
   {
     "name": "Data Center Design - Serbin Studio",
@@ -2181,7 +2356,8 @@
     "host": "snh-a.com",
     "audience": "architect",
     "sourceUrl": "https://www.snh-a.com/author/snha/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Gensler Unveils Phoenix Hyperscale Data Center Plans | News",
@@ -2189,7 +2365,8 @@
     "host": "metrophoenix.com",
     "audience": "architect",
     "sourceUrl": "https://metrophoenix.com/2026/05/gensler-unveils-phoenix-hyperscale-data-center-plans/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Gensler designs Corten data centre to have \"meaningful civic contribution\" - Architectural Digest",
@@ -2197,7 +2374,8 @@
     "host": "architecturedigest.net",
     "audience": "architect",
     "sourceUrl": "https://architecturedigest.net/gensler-designs-corten-data-centre-to-have-meaningful-civic-contribution",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Meade",
@@ -2205,7 +2383,8 @@
     "host": "meadeengineering.com",
     "audience": "architect",
     "sourceUrl": "https://meadeengineering.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Assisted Living & Memory Care Architect — Arizona | Trevor Pan Architects",
@@ -2213,7 +2392,8 @@
     "host": "trevorpan.com",
     "audience": "architect",
     "sourceUrl": "https://trevorpan.com/services/assisted-living-memory-care",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Multi-family » Project types »  RAR Architects",
@@ -2237,7 +2417,8 @@
     "host": "dsydnorarchitect.org",
     "audience": "architect",
     "sourceUrl": "https://www.dsydnorarchitect.org/work",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "La Siena | ORB Architecture",
@@ -2245,7 +2426,8 @@
     "host": "orbarch.com",
     "audience": "architect",
     "sourceUrl": "https://orbarch.com/project/la-siena/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "HOV Dementia Care Campus — Lizard Rock Designs",
@@ -2253,7 +2435,8 @@
     "host": "lrd-az.com",
     "audience": "architect",
     "sourceUrl": "https://www.lrd-az.com/senior-living-architecture/hov-dementia-care",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Office Interior Design | Interiors Remembered AZ",
@@ -2261,7 +2444,8 @@
     "host": "interiorsremembered.com",
     "audience": "architect",
     "sourceUrl": "https://www.interiorsremembered.com/commercial/offices/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "NM Interiors Group",
@@ -2269,7 +2453,8 @@
     "host": "nminteriorsgroup.com",
     "audience": "architect",
     "sourceUrl": "https://www.nminteriorsgroup.com/firmprofile.html",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "McCarthy Nordburg – McCarthy Nordburg",
@@ -2277,7 +2462,8 @@
     "host": "mnia.design",
     "audience": "architect",
     "sourceUrl": "https://mnia.design/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "RICHÄRD KENNEDY ARCHITECTS | A studio based, integrated ...",
@@ -2285,7 +2471,8 @@
     "host": "rkarch.com",
     "audience": "architect",
     "sourceUrl": "https://rkarch.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "JWA Architects - Flagstaff, AZ",
@@ -2293,7 +2480,8 @@
     "host": "jwaarchitects.com",
     "audience": "architect",
     "sourceUrl": "https://jwaarchitects.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "StudioLP4, LLC - P. Lloyd Paul, Registered Architect - ABOUT",
@@ -2309,7 +2497,8 @@
     "host": "architizer.com",
     "audience": "architect",
     "sourceUrl": "https://architizer.com/firms/richard-kennedy-architects/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Architectural Services | Highton Company",
@@ -2317,7 +2506,8 @@
     "host": "hightoncompany.com",
     "audience": "architect",
     "sourceUrl": "https://www.hightoncompany.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial & Residential Architectural Designs by Scott Rumel Architect",
@@ -2325,7 +2515,8 @@
     "host": "scottrumelarchitect.com",
     "audience": "architect",
     "sourceUrl": "https://scottrumelarchitect.com/about-us/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Masonry Contractor Phoenix AZ | Father & Son Masonry",
@@ -2333,7 +2524,8 @@
     "host": "fandsmasonry.com",
     "audience": "builder",
     "sourceUrl": "https://fandsmasonry.com/commercial-masonry-services/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home - Integrated Masonry",
@@ -2341,7 +2533,8 @@
     "host": "integratedmasonry.com",
     "audience": "builder",
     "sourceUrl": "https://integratedmasonry.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "G & G Masonry LLC - Masonry Contractor - Phoenix, Arizona",
@@ -2365,7 +2558,8 @@
     "host": "az.hirschimasonry.com",
     "audience": "builder",
     "sourceUrl": "https://az.hirschimasonry.com/commercial/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Blue Collar Masonry | Arizona’s Trusted Experts in Stone & Block Work",
@@ -2373,7 +2567,8 @@
     "host": "bc-masonry.com",
     "audience": "builder",
     "sourceUrl": "https://www.bc-masonry.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Sun Valley – Stone Systems | Masonry | Concrete",
@@ -2389,7 +2584,8 @@
     "host": "haxtonmasonry.com",
     "audience": "builder",
     "sourceUrl": "https://haxtonmasonry.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Atlas Masonry: Home",
@@ -2397,7 +2593,8 @@
     "host": "atlasmasonryandconcrete.com",
     "audience": "builder",
     "sourceUrl": "https://www.atlasmasonryandconcrete.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Re-Create Companies: Home",
@@ -2413,7 +2610,8 @@
     "host": "lyonsroofing.com",
     "audience": "builder",
     "sourceUrl": "https://lyonsroofing.com/services/commercial-roofing-company/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Roofing Company in Phoenix, AZ - SUNVEK Roofing",
@@ -2429,7 +2627,8 @@
     "host": "starkweatherroof.com",
     "audience": "builder",
     "sourceUrl": "https://www.starkweatherroof.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Commercial Roofing in Arizona | Avid Roofing Systems",
@@ -2437,7 +2636,8 @@
     "host": "avidroofingsolutions.com",
     "audience": "builder",
     "sourceUrl": "https://www.avidroofingsolutions.com/commercial-roofing/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona's Premier Commercial Roofing Services",
@@ -2445,7 +2645,8 @@
     "host": "xbuiltroofing.com",
     "audience": "builder",
     "sourceUrl": "https://xbuiltroofing.com/services/commercial-roofing/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Commercial Roof Installation in Phoenix, AZ Since 1963",
@@ -2453,7 +2654,8 @@
     "host": "azroof.com",
     "audience": "builder",
     "sourceUrl": "https://azroof.com/commercial-roof-installation.htm",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Diversified Roofing | Commercial & Residential | AZ & TX",
@@ -2485,7 +2687,8 @@
     "host": "oversonroofing.com",
     "audience": "builder",
     "sourceUrl": "https://oversonroofing.com/commercial-services/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Professional Excavating in Arizona | Licensed & Trusted",
@@ -2493,7 +2696,8 @@
     "host": "azproex.com",
     "audience": "builder",
     "sourceUrl": "https://azproex.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Civil Construction & Infrastructure Contractor in Arizona | Buesing",
@@ -2509,7 +2713,8 @@
     "host": "accurateexcavation.com",
     "audience": "builder",
     "sourceUrl": "https://www.accurateexcavation.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Excavation & Clearing Chandler | Topline Constructions",
@@ -2517,7 +2722,8 @@
     "host": "toplineconstructions.com",
     "audience": "builder",
     "sourceUrl": "https://toplineconstructions.com/commercial-excavation/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Bayley | Earthwork, Hard Rock Excavation & Civil Sitework | AZ, NV, UT",
@@ -2525,7 +2731,8 @@
     "host": "bayley.com",
     "audience": "builder",
     "sourceUrl": "https://www.bayley.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "AZ Unlimited Construction | Paving, Grading, Concrete & Storm Drain",
@@ -2533,7 +2740,8 @@
     "host": "azunlimited.com",
     "audience": "builder",
     "sourceUrl": "https://azunlimited.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Earthworks, Land Grading, Building Pads | Phoenix, Peoria ...",
@@ -2541,7 +2749,8 @@
     "host": "valleywidedigandhaul.com",
     "audience": "builder",
     "sourceUrl": "https://valleywidedigandhaul.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Smith Construction And Excavation Services Tucson, Arizona",
@@ -2549,7 +2758,8 @@
     "host": "smithconstructionandexcavationservices.com",
     "audience": "builder",
     "sourceUrl": "https://www.smithconstructionandexcavationservices.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Grand State Construction | Commercial Framing & Drywall in Arizona Since 1999",
@@ -2557,7 +2767,8 @@
     "host": "grandstateconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://grandstateconstruction.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Commercial Drywall and Framing Contractor in Arizona | Mirasol Development",
@@ -2565,7 +2776,8 @@
     "host": "mirasoldrywall.com",
     "audience": "builder",
     "sourceUrl": "https://mirasoldrywall.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Performance Drywall: Commercial Drywall Contractor Phoenix",
@@ -2573,7 +2785,8 @@
     "host": "performancedrywallaz.com",
     "audience": "builder",
     "sourceUrl": "https://www.performancedrywallaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Western Walls Steel Framing, Drywall, Insulation, Stucco, and Paint Contractor Phoenix Arizona - Western Walls",
@@ -2581,7 +2794,8 @@
     "host": "westernwalls.com",
     "audience": "builder",
     "sourceUrl": "https://www.westernwalls.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home - Morrow's Contracting",
@@ -2589,7 +2803,8 @@
     "host": "morrowscontracting.com",
     "audience": "builder",
     "sourceUrl": "https://morrowscontracting.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Extreme Drywall",
@@ -2597,7 +2812,8 @@
     "host": "extremedrywallconcepts.com",
     "audience": "builder",
     "sourceUrl": "https://extremedrywallconcepts.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "WD Drywall LLC - Frame, Drywall, Acoustical Ceilings, Paint, Contractors",
@@ -2605,7 +2821,8 @@
     "host": "wddrywall.com",
     "audience": "builder",
     "sourceUrl": "https://www.wddrywall.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Rivermex Drywall Phoenix AZ | Drywall & Metal Framing Experts",
@@ -2613,7 +2830,8 @@
     "host": "rivermexbuilders.com",
     "audience": "builder",
     "sourceUrl": "https://rivermexbuilders.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Home - AspenSaguaro",
@@ -2621,7 +2839,8 @@
     "host": "aspendrywall.com",
     "audience": "builder",
     "sourceUrl": "https://aspendrywall.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "FRAMING & DRYWALL",
@@ -2645,7 +2864,8 @@
     "host": "mtjelectric.com",
     "audience": "builder",
     "sourceUrl": "https://mtjelectric.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Electrical Contractor in Arizona & Texas | DP Electric",
@@ -2685,7 +2905,8 @@
     "host": "pceaz.com",
     "audience": "builder",
     "sourceUrl": "https://pceaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Electrical Contractor | Spectra Electrical | Arizona",
@@ -2693,7 +2914,8 @@
     "host": "spectra-electrical.com",
     "audience": "builder",
     "sourceUrl": "https://www.spectra-electrical.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "MJK Electric - Industrial & Commercial Electrical Contractor",
@@ -2701,7 +2923,8 @@
     "host": "mjk.llc",
     "audience": "builder",
     "sourceUrl": "https://mjk.llc/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Tucson Commercial Electrician & Design-Build Contractor",
@@ -2709,7 +2932,8 @@
     "host": "aztucsonelectricalsolutions.com",
     "audience": "builder",
     "sourceUrl": "https://www.aztucsonelectricalsolutions.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Mechanical & Plumbing Contractor | Crawford Mechanical | Phx, AZ",
@@ -2717,7 +2941,8 @@
     "host": "cmsaz.com",
     "audience": "builder",
     "sourceUrl": "https://cmsaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Apexx Mechanical AZ – Commercial HVAC & Plumbing | Phoenix | Arizona",
@@ -2725,7 +2950,8 @@
     "host": "apexxaz.com",
     "audience": "builder",
     "sourceUrl": "https://www.apexxaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Falcon Mechanicals | Commercial Mechanical Contractor",
@@ -2733,7 +2959,8 @@
     "host": "falconmechanicals.com",
     "audience": "builder",
     "sourceUrl": "https://falconmechanicals.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Plumbing, Process Piping & HVAC Services in Arizona | Trident Mechanical Service",
@@ -2757,7 +2984,8 @@
     "host": "aimpromechanical.com",
     "audience": "builder",
     "sourceUrl": "https://aimpromechanical.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Pueblo Mechanical: Commercial HVAC, Plumbing & Controls ...",
@@ -2765,7 +2993,8 @@
     "host": "pueblo-mechanical.com",
     "audience": "builder",
     "sourceUrl": "https://pueblo-mechanical.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Midstate Mechanical – Commercial HVAC Contractor Phoenix, AZ",
@@ -2789,7 +3018,8 @@
     "host": "diamondbackmechanical.com",
     "audience": "builder",
     "sourceUrl": "https://www.diamondbackmechanical.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Hensel Phelps Construction  (KC87NGP2E9N7)",
@@ -2805,7 +3035,8 @@
     "host": "contractology.com",
     "audience": "builder",
     "sourceUrl": "https://contractology.com/states/arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "HENSEL PHELPS CONSTRUCTION CO. - General Services Administration | Federal Contract Award | Propivix",
@@ -2813,7 +3044,8 @@
     "host": "propivix.com",
     "audience": "builder",
     "sourceUrl": "https://propivix.com/federal-awards/hensel-phelps-construction-co-general-services-administration-47pk0122c0005-ps0048/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Loven Contracting, Inc. | Contractors | Construction Related-General Contractors",
@@ -2821,7 +3053,8 @@
     "host": "flagstaffchamber.chambermaster.com",
     "audience": "builder",
     "sourceUrl": "https://flagstaffchamber.chambermaster.com/list/member/loven-contracting-inc-1165",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Aviation - Fann Contracting",
@@ -2837,7 +3070,8 @@
     "host": "rcibuilt.com",
     "audience": "builder",
     "sourceUrl": "https://rcibuilt.com/aviation/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Arizona Aviation Commercial Construction Management ...",
@@ -2845,7 +3079,8 @@
     "host": "desertservices.com",
     "audience": "builder",
     "sourceUrl": "http://www.desertservices.com/aviation.htm",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "FNF Construction",
@@ -2861,7 +3096,8 @@
     "host": "davconaviation.com",
     "audience": "builder",
     "sourceUrl": "https://davconaviation.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Corporate Members",
@@ -2869,7 +3105,8 @@
     "host": "azairports.org",
     "audience": "builder",
     "sourceUrl": "https://www.azairports.org/Corporate-Members",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Water & Wastewater Construction in Arizona | RS Contracting",
@@ -2885,7 +3122,8 @@
     "host": "felixconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://felixconstruction.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "About - MGC Contractors Inc.",
@@ -2901,7 +3139,8 @@
     "host": "jonovichcompanies.com",
     "audience": "builder",
     "sourceUrl": "https://jonovichcompanies.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Water Infrastructure — Barragan Construction",
@@ -2909,7 +3148,8 @@
     "host": "barraganconstructionaz.com",
     "audience": "builder",
     "sourceUrl": "https://www.barraganconstructionaz.com/new-page-1",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Water & Wastewater - Haydon Companies",
@@ -2925,7 +3165,8 @@
     "host": "jjsprague.com",
     "audience": "builder",
     "sourceUrl": "https://jjsprague.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Water - KEAR Civil Corp",
@@ -2965,7 +3206,8 @@
     "host": "smrtinc.com",
     "audience": "builder",
     "sourceUrl": "https://www.smrtinc.com/projects/university-of-arizona-ece-nano-fab-cleanroom/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Life Sciences - C1S, Inc.",
@@ -2973,7 +3215,8 @@
     "host": "c1sinc.com",
     "audience": "builder",
     "sourceUrl": "https://c1sinc.com/markets/life-sciences",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Life Sciences Construction - ARCO Design/Build",
@@ -2997,7 +3240,8 @@
     "host": "bsmconst.com",
     "audience": "builder",
     "sourceUrl": "https://bsmconst.com/services/service-offerings/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Grocery Store Construction | Eleven Western Builders, Inc.",
@@ -3013,7 +3257,8 @@
     "host": "agigc.com",
     "audience": "builder",
     "sourceUrl": "https://agigc.com/portfolios/frys-queen-creek-az/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "MultiFamily — American Wolf Construction",
@@ -3021,7 +3266,8 @@
     "host": "americanwolfconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://www.americanwolfconstruction.com/multifamily",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Ameris Construction",
@@ -3029,7 +3275,18 @@
     "host": "amerisconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://amerisconstruction.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "domain_found",
+    "contactStatus": "no_longer_with_company",
+    "contactCorrectionSource": "inbound_reply",
+    "replacementContacts": [
+      {
+        "name": "Chris Jones",
+        "email": "cjones@amerisconstruction.com",
+        "scope": "replacement_contact",
+        "approvalStatus": "pending_manual_review",
+        "source": "inbound_reply"
+      }
+    ]
   },
   {
     "name": "Superior 3rd Party Construction Services | Porter Kyle",
@@ -3037,7 +3294,8 @@
     "host": "porterkylebuilders.com",
     "audience": "builder",
     "sourceUrl": "https://porterkylebuilders.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Multifamily - Prime Builders",
@@ -3045,7 +3303,8 @@
     "host": "primebuildersaz.com",
     "audience": "builder",
     "sourceUrl": "https://primebuildersaz.com/portfolio/multifamily/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Multifamily Construction Phoenix & Tucson",
@@ -3061,7 +3320,8 @@
     "host": "aria.builders",
     "audience": "builder",
     "sourceUrl": "https://aria.builders/home1/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Nimmbol — Design. Develop. Build.",
@@ -3069,7 +3329,8 @@
     "host": "nimmbol.com",
     "audience": "builder",
     "sourceUrl": "https://nimmbol.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial & Multi-Family Contractors in Arizona | Centex",
@@ -3077,7 +3338,8 @@
     "host": "centexconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://centexconstruction.com/locations/arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Aviation + Transportation | Fentress Studios, a Populous Company",
@@ -3085,7 +3347,8 @@
     "host": "fentress-studios.com",
     "audience": "architect",
     "sourceUrl": "https://fentress-studios.com/markets/aviation-transportation/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Aviation | Expertise",
@@ -3093,7 +3356,8 @@
     "host": "gensler.com",
     "audience": "architect",
     "sourceUrl": "https://www.gensler.com/expertise/aviation",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Airport Architecture & Aviation Planning Services",
@@ -3109,7 +3373,8 @@
     "host": "lordaecksargent.com",
     "audience": "architect",
     "sourceUrl": "https://www.lordaecksargent.com/portfolio/laboratories/asu_biodesign",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona State University, Biodesign Institute C - Work - ZGF",
@@ -3117,7 +3382,8 @@
     "host": "zgf.com",
     "audience": "architect",
     "sourceUrl": "https://www.zgf.com/work/118-arizona-state-university-biodesign-institute-c",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Lab Architect Group – Life. Science. Architecture.",
@@ -3125,7 +3391,8 @@
     "host": "labarchitectgroup.com",
     "audience": "architect",
     "sourceUrl": "https://www.labarchitectgroup.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Recreation Space Contractor | Sport Lines Athletics & Recreation",
@@ -3133,7 +3400,8 @@
     "host": "sportlinesaz.com",
     "audience": "architect",
     "sourceUrl": "https://sportlinesaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Mosaic Quarter Iceplex & Field House | JLG Architects",
@@ -3165,7 +3433,8 @@
     "host": "firehouse.com",
     "audience": "architect",
     "sourceUrl": "https://www.firehouse.com/stations/architects/company/12089092/perlman-architects",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Surprise Fire Station No. 308 « Perlman Architects",
@@ -3173,7 +3442,8 @@
     "host": "perlmanaz.com",
     "audience": "architect",
     "sourceUrl": "https://www.perlmanaz.com/?portfolio=surprise-fire-station-no-308",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Two Arizona Fire & Medical Authority Stations Designed and Built by Arrington Watkins Architects",
@@ -3181,7 +3451,8 @@
     "host": "fireapparatusmagazine.com",
     "audience": "architect",
     "sourceUrl": "https://www.fireapparatusmagazine.com/the-fire-station/the-station-articles/arizona-fire-medical-authority-fire-stations/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Church Design - Barduson Architects",
@@ -3189,7 +3460,8 @@
     "host": "barduson.com",
     "audience": "architect",
     "sourceUrl": "https://barduson.com/industries/church-design/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "St. Joseph's Catholic Church – New Worship Building - Adaptive Architects",
@@ -3205,7 +3477,8 @@
     "host": "impactarchitects.org",
     "audience": "architect",
     "sourceUrl": "https://impactarchitects.org/2023/12/31/project-5/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "toddassoc.com",
@@ -3221,7 +3494,8 @@
     "host": "motleydesign.group",
     "audience": "architect",
     "sourceUrl": "https://www.motleydesign.group/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Historic Building & Adaptive Reuse Architect | Scottsdale AZ",
@@ -3229,7 +3503,8 @@
     "host": "jreeserarchitect.com",
     "audience": "architect",
     "sourceUrl": "https://www.jreeserarchitect.com/historic-preservation-scottsdale/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Erik Ryden - About",
@@ -3237,7 +3512,8 @@
     "host": "erikryden.myportfolio.com",
     "audience": "architect",
     "sourceUrl": "https://erikryden.myportfolio.com/about",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "About",
@@ -3245,7 +3521,8 @@
     "host": "vinsonstudio.net",
     "audience": "architect",
     "sourceUrl": "http://www.vinsonstudio.net/about.html",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Four Seasons Scottsdale  — RGA Robert Glazier Architects",
@@ -3253,7 +3530,8 @@
     "host": "robertglazierarchitects.com",
     "audience": "architect",
     "sourceUrl": "https://www.robertglazierarchitects.com/four-seasons-scottsdale",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "The Ranch Mine | Modern Architecture in Arizona and Beyond",
@@ -3261,7 +3539,8 @@
     "host": "theranchmine.com",
     "audience": "architect",
     "sourceUrl": "https://www.theranchmine.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "The Global Ambassador - Nelsen Partners Architects",
@@ -3277,7 +3556,8 @@
     "host": "jsrarchinc.com",
     "audience": "architect",
     "sourceUrl": "http://www.jsrarchinc.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Sketch Architecture Company",
@@ -3293,7 +3573,10 @@
     "host": "omniapartners.com",
     "audience": "architect",
     "sourceUrl": "https://www.omniapartners.com/suppliers-files/A-D/BWS_Architects/Assets/2025.08_BWS_Architects_Cobranded.pdf",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "domain_found",
+    "contactStatus": "temporarily_unavailable",
+    "contactCorrectionSource": "attached_screenshot",
+    "autoReplyReturnWindow": "Away through Monday, August 31 with very limited email access; expects to respond as soon as possible."
   },
   {
     "name": "JOHNSON, SMITTHIPONG & ROSAMOND ASSOCIATES, INC., Tucson, Arizona, AZ 85712-2566",
@@ -3301,7 +3584,8 @@
     "host": "governmentbidders.com",
     "audience": "architect",
     "sourceUrl": "https://governmentbidders.com/government-bidders/contractor-5494667-JOHNSON-SMITTHIPONG-ROSAMON.htm",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Home - BFL Construction",
@@ -3325,7 +3609,8 @@
     "host": "bannonconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://bannonconstruction.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Sterling CM | Home",
@@ -3341,7 +3626,8 @@
     "host": "bprcompanies.com",
     "audience": "builder",
     "sourceUrl": "https://www.bprcompanies.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home - ARC Construction",
@@ -3349,7 +3635,8 @@
     "host": "arc-az.com",
     "audience": "builder",
     "sourceUrl": "https://arc-az.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Construction in Glendale, Arizona: 17 Top ...",
@@ -3357,7 +3644,8 @@
     "host": "serviceagent.ai",
     "audience": "builder",
     "sourceUrl": "https://serviceagent.ai/directory/arizona/glendale/construction/commercial/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Restoration Services | Titan Restoration of Arizona",
@@ -3405,7 +3693,8 @@
     "host": "kingshiprestoration.com",
     "audience": "builder",
     "sourceUrl": "https://kingshiprestoration.com/service/commercial-remodel-reconstruction/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Phoenix Arizona restoration repair cleanup and construction",
@@ -3413,7 +3702,8 @@
     "host": "servpro.com",
     "audience": "builder",
     "sourceUrl": "https://www.servpro.com/locations/az/phoenix-restoration",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Sero Glass | Glass Contractor, Glazing Contractor | Phoenix, AZ",
@@ -3421,7 +3711,8 @@
     "host": "seroglass.com",
     "audience": "builder",
     "sourceUrl": "https://www.seroglass.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home - Alta Glazing",
@@ -3429,7 +3720,8 @@
     "host": "altaglazing.com",
     "audience": "builder",
     "sourceUrl": "https://altaglazing.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "KOVACH | General Contractor",
@@ -3437,7 +3729,8 @@
     "host": "siteline.com",
     "audience": "builder",
     "sourceUrl": "https://www.siteline.com/general-contractor/contractor/kovach",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "A3 Glazing",
@@ -3445,7 +3738,8 @@
     "host": "a3glazing.com",
     "audience": "builder",
     "sourceUrl": "https://a3glazing.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Glass in Glendale, AZ | Installation & Repair | Clear Cut Glass & Tint",
@@ -3453,7 +3747,8 @@
     "host": "clearcutglassandtint.com",
     "audience": "builder",
     "sourceUrl": "https://clearcutglassandtint.com/commercial-glass/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Glazing - Twin Peaks Glass Installation Arizona",
@@ -3461,7 +3756,8 @@
     "host": "twinpeaksglass.com",
     "audience": "builder",
     "sourceUrl": "http://twinpeaksglass.com/glass-installation-services/commercial-glazing",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Storefront Glass Pros Phoenix | ABC Glass AZ",
@@ -3469,7 +3765,8 @@
     "host": "abcglassaz.com",
     "audience": "builder",
     "sourceUrl": "https://www.abcglassaz.com/storefront-glass",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Glazing | Cottonwood, AZ",
@@ -3477,7 +3774,8 @@
     "host": "conceptglassandglazingaz.com",
     "audience": "builder",
     "sourceUrl": "https://conceptglassandglazingaz.com/service-commercial-glazing",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona Glass and Aluminum Systems - PRL Glass Systems, Inc",
@@ -3485,7 +3783,8 @@
     "host": "architecturalglassandmetal.com",
     "audience": "builder",
     "sourceUrl": "https://architecturalglassandmetal.com/arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Home",
@@ -3493,7 +3792,8 @@
     "host": "selectinteriorsaz.com",
     "audience": "builder",
     "sourceUrl": "https://www.selectinteriorsaz.com/home.html",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "George Floors",
@@ -3501,7 +3801,8 @@
     "host": "georgefloors.com",
     "audience": "builder",
     "sourceUrl": "https://georgefloors.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Sun Valley Commercial Flooring | Arizona’s Leading Commercial & Industrial Flooring Experts | Sun Valley Commercial Flooring",
@@ -3509,7 +3810,8 @@
     "host": "sunvalleycommercialflooring.com",
     "audience": "builder",
     "sourceUrl": "https://www.sunvalleycommercialflooring.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Arizona-Based Commercial Flooring Contractor | RNB Flooring",
@@ -3517,7 +3819,8 @@
     "host": "rnbflooring.com",
     "audience": "builder",
     "sourceUrl": "https://rnbflooring.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Diversified Flooring Services | Full Service Commercial Flooring Contractor",
@@ -3525,7 +3828,8 @@
     "host": "dfsaz.com",
     "audience": "builder",
     "sourceUrl": "https://www.dfsaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Sun Country Floors, Inc. - Commercial Flooring - Phoenix, Arizona",
@@ -3549,7 +3853,8 @@
     "host": "qualityfloorsaz.com",
     "audience": "builder",
     "sourceUrl": "https://qualityfloorsaz.com/home",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Alliance Flooring Services: Premier Commercial Flooring Phoenix AZ",
@@ -3557,7 +3862,8 @@
     "host": "allianceflooringservices.com",
     "audience": "builder",
     "sourceUrl": "https://www.allianceflooringservices.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Flooring Company Scottsdale, AZ | Commercial Flooring | Cardinal Floor Covering™",
@@ -3565,7 +3871,8 @@
     "host": "cardinalfloorcovering.com",
     "audience": "builder",
     "sourceUrl": "https://cardinalfloorcovering.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "SunRenu Solar — Arizona's Commercial Solar EPC Contractor",
@@ -3573,7 +3880,8 @@
     "host": "sunrenu.com",
     "audience": "builder",
     "sourceUrl": "https://sunrenu.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Solar Installation - Simple Solar",
@@ -3581,7 +3889,8 @@
     "host": "simplesolar.io",
     "audience": "builder",
     "sourceUrl": "https://simplesolar.io/commercial-solar-installation/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Solar Company in Scottsdale & Phoenix, AZ | Free Site Assessment | Tech Energy America",
@@ -3589,7 +3898,8 @@
     "host": "techenergyamerica.com",
     "audience": "builder",
     "sourceUrl": "https://www.techenergyamerica.com/commercial-solar",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Commercial | EVX Solar",
@@ -3605,7 +3915,8 @@
     "host": "jkrenewables.us",
     "audience": "builder",
     "sourceUrl": "https://jkrenewables.us/commercial-solar-arizona",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Roof Mounted Solar Installations & Services for Commercial Properties in Arizona | JIT Solar",
@@ -3613,7 +3924,8 @@
     "host": "jitsolar.com",
     "audience": "builder",
     "sourceUrl": "https://jitsolar.com/commercial-solar/roof-mounted/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Solar Contractor for Design, Construction & O&M",
@@ -3653,7 +3965,8 @@
     "host": "ticold.com",
     "audience": "builder",
     "sourceUrl": "https://ticold.com/cold-storage-in-arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Scannell Properties | Vistar Foodservice Facility | Phoenix, AZ",
@@ -3661,7 +3974,8 @@
     "host": "arconational.com",
     "audience": "builder",
     "sourceUrl": "https://www.arconational.com/scannell-properties-vistar-phoenix-az/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Case Study Comprehensive MEPR Engineering CO2 Refrigeration",
@@ -3669,7 +3983,8 @@
     "host": "coolsysenergydesign.com",
     "audience": "builder",
     "sourceUrl": "https://coolsysenergydesign.com/case-study-comprehensive-mepr-engineering-for-a-complex-meal-production-facility/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Food & Beverage | Clayco",
@@ -3693,7 +4008,8 @@
     "host": "hansen-rice.com",
     "audience": "builder",
     "sourceUrl": "https://hansen-rice.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Design-Build & Self-Performed Work - Quasius Construction : Food Processing & Cold Storage Facilities",
@@ -3701,7 +4017,8 @@
     "host": "food-construction.quasius.com",
     "audience": "builder",
     "sourceUrl": "https://food-construction.quasius.com/design-build-self-performed-work/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona Self-Storage Construction Services",
@@ -3717,7 +4034,8 @@
     "host": "alohaconstructiongroup.com",
     "audience": "builder",
     "sourceUrl": "https://alohaconstructiongroup.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Home Tucson Architecture Firm | Intertech Architectural Interiors Inc.",
@@ -3733,7 +4051,8 @@
     "host": "designdirectory.com",
     "audience": "architect",
     "sourceUrl": "https://www.designdirectory.com/tectonicus",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Robinette Architects Inc.",
@@ -3741,7 +4060,8 @@
     "host": "robinettearchitect.com",
     "audience": "architect",
     "sourceUrl": "https://robinettearchitect.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home - KHB Architecture Studios",
@@ -3757,7 +4077,8 @@
     "host": "victorsidy.com",
     "audience": "architect",
     "sourceUrl": "https://victorsidy.com/services/restoration-adaptive-reuse/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "PHX Historic Design Studio + RE Services",
@@ -3765,7 +4086,8 @@
     "host": "phxhistoric.com",
     "audience": "architect",
     "sourceUrl": "https://www.phxhistoric.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Robert    Polcar    Architects,    Inc.",
@@ -3773,7 +4095,8 @@
     "host": "rparchitects.com",
     "audience": "architect",
     "sourceUrl": "http://rparchitects.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "TAZ KHATRI STUDIOS | DOWNTOWN PHOENIX ARCHITECTURE",
@@ -3781,7 +4104,8 @@
     "host": "tazkhatristudios.com",
     "audience": "architect",
     "sourceUrl": "https://tazkhatristudios.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Joel Contreras | Architectural Designer, Phoenix, AZ",
@@ -3789,7 +4113,8 @@
     "host": "joelcontrerasdesign.com",
     "audience": "architect",
     "sourceUrl": "https://joelcontrerasdesign.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Behavioral Health",
@@ -3797,7 +4122,8 @@
     "host": "srarchinc.com",
     "audience": "architect",
     "sourceUrl": "https://www.srarchinc.com/index.php/portfolio/behavioral-health",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "CLIENTS | TBE Architects",
@@ -3805,7 +4131,8 @@
     "host": "tbearchitects.com",
     "audience": "architect",
     "sourceUrl": "https://www.tbearchitects.com/clients",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Mancini Selected as Lead Architect for Hualapai Tribe’s Transformational $500 Million Development Program • Mancini",
@@ -3821,7 +4148,8 @@
     "host": "worthgroup.com",
     "audience": "architect",
     "sourceUrl": "https://www.worthgroup.com/tribal-gaming-architecture-design/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Wild Horse Pass Hotel | JCJ Architecture",
@@ -3837,7 +4165,8 @@
     "host": "indiangaming.com",
     "audience": "architect",
     "sourceUrl": "https://www.indiangaming.com/2025-indian-country-architectural-showcase/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Hadley Design | Master Planning & Urban Design Studio | Scottsdale, AZ",
@@ -3845,7 +4174,8 @@
     "host": "hadley-design.com",
     "audience": "architect",
     "sourceUrl": "https://hadley-design.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "RKAA Architects | National Architects",
@@ -3869,7 +4199,8 @@
     "host": "srsarchitects.com",
     "audience": "architect",
     "sourceUrl": "https://srsarchitects.com/sustainable-design/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Architect Clarkdale AZ | Sustainable Architecture",
@@ -3877,7 +4208,8 @@
     "host": "architectureworks.net",
     "audience": "architect",
     "sourceUrl": "https://architectureworks.net/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Green Project Architects - Green Project Architects",
@@ -3885,7 +4217,8 @@
     "host": "greenprojectarchitects.com",
     "audience": "architect",
     "sourceUrl": "https://greenprojectarchitects.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "suoll architects | creative innovative architects | Arizona",
@@ -3893,7 +4226,8 @@
     "host": "suollarchitects.com",
     "audience": "architect",
     "sourceUrl": "https://www.suollarchitects.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Millwork in Phoenix & the Southwest | 30+ Years",
@@ -3909,7 +4243,8 @@
     "host": "castaldicustom.com",
     "audience": "builder",
     "sourceUrl": "https://castaldicustom.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Troyer Millwork | Commercial Millwork Arizona",
@@ -3917,7 +4252,8 @@
     "host": "troyermillwork.com",
     "audience": "builder",
     "sourceUrl": "https://troyermillwork.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "MCI Woodwork — Custom Architectural Millwork for Hospitality & Commercial Spaces",
@@ -3925,7 +4261,8 @@
     "host": "mciwoodwork.com",
     "audience": "builder",
     "sourceUrl": "https://mciwoodwork.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Western Millwork | Architectural Millwork",
@@ -3933,7 +4270,8 @@
     "host": "westmillaz.com",
     "audience": "builder",
     "sourceUrl": "https://www.westmillaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona Commercial Cabinetry & Millwork",
@@ -3941,7 +4279,8 @@
     "host": "maplewoodcabinetry.com",
     "audience": "builder",
     "sourceUrl": "https://maplewoodcabinetry.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Custom Commercial Millwork and Woodworking | Linear Fine Woodworking",
@@ -3949,7 +4288,8 @@
     "host": "linearfinewoodworking.com",
     "audience": "builder",
     "sourceUrl": "https://www.linearfinewoodworking.com/commercial-millwork/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Services - Ellis & Co.",
@@ -3957,7 +4297,8 @@
     "host": "ellismillwork.com",
     "audience": "builder",
     "sourceUrl": "https://ellismillwork.com/services/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Custom Millwork in Phoenix, AZ — Architectural & Commercial | Surprise Granite",
@@ -3965,7 +4306,8 @@
     "host": "surprisegranite.com",
     "audience": "builder",
     "sourceUrl": "https://www.surprisegranite.com/millwork/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona Fire Protection Services | Phoenix & Tucson",
@@ -3973,7 +4315,8 @@
     "host": "statefire.com",
     "audience": "builder",
     "sourceUrl": "https://statefire.com/arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Fire Protection Service | Scottsdale, Arizona",
@@ -3981,7 +4324,8 @@
     "host": "smartfirepro.com",
     "audience": "builder",
     "sourceUrl": "https://www.smartfirepro.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona Rapid Fire Systems LLC",
@@ -3989,7 +4333,8 @@
     "host": "azrapidfire.com",
     "audience": "builder",
     "sourceUrl": "https://azrapidfire.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_site_unavailable",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Fire Protection Systems Phoenix | 24/7 Service | CSI",
@@ -3997,7 +4342,8 @@
     "host": "controlsystems.net",
     "audience": "builder",
     "sourceUrl": "https://www.controlsystems.net/locations/fire-protection-systems-and-service-phoenix-arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Allan Fire Protection Systems - Home",
@@ -4005,7 +4351,8 @@
     "host": "allanfire.com",
     "audience": "builder",
     "sourceUrl": "https://www.allanfire.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Phoenix Fire Sprinkler Systems & Extinguishers | Armor Fire Pro",
@@ -4013,7 +4360,8 @@
     "host": "armorfirepro.com",
     "audience": "builder",
     "sourceUrl": "https://armorfirepro.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Complete Fire Protection",
@@ -4021,7 +4369,8 @@
     "host": "completefireaz.com",
     "audience": "builder",
     "sourceUrl": "https://www.completefireaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Apex Fire Protection | Fire Safety Systems AZ",
@@ -4029,7 +4378,8 @@
     "host": "apexfireprotection.com",
     "audience": "builder",
     "sourceUrl": "https://www.apexfireprotection.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Fire & Life Safety Services in Tempe, AZ | Local NFPA Experts Since 1986",
@@ -4045,7 +4395,8 @@
     "host": "impactfireservices.com",
     "audience": "builder",
     "sourceUrl": "https://impactfireservices.com/locations/phoenix-az/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona Specialty Demolition – Phoenix Demolition Services",
@@ -4053,7 +4404,8 @@
     "host": "azspecialtydemo.com",
     "audience": "builder",
     "sourceUrl": "https://azspecialtydemo.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Demolition – Kogan",
@@ -4061,7 +4413,8 @@
     "host": "koganaz.com",
     "audience": "builder",
     "sourceUrl": "https://koganaz.com/commercial-demolition/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Total Demolition Services",
@@ -4069,7 +4422,8 @@
     "host": "totaldemosolutions.com",
     "audience": "builder",
     "sourceUrl": "https://totaldemosolutions.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Demolition Contractor in Phoenix, Arizona - Arizona Demolition Experts",
@@ -4077,7 +4431,8 @@
     "host": "arizonademolitionexperts.com",
     "audience": "builder",
     "sourceUrl": "https://arizonademolitionexperts.com/commercial-demolition-arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Demolition | Phoenix, AZ",
@@ -4085,7 +4440,8 @@
     "host": "shamrockdemolition.com",
     "audience": "builder",
     "sourceUrl": "https://www.shamrockdemolition.com/commercial-demolition",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Demolition Contractors Phoenix Arizona | Building Demolition ...",
@@ -4093,7 +4449,8 @@
     "host": "firstdemoaz.com",
     "audience": "builder",
     "sourceUrl": "https://www.firstdemoaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Top-Rated Demolition Contractor in Phoenix AZ | Toro Demolition",
@@ -4101,7 +4458,8 @@
     "host": "torodemolitionaz.com",
     "audience": "builder",
     "sourceUrl": "https://torodemolitionaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "All Demolition - The Number One Demolition Contractor In Phoenix, AZ",
@@ -4109,7 +4467,8 @@
     "host": "alldemolition.net",
     "audience": "builder",
     "sourceUrl": "https://alldemolition.net/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Paving Contractor in Phoenix, AZ | Road Tech Paving",
@@ -4117,7 +4476,8 @@
     "host": "roadtechpavingaz.com",
     "audience": "builder",
     "sourceUrl": "https://www.roadtechpavingaz.com/services/commercial-paving",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "YSC Paving",
@@ -4125,7 +4485,8 @@
     "host": "yscpaving.com",
     "audience": "builder",
     "sourceUrl": "https://yscpaving.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Paving Inc. (602) 622-8807 | Phoenix, Tucson and ...",
@@ -4133,7 +4494,8 @@
     "host": "commercialpavingaz.com",
     "audience": "builder",
     "sourceUrl": "https://commercialpavingaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Commercial Asphalt and Paving Company in Arizona",
@@ -4141,7 +4503,8 @@
     "host": "apschipsealingpaving.com",
     "audience": "builder",
     "sourceUrl": "https://apschipsealingpaving.com/commercial-paving-company-arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "S&S Paving & Construction: Paving & Construction Services in Phoenix AZ",
@@ -4149,7 +4512,8 @@
     "host": "sspaving.com",
     "audience": "builder",
     "sourceUrl": "https://sspaving.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Asphalt Paving, Sealcoat, and Concrete Services in Phoenix - Dynamite Paving",
@@ -4157,7 +4521,8 @@
     "host": "dynamitepaving.com",
     "audience": "builder",
     "sourceUrl": "https://dynamitepaving.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Top Asphalt & Concrete Paving Company in Phoenix, AZ | Copper ...",
@@ -4173,7 +4538,8 @@
     "host": "krpaving.com",
     "audience": "builder",
     "sourceUrl": "https://krpaving.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Phoenix Asphalt Paving Contractor",
@@ -4181,7 +4547,8 @@
     "host": "keeleyconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://www.keeleyconstruction.com/paving/phx",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Paving Company in Phoenix, AZ",
@@ -4189,7 +4556,8 @@
     "host": "rosepaving.com",
     "audience": "builder",
     "sourceUrl": "https://rosepaving.com/phoenix-paving-company/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Coy Landscape & Maintenance - Commercial Landscaping in Phoenix, AZ",
@@ -4197,7 +4565,8 @@
     "host": "coylandscape.com",
     "audience": "builder",
     "sourceUrl": "https://www.coylandscape.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Landscaping in Phoenix, AZ — Metro to Tucson",
@@ -4205,7 +4574,8 @@
     "host": "nexgenlandscaping.com",
     "audience": "builder",
     "sourceUrl": "https://nexgenlandscaping.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Landscaping Services | (623) 412-2200",
@@ -4213,7 +4583,8 @@
     "host": "sunburstlandscaping.com",
     "audience": "builder",
     "sourceUrl": "https://sunburstlandscaping.com/commercial/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Phoenix, AZ Commercial Landscape Services",
@@ -4229,7 +4600,8 @@
     "host": "azcornerstone.com",
     "audience": "builder",
     "sourceUrl": "https://azcornerstone.com/commercial-landscaping/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "H.M.I. Commercial Landscaping | Proudly Serving Arizona",
@@ -4237,7 +4609,8 @@
     "host": "hmiofaz.com",
     "audience": "builder",
     "sourceUrl": "https://hmiofaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Landscapers in Phoenix | Sun Country Landscape",
@@ -4245,7 +4618,8 @@
     "host": "suncountrylandscape.com",
     "audience": "builder",
     "sourceUrl": "https://www.suncountrylandscape.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Landscaping Services in Phoenix, AZ",
@@ -4253,7 +4627,8 @@
     "host": "yellowstonelandscape.com",
     "audience": "builder",
     "sourceUrl": "https://www.yellowstonelandscape.com/locations/phoenix-arizona",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona Landscape Contractor – Luxe Pools and Landscaping",
@@ -4261,7 +4636,8 @@
     "host": "luxepoolsarizona.com",
     "audience": "builder",
     "sourceUrl": "https://luxepoolsarizona.com/arizona-landscape-contractor/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona Specialty Landscapes Inc. | Landscaping & Construction",
@@ -4269,7 +4645,8 @@
     "host": "azspecialtylandscape.com",
     "audience": "builder",
     "sourceUrl": "https://azspecialtylandscape.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Wendell Burnette Architects",
@@ -4277,7 +4654,8 @@
     "host": "wendellburnettearchitects.com",
     "audience": "architect",
     "sourceUrl": "https://wendellburnettearchitects.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona State University Hayden Library Reinvention — Ayers Saint Gross",
@@ -4285,7 +4663,8 @@
     "host": "ayerssaintgross.com",
     "audience": "architect",
     "sourceUrl": "https://ayerssaintgross.com/work/project/asu-hayden-library-reinvention/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "ESB Design+Build — Expedited, Turnkey Building Construction",
@@ -4301,7 +4680,8 @@
     "host": "designmodulars.com",
     "audience": "architect",
     "sourceUrl": "https://designmodulars.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "About Us - Modular Solutions Ltd",
@@ -4309,7 +4689,8 @@
     "host": "modularsolutionsltd.com",
     "audience": "architect",
     "sourceUrl": "https://www.modularsolutionsltd.com/about-us/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Modular Building & Shipping Container Solutions - Linked Equipment",
@@ -4317,7 +4698,8 @@
     "host": "linkedequipment.com",
     "audience": "architect",
     "sourceUrl": "https://linkedequipment.com/modular-building-shipping-container-solutions/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona Modular Construction for Buildings and Offices",
@@ -4325,7 +4707,8 @@
     "host": "modular.org",
     "audience": "architect",
     "sourceUrl": "https://www.modular.org/modular-building-arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Modular Solutions, Ltd    - Modular Building Institute",
@@ -4333,7 +4716,8 @@
     "host": "members.modular.org",
     "audience": "architect",
     "sourceUrl": "https://members.modular.org/member-directory/Details/modular-solutions-ltd-1969272",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Modular Building Design | Nationwide | Ehm Architecture Inc",
@@ -4341,7 +4725,8 @@
     "host": "ehmarch.com",
     "audience": "architect",
     "sourceUrl": "https://www.ehmarch.com/modular-building-architecture",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Top Construction Company in Phoenix, Arizona",
@@ -4349,7 +4734,8 @@
     "host": "dpr.com",
     "audience": "builder",
     "sourceUrl": "https://www.dpr.com/company/locations/phoenix-arizona",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Park Algodon - LGE Design Build",
@@ -4357,7 +4743,8 @@
     "host": "lgedesignbuild.com",
     "audience": "builder",
     "sourceUrl": "https://lgedesignbuild.com/projects/park-algodon/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Stevens-Leinweber Completes Fully Leased 27th Ave. Merit Partners Industrial Project | Stevens-Leinweber",
@@ -4365,7 +4752,8 @@
     "host": "stevensleinweber.com",
     "audience": "builder",
     "sourceUrl": "https://stevensleinweber.com/stevens-leinweber-completes-fully-leased-27th-ave-merit-partners-industrial-project/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Sun State Builders Goes Vertical on 450,000-Square-Foot Industrial Project New Phoenix warehouse under construction",
@@ -4373,7 +4761,8 @@
     "host": "arizcc.com",
     "audience": "builder",
     "sourceUrl": "https://www.arizcc.com/post/sun-state-builders-goes-vertical-on-450-000-square-foot-industrial-project-new-phoenix-warehouse-und",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Projects in Process | City of Scottsdale",
@@ -4381,7 +4770,8 @@
     "host": "scottsdaleaz.gov",
     "audience": "builder",
     "sourceUrl": "https://www.scottsdaleaz.gov/planning-development/projects-in-process",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Mack Innovation Park in Scottsdale Celebrates Milestone - Rocky Mountain Construction",
@@ -4389,7 +4779,8 @@
     "host": "acppubs.com",
     "audience": "builder",
     "sourceUrl": "https://acppubs.com/RMC/article/FC62A40E-mack-innovation-park-in-scottsdale-celebrates-milestone",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "EBCO Celebrates Topping-Out Milestone for Tempo by Hilton in Tucson - EBCO General Contractor",
@@ -4397,7 +4788,8 @@
     "host": "ebcogc.com",
     "audience": "builder",
     "sourceUrl": "https://ebcogc.com/topping-out-tempo-by-hilton-tucson/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Tucson Commerce Center (3 Buildings) — ViCon",
@@ -4405,7 +4797,8 @@
     "host": "viconconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://www.viconconstruction.com/our-projects/tucson-commerce-center-3-buildings",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "12 Tucson Area Construction Projects to Watch in 2025",
@@ -4413,7 +4806,8 @@
     "host": "realestatedaily-news.com",
     "audience": "builder",
     "sourceUrl": "https://realestatedaily-news.com/12-tucson-area-construction-projects-to-watch-in-2025/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Elliot Mesa Industrial - Alston Construction Company",
@@ -4421,7 +4815,8 @@
     "host": "alstonco.com",
     "audience": "builder",
     "sourceUrl": "https://alstonco.com/project/elliot-mesa-industrial/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Cavan Breaks Ground on Mesa Industrial Development - CCR-Mag.com",
@@ -4429,7 +4824,8 @@
     "host": "ccr-mag.com",
     "audience": "builder",
     "sourceUrl": "https://ccr-mag.com/cavan-breaks-ground-on-mesa-industrial-development/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Active Development Sites - ArcGIS Experience Builder",
@@ -4437,7 +4833,8 @@
     "host": "experience.arcgis.com",
     "audience": "builder",
     "sourceUrl": "https://experience.arcgis.com/experience/e7c4f8f4201641919a28b28452fa095c/page/Active-Development-Sites-Map/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Scottsdale developer nearing completion on industrial buildings in Mesa - Scottsdale Independent",
@@ -4445,7 +4842,8 @@
     "host": "yourvalley.net",
     "audience": "builder",
     "sourceUrl": "https://www.yourvalley.net/scottsdale-independent/stories/scottsdale-developer-nearing-completion-on-industrial-buildings-in-mesa,666667",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "AZ 202 Commerce Park | Nitti Builders",
@@ -4453,7 +4851,8 @@
     "host": "nittibldrs.com",
     "audience": "builder",
     "sourceUrl": "https://nittibldrs.com/projects/az-202-commerce-park/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Envision 56 - Opus",
@@ -4461,7 +4860,8 @@
     "host": "opus-group.com",
     "audience": "builder",
     "sourceUrl": "https://www.opus-group.com/Projects/envision-56",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Chandler Bay | VAC Development",
@@ -4469,7 +4869,8 @@
     "host": "vacdevelopment.com",
     "audience": "builder",
     "sourceUrl": "https://vacdevelopment.com/portfolio/chandler-bay",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "DPC Companies breaks ground on Chandler Innovation Park — a 327,776-square-foot industrial park | City of Chandler",
@@ -4477,7 +4878,8 @@
     "host": "chandleraz.gov",
     "audience": "builder",
     "sourceUrl": "https://www.chandleraz.gov/news-center/dpc-companies-breaks-ground-chandler-innovation-park-327776-square-foot-industrial-park",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Construction Firms in Chandler, AZ",
@@ -4485,7 +4887,8 @@
     "host": "clearlyrated.com",
     "audience": "builder",
     "sourceUrl": "https://www.clearlyrated.com/commercial-construction/az-usa/chandler-az",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "SunCap Property, Inclenberg Investments Break Ground on Final Building at Gilbert Spectrum Business Park in Arizona - REBusinessOnline",
@@ -4493,7 +4896,8 @@
     "host": "rebusinessonline.com",
     "audience": "builder",
     "sourceUrl": "https://rebusinessonline.com/suncap-property-inclenberg-investments-break-ground-on-final-building-at-gilbert-spectrum-business-park-in-arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Restaurant Construction Contractor Gilbert, AZ",
@@ -4501,7 +4905,8 @@
     "host": "temac.com",
     "audience": "builder",
     "sourceUrl": "https://www.temac.com/general-contracting",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_qualifying_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Solid State Construction, AZ | Residential & Commercial ...",
@@ -4509,7 +4914,8 @@
     "host": "solidstateconstructionaz.com",
     "audience": "builder",
     "sourceUrl": "https://solidstateconstructionaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_qualifying_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Semiconductor Fab Buildout and Tool Hook-Up | BMWC Constructors",
@@ -4517,7 +4923,8 @@
     "host": "bmwc.com",
     "audience": "builder",
     "sourceUrl": "https://www.bmwc.com/what-we-do/featured-projects/tsmc-fab-buildout-and-tool-hook-up/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_qualifying_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Hoffman Construction — Fab 52",
@@ -4525,7 +4932,8 @@
     "host": "hoffmancorp.com",
     "audience": "builder",
     "sourceUrl": "https://www.hoffmancorp.com/project/fab-52-1-52-2/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_qualifying_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home | United Integrated Services (USA) Corp.",
@@ -4533,7 +4941,8 @@
     "host": "uisusacorp.com",
     "audience": "builder",
     "sourceUrl": "https://uisusacorp.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_qualifying_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "How Contractors Are Supporting the Semiconductor Surge with Highly Specialized Precision Work - Greater Phoenix In Business Magazine",
@@ -4541,7 +4950,8 @@
     "host": "inbusinessphx.com",
     "audience": "builder",
     "sourceUrl": "https://inbusinessphx.com/technology-innovation/how-contractors-are-supporting-the-semiconductor-surge-with-highly-specialized-precision-work",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_qualifying_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Project Discovery - Chang Chun Petrochemical Arizona | Mortenson",
@@ -4549,7 +4959,8 @@
     "host": "mortenson.com",
     "audience": "builder",
     "sourceUrl": "https://www.mortenson.com/projects/project-discovery-chang-chun-petrochemical-arizona",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_qualifying_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "ARCO and Prime Data Centers Celebrate Data Center Campus Groundbreaking in Avondale, AZ - ARCO/Murray",
@@ -4557,7 +4968,8 @@
     "host": "arcomurray.com",
     "audience": "builder",
     "sourceUrl": "https://www.arcomurray.com/prime-data-centers-groundbreaking/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_qualifying_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Confidential Data Center (Arizona) | Weitz",
@@ -4565,7 +4977,8 @@
     "host": "weitz.com",
     "audience": "builder",
     "sourceUrl": "https://www.weitz.com/projects/confidential-data-center-campus-phoenix/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_qualifying_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Iron Mountain Phoenix Data Center Campus Arizona",
@@ -4573,7 +4986,8 @@
     "host": "dcpulse.com",
     "audience": "builder",
     "sourceUrl": "https://dcpulse.com/project/iron-mountain-phoenix-data-center-campus",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_qualifying_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Design-Build | Phoenix Medical Construction",
@@ -4581,7 +4995,8 @@
     "host": "phoenixmedicalconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://phoenixmedicalconstruction.com/design-build/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Edge Construction | Premium Residential & Commercial ...",
@@ -4589,7 +5004,8 @@
     "host": "edgeconstruct.com",
     "audience": "builder",
     "sourceUrl": "https://edgeconstruct.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Ironmark Drives Arizona Multifamily Growth With 800+ New Units",
@@ -4597,7 +5013,8 @@
     "host": "ironmarkbldg.com",
     "audience": "builder",
     "sourceUrl": "https://ironmarkbldg.com/ironmark-drives-arizona-multifamily-growth-with-800-new-units/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Project Locations | Arizona | Precision General Commercial Contractors, Inc.",
@@ -4605,7 +5022,8 @@
     "host": "precisiongc.com",
     "audience": "builder",
     "sourceUrl": "https://precisiongc.com/multifamily-construction/locations/az",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Real Estate Development & Construction in AZ | Caliber",
@@ -4613,7 +5031,8 @@
     "host": "caliberco.com",
     "audience": "builder",
     "sourceUrl": "https://www.caliberco.com/development/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Kenzy Architects | Architects and interior design",
@@ -4621,7 +5040,8 @@
     "host": "kenzyarchitects.com",
     "audience": "architect",
     "sourceUrl": "https://www.kenzyarchitects.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Christy & Company Architecture: a Scottsdale, Arizona custom residential and commercial architectural firm / 480-483-0713",
@@ -4629,7 +5049,8 @@
     "host": "christyandco.com",
     "audience": "architect",
     "sourceUrl": "https://christyandco.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Campbell Hedrick | repp+mclain design and construction",
@@ -4637,7 +5058,8 @@
     "host": "reppmclain.com",
     "audience": "architect",
     "sourceUrl": "https://reppmclain.com/project/campbell-hedrick-tucson-arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Tempo by Hilton - Mayse & Associates",
@@ -4645,7 +5067,8 @@
     "host": "mayseassociates.com",
     "audience": "architect",
     "sourceUrl": "https://www.mayseassociates.com/projects/tempo-by-hilton/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Fourteen Hundred Tempe - AO | Architecture. Design. Relationships.",
@@ -4653,7 +5076,8 @@
     "host": "aoarchitects.com",
     "audience": "architect",
     "sourceUrl": "https://www.aoarchitects.com/project/fourteen-hundred-tempe/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "SSOE Group Ranked #12 Engineering Firm in Phoenix, Signals Deepened Commitment to Arizona's Advanced Manufacturing Boom - SSOE Group",
@@ -4661,7 +5085,8 @@
     "host": "ssoe.com",
     "audience": "architect",
     "sourceUrl": "https://www.ssoe.com/press-releases/ssoe-group-ranked-12-engineering-firm-in-phoenix-signals-deepened-commitment-to-arizonas-advanced-manufacturing-boom/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "University of Arizona | Hodess",
@@ -4669,7 +5094,8 @@
     "host": "hodess.com",
     "audience": "architect",
     "sourceUrl": "https://hodess.com/project/university-of-arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "TSMC Phoenix – Project Feature – Aquinas Engineering PLLC",
@@ -4677,7 +5103,8 @@
     "host": "aquinasengr.com",
     "audience": "architect",
     "sourceUrl": "https://aquinasengr.com/tsmc-phoenix-project-feature/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "MAZ Mesa Data Center in Mesa, Arizona (Confidential)",
@@ -4685,7 +5112,8 @@
     "host": "rosendin.com",
     "audience": "architect",
     "sourceUrl": "https://www.rosendin.com/projects/maz-mesa-data-center/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "AI creates demand for new data center facilities across ...",
@@ -4693,7 +5121,8 @@
     "host": "archpaper.com",
     "audience": "architect",
     "sourceUrl": "https://www.archpaper.com/2025/11/demand-data-center-facilities-architecture-firms-sustainability/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "CO Architects",
@@ -4701,7 +5130,8 @@
     "host": "coarchitects.com",
     "audience": "architect",
     "sourceUrl": "https://coarchitects.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Tenant Improvement Contractor in Phoenix, AZ - LJ Builders",
@@ -4709,7 +5139,8 @@
     "host": "ljbuildersaz.com",
     "audience": "builder",
     "sourceUrl": "https://ljbuildersaz.com/tenant-improvement-contractor-phoenix/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Tenant Improvement Contractors in Arizona",
@@ -4717,7 +5148,8 @@
     "host": "structuresgroup.com",
     "audience": "builder",
     "sourceUrl": "https://structuresgroup.com/tenant-improvement-contractors-in-arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Commercial Design-Build Services Phoenix, AZ | Koomen",
@@ -4725,7 +5157,8 @@
     "host": "koomencontracting.com",
     "audience": "builder",
     "sourceUrl": "https://www.koomencontracting.com/commercial/design-build-services",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Concept Commercial Construction: Commercial Project Experts",
@@ -4733,7 +5166,8 @@
     "host": "conceptaz.com",
     "audience": "builder",
     "sourceUrl": "https://conceptaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Delta Construction: Arizona's Trusted Commercial Contractor",
@@ -4741,7 +5175,8 @@
     "host": "deltaconstructionaz.com",
     "audience": "builder",
     "sourceUrl": "https://deltaconstructionaz.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home - Bunney's Inc.",
@@ -4749,7 +5184,8 @@
     "host": "bunneysinc.com",
     "audience": "builder",
     "sourceUrl": "https://bunneysinc.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "RK Industries Arizona: Construction Services & Contracting",
@@ -4757,7 +5193,8 @@
     "host": "rkindustries.com",
     "audience": "builder",
     "sourceUrl": "https://rkindustries.com/arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona Commercial Construction Company",
@@ -4765,7 +5202,8 @@
     "host": "greystoneconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://www.greystoneconstruction.com/markets/arizona.html",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona Retail Construction | ROC #194355",
@@ -4773,7 +5211,8 @@
     "host": "azretailconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://www.azretailconstruction.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Retail Construction Services Buildouts, Renovations in Phoenix",
@@ -4781,7 +5220,8 @@
     "host": "azpci.com",
     "audience": "builder",
     "sourceUrl": "https://azpci.com/retail-construction/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "americanretailcontractors.com",
@@ -4789,7 +5229,8 @@
     "host": "americanretailcontractors.com",
     "audience": "builder",
     "sourceUrl": "http://americanretailcontractors.com/aboutus.html",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Multifamily Development - Sun State Builders",
@@ -4797,7 +5238,8 @@
     "host": "sunstatebuilders.com",
     "audience": "builder",
     "sourceUrl": "https://sunstatebuilders.com/services/multifamily-development/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Genesee Construction and Development",
@@ -4805,7 +5247,8 @@
     "host": "geneseecd.com",
     "audience": "builder",
     "sourceUrl": "https://geneseecd.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "General Contractor in Arizona",
@@ -4813,7 +5256,8 @@
     "host": "hrconstruction.com",
     "audience": "builder",
     "sourceUrl": "https://www.hrconstruction.com/arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Hotel Renovation Contractor in Arizona | CRR Construction",
@@ -4821,7 +5265,8 @@
     "host": "crrconstructionllc.com",
     "audience": "builder",
     "sourceUrl": "https://crrconstructionllc.com/arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Kingsman Development | Scottsdale Civil Construction ...",
@@ -4829,7 +5274,8 @@
     "host": "kingsmandevelopmentusa.com",
     "audience": "builder",
     "sourceUrl": "https://www.kingsmandevelopmentusa.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Site Development - Sharp Creek Contracting, Inc",
@@ -4837,7 +5283,8 @@
     "host": "sharpcreek.com",
     "audience": "builder",
     "sourceUrl": "https://sharpcreek.com/site-development/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "A Firestopping & Specialty Contractor, Arizona Specialty Contracting, Inc.",
@@ -4845,7 +5292,8 @@
     "host": "arizona-sc.com",
     "audience": "builder",
     "sourceUrl": "https://arizona-sc.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Viking Specialty Contracting - Viking Specialty Contracting",
@@ -4853,7 +5301,8 @@
     "host": "viking-az.com",
     "audience": "builder",
     "sourceUrl": "https://www.viking-az.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Find Arizona Construction Subcontractors | LookingForSubs.com",
@@ -4861,7 +5310,8 @@
     "host": "lookingforsubs.com",
     "audience": "builder",
     "sourceUrl": "https://lookingforsubs.com/Arizona",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "5500 Verified Subcontractors in Arizona",
@@ -4869,7 +5319,8 @@
     "host": "downtobid.com",
     "audience": "builder",
     "sourceUrl": "https://downtobid.com/state/az",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "American Subcontractors Association of Arizona",
@@ -4877,7 +5328,8 @@
     "host": "asa-az.org",
     "audience": "builder",
     "sourceUrl": "https://www.asa-az.org/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "AAA Insurance HQ Foam Roof Recoat — 155,000 SF ARMORCOAT AC100, Glendale AZ",
@@ -4885,7 +5337,8 @@
     "host": "vanguardroofingaz.com",
     "audience": "builder",
     "sourceUrl": "https://vanguardroofingaz.com/projects/aaa-insurance-headquarters-foam-recoat-glendale.html",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Highland Portfolio: Phoenix Gateway Center Roofing Project",
@@ -4893,7 +5346,8 @@
     "host": "highlandroof.com",
     "audience": "builder",
     "sourceUrl": "https://highlandroof.com/portfolio/phoenix-gateway-center/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona Center - Clark's Quality Roofing",
@@ -4901,7 +5355,8 @@
     "host": "clarkroof.com",
     "audience": "builder",
     "sourceUrl": "https://clarkroof.com/arizona-center/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Fiat Mechanical | HVAC - Electrical - Plumbing",
@@ -4909,7 +5364,8 @@
     "host": "fiatmechanical.com",
     "audience": "builder",
     "sourceUrl": "https://fiatmechanical.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Arizona | Apollo Mechanical",
@@ -4917,7 +5373,8 @@
     "host": "apollomech.com",
     "audience": "builder",
     "sourceUrl": "https://apollomech.com/arizona/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "HVAC Construction Services | PDQ Mechanical LLC",
@@ -4925,7 +5382,8 @@
     "host": "pdqmechanicalllc.com",
     "audience": "builder",
     "sourceUrl": "https://www.pdqmechanicalllc.com/hvac-services/construction-services/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Central Mechanical Services LLC: Phoenix HVAC & Plumbing ...",
@@ -4933,7 +5391,8 @@
     "host": "centralmechanicalservices.com",
     "audience": "builder",
     "sourceUrl": "https://centralmechanicalservices.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Interior Design Phoenix AZ | Joint Venture Design",
@@ -4941,7 +5400,8 @@
     "host": "jointventuredesign.com",
     "audience": "architect",
     "sourceUrl": "https://jointventuredesign.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Phoenix Commercial Architect & Interior Design | MOR Studio",
@@ -4949,7 +5409,8 @@
     "host": "morstudio.net",
     "audience": "architect",
     "sourceUrl": "https://www.morstudio.net/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Retail Architecture & Interior Design - Oculus Inc.",
@@ -4957,7 +5418,8 @@
     "host": "oculusinc.com",
     "audience": "architect",
     "sourceUrl": "https://oculusinc.com/markets/retail/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Phoenix | National Architecture Firm | Retail, Grocery & Hospitality Design",
@@ -4965,7 +5427,8 @@
     "host": "brrarch.com",
     "audience": "architect",
     "sourceUrl": "https://www.brrarch.com/phoenix/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Commercial Retail Design — ShouDesign - Commercial Architecture",
@@ -4973,7 +5436,8 @@
     "host": "shoudesign.com",
     "audience": "architect",
     "sourceUrl": "https://www.shoudesign.com/commercial-1",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Inline Retail Store Architecture – SCA Design AZ, NV, ID",
@@ -4981,7 +5445,8 @@
     "host": "scadesign.com",
     "audience": "architect",
     "sourceUrl": "https://scadesign.com/portfolio/inline-retail-store-architecture/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "NOVEL Val Vista - Craine Architecture",
@@ -4989,7 +5454,8 @@
     "host": "crainearch.com",
     "audience": "architect",
     "sourceUrl": "https://crainearch.com/projects/novel-val-vista/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Aiya Apartments Project | Strouse Davis Architecture",
@@ -4997,7 +5463,8 @@
     "host": "strousedavisarch.com",
     "audience": "architect",
     "sourceUrl": "https://www.strousedavisarch.com/residential-project/aiya-apartments/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Raytech Corporation | Industrial Design | Engineering | Research | Phoenix, AZ",
@@ -5005,7 +5472,8 @@
     "host": "raytechcorp.com",
     "audience": "architect",
     "sourceUrl": "https://raytechcorp.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Product Development & Industrial Design Services - Phoenix ...",
@@ -5013,7 +5481,8 @@
     "host": "radiantpd.com",
     "audience": "architect",
     "sourceUrl": "https://www.radiantpd.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Industrial/Semiconductor Mechanical Designer in Phoenix AZ, AZ - Farnsworth Group, Inc.",
@@ -5021,7 +5490,8 @@
     "host": "us.trabajo.org",
     "audience": "architect",
     "sourceUrl": "https://us.trabajo.org/job-5003-3129e5112fb78ee43b5622f4e247e786",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Design Architect - New Fab Design Department Job Details | TSMC",
@@ -5029,7 +5499,8 @@
     "host": "ro.careers.tsmc.com",
     "audience": "architect",
     "sourceUrl": "https://ro.careers.tsmc.com/job/Phoenix-Design-Architect-New-Fab-Design-Department-AZ-85083/1056480666/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "EMC2 Group, Inc. | Full Architectural Services | 1635 N Greenfield Rd, Mesa, AZ, USA",
@@ -5037,7 +5508,8 @@
     "host": "emc2group.com",
     "audience": "architect",
     "sourceUrl": "https://www.emc2group.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Avondale Civic Center | Dig Studio",
@@ -5045,7 +5517,8 @@
     "host": "digstudio.com",
     "audience": "architect",
     "sourceUrl": "https://digstudio.com/work/avondale-civic-center/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "JKC Inc. Flagstaff General Contractor",
@@ -5053,7 +5526,8 @@
     "host": "jkc-inc.com",
     "audience": "builder",
     "sourceUrl": "https://www.jkc-inc.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Northern Arizona Commercial Construction - Golden Peak Builders",
@@ -5061,7 +5535,8 @@
     "host": "goldenpeakbuilders.com",
     "audience": "builder",
     "sourceUrl": "https://goldenpeakbuilders.com/northern-arizona-commercial-construction/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Activity Based Office Remodel – APMI architecture",
@@ -5069,7 +5544,8 @@
     "host": "apmi.com",
     "audience": "architect",
     "sourceUrl": "https://apmi.com/activity-based-office-remodel/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "About - DPE Construction",
@@ -5077,7 +5553,8 @@
     "host": "dpeyuma.com",
     "audience": "builder",
     "sourceUrl": "https://dpeyuma.com/about/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "JRP Construction LLC  - Metal Building WOSB Contractor in Yuma, Arizona",
@@ -5085,7 +5562,8 @@
     "host": "jrpyuma.com",
     "audience": "builder",
     "sourceUrl": "https://www.jrpyuma.com/index.html",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Innov-R Design Final",
@@ -5093,7 +5571,8 @@
     "host": "innov-r-llc.com",
     "audience": "architect",
     "sourceUrl": "http://www.innov-r-llc.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "Arizona Engineers | Infrastructure Project Solutions | 183 East 24th Street, Yuma, AZ, USA",
@@ -5101,7 +5580,8 @@
     "host": "arizonaengineers.com",
     "audience": "architect",
     "sourceUrl": "https://www.arizonaengineers.com/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Home",
@@ -5109,7 +5589,8 @@
     "host": "veganvega.com",
     "audience": "architect",
     "sourceUrl": "http://www.veganvega.com/home.html",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Architecture - Yuma Engineering Company",
@@ -5117,7 +5598,8 @@
     "host": "neiaw.com",
     "audience": "architect",
     "sourceUrl": "https://www.neiaw.com/architecture.html",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "Innov-R | Architectural - Yuma County Chamber of Commerce - Yuma Arizona",
@@ -5125,7 +5607,8 @@
     "host": "members.yumachamber.org",
     "audience": "architect",
     "sourceUrl": "https://members.yumachamber.org/members/member/innov-r-3050",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_checked_no_email",
+    "publicEmailStatus": "checked"
   },
   {
     "name": "About Us - Sternco Engineers",
@@ -5133,7 +5616,8 @@
     "host": "sterncoengineers.com",
     "audience": "architect",
     "sourceUrl": "https://sterncoengineers.com/about-sternco-engineers/",
-    "coverageStatus": "domain_found"
+    "coverageStatus": "public_email_saved",
+    "publicEmailStatus": "saved"
   },
   {
     "name": "KLD Construction | Interior Design & Build Firm in Yuma AZ",

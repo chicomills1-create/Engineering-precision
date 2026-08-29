@@ -7,6 +7,12 @@ Maintain a persistent, auditable prospect library rather than relying on convers
 
 Only add a recipient after public company/contact evidence and a successful business-email verification. Require a domain-matched email, a named decision-maker with a relevant role, public source URLs, and one recipient per normalized company. Keep rejected, ambiguous, mismatched, and incomplete records out of the send queue.
 
+When extracting emails from public pages, attribute each address to the target company itself. Reject publisher, directory, vendor, partner, placeholder, and unclear third-party addresses; a different domain is acceptable only when the page explicitly identifies it as the target company's contact domain.
+
+**Why:** Search-result and article pages often expose a valid email that belongs to the publisher rather than the company being researched. Saving those addresses creates false leads and can misdirect outreach.
+
+**How to apply:** Ask the extractor for qualifying and rejected addresses separately, retain only qualifying addresses, and mark the site checked with no qualifying email when attribution is unclear.
+
 Budget each finder credit as one potential final email address. Identify the reputable person and matching company domain through free public research first; never spend finder credits on broad employee discovery or curiosity searches. Use one paid name/domain lookup only for a pre-qualified person, then verify and run suppression checks before outreach.
 
 Do not thin the company universe because enrichment fails. Preserve every legitimate, deduplicated Arizona or California architecture/construction company in the candidate library; attach one public named person and one email when available. A missing, rejected, or unresolved email remains a visible unresolved company record rather than a discarded company.
