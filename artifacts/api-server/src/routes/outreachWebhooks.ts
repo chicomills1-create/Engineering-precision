@@ -84,13 +84,9 @@ router.post("/outreach/webhooks/sendgrid-events", async (req, res): Promise<void
       });
       if (!forwarded.ok) {
         req.log.error({ status: forwarded.status }, "Forwarded SendGrid event webhook was rejected");
-        res.status(502).json({ error: "Event forwarding failed" });
-        return;
       }
     } catch (err) {
       req.log.error({ err }, "Forwarded SendGrid event webhook failed");
-      res.status(502).json({ error: "Event forwarding failed" });
-      return;
     }
   }
   req.log.info({ processed }, "Processed SendGrid outreach events");

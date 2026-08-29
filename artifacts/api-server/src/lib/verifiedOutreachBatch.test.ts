@@ -1,0 +1,24 @@
+import assert from "node:assert/strict";
+import { test } from "node:test";
+import {
+  approvedOutreachBody,
+  VERIFIED_OUTREACH_CONTACTS,
+} from "./verifiedOutreachBatch";
+
+test("the verified morning batch contains exactly ten unique public contacts", () => {
+  assert.equal(VERIFIED_OUTREACH_CONTACTS.length, 10);
+  assert.equal(new Set(VERIFIED_OUTREACH_CONTACTS.map((contact) => contact.contactEmail)).size, 10);
+  assert.equal(new Set(VERIFIED_OUTREACH_CONTACTS.map((contact) => contact.companyName)).size, 10);
+  assert.ok(VERIFIED_OUTREACH_CONTACTS.every((contact) =>
+    contact.contactSourceUrl.startsWith("https://")
+    && contact.sourceUrl.startsWith("https://")
+    && contact.contactEmail.includes("@")
+  ));
+});
+
+test("the approved body uses only the approved pipeline closing", () => {
+  const body = approvedOutreachBody("Alex Rivera");
+  assert.match(body, /^Hi Alex,/);
+  assert.match(body, /Do you have any current projects in your pipeline that you would like us to review\?$/);
+  assert.doesNotMatch(body, /plan-review comment|field condition|waiting on engineering answers/i);
+});

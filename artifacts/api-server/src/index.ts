@@ -2,6 +2,7 @@ import app from "./app";
 import { logger } from "./lib/logger";
 import { startOutreachWorker } from "./lib/outreachWorker";
 import { startClientJobUploadCleanup } from "./lib/clientJobUploadCleanup";
+import { seedVerifiedOutreachBatch } from "./lib/verifiedOutreachBatch";
 
 const rawPort = process.env["PORT"];
 
@@ -24,6 +25,15 @@ app.listen(port, (err) => {
   }
 
   logger.info({ port }, "Server listening");
-  startOutreachWorker();
-  startClientJobUploadCleanup();
+  void seedVerifiedOutreachBatch()
+    .then((result) => {
+      if (result.state === "ready") {
+        logger.info({ queued: result.queued }, "Verified outreach batch prepared");
+      }
+      startOutreachWorker();
+      startClientJobUploadCleanup();
+    })
+    .catch((seedError: unknown) => {
+      logger.error({ err: seedError }, "Verified outreach batch preparation failed");
+    });
 });
