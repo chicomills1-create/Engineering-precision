@@ -215,12 +215,13 @@ export async function processSendGridEvents(events: SendGridEvent[]): Promise<nu
         : undefined;
 
     if (messageWhere && eventType === "delivered") {
-      await db.update(outreachMessagesTable).set({ status: "delivered", error: null }).where(messageWhere);
-      const deliveredMessage = Number.isInteger(messageId)
-        ? (await db.select().from(outreachMessagesTable).where(eq(outreachMessagesTable.id, messageId)))[0]
-        : providerMessageId
-          ? (await db.select().from(outreachMessagesTable).where(eq(outreachMessagesTable.providerMessageId, providerMessageId)))[0]
-          : undefined;
+      const [deliveredMessage] = await db.update(outreachMessagesTable)
+        .set({ status: "delivered", error: null })
+        .where(and(
+          messageWhere,
+          inArray(outreachMessagesTable.status, ["sent", "sending"]),
+        ))
+        .returning();
       if (deliveredMessage?.sequenceNumber === 1) {
         const followUps = await db.select().from(outreachMessagesTable).where(and(
           eq(outreachMessagesTable.prospectId, deliveredMessage.prospectId),

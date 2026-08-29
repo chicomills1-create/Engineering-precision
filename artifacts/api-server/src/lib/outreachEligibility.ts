@@ -50,3 +50,17 @@ export function getFollowUpScheduledAt(sequenceNumber: number, baseDate = new Da
   const days = FOLLOW_UP_DELAY_DAYS[sequenceNumber];
   return days ? new Date(baseDate.getTime() + days * 24 * 60 * 60 * 1000) : null;
 }
+
+export function getNextPhoenixEightAm(now = new Date()): Date {
+  const dateParts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Phoenix",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(now);
+  const values = Object.fromEntries(dateParts.map((part) => [part.type, part.value]));
+  const todayAtEight = new Date(`${values.year}-${values.month}-${values.day}T08:00:00-07:00`);
+  return todayAtEight.getTime() > now.getTime()
+    ? todayAtEight
+    : new Date(todayAtEight.getTime() + 24 * 60 * 60 * 1000);
+}

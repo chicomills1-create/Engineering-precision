@@ -33,6 +33,13 @@ const INITIAL_RAMP_DAILY_LIMIT = 10;
 const RAMPED_DAILY_LIMIT = 20;
 const INITIAL_RAMP_ACTIVE_DAYS = 3;
 
+export class DailySendLimitError extends Error {
+  constructor() {
+    super("Daily send limit reached");
+    this.name = "DailySendLimitError";
+  }
+}
+
 function phoenixDateKey(date = new Date()): string {
   const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/Phoenix",
@@ -72,7 +79,7 @@ async function reserveDailySend(message: OutreachMessage, campaign: Campaign | u
       .returning({ id: outreachSendReservationsTable.id });
     if (inserted[0]) return inserted[0].id;
   }
-  throw new Error("Daily send limit reached");
+  throw new DailySendLimitError();
 }
 
 export async function generateProspectDraft(prospect: Prospect): Promise<GeneratedDraft> {

@@ -6,6 +6,7 @@ import {
   assertScheduledTimeReady,
   assertSequenceDeliveryReady,
   getFollowUpScheduledAt,
+  getNextPhoenixEightAm,
 } from "./outreachEligibility";
 import { getOutreachDailyLimit } from "./outreach";
 
@@ -132,5 +133,16 @@ test("manual and automatic follow-ups cannot bypass their due time", () => {
   );
   assert.doesNotThrow(
     () => assertScheduledTimeReady(2, new Date("2026-08-28T11:59:59.000Z"), now),
+  );
+});
+
+test("queues approved outreach for the next 8 AM Phoenix window", () => {
+  assert.equal(
+    getNextPhoenixEightAm(new Date("2026-08-29T14:00:00.000Z")).toISOString(),
+    "2026-08-29T15:00:00.000Z",
+  );
+  assert.equal(
+    getNextPhoenixEightAm(new Date("2026-08-29T15:01:00.000Z")).toISOString(),
+    "2026-08-30T15:00:00.000Z",
   );
 });

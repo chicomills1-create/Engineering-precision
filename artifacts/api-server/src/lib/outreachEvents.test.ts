@@ -43,7 +43,7 @@ test("accepts the base64 DER public-key format returned by SendGrid", () => {
   assert.equal(verifySendGridEventSignature(body, { timestamp, signature }), true);
 });
 
-async function createEventFixture() {
+async function createEventFixture(initialStatus: "approved" | "sent" = "sent") {
   const suffix = randomUUID();
   const email = `outreach-test-${suffix}@example.com`;
   const [campaign] = await db.insert(campaignsTable).values({
@@ -77,7 +77,7 @@ async function createEventFixture() {
       sequenceNumber: 1,
       subject: "Initial test",
       body: "Initial test body",
-      status: "approved",
+      status: initialStatus,
     },
     {
       prospectId: prospect!.id,
@@ -143,6 +143,37 @@ test("bounce events suppress the address and stop pending messages", async () =>
   }
 });
 
+test("a late delivered event cannot revive a bounced message or its follow-ups", async () => {
+  const fixture = await createEventFixture();
+  try {
+    await processSendGridEvents([{
+      email: fixture.email,
+      event: "bounce",
+      reason: "Mailbox unavailable",
+      timestamp: 1787970001,
+      sg_message_id: `late-bounce-${fixture.campaign.id}.filter`,
+      outreach_message_id: String(fixture.initial.id),
+      outreach_prospect_id: String(fixture.prospect.id),
+    }]);
+    await processSendGridEvents([{
+      email: fixture.email,
+      event: "delivered",
+      timestamp: 1787970002,
+      sg_message_id: `late-delivery-${fixture.campaign.id}.filter`,
+      outreach_message_id: String(fixture.initial.id),
+      outreach_prospect_id: String(fixture.prospect.id),
+    }]);
+
+    const [message] = await db.select().from(outreachMessagesTable).where(eq(outreachMessagesTable.id, fixture.initial.id));
+    const [followUp] = await db.select().from(outreachMessagesTable).where(eq(outreachMessagesTable.id, fixture.followUp.id));
+    assert.equal(message?.status, "bounced");
+    assert.equal(followUp?.status, "bounced");
+    assert.equal(followUp?.scheduledAt, null);
+  } finally {
+    await cleanEventFixture(fixture);
+  }
+});
+
 test("complaint events suppress the address and stop pending messages", async () => {
   const fixture = await createEventFixture();
   try {
@@ -164,7 +195,7 @@ test("complaint events suppress the address and stop pending messages", async ()
 });
 
 test("inbound replies mark the prospect replied and stop pending messages", async () => {
-  const fixture = await createEventFixture();
+  const fixture = await createEventFixture("approved");
   try {
     assert.equal(await processInboundReply(fixture.email), 1);
     const [prospect] = await db.select().from(prospectsTable).where(eq(prospectsTable.id, fixture.prospect.id));

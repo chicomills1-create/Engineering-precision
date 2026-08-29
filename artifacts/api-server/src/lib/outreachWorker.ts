@@ -7,7 +7,8 @@ import {
   type OutreachMessage,
 } from "@workspace/db";
 import { logger } from "./logger";
-import { isUnknownSendResultError, sendApprovedOutreach } from "./outreach";
+import { DailySendLimitError, isUnknownSendResultError, sendApprovedOutreach } from "./outreach";
+import { getNextPhoenixEightAm } from "./outreachEligibility";
 import {
   isReplyWebhookConfigured,
   syncSendGridInboundReplyWebhook,
@@ -138,6 +139,20 @@ export async function processDueOutreachMessages(): Promise<number> {
       sentCount += 1;
     } catch (err) {
       const error = err instanceof Error ? err.message : "Scheduled send failed";
+      if (err instanceof DailySendLimitError) {
+        const scheduledAt = getNextPhoenixEightAm();
+        await db.update(outreachMessagesTable)
+          .set({
+            status: "approved",
+            scheduledAt,
+            error: `Daily limit reached; deferred to ${scheduledAt.toISOString()}`,
+          })
+          .where(and(
+            eq(outreachMessagesTable.id, claimed.id),
+            eq(outreachMessagesTable.status, "sending"),
+          ));
+        continue;
+      }
       await db.update(outreachMessagesTable)
         .set({ status: isUnknownSendResultError(err) ? "sending" : "failed", error })
         .where(and(

@@ -50,6 +50,7 @@ import {
   sendClientMonthlyMessage,
 } from "../lib/clientMonthlyOutreach";
 import { validateAttributionPair, validateAttributionSourceStatus, type AttributionSourceType } from "../lib/growthAttribution";
+import { getNextPhoenixEightAm } from "../lib/outreachEligibility";
 
 const router: IRouter = Router();
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
@@ -316,11 +317,16 @@ router.post("/outreach/prospects/:id/replied", requireAuth, async (req, res): Pr
 });
 router.post("/outreach/messages/:id/approve", requireAuth, async (req, res): Promise<void> => {
   const p = ApproveOutreachMessageParams.safeParse(req.params); if (!p.success) { res.status(400).json({ error: p.error.message }); return; }
-  const [row] = await db.update(outreachMessagesTable).set({ status: "approved", scheduledAt: new Date() }).where(and(eq(outreachMessagesTable.id, p.data.id), eq(outreachMessagesTable.status, "draft"))).returning();
+  const [row] = await db.update(outreachMessagesTable).set({ status: "approved", scheduledAt: getNextPhoenixEightAm() }).where(and(eq(outreachMessagesTable.id, p.data.id), eq(outreachMessagesTable.status, "draft"))).returning();
   if (!row) { res.status(409).json({ error: "Only draft messages can be approved" }); return; } res.json(ApproveOutreachMessageResponse.parse(await messageJson(row)));
 });
 router.post("/outreach/messages/:id/send", requireAuth, async (req, res): Promise<void> => {
   const p = SendOutreachMessageParams.safeParse(req.params); if (!p.success) { res.status(400).json({ error: p.error.message }); return; }
+  const automationStatus = getOutreachAutomationStatus();
+  if (!automationStatus.automationReady) {
+    res.status(503).json({ error: "Production outreach is not ready; delivery, event, reply, and automation safeguards must all be verified" });
+    return;
+  }
   const [message] = await db.select().from(outreachMessagesTable).where(eq(outreachMessagesTable.id, p.data.id));
   if (!message) { res.status(404).json({ error: "Message not found" }); return; }
   const [prospect] = await db.select().from(prospectsTable).where(eq(prospectsTable.id, message.prospectId));
