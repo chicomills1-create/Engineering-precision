@@ -108,7 +108,7 @@ export async function sendClientMonthlyMessage(
   const unsubscribeUrl = makeUnsubscribeUrl(contact.email);
   const oneClickUrl = makeOneClickUnsubscribeUrl(contact.email);
   if (!unsubscribeUrl || !oneClickUrl) throw new Error("Unsubscribe signing is not configured");
-  const emailContent = renderBrandedEmail(messageBody, unsubscribeUrl);
+  const emailContent = renderBrandedEmail(messageBody, unsubscribeUrl, contact.name);
   const from = process.env.OUTREACH_FROM_EMAIL;
   if (!from) throw new Error("OUTREACH_FROM_EMAIL is not configured");
   const replyTo = process.env.OUTREACH_REPLY_TO_EMAIL?.trim() || from;

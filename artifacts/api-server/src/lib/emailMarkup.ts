@@ -15,6 +15,25 @@ export function escapeEmailHtml(value: string): string {
     .replaceAll("'", "&#39;");
 }
 
+function personalizeBody(body: string, recipientName?: string): string {
+  const trimmedBody = body.trim();
+  const name = recipientName?.trim();
+  if (!name) return trimmedBody;
+
+  const firstLineEnd = trimmedBody.indexOf("\n");
+  const firstLine = firstLineEnd === -1 ? trimmedBody : trimmedBody.slice(0, firstLineEnd);
+  const normalizedFirstLine = firstLine.toLowerCase();
+  const normalizedName = name.toLowerCase();
+  const firstName = normalizedName.split(/\s+/)[0];
+  if (normalizedFirstLine.includes(normalizedName) || normalizedFirstLine.includes(firstName)) {
+    return trimmedBody;
+  }
+  if (/^(hi|hello|dear)\b/i.test(firstLine) && firstLine.length <= 60) {
+    return `${`Hi ${name},`}${firstLineEnd === -1 ? "" : trimmedBody.slice(firstLineEnd)}`;
+  }
+  return `Hi ${name},\n\n${trimmedBody}`;
+}
+
 function renderBodyHtml(body: string): string {
   return body
     .trim()
@@ -24,12 +43,13 @@ function renderBodyHtml(body: string): string {
     .join("");
 }
 
-export function renderBrandedEmail(body: string, unsubscribeUrl: string): {
+export function renderBrandedEmail(body: string, unsubscribeUrl: string, recipientName?: string): {
   plainText: string;
   html: string;
 } {
+  const personalizedBody = personalizeBody(body, recipientName);
   const safeUnsubscribeUrl = escapeEmailHtml(unsubscribeUrl);
-  const plainText = `${body.trim()}\n\nBest regards,\n${CONTACT_NAME}\n${CONTACT_TITLE}\n${LEGAL_COMPANY_NAME}\n${CONTACT_PHONE}\n\nUnsubscribe: ${unsubscribeUrl}`;
+  const plainText = `${personalizedBody}\n\nBest regards,\n${CONTACT_NAME}\n${CONTACT_TITLE}\n${LEGAL_COMPANY_NAME}\n${CONTACT_PHONE}\n\nUnsubscribe: ${unsubscribeUrl}`;
   const html = `<!doctype html>
 <html lang="en">
   <head>
@@ -38,14 +58,14 @@ export function renderBrandedEmail(body: string, unsubscribeUrl: string): {
     <title>${COMPANY_NAME}</title>
   </head>
   <body style="margin:0;padding:0;background:#ffffff;color:#202124;">
-    <div style="display:none;max-height:0;overflow:hidden;opacity:0;">${escapeEmailHtml(body.trim().slice(0, 120))}</div>
+    <div style="display:none;max-height:0;overflow:hidden;opacity:0;">${escapeEmailHtml(personalizedBody.slice(0, 120))}</div>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;background:#ffffff;">
       <tr>
         <td align="left" style="padding:24px 18px 32px;">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:640px;">
             <tr>
               <td style="padding:0;font-family:Arial,Helvetica,sans-serif;">
-                ${renderBodyHtml(body)}
+                ${renderBodyHtml(personalizedBody)}
                 <p style="margin:28px 0 12px;color:#202124;font-size:16px;line-height:1.5;">Best regards,</p>
                 <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0;">
                   <tr>

@@ -19,3 +19,15 @@ test("renders outreach as readable HTML while retaining a plain-text fallback", 
   assert.match(content.plainText, /Unsubscribe: https:\/\/example\.com/);
   assert.doesNotMatch(content.html, /Hello <Principal>/);
 });
+
+test("uses the named recipient instead of a generic greeting", () => {
+  const content = renderBrandedEmail(
+    "Hi there,\n\nWe can help with the current review.",
+    "https://example.com/unsubscribe",
+    "Ernesto Garcia",
+  );
+
+  assert.match(content.html, />Hi Ernesto Garcia,<\/p>/);
+  assert.match(content.plainText, /^Hi Ernesto Garcia,/);
+  assert.doesNotMatch(content.html, /Hi there/);
+});
