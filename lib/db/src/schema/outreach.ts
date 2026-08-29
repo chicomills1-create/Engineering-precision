@@ -17,7 +17,7 @@ export const campaignsTable = pgTable("outreach_campaigns", {
   name: text("name").notNull(),
   audience: text("audience").notNull(),
   states: text("states").array().notNull(),
-  dailyLimit: integer("daily_limit").notNull().default(10),
+  dailyLimit: integer("daily_limit").notNull().default(100),
   status: text("status").notNull().default("draft"),
   subjectTemplate: text("subject_template"),
   bodyTemplate: text("body_template"),

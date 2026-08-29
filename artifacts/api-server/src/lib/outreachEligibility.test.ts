@@ -59,7 +59,7 @@ const activeCampaign: Campaign = {
   name: "Arizona architects",
   audience: "architect",
   states: ["AZ"],
-  dailyLimit: 10,
+  dailyLimit: 100,
   status: "active",
   subjectTemplate: null,
   bodyTemplate: null,
@@ -71,10 +71,12 @@ test("eligible outreach returns a normalized email", () => {
   assert.equal(assertOutreachEligibilityBase(approvedMessage, eligibleProspect, activeCampaign), "alex@example.com");
 });
 
-test("holds the campaign at ten sends through the first three active days", () => {
-  assert.equal(getOutreachDailyLimit(10, 0), 10);
-  assert.equal(getOutreachDailyLimit(10, 2), 10);
-  assert.equal(getOutreachDailyLimit(10, 3), 20);
+test("holds the campaign at 100 sends before ramping to 250", () => {
+  assert.equal(getOutreachDailyLimit(100, 0), 100);
+  assert.equal(getOutreachDailyLimit(100, 2), 100);
+  assert.equal(getOutreachDailyLimit(100, 3), 250);
+  assert.equal(getOutreachDailyLimit(500, 0), 100);
+  assert.equal(getOutreachDailyLimit(500, 3), 500);
 });
 
 const blockedCases: Array<[string, Partial<Prospect>, Partial<OutreachMessage>, Partial<Campaign>, string]> = [

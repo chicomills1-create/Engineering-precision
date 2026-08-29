@@ -17,7 +17,7 @@ export interface CampaignInput {
   states: CampaignInputStatesItem[];
   /**
      * @minimum 1
-     * @maximum 100
+     * @maximum 500
      */
   dailyLimit?: number;
   status?: CampaignInputStatus;

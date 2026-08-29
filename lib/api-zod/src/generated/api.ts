@@ -865,7 +865,7 @@ export const MarkOutreachProspectRepliedResponse = zod.object({
 })
 
 
-export const listCampaignsResponseDailyLimitMax = 100;
+export const listCampaignsResponseDailyLimitMax = 500;
 
 
 
@@ -886,8 +886,8 @@ export const ListCampaignsResponse = zod.array(ListCampaignsResponseItem)
 
 
 
-export const createCampaignBodyDailyLimitDefault = 10;
-export const createCampaignBodyDailyLimitMax = 100;
+export const createCampaignBodyDailyLimitDefault = 100;
+export const createCampaignBodyDailyLimitMax = 500;
 
 
 
@@ -901,7 +901,7 @@ export const CreateCampaignBody = zod.object({
   "bodyTemplate": zod.string().optional()
 })
 
-export const createCampaignResponseDailyLimitMax = 100;
+export const createCampaignResponseDailyLimitMax = 500;
 
 
 
@@ -925,8 +925,8 @@ export const UpdateCampaignParams = zod.object({
 
 
 
-export const updateCampaignBodyOneDailyLimitDefault = 10;
-export const updateCampaignBodyOneDailyLimitMax = 100;
+export const updateCampaignBodyOneDailyLimitDefault = 100;
+export const updateCampaignBodyOneDailyLimitMax = 500;
 
 
 
@@ -940,7 +940,7 @@ export const UpdateCampaignBody = zod.object({
   "bodyTemplate": zod.string().optional()
 })
 
-export const updateCampaignResponseDailyLimitMax = 100;
+export const updateCampaignResponseDailyLimitMax = 500;
 
 
 

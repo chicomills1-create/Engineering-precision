@@ -593,7 +593,7 @@ export interface Campaign {
   states: CampaignStatesItem[];
   /**
      * @minimum 1
-     * @maximum 100
+     * @maximum 500
      */
   dailyLimit: number;
   status: CampaignStatus;
@@ -639,7 +639,7 @@ export interface CampaignInput {
   states: CampaignInputStatesItem[];
   /**
      * @minimum 1
-     * @maximum 100
+     * @maximum 500
      */
   dailyLimit?: number;
   status?: CampaignInputStatus;

@@ -28,7 +28,7 @@ const campaignSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   audience: z.enum(['architect', 'builder']),
   states: z.array(z.enum(['AZ', 'CA', 'TX'])).min(1, 'Select at least one state'),
-  dailyLimit: z.coerce.number().min(1).max(100),
+  dailyLimit: z.coerce.number().min(1).max(500),
   subjectTemplate: z.string().optional(),
   bodyTemplate: z.string().optional(),
 });
@@ -86,7 +86,7 @@ export function CampaignsTab() {
       name: '',
       audience: 'architect',
       states: [],
-      dailyLimit: 10,
+      dailyLimit: 100,
       subjectTemplate: '',
       bodyTemplate: '',
     },
