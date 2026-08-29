@@ -17,3 +17,4 @@
 - [Past-client monthly outreach](past-client-monthly-outreach.md) — consent is canonical per normalized email; claim one send per Phoenix month before provider dispatch.
 - [Outbound proof environments](outbound-proof-environments.md) — send proofs from the same environment whose webhook updates are being verified; provider delivery alone does not prove app state.
 - [Environment scope inheritance](environment-scope-inheritance.md) — a shared env var applies to production; duplicate shared/production entries can block updates and should be consolidated without losing values.
+- [Outreach closing language](outreach-closing-language.md) — use the current-projects-in-pipeline review question; do not mention plan-review comments or field conditions in the close.
