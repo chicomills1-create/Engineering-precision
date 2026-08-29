@@ -874,6 +874,68 @@ paths:
               schema:
                 type: array
                 items: { $ref: "#/components/schemas/PublicOpportunity" }
+  /payroll/plans:
+    get:
+      operationId: listPayrollPlans
+      responses:
+        "200":
+          description: Job payroll plans
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/PayrollPlan" }
+    post:
+      operationId: createPayrollPlan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PayrollPlanInput" }
+      responses:
+        "201":
+          description: Created payroll plan
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PayrollPlan" }
+  /payroll/plans/{id}/entries:
+    post:
+      operationId: createPayrollEntry
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: number }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PayrollEntryInput" }
+      responses:
+        "201":
+          description: Created payroll entry
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PayrollPlan" }
+  /payroll/installments/{id}:
+    patch:
+      operationId: updatePayrollInstallment
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: number }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PayrollInstallmentUpdate" }
+      responses:
+        "200":
+          description: Updated payroll plan
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PayrollPlan" }
 components:
   schemas:
     HealthStatus:
@@ -1506,3 +1568,89 @@ components:
         prospects:
           type: array
           items: { $ref: "#/components/schemas/Prospect" }
+    PayrollInstallment:
+      type: object
+      required: [id, entryId, installmentNumber, label, percentage, amount, status, createdAt]
+      properties:
+        id: { type: number }
+        entryId: { type: number }
+        installmentNumber: { type: number }
+        label: { type: string }
+        percentage: { type: number }
+        amount: { type: number }
+        dueAt: { type: [string, "null"] }
+        status: { type: string, enum: [planned, due, paid] }
+        paidAt: { type: [string, "null"] }
+        createdAt: { type: string }
+    PayrollEntry:
+      type: object
+      required: [id, planId, role, payeeName, compensationType, totalAmount, installments, createdAt, updatedAt]
+      properties:
+        id: { type: number }
+        planId: { type: number }
+        role: { type: string, enum: [ceo, pe_stamp, engineer, operations_manager, other] }
+        payeeName: { type: string }
+        payeeEmail: { type: [string, "null"] }
+        compensationType: { type: string, enum: [fixed, percentage] }
+        agreedTotal: { type: [number, "null"] }
+        percentage: { type: [number, "null"] }
+        totalAmount: { type: number }
+        notes: { type: [string, "null"] }
+        installments:
+          type: array
+          items: { $ref: "#/components/schemas/PayrollInstallment" }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+    PayrollPlan:
+      type: object
+      required: [id, jobId, jobTitle, clientName, contractRevenue, status, entries, allocatedTotal, remainingRevenue, createdAt, updatedAt]
+      properties:
+        id: { type: number }
+        jobId: { type: number }
+        jobTitle: { type: string }
+        clientName: { type: string }
+        contractRevenue: { type: number }
+        status: { type: string, enum: [draft, active, complete] }
+        notes: { type: [string, "null"] }
+        entries:
+          type: array
+          items: { $ref: "#/components/schemas/PayrollEntry" }
+        allocatedTotal: { type: number }
+        remainingRevenue: { type: number }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+    PayrollPlanInput:
+      type: object
+      required: [jobId, contractRevenue]
+      properties:
+        jobId: { type: number }
+        contractRevenue: { type: number, minimum: 0 }
+        status: { type: string, enum: [draft, active, complete] }
+        notes: { type: string, maxLength: 5000 }
+    PayrollInstallmentInput:
+      type: object
+      required: [label, percentage]
+      properties:
+        label: { type: string, minLength: 1, maxLength: 120 }
+        percentage: { type: number, minimum: 0.01, maximum: 100 }
+        dueAt: { type: string }
+    PayrollEntryInput:
+      type: object
+      required: [role, payeeName, compensationType, installments]
+      properties:
+        role: { type: string, enum: [ceo, pe_stamp, engineer, operations_manager, other] }
+        payeeName: { type: string, minLength: 1, maxLength: 160 }
+        payeeEmail: { type: string, maxLength: 320, pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$" }
+        compensationType: { type: string, enum: [fixed, percentage] }
+        agreedTotal: { type: number, minimum: 0 }
+        percentage: { type: number, minimum: 0, maximum: 100 }
+        notes: { type: string, maxLength: 5000 }
+        installments:
+          type: array
+          minItems: 1
+          items: { $ref: "#/components/schemas/PayrollInstallmentInput" }
+    PayrollInstallmentUpdate:
+      type: object
+      required: [status]
+      properties:
+        status: { type: string, enum: [planned, due, paid] }

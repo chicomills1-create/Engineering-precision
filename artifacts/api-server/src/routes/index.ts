@@ -9,6 +9,7 @@ import outreachRouter from "./outreach";
 import outreachWebhooksRouter from "./outreachWebhooks";
 import clientJobsRouter from "./clientJobs";
 import growthRouter from "./growth";
+import payrollRouter from "./payroll";
 
 const router: IRouter = Router();
 
@@ -22,5 +23,6 @@ router.use(outreachRouter);
 router.use(outreachWebhooksRouter);
 router.use(clientJobsRouter);
 router.use(growthRouter);
+router.use(payrollRouter);
 
 export default router;

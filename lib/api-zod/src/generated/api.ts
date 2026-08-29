@@ -1613,3 +1613,229 @@ export const PreparePublicOpportunitiesResponseItem = zod.object({
 export const PreparePublicOpportunitiesResponse = zod.array(PreparePublicOpportunitiesResponseItem)
 
 
+export const ListPayrollPlansResponseItem = zod.object({
+  "id": zod.number(),
+  "jobId": zod.number(),
+  "jobTitle": zod.string(),
+  "clientName": zod.string(),
+  "contractRevenue": zod.number(),
+  "status": zod.enum(['draft', 'active', 'complete']),
+  "notes": zod.string().nullish(),
+  "entries": zod.array(zod.object({
+  "id": zod.number(),
+  "planId": zod.number(),
+  "role": zod.enum(['ceo', 'pe_stamp', 'engineer', 'operations_manager', 'other']),
+  "payeeName": zod.string(),
+  "payeeEmail": zod.string().nullish(),
+  "compensationType": zod.enum(['fixed', 'percentage']),
+  "agreedTotal": zod.number().nullish(),
+  "percentage": zod.number().nullish(),
+  "totalAmount": zod.number(),
+  "notes": zod.string().nullish(),
+  "installments": zod.array(zod.object({
+  "id": zod.number(),
+  "entryId": zod.number(),
+  "installmentNumber": zod.number(),
+  "label": zod.string(),
+  "percentage": zod.number(),
+  "amount": zod.number(),
+  "dueAt": zod.string().nullish(),
+  "status": zod.enum(['planned', 'due', 'paid']),
+  "paidAt": zod.string().nullish(),
+  "createdAt": zod.string()
+})),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})),
+  "allocatedTotal": zod.number(),
+  "remainingRevenue": zod.number(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const ListPayrollPlansResponse = zod.array(ListPayrollPlansResponseItem)
+
+
+export const createPayrollPlanBodyContractRevenueMin = 0;
+
+export const createPayrollPlanBodyNotesMax = 5000;
+
+
+
+export const CreatePayrollPlanBody = zod.object({
+  "jobId": zod.number(),
+  "contractRevenue": zod.number().min(createPayrollPlanBodyContractRevenueMin),
+  "status": zod.enum(['draft', 'active', 'complete']).optional(),
+  "notes": zod.string().max(createPayrollPlanBodyNotesMax).optional()
+})
+
+export const CreatePayrollPlanResponse = zod.object({
+  "id": zod.number(),
+  "jobId": zod.number(),
+  "jobTitle": zod.string(),
+  "clientName": zod.string(),
+  "contractRevenue": zod.number(),
+  "status": zod.enum(['draft', 'active', 'complete']),
+  "notes": zod.string().nullish(),
+  "entries": zod.array(zod.object({
+  "id": zod.number(),
+  "planId": zod.number(),
+  "role": zod.enum(['ceo', 'pe_stamp', 'engineer', 'operations_manager', 'other']),
+  "payeeName": zod.string(),
+  "payeeEmail": zod.string().nullish(),
+  "compensationType": zod.enum(['fixed', 'percentage']),
+  "agreedTotal": zod.number().nullish(),
+  "percentage": zod.number().nullish(),
+  "totalAmount": zod.number(),
+  "notes": zod.string().nullish(),
+  "installments": zod.array(zod.object({
+  "id": zod.number(),
+  "entryId": zod.number(),
+  "installmentNumber": zod.number(),
+  "label": zod.string(),
+  "percentage": zod.number(),
+  "amount": zod.number(),
+  "dueAt": zod.string().nullish(),
+  "status": zod.enum(['planned', 'due', 'paid']),
+  "paidAt": zod.string().nullish(),
+  "createdAt": zod.string()
+})),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})),
+  "allocatedTotal": zod.number(),
+  "remainingRevenue": zod.number(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const CreatePayrollEntryParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const createPayrollEntryBodyPayeeNameMax = 160;
+
+export const createPayrollEntryBodyPayeeEmailMax = 320;
+
+
+export const createPayrollEntryBodyPayeeEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+export const createPayrollEntryBodyAgreedTotalMin = 0;
+
+export const createPayrollEntryBodyPercentageMin = 0;
+export const createPayrollEntryBodyPercentageMax = 100;
+
+export const createPayrollEntryBodyNotesMax = 5000;
+
+export const createPayrollEntryBodyInstallmentsItemLabelMax = 120;
+
+export const createPayrollEntryBodyInstallmentsItemPercentageMin = 0.01;
+export const createPayrollEntryBodyInstallmentsItemPercentageMax = 100;
+
+
+
+
+export const CreatePayrollEntryBody = zod.object({
+  "role": zod.enum(['ceo', 'pe_stamp', 'engineer', 'operations_manager', 'other']),
+  "payeeName": zod.string().min(1).max(createPayrollEntryBodyPayeeNameMax),
+  "payeeEmail": zod.string().max(createPayrollEntryBodyPayeeEmailMax).regex(createPayrollEntryBodyPayeeEmailRegExp).optional(),
+  "compensationType": zod.enum(['fixed', 'percentage']),
+  "agreedTotal": zod.number().min(createPayrollEntryBodyAgreedTotalMin).optional(),
+  "percentage": zod.number().min(createPayrollEntryBodyPercentageMin).max(createPayrollEntryBodyPercentageMax).optional(),
+  "notes": zod.string().max(createPayrollEntryBodyNotesMax).optional(),
+  "installments": zod.array(zod.object({
+  "label": zod.string().min(1).max(createPayrollEntryBodyInstallmentsItemLabelMax),
+  "percentage": zod.number().min(createPayrollEntryBodyInstallmentsItemPercentageMin).max(createPayrollEntryBodyInstallmentsItemPercentageMax),
+  "dueAt": zod.string().optional()
+})).min(1)
+})
+
+export const CreatePayrollEntryResponse = zod.object({
+  "id": zod.number(),
+  "jobId": zod.number(),
+  "jobTitle": zod.string(),
+  "clientName": zod.string(),
+  "contractRevenue": zod.number(),
+  "status": zod.enum(['draft', 'active', 'complete']),
+  "notes": zod.string().nullish(),
+  "entries": zod.array(zod.object({
+  "id": zod.number(),
+  "planId": zod.number(),
+  "role": zod.enum(['ceo', 'pe_stamp', 'engineer', 'operations_manager', 'other']),
+  "payeeName": zod.string(),
+  "payeeEmail": zod.string().nullish(),
+  "compensationType": zod.enum(['fixed', 'percentage']),
+  "agreedTotal": zod.number().nullish(),
+  "percentage": zod.number().nullish(),
+  "totalAmount": zod.number(),
+  "notes": zod.string().nullish(),
+  "installments": zod.array(zod.object({
+  "id": zod.number(),
+  "entryId": zod.number(),
+  "installmentNumber": zod.number(),
+  "label": zod.string(),
+  "percentage": zod.number(),
+  "amount": zod.number(),
+  "dueAt": zod.string().nullish(),
+  "status": zod.enum(['planned', 'due', 'paid']),
+  "paidAt": zod.string().nullish(),
+  "createdAt": zod.string()
+})),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})),
+  "allocatedTotal": zod.number(),
+  "remainingRevenue": zod.number(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const UpdatePayrollInstallmentParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const UpdatePayrollInstallmentBody = zod.object({
+  "status": zod.enum(['planned', 'due', 'paid'])
+})
+
+export const UpdatePayrollInstallmentResponse = zod.object({
+  "id": zod.number(),
+  "jobId": zod.number(),
+  "jobTitle": zod.string(),
+  "clientName": zod.string(),
+  "contractRevenue": zod.number(),
+  "status": zod.enum(['draft', 'active', 'complete']),
+  "notes": zod.string().nullish(),
+  "entries": zod.array(zod.object({
+  "id": zod.number(),
+  "planId": zod.number(),
+  "role": zod.enum(['ceo', 'pe_stamp', 'engineer', 'operations_manager', 'other']),
+  "payeeName": zod.string(),
+  "payeeEmail": zod.string().nullish(),
+  "compensationType": zod.enum(['fixed', 'percentage']),
+  "agreedTotal": zod.number().nullish(),
+  "percentage": zod.number().nullish(),
+  "totalAmount": zod.number(),
+  "notes": zod.string().nullish(),
+  "installments": zod.array(zod.object({
+  "id": zod.number(),
+  "entryId": zod.number(),
+  "installmentNumber": zod.number(),
+  "label": zod.string(),
+  "percentage": zod.number(),
+  "amount": zod.number(),
+  "dueAt": zod.string().nullish(),
+  "status": zod.enum(['planned', 'due', 'paid']),
+  "paidAt": zod.string().nullish(),
+  "createdAt": zod.string()
+})),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})),
+  "allocatedTotal": zod.number(),
+  "remainingRevenue": zod.number(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+

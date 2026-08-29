@@ -1157,3 +1157,181 @@ export interface ResearchRunResponse {
   prospects: Prospect[];
 }
 
+export type PayrollInstallmentStatus = typeof PayrollInstallmentStatus[keyof typeof PayrollInstallmentStatus];
+
+
+export const PayrollInstallmentStatus = {
+  planned: 'planned',
+  due: 'due',
+  paid: 'paid',
+} as const;
+
+export interface PayrollInstallment {
+  id: number;
+  entryId: number;
+  installmentNumber: number;
+  label: string;
+  percentage: number;
+  amount: number;
+  /** @nullable */
+  dueAt?: string | null;
+  status: PayrollInstallmentStatus;
+  /** @nullable */
+  paidAt?: string | null;
+  createdAt: string;
+}
+
+export type PayrollEntryRole = typeof PayrollEntryRole[keyof typeof PayrollEntryRole];
+
+
+export const PayrollEntryRole = {
+  ceo: 'ceo',
+  pe_stamp: 'pe_stamp',
+  engineer: 'engineer',
+  operations_manager: 'operations_manager',
+  other: 'other',
+} as const;
+
+export type PayrollEntryCompensationType = typeof PayrollEntryCompensationType[keyof typeof PayrollEntryCompensationType];
+
+
+export const PayrollEntryCompensationType = {
+  fixed: 'fixed',
+  percentage: 'percentage',
+} as const;
+
+export interface PayrollEntry {
+  id: number;
+  planId: number;
+  role: PayrollEntryRole;
+  payeeName: string;
+  /** @nullable */
+  payeeEmail?: string | null;
+  compensationType: PayrollEntryCompensationType;
+  /** @nullable */
+  agreedTotal?: number | null;
+  /** @nullable */
+  percentage?: number | null;
+  totalAmount: number;
+  /** @nullable */
+  notes?: string | null;
+  installments: PayrollInstallment[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type PayrollPlanStatus = typeof PayrollPlanStatus[keyof typeof PayrollPlanStatus];
+
+
+export const PayrollPlanStatus = {
+  draft: 'draft',
+  active: 'active',
+  complete: 'complete',
+} as const;
+
+export interface PayrollPlan {
+  id: number;
+  jobId: number;
+  jobTitle: string;
+  clientName: string;
+  contractRevenue: number;
+  status: PayrollPlanStatus;
+  /** @nullable */
+  notes?: string | null;
+  entries: PayrollEntry[];
+  allocatedTotal: number;
+  remainingRevenue: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type PayrollPlanInputStatus = typeof PayrollPlanInputStatus[keyof typeof PayrollPlanInputStatus];
+
+
+export const PayrollPlanInputStatus = {
+  draft: 'draft',
+  active: 'active',
+  complete: 'complete',
+} as const;
+
+export interface PayrollPlanInput {
+  jobId: number;
+  /** @minimum 0 */
+  contractRevenue: number;
+  status?: PayrollPlanInputStatus;
+  /** @maxLength 5000 */
+  notes?: string;
+}
+
+export interface PayrollInstallmentInput {
+  /**
+     * @minLength 1
+     * @maxLength 120
+     */
+  label: string;
+  /**
+     * @minimum 0.01
+     * @maximum 100
+     */
+  percentage: number;
+  dueAt?: string;
+}
+
+export type PayrollEntryInputRole = typeof PayrollEntryInputRole[keyof typeof PayrollEntryInputRole];
+
+
+export const PayrollEntryInputRole = {
+  ceo: 'ceo',
+  pe_stamp: 'pe_stamp',
+  engineer: 'engineer',
+  operations_manager: 'operations_manager',
+  other: 'other',
+} as const;
+
+export type PayrollEntryInputCompensationType = typeof PayrollEntryInputCompensationType[keyof typeof PayrollEntryInputCompensationType];
+
+
+export const PayrollEntryInputCompensationType = {
+  fixed: 'fixed',
+  percentage: 'percentage',
+} as const;
+
+export interface PayrollEntryInput {
+  role: PayrollEntryInputRole;
+  /**
+     * @minLength 1
+     * @maxLength 160
+     */
+  payeeName: string;
+  /**
+     * @maxLength 320
+     * @pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$
+     */
+  payeeEmail?: string;
+  compensationType: PayrollEntryInputCompensationType;
+  /** @minimum 0 */
+  agreedTotal?: number;
+  /**
+     * @minimum 0
+     * @maximum 100
+     */
+  percentage?: number;
+  /** @maxLength 5000 */
+  notes?: string;
+  /** @minItems 1 */
+  installments: PayrollInstallmentInput[];
+}
+
+export type PayrollInstallmentUpdateStatus = typeof PayrollInstallmentUpdateStatus[keyof typeof PayrollInstallmentUpdateStatus];
+
+
+export const PayrollInstallmentUpdateStatus = {
+  planned: 'planned',
+  due: 'due',
+  paid: 'paid',
+} as const;
+
+export interface PayrollInstallmentUpdate {
+  status: PayrollInstallmentUpdateStatus;
+}
+

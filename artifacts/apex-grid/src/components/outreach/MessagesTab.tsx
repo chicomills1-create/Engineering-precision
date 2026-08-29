@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -141,6 +141,20 @@ export function MessagesTab() {
   });
   const editForm = useForm<EditMessageFormValues>({ resolver: zodResolver(editMessageSchema) });
   const suppressForm = useForm<SuppressFormValues>({ resolver: zodResolver(suppressSchema) });
+  const sourcePrefillApplied = useRef(false);
+
+  useEffect(() => {
+    if (sourcePrefillApplied.current) return;
+    const params = new URLSearchParams(window.location.search);
+    const sourceType = params.get('sourceType');
+    const sourceId = Number(params.get('sourceId'));
+    if (sourceType === 'public_opportunity' && Number.isInteger(sourceId) && sourceId > 0) {
+      sourcePrefillApplied.current = true;
+      generateForm.setValue('sourceType', sourceType);
+      generateForm.setValue('sourceId', sourceId);
+      setIsGenerateOpen(true);
+    }
+  }, [generateForm]);
 
   function onGenerate(data: GenerateFormValues) {
     generateMutation.mutate({

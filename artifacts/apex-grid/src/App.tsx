@@ -36,7 +36,7 @@ const queryClient = new QueryClient({
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-function LazyClerk({ page }: { page: 'admin' | 'admin-seo' | 'admin-outreach' | 'admin-growth' | 'sign-in' | 'sign-up' }) {
+function LazyClerk({ page }: { page: 'admin' | 'admin-seo' | 'admin-outreach' | 'admin-growth' | 'admin-payroll' | 'sign-in' | 'sign-up' }) {
   return (
     <Suspense
       fallback={
@@ -117,6 +117,9 @@ function Router() {
         </Route>
         <Route path="/admin/growth">
           <LazyClerk page="admin-growth" />
+        </Route>
+        <Route path="/admin/payroll">
+          <LazyClerk page="admin-payroll" />
         </Route>
         <Route path="/sign-in/*?">
           <LazyClerk page="sign-in" />
