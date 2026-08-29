@@ -3,6 +3,7 @@ import { logger } from "./lib/logger";
 import { startOutreachWorker } from "./lib/outreachWorker";
 import { startClientJobUploadCleanup } from "./lib/clientJobUploadCleanup";
 import { seedVerifiedOutreachBatch } from "./lib/verifiedOutreachBatch";
+import { prepareNextPhoenixOutreach } from "./lib/outreachPreparation";
 
 const rawPort = process.env["PORT"];
 
@@ -26,9 +27,13 @@ app.listen(port, (err) => {
 
   logger.info({ port }, "Server listening");
   void seedVerifiedOutreachBatch()
-    .then((result) => {
+    .then(async (result) => {
       if (result.state === "ready") {
-        logger.info({ queued: result.queued }, "Verified outreach batch prepared");
+        const preparation = await prepareNextPhoenixOutreach();
+        logger.info(
+          { prepared: preparation.prepared, shortfall: preparation.shortfall },
+          "Verified outreach candidates routed through daily preparation",
+        );
       }
       startOutreachWorker();
       startClientJobUploadCleanup();

@@ -12,4 +12,5 @@ export type CampaignAudience = typeof CampaignAudience[keyof typeof CampaignAudi
 export const CampaignAudience = {
   architect: 'architect',
   builder: 'builder',
+  mixed: 'mixed',
 } as const;

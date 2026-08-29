@@ -2,12 +2,10 @@ import { and, eq, notInArray, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
-  outreachMessagesTable,
   outreachResearchSchedulesTable,
   outreachSuppressionsTable,
   prospectsTable,
 } from "@workspace/db";
-import { getNextPhoenixEightAm } from "./outreachEligibility";
 import { assertVerifiedOutreachBatch } from "./outreachContactValidation";
 import { VERIFIED_OUTREACH_CONTACTS } from "./verifiedOutreachContacts";
 
@@ -65,7 +63,6 @@ export async function seedVerifiedOutreachBatch(options: {
     .set({ targetCount: 150 })
     .where(eq(outreachResearchSchedulesTable.campaignId, campaign.id));
 
-  const scheduledAt = getNextPhoenixEightAm(options.now);
   for (const contact of VERIFIED_OUTREACH_CONTACTS) {
     await db.transaction(async (tx) => {
       const normalizedEmail = contact.contactEmail.toLowerCase();
@@ -118,47 +115,9 @@ export async function seedVerifiedOutreachBatch(options: {
     }).returning();
       if (!prospect) return;
 
-      const [current] = await tx.select().from(prospectsTable)
-        .where(eq(prospectsTable.id, prospect.id))
-        .for("update");
-      const [suppression] = await tx.select({ id: outreachSuppressionsTable.id })
-        .from(outreachSuppressionsTable)
-        .where(eq(outreachSuppressionsTable.email, normalizedEmail))
-        .limit(1);
-      if (
-        !current
-        || suppression
-        || current.contactStatus !== "active"
-        || !["approved", "contacted"].includes(current.status)
-      ) return;
-
-      const [existingMessage] = await tx.select({ id: outreachMessagesTable.id })
-        .from(outreachMessagesTable)
-        .where(and(
-          eq(outreachMessagesTable.prospectId, prospect.id),
-          eq(outreachMessagesTable.campaignId, campaign.id),
-          eq(outreachMessagesTable.sequenceNumber, 1),
-        ))
-        .limit(1);
-      if (!existingMessage) {
-        await tx.insert(outreachMessagesTable).values({
-        prospectId: prospect.id,
-        campaignId: campaign.id,
-        sequenceNumber: 1,
-        subject: SUBJECT,
-        body: approvedOutreachBody(contact.contactName),
-        status: "approved",
-        scheduledAt,
-      });
-      }
     });
   }
-
-  const queued = await db.select({ id: outreachMessagesTable.id })
-    .from(outreachMessagesTable)
-    .where(and(
-      eq(outreachMessagesTable.campaignId, campaign.id),
-      eq(outreachMessagesTable.status, "approved"),
-    ));
-  return { state: "ready", queued: queued.length };
+  // The seed only supplies reviewed candidates. The preparation service owns all
+  // message creation so the startup path cannot bypass the shared 150-slot ledger.
+  return { state: "ready", queued: 0 };
 }

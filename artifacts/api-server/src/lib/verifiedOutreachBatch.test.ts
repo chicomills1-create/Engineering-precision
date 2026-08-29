@@ -27,6 +27,13 @@ test("the verified morning batch contains exactly 167 unique, valid contacts", (
   assert.doesNotThrow(() => assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS));
 });
 
+test("the legacy verified pool leaves daily scheduling to the 150-slot preparation service", async () => {
+  const source = await import("node:fs/promises")
+    .then((fs) => fs.readFile(new URL("./verifiedOutreachBatch.ts", import.meta.url), "utf8"));
+  assert.doesNotMatch(source, /outreachMessagesTable|status:\s*"approved",\s*scheduledAt/);
+  assert.match(source, /preparation service owns all\s*\n\s*\/\/ message creation/);
+});
+
 test("legacy placeholders cannot enter seed or approval paths", () => {
   assert.equal(isUsableBusinessEmail("null"), false);
   assert.equal(isUsableBusinessEmail("info@company.com"), false);

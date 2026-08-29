@@ -425,6 +425,28 @@ export const ProspectStatus = {
 } as const;
 
 export type ProspectContactStatus = typeof ProspectContactStatus[keyof typeof ProspectContactStatus];
+
+
+export const ProspectContactStatus = {
+  active: 'active',
+  replied: 'replied',
+  temporary_unavailable: 'temporary_unavailable',
+  departed: 'departed',
+  replacement_pending: 'replacement_pending',
+} as const;
+
+/**
+ * @nullable
+ */
+export type ProspectContactEvidenceType = typeof ProspectContactEvidenceType[keyof typeof ProspectContactEvidenceType] | null;
+
+
+export const ProspectContactEvidenceType = {
+  forwarded_reply: 'forwarded_reply',
+  temporary_unavailability: 'temporary_unavailability',
+  departed: 'departed',
+} as const;
+
 export interface Prospect {
   id: number;
   /** @nullable */
@@ -571,12 +593,50 @@ export interface ProspectInput {
 export type ProspectUpdate = ProspectInput;
 
 export type ContactEvidenceInputEvidenceType = typeof ContactEvidenceInputEvidenceType[keyof typeof ContactEvidenceInputEvidenceType];
+
+
+export const ContactEvidenceInputEvidenceType = {
+  forwarded_reply: 'forwarded_reply',
+  temporary_unavailability: 'temporary_unavailability',
+  departed: 'departed',
+} as const;
+
+export interface ContactEvidenceInput {
+  evidenceType: ContactEvidenceInputEvidenceType;
+  /**
+     * @minLength 1
+     * @maxLength 4000
+     */
+  evidenceNote: string;
+  reviewAt?: string;
+  /** @maxLength 160 */
+  replacementContactName?: string;
+  /** @maxLength 160 */
+  replacementContactTitle?: string;
+  /**
+     * @maxLength 320
+     * @pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$
+     */
+  replacementContactEmail?: string;
+  /** @maxLength 1000 */
+  replacementContactSourceUrl?: string;
+}
+
+export interface ContactEvidenceResult {
+  prospect: Prospect;
+  stoppedMessageCount: number;
+  /** @nullable */
+  suppressedEmail: string | null;
+  replacementPending: boolean;
+}
+
 export type CampaignAudience = typeof CampaignAudience[keyof typeof CampaignAudience];
 
 
 export const CampaignAudience = {
   architect: 'architect',
   builder: 'builder',
+  mixed: 'mixed',
 } as const;
 
 export type CampaignStatesItem = typeof CampaignStatesItem[keyof typeof CampaignStatesItem];
@@ -622,6 +682,7 @@ export type CampaignInputAudience = typeof CampaignInputAudience[keyof typeof Ca
 export const CampaignInputAudience = {
   architect: 'architect',
   builder: 'builder',
+  mixed: 'mixed',
 } as const;
 
 export type CampaignInputStatesItem = typeof CampaignInputStatesItem[keyof typeof CampaignInputStatesItem];
@@ -1369,57 +1430,3 @@ export interface PayrollInstallmentUpdate {
   status: PayrollInstallmentUpdateStatus;
 }
 
-
-export const ProspectContactStatus = {
-  active: 'active',
-  replied: 'replied',
-  temporary_unavailable: 'temporary_unavailable',
-  departed: 'departed',
-  replacement_pending: 'replacement_pending',
-} as const;
-
-/**
- * @nullable
- */
-export type ProspectContactEvidenceType = typeof ProspectContactEvidenceType[keyof typeof ProspectContactEvidenceType] | null;
-
-export interface ContactEvidenceResult {
-  prospect: Prospect;
-  stoppedMessageCount: number;
-  /** @nullable */
-  suppressedEmail: string | null;
-  replacementPending: boolean;
-}
-
-export const ContactEvidenceInputEvidenceType = {
-  forwarded_reply: 'forwarded_reply',
-  temporary_unavailability: 'temporary_unavailability',
-  departed: 'departed',
-} as const;
-
-export interface ContactEvidenceInput {
-  evidenceType: ContactEvidenceInputEvidenceType;
-  /**
-     * @minLength 1
-     * @maxLength 4000
-     */
-  evidenceNote: string;
-  reviewAt?: string;
-  /** @maxLength 160 */
-  replacementContactName?: string;
-  /** @maxLength 160 */
-  replacementContactTitle?: string;
-  /**
-     * @maxLength 320
-     * @pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$
-     */
-  replacementContactEmail?: string;
-  /** @maxLength 1000 */
-  replacementContactSourceUrl?: string;
-}
-
-export const ProspectContactEvidenceType = {
-  forwarded_reply: 'forwarded_reply',
-  temporary_unavailability: 'temporary_unavailability',
-  departed: 'departed',
-} as const;

@@ -1355,7 +1355,7 @@ components:
       properties:
         id: { type: number }
         name: { type: string }
-        audience: { type: string, enum: [architect, builder] }
+        audience: { type: string, enum: [architect, builder, mixed] }
         states: { type: array, items: { type: string, enum: [AZ, CA, TX] } }
         dailyLimit: { type: number, minimum: 1, maximum: 150 }
         status: { type: string, enum: [draft, active, paused] }
@@ -1368,7 +1368,7 @@ components:
       required: [name, audience, states]
       properties:
         name: { type: string, minLength: 1 }
-        audience: { type: string, enum: [architect, builder] }
+        audience: { type: string, enum: [architect, builder, mixed] }
         states: { type: array, minItems: 1, items: { type: string, enum: [AZ, CA, TX] } }
         dailyLimit: { type: number, minimum: 1, maximum: 150, default: 150 }
         status: { type: string, enum: [draft, active, paused] }
