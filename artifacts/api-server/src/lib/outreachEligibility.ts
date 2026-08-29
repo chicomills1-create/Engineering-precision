@@ -43,7 +43,10 @@ export function assertOutreachEligibilityBase(
   if (prospect.emailStatus !== "verified") throw new Error("Prospect email must be verified before sending");
   if (campaign) {
     if (campaign.status !== "active") throw new Error("Campaign must be active before sending");
-    if (campaign.audience !== prospect.audience || !campaign.states.includes(prospect.state)) {
+    if (
+      (campaign.audience !== "mixed" && campaign.audience !== prospect.audience)
+      || !campaign.states.includes(prospect.state)
+    ) {
       throw new Error("Campaign targeting does not match the prospect");
     }
   }
