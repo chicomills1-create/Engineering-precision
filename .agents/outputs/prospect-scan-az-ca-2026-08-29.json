@@ -2,9 +2,10 @@
   "scanDate": "2026-08-29",
   "scope": {
     "priority": "Arizona",
-    "secondary": "California",
+    "secondary": "California (deferred)",
     "audiences": ["architect", "builder"],
-    "sourcePolicy": "Public company and project evidence only; no guessed contacts"
+    "sourcePolicy": "Public company and project evidence only; no guessed contacts",
+    "nextAction": "Enrich and review Arizona architecture and commercial-construction prospects before working the California list"
   },
   "leads": [
     {
