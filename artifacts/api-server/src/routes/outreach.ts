@@ -33,6 +33,7 @@ import {
   sendApprovedOutreach,
 } from "../lib/outreach";
 import { verifyUnsubscribeToken } from "../lib/unsubscribeToken";
+import { suppressOutreachEmail } from "../lib/outreachSuppression";
 import { discoverPublicProspects } from "../lib/publicResearch";
 import { getOutreachAutomationStatus } from "../lib/outreachWorker";
 import {
@@ -396,18 +397,7 @@ async function unsubscribeOutreach(req: Request, res: Response): Promise<void> {
   const data = UnsubscribeOutreachAddressBody.safeParse({ email: req.body?.email ?? req.query.email, token: req.body?.token ?? req.query.token });
   if (!data.success || !verifyUnsubscribeToken(data.success ? data.data.email : "", data.success ? data.data.token : "")) { res.status(400).json({ error: "Invalid unsubscribe request" }); return; }
   const email = normalizeEmail(data.data.email);
-  await db.insert(outreachSuppressionsTable).values({ email, reason: "unsubscribe" }).onConflictDoNothing();
-  const matchingProspects = await db.select({ id: prospectsTable.id }).from(prospectsTable).where(eq(prospectsTable.contactEmail, email));
-  const prospectIds = matchingProspects.map((prospect) => prospect.id);
-  if (prospectIds.length > 0) {
-    await db.update(prospectsTable).set({ status: "suppressed" }).where(inArray(prospectsTable.id, prospectIds));
-    await db.update(outreachMessagesTable)
-      .set({ status: "unsubscribed", error: "Sequence stopped after unsubscribe" })
-      .where(and(
-        inArray(outreachMessagesTable.prospectId, prospectIds),
-        inArray(outreachMessagesTable.status, ["draft", "approved", "sending"]),
-      ));
-  }
+  await suppressOutreachEmail(email);
   res.json(UnsubscribeOutreachAddressResponse.parse({ ok: true }));
 }
 router.get("/outreach/unsubscribe", unsubscribeOutreach);

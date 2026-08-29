@@ -1,5 +1,8 @@
-import { Router, type IRouter } from "express";
-import { db, subscribersTable } from "@workspace/db";
+import { Router, type IRouter, type Request, type Response } from "express";
+import {
+  db,
+  subscribersTable,
+} from "@workspace/db";
 import {
   CreateSubscriberBody,
   CreateSubscriberResponse,
@@ -12,6 +15,7 @@ import {
 import { requireAuth } from "../middlewares/requireAuth";
 import { sendWelcomeEmail } from "../lib/welcomeEmail";
 import { verifyUnsubscribeToken } from "../lib/unsubscribeToken";
+import { suppressOutreachEmail } from "../lib/outreachSuppression";
 import { desc, eq, isNull, sql } from "drizzle-orm";
 
 const router: IRouter = Router();
@@ -76,8 +80,11 @@ router.post("/subscribers", async (req, res): Promise<void> => {
   res.status(201).json(CreateSubscriberResponse.parse({ ok: true }));
 });
 
-router.post("/subscribers/unsubscribe", async (req, res): Promise<void> => {
-  const parsed = UnsubscribeSubscriberBody.safeParse(req.body);
+async function unsubscribeSubscriber(req: Request, res: Response): Promise<void> {
+  const parsed = UnsubscribeSubscriberBody.safeParse({
+    email: req.body?.email ?? req.query.email,
+    token: req.body?.token ?? req.query.token,
+  });
   if (!parsed.success) {
     res.status(400).json({ error: parsed.error.message });
     return;
@@ -98,9 +105,13 @@ router.post("/subscribers/unsubscribe", async (req, res): Promise<void> => {
     .update(subscribersTable)
     .set({ unsubscribedAt: new Date() })
     .where(eq(subscribersTable.email, email));
+  await suppressOutreachEmail(email);
 
   res.json(UnsubscribeSubscriberResponse.parse({ ok: true }));
-});
+}
+
+router.post("/subscribers/unsubscribe", unsubscribeSubscriber);
+router.post("/subscribers/one-click-unsubscribe", unsubscribeSubscriber);
 
 router.delete(
   "/subscribers/:id",

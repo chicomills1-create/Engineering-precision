@@ -6,7 +6,10 @@ import {
   db,
   outreachSuppressionsTable,
 } from "@workspace/db";
-import { getPublicBaseUrl, makeUnsubscribeToken } from "./unsubscribeToken";
+import {
+  makeOneClickUnsubscribeUrl,
+  makeUnsubscribeUrl,
+} from "./unsubscribeToken";
 import { renderBrandedEmail } from "./emailMarkup";
 
 const EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -102,11 +105,10 @@ export async function sendClientMonthlyMessage(
 ): Promise<{ providerMessageId?: string }> {
   const current = (await getClientMonthlySafeList()).find((item) => item.email === contact.email);
   if (!current) throw new Error("Contact is no longer eligible");
-  const token = makeUnsubscribeToken(contact.email);
-  const baseUrl = getPublicBaseUrl();
-  if (!token || !baseUrl) throw new Error("Unsubscribe signing is not configured");
-  const unsubscribe = `${baseUrl}/api/outreach/unsubscribe?${new URLSearchParams({ email: contact.email, token })}`;
-  const emailContent = renderBrandedEmail(messageBody, unsubscribe);
+  const unsubscribeUrl = makeUnsubscribeUrl(contact.email);
+  const oneClickUrl = makeOneClickUnsubscribeUrl(contact.email);
+  if (!unsubscribeUrl || !oneClickUrl) throw new Error("Unsubscribe signing is not configured");
+  const emailContent = renderBrandedEmail(messageBody, unsubscribeUrl);
   const from = process.env.OUTREACH_FROM_EMAIL;
   if (!from) throw new Error("OUTREACH_FROM_EMAIL is not configured");
   const replyTo = process.env.OUTREACH_REPLY_TO_EMAIL?.trim() || from;
@@ -114,7 +116,7 @@ export async function sendClientMonthlyMessage(
     personalizations: [{
       to: [{ email: contact.email, name: contact.name }],
       headers: {
-        "List-Unsubscribe": `<${unsubscribe}>`,
+        "List-Unsubscribe": `<${oneClickUrl}>`,
         "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
       },
       custom_args: { client_monthly_job_id: String(contact.jobId) },

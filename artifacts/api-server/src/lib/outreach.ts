@@ -12,7 +12,10 @@ import {
   type OutreachMessage,
   type Prospect,
 } from "@workspace/db";
-import { getPublicBaseUrl, makeUnsubscribeToken } from "./unsubscribeToken";
+import {
+  makeOneClickUnsubscribeUrl,
+  makeUnsubscribeUrl,
+} from "./unsubscribeToken";
 import { renderBrandedEmail } from "./emailMarkup";
 import {
   assertOutreachEligibilityBase,
@@ -110,12 +113,10 @@ export async function sendApprovedOutreach(message: OutreachMessage, prospect: P
   const [suppression] = await db.select({ id: outreachSuppressionsTable.id }).from(outreachSuppressionsTable).where(eq(outreachSuppressionsTable.email, email)).limit(1);
   if (suppression) throw new Error("Address is suppressed");
 
-  const token = makeUnsubscribeToken(email);
-  const baseUrl = getPublicBaseUrl();
-  if (!token || !baseUrl) throw new Error("Unsubscribe signing is not configured");
-  const unsubscribe = `${baseUrl}/api/outreach/unsubscribe?${new URLSearchParams({ email, token })}`;
-  const oneClick = unsubscribe;
-  const emailContent = renderBrandedEmail(message.body, unsubscribe);
+  const unsubscribeUrl = makeUnsubscribeUrl(email);
+  const oneClickUrl = makeOneClickUnsubscribeUrl(email);
+  if (!unsubscribeUrl || !oneClickUrl) throw new Error("Unsubscribe signing is not configured");
+  const emailContent = renderBrandedEmail(message.body, unsubscribeUrl);
   const from = process.env.OUTREACH_FROM_EMAIL;
   if (!from) throw new Error("OUTREACH_FROM_EMAIL is not configured");
   const replyTo = process.env.OUTREACH_REPLY_TO_EMAIL?.trim() || from;
@@ -130,7 +131,7 @@ export async function sendApprovedOutreach(message: OutreachMessage, prospect: P
       personalizations: [{
         to: [{ email }],
         headers: {
-          "List-Unsubscribe": `<${oneClick}>`,
+          "List-Unsubscribe": `<${oneClickUrl}>`,
           "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
         },
         custom_args: {
