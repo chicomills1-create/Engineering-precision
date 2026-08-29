@@ -5,6 +5,7 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { OutreachDashboardNextPreparationStatus } from './outreachDashboardNextPreparationStatus';
 
 export interface OutreachDashboard {
   prospects: number;
@@ -12,6 +13,15 @@ export interface OutreachDashboard {
   messages: number;
   sentToday: number;
   replies: number;
+  nextPreparationDate: string;
+  nextPreparationTarget: number;
+  nextPreparationPrepared: number;
+  nextPreparationShortfall: number;
+  nextPreparationStatus: OutreachDashboardNextPreparationStatus;
+  /** @nullable */
+  nextPreparationCompletedAt: string | null;
+  /** @nullable */
+  nextPreparationError: string | null;
   adminAllowlistReady: boolean;
   productionConfigReady: boolean;
   sendgridDeliveryPathReady: boolean;

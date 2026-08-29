@@ -15,6 +15,7 @@ import {
   syncSendGridInboundReplyWebhook,
 } from "./outreachEvents";
 import { processDueOutreachResearchSchedules } from "./outreachResearchScheduler";
+import { prepareNextPhoenixOutreach } from "./outreachPreparation";
 
 const ADMIN_EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const SEND_REVIEW_AFTER_MS = 15 * 60 * 1000;
@@ -264,13 +265,20 @@ export function startOutreachWorker(): void {
   }
 
   if (status.automationReady) {
-    const sendTimer = setInterval(() => {
+    const runProductionAutomation = () => {
       void processDueOutreachMessages()
-        .then((sentCount) => {
+        .then(async (sentCount) => {
           if (sentCount > 0) logger.info({ sentCount }, "Processed scheduled outreach messages");
+          const preparation = await prepareNextPhoenixOutreach();
+          if (preparation.state === "completed") {
+            logger.info(preparation, "Prepared next Phoenix outreach window");
+          } else if (preparation.state === "failed") {
+            logger.error(preparation, "Next Phoenix outreach preparation failed");
+          }
         })
-        .catch((err: unknown) => logger.error({ err }, "Outreach send scheduler failed"));
-    }, 60_000);
+        .catch((err: unknown) => logger.error({ err }, "Outreach production scheduler failed"));
+    };
+    const sendTimer = setInterval(runProductionAutomation, 60_000);
     sendTimer.unref();
     logger.info("Outreach send scheduler enabled");
   }

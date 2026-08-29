@@ -10,7 +10,7 @@ import {
   getPhoenixCalendarDayStart,
   isOutreachContactExcluded,
 } from "./outreachEligibility";
-import { getOutreachDailyLimit } from "./outreach";
+import { getLegacyOutreachSentCount, getOutreachDailyLimit } from "./outreach";
 
   const now = new Date("2026-08-28T12:00:00.000Z");
 const eligibleProspect: Prospect = {
@@ -144,6 +144,12 @@ test("enforces the 150-per-day campaign ceiling from the first send day", () => 
   assert.equal(getOutreachDailyLimit(167, 0), 150);
   assert.equal(getOutreachDailyLimit(500, 0), 150);
   assert.equal(getOutreachDailyLimit(500, 3), 150);
+});
+
+test("legacy same-day sends consume the new global reservation ceiling", () => {
+  assert.equal(getLegacyOutreachSentCount(167, 0), 167);
+  assert.equal(getLegacyOutreachSentCount(100, 100), 0);
+  assert.equal(getLegacyOutreachSentCount(120, 20), 100);
 });
 
 const blockedCases: Array<[string, Partial<Prospect>, Partial<OutreachMessage>, Partial<Campaign>, string]> = [

@@ -98,6 +98,21 @@ export const outreachResearchScheduleRunsTable = pgTable("outreach_research_sche
   uniqueIndex("outreach_research_schedule_runs_date_unique").on(table.runDate),
 ]);
 
+export const outreachPreparationRunsTable = pgTable("outreach_preparation_runs", {
+  id: serial("id").primaryKey(),
+  targetDate: text("target_date").notNull(),
+  status: text("status").notNull().default("running"),
+  targetCount: integer("target_count").notNull().default(150),
+  preparedCount: integer("prepared_count").notNull().default(0),
+  skippedCount: integer("skipped_count").notNull().default(0),
+  shortfallCount: integer("shortfall_count").notNull().default(0),
+  error: text("error"),
+  startedAt: timestamp("started_at", { withTimezone: true }).notNull().defaultNow(),
+  completedAt: timestamp("completed_at", { withTimezone: true }),
+}, (table) => [
+  uniqueIndex("outreach_preparation_runs_target_date_unique").on(table.targetDate),
+]);
+
 export const outreachMessagesTable = pgTable("outreach_messages", {
   id: serial("id").primaryKey(),
   prospectId: integer("prospect_id").notNull().references(() => prospectsTable.id, { onDelete: "cascade" }),
@@ -116,6 +131,20 @@ export const outreachMessagesTable = pgTable("outreach_messages", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
 });
+
+export const outreachPreparationSlotsTable = pgTable("outreach_preparation_slots", {
+  id: serial("id").primaryKey(),
+  runId: integer("run_id").notNull().references(() => outreachPreparationRunsTable.id, { onDelete: "cascade" }),
+  targetDate: text("target_date").notNull(),
+  slot: integer("slot").notNull(),
+  prospectId: integer("prospect_id").notNull().references(() => prospectsTable.id, { onDelete: "restrict" }),
+  messageId: integer("message_id").references(() => outreachMessagesTable.id, { onDelete: "set null" }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [
+  uniqueIndex("outreach_preparation_slots_target_slot_unique").on(table.targetDate, table.slot),
+  uniqueIndex("outreach_preparation_slots_target_prospect_unique").on(table.targetDate, table.prospectId),
+  uniqueIndex("outreach_preparation_slots_message_unique").on(table.messageId),
+]);
 
 export const outreachSequenceSendClaimsTable = pgTable("outreach_sequence_send_claims", {
   id: serial("id").primaryKey(),
@@ -191,6 +220,8 @@ export const insertProspectSchema = createInsertSchema(prospectsTable).omit({ id
 export const insertCampaignSchema = createInsertSchema(campaignsTable).omit({ id: true, createdAt: true, updatedAt: true });
 export const insertResearchScheduleSchema = createInsertSchema(outreachResearchSchedulesTable).omit({ id: true, createdAt: true, updatedAt: true });
 export const insertResearchScheduleRunSchema = createInsertSchema(outreachResearchScheduleRunsTable).omit({ id: true, startedAt: true, completedAt: true });
+export const insertPreparationRunSchema = createInsertSchema(outreachPreparationRunsTable).omit({ id: true, startedAt: true, completedAt: true });
+export const insertPreparationSlotSchema = createInsertSchema(outreachPreparationSlotsTable).omit({ id: true, createdAt: true });
 export const insertOutreachMessageSchema = createInsertSchema(outreachMessagesTable).omit({ id: true, createdAt: true, updatedAt: true });
 export const insertOutreachSequenceSendClaimSchema = createInsertSchema(outreachSequenceSendClaimsTable).omit({ id: true, createdAt: true });
 export const insertOutreachSuppressionSchema = createInsertSchema(outreachSuppressionsTable).omit({ id: true, createdAt: true });
@@ -207,6 +238,10 @@ export type ResearchSchedule = typeof outreachResearchSchedulesTable.$inferSelec
 export type ResearchScheduleRun = typeof outreachResearchScheduleRunsTable.$inferSelect;
 export type InsertResearchSchedule = z.infer<typeof insertResearchScheduleSchema>;
 export type InsertResearchScheduleRun = z.infer<typeof insertResearchScheduleRunSchema>;
+export type PreparationRun = typeof outreachPreparationRunsTable.$inferSelect;
+export type InsertPreparationRun = z.infer<typeof insertPreparationRunSchema>;
+export type PreparationSlot = typeof outreachPreparationSlotsTable.$inferSelect;
+export type InsertPreparationSlot = z.infer<typeof insertPreparationSlotSchema>;
 export type InsertOutreachMessage = z.infer<typeof insertOutreachMessageSchema>;
 export type OutreachMessage = typeof outreachMessagesTable.$inferSelect;
 export type InsertOutreachSuppression = z.infer<typeof insertOutreachSuppressionSchema>;

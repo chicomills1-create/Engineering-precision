@@ -16,7 +16,7 @@ export interface Campaign {
   states: CampaignStatesItem[];
   /**
      * @minimum 1
-     * @maximum 500
+     * @maximum 150
      */
   dailyLimit: number;
   status: CampaignStatus;

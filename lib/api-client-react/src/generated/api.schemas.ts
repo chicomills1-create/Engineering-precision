@@ -593,7 +593,7 @@ export interface Campaign {
   states: CampaignStatesItem[];
   /**
      * @minimum 1
-     * @maximum 500
+     * @maximum 150
      */
   dailyLimit: number;
   status: CampaignStatus;
@@ -639,7 +639,7 @@ export interface CampaignInput {
   states: CampaignInputStatesItem[];
   /**
      * @minimum 1
-     * @maximum 500
+     * @maximum 150
      */
   dailyLimit?: number;
   status?: CampaignInputStatus;
@@ -769,12 +769,32 @@ export interface OutreachUnsubscribeInput {
   token: string;
 }
 
+export type OutreachDashboardNextPreparationStatus = typeof OutreachDashboardNextPreparationStatus[keyof typeof OutreachDashboardNextPreparationStatus];
+
+
+export const OutreachDashboardNextPreparationStatus = {
+  not_started: 'not_started',
+  pending: 'pending',
+  running: 'running',
+  completed: 'completed',
+  failed: 'failed',
+} as const;
+
 export interface OutreachDashboard {
   prospects: number;
   campaigns: number;
   messages: number;
   sentToday: number;
   replies: number;
+  nextPreparationDate: string;
+  nextPreparationTarget: number;
+  nextPreparationPrepared: number;
+  nextPreparationShortfall: number;
+  nextPreparationStatus: OutreachDashboardNextPreparationStatus;
+  /** @nullable */
+  nextPreparationCompletedAt: string | null;
+  /** @nullable */
+  nextPreparationError: string | null;
   adminAllowlistReady: boolean;
   productionConfigReady: boolean;
   sendgridDeliveryPathReady: boolean;

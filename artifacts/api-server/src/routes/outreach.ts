@@ -52,6 +52,10 @@ import {
 } from "../lib/clientMonthlyOutreach";
 import { validateAttributionPair, validateAttributionSourceStatus, type AttributionSourceType } from "../lib/growthAttribution";
 import { assertOutreachEligibilityBase, getNextPhoenixEightAm, getPhoenixCalendarDayStart } from "../lib/outreachEligibility";
+import {
+  approveInitialMessageInPreparationWindow,
+  getNextOutreachPreparationStatus,
+} from "../lib/outreachPreparation";
 
 const router: IRouter = Router();
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
@@ -116,11 +120,12 @@ const researchScheduleJson = (
 router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> => {
   const automationStatus = getOutreachAutomationStatus();
   const start = getPhoenixCalendarDayStart();
-  const [[prospects], [campaigns], [messages], [sentToday], [replies]] = await Promise.all([
+  const [[prospects], [campaigns], [messages], [sentToday], [replies], preparation] = await Promise.all([
     db.select({ value: count() }).from(prospectsTable), db.select({ value: count() }).from(campaignsTable),
     db.select({ value: count() }).from(outreachMessagesTable),
     db.select({ value: count() }).from(outreachMessagesTable).where(gte(outreachMessagesTable.sentAt, start)),
     db.select({ value: count() }).from(outreachMessagesTable).where(eq(outreachMessagesTable.status, "replied")),
+    getNextOutreachPreparationStatus(),
   ]);
   res.json(GetOutreachDashboardResponse.parse({
     prospects: prospects?.value ?? 0,
@@ -128,6 +133,13 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     messages: messages?.value ?? 0,
     sentToday: sentToday?.value ?? 0,
     replies: replies?.value ?? 0,
+    nextPreparationDate: preparation.targetDate,
+    nextPreparationTarget: preparation.targetCount,
+    nextPreparationPrepared: preparation.preparedCount,
+    nextPreparationShortfall: preparation.shortfallCount,
+    nextPreparationStatus: preparation.status,
+    nextPreparationCompletedAt: preparation.completedAt?.toISOString() ?? null,
+    nextPreparationError: preparation.error,
     ...automationStatus,
   }));
 });
@@ -349,7 +361,24 @@ router.post("/outreach/messages/:id/approve", requireAuth, async (req, res): Pro
     res.status(409).json({ error: `Approval blocked: ${blocker}` });
     return;
   }
-  const [row] = await db.update(outreachMessagesTable).set({ status: "approved", scheduledAt: getNextPhoenixEightAm() }).where(and(eq(outreachMessagesTable.id, p.data.id), eq(outreachMessagesTable.status, "draft"))).returning();
+  let row: typeof outreachMessagesTable.$inferSelect | undefined;
+  try {
+    if (message.sequenceNumber === 1) {
+      row = await approveInitialMessageInPreparationWindow(message.id);
+    } else {
+      [row] = await db.update(outreachMessagesTable)
+        .set({ status: "approved", scheduledAt: getNextPhoenixEightAm() })
+        .where(and(
+          eq(outreachMessagesTable.id, p.data.id),
+          eq(outreachMessagesTable.status, "draft"),
+        ))
+        .returning();
+    }
+  } catch (error) {
+    const blocker = error instanceof Error ? error.message : "Unable to reserve the preparation window";
+    res.status(409).json({ error: `Approval blocked: ${blocker}` });
+    return;
+  }
   if (!row) { res.status(409).json({ error: "Only draft messages can be approved" }); return; } res.json(ApproveOutreachMessageResponse.parse(await messageJson(row)));
 });
 router.post("/outreach/messages/:id/send", requireAuth, async (req, res): Promise<void> => {

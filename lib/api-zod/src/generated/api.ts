@@ -602,6 +602,13 @@ export const GetOutreachDashboardResponse = zod.object({
   "messages": zod.number(),
   "sentToday": zod.number(),
   "replies": zod.number(),
+  "nextPreparationDate": zod.string(),
+  "nextPreparationTarget": zod.number(),
+  "nextPreparationPrepared": zod.number(),
+  "nextPreparationShortfall": zod.number(),
+  "nextPreparationStatus": zod.enum(['not_started', 'pending', 'running', 'completed', 'failed']),
+  "nextPreparationCompletedAt": zod.string().nullable(),
+  "nextPreparationError": zod.string().nullable(),
   "adminAllowlistReady": zod.boolean(),
   "productionConfigReady": zod.boolean(),
   "sendgridDeliveryPathReady": zod.boolean(),
@@ -865,7 +872,7 @@ export const MarkOutreachProspectRepliedResponse = zod.object({
 })
 
 
-export const listCampaignsResponseDailyLimitMax = 500;
+export const listCampaignsResponseDailyLimitMax = 150;
 
 
 
@@ -886,8 +893,8 @@ export const ListCampaignsResponse = zod.array(ListCampaignsResponseItem)
 
 
 
-export const createCampaignBodyDailyLimitDefault = 100;
-export const createCampaignBodyDailyLimitMax = 500;
+export const createCampaignBodyDailyLimitDefault = 150;
+export const createCampaignBodyDailyLimitMax = 150;
 
 
 
@@ -901,7 +908,7 @@ export const CreateCampaignBody = zod.object({
   "bodyTemplate": zod.string().optional()
 })
 
-export const createCampaignResponseDailyLimitMax = 500;
+export const createCampaignResponseDailyLimitMax = 150;
 
 
 
@@ -925,8 +932,8 @@ export const UpdateCampaignParams = zod.object({
 
 
 
-export const updateCampaignBodyOneDailyLimitDefault = 100;
-export const updateCampaignBodyOneDailyLimitMax = 500;
+export const updateCampaignBodyOneDailyLimitDefault = 150;
+export const updateCampaignBodyOneDailyLimitMax = 150;
 
 
 
@@ -940,7 +947,7 @@ export const UpdateCampaignBody = zod.object({
   "bodyTemplate": zod.string().optional()
 })
 
-export const updateCampaignResponseDailyLimitMax = 500;
+export const updateCampaignResponseDailyLimitMax = 150;
 
 
 

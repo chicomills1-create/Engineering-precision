@@ -1,6 +1,6 @@
 import { ReplitConnectors } from "@replit/connectors-sdk";
 import { openai } from "@workspace/integrations-openai-ai-server";
-import { and, eq, isNotNull, isNull, sql } from "drizzle-orm";
+import { and, count, eq, gte, isNotNull, isNull, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
@@ -22,6 +22,7 @@ import {
   assertOutreachEligibilityBase,
   assertScheduledTimeReady,
   assertSequenceDeliveryReady,
+  getPhoenixCalendarDayStart,
 } from "./outreachEligibility";
 
 export type GeneratedDraft = { subject: string; body: string; followUps: { subject: string; body: string }[] };
@@ -79,6 +80,10 @@ export function getOutreachDailyLimit(configuredLimit: number | undefined, activ
   return Math.min(rampLimit, INITIAL_RAMP_DAILY_LIMIT);
 }
 
+export function getLegacyOutreachSentCount(totalSent: number, globallyReservedSent: number): number {
+  return Math.max(0, totalSent - globallyReservedSent);
+}
+
 async function getCampaignActiveSendDays(campaignId: number): Promise<number> {
   const sentMessages = await db.select({ sentAt: outreachMessagesTable.sentAt })
     .from(outreachMessagesTable)
@@ -90,17 +95,54 @@ async function getCampaignActiveSendDays(campaignId: number): Promise<number> {
 }
 
 async function reserveDailySend(message: OutreachMessage, campaign: Campaign | undefined): Promise<number> {
-  const quotaKey = `${campaign ? `campaign:${campaign.id}` : "standalone"}:${phoenixDateKey()}`;
+  const quotaKey = `outreach-global:${phoenixDateKey()}`;
   const activeSendDays = campaign ? await getCampaignActiveSendDays(campaign.id) : INITIAL_RAMP_ACTIVE_DAYS;
-  const limit = getOutreachDailyLimit(campaign?.dailyLimit, activeSendDays);
-  for (let slot = 1; slot <= limit; slot += 1) {
-    const inserted = await db.insert(outreachSendReservationsTable)
-      .values({ messageId: message.id, quotaKey, slot })
-      .onConflictDoNothing()
-      .returning({ id: outreachSendReservationsTable.id });
-    if (inserted[0]) return inserted[0].id;
-  }
-  throw new DailySendLimitError();
+  const campaignLimit = getOutreachDailyLimit(campaign?.dailyLimit, activeSendDays);
+  const dayStart = getPhoenixCalendarDayStart();
+  return db.transaction(async (tx) => {
+    await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${quotaKey}))`);
+    if (campaign) {
+      const [campaignReservations] = await tx.select({ value: count() })
+        .from(outreachSendReservationsTable)
+        .innerJoin(
+          outreachMessagesTable,
+          eq(outreachSendReservationsTable.messageId, outreachMessagesTable.id),
+        )
+        .where(and(
+          eq(outreachSendReservationsTable.quotaKey, quotaKey),
+          eq(outreachMessagesTable.campaignId, campaign.id),
+        ));
+      if ((campaignReservations?.value ?? 0) >= campaignLimit) {
+        throw new DailySendLimitError();
+      }
+    }
+    const [[alreadySent], [globallyReservedSent]] = await Promise.all([
+      tx.select({ value: count() }).from(outreachMessagesTable)
+        .where(gte(outreachMessagesTable.sentAt, dayStart)),
+      tx.select({ value: count() })
+        .from(outreachSendReservationsTable)
+        .innerJoin(
+          outreachMessagesTable,
+          eq(outreachSendReservationsTable.messageId, outreachMessagesTable.id),
+        )
+        .where(and(
+          eq(outreachSendReservationsTable.quotaKey, quotaKey),
+          gte(outreachMessagesTable.sentAt, dayStart),
+        )),
+    ]);
+    const legacySent = getLegacyOutreachSentCount(
+      alreadySent?.value ?? 0,
+      globallyReservedSent?.value ?? 0,
+    );
+    for (let slot = legacySent + 1; slot <= INITIAL_RAMP_DAILY_LIMIT; slot += 1) {
+      const [inserted] = await tx.insert(outreachSendReservationsTable)
+        .values({ messageId: message.id, quotaKey, slot })
+        .onConflictDoNothing()
+        .returning({ id: outreachSendReservationsTable.id });
+      if (inserted) return inserted.id;
+    }
+    throw new DailySendLimitError();
+  });
 }
 
 export async function reserveSequenceSend(message: OutreachMessage): Promise<number> {

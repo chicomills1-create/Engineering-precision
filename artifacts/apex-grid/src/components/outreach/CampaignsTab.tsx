@@ -30,7 +30,7 @@ const campaignSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   audience: z.enum(['architect', 'builder']),
   states: z.array(z.enum(['AZ', 'CA', 'TX'])).min(1, 'Select at least one state'),
-  dailyLimit: z.coerce.number().min(1).max(500),
+  dailyLimit: z.coerce.number().min(1).max(150),
   subjectTemplate: z.string().optional(),
   bodyTemplate: z.string().optional(),
 });
@@ -92,7 +92,7 @@ export function CampaignsTab() {
       name: '',
       audience: 'architect',
       states: [],
-       dailyLimit: 167,
+      dailyLimit: 150,
       subjectTemplate: '',
       bodyTemplate: '',
     },
@@ -124,7 +124,7 @@ export function CampaignsTab() {
       data: {
         enabled: !schedule?.enabled,
         localHour: 8,
-         targetCount: Math.min(167, campaign.dailyLimit),
+        targetCount: Math.min(150, campaign.dailyLimit),
       },
     });
   }
@@ -217,9 +217,9 @@ export function CampaignsTab() {
                     name="dailyLimit"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Daily Limit (1-500)</FormLabel>
+                        <FormLabel>Daily Limit (1-150)</FormLabel>
                         <FormControl>
-                          <Input type="number" min={1} max={500} {...field} data-testid="input-campaign-limit" />
+                          <Input type="number" min={1} max={150} {...field} data-testid="input-campaign-limit" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>

@@ -14,6 +14,10 @@ const CAMPAIGN_NAME = "Approved 8 AM Outreach - August 2026";
 const SUBJECT = "Need stamped engineering without the usual wait or cost?";
 export { VERIFIED_OUTREACH_CONTACTS } from "./verifiedOutreachContacts";
 
+export function approvedOutreachSubject(): string {
+  return SUBJECT;
+}
+
 export function approvedOutreachBody(contactName: string): string {
   const firstName = contactName.trim().split(/\s+/)[0];
   return `Hi ${firstName},
