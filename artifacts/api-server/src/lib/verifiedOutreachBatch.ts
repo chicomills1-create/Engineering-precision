@@ -3,6 +3,7 @@ import {
   campaignsTable,
   db,
   outreachMessagesTable,
+  outreachResearchSchedulesTable,
   prospectsTable,
 } from "@workspace/db";
 import { getNextPhoenixEightAm } from "./outreachEligibility";
@@ -166,6 +167,17 @@ export async function seedVerifiedOutreachBatch(options: {
     }).returning();
   }
   if (!campaign) throw new Error("Unable to create the verified outreach campaign");
+  if (campaign.dailyLimit !== 167) {
+    const [updatedCampaign] = await db.update(campaignsTable)
+      .set({ dailyLimit: 167 })
+      .where(eq(campaignsTable.id, campaign.id))
+      .returning();
+    if (!updatedCampaign) throw new Error("Unable to set the outreach campaign daily limit");
+    campaign = updatedCampaign;
+  }
+  await db.update(outreachResearchSchedulesTable)
+    .set({ targetCount: 167 })
+    .where(eq(outreachResearchSchedulesTable.campaignId, campaign.id));
 
   const scheduledAt = getNextPhoenixEightAm(options.now);
   for (const contact of VERIFIED_OUTREACH_CONTACTS) {
