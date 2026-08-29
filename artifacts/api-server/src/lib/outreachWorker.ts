@@ -8,7 +8,10 @@ import {
 } from "@workspace/db";
 import { logger } from "./logger";
 import { isUnknownSendResultError, sendApprovedOutreach } from "./outreach";
-import { isReplyWebhookConfigured } from "./outreachEvents";
+import {
+  isReplyWebhookConfigured,
+  syncSendGridInboundReplyWebhook,
+} from "./outreachEvents";
 import { processDueOutreachResearchSchedules } from "./outreachResearchScheduler";
 
 const ADMIN_EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -148,6 +151,16 @@ export async function processDueOutreachMessages(): Promise<number> {
 }
 
 export function startOutreachWorker(): void {
+  void syncSendGridInboundReplyWebhook()
+    .then(({ state, hostname }) => {
+      if (state !== "skipped") {
+        logger.info({ state, hostname }, "SendGrid inbound reply webhook synchronized");
+      }
+    })
+    .catch((err: unknown) => {
+      logger.error({ err }, "SendGrid inbound reply webhook synchronization failed");
+    });
+
   const status = getOutreachAutomationStatus();
   if (!status.automationReady && !status.researchAutomationReady) {
     logger.info({

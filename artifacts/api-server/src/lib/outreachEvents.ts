@@ -35,6 +35,74 @@ export function isReplyWebhookConfigured(): boolean {
   return Boolean(getReplyWebhookToken());
 }
 
+export async function syncSendGridInboundReplyWebhook(): Promise<{
+  state: "skipped" | "unchanged" | "updated";
+  hostname?: string;
+}> {
+  if (process.env.NODE_ENV !== "production") return { state: "skipped" };
+
+  const token = getReplyWebhookToken();
+  const publicSiteUrl = process.env.PUBLIC_SITE_URL?.trim();
+  if (!token || !publicSiteUrl) return { state: "skipped" };
+
+  const targetUrl = new URL("/api/outreach/webhooks/inbound-reply", publicSiteUrl);
+  targetUrl.searchParams.set("token", token);
+
+  const connectors = new ReplitConnectors();
+  const listResponse = await connectors.proxy(
+    "sendgrid",
+    "/v3/user/webhooks/parse/settings",
+    { method: "GET" },
+  );
+  if (!listResponse.ok) {
+    throw new Error(`Unable to inspect SendGrid inbound parse settings (${listResponse.status})`);
+  }
+
+  const payload = await listResponse.json() as {
+    result?: Array<{
+      hostname?: string;
+      url?: string;
+      spam_check?: boolean;
+      send_raw?: boolean;
+    }>;
+  };
+  const matches = (payload.result ?? []).filter((setting) => {
+    if (!setting.hostname || !setting.url) return false;
+    try {
+      return new URL(setting.url).pathname === targetUrl.pathname;
+    } catch {
+      return false;
+    }
+  });
+  if (matches.length !== 1) {
+    throw new Error(`Expected one Apex inbound parse setting, found ${matches.length}`);
+  }
+
+  const setting = matches[0]!;
+  if (setting.url === targetUrl.toString()) {
+    return { state: "unchanged", hostname: setting.hostname };
+  }
+
+  const updateResponse = await connectors.proxy(
+    "sendgrid",
+    `/v3/user/webhooks/parse/settings/${encodeURIComponent(setting.hostname!)}`,
+    {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        url: targetUrl.toString(),
+        spam_check: setting.spam_check ?? true,
+        send_raw: setting.send_raw ?? false,
+      }),
+    },
+  );
+  if (!updateResponse.ok) {
+    throw new Error(`Unable to update SendGrid inbound parse setting (${updateResponse.status})`);
+  }
+
+  return { state: "updated", hostname: setting.hostname };
+}
+
 function normalizeProviderMessageId(value: string | undefined): string | null {
   if (!value) return null;
   return value.split(".")[0] ?? value;
