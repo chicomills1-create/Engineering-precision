@@ -62,6 +62,7 @@ export const createLeadBodyReferralPartnerCodeMin = 20;
 export const createLeadBodyReferralPartnerCodeMax = 64;
 
 
+
 export const CreateLeadBody = zod.object({
   "name": zod.string().min(1),
   "email": zod.string().min(createLeadBodyEmailMin),
@@ -141,6 +142,7 @@ export const unsubscribeSubscriberBodyEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s
 export const unsubscribeSubscriberBodyTokenMax = 128;
 
 
+
 export const UnsubscribeSubscriberBody = zod.object({
   "email": zod.string().min(unsubscribeSubscriberBodyEmailMin).max(unsubscribeSubscriberBodyEmailMax).regex(unsubscribeSubscriberBodyEmailRegExp),
   "token": zod.string().max(unsubscribeSubscriberBodyTokenMax).optional().describe('Signed unsubscribe token from an email link; verified server-side when present')
@@ -174,6 +176,7 @@ export const callbackChatBodySessionMax = 512;
 export const callbackChatBodyMessagesItemContentMax = 2000;
 
 export const callbackChatBodyMessagesMax = 30;
+
 
 
 export const CallbackChatBody = zod.object({
@@ -309,6 +312,7 @@ export const createClientJobBodyDocumentsItemUploadTokenMax = 128;
 export const createClientJobBodyDocumentsMax = 20;
 
 
+
 export const CreateClientJobBody = zod.object({
   "submitterName": zod.string().min(1).max(createClientJobBodySubmitterNameMax),
   "submitterEmail": zod.string().min(createClientJobBodySubmitterEmailMin).max(createClientJobBodySubmitterEmailMax).regex(createClientJobBodySubmitterEmailRegExp),
@@ -436,6 +440,7 @@ export const sendClientMonthlyEmailBodySubjectMax = 200;
 export const sendClientMonthlyEmailBodyBodyMax = 10000;
 
 
+
 export const SendClientMonthlyEmailBody = zod.object({
   "recipientEmails": zod.array(zod.string().regex(sendClientMonthlyEmailBodyRecipientEmailsItemRegExp)).min(1).max(sendClientMonthlyEmailBodyRecipientEmailsMax),
   "subject": zod.string().min(1).max(sendClientMonthlyEmailBodySubjectMax),
@@ -461,6 +466,7 @@ export const UpdateClientJobParams = zod.object({
 })
 
 export const updateClientJobBodyInternalNotesMax = 10000;
+
 
 
 export const UpdateClientJobBody = zod.object({
@@ -615,6 +621,7 @@ export const listProspectsResponseNeedScoreMin = 0;
 export const listProspectsResponseNeedScoreMax = 100;
 
 
+
 export const ListProspectsResponseItem = zod.object({
   "id": zod.number(),
   "campaignId": zod.number().nullable(),
@@ -641,6 +648,8 @@ export const ListProspectsResponseItem = zod.object({
   "updatedAt": zod.string()
 })
 export const ListProspectsResponse = zod.array(ListProspectsResponseItem)
+
+
 
 
 export const createProspectBodyFitScoreMin = 0;
@@ -682,6 +691,7 @@ export const createProspectResponseNeedScoreMin = 0;
 export const createProspectResponseNeedScoreMax = 100;
 
 
+
 export const CreateProspectResponse = zod.object({
   "id": zod.number(),
   "campaignId": zod.number().nullable(),
@@ -712,6 +722,7 @@ export const CreateProspectResponse = zod.object({
 export const UpdateProspectParams = zod.object({
   "id": zod.coerce.number()
 })
+
 
 
 export const updateProspectBodyOneFitScoreMin = 0;
@@ -753,6 +764,7 @@ export const updateProspectResponseNeedScoreMin = 0;
 export const updateProspectResponseNeedScoreMax = 100;
 
 
+
 export const UpdateProspectResponse = zod.object({
   "id": zod.number(),
   "campaignId": zod.number().nullable(),
@@ -791,6 +803,8 @@ export const GenerateOutreachDraftBody = zod.object({
 })
 
 
+
+
 export const GenerateOutreachDraftResponseItem = zod.object({
   "id": zod.number(),
   "prospectId": zod.number(),
@@ -823,6 +837,7 @@ export const markOutreachProspectRepliedResponseNeedScoreMin = 0;
 export const markOutreachProspectRepliedResponseNeedScoreMax = 100;
 
 
+
 export const MarkOutreachProspectRepliedResponse = zod.object({
   "id": zod.number(),
   "campaignId": zod.number().nullable(),
@@ -853,6 +868,7 @@ export const MarkOutreachProspectRepliedResponse = zod.object({
 export const listCampaignsResponseDailyLimitMax = 100;
 
 
+
 export const ListCampaignsResponseItem = zod.object({
   "id": zod.number(),
   "name": zod.string(),
@@ -868,8 +884,11 @@ export const ListCampaignsResponseItem = zod.object({
 export const ListCampaignsResponse = zod.array(ListCampaignsResponseItem)
 
 
+
+
 export const createCampaignBodyDailyLimitDefault = 10;
 export const createCampaignBodyDailyLimitMax = 100;
+
 
 
 export const CreateCampaignBody = zod.object({
@@ -883,6 +902,7 @@ export const CreateCampaignBody = zod.object({
 })
 
 export const createCampaignResponseDailyLimitMax = 100;
+
 
 
 export const CreateCampaignResponse = zod.object({
@@ -904,8 +924,10 @@ export const UpdateCampaignParams = zod.object({
 })
 
 
+
 export const updateCampaignBodyOneDailyLimitDefault = 10;
 export const updateCampaignBodyOneDailyLimitMax = 100;
+
 
 
 export const UpdateCampaignBody = zod.object({
@@ -919,6 +941,7 @@ export const UpdateCampaignBody = zod.object({
 })
 
 export const updateCampaignResponseDailyLimitMax = 100;
+
 
 
 export const UpdateCampaignResponse = zod.object({
@@ -936,6 +959,7 @@ export const UpdateCampaignResponse = zod.object({
 
 
 export const listOutreachResearchSchedulesResponseTargetCountMax = 10;
+
 
 
 export const ListOutreachResearchSchedulesResponseItem = zod.object({
@@ -966,6 +990,7 @@ export const updateOutreachResearchScheduleBodyTargetCountDefault = 10;
 export const updateOutreachResearchScheduleBodyTargetCountMax = 10;
 
 
+
 export const UpdateOutreachResearchScheduleBody = zod.object({
   "enabled": zod.boolean(),
   "localHour": zod.literal(8).default(updateOutreachResearchScheduleBodyLocalHourDefault),
@@ -973,6 +998,7 @@ export const UpdateOutreachResearchScheduleBody = zod.object({
 })
 
 export const updateOutreachResearchScheduleResponseTargetCountMax = 10;
+
 
 
 export const UpdateOutreachResearchScheduleResponse = zod.object({
@@ -991,6 +1017,9 @@ export const UpdateOutreachResearchScheduleResponse = zod.object({
   "lastRunError": zod.string().nullable(),
   "lastRunCompletedAt": zod.string().nullable()
 })
+
+
+
 
 
 export const ListOutreachMessagesResponseItem = zod.object({
@@ -1014,6 +1043,11 @@ export const ListOutreachMessagesResponseItem = zod.object({
 export const ListOutreachMessagesResponse = zod.array(ListOutreachMessagesResponseItem)
 
 
+
+
+
+
+
 export const CreateOutreachMessageBody = zod.object({
   "prospectId": zod.number(),
   "campaignId": zod.number().optional(),
@@ -1024,6 +1058,8 @@ export const CreateOutreachMessageBody = zod.object({
   "sourceType": zod.enum(['lead', 'referral_partner', 'public_opportunity']).optional(),
   "sourceId": zod.number().optional()
 })
+
+
 
 
 export const CreateOutreachMessageResponse = zod.object({
@@ -1051,6 +1087,10 @@ export const UpdateOutreachMessageParams = zod.object({
 })
 
 
+
+
+
+
 export const UpdateOutreachMessageBody = zod.object({
   "prospectId": zod.number(),
   "campaignId": zod.number().optional(),
@@ -1061,6 +1101,8 @@ export const UpdateOutreachMessageBody = zod.object({
   "sourceType": zod.enum(['lead', 'referral_partner', 'public_opportunity']).optional(),
   "sourceId": zod.number().optional()
 })
+
+
 
 
 export const UpdateOutreachMessageResponse = zod.object({
@@ -1088,6 +1130,8 @@ export const ApproveOutreachMessageParams = zod.object({
 })
 
 
+
+
 export const ApproveOutreachMessageResponse = zod.object({
   "id": zod.number(),
   "prospectId": zod.number(),
@@ -1113,6 +1157,8 @@ export const SendOutreachMessageParams = zod.object({
 })
 
 
+
+
 export const SendOutreachMessageResponse = zod.object({
   "id": zod.number(),
   "prospectId": zod.number(),
@@ -1134,6 +1180,7 @@ export const SendOutreachMessageResponse = zod.object({
 
 
 export const suppressOutreachAddressBodyEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+
 
 
 export const SuppressOutreachAddressBody = zod.object({
@@ -1177,6 +1224,7 @@ export const ListOutreachResearchRunsResponse = zod.array(ListOutreachResearchRu
 export const runOutreachResearchBodyQueryMax = 200;
 
 
+
 export const RunOutreachResearchBody = zod.object({
   "state": zod.enum(['AZ', 'CA', 'TX']),
   "audience": zod.enum(['architect', 'builder']),
@@ -1188,6 +1236,7 @@ export const runOutreachResearchResponseProspectsItemFitScoreMax = 100;
 
 export const runOutreachResearchResponseProspectsItemNeedScoreMin = 0;
 export const runOutreachResearchResponseProspectsItemNeedScoreMax = 100;
+
 
 
 export const RunOutreachResearchResponse = zod.object({
@@ -1234,6 +1283,7 @@ export const RunOutreachResearchResponse = zod.object({
 
 export const unsubscribeOutreachAddressBodyEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
 export const unsubscribeOutreachAddressBodyTokenMax = 128;
+
 
 
 export const UnsubscribeOutreachAddressBody = zod.object({
@@ -1323,6 +1373,7 @@ export const createReferralPartnerBodySourceMax = 200;
 export const createReferralPartnerBodyNotesMax = 4000;
 
 
+
 export const CreateReferralPartnerBody = zod.object({
   "companyName": zod.string().min(1).max(createReferralPartnerBodyCompanyNameMax),
   "contactName": zod.string().max(createReferralPartnerBodyContactNameMax).optional(),
@@ -1373,6 +1424,7 @@ export const updateReferralPartnerBodyOneWebsiteMax = 500;
 export const updateReferralPartnerBodyOneSourceMax = 200;
 
 export const updateReferralPartnerBodyOneNotesMax = 4000;
+
 
 
 export const UpdateReferralPartnerBody = zod.object({
@@ -1448,6 +1500,7 @@ export const createPublicOpportunityBodyOwnerMax = 160;
 export const createPublicOpportunityBodyNextActionMax = 500;
 
 
+
 export const CreatePublicOpportunityBody = zod.object({
   "title": zod.string().min(1).max(createPublicOpportunityBodyTitleMax),
   "sourceUrl": zod.string().min(1).max(createPublicOpportunityBodySourceUrlMax),
@@ -1501,6 +1554,7 @@ export const updatePublicOpportunityBodyOneOwnerMax = 160;
 export const updatePublicOpportunityBodyOneNextActionMax = 500;
 
 
+
 export const UpdatePublicOpportunityBody = zod.object({
   "title": zod.string().min(1).max(updatePublicOpportunityBodyOneTitleMax),
   "sourceUrl": zod.string().min(1).max(updatePublicOpportunityBodyOneSourceUrlMax),
@@ -1537,6 +1591,7 @@ export const UpdatePublicOpportunityResponse = zod.object({
  * @summary Prepare review-only opportunities from public web research
  */
 export const preparePublicOpportunitiesBodyQueryMax = 200;
+
 
 
 export const PreparePublicOpportunitiesBody = zod.object({
@@ -1611,6 +1666,7 @@ export const createPayrollPlanBodyContractRevenueMin = 0;
 export const createPayrollPlanBodyNotesMax = 5000;
 
 
+
 export const CreatePayrollPlanBody = zod.object({
   "jobId": zod.number(),
   "contractRevenue": zod.number().min(createPayrollPlanBodyContractRevenueMin),
@@ -1680,6 +1736,8 @@ export const createPayrollEntryBodyInstallmentsItemLabelMax = 120;
 
 export const createPayrollEntryBodyInstallmentsItemPercentageMin = 0.01;
 export const createPayrollEntryBodyInstallmentsItemPercentageMax = 100;
+
+
 
 
 export const CreatePayrollEntryBody = zod.object({
@@ -1785,4 +1843,5 @@ export const UpdatePayrollInstallmentResponse = zod.object({
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
+
 

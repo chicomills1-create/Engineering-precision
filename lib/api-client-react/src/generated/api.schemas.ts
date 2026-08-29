@@ -1336,3 +1336,4 @@ export const PayrollInstallmentUpdateStatus = {
 export interface PayrollInstallmentUpdate {
   status: PayrollInstallmentUpdateStatus;
 }
+
