@@ -7,7 +7,7 @@ import {
   type OutreachMessage,
 } from "@workspace/db";
 import { logger } from "./logger";
-import { sendApprovedOutreach } from "./outreach";
+import { isUnknownSendResultError, sendApprovedOutreach } from "./outreach";
 import { isReplyWebhookConfigured } from "./outreachEvents";
 import { processDueOutreachResearchSchedules } from "./outreachResearchScheduler";
 
@@ -136,7 +136,7 @@ export async function processDueOutreachMessages(): Promise<number> {
     } catch (err) {
       const error = err instanceof Error ? err.message : "Scheduled send failed";
       await db.update(outreachMessagesTable)
-        .set({ status: "failed", error })
+        .set({ status: isUnknownSendResultError(err) ? "sending" : "failed", error })
         .where(and(
           eq(outreachMessagesTable.id, claimed.id),
           eq(outreachMessagesTable.status, "sending"),

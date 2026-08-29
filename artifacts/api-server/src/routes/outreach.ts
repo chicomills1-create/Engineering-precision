@@ -27,7 +27,11 @@ import {
   UpdateProspectBody, UpdateProspectParams, UpdateProspectResponse,
 } from "@workspace/api-zod";
 import { requireAuth } from "../middlewares/requireAuth";
-import { generateProspectDraft, sendApprovedOutreach } from "../lib/outreach";
+import {
+  generateProspectDraft,
+  isUnknownSendResultError,
+  sendApprovedOutreach,
+} from "../lib/outreach";
 import { verifyUnsubscribeToken } from "../lib/unsubscribeToken";
 import { discoverPublicProspects } from "../lib/publicResearch";
 import { getOutreachAutomationStatus } from "../lib/outreachWorker";
@@ -303,7 +307,10 @@ router.post("/outreach/messages/:id/send", requireAuth, async (req, res): Promis
     res.json(SendOutreachMessageResponse.parse(messageJson(row!)));
   } catch (err) {
     const error = err instanceof Error ? err.message : "Unable to send message";
-    await db.update(outreachMessagesTable).set({ status: "failed", error }).where(and(
+    await db.update(outreachMessagesTable).set({
+      status: isUnknownSendResultError(err) ? "sending" : "failed",
+      error,
+    }).where(and(
       eq(outreachMessagesTable.id, message.id),
       eq(outreachMessagesTable.status, "sending"),
     ));

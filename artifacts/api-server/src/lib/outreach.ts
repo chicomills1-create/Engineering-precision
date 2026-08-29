@@ -21,6 +21,10 @@ import {
 
 export type GeneratedDraft = { subject: string; body: string; followUps: { subject: string; body: string }[] };
 
+export function isUnknownSendResultError(error: unknown): boolean {
+  return error instanceof Error && error.message.includes("dispatch result is unknown");
+}
+
 function phoenixDateKey(date = new Date()): string {
   const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/Phoenix",
