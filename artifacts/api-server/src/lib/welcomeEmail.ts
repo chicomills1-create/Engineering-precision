@@ -3,6 +3,7 @@ import {
   makeUnsubscribeUrl,
   makeOneClickUnsubscribeUrl,
 } from "./unsubscribeToken";
+import { renderBrandedEmail } from "./emailMarkup";
 
 /**
  * Sends a branded welcome/confirmation email to a new subscriber via the
@@ -40,10 +41,10 @@ export async function sendWelcomeEmail(
     "If you didn't sign up, you can safely ignore this email.",
     "",
     "— The Apex Grid Engineering Team",
-    ...(unsubscribeUrl
-      ? ["", `Unsubscribe any time with one click: ${unsubscribeUrl}`]
-      : []),
   ].join("\n");
+  const emailContent = unsubscribeUrl
+    ? renderBrandedEmail(text, unsubscribeUrl)
+    : { plainText: text, html: undefined };
 
   const connectors = new ReplitConnectors();
   const response = await connectors.proxy("sendgrid", "/v3/mail/send", {
@@ -62,7 +63,10 @@ export async function sendWelcomeEmail(
         : {}),
       from: { email: from, name: "Apex Grid Engineering" },
       subject: "Welcome — you're subscribed to Apex Grid updates",
-      content: [{ type: "text/plain", value: text }],
+      content: [
+        { type: "text/plain", value: emailContent.plainText },
+        ...(emailContent.html ? [{ type: "text/html" as const, value: emailContent.html }] : []),
+      ],
     }),
   });
 
