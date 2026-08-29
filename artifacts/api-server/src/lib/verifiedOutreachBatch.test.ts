@@ -10,11 +10,11 @@ import {
   isUsableBusinessEmail,
 } from "./outreachContactValidation";
 
-test("the verified morning batch contains exactly 167 unique, valid contacts", () => {
+test("the verified outreach library contains exactly 313 unique, valid contacts", () => {
   const domains = VERIFIED_OUTREACH_CONTACTS.map((contact) =>
     new URL(contact.website).hostname.replace(/^www\./, "").toLowerCase()
   );
-  assert.equal(VERIFIED_OUTREACH_CONTACTS.length, 167);
+  assert.equal(VERIFIED_OUTREACH_CONTACTS.length, 313);
   assert.equal(new Set(VERIFIED_OUTREACH_CONTACTS.map((contact) => contact.contactEmail)).size, VERIFIED_OUTREACH_CONTACTS.length);
   assert.equal(new Set(domains).size, VERIFIED_OUTREACH_CONTACTS.length);
   assert.ok(VERIFIED_OUTREACH_CONTACTS.some((contact) => contact.audience === "architect"));

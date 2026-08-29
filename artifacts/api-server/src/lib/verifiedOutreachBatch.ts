@@ -7,11 +7,15 @@ import {
   prospectsTable,
 } from "@workspace/db";
 import { assertVerifiedOutreachBatch } from "./outreachContactValidation";
-import { VERIFIED_OUTREACH_CONTACTS } from "./verifiedOutreachContacts";
+import { VERIFIED_OUTREACH_CONTACTS as LEGACY_VERIFIED_OUTREACH_CONTACTS } from "./verifiedOutreachContacts";
+import { VERIFIED_OUTREACH_CONTACTS_AUG_29 } from "./verifiedOutreachContactsAug29";
 
 const CAMPAIGN_NAME = "Approved 8 AM Outreach - August 2026";
 const SUBJECT = "Need stamped engineering without the usual wait or cost?";
-export { VERIFIED_OUTREACH_CONTACTS } from "./verifiedOutreachContacts";
+export const VERIFIED_OUTREACH_CONTACTS = [
+  ...LEGACY_VERIFIED_OUTREACH_CONTACTS,
+  ...VERIFIED_OUTREACH_CONTACTS_AUG_29,
+] as const;
 
 export function approvedOutreachSubject(): string {
   return SUBJECT;

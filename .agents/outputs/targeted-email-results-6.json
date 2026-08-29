@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-08-29",
+  "candidates": 6,
+  "endCredits": 4265,
+  "results": [
+    {
+      "audience": "Commercial general contractor",
+      "city": "La Palma",
+      "companyEvidence": "Official company site documents commercial preconstruction and ground-up project planning.",
+      "companyName": "Gulati Construction Company",
+      "domain": "gccogroup.com",
+      "email": "nitin@gccogroup.com",
+      "linkedinUrl": "https://www.linkedin.com/in/nitin239",
+      "name": "Nitin Gulati",
+      "officialUrl": "https://gccogroup.com/preconstruction-in-la-palma-ca/",
+      "providerJobTitle": "Owner | General Contractor",
+      "providerName": "Nitin Gulati",
+      "sourceUrl": "https://www.linkedin.com/in/nitin-gulati",
+      "state": "California",
+      "title": "Owner / General Contractor"
+    },
+    {
+      "audience": "Commercial general contractor",
+      "city": "Southern California",
+      "companyEvidence": "Official company site documents tenant improvements and commercial office build-outs.",
+      "companyName": "Brady Construction Group",
+      "domain": "bradyconstruction.com",
+      "email": "bbrady@bradyconstruction.com",
+      "linkedinUrl": "https://www.linkedin.com/in/brent-brady-291925271",
+      "name": "Brent Brady",
+      "officialUrl": "https://bradyconstruction.com/pre-construction/",
+      "providerJobTitle": "President",
+      "providerName": "Brent Brady",
+      "sourceUrl": "https://www.linkedin.com/in/brent-brady",
+      "state": "California",
+      "title": "President"
+    }
+  ],
+  "spent": 2,
+  "startCredits": 4267
+}
