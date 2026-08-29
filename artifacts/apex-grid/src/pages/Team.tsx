@@ -139,6 +139,48 @@ export default function Team() {
         </div>
       </section>
 
+      <section id="engineering-team" className="py-24 bg-card border-y border-border scroll-mt-24">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mb-16">
+            <span className="font-mono text-xs uppercase tracking-widest text-primary mb-4 block">Engineering Leadership</span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">The People <span className="text-muted-foreground">Behind the Work</span></h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              A senior engineering team built to move projects from scope to stamped, coordinated deliverables without unnecessary handoffs.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {ENGINEERING_TEAM.map((person) => (
+              <article key={person.name} className="group border border-border bg-background">
+                <div className="relative aspect-[4/5] overflow-hidden bg-[#111]">
+                  <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+                    <div className="absolute h-[72%] w-[72%] rounded-full border border-primary/20" />
+                    <img
+                      src="/logo.svg"
+                      alt=""
+                      className="relative w-[58%] opacity-20 transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+                  <img
+                    src={person.image}
+                    alt={`${person.name}, ${person.role} at Apex Grid Engineering`}
+                    className="relative z-10 h-full w-full object-contain object-bottom transition-transform duration-500 group-hover:scale-[1.02]"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="border-t border-border p-5">
+                  <h3 className="text-xl font-display font-bold">{person.name}</h3>
+                  <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] leading-relaxed text-primary">
+                    {person.role}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Architecture team */}
       <section className="py-24 bg-card border-t border-border">
         <div className="container mx-auto px-4 md:px-8">
@@ -295,6 +337,44 @@ const TEAM_SCHEMA = {
     ],
   },
 };
+
+const ENGINEERING_TEAM = [
+  {
+    name: "Grant Meaux",
+    role: "Principal | MEP Professional Engineer (PE)",
+    image: "/images/team/grant-meaux.webp",
+  },
+  {
+    name: "Jason Luhn",
+    role: "Principal | Structural Professional Engineer (PE)",
+    image: "/images/team/jason-luhn.webp",
+  },
+  {
+    name: "Travis Airola",
+    role: "Principal | Civil & Structural Professional Engineer (PE)",
+    image: "/images/team/travis-airola.webp",
+  },
+  {
+    name: "Sevdalina Petkova",
+    role: "Principal | Structural Professional Engineer (PE)",
+    image: "/images/team/sevdalina-petkova.webp",
+  },
+  {
+    name: "Jorge Fuentes",
+    role: "Principal | Civil & Structural Engineer, PE",
+    image: "/images/team/jorge-fuentes.webp",
+  },
+  {
+    name: "Eric Culver",
+    role: "Principal | Professional Engineer (PE)",
+    image: "/images/team/eric-culver.webp",
+  },
+  {
+    name: "Shan Fernando",
+    role: "Head of Engineering",
+    image: "/images/team/shan-fernando.webp",
+  },
+];
 
 const PCM_TEAM = [
   {
