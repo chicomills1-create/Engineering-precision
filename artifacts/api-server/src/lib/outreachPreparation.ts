@@ -1,4 +1,4 @@
-import { and, eq, gte, inArray, lt, lte, or, sql } from "drizzle-orm";
+import { and, eq, gt, gte, inArray, lt, lte, or, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
@@ -124,6 +124,10 @@ async function claimPreparationRun(targetDate: string, now: Date): Promise<numbe
     eq(outreachPreparationRunsTable.targetDate, targetDate),
     or(
       inArray(outreachPreparationRunsTable.status, ["failed", "pending"]),
+      and(
+        eq(outreachPreparationRunsTable.status, "completed"),
+        gt(outreachPreparationRunsTable.shortfallCount, 0),
+      ),
       and(
         eq(outreachPreparationRunsTable.status, "running"),
         lte(outreachPreparationRunsTable.startedAt, staleCutoff),
