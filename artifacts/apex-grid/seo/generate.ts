@@ -785,6 +785,9 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     u(`${SITE}/for-property-managers`, today, "monthly", "0.8"),
     u(`${SITE}/sitemap/`, today, "monthly", "0.3"),
   ];
+  for (const page of STATIC_STANDALONE_PAGES.filter((entry) => entry.sitemapCategory === "core")) {
+    coreUrls.push(u(`${SITE}/${page.dir}/`, today, "monthly", "0.7"));
+  }
 
   // ── Tier 1-2: Service discipline hubs + deep subpages ───────────────────
   const servicesUrls: string[] = [];
@@ -845,7 +848,9 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     solutionsUrls.push(u(`${SITE}/projects/${cat.slug}/`, today, "monthly", "0.7"));
   }
   for (const sp of STATIC_STANDALONE_PAGES) {
-    solutionsUrls.push(u(`${SITE}/${sp.dir}/`, today, "monthly", "0.8"));
+    if (sp.sitemapCategory !== "core") {
+      solutionsUrls.push(u(`${SITE}/${sp.dir}/`, today, "monthly", "0.8"));
+    }
   }
   for (const mp of MISC_PAGES) {
     solutionsUrls.push(u(`${SITE}/${mp.slug}/`, today, "monthly", "0.8"));
@@ -2312,7 +2317,13 @@ function staticStandalonePage(page: StaticPageDef): string {
       </div>
     </section>`;
   const schema = { "@context": "https://schema.org", "@type": "WebPage", "name": page.h1, "description": page.description, "url": `${SITE}${url}`, "publisher": { "@type": "Organization", "name": "Apex Grid Engineering", "url": SITE } };
-  return htmlShell({ title: page.title, description: page.description, canonical: `${SITE}${url}`, schemaJson: [schema, breadcrumbSchema(crumbs)], body });
+  return htmlShell({
+    title: page.title,
+    description: page.description,
+    canonical: `${SITE}${url}`,
+    schemaJson: [schema, ...(page.schemaJson ?? []), breadcrumbSchema(crumbs)],
+    body,
+  });
 }
 
 // ─── HTML Sitemap Renderer ────────────────────────────────────────────────

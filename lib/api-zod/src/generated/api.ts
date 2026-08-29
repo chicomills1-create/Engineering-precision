@@ -1977,3 +1977,102 @@ export const UpdatePayrollInstallmentResponse = zod.object({
 })
 
 
+export const GetSeoDashboardResponse = zod.object({
+  "inventory": zod.object({
+  "totalUrls": zod.number(),
+  "byCategory": zod.record(zod.string(), zod.number())
+}),
+  "performance": zod.array(zod.object({
+  "dimension": zod.string().optional(),
+  "dimensionValue": zod.string().optional(),
+  "clicks": zod.number().optional(),
+  "impressions": zod.number().optional(),
+  "ctr": zod.string().optional(),
+  "position": zod.string().optional()
+})),
+  "performanceHistory": zod.array(zod.object({
+  "startDate": zod.string(),
+  "endDate": zod.string(),
+  "clicks": zod.number(),
+  "impressions": zod.number(),
+  "position": zod.string()
+})),
+  "organicAttribution": zod.array(zod.object({
+  "source": zod.string().nullish(),
+  "medium": zod.string().nullish(),
+  "campaign": zod.string().nullish(),
+  "landingPath": zod.string().nullish(),
+  "referrer": zod.string().nullish(),
+  "count": zod.number().optional()
+})),
+  "latestAudit": zod.object({
+  "id": zod.number().optional(),
+  "status": zod.string().optional()
+}).nullable(),
+  "openIssues": zod.array(zod.object({
+  "url": zod.string(),
+  "category": zod.string(),
+  "severity": zod.enum(['critical', 'warning', 'info']),
+  "status": zod.string().optional(),
+  "message": zod.string()
+}))
+})
+
+
+export const syncSeoPerformanceBodyStartDateRegExp = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
+export const syncSeoPerformanceBodyEndDateRegExp = new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
+
+
+export const SyncSeoPerformanceBody = zod.object({
+  "startDate": zod.string().regex(syncSeoPerformanceBodyStartDateRegExp).optional(),
+  "endDate": zod.string().regex(syncSeoPerformanceBodyEndDateRegExp).optional()
+})
+
+export const SyncSeoPerformanceResponse = zod.object({
+  "availability": zod.enum(['available', 'unconfigured', 'quota_exhausted', 'api_error']),
+  "synced": zod.boolean(),
+  "error": zod.string().nullish(),
+  "startDate": zod.string().optional(),
+  "endDate": zod.string().optional(),
+  "totals": zod.object({
+  "pages": zod.number(),
+  "queries": zod.number()
+})
+})
+
+
+export const RunSeoAuditResponse = zod.object({
+  "auditRunId": zod.number(),
+  "status": zod.string(),
+  "urlsScanned": zod.number(),
+  "issues": zod.array(zod.object({
+  "url": zod.string(),
+  "category": zod.string(),
+  "severity": zod.enum(['critical', 'warning', 'info']),
+  "status": zod.string().optional(),
+  "message": zod.string()
+}))
+})
+
+
+export const listSeoAuditIssuesQueryLimitMax = 500;
+
+
+
+export const ListSeoAuditIssuesQueryParams = zod.object({
+  "severity": zod.coerce.string().optional(),
+  "status": zod.coerce.string().optional(),
+  "category": zod.coerce.string().optional(),
+  "limit": zod.coerce.number().min(1).max(listSeoAuditIssuesQueryLimitMax).optional()
+})
+
+export const ListSeoAuditIssuesResponseItem = zod.object({
+  "url": zod.string(),
+  "category": zod.string(),
+  "severity": zod.enum(['critical', 'warning', 'info']),
+  "status": zod.string().optional(),
+  "message": zod.string()
+})
+export const ListSeoAuditIssuesResponse = zod.array(ListSeoAuditIssuesResponseItem)
+
+

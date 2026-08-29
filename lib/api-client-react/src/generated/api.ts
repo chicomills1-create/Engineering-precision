@@ -43,6 +43,7 @@ import type {
   Lead,
   LeadInput,
   LeadUpdateInput,
+  ListSeoAuditIssuesParams,
   OpportunityResearchInput,
   OutreachDashboard,
   OutreachMessage,
@@ -67,6 +68,11 @@ import type {
   ResearchRunResponse,
   ResearchSchedule,
   ResearchScheduleInput,
+  SeoAuditIssue,
+  SeoAuditRun,
+  SeoDashboard,
+  SeoPerformanceRange,
+  SeoPerformanceSync,
   SubscribeResult,
   Subscriber,
   SubscriberInput,
@@ -4042,4 +4048,283 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
       return useMutation(getUpdatePayrollInstallmentMutationOptions(options));
     }
+
+export const getGetSeoDashboardUrl = () => {
+
+
+
+
+  return `/api/seo/dashboard`
+}
+
+export const getSeoDashboard = async ( options?: Parameters<typeof customFetch>[1]): Promise<SeoDashboard> => {
+
+  return customFetch<SeoDashboard>(getGetSeoDashboardUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetSeoDashboardQueryKey = () => {
+    return [
+    `/api/seo/dashboard`
+    ] as const;
+    }
+
+
+export const getGetSeoDashboardQueryOptions = <TData = Awaited<ReturnType<typeof getSeoDashboard>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getSeoDashboard>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetSeoDashboardQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getSeoDashboard>>> = ({ signal }) => getSeoDashboard({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getSeoDashboard>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetSeoDashboardQueryResult = NonNullable<Awaited<ReturnType<typeof getSeoDashboard>>>
+export type GetSeoDashboardQueryError = ErrorType<unknown>
+
+
+
+export function useGetSeoDashboard<TData = Awaited<ReturnType<typeof getSeoDashboard>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getSeoDashboard>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetSeoDashboardQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getSyncSeoPerformanceUrl = () => {
+
+
+
+
+  return `/api/seo/dashboard/performance-sync`
+}
+
+export const syncSeoPerformance = async (seoPerformanceRange?: SeoPerformanceRange, options?: Parameters<typeof customFetch>[1]): Promise<SeoPerformanceSync> => {
+
+  return customFetch<SeoPerformanceSync>(getSyncSeoPerformanceUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(seoPerformanceRange)
+  }
+);}
+
+
+
+
+
+export const getSyncSeoPerformanceMutationOptions = <TError = ErrorType<SeoPerformanceSync>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof syncSeoPerformance>>, TError,{data?: BodyType<SeoPerformanceRange>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof syncSeoPerformance>>, TError,{data?: BodyType<SeoPerformanceRange>}, TContext> => {
+
+const mutationKey = ['syncSeoPerformance'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof syncSeoPerformance>>, {data?: BodyType<SeoPerformanceRange>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  syncSeoPerformance(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type SyncSeoPerformanceMutationResult = NonNullable<Awaited<ReturnType<typeof syncSeoPerformance>>>
+    export type SyncSeoPerformanceMutationBody = BodyType<SeoPerformanceRange> | undefined
+    export type SyncSeoPerformanceMutationError = ErrorType<SeoPerformanceSync>
+
+    export const useSyncSeoPerformance = <TError = ErrorType<SeoPerformanceSync>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof syncSeoPerformance>>, TError,{data?: BodyType<SeoPerformanceRange>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof syncSeoPerformance>>,
+        TError,
+        {data?: BodyType<SeoPerformanceRange>},
+        TContext
+      > => {
+      return useMutation(getSyncSeoPerformanceMutationOptions(options));
+    }
+
+export const getRunSeoAuditUrl = () => {
+
+
+
+
+  return `/api/seo/dashboard/audit`
+}
+
+export const runSeoAudit = async ( options?: Parameters<typeof customFetch>[1]): Promise<SeoAuditRun> => {
+
+  return customFetch<SeoAuditRun>(getRunSeoAuditUrl(),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+
+export const getRunSeoAuditMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof runSeoAudit>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof runSeoAudit>>, TError,void, TContext> => {
+
+const mutationKey = ['runSeoAudit'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof runSeoAudit>>, void> = () => {
+
+
+          return  runSeoAudit(requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type RunSeoAuditMutationResult = NonNullable<Awaited<ReturnType<typeof runSeoAudit>>>
+
+    export type RunSeoAuditMutationError = ErrorType<unknown>
+
+    export const useRunSeoAudit = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof runSeoAudit>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof runSeoAudit>>,
+        TError,
+        void,
+        TContext
+      > => {
+      return useMutation(getRunSeoAuditMutationOptions(options));
+    }
+
+export const getListSeoAuditIssuesUrl = (params?: ListSeoAuditIssuesParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : String(value))
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/api/seo/dashboard/issues?${stringifiedParams}` : `/api/seo/dashboard/issues`
+}
+
+export const listSeoAuditIssues = async (params?: ListSeoAuditIssuesParams, options?: Parameters<typeof customFetch>[1]): Promise<SeoAuditIssue[]> => {
+
+  return customFetch<SeoAuditIssue[]>(getListSeoAuditIssuesUrl(params),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListSeoAuditIssuesQueryKey = (params?: ListSeoAuditIssuesParams,) => {
+    return [
+    `/api/seo/dashboard/issues`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getListSeoAuditIssuesQueryOptions = <TData = Awaited<ReturnType<typeof listSeoAuditIssues>>, TError = ErrorType<unknown>>(params?: ListSeoAuditIssuesParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listSeoAuditIssues>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListSeoAuditIssuesQueryKey(params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listSeoAuditIssues>>> = ({ signal }) => listSeoAuditIssues(params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listSeoAuditIssues>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListSeoAuditIssuesQueryResult = NonNullable<Awaited<ReturnType<typeof listSeoAuditIssues>>>
+export type ListSeoAuditIssuesQueryError = ErrorType<unknown>
+
+
+
+export function useListSeoAuditIssues<TData = Awaited<ReturnType<typeof listSeoAuditIssues>>, TError = ErrorType<unknown>>(
+ params?: ListSeoAuditIssuesParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listSeoAuditIssues>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListSeoAuditIssuesQueryOptions(params,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
 

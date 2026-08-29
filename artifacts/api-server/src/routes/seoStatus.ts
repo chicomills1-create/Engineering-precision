@@ -1,7 +1,9 @@
 import { Router } from "express";
 import { requireAuth } from "../middlewares/requireAuth";
-import { readFile, access } from "fs/promises";
+import { readFile, access, readdir } from "fs/promises";
 import path from "path";
+import { and, desc, eq, sql } from "drizzle-orm";
+import { db, leadsTable, seoAuditIssuesTable, seoAuditRunsTable, seoPerformanceSnapshotsTable } from "@workspace/db";
 import {
   getCachedResult,
   getCacheStats,
@@ -10,11 +12,23 @@ import {
   isQuotaExhausted,
   type GscVerdict,
 } from "../lib/gscInspection";
+import { querySearchAnalytics } from "../lib/gscInspection";
+import {
+  classifyAuditPage,
+  duplicateMetadataValueIssues,
+  extractAuditMetadata,
+  type AuditIssueCandidate,
+  type AuditMetadata,
+} from "../lib/seoAudit";
 
 const router = Router();
 
 // Resolve the apex-grid public directory relative to the CWD (artifacts/api-server)
 const PUBLIC_DIR = path.resolve(process.cwd(), "../apex-grid/public");
+
+type SitemapCategory =
+  | "core" | "services" | "industries" | "solutions" | "resources" | "locations"
+  | "architecture_locations" | "general_contracting_locations" | "other";
 
 const SITEMAP_FILES = [
   { file: "sitemap-core.xml", category: "core" },
@@ -23,9 +37,26 @@ const SITEMAP_FILES = [
   { file: "sitemap-solutions.xml", category: "solutions" },
   { file: "sitemap-resources.xml", category: "resources" },
   { file: "sitemap-locations.xml", category: "locations" },
+  { file: "sitemap-architecture-locations.xml", category: "architecture_locations" },
+  { file: "sitemap-general-contracting-locations.xml", category: "general_contracting_locations" },
 ] as const;
 
-type SitemapCategory = (typeof SITEMAP_FILES)[number]["category"];
+let sitemapFilesCache: Array<{ file: string; category: SitemapCategory }> | null = null;
+let sitemapFilesCacheAt = 0;
+const SITEMAP_CACHE_TTL_MS = 5 * 60 * 1000;
+async function getSitemapFiles(): Promise<Array<{ file: string; category: SitemapCategory }>> {
+  if (sitemapFilesCache && Date.now() - sitemapFilesCacheAt < SITEMAP_CACHE_TTL_MS) return sitemapFilesCache;
+  const known: Array<{ file: string; category: SitemapCategory }> = [...SITEMAP_FILES];
+  try {
+    const names = await readdir(PUBLIC_DIR);
+    for (const file of names) {
+      if (/^sitemap(?:[-_].+)?\.xml$/i.test(file) && !known.some((entry) => entry.file === file)) known.push({ file, category: "other" });
+    }
+  } catch { /* public directory errors are reported by the calling endpoint */ }
+  sitemapFilesCache = known;
+  sitemapFilesCacheAt = Date.now();
+  return known;
+}
 
 interface SitemapEntry {
   url: string;
@@ -201,7 +232,7 @@ router.get(
 
       const allEntries: SitemapEntry[] = [];
 
-      for (const { file, category } of SITEMAP_FILES) {
+       for (const { file, category } of await getSitemapFiles()) {
         const xmlPath = path.join(PUBLIC_DIR, file);
         let xml: string;
         try {
@@ -283,7 +314,7 @@ router.post(
 
       // Gather all sitemap URLs, highest priority first.
       const urls: { url: string; priority: number }[] = [];
-      for (const { file, category } of SITEMAP_FILES) {
+      for (const { file, category } of await getSitemapFiles()) {
         const xmlPath = path.join(PUBLIC_DIR, file);
         let xml: string;
         try {
@@ -315,5 +346,142 @@ router.post(
     }
   },
 );
+
+function dateOnly(value: unknown): string | null {
+  return typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value) ? value : null;
+}
+function defaultPerformanceRange(): { startDate: string; endDate: string } {
+  const end = new Date(Date.now() - 3 * 86400000);
+  const start = new Date(end.getTime() - 27 * 86400000);
+  return { startDate: start.toISOString().slice(0, 10), endDate: end.toISOString().slice(0, 10) };
+}
+async function sitemapEntries(): Promise<ParsedEntry[]> {
+  const entries: ParsedEntry[] = [];
+  for (const { file, category } of await getSitemapFiles()) {
+    try { entries.push(...parseUrlEntries(await readFile(path.join(PUBLIC_DIR, file), "utf8"), file, category)); } catch { /* missing optional sitemap */ }
+  }
+  return entries;
+}
+
+router.post("/seo/dashboard/performance-sync", requireAuth, async (req, res): Promise<void> => {
+  const fallback = defaultPerformanceRange();
+  const startDate = dateOnly(req.body?.startDate) ?? fallback.startDate;
+  const endDate = dateOnly(req.body?.endDate) ?? fallback.endDate;
+  if (startDate > endDate || (Date.parse(`${endDate}T00:00:00Z`) - Date.parse(`${startDate}T00:00:00Z`)) > 92 * 86400000) {
+    res.status(400).json({ error: "Date range must be ordered and no longer than 93 days." }); return;
+  }
+  const [site, pages, queries] = await Promise.all([
+    querySearchAnalytics(startDate, endDate, "site"),
+    querySearchAnalytics(startDate, endDate, "page"),
+    querySearchAnalytics(startDate, endDate, "query"),
+  ]);
+  if (site.availability !== "available" || pages.availability !== "available" || queries.availability !== "available") {
+    const unavailable = [site, pages, queries].find((result) => result.availability !== "available");
+    res.status(503).json({ availability: unavailable?.availability ?? "api_error", synced: false, error: unavailable?.error ?? "Search Console is unavailable.", totals: { pages: 0, queries: 0 } }); return;
+  }
+  const rows = [
+    ...site.rows.map((row) => ({ ...row, dimension: "site" })),
+    ...pages.rows.map((row) => ({ ...row, dimension: "page" })),
+    ...queries.rows.map((row) => ({ ...row, dimension: "query" })),
+  ];
+  if (rows.length) await db.insert(seoPerformanceSnapshotsTable).values(rows.map((row) => ({
+    periodStart: startDate, periodEnd: endDate, dimension: row.dimension, dimensionValue: row.key,
+    clicks: Math.round(row.clicks), impressions: Math.round(row.impressions), ctr: String(row.ctr), position: String(row.position),
+  }))).onConflictDoUpdate({ target: [seoPerformanceSnapshotsTable.periodStart, seoPerformanceSnapshotsTable.periodEnd, seoPerformanceSnapshotsTable.dimension, seoPerformanceSnapshotsTable.dimensionValue], set: { clicks: sql`excluded.clicks`, impressions: sql`excluded.impressions`, ctr: sql`excluded.ctr`, position: sql`excluded.position`, syncedAt: new Date() } });
+  res.json({ availability: "available", synced: true, error: null, startDate, endDate, totals: { pages: pages.rows.length, queries: queries.rows.length } });
+});
+
+router.post("/seo/dashboard/audit", requireAuth, async (req, res): Promise<void> => {
+  const entries = await sitemapEntries();
+  const rules = await loadRobotsRules();
+  const run = await db.insert(seoAuditRunsTable).values({ status: "partial", urlsScanned: 0, issueCount: 0, summary: {} }).returning();
+  const issues: AuditIssueCandidate[] = [];
+  const metadata: AuditMetadata[] = [];
+  const inbound = new Set<string>();
+  for (let i = 0; i < entries.length; i += 20) await Promise.all(entries.slice(i, i + 20).map(async (entry) => {
+    let html: string | null = null; const hasStaticFile = await staticFileExists(entry.path);
+    if (hasStaticFile) { const stripped = entry.path.replace(/^\//, "").replace(/\/$/, ""); try { html = await readFile(path.join(PUBLIC_DIR, stripped, "index.html"), "utf8"); } catch { try { html = await readFile(path.join(PUBLIC_DIR, `${stripped}.html`), "utf8"); } catch { /* checked existence is best effort */ } } }
+    issues.push(...classifyAuditPage({ url: entry.url, path: entry.path, html, hasStaticFile, robotsBlocked: isPathBlocked(rules, entry.path) }));
+    if (html) {
+      metadata.push(extractAuditMetadata(entry.url, html));
+      for (const match of html.matchAll(/href=["'](\/[^"'?#]*)/gi)) {
+        const href = match[1].endsWith("/") ? match[1] : `${match[1]}/`;
+        inbound.add(href);
+      }
+    }
+  }));
+  const orphanIssues = entries
+    .filter((entry) => entry.path !== "/" && !inbound.has(entry.path.endsWith("/") ? entry.path : `${entry.path}/`))
+    .map((entry) => ({ url: entry.url, category: "orphan_risk", severity: "info" as const, message: "No internal HTML link to this sitemap URL was found.", details: {} }));
+  issues.push(...duplicateMetadataValueIssues(metadata), ...orphanIssues);
+  for (let i = 0; i < issues.length; i += 500) {
+    await db.insert(seoAuditIssuesTable).values(issues.slice(i, i + 500).map((issue) => ({ auditRunId: run[0].id, ...issue })));
+  }
+  await db.update(seoAuditRunsTable).set({ status: "completed", completedAt: new Date(), urlsScanned: entries.length, issueCount: issues.length, summary: { sitemapFiles: (await getSitemapFiles()).length } }).where(eq(seoAuditRunsTable.id, run[0].id));
+  res.json({ auditRunId: run[0].id, status: "completed", urlsScanned: entries.length, issues: issues.slice(0, 500) });
+});
+
+router.get("/seo/dashboard/issues", requireAuth, async (req, res): Promise<void> => {
+  const limit = Math.min(Math.max(Number(req.query.limit) || 100, 1), 500);
+  const latest = await db.select().from(seoAuditRunsTable).orderBy(desc(seoAuditRunsTable.completedAt)).limit(1);
+  if (!latest[0]) { res.json([]); return; }
+  let issues = await db.select().from(seoAuditIssuesTable).where(eq(seoAuditIssuesTable.auditRunId, latest[0].id)).limit(limit);
+  for (const field of ["severity", "status", "category"] as const) if (typeof req.query[field] === "string") issues = issues.filter((issue) => issue[field] === req.query[field]);
+  res.json(issues);
+});
+
+router.get("/seo/dashboard", requireAuth, async (_req, res): Promise<void> => {
+  const entries = await sitemapEntries();
+  const [latestAudit, latestPerformancePeriod, performanceHistory, leads] = await Promise.all([
+    db.select().from(seoAuditRunsTable).orderBy(desc(seoAuditRunsTable.completedAt)).limit(1),
+    db.select({
+      periodStart: seoPerformanceSnapshotsTable.periodStart,
+      periodEnd: seoPerformanceSnapshotsTable.periodEnd,
+    }).from(seoPerformanceSnapshotsTable).orderBy(desc(seoPerformanceSnapshotsTable.syncedAt)).limit(1),
+    db.select({
+      startDate: seoPerformanceSnapshotsTable.periodStart,
+      endDate: seoPerformanceSnapshotsTable.periodEnd,
+      clicks: seoPerformanceSnapshotsTable.clicks,
+      impressions: seoPerformanceSnapshotsTable.impressions,
+      position: seoPerformanceSnapshotsTable.position,
+    }).from(seoPerformanceSnapshotsTable)
+      .where(eq(seoPerformanceSnapshotsTable.dimension, "site"))
+      .orderBy(desc(seoPerformanceSnapshotsTable.periodEnd))
+      .limit(12),
+    db.select({
+      source: leadsTable.source,
+      medium: leadsTable.medium,
+      campaign: leadsTable.campaign,
+      landingPath: leadsTable.landingPath,
+      referrer: leadsTable.referrer,
+      count: sql<number>`cast(count(*) as integer)`,
+    }).from(leadsTable).groupBy(
+      leadsTable.source,
+      leadsTable.medium,
+      leadsTable.campaign,
+      leadsTable.landingPath,
+      leadsTable.referrer,
+    ),
+  ]);
+  const latestPeriod = latestPerformancePeriod[0];
+  const performance = latestPeriod
+    ? await db.select().from(seoPerformanceSnapshotsTable).where(and(
+      eq(seoPerformanceSnapshotsTable.periodStart, latestPeriod.periodStart),
+      eq(seoPerformanceSnapshotsTable.periodEnd, latestPeriod.periodEnd),
+    )).orderBy(desc(seoPerformanceSnapshotsTable.clicks)).limit(500)
+    : [];
+  const openIssues = latestAudit[0] ? await db.select().from(seoAuditIssuesTable).where(eq(seoAuditIssuesTable.auditRunId, latestAudit[0].id)).limit(25) : [];
+  res.json({
+    inventory: {
+      totalUrls: entries.length,
+      byCategory: Object.fromEntries(entries.reduce((m, e) => m.set(e.category, (m.get(e.category) ?? 0) + 1), new Map<string, number>())),
+    },
+    performance,
+    performanceHistory,
+    organicAttribution: leads.filter((lead) => (lead.medium ?? "").toLowerCase() === "organic"),
+    latestAudit: latestAudit[0] ?? null,
+    openIssues,
+  });
+});
 
 export default router;

@@ -1,12 +1,13 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { usePageMeta } from "@/lib/seo";
+import { SITE_URL, useJsonLd, usePageMeta } from "@/lib/seo";
 import officeImg from "@assets/generated_images/office.webp";
 import jeremyImg from "@assets/generated_images/jeremy-mills.webp";
 import jasonLuhnImg from "@assets/generated_images/jason-luhn.webp";
 
 export default function About() {
   usePageMeta(PAGE_META);
+  useJsonLd(JEREMY_PERSON_SCHEMA);
 
   return (
     <div className="flex flex-col">
@@ -164,7 +165,11 @@ export default function About() {
                   />
                 </div>
                 <div className="w-12 h-[2px] bg-primary mb-6" />
-                <h3 className="text-2xl font-display font-bold mb-1">Jeremy Mills</h3>
+                <h3 className="text-2xl font-display font-bold mb-1">
+                  <Link href="/jeremy-mills/" className="hover:text-primary transition-colors">
+                    Jeremy Mills
+                  </Link>
+                </h3>
                 <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Co-Founder &amp; CEO · U.S. Air Force Veteran</div>
                 <p className="text-muted-foreground leading-relaxed">
                   Jeremy leads Apex Grid with the same mission-first discipline he developed in uniform. As an Aerospace Medical Service Journeyman who deployed to Iraq in support of Operation Iraqi Freedom, he built the firm around accountability, clear communication, and delivering for clients the way you deliver for your unit — no excuses, no surprises.
@@ -181,6 +186,12 @@ export default function About() {
                   </a>
                   , a separate faith-centered community focused on Scripture, prayer, and daily discipleship.
                 </p>
+                <Link
+                  href="/jeremy-mills/"
+                  className="inline-flex items-center gap-2 mt-6 text-sm font-bold text-primary hover:underline underline-offset-4"
+                >
+                  Jeremy’s leadership profile <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
               <div className="bg-card p-10">
                 <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden">
@@ -261,6 +272,24 @@ export default function About() {
     </div>
   );
 }
+
+const JEREMY_PERSON_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${SITE_URL}/jeremy-mills/#person`,
+  name: "Jeremy Mills",
+  alternateName: ["Chico Mills", "Pastor Jeremy Mills", "Pastor Chico Mills"],
+  url: `${SITE_URL}/jeremy-mills/`,
+  jobTitle: "Co-Founder and Chief Executive Officer",
+  description:
+    "Co-Founder and CEO of Apex Grid Engineering, U.S. Air Force veteran, and Founder and Senior Pastor of 16:3 Faith.",
+  worksFor: { "@id": `${SITE_URL}/#business` },
+  affiliation: {
+    "@type": "Organization",
+    name: "16:3 Faith",
+    url: "https://163faith.com",
+  },
+};
 
 const PAGE_META = {
   title: "About Our Engineering Firm | Apex Grid Engineering",

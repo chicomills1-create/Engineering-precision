@@ -22,6 +22,8 @@ export interface GscResult {
 const SITE_URL = "sc-domain:apexgrideng.com";
 const INSPECT_ENDPOINT =
   "https://searchconsole.googleapis.com/v1/urlInspection/index:inspect";
+const SEARCH_ANALYTICS_ENDPOINT =
+  "https://searchconsole.googleapis.com/webmasters/v3/sites/sc-domain%3Aapexgrideng.com/searchAnalytics/query";
 const SCOPE = "https://www.googleapis.com/auth/webmasters.readonly";
 
 const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
@@ -102,6 +104,78 @@ export function mapIndexVerdict(verdict: string | undefined): GscVerdict {
       return "not_indexed";
     default:
       return "unknown";
+  }
+}
+
+export type SearchAnalyticsAvailability =
+  | "available"
+  | "unconfigured"
+  | "quota_exhausted"
+  | "api_error";
+
+export interface SearchAnalyticsRow {
+  key: string;
+  clicks: number;
+  impressions: number;
+  ctr: number;
+  position: number;
+}
+
+export interface SearchAnalyticsOutcome {
+  availability: SearchAnalyticsAvailability;
+  rows: SearchAnalyticsRow[];
+  error: string | null;
+}
+
+/**
+ * Queries the official Search Analytics endpoint. An unavailable integration is
+ * deliberately distinct from an empty report: empty rows only mean Google
+ * returned no matching traffic.
+ */
+export async function querySearchAnalytics(
+  startDate: string,
+  endDate: string,
+  dimension: "page" | "query" | "site",
+  rowLimit = 250,
+): Promise<SearchAnalyticsOutcome> {
+  const client = getAuth();
+  if (!client) return { availability: "unconfigured", rows: [], error: "Google Search Console credentials are not configured." };
+  if (isQuotaExhausted()) return { availability: "quota_exhausted", rows: [], error: "Google Search Console quota is temporarily exhausted." };
+  try {
+    const token = await client.getAccessToken();
+    if (!token) return { availability: "api_error", rows: [], error: "Unable to obtain a Google Search Console access token." };
+    const response = await fetch(SEARCH_ANALYTICS_ENDPOINT, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        startDate,
+        endDate,
+        ...(dimension === "site" ? {} : { dimensions: [dimension] }),
+        rowLimit: dimension === "site" ? 1 : Math.min(Math.max(rowLimit, 1), 1000),
+      }),
+    });
+    if (response.status === 429) {
+      quotaExhaustedUntil = Date.now() + QUOTA_COOLDOWN_MS;
+      return { availability: "quota_exhausted", rows: [], error: "Google Search Console quota is temporarily exhausted." };
+    }
+    if (!response.ok) {
+      return { availability: "api_error", rows: [], error: `Search Analytics request failed (${response.status}).` };
+    }
+    const payload = (await response.json()) as { rows?: Array<{ keys?: string[]; clicks?: number; impressions?: number; ctr?: number; position?: number }> };
+    return {
+      availability: "available",
+      error: null,
+      rows: (payload.rows ?? []).map((row) => ({
+        key: dimension === "site" ? "site" : row.keys?.[0] ?? "",
+        clicks: row.clicks ?? 0,
+        impressions: row.impressions ?? 0,
+        ctr: row.ctr ?? 0,
+        position: row.position ?? 0,
+      })),
+    };
+  } catch (err) {
+    logger.warn({ err }, "Search Analytics request failed");
+    return { availability: "api_error", rows: [], error: "Search Analytics request could not be completed." };
   }
 }
 

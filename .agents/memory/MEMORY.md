@@ -25,3 +25,4 @@
 - [Verified outreach library](verified-outreach-library.md) — build an auditable AZ-first, then CA prospect pool; cap daily sends at 150 under a hard 5,000 monthly ceiling.
 - [Free-first outreach research](free-first-outreach-research.md) — use official registries and firm pages before targeted enrichment; never infer emails from patterns.
 - [Outreach stop serialization](outreach-stop-serialization.md) — evidence, suppression, sending, and seeding must share database locks so a stopped contact cannot be revived by a race.
+- [SEO corpus audit scaling](seo-corpus-audit-scaling.md) — full-corpus audits must stream metadata and links, never retain every generated HTML document; GSC property totals require a no-dimension query.

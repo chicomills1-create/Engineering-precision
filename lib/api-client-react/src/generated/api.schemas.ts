@@ -1430,3 +1430,126 @@ export interface PayrollInstallmentUpdate {
   status: PayrollInstallmentUpdateStatus;
 }
 
+export interface SeoPerformanceRange {
+  /** @pattern ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ */
+  startDate?: string;
+  /** @pattern ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ */
+  endDate?: string;
+}
+
+export type SeoPerformanceSyncAvailability = typeof SeoPerformanceSyncAvailability[keyof typeof SeoPerformanceSyncAvailability];
+
+
+export const SeoPerformanceSyncAvailability = {
+  available: 'available',
+  unconfigured: 'unconfigured',
+  quota_exhausted: 'quota_exhausted',
+  api_error: 'api_error',
+} as const;
+
+export type SeoPerformanceSyncTotals = {
+  pages: number;
+  queries: number;
+};
+
+export interface SeoPerformanceSync {
+  availability: SeoPerformanceSyncAvailability;
+  synced: boolean;
+  /** @nullable */
+  error?: string | null;
+  startDate?: string;
+  endDate?: string;
+  totals: SeoPerformanceSyncTotals;
+}
+
+export type SeoAuditIssueSeverity = typeof SeoAuditIssueSeverity[keyof typeof SeoAuditIssueSeverity];
+
+
+export const SeoAuditIssueSeverity = {
+  critical: 'critical',
+  warning: 'warning',
+  info: 'info',
+} as const;
+
+export interface SeoAuditIssue {
+  url: string;
+  category: string;
+  severity: SeoAuditIssueSeverity;
+  status?: string;
+  message: string;
+}
+
+export interface SeoAuditRun {
+  auditRunId: number;
+  status: string;
+  urlsScanned: number;
+  issues: SeoAuditIssue[];
+}
+
+export type SeoDashboardInventoryByCategory = {[key: string]: number};
+
+export type SeoDashboardInventory = {
+  totalUrls: number;
+  byCategory: SeoDashboardInventoryByCategory;
+};
+
+/**
+ * @nullable
+ */
+export type SeoDashboardLatestAudit = {
+  id?: number;
+  status?: string;
+} | null;
+
+export interface SeoPerformanceSnapshot {
+  dimension?: string;
+  dimensionValue?: string;
+  clicks?: number;
+  impressions?: number;
+  ctr?: string;
+  position?: string;
+}
+
+export interface SeoPerformancePeriodSummary {
+  startDate: string;
+  endDate: string;
+  clicks: number;
+  impressions: number;
+  position: string;
+}
+
+export interface SeoAttributionRollup {
+  /** @nullable */
+  source?: string | null;
+  /** @nullable */
+  medium?: string | null;
+  /** @nullable */
+  campaign?: string | null;
+  /** @nullable */
+  landingPath?: string | null;
+  /** @nullable */
+  referrer?: string | null;
+  count?: number;
+}
+
+export interface SeoDashboard {
+  inventory: SeoDashboardInventory;
+  performance: SeoPerformanceSnapshot[];
+  performanceHistory: SeoPerformancePeriodSummary[];
+  organicAttribution: SeoAttributionRollup[];
+  /** @nullable */
+  latestAudit: SeoDashboardLatestAudit;
+  openIssues: SeoAuditIssue[];
+}
+
+export type ListSeoAuditIssuesParams = {
+severity?: string;
+status?: string;
+category?: string;
+/**
+ * @minimum 1
+ * @maximum 500
+ */
+limit?: number;
+};
+

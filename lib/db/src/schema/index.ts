@@ -23,3 +23,4 @@ export * from "./outreach";
 export * from "./clientJobs";
 export * from "./growth";
 export * from "./payroll";
+export * from "./seo";
