@@ -20,3 +20,4 @@
 - [Outreach closing language](outreach-closing-language.md) — use the current-projects-in-pipeline review question; do not mention plan-review comments or field conditions in the close.
 - [Production outreach seeding](production-outreach-seeding.md) — schema-push databases lack reliable migration journals; seed reviewed batches idempotently behind an explicit production flag.
 - [Unknown outreach sends](unknown-outreach-sends.md) — retain immutable sequence claims for transport errors and ambiguous provider responses; reconcile by stable custom key.
+- [Client outreach exclusions](client-outreach-exclusions.md) — Atmosphere Architects clients Tim Boyle and Mike Hudson must never receive Apex Grid outreach.

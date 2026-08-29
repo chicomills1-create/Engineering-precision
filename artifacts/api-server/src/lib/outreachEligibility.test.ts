@@ -7,6 +7,7 @@ import {
   assertSequenceDeliveryReady,
   getFollowUpScheduledAt,
   getNextPhoenixEightAm,
+  isOutreachContactExcluded,
 } from "./outreachEligibility";
 import { getOutreachDailyLimit } from "./outreach";
 
@@ -69,6 +70,29 @@ const activeCampaign: Campaign = {
 
 test("eligible outreach returns a normalized email", () => {
   assert.equal(assertOutreachEligibilityBase(approvedMessage, eligibleProspect, activeCampaign), "alex@example.com");
+});
+
+test("excludes current client contacts by name and company", () => {
+  assert.equal(isOutreachContactExcluded({
+    companyName: "Atmosphere Architects, Inc.",
+    contactName: "Tim Boyle",
+  }), true);
+  assert.equal(isOutreachContactExcluded({
+    companyName: "Atmosphere Architects",
+    contactName: "Mike Hudson",
+  }), true);
+  assert.equal(isOutreachContactExcluded({
+    companyName: "Atmosphere Architects",
+    contactName: "Other Contact",
+  }), false);
+  assert.throws(
+    () => assertOutreachEligibilityBase(
+      approvedMessage,
+      { ...eligibleProspect, companyName: "Atmosphere Architects", contactName: "Tim Boyle" },
+      activeCampaign,
+    ),
+    /excluded from outreach/,
+  );
 });
 
 test("holds the campaign at 100 sends before ramping to 250", () => {

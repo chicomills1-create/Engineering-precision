@@ -1,10 +1,32 @@
 import type { Campaign, OutreachMessage, Prospect } from "@workspace/db";
 
+const EXCLUDED_OUTREACH_CONTACTS = new Map([
+  ["atmosphere architects", new Set(["tim boyle", "mike hudson"])],
+]);
+
+function normalizeIdentity(value: string): string {
+  return value.trim().toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+export function isOutreachContactExcluded(
+  prospect: Pick<Prospect, "companyName" | "contactName">,
+): boolean {
+  const company = normalizeIdentity(prospect.companyName);
+  const contact = prospect.contactName ? normalizeIdentity(prospect.contactName) : "";
+  for (const [excludedCompany, excludedContacts] of EXCLUDED_OUTREACH_CONTACTS) {
+    if (company.includes(excludedCompany) && excludedContacts.has(contact)) return true;
+  }
+  return false;
+}
+
 export function assertOutreachEligibilityBase(
   message: OutreachMessage,
   prospect: Prospect,
   campaign: Campaign | undefined,
 ): string {
+  if (isOutreachContactExcluded(prospect)) {
+    throw new Error("Contact is excluded from outreach per client relationship");
+  }
   if (!prospect.contactEmail) throw new Error("Prospect does not have a business email");
   if (message.status !== "approved") throw new Error("Message must be approved before sending");
   if (!["approved", "contacted"].includes(prospect.status)) throw new Error("Prospect must be approved before sending");
