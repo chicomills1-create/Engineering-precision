@@ -136,12 +136,13 @@ test("excludes current client contacts by name and company", () => {
   );
 });
 
-test("respects the configured campaign limit after the initial 100-send ramp", () => {
+test("allows the 167-per-day campaign target from the first send day", () => {
   assert.equal(getOutreachDailyLimit(100, 0), 100);
   assert.equal(getOutreachDailyLimit(100, 2), 100);
   assert.equal(getOutreachDailyLimit(100, 3), 100);
   assert.equal(getOutreachDailyLimit(250, 3), 250);
-  assert.equal(getOutreachDailyLimit(500, 0), 100);
+  assert.equal(getOutreachDailyLimit(167, 0), 167);
+  assert.equal(getOutreachDailyLimit(500, 0), 167);
   assert.equal(getOutreachDailyLimit(500, 3), 500);
 });
 

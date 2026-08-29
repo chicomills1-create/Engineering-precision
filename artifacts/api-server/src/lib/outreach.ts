@@ -36,7 +36,7 @@ export function isDefinitiveSendGridRejection(status: number): boolean {
     && ![408, 409, 425, 429].includes(status);
 }
 
-const INITIAL_RAMP_DAILY_LIMIT = 100;
+const INITIAL_RAMP_DAILY_LIMIT = 167;
 const INITIAL_RAMP_ACTIVE_DAYS = 3;
 
 export class DailySendLimitError extends Error {
