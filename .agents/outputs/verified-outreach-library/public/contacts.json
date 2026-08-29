@@ -1,0 +1,62 @@
+[
+  {
+    "dedupeKey": "verified-2026-08-28-krause",
+    "companyName": "Krause Architecture + Interiors",
+    "website": "https://krauseaz.com/",
+    "city": "Phoenix",
+    "audience": "architect",
+    "contactName": "Brad Krause",
+    "contactTitle": "Founder and President",
+    "contactEmail": "info@krauseaz.com",
+    "contactSourceUrl": "https://krauseaz.com/contact/",
+    "sourceUrl": "https://krauseaz.com/team/brad-krause/",
+    "needSignals": "Public portfolio and leadership pages show active architecture and interiors work, including commercial and public-sector projects.",
+    "emailLane": "public",
+    "laneReason": "role_based_company_mailbox"
+  },
+  {
+    "dedupeKey": "verified-2026-08-28-shade",
+    "companyName": "Shade Architects",
+    "website": "https://www.shadearch.com/",
+    "city": "Mesa",
+    "audience": "architect",
+    "contactName": "Justin Trexler",
+    "contactTitle": "Founding Principal",
+    "contactEmail": "info@shadearch.com",
+    "contactSourceUrl": "https://www.shadearch.com/contact",
+    "sourceUrl": "https://www.shadearch.com/about",
+    "needSignals": "Official site lists tenant improvements, ground-up construction, adaptive reuse, civic work, and coordination with structural, MEP, and civil consultants.",
+    "emailLane": "public",
+    "laneReason": "role_based_company_mailbox"
+  },
+  {
+    "dedupeKey": "verified-2026-08-28-esb",
+    "companyName": "ESB Design+Build",
+    "website": "https://esbdesignbuild.com/",
+    "city": "Marana",
+    "audience": "builder",
+    "contactName": "Lois Morey",
+    "contactTitle": "CEO and Co-owner",
+    "contactEmail": "info@esbdesignbuild.com",
+    "contactSourceUrl": "https://esbdesignbuild.com/contact/",
+    "sourceUrl": "https://esbdesignbuild.com/",
+    "needSignals": "Official site describes current expedited turnkey commercial, steel-frame modular, prefab, site, utility, and full construction services.",
+    "emailLane": "public",
+    "laneReason": "role_based_company_mailbox"
+  },
+  {
+    "dedupeKey": "verified-2026-08-28-deutsch",
+    "companyName": "Deutsch Architecture Group",
+    "website": "https://www.2929.com/",
+    "city": "Phoenix",
+    "audience": "architect",
+    "contactName": "Bernie Deutsch",
+    "contactTitle": "Founder and President",
+    "contactEmail": "info@2929.com",
+    "contactSourceUrl": "https://www.2929.com/contact-1",
+    "sourceUrl": "https://www.2929.com/company-leaders/bernie-deutsch",
+    "needSignals": "Official leadership and portfolio pages show active commercial and industrial architecture work, including the NIRVC sales and storage project.",
+    "emailLane": "public",
+    "laneReason": "role_based_company_mailbox"
+  }
+]

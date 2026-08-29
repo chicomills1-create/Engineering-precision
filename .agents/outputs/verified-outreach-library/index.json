@@ -1,0 +1,16 @@
+{
+  "processingOrder": [
+    "personal",
+    "public"
+  ],
+  "rules": {
+    "personal": "Named individual emails. Use one paid lookup only after the company domain and reputable person are confirmed publicly.",
+    "public": "Role-based company emails found from free public sources. Process only after the Personal lane.",
+    "unresolved": "Keep unresolved firms in the company universe and public-contact candidate register for later free-source review."
+  },
+  "counts": {
+    "personal": 190,
+    "public": 4,
+    "total": 194
+  }
+}
