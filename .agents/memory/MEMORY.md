@@ -21,3 +21,4 @@
 - [Production outreach seeding](production-outreach-seeding.md) — schema-push databases lack reliable migration journals; seed reviewed batches idempotently behind an explicit production flag.
 - [Unknown outreach sends](unknown-outreach-sends.md) — retain immutable sequence claims for transport errors and ambiguous provider responses; reconcile by stable custom key.
 - [Client outreach exclusions](client-outreach-exclusions.md) — Atmosphere Architects clients Tim Boyle and Mike Hudson must never receive Apex Grid outreach.
+- [Exact-time outreach scheduling](exact-time-outreach-scheduling.md) — an autoscaling web interval is not a durable 8 AM scheduler; use an external scheduled trigger and transactional leases.
