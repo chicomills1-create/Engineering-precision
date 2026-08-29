@@ -7,6 +7,7 @@ import {
   outreachSuppressionsTable,
 } from "@workspace/db";
 import { getPublicBaseUrl, makeUnsubscribeToken } from "./unsubscribeToken";
+import { renderBrandedEmail } from "./emailMarkup";
 
 const EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const DELIVERY_AUDIT_RETENTION_MONTHS = 24;
@@ -105,7 +106,7 @@ export async function sendClientMonthlyMessage(
   const baseUrl = getPublicBaseUrl();
   if (!token || !baseUrl) throw new Error("Unsubscribe signing is not configured");
   const unsubscribe = `${baseUrl}/api/outreach/unsubscribe?${new URLSearchParams({ email: contact.email, token })}`;
-  const body = `${messageBody}\n\n— Apex Grid Engineering\n22475 E Quintero Rd, Queen Creek, AZ 85142\n\nUnsubscribe: ${unsubscribe}`;
+  const emailContent = renderBrandedEmail(messageBody, unsubscribe);
   const from = process.env.OUTREACH_FROM_EMAIL;
   if (!from) throw new Error("OUTREACH_FROM_EMAIL is not configured");
   const replyTo = process.env.OUTREACH_REPLY_TO_EMAIL?.trim() || from;
@@ -121,7 +122,10 @@ export async function sendClientMonthlyMessage(
     from: { email: from, name: "Apex Grid Engineering" },
     reply_to: { email: replyTo, name: "Apex Grid Engineering" },
     subject,
-    content: [{ type: "text/plain", value: body }],
+    content: [
+      { type: "text/plain", value: emailContent.plainText },
+      { type: "text/html", value: emailContent.html },
+    ],
   });
   const dedicatedKey = process.env.SENDGRID_ISOLATION_VERIFIED === "true"
     ? process.env.SENDGRID_DEDICATED_API_KEY?.trim()

@@ -13,6 +13,7 @@ import {
   type Prospect,
 } from "@workspace/db";
 import { getPublicBaseUrl, makeUnsubscribeToken } from "./unsubscribeToken";
+import { renderBrandedEmail } from "./emailMarkup";
 import {
   assertOutreachEligibilityBase,
   assertScheduledTimeReady,
@@ -114,7 +115,7 @@ export async function sendApprovedOutreach(message: OutreachMessage, prospect: P
   if (!token || !baseUrl) throw new Error("Unsubscribe signing is not configured");
   const unsubscribe = `${baseUrl}/api/outreach/unsubscribe?${new URLSearchParams({ email, token })}`;
   const oneClick = unsubscribe;
-  const body = `${message.body}\n\n— Apex Grid Engineering\n22475 E Quintero Rd, Queen Creek, AZ 85142\n\nUnsubscribe: ${unsubscribe}`;
+  const emailContent = renderBrandedEmail(message.body, unsubscribe);
   const from = process.env.OUTREACH_FROM_EMAIL;
   if (!from) throw new Error("OUTREACH_FROM_EMAIL is not configured");
   const replyTo = process.env.OUTREACH_REPLY_TO_EMAIL?.trim() || from;
@@ -140,7 +141,10 @@ export async function sendApprovedOutreach(message: OutreachMessage, prospect: P
       from: { email: from, name: "Apex Grid Engineering" },
       reply_to: { email: replyTo, name: "Apex Grid Engineering" },
       subject: message.subject,
-      content: [{ type: "text/plain", value: body }],
+      content: [
+        { type: "text/plain", value: emailContent.plainText },
+        { type: "text/html", value: emailContent.html },
+      ],
     });
     response = dedicatedSendGridKey
       ? await fetch("https://api.sendgrid.com/v3/mail/send", {
