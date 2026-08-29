@@ -49,7 +49,7 @@ export function renderBrandedEmail(body: string, unsubscribeUrl: string, recipie
 } {
   const personalizedBody = personalizeBody(body, recipientName);
   const safeUnsubscribeUrl = escapeEmailHtml(unsubscribeUrl);
-  const plainText = `${personalizedBody}\n\nBest regards,\n${CONTACT_NAME}\n${CONTACT_TITLE}\n${LEGAL_COMPANY_NAME}\n${CONTACT_PHONE}\n\nUnsubscribe: ${unsubscribeUrl}`;
+  const plainText = `${personalizedBody}\n\nBest regards,\n${CONTACT_NAME}\n${CONTACT_TITLE}\n${LEGAL_COMPANY_NAME}\nVeteran-owned engineering company\n${CONTACT_PHONE}\n${COMPANY_SITE}\n\nUnsubscribe: ${unsubscribeUrl}`;
   const html = `<!doctype html>
 <html lang="en">
   <head>
@@ -76,7 +76,9 @@ export function renderBrandedEmail(body: string, unsubscribeUrl: string, recipie
                       <div style="padding-left:13px;color:#202124;font-size:16px;font-weight:700;line-height:1.4;">${CONTACT_NAME}</div>
                       <div style="padding-left:13px;color:#202124;font-size:14px;line-height:1.5;">${CONTACT_TITLE}</div>
                       <div style="padding-left:13px;color:#202124;font-size:14px;font-weight:700;line-height:1.5;">${LEGAL_COMPANY_NAME}</div>
+                      <div style="padding-left:13px;color:#5f6368;font-size:13px;line-height:1.5;">Veteran-owned engineering company</div>
                       <div style="padding-left:13px;font-size:14px;line-height:1.5;"><a href="tel:+14804900064" style="color:#245b8f;text-decoration:none;">${CONTACT_PHONE}</a></div>
+                      <div style="padding-left:13px;font-size:14px;line-height:1.5;"><a href="${COMPANY_SITE}" style="color:#245b8f;text-decoration:none;">apexgrideng.com</a></div>
                     </td>
                   </tr>
                 </table>
