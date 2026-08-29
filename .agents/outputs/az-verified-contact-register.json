@@ -2472,5 +2472,44 @@
     "contactSourceUrl": "http://www.designlinkarchitecture.com/",
     "sourceUrl": "http://www.designlinkarchitecture.com/",
     "needSignals": "The firm's official website identifies this person in a relevant senior role; the business email is verified and domain-matched."
+  },
+  {
+    "dedupeKey": "verified-2026-08-29-bax-az-com",
+    "companyName": "Baxley Architectural and Consulting",
+    "website": "http://www.bax-az.com/",
+    "city": "Arizona",
+    "audience": "architect",
+    "contactName": "Kendall Baxley",
+    "contactTitle": "Owner",
+    "contactEmail": "kendall@bax-az.com",
+    "contactSourceUrl": "http://www.bax-az.com/",
+    "sourceUrl": "http://www.bax-az.com/",
+    "needSignals": "The firm's official website identifies this person in a relevant senior role; the business email is verified and domain-matched."
+  },
+  {
+    "dedupeKey": "verified-2026-08-29-swaimaia-com",
+    "companyName": "Swaim Associates",
+    "website": "https://swaimaia.com/",
+    "city": "Arizona",
+    "audience": "architect",
+    "contactName": "Ed Marley",
+    "contactTitle": "Principal",
+    "contactEmail": "emarley@swaimaia.com",
+    "contactSourceUrl": "https://swaimaia.com/",
+    "sourceUrl": "https://swaimaia.com/",
+    "needSignals": "The firm's official website identifies this person in a relevant senior role; the business email is verified and domain-matched."
+  },
+  {
+    "dedupeKey": "verified-2026-08-29-rust-architect-com",
+    "companyName": "Michael Rust – Architect",
+    "website": "http://www.rust-architect.com/",
+    "city": "Arizona",
+    "audience": "architect",
+    "contactName": "Michael Rust",
+    "contactTitle": "Architect",
+    "contactEmail": "mrust@rust-architect.com",
+    "contactSourceUrl": "http://www.rust-architect.com/",
+    "sourceUrl": "http://www.rust-architect.com/",
+    "needSignals": "The firm's official website identifies this person in a relevant senior role; the business email is verified and domain-matched."
   }
 ]

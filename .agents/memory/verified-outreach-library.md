@@ -11,6 +11,8 @@ Budget each finder credit as one potential final email address. Identify the rep
 
 Do not thin the company universe because enrichment fails. Preserve every legitimate, deduplicated Arizona or California architecture/construction company in the candidate library; attach one public named person and one email when available. A missing, rejected, or unresolved email remains a visible unresolved company record rather than a discarded company.
 
+Keep the public person, role, company domain, source URL, and enrichment status for unresolved firms. Revisit those same firms later for a directly published business email before considering another paid lookup; never lose the company just because the first email path was empty.
+
 The daily operating target is 167 new eligible recipients at 8:00 AM America/Phoenix time. Enforce a hard monthly ceiling of 5,000 sends; 167 per day would otherwise exceed that ceiling in a 30-day month. Every daily selection must exclude prior sends and all bounce, complaint, unsubscribe, and reply suppressions.
 
 **Why:** Paid enrichment credits are finite, while the requested company coverage is broader than the immediately sendable list. Separating the company universe from email enrichment prevents low-yield lookups from silently hiding legitimate prospects.
