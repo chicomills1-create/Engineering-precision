@@ -7,6 +7,7 @@ import {
   assertSequenceDeliveryReady,
   getFollowUpScheduledAt,
 } from "./outreachEligibility";
+import { getOutreachDailyLimit } from "./outreach";
 
 const now = new Date();
 const eligibleProspect: Prospect = {
@@ -64,6 +65,12 @@ const activeCampaign: Campaign = {
 
 test("eligible outreach returns a normalized email", () => {
   assert.equal(assertOutreachEligibilityBase(approvedMessage, eligibleProspect, activeCampaign), "alex@example.com");
+});
+
+test("holds the campaign at ten sends through the first three active days", () => {
+  assert.equal(getOutreachDailyLimit(10, 0), 10);
+  assert.equal(getOutreachDailyLimit(10, 2), 10);
+  assert.equal(getOutreachDailyLimit(10, 3), 20);
 });
 
 const blockedCases: Array<[string, Partial<Prospect>, Partial<OutreachMessage>, Partial<Campaign>, string]> = [

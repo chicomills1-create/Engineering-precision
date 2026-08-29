@@ -11,6 +11,7 @@ test("renders outreach as readable HTML while retaining a plain-text fallback", 
   assert.match(content.html, /Hello &lt;Principal&gt;\.<\/p>/);
   assert.match(content.html, /Jeremy Mills/);
   assert.match(content.html, /480-490-0064/);
+  assert.match(content.html, /CEO · USAF Veteran/);
   assert.match(content.html, /Veteran-owned engineering company/);
   assert.match(content.html, /href="https:\/\/apexgrideng\.com"[^>]*>apexgrideng\.com<\/a>/);
   assert.match(content.html, /https:\/\/apexgrideng\.com\/logo\.svg/);

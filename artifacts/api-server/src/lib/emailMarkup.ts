@@ -1,7 +1,7 @@
 const COMPANY_NAME = "Apex Grid Engineering";
 const LEGAL_COMPANY_NAME = "Apex Grid Engineering PLLC";
 const CONTACT_NAME = "Jeremy Mills";
-const CONTACT_TITLE = "CEO";
+const CONTACT_TITLE = "CEO · USAF Veteran";
 const CONTACT_PHONE = "480-490-0064";
 const COMPANY_SITE = "https://apexgrideng.com";
 const COMPANY_LOGO = `${COMPANY_SITE}/logo.svg`;

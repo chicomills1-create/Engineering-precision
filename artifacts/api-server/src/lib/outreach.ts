@@ -1,6 +1,6 @@
 import { ReplitConnectors } from "@replit/connectors-sdk";
 import { openai } from "@workspace/integrations-openai-ai-server";
-import { and, eq, isNull } from "drizzle-orm";
+import { and, eq, isNotNull, isNull } from "drizzle-orm";
 import {
   campaignsTable,
   db,
@@ -29,6 +29,10 @@ export function isUnknownSendResultError(error: unknown): boolean {
   return error instanceof Error && error.message.includes("dispatch result is unknown");
 }
 
+const INITIAL_RAMP_DAILY_LIMIT = 10;
+const RAMPED_DAILY_LIMIT = 20;
+const INITIAL_RAMP_ACTIVE_DAYS = 3;
+
 function phoenixDateKey(date = new Date()): string {
   const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/Phoenix",
@@ -40,9 +44,27 @@ function phoenixDateKey(date = new Date()): string {
   return `${value.year}-${value.month}-${value.day}`;
 }
 
+export function getOutreachDailyLimit(configuredLimit: number | undefined, activeSendDays: number): number {
+  const limit = configuredLimit ?? INITIAL_RAMP_DAILY_LIMIT;
+  return activeSendDays < INITIAL_RAMP_ACTIVE_DAYS
+    ? Math.min(limit, INITIAL_RAMP_DAILY_LIMIT)
+    : Math.max(limit, RAMPED_DAILY_LIMIT);
+}
+
+async function getCampaignActiveSendDays(campaignId: number): Promise<number> {
+  const sentMessages = await db.select({ sentAt: outreachMessagesTable.sentAt })
+    .from(outreachMessagesTable)
+    .where(and(
+      eq(outreachMessagesTable.campaignId, campaignId),
+      isNotNull(outreachMessagesTable.sentAt),
+    ));
+  return new Set(sentMessages.map(({ sentAt }) => phoenixDateKey(sentAt!))).size;
+}
+
 async function reserveDailySend(message: OutreachMessage, campaign: Campaign | undefined): Promise<number> {
   const quotaKey = `${campaign ? `campaign:${campaign.id}` : "standalone"}:${phoenixDateKey()}`;
-  const limit = campaign?.dailyLimit ?? 10;
+  const activeSendDays = campaign ? await getCampaignActiveSendDays(campaign.id) : INITIAL_RAMP_ACTIVE_DAYS;
+  const limit = getOutreachDailyLimit(campaign?.dailyLimit, activeSendDays);
   for (let slot = 1; slot <= limit; slot += 1) {
     const inserted = await db.insert(outreachSendReservationsTable)
       .values({ messageId: message.id, quotaKey, slot })
