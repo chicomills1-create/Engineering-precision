@@ -99,6 +99,21 @@ test("draft approval validates sending safeguards without requiring prior approv
   );
 });
 
+test("automatic preparation may pre-approve a fully verified review prospect", () => {
+  assert.equal(
+    assertOutreachEligibilityBase(
+      { ...approvedMessage, status: "draft" },
+      { ...eligibleProspect, status: "review" },
+      activeCampaign,
+      {
+        requireApprovedMessage: false,
+        requireApprovedProspect: false,
+      },
+    ),
+    "alex@example.com",
+  );
+});
+
 test("rejects whitespace-only outreach evidence", () => {
   assert.throws(
     () => assertOutreachEligibilityBase(

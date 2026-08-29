@@ -39,6 +39,11 @@ _Populate as you build — non-obvious choices a reader couldn't infer from the 
 - Never research, qualify, draft outreach for, or contact Atmosphere Architects. Apex Grid already partners with them.
 - Do not contact their owners Tim Boyle or Mike Hudson.
 
+## Outreach batching
+
+- Daily preparation may pre-approve a prospect without a manual click only when it meets the same hard standard as the approved batch: named high-confidence contact, verified business email, public contact evidence, current-need evidence, active campaign targeting, no suppression, and no prior initial send or sequence claim.
+- Preparation must continue to use the shared 150-message Phoenix-day ledger and must never resend delivered messages or retry bounced, replied, or unsubscribed contacts.
+
 ## Quarterly state-data review
 
 - `pnpm --filter @workspace/apex-grid run seo:review` — console report flagging state code data not verified in 9+ months (`artifacts/apex-grid/seo/review-report.ts`; shared logic in `seo/review-core.ts`)

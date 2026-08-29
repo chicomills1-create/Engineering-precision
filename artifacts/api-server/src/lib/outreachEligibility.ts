@@ -24,7 +24,10 @@ export function assertOutreachEligibilityBase(
   message: OutreachMessage,
   prospect: Prospect,
   campaign: Campaign | undefined,
-  options: { requireApprovedMessage?: boolean } = {},
+  options: {
+    requireApprovedMessage?: boolean;
+    requireApprovedProspect?: boolean;
+  } = {},
 ): string {
   if (isOutreachContactExcluded(prospect)) {
     throw new Error("Contact is excluded from outreach per client relationship");
@@ -36,7 +39,9 @@ export function assertOutreachEligibilityBase(
   if (options.requireApprovedMessage !== false && message.status !== "approved") {
     throw new Error("Message must be approved before sending");
   }
-  if (!["approved", "contacted"].includes(prospect.status)) throw new Error("Prospect must be approved before sending");
+  if (options.requireApprovedProspect !== false && !["approved", "contacted"].includes(prospect.status)) {
+    throw new Error("Prospect must be approved before sending");
+  }
   if (prospect.fitScore < 60 || prospect.needScore < 60 || !prospect.needSignals?.trim()) {
     throw new Error("Prospect does not have enough evidence of current need");
   }

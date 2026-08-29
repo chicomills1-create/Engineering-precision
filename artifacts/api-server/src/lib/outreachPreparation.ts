@@ -242,7 +242,10 @@ function canPrepare(prospect: Prospect, campaign: Campaign, suppressedEmails: Se
       subject: "", body: "", status: "draft", scheduledAt: null, sentAt: null,
       providerMessageId: null, providerReconciliationKey: null, error: null,
       sourceType: null, sourceId: null, createdAt: new Date(), updatedAt: new Date(),
-    }, prospect, campaign, { requireApprovedMessage: false });
+    }, prospect, campaign, {
+      requireApprovedMessage: false,
+      requireApprovedProspect: false,
+    });
     return true;
   } catch {
     return false;
@@ -267,7 +270,7 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
       .from(prospectsTable)
       .innerJoin(campaignsTable, eq(prospectsTable.campaignId, campaignsTable.id))
       .where(and(
-        eq(prospectsTable.status, "approved"),
+        inArray(prospectsTable.status, ["approved", "review"]),
         eq(prospectsTable.emailStatus, "verified"),
         eq(prospectsTable.contactConfidence, "high"),
         eq(campaignsTable.status, "active"),
@@ -300,6 +303,7 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
     );
 
     const campaignsByProspect = new Map(rows.map((row) => [row.prospect.id, row.campaign.id]));
+    const campaignByProspect = new Map(rows.map((row) => [row.prospect.id, row.campaign]));
     const prepared = await db.transaction(async (tx) => {
       await tx.execute(sql`select ${outreachPreparationRunsTable.id}
         from ${outreachPreparationRunsTable}
@@ -341,6 +345,16 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
 
       for (const prospect of selected) {
         if (usedProspects.has(prospect.id)) continue;
+        const [currentProspect] = await tx.select().from(prospectsTable)
+          .where(eq(prospectsTable.id, prospect.id))
+          .limit(1);
+        const campaign = campaignByProspect.get(prospect.id);
+        if (
+          !currentProspect
+          || !campaign
+          || !["approved", "review"].includes(currentProspect.status)
+          || !canPrepare(currentProspect, campaign, suppressedEmails)
+        ) continue;
         const slot = availableSlots.shift();
         if (slot === undefined) break;
         const [slotClaim] = await tx.insert(outreachPreparationSlotsTable).values({
@@ -350,6 +364,20 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
           prospectId: prospect.id,
         }).onConflictDoNothing().returning({ id: outreachPreparationSlotsTable.id });
         if (!slotClaim) continue;
+        if (currentProspect.status === "review") {
+          const [promoted] = await tx.update(prospectsTable)
+            .set({ status: "approved" })
+            .where(and(
+              eq(prospectsTable.id, currentProspect.id),
+              eq(prospectsTable.status, "review"),
+            ))
+            .returning({ id: prospectsTable.id });
+          if (!promoted) {
+            await tx.delete(outreachPreparationSlotsTable)
+              .where(eq(outreachPreparationSlotsTable.id, slotClaim.id));
+            continue;
+          }
+        }
         const [message] = await tx.insert(outreachMessagesTable).values({
           prospectId: prospect.id,
           campaignId: campaignsByProspect.get(prospect.id)!,
