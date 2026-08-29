@@ -342,7 +342,7 @@ export function MessagesTab() {
                             </DropdownMenuItem>
                             {m.status === 'draft' && (
                               <DropdownMenuItem onClick={() => approveMutation.mutate({ id: m.id })} data-testid={`action-approve-message-${m.id}`}>
-                                <CheckCircle2 className="w-4 h-4 mr-2" /> Approve Draft
+                                <CheckCircle2 className="w-4 h-4 mr-2" /> Approve & Queue
                               </DropdownMenuItem>
                             )}
                             {m.status === 'approved' && (
