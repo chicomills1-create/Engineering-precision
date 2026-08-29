@@ -39,9 +39,11 @@
       "location": "Phoenix Valley",
       "sourceUrl": "https://cawleyarchitects.com/firm/",
       "evidence": "Public firm page describes more than 900 commercial building projects and work across industrial, manufacturing, distribution, healthcare, bioscience, retail, restaurant, entertainment, office, and automotive sectors.",
-      "contactName": null,
-      "contactEmail": null,
-      "emailStatus": "not researched",
+      "contactName": "Paul Devers",
+      "contactEmail": "pauld@cawleyarchitects.com",
+      "contactTitle": "President & Principal Architect",
+      "contactSourceUrl": "https://www.linkedin.com/in/paul-devers-az",
+      "emailStatus": "verified by FindyMail; Arizona identity match",
       "approvalStatus": "pending review"
     },
     {
@@ -63,9 +65,11 @@
       "location": "Arizona",
       "sourceUrl": "https://willmeng.com/willmeng-breaks-ground-on-one-of-arizonas-largest-speculative-industrial-facilities/",
       "evidence": "Public August 2026 announcement says Willmeng began a 1.1-million-square-foot industrial warehouse and distribution facility in Arizona.",
-      "contactName": null,
-      "contactEmail": null,
-      "emailStatus": "not researched",
+      "contactName": "Thomas Jarvis",
+      "contactEmail": "tjarvis@willmeng.com",
+      "contactTitle": "Vice President Sales and Pre-Lease Estimating",
+      "contactSourceUrl": "https://www.linkedin.com/in/thomas-jarvis",
+      "emailStatus": "verified by FindyMail",
       "approvalStatus": "pending review"
     },
     {
@@ -75,9 +79,11 @@
       "location": "Phoenix",
       "sourceUrl": "https://lgedesignbuild.com/projects/park-algodon/",
       "evidence": "Public project page identifies an 86-acre Phoenix industrial project with four buildings totaling 725,000 square feet and a 2026 build phase.",
-      "contactName": null,
-      "contactEmail": null,
-      "emailStatus": "not researched",
+      "contactName": "John Mocarski",
+      "contactEmail": "johnm@lgedesignbuild.com",
+      "contactTitle": "Director of Business Development / Registered Architect",
+      "contactSourceUrl": "https://www.linkedin.com/in/ACwAAAIOopABzzcU72q0WLirzuAyR5-CrxSzXJ0",
+      "emailStatus": "verified by FindyMail; location metadata incomplete",
       "approvalStatus": "pending review"
     },
     {
@@ -87,9 +93,11 @@
       "location": "Phoenix",
       "sourceUrl": "https://stevensleinweber.com/projects/c303/",
       "evidence": "Public project page identifies Stevens-Leinweber as general contractor for a 1.75-million-square-foot, three-building industrial development along the Loop 303 corridor.",
-      "contactName": null,
-      "contactEmail": null,
-      "emailStatus": "not researched",
+      "contactName": "Erik Powell",
+      "contactEmail": "epowell@stevensleinweber.com",
+      "contactTitle": "Vice President",
+      "contactSourceUrl": "https://www.linkedin.com/in/erik-powell-69950b4",
+      "emailStatus": "verified by FindyMail; Arizona identity match",
       "approvalStatus": "pending review"
     },
     {
@@ -99,9 +107,11 @@
       "location": "Arizona, California, and the Southwest",
       "sourceUrl": "https://www.armays.com/business-development",
       "evidence": "Public business-development page solicits commercial construction work in Arizona, California, and the Southwest, including ground-up and tenant-improvement projects.",
-      "contactName": null,
-      "contactEmail": null,
-      "emailStatus": "not researched",
+      "contactName": "Melinda Webster",
+      "contactEmail": "melinda@armays.com",
+      "contactTitle": "Vice President Business Development & Design",
+      "contactSourceUrl": "https://www.linkedin.com/in/melinda-webster-3b13518",
+      "emailStatus": "verified by FindyMail; Arizona identity match",
       "approvalStatus": "pending review"
     },
     {
