@@ -109,12 +109,12 @@ export default function Home() {
             
             <div className="flex flex-col sm:flex-row gap-6 items-center w-full sm:w-auto">
               <Link 
-                href="/submit-project" 
+                href="/request-proposal?utm_source=website&utm_medium=organic&utm_campaign=homepage_hero"
                 className="w-full sm:w-auto h-16 px-10 bg-primary text-white font-bold text-sm uppercase tracking-[0.15em] flex items-center justify-center gap-3 rounded-none hover:bg-primary/90 transition-all group relative overflow-hidden"
               >
                 <div className="absolute inset-0 w-full h-full bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
                 <span className="relative z-10 flex items-center gap-3 whitespace-nowrap">
-                  Start a Project Review
+                  Request a Proposal
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
@@ -421,10 +421,10 @@ export default function Home() {
             className="max-w-4xl mx-auto flex flex-col items-center"
           >
             <h2 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-8 tracking-tighter drop-shadow-2xl">
-              Engineering Value.
+              Get a clear next step.
             </h2>
             <p className="text-lg md:text-2xl text-white/90 font-light mb-12 leading-relaxed max-w-3xl drop-shadow-md">
-              We beat most firm quotes — guaranteed. Get a comprehensive proposal with an initial review response typically within 12–24 hours. No endless follow-up emails. Just solid numbers.
+              Share the scope, location, and discipline for a live project. We’ll review the request and typically respond within 12–24 hours for most standard inquiries.
             </p>
             <Link 
               href="/request-proposal?utm_source=website&utm_medium=organic&utm_campaign=homepage_proposal"

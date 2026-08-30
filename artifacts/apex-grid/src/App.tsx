@@ -70,6 +70,18 @@ function Router() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+
+    const frame = window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    });
+    const timeout = window.setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    }, 150);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(timeout);
+    };
   }, [location]);
 
   return (

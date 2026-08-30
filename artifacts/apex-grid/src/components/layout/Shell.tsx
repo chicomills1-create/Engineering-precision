@@ -183,10 +183,10 @@ export function Shell({ children }: { children: React.ReactNode }) {
               );
             })}
             <Link
-              href="/submit-project"
+              href="/request-proposal?utm_source=website&utm_medium=organic&utm_campaign=site_header"
               className="h-10 min-w-[150px] whitespace-nowrap px-5 bg-primary text-white font-semibold text-sm flex items-center justify-center rounded-[2px] hover:bg-primary/90 transition-colors"
             >
-              Submit a Project
+              Request a Proposal
             </Link>
           </nav>
 
@@ -282,11 +282,11 @@ export function Shell({ children }: { children: React.ReactNode }) {
               </Link>
             </div>
             <Link
-              href="/submit-project"
+              href="/request-proposal?utm_source=website&utm_medium=organic&utm_campaign=mobile_nav"
               className="h-14 w-full mt-4 bg-primary text-white font-bold flex items-center justify-center rounded-[2px]"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Submit a Project
+              Request a Proposal
             </Link>
           </div>
         )}

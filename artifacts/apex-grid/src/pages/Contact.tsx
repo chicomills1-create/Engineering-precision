@@ -32,7 +32,7 @@ type LeadFormValues = z.infer<typeof leadSchema>;
 
 const PAGE_META = {
   title: "Contact Us | Request an Engineering Proposal | Apex Grid",
-  description: "Start your project with Apex Grid Engineering. Request a proposal for architectural, MEP, structural, or civil design services — initial review response within 12-24 hours.",
+  description: "Start your project with Apex Grid Engineering. Request a proposal for architectural, MEP, structural, or civil design services — initial review response typically within 12-24 hours for most standard requests.",
   path: "/contact",
 };
 
@@ -192,7 +192,7 @@ export default function Contact() {
           </div>
           <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">Request Received</h1>
           <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
-            Your project details have been logged in our system. A lead engineer will review your requirements and contact you within 12–24 hours.
+             Your project details have been logged in our system. A lead engineer will review your requirements and contact you within 12–24 hours for most standard requests.
           </p>
           <button
             onClick={() => {
