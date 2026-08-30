@@ -44,7 +44,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
     { name: "Team", href: "/team" },
     { name: "Portfolio", href: "/portfolio" },
     { name: "Industries", href: "/industries" },
-    { name: "General Contracting", href: "/team#construction-delivery" },
+    { name: "Delivery", href: "/team#construction-delivery" },
     { name: "Military", href: "/military" },
     { name: "Resources", href: "/resources" },
   ];
@@ -70,7 +70,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col font-sans">
+       <div className="min-h-screen flex flex-col font-sans overflow-x-hidden">
       <header 
         className={`fixed top-0 z-50 w-full transition-all duration-500 ${
           scrolled ? "bg-background/90 backdrop-blur-xl border-b border-white/5 py-4 shadow-2xl shadow-black/50" : "bg-gradient-to-b from-black/80 via-black/40 to-transparent py-8"

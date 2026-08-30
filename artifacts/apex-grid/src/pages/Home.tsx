@@ -1,5 +1,17 @@
 import { Link } from "wouter";
-import { ArrowRight, ChevronRight, FileCheck, Layers, ShieldCheck, Zap, ArrowDownRight } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowDownRight,
+  ArrowUpRight,
+  Building2,
+  ChevronRight,
+  ClipboardCheck,
+  FileCheck,
+  Layers,
+  ShieldCheck,
+  Users,
+  Zap,
+} from "lucide-react";
 import heroBg from "@assets/generated_images/hero-bg2.webp";
 import { useJsonLd, usePageMeta } from "@/lib/seo";
 import { APEX_GRID_BUSINESS_SCHEMA } from "@/lib/business-schema";
@@ -33,6 +45,37 @@ export default function Home() {
     { label: "PE-led project work", value: "100%" }
   ];
 
+  const audiences = [
+    {
+      label: "For Architects",
+      title: "Protect the design intent.",
+      desc: "Bring structural, MEP, and civil coordination into the room early, without adding another layer of project management.",
+      href: "/for-architects",
+      icon: Users,
+    },
+    {
+      label: "For Contractors",
+      title: "Keep the field moving.",
+      desc: "Get practical, permit-ready answers when RFIs, deferred submittals, or plan-check comments threaten the schedule.",
+      href: "/for-contractors",
+      icon: ClipboardCheck,
+    },
+    {
+      label: "For Developers",
+      title: "Make every market repeatable.",
+      desc: "Use one accountable engineering partner across your portfolio, with consistent standards from feasibility through permit.",
+      href: "/for-developers",
+      icon: Building2,
+    },
+    {
+      label: "For Property Managers",
+      title: "Make the next decision clear.",
+      desc: "Turn building conditions, capital planning questions, and tenant improvements into an actionable engineering path.",
+      href: "/for-property-managers",
+      icon: ShieldCheck,
+    },
+  ];
+
   const processes = [
     { id: "01", title: "Project Review", desc: "We ingest your plans, assess jurisdictional constraints, and identify clash risks before drawing a single line." },
     { id: "02", title: "System Strategy", desc: "Value-engineering the approach. We design systems that are robust but won't break the construction budget." },
@@ -41,9 +84,9 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-[100dvh] flex items-center justify-center pt-20 pb-32 overflow-hidden bg-background">
+      <section className="relative min-h-[100svh] flex items-center justify-center pt-28 pb-24 sm:pt-24 sm:pb-28 overflow-hidden bg-background">
         <motion.div 
           className="absolute inset-0 z-0"
           style={{ y: yHeroBg }}
@@ -68,7 +111,7 @@ export default function Home() {
         
         <div className="container mx-auto px-4 md:px-8 relative z-30">
           <motion.div 
-            className="max-w-6xl mx-auto flex flex-col items-center text-center"
+            className="max-w-6xl mx-auto flex flex-col items-center text-center px-1"
             style={{ opacity: opacityHeroText }}
           >
             <motion.div 
@@ -93,7 +136,7 @@ export default function Home() {
               initial="hidden"
               animate="visible"
               variants={staggerContainer}
-              className="text-5xl md:text-7xl lg:text-[8rem] font-display font-bold leading-[0.95] tracking-tighter mb-10 flex flex-col items-center"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-[8rem] font-display font-bold leading-[0.95] tracking-tighter mb-8 sm:mb-10 flex flex-col items-center"
             >
               <motion.span variants={fadeUp} className="block text-white">
                 De-Risk
@@ -103,14 +146,14 @@ export default function Home() {
               </motion.span>
             </motion.h1>
             
-            <p className="text-lg md:text-2xl text-foreground/75 max-w-3xl mb-12 leading-relaxed font-light">
+            <p className="text-base sm:text-lg md:text-2xl text-foreground/75 max-w-3xl mb-9 sm:mb-12 leading-relaxed font-light">
               Need stamped plans or engineering support to keep a commercial project moving? Coordinate structural, MEP, civil, and building assessments through one accountable, PE-led team.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-6 items-center w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center w-full sm:w-auto max-w-md sm:max-w-none">
               <Link 
                 href="/request-proposal?utm_source=website&utm_medium=organic&utm_campaign=homepage_hero"
-                className="w-full sm:w-auto h-16 px-10 bg-primary text-white font-bold text-sm uppercase tracking-[0.15em] flex items-center justify-center gap-3 rounded-none hover:bg-primary/90 transition-all group relative overflow-hidden"
+                className="w-full sm:w-auto h-16 px-6 sm:px-10 bg-primary text-white font-bold text-xs sm:text-sm uppercase tracking-[0.15em] flex items-center justify-center gap-3 rounded-none hover:bg-primary/90 transition-all group relative overflow-hidden"
               >
                 <div className="absolute inset-0 w-full h-full bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
                 <span className="relative z-10 flex items-center gap-3 whitespace-nowrap">
@@ -120,7 +163,7 @@ export default function Home() {
               </Link>
               <Link 
                 href="/portfolio" 
-                className="w-full sm:w-auto h-16 px-10 bg-transparent border border-white/20 text-white font-bold text-sm uppercase tracking-[0.15em] flex items-center justify-center rounded-none hover:border-white/60 hover:bg-white/5 transition-colors whitespace-nowrap"
+                className="w-full sm:w-auto h-16 px-6 sm:px-10 bg-transparent border border-white/20 text-white font-bold text-xs sm:text-sm uppercase tracking-[0.15em] flex items-center justify-center rounded-none hover:border-white/60 hover:bg-white/5 transition-colors whitespace-nowrap"
               >
                 View Portfolio
               </Link>
@@ -156,24 +199,67 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="p-8 md:p-12 lg:p-16 text-center group hover:bg-white/[0.02] transition-colors relative overflow-hidden"
+              className="p-5 sm:p-8 md:p-12 lg:p-16 text-center group hover:bg-white/[0.02] transition-colors relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-full h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out" />
-              <div className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-4 tracking-tighter group-hover:text-primary transition-colors duration-500">{stat.value}</div>
-              <div className="text-xs md:text-sm font-mono uppercase tracking-[0.1em] md:tracking-[0.2em] text-muted-foreground group-hover:text-white transition-colors duration-500">{stat.label}</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-3 sm:mb-4 tracking-tighter group-hover:text-primary transition-colors duration-500">{stat.value}</div>
+              <div className="text-[10px] sm:text-xs md:text-sm font-mono uppercase tracking-[0.08em] sm:tracking-[0.1em] md:tracking-[0.2em] text-muted-foreground group-hover:text-white transition-colors duration-500">{stat.label}</div>
             </motion.div>
           ))}
         </div>
       </section>
 
+      {/* Audience routing */}
+      <section className="py-24 md:py-32 bg-secondary/20 border-b border-white/5 relative">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14 md:mb-20">
+            <div className="max-w-3xl">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-8 h-px bg-primary" />
+                <span className="font-mono text-xs tracking-widest text-primary uppercase font-bold">Built around your role</span>
+              </div>
+              <h2 className="text-4xl md:text-6xl font-display font-bold leading-[1.05] tracking-tight">
+                The right support for the work in front of you.
+              </h2>
+            </div>
+            <p className="max-w-md text-lg text-muted-foreground leading-relaxed font-light">
+              Different project roles carry different risks. Start with the path that sounds like your day-to-day.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/10 border border-white/10">
+            {audiences.map((audience, i) => (
+              <motion.div
+                key={audience.href}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="bg-background group"
+              >
+                <Link href={audience.href} className="flex flex-col h-full p-7 sm:p-9 md:p-12 hover:bg-secondary/50 transition-colors">
+                  <div className="flex items-start justify-between gap-6 mb-12">
+                    <audience.icon className="w-8 h-8 text-primary" strokeWidth={1.5} />
+                    <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                  </div>
+                  <span className="font-mono text-[10px] tracking-[0.2em] text-primary uppercase font-bold mb-4">{audience.label}</span>
+                  <h3 className="text-2xl md:text-3xl font-display font-bold mb-4 group-hover:text-primary transition-colors">{audience.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed font-light">{audience.desc}</p>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Three divisions */}
-      <section className="py-32 bg-background relative z-20">
+      <section className="py-24 md:py-32 bg-background relative z-20">
         <div className="container mx-auto px-4 md:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            className="max-w-4xl mb-24"
+            className="max-w-4xl mb-16 md:mb-24"
           >
             <div className="flex items-center gap-4 mb-8">
               <div className="w-12 h-px bg-primary" />
@@ -198,11 +284,11 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: i * 0.15 }}
                 className="group relative h-full"
               >
-                <Link href={division.href} className="block h-full bg-secondary/30 border border-white/5 p-10 md:p-14 hover:bg-secondary/60 transition-all duration-500 overflow-hidden">
+                  <Link href={division.href} className="block h-full bg-secondary/30 border border-white/5 p-7 sm:p-10 md:p-14 hover:bg-secondary/60 transition-all duration-500 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/[0.05] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   <div className="relative z-10 flex flex-col h-full">
-                    <div className="flex justify-between items-start mb-16">
+                    <div className="flex justify-between items-start mb-12 md:mb-16">
                       <span className="text-5xl md:text-6xl font-display font-bold text-white/10 group-hover:text-primary transition-colors duration-500">{division.num}</span>
                       <ArrowDownRight className="w-8 h-8 text-muted-foreground group-hover:text-primary group-hover:-rotate-45 transition-all duration-500" />
                     </div>
@@ -222,7 +308,7 @@ export default function Home() {
       </section>
 
       {/* Why Apex Grid */}
-      <section className="py-32 bg-secondary/20 border-y border-white/5 relative">
+      <section className="py-24 md:py-32 bg-secondary/20 border-y border-white/5 relative">
         <div className="absolute inset-0 bg-grid-white opacity-30 bg-[size:64px_64px] pointer-events-none" />
         <div className="container mx-auto px-4 md:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
@@ -278,7 +364,7 @@ export default function Home() {
       </section>
 
       {/* Services Breakdown */}
-      <section className="py-32 bg-background">
+      <section className="py-24 md:py-32 bg-background">
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
             <div className="max-w-2xl">
@@ -338,7 +424,7 @@ export default function Home() {
       </section>
 
       {/* Philosophy / The Three Lenses */}
-      <section className="py-32 bg-secondary/30 relative overflow-hidden border-y border-white/5">
+      <section className="py-24 md:py-32 bg-secondary/30 relative overflow-hidden border-y border-white/5">
         <div className="absolute top-1/2 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/2 pointer-events-none" />
         
         <div className="container mx-auto px-4 md:px-8 relative z-10">
@@ -377,7 +463,7 @@ export default function Home() {
       </section>
 
       {/* Process */}
-      <section className="py-32 bg-background">
+      <section className="py-24 md:py-32 bg-background">
         <div className="container mx-auto px-4 md:px-8">
           <div className="mb-24 flex flex-col md:flex-row md:items-center gap-8">
             <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight">Execution Plan</h2>
@@ -408,7 +494,7 @@ export default function Home() {
       </section>
 
       {/* Pricing / Final CTA */}
-      <section className="py-40 bg-primary relative overflow-hidden text-center text-white">
+      <section className="py-24 md:py-40 bg-primary relative overflow-hidden text-center text-white">
         <div className="absolute inset-0 bg-grid-white opacity-20 bg-[size:32px_32px] pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
         
@@ -420,7 +506,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto flex flex-col items-center"
           >
-            <h2 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-8 tracking-tighter drop-shadow-2xl">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-8 tracking-tighter drop-shadow-2xl">
               Get a clear next step.
             </h2>
             <p className="text-lg md:text-2xl text-white/90 font-light mb-12 leading-relaxed max-w-3xl drop-shadow-md">
@@ -428,7 +514,7 @@ export default function Home() {
             </p>
             <Link 
               href="/request-proposal?utm_source=website&utm_medium=organic&utm_campaign=homepage_proposal"
-              className="h-16 px-10 md:px-14 bg-white text-primary font-bold text-sm uppercase tracking-[0.2em] flex items-center justify-center gap-4 rounded-none hover:bg-white/90 transition-all group shadow-[0_0_40px_rgba(0,0,0,0.5)] hover:scale-105 duration-300"
+              className="w-full max-w-sm h-16 px-6 md:px-14 bg-white text-primary font-bold text-xs sm:text-sm uppercase tracking-[0.16em] md:tracking-[0.2em] flex items-center justify-center gap-4 rounded-none hover:bg-white/90 transition-all group shadow-[0_0_40px_rgba(0,0,0,0.5)] hover:scale-105 duration-300"
             >
               Request a Proposal
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
