@@ -23,7 +23,7 @@ const PUBLIC_INBOX_LOCAL_PARTS = new Set([
 
 export type PreparationCandidate = Pick<Prospect,
   "id" | "companyName" | "website" | "contactEmail" | "contactName" | "state" | "fitScore" | "needScore"
->;
+> & { contactEvidenceType?: Prospect["contactEvidenceType"] };
 
 function phoenixDateKey(now: Date): string {
   const parts = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
@@ -50,7 +50,12 @@ export function isPhoenixPreparationWindowOpen(now = new Date()): boolean {
   return now.getTime() >= todayAtEight.getTime();
 }
 
-export function isPublicInbox(email: string | null, contactName: string | null): boolean {
+export function isPublicInbox(
+  email: string | null,
+  contactName: string | null,
+  evidenceType?: string | null,
+): boolean {
+  if (evidenceType === "official_publication") return true;
   const localPart = email?.trim().toLowerCase().split("@")[0] ?? "";
   const normalizedName = contactName?.trim().toLowerCase().replace(/[^a-z]/g, "") ?? "";
   return PUBLIC_INBOX_LOCAL_PARTS.has(localPart)
@@ -71,11 +76,18 @@ export function companyDomain(candidate: PreparationCandidate): string {
 export function prioritizePreparationCandidates<T extends PreparationCandidate>(candidates: T[]): T[] {
   const statePriority = (state: string) => state === "AZ" ? 0 : state === "CA" ? 1 : 2;
   return [...candidates].sort((left, right) => {
-    const laneDifference = Number(isPublicInbox(left.contactEmail, left.contactName))
-      - Number(isPublicInbox(right.contactEmail, right.contactName));
-    if (laneDifference !== 0) return laneDifference;
     const stateDifference = statePriority(left.state) - statePriority(right.state);
     if (stateDifference !== 0) return stateDifference;
+    const laneDifference = Number(isPublicInbox(
+      left.contactEmail,
+      left.contactName,
+      left.contactEvidenceType,
+    )) - Number(isPublicInbox(
+      right.contactEmail,
+      right.contactName,
+      right.contactEvidenceType,
+    ));
+    if (laneDifference !== 0) return laneDifference;
     const qualityDifference = (right.fitScore + right.needScore) - (left.fitScore + left.needScore);
     return qualityDifference || left.id - right.id;
   });

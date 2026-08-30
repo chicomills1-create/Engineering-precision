@@ -7,9 +7,9 @@ import {
   prospectsTable,
 } from "@workspace/db";
 import { assertVerifiedOutreachBatch } from "./outreachContactValidation";
-import { ObjectStorageService } from "./objectStorage";
 import { VERIFIED_OUTREACH_CONTACTS as LEGACY_VERIFIED_OUTREACH_CONTACTS } from "./verifiedOutreachContacts";
 import { VERIFIED_OUTREACH_CONTACTS_AUG_29 } from "./verifiedOutreachContactsAug29";
+import { VERIFIED_OUTREACH_CONTACTS_AUG_30 } from "./verifiedOutreachContactsAug30";
 
 const CAMPAIGN_NAME = "Approved 8 AM Outreach - August 2026";
 const SUBJECT = "Need stamped engineering without the usual wait or cost?";
@@ -18,33 +18,7 @@ export const VERIFIED_OUTREACH_CONTACTS = [
   ...VERIFIED_OUTREACH_CONTACTS_AUG_29,
 ] as const;
 
-type VerifiedOutreachContact = {
-  dedupeKey: string;
-  companyName: string;
-  website: string;
-  city: string;
-  state?: string;
-  audience: string;
-  contactName: string;
-  contactTitle: string;
-  contactEmail: string;
-  contactSourceUrl: string;
-  sourceUrl: string;
-  needSignals: string;
-};
-
-const STAGED_BATCH_OBJECT = "/objects/outreach/verified-2026-08-31.json";
-
-async function loadStagedVerifiedContacts(): Promise<VerifiedOutreachContact[]> {
-  const storage = new ObjectStorageService();
-  const file = await storage.getObjectEntityFile(STAGED_BATCH_OBJECT);
-  const [contents] = await file.download();
-  const parsed: unknown = JSON.parse(contents.toString("utf8"));
-  if (!Array.isArray(parsed)) {
-    throw new Error("The staged verified outreach batch is not an array");
-  }
-  return parsed as VerifiedOutreachContact[];
-}
+const AUG_30_TARGET = 150;
 
 export function approvedOutreachSubject(): string {
   return SUBJECT;
@@ -67,13 +41,8 @@ export async function seedVerifiedOutreachBatch(options: {
 } = {}): Promise<{ state: "skipped" | "ready"; queued: number }> {
   const enabled = options.enabled ?? process.env.OUTREACH_SEED_VERIFIED_BATCH === "true";
   if (!enabled) return { state: "skipped", queued: 0 };
-  const stagedContacts = await loadStagedVerifiedContacts();
-  assertVerifiedOutreachBatch(stagedContacts, 150);
-  const contacts: VerifiedOutreachContact[] = [
-    ...VERIFIED_OUTREACH_CONTACTS,
-    ...stagedContacts,
-  ];
-  assertVerifiedOutreachBatch(contacts, 463);
+  assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS, 313);
+  assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_AUG_30);
 
   let [campaign] = await db.select().from(campaignsTable)
     .where(eq(campaignsTable.name, CAMPAIGN_NAME))
@@ -93,7 +62,6 @@ export async function seedVerifiedOutreachBatch(options: {
   if (
     campaign.dailyLimit !== 150
     || campaign.audience !== "mixed"
-    || campaign.states.length !== 2
     || !campaign.states.includes("AZ")
     || !campaign.states.includes("CA")
   ) {
@@ -108,7 +76,7 @@ export async function seedVerifiedOutreachBatch(options: {
     .set({ targetCount: 150 })
     .where(eq(outreachResearchSchedulesTable.campaignId, campaign.id));
 
-  for (const contact of contacts) {
+  for (const contact of VERIFIED_OUTREACH_CONTACTS) {
     await db.transaction(async (tx) => {
       const normalizedEmail = contact.contactEmail.toLowerCase();
       await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${normalizedEmail}, 0))`);
@@ -123,7 +91,7 @@ export async function seedVerifiedOutreachBatch(options: {
       companyName: contact.companyName,
       website: contact.website,
       city: contact.city,
-       state: contact.state ?? "AZ",
+      state: contactState(contact),
       audience: contact.audience,
       sourceUrl: contact.sourceUrl,
       researchNotes: contact.needSignals,
@@ -142,6 +110,7 @@ export async function seedVerifiedOutreachBatch(options: {
       target: prospectsTable.dedupeKey,
       set: {
         campaignId: campaign.id,
+         state: contactState(contact),
         researchNotes: contact.needSignals,
         needSignals: contact.needSignals,
         contactName: contact.contactName,
@@ -162,7 +131,111 @@ export async function seedVerifiedOutreachBatch(options: {
 
     });
   }
+  const existingRows = await db.select().from(prospectsTable);
+  const suppressions = await db.select({ email: outreachSuppressionsTable.email })
+    .from(outreachSuppressionsTable);
+  const suppressedEmails = new Set(suppressions.map((row) => row.email.trim().toLowerCase()));
+  const usedEmails = new Set(existingRows.flatMap((row) =>
+    row.contactEmail ? [row.contactEmail.trim().toLowerCase()] : []
+  ));
+  const usedDomains = new Set(existingRows.flatMap((row) => {
+    if (!row.website) return [];
+    try {
+      return [new URL(row.website).hostname.replace(/^www\./, "").toLowerCase()];
+    } catch {
+      return [];
+    }
+  }));
+  let stored = existingRows.filter((row) =>
+    row.dedupeKey?.startsWith("verified-2026-08-30-")
+    && row.status === "approved"
+    && row.emailStatus === "verified"
+    && row.contactStatus === "active"
+  ).length;
+
+  for (const contact of VERIFIED_OUTREACH_CONTACTS_AUG_30) {
+    if (stored >= AUG_30_TARGET) break;
+    const normalizedEmail = contact.contactEmail.toLowerCase();
+    const domain = new URL(contact.website).hostname.replace(/^www\./, "").toLowerCase();
+    if (
+      suppressedEmails.has(normalizedEmail)
+      || usedEmails.has(normalizedEmail)
+      || usedDomains.has(domain)
+    ) continue;
+
+    const inserted = await db.transaction(async (tx) => {
+      await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${normalizedEmail}, 0))`);
+      await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${domain}, 0))`);
+      const currentRows = await tx.select({
+        contactEmail: prospectsTable.contactEmail,
+        website: prospectsTable.website,
+      }).from(prospectsTable);
+      const conflict = currentRows.some((row) => {
+        const email = row.contactEmail?.trim().toLowerCase();
+        let currentDomain = "";
+        try {
+          currentDomain = row.website
+            ? new URL(row.website).hostname.replace(/^www\./, "").toLowerCase()
+            : "";
+        } catch {
+          currentDomain = "";
+        }
+        return email === normalizedEmail || currentDomain === domain;
+      });
+      const [suppression] = await tx.select({ id: outreachSuppressionsTable.id })
+        .from(outreachSuppressionsTable)
+        .where(eq(outreachSuppressionsTable.email, normalizedEmail))
+        .limit(1);
+      if (conflict || suppression) return false;
+
+      const [prospect] = await tx.insert(prospectsTable).values({
+        campaignId: campaign.id,
+        companyName: contact.companyName,
+        website: contact.website,
+        city: contact.city,
+        state: contact.state,
+        audience: contact.audience,
+        sourceUrl: contact.sourceUrl,
+        researchNotes: `${contact.needSignals} Approval: ${contact.approvalStatus}.`,
+        fitScore: 85,
+        needScore: 80,
+        needSignals: contact.needSignals,
+        contactName: contact.contactName,
+        contactTitle: contact.contactTitle,
+        contactEmail: normalizedEmail,
+        contactConfidence: "high",
+        contactSourceUrl: contact.contactSourceUrl,
+        dedupeKey: contact.dedupeKey,
+        emailStatus: "verified",
+        status: "approved",
+        contactStatus: "active",
+        contactEvidenceType: contact.emailLane === "personal"
+          ? "findymail_verified"
+          : "official_publication",
+        contactEvidence: contact.emailEvidence,
+        contactEvidenceAt: options.now ?? new Date(),
+      }).onConflictDoNothing().returning({ id: prospectsTable.id });
+      return Boolean(prospect);
+    });
+    if (!inserted) continue;
+    usedEmails.add(normalizedEmail);
+    usedDomains.add(domain);
+    stored += 1;
+  }
+  if (stored !== AUG_30_TARGET) {
+    throw new Error(`Verified August 30 outreach seed requires exactly 150 active prospects; found ${stored}`);
+  }
   // The seed only supplies reviewed candidates. The preparation service owns all
   // message creation so the startup path cannot bypass the shared 150-slot ledger.
   return { state: "ready", queued: 0 };
+}
+
+function contactState(contact: unknown): string {
+  if (
+    typeof contact === "object"
+    && contact !== null
+    && "state" in contact
+    && typeof contact.state === "string"
+  ) return contact.state;
+  return "AZ";
 }

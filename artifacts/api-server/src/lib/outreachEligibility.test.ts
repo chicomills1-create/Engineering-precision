@@ -235,9 +235,13 @@ test("follow-ups use 3, 8, and 15 days from verified initial delivery", () => {
   assert.equal(getFollowUpScheduledAt(4, initialDeliveredAt)?.toISOString(), "2026-09-12T12:00:00.000Z");
 });
 
-test("manual and automatic follow-ups cannot bypass their due time", () => {
+test("manual and automatic sends cannot bypass their due time", () => {
   const now = new Date("2026-08-28T12:00:00.000Z");
   assert.doesNotThrow(() => assertScheduledTimeReady(1, null, now));
+  assert.throws(
+    () => assertScheduledTimeReady(1, new Date("2026-08-29T12:00:00.000Z"), now),
+    /before its scheduled time/,
+  );
   assert.throws(() => assertScheduledTimeReady(2, null, now), /scheduled send time/);
   assert.throws(
     () => assertScheduledTimeReady(2, new Date("2026-08-29T12:00:00.000Z"), now),

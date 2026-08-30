@@ -24,10 +24,18 @@ test("preparation does not stage the same Phoenix day before 8 AM", () => {
   assert.equal(isPhoenixPreparationWindowOpen(new Date("2026-08-29T15:00:00.000Z")), true);
 });
 
-test("personal contacts are prioritized before public inboxes", () => {
+test("Arizona contacts are prioritized before California contacts", () => {
   const ordered = prioritizePreparationCandidates([
     { id: 1, companyName: "General Co", website: "https://general.example", contactEmail: "info@general.example", contactName: "Info", state: "AZ", fitScore: 100, needScore: 100 },
     { id: 2, companyName: "Personal Co", website: "https://personal.example", contactEmail: "alex@personal.example", contactName: "Alex Rivera", state: "CA", fitScore: 60, needScore: 60 },
+  ]);
+  assert.deepEqual(ordered.map((candidate) => candidate.id), [1, 2]);
+});
+
+test("personal contacts are prioritized before public inboxes within a state", () => {
+  const ordered = prioritizePreparationCandidates([
+    { id: 1, companyName: "General Co", website: "https://general.example", contactEmail: "info@general.example", contactName: "Info", state: "AZ", fitScore: 100, needScore: 100 },
+    { id: 2, companyName: "Personal Co", website: "https://personal.example", contactEmail: "alex@personal.example", contactName: "Alex Rivera", state: "AZ", fitScore: 60, needScore: 60 },
   ]);
   assert.deepEqual(ordered.map((candidate) => candidate.id), [2, 1]);
 });

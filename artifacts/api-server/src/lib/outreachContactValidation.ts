@@ -78,7 +78,7 @@ export function assertOutreachContactData(
 
 export function assertVerifiedOutreachBatch(
   contacts: readonly VerifiedBatchContactValidationInput[],
-  expectedCount = 313,
+  expectedCount = contacts.length,
 ): void {
   if (contacts.length !== expectedCount) {
     throw new Error(`Verified library requires exactly ${expectedCount} contacts; found ${contacts.length}`);

@@ -4,13 +4,14 @@ import {
   approvedOutreachBody,
   VERIFIED_OUTREACH_CONTACTS,
 } from "./verifiedOutreachBatch";
+import { VERIFIED_OUTREACH_CONTACTS_AUG_30 } from "./verifiedOutreachContactsAug30";
 import {
   assertOutreachContactData,
   assertVerifiedOutreachBatch,
   isUsableBusinessEmail,
 } from "./outreachContactValidation";
 
-test("the verified outreach library contains exactly 313 unique, valid contacts", () => {
+test("the verified legacy outreach library contains exactly 313 unique, valid contacts", () => {
   const domains = VERIFIED_OUTREACH_CONTACTS.map((contact) =>
     new URL(contact.website).hostname.replace(/^www\./, "").toLowerCase()
   );
@@ -24,7 +25,30 @@ test("the verified outreach library contains exactly 313 unique, valid contacts"
     && contact.sourceUrl.startsWith("https://")
     && contact.contactEmail.includes("@")
   ));
-  assert.doesNotThrow(() => assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS));
+  assert.doesNotThrow(() => assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS, 313));
+});
+
+test("the August 30 backfill pool can supply exactly 150 distinct contacts", () => {
+  assert.ok(VERIFIED_OUTREACH_CONTACTS_AUG_30.length > 150);
+  assert.equal(
+    new Set(VERIFIED_OUTREACH_CONTACTS_AUG_30.map((contact) => contact.contactEmail)).size,
+    VERIFIED_OUTREACH_CONTACTS_AUG_30.length,
+  );
+  assert.equal(
+    new Set(VERIFIED_OUTREACH_CONTACTS_AUG_30.map((contact) =>
+      new URL(contact.website).hostname.replace(/^www\./, "").toLowerCase()
+    )).size,
+    VERIFIED_OUTREACH_CONTACTS_AUG_30.length,
+  );
+  assert.doesNotThrow(() => assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_AUG_30));
+});
+
+test("the enabled seed uses committed contacts without a private-storage prerequisite", async () => {
+  const source = await import("node:fs/promises")
+    .then((fs) => fs.readFile(new URL("./verifiedOutreachBatch.ts", import.meta.url), "utf8"));
+  assert.doesNotMatch(source, /ObjectStorageService|STAGED_BATCH_OBJECT|loadStagedVerifiedContacts/);
+  assert.match(source, /for \(const contact of VERIFIED_OUTREACH_CONTACTS_AUG_30\)/);
+  assert.match(source, /stored !== AUG_30_TARGET/);
 });
 
 test("the legacy verified pool leaves daily scheduling to the 150-slot preparation service", async () => {

@@ -73,11 +73,11 @@ export function assertScheduledTimeReady(
   scheduledAt: Date | null,
   now = new Date(),
 ): void {
-  if (sequenceNumber > 1) {
-    if (!scheduledAt) throw new Error("Follow-up must have a scheduled send time");
-    if (scheduledAt.getTime() > now.getTime()) {
-      throw new Error("Follow-up cannot send before its scheduled time");
-    }
+  if (sequenceNumber > 1 && !scheduledAt) {
+    throw new Error("Follow-up must have a scheduled send time");
+  }
+  if (scheduledAt && scheduledAt.getTime() > now.getTime()) {
+    throw new Error("Message cannot send before its scheduled time");
   }
 }
 
