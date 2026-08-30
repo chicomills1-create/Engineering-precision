@@ -44,12 +44,12 @@ export default function Military() {
               <div className="aspect-[4/5] bg-secondary border border-border overflow-hidden">
                 <img
                   src={jeremyImg}
-                  alt="Jeremy Mills, Co-Founder & CEO of Apex Grid Engineering, U.S. Air Force veteran"
+                  alt="Jeremy Mills, Founder & CEO of Apex Grid Engineering, U.S. Air Force veteran"
                   className="w-full h-full object-cover object-top"
                   loading="lazy"
                 />
               </div>
-              <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground mt-4">Jeremy Mills · Co-Founder &amp; CEO</div>
+              <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground mt-4">Jeremy Mills · Founder &amp; CEO</div>
             </div>
             <div>
               <span className="font-mono text-xs uppercase tracking-widest text-primary mb-6 block">A Note from our CEO</span>
@@ -64,7 +64,7 @@ export default function Military() {
                   Serving military clients and veteran-owned businesses isn't a niche for us — it's personal. We know what's at stake, and we're honored to bring our service-driven standards to every project that crosses our desk."
                 </p>
                 <footer className="pt-2 text-sm text-muted-foreground font-mono uppercase tracking-widest">
-                  — Jeremy, Co-Founder &amp; CEO · USAF Veteran
+                  — Jeremy, Founder &amp; CEO · USAF Veteran
                 </footer>
               </blockquote>
             </div>

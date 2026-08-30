@@ -115,7 +115,7 @@ export const MISC_PAGES: MiscPage[] = [
     sections: [
       {
         heading: "SDVOSB Status and Federal Set-Aside Eligibility",
-        content: "Apex Grid Engineering is led by a Service-Disabled Veteran — Jeremy Mills, co-founder and CEO, USAF disabled veteran — and is eligible for federal SDVOSB set-aside contracts.",
+        content: "Apex Grid Engineering is led by a Service-Disabled Veteran — Jeremy Mills, founder and CEO, USAF disabled veteran — and is eligible for federal SDVOSB set-aside contracts.",
         bullets: [
           "SDVOSB-eligible — Service-Disabled Veteran-Owned Small Business",
           "Registered in SAM.gov — active registration with UEI and CAGE code",
@@ -173,7 +173,7 @@ export const MISC_PAGES: MiscPage[] = [
           "CAGE code and UEI available for teaming and contract vehicles",
           "Formal capabilities statement available on request",
           "NAICS 541330 and related codes — engineering services",
-          "Contact: Jeremy Mills, Co-Founder and CEO",
+          "Contact: Jeremy Mills, Founder and CEO",
           "Phone: 480-490-0064 | Online: apexgrideng.com/contact/",
         ],
       },

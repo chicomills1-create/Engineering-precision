@@ -22,16 +22,16 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
     sitemapCategory: "core",
     title: "Jeremy Mills (Chico Mills) | Apex Grid Engineering CEO",
     description:
-      "Jeremy “Chico” Mills is Co-Founder and CEO of Apex Grid Engineering, a U.S. Air Force veteran, and Founder and Senior Pastor of 16:3 Faith.",
+      "Jeremy “Chico” Mills is Founder and CEO of Apex Grid Engineering, a U.S. Air Force veteran, and Founder and Senior Pastor of 16:3 Faith.",
     h1: "Jeremy “Chico” Mills",
-    kicker: "Co-Founder & CEO",
+    kicker: "Founder & CEO",
     lede:
       "Jeremy Mills, also known as Chico Mills, leads Apex Grid Engineering and serves as Founder and Senior Pastor of 16:3 Faith.",
     sections: [
       {
         heading: "Who Is Jeremy Mills?",
         content:
-          "Jeremy Mills is the Co-Founder and CEO of Apex Grid Engineering. He leads the firm’s growth, client service, and mission-driven operating culture as it delivers integrated engineering, architecture, and construction support nationwide.",
+          "Jeremy Mills is the Founder and CEO of Apex Grid Engineering. He leads the firm’s growth, client service, and mission-driven operating culture as it delivers integrated engineering, architecture, and construction support nationwide.",
       },
       {
         heading: "Military Service and Leadership",
@@ -68,9 +68,9 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
         name: "Jeremy Mills",
         alternateName: ["Chico Mills", "Pastor Jeremy Mills", "Pastor Chico Mills"],
         url: "https://apexgrideng.com/jeremy-mills/",
-        jobTitle: "Co-Founder and Chief Executive Officer",
+        jobTitle: "Founder and Chief Executive Officer",
         description:
-          "Co-Founder and CEO of Apex Grid Engineering, U.S. Air Force veteran, and Founder and Senior Pastor of 16:3 Faith.",
+          "Founder and CEO of Apex Grid Engineering, U.S. Air Force veteran, and Founder and Senior Pastor of 16:3 Faith.",
         worksFor: { "@id": "https://apexgrideng.com/#business" },
         affiliation: {
           "@type": "Organization",

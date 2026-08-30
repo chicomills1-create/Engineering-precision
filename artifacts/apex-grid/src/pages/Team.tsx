@@ -360,7 +360,7 @@ export default function Team() {
 
 const PAGE_META = {
   title: "Our Engineering & Architecture Team | PEs in 49 States | Apex Grid",
-  description: "Meet Apex Grid Engineering's architecture and engineering team, including registered architects Jason Mitchell and James Spencer, plus the PCM construction delivery branch.",
+  description: "Meet Apex Grid Engineering's executive, architecture, and engineering team, including Chief People Officer Angel Endres, registered architects Jason Mitchell and James Spencer, and the PCM construction delivery branch.",
   path: "/team",
 };
 
@@ -400,6 +400,20 @@ const TEAM_SCHEMA = {
         worksFor: { "@type": "Organization", name: "Apex Grid Engineering" },
         knowsAbout: ["Structural engineering", "Multifamily residential buildings", "Gravity and lateral load analysis", "Finite element modelling"],
       },
+      {
+        "@type": "Person",
+        name: "Angel Endres",
+        jobTitle: "Chief People Officer",
+        worksFor: { "@type": "Organization", name: "Apex Grid Engineering" },
+        knowsAbout: [
+          "Human resources leadership",
+          "SHRM principles",
+          "Engineering-industry HR compliance",
+          "Employee relations",
+          "Talent acquisition",
+          "Organizational development",
+        ],
+      },
     ],
   },
 };
@@ -412,7 +426,7 @@ const ENGINEERING_TEAM = [
   },
   {
     name: "Jason Luhn",
-    role: "Principal | Structural Professional Engineer (PE)",
+    role: "Chief Operating Officer | Principal Structural Professional Engineer (PE)",
     image: "/images/team/jason-luhn.webp",
   },
   {

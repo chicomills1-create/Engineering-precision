@@ -30,7 +30,7 @@ _Populate as you build — non-obvious choices a reader couldn't infer from the 
 
 ## Product
 
-- `artifacts/apex-grid` — dark, cinematic marketing site at `/`, modeled on www.engides.com (the user is CEO of Engides): Home, About, Portfolio, Industries, Services overview + `/services/:id` detail pages (mep, structural, civil, assessments), Resources guides, Contact, Privacy/Terms. No employee/team page by explicit request. Contact form posts to `POST /api/leads` (stored in `leads` table).
+- `artifacts/apex-grid` — dark, cinematic marketing site at `/`, modeled on www.engides.com (the user is CEO of Engides): Home, About, Team, Portfolio, Industries, Services overview + `/services/:id` detail pages (mep, structural, civil, assessments), Resources guides, Contact, Privacy/Terms. Contact form posts to `POST /api/leads` (stored in `leads` table).
 - `/admin` — Clerk-protected personal employee portal for jobs, inquiries, and workspace operations. `/admin/outreach` is the email approvals and outreach section, and `/admin/seo` is the SEO section; all remain behind the same `ADMIN_EMAILS` authorization. Auth is Replit-managed Clerk: proxy middleware + `clerkMiddleware` in `artifacts/api-server/src/app.ts`, `requireAuth` in `src/middlewares/requireAuth.ts`, sign-in/sign-up routes + themed Clerk UI in `artifacts/apex-grid/src/App.tsx`.
 - Design: dark by default, near-black neutral bg (HSL 0 0% 4%), red accent (HSL 0 72% 48%), Space Grotesk headings / Inter body, 4px radius — user changed the original gold/navy palette to red and black; keep this look.
 

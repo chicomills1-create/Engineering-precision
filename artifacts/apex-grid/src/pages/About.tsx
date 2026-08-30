@@ -4,6 +4,7 @@ import { SITE_URL, useJsonLd, usePageMeta } from "@/lib/seo";
 import officeImg from "@assets/generated_images/office.webp";
 import jeremyImg from "@assets/generated_images/jeremy-mills.webp";
 import jasonLuhnImg from "@assets/generated_images/jason-luhn.webp";
+import angelImg from "@assets/file_00000000b85c8230ad55cc8b03100eea_1788058580363.png";
 
 export default function About() {
   usePageMeta(PAGE_META);
@@ -146,20 +147,20 @@ export default function About() {
         </div>
       </section>
 
-      {/* Co-Founders */}
+      {/* Executive leadership */}
       <section className="py-32 bg-background border-b border-border">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-center">Our Co-Founders</h2>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-center">Executive Leadership</h2>
             <p className="text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-16">
-              Apex Grid Engineering is founder-led — the people who started the firm still stand behind every set of drawings.
+              Apex Grid Engineering is founder-led, operationally disciplined, and built around the people and standards that make accountable delivery possible.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
               <div className="bg-card p-10">
                 <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden">
                   <img
                     src={jeremyImg}
-                    alt="Jeremy Mills, Co-Founder & CEO of Apex Grid Engineering"
+                    alt="Jeremy Mills, Founder & CEO of Apex Grid Engineering"
                     className="w-full h-full object-cover object-top"
                     loading="lazy"
                   />
@@ -170,7 +171,7 @@ export default function About() {
                     Jeremy Mills
                   </Link>
                 </h3>
-                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Co-Founder &amp; CEO · U.S. Air Force Veteran</div>
+                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Founder &amp; CEO · U.S. Air Force Veteran</div>
                 <p className="text-muted-foreground leading-relaxed">
                   Jeremy leads Apex Grid with the same mission-first discipline he developed in uniform. As an Aerospace Medical Service Journeyman who deployed to Iraq in support of Operation Iraqi Freedom, he built the firm around accountability, clear communication, and delivering for clients the way you deliver for your unit — no excuses, no surprises.
                 </p>
@@ -197,17 +198,41 @@ export default function About() {
                 <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden">
                   <img
                     src={jasonLuhnImg}
-                    alt="Jason Luhn, PE — Co-Founder & COO of Apex Grid Engineering"
+                    alt="Jason Luhn, PE — Chief Operating Officer of Apex Grid Engineering"
                     className="w-full h-full object-cover object-top"
                     loading="lazy"
                   />
                 </div>
                 <div className="w-12 h-[2px] bg-primary mb-6" />
                 <h3 className="text-2xl font-display font-bold mb-1">Jason Luhn, PE</h3>
-                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Co-Founder &amp; COO · Professional Engineer</div>
+                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Chief Operating Officer · Professional Engineer</div>
                 <p className="text-muted-foreground leading-relaxed">
                   Jason is the firm's operational and technical anchor. A licensed Professional Engineer, he runs the firm's day-to-day operations and sets the engineering standard across every discipline — insisting on constructable drawings, code-first design, and documents that pass review the first time.
                 </p>
+              </div>
+              <div className="bg-card p-10">
+                <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden">
+                  <img
+                    src={angelImg}
+                    alt="Angel Endres, Chief People Officer of Apex Grid Engineering"
+                    className="w-full h-full object-cover object-top"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="w-12 h-[2px] bg-primary mb-6" />
+                <h3 className="text-2xl font-display font-bold mb-1">Angel Endres</h3>
+                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Chief People Officer · SHRM Professional</div>
+                <div className="space-y-4 text-muted-foreground leading-relaxed">
+                  <p>
+                    Angel is a seasoned Human Resources executive with more than 15 years of HR leadership experience, including five years as an HR Director in the engineering field.
+                  </p>
+                  <p>
+                    She strengthens the people, culture, and organizational infrastructure behind Apex Grid's continued growth, with expertise in talent acquisition, employee development, performance management, compliance, workplace investigations, and leadership development.
+                  </p>
+                  <p>
+                    Her award-recognized work in engineering-industry HR compliance and SHRM-informed professional practice makes her a strategic partner to executive leadership.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -280,9 +305,9 @@ const JEREMY_PERSON_SCHEMA = {
   name: "Jeremy Mills",
   alternateName: ["Chico Mills", "Pastor Jeremy Mills", "Pastor Chico Mills"],
   url: `${SITE_URL}/jeremy-mills/`,
-  jobTitle: "Co-Founder and Chief Executive Officer",
+  jobTitle: "Founder and Chief Executive Officer",
   description:
-    "Co-Founder and CEO of Apex Grid Engineering, U.S. Air Force veteran, and Founder and Senior Pastor of 16:3 Faith.",
+    "Founder and CEO of Apex Grid Engineering, U.S. Air Force veteran, and Founder and Senior Pastor of 16:3 Faith.",
   worksFor: { "@id": `${SITE_URL}/#business` },
   affiliation: {
     "@type": "Organization",
