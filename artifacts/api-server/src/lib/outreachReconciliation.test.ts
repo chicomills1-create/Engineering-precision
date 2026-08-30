@@ -9,6 +9,7 @@ import {
   outreachMessagesTable,
   outreachSendReservationsTable,
   outreachSequenceSendClaimsTable,
+  outreachSuppressionsTable,
   prospectsTable,
 } from "@workspace/db";
 import {
@@ -23,6 +24,11 @@ import {
   getSendFailureStatus,
   reconcileSendingOutreachMessages,
 } from "./outreachWorker";
+import {
+  classifySendGridActivity,
+  reconcileUncertainOutreachMessages,
+  type ProviderActivityOutcome,
+} from "./outreachReconciliation";
 
 async function createFixture(status = "approved") {
   const suffix = randomUUID();
@@ -63,6 +69,8 @@ async function createFixture(status = "approved") {
 }
 
 async function cleanFixture(fixture: Awaited<ReturnType<typeof createFixture>>): Promise<void> {
+  await db.delete(outreachSuppressionsTable)
+    .where(eq(outreachSuppressionsTable.email, fixture.prospect.contactEmail!));
   await db.delete(outreachDeliveryEventsTable).where(eq(outreachDeliveryEventsTable.outreachMessageId, fixture.message.id));
   await db.delete(outreachSendReservationsTable).where(eq(outreachSendReservationsTable.messageId, fixture.message.id));
   await db.delete(outreachSequenceSendClaimsTable).where(eq(outreachSequenceSendClaimsTable.prospectId, fixture.prospect.id));
@@ -292,6 +300,234 @@ test("a provider 503 retains the sequence claim and blocks redispatch", async ()
       if (value === undefined) delete process.env[key];
       else process.env[key] = value;
     }
+    await cleanFixture(fixture);
+  }
+});
+
+async function addSendClaims(fixture: Awaited<ReturnType<typeof createFixture>>): Promise<void> {
+  await db.insert(outreachSequenceSendClaimsTable).values({
+    messageId: fixture.message.id,
+    prospectId: fixture.prospect.id,
+    campaignScope: `campaign:${fixture.campaign.id}`,
+    sequenceNumber: fixture.message.sequenceNumber,
+  });
+  await db.insert(outreachSendReservationsTable).values({
+    messageId: fixture.message.id,
+    quotaKey: "outreach-global:2026-08-30",
+    slot: fixture.message.id,
+  });
+}
+
+function lookupResult(outcome: ProviderActivityOutcome) {
+  return async () => outcome;
+}
+
+test("terminal non-delivery takes precedence over an earlier processed event", () => {
+  const outcome = classifySendGridActivity({
+    messages: [{
+      msg_id: "mixed-event-message",
+      status: "not_delivered",
+      last_event_time: "2026-08-30T15:00:00.000Z",
+      events: [
+        "processed",
+        { event_name: "bounce", reason: "Mailbox rejected the message" },
+      ],
+    }],
+  });
+  assert.equal(outcome.state, "terminal_failure");
+  assert.match(outcome.reason, /mailbox rejected/i);
+});
+
+test("activity bounce suppresses the address and cannot release a resend", async () => {
+  const fixture = await createFixture("sending");
+  try {
+    await ensureProviderReconciliationKey(fixture.message.id);
+    await addSendClaims(fixture);
+    const summary = await reconcileUncertainOutreachMessages({
+      reviewAfterMs: 0,
+      lookupActivity: lookupResult(classifySendGridActivity({
+        messages: [{
+          msg_id: `bounced-${fixture.message.id}`,
+          status: "not_delivered",
+          last_event_time: "2026-08-30T15:00:00.000Z",
+          events: [
+            "processed",
+            { event_name: "bounce", reason: "Mailbox unavailable" },
+          ],
+        }],
+      })),
+    });
+    const [message] = await db.select().from(outreachMessagesTable)
+      .where(eq(outreachMessagesTable.id, fixture.message.id));
+    const [prospect] = await db.select().from(prospectsTable)
+      .where(eq(prospectsTable.id, fixture.prospect.id));
+    const [suppression] = await db.select().from(outreachSuppressionsTable)
+      .where(eq(outreachSuppressionsTable.email, fixture.prospect.contactEmail!));
+    assert.equal(summary.failed, 1);
+    assert.equal(summary.retryReleased, 0);
+    assert.equal(message?.status, "bounced");
+    assert.equal(prospect?.status, "suppressed");
+    assert.ok(suppression);
+    assert.equal(
+      (await db.select().from(outreachSendReservationsTable)
+        .where(eq(outreachSendReservationsTable.messageId, fixture.message.id))).length,
+      1,
+    );
+    assert.equal(
+      (await db.select().from(outreachSequenceSendClaimsTable)
+        .where(eq(outreachSequenceSendClaimsTable.messageId, fixture.message.id))).length,
+      1,
+    );
+    assert.equal(await claimOutreachMessageForSending(fixture.message.id), undefined);
+  } finally {
+    await cleanFixture(fixture);
+  }
+});
+
+test("provider acceptance reconciles the message and preserves quota without resending", async () => {
+  const fixture = await createFixture("sending");
+  try {
+    const reconciliationKey = await ensureProviderReconciliationKey(fixture.message.id);
+    await addSendClaims(fixture);
+    const occurredAt = new Date("2026-08-30T15:00:00.000Z");
+    const summary = await reconcileUncertainOutreachMessages({
+      reviewAfterMs: 0,
+      lookupActivity: async (key) => {
+        assert.equal(key, reconciliationKey);
+        return {
+          state: "accepted",
+          providerMessageId: `accepted-${fixture.message.id}`,
+          occurredAt,
+          delivered: false,
+          reason: "accepted",
+        };
+      },
+    });
+
+    const [message] = await db.select().from(outreachMessagesTable)
+      .where(eq(outreachMessagesTable.id, fixture.message.id));
+    const reservations = await db.select().from(outreachSendReservationsTable)
+      .where(eq(outreachSendReservationsTable.messageId, fixture.message.id));
+    const claims = await db.select().from(outreachSequenceSendClaimsTable)
+      .where(eq(outreachSequenceSendClaimsTable.messageId, fixture.message.id));
+    assert.equal(summary.accepted, 1);
+    assert.equal(message?.status, "sent");
+    assert.equal(message?.providerMessageId, `accepted-${fixture.message.id}`);
+    assert.equal(message?.sentAt?.toISOString(), occurredAt.toISOString());
+    assert.equal(reservations.length, 1);
+    assert.equal(claims.length, 1);
+  } finally {
+    await cleanFixture(fixture);
+  }
+});
+
+test("confirmed provider rejection releases exactly one automatic retry", async () => {
+  const fixture = await createFixture("sending");
+  try {
+    await ensureProviderReconciliationKey(fixture.message.id);
+    await addSendClaims(fixture);
+    const rejected: ProviderActivityOutcome = {
+      state: "not_accepted",
+      providerMessageId: `rejected-${fixture.message.id}`,
+      occurredAt: new Date("2026-08-30T15:01:00.000Z"),
+      reason: "Provider rejected before delivery",
+    };
+    const first = await reconcileUncertainOutreachMessages({
+      reviewAfterMs: 0,
+      lookupActivity: lookupResult(rejected),
+    });
+    const [released] = await db.select().from(outreachMessagesTable)
+      .where(eq(outreachMessagesTable.id, fixture.message.id));
+    assert.equal(first.retryReleased, 1);
+    assert.equal(released?.status, "approved");
+    assert.equal(
+      (await db.select().from(outreachSendReservationsTable)
+        .where(eq(outreachSendReservationsTable.messageId, fixture.message.id))).length,
+      0,
+    );
+    assert.equal(
+      (await db.select().from(outreachSequenceSendClaimsTable)
+        .where(eq(outreachSequenceSendClaimsTable.messageId, fixture.message.id))).length,
+      0,
+    );
+
+    await db.update(outreachMessagesTable).set({ status: "sending" })
+      .where(eq(outreachMessagesTable.id, fixture.message.id));
+    await addSendClaims(fixture);
+    const second = await reconcileUncertainOutreachMessages({
+      reviewAfterMs: 0,
+      lookupActivity: lookupResult(rejected),
+    });
+    const [failed] = await db.select().from(outreachMessagesTable)
+      .where(eq(outreachMessagesTable.id, fixture.message.id));
+    assert.equal(second.failed, 1);
+    assert.equal(failed?.status, "failed");
+    assert.match(failed?.error ?? "", /one automatic retry/i);
+  } finally {
+    await cleanFixture(fixture);
+  }
+});
+
+test("provider activity timeout remains blocked with a clear review reason", async () => {
+  const fixture = await createFixture("sending");
+  try {
+    await ensureProviderReconciliationKey(fixture.message.id);
+    await addSendClaims(fixture);
+    const summary = await reconcileUncertainOutreachMessages({
+      reviewAfterMs: 0,
+      lookupActivity: lookupResult({
+        state: "ambiguous",
+        reason: "SendGrid activity lookup timed out",
+      }),
+    });
+    const [message] = await db.select().from(outreachMessagesTable)
+      .where(eq(outreachMessagesTable.id, fixture.message.id));
+    assert.equal(summary.ambiguous, 1);
+    assert.equal(message?.status, "needs_review");
+    assert.match(message?.error ?? "", /timed out/i);
+    assert.match(message?.error ?? "", /retry remains blocked/i);
+    assert.equal(
+      (await db.select().from(outreachSequenceSendClaimsTable)
+        .where(eq(outreachSequenceSendClaimsTable.messageId, fixture.message.id))).length,
+      1,
+    );
+  } finally {
+    await cleanFixture(fixture);
+  }
+});
+
+test("concurrent reconciliation cannot release the same retry twice", async () => {
+  const fixture = await createFixture("sending");
+  try {
+    await ensureProviderReconciliationKey(fixture.message.id);
+    await addSendClaims(fixture);
+    const rejected: ProviderActivityOutcome = {
+      state: "not_accepted",
+      providerMessageId: `duplicate-safe-${fixture.message.id}`,
+      occurredAt: new Date("2026-08-30T15:02:00.000Z"),
+      reason: "Provider rejected before delivery",
+    };
+    const results = await Promise.all([
+      reconcileUncertainOutreachMessages({
+        reviewAfterMs: 0,
+        lookupActivity: lookupResult(rejected),
+      }),
+      reconcileUncertainOutreachMessages({
+        reviewAfterMs: 0,
+        lookupActivity: lookupResult(rejected),
+      }),
+    ]);
+    assert.equal(results.reduce((total, result) => total + result.retryReleased, 0), 1);
+    const retryMarkers = await db.select().from(outreachDeliveryEventsTable)
+      .where(eq(outreachDeliveryEventsTable.outreachMessageId, fixture.message.id));
+    assert.equal(
+      retryMarkers.filter((event) => event.eventType === "reconciliation_retry_released").length,
+      1,
+    );
+    const [message] = await db.select().from(outreachMessagesTable)
+      .where(eq(outreachMessagesTable.id, fixture.message.id));
+    assert.equal(message?.status, "approved");
+  } finally {
     await cleanFixture(fixture);
   }
 });

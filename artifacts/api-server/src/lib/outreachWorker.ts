@@ -1,8 +1,7 @@
-import { and, asc, desc, eq, lte, or, sql } from "drizzle-orm";
+import { and, asc, eq, lte, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
-  outreachDeliveryEventsTable,
   outreachMessagesTable,
   prospectsTable,
   type OutreachMessage,
@@ -16,9 +15,12 @@ import {
 } from "./outreachEvents";
 import { processDueOutreachResearchSchedules } from "./outreachResearchScheduler";
 import { prepareNextPhoenixOutreach } from "./outreachPreparation";
+import {
+  reconcileUncertainOutreachMessages,
+  type OutreachReconciliationSummary,
+} from "./outreachReconciliation";
 
 const ADMIN_EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-const SEND_REVIEW_AFTER_MS = 15 * 60 * 1000;
 const MAX_SCHEDULED_MESSAGES_PER_RUN = 150;
 
 export type OutreachAutomationStatus = {
@@ -152,67 +154,16 @@ export async function sendClaimedOutreachMessage(message: OutreachMessage): Prom
 }
 export async function reconcileSendingOutreachMessages(
   now = new Date(),
-  reviewAfterMs = SEND_REVIEW_AFTER_MS,
+  reviewAfterMs = 15 * 60 * 1000,
 ): Promise<number> {
-  const messages = await db.select().from(outreachMessagesTable)
-    .where(eq(outreachMessagesTable.status, "sending"));
-  let reconciledCount = 0;
-  for (const message of messages) {
-    const evidence = await db.select().from(outreachDeliveryEventsTable)
-      .where(or(
-        eq(outreachDeliveryEventsTable.outreachMessageId, message.id),
-        ...(message.providerReconciliationKey
-          ? [eq(outreachDeliveryEventsTable.reconciliationKey, message.providerReconciliationKey)]
-          : []),
-      ))
-      .orderBy(desc(outreachDeliveryEventsTable.occurredAt));
-    const terminalFailure = evidence.find((event) =>
-      ["bounce", "blocked", "dropped"].includes(event.eventType)
-    );
-    const delivered = evidence.find((event) => event.eventType === "delivered");
-    const accepted = evidence[0];
-    const decisiveEvent = terminalFailure ?? delivered ?? accepted;
-    if (decisiveEvent) {
-      const status = terminalFailure ? "bounced" : delivered ? "delivered" : "sent";
-      const [updated] = await db.update(outreachMessagesTable)
-        .set({
-          status,
-          sentAt: status === "sent" || status === "delivered"
-            ? sql`coalesce(${outreachMessagesTable.sentAt}, ${decisiveEvent.occurredAt})`
-            : undefined,
-          providerMessageId: decisiveEvent.providerMessageId ?? undefined,
-          error: terminalFailure
-            ? terminalFailure.reason ?? "Delivery failed"
-            : null,
-        })
-        .where(and(
-          eq(outreachMessagesTable.id, message.id),
-          eq(outreachMessagesTable.status, "sending"),
-        ))
-        .returning({ id: outreachMessagesTable.id });
-      if (updated) reconciledCount += 1;
-      continue;
-    }
-
-    if (now.getTime() - message.updatedAt.getTime() < reviewAfterMs) continue;
-    const [updated] = await db.update(outreachMessagesTable)
-      .set({
-        status: "needs_review",
-        error: "SendGrid dispatch result is unresolved; review provider activity before taking any action",
-      })
-      .where(and(
-        eq(outreachMessagesTable.id, message.id),
-        eq(outreachMessagesTable.status, "sending"),
-      ))
-      .returning({ id: outreachMessagesTable.id });
-    if (updated) reconciledCount += 1;
-  }
-  return reconciledCount;
+  const result = await reconcileUncertainOutreachMessages({ now, reviewAfterMs });
+  return result.accepted + result.retryReleased + result.failed + result.ambiguous;
 }
 
 export async function processDueOutreachMessages(): Promise<number> {
   if (!isOutreachAutomationReady()) return 0;
-  await reconcileSendingOutreachMessages();
+  const reconciliation = await reconcileUncertainOutreachMessages();
+  logReconciliationSummary(reconciliation);
   const due = await db.select().from(outreachMessagesTable)
     .where(and(
       eq(outreachMessagesTable.status, "approved"),
@@ -253,6 +204,23 @@ export async function processDueOutreachMessages(): Promise<number> {
     }
   }
   return sentCount;
+}
+
+function logReconciliationSummary(summary: OutreachReconciliationSummary): void {
+  if (summary.checked === 0 && summary.waiting === 0) return;
+  const context = {
+    checked: summary.checked,
+    accepted: summary.accepted,
+    retryReleased: summary.retryReleased,
+    failed: summary.failed,
+    ambiguous: summary.ambiguous,
+    waiting: summary.waiting,
+  };
+  if (summary.ambiguous > 0 || summary.failed > 0) {
+    logger.warn(context, "Outreach reconciliation left messages requiring review");
+  } else {
+    logger.info(context, "Outreach reconciliation completed");
+  }
 }
 
 export function startOutreachWorker(): void {

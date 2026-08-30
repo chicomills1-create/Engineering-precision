@@ -802,6 +802,15 @@ export interface OutreachMessageInput {
 
 export type OutreachMessageUpdate = OutreachMessageInput;
 
+export interface OutreachReconciliationSummary {
+  checked: number;
+  accepted: number;
+  retryReleased: number;
+  failed: number;
+  ambiguous: number;
+  waiting: number;
+}
+
 export type DraftGenerationInputSourceType = typeof DraftGenerationInputSourceType[keyof typeof DraftGenerationInputSourceType];
 
 

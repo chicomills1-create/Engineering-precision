@@ -22,6 +22,7 @@ import {
   GetOutreachDashboardResponse, ListCampaignsResponse, ListOutreachMessagesResponse, ListProspectsResponse,
   ListOutreachResearchRunsResponse, ListOutreachResearchSchedulesResponse, ListOutreachSuppressionsResponse,
   MarkOutreachProspectRepliedParams, MarkOutreachProspectRepliedResponse,
+  ReconcileOutreachMessagesResponse,
   RecordOutreachContactEvidenceBody, RecordOutreachContactEvidenceParams, RecordOutreachContactEvidenceResponse,
   RunOutreachResearchBody, RunOutreachResearchResponse,
   SendOutreachMessageParams, SendOutreachMessageResponse, SuppressOutreachAddressBody, SuppressOutreachAddressResponse,
@@ -57,6 +58,7 @@ import {
   getNextOutreachPreparationStatus,
 } from "../lib/outreachPreparation";
 import { recordContactEvidence } from "../lib/outreachContactEvidence";
+import { reconcileUncertainOutreachMessages } from "../lib/outreachReconciliation";
 
 const router: IRouter = Router();
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
@@ -291,6 +293,10 @@ router.get("/outreach/messages/review", requireAuth, async (_req, res): Promise<
     .where(inArray(outreachMessagesTable.status, ["sending", "needs_review"]))
     .orderBy(desc(outreachMessagesTable.updatedAt));
   res.json(ListOutreachMessagesResponse.parse(await Promise.all(rows.map(messageJson))));
+});
+router.post("/outreach/messages/reconcile", requireAuth, async (_req, res): Promise<void> => {
+  const result = await reconcileUncertainOutreachMessages();
+  res.json(ReconcileOutreachMessagesResponse.parse(result));
 });
 router.get("/outreach/messages", requireAuth, async (_req, res): Promise<void> => { const rows = await db.select().from(outreachMessagesTable).orderBy(desc(outreachMessagesTable.createdAt)); res.json(ListOutreachMessagesResponse.parse(await Promise.all(rows.map(messageJson)))); });
 router.post("/outreach/messages", requireAuth, async (req, res): Promise<void> => { const data = CreateOutreachMessageBody.safeParse(req.body); if (!data.success) { res.status(400).json({ error: data.error.message }); return; } const attributionError = await validateAttribution(data.data.sourceType, data.data.sourceId); if (attributionError) { res.status(400).json({ error: attributionError }); return; } const [row] = await db.insert(outreachMessagesTable).values({ ...data.data, status: "draft", scheduledAt: data.data.scheduledAt ? new Date(data.data.scheduledAt) : undefined }).returning(); res.status(201).json(CreateOutreachMessageResponse.parse(await messageJson(row!))); });

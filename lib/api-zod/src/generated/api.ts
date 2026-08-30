@@ -1209,6 +1209,19 @@ export const ListOutreachMessagesForReviewResponseItem = zod.object({
 export const ListOutreachMessagesForReviewResponse = zod.array(ListOutreachMessagesForReviewResponseItem)
 
 
+/**
+ * Check unresolved sends against SendGrid activity and safely finalize, retry once, or retain them for review.
+ */
+export const ReconcileOutreachMessagesResponse = zod.object({
+  "checked": zod.number(),
+  "accepted": zod.number(),
+  "retryReleased": zod.number(),
+  "failed": zod.number(),
+  "ambiguous": zod.number(),
+  "waiting": zod.number()
+})
+
+
 export const UpdateOutreachMessageParams = zod.object({
   "id": zod.coerce.number()
 })

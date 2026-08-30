@@ -105,6 +105,7 @@ export * from './outreachMessageInputSourceType';
 export * from './outreachMessageSourceType';
 export * from './outreachMessageStatus';
 export * from './outreachMessageUpdate';
+export * from './outreachReconciliationSummary';
 export * from './outreachUnsubscribeInput';
 export * from './payrollEntry';
 export * from './payrollEntryCompensationType';

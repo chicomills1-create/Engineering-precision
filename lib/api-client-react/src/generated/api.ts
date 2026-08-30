@@ -78,6 +78,7 @@ import type {
   OutreachMessage,
   OutreachMessageInput,
   OutreachMessageUpdate,
+  OutreachReconciliationSummary,
   OutreachUnsubscribeInput,
   PayrollEntryInput,
   PayrollInstallmentUpdate,
@@ -2702,6 +2703,74 @@ export function useListOutreachMessagesForReview<TData = Awaited<ReturnType<type
 
 
 
+
+export const getReconcileOutreachMessagesUrl = () => {
+
+
+
+
+  return `/api/outreach/messages/reconcile`
+}
+
+/**
+ * Check unresolved sends against SendGrid activity and safely finalize, retry once, or retain them for review.
+ */
+export const reconcileOutreachMessages = async ( options?: Parameters<typeof customFetch>[1]): Promise<OutreachReconciliationSummary> => {
+
+  return customFetch<OutreachReconciliationSummary>(getReconcileOutreachMessagesUrl(),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+
+export const getReconcileOutreachMessagesMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof reconcileOutreachMessages>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof reconcileOutreachMessages>>, TError,void, TContext> => {
+
+const mutationKey = ['reconcileOutreachMessages'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof reconcileOutreachMessages>>, void> = () => {
+
+
+          return  reconcileOutreachMessages(requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type ReconcileOutreachMessagesMutationResult = NonNullable<Awaited<ReturnType<typeof reconcileOutreachMessages>>>
+
+    export type ReconcileOutreachMessagesMutationError = ErrorType<unknown>
+
+    export const useReconcileOutreachMessages = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof reconcileOutreachMessages>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof reconcileOutreachMessages>>,
+        TError,
+        void,
+        TContext
+      > => {
+      return useMutation(getReconcileOutreachMessagesMutationOptions(options));
+    }
 
 export const getUpdateOutreachMessageUrl = (id: number,) => {
 

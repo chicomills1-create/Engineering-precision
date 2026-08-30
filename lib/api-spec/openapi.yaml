@@ -730,6 +730,13 @@ paths:
       tags: [outreach]
       responses:
         "200": { description: Messages with unresolved provider outcomes, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/OutreachMessage" } } } } }
+  /outreach/messages/reconcile:
+    post:
+      operationId: reconcileOutreachMessages
+      tags: [outreach]
+      description: Check unresolved sends against SendGrid activity and safely finalize, retry once, or retain them for review.
+      responses:
+        "200": { description: Reconciliation counts, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachReconciliationSummary" } } } }
   /outreach/messages/{id}:
     patch:
       operationId: updateOutreachMessage
@@ -1537,6 +1544,16 @@ components:
         sourceId: { type: number }
     OutreachMessageUpdate:
       allOf: [{ $ref: "#/components/schemas/OutreachMessageInput" }]
+    OutreachReconciliationSummary:
+      type: object
+      required: [checked, accepted, retryReleased, failed, ambiguous, waiting]
+      properties:
+        checked: { type: number }
+        accepted: { type: number }
+        retryReleased: { type: number }
+        failed: { type: number }
+        ambiguous: { type: number }
+        waiting: { type: number }
     DraftGenerationInput:
       type: object
       properties:
