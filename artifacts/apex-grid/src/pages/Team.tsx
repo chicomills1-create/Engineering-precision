@@ -463,7 +463,7 @@ const SHAN_PORTFOLIO = [
     subtitle: "24-unit luxury apartment building with basement",
     location: "Wellesley, Massachusetts",
     floorArea: "50,000 SF",
-    image: shanWellesley24Img,
+    image: shanLawrenceImg,
     scope: [
       "Steel–concrete composite transfer floor above parking",
       "Strip foundations designed for site soil and structural loads",
@@ -491,7 +491,7 @@ const SHAN_PORTFOLIO = [
     subtitle: "New addition retaining an existing two-storey structure",
     location: "Lawrence, Massachusetts",
     floorArea: "30,000 SF",
-    image: shanLawrenceImg,
+    image: shanWellesley24Img,
     scope: [
       "Composite transfer structure for the proposed addition",
       "Wood-framed residential floor design",
