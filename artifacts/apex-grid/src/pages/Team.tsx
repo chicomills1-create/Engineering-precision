@@ -3,6 +3,9 @@ import { Link } from "wouter";
 import { useEffect } from "react";
 import jasonImg from "@assets/generated_images/jason-mitchell.webp";
 import jamesImg from "@assets/IMG_5014_1787872200800.jpg";
+import shanWellesley24Img from "@assets/image_(2)_1788051232762.png";
+import shanWellesley32Img from "@assets/image_(1)_1788051232852.png";
+import shanLawrenceImg from "@assets/image_1788051232867.png";
 import {
   DraftingCompass,
   Zap,
@@ -11,6 +14,7 @@ import {
   Layers,
   Stamp,
   PenTool,
+  ArrowRight,
 } from "lucide-react";
 
 const STATS = [
@@ -76,9 +80,10 @@ export default function Team() {
   usePageMeta(PAGE_META);
   useJsonLd(TEAM_SCHEMA);
   useEffect(() => {
-    if (window.location.hash !== "#construction-delivery") return;
+    const targetId = window.location.hash.replace(/^#/, "");
+    if (!["construction-delivery", "shan-portfolio"].includes(targetId)) return;
     window.requestAnimationFrame(() => {
-      document.getElementById("construction-delivery")?.scrollIntoView({ block: "start" });
+      document.getElementById(targetId)?.scrollIntoView({ block: "start" });
     });
   }, []);
 
@@ -174,9 +179,63 @@ export default function Team() {
                   <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] leading-relaxed text-primary">
                     {person.role}
                   </p>
+                  {person.name === "Shan Fernando" && (
+                    <Link
+                      href="/team#shan-portfolio"
+                      className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-foreground/80 transition-colors hover:text-primary"
+                      data-testid="link-shan-portfolio"
+                    >
+                      View selected structural work
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  )}
                 </div>
               </article>
             ))}
+          </div>
+
+          <div id="shan-portfolio" className="mt-24 scroll-mt-24" data-testid="shan-portfolio">
+            <div className="max-w-3xl mb-12">
+              <span className="font-mono text-xs uppercase tracking-widest text-primary mb-4 block">Head of Engineering · Selected Work</span>
+              <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+                Shan Fernando <span className="text-muted-foreground">Structural Portfolio</span>
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Selected multifamily structural design work led by Shan Fernando, Head of Engineering, across Massachusetts residential projects.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {SHAN_PORTFOLIO.map((project) => (
+                <article key={project.title} className="group border border-border bg-background overflow-hidden" data-testid={`shan-portfolio-project-${project.slug}`}>
+                  <div className="relative aspect-[16/10] overflow-hidden bg-secondary">
+                    <img
+                      src={project.image}
+                      alt={`${project.title}, ${project.location}`}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    <div className="absolute bottom-4 left-5 right-5 flex items-end justify-between gap-3">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/80">{project.location}</span>
+                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary-foreground bg-primary px-2 py-1">{project.floorArea}</span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-display font-bold leading-tight mb-2">{project.title}</h3>
+                    <p className="text-sm text-primary font-medium mb-5">{project.subtitle}</p>
+                    <ul className="space-y-2 border-t border-border pt-5">
+                      {project.scope.map((item) => (
+                        <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
+                          <span className="text-primary mt-[2px]" aria-hidden="true">▸</span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -334,6 +393,13 @@ const TEAM_SCHEMA = {
         worksFor: { "@type": "Organization", name: "Apex Grid Engineering" },
         knowsAbout: ["Architecture", "California architecture", "Arizona architecture", "Texas architecture", "Washington architecture"],
       },
+      {
+        "@type": "Person",
+        name: "Shan Fernando",
+        jobTitle: "Head of Engineering",
+        worksFor: { "@type": "Organization", name: "Apex Grid Engineering" },
+        knowsAbout: ["Structural engineering", "Multifamily residential buildings", "Gravity and lateral load analysis", "Finite element modelling"],
+      },
     ],
   },
 };
@@ -373,6 +439,51 @@ const ENGINEERING_TEAM = [
     name: "Shan Fernando",
     role: "Head of Engineering",
     image: "/images/team/shan-fernando.webp",
+  },
+];
+
+const SHAN_PORTFOLIO = [
+  {
+    slug: "wellesley-24-unit-apartment",
+    title: "Proposed 5-Storey Apartment Building",
+    subtitle: "24-unit luxury apartment building with basement",
+    location: "Wellesley, Massachusetts",
+    floorArea: "50,000 SF",
+    image: shanWellesley24Img,
+    scope: [
+      "Steel–concrete composite transfer floor above parking",
+      "Strip foundations designed for site soil and structural loads",
+      "Finite element modelling with gravity and lateral analysis",
+      "Structural plans, sections, elevations, and construction details",
+    ],
+  },
+  {
+    slug: "wellesley-32-unit-apartment",
+    title: "Proposed Apartment Building",
+    subtitle: "32-unit residential building overlooking Sprague Fields",
+    location: "Wellesley, Massachusetts",
+    floorArea: "70,000 SF",
+    image: shanWellesley32Img,
+    scope: [
+      "Massing configured to preserve open space beside neighbouring homes",
+      "Composite transfer floor aligned with parking and apartment walls",
+      "Finite element modelling under gravity and lateral loads",
+      "Strip foundation design",
+    ],
+  },
+  {
+    slug: "lawrence-luxury-apartments",
+    title: "6-Story Luxury Apartment Building",
+    subtitle: "New addition retaining an existing two-storey structure",
+    location: "Lawrence, Massachusetts",
+    floorArea: "30,000 SF",
+    image: shanLawrenceImg,
+    scope: [
+      "Composite transfer structure for the proposed addition",
+      "Wood-framed residential floor design",
+      "Finite element modelling and structural analysis",
+      "Design integrated with the retained existing structure",
+    ],
   },
 ];
 
