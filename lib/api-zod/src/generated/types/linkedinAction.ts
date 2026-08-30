@@ -35,6 +35,19 @@ export interface LinkedinAction {
   legalBasisNote?: string | null;
   /** @nullable */
   completedAt?: string | null;
+  /** @nullable */
+  providerName?: string | null;
+  /** @nullable */
+  providerOperation?: string | null;
+  providerState: string;
+  /** @nullable */
+  providerReconciliationKey?: string | null;
+  /** @nullable */
+  providerActionId?: string | null;
+  /** @nullable */
+  providerError?: string | null;
+  /** @nullable */
+  providerAttemptedAt?: string | null;
   createdAt: string;
   updatedAt: string;
 }

@@ -14,7 +14,8 @@ import {
   getListLinkedinSignalsQueryKey,
   type LinkedinPerson,
   type LinkedinCompany,
-  type LinkedinSignal
+  type LinkedinSignal,
+  type LinkedinActionPrepareInputActionType
 } from '@workspace/api-client-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -66,7 +67,7 @@ function PeopleTab() {
   
   const [addOpen, setAddOpen] = useState(false);
   const [prepareOpen, setPrepareOpen] = useState<number | null>(null);
-  const [actionType, setActionType] = useState('connection_note');
+  const [actionType, setActionType] = useState<LinkedinActionPrepareInputActionType>('connection_note');
   
   const [formData, setFormData] = useState({
     name: '',
@@ -271,7 +272,7 @@ function PeopleTab() {
           <div className="space-y-4 py-4">
             <div className="space-y-2">
               <Label>Action Type</Label>
-              <Select value={actionType} onValueChange={setActionType}>
+              <Select value={actionType} onValueChange={(value) => setActionType(value as LinkedinActionPrepareInputActionType)}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select type" />
                 </SelectTrigger>

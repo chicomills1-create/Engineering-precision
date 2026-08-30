@@ -5,7 +5,9 @@ import {
   useCreateLinkedinContent,
   useUpdateLinkedinContent,
   useTransitionLinkedinContent,
+  useCreateLinkedinAction,
   getListLinkedinContentQueryKey,
+  getGetLinkedinQueueQueryKey,
   getGetLinkedinDashboardQueryKey,
   type LinkedinContentItem
 } from '@workspace/api-client-react';
@@ -27,6 +29,7 @@ export function LinkedinContentCalendar() {
   const createContent = useCreateLinkedinContent();
   const updateContent = useUpdateLinkedinContent();
   const transitionContent = useTransitionLinkedinContent();
+  const createAction = useCreateLinkedinAction();
   
   const [addOpen, setAddOpen] = useState(false);
   const [editOpen, setEditOpen] = useState<LinkedinContentItem | null>(null);
@@ -118,6 +121,25 @@ export function LinkedinContentCalendar() {
     }
   };
 
+  const queueForPublishing = async (item: LinkedinContentItem) => {
+    if (!item.approvedCopy) return;
+    try {
+      await createAction.mutateAsync({
+        data: {
+          contentItemId: item.id,
+          campaignId: item.campaignId ?? undefined,
+          actionType: 'organization_post',
+          draftCopy: item.approvedCopy,
+          legalBasisNote: 'Approved public content queued for organization publishing',
+        },
+      });
+      toast({ title: 'Post added for action approval', description: 'Review and approve the queue record before publishing.' });
+      qc.invalidateQueries({ queryKey: getGetLinkedinQueueQueryKey() });
+    } catch (e: any) {
+      toast({ title: 'Unable to queue post', description: e.data?.error || e.message, variant: 'destructive' });
+    }
+  };
+
   if (isLoading) return <div className="text-sm text-muted-foreground p-4">Loading content calendar...</div>;
 
   return (
@@ -192,9 +214,14 @@ export function LinkedinContentCalendar() {
                     )}
                     
                     {item.status === 'approved' && (
-                      <Button variant="outline" size="sm" className="w-full justify-start text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 border-emerald-200" onClick={() => setTransitionStatus({item, status: 'published'})}>
-                        <Share className="w-4 h-4 mr-2" /> Log Published
-                      </Button>
+                      <>
+                        <Button size="sm" className="w-full justify-start" disabled={!item.approvedCopy || createAction.isPending} onClick={() => queueForPublishing(item)}>
+                          <Share className="w-4 h-4 mr-2" /> Queue for Publishing
+                        </Button>
+                        <Button variant="outline" size="sm" className="w-full justify-start text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 border-emerald-200" onClick={() => setTransitionStatus({item, status: 'published'})}>
+                          <CheckCircle className="w-4 h-4 mr-2" /> Log Published Manually
+                        </Button>
+                      </>
                     )}
 
                     {item.status !== 'published' && item.status !== 'stopped' && (

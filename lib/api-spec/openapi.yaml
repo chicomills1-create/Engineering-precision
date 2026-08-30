@@ -997,7 +997,7 @@ paths:
   /linkedin/dashboard:
     get: { operationId: getLinkedinDashboard, tags: [linkedin], responses: { "200": { description: Dashboard, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinDashboard" } } } } } }
   /linkedin/provider:
-    get: { operationId: getLinkedinProvider, tags: [linkedin], responses: { "200": { description: Manual provider capabilities, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinProvider" } } } } } }
+    get: { operationId: getLinkedinProvider, tags: [linkedin], responses: { "200": { description: Discovered and explicitly allowlisted provider capabilities, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinProvider" } } } } } }
   /linkedin/companies:
     get: { operationId: listLinkedinCompanies, tags: [linkedin], responses: { "200": { description: Companies, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/LinkedinCompany" } } } } } } }
     post: { operationId: createLinkedinCompany, tags: [linkedin], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinCompanyInput" } } } }, responses: { "201": { description: Created, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinCompany" } } } } } }
@@ -1016,6 +1016,43 @@ paths:
     patch: { operationId: updateLinkedinAction, tags: [linkedin], parameters: [{ name: id, in: path, required: true, schema: { type: number } }], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinActionUpdateInput" } } } }, responses: { "200": { description: Updated, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinAction" } } } } } }
   /linkedin/actions/{id}/transition:
     post: { operationId: transitionLinkedinAction, tags: [linkedin], parameters: [{ name: id, in: path, required: true, schema: { type: number } }], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinTransition" } } } }, responses: { "200": { description: Transitioned, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinAction" } } } } } }
+  /linkedin/actions/{id}/execute:
+    post:
+      operationId: executeLinkedinAction
+      tags: [linkedin]
+      parameters: [{ name: id, in: path, required: true, schema: { type: number } }]
+      responses:
+        "200": { description: Provider action accepted, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinAction" } } } }
+        "202": { description: Provider outcome ambiguous and held for reconciliation, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinAction" } } } }
+  /linkedin/webhooks/provider:
+    get:
+      operationId: validateLinkedinProviderWebhook
+      tags: [linkedin]
+      parameters:
+        - { name: challengeCode, in: query, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Signed LinkedIn webhook validation challenge
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [challengeCode, challengeResponse]
+                properties:
+                  challengeCode: { type: string }
+                  challengeResponse: { type: string }
+    post:
+      operationId: reconcileLinkedinProviderWebhook
+      tags: [linkedin]
+      parameters:
+        - { name: x-li-signature, in: header, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/LinkedinProviderWebhookInput" }
+      responses:
+        "200": { description: Provider outcome reconciled, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinAction" } } } }
   /linkedin/actions/{id}/reschedule:
     post: { operationId: rescheduleLinkedinAction, tags: [linkedin], parameters: [{ name: id, in: path, required: true, schema: { type: number } }], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinRescheduleInput" } } } }, responses: { "200": { description: Rescheduled, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinAction" } } } } } }
   /linkedin/queue:
@@ -1890,8 +1927,8 @@ components:
       properties: { id: { type: number }, personId: { type: [number, "null"] }, companyId: { type: [number, "null"] }, kind: { type: string }, title: { type: string }, sourceUrl: { type: string }, evidence: { type: string }, observedAt: { type: string }, confidence: { type: number }, status: { type: string }, createdAt: { type: string } }
     LinkedinAction:
       type: object
-      required: [id, actionType, status, createdAt, updatedAt]
-      properties: { id: { type: number }, personId: { type: [number, "null"] }, companyId: { type: [number, "null"] }, signalId: { type: [number, "null"] }, campaignId: { type: [number, "null"] }, contentItemId: { type: [number, "null"] }, actionType: { type: string, enum: [connection_note, direct_message, follow_up, comment_idea, talking_points] }, draftCopy: { type: [string, "null"] }, approvedCopy: { type: [string, "null"] }, directActionUrl: { type: [string, "null"] }, owner: { type: [string, "null"] }, dueAt: { type: [string, "null"] }, status: { type: string }, legalBasisNote: { type: [string, "null"] }, completedAt: { type: [string, "null"] }, createdAt: { type: string }, updatedAt: { type: string } }
+      required: [id, actionType, status, providerState, createdAt, updatedAt]
+      properties: { id: { type: number }, personId: { type: [number, "null"] }, companyId: { type: [number, "null"] }, signalId: { type: [number, "null"] }, campaignId: { type: [number, "null"] }, contentItemId: { type: [number, "null"] }, actionType: { type: string, enum: [connection_note, direct_message, follow_up, comment_idea, talking_points, organization_post] }, draftCopy: { type: [string, "null"] }, approvedCopy: { type: [string, "null"] }, directActionUrl: { type: [string, "null"] }, owner: { type: [string, "null"] }, dueAt: { type: [string, "null"] }, status: { type: string }, legalBasisNote: { type: [string, "null"] }, completedAt: { type: [string, "null"] }, providerName: { type: [string, "null"] }, providerOperation: { type: [string, "null"] }, providerState: { type: string }, providerReconciliationKey: { type: [string, "null"] }, providerActionId: { type: [string, "null"] }, providerError: { type: [string, "null"] }, providerAttemptedAt: { type: [string, "null"] }, createdAt: { type: string }, updatedAt: { type: string } }
     LinkedinSuppression:
       type: object
       required: [id, normalizedTarget, reason, createdAt]
@@ -1923,11 +1960,11 @@ components:
     LinkedinActionInput:
       type: object
       required: [actionType]
-      properties: { personId: { type: number }, companyId: { type: number }, campaignId: { type: number }, actionType: { type: string }, draftCopy: { type: string }, status: { type: string } }
+      properties: { personId: { type: number }, companyId: { type: number }, signalId: { type: number }, campaignId: { type: number }, contentItemId: { type: number }, actionType: { type: string }, draftCopy: { type: string }, legalBasisNote: { type: string } }
     LinkedinActionPrepareInput:
       type: object
       required: [personId, actionType]
-      properties: { personId: { type: number }, campaignId: { type: number }, actionType: { type: string } }
+      properties: { personId: { type: number }, campaignId: { type: number }, actionType: { type: string, enum: [connection_note, direct_message, follow_up, comment_idea, talking_points] } }
     LinkedinActionUpdateInput:
       type: object
       properties: { draftCopy: { type: string }, approvedCopy: { type: string }, owner: { type: string }, dueAt: { type: string }, legalBasisNote: { type: string } }
@@ -1977,8 +2014,35 @@ components:
       properties: { actionId: { type: number }, campaignId: { type: number }, personId: { type: number }, companyId: { type: number }, contentItemId: { type: number }, outcomeType: { type: string, enum: [visit, reply, meeting, proposal, win] }, value: { type: number }, count: { type: number }, notes: { type: string }, sourceUrl: { type: string }, occurredAt: { type: string } }
     LinkedinProvider:
       type: object
-      required: [name, capabilities]
-      properties: { name: { type: string }, capabilities: { type: object, additionalProperties: { type: boolean } } }
+      required: [name, configured, mode, discovery, capabilities, allowedOperations, unavailableReasons]
+      properties:
+        name: { type: string }
+        configured: { type: boolean }
+        mode: { type: string, enum: [manual_only, official_api] }
+        discovery: { type: string, enum: [configuration, disabled] }
+        capabilities: { $ref: "#/components/schemas/LinkedinProviderCapabilities" }
+        allowedOperations: { type: array, items: { type: string, enum: [publish_organization_post] } }
+        unavailableReasons: { type: array, items: { type: string } }
+    LinkedinProviderCapabilities:
+      type: object
+      required: [read, execute, send, publish, publishOrganizationPost, sendConnectionRequest, sendDirectMessage, publishComment]
+      properties:
+        read: { type: boolean }
+        execute: { type: boolean }
+        send: { type: boolean }
+        publish: { type: boolean }
+        publishOrganizationPost: { type: boolean }
+        sendConnectionRequest: { type: boolean }
+        sendDirectMessage: { type: boolean }
+        publishComment: { type: boolean }
+    LinkedinProviderWebhookInput:
+      type: object
+      required: [reconciliationKey, status]
+      properties:
+        reconciliationKey: { type: string }
+        providerActionId: { type: string }
+        status: { type: string, enum: [succeeded, failed] }
+        note: { type: string, maxLength: 500 }
     LinkedinDashboard:
       type: object
       required: [people, companies, actions, completedToday, contentItems, publishedToday, outcomeRollups, provider]

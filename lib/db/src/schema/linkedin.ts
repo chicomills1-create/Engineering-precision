@@ -118,11 +118,20 @@ export const linkedinActionsTable = pgTable("linkedin_actions", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
   completedAt: timestamp("completed_at", { withTimezone: true }),
+  providerName: text("provider_name"),
+  providerOperation: text("provider_operation"),
+  providerState: text("provider_state").notNull().default("not_attempted"),
+  providerReconciliationKey: text("provider_reconciliation_key"),
+  providerActionId: text("provider_action_id"),
+  providerError: text("provider_error"),
+  providerAttemptedAt: timestamp("provider_attempted_at", { withTimezone: true }),
 }, (table) => [
   index("linkedin_actions_queue_idx").on(table.status, table.dueAt),
   index("linkedin_actions_completed_idx").on(table.completedAt),
   index("linkedin_actions_person_idx").on(table.personId, table.status),
   index("linkedin_actions_campaign_idx").on(table.campaignId, table.status),
+  uniqueIndex("linkedin_actions_provider_reconciliation_unique").on(table.providerReconciliationKey),
+  uniqueIndex("linkedin_actions_provider_action_unique").on(table.providerActionId),
 ]);
 
 export const linkedinApprovalEventsTable = pgTable("linkedin_approval_events", {

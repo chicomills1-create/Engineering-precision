@@ -9,8 +9,10 @@
 export interface LinkedinActionInput {
   personId?: number;
   companyId?: number;
+  signalId?: number;
   campaignId?: number;
+  contentItemId?: number;
   actionType: string;
   draftCopy?: string;
-  status?: string;
+  legalBasisNote?: string;
 }

@@ -1621,6 +1621,7 @@ export const LinkedinActionActionType = {
   follow_up: 'follow_up',
   comment_idea: 'comment_idea',
   talking_points: 'talking_points',
+  organization_post: 'organization_post',
 } as const;
 
 export interface LinkedinAction {
@@ -1651,6 +1652,19 @@ export interface LinkedinAction {
   legalBasisNote?: string | null;
   /** @nullable */
   completedAt?: string | null;
+  /** @nullable */
+  providerName?: string | null;
+  /** @nullable */
+  providerOperation?: string | null;
+  providerState: string;
+  /** @nullable */
+  providerReconciliationKey?: string | null;
+  /** @nullable */
+  providerActionId?: string | null;
+  /** @nullable */
+  providerError?: string | null;
+  /** @nullable */
+  providerAttemptedAt?: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -1778,16 +1792,29 @@ export interface LinkedinSignalInput {
 export interface LinkedinActionInput {
   personId?: number;
   companyId?: number;
+  signalId?: number;
   campaignId?: number;
+  contentItemId?: number;
   actionType: string;
   draftCopy?: string;
-  status?: string;
+  legalBasisNote?: string;
 }
+
+export type LinkedinActionPrepareInputActionType = typeof LinkedinActionPrepareInputActionType[keyof typeof LinkedinActionPrepareInputActionType];
+
+
+export const LinkedinActionPrepareInputActionType = {
+  connection_note: 'connection_note',
+  direct_message: 'direct_message',
+  follow_up: 'follow_up',
+  comment_idea: 'comment_idea',
+  talking_points: 'talking_points',
+} as const;
 
 export interface LinkedinActionPrepareInput {
   personId: number;
   campaignId?: number;
-  actionType: string;
+  actionType: LinkedinActionPrepareInputActionType;
 }
 
 export interface LinkedinActionUpdateInput {
@@ -1931,11 +1958,64 @@ export interface LinkedinOutcomeInput {
   occurredAt: string;
 }
 
-export type LinkedinProviderCapabilities = {[key: string]: boolean};
+export type LinkedinProviderMode = typeof LinkedinProviderMode[keyof typeof LinkedinProviderMode];
+
+
+export const LinkedinProviderMode = {
+  manual_only: 'manual_only',
+  official_api: 'official_api',
+} as const;
+
+export type LinkedinProviderDiscovery = typeof LinkedinProviderDiscovery[keyof typeof LinkedinProviderDiscovery];
+
+
+export const LinkedinProviderDiscovery = {
+  configuration: 'configuration',
+  disabled: 'disabled',
+} as const;
+
+export type LinkedinProviderAllowedOperationsItem = typeof LinkedinProviderAllowedOperationsItem[keyof typeof LinkedinProviderAllowedOperationsItem];
+
+
+export const LinkedinProviderAllowedOperationsItem = {
+  publish_organization_post: 'publish_organization_post',
+} as const;
+
+export interface LinkedinProviderCapabilities {
+  read: boolean;
+  execute: boolean;
+  send: boolean;
+  publish: boolean;
+  publishOrganizationPost: boolean;
+  sendConnectionRequest: boolean;
+  sendDirectMessage: boolean;
+  publishComment: boolean;
+}
 
 export interface LinkedinProvider {
   name: string;
+  configured: boolean;
+  mode: LinkedinProviderMode;
+  discovery: LinkedinProviderDiscovery;
   capabilities: LinkedinProviderCapabilities;
+  allowedOperations: LinkedinProviderAllowedOperationsItem[];
+  unavailableReasons: string[];
+}
+
+export type LinkedinProviderWebhookInputStatus = typeof LinkedinProviderWebhookInputStatus[keyof typeof LinkedinProviderWebhookInputStatus];
+
+
+export const LinkedinProviderWebhookInputStatus = {
+  succeeded: 'succeeded',
+  failed: 'failed',
+} as const;
+
+export interface LinkedinProviderWebhookInput {
+  reconciliationKey: string;
+  providerActionId?: string;
+  status: LinkedinProviderWebhookInputStatus;
+  /** @maxLength 500 */
+  note?: string;
 }
 
 export type LinkedinDashboardOutcomeRollups = {[key: string]: number};
@@ -1964,6 +2044,15 @@ category?: string;
  * @maximum 500
  */
 limit?: number;
+};
+
+export type ValidateLinkedinProviderWebhookParams = {
+challengeCode: string;
+};
+
+export type ValidateLinkedinProviderWebhook200 = {
+  challengeCode: string;
+  challengeResponse: string;
 };
 
 export type GetLinkedinQueueParams = {

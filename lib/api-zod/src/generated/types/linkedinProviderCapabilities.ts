@@ -6,4 +6,13 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export type LinkedinProviderCapabilities = {[key: string]: boolean};
+export interface LinkedinProviderCapabilities {
+  read: boolean;
+  execute: boolean;
+  send: boolean;
+  publish: boolean;
+  publishOrganizationPost: boolean;
+  sendConnectionRequest: boolean;
+  sendDirectMessage: boolean;
+  publishComment: boolean;
+}

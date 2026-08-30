@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import {
+  getGetLinkedinProviderQueryKey,
   getGetLinkedinDashboardQueryKey,
   getGetLinkedinQueueQueryKey,
+  useExecuteLinkedinAction,
+  useGetLinkedinProvider,
   useGetLinkedinQueue,
   usePrepareLinkedinQueue,
   useRescheduleLinkedinAction,
@@ -44,6 +47,8 @@ export function LinkedinApprovalQueue() {
   const transitionAction = useTransitionLinkedinAction();
   const prepareQueue = usePrepareLinkedinQueue();
   const rescheduleAction = useRescheduleLinkedinAction();
+  const executeAction = useExecuteLinkedinAction();
+  const { data: provider } = useGetLinkedinProvider();
 
   const [selectedAction, setSelectedAction] = useState<LinkedinQueueItem | null>(null);
   const [editMode, setEditMode] = useState(false);
@@ -55,6 +60,7 @@ export function LinkedinApprovalQueue() {
   const invalidateQueue = () => {
     qc.invalidateQueries({ queryKey: getGetLinkedinQueueQueryKey({ date: phoenixToday, limit: 100 }) });
     qc.invalidateQueries({ queryKey: getGetLinkedinDashboardQueryKey() });
+    qc.invalidateQueries({ queryKey: getGetLinkedinProviderQueryKey() });
   };
 
   const handleEditClick = (action: LinkedinQueueItem) => {
@@ -136,6 +142,22 @@ export function LinkedinApprovalQueue() {
       invalidateQueue();
     } catch (e: any) {
       toast({ title: 'Unable to reschedule action', description: e.data?.error || e.message, variant: 'destructive' });
+    }
+  };
+
+  const executeApprovedAction = async (action: LinkedinQueueItem) => {
+    try {
+      const result = await executeAction.mutateAsync({ id: action.id });
+      const awaitingReconciliation = result.providerState === 'ambiguous';
+      toast({
+        title: awaitingReconciliation ? 'Provider outcome needs reconciliation' : 'Approved post published',
+        description: awaitingReconciliation
+          ? 'The provider request will not be retried. A signed webhook must reconcile the outcome.'
+          : 'LinkedIn accepted the approved organization post.',
+      });
+      invalidateQueue();
+    } catch (e: any) {
+      toast({ title: 'Provider action rejected', description: e.data?.error || e.message, variant: 'destructive' });
     }
   };
 
@@ -225,7 +247,7 @@ export function LinkedinApprovalQueue() {
                           <CheckCircle className="w-4 h-4 mr-2" /> Approve
                         </Button>
                       )}
-                      {action.status === 'approved' && (
+                      {action.status === 'approved' && action.actionType !== 'organization_post' && (
                         <>
                           <div className="p-3 bg-primary/10 border border-primary/20 rounded-md mb-1">
                             <p className="text-xs text-primary flex items-start gap-1.5 leading-tight">
@@ -241,7 +263,35 @@ export function LinkedinApprovalQueue() {
                           </Button>
                         </>
                       )}
-                      {(action.status === 'draft' || action.status === 'pending_review' || action.status === 'approved') && (
+                      {action.status === 'approved' && action.actionType === 'organization_post' && (
+                        <div className="space-y-2">
+                          <div className="p-3 bg-primary/10 border border-primary/20 rounded-md">
+                            <p className="text-xs text-primary flex items-start gap-1.5 leading-tight">
+                              <AlertCircle className="w-3.5 h-3.5 mt-0.5 shrink-0" />
+                              {provider?.capabilities.publishOrganizationPost
+                                ? 'This publishes the immutable approved copy through the official provider and consumes today’s Phoenix limit.'
+                                : 'Official provider publishing is unavailable. The action remains manual-only.'}
+                            </p>
+                          </div>
+                          {action.providerState !== 'not_attempted' && (
+                            <Badge variant="outline" className="capitalize">
+                              Provider: {action.providerState.replace('_', ' ')}
+                            </Badge>
+                          )}
+                          <Button
+                            size="sm"
+                            className="w-full justify-start"
+                            disabled={!provider?.capabilities.publishOrganizationPost || action.providerState !== 'not_attempted' || executeAction.isPending}
+                            onClick={() => executeApprovedAction(action)}
+                          >
+                            <Play className="w-4 h-4 mr-2" /> Publish Approved Post
+                          </Button>
+                          <Button variant="outline" size="sm" className="w-full justify-start" onClick={() => openReschedule(action)}>
+                            <CalendarClock className="w-4 h-4 mr-2" /> Reschedule
+                          </Button>
+                        </div>
+                      )}
+                      {(action.status === 'draft' || action.status === 'pending_review' || action.status === 'approved') && action.providerState === 'not_attempted' && (
                         <Button variant="ghost" size="sm" className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10" onClick={() => handleTransitionClick(action, 'stopped')}>
                           <XCircle className="w-4 h-4 mr-2" /> Skip / Stop
                         </Button>

@@ -7,7 +7,7 @@ LinkedIn research and draft preparation may be automated, but connection request
 
 **Why:** Approval UI alone is not a safety boundary. Suppressed targets can re-enter through linked signals unless the server resolves the complete attribution chain, and per-record locks cannot enforce a global daily limit under concurrency.
 
-**How to apply:** Derive approvers from authenticated server identity, keep immutable transition history, resolve person/company suppression through every linked entity, fail closed when provider capabilities are absent, and acquire one shared Phoenix-day quota lock before counting and completing or publishing.
+**How to apply:** Derive approvers from authenticated server identity, keep immutable transition history, resolve person/company suppression through every linked entity, fail closed when provider capabilities are absent, and acquire one shared Phoenix-day quota lock before counting or reserving work. Once an external dispatch is durably claimed after the final suppression check, no manual transition or later suppression may cancel that claim; only signed provider reconciliation may finalize it.
 
 The designated Apex Grid owner is the intended operator for any remaining manual social action; the 1099 team is not expected to perform social outreach.
 

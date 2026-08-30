@@ -7,6 +7,8 @@ test("only permits reviewed action transitions", () => {
   assert.throws(() => assertLinkedinTransition("draft", "completed"));
 });
 test("manual provider fails closed", async () => {
-  assert.deepEqual(linkedinProvider.capabilities, { read: false, execute: false, send: false, publish: false });
-  await assert.rejects(() => linkedinProvider.execute());
+  assert.equal(linkedinProvider.capabilities.send, false);
+  assert.equal(linkedinProvider.capabilities.sendConnectionRequest, false);
+  assert.equal(linkedinProvider.capabilities.sendDirectMessage, false);
+  await assert.rejects(() => linkedinProvider.execute(), /approved queue action/);
 });

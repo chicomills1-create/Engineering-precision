@@ -6,14 +6,13 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export type LinkedinActionActionType = typeof LinkedinActionActionType[keyof typeof LinkedinActionActionType];
+export type LinkedinActionPrepareInputActionType = typeof LinkedinActionPrepareInputActionType[keyof typeof LinkedinActionPrepareInputActionType];
 
 
-export const LinkedinActionActionType = {
+export const LinkedinActionPrepareInputActionType = {
   connection_note: 'connection_note',
   direct_message: 'direct_message',
   follow_up: 'follow_up',
   comment_idea: 'comment_idea',
   talking_points: 'talking_points',
-  organization_post: 'organization_post',
 } as const;

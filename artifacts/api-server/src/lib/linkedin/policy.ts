@@ -5,6 +5,8 @@ import { normalizeLinkedinUrl } from "./url";
 export const PERSON_ACTION_QUOTA_LOCK = 4815162342n;
 export const CONTENT_PUBLISH_QUOTA_LOCK = 4815162343n;
 export const LINKEDIN_SUPPRESSION_LOCK = 4815162344n;
+
+export const LINKEDIN_PROVIDER_EXECUTION_LOCK = 4815162345n;
 export const LINKEDIN_QUEUE_PREP_LOCK = 4815162345n;
 export const normalizeLinkedinName = (value: string) => value.trim().replace(/\s+/g, " ").toLocaleLowerCase();
 export function isPostgresUniqueViolation(error: unknown): boolean {
@@ -12,6 +14,24 @@ export function isPostgresUniqueViolation(error: unknown): boolean {
     && (error as { code?: unknown }).code === "23505";
 }
 
+export function assertLinkedinProviderExecution(input: {
+  status: string;
+  providerState?: string | null;
+  actionType: string;
+  approvedCopy?: string | null;
+  hasApprovedHistory: boolean;
+  supported: boolean;
+}): void {
+  if (input.status !== "approved") throw new Error("Provider execution requires an approved queue action");
+  if (!input.hasApprovedHistory) throw new Error("Provider execution requires immutable approval history");
+  if (input.providerState && input.providerState !== "not_attempted") {
+    throw new Error("Provider action was already attempted and will not be retried");
+  }
+  if (input.actionType !== "organization_post" || !input.supported) {
+    throw new Error("This LinkedIn action is not supported by the configured provider");
+  }
+  if (!input.approvedCopy?.trim()) throw new Error("Provider execution requires approved copy");
+}
 export type LinkedinAttributionIds = {
   personId?: number;
   companyId?: number;
@@ -125,7 +145,46 @@ export async function suppressLinkedinTarget(input: { personId?: number | null; 
       ...(linkedSignalIds.length ? [inArray(linkedinActionsTable.signalId, linkedSignalIds)] : []),
       sql`false`,
     );
-    await tx.update(linkedinActionsTable).set({ status: "stopped", updatedAt: new Date() }).where(and(condition, inArray(linkedinActionsTable.status, ["draft", "pending_review", "approved"])));
+    await tx.update(linkedinActionsTable).set({ status: "stopped", updatedAt: new Date() }).where(and(
+      condition,
+      inArray(linkedinActionsTable.status, ["draft", "pending_review", "approved"]),
+      eq(linkedinActionsTable.providerState, "not_attempted"),
+    ));
     return row!;
   });
+}
+
+export function assertLinkedinDailyLimit(used: number, limit: number, label: string): void {
+  if (used >= limit) throw new Error(`Phoenix daily ${label} limit reached`);
+}
+
+export function assertLinkedinProviderReconciliation(input: {
+  providerState: string;
+  status: "succeeded" | "failed";
+  providerActionId?: string;
+}): void {
+  if (!["pending", "ambiguous"].includes(input.providerState)) {
+    throw new Error("Provider reconciliation requires a pending or ambiguous attempt");
+  }
+  if (input.status === "succeeded" && !input.providerActionId?.trim()) {
+    throw new Error("Successful provider reconciliation requires a provider action ID");
+  }
+}
+
+export function assertLinkedinManualTransitionAllowed(providerState?: string | null): void {
+  if (providerState && providerState !== "not_attempted") {
+    throw new Error("Provider-claimed actions cannot be transitioned manually");
+  }
+}
+
+export function assertNoExistingLinkedinContentClaim(existingClaims: number): void {
+  if (existingClaims > 0) {
+    throw new Error("Approved content already has a provider dispatch claim");
+  }
+}
+
+export function assertLinkedinOrganizationPostCopy(actionCopy?: string | null, contentCopy?: string | null): void {
+  if (!actionCopy?.trim() || actionCopy !== contentCopy) {
+    throw new Error("Organization post copy must match the approved content");
+  }
 }

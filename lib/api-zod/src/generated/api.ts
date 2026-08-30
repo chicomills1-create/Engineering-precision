@@ -2086,14 +2086,42 @@ export const GetLinkedinDashboardResponse = zod.object({
   "outcomeRollups": zod.record(zod.string(), zod.number()),
   "provider": zod.object({
   "name": zod.string(),
-  "capabilities": zod.record(zod.string(), zod.boolean())
+  "configured": zod.boolean(),
+  "mode": zod.enum(['manual_only', 'official_api']),
+  "discovery": zod.enum(['configuration', 'disabled']),
+  "capabilities": zod.object({
+  "read": zod.boolean(),
+  "execute": zod.boolean(),
+  "send": zod.boolean(),
+  "publish": zod.boolean(),
+  "publishOrganizationPost": zod.boolean(),
+  "sendConnectionRequest": zod.boolean(),
+  "sendDirectMessage": zod.boolean(),
+  "publishComment": zod.boolean()
+}),
+  "allowedOperations": zod.array(zod.enum(['publish_organization_post'])),
+  "unavailableReasons": zod.array(zod.string())
 })
 })
 
 
 export const GetLinkedinProviderResponse = zod.object({
   "name": zod.string(),
-  "capabilities": zod.record(zod.string(), zod.boolean())
+  "configured": zod.boolean(),
+  "mode": zod.enum(['manual_only', 'official_api']),
+  "discovery": zod.enum(['configuration', 'disabled']),
+  "capabilities": zod.object({
+  "read": zod.boolean(),
+  "execute": zod.boolean(),
+  "send": zod.boolean(),
+  "publish": zod.boolean(),
+  "publishOrganizationPost": zod.boolean(),
+  "sendConnectionRequest": zod.boolean(),
+  "sendDirectMessage": zod.boolean(),
+  "publishComment": zod.boolean()
+}),
+  "allowedOperations": zod.array(zod.enum(['publish_organization_post'])),
+  "unavailableReasons": zod.array(zod.string())
 })
 
 
@@ -2252,7 +2280,7 @@ export const ListLinkedinActionsResponseItem = zod.object({
   "signalId": zod.number().nullish(),
   "campaignId": zod.number().nullish(),
   "contentItemId": zod.number().nullish(),
-  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points']),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points', 'organization_post']),
   "draftCopy": zod.string().nullish(),
   "approvedCopy": zod.string().nullish(),
   "directActionUrl": zod.string().nullish(),
@@ -2261,6 +2289,13 @@ export const ListLinkedinActionsResponseItem = zod.object({
   "status": zod.string(),
   "legalBasisNote": zod.string().nullish(),
   "completedAt": zod.string().nullish(),
+  "providerName": zod.string().nullish(),
+  "providerOperation": zod.string().nullish(),
+  "providerState": zod.string(),
+  "providerReconciliationKey": zod.string().nullish(),
+  "providerActionId": zod.string().nullish(),
+  "providerError": zod.string().nullish(),
+  "providerAttemptedAt": zod.string().nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -2270,10 +2305,12 @@ export const ListLinkedinActionsResponse = zod.array(ListLinkedinActionsResponse
 export const CreateLinkedinActionBody = zod.object({
   "personId": zod.number().optional(),
   "companyId": zod.number().optional(),
+  "signalId": zod.number().optional(),
   "campaignId": zod.number().optional(),
+  "contentItemId": zod.number().optional(),
   "actionType": zod.string(),
   "draftCopy": zod.string().optional(),
-  "status": zod.string().optional()
+  "legalBasisNote": zod.string().optional()
 })
 
 export const CreateLinkedinActionResponse = zod.object({
@@ -2283,7 +2320,7 @@ export const CreateLinkedinActionResponse = zod.object({
   "signalId": zod.number().nullish(),
   "campaignId": zod.number().nullish(),
   "contentItemId": zod.number().nullish(),
-  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points']),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points', 'organization_post']),
   "draftCopy": zod.string().nullish(),
   "approvedCopy": zod.string().nullish(),
   "directActionUrl": zod.string().nullish(),
@@ -2292,6 +2329,13 @@ export const CreateLinkedinActionResponse = zod.object({
   "status": zod.string(),
   "legalBasisNote": zod.string().nullish(),
   "completedAt": zod.string().nullish(),
+  "providerName": zod.string().nullish(),
+  "providerOperation": zod.string().nullish(),
+  "providerState": zod.string(),
+  "providerReconciliationKey": zod.string().nullish(),
+  "providerActionId": zod.string().nullish(),
+  "providerError": zod.string().nullish(),
+  "providerAttemptedAt": zod.string().nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -2300,7 +2344,7 @@ export const CreateLinkedinActionResponse = zod.object({
 export const PrepareLinkedinActionBody = zod.object({
   "personId": zod.number(),
   "campaignId": zod.number().optional(),
-  "actionType": zod.string()
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points'])
 })
 
 export const PrepareLinkedinActionResponse = zod.object({
@@ -2310,7 +2354,7 @@ export const PrepareLinkedinActionResponse = zod.object({
   "signalId": zod.number().nullish(),
   "campaignId": zod.number().nullish(),
   "contentItemId": zod.number().nullish(),
-  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points']),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points', 'organization_post']),
   "draftCopy": zod.string().nullish(),
   "approvedCopy": zod.string().nullish(),
   "directActionUrl": zod.string().nullish(),
@@ -2319,6 +2363,13 @@ export const PrepareLinkedinActionResponse = zod.object({
   "status": zod.string(),
   "legalBasisNote": zod.string().nullish(),
   "completedAt": zod.string().nullish(),
+  "providerName": zod.string().nullish(),
+  "providerOperation": zod.string().nullish(),
+  "providerState": zod.string(),
+  "providerReconciliationKey": zod.string().nullish(),
+  "providerActionId": zod.string().nullish(),
+  "providerError": zod.string().nullish(),
+  "providerAttemptedAt": zod.string().nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -2343,7 +2394,7 @@ export const UpdateLinkedinActionResponse = zod.object({
   "signalId": zod.number().nullish(),
   "campaignId": zod.number().nullish(),
   "contentItemId": zod.number().nullish(),
-  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points']),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points', 'organization_post']),
   "draftCopy": zod.string().nullish(),
   "approvedCopy": zod.string().nullish(),
   "directActionUrl": zod.string().nullish(),
@@ -2352,6 +2403,13 @@ export const UpdateLinkedinActionResponse = zod.object({
   "status": zod.string(),
   "legalBasisNote": zod.string().nullish(),
   "completedAt": zod.string().nullish(),
+  "providerName": zod.string().nullish(),
+  "providerOperation": zod.string().nullish(),
+  "providerState": zod.string(),
+  "providerReconciliationKey": zod.string().nullish(),
+  "providerActionId": zod.string().nullish(),
+  "providerError": zod.string().nullish(),
+  "providerAttemptedAt": zod.string().nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -2373,7 +2431,7 @@ export const TransitionLinkedinActionResponse = zod.object({
   "signalId": zod.number().nullish(),
   "campaignId": zod.number().nullish(),
   "contentItemId": zod.number().nullish(),
-  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points']),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points', 'organization_post']),
   "draftCopy": zod.string().nullish(),
   "approvedCopy": zod.string().nullish(),
   "directActionUrl": zod.string().nullish(),
@@ -2382,6 +2440,98 @@ export const TransitionLinkedinActionResponse = zod.object({
   "status": zod.string(),
   "legalBasisNote": zod.string().nullish(),
   "completedAt": zod.string().nullish(),
+  "providerName": zod.string().nullish(),
+  "providerOperation": zod.string().nullish(),
+  "providerState": zod.string(),
+  "providerReconciliationKey": zod.string().nullish(),
+  "providerActionId": zod.string().nullish(),
+  "providerError": zod.string().nullish(),
+  "providerAttemptedAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const ExecuteLinkedinActionParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const ExecuteLinkedinActionResponse = zod.object({
+  "id": zod.number(),
+  "personId": zod.number().nullish(),
+  "companyId": zod.number().nullish(),
+  "signalId": zod.number().nullish(),
+  "campaignId": zod.number().nullish(),
+  "contentItemId": zod.number().nullish(),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points', 'organization_post']),
+  "draftCopy": zod.string().nullish(),
+  "approvedCopy": zod.string().nullish(),
+  "directActionUrl": zod.string().nullish(),
+  "owner": zod.string().nullish(),
+  "dueAt": zod.string().nullish(),
+  "status": zod.string(),
+  "legalBasisNote": zod.string().nullish(),
+  "completedAt": zod.string().nullish(),
+  "providerName": zod.string().nullish(),
+  "providerOperation": zod.string().nullish(),
+  "providerState": zod.string(),
+  "providerReconciliationKey": zod.string().nullish(),
+  "providerActionId": zod.string().nullish(),
+  "providerError": zod.string().nullish(),
+  "providerAttemptedAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const ValidateLinkedinProviderWebhookQueryParams = zod.object({
+  "challengeCode": zod.coerce.string()
+})
+
+export const ValidateLinkedinProviderWebhookResponse = zod.object({
+  "challengeCode": zod.string(),
+  "challengeResponse": zod.string()
+})
+
+
+export const ReconcileLinkedinProviderWebhookHeader = zod.object({
+  "x-li-signature": zod.string()
+})
+
+export const reconcileLinkedinProviderWebhookBodyNoteMax = 500;
+
+
+
+export const ReconcileLinkedinProviderWebhookBody = zod.object({
+  "reconciliationKey": zod.string(),
+  "providerActionId": zod.string().optional(),
+  "status": zod.enum(['succeeded', 'failed']),
+  "note": zod.string().max(reconcileLinkedinProviderWebhookBodyNoteMax).optional()
+})
+
+export const ReconcileLinkedinProviderWebhookResponse = zod.object({
+  "id": zod.number(),
+  "personId": zod.number().nullish(),
+  "companyId": zod.number().nullish(),
+  "signalId": zod.number().nullish(),
+  "campaignId": zod.number().nullish(),
+  "contentItemId": zod.number().nullish(),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points', 'organization_post']),
+  "draftCopy": zod.string().nullish(),
+  "approvedCopy": zod.string().nullish(),
+  "directActionUrl": zod.string().nullish(),
+  "owner": zod.string().nullish(),
+  "dueAt": zod.string().nullish(),
+  "status": zod.string(),
+  "legalBasisNote": zod.string().nullish(),
+  "completedAt": zod.string().nullish(),
+  "providerName": zod.string().nullish(),
+  "providerOperation": zod.string().nullish(),
+  "providerState": zod.string(),
+  "providerReconciliationKey": zod.string().nullish(),
+  "providerActionId": zod.string().nullish(),
+  "providerError": zod.string().nullish(),
+  "providerAttemptedAt": zod.string().nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -2402,7 +2552,7 @@ export const RescheduleLinkedinActionResponse = zod.object({
   "signalId": zod.number().nullish(),
   "campaignId": zod.number().nullish(),
   "contentItemId": zod.number().nullish(),
-  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points']),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points', 'organization_post']),
   "draftCopy": zod.string().nullish(),
   "approvedCopy": zod.string().nullish(),
   "directActionUrl": zod.string().nullish(),
@@ -2411,6 +2561,13 @@ export const RescheduleLinkedinActionResponse = zod.object({
   "status": zod.string(),
   "legalBasisNote": zod.string().nullish(),
   "completedAt": zod.string().nullish(),
+  "providerName": zod.string().nullish(),
+  "providerOperation": zod.string().nullish(),
+  "providerState": zod.string(),
+  "providerReconciliationKey": zod.string().nullish(),
+  "providerActionId": zod.string().nullish(),
+  "providerError": zod.string().nullish(),
+  "providerAttemptedAt": zod.string().nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 })
@@ -2441,7 +2598,7 @@ export const GetLinkedinQueueResponse = zod.object({
   "signalId": zod.number().nullish(),
   "campaignId": zod.number().nullish(),
   "contentItemId": zod.number().nullish(),
-  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points']),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points', 'organization_post']),
   "draftCopy": zod.string().nullish(),
   "approvedCopy": zod.string().nullish(),
   "directActionUrl": zod.string().nullish(),
@@ -2450,6 +2607,13 @@ export const GetLinkedinQueueResponse = zod.object({
   "status": zod.string(),
   "legalBasisNote": zod.string().nullish(),
   "completedAt": zod.string().nullish(),
+  "providerName": zod.string().nullish(),
+  "providerOperation": zod.string().nullish(),
+  "providerState": zod.string(),
+  "providerReconciliationKey": zod.string().nullish(),
+  "providerActionId": zod.string().nullish(),
+  "providerError": zod.string().nullish(),
+  "providerAttemptedAt": zod.string().nullish(),
   "createdAt": zod.string(),
   "updatedAt": zod.string()
 }).and(zod.object({

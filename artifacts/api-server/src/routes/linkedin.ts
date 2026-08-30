@@ -8,11 +8,12 @@ import {
   linkedinContentItemsTable, linkedinOutcomesTable, linkedinPeopleTable, linkedinSignalsTable, linkedinSuppressionsTable,
 } from "@workspace/db";
 import { requireAuth } from "../middlewares/requireAuth";
-import { assertApprovalFields, assertLinkedinAttributionConsistency, assertLinkedinTransition, actorFromRequest, assertNotSuppressed, canonicalDomain, CONTENT_PUBLISH_QUOTA_LOCK, defaultRetentionUntil, isPostgresUniqueViolation, LINKEDIN_QUEUE_PREP_LOCK, LINKEDIN_SUPPRESSION_LOCK, linkedinProvider, normalizeEvidenceUrl, normalizeLinkedinName, normalizeLinkedinUrl, PERSON_ACTION_QUOTA_LOCK, scoreLinkedinFit, suppressLinkedinTarget } from "../lib/linkedin";
+import { assertApprovalFields, assertLinkedinAttributionConsistency, assertLinkedinDailyLimit, assertLinkedinManualTransitionAllowed, assertLinkedinOrganizationPostCopy, assertLinkedinProviderExecution, assertLinkedinProviderReconciliation, assertLinkedinTransition, assertNoExistingLinkedinContentClaim, actorFromRequest, assertNotSuppressed, canonicalDomain, CONTENT_PUBLISH_QUOTA_LOCK, defaultRetentionUntil, discoverLinkedinProviderStatus, isPostgresUniqueViolation, LINKEDIN_PROVIDER_EXECUTION_LOCK, LINKEDIN_QUEUE_PREP_LOCK, LINKEDIN_SUPPRESSION_LOCK, linkedinProvider, linkedinWebhookChallenge, normalizeEvidenceUrl, normalizeLinkedinName, normalizeLinkedinUrl, PERSON_ACTION_QUOTA_LOCK, scoreLinkedinFit, suppressLinkedinTarget, verifyLinkedinProviderWebhook } from "../lib/linkedin";
 
 const router: IRouter = Router();
 const id = z.coerce.number().int().positive();
-const actionType = z.enum(["connection_note", "direct_message", "follow_up", "comment_idea", "talking_points"]);
+const actionType = z.enum(["connection_note", "direct_message", "follow_up", "comment_idea", "talking_points", "organization_post"]);
+const manualActionType = z.enum(["connection_note", "direct_message", "follow_up", "comment_idea", "talking_points"]);
 const actionStatus = z.enum(["draft", "pending_review", "approved", "completed", "replied", "meeting_booked", "opportunity_created", "suppressed", "stopped"]);
 const iso = z.string().datetime();
 const optional = (v?: string | null) => v?.trim() || null;
@@ -44,7 +45,7 @@ async function duplicates(name: string, company?: string | null) {
   ], company: company ?? null };
 }
 
-router.get("/linkedin/provider", requireAuth, (_req, res) => res.json({ name: linkedinProvider.name, capabilities: linkedinProvider.capabilities }));
+router.get("/linkedin/provider", requireAuth, (_req, res) => res.json(discoverLinkedinProviderStatus()));
 router.get("/linkedin/dashboard", requireAuth, async (_req, res) => {
   const start = phoenixStart();
   const [[people], [companies], [actions], [completed], [content], [published], outcomes] = await Promise.all([
@@ -56,7 +57,7 @@ router.get("/linkedin/dashboard", requireAuth, async (_req, res) => {
   const outcomeRollups: Record<string, number> = {};
   outcomes.forEach((o) => { outcomeRollups[o.outcomeType] = (outcomeRollups[o.outcomeType] ?? 0) + o.count; });
   const [queue] = await db.select({ value: count() }).from(linkedinActionsTable).where(and(eq(linkedinActionsTable.status, "approved"), lte(linkedinActionsTable.dueAt, new Date())));
-  res.json({ people: people?.value ?? 0, companies: companies?.value ?? 0, actions: actions?.value ?? 0, completedToday: completed?.value ?? 0, contentItems: content?.value ?? 0, publishedToday: published?.value ?? 0, readyNow: queue?.value ?? 0, outcomeRollups, provider: { name: linkedinProvider.name, capabilities: linkedinProvider.capabilities } });
+  res.json({ people: people?.value ?? 0, companies: companies?.value ?? 0, actions: actions?.value ?? 0, completedToday: completed?.value ?? 0, contentItems: content?.value ?? 0, publishedToday: published?.value ?? 0, readyNow: queue?.value ?? 0, outcomeRollups, provider: discoverLinkedinProviderStatus() });
 });
 
 router.get("/linkedin/companies", requireAuth, async (_req, res) => res.json((await db.select().from(linkedinCompaniesTable).orderBy(desc(linkedinCompaniesTable.updatedAt))).map(dates)));
@@ -160,8 +161,33 @@ router.post("/linkedin/actions", requireAuth, async (req, res) => {
     }
     const row = await db.transaction(async (tx) => {
       await tx.execute(sql`select pg_advisory_xact_lock(${LINKEDIN_SUPPRESSION_LOCK})`);
+      await tx.execute(sql`select pg_advisory_xact_lock(${LINKEDIN_PROVIDER_EXECUTION_LOCK})`);
       await assertNotSuppressed({ personId, companyId, signalId: p.data.signalId });
-      const [created] = await tx.insert(linkedinActionsTable).values({ ...p.data, personId, companyId, status: "draft" }).returning();
+      if (p.data.actionType === "organization_post") {
+        if (!p.data.contentItemId) throw new Error("Organization posts require an approved content item");
+        const [content] = await tx.select().from(linkedinContentItemsTable).where(eq(linkedinContentItemsTable.id, p.data.contentItemId));
+        if (!content || content.status !== "approved" || !content.approvedCopy) {
+          throw new Error("Organization posts require approved content and approved copy");
+        }
+        if (p.data.draftCopy !== content.approvedCopy) {
+          throw new Error("Organization post copy must match the approved content");
+        }
+        const existing = await tx.select({ id: linkedinActionsTable.id }).from(linkedinActionsTable).where(and(
+          eq(linkedinActionsTable.contentItemId, content.id),
+          eq(linkedinActionsTable.actionType, "organization_post"),
+          or(
+            inArray(linkedinActionsTable.status, ["draft", "pending_review", "approved", "completed"]),
+            inArray(linkedinActionsTable.providerState, ["pending", "ambiguous", "accepted", "reconciled"]),
+          ),
+        )).limit(1);
+        if (existing.length) throw new Error("Approved content already has an organization-post queue record");
+      }
+      const [created] = await tx.insert(linkedinActionsTable).values({
+        ...p.data,
+        personId,
+        companyId,
+        status: p.data.actionType === "organization_post" ? "pending_review" : "draft",
+      }).returning();
       return created!;
     });
     res.status(201).json(dates(row!));
@@ -170,7 +196,7 @@ router.post("/linkedin/actions", requireAuth, async (req, res) => {
   }
 });
 router.post("/linkedin/actions/prepare", requireAuth, async (req, res) => {
-  const p = z.object({ personId: id, actionType, campaignId: id.optional() }).safeParse(req.body);
+  const p = z.object({ personId: id, actionType: manualActionType, campaignId: id.optional() }).safeParse(req.body);
   if (!p.success) { res.status(400).json({ error: "Invalid preparation request" }); return; }
   const [person] = await db.select().from(linkedinPeopleTable).where(eq(linkedinPeopleTable.id, p.data.personId));
   if (!person || person.status !== "active" || !person.name.trim() || !person.sourceUrl || !person.evidence) { res.status(409).json({ error: "Preparation requires an active named person with public source URL and evidence" }); return; }
@@ -196,22 +222,38 @@ router.post("/linkedin/actions/:id/transition", requireAuth, async (req, res) =>
   try {
     const row = await db.transaction(async (tx) => {
       await tx.execute(sql`select pg_advisory_xact_lock(${LINKEDIN_SUPPRESSION_LOCK})`);
+      await tx.execute(sql`select pg_advisory_xact_lock(${LINKEDIN_PROVIDER_EXECUTION_LOCK})`);
       if (p.data.status === "completed") await tx.execute(sql`select pg_advisory_xact_lock(${PERSON_ACTION_QUOTA_LOCK})`);
       const [action] = await tx.select().from(linkedinActionsTable).where(eq(linkedinActionsTable.id, params.data));
       if (!action) throw new Error("Action not found");
+      assertLinkedinManualTransitionAllowed(action.providerState);
       await assertNotSuppressed({
         personId: action.personId,
         companyId: action.companyId,
         signalId: action.signalId,
       });
       assertLinkedinTransition(action.status as z.infer<typeof actionStatus>, p.data.status);
-      if (p.data.status === "approved") assertApprovalFields({ ...action, sourceUrl: action.personId ? (await tx.select({ sourceUrl: linkedinPeopleTable.sourceUrl }).from(linkedinPeopleTable).where(eq(linkedinPeopleTable.id, action.personId)))[0]?.sourceUrl : null });
+      if (p.data.status === "approved") {
+        const content = action.contentItemId
+          ? (await tx.select().from(linkedinContentItemsTable).where(eq(linkedinContentItemsTable.id, action.contentItemId)))[0]
+          : undefined;
+        const sourceUrl = action.personId
+          ? (await tx.select({ sourceUrl: linkedinPeopleTable.sourceUrl }).from(linkedinPeopleTable).where(eq(linkedinPeopleTable.id, action.personId)))[0]?.sourceUrl
+          : content
+            ? content.sourceUrl
+            : null;
+        assertApprovalFields({ ...action, sourceUrl });
+        if (action.actionType === "organization_post") {
+          if (!content || content.status !== "approved") throw new Error("Organization post requires approved content");
+          assertLinkedinOrganizationPostCopy(action.approvedCopy, content.approvedCopy);
+        }
+      }
       if (p.data.status === "completed") {
         const start = phoenixStart();
         const [{ value: used }] = await tx.select({ value: count() }).from(linkedinActionsTable).where(gte(linkedinActionsTable.completedAt, start));
         let limit = 25;
         if (action.campaignId) { const [campaign] = await tx.select().from(linkedinCampaignsTable).where(eq(linkedinCampaignsTable.id, action.campaignId)); if (campaign) limit = Math.min(limit, campaign.dailyActionLimit); }
-        if ((used ?? 0) >= limit) throw new Error("Phoenix daily completed person-action limit reached");
+        assertLinkedinDailyLimit(used ?? 0, limit, "completed person-action");
       }
       const [updated] = await tx.update(linkedinActionsTable).set({ status: p.data.status, completedAt: p.data.status === "completed" ? new Date() : action.completedAt, updatedAt: new Date() }).where(and(eq(linkedinActionsTable.id, action.id), eq(linkedinActionsTable.status, action.status))).returning();
       if (!updated) throw new Error("Action changed concurrently");
@@ -227,9 +269,11 @@ router.post("/linkedin/actions/:id/reschedule", requireAuth, async (req, res) =>
   try {
     const row = await db.transaction(async (tx) => {
       await tx.execute(sql`select pg_advisory_xact_lock(${LINKEDIN_SUPPRESSION_LOCK})`);
+      await tx.execute(sql`select pg_advisory_xact_lock(${LINKEDIN_PROVIDER_EXECUTION_LOCK})`);
       const [action] = await tx.select().from(linkedinActionsTable).where(eq(linkedinActionsTable.id, params.data));
       if (!action) throw new Error("Action not found");
       if (action.status !== "approved") throw new Error("Only approved actions can be rescheduled");
+      assertLinkedinManualTransitionAllowed(action.providerState);
       await assertNotSuppressed({ personId: action.personId, companyId: action.companyId, signalId: action.signalId });
       const [updated] = await tx.update(linkedinActionsTable).set({ dueAt: new Date(p.data.dueAt), updatedAt: new Date() }).where(and(eq(linkedinActionsTable.id, action.id), eq(linkedinActionsTable.status, "approved"))).returning();
       if (!updated) throw new Error("Action changed concurrently");
@@ -252,6 +296,10 @@ router.get("/linkedin/queue", requireAuth, async (req, res) => {
       actionType: linkedinActionsTable.actionType, draftCopy: linkedinActionsTable.draftCopy, approvedCopy: linkedinActionsTable.approvedCopy,
       owner: linkedinActionsTable.owner, dueAt: linkedinActionsTable.dueAt, status: linkedinActionsTable.status,
       legalBasisNote: linkedinActionsTable.legalBasisNote, completedAt: linkedinActionsTable.completedAt,
+      providerName: linkedinActionsTable.providerName, providerOperation: linkedinActionsTable.providerOperation,
+      providerState: linkedinActionsTable.providerState, providerReconciliationKey: linkedinActionsTable.providerReconciliationKey,
+      providerActionId: linkedinActionsTable.providerActionId, providerError: linkedinActionsTable.providerError,
+      providerAttemptedAt: linkedinActionsTable.providerAttemptedAt,
       createdAt: linkedinActionsTable.createdAt, updatedAt: linkedinActionsTable.updatedAt,
       personName: linkedinPeopleTable.name, personRole: linkedinPeopleTable.role, personLinkedinUrl: linkedinPeopleTable.linkedinUrl,
       companyName: linkedinCompaniesTable.name,
@@ -290,7 +338,7 @@ router.get("/linkedin/queue", requireAuth, async (req, res) => {
   });
 });
 router.post("/linkedin/queue/prepare", requireAuth, async (req, res) => {
-  const p = z.object({ date: queueDate.optional(), limit: z.number().int().min(1).max(25).optional(), actionType: actionType.optional() }).safeParse(req.body);
+  const p = z.object({ date: queueDate.optional(), limit: z.number().int().min(1).max(25).optional(), actionType: manualActionType.optional() }).safeParse(req.body);
   if (!p.success) { res.status(400).json({ error: p.error.message }); return; }
   const targetDate = p.data.date ?? phoenixDateKey(new Date());
   const { start } = phoenixWindow(targetDate);
@@ -322,6 +370,212 @@ router.post("/linkedin/queue/prepare", requireAuth, async (req, res) => {
     res.status(201).json(result);
   } catch (error) { res.status(409).json({ error: error instanceof Error ? error.message : "Unable to prepare queue" }); }
 });
+router.post("/linkedin/actions/:id/execute", requireAuth, async (req, res) => {
+  const params = id.safeParse(req.params.id);
+  if (!params.success) { res.status(400).json({ error: "Invalid action ID" }); return; }
+  const actor = actorFromRequest({ auth: getAuth(req) });
+  const reconciliationKey = `linkedin-action-${params.data}`;
+  try {
+    const reserved = await db.transaction(async (tx) => {
+      await tx.execute(sql`select pg_advisory_xact_lock(${LINKEDIN_SUPPRESSION_LOCK})`);
+      await tx.execute(sql`select pg_advisory_xact_lock(${LINKEDIN_PROVIDER_EXECUTION_LOCK})`);
+      await tx.execute(sql`select pg_advisory_xact_lock(${CONTENT_PUBLISH_QUOTA_LOCK})`);
+      const [action] = await tx.select().from(linkedinActionsTable).where(eq(linkedinActionsTable.id, params.data));
+      if (!action) throw new Error("Action not found");
+      await assertNotSuppressed({ personId: action.personId, companyId: action.companyId, signalId: action.signalId });
+      const approval = await tx.select({ id: linkedinApprovalEventsTable.id }).from(linkedinApprovalEventsTable)
+        .where(and(eq(linkedinApprovalEventsTable.actionId, action.id), eq(linkedinApprovalEventsTable.newStatus, "approved"))).limit(1);
+      const provider = discoverLinkedinProviderStatus();
+      assertLinkedinProviderExecution({
+        status: action.status,
+        providerState: action.providerState,
+        actionType: action.actionType,
+        approvedCopy: action.approvedCopy,
+        hasApprovedHistory: approval.length > 0,
+        supported: provider.allowedOperations.includes("publish_organization_post"),
+      });
+      if (!action.contentItemId) throw new Error("Organization post execution requires an approved content item");
+      const [contentItem] = await tx.select().from(linkedinContentItemsTable).where(eq(linkedinContentItemsTable.id, action.contentItemId));
+      if (!contentItem || contentItem.status !== "approved") throw new Error("Organization post execution requires approved content");
+      assertLinkedinOrganizationPostCopy(action.approvedCopy, contentItem.approvedCopy);
+      const existingClaim = await tx.select({ id: linkedinActionsTable.id }).from(linkedinActionsTable).where(and(
+        eq(linkedinActionsTable.contentItemId, action.contentItemId),
+        sql`${linkedinActionsTable.id} <> ${action.id}`,
+        inArray(linkedinActionsTable.providerState, ["pending", "ambiguous", "accepted", "reconciled"]),
+      )).limit(1);
+      assertNoExistingLinkedinContentClaim(existingClaim.length);
+      const start = phoenixStart();
+      const [{ value: used }] = await tx.select({ value: count() }).from(linkedinContentItemsTable)
+        .where(or(
+          and(eq(linkedinContentItemsTable.status, "published"), gte(linkedinContentItemsTable.updatedAt, start)),
+          sql`exists (
+            select 1 from ${linkedinActionsTable}
+            where ${linkedinActionsTable.contentItemId} = ${linkedinContentItemsTable.id}
+              and ${linkedinActionsTable.providerOperation} = 'publish_organization_post'
+              and ${linkedinActionsTable.providerAttemptedAt} >= ${start}
+          )`,
+        ));
+      assertLinkedinDailyLimit(used ?? 0, 3, "published-content");
+      const [claimed] = await tx.update(linkedinActionsTable).set({
+        providerName: provider.name,
+        providerOperation: "publish_organization_post",
+        providerState: "pending",
+        providerReconciliationKey: reconciliationKey,
+        providerAttemptedAt: new Date(),
+        providerError: null,
+        updatedAt: new Date(),
+      }).where(and(
+        eq(linkedinActionsTable.id, action.id),
+        eq(linkedinActionsTable.status, "approved"),
+        eq(linkedinActionsTable.providerState, "not_attempted"),
+      )).returning();
+      if (!claimed) throw new Error("Provider action was already attempted and will not be retried");
+      await tx.insert(linkedinApprovalEventsTable).values({
+        actionId: action.id,
+        actor,
+        previousStatus: action.status,
+        newStatus: action.status,
+        approvedCopySnapshot: action.approvedCopy,
+        note: `Provider execution reserved: ${reconciliationKey}`,
+      });
+      return claimed;
+    });
+
+    try {
+      const result = await linkedinProvider.execute({
+        operation: "publish_organization_post",
+        reconciliationKey,
+        approvedCopy: reserved.approvedCopy!,
+      });
+      if (result.state === "ambiguous") {
+        const [updated] = await db.update(linkedinActionsTable).set({
+          providerState: "ambiguous",
+          providerActionId: result.providerActionId,
+          providerError: "Provider accepted the request without a definitive action identifier; awaiting reconciliation",
+          updatedAt: new Date(),
+        }).where(and(eq(linkedinActionsTable.id, reserved.id), eq(linkedinActionsTable.providerState, "pending"))).returning();
+        res.status(202).json(dates(updated ?? reserved));
+        return;
+      }
+      const completed = await db.transaction(async (tx) => {
+        const now = new Date();
+        const [updated] = await tx.update(linkedinActionsTable).set({
+          status: "completed",
+          completedAt: now,
+          providerState: "accepted",
+          providerActionId: result.providerActionId,
+          providerError: null,
+          updatedAt: now,
+        }).where(and(eq(linkedinActionsTable.id, reserved.id), eq(linkedinActionsTable.status, "approved"), eq(linkedinActionsTable.providerState, "pending"))).returning();
+        if (!updated) throw new Error("Provider action changed during execution");
+        await tx.update(linkedinContentItemsTable).set({ status: "published", updatedAt: now })
+          .where(and(eq(linkedinContentItemsTable.id, reserved.contentItemId!), eq(linkedinContentItemsTable.status, "approved")));
+        await tx.insert(linkedinApprovalEventsTable).values({
+          actionId: reserved.id,
+          actor: `provider:${discoverLinkedinProviderStatus().name}`,
+          previousStatus: "approved",
+          newStatus: "completed",
+          approvedCopySnapshot: reserved.approvedCopy,
+          note: `Provider accepted action ${result.providerActionId}`,
+        });
+        return updated;
+      });
+      res.json(dates(completed));
+    } catch (error) {
+      const ambiguous = !(error && typeof error === "object" && "outcome" in error && error.outcome === "definitive");
+      const [updated] = await db.update(linkedinActionsTable).set({
+        providerState: ambiguous ? "ambiguous" : "failed",
+        providerError: error instanceof Error ? error.message : "Provider execution failed",
+        updatedAt: new Date(),
+      }).where(and(eq(linkedinActionsTable.id, reserved.id), eq(linkedinActionsTable.providerState, "pending"))).returning();
+      res.status(ambiguous ? 202 : 409).json(dates(updated ?? reserved));
+    }
+  } catch (error) {
+    res.status(String(error).includes("not found") ? 404 : 409).json({ error: error instanceof Error ? error.message : "Provider execution rejected" });
+  }
+});
+router.get("/linkedin/webhooks/provider", (req, res) => {
+  const parsed = z.object({ challengeCode: z.string().min(1) }).safeParse(req.query);
+  if (!parsed.success) { res.status(400).json({ error: "Missing challengeCode" }); return; }
+  try {
+    res.json({ challengeCode: parsed.data.challengeCode, challengeResponse: linkedinWebhookChallenge(parsed.data.challengeCode) });
+  } catch (error) {
+    res.status(503).json({ error: error instanceof Error ? error.message : "Webhook validation unavailable" });
+  }
+});
+router.post("/linkedin/webhooks/provider", async (req, res) => {
+  if (!Buffer.isBuffer(req.body)) { res.status(400).json({ error: "Raw webhook body is required" }); return; }
+  const signature = req.header("x-li-signature") ?? req.header("x-linkedin-signature") ?? undefined;
+  if (!verifyLinkedinProviderWebhook(req.body, signature)) { res.status(401).json({ error: "Invalid webhook signature" }); return; }
+  let payload: unknown;
+  try { payload = JSON.parse(req.body.toString("utf8")); } catch { res.status(400).json({ error: "Invalid webhook JSON" }); return; }
+  const parsed = z.object({
+    reconciliationKey: z.string().min(1),
+    providerActionId: z.string().min(1).optional(),
+    status: z.enum(["succeeded", "failed"]),
+    note: z.string().max(500).optional(),
+  }).refine((value) => value.status !== "succeeded" || Boolean(value.providerActionId), {
+    message: "Successful reconciliation requires providerActionId",
+  }).safeParse(payload);
+  if (!parsed.success) { res.status(400).json({ error: "Invalid provider webhook" }); return; }
+  try {
+    const row = await db.transaction(async (tx) => {
+      await tx.execute(sql`select pg_advisory_xact_lock(${LINKEDIN_PROVIDER_EXECUTION_LOCK})`);
+      await tx.execute(sql`select pg_advisory_xact_lock(${CONTENT_PUBLISH_QUOTA_LOCK})`);
+      const [action] = await tx.select().from(linkedinActionsTable)
+        .where(eq(linkedinActionsTable.providerReconciliationKey, parsed.data.reconciliationKey));
+      if (!action) throw new Error("Provider action not found");
+      if (["accepted", "reconciled", "failed"].includes(action.providerState)) return action;
+      assertLinkedinProviderReconciliation({
+        providerState: action.providerState,
+        status: parsed.data.status,
+        providerActionId: parsed.data.providerActionId,
+      });
+      if (parsed.data.status === "failed") {
+        const [failed] = await tx.update(linkedinActionsTable).set({
+          providerState: "failed",
+          providerActionId: parsed.data.providerActionId ?? action.providerActionId,
+          providerError: parsed.data.note ?? "Provider reported failure",
+          updatedAt: new Date(),
+        }).where(and(
+          eq(linkedinActionsTable.id, action.id),
+          inArray(linkedinActionsTable.providerState, ["pending", "ambiguous"]),
+        )).returning();
+        if (!failed) throw new Error("Provider action changed during reconciliation");
+        return failed!;
+      }
+      if (action.status !== "approved" || !action.contentItemId) throw new Error("Provider reconciliation requires an approved queue action");
+      const now = new Date();
+      const [updated] = await tx.update(linkedinActionsTable).set({
+        status: "completed",
+        completedAt: now,
+        providerState: "reconciled",
+        providerActionId: parsed.data.providerActionId ?? action.providerActionId,
+        providerError: null,
+        updatedAt: now,
+      }).where(and(
+        eq(linkedinActionsTable.id, action.id),
+        eq(linkedinActionsTable.status, "approved"),
+        inArray(linkedinActionsTable.providerState, ["pending", "ambiguous"]),
+      )).returning();
+      if (!updated) throw new Error("Provider action changed during reconciliation");
+      await tx.update(linkedinContentItemsTable).set({ status: "published", updatedAt: now })
+        .where(and(eq(linkedinContentItemsTable.id, action.contentItemId), eq(linkedinContentItemsTable.status, "approved")));
+      await tx.insert(linkedinApprovalEventsTable).values({
+        actionId: action.id,
+        actor: "provider:webhook",
+        previousStatus: "approved",
+        newStatus: "completed",
+        approvedCopySnapshot: action.approvedCopy,
+        note: parsed.data.note ?? "Provider outcome reconciled by signed webhook",
+      });
+      return updated;
+    });
+    res.json(dates(row));
+  } catch (error) {
+    res.status(String(error).includes("not found") ? 404 : 409).json({ error: error instanceof Error ? error.message : "Webhook reconciliation rejected" });
+  }
+});
 router.get("/linkedin/suppressions", requireAuth, async (_req, res) => res.json((await db.select().from(linkedinSuppressionsTable).orderBy(desc(linkedinSuppressionsTable.createdAt))).map(dates)));
 router.post("/linkedin/suppressions", requireAuth, async (req, res) => {
   const p = z.object({ personId: id.optional(), companyId: id.optional(), profileUrl: z.string().optional(), reason: z.string().min(1) }).refine((x) => Boolean(x.personId || x.companyId || x.profileUrl), "target required").safeParse(req.body);
@@ -339,14 +593,36 @@ router.post("/linkedin/content/:id/transition", requireAuth, async (req, res) =>
   if (!params.success || !p.success) { res.status(400).json({ error: "Invalid content transition" }); return; }
   try {
     const row = await db.transaction(async (tx) => {
-      if (p.data.status === "published") await tx.execute(sql`select pg_advisory_xact_lock(${CONTENT_PUBLISH_QUOTA_LOCK})`);
+      if (p.data.status === "published" || p.data.status === "stopped") {
+        await tx.execute(sql`select pg_advisory_xact_lock(${LINKEDIN_PROVIDER_EXECUTION_LOCK})`);
+        await tx.execute(sql`select pg_advisory_xact_lock(${CONTENT_PUBLISH_QUOTA_LOCK})`);
+      }
       const [item] = await tx.select().from(linkedinContentItemsTable).where(eq(linkedinContentItemsTable.id, params.data));
       if (!item) throw new Error("Content not found");
       const next = p.data.status;
       const valid = (item.status === "draft" && ["pending_review", "stopped"].includes(next)) || (item.status === "pending_review" && ["approved", "stopped"].includes(next)) || (item.status === "approved" && ["published", "stopped"].includes(next));
       if (!valid) throw new Error("Content transition is not allowed");
+      if (item.status === "approved" && ["published", "stopped"].includes(next)) {
+        const claimed = await tx.select({ id: linkedinActionsTable.id }).from(linkedinActionsTable).where(and(
+          eq(linkedinActionsTable.contentItemId, item.id),
+          inArray(linkedinActionsTable.providerState, ["pending", "ambiguous", "accepted", "reconciled"]),
+        )).limit(1);
+        if (claimed.length) throw new Error("Content has a provider dispatch claim and cannot be changed manually");
+      }
       if (next === "approved" || next === "published") assertApprovalFields({ approvedCopy: item.approvedCopy, owner: item.owner, dueAt: item.scheduledFor, legalBasisNote: "Content reviewed by owner", sourceUrl: item.sourceUrl && item.evidence ? item.sourceUrl : null });
-      if (next === "published") { const [{ value }] = await tx.select({ value: count() }).from(linkedinContentItemsTable).where(and(eq(linkedinContentItemsTable.status, "published"), gte(linkedinContentItemsTable.updatedAt, phoenixStart()))); if ((value ?? 0) >= 3) throw new Error("Phoenix daily published-content limit reached"); }
+      if (next === "published") {
+        const start = phoenixStart();
+        const [{ value }] = await tx.select({ value: count() }).from(linkedinContentItemsTable).where(or(
+          and(eq(linkedinContentItemsTable.status, "published"), gte(linkedinContentItemsTable.updatedAt, start)),
+          sql`exists (
+            select 1 from ${linkedinActionsTable}
+            where ${linkedinActionsTable.contentItemId} = ${linkedinContentItemsTable.id}
+              and ${linkedinActionsTable.providerOperation} = 'publish_organization_post'
+              and ${linkedinActionsTable.providerAttemptedAt} >= ${start}
+          )`,
+        ));
+        assertLinkedinDailyLimit(value ?? 0, 3, "published-content");
+      }
       const [updated] = await tx.update(linkedinContentItemsTable).set({ status: next, updatedAt: new Date() }).where(and(eq(linkedinContentItemsTable.id, item.id), eq(linkedinContentItemsTable.status, item.status))).returning();
       if (!updated) throw new Error("Content changed concurrently"); return updated;
     }); res.json(dates(row));
@@ -380,8 +656,9 @@ router.post("/linkedin/outcomes", requireAuth, async (req, res) => {
 });
 router.post("/linkedin/retention/run", requireAuth, async (_req, res) => {
   const now = new Date(); const expired = await db.transaction(async (tx) => {
+    await tx.execute(sql`select pg_advisory_xact_lock(${LINKEDIN_PROVIDER_EXECUTION_LOCK})`);
     const rows = await tx.select({ id: linkedinPeopleTable.id }).from(linkedinPeopleTable).where(and(eq(linkedinPeopleTable.status, "active"), sql`${linkedinPeopleTable.retentionUntil} is not null and ${linkedinPeopleTable.retentionUntil} <= ${now}`));
-    const ids = rows.map((x) => x.id); if (ids.length) { await tx.update(linkedinPeopleTable).set({ status: "expired", updatedAt: now }).where(inArray(linkedinPeopleTable.id, ids)); await tx.update(linkedinActionsTable).set({ status: "stopped", updatedAt: now }).where(and(inArray(linkedinActionsTable.personId, ids), inArray(linkedinActionsTable.status, ["draft", "pending_review", "approved"]))); } return ids.length;
+    const ids = rows.map((x) => x.id); if (ids.length) { await tx.update(linkedinPeopleTable).set({ status: "expired", updatedAt: now }).where(inArray(linkedinPeopleTable.id, ids)); await tx.update(linkedinActionsTable).set({ status: "stopped", updatedAt: now }).where(and(inArray(linkedinActionsTable.personId, ids), inArray(linkedinActionsTable.status, ["draft", "pending_review", "approved"]), eq(linkedinActionsTable.providerState, "not_attempted"))); } return ids.length;
   }); res.json({ expiredPeople: expired });
 });
 export default router;

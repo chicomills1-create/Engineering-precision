@@ -61,6 +61,7 @@ import type {
   LinkedinPerson,
   LinkedinPersonInput,
   LinkedinProvider,
+  LinkedinProviderWebhookInput,
   LinkedinQueue,
   LinkedinQueuePreparation,
   LinkedinQueuePrepareInput,
@@ -107,7 +108,9 @@ import type {
   Suppression,
   SuppressionInput,
   UnsubscribeInput,
-  UploadResponse
+  UploadResponse,
+  ValidateLinkedinProviderWebhook200,
+  ValidateLinkedinProviderWebhookParams
 } from './api.schemas';
 
 import { customFetch } from '../custom-fetch';
@@ -5237,6 +5240,214 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
         TContext
       > => {
       return useMutation(getTransitionLinkedinActionMutationOptions(options));
+    }
+
+export const getExecuteLinkedinActionUrl = (id: number,) => {
+
+
+
+
+  return `/api/linkedin/actions/${id}/execute`
+}
+
+export const executeLinkedinAction = async (id: number, options?: Parameters<typeof customFetch>[1]): Promise<LinkedinAction> => {
+
+  return customFetch<LinkedinAction>(getExecuteLinkedinActionUrl(id),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+
+export const getExecuteLinkedinActionMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof executeLinkedinAction>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof executeLinkedinAction>>, TError,{id: number}, TContext> => {
+
+const mutationKey = ['executeLinkedinAction'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof executeLinkedinAction>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  executeLinkedinAction(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type ExecuteLinkedinActionMutationResult = NonNullable<Awaited<ReturnType<typeof executeLinkedinAction>>>
+
+    export type ExecuteLinkedinActionMutationError = ErrorType<unknown>
+
+    export const useExecuteLinkedinAction = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof executeLinkedinAction>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof executeLinkedinAction>>,
+        TError,
+        {id: number},
+        TContext
+      > => {
+      return useMutation(getExecuteLinkedinActionMutationOptions(options));
+    }
+
+export const getValidateLinkedinProviderWebhookUrl = (params: ValidateLinkedinProviderWebhookParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : String(value))
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/api/linkedin/webhooks/provider?${stringifiedParams}` : `/api/linkedin/webhooks/provider`
+}
+
+export const validateLinkedinProviderWebhook = async (params: ValidateLinkedinProviderWebhookParams, options?: Parameters<typeof customFetch>[1]): Promise<ValidateLinkedinProviderWebhook200> => {
+
+  return customFetch<ValidateLinkedinProviderWebhook200>(getValidateLinkedinProviderWebhookUrl(params),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getValidateLinkedinProviderWebhookQueryKey = (params?: ValidateLinkedinProviderWebhookParams,) => {
+    return [
+    `/api/linkedin/webhooks/provider`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getValidateLinkedinProviderWebhookQueryOptions = <TData = Awaited<ReturnType<typeof validateLinkedinProviderWebhook>>, TError = ErrorType<unknown>>(params: ValidateLinkedinProviderWebhookParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof validateLinkedinProviderWebhook>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getValidateLinkedinProviderWebhookQueryKey(params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof validateLinkedinProviderWebhook>>> = ({ signal }) => validateLinkedinProviderWebhook(params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof validateLinkedinProviderWebhook>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ValidateLinkedinProviderWebhookQueryResult = NonNullable<Awaited<ReturnType<typeof validateLinkedinProviderWebhook>>>
+export type ValidateLinkedinProviderWebhookQueryError = ErrorType<unknown>
+
+
+
+export function useValidateLinkedinProviderWebhook<TData = Awaited<ReturnType<typeof validateLinkedinProviderWebhook>>, TError = ErrorType<unknown>>(
+ params: ValidateLinkedinProviderWebhookParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof validateLinkedinProviderWebhook>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getValidateLinkedinProviderWebhookQueryOptions(params,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getReconcileLinkedinProviderWebhookUrl = () => {
+
+
+
+
+  return `/api/linkedin/webhooks/provider`
+}
+
+export const reconcileLinkedinProviderWebhook = async (linkedinProviderWebhookInput: LinkedinProviderWebhookInput, options?: Parameters<typeof customFetch>[1]): Promise<LinkedinAction> => {
+
+  return customFetch<LinkedinAction>(getReconcileLinkedinProviderWebhookUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(linkedinProviderWebhookInput)
+  }
+);}
+
+
+
+
+
+export const getReconcileLinkedinProviderWebhookMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof reconcileLinkedinProviderWebhook>>, TError,{data: BodyType<LinkedinProviderWebhookInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof reconcileLinkedinProviderWebhook>>, TError,{data: BodyType<LinkedinProviderWebhookInput>}, TContext> => {
+
+const mutationKey = ['reconcileLinkedinProviderWebhook'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof reconcileLinkedinProviderWebhook>>, {data: BodyType<LinkedinProviderWebhookInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  reconcileLinkedinProviderWebhook(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type ReconcileLinkedinProviderWebhookMutationResult = NonNullable<Awaited<ReturnType<typeof reconcileLinkedinProviderWebhook>>>
+    export type ReconcileLinkedinProviderWebhookMutationBody = BodyType<LinkedinProviderWebhookInput>
+    export type ReconcileLinkedinProviderWebhookMutationError = ErrorType<unknown>
+
+    export const useReconcileLinkedinProviderWebhook = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof reconcileLinkedinProviderWebhook>>, TError,{data: BodyType<LinkedinProviderWebhookInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof reconcileLinkedinProviderWebhook>>,
+        TError,
+        {data: BodyType<LinkedinProviderWebhookInput>},
+        TContext
+      > => {
+      return useMutation(getReconcileLinkedinProviderWebhookMutationOptions(options));
     }
 
 export const getRescheduleLinkedinActionUrl = (id: number,) => {

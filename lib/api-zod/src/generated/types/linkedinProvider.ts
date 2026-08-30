@@ -5,9 +5,17 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { LinkedinProviderAllowedOperationsItem } from './linkedinProviderAllowedOperationsItem';
 import type { LinkedinProviderCapabilities } from './linkedinProviderCapabilities';
+import type { LinkedinProviderDiscovery } from './linkedinProviderDiscovery';
+import type { LinkedinProviderMode } from './linkedinProviderMode';
 
 export interface LinkedinProvider {
   name: string;
+  configured: boolean;
+  mode: LinkedinProviderMode;
+  discovery: LinkedinProviderDiscovery;
   capabilities: LinkedinProviderCapabilities;
+  allowedOperations: LinkedinProviderAllowedOperationsItem[];
+  unavailableReasons: string[];
 }

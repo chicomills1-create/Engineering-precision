@@ -30,7 +30,7 @@ export function LinkedinDashboard() {
   const completedToday = dashboard.completedToday ?? 0;
   const contentItems = dashboard.contentItems ?? 0;
   const publishedToday = dashboard.publishedToday ?? 0;
-  const provider = dashboard.provider ?? { name: 'Manual', capabilities: {} };
+  const provider = dashboard.provider;
   const outcomes = dashboard.outcomeRollups ?? {};
 
   return (
@@ -109,18 +109,31 @@ export function LinkedinDashboard() {
                 <span className="text-sm">Provider Name</span>
                 <span className="text-sm font-medium">{provider.name}</span>
               </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm">Connection status</span>
+                <span className={`text-xs px-2 py-0.5 rounded ${provider.configured ? 'bg-emerald-500/10 text-emerald-700' : 'bg-muted/50 text-muted-foreground'}`}>
+                  {provider.configured ? 'Configured' : 'Manual only'}
+                </span>
+              </div>
               <div className="flex items-center justify-between text-muted-foreground">
-                <span className="text-sm flex items-center gap-1"><ShieldAlert className="w-3 h-3"/> Auto-send Connection Requests</span>
+                <span className="text-sm flex items-center gap-1"><ShieldAlert className="w-3 h-3"/> Send Connection Requests</span>
                 <span className="text-xs px-2 py-0.5 rounded bg-muted/50">Disabled</span>
               </div>
               <div className="flex items-center justify-between text-muted-foreground">
-                <span className="text-sm flex items-center gap-1"><ShieldAlert className="w-3 h-3"/> Auto-send Messages</span>
+                <span className="text-sm flex items-center gap-1"><ShieldAlert className="w-3 h-3"/> Send Direct Messages</span>
                 <span className="text-xs px-2 py-0.5 rounded bg-muted/50">Disabled</span>
               </div>
-              <div className="flex items-center justify-between text-muted-foreground">
-                <span className="text-sm flex items-center gap-1"><ShieldAlert className="w-3 h-3"/> Auto-publish Content</span>
-                <span className="text-xs px-2 py-0.5 rounded bg-muted/50">Disabled</span>
+              <div className="flex items-center justify-between">
+                <span className="text-sm flex items-center gap-1"><ShieldAlert className="w-3 h-3"/> Publish approved organization posts</span>
+                <span className={`text-xs px-2 py-0.5 rounded ${provider.capabilities.publishOrganizationPost ? 'bg-emerald-500/10 text-emerald-700' : 'bg-muted/50 text-muted-foreground'}`}>
+                  {provider.capabilities.publishOrganizationPost ? 'Approved queue only' : 'Disabled'}
+                </span>
               </div>
+              {!provider.configured && provider.unavailableReasons.length > 0 && (
+                <p className="pt-2 text-xs text-muted-foreground">
+                  Provider actions remain disabled until approved credentials, organization ID, and permissions are configured in Replit.
+                </p>
+              )}
             </div>
           </CardContent>
         </Card>
