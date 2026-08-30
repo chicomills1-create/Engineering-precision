@@ -1,4 +1,4 @@
-import { and, eq, notInArray, sql } from "drizzle-orm";
+import { and, eq, inArray, notInArray, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
@@ -76,7 +76,18 @@ export async function seedVerifiedOutreachBatch(options: {
     .set({ targetCount: 150 })
     .where(eq(outreachResearchSchedulesTable.campaignId, campaign.id));
 
+  const existingLegacyRows = await db.select({ dedupeKey: prospectsTable.dedupeKey })
+    .from(prospectsTable)
+    .where(inArray(
+      prospectsTable.dedupeKey,
+      VERIFIED_OUTREACH_CONTACTS.map((contact) => contact.dedupeKey),
+    ));
+  const existingLegacyKeys = new Set(
+    existingLegacyRows.flatMap((row) => row.dedupeKey ? [row.dedupeKey] : []),
+  );
+
   for (const contact of VERIFIED_OUTREACH_CONTACTS) {
+    if (existingLegacyKeys.has(contact.dedupeKey)) continue;
     await db.transaction(async (tx) => {
       const normalizedEmail = contact.contactEmail.toLowerCase();
       await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${normalizedEmail}, 0))`);

@@ -26,6 +26,8 @@ app.listen(port, (err) => {
   }
 
   logger.info({ port }, "Server listening");
+  startOutreachWorker();
+  startClientJobUploadCleanup();
   void seedVerifiedOutreachBatch()
     .then(async (result) => {
       if (result.state === "ready") {
@@ -35,8 +37,6 @@ app.listen(port, (err) => {
           "Verified outreach candidates routed through daily preparation",
         );
       }
-      startOutreachWorker();
-      startClientJobUploadCleanup();
     })
     .catch((seedError: unknown) => {
       logger.error({ err: seedError }, "Verified outreach batch preparation failed");
