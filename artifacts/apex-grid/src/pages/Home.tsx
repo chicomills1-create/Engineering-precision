@@ -427,7 +427,7 @@ export default function Home() {
               We beat most firm quotes — guaranteed. Get a comprehensive proposal with an initial review response typically within 12–24 hours. No endless follow-up emails. Just solid numbers.
             </p>
             <Link 
-              href="/contact" 
+              href="/request-proposal?utm_source=website&utm_medium=organic&utm_campaign=homepage_proposal"
               className="h-16 px-10 md:px-14 bg-white text-primary font-bold text-sm uppercase tracking-[0.2em] flex items-center justify-center gap-4 rounded-none hover:bg-white/90 transition-all group shadow-[0_0_40px_rgba(0,0,0,0.5)] hover:scale-105 duration-300"
             >
               Request a Proposal

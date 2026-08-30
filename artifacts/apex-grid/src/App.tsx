@@ -15,10 +15,11 @@ import Resources from '@/pages/Resources';
 import About from '@/pages/About';
 import Team from '@/pages/Team';
 import Contact from '@/pages/Contact';
+import RequestProposal from '@/pages/RequestProposal';
 import Unsubscribe from '@/pages/Unsubscribe';
 import Audience from '@/pages/Audience';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Route, Switch, Router as WouterRouter } from 'wouter';
+import { Route, Switch, Router as WouterRouter, useLocation } from 'wouter';
 import { lazy, Suspense, useEffect } from 'react';
 import Capabilities from '@/pages/Capabilities';
 
@@ -65,6 +66,12 @@ function LazyClient({ page }: { page: 'submit' | 'portal' }) {
 }
 
 function Router() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location]);
+
   return (
     <Shell>
       <Switch>
@@ -86,6 +93,7 @@ function Router() {
         <Route path="/about" component={About} />
         <Route path="/team" component={Team} />
         <Route path="/contact" component={Contact} />
+        <Route path="/request-proposal" component={RequestProposal} />
         <Route path="/submit-project">
           <LazyClient page="submit" />
         </Route>

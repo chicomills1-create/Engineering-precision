@@ -137,7 +137,7 @@ export default function Resources() {
       utm_medium: "resource",
       utm_campaign: articleSlug ? `project_review_${articleSlug}` : "project_review",
     });
-    return `/contact?${params.toString()}`;
+    return `/request-proposal?${params.toString()}`;
   };
 
   useEffect(() => {
