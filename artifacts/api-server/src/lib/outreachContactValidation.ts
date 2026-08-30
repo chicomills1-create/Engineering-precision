@@ -78,9 +78,10 @@ export function assertOutreachContactData(
 
 export function assertVerifiedOutreachBatch(
   contacts: readonly VerifiedBatchContactValidationInput[],
+  expectedCount = 313,
 ): void {
-  if (contacts.length !== 313) {
-    throw new Error(`Verified library requires exactly 313 contacts; found ${contacts.length}`);
+  if (contacts.length !== expectedCount) {
+    throw new Error(`Verified library requires exactly ${expectedCount} contacts; found ${contacts.length}`);
   }
   const emails = new Set<string>();
   const dedupeKeys = new Set<string>();

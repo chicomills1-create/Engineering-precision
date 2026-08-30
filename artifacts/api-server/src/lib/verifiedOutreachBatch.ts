@@ -7,6 +7,7 @@ import {
   prospectsTable,
 } from "@workspace/db";
 import { assertVerifiedOutreachBatch } from "./outreachContactValidation";
+import { ObjectStorageService } from "./objectStorage";
 import { VERIFIED_OUTREACH_CONTACTS as LEGACY_VERIFIED_OUTREACH_CONTACTS } from "./verifiedOutreachContacts";
 import { VERIFIED_OUTREACH_CONTACTS_AUG_29 } from "./verifiedOutreachContactsAug29";
 
@@ -16,6 +17,34 @@ export const VERIFIED_OUTREACH_CONTACTS = [
   ...LEGACY_VERIFIED_OUTREACH_CONTACTS,
   ...VERIFIED_OUTREACH_CONTACTS_AUG_29,
 ] as const;
+
+type VerifiedOutreachContact = {
+  dedupeKey: string;
+  companyName: string;
+  website: string;
+  city: string;
+  state?: string;
+  audience: string;
+  contactName: string;
+  contactTitle: string;
+  contactEmail: string;
+  contactSourceUrl: string;
+  sourceUrl: string;
+  needSignals: string;
+};
+
+const STAGED_BATCH_OBJECT = "/objects/outreach/verified-2026-08-31.json";
+
+async function loadStagedVerifiedContacts(): Promise<VerifiedOutreachContact[]> {
+  const storage = new ObjectStorageService();
+  const file = await storage.getObjectEntityFile(STAGED_BATCH_OBJECT);
+  const [contents] = await file.download();
+  const parsed: unknown = JSON.parse(contents.toString("utf8"));
+  if (!Array.isArray(parsed)) {
+    throw new Error("The staged verified outreach batch is not an array");
+  }
+  return parsed as VerifiedOutreachContact[];
+}
 
 export function approvedOutreachSubject(): string {
   return SUBJECT;
@@ -38,7 +67,13 @@ export async function seedVerifiedOutreachBatch(options: {
 } = {}): Promise<{ state: "skipped" | "ready"; queued: number }> {
   const enabled = options.enabled ?? process.env.OUTREACH_SEED_VERIFIED_BATCH === "true";
   if (!enabled) return { state: "skipped", queued: 0 };
-  assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS);
+  const stagedContacts = await loadStagedVerifiedContacts();
+  assertVerifiedOutreachBatch(stagedContacts, 150);
+  const contacts: VerifiedOutreachContact[] = [
+    ...VERIFIED_OUTREACH_CONTACTS,
+    ...stagedContacts,
+  ];
+  assertVerifiedOutreachBatch(contacts, 463);
 
   let [campaign] = await db.select().from(campaignsTable)
     .where(eq(campaignsTable.name, CAMPAIGN_NAME))
@@ -47,7 +82,7 @@ export async function seedVerifiedOutreachBatch(options: {
     [campaign] = await db.insert(campaignsTable).values({
       name: CAMPAIGN_NAME,
       audience: "mixed",
-      states: ["AZ"],
+      states: ["AZ", "CA"],
       dailyLimit: 150,
       status: "active",
       subjectTemplate: SUBJECT,
@@ -55,9 +90,15 @@ export async function seedVerifiedOutreachBatch(options: {
     }).returning();
   }
   if (!campaign) throw new Error("Unable to create the verified outreach campaign");
-  if (campaign.dailyLimit !== 150 || campaign.audience !== "mixed") {
+  if (
+    campaign.dailyLimit !== 150
+    || campaign.audience !== "mixed"
+    || campaign.states.length !== 2
+    || !campaign.states.includes("AZ")
+    || !campaign.states.includes("CA")
+  ) {
     const [updatedCampaign] = await db.update(campaignsTable)
-      .set({ dailyLimit: 150, audience: "mixed" })
+      .set({ dailyLimit: 150, audience: "mixed", states: ["AZ", "CA"] })
       .where(eq(campaignsTable.id, campaign.id))
       .returning();
     if (!updatedCampaign) throw new Error("Unable to set the outreach campaign daily limit");
@@ -67,7 +108,7 @@ export async function seedVerifiedOutreachBatch(options: {
     .set({ targetCount: 150 })
     .where(eq(outreachResearchSchedulesTable.campaignId, campaign.id));
 
-  for (const contact of VERIFIED_OUTREACH_CONTACTS) {
+  for (const contact of contacts) {
     await db.transaction(async (tx) => {
       const normalizedEmail = contact.contactEmail.toLowerCase();
       await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${normalizedEmail}, 0))`);
@@ -82,7 +123,7 @@ export async function seedVerifiedOutreachBatch(options: {
       companyName: contact.companyName,
       website: contact.website,
       city: contact.city,
-      state: "AZ",
+       state: contact.state ?? "AZ",
       audience: contact.audience,
       sourceUrl: contact.sourceUrl,
       researchNotes: contact.needSignals,
