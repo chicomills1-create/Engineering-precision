@@ -1,5 +1,5 @@
 import { Router, type IRouter } from "express";
-import { and, count, desc, eq, gte, inArray, or, sql } from "drizzle-orm";
+import { and, asc, count, desc, eq, gte, inArray, lt, lte, or, sql } from "drizzle-orm";
 import { z } from "zod";
 import { getAuth } from "@clerk/express";
 import {
@@ -8,7 +8,7 @@ import {
   linkedinContentItemsTable, linkedinOutcomesTable, linkedinPeopleTable, linkedinSignalsTable, linkedinSuppressionsTable,
 } from "@workspace/db";
 import { requireAuth } from "../middlewares/requireAuth";
-import { assertApprovalFields, assertLinkedinAttributionConsistency, assertLinkedinTransition, actorFromRequest, assertNotSuppressed, canonicalDomain, CONTENT_PUBLISH_QUOTA_LOCK, defaultRetentionUntil, isPostgresUniqueViolation, LINKEDIN_SUPPRESSION_LOCK, linkedinProvider, normalizeEvidenceUrl, normalizeLinkedinName, normalizeLinkedinUrl, PERSON_ACTION_QUOTA_LOCK, scoreLinkedinFit, suppressLinkedinTarget } from "../lib/linkedin";
+import { assertApprovalFields, assertLinkedinAttributionConsistency, assertLinkedinTransition, actorFromRequest, assertNotSuppressed, canonicalDomain, CONTENT_PUBLISH_QUOTA_LOCK, defaultRetentionUntil, isPostgresUniqueViolation, LINKEDIN_QUEUE_PREP_LOCK, LINKEDIN_SUPPRESSION_LOCK, linkedinProvider, normalizeEvidenceUrl, normalizeLinkedinName, normalizeLinkedinUrl, PERSON_ACTION_QUOTA_LOCK, scoreLinkedinFit, suppressLinkedinTarget } from "../lib/linkedin";
 
 const router: IRouter = Router();
 const id = z.coerce.number().int().positive();
@@ -21,6 +21,12 @@ const phoenixStart = () => {
   const text = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Phoenix", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
   return new Date(`${text}T00:00:00-07:00`);
 };
+const phoenixDateKey = (date: Date) => new Intl.DateTimeFormat("en-CA", { timeZone: "America/Phoenix", year: "numeric", month: "2-digit", day: "2-digit" }).format(date);
+const phoenixWindow = (dateKey: string) => {
+  const start = new Date(`${dateKey}T00:00:00-07:00`);
+  return { start, end: new Date(start.getTime() + 24 * 60 * 60 * 1000) };
+};
+const queueDate = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Use YYYY-MM-DD");
 async function duplicates(name: string, company?: string | null) {
   const normalized = name.trim().toLowerCase();
   const [people, companies, prospects, leads, partners, opportunities] = await Promise.all([
@@ -49,7 +55,8 @@ router.get("/linkedin/dashboard", requireAuth, async (_req, res) => {
   ]);
   const outcomeRollups: Record<string, number> = {};
   outcomes.forEach((o) => { outcomeRollups[o.outcomeType] = (outcomeRollups[o.outcomeType] ?? 0) + o.count; });
-  res.json({ people: people?.value ?? 0, companies: companies?.value ?? 0, actions: actions?.value ?? 0, completedToday: completed?.value ?? 0, contentItems: content?.value ?? 0, publishedToday: published?.value ?? 0, outcomeRollups, provider: { name: linkedinProvider.name, capabilities: linkedinProvider.capabilities } });
+  const [queue] = await db.select({ value: count() }).from(linkedinActionsTable).where(and(eq(linkedinActionsTable.status, "approved"), lte(linkedinActionsTable.dueAt, new Date())));
+  res.json({ people: people?.value ?? 0, companies: companies?.value ?? 0, actions: actions?.value ?? 0, completedToday: completed?.value ?? 0, contentItems: content?.value ?? 0, publishedToday: published?.value ?? 0, readyNow: queue?.value ?? 0, outcomeRollups, provider: { name: linkedinProvider.name, capabilities: linkedinProvider.capabilities } });
 });
 
 router.get("/linkedin/companies", requireAuth, async (_req, res) => res.json((await db.select().from(linkedinCompaniesTable).orderBy(desc(linkedinCompaniesTable.updatedAt))).map(dates)));
@@ -212,6 +219,108 @@ router.post("/linkedin/actions/:id/transition", requireAuth, async (req, res) =>
       return updated;
     }); res.json(dates(row));
   } catch (error) { res.status(String(error).includes("not found") ? 404 : 409).json({ error: error instanceof Error ? error.message : "Transition rejected" }); }
+});
+router.post("/linkedin/actions/:id/reschedule", requireAuth, async (req, res) => {
+  const params = id.safeParse(req.params.id);
+  const p = z.object({ dueAt: iso }).safeParse(req.body);
+  if (!params.success || !p.success) { res.status(400).json({ error: "A valid dueAt is required" }); return; }
+  try {
+    const row = await db.transaction(async (tx) => {
+      await tx.execute(sql`select pg_advisory_xact_lock(${LINKEDIN_SUPPRESSION_LOCK})`);
+      const [action] = await tx.select().from(linkedinActionsTable).where(eq(linkedinActionsTable.id, params.data));
+      if (!action) throw new Error("Action not found");
+      if (action.status !== "approved") throw new Error("Only approved actions can be rescheduled");
+      await assertNotSuppressed({ personId: action.personId, companyId: action.companyId, signalId: action.signalId });
+      const [updated] = await tx.update(linkedinActionsTable).set({ dueAt: new Date(p.data.dueAt), updatedAt: new Date() }).where(and(eq(linkedinActionsTable.id, action.id), eq(linkedinActionsTable.status, "approved"))).returning();
+      if (!updated) throw new Error("Action changed concurrently");
+      return updated;
+    });
+    res.json(dates(row));
+  } catch (error) { res.status(String(error).includes("not found") ? 404 : 409).json({ error: error instanceof Error ? error.message : "Unable to reschedule action" }); }
+});
+router.get("/linkedin/queue", requireAuth, async (req, res) => {
+  const parsed = queueDate.default(phoenixDateKey(new Date())).safeParse(req.query.date);
+  const limitParsed = z.coerce.number().int().min(1).max(100).default(50).safeParse(req.query.limit);
+  if (!parsed.success || !limitParsed.success) { res.status(400).json({ error: "Invalid queue date or limit" }); return; }
+  const { start, end } = phoenixWindow(parsed.data);
+  const upcomingEnd = new Date(end.getTime() + 7 * 24 * 60 * 60 * 1000);
+  const [completed, rows] = await Promise.all([
+    db.select({ value: count() }).from(linkedinActionsTable).where(gte(linkedinActionsTable.completedAt, start)),
+    db.select({
+      id: linkedinActionsTable.id, personId: linkedinActionsTable.personId, companyId: linkedinActionsTable.companyId,
+      signalId: linkedinActionsTable.signalId, campaignId: linkedinActionsTable.campaignId, contentItemId: linkedinActionsTable.contentItemId,
+      actionType: linkedinActionsTable.actionType, draftCopy: linkedinActionsTable.draftCopy, approvedCopy: linkedinActionsTable.approvedCopy,
+      owner: linkedinActionsTable.owner, dueAt: linkedinActionsTable.dueAt, status: linkedinActionsTable.status,
+      legalBasisNote: linkedinActionsTable.legalBasisNote, completedAt: linkedinActionsTable.completedAt,
+      createdAt: linkedinActionsTable.createdAt, updatedAt: linkedinActionsTable.updatedAt,
+      personName: linkedinPeopleTable.name, personRole: linkedinPeopleTable.role, personLinkedinUrl: linkedinPeopleTable.linkedinUrl,
+      companyName: linkedinCompaniesTable.name,
+    }).from(linkedinActionsTable)
+      .leftJoin(linkedinPeopleTable, eq(linkedinActionsTable.personId, linkedinPeopleTable.id))
+      .leftJoin(linkedinCompaniesTable, eq(linkedinActionsTable.companyId, linkedinCompaniesTable.id))
+      .where(and(
+        inArray(linkedinActionsTable.status, ["pending_review", "approved"]),
+        or(
+          eq(linkedinActionsTable.status, "pending_review"),
+          lte(linkedinActionsTable.dueAt, upcomingEnd),
+        ),
+      ))
+      .orderBy(asc(linkedinActionsTable.dueAt), asc(linkedinActionsTable.id))
+      .limit(limitParsed.data),
+  ]);
+  const items: Array<Record<string, any>> = rows.map((row) => {
+    const bucket = row.status === "pending_review"
+      ? "review"
+      : !row.dueAt
+        ? "unscheduled"
+        : row.dueAt < start
+          ? "overdue"
+          : row.dueAt < end
+            ? "today"
+            : "upcoming";
+    return { ...dates(row), bucket };
+  });
+  res.json({
+    phoenixDate: parsed.data, timezone: "America/Phoenix", dailyLimit: 25,
+    completedToday: completed[0]?.value ?? 0, remainingToday: Math.max(0, 25 - (completed[0]?.value ?? 0)),
+    readyCount: items.filter((item) => item.status === "approved" && ["overdue", "today"].includes(item.bucket)).length,
+    overdueCount: items.filter((item) => item.bucket === "overdue").length,
+    reviewCount: items.filter((item) => item.bucket === "review").length,
+    items,
+  });
+});
+router.post("/linkedin/queue/prepare", requireAuth, async (req, res) => {
+  const p = z.object({ date: queueDate.optional(), limit: z.number().int().min(1).max(25).optional(), actionType: actionType.optional() }).safeParse(req.body);
+  if (!p.success) { res.status(400).json({ error: p.error.message }); return; }
+  const targetDate = p.data.date ?? phoenixDateKey(new Date());
+  const { start } = phoenixWindow(targetDate);
+  try {
+    const result = await db.transaction(async (tx) => {
+      await tx.execute(sql`select pg_advisory_xact_lock(${LINKEDIN_QUEUE_PREP_LOCK})`);
+      await tx.execute(sql`select pg_advisory_xact_lock(${LINKEDIN_SUPPRESSION_LOCK})`);
+      const people = await tx.select().from(linkedinPeopleTable)
+        .where(eq(linkedinPeopleTable.status, "active"))
+        .orderBy(desc(linkedinPeopleTable.confidence), asc(linkedinPeopleTable.id))
+        .limit(250);
+      const existing = await tx.select({ personId: linkedinActionsTable.personId }).from(linkedinActionsTable)
+        .where(inArray(linkedinActionsTable.status, ["draft", "pending_review", "approved"]));
+      const occupied = new Set(existing.map((action) => action.personId).filter((value): value is number => value !== null));
+      const created: number[] = [];
+      for (const person of people) {
+        if (created.length >= (p.data.limit ?? 25) || occupied.has(person.id) || !person.linkedinUrl || !person.sourceUrl || !person.evidence || !person.legalBasisNote) continue;
+        await assertNotSuppressed({ personId: person.id, companyId: person.companyId, profileUrl: person.linkedinUrl });
+        const dueAt = new Date(start.getTime() + 8 * 60 * 60 * 1000 + created.length * 15 * 60 * 1000);
+        const [row] = await tx.insert(linkedinActionsTable).values({
+          personId: person.id, companyId: person.companyId, actionType: p.data.actionType ?? "connection_note",
+          draftCopy: `Review public evidence for ${person.name}: ${person.evidence}`,
+          dueAt, status: "pending_review", legalBasisNote: person.legalBasisNote,
+        }).returning({ id: linkedinActionsTable.id });
+        if (row) { created.push(row.id); occupied.add(person.id); }
+      }
+      return { targetDate, prepared: created.length, skipped: Math.max(0, people.length - created.length) };
+    });
+    res.status(201).json(result);
+  } catch (error) { res.status(409).json({ error: error instanceof Error ? error.message : "Unable to prepare queue" }); }
 });
 router.get("/linkedin/suppressions", requireAuth, async (_req, res) => res.json((await db.select().from(linkedinSuppressionsTable).orderBy(desc(linkedinSuppressionsTable.createdAt))).map(dates)));
 router.post("/linkedin/suppressions", requireAuth, async (req, res) => {

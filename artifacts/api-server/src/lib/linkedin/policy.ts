@@ -5,6 +5,7 @@ import { normalizeLinkedinUrl } from "./url";
 export const PERSON_ACTION_QUOTA_LOCK = 4815162342n;
 export const CONTENT_PUBLISH_QUOTA_LOCK = 4815162343n;
 export const LINKEDIN_SUPPRESSION_LOCK = 4815162344n;
+export const LINKEDIN_QUEUE_PREP_LOCK = 4815162345n;
 export const normalizeLinkedinName = (value: string) => value.trim().replace(/\s+/g, " ").toLocaleLowerCase();
 export function isPostgresUniqueViolation(error: unknown): boolean {
   return typeof error === "object" && error !== null && "code" in error

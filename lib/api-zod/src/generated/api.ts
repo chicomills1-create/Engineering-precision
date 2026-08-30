@@ -2387,6 +2387,98 @@ export const TransitionLinkedinActionResponse = zod.object({
 })
 
 
+export const RescheduleLinkedinActionParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const RescheduleLinkedinActionBody = zod.object({
+  "dueAt": zod.coerce.date()
+})
+
+export const RescheduleLinkedinActionResponse = zod.object({
+  "id": zod.number(),
+  "personId": zod.number().nullish(),
+  "companyId": zod.number().nullish(),
+  "signalId": zod.number().nullish(),
+  "campaignId": zod.number().nullish(),
+  "contentItemId": zod.number().nullish(),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points']),
+  "draftCopy": zod.string().nullish(),
+  "approvedCopy": zod.string().nullish(),
+  "directActionUrl": zod.string().nullish(),
+  "owner": zod.string().nullish(),
+  "dueAt": zod.string().nullish(),
+  "status": zod.string(),
+  "legalBasisNote": zod.string().nullish(),
+  "completedAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+
+
+export const getLinkedinQueueQueryLimitMax = 100;
+
+
+
+export const GetLinkedinQueueQueryParams = zod.object({
+  "date": zod.coerce.string().optional(),
+  "limit": zod.coerce.number().min(1).max(getLinkedinQueueQueryLimitMax).optional()
+})
+
+export const GetLinkedinQueueResponse = zod.object({
+  "phoenixDate": zod.string(),
+  "timezone": zod.string(),
+  "dailyLimit": zod.number(),
+  "completedToday": zod.number(),
+  "remainingToday": zod.number(),
+  "readyCount": zod.number(),
+  "overdueCount": zod.number(),
+  "reviewCount": zod.number(),
+  "items": zod.array(zod.object({
+  "id": zod.number(),
+  "personId": zod.number().nullish(),
+  "companyId": zod.number().nullish(),
+  "signalId": zod.number().nullish(),
+  "campaignId": zod.number().nullish(),
+  "contentItemId": zod.number().nullish(),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points']),
+  "draftCopy": zod.string().nullish(),
+  "approvedCopy": zod.string().nullish(),
+  "directActionUrl": zod.string().nullish(),
+  "owner": zod.string().nullish(),
+  "dueAt": zod.string().nullish(),
+  "status": zod.string(),
+  "legalBasisNote": zod.string().nullish(),
+  "completedAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+}).and(zod.object({
+  "bucket": zod.enum(['review', 'overdue', 'today', 'upcoming', 'unscheduled']),
+  "personName": zod.string().nullish(),
+  "personRole": zod.string().nullish(),
+  "personLinkedinUrl": zod.string().nullish(),
+  "companyName": zod.string().nullish()
+})))
+})
+
+
+export const prepareLinkedinQueueBodyLimitMax = 25;
+
+
+
+export const PrepareLinkedinQueueBody = zod.object({
+  "date": zod.string().optional(),
+  "limit": zod.number().min(1).max(prepareLinkedinQueueBodyLimitMax).optional(),
+  "actionType": zod.enum(['connection_note', 'direct_message', 'follow_up', 'comment_idea', 'talking_points']).optional()
+})
+
+export const PrepareLinkedinQueueResponse = zod.object({
+  "targetDate": zod.string(),
+  "prepared": zod.number(),
+  "skipped": zod.number()
+})
+
+
 export const ListLinkedinSuppressionsResponseItem = zod.object({
   "id": zod.number(),
   "personId": zod.number().nullish(),

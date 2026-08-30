@@ -22,7 +22,7 @@ export default function AdminLinkedin() {
               <div className="mt-4 p-4 border border-border bg-card rounded-md max-w-4xl">
                 <p className="text-sm font-medium text-foreground mb-1">Manual-only channel</p>
                 <p className="text-sm text-muted-foreground">
-                  Research and draft preparation are supported; connection requests, messages, comments, and publishing require your explicit approval and must be completed by an employee. No provider is connected.
+                  Research, prioritization, and draft preparation are supported; connection requests, messages, comments, and publishing require explicit approval and must be completed by the designated Apex Grid owner. 1099 team members are not expected to perform social outreach.
                 </p>
               </div>
             </div>

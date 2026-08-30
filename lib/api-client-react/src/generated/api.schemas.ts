@@ -1803,6 +1803,72 @@ export interface LinkedinTransition {
   note?: string;
 }
 
+export interface LinkedinRescheduleInput {
+  dueAt: string;
+}
+
+export type LinkedinQueuePrepareInputActionType = typeof LinkedinQueuePrepareInputActionType[keyof typeof LinkedinQueuePrepareInputActionType];
+
+
+export const LinkedinQueuePrepareInputActionType = {
+  connection_note: 'connection_note',
+  direct_message: 'direct_message',
+  follow_up: 'follow_up',
+  comment_idea: 'comment_idea',
+  talking_points: 'talking_points',
+} as const;
+
+export interface LinkedinQueuePrepareInput {
+  date?: string;
+  /**
+     * @minimum 1
+     * @maximum 25
+     */
+  limit?: number;
+  actionType?: LinkedinQueuePrepareInputActionType;
+}
+
+export type LinkedinQueueItemBucket = typeof LinkedinQueueItemBucket[keyof typeof LinkedinQueueItemBucket];
+
+
+export const LinkedinQueueItemBucket = {
+  review: 'review',
+  overdue: 'overdue',
+  today: 'today',
+  upcoming: 'upcoming',
+  unscheduled: 'unscheduled',
+} as const;
+
+export type LinkedinQueueItem = LinkedinAction & ({
+  bucket: LinkedinQueueItemBucket;
+  /** @nullable */
+  personName?: string | null;
+  /** @nullable */
+  personRole?: string | null;
+  /** @nullable */
+  personLinkedinUrl?: string | null;
+  /** @nullable */
+  companyName?: string | null;
+});
+
+export interface LinkedinQueue {
+  phoenixDate: string;
+  timezone: string;
+  dailyLimit: number;
+  completedToday: number;
+  remainingToday: number;
+  readyCount: number;
+  overdueCount: number;
+  reviewCount: number;
+  items: LinkedinQueueItem[];
+}
+
+export interface LinkedinQueuePreparation {
+  targetDate: string;
+  prepared: number;
+  skipped: number;
+}
+
 export interface LinkedinSuppressionInput {
   personId?: number;
   companyId?: number;
@@ -1896,6 +1962,15 @@ category?: string;
 /**
  * @minimum 1
  * @maximum 500
+ */
+limit?: number;
+};
+
+export type GetLinkedinQueueParams = {
+date?: string;
+/**
+ * @minimum 1
+ * @maximum 100
  */
 limit?: number;
 };

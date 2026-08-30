@@ -1016,6 +1016,22 @@ paths:
     patch: { operationId: updateLinkedinAction, tags: [linkedin], parameters: [{ name: id, in: path, required: true, schema: { type: number } }], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinActionUpdateInput" } } } }, responses: { "200": { description: Updated, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinAction" } } } } } }
   /linkedin/actions/{id}/transition:
     post: { operationId: transitionLinkedinAction, tags: [linkedin], parameters: [{ name: id, in: path, required: true, schema: { type: number } }], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinTransition" } } } }, responses: { "200": { description: Transitioned, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinAction" } } } } } }
+  /linkedin/actions/{id}/reschedule:
+    post: { operationId: rescheduleLinkedinAction, tags: [linkedin], parameters: [{ name: id, in: path, required: true, schema: { type: number } }], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinRescheduleInput" } } } }, responses: { "200": { description: Rescheduled, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinAction" } } } } } }
+  /linkedin/queue:
+    get:
+      operationId: getLinkedinQueue
+      tags: [linkedin]
+      parameters:
+        - { name: date, in: query, schema: { type: string } }
+        - { name: limit, in: query, schema: { type: number, minimum: 1, maximum: 100 } }
+      responses: { "200": { description: Daily LinkedIn queue, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinQueue" } } } } }
+  /linkedin/queue/prepare:
+    post:
+      operationId: prepareLinkedinQueue
+      tags: [linkedin]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinQueuePrepareInput" } } } }
+      responses: { "201": { description: Queue prepared, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinQueuePreparation" } } } } }
   /linkedin/suppressions:
     get: { operationId: listLinkedinSuppressions, tags: [linkedin], responses: { "200": { description: Suppressions, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/LinkedinSuppression" } } } } } } }
     post: { operationId: createLinkedinSuppression, tags: [linkedin], requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinSuppressionInput" } } } }, responses: { "201": { description: Suppressed, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinSuppression" } } } } } }
@@ -1919,6 +1935,27 @@ components:
       type: object
       required: [status]
       properties: { status: { type: string }, note: { type: string } }
+    LinkedinRescheduleInput:
+      type: object
+      required: [dueAt]
+      properties: { dueAt: { type: string, format: date-time } }
+    LinkedinQueuePrepareInput:
+      type: object
+      properties: { date: { type: string }, limit: { type: number, minimum: 1, maximum: 25 }, actionType: { type: string, enum: [connection_note, direct_message, follow_up, comment_idea, talking_points] } }
+    LinkedinQueueItem:
+      allOf:
+        - $ref: "#/components/schemas/LinkedinAction"
+        - type: object
+          required: [bucket]
+          properties: { bucket: { type: string, enum: [review, overdue, today, upcoming, unscheduled] }, personName: { type: [string, "null"] }, personRole: { type: [string, "null"] }, personLinkedinUrl: { type: [string, "null"] }, companyName: { type: [string, "null"] } }
+    LinkedinQueue:
+      type: object
+      required: [phoenixDate, timezone, dailyLimit, completedToday, remainingToday, readyCount, overdueCount, reviewCount, items]
+      properties: { phoenixDate: { type: string }, timezone: { type: string }, dailyLimit: { type: number }, completedToday: { type: number }, remainingToday: { type: number }, readyCount: { type: number }, overdueCount: { type: number }, reviewCount: { type: number }, items: { type: array, items: { $ref: "#/components/schemas/LinkedinQueueItem" } } }
+    LinkedinQueuePreparation:
+      type: object
+      required: [targetDate, prepared, skipped]
+      properties: { targetDate: { type: string }, prepared: { type: number }, skipped: { type: number } }
     LinkedinSuppressionInput:
       type: object
       required: [reason]
