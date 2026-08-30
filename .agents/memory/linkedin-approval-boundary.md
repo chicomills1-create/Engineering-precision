@@ -8,3 +8,9 @@ LinkedIn research and draft preparation may be automated, but connection request
 **Why:** Approval UI alone is not a safety boundary. Suppressed targets can re-enter through linked signals unless the server resolves the complete attribution chain, and per-record locks cannot enforce a global daily limit under concurrency.
 
 **How to apply:** Derive approvers from authenticated server identity, keep immutable transition history, resolve person/company suppression through every linked entity, fail closed when provider capabilities are absent, and acquire one shared Phoenix-day quota lock before counting and completing or publishing.
+
+The designated Apex Grid owner is the intended operator for any remaining manual social action; the 1099 team is not expected to perform social outreach.
+
+**Why:** The owner is too busy to delegate social execution to contractors, so queue ownership must not imply that 1099s will send messages or publish content.
+
+**How to apply:** Keep research, drafts, reminders, suppression checks, and reporting automated while treating the owner as the only manual executor unless an approved provider changes that boundary.
