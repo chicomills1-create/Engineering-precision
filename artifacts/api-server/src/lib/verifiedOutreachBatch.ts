@@ -10,6 +10,7 @@ import { assertVerifiedOutreachBatch } from "./outreachContactValidation";
 import { VERIFIED_OUTREACH_CONTACTS as LEGACY_VERIFIED_OUTREACH_CONTACTS } from "./verifiedOutreachContacts";
 import { VERIFIED_OUTREACH_CONTACTS_AUG_29 } from "./verifiedOutreachContactsAug29";
 import { VERIFIED_OUTREACH_CONTACTS_AUG_30 } from "./verifiedOutreachContactsAug30";
+import { VERIFIED_OUTREACH_CONTACTS_AUG_31 } from "./verifiedOutreachContactsAug31";
 
 const CAMPAIGN_NAME = "Approved 8 AM Outreach - August 2026";
 const SUBJECT = "Need stamped engineering without the usual wait or cost?";
@@ -19,6 +20,7 @@ export const VERIFIED_OUTREACH_CONTACTS = [
 ] as const;
 
 const AUG_30_TARGET = 150;
+const AUG_31_TARGET = 150;
 
 export function approvedOutreachSubject(): string {
   return SUBJECT;
@@ -43,6 +45,7 @@ export async function seedVerifiedOutreachBatch(options: {
   if (!enabled) return { state: "skipped", queued: 0 };
   assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS, 313);
   assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_AUG_30);
+  assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_AUG_31, AUG_31_TARGET);
 
   let [campaign] = await db.select().from(campaignsTable)
     .where(eq(campaignsTable.name, CAMPAIGN_NAME))
@@ -157,15 +160,31 @@ export async function seedVerifiedOutreachBatch(options: {
       return [];
     }
   }));
-  let stored = existingRows.filter((row) =>
-    row.dedupeKey?.startsWith("verified-2026-08-30-")
-    && row.status === "approved"
-    && row.emailStatus === "verified"
-    && row.contactStatus === "active"
-  ).length;
+  const datedBatches = [
+    {
+      contacts: VERIFIED_OUTREACH_CONTACTS_AUG_30,
+      prefix: "verified-2026-08-30-",
+      target: AUG_30_TARGET,
+      label: "August 30",
+    },
+    {
+      contacts: VERIFIED_OUTREACH_CONTACTS_AUG_31,
+      prefix: "verified-2026-08-31-",
+      target: AUG_31_TARGET,
+      label: "August 31",
+    },
+  ] as const;
 
-  for (const contact of VERIFIED_OUTREACH_CONTACTS_AUG_30) {
-    if (stored >= AUG_30_TARGET) break;
+  for (const batch of datedBatches) {
+    let stored = existingRows.filter((row) =>
+      row.dedupeKey?.startsWith(batch.prefix)
+      && row.status === "approved"
+      && row.emailStatus === "verified"
+      && row.contactStatus === "active"
+    ).length;
+
+    for (const contact of batch.contacts) {
+      if (stored >= batch.target) break;
     const normalizedEmail = contact.contactEmail.toLowerCase();
     const domain = new URL(contact.website).hostname.replace(/^www\./, "").toLowerCase();
     if (
@@ -232,9 +251,12 @@ export async function seedVerifiedOutreachBatch(options: {
     usedEmails.add(normalizedEmail);
     usedDomains.add(domain);
     stored += 1;
-  }
-  if (stored !== AUG_30_TARGET) {
-    throw new Error(`Verified August 30 outreach seed requires exactly 150 active prospects; found ${stored}`);
+    }
+    if (stored !== batch.target) {
+      throw new Error(
+        `Verified ${batch.label} outreach seed requires exactly ${batch.target} active prospects; found ${stored}`,
+      );
+    }
   }
   // The seed only supplies reviewed candidates. The preparation service owns all
   // message creation so the startup path cannot bypass the shared 150-slot ledger.

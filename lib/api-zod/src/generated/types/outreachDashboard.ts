@@ -12,6 +12,10 @@ export interface OutreachDashboard {
   campaigns: number;
   messages: number;
   sentToday: number;
+  providerProcessedToday: number;
+  deliveredToday: number;
+  bouncedToday: number;
+  unresolvedToday: number;
   replies: number;
   nextPreparationDate: string;
   nextPreparationTarget: number;

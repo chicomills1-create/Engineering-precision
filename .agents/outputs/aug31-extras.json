@@ -1,0 +1,875 @@
+[
+  {
+    "resultPages": [
+      {
+        "publishedDate": "2024-03-25T00:00:00.000Z",
+        "snippet": "Our Team - Bjerk Builders\n\nbjerk is built dffrnt.\n\n## leadership\n\nBjerk Builders is built on the strength of its people: leaders, craftsmen, and managers who know this market because they were raised in it. That experience shows up where it matters. At the end of the day, great projects don’t happen by accident. They’re built by a team that knows what they’re doing and takes pride in getting it right.\n\nCEO & Owner\n\nNate Lowrie\n\nDirector of Business Development\n\nKate Perrin\n\nDirector of Preconstruction\n\nScott Pardee\n\nDirector of Performance Infrastructure\n\nTony Potts\n\nLegacy Partner\n\nScott Bjerk\n\n## DIVISION Managers\n\nDrywall Division Manager\n\nRandy Dykstra\n\nElectrical Division Manager\n\nVicente Nieves\n\nGeneral Division Manager\n\nDeano Jacobs\n\nEstimating Manager\n\nDan Bjerk\n\n## Project Manager",
+        "title": "Our Team - Bjerk Builders",
+        "url": "https://bjerkbuilders.com/our-team/"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/56472yy5jy9",
+            "properties": {
+              "description": null,
+              "financials": null,
+              "foundedYear": null,
+              "headquarters": {
+                "address": "1383 N Tech Blvd, Gilbert, Arizona 85233-1612, US",
+                "city": "Gilbert",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "Bjerk Builders Inc",
+              "research": null,
+              "webTraffic": null,
+              "workforce": {
+                "total": 1
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2024-03-25T02:28:47.000Z",
+        "snippet": "Bjerk Builders - Arizona's #1 Tenant Improvement Contractor\n\nEverything contracting.\n\n## projects that are built dffrnt\n\n### Choose a partner you can trust to build your future.\n\nWith a team of 85+ full-time professionals and over $900 million in completed work across Arizona, Bjerk Builders doesn’t just talk about experience – we’ve built it, project by project.\n\nWe know what matters to owners: tenant improvements and ground up construction with clear numbers, straight answers, and a team that delivers what they say they will. No surprises, no runaround. Just quality work, done right, on schedule, and at a price that makes sense.\n\nLet’s get to work.\n\n### 250+\n\nCompleted Projects Each Year\n\n### 40\n\nYears Serving Arizona\n\nour impact.\n\n## by the numbers\n\n01.\n\nlocation\n\n0\n\nlocations with mult",
+        "title": "Bjerk Builders – #1 Tenant Improvement Contractor in Arizona",
+        "url": "https://bjerkbuilders.com/"
+      },
+      {
+        "publishedDate": "2024-03-25T02:43:37.000Z",
+        "snippet": "About Us - Bjerk Builders\n\n### Four decades, one mission: BUILD YOUR FUTURE\n\nSince 1986, Bjerk Builders has built its reputation the only way that actually matters in this business: by showing up, doing the work, and delivering results that hold up long after the ribbon cutting.\n\nToday, under the leadership of Nate Lowrie, that standard hasn’t changed, it’s gotten sharper. The expectation is simple: fast execution, honest numbers, and a finished product that performs the way it’s supposed to.\n\nBig project or small, if you’re looking for a team that will shoot you straight and get it built right, let’s talk.\n\nbuilt dffrnt\n\n·\n\nby design\n\n·\n\nbuilt dffrnt\n\n·\n\nby design\n\n·\n\nbuilt dffrnt\n\n·\n\nby design\n\n·\n\nbuilt dffrnt\n\n·\n\nby design\n\n·\n\ndesign\n\n·\n\nbuild\n\n·\n\nmanagement\n\n·\n\nconstruction\n\n·\n\ndesign\n",
+        "title": "About Us",
+        "url": "https://bjerkbuilders.com/about-us/"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/g8x70hczzxw",
+            "properties": {
+              "educationHistory": [
+                {
+                  "dates": {
+                    "from": "1999",
+                    "to": "2002"
+                  },
+                  "degree": "Magna Cum Laude Bachelor of Science (BS) Entrepreneurial and Small Business Operations",
+                  "institution": {
+                    "id": null,
+                    "name": "W. P. Carey School of Business – Arizona State University"
+                  }
+                }
+              ],
+              "firstName": "Nate",
+              "lastName": "Lowrie",
+              "location": "Phoenix, Arizona, United States",
+              "name": "Nate Lowrie",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/4kkg744hl33",
+                    "name": "BjERK Builders"
+                  },
+                  "dates": {
+                    "from": "2024-02-01",
+                    "to": null
+                  },
+                  "location": "Arizona, United States",
+                  "title": "Chief Executive Officer"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/3hqqj38q4cf",
+                    "name": "Valleywise Health Foundation"
+                  },
+                  "dates": {
+                    "from": "2015-08-01",
+                    "to": "2023-01-01"
+                  },
+                  "location": null,
+                  "title": "Chief Executive Officer"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "L&N Investment Company"
+                  },
+                  "dates": {
+                    "from": "2002-01-01",
+                    "to": "2015-01-01"
+                  },
+                  "location": "Phoenix, Arizona Area",
+                  "title": "Founder, President"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/q71hn5rj2bj",
+                    "name": "BICYCLE HAUS, LLC"
+                  },
+                  "dates": {
+                    "from": "2004-01-01",
+                    "to": "2009-01-01"
+                  },
+                  "location": "Scottsdale, Az",
+                  "title": "Co-Founder & Owner"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/5l9ztvywlkf",
+                    "name": "Zoes Kitchen"
+                  },
+                  "dates": {
+                    "from": "2002-01-01",
+                    "to": "2007-01-01"
+                  },
+                  "location": "Phoenix, Arizona Area",
+                  "title": "President Zoe's Kitchen Southwest"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-07-08T00:00:00.000Z",
+        "snippet": "# Nate Lowrie\n\nCEO & Owner at Bjerk Builders\n\nPhoenix, Arizona, United States (US)\n\n500 connections • 1,937 followers\n\n## About\n\nWe are Builders! We aim to build a better America by helping people build the highest quality commercial spaces at the best price possible for their hard-working families. We aim to be the best builders of thriving and resilient 1) Teams, 2) Customers, and 3) Communities. We aim to build faith through purpose, love, courage, and dogged determinedness to the BjERK Way; Be The Best! I am a Builder: Strengthening lives and empowering purpose-driven leaders to get after it in life, family, and business. I surround myself with great people and do everything possible to support their greatest potential. I love strategic business anchored in high-performance team cultur",
+        "title": "Nate Lowrie",
+        "url": "https://www.linkedin.com/in/nate-lowrie-859880a4"
+      },
+      {
+        "author": "Nicole",
+        "publishedDate": "2026-01-16T00:00:00.000Z",
+        "snippet": "Nate Lowrie Honored By AZ Big Media: AZ Big 100 - Bjerk Builders\n\n## Bjerk Builders CEO Nate Lowrie Named One of AZ Big 100’s “50 Commercial Real Estate Leaders to Watch in 2026”\n\nWe’re proud to announce that Nate Lowrie, Owner and CEO of Bjerk Builders, has been featured in the AZ Big 100: 50 Commercial Real Estate Leaders to Watch in 2026 list by AZ Big Media, a recognition honoring the most impactful leaders shaping Arizona’s commercial real estate landscape.\n\nEach year, AZ Big Media and the editorial board of AZRE Magazine curate the AZ Big 100 list which is known for spotlighting the individuals whose vision, leadership, and innovation are driving growth, investment, and opportunity across the state. The “Commercial Real Estate Leaders to Watch” category recognizes those who are influ",
+        "title": "Nate Lowrie Honored By AZ Big Media: AZ Big 100",
+        "url": "https://bjerkbuilders.com/nate-lowrie-az-big-100/"
+      },
+      {
+        "author": "dpalomares",
+        "publishedDate": "2024-03-11T00:05:05.000Z",
+        "snippet": "Family-owned Bjerk Builders acquired by local investors - Bjerk Builders\n\nBjerk Builders, a full-service commercial construction company that began building in the Valley for nearly 40 years, has been purchased by a group of investors led by Nate Lowrie, who hails from a multi-generational Arizona family.\n\n“The Bjerk team is just fantastic and that’s one of the reasons why I targeted them for acquisition. I have sold a couple of companies over the years but never bought one, so it had to be the right one,” Lowrie said, adding, “their employees are terrific and some have been there since day one.”\n\nNate Lowrie\n\nLowrie will become CEO of Bjerk Builders, which has completed over $750 million in projects since it was founded in 1986. The terms of the transaction are not public but company foun",
+        "title": "Family-owned Bjerk Builders acquired by local investors",
+        "url": "https://bjerkbuilders.com/family-owned-bjerk-builders-acquired-by-local-investors/"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "snippet": "About | Reece Studio Architects - Custom Architectural Design and Remodels\n\n## OUR FIRM\n\nReece Studio Architects is a collaborative design practice based in Flagstaff, Arizona, with a footprint state and nationwide. We specialize in a range of project scales varying from Tenant Improvement to custom Design-Build residences. Our team works with individuals and corporations to imagine your business from conception to completion.\n\nOriginally evolving out of Phoenix as Wyatt Reece Architects in 1975, the Flagstaff location opened in 1987 emerging into the present-day Reece Studio Architects leading the architectural practice in The City of Flagstaff.\n\n## OUR TEAM\n\n#### Richard Reece, RA\n\nPrincipal Architect\n\n#### Wes Ulrich\n\nDesigner\n\n#### Ty Reece, AIA, LEED AP\n\nPrincipal Architect\n\n#### Meli",
+        "title": "ABOUT | REECE STUDIO ARCHITECTS",
+        "url": "https://www.reecestudioarchitects.com/about/"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/g50w4vrv3gb3lljtqmv7hv",
+            "properties": {
+              "description": "Reece Studio Architects is a full service collaborative design firm based in Flagstaff, Arizona, designing custom homes in Northern Arizona for over 35 years",
+              "financials": null,
+              "foundedYear": 1978,
+              "headquarters": {
+                "address": "1254 W University Ave; #100; Flagstaff, AZ 86001, US",
+                "city": "Flagstaff",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "Reece Studio Architects",
+              "research": null,
+              "webTraffic": null,
+              "workforce": {
+                "total": 1
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "snippet": "REECE STUDIO ARCHITECTS, PLLC\n\nREECE STUDIO ARCHITECTS, PLLC\n[![](https://www.reecestudioarchitects.com/wp-content/uploads/2023/01/smallRSA-LOGO-black.png)](http://www.reecestudioarchitects.com)\n![](https://www.reecestudioarchitects.com/wp-content/uploads/2025/11/3100-Solitaires-94-of-345-scaled.jpg)",
+        "title": "REECE STUDIO ARCHITECTS, PLLC",
+        "url": "https://www.reecestudioarchitects.com/"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/qsr8ql2zlfj",
+            "properties": {
+              "educationHistory": [],
+              "firstName": "Ty",
+              "lastName": "Reece",
+              "location": "Flagstaff, Arizona, United States",
+              "name": "Ty Reece",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/g50w4vrv3gb3lljtqmv7hv",
+                    "name": "Reece Studio Architects"
+                  },
+                  "dates": {
+                    "from": "2021-01-01",
+                    "to": null
+                  },
+                  "location": "1254 W. UNIVERSITY AVE",
+                  "title": "PRINCIPAL ARCHITECT"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Reece Studio Architects"
+                  },
+                  "dates": {
+                    "from": "2016-06-01",
+                    "to": null
+                  },
+                  "location": "FLAGSTAFF, AZ",
+                  "title": "ARCHITECT"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Lake|Flato"
+                  },
+                  "dates": {
+                    "from": "2013-06-01",
+                    "to": null
+                  },
+                  "location": null,
+                  "title": "Intern Architect"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Line and Space, LLC"
+                  },
+                  "dates": {
+                    "from": "2012-05-01",
+                    "to": "2013-06-01"
+                  },
+                  "location": null,
+                  "title": "Intern"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/rfy1q0c233j",
+                    "name": "The University of Arizona"
+                  },
+                  "dates": {
+                    "from": "2010-01-01",
+                    "to": "2013-01-01"
+                  },
+                  "location": null,
+                  "title": "MArch"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-07-14T13:04:37.000Z",
+        "snippet": "# Ty Reece\n\nARCHITECT, LEED AP HOMES\n\nFlagstaff, Arizona, United States (US)\n\n183 connections • 190 followers\n\n## About\n\nARCHITECT, LEED AP HOMES\n\nTotal Experience: 16 years and 6 months\n\n## Experience\n\n### PRINCIPAL ARCHITECT - [Reece Studio Architects](https://www.linkedin.com/company/reece-studio-architects) (Current)\n\nJan 2021 - Present (5 years and 6 months) in 1254 W. UNIVERSITY AVE\n\nHTTP://WWW.REECESTUDIOARCHITECTS.COM\n\nDepartment: Design • Level: Senior\n\nReece Studio Architects is a Architecture and Planning company. Reece Studio Architects has 1-10 employees, founded in 1978. Headquartered in Flagstaff, Arizona, United States.\n\n### ARCHITECT - Reece Studio Architects (Current)\n\nJun 2016 - Present (9 years and 11 months) in FLAGSTAFF, AZ\n\nDepartment: Design • Level: Specialist\n\n###",
+        "title": "Ty Reece - ARCHITECT, LEED AP HOMES",
+        "url": "https://www.linkedin.com/in/ty-reece-3930b766"
+      },
+      {
+        "snippet": "Reece Studio Architects | Architects Skip to content\n\n# Reece Studio Architects\n\nArchitects\n\n### About Us\n\nLOCAL With offices in Phoenix and Flagstaff, we are uniquely set up not only to focus efforts of both offices on larger projects, but also to know the unique qualities of our regions and meet their challenges and opportunities.SUSTAINABLETrue sustainability in the long run, rather than just using materials which claim to be ''green'', is extremely important to us. If you have specific needs, we can also get your project LEED certified.AFFORDABLEWe always work with the client to figure out the best pricing scheme for our fees, and construction scheme (CMAR, Design-Build, Design-Bid-Build) which is likely to end up with the best combination of price and quality.\n\n### Highlights\n\n### Rep",
+        "title": "Reece Studio Architects",
+        "url": "https://business.flagstaffchamber.com/list/member/reece-studio-architects-14153"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/g50w4vrv3gb3lljtqmv7hv",
+            "properties": {
+              "description": "Reece Studio Architects is a full service collaborative design firm based in Flagstaff, Arizona, designing custom homes in Northern Arizona for over 35 years",
+              "financials": null,
+              "foundedYear": 1978,
+              "headquarters": {
+                "address": "1254 W University Ave; #100; Flagstaff, AZ 86001, US",
+                "city": "Flagstaff",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "Reece Studio Architects",
+              "research": null,
+              "webTraffic": null,
+              "workforce": {
+                "total": 1
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "snippet": "# Reece Studio Architects\n\nReece Studio Architects is a Architecture and Planning company. Reece Studio Architects employs 1 person, founded in 1978. Headquartered in Flagstaff, Arizona, United States.\n\n## About\n\nReece Studio Architects is a full service collaborative design firm based in Flagstaff, Arizona, designing custom homes in Northern Arizona for over 35 years\n\n## Company Details\n- Industry: Architecture and Planning\n- Type: Self-Owned\n- Headquarters: Flagstaff, United States\n- Founded Year: 1978\n- Homepage: reecestudioarchitects.com\n- Aliases: reece studio architects\n- LinkedIn: linkedin.com/company/reece-studio-architects\n- Linkedin Followers: 1\n\n## Workforce\n- Employees: 1 (1-10 employees)\n\n## Social\n\n### Linkedin\n\n- [2026-05-05] Honesty in design - exterior structure and form t",
+        "title": "Reece Studio Architects",
+        "url": "https://linkedin.com/company/reece-studio-architects"
+      },
+      {
+        "snippet": "Reece Studio Architects | Architects Skip to content\n\n# Reece Studio Architects\n\nArchitects\n\n### About Us\n\nLOCAL With offices in Phoenix and Flagstaff, we are uniquely set up not only to focus efforts of both offices on larger projects, but also to know the unique qualities of our regions and meet their challenges and opportunities.SUSTAINABLETrue sustainability in the long run, rather than just using materials which claim to be ''green'', is extremely important to us. If you have specific needs, we can also get your project LEED certified.AFFORDABLEWe always work with the client to figure out the best pricing scheme for our fees, and construction scheme (CMAR, Design-Build, Design-Bid-Build) which is likely to end up with the best combination of price and quality.\n\n### Highlights\n\n### Rep",
+        "title": "Reece Studio Architects  | Architects",
+        "url": "https://business.flagstaffchamber.com/members/member/reece-studio-architects-14153"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "publishedDate": "2026-06-09T21:13:50.000Z",
+        "snippet": "About Capital R - Capital R Construction\n\n# About Us\n\n## Building Foundations of Trust Since 2003\n\nFounded in 2003, Capital R Construction is a commercial and industrial general contractor serving Casa Grande, Pinal County, and communities throughout Arizona. For more than two decades, we have helped clients bring their projects to life through quality construction, transparent communication, and a commitment to doing what we say we will do.\n\nToday, more than 85% of our work comes from repeat clients and direct referrals. We believe that is one of the strongest measures of success. When clients choose to work with us again—or recommend us to others—it reflects the trust, relationships, and results we strive to deliver on every project.\n\nWhether we are constructing a new facility, renovatin",
+        "title": "About Us - Capital R Construction",
+        "url": "https://capitalrinc.com/about-capital-r/"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/sfn514v8qt5",
+            "properties": {
+              "educationHistory": [
+                {
+                  "dates": {
+                    "from": "1999",
+                    "to": "2001"
+                  },
+                  "degree": "Bachlor of Sicence, Constrcution Mangement, Business Mangement",
+                  "institution": {
+                    "id": "https://exa.ai/library/organization/fmr88v1608r",
+                    "name": "Northern Arizona University"
+                  }
+                },
+                {
+                  "dates": {
+                    "from": "1995",
+                    "to": "1996"
+                  },
+                  "degree": "Construction Management",
+                  "institution": {
+                    "id": "https://exa.ai/library/organization/s2qtkz5spn3",
+                    "name": "Brigham Young University"
+                  }
+                }
+              ],
+              "firstName": "Roddy",
+              "lastName": "Riggs",
+              "location": "Casa Grande, Arizona, United States",
+              "name": "Roddy Riggs",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/hdzjx224z3x",
+                    "name": "Capital R Construction"
+                  },
+                  "dates": {
+                    "from": "2003-12-01",
+                    "to": null
+                  },
+                  "location": null,
+                  "title": "President"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/hdzjx224z3x",
+                    "name": "Capital R Construction"
+                  },
+                  "dates": {
+                    "from": "2003-12-01",
+                    "to": null
+                  },
+                  "location": "Casa Grande, Arizona",
+                  "title": "President"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Layton Construction"
+                  },
+                  "dates": {
+                    "from": "2001-01-01",
+                    "to": "2004-01-01"
+                  },
+                  "location": null,
+                  "title": "Assistant Superintendent"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Graves-Harshman & Co."
+                  },
+                  "dates": {
+                    "from": "1998-03-01",
+                    "to": "2001-08-01"
+                  },
+                  "location": "Flagstaff, Arizona Area",
+                  "title": "Laborer"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "KB Home"
+                  },
+                  "dates": {
+                    "from": "1999-05-01",
+                    "to": "1999-08-01"
+                  },
+                  "location": "Arizona City, Arizona",
+                  "title": "Assistant Superintendent"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-07-08T00:00:00.000Z",
+        "snippet": "# Roddy Riggs\n\nFounder at Capital R Construction\n\nCasa Grande, Arizona, United States (US)\n\n379 connections • 394 followers\n\n## About\n\nFounder at Capital R Construction\n\nTotal Experience: 28 years and 5 months\n\n## Experience\n\n### President - Capital R Construction (Current)\n\nDec 2003 - Present (22 years and 8 months) in Casa Grande, Arizona\n\nGeneral Contractor: commercial buildings, office space, metal buildings, retail centers, medical offices, tenant improvements, industrial construction, restaurants, executive suites, major commercial remodels. Coordinate, collaborate, and construct your capital.\n\nDepartment: General Management • Level: President/Vice President\n\n### President - [Capital R Construction](https://www.linkedin.com/company/capitalrconstruction) (Current)\n\nDec 2003 - Present ",
+        "title": "Roddy Riggs",
+        "url": "https://www.linkedin.com/in/roddy-rusty-riggs-59389110"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/hdzjx224z3x",
+            "properties": {
+              "description": "At Capital R Construction, we are committed to build and develop foundations of trust that you can rely on to ensure the success of each project. This success can be measured by the timeliness of completion, the quality of work, and the integrity shown throughout the process. Capital R Construction provides leaders, who are ready and willing, to partner with you on your next project!\nNew Construction, Ground Up, Tenant Improvements, Major Remodels, Additions. Experience in: Educational facilities, charter schools, offices, medical offices, dental offices, gyms, executive suites, retail, warehouse, industrial, metal buildings, religious buildings, and more.",
+              "financials": {
+                "fundingLatestRound": null,
+                "fundingTotal": null,
+                "revenueAnnual": 48882356
+              },
+              "foundedYear": 2003,
+              "headquarters": {
+                "address": "3009 N Rockwell Ave., Suite 4, Casa Grande, Arizona 85122, US",
+                "city": "Casa Grande",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "Capital R Construction",
+              "research": null,
+              "webTraffic": {
+                "avgDurationSeconds": 0,
+                "countryRank": null,
+                "history": [
+                  {
+                    "dateFrom": "2025-04",
+                    "dateTo": "2025-04",
+                    "value": 185
+                  },
+                  {
+                    "dateFrom": "2025-05",
+                    "dateTo": "2025-05",
+                    "value": 1700
+                  },
+                  {
+                    "dateFrom": "2025-06",
+                    "dateTo": "2025-06",
+                    "value": 1200
+                  },
+                  {
+                    "dateFrom": "2025-07",
+                    "dateTo": "2025-07",
+                    "value": 1100
+                  },
+                  {
+                    "dateFrom": "2025-10",
+                    "dateTo": "2025-10",
+                    "value": 600
+                  },
+                  {
+                    "dateFrom": "2025-11",
+                    "dateTo": "2025-11",
+                    "value": 580
+                  }
+                ],
+                "visitsMonthly": 580
+              },
+              "workforce": {
+                "total": 6
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2024-08-13T16:07:40.000Z",
+        "snippet": "Home - Capital R Construction Capital R Construction Located in Casa Grande, Arizona\n\n# Commercial & Industrial Construction general Contractor in Casa Grande, AZ\n\nExperienced commercial construction. Clear communication. Reliable execution\n\n## Full-Service Commercial & Industrial Construction\n\nCapital R Construction is a commercial general contractor based in Casa Grande, Arizona, specializing in commercial ground-up or remodels, tenant improvements, industrial buildings, and design-build projects. We partner with owners, developers, and businesses to deliver efficient, high-quality construction across Pinal County and surrounding markets.\n\nSince 2003, Capital R Construction has completed projects for businesses, municipalities, educational institutions, manufacturers, and developers thro",
+        "title": "Home - Capital R Construction Capital R Construction Located in Casa ...",
+        "url": "https://capitalrinc.com/"
+      },
+      {
+        "snippet": "Capital R Construction - Locations and Key Contacts | ProView\n\nHome Arizona General Contractors\n\n## Locations\n\n### Capital R Construction\n\n3009 N. Rockwell Blvd., Ste. 4 Casa Grande, AZ 85122\n\n(520) 858-6501 (520) 705-9648\n\n(520) 836-0841\n\nwww.capitalrinc.com\n\nAlvin Nall Senior Project Manager\n\nMain Location\n\n## Key Contacts\n\n#### Owners, Principals & Senior Executives\n\nRoddy Riggs\n\nOwner\n\n(520) 858-6501\n\nRusty Riggs\n\nPresident\n\n(520) 858-6501\n\n#### Operations\n\nAlvin Nall\n\nSenior Project Manager\n\n(520) 858-6501\n\nBrett Riggs\n\nPre-Construction Manager\n\n(520) 858-6501\n\nJL Jordan\n\nProject Manager\n\n(520) 858-6501\n\nRyan Barrett\n\nVice President of Operations\n\n(520) 858-6501\n\n#### Finance & Accounting\n\nMelissa Juarez\n\n(520) 858-6501 (520) 836-0841\n\nLocations Regions\n\n##### Share Our ProView\n\nShare",
+        "title": "Capital R Construction - Locations and Key Contacts | ProView",
+        "url": "https://www.thebluebook.com/iProView/797235/capital-r-construction/general-contractors/locations-contacts/"
+      },
+      {
+        "snippet": "Capital R Construction: Employee Directory | ZoomInfo.com\n[![Zoominfo](https://www.zoominfo.com/ge-assets/common/zi-logo-2024-directories.svg)](https://www.zoominfo.com/)\n![search icon](https://www.zoominfo.com/ge-assets/common/search_black_icon_24.svg)Search\n![search icon](https://www.zoominfo.com/ge-assets/common/search_black_icon_24.svg)SearchLog InContact SalesSign Up\nTrying To Reach Decision Makers?\nFind 17 employees from Capital R Construction\nStart Free\n[![logo for Capital R Construction](https://res.cloudinary.com/zoominfo-images/image/upload/w_120,h_120,c_fit/capitalrinc.com)](https://www.zoominfo.com/c/capital-r-construction/346287882)\n# [Capital R Construction](https://www.zoominfo.com/c/capital-r-construction/346287882)Employee Directory\nCapital R Construction corporate office ",
+        "title": "Capital R Construction: Employee Directory | ZoomInfo.com",
+        "url": "https://www.zoominfo.com/pic/capital-r-construction/346287882"
+      },
+      {
+        "snippet": "Capital R Construction Information\n![stars 1](https://static.rocketreach.co/images/splashRR2018/Comp_Starlayer1.svg)![stars 2](https://static.rocketreach.co/images/splashRR2018/Comp_Starlayer2.svg)![stars 3](https://static.rocketreach.co/images/splashRR2018/Comp_Starlayer3.svg)\n**\n* [## Company Information\n](https://rocketreach.co/capital-r-construction-profile_b5903c49f643c34b)\n* [## Email Format\n](https://rocketreach.co/capital-r-construction-email-format_b5903c49f643c34b)\n* [## Management\n](https://rocketreach.co/capital-r-construction-management_b5903c49f643c34b)\n* [## Technology Stack\n](https://rocketreach.co/capital-r-construction-technology-stack_b5903c49f643c34b)\n* [## Competitors\n](https://rocketreach.co/capital-r-construction-competitors_b5903c49f643c34b)\n**\n[![Capital R Construc",
+        "title": "Capital R Construction Information - RocketReach",
+        "url": "https://rocketreach.co/capital-r-construction-profile_b5903c49f643c34b"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/0vbbdctb886",
+            "properties": {
+              "description": "We are a mud on the boots, covered in sawdust, down in the ditch, contractor that can solve your construction problems!",
+              "financials": null,
+              "foundedYear": 2009,
+              "headquarters": {
+                "address": "Tucson, US",
+                "city": "Tucson",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "Kappcon, Inc.",
+              "research": null,
+              "webTraffic": {
+                "avgDurationSeconds": 0,
+                "countryRank": null,
+                "history": [
+                  {
+                    "dateFrom": "2025-10",
+                    "dateTo": "2025-10",
+                    "value": 345
+                  },
+                  {
+                    "dateFrom": "2026-03",
+                    "dateTo": "2026-03",
+                    "value": 429
+                  },
+                  {
+                    "dateFrom": "2026-04",
+                    "dateTo": "2026-04",
+                    "value": 1316
+                  },
+                  {
+                    "dateFrom": "2026-04",
+                    "dateTo": "2026-04",
+                    "value": 1316
+                  },
+                  {
+                    "dateFrom": "2026-05",
+                    "dateTo": "2026-05",
+                    "value": 318
+                  },
+                  {
+                    "dateFrom": "2026-06",
+                    "dateTo": "2026-06",
+                    "value": 205
+                  }
+                ],
+                "visitsMonthly": 205
+              },
+              "workforce": {
+                "total": 6
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2015-06-25T03:15:11.000Z",
+        "snippet": "Kappcon General Contracting | Your Partner in Success!\n\n# Your Partner in Success\n\n## Kappcon is a general contractor located in Tucson, Arizona.\n\n## Featured projects\n\nKappcon was the JOC to replace Arizona Stadium's Turf for 2022/23 Season\n\nA new Splash Pad at Lincoln Park! 2020\n\nDog Park is now ready for play!\n\nRita Road Cultivation Center - 40,000 GSF\n\nADOT Equipment Maintenance Facility in Safford, AZ\n\nHimmel Park Playground - Tucson Parks & Rec - Job Order Contracting\n\nInstallation of Lute Olson Statue - University of Arizona - Job Order Contract\n\nGuadalupe LITC Senior Housing - General Contractor\n\nSunrise Drive Elementary School - Prequalified General Contractor\n\nWinner: 2019 AIA New Mexico Distinguished Architecture - Merit Award - Area 751 Addition\n\n655 N Alvernon - University of ",
+        "title": "Kappcon General Contracting | Your Partner in Success!",
+        "url": "https://kappcon.com/"
+      },
+      {
+        "snippet": "Kappcon, Inc. - Locations and Key Contacts | ProView\n\nHome Arizona Building Alterations\n\n## Locations\n\n### Kappcon, Inc.\n\n4847 N. Daisy Dawn Pl. Suite 101 Tucson, AZ 85705\n\n(520) 292-2225\n\n(520) 292-2227\n\nwww.kappcon.com\n\nNathan Kappler Principal\n\nMain Location\n\n## Key Contacts\n\n#### Owners, Principals & Senior Executives\n\nNathan Kappler\n\nPresident\n\n(520) 292-2225 (520) 292-2227\n\n#### Operations\n\nBen White\n\nProject Engineer\n\n(520) 292-2225 (520) 292-2227\n\nDerek Fenton\n\nProject Manager\n\n(520) 292-2225 (520) 292-2227\n\nEarl Moyer\n\nProject Manager\n\n(520) 292-2225 (520) 292-2227\n\nEric Lara\n\nSuperintendent\n\n(520) 292-2225 (520) 292-2227\n\nFlorencio Jacobo\n\nForeman\n\n(520) 292-2225 (520) 292-2227\n\nLance Lesny\n\nSuperintendent\n\n(520) 292-2225 (520) 292-2227\n\nMarty Martin\n\nProject Superintendent\n\n(520",
+        "title": "Kappcon, Inc. - Locations and Key Contacts | ProView",
+        "url": "https://www.thebluebook.com/iProView/266919/kappcon-inc/general-contractors/locations-contacts/"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/4qbkbcpz3ms",
+            "properties": {
+              "educationHistory": [
+                {
+                  "dates": {
+                    "from": "1994",
+                    "to": "1998"
+                  },
+                  "degree": "Bachelor of Arts (B.A.)",
+                  "institution": {
+                    "id": "https://exa.ai/library/organization/rfy1q0c233j",
+                    "name": "University of Arizona"
+                  }
+                },
+                {
+                  "dates": {
+                    "from": "1994",
+                    "to": "1998"
+                  },
+                  "degree": "B.A., Interdisciplinary Studies",
+                  "institution": {
+                    "id": "https://exa.ai/library/organization/rfy1q0c233j",
+                    "name": "University of Arizona"
+                  }
+                }
+              ],
+              "firstName": "Nathan",
+              "lastName": "Kappler",
+              "location": "Tucson, Arizona, United States",
+              "name": "Nathan Kappler",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Kappcon, Inc"
+                  },
+                  "dates": {
+                    "from": "2009-09-01",
+                    "to": null
+                  },
+                  "location": "Tucson, AZ",
+                  "title": "Owner, President"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Tucson Building & Remodeling, Inc"
+                  },
+                  "dates": {
+                    "from": "2005-02-01",
+                    "to": "2009-09-01"
+                  },
+                  "location": "Tucson, Arizona Area",
+                  "title": "Project Manager"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/78mr3snf7zv",
+                    "name": "Accenture"
+                  },
+                  "dates": {
+                    "from": "1998-01-01",
+                    "to": "2004-01-01"
+                  },
+                  "location": "Phoenix, Arizona Area",
+                  "title": "Information Technology Consultant"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-07-13T00:00:00.000Z",
+        "snippet": "# Nathan Kappler\n\nPresident, LEED AP, at Kappcon Inc\n\nTucson, Arizona, United States (US)\n\n500 connections • 874 followers\n\n## About\n\nYour Partner In Success I have a passion to work with and assemble excellent teams of construction professionals. It is my belief that creating a teamwork environment will lead to a enjoyable construction process that will in turn lead to successful projects for all stakeholders. I have 10+ years prime contracting experience working as JOC, IDIQ, CMAR, Design-Assist, and a Design-Bid-Build contractor. My customers include the Smithsonian Institution, University of Arizona, Amphitheater Public Schools, Pima Community College, Pima County, City of Tucson and many more. Regardless of the delivery method, I will approach each project as partner to the Owner and ",
+        "title": "Nathan Kappler",
+        "url": "https://www.linkedin.com/in/nathan-kappler-0834998"
+      },
+      {
+        "author": "Nathan Kappler",
+        "publishedDate": "2016-07-26T00:00:00.000Z",
+        "snippet": "Tucson General Contractor | Kappcon\n\nGeneral Contracting experience in Tucson since 1979.\n\nWe can lead your next construction project to success.\n\n## We go beyond building excellent projects; we build lasting partnerships.\n\n## Contact\n\nKappcon, Inc. General Contracting\n\nAZROC KB-01 259522\n\nFor correspondence and deliveries: 4847 N. Daisy Dawn Pl. Ste. 101 Tucson, AZ 85705\n\nOffice +1-520-292-2225 Fax 520-292-2227 info@kappcon.com",
+        "title": "Tucson General Contractor | Kappcon",
+        "url": "https://kappcon.com/tucson-general-contractor/"
+      },
+      {
+        "author": "Nathan Kappler",
+        "snippet": "Nathan Kappler, Author at Kappcon\n\nKappcon General Contracting was a Job Order Contractor to build this Splash Pad. We started the work in April 2020. Working through the Covid Pandemic, we were able to deliver this splash pad by September, 2020.\n\nFirst an underground parking garage, and then a 3 story concrete building frame. Could not do it without the best Construction Team in Tucson.\n\nThe Baffert at Five Points will be a mixed use building with commercial space on the ground floor and residential lofts on the 2nd and 3rd floors.\n\nKappcon General Contractor’s and our Subcontracting Partners have made the first concrete pour of the finish floor for the new Sanctuary Building.\n\nCongrats to the team that worked so hard to get to this milestone!\n\nWe are very proud of our team that reached t",
+        "title": "Author: Nathan Kappler",
+        "url": "https://kappcon.com/author/nathan/"
+      },
+      {
+        "author": "Nathan Kappler",
+        "publishedDate": "2017-09-09T00:00:00.000Z",
+        "snippet": "Construction Superintendent | Kappcon\n\n# We are looking for another great Superintendent. Is that you?\n\n## We are…\n\nKappcon General Contracting is a construction team in Tucson that loves to build, support each other, and solve our customers problems together. We are leaders with a long term vision for success. Our projects are unique, challenging, and vital to our Tucson community. We have a drive to learn, add more value to our customers, and take care of our families. We have been recognized by the Cornerstone Foundation as the General Contractor or the Year (2017) for projects under $2,000,000. We are growing and increasing our capabilities all the time.\n\n## You are…\n\nYou are experienced in the commercial construction industry. You have been loyal to companies and they’ve been loyal to",
+        "title": "Construction Superintendent | Kappcon",
+        "url": "https://kappcon.com/superintendent/"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "snippet": "About Motley Design | Phoenix Historic Preservation Architecture\n\ntop of page\n\n### About\n\n##### We solve problems. ​\n\nMotley Design Group specializes in renovation, historic preservation, and urban design. Our portfolio spans many building types and sectors, but a single thread runs through all of it: we take on work that demands ingenuity, persistence, and practical problem-solving.\n\nWe are among Arizona's leaders in historic preservation, trusted to steward buildings that carry real cultural and community weight. Our new construction work reflects the same sensibility, drawn to projects with difficult site constraints, complex zoning, or unusual programs that require thoughtful solutions rather than standard responses.\n\nWhat sets us apart is not a signature style or celebrated aesthetic.",
+        "title": "About Motley Design | Phoenix Historic Preservation Architecture",
+        "url": "https://www.motleydesign.group/about"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/w98rkm768f8",
+            "properties": {
+              "educationHistory": [
+                {
+                  "dates": {
+                    "from": "1980",
+                    "to": "1985"
+                  },
+                  "degree": "B. Arch., Architecture",
+                  "institution": {
+                    "id": "https://exa.ai/library/organization/c56ctlhxrr3",
+                    "name": "Arizona State University"
+                  }
+                }
+              ],
+              "firstName": "Robert",
+              "lastName": "Graham",
+              "location": "Greater Phoenix Area",
+              "name": "Robert Graham",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/yl5yq21qj77",
+                    "name": "Phoenix Trolley Museum"
+                  },
+                  "dates": {
+                    "from": "2024-09-01",
+                    "to": null
+                  },
+                  "location": "Phoenix, Arizona, United States",
+                  "title": "President"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/4rg46c194xj",
+                    "name": "Motley Design Group, LLC"
+                  },
+                  "dates": {
+                    "from": "2006-09-01",
+                    "to": null
+                  },
+                  "location": "Phoenix, Artizona",
+                  "title": "Principal Architect Owner"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Metropolis Design Group LLC"
+                  },
+                  "dates": {
+                    "from": "2000-01-01",
+                    "to": "2006-09-01"
+                  },
+                  "location": "Phoenix, Arizona",
+                  "title": "Principal Architect"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Alliance Architects LLC"
+                  },
+                  "dates": {
+                    "from": "1995-01-01",
+                    "to": "2000-01-01"
+                  },
+                  "location": "Phoenix, Arizona",
+                  "title": "Architect"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Ryden Architects"
+                  },
+                  "dates": {
+                    "from": "1985-01-01",
+                    "to": "1995-01-01"
+                  },
+                  "location": "Phoenix, Arizona",
+                  "title": "Architect"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-06-12T00:00:00.000Z",
+        "snippet": "# Robert Graham\n\nOwner, Motley Design Group, LLC\n\nGreater Phoenix Area (US)\n\n423 connections • 450 followers\n\n## About\n\nI am dedicated to using my 40 years of experience as an architect to the transformation and improvement of metro Phoenix, leading redevelopment projects and nonprofit/public service groups working to that end. Specialties: Historic Preservation, Sustainability, Urban Design\n\nTotal Experience: 41 years and 7 months\n\n## Experience\n\n### President - [Phoenix Trolley Museum](https://www.linkedin.com/company/phoenix-trolley-museum) (Current)\n\nSep 2024 - Present (1 year and 10 months) in Phoenix, Arizona, United States\n\nDepartment: General Management • Level: President/Vice President\n\nPhoenix Trolley Museum is a nonprofit organization. Phoenix Trolley Museum has 1-10 employees, ",
+        "title": "Robert Graham",
+        "url": "https://www.linkedin.com/in/robert-graham-94a024b"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/4rg46c194xj",
+            "properties": {
+              "description": "We solve problems. When the success of a project hinges on a creative solution to difficult circumstances, our team provides practical answers. Our ability to work with troubled sites and older and historic buildings can help to bring new life to tired properties and sustainability to our urban environment.",
+              "financials": null,
+              "foundedYear": 2006,
+              "headquarters": {
+                "address": "1114 Grand Avenue, Phoenix, AZ 85007, US",
+                "city": "phoenix",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "Motley Design Group",
+              "research": null,
+              "webTraffic": null,
+              "workforce": {
+                "total": 4
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "snippet": "Phoenix Historic Preservation Architecture | Motley Design\n\ntop of page\n\nDeSoto Central Market\n\nArizona Opera Center\n\nCharles T. Hayden House\n\nDeSoto Central Market\n\n1/8\n\n##### Arizona Historic Rehabilitation\n\n##### Arizona Preservation Planning\n\n##### New Construction in Arizona\n\n##### Arizona Museum Consulting\n\n##### Testimonial\n\n“Motley knew what to do with my building when all of the other architects ran away screaming.\" ​\n\n​- Ken Cook, Owner DeSoto Building\n\n##### Residential Design in Arizona\n\nbottom of page",
+        "title": "Phoenix Historic Preservation Architecture | Motley Design",
+        "url": "https://www.motleydesign.group/"
+      },
+      {
+        "publishedDate": "2025-08-08T00:00:00.000Z",
+        "snippet": "Why Phoenix’s Iconic Mystery Castle Is Now at Risk of Demolition - Phoenix Home & Garden\n\nback to top\n\nHomepage/ Architecture/ Why Phoenix’s Iconic Mystery Castle Is Now at Risk of Demolition\n\n## Why Phoenix’s Iconic Mystery Castle Is Now at Risk of Demolition\n\nInside the fight to protect Mystery Castle, Phoenix’s most enigmatic piece of folk architecture\n\nAs its name suggests, Phoenix’s Mystery Castle evokes more questions than answers. An aura of the unknown permeates the whimsical structure, an eclectic mix of native rock and repurposed materials that one man began building at the base of South Mountain during the Great Depression. What is crystal clear about the building, however, is its significance, according to Robert Graham, principal architect at Motley Design Group.\n\n“Mystery Cas",
+        "title": "Why Phoenix's Iconic Mystery Castle Is Now at Risk of Demolition",
+        "url": "https://www.phgmag.com/why-phoenixs-iconic-mystery-castle-is-now-at-risk-of-demolition/"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/4rg46c194xj",
+            "properties": {
+              "description": "We solve problems. When the success of a project hinges on a creative solution to difficult circumstances, our team provides practical answers. Our ability to work with troubled sites and older and historic buildings can help to bring new life to tired properties and sustainability to our urban environment.",
+              "financials": null,
+              "foundedYear": 2006,
+              "headquarters": {
+                "address": "1114 Grand Avenue, Phoenix, AZ 85007, US",
+                "city": "phoenix",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "Motley Design Group",
+              "research": null,
+              "webTraffic": null,
+              "workforce": {
+                "total": 4
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "snippet": "# Motley Design Group\n\nMotley Design Group is a Architecture and Planning company. Motley Design Group is a regionally recognized company specializing in historic preservation architecture. They offer services in historic & rehabilitation design, historic preservation planning, new construction design, museum design and consulting, and residential design and rehabilitation. Motley Design Group employs 4 people, founded in 2006. Headquartered in phoenix, arizona, United States.\n\n## About\n\nWe solve problems. When the success of a project hinges on a creative solution to difficult circumstances, our team provides practical answers. Our ability to work with troubled sites and older and historic buildings can help to bring new life to tired properties and sustainability to our urban environment",
+        "title": "Motley Design Group",
+        "url": "https://linkedin.com/company/motley-design-group"
+      },
+      {
+        "author": "Robert Graham",
+        "publishedDate": "2025-03-28T00:00:00.000Z",
+        "snippet": "# Motley Design Group has been selected as an on-call architectural firm for the San Xavier del Bac mission! | Robert Graham · LinkedIn · 2025-03-28\n\n**Robert Graham**: President at Phoenix Trolley Museum for 1 year 10 months with 41 years 7 months of total professional experience. Previous roles include Principal Architect at Metropolis Design Group LLC, Architect at Alliance Architects LLC, and Architect at Ryden Architects. Based in Greater Phoenix Area [US].\n\n---\n\nMotley Design Group has been selected as an on-call architectural firm for the San Xavier del Bac mission!\n\n![Motley Design Group has been selected as an on-call architectural firm for the San Xavier del Bac mission! | Robert Graham image](https://media.licdn.com/dms/image/v2/D5622AQF3AaQL-WM7Cw/feedshare-shrink_1280/B56ZXeg8",
+        "title": "Motley Design Group has been selected as an on-call architectural firm for the San Xavier del Bac mission! | Robert Graham",
+        "url": "https://www.linkedin.com/posts/robert-graham-94a024b_motley-design-group-has-been-selected-as-activity-7311489496762523650-Kdi8"
+      }
+    ],
+    "searchAnswer": null
+  }
+]

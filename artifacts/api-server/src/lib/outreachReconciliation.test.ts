@@ -7,6 +7,7 @@ import {
   db,
   outreachDeliveryEventsTable,
   outreachMessagesTable,
+  outreachMonthlySendReservationsTable,
   outreachSendReservationsTable,
   outreachSequenceSendClaimsTable,
   outreachSuppressionsTable,
@@ -73,6 +74,8 @@ async function cleanFixture(fixture: Awaited<ReturnType<typeof createFixture>>):
     .where(eq(outreachSuppressionsTable.email, fixture.prospect.contactEmail!));
   await db.delete(outreachDeliveryEventsTable).where(eq(outreachDeliveryEventsTable.outreachMessageId, fixture.message.id));
   await db.delete(outreachSendReservationsTable).where(eq(outreachSendReservationsTable.messageId, fixture.message.id));
+  await db.delete(outreachMonthlySendReservationsTable)
+    .where(eq(outreachMonthlySendReservationsTable.messageId, fixture.message.id));
   await db.delete(outreachSequenceSendClaimsTable).where(eq(outreachSequenceSendClaimsTable.prospectId, fixture.prospect.id));
   await db.delete(outreachMessagesTable).where(eq(outreachMessagesTable.prospectId, fixture.prospect.id));
   await db.delete(prospectsTable).where(eq(prospectsTable.id, fixture.prospect.id));
@@ -236,7 +239,7 @@ test("an accepted-but-unknown dispatch is not sent twice and late evidence resol
     }).returning();
     await assert.rejects(
       sendApprovedOutreach(duplicate!, fixture.prospect, fixture.campaign),
-      /already reserved or was sent/,
+      /already (?:active|reserved)|was sent/,
     );
     assert.equal(providerCalls, 1);
 
@@ -291,7 +294,7 @@ test("a provider 503 retains the sequence claim and blocks redispatch", async ()
     );
     await assert.rejects(
       sendApprovedOutreach(fixture.message, fixture.prospect, fixture.campaign),
-      /already reserved or was sent/,
+      /already (?:active|reserved)|was sent/,
     );
     assert.equal(providerCalls, 1);
   } finally {
@@ -314,6 +317,13 @@ async function addSendClaims(fixture: Awaited<ReturnType<typeof createFixture>>)
   await db.insert(outreachSendReservationsTable).values({
     messageId: fixture.message.id,
     quotaKey: "outreach-global:2026-08-30",
+    slot: fixture.message.id,
+  });
+  await db.insert(outreachMonthlySendReservationsTable).values({
+    messageId: fixture.message.id,
+    normalizedEmail: fixture.prospect.contactEmail!.trim().toLowerCase(),
+    sequenceNumber: fixture.message.sequenceNumber,
+    quotaKey: "outreach-global:2026-08",
     slot: fixture.message.id,
   });
 }
@@ -376,6 +386,11 @@ test("activity bounce suppresses the address and cannot release a resend", async
     assert.equal(
       (await db.select().from(outreachSequenceSendClaimsTable)
         .where(eq(outreachSequenceSendClaimsTable.messageId, fixture.message.id))).length,
+      1,
+    );
+    assert.equal(
+      (await db.select().from(outreachMonthlySendReservationsTable)
+        .where(eq(outreachMonthlySendReservationsTable.messageId, fixture.message.id))).length,
       1,
     );
     assert.equal(await claimOutreachMessageForSending(fixture.message.id), undefined);
@@ -448,6 +463,11 @@ test("confirmed provider rejection releases exactly one automatic retry", async 
     assert.equal(
       (await db.select().from(outreachSequenceSendClaimsTable)
         .where(eq(outreachSequenceSendClaimsTable.messageId, fixture.message.id))).length,
+      0,
+    );
+    assert.equal(
+      (await db.select().from(outreachMonthlySendReservationsTable)
+        .where(eq(outreachMonthlySendReservationsTable.messageId, fixture.message.id))).length,
       0,
     );
 

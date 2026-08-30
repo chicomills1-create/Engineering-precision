@@ -200,6 +200,23 @@ export const outreachSendReservationsTable = pgTable("outreach_send_reservations
   uniqueIndex("outreach_send_reservation_quota_slot_unique").on(table.quotaKey, table.slot),
 ]);
 
+export const outreachMonthlySendReservationsTable = pgTable("outreach_monthly_send_reservations", {
+  id: serial("id").primaryKey(),
+  messageId: integer("message_id").notNull().references(() => outreachMessagesTable.id),
+  normalizedEmail: text("normalized_email").notNull(),
+  sequenceNumber: integer("sequence_number").notNull(),
+  quotaKey: text("quota_key").notNull(),
+  slot: integer("slot").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [
+  uniqueIndex("outreach_monthly_send_reservation_message_unique").on(table.messageId),
+  uniqueIndex("outreach_monthly_send_reservation_quota_slot_unique").on(table.quotaKey, table.slot),
+  uniqueIndex("outreach_monthly_send_reservation_email_sequence_unique").on(
+    table.normalizedEmail,
+    table.sequenceNumber,
+  ),
+]);
+
 export const clientMonthlyEmailDeliveriesTable = pgTable("client_monthly_email_deliveries", {
   id: serial("id").primaryKey(),
   clientJobId: integer("client_job_id"),
@@ -232,6 +249,7 @@ export const insertOutreachSequenceSendClaimSchema = createInsertSchema(outreach
 export const insertOutreachSuppressionSchema = createInsertSchema(outreachSuppressionsTable).omit({ id: true, createdAt: true });
 export const insertOutreachDeliveryEventSchema = createInsertSchema(outreachDeliveryEventsTable).omit({ id: true, createdAt: true });
 export const insertOutreachSendReservationSchema = createInsertSchema(outreachSendReservationsTable).omit({ id: true, createdAt: true });
+export const insertOutreachMonthlySendReservationSchema = createInsertSchema(outreachMonthlySendReservationsTable).omit({ id: true, createdAt: true });
 export const insertClientMonthlyEmailDeliverySchema = createInsertSchema(clientMonthlyEmailDeliveriesTable).omit({ id: true, createdAt: true });
 export type ResearchRun = typeof outreachResearchRunsTable.$inferSelect;
 export type InsertResearchRun = z.infer<typeof insertResearchRunSchema>;
@@ -253,4 +271,6 @@ export type InsertOutreachSuppression = z.infer<typeof insertOutreachSuppression
 export type OutreachSuppression = typeof outreachSuppressionsTable.$inferSelect;
 export type InsertOutreachDeliveryEvent = z.infer<typeof insertOutreachDeliveryEventSchema>;
 export type OutreachDeliveryEvent = typeof outreachDeliveryEventsTable.$inferSelect;
+export type InsertOutreachMonthlySendReservation = z.infer<typeof insertOutreachMonthlySendReservationSchema>;
+export type OutreachMonthlySendReservation = typeof outreachMonthlySendReservationsTable.$inferSelect;
 export type ClientMonthlyEmailDelivery = typeof clientMonthlyEmailDeliveriesTable.$inferSelect;

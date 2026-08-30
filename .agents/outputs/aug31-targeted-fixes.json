@@ -1,0 +1,1974 @@
+[
+  {
+    "resultPages": [
+      {
+        "author": "Exa",
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/0hjch6m2dgd",
+            "properties": {
+              "description": "Located in Gilbert, AZ, SS Construction is a locally minority-owned and operated family business that takes pride in its unique blend of skills and experience. Being residents of the Greater Phoenix area ourselves, we have an intimate understanding of the local market and the specific challenges and opportunities it presents. Our deep roots in the community have allowed us to forge strong relationships with suppliers, subcontractors, and industry professionals, giving us access to top-notch resources and ensuring that every aspect of our projects meets the highest standards of quality.\n\nOur team consists of skilled craftsmen, designers, and project managers who have a proven track record of successfully completing projects of all sizes and complexities. Whether it’s a residential remodel or a large-scale commercial construction endeavor, we have the expertise and capabilities to handle it.\n\nWe offer a wide range of services tailored to our client’s diverse needs. From general contracting and construction consulting to design-build services, we have the capabilities to take a project from concept to completion. With our in-house designers, we provide comprehensive design solutions that align with our client’s preferences. With a comprehensive range of tailored services, we guide projects from concept to completion, staying at the forefront of industry trends, and employing cutting-edge tools and technologies to ensure efficiency and effectiveness in our work.\n\n We believe in redefining the construction industry by setting a new standard of service and value. We are grateful for your consideration in choosing SS Construction for your construction needs. With our dedication to communication, collaboration, and customer satisfaction, we eagerly look forward to the opportunity to work with you and bring your project to life. Trust us to deliver exceptional results that reflect our shared passion for building and commitment to excellence.",
+              "financials": null,
+              "foundedYear": 2023,
+              "headquarters": {
+                "address": "3317 S Higley Rd, Gilbert, Arizona 85297, US",
+                "city": "Gilbert",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "SS Construction LLC",
+              "research": null,
+              "webTraffic": {
+                "avgDurationSeconds": 0,
+                "countryRank": null,
+                "history": [
+                  {
+                    "dateFrom": "2026-02",
+                    "dateTo": "2026-02",
+                    "value": 139
+                  }
+                ],
+                "visitsMonthly": 139
+              },
+              "workforce": {
+                "total": 2
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-06-02T00:00:00.000Z",
+        "snippet": "# SS Construction LLC\n\nSS Construction LLC is a Construction company. SS Construction is a minority-owned and family-operated business that specializes in a wide range of commercial construction services, including commercial demolition, storefront window installation, custom gate fabrication, and commercial concrete work. SS Construction LLC employs 2 people (+25.0% YoY, +1 person), founded in 2023. Headquartered in Gilbert, Arizona, United States.\n\n## About\n\nLocated in Gilbert, AZ, SS Construction is a locally minority-owned and operated family business that takes pride in its unique blend of skills and experience. Being residents of the Greater Phoenix area ourselves, we have an intimate understanding of the local market and the specific challenges and opportunities it presents. Our dee",
+        "title": "ss construction llc",
+        "url": "https://linkedin.com/company/ss-construction-llc"
+      },
+      {
+        "snippet": "Skip to content",
+        "title": "",
+        "url": "https://solidstateconstructionaz.com/"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/wcv4v81jv75",
+            "properties": {
+              "educationHistory": [
+                {
+                  "dates": {
+                    "from": "1994",
+                    "to": "1996"
+                  },
+                  "degree": "Associate's degree Business Administration and Management General",
+                  "institution": {
+                    "id": null,
+                    "name": "University of Hawaii at Manoa"
+                  }
+                }
+              ],
+              "firstName": "Sonny",
+              "lastName": "Saldua",
+              "location": "Greater Phoenix Area",
+              "name": "Sonny Saldua",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/0hjch6m2dgd",
+                    "name": "SS Construction LLC"
+                  },
+                  "dates": {
+                    "from": "2023-01-01",
+                    "to": null
+                  },
+                  "location": "Gilbert, Arizona, United States",
+                  "title": "Managing Principal"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/xfhfjw419j3",
+                    "name": "Quantum"
+                  },
+                  "dates": {
+                    "from": "2020-01-01",
+                    "to": "2023-01-01"
+                  },
+                  "location": "San Jose, California, United States",
+                  "title": "Sr. Director Global Real Estate & Facilities Physical Security & EHS at Quantum Corp."
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/66dfzd91b4b",
+                    "name": "Axon"
+                  },
+                  "dates": {
+                    "from": "2019-06-01",
+                    "to": "2020-01-01"
+                  },
+                  "location": "Greater Phoenix Area",
+                  "title": "Global Facilities & Real Estate"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Meridiem kitchen + Lounge"
+                  },
+                  "dates": {
+                    "from": "2017-10-01",
+                    "to": "2019-06-01"
+                  },
+                  "location": "Chandler, Arizona",
+                  "title": "Managing Partner"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/21flvsqr9cv",
+                    "name": "ZenSpace"
+                  },
+                  "dates": {
+                    "from": "2017-10-01",
+                    "to": "2019-03-01"
+                  },
+                  "location": null,
+                  "title": "VP of Corporate Real Estate"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/21flvsqr9cv",
+                    "name": "ZenSpace"
+                  },
+                  "dates": {
+                    "from": "2017-10-01",
+                    "to": "2019-03-01"
+                  },
+                  "location": null,
+                  "title": "VP Of Operations"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/5v4qh6xgl1y",
+                    "name": "Uber Advanced Technologies Group"
+                  },
+                  "dates": {
+                    "from": "2017-01-01",
+                    "to": "2018-01-01"
+                  },
+                  "location": "San Francisco Bay Area",
+                  "title": "Director Of Facilities"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/0j2mwztfbwh",
+                    "name": "Otto"
+                  },
+                  "dates": {
+                    "from": "2017-01-01",
+                    "to": "2017-03-01"
+                  },
+                  "location": "San Francisco, California",
+                  "title": "Director Of Facilities West Coast"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/q4xrw5ytk81",
+                    "name": "Dell EMC"
+                  },
+                  "dates": {
+                    "from": "2014-12-01",
+                    "to": "2017-03-01"
+                  },
+                  "location": "4025 Bohannon Dr Menlo Park CA 94025",
+                  "title": "Head of Facilities and Operations"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/lz9xq26fy32",
+                    "name": "Evernote"
+                  },
+                  "dates": {
+                    "from": "2012-06-01",
+                    "to": "2014-11-01"
+                  },
+                  "location": "Redwood city",
+                  "title": "Director Of Facilities"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/lrlfxz8532r",
+                    "name": "Kabam"
+                  },
+                  "dates": {
+                    "from": "2010-10-01",
+                    "to": "2012-05-01"
+                  },
+                  "location": "San Francisco Bay Area",
+                  "title": "Facilities Project Manager Director"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-06-23T00:00:00.000Z",
+        "snippet": "# Sonny Saldua\n\nOwner | SS Construction (MBE Certified) | Licensed, Bonded & Insured Dual (Residential & Commercial) General Contractor | HOA Construction | 20+ Years Experience | Serving All Arizona\n\nGreater Phoenix Area (US)\n\n500 connections • 4,434 followers\n\n## About\n\nGlobal Real Estate, Construction & Facilities Executive with 20+ years of experience…\n\nTotal Experience: 15 years and 9 months\n\n## Experience\n\n### Managing Principal - [SS Construction LLC](https://www.linkedin.com/company/ss-construction-llc) (Current)\n\nJan 2023 - Present (3 years and 7 months) in Gilbert, Arizona, United States\n\nSS Construction is a locally minority-owned and family-operated general contracting company serving the Greater Phoenix area. We specialize in:\n- Commercial and Residential Construction\n- Demoli",
+        "title": "Sonny Saldua",
+        "url": "https://www.linkedin.com/in/sonnysaldua"
+      },
+      {
+        "snippet": "Ss Construction | Gilbert AZ | Read Reviews + Get a Bid | BuildZoom\n\n×\n\n## We'll help you find the right contractor.\n\n### Share your project details and we'll reach out to Ss Construction LLC so you don't have to.\n\n#### We'll also connect you with other vetted professionals who are a strong match for your project. That way, you can compare quotes, meet different contractors, and make the choice that feels right for you.\n\nGet Started\n\nIs this your business? Claim now >\n\n\" Concrete Housing Construction\" by Concrete Forms// CC BY 2.0\n\nS\n\nALERT\n\n# Ss Construction\n\nALERT\n\nWRITE A REVIEW\n\nUpdated: Nov 25, 2025\n\n### Hiring a contractor?\n\nWe recommend getting multiple quotes for any construction project. Our free bidding system will get you quotes from Ss Construction LLC and 2 other top contracto",
+        "title": "Ss Construction | Gilbert AZ | Read Reviews + Get a Bid",
+        "url": "https://www.buildzoom.com/contractor/ss-construction-llc-gilbert-az"
+      },
+      {
+        "author": "Sonny Saldua",
+        "publishedDate": "2025-04-10T00:00:00.000Z",
+        "snippet": "# We’re proud to announce that SS Construction is now a certified Minority Business Enterprise (MBE)! | Sonny Saldua · LinkedIn · 2025-04-10\n\n**Sonny Saldua**: Managing Principal at SS Construction LLC for 3 years 7 months with 15 years 9 months of total professional experience. Previous roles include Sr. Director Global Real Estate & Facilities Physical Security & EHS at Quantum Corp. at Quantum, Global Facilities & Real Estate at Axon, and Managing Partner at Meridiem kitchen + Lounge. Based in Greater Phoenix Area [US].\n\n---\n\nWe’re proud to announce that SS Construction is now a certified Minority Business Enterprise (MBE)!\n\nThis certification represents more than a title — it’s a reflection of our commitment to quality, integrity, and diversity in the construction industry.\n\nWith years",
+        "title": "We’re proud to announce that SS Construction is now a certified Minority Business Enterprise (MBE)! | Sonny Saldua",
+        "url": "https://www.linkedin.com/posts/sonnysaldua_mbe-construction-supplierdiversity-activity-7315962971250147329-Tgrh"
+      },
+      {
+        "snippet": "Solid State Construction AZ, Gilbert, AZ - Reviews (23), Photos (8) - BestProsInTown\n\n# Solid State Construction AZ\n\nGeneral Contractor 3317 S Higley Rd Ste 114 239, Gilbert, AZ 85297\n\n## About Solid State Construction AZ\n\nSS Construction LLC is a locally owned and operated business, deeply rooted in the community. They offer comprehensive services, providing a seamless and hassle-free experience from concept to completion. The team is known for their exceptional craftsmanship and creative flair in every project. They are minority-owned, embracing diversity and inclusivity. SS Construction has handled various projects, including surface work, building structure, and water main work. They are praised for their integrity, professionalism, and efficiency. The team is also commended for their ",
+        "title": "Solid State Construction AZ, Gilbert, AZ - Reviews (23), Photos (8) - BestProsInTown",
+        "url": "https://www.bestprosintown.com/az/gilbert/ss-construction-llc-/"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "snippet": "Durante Construction Co., Inc. - Tucson, Arizona | ProView\n\nHome Arizona General Contractors\n\n## People Also View These\n\n## Our Story\n\nOur main lines of business include: General Contractors.\n\nDurante Construction Co., Inc. has been listed in the Blue Book since 2007.\n\nView More\n\n## What We Do\n\n- General Contractors\n\n## Regions & Counties Serviced\n\n- Arizona\n\n### Arizona 1\n\n- Pima\n\n## Project Experience\n\n- Projects From $500,001 to $2,000,000\n- Private\n\n## Gallery\n\nWe are located in Pima County.\n\nLocations Regions\n\n##### Share Our ProView\n\nShare URL copied!\n\nhttps://www.thebluebook.com/iProView/353472/durante-construction-co-inc/general-contractors/\n\nFacebook\n\nX\n\nTweet\n\nLinkedIn\n\nRequest Qualifications\n\nSending Qualification Request...\n\n##### Request Brochure\n\nCancel Send\n\nWe will send a l",
+        "title": "Durante Construction Co., Inc.",
+        "url": "https://www.thebluebook.com/iProView/353472/durante-construction-co-inc/general-contractors/"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/xjgjtk9qcdy",
+            "properties": {
+              "educationHistory": [],
+              "firstName": "Sonny",
+              "lastName": "Durante",
+              "location": "Tucson, Arizona, United States",
+              "name": "Sonny Durante",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": null,
+                    "name": "DURANTE Construction Co., Inc."
+                  },
+                  "dates": {
+                    "from": "1972-09-01",
+                    "to": null
+                  },
+                  "location": "Oro Valley, AZ",
+                  "title": "President"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "MLW Development, LLC"
+                  },
+                  "dates": {
+                    "from": "2011-09-01",
+                    "to": "2018-09-01"
+                  },
+                  "location": "Western North Dakota",
+                  "title": "Managing Member"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Marrano Development, LLC"
+                  },
+                  "dates": {
+                    "from": "1987-06-01",
+                    "to": "2001-01-01"
+                  },
+                  "location": "Western New York",
+                  "title": "Senior Operations Manager"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-06-26T00:00:00.000Z",
+        "snippet": "# Sonny Durante\n\nDURANTE Construction Co., Inc.\n\nTucson, Arizona, United States (US)\n\n60 connections • 62 followers\n\n## About\n\nSeasoned Construction and Development Management Professional with a background in single and multi-family housing, commercial building, and infrastructure construction, in excess of $500 million in value. Exceptional history in project design, estimating and cost control, project scheduling, supervision, quality control, and client/agency relations.\n\nTotal Experience: 53 years and 11 months\n\n## Experience\n\n### President - DURANTE Construction Co., Inc. (Current)\n\nSep 1972 - Present (53 years and 11 months) in Oro Valley, AZ\n\nFull service construction & development consulting\n\nDepartment: General Management • Level: President/Vice President\n\n### Managing Member - M",
+        "title": "Sonny Durante",
+        "url": "https://www.linkedin.com/in/sonny-durante-5444b23a"
+      },
+      {
+        "snippet": "Durante Construction Co., Inc. - Locations and Key Contacts | ProView\n\nHome Arizona General Contractors\n\n## Locations\n\n## Key Contacts\n\n#### Owners, Principals & Senior Executives\n\nLocations Regions\n\n##### Share Our ProView\n\nShare URL copied!\n\nhttps://www.thebluebook.com/iProView/353472/durante-construction-co-inc/general-contractors/\n\nFacebook\n\nX\n\nTweet\n\nLinkedIn\n\nRequest Qualifications\n\nSending Qualification Request...\n\n##### Request Brochure\n\nCancel Send\n\nWe will send a link to your email address that will download our FREE PDF brochure.\n\nProView Brochure Request\n\nSending Brochure Request...",
+        "title": "Durante Construction Co., Inc.",
+        "url": "https://www.thebluebook.com/iProView/353472/durante-construction-co-inc/general-contractors/locations-contacts/"
+      },
+      {
+        "author": "Durante Construction",
+        "snippet": "Durante Construction\n\n# General Contracting, Expert Remodeling and Maintenance Services\n\nQuality construction solutions for safe environments.\n\nGet Your Free Quote (jessica@duranteconstruction.com)\n\nDurante Construction\n[(405) 787-6200](tel:4057876200)\n# General Contracting, Expert Remodeling and Maintenance Services\nGeneral Contracting, Expert Remodeling and Maintenance ServicesGeneral Contracting, Expert Remodeling and Maintenance ServicesGeneral Contracting, Expert Remodeling and Maintenance Services\nQuality construction solutions for safe environments.\n[Get Your Free Quote](<mailto:jessica@duranteconstruction.com?subject=Quote Request>)\n## About Durante Construction\n![](https://img1.wsimg.com/isteam/getty/1488354306/:/cr=t:12.5%25,l:0%25,w:100%25,h:75%25/rs=w:600,h:300,cg:true)\n#### Ou",
+        "title": "Durante Construction",
+        "url": "https://duranteconstruction.com/"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/8gn0gktp7tf",
+            "properties": {
+              "description": "To promote quality construction by Arizona contractors through a licensing and regulatory system designed to protect the health, safety, and welfare of the public.",
+              "financials": null,
+              "foundedYear": 1931,
+              "headquarters": {
+                "address": "1700 W. Washington St., Suite 105, Phoenix, Arizona 85007, US",
+                "city": "Phoenix",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "Arizona Registrar of Contractors",
+              "research": null,
+              "webTraffic": {
+                "avgDurationSeconds": 117,
+                "countryRank": null,
+                "history": [
+                  {
+                    "dateFrom": "2026-01",
+                    "dateTo": "2026-01",
+                    "value": 36520
+                  },
+                  {
+                    "dateFrom": "2026-02",
+                    "dateTo": "2026-02",
+                    "value": 47871
+                  },
+                  {
+                    "dateFrom": "2026-03",
+                    "dateTo": "2026-03",
+                    "value": 49984
+                  },
+                  {
+                    "dateFrom": "2026-04",
+                    "dateTo": "2026-04",
+                    "value": 47782
+                  },
+                  {
+                    "dateFrom": "2026-05",
+                    "dateTo": "2026-05",
+                    "value": 53771
+                  },
+                  {
+                    "dateFrom": "2026-06",
+                    "dateTo": "2026-06",
+                    "value": 50929
+                  }
+                ],
+                "visitsMonthly": 50929
+              },
+              "workforce": {
+                "total": 30
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "snippet": "Home | Arizona Registrar of Contractors Skip to main content\n\n## Did you know? Our ROC Customer Portal is now available for your convenience!\n\nSubmit license applications, updates, complaints, or Find your License ID cards all online! For assistance, Contact us.\n\n## Anyone can pretend to be a contractor. Check the license.\n\nHow to Apply for a License\n\nRenew or Apply Online Now\n\n# Our Mission: Protect the health, safety and welfare of the public through a regulatory system designed to promote quality construction by Arizona contractors.\n\nPursuant to section 32-4302, Arizona Revised Statutes, a person shall be granted an occupational or professional license or certificate if the person has been licensed or certified in another state for at least twelve months, the license or certificate is i",
+        "title": "Arizona Registrar of Contractors: Home",
+        "url": "https://roc.az.gov/"
+      },
+      {
+        "snippet": "Resources and Tools | Pima County, AZ\n\n[]\n\nResources and Tools | Pima County, AZ\n[Skip to Main Content](#cc5f8c90dc-b4cb-431b-90ee-10648f8df655)\n[ ![The Pima County Logo](https://content.civicplus.com/api/assets/79167038-e4aa-4958-bbce-4c1a80603e4d?cache=180)\n](https://www.pima.gov/)\n#\nResources and Tools\n[](?contentId=3838fd30-cc7b-4f39-90e6-64751b7481f0)\nAs part of Pima County’s commitment to equity, transparency, and inclusive economic growth, we recognize that access to information and support is key to ensuring businesses of all sizes and backgrounds can successfully engage in County procurement opportunities.\nThe following resources are provided to assist prospective contractors, consultants, and vendors in preparing to respond to upcoming solicitations. These tools and organizations",
+        "title": "Resources and Tools | Pima County, AZ",
+        "url": "https://www.pima.gov/3834/Resources-and-Tools"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/hxm8pd2gw6m",
+            "properties": {
+              "educationHistory": [
+                {
+                  "dates": {
+                    "from": "1992",
+                    "to": "1998"
+                  },
+                  "degree": "MArch/BS Design, Architecture",
+                  "institution": {
+                    "id": "https://exa.ai/library/organization/c56ctlhxrr3",
+                    "name": "Arizona State University"
+                  }
+                }
+              ],
+              "firstName": "Brian",
+              "lastName": "Andrews",
+              "location": "Phoenix, Arizona, United States",
+              "name": "Brian Andrews",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": null,
+                    "name": "bricon studio, llc"
+                  },
+                  "dates": {
+                    "from": "2016-01-01",
+                    "to": null
+                  },
+                  "location": "Phoenix, Arizona",
+                  "title": "Owner Architect"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/w9c9j4xff73",
+                    "name": "Knoell & Quidort Architects"
+                  },
+                  "dates": {
+                    "from": "1995-06-01",
+                    "to": "2016-01-01"
+                  },
+                  "location": "Phoenix, Arizona",
+                  "title": "Project Architect"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-08-09T00:00:00.000Z",
+        "snippet": "# Brian Andrews\n\nOwner/Architect at bricon studio, llc\n\nPhoenix, Arizona, United States (US)\n\n500 connections • 519 followers\n\n## About\n\nBrian Andrews, AIA has more than 27 year of experience in the architectural field. He is the founder and owner of bricon studio a Phoenix based design firm. The firm specializes in custom homes (both new builds and remodels), commercial tenant improvements (medical, dental and office spaces) and ground up commercial buildings.\n\nTotal Experience: 31 years and 2 months\n\n## Experience\n\n### Owner Architect - bricon studio, llc (Current)\n\nJan 2016 - Present (10 years and 7 months) in Phoenix, Arizona\n\nFounder and managing partner. Involved in all aspects of the projects from preliminary design to construction administration.\n\nDepartment: General Management • L",
+        "title": "Brian Andrews",
+        "url": "https://www.linkedin.com/in/brian-andrews-aia-66519212"
+      },
+      {
+        "snippet": "Bricon Studio Llc.\n\n## NAPC Service & Product Provider Directory\n\nThe NAPC Directory of 1 million+ contractors and vendors can be accessed by searching or browsing first by geography and then by industry group.\n\n### Bricon Studio, LLC.\n\n 3429 N. 44th Place Phoenix, Maricopa, Arizona, 85018 UNITED STATES\n\nTEL \n\n# Bids in Oregon | Oregon Bid Network provides construction bids and government bids for Oregon projects - News, Informations, and Entries\n\nWBE Supply, Inc. For All Your Supply Needs Certified woman-owned, small business\n\n### Bid Results\n\n## Bid, Tender, RFP Results\n\nFollowing are some of the many bid and tender results, bid tabulations, low bidder, contract award and other market intelligence that our members enjoy. Click on the listings below for more details. Login to view the ful",
+        "title": "Bricon Studio  Llc.",
+        "url": "https://www.oregonbids.com/directory/1298570-bricon_studio__llc..html"
+      },
+      {
+        "publishedDate": "2025-04-04T00:00:00.000Z",
+        "snippet": "Peek Inside the Studio of one of the Valley’s Most Fascinating Architects - Phoenix Home & Garden\n\nback to top\n\nHomepage/ Architecture/ Peek Inside the Studio of one of the Valley’s Most Fascinating Architects\n\n## Peek Inside the Studio of one of the Valley’s Most Fascinating Architects\n\nInside the studio (and mind) of celebrated Arizona architect Eddie Jones.\n\n#### By Robrt L. Pela\n\nWith architecture, we’re solving problems, and we want the solutions to be beautiful,” architect Eddie Jones says. “And sometimes, along the way, really neat things happen.”\n\nJones has made a name for himself with those “really neat” things. Locally, he’s known for his environmentally conscious building designs that predate the modern-day green movement. Globally, he’s the guy who—along with his brother and bu",
+        "title": "Peek Inside the Studio of one of the Valley's Most Fascinating Architects",
+        "url": "https://www.phgmag.com/peek-inside-the-studio-of-one-of-the-valleys-most-fascinating-architects/"
+      },
+      {
+        "snippet": "Photo Gallery | BriCon Inc.\n\nNavigation\n\n- Mark Brice\n- Herb Brice\n\n- Office Buildings\n- Water & Waste Water\n- Parks & Recreation\n- Miscellaneous\n\n# Photo Gallery\n\nCommercial General Contractor serving Ada County, Canyon County and surrounding areas.\n\nClick on the left icon to view project photos and details. The right button to enlarge the image.\n\n## Down Town Boise Alley Retrofit\n\nZoom in Read more\n\nAlley Before Renovation ACHD has initiated a plan to update alleys in down town Boise. The existing alleys have been plagued by poor drainage and are unsightly. As part of a pilot program BriCon, Inc. paved two alleys in concrete and hired local hardscape experts, Northwest Hardscape http://www.nwhardscapespecialties.com, to install the permeable pavers in the center. The project involved rel",
+        "title": "Photo Gallery | BriCon Inc.",
+        "url": "https://briconinc.com/our-projects/"
+      },
+      {
+        "snippet": "Office Buildings | BriCon Inc.\n\nNavigation\n\n- Mark Brice\n- Herb Brice\n\n- Office Buildings\n- Water & Waste Water\n- Parks & Recreation\n- Miscellaneous\n\n# Office Buildings\n\nClick on the left icon to view project photos and details. The right button to enlarge the image.\n\n## Bowman Funeral Home\n\nZoom in Read more\n\nBowman Funeral Home has served southern Idaho families for many years. Their multigenerational business provides great service at a reasonable price. We are pleased to provide them with a larger facility with a built in...\n\n## LHTAC Office Building\n\nZoom in Read more\n\nThis is the Local Highway Technical Assistance Council (LHTAC) office building. We lovingly refer to it as our Frank Lloyd Wright Building. Designed by McKeegan Architects there are over a dozen different roof elevation",
+        "title": "Office Buildings | BriCon Inc.",
+        "url": "https://briconinc.com/our-projects/office-buildings/"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/gbxh7zmpqpd",
+            "properties": {
+              "description": null,
+              "financials": null,
+              "foundedYear": null,
+              "headquarters": {
+                "address": "Grimsby, Ontario L3M 3W6, CA",
+                "city": "Grimsby",
+                "country": "Canada",
+                "postalCode": null
+              },
+              "name": "BRICON CONSTRUCTION MANAGAMENT",
+              "research": null,
+              "webTraffic": {
+                "avgDurationSeconds": 0,
+                "countryRank": null,
+                "history": [
+                  {
+                    "dateFrom": "2026-02",
+                    "dateTo": "2026-02",
+                    "value": 520
+                  },
+                  {
+                    "dateFrom": "2026-03",
+                    "dateTo": "2026-03",
+                    "value": 787
+                  },
+                  {
+                    "dateFrom": "2026-04",
+                    "dateTo": "2026-04",
+                    "value": 619
+                  },
+                  {
+                    "dateFrom": "2026-04",
+                    "dateTo": "2026-04",
+                    "value": 619
+                  },
+                  {
+                    "dateFrom": "2026-05",
+                    "dateTo": "2026-05",
+                    "value": 44
+                  },
+                  {
+                    "dateFrom": "2026-06",
+                    "dateTo": "2026-06",
+                    "value": 278
+                  }
+                ],
+                "visitsMonthly": 278
+              },
+              "workforce": {
+                "total": 1
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2018-05-02T00:00:00.000Z",
+        "snippet": "Home | Business, Experience | Bricon Construction Management\n\n# Build Your Business with BRICON: Proven Excellence in Construction Management\n\n# Trust BRICON Construction Management for Experience…\n\nBRICON Construction Management Inc. has over 30 years experience in retail and commercial construction. BRICON Construction Management Inc. provides professional services to; retail, office, pharmaceutical, food and hospitality industries. Every element of each project is carefully assembled based on cost-effectiveness, proven track-record and, most importantly, the highest quality of workmanship possible. The result: Highly-functional, effective and efficient business processes fostered by a wealth of experience, which contribute to the on-time results we expect, every time.\n\nRead More About U",
+        "title": "Home | Business, Experience | Bricon Construction Management",
+        "url": "https://briconconstruction.com/"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "author": "Exa",
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/71ybhvfz8fq",
+            "properties": {
+              "description": "Trillium Residential is an innovative development company committed to creating lifestyle-enriched communities.\r\n \r\nOur company was founded on the principle that people today are seeking a radically different approach to living their day-to-day lives than any generation before them. With this in mind, Trillium focuses on creating unique lifestyle amenities for its residents, offering a distinct alternative to the status quo at our apartments throughout Phoenix, Arizona.\r\n\r\nTrillium differentiates itself from its competitors in many ways. Fundamentally, Trillium prides ourselves on basing its community development on years of exhaustive research, incorporating people's ideas and attitudes, dreams and desires into what can only be described as a new paradigm for 21st Century living.\r\n\r\nOur portfolio includes a wide array of living communities, everything from high-density apartment buildings to garden-style residences. By combining development, construction, finance and property management all under one roof, we are able to create the cohesive and coordinated environment necessary to provide our residents with the highest quality multi-family housing available today.",
+              "financials": null,
+              "foundedYear": 2003,
+              "headquarters": {
+                "address": "230 W 5th Street, Tempe, AZ 85281, US",
+                "city": "Tempe",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "Trillium Residential",
+              "research": null,
+              "webTraffic": {
+                "avgDurationSeconds": 0,
+                "countryRank": 0,
+                "history": [
+                  {
+                    "dateFrom": "2024-05",
+                    "dateTo": "2024-05",
+                    "value": 0
+                  },
+                  {
+                    "dateFrom": "2024-09",
+                    "dateTo": "2024-09",
+                    "value": 0
+                  },
+                  {
+                    "dateFrom": "2024-10",
+                    "dateTo": "2024-10",
+                    "value": 0
+                  },
+                  {
+                    "dateFrom": "2025-05",
+                    "dateTo": "2025-05",
+                    "value": 0
+                  },
+                  {
+                    "dateFrom": "2025-06",
+                    "dateTo": "2025-06",
+                    "value": 136
+                  },
+                  {
+                    "dateFrom": "2025-07",
+                    "dateTo": "2025-07",
+                    "value": 165
+                  }
+                ],
+                "visitsMonthly": 165
+              },
+              "workforce": {
+                "total": 7
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-06-10T00:00:00.000Z",
+        "snippet": "# Trillium Residential\n\nTrillium Residential is a Real Estate company. Trillium Residential employs 7 people (+14.7% YoY, +5 people) and has an annual revenue of $5M-$25M, founded in 2003. Headquartered in Tempe, Arizona, United States, with an office in Phoenix. Its workforce is distributed across United States and Sri Lanka.\n\n## About\n\nTrillium Residential is an innovative development company committed to creating lifestyle-enriched communities.\r\n \r\nOur company was founded on the principle that people today are seeking a radically different approach to living their day-to-day lives than any generation before them. With this in mind, Trillium focuses on creating unique lifestyle amenities for its residents, offering a distinct alternative to the status quo at our apartments throughout Pho",
+        "title": "trillium residential",
+        "url": "https://linkedin.com/company/trillium-residential"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/l997wb4gf7j",
+            "properties": {
+              "educationHistory": [
+                {
+                  "dates": {
+                    "from": "1981",
+                    "to": "1985"
+                  },
+                  "degree": "Bachelor, Architectural Science",
+                  "institution": {
+                    "id": "https://exa.ai/library/organization/my322mztmmk",
+                    "name": "Ryerson University"
+                  }
+                }
+              ],
+              "firstName": "David",
+              "lastName": "Dewar",
+              "location": "Tempe, Arizona, United States",
+              "name": "David Dewar",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Trillium Residential"
+                  },
+                  "dates": {
+                    "from": "1989-01-01",
+                    "to": null
+                  },
+                  "location": null,
+                  "title": "Principal"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Magellan Companies"
+                  },
+                  "dates": {
+                    "from": "1989-01-01",
+                    "to": "2001-01-01"
+                  },
+                  "location": null,
+                  "title": "President"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-07-15T00:00:00.000Z",
+        "snippet": "# David Dewar\n\nPrincipal at Trillium Residential\n\nTempe, Arizona, United States (US)\n\n32 connections • 67 followers\n\n## About\n\nDavid Dewar is a founding partner and principal of Trillium Residential, LLC, a builder and manager of award-winning, luxury multi-housing properties. David directs finance, development and acquisition of each asset, as well as is intimately involved in the architecture, design and management components. Mr. Dewar has conceived and developed more than 10,000 multi-family units and is distinguished in the Phoenix market for pioneering luxury boutique hotel-inspired design and management elements and high technology amenity offerings. Projects range from in-fill mixed-use urban communities to garden-style communities in burgeoning corridors. David is currently a memb",
+        "title": "David Dewar",
+        "url": "https://www.linkedin.com/in/david-dewar-013132a"
+      },
+      {
+        "snippet": "Trillium Residential, L.L.C. · 2901 E Camelback Ste 100, Phoenix, AZ 85016\n\nArizona Corporation Registration\n\n# Trillium Residential, L.L.C.\n\n## 2901 E Camelback Ste 100, Phoenix, AZ 85016\n\n## Overview\n\nTRILLIUM RESIDENTIAL, L.L.C. (Entity #L10559658) is a DOMESTIC L.L.C. business in Phoenix, Arizona registered with the Corporations Division of the Arizona Corporation Commission (ACC). The business entity was formed on December 17, 2002, incorporated on January 22, 2003. The current entity status is (). The type of the business is . The registered business location is at 2901 E Camelback Ste 100, Phoenix, AZ 85016. The registered agent of the business is TRILLIUM DEVELOPMENT LLC. The agent office address is 2901 E Camelback Ste 100, Phoenix, AZ 85016. The officers of the entity include Jam",
+        "title": "Trillium Residential, L.L.C. · 2901 E Camelback Ste 100, Phoenix, AZ 85016",
+        "url": "https://opengovus.com/arizona-corporation/L10559658"
+      },
+      {
+        "snippet": "Trillium Residential LLC - Company Profile and News - Bloomberg Markets Skip To Content\n\nQuick Links\n\nRecently Viewed Companies\n\n# Trillium Residential LLC\n\nTrillium Residential LLC owns, develops, and manages real estate properties. The Company constructs apartment buildings, homes, and multi-family housing facilities. Trillium Residential is based in Arizona.\n\nTerms of Service Do Not Sell or Share My Personal Information Trademarks Privacy Policy\n\nHelp©2026 Bloomberg L.P. All Rights Reserved.",
+        "title": "Trillium Residential LLC - Company Profile and News - Bloomberg Markets",
+        "url": "https://www.bloomberg.com/profile/company/1247218D:US"
+      },
+      {
+        "author": "David Dewar",
+        "snippet": "David Dewar | about.me\n\n# David Dewar\n\nDavid Dewar of Tempe, Arizona, has over 27 years of experience in all aspects of business and management. Before commencing his career, David Dewar studied at Ryerson Polytechnical University immediately after finishing his schooling at Keillor MacKay High School. He graduated from Ryerson in the spring of 1985, receiving a Bachelor of Technology with a major in Project Management and a minor in Economics.\n\nDavid Dewar immediately began putting his expertise to use, founding the David C. Dewar Consulting Ltd., in May of 1985, providing project management services to retail and shopping center clients. He worked on various notable projects, such as Hazelton Lanes in Toronto, Loblaws Supercenters all through Ontario, New Brunswick, and Nova Scotia, and ",
+        "title": "David Dewar | about.me",
+        "url": "https://about.me/daviddewararizona"
+      },
+      {
+        "author": "LRA Real Estate Group",
+        "publishedDate": "2014-09-26T00:00:00.000Z",
+        "snippet": "TRILLIUM RESIDENTIAL ENTITY PLANNING $40 MILLION APARTMENT DEVELOPMENT IN PHOENIX | LRA Real Estate Group\n\n# TRILLIUM RESIDENTIAL ENTITY PLANNING $40 MILLION APARTMENT DEVELOPMENT IN PHOENIX\n\ncourtesy of BREW\n\nPhoenix – A company formed by Trillium Residential LLC in Tempe (Jamie Dawson, Ken Losch, principals) plans to develop a 304-unit apartment complex at the northwest corner of the 101 Loop and 7th Avenue in north Phoenix. 7th Avenue Apartments Holdings LLC(the Trillium entity) paid just under $4.299 million to buy the 9.95-acre site. The seller was The Ken Roth Family Limited Partnership in Phoenix (Ken Roth, principal)and a trust formed by Herbert Dreiseszun and Patricia Dreiseszun in Phoenix. The address of the parcel is 20202 N. 7th Avenue. The transaction was negotiated through Ma",
+        "title": "TRILLIUM RESIDENTIAL ENTITY PLANNING $40 MILLION APARTMENT DEVELOPMENT IN PHOENIX | LRA Real Estate Group",
+        "url": "https://lrarealestate.com/trillium-residential-entity-planning-40-million-apartment-development-in-phoenix/"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/x17bm590n79",
+            "properties": {
+              "description": "Saint Holdings is a multi-faceted real estate investment and development company with holdings in industrial, land, multifamily residential, and agriculture.",
+              "financials": null,
+              "foundedYear": 2010,
+              "headquarters": {
+                "address": "7154 East Stetson Drive, Suite 300, Scottsdale, AZ 85251, US",
+                "city": "Scottsdale",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "Saint Holdings",
+              "research": null,
+              "webTraffic": null,
+              "workforce": {
+                "total": 3
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "snippet": "SaintHoldings\n\n##### (C) SaintHoldings 2023 / info@saintholdings.com /\n\nSaintHoldings\n#\n###\n![](assets/img/Saintholdings-top.png)\n[ ![Saint Holdings](assets/img/demo-slides/saintholdings.png)](<mailto:info@saintholdings.com?subject=hello SaintHoldings>)\n[![cazcp](assets/img/demo-slides/cazcp.png)](http://www.cazcp.com)\n[![Inland Port AZ](assets/img/demo-slides/ipaz.png)](http://saintholdings.com/pdf/IPAZ_Site_Plan012323.pdf)\n[ ![FSI Cube and Pellet](assets/img/demo-slides/fsi.png)](http://www.fsifarms.com/)\n[![Merchant Property Company](assets/img/demo-slides/merchantpropertycompany.png)](http://merchantpropertycompany.com/)\n[ ![Pinal Land Holdings](assets/img/demo-slides/pinallandholdings.png)](http://www.heritagearizona.com/)\n##### (C) SaintHoldings 2023 /\n[info@saintholdings.com](<mailt",
+        "title": "SaintHoldings",
+        "url": "http://www.saintholdings.com/"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/x17bm590n79",
+            "properties": {
+              "description": "Saint Holdings is a multi-faceted real estate investment and development company with holdings in industrial, land, multifamily residential, and agriculture.",
+              "financials": null,
+              "foundedYear": 2010,
+              "headquarters": {
+                "address": "7154 East Stetson Drive, Suite 300, Scottsdale, AZ 85251, US",
+                "city": "Scottsdale",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "Saint Holdings",
+              "research": null,
+              "webTraffic": null,
+              "workforce": {
+                "total": 3
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "snippet": "# Saint Holdings (Saint Holdings, LLC.)\n\nSaint Holdings is a Real Estate company. Saint Holdings employs 3 people, founded in 2010. Headquartered in Scottsdale, Arizona, United States.\n\n## About\n\nSaint Holdings is a multi-faceted real estate investment and development company with holdings in industrial, land, multifamily residential, and agriculture.\n\n## Company Details\n- Industry: Real Estate\n- Type: Privately Held\n- Headquarters: Scottsdale, United States\n- Founded Year: 2010\n- Homepage: saintholdings.com\n- Status: active\n- Aliases: saint holdings, saint holdings, llc.\n- LinkedIn: linkedin.com/company/saintholdings\n- Linkedin Followers: 523 (Yearly: +1.2%)\n- Emails: info@saintholdings.com\n- Phone: +1 480 751 2900\n\n## Workforce\n- Employees: 3 (1-10 employees)\n- Key Executives:\n  - Jackob",
+        "title": "Saint Holdings",
+        "url": "https://linkedin.com/company/saintholdings"
+      },
+      {
+        "author": "Saint Holdings",
+        "publishedDate": "2023-02-02T00:00:00.000Z",
+        "snippet": "# We are pleased to announce that Nikola’s new battery manufacturing plant for its electric vehicles will be moving to Inland Port AZ in Coolidge, Arizona beginning in Q3 2023. | Saint Holdings · LinkedIn · 2023-02-02\n\n**Saint Holdings**: Saint Holdings has 1-10 employees, founded in 2010. Headquartered in Scottsdale, Arizona, United States.\n\n---\n\nWe are pleased to announce that Nikola’s new battery manufacturing plant for its electric vehicles will be moving to Inland Port AZ in Coolidge, Arizona beginning in Q3 2023.\n\nCheck out the following article to learn more about this exciting development: https://lnkd.in/g9uedzSi\n\n![We are pleased to announce that Nikola’s new battery manufacturing plant for its electric vehicles will be moving to Inland Port AZ in Coolidge, Arizona beginning in Q",
+        "title": "We are pleased to announce that Nikola’s new battery manufacturing plant for its electric vehicles will be moving to Inland Port AZ in Coolidge, Arizona beginning in Q3 2023. | Saint Holdings",
+        "url": "https://www.linkedin.com/posts/saintholdings_we-are-pleased-to-announce-that-nikolas-activity-7026971596313550848-riee"
+      },
+      {
+        "author": "Callan Smith",
+        "publishedDate": "2019-07-09T18:31:55.000Z",
+        "snippet": "Saint Holdings finalizes purchase in one of Arizona's biggest private land buys - Rose Law Group\n\nJackob Andersen, president and CEO of Saint Holdings / Provided by Saint Holdings\n\nDisclosure: Rose Law Group represents Saint Holdings\n\nBy Corina Vanek | Phoenix Business Journal\n\nParcel is final piece of much larger sale\n\nSaint Holdings LLC, the Scottsdale real estate firm behind some of Pinal County’s largest land deals, finalized buying 5,650 acres in Coolidge that was owned by the city of Mesa — a deal first agreed upon eight years ago.\n\nSaint Holdings and Mesa officials agreed to the sale in 2011 and completed due diligence in 2013, said Jackob Andersen, president and CEO of Saint Holdings. The 5,650 acres was the final piece in a larger sale totaling 11,400 acres the firm bought from th",
+        "title": "Saint Holdings finalizes purchase in one of Arizona's ...",
+        "url": "https://www.roselawgroup.com/saint-holdings-finalizes-purchase-in-one-of-arizonas-biggest-private-land-buys/"
+      },
+      {
+        "author": "Saint Holdings",
+        "publishedDate": "2026-03-24T00:00:00.000Z",
+        "snippet": "# Get an inside look at how strategic land development is shaping one of Arizona’s fastest-growing economic regions with Jackob Andersen, President and CEO of Saint Holdings. | Saint Holdings · LinkedIn · 2026-03-24\n\n**Saint Holdings**: Saint Holdings has 1-10 employees, founded in 2010. Headquartered in Scottsdale, Arizona, United States.\n\n---\n\nGet an inside look at how strategic land development is shaping one of Arizona’s fastest-growing economic regions with [Jackob Andersen](https://linkedin.com/in/jackob-andersen-2a7642b6), President and CEO of Saint Holdings.\n\nIn this episode, Jackob shares his perspective on Saint Holdings’ work in Pinal County, including infrastructure-ready industrial parks in Coolidge and Casa Grande, and creating long-term employment and investment opportunitie",
+        "title": "Get an inside look at how strategic land development is shaping one of Arizona’s fastest-growing economic regions with Jackob Andersen, President and CEO of Saint Holdings. | Saint Holdings",
+        "url": "https://www.linkedin.com/posts/saintholdings_get-an-inside-look-at-how-strategic-land-activity-7442230155923673088-c0ap"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/234fs9js3ps",
+            "properties": {
+              "educationHistory": [],
+              "firstName": "Jackob",
+              "lastName": "Andersen",
+              "location": "Scottsdale, Arizona, United States",
+              "name": "Jackob Andersen",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/x17bm590n79",
+                    "name": "Saint Holdings"
+                  },
+                  "dates": {
+                    "from": "2005-01-01",
+                    "to": null
+                  },
+                  "location": "Scottsdale, Arizona",
+                  "title": "President CEO"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/4k7kdhfbs5s",
+                    "name": "Pinal Partnership - Uniting the vision for Pinal County"
+                  },
+                  "dates": {
+                    "from": "2013-01-01",
+                    "to": null
+                  },
+                  "location": "Pinal County",
+                  "title": "Vice Chairman"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "ARIZONA@WORK Pinal County"
+                  },
+                  "dates": {
+                    "from": "2017-01-01",
+                    "to": null
+                  },
+                  "location": "Pinal County",
+                  "title": "Board Of Directors"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/btvmm1m7gln",
+                    "name": "Pinal County"
+                  },
+                  "dates": {
+                    "from": "2013-01-01",
+                    "to": null
+                  },
+                  "location": "Pinal County",
+                  "title": "Economic Development Advisory Committee"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/75sm6r56msy",
+                    "name": "Greater Phoenix Economic Council"
+                  },
+                  "dates": {
+                    "from": "2009-01-01",
+                    "to": null
+                  },
+                  "location": "Phoenix, Arizona Area",
+                  "title": "Member"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Arizona Association of Economic Development"
+                  },
+                  "dates": {
+                    "from": "2016-01-01",
+                    "to": null
+                  },
+                  "location": null,
+                  "title": "Member"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "City of Coolidge Eco Advisory Committee"
+                  },
+                  "dates": {
+                    "from": "2012-01-01",
+                    "to": null
+                  },
+                  "location": "Coolidge, AZ",
+                  "title": "Advisory Committee Member"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "City of Casa Grande Economic Development Advisory Committee"
+                  },
+                  "dates": {
+                    "from": "2009-01-01",
+                    "to": null
+                  },
+                  "location": "Casa Grande, AZ",
+                  "title": "Advisory Committee Member"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-06-12T00:00:00.000Z",
+        "snippet": "# Jackob Andersen\n\nPresident / CEO Saint Holdings, LLC\n\nScottsdale, Arizona, United States (US)\n\n500 connections • 2,464 followers\n\n## About\n\nJackob Andersen oversees real estate development assets in excess of ¼ of a billion US dollars in the areas of industrial, commercial, retail, residential and renewable energy. Specialties include acquisition, finance, land use planning, zoning, entitlement, government affairs, infrastructure, construction, real estate management, water resources/rights and Arizona Agribusiness. Well known for his ability to create smart, quality growth projects, Andersen works hand-in-hand with community and business leaders and government agencies as evidenced by his successes in attracting high-profile companies such as Lucid Motors, Nikola Motor Company, and Trac",
+        "title": "Jackob Andersen",
+        "url": "https://www.linkedin.com/in/jackob-andersen-2a7642b6"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "snippet": "Cardon Commercial, LLC · 4819 N 72nd Way, Scottsdale, AZ 85251\n\nArizona Corporation Registration\n\n# Cardon Commercial, LLC\n\n## 4819 N 72nd Way, Scottsdale, AZ 85251\n\n## Overview\n\nCARDON COMMERCIAL, LLC (Entity #L16172479) is a DOMESTIC L.L.C. business in Scottsdale, Arizona registered with the Corporations Division of the Arizona Corporation Commission (ACC). The business entity was formed on July 28, 2010, incorporated on December 6, 2010. The current entity status is (). The type of the business is . The registered business location is at 4819 N 72nd Way, Scottsdale, AZ 85251. The registered agent of the business is NATHAN CARDON. The agent office address is 4819 N 72nd Way, Scottsdale, AZ 85251. The officers of the entity include Jack Cardon (Member), Nathan Cardon (Member).\n\n### Busine",
+        "title": "Cardon Commercial, LLC · 4819 N 72nd Way, Scottsdale, AZ 85251",
+        "url": "https://opengovus.com/arizona-corporation/L16172479"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/ycqv0k1m86g",
+            "properties": {
+              "educationHistory": [
+                {
+                  "dates": {
+                    "from": "1994",
+                    "to": "1999"
+                  },
+                  "degree": "BIS, PSYCHOLOGY",
+                  "institution": {
+                    "id": "https://exa.ai/library/organization/c56ctlhxrr3",
+                    "name": "Arizona State University"
+                  }
+                }
+              ],
+              "firstName": "Nathan",
+              "lastName": "Cardon",
+              "location": "Scottsdale, Arizona, United States",
+              "name": "Nathan Cardon",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Cardon Commercial"
+                  },
+                  "dates": {
+                    "from": "2010-02-01",
+                    "to": null
+                  },
+                  "location": "Phoenix, Arizona Area",
+                  "title": "Founding Partner"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Camelback Real Estate Investments"
+                  },
+                  "dates": {
+                    "from": "2005-12-01",
+                    "to": null
+                  },
+                  "location": "Phoenix, Arizona Area",
+                  "title": "Managing Director"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/7czcd142d16",
+                    "name": "KW Commercial"
+                  },
+                  "dates": {
+                    "from": "2009-01-01",
+                    "to": "2010-01-01"
+                  },
+                  "location": "Phoenix, Arizona Area",
+                  "title": "Senior Vice President"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/4k81gd52chf",
+                    "name": "Coldwell Banker Commercial"
+                  },
+                  "dates": {
+                    "from": "2002-01-01",
+                    "to": "2005-01-01"
+                  },
+                  "location": "Phoenix, Arizona Area",
+                  "title": "Vice President"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "AzCaL Real Estate Investment Corporation"
+                  },
+                  "dates": {
+                    "from": "1999-01-01",
+                    "to": "2001-01-01"
+                  },
+                  "location": "Scottsdale, Arizona",
+                  "title": "Investment Advisor"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-08-09T01:35:44.000Z",
+        "snippet": "# Nathan Cardon\n\nFounding Partner, Cardon Commercial\n\nScottsdale, Arizona, United States (US)\n\n500 connections • 892 followers\n\n## About\n\nMr. Cardon is the Founding Partner and Principal with Cardon Commercial. Specializing in the development and sale of Shopping Centers, Retail Investments, Multifamily, and Office/Medical properties throughout the United States, with a focal point on the Southwest and West Coast markets. Along with representing his company’s own personal developments and investments, Mr. Cardon also represents Buyers, Sellers, Landlords and Tenants. With over 30 years of experience, Mr. Cardon has an outstanding track record of achieving superior results for his clients. He has been awarded with multiple accolades for both sales and civic duties. Additionally, Mr. Cardon'",
+        "title": "Nathan Cardon - Founding Partner, Cardon Commercial | LinkedIn",
+        "url": "https://www.linkedin.com/in/nathan-cardon-2999754"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/0bd7jhq3ry3",
+            "properties": {
+              "description": "Cardon Development Group specializes in imaginative partnerships that enable local enrichment through transformative real estate developments.",
+              "financials": {
+                "fundingLatestRound": null,
+                "fundingTotal": null,
+                "revenueAnnual": 26219473
+              },
+              "foundedYear": 2017,
+              "headquarters": {
+                "address": "2701 E CAMELBACK RD, Phoenix, Arizona 85016, us",
+                "city": "Phoenix",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "CARDON GLOBAL, LLC",
+              "research": null,
+              "webTraffic": {
+                "avgDurationSeconds": 0,
+                "countryRank": null,
+                "history": [
+                  {
+                    "dateFrom": "2025-11",
+                    "dateTo": "2025-11",
+                    "value": 920
+                  },
+                  {
+                    "dateFrom": "2025-12",
+                    "dateTo": "2025-12",
+                    "value": 409
+                  },
+                  {
+                    "dateFrom": "2026-04",
+                    "dateTo": "2026-04",
+                    "value": 441
+                  },
+                  {
+                    "dateFrom": "2026-04",
+                    "dateTo": "2026-04",
+                    "value": 219
+                  },
+                  {
+                    "dateFrom": "2026-05",
+                    "dateTo": "2026-05",
+                    "value": 523
+                  },
+                  {
+                    "dateFrom": "2026-06",
+                    "dateTo": "2026-06",
+                    "value": 1283
+                  }
+                ],
+                "visitsMonthly": 1283
+              },
+              "workforce": {
+                "total": 1
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "snippet": "Cardon Development Group\n\n# THE POWER OF P3\n\nAn Industry-Leading Real Estate Developer Specializing in Private-Public Partnerships\n\nSCROLL TO LEARN MORE\n\n### CDG: Turning visions into full expressions\n\nSince 2002, our mission has been to serve as a visionary and entrepreneurial master-developer committed to productive partnerships that result in extraordinary projects that enrich and foster public good. Our rich history reflects our unique position as trendsetters, innovators and shapers of the markets we serve.\n\n---\n\nWILLISTON BASIN INTERNATIONAL AIRPORT (XWA)\n\n---\n\n---\n\n### OUR STORY\n\nFounded in 2002 by Don Cardon, Cardon Development Group is an industry leading, fully-integrated commercial, multi-family housing and retail development group known for breathing life into seemingly impossi",
+        "title": "Cardon Development Group",
+        "url": "https://www.cardondevelopment.com/"
+      },
+      {
+        "snippet": "About — Cardon Development Group\n\n# A PIONEER IN PRIVATE-PUBLIC PARTNERSHIPS\n\nReady Our Story\n\nSCROLL TO LEARN MORE\n\nCardon Development Group (CDG) is a fully integrated commercial, multi-family housing and retail development group founded in 2002 by Don Cardon.\n\nAs one of the most capable and creative developers in the industry, CDG takes on imaginative private-public partnerships (P3s) that enable local enrichment through transformative, highly energized real estate developments.\n\nBy masterfully uniting the ingenuity of the private sector with the resources of public enterprise, CDG is able to breathe life into seemingly impossible projects. In realizing large-scale developments throughout the United States, we create quality benefits and long-lasting impact to all who use them.\n\nFew fir",
+        "title": "About — Cardon Development Group",
+        "url": "https://www.cardondevelopment.com/about"
+      },
+      {
+        "snippet": "Cardon Global — Cardon Development Group\n\nOUR PARENT COMPANY\n\n### OUR WORK REVEALS WHO WE ARE.\n\nCardon Global is a real estate developer, with extensive expertise in the development of commercial and residential properties. We're proud to offer capital investment services, such as equity capital investment services and real estate financial investing. Cardon Global can provide financing for a wide range of real estate development projects, as well as project financing and other financing services in the field of real estate.\n\nThe genesis of Cardon Global stems from Cardon Development Group (CDG), a residential and retail development company founded by Don Cardon in 2002. During the past 20 years, CDG has developed a wide array of public-private projects, many of which have won awards of ex",
+        "title": "Cardon Global — Cardon Development Group",
+        "url": "https://www.cardondevelopment.com/cardonglobal"
+      },
+      {
+        "snippet": "Don Cardon — Cardon Development Group\n\n## Don CARDON\n\nFounder/CEO, Cardon Development Group\n\n#### Experience & Bio\n\nDon Cardon, Founder and CEO of CDG, drives the vision, project initiation, public outreach, and capital structure - including public debt and equity—for all CDG projects. He is known for his disruptive approach of forging private-public partnerships, known as P3’s, to enable developments that for a variety of reasons have failed to be realized. Understanding the unique pathways required to not only envision what ‘could be,’ but more importantly how to actually see them come to reality, is what sets CDG apart. Whether it is the advancement of affordable housing projects, scaled mixed-use projects, the development of retail, hospitality or economic development initiatives, Don ",
+        "title": "Don Cardon — Cardon Development Group",
+        "url": "https://www.cardondevelopment.com/don-cardon"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/1yzb25dc1j6",
+            "properties": {
+              "educationHistory": [],
+              "firstName": "Adam",
+              "lastName": "Lewis",
+              "location": "Buckeye, Arizona, United States",
+              "name": "Adam Lewis",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/mtmr901gp1z",
+                    "name": "AIRE - Arizona International Real Estate"
+                  },
+                  "dates": {
+                    "from": "2026-01-01",
+                    "to": null
+                  },
+                  "location": "Greater Phoenix Area",
+                  "title": "Founder & Managing Commercial Advisor"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Ironheart Commercial Real Estate"
+                  },
+                  "dates": {
+                    "from": "2025-12-01",
+                    "to": null
+                  },
+                  "location": "Greater Phoenix Area",
+                  "title": "Managing Commercial Advisor"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/t11nmfvrd6v",
+                    "name": "MHG Commercial Real Estate"
+                  },
+                  "dates": {
+                    "from": "2022-01-01",
+                    "to": "2026-03-01"
+                  },
+                  "location": "Arizona, United States",
+                  "title": "Commercial Realtor and West Valley Division Lead"
+                },
+                {
+                  "company": null,
+                  "dates": {
+                    "from": "2018-01-01",
+                    "to": "2022-01-01"
+                  },
+                  "location": "Arizona, United States",
+                  "title": "Real Estate Investor Residential Redevelopment"
+                },
+                {
+                  "company": null,
+                  "dates": {
+                    "from": "2015-01-01",
+                    "to": "2018-01-01"
+                  },
+                  "location": "Arizona, United States",
+                  "title": "Operations & Logistics Local Goods Distribution"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-08-06T00:00:00.000Z",
+        "snippet": "# Adam Lewis\n\nFounder @ Ironheart Commercial | Helping Investors & Business Owners Acquire, Lease, and Sell Commercial Property Across All Asset Classes in the Phoenix West Valley\n\nBuckeye, Arizona, United States (US)\n\n151 connections • 153 followers\n\n## About\n\nI have always believed that commercial real estate is about more than just square footage; it is about the people we serve and the communities we build. This conviction is precisely why I founded Ironheart Commercial. As an entrepreneur myself, I understand the inherent risks and rewards of growing a business. I built this firm to mirror my own core values: a relentless work ethic, a quick wit, and a deep appreciation for genuine connection. We are a firm grounded in the West Valley and driven by a sincere desire to see our clients ",
+        "title": "Adam Lewis",
+        "url": "https://www.linkedin.com/in/adam-lewis-cre"
+      },
+      {
+        "author": "Adam Lewis",
+        "publishedDate": "2026-04-07T00:00:00.000Z",
+        "snippet": "West Valley Shift Accelerates with Buckeye Employment Corridor | Adam Lewis posted on the topic | LinkedIn\n\nAgree & Join LinkedIn\n\nBy clicking Continue to join or sign in, you agree to LinkedIn’s User Agreement, Privacy Policy, and Cookie Policy.\n\n# West Valley Shift Accelerates with Buckeye Employment Corridor\n\nFounder @ Ironheart Commercial | Helping Investors & Business Owners Acquire, Lease, and Sell Commercial Property Across All Asset Classes in the Phoenix West Valley\n\n3mo\n\nEdited\n\nThe Phoenix West Valley is no longer a speculative bet—it is a structural powerhouse. While many are still making decisions based on last year’s data, the \"West Valley Shift\" is accelerating. If you are looking to acquire, sell, or lease commercial property, here is why this corridor should be at the top ",
+        "title": "Post by Adam Lewis",
+        "url": "https://www.linkedin.com/posts/adam-lewis-cre_westvalleycre-ironheartcommercial-phoenixrealestate-activity-7447279562004234240-BoRs"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/1c6rdcgmry6",
+            "properties": {
+              "educationHistory": [],
+              "firstName": "Talon",
+              "lastName": "Lewis",
+              "location": "Greater Phoenix Area",
+              "name": "Talon Lewis",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Ironheart Commercial"
+                  },
+                  "dates": {
+                    "from": "2026-01-01",
+                    "to": null
+                  },
+                  "location": "Phoenix, Arizona, United States",
+                  "title": "Commercial Real Estate Agent"
+                },
+                {
+                  "company": {
+                    "id": "https://exa.ai/library/organization/04c0gzbpwf6",
+                    "name": "My Home Group"
+                  },
+                  "dates": {
+                    "from": "2024-10-01",
+                    "to": "2026-01-01"
+                  },
+                  "location": "Phoenix, Arizona, United States",
+                  "title": "Commercial Real Estate Agent"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-06-15T00:00:00.000Z",
+        "snippet": "# Talon Lewis\n\nCommercial Real Estate Agent @ Ironheart Commercial | Commercial Real Estate, Land Specialist\n\nGreater Phoenix Area (US)\n\n133 connections • 134 followers\n\n## About\n\nCurrently supporting and managing commercial real estate transactions at My Home Group, with a focus on leasing office spaces, industrial warehouses, and land parcels. Their work is underpinned by expertise in market analysis, contract negotiation, and a commitment to staying informed on local market trends. Collaborating with clients and stakeholders, they provide strategic guidance to facilitate successful transactions. By leveraging market knowledge and fostering strong communication, they aim to deliver tailored solutions that align with client goals and organizational priorities.\n\nTotal Experience: 1 year an",
+        "title": "Talon Lewis",
+        "url": "https://www.linkedin.com/in/talon-lewis-commercialre"
+      },
+      {
+        "author": "Ironheart Demolition and Hauling +",
+        "snippet": "Ironheart Demolition and Hauling +\n\n# Building with Strength and Precision\n\n# Building with Strength and Precision\n\nIronheart Demolition and Hauling +\n# Building with Strength and Precision\nBuilding with Strength and PrecisionBuilding with Strength and PrecisionBuilding with Strength and Precision\n# Building with Strength and Precision\nBuilding with Strength and PrecisionBuilding with Strength and PrecisionBuilding with Strength and Precision\n## Contact Us\n#### Drop us a line!\nName\nEmail\\*\nSign up for our email list for updates, promotions, and more.\nSend\nThis site is protected by reCAPTCHA and the Google [Privacy Policy](https://policies.google.com/privacy) and [Terms of Service](https://policies.google.com/terms) apply.\nCopyright © 2025 Ironheart Demolition and Hauling + - All Rights Res",
+        "title": "Ironheart Demolition and Hauling +",
+        "url": "https://ironheartconstruction.com/"
+      },
+      {
+        "snippet": "-- Arizona Contractor | Iron Sight Construction Co | Buckeye\n\ntop of page\n\nIron Sight Construction Co. is a General Contractor specializing in commercial construction management.\n\nOur focus is client satisfaction from concept to completion.\n\n## CONTACT US\n\n###### CALL\n\n1-623-521-7646\n\n###### EMAIL\n\nAmartinez@ironsightconstruction.com\n\n###### FOLLOW\n\nbottom of page",
+        "title": "Arizona Contractor | Iron Sight Construction Co | Buckeye",
+        "url": "https://www.ironsightconstruction.com/home"
+      },
+      {
+        "snippet": "Ironheart Industries LLC - Commercial Maintenance Services\n\n## Home\n\n#### BUILDINGS, PARKING LOTS, FLEETS, & MORE\n\n## About Us\n\nWith over 20 years experience in building and parking lot pressure washing, soft washing and parking lot striping, we're more than equipped to help keep your property looking fresh and clean. In addition to that, we also offer concrete sealing and the installation of custom catalytic converter shields.\n\n## Catalytic Converter Shields\n\n### Anti-Theft Devices\n\nCatalytic converter theft has risen dramatically in the past few years. The larger the converter, the higher its rare metal content and so the more value it has on the scrap market. Commercial vehicles have some of the largest on the road.\n\nIn addition, most commercial vehicles sit off the ground high enough t",
+        "title": "Ironheart Industries LLC - Commercial Maintenance Services",
+        "url": "https://ironheartindustries.com/"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "author": "AZRE",
+        "publishedDate": "2008-07-01T00:00:00.000Z",
+        "snippet": "Mixed-Use: Camelback Crossing - AZ|RE Magazine\n\n 2008-07-01T08:00:45-07:00 \n\nAZRE\n\n# Mixed-Use: Camelback Crossing \n\n### CAMELBACK CROSSING\n\nDeveloper: CenterCore Development Group General contractor: TBD Architect: Robert Kubicek Architects Location: NEC 19th Ave. & Camelback Road, Phoenix Size: 15,000 SF Broker: Phoenix Commercial Advisors\n\nCamelback Crossing is a $6 million redevelopment project occurring along the light rail. Construction will begin 3Q08, and has a December completion date for this year.",
+        "title": "Mixed-Use: Camelback Crossing - AZ|RE Magazine",
+        "url": "https://azbigmedia.com/real-estate/mixed-use/camelback-crossing/"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/shgx354yy59",
+            "properties": {
+              "educationHistory": [
+                {
+                  "dates": {
+                    "from": "1985",
+                    "to": "1990"
+                  },
+                  "degree": null,
+                  "institution": {
+                    "id": "https://exa.ai/library/organization/c56ctlhxrr3",
+                    "name": "Arizona State University"
+                  }
+                }
+              ],
+              "firstName": "Scott",
+              "lastName": "Goodman",
+              "location": "Phoenix, Arizona, United States",
+              "name": "Scott Goodman",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": null,
+                    "name": "CenterCore Development Group"
+                  },
+                  "dates": {
+                    "from": "2007-01-01",
+                    "to": null
+                  },
+                  "location": null,
+                  "title": "Owner"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-06-22T00:00:00.000Z",
+        "snippet": "# Scott Goodman\n\nOwner, CenterCore Development Group\n\nPhoenix, Arizona, United States (US)\n\n220 connections • 220 followers\n\n## About\n\nCurrent Projects: NW Corner 19th Ave & Camelback- Redevelopment/New Retail Shops fronting the new Light Rail Station, with a 400 car Park & Ride directly across the street. Developing New Retail Shops within the Gateway Pavilions Power Center @ NW Corner of 99th Ave & McDowell. Specialties: Shopping Center Development & Investment\n\nTotal Experience: 19 years and 7 months\n\n## Experience\n\n### Owner - CenterCore Development Group (Current)\n\nJan 2007 - Present (19 years and 7 months)\n\nAcquisition, development and redevelopment of shopping centers in the Southwestern United States.\n\nDepartment: General Management • Level: Owner\n\n## Education\n\n### [Arizona State ",
+        "title": "Scott Goodman",
+        "url": "https://www.linkedin.com/in/scottgoodmanaz"
+      },
+      {
+        "snippet": "Centercore Development Group Lic Llc1 - Camelback East, Phoenix, Arizona 85018-7246 (14542786) | CitySquares\n\n# Centercore Development Group Lic Llc1\n\n- Contact\n- About\n\nClaim Rate & Review\n\nArizona > Phoenix> Camelback East> Real Estate, Moving & Storage> Real Estate - Development> Centercore Development Group Lic Llc1\n\n(602) 956-2800\n\n2999 N 44th St, Phoenix, Arizona, 85018-7246\n\n## About us\n\nNeighborhood: Camelback East\n\n## Reviews\n\n---\n\nNo reviews yet. Be the first to write a review!\n\nRate & Review\n\n## Is this your business?\n\n## Featured businesses\n\nThe Brooks Companies\n\n2410 East Osborn Road, Phoenix, Arizona, 85016\n\n(480) 951-1515\n\nKB Home Santolina at South Mountain\n\n3408 W Pollack St, Phoenix, Arizona, 85009\n\n(480) 758-3000\n\nKB Home Dobbins Manor Traditions\n\nW. Dobbins Rd. And S. 2",
+        "title": "Centercore Development Group Lic Llc1 - Camelback East, Phoenix, Arizona 85018-7246 (14542786) | CitySquares",
+        "url": "https://citysquares.com/b/centercore-development-group-lic-llc1-14542786"
+      },
+      {
+        "author": "Exa",
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/wbpb0rrq21x",
+            "properties": {
+              "description": "CenterCore Properties is a real estate private equity firm focused on niche real estate sectors in emerging markets to generate strong/growing cash yields with tax efficiency. We combine an entrepreneurial approach with institutional discipline to achieve superior risk-adjusted results over a long-term investment horizon.",
+              "financials": null,
+              "foundedYear": null,
+              "headquarters": {
+                "address": "1569 Sherman Ave, Evanston, Illinois 60201, US",
+                "city": "Evanston",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "CenterCore Properties, LLC",
+              "research": null,
+              "webTraffic": {
+                "avgDurationSeconds": 0,
+                "countryRank": null,
+                "history": [
+                  {
+                    "dateFrom": "2026-03",
+                    "dateTo": "2026-03",
+                    "value": 54
+                  },
+                  {
+                    "dateFrom": "2026-04",
+                    "dateTo": "2026-04",
+                    "value": 187
+                  },
+                  {
+                    "dateFrom": "2026-04",
+                    "dateTo": "2026-04",
+                    "value": 187
+                  },
+                  {
+                    "dateFrom": "2026-05",
+                    "dateTo": "2026-05",
+                    "value": 356
+                  },
+                  {
+                    "dateFrom": "2026-05",
+                    "dateTo": "2026-05",
+                    "value": 356
+                  },
+                  {
+                    "dateFrom": "2026-06",
+                    "dateTo": "2026-06",
+                    "value": 483
+                  }
+                ],
+                "visitsMonthly": 483
+              },
+              "workforce": {
+                "total": 2
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-06-27T00:00:00.000Z",
+        "snippet": "# CenterCore Properties, LLC\n\nCenterCore Properties, LLC is a Leasing Non-residential Real Estate company. CenterCore Properties is a real estate private equity firm focused on niche real estate sectors in emerging markets to generate strong/growing cash yields with tax efficiency. CenterCore Properties, LLC employs 2 people. Headquartered in Evanston, Illinois, United States.\n\n## About\n\nCenterCore Properties is a real estate private equity firm focused on niche real estate sectors in emerging markets to generate strong/growing cash yields with tax efficiency. We combine an entrepreneurial approach with institutional discipline to achieve superior risk-adjusted results over a long-term investment horizon.\n\n## Company Details\n- Industry: Leasing Non-residential Real Estate\n- Type: Privately",
+        "title": "centercore properties, llc",
+        "url": "https://linkedin.com/company/centercore-properties"
+      },
+      {
+        "publishedDate": "2021-06-28T00:00:00.000Z",
+        "snippet": "The CenterCore Difference\n\n## The CenterCore Difference\n\nCenterCore Properties leverages its partners’ deep real estate experience, combined with an entrepreneurial, yet disciplined, approach and niche focus to drive premium risk-adjusted investment returns for our investors.\n\n– Experience: CenterCore is led by Robert S. Duncan, a veteran commercial real estate senior executive who brings a depth and breadth of experience and perspective gained from more than 35 years in the industry. CenterCore’s partner and market partner team collectively bring over 100 years of commercial real estate experience.\n\n– Entrepreneurial Approach, Institutional Quality: CenterCore combines an institutional/REIT discipline to mitigate risks with an entrepreneurial approach to creatively and nimbly source/struc",
+        "title": "The CenterCore Difference",
+        "url": "https://centercoreproperties.com/the-centercore-difference/"
+      },
+      {
+        "author": "Core Construction Group LLC",
+        "snippet": "Core Construction Group LLC | Phoenix Remodeling & Construction\n\nPhoenix construction and remodeling\n\n# Built close to the work, managed close to the owner.\n\nCore Construction Group LLC handles construction, remodeling, maintenance, and facility projects under $100,000 across the Phoenix metro area with veteran-owned discipline, owner-direct management, and no subcontracting.\n\nRequest an estimate Call (602) 123-4567 (+16021234567)\n\nDifferent by design\n\n## Not a pass-through general contractor.\n\nWe keep project control close, communicate directly, and focus on practical scopes that improve homes, rentals, commercial spaces, and facilities without unnecessary layers.\n\n100kand under project focus\n\n0subcontracting model\n\n1owner-direct point of management\n\nAZPhoenix metro service area\n\nServices",
+        "title": "Core Construction Group LLC | Phoenix Remodeling & Construction",
+        "url": "https://coreconstructiongroupaz.com/"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "snippet": "---\ndescription: Sam Sprague is a Principal at Aurbis Development. Sam Sprague has 42 years of experience. Sam Sprague is skilled in Investors, Shopping Centers, Investment Properties, Construction Management, Real Estate Transactions, Real Estate, Real Estate Development, Marketing, Entitlements, Construction,\ntitle: Sam Sprague - Topline\nimage: https://media.licdn.com/dms/image/C5603AQF2io_dwBbPig/profile-displayphoto-shrink_200_200/0/1555720858999?e=2147483647&v=beta&t=P8mOMwpRkiWGv4D94wxvmVNJJUXcMt_1cHKfuAo6MnY\n---\n\n \n\n![image](https://topline.com/assets/next-hire/section-shape-01e3fd97.png) \n\n![](https://topline.com/assets/black-star-44782369.svg) \n\n## Unlock Sam Sprague's Topline Rate & Full Report \n\nEnter Your Email To Unlock Our Full Research Report Including The Topline Hourly Rat",
+        "title": "Topline | Sam Sprague - Topline",
+        "url": "https://topline.com/people/sam-sprague-142490482"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/y7clx9ncpbt",
+            "properties": {
+              "description": "100% compliant, technology-enabled, energy-efficient workspaces designed to grow with your business\n\nAurbis creates elegant, dynamic workspaces for contemporary businesses. \n\nAurbis is filling the gap between premium and shared office spaces. Whether it’s a private office for your specialised firm, or a co-working space for your start-up, we can create a solution that sees your business thrive, wherever you are.\n\nThat’s because we plan, design, and execute energy-efficient, technology-driven premium workspaces that can be customised to your business’ needs. \n\nWhatever stage of growth you’re in, whether you’re in India or Australia, we offer transparent and flexible office space solutions to businesses of all sizes. With flexible occupancy options and top-of-the-line amenities, we can help your business scale new heights.",
+              "financials": null,
+              "foundedYear": 2018,
+              "headquarters": {
+                "address": "Outer Ring Road, Devarabisanahalli, Aurbis Business Parks Pvt Ltd, Bangalore, Karnataka 560103, IN",
+                "city": "Bangalore",
+                "country": "India",
+                "postalCode": null
+              },
+              "name": "Aurbis Business Parks",
+              "research": null,
+              "webTraffic": {
+                "avgDurationSeconds": 44,
+                "countryRank": 373652,
+                "history": [
+                  {
+                    "dateFrom": "2026-03",
+                    "dateTo": "2026-03",
+                    "value": 2932
+                  },
+                  {
+                    "dateFrom": "2026-04",
+                    "dateTo": "2026-04",
+                    "value": 4454
+                  },
+                  {
+                    "dateFrom": "2026-04",
+                    "dateTo": "2026-04",
+                    "value": 3801
+                  },
+                  {
+                    "dateFrom": "2026-05",
+                    "dateTo": "2026-05",
+                    "value": 3158
+                  },
+                  {
+                    "dateFrom": "2026-05",
+                    "dateTo": "2026-05",
+                    "value": 3158
+                  },
+                  {
+                    "dateFrom": "2026-06",
+                    "dateTo": "2026-06",
+                    "value": 2366
+                  }
+                ],
+                "visitsMonthly": 2366
+              },
+              "workforce": {
+                "total": 16
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-05-14T11:41:40.000Z",
+        "snippet": "Managed Office Space in India | Enterprise Workspaces | Aurbis\n\n# Managed Office Space Built for Enterprise Growth in India\n\nFrom fully managed office space to customised enterprise workspace solutions, every workspace is built around your growth.\n\nKnow More\n\n## Managed Workspaces Designed for the Enterprise of Tomorrow\n\nYour workspace should do more than house your team. It should support performance, enhance employee experience, simplify operations, and give your business room to grow.\n\nAurbis creates premium managed office spaces in India for organisations that need more than a conventional office lease. Our workspaces combine modern design, enterprise-ready infrastructure, smart building systems, sustainability-led operations, and end-to-end workspace management.\n\nWhether you are expan",
+        "title": "Aurbis Business Parks",
+        "url": "https://aurbis.com/"
+      },
+      {
+        "snippet": "Aurbis — India's Premium Managed Office Space Provider\n\n# Redefining the Future of Managed Office Spaces in India\n\nAurbis is redefining the future of work through technology-led, sustainable managed office spaces for Fortune 500s, GCCs, corporate teams, and fast-scaling enterprises.\n\nUnlike traditional coworking providers, Aurbis delivers customizable, turnkey office solutions tailored to each enterprise’s operational, cultural, technology, compliance, and security needs. For businesses seeking managed office space in India, Aurbis combines premium locations, intelligent office systems, sustainable design, and seamless workplace operations.\n\n## About Aurbis\n\nAurbis is a premium managed office space provider in India focused on creating spaces where businesses and people thrive.\n\nOur worksp",
+        "title": "About – aurbis",
+        "url": "https://aurbis.com/about/"
+      },
+      {
+        "snippet": "Aurbis Metro Partners, LLC · 7802 E Gray Rd, Ste 600, Scottsdale, AZ 85260\n\n# Aurbis Metro Partners, LLC\n\n## 7802 E Gray Rd, Ste 600, Scottsdale, AZ 85260\n\n## Overview\n\nAURBIS METRO PARTNERS, LLC (Entity #L18831770) is a DOMESTIC L.L.C. business in Scottsdale, Arizona registered with the Corporations Division of the Arizona Corporation Commission (ACC). The business entity was formed on October 30, 2013, incorporated on November 27, 2013. The current entity status is (). The type of the business is . The registered business location is at 7802 E Gray Rd, Ste 600, Scottsdale, AZ 85260. The registered agent of the business is VALERIE V TODOROVICH. The agent office address is 5045 N 12th St, Ste 110, Phoenix, AZ 85014. The officers of the entity include Aurbis Ventures LLC (Member), Big Slick",
+        "title": "Aurbis Metro Partners, LLC · 7802 E Gray Rd, Ste 600, Scottsdale, AZ 85260",
+        "url": "https://opengovus.com/arizona-corporation/L18831770"
+      },
+      {
+        "snippet": "Schedule a Visit\nFill up the form and our team will get back to you within 24 hours.\n![](https://aurbis.com/wp-content/themes/aurbis/assets/img/home/close.svg)\nInvalid First Name.\nInvalid First Name.\nInvalid Email Address.\nInvalid Phone Number.\n###### What are you interested in?\nEnterpriseCoworkingSomething Else\nEnquire Now\n## Thank you\nWe have successfully received your application.\nYou will be hearing from us soon!\n![](https://aurbis.com/wp-content/themes/aurbis/assets/img/home/logo.svg)\n# Go Beyond Traditional Officeswith Smart, Flexible, andEfficient Workspaces\nEdge Certified, Grade A buildings with a dedicated Mobile App to help you focus on what matters\n[Virtual Tour](https://www.watchitvirtually.com/wp-content/uploads/VirtualTours/AurbisGVT/index.htm)\n![](https://aurbis.com/wp-conte",
+        "title": "Go Beyond Traditional Offices   with Smart,                   Flexible, and  Efficient Workspaces",
+        "url": "https://aurbis.com/?x=702391192121"
+      },
+      {
+        "snippet": "Aurbis Business Parks Pvt. Ltd. - Real Estate Services & Commercial Real Estate Service from Bengaluru\n[IndiaMART](https://www.indiamart.com/)\n[Get Best Price](https://my.indiamart.com/blgen/postbl?modid=IMHOME)\nShopping\nLead Manager\nBuyLeads\nProducts\nSell\nHelp\nMessages\nX\n# [Aurbis Business Parks Pvt. Ltd.](javascript:void(0);)\nBengaluru, Karnataka\nGST - 29AAPCA0762R1ZV\n5 yrs\nView Mobile Number\n* [Home](javascript:void(0);)\n* [Products & Services](services.html)\n* [Real Estate Services](services.html#24727014933)\n* [Real Estate Consulting Service](services.html#24727050691)\n* [Commercial Real Estate Service](services.html#24727050748)\n* [About Us](#aboutus)\n* [Contact Us](enquiry.html)\nContact Supplier\n# [Aurbis Business Parks Pvt. Ltd.](javascript:void(0);)\nBengaluru, Karnataka\nGST - 29AA",
+        "title": "Aurbis Business Parks Pvt. Ltd.",
+        "url": "https://www.indiamart.com/aurbis-business-parks-pvt-ltd/"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/14dj576p3ff",
+            "properties": {
+              "description": "Sedona Resorts and its affiliate, Sedona Resorts International, undertake the management and development of quality Hotels, Resorts, Spas and Club amenities.",
+              "financials": {
+                "fundingLatestRound": null,
+                "fundingTotal": null,
+                "revenueAnnual": 31120051
+              },
+              "foundedYear": null,
+              "headquarters": {
+                "address": "480 KING CARTER DR, Irvington, Virginia 22480, us",
+                "city": "Irvington",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "Resort Hotel Investors: Sedona Resorts",
+              "research": null,
+              "webTraffic": {
+                "avgDurationSeconds": 0,
+                "countryRank": 0,
+                "history": [
+                  {
+                    "dateFrom": "2024-10",
+                    "dateTo": "2024-10",
+                    "value": 848
+                  },
+                  {
+                    "dateFrom": "2024-12",
+                    "dateTo": "2024-12",
+                    "value": 1100
+                  },
+                  {
+                    "dateFrom": "2025-03",
+                    "dateTo": "2025-03",
+                    "value": 0
+                  },
+                  {
+                    "dateFrom": "2025-04",
+                    "dateTo": "2025-04",
+                    "value": 0
+                  },
+                  {
+                    "dateFrom": "2025-05",
+                    "dateTo": "2025-05",
+                    "value": 0
+                  },
+                  {
+                    "dateFrom": "2025-06",
+                    "dateTo": "2025-06",
+                    "value": 0
+                  }
+                ],
+                "visitsMonthly": 0
+              },
+              "workforce": {
+                "total": 1
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "snippet": "# Resort Hotel Investors: Sedona Resorts\n\nResort Hotel Investors: Sedona Resorts is a Real Estate company. Sedona Resorts is a premier hotel management company that offers development and acquisition services for the hospitality industry. They specialize in hotel asset management, development services, brand management, and hotel consulting. They have hotels and resorts from around the world and have employed the services of this hospitality management company located in virginia. Resort Hotel Investors: Sedona Resorts employs 1 person and has an annual revenue of $31.1M. Headquartered in Irvington, Virginia, United States, with an office in Sedona.\n\n## About\n\nSedona Resorts and its affiliate, Sedona Resorts International, undertake the management and development of quality Hotels, Resorts",
+        "title": "Resort Hotel Investors: Sedona Resorts",
+        "url": "https://linkedin.com/company/resort-hotel-investors-sedona-resorts"
+      },
+      {
+        "snippet": "www.Sedona-resorts.com - Resort Hotel Investors\n\n \n\n# Sedona-resorts.com\n\nSedona-resorts is ranked 5,078,629 in the United States. 'Resort Hotel Investors: Sedona Resorts Sedona Arizona AZ hospitality asset interim management timeshare strategic planning conceptualization..'\n\n5,078,629 Rank in United States\n\n-- Worldwide Rank\n\n| Monthly pages viewed | < 300 | |\n| --- | --- | --- |\n| Monthly visits | < 300 | |\n| Value per visitor | $1.40 | |\n| Estimated worth | $733.78 | |\n| External links | 13 | |\n| Number of pages | 60 | |\n\n Last Updated: 04/16/2018 . Estimated data, read disclaimer.\n\n# www.Sedona-resorts.com\n\nTopics: Enchantment Resort, The Tides Inn, Sedona, Hotel Marketing, and Cendyn.\n\nAge: It went live on June 3rd 1999, making it over 18 years, 10 months old.\n\n- Links out \n- cendyn.c",
+        "title": "www.Sedona-resorts.com - Resort Hotel Investors",
+        "url": "http://urlm.co/www.sedona-resorts.com"
+      },
+      {
+        "snippet": "SEDONA CLUBS & RESORTS INTERNATIONAL PTE LTD (199408496G) - RESORT MARKETING & MANAGEMENT - Singapore Company\n\n# SEDONA CLUBS & RESORTS INTERNATIONAL PTE LTD (199408496G)\n\nSEDONA CLUBS & RESORTS INTERNATIONAL PTE LTD is a Singapore Private Company Limited by Shares. The company was incorporated on 21 Nov 1994, which is 31.8 years ago. The address of the Business's registered office is 1 HARBOURFRONT AVENUE, #18-01, KEPPEL BAY TOWER, Singapore 098632. The Business current operating status is Struck Off. The Business's principal activity is RESORT MARKETING & MANAGEMENT. The Business's secondary activity is RESORT MARKETING & MANAGEMENT. The company's paid-up capital is SGD 2. It was named as SEDONA CLUB AND RESORT INTERNATIONAL. And it is also known as BAYSVILLE PROPERTIES. The company UEN ",
+        "title": "SEDONA CLUBS & RESORTS INTERNATIONAL PTE LTD (199408496G) - RESORT MARKETING & MANAGEMENT - Singapore Company",
+        "url": "https://www.companies.sg/business/199408496G/SEDONA-CLUBS-RESORTS-INTERNATIONAL-PTE-LTD"
+      },
+      {
+        "author": "E",
+        "snippet": "Sedona Resorts Management Inc Customer Service: Phone, Address, Working Hours, E-Mail & More\n\nHealth\n\nCivil Services\n\n \n\n# Sedona Resorts Management Inc Customer Service\n\n Searching for Sedona Resorts Management Inc customer service? Here you will find complete information about Sedona Resorts Management Inc customer service, including phone numbers, office addresses, emails, online support, faxes, working hours and more information in the form of reviews and comments from Sedona Resorts Management Inc users. \n\n## Complete Customer Service Information:\n\n| Categories | Services, Resort, Resort |\n| --- | --- |\n| Address | 22 E Church St, Kilmarnock, VA 22482, United States |\n| Phone | 8044368001 |\n| WEB | sedona-resorts.com |\n| Rating | 5 |\n| Opening hours | Sunday Monday Tuesday Wednesday T",
+        "title": "Sedona Resorts Management Inc Customer Service: Phone, Address, Working Hours, E-Mail & More",
+        "url": "https://rescue1realty.com/sedona-resorts-management-inc-1052858"
+      },
+      {
+        "author": "S",
+        "snippet": "Sedona Resorts Customer Service: Phone, Address, Working Hours, E-Mail & More\n\n# Sedona Resorts Customer Service\n\nSearching for Sedona Resorts customer service? Here you will find complete information about Sedona Resorts customer service, including phone numbers, office addresses, emails, online support, faxes, working hours and more information in the form of reviews and comments from Sedona Resorts users.\n\n## Complete Customer Service Information:\n\n| Sunday |\n| --- |\n| Monday |\n| Tuesday |\n| Wednesday |\n| Thursday |\n| Friday |\n| Saturday |\n\n| Categories | Services, Resort, Travel agency |\n| --- | --- |\n| Address | 3410 Alexander Cir NE, Atlanta, GA 30326, United States |\n| Phone | +1 678-974-7270 |\n| WEB | sedona-resorts.com |\n| Rating | 5 |\n| Opening hours | |\n\n## Frequently Asked Ques",
+        "title": "Sedona Resorts Customer Service: Phone, Address, Working Hours, E-Mail & More",
+        "url": "https://rescue1realty.com/sedona-resorts-254529"
+      },
+      {
+        "snippet": "Google Rated 4.7/5 3k+ Happy Customers • Live Reservation Specialists • 100,000+ Hotels Worldwide • Secure Booking \n\n# Vacation Resorts International brand hotels in Sedona, Arizona\n\nFind the best deals for Sedona Vacation Resorts International\n\nBook Online or Call +1-888-385-6609\n\nCheck in & out date \n\nRooms & guests \n\nRooms \n\n Add room\n\nEnter Reset\n\nSearch hotels CLOSE\n\nContinents North America United States of America Arizona Sedona (and vicinity) Sedona Vacation Resorts International\n\n### About Vacation Resorts International Sedona\n\nVacation Resorts International (VRI) is a management and marketing services to hospitality establishments such as condominiums and resorts. The company’s headquarters is located in Laguna Hills, California, although their management has operations across ma",
+        "title": "",
+        "url": "https://www.reservations.com/hotels/sedona-az/brands/vacation-resorts-international"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "snippet": "Kevin Roos, CCIM - TotalCommercial.com\n\n# Kevin Roos, CCIM\n\n#### Roos Commercial\n\n \n\n 8222 N. 75th Street Scottsdale, Arizona 85258 USA \n\n| Email | kevin@roosrealtypartners.com |\n| --- | --- |\n| Office Phone | (602) 510-8499 |\n| Designations | CCIM |",
+        "title": "Kevin Roos, CCIM - TotalCommercial.com",
+        "url": "https://totalcommercial.com/agents/1822?territory=1"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/nhw0nx7015t",
+            "properties": {
+              "educationHistory": [
+                {
+                  "dates": {
+                    "from": "1977",
+                    "to": "1981"
+                  },
+                  "degree": "BS, Business - Marketing",
+                  "institution": {
+                    "id": "https://exa.ai/library/organization/c56ctlhxrr3",
+                    "name": "Arizona State University"
+                  }
+                },
+                {
+                  "dates": {
+                    "from": "2005",
+                    "to": "2005"
+                  },
+                  "degree": null,
+                  "institution": {
+                    "id": null,
+                    "name": "CCIM"
+                  }
+                }
+              ],
+              "firstName": "Kevin",
+              "lastName": "Roos",
+              "location": "Scottsdale, Arizona, United States",
+              "name": "Kevin Roos",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Roos Realty Partners"
+                  },
+                  "dates": {
+                    "from": "2014-01-01",
+                    "to": null
+                  },
+                  "location": "SCOTTSDALE",
+                  "title": "Owner"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Univest Development Company"
+                  },
+                  "dates": {
+                    "from": "2007-01-01",
+                    "to": "2017-01-01"
+                  },
+                  "location": null,
+                  "title": "Partner"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Roos Commercial"
+                  },
+                  "dates": {
+                    "from": "2004-01-01",
+                    "to": "2014-01-01"
+                  },
+                  "location": null,
+                  "title": "Owner"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-08-05T19:24:08.000Z",
+        "snippet": "# Kevin Roos\n\nOwner at Roos Realty Partners\n\nScottsdale, Arizona, United States (US)\n\n283 connections • 286 followers\n\n## About\n\nOwner and Designated Broker of Roos Realty Partners llc, a commercial real estate brokerage providing sales, leasing, and, property management services to the Phoenix Metro market. Specialties: Leasing, Sales, Property Management\n\nTotal Experience: 22 years and 7 months\n\n## Experience\n\n### Owner - Roos Realty Partners (Current)\n\nJan 2014 - Present (12 years and 7 months) in SCOTTSDALE\n\nDepartment: General Management • Level: Owner\n\n### Partner - Univest Development Company\n\nJan 2007 - Jan 2017 (10 years)\n\nDepartment: General Management • Level: Partner\n\n### Owner - Roos Commercial\n\nJan 2004 - Jan 2014 (10 years)\n\nDepartment: General Management • Level: Owner\n\n## ",
+        "title": "Kevin Roos - Owner at Roos Realty Partners | LinkedIn",
+        "url": "https://www.linkedin.com/in/kevin-roos-8846b519"
+      },
+      {
+        "snippet": "7622 Third LLC · 8222 N 75th St, Scottsdale, AZ 85258\n\nArizona Corporation Registrations\n\n# 7622 Third LLC\n\n## 8222 N 75th St, Scottsdale, AZ 85258\n\n## Overview\n\n7622 Third LLC is business registered with Arizona Corporation Commission (ACC), Corporations Division. The entity number is L17426335. The formed date is May 22, 2012. The business address is 8222 N 75th St, Scottsdale, AZ 85258.\n\n| Entity ID | L17426335 |\n| --- | --- |\n| Entity Name | 7622 THIRD LLC |\n| Business Address | 8222 N 75th StScottsdaleAZ 85258 |\n| Business County | MARICOPA |\n| Amendment Publication Exception Code | N |\n| Formation Date | 2012-02-27 |\n| Approval Date | 2012-04-05 |\n| Corporation Type Code | W |\n| Entity Type | DOMESTIC L.L.C. |\n| Domicile State | AZ |\n| Life Period | PP |\n| Incorporation Date | 2012-0",
+        "title": "7622 Third LLC · 8222 N 75th St, Scottsdale, AZ 85258",
+        "url": "https://opencorpdata.com/us-az/L17426335"
+      },
+      {
+        "snippet": "Kevin Roos • State of Arizona 巛\n\n# Kevin Roos\n\n### « KEVIN ROOS RESULTS »\n\nKR\n\n## Kevin Roos\n\n480-471-8389\n\n- Scottsdale • \n- 5701 E Windsor Ave, Scottsdale, AZ 85257-1036\n\nKR\n\n## Kevin Roos\n\n602-510-8499\n\n- Scottsdale • \n- 8222 N 75th St, Scottsdale, AZ 85258-2778\n\n### Travel Video\n\n###### IN THE NEWS\n\n20-year-old woman revived after trapped underwater at Sabino Canyon\n\n###### EXPLORE\n\n###### FAMOUS PLACES",
+        "title": "Kevin Roos • State of Arizona 巛",
+        "url": "https://arizona.guide/people/Roos/Kevin"
+      },
+      {
+        "snippet": "Ross Brown Partners — Commercial Real Estate\n\n# Commercial real estate, handled by partners.\n\nRoss Brown Partners is a boutique brokerage that provides its clients with an institutional level of service across industrial, retail, office, IOS, land and investment properties throughout the Valley.\n\n## About the firm.\n\nFounded in 1991, Ross Brown Partners provides Brokerage and Property Management services to Tenants, Landlords, Investors, Developers, and Owner Users across multiple asset classes in the Phoenix metro.\n\nBoutique by design, and grounded in honesty, integrity, and deep Valley expertise.\n\n0\n\nYear founded\n\n0+\n\nCommercial real estate transactions\n\n$0B+\n\nTotal transaction dollar amount\n\n0M+\n\nSquare feet actively managed across the Valley\n\nWhat we do\n\n## Four services. One partner.\n\n",
+        "title": "Ross Brown Partners — Commercial Real Estate",
+        "url": "https://www.rossbrown.com/"
+      },
+      {
+        "snippet": "About Us — Ross Brown Partners\n\nAbout Ross Brown Partners\n\n# Boutique by design.Built for results.\n\nRoss Brown Partners is a commercial real estate services company founded in 1991 and operating in the Phoenix metro area. We specialize in office, industrial, IOS, land, and investment properties, offering a full menu of brokerage, management, and consulting services.\n\nMeet the team →\n\nOur mission\n\n## Your success is our mission.\n\nBy blending your company vision with over 35 years of commercial real estate experience, we deliver solutions-based strategies and transactions to ensure your success. We know the market, we know the process, and we do what we say.\n\nWe keep it boutique, and powerful, so our clients receive personalized service grounded in honesty, integrity, and industry expertise.",
+        "title": "About Us — Ross Brown Partners",
+        "url": "https://www.rossbrown.com/about"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/3x5p3dzpy15",
+            "properties": {
+              "educationHistory": [
+                {
+                  "dates": {
+                    "from": "1981",
+                    "to": "1985"
+                  },
+                  "degree": null,
+                  "institution": {
+                    "id": null,
+                    "name": "Lake Havasu High School"
+                  }
+                },
+                {
+                  "dates": {
+                    "from": "1998",
+                    "to": "2003"
+                  },
+                  "degree": "Architecture",
+                  "institution": {
+                    "id": "https://exa.ai/library/organization/c56ctlhxrr3",
+                    "name": "Arizona State University"
+                  }
+                },
+                {
+                  "dates": {
+                    "from": "2001",
+                    "to": "2002"
+                  },
+                  "degree": "None, Architecture",
+                  "institution": {
+                    "id": "https://exa.ai/library/organization/b9st7vrzk2q",
+                    "name": "Harvard University Graduate School of Design"
+                  }
+                }
+              ],
+              "firstName": "Gary",
+              "lastName": "Striyle",
+              "location": "Phoenix, Arizona, United States",
+              "name": "Gary Striyle",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Architecture Cubed"
+                  },
+                  "dates": {
+                    "from": "2001-01-01",
+                    "to": null
+                  },
+                  "location": null,
+                  "title": "CEO"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Clark & Associates Architects"
+                  },
+                  "dates": {
+                    "from": "2000-02-01",
+                    "to": "2002-10-01"
+                  },
+                  "location": null,
+                  "title": "Design Director"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Clark & Associates Architects"
+                  },
+                  "dates": {
+                    "from": "1996-06-01",
+                    "to": "1999-05-01"
+                  },
+                  "location": null,
+                  "title": "Project Manager"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "AAD"
+                  },
+                  "dates": {
+                    "from": "1999-10-01",
+                    "to": "2000-09-01"
+                  },
+                  "location": null,
+                  "title": "Designer"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Striyle Studio"
+                  },
+                  "dates": {
+                    "from": "1991-01-01",
+                    "to": "1996-01-01"
+                  },
+                  "location": null,
+                  "title": "Owner"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "Mohave Commuity College"
+                  },
+                  "dates": {
+                    "from": "1994-01-01",
+                    "to": "1995-12-01"
+                  },
+                  "location": null,
+                  "title": "Department Head - Architectural Drafting"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "DynaTek Design"
+                  },
+                  "dates": {
+                    "from": "1989-01-01",
+                    "to": "1991-01-01"
+                  },
+                  "location": null,
+                  "title": "Draftsman"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-07-16T00:00:00.000Z",
+        "snippet": "# Gary Striyle\n\nCEO, Architecture Cubed\n\nPhoenix, Arizona, United States (US)\n\n169 connections • 172 followers\n\n## About\n\nGary heads up a full service Architectural & Engineering firm that services the Western United States and also has projects abroad. Arizona, California, and Nevada account for 95% of projects with other projects scattered from Cabo San Lucas, Mexico to Dubi. Our goal is to build quality, long term relationships with our clients. Gary also owns an animal hospital with his wife in Phoenix Arizona. Specialties: Tenant Improvements, restaurant design, multi-family and general commercial projects constitute the largest sector of experiance.\n\nTotal Experience: 36 years and 8 months\n\n## Experience\n\n### CEO - Architecture Cubed (Current)\n\nJan 2001 - Present (25 years and 6 mont",
+        "title": "Gary Striyle",
+        "url": "https://www.linkedin.com/in/gary-striyle-9352a610"
+      },
+      {
+        "snippet": "Architecture Cubed\n\n# Architecture Cubed \n\nPrivately Funded\n\nDocuments Available\n\n Saving Project... \n\n### You’ve reached the free-view limit.\n\nThousands of companies are added every week - don't miss out. Explore the best project and company lead options for your business and subscribe today.\n\n Published March 25, 2026 at 11:32 PM \n\nUpdated March 25, 2026\n\n### Contacts\n\n3\n\n| Contact | Phone | Email Address |\n| --- | --- | --- |\n| Gary Striyle | (602) | @archcubed.com |\n| Jim Liesen | (602) | @ |\n| Gerald Shingleton | (602) | @ |\n\n 1 \n\n 2 \n\n 3 \n\n 4 \n\n 5 \n\n ... \n\n 5 \n\n#### Location\n\n \n\n 2425 E Camelback Rd, Phoenix, AZ \n\n#### Details\n\nCompany Type\n\n Architect \n\nActive Projects\n\nCurrently Bidding\n\nProject Value\n\n#### Active Projects\n\n### No active project was found\n\n### No Information to Dis",
+        "title": "Architecture Cubed",
+        "url": "https://projects.constructconnect.com/companies/6125-architecture-cubed&find_loc=AZ-85015"
+      },
+      {
+        "snippet": "Architecture Cubed | Highly Recommended Architects in Phoenix AZ\n\nback to architects\n\n## A Highly recommended Architect in Phoenix AZ\n\n### Address\n\n1 E Camelback Rd Phoenix, AZ 85012\n\n### Contact\n\ntel (602) 265-3988 ((602)265-3988)\n\n## Click to load\n\n## Map\n\n### About\n\nArchitecture Cubed is a highly recommended Architect in Phoenix AZ with 47 years of experience and 3 recommendations from clients in the community.\n\n### I've been doing this for 47 years\n\n### Hours of Operation\n\nMon - Fri 8:00AM - 5:00PMSat - Sun ClosedHolidays Closed\n\n## People also searched for:\n\n### Phoenix Architect\n\n### Best Phoenix Architects\n\n### Top Architects in Phoenix AZ\n\n### Architecture Cubed Phoenix AZ\n\n© 2026 Qdexx",
+        "title": "Architecture Cubed | Highly Recommended Architects in Phoenix AZ",
+        "url": "https://www.qdexx.com/US/AZ/Phoenix/Architects/US-AZ-Phoenix-Architects-Architecture-Cubed/"
+      },
+      {
+        "snippet": "Architecture Cubed, 1 E Camelback Rd Ste 550, Phoenix, AZ 85012, US - MapQuest\n\nAdvertisement\n\nAdvertisement\n\n# Architecture Cubed\n\nClosed\n\nSave Call (+16022653988) Web Share\n\nDirections\n\nAdvertisement\n\nAdvertisement\n\n1 E Camelback Rd Ste 550, Phoenix, AZ, 85012\n\nHours\n\nClosed\n\nAdvertisement\n\n## Also at this address\n\nAdvertisement\n\nAdvertisement\n\nSee a problem?Let us know\n\nPartial Data by Foursquare.\n\nSee more",
+        "title": "Architecture Cubed, 1 E Camelback Rd Ste 550, Phoenix, AZ 85012, US - MapQuest",
+        "url": "https://www.mapquest.com/us/arizona/architecture-cubed-345667007"
+      },
+      {
+        "author": "usabuildadvisor.com",
+        "snippet": "Reviews for Architecture Cubed, 1 E Camelback Road, Phoenix | usabuildadvisor.com\n\n## Contacts\n\n(602) 265-3988\n\n1 E Camelback Road, Phoenix, Arizona 85012\n\nEdit Business Info\n\nArchitecture Cubed is located in Phoenix, county Arizona. Zip code 85012. If you need to clarify some of the details you can call by phone number (602) 265-3988 or visit website . Architecture Cubed is listed in following categories: Architectural and Building Design Services, . If you have an personal experience with Architecture Cubed please leave feedback.\n\n## Trusted Reviews\n\nArchitecture Cubed can't remove their reviews.\n\nReview Architecture Cubed and share your experiences with our community.\n\n- Finish the project on time?\n- Keep to budget?\n- Deliver expected quality?\n- Professional to deal with?\n- Integrity - ",
+        "title": "Reviews for Architecture Cubed, 1 E Camelback Road, Phoenix | usabuildadvisor.com",
+        "url": "https://phoenix-arizona.usabuildadvisor.com/architecture-cubed.html"
+      },
+      {
+        "snippet": "A\n\n# ARCHITECTURE CUBED INC\n\n111 W FLORENCE BLVD CASA GRANDE, AZ 85122 Get Directions\n\n### Business Info\n\n- Founded 2008\n- Incorporated\n- Annual Revenue $220,000.00\n- Employee Count --\n- Industries Architectural Services\n- Contacts --\n\n### Contact Business\n\nYour Email Address Subject:\n\nMessage Send Message\n\n### Company Summary\n\nArchitecture Cubed Inc is located at 111 W Florence Blvd in Casa Grande and has been in the business of Architectural Services since 2008.\n\nVERIFIED Status: UNVERIFIED\n\nAddress: UNVERIFIED\n\nLAST VERIFIED: --\n\nPhone: UNVERIFIED\n\nPayment Method: UNVERIFIED\n\n### Similar Businesses Nearby\n\n### Competitive Landscape\n\n### Payments Accepted\n\nNO DATA\n\n### Hours\n\n- Sunday --\n- Monday --\n- Tuesday --\n- Wednesday --\n- Thursday --\n- Friday --\n- Saturday --\n\nA\n\nVIEW ADDITIONAL D",
+        "title": "ARCHITECTURE CUBED INC",
+        "url": "https://b1-assets.dandb.com/businessdirectory/architecturecubedinc-casagrande-az-3645215.html"
+      }
+    ],
+    "searchAnswer": null
+  },
+  {
+    "resultPages": [
+      {
+        "author": "Exa",
+        "entities": [
+          {
+            "id": "https://exa.ai/library/organization/800xb1gb4d5",
+            "properties": {
+              "description": null,
+              "financials": {
+                "fundingLatestRound": null,
+                "fundingTotal": null,
+                "revenueAnnual": 8000810
+              },
+              "foundedYear": null,
+              "headquarters": {
+                "address": "14230 S AVE 3 E, YUMA, Arizona 85365, US",
+                "city": "Yuma",
+                "country": "United States",
+                "postalCode": null
+              },
+              "name": "PMB CONSTRUCTION LLC",
+              "research": null,
+              "webTraffic": null,
+              "workforce": {
+                "total": 9
+              }
+            },
+            "type": "company",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-06-29T00:00:00.000Z",
+        "snippet": "# PMB CONSTRUCTION LLC\n\nPMB CONSTRUCTION LLC is a Construction company. Pmbconstruction.com is a company that sells domain names and provides online presence for construction businesses. They offer a 90%+ satisfaction rate from their customers and provide a payment plan for purchasing domains. PMB CONSTRUCTION LLC employs 9 people (+28.6% YoY, +2 people) and has an annual revenue of $8M. Headquartered in Yuma, Arizona, United States.\n\n## Company Details\n- Industry: Construction\n- Headquarters: Yuma, United States\n- Homepage: pmbconstruction.com\n- Status: active\n- Ownership: Private\n- Aliases: pmb construction llc, pmb construction, llc, pmb construction\n- LinkedIn: linkedin.com/company/pmb-construction-llc\n- Linkedin Followers: 6 (Yearly: +50.0%)\n- Phone: 833-878-5115, 1-480-641-0142\n- SIC",
+        "title": "pmb construction llc",
+        "url": "https://linkedin.com/company/pmb-construction-llc"
+      },
+      {
+        "snippet": "PMB CONSTRUCTION LLC - YUMA, AZ - $112,396 in Defense Contracts in 2015 - 14230 S AVE 3E\n\n| See Defense Contracts Won |\n| --- |\n| Defense Contract Totals in 2020 Count:3,603,454 Dollar Amount:$421,753,292,925 |\n\n| Home | | | Contractor Search | | | Data Downloads | | | About | Data Updated Through 2020 |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n\n# PMB CONSTRUCTION LLC 14230 S AVE 3EYUMA, AZ 85365 2015 Government Contracts Awarded to this Contractor/Location Defense Department\n\n| Government Contractor Information |\n| --- |\n| Download the entire list of Defense Contracts for this contractor from 2000 - 2020 To a Spreadsheet or Other File Type |\n| Government Contractor/ Address | PMB CONSTRUCTION LLC 14230 S AVE 3EYUMA, AZ 85365 |\n| Dollar Amount of Defense Contracts Awarded to this ",
+        "title": "PMB CONSTRUCTION LLC - YUMA, AZ  - $112,396 in Defense Contracts in 2015 - 14230 S AVE 3E",
+        "url": "https://www.governmentcontractswon.com/department/defense/p-m-b-construction-llc-796992886.asp?yr=15"
+      },
+      {
+        "snippet": "Pmb Construction LLC - Construction Directory - Construction\n\n# Pmb Construction LLC \n\n Construction Directory Yuma, AZ, 85365 \n\n Call: 14802506755 \n\n \n\n MAKE A CONNECTION Pmb Construction LLC is accepting messages: Send Message \n\n## About \n\n## Pmb Construction LLC\n\nPmb Construction LLC, based in Yuma, Arizona are a company in the US Construction Directory mainly listed under the category of Industrial Building Construction, but also listed under \n\n- Residential Remodelers\n- General Building Contractors\n- Construction of Single-Family Houses\n- Solar Rooms And Additions\n\n## Company Details\n\n## Contact Information\n\nCompany Name\n\nPmb Construction LLC\n\n Visit Website \n\n http://pmbconstruction.com/ \n\n Phone Number \n\n Call: 14802506755 \n\n Location \n\n 14230 S Avenue 3 E Yuma, Arizona, 85365 Unite",
+        "title": "Pmb Construction LLC - Construction Directory - Construction",
+        "url": "https://www.constructiondirectory.us/arizona/yuma/construction-directory/pmb-construction-llc"
+      },
+      {
+        "entities": [
+          {
+            "id": "https://exa.ai/library/person/qvcgyxyv2cy",
+            "properties": {
+              "educationHistory": [
+                {
+                  "dates": null,
+                  "degree": "Associate of Arts (A.A.), Construction Management",
+                  "institution": {
+                    "id": "https://exa.ai/library/organization/pdjqjb9cy0k",
+                    "name": "Pima Community College"
+                  }
+                }
+              ],
+              "firstName": "Paul",
+              "lastName": "Pacheco",
+              "location": "Yuma, Arizona, United States",
+              "name": "Paul Pacheco",
+              "research": null,
+              "workHistory": [
+                {
+                  "company": {
+                    "id": null,
+                    "name": "PMB Construction"
+                  },
+                  "dates": {
+                    "from": "2007-01-01",
+                    "to": null
+                  },
+                  "location": "Yuma",
+                  "title": "President"
+                },
+                {
+                  "company": {
+                    "id": null,
+                    "name": "PMB Constructioin, LLC"
+                  },
+                  "dates": null,
+                  "location": null,
+                  "title": "Managing Member"
+                }
+              ]
+            },
+            "type": "person",
+            "version": 1
+          }
+        ],
+        "publishedDate": "2026-06-12T00:00:00.000Z",
+        "snippet": "# Paul Pacheco\n\nPresident at PMB Construction\n\nYuma, Arizona, United States (US)\n\n132 connections • 132 followers\n\n## About\n\nPresident at PMB Construction\n\nTotal Experience: 19 years and 7 months\n\n## Experience\n\n### President - PMB Construction (Current)\n\nJan 2007 - Present (19 years and 6 months) in Yuma\n\nDepartment: General Management • Level: President/Vice President\n\n### Managing Member - PMB Constructioin, LLC\n\nDepartment: General Management • Level: Manager\n\n## Education\n\n### Associate of Arts (A.A.), Construction Management at [Pima Community College](https://www.linkedin.com/school/pima-community-college)\n\nTucson, Arizona, United States\n\nPima Community College is a higher education institution. Pima Community College is an educational institution offering affordable and accessible ",
+        "title": "Paul Pacheco",
+        "url": "https://www.linkedin.com/in/paul-pacheco-9983b016"
+      },
+      {
+        "snippet": "PMB CONSTRUCTION LLC, Yuma, Arizona, AZ 85365-0000\n\n- Join\n- or\n- Sign In\n\nToggle\n\nContractor Directory> PMB CONSTRUCTION LLC\n\n# PMB CONSTRUCTION LLCYuma, Arizona\n\n(480) 250-6755\n\n14230 S Ave 3e Yuma, AZ 85365-0000\n\nFax:928-750-4539\n\n## Products & Services\n\nGeneral Contractor\n\n### Keywords\n\n- General Contractor\n\n### NAICS Code(s)\n\n236210Industrial Building Construction 236220Commercial and Institutional Building Construction 237110Water and Sewer Line and Related Structures Construction 237120Oil and Gas Pipeline and Related Structures Construction 237130Power and Communication Line and Related Structures Construction 237310Highway, Street, and Bridge Construction 237990Other Heavy and Civil Engineering Construction 238110Poured Concrete Foundation and Structure Contractors 238120Structura",
+        "title": "PMB CONSTRUCTION LLC, Yuma, Arizona, AZ 85365-0000",
+        "url": "https://governmentbidders.com/government-bidders/contractor-5148750-PMB-CONSTRUCTION-LLC.htm"
+      },
+      {
+        "snippet": "PMB Construction LLC, 14230 S Avenue 3 E, Yuma, AZ 85365-4785, US - MapQuest\n\nAdvertisement\n\nAdvertisement\n\n# PMB Construction LLC\n\nOpen\n\nSave Call (+14802506755) Web Share\n\nDirections\n\nAdvertisement\n\nAdvertisement\n\n14230 S Avenue 3 E, Yuma, AZ, 85365-4785\n\nPMB Construction LLC in Yuma specializes in government contracting services, offering bid matching, forecasts, and contract histories for federal, state, and local government projects.\n\nWith a focus on government bids and contracts, PMB Construction LLC assists educational purchasing agencies in securing sealed bids and contract awards.\n\nGenerated from their website's infomation\n\nHours\n\nOpen until 5 pm\n\nAdvertisement\n\n## You might also like\n\n## Also at this address\n\nAdvertisement\n\nAdvertisement\n\nSee a problem?Let us know\n\nUnited States›",
+        "title": "PMB Construction LLC, 14230 S Avenue 3 E, Yuma, AZ 85365-4785, US - MapQuest",
+        "url": "https://www.mapquest.com/us/arizona/pmb-construction-llc-355021669"
+      }
+    ],
+    "searchAnswer": null
+  }
+]

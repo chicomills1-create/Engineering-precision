@@ -1,10 +1,11 @@
 import { ReplitConnectors } from "@replit/connectors-sdk";
 import { openai } from "@workspace/integrations-openai-ai-server";
-import { and, count, eq, gte, isNotNull, isNull, sql } from "drizzle-orm";
+import { and, count, eq, gte, inArray, isNotNull, isNull, ne, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
   outreachMessagesTable,
+  outreachMonthlySendReservationsTable,
   outreachSendReservationsTable,
   outreachSequenceSendClaimsTable,
   outreachSuppressionsTable,
@@ -39,11 +40,28 @@ export function isDefinitiveSendGridRejection(status: number): boolean {
 
 const INITIAL_RAMP_DAILY_LIMIT = 150;
 const INITIAL_RAMP_ACTIVE_DAYS = 3;
+const OUTREACH_MONTHLY_LIMIT = 5000;
+const DUPLICATE_EMAIL_SEQUENCE_STATUSES = [
+  "sending",
+  "needs_review",
+  "sent",
+  "delivered",
+  "bounced",
+  "replied",
+  "unsubscribed",
+] as const;
 
 export class DailySendLimitError extends Error {
   constructor() {
     super("Daily send limit reached");
     this.name = "DailySendLimitError";
+  }
+}
+
+export class MonthlySendLimitError extends Error {
+  constructor() {
+    super("Monthly send limit reached");
+    this.name = "MonthlySendLimitError";
   }
 }
 
@@ -72,6 +90,18 @@ function phoenixDateKey(date = new Date()): string {
   return `${value.year}-${value.month}-${value.day}`;
 }
 
+export function getPhoenixOutreachMonthKey(date = new Date()): string {
+  return phoenixDateKey(date).slice(0, 7);
+}
+
+export function getOutreachMonthlyLimit(): number {
+  return OUTREACH_MONTHLY_LIMIT;
+}
+
+export function isDuplicateEmailSequenceStatus(status: string): boolean {
+  return (DUPLICATE_EMAIL_SEQUENCE_STATUSES as readonly string[]).includes(status);
+}
+
 export function getOutreachDailyLimit(configuredLimit: number | undefined, activeSendDays: number): number {
   const limit = configuredLimit ?? INITIAL_RAMP_DAILY_LIMIT;
   const rampLimit = activeSendDays < INITIAL_RAMP_ACTIVE_DAYS
@@ -84,24 +114,92 @@ export function getLegacyOutreachSentCount(totalSent: number, globallyReservedSe
   return Math.max(0, totalSent - globallyReservedSent);
 }
 
-async function getCampaignActiveSendDays(campaignId: number): Promise<number> {
-  const sentMessages = await db.select({ sentAt: outreachMessagesTable.sentAt })
-    .from(outreachMessagesTable)
-    .where(and(
-      eq(outreachMessagesTable.campaignId, campaignId),
-      isNotNull(outreachMessagesTable.sentAt),
-    ));
-  return new Set(sentMessages.map(({ sentAt }) => phoenixDateKey(sentAt!))).size;
+export function getLegacyOutreachMonthlySentCount(
+  totalSent: number,
+  monthlyReservedSent: number,
+): number {
+  return getLegacyOutreachSentCount(totalSent, monthlyReservedSent);
 }
 
-async function reserveDailySend(message: OutreachMessage, campaign: Campaign | undefined): Promise<number> {
-  const quotaKey = `outreach-global:${phoenixDateKey()}`;
-  const activeSendDays = campaign ? await getCampaignActiveSendDays(campaign.id) : INITIAL_RAMP_ACTIVE_DAYS;
-  const campaignLimit = getOutreachDailyLimit(campaign?.dailyLimit, activeSendDays);
+type OutreachReservationIds = {
+  dailyReservationId: number;
+  monthlyReservationId: number;
+  sequenceClaimId: number;
+};
+
+async function reserveOutreachSend(
+  message: OutreachMessage,
+  campaign: Campaign | undefined,
+  normalizedEmail: string,
+): Promise<OutreachReservationIds> {
+  const dateKey = phoenixDateKey();
+  const monthKey = getPhoenixOutreachMonthKey();
+  const dailyQuotaKey = `outreach-global:${dateKey}`;
+  const monthlyQuotaKey = `outreach-global:${monthKey}`;
   const dayStart = getPhoenixCalendarDayStart();
+  const monthStart = new Date(`${monthKey}-01T07:00:00.000Z`);
   return db.transaction(async (tx) => {
-    await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${quotaKey}))`);
+    await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${normalizedEmail}, 0))`);
+    await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${dailyQuotaKey}))`);
+    await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${monthlyQuotaKey}))`);
+
+    const [lockedProspect] = await tx.select({ contactEmail: prospectsTable.contactEmail })
+      .from(prospectsTable)
+      .where(eq(prospectsTable.id, message.prospectId))
+      .for("update");
+    if ((lockedProspect?.contactEmail?.trim().toLowerCase() || null) !== normalizedEmail) {
+      throw new Error("Contact changed while dispatch was starting; please retry");
+    }
+
+    const duplicateStatuses = DUPLICATE_EMAIL_SEQUENCE_STATUSES.filter(isDuplicateEmailSequenceStatus);
+    const [historicalDuplicate] = await tx.select({ id: outreachMessagesTable.id })
+      .from(outreachMessagesTable)
+      .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+      .where(and(
+        sql`lower(trim(${prospectsTable.contactEmail})) = ${normalizedEmail}`,
+        eq(outreachMessagesTable.sequenceNumber, message.sequenceNumber),
+        ne(outreachMessagesTable.id, message.id),
+        inArray(outreachMessagesTable.status, duplicateStatuses),
+      ))
+      .limit(1);
+    if (historicalDuplicate) {
+      throw new Error("This sequence is already active or was sent to this email address");
+    }
+    const [existingEmailReservation] = await tx.select({
+      id: outreachMonthlySendReservationsTable.id,
+    })
+      .from(outreachMonthlySendReservationsTable)
+      .where(and(
+        eq(outreachMonthlySendReservationsTable.normalizedEmail, normalizedEmail),
+        eq(outreachMonthlySendReservationsTable.sequenceNumber, message.sequenceNumber),
+      ))
+      .limit(1);
+    if (existingEmailReservation) {
+      throw new Error("This sequence is already reserved or was sent to this email address");
+    }
+
+    const [sequenceClaim] = await tx.insert(outreachSequenceSendClaimsTable)
+      .values({
+        messageId: message.id,
+        prospectId: message.prospectId,
+        campaignScope: message.campaignId ? `campaign:${message.campaignId}` : "standalone",
+        sequenceNumber: message.sequenceNumber,
+      })
+      .onConflictDoNothing()
+      .returning({ id: outreachSequenceSendClaimsTable.id });
+    if (!sequenceClaim) {
+      throw new Error("This campaign sequence is already reserved or was sent to this prospect");
+    }
+
     if (campaign) {
+      const sentMessages = await tx.select({ sentAt: outreachMessagesTable.sentAt })
+        .from(outreachMessagesTable)
+        .where(and(
+          eq(outreachMessagesTable.campaignId, campaign.id),
+          isNotNull(outreachMessagesTable.sentAt),
+        ));
+      const activeSendDays = new Set(sentMessages.map(({ sentAt }) => phoenixDateKey(sentAt!))).size;
+      const campaignLimit = getOutreachDailyLimit(campaign.dailyLimit, activeSendDays);
       const [campaignReservations] = await tx.select({ value: count() })
         .from(outreachSendReservationsTable)
         .innerJoin(
@@ -109,7 +207,7 @@ async function reserveDailySend(message: OutreachMessage, campaign: Campaign | u
           eq(outreachSendReservationsTable.messageId, outreachMessagesTable.id),
         )
         .where(and(
-          eq(outreachSendReservationsTable.quotaKey, quotaKey),
+          eq(outreachSendReservationsTable.quotaKey, dailyQuotaKey),
           eq(outreachMessagesTable.campaignId, campaign.id),
         ));
       if ((campaignReservations?.value ?? 0) >= campaignLimit) {
@@ -126,7 +224,7 @@ async function reserveDailySend(message: OutreachMessage, campaign: Campaign | u
           eq(outreachSendReservationsTable.messageId, outreachMessagesTable.id),
         )
         .where(and(
-          eq(outreachSendReservationsTable.quotaKey, quotaKey),
+          eq(outreachSendReservationsTable.quotaKey, dailyQuotaKey),
           gte(outreachMessagesTable.sentAt, dayStart),
         )),
     ]);
@@ -134,14 +232,57 @@ async function reserveDailySend(message: OutreachMessage, campaign: Campaign | u
       alreadySent?.value ?? 0,
       globallyReservedSent?.value ?? 0,
     );
+    let dailyReservationId: number | undefined;
     for (let slot = legacySent + 1; slot <= INITIAL_RAMP_DAILY_LIMIT; slot += 1) {
       const [inserted] = await tx.insert(outreachSendReservationsTable)
-        .values({ messageId: message.id, quotaKey, slot })
+        .values({ messageId: message.id, quotaKey: dailyQuotaKey, slot })
         .onConflictDoNothing()
         .returning({ id: outreachSendReservationsTable.id });
-      if (inserted) return inserted.id;
+      if (inserted) {
+        dailyReservationId = inserted.id;
+        break;
+      }
     }
-    throw new DailySendLimitError();
+    if (!dailyReservationId) throw new DailySendLimitError();
+
+    const [[monthlySent], [monthlyReservedSent]] = await Promise.all([
+      tx.select({ value: count() }).from(outreachMessagesTable)
+        .where(gte(outreachMessagesTable.sentAt, monthStart)),
+      tx.select({ value: count() })
+        .from(outreachMonthlySendReservationsTable)
+        .innerJoin(
+          outreachMessagesTable,
+          eq(outreachMonthlySendReservationsTable.messageId, outreachMessagesTable.id),
+        )
+        .where(and(
+          eq(outreachMonthlySendReservationsTable.quotaKey, monthlyQuotaKey),
+          gte(outreachMessagesTable.sentAt, monthStart),
+        )),
+    ]);
+    const legacyMonthlySent = getLegacyOutreachMonthlySentCount(
+      monthlySent?.value ?? 0,
+      monthlyReservedSent?.value ?? 0,
+    );
+    for (let slot = legacyMonthlySent + 1; slot <= OUTREACH_MONTHLY_LIMIT; slot += 1) {
+      const [inserted] = await tx.insert(outreachMonthlySendReservationsTable)
+        .values({
+          messageId: message.id,
+          normalizedEmail,
+          sequenceNumber: message.sequenceNumber,
+          quotaKey: monthlyQuotaKey,
+          slot,
+        })
+        .onConflictDoNothing()
+        .returning({ id: outreachMonthlySendReservationsTable.id });
+      if (inserted) {
+        return {
+          dailyReservationId,
+          monthlyReservationId: inserted.id,
+          sequenceClaimId: sequenceClaim.id,
+        };
+      }
+    }
+    throw new MonthlySendLimitError();
   });
 }
 
@@ -233,14 +374,7 @@ export async function sendApprovedOutreach(message: OutreachMessage, prospect: P
     : undefined;
   const sendgridSubuser = process.env.SENDGRID_SUBUSER_USERNAME?.trim();
   const providerReconciliationKey = await ensureProviderReconciliationKey(message.id);
-  const sequenceClaimId = await reserveSequenceSend(message);
-  let reservationId: number;
-  try {
-    reservationId = await reserveDailySend(message, currentCampaign);
-  } catch (error) {
-    await db.delete(outreachSequenceSendClaimsTable).where(eq(outreachSequenceSendClaimsTable.id, sequenceClaimId));
-    throw error;
-  }
+  const reservations = await reserveOutreachSend(message, currentCampaign, email);
   let response: Awaited<ReturnType<ReplitConnectors["proxy"]>>;
   try {
     const requestBody = JSON.stringify({
@@ -286,10 +420,14 @@ export async function sendApprovedOutreach(message: OutreachMessage, prospect: P
   }
   if (!response.ok) {
     if (isDefinitiveSendGridRejection(response.status)) {
-      await Promise.all([
-        db.delete(outreachSendReservationsTable).where(eq(outreachSendReservationsTable.id, reservationId)),
-        db.delete(outreachSequenceSendClaimsTable).where(eq(outreachSequenceSendClaimsTable.id, sequenceClaimId)),
-      ]);
+      await db.transaction(async (tx) => {
+        await tx.delete(outreachSendReservationsTable)
+          .where(eq(outreachSendReservationsTable.id, reservations.dailyReservationId));
+        await tx.delete(outreachMonthlySendReservationsTable)
+          .where(eq(outreachMonthlySendReservationsTable.id, reservations.monthlyReservationId));
+        await tx.delete(outreachSequenceSendClaimsTable)
+          .where(eq(outreachSequenceSendClaimsTable.id, reservations.sequenceClaimId));
+      });
       throw new Error(`SendGrid rejected the message with status ${response.status}`);
     }
     throw new Error(`SendGrid dispatch result is unknown after status ${response.status}; message requires reconciliation before retry`);

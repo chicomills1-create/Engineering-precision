@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { afterEach, test } from "node:test";
 import {
+  countPersistedOutreachSend,
+  createGuardedAsyncRun,
   getOutreachAutomationStatus,
   isOutreachAutomationReady,
   isOutreachResearchAutomationReady,
@@ -133,7 +135,7 @@ test("does not trust an unverified dedicated SendGrid key", () => {
   assert.equal(getOutreachAutomationStatus().automationReady, false);
 });
 
-test("accepts a verified event relay on the existing SendGrid account", () => {
+test("does not mistake an event relay for the outbound delivery transport", () => {
   configureProduction({
     SENDGRID_SUBUSER_USERNAME: "",
     SENDGRID_DEDICATED_API_KEY: "",
@@ -141,7 +143,34 @@ test("accepts a verified event relay on the existing SendGrid account", () => {
     SENDGRID_EVENT_RELAY_VERIFIED: "true",
   });
 
-  assert.equal(getOutreachAutomationStatus().sendgridDeliveryPathReady, true);
+  assert.equal(getOutreachAutomationStatus().sendgridDeliveryPathReady, false);
+});
+
+test("counts only sends whose sent row was persisted", () => {
+  assert.equal(countPersistedOutreachSend(4, undefined), 4);
+  assert.equal(countPersistedOutreachSend(4, {} as never), 5);
+});
+
+test("guarded automation runs immediately when invoked and never overlaps", async () => {
+  let calls = 0;
+  let release: (() => void) | undefined;
+  const run = createGuardedAsyncRun(async () => {
+    calls += 1;
+    await new Promise<void>((resolve) => {
+      release = resolve;
+    });
+  });
+
+  run();
+  run();
+  await new Promise<void>((resolve) => setImmediate(resolve));
+  assert.equal(calls, 1);
+  release!();
+  await new Promise<void>((resolve) => setImmediate(resolve));
+  run();
+  await new Promise<void>((resolve) => setImmediate(resolve));
+  assert.equal(calls, 2);
+  release!();
 });
 
 test("arms only when the explicit automation flag is enabled", () => {

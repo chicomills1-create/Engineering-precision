@@ -1,9 +1,10 @@
 import { Router, type IRouter, type Request, type Response } from "express";
-import { and, count, desc, eq, gte, inArray } from "drizzle-orm";
+import { and, count, desc, eq, gte, inArray, lt } from "drizzle-orm";
 import {
   campaignsTable,
   db,
   leadsTable,
+  outreachDeliveryEventsTable,
   outreachMessagesTable,
   outreachResearchRunsTable,
   outreachResearchScheduleRunsTable,
@@ -129,18 +130,59 @@ const researchScheduleJson = (
 router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> => {
   const automationStatus = getOutreachAutomationStatus();
   const start = getPhoenixCalendarDayStart();
-  const [[prospects], [campaigns], [messages], [sentToday], [replies], preparation] = await Promise.all([
+  const end = new Date(start.getTime() + 24 * 60 * 60 * 1000);
+  const todayWindow = and(
+    gte(outreachMessagesTable.scheduledAt, start),
+    lt(outreachMessagesTable.scheduledAt, end),
+  );
+  const [
+    [prospects],
+    [campaigns],
+    [messages],
+    [providerProcessedToday],
+    [deliveredToday],
+    [bouncedToday],
+    [unresolvedToday],
+    [replies],
+    preparation,
+  ] = await Promise.all([
     db.select({ value: count() }).from(prospectsTable), db.select({ value: count() }).from(campaignsTable),
     db.select({ value: count() }).from(outreachMessagesTable),
-    db.select({ value: count() }).from(outreachMessagesTable).where(gte(outreachMessagesTable.sentAt, start)),
+    db.select({ value: count() })
+      .from(outreachDeliveryEventsTable)
+      .innerJoin(
+        outreachMessagesTable,
+        eq(outreachDeliveryEventsTable.outreachMessageId, outreachMessagesTable.id),
+      )
+      .where(and(
+        todayWindow,
+        eq(outreachDeliveryEventsTable.eventType, "processed"),
+      )),
+    db.select({ value: count() }).from(outreachMessagesTable).where(and(
+      todayWindow,
+      eq(outreachMessagesTable.status, "delivered"),
+    )),
+    db.select({ value: count() }).from(outreachMessagesTable).where(and(
+      todayWindow,
+      eq(outreachMessagesTable.status, "bounced"),
+    )),
+    db.select({ value: count() }).from(outreachMessagesTable).where(and(
+      todayWindow,
+      inArray(outreachMessagesTable.status, ["approved", "sending", "failed", "needs_review"]),
+    )),
     db.select({ value: count() }).from(outreachMessagesTable).where(eq(outreachMessagesTable.status, "replied")),
     getNextOutreachPreparationStatus(),
   ]);
+  const processedCount = providerProcessedToday?.value ?? 0;
   res.json(GetOutreachDashboardResponse.parse({
     prospects: prospects?.value ?? 0,
     campaigns: campaigns?.value ?? 0,
     messages: messages?.value ?? 0,
-    sentToday: sentToday?.value ?? 0,
+    sentToday: processedCount,
+    providerProcessedToday: processedCount,
+    deliveredToday: deliveredToday?.value ?? 0,
+    bouncedToday: bouncedToday?.value ?? 0,
+    unresolvedToday: unresolvedToday?.value ?? 0,
     replies: replies?.value ?? 0,
     nextPreparationDate: preparation.targetDate,
     nextPreparationTarget: preparation.targetCount,

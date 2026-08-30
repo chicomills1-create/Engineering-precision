@@ -1,0 +1,14 @@
+{
+  "target": 150,
+  "successful": 150,
+  "attempts": 12,
+  "additionalAccepted": 9,
+  "rejectionReasons": {
+    "domain_mismatch": 1,
+    "no_verified_result": 2
+  },
+  "finderCreditsBefore": 3840,
+  "finderCreditsAfter": 3830,
+  "verifierCreditsBefore": 4942,
+  "verifierCreditsAfter": 4942
+}

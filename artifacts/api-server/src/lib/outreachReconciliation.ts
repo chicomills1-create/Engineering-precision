@@ -4,6 +4,7 @@ import {
   db,
   outreachDeliveryEventsTable,
   outreachMessagesTable,
+  outreachMonthlySendReservationsTable,
   outreachSendReservationsTable,
   outreachSequenceSendClaimsTable,
   prospectsTable,
@@ -286,6 +287,8 @@ async function applyRejectedOutcome(
     await Promise.all([
       tx.delete(outreachSendReservationsTable)
         .where(eq(outreachSendReservationsTable.messageId, message.id)),
+      tx.delete(outreachMonthlySendReservationsTable)
+        .where(eq(outreachMonthlySendReservationsTable.messageId, message.id)),
       tx.delete(outreachSequenceSendClaimsTable)
         .where(eq(outreachSequenceSendClaimsTable.messageId, message.id)),
     ]);

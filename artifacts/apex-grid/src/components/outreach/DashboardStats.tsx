@@ -15,11 +15,11 @@ export function DashboardStats() {
 
   const items = [
     { label: 'Prospects', value: stats.prospects },
-    { label: 'Campaigns', value: stats.campaigns },
-    { label: 'Total Messages', value: stats.messages },
-    { label: 'Sent Today', value: stats.sentToday },
+    { label: 'Processed Today', value: stats.providerProcessedToday },
+    { label: 'Delivered Today', value: stats.deliveredToday },
+    { label: 'Bounced Today', value: stats.bouncedToday },
     { label: 'Ready Tomorrow', value: stats.nextPreparationPrepared },
-    { label: 'Replies', value: stats.replies },
+    { label: 'Unresolved Today', value: stats.unresolvedToday },
   ];
 
   return (
@@ -31,6 +31,21 @@ export function DashboardStats() {
             <p className="font-display text-2xl font-bold" data-testid={`stat-value-${item.label.toLowerCase().replace(' ', '-')}`}>{item.value.toLocaleString()}</p>
           </div>
         ))}
+      </div>
+      <div
+        className={`border px-4 py-3 rounded-[2px] text-sm ${
+          stats.providerProcessedToday === 150 && stats.unresolvedToday === 0
+            ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+            : 'border-amber-500/30 bg-amber-500/10 text-amber-200'
+        }`}
+        data-testid="status-today-outreach-delivery"
+      >
+        <span className="font-medium">
+          SendGrid evidence: {stats.providerProcessedToday} processed today.
+        </span>{' '}
+        <span>
+          {stats.deliveredToday} delivered · {stats.bouncedToday} bounced · {stats.unresolvedToday} unresolved.
+        </span>
       </div>
       <div
         className={`border px-4 py-3 rounded-[2px] text-sm ${

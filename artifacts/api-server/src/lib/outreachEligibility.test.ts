@@ -10,7 +10,14 @@ import {
   getPhoenixCalendarDayStart,
   isOutreachContactExcluded,
 } from "./outreachEligibility";
-import { getLegacyOutreachSentCount, getOutreachDailyLimit } from "./outreach";
+import {
+  getLegacyOutreachMonthlySentCount,
+  getLegacyOutreachSentCount,
+  getOutreachDailyLimit,
+  getOutreachMonthlyLimit,
+  getPhoenixOutreachMonthKey,
+  isDuplicateEmailSequenceStatus,
+} from "./outreach";
 
   const now = new Date("2026-08-28T12:00:00.000Z");
 const eligibleProspect: Prospect = {
@@ -170,6 +177,31 @@ test("legacy same-day sends consume the new global reservation ceiling", () => {
   assert.equal(getLegacyOutreachSentCount(167, 0), 167);
   assert.equal(getLegacyOutreachSentCount(100, 100), 0);
   assert.equal(getLegacyOutreachSentCount(120, 20), 100);
+});
+
+test("monthly outreach quota uses Phoenix calendar months and a hard 5000 ceiling", () => {
+  assert.equal(getPhoenixOutreachMonthKey(new Date("2026-09-01T06:59:59.000Z")), "2026-08");
+  assert.equal(getPhoenixOutreachMonthKey(new Date("2026-09-01T07:00:00.000Z")), "2026-09");
+  assert.equal(getOutreachMonthlyLimit(), 5000);
+  assert.equal(getLegacyOutreachMonthlySentCount(5100, 100), 5000);
+  assert.equal(getLegacyOutreachMonthlySentCount(50, 75), 0);
+});
+
+test("duplicate recipient sequence policy blocks active and post-acceptance states", () => {
+  for (const status of [
+    "sending",
+    "needs_review",
+    "sent",
+    "delivered",
+    "bounced",
+    "replied",
+    "unsubscribed",
+  ]) {
+    assert.equal(isDuplicateEmailSequenceStatus(status), true);
+  }
+  for (const status of ["draft", "approved", "failed"]) {
+    assert.equal(isDuplicateEmailSequenceStatus(status), false);
+  }
 });
 
 const blockedCases: Array<[string, Partial<Prospect>, Partial<OutreachMessage>, Partial<Campaign>, string]> = [

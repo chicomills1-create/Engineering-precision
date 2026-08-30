@@ -127,6 +127,13 @@
       "when": 1788049581246,
       "tag": "0017_overjoyed_magneto",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1788127746463,
+      "tag": "0018_early_krista_starr",
+      "breakpoints": true
     }
   ]
 }

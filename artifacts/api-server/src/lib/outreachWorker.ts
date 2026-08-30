@@ -1,4 +1,4 @@
-import { and, asc, eq, lte, sql } from "drizzle-orm";
+import { and, asc, eq, lte } from "drizzle-orm";
 import {
   campaignsTable,
   db,
@@ -7,7 +7,12 @@ import {
   type OutreachMessage,
 } from "@workspace/db";
 import { logger } from "./logger";
-import { DailySendLimitError, isUnknownSendResultError, sendApprovedOutreach } from "./outreach";
+import {
+  DailySendLimitError,
+  isUnknownSendResultError,
+  MonthlySendLimitError,
+  sendApprovedOutreach,
+} from "./outreach";
 import { getNextPhoenixEightAm } from "./outreachEligibility";
 import {
   isReplyWebhookConfigured,
@@ -59,13 +64,10 @@ export function getOutreachAutomationStatus(): OutreachAutomationStatus {
   const productionConfigReady = hasPublishedProductionUrl();
   const dedicatedAccountReady = Boolean(process.env.SENDGRID_DEDICATED_API_KEY?.trim())
     && process.env.SENDGRID_ISOLATION_VERIFIED === "true";
-  const eventRelayReady = Boolean(process.env.SENDGRID_EVENT_FORWARD_URL?.trim())
-    && process.env.SENDGRID_EVENT_RELAY_VERIFIED === "true";
   const sendgridDeliveryPathReady = Boolean(
     (process.env.SENDGRID_SUBUSER_USERNAME?.trim()
       && process.env.SENDGRID_SUBUSER_VERIFIED === "true")
-    || dedicatedAccountReady
-    || eventRelayReady,
+    || dedicatedAccountReady,
   );
   const deliveryEventsReady = Boolean(process.env.SENDGRID_EVENT_WEBHOOK_PUBLIC_KEY)
     && process.env.SENDGRID_EVENT_PATH_VERIFIED === "true";
@@ -119,38 +121,41 @@ export function getSendFailureStatus(error: unknown): "failed" | "needs_review" 
 }
 
 export async function sendClaimedOutreachMessage(message: OutreachMessage): Promise<OutreachMessage | undefined> {
-  const [candidate] = await db.select({ contactEmail: prospectsTable.contactEmail })
-    .from(prospectsTable)
-    .where(eq(prospectsTable.id, message.prospectId))
-    .limit(1);
-  if (!candidate) throw new Error("Prospect not found");
-  const candidateEmail = candidate.contactEmail?.trim().toLowerCase() || null;
-  return db.transaction(async (tx) => {
-    if (candidateEmail) {
-      await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${candidateEmail}, 0))`);
-    }
-    const [prospect] = await tx.select().from(prospectsTable)
-      .where(eq(prospectsTable.id, message.prospectId))
-      .for("update");
-    if (!prospect) throw new Error("Prospect not found");
-    if ((prospect.contactEmail?.trim().toLowerCase() || null) !== candidateEmail) {
-      throw new Error("Contact changed while dispatch was starting; please retry");
-    }
-    const [campaign] = message.campaignId
-      ? await tx.select().from(campaignsTable).where(eq(campaignsTable.id, message.campaignId))
-      : [];
-    const sent = await sendApprovedOutreach({ ...message, status: "approved" }, prospect, campaign);
-    const [updated] = await tx.update(outreachMessagesTable).set({
-      status: "sent",
-      sentAt: new Date(),
-      providerMessageId: sent.providerMessageId,
-      error: null,
-    }).where(and(
-      eq(outreachMessagesTable.id, message.id),
-      eq(outreachMessagesTable.status, "sending"),
-    )).returning();
-    return updated;
-  });
+  const [prospect] = await db.select().from(prospectsTable)
+    .where(eq(prospectsTable.id, message.prospectId));
+  if (!prospect) throw new Error("Prospect not found");
+  const [campaign] = message.campaignId
+    ? await db.select().from(campaignsTable).where(eq(campaignsTable.id, message.campaignId))
+    : [];
+  const sent = await sendApprovedOutreach({ ...message, status: "approved" }, prospect, campaign);
+  const [updated] = await db.update(outreachMessagesTable).set({
+    status: "sent",
+    sentAt: new Date(),
+    providerMessageId: sent.providerMessageId,
+    error: null,
+  }).where(and(
+    eq(outreachMessagesTable.id, message.id),
+    eq(outreachMessagesTable.status, "sending"),
+  )).returning();
+  return updated;
+}
+
+export function countPersistedOutreachSend(
+  sentCount: number,
+  persisted: OutreachMessage | undefined,
+): number {
+  return persisted ? sentCount + 1 : sentCount;
+}
+
+export function createGuardedAsyncRun(task: () => Promise<void>): () => void {
+  let running = false;
+  return () => {
+    if (running) return;
+    running = true;
+    void task().finally(() => {
+      running = false;
+    });
+  };
 }
 export async function reconcileSendingOutreachMessages(
   now = new Date(),
@@ -176,17 +181,17 @@ export async function processDueOutreachMessages(): Promise<number> {
     const claimed = await claimOutreachMessageForSending(message.id);
     if (!claimed) continue;
     try {
-      await sendClaimedOutreachMessage(claimed);
-      sentCount += 1;
+      const persisted = await sendClaimedOutreachMessage(claimed);
+      sentCount = countPersistedOutreachSend(sentCount, persisted);
     } catch (err) {
       const error = err instanceof Error ? err.message : "Scheduled send failed";
-      if (err instanceof DailySendLimitError) {
+      if (err instanceof DailySendLimitError || err instanceof MonthlySendLimitError) {
         const scheduledAt = getNextPhoenixEightAm();
         await db.update(outreachMessagesTable)
           .set({
             status: "approved",
             scheduledAt,
-            error: `Daily limit reached; deferred to ${scheduledAt.toISOString()}`,
+            error: `${err.message}; deferred to ${scheduledAt.toISOString()}`,
           })
           .where(and(
             eq(outreachMessagesTable.id, claimed.id),
@@ -249,8 +254,8 @@ export function startOutreachWorker(): void {
   }
 
   if (status.automationReady) {
-    const runProductionAutomation = () => {
-      void processDueOutreachMessages()
+    const runProductionAutomation = createGuardedAsyncRun(async () => {
+      await processDueOutreachMessages()
         .then(async (sentCount) => {
           if (sentCount > 0) logger.info({ sentCount }, "Processed scheduled outreach messages");
           const preparation = await prepareNextPhoenixOutreach();
@@ -261,7 +266,8 @@ export function startOutreachWorker(): void {
           }
         })
         .catch((err: unknown) => logger.error({ err }, "Outreach production scheduler failed"));
-    };
+    });
+    runProductionAutomation();
     const sendTimer = setInterval(runProductionAutomation, 60_000);
     sendTimer.unref();
     logger.info("Outreach send scheduler enabled");

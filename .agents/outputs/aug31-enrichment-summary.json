@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2026-08-30T22:29:54.738Z",
+  "target": 150,
+  "attempts": 180,
+  "successful": 141,
+  "rejected": 39,
+  "rejectionReasons": {
+    "no_verified_result": 30,
+    "domain_mismatch": 9
+  },
+  "finderCreditsBefore": 3987,
+  "finderCreditsAfter": 3840,
+  "verifierCreditsBefore": 4942,
+  "verifierCreditsAfter": 4942
+}
