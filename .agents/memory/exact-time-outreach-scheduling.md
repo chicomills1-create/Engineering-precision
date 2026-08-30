@@ -14,3 +14,9 @@ Manual approvals and automatic preparation must allocate from the same date-keye
 **Why:** A preparation-only lock still allows concurrent manual approvals to overfill the next window, and a campaign-scoped quota can exceed the promised account-wide daily ceiling. Mid-day quota-key changes can also reopen capacity unless already-sent messages are counted.
 
 **How to apply:** Route every initial-message approval through the shared window allocator, enforce one global Phoenix-day ceiling at dispatch, and keep campaign limits as an additional constraint rather than the global limit itself.
+
+The approved operating cycle is autonomous: at 8:00 AM America/Phoenix, dispatch the already-approved batch of 150 eligible initial messages without asking for another approval. After that batch is sent or its provider outcome is safely reconciled, prepare a fresh batch of 150 for the following Phoenix day.
+
+**Why:** The user has already approved the original outreach and explicitly wants the same 150-per-day cycle to continue without routine approval prompts. Requiring approval again delays the schedule; retrying an unresolved dispatch without reconciliation risks duplicate emails.
+
+**How to apply:** Treat approval as a standing authorization for the reviewed outreach process, not a one-time click for every daily batch. Keep unresolved or ambiguous provider outcomes blocked until SendGrid reconciliation proves whether each message was accepted, delivered, or safe to retry; never replace an unresolved batch with a new batch or resend it blindly.

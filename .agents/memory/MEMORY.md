@@ -21,7 +21,7 @@
 - [Production outreach seeding](production-outreach-seeding.md) — schema-push databases lack reliable migration journals; seed reviewed batches idempotently behind an explicit production flag.
 - [Unknown outreach sends](unknown-outreach-sends.md) — retain immutable sequence claims for transport errors and ambiguous provider responses; reconcile by stable custom key.
 - [Client outreach exclusions](client-outreach-exclusions.md) — Atmosphere Architects clients Tim Boyle and Mike Hudson must never receive Apex Grid outreach.
-- [Exact-time outreach scheduling](exact-time-outreach-scheduling.md) — an autoscaling web interval is not a durable 8 AM scheduler; use an external scheduled trigger and transactional leases.
+- [Exact-time outreach scheduling](exact-time-outreach-scheduling.md) — send 150 approved messages at 8 AM Phoenix, then prepare the next day's 150; use durable triggers and transactional leases.
 - [Verified outreach library](verified-outreach-library.md) — build an auditable AZ-first, then CA prospect pool; cap daily sends at 150 under a hard 5,000 monthly ceiling.
 - [Free-first outreach research](free-first-outreach-research.md) — use official registries and firm pages before targeted enrichment; never infer emails from patterns.
 - [Outreach stop serialization](outreach-stop-serialization.md) — evidence, suppression, sending, and seeding must share database locks so a stopped contact cannot be revived by a race.
