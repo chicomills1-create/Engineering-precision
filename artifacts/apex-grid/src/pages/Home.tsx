@@ -18,10 +18,10 @@ export default function Home() {
   }, []);
 
   const stats = [
-    { label: "Integrated Divisions", value: "3" },
-    { label: "Typical Quote Turnaround", value: "12-24hr" },
-    { label: "States Licensed", value: "49" },
-    { label: "Initial Review Response", value: "12-24hr" }
+    { label: "States with licensing coverage", value: "49" },
+    { label: "Typical quote turnaround", value: "12–24h" },
+    { label: "Integrated divisions", value: "3" },
+    { label: "PE-led project work", value: "100%" }
   ];
 
   const processes = [
@@ -55,7 +55,7 @@ export default function Home() {
             <div className="flex items-center gap-4 mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
               <div className="w-12 h-[2px] bg-primary"></div>
               <span className="font-mono text-sm tracking-widest text-primary uppercase font-bold">
-                Engineering · Architecture · General Contracting
+                For architects · contractors · developers · owners
               </span>
             </div>
             
@@ -64,8 +64,8 @@ export default function Home() {
               <span className="block text-muted-foreground italic font-medium">Build.</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-foreground/80 max-w-2xl mb-12 leading-relaxed border-l-4 border-primary pl-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both">
-              PE-stamped structural, commercial MEP, civil, and building-assessment engineering from our Arizona headquarters—coordinated with architectural design and PCM construction delivery.
+            <p className="text-xl md:text-2xl text-foreground/80 max-w-2xl mb-8 leading-relaxed border-l-4 border-primary pl-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300 fill-mode-both">
+              Need stamped plans or engineering support to keep a commercial project moving? Apex Grid coordinates structural, MEP, civil, and building-assessment work from one accountable team.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-500 fill-mode-both">
@@ -73,7 +73,7 @@ export default function Home() {
                 href="/submit-project" 
                 className="h-16 px-10 bg-primary text-white font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-3 rounded-[2px] hover:bg-primary/90 transition-all group hover:shadow-[0_0_30px_rgba(184,0,0,0.3)]"
               >
-                Start Your Project
+                Start a Project Review
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 
@@ -83,6 +83,23 @@ export default function Home() {
                 View Portfolio
               </Link>
             </div>
+            <p className="mt-5 text-sm text-white/70 animate-in fade-in duration-700 delay-700 fill-mode-both">
+              Send plans, a scope, or a project question to start the conversation.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Proof strip */}
+      <section className="py-12 bg-card border-y border-border relative z-30" aria-label="Apex Grid proof points">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-border/50">
+            {stats.map((stat, i) => (
+              <div key={i} className="px-4 text-center">
+                <div className="text-3xl md:text-4xl font-display font-bold text-white mb-2">{stat.value}</div>
+                <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -131,20 +148,6 @@ export default function Home() {
                   {division.cta} <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Strip */}
-      <section className="py-12 bg-card border-y border-border relative z-30">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-border/50">
-            {stats.map((stat, i) => (
-              <div key={i} className="px-4 text-center">
-                <div className="text-4xl md:text-5xl font-display font-bold text-white mb-2">{stat.value}</div>
-                <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground">{stat.label}</div>
-              </div>
             ))}
           </div>
         </div>
@@ -206,10 +209,10 @@ export default function Home() {
                   <p className="text-sm text-muted-foreground leading-relaxed">Documents explicitly detailed for stringent municipal review.</p>
                 </div>
                 <div className="bg-primary p-8 border border-primary text-white">
-                  <h3 className="font-display font-bold text-xl mb-3">Guaranteed Value</h3>
-                  <p className="text-sm text-white/80 leading-relaxed mb-6">We will meet or beat any equivalent firm's proposal.</p>
-                  <Link href="/contact" className="text-xs uppercase tracking-widest font-bold flex items-center gap-2 group">
-                    Get a Quote <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <h3 className="font-display font-bold text-xl mb-3">Clear Next Step</h3>
+                  <p className="text-sm text-white/80 leading-relaxed mb-6">Start with the plans, scope, and constraints you already have. We will help define the right review or proposal.</p>
+                  <Link href="/submit-project" className="text-xs uppercase tracking-widest font-bold flex items-center gap-2 group">
+                    Start a Review <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </div>

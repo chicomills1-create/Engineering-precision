@@ -184,7 +184,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
             })}
             <Link
               href="/submit-project"
-              className="h-10 px-6 bg-primary text-white font-semibold text-sm flex items-center justify-center rounded-[2px] hover:bg-primary/90 transition-colors"
+              className="h-10 min-w-[150px] whitespace-nowrap px-5 bg-primary text-white font-semibold text-sm flex items-center justify-center rounded-[2px] hover:bg-primary/90 transition-colors"
             >
               Submit a Project
             </Link>
