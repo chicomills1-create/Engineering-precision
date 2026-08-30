@@ -12,11 +12,11 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-  
+
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
   --color-card-border: hsl(var(--card-border));
-  
+
   --color-popover: hsl(var(--popover));
   --color-popover-foreground: hsl(var(--popover-foreground));
   --color-popover-border: hsl(var(--popover-border));
@@ -112,13 +112,13 @@
 
   --background: 0 0% 2%;
   --foreground: 0 0% 95%;
-  --border: 0 0% 10%;
+  --border: 0 0% 14%; /* slightly lighter border for contrast */
   --card: 0 0% 4%;
   --card-foreground: 0 0% 95%;
-  --card-border: 0 0% 10%;
+  --card-border: 0 0% 14%;
   --popover: 0 0% 4%;
   --popover-foreground: 0 0% 95%;
-  --popover-border: 0 0% 10%;
+  --popover-border: 0 0% 14%;
   
   --primary: 355 78% 48%;
   --primary-foreground: 0 0% 100%;
@@ -126,7 +126,7 @@
   --secondary: 0 0% 8%;
   --secondary-foreground: 0 0% 95%;
   --muted: 0 0% 15%;
-  --muted-foreground: 0 0% 60%;
+  --muted-foreground: 0 0% 65%; /* lighter muted foreground */
   --accent: 355 78% 48%;
   --accent-foreground: 0 0% 100%;
   
@@ -156,6 +156,16 @@
     font-family: var(--app-font-display);
     @apply font-bold tracking-tight text-white;
   }
+
+  /* Global focus states */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:not([tabindex="-1"]):focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
 }
 
 @layer utilities {
@@ -166,5 +176,15 @@
   .bg-grid-primary {
     background-image: linear-gradient(to right, hsl(var(--primary) / 0.15) 1px, transparent 1px),
       linear-gradient(to bottom, hsl(var(--primary) / 0.15) 1px, transparent 1px);
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
