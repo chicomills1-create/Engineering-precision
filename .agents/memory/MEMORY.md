@@ -26,6 +26,7 @@
 - [Verified outreach library](verified-outreach-library.md) — build an auditable AZ-first, then CA prospect pool; cap daily sends at 150 under a hard 5,000 monthly ceiling.
 - [Free-first outreach research](free-first-outreach-research.md) — use official registries and firm pages before targeted enrichment; never infer emails from patterns.
 - [Outreach stop serialization](outreach-stop-serialization.md) — evidence, suppression, sending, and seeding must share database locks so a stopped contact cannot be revived by a race.
+- [Reply/send dispatch ordering](reply-send-dispatch-ordering.md) — hold the per-email lock through provider dispatch; recheck persisted send state under it so replies can stop unsent follow-ups.
 - [SEO corpus audit scaling](seo-corpus-audit-scaling.md) — full-corpus audits must stream metadata and links, never retain every generated HTML document; GSC property totals require a no-dimension query.
 - [LinkedIn approval boundary](linkedin-approval-boundary.md) — LinkedIn stays manual-only; resolve suppressions through linked signals and serialize global daily quotas before status transitions.
 - [Outreach seed startup](outreach-seed-startup.md) — idempotent backfills must skip existing contacts and never block the send scheduler during production startup.

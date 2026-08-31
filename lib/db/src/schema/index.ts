@@ -20,6 +20,7 @@
 export * from "./leads";
 export * from "./subscribers";
 export * from "./outreach";
+export * from "./outreachReplies";
 export * from "./clientJobs";
 export * from "./growth";
 export * from "./payroll";

@@ -623,6 +623,34 @@ paths:
       tags: [outreach]
       responses:
         "200": { description: Summary, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachDashboard" } } } }
+  /outreach/replies:
+    get:
+      operationId: listOutreachReplies
+      tags: [outreach]
+      summary: List retained inbound outreach replies
+      responses:
+        "200":
+          description: Inbound replies, newest first
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/OutreachReply" }
+  /outreach/replies/{id}:
+    patch:
+      operationId: updateOutreachReply
+      tags: [outreach]
+      summary: Update an inbound reply workflow
+      parameters: [{ name: id, in: path, required: true, schema: { type: number } }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OutreachReplyUpdate" }
+      responses:
+        "200": { description: Updated reply, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachReply" } } } }
+        "400": { description: Invalid update, content: { application/json: { schema: { $ref: "#/components/schemas/ErrorMessage" } } } }
+        "404": { description: Reply not found, content: { application/json: { schema: { $ref: "#/components/schemas/ErrorMessage" } } } }
   /outreach/prospects:
     get:
       operationId: listProspects
@@ -1554,6 +1582,42 @@ components:
         failed: { type: number }
         ambiguous: { type: number }
         waiting: { type: number }
+    OutreachReply:
+      type: object
+      required: [id, senderEmail, subject, textBody, messageType, status, forwardStatus, receivedAt, createdAt, updatedAt]
+      properties:
+        id: { type: number }
+        senderEmail: { type: string }
+        senderName: { type: [string, "null"] }
+        recipientEmail: { type: [string, "null"] }
+        subject: { type: string }
+        textBody: { type: string }
+        messageType: { type: string, enum: [reply, auto_reply] }
+        prospectId: { type: [number, "null"] }
+        outreachMessageId: { type: [number, "null"] }
+        companyName: { type: [string, "null"] }
+        contactName: { type: [string, "null"] }
+        campaignId: { type: [number, "null"] }
+        sequenceNumber: { type: [number, "null"] }
+        status: { type: string, enum: [unread, read, resolved] }
+        assignedTo: { type: [string, "null"] }
+        internalNote: { type: [string, "null"] }
+        followUpAt: { type: [string, "null"] }
+        receivedAt: { type: string }
+        readAt: { type: [string, "null"] }
+        resolvedAt: { type: [string, "null"] }
+        forwardStatus: { type: string, enum: [pending, forwarded, failed, skipped] }
+        forwardError: { type: [string, "null"] }
+        forwardedAt: { type: [string, "null"] }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+    OutreachReplyUpdate:
+      type: object
+      properties:
+        status: { type: string, enum: [unread, read, resolved] }
+        assignedTo: { type: [string, "null"], maxLength: 320 }
+        internalNote: { type: [string, "null"], maxLength: 10000 }
+        followUpAt: { type: [string, "null"], format: date-time }
     DraftGenerationInput:
       type: object
       properties:
@@ -1582,7 +1646,7 @@ components:
         token: { type: string, minLength: 1, maxLength: 128 }
     OutreachDashboard:
       type: object
-      required: [prospects, campaigns, messages, sentToday, providerProcessedToday, deliveredToday, bouncedToday, unresolvedToday, replies, nextPreparationDate, nextPreparationTarget, nextPreparationPrepared, nextPreparationShortfall, nextPreparationStatus, nextPreparationCompletedAt, nextPreparationError, adminAllowlistReady, productionConfigReady, sendgridDeliveryPathReady, deliveryEventsReady, replyWebhookReady, automationEnabled, automationReady, researchAutomationEnabled, researchAutomationReady]
+      required: [prospects, campaigns, messages, sentToday, providerProcessedToday, deliveredToday, bouncedToday, unresolvedToday, replies, unreadReplies, nextPreparationDate, nextPreparationTarget, nextPreparationPrepared, nextPreparationShortfall, nextPreparationStatus, nextPreparationCompletedAt, nextPreparationError, adminAllowlistReady, productionConfigReady, sendgridDeliveryPathReady, deliveryEventsReady, replyWebhookReady, automationEnabled, automationReady, researchAutomationEnabled, researchAutomationReady]
       properties:
         prospects: { type: number }
         campaigns: { type: number }
@@ -1593,6 +1657,7 @@ components:
         bouncedToday: { type: number }
         unresolvedToday: { type: number }
         replies: { type: number }
+        unreadReplies: { type: number }
         nextPreparationDate: { type: string }
         nextPreparationTarget: { type: number }
         nextPreparationPrepared: { type: number }

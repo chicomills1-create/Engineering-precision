@@ -811,6 +811,101 @@ export interface OutreachReconciliationSummary {
   waiting: number;
 }
 
+export type OutreachReplyMessageType = typeof OutreachReplyMessageType[keyof typeof OutreachReplyMessageType];
+
+
+export const OutreachReplyMessageType = {
+  reply: 'reply',
+  auto_reply: 'auto_reply',
+} as const;
+
+export type OutreachReplyStatus = typeof OutreachReplyStatus[keyof typeof OutreachReplyStatus];
+
+
+export const OutreachReplyStatus = {
+  unread: 'unread',
+  read: 'read',
+  resolved: 'resolved',
+} as const;
+
+export type OutreachReplyForwardStatus = typeof OutreachReplyForwardStatus[keyof typeof OutreachReplyForwardStatus];
+
+
+export const OutreachReplyForwardStatus = {
+  pending: 'pending',
+  forwarded: 'forwarded',
+  failed: 'failed',
+  skipped: 'skipped',
+} as const;
+
+export interface OutreachReply {
+  id: number;
+  senderEmail: string;
+  /** @nullable */
+  senderName?: string | null;
+  /** @nullable */
+  recipientEmail?: string | null;
+  subject: string;
+  textBody: string;
+  messageType: OutreachReplyMessageType;
+  /** @nullable */
+  prospectId?: number | null;
+  /** @nullable */
+  outreachMessageId?: number | null;
+  /** @nullable */
+  companyName?: string | null;
+  /** @nullable */
+  contactName?: string | null;
+  /** @nullable */
+  campaignId?: number | null;
+  /** @nullable */
+  sequenceNumber?: number | null;
+  status: OutreachReplyStatus;
+  /** @nullable */
+  assignedTo?: string | null;
+  /** @nullable */
+  internalNote?: string | null;
+  /** @nullable */
+  followUpAt?: string | null;
+  receivedAt: string;
+  /** @nullable */
+  readAt?: string | null;
+  /** @nullable */
+  resolvedAt?: string | null;
+  forwardStatus: OutreachReplyForwardStatus;
+  /** @nullable */
+  forwardError?: string | null;
+  /** @nullable */
+  forwardedAt?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type OutreachReplyUpdateStatus = typeof OutreachReplyUpdateStatus[keyof typeof OutreachReplyUpdateStatus];
+
+
+export const OutreachReplyUpdateStatus = {
+  unread: 'unread',
+  read: 'read',
+  resolved: 'resolved',
+} as const;
+
+export interface OutreachReplyUpdate {
+  status?: OutreachReplyUpdateStatus;
+  /**
+     * @maxLength 320
+     * @nullable
+     */
+  assignedTo?: string | null;
+  /**
+     * @maxLength 10000
+     * @nullable
+     */
+  internalNote?: string | null;
+  /** @nullable */
+  followUpAt?: string | null;
+}
+
 export type DraftGenerationInputSourceType = typeof DraftGenerationInputSourceType[keyof typeof DraftGenerationInputSourceType];
 
 
@@ -871,6 +966,7 @@ export interface OutreachDashboard {
   bouncedToday: number;
   unresolvedToday: number;
   replies: number;
+  unreadReplies: number;
   nextPreparationDate: string;
   nextPreparationTarget: number;
   nextPreparationPrepared: number;

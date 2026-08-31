@@ -6,9 +6,14 @@ import { ProspectsTab } from '@/components/outreach/ProspectsTab';
 import { CampaignsTab } from '@/components/outreach/CampaignsTab';
 import { MessagesTab } from '@/components/outreach/MessagesTab';
 import { ClientSafeListTab } from '@/components/outreach/ClientSafeListTab';
+import { ReplyInboxTab } from '@/components/outreach/ReplyInboxTab';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useGetOutreachDashboard } from '@workspace/api-client-react';
 
 export default function AdminOutreach() {
+  const { data: stats } = useGetOutreachDashboard();
+  const unreadCount = stats?.unreadReplies || 0;
+
   return (
     <>
       <Show when="signed-in">
@@ -27,8 +32,16 @@ export default function AdminOutreach() {
           <AdminNav />
           <DashboardStats />
 
-          <Tabs defaultValue="prospects" className="space-y-8">
-            <TabsList className="bg-card border border-border h-auto p-1" data-testid="outreach-tabs">
+          <Tabs defaultValue="inbox" className="space-y-8">
+            <TabsList className="bg-card border border-border h-auto p-1 flex-wrap" data-testid="outreach-tabs">
+              <TabsTrigger value="inbox" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary relative" data-testid="tab-inbox">
+                Reply Inbox
+                {unreadCount > 0 && (
+                  <span className="ml-2 inline-flex items-center justify-center bg-primary text-primary-foreground text-[10px] font-bold h-4 min-w-4 px-1 rounded-sm">
+                    {unreadCount}
+                  </span>
+                )}
+              </TabsTrigger>
               <TabsTrigger value="prospects" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary" data-testid="tab-prospects">
                 Prospects
               </TabsTrigger>
@@ -43,6 +56,10 @@ export default function AdminOutreach() {
               </TabsTrigger>
             </TabsList>
 
+            <TabsContent value="inbox" className="mt-0">
+              <ReplyInboxTab />
+            </TabsContent>
+
             <TabsContent value="prospects" className="mt-0">
               <ProspectsTab />
             </TabsContent>
@@ -54,9 +71,10 @@ export default function AdminOutreach() {
             <TabsContent value="messages" className="mt-0">
               <MessagesTab />
             </TabsContent>
-              <TabsContent value="past-clients" className="mt-0">
-                <ClientSafeListTab />
-              </TabsContent>
+            
+            <TabsContent value="past-clients" className="mt-0">
+              <ClientSafeListTab />
+            </TabsContent>
           </Tabs>
         </div>
       </Show>

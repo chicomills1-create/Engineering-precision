@@ -25,6 +25,7 @@ import {
   assertSequenceDeliveryReady,
   getPhoenixCalendarDayStart,
 } from "./outreachEligibility";
+import { withOutreachEmailLock } from "./outreachEmailLock";
 
 export type GeneratedDraft = { subject: string; body: string; followUps: { subject: string; body: string }[] };
 
@@ -336,7 +337,12 @@ function isDraft(value: unknown): value is GeneratedDraft {
     draft.followUps.every((item) => item && typeof item.subject === "string" && typeof item.body === "string");
 }
 
-export async function sendApprovedOutreach(message: OutreachMessage, prospect: Prospect, campaign: Campaign | undefined): Promise<{ providerMessageId?: string }> {
+export async function sendApprovedOutreach(
+  message: OutreachMessage,
+  prospect: Prospect,
+  campaign: Campaign | undefined,
+  options: { expectedPersistedStatus?: "approved" | "sending" } = {},
+): Promise<{ providerMessageId?: string }> {
   const [currentProspect] = await db.select().from(prospectsTable).where(eq(prospectsTable.id, prospect.id));
   if (!currentProspect) throw new Error("Prospect not found");
   const [currentCampaign] = campaign
@@ -375,8 +381,28 @@ export async function sendApprovedOutreach(message: OutreachMessage, prospect: P
   const sendgridSubuser = process.env.SENDGRID_SUBUSER_USERNAME?.trim();
   const providerReconciliationKey = await ensureProviderReconciliationKey(message.id);
   const reservations = await reserveOutreachSend(message, currentCampaign, email);
-  let response: Awaited<ReturnType<ReplitConnectors["proxy"]>>;
-  try {
+  return withOutreachEmailLock(email, async () => {
+    const [lockedMessage] = await db.select({ status: outreachMessagesTable.status })
+      .from(outreachMessagesTable)
+      .where(eq(outreachMessagesTable.id, message.id))
+      .limit(1);
+    const persistedStatusIsEligible = options.expectedPersistedStatus
+      ? lockedMessage?.status === options.expectedPersistedStatus
+      : lockedMessage?.status === "approved" || lockedMessage?.status === "sending";
+    if (!persistedStatusIsEligible) {
+      await db.transaction(async (tx) => {
+        await tx.delete(outreachSendReservationsTable)
+          .where(eq(outreachSendReservationsTable.id, reservations.dailyReservationId));
+        await tx.delete(outreachMonthlySendReservationsTable)
+          .where(eq(outreachMonthlySendReservationsTable.id, reservations.monthlyReservationId));
+        await tx.delete(outreachSequenceSendClaimsTable)
+          .where(eq(outreachSequenceSendClaimsTable.id, reservations.sequenceClaimId));
+      });
+      throw new Error("Outreach stopped before provider dispatch");
+    }
+
+    let response: Awaited<ReturnType<ReplitConnectors["proxy"]>>;
+    try {
     const requestBody = JSON.stringify({
       personalizations: [{
         to: [{ email }],
@@ -415,10 +441,10 @@ export async function sendApprovedOutreach(message: OutreachMessage, prospect: P
           },
           body: requestBody,
         });
-  } catch {
-    throw new Error("SendGrid dispatch result is unknown; message requires reconciliation before retry");
-  }
-  if (!response.ok) {
+    } catch {
+      throw new Error("SendGrid dispatch result is unknown; message requires reconciliation before retry");
+    }
+    if (!response.ok) {
     if (isDefinitiveSendGridRejection(response.status)) {
       await db.transaction(async (tx) => {
         await tx.delete(outreachSendReservationsTable)
@@ -431,6 +457,7 @@ export async function sendApprovedOutreach(message: OutreachMessage, prospect: P
       throw new Error(`SendGrid rejected the message with status ${response.status}`);
     }
     throw new Error(`SendGrid dispatch result is unknown after status ${response.status}; message requires reconciliation before retry`);
-  }
-  return { providerMessageId: response.headers.get("x-message-id") ?? undefined };
+    }
+    return { providerMessageId: response.headers.get("x-message-id") ?? undefined };
+  });
 }

@@ -5,9 +5,9 @@ export function DashboardStats() {
 
   if (isLoading || !stats) {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 mb-8" data-testid="outreach-dashboard-loading">
-        {[1, 2, 3, 4, 5, 6].map((i) => (
-          <div key={i} className="border border-border bg-card p-4 rounded-[2px] animate-pulse h-[84px]" />
+        <div className="flex flex-wrap gap-3 mb-8" data-testid="outreach-dashboard-loading">
+        {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+          <div key={i} className="flex-1 min-w-[130px] border border-border bg-card p-4 rounded-[2px] animate-pulse h-[84px]" />
         ))}
       </div>
     );
@@ -20,14 +20,15 @@ export function DashboardStats() {
     { label: 'Bounced Today', value: stats.bouncedToday },
     { label: 'Ready Tomorrow', value: stats.nextPreparationPrepared },
     { label: 'Unresolved Today', value: stats.unresolvedToday },
+    { label: 'Unread Replies', value: stats.unreadReplies },
   ];
 
   return (
     <div className="space-y-3 mb-8">
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3" data-testid="outreach-dashboard-stats">
+      <div className="flex flex-wrap gap-3" data-testid="outreach-dashboard-stats">
         {items.map((item) => (
-          <div key={item.label} className="border border-border bg-card p-4 rounded-[2px]" data-testid={`stat-${item.label.toLowerCase().replace(' ', '-')}`}>
-            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-1">{item.label}</p>
+          <div key={item.label} className="flex-1 min-w-[130px] border border-border bg-card p-4 rounded-[2px]" data-testid={`stat-${item.label.toLowerCase().replace(' ', '-')}`}>
+            <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground mb-1 whitespace-nowrap">{item.label}</p>
             <p className="font-display text-2xl font-bold" data-testid={`stat-value-${item.label.toLowerCase().replace(' ', '-')}`}>{item.value.toLocaleString()}</p>
           </div>
         ))}
@@ -90,7 +91,7 @@ export function DashboardStats() {
             Automatic follow-ups stay off until production safety checks and reply-stop signals are verified.
           </span>
         )}
-        <span className="ml-2 text-xs opacity-75">
+        <span className="ml-2 text-[10px] opacity-75 hidden md:inline">
           Admin allowlist: {stats.adminAllowlistReady ? 'ready' : 'not configured'} ·{' '}
           Production URL: {stats.productionConfigReady ? 'ready' : 'not configured'} ·{' '}
           SendGrid delivery path: {stats.sendgridDeliveryPathReady ? 'verified' : 'not verified'} ·{' '}

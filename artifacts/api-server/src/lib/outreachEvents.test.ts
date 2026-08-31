@@ -6,12 +6,16 @@ import {
   db,
   outreachDeliveryEventsTable,
   outreachMessagesTable,
+  outreachRepliesTable,
   outreachSuppressionsTable,
   prospectsTable,
 } from "@workspace/db";
 import {
+  captureInboundReply,
+  classifyInboundReply,
   processInboundReply,
   processSendGridEvents,
+  recordInboundReplyForwarding,
   verifySendGridEventSignature,
 } from "./outreachEvents";
 import { eq, inArray } from "drizzle-orm";
@@ -92,6 +96,7 @@ async function createEventFixture(initialStatus: "approved" | "sent" = "sent") {
 }
 
 async function cleanEventFixture(fixture: Awaited<ReturnType<typeof createEventFixture>>) {
+  await db.delete(outreachRepliesTable).where(eq(outreachRepliesTable.senderEmail, fixture.email));
   await db.delete(outreachDeliveryEventsTable).where(eq(outreachDeliveryEventsTable.email, fixture.email));
   await db.delete(outreachSuppressionsTable).where(eq(outreachSuppressionsTable.email, fixture.email));
   await db.delete(outreachMessagesTable).where(inArray(outreachMessagesTable.id, [fixture.initial.id, fixture.followUp.id]));
@@ -205,4 +210,88 @@ test("inbound replies mark the prospect replied and stop pending messages", asyn
   } finally {
     await cleanEventFixture(fixture);
   }
+});
+
+test("retains an inbound reply once when SendGrid retries the same message", async () => {
+  const fixture = await createEventFixture("approved");
+  try {
+    const input = {
+      from: fixture.email,
+      senderName: "Test Contact",
+      to: "replies@example.com",
+      subject: "Re: Initial test",
+      text: "Yes, please call me next week.",
+      headers: "Message-ID: <reply-dedupe@example.com>\nAuto-Submitted: no",
+    };
+    const first = await captureInboundReply(input);
+    const duplicate = await captureInboundReply(input);
+    assert.equal(first.inserted, true);
+    assert.equal(first.matchedProspects, 1);
+    assert.equal(duplicate.inserted, false);
+    assert.equal(duplicate.matchedProspects, 0);
+    assert.equal(first.reply.prospectId, fixture.prospect.id);
+    assert.equal(first.reply.outreachMessageId, null);
+    const retained = await db.select().from(outreachRepliesTable)
+      .where(eq(outreachRepliesTable.senderEmail, fixture.email));
+    assert.equal(retained.length, 1);
+  } finally {
+    await cleanEventFixture(fixture);
+  }
+});
+
+test("classifies out-of-office replies and pauses rather than permanently closing the prospect", async () => {
+  const fixture = await createEventFixture("approved");
+  try {
+    const captured = await captureInboundReply({
+      from: fixture.email,
+      subject: "Automatic reply: Re: Initial test",
+      text: "I am out of the office and will return soon.",
+      headers: "Message-ID: <auto-reply@example.com>\nAuto-Submitted: auto-replied",
+      receivedAt: new Date("2026-08-31T16:00:00.000Z"),
+    });
+    assert.equal(captured.reply.messageType, "auto_reply");
+    assert.ok(captured.reply.followUpAt);
+    const [prospect] = await db.select().from(prospectsTable)
+      .where(eq(prospectsTable.id, fixture.prospect.id));
+    const messages = await db.select().from(outreachMessagesTable)
+      .where(inArray(outreachMessagesTable.id, [fixture.initial.id, fixture.followUp.id]));
+    assert.equal(prospect?.status, "review");
+    assert.equal(prospect?.contactStatus, "temporary_unavailable");
+    assert.ok(messages.every((message) => message.status === "needs_review"));
+  } finally {
+    await cleanEventFixture(fixture);
+  }
+});
+
+test("retains unmatched replies for triage and records forwarding failure independently", async () => {
+  const email = `unmatched-${randomUUID()}@example.com`;
+  try {
+    const captured = await captureInboundReply({
+      from: email,
+      subject: "Question about Apex Grid",
+      text: "Can someone help?",
+      headers: `Message-ID: <${randomUUID()}@example.com>`,
+    });
+    assert.equal(captured.matchedProspects, 0);
+    assert.equal(captured.reply.prospectId, null);
+    await recordInboundReplyForwarding(captured.reply.id, {
+      status: "failed",
+      error: "Simulated forwarding outage",
+    });
+    const [retained] = await db.select().from(outreachRepliesTable)
+      .where(eq(outreachRepliesTable.id, captured.reply.id));
+    assert.equal(retained?.status, "unread");
+    assert.equal(retained?.forwardStatus, "failed");
+    assert.equal(retained?.forwardError, "Simulated forwarding outage");
+  } finally {
+    await db.delete(outreachRepliesTable).where(eq(outreachRepliesTable.senderEmail, email));
+  }
+});
+
+test("does not misclassify ordinary replies as automatic", () => {
+  assert.equal(classifyInboundReply({
+    subject: "Re: Initial test",
+    text: "Thanks, this is interesting.",
+    headers: "Auto-Submitted: no",
+  }), "reply");
 });

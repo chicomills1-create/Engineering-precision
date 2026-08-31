@@ -17,6 +17,7 @@ export interface OutreachDashboard {
   bouncedToday: number;
   unresolvedToday: number;
   replies: number;
+  unreadReplies: number;
   nextPreparationDate: string;
   nextPreparationTarget: number;
   nextPreparationPrepared: number;

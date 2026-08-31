@@ -6,6 +6,7 @@ import {
   leadsTable,
   outreachDeliveryEventsTable,
   outreachMessagesTable,
+  outreachRepliesTable,
   outreachResearchRunsTable,
   outreachResearchScheduleRunsTable,
   outreachResearchSchedulesTable,
@@ -21,6 +22,7 @@ import {
   CreateOutreachMessageBody, CreateOutreachMessageResponse, CreateProspectBody, CreateProspectResponse,
   GenerateOutreachDraftBody, GenerateOutreachDraftParams, GenerateOutreachDraftResponse,
   GetOutreachDashboardResponse, ListCampaignsResponse, ListOutreachMessagesResponse, ListProspectsResponse,
+  ListOutreachRepliesResponse,
   ListOutreachResearchRunsResponse, ListOutreachResearchSchedulesResponse, ListOutreachSuppressionsResponse,
   MarkOutreachProspectRepliedParams, MarkOutreachProspectRepliedResponse,
   ReconcileOutreachMessagesResponse,
@@ -30,6 +32,7 @@ import {
   UnsubscribeOutreachAddressBody, UnsubscribeOutreachAddressResponse, UpdateCampaignBody, UpdateCampaignParams,
   UpdateCampaignResponse, UpdateOutreachMessageBody, UpdateOutreachMessageParams, UpdateOutreachMessageResponse,
   UpdateOutreachResearchScheduleBody, UpdateOutreachResearchScheduleParams, UpdateOutreachResearchScheduleResponse,
+  UpdateOutreachReplyBody, UpdateOutreachReplyParams, UpdateOutreachReplyResponse,
   UpdateProspectBody, UpdateProspectParams, UpdateProspectResponse,
 } from "@workspace/api-zod";
 import { requireAuth } from "../middlewares/requireAuth";
@@ -92,6 +95,41 @@ const messageJson = async (m: typeof outreachMessagesTable.$inferSelect) => ({
   createdAt: m.createdAt.toISOString(),
   updatedAt: m.updatedAt.toISOString(),
 });
+async function replyJson(reply: typeof outreachRepliesTable.$inferSelect) {
+  const [prospect] = reply.prospectId
+    ? await db.select().from(prospectsTable).where(eq(prospectsTable.id, reply.prospectId)).limit(1)
+    : [];
+  const [message] = reply.outreachMessageId
+    ? await db.select().from(outreachMessagesTable).where(eq(outreachMessagesTable.id, reply.outreachMessageId)).limit(1)
+    : [];
+  return {
+    id: reply.id,
+    senderEmail: reply.senderEmail,
+    senderName: reply.senderName,
+    recipientEmail: reply.recipientEmail,
+    subject: reply.subject,
+    textBody: reply.textBody,
+    messageType: reply.messageType,
+    prospectId: reply.prospectId,
+    outreachMessageId: reply.outreachMessageId,
+    companyName: prospect?.companyName ?? null,
+    contactName: prospect?.contactName ?? null,
+    campaignId: message?.campaignId ?? prospect?.campaignId ?? null,
+    sequenceNumber: message?.sequenceNumber ?? null,
+    status: reply.status,
+    assignedTo: reply.assignedTo,
+    internalNote: reply.internalNote,
+    followUpAt: reply.followUpAt?.toISOString() ?? null,
+    receivedAt: reply.receivedAt.toISOString(),
+    readAt: reply.readAt?.toISOString() ?? null,
+    resolvedAt: reply.resolvedAt?.toISOString() ?? null,
+    forwardStatus: reply.forwardStatus,
+    forwardError: reply.forwardError,
+    forwardedAt: reply.forwardedAt?.toISOString() ?? null,
+    createdAt: reply.createdAt.toISOString(),
+    updatedAt: reply.updatedAt.toISOString(),
+  };
+}
 async function validateAttribution(sourceType?: AttributionSourceType, sourceId?: number): Promise<string | null> {
   const pairError = validateAttributionPair(sourceType, sourceId);
   if (pairError) return pairError;
@@ -144,6 +182,7 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     [bouncedToday],
     [unresolvedToday],
     [replies],
+    [unreadReplies],
     preparation,
   ] = await Promise.all([
     db.select({ value: count() }).from(prospectsTable), db.select({ value: count() }).from(campaignsTable),
@@ -171,6 +210,7 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
       inArray(outreachMessagesTable.status, ["approved", "sending", "failed", "needs_review"]),
     )),
     db.select({ value: count() }).from(outreachMessagesTable).where(eq(outreachMessagesTable.status, "replied")),
+    db.select({ value: count() }).from(outreachRepliesTable).where(eq(outreachRepliesTable.status, "unread")),
     getNextOutreachPreparationStatus(),
   ]);
   const processedCount = providerProcessedToday?.value ?? 0;
@@ -184,6 +224,7 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     bouncedToday: bouncedToday?.value ?? 0,
     unresolvedToday: unresolvedToday?.value ?? 0,
     replies: replies?.value ?? 0,
+    unreadReplies: unreadReplies?.value ?? 0,
     nextPreparationDate: preparation.targetDate,
     nextPreparationTarget: preparation.targetCount,
     nextPreparationPrepared: preparation.preparedCount,
@@ -193,6 +234,59 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     nextPreparationError: preparation.error,
     ...automationStatus,
   }));
+});
+router.get("/outreach/replies", requireAuth, async (_req, res): Promise<void> => {
+  const rows = await db.select().from(outreachRepliesTable).orderBy(desc(outreachRepliesTable.receivedAt));
+  res.json(ListOutreachRepliesResponse.parse(await Promise.all(rows.map(replyJson))));
+});
+router.patch("/outreach/replies/:id", requireAuth, async (req, res): Promise<void> => {
+  const params = UpdateOutreachReplyParams.safeParse(req.params);
+  const input = UpdateOutreachReplyBody.safeParse(req.body);
+  if (!params.success || !input.success || Object.keys(input.data).length === 0) {
+    res.status(400).json({ error: "Invalid reply update" });
+    return;
+  }
+  const assignedTo = input.data.assignedTo?.trim().toLowerCase() || null;
+  const allowedEmails = new Set(
+    (process.env.ADMIN_EMAILS ?? "").split(",").map((email) => email.trim().toLowerCase()).filter(Boolean),
+  );
+  if (assignedTo && allowedEmails.size > 0 && !allowedEmails.has(assignedTo)) {
+    res.status(400).json({ error: "Replies can only be assigned to an approved employee" });
+    return;
+  }
+  const followUpAt = input.data.followUpAt === undefined
+    ? undefined
+    : input.data.followUpAt === null
+      ? null
+      : new Date(input.data.followUpAt);
+  if (followUpAt instanceof Date && Number.isNaN(followUpAt.getTime())) {
+    res.status(400).json({ error: "Invalid follow-up date" });
+    return;
+  }
+  const [current] = await db.select().from(outreachRepliesTable)
+    .where(eq(outreachRepliesTable.id, params.data.id))
+    .limit(1);
+  if (!current) {
+    res.status(404).json({ error: "Reply not found" });
+    return;
+  }
+  const now = new Date();
+  const nextStatus = input.data.status ?? current.status;
+  const [updated] = await db.update(outreachRepliesTable).set({
+    ...(input.data.status !== undefined ? { status: input.data.status } : {}),
+    ...(input.data.assignedTo !== undefined ? { assignedTo } : {}),
+    ...(input.data.internalNote !== undefined
+      ? { internalNote: input.data.internalNote?.trim() || null }
+      : {}),
+    ...(input.data.followUpAt !== undefined ? { followUpAt } : {}),
+    ...(input.data.status !== undefined
+      ? {
+          readAt: nextStatus === "unread" ? null : current.readAt ?? now,
+          resolvedAt: nextStatus === "resolved" ? current.resolvedAt ?? now : null,
+        }
+      : {}),
+  }).where(eq(outreachRepliesTable.id, current.id)).returning();
+  res.json(UpdateOutreachReplyResponse.parse(await replyJson(updated!)));
 });
 router.get("/outreach/client-safe-list", requireAuth, async (_req, res): Promise<void> => {
   const contacts = await getClientMonthlySafeList();

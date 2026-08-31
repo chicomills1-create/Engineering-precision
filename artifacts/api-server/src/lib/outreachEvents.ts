@@ -1,14 +1,16 @@
-import { createHmac, createPublicKey, timingSafeEqual, verify } from "node:crypto";
+import { createHash, createHmac, createPublicKey, timingSafeEqual, verify } from "node:crypto";
 import { ReplitConnectors } from "@replit/connectors-sdk";
-import { and, eq, inArray, isNull, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, isNull, sql } from "drizzle-orm";
 import {
   db,
   outreachDeliveryEventsTable,
   outreachMessagesTable,
+  outreachRepliesTable,
   prospectsTable,
 } from "@workspace/db";
 import { getFollowUpScheduledAt } from "./outreachEligibility";
 import { recordContactEvidence } from "./outreachContactEvidence";
+import { withOutreachEmailLock } from "./outreachEmailLock";
 import { suppressOutreachEmail } from "./outreachSuppression";
 
 export type SendGridEvent = {
@@ -170,6 +172,135 @@ export async function forwardInboundReplyToApex(input: {
     }),
   });
   return response.ok;
+}
+
+export type InboundReplyInput = {
+  from: string;
+  senderName?: string;
+  to?: string;
+  subject: string;
+  text: string;
+  headers?: string;
+  receivedAt?: Date;
+};
+
+function inboundMessageId(headers = ""): string | null {
+  const match = headers.match(/^message-id:\s*(.+)$/im);
+  return match?.[1]?.trim().slice(0, 500) || null;
+}
+
+export function classifyInboundReply(input: Pick<InboundReplyInput, "subject" | "text" | "headers">): "reply" | "auto_reply" {
+  const headers = input.headers?.toLowerCase() ?? "";
+  const subject = input.subject.trim().toLowerCase();
+  const textStart = input.text.trim().slice(0, 500).toLowerCase();
+  if (
+    /^auto-submitted:\s*(?:auto-|yes\b)/im.test(headers)
+    || /^x-autoreply:/im.test(headers)
+    || /^x-auto-response-suppress:/im.test(headers)
+    || /^(automatic reply|auto(?:matic)? reply|out of office|ooo\b|away from)/i.test(subject)
+    || /\b(out of (?:the )?office|automatic reply)\b/i.test(textStart)
+  ) {
+    return "auto_reply";
+  }
+  return "reply";
+}
+
+function inboundDedupeKey(input: InboundReplyInput): { key: string; providerMessageId: string | null } {
+  const providerMessageId = inboundMessageId(input.headers);
+  const normalized = providerMessageId
+    ? `message-id:${providerMessageId.toLowerCase()}`
+    : [
+        input.from.trim().toLowerCase(),
+        input.to?.trim().toLowerCase() ?? "",
+        input.subject.trim(),
+        input.text.trim(),
+      ].join("\n");
+  return {
+    key: createHash("sha256").update(normalized).digest("hex"),
+    providerMessageId,
+  };
+}
+
+export async function captureInboundReply(input: InboundReplyInput): Promise<{
+  reply: typeof outreachRepliesTable.$inferSelect;
+  inserted: boolean;
+  matchedProspects: number;
+}> {
+  const senderEmail = input.from.trim().toLowerCase();
+  const receivedAt = input.receivedAt ?? new Date();
+  const messageType = classifyInboundReply(input);
+  const { key, providerMessageId } = inboundDedupeKey(input);
+  const prospects = await db.select().from(prospectsTable)
+    .where(eq(prospectsTable.contactEmail, senderEmail))
+    .orderBy(desc(prospectsTable.updatedAt));
+  const primaryProspect = prospects[0];
+  const [inserted] = await db.insert(outreachRepliesTable).values({
+    dedupeKey: key,
+    providerMessageId,
+    senderEmail,
+    senderName: input.senderName?.trim().slice(0, 320) || null,
+    recipientEmail: input.to?.trim().slice(0, 320) || null,
+    subject: input.subject.trim().slice(0, 1000),
+    textBody: input.text.trim().slice(0, 100_000),
+    messageType,
+    prospectId: primaryProspect?.id ?? null,
+    // Do not infer a thread from recency. Link a message only when a future
+    // verified In-Reply-To/References correlation is available.
+    outreachMessageId: null,
+    receivedAt,
+  }).onConflictDoNothing().returning();
+
+  let reply = inserted;
+  if (!reply) {
+    [reply] = await db.select().from(outreachRepliesTable)
+      .where(eq(outreachRepliesTable.dedupeKey, key))
+      .limit(1);
+  }
+  if (!reply) throw new Error("Unable to retain inbound reply");
+
+  let matchedProspects = 0;
+  reply = await withOutreachEmailLock(senderEmail, async () => {
+    const [current] = await db.select().from(outreachRepliesTable)
+      .where(eq(outreachRepliesTable.id, reply!.id))
+      .limit(1);
+    if (!current) throw new Error("Retained inbound reply disappeared");
+    if (current.stopProcessedAt) return current;
+
+    const reviewAt = new Date(receivedAt.getTime() + 14 * 24 * 60 * 60 * 1000);
+    for (const prospect of prospects) {
+      await recordContactEvidence({
+        prospectId: prospect.id,
+        evidenceType: messageType === "auto_reply" ? "temporary_unavailability" : "forwarded_reply",
+        evidenceNote: messageType === "auto_reply"
+          ? "Automatic reply received by the protected reply webhook; review before resuming outreach"
+          : "Inbound reply received and retained by the protected reply webhook",
+        reviewAt: messageType === "auto_reply" ? reviewAt : undefined,
+        now: receivedAt,
+      });
+      matchedProspects += 1;
+    }
+    const [processed] = await db.update(outreachRepliesTable)
+      .set({
+        stopProcessedAt: new Date(),
+        followUpAt: messageType === "auto_reply" ? reviewAt : current.followUpAt,
+      })
+      .where(eq(outreachRepliesTable.id, current.id))
+      .returning();
+    return processed;
+  });
+
+  return { reply: reply!, inserted: Boolean(inserted), matchedProspects };
+}
+
+export async function recordInboundReplyForwarding(
+  id: number,
+  result: { status: "forwarded" | "failed" | "skipped"; error?: string },
+): Promise<void> {
+  await db.update(outreachRepliesTable).set({
+    forwardStatus: result.status,
+    forwardError: result.error?.slice(0, 1000) ?? null,
+    forwardedAt: result.status === "forwarded" ? new Date() : null,
+  }).where(eq(outreachRepliesTable.id, id));
 }
 
 async function stopPendingMessages(prospectId: number, status: "bounced" | "unsubscribed" | "replied", reason: string): Promise<void> {

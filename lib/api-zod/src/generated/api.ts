@@ -606,6 +606,7 @@ export const GetOutreachDashboardResponse = zod.object({
   "bouncedToday": zod.number(),
   "unresolvedToday": zod.number(),
   "replies": zod.number(),
+  "unreadReplies": zod.number(),
   "nextPreparationDate": zod.string(),
   "nextPreparationTarget": zod.number(),
   "nextPreparationPrepared": zod.number(),
@@ -622,6 +623,88 @@ export const GetOutreachDashboardResponse = zod.object({
   "automationReady": zod.boolean(),
   "researchAutomationEnabled": zod.boolean(),
   "researchAutomationReady": zod.boolean()
+})
+
+
+/**
+ * @summary List retained inbound outreach replies
+ */
+export const ListOutreachRepliesResponseItem = zod.object({
+  "id": zod.number(),
+  "senderEmail": zod.string(),
+  "senderName": zod.string().nullish(),
+  "recipientEmail": zod.string().nullish(),
+  "subject": zod.string(),
+  "textBody": zod.string(),
+  "messageType": zod.enum(['reply', 'auto_reply']),
+  "prospectId": zod.number().nullish(),
+  "outreachMessageId": zod.number().nullish(),
+  "companyName": zod.string().nullish(),
+  "contactName": zod.string().nullish(),
+  "campaignId": zod.number().nullish(),
+  "sequenceNumber": zod.number().nullish(),
+  "status": zod.enum(['unread', 'read', 'resolved']),
+  "assignedTo": zod.string().nullish(),
+  "internalNote": zod.string().nullish(),
+  "followUpAt": zod.string().nullish(),
+  "receivedAt": zod.string(),
+  "readAt": zod.string().nullish(),
+  "resolvedAt": zod.string().nullish(),
+  "forwardStatus": zod.enum(['pending', 'forwarded', 'failed', 'skipped']),
+  "forwardError": zod.string().nullish(),
+  "forwardedAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
+})
+export const ListOutreachRepliesResponse = zod.array(ListOutreachRepliesResponseItem)
+
+
+/**
+ * @summary Update an inbound reply workflow
+ */
+export const UpdateOutreachReplyParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const updateOutreachReplyBodyAssignedToMax = 320;
+
+export const updateOutreachReplyBodyInternalNoteMax = 10000;
+
+
+
+export const UpdateOutreachReplyBody = zod.object({
+  "status": zod.enum(['unread', 'read', 'resolved']).optional(),
+  "assignedTo": zod.string().max(updateOutreachReplyBodyAssignedToMax).nullish(),
+  "internalNote": zod.string().max(updateOutreachReplyBodyInternalNoteMax).nullish(),
+  "followUpAt": zod.coerce.date().nullish()
+})
+
+export const UpdateOutreachReplyResponse = zod.object({
+  "id": zod.number(),
+  "senderEmail": zod.string(),
+  "senderName": zod.string().nullish(),
+  "recipientEmail": zod.string().nullish(),
+  "subject": zod.string(),
+  "textBody": zod.string(),
+  "messageType": zod.enum(['reply', 'auto_reply']),
+  "prospectId": zod.number().nullish(),
+  "outreachMessageId": zod.number().nullish(),
+  "companyName": zod.string().nullish(),
+  "contactName": zod.string().nullish(),
+  "campaignId": zod.number().nullish(),
+  "sequenceNumber": zod.number().nullish(),
+  "status": zod.enum(['unread', 'read', 'resolved']),
+  "assignedTo": zod.string().nullish(),
+  "internalNote": zod.string().nullish(),
+  "followUpAt": zod.string().nullish(),
+  "receivedAt": zod.string(),
+  "readAt": zod.string().nullish(),
+  "resolvedAt": zod.string().nullish(),
+  "forwardStatus": zod.enum(['pending', 'forwarded', 'failed', 'skipped']),
+  "forwardError": zod.string().nullish(),
+  "forwardedAt": zod.string().nullish(),
+  "createdAt": zod.string(),
+  "updatedAt": zod.string()
 })
 
 

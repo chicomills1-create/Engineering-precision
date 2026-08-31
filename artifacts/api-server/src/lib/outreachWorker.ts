@@ -127,7 +127,12 @@ export async function sendClaimedOutreachMessage(message: OutreachMessage): Prom
   const [campaign] = message.campaignId
     ? await db.select().from(campaignsTable).where(eq(campaignsTable.id, message.campaignId))
     : [];
-  const sent = await sendApprovedOutreach({ ...message, status: "approved" }, prospect, campaign);
+  const sent = await sendApprovedOutreach(
+    { ...message, status: "approved" },
+    prospect,
+    campaign,
+    { expectedPersistedStatus: "sending" },
+  );
   const [updated] = await db.update(outreachMessagesTable).set({
     status: "sent",
     sentAt: new Date(),
