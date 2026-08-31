@@ -29,6 +29,25 @@ import { withOutreachEmailLock } from "./outreachEmailLock";
 
 export type GeneratedDraft = { subject: string; body: string; followUps: { subject: string; body: string }[] };
 
+export type OutreachSendOptions = {
+  expectedPersistedStatus?: "approved" | "sending";
+  fromEmail?: string;
+  replyToEmail?: string;
+  unsubscribeUrls?: {
+    unsubscribeUrl: string;
+    oneClickUnsubscribeUrl: string;
+  };
+  beforeEmailLock?: () => Promise<void>;
+  beforeProviderDispatch?: () => Promise<void>;
+  dispatch?: (request: {
+    body: string;
+    email: string;
+    fromEmail: string;
+    replyToEmail: string;
+  }) => Promise<Response>;
+  afterProviderDispatch?: (providerMessageId: string | undefined) => Promise<void>;
+};
+
 export function isUnknownSendResultError(error: unknown): boolean {
   return error instanceof Error && error.message.includes("dispatch result is unknown");
 }
@@ -341,7 +360,7 @@ export async function sendApprovedOutreach(
   message: OutreachMessage,
   prospect: Prospect,
   campaign: Campaign | undefined,
-  options: { expectedPersistedStatus?: "approved" | "sending" } = {},
+  options: OutreachSendOptions = {},
 ): Promise<{ providerMessageId?: string }> {
   const [currentProspect] = await db.select().from(prospectsTable).where(eq(prospectsTable.id, prospect.id));
   if (!currentProspect) throw new Error("Prospect not found");
@@ -368,19 +387,20 @@ export async function sendApprovedOutreach(
   const [suppression] = await db.select({ id: outreachSuppressionsTable.id }).from(outreachSuppressionsTable).where(eq(outreachSuppressionsTable.email, email)).limit(1);
   if (suppression) throw new Error("Address is suppressed");
 
-  const unsubscribeUrl = makeUnsubscribeUrl(email);
-  const oneClickUrl = makeOneClickUnsubscribeUrl(email);
+  const unsubscribeUrl = options.unsubscribeUrls?.unsubscribeUrl ?? makeUnsubscribeUrl(email);
+  const oneClickUrl = options.unsubscribeUrls?.oneClickUnsubscribeUrl ?? makeOneClickUnsubscribeUrl(email);
   if (!unsubscribeUrl || !oneClickUrl) throw new Error("Unsubscribe signing is not configured");
   const emailContent = renderBrandedEmail(message.body, unsubscribeUrl, currentProspect.contactName ?? undefined);
-  const from = process.env.OUTREACH_FROM_EMAIL;
+  const from = options.fromEmail?.trim() || process.env.OUTREACH_FROM_EMAIL;
   if (!from) throw new Error("OUTREACH_FROM_EMAIL is not configured");
-  const replyTo = process.env.OUTREACH_REPLY_TO_EMAIL?.trim() || from;
+  const replyTo = options.replyToEmail?.trim() || process.env.OUTREACH_REPLY_TO_EMAIL?.trim() || from;
   const dedicatedSendGridKey = process.env.SENDGRID_ISOLATION_VERIFIED === "true"
     ? process.env.SENDGRID_DEDICATED_API_KEY?.trim()
     : undefined;
   const sendgridSubuser = process.env.SENDGRID_SUBUSER_USERNAME?.trim();
   const providerReconciliationKey = await ensureProviderReconciliationKey(message.id);
   const reservations = await reserveOutreachSend(message, currentCampaign, email);
+  await options.beforeEmailLock?.();
   return withOutreachEmailLock(email, async () => {
     const [lockedMessage] = await db.select({ status: outreachMessagesTable.status })
       .from(outreachMessagesTable)
@@ -424,8 +444,16 @@ export async function sendApprovedOutreach(
         { type: "text/html", value: emailContent.html },
       ],
     });
-    response = dedicatedSendGridKey
-      ? await fetch("https://api.sendgrid.com/v3/mail/send", {
+      await options.beforeProviderDispatch?.();
+      response = options.dispatch
+        ? await options.dispatch({
+            body: requestBody,
+            email,
+            fromEmail: from,
+            replyToEmail: replyTo,
+          })
+        : dedicatedSendGridKey
+        ? await fetch("https://api.sendgrid.com/v3/mail/send", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -458,6 +486,8 @@ export async function sendApprovedOutreach(
     }
     throw new Error(`SendGrid dispatch result is unknown after status ${response.status}; message requires reconciliation before retry`);
     }
-    return { providerMessageId: response.headers.get("x-message-id") ?? undefined };
+    const providerMessageId = response.headers.get("x-message-id") ?? undefined;
+    await options.afterProviderDispatch?.(providerMessageId);
+    return { providerMessageId };
   });
 }

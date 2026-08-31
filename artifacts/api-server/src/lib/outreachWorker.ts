@@ -12,6 +12,7 @@ import {
   isUnknownSendResultError,
   MonthlySendLimitError,
   sendApprovedOutreach,
+  type OutreachSendOptions,
 } from "./outreach";
 import { getNextPhoenixEightAm } from "./outreachEligibility";
 import {
@@ -120,29 +121,38 @@ export function getSendFailureStatus(error: unknown): "failed" | "needs_review" 
   return isUnknownSendResultError(error) ? "needs_review" : "failed";
 }
 
-export async function sendClaimedOutreachMessage(message: OutreachMessage): Promise<OutreachMessage | undefined> {
+export async function sendClaimedOutreachMessage(
+  message: OutreachMessage,
+  options: Omit<OutreachSendOptions, "expectedPersistedStatus" | "afterProviderDispatch"> = {},
+): Promise<OutreachMessage | undefined> {
   const [prospect] = await db.select().from(prospectsTable)
     .where(eq(prospectsTable.id, message.prospectId));
   if (!prospect) throw new Error("Prospect not found");
   const [campaign] = message.campaignId
     ? await db.select().from(campaignsTable).where(eq(campaignsTable.id, message.campaignId))
     : [];
-  const sent = await sendApprovedOutreach(
+  let persisted: OutreachMessage | undefined;
+  await sendApprovedOutreach(
     { ...message, status: "approved" },
     prospect,
     campaign,
-    { expectedPersistedStatus: "sending" },
+    {
+      ...options,
+      expectedPersistedStatus: "sending",
+      afterProviderDispatch: async (providerMessageId) => {
+        [persisted] = await db.update(outreachMessagesTable).set({
+          status: "sent",
+          sentAt: new Date(),
+          providerMessageId,
+          error: null,
+        }).where(and(
+          eq(outreachMessagesTable.id, message.id),
+          eq(outreachMessagesTable.status, "sending"),
+        )).returning();
+      },
+    },
   );
-  const [updated] = await db.update(outreachMessagesTable).set({
-    status: "sent",
-    sentAt: new Date(),
-    providerMessageId: sent.providerMessageId,
-    error: null,
-  }).where(and(
-    eq(outreachMessagesTable.id, message.id),
-    eq(outreachMessagesTable.status, "sending"),
-  )).returning();
-  return updated;
+  return persisted;
 }
 
 export function countPersistedOutreachSend(

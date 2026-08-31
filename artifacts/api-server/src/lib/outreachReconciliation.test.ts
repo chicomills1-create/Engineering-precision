@@ -25,7 +25,9 @@ import {
   claimOutreachMessageForSending,
   getSendFailureStatus,
   reconcileSendingOutreachMessages,
+  sendClaimedOutreachMessage,
 } from "./outreachWorker";
+import { withOutreachEmailLock } from "./outreachEmailLock";
 import {
   classifySendGridActivity,
   reconcileUncertainOutreachMessages,
@@ -84,6 +86,256 @@ async function cleanFixture(fixture: Awaited<ReturnType<typeof createFixture>>):
   await db.delete(prospectsTable).where(eq(prospectsTable.id, fixture.prospect.id));
   await db.delete(campaignsTable).where(eq(campaignsTable.id, fixture.campaign.id));
 }
+
+async function createRaceFixture() {
+  const fixture = await createFixture("delivered");
+  const [followUp, laterFollowUp] = await db.insert(outreachMessagesTable).values([
+    {
+      prospectId: fixture.prospect.id,
+      campaignId: fixture.campaign.id,
+      sequenceNumber: 2,
+      subject: "Race follow-up",
+      body: "Race follow-up body",
+      status: "approved",
+      scheduledAt: new Date("2026-08-30T15:00:00.000Z"),
+    },
+    {
+      prospectId: fixture.prospect.id,
+      campaignId: fixture.campaign.id,
+      sequenceNumber: 3,
+      subject: "Later race follow-up",
+      body: "Later race follow-up body",
+      status: "approved",
+      scheduledAt: new Date("2026-09-07T15:00:00.000Z"),
+    },
+  ]).returning();
+  return { ...fixture, followUp: followUp!, laterFollowUp: laterFollowUp! };
+}
+
+async function cleanRaceFixture(fixture: Awaited<ReturnType<typeof createRaceFixture>>): Promise<void> {
+  await db.delete(outreachRepliesTable).where(eq(outreachRepliesTable.senderEmail, fixture.prospect.contactEmail!));
+  await db.delete(outreachSendReservationsTable).where(eq(outreachSendReservationsTable.messageId, fixture.followUp.id));
+  await db.delete(outreachMonthlySendReservationsTable).where(eq(outreachMonthlySendReservationsTable.messageId, fixture.followUp.id));
+  await db.delete(outreachSequenceSendClaimsTable).where(eq(outreachSequenceSendClaimsTable.prospectId, fixture.prospect.id));
+  await cleanFixture(fixture);
+}
+
+function deferred<T>() {
+  let resolve!: (value: T | PromiseLike<T>) => void;
+  const promise = new Promise<T>((resolvePromise) => {
+    resolve = resolvePromise;
+  });
+  return { promise, resolve };
+}
+
+async function waitForReply(email: string): Promise<void> {
+  for (let attempt = 0; attempt < 100; attempt += 1) {
+    const [reply] = await db.select({ id: outreachRepliesTable.id })
+      .from(outreachRepliesTable)
+      .where(eq(outreachRepliesTable.senderEmail, email))
+      .limit(1);
+    if (reply) return;
+    await new Promise<void>((resolve) => setTimeout(resolve, 10));
+  }
+  throw new Error("Timed out waiting for inbound reply retention");
+}
+
+async function waitForGateOrWorker(
+  gate: Promise<void>,
+  worker: Promise<unknown>,
+  label: string,
+): Promise<void> {
+  await Promise.race([
+    gate,
+    worker.then(
+      () => {
+        throw new Error(`Worker completed before ${label}`);
+      },
+      (error: unknown) => {
+        throw error;
+      },
+    ),
+  ]);
+}
+
+const isolatedSendOptions = {
+  fromEmail: "outreach@example.com",
+  replyToEmail: "replies@example.com",
+  unsubscribeUrls: {
+    unsubscribeUrl: "https://apexgrideng.com/unsubscribe",
+    oneClickUnsubscribeUrl: "https://apexgrideng.com/api/subscribers/one-click-unsubscribe",
+  },
+};
+
+test("reply processing always wins or is retained around unsent follow-up dispatch", async () => {
+  const replyFirstFixture = await createRaceFixture();
+  const replyFirstPaused = deferred<void>();
+  const replyFirstRelease = deferred<void>();
+  let replyFirstProviderCalls = 0;
+  let replyFirstWorker: Promise<unknown> | undefined;
+  let replyFirstInbound: Promise<Awaited<ReturnType<typeof captureInboundReply>>> | undefined;
+
+  try {
+    const claimed = await claimOutreachMessageForSending(replyFirstFixture.followUp.id);
+    assert.ok(claimed);
+    replyFirstWorker = sendClaimedOutreachMessage(claimed, {
+      ...isolatedSendOptions,
+      beforeEmailLock: async () => {
+        replyFirstPaused.resolve();
+        await replyFirstRelease.promise;
+      },
+      dispatch: async () => {
+        replyFirstProviderCalls += 1;
+        return new Response(null, { status: 202 });
+      },
+    });
+    await waitForGateOrWorker(
+      replyFirstPaused.promise,
+      replyFirstWorker,
+      "the pre-dispatch email lock gate",
+    );
+
+    const holder = withOutreachEmailLock(replyFirstFixture.prospect.contactEmail!, async () => {
+      replyFirstInbound = captureInboundReply({
+        from: replyFirstFixture.prospect.contactEmail!,
+        subject: "Re: Initial test",
+        text: "Yes, please call me next week.",
+        headers: "Message-ID: <genuine-race-reply@example.com>\nAuto-Submitted: no",
+      });
+      await waitForReply(replyFirstFixture.prospect.contactEmail!);
+    });
+    await holder;
+    await replyFirstInbound;
+    replyFirstRelease.resolve();
+
+    await assert.rejects(replyFirstWorker, /Outreach stopped before provider dispatch/);
+    assert.equal(replyFirstProviderCalls, 0);
+    const [prospect] = await db.select().from(prospectsTable)
+      .where(eq(prospectsTable.id, replyFirstFixture.prospect.id));
+    const messages = await db.select().from(outreachMessagesTable)
+      .where(eq(outreachMessagesTable.prospectId, replyFirstFixture.prospect.id));
+    const [reply] = await db.select().from(outreachRepliesTable)
+      .where(eq(outreachRepliesTable.senderEmail, replyFirstFixture.prospect.contactEmail!));
+    assert.equal(prospect?.status, "replied");
+    assert.equal(reply?.messageType, "reply");
+    assert.equal(messages.find((message) => message.id === replyFirstFixture.followUp.id)?.status, "replied");
+    assert.equal(messages.find((message) => message.id === replyFirstFixture.laterFollowUp.id)?.status, "replied");
+    assert.equal(
+      (await db.select().from(outreachSendReservationsTable)
+        .where(eq(outreachSendReservationsTable.messageId, replyFirstFixture.followUp.id))).length,
+      0,
+    );
+    assert.equal(
+      (await db.select().from(outreachMonthlySendReservationsTable)
+        .where(eq(outreachMonthlySendReservationsTable.messageId, replyFirstFixture.followUp.id))).length,
+      0,
+    );
+    assert.equal(
+      (await db.select().from(outreachSequenceSendClaimsTable)
+        .where(eq(outreachSequenceSendClaimsTable.messageId, replyFirstFixture.followUp.id))).length,
+      0,
+    );
+  } finally {
+    replyFirstRelease.resolve();
+    if (replyFirstInbound) await replyFirstInbound.catch(() => undefined);
+    if (replyFirstWorker) await replyFirstWorker.catch(() => undefined);
+    await cleanRaceFixture(replyFirstFixture);
+  }
+
+  const dispatchFirstFixture = await createRaceFixture();
+  const dispatchFirstBeforeLock = deferred<void>();
+  const dispatchFirstProviderPaused = deferred<void>();
+  const dispatchFirstReleaseBeforeLock = deferred<void>();
+  const dispatchFirstReleaseProvider = deferred<void>();
+  let dispatchFirstProviderCalls = 0;
+  let dispatchFirstWorker: Promise<unknown> | undefined;
+  let dispatchFirstInbound: Promise<Awaited<ReturnType<typeof captureInboundReply>>> | undefined;
+  let dispatchFirstInboundSettled = false;
+
+  try {
+    const claimed = await claimOutreachMessageForSending(dispatchFirstFixture.followUp.id);
+    assert.ok(claimed);
+    dispatchFirstWorker = sendClaimedOutreachMessage(claimed, {
+      ...isolatedSendOptions,
+      beforeEmailLock: async () => {
+        dispatchFirstBeforeLock.resolve();
+        await dispatchFirstReleaseBeforeLock.promise;
+      },
+      beforeProviderDispatch: async () => {
+        dispatchFirstProviderPaused.resolve();
+        await dispatchFirstReleaseProvider.promise;
+      },
+      dispatch: async () => {
+        dispatchFirstProviderCalls += 1;
+        return new Response(null, {
+          status: 202,
+          headers: { "x-message-id": "dispatch-first-race" },
+        });
+      },
+    });
+    await waitForGateOrWorker(
+      dispatchFirstBeforeLock.promise,
+      dispatchFirstWorker,
+      "the pre-dispatch email lock gate",
+    );
+    dispatchFirstReleaseBeforeLock.resolve();
+    // This gate resolves only while the worker owns the email lock.
+    await waitForGateOrWorker(
+      dispatchFirstProviderPaused.promise,
+      dispatchFirstWorker,
+      "the provider dispatch gate",
+    );
+
+    dispatchFirstInbound = captureInboundReply({
+      from: dispatchFirstFixture.prospect.contactEmail!,
+      subject: "Automatic reply: Re: Initial test",
+      text: "I am out of the office and will return soon.",
+      headers: "Message-ID: <automatic-race-reply@example.com>\nAuto-Submitted: auto-replied",
+    }).then((result) => {
+      dispatchFirstInboundSettled = true;
+      return result;
+    });
+    await waitForReply(dispatchFirstFixture.prospect.contactEmail!);
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    assert.equal(dispatchFirstInboundSettled, false);
+
+    dispatchFirstReleaseProvider.resolve();
+    const sent = await dispatchFirstWorker;
+    const captured = await dispatchFirstInbound;
+    assert.equal((sent as { status?: string } | undefined)?.status, "sent");
+    assert.equal(captured.reply.messageType, "auto_reply");
+    assert.equal(dispatchFirstProviderCalls, 1);
+
+    const [prospect] = await db.select().from(prospectsTable)
+      .where(eq(prospectsTable.id, dispatchFirstFixture.prospect.id));
+    const messages = await db.select().from(outreachMessagesTable)
+      .where(eq(outreachMessagesTable.prospectId, dispatchFirstFixture.prospect.id));
+    const [reply] = await db.select().from(outreachRepliesTable)
+      .where(eq(outreachRepliesTable.senderEmail, dispatchFirstFixture.prospect.contactEmail!));
+    assert.equal(prospect?.status, "review");
+    assert.equal(prospect?.contactStatus, "temporary_unavailable");
+    assert.equal(reply?.messageType, "auto_reply");
+    assert.ok(reply?.followUpAt);
+    assert.equal(messages.find((message) => message.id === dispatchFirstFixture.followUp.id)?.status, "sent");
+    assert.equal(messages.find((message) => message.id === dispatchFirstFixture.laterFollowUp.id)?.status, "needs_review");
+    assert.equal(
+      (await db.select().from(outreachSendReservationsTable)
+        .where(eq(outreachSendReservationsTable.messageId, dispatchFirstFixture.followUp.id))).length,
+      1,
+    );
+    assert.equal(
+      (await db.select().from(outreachSequenceSendClaimsTable)
+        .where(eq(outreachSequenceSendClaimsTable.messageId, dispatchFirstFixture.followUp.id))).length,
+      1,
+    );
+  } finally {
+    dispatchFirstReleaseBeforeLock.resolve();
+    dispatchFirstReleaseProvider.resolve();
+    if (dispatchFirstInbound) await dispatchFirstInbound.catch(() => undefined);
+    if (dispatchFirstWorker) await dispatchFirstWorker.catch(() => undefined);
+    await cleanRaceFixture(dispatchFirstFixture);
+  }
+});
 
 test("a reconciliation key is stable when initialized concurrently", async () => {
   const fixture = await createFixture();
