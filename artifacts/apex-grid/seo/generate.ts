@@ -199,6 +199,52 @@ function breadcrumbSchema(items: { name: string; href?: string }[]) {
 
 const orgSchema = APEX_GRID_BUSINESS_SCHEMA;
 
+const INDUSTRY_ROOT_SLUGS: Readonly<Record<string, string>> = {
+  agriculture: "agriculture-cannabis-facility-engineering",
+  aviation: "aviation-hangar-engineering",
+  cannabis: "agriculture-cannabis-facility-engineering",
+  "cold-storage": "cold-storage-food-processing-engineering",
+  "commercial-office": "commercial-office-engineering",
+  "data-centers": "data-center-engineering",
+  education: "educational-facility-engineering",
+  "ev-automotive": "ev-charging-automotive-engineering",
+  government: "government-civic-engineering",
+  healthcare: "healthcare-engineering",
+  hospitality: "retail-hospitality-engineering",
+  "industrial-warehouse": "industrial-warehouse-engineering",
+  "life-science": "life-science-cleanroom-engineering",
+  "military-defense": "military-defense-engineering",
+  multifamily: "multifamily-residential-engineering",
+  parking: "parking-structure-engineering",
+  "religious-worship": "religious-worship-facility-engineering",
+  "renewable-energy": "solar-renewable-energy-engineering",
+  restaurants: "restaurant-food-service-engineering",
+  retail: "retail-hospitality-engineering",
+  "senior-living": "senior-living-assisted-care-engineering",
+  "student-housing": "multifamily-residential-engineering",
+  telecommunications: "telecommunications-engineering",
+};
+
+function industryRootUrl(slug: string): string {
+  const canonicalSlug = INDUSTRY_ROOT_SLUGS[slug] ?? slug;
+  if (!ALL_INDUSTRIES.some((industry) => industry.slug === canonicalSlug)) {
+    throw new Error(`Industry root has no canonical page: ${slug}`);
+  }
+  return `/industries/${canonicalSlug}/`;
+}
+
+const LOCATION_SERVICE_URLS = new Set(
+  LOCATION_SERVICE_PAGES.map(
+    (page) => `/locations/${page.stateSlug}/${page.citySlug}/${page.serviceSlug}/`,
+  ),
+);
+
+function staticIndexExists(urlPath: string): boolean {
+  return fs.existsSync(
+    path.join(PUBLIC, urlPath.replace(/^\/|\/$/g, ""), "index.html"),
+  );
+}
+
 function servicePage(state: StateData, svc: ServiceDef, allStates: StateData[]): string {
   const url = `/locations/${state.slug}/${svc.slug}/`;
   const crumbs = [
@@ -1574,9 +1620,9 @@ function industryDisciplinePage(page: IndustryDisciplinePage): string {
   const crumbs: { name: string; href?: string }[] = [{ name: "Home", href: "/" }, { name: "Industries", href: "/industries/" }];
   if (page.segments.length > 2) {
     // sub-industry path: e.g. ["healthcare","hospitals","mep-engineering"]
-    crumbs.push({ name: toTitle(page.segments[1]), href: `/industries/${page.segments[0]}/` });
+    crumbs.push({ name: toTitle(page.segments[1]), href: industryRootUrl(page.industrySlug) });
   } else {
-    crumbs.push({ name: toTitle(page.segments[0]), href: `/industries/${page.industrySlug}/` });
+    crumbs.push({ name: toTitle(page.segments[0]), href: industryRootUrl(page.industrySlug) });
   }
   crumbs.push({ name: page.disciplineLabel });
 
@@ -1631,7 +1677,7 @@ ${siblings.length ? `<section class="block"><div class="container">
   <div class="grid2">
   ${siblings.map((s) => `<a class="card" href="${getIndustryDisciplineUrl(s)}"><div class="label">${esc(s.kicker)}</div><h3>${esc(s.h1)}</h3><p>${esc(s.lede.slice(0, 120))}…</p></a>`).join("")}
   </div>
-  <div class="linkrow" style="margin-top:20px"><a href="/industries/${esc(page.industrySlug)}/">Back to ${esc(toTitle(page.industrySlug))} Engineering</a></div>
+  <div class="linkrow" style="margin-top:20px"><a href="${industryRootUrl(page.industrySlug)}">Back to ${esc(toTitle(page.industrySlug))} Engineering</a></div>
 </div></section>` : ""}
 
 ${glossaryTerms.length ? `<section class="block"><div class="container">
@@ -1664,14 +1710,19 @@ function toTitle(slug: string): string {
 
 function locationServicePage(page: LocationServicePage): string {
   const url = `/locations/${page.stateSlug}/${page.citySlug}/${page.serviceSlug}/`;
+  const cityUrl = `/locations/${page.stateSlug}/${page.citySlug}/`;
   const crumbs = [
     { name: "Home", href: "/" },
     { name: "Locations", href: "/locations/" },
     { name: page.stateName, href: `/locations/${page.stateSlug}/` },
-    { name: page.cityName, href: `/locations/${page.stateSlug}/${page.citySlug}/` },
+    { name: page.cityName, ...(staticIndexExists(cityUrl) ? { href: cityUrl } : {}) },
     { name: toTitle(page.serviceSlug) },
   ];
   const relatedLinks = page.relatedServiceSlugs
+    .filter((serviceSlug) => {
+      const relatedUrl = `/locations/${page.stateSlug}/${page.citySlug}/${serviceSlug}/`;
+      return LOCATION_SERVICE_URLS.has(relatedUrl) || staticIndexExists(relatedUrl);
+    })
     .slice(0, 3)
     .map((s) => `<a href="/locations/${page.stateSlug}/${page.citySlug}/${s}/">${toTitle(s)}</a>`)
     .join(" · ");
@@ -1714,7 +1765,7 @@ function locationServicePage(page: LocationServicePage): string {
         <h2>About Apex Grid Engineering</h2>
         <p>Apex Grid Engineering is a multi-discipline engineering firm licensed in 49 states and headquartered in Queen Creek, Arizona. We provide structural, MEP, civil, and geotechnical engineering for commercial, industrial, multifamily, and government clients — with 15+ years of experience and 20+ licensed engineers on staff.</p>
         <p>We work from architectural PDFs, CAD files, or field measurements, and we're set up to turn projects around on compressed schedules when the situation calls for it.</p>
-        ${relatedLinks ? `<p>Related services in ${esc(page.cityName)}: ${relatedLinks}</p>` : ""}
+${relatedLinks ? `        <p>Related services in ${esc(page.cityName)}: ${relatedLinks}</p>` : ""}
       </div>
     </section>
 
@@ -1760,8 +1811,10 @@ function solutionPage(page: SolutionPage): string {
     { name: page.h1 },
   ];
   const relatedLinks = page.relatedSlugs
+    .map((slug) => SOLUTION_PAGES.find((candidate) => candidate.slug === slug))
+    .filter((candidate): candidate is SolutionPage => Boolean(candidate))
     .slice(0, 4)
-    .map((s) => `<a class="card" href="/solutions/${s}/"><h3>${toTitle(s).replace(/Engineering$/, "").trim()}</h3></a>`)
+    .map((related) => `<a class="card" href="/${related.dir}/${related.slug}/"><h3>${toTitle(related.slug).replace(/Engineering$/, "").trim()}</h3></a>`)
     .join("\n          ");
 
   // Derive keyword hints from the page slug words + category words
@@ -2359,21 +2412,21 @@ function htmlSitemapPage(): string {
             <h2>Industries</h2>
             <ul>
               <li><a href="/industries/">All Industries</a></li>
-              <li><a href="/industries/healthcare/">Healthcare</a></li>
-              <li><a href="/industries/multifamily/">Multifamily</a></li>
-              <li><a href="/industries/restaurants/">Restaurants</a></li>
-              <li><a href="/industries/industrial-warehouse/">Industrial &amp; Warehouse</a></li>
-              <li><a href="/industries/data-centers/">Data Centers</a></li>
-              <li><a href="/industries/retail/">Retail</a></li>
-              <li><a href="/industries/government/">Government</a></li>
-              <li><a href="/industries/military-defense/">Military &amp; Defense</a></li>
-              <li><a href="/industries/renewable-energy/">Solar &amp; Renewable Energy</a></li>
-              <li><a href="/industries/commercial-office/">Commercial Office</a></li>
-              <li><a href="/industries/hospitality/">Hospitality</a></li>
-              <li><a href="/industries/education/">Education</a></li>
-              <li><a href="/industries/life-science/">Life Science</a></li>
-              <li><a href="/industries/senior-living/">Senior Living</a></li>
-              <li><a href="/industries/cold-storage/">Cold Storage</a></li>
+              <li><a href="${industryRootUrl("healthcare")}">Healthcare</a></li>
+              <li><a href="${industryRootUrl("multifamily")}">Multifamily</a></li>
+              <li><a href="${industryRootUrl("restaurants")}">Restaurants</a></li>
+              <li><a href="${industryRootUrl("industrial-warehouse")}">Industrial &amp; Warehouse</a></li>
+              <li><a href="${industryRootUrl("data-centers")}">Data Centers</a></li>
+              <li><a href="${industryRootUrl("retail")}">Retail</a></li>
+              <li><a href="${industryRootUrl("government")}">Government</a></li>
+              <li><a href="${industryRootUrl("military-defense")}">Military &amp; Defense</a></li>
+              <li><a href="${industryRootUrl("renewable-energy")}">Solar &amp; Renewable Energy</a></li>
+              <li><a href="${industryRootUrl("commercial-office")}">Commercial Office</a></li>
+              <li><a href="${industryRootUrl("hospitality")}">Hospitality</a></li>
+              <li><a href="${industryRootUrl("education")}">Education</a></li>
+              <li><a href="${industryRootUrl("life-science")}">Life Science</a></li>
+              <li><a href="${industryRootUrl("senior-living")}">Senior Living</a></li>
+              <li><a href="${industryRootUrl("cold-storage")}">Cold Storage</a></li>
             </ul>
           </div>
           <div class="sitemap-col">
@@ -2432,7 +2485,6 @@ function htmlSitemapPage(): string {
               <li><a href="/locations/texas/houston/">Houston</a></li>
               <li><a href="/locations/texas/austin/">Austin</a></li>
               <li><a href="/locations/florida/miami/">Miami</a></li>
-              <li><a href="/locations/virginia/northern-virginia/">Northern Virginia</a></li>
             </ul>
             <h2>About &amp; Company</h2>
             <ul>
@@ -2444,7 +2496,6 @@ function htmlSitemapPage(): string {
               <li><a href="/quality-control/">Quality Control</a></li>
               <li><a href="/engineering-process/">Our Process</a></li>
               <li><a href="/contact/">Contact Us</a></li>
-              <li><a href="/intake-requirements/">Intake Requirements</a></li>
             </ul>
           </div>
         </div>
