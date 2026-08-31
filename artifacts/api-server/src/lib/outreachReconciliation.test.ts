@@ -8,6 +8,7 @@ import {
   outreachDeliveryEventsTable,
   outreachMessagesTable,
   outreachMonthlySendReservationsTable,
+  outreachRepliesTable,
   outreachSendReservationsTable,
   outreachSequenceSendClaimsTable,
   outreachSuppressionsTable,
@@ -19,7 +20,7 @@ import {
   reserveSequenceSend,
   sendApprovedOutreach,
 } from "./outreach";
-import { processSendGridEvents } from "./outreachEvents";
+import { captureInboundReply, processSendGridEvents } from "./outreachEvents";
 import {
   claimOutreachMessageForSending,
   getSendFailureStatus,
@@ -70,6 +71,8 @@ async function createFixture(status = "approved") {
 }
 
 async function cleanFixture(fixture: Awaited<ReturnType<typeof createFixture>>): Promise<void> {
+  await db.delete(outreachRepliesTable)
+    .where(eq(outreachRepliesTable.senderEmail, fixture.prospect.contactEmail!));
   await db.delete(outreachSuppressionsTable)
     .where(eq(outreachSuppressionsTable.email, fixture.prospect.contactEmail!));
   await db.delete(outreachDeliveryEventsTable).where(eq(outreachDeliveryEventsTable.outreachMessageId, fixture.message.id));
@@ -109,6 +112,71 @@ test("only one concurrent worker can claim an approved message", async () => {
     assert.equal(claims.filter(Boolean).length, 1);
     assert.equal(claims.find(Boolean)?.status, "sending");
   } finally {
+    await cleanFixture(fixture);
+  }
+});
+
+test("an inbound reply is serialized with an in-flight provider dispatch", async () => {
+  const fixture = await createFixture();
+  const originalFetch = globalThis.fetch;
+  const originalEnv = {
+    OUTREACH_FROM_EMAIL: process.env.OUTREACH_FROM_EMAIL,
+    OUTREACH_REPLY_TO_EMAIL: process.env.OUTREACH_REPLY_TO_EMAIL,
+    SENDGRID_ISOLATION_VERIFIED: process.env.SENDGRID_ISOLATION_VERIFIED,
+    SENDGRID_DEDICATED_API_KEY: process.env.SENDGRID_DEDICATED_API_KEY,
+    SESSION_SECRET: process.env.SESSION_SECRET,
+  };
+  let providerStarted!: () => void;
+  const providerReady = new Promise<void>((resolve) => { providerStarted = resolve; });
+  let releaseProvider!: () => void;
+  const providerRelease = new Promise<void>((resolve) => { releaseProvider = resolve; });
+  let providerCalls = 0;
+  try {
+    process.env.OUTREACH_FROM_EMAIL = "outreach@example.com";
+    process.env.OUTREACH_REPLY_TO_EMAIL = "replies@example.com";
+    process.env.SENDGRID_ISOLATION_VERIFIED = "true";
+    process.env.SENDGRID_DEDICATED_API_KEY = "test-only";
+    process.env.SESSION_SECRET = "test-only";
+    globalThis.fetch = async () => {
+      providerCalls += 1;
+      providerStarted();
+      await providerRelease;
+      return new Response(null, {
+        status: 202,
+        headers: { "x-message-id": "provider-race-test" },
+      });
+    };
+
+    const claimed = await claimOutreachMessageForSending(fixture.message.id);
+    assert.ok(claimed);
+    const sendPromise = sendApprovedOutreach(
+      { ...claimed, status: "approved" },
+      fixture.prospect,
+      fixture.campaign,
+      { expectedPersistedStatus: "sending" },
+    );
+    await providerReady;
+    const replyPromise = captureInboundReply({
+      from: fixture.prospect.contactEmail!,
+      subject: "Re: Reconciliation test",
+      text: "Yes, let's discuss this.",
+      headers: `Message-ID: <race-${fixture.message.id}@example.com>`,
+    });
+    releaseProvider();
+    await sendPromise;
+    const captured = await replyPromise;
+    assert.equal(providerCalls, 1);
+    assert.equal(captured.inserted, true);
+    const [followUp] = await db.select({ status: outreachMessagesTable.status })
+      .from(outreachMessagesTable)
+      .where(eq(outreachMessagesTable.id, fixture.message.id));
+    assert.equal(followUp?.status, "replied");
+  } finally {
+    globalThis.fetch = originalFetch;
+    for (const [key, value] of Object.entries(originalEnv)) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
     await cleanFixture(fixture);
   }
 });
