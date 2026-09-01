@@ -31,7 +31,7 @@ import {
 } from "./outreachSequence";
 
 const ADMIN_EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-const MAX_SCHEDULED_MESSAGES_PER_RUN = 150;
+const MAX_SCHEDULED_MESSAGES_PER_RUN = 200;
 
 export type OutreachAutomationStatus = {
   adminAllowlistReady: boolean;

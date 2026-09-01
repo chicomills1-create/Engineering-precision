@@ -60,9 +60,9 @@ export function isDefinitiveSendGridRejection(status: number): boolean {
     && ![408, 409, 425, 429].includes(status);
 }
 
-const INITIAL_RAMP_DAILY_LIMIT = 150;
+const INITIAL_RAMP_DAILY_LIMIT = 200;
 const INITIAL_RAMP_ACTIVE_DAYS = 3;
-const OUTREACH_MONTHLY_LIMIT = 5000;
+const OUTREACH_MONTHLY_LIMIT = 6000;
 const DUPLICATE_EMAIL_SEQUENCE_STATUSES = [
   "sending",
   "needs_review",

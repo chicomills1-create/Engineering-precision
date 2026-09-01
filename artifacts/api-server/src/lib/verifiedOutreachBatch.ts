@@ -134,7 +134,7 @@ export async function seedVerifiedOutreachBatch(options: {
       name: CAMPAIGN_NAME,
       audience: "mixed",
       states: ["AZ", "CA"],
-      dailyLimit: 150,
+      dailyLimit: 200,
       status: "active",
       subjectTemplate: SUBJECT,
       bodyTemplate: "Approved personalized Apex Grid outreach copy",
@@ -142,13 +142,13 @@ export async function seedVerifiedOutreachBatch(options: {
   }
   if (!campaign) throw new Error("Unable to create the verified outreach campaign");
   if (
-    campaign.dailyLimit !== 150
+    campaign.dailyLimit !== 200
     || campaign.audience !== "mixed"
     || !campaign.states.includes("AZ")
     || !campaign.states.includes("CA")
   ) {
     const [updatedCampaign] = await db.update(campaignsTable)
-      .set({ dailyLimit: 150, audience: "mixed", states: ["AZ", "CA"] })
+      .set({ dailyLimit: 200, audience: "mixed", states: ["AZ", "CA"] })
       .where(eq(campaignsTable.id, campaign.id))
       .returning();
     if (!updatedCampaign) throw new Error("Unable to set the outreach campaign daily limit");
@@ -350,7 +350,7 @@ export async function seedVerifiedOutreachBatch(options: {
     }
   }
   // The seed only supplies reviewed candidates. The preparation service owns all
-  // message creation so the startup path cannot bypass the shared 150-slot ledger.
+  // message creation so the startup path cannot bypass the shared 200-slot ledger.
   return { state: "ready", queued: 0 };
 }
 

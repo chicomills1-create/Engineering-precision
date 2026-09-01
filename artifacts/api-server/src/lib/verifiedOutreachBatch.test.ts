@@ -115,7 +115,7 @@ test("the enabled seed uses committed contacts without a private-storage prerequ
   assert.match(source, /for \(const batch of datedBatches\)/);
 });
 
-test("the legacy verified pool leaves daily scheduling to the 150-slot preparation service", async () => {
+test("the legacy verified pool leaves daily scheduling to the shared preparation service", async () => {
   const source = await import("node:fs/promises")
     .then((fs) => fs.readFile(new URL("./verifiedOutreachBatch.ts", import.meta.url), "utf8"));
   assert.doesNotMatch(source, /outreachMessagesTable|status:\s*"approved",\s*scheduledAt/);

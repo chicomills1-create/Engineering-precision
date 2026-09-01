@@ -164,14 +164,14 @@ test("excludes current client contacts by name and company", () => {
   );
 });
 
-test("enforces the 150-per-day campaign ceiling from the first send day", () => {
+test("enforces the 200-per-day campaign ceiling from the first send day", () => {
   assert.equal(getOutreachDailyLimit(100, 0), 100);
   assert.equal(getOutreachDailyLimit(100, 2), 100);
   assert.equal(getOutreachDailyLimit(100, 3), 100);
-  assert.equal(getOutreachDailyLimit(250, 3), 150);
-  assert.equal(getOutreachDailyLimit(167, 0), 150);
-  assert.equal(getOutreachDailyLimit(500, 0), 150);
-  assert.equal(getOutreachDailyLimit(500, 3), 150);
+  assert.equal(getOutreachDailyLimit(250, 3), 200);
+  assert.equal(getOutreachDailyLimit(167, 0), 167);
+  assert.equal(getOutreachDailyLimit(500, 0), 200);
+  assert.equal(getOutreachDailyLimit(500, 3), 200);
 });
 
 test("legacy same-day sends consume the new global reservation ceiling", () => {
@@ -180,11 +180,11 @@ test("legacy same-day sends consume the new global reservation ceiling", () => {
   assert.equal(getLegacyOutreachSentCount(120, 20), 100);
 });
 
-test("monthly outreach quota uses Phoenix calendar months and a hard 5000 ceiling", () => {
+test("monthly outreach quota uses Phoenix calendar months and a hard 6000 ceiling", () => {
   assert.equal(getPhoenixOutreachMonthKey(new Date("2026-09-01T06:59:59.000Z")), "2026-08");
   assert.equal(getPhoenixOutreachMonthKey(new Date("2026-09-01T07:00:00.000Z")), "2026-09");
-  assert.equal(getOutreachMonthlyLimit(), 5000);
-  assert.equal(getLegacyOutreachMonthlySentCount(5100, 100), 5000);
+  assert.equal(getOutreachMonthlyLimit(), 6000);
+  assert.equal(getLegacyOutreachMonthlySentCount(6100, 100), 6000);
   assert.equal(getLegacyOutreachMonthlySentCount(50, 75), 0);
 });
 

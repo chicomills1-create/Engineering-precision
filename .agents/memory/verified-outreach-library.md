@@ -21,17 +21,17 @@ Keep the public person, role, company domain, source URL, and enrichment status 
 
 Maintain two ordered library lanes: Personal and Public. Personal holds named individual contacts obtained through a single paid lookup after public qualification; Public holds company-published business emails found without finder credits. Work through Personal first, then revisit unresolved companies for the Public lane.
 
-The operating priority is Personal first: spend at most one Finder credit on one publicly confirmed reputable person and matching domain, never retry a failed lookup or switch to another person to force a result. Save all other clearly attributed official-site emails in Public without paid credits. Prepare the next day's batch only after the current 150-send window, and do not mix in Public recipients until the Personal pool is exhausted or the owner explicitly approves a mixed batch.
+The operating mix is 150 Personal plus 50 Public recipients per Phoenix day. Spend at most one Finder credit on one publicly confirmed reputable person and matching domain, never retry a failed lookup or switch people to force a result, and use clearly attributed official-site emails in the zero-credit Public lane.
 
-Do not increase the daily ceiling solely because messages appear delivered. Review at least seven calendar days of bounce, complaint, unsubscribe, reply-stop, and provider-reconciliation evidence before a ramp. If the next approved target is 200 total, the arithmetic mix is 150 Personal plus 50 Public; 150 Personal plus 59 Public is 209 total and must be treated as a separate target.
+The approved daily target is exactly 200: 150 Personal plus 50 Public. The hard Phoenix-calendar monthly ceiling is 6,000, allowing this mix for 30 days. The paid Finder ceiling remains independently capped at 150 lookups per Phoenix day.
 
-**Why:** Named, publicly confirmed decision-makers are the highest-confidence audience, while company inboxes are useful as a later lane but carry different attribution and response risk. A staged ramp protects sender reputation and keeps the 5,000/month ceiling intact.
+**Why:** Personal and Public contacts have different evidence and credit costs. Separate quotas prevent either lane from consuming the other and make the 30-day 6,000-send decision explicit.
 
-**How to apply:** Maintain separate Personal/Public counts and statuses, preserve paid-credit usage per lookup, stage tomorrow's messages for the next Phoenix 8:00 AM window, and require an explicit clean-delivery review before changing the 150/day ceiling.
+**How to apply:** Reserve 150 Personal and 50 Public preparation slots, preserve paid-credit usage per lookup, stage tomorrow's messages for the next Phoenix 8:00 AM window, and stop all sends at 6,000 in a Phoenix month.
 
 If a reputable direct person cannot be confirmed or their individual email cannot be obtained responsibly, retain the company in the Public lane and save any official company email found there. Never spend repeated credits trying to force a personal address, and never discard the company or its public email.
 
-The daily operating ceiling is 150 new eligible recipients at 8:00 AM America/Phoenix time. Enforce a hard monthly ceiling of 5,000 sends; 150 per day leaves a 350-500 message cushion in 30- and 31-day months. Every daily selection must exclude prior sends and all bounce, complaint, unsubscribe, and reply suppressions.
+The daily operating ceiling is 200 new eligible recipients at 8:00 AM America/Phoenix time, partitioned into 150 Personal and 50 Public slots. Enforce a hard monthly ceiling of 6,000 sends. Every daily selection must exclude prior sends and all bounce, complaint, unsubscribe, and reply suppressions.
 
 **Why:** Paid enrichment credits are finite, while the requested company coverage is broader than the immediately sendable list. Separating the company universe from email enrichment prevents low-yield lookups from silently hiding legitimate prospects.
 
@@ -51,18 +51,18 @@ Historical seed batches are satisfied when they retain at least their target cou
 
 The paid-enrichment budget is a separate hard limit: use at most 150 paid credits per Phoenix calendar day, with one lookup per contact. Never exceed that budget to fill an email batch or create reserve contacts.
 
-**Why:** The 150-credit allowance protects spend independently of the 150-email send target; treating lookup failures as a reason to keep spending caused unnecessary overrun.
+**Why:** The 150-credit allowance protects spend independently of the 200-email send target; treating lookup failures as a reason to keep spending caused unnecessary overrun.
 
 **How to apply:** Count every attempted paid contact lookup before starting research, stop at 150 for the Phoenix day, and report any remaining email shortfall without purchasing additional lookups.
 
-The paid-credit plan must be evaluated over a 30-day horizon: 150 paid contacts per day requires 4,500 finder credits. This does not authorize reducing the 150-email daily target when the balance is short.
+The paid-credit plan must be evaluated over a 30-day horizon: 150 paid contacts per day requires 4,500 finder credits. This does not authorize reducing the 150-contact Personal lane when the balance is short.
 
 **Why:** Daily send volume and the multi-day enrichment runway are separate planning constraints; silently lowering the send target would change the operating decision instead of addressing the credit shortfall.
 
-**How to apply:** Report current finder-credit coverage and the 30-day shortfall explicitly, keep the 150/day target unchanged, and do not spend beyond the per-day or 30-day credit plan.
+**How to apply:** Report current finder-credit coverage and the 30-day shortfall explicitly, keep the 150/day Personal target unchanged, and do not spend beyond the per-day or 30-day credit plan.
 
-Public business emails published on official company websites are a zero-credit lane and should fill the 150-email daily target whenever a qualified personal email is unavailable. The 150-email target and 150-paid-credit ceiling are separate constraints.
+Public business emails published on official company websites are a zero-credit lane with 50 reserved daily slots. The 200-email target, its 150/50 lane split, and the 150-paid-credit ceiling are separate constraints.
 
 **Why:** A company-published address can support compliant outreach without consuming a Finder credit; treating every send as a paid lookup wastes the enrichment budget and needlessly reduces future coverage.
 
-**How to apply:** Select qualified Personal contacts first up to the 150-credit daily ceiling, then use qualified Public contacts to complete the 150 outbound emails. Never lower the email target because the paid lane is short, and never use paid credits for reserve contacts while eligible Public contacts remain.
+**How to apply:** Select up to 150 qualified Personal contacts and exactly 50 qualified Public contacts. Never let surplus contacts in one lane consume the other lane's slots, and never use paid credits for Public contacts.

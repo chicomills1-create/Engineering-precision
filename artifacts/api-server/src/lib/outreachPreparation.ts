@@ -19,7 +19,10 @@ import {
   approvedOutreachSubject,
 } from "./verifiedOutreachBatch";
 import { ensureApprovedFollowUpSequence } from "./outreachSequence";
-export const OUTREACH_PREPARATION_TARGET = 150;
+export const OUTREACH_PERSONAL_PREPARATION_TARGET = 150;
+export const OUTREACH_PUBLIC_PREPARATION_TARGET = 50;
+export const OUTREACH_PREPARATION_TARGET =
+  OUTREACH_PERSONAL_PREPARATION_TARGET + OUTREACH_PUBLIC_PREPARATION_TARGET;
 const STALE_RUN_MS = 30 * 60_000;
 const PUBLIC_INBOX_LOCAL_PARTS = new Set([
   "admin", "contact", "hello", "help", "info", "inquiries", "office", "sales", "support",
@@ -100,18 +103,41 @@ export function prioritizePreparationCandidates<T extends PreparationCandidate>(
 
 export function selectUniquePreparationCandidates<T extends PreparationCandidate>(
   candidates: T[],
-  cap = OUTREACH_PREPARATION_TARGET,
+  options: {
+    personalCap?: number;
+    publicCap?: number;
+    usedEmails?: Iterable<string>;
+    usedDomains?: Iterable<string>;
+  } = {},
 ): T[] {
-  const emails = new Set<string>();
-  const domains = new Set<string>();
+  const personalCap = Math.min(
+    Math.max(0, options.personalCap ?? OUTREACH_PERSONAL_PREPARATION_TARGET),
+    OUTREACH_PERSONAL_PREPARATION_TARGET,
+  );
+  const publicCap = Math.min(
+    Math.max(0, options.publicCap ?? OUTREACH_PUBLIC_PREPARATION_TARGET),
+    OUTREACH_PUBLIC_PREPARATION_TARGET,
+  );
+  const emails = new Set(Array.from(options.usedEmails ?? [], (email) => email.trim().toLowerCase()));
+  const domains = new Set(Array.from(options.usedDomains ?? [], (domain) => domain.trim().toLowerCase()));
+  let personalCount = 0;
+  let publicCount = 0;
   return prioritizePreparationCandidates(candidates).filter((candidate) => {
     const email = candidate.contactEmail?.trim().toLowerCase() ?? "";
     const domain = companyDomain(candidate);
     if (!email || !domain || emails.has(email) || domains.has(domain)) return false;
+    const publicLane = isPublicInbox(
+      candidate.contactEmail,
+      candidate.contactName,
+      candidate.contactEvidenceType,
+    );
+    if (publicLane ? publicCount >= publicCap : personalCount >= personalCap) return false;
     emails.add(email);
     domains.add(domain);
+    if (publicLane) publicCount += 1;
+    else personalCount += 1;
     return true;
-  }).slice(0, Math.min(cap, OUTREACH_PREPARATION_TARGET));
+  });
 }
 
 export function getPreparationShortfall(prepared: number): number {
@@ -137,6 +163,11 @@ async function claimPreparationRun(targetDate: string, now: Date): Promise<numbe
     startedAt: now,
     completedAt: null,
     error: null,
+    targetCount: OUTREACH_PREPARATION_TARGET,
+    shortfallCount: sql`greatest(
+      0,
+      ${OUTREACH_PREPARATION_TARGET} - ${outreachPreparationRunsTable.preparedCount}
+    )`,
   }).where(and(
     eq(outreachPreparationRunsTable.targetDate, targetDate),
     or(
@@ -144,6 +175,10 @@ async function claimPreparationRun(targetDate: string, now: Date): Promise<numbe
       and(
         eq(outreachPreparationRunsTable.status, "completed"),
         gt(outreachPreparationRunsTable.shortfallCount, 0),
+      ),
+      and(
+        eq(outreachPreparationRunsTable.status, "completed"),
+        lt(outreachPreparationRunsTable.targetCount, OUTREACH_PREPARATION_TARGET),
       ),
       and(
         eq(outreachPreparationRunsTable.status, "running"),
@@ -211,7 +246,13 @@ export async function approveInitialMessageInPreparationWindow(
         messageId: outreachPreparationSlotsTable.messageId,
       }).from(outreachPreparationSlotsTable)
         .where(eq(outreachPreparationSlotsTable.targetDate, targetDate)),
-      tx.select({ id: outreachMessagesTable.id }).from(outreachMessagesTable)
+      tx.select({
+        id: outreachMessagesTable.id,
+        contactEmail: prospectsTable.contactEmail,
+        contactName: prospectsTable.contactName,
+        contactEvidenceType: prospectsTable.contactEvidenceType,
+      }).from(outreachMessagesTable)
+        .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
         .where(and(
           eq(outreachMessagesTable.sequenceNumber, 1),
           gte(outreachMessagesTable.scheduledAt, scheduledAt),
@@ -221,6 +262,24 @@ export async function approveInitialMessageInPreparationWindow(
     ]);
     const slottedMessageIds = new Set(slots.flatMap((slot) => slot.messageId ? [slot.messageId] : []));
     const untrackedCount = targetInitials.filter((candidate) => !slottedMessageIds.has(candidate.id)).length;
+    const publicCount = targetInitials.filter((candidate) => isPublicInbox(
+      candidate.contactEmail,
+      candidate.contactName,
+      candidate.contactEvidenceType,
+    )).length;
+    const personalCount = targetInitials.length - publicCount;
+    const publicLane = isPublicInbox(
+      prospect.contactEmail,
+      prospect.contactName,
+      prospect.contactEvidenceType,
+    );
+    if (
+      publicLane
+        ? publicCount >= OUTREACH_PUBLIC_PREPARATION_TARGET
+        : personalCount >= OUTREACH_PERSONAL_PREPARATION_TARGET
+    ) {
+      throw new Error(`The target outreach ${publicLane ? "Public" : "Personal"} lane is full`);
+    }
     const remainingCapacity = getPreparationRemainingCapacity(slots.length, untrackedCount);
     if (remainingCapacity === 0) throw new Error("The target outreach window is full");
     const usedSlots = new Set(slots.map((slot) => slot.slot));
@@ -318,11 +377,6 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
       canPrepare(prospect, campaign, suppressedEmails)
       && !initialProspects.has(prospect.id)
       && !claimedProspects.has(prospect.id));
-    const selected = selectUniquePreparationCandidates(
-      eligible.map((row) => row.prospect),
-      OUTREACH_PREPARATION_TARGET,
-    );
-
     const campaignsByProspect = new Map(rows.map((row) => [row.prospect.id, row.campaign.id]));
     const campaignByProspect = new Map(rows.map((row) => [row.prospect.id, row.campaign]));
     const prepared = await db.transaction(async (tx) => {
@@ -340,8 +394,17 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
       const currentTargetInitials = await tx.select({
         id: outreachMessagesTable.id,
         prospectId: outreachMessagesTable.prospectId,
+        companyName: prospectsTable.companyName,
+        website: prospectsTable.website,
+        contactEmail: prospectsTable.contactEmail,
+        contactName: prospectsTable.contactName,
+        contactEvidenceType: prospectsTable.contactEvidenceType,
+        state: prospectsTable.state,
+        fitScore: prospectsTable.fitScore,
+        needScore: prospectsTable.needScore,
       })
         .from(outreachMessagesTable)
+        .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
         .where(and(
           eq(outreachMessagesTable.sequenceNumber, 1),
           gte(outreachMessagesTable.scheduledAt, scheduledAt),
@@ -358,6 +421,23 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
       const remainingCapacity = getPreparationRemainingCapacity(
         existingSlots.length,
         untrackedTargetInitials.length,
+      );
+      const existingPublicCount = currentTargetInitials.filter((candidate) => isPublicInbox(
+        candidate.contactEmail,
+        candidate.contactName,
+        candidate.contactEvidenceType,
+      )).length;
+      const existingPersonalCount = currentTargetInitials.length - existingPublicCount;
+      const selected = selectUniquePreparationCandidates(
+        eligible.map((row) => row.prospect),
+        {
+          personalCap: OUTREACH_PERSONAL_PREPARATION_TARGET - existingPersonalCount,
+          publicCap: OUTREACH_PUBLIC_PREPARATION_TARGET - existingPublicCount,
+          usedEmails: currentTargetInitials.flatMap((candidate) =>
+            candidate.contactEmail ? [candidate.contactEmail] : []
+          ),
+          usedDomains: currentTargetInitials.map(companyDomain),
+        },
       );
       const availableSlots = Array.from(
         { length: OUTREACH_PREPARATION_TARGET },
