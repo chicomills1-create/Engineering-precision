@@ -92,6 +92,7 @@ export function ReplyInboxTab() {
                   </div>
                   <div className="text-xs font-medium truncate mb-1 text-foreground/80">
                     {reply.messageType === 'auto_reply' && <span className="inline-block px-1 bg-amber-500/20 text-amber-500 text-[9px] uppercase mr-2 rounded-[2px] tracking-wider">Auto</span>}
+                    {reply.messageType === 'permanent_closure' && <span className="inline-block px-1 bg-destructive/20 text-destructive text-[9px] uppercase mr-2 rounded-[2px] tracking-wider">Closed</span>}
                     {reply.subject}
                   </div>
                   <div className="text-[11px] text-muted-foreground line-clamp-2 leading-relaxed opacity-75">
@@ -177,6 +178,14 @@ function ReplyDetail({ reply, onBack }: { reply: OutreachReply; onBack: () => vo
             {reply.messageType === 'auto_reply' && (
               <span className="px-2 py-1 text-[10px] uppercase tracking-wider font-bold rounded-[2px] bg-amber-500/20 text-amber-500">
                 Auto-Reply
+              </span>
+            )}
+            {reply.messageType === 'permanent_closure' && (
+              <span
+                className="px-2 py-1 text-[10px] uppercase tracking-wider font-bold rounded-[2px] bg-destructive/20 text-destructive"
+                data-testid="reply-permanent-closure"
+              >
+                Permanent Closure
               </span>
             )}
           </div>

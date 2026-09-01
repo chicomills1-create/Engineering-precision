@@ -189,10 +189,15 @@ function inboundMessageId(headers = ""): string | null {
   return match?.[1]?.trim().slice(0, 500) || null;
 }
 
-export function classifyInboundReply(input: Pick<InboundReplyInput, "subject" | "text" | "headers">): "reply" | "auto_reply" {
+export function classifyInboundReply(input: Pick<InboundReplyInput, "subject" | "text" | "headers">): "reply" | "auto_reply" | "permanent_closure" {
   const headers = input.headers?.toLowerCase() ?? "";
   const subject = input.subject.trim().toLowerCase();
   const textStart = input.text.trim().slice(0, 500).toLowerCase();
+  if (
+    /\bpermanently closed\b|\bceased operations\b|\bno longer in business\b/.test(`${subject}\n${textStart}`)
+  ) {
+    return "permanent_closure";
+  }
   if (
     /^auto-submitted:\s*(?:auto-|yes\b)/im.test(headers)
     || /^x-autoreply:/im.test(headers)
@@ -267,15 +272,23 @@ export async function captureInboundReply(input: InboundReplyInput): Promise<{
     if (current.stopProcessedAt) return current;
 
     const reviewAt = new Date(receivedAt.getTime() + 14 * 24 * 60 * 60 * 1000);
+    const evidenceType = messageType === "permanent_closure"
+      ? "departed"
+      : messageType === "auto_reply"
+        ? "temporary_unavailability"
+        : "forwarded_reply";
     for (const prospect of prospects) {
       await recordContactEvidence({
         prospectId: prospect.id,
-        evidenceType: messageType === "auto_reply" ? "temporary_unavailability" : "forwarded_reply",
-        evidenceNote: messageType === "auto_reply"
-          ? "Automatic reply received by the protected reply webhook; review before resuming outreach"
-          : "Inbound reply received and retained by the protected reply webhook",
+        evidenceType,
+        evidenceNote: messageType === "permanent_closure"
+          ? "Permanent business closure reported by the protected reply webhook"
+          : messageType === "auto_reply"
+            ? "Automatic reply received by the protected reply webhook; review before resuming outreach"
+            : "Inbound reply received and retained by the protected reply webhook",
         reviewAt: messageType === "auto_reply" ? reviewAt : undefined,
         now: receivedAt,
+        emailLockAlreadyHeld: true,
       });
       matchedProspects += 1;
     }

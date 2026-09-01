@@ -7,4 +7,4 @@ Hold the normalized-email advisory lock through the final persisted-state check,
 
 **Why:** Claiming an outbound row before sending is not sufficient. An inbound reply can stop the persisted sequence while a worker still holds a stale claimed object and sends it anyway. Persisting sent after unlocking can also overwrite a reply or automatic-reply stop state.
 
-**How to apply:** Any new reply, suppression, or send path must use the same per-email lock. Never infer a reply's message thread from recency; link message-level context only from verified correlation.
+**How to apply:** Any new reply, suppression, or send path must use the same per-email lock. When a caller already holds the session lock, nested evidence logic must skip its transaction-level lock to avoid a cross-connection deadlock. Never infer a reply's message thread from recency; link message-level context only from verified correlation.

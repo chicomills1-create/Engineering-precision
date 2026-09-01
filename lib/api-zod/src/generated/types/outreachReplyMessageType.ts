@@ -12,4 +12,5 @@ export type OutreachReplyMessageType = typeof OutreachReplyMessageType[keyof typ
 export const OutreachReplyMessageType = {
   reply: 'reply',
   auto_reply: 'auto_reply',
+  permanent_closure: 'permanent_closure',
 } as const;

@@ -24,6 +24,7 @@ export type RecordContactEvidenceInput = {
   replacementContactEmail?: string;
   replacementContactSourceUrl?: string;
   now?: Date;
+  emailLockAlreadyHeld?: boolean;
 };
 
 export type RecordContactEvidenceResult = {
@@ -70,7 +71,7 @@ export async function recordContactEvidence(
   const candidateEmail = candidate.contactEmail?.trim().toLowerCase() || null;
 
   return db.transaction(async (tx) => {
-    if (input.evidenceType === "departed" && candidateEmail) {
+    if (input.evidenceType === "departed" && candidateEmail && !input.emailLockAlreadyHeld) {
       await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${candidateEmail}, 0))`);
     }
     const [current] = await tx.select().from(prospectsTable)

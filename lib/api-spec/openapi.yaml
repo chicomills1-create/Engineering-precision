@@ -1592,7 +1592,7 @@ components:
         recipientEmail: { type: [string, "null"] }
         subject: { type: string }
         textBody: { type: string }
-        messageType: { type: string, enum: [reply, auto_reply] }
+        messageType: { type: string, enum: [reply, auto_reply, permanent_closure] }
         prospectId: { type: [number, "null"] }
         outreachMessageId: { type: [number, "null"] }
         companyName: { type: [string, "null"] }

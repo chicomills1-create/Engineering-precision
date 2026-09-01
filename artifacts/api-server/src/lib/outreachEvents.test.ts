@@ -295,3 +295,36 @@ test("does not misclassify ordinary replies as automatic", () => {
     headers: "Auto-Submitted: no",
   }), "reply");
 });
+
+test("classifies an explicit permanent business closure separately from a temporary auto-reply", () => {
+  assert.equal(classifyInboundReply({
+    subject: "Auto Response from BKBC Architects",
+    text: "BKBC Architects Inc. has permanently closed.",
+    headers: "Auto-Submitted: auto-replied",
+  }), "permanent_closure");
+});
+
+test("a permanent closure reply suppresses the address and stops pending outreach", async () => {
+  const fixture = await createEventFixture("approved");
+  try {
+    const captured = await captureInboundReply({
+      from: fixture.email,
+      subject: "Auto Response from Test Firm",
+      text: "As of March 31, 2026, Test Firm has permanently closed.",
+      headers: `Message-ID: <closure-${fixture.prospect.id}@example.com>`,
+    });
+    assert.equal(captured.reply.messageType, "permanent_closure");
+    const [prospect] = await db.select().from(prospectsTable)
+      .where(eq(prospectsTable.id, fixture.prospect.id));
+    const [suppression] = await db.select().from(outreachSuppressionsTable)
+      .where(eq(outreachSuppressionsTable.email, fixture.email));
+    const messages = await db.select().from(outreachMessagesTable)
+      .where(inArray(outreachMessagesTable.id, [fixture.initial.id, fixture.followUp.id]));
+    assert.equal(prospect?.status, "suppressed");
+    assert.equal(prospect?.contactStatus, "departed");
+    assert.ok(suppression);
+    assert.ok(messages.every((message) => message.status === "unsubscribed"));
+  } finally {
+    await cleanEventFixture(fixture);
+  }
+});
