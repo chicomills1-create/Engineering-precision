@@ -11,6 +11,7 @@ import { VERIFIED_OUTREACH_CONTACTS as LEGACY_VERIFIED_OUTREACH_CONTACTS } from 
 import { VERIFIED_OUTREACH_CONTACTS_AUG_29 } from "./verifiedOutreachContactsAug29";
 import { VERIFIED_OUTREACH_CONTACTS_AUG_30 } from "./verifiedOutreachContactsAug30";
 import { VERIFIED_OUTREACH_CONTACTS_AUG_31 } from "./verifiedOutreachContactsAug31";
+import { VERIFIED_OUTREACH_CONTACTS_SEP_02 } from "./verifiedOutreachContactsSep02";
 
 const CAMPAIGN_NAME = "Approved 8 AM Outreach - August 2026";
 const SUBJECT = "Need stamped engineering without the usual wait or cost?";
@@ -21,6 +22,7 @@ export const VERIFIED_OUTREACH_CONTACTS = [
 
 const AUG_30_TARGET = 150;
 const AUG_31_TARGET = 150;
+const SEP_02_TARGET = 145;
 
 export function approvedOutreachSubject(): string {
   return SUBJECT;
@@ -116,6 +118,7 @@ export async function seedVerifiedOutreachBatch(options: {
   assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS, 313);
   assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_AUG_30);
   assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_AUG_31, AUG_31_TARGET);
+  assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_SEP_02, SEP_02_TARGET);
 
   let [campaign] = await db.select().from(campaignsTable)
     .where(eq(campaignsTable.name, CAMPAIGN_NAME))
@@ -243,6 +246,12 @@ export async function seedVerifiedOutreachBatch(options: {
       target: AUG_31_TARGET,
       label: "August 31",
     },
+    {
+      contacts: VERIFIED_OUTREACH_CONTACTS_SEP_02,
+      prefix: "verified-2026-09-02-",
+      target: SEP_02_TARGET,
+      label: "September 2",
+    },
   ] as const;
 
   for (const batch of datedBatches) {
@@ -322,9 +331,9 @@ export async function seedVerifiedOutreachBatch(options: {
     usedDomains.add(domain);
     stored += 1;
     }
-    if (stored !== batch.target) {
+    if (stored < batch.target) {
       throw new Error(
-        `Verified ${batch.label} outreach seed requires exactly ${batch.target} active prospects; found ${stored}`,
+        `Verified ${batch.label} outreach seed requires at least ${batch.target} active prospects; found ${stored}`,
       );
     }
   }

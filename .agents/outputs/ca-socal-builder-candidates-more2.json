@@ -1,0 +1,98 @@
+[
+  {
+    "companyName": "CEG Construction",
+    "website": "https://www.cegconstruction.com/",
+    "city": "Pico Rivera",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.cegconstruction.com/careers",
+    "needSignals": "CEG's official careers page invites applications for its Los Angeles headquarters and Los Angeles County jobsites, signaling an active need for construction talent.",
+    "contactName": "Trace Chalmers",
+    "contactTitle": "President",
+    "contactSourceUrl": "https://www.cegconstruction.com/trace-chalmers"
+  },
+  {
+    "companyName": "Sierra Pacific Constructors",
+    "website": "https://www.spcinc.com/",
+    "city": "Woodland Hills",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.spcinc.com/career/",
+    "needSignals": "Sierra Pacific Constructors' official career page promotes construction career opportunities; its official contact page identifies the Woodland Hills office.",
+    "contactName": "Ken La Spada",
+    "contactTitle": "Principal",
+    "contactSourceUrl": "https://www.spcinc.com/management/"
+  },
+  {
+    "companyName": "Shawmut Design and Construction",
+    "website": "https://www.shawmut.com/",
+    "city": "Los Angeles",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.shawmut.com/careers/",
+    "needSignals": "Shawmut's official careers page links to open positions and describes its employee-owned construction organization; its Los Angeles office page confirms the local presence.",
+    "contactName": "Les Hiscoe",
+    "contactTitle": "Chief Executive Officer",
+    "contactSourceUrl": "https://www.shawmut.com/about/leadership"
+  },
+  {
+    "companyName": "BCM Group, Inc.",
+    "website": "https://bcmg.us/",
+    "city": "Rancho Cucamonga",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://bcmg.us/jobs/",
+    "needSignals": "BCM states that it is actively seeking talent to meet growing Orange County and Inland Empire demand and lists superintendent and project-engineer hiring.",
+    "contactName": "William Sterling",
+    "contactTitle": "President and Chief Executive Officer",
+    "contactSourceUrl": "https://bcmg.us/about-us/"
+  },
+  {
+    "companyName": "RORE, Inc.",
+    "website": "https://roreinc.com/",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://roreinc.com/careers/",
+    "needSignals": "RORE's official careers page directs qualified candidates to review current open positions for its design-build general-contracting organization.",
+    "contactName": "Gita Murthy",
+    "contactTitle": "Founder and Chief Executive Officer",
+    "contactSourceUrl": "https://roreinc.com/leadership/"
+  },
+  {
+    "companyName": "IE General Builders, Inc.",
+    "website": "https://iegeneralbuilders.com/",
+    "city": "Chino",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://iegeneralbuilders.com/subcontractors/",
+    "needSignals": "IE General Builders' official subcontractor page invites potential trade partners and states the company has remained focused on positive subcontractor and supplier relationships since 1992.",
+    "contactName": "Adam Lopez",
+    "contactTitle": "President",
+    "contactSourceUrl": "https://iegeneralbuilders.com/about/"
+  },
+  {
+    "companyName": "Clune Construction",
+    "website": "https://www.clunegc.com/",
+    "city": "Los Angeles",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.clunegc.com/careers/",
+    "needSignals": "Clune's official careers page presents employment opportunities, while its Los Angeles office page describes ongoing complex project delivery in corporate interiors, renovations, retail, education, and data centers.",
+    "contactName": "Randy Starbird",
+    "contactTitle": "Managing Director",
+    "contactSourceUrl": "https://www.clunegc.com/location/los-angeles/"
+  },
+  {
+    "companyName": "Icon West, Inc.",
+    "website": "https://icon-west.com/",
+    "city": "Los Angeles",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://icon-west.com/job-listings/",
+    "needSignals": "Icon West's official jobs page lists current openings and asks candidates to apply for open positions.",
+    "contactName": "Michael Halaoui",
+    "contactTitle": "Chairman and President",
+    "contactSourceUrl": "https://icon-west.com/leadership/"
+  }
+]

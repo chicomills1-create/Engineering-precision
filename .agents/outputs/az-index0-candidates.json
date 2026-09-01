@@ -1,0 +1,86 @@
+[
+  {
+    "companyName": "GSS Contracting",
+    "website": "https://www.gssco.com/",
+    "city": "Scottsdale",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://www.gssco.com/",
+    "needSignals": "The active company site says GSS is a Scottsdale-based full-service general contractor for industrial manufacturing and commercial projects, identifies new-facility construction as its core focus, and has a live “Tell us about your project” intake link.",
+    "contactName": "Tim Smith",
+    "contactTitle": "Executive Officer",
+    "contactSourceUrl": "https://www.gssco.com/our-team"
+  },
+  {
+    "companyName": "Lloyd Construction",
+    "website": "https://lloydconstruction.com/",
+    "city": "Tucson",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://lloydconstruction.com/pages/careers/",
+    "needSignals": "Its live careers page says it is “always looking for talented people,” explicitly advertises “LABORERS NEEDED…APPLY NOW!,” and requests applications for current professional and administrative roles.",
+    "contactName": "William E. Lloyd",
+    "contactTitle": "Company President",
+    "contactSourceUrl": "https://lloydconstruction.com/pages/about-us/"
+  },
+  {
+    "companyName": "AP Global Contractors",
+    "website": "https://apglobalcontractors.com/",
+    "city": "Scottsdale",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://apglobalcontractors.com/",
+    "needSignals": "The current site is actively marketing commercial construction and displays Arizona project work with 2025-uploaded project assets, including QuikTrip Glendale, SSCW Casa Grande, and Cobblestone Tolleson.",
+    "contactName": "Toby Pugh",
+    "contactTitle": "President",
+    "contactSourceUrl": "https://apglobalcontractors.com/our-staff/"
+  },
+  {
+    "companyName": "Piramide Contractors Inc.",
+    "website": "https://www.piramidecontractors.com/",
+    "city": "Yuma",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://www.piramidecontractors.com/",
+    "needSignals": "Its live Yuma site solicits commercial projects—including offices, retail, and restaurants—and directs prospective clients to begin quote inquiries through its contact form.",
+    "contactName": "Dixie Rojas",
+    "contactTitle": "VP",
+    "contactSourceUrl": "https://www.piramidecontractors.com/about-us"
+  },
+  {
+    "companyName": "Salustro Partnership Architects, LLC",
+    "website": "https://salustroarchitects.com/",
+    "city": "Scottsdale",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://salustroarchitects.com/scottsdale-commercial-architects/",
+    "needSignals": "The firm's active commercial-services page offers a complimentary consultation for project program requirements and development-process discussions, covering offices, retail, government buildings, shopping centers, restaurants, and recreation facilities.",
+    "contactName": "John Salustro",
+    "contactTitle": "Partner",
+    "contactSourceUrl": "https://salustroarchitects.com/about-us/"
+  },
+  {
+    "companyName": "Headwaters Architecture",
+    "website": "https://headwatersarch.com/",
+    "city": "Prescott",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://headwatersarch.com/",
+    "needSignals": "The active Prescott firm site explicitly invites commercial work for retail spaces, medical offices, corporate facilities, and churches, including upgrades, expansions, and ground-up projects.",
+    "contactName": "Todd Marolf",
+    "contactTitle": "Founder and Architect",
+    "contactSourceUrl": "https://headwatersarch.com/about/"
+  },
+  {
+    "companyName": "smithARCHITECTS, Inc.",
+    "website": "https://www.smith-arc.com/",
+    "city": "Flagstaff",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://www.smith-arc.com/",
+    "needSignals": "The live commercial portfolio identifies recent Arizona commercial work, including a Clarkdale hotel dated 2024 and a Flagstaff community-center and bathhouse project dated 2023.",
+    "contactName": "Ryan Smith",
+    "contactTitle": "Registered Architect",
+    "contactSourceUrl": "https://www.smith-arc.com/about"
+  }
+]

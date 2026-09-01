@@ -1,0 +1,98 @@
+[
+  {
+    "companyName": "Grace Design Studios",
+    "website": "https://grace-design.com/",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://grace-design.com/careers",
+    "needSignals": "Grace's careers page lists current openings, including Phoenix openings; its Phoenix office page identifies the local office and its work in healthcare, education, hospitality, and civic projects.",
+    "contactName": "Saravanan Bala",
+    "contactTitle": "Office Leader",
+    "contactSourceUrl": "https://grace-design.com/locations/phoenix"
+  },
+  {
+    "companyName": "Cuningham",
+    "website": "https://cuningham.com/",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://jobs.lever.co/cuningham/770c0b4e-2530-4cb7-be92-06e72caadcc1",
+    "needSignals": "Cuningham is recruiting a Project Architect or Project Manager for its Phoenix studio, whose portfolio is described in the posting as spanning healthcare, workplace, and entertainment.",
+    "contactName": "Dan Olic",
+    "contactTitle": "Principal | Chief Operating Officer | Office Director - Phoenix",
+    "contactSourceUrl": "https://cuningham.com/people/dan-olic-aia-ncarb-pmp-leed-ap"
+  },
+  {
+    "companyName": "E5 Design-Build",
+    "website": "https://www.e5db.com/",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://www.e5db.com/career",
+    "needSignals": "E5's careers page lists a Phoenix Architectural Designer / Project Engineer vacancy and states that the role supports its growing portfolio.",
+    "contactName": "Travis Bradley",
+    "contactTitle": "Owner & Designer",
+    "contactSourceUrl": "https://www.e5db.com/"
+  },
+  {
+    "companyName": "Architekton",
+    "website": "https://www.architekton.com/",
+    "city": "Tempe",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://www.architekton.com/project-manager",
+    "needSignals": "Architekton is seeking a Project Manager in Tempe to work with principals, clients, and its studio team on project development and coordination.",
+    "contactName": "John Kane",
+    "contactTitle": "Founding Partner and Design Principal",
+    "contactSourceUrl": "https://aia-arizona.org/people/john-kane/"
+  },
+  {
+    "companyName": "DUST Architects",
+    "website": "https://dustarchitects.com/",
+    "city": "Tucson",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://dustarchitects.com/wp-content/uploads/2025/09/DUST_ProjectDesigner.pdf",
+    "needSignals": "DUST posted a full-time, in-studio Project Designer opening in Tucson for a designer who will work with the studio on its architecture projects.",
+    "contactName": "Jesús Edmundo Robles Jr.",
+    "contactTitle": "Founding Principal",
+    "contactSourceUrl": "https://www.capla.arizona.edu/faculty-staff/jesus-edmundo-robles-jr"
+  },
+  {
+    "companyName": "Upward Architects",
+    "website": "https://upwardarchitects.com/",
+    "city": "Tempe",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://www.linkedin.com/posts/upwardarchitects_jggmengineering-edcelectricalconsulting-activity-7450240971855859712-D_CN",
+    "needSignals": "Upward publicly highlighted its Mercy Center project in Gilbert, a two-story mixed-use development, in a company post.",
+    "contactName": "Trish Flower",
+    "contactTitle": "Partner & Project Architect",
+    "contactSourceUrl": "https://upwardarchitects.com/trish-flower/"
+  },
+  {
+    "companyName": "repp+mclain design and construction",
+    "website": "https://reppmclain.com/",
+    "city": "Tucson",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://reppmclain.com/",
+    "needSignals": "The firm's live project updates include construction closeout work for its El Rancho project; the firm describes itself as a Tucson architecture and design-build studio.",
+    "contactName": "Page Repp",
+    "contactTitle": "Founder",
+    "contactSourceUrl": "https://reppmclain.com/people/"
+  },
+  {
+    "companyName": "Hamilton Architecture",
+    "website": "https://www.hamiltecture.com/",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://www.linkedin.com/posts/hamilton-architecture_happy-to-be-working-on-another-project-with-activity-7376392855268806656-I802",
+    "needSignals": "Hamilton Architecture publicly reported that it was working on another project with KGM Builders in September 2025.",
+    "contactName": "Rick Hamilton",
+    "contactTitle": "Founder",
+    "contactSourceUrl": "https://www.hamiltecture.com/about"
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "companyName": "Nacht & Lewis Architects",
+    "website": "https://nachtlewis.com/",
+    "city": "Sacramento",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://www.linkedin.com/posts/nacht-%26-lewis-architects-inc-_nachtlewis-progressupdate-healthcare-activity-7486492881340465152-ocge",
+    "needSignals": "The firm reported that construction is progressing on the UC Davis Health Central Utility Plant Expansion.",
+    "contactName": "Mike Parrott",
+    "contactTitle": "President and Healthcare Leader",
+    "contactSourceUrl": "https://nachtlewis.com/people/"
+  },
+  {
+    "companyName": "Tucker Sadler Architects",
+    "website": "https://www.tuckersadler.com/",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://www.tuckersadler.com/projects/martinez-marina",
+    "needSignals": "The firm's Martinez Marina project page cites 2025 reporting on the waterfront revitalization moving forward, including hotels, an amphitheater, and ferry service.",
+    "contactName": "Gregory Mueller",
+    "contactTitle": "Design Principal and CEO",
+    "contactSourceUrl": "https://www.tuckersadler.com/tucker-sadler-team"
+  },
+  {
+    "companyName": "AVRP Studios",
+    "website": "https://www.avrpstudios.com/",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://www.linkedin.com/posts/avrp-studios_avrpstudios-mixeduse-construction-activity-7490467290459795457-YdYN",
+    "needSignals": "AVRP reported that its three-building mixed-use Poway Paseo project had passed the halfway construction mark.",
+    "contactName": "Douglas H. Austin",
+    "contactTitle": "Founder and Chairman",
+    "contactSourceUrl": "https://www.avrpstudios.com/culture"
+  },
+  {
+    "companyName": "C2 Collaborative",
+    "website": "https://www.c2collaborative.com/",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://www.linkedin.com/posts/c2-collaborative_c2-collaborative-linkedin-activity-7475980212841668609-4-QP",
+    "needSignals": "C2 Collaborative publicly announced it is hiring additional team members.",
+    "contactName": "Paul Haden",
+    "contactTitle": "Founder and CCO",
+    "contactSourceUrl": "https://www.c2collaborative.com/leadership"
+  },
+  {
+    "companyName": "Hendy",
+    "website": "https://hhendy.com/",
+    "city": "Newport Beach",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://hhendy.com/careers/",
+    "needSignals": "Hendy maintains a public careers page for prospective staff.",
+    "contactName": "Heidi Hendy",
+    "contactTitle": "Co-CEO and Managing Principal",
+    "contactSourceUrl": "https://hhendy.com/person/heidi-hendy/"
+  },
+  {
+    "companyName": "JZMK Partners",
+    "website": "https://jzmkpartners.com/",
+    "city": "Costa Mesa",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://www.linkedin.com/posts/jzmk-partners_jzmk-partners-is-excited-to-share-continued-activity-7473081714060288002-GJoF",
+    "needSignals": "JZMK reported continued construction progress at Shelter Distilling in Dana Point as the project moves toward completion and opening.",
+    "contactName": "Andrew Watkins",
+    "contactTitle": "Partner and President",
+    "contactSourceUrl": "https://jzmkpartners.com/leadership/andrew-watkins/"
+  },
+  {
+    "companyName": "NAC Architecture",
+    "website": "https://www.nacarchitecture.com/",
+    "city": "Sacramento",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://www.nacarchitecture.com/careers",
+    "needSignals": "NAC maintains a public careers page for prospective staff.",
+    "contactName": "Dana L. Harbaugh",
+    "contactTitle": "President and CEO",
+    "contactSourceUrl": "https://www.nacarchitecture.com/people/dana-harbaugh"
+  },
+  {
+    "companyName": "Darden Architects",
+    "website": "https://dardenarchitects.com/",
+    "city": "Fresno",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://dardenarchitects.com/careers/",
+    "needSignals": "Darden Architects maintains a public careers page for prospective staff.",
+    "contactName": "Ed Darden",
+    "contactTitle": "President",
+    "contactSourceUrl": "https://dardenarchitects.com/our-story/leadership/"
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "companyName": "WRNS Studio",
+    "website": "https://wrnsstudio.com/",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://wrnsstudio.com/careers/",
+    "needSignals": "WRNS Studio publicly lists an Interior Designer opening for its San Francisco studio.",
+    "contactName": "Pauline Souza",
+    "contactTitle": "Partner and Director of K-12 and Community Studio",
+    "contactSourceUrl": "https://wrnsstudio.com/team-member/pauline-souza/"
+  },
+  {
+    "companyName": "TEF Design",
+    "website": "https://tefarch.com/",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://www.linkedin.com/posts/tefdesign_tefdesign-archiecturejobs-bayareajobs-activity-7478175209603158016--F7S",
+    "needSignals": "TEF Design publicly announced that it is growing its team and recruiting a Project Architect/Manager plus an Intermediate/Senior Interior Architect/Designer.",
+    "contactName": "Douglas Tom",
+    "contactTitle": "Founding Principal",
+    "contactSourceUrl": "https://tefarch.com/people/leadership"
+  },
+  {
+    "companyName": "Jensen Architects",
+    "website": "https://jensen-architects.com/",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://jensen-architects.com/jobs/intermediate-designer-architect/",
+    "needSignals": "Jensen Architects has a public full-time Intermediate Designer/Architect opening at its downtown San Francisco practice.",
+    "contactName": "Mark Jensen",
+    "contactTitle": "Principal",
+    "contactSourceUrl": "https://jensen-architects.com/office/people/"
+  },
+  {
+    "companyName": "Noll & Tam Architects",
+    "website": "https://www.nollandtam.com/",
+    "city": "Berkeley",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://www.linkedin.com/posts/noll-%26-tam-architects_aecmarketing-smps-architecturejobs-activity-7460437745874755585-SJkS",
+    "needSignals": "Noll & Tam publicly announced it is hiring a Marketing and Pursuit Manager.",
+    "contactName": "Scott Salge",
+    "contactTitle": "Principal",
+    "contactSourceUrl": "https://www.nollandtam.com/whoweare/people/scott"
+  },
+  {
+    "companyName": "HKIT Architects",
+    "website": "https://hkit.com/",
+    "city": "Oakland",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://hkit.com/careers",
+    "needSignals": "HKIT's public careers page directs candidates to its open positions and says the firm is actively seeking talent.",
+    "contactName": "Melissa Regan-Byers",
+    "contactTitle": "Principal",
+    "contactSourceUrl": "https://hkit.com/people/melissa-regan-byers/"
+  },
+  {
+    "companyName": "DGA",
+    "website": "https://www.dgaonline.com/",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://www.dgaonline.com/careers/",
+    "needSignals": "DGA's public careers page invites applicants to explore its current job openings.",
+    "contactName": "David McAdams",
+    "contactTitle": "Managing Principal",
+    "contactSourceUrl": "https://www.dgaonline.com/person/david-mcadams/"
+  },
+  {
+    "companyName": "Signum Architecture",
+    "website": "https://signumarchitecture.com/",
+    "city": "Napa",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://www.linkedin.com/posts/signum-architecture_signum-architecture-is-hiring-after-15-years-activity-7420521787425226752-AIsM",
+    "needSignals": "Signum Architecture publicly announced that its practice is growing and that it is hiring to build its staff.",
+    "contactName": "Jarrod Denton",
+    "contactTitle": "Co-Founder",
+    "contactSourceUrl": "https://signumarchitecture.com/about/"
+  },
+  {
+    "companyName": "Martinkovic Milford Architects",
+    "website": "https://martinkovicmilford.com/",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://martinkovicmilford.com/careers/sanfrancisco/",
+    "needSignals": "Martinkovic Milford Architects publicly lists San Francisco openings for a Job Captain and a Senior Project Architect focused on branded environments and commercial interiors.",
+    "contactName": "Justin Martinkovic",
+    "contactTitle": "Principal",
+    "contactSourceUrl": "https://www.linkedin.com/in/justin-martinkovic-aia-ncarb-aa216"
+  }
+]

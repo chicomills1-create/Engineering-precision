@@ -1,0 +1,666 @@
+id,company_name,website,contact_email,status,contact_status
+1,Krause Architecture + Interiors,https://krauseaz.com/,info@krauseaz.com,approved,active
+2,Shade Architects,https://www.shadearch.com/,info@shadearch.com,approved,active
+3,DFDG Architecture,https://www.dfdg.com/,dfdg@dfdg.com,approved,active
+4,Orcutt | Winslow,https://www.owp.com/,kolejka.m@owp.com,approved,active
+5,ESB Design+Build,https://esbdesignbuild.com/,info@esbdesignbuild.com,approved,active
+6,ProConstructor,https://proconstructor.com/,steve@proconstructor.com,approved,active
+7,Deutsch Architecture Group,https://www.2929.com/,info@2929.com,approved,active
+8,Nelsen Partners,https://nelsenpartners.com/,gmelara@nelsenpartners.com,approved,active
+9,Jones Studio,https://jonesstudioinc.com/,jacob@jonesstudioinc.com,approved,active
+10,Cosan Studio,https://www.cosanstudio.com/,scott@cosanstudio.com,approved,active
+71,A.R. Mays Construction,https://armays.com/,amays@armays.com,approved,active
+72,Robert Caylor Construction Company,https://caylor.net/,caylor@caylor.net,approved,active
+73,Cawley Architects,https://cawleyarchitects.com/,pauld@cawleyarchitects.com,approved,active
+74,Canyon Building & Design LLC,https://canyonbd.com/,david@canyonbd.com,approved,active
+75,Corgan,https://corgan.com/,joyce.fownes@corgan.com,approved,active
+76,FFKR Architects,https://ffkr.com/,ganderson@ffkr.com,approved,active
+77,Drewett Works,https://drewettworks.com/,cp@drewettworks.com,approved,active
+78,"GEM Studio Architecture, Inc.",https://gemstudioarchitecture.com/,geoff@gemstudioarchitecture.com,approved,active
+79,Jones & Jones Construction,https://jonesandjonesusa.com/,cjones@jonesandjonesusa.com,approved,active
+80,"GH2 Architects, LLC",https://gh2.com/,tcs@gh2.com,approved,active
+81,"KGM Builders, Inc.",https://kgmbuilders.com/,kevin@kgmbuilders.com,approved,active
+82,Loven Contracting,https://lovencontracting.com/,mloven@lovencontracting.com,approved,active
+83,Aline Architecture Concepts,https://madewithaline.com/,bk@madewithaline.com,approved,active
+84,"McCarthy Building Companies, Inc.",https://mccarthy.com/,rsawall@mccarthy.com,approved,active
+85,Mikado Architecture,https://mikado-arc.com/,stefan@mikado-arc.com,approved,active
+86,"Miko, LLC",https://mikollc.com/,todd@mikollc.com,approved,active
+87,Novatr,https://novatr.com/,chaithanya@novatr.com,approved,active
+88,On Point Architecture LLC,https://onpointarchitecture.com/,nicole@onpointarchitecture.com,approved,active
+89,Phoenix Design One,https://p-d-o.com/,ashley.touchette@p-d-o.com,approved,active
+90,"INNOVATIVE TECHNOLOGY DEVELOPMENT GROUP, L.L.C.",https://itdgconstruction.com/,charles@itdgconstruction.com,approved,active
+91,Princeton Construction,https://princetonaz.com/,charlie@princetonaz.com,approved,active
+92,Rob Paulus Architects Ltd,https://robpaulus.com/,rob@robpaulus.com,approved,active
+93,"SCBS, LLC",https://scbsllc.com/,jgoodman@scbsllc.com,approved,active
+94,"Seaver Franks Inc., AIA",https://seaverfranks.com/,mikefranks@seaverfranks.com,approved,active
+95,Sears Gerbo Architecture,https://searsgerboarch.com/,t.gerbo@searsgerboarch.com,approved,active
+96,Stewart + Reindersma Architecture,https://sra360.com/,monique@sra360.com,approved,active
+97,Studio Rick Joy,https://studiorickjoy.com/,rick@studiorickjoy.com,approved,active
+98,Sun Valley Builders,https://sunvalleybuilders.com/,jody@sunvalleybuilders.com,approved,active
+99,"Willmeng Construction, Inc.",https://willmeng.com/,tjarvis@willmeng.com,approved,active
+100,"Studio M Architects, Inc.",https://studiomarchitects.net/,adam.meyer@studiomarchitects.net,approved,active
+101,MCI Builders,https://mcibuildersaz.com/,lisa@mcibuildersaz.com,approved,active
+102,"Andrew's Construction, Inc",https://andrewsaz.com/,paulr@andrewsaz.com,approved,active
+103,3rd Story,https://3rdstory.com/,rick@3rdstory.com,approved,active
+104,"ARUSI, LLC.",https://arusi.net/,alex.reynoso@arusi.net,approved,active
+105,Advantech Facility Design Inc.,https://advantechae.com/,paiman.owtad@advantechae.com,approved,active
+106,"Barker Contracting, Inc.",https://barkerone.com/,bbarker@barkerone.com,approved,active
+107,AZBIGMEDIA,https://azbigmedia.com/,mike.mertes@azbigmedia.com,approved,active
+108,BWS Architects,https://bwsarchitects.com/,sgray@bwsarchitects.com,approved,active
+109,CORE Architecture,https://corearch.com/,curtism@corearch.com,approved,active
+110,CSDA Design Group,https://csdadesigngroup.com/,abalani@csdadesigngroup.com,approved,active
+111,ERIN MORRIS,https://erinmorris.com/,erin@erinmorris.com,approved,active
+112,ESG | Architecture & Design (Elness Swenson Graham Architects Inc.),https://esgarch.com/,neil.reardon@esgarch.com,approved,active
+113,"Robert N. Ewing General Contractor, Inc.",https://ewingconstruction.com/,steved@ewingconstruction.com,approved,active
+114,"GLHN Architects & Engineers, Inc",https://glhn.com/,dmertes@glhn.com,approved,active
+115,Gridline Construction,https://gridlineconstruction.com/,kevin@gridlineconstruction.com,approved,active
+116,"DMS design, llc",https://dmsdesign.com/,dskolski@dmsdesign.com,approved,active
+117,"Haley Construction Company - Prescott, AZ",https://haleyconstructionaz.com/,gillian@haleyconstructionaz.com,approved,active
+118,"HKS, Inc.",https://hksinc.com/,bmounger@hksinc.com,approved,active
+119,"Kinney Construction Services, Inc. (Kinney)",https://kinneyconstruction.net/,gs@kinneyconstruction.net,approved,active
+120,KRB Development,https://krbdevelopment.com/,rex@krbdevelopment.com,approved,active
+121,Mike Furr Construction Inc.,https://mikefurrconstruction.com/,mike@mikefurrconstruction.com,approved,active
+122,Mycroft Engineering Consultant,https://mycroftconsultant.com/,aman@mycroftconsultant.com,approved,active
+123,PHX Architecture,https://phxarch.com/,erikp@phxarch.com,approved,active
+124,SmithGroup,https://smithgroup.com/,stephanie.hertzberg@smithgroup.com,approved,active
+125,Southland Industries,https://southlandind.com/,eric.spaeth@southlandind.com,approved,active
+126,SPS+ Architects,https://spsplusarchitects.com/,morgan.e@spsplusarchitects.com,approved,active
+127,Shepley Bulfinch,https://shepleybulfinch.com/,prasmussen@shepleybulfinch.com,approved,active
+128,Venn Construction,https://venncompanies.com/,nick.veldman@venncompanies.com,approved,active
+129,Sundt Construction,https://sundt.com/,jdbia@sundt.com,approved,active
+130,Straightline Builders,https://straightlinebuilders.com/,pete@straightlinebuilders.com,approved,active
+131,"Achen-Gardner Construction, LLC",https://achen.com/,dspitza@achen.com,approved,active
+132,AF Steel Fabricators,https://afsteelfab.com/,bill@afsteelfab.com,approved,active
+133,AIA Arizona | A Component of the American Institute of Architects,https://aia-arizona.org/,john@aia-arizona.org,approved,active
+134,"J. BANICKI CONSTRUCTION, INC.",https://banicki.com/,mabraham@banicki.com,approved,active
+135,"Agate Steel, Inc",https://agatesteel.com/,rick.nichols@agatesteel.com,approved,active
+136,Canyon State Enterprises LLC.,https://canyonstateaz.com/,kevin@canyonstateaz.com,approved,active
+137,"DCS Contracting, Inc.",https://dcscontracting.com/,brandon.byrne@dcscontracting.com,approved,active
+138,"DWL Architects + Planners, Inc.",https://dwlarchitects.com/,kukla@dwlarchitects.com,approved,active
+139,Bell Steel Inc. Arizona,https://bell-steel.com/,lori@bell-steel.com,approved,active
+140,Emerald Inc.,https://emeraldinc.biz/,colin@emeraldinc.biz,approved,active
+141,J.B. Steel,https://jbsteel.net/,dan.elmer@jbsteel.net,approved,active
+142,"KE&G Construction, Inc.",https://kegtus.com/,eanderson@kegtus.com,approved,active
+143,Monroy Construction Inc.(SBE),https://monroyconstruction.com/,bmonroy@monroyconstruction.com,approved,active
+144,Procore Technologies,https://procore.com/,peter.huston@procore.com,approved,active
+145,Pwi construction,https://pwiconstruction.com/,price@pwiconstruction.com,approved,active
+146,Reece and  Rowe Architects,https://rararchitects.com/,steph@rararchitects.com,approved,active
+147,Riggs Companies,https://riggscompanies.com/,wayne@riggscompanies.com,approved,active
+148,Shive-Hattery,https://shive-hattery.com/,jlewis@shive-hattery.com,approved,active
+149,"S&H Steel Co., Inc.",https://shsteelaz.com/,dru@shsteelaz.com,approved,active
+150,"Serbin Studio, Inc.",https://serbinstudio.com/,lara@serbinstudio.com,approved,active
+151,Stormy Construction & Development LLC,https://stormyconstruction.com/,cameron@stormyconstruction.com,approved,active
+152,Southwest Retail Construction,https://swretailgc.com/,kevin@swretailgc.com,approved,active
+153,TriARC architecture & design,https://triarcdesign.com/,jill@triarcdesign.com,approved,active
+154,Suntec Concrete,https://suntecconcrete.com/,jerry@suntecconcrete.com,approved,active
+155,"StudioLP4, LLC",https://studiolp4.com/,lloyd@studiolp4.com,approved,active
+156,Adaptive Architects,https://adaptivearchitectsinc.com/,vince@adaptivearchitectsinc.com,approved,active
+157,Allied Electric Technology LLC,https://aet-az.com/,stacy@aet-az.com,approved,active
+158,American Cleanroom Systems ®,https://americancleanrooms.com/,anthony@americancleanrooms.com,approved,active
+159,Ameris Construction,https://amerisconstruction.com/,dlugo@amerisconstruction.com,approved,active
+160,ARCO Design/Build,https://arcodb.com/,esafko@arcodb.com,approved,active
+161,Breckenridge Group Architects Planners,https://breckenridgearchitects.com/,kbreckenridge@breckenridgearchitects.com,approved,active
+162,Brick and Mortar Masonry LLC,https://brickandmortarmasonryllc.com/,sophia@brickandmortarmasonryllc.com,approved,active
+163,BRYCON Construction,https://brycon.com/,blemon@brycon.com,approved,active
+164,BUESING CORP,https://buesingcorp.com/,buesing@buesingcorp.com,approved,active
+165,"Cannon & Wendt Electric Co., Inc.",https://cannon-wendt.com/,ssnyder@cannon-wendt.com,approved,active
+166,Canyon State Electric,https://canyonstateelectric.com/,rhughes@canyonstateelectric.com,approved,active
+167,Chasse Building Team,https://chasse.us/,cyncera@chasse.us,approved,active
+168,Diversified Roofing,https://diversifiedroofing.com/,ben.parks@diversifiedroofing.com,approved,active
+169,DP Electric Inc.,https://dpelectric.com/,dan.puente@dpelectric.com,approved,active
+170,"Eleven Western Builders, Inc.",https://ewbinc.com/,rbackus@ewbinc.com,approved,active
+171,Fann Contracting,https://fanncontracting.com/,mfann@fanncontracting.com,approved,active
+172,"FNF Construction, Inc",https://fnfinc.com/,janderson@fnfinc.com,approved,active
+173,G & G Masonry LLC,https://ggmasonryllc.com/,melonie@ggmasonryllc.com,approved,active
+174,IMCOR - Interstate Mechanical Corporation,https://imcor-az.com/,david.carrillo@imcor-az.com,approved,active
+175,Haydon Building Corp,https://haydon.com/,ghaydon@haydon.com,approved,active
+176,JLG Architects,https://jlgarchitects.com/,mmongeon@jlgarchitects.com,approved,active
+177,Jokake Construction,https://jokake.com/,casey.cartier@jokake.com,approved,active
+178,KEAR Civil Corporation,https://kearcorp.com/,mike.fossett@kearcorp.com,approved,active
+179,HigherGov,https://highergov.com/,justin.siken@highergov.com,approved,active
+180,MGC Contractors,https://mgccontractors.com/,dhoopes@mgccontractors.com,approved,active
+181,Midstate Mechanical LLC,https://midstatemechanical.com/,bsowa@midstatemechanical.com,approved,active
+182,"MKB Construction, Inc.",https://mkbc.com/,janderson@mkbc.com,approved,active
+183,Nations Roof,https://nationsroof.com/,dingle@nationsroof.com,approved,active
+184,OMNIA Partners,https://omniapartners.com/,annie.lamerand@omniapartners.com,approved,active
+185,Perlman Architects,https://perlmanarchitects.com/,rick@perlmanarchitects.com,approved,active
+186,Re-Create Companies,https://recreatecompanies.com/,jon@recreatecompanies.com,approved,active
+187,Robert E. Porter Construction,https://robertporterconstruction.com/,jlucas@robertporterconstruction.com,approved,active
+188,RS Contracting,https://rs-contracting.com/,tim@rs-contracting.com,approved,active
+189,RS&H,https://rsandh.com/,matt.schnelle@rsandh.com,approved,active
+190,"SDB, Inc.",https://sdb.com/,angie.schmidt@sdb.com,approved,active
+191,SKETCH ARCHITECTURE COMPANY,https://sketcharchitecturecompany.com/,jonathan@sketcharchitecturecompany.com,approved,active
+192,Star Roofing Inc,https://starroofingaz.com/,jplescia@starroofingaz.com,approved,active
+193,SUNVEK Roofing,https://sunvek.com/,jenniferc@sunvek.com,approved,active
+194,Tempe Mechanical,https://tempemechanical.net/,jyoung@tempemechanical.net,approved,active
+195,"Todd & Associates, Inc.",https://toddassoc.com/,sthompson@toddassoc.com,approved,active
+196,"Trident Mechanical Services, LLC",https://tridentmechanical.us/,dpalmer@tridentmechanical.us,approved,active
+197,Wilson Electric Services Corp,https://wilsonelectric.net/,wmcclure@wilsonelectric.net,approved,active
+198,"Sun Valley Construction, Inc.",https://sunvalleymasonry.com/,chuckpaxson@sunvalleymasonry.com,approved,active
+199,ABS Floor Covering,https://absflooring.com/,terry@absflooring.com,approved,active
+200,"ATI Restoration, LLC",https://atirestoration.com/,lisa.mccollough@atirestoration.com,approved,active
+201,"Arrington Watkins Architects, LLC",https://awarch.com/,michael@awarch.com,approved,active
+202,Axium Solar,https://axiumsolar.com/,eric@axiumsolar.com,approved,active
+203,ALR Engineering Inc,https://alrengineeringinc.com/,raul.martinez@alrengineeringinc.com,approved,active
+204,"BFL Construction Co., Inc.",https://bflconstruction.com/,a.ortega@bflconstruction.com,approved,active
+205,Commercial Solar Arizona,https://comsolaraz.com/,francisco.e@comsolaraz.com,approved,active
+206,Clayco,https://claycorp.com/,merrillp@claycorp.com,approved,active
+207,"Concord General Contracting, Inc.",https://concordinc.com/,gmartacho@concordinc.com,approved,active
+208,Disaster Recovery Restoration,https://disasterrecoveryrestoration.com/,brad@disasterrecoveryrestoration.com,approved,active
+209,EHS Restoration,https://ehsrestoration.com/,keith@ehsrestoration.com,approved,active
+210,"FCL Builders, LLC",https://fclbuilders.com/,mvitek@fclbuilders.com,approved,active
+211,EVX Solar,https://evxsolar.com/,jmeringer@evxsolar.com,approved,active
+212,Green Tanner Industrial Construction LLC,https://greentanner.com/,bgreen@greentanner.com,approved,active
+213,Intertech Architecture,https://intertecharchitecture.com/,wswan@intertecharchitecture.com,approved,active
+214,JCJ Architecture,https://jcj.com/,pstevens@jcj.com,approved,active
+215,"KHB Architecture Studios, PLLC",https://khbarchstudios.com/,heather@khbarchstudios.com,approved,active
+216,"Kowalski Construction, Inc.",https://kowalski.com/,jrk@kowalski.com,approved,active
+217,Mancini Duffy,https://manciniduffy.com/,thammer@manciniduffy.com,approved,active
+218,MakoRabco,https://makorabco.com/,angie.guerin@makorabco.com,approved,active
+219,"RKAA Architects, Inc",https://rkaa.com/,nfeaser@rkaa.com,approved,active
+220,Sterling CM LLC,https://sterling-cm.com/,garrett@sterling-cm.com,approved,active
+221,"Studio Ma, Inc.",https://studioma.com/,cannavino@studioma.com,approved,active
+222,Sun Country Floors,https://suncountryfloors.com/,anthony@suncountryfloors.com,approved,active
+223,"Titan Restoration of AZ, LLC",https://titan911.com/,russ@titan911.com,approved,active
+224,Ascent Custom Millwork,https://ascentmillwork.com/,jayc@ascentmillwork.com,approved,active
+225,Benson Systems,https://benson-inc.com/,shawnb@benson-inc.com,approved,active
+226,BrightView Landscapes,https://brightview.com/,andrew.dunne@brightview.com,approved,active
+227,Copper State Pavement,https://copperstatepavement.com/,wendy@copperstatepavement.com,approved,active
+554,Eckard Commercial Construction,https://eccyuma.com/,troy@eccyuma.com,approved,active
+555,Pilkington Construction,https://pcco.us/,clint@pcco.us,approved,active
+556,Frans Construction,https://fransconstruction.com/,everheijen@fransconstruction.com,approved,active
+557,WDS Architecture,https://wdsarch.com/,mike@wds.build,approved,active
+1206,Hensel Phelps,https://henselphelps.com,ajeffers@henselphelps.com,approved,active
+1207,RSP Architects,https://rsparch.com,jploszaj@rsparch.com,approved,active
+1208,Dekker,https://dekkerdesign.org,jamesf@dekkerdesign.org,approved,active
+1209,Kitchell,https://kitchell.com,bjohal@kitchell.com,approved,active
+1210,Ware Malcomb,https://waremalcomb.com,bblake@waremalcomb.com,approved,active
+1211,MCG Architecture,https://mcgarchitecture.com,jcalderon@mcgarchitecture.com,approved,active
+1212,"Holwick Constructors, Inc.",https://holwick.biz,mike@holwick.biz,approved,active
+1213,Simile Construction,https://similebuilt.com,j.simile@similebuilt.com,approved,active
+1214,Nadel Architects,https://nadelarc.com,glyon@nadelarc.com,approved,active
+1215,Lehrer Architects,https://lehrerarchitects.com,michael@lehrerarchitects.com,approved,active
+1216,SPF:a,https://spfa.com,zoltan.pali@spfa.com,approved,active
+1217,EPI Construction,https://epiconst.com,gblackwell@epiconst.com,approved,active
+1218,Butler Design Group,https://butlerdesigngroup.com,rbutler@butlerdesigngroup.com,suppressed,active
+1219,Brubaker Architects,https://brubakerarchitects.com,dbrubaker@brubakerarchitects.com,approved,active
+1220,SDG Architecture LLC,https://sdgarchitecturellc.com,scott@sdgarchitecturellc.com,approved,active
+1221,Childers Architect,https://childersarchitect.com,sschimke@childersarchitect.com,approved,active
+1222,Dekker/Perich/Sabatini,https://dpsdesign.org,bobbyg@dpsdesign.org,approved,active
+1223,Boulder Associates,https://boulderassociates.com,srasmussen@boulderassociates.com,suppressed,active
+1224,"Highton Company, LLC",https://hightoncompany.com,julie@hightoncompany.com,approved,active
+1225,Montalba Architects,https://montalbaarchitects.com,david@montalbaarchitects.com,approved,active
+1226,Gensler,https://gensler.com,elif_tinney@gensler.com,approved,active
+1227,Delawie,https://delawie.com,fternasky@delawie.com,suppressed,active
+1228,JWDA,https://jwdainc.com,mgeaman@jwdainc.com,approved,active
+1229,AC Martin,https://acmartin.com,sami.khoury@acmartin.com,approved,active
+1230,Architects Orange,https://aoarchitects.com,jack@aoarchitects.com,approved,active
+1231,The Design Collectiv,https://thedesigncollectiv.com,i.nutting@thedesigncollectiv.com,approved,active
+1232,Stratos Form,https://stratosform.com,cfox@stratosform.com,approved,active
+1233,RMW Architecture & Interiors,https://rmw.com,jleonhardt@rmw.com,approved,active
+1234,Capital City Architects,https://capcityarch.com,don@capcityarch.com,approved,active
+1235,Comstock Johnson Architects,https://cja-architects.com,jeff@cja-architects.com,approved,active
+1236,"Owen T. Jones, Architect",https://owentjones.com,owen@owentjones.com,approved,active
+1237,FENNIE + MEHL Architects,https://fm-arch.com,dwm@fm-arch.com,approved,active
+1238,Studio KDA,https://studiokda.com,marites@studiokda.com,approved,active
+1239,BDE Architecture Inc,https://bdearch.com,jennis@bdearch.com,approved,active
+1240,BCV Architecture + Interiors,https://bcvarch.com,chris@bcvarch.com,approved,active
+1241,"Bosz Arch, Inc.",https://boszarch.com,gbosz@boszarch.com,approved,active
+1242,tBP/Architecture,https://tbparchitecture.com,kwong@tbparchitecture.com,approved,active
+1243,"Frakes Construction, Inc.",https://frakesconstruction.com,anthonyfrakes@frakesconstruction.com,approved,active
+1244,13ZERO3 Construction,https://13zero3.com,gg@13zero3.com,approved,active
+1245,Richard and Richard Construction,https://richardandrichard.com,dr@richardandrichard.com,approved,active
+1246,"CASCO Contractors, Inc.",https://cascocontractors.com,cheryl.osborn@cascocontractors.com,approved,active
+1247,"Mark III Construction, Inc.",https://mark-three.com,dcarlton@mark-three.com,approved,active
+1248,Unger Construction Co.,https://ungerconstruction.com,mmencarini@ungerconstruction.com,approved,active
+1249,"REINKE CONSTRUCTION, INC.",https://reinkeconstruction.com,richard@reinkeconstruction.com,approved,active
+1250,"Buzz Oates Construction, Inc.",https://buzzoates.com,dennyboom@buzzoates.com,approved,active
+1251,TNT INDUSTRIAL CONTRACTORS INC,https://tntindustrial.com,jtwist@tntindustrial.com,approved,active
+1252,"Ironwood Commercial Builders, Inc",https://ironwoodcb.com,nbrinkerhoff@ironwoodcb.com,approved,active
+1253,Nibbi Brothers General Contractors,https://nibbi.com,bobn@nibbi.com,suppressed,active
+1254,ROSSI BUILDERS Inc.,https://rossibuilders.com,craig@rossibuilders.com,suppressed,active
+1255,"Seals Construction, Inc.",https://sealsconstruction.com,matt.seals@sealsconstruction.com,approved,active
+1256,Associated Architects,https://associated-architects.com,brian@associated-architects.com,approved,active
+1257,"BMA architecture, llc",https://bmaarchitecture.com,brian@bmaarchitecture.com,approved,active
+1258,HMC Architects,https://hmcarchitects.com,dan@hmcarchitects.com,approved,active
+1259,FORM64 Architecture + Construction Management,https://form64.com,scott@form64.com,approved,active
+1260,RNT Architects,https://rntarchitects.com,bradbury@rntarchitects.com,approved,active
+1261,"RAAM Construction, Inc.",https://raamconstruction.com,rlara@raamconstruction.com,approved,active
+1262,Colombo Construction Company,https://colomboconstruction.com,raltergott@colomboconstruction.com,approved,active
+1263,TacocaT Architecture,https://tacocatarchitecture.com,jason@tacocatarchitecture.com,approved,active
+1264,Merge Architectural Group,https://mergeag.com,cdc@mergeag.com,approved,active
+1265,CHRIS EVANS ARCHITECT,https://evansarch.com,chris@evansarch.com,approved,active
+1266,"Studio of Architecture, LTD",https://soaltd.com,dpollard@soaltd.com,approved,active
+1267,"DesignBuild Collaborative, Inc.",https://dbcarchitectbuilder.com,pweiner@dbcarchitectbuilder.com,approved,active
+1268,VINT & ASSOCIATES ARCHITECTS,https://vintarchitects.net,bob@vintarchitects.net,suppressed,active
+1269,"Markham Contracting Co., Inc.",https://markhamcontracting.com,mikemarkham@markhamcontracting.com,approved,active
+1270,CORE Construction Arizona,https://coreconstruction.com,toddsteffen@coreconstruction.com,approved,active
+1271,"Caliente Construction, Inc.",https://calienteconstruction.com,lbergman@calienteconstruction.com,approved,active
+1272,JE Dunn Construction,https://jedunn.com,monty.everson@jedunn.com,approved,active
+1273,LGE Design Build,https://lgedesignbuild.com,blakew@lgedesignbuild.com,suppressed,active
+1274,Gilbane Building Company,https://gilbaneco.com,abennett@gilbaneco.com,approved,active
+1275,Tighe Architecture,https://tighearchitecture.com,patrick@tighearchitecture.com,approved,active
+1276,Edward Ogosta Architecture,https://edwardogosta.com,ed@edwardogosta.com,approved,active
+1277,PAULSON POEI PROJECTS,https://paulsonpoei.com,kp@paulsonpoei.com,approved,active
+1278,Stephen Phillips Architects,https://sparchs.design,sphillips@sparchs.design,approved,active
+1279,LUCE et Studio,https://lucestudio.com,jennifer@lucestudio.com,approved,active
+1280,Safdie Rabines Architects,https://safdierabines.com,ricardo@safdierabines.com,approved,active
+1281,Heleo Architecture + Design,https://heleo.co,barbara@heleo.co,approved,active
+1282,Platt-Whitelaw Architects,https://plattwhitelaw.com,nwaney@plattwhitelaw.com,approved,active
+1283,Krenek Design Group Architecture and Planning,https://krenekdesign.com,kimberly@krenekdesign.com,approved,active
+1284,Studio E Architects,https://studioearchitects.com,jsheehan@studioearchitects.com,approved,active
+1285,phipps studio + design,https://phipps-studio.com,kellie@phipps-studio.com,approved,active
+1286,Moniz Architecture,https://monizarchitecture.com,amoniz@monizarchitecture.com,approved,active
+1287,Pressey & Associates,https://presseyassociates.com,kpressey@presseyassociates.com,approved,active
+1288,Ellis Architects,https://ellis-architects.com,sarah@ellis-architects.com,approved,active
+1289,STUDIO OXEYE,https://studiooxeye.com,gen@studiooxeye.com,approved,active
+1290,WHA | William Hezmalhalch Architects,https://whainc.com,nathaniels@whainc.com,approved,active
+1291,Julie de Jesús Architecture,https://juliedejesus.com,julie@juliedejesus.com,approved,active
+1292,Andrea Escobar Studio,https://andreaescobarstudio.com,andrea@andreaescobarstudio.com,approved,active
+1293,See Arch,https://see-arch.com,sarah@see-arch.com,approved,active
+1294,Molina + Timmins,https://molinatimmins.com,paul@molinatimmins.com,approved,active
+1295,PBK Architects,https://pbk.com,beryl.mensonides@pbk.com,approved,active
+1296,Miller Architectural Corporation,https://miller-aip.com,gmiller@miller-aip.com,approved,active
+1297,Aedis Architects,https://aedisarchitects.com,jvela@aedisarchitects.com,approved,active
+1298,Halajian Architects,https://halajianarch.com,paulh@halajianarch.com,approved,active
+1299,Pratt Architecture,https://prattarch.com,paul.pratt@prattarch.com,approved,active
+1300,TETER Architects and Engineers,https://teterae.com,clay.davis@teterae.com,approved,active
+1301,Danbuilt,https://danbuiltinc.com,dan@danbuiltinc.com,approved,active
+1302,Cali Builders & Construction Inc.,https://cali-builders.com,simon@cali-builders.com,suppressed,active
+1303,"G. B. Construction, Inc.",https://gbci.us,kckim@gbci.us,approved,active
+1304,Eberhard,https://eberhardco.com,david.stefko@eberhardco.com,approved,active
+1305,"JXR Constructors, Inc.",https://jxrconstructors.com,jesus.ramirez@jxrconstructors.com,approved,active
+1306,"element:design.build,inc.",https://elementdesignbuild.net,robert@elementdesignbuild.net,approved,active
+1307,Sutter Builders,https://sutterbuilders.com,rick@sutterbuilders.com,approved,active
+1308,"Golden Bay Construction, Inc.",https://gbayinc.com,johnny@gbayinc.com,approved,active
+1309,RoSa Construction Inc.,https://rosaconstructioninc.net,joeyr@rosaconstructioninc.net,approved,active
+1310,South Bay Grading,https://southbaygrading.com,shawn.dean@southbaygrading.com,approved,active
+1311,Mares & Dow Construction,https://maresdow.com,archie@maresdow.com,approved,active
+1312,UC Construction,https://ucconstruct.com,dennis@ucconstruct.com,approved,active
+1313,"KPRS Construction Services, Inc.",https://kprsinc.com,mrabinovich@kprsinc.com,approved,active
+1314,Wespac Construction,https://wespacaz.com,tmark@wespacaz.com,approved,active
+1315,Britican Builders,https://briticanbuilders.com,brett@briticanbuilders.com,approved,active
+1316,"STK Architecture, Inc.",https://stkinc.com,gvsalts@stkinc.com,approved,active
+1317,WAKECO INC.,https://wakecoinc.com,gavin@wakecoinc.com,approved,active
+1318,JF Construction Services,https://jfpetrogroup.com,brett.crail@jfpetrogroup.com,approved,active
+1319,"JJC Project Management Group, Inc.",https://jjcpmg.com,jamescuevas@jjcpmg.com,approved,active
+1320,"Edmond Babayan & Associates, Inc.",https://edmondbabayan.com,jack@edmondbabayan.com,approved,active
+1321,Malekian & Associates,https://malekian.com,alen@malekian.com,approved,active
+1322,Torres Architects,https://tarci.com,denise@tarci.com,approved,active
+1323,Studio Architects,https://studioarcs.com,jgener@studioarcs.com,approved,active
+1324,BKBC Architects Inc.,https://bkbcarch.com,skb@bkbcarch.com,approved,active
+1325,"M I Architects, Inc.",https://miarchitect.com,muthana@miarchitect.com,approved,active
+1326,"Trainor Commercial Construction, Inc.",https://trainorconstruction.com,john.holmberg@trainorconstruction.com,approved,active
+1327,ArchiLOGIX,https://archilogix.com,ps@archilogix.com,approved,active
+1328,CommercialArch,https://commercialarch.com,swellnitz@commercialarch.com,approved,active
+1329,API Architecture and Planning,https://apiarc.com,rod@apiarc.com,approved,active
+1330,RED INC ARCHITECTS,https://redincarchitects.com,david@redincarchitects.com,approved,active
+1331,Acme Construction Inc,https://acmeconstruction.com,greg@acmeconstruction.com,approved,active
+1332,Trilogy Architecture,https://trilogyarch.com,jc@trilogyarch.com,approved,active
+1333,"Nichols, Melburg & Rossetto",https://nmrdesign.com,robertson@nmrdesign.com,approved,active
+1334,"MODERN BUILDING, INC.",https://modernbuildinginc.com,mikes@modernbuildinginc.com,approved,active
+1335,"Mark Wilson Construction Co., Inc",https://markwilsonconstruction.com,jvasquez@markwilsonconstruction.com,approved,active
+1336,Staples Construction Company,https://staplesconstruction.com,david@staplesconstruction.com,approved,active
+1337,DMHA Architecture and Interiors,https://dmhaa.com,edward@dmhaa.com,approved,active
+1338,Frank Schipper Construction Co.,https://schipperconstruction.com,erwin@schipperconstruction.com,approved,active
+1339,o2 Architecture,https://o2arch.com,lance@o2arch.com,approved,active
+1340,"Dempsey Construction, Inc.",https://dempseyconstruction.com,msmits@dempseyconstruction.com,approved,active
+1341,DPR Construction,https://dpr.com,kevinr@dpr.com,approved,active
+1342,"Insite Construction, Inc.",https://insite-cm.com,dave@insite-cm.com,approved,active
+1343,Vellum Inc.,https://vellumdesignbuild.com,paul@vellumdesignbuild.com,approved,active
+1344,R. McKinley Construction Inc.,https://rmckinleyconstructioninc.com,ryan@rmckinleyconstructioninc.com,suppressed,active
+1345,Coastal Architects,https://coastalarch.com,jeff@coastalarch.com,approved,active
+1346,The Akeena Group,https://theakeenagroup.com,laura@theakeenagroup.com,approved,active
+1347,Desert Design Builders Inc.,https://desertdesignbuilders.com,wally@desertdesignbuilders.com,approved,active
+1348,Gulati Construction Company,https://gccogroup.com,nitin@gccogroup.com,approved,active
+1349,Brady Construction Group,https://bradyconstruction.com,bbrady@bradyconstruction.com,approved,active
+1350,Burge Corporation,https://burgecorporation.com,bret@burgecorporation.com,approved,active
+1351,DI Build,https://dibuild.com,aschmitt@dibuild.com,approved,active
+12431,George Oliver,https://georgeoliver.com/,curt.kremer@georgeoliver.com,approved,active
+12432,ViaWest Group,https://viawestgroup.com/,dswancey@viawestgroup.com,approved,active
+12433,Creation,https://creationequity.com/,bob@creationequity.com,approved,active
+12434,GCON,https://gconinc.com/,godbehere@gconinc.com,approved,active
+12435,Stevens-Leinweber Construction,https://stevensleinweber.com/,epowell@stevensleinweber.com,approved,active
+12436,Irontree Construction,https://irontreeaz.com/,greg@irontreeaz.com,approved,active
+12437,Sun State Builders,https://sunstatebuilders.com/,apiering@sunstatebuilders.com,approved,active
+12438,TEPCON Construction,https://tepcon.com/,tom@tepcon.com,approved,active
+12439,Graycor Construction,https://graycor.com/,michelle_palys@graycor.com,approved,active
+12440,Mark-Taylor,https://mark-taylor.com/,john.carlson@mark-taylor.com,approved,active
+12441,Caliber,https://caliberco.com/,chris@caliberco.com,approved,active
+12442,SimonCRE,https://simoncre.com/,joshua@simoncre.com,approved,active
+12443,CO Architects,https://coarchitects.com/,jkanda@coarchitects.com,approved,active
+12444,VP Companies,https://vpcompanies.com/,robert@vpcompanies.com,approved,active
+12445,DLR Group,https://dlrgroup.com/,eheck@dlrgroup.com,approved,active
+12446,Ryan Companies,https://ryancompanies.com/,molly.carson@ryancompanies.com,approved,active
+12447,Buildtek Structures,https://buildtekstructures.com/,kevin@buildtekstructures.com,approved,active
+12448,CenterPointe CRE,https://centerpointecre.com/,clint@cp-cre.com,approved,active
+12449,RED Development,https://reddevelopment.com/,mebert@reddevelopment.com,approved,active
+12450,Candelaria Design,https://candelariadesign.com/,mark@candelariadesign.com,approved,active
+12451,Graef Construction,https://graefconstruction.com/,jill@graefconstruction.com,approved,active
+12452,Alliance Residential Company,https://allresco.com/,jhiemenz@allresco.com,approved,active
+12453,The Weitz Company,https://weitz.com/,frank.dascanio@weitz.com,approved,active
+12454,Brinkmann Constructors,https://brinkmannconstructors.com/,jstrobbe@brinkmannconstructors.com,approved,active
+12455,B Team Construction,https://bteamconstruction.com/,fbejarano@bteamconstruction.com,approved,active
+12456,W.D. Manor Mechanical Contractors,https://wdmanor.com/,dpetty@wdmanor.com,approved,active
+12457,Kortman,https://kortmaninc.com/,ken@kortmaninc.com,approved,active
+12458,Baker Development Corporation,https://bakerdevelopmentcorp.com/,d.slack@bakerdevelopmentcorp.com,approved,active
+12459,Colton Commercial,https://coltoncommercial.com/,dcolton@coltoncommercial.com,approved,active
+12460,Holualoa Companies,https://holualoa.com/,steve@holualoa.com,approved,active
+12461,Cardon Development Group,https://cardondevelopment.com/,matt@cardondevelopment.com,approved,active
+12462,NexMetro Communities,https://nexmetro.com/,josh@nexmetro.com,approved,active
+12463,Reveal Concepts,https://revealconceptsco.com/,kevin@revealconceptsco.com,approved,active
+12464,Vestar,https://vestar.com/,dlarcher@vestar.com,approved,active
+12465,P.B. Bell,https://pbbell.com/,cbell@pbbell.com,approved,active
+12466,Evergreen Devco,https://evgre.com/,lortiz@evgre.com,approved,active
+12467,Wentworth Property Company,https://wentworthproperty.com/,tchester@wentprop.com,approved,active
+12468,Phoenix Construction Group,https://phxcg.com/,kylebernabe@phxcg.com,approved,active
+12469,UBC Construction Corporation,https://ubcconstruction.com/,jc@ubcconstruction.com,approved,active
+12470,Gryphon Construction,https://gryphonaz.com/,patrick@gryphonaz.com,approved,active
+12471,FHP Builders,https://fhpbuilders.com/,cfromm@fhpbuilders.com,approved,active
+12472,Bill Stacey Construction,https://billstaceyconstruction.com/,bill@billstaceyconstruction.com,approved,active
+12473,Danson Construction,https://dansonconstruction.com/,dfontana@dansonbldg.com,approved,active
+12474,Heritage Architecture & Planning,https://heritagearchitecture.com/,david@heritagearchitecture.com,approved,active
+12475,TLW Construction,https://tlwconstruction.com/,tarik@tlwconstruction.com,approved,active
+12476,Caruso Construction,https://carusoconstruction.com/,ccaruso@carusoconstruction.com,approved,active
+12477,Dallas Construction,https://dallasconstruction.com/,dallas@dallasconstruction.com,suppressed,active
+12478,Elite Commercial Builders,https://elitebuildaz.com/,jessie@elitebuildaz.com,approved,active
+12479,Sunland Asphalt & Construction,https://sunlandasphalt.com/,alexd@sunlandasphalt.com,approved,active
+12480,Cholla Managing Group,https://chollamanaginggroup.com/,bradd@cmgllc.biz,approved,active
+12481,Pennant Development,https://pennantdevelopment.com/,gordon@pennantdevelopment.com,approved,active
+12482,Ganem Companies,https://ganemcompanies.com/,emily.ganem@ganemcompanies.com,approved,active
+12483,TDIndustries,https://tdindustries.com/,chris.brown@tdindustries.com,approved,active
+12484,BeachFleischman,https://beachfleischman.com/,beto@beachfleischman.com,approved,active
+12485,INSURICA,https://insurica.com/,eric.pach@insurica.com,approved,active
+12486,Trammell Crow Company,https://trammellcrow.com/,ptuchin@trammellcrow.com,approved,active
+12487,Kinetic Companies,https://kineticcompanies.com/,jeff@kineticcompanies.com,approved,active
+12488,Miramonte Homes,https://miramontehomes.com/,ckemmerly@miramontehomes.com,suppressed,active
+12489,Ascent Companies,https://ascentcos.com/,brad@ascentcos.com,approved,active
+12490,HDR,https://hdrinc.com/,macosta@hdrinc.com,approved,active
+12491,OZ Architects,https://ozarchitects.com/,inga@ozarchitects.com,approved,active
+12492,Knipp Contracting,https://knippcontracting.com/,kmione@knippcontracting.com,approved,active
+12493,University of Arizona,https://arizona.edu/,dsylvester@arizona.edu,suppressed,active
+12494,Graywolf,https://graywolf.com/,mark.stoller@graywolf.com,approved,active
+12495,Form4 Architecture,https://form4inc.com/,jmarx@form4inc.com,approved,active
+12496,Ehrlich Yanai Rhee Chaney Architects,https://eyrc.com/,tyanai@eyrc.com,approved,active
+12497,Barbara Bestor Architecture,https://bestorarchitecture.com/,barbara@bestorarchitecture.com,approved,active
+12498,OYLER WU Collaborative,https://oylerwu.com/,jw@oylerwu.com,approved,active
+12499,Caruso,https://caruso.com/,cverdery@caruso.com,approved,active
+12500,Woodbridge Pacific Group,https://woodbridgepacific.com/,cneuss@woodbridgepacific.com,approved,active
+12501,La Placa Group,https://laplaca.com/,gaetano@laplaca.com,approved,active
+12502,LPA Design Studios,https://lpadesignstudios.com/,wrogers@lpadesignstudios.com,approved,active
+12503,Swinerton,https://swinerton.com/,ltatevosian@swinerton.com,approved,active
+12504,Webcor,https://webcor.com/,jitendra@webcor.com,approved,active
+12505,XL Construction,https://xlconstruction.com/,dbeck@xlconstruction.com,approved,active
+12506,Architects Mosher Drew,https://mosherdrew.com/,edh@mosherdrew.com,approved,active
+12507,Anthony Mull Architects,https://anthonymullarchitects.com/,anthony@anthonymullarchitects.com,approved,active
+12508,Related California,https://relatedcalifornia.com/,gcanori@related.com,approved,active
+12509,DM Development,https://dm-dev.com/,mark.macdonald@dm-dev.com,approved,active
+12510,domusstudio architecture,https://domusstudio.com/,jon.dominy@domusstudio.com,approved,active
+12511,Perkins&Will,https://perkinswill.com/,jeffrey.dreesman@perkinswill.com,approved,active
+12512,Haagen Company,https://haagenco.com/,ah4@haagenco.com,approved,active
+12513,"S. J. Amoroso Construction Co., LLC",https://sjamoroso.com/,berskine@sjamoroso.com,approved,active
+12514,"Rodan Builders, Inc.",https://rodanbuilders.com/,doliver@rodanbuilders.com,approved,active
+12515,"Largo Concrete, Inc.",https://largoconcrete.com/,mcarnathan@largoconcrete.com,approved,active
+12516,Dome Construction Corp.,https://domebuilds.com/,rlynch@domebuilds.com,approved,active
+12517,"Roebbelen Contracting, Inc.",https://roebbelen.com/,robm@roebbelen.com,approved,active
+12518,Martinez + Cutri Urban Studio,https://martinezcutri.com/,jmartinez@martinezcutri.com,approved,active
+12519,Marmol Radziner,https://marmol-radziner.com/,leo@marmol-radziner.com,approved,active
+12520,Brooks + Scarpa,https://brooksscarpa.com/,brooks@brooksscarpa.com,approved,active
+12521,NewMark Merrill Companies,https://newmarkmerrill.com/,ssigal@newmarkmerrill.com,approved,active
+12522,Chartered Companies,https://charteredcompanies.com/,troy.ritter@charteredcompanies.com,approved,active
+12523,"Skidmore, Owings & Merrill",https://som.com/,craig.hartman@som.com,approved,active
+12524,EHDD,https://ehdd.com/,d.ballash@ehdd.com,approved,active
+12525,Donald Joseph Inc.,https://donaldjoseph.com/,dfugina@donaldjoseph.com,approved,active
+12526,Cornerstone Communities,https://cornerstonecommunities.com/,ukretowicz@cornerstonecommunities.com,approved,active
+12527,Sutro Architects,https://sutroarchitects.com/,ssutro@sutroarchitects.com,approved,active
+12528,MBH Architects,https://mbharch.com/,johnm@mbharch.com,approved,active
+12529,DAHLIN Architecture | Planning | Interiors,https://dahlingroup.com/,nancy.keenan@dahlingroup.com,approved,active
+12530,KTGY,https://ktgy.com/,tesser@ktgy.com,approved,active
+12531,NBBJ,https://nbbj.com/,rmankin@nbbj.com,approved,active
+12532,LRS Realty & Management,https://lrspropertymanagement.com/,alec@lrsrm.com,approved,active
+12533,Hathaway Dinwiddie Construction Company,https://hathawaydinwiddie.com/,oriordank@hdcco.com,approved,active
+12534,"Alcal Specialty Contracting, Inc.",https://alcal.com/,tai.ai@alcal.com,approved,active
+12535,The Boldt Company,https://theboldtcompany.com/,steve.lind@boldt.com,approved,active
+12536,"Suffolk Construction Company, Inc.",https://suffolk.com/,jmckernan@suffolk.com,approved,active
+12537,MVE + Partners,https://mve-architects.com/,larambula@mve-architects.com,approved,active
+12538,Carrier Johnson + Culture,https://carrierjohnson.com/,deh@carrierjohnson.com,approved,active
+12539,Lionakis,https://lionakis.com/,laura.knauss@lionakis.com,approved,active
+12540,Johnson Fain,https://johnsonfain.com/,sspina@johnsonfain.com,approved,active
+12541,Woods Bagot,https://woodsbagot.com/,patrick.daly@woodsbagot.com,approved,active
+12542,"Alten Construction, Inc.",https://altenconstruction.com/,ralten@altenconstruction.com,approved,active
+12543,Buhler Commercial Construction,https://buhlercommercial.com/,steve@buhlercommercial.com,approved,active
+12544,Vance Brown Builders,https://vancebrown.com/,loren.brown@vancebrown.com,approved,active
+12545,James E. Roberts-Obayashi Corp.,https://jerocorp.com/,scott@jerocorp.com,approved,active
+12546,Blach Construction,https://blach.com/,dan.rogers@blach.com,approved,active
+12547,Ghilotti Construction Company,https://ghilotti.com/,dick@ghilotti.com,approved,active
+12548,Aidlin Darling Design,https://aidlindarlingdesign.com/,ja@aidlin-darling-design.com,approved,active
+12549,Leddy Maytum Stacy Architects,https://lmsarch.com/,mmaytum@lmsarch.com,approved,active
+12550,Feldman Architecture,https://feldmanarchitecture.com/,jfeldman@feldmanarch.com,approved,active
+12551,NICOLEHOLLIS,https://nicolehollis.com/,nicole@nicolehollis.com,suppressed,active
+12552,Cass Calder Smith Architecture + Interiors,https://casscaldersmith.com/,cass@casscaldersmith.com,approved,active
+12553,David Baker Architects,https://dbarchitect.com/,davidbaker@dbarchitect.com,approved,active
+12554,Fougeron Architecture,https://fougeron.com/,anne@fougeron.com,approved,active
+12555,Saitowitz | Natoma Architects,https://saitowitz.com/,stanley@saitowitz.com,approved,active
+12556,Kemp Bros. Construction,https://kempbros.com/,gsolaas@kempbros.com,approved,active
+12557,Oltmans Construction Co.,https://oltmans.com/,oltmans@oltmans.com,approved,active
+12558,C.W. Driver Companies,https://cwdriver.com/,droberts@cwdriver.com,approved,active
+12559,HITT Contracting,https://hitt.com/,tcoffey@hitt-gc.com,approved,active
+12560,Howard CDM,https://howardcdm.com/,mhoward@howardcdm.com,approved,active
+12561,R.D. Olson Construction,https://rdolson.com/,bob.olson@rdolson.com,approved,active
+12562,Balfour Beatty US,https://balfourbeattyus.com/,bcahill@balfourbeattyus.com,approved,active
+12563,Turner Construction Company,https://turnerconstruction.com/,treilly@tcco.com,approved,active
+12564,Clark Construction Group,https://clarkconstruction.com/,robert.moser@clarkconstruction.com,approved,active
+12565,PYATOK architecture + urban design,https://pyatok.com/,tballard@pyatok.com,approved,active
+12566,Carmel Partners,https://carmelpartners.com/,rzeff@carmelpartners.com,approved,active
+12567,CIM Group,https://cimgroup.com/,skuba@cimgroup.com,approved,active
+12568,Cityview,https://cityview.com/,sburton@cityview.com,approved,active
+12569,Jamison Services,https://jamisonservices.com/,jaimelee@jamisonservices.com,approved,active
+12570,Cal Poly Facilities Management & Development,https://calpoly.edu/,mmccormick@calpoly.edu,suppressed,active
+12571,Alarcon Bohm,https://bohmgroup.com/,kbohm@bohmgroup.com,approved,active
+12572,Burrell Construction,https://burrellc.com/,grobles@burrellcinc.com,approved,active
+12573,"Millie and Severson, Inc.",https://mandsinc.com/,bseverson@mandsinc.com,approved,active
+12574,BLC Builders,https://blcbuilders.com/,mfolgner@blcbuilders.com,approved,active
+12575,Near-Cal Corp.,https://nearcal.com/,steve@nearcal.com,approved,active
+12576,Michael Maltzan Architecture,https://mmaltzan.com/,mm@mmaltzan.com,approved,active
+12577,SECONEA,https://seconea.com/,yslee@seconea.com,approved,active
+12578,Rios,https://rios.com/,mark@rios.com,approved,active
+12579,Morrow-Meadows Corporation,https://morrow-meadows.com/,cvick@morrow-meadows.com,approved,active
+12580,W.E. O’Neil Construction,https://weoneil.com/,jfinn@weoneil.com,approved,active
+12581,FoRM Design Studio,https://formdesignstudio.com,jmartinez@formdesignstudio.com,approved,active
+12582,WSP USA,https://www.wsp.com,david.anderson@wsp.com,suppressed,active
+12583,Arizona Corporate Builders,https://www.azcorporatebuilders.com/,greg@azcorporatebuilders.com,approved,active
+12584,Wood Partners Construction,https://www.woodpartners.com/,joe@woodpartners.com,approved,active
+12585,D.L. English Design & Construction,https://dlenglishdesign.com/,d.english@dlenglishdesign.com,approved,active
+12586,Kiewit Building Group,https://www.kiewit.com/,rick.lanoha@kiewit.com,approved,active
+12587,Alston Construction,https://www.alstonco.com/,alston@alstonco.com,approved,active
+12588,ART Architects,https://www.art-team.com/,dmccord@art-team.com,approved,active
+12589,CDG Architects,https://www.cdg-architects.com/,frank@cdg-architects.com,approved,active
+12590,Cornell Architecture,https://www.cornellarchitecture.com/,greg@cornellarchitecture.com,approved,active
+12591,Design Link Architecture and Planning,https://www.designlinkarchitecture.com/,debra@designlinkarchitecture.com,approved,active
+12592,Baxley Architectural and Consulting,https://www.bax-az.com/,kendall@bax-az.com,approved,active
+12593,Swaim Associates,https://swaimaia.com/,emarley@swaimaia.com,approved,active
+12594,Michael Rust – Architect,https://www.rust-architect.com/,mrust@rust-architect.com,approved,active
+12595,Stickley Design Group Architects,https://www.stickleydesign.com/,martin@stickleydesign.com,approved,active
+12596,Bannon Construction,https://bannonconstruction.com/,info@bannonconstruction.com,approved,active
+12597,Hadley Design,https://hadley-design.com/,info@hadley-design.com,approved,active
+12598,Bunney's Inc.,https://bunneysinc.com/,info@bunneysinc.com,approved,active
+12599,Richärd Kennedy Architects,https://rkarch.com/,admin@rkarch.com,approved,active
+12600,"Searer, Robbins & Stephens",https://srsarchitects.com/,info@srsarchitects.com,suppressed,active
+12601,Arizona Retail Construction,https://azretailconstruction.com/,brian@azretailconstruction.com,approved,active
+12602,Woodruff Construction,https://woodruffaz.com/,info@woodruffaz.com,approved,active
+12603,SCA Design,https://scadesign.com/,sheldon@scadesign.com,approved,active
+12604,"Green Project Architects, PLLC",https://greenprojectarchitects.com/,si@greenprojectarchitects.com,approved,active
+12605,Kenzy Architects,https://www.kenzyarchitects.com/,info@kenzyarchitects.com,approved,active
+12606,The Structures Group Southwest Inc.,https://structuresgroup.com/,info@structuresgroup.com,approved,active
+12607,APMI architecture,https://apmi.com/,apmi@apmi.com,approved,active
+12608,Upward Architects,https://upwardarchitects.com/,info@upwardarchitects.com,suppressed,active
+12609,Hokanson Architects,https://www.hokansonarchitects.com/,info@hokansonarchitects.com,approved,active
+12610,Integrate Design,https://idarchitecturestudio.com/,info@idarchitecturestudio.com,approved,active
+12611,Kerpan Architects,https://kerpanarchitects.com/,kevin@kerpanarchitects.com,approved,active
+12612,FORSarchitecture + interiors,https://www.forsarchitecture.com/,yana@forsarchitecture.com,approved,active
+12613,Indigenous Design Studio + Architecture,https://www.ids-a.com/,marketing@ids-a.com,approved,active
+12614,plaY architecture,https://play-architecture.com/,info@play-architecture.com,approved,active
+12615,Devenney Group Architects,https://devenneygroup.com/,info@devenneygroup.com,approved,active
+12616,Allen+Philp Partners,https://allenphilp.com/,info@allenphilp.com,suppressed,active
+12617,Cotton Architecture + Design,https://www.cottonarchitecture.com/,info@cottonarchitecture.com,approved,active
+12618,Ryan Magdalena Architects,https://ryanmagdalena.com/,info@ryanmagdalena.com,approved,active
+12619,"Mittelstaedt Cooper & Associates, Ltd.",https://mittelstaedt.com,jmm@mittelstaedt.com,approved,active
+12620,"Eglin + Bresler Architects, P.C.",https://eglinbresler.com,tatyanab@eglinbresler.com,approved,active
+12621,MW Morrissey Construction,https://mwmorrissey.com,kevin@mwmorrissey.com,approved,active
+12622,Scott Rumel Architect,https://scottrumelarchitect.com,scott@scottrumelarchitect.com,suppressed,active
+12623,a23 Studios,https://www.a23studios.com,info@a23studios.com,approved,active
+12624,August Building Company,https://www.augustbuilding.com,info@augustbuilding.com,approved,active
+12625,"MJR Builders, Inc.",https://mjrbuilders.com,mike@mjrbuilders.com,approved,active
+12626,DCR + Arkitects,https://dcrarkitects.com,info@dcrarkitects.com,suppressed,active
+12627,Spurr Construction,https://spurrconstruction.com/,marilyn.spurr@spurrconstruction.com,approved,active
+12628,Cuneo Construction,https://cuneoconstruction.com/,info@cuneoconstruction.com,approved,active
+12629,4C Construction,https://4cconstruct.com/,info@4cconstruct.com,approved,active
+12630,Whelcon Contractors,https://www.whelcon.com/,business@whelcon.com,approved,active
+12631,Barrio Construction,https://www.barrioconstruction.com/,info@barrioconstruction.com,suppressed,active
+12632,Tucson Building Maintenance,https://tucsonbuildingmaintenance.com/,ask@tucsonbuildingmaintenance.com,approved,active
+12633,Bailey Marshall Corporation,https://www.baileymarshallcorporation.com/,jmbest@baileymarshallcorporation.com,approved,active
+12634,Capstone Constructors,https://capstoneconstructors.com/,jose@capstoneconstructors.com,approved,active
+12635,Cypress Construction Contractors,https://thecypressteam.com/,info@thecypressteam.com,suppressed,active
+12636,Sharp Construction,https://www.sharpconstruction.com/,info@sharpconstruction.com,approved,active
+12637,Design Build System,https://designbuildsystem.com/,steve@designbuildsystem.com,approved,active
+12638,CMP General Contracting,https://cmprosaz.com/,vchacon@cmprosaz.com,approved,active
+12639,Cornerstone Construction AZ,https://cornerstoneconstructionaz.com/,nkirsten@cornerstoneconstructionaz.com,suppressed,active
+12640,Simmons Construction Company,https://simmonscc.com/,info@simmonscc.com,suppressed,active
+12641,SunWest Builders,https://sunwestbuildersaz.com/,info@sunwestbuildersaz.com,suppressed,active
+12642,Caldwell Contractors,https://caldwellcontractors.com/,info@caldwellcontractors.com,suppressed,active
+12643,Desert Star Construction,https://desertstarconstruction.com/,info@desertstarconstruction.com,approved,active
+12644,Coyote Contractors,https://www.coyotecontractors.com/,info@coyotecontractors.com,approved,active
+12645,Colton Constructors,https://www.coltonconst.com/,info@coltonconst.com,approved,active
+12646,Phoenician Construction,https://phoenicianconstruction.com/,contact@pcaz.net,approved,active
+12647,ALR Construction,https://alrconstructionaz.com/,email@alrconstructionaz.com,suppressed,active
+12648,Milestone Construction GC,https://milestoneconstructionaz.com/,info@milestoneconstructionaz.com,suppressed,active
+12649,Lions Construction Group,https://lionsconstructiongroupllc.com/,info@lionsconstructiongroupllc.com,suppressed,active
+12650,Remblake Builders,https://remblakebuilders.com/,info@remblakebuilders.com,suppressed,active
+12651,GI Solution,https://gi-solution.com/,info@gi-solution.com,approved,active
+12652,Reliance Build,https://rbiphx.com/,info@rbiphx.com,approved,active
+12653,Wasson Commercial Contracting,https://wassoncc.com/,info@wassoncc.com,approved,active
+12654,WDS Commercial,https://wdscom.com/,info@wdscom.com,suppressed,active
+12655,Action Contracting,https://www.action-contracting.com/,info@action-contracting.com,suppressed,active
+12656,Biltmore Construction,https://www.biltmoreconstruction.com/,bcc@biltmorefl.com,approved,active
+12657,New World Contractors,https://newworldcontractors.com/,info@newworldcontractors.com,suppressed,active
+12658,Stonehenge Construction of Arizona,https://stonehengeaz.com/,info@stonehengeaz.com,suppressed,active
+12659,Danu Construction,https://danuconstruction.com/,office@danuconstruction.com,approved,active
+12660,LPA Design Studios,https://www.lpainc.com,wrogers@lpainc.com,approved,active
+12661,Koning Eizenberg Architecture,https://www.kearch.com,jeizenberg@kearch.com,approved,active
+12662,OfficeUntitled,https://officeuntitled.com,dave@officeuntitled.com,approved,active
+12663,HGA,https://hga.com,tcarl@hga.com,approved,active
+12664,Kohn Pedersen Fox,https://www.kpf.com,jvonklemperer@kpf.com,approved,active
+12665,TCA Architects,https://tca-arch.com,tcox@tca-arch.com,approved,active
+12666,Tutor Perini,https://www.tutorperini.com,ronald.tutor@tutorperini.com,approved,active
+12667,Lendlease,https://www.lendlease.com,claire.johnston@lendlease.com,approved,active
+12668,Rosendin,https://www.rosendin.com,mgreenawalt@rosendin.com,approved,active
+12669,Cupertino Electric,https://www.cei.com,tom_schott@cei.com,approved,active
+12670,IA Interior Architects,https://interiorarchitects.com,t.powers@interiorarchitects.com,approved,active
+12671,Build Group,https://www.buildgc.com,ross@buildgc.com,approved,active
+12672,Herrero Builders,https://herrero.com,herrero@herrero.com,suppressed,active
+12673,Clive Wilkinson Architects,https://www.clivewilkinson.com,cw@clivewilkinson.com,approved,active
+12674,XTEN Architecture,https://www.xtenarchitecture.com,akelly@xtenarchitecture.com,approved,active
+12675,Huntsman Architectural Group,https://www.huntsmanag.com,huntsman@huntsmanag.com,suppressed,active
+12676,ODA,https://www.oda-architecture.com,eran@oda-architecture.com,approved,active
+12677,Adjaye Associates,https://www.adjaye.com,david.adjaye@adjaye.com,approved,active
+12678,The Switzer Group,https://switzer.com,switzer@switzer.com,approved,active
+12679,Handel Architects,https://handelarchitects.com,ghandel@handelarchitects.com,approved,active
+12680,Arquitectonica,https://arquitectonica.com,bernardo@arquitectonica.com,approved,active
+12681,S. C. Anderson,https://scanderson.com,steven@scanderson.com,approved,active
+12682,Sillman Wright Architects,https://sillmanwright.com,mark@sillmanwright.com,approved,active
+12683,Kern Steel Fabrication,https://kernsteel.com,mike@kernsteel.com,approved,active
+12684,R. F. MacDonald Co.,https://rfmacdonald.com,david@rfmacdonald.com,approved,active
+12685,W. L. Butler,https://wlbutler.com,bill.butler@wlbutler.com,approved,active
+12686,Miller Hull Partnership,https://millerhull.com,bcourt@millerhull.com,approved,active
+12687,LS3P,https://ls3p.com,ronsmith@ls3p.com,approved,active
+12688,Quattrocchi Kwok Architects,https://qka.com,markq@qka.com,approved,active
+12689,FCF General Contractor,https://fcfgc.com,frank.fernandez@fcfgc.com,approved,active
+12690,Lundberg Design,https://lundbergdesign.com,olle@lundbergdesign.com,approved,active
+12691,Diede Construction,https://diedeconstruction.com,stevediede@diedeconstruction.com,approved,active
+12692,AD Architects,https://www.adarch.com,newell@adarch.com,approved,active
+12693,Reyes Architects,https://www.reyesarchitects.com,hreyes@reyesarchitects.com,approved,active
+12694,Ronald Beyer Architect,https://ronaldbeyerarchitect.com,ronbeyer@ronaldbeyerarchitect.com,suppressed,active
+12695,Rengel + Company Architects,https://rengelarch.com,info@rengelarch.com,suppressed,active
+12696,dSantana,https://www.dsantanaarchitect.com,david@dsantanaarchitect.com,approved,active
+12697,Herdman Architecture + Design,https://www.herdman-ad.com,info@herdman-ad.com,approved,active
+12698,Interactive Resources,https://www.intres.com,info@intres.com,approved,active
+12699,Franco Architects,https://www.francoarchitects.com,info@francoarchitects.com,approved,active
+12700,Geddes Ulinskas Architects,https://www.ularch.com,info@ularch.com,suppressed,active
+12701,Pacific 33 Architects,https://pacific33architects.com,info@pacific33architects.com,approved,active
+12702,Stoutenborough Inc.,https://www.stoutenboroughinc.com,info@stoutenboroughinc.com,suppressed,active
+12703,KRP Architects,https://krparchitects.com,info@krparchitects.com,approved,active
+12704,Watry Design,https://watrydesign.com,jmcinerney@watrydesign.com,approved,active
+12705,Lowney Architecture,https://lowneyarch.com,info@lowneyarch.com,approved,active
+12706,SweisKloss,https://www.sweiskloss.com,info@sweiskloss.com,approved,active
+12707,BOTO Design Architects,https://www.boto.com,info@boto.com,approved,active
+12708,Synchronis Architecture,https://synchronis.design,info@synchronis.design,approved,active
+12709,Letter Four,https://www.letterfour.com,info@letterfour.com,approved,active
+12710,Mayer Architects,https://mayerarchitects.com,gerhard@mayerarchitects.com,approved,active
+12711,BAA Architects,https://www.baarchitects.com,d.banducci@baarchitects.com,approved,active
+12712,Tiu Architects,https://tiuarchitects.com,info@tiuarchitects.com,approved,active
+12713,SPACE International Architects,https://www.space-intl.com,info@space-intl.com,approved,active
+12714,Keating Architecture,https://www.keatingarchitecture.com,info@keatingarchitecture.com,suppressed,active
+12715,Ziese Architecture,https://www.ziesearchitecture.com,info@ziesearchitecture.com,approved,active
+12716,DRAMS Architects + Construction,https://www.dramsinc.com,info@dramsinc.com,approved,active
+12717,PAS Architects,https://pasarchitects.com,info@pasarchitects.com,suppressed,active
+12718,BAE Architecture + Design,https://www.bae-ad.com,info@bae-ad.com,suppressed,active
+12719,Coonan & Bonds Architects,https://www.coonanbonds.com,info@coonanbonds.com,approved,active
+12720,10-19 Architecture,https://www.10-19architecture.com,info@10-19architecture.com,approved,active
+12721,Patel Architecture,https://www.patelarchitecture.com,info@patelarchitecture.com,approved,active
+12722,MERArchitect,https://www.merarchitect.com,info@merarchitect.com,suppressed,active
+12723,Mendelson Architecture + Project Development,https://www.mendelsonarchitecture.com,info@mendelsonarchitecture.com,approved,active
+12724,Macy Architecture,https://www.macyarchitecture.com,info@macyarchitecture.com,approved,active
+12725,Arcanum Architecture,https://www.arcanumarchitecture.com,info@arcanumarchitecture.com,approved,active
+12726,Jackson Liles Architecture,https://www.jacksonliles.com,info@jacksonliles.com,approved,active
+12727,"Broeske Architects & Associates, Inc.",https://broeskearchitects.com,jlb@broeskearchitects.com,approved,active
+12728,Elka Construction Inc.,https://www.elkaconstruction.com,tonikaleh@elkaconstruction.com,approved,active
+12729,M3 Architects,https://www.m3archs.com,jmontoya@m3archs.com,approved,active
+12730,"AE3 Partners, Inc. | Architecture + CM",https://www.ae3partners.com,info@ae3partners.com,approved,active
+12731,Matador Construction,https://matadorconstructionaz.com/,ruben@matadorconstructionaz.com,approved,active
+12732,AZ Commercial Builders,https://az-cb.com/,andre@az-cb.com,approved,active
+12733,"Alexander Building Company, Inc.",https://abccre.com/,salexander@abccre.com,approved,active
+12734,LAST Architects,https://www.lastarchitects.com/,brad@lastarchitects.com,approved,active
+12735,Dean Alan Architects,https://www.deanalanarchitects.com/,info@deanalanarchitects.com,approved,active
+12736,MIK Construction Inc.,https://mikinc.us,info@mikinc.us,approved,active
+12737,Fassberg Construction Company,https://buildfassberg.com,sean@buildfassberg.com,approved,active
+12738,Bassi Build Group,https://bbgconstruct.com,hbassi@bbgconstruct.com,approved,active
+12739,JM|A+D (Jeffrey Miller Architecture & Design),https://jmadstudio.com,jm@jmadstudio.com,approved,active
+12740,Foxtrot Construction,https://foxtco.com,info@foxtco.com,approved,active
+12741,Danielian Associates,https://danielian.com,jdanielian@danielian.com,approved,active
+12742,O Arch,https://oarchinc.com,info@oarchinc.com,approved,active
+12743,Valerio Inc.,https://www.valerioinc.com,info@valerioinc.com,approved,active
+12744,Shokati Architects,https://shokatiarchitects.com,info@shokatiarchitects.com,approved,active
+12745,DWD Builders Inc.,https://www.dwdbuilders.com,info@dwdbuilders.com,approved,active
+12746,"Pison Netsawang Architects, Inc.",https://pisonarchitects.com,info@pisonarchitects.com,approved,active
+12747,Trident CPM Building & Consulting,https://trident-cpm.com/,mike@tridentcpm.com,approved,active
+12748,Viola Incorporated,https://violainc.com/,estimating@violainc.com,approved,active
+12749,6D PMCM,https://6dpmcm.com/,info@6dpmcm.com,approved,active
+12750,"Commercial Construction & Improvements, Inc.",https://cci-gc.com/,info@cci-gc.com,approved,active
+12751,Baldwin Builders,https://baldwin-builders.com/,info@baldwin-builders.com,approved,active
+12752,Pro Construction,https://pro-const.com/,info@pro-const.com,approved,active
+12753,SE Builders,https://www.sebuilders.com/,info@sebuilders.com,approved,active
+12754,DMR Builders,https://dmrbuilderscorp.com/,info@dmrbuilderscorp.com,approved,active
+12755,"BLDG Construction, Inc.",https://www.buildwithbldg.com/,info@withbldg.com,approved,active
+12756,DZI Construction,https://dziconstruction.com/,courtneyd@dziconstruction.com,approved,active
+12757,Greyhawk Construction,https://www.greyhawkco.com/,info@greyhawkco.net,approved,active
+12758,"Miller Pacific, Inc.",https://www.millerpacificinc.com/,info@millerpacificinc.com,approved,active
+12759,AGI General Contracting,https://agigc.com/,subcontractor@agigc.com,approved,active
+12760,TriStone Group,https://www.tristone-group.com/,info@tristone-group.com,approved,active
+12761,CMT Construction,https://www.cmtconstruction.com/,info@cmtconstruction.com,approved,active
+12762,"Dorado Design & Construction, Inc.",https://www.doradodc.com/,info@doradodc.com,approved,active
+12763,JDS Design Build,https://jdsdesign.build/,info@jdsdesign.build,approved,active
+12764,YADEJS Inc.,https://www.yadejsinc.com/,jamesmabrey@yadejs.com,approved,active
+12765,Krouse Construction Inc.,https://krouseconstruction.com/,contact@krouseconstruction.com,approved,active
+12766,APB Inc.,https://apb-inc.com/,info@apb-inc.com,approved,active
+12767,VHD Construction Inc.,https://vhdconstruction.com/,info@vhdconstruction.com,approved,active
+12768,JMF Commercial Construction,https://jmfcommercialconstruction.com/,info@jmfcommercialconstruction.com,approved,active
+12769,Ambros Construction Inc.,https://ambrosconstructioninc.com/,info@ambrosconstructioninc.com,approved,active
+12770,"Sierra Valley Builders, Inc.",https://www.sierravalleybuilders.com/,info@sierravalleybuilders.com,approved,active
+12771,Unique Builders Co.,https://uniquebuildersco.com/,info@uniquebuildersco.com,approved,active
+12772,Rushmore Construction Company Inc.,https://rushmorecc.com/,info@rushmorecc.com,approved,active
+12773,"California Designers Remodeling, Inc.",https://cdrremodeling.com/,info@cdrremodeling.com,approved,active
+12774,"Noor Construction, Inc.",https://noorcontractor.com/,info@noorcontractor.com,approved,active
+12775,"Speedway Constructors, Inc.",https://www.speedwayci.com/,info@speedwayci.com,approved,active
+12776,"MVW General Contractors, Inc.",https://mvwcontractor.com/,info@mvwcontractors.com,approved,active
+12777,Schmidt-Tomey Construction,https://schmidt-tomey.com/,info@schmidt-tomey.com,approved,active
+12778,Greater Pacific Construction,https://greaterpacificconstruction.com/,info@greaterpacificconstruction.com,approved,active

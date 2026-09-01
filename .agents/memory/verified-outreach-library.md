@@ -36,3 +36,15 @@ The daily operating ceiling is 150 new eligible recipients at 8:00 AM America/Ph
 **Why:** Paid enrichment credits are finite, while the requested company coverage is broader than the immediately sendable list. Separating the company universe from email enrichment prevents low-yield lookups from silently hiding legitimate prospects.
 
 **How to apply:** Keep operational contact data in the database/register with verification, approval, source, and suppression state. Use FindyMail for enrichment and verification without guessing addresses. Use durable scheduled execution or an always-running worker for the 8:00 AM trigger; an autoscaling in-process interval is not sufficient.
+
+Run FindyMail name/domain enrichment in small paced batches and retry only explicit rate-limit responses. A successful HTTP response without a returned email is a legitimate no-result, not a reason to try another person.
+
+**Why:** Larger concurrent batches can receive transient 429 responses even below the documented concurrency ceiling; treating those as finder failures understates the verified pool, while retrying genuine no-results violates the one-lookup rule.
+
+**How to apply:** Keep each confirmed pair's result, pace requests in groups of roughly four, retry only 429s, and count a contact as verified only when the response contains an email.
+
+Historical seed batches are satisfied when they retain at least their target count; surplus records must not block later batches.
+
+**Why:** Older runs can legitimately retain more than the nominal target after reconciliation. Requiring exact equality causes startup to fail before newer verified batches are seeded.
+
+**How to apply:** Fail when an idempotent seed remains below its required target, but accept counts at or above the target and let the shared daily slot ledger enforce the actual send ceiling.

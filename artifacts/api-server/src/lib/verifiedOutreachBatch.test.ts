@@ -7,6 +7,7 @@ import {
 } from "./verifiedOutreachBatch";
 import { VERIFIED_OUTREACH_CONTACTS_AUG_30 } from "./verifiedOutreachContactsAug30";
 import { VERIFIED_OUTREACH_CONTACTS_AUG_31 } from "./verifiedOutreachContactsAug31";
+import { VERIFIED_OUTREACH_CONTACTS_SEP_02 } from "./verifiedOutreachContactsSep02";
 import {
   assertOutreachContactData,
   assertVerifiedOutreachBatch,
@@ -60,12 +61,32 @@ test("the August 31 reserve contains exactly 150 verified distinct contacts", ()
   assert.doesNotThrow(() => assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_AUG_31, 150));
 });
 
+test("the September 2 fill contains exactly 145 verified distinct contacts", () => {
+  assert.equal(VERIFIED_OUTREACH_CONTACTS_SEP_02.length, 145);
+  assert.equal(
+    new Set(VERIFIED_OUTREACH_CONTACTS_SEP_02.map((contact) => contact.contactEmail)).size,
+    145,
+  );
+  assert.equal(
+    new Set(VERIFIED_OUTREACH_CONTACTS_SEP_02.map((contact) =>
+      new URL(contact.website).hostname.replace(/^www\./, "").toLowerCase()
+    )).size,
+    145,
+  );
+  assert.equal(
+    VERIFIED_OUTREACH_CONTACTS_SEP_02.filter((contact) => contact.state === "AZ").length,
+    43,
+  );
+  assert.doesNotThrow(() => assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_SEP_02, 145));
+});
+
 test("the enabled seed uses committed contacts without a private-storage prerequisite", async () => {
   const source = await import("node:fs/promises")
     .then((fs) => fs.readFile(new URL("./verifiedOutreachBatch.ts", import.meta.url), "utf8"));
   assert.doesNotMatch(source, /ObjectStorageService|STAGED_BATCH_OBJECT|loadStagedVerifiedContacts/);
   assert.match(source, /VERIFIED_OUTREACH_CONTACTS_AUG_30/);
   assert.match(source, /VERIFIED_OUTREACH_CONTACTS_AUG_31/);
+  assert.match(source, /VERIFIED_OUTREACH_CONTACTS_SEP_02/);
   assert.match(source, /for \(const batch of datedBatches\)/);
 });
 

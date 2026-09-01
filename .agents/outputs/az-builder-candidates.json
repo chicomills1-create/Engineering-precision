@@ -1,0 +1,122 @@
+[
+  {
+    "companyName": "Brien Contracting",
+    "website": "https://briencontracting.com/",
+    "city": "Scottsdale",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://briencontracting.com/career/",
+    "needSignals": "Brien’s official careers page invites applications and describes its Arizona commercial-construction work.",
+    "contactName": "Chris Brien",
+    "contactTitle": "President and CEO",
+    "contactSourceUrl": "https://briencontracting.com/about/"
+  },
+  {
+    "companyName": "Bjerk Builders",
+    "website": "https://bjerkbuilders.com/",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://bjerkbuilders.com/our-team/",
+    "needSignals": "The official team page includes an opportunities section that accepts resumes; Bjerk identifies itself there as Arizona’s tenant-improvement contractor.",
+    "contactName": "Scott Pardee",
+    "contactTitle": "Director of Preconstruction",
+    "contactSourceUrl": "https://bjerkbuilders.com/our-team/"
+  },
+  {
+    "companyName": "Primak Construction Group",
+    "website": "https://primakconstruction.com/",
+    "city": "Mesa",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://azbigmedia.com/real-estate/cunningham-aviation-and-primak-construction-break-ground-on-falcon-field-fbo-facility/",
+    "needSignals": "Public project coverage reports Primak broke ground in Mesa on Cunningham Aviation’s 36,000-square-foot hangar and 7,346-square-foot FBO project.",
+    "contactName": "Lou Primak",
+    "contactTitle": "President and COO",
+    "contactSourceUrl": "https://primakconstruction.com/about-us/"
+  },
+  {
+    "companyName": "Path Construction Southwest",
+    "website": "https://pathcc.com/",
+    "city": "Mesa",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://pathcc.com/path-construction-southwest-marriott-studiores-arizona/",
+    "needSignals": "Path’s official project update says it is general contractor for the 124-key Marriott StudioRes Mesa and that the work is progressing ahead of schedule.",
+    "contactName": "Min Jang",
+    "contactTitle": "Vice President of Path Construction Southwest",
+    "contactSourceUrl": "https://pathcc.com/team-members/"
+  },
+  {
+    "companyName": "Adolfson & Peterson Construction",
+    "website": "https://www.a-p.com/",
+    "city": "Tempe",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://www.a-p.com/offices/tempe-az/",
+    "needSignals": "AP’s Tempe office page lists Arizona commercial/office work and identifies current featured projects, including the Cirrus Logic tenant improvement in Mesa.",
+    "contactName": "David Grandstaff",
+    "contactTitle": "Regional President, Midwest and Southwest",
+    "contactSourceUrl": "https://www.a-p.com/offices/tempe-az/"
+  },
+  {
+    "companyName": "Okland Construction",
+    "website": "https://www.okland.com/",
+    "city": "Tempe",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://oklandconstructioncareers-ootb.ttcportals.com/jobs/15988816-senior-superintendent",
+    "needSignals": "Okland’s official careers portal lists a Phoenix Senior Superintendent opening for commercial vertical-construction projects.",
+    "contactName": "Bill Okland",
+    "contactTitle": "Chief Executive Officer",
+    "contactSourceUrl": "https://www.okland.com/press-releases/article/okland-construction-expands-ownership-to-employees-while-remaining-family-led"
+  },
+  {
+    "companyName": "Mortenson",
+    "website": "https://www.mortenson.com/",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://www.mortenson.com/careers/phoenix-office/operating-group-safety-director-22561",
+    "needSignals": "Mortenson’s official careers site lists an Operating Group Safety Director opening in its Phoenix office.",
+    "contactName": "Melanie Morehart",
+    "contactTitle": "Director of Operations, Phoenix",
+    "contactSourceUrl": "https://www.mortenson.com/team/melanie-morehart"
+  },
+  {
+    "companyName": "Layton Construction",
+    "website": "https://www.laytonconstruction.com/",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://www.laytonconstruction.com/open-positions/",
+    "needSignals": "Layton’s official careers site has a current open-positions page; its Arizona office describes a 150-person Phoenix construction operation.",
+    "contactName": "Andrew Geier",
+    "contactTitle": "Executive Vice President",
+    "contactSourceUrl": "https://www.laytonconstruction.com/contact/southwest/"
+  },
+  {
+    "companyName": "PREMIER Design + Build Group",
+    "website": "https://www.pdbgroup.com/",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://www.arizcc.com/post/premier-completes-multi-building-industrial-project-in-arizona",
+    "needSignals": "PREMIER reported completing four speculative industrial buildings at Arizona’s Skyway Business Park as part of its Arizona market entry.",
+    "contactName": "Graham Benes",
+    "contactTitle": "Executive Vice President, Southwest",
+    "contactSourceUrl": "https://www.pdbgroup.com/post/premier-design-build-group-welcomes-industry-leader-graham-benes-as-executive-vice-president-in-so"
+  },
+  {
+    "companyName": "Skanska USA Building",
+    "website": "https://www.skanska.com/us/en/",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://careers.usa.skanska.com/jobs/8611?lang=en-us",
+    "needSignals": "Skanska’s official careers portal lists a Quality Manager opening in Phoenix; its Arizona page identifies data centers and high-tech manufacturing among its local work.",
+    "contactName": "Paul Haining",
+    "contactTitle": "Executive Vice President, Skanska USA Building",
+    "contactSourceUrl": "https://www.skanska.com/us/en/about-skanska/leadership/"
+  }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "companyName": "Brown Construction, Inc.",
+    "website": "https://www.brown-construction.com/",
+    "city": "West Sacramento",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.brown-construction.com/join-our-team/",
+    "needSignals": "Brown's official careers page invites candidates to become part of the Brown family, indicating an active need to add construction talent.",
+    "contactName": "Darrin Henry",
+    "contactTitle": "Vice President of Construction Operations",
+    "contactSourceUrl": "https://www.brown-construction.com/who-we-are/leadership-team/"
+  },
+  {
+    "companyName": "Hartin and Hume, Inc.",
+    "website": "https://www.hartinandhume.com/",
+    "city": "Rancho Cordova",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.hartinandhume.com/project-gallery/",
+    "needSignals": "The official gallery documents the firm's commercial office, retail, industrial, and tenant-improvement delivery across the Sacramento, Placer, and San Joaquin regions.",
+    "contactName": "Jeff Hume",
+    "contactTitle": "President",
+    "contactSourceUrl": "https://www.hartinandhume.com/about-us/"
+  },
+  {
+    "companyName": "Gheen Builders, Inc.",
+    "website": "https://www.gheenbuilders.com/",
+    "city": "Redding",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.gheenbuilders.com/tenant-improvements/",
+    "needSignals": "Gheen's official tenant-improvement page states that it performs tenant improvements and new ground-up construction for national clients, commercial properties, and local government projects across the Northstate.",
+    "contactName": "Steve Gheen",
+    "contactTitle": "President",
+    "contactSourceUrl": "https://www.gheenbuilders.com/gheen-builders-contact-us/"
+  },
+  {
+    "companyName": "Huff Construction Company, Inc.",
+    "website": "https://www.huffcon.com/",
+    "city": "Modesto",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.huffcon.com/building-excellence-at-the-kimpton-hotel-in-pacific-grove-ca/",
+    "needSignals": "Huff's official June 2024 project update reports active vertical construction work on the Kimpton Hotel in Pacific Grove.",
+    "contactName": "Brad Ardis",
+    "contactTitle": "President",
+    "contactSourceUrl": "https://www.huffcon.com/building-lightfighter-village-leadership-teamwork-in-action/"
+  },
+  {
+    "companyName": "Reeve-Knight Construction, Inc.",
+    "website": "https://www.reeve-knight.com/",
+    "city": "Roseville",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.reeve-knight.com/careers/",
+    "needSignals": "Reeve-Knight's official careers page lists a Project Superintendent position requiring commercial and retail supervision experience.",
+    "contactName": "Pat Chism",
+    "contactTitle": "Vice President of Estimating & Preconstruction",
+    "contactSourceUrl": "https://www.reeve-knight.com/about/reeve-knight-construction-inc-our-team/"
+  },
+  {
+    "companyName": "Nordby Construction",
+    "website": "https://construction.nordby.net/",
+    "city": "Santa Rosa",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://construction.nordby.net/company-info/",
+    "needSignals": "Nordby's official commercial-construction page describes active full-service new construction and renovation capability for commercial, tenant-improvement, and hospitality work throughout Northern California.",
+    "contactName": "Tony Simmons",
+    "contactTitle": "Partner & President",
+    "contactSourceUrl": "https://construction.nordby.net/company-info/"
+  },
+  {
+    "companyName": "Stuart James Construction, Inc.",
+    "website": "https://www.sjci.build/",
+    "city": "Rocklin",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.sjci.build/blog/20-years-commercial-construction-partnerships/",
+    "needSignals": "SJCI's official February 2026 post marks 20 years of commercial construction and describes its continued work serving commercial clients.",
+    "contactName": "Brent Wiegand",
+    "contactTitle": "President & CEO",
+    "contactSourceUrl": "https://www.sjci.build/about/team/"
+  }
+]

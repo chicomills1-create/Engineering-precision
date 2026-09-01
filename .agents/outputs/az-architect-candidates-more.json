@@ -1,0 +1,74 @@
+[
+  {
+    "companyName": "DBSI",
+    "website": "https://dbsi.com/",
+    "city": "Chandler",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://www.linkedin.com/posts/dbsi-inc_hiring-careers-architecture-activity-7491194724297560064-b1JT",
+    "needSignals": "DBSI publicly announced current hiring for an Architectural Designer along with other roles in its Chandler-based design-build business.",
+    "contactName": "Debra Dillon",
+    "contactTitle": "Principal",
+    "contactSourceUrl": "https://dbsi.com/why-dbsi/meet-the-team"
+  },
+  {
+    "companyName": "Cuhaci Peterson",
+    "website": "https://www.c-p.com/",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://www.c-p.com/news/cuhaci-peterson-expands-phoenix-office-to-support-continued-growth/",
+    "needSignals": "Cuhaci Peterson announced that it expanded its Phoenix office to accommodate growing client demand and strategic initiatives; the office supports grocery, retail, and restaurant work.",
+    "contactName": "Eric S. Harris",
+    "contactTitle": "Principal",
+    "contactSourceUrl": "https://www.c-p.com/company-profile/leadership/eric-s-harris/"
+  },
+  {
+    "companyName": "Tawaw Architecture Collective",
+    "website": "https://www.tawarc.com/",
+    "city": "Tempe",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://www.linkedin.com/posts/tawaw-architecture-collective_truthandreconciliation-indigenousdesign-activity-7449598371817857025-rDhl",
+    "needSignals": "Tawaw publicly announced its selection by the National Centre for Truth and Reconciliation and the University of Manitoba to lead the design of a project.",
+    "contactName": "Wanda Dalla Costa",
+    "contactTitle": "Principal",
+    "contactSourceUrl": "https://www.tawarc.com/research-links"
+  },
+  {
+    "companyName": "LEA Architects",
+    "website": "http://lea-architects.com/",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://www.linkedin.com/posts/lea-architects-llc_hiring-activity-7364991081001754624-Gl12",
+    "needSignals": "LEA Architects publicly posted that it was hiring a Project Architect in Phoenix.",
+    "contactName": "Lance Enyart",
+    "contactTitle": "Design Principal / Partner",
+    "contactSourceUrl": "http://lea-architects.com/team/"
+  },
+  {
+    "companyName": "Trevor Pan Architects",
+    "website": "https://trevorpan.com/",
+    "city": "Scottsdale",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://archinect.com/jobs/entry/150519132/revit-drafter",
+    "needSignals": "Trevor Pan Architects was seeking a Revit Drafter in Scottsdale in an Arizona architecture-firm hiring roundup.",
+    "contactName": "Trevor Pan",
+    "contactTitle": "Principal Architect",
+    "contactSourceUrl": "https://trevorpan.com/about"
+  },
+  {
+    "companyName": "Hooker DeJong",
+    "website": "https://hookerdejong.com/",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://hiringcafe.com/job/lead-project-architect-hooker-dejong-phoenix-arizona-v1661v2zmk1zr8wh",
+    "needSignals": "Hooker DeJong was recruiting a Lead Project Architect for its Phoenix production office to coordinate design and construction-document delivery.",
+    "contactName": "Nicole Caldwell",
+    "contactTitle": "Architect",
+    "contactSourceUrl": "https://hookerdejong.com/graduate-of-architecture-program/"
+  }
+]

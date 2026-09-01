@@ -1,0 +1,26 @@
+[
+  {
+    "companyName": "Kittle Design and Construction",
+    "website": "http://www.kittlearizona.com/",
+    "city": "Tucson",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "http://www.kittlearizona.com/careers",
+    "needSignals": "Kittle’s official website has a careers page seeking construction applicants; the company describes its work as commercial construction.",
+    "contactName": "Kenneth Schagel",
+    "contactTitle": "Owner and General Manager",
+    "contactSourceUrl": "http://www.kittlearizona.com/bio"
+  },
+  {
+    "companyName": "VE Construction LLC",
+    "website": "https://veconstructionaz.com/",
+    "city": "Tolleson",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://network.procore.com/p/ve-construction-llc-tolleson",
+    "needSignals": "VE Construction’s public Procore profile reports nine active projects and identifies commercial, healthcare, and residential market sectors.",
+    "contactName": "Cristobal Diosdado",
+    "contactTitle": "Chief Executive Officer",
+    "contactSourceUrl": "https://veconstructionaz.com/about"
+  }
+]
