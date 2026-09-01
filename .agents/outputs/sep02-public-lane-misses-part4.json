@@ -1,0 +1,134 @@
+[
+  {
+    "companyName": "Herrero Builders",
+    "website": "https://www.herrerobuilders.com/",
+    "companyDomain": "herrerobuilders.com",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.herrerobuilders.com/projects/",
+    "needSignals": "Herrero publicly maintains a portfolio of commercial and institutional building projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Dominguez General Engineering",
+    "website": "https://www.dominguezgeneral.com/",
+    "companyDomain": "dominguezgeneral.com",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.dominguezgeneral.com/projects/",
+    "needSignals": "The firm publicly shows active civil and commercial construction work.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Tilden-Coil Constructors",
+    "website": "https://www.tildencoil.com/",
+    "companyDomain": "tildencoil.com",
+    "city": "Riverside",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.tildencoil.com/projects/",
+    "needSignals": "Tilden-Coil publicly presents education, healthcare, civic, and commercial construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Hamilton Construction",
+    "website": "https://www.hamiltonconstruction.com/",
+    "companyDomain": "hamiltonconstruction.com",
+    "city": "Sacramento",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.hamiltonconstruction.com/projects/",
+    "needSignals": "Hamilton publicly displays California infrastructure and construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "PENTA Building Group",
+    "website": "https://www.pentabldggroup.com/",
+    "companyDomain": "pentabldggroup.com",
+    "city": "Los Angeles",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.pentabldggroup.com/projects/",
+    "needSignals": "PENTA publicly displays commercial, hospitality, healthcare, and entertainment construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "West Valley Construction",
+    "website": "https://westvalleyconstruction.com/",
+    "companyDomain": "westvalleyconstruction.com",
+    "city": "Campbell",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://westvalleyconstruction.com/careers/open-positions/",
+    "needSignals": "West Valley's official careers page lists open positions.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "RCP Pacific",
+    "website": "https://www.rcpacific.com/",
+    "companyDomain": "rcpacific.com",
+    "city": "Carlsbad",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.rcpacific.com/projects/",
+    "needSignals": "RCP Pacific publicly displays commercial and mixed-use construction work.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Giffin Inc.",
+    "website": "https://www.giffininc.com/",
+    "companyDomain": "giffininc.com",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.giffininc.com/projects/",
+    "needSignals": "Giffin publicly presents commercial construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "DGA",
+    "website": "https://www.dgaonline.com/",
+    "companyDomain": "dgaonline.com",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://www.dgaonline.com/careers/",
+    "needSignals": "DGA's public careers page invites applicants to explore its current job openings.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "United Integrated Services (USA) Corp.",
+    "website": "https://uisusacorp.com/",
+    "companyDomain": "uisusacorp.com",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://uisusacorp.com/",
+    "needSignals": "UIS states that it currently serves as a general contractor on TSMC's Fab 21 project in Phoenix and that its Phoenix cleanroom under construction will be nearly 650,000 square feet.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "RO | ROCKETT DESIGN",
+    "website": "https://rorockettdesign.com/",
+    "companyDomain": "rorockettdesign.com",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://www.linkedin.com/posts/ro-rockett-design_were-hiring-were-looking-for-talented-activity-7489086010237259776-32ti",
+    "needSignals": "The firm publicly announced that it is hiring intermediate- and senior-level designers and architects for all of its studios, including San Francisco and Los Angeles.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Pegasus Architecture",
+    "website": "https://pegasus-architecture.com/",
+    "companyDomain": "pegasus-architecture.com",
+    "city": "San Luis Obispo",
+    "state": "CA",
+    "audience": "architect",
+    "sourceUrl": "https://pegasus-architecture.com/",
+    "needSignals": "Pegasus's active portfolio promotes commercial and hospitality commissions, including The Agrarian, Big Sky Cafe remodel, Allegretto, Villa San Juliette, and Calipaso, and invites new project inquiries.",
+    "noPublicEmailFound": true
+  }
+]

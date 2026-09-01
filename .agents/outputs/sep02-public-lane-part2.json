@@ -1,0 +1,98 @@
+[
+  {
+    "companyName": "Haggerty Construction",
+    "website": "https://haggertybuilds.com/",
+    "companyDomain": "haggertybuilds.com",
+    "city": "Fresno",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://haggertybuilds.com/central-valley-commercial-construction-q2-2026/",
+    "needSignals": "Haggerty's Q2 2026 update reports commercial projects moving on schedule and growth past 100 employees.",
+    "publicEmail": "info@haggertybuilds.com",
+    "publicEmailSourceUrl": "https://haggertybuilds.com/contact/"
+  },
+  {
+    "companyName": "BCCI Construction",
+    "website": "https://bcciconst.com/",
+    "companyDomain": "bcciconst.com",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://bcciconst.com/projects/",
+    "needSignals": "BCCI publicly displays commercial interiors, life-science, and workplace construction projects.",
+    "publicEmail": "infosf@bcciconst.com",
+    "publicEmailSourceUrl": "https://bcciconst.com/contact"
+  },
+  {
+    "companyName": "Flintco",
+    "website": "https://www.flintco.com/",
+    "companyDomain": "flintco.com",
+    "city": "Irvine",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.flintco.com/projects/",
+    "needSignals": "Flintco publicly publishes commercial construction projects and maintains Southern California operations.",
+    "publicEmail": "native@flintco.com",
+    "publicEmailSourceUrl": "https://flintco.com/contact/native-american"
+  },
+  {
+    "companyName": "The Korte Company",
+    "website": "https://www.korteco.com/",
+    "companyDomain": "korteco.com",
+    "city": "Los Angeles",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.korteco.com/projects/",
+    "needSignals": "The Korte Company publicly displays commercial, industrial, and federal construction projects.",
+    "publicEmail": "Tom.schiller@korteco.com",
+    "publicEmailSourceUrl": "https://www.korteco.com/diversified-operations-group"
+  },
+  {
+    "companyName": "Pacific Construction",
+    "website": "https://www.pac-construction.com/",
+    "companyDomain": "pac-construction.com",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.pac-construction.com/careers/",
+    "needSignals": "Pacific Construction's official careers page invites applications.",
+    "publicEmail": "info@pac-construction.com",
+    "publicEmailSourceUrl": "https://www.pac-construction.com/"
+  },
+  {
+    "companyName": "SC Builders",
+    "website": "https://www.scbuildersinc.com/",
+    "companyDomain": "scbuildersinc.com",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.scbuildersinc.com/projects/",
+    "needSignals": "SC Builders publicly presents commercial construction projects.",
+    "publicEmail": "info@scbuildersinc.com",
+    "publicEmailSourceUrl": "https://www.scbuildersinc.com/contact/san-francisco/"
+  },
+  {
+    "companyName": "DPE Construction",
+    "website": "https://dpeyuma.com/",
+    "companyDomain": "dpeyuma.com",
+    "city": "Yuma",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://dpeyuma.com/about/",
+    "needSignals": "DPE says it is focused on new construction and upgrading existing facilities, holds an Arizona B-1 General Commercial Contractor license, and is recruiting for its growing construction team.",
+    "publicEmail": "biancap@dpeyuma.com",
+    "publicEmailSourceUrl": "https://dpeyuma.com/staff"
+  },
+  {
+    "companyName": "Fresno Construction",
+    "website": "https://www.fresnoconstruction.net/",
+    "companyDomain": "fresnoconstruction.net",
+    "city": "Fresno",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.fresnoconstruction.net/about-us",
+    "needSignals": "Fresno Construction's active company page invites prospects to start a project and says the firm is continuing to provide construction and remodeling services for the spaces where clients live and work.",
+    "publicEmail": "Brad@FresnoConstruction.net",
+    "publicEmailSourceUrl": "https://www.fresnoconstruction.net/about-us"
+  }
+]

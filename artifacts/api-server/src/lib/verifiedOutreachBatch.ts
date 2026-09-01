@@ -12,6 +12,7 @@ import { VERIFIED_OUTREACH_CONTACTS_AUG_29 } from "./verifiedOutreachContactsAug
 import { VERIFIED_OUTREACH_CONTACTS_AUG_30 } from "./verifiedOutreachContactsAug30";
 import { VERIFIED_OUTREACH_CONTACTS_AUG_31 } from "./verifiedOutreachContactsAug31";
 import { VERIFIED_OUTREACH_CONTACTS_SEP_02 } from "./verifiedOutreachContactsSep02";
+import { VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC } from "./verifiedOutreachContactsSep02Public";
 
 const CAMPAIGN_NAME = "Approved 8 AM Outreach - August 2026";
 const SUBJECT = "Need stamped engineering without the usual wait or cost?";
@@ -23,6 +24,7 @@ export const VERIFIED_OUTREACH_CONTACTS = [
 const AUG_30_TARGET = 150;
 const AUG_31_TARGET = 150;
 const SEP_02_TARGET = 145;
+const SEP_02_PUBLIC_TARGET = 41;
 
 export function approvedOutreachSubject(): string {
   return SUBJECT;
@@ -119,6 +121,10 @@ export async function seedVerifiedOutreachBatch(options: {
   assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_AUG_30);
   assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_AUG_31, AUG_31_TARGET);
   assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_SEP_02, SEP_02_TARGET);
+  assertVerifiedOutreachBatch(
+    VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC,
+    SEP_02_PUBLIC_TARGET,
+  );
 
   let [campaign] = await db.select().from(campaignsTable)
     .where(eq(campaignsTable.name, CAMPAIGN_NAME))
@@ -251,6 +257,12 @@ export async function seedVerifiedOutreachBatch(options: {
       prefix: "verified-2026-09-02-",
       target: SEP_02_TARGET,
       label: "September 2",
+    },
+    {
+      contacts: VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC,
+      prefix: "public-verified-2026-09-02-",
+      target: SEP_02_PUBLIC_TARGET,
+      label: "September 2 Public",
     },
   ] as const;
 

@@ -1,0 +1,35 @@
+[
+  {
+    "companyName": "Western Devcon",
+    "website": "https://www.westerndevcon.com/",
+    "companyDomain": "westerndevcon.com",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.westerndevcon.com/projects/",
+    "needSignals": "Western Devcon publicly displays Southern California commercial, laboratory, industrial, and tenant-improvement work.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Fitzgerald Construction",
+    "website": "https://www.fitzgeraldconstruction.com/",
+    "companyDomain": "fitzgeraldconstruction.com",
+    "city": "Sacramento",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.fitzgeraldconstruction.com/projects/",
+    "needSignals": "Fitzgerald publicly presents commercial construction work.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Vogt Construction",
+    "website": "https://www.vogtconstruction.com/",
+    "companyDomain": "vogtconstruction.com",
+    "city": "Fresno",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.vogtconstruction.com/projects",
+    "needSignals": "Vogt publicly presents Central Valley commercial construction projects.",
+    "noPublicEmailFound": true
+  }
+]

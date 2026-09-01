@@ -8,6 +8,7 @@ import {
 import { VERIFIED_OUTREACH_CONTACTS_AUG_30 } from "./verifiedOutreachContactsAug30";
 import { VERIFIED_OUTREACH_CONTACTS_AUG_31 } from "./verifiedOutreachContactsAug31";
 import { VERIFIED_OUTREACH_CONTACTS_SEP_02 } from "./verifiedOutreachContactsSep02";
+import { VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC } from "./verifiedOutreachContactsSep02Public";
 import {
   assertOutreachContactData,
   assertVerifiedOutreachBatch,
@@ -80,6 +81,29 @@ test("the September 2 fill contains exactly 145 verified distinct contacts", () 
   assert.doesNotThrow(() => assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_SEP_02, 145));
 });
 
+test("the September 2 Public fallback library contains 41 official-site contacts", () => {
+  assert.equal(VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC.length, 41);
+  assert.equal(
+    new Set(VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC.map((contact) =>
+      contact.contactEmail
+    )).size,
+    41,
+  );
+  assert.equal(
+    new Set(VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC.map((contact) =>
+      new URL(contact.website).hostname.replace(/^www\./, "").toLowerCase()
+    )).size,
+    41,
+  );
+  assert.ok(VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC.every((contact) =>
+    contact.emailLane === "public"
+    && contact.emailEvidence.startsWith("https://")
+  ));
+  assert.doesNotThrow(() =>
+    assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC, 41)
+  );
+});
+
 test("the enabled seed uses committed contacts without a private-storage prerequisite", async () => {
   const source = await import("node:fs/promises")
     .then((fs) => fs.readFile(new URL("./verifiedOutreachBatch.ts", import.meta.url), "utf8"));
@@ -87,6 +111,7 @@ test("the enabled seed uses committed contacts without a private-storage prerequ
   assert.match(source, /VERIFIED_OUTREACH_CONTACTS_AUG_30/);
   assert.match(source, /VERIFIED_OUTREACH_CONTACTS_AUG_31/);
   assert.match(source, /VERIFIED_OUTREACH_CONTACTS_SEP_02/);
+  assert.match(source, /VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC/);
   assert.match(source, /for \(const batch of datedBatches\)/);
 });
 

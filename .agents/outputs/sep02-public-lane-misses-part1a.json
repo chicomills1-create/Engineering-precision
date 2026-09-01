@@ -1,0 +1,57 @@
+[
+  {
+    "companyName": "EC Constructors",
+    "website": "https://www.econbuild.com/",
+    "companyDomain": "econbuild.com",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.econbuild.com/projects",
+    "needSignals": "EC Constructors publicly presents commercial construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Rudolph and Sletten",
+    "website": "https://www.rudolphandsletten.com/",
+    "companyDomain": "rudolphandsletten.com",
+    "city": "Redwood City",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.rudolphandsletten.com/projects/",
+    "needSignals": "Rudolph and Sletten publicly presents California building projects across major market sectors.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "DeMartini Construction",
+    "website": "https://www.demartini.com/",
+    "companyDomain": "demartini.com",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.demartini.com/projects/",
+    "needSignals": "DeMartini publicly displays commercial, multifamily, and institutional construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Barnes Construction",
+    "website": "https://www.barnesconstruction.com/",
+    "companyDomain": "barnesconstruction.com",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.barnesconstruction.com/projects/",
+    "needSignals": "Barnes publicly shows commercial construction and renovation projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "CEW Construction",
+    "website": "https://www.cewconstruction.com/",
+    "companyDomain": "cewconstruction.com",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.cewconstruction.com/projects/",
+    "needSignals": "CEW publicly displays commercial construction and tenant-improvement work.",
+    "noPublicEmailFound": true
+  }
+]

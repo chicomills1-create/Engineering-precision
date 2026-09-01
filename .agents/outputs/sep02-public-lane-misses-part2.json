@@ -1,0 +1,145 @@
+[
+  {
+    "companyName": "Plant Construction Company",
+    "website": "https://www.plantconstruction.com/",
+    "companyDomain": "plantconstruction.com",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.plantconstruction.com/projects/",
+    "needSignals": "Plant's portfolio publicly documents commercial construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Roel Construction",
+    "website": "https://www.roelconstruction.com/",
+    "companyDomain": "roelconstruction.com",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.roelconstruction.com/projects/",
+    "needSignals": "Roel publicly shows commercial, healthcare, education, and hospitality projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Wade Construction",
+    "website": "https://www.wadecon.com/",
+    "companyDomain": "wadecon.com",
+    "city": "Riverside",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.wadecon.com/projects/",
+    "needSignals": "Wade publicly displays commercial and institutional construction work.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "DCK Worldwide",
+    "website": "https://www.dckww.com/",
+    "companyDomain": "dckww.com",
+    "city": "Irvine",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.dckww.com/projects/",
+    "needSignals": "DCK publicly presents construction work in commercial and specialized markets.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Napa Construction",
+    "website": "https://www.napa-construction.com/",
+    "companyDomain": "napa-construction.com",
+    "city": "Napa",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.napa-construction.com/projects/",
+    "needSignals": "The company publicly displays commercial and institutional construction work.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Mid-Pacific Construction",
+    "website": "https://www.midpac.com/",
+    "companyDomain": "midpac.com",
+    "city": "Irvine",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.midpac.com/projects/",
+    "needSignals": "Mid-Pacific publicly presents commercial construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "R&O Construction",
+    "website": "https://www.randoco.com/",
+    "companyDomain": "randoco.com",
+    "city": "Irvine",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.randoco.com/projects/",
+    "needSignals": "R&O publicly presents commercial building projects and California operations.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Kittle Design and Construction",
+    "website": "http://www.kittlearizona.com/",
+    "companyDomain": "kittlearizona.com",
+    "city": "Tucson",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "http://www.kittlearizona.com/careers",
+    "needSignals": "Kittle’s official website has a careers page seeking construction applicants; the company describes its work as commercial construction.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Perera Construction",
+    "website": "https://www.pererainc.com/",
+    "companyDomain": "pererainc.com",
+    "city": "Redlands",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.pererainc.com/projects",
+    "needSignals": "Perera publicly publishes its construction-project portfolio.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Oakview Constructors",
+    "website": "https://www.oakviewconstructors.net/",
+    "companyDomain": "oakviewconstructors.net",
+    "city": "Ontario",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.oakviewconstructors.net/bidding-opportunities",
+    "needSignals": "Oakview's official bidding page states that it is accepting bids.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Lusardi Construction",
+    "website": "https://www.lusardi.com/",
+    "companyDomain": "lusardi.com",
+    "city": "San Marcos",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.lusardi.com/projects/",
+    "needSignals": "Lusardi publicly presents commercial, education, and civic construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "NexPhase Construction",
+    "website": "https://www.nextphaseconstruction.com/",
+    "companyDomain": "nextphaseconstruction.com",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.nextphaseconstruction.com/projects/",
+    "needSignals": "NexPhase publicly presents commercial and multifamily construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Piramide Contractors Inc.",
+    "website": "https://www.piramidecontractors.com/",
+    "companyDomain": "piramidecontractors.com",
+    "city": "Yuma",
+    "state": "AZ",
+    "audience": "builder",
+    "sourceUrl": "https://www.piramidecontractors.com/",
+    "needSignals": "Its live Yuma site solicits commercial projects—including offices, retail, and restaurants—and directs prospective clients to begin quote inquiries through its contact form.",
+    "noPublicEmailFound": true
+  }
+]

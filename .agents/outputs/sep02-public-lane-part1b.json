@@ -1,0 +1,86 @@
+[
+  {
+    "companyName": "Tawaw Architecture Collective",
+    "website": "https://www.tawarc.com/",
+    "companyDomain": "tawarc.com",
+    "city": "Tempe",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://www.linkedin.com/posts/tawaw-architecture-collective_truthandreconciliation-indigenousdesign-activity-7449598371817857025-rDhl",
+    "needSignals": "Tawaw publicly announced its selection by the National Centre for Truth and Reconciliation and the University of Manitoba to lead the design of a project.",
+    "publicEmail": "letsworktogether@tawarc.com",
+    "publicEmailSourceUrl": "https://www.tawarc.com/contact"
+  },
+  {
+    "companyName": "MAI Construction",
+    "website": "https://www.maiconst.com/",
+    "companyDomain": "maiconst.com",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.maiconst.com/careers",
+    "needSignals": "MAI's official careers page invites prospective employees to join the company.",
+    "publicEmail": "marketing@maiconst.com",
+    "publicEmailSourceUrl": "https://www.maiconst.com/contact-us"
+  },
+  {
+    "companyName": "Rubik Built",
+    "website": "https://www.rubikbuilt.com/",
+    "companyDomain": "rubikbuilt.com",
+    "city": "Fresno",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.rubikbuilt.com/our-project-portfolio",
+    "needSignals": "Rubik Built publicly presents a Central Valley portfolio including multifamily and commercial work.",
+    "publicEmail": "build@rubikbuilt.com",
+    "publicEmailSourceUrl": "https://www.rubikbuilt.com/contact"
+  },
+  {
+    "companyName": "Capstone Building Group",
+    "website": "https://www.capbuildinggroup.com/",
+    "companyDomain": "capbuildinggroup.com",
+    "city": "Irvine",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.capbuildinggroup.com/projects",
+    "needSignals": "Capstone publicly displays Orange County commercial construction projects.",
+    "publicEmail": "info@capbuildinggroup.com",
+    "publicEmailSourceUrl": "https://www.capbuildinggroup.com/contact-8"
+  },
+  {
+    "companyName": "BCM Group, Inc.",
+    "website": "https://bcmg.us/",
+    "companyDomain": "bcmg.us",
+    "city": "Rancho Cucamonga",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://bcmg.us/jobs/",
+    "needSignals": "BCM states that it is actively seeking talent to meet growing Orange County and Inland Empire demand and lists superintendent and project-engineer hiring.",
+    "publicEmail": "information@BCMG.us",
+    "publicEmailSourceUrl": "https://bcmg.us/contact-us/"
+  },
+  {
+    "companyName": "Wendell Burnette Architects",
+    "website": "https://wendellburnettearchitects.com/",
+    "companyDomain": "wendellburnettearchitects.com",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "architect",
+    "sourceUrl": "https://wendellburnettearchitects.com/studio/",
+    "needSignals": "The Phoenix practice says its recent public and private commissions demonstrate ongoing work shaping communities, and its portfolio includes civic, cultural, medical, hospitality, and commercial projects.",
+    "publicEmail": "info@wendellburnettearchitects.com",
+    "publicEmailSourceUrl": "https://wendellburnettearchitects.com/contact/"
+  },
+  {
+    "companyName": "Lucrum Builders, Inc.",
+    "website": "https://lucrumbuilders.com/",
+    "companyDomain": "lucrumbuilders.com",
+    "city": "Oakland",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.einpresswire.com/article/894071279/lucrum-builders-inc-surpasses-200-commercial-construction-projects-across-the-bay-area",
+    "needSignals": "A February 2026 public announcement reports that Lucrum surpassed 200 Bay Area commercial projects; the official site identifies current restaurant, retail, office-renovation, and commercial-kitchen work.",
+    "publicEmail": "info@lucrumbuilders.com",
+    "publicEmailSourceUrl": "https://lucrumbuilders.com/contact"
+  }
+]

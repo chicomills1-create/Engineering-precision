@@ -1,0 +1,110 @@
+[
+  {
+    "companyName": "Huff Construction",
+    "website": "https://www.huffconstructionsf.com/",
+    "companyDomain": "huffconstructionsf.com",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.huffconstructionsf.com/projects",
+    "needSignals": "Huff publishes a portfolio of commercial construction projects.",
+    "publicEmail": "hello@huffconstructionsf.com",
+    "publicEmailSourceUrl": "https://huffconstructionsf.com/get-in-touch/"
+  },
+  {
+    "companyName": "Hamel Contracting",
+    "website": "https://hamelcontracting.com/",
+    "companyDomain": "hamelcontracting.com",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://hamelcontracting.com/projects/",
+    "needSignals": "Hamel publicly shows commercial tenant-improvement and ground-up projects.",
+    "publicEmail": "Joe@hamelcontracting.com",
+    "publicEmailSourceUrl": "https://www.hamelcontracting.com/contact-us.html"
+  },
+  {
+    "companyName": "Barnhart-Reese Construction",
+    "website": "https://www.barnhartreese.com/",
+    "companyDomain": "barnhartreese.com",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.barnhartreese.com/projects",
+    "needSignals": "The company publishes commercial construction projects in its portfolio.",
+    "publicEmail": "careers@barnhartreese.com",
+    "publicEmailSourceUrl": "https://barnhartreese.com/contact"
+  },
+  {
+    "companyName": "McLean Contracting Company",
+    "website": "https://www.mcleancontracting.com/",
+    "companyDomain": "mcleancontracting.com",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.mcleancontracting.com/projects/",
+    "needSignals": "McLean publicly presents commercial construction projects.",
+    "publicEmail": "info@mcleancontracting.com",
+    "publicEmailSourceUrl": "https://www.mcleancontracting.com/contact"
+  },
+  {
+    "companyName": "Bernards",
+    "website": "https://www.bernards.com/",
+    "companyDomain": "bernards.com",
+    "city": "Los Angeles",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.bernards.com/projects/",
+    "needSignals": "Bernards publicly presents education, civic, healthcare, and commercial construction projects.",
+    "publicEmail": "mretama@bernards.com",
+    "publicEmailSourceUrl": "https://www.bernards.com/markets/education/"
+  },
+  {
+    "companyName": "Level 10 Construction",
+    "website": "https://www.level10gc.com/",
+    "companyDomain": "level10gc.com",
+    "city": "Sunnyvale",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.level10gc.com/projects/",
+    "needSignals": "Level 10 publicly displays active commercial, healthcare, and technology construction work.",
+    "publicEmail": "marketing@level10gc.com",
+    "publicEmailSourceUrl": "https://level10gc.com/contact/"
+  },
+  {
+    "companyName": "Valley Construction Services",
+    "website": "https://vcsi.com/",
+    "companyDomain": "vcsi.com",
+    "city": "Fresno",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://vcsi.com/news/",
+    "needSignals": "VCSI's official news page publishes current company updates.",
+    "publicEmail": "info@vcsi.com",
+    "publicEmailSourceUrl": "https://vcsi.com/contact/"
+  },
+  {
+    "companyName": "INDECON Builders",
+    "website": "https://www.indeconbuilders.com/",
+    "companyDomain": "indeconbuilders.com",
+    "city": "Irvine",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.indeconbuilders.com/careers",
+    "needSignals": "INDECON's official careers page seeks people to join its Orange County commercial-building team.",
+    "publicEmail": "mpulley@indeconbuilders.com",
+    "publicEmailSourceUrl": "https://www.indeconbuilders.com/contact"
+  },
+  {
+    "companyName": "Graves Construction",
+    "website": "https://www.gravesconstruction.com/",
+    "companyDomain": "gravesconstruction.com",
+    "city": "Foothill Ranch",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.gravesconstruction.com/projects/",
+    "needSignals": "Graves publicly presents retail, restaurant, industrial, and commercial construction projects.",
+    "publicEmail": "info@gravesconstruction.com",
+    "publicEmailSourceUrl": "https://gravesconstruction.com/contact/"
+  }
+]

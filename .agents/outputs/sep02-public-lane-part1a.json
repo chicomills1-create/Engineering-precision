@@ -1,0 +1,74 @@
+[
+  {
+    "companyName": "MATT Construction",
+    "website": "https://www.mattconstruction.com/",
+    "companyDomain": "mattconstruction.com",
+    "city": "Los Angeles",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.mattconstruction.com/news/",
+    "needSignals": "The company's news page publishes current construction project updates.",
+    "publicEmail": "info@mattconstruction.com",
+    "publicEmailSourceUrl": "https://www.mattconstruction.com/contact"
+  },
+  {
+    "companyName": "Power Construction",
+    "website": "https://powerconstructioninc-sf.com/",
+    "companyDomain": "powerconstructioninc-sf.com",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://powerconstructioninc-sf.com/projects/",
+    "needSignals": "The firm publishes current and completed Bay Area commercial construction work.",
+    "publicEmail": "john.power@powerconstructioninc-sf.com",
+    "publicEmailSourceUrl": "https://powerconstructioninc-sf.com/team"
+  },
+  {
+    "companyName": "AGC General Contractors",
+    "website": "https://www.agcsf.com/",
+    "companyDomain": "agcsf.com",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.agcsf.com/projects",
+    "needSignals": "The firm's public portfolio shows commercial construction work in the Bay Area.",
+    "publicEmail": "info@agcsf.com",
+    "publicEmailSourceUrl": "https://www.agcsf.com/contact"
+  },
+  {
+    "companyName": "Cannon Building",
+    "website": "https://www.cannonbuilding.com/",
+    "companyDomain": "cannonbuilding.com",
+    "city": "Irvine",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.cannonbuilding.com/projects/",
+    "needSignals": "Cannon publicly shows Southern California commercial construction projects.",
+    "publicEmail": "contactus@cannonbuilding.com",
+    "publicEmailSourceUrl": "https://www.cannonbuilding.com/"
+  },
+  {
+    "companyName": "S+B James Construction",
+    "website": "https://www.sbjames.com/",
+    "companyDomain": "sbjames.com",
+    "city": "Redding",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.sbjames.com/projects/",
+    "needSignals": "S+B James publicly displays California commercial, healthcare, and education projects.",
+    "publicEmail": "info@sbjames.com",
+    "publicEmailSourceUrl": "https://sbjames.com/how-to-reach-us/contact"
+  },
+  {
+    "companyName": "BNBuilders",
+    "website": "https://www.bnbuilders.com/",
+    "companyDomain": "bnbuilders.com",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.bnbuilders.com/projects/",
+    "needSignals": "BNBuilders publicly presents life-science, healthcare, and commercial construction projects.",
+    "publicEmail": "ross.brown@bnbuilders.com",
+    "publicEmailSourceUrl": "https://www.bnbuilders.com/offices/san-diego"
+  }
+]

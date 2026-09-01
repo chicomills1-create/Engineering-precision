@@ -1,0 +1,112 @@
+[
+  {
+    "companyName": "KCK Builders",
+    "website": "https://www.kckbuilders.com/",
+    "companyDomain": "kckbuilders.com",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.kckbuilders.com/projects/",
+    "needSignals": "KCK publicly publishes commercial construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "McLarney Construction",
+    "website": "https://www.mc-larney.com/",
+    "companyDomain": "mc-larney.com",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.mc-larney.com/projects/",
+    "needSignals": "The company publicly shows commercial construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "MDM Construction",
+    "website": "https://www.mdmconstruction.com/",
+    "companyDomain": "mdmconstruction.com",
+    "city": "Sacramento",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.mdmconstruction.com/projects/",
+    "needSignals": "MDM publicly displays California commercial construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "S. D. Deacon",
+    "website": "https://www.sddeacon.com/",
+    "companyDomain": "sddeacon.com",
+    "city": "Irvine",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.sddeacon.com/projects/",
+    "needSignals": "The company publicly shows commercial, industrial, and mixed-use construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Nexgeneral Construction",
+    "website": "https://nexgeneralconstruction.com/",
+    "companyDomain": "nexgeneralconstruction.com",
+    "city": "Fresno",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://nexgeneralconstruction.com/careers/",
+    "needSignals": "Nexgeneral's official careers page says the Fresno-based general contractor is growing and invites superintendents and project managers to apply.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Creekside Commercial Builders",
+    "website": "https://www.creeksidecommercialbuilders.com/",
+    "companyDomain": "creeksidecommercialbuilders.com",
+    "city": "Sacramento",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.creeksidecommercialbuilders.com/projects/",
+    "needSignals": "Creekside publicly presents commercial construction projects in its portfolio.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Quiring General",
+    "website": "https://www.quiringgeneral.com/",
+    "companyDomain": "quiringgeneral.com",
+    "city": "San Francisco",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.quiringgeneral.com/projects/",
+    "needSignals": "Quiring General publicly presents commercial construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Bobo Construction",
+    "website": "https://www.boboconstruction.com/",
+    "companyDomain": "boboconstruction.com",
+    "city": "Irvine",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.boboconstruction.com/projects/",
+    "needSignals": "Bobo publicly presents Southern California commercial construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "Davis-Reed Construction",
+    "website": "https://www.davisreedconstruction.com/",
+    "companyDomain": "davisreedconstruction.com",
+    "city": "San Diego",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://www.davisreedconstruction.com/projects/",
+    "needSignals": "Davis-Reed publicly displays commercial construction projects.",
+    "noPublicEmailFound": true
+  },
+  {
+    "companyName": "North State Builders",
+    "website": "https://northstatebuilders.net/",
+    "companyDomain": "northstatebuilders.net",
+    "city": "Redding",
+    "state": "CA",
+    "audience": "builder",
+    "sourceUrl": "https://northstatebuilders.net/commercial/",
+    "needSignals": "The firm's live commercial page is seeking office remodels, retail transformations, business renovations, and new-store construction in Redding and offers free estimates for commercial remodeling and new construction.",
+    "noPublicEmailFound": true
+  }
+]
