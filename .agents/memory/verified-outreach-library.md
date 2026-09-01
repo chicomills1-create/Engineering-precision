@@ -48,3 +48,9 @@ Historical seed batches are satisfied when they retain at least their target cou
 **Why:** Older runs can legitimately retain more than the nominal target after reconciliation. Requiring exact equality causes startup to fail before newer verified batches are seeded.
 
 **How to apply:** Fail when an idempotent seed remains below its required target, but accept counts at or above the target and let the shared daily slot ledger enforce the actual send ceiling.
+
+The paid-enrichment budget is a separate hard limit: use at most 150 paid credits per Phoenix calendar day, with one lookup per contact. Never exceed that budget to fill an email batch or create reserve contacts.
+
+**Why:** The 150-credit allowance protects spend independently of the 150-email send target; treating lookup failures as a reason to keep spending caused unnecessary overrun.
+
+**How to apply:** Count every attempted paid contact lookup before starting research, stop at 150 for the Phoenix day, and report any remaining email shortfall without purchasing additional lookups.
