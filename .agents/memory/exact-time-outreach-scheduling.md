@@ -20,3 +20,9 @@ The approved operating cycle is autonomous: at 8:00 AM America/Phoenix, dispatch
 **Why:** The user has already approved the original outreach and explicitly wants the same 150-per-day cycle to continue without routine approval prompts. Requiring approval again delays the schedule; retrying an unresolved dispatch without reconciliation risks duplicate emails.
 
 **How to apply:** Treat approval as a standing authorization for the reviewed outreach process, not a one-time click for every daily batch. Keep unresolved or ambiguous provider outcomes blocked until SendGrid reconciliation proves whether each message was accepted, delivered, or safe to retry; never replace an unresolved batch with a new batch or resend it blindly.
+
+An automated drip must create every approved sequence row before the initial delivery event; delivery handling can only schedule follow-ups that already exist. Reconcile missing rows idempotently on startup and derive their dates from verified delivery evidence.
+
+**Why:** Initial-only campaign rows looked enrolled but produced no follow-ups, because the event handler had nothing to schedule. Existing delivered contacts also needed a safe backfill without duplicates or immediate sends.
+
+**How to apply:** Create unscheduled sequences 2–4 transactionally with sequence 1, schedule them only after verified delivery, and make startup reconciliation safe to rerun with zero duplicate rows.

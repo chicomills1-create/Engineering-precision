@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
   approvedOutreachBody,
+  approvedOutreachFollowUpMessages,
   VERIFIED_OUTREACH_CONTACTS,
 } from "./verifiedOutreachBatch";
 import { VERIFIED_OUTREACH_CONTACTS_AUG_30 } from "./verifiedOutreachContactsAug30";
@@ -107,4 +108,13 @@ test("the approved body uses only the approved pipeline closing", () => {
   assert.match(body, /Do you have any current projects in your pipeline that you would like us to review\?$/);
   assert.doesNotMatch(body, /15.?minute|15 min|schedule|book.*call/i);
   assert.doesNotMatch(body, /plan-review comment|field condition|waiting on engineering answers/i);
+});
+
+test("approved follow-ups are concise, scheduled later, and contain no call CTA", () => {
+  const followUps = approvedOutreachFollowUpMessages("Alex Rivera");
+  assert.deepEqual(followUps.map((followUp) => followUp.sequenceNumber), [2, 3, 4]);
+  assert.ok(followUps.every((followUp) =>
+    followUp.body.includes("Click the URL to visit our page: https://apexgrideng.com.")
+    && !/15.?minute|15 min|schedule|book.*call/i.test(followUp.body)
+  ));
 });

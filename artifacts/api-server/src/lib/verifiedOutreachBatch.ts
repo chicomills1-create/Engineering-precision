@@ -37,6 +37,43 @@ We right-size the scope, review what you already have, and provide clear pricing
 Do you have any current projects in your pipeline that you would like us to review?`;
 }
 
+export function approvedOutreachFollowUpMessages(contactName: string): Array<{
+  sequenceNumber: number;
+  subject: string;
+  body: string;
+}> {
+  const firstName = contactName.trim().split(/\s+/)[0];
+  return [
+    {
+      sequenceNumber: 2,
+      subject: "Following up on engineering support",
+      body: `Hi ${firstName},
+
+Just following up in case an engineering review or permit response would help on a current project.
+
+Click the URL to visit our page: https://apexgrideng.com.`,
+    },
+    {
+      sequenceNumber: 3,
+      subject: "Checking in on your current projects",
+      body: `Hi ${firstName},
+
+I wanted to check whether your team has a current project where focused engineering support could help.
+
+Click the URL to visit our page: https://apexgrideng.com.`,
+    },
+    {
+      sequenceNumber: 4,
+      subject: "Closing the loop",
+      body: `Hi ${firstName},
+
+I’ll close the loop here. If an engineering need comes up, Apex Grid is available for focused Civil, Structural, or MEP support.
+
+Click the URL to visit our page: https://apexgrideng.com.`,
+    },
+  ];
+}
+
 export async function seedVerifiedOutreachBatch(options: {
   enabled?: boolean;
   now?: Date;

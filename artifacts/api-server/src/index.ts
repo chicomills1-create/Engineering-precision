@@ -3,7 +3,7 @@ import { logger } from "./lib/logger";
 import { startOutreachWorker } from "./lib/outreachWorker";
 import { startClientJobUploadCleanup } from "./lib/clientJobUploadCleanup";
 import { seedVerifiedOutreachBatch } from "./lib/verifiedOutreachBatch";
-import { prepareNextPhoenixOutreach } from "./lib/outreachPreparation";
+import { ensureOutreachFollowUps, prepareNextPhoenixOutreach } from "./lib/outreachPreparation";
 
 const rawPort = process.env["PORT"];
 
@@ -37,6 +37,8 @@ app.listen(port, (err) => {
           "Verified outreach candidates routed through daily preparation",
         );
       }
+      const followUps = await ensureOutreachFollowUps();
+      logger.info(followUps, "Outreach follow-up sequences reconciled");
     })
     .catch((seedError: unknown) => {
       logger.error({ err: seedError }, "Verified outreach batch preparation failed");
