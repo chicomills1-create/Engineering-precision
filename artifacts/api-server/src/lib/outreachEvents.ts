@@ -12,6 +12,7 @@ import { getFollowUpScheduledAt } from "./outreachEligibility";
 import { recordContactEvidence } from "./outreachContactEvidence";
 import { withOutreachEmailLock } from "./outreachEmailLock";
 import { suppressOutreachEmail } from "./outreachSuppression";
+import { ensureApprovedFollowUpSequence } from "./outreachSequence";
 
 export type SendGridEvent = {
   email?: string;
@@ -393,6 +394,13 @@ export async function processSendGridEvents(events: SendGridEvent[]): Promise<nu
         ))
         .returning();
       if (deliveredMessage?.sequenceNumber === 1) {
+        const [prospect] = await db.select({ contactName: prospectsTable.contactName })
+          .from(prospectsTable)
+          .where(eq(prospectsTable.id, deliveredMessage.prospectId))
+          .limit(1);
+        if (prospect) {
+          await ensureApprovedFollowUpSequence(deliveredMessage, prospect);
+        }
         const followUps = await db.select().from(outreachMessagesTable).where(and(
           eq(outreachMessagesTable.prospectId, deliveredMessage.prospectId),
           deliveredMessage.campaignId

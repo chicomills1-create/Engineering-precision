@@ -119,7 +119,39 @@ test("delivery events mark the message delivered and schedule follow-up timing",
     const [message] = await db.select().from(outreachMessagesTable).where(eq(outreachMessagesTable.id, fixture.initial.id));
     const [followUp] = await db.select().from(outreachMessagesTable).where(eq(outreachMessagesTable.id, fixture.followUp.id));
     assert.equal(message?.status, "delivered");
-    assert.ok(followUp?.scheduledAt);
+    assert.equal(followUp?.scheduledAt?.toISOString(), "2026-08-31T15:00:00.000Z");
+  } finally {
+    await cleanEventFixture(fixture);
+  }
+});
+
+test("verified initial delivery creates and schedules the complete approved drip", async () => {
+  const fixture = await createEventFixture();
+  try {
+    await db.delete(outreachMessagesTable).where(eq(outreachMessagesTable.id, fixture.followUp.id));
+    await processSendGridEvents([{
+      email: fixture.email,
+      event: "delivered",
+      timestamp: 1787970000,
+      sg_message_id: `complete-drip-${fixture.campaign.id}.filter`,
+      outreach_message_id: String(fixture.initial.id),
+      outreach_prospect_id: String(fixture.prospect.id),
+    }]);
+
+    const followUps = (await db.select().from(outreachMessagesTable)
+      .where(eq(outreachMessagesTable.prospectId, fixture.prospect.id)))
+      .filter((message) => message.sequenceNumber > 1)
+      .sort((left, right) => left.sequenceNumber - right.sequenceNumber);
+    assert.deepEqual(followUps.map((message) => message.sequenceNumber), [2, 3, 4]);
+    assert.ok(followUps.every((message) => message.status === "approved"));
+    assert.deepEqual(
+      followUps.map((message) => message.scheduledAt?.toISOString()),
+      [
+        "2026-08-31T15:00:00.000Z",
+        "2026-09-05T15:00:00.000Z",
+        "2026-09-12T15:00:00.000Z",
+      ],
+    );
   } finally {
     await cleanEventFixture(fixture);
   }

@@ -1,12 +1,21 @@
 import assert from "node:assert/strict";
 import { afterEach, test } from "node:test";
 import {
+  claimOutreachMessageForSending,
   countPersistedOutreachSend,
   createGuardedAsyncRun,
   getOutreachAutomationStatus,
   isOutreachAutomationReady,
   isOutreachResearchAutomationReady,
 } from "./outreachWorker";
+import {
+  campaignsTable,
+  db,
+  outreachMessagesTable,
+  prospectsTable,
+} from "@workspace/db";
+import { eq } from "drizzle-orm";
+import { randomUUID } from "node:crypto";
 
 const CONFIG_KEYS = [
   "ADMIN_EMAILS",
@@ -149,6 +158,64 @@ test("does not mistake an event relay for the outbound delivery transport", () =
 test("counts only sends whose sent row was persisted", () => {
   assert.equal(countPersistedOutreachSend(4, undefined), 4);
   assert.equal(countPersistedOutreachSend(4, {} as never), 5);
+});
+
+test("a follow-up cannot be claimed until its immediately prior message is delivered", async () => {
+  const suffix = randomUUID();
+  const [campaign] = await db.insert(campaignsTable).values({
+    name: `Delivery gate ${suffix}`,
+    audience: "architect",
+    states: ["AZ"],
+    status: "active",
+  }).returning();
+  const [prospect] = await db.insert(prospectsTable).values({
+    campaignId: campaign!.id,
+    companyName: `Delivery gate ${suffix}`,
+    city: "Phoenix",
+    state: "AZ",
+    audience: "architect",
+    contactEmail: `delivery-gate-${suffix}@example.com`,
+    contactName: "Gate Test",
+    contactTitle: "Principal",
+    contactConfidence: "high",
+    contactSourceUrl: "https://example.com/gate",
+    emailStatus: "verified",
+    status: "approved",
+    fitScore: 80,
+    needScore: 80,
+    needSignals: "Public project signal",
+    dedupeKey: `delivery-gate:${suffix}`,
+  }).returning();
+  const [initial, followUp] = await db.insert(outreachMessagesTable).values([
+    {
+      prospectId: prospect!.id,
+      campaignId: campaign!.id,
+      sequenceNumber: 1,
+      subject: "Initial",
+      body: "Initial body",
+      status: "sent",
+    },
+    {
+      prospectId: prospect!.id,
+      campaignId: campaign!.id,
+      sequenceNumber: 2,
+      subject: "Follow-up",
+      body: "Follow-up body",
+      status: "approved",
+      scheduledAt: new Date(0),
+    },
+  ]).returning();
+
+  try {
+    assert.equal(await claimOutreachMessageForSending(followUp!.id), undefined);
+    await db.update(outreachMessagesTable)
+      .set({ status: "delivered" })
+      .where(eq(outreachMessagesTable.id, initial!.id));
+    assert.equal((await claimOutreachMessageForSending(followUp!.id))?.status, "sending");
+  } finally {
+    await db.delete(prospectsTable).where(eq(prospectsTable.id, prospect!.id));
+    await db.delete(campaignsTable).where(eq(campaignsTable.id, campaign!.id));
+  }
 });
 
 test("guarded automation runs immediately when invoked and never overlaps", async () => {

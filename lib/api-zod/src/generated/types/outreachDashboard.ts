@@ -11,6 +11,8 @@ export interface OutreachDashboard {
   prospects: number;
   campaigns: number;
   messages: number;
+  upcomingFollowUps: number;
+  stoppedSequences: number;
   sentToday: number;
   providerProcessedToday: number;
   deliveredToday: number;

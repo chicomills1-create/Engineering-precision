@@ -1,4 +1,4 @@
-import { and, desc, eq, gt, gte, inArray, lt, lte, or, sql } from "drizzle-orm";
+import { and, asc, eq, gt, gte, inArray, lt, lte, or, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
@@ -18,7 +18,7 @@ import {
   approvedOutreachFollowUpMessages,
   approvedOutreachSubject,
 } from "./verifiedOutreachBatch";
-
+import { ensureApprovedFollowUpSequence } from "./outreachSequence";
 export const OUTREACH_PREPARATION_TARGET = 150;
 const STALE_RUN_MS = 30 * 60_000;
 const PUBLIC_INBOX_LOCAL_PARTS = new Set([
@@ -418,7 +418,7 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
             status: "approved",
             scheduledAt: null,
           })),
-        );
+        ).onConflictDoNothing();
         await tx.update(outreachPreparationSlotsTable)
           .set({ messageId: message!.id })
           .where(eq(outreachPreparationSlotsTable.id, slotClaim.id));
@@ -432,6 +432,21 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
         OUTREACH_PREPARATION_TARGET,
       );
     });
+    const preparedInitials = await db.select({
+      message: outreachMessagesTable,
+      contactName: prospectsTable.contactName,
+    })
+      .from(outreachMessagesTable)
+      .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+      .where(and(
+        eq(outreachMessagesTable.sequenceNumber, 1),
+        eq(outreachMessagesTable.status, "approved"),
+        gte(outreachMessagesTable.scheduledAt, scheduledAt),
+        lt(outreachMessagesTable.scheduledAt, new Date(scheduledAt.getTime() + 24 * 60 * 60 * 1000)),
+      ));
+    for (const row of preparedInitials) {
+      await ensureApprovedFollowUpSequence(row.message, { contactName: row.contactName });
+    }
     const skipped = rows.length - prepared;
     const shortfall = getPreparationShortfall(prepared);
     await db.update(outreachPreparationRunsTable).set({
@@ -472,38 +487,21 @@ export async function ensureOutreachFollowUps(): Promise<{ created: number; sche
       || !prospect.contactName?.trim()
     ) continue;
 
+    const createdCount = await ensureApprovedFollowUpSequence(initial, {
+      contactName: prospect.contactName,
+    });
     const result = await db.transaction(async (tx) => {
-      const existing = await tx.select().from(outreachMessagesTable).where(and(
-        eq(outreachMessagesTable.prospectId, initial.prospectId),
-        eq(outreachMessagesTable.campaignId, initial.campaignId!),
-        inArray(outreachMessagesTable.sequenceNumber, [2, 3, 4]),
-      ));
-      const existingSequences = new Set(existing.map((message) => message.sequenceNumber));
-      const missing = approvedOutreachFollowUpMessages(prospect.contactName!)
-        .filter((followUp) => !existingSequences.has(followUp.sequenceNumber));
-      if (missing.length > 0) {
-        await tx.insert(outreachMessagesTable).values(missing.map((followUp) => ({
-          prospectId: initial.prospectId,
-          campaignId: initial.campaignId!,
-          sequenceNumber: followUp.sequenceNumber,
-          subject: followUp.subject,
-          body: followUp.body,
-          status: "approved",
-          scheduledAt: null,
-        })));
-      }
-
-      if (initial.status !== "delivered") return { created: missing.length, scheduled: 0 };
+      if (initial.status !== "delivered") return { created: createdCount, scheduled: 0 };
       const [delivery] = await tx.select({ occurredAt: outreachDeliveryEventsTable.occurredAt })
         .from(outreachDeliveryEventsTable)
         .where(and(
           eq(outreachDeliveryEventsTable.outreachMessageId, initial.id),
           eq(outreachDeliveryEventsTable.eventType, "delivered"),
         ))
-        .orderBy(desc(outreachDeliveryEventsTable.occurredAt))
+        .orderBy(asc(outreachDeliveryEventsTable.occurredAt))
         .limit(1);
-      const baseDate = delivery?.occurredAt ?? initial.sentAt;
-      if (!baseDate) return { created: missing.length, scheduled: 0 };
+      const baseDate = delivery?.occurredAt;
+      if (!baseDate) return { created: createdCount, scheduled: 0 };
       const followUps = await tx.select().from(outreachMessagesTable).where(and(
         eq(outreachMessagesTable.prospectId, initial.prospectId),
         eq(outreachMessagesTable.campaignId, initial.campaignId!),
@@ -519,7 +517,7 @@ export async function ensureOutreachFollowUps(): Promise<{ created: number; sche
         )).returning({ id: outreachMessagesTable.id });
         if (updated.length > 0) scheduledCount += 1;
       }
-      return { created: missing.length, scheduled: scheduledCount };
+      return { created: createdCount, scheduled: scheduledCount };
     });
     created += result.created;
     scheduled += result.scheduled;

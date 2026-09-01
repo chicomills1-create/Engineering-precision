@@ -21,11 +21,13 @@ import {
 import { renderBrandedEmail } from "./emailMarkup";
 import {
   assertOutreachEligibilityBase,
+  assertFollowUpCadenceReady,
   assertScheduledTimeReady,
   assertSequenceDeliveryReady,
   getPhoenixCalendarDayStart,
 } from "./outreachEligibility";
 import { withOutreachEmailLock } from "./outreachEmailLock";
+import { getVerifiedInitialDeliveryAt } from "./outreachSequence";
 
 export type GeneratedDraft = { subject: string; body: string; followUps: { subject: string; body: string }[] };
 
@@ -371,6 +373,12 @@ export async function sendApprovedOutreach(
   const email = assertOutreachEligibilityBase(message, currentProspect, currentCampaign);
   assertScheduledTimeReady(message.sequenceNumber, message.scheduledAt);
   if (message.sequenceNumber > 1) {
+    const initialDeliveredAt = await getVerifiedInitialDeliveryAt(message);
+    assertFollowUpCadenceReady(
+      message.sequenceNumber,
+      message.scheduledAt,
+      initialDeliveredAt,
+    );
     const campaignScope = message.campaignId
       ? eq(outreachMessagesTable.campaignId, message.campaignId)
       : isNull(outreachMessagesTable.campaignId);

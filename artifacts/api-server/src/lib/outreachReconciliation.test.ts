@@ -89,6 +89,13 @@ async function cleanFixture(fixture: Awaited<ReturnType<typeof createFixture>>):
 
 async function createRaceFixture() {
   const fixture = await createFixture("delivered");
+  await db.insert(outreachDeliveryEventsTable).values({
+    providerMessageId: `race-delivered-${fixture.message.id}`,
+    email: fixture.prospect.contactEmail!,
+    eventType: "delivered",
+    occurredAt: new Date("2026-08-27T15:00:00.000Z"),
+    outreachMessageId: fixture.message.id,
+  });
   const [followUp, laterFollowUp] = await db.insert(outreachMessagesTable).values([
     {
       prospectId: fixture.prospect.id,

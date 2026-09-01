@@ -6,7 +6,7 @@ export function DashboardStats() {
   if (isLoading || !stats) {
     return (
         <div className="flex flex-wrap gap-3 mb-8" data-testid="outreach-dashboard-loading">
-        {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
           <div key={i} className="flex-1 min-w-[130px] border border-border bg-card p-4 rounded-[2px] animate-pulse h-[84px]" />
         ))}
       </div>
@@ -15,6 +15,8 @@ export function DashboardStats() {
 
   const items = [
     { label: 'Prospects', value: stats.prospects },
+    { label: 'Upcoming Follow-ups', value: stats.upcomingFollowUps },
+    { label: 'Stopped Sequences', value: stats.stoppedSequences },
     { label: 'Processed Today', value: stats.providerProcessedToday },
     { label: 'Delivered Today', value: stats.deliveredToday },
     { label: 'Bounced Today', value: stats.bouncedToday },

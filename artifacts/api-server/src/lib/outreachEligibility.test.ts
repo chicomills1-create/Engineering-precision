@@ -3,6 +3,7 @@ import { test } from "node:test";
 import type { Campaign, OutreachMessage, Prospect } from "@workspace/db";
 import {
   assertOutreachEligibilityBase,
+  assertFollowUpCadenceReady,
   assertScheduledTimeReady,
   assertSequenceDeliveryReady,
   getFollowUpScheduledAt,
@@ -259,12 +260,27 @@ test("follow-up requires the immediately prior sequence to be delivered", () => 
   assert.doesNotThrow(() => assertSequenceDeliveryReady(2, "delivered"));
 });
 
-test("follow-ups use 3, 8, and 15 days from verified initial delivery", () => {
+test("follow-ups use Phoenix 8 AM on days 3, 8, and 15 after verified initial delivery", () => {
   const initialDeliveredAt = new Date("2026-08-28T12:00:00.000Z");
   assert.equal(getFollowUpScheduledAt(1, initialDeliveredAt), null);
-  assert.equal(getFollowUpScheduledAt(2, initialDeliveredAt)?.toISOString(), "2026-08-31T12:00:00.000Z");
-  assert.equal(getFollowUpScheduledAt(3, initialDeliveredAt)?.toISOString(), "2026-09-05T12:00:00.000Z");
-  assert.equal(getFollowUpScheduledAt(4, initialDeliveredAt)?.toISOString(), "2026-09-12T12:00:00.000Z");
+  assert.equal(getFollowUpScheduledAt(2, initialDeliveredAt)?.toISOString(), "2026-08-31T15:00:00.000Z");
+  assert.equal(getFollowUpScheduledAt(3, initialDeliveredAt)?.toISOString(), "2026-09-05T15:00:00.000Z");
+  assert.equal(getFollowUpScheduledAt(4, initialDeliveredAt)?.toISOString(), "2026-09-12T15:00:00.000Z");
+});
+
+test("follow-ups cannot bypass the delivery-derived Phoenix cadence", () => {
+  const deliveredAt = new Date("2026-08-28T12:00:00.000Z");
+  assert.throws(
+    () => assertFollowUpCadenceReady(2, new Date("2026-08-29T15:00:00.000Z"), deliveredAt),
+    /Phoenix delivery-based cadence/,
+  );
+  assert.throws(
+    () => assertFollowUpCadenceReady(2, new Date("2026-08-31T15:00:00.000Z"), null),
+    /verified delivered/,
+  );
+  assert.doesNotThrow(
+    () => assertFollowUpCadenceReady(2, new Date("2026-08-31T15:00:00.000Z"), deliveredAt),
+  );
 });
 
 test("manual and automatic sends cannot bypass their due time", () => {

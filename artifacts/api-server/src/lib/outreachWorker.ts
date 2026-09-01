@@ -1,4 +1,4 @@
-import { and, asc, eq, lte } from "drizzle-orm";
+import { and, asc, eq, lte, or, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
@@ -25,6 +25,10 @@ import {
   reconcileUncertainOutreachMessages,
   type OutreachReconciliationSummary,
 } from "./outreachReconciliation";
+import {
+  backfillDeliveredFollowUpSequences,
+  ensureApprovedFollowUpSequence,
+} from "./outreachSequence";
 
 const ADMIN_EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const MAX_SCHEDULED_MESSAGES_PER_RUN = 150;
@@ -112,6 +116,23 @@ export async function claimOutreachMessageForSending(messageId: number): Promise
     .where(and(
       eq(outreachMessagesTable.id, messageId),
       eq(outreachMessagesTable.status, "approved"),
+      or(
+        eq(outreachMessagesTable.sequenceNumber, 1),
+        sql`exists (
+          select 1
+          from ${outreachMessagesTable} as previous_message
+          where previous_message.prospect_id = ${outreachMessagesTable.prospectId}
+            and previous_message.sequence_number = ${outreachMessagesTable.sequenceNumber} - 1
+            and previous_message.status = 'delivered'
+            and (
+              previous_message.campaign_id = ${outreachMessagesTable.campaignId}
+              or (
+                previous_message.campaign_id is null
+                and ${outreachMessagesTable.campaignId} is null
+              )
+            )
+        )`,
+      ),
     ))
     .returning();
   return claimed;
@@ -140,6 +161,9 @@ export async function sendClaimedOutreachMessage(
       ...options,
       expectedPersistedStatus: "sending",
       afterProviderDispatch: async (providerMessageId) => {
+        if (message.sequenceNumber === 1) {
+          await ensureApprovedFollowUpSequence(message, prospect);
+        }
         [persisted] = await db.update(outreachMessagesTable).set({
           status: "sent",
           sentAt: new Date(),
@@ -182,6 +206,7 @@ export async function reconcileSendingOutreachMessages(
 
 export async function processDueOutreachMessages(): Promise<number> {
   if (!isOutreachAutomationReady()) return 0;
+  await backfillDeliveredFollowUpSequences();
   const reconciliation = await reconcileUncertainOutreachMessages();
   logReconciliationSummary(reconciliation);
   const due = await db.select().from(outreachMessagesTable)

@@ -85,7 +85,32 @@ const FOLLOW_UP_DELAY_DAYS: Record<number, number> = { 2: 3, 3: 8, 4: 15 };
 
 export function getFollowUpScheduledAt(sequenceNumber: number, baseDate = new Date()): Date | null {
   const days = FOLLOW_UP_DELAY_DAYS[sequenceNumber];
-  return days ? new Date(baseDate.getTime() + days * 24 * 60 * 60 * 1000) : null;
+  if (!days) return null;
+  const parts = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Phoenix",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(baseDate).map((part) => [part.type, part.value]));
+  const deliveredPhoenixMorning = new Date(`${parts.year}-${parts.month}-${parts.day}T08:00:00-07:00`);
+  return new Date(deliveredPhoenixMorning.getTime() + days * 24 * 60 * 60 * 1000);
+}
+
+export function assertFollowUpCadenceReady(
+  sequenceNumber: number,
+  scheduledAt: Date | null,
+  initialDeliveredAt: Date | null,
+): void {
+  if (sequenceNumber === 1) return;
+  const earliest = initialDeliveredAt
+    ? getFollowUpScheduledAt(sequenceNumber, initialDeliveredAt)
+    : null;
+  if (!earliest) {
+    throw new Error("Initial sequence message must be verified delivered before this follow-up can send");
+  }
+  if (!scheduledAt || scheduledAt.getTime() < earliest.getTime()) {
+    throw new Error("Follow-up cannot send before its Phoenix delivery-based cadence");
+  }
 }
 
 export function getNextPhoenixEightAm(now = new Date()): Date {

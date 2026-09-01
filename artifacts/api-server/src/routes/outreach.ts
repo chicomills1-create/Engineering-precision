@@ -1,5 +1,5 @@
 import { Router, type IRouter, type Request, type Response } from "express";
-import { and, count, desc, eq, gte, inArray, lt } from "drizzle-orm";
+import { and, count, countDistinct, desc, eq, gt, gte, inArray, isNotNull, lt, ne, or } from "drizzle-orm";
 import {
   campaignsTable,
   db,
@@ -56,13 +56,19 @@ import {
   sendClientMonthlyMessage,
 } from "../lib/clientMonthlyOutreach";
 import { validateAttributionPair, validateAttributionSourceStatus, type AttributionSourceType } from "../lib/growthAttribution";
-import { assertOutreachEligibilityBase, getNextPhoenixEightAm, getPhoenixCalendarDayStart } from "../lib/outreachEligibility";
+import {
+  assertOutreachEligibilityBase,
+  getFollowUpScheduledAt,
+  getNextPhoenixEightAm,
+  getPhoenixCalendarDayStart,
+} from "../lib/outreachEligibility";
 import {
   approveInitialMessageInPreparationWindow,
   getNextOutreachPreparationStatus,
 } from "../lib/outreachPreparation";
 import { recordContactEvidence } from "../lib/outreachContactEvidence";
 import { reconcileUncertainOutreachMessages } from "../lib/outreachReconciliation";
+import { getVerifiedInitialDeliveryAt } from "../lib/outreachSequence";
 
 const router: IRouter = Router();
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
@@ -177,6 +183,8 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     [prospects],
     [campaigns],
     [messages],
+    [upcomingFollowUps],
+    [stoppedSequences],
     [providerProcessedToday],
     [deliveredToday],
     [bouncedToday],
@@ -187,6 +195,24 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
   ] = await Promise.all([
     db.select({ value: count() }).from(prospectsTable), db.select({ value: count() }).from(campaignsTable),
     db.select({ value: count() }).from(outreachMessagesTable),
+    db.select({ value: count() }).from(outreachMessagesTable).where(and(
+      gt(outreachMessagesTable.sequenceNumber, 1),
+      eq(outreachMessagesTable.status, "approved"),
+      isNotNull(outreachMessagesTable.scheduledAt),
+    )),
+    db.select({ value: countDistinct(prospectsTable.id) })
+      .from(prospectsTable)
+      .innerJoin(
+        outreachMessagesTable,
+        eq(outreachMessagesTable.prospectId, prospectsTable.id),
+      )
+      .where(and(
+        eq(outreachMessagesTable.sequenceNumber, 1),
+        or(
+          ne(prospectsTable.contactStatus, "active"),
+          inArray(prospectsTable.status, ["replied", "suppressed", "not_a_fit"]),
+        ),
+      )),
     db.select({ value: count() })
       .from(outreachDeliveryEventsTable)
       .innerJoin(
@@ -218,6 +244,8 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     prospects: prospects?.value ?? 0,
     campaigns: campaigns?.value ?? 0,
     messages: messages?.value ?? 0,
+    upcomingFollowUps: upcomingFollowUps?.value ?? 0,
+    stoppedSequences: stoppedSequences?.value ?? 0,
     sentToday: processedCount,
     providerProcessedToday: processedCount,
     deliveredToday: deliveredToday?.value ?? 0,
@@ -467,7 +495,7 @@ router.post("/outreach/prospects/:id/draft", requireAuth, async (req, res): Prom
           sourceType: input.data.sourceType,
           sourceId: input.data.sourceId,
       })),
-    ]).returning();
+    ]).onConflictDoNothing().returning();
     res.status(201).json(GenerateOutreachDraftResponse.parse(await Promise.all(rows.map(messageJson))));
   } catch (err) { req.log.error({ err }, "Outreach draft generation failed"); res.status(502).json({ error: "Unable to generate outreach draft" }); }
 });
@@ -571,8 +599,15 @@ router.post("/outreach/messages/:id/approve", requireAuth, async (req, res): Pro
     if (message.sequenceNumber === 1) {
       row = await approveInitialMessageInPreparationWindow(message.id);
     } else {
+      const deliveredAt = await getVerifiedInitialDeliveryAt(message);
+      const scheduledAt = deliveredAt
+        ? getFollowUpScheduledAt(message.sequenceNumber, deliveredAt)
+        : null;
+      if (!scheduledAt) {
+        throw new Error("The initial message must be verified delivered before approving a follow-up");
+      }
       [row] = await db.update(outreachMessagesTable)
-        .set({ status: "approved", scheduledAt: getNextPhoenixEightAm() })
+        .set({ status: "approved", scheduledAt })
         .where(and(
           eq(outreachMessagesTable.id, p.data.id),
           eq(outreachMessagesTable.status, "draft"),

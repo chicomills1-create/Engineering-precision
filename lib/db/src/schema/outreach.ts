@@ -135,7 +135,15 @@ export const outreachMessagesTable = pgTable("outreach_messages", {
   sourceId: integer("source_id"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
-});
+}, (table) => [
+  uniqueIndex("outreach_messages_follow_up_sequence_unique")
+    .on(
+      table.prospectId,
+      sql`coalesce(${table.campaignId}, 0)`,
+      table.sequenceNumber,
+    )
+    .where(sql`${table.sequenceNumber} > 1`),
+]);
 
 export const outreachPreparationSlotsTable = pgTable("outreach_preparation_slots", {
   id: serial("id").primaryKey(),

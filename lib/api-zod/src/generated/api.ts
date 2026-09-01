@@ -600,6 +600,8 @@ export const GetOutreachDashboardResponse = zod.object({
   "prospects": zod.number(),
   "campaigns": zod.number(),
   "messages": zod.number(),
+  "upcomingFollowUps": zod.number(),
+  "stoppedSequences": zod.number(),
   "sentToday": zod.number(),
   "providerProcessedToday": zod.number(),
   "deliveredToday": zod.number(),

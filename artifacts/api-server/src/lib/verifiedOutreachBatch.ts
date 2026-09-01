@@ -37,6 +37,39 @@ We right-size the scope, review what you already have, and provide clear pricing
 Do you have any current projects in your pipeline that you would like us to review?`;
 }
 
+export function approvedOutreachFollowUps(contactName: string): Array<{
+  subject: string;
+  body: string;
+}> {
+  const firstName = contactName.trim().split(/\s+/)[0] || "there";
+  return [
+    {
+      subject: `Re: ${SUBJECT}`,
+      body: `Hi ${firstName},
+
+I wanted to follow up in case a focused Civil, Structural, or MEP issue is holding up one of your current projects. Apex Grid can review the existing information, right-size the scope, and provide clear pricing before work begins.
+
+Do you have any current projects in your pipeline that you would like us to review?`,
+    },
+    {
+      subject: `Re: ${SUBJECT}`,
+      body: `Hi ${firstName},
+
+Checking back once more. If an engineering review, permit response, or stamped design package is moving too slowly or has grown beyond the work actually needed, our licensed team may be able to help.
+
+Would it be useful for us to review a current project and outline the fastest practical next step?`,
+    },
+    {
+      subject: `Re: ${SUBJECT}`,
+      body: `Hi ${firstName},
+
+I will close the loop after this note. Apex Grid is available when you need focused, clearly priced Civil, Structural, or MEP support without an oversized scope.
+
+If a project comes up that you would like us to review, reply with the basic details and we will take a look.`,
+    },
+  ];
+}
+
 export function approvedOutreachFollowUpMessages(contactName: string): Array<{
   sequenceNumber: number;
   subject: string;
