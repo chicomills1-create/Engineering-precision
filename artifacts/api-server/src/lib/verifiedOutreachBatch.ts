@@ -32,7 +32,7 @@ export function approvedOutreachBody(contactName: string): string {
 
 If a focused engineering issue is taking too long or costing more than it should, Apex Grid can help. Our licensed Civil, Structural, and MEP PEs stamp our designs, and focused reviews or design responses typically turn around in 12–24 hours.
 
-We right-size the scope, review what you already have, and provide clear pricing before work begins. As a veteran-owned engineering company, we keep the process direct and accountable.
+We right-size the scope, review what you already have, and provide clear pricing before work begins. You can see our capabilities at https://apexgrideng.com.
 
 Do you have any current projects in your pipeline that you would like us to review?`;
 }
