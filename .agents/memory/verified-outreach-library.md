@@ -60,3 +60,9 @@ The paid-credit plan must be evaluated over a 30-day horizon: 150 paid contacts 
 **Why:** Daily send volume and the multi-day enrichment runway are separate planning constraints; silently lowering the send target would change the operating decision instead of addressing the credit shortfall.
 
 **How to apply:** Report current finder-credit coverage and the 30-day shortfall explicitly, keep the 150/day target unchanged, and do not spend beyond the per-day or 30-day credit plan.
+
+Public business emails published on official company websites are a zero-credit lane and should fill the 150-email daily target whenever a qualified personal email is unavailable. The 150-email target and 150-paid-credit ceiling are separate constraints.
+
+**Why:** A company-published address can support compliant outreach without consuming a Finder credit; treating every send as a paid lookup wastes the enrichment budget and needlessly reduces future coverage.
+
+**How to apply:** Select qualified Personal contacts first up to the 150-credit daily ceiling, then use qualified Public contacts to complete the 150 outbound emails. Never lower the email target because the paid lane is short, and never use paid credits for reserve contacts while eligible Public contacts remain.
