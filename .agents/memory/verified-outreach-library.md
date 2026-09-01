@@ -54,3 +54,9 @@ The paid-enrichment budget is a separate hard limit: use at most 150 paid credit
 **Why:** The 150-credit allowance protects spend independently of the 150-email send target; treating lookup failures as a reason to keep spending caused unnecessary overrun.
 
 **How to apply:** Count every attempted paid contact lookup before starting research, stop at 150 for the Phoenix day, and report any remaining email shortfall without purchasing additional lookups.
+
+The paid-credit plan must be evaluated over a 30-day horizon: 150 paid contacts per day requires 4,500 finder credits. This does not authorize reducing the 150-email daily target when the balance is short.
+
+**Why:** Daily send volume and the multi-day enrichment runway are separate planning constraints; silently lowering the send target would change the operating decision instead of addressing the credit shortfall.
+
+**How to apply:** Report current finder-credit coverage and the 30-day shortfall explicitly, keep the 150/day target unchanged, and do not spend beyond the per-day or 30-day credit plan.
