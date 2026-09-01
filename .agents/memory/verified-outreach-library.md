@@ -48,3 +48,9 @@ Historical seed batches are satisfied when they retain at least their target cou
 **Why:** Older runs can legitimately retain more than the nominal target after reconciliation. Requiring exact equality causes startup to fail before newer verified batches are seeded.
 
 **How to apply:** Fail when an idempotent seed remains below its required target, but accept counts at or above the target and let the shared daily slot ledger enforce the actual send ceiling.
+
+For a 150-email daily batch, the paid-enrichment ceiling is the remaining email slots, not an open-ended budget to obtain a reserve. If five eligible messages already exist, no more than 145 paid lookups may be attempted.
+
+**Why:** A 150-send target paired with 258 paid lookups is a planning failure even when the send queue eventually reaches 150. No-result lookups and rejected matches are a shortfall to report, not justification for exceeding the batch budget.
+
+**How to apply:** Before research, record target, already-eligible count, and remaining paid-lookup allowance. Decrement the allowance per attempted lookup, stop at zero, and never spend paid credits on reserve contacts for that same batch.
