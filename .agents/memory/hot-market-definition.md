@@ -62,3 +62,11 @@ Representative referral/partner targets include:
 - 3rd Story
 
 The partner lane is part of Hot Market, but it must remain operationally distinct from the direct-client lane in targeting, positioning, and email copy.
+
+## Confirmed Arizona campaign count
+
+The original Arizona Hot Market campaign discussed and prepared for the September 2026 send contained 19 intended companies across the direct-client and referral/partner lanes. Do not mistake the smaller number of records that survive production deduplication or seeding for the campaign's intended total.
+
+**Why:** Production initially showed only 13 newly seeded records, which was incorrectly reported as the campaign total. The user confirmed that the prepared campaign contained 19 companies.
+
+**How to apply:** Reconcile all 19 intended companies individually as delivered, previously contacted/deduplicated, suppressed, missing verification, or still unsent. Report both the intended campaign count and the production-send outcome instead of replacing one with the other.
