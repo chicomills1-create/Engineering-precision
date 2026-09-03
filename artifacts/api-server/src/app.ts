@@ -18,6 +18,47 @@ import { logger } from "./lib/logger";
 // artifacts/api-server/dist/ — so apex-grid's static output is two levels up.
 const __apiDir = path.dirname(fileURLToPath(import.meta.url));
 const staticRoot = path.resolve(__apiDir, "../../apex-grid/dist/public");
+const indexHtml = path.join(staticRoot, "index.html");
+
+const explicitSpaPaths = new Set([
+  "/privacy",
+  "/terms",
+  "/request-proposal",
+  "/submit-project",
+  "/client-portal",
+  "/unsubscribe",
+  "/capabilities",
+  "/admin",
+  "/admin/seo",
+  "/admin/outreach",
+  "/admin/linkedin",
+  "/admin/growth",
+  "/admin/reviews",
+  "/admin/payroll",
+  "/sign-in",
+  "/sign-up",
+]);
+
+function normalizePathname(value: string): string {
+  const withoutQuery = value.split("?")[0] || "/";
+  return withoutQuery === "/" ? "/" : withoutQuery.replace(/\/+$/, "");
+}
+
+function loadSitemapPaths(): Set<string> {
+  const paths = new Set<string>();
+  if (!fs.existsSync(staticRoot)) return paths;
+
+  for (const filename of fs.readdirSync(staticRoot)) {
+    if (!/^sitemap(?:[-_].+)?\.xml$/.test(filename)) continue;
+    const xml = fs.readFileSync(path.join(staticRoot, filename), "utf8");
+    for (const match of xml.matchAll(/<loc>(https:\/\/apexgrideng\.com)?([^<]+)<\/loc>/g)) {
+      const pathname = match[2];
+      if (pathname?.startsWith("/")) paths.add(normalizePathname(pathname));
+    }
+  }
+
+  return paths;
+}
 
 const app: Express = express();
 
@@ -87,12 +128,19 @@ if (fs.existsSync(staticRoot)) {
 
 app.use("/api", router);
 
-// SPA catch-all: any path not matched by static files or /api routes gets
-// the React app shell so client-side routing works for non-static pages.
-const indexHtml = path.join(staticRoot, "index.html");
-app.use((_req, res) => {
+// Serve the React shell for known client-side routes. Unknown paths still get
+// the same branded not-found screen, but with a real 404 status so crawlers do
+// not mistake arbitrary URLs for valid pages.
+const sitemapPaths = loadSitemapPaths();
+app.use((req, res) => {
   if (fs.existsSync(indexHtml)) {
-    res.sendFile(indexHtml);
+    const pathname = normalizePathname(req.path);
+    const isKnownSpaPath =
+      sitemapPaths.has(pathname) ||
+      explicitSpaPaths.has(pathname) ||
+      pathname.startsWith("/sign-in/") ||
+      pathname.startsWith("/sign-up/");
+    res.status(isKnownSpaPath ? 200 : 404).sendFile(indexHtml);
   } else {
     res.status(404).send("Not found");
   }
