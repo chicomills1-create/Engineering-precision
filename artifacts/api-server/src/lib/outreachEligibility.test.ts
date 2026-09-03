@@ -16,11 +16,17 @@ import {
   getLegacyOutreachSentCount,
   getGlobalOutreachDailyLimit,
   getOutreachDailyLimit,
+  getOutreachDailyLane,
+  getOutreachDailyLaneLimit,
   getOutreachMonthlyLimit,
   getPhoenixOutreachMonthKey,
   isRegularMonthlyOutreachLimitReached,
   isDuplicateEmailSequenceStatus,
 } from "./outreach";
+import {
+  HOT_MARKET_RECURRING_SOURCE_TYPE,
+  HOT_MARKET_SOURCE_TYPE,
+} from "./hotMarketOutreachBatch";
 import { MAX_SCHEDULED_MESSAGES_PER_RUN } from "./outreachWorker";
 
 test("the global target reserves 150 regular and 50 hot-market slots while allowing verified extras", () => {
@@ -31,6 +37,24 @@ test("the global target reserves 150 regular and 50 hot-market slots while allow
   assert.ok(MAX_SCHEDULED_MESSAGES_PER_RUN >= 223);
   assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-04T15:00:00.000Z"), 100), 250);
   assert.equal(getOutreachMonthlyLimit(new Date("2026-09-03T15:00:00.000Z")), 6000);
+});
+
+test("dispatch lane inference isolates Direct, Public, recurring Hot Market, and verified extras", () => {
+  const direct = { contactEmail: "jordan@example.com", contactName: "Jordan Lee", contactEvidenceType: null };
+  const publicInbox = { contactEmail: "info@example.com", contactName: null, contactEvidenceType: null };
+  const publishedInbox = { contactEmail: "jordan@example.com", contactName: "Jordan Lee", contactEvidenceType: "official_publication" as const };
+  const regular = { sourceType: null } as Pick<OutreachMessage, "sourceType">;
+
+  // Null-source legacy regular messages are classified from current evidence.
+  assert.equal(getOutreachDailyLane(regular, direct), "direct");
+  assert.equal(getOutreachDailyLane(regular, publicInbox), "public");
+  assert.equal(getOutreachDailyLane(regular, publishedInbox), "public");
+  assert.equal(getOutreachDailyLane({ sourceType: HOT_MARKET_RECURRING_SOURCE_TYPE }, direct), "hot_market");
+  assert.equal(getOutreachDailyLane({ sourceType: HOT_MARKET_SOURCE_TYPE }, publicInbox), "hot_market_extra");
+  assert.equal(getOutreachDailyLaneLimit("direct"), 100);
+  assert.equal(getOutreachDailyLaneLimit("public"), 50);
+  assert.equal(getOutreachDailyLaneLimit("hot_market"), 50);
+  assert.equal(getOutreachDailyLaneLimit("hot_market_extra"), undefined);
 });
 
   const now = new Date("2026-08-28T12:00:00.000Z");

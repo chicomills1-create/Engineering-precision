@@ -1,6 +1,6 @@
 import { ReplitConnectors } from "@replit/connectors-sdk";
 import { openai } from "@workspace/integrations-openai-ai-server";
-import { and, count, eq, gte, inArray, isNotNull, isNull, lt, ne, sql } from "drizzle-orm";
+import { and, count, eq, gte, inArray, isNotNull, isNull, lt, ne, or, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
@@ -33,6 +33,7 @@ import {
 } from "./outreachSequence";
 import {
   HOT_MARKET_DAILY_TARGET,
+  HOT_MARKET_RECURRING_SOURCE_TYPE,
   HOT_MARKET_SOURCE_TYPES,
   hotMarketOutreachSubject,
   isHotMarketSourceType,
@@ -88,6 +89,42 @@ const DUPLICATE_EMAIL_SEQUENCE_STATUSES = [
   "replied",
   "unsubscribed",
 ] as const;
+const PUBLIC_INBOX_LOCAL_PARTS = new Set([
+  "admin", "contact", "hello", "help", "info", "inquiries", "office", "sales", "support",
+  "team",
+]);
+const DIRECT_DAILY_TARGET = 100;
+const PUBLIC_DAILY_TARGET = 50;
+
+export type OutreachDailyLane = "direct" | "public" | "hot_market" | "hot_market_extra";
+
+/**
+ * Source metadata is authoritative for Hot Market.  Older regular records did
+ * not persist a source, so their lane is inferred from the prospect evidence
+ * at dispatch rather than treating them as personal by default.
+ */
+export function getOutreachDailyLane(
+  message: Pick<OutreachMessage, "sourceType">,
+  prospect: Pick<Prospect, "contactEmail" | "contactName" | "contactEvidenceType">,
+): OutreachDailyLane {
+  if (message.sourceType === HOT_MARKET_RECURRING_SOURCE_TYPE) return "hot_market";
+  if (isHotMarketSourceType(message.sourceType)) return "hot_market_extra";
+  if (prospect.contactEvidenceType === "official_publication") return "public";
+  const localPart = prospect.contactEmail?.trim().toLowerCase().split("@")[0] ?? "";
+  const normalizedName = prospect.contactName?.trim().toLowerCase().replace(/[^a-z]/g, "") ?? "";
+  return PUBLIC_INBOX_LOCAL_PARTS.has(localPart) || PUBLIC_INBOX_LOCAL_PARTS.has(normalizedName)
+    ? "public"
+    : "direct";
+}
+
+export function getOutreachDailyLaneLimit(lane: OutreachDailyLane): number | undefined {
+  if (lane === "direct") return DIRECT_DAILY_TARGET;
+  if (lane === "public") return PUBLIC_DAILY_TARGET;
+  if (lane === "hot_market") return HOT_MARKET_DAILY_TARGET;
+  // One-time verified Hot Market evidence is an intentional extra lane.  It
+  // never takes a recurring slot or a regular Direct/Public slot.
+  return undefined;
+}
 
 export class DailySendLimitError extends Error {
   constructor() {
@@ -214,20 +251,28 @@ async function reserveOutreachSend(
   const now = new Date();
   const dateKey = phoenixDateKey(now);
   const monthKey = getPhoenixOutreachMonthKey(now);
-  const dailyQuotaKey = `outreach-global:${dateKey}`;
+  const legacyDailyQuotaKey = `outreach-global:${dateKey}`;
   const legacyRegularMonthlyQuotaKey = `outreach-global:${monthKey}`;
   const regularMonthlyQuotaKey = `outreach-regular:${monthKey}`;
   const dayStart = getPhoenixCalendarDayStart(now);
   const monthStart = new Date(`${monthKey}-01T07:00:00.000Z`);
   return db.transaction(async (tx) => {
+    const [lockedProspect] = await tx.select({
+      contactEmail: prospectsTable.contactEmail,
+      contactName: prospectsTable.contactName,
+      contactEvidenceType: prospectsTable.contactEvidenceType,
+    })
+      .from(prospectsTable)
+      .where(eq(prospectsTable.id, message.prospectId))
+      .for("update");
+    const lane = getOutreachDailyLane(message, lockedProspect ?? {
+      contactEmail: null, contactName: null, contactEvidenceType: null,
+    });
+    const dailyQuotaKey = `outreach-${lane}:${dateKey}`;
     await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${normalizedEmail}, 0))`);
     await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${dailyQuotaKey}))`);
     await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${regularMonthlyQuotaKey}))`);
 
-    const [lockedProspect] = await tx.select({ contactEmail: prospectsTable.contactEmail })
-      .from(prospectsTable)
-      .where(eq(prospectsTable.id, message.prospectId))
-      .for("update");
     if ((lockedProspect?.contactEmail?.trim().toLowerCase() || null) !== normalizedEmail) {
       throw new Error("Contact changed while dispatch was starting; please retry");
     }
@@ -272,7 +317,7 @@ async function reserveOutreachSend(
       throw new Error("This campaign sequence is already reserved or was sent to this prospect");
     }
 
-    if (campaign) {
+    if (campaign && message.sequenceNumber === 1) {
       const sentMessages = await tx.select({ sentAt: outreachMessagesTable.sentAt })
         .from(outreachMessagesTable)
         .where(and(
@@ -300,41 +345,59 @@ async function reserveOutreachSend(
       }
     }
     let dailyReservationId: number | undefined;
-    if (message.sequenceNumber === 1) {
-      const [[alreadySent], [globallyReservedSent]] = await Promise.all([
-        tx.select({ value: count() }).from(outreachMessagesTable)
-          .where(gte(outreachMessagesTable.sentAt, dayStart)),
-        tx.select({ value: count() })
-          .from(outreachSendReservationsTable)
-          .innerJoin(
-            outreachMessagesTable,
-            eq(outreachSendReservationsTable.messageId, outreachMessagesTable.id),
-          )
-          .where(and(
-            eq(outreachSendReservationsTable.quotaKey, dailyQuotaKey),
-            gte(outreachMessagesTable.sentAt, dayStart),
-          )),
+    const laneLimit = getOutreachDailyLaneLimit(lane);
+    if (message.sequenceNumber === 1 && laneLimit === undefined) {
+      // Extras are deliberately uncapped, but still receive a durable,
+      // per-message reservation so provider retries and reconciliation retain
+      // the same transactional ownership guarantees as every other opener.
+      const [inserted] = await tx.insert(outreachSendReservationsTable)
+        .values({ messageId: message.id, quotaKey: dailyQuotaKey, slot: message.id })
+        .onConflictDoNothing()
+        .returning({ id: outreachSendReservationsTable.id });
+      if (!inserted) throw new DailySendLimitError();
+      dailyReservationId = inserted.id;
+    }
+    if (message.sequenceNumber === 1 && laneLimit !== undefined) {
+      const laneQuotaKeys = [
+        legacyDailyQuotaKey,
+        `outreach-direct:${dateKey}`,
+        `outreach-public:${dateKey}`,
+        `outreach-hot_market:${dateKey}`,
+        `outreach-hot_market_extra:${dateKey}`,
+      ];
+      const [sentInitials, dailyReservations] = await Promise.all([
+        tx.select({
+          id: outreachMessagesTable.id,
+          sourceType: outreachMessagesTable.sourceType,
+          contactEmail: prospectsTable.contactEmail,
+          contactName: prospectsTable.contactName,
+          contactEvidenceType: prospectsTable.contactEvidenceType,
+        }).from(outreachMessagesTable)
+          .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+          .where(and(eq(outreachMessagesTable.sequenceNumber, 1), gte(outreachMessagesTable.sentAt, dayStart))),
+        tx.select({
+          messageId: outreachSendReservationsTable.messageId,
+          sourceType: outreachMessagesTable.sourceType,
+          contactEmail: prospectsTable.contactEmail,
+          contactName: prospectsTable.contactName,
+          contactEvidenceType: prospectsTable.contactEvidenceType,
+        }).from(outreachSendReservationsTable)
+          .innerJoin(outreachMessagesTable, eq(outreachSendReservationsTable.messageId, outreachMessagesTable.id))
+          .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+          .where(inArray(outreachSendReservationsTable.quotaKey, laneQuotaKeys)),
       ]);
-      const legacySent = getLegacyOutreachSentCount(
-        alreadySent?.value ?? 0,
-        globallyReservedSent?.value ?? 0,
-      );
-      const [hotMarketMessages] = await tx.select({ value: count() })
-        .from(outreachMessagesTable)
-        .where(and(
-          eq(outreachMessagesTable.sequenceNumber, 1),
-          inArray(outreachMessagesTable.sourceType, [...HOT_MARKET_SOURCE_TYPES]),
-          gte(outreachMessagesTable.scheduledAt, dayStart),
-          lt(
-            outreachMessagesTable.scheduledAt,
-            new Date(dayStart.getTime() + 24 * 60 * 60 * 1000),
-          ),
-        ));
-      const globalDailyLimit = getGlobalOutreachDailyLimit(
-        now,
-        hotMarketMessages?.value ?? 0,
-      );
-      for (let slot = legacySent + 1; slot <= globalDailyLimit; slot += 1) {
+      const reservedIds = new Set(dailyReservations.map((reservation) => reservation.messageId));
+      const laneUsage = new Set<number>();
+      for (const reservation of dailyReservations) {
+        if (getOutreachDailyLane(reservation, reservation) === lane) laneUsage.add(reservation.messageId);
+      }
+      // A sent legacy message has no reservation row. Count it once, in its
+      // inferred lane, so migration to lane keys cannot oversend that lane.
+      for (const sent of sentInitials) {
+        if (!reservedIds.has(sent.id) && getOutreachDailyLane(sent, sent) === lane) laneUsage.add(sent.id);
+      }
+      if (laneUsage.size >= laneLimit) throw new DailySendLimitError();
+      for (let slot = 1; slot <= laneLimit; slot += 1) {
         const [inserted] = await tx.insert(outreachSendReservationsTable)
           .values({ messageId: message.id, quotaKey: dailyQuotaKey, slot })
           .onConflictDoNothing()
@@ -348,12 +411,20 @@ async function reserveOutreachSend(
     }
 
     let regularMonthlyReservationId: number | undefined;
-    if (message.sequenceNumber === 1) {
+    if (message.sequenceNumber === 1 && !isHotMarketSourceType(message.sourceType)) {
       const regularQuotaKeys = [legacyRegularMonthlyQuotaKey, regularMonthlyQuotaKey];
+      const regularSource = or(
+        isNull(outreachMessagesTable.sourceType),
+        sql`${outreachMessagesTable.sourceType} not in (${sql.join(
+          HOT_MARKET_SOURCE_TYPES.map((sourceType) => sql`${sourceType}`),
+          sql`, `,
+        )})`,
+      );
       const [[regularSent], [regularReservedSent], [regularReservations]] = await Promise.all([
         tx.select({ value: count() }).from(outreachMessagesTable)
           .where(and(
             eq(outreachMessagesTable.sequenceNumber, 1),
+            regularSource,
             gte(outreachMessagesTable.sentAt, monthStart),
           )),
         tx.select({ value: count() })
@@ -365,10 +436,19 @@ async function reserveOutreachSend(
           .where(and(
             inArray(outreachMonthlySendReservationsTable.quotaKey, regularQuotaKeys),
             eq(outreachMessagesTable.sequenceNumber, 1),
+            regularSource,
             gte(outreachMessagesTable.sentAt, monthStart),
           )),
         tx.select({ value: count() }).from(outreachMonthlySendReservationsTable)
-          .where(inArray(outreachMonthlySendReservationsTable.quotaKey, regularQuotaKeys)),
+          .innerJoin(
+            outreachMessagesTable,
+            eq(outreachMonthlySendReservationsTable.messageId, outreachMessagesTable.id),
+          )
+          .where(and(
+            inArray(outreachMonthlySendReservationsTable.quotaKey, regularQuotaKeys),
+            eq(outreachMessagesTable.sequenceNumber, 1),
+            regularSource,
+          )),
       ]);
       const regularMonthlyUsage = getLegacyOutreachMonthlySentCount(
         regularSent?.value ?? 0,
