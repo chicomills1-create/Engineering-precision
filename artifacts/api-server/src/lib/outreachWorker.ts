@@ -31,6 +31,8 @@ import {
 import {
   backfillDeliveredFollowUpSequences,
   ensureApprovedFollowUpSequence,
+  OPENER_FOLLOW_UP_MAX_AGE_DAYS,
+  stopStaleOpenerFollowUps,
   stopLegacyAdditionalFollowUps,
 } from "./outreachSequence";
 
@@ -168,6 +170,8 @@ export async function claimOutreachMessageForSending(messageId: number): Promise
           where initial_message.prospect_id = ${outreachMessagesTable.prospectId}
             and initial_message.sequence_number = 1
             and initial_open.event_type = 'open'
+             and initial_open.occurred_at >= now() - (${OPENER_FOLLOW_UP_MAX_AGE_DAYS} * interval '1 day')
+             and initial_open.occurred_at <= now()
             and (
               initial_message.campaign_id = ${outreachMessagesTable.campaignId}
               or (
@@ -251,6 +255,7 @@ export async function reconcileSendingOutreachMessages(
 export async function processDueOutreachMessages(): Promise<number> {
   if (!isOutreachAutomationReady()) return 0;
   await stopLegacyAdditionalFollowUps();
+  await stopStaleOpenerFollowUps();
   await backfillDeliveredFollowUpSequences();
   const reconciliation = await reconcileUncertainOutreachMessages();
   logReconciliationSummary(reconciliation);

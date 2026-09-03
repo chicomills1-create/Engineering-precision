@@ -9,7 +9,26 @@ import {
   outreachMessagesTable,
   prospectsTable,
 } from "@workspace/db";
-import { ensureApprovedFollowUpSequence } from "./outreachSequence";
+import {
+  ensureApprovedFollowUpSequence,
+  isOpenerFollowUpWithinWindow,
+} from "./outreachSequence";
+
+test("opener reminders accept only opens from the prior 30 days", () => {
+  const now = new Date("2026-09-03T15:00:00.000Z");
+  assert.equal(
+    isOpenerFollowUpWithinWindow(new Date("2026-08-04T15:00:00.000Z"), now),
+    true,
+  );
+  assert.equal(
+    isOpenerFollowUpWithinWindow(new Date("2026-08-04T14:59:59.999Z"), now),
+    false,
+  );
+  assert.equal(
+    isOpenerFollowUpWithinWindow(new Date("2026-09-03T15:00:00.001Z"), now),
+    false,
+  );
+});
 
 test("enrollment remains idempotent when a separate draft writer races it", async () => {
   const suffix = randomUUID();

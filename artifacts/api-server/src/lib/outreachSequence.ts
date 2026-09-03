@@ -1,4 +1,4 @@
-import { and, asc, eq, inArray, isNull, sql } from "drizzle-orm";
+import { and, asc, desc, eq, gte, inArray, isNull, lte, sql } from "drizzle-orm";
 import {
   db,
   outreachDeliveryEventsTable,
@@ -13,6 +13,16 @@ import { getFollowUpScheduledAt } from "./outreachEligibility";
 
 const FOLLOW_UP_SEQUENCE_NUMBERS = [2] as const;
 const LEGACY_EXTRA_FOLLOW_UP_SEQUENCE_NUMBERS = [3, 4] as const;
+export const OPENER_FOLLOW_UP_MAX_AGE_DAYS = 30;
+const OPENER_FOLLOW_UP_MAX_AGE_MS = OPENER_FOLLOW_UP_MAX_AGE_DAYS * 24 * 60 * 60 * 1000;
+
+export function isOpenerFollowUpWithinWindow(
+  openedAt: Date,
+  now = new Date(),
+): boolean {
+  const ageMs = now.getTime() - openedAt.getTime();
+  return ageMs >= 0 && ageMs <= OPENER_FOLLOW_UP_MAX_AGE_MS;
+}
 
 type InitialSequenceMessage = Pick<
   OutreachMessage,
@@ -22,6 +32,7 @@ type InitialSequenceMessage = Pick<
 export async function ensureApprovedFollowUpSequence(
   initialMessage: InitialSequenceMessage,
   prospect: Pick<Prospect, "contactName">,
+  now = new Date(),
 ): Promise<number> {
   if (initialMessage.sequenceNumber !== 1) return 0;
 
@@ -68,6 +79,9 @@ export async function ensureApprovedFollowUpSequence(
       .where(eq(outreachSuppressionsTable.email, normalizedEmail))
       .limit(1);
     if (suppression) return 0;
+    const scope = initialMessage.campaignId
+      ? eq(outreachMessagesTable.campaignId, initialMessage.campaignId)
+      : isNull(outreachMessagesTable.campaignId);
     const [initialOpened] = await tx.select({
       occurredAt: outreachDeliveryEventsTable.occurredAt,
     })
@@ -76,9 +90,23 @@ export async function ensureApprovedFollowUpSequence(
         eq(outreachDeliveryEventsTable.outreachMessageId, initialMessage.id),
         eq(outreachDeliveryEventsTable.eventType, "open"),
       ))
-      .orderBy(asc(outreachDeliveryEventsTable.occurredAt))
+      .orderBy(desc(outreachDeliveryEventsTable.occurredAt))
       .limit(1);
-    if (!initialOpened) return 0;
+    if (!initialOpened || !isOpenerFollowUpWithinWindow(initialOpened.occurredAt, now)) {
+      await tx.update(outreachMessagesTable)
+        .set({
+          status: "needs_review",
+          scheduledAt: null,
+          error: "Stopped because the opener was outside the 30-day reminder window",
+        })
+        .where(and(
+          eq(outreachMessagesTable.prospectId, initialMessage.prospectId),
+          scope,
+          eq(outreachMessagesTable.sequenceNumber, 2),
+          inArray(outreachMessagesTable.status, ["draft", "approved"]),
+        ));
+      return 0;
+    }
 
     await tx.update(outreachMessagesTable)
       .set({
@@ -95,9 +123,6 @@ export async function ensureApprovedFollowUpSequence(
         inArray(outreachMessagesTable.status, ["draft", "approved"]),
       ));
 
-    const scope = initialMessage.campaignId
-      ? eq(outreachMessagesTable.campaignId, initialMessage.campaignId)
-      : isNull(outreachMessagesTable.campaignId);
     const existing = await tx.select().from(outreachMessagesTable).where(and(
       eq(outreachMessagesTable.prospectId, initialMessage.prospectId),
       scope,
@@ -185,7 +210,11 @@ export async function ensureApprovedFollowUpSequence(
   });
 }
 
-export async function backfillDeliveredFollowUpSequences(limit = 1000): Promise<number> {
+export async function backfillDeliveredFollowUpSequences(
+  limit = 1000,
+  now = new Date(),
+): Promise<number> {
+  const cutoff = new Date(now.getTime() - OPENER_FOLLOW_UP_MAX_AGE_MS);
   const candidates = await db.select({
     message: outreachMessagesTable,
     contactName: prospectsTable.contactName,
@@ -200,6 +229,8 @@ export async function backfillDeliveredFollowUpSequences(limit = 1000): Promise<
     .where(and(
       eq(outreachMessagesTable.sequenceNumber, 1),
       eq(outreachDeliveryEventsTable.eventType, "open"),
+      gte(outreachDeliveryEventsTable.occurredAt, cutoff),
+      lte(outreachDeliveryEventsTable.occurredAt, now),
       eq(prospectsTable.contactStatus, "active"),
       inArray(prospectsTable.status, ["approved", "contacted"]),
       sql`(
@@ -217,7 +248,7 @@ export async function backfillDeliveredFollowUpSequences(limit = 1000): Promise<
           )
       ) < 1`,
     ))
-    .orderBy(asc(outreachDeliveryEventsTable.occurredAt))
+    .orderBy(desc(outreachDeliveryEventsTable.occurredAt))
     .limit(limit);
 
   const earliestByMessage = new Map<number, typeof candidates[number]>();
@@ -229,9 +260,11 @@ export async function backfillDeliveredFollowUpSequences(limit = 1000): Promise<
 
   let repaired = 0;
   for (const candidate of earliestByMessage.values()) {
-    await ensureApprovedFollowUpSequence(candidate.message, {
-      contactName: candidate.contactName,
-    });
+    await ensureApprovedFollowUpSequence(
+      candidate.message,
+      { contactName: candidate.contactName },
+      now,
+    );
     const scope = candidate.message.campaignId
       ? eq(outreachMessagesTable.campaignId, candidate.message.campaignId)
       : isNull(outreachMessagesTable.campaignId);
@@ -260,6 +293,40 @@ export async function backfillDeliveredFollowUpSequences(limit = 1000): Promise<
   }
 
   return repaired;
+}
+
+export async function stopStaleOpenerFollowUps(now = new Date()): Promise<number> {
+  const cutoff = new Date(now.getTime() - OPENER_FOLLOW_UP_MAX_AGE_MS);
+  const stopped = await db.update(outreachMessagesTable)
+    .set({
+      status: "needs_review",
+      scheduledAt: null,
+      error: "Stopped because no opener fell within the 30-day reminder window",
+    })
+    .where(and(
+      eq(outreachMessagesTable.sequenceNumber, 2),
+      inArray(outreachMessagesTable.status, ["draft", "approved"]),
+      sql`not exists (
+        select 1
+        from outreach_messages as initial_message
+        inner join outreach_delivery_events as initial_open
+          on initial_open.outreach_message_id = initial_message.id
+        where initial_message.prospect_id = ${outreachMessagesTable.prospectId}
+          and initial_message.sequence_number = 1
+          and (
+            initial_message.campaign_id = ${outreachMessagesTable.campaignId}
+            or (
+              initial_message.campaign_id is null
+              and ${outreachMessagesTable.campaignId} is null
+            )
+          )
+          and initial_open.event_type = 'open'
+          and initial_open.occurred_at >= ${cutoff}
+          and initial_open.occurred_at <= ${now}
+      )`,
+    ))
+    .returning({ id: outreachMessagesTable.id });
+  return stopped.length;
 }
 
 export async function stopLegacyAdditionalFollowUps(): Promise<number> {

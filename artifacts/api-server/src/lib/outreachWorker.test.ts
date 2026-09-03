@@ -212,16 +212,17 @@ test("a follow-up cannot be claimed until its immediately prior message is deliv
     await db.update(outreachMessagesTable)
       .set({ status: "delivered" })
       .where(eq(outreachMessagesTable.id, initial!.id));
+    const openedAt = new Date();
     await db.insert(outreachDeliveryEventsTable).values({
       email: prospect!.contactEmail!,
       eventType: "open",
-      occurredAt: new Date("2026-08-28T15:00:00.000Z"),
+      occurredAt: openedAt,
       outreachMessageId: initial!.id,
     });
     await db.insert(outreachDeliveryEventsTable).values({
       email: prospect!.contactEmail!,
       eventType: "delivered",
-      occurredAt: new Date("2026-08-28T14:00:00.000Z"),
+      occurredAt: new Date(openedAt.getTime() - 60_000),
       outreachMessageId: initial!.id,
     });
     assert.equal((await claimOutreachMessageForSending(followUp!.id))?.status, "sending");
