@@ -18,6 +18,7 @@ import {
   getOutreachDailyLimit,
   getOutreachMonthlyLimit,
   getPhoenixOutreachMonthKey,
+  isRegularMonthlyOutreachLimitReached,
   isDuplicateEmailSequenceStatus,
 } from "./outreach";
 import { MAX_SCHEDULED_MESSAGES_PER_RUN } from "./outreachWorker";
@@ -193,18 +194,34 @@ test("legacy same-day sends consume the new global reservation ceiling", () => {
   assert.equal(getLegacyOutreachSentCount(120, 20), 100);
 });
 
-test("monthly outreach quota has an absolute 6,000-message Phoenix-month ceiling", () => {
+test("regular sequence-1 outreach uses the approved Phoenix-month ramp", () => {
   assert.equal(getPhoenixOutreachMonthKey(new Date("2026-09-01T06:59:59.000Z")), "2026-08");
   assert.equal(getPhoenixOutreachMonthKey(new Date("2026-09-01T07:00:00.000Z")), "2026-09");
   assert.equal(getOutreachMonthlyLimit(new Date("2026-08-31T12:00:00.000Z")), 6000);
   assert.equal(getOutreachMonthlyLimit(new Date("2026-09-30T12:00:00.000Z")), 6000);
-  assert.equal(getOutreachMonthlyLimit(new Date("2026-10-01T12:00:00.000Z")), 6000);
-  assert.equal(getOutreachMonthlyLimit(new Date("2026-11-01T12:00:00.000Z")), 6000);
-  assert.equal(getOutreachMonthlyLimit(new Date("2026-12-01T12:00:00.000Z")), 6000);
-  assert.equal(getOutreachMonthlyLimit(new Date("2027-01-01T12:00:00.000Z")), 6000);
-  assert.equal(getOutreachMonthlyLimit(new Date("2027-02-01T12:00:00.000Z")), 6000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-10-01T06:59:59.000Z")), 6000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-10-01T07:00:00.000Z")), 10_000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-11-01T07:00:00.000Z")), 20_000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-12-01T07:00:00.000Z")), 35_000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2027-01-01T06:59:59.000Z")), 35_000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2027-01-01T07:00:00.000Z")), 50_000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2027-02-01T12:00:00.000Z")), 50_000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2028-01-01T12:00:00.000Z")), 50_000);
   assert.equal(getLegacyOutreachMonthlySentCount(6100, 100), 6000);
   assert.equal(getLegacyOutreachMonthlySentCount(50, 75), 0);
+});
+
+test("regular sequence-1 reservations stop at each Phoenix-month ramp limit", () => {
+  for (const [date, limit] of [
+    ["2026-09-30T12:00:00.000Z", 6000],
+    ["2026-10-31T12:00:00.000Z", 10_000],
+    ["2026-11-30T12:00:00.000Z", 20_000],
+    ["2026-12-31T12:00:00.000Z", 35_000],
+    ["2027-01-31T12:00:00.000Z", 50_000],
+  ] as const) {
+    assert.equal(isRegularMonthlyOutreachLimitReached(limit - 1, new Date(date)), false);
+    assert.equal(isRegularMonthlyOutreachLimitReached(limit, new Date(date)), true);
+  }
 });
 
 test("duplicate recipient sequence policy blocks active and post-acceptance states", () => {

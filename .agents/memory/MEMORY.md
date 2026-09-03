@@ -22,8 +22,8 @@
 - [Unknown outreach sends](unknown-outreach-sends.md) — retain immutable sequence claims for transport errors and ambiguous provider responses; reconcile by stable custom key.
 - [Outreach delivery evidence](outreach-delivery-evidence.md) — “prepared” and `sent_at` are not proof of handoff; report SendGrid processed, delivered, bounced, and unresolved separately.
 - [Client outreach exclusions](client-outreach-exclusions.md) — Atmosphere Architects clients Tim Boyle and Mike Hudson must never receive Apex Grid outreach.
-- [Exact-time outreach scheduling](exact-time-outreach-scheduling.md) — target 150 regular + 50 hot-market messages at 8 AM Phoenix; verified hot-market extras are allowed under the monthly ceiling.
-- [Verified outreach library](verified-outreach-library.md) — build an auditable AZ-first, then CA prospect pool; cap daily sends at 150 under a hard 5,000 monthly ceiling.
+- [Exact-time outreach scheduling](exact-time-outreach-scheduling.md) — 100 Direct + 50 Public + 50 hot-market daily; regular monthly ramp rises to 50k, with Hot Lead follow-ups outside it.
+- [Verified outreach library](verified-outreach-library.md) — build an auditable AZ-first, then CA prospect pool; target 100 Direct + 50 Public + 50 Hot Market initial emails daily.
 - [Free-first outreach research](free-first-outreach-research.md) — use official registries and firm pages before targeted enrichment; never infer emails from patterns.
 - [Outreach stop serialization](outreach-stop-serialization.md) — evidence, suppression, sending, and seeding must share database locks so a stopped contact cannot be revived by a race.
 - [Reply/send dispatch ordering](reply-send-dispatch-ordering.md) — hold the per-email lock through provider dispatch; recheck persisted send state under it so replies can stop unsent follow-ups.

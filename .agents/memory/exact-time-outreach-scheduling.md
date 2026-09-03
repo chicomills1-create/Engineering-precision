@@ -15,11 +15,11 @@ Manual approvals and automatic preparation must allocate from the same date-keye
 
 **How to apply:** Route every initial-message approval through the shared window allocator, enforce one global Phoenix-day ceiling at dispatch, and keep campaign limits as an additional constraint rather than the global limit itself.
 
-The approved operating cycle is autonomous: target 100 Personal regular, 50 Public regular, and 50 verified hot-market initial messages without another approval. Verified hot-market contacts beyond 50 may also send, subject to an absolute 6,000-message Phoenix-month ceiling. After dispatch or safe provider reconciliation, prepare the next regular batch and replenish the hot-market lane.
+The approved operating cycle is autonomous: target 100 Direct regular, 50 Public regular, and 50 verified hot-market initial messages without another approval. Verified hot-market contacts beyond 50 may also send. Hot Lead follow-ups are additional to the 200-message initial-outreach baseline and do not consume the regular campaign's monthly ramp.
 
-**Why:** The user chose a 100 Personal + 50 Public + 50 hot-market baseline so daily outreach reaches 200 when every verified lane is filled, while allowing unusually strong verified hot-market opportunities beyond 50. Requiring approval again delays the schedule; retrying an unresolved dispatch without reconciliation risks duplicate emails.
+**Why:** The user chose a 100 Direct + 50 Public + 50 hot-market baseline so daily initial outreach reaches 200 when every verified lane is filled, while strong engaged Hot Leads receive follow-ups without reducing new-prospect capacity.
 
-**How to apply:** Treat approval as standing authorization for the reviewed process. Enforce the 100/50 regular split, reserve 50 verified hot-market slots, allow verified extras, leave unfilled hot-market slots empty, and stop absolutely at 6,000 per Phoenix month. Keep ambiguous provider outcomes blocked until SendGrid reconciliation proves whether each message was accepted, delivered, or safe to retry.
+**How to apply:** Treat approval as standing authorization for the reviewed process. Enforce 100 Direct, 50 Public, and 50 verified hot-market initial messages per day; allow verified hot-market extras and leave unfilled slots empty. Apply this Phoenix-month ramp to regular campaign emails: September 2026 6,000; October 10,000; November 20,000; December 35,000; January 2027 onward 50,000 maximum. Hot Lead follow-ups are outside the ramp and may raise the monthly total. Keep ambiguous provider outcomes blocked until SendGrid reconciliation proves whether each message was accepted, delivered, or safe to retry.
 
 An automated drip must create every approved sequence row before the initial delivery event; delivery handling can only schedule follow-ups that already exist. Reconcile missing rows idempotently on startup and derive their dates from verified delivery evidence.
 

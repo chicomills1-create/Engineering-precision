@@ -335,7 +335,7 @@ test("reply processing always wins or is retained around unsent follow-up dispat
     assert.equal(
       (await db.select().from(outreachSendReservationsTable)
         .where(eq(outreachSendReservationsTable.messageId, dispatchFirstFixture.followUp.id))).length,
-      1,
+      0,
     );
     assert.equal(
       (await db.select().from(outreachSequenceSendClaimsTable)
@@ -348,6 +348,41 @@ test("reply processing always wins or is retained around unsent follow-up dispat
     if (dispatchFirstInbound) await dispatchFirstInbound.catch(() => undefined);
     if (dispatchFirstWorker) await dispatchFirstWorker.catch(() => undefined);
     await cleanRaceFixture(dispatchFirstFixture);
+  }
+});
+
+test("a Hot Lead sequence-2 bypasses regular ledgers and releases its claim on rejection", async () => {
+  const fixture = await createRaceFixture();
+  try {
+    await assert.rejects(
+      sendApprovedOutreach(
+        fixture.followUp,
+        fixture.prospect,
+        fixture.campaign,
+        {
+          ...isolatedSendOptions,
+          dispatch: async () => new Response(null, { status: 400 }),
+        },
+      ),
+      /SendGrid rejected the message with status 400/,
+    );
+    assert.equal(
+      (await db.select().from(outreachSendReservationsTable)
+        .where(eq(outreachSendReservationsTable.messageId, fixture.followUp.id))).length,
+      0,
+    );
+    assert.equal(
+      (await db.select().from(outreachMonthlySendReservationsTable)
+        .where(eq(outreachMonthlySendReservationsTable.messageId, fixture.followUp.id))).length,
+      0,
+    );
+    assert.equal(
+      (await db.select().from(outreachSequenceSendClaimsTable)
+        .where(eq(outreachSequenceSendClaimsTable.messageId, fixture.followUp.id))).length,
+      0,
+    );
+  } finally {
+    await cleanRaceFixture(fixture);
   }
 });
 

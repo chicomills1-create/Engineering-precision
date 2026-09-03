@@ -23,15 +23,15 @@ Maintain three ordered library lanes: Personal, Public, and Hot Market. Personal
 
 The regular operating mix is 100 Personal plus 50 Public recipients per Phoenix day. The separate Hot Market lane targets 50 verified recipients; verified extras may send when available. Spend at most one Finder credit on one publicly confirmed reputable person and matching domain, never retry a failed lookup or switch people to force a result, and use clearly attributed official-site emails in zero-credit lanes.
 
-The approved baseline is 200 per Phoenix day: 150 regular plus 50 Hot Market. The hard Phoenix-calendar monthly ceiling remains 6,000. Verified Hot Market extras are allowed, but they consume the same monthly ceiling and therefore reduce remaining monthly capacity.
+The approved baseline is 200 initial campaign emails per Phoenix day: 100 Direct, 50 Public, and 50 Hot Market. Verified Hot Market extras are allowed. Hot Lead follow-ups are additional and do not consume the initial-campaign daily or monthly allocation.
 
 **Why:** Personal, Public, and Hot Market contacts have different evidence, urgency, and credit costs. Separate targets preserve the regular pipeline while prioritizing current opportunities without pretending unverified records are sendable.
 
-**How to apply:** Reserve 100 Personal and 50 Public regular slots, target 50 verified Hot Market messages, allow verified Hot Market extras, preserve paid-credit usage per lookup, stage messages for the next Phoenix 8:00 AM window, and stop all sends at 6,000 in a Phoenix month.
+**How to apply:** Reserve 100 Direct and 50 Public regular slots, target 50 verified Hot Market messages, allow verified Hot Market extras, preserve paid-credit usage per lookup, and stage messages for the next Phoenix 8:00 AM window. Apply the approved monthly ramp only to initial campaign emails.
 
 If a reputable direct person cannot be confirmed or their individual email cannot be obtained responsibly, retain the company in the Public lane and save any official company email found there. Never spend repeated credits trying to force a personal address, and never discard the company or its public email.
 
-The daily operating baseline is 200 new eligible recipients at 8:00 AM America/Phoenix time: 150 regular and 50 Hot Market. Verified Hot Market extras may raise the daily total, but the hard monthly ceiling remains 6,000. Every selection must exclude prior sends and all bounce, complaint, unsubscribe, and reply suppressions.
+The daily operating baseline is 200 new eligible recipients at 8:00 AM America/Phoenix time: 100 Direct, 50 Public, and 50 Hot Market. Verified Hot Market extras and eligible Hot Lead follow-ups may raise the daily and monthly total. Every selection must exclude prior sends and all bounce, complaint, unsubscribe, and reply suppressions.
 
 **Why:** Paid enrichment credits are finite, while requested national coverage is broader than the immediately sendable list. Separating the company universe from email enrichment and hot-market qualification prevents low-yield lookups or weak urgency signals from entering the send queue.
 
@@ -67,7 +67,7 @@ The paid-credit plan must be evaluated over a 30-day horizon. The regular Person
 
 **How to apply:** Report finder-credit coverage explicitly, target 100 Personal regular recipients, use public evidence first for Hot Market contacts, and do not spend beyond the existing per-day or 30-day credit plan.
 
-Public business emails published on official company websites remain a zero-credit regular lane with 50 reserved daily slots. The 150 regular target, 50 Hot Market target, monthly ceiling, and paid-credit ceiling are separate constraints.
+Public business emails published on official company websites remain a zero-credit regular lane with 50 reserved daily slots. The 150 Direct/Public target, 50 Hot Market target, initial-campaign monthly ramp, and paid-credit ceiling are separate constraints.
 
 **Why:** A company-published address can support compliant outreach without consuming a Finder credit; treating every send as a paid lookup wastes the enrichment budget and needlessly reduces future coverage.
 
