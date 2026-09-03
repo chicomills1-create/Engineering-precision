@@ -36,6 +36,7 @@ test("the approved hot-market copy leads with the builder value proposition", ()
   assert.equal(hotMarketOutreachSubject(), "Fast engineering support for active projects");
   assert.match(body, /veteran-owned, PE-led/);
   assert.match(body, /Civil, Structural, MEP, permit-response, and drafting support/);
+  assert.match(body, /Arizona-based, but licensed to support projects across 49 states, excluding Alaska/);
   assert.match(body, /consistent work/);
   assert.match(body, /clear competitive pricing/);
   assert.match(body, /12–24 hours/);
@@ -55,6 +56,7 @@ test("hot-market referral partners receive relationship-focused copy", () => {
   assert.match(body, /work alongside architects and design teams/);
   assert.match(body, /without taking over the client relationship/);
   assert.match(body, /veteran-owned, PE-led/);
+  assert.match(body, /Arizona-based, but licensed to support projects across 49 states, excluding Alaska/);
   assert.match(body, /current projects in your pipeline/);
 });
 
