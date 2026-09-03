@@ -22,8 +22,10 @@ import {
 } from "./outreach";
 
 test("the September 3 hot-market exception raises only that Phoenix day's global limit", () => {
-  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z")), 250);
-  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-04T15:00:00.000Z")), 200);
+  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z")), 200);
+  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z"), 50), 250);
+  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z"), 100), 300);
+  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-04T15:00:00.000Z"), 100), 200);
   assert.equal(getOutreachMonthlyLimit(), 6000);
 });
 

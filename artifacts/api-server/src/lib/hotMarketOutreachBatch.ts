@@ -175,6 +175,14 @@ export async function seedHotMarketOutreachBatch(options: {
     }).returning();
   }
   if (!campaign) throw new Error("Unable to create the hot-market outreach campaign");
+  if (campaign.dailyLimit !== HOT_MARKET_OUTREACH_CONTACTS.length) {
+    const [updatedCampaign] = await db.update(campaignsTable)
+      .set({ dailyLimit: HOT_MARKET_OUTREACH_CONTACTS.length })
+      .where(eq(campaignsTable.id, campaign.id))
+      .returning();
+    if (!updatedCampaign) throw new Error("Unable to update the hot-market campaign limit");
+    campaign = updatedCampaign;
+  }
 
   let queued = 0;
   for (const contact of HOT_MARKET_OUTREACH_CONTACTS) {

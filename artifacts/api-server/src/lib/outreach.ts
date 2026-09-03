@@ -1,6 +1,6 @@
 import { ReplitConnectors } from "@replit/connectors-sdk";
 import { openai } from "@workspace/integrations-openai-ai-server";
-import { and, count, eq, gte, inArray, isNotNull, isNull, ne, sql } from "drizzle-orm";
+import { and, count, eq, gte, inArray, isNotNull, isNull, lt, ne, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
@@ -28,6 +28,7 @@ import {
 } from "./outreachEligibility";
 import { withOutreachEmailLock } from "./outreachEmailLock";
 import { getVerifiedInitialDeliveryAt } from "./outreachSequence";
+import { HOT_MARKET_SOURCE_TYPE } from "./hotMarketOutreachBatch";
 
 export type GeneratedDraft = { subject: string; body: string; followUps: { subject: string; body: string }[] };
 
@@ -64,7 +65,6 @@ const INITIAL_RAMP_DAILY_LIMIT = 200;
 const INITIAL_RAMP_ACTIVE_DAYS = 3;
 const OUTREACH_MONTHLY_LIMIT = 6000;
 const ONE_TIME_HOT_MARKET_DATE = "2026-09-03";
-const ONE_TIME_HOT_MARKET_GLOBAL_LIMIT = 250;
 const DUPLICATE_EMAIL_SEQUENCE_STATUSES = [
   "sending",
   "needs_review",
@@ -122,9 +122,12 @@ export function getOutreachMonthlyLimit(): number {
   return OUTREACH_MONTHLY_LIMIT;
 }
 
-export function getGlobalOutreachDailyLimit(date = new Date()): number {
+export function getGlobalOutreachDailyLimit(
+  date = new Date(),
+  hotMarketMessageCount = 0,
+): number {
   return phoenixDateKey(date) === ONE_TIME_HOT_MARKET_DATE
-    ? ONE_TIME_HOT_MARKET_GLOBAL_LIMIT
+    ? INITIAL_RAMP_DAILY_LIMIT + Math.max(0, hotMarketMessageCount)
     : INITIAL_RAMP_DAILY_LIMIT;
 }
 
@@ -263,8 +266,22 @@ async function reserveOutreachSend(
       alreadySent?.value ?? 0,
       globallyReservedSent?.value ?? 0,
     );
+    const [hotMarketMessages] = await tx.select({ value: count() })
+      .from(outreachMessagesTable)
+      .where(and(
+        eq(outreachMessagesTable.sourceType, HOT_MARKET_SOURCE_TYPE),
+        gte(outreachMessagesTable.scheduledAt, dayStart),
+        lt(
+          outreachMessagesTable.scheduledAt,
+          new Date(dayStart.getTime() + 24 * 60 * 60 * 1000),
+        ),
+      ));
+    const globalDailyLimit = getGlobalOutreachDailyLimit(
+      now,
+      hotMarketMessages?.value ?? 0,
+    );
     let dailyReservationId: number | undefined;
-    for (let slot = legacySent + 1; slot <= getGlobalOutreachDailyLimit(now); slot += 1) {
+    for (let slot = legacySent + 1; slot <= globalDailyLimit; slot += 1) {
       const [inserted] = await tx.insert(outreachSendReservationsTable)
         .values({ messageId: message.id, quotaKey: dailyQuotaKey, slot })
         .onConflictDoNothing()
