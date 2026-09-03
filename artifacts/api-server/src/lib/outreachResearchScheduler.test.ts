@@ -9,6 +9,7 @@ import {
   MAX_DAILY_RESEARCH_PROSPECTS,
   OUTREACH_RESEARCH_LOCAL_HOUR,
   OUTREACH_RESEARCH_TIMEZONE,
+  usesGenericResearchPipeline,
 } from "./outreachResearchScheduler";
 import { RESEARCH_STATE_ORDER } from "./publicResearch";
 
@@ -67,4 +68,12 @@ test("national hot-market research rotates the remaining licensed states", () =>
   const second = getHotMarketResearchStates("2026-09-04");
   assert.deepEqual(second.slice(0, 2), ["AZ", "CA"]);
   assert.notDeepEqual(first.slice(2), second.slice(2));
+});
+
+test("routes the recurring hot-market campaign only through verified hot-market research", () => {
+  assert.equal(
+    usesGenericResearchPipeline({ name: "Verified National Hot-Market Outreach" }),
+    false,
+  );
+  assert.equal(usesGenericResearchPipeline({ name: "Architect outreach" }), true);
 });

@@ -23,6 +23,7 @@ import {
   processDueHotMarketResearch,
   processDueOutreachResearchSchedules,
 } from "./outreachResearchScheduler";
+import { ensureRecurringHotMarketResearchSchedule } from "./hotMarketResearch";
 import { prepareNextPhoenixOutreach } from "./outreachPreparation";
 import {
   reconcileUncertainOutreachMessages,
@@ -365,10 +366,11 @@ export function startOutreachWorker(): void {
 
   if (status.researchAutomationReady) {
     const runResearch = () => {
-      void Promise.all([
-        processDueOutreachResearchSchedules(),
-        processDueHotMarketResearch(),
-      ])
+      void ensureRecurringHotMarketResearchSchedule()
+        .then(() => Promise.all([
+          processDueOutreachResearchSchedules(),
+          processDueHotMarketResearch(),
+        ]))
         .then(([completedCount, hotMarket]) => {
           if (completedCount > 0) {
             logger.info({ completedCount }, "Prepared scheduled outreach research lists");

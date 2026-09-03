@@ -24,6 +24,7 @@ import {
   HOT_MARKET_DAILY_TARGET,
   stageVerifiedHotMarketProspects,
 } from "./hotMarketOutreachBatch";
+import { isRecurringHotMarketCampaign } from "./hotMarketResearch";
 import { getNextPhoenixPreparationTarget } from "./outreachPreparation";
 
 export const OUTREACH_RESEARCH_TIMEZONE = "America/Phoenix";
@@ -61,6 +62,10 @@ export function isResearchScheduleDue(
 ): boolean {
   if (!schedule.enabled || campaign.status !== "active") return false;
   return getPhoenixResearchWindow(now).localHour >= OUTREACH_RESEARCH_LOCAL_HOUR;
+}
+
+export function usesGenericResearchPipeline(campaign: Pick<Campaign, "name">): boolean {
+  return !isRecurringHotMarketCampaign(campaign);
 }
 
 export function getDailyResearchTarget(scheduleTarget: number, campaignLimit: number): number {
@@ -319,6 +324,7 @@ export async function processDueOutreachResearchSchedules(now = new Date()): Pro
   let completed = 0;
 
   for (const { schedule, campaign } of rows) {
+    if (!usesGenericResearchPipeline(campaign)) continue;
     if (!isResearchScheduleDue(schedule, campaign, now)) continue;
     const staleCutoff = new Date(now.getTime() - 30 * 60_000);
     const [recovered] = await db.update(outreachResearchScheduleRunsTable).set({
