@@ -1,0 +1,103 @@
+{
+  "researchedOn": "2026-09-03",
+  "scope": "High-priority Arizona builder signals not promoted to the verified outreach library",
+  "totalRejectedOrUnresolved": 16,
+  "records": [
+    {
+      "companyName": "Capstone Homes",
+      "officialDomain": "capstonehomesaz.com",
+      "reason": "The official site exposes a warranty-only address, not an appropriate public business outreach address, and no current named decision-maker was confirmed on an official page.",
+      "sourceUrls": ["https://capstonehomesaz.com/communities", "https://capstonehomesaz.com/contact-us"]
+    },
+    {
+      "companyName": "Century Communities, Inc.",
+      "officialDomain": "centurycommunities.com",
+      "reason": "The active Phoenix signal was reconfirmed, but the only official public address found was for investor relations rather than project or Arizona operations.",
+      "sourceUrls": ["https://investors.centurycommunities.com/news/news-details/2026/Century-Communities-Phoenix-Announces-2-February-Grand-Openings-in-Prime-East-and-West-Valley-Submarkets/default.aspx", "https://investors.centurycommunities.com/"]
+    },
+    {
+      "companyName": "Fairfield Homes",
+      "officialDomain": "fairfieldhomes.com",
+      "reason": "Official sales addresses were found, but no current named decision-maker and role could be confirmed from an official company source without guessing.",
+      "sourceUrls": ["https://fairfieldhomes.com/communities/", "https://fairfieldhomes.com/contact-us"]
+    },
+    {
+      "companyName": "Fulton Homes",
+      "officialDomain": "fultonhomes.com",
+      "reason": "The active communities were reconfirmed, but no suitable official public company-domain email and matching current decision-maker source were found.",
+      "sourceUrls": ["https://www.fultonhomes.com/our-communities"]
+    },
+    {
+      "companyName": "Insight Homes",
+      "officialDomain": "insighthomes.com",
+      "reason": "The under-construction signal was reconfirmed, but no suitable official public company-domain email and matching current decision-maker source were found.",
+      "sourceUrls": ["https://insighthomes.com/custom-home-galleries"]
+    },
+    {
+      "companyName": "KB Home",
+      "officialDomain": "kbhome.com",
+      "reason": "Official public addresses were limited to customer relations, media, and investor relations; none was an appropriate Arizona project outreach address tied to the relevant decision-maker.",
+      "sourceUrls": ["https://www.kbhome.com/new-homes-tucson", "https://kbhome.com/corporate-contacts", "https://www.kbhome.com/media-contacts"]
+    },
+    {
+      "companyName": "K. Hovnanian Homes",
+      "officialDomain": "khov.com",
+      "reason": "The current Phoenix community signal was reconfirmed, but only privacy and accessibility addresses were publicly exposed on the official site.",
+      "sourceUrls": ["https://www.khov.com/new-construction-homes/arizona/phoenix-city/serenity-at-sonoran-foothills", "https://www.khov.com/privacy-policy/", "https://www.khov.com/accessibility"]
+    },
+    {
+      "companyName": "Lennar",
+      "officialDomain": "lennar.com",
+      "reason": "Official public addresses found were for media, investors, and board feedback rather than Arizona construction or project decisions.",
+      "sourceUrls": ["https://www.lennar.com/new-homes/arizona/phoenix", "https://www.lennar.com/new-homes/arizona/tucson", "https://newsroom.lennar.com/media-contact"]
+    },
+    {
+      "companyName": "LGI Homes",
+      "officialDomain": "lgihomes.com",
+      "reason": "A general company address is public, but the official Arizona leader evidence located was from a 2022 announcement and was not sufficient to prove the person remains the current decision-maker.",
+      "sourceUrls": ["https://www.lgihomes.com/arizona/tucson", "https://www.lgihomes.com/request-info", "https://investor.lgihomes.com/news-releases/news-release-details/lgi-homes-announces-grand-opening-sc-ranch-tucson"]
+    },
+    {
+      "companyName": "Mattamy Homes",
+      "officialDomain": "mattamyhomes.com",
+      "reason": "The public community address found uses a different corporate domain and no current named Arizona decision-maker was confirmed on an official page.",
+      "sourceUrls": ["https://mattamyhomes.com/arizona/phoenix/phoenix/baker-farms-d30", "https://mattamyhomes.com/arizona/tucson/tucson/blackhawk-3000s"]
+    },
+    {
+      "companyName": "Meritage Homes",
+      "officialDomain": "meritagehomes.com",
+      "reason": "The active Phoenix and Tucson inventory signals were reconfirmed, but no suitable official public Arizona project email and matching current decision-maker source were found.",
+      "sourceUrls": ["https://www.meritagehomes.com/state/az/phoenix", "https://www.meritagehomes.com/state/az/tucson"]
+    },
+    {
+      "companyName": "Richmond American Homes",
+      "officialDomain": "richmondamerican.com",
+      "reason": "A public questions address exists, but no current named Arizona construction decision-maker was confirmed from an official company source.",
+      "sourceUrls": ["https://www.richmondamerican.com/arizona/phoenix-new-homes", "https://www.richmondamerican.com/agent-blog/contact/"]
+    },
+    {
+      "companyName": "Robson Resort Communities",
+      "officialDomain": "robson.com",
+      "reason": "The official site exposes general, HOA, privacy, and publishing addresses, but no suitable project-outreach address paired with a current relevant decision-maker.",
+      "sourceUrls": ["https://robson.com/communities/saddlebrooke-ranch", "https://robson.com/contact", "https://robson.com/privacy-statement"]
+    },
+    {
+      "companyName": "Shea Homes",
+      "officialDomain": "sheahomes.com",
+      "reason": "The official site uses inquiry forms and exposes only privacy/accessibility addresses, which are not appropriate for outreach.",
+      "sourceUrls": ["https://www.sheahomes.com/new-homes/arizona/phoenix-area", "https://www.sheahomes.com/new-homes-sales/general-inquiries"]
+    },
+    {
+      "companyName": "Taylor Morrison",
+      "officialDomain": "taylormorrison.com",
+      "reason": "The current Phoenix signal was reconfirmed, but the public addresses found were for investor and media relations rather than Arizona project decisions.",
+      "sourceUrls": ["https://www.taylormorrison.com/az/phoenix", "https://investors.taylormorrison.com/resources/contact-us/default.aspx"]
+    },
+    {
+      "companyName": "Woodside Homes",
+      "officialDomain": "woodsidehomes.com",
+      "reason": "The official Arizona inventory was reconfirmed, but the site provides a form/phone for general contact and only a privacy email publicly.",
+      "sourceUrls": ["https://woodsidehomes.com/findmyhome/arizona", "https://www.woodsidehomes.com/contact-us", "https://www.woodsidehomes.com/do-not-sell-my-info"]
+    }
+  ]
+}

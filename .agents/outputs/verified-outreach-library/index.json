@@ -10,11 +10,11 @@
   },
   "counts": {
     "personal": 190,
-    "public": 99,
-    "total": 289,
+    "public": 101,
+    "total": 291,
     "pausedAutoReplyRecords": 2,
     "publicSeedValidated": 4,
-    "publicManualReviewRequired": 74,
+    "publicManualReviewRequired": 76,
     "publicQuarantined": 21
   },
   "lastFreePublicPass": {
@@ -29,6 +29,13 @@
     "paidLookups": 1,
     "paidEmailsReturned": 0,
     "verifiedPersonalAdded": 0
+  },
+  "lastArizonaSignalVerification": {
+    "researchedOn": "2026-09-03",
+    "signalsRechecked": 18,
+    "publicLeadsAdded": 2,
+    "rejectedOrUnresolved": 16,
+    "creditsUsed": 0
   },
   "contactCorrections": {
     "temporaryAutoReplies": [

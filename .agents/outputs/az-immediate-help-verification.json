@@ -1,0 +1,57 @@
+{
+  "researchedOn": "2026-09-03",
+  "scope": "Verification of the 18 high-priority Arizona builder signals in az-immediate-help-research.json",
+  "signalsRechecked": 18,
+  "findyMailCreditsUsed": 0,
+  "fullyVerifiedPublicLeads": 2,
+  "records": [
+    {
+      "companyName": "A.F. Sterling",
+      "website": "https://www.afsterling.com/",
+      "city": "Tucson",
+      "state": "AZ",
+      "audience": "builder",
+      "contactName": "Jon Fenton",
+      "contactTitle": "President/Principal",
+      "contactEmail": "info@afsterling.com",
+      "emailLane": "public",
+      "companySourceUrl": "https://www.afsterling.com/",
+      "needSignalSourceUrl": "https://www.afsterling.com/communities",
+      "contactSourceUrl": "https://www.afsterling.com/about/",
+      "emailSourceUrl": "https://www.afsterling.com/",
+      "needSignals": "The official communities page documents active Tucson communities.",
+      "approvalStatus": "pending_manual_approval",
+      "eligibilityChecks": {
+        "duplicateLibraryRecord": false,
+        "priorOutreach": false,
+        "suppressed": false,
+        "currentClient": false,
+        "departedContactEvidence": false
+      }
+    },
+    {
+      "companyName": "Tri Pointe Homes",
+      "website": "https://www.tripointehomes.com/",
+      "city": "Goodyear",
+      "state": "AZ",
+      "audience": "builder",
+      "contactName": "James Attwood",
+      "contactTitle": "Division President, Tri Pointe Homes Arizona",
+      "contactEmail": "arizona@tripointehomes.com",
+      "emailLane": "public",
+      "companySourceUrl": "https://www.tripointehomes.com/",
+      "needSignalSourceUrl": "https://www.tripointehomes.com/az/phoenix-metro/abel-ranch",
+      "contactSourceUrl": "https://investors.tripointehomes.com/divisions/",
+      "emailSourceUrl": "https://investors.tripointehomes.com/contact-us",
+      "needSignals": "The official Abel Ranch page marks the Camerano and Navarre communities in Goodyear as Now Selling.",
+      "approvalStatus": "pending_manual_approval",
+      "eligibilityChecks": {
+        "duplicateLibraryRecord": false,
+        "priorOutreach": false,
+        "suppressed": false,
+        "currentClient": false,
+        "departedContactEvidence": false
+      }
+    }
+  ]
+}
