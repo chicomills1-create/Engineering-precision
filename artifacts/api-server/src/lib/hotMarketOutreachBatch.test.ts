@@ -15,6 +15,7 @@ import {
   assertVerifiedOutreachBatch,
   isCompanyDomainEmail,
 } from "./outreachContactValidation";
+import { approvedOutreachBody } from "./verifiedOutreachBatch";
 
 test("the one-time Arizona hot-market batch contains every currently verified new contact", () => {
   assert.equal(HOT_MARKET_DAILY_TARGET, 50);
@@ -43,17 +44,11 @@ test("the approved hot-market copy leads with the builder value proposition", ()
   )!;
   const body = hotMarketOutreachBody(builder);
   assert.equal(hotMarketOutreachSubject(), "Fast engineering support for active projects");
-  assert.match(body, /veteran-owned, PE-led/);
-  assert.match(body, /Civil, Structural, MEP, permit-response, and drafting support/);
-  assert.match(body, /Arizona-based, but licensed to support projects across 49 states/);
-  assert.match(body, /consistent work/);
-  assert.match(body, /clear competitive pricing/);
-  assert.match(body, /12–24 hours/);
-  assert.match(body, /current projects in your pipeline/);
-  assert.doesNotMatch(body, /amazing price|military-backed/i);
+  assert.equal(body, approvedOutreachBody(builder.contactName));
+  assert.doesNotMatch(body, /drainage|utility|site issue|project-specific/i);
 });
 
-test("hot-market referral partners receive relationship-focused copy", () => {
+test("hot-market referral partners use the same approved shared copy", () => {
   const partner = HOT_MARKET_OUTREACH_CONTACTS.find(
     (contact) => contact.audience === "architect",
   )!;
@@ -62,11 +57,7 @@ test("hot-market referral partners receive relationship-focused copy", () => {
     hotMarketOutreachSubject(partner.audience),
     "A reliable engineering partner for active projects",
   );
-  assert.match(body, /work alongside architects and design teams/);
-  assert.match(body, /without taking over the client relationship/);
-  assert.match(body, /veteran-owned, PE-led/);
-  assert.match(body, /Arizona-based, but licensed to support projects across 49 states/);
-  assert.match(body, /current projects in your pipeline/);
+  assert.equal(body, approvedOutreachBody(partner.contactName));
 });
 
 test("hot-market personalization does not narrow the firm to Scottsdale", () => {
