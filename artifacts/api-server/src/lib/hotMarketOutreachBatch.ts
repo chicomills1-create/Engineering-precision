@@ -117,10 +117,8 @@ export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts
     ).trim(),
   }));
 
-export function hotMarketOutreachSubject(_audience = "builder", state = "AZ"): string {
-  return state === "AZ"
-    ? "A reliable engineering partner for Arizona projects"
-    : "A reliable engineering partner for active projects";
+export function hotMarketOutreachSubject(_audience = "builder", _state = "AZ"): string {
+  return "A reliable engineering partner for active projects";
 }
 
 export function isHotMarketSourceType(sourceType: string | null): boolean {

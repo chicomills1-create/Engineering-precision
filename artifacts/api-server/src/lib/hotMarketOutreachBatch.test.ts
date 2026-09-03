@@ -45,7 +45,7 @@ test("the approved hot-market copy leads with the builder value proposition", ()
   const body = hotMarketOutreachBody(builder);
   assert.equal(
     hotMarketOutreachSubject(),
-    "A reliable engineering partner for Arizona projects",
+    "A reliable engineering partner for active projects",
   );
   assert.equal(body, approvedOutreachBody(builder.contactName));
   assert.doesNotMatch(body, /drainage|utility|site issue|project-specific/i);
@@ -58,12 +58,16 @@ test("hot-market referral partners use the same approved shared copy", () => {
   const body = hotMarketOutreachBody(partner);
   assert.equal(
     hotMarketOutreachSubject(partner.audience),
-    "A reliable engineering partner for Arizona projects",
+    "A reliable engineering partner for active projects",
   );
   assert.equal(body, approvedOutreachBody(partner.contactName));
 });
 
-test("national hot-market contacts use the national subject", () => {
+test("all hot-market contacts use the consistent national subject", () => {
+  assert.equal(
+    hotMarketOutreachSubject("builder", "AZ"),
+    "A reliable engineering partner for active projects",
+  );
   assert.equal(
     hotMarketOutreachSubject("builder", "CA"),
     "A reliable engineering partner for active projects",
