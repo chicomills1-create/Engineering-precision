@@ -1,0 +1,30 @@
+{
+  "researchedOn": "2026-09-03",
+  "scope": "Unresolved records from the requested hot-market commercial-contractor recheck. Official company websites and official company-controlled pages only; no directory, paid-enrichment, inferred-address, or form-only contact evidence was used.",
+  "rejectedRecords": 2,
+  "records": [
+    {
+      "companyName": "LMF Construction",
+      "website": "https://lmfconstruction.com/",
+      "officialEvidenceCheckedUrls": [
+        "https://lmfconstruction.com/our-team",
+        "https://www.lmfconstruction.com/projects",
+        "https://lmfconstruction.com/contact"
+      ],
+      "rejectionReason": "Unresolved: LMF's official team page identifies its leadership and its projects page lists Texas projects, but the official material checked does not establish a current Arizona/local leader, current Arizona project or business activity, or a visibly published suitable company-domain email. The contact page is form-only.",
+      "personalizationSentence": "LMF's multifamily construction experience could become relevant if it establishes a current Arizona project and publishes an appropriate business contact route."
+    },
+    {
+      "companyName": "DPR Construction",
+      "website": "https://www.dpr.com/",
+      "officialEvidenceCheckedUrls": [
+        "https://www.dpr.com/company/locations/phoenix-arizona",
+        "https://www.dpr.com/company/leadership/nathan-lentz",
+        "https://www.dpr.com/contact-us",
+        "https://www.dpr.com/press-room"
+      ],
+      "rejectionReason": "Unresolved: DPR's official Phoenix and leadership pages establish its Arizona operation and Nathan Lentz as Arizona Business Unit Leader, but the official contact pages checked provide a form and pr@dpr.com. The latter is expressly a press/media address and is excluded; no suitable public company-domain email was located.",
+      "personalizationSentence": "DPR's Phoenix technical-building platform and Arizona business-unit leadership would otherwise make it a strong hot-market prospect once a suitable public business email is available."
+    }
+  ]
+}

@@ -7,8 +7,10 @@ import {
   prospectsTable,
 } from "@workspace/db";
 import customBuilderData from "../../../../.agents/outputs/hot-market-custom-builders-verified.json";
+import customBuilderRecheckData from "../../../../.agents/outputs/hot-market-custom-builders-recheck-verified.json";
 import localContractorData from "../../../../.agents/outputs/hot-market-local-contractors-verified.json";
 import majorContractorData from "../../../../.agents/outputs/hot-market-major-contractors-verified.json";
+import commercialRecheckData from "../../../../.agents/outputs/hot-market-commercial-recheck-verified.json";
 import { assertVerifiedOutreachBatch } from "./outreachContactValidation";
 
 export const HOT_MARKET_SOURCE_TYPE = "hot_market_one_time";
@@ -52,8 +54,10 @@ function slug(value: string): string {
 
 const sourceContacts: SourceContact[] = [
   ...(customBuilderData as SourceContact[]),
+  ...(customBuilderRecheckData as SourceContact[]),
   ...((localContractorData as { records: SourceContact[] }).records),
   ...((majorContractorData as { records: SourceContact[] }).records),
+  ...((commercialRecheckData as { records: SourceContact[] }).records),
 ];
 
 export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts
@@ -158,7 +162,10 @@ export async function seedHotMarketOutreachBatch(options: {
     return { state: "expired", queued: 0 };
   }
 
-  assertVerifiedOutreachBatch(HOT_MARKET_OUTREACH_CONTACTS, 14);
+  assertVerifiedOutreachBatch(
+    HOT_MARKET_OUTREACH_CONTACTS,
+    HOT_MARKET_OUTREACH_CONTACTS.length,
+  );
 
   let [campaign] = await db.select().from(campaignsTable)
     .where(eq(campaignsTable.name, CAMPAIGN_NAME))

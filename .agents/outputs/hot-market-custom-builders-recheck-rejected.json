@@ -1,0 +1,19 @@
+[
+  {
+    "companyName": "UR Development",
+    "website": "https://urdevelopment.com/",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "Luxury home-development CEO",
+    "contactName": "Angel Ureta",
+    "contactTitle": "CEO",
+    "contactEmail": null,
+    "companySourceUrl": "https://urdevelopment.com/",
+    "needSignalSourceUrl": "https://urdevelopment.com/upcoming-projects/",
+    "contactSourceUrl": "https://urdevelopment.com/about-us",
+    "emailSourceUrl": "https://urdevelopment.com/contact-us/",
+    "needSignals": "UR Development’s official upcoming-projects page identifies Gold Manor, Caliza, and Maverick in Paradise Valley as in Planning and Design, and the home page also lists Caliza and Gold Dust projects as Under Construction.",
+    "personalizationSentence": null,
+    "rejectionReason": "Unresolved: the official site identifies Angel Ureta as CEO and shows active Paradise Valley projects, but no publicly published @urdevelopment.com email was found. Its official contact page publishes only info@urinvestments.com, which is not the requested company-domain email, and otherwise provides a form."
+  }
+]

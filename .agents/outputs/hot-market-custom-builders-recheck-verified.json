@@ -1,0 +1,34 @@
+[
+  {
+    "companyName": "Peak One Builders",
+    "website": "https://peakonebuilders.com/",
+    "city": "Scottsdale",
+    "state": "AZ",
+    "audience": "Luxury custom-home builder owner",
+    "contactName": "Michael Christensen",
+    "contactTitle": "Owner",
+    "contactEmail": "info@peakonebuilders.com",
+    "companySourceUrl": "https://peakonebuilders.com/",
+    "needSignalSourceUrl": "https://peakonebuilders.com/",
+    "contactSourceUrl": "https://peakonebuilders.com/team",
+    "emailSourceUrl": "https://www.facebook.com/peakonebuilders",
+    "needSignals": "Peak One’s official website currently promotes award-winning luxury custom homes and states that it manages design, architecture, engineering, and construction for homeowners building or remodeling in Scottsdale, Phoenix, and surrounding Arizona communities.",
+    "personalizationSentence": "Peak One’s integrated approach to luxury custom homes—bringing design, architecture, engineering, and construction under one roof—stood out."
+  },
+  {
+    "companyName": "Cullum Homes",
+    "website": "https://cullumhomes.com/",
+    "city": "Scottsdale",
+    "state": "AZ",
+    "audience": "Luxury custom-home builder founder",
+    "contactName": "Rod Cullum",
+    "contactTitle": "Founder",
+    "contactEmail": "inquiry@cullumhomes.com",
+    "companySourceUrl": "https://cullumhomes.com/",
+    "needSignalSourceUrl": "https://cullumhomes.com/available-homes",
+    "contactSourceUrl": "https://cullumhomes.com/about",
+    "emailSourceUrl": "https://www.facebook.com/cullum.homes",
+    "needSignals": "Cullum’s official available-homes page currently lists multiple move-in-ready, fully furnished for-sale model homes, including The Mirari in Village at Seven Desert Mountain and Ironwood Escape in Ironwood Golf Villas.",
+    "personalizationSentence": "Cullum’s current collection of fully furnished, move-in-ready homes—including The Mirari at Village at Seven Desert Mountain—provides a timely project context."
+  }
+]
