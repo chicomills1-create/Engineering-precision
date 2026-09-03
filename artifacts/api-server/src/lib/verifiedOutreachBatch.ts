@@ -15,7 +15,7 @@ import { VERIFIED_OUTREACH_CONTACTS_SEP_02 } from "./verifiedOutreachContactsSep
 import { VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC } from "./verifiedOutreachContactsSep02Public";
 
 const CAMPAIGN_NAME = "Approved 8 AM Outreach - August 2026";
-const SUBJECT = "Need stamped engineering without the usual wait or cost?";
+const SUBJECT = "A reliable engineering partner for active projects";
 export const REGULAR_OUTREACH_DAILY_TARGET = 150;
 export const VERIFIED_OUTREACH_CONTACTS = [
   ...LEGACY_VERIFIED_OUTREACH_CONTACTS,

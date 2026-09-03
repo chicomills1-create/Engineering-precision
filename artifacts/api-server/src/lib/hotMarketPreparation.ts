@@ -181,7 +181,7 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
             prospectId: currentProspect.id,
             campaignId: campaign.id,
             sequenceNumber: 1,
-            subject: hotMarketOutreachSubject(currentProspect.audience),
+            subject: hotMarketOutreachSubject(currentProspect.audience, currentProspect.state),
             body: hotMarketOutreachBody({
               contactName: currentProspect.contactName!,
               personalization,
@@ -194,6 +194,7 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
           ...hotMarketOutreachFollowUps(
             currentProspect.contactName!,
             currentProspect.audience,
+            currentProspect.state,
           ).map((followUp) => ({
             prospectId: currentProspect.id,
             campaignId: campaign.id,

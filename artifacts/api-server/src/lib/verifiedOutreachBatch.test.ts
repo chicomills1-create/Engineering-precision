@@ -3,6 +3,7 @@ import { test } from "node:test";
 import {
   approvedOutreachBody,
   approvedOutreachFollowUpMessages,
+  approvedOutreachSubject,
   VERIFIED_OUTREACH_CONTACTS,
 } from "./verifiedOutreachBatch";
 import { VERIFIED_OUTREACH_CONTACTS_AUG_30 } from "./verifiedOutreachContactsAug30";
@@ -148,6 +149,10 @@ test("the seed validator quarantines duplicate identities before database writes
 });
 
 test("the approved body uses only the approved pipeline closing", () => {
+  assert.equal(
+    approvedOutreachSubject(),
+    "A reliable engineering partner for active projects",
+  );
   const body = approvedOutreachBody("Alex Rivera");
   assert.match(body, /^Hi Alex,/);
   assert.match(body, /Arizona-based, but licensed to support projects across 49 states/);

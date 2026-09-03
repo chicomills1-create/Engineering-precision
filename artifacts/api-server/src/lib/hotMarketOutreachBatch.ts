@@ -117,10 +117,10 @@ export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts
     ).trim(),
   }));
 
-export function hotMarketOutreachSubject(audience = "builder", _state = "AZ"): string {
-  return audience === "architect"
-    ? "A reliable engineering partner for active projects"
-    : SUBJECT;
+export function hotMarketOutreachSubject(_audience = "builder", state = "AZ"): string {
+  return state === "AZ"
+    ? "A reliable engineering partner for Arizona projects"
+    : "A reliable engineering partner for active projects";
 }
 
 export function isHotMarketSourceType(sourceType: string | null): boolean {
@@ -348,7 +348,7 @@ export async function seedHotMarketOutreachBatch(options: {
           prospectId: prospect.id,
           campaignId: campaign.id,
           sequenceNumber: 1,
-          subject: hotMarketOutreachSubject(contact.audience),
+          subject: hotMarketOutreachSubject(contact.audience, contact.state),
           body: hotMarketOutreachBody(contact),
           status: "approved",
           scheduledAt: HOT_MARKET_SEND_AT,

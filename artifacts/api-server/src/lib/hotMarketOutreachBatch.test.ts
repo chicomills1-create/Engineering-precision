@@ -43,7 +43,10 @@ test("the approved hot-market copy leads with the builder value proposition", ()
     (contact) => contact.audience === "builder",
   )!;
   const body = hotMarketOutreachBody(builder);
-  assert.equal(hotMarketOutreachSubject(), "Fast engineering support for active projects");
+  assert.equal(
+    hotMarketOutreachSubject(),
+    "A reliable engineering partner for Arizona projects",
+  );
   assert.equal(body, approvedOutreachBody(builder.contactName));
   assert.doesNotMatch(body, /drainage|utility|site issue|project-specific/i);
 });
@@ -55,9 +58,16 @@ test("hot-market referral partners use the same approved shared copy", () => {
   const body = hotMarketOutreachBody(partner);
   assert.equal(
     hotMarketOutreachSubject(partner.audience),
-    "A reliable engineering partner for active projects",
+    "A reliable engineering partner for Arizona projects",
   );
   assert.equal(body, approvedOutreachBody(partner.contactName));
+});
+
+test("national hot-market contacts use the national subject", () => {
+  assert.equal(
+    hotMarketOutreachSubject("builder", "CA"),
+    "A reliable engineering partner for active projects",
+  );
 });
 
 test("hot-market personalization does not narrow the firm to Scottsdale", () => {

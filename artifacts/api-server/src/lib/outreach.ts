@@ -31,9 +31,14 @@ import { getVerifiedInitialDeliveryAt } from "./outreachSequence";
 import {
   HOT_MARKET_DAILY_TARGET,
   HOT_MARKET_SOURCE_TYPES,
+  hotMarketOutreachSubject,
   isHotMarketSourceType,
 } from "./hotMarketOutreachBatch";
-import { REGULAR_OUTREACH_DAILY_TARGET } from "./verifiedOutreachBatch";
+import {
+  approvedOutreachBody,
+  approvedOutreachSubject,
+  REGULAR_OUTREACH_DAILY_TARGET,
+} from "./verifiedOutreachBatch";
 
 export type GeneratedDraft = { subject: string; body: string; followUps: { subject: string; body: string }[] };
 
@@ -439,7 +444,21 @@ export async function sendApprovedOutreach(
   const unsubscribeUrl = options.unsubscribeUrls?.unsubscribeUrl ?? makeUnsubscribeUrl(email);
   const oneClickUrl = options.unsubscribeUrls?.oneClickUnsubscribeUrl ?? makeOneClickUnsubscribeUrl(email);
   if (!unsubscribeUrl || !oneClickUrl) throw new Error("Unsubscribe signing is not configured");
-  const emailContent = renderBrandedEmail(message.body, unsubscribeUrl, currentProspect.contactName ?? undefined);
+  const usesCurrentSharedCopy =
+    message.sequenceNumber === 1
+    && (
+      isHotMarketSourceType(message.sourceType)
+      || currentCampaign?.bodyTemplate === "Approved personalized Apex Grid outreach copy"
+    );
+  const currentSubject = usesCurrentSharedCopy
+    ? isHotMarketSourceType(message.sourceType)
+      ? hotMarketOutreachSubject(currentProspect.audience, currentProspect.state)
+      : approvedOutreachSubject()
+    : message.subject;
+  const currentBody = usesCurrentSharedCopy
+    ? approvedOutreachBody(currentProspect.contactName ?? "")
+    : message.body;
+  const emailContent = renderBrandedEmail(currentBody, unsubscribeUrl, currentProspect.contactName ?? undefined);
   const from = options.fromEmail?.trim() || process.env.OUTREACH_FROM_EMAIL;
   if (!from) throw new Error("OUTREACH_FROM_EMAIL is not configured");
   const replyTo = options.replyToEmail?.trim() || process.env.OUTREACH_REPLY_TO_EMAIL?.trim() || from;
@@ -487,7 +506,7 @@ export async function sendApprovedOutreach(
       }],
       from: { email: from, name: "Apex Grid Engineering" },
       reply_to: { email: replyTo, name: "Apex Grid Engineering" },
-      subject: message.subject,
+      subject: currentSubject,
       content: [
         { type: "text/plain", value: emailContent.plainText },
         { type: "text/html", value: emailContent.html },
