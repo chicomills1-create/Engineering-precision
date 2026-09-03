@@ -39,7 +39,7 @@ If a focused engineering issue is taking too long or costing more than it should
 
 We’re Arizona-based, but licensed to support projects across 49 states, so we can stay useful when your team or partners work outside Arizona.
 
-We right-size the scope, review what you already have, and provide clear pricing before work begins. Click the URL to visit our page: https://apexgrideng.com.
+ We right-size the scope, review what you already have, and provide clear pricing before work begins.
 
 Do you have any current projects in your pipeline that you would like us to review?`;
 }
@@ -89,27 +89,27 @@ export function approvedOutreachFollowUpMessages(contactName: string): Array<{
       subject: "Following up on engineering support",
       body: `Hi ${firstName},
 
-Just following up in case an engineering review or permit response would help on a current project.
+ Just following up in case an engineering review or permit response would help on a current project.
 
-Click the URL to visit our page: https://apexgrideng.com.`,
+ Would it be useful for us to review a current project?`,
     },
     {
       sequenceNumber: 3,
       subject: "Checking in on your current projects",
       body: `Hi ${firstName},
 
-I wanted to check whether your team has a current project where focused engineering support could help.
+ I wanted to check whether your team has a current project where focused engineering support could help.
 
-Click the URL to visit our page: https://apexgrideng.com.`,
+ Would it be useful for us to review a current project?`,
     },
     {
       sequenceNumber: 4,
       subject: "Closing the loop",
       body: `Hi ${firstName},
 
-I’ll close the loop here. If an engineering need comes up, Apex Grid is available for focused Civil, Structural, or MEP support.
+ I’ll close the loop here. If an engineering need comes up, Apex Grid is available for focused Civil, Structural, or MEP support.
 
-Click the URL to visit our page: https://apexgrideng.com.`,
+ If a project comes up that you would like us to review, reply with the basic details and we will take a look.`,
     },
   ];
 }

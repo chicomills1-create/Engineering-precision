@@ -36,6 +36,7 @@ import {
 } from "./hotMarketOutreachBatch";
 import {
   approvedOutreachBody,
+  approvedOutreachFollowUpMessages,
   approvedOutreachSubject,
   REGULAR_OUTREACH_DAILY_TARGET,
 } from "./verifiedOutreachBatch";
@@ -381,7 +382,28 @@ export async function generateProspectDraft(prospect: Prospect): Promise<Generat
     model: "gpt-5.6-luna",
     max_completion_tokens: 8192,
     response_format: { type: "json_object" },
-    messages: [{ role: "system", content: "Return strict JSON only: {\"subject\":\"...\",\"body\":\"...\",\"followUps\":[{\"subject\":\"...\",\"body\":\"...\"},{\"subject\":\"...\",\"body\":\"...\"},{\"subject\":\"...\",\"body\":\"...\"}]}. Write concise, specific professional B2B outreach for Apex Grid Engineering—not a generic introduction. Open with a natural greeting using the supplied contactName, not 'Hi there' or a generic salutation. Keep the initial email to roughly 80-120 words in three short paragraphs: lead with the prospect's one concrete pain point, state the one relevant Apex Grid solution, then end with one simple question. Make speed and price clear without overexplaining: engineering support can be too slow, oversized scopes can be extremely expensive, and Apex Grid right-sizes the work with clear pricing before it starts. Mention only the capability relevant to the supplied need, such as plan-review response, field investigation, permit-ready or PE-stamped Civil, Structural, or MEP documents, targeted code analysis, or coordination. Apex Grid's licensed Civil, Structural, and MEP PEs can stamp our designs. When the supplied need fits a focused review or design response, it is accurate to say we typically provide a 12-24 hour turnaround; do not present that timing as a guarantee for a complex or undefined scope. A brief veteran-owned mention is optional and should never replace the project-specific reason to respond. Include this exact positioning sentence once in the initial email: 'We’re Arizona-based, but licensed to support projects across 49 states, so we can stay useful when your team or partners work outside Arizona.' Include this exact simple sentence once in the email: 'Click the URL to visit our page: https://apexgrideng.com.' Do not offer, mention, schedule, or book a 15-minute call or any similar call CTA; the website sentence replaces that CTA. Avoid long capability lists, marketing language, competitor comparisons, unsupported savings claims, repeated points, and lists of hypothetical issues in the closing. Use this exact preferred closing question when it fits: 'Do you have any current projects in your pipeline that you would like us to review?' Do not use the old closing about a plan-review comment, field condition, or a project waiting on engineering answers. Use only supplied public research notes and the explicitly provided Apex Grid capabilities; never invent claims, projects, prices, turnaround times, ownership status, or facts. Keep follow-ups shorter than the initial email and focused on one next step." },
+    messages: [{
+      role: "system",
+      content: [
+        "Return strict JSON only: {\"subject\":\"...\",\"body\":\"...\",\"followUps\":[{\"subject\":\"...\",\"body\":\"...\"},{\"subject\":\"...\",\"body\":\"...\"},{\"subject\":\"...\",\"body\":\"...\"}]} .",
+        "Write concise, specific professional B2B outreach for Apex Grid Engineering—not a generic introduction.",
+        "Open with a natural greeting using the supplied contactName, not 'Hi there' or a generic salutation.",
+        "Keep the initial email to roughly 80-120 words in three short paragraphs: lead with the prospect's one concrete pain point, state the one relevant Apex Grid solution, then end with one simple question.",
+        "Make speed and price clear without overexplaining: engineering support can be too slow, oversized scopes can be extremely expensive, and Apex Grid right-sizes the work with clear pricing before it starts.",
+        "Mention only the capability relevant to the supplied need, such as plan-review response, field investigation, permit-ready or PE-stamped Civil, Structural, or MEP documents, targeted code analysis, or coordination.",
+        "Apex Grid's licensed Civil, Structural, and MEP PEs can stamp our designs.",
+        "When the supplied need fits a focused review or design response, it is accurate to say we typically provide a 12-24 hour turnaround; do not present that timing as a guarantee for a complex or undefined scope.",
+        "A brief veteran-owned mention is optional and should never replace the project-specific reason to respond.",
+        "Include this exact positioning sentence once in the initial email: 'We’re Arizona-based, but licensed to support projects across 49 states, so we can stay useful when your team or partners work outside Arizona.'",
+        "Do not include a website link or ask recipients to click through; keep the call to action as a reply.",
+        "Do not offer, mention, schedule, or book a 15-minute call or any similar call CTA.",
+        "Avoid long capability lists, marketing language, competitor comparisons, unsupported savings claims, repeated points, and lists of hypothetical issues in the closing.",
+        "Use this exact preferred closing question when it fits: 'Do you have any current projects in your pipeline that you would like us to review?'",
+        "Do not use the old closing about a plan-review comment, field condition, or a project waiting on engineering answers.",
+        "Use only supplied public research notes and the explicitly provided Apex Grid capabilities; never invent claims, projects, prices, turnaround times, ownership status, or facts.",
+        "Keep follow-ups shorter than the initial email and focused on one next step.",
+      ].join(" "),
+    },
       { role: "user", content: JSON.stringify({
         companyName: prospect.companyName,
         audience: prospect.audience,
@@ -450,13 +472,23 @@ export async function sendApprovedOutreach(
       isHotMarketSourceType(message.sourceType)
       || currentCampaign?.bodyTemplate === "Approved personalized Apex Grid outreach copy"
     );
+  const currentRegularFollowUp = usesCurrentSharedCopy && message.sequenceNumber > 1 && !isHotMarketSourceType(message.sourceType)
+    ? approvedOutreachFollowUpMessages(currentProspect.contactName ?? "")
+      .find((followUp) => followUp.sequenceNumber === message.sequenceNumber)
+    : undefined;
   const currentSubject = usesCurrentSharedCopy
     ? isHotMarketSourceType(message.sourceType)
-      ? hotMarketOutreachSubject(currentProspect.audience, currentProspect.state)
-      : approvedOutreachSubject()
+      ? message.sequenceNumber === 1
+        ? hotMarketOutreachSubject(currentProspect.audience, currentProspect.state)
+        : message.subject
+      : currentRegularFollowUp?.subject ?? approvedOutreachSubject()
     : message.subject;
   const currentBody = usesCurrentSharedCopy
-    ? approvedOutreachBody(currentProspect.contactName ?? "")
+    ? isHotMarketSourceType(message.sourceType)
+      ? message.sequenceNumber === 1
+        ? approvedOutreachBody(currentProspect.contactName ?? "")
+        : message.body
+      : currentRegularFollowUp?.body ?? approvedOutreachBody(currentProspect.contactName ?? "")
     : message.body;
   const emailContent = renderBrandedEmail(currentBody, unsubscribeUrl, currentProspect.contactName ?? undefined);
   const from = options.fromEmail?.trim() || process.env.OUTREACH_FROM_EMAIL;
