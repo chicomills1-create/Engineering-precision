@@ -1,0 +1,115 @@
+{
+  "research_scope": "Arizona luxury/custom-residential architecture and design-build firms researched from official company pages only. A current signal is either dated 2026 portfolio/press activity or a live official page describing active services or work in progress. Public emails are included only where visibly published on the firm's official domain; null means no email is asserted.",
+  "researched_on": "2026-09-03",
+  "records": [
+    {
+      "company_name": "Candelaria Design Associates",
+      "official_domain": "https://www.candelariadesign.com",
+      "market": "Phoenix/Scottsdale luxury residential, spec homes, and boutique commercial",
+      "current_signal": "Its official press catalogue published a Santa Barbara-style remodel on July 22, 2026. The firm’s current homepage describes active luxury-residential, spec-home, and boutique-commercial practice and says it works with owners’ representatives, builders, and vendors from start to finish.",
+      "source_urls": [
+        "https://www.candelariadesign.com/",
+        "https://www.candelariadesign.com/press"
+      ],
+      "official_public_email": null,
+      "likely_apex_grid_partner_client_fit": "High-priority referral/consultant partner for custom homes, spec homes, and boutique commercial work needing early civil/site feasibility, utility and drainage coordination, and coordinated permit support with the builder and specialty team.",
+      "private_relationship_note": "User reports an architect relationship with Candelaria. Treat this solely as a private warm-referral note, not as public evidence."
+    },
+    {
+      "company_name": "PHX Architecture",
+      "official_domain": "https://phxarch.com",
+      "market": "Scottsdale/Phoenix and Los Angeles luxury residences, private clubhouses, and hospitality",
+      "current_signal": "The official portfolio carries 2026-updated residential entries including Lost Canyon, Mockingbird, Red Rock Overlook, Promontory, and Sonoran Desert Retreat. Its services page explicitly says PHX coordinates subconsultants, schedules, contractors, site observations, samples, and submittals through construction.",
+      "source_urls": [
+        "https://phxarch.com/portfolio/",
+        "https://phxarch.com/services",
+        "https://phxarch.com/"
+      ],
+      "official_public_email": "hiring@phxarch.com",
+      "likely_apex_grid_partner_client_fit": "Strong design-team partner for high-end homes, clubhouses, and boutique hospitality projects where specialist civil/site, drainage, utilities, and construction-phase coordination can complement its stated consultant-management process."
+    },
+    {
+      "company_name": "Drewett Works",
+      "official_domain": "https://drewettworks.com",
+      "market": "Scottsdale luxury residential, hospitality, and boutique commercial architecture in Arizona and Mexico",
+      "current_signal": "The official homepage is dated April 1, 2026 and identifies the practice as serving luxury residential, hospitality, and boutique commercial work; it also highlights 2026 featured/press activity, including August features. A 2026 Modern Luxury item documents C.P. Drewett’s current thought leadership beyond luxury homes.",
+      "source_urls": [
+        "https://drewettworks.com/",
+        "https://drewettworks.com/c-p-drewett-looks-beyond-luxury-homes-in-modern-luxury-2026"
+      ],
+      "official_public_email": null,
+      "likely_apex_grid_partner_client_fit": "Good referral and specialty-consultant fit for estate, hospitality, and boutique-commercial assignments that need site due diligence, utility/drainage coordination, and permit-ready engineering support."
+    },
+    {
+      "company_name": "SWABACK",
+      "official_domain": "https://swaback.com",
+      "market": "Scottsdale-based architecture, planning, landscape architecture, and interiors; luxury residences, communities, and mixed-use work",
+      "current_signal": "The official 'In the Works' collection describes projects in progress and collaborative partnerships; its current collection includes Arizona work such as Halo Vista, Museum Square Scottsdale, The Artisan Scottsdale, Clearwater Hills Residence, Mohave Estate, and Scottsdale Hillside Residence. The firm publicly describes integrated planning, landscape, architecture, and interiors services.",
+      "source_urls": [
+        "https://swaback.com/project-categories/in-the-works",
+        "https://swaback.com/about-us",
+        "https://swaback.com/about-us/the-team"
+      ],
+      "official_public_email": "jesather@swaback.com",
+      "likely_apex_grid_partner_client_fit": "High-value multidisciplinary partner for hillside/custom residential, planned-community, mid-rise infill, and mixed-use work requiring coordinated civil/site, grading, drainage, utility, and permitting input alongside planning and landscape teams."
+    },
+    {
+      "company_name": "Stratton Architects",
+      "official_domain": "https://www.stratton-architects.com",
+      "market": "Arizona custom residential, including Desert Mountain and Ocotillo-area work",
+      "current_signal": "The live official home and projects pages present an active custom-residential portfolio, including Desert Mountain and Ocotillo Residence. The firm is a fit based on active public design presentation, but no independently dated 2026 project announcement was located on the official site.",
+      "source_urls": [
+        "https://www.stratton-architects.com/",
+        "https://www.stratton-architects.com/projects"
+      ],
+      "official_public_email": null,
+      "likely_apex_grid_partner_client_fit": "Potential custom-home referral partner for early parcel feasibility, hillside/site constraints, grading and drainage, utility coordination, and consultant-ready permit documentation."
+    },
+    {
+      "company_name": "Urban Design Associates, Ltd.",
+      "official_domain": "https://www.urbandesignassociatesltd.com",
+      "market": "Scottsdale/Phoenix and statewide Arizona custom residential, remodels, boutique commercial, and speculative development",
+      "current_signal": "The official site published multiple 2026 Arizona luxury-home design articles, including an August 28, 2026 article on legacy-home design, and maintains a project gallery for its residential work. This is the Scottsdale firm, not the unrelated Pittsburgh urban-design company with a similar name.",
+      "source_urls": [
+        "https://www.urbandesignassociatesltd.com/",
+        "https://www.urbandesignassociatesltd.com/project-gallery"
+      ],
+      "official_public_email": null,
+      "likely_apex_grid_partner_client_fit": "Good custom-residential and boutique-commercial referral prospect, especially where a client needs civil/site feasibility, utility and drainage coordination, or engineering support across a remodel, spec, or ground-up project."
+    },
+    {
+      "company_name": "Fratantoni Design",
+      "official_domain": "https://www.fratantonidesign.com",
+      "market": "Scottsdale/Paradise Valley luxury custom estates and national high-end residential",
+      "current_signal": "Its live official services/home content describes a fully integrated design-build approach with in-house collaboration among Fratantoni Design, Fratantoni Luxury Estates, and Fratantoni Interior Designers, guiding projects from initial concept through final construction.",
+      "source_urls": [
+        "https://www.fratantonidesign.com/"
+      ],
+      "official_public_email": null,
+      "likely_apex_grid_partner_client_fit": "Direct design-build partner/client fit for luxury estates needing outside civil/site engineering, drainage and utility design, jurisdictional coordination, or extra technical capacity that complements an integrated architecture-builder-interiors team."
+    },
+    {
+      "company_name": "Robinette Architects, Inc.",
+      "official_domain": "https://robinettearchitect.com",
+      "market": "Tucson and Southern Arizona boutique custom residential",
+      "current_signal": "The official firm page describes a full-service custom-home practice with design-and-construction, interiors, and landscape expertise. Its live 'On The Boards' project page for Saguaro Ranch Home provides public evidence of work in development.",
+      "source_urls": [
+        "https://robinettearchitect.com/our-firm/",
+        "https://robinettearchitect.com/project/saguaro-ranch-home"
+      ],
+      "official_public_email": "rwrobinette@robinettearchitect.com",
+      "likely_apex_grid_partner_client_fit": "Strong Southern Arizona custom-home referral opportunity for Sonoran-desert site planning, grading/drainage, utilities, and coordinated engineering support during design and construction."
+    },
+    {
+      "company_name": "3rd story",
+      "official_domain": "https://www.3rdstory.com",
+      "market": "Arizona luxury custom homes and interiors, with work in Scottsdale, Paradise Valley, Desert Mountain, Estancia, Verrado, and other exclusive communities",
+      "current_signal": "The official luxury-custom-homes page actively markets architecture and interior-design services, states that its principal has designed more than 400 custom homes, and identifies current Arizona community markets. It also describes construction, interior-design, and landscape experience as part of a unified design vision.",
+      "source_urls": [
+        "https://www.3rdstory.com/residential/custom-homes"
+      ],
+      "official_public_email": null,
+      "likely_apex_grid_partner_client_fit": "Relevant luxury-residential referral partner for technically complex estate sites and coordinated site/civil, drainage, utility, and consultant engineering needs."
+    }
+  ]
+}

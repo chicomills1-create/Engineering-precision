@@ -1,0 +1,115 @@
+{
+  "scope": "Arizona custom/luxury-home builders and design-build firms screened from public official-company pages. A record is included only where an official page shows a live available/under-construction offering, an active community, a current inquiry/vendor path, or an active custom-home/design-build service. Emails are included only where visibly published on the company's official domain.",
+  "qualifiedCompanies": [
+    {
+      "companyName": "Armstrong Construction Group",
+      "officialDomain": "acgarizona.com",
+      "market": "Scottsdale, Paradise Valley, Arcadia, Phoenix, Carefree, and Cave Creek, Arizona",
+      "currentProjectNeedSignal": "The live portfolio lists Scottsdale custom-home work and the Ritz-Carlton Residences luxury residential development (80 villas / 300,000+ sq. ft.). Its live contact page actively solicits custom-home, remodel, and design-forward residential project conversations and has a vendor-intake path.",
+      "sourceUrls": ["https://www.acgarizona.com/projects", "https://www.acgarizona.com/contact-us", "https://www.acgarizona.com/company/vendors"],
+      "likelyApexGridServiceFit": "Civil/site and drainage coordination for luxury estates and residential developments; structural and MEP engineering coordination; permit-ready drafting and revision support.",
+      "targetType": "Immediate client target",
+      "officialPublicEmail": "dream@acgarizona.com"
+    },
+    {
+      "companyName": "Peak One Builders",
+      "officialDomain": "peakonebuilders.com",
+      "market": "Cave Creek, Carefree, Scottsdale, North Scottsdale, Paradise Valley, Arcadia, Troon/Troon North, Fountain Hills, Desert Mountain, and Rio Verde, Arizona",
+      "currentProjectNeedSignal": "Its custom-home page says Peak One currently has buildable lots and can provide other available lots through realtor partners. The contact page states the firm currently builds/remodels in its listed Arizona luxury markets and links a live vendor form for partnership inquiries.",
+      "sourceUrls": ["https://peakonebuilders.com/custom-home-building/", "https://peakonebuilders.com/contact", "https://peakonebuilders.com/subcontractors-vendors-suppliers/"],
+      "likelyApexGridServiceFit": "Lot feasibility, grading/drainage and utility civil work; structural/MEP engineering coordination for high-end custom homes; construction-document drafting.",
+      "targetType": "Immediate client target",
+      "officialPublicEmail": null
+    },
+    {
+      "companyName": "Cullum Homes",
+      "officialDomain": "cullumhomes.com",
+      "market": "Scottsdale and Paradise Valley, Arizona; Seven Desert Mountain and Ascent at The Phoenician",
+      "currentProjectNeedSignal": "The official available-homes page currently lists multiple move-in-ready, fully furnished Cullum homes, including Mirari and Sophisticated Cowboy at Village at Seven Desert Mountain, Ironwood Escape in Paradise Valley, and homes at Ascent at The Phoenician.",
+      "sourceUrls": ["https://cullumhomes.com/available-homes", "https://cullumhomes.com/communities/"],
+      "likelyApexGridServiceFit": "Luxury-community site/civil coordination, structural and MEP design coordination for custom/spec estates, and drawing/permit revision capacity.",
+      "targetType": "Immediate client target",
+      "officialPublicEmail": null
+    },
+    {
+      "companyName": "Modern Nest",
+      "officialDomain": "modernnesthomes.com",
+      "market": "Scottsdale and Paradise Valley, Arizona; nationwide interior-design/furnishing work",
+      "currentProjectNeedSignal": "The official questions page directs active custom-home design, build, and furnishing inquiries to its project-inquiry workflow. Its portfolio identifies Modern Nest as both design and build for a 6,270-square-foot Paradise Valley new-construction spec home.",
+      "sourceUrls": ["https://modernnesthomes.com/general-questions/", "https://modernnesthomes.com/custom-homes", "https://modernnesthomes.com/projects/english-country"],
+      "likelyApexGridServiceFit": "Best suited for early design-assist referrals: structural/MEP coordination and permit/construction drafting that protects an interior-led custom-home concept.",
+      "targetType": "Partner/referral target",
+      "officialPublicEmail": null
+    },
+    {
+      "companyName": "Canyon Building & Design",
+      "officialDomain": "canyonbd.com",
+      "market": "Phoenix metro / Arizona residential market",
+      "currentProjectNeedSignal": "Canyon maintains a live luxury-custom-homes service page within its residential-building-services offering, demonstrating an active specialty residential service line rather than directory-only evidence.",
+      "sourceUrls": ["https://canyonbd.com/services/residential-building-services/luxury-custom-homes/", "https://canyonbd.com/services/residential-building-services"],
+      "likelyApexGridServiceFit": "Civil/site, structural and MEP consultant coordination for custom residences, plus drafting support for permit sets and field-driven revisions.",
+      "targetType": "Immediate client target",
+      "officialPublicEmail": null
+    },
+    {
+      "companyName": "UR Development",
+      "officialDomain": "urdevelopment.com",
+      "market": "Paradise Valley and Scottsdale, Arizona",
+      "currentProjectNeedSignal": "The official available-projects content lists Arizona residences for sale and identifies a 13,000-square-foot, seven-bedroom Paradise Valley residence at 3707 E. Bethany Home Road as under construction.",
+      "sourceUrls": ["https://urdevelopment.com/", "https://urdevelopment.com/availableprojects/"],
+      "likelyApexGridServiceFit": "Immediate estate-scale civil/site, structural, MEP, and permit-drafting capacity; particularly relevant for an identified under-construction luxury residence.",
+      "targetType": "Immediate client target",
+      "officialPublicEmail": null
+    },
+    {
+      "companyName": "Fenn Rogers Custom Homes",
+      "officialDomain": "fennrogers.com",
+      "market": "Paradise Valley and greater Phoenix, Arizona",
+      "currentProjectNeedSignal": "Its live Paradise Valley service page offers ground-up luxury home building, additions, and renovations, identifies estate lots in Paradise Valley, and links to the firm's latest projects.",
+      "sourceUrls": ["https://www.fennrogers.com/areas-we-serve/luxury-home-building-paradise-valley-arizona", "https://www.fennrogers.com/services/"],
+      "likelyApexGridServiceFit": "Estate site feasibility and civil work; structural/MEP engineering for ground-up homes and additions; coordinated permit and drafting support.",
+      "targetType": "Immediate client target",
+      "officialPublicEmail": null
+    },
+    {
+      "companyName": "Moss Custom Homes",
+      "officialDomain": "mosscustomhomes.com",
+      "market": "Scottsdale, Paradise Valley, Phoenix, Fountain Hills, Carefree, and Cave Creek, Arizona",
+      "currentProjectNeedSignal": "The official site features a Desert Mountain new build and active luxury ground-up/high-end-remodel services. Its consultation page says the company takes on a select number of projects each year and invites project requests.",
+      "sourceUrls": ["https://mosscustomhomes.com/", "https://mosscustomhomes.com/contact/"],
+      "likelyApexGridServiceFit": "High-touch structural/MEP coordination, civil/site and drainage support, and fast permit/revision drafting for select custom homes and remodels.",
+      "targetType": "Immediate client target",
+      "officialPublicEmail": "john@mosscustomhomes.com"
+    },
+    {
+      "companyName": "Desert Star Construction",
+      "officialDomain": "desertstarconstruction.com",
+      "market": "Scottsdale, Paradise Valley, and North Scottsdale, Arizona",
+      "currentProjectNeedSignal": "The official builder site actively invites prospective clients to build with the firm and presents its current custom-home-builder service and luxury-project gallery, including Paradise Valley's Valley Vista and Dancing Light.",
+      "sourceUrls": ["https://desertstarconstruction.com/", "https://desertstarconstruction.com/custom-home-builder/", "https://desertstarconstruction.com/contact-us/"],
+      "likelyApexGridServiceFit": "Complex custom-estate site/civil, drainage, structural and MEP coordination, plus detailed construction-document support.",
+      "targetType": "Immediate client target",
+      "officialPublicEmail": null
+    },
+    {
+      "companyName": "Camelot Homes",
+      "officialDomain": "camelothomes.com",
+      "market": "Scottsdale and Phoenix, Arizona",
+      "currentProjectNeedSignal": "Camelot's live Arizona community presentation includes The Edge at Joy Ranch in Scottsdale, Viridian in Phoenix, and The Retreat in Scottsdale. The Edge at Joy Ranch is presented as having models now open, 52 homesites, and seven floor plans.",
+      "sourceUrls": ["https://camelothomes.com/", "https://camelothomes.com/community/the-edge-joy-ranch/"],
+      "likelyApexGridServiceFit": "Community civil/site and utility coordination; structural and MEP support for luxury floor plans and options; production-quality drafting/revisions.",
+      "targetType": "Immediate client target",
+      "officialPublicEmail": null
+    },
+    {
+      "companyName": "Blue Sky Homes",
+      "officialDomain": "blueskybuilt.com",
+      "market": "Phoenix / Valley of the Sun, Arizona",
+      "currentProjectNeedSignal": "Its active portfolio markets luxe and ultra-luxe homes, build-to-suit work, communities, signature projects, and a coming-soon development page. The build-to-suit description offers planning, design, and construction around a client's homesite.",
+      "sourceUrls": ["https://blueskybuilt.com/portfolio/", "https://blueskybuilt.com/build-to-suit/", "https://blueskybuilt.com/coming-soon/", "https://blueskybuilt.com/contact/"],
+      "likelyApexGridServiceFit": "Civil/site due diligence, drainage/utilities, structural and MEP engineering coordination, and construction-document drafting for build-to-suit and upcoming development work.",
+      "targetType": "Immediate client target",
+      "officialPublicEmail": "info@blueskybuilt.com"
+    }
+  ]
+}

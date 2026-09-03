@@ -1,0 +1,23 @@
+{
+  "scope": "Candidates not retained as Arizona custom/luxury builder or design-build outreach records because the accessible public evidence did not meet the requested official-current-work standard.",
+  "rejectedCompanies": [
+    {
+      "companyName": "Paradise Valley New Construction",
+      "officialDomain": "paradisevalleynewconstruction.com",
+      "reasonRejected": "The public site identifies itself as a platform/local expert for new-construction properties, lots, and sales consultation rather than as a builder or design-build firm. It is a referral/listing resource, not a comparable contractor target.",
+      "sourceUrls": ["https://paradisevalleynewconstruction.com/"]
+    },
+    {
+      "companyName": "Patterson Homes",
+      "officialDomain": null,
+      "reasonRejected": "A current renovation completion result was located through a PR distribution source, but no verified official-company domain/current project page was established during this pass. It was excluded rather than relying on third-party-only evidence.",
+      "sourceUrls": ["https://www.prnewswire.com/news-releases/patterson-homes-completes-lincoln-hills-luxury-renovation-using-custom-home-standards-302846236.html"]
+    },
+    {
+      "companyName": "Phoenix Crest Homes",
+      "officialDomain": "phoenixcresthomes.com",
+      "reasonRejected": "The official site describes custom-home and renovation services, but the reviewed public result did not show a specific live project, available home/community, hiring/expansion event, or equally specific current-work trigger. Generic service copy alone was not used here.",
+      "sourceUrls": ["https://phoenixcresthomes.com/"]
+    }
+  ]
+}

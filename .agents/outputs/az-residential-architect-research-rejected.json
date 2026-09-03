@@ -1,0 +1,22 @@
+{
+  "research_scope": "Named or similarly named candidates excluded from the Arizona residential architecture target list because public evidence did not establish the requested Arizona-residential fit.",
+  "researched_on": "2026-09-03",
+  "rejected_records": [
+    {
+      "company_name": "Urban Design Associates",
+      "official_domain": "https://urbandesignassociates.com",
+      "reason": "Excluded to avoid conflating it with Arizona-based Urban Design Associates, Ltd. The official site identifies this company as headquartered in Pittsburgh, Pennsylvania and its 2026 content concerns national neighborhood/homebuilder urban-design work rather than an Arizona custom-residential architecture practice.",
+      "source_urls": [
+        "https://urbandesignassociates.com/"
+      ]
+    },
+    {
+      "company_name": "Stratton Architects (strattonarchitects.net)",
+      "official_domain": "https://www.strattonarchitects.net",
+      "reason": "Excluded as a duplicate/ambiguous web presence. The researched Arizona firm’s official current project and portfolio pages use stratton-architects.com, so the .net domain was not used as a separate company record.",
+      "source_urls": [
+        "https://www.stratton-architects.com/"
+      ]
+    }
+  ]
+}

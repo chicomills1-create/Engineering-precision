@@ -1,0 +1,328 @@
+{
+  "researchedOn": "2026-09-02",
+  "scope": "Arizona custom/luxury builders, residential architecture firms, and design-build networks similar to Armstrong Construction Group, Candelaria Design Associates, and Payne Cole Designs",
+  "totalUniqueCompanies": 21,
+  "records": [
+    {
+      "companyName": "Armstrong Construction Group",
+      "officialDomain": "acgarizona.com",
+      "market": "Scottsdale, Paradise Valley, Arcadia, Phoenix, Carefree, and Cave Creek, Arizona",
+      "type": "custom/luxury builder or design-build firm",
+      "currentSignal": "The live portfolio lists Scottsdale custom-home work and the Ritz-Carlton Residences luxury residential development (80 villas / 300,000+ sq. ft.). Its live contact page actively solicits custom-home, remodel, and design-forward residential project conversations and has a vendor-intake path.",
+      "sourceUrls": [
+        "https://www.acgarizona.com/projects",
+        "https://www.acgarizona.com/contact-us",
+        "https://www.acgarizona.com/company/vendors"
+      ],
+      "likelyApexGridFit": "Civil/site and drainage coordination for luxury estates and residential developments; structural and MEP engineering coordination; permit-ready drafting and revision support.",
+      "targetingMode": "Immediate client target",
+      "officialPublicEmail": "dream@acgarizona.com",
+      "emailStatus": "research-only-needs-email-source-url"
+    },
+    {
+      "companyName": "Blue Sky Homes",
+      "officialDomain": "blueskybuilt.com",
+      "market": "Phoenix / Valley of the Sun, Arizona",
+      "type": "custom/luxury builder or design-build firm",
+      "currentSignal": "Its active portfolio markets luxe and ultra-luxe homes, build-to-suit work, communities, signature projects, and a coming-soon development page. The build-to-suit description offers planning, design, and construction around a client's homesite.",
+      "sourceUrls": [
+        "https://blueskybuilt.com/portfolio/",
+        "https://blueskybuilt.com/build-to-suit/",
+        "https://blueskybuilt.com/coming-soon/",
+        "https://blueskybuilt.com/contact/"
+      ],
+      "likelyApexGridFit": "Civil/site due diligence, drainage/utilities, structural and MEP engineering coordination, and construction-document drafting for build-to-suit and upcoming development work.",
+      "targetingMode": "Immediate client target",
+      "officialPublicEmail": "info@blueskybuilt.com",
+      "emailStatus": "research-only-needs-email-source-url"
+    },
+    {
+      "companyName": "Camelot Homes",
+      "officialDomain": "camelothomes.com",
+      "market": "Scottsdale and Phoenix, Arizona",
+      "type": "custom/luxury builder or design-build firm",
+      "currentSignal": "Camelot's live Arizona community presentation includes The Edge at Joy Ranch in Scottsdale, Viridian in Phoenix, and The Retreat in Scottsdale. The Edge at Joy Ranch is presented as having models now open, 52 homesites, and seven floor plans.",
+      "sourceUrls": [
+        "https://camelothomes.com/",
+        "https://camelothomes.com/community/the-edge-joy-ranch/"
+      ],
+      "likelyApexGridFit": "Community civil/site and utility coordination; structural and MEP support for luxury floor plans and options; production-quality drafting/revisions.",
+      "targetingMode": "Immediate client target",
+      "officialPublicEmail": null,
+      "emailStatus": "not-found-in-reviewed-pages"
+    },
+    {
+      "companyName": "Canyon Building & Design",
+      "officialDomain": "canyonbd.com",
+      "market": "Phoenix metro / Arizona residential market",
+      "type": "custom/luxury builder or design-build firm",
+      "currentSignal": "Canyon maintains a live luxury-custom-homes service page within its residential-building-services offering, demonstrating an active specialty residential service line rather than directory-only evidence.",
+      "sourceUrls": [
+        "https://canyonbd.com/services/residential-building-services/luxury-custom-homes/",
+        "https://canyonbd.com/services/residential-building-services"
+      ],
+      "likelyApexGridFit": "Civil/site, structural and MEP consultant coordination for custom residences, plus drafting support for permit sets and field-driven revisions.",
+      "targetingMode": "Immediate client target",
+      "officialPublicEmail": null,
+      "emailStatus": "not-found-in-reviewed-pages"
+    },
+    {
+      "companyName": "Cullum Homes",
+      "officialDomain": "cullumhomes.com",
+      "market": "Scottsdale and Paradise Valley, Arizona; Seven Desert Mountain and Ascent at The Phoenician",
+      "type": "custom/luxury builder or design-build firm",
+      "currentSignal": "The official available-homes page currently lists multiple move-in-ready, fully furnished Cullum homes, including Mirari and Sophisticated Cowboy at Village at Seven Desert Mountain, Ironwood Escape in Paradise Valley, and homes at Ascent at The Phoenician.",
+      "sourceUrls": [
+        "https://cullumhomes.com/available-homes",
+        "https://cullumhomes.com/communities/"
+      ],
+      "likelyApexGridFit": "Luxury-community site/civil coordination, structural and MEP design coordination for custom/spec estates, and drawing/permit revision capacity.",
+      "targetingMode": "Immediate client target",
+      "officialPublicEmail": null,
+      "emailStatus": "not-found-in-reviewed-pages"
+    },
+    {
+      "companyName": "Desert Star Construction",
+      "officialDomain": "desertstarconstruction.com",
+      "market": "Scottsdale, Paradise Valley, and North Scottsdale, Arizona",
+      "type": "custom/luxury builder or design-build firm",
+      "currentSignal": "The official builder site actively invites prospective clients to build with the firm and presents its current custom-home-builder service and luxury-project gallery, including Paradise Valley's Valley Vista and Dancing Light.",
+      "sourceUrls": [
+        "https://desertstarconstruction.com/",
+        "https://desertstarconstruction.com/custom-home-builder/",
+        "https://desertstarconstruction.com/contact-us/"
+      ],
+      "likelyApexGridFit": "Complex custom-estate site/civil, drainage, structural and MEP coordination, plus detailed construction-document support.",
+      "targetingMode": "Immediate client target",
+      "officialPublicEmail": null,
+      "emailStatus": "not-found-in-reviewed-pages"
+    },
+    {
+      "companyName": "Fenn Rogers Custom Homes",
+      "officialDomain": "fennrogers.com",
+      "market": "Paradise Valley and greater Phoenix, Arizona",
+      "type": "custom/luxury builder or design-build firm",
+      "currentSignal": "Its live Paradise Valley service page offers ground-up luxury home building, additions, and renovations, identifies estate lots in Paradise Valley, and links to the firm's latest projects.",
+      "sourceUrls": [
+        "https://www.fennrogers.com/areas-we-serve/luxury-home-building-paradise-valley-arizona",
+        "https://www.fennrogers.com/services/"
+      ],
+      "likelyApexGridFit": "Estate site feasibility and civil work; structural/MEP engineering for ground-up homes and additions; coordinated permit and drafting support.",
+      "targetingMode": "Immediate client target",
+      "officialPublicEmail": null,
+      "emailStatus": "not-found-in-reviewed-pages"
+    },
+    {
+      "companyName": "Moss Custom Homes",
+      "officialDomain": "mosscustomhomes.com",
+      "market": "Scottsdale, Paradise Valley, Phoenix, Fountain Hills, Carefree, and Cave Creek, Arizona",
+      "type": "custom/luxury builder or design-build firm",
+      "currentSignal": "The official site features a Desert Mountain new build and active luxury ground-up/high-end-remodel services. Its consultation page says the company takes on a select number of projects each year and invites project requests.",
+      "sourceUrls": [
+        "https://mosscustomhomes.com/",
+        "https://mosscustomhomes.com/contact/"
+      ],
+      "likelyApexGridFit": "High-touch structural/MEP coordination, civil/site and drainage support, and fast permit/revision drafting for select custom homes and remodels.",
+      "targetingMode": "Immediate client target",
+      "officialPublicEmail": "john@mosscustomhomes.com",
+      "emailStatus": "research-only-needs-email-source-url"
+    },
+    {
+      "companyName": "Peak One Builders",
+      "officialDomain": "peakonebuilders.com",
+      "market": "Cave Creek, Carefree, Scottsdale, North Scottsdale, Paradise Valley, Arcadia, Troon/Troon North, Fountain Hills, Desert Mountain, and Rio Verde, Arizona",
+      "type": "custom/luxury builder or design-build firm",
+      "currentSignal": "Its custom-home page says Peak One currently has buildable lots and can provide other available lots through realtor partners. The contact page states the firm currently builds/remodels in its listed Arizona luxury markets and links a live vendor form for partnership inquiries.",
+      "sourceUrls": [
+        "https://peakonebuilders.com/custom-home-building/",
+        "https://peakonebuilders.com/contact",
+        "https://peakonebuilders.com/subcontractors-vendors-suppliers/"
+      ],
+      "likelyApexGridFit": "Lot feasibility, grading/drainage and utility civil work; structural/MEP engineering coordination for high-end custom homes; construction-document drafting.",
+      "targetingMode": "Immediate client target",
+      "officialPublicEmail": null,
+      "emailStatus": "not-found-in-reviewed-pages"
+    },
+    {
+      "companyName": "UR Development",
+      "officialDomain": "urdevelopment.com",
+      "market": "Paradise Valley and Scottsdale, Arizona",
+      "type": "custom/luxury builder or design-build firm",
+      "currentSignal": "The official available-projects content lists Arizona residences for sale and identifies a 13,000-square-foot, seven-bedroom Paradise Valley residence at 3707 E. Bethany Home Road as under construction.",
+      "sourceUrls": [
+        "https://urdevelopment.com/",
+        "https://urdevelopment.com/availableprojects/"
+      ],
+      "likelyApexGridFit": "Immediate estate-scale civil/site, structural, MEP, and permit-drafting capacity; particularly relevant for an identified under-construction luxury residence.",
+      "targetingMode": "Immediate client target",
+      "officialPublicEmail": null,
+      "emailStatus": "not-found-in-reviewed-pages"
+    },
+    {
+      "companyName": "Modern Nest",
+      "officialDomain": "modernnesthomes.com",
+      "market": "Scottsdale and Paradise Valley, Arizona; nationwide interior-design/furnishing work",
+      "type": "custom/luxury builder or design-build firm",
+      "currentSignal": "The official questions page directs active custom-home design, build, and furnishing inquiries to its project-inquiry workflow. Its portfolio identifies Modern Nest as both design and build for a 6,270-square-foot Paradise Valley new-construction spec home.",
+      "sourceUrls": [
+        "https://modernnesthomes.com/general-questions/",
+        "https://modernnesthomes.com/custom-homes",
+        "https://modernnesthomes.com/projects/english-country"
+      ],
+      "likelyApexGridFit": "Best suited for early design-assist referrals: structural/MEP coordination and permit/construction drafting that protects an interior-led custom-home concept.",
+      "targetingMode": "Partner/referral target",
+      "officialPublicEmail": null,
+      "emailStatus": "not-found-in-reviewed-pages"
+    },
+    {
+      "companyName": "3rd story",
+      "officialDomain": "3rdstory.com",
+      "market": "Arizona luxury custom homes and interiors, with work in Scottsdale, Paradise Valley, Desert Mountain, Estancia, Verrado, and other exclusive communities",
+      "type": "residential architecture or design-build partner",
+      "currentSignal": "The official luxury-custom-homes page actively markets architecture and interior-design services, states that its principal has designed more than 400 custom homes, and identifies current Arizona community markets. It also describes construction, interior-design, and landscape experience as part of a unified design vision.",
+      "sourceUrls": [
+        "https://www.3rdstory.com/residential/custom-homes"
+      ],
+      "likelyApexGridFit": "Relevant luxury-residential referral partner for technically complex estate sites and coordinated site/civil, drainage, utility, and consultant engineering needs.",
+      "targetingMode": "partner/referral target",
+      "officialPublicEmail": null,
+      "emailStatus": "not-found-in-reviewed-pages"
+    },
+    {
+      "companyName": "Candelaria Design Associates",
+      "officialDomain": "candelariadesign.com",
+      "market": "Phoenix/Scottsdale luxury residential, spec homes, and boutique commercial",
+      "type": "residential architecture or design-build partner",
+      "currentSignal": "Its official press catalogue published a Santa Barbara-style remodel on July 22, 2026. The firm’s current homepage describes active luxury-residential, spec-home, and boutique-commercial practice and says it works with owners’ representatives, builders, and vendors from start to finish.",
+      "sourceUrls": [
+        "https://www.candelariadesign.com/",
+        "https://www.candelariadesign.com/press"
+      ],
+      "likelyApexGridFit": "High-priority referral/consultant partner for custom homes, spec homes, and boutique commercial work needing early civil/site feasibility, utility and drainage coordination, and coordinated permit support with the builder and specialty team.",
+      "targetingMode": "partner/referral target",
+      "officialPublicEmail": null,
+      "emailStatus": "not-found-in-reviewed-pages"
+    },
+    {
+      "companyName": "Drewett Works",
+      "officialDomain": "drewettworks.com",
+      "market": "Scottsdale luxury residential, hospitality, and boutique commercial architecture in Arizona and Mexico",
+      "type": "residential architecture or design-build partner",
+      "currentSignal": "The official homepage is dated April 1, 2026 and identifies the practice as serving luxury residential, hospitality, and boutique commercial work; it also highlights 2026 featured/press activity, including August features. A 2026 Modern Luxury item documents C.P. Drewett’s current thought leadership beyond luxury homes.",
+      "sourceUrls": [
+        "https://drewettworks.com/",
+        "https://drewettworks.com/c-p-drewett-looks-beyond-luxury-homes-in-modern-luxury-2026"
+      ],
+      "likelyApexGridFit": "Good referral and specialty-consultant fit for estate, hospitality, and boutique-commercial assignments that need site due diligence, utility/drainage coordination, and permit-ready engineering support.",
+      "targetingMode": "partner/referral target",
+      "officialPublicEmail": null,
+      "emailStatus": "not-found-in-reviewed-pages"
+    },
+    {
+      "companyName": "Fratantoni Design",
+      "officialDomain": "fratantonidesign.com",
+      "market": "Scottsdale/Paradise Valley luxury custom estates and national high-end residential",
+      "type": "residential architecture or design-build partner",
+      "currentSignal": "Its live official services/home content describes a fully integrated design-build approach with in-house collaboration among Fratantoni Design, Fratantoni Luxury Estates, and Fratantoni Interior Designers, guiding projects from initial concept through final construction.",
+      "sourceUrls": [
+        "https://www.fratantonidesign.com/"
+      ],
+      "likelyApexGridFit": "Direct design-build partner/client fit for luxury estates needing outside civil/site engineering, drainage and utility design, jurisdictional coordination, or extra technical capacity that complements an integrated architecture-builder-interiors team.",
+      "targetingMode": "partner/referral target",
+      "officialPublicEmail": null,
+      "emailStatus": "not-found-in-reviewed-pages"
+    },
+    {
+      "companyName": "PHX Architecture",
+      "officialDomain": "phxarch.com",
+      "market": "Scottsdale/Phoenix and Los Angeles luxury residences, private clubhouses, and hospitality",
+      "type": "residential architecture or design-build partner",
+      "currentSignal": "The official portfolio carries 2026-updated residential entries including Lost Canyon, Mockingbird, Red Rock Overlook, Promontory, and Sonoran Desert Retreat. Its services page explicitly says PHX coordinates subconsultants, schedules, contractors, site observations, samples, and submittals through construction.",
+      "sourceUrls": [
+        "https://phxarch.com/portfolio/",
+        "https://phxarch.com/services",
+        "https://phxarch.com/"
+      ],
+      "likelyApexGridFit": "Strong design-team partner for high-end homes, clubhouses, and boutique hospitality projects where specialist civil/site, drainage, utilities, and construction-phase coordination can complement its stated consultant-management process.",
+      "targetingMode": "partner/referral target",
+      "officialPublicEmail": "hiring@phxarch.com",
+      "emailStatus": "research-only-needs-email-source-url"
+    },
+    {
+      "companyName": "Payne Cole Designs",
+      "officialDomain": "paynecole.com",
+      "market": "Arizona / Southwest markets",
+      "type": "residential architecture or design-build partner",
+      "currentSignal": "The official About page describes a turn-key luxury design practice with builder-friendly plans, civil and structural engineering, permitting, interior design, and coverage that includes Arizona. The firm combines a luxury general contractor and licensed architect in one team.",
+      "sourceUrls": [
+        "https://paynecole.com/about",
+        "https://paynecole.com/team"
+      ],
+      "likelyApexGridFit": "Potential referral or overflow partner for Arizona luxury residential work, especially when a project needs supplemental engineering capacity or a local Arizona specialist; do not assume it needs Apex Grid because it advertises in-house civil/structural capability.",
+      "targetingMode": "partner/referral target",
+      "officialPublicEmail": null,
+      "emailStatus": "not-found-in-reviewed-pages"
+    },
+    {
+      "companyName": "Robinette Architects, Inc.",
+      "officialDomain": "robinettearchitect.com",
+      "market": "Tucson and Southern Arizona boutique custom residential",
+      "type": "residential architecture or design-build partner",
+      "currentSignal": "The official firm page describes a full-service custom-home practice with design-and-construction, interiors, and landscape expertise. Its live 'On The Boards' project page for Saguaro Ranch Home provides public evidence of work in development.",
+      "sourceUrls": [
+        "https://robinettearchitect.com/our-firm/",
+        "https://robinettearchitect.com/project/saguaro-ranch-home"
+      ],
+      "likelyApexGridFit": "Strong Southern Arizona custom-home referral opportunity for Sonoran-desert site planning, grading/drainage, utilities, and coordinated engineering support during design and construction.",
+      "targetingMode": "partner/referral target",
+      "officialPublicEmail": "rwrobinette@robinettearchitect.com",
+      "emailStatus": "research-only-needs-email-source-url"
+    },
+    {
+      "companyName": "SWABACK",
+      "officialDomain": "swaback.com",
+      "market": "Scottsdale-based architecture, planning, landscape architecture, and interiors; luxury residences, communities, and mixed-use work",
+      "type": "residential architecture or design-build partner",
+      "currentSignal": "The official 'In the Works' collection describes projects in progress and collaborative partnerships; its current collection includes Arizona work such as Halo Vista, Museum Square Scottsdale, The Artisan Scottsdale, Clearwater Hills Residence, Mohave Estate, and Scottsdale Hillside Residence. The firm publicly describes integrated planning, landscape, architecture, and interiors services.",
+      "sourceUrls": [
+        "https://swaback.com/project-categories/in-the-works",
+        "https://swaback.com/about-us",
+        "https://swaback.com/about-us/the-team"
+      ],
+      "likelyApexGridFit": "High-value multidisciplinary partner for hillside/custom residential, planned-community, mid-rise infill, and mixed-use work requiring coordinated civil/site, grading, drainage, utility, and permitting input alongside planning and landscape teams.",
+      "targetingMode": "partner/referral target",
+      "officialPublicEmail": "jesather@swaback.com",
+      "emailStatus": "research-only-needs-email-source-url"
+    },
+    {
+      "companyName": "Stratton Architects",
+      "officialDomain": "stratton-architects.com",
+      "market": "Arizona custom residential, including Desert Mountain and Ocotillo-area work",
+      "type": "residential architecture or design-build partner",
+      "currentSignal": "The live official home and projects pages present an active custom-residential portfolio, including Desert Mountain and Ocotillo Residence. The firm is a fit based on active public design presentation, but no independently dated 2026 project announcement was located on the official site.",
+      "sourceUrls": [
+        "https://www.stratton-architects.com/",
+        "https://www.stratton-architects.com/projects"
+      ],
+      "likelyApexGridFit": "Potential custom-home referral partner for early parcel feasibility, hillside/site constraints, grading and drainage, utility coordination, and consultant-ready permit documentation.",
+      "targetingMode": "partner/referral target",
+      "officialPublicEmail": null,
+      "emailStatus": "not-found-in-reviewed-pages"
+    },
+    {
+      "companyName": "Urban Design Associates, Ltd.",
+      "officialDomain": "urbandesignassociatesltd.com",
+      "market": "Scottsdale/Phoenix and statewide Arizona custom residential, remodels, boutique commercial, and speculative development",
+      "type": "residential architecture or design-build partner",
+      "currentSignal": "The official site published multiple 2026 Arizona luxury-home design articles, including an August 28, 2026 article on legacy-home design, and maintains a project gallery for its residential work. This is the Scottsdale firm, not the unrelated Pittsburgh urban-design company with a similar name.",
+      "sourceUrls": [
+        "https://www.urbandesignassociatesltd.com/",
+        "https://www.urbandesignassociatesltd.com/project-gallery"
+      ],
+      "likelyApexGridFit": "Good custom-residential and boutique-commercial referral prospect, especially where a client needs civil/site feasibility, utility and drainage coordination, or engineering support across a remodel, spec, or ground-up project.",
+      "targetingMode": "partner/referral target",
+      "officialPublicEmail": null,
+      "emailStatus": "not-found-in-reviewed-pages"
+    }
+  ]
+}
