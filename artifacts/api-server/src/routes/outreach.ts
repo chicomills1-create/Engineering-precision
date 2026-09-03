@@ -69,7 +69,7 @@ import {
 } from "../lib/outreachPreparation";
 import { recordContactEvidence } from "../lib/outreachContactEvidence";
 import { reconcileUncertainOutreachMessages } from "../lib/outreachReconciliation";
-import { getVerifiedInitialOpenAt } from "../lib/outreachSequence";
+import { getVerifiedInitialEngagementAt } from "../lib/outreachSequence";
 import { approvedOutreachFollowUpMessages } from "../lib/verifiedOutreachBatch";
 import { buildOutreachHotLeads } from "../lib/outreachHotLeads";
 
@@ -666,12 +666,12 @@ router.post("/outreach/messages/:id/approve", requireAuth, async (req, res): Pro
     if (message.sequenceNumber === 1) {
       row = await approveInitialMessageInPreparationWindow(message.id);
     } else {
-      const openedAt = await getVerifiedInitialOpenAt(message);
-      const scheduledAt = openedAt
-        ? getFollowUpScheduledAt(message.sequenceNumber, openedAt)
+      const engagedAt = await getVerifiedInitialEngagementAt(message);
+      const scheduledAt = engagedAt
+        ? getFollowUpScheduledAt(message.sequenceNumber, engagedAt)
         : null;
       if (!scheduledAt) {
-        throw new Error("The initial message must have a verified open before approving a follow-up");
+        throw new Error("The initial message must have a verified open or click before approving a follow-up");
       }
       [row] = await db.update(outreachMessagesTable)
         .set({

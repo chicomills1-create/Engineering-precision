@@ -3,11 +3,11 @@ name: Outreach automation safety
 description: Safety boundary for automated B2B email sequences.
 ---
 
-Do not enable hands-off follow-up sending until the system receives both delivery events and inbox replies, and can cancel pending messages immediately on reply, bounce, complaint, or unsubscribe.
+Hands-off follow-up sending is allowed only while signed delivery events and monitored inbox replies are both verified, and pending messages can be cancelled immediately on reply, bounce, complaint, or unsubscribe.
 
 **Why:** SendGrid outbound delivery alone cannot detect ordinary email replies. Automating sequences without reply detection risks continuing to email someone who has already responded.
 
-**How to apply:** Keep the current workflow at review, approve, and explicit send. Add signed delivery-event handling and a monitored reply mailbox before introducing a scheduler for follow-up messages.
+**How to apply:** Fail closed whenever either evidence path is unhealthy. Keep the final pre-dispatch evidence check serialized with the send claim so a newly arrived stop signal wins before provider handoff.
 
 When one SendGrid account already serves another system, preserve its single event-webhook destination through a fail-closed relay rather than overwriting it or requiring another paid account. Keep the primary mailbox MX unchanged; use an isolated reply subdomain and forward a copy into the normal inbox.
 
@@ -21,8 +21,8 @@ Automated prospecting may prepare a conservative daily review list, but it must 
 
 **How to apply:** Require public need evidence and deduplication, cap daily imports, leave contacts unverified, and keep approval and sending as separate employee actions.
 
-Engaged prospects receive at most one automated follow-up: only after the initial email has both verified delivery and an opener event, and only after three Phoenix business days. The subject is “A reliable engineering partner for active projects”; the body asks for a reply and has no website CTA outside the signature.
+Engaged prospects receive at most one automated follow-up: only after the initial email has verified delivery followed by an open or click event, and only after three Phoenix business days from the first qualifying engagement. The body asks for a reply and has no website CTA outside the signature.
 
-**Why:** Open tracking is only an engagement signal, not proof of intent. One concise reply-first touch balances responsiveness with sender reputation and avoids reviving the superseded multi-message drip.
+**Why:** Opens and clicks are engagement signals, not proof of intent. One concise reply-first touch balances responsiveness with sender reputation and avoids reviving the superseded multi-message drip.
 
-**How to apply:** Treat reply, bounce, complaint, unsubscribe, suppression, or other delivery-warning evidence as a hard stop; serialize the final evidence check with dispatch, prevent duplicate sequence claims, and report opens separately from delivered, bounced, and thread-attributed human replies.
+**How to apply:** Backfill qualifying opens and click-only engagements idempotently within the approved 30-day window. Treat reply, bounce, complaint, unsubscribe, suppression, or other delivery-warning evidence as a hard stop; prevent duplicate sequence claims and report opens/clicks separately from delivery and replies.

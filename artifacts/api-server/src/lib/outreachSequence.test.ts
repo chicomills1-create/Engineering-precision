@@ -64,12 +64,20 @@ test("enrollment remains idempotent when a separate draft writer races it", asyn
     body: "Initial body",
     status: "sent",
   }).returning();
-  await db.insert(outreachDeliveryEventsTable).values({
-    email: prospect!.contactEmail!,
-    eventType: "open",
-    occurredAt: new Date("2026-08-28T15:00:00.000Z"),
-    outreachMessageId: initial!.id,
-  });
+  await db.insert(outreachDeliveryEventsTable).values([
+    {
+      email: prospect!.contactEmail!,
+      eventType: "delivered",
+      occurredAt: new Date("2026-08-28T14:59:00.000Z"),
+      outreachMessageId: initial!.id,
+    },
+    {
+      email: prospect!.contactEmail!,
+      eventType: "open",
+      occurredAt: new Date("2026-08-28T15:00:00.000Z"),
+      outreachMessageId: initial!.id,
+    },
+  ]);
   await db.insert(outreachMessagesTable).values({
     prospectId: prospect!.id,
     campaignId: campaign!.id,

@@ -81,7 +81,7 @@ export function assertScheduledTimeReady(
   }
 }
 
-const OPENER_FOLLOW_UP_BUSINESS_DAYS = 3;
+const ENGAGEMENT_FOLLOW_UP_BUSINESS_DAYS = 3;
 
 function phoenixDateParts(date: Date): { year: string; month: string; day: string } {
   const parts = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
@@ -99,7 +99,7 @@ export function getFollowUpScheduledAt(sequenceNumber: number, baseDate = new Da
   const openedPhoenixMorning = new Date(`${parts.year}-${parts.month}-${parts.day}T08:00:00-07:00`);
   let candidate = openedPhoenixMorning;
   let businessDays = 0;
-  while (businessDays < OPENER_FOLLOW_UP_BUSINESS_DAYS) {
+  while (businessDays < ENGAGEMENT_FOLLOW_UP_BUSINESS_DAYS) {
     candidate = new Date(candidate.getTime() + 24 * 60 * 60 * 1000);
     const weekday = candidate.getUTCDay();
     if (weekday !== 0 && weekday !== 6) businessDays += 1;
@@ -110,14 +110,14 @@ export function getFollowUpScheduledAt(sequenceNumber: number, baseDate = new Da
 export function assertFollowUpCadenceReady(
   sequenceNumber: number,
   scheduledAt: Date | null,
-  initialOpenedAt: Date | null,
+  initialEngagedAt: Date | null,
 ): void {
   if (sequenceNumber === 1) return;
-  const earliest = initialOpenedAt
-    ? getFollowUpScheduledAt(sequenceNumber, initialOpenedAt)
+  const earliest = initialEngagedAt
+    ? getFollowUpScheduledAt(sequenceNumber, initialEngagedAt)
     : null;
   if (!earliest) {
-    throw new Error("Initial sequence message must have a verified open before this follow-up can send");
+    throw new Error("Initial sequence message must have a verified open or click before this follow-up can send");
   }
   if (!scheduledAt || scheduledAt.getTime() < earliest.getTime()) {
     throw new Error("Follow-up cannot send before its Phoenix opener-based business cadence");

@@ -124,6 +124,18 @@ export async function claimOutreachMessageForSending(messageId: number): Promise
     .where(and(
       eq(outreachMessagesTable.id, messageId),
       eq(outreachMessagesTable.status, "approved"),
+      sql`exists (
+        select 1
+        from ${prospectsTable} as current_prospect
+        where current_prospect.id = ${outreachMessagesTable.prospectId}
+          and current_prospect.contact_status = 'active'
+          and current_prospect.status in ('approved', 'contacted')
+          and not exists (
+            select 1
+            from outreach_suppressions as suppression
+            where suppression.email = lower(trim(current_prospect.contact_email))
+          )
+      )`,
       or(
         eq(outreachMessagesTable.sequenceNumber, 1),
         sql`exists (
@@ -167,13 +179,20 @@ export async function claimOutreachMessageForSending(messageId: number): Promise
         sql`exists (
           select 1
           from ${outreachMessagesTable} as initial_message
-          inner join outreach_delivery_events as initial_open
-            on initial_open.outreach_message_id = initial_message.id
+          inner join outreach_delivery_events as initial_engagement
+            on initial_engagement.outreach_message_id = initial_message.id
           where initial_message.prospect_id = ${outreachMessagesTable.prospectId}
             and initial_message.sequence_number = 1
-            and initial_open.event_type = 'open'
-             and initial_open.occurred_at >= now() - (${OPENER_FOLLOW_UP_MAX_AGE_DAYS} * interval '1 day')
-             and initial_open.occurred_at <= now()
+            and initial_engagement.event_type in ('open', 'click')
+             and initial_engagement.occurred_at >= now() - (${OPENER_FOLLOW_UP_MAX_AGE_DAYS} * interval '1 day')
+              and initial_engagement.occurred_at <= now()
+            and exists (
+              select 1
+              from outreach_delivery_events as delivery_evidence
+              where delivery_evidence.outreach_message_id = initial_message.id
+                and delivery_evidence.event_type = 'delivered'
+                and delivery_evidence.occurred_at <= initial_engagement.occurred_at
+            )
             and (
               initial_message.campaign_id = ${outreachMessagesTable.campaignId}
               or (

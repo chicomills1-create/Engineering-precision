@@ -29,7 +29,7 @@ import {
 import { withOutreachEmailLock } from "./outreachEmailLock";
 import {
   getVerifiedInitialDeliveryAt,
-  getVerifiedInitialOpenAt,
+  getVerifiedInitialEngagementAt,
 } from "./outreachSequence";
 import {
   HOT_MARKET_DAILY_TARGET,
@@ -448,14 +448,14 @@ export async function sendApprovedOutreach(
   assertScheduledTimeReady(message.sequenceNumber, message.scheduledAt);
   if (message.sequenceNumber > 1) {
     const initialDeliveredAt = await getVerifiedInitialDeliveryAt(message);
-    const initialOpenedAt = await getVerifiedInitialOpenAt(message);
+    const initialEngagedAt = await getVerifiedInitialEngagementAt(message);
     if (!initialDeliveredAt) {
       throw new Error("Initial sequence message must have verified delivery evidence before this follow-up can send");
     }
     assertFollowUpCadenceReady(
       message.sequenceNumber,
       message.scheduledAt,
-      initialOpenedAt,
+      initialEngagedAt,
     );
     const campaignScope = message.campaignId
       ? eq(outreachMessagesTable.campaignId, message.campaignId)
@@ -505,14 +505,14 @@ export async function sendApprovedOutreach(
   await options.beforeEmailLock?.();
   return withOutreachEmailLock(email, async () => {
     if (message.sequenceNumber === 2) {
-      const [lockedDelivery, lockedOpen] = await Promise.all([
+      const [lockedDelivery, lockedEngagement] = await Promise.all([
         getVerifiedInitialDeliveryAt(message),
-        getVerifiedInitialOpenAt(message),
+        getVerifiedInitialEngagementAt(message),
       ]);
-      if (!lockedDelivery || !lockedOpen) {
-        throw new Error("Follow-up lost its verified delivery or opener evidence before provider dispatch");
+      if (!lockedDelivery || !lockedEngagement) {
+        throw new Error("Follow-up lost its verified delivery or engagement evidence before provider dispatch");
       }
-      assertFollowUpCadenceReady(message.sequenceNumber, message.scheduledAt, lockedOpen);
+      assertFollowUpCadenceReady(message.sequenceNumber, message.scheduledAt, lockedEngagement);
     }
     const [lockedMessage] = await db.select({ status: outreachMessagesTable.status })
       .from(outreachMessagesTable)

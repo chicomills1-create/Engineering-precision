@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, gte, inArray, isNull, lte, sql } from "drizzle-orm";
+import { and, asc, eq, gte, inArray, isNull, lte, sql } from "drizzle-orm";
 import {
   db,
   outreachDeliveryEventsTable,
@@ -17,10 +17,10 @@ export const OPENER_FOLLOW_UP_MAX_AGE_DAYS = 30;
 const OPENER_FOLLOW_UP_MAX_AGE_MS = OPENER_FOLLOW_UP_MAX_AGE_DAYS * 24 * 60 * 60 * 1000;
 
 export function isOpenerFollowUpWithinWindow(
-  openedAt: Date,
+  engagedAt: Date,
   now = new Date(),
 ): boolean {
-  const ageMs = now.getTime() - openedAt.getTime();
+  const ageMs = now.getTime() - engagedAt.getTime();
   return ageMs >= 0 && ageMs <= OPENER_FOLLOW_UP_MAX_AGE_MS;
 }
 
@@ -82,22 +82,29 @@ export async function ensureApprovedFollowUpSequence(
     const scope = initialMessage.campaignId
       ? eq(outreachMessagesTable.campaignId, initialMessage.campaignId)
       : isNull(outreachMessagesTable.campaignId);
-    const [initialOpened] = await tx.select({
+    const [initialEngagement] = await tx.select({
       occurredAt: outreachDeliveryEventsTable.occurredAt,
     })
       .from(outreachDeliveryEventsTable)
       .where(and(
         eq(outreachDeliveryEventsTable.outreachMessageId, initialMessage.id),
-        eq(outreachDeliveryEventsTable.eventType, "open"),
+        inArray(outreachDeliveryEventsTable.eventType, ["open", "click"]),
+        sql`exists (
+          select 1
+          from outreach_delivery_events as delivery_evidence
+          where delivery_evidence.outreach_message_id = ${initialMessage.id}
+            and delivery_evidence.event_type = 'delivered'
+            and delivery_evidence.occurred_at <= ${outreachDeliveryEventsTable.occurredAt}
+        )`,
       ))
-      .orderBy(desc(outreachDeliveryEventsTable.occurredAt))
+      .orderBy(asc(outreachDeliveryEventsTable.occurredAt))
       .limit(1);
-    if (!initialOpened || !isOpenerFollowUpWithinWindow(initialOpened.occurredAt, now)) {
+    if (!initialEngagement || !isOpenerFollowUpWithinWindow(initialEngagement.occurredAt, now)) {
       await tx.update(outreachMessagesTable)
         .set({
           status: "needs_review",
           scheduledAt: null,
-          error: "Stopped because the opener was outside the 30-day reminder window",
+          error: "Stopped because the qualifying engagement was outside the 30-day reminder window",
         })
         .where(and(
           eq(outreachMessagesTable.prospectId, initialMessage.prospectId),
@@ -146,7 +153,7 @@ export async function ensureApprovedFollowUpSequence(
         if (current.status === "approved" && !current.scheduledAt) {
           const [scheduled] = await tx.update(outreachMessagesTable)
             .set({
-              scheduledAt: getFollowUpScheduledAt(sequenceNumber, initialOpened.occurredAt),
+              scheduledAt: getFollowUpScheduledAt(sequenceNumber, initialEngagement.occurredAt),
               error: null,
             })
             .where(and(
@@ -162,7 +169,7 @@ export async function ensureApprovedFollowUpSequence(
           const [approved] = await tx.update(outreachMessagesTable)
             .set({
               status: "approved",
-              scheduledAt: getFollowUpScheduledAt(2, initialOpened.occurredAt),
+              scheduledAt: getFollowUpScheduledAt(2, initialEngagement.occurredAt),
               error: null,
             })
             .where(and(
@@ -181,7 +188,7 @@ export async function ensureApprovedFollowUpSequence(
         subject: template.subject,
         body: template.body,
         status: "approved",
-        scheduledAt: getFollowUpScheduledAt(sequenceNumber, initialOpened.occurredAt),
+        scheduledAt: getFollowUpScheduledAt(sequenceNumber, initialEngagement.occurredAt),
         sourceType: initialMessage.sourceType,
         sourceId: initialMessage.sourceId,
       }).onConflictDoNothing().returning({ id: outreachMessagesTable.id });
@@ -193,7 +200,7 @@ export async function ensureApprovedFollowUpSequence(
       const [approvedConcurrentDraft] = await tx.update(outreachMessagesTable)
         .set({
           status: "approved",
-          scheduledAt: getFollowUpScheduledAt(sequenceNumber, initialOpened.occurredAt),
+          scheduledAt: getFollowUpScheduledAt(sequenceNumber, initialEngagement.occurredAt),
           error: null,
         })
         .where(and(
@@ -218,7 +225,7 @@ export async function backfillDeliveredFollowUpSequences(
   const candidates = await db.select({
     message: outreachMessagesTable,
     contactName: prospectsTable.contactName,
-    openedAt: outreachDeliveryEventsTable.occurredAt,
+    engagedAt: outreachDeliveryEventsTable.occurredAt,
   })
     .from(outreachMessagesTable)
     .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
@@ -228,9 +235,16 @@ export async function backfillDeliveredFollowUpSequences(
     )
     .where(and(
       eq(outreachMessagesTable.sequenceNumber, 1),
-      eq(outreachDeliveryEventsTable.eventType, "open"),
+      inArray(outreachDeliveryEventsTable.eventType, ["open", "click"]),
       gte(outreachDeliveryEventsTable.occurredAt, cutoff),
       lte(outreachDeliveryEventsTable.occurredAt, now),
+      sql`exists (
+        select 1
+        from outreach_delivery_events as delivery_evidence
+        where delivery_evidence.outreach_message_id = ${outreachMessagesTable.id}
+          and delivery_evidence.event_type = 'delivered'
+          and delivery_evidence.occurred_at <= ${outreachDeliveryEventsTable.occurredAt}
+      )`,
       eq(prospectsTable.contactStatus, "active"),
       inArray(prospectsTable.status, ["approved", "contacted"]),
       sql`(
@@ -248,7 +262,7 @@ export async function backfillDeliveredFollowUpSequences(
           )
       ) < 1`,
     ))
-    .orderBy(desc(outreachDeliveryEventsTable.occurredAt))
+    .orderBy(asc(outreachDeliveryEventsTable.occurredAt))
     .limit(limit);
 
   const earliestByMessage = new Map<number, typeof candidates[number]>();
@@ -278,7 +292,7 @@ export async function backfillDeliveredFollowUpSequences(
     for (const followUp of followUps) {
       const scheduledAt = getFollowUpScheduledAt(
         followUp.sequenceNumber,
-        candidate.openedAt,
+        candidate.engagedAt,
       );
       if (!scheduledAt) continue;
       await db.update(outreachMessagesTable)
@@ -301,7 +315,7 @@ export async function stopStaleOpenerFollowUps(now = new Date()): Promise<number
     .set({
       status: "needs_review",
       scheduledAt: null,
-      error: "Stopped because no opener fell within the 30-day reminder window",
+      error: "Stopped because no qualifying engagement fell within the 30-day reminder window",
     })
     .where(and(
       eq(outreachMessagesTable.sequenceNumber, 2),
@@ -309,8 +323,8 @@ export async function stopStaleOpenerFollowUps(now = new Date()): Promise<number
       sql`not exists (
         select 1
         from outreach_messages as initial_message
-        inner join outreach_delivery_events as initial_open
-          on initial_open.outreach_message_id = initial_message.id
+        inner join outreach_delivery_events as initial_engagement
+          on initial_engagement.outreach_message_id = initial_message.id
         where initial_message.prospect_id = ${outreachMessagesTable.prospectId}
           and initial_message.sequence_number = 1
           and (
@@ -320,9 +334,16 @@ export async function stopStaleOpenerFollowUps(now = new Date()): Promise<number
               and ${outreachMessagesTable.campaignId} is null
             )
           )
-          and initial_open.event_type = 'open'
-          and initial_open.occurred_at >= ${cutoff}
-          and initial_open.occurred_at <= ${now}
+          and initial_engagement.event_type in ('open', 'click')
+          and initial_engagement.occurred_at >= ${cutoff}
+          and initial_engagement.occurred_at <= ${now}
+          and exists (
+            select 1
+            from outreach_delivery_events as delivery_evidence
+            where delivery_evidence.outreach_message_id = initial_message.id
+              and delivery_evidence.event_type = 'delivered'
+              and delivery_evidence.occurred_at <= initial_engagement.occurred_at
+          )
       )`,
     ))
     .returning({ id: outreachMessagesTable.id });
@@ -372,13 +393,13 @@ export async function getVerifiedInitialDeliveryAt(
   return delivery?.occurredAt ?? null;
 }
 
-export async function getVerifiedInitialOpenAt(
+export async function getVerifiedInitialEngagementAt(
   message: Pick<OutreachMessage, "prospectId" | "campaignId">,
 ): Promise<Date | null> {
   const scope = message.campaignId
     ? eq(outreachMessagesTable.campaignId, message.campaignId)
     : isNull(outreachMessagesTable.campaignId);
-  const [opened] = await db.select({
+  const [engagement] = await db.select({
     occurredAt: outreachDeliveryEventsTable.occurredAt,
   })
     .from(outreachMessagesTable)
@@ -390,9 +411,19 @@ export async function getVerifiedInitialOpenAt(
       eq(outreachMessagesTable.prospectId, message.prospectId),
       scope,
       eq(outreachMessagesTable.sequenceNumber, 1),
-      eq(outreachDeliveryEventsTable.eventType, "open"),
+      inArray(outreachDeliveryEventsTable.eventType, ["open", "click"]),
+      sql`exists (
+          select 1
+          from outreach_delivery_events as delivery_evidence
+          where delivery_evidence.outreach_message_id = ${outreachMessagesTable.id}
+            and delivery_evidence.event_type = 'delivered'
+            and delivery_evidence.occurred_at <= ${outreachDeliveryEventsTable.occurredAt}
+      )`,
     ))
     .orderBy(asc(outreachDeliveryEventsTable.occurredAt))
     .limit(1);
-  return opened?.occurredAt ?? null;
+  return engagement?.occurredAt ?? null;
 }
+
+/** @deprecated Use getVerifiedInitialEngagementAt for open-or-click qualification. */
+export const getVerifiedInitialOpenAt = getVerifiedInitialEngagementAt;

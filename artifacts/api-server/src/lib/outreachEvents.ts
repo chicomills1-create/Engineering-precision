@@ -409,7 +409,7 @@ export async function processSendGridEvents(events: SendGridEvent[]): Promise<nu
         ));
     }
 
-    if (matchedMessage?.sequenceNumber === 1 && eventType === "open") {
+    if (matchedMessage?.sequenceNumber === 1 && ["open", "click"].includes(eventType)) {
       const [prospect] = await db.select({ contactName: prospectsTable.contactName })
         .from(prospectsTable)
         .where(eq(prospectsTable.id, matchedMessage.prospectId))

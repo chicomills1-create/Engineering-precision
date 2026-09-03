@@ -129,14 +129,24 @@ test("an initial open schedules exactly one reply-first follow-up", async () => 
   const fixture = await createEventFixture();
   try {
     await db.delete(outreachMessagesTable).where(eq(outreachMessagesTable.id, fixture.followUp.id));
-    await processSendGridEvents([{
-      email: fixture.email,
-      event: "open",
-      timestamp: 1787970000,
-      sg_message_id: `opener-follow-up-${fixture.campaign.id}.filter`,
-      outreach_message_id: String(fixture.initial.id),
-      outreach_prospect_id: String(fixture.prospect.id),
-    }]);
+    await processSendGridEvents([
+      {
+        email: fixture.email,
+        event: "delivered",
+        timestamp: 1787969999,
+        sg_message_id: `opener-delivery-${fixture.campaign.id}.filter`,
+        outreach_message_id: String(fixture.initial.id),
+        outreach_prospect_id: String(fixture.prospect.id),
+      },
+      {
+        email: fixture.email,
+        event: "open",
+        timestamp: 1787970000,
+        sg_message_id: `opener-follow-up-${fixture.campaign.id}.filter`,
+        outreach_message_id: String(fixture.initial.id),
+        outreach_prospect_id: String(fixture.prospect.id),
+      },
+    ]);
 
     const followUps = (await db.select().from(outreachMessagesTable)
       .where(eq(outreachMessagesTable.prospectId, fixture.prospect.id)))
@@ -150,6 +160,67 @@ test("an initial open schedules exactly one reply-first follow-up", async () => 
     );
     assert.equal(followUps[0]?.subject, "A reliable engineering partner for active projects");
     assert.doesNotMatch(followUps[0]?.body ?? "", /https?:\/\/|click/i);
+  } finally {
+    await cleanEventFixture(fixture);
+  }
+});
+
+test("a delivered initial click schedules one follow-up from the first engagement", async () => {
+  const fixture = await createEventFixture();
+  try {
+    await db.delete(outreachMessagesTable).where(eq(outreachMessagesTable.id, fixture.followUp.id));
+    await processSendGridEvents([
+      {
+        email: fixture.email,
+        event: "delivered",
+        timestamp: 1787969999,
+        sg_message_id: `click-delivery-${fixture.campaign.id}.filter`,
+        outreach_message_id: String(fixture.initial.id),
+        outreach_prospect_id: String(fixture.prospect.id),
+      },
+      {
+        email: fixture.email,
+        event: "click",
+        timestamp: 1787970000,
+        sg_message_id: `click-follow-up-${fixture.campaign.id}.filter`,
+        outreach_message_id: String(fixture.initial.id),
+        outreach_prospect_id: String(fixture.prospect.id),
+      },
+      {
+        email: fixture.email,
+        event: "open",
+        timestamp: 1788056400,
+        sg_message_id: `later-open-${fixture.campaign.id}.filter`,
+        outreach_message_id: String(fixture.initial.id),
+        outreach_prospect_id: String(fixture.prospect.id),
+      },
+    ]);
+    const followUps = (await db.select().from(outreachMessagesTable)
+      .where(eq(outreachMessagesTable.prospectId, fixture.prospect.id)))
+      .filter((message) => message.sequenceNumber === 2);
+    assert.equal(followUps.length, 1);
+    assert.equal(followUps[0]?.scheduledAt?.toISOString(), "2026-09-02T15:00:00.000Z");
+  } finally {
+    await cleanEventFixture(fixture);
+  }
+});
+
+test("an open without prior verified delivery does not enroll a follow-up", async () => {
+  const fixture = await createEventFixture();
+  try {
+    await db.delete(outreachMessagesTable).where(eq(outreachMessagesTable.id, fixture.followUp.id));
+    await processSendGridEvents([{
+      email: fixture.email,
+      event: "open",
+      timestamp: 1787970000,
+      sg_message_id: `undelivered-open-${fixture.campaign.id}.filter`,
+      outreach_message_id: String(fixture.initial.id),
+      outreach_prospect_id: String(fixture.prospect.id),
+    }]);
+    const followUps = (await db.select().from(outreachMessagesTable)
+      .where(eq(outreachMessagesTable.prospectId, fixture.prospect.id)))
+      .filter((message) => message.sequenceNumber === 2);
+    assert.equal(followUps.length, 0);
   } finally {
     await cleanEventFixture(fixture);
   }

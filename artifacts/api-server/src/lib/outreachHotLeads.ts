@@ -26,12 +26,13 @@ export function buildOutreachHotLeads(rows: OutreachEngagementRow[]) {
     latestEngagedAt: Date;
   }>();
   for (const row of rows) {
+    if (row.eventType !== "open" && row.eventType !== "click") continue;
     if (leads.get(row.prospectId)?.eventIds.has(row.eventId)) continue;
     const current = leads.get(row.prospectId);
     if (current) {
       current.eventIds.add(row.eventId);
-      if (row.eventType === "click") current.clickCount += 1;
-      else current.openCount += 1;
+        if (row.eventType === "click") current.clickCount += 1;
+        if (row.eventType === "open") current.openCount += 1;
       if (row.occurredAt < current.firstEngagedAt) current.firstEngagedAt = row.occurredAt;
       if (row.occurredAt > current.latestEngagedAt) {
         current.latestEngagedAt = row.occurredAt;
