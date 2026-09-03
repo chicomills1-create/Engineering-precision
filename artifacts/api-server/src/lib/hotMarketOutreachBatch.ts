@@ -15,6 +15,7 @@ import referralPartnerData from "../../../../.agents/outputs/hot-market-referral
 import { assertVerifiedOutreachBatch } from "./outreachContactValidation";
 
 export const HOT_MARKET_SOURCE_TYPE = "hot_market_one_time";
+export const HOT_MARKET_DAILY_TARGET = 50;
 export const HOT_MARKET_TARGET_DATE = "2026-09-03";
 export const HOT_MARKET_SEND_AT = new Date("2026-09-03T15:10:00.000Z");
 const CAMPAIGN_NAME = "Arizona Hot-Market Builders - September 3, 2026";
@@ -139,7 +140,7 @@ When a structural change, site issue, MEP coordination item, or permit response 
 
 Apex Grid is a veteran-owned, PE-led team providing focused Civil, Structural, MEP, permit-response, and drafting support. We deliver consistent work, keep scopes right-sized, provide clear competitive pricing before work starts, and typically turn around focused reviews or defined design responses in 12–24 hours.
 
-We’re Arizona-based, but licensed to support projects across 49 states, excluding Alaska, so we can stay useful when your team or partners work outside Arizona.
+We’re Arizona-based, but licensed to support projects across 49 states, so we can stay useful when your team or partners work outside Arizona.
 
 Click the URL to visit our page: https://apexgrideng.com.
 
@@ -233,6 +234,10 @@ export async function seedHotMarketOutreachBatch(options: {
     HOT_MARKET_OUTREACH_CONTACTS,
     HOT_MARKET_OUTREACH_CONTACTS.length,
   );
+  const hotMarketDailyLimit = Math.max(
+    HOT_MARKET_DAILY_TARGET,
+    HOT_MARKET_OUTREACH_CONTACTS.length,
+  );
 
   let [campaign] = await db.select().from(campaignsTable)
     .where(eq(campaignsTable.name, CAMPAIGN_NAME))
@@ -242,7 +247,7 @@ export async function seedHotMarketOutreachBatch(options: {
       name: CAMPAIGN_NAME,
       audience: "mixed",
       states: ["AZ"],
-      dailyLimit: HOT_MARKET_OUTREACH_CONTACTS.length,
+      dailyLimit: hotMarketDailyLimit,
       status: "active",
       subjectTemplate: SUBJECT,
       bodyTemplate: "Approved personalized Arizona hot-market builder copy",
@@ -250,12 +255,12 @@ export async function seedHotMarketOutreachBatch(options: {
   }
   if (!campaign) throw new Error("Unable to create the hot-market outreach campaign");
   if (
-    campaign.dailyLimit !== HOT_MARKET_OUTREACH_CONTACTS.length
+    campaign.dailyLimit !== hotMarketDailyLimit
     || campaign.audience !== "mixed"
   ) {
     const [updatedCampaign] = await db.update(campaignsTable)
       .set({
-        dailyLimit: HOT_MARKET_OUTREACH_CONTACTS.length,
+        dailyLimit: hotMarketDailyLimit,
         audience: "mixed",
       })
       .where(eq(campaignsTable.id, campaign.id))

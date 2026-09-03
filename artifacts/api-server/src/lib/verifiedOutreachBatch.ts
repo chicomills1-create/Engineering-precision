@@ -16,6 +16,7 @@ import { VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC } from "./verifiedOutreachCont
 
 const CAMPAIGN_NAME = "Approved 8 AM Outreach - August 2026";
 const SUBJECT = "Need stamped engineering without the usual wait or cost?";
+export const REGULAR_OUTREACH_DAILY_TARGET = 150;
 export const VERIFIED_OUTREACH_CONTACTS = [
   ...LEGACY_VERIFIED_OUTREACH_CONTACTS,
   ...VERIFIED_OUTREACH_CONTACTS_AUG_29,
@@ -136,7 +137,7 @@ export async function seedVerifiedOutreachBatch(options: {
       name: CAMPAIGN_NAME,
       audience: "mixed",
       states: ["AZ", "CA"],
-      dailyLimit: 200,
+      dailyLimit: REGULAR_OUTREACH_DAILY_TARGET,
       status: "active",
       subjectTemplate: SUBJECT,
       bodyTemplate: "Approved personalized Apex Grid outreach copy",
@@ -144,13 +145,17 @@ export async function seedVerifiedOutreachBatch(options: {
   }
   if (!campaign) throw new Error("Unable to create the verified outreach campaign");
   if (
-    campaign.dailyLimit !== 200
+    campaign.dailyLimit !== REGULAR_OUTREACH_DAILY_TARGET
     || campaign.audience !== "mixed"
     || !campaign.states.includes("AZ")
     || !campaign.states.includes("CA")
   ) {
     const [updatedCampaign] = await db.update(campaignsTable)
-      .set({ dailyLimit: 200, audience: "mixed", states: ["AZ", "CA"] })
+      .set({
+        dailyLimit: REGULAR_OUTREACH_DAILY_TARGET,
+        audience: "mixed",
+        states: ["AZ", "CA"],
+      })
       .where(eq(campaignsTable.id, campaign.id))
       .returning();
     if (!updatedCampaign) throw new Error("Unable to set the outreach campaign daily limit");

@@ -22,7 +22,7 @@
 - [Unknown outreach sends](unknown-outreach-sends.md) — retain immutable sequence claims for transport errors and ambiguous provider responses; reconcile by stable custom key.
 - [Outreach delivery evidence](outreach-delivery-evidence.md) — “prepared” and `sent_at` are not proof of handoff; report SendGrid processed, delivered, bounced, and unresolved separately.
 - [Client outreach exclusions](client-outreach-exclusions.md) — Atmosphere Architects clients Tim Boyle and Mike Hudson must never receive Apex Grid outreach.
-- [Exact-time outreach scheduling](exact-time-outreach-scheduling.md) — send 150 approved messages at 8 AM Phoenix, then prepare the next day's 150; use durable triggers and transactional leases.
+- [Exact-time outreach scheduling](exact-time-outreach-scheduling.md) — target 150 regular + 50 hot-market messages at 8 AM Phoenix; verified hot-market extras are allowed under the monthly ceiling.
 - [Verified outreach library](verified-outreach-library.md) — build an auditable AZ-first, then CA prospect pool; cap daily sends at 150 under a hard 5,000 monthly ceiling.
 - [Free-first outreach research](free-first-outreach-research.md) — use official registries and firm pages before targeted enrichment; never infer emails from patterns.
 - [Outreach stop serialization](outreach-stop-serialization.md) — evidence, suppression, sending, and seeding must share database locks so a stopped contact cannot be revived by a race.

@@ -17,13 +17,13 @@ import {
   approvedOutreachBody,
   approvedOutreachFollowUpMessages,
   approvedOutreachSubject,
+  REGULAR_OUTREACH_DAILY_TARGET,
 } from "./verifiedOutreachBatch";
 import { ensureApprovedFollowUpSequence } from "./outreachSequence";
 import { HOT_MARKET_SOURCE_TYPE } from "./hotMarketOutreachBatch";
-export const OUTREACH_PERSONAL_PREPARATION_TARGET = 150;
+export const OUTREACH_PERSONAL_PREPARATION_TARGET = 100;
 export const OUTREACH_PUBLIC_PREPARATION_TARGET = 50;
-export const OUTREACH_PREPARATION_TARGET =
-  OUTREACH_PERSONAL_PREPARATION_TARGET + OUTREACH_PUBLIC_PREPARATION_TARGET;
+export const OUTREACH_PREPARATION_TARGET = REGULAR_OUTREACH_DAILY_TARGET;
 const STALE_RUN_MS = 30 * 60_000;
 const PUBLIC_INBOX_LOCAL_PARTS = new Set([
   "admin", "contact", "hello", "help", "info", "inquiries", "office", "sales", "support",

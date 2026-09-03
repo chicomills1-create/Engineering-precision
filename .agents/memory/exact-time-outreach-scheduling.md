@@ -15,11 +15,11 @@ Manual approvals and automatic preparation must allocate from the same date-keye
 
 **How to apply:** Route every initial-message approval through the shared window allocator, enforce one global Phoenix-day ceiling at dispatch, and keep campaign limits as an additional constraint rather than the global limit itself.
 
-The approved operating cycle is autonomous: at 8:00 AM America/Phoenix, dispatch the already-approved batch of 150 eligible initial messages without asking for another approval. After that batch is sent or its provider outcome is safely reconciled, prepare a fresh batch of 150 for the following Phoenix day.
+The approved operating cycle is autonomous: at 8:00 AM America/Phoenix, target 150 regular eligible initial messages plus 50 verified hot-market messages without asking for another approval. Verified hot-market contacts beyond 50 may also send, subject to the hard monthly ceiling. After dispatch or safe provider reconciliation, prepare the next regular batch and replenish the hot-market lane.
 
-**Why:** The user has already approved the original outreach and explicitly wants the same 150-per-day cycle to continue without routine approval prompts. Requiring approval again delays the schedule; retrying an unresolved dispatch without reconciliation risks duplicate emails.
+**Why:** The user chose a 150 regular + 50 hot-market baseline so daily outreach stays at 200 when the target is filled, while allowing unusually strong verified opportunities without an artificial daily hot-market cap. Requiring approval again delays the schedule; retrying an unresolved dispatch without reconciliation risks duplicate emails.
 
-**How to apply:** Treat approval as a standing authorization for the reviewed outreach process, not a one-time click for every daily batch. Keep unresolved or ambiguous provider outcomes blocked until SendGrid reconciliation proves whether each message was accepted, delivered, or safe to retry; never replace an unresolved batch with a new batch or resend it blindly.
+**How to apply:** Treat approval as a standing authorization for the reviewed outreach process, not a one-time click for every daily batch. Keep the regular lane at 150, reserve a 50-message hot-market target, allow only verified extras, and stop at the monthly ceiling. Keep ambiguous provider outcomes blocked until SendGrid reconciliation proves whether each message was accepted, delivered, or safe to retry.
 
 An automated drip must create every approved sequence row before the initial delivery event; delivery handling can only schedule follow-ups that already exist. Reconcile missing rows idempotently on startup and derive their dates from verified delivery evidence.
 

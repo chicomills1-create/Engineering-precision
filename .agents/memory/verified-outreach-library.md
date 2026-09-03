@@ -19,23 +19,23 @@ Do not thin the company universe because enrichment fails. Preserve every legiti
 
 Keep the public person, role, company domain, source URL, and enrichment status for unresolved firms. Revisit those same firms later for a directly published business email before considering another paid lookup; never lose the company just because the first email path was empty.
 
-Maintain two ordered library lanes: Personal and Public. Personal holds named individual contacts obtained through a single paid lookup after public qualification; Public holds company-published business emails found without finder credits. Work through Personal first, then revisit unresolved companies for the Public lane.
+Maintain three ordered library lanes: Personal, Public, and Hot Market. Personal holds named contacts obtained through one paid lookup after public qualification; Public holds company-published emails found without finder credits; Hot Market requires current, strong project or market evidence and a verified contact.
 
-The operating mix is 150 Personal plus 50 Public recipients per Phoenix day. Spend at most one Finder credit on one publicly confirmed reputable person and matching domain, never retry a failed lookup or switch people to force a result, and use clearly attributed official-site emails in the zero-credit Public lane.
+The regular operating mix is 100 Personal plus 50 Public recipients per Phoenix day. The separate Hot Market lane targets 50 verified recipients; verified extras may send when available. Spend at most one Finder credit on one publicly confirmed reputable person and matching domain, never retry a failed lookup or switch people to force a result, and use clearly attributed official-site emails in zero-credit lanes.
 
-The approved daily target is exactly 200: 150 Personal plus 50 Public. The hard Phoenix-calendar monthly ceiling is 6,000, allowing this mix for 30 days. The paid Finder ceiling remains independently capped at 150 lookups per Phoenix day.
+The approved baseline is 200 per Phoenix day: 150 regular plus 50 Hot Market. The hard Phoenix-calendar monthly ceiling remains 6,000. Verified Hot Market extras are allowed, but they consume the same monthly ceiling and therefore reduce remaining monthly capacity.
 
-**Why:** Personal and Public contacts have different evidence and credit costs. Separate quotas prevent either lane from consuming the other and make the 30-day 6,000-send decision explicit.
+**Why:** Personal, Public, and Hot Market contacts have different evidence, urgency, and credit costs. Separate targets preserve the regular pipeline while prioritizing current opportunities without pretending unverified records are sendable.
 
-**How to apply:** Reserve 150 Personal and 50 Public preparation slots, preserve paid-credit usage per lookup, stage tomorrow's messages for the next Phoenix 8:00 AM window, and stop all sends at 6,000 in a Phoenix month.
+**How to apply:** Reserve 100 Personal and 50 Public regular slots, target 50 verified Hot Market messages, allow verified Hot Market extras, preserve paid-credit usage per lookup, stage messages for the next Phoenix 8:00 AM window, and stop all sends at 6,000 in a Phoenix month.
 
 If a reputable direct person cannot be confirmed or their individual email cannot be obtained responsibly, retain the company in the Public lane and save any official company email found there. Never spend repeated credits trying to force a personal address, and never discard the company or its public email.
 
-The daily operating ceiling is 200 new eligible recipients at 8:00 AM America/Phoenix time, partitioned into 150 Personal and 50 Public slots. Enforce a hard monthly ceiling of 6,000 sends. Every daily selection must exclude prior sends and all bounce, complaint, unsubscribe, and reply suppressions.
+The daily operating baseline is 200 new eligible recipients at 8:00 AM America/Phoenix time: 150 regular and 50 Hot Market. Verified Hot Market extras may raise the daily total, but the hard monthly ceiling remains 6,000. Every selection must exclude prior sends and all bounce, complaint, unsubscribe, and reply suppressions.
 
-**Why:** Paid enrichment credits are finite, while the requested company coverage is broader than the immediately sendable list. Separating the company universe from email enrichment prevents low-yield lookups from silently hiding legitimate prospects.
+**Why:** Paid enrichment credits are finite, while requested national coverage is broader than the immediately sendable list. Separating the company universe from email enrichment and hot-market qualification prevents low-yield lookups or weak urgency signals from entering the send queue.
 
-**How to apply:** Keep operational contact data in the database/register with verification, approval, source, and suppression state. Use FindyMail for enrichment and verification without guessing addresses. Use durable scheduled execution or an always-running worker for the 8:00 AM trigger; an autoscaling in-process interval is not sufficient.
+**How to apply:** Keep operational contact data in the database/register with verification, approval, source, urgency lane, and suppression state. Use FindyMail for enrichment and verification without guessing addresses. Use durable scheduled execution or an always-running worker for the 8:00 AM trigger; an autoscaling in-process interval is not sufficient.
 
 Run FindyMail name/domain enrichment in small paced batches and retry only explicit rate-limit responses. A successful HTTP response without a returned email is a legitimate no-result, not a reason to try another person.
 
@@ -55,14 +55,14 @@ The paid-enrichment budget is a separate hard limit: use at most 150 paid credit
 
 **How to apply:** Count every attempted paid contact lookup before starting research, stop at 150 for the Phoenix day, and report any remaining email shortfall without purchasing additional lookups.
 
-The paid-credit plan must be evaluated over a 30-day horizon: 150 paid contacts per day requires 4,500 finder credits. This does not authorize reducing the 150-contact Personal lane when the balance is short.
+The paid-credit plan must be evaluated over a 30-day horizon. The regular Personal lane targets 100 recipients per day; the independent safety ceiling remains at most 150 paid lookups per Phoenix day unless the user lowers it separately.
 
-**Why:** Daily send volume and the multi-day enrichment runway are separate planning constraints; silently lowering the send target would change the operating decision instead of addressing the credit shortfall.
+**Why:** Daily send volume and the multi-day enrichment runway are separate planning constraints. The new 150-message regular allocation reduces the Personal send target, but it does not authorize extra paid lookups for the Hot Market lane.
 
-**How to apply:** Report current finder-credit coverage and the 30-day shortfall explicitly, keep the 150/day Personal target unchanged, and do not spend beyond the per-day or 30-day credit plan.
+**How to apply:** Report finder-credit coverage explicitly, target 100 Personal regular recipients, use public evidence first for Hot Market contacts, and do not spend beyond the existing per-day or 30-day credit plan.
 
-Public business emails published on official company websites are a zero-credit lane with 50 reserved daily slots. The 200-email target, its 150/50 lane split, and the 150-paid-credit ceiling are separate constraints.
+Public business emails published on official company websites remain a zero-credit regular lane with 50 reserved daily slots. The 150 regular target, 50 Hot Market target, monthly ceiling, and paid-credit ceiling are separate constraints.
 
 **Why:** A company-published address can support compliant outreach without consuming a Finder credit; treating every send as a paid lookup wastes the enrichment budget and needlessly reduces future coverage.
 
-**How to apply:** Select up to 150 qualified Personal contacts and exactly 50 qualified Public contacts. Never let surplus contacts in one lane consume the other lane's slots, and never use paid credits for Public contacts.
+**How to apply:** Select up to 100 qualified Personal contacts and 50 qualified Public contacts for the regular lane. Fill Hot Market only with current, verified evidence; allow verified extras; never use paid credits for publicly available addresses.

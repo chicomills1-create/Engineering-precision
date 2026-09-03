@@ -28,7 +28,11 @@ import {
 } from "./outreachEligibility";
 import { withOutreachEmailLock } from "./outreachEmailLock";
 import { getVerifiedInitialDeliveryAt } from "./outreachSequence";
-import { HOT_MARKET_SOURCE_TYPE } from "./hotMarketOutreachBatch";
+import {
+  HOT_MARKET_DAILY_TARGET,
+  HOT_MARKET_SOURCE_TYPE,
+} from "./hotMarketOutreachBatch";
+import { REGULAR_OUTREACH_DAILY_TARGET } from "./verifiedOutreachBatch";
 
 export type GeneratedDraft = { subject: string; body: string; followUps: { subject: string; body: string }[] };
 
@@ -61,10 +65,10 @@ export function isDefinitiveSendGridRejection(status: number): boolean {
     && ![408, 409, 425, 429].includes(status);
 }
 
-const INITIAL_RAMP_DAILY_LIMIT = 200;
+const INITIAL_RAMP_DAILY_LIMIT =
+  REGULAR_OUTREACH_DAILY_TARGET + HOT_MARKET_DAILY_TARGET;
 const INITIAL_RAMP_ACTIVE_DAYS = 3;
 const OUTREACH_MONTHLY_LIMIT = 6000;
-const ONE_TIME_HOT_MARKET_DATE = "2026-09-03";
 const DUPLICATE_EMAIL_SEQUENCE_STATUSES = [
   "sending",
   "needs_review",
@@ -126,17 +130,22 @@ export function getGlobalOutreachDailyLimit(
   date = new Date(),
   hotMarketMessageCount = 0,
 ): number {
-  return phoenixDateKey(date) === ONE_TIME_HOT_MARKET_DATE
-    ? INITIAL_RAMP_DAILY_LIMIT + Math.max(0, hotMarketMessageCount)
-    : INITIAL_RAMP_DAILY_LIMIT;
+  phoenixDateKey(date);
+  return REGULAR_OUTREACH_DAILY_TARGET
+    + Math.max(HOT_MARKET_DAILY_TARGET, Math.max(0, hotMarketMessageCount));
 }
 
 export function isDuplicateEmailSequenceStatus(status: string): boolean {
   return (DUPLICATE_EMAIL_SEQUENCE_STATUSES as readonly string[]).includes(status);
 }
 
-export function getOutreachDailyLimit(configuredLimit: number | undefined, activeSendDays: number): number {
+export function getOutreachDailyLimit(
+  configuredLimit: number | undefined,
+  activeSendDays: number,
+  allowVerifiedHotMarketExtras = false,
+): number {
   const limit = configuredLimit ?? INITIAL_RAMP_DAILY_LIMIT;
+  if (allowVerifiedHotMarketExtras) return limit;
   const rampLimit = activeSendDays < INITIAL_RAMP_ACTIVE_DAYS
     ? Math.min(limit, INITIAL_RAMP_DAILY_LIMIT)
     : limit;
@@ -233,7 +242,11 @@ async function reserveOutreachSend(
           isNotNull(outreachMessagesTable.sentAt),
         ));
       const activeSendDays = new Set(sentMessages.map(({ sentAt }) => phoenixDateKey(sentAt!))).size;
-      const campaignLimit = getOutreachDailyLimit(campaign.dailyLimit, activeSendDays);
+      const campaignLimit = getOutreachDailyLimit(
+        campaign.dailyLimit,
+        activeSendDays,
+        message.sourceType === HOT_MARKET_SOURCE_TYPE,
+      );
       const [campaignReservations] = await tx.select({ value: count() })
         .from(outreachSendReservationsTable)
         .innerJoin(

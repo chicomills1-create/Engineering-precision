@@ -21,11 +21,11 @@ import {
   isDuplicateEmailSequenceStatus,
 } from "./outreach";
 
-test("the September 3 hot-market exception raises only that Phoenix day's global limit", () => {
+test("the global target reserves 150 regular and 50 hot-market slots while allowing verified extras", () => {
   assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z")), 200);
-  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z"), 50), 250);
-  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z"), 100), 300);
-  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-04T15:00:00.000Z"), 100), 200);
+  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z"), 50), 200);
+  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z"), 100), 250);
+  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-04T15:00:00.000Z"), 100), 250);
   assert.equal(getOutreachMonthlyLimit(), 6000);
 });
 
@@ -181,6 +181,7 @@ test("enforces the 200-per-day campaign ceiling from the first send day", () => 
   assert.equal(getOutreachDailyLimit(167, 0), 167);
   assert.equal(getOutreachDailyLimit(500, 0), 200);
   assert.equal(getOutreachDailyLimit(500, 3), 200);
+  assert.equal(getOutreachDailyLimit(250, 0, true), 250);
 });
 
 test("legacy same-day sends consume the new global reservation ceiling", () => {
