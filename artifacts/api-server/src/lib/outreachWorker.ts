@@ -265,6 +265,33 @@ export function createGuardedAsyncRun(task: () => Promise<void>): () => void {
     });
   };
 }
+
+export type OutreachWorkerRunOperations = {
+  dispatch: () => Promise<void>;
+  reconcile: () => Promise<void>;
+  research: () => Promise<void>;
+};
+
+export type OutreachWorkerRuns = {
+  runDispatch: () => void;
+  runReconciliation: () => void;
+  runResearch: () => void;
+};
+
+/**
+ * Each scheduler lane has its own guard. Slow provider work or research can
+ * therefore remain in flight without consuming the dispatch lane's guard.
+ */
+export function createOutreachWorkerRuns(
+  operations: OutreachWorkerRunOperations,
+): OutreachWorkerRuns {
+  return {
+    runDispatch: createGuardedAsyncRun(operations.dispatch),
+    runReconciliation: createGuardedAsyncRun(operations.reconcile),
+    runResearch: createGuardedAsyncRun(operations.research),
+  };
+}
+
 export async function reconcileSendingOutreachMessages(
   now = new Date(),
   reviewAfterMs = 15 * 60 * 1000,
@@ -322,11 +349,12 @@ export async function processDueOutreachMessages(): Promise<number> {
       logger.warn({ messageId: claimed.id, error }, "Scheduled outreach send blocked or failed");
     }
   }
-  // Dispatch already-approved due messages before the potentially slow provider
-  // reconciliation scan so autoscale instances cannot idle before sending.
+  return sentCount;
+}
+
+export async function processOutreachReconciliation(): Promise<void> {
   const reconciliation = await reconcileUncertainOutreachMessages();
   logReconciliationSummary(reconciliation);
-  return sentCount;
 }
 
 function logReconciliationSummary(summary: OutreachReconciliationSummary): void {
@@ -371,11 +399,17 @@ export function startOutreachWorker(): void {
     return;
   }
 
-  if (status.automationReady) {
-    const runProductionAutomation = createGuardedAsyncRun(async () => {
+  const runs = createOutreachWorkerRuns({
+    dispatch: async () => {
       await processDueOutreachMessages()
-        .then(async (sentCount) => {
+        .then((sentCount) => {
           if (sentCount > 0) logger.info({ sentCount }, "Processed scheduled outreach messages");
+        })
+        .catch((err: unknown) => logger.error({ err }, "Outreach dispatch scheduler failed"));
+    },
+    reconcile: async () => {
+      await processOutreachReconciliation()
+        .then(async () => {
           const preparation = await prepareNextPhoenixOutreach();
           if (preparation.state === "completed") {
             logger.info(preparation, "Prepared next Phoenix outreach window");
@@ -383,17 +417,10 @@ export function startOutreachWorker(): void {
             logger.error(preparation, "Next Phoenix outreach preparation failed");
           }
         })
-        .catch((err: unknown) => logger.error({ err }, "Outreach production scheduler failed"));
-    });
-    runProductionAutomation();
-    const sendTimer = setInterval(runProductionAutomation, 60_000);
-    sendTimer.unref();
-    logger.info("Outreach send scheduler enabled");
-  }
-
-  if (status.researchAutomationReady) {
-    const runResearch = () => {
-      void ensureRecurringHotMarketResearchSchedule()
+        .catch((err: unknown) => logger.error({ err }, "Outreach reconciliation scheduler failed"));
+    },
+    research: async () => {
+      await ensureRecurringHotMarketResearchSchedule()
         .then(() => Promise.all([
           processDueOutreachResearchSchedules(),
           processDueHotMarketResearch(),
@@ -409,9 +436,24 @@ export function startOutreachWorker(): void {
           }
         })
         .catch((err: unknown) => logger.error({ err }, "Outreach research scheduler failed"));
-    };
-    runResearch();
-    const researchTimer = setInterval(runResearch, 60_000);
+    },
+  });
+
+  if (status.automationReady) {
+    runs.runDispatch();
+    const sendTimer = setInterval(runs.runDispatch, 60_000);
+    sendTimer.unref();
+    logger.info("Outreach send scheduler enabled");
+
+    runs.runReconciliation();
+    const reconciliationTimer = setInterval(runs.runReconciliation, 60_000);
+    reconciliationTimer.unref();
+    logger.info("Outreach reconciliation scheduler enabled");
+  }
+
+  if (status.researchAutomationReady) {
+    runs.runResearch();
+    const researchTimer = setInterval(runs.runResearch, 60_000);
     researchTimer.unref();
     logger.info("Outreach research scheduler enabled");
   }

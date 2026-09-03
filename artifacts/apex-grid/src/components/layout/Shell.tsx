@@ -77,7 +77,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                   APEX GRID
                 </span>
                 <span className="text-[8px] uppercase tracking-[0.12em] text-muted-foreground leading-none mt-1 whitespace-nowrap">
-                  Engineering · Architecture · PCM
+                  Engineering · Architecture · General Contracting
                 </span>
               </div>
             </Link>

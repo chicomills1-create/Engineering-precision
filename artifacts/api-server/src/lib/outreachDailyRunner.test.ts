@@ -44,11 +44,12 @@ test("researches before dispatching and makes a second pass after the safe wait"
       calls.push(`send-${++sends}`);
       return sends;
     },
+    processProviderReconciliation: async () => { calls.push("reconcile"); },
     now: () => times.shift()!,
     wait: async (milliseconds) => { calls.push(`wait-${milliseconds}`); },
   });
 
-  assert.deepEqual(calls, ["hot-market", "scheduled", "send-1", "wait-240000", "send-2"]);
+  assert.deepEqual(calls, ["hot-market", "scheduled", "send-1", "reconcile", "wait-240000", "send-2"]);
   assert.deepEqual(result, { initialSent: 1, stagedSent: 2, waitMs: 240_000 });
 });
 
@@ -58,6 +59,7 @@ test("does not make a second send pass for catch-up runs", async () => {
     processHotMarketResearch: async () => undefined,
     processScheduledResearch: async () => 0,
     processDueMessages: async () => ++sends,
+    processProviderReconciliation: async () => undefined,
     now: () => new Date("2026-01-15T16:00:00.000Z"),
     wait: async () => assert.fail("catch-up runs must not wait"),
   });

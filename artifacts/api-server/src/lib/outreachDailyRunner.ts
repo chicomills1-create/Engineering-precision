@@ -54,6 +54,7 @@ export type DailyOutreachRunnerOperations = {
   processHotMarketResearch: () => Promise<unknown>;
   processScheduledResearch: () => Promise<number>;
   processDueMessages: () => Promise<number>;
+  processProviderReconciliation: () => Promise<void>;
   now: () => Date;
   wait: (milliseconds: number) => Promise<void>;
 };
@@ -77,12 +78,15 @@ export async function runDailyOutreachOnce(
   await operations.processScheduledResearch();
 
   const initialSent = await operations.processDueMessages();
+  const reconciliation = operations.processProviderReconciliation();
   const waitMs = getPhoenixStagedMessageWaitMs(invokedAt, operations.now());
   if (waitMs === 0) {
+    await reconciliation;
     return { initialSent, stagedSent: 0, waitMs };
   }
 
   await operations.wait(waitMs);
   const stagedSent = await operations.processDueMessages();
+  await reconciliation;
   return { initialSent, stagedSent, waitMs };
 }

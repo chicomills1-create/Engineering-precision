@@ -3,6 +3,7 @@ import { logger } from "./lib/logger";
 import {
   getOutreachAutomationStatus,
   processDueOutreachMessages,
+  processOutreachReconciliation,
 } from "./lib/outreachWorker";
 import {
   processDueHotMarketResearch,
@@ -39,6 +40,7 @@ async function main(): Promise<void> {
     processHotMarketResearch: () => processDueHotMarketResearch(),
     processScheduledResearch: () => processDueOutreachResearchSchedules(),
     processDueMessages: () => processDueOutreachMessages(),
+    processProviderReconciliation: () => processOutreachReconciliation(),
     now: () => new Date(),
     wait,
   });

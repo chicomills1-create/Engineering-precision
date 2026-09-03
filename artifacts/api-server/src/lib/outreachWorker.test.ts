@@ -4,6 +4,7 @@ import {
   claimOutreachMessageForSending,
   countPersistedOutreachSend,
   createGuardedAsyncRun,
+  createOutreachWorkerRuns,
   getOutreachAutomationStatus,
   isOutreachAutomationReady,
   isOutreachResearchAutomationReady,
@@ -252,6 +253,82 @@ test("guarded automation runs immediately when invoked and never overlaps", asyn
   await new Promise<void>((resolve) => setImmediate(resolve));
   assert.equal(calls, 2);
   release!();
+});
+
+test("pending reconciliation does not block a later dispatch tick", async () => {
+  let dispatchCalls = 0;
+  let releaseReconciliation: (() => void) | undefined;
+  const runs = createOutreachWorkerRuns({
+    dispatch: async () => { dispatchCalls += 1; },
+    reconcile: async () => {
+      await new Promise<void>((resolve) => {
+        releaseReconciliation = resolve;
+      });
+    },
+    research: async () => undefined,
+  });
+
+  runs.runReconciliation();
+  await new Promise<void>((resolve) => setImmediate(resolve));
+  runs.runDispatch();
+  await new Promise<void>((resolve) => setImmediate(resolve));
+
+  assert.equal(dispatchCalls, 1);
+  releaseReconciliation!();
+});
+
+test("dispatch lane does not overlap itself", async () => {
+  let dispatchCalls = 0;
+  let releaseDispatch: (() => void) | undefined;
+  const runs = createOutreachWorkerRuns({
+    dispatch: async () => {
+      dispatchCalls += 1;
+      await new Promise<void>((resolve) => {
+        releaseDispatch = resolve;
+      });
+    },
+    reconcile: async () => undefined,
+    research: async () => undefined,
+  });
+
+  runs.runDispatch();
+  runs.runDispatch();
+  await new Promise<void>((resolve) => setImmediate(resolve));
+  assert.equal(dispatchCalls, 1);
+
+  releaseDispatch!();
+  await new Promise<void>((resolve) => setImmediate(resolve));
+  runs.runDispatch();
+  await new Promise<void>((resolve) => setImmediate(resolve));
+  assert.equal(dispatchCalls, 2);
+  releaseDispatch!();
+});
+
+test("reconciliation lane does not overlap itself", async () => {
+  let reconciliationCalls = 0;
+  let releaseReconciliation: (() => void) | undefined;
+  const runs = createOutreachWorkerRuns({
+    dispatch: async () => undefined,
+    reconcile: async () => {
+      reconciliationCalls += 1;
+      await new Promise<void>((resolve) => {
+        releaseReconciliation = resolve;
+      });
+    },
+    research: async () => undefined,
+  });
+
+  runs.runReconciliation();
+  runs.runReconciliation();
+  await new Promise<void>((resolve) => setImmediate(resolve));
+  assert.equal(reconciliationCalls, 1);
+
+  releaseReconciliation!();
+  await new Promise<void>((resolve) => setImmediate(resolve));
+  runs.runReconciliation();
+  await new Promise<void>((resolve) => setImmediate(resolve));
+  assert.equal(reconciliationCalls, 2);
+  releaseReconciliation!();
 });
 
 test("arms only when the explicit automation flag is enabled", () => {
