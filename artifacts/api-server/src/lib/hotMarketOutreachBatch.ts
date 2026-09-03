@@ -12,6 +12,11 @@ import localContractorData from "../../../../.agents/outputs/hot-market-local-co
 import majorContractorData from "../../../../.agents/outputs/hot-market-major-contractors-verified.json";
 import commercialRecheckData from "../../../../.agents/outputs/hot-market-commercial-recheck-verified.json";
 import referralPartnerData from "../../../../.agents/outputs/hot-market-referral-partners-verified.json";
+import texasExpansionData from "../../../../.agents/outputs/hot-market-texas-verified.json";
+import southeastExpansionData from "../../../../.agents/outputs/hot-market-southeast-verified.json";
+import carolinasExpansionData from "../../../../.agents/outputs/hot-market-carolinas-verified.json";
+import mountainExpansionData from "../../../../.agents/outputs/hot-market-mountain-verified.json";
+import nationalExpansionData from "../../../../.agents/outputs/hot-market-national-verified.json";
 import {
   assertVerifiedHotMarketContact,
   assertVerifiedOutreachBatch,
@@ -30,7 +35,7 @@ export const HOT_MARKET_SOURCE_TYPE = "hot_market_one_time";
 
 export const HOT_MARKET_RECURRING_SOURCE_TYPE = "hot_market_verified_national";
 export const HOT_MARKET_DAILY_TARGET = 50;
-const CAMPAIGN_NAME = "Arizona Hot-Market Builders - September 3, 2026";
+const CAMPAIGN_NAME = "Verified National Hot-Market Expansion - September 4, 2026";
 const SUBJECT = "Fast engineering support for active projects";
 
 const NATIONAL_CAMPAIGN_NAME = "Verified National Hot-Market Outreach";
@@ -69,6 +74,43 @@ type SourceContact = {
   personalizationSentence?: string;
 };
 
+type ExpansionContact = SourceContact & {
+  lane: "direct_client" | "referral_partner";
+  projectEvidenceUrl: string;
+  personalization: string;
+};
+
+const PREVIOUSLY_CONTACTED_EXPANSION_DOMAINS = new Set([
+  "econtractors.com",
+  "fieldpaoli.com",
+  "formgrey.com",
+  "jhlconstructors.com",
+  "mithun.com",
+  "mortenson.com",
+  "pepperconstruction.com",
+  "webcor.com",
+]);
+
+function companyDomain(website: string): string {
+  return new URL(website).hostname.replace(/^www\./, "").toLowerCase();
+}
+
+const expansionContacts = [
+  ...((texasExpansionData as { records: ExpansionContact[] }).records),
+  ...((southeastExpansionData as { records: ExpansionContact[] }).records),
+  ...((carolinasExpansionData as { records: ExpansionContact[] }).records),
+  ...((mountainExpansionData as { records: ExpansionContact[] }).records),
+  ...((nationalExpansionData as { records: ExpansionContact[] }).records),
+]
+  .filter((contact) => !PREVIOUSLY_CONTACTED_EXPANSION_DOMAINS.has(companyDomain(contact.website)))
+  .slice(0, HOT_MARKET_DAILY_TARGET)
+  .map((contact): SourceContact => ({
+    ...contact,
+    audience: contact.lane === "referral_partner" ? "architect_design_partner" : "builder",
+    projectSourceUrl: contact.projectEvidenceUrl,
+    personalizationSentence: contact.personalization,
+  }));
+
 function slug(value: string): string {
   return value.toLowerCase()
     .normalize("NFKD")
@@ -84,6 +126,7 @@ const sourceContacts: SourceContact[] = [
   ...((majorContractorData as { records: SourceContact[] }).records),
   ...((commercialRecheckData as { records: SourceContact[] }).records),
   ...((referralPartnerData as { records: SourceContact[] }).records),
+  ...expansionContacts,
 ];
 
 export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts
@@ -93,7 +136,7 @@ export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts
     companyName: contact.companyName.trim(),
     website: contact.website,
     city: contact.city.trim(),
-    state: "AZ",
+    state: contact.state.trim().toUpperCase(),
     audience: contact.audience === "architect_design_partner" ? "architect" : "builder",
     contactName: contact.contactName.trim(),
     contactTitle: contact.contactTitle.trim(),
@@ -119,8 +162,10 @@ export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts
     ).trim(),
   }));
 
-export function hotMarketOutreachSubject(_audience = "builder", _state = "AZ"): string {
-  return "A reliable engineering partner for active projects";
+export function hotMarketOutreachSubject(audience = "builder", _state = "AZ"): string {
+  return audience === "architect"
+    ? "A reliable engineering partner for active projects"
+    : "Fast engineering support for active projects";
 }
 
 export function isHotMarketSourceType(sourceType: string | null): boolean {
@@ -139,18 +184,54 @@ export function hotMarketOutreachBody(contact: {
   personalization: string;
   audience: string;
 }): string {
-  return approvedOutreachBody(contact.contactName);
+  const firstName = contact.contactName.trim().split(/\s+/)[0] || "there";
+  if (contact.audience === "architect") {
+    return `Hi ${firstName},
+
+${contact.personalization.trim()}
+
+Apex Grid is a veteran-owned, PE-led team providing Civil, Structural, MEP, drainage, utility, permit-response, and drafting support. We work alongside architects and design teams when a project needs additional technical capacity, a builder-friendly response, or a trusted engineering referral—without taking over the client relationship.
+
+We’re Arizona-based, but licensed to support projects across 49 states, so we can stay useful when your team or partners work outside Arizona.
+
+We keep scopes right-sized, provide clear competitive pricing before work starts, and typically turn around focused reviews or defined design responses in 12–24 hours.
+
+Do you have any current projects in your pipeline that you would like us to review?`;
+  }
+  return `Hi ${firstName},
+
+${contact.personalization.trim()}
+
+When a structural change, site issue, MEP coordination item, or permit response comes up, waiting on engineering can slow the job down.
+
+Apex Grid is a veteran-owned, PE-led team providing focused Civil, Structural, MEP, permit-response, and drafting support. We deliver consistent work, keep scopes right-sized, provide clear competitive pricing before work starts, and typically turn around focused reviews or defined design responses in 12–24 hours.
+
+We’re Arizona-based, but licensed to support projects across 49 states, so we can stay useful when your team or partners work outside Arizona.
+
+Do you have any current projects in your pipeline that you would like us to review?`;
 }
 
 export function hotMarketOutreachFollowUps(
   contactName: string,
-  _audience = "builder",
+  audience = "builder",
   _state = "AZ",
 ): Array<{
   sequenceNumber: number;
   subject: string;
   body: string;
 }> {
+  const firstName = contactName.trim().split(/\s+/)[0] || "there";
+  if (audience === "architect") {
+    return [{
+      sequenceNumber: 2,
+      subject: "A reliable engineering partner for active projects",
+      body: `Hi ${firstName},
+
+I wanted to follow up in case your team could use additional Civil, Structural, or MEP capacity on an active project while keeping the architectural relationship and design direction fully in your hands.
+
+Do you have any current projects in your pipeline that you would like us to review?`,
+    }];
+  }
   return approvedOutreachFollowUpMessages(contactName);
 }
 
@@ -204,6 +285,7 @@ export async function seedHotMarketOutreachBatch(options: {
     HOT_MARKET_DAILY_TARGET,
     HOT_MARKET_OUTREACH_CONTACTS.length,
   );
+  const campaignStates = [...new Set(HOT_MARKET_OUTREACH_CONTACTS.map((contact) => contact.state))];
 
   let [campaign] = await db.select().from(campaignsTable)
     .where(eq(campaignsTable.name, CAMPAIGN_NAME))
@@ -212,7 +294,7 @@ export async function seedHotMarketOutreachBatch(options: {
     [campaign] = await db.insert(campaignsTable).values({
       name: CAMPAIGN_NAME,
       audience: "mixed",
-      states: ["AZ"],
+      states: campaignStates,
       dailyLimit: hotMarketDailyLimit,
       status: "active",
       subjectTemplate: SUBJECT,
@@ -223,11 +305,13 @@ export async function seedHotMarketOutreachBatch(options: {
   if (
     campaign.dailyLimit !== hotMarketDailyLimit
     || campaign.audience !== "mixed"
+    || campaign.states.join(",") !== campaignStates.join(",")
   ) {
     const [updatedCampaign] = await db.update(campaignsTable)
       .set({
         dailyLimit: hotMarketDailyLimit,
         audience: "mixed",
+        states: campaignStates,
       })
       .where(eq(campaignsTable.id, campaign.id))
       .returning();

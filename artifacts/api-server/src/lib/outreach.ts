@@ -600,16 +600,15 @@ export async function sendApprovedOutreach(
   const unsubscribeUrl = options.unsubscribeUrls?.unsubscribeUrl ?? makeUnsubscribeUrl(email);
   const oneClickUrl = options.unsubscribeUrls?.oneClickUnsubscribeUrl ?? makeOneClickUnsubscribeUrl(email);
   if (!unsubscribeUrl || !oneClickUrl) throw new Error("Unsubscribe signing is not configured");
-  const usesCurrentSharedCopy = isHotMarketSourceType(message.sourceType)
-    || currentCampaign?.bodyTemplate === "Approved personalized Apex Grid outreach copy";
-  const currentRegularFollowUp = message.sequenceNumber === 2
+  const isHotMarketMessage = isHotMarketSourceType(message.sourceType);
+  const usesCurrentSharedCopy = !isHotMarketMessage
+    && currentCampaign?.bodyTemplate === "Approved personalized Apex Grid outreach copy";
+  const currentRegularFollowUp = !isHotMarketMessage && message.sequenceNumber === 2
     ? approvedOutreachFollowUpMessages(currentProspect.contactName ?? "")
       .find((followUp) => followUp.sequenceNumber === message.sequenceNumber)
     : undefined;
   const currentSubject = currentRegularFollowUp?.subject ?? (usesCurrentSharedCopy
-      ? message.sequenceNumber === 1 && isHotMarketSourceType(message.sourceType)
-        ? hotMarketOutreachSubject(currentProspect.audience, currentProspect.state)
-        : approvedOutreachSubject()
+      ? approvedOutreachSubject()
     : message.subject);
   const currentBody = currentRegularFollowUp?.body ?? (usesCurrentSharedCopy
       ? message.sequenceNumber === 1

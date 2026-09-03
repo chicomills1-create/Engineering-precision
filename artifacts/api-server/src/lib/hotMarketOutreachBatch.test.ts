@@ -15,18 +15,17 @@ import {
   assertVerifiedOutreachBatch,
   isCompanyDomainEmail,
 } from "./outreachContactValidation";
-import { approvedOutreachBody } from "./verifiedOutreachBatch";
 
-test("the one-time Arizona hot-market batch contains every currently verified new contact", () => {
+test("the one-time hot-market batch contains every currently verified new contact", () => {
   assert.equal(HOT_MARKET_DAILY_TARGET, 50);
-  assert.equal(HOT_MARKET_OUTREACH_CONTACTS.length, 23);
+  assert.equal(HOT_MARKET_OUTREACH_CONTACTS.length, 73);
   assert.equal(
     new Set(HOT_MARKET_OUTREACH_CONTACTS.map((contact) => contact.contactEmail)).size,
-    23,
+    73,
   );
   assert.ok(HOT_MARKET_OUTREACH_CONTACTS.every((contact) =>
     contact.approvalStatus === "approved"
-    && contact.state === "AZ"
+    && /^[A-Z]{2}$/.test(contact.state)
     && contact.emailEvidence.startsWith("https://")
     && contact.personalization.length > 20
   ));
@@ -34,8 +33,15 @@ test("the one-time Arizona hot-market batch contains every currently verified ne
     ["alston@alstonco.com", "frank.dascanio@weitz.com"].includes(contact.contactEmail)
   ));
   assert.doesNotThrow(() =>
-    assertVerifiedOutreachBatch(HOT_MARKET_OUTREACH_CONTACTS, 23)
+    assertVerifiedOutreachBatch(HOT_MARKET_OUTREACH_CONTACTS, 73)
   );
+});
+
+test("the national expansion contributes exactly 50 verified contacts across both copy lanes", () => {
+  const expansion = HOT_MARKET_OUTREACH_CONTACTS.filter((contact) => contact.state !== "AZ");
+  assert.equal(expansion.length, 50);
+  assert.equal(expansion.filter((contact) => contact.audience === "builder").length, 35);
+  assert.equal(expansion.filter((contact) => contact.audience === "architect").length, 15);
 });
 
 test("the approved hot-market copy leads with the builder value proposition", () => {
@@ -45,13 +51,14 @@ test("the approved hot-market copy leads with the builder value proposition", ()
   const body = hotMarketOutreachBody(builder);
   assert.equal(
     hotMarketOutreachSubject(),
-    "A reliable engineering partner for active projects",
+    "Fast engineering support for active projects",
   );
-  assert.equal(body, approvedOutreachBody(builder.contactName));
-  assert.doesNotMatch(body, /drainage|utility|site issue|project-specific/i);
+  assert.match(body, /structural change, site issue, MEP coordination item, or permit response/i);
+  assert.match(body, /clear competitive pricing/i);
+  assert.match(body, /12–24 hours/i);
 });
 
-test("hot-market referral partners use the same approved shared copy", () => {
+test("hot-market referral partners use relationship-focused copy", () => {
   const partner = HOT_MARKET_OUTREACH_CONTACTS.find(
     (contact) => contact.audience === "architect",
   )!;
@@ -60,17 +67,19 @@ test("hot-market referral partners use the same approved shared copy", () => {
     hotMarketOutreachSubject(partner.audience),
     "A reliable engineering partner for active projects",
   );
-  assert.equal(body, approvedOutreachBody(partner.contactName));
+  assert.match(body, /work alongside architects and design teams/i);
+  assert.match(body, /without taking over the client relationship/i);
+  assert.doesNotMatch(body, /waiting on engineering can slow the job down/i);
 });
 
-test("all hot-market contacts use the consistent national subject", () => {
+test("builder hot-market contacts use their approved direct-client subject nationally", () => {
   assert.equal(
     hotMarketOutreachSubject("builder", "AZ"),
-    "A reliable engineering partner for active projects",
+    "Fast engineering support for active projects",
   );
   assert.equal(
     hotMarketOutreachSubject("builder", "CA"),
-    "A reliable engineering partner for active projects",
+    "Fast engineering support for active projects",
   );
 });
 

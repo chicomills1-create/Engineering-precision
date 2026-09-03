@@ -63,6 +63,12 @@ Representative referral/partner targets include:
 
 The partner lane is part of Hot Market, but it must remain operationally distinct from the direct-client lane in targeting, positioning, and email copy.
 
+Prepared Hot Market copy is authoritative at dispatch. The sender must preserve each message's direct-client or referral-partner subject and body instead of replacing it with generic campaign copy. Both lanes use exactly one engagement-qualified, reply-focused follow-up; the partner follow-up must remain relationship-focused.
+
+**Why:** A dispatch-time shared-copy override silently replaced lane-specific messages after they had been researched and prepared.
+
+**How to apply:** Generate the correct copy when staging, persist it with the message, and send that persisted copy after all eligibility, suppression, and delivery checks pass.
+
 ## Confirmed Arizona campaign count
 
 The original Arizona Hot Market campaign discussed and prepared for the September 2026 send contained 19 intended companies across the direct-client and referral/partner lanes. Do not mistake the smaller number of records that survive production deduplication or seeding for the campaign's intended total.
