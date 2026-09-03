@@ -11,6 +11,7 @@ import customBuilderRecheckData from "../../../../.agents/outputs/hot-market-cus
 import localContractorData from "../../../../.agents/outputs/hot-market-local-contractors-verified.json";
 import majorContractorData from "../../../../.agents/outputs/hot-market-major-contractors-verified.json";
 import commercialRecheckData from "../../../../.agents/outputs/hot-market-commercial-recheck-verified.json";
+import referralPartnerData from "../../../../.agents/outputs/hot-market-referral-partners-verified.json";
 import { assertVerifiedOutreachBatch } from "./outreachContactValidation";
 
 export const HOT_MARKET_SOURCE_TYPE = "hot_market_one_time";
@@ -28,6 +29,7 @@ type SourceContact = {
   website: string;
   city: string;
   state: string;
+  audience: string;
   contactName: string;
   contactTitle: string;
   contactEmail: string;
@@ -58,6 +60,7 @@ const sourceContacts: SourceContact[] = [
   ...((localContractorData as { records: SourceContact[] }).records),
   ...((majorContractorData as { records: SourceContact[] }).records),
   ...((commercialRecheckData as { records: SourceContact[] }).records),
+  ...((referralPartnerData as { records: SourceContact[] }).records),
 ];
 
 export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts
@@ -68,7 +71,7 @@ export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts
     website: contact.website,
     city: contact.city.trim(),
     state: "AZ",
-    audience: "builder",
+    audience: contact.audience === "architect_design_partner" ? "architect" : "builder",
     contactName: contact.contactName.trim(),
     contactTitle: contact.contactTitle.trim(),
     contactEmail: contact.contactEmail.trim().toLowerCase(),
@@ -92,15 +95,31 @@ export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts
     ).trim(),
   }));
 
-export function hotMarketOutreachSubject(): string {
-  return SUBJECT;
+export function hotMarketOutreachSubject(audience = "builder"): string {
+  return audience === "architect"
+    ? "A reliable engineering partner for Arizona projects"
+    : SUBJECT;
 }
 
 export function hotMarketOutreachBody(contact: {
   contactName: string;
   personalization: string;
+  audience: string;
 }): string {
   const firstName = contact.contactName.trim().split(/\s+/)[0] || "there";
+  if (contact.audience === "architect") {
+    return `Hi ${firstName},
+
+${contact.personalization}
+
+Apex Grid is a veteran-owned, PE-led team providing Civil, Structural, MEP, drainage, utility, permit-response, and drafting support. We work alongside architects and design teams when a project needs additional technical capacity, a builder-friendly response, or a trusted engineering referral—without taking over the client relationship.
+
+We keep scopes right-sized, provide clear competitive pricing before work starts, and typically turn around focused reviews or defined design responses in 12–24 hours.
+
+Click the URL to visit our page: https://apexgrideng.com.
+
+Do you have any current projects in your pipeline that you would like us to review?`;
+  }
   return `Hi ${firstName},
 
 ${contact.personalization}
@@ -114,12 +133,47 @@ Click the URL to visit our page: https://apexgrideng.com.
 Do you have any current projects in your pipeline that you would like us to review?`;
 }
 
-export function hotMarketOutreachFollowUps(contactName: string): Array<{
+export function hotMarketOutreachFollowUps(
+  contactName: string,
+  audience = "builder",
+): Array<{
   sequenceNumber: number;
   subject: string;
   body: string;
 }> {
   const firstName = contactName.trim().split(/\s+/)[0] || "there";
+  const subject = hotMarketOutreachSubject(audience);
+  if (audience === "architect") {
+    return [
+      {
+        sequenceNumber: 2,
+        subject: `Re: ${subject}`,
+        body: `Hi ${firstName},
+
+Following up in case one of your Arizona projects needs added civil/site, drainage, utility, structural, MEP, or permit-response capacity. Apex Grid can support the technical scope while your team retains the client and design relationship.
+
+Do you have any current projects in your pipeline that you would like us to review?`,
+      },
+      {
+        sequenceNumber: 3,
+        subject: `Re: ${subject}`,
+        body: `Hi ${firstName},
+
+Checking back once more. If your team or builder needs a responsive engineering partner for a focused issue, overflow production, or coordinated permit package, Apex Grid is available with a right-sized scope and clear pricing.
+
+Would it be useful for us to review a current project and outline the fastest practical next step?`,
+      },
+      {
+        sequenceNumber: 4,
+        subject: `Re: ${subject}`,
+        body: `Hi ${firstName},
+
+I’ll close the loop after this note. Apex Grid is available as a veteran-owned, PE-led engineering partner when an Arizona project needs additional technical capacity without disrupting your client relationship.
+
+If a project comes up that you would like us to review, reply with the basic details and we will take a look.`,
+      },
+    ];
+  }
   return [
     {
       sequenceNumber: 2,
@@ -173,7 +227,7 @@ export async function seedHotMarketOutreachBatch(options: {
   if (!campaign) {
     [campaign] = await db.insert(campaignsTable).values({
       name: CAMPAIGN_NAME,
-      audience: "builder",
+      audience: "mixed",
       states: ["AZ"],
       dailyLimit: HOT_MARKET_OUTREACH_CONTACTS.length,
       status: "active",
@@ -182,9 +236,15 @@ export async function seedHotMarketOutreachBatch(options: {
     }).returning();
   }
   if (!campaign) throw new Error("Unable to create the hot-market outreach campaign");
-  if (campaign.dailyLimit !== HOT_MARKET_OUTREACH_CONTACTS.length) {
+  if (
+    campaign.dailyLimit !== HOT_MARKET_OUTREACH_CONTACTS.length
+    || campaign.audience !== "mixed"
+  ) {
     const [updatedCampaign] = await db.update(campaignsTable)
-      .set({ dailyLimit: HOT_MARKET_OUTREACH_CONTACTS.length })
+      .set({
+        dailyLimit: HOT_MARKET_OUTREACH_CONTACTS.length,
+        audience: "mixed",
+      })
       .where(eq(campaignsTable.id, campaign.id))
       .returning();
     if (!updatedCampaign) throw new Error("Unable to update the hot-market campaign limit");
@@ -246,13 +306,16 @@ export async function seedHotMarketOutreachBatch(options: {
           prospectId: prospect.id,
           campaignId: campaign.id,
           sequenceNumber: 1,
-          subject: hotMarketOutreachSubject(),
+          subject: hotMarketOutreachSubject(contact.audience),
           body: hotMarketOutreachBody(contact),
           status: "approved",
           scheduledAt: HOT_MARKET_SEND_AT,
           sourceType: HOT_MARKET_SOURCE_TYPE,
         },
-        ...hotMarketOutreachFollowUps(contact.contactName).map((followUp) => ({
+        ...hotMarketOutreachFollowUps(
+          contact.contactName,
+          contact.audience,
+        ).map((followUp) => ({
           prospectId: prospect.id,
           campaignId: campaign.id,
           sequenceNumber: followUp.sequenceNumber,

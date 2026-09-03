@@ -1,0 +1,28 @@
+{
+  "researchedOn": "2026-09-03",
+  "scope": "Requested Arizona hot-market architecture/design referral firms not qualified under the requirement for current Arizona project/design evidence, a current relevant principal/owner/partner/design leader, and a suitable email publicly published on the official company domain. Candelaria Design Associates, PHX Architecture, Drewett Works, and 3rd Story are deliberately excluded because they already received outreach.",
+  "rejectedRecords": 2,
+  "records": [
+    {
+      "companyName": "Payne Cole Designs",
+      "website": "https://www.paynecole.com/",
+      "officialDecisionMaker": "Eric Payne, Co-Founder; Nicholas (Nic) Cole, Co-Founder and licensed architect",
+      "contactSourceUrl": "https://www.paynecole.com/team",
+      "emailEvidenceCheckedUrl": "https://www.paynecole.com/contact",
+      "publicEmailFound": "info@paynecole.com",
+      "projectEvidenceCheckedUrl": "https://paynecole.com/about",
+      "rejectionReason": "Rejected: the official site says the firm can provide services in Arizona and surrounding markets, but the official pages reviewed identify offices in Whitefish, Missoula, Big Sky, and Park City and did not publish a current, identifiable Arizona design or project. The public info@paynecole.com address was not guessed, but an Arizona project-evidence requirement remains unmet.",
+      "personalizationSentence": "Payne Cole's integrated architecture, engineering, permitting, and builder-friendly process would otherwise make it a relevant relationship prospect if a current Arizona project is publicly identified."
+    },
+    {
+      "companyName": "Urban Design Associates, Ltd.",
+      "website": "https://www.urbandesignassociatesltd.com/",
+      "officialDecisionMaker": "Jessica Hutchison-Rough, AIA, LEED AP, Owner and Principal Architect",
+      "contactSourceUrl": "https://www.urbandesignassociatesltd.com/about",
+      "projectEvidenceCheckedUrl": "https://www.urbandesignassociatesltd.com/",
+      "emailEvidenceCheckedUrl": "https://www.urbandesignassociatesltd.com/contact",
+      "rejectionReason": "Rejected: the official site provides strong current Arizona practice evidence, including 2026 Scottsdale/Arizona luxury-home design articles, and identifies the owner/principal architect. However, no suitable email on the official company website domain (urbandesignassociatesltd.com) was publicly displayed on the official pages checked. A third-party listing's office@uda.email is not an official-site publication and does not meet the official-company-domain requirement.",
+      "personalizationSentence": "UDA's current Scottsdale luxury-residential design content and Jessica Hutchison-Rough's site-analysis and custom-home expertise would otherwise make this a strong site-engineering referral relationship."
+    }
+  ]
+}

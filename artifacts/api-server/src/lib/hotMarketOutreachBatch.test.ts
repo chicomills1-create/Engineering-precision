@@ -9,10 +9,10 @@ import {
 import { assertVerifiedOutreachBatch } from "./outreachContactValidation";
 
 test("the one-time Arizona hot-market batch contains every currently verified new contact", () => {
-  assert.equal(HOT_MARKET_OUTREACH_CONTACTS.length, 19);
+  assert.equal(HOT_MARKET_OUTREACH_CONTACTS.length, 23);
   assert.equal(
     new Set(HOT_MARKET_OUTREACH_CONTACTS.map((contact) => contact.contactEmail)).size,
-    19,
+    23,
   );
   assert.ok(HOT_MARKET_OUTREACH_CONTACTS.every((contact) =>
     contact.approvalStatus === "approved"
@@ -24,12 +24,15 @@ test("the one-time Arizona hot-market batch contains every currently verified ne
     ["alston@alstonco.com", "frank.dascanio@weitz.com"].includes(contact.contactEmail)
   ));
   assert.doesNotThrow(() =>
-    assertVerifiedOutreachBatch(HOT_MARKET_OUTREACH_CONTACTS, 19)
+    assertVerifiedOutreachBatch(HOT_MARKET_OUTREACH_CONTACTS, 23)
   );
 });
 
 test("the approved hot-market copy leads with the builder value proposition", () => {
-  const body = hotMarketOutreachBody(HOT_MARKET_OUTREACH_CONTACTS[0]!);
+  const builder = HOT_MARKET_OUTREACH_CONTACTS.find(
+    (contact) => contact.audience === "builder",
+  )!;
+  const body = hotMarketOutreachBody(builder);
   assert.equal(hotMarketOutreachSubject(), "Fast engineering support for active projects");
   assert.match(body, /veteran-owned, PE-led/);
   assert.match(body, /Civil, Structural, MEP, permit-response, and drafting support/);
@@ -38,6 +41,21 @@ test("the approved hot-market copy leads with the builder value proposition", ()
   assert.match(body, /12–24 hours/);
   assert.match(body, /current projects in your pipeline/);
   assert.doesNotMatch(body, /amazing price|military-backed/i);
+});
+
+test("hot-market referral partners receive relationship-focused copy", () => {
+  const partner = HOT_MARKET_OUTREACH_CONTACTS.find(
+    (contact) => contact.audience === "architect",
+  )!;
+  const body = hotMarketOutreachBody(partner);
+  assert.equal(
+    hotMarketOutreachSubject(partner.audience),
+    "A reliable engineering partner for Arizona projects",
+  );
+  assert.match(body, /work alongside architects and design teams/);
+  assert.match(body, /without taking over the client relationship/);
+  assert.match(body, /veteran-owned, PE-led/);
+  assert.match(body, /current projects in your pipeline/);
 });
 
 test("the hot-market messages wait until after the regular 8 AM Phoenix batch", () => {
