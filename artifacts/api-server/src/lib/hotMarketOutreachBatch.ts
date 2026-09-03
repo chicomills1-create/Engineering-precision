@@ -123,7 +123,7 @@ ${contact.personalization}
 
 Apex Grid is a veteran-owned, PE-led team providing Civil, Structural, MEP, drainage, utility, permit-response, and drafting support. We work alongside architects and design teams when a project needs additional technical capacity, a builder-friendly response, or a trusted engineering referral—without taking over the client relationship.
 
-We’re Arizona-based, but licensed to support projects across 49 states, excluding Alaska, so we can stay useful when your team or partners work outside Arizona.
+We’re Arizona-based, but licensed to support projects across 49 states, so we can stay useful when your team or partners work outside Arizona.
 
 We keep scopes right-sized, provide clear competitive pricing before work starts, and typically turn around focused reviews or defined design responses in 12–24 hours.
 
