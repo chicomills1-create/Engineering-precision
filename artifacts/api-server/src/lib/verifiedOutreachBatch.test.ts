@@ -150,6 +150,7 @@ test("the seed validator quarantines duplicate identities before database writes
 test("the approved body uses only the approved pipeline closing", () => {
   const body = approvedOutreachBody("Alex Rivera");
   assert.match(body, /^Hi Alex,/);
+  assert.match(body, /Arizona-based, but licensed to support projects across 49 states/);
   assert.match(body, /Click the URL to visit our page: https:\/\/apexgrideng\.com\./);
   assert.match(body, /Do you have any current projects in your pipeline that you would like us to review\?$/);
   assert.doesNotMatch(body, /15.?minute|15 min|schedule|book.*call/i);
