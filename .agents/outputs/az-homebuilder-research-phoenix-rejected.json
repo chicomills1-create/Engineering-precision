@@ -1,0 +1,38 @@
+{
+  "scope": "Candidates not included because the public evidence did not establish a current Phoenix-metro engineering-relevant signal at the required confidence level.",
+  "rejectedOrInsufficientCandidates": [
+    {
+      "companyName": "Rosewood Homes",
+      "officialDomain": "rosewoodhomes.com",
+      "reason": "The official homepage states \"We're Sold Out,\" which is the opposite of an active new-community signal.",
+      "sourceUrls": [
+        "https://rosewoodhomes.com/"
+      ]
+    },
+    {
+      "companyName": "Landsea Homes",
+      "officialDomain": "landseahomes.com",
+      "reason": "The readily located acquisition story concerned 178 homesites but was dated 2020; it was rejected as stale rather than used to infer current activity.",
+      "sourceUrls": [
+        "https://www.builderonline.com/land/development/landsea-homes-acquires-178-homesites-in-two-ariz-communities_c"
+      ]
+    },
+    {
+      "companyName": "Beazer Homes",
+      "officialDomain": "beazer.com",
+      "reason": "The search result located was a third-party NewHomeSource directory rather than a current official Phoenix project, permit, or announcement page.",
+      "sourceUrls": [
+        "https://www.newhomesource.com/communities/az/phoenix-mesa-area/builder-beazer-homes-1"
+      ]
+    },
+    {
+      "companyName": "Mandalay Homes",
+      "officialDomain": "mandalayhomes.com",
+      "reason": "Official community results focused on Prescott/Clarkdale rather than Phoenix metro; the Phoenix/Glendale project story found was dated 2015.",
+      "sourceUrls": [
+        "https://mandalayhomes.com/our-communities",
+        "https://mandalayhomes.com/vision-hill-zero-energy-ready-homes/"
+      ]
+    }
+  ]
+}

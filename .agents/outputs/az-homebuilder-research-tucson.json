@@ -1,0 +1,140 @@
+[
+  {
+    "company": "Mattamy Homes",
+    "officialDomain": "mattamyhomes.com",
+    "city": "Tucson",
+    "currentNeedSignal": "Its official Blackhawk community page says \"Now Selling,\" lists four floor plans and seven quick move-ins, and shows a Tucson sales gallery. The page also advertises quick move-in inventory with dates extending into 2026. This is a live single-family delivery program rather than an archival portfolio item.",
+    "sourceUrls": [
+      "https://mattamyhomes.com/arizona/tucson/tucson/blackhawk-3000s"
+    ],
+    "likelyServiceFit": "Civil/site support for remaining lots and utility/drainage coordination; structural and residential MEP plan/option coordination for the active home releases.",
+    "officialPublicEmail": "Blackhawk@mattamycorp.com"
+  },
+  {
+    "company": "Lennar",
+    "officialDomain": "lennar.com",
+    "city": "Tucson / Marana",
+    "currentNeedSignal": "Lennar's Tucson market page currently reports 122 available homes across 12 communities and displays move-in-ready inventory in Marana. The scale and active inventory indicate ongoing construction releases in the Tucson-area market.",
+    "sourceUrls": [
+      "https://www.lennar.com/new-homes/arizona/tucson"
+    ],
+    "likelyServiceFit": "Subdivision civil work, grading/drainage and dry-utility coordination; production-home structural and MEP coordination."
+  },
+  {
+    "company": "Meritage Homes",
+    "officialDomain": "meritagehomes.com",
+    "city": "Tucson",
+    "currentNeedSignal": "The official Tucson market page actively markets move-in-ready homes and communities; the linked Houghton Reserve - Esplanade community page provides an open daily sales office at 10338 E Red Slate Place, Tucson. This is current sales and delivery activity.",
+    "sourceUrls": [
+      "https://www.meritagehomes.com/state/az/tucson",
+      "https://www.meritagehomes.com/state/az/tucson/houghton-reserve-esplanade"
+    ],
+    "likelyServiceFit": "Civil/site engineering for active community phases plus structural/MEP coordination for energy-efficient production homes."
+  },
+  {
+    "company": "KB Home",
+    "officialDomain": "kbhome.com",
+    "city": "Tucson",
+    "currentNeedSignal": "KB Home's official Arizona market page identifies 15 new-home communities in Tucson, and its Tucson page markets personalized ranch and two-story homes currently for sale in the area. The quantity of current communities is a concrete pipeline signal.",
+    "sourceUrls": [
+      "https://www.kbhome.com/new-homes-arizona",
+      "https://www.kbhome.com/new-homes-tucson"
+    ],
+    "likelyServiceFit": "Residential civil/site entitlement and infrastructure support; structural-option and MEP design/coordination support across multiple active subdivisions."
+  },
+  {
+    "company": "Richmond American Homes",
+    "officialDomain": "richmondamerican.com",
+    "city": "Tucson",
+    "currentNeedSignal": "Richmond American's official Tucson new-homes page is an active market page and explicitly invites buyers to select homesites and structural options. That represents current community sales and house-plan configuration activity, not a completed-project record.",
+    "sourceUrls": [
+      "https://www.richmondamerican.com/arizona/tucson-new-homes/tucson"
+    ],
+    "likelyServiceFit": "Structural option review and production-home MEP coordination, with civil support for Tucson-area community phases."
+  },
+  {
+    "company": "LGI Homes",
+    "officialDomain": "lgihomes.com",
+    "city": "Tucson",
+    "currentNeedSignal": "LGI's official Tucson page says it constructs move-in-ready homes and directs visitors to its Tucson communities to schedule tours. The page presents current new-construction community activity in the Tucson market.",
+    "sourceUrls": [
+      "https://www.lgihomes.com/arizona/tucson"
+    ],
+    "likelyServiceFit": "Fast-turn production residential civil/site, structural, and MEP coordination for move-in-ready home delivery."
+  },
+  {
+    "company": "Fairfield Homes",
+    "officialDomain": "fairfieldhomes.com",
+    "city": "Tucson / Southern Arizona",
+    "currentNeedSignal": "Fairfield's official site advertises more than 24 quick move-in homes available. Its live community page lists 12 communities and filters for Green Valley, Marana, Tucson, and Vail, while describing the company as a builder of master-planned, semi-custom, and custom homes.",
+    "sourceUrls": [
+      "https://fairfieldhomes.com/",
+      "https://fairfieldhomes.com/communities/"
+    ],
+    "likelyServiceFit": "Site/civil engineering for master-planned community phases, plus structural and MEP design coordination for semi-custom and custom homes."
+  },
+  {
+    "company": "A.F. Sterling",
+    "officialDomain": "afsterling.com",
+    "city": "Tucson",
+    "currentNeedSignal": "The company's official multi-family page says A.F. Sterling builds apartment and casita communities in addition to Tucson neighborhoods, and identifies The Hedrick as an A.F. Sterling multifamily community in Tucson. Its current site also presents new homes, renovations, and multifamily as active offerings.",
+    "sourceUrls": [
+      "https://afsterling.com/communities",
+      "https://afsterling.com/"
+    ],
+    "likelyServiceFit": "Civil/site, utility and drainage support for multifamily/neighborhood work; structural and MEP coordination for apartments, casitas, and custom homes.",
+    "officialPublicEmail": "info@afsterling.com"
+  },
+  {
+    "company": "Insight Homes",
+    "officialDomain": "insighthomes.com",
+    "city": "Tucson / Oro Valley",
+    "currentNeedSignal": "Insight's official custom-home gallery states that it builds in Tucson, Oro Valley, Marana, Butterfly Mountain, Canyon Pass, and Dove Mountain, and specifically invites review of recently completed and currently under-construction Tucson custom homes. The explicit under-construction statement is an immediate project-work signal.",
+    "sourceUrls": [
+      "https://insighthomes.com/custom-home-galleries"
+    ],
+    "likelyServiceFit": "Custom-home civil/site and grading support, structural engineering, and MEP design/coordination for homes under construction."
+  },
+  {
+    "company": "Robson Resort Communities",
+    "officialDomain": "robson.com",
+    "city": "Oracle / Pinal County (SaddleBrooke Ranch)",
+    "currentNeedSignal": "The official SaddleBrooke Ranch page is actively marketing new-construction homes and includes a current \"New Oasis Now Selling\" asset. It identifies multiple home-plan series available at the community, supporting an active residential delivery signal in the Tucson-region market.",
+    "sourceUrls": [
+      "https://robson.com/communities/saddlebrooke-ranch"
+    ],
+    "likelyServiceFit": "Community civil/site infrastructure and amenity support; structural and MEP coordination for new active-adult home series."
+  },
+  {
+    "company": "Capstone Homes",
+    "officialDomain": "capstonehomesaz.com",
+    "city": "Flagstaff / Prescott",
+    "currentNeedSignal": "Capstone's official communities page lists active inventory in Flagstaff, Prescott, and Prescott Valley. It labels Aspen Ridge II in Flagstaff \"Now Selling\" and presents specific homes, plans, sizes, and pricing; it also identifies Canyon del Rio communities. This is an active Northern Arizona pipeline.",
+    "sourceUrls": [
+      "https://capstonehomesaz.com/communities",
+      "https://capstonehomesaz.com/flagstaff"
+    ],
+    "likelyServiceFit": "Northern Arizona subdivision civil/site and drainage work; structural and MEP coordination for move-in-ready homes and townhomes."
+  },
+  {
+    "company": "Mandalay Homes",
+    "officialDomain": "mandalayhomes.com",
+    "city": "Prescott / Prescott Valley",
+    "currentNeedSignal": "Mandalay's official communities page presents a limited-time financing offer on all inventory homes and lists active communities including Jasper in Prescott Valley and Hidden Hills in Prescott, with sales-office and plan details. It also says floor plans and lot availability for The Dells will be released soon, indicating an upcoming Prescott release.",
+    "sourceUrls": [
+      "https://mandalayhomes.com/communities/"
+    ],
+    "likelyServiceFit": "Civil/site and utility support for Prescott-area community releases; structural and high-performance/energy-focused MEP coordination."
+  },
+  {
+    "company": "Miramonte Homes",
+    "officialDomain": "miramontehomes.com",
+    "city": "Tucson / Flagstaff",
+    "currentNeedSignal": "Miramonte's official site asks visitors to contact it about \"active communities\" or an \"upcoming project\" and lists dedicated Southern Arizona (Tucson) and Northern Arizona (Flagstaff) offices. Its published Arizona Public Report disclosure identifies Miramonte Arizona, LLC as the licensed residential builder.",
+    "sourceUrls": [
+      "https://www.miramontehomes.com/",
+      "https://www.miramontehomes.com/themiramontedifference"
+    ],
+    "likelyServiceFit": "Civil/site support for active and upcoming community development, plus structural/MEP coordination for Arizona residential and build-to-rent work."
+  }
+]

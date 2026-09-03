@@ -1,0 +1,143 @@
+{
+  "scope": "Arizona residential homebuilders/general contractors with a current, public Phoenix-metro construction or new-community signal. Sources were limited to public official company or issuer pages.",
+  "qualifiedCompanies": [
+    {
+      "companyName": "Century Communities, Inc.",
+      "officialDomain": "centurycommunities.com",
+      "city": "Phoenix, AZ (metro projects in Buckeye and San Tan Valley)",
+      "currentSignal": "The company's February 18, 2026 issuer announcement says it is opening Skyline Village in San Tan Valley and Montaña Vista in Buckeye, bringing more than 300 new homes to greater Phoenix. It identifies both as now selling and describes new model-home activity.",
+      "sourceUrls": [
+        "https://investors.centurycommunities.com/news/news-details/2026/Century-Communities-Phoenix-Announces-2-February-Grand-Openings-in-Prime-East-and-West-Valley-Submarkets/default.aspx",
+        "https://www.centurycommunities.com/find-your-new-home/arizona/phoenix-metro"
+      ],
+      "likelyApexGridServiceFit": "Civil engineering for subdivision/site infrastructure and drainage; structural and MEP coordination for production homes and models.",
+      "officialPublicCompanyEmailVisible": false
+    },
+    {
+      "companyName": "Camelot Homes",
+      "officialDomain": "camelothomes.com",
+      "city": "Scottsdale, AZ",
+      "currentSignal": "Its community page labels The Edge at Joy Ranch \"Models Now Open,\" identifies 52 homesites and seven floor plans (including four brand-new designs), and provides a Scottsdale sales/community address.",
+      "sourceUrls": [
+        "https://camelothomes.com/community/the-edge-joy-ranch/"
+      ],
+      "likelyApexGridServiceFit": "Civil/site support for a 52-lot enclave, plus structural and MEP design coordination for new luxury plans, detached casitas, and options.",
+      "officialPublicCompanyEmailVisible": false
+    },
+    {
+      "companyName": "Mattamy Homes",
+      "officialDomain": "mattamyhomes.com",
+      "city": "Phoenix, AZ",
+      "currentSignal": "Baker Farms is identified on Mattamy's official page as \"Now Selling\" at 7943 W Granada Rd., Phoenix, with a sales office and current appointment availability.",
+      "sourceUrls": [
+        "https://mattamyhomes.com/arizona/phoenix/phoenix/baker-farms-d30"
+      ],
+      "likelyApexGridServiceFit": "Residential civil/site and utility coordination, structural plan support, and MEP design/revisions for a live new-home community.",
+      "officialPublicCompanyEmailVisible": false
+    },
+    {
+      "companyName": "Fulton Homes",
+      "officialDomain": "fultonhomes.com",
+      "city": "Avondale, AZ (also active across Phoenix metro)",
+      "currentSignal": "The official communities map lists Acclaim in Avondale and active communities in Gilbert, Litchfield Park, Queen Creek, San Tan Valley, and Surprise with current pricing. Its North Shore at Escalante page provides a Surprise sales-office location and interactive lot map.",
+      "sourceUrls": [
+        "https://www.fultonhomes.com/our-communities",
+        "https://www.fultonhomes.com/our-communities/escalante/north-shore"
+      ],
+      "likelyApexGridServiceFit": "Subdivision civil and utilities, structural engineering for production-home plans, and MEP support across multiple active Valley communities.",
+      "officialPublicCompanyEmailVisible": false
+    },
+    {
+      "companyName": "K. Hovnanian Homes",
+      "officialDomain": "khov.com",
+      "city": "Phoenix, AZ",
+      "currentSignal": "Serenity at Sonoran Foothills is presented by the builder as a new North Phoenix townhome community that is \"Now Selling,\" with new-build townhomes and current promotions; the page provides the Phoenix community location.",
+      "sourceUrls": [
+        "https://www.khov.com/new-construction-homes/arizona/phoenix-city/serenity-at-sonoran-foothills",
+        "https://www.khov.com/new-construction-homes/arizona/phoenix-city"
+      ],
+      "likelyApexGridServiceFit": "Townhome structural and MEP design coordination, civil/site and utility support, and permit/revision assistance.",
+      "officialPublicCompanyEmailVisible": false
+    },
+    {
+      "companyName": "Meritage Homes",
+      "officialDomain": "meritagehomes.com",
+      "city": "Phoenix, AZ",
+      "currentSignal": "Meritage's Phoenix market page actively markets move-in-ready homes and communities and carries a time-bounded PHX-area offer through September 15, signaling current available/new-home inventory activity.",
+      "sourceUrls": [
+        "https://www.meritagehomes.com/state/az/phoenix"
+      ],
+      "likelyApexGridServiceFit": "Production-home structural/MEP updates and civil engineering support for active Phoenix-area community buildout.",
+      "officialPublicCompanyEmailVisible": false
+    },
+    {
+      "companyName": "Shea Homes",
+      "officialDomain": "sheahomes.com",
+      "city": "Phoenix, AZ (metro)",
+      "currentSignal": "The builder's live Phoenix Area market page includes dedicated Communities and Quick Move-In Homes sections and an active information request for Phoenix Metro new homes.",
+      "sourceUrls": [
+        "https://www.sheahomes.com/new-homes/arizona/phoenix-area"
+      ],
+      "likelyApexGridServiceFit": "Civil/site engineering, structural plan support, and MEP coordination for active communities and quick-move-in home production.",
+      "officialPublicCompanyEmailVisible": false
+    },
+    {
+      "companyName": "Taylor Morrison",
+      "officialDomain": "taylormorrison.com",
+      "city": "Phoenix, AZ",
+      "currentSignal": "Taylor Morrison's official Phoenix market page currently advertises Phoenix AZ new construction, available homes, floor plans, and sales contact pathways.",
+      "sourceUrls": [
+        "https://www.taylormorrison.com/az/phoenix"
+      ],
+      "likelyApexGridServiceFit": "Civil engineering for new subdivisions, structural support for plan changes, and MEP design/permit coordination.",
+      "officialPublicCompanyEmailVisible": false
+    },
+    {
+      "companyName": "Woodside Homes",
+      "officialDomain": "woodsidehomes.com",
+      "city": "Gilbert, AZ",
+      "currentSignal": "Woodside's current Arizona community inventory lists 33 North in Gilbert and Icon at Thunderbird in Glendale with starting prices and multiple available floor plans, indicating active new-construction offerings.",
+      "sourceUrls": [
+        "https://woodsidehomes.com/findmyhome/arizona"
+      ],
+      "likelyApexGridServiceFit": "Civil/site and utility work for active neighborhoods plus structural and MEP plan coordination for multiple floor plans.",
+      "officialPublicCompanyEmailVisible": false
+    },
+    {
+      "companyName": "Tri Pointe Homes",
+      "officialDomain": "tripointehomes.com",
+      "city": "Goodyear, AZ",
+      "currentSignal": "The Abel Ranch project page describes two connected Goodyear communities, Camerano and Navarre, and marks the project \"Now Selling\" with future amenities.",
+      "sourceUrls": [
+        "https://www.tripointehomes.com/az/phoenix-metro/abel-ranch",
+        "https://www.tripointehomes.com/find-your-home/az/phoenix-metro"
+      ],
+      "likelyApexGridServiceFit": "Master-planned community civil/site and infrastructure work, structural support for single-story/flex designs, and MEP coordination.",
+      "officialPublicCompanyEmailVisible": false
+    },
+    {
+      "companyName": "Richmond American Homes",
+      "officialDomain": "richmondamerican.com",
+      "city": "Surprise, AZ",
+      "currentSignal": "Richmond American maintains a current official Surprise new-home market page with active inventory/community search and request-information/sales phone pathways.",
+      "sourceUrls": [
+        "https://www.richmondamerican.com/arizona/phoenix-new-homes/surprise",
+        "https://www.richmondamerican.com/arizona/phoenix-new-homes"
+      ],
+      "likelyApexGridServiceFit": "Civil subdivision support, structural engineering for production homes, and MEP/permit revisions for ongoing Phoenix-metro new-home delivery.",
+      "officialPublicCompanyEmailVisible": false
+    },
+    {
+      "companyName": "Lennar",
+      "officialDomain": "lennar.com",
+      "city": "Phoenix, AZ",
+      "currentSignal": "Lennar's official Phoenix market page is a live new-home search for Phoenix communities and available homes, with direct contact and business-inquiry paths.",
+      "sourceUrls": [
+        "https://www.lennar.com/new-homes/arizona/phoenix",
+        "https://www.lennar.com/find-a-home?state=AZ&market=PHO&city=phoenix"
+      ],
+      "likelyApexGridServiceFit": "Civil/site utilities and drainage, production-home structural support, and MEP coordination/plan revisions.",
+      "officialPublicCompanyEmailVisible": false
+    }
+  ]
+}

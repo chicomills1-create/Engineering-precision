@@ -1,0 +1,30 @@
+{
+  "research_scope": "Candidates reviewed but excluded from the qualified list because the available public material did not establish a sufficiently specific, dated Arizona trigger tied to the company.",
+  "rejected_or_insufficient_candidates": [
+    {
+      "candidate": "Cale Enterprises",
+      "reason": "A search result referenced a northeast Phoenix industrial rezoning, but the available result was dated 2026-08-07 and did not provide enough reliable, company-specific public detail to validate the official domain and project facts for outreach research.",
+      "source_url": "https://azbex.com/tag/phoenix-planning-commission"
+    },
+    {
+      "candidate": "Redpoint Contracting",
+      "reason": "Named in an ADOT March 2025 contract-award search snippet, but the available source did not provide a project location or sufficient award context for a qualified, actionable record.",
+      "source_url": "https://azdot.gov/sites/default/files/2025-05/March%202025%20Contract%20Award%20and%20DBE%20Commitments.pdf"
+    },
+    {
+      "candidate": "AJP Electric",
+      "reason": "Named in an ADOT March 2025 contract-award search snippet, but project/location and scope could not be verified from an accessible primary-source record.",
+      "source_url": "https://azdot.gov/sites/default/files/2025-05/March%202025%20Contract%20Award%20and%20DBE%20Commitments.pdf"
+    },
+    {
+      "candidate": "The Engineering & Construction Co., LLC",
+      "reason": "Named in an ADOT March 2025 contract-award search snippet, but the accessible public evidence was insufficient to identify project/location and verify company fit.",
+      "source_url": "https://azdot.gov/sites/default/files/2025-05/March%202025%20Contract%20Award%20and%20DBE%20Commitments.pdf"
+    },
+    {
+      "candidate": "Residences at Scottsdale Crossing applicant",
+      "reason": "Phoenix public-meeting material identifies a December 4, 2025 multifamily rezoning case and an applicant representative, but does not identify the underlying developer company; no company record was created rather than guessing.",
+      "source_url": "https://www.phoenix.gov/content/dam/phoenix/cityclerksite/publicmeetings/results/2025/november/251103004R.pdf"
+    }
+  ]
+}

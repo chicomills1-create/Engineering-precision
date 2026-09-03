@@ -1,0 +1,950 @@
+{
+  "researchedOn": "2026-09-02",
+  "scope": "Arizona residential builders, multifamily developers, general contractors, and project partners with public current-need signals",
+  "totalUniqueCompanies": 32,
+  "records": [
+    {
+      "companyNames": [
+        "A.F. Sterling"
+      ],
+      "officialDomain": "afsterling.com",
+      "markets": [
+        "Tucson"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "The company's official multi-family page says A.F. Sterling builds apartment and casita communities in addition to Tucson neighborhoods, and identifies The Hedrick as an A.F. Sterling multifamily community in Tucson. Its current site also presents new homes, renovations, and multifamily as active offerings."
+      ],
+      "serviceFits": [
+        "Civil/site, utility and drainage support for multifamily/neighborhood work; structural and MEP coordination for apartments, casitas, and custom homes."
+      ],
+      "sourceUrls": [
+        "https://afsterling.com/communities",
+        "https://afsterling.com/"
+      ],
+      "officialPublicEmail": "info@afsterling.com",
+      "officialEmailStatus": "research-only-needs-email-source-url",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Capstone Homes"
+      ],
+      "officialDomain": "capstonehomesaz.com",
+      "markets": [
+        "Flagstaff / Prescott"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "Capstone's official communities page lists active inventory in Flagstaff, Prescott, and Prescott Valley. It labels Aspen Ridge II in Flagstaff \"Now Selling\" and presents specific homes, plans, sizes, and pricing; it also identifies Canyon del Rio communities. This is an active Northern Arizona pipeline."
+      ],
+      "serviceFits": [
+        "Northern Arizona subdivision civil/site and drainage work; structural and MEP coordination for move-in-ready homes and townhomes."
+      ],
+      "sourceUrls": [
+        "https://capstonehomesaz.com/communities",
+        "https://capstonehomesaz.com/flagstaff"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Century Communities, Inc."
+      ],
+      "officialDomain": "centurycommunities.com",
+      "markets": [
+        "Phoenix, AZ (metro projects in Buckeye and San Tan Valley)"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "The company's February 18, 2026 issuer announcement says it is opening Skyline Village in San Tan Valley and Montaña Vista in Buckeye, bringing more than 300 new homes to greater Phoenix. It identifies both as now selling and describes new model-home activity."
+      ],
+      "serviceFits": [
+        "Civil engineering for subdivision/site infrastructure and drainage; structural and MEP coordination for production homes and models."
+      ],
+      "sourceUrls": [
+        "https://investors.centurycommunities.com/news/news-details/2026/Century-Communities-Phoenix-Announces-2-February-Grand-Openings-in-Prime-East-and-West-Valley-Submarkets/default.aspx",
+        "https://www.centurycommunities.com/find-your-new-home/arizona/phoenix-metro"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Fairfield Homes"
+      ],
+      "officialDomain": "fairfieldhomes.com",
+      "markets": [
+        "Tucson / Southern Arizona"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "Fairfield's official site advertises more than 24 quick move-in homes available. Its live community page lists 12 communities and filters for Green Valley, Marana, Tucson, and Vail, while describing the company as a builder of master-planned, semi-custom, and custom homes."
+      ],
+      "serviceFits": [
+        "Site/civil engineering for master-planned community phases, plus structural and MEP design coordination for semi-custom and custom homes."
+      ],
+      "sourceUrls": [
+        "https://fairfieldhomes.com/",
+        "https://fairfieldhomes.com/communities/"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Fulton Homes"
+      ],
+      "officialDomain": "fultonhomes.com",
+      "markets": [
+        "Avondale, AZ (also active across Phoenix metro)"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "The official communities map lists Acclaim in Avondale and active communities in Gilbert, Litchfield Park, Queen Creek, San Tan Valley, and Surprise with current pricing. Its North Shore at Escalante page provides a Surprise sales-office location and interactive lot map."
+      ],
+      "serviceFits": [
+        "Subdivision civil and utilities, structural engineering for production-home plans, and MEP support across multiple active Valley communities."
+      ],
+      "sourceUrls": [
+        "https://www.fultonhomes.com/our-communities",
+        "https://www.fultonhomes.com/our-communities/escalante/north-shore"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Insight Homes"
+      ],
+      "officialDomain": "insighthomes.com",
+      "markets": [
+        "Tucson / Oro Valley"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "Insight's official custom-home gallery states that it builds in Tucson, Oro Valley, Marana, Butterfly Mountain, Canyon Pass, and Dove Mountain, and specifically invites review of recently completed and currently under-construction Tucson custom homes. The explicit under-construction statement is an immediate project-work signal."
+      ],
+      "serviceFits": [
+        "Custom-home civil/site and grading support, structural engineering, and MEP design/coordination for homes under construction."
+      ],
+      "sourceUrls": [
+        "https://insighthomes.com/custom-home-galleries"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "KB Home"
+      ],
+      "officialDomain": "kbhome.com",
+      "markets": [
+        "Tucson"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "KB Home's official Arizona market page identifies 15 new-home communities in Tucson, and its Tucson page markets personalized ranch and two-story homes currently for sale in the area. The quantity of current communities is a concrete pipeline signal."
+      ],
+      "serviceFits": [
+        "Residential civil/site entitlement and infrastructure support; structural-option and MEP design/coordination support across multiple active subdivisions."
+      ],
+      "sourceUrls": [
+        "https://www.kbhome.com/new-homes-arizona",
+        "https://www.kbhome.com/new-homes-tucson"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "K. Hovnanian Homes"
+      ],
+      "officialDomain": "khov.com",
+      "markets": [
+        "Phoenix, AZ"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "Serenity at Sonoran Foothills is presented by the builder as a new North Phoenix townhome community that is \"Now Selling,\" with new-build townhomes and current promotions; the page provides the Phoenix community location."
+      ],
+      "serviceFits": [
+        "Townhome structural and MEP design coordination, civil/site and utility support, and permit/revision assistance."
+      ],
+      "sourceUrls": [
+        "https://www.khov.com/new-construction-homes/arizona/phoenix-city/serenity-at-sonoran-foothills",
+        "https://www.khov.com/new-construction-homes/arizona/phoenix-city"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Lennar"
+      ],
+      "officialDomain": "lennar.com",
+      "markets": [
+        "Phoenix, AZ",
+        "Tucson / Marana"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "Lennar's official Phoenix market page is a live new-home search for Phoenix communities and available homes, with direct contact and business-inquiry paths.",
+        "Lennar's Tucson market page currently reports 122 available homes across 12 communities and displays move-in-ready inventory in Marana. The scale and active inventory indicate ongoing construction releases in the Tucson-area market."
+      ],
+      "serviceFits": [
+        "Civil/site utilities and drainage, production-home structural support, and MEP coordination/plan revisions.",
+        "Subdivision civil work, grading/drainage and dry-utility coordination; production-home structural and MEP coordination."
+      ],
+      "sourceUrls": [
+        "https://www.lennar.com/new-homes/arizona/phoenix",
+        "https://www.lennar.com/find-a-home?state=AZ&market=PHO&city=phoenix",
+        "https://www.lennar.com/new-homes/arizona/tucson"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "LGI Homes"
+      ],
+      "officialDomain": "lgihomes.com",
+      "markets": [
+        "Tucson"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "LGI's official Tucson page says it constructs move-in-ready homes and directs visitors to its Tucson communities to schedule tours. The page presents current new-construction community activity in the Tucson market."
+      ],
+      "serviceFits": [
+        "Fast-turn production residential civil/site, structural, and MEP coordination for move-in-ready home delivery."
+      ],
+      "sourceUrls": [
+        "https://www.lgihomes.com/arizona/tucson"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Mattamy Homes"
+      ],
+      "officialDomain": "mattamyhomes.com",
+      "markets": [
+        "Phoenix, AZ",
+        "Tucson"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "Baker Farms is identified on Mattamy's official page as \"Now Selling\" at 7943 W Granada Rd., Phoenix, with a sales office and current appointment availability.",
+        "Its official Blackhawk community page says \"Now Selling,\" lists four floor plans and seven quick move-ins, and shows a Tucson sales gallery. The page also advertises quick move-in inventory with dates extending into 2026. This is a live single-family delivery program rather than an archival portfolio item."
+      ],
+      "serviceFits": [
+        "Residential civil/site and utility coordination, structural plan support, and MEP design/revisions for a live new-home community.",
+        "Civil/site support for remaining lots and utility/drainage coordination; structural and residential MEP plan/option coordination for the active home releases."
+      ],
+      "sourceUrls": [
+        "https://mattamyhomes.com/arizona/phoenix/phoenix/baker-farms-d30",
+        "https://mattamyhomes.com/arizona/tucson/tucson/blackhawk-3000s"
+      ],
+      "officialPublicEmail": "Blackhawk@mattamycorp.com",
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Meritage Homes"
+      ],
+      "officialDomain": "meritagehomes.com",
+      "markets": [
+        "Phoenix, AZ",
+        "Tucson"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "Meritage's Phoenix market page actively markets move-in-ready homes and communities and carries a time-bounded PHX-area offer through September 15, signaling current available/new-home inventory activity.",
+        "The official Tucson market page actively markets move-in-ready homes and communities; the linked Houghton Reserve - Esplanade community page provides an open daily sales office at 10338 E Red Slate Place, Tucson. This is current sales and delivery activity."
+      ],
+      "serviceFits": [
+        "Production-home structural/MEP updates and civil engineering support for active Phoenix-area community buildout.",
+        "Civil/site engineering for active community phases plus structural/MEP coordination for energy-efficient production homes."
+      ],
+      "sourceUrls": [
+        "https://www.meritagehomes.com/state/az/phoenix",
+        "https://www.meritagehomes.com/state/az/tucson",
+        "https://www.meritagehomes.com/state/az/tucson/houghton-reserve-esplanade"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Richmond American Homes",
+        "Richmond American Homes of Arizona"
+      ],
+      "officialDomain": "richmondamerican.com",
+      "markets": [
+        "Surprise, AZ",
+        "Tucson",
+        "Entrada Del Toro, 830 W. Calle La Mazorca, Sahuarita, AZ"
+      ],
+      "companyTypes": [
+        "active-homebuilder",
+        "residential homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder",
+        "project-or-entitlement-trigger"
+      ],
+      "needSignals": [
+        "Richmond American maintains a current official Surprise new-home market page with active inventory/community search and request-information/sales phone pathways.",
+        "Richmond American's official Tucson new-homes page is an active market page and explicitly invites buyers to select homesites and structural options. That represents current community sales and house-plan configuration activity, not a completed-project record.",
+        "2026-01-16 — Richmond American Homes of Arizona opened Entrada Del Toro, a new single-family community in Rancho Sahuarita, with models open and buyer intake beginning."
+      ],
+      "serviceFits": [
+        "Civil subdivision support, structural engineering for production homes, and MEP/permit revisions for ongoing Phoenix-metro new-home delivery.",
+        "Structural option review and production-home MEP coordination, with civil support for Tucson-area community phases.",
+        "Residential site-development, utilities, drainage, and municipal coordination for community rollout and future phases."
+      ],
+      "sourceUrls": [
+        "https://www.richmondamerican.com/arizona/phoenix-new-homes/surprise",
+        "https://www.richmondamerican.com/arizona/phoenix-new-homes",
+        "https://www.richmondamerican.com/arizona/tucson-new-homes/tucson",
+        "https://azbex.com/local-projects/arizona-projects-01-16-26",
+        "https://www.richmondamerican.com/arizona"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Robson Resort Communities"
+      ],
+      "officialDomain": "robson.com",
+      "markets": [
+        "Oracle / Pinal County (SaddleBrooke Ranch)"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "The official SaddleBrooke Ranch page is actively marketing new-construction homes and includes a current \"New Oasis Now Selling\" asset. It identifies multiple home-plan series available at the community, supporting an active residential delivery signal in the Tucson-region market."
+      ],
+      "serviceFits": [
+        "Community civil/site infrastructure and amenity support; structural and MEP coordination for new active-adult home series."
+      ],
+      "sourceUrls": [
+        "https://robson.com/communities/saddlebrooke-ranch"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Shea Homes"
+      ],
+      "officialDomain": "sheahomes.com",
+      "markets": [
+        "Phoenix, AZ (metro)"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "The builder's live Phoenix Area market page includes dedicated Communities and Quick Move-In Homes sections and an active information request for Phoenix Metro new homes."
+      ],
+      "serviceFits": [
+        "Civil/site engineering, structural plan support, and MEP coordination for active communities and quick-move-in home production."
+      ],
+      "sourceUrls": [
+        "https://www.sheahomes.com/new-homes/arizona/phoenix-area"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Taylor Morrison"
+      ],
+      "officialDomain": "taylormorrison.com",
+      "markets": [
+        "Phoenix, AZ"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "Taylor Morrison's official Phoenix market page currently advertises Phoenix AZ new construction, available homes, floor plans, and sales contact pathways."
+      ],
+      "serviceFits": [
+        "Civil engineering for new subdivisions, structural support for plan changes, and MEP design/permit coordination."
+      ],
+      "sourceUrls": [
+        "https://www.taylormorrison.com/az/phoenix"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Tri Pointe Homes"
+      ],
+      "officialDomain": "tripointehomes.com",
+      "markets": [
+        "Goodyear, AZ"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "The Abel Ranch project page describes two connected Goodyear communities, Camerano and Navarre, and marks the project \"Now Selling\" with future amenities."
+      ],
+      "serviceFits": [
+        "Master-planned community civil/site and infrastructure work, structural support for single-story/flex designs, and MEP coordination."
+      ],
+      "sourceUrls": [
+        "https://www.tripointehomes.com/az/phoenix-metro/abel-ranch",
+        "https://www.tripointehomes.com/find-your-home/az/phoenix-metro"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Woodside Homes"
+      ],
+      "officialDomain": "woodsidehomes.com",
+      "markets": [
+        "Gilbert, AZ"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "Woodside's current Arizona community inventory lists 33 North in Gilbert and Icon at Thunderbird in Glendale with starting prices and multiple available floor plans, indicating active new-construction offerings."
+      ],
+      "serviceFits": [
+        "Civil/site and utility work for active neighborhoods plus structural and MEP plan coordination for multiple floor plans."
+      ],
+      "sourceUrls": [
+        "https://woodsidehomes.com/findmyhome/arizona"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "high",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "29th Street Capital"
+      ],
+      "officialDomain": "29thstreetcapital.com",
+      "markets": [
+        "Verge build-to-rent community, Apache Junction, AZ"
+      ],
+      "companyTypes": [
+        "build-to-rent developer"
+      ],
+      "triggerKinds": [
+        "project-or-entitlement-trigger"
+      ],
+      "needSignals": [
+        "2026-01-16 — Leasing began at Verge, a newly delivered build-to-rent community in Apache Junction developed by 29th Street Capital; reporting says construction was expected to finish in March."
+      ],
+      "serviceFits": [
+        "BTR site-development and utility/drainage coordination for remaining closeout work and future Arizona community phases."
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-01-16-26",
+        "https://29thstreetcapital.com"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "verify-current-status",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Camelot Homes"
+      ],
+      "officialDomain": "camelothomes.com",
+      "markets": [
+        "Scottsdale, AZ"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "Its community page labels The Edge at Joy Ranch \"Models Now Open,\" identifies 52 homesites and seven floor plans (including four brand-new designs), and provides a Scottsdale sales/community address."
+      ],
+      "serviceFits": [
+        "Civil/site support for a 52-lot enclave, plus structural and MEP design coordination for new luxury plans, detached casitas, and options."
+      ],
+      "sourceUrls": [
+        "https://camelothomes.com/community/the-edge-joy-ranch/"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "verify-current-status",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Embrey"
+      ],
+      "officialDomain": "embrey.com",
+      "markets": [
+        "12th & Greenway, near 12th Street and Greenway Parkway, Phoenix, AZ"
+      ],
+      "companyTypes": [
+        "multifamily developer"
+      ],
+      "triggerKinds": [
+        "project-or-entitlement-trigger"
+      ],
+      "needSignals": [
+        "2025-12-12 — Embrey Development broke ground on the $100M, 340-unit 12th & Greenway apartment community, including 38 rental townhomes."
+      ],
+      "serviceFits": [
+        "Construction-phase design coordination, site/utilities issue resolution, and supplemental engineering support for a large multifamily build."
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-12-12-25",
+        "https://www.embrey.com"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "verify-current-status",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "FNF Construction"
+      ],
+      "officialDomain": "fnfinc.com",
+      "markets": [
+        "I-10 Wild Horse Pass Corridor, Gas Line Road to south of SR 387, between Phoenix and Casa Grande, AZ"
+      ],
+      "companyTypes": [
+        "heavy civil general contractor"
+      ],
+      "triggerKinds": [
+        "project-or-entitlement-trigger"
+      ],
+      "needSignals": [
+        "2025-12-12 — Construction was set to begin on the second segment of the I-10 Wild Horse Pass Corridor; FNF Construction is the contractor for the 10-mile segment."
+      ],
+      "serviceFits": [
+        "Civil/utility/drainage design support and construction engineering for roadway widening and related infrastructure."
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-12-12-25",
+        "https://azdot.gov/news/progress-moves-forward-i-10-wild-horse-pass-corridor-project"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "verify-current-status",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Humphreys & Partners Architects"
+      ],
+      "officialDomain": "humphreys.com",
+      "markets": [
+        "12th & Greenway, near 12th Street and Greenway Parkway, Phoenix, AZ"
+      ],
+      "companyTypes": [
+        "multifamily design firm"
+      ],
+      "triggerKinds": [
+        "project-or-entitlement-trigger"
+      ],
+      "needSignals": [
+        "2025-12-12 — Humphreys & Partners Architects was named architect for Embrey's newly broken-ground 340-unit 12th & Greenway apartment community."
+      ],
+      "serviceFits": [
+        "Consultant-team capacity for site, utility, and permit coordination on an active multifamily development."
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-12-12-25",
+        "https://www.humphreys.com"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "verify-current-status",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Hunter Contracting"
+      ],
+      "officialDomain": "huntercontracting.com",
+      "markets": [
+        "Friendship Park improvements, 12325 W. McDowell Road, Avondale, AZ"
+      ],
+      "companyTypes": [
+        "heavy civil general contractor"
+      ],
+      "triggerKinds": [
+        "project-or-entitlement-trigger"
+      ],
+      "needSignals": [
+        "2026-01-16 — Hunter Contracting served as general contractor on City of Avondale's completed Friendship Park improvements, including eight new pickleball courts and a renovated dog park."
+      ],
+      "serviceFits": [
+        "Parks/site civil, drainage, utilities, and closeout/as-built engineering support on municipal recreation work and subsequent public projects."
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-01-16-26",
+        "https://www.avondaleaz.gov/government/departments/public-works"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "verify-current-status",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Lafferty Construction"
+      ],
+      "officialDomain": "laffertyconstruction.com",
+      "markets": [
+        "Madison Street Apartments, northwest corner of Madison and 13th streets, Phoenix, AZ"
+      ],
+      "companyTypes": [
+        "general contractor"
+      ],
+      "triggerKinds": [
+        "project-or-entitlement-trigger"
+      ],
+      "needSignals": [
+        "2025-08-29 — Project reporting identifies Lafferty Construction as general contractor for Lafferty Development's proposed 160-unit, 10-story Madison Street Apartments rezoning."
+      ],
+      "serviceFits": [
+        "Preconstruction engineering support, utility/drainage coordination, and constructability coordination as the project progresses from entitlement toward permit documents."
+      ],
+      "sourceUrls": [
+        "https://azbex.com/planning-development/160-unit-multifamily-planned-at-13th-st-madison-in-phoenix",
+        "https://www.phoenix.gov/administration/departments/pdd/planning-zoning/zoning-rezoning.html"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "verify-current-status",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Lafferty Development"
+      ],
+      "officialDomain": "laffertydevelopment.com",
+      "markets": [
+        "Madison Street Apartments, northwest corner of Madison and 13th streets, Phoenix, AZ"
+      ],
+      "companyTypes": [
+        "multifamily developer"
+      ],
+      "triggerKinds": [
+        "project-or-entitlement-trigger"
+      ],
+      "needSignals": [
+        "2025-08-29 — Lafferty Development requested rezoning of 1.16 acres to create a 160-unit, 10-story multifamily community under Phoenix's Walkable Urban Code."
+      ],
+      "serviceFits": [
+        "Early entitlement-to-permit engineering coordination: site/civil scope, utility coordination, drainage, and consultant coordination for a dense infill multifamily project."
+      ],
+      "sourceUrls": [
+        "https://azbex.com/planning-development/160-unit-multifamily-planned-at-13th-st-madison-in-phoenix",
+        "https://www.phoenix.gov/administration/departments/pdd/planning-zoning/zoning-rezoning.html"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "verify-current-status",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Mandalay Homes"
+      ],
+      "officialDomain": "mandalayhomes.com",
+      "markets": [
+        "Prescott / Prescott Valley"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "Mandalay's official communities page presents a limited-time financing offer on all inventory homes and lists active communities including Jasper in Prescott Valley and Hidden Hills in Prescott, with sales-office and plan details. It also says floor plans and lot availability for The Dells will be released soon, indicating an upcoming Prescott release."
+      ],
+      "serviceFits": [
+        "Civil/site and utility support for Prescott-area community releases; structural and high-performance/energy-focused MEP coordination."
+      ],
+      "sourceUrls": [
+        "https://mandalayhomes.com/communities/"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "verify-current-status",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "McCarthy Building Companies"
+      ],
+      "officialDomain": "mccarthy.com",
+      "markets": [
+        "Signal Butte Water Treatment Plant expansion, north of Elliot Road and east of Signal Butte Road, Mesa, AZ"
+      ],
+      "companyTypes": [
+        "general contractor / construction manager"
+      ],
+      "triggerKinds": [
+        "project-or-entitlement-trigger"
+      ],
+      "needSignals": [
+        "2025-12-12 — McCarthy was identified as general contractor on Mesa's $168M water-treatment-plant expansion; Phase I is scheduled for October 2026 and Phase II for early summer 2027."
+      ],
+      "serviceFits": [
+        "Civil/site, utility, drainage, and construction-phase engineering coordination for a multi-phase municipal water project."
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-12-12-25",
+        "https://www.mesaaz.gov/Government/Departments-and-Divisions/Water-Resources"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "verify-current-status",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Miramonte Homes"
+      ],
+      "officialDomain": "miramontehomes.com",
+      "markets": [
+        "Tucson / Flagstaff"
+      ],
+      "companyTypes": [
+        "active-homebuilder"
+      ],
+      "triggerKinds": [
+        "active-homebuilder"
+      ],
+      "needSignals": [
+        "Miramonte's official site asks visitors to contact it about \"active communities\" or an \"upcoming project\" and lists dedicated Southern Arizona (Tucson) and Northern Arizona (Flagstaff) offices. Its published Arizona Public Report disclosure identifies Miramonte Arizona, LLC as the licensed residential builder."
+      ],
+      "serviceFits": [
+        "Civil/site support for active and upcoming community development, plus structural/MEP coordination for Arizona residential and build-to-rent work."
+      ],
+      "sourceUrls": [
+        "https://www.miramontehomes.com/",
+        "https://www.miramontehomes.com/themiramontedifference"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "verify-current-status",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Sundt Construction"
+      ],
+      "officialDomain": "sundt.com",
+      "markets": [
+        "Ocotillo Bridge and Road Extension, south Gilbert, AZ"
+      ],
+      "companyTypes": [
+        "general contractor / design-build contractor"
+      ],
+      "triggerKinds": [
+        "project-or-entitlement-trigger"
+      ],
+      "needSignals": [
+        "2025-12-12 — Reporting states the Town of Gilbert's bridge and road-extension project, led by Sundt, remains in delivery with summer 2026 delivery and fall closeout scheduled."
+      ],
+      "serviceFits": [
+        "Civil/site engineering, utility and drainage coordination, and construction-phase engineering support for a public road-and-bridge delivery."
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-12-12-25",
+        "https://www.gilbertaz.gov/departments/public-works/capital-improvement-projects"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "verify-current-status",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Wespac Construction"
+      ],
+      "officialDomain": "wespacaz.com",
+      "markets": [
+        "XNRGY Climate Systems U.S. headquarters and manufacturing facility, Gateway East at Phoenix-Mesa Gateway Airport, Mesa, AZ"
+      ],
+      "companyTypes": [
+        "general contractor"
+      ],
+      "triggerKinds": [
+        "project-or-entitlement-trigger"
+      ],
+      "needSignals": [
+        "2025-12-12 — Wespac completed the 275,000-square-foot first phase of XNRGY's planned 1-million-square-foot campus."
+      ],
+      "serviceFits": [
+        "Campus follow-on site/civil, utility, and construction engineering coordination as later phases move forward."
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-12-12-25",
+        "https://www.wespacaz.com"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "verify-current-status",
+      "reviewBeforeOutreach": true
+    },
+    {
+      "companyNames": [
+        "Wood Patel"
+      ],
+      "officialDomain": "woodpatel.com",
+      "markets": [
+        "Ocotillo Bridge and Road Extension, south Gilbert, AZ"
+      ],
+      "companyTypes": [
+        "civil engineering / infrastructure design firm"
+      ],
+      "triggerKinds": [
+        "project-or-entitlement-trigger"
+      ],
+      "needSignals": [
+        "2025-12-12 — Wood Patel was identified as engineer on the Town of Gilbert's active Ocotillo Bridge and Road Extension, scheduled for summer 2026 delivery."
+      ],
+      "serviceFits": [
+        "Overflow design-production, permitting/utility coordination, and construction support where a civil engineering team needs additional capacity."
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-12-12-25",
+        "https://www.gilbertaz.gov/departments/public-works/capital-improvement-projects"
+      ],
+      "officialPublicEmail": null,
+      "officialEmailStatus": "not-found-in-reviewed-pages",
+      "priority": "verify-current-status",
+      "reviewBeforeOutreach": true
+    }
+  ]
+}

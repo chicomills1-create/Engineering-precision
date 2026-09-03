@@ -1,0 +1,186 @@
+{
+  "research_scope": "Arizona residential developers, multifamily builders, and design-build/general contractors. Records require a dated, public project/entitlement/construction trigger; no individual contact or inferred email has been included.",
+  "researched_on": "2026-09-02",
+  "results": [
+    {
+      "rank": 1,
+      "company": "Lafferty Development",
+      "company_type": "multifamily developer",
+      "official_domain": "https://laffertydevelopment.com",
+      "public_company_email": null,
+      "project_location": "Madison Street Apartments, northwest corner of Madison and 13th streets, Phoenix, AZ",
+      "dated_trigger": "2025-08-29 — Lafferty Development requested rezoning of 1.16 acres to create a 160-unit, 10-story multifamily community under Phoenix's Walkable Urban Code.",
+      "trigger_type": "rezoning / entitlement filing",
+      "source_urls": [
+        "https://azbex.com/planning-development/160-unit-multifamily-planned-at-13th-st-madison-in-phoenix",
+        "https://www.phoenix.gov/administration/departments/pdd/planning-zoning/zoning-rezoning.html"
+      ],
+      "apex_grid_service_fit": "Early entitlement-to-permit engineering coordination: site/civil scope, utility coordination, drainage, and consultant coordination for a dense infill multifamily project."
+    },
+    {
+      "rank": 2,
+      "company": "Lafferty Construction",
+      "company_type": "general contractor",
+      "official_domain": "https://laffertyconstruction.com",
+      "public_company_email": null,
+      "project_location": "Madison Street Apartments, northwest corner of Madison and 13th streets, Phoenix, AZ",
+      "dated_trigger": "2025-08-29 — Project reporting identifies Lafferty Construction as general contractor for Lafferty Development's proposed 160-unit, 10-story Madison Street Apartments rezoning.",
+      "trigger_type": "identified general contractor on active entitlement",
+      "source_urls": [
+        "https://azbex.com/planning-development/160-unit-multifamily-planned-at-13th-st-madison-in-phoenix",
+        "https://www.phoenix.gov/administration/departments/pdd/planning-zoning/zoning-rezoning.html"
+      ],
+      "apex_grid_service_fit": "Preconstruction engineering support, utility/drainage coordination, and constructability coordination as the project progresses from entitlement toward permit documents."
+    },
+    {
+      "rank": 3,
+      "company": "Embrey",
+      "company_type": "multifamily developer",
+      "official_domain": "https://www.embrey.com",
+      "public_company_email": null,
+      "project_location": "12th & Greenway, near 12th Street and Greenway Parkway, Phoenix, AZ",
+      "dated_trigger": "2025-12-12 — Embrey Development broke ground on the $100M, 340-unit 12th & Greenway apartment community, including 38 rental townhomes.",
+      "trigger_type": "groundbreaking / active construction",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-12-12-25",
+        "https://www.embrey.com"
+      ],
+      "apex_grid_service_fit": "Construction-phase design coordination, site/utilities issue resolution, and supplemental engineering support for a large multifamily build."
+    },
+    {
+      "rank": 4,
+      "company": "Humphreys & Partners Architects",
+      "company_type": "multifamily design firm",
+      "official_domain": "https://www.humphreys.com",
+      "public_company_email": null,
+      "project_location": "12th & Greenway, near 12th Street and Greenway Parkway, Phoenix, AZ",
+      "dated_trigger": "2025-12-12 — Humphreys & Partners Architects was named architect for Embrey's newly broken-ground 340-unit 12th & Greenway apartment community.",
+      "trigger_type": "active multifamily project assignment",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-12-12-25",
+        "https://www.humphreys.com"
+      ],
+      "apex_grid_service_fit": "Consultant-team capacity for site, utility, and permit coordination on an active multifamily development."
+    },
+    {
+      "rank": 5,
+      "company": "Sundt Construction",
+      "company_type": "general contractor / design-build contractor",
+      "official_domain": "https://www.sundt.com",
+      "public_company_email": null,
+      "project_location": "Ocotillo Bridge and Road Extension, south Gilbert, AZ",
+      "dated_trigger": "2025-12-12 — Reporting states the Town of Gilbert's bridge and road-extension project, led by Sundt, remains in delivery with summer 2026 delivery and fall closeout scheduled.",
+      "trigger_type": "active public infrastructure construction",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-12-12-25",
+        "https://www.gilbertaz.gov/departments/public-works/capital-improvement-projects"
+      ],
+      "apex_grid_service_fit": "Civil/site engineering, utility and drainage coordination, and construction-phase engineering support for a public road-and-bridge delivery."
+    },
+    {
+      "rank": 6,
+      "company": "Wood Patel",
+      "company_type": "civil engineering / infrastructure design firm",
+      "official_domain": "https://www.woodpatel.com",
+      "public_company_email": null,
+      "project_location": "Ocotillo Bridge and Road Extension, south Gilbert, AZ",
+      "dated_trigger": "2025-12-12 — Wood Patel was identified as engineer on the Town of Gilbert's active Ocotillo Bridge and Road Extension, scheduled for summer 2026 delivery.",
+      "trigger_type": "active public infrastructure design assignment",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-12-12-25",
+        "https://www.gilbertaz.gov/departments/public-works/capital-improvement-projects"
+      ],
+      "apex_grid_service_fit": "Overflow design-production, permitting/utility coordination, and construction support where a civil engineering team needs additional capacity."
+    },
+    {
+      "rank": 7,
+      "company": "Wespac Construction",
+      "company_type": "general contractor",
+      "official_domain": "https://www.wespacaz.com",
+      "public_company_email": null,
+      "project_location": "XNRGY Climate Systems U.S. headquarters and manufacturing facility, Gateway East at Phoenix-Mesa Gateway Airport, Mesa, AZ",
+      "dated_trigger": "2025-12-12 — Wespac completed the 275,000-square-foot first phase of XNRGY's planned 1-million-square-foot campus.",
+      "trigger_type": "current project completion / planned campus expansion",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-12-12-25",
+        "https://www.wespacaz.com"
+      ],
+      "apex_grid_service_fit": "Campus follow-on site/civil, utility, and construction engineering coordination as later phases move forward."
+    },
+    {
+      "rank": 8,
+      "company": "McCarthy Building Companies",
+      "company_type": "general contractor / construction manager",
+      "official_domain": "https://www.mccarthy.com",
+      "public_company_email": null,
+      "project_location": "Signal Butte Water Treatment Plant expansion, north of Elliot Road and east of Signal Butte Road, Mesa, AZ",
+      "dated_trigger": "2025-12-12 — McCarthy was identified as general contractor on Mesa's $168M water-treatment-plant expansion; Phase I is scheduled for October 2026 and Phase II for early summer 2027.",
+      "trigger_type": "active public utility construction",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-12-12-25",
+        "https://www.mesaaz.gov/Government/Departments-and-Divisions/Water-Resources"
+      ],
+      "apex_grid_service_fit": "Civil/site, utility, drainage, and construction-phase engineering coordination for a multi-phase municipal water project."
+    },
+    {
+      "rank": 9,
+      "company": "FNF Construction",
+      "company_type": "heavy civil general contractor",
+      "official_domain": "https://www.fnfinc.com",
+      "public_company_email": null,
+      "project_location": "I-10 Wild Horse Pass Corridor, Gas Line Road to south of SR 387, between Phoenix and Casa Grande, AZ",
+      "dated_trigger": "2025-12-12 — Construction was set to begin on the second segment of the I-10 Wild Horse Pass Corridor; FNF Construction is the contractor for the 10-mile segment.",
+      "trigger_type": "construction start",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-12-12-25",
+        "https://azdot.gov/news/progress-moves-forward-i-10-wild-horse-pass-corridor-project"
+      ],
+      "apex_grid_service_fit": "Civil/utility/drainage design support and construction engineering for roadway widening and related infrastructure."
+    },
+    {
+      "rank": 10,
+      "company": "Richmond American Homes of Arizona",
+      "company_type": "residential homebuilder",
+      "official_domain": "https://www.richmondamerican.com",
+      "public_company_email": null,
+      "project_location": "Entrada Del Toro, 830 W. Calle La Mazorca, Sahuarita, AZ",
+      "dated_trigger": "2026-01-16 — Richmond American Homes of Arizona opened Entrada Del Toro, a new single-family community in Rancho Sahuarita, with models open and buyer intake beginning.",
+      "trigger_type": "new community opening",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-01-16-26",
+        "https://www.richmondamerican.com/arizona"
+      ],
+      "apex_grid_service_fit": "Residential site-development, utilities, drainage, and municipal coordination for community rollout and future phases."
+    },
+    {
+      "rank": 11,
+      "company": "Hunter Contracting",
+      "company_type": "heavy civil general contractor",
+      "official_domain": "https://www.huntercontracting.com",
+      "public_company_email": null,
+      "project_location": "Friendship Park improvements, 12325 W. McDowell Road, Avondale, AZ",
+      "dated_trigger": "2026-01-16 — Hunter Contracting served as general contractor on City of Avondale's completed Friendship Park improvements, including eight new pickleball courts and a renovated dog park.",
+      "trigger_type": "recent public construction completion",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-01-16-26",
+        "https://www.avondaleaz.gov/government/departments/public-works"
+      ],
+      "apex_grid_service_fit": "Parks/site civil, drainage, utilities, and closeout/as-built engineering support on municipal recreation work and subsequent public projects."
+    },
+    {
+      "rank": 12,
+      "company": "29th Street Capital",
+      "company_type": "build-to-rent developer",
+      "official_domain": "https://29thstreetcapital.com",
+      "public_company_email": null,
+      "project_location": "Verge build-to-rent community, Apache Junction, AZ",
+      "dated_trigger": "2026-01-16 — Leasing began at Verge, a newly delivered build-to-rent community in Apache Junction developed by 29th Street Capital; reporting says construction was expected to finish in March.",
+      "trigger_type": "new build-to-rent delivery / leasing launch",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-01-16-26",
+        "https://29thstreetcapital.com"
+      ],
+      "apex_grid_service_fit": "BTR site-development and utility/drainage coordination for remaining closeout work and future Arizona community phases."
+    }
+  ]
+}

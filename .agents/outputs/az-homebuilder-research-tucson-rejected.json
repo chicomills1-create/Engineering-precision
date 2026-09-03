@@ -1,0 +1,33 @@
+[
+  {
+    "company": "Dorn Homes",
+    "officialDomain": "dornhomes.com",
+    "reasonRejected": "Search results contained third-party community and directory claims, but no current, fetchable official-company community, permit, entitlement, bid, or hiring page was verified for this pass. It is therefore not included on the evidence-led outreach list.",
+    "nonQualifyingSourceUrls": [
+      "https://www.findabuilder.com/flagstaff/builders/dorn-homes",
+      "https://www.newhomesource.com/communities/az/prescott-area?inventory=true"
+    ]
+  },
+  {
+    "company": "D.R. Horton",
+    "officialDomain": "drhorton.com",
+    "reasonRejected": "It appears in general Tucson new-home search results, but this pass did not verify a specific current official Tucson/Pima County community, permit/entitlement item, or posted opening. Directory/listing evidence alone was intentionally not used.",
+    "nonQualifyingSourceUrls": [
+      "https://www.realtor.com/newhomecommunities/Tucson_AZ"
+    ]
+  },
+  {
+    "company": "Pulte Homes",
+    "officialDomain": "pulte.com",
+    "reasonRejected": "No specific current official Tucson, Flagstaff, Prescott, or other non-Phoenix Arizona community/permit/hiring signal was verified during this pass; the company is excluded rather than inferred from general market presence.",
+    "nonQualifyingSourceUrls": []
+  },
+  {
+    "company": "Maracay Homes",
+    "officialDomain": "maracayhomes.com",
+    "reasonRejected": "A third-party Tucson relocation guide mentioned the builder, but no sufficiently specific current official company or authoritative municipal project signal was verified for this pass.",
+    "nonQualifyingSourceUrls": [
+      "https://tucsonrelocationguide.com/new-home-builders-in-tucson/"
+    ]
+  }
+]

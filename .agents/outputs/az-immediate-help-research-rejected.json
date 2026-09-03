@@ -1,0 +1,108 @@
+{
+  "researchedOn": "2026-09-02",
+  "totalRejected": 13,
+  "records": [
+    {
+      "companyName": "Rosewood Homes",
+      "officialDomain": "rosewoodhomes.com",
+      "reason": "The official homepage states \"We're Sold Out,\" which is the opposite of an active new-community signal.",
+      "sourceUrls": [
+        "https://rosewoodhomes.com/"
+      ],
+      "researchSource": ".agents/outputs/az-homebuilder-research-phoenix-rejected.json"
+    },
+    {
+      "companyName": "Landsea Homes",
+      "officialDomain": "landseahomes.com",
+      "reason": "The readily located acquisition story concerned 178 homesites but was dated 2020; it was rejected as stale rather than used to infer current activity.",
+      "sourceUrls": [
+        "https://www.builderonline.com/land/development/landsea-homes-acquires-178-homesites-in-two-ariz-communities_c"
+      ],
+      "researchSource": ".agents/outputs/az-homebuilder-research-phoenix-rejected.json"
+    },
+    {
+      "companyName": "Beazer Homes",
+      "officialDomain": "beazer.com",
+      "reason": "The search result located was a third-party NewHomeSource directory rather than a current official Phoenix project, permit, or announcement page.",
+      "sourceUrls": [
+        "https://www.newhomesource.com/communities/az/phoenix-mesa-area/builder-beazer-homes-1"
+      ],
+      "researchSource": ".agents/outputs/az-homebuilder-research-phoenix-rejected.json"
+    },
+    {
+      "companyName": "Mandalay Homes",
+      "officialDomain": "mandalayhomes.com",
+      "reason": "Official community results focused on Prescott/Clarkdale rather than Phoenix metro; the Phoenix/Glendale project story found was dated 2015.",
+      "sourceUrls": [
+        "https://mandalayhomes.com/our-communities",
+        "https://mandalayhomes.com/vision-hill-zero-energy-ready-homes/"
+      ],
+      "researchSource": ".agents/outputs/az-homebuilder-research-phoenix-rejected.json"
+    },
+    {
+      "company": "Dorn Homes",
+      "officialDomain": "dornhomes.com",
+      "reasonRejected": "Search results contained third-party community and directory claims, but no current, fetchable official-company community, permit, entitlement, bid, or hiring page was verified for this pass. It is therefore not included on the evidence-led outreach list.",
+      "nonQualifyingSourceUrls": [
+        "https://www.findabuilder.com/flagstaff/builders/dorn-homes",
+        "https://www.newhomesource.com/communities/az/prescott-area?inventory=true"
+      ],
+      "researchSource": ".agents/outputs/az-homebuilder-research-tucson-rejected.json"
+    },
+    {
+      "company": "D.R. Horton",
+      "officialDomain": "drhorton.com",
+      "reasonRejected": "It appears in general Tucson new-home search results, but this pass did not verify a specific current official Tucson/Pima County community, permit/entitlement item, or posted opening. Directory/listing evidence alone was intentionally not used.",
+      "nonQualifyingSourceUrls": [
+        "https://www.realtor.com/newhomecommunities/Tucson_AZ"
+      ],
+      "researchSource": ".agents/outputs/az-homebuilder-research-tucson-rejected.json"
+    },
+    {
+      "company": "Pulte Homes",
+      "officialDomain": "pulte.com",
+      "reasonRejected": "No specific current official Tucson, Flagstaff, Prescott, or other non-Phoenix Arizona community/permit/hiring signal was verified during this pass; the company is excluded rather than inferred from general market presence.",
+      "nonQualifyingSourceUrls": [],
+      "researchSource": ".agents/outputs/az-homebuilder-research-tucson-rejected.json"
+    },
+    {
+      "company": "Maracay Homes",
+      "officialDomain": "maracayhomes.com",
+      "reasonRejected": "A third-party Tucson relocation guide mentioned the builder, but no sufficiently specific current official company or authoritative municipal project signal was verified for this pass.",
+      "nonQualifyingSourceUrls": [
+        "https://tucsonrelocationguide.com/new-home-builders-in-tucson/"
+      ],
+      "researchSource": ".agents/outputs/az-homebuilder-research-tucson-rejected.json"
+    },
+    {
+      "candidate": "Cale Enterprises",
+      "reason": "A search result referenced a northeast Phoenix industrial rezoning, but the available result was dated 2026-08-07 and did not provide enough reliable, company-specific public detail to validate the official domain and project facts for outreach research.",
+      "source_url": "https://azbex.com/tag/phoenix-planning-commission",
+      "researchSource": ".agents/outputs/az-construction-trigger-research-rejected.json"
+    },
+    {
+      "candidate": "Redpoint Contracting",
+      "reason": "Named in an ADOT March 2025 contract-award search snippet, but the available source did not provide a project location or sufficient award context for a qualified, actionable record.",
+      "source_url": "https://azdot.gov/sites/default/files/2025-05/March%202025%20Contract%20Award%20and%20DBE%20Commitments.pdf",
+      "researchSource": ".agents/outputs/az-construction-trigger-research-rejected.json"
+    },
+    {
+      "candidate": "AJP Electric",
+      "reason": "Named in an ADOT March 2025 contract-award search snippet, but project/location and scope could not be verified from an accessible primary-source record.",
+      "source_url": "https://azdot.gov/sites/default/files/2025-05/March%202025%20Contract%20Award%20and%20DBE%20Commitments.pdf",
+      "researchSource": ".agents/outputs/az-construction-trigger-research-rejected.json"
+    },
+    {
+      "candidate": "The Engineering & Construction Co., LLC",
+      "reason": "Named in an ADOT March 2025 contract-award search snippet, but the accessible public evidence was insufficient to identify project/location and verify company fit.",
+      "source_url": "https://azdot.gov/sites/default/files/2025-05/March%202025%20Contract%20Award%20and%20DBE%20Commitments.pdf",
+      "researchSource": ".agents/outputs/az-construction-trigger-research-rejected.json"
+    },
+    {
+      "candidate": "Residences at Scottsdale Crossing applicant",
+      "reason": "Phoenix public-meeting material identifies a December 4, 2025 multifamily rezoning case and an applicant representative, but does not identify the underlying developer company; no company record was created rather than guessing.",
+      "source_url": "https://www.phoenix.gov/content/dam/phoenix/cityclerksite/publicmeetings/results/2025/november/251103004R.pdf",
+      "researchSource": ".agents/outputs/az-construction-trigger-research-rejected.json"
+    }
+  ]
+}
