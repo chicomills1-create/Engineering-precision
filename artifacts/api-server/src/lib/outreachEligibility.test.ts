@@ -26,7 +26,7 @@ test("the global target reserves 150 regular and 50 hot-market slots while allow
   assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z"), 50), 200);
   assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z"), 100), 250);
   assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-04T15:00:00.000Z"), 100), 250);
-  assert.equal(getOutreachMonthlyLimit(), 6000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-09-03T15:00:00.000Z")), 6000);
 });
 
   const now = new Date("2026-08-28T12:00:00.000Z");
@@ -190,10 +190,16 @@ test("legacy same-day sends consume the new global reservation ceiling", () => {
   assert.equal(getLegacyOutreachSentCount(120, 20), 100);
 });
 
-test("monthly outreach quota uses Phoenix calendar months and a hard 6000 ceiling", () => {
+test("monthly outreach quota follows the approved Phoenix-month ramp", () => {
   assert.equal(getPhoenixOutreachMonthKey(new Date("2026-09-01T06:59:59.000Z")), "2026-08");
   assert.equal(getPhoenixOutreachMonthKey(new Date("2026-09-01T07:00:00.000Z")), "2026-09");
-  assert.equal(getOutreachMonthlyLimit(), 6000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-08-31T12:00:00.000Z")), 6000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-09-30T12:00:00.000Z")), 6000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-10-01T12:00:00.000Z")), 10000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-11-01T12:00:00.000Z")), 20000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-12-01T12:00:00.000Z")), 35000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2027-01-01T12:00:00.000Z")), 50000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2027-02-01T12:00:00.000Z")), 50000);
   assert.equal(getLegacyOutreachMonthlySentCount(6100, 100), 6000);
   assert.equal(getLegacyOutreachMonthlySentCount(50, 75), 0);
 });
