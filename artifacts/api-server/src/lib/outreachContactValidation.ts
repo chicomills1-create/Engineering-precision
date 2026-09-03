@@ -12,6 +12,12 @@ export type VerifiedBatchContactValidationInput = OutreachContactValidationInput
   contactSourceUrl: unknown;
 };
 
+export type VerifiedHotMarketContactValidationInput =
+  VerifiedBatchContactValidationInput & {
+    emailSourceUrl: unknown;
+    projectEvidenceUrl?: unknown;
+  };
+
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const INVALID_TEXT_VALUES = new Set([
   "[object object]",
@@ -46,6 +52,21 @@ function isPublicHttpUrl(value: unknown): boolean {
       && Boolean(url.hostname)
       && !url.username
       && !url.password;
+  } catch {
+    return false;
+  }
+}
+
+function hostname(value: string): string {
+  return new URL(value).hostname.replace(/^www\./, "").toLowerCase();
+}
+
+export function isCompanyDomainEmail(emailValue: unknown, websiteValue: unknown): boolean {
+  if (!isUsableBusinessEmail(emailValue) || !isPublicHttpUrl(websiteValue)) return false;
+  try {
+    const emailDomain = normalizedText(emailValue).toLowerCase().split("@")[1] ?? "";
+    const siteDomain = hostname(normalizedText(websiteValue));
+    return emailDomain === siteDomain || emailDomain.endsWith(`.${siteDomain}`);
   } catch {
     return false;
   }
@@ -106,5 +127,20 @@ export function assertVerifiedOutreachBatch(
     emails.add(email);
     dedupeKeys.add(dedupeKey);
     websites.add(website);
+  }
+}
+
+export function assertVerifiedHotMarketContact(
+  contact: VerifiedHotMarketContactValidationInput,
+): void {
+  assertVerifiedOutreachBatch([contact], 1);
+  if (!isPublicHttpUrl(contact.emailSourceUrl)) {
+    throw new Error("Hot-market contact requires a public email evidence URL");
+  }
+  if (contact.projectEvidenceUrl !== undefined && !isPublicHttpUrl(contact.projectEvidenceUrl)) {
+    throw new Error("Hot-market contact requires a public project evidence URL");
+  }
+  if (!isCompanyDomainEmail(contact.contactEmail, contact.website)) {
+    throw new Error("Hot-market contact requires a company-domain email");
   }
 }

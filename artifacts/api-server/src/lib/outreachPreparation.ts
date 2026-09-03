@@ -20,7 +20,7 @@ import {
   REGULAR_OUTREACH_DAILY_TARGET,
 } from "./verifiedOutreachBatch";
 import { ensureApprovedFollowUpSequence } from "./outreachSequence";
-import { HOT_MARKET_SOURCE_TYPE } from "./hotMarketOutreachBatch";
+import { isHotMarketSourceType } from "./hotMarketOutreachBatch";
 export const OUTREACH_PERSONAL_PREPARATION_TARGET = 100;
 export const OUTREACH_PUBLIC_PREPARATION_TARGET = 50;
 export const OUTREACH_PREPARATION_TARGET = REGULAR_OUTREACH_DAILY_TARGET;
@@ -414,7 +414,7 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
           inArray(outreachMessagesTable.status, ["approved", "sending"]),
         ));
       const regularTargetInitials = currentTargetInitials.filter(
-        (message) => message.sourceType !== HOT_MARKET_SOURCE_TYPE,
+        (message) => !isHotMarketSourceType(message.sourceType),
       );
       const slottedMessageIds = new Set(existingSlots.flatMap((row) => row.messageId ? [row.messageId] : []));
       const untrackedTargetInitials = regularTargetInitials.filter((message) => !slottedMessageIds.has(message.id));

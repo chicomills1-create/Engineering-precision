@@ -3,11 +3,18 @@ import { test } from "node:test";
 import {
   HOT_MARKET_OUTREACH_CONTACTS,
   HOT_MARKET_DAILY_TARGET,
+  HOT_MARKET_RECURRING_SOURCE_TYPE,
   HOT_MARKET_SEND_AT,
+  getHotMarketScheduledAt,
   hotMarketOutreachBody,
   hotMarketOutreachSubject,
+  isHotMarketSourceType,
 } from "./hotMarketOutreachBatch";
-import { assertVerifiedOutreachBatch } from "./outreachContactValidation";
+import {
+  assertVerifiedHotMarketContact,
+  assertVerifiedOutreachBatch,
+  isCompanyDomainEmail,
+} from "./outreachContactValidation";
 
 test("the one-time Arizona hot-market batch contains every currently verified new contact", () => {
   assert.equal(HOT_MARKET_DAILY_TARGET, 50);
@@ -79,4 +86,37 @@ test("hot-market personalization does not narrow the firm to Scottsdale", () => 
 
 test("the hot-market messages wait until after the regular 8 AM Phoenix batch", () => {
   assert.equal(HOT_MARKET_SEND_AT.toISOString(), "2026-09-03T15:10:00.000Z");
+  assert.equal(
+    getHotMarketScheduledAt(new Date("2026-09-04T15:00:00.000Z")).toISOString(),
+    "2026-09-04T15:10:00.000Z",
+  );
+});
+
+test("recurring and legacy hot-market messages share one quota lane", () => {
+  assert.equal(isHotMarketSourceType("hot_market_one_time"), true);
+  assert.equal(isHotMarketSourceType(HOT_MARKET_RECURRING_SOURCE_TYPE), true);
+  assert.equal(isHotMarketSourceType(null), false);
+  assert.equal(isHotMarketSourceType("regular"), false);
+});
+
+test("verified hot-market contacts require public evidence and company-domain email", () => {
+  const contact = {
+    dedupeKey: "verified-hot-market-example",
+    companyName: "Example Builders",
+    website: "https://example.com",
+    contactName: "Alex Rivera",
+    contactTitle: "President",
+    contactEmail: "alex@example.com",
+    sourceUrl: "https://permits.example.gov/project/123",
+    projectEvidenceUrl: "https://permits.example.gov/project/123",
+    contactSourceUrl: "https://example.com/team",
+    emailSourceUrl: "https://example.com/contact",
+  };
+  assert.equal(isCompanyDomainEmail(contact.contactEmail, contact.website), true);
+  assert.equal(isCompanyDomainEmail("alex@gmail.com", contact.website), false);
+  assert.doesNotThrow(() => assertVerifiedHotMarketContact(contact));
+  assert.throws(
+    () => assertVerifiedHotMarketContact({ ...contact, contactEmail: "alex@gmail.com" }),
+    /company-domain email/,
+  );
 });

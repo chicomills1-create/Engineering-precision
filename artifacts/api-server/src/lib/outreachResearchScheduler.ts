@@ -1,4 +1,4 @@
-import { and, eq, inArray, lte } from "drizzle-orm";
+import { and, eq, inArray, lte, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
@@ -11,20 +11,27 @@ import {
 } from "@workspace/db";
 import { logger } from "./logger";
 import {
+  discoverPublicHotMarketProspects,
   discoverPublicProspects,
+  RESEARCH_STATE_ORDER,
+  type DiscoveredHotMarketProspect,
   type DiscoveredProspect,
   type ResearchAudience,
   type ResearchState,
 } from "./publicResearch";
 import {
-  getHotMarketResearchStates,
-  isRecurringHotMarketCampaign,
-  isResearchState,
-} from "./hotMarketResearch";
+  getHotMarketScheduledAt,
+  HOT_MARKET_DAILY_TARGET,
+  stageVerifiedHotMarketProspects,
+} from "./hotMarketOutreachBatch";
+import { getNextPhoenixPreparationTarget } from "./outreachPreparation";
 
 export const OUTREACH_RESEARCH_TIMEZONE = "America/Phoenix";
 export const OUTREACH_RESEARCH_LOCAL_HOUR = 8;
 export const MAX_DAILY_RESEARCH_PROSPECTS = 150;
+export const HOT_MARKET_RESEARCH_STATES_PER_RUN = 8;
+const HOT_MARKET_RESEARCH_QUERY_PREFIX = "hot-market-replenishment:";
+const HOT_MARKET_RESEARCH_AUDIENCES: ResearchAudience[] = ["builder", "architect"];
 
 const DATE_FORMATTER = new Intl.DateTimeFormat("en-CA", {
   timeZone: OUTREACH_RESEARCH_TIMEZONE,
@@ -64,7 +71,9 @@ export function getDailyResearchTarget(scheduleTarget: number, campaignLimit: nu
 }
 
 function validStates(states: string[]): ResearchState[] {
-  return states.filter(isResearchState);
+  return states.filter((state): state is ResearchState =>
+    (RESEARCH_STATE_ORDER as readonly string[]).includes(state)
+  );
 }
 
 function validAudiences(audience: string): ResearchAudience[] {
@@ -82,16 +91,138 @@ function uniqueCandidates(candidates: DiscoveredProspect[]): DiscoveredProspect[
   });
 }
 
+export function getHotMarketResearchStates(
+  runDate: string,
+  limit = HOT_MARKET_RESEARCH_STATES_PER_RUN,
+): ResearchState[] {
+  const secondaryStates = RESEARCH_STATE_ORDER.slice(2);
+  const dayNumber = Math.floor(new Date(`${runDate}T12:00:00Z`).getTime() / 86_400_000);
+  const secondaryCount = Math.max(0, Math.min(secondaryStates.length, limit - 2));
+  const offset = secondaryStates.length === 0 ? 0 : dayNumber % secondaryStates.length;
+  const rotatingStates = Array.from({ length: secondaryCount }, (_, index) =>
+    secondaryStates[(offset + index) % secondaryStates.length]
+  ).filter((state): state is ResearchState => Boolean(state));
+  return [...RESEARCH_STATE_ORDER.slice(0, Math.min(2, limit)), ...rotatingStates];
+}
+
+function uniqueHotMarketCandidates(
+  candidates: DiscoveredHotMarketProspect[],
+): DiscoveredHotMarketProspect[] {
+  const dedupeKeys = new Set<string>();
+  const emails = new Set<string>();
+  const domains = new Set<string>();
+  return candidates.filter((candidate) => {
+    const email = candidate.contactEmail.trim().toLowerCase();
+    let domain = "";
+    try {
+      domain = new URL(candidate.website).hostname.replace(/^www\./, "").toLowerCase();
+    } catch {
+      return false;
+    }
+    if (
+      dedupeKeys.has(candidate.dedupeKey)
+      || emails.has(email)
+      || domains.has(domain)
+    ) return false;
+    dedupeKeys.add(candidate.dedupeKey);
+    emails.add(email);
+    domains.add(domain);
+    return true;
+  });
+}
+
+async function claimHotMarketResearchRun(
+  runDate: string,
+  states: ResearchState[],
+  now: Date,
+): Promise<number | undefined> {
+  const query = `${HOT_MARKET_RESEARCH_QUERY_PREFIX}${runDate}`;
+  return db.transaction(async (tx) => {
+    await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${query}, 0))`);
+    const [existing] = await tx.select().from(outreachResearchRunsTable)
+      .where(eq(outreachResearchRunsTable.query, query))
+      .limit(1);
+    if (existing) {
+      const stale = existing.status === "running"
+        && existing.createdAt.getTime() <= now.getTime() - 30 * 60_000;
+      if (existing.status !== "failed" && !stale) return undefined;
+      const [recovered] = await tx.update(outreachResearchRunsTable).set({
+        state: states.join(","),
+        status: "running",
+        resultCount: 0,
+        skippedCount: 0,
+        error: null,
+        completedAt: null,
+      }).where(eq(outreachResearchRunsTable.id, existing.id)).returning({
+        id: outreachResearchRunsTable.id,
+      });
+      return recovered?.id;
+    }
+    const [created] = await tx.insert(outreachResearchRunsTable).values({
+      state: states.join(","),
+      audience: "mixed",
+      query,
+      status: "running",
+    }).returning({ id: outreachResearchRunsTable.id });
+    return created?.id;
+  });
+}
+
+export async function processDueHotMarketResearch(
+  now = new Date(),
+): Promise<{ state: "skipped" | "completed" | "failed"; staged: number; shortfall: number }> {
+  const { runDate, localHour } = getPhoenixResearchWindow(now);
+  if (localHour < OUTREACH_RESEARCH_LOCAL_HOUR) {
+    return { state: "skipped", staged: 0, shortfall: HOT_MARKET_DAILY_TARGET };
+  }
+  const states = getHotMarketResearchStates(runDate);
+  const runId = await claimHotMarketResearchRun(runDate, states, now);
+  if (!runId) return { state: "skipped", staged: 0, shortfall: 0 };
+
+  try {
+    const discoveries: DiscoveredHotMarketProspect[] = [];
+    for (const state of states) {
+      for (const audience of HOT_MARKET_RESEARCH_AUDIENCES) {
+        const result = await discoverPublicHotMarketProspects({ state, audience });
+        discoveries.push(...result.prospects);
+      }
+    }
+    const candidates = uniqueHotMarketCandidates(discoveries);
+    const target = getNextPhoenixPreparationTarget(now);
+    const result = await stageVerifiedHotMarketProspects(candidates, {
+      targetDate: target.targetDate,
+      scheduledAt: getHotMarketScheduledAt(target.scheduledAt),
+      targetCount: HOT_MARKET_DAILY_TARGET,
+      now,
+    });
+    await db.update(outreachResearchRunsTable).set({
+      status: "completed",
+      resultCount: result.staged,
+      skippedCount: result.skipped,
+      completedAt: new Date(),
+      error: result.shortfall > 0
+        ? `Verified hot-market shortfall: ${result.shortfall}`
+        : null,
+    }).where(eq(outreachResearchRunsTable.id, runId));
+    return { state: "completed", staged: result.staged, shortfall: result.shortfall };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Hot-market research failed";
+    await db.update(outreachResearchRunsTable).set({
+      status: "failed",
+      error: message,
+      completedAt: new Date(),
+    }).where(eq(outreachResearchRunsTable.id, runId));
+    logger.error({ err: error, runDate }, "Scheduled hot-market research run failed");
+    return { state: "failed", staged: 0, shortfall: HOT_MARKET_DAILY_TARGET };
+  }
+}
+
 async function completeScheduledResearch(
   schedule: ResearchSchedule,
   campaign: Campaign,
   scheduleRunId: number,
-  runDate: string,
 ): Promise<void> {
-  const hotMarket = isRecurringHotMarketCampaign(campaign);
-  const states = hotMarket
-    ? getHotMarketResearchStates(runDate)
-    : validStates(campaign.states);
+  const states = validStates(campaign.states);
   if (states.length === 0) throw new Error("Campaign has no supported target states");
 
   const audiences = validAudiences(campaign.audience);
@@ -108,11 +239,7 @@ async function completeScheduledResearch(
     const discoveries = [];
     for (const state of states) {
       for (const audience of audiences) {
-        discoveries.push(await discoverPublicProspects({
-          state,
-          audience,
-          mode: hotMarket ? "hot_market" : "regular",
-        }));
+        discoveries.push(await discoverPublicProspects({ state, audience }));
       }
     }
 
@@ -132,9 +259,6 @@ async function completeScheduledResearch(
       ? []
       : await db.insert(prospectsTable).values(newCandidates.map((candidate) => ({
         ...candidate,
-        researchNotes: hotMarket
-          ? `Hot-market candidate requiring contact and email verification. ${candidate.researchNotes}`
-          : candidate.researchNotes,
         campaignId: campaign.id,
         researchRunId: researchRun.id,
         status: "review",
@@ -218,7 +342,7 @@ export async function processDueOutreachResearchSchedules(now = new Date()): Pro
     if (!claimed) continue;
 
     try {
-      await completeScheduledResearch(schedule, campaign, claimed.id, runDate);
+      await completeScheduledResearch(schedule, campaign, claimed.id);
       completed += 1;
     } catch (error) {
       logger.error({ err: error, scheduleId: schedule.id }, "Scheduled outreach research run failed");

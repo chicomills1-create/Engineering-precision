@@ -30,7 +30,8 @@ import { withOutreachEmailLock } from "./outreachEmailLock";
 import { getVerifiedInitialDeliveryAt } from "./outreachSequence";
 import {
   HOT_MARKET_DAILY_TARGET,
-  HOT_MARKET_SOURCE_TYPE,
+  HOT_MARKET_SOURCE_TYPES,
+  isHotMarketSourceType,
 } from "./hotMarketOutreachBatch";
 import { REGULAR_OUTREACH_DAILY_TARGET } from "./verifiedOutreachBatch";
 
@@ -245,7 +246,7 @@ async function reserveOutreachSend(
       const campaignLimit = getOutreachDailyLimit(
         campaign.dailyLimit,
         activeSendDays,
-        message.sourceType === HOT_MARKET_SOURCE_TYPE,
+        isHotMarketSourceType(message.sourceType),
       );
       const [campaignReservations] = await tx.select({ value: count() })
         .from(outreachSendReservationsTable)
@@ -282,7 +283,8 @@ async function reserveOutreachSend(
     const [hotMarketMessages] = await tx.select({ value: count() })
       .from(outreachMessagesTable)
       .where(and(
-        eq(outreachMessagesTable.sourceType, HOT_MARKET_SOURCE_TYPE),
+        eq(outreachMessagesTable.sequenceNumber, 1),
+        inArray(outreachMessagesTable.sourceType, [...HOT_MARKET_SOURCE_TYPES]),
         gte(outreachMessagesTable.scheduledAt, dayStart),
         lt(
           outreachMessagesTable.scheduledAt,

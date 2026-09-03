@@ -2,16 +2,15 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
   getDailyResearchTarget,
+  getHotMarketResearchStates,
   getPhoenixResearchWindow,
+  HOT_MARKET_RESEARCH_STATES_PER_RUN,
   isResearchScheduleDue,
   MAX_DAILY_RESEARCH_PROSPECTS,
   OUTREACH_RESEARCH_LOCAL_HOUR,
   OUTREACH_RESEARCH_TIMEZONE,
 } from "./outreachResearchScheduler";
-import {
-  getHotMarketResearchStates,
-  LICENSED_OUTREACH_STATES,
-} from "./hotMarketResearch";
+import { RESEARCH_STATE_ORDER } from "./publicResearch";
 
 test("uses the Phoenix calendar day and 8 AM boundary", () => {
   assert.deepEqual(
@@ -53,14 +52,19 @@ test("caps daily scheduled research at the 150-per-day monthly-safe target", () 
   assert.equal(getDailyResearchTarget(5, 5), 5);
 });
 
-test("national hot-market research always starts with Arizona and California and rotates other licensed states", () => {
+test("national hot-market research always starts in Arizona and California", () => {
+  const states = getHotMarketResearchStates("2026-09-03");
+  assert.equal(HOT_MARKET_RESEARCH_STATES_PER_RUN, 8);
+  assert.equal(states.length, 8);
+  assert.deepEqual(states.slice(0, 2), ["AZ", "CA"]);
+  assert.equal(new Set(states).size, states.length);
+  assert.equal(RESEARCH_STATE_ORDER.length, 49);
+  assert.equal(RESEARCH_STATE_ORDER.includes("AK" as never), false);
+});
+
+test("national hot-market research rotates the remaining licensed states", () => {
   const first = getHotMarketResearchStates("2026-09-03");
-  const next = getHotMarketResearchStates("2026-09-04");
-  assert.deepEqual(first.slice(0, 2), ["AZ", "CA"]);
-  assert.deepEqual(next.slice(0, 2), ["AZ", "CA"]);
-  assert.equal(first.length, 6);
-  assert.equal(next.length, 6);
-  assert.equal(first.includes("AK" as any), false);
-  assert.equal(LICENSED_OUTREACH_STATES.length, 49);
-  assert.notDeepEqual(first.slice(2), next.slice(2));
+  const second = getHotMarketResearchStates("2026-09-04");
+  assert.deepEqual(second.slice(0, 2), ["AZ", "CA"]);
+  assert.notDeepEqual(first.slice(2), second.slice(2));
 });

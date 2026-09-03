@@ -19,9 +19,10 @@ import {
   isReplyWebhookConfigured,
   syncSendGridInboundReplyWebhook,
 } from "./outreachEvents";
-import { processDueOutreachResearchSchedules } from "./outreachResearchScheduler";
-import { ensureRecurringHotMarketResearchSchedule } from "./hotMarketResearch";
-import { prepareNextPhoenixHotMarketOutreach } from "./hotMarketPreparation";
+import {
+  processDueHotMarketResearch,
+  processDueOutreachResearchSchedules,
+} from "./outreachResearchScheduler";
 import { prepareNextPhoenixOutreach } from "./outreachPreparation";
 import {
   reconcileUncertainOutreachMessages,
@@ -306,12 +307,6 @@ export function startOutreachWorker(): void {
           } else if (preparation.state === "failed") {
             logger.error(preparation, "Next Phoenix outreach preparation failed");
           }
-          const hotMarketPreparation = await prepareNextPhoenixHotMarketOutreach();
-          if (hotMarketPreparation.state === "completed") {
-            logger.info(hotMarketPreparation, "Prepared next Phoenix hot-market window");
-          } else if (hotMarketPreparation.state === "failed") {
-            logger.error(hotMarketPreparation, "Next Phoenix hot-market preparation failed");
-          }
         })
         .catch((err: unknown) => logger.error({ err }, "Outreach production scheduler failed"));
     });
@@ -323,11 +318,18 @@ export function startOutreachWorker(): void {
 
   if (status.researchAutomationReady) {
     const runResearch = () => {
-      void ensureRecurringHotMarketResearchSchedule()
-        .then(() => processDueOutreachResearchSchedules())
-        .then((completedCount) => {
+      void Promise.all([
+        processDueOutreachResearchSchedules(),
+        processDueHotMarketResearch(),
+      ])
+        .then(([completedCount, hotMarket]) => {
           if (completedCount > 0) {
             logger.info({ completedCount }, "Prepared scheduled outreach research lists");
+          }
+          if (hotMarket.state === "completed") {
+            logger.info(hotMarket, "Replenished the next verified hot-market window");
+          } else if (hotMarket.state === "failed") {
+            logger.error(hotMarket, "Verified hot-market replenishment failed");
           }
         })
         .catch((err: unknown) => logger.error({ err }, "Outreach research scheduler failed"));
