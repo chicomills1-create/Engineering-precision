@@ -1646,13 +1646,17 @@ components:
         token: { type: string, minLength: 1, maxLength: 128 }
     OutreachDashboard:
       type: object
-      required: [prospects, campaigns, messages, upcomingFollowUps, stoppedSequences, sentToday, providerProcessedToday, deliveredToday, bouncedToday, unresolvedToday, replies, unreadReplies, nextPreparationDate, nextPreparationTarget, nextPreparationPrepared, nextPreparationShortfall, nextPreparationStatus, nextPreparationCompletedAt, nextPreparationError, adminAllowlistReady, productionConfigReady, sendgridDeliveryPathReady, deliveryEventsReady, replyWebhookReady, automationEnabled, automationReady, researchAutomationEnabled, researchAutomationReady]
+      required: [prospects, campaigns, messages, upcomingFollowUps, stoppedSequences, initialOpeners, followUpDelivered, followUpBounced, followUpReplies, sentToday, providerProcessedToday, deliveredToday, bouncedToday, unresolvedToday, replies, unreadReplies, nextPreparationDate, nextPreparationTarget, nextPreparationPrepared, nextPreparationShortfall, nextPreparationStatus, nextPreparationCompletedAt, nextPreparationError, adminAllowlistReady, productionConfigReady, sendgridDeliveryPathReady, deliveryEventsReady, replyWebhookReady, automationEnabled, automationReady, researchAutomationEnabled, researchAutomationReady]
       properties:
         prospects: { type: number }
         campaigns: { type: number }
         messages: { type: number }
         upcomingFollowUps: { type: number }
         stoppedSequences: { type: number }
+        initialOpeners: { type: number }
+        followUpDelivered: { type: number }
+        followUpBounced: { type: number }
+        followUpReplies: { type: number }
         sentToday: { type: number }
         providerProcessedToday: { type: number }
         deliveredToday: { type: number }

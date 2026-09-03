@@ -81,35 +81,46 @@ export function assertScheduledTimeReady(
   }
 }
 
-const FOLLOW_UP_DELAY_DAYS: Record<number, number> = { 2: 3, 3: 8, 4: 15 };
+const OPENER_FOLLOW_UP_BUSINESS_DAYS = 3;
 
-export function getFollowUpScheduledAt(sequenceNumber: number, baseDate = new Date()): Date | null {
-  const days = FOLLOW_UP_DELAY_DAYS[sequenceNumber];
-  if (!days) return null;
+function phoenixDateParts(date: Date): { year: string; month: string; day: string } {
   const parts = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Phoenix",
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
-  }).formatToParts(baseDate).map((part) => [part.type, part.value]));
-  const deliveredPhoenixMorning = new Date(`${parts.year}-${parts.month}-${parts.day}T08:00:00-07:00`);
-  return new Date(deliveredPhoenixMorning.getTime() + days * 24 * 60 * 60 * 1000);
+  }).formatToParts(date).map((part) => [part.type, part.value]));
+  return { year: parts.year, month: parts.month, day: parts.day };
+}
+
+export function getFollowUpScheduledAt(sequenceNumber: number, baseDate = new Date()): Date | null {
+  if (sequenceNumber !== 2) return null;
+  const parts = phoenixDateParts(baseDate);
+  const openedPhoenixMorning = new Date(`${parts.year}-${parts.month}-${parts.day}T08:00:00-07:00`);
+  let candidate = openedPhoenixMorning;
+  let businessDays = 0;
+  while (businessDays < OPENER_FOLLOW_UP_BUSINESS_DAYS) {
+    candidate = new Date(candidate.getTime() + 24 * 60 * 60 * 1000);
+    const weekday = candidate.getUTCDay();
+    if (weekday !== 0 && weekday !== 6) businessDays += 1;
+  }
+  return candidate;
 }
 
 export function assertFollowUpCadenceReady(
   sequenceNumber: number,
   scheduledAt: Date | null,
-  initialDeliveredAt: Date | null,
+  initialOpenedAt: Date | null,
 ): void {
   if (sequenceNumber === 1) return;
-  const earliest = initialDeliveredAt
-    ? getFollowUpScheduledAt(sequenceNumber, initialDeliveredAt)
+  const earliest = initialOpenedAt
+    ? getFollowUpScheduledAt(sequenceNumber, initialOpenedAt)
     : null;
   if (!earliest) {
-    throw new Error("Initial sequence message must be verified delivered before this follow-up can send");
+    throw new Error("Initial sequence message must have a verified open before this follow-up can send");
   }
   if (!scheduledAt || scheduledAt.getTime() < earliest.getTime()) {
-    throw new Error("Follow-up cannot send before its Phoenix delivery-based cadence");
+    throw new Error("Follow-up cannot send before its Phoenix opener-based business cadence");
   }
 }
 

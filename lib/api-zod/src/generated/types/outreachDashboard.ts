@@ -13,6 +13,10 @@ export interface OutreachDashboard {
   messages: number;
   upcomingFollowUps: number;
   stoppedSequences: number;
+  initialOpeners: number;
+  followUpDelivered: number;
+  followUpBounced: number;
+  followUpReplies: number;
   sentToday: number;
   providerProcessedToday: number;
   deliveredToday: number;

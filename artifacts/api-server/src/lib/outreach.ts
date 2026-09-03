@@ -27,7 +27,10 @@ import {
   getPhoenixCalendarDayStart,
 } from "./outreachEligibility";
 import { withOutreachEmailLock } from "./outreachEmailLock";
-import { getVerifiedInitialDeliveryAt } from "./outreachSequence";
+import {
+  getVerifiedInitialDeliveryAt,
+  getVerifiedInitialOpenAt,
+} from "./outreachSequence";
 import {
   HOT_MARKET_DAILY_TARGET,
   HOT_MARKET_SOURCE_TYPES,
@@ -400,7 +403,7 @@ export async function generateProspectDraft(prospect: Prospect): Promise<Generat
     messages: [{
       role: "system",
       content: [
-        "Return strict JSON only: {\"subject\":\"...\",\"body\":\"...\",\"followUps\":[{\"subject\":\"...\",\"body\":\"...\"},{\"subject\":\"...\",\"body\":\"...\"},{\"subject\":\"...\",\"body\":\"...\"}]} .",
+        "Return strict JSON only: {\"subject\":\"...\",\"body\":\"...\"}.",
         "Write concise, specific professional B2B outreach for Apex Grid Engineering—not a generic introduction.",
         "Open with a natural greeting using the supplied contactName, not 'Hi there' or a generic salutation.",
         "Keep the initial email to roughly 80-120 words in three short paragraphs: lead with the prospect's one concrete pain point, state the one relevant Apex Grid solution, then end with one simple question.",
@@ -416,7 +419,6 @@ export async function generateProspectDraft(prospect: Prospect): Promise<Generat
         "Use this exact preferred closing question when it fits: 'Do you have any current projects in your pipeline that you would like us to review?'",
         "Do not use the old closing about a plan-review comment, field condition, or a project waiting on engineering answers.",
         "Use only supplied public research notes and the explicitly provided Apex Grid capabilities; never invent claims, projects, prices, turnaround times, ownership status, or facts.",
-        "Keep follow-ups shorter than the initial email and focused on one next step.",
       ].join(" "),
     },
       { role: "user", content: JSON.stringify({
@@ -430,15 +432,17 @@ export async function generateProspectDraft(prospect: Prospect): Promise<Generat
   });
   const parsed: unknown = JSON.parse(completion.choices[0]?.message.content ?? "");
   if (!isDraft(parsed)) throw new Error("AI returned an invalid outreach draft");
-  return parsed;
+  return {
+    ...parsed,
+    followUps: approvedOutreachFollowUpMessages(prospect.contactName),
+  };
 }
 
-function isDraft(value: unknown): value is GeneratedDraft {
+function isDraft(value: unknown): value is Pick<GeneratedDraft, "subject" | "body"> {
   if (!value || typeof value !== "object") return false;
   const draft = value as Record<string, unknown>;
   return typeof draft.subject === "string" && typeof draft.body === "string" &&
-    Array.isArray(draft.followUps) && draft.followUps.length === 3 &&
-    draft.followUps.every((item) => item && typeof item.subject === "string" && typeof item.body === "string");
+    !("followUps" in draft);
 }
 
 export async function sendApprovedOutreach(
@@ -457,10 +461,14 @@ export async function sendApprovedOutreach(
   assertScheduledTimeReady(message.sequenceNumber, message.scheduledAt);
   if (message.sequenceNumber > 1) {
     const initialDeliveredAt = await getVerifiedInitialDeliveryAt(message);
+    const initialOpenedAt = await getVerifiedInitialOpenAt(message);
+    if (!initialDeliveredAt) {
+      throw new Error("Initial sequence message must have verified delivery evidence before this follow-up can send");
+    }
     assertFollowUpCadenceReady(
       message.sequenceNumber,
       message.scheduledAt,
-      initialDeliveredAt,
+      initialOpenedAt,
     );
     const campaignScope = message.campaignId
       ? eq(outreachMessagesTable.campaignId, message.campaignId)
@@ -481,30 +489,22 @@ export async function sendApprovedOutreach(
   const unsubscribeUrl = options.unsubscribeUrls?.unsubscribeUrl ?? makeUnsubscribeUrl(email);
   const oneClickUrl = options.unsubscribeUrls?.oneClickUnsubscribeUrl ?? makeOneClickUnsubscribeUrl(email);
   if (!unsubscribeUrl || !oneClickUrl) throw new Error("Unsubscribe signing is not configured");
-  const usesCurrentSharedCopy =
-    message.sequenceNumber === 1
-    && (
-      isHotMarketSourceType(message.sourceType)
-      || currentCampaign?.bodyTemplate === "Approved personalized Apex Grid outreach copy"
-    );
-  const currentRegularFollowUp = usesCurrentSharedCopy && message.sequenceNumber > 1 && !isHotMarketSourceType(message.sourceType)
+  const usesCurrentSharedCopy = isHotMarketSourceType(message.sourceType)
+    || currentCampaign?.bodyTemplate === "Approved personalized Apex Grid outreach copy";
+  const currentRegularFollowUp = message.sequenceNumber === 2
     ? approvedOutreachFollowUpMessages(currentProspect.contactName ?? "")
       .find((followUp) => followUp.sequenceNumber === message.sequenceNumber)
     : undefined;
-  const currentSubject = usesCurrentSharedCopy
-    ? isHotMarketSourceType(message.sourceType)
-      ? message.sequenceNumber === 1
+  const currentSubject = currentRegularFollowUp?.subject ?? (usesCurrentSharedCopy
+      ? message.sequenceNumber === 1 && isHotMarketSourceType(message.sourceType)
         ? hotMarketOutreachSubject(currentProspect.audience, currentProspect.state)
-        : message.subject
-      : currentRegularFollowUp?.subject ?? approvedOutreachSubject()
-    : message.subject;
-  const currentBody = usesCurrentSharedCopy
-    ? isHotMarketSourceType(message.sourceType)
+        : approvedOutreachSubject()
+    : message.subject);
+  const currentBody = currentRegularFollowUp?.body ?? (usesCurrentSharedCopy
       ? message.sequenceNumber === 1
         ? approvedOutreachBody(currentProspect.contactName ?? "")
         : message.body
-      : currentRegularFollowUp?.body ?? approvedOutreachBody(currentProspect.contactName ?? "")
-    : message.body;
+    : message.body);
   const emailContent = renderBrandedEmail(currentBody, unsubscribeUrl, currentProspect.contactName ?? undefined);
   const from = options.fromEmail?.trim() || process.env.OUTREACH_FROM_EMAIL;
   if (!from) throw new Error("OUTREACH_FROM_EMAIL is not configured");
@@ -517,6 +517,16 @@ export async function sendApprovedOutreach(
   const reservations = await reserveOutreachSend(message, currentCampaign, email);
   await options.beforeEmailLock?.();
   return withOutreachEmailLock(email, async () => {
+    if (message.sequenceNumber === 2) {
+      const [lockedDelivery, lockedOpen] = await Promise.all([
+        getVerifiedInitialDeliveryAt(message),
+        getVerifiedInitialOpenAt(message),
+      ]);
+      if (!lockedDelivery || !lockedOpen) {
+        throw new Error("Follow-up lost its verified delivery or opener evidence before provider dispatch");
+      }
+      assertFollowUpCadenceReady(message.sequenceNumber, message.scheduledAt, lockedOpen);
+    }
     const [lockedMessage] = await db.select({ status: outreachMessagesTable.status })
       .from(outreachMessagesTable)
       .where(eq(outreachMessagesTable.id, message.id))

@@ -1,6 +1,6 @@
 import { createHash, createHmac, createPublicKey, timingSafeEqual, verify } from "node:crypto";
 import { ReplitConnectors } from "@replit/connectors-sdk";
-import { and, desc, eq, inArray, isNull, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, sql } from "drizzle-orm";
 import {
   db,
   outreachDeliveryEventsTable,
@@ -8,7 +8,6 @@ import {
   outreachRepliesTable,
   prospectsTable,
 } from "@workspace/db";
-import { getFollowUpScheduledAt } from "./outreachEligibility";
 import { recordContactEvidence } from "./outreachContactEvidence";
 import { withOutreachEmailLock } from "./outreachEmailLock";
 import { suppressOutreachEmail } from "./outreachSuppression";
@@ -190,6 +189,13 @@ function inboundMessageId(headers = ""): string | null {
   return match?.[1]?.trim().slice(0, 500) || null;
 }
 
+function referencedOutboundMessageIds(headers = ""): string[] {
+  return [...headers.matchAll(/^(?:in-reply-to|references):\s*(.+)$/gim)]
+    .flatMap((match) => match[1]?.split(/\s+/) ?? [])
+    .map((value) => normalizeProviderMessageId(value.replace(/^<|>$/g, "")))
+    .filter((value): value is string => Boolean(value));
+}
+
 export function classifyInboundReply(input: Pick<InboundReplyInput, "subject" | "text" | "headers">): "reply" | "auto_reply" | "permanent_closure" {
   const headers = input.headers?.toLowerCase() ?? "";
   const subject = input.subject.trim().toLowerCase();
@@ -240,6 +246,17 @@ export async function captureInboundReply(input: InboundReplyInput): Promise<{
     .where(eq(prospectsTable.contactEmail, senderEmail))
     .orderBy(desc(prospectsTable.updatedAt));
   const primaryProspect = prospects[0];
+  const referencedIds = referencedOutboundMessageIds(input.headers);
+  const [referencedMessage] = primaryProspect && referencedIds.length > 0
+    ? await db.select({ id: outreachMessagesTable.id })
+      .from(outreachMessagesTable)
+      .where(and(
+        eq(outreachMessagesTable.prospectId, primaryProspect.id),
+        inArray(outreachMessagesTable.providerMessageId, referencedIds),
+      ))
+      .orderBy(desc(outreachMessagesTable.sentAt))
+      .limit(1)
+    : [];
   const [inserted] = await db.insert(outreachRepliesTable).values({
     dedupeKey: key,
     providerMessageId,
@@ -250,9 +267,7 @@ export async function captureInboundReply(input: InboundReplyInput): Promise<{
     textBody: input.text.trim().slice(0, 100_000),
     messageType,
     prospectId: primaryProspect?.id ?? null,
-    // Do not infer a thread from recency. Link a message only when a future
-    // verified In-Reply-To/References correlation is available.
-    outreachMessageId: null,
+    outreachMessageId: referencedMessage?.id ?? null,
     receivedAt,
   }).onConflictDoNothing().returning();
 
@@ -381,7 +396,7 @@ export async function processSendGridEvents(events: SendGridEvent[]): Promise<nu
     }
 
     if (messageWhere && eventType === "delivered") {
-      const [deliveredMessage] = await db.update(outreachMessagesTable)
+      await db.update(outreachMessagesTable)
         .set({
           status: "delivered",
           sentAt: sql`coalesce(${outreachMessagesTable.sentAt}, ${occurredAt})`,
@@ -391,33 +406,16 @@ export async function processSendGridEvents(events: SendGridEvent[]): Promise<nu
         .where(and(
           messageWhere,
           inArray(outreachMessagesTable.status, ["sent", "sending", "needs_review"]),
-        ))
-        .returning();
-      if (deliveredMessage?.sequenceNumber === 1) {
-        const [prospect] = await db.select({ contactName: prospectsTable.contactName })
-          .from(prospectsTable)
-          .where(eq(prospectsTable.id, deliveredMessage.prospectId))
-          .limit(1);
-        if (prospect) {
-          await ensureApprovedFollowUpSequence(deliveredMessage, prospect);
-        }
-        const followUps = await db.select().from(outreachMessagesTable).where(and(
-          eq(outreachMessagesTable.prospectId, deliveredMessage.prospectId),
-          deliveredMessage.campaignId
-            ? eq(outreachMessagesTable.campaignId, deliveredMessage.campaignId)
-            : isNull(outreachMessagesTable.campaignId),
-          inArray(outreachMessagesTable.status, ["draft", "approved"]),
         ));
-        for (const followUp of followUps) {
-          const scheduledAt = getFollowUpScheduledAt(followUp.sequenceNumber, occurredAt);
-          if (!scheduledAt) continue;
-          await db.update(outreachMessagesTable)
-            .set({ scheduledAt })
-            .where(and(
-              eq(outreachMessagesTable.id, followUp.id),
-              inArray(outreachMessagesTable.status, ["draft", "approved"]),
-            ));
-        }
+    }
+
+    if (matchedMessage?.sequenceNumber === 1 && eventType === "open") {
+      const [prospect] = await db.select({ contactName: prospectsTable.contactName })
+        .from(prospectsTable)
+        .where(eq(prospectsTable.id, matchedMessage.prospectId))
+        .limit(1);
+      if (prospect) {
+        await ensureApprovedFollowUpSequence(matchedMessage, prospect);
       }
     }
 

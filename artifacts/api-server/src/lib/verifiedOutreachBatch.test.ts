@@ -162,11 +162,13 @@ test("the approved body uses only the approved pipeline closing", () => {
   assert.doesNotMatch(body, /plan-review comment|field condition|waiting on engineering answers/i);
 });
 
-test("approved follow-ups are concise, scheduled later, and contain no call CTA", () => {
+test("the approved opener follow-up is one concise reply-first touch", () => {
   const followUps = approvedOutreachFollowUpMessages("Alex Rivera");
-  assert.deepEqual(followUps.map((followUp) => followUp.sequenceNumber), [2, 3, 4]);
+  assert.deepEqual(followUps.map((followUp) => followUp.sequenceNumber), [2]);
+  assert.equal(followUps[0]?.subject, "A reliable engineering partner for active projects");
   assert.ok(followUps.every((followUp) =>
     !/Click the URL|https:\/\/apexgrideng\.com/i.test(followUp.body)
     && !/15.?minute|15 min|schedule|book.*call/i.test(followUp.body)
+    && /reply|projects in your pipeline|would you like us to review/i.test(followUp.body)
   ));
 });

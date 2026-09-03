@@ -272,30 +272,29 @@ test("initial outreach does not require a prior delivery", () => {
 
 test("follow-up requires the immediately prior sequence to be delivered", () => {
   assert.throws(() => assertSequenceDeliveryReady(2, "sent"), /must be delivered/);
-  assert.throws(() => assertSequenceDeliveryReady(3, "bounced"), /must be delivered/);
   assert.doesNotThrow(() => assertSequenceDeliveryReady(2, "delivered"));
 });
 
-test("follow-ups use Phoenix 8 AM on days 3, 8, and 15 after verified initial delivery", () => {
-  const initialDeliveredAt = new Date("2026-08-28T12:00:00.000Z");
-  assert.equal(getFollowUpScheduledAt(1, initialDeliveredAt), null);
-  assert.equal(getFollowUpScheduledAt(2, initialDeliveredAt)?.toISOString(), "2026-08-31T15:00:00.000Z");
-  assert.equal(getFollowUpScheduledAt(3, initialDeliveredAt)?.toISOString(), "2026-09-05T15:00:00.000Z");
-  assert.equal(getFollowUpScheduledAt(4, initialDeliveredAt)?.toISOString(), "2026-09-12T15:00:00.000Z");
+test("the single opener follow-up waits three Phoenix business days", () => {
+  const fridayOpen = new Date("2026-08-28T12:00:00.000Z");
+  assert.equal(getFollowUpScheduledAt(1, fridayOpen), null);
+  assert.equal(getFollowUpScheduledAt(2, fridayOpen)?.toISOString(), "2026-09-02T15:00:00.000Z");
+  assert.equal(getFollowUpScheduledAt(3, fridayOpen), null);
+  assert.equal(getFollowUpScheduledAt(4, fridayOpen), null);
 });
 
-test("follow-ups cannot bypass the delivery-derived Phoenix cadence", () => {
-  const deliveredAt = new Date("2026-08-28T12:00:00.000Z");
+test("follow-ups cannot bypass the opener-derived Phoenix business cadence", () => {
+  const openedAt = new Date("2026-08-28T12:00:00.000Z");
   assert.throws(
-    () => assertFollowUpCadenceReady(2, new Date("2026-08-29T15:00:00.000Z"), deliveredAt),
-    /Phoenix delivery-based cadence/,
+    () => assertFollowUpCadenceReady(2, new Date("2026-09-01T15:00:00.000Z"), openedAt),
+    /Phoenix opener-based business cadence/,
   );
   assert.throws(
-    () => assertFollowUpCadenceReady(2, new Date("2026-08-31T15:00:00.000Z"), null),
-    /verified delivered/,
+    () => assertFollowUpCadenceReady(2, new Date("2026-09-02T15:00:00.000Z"), null),
+    /verified open/,
   );
   assert.doesNotThrow(
-    () => assertFollowUpCadenceReady(2, new Date("2026-08-31T15:00:00.000Z"), deliveredAt),
+    () => assertFollowUpCadenceReady(2, new Date("2026-09-02T15:00:00.000Z"), openedAt),
   );
 });
 
@@ -350,3 +349,5 @@ test("blocks every contact with recorded reply, availability, departure, or repl
     );
   }
 });
+
+  const openedAt = new Date("2026-08-28T12:00:00.000Z");

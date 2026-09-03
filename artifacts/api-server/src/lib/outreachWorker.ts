@@ -31,6 +31,7 @@ import {
 import {
   backfillDeliveredFollowUpSequences,
   ensureApprovedFollowUpSequence,
+  stopLegacyAdditionalFollowUps,
 } from "./outreachSequence";
 
 const ADMIN_EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -136,6 +137,46 @@ export async function claimOutreachMessageForSending(messageId: number): Promise
             )
         )`,
       ),
+      or(
+        eq(outreachMessagesTable.sequenceNumber, 1),
+        sql`exists (
+          select 1
+          from ${outreachMessagesTable} as delivered_initial
+          inner join outreach_delivery_events as delivery_evidence
+            on delivery_evidence.outreach_message_id = delivered_initial.id
+          where delivered_initial.prospect_id = ${outreachMessagesTable.prospectId}
+            and delivered_initial.sequence_number = 1
+            and delivered_initial.status = 'delivered'
+            and delivery_evidence.event_type = 'delivered'
+            and (
+              delivered_initial.campaign_id = ${outreachMessagesTable.campaignId}
+              or (
+                delivered_initial.campaign_id is null
+                and ${outreachMessagesTable.campaignId} is null
+              )
+            )
+        )`,
+      ),
+      sql`${outreachMessagesTable.sequenceNumber} <= 2`,
+      or(
+        eq(outreachMessagesTable.sequenceNumber, 1),
+        sql`exists (
+          select 1
+          from ${outreachMessagesTable} as initial_message
+          inner join outreach_delivery_events as initial_open
+            on initial_open.outreach_message_id = initial_message.id
+          where initial_message.prospect_id = ${outreachMessagesTable.prospectId}
+            and initial_message.sequence_number = 1
+            and initial_open.event_type = 'open'
+            and (
+              initial_message.campaign_id = ${outreachMessagesTable.campaignId}
+              or (
+                initial_message.campaign_id is null
+                and ${outreachMessagesTable.campaignId} is null
+              )
+            )
+        )`,
+      ),
     ))
     .returning();
   return claimed;
@@ -209,6 +250,7 @@ export async function reconcileSendingOutreachMessages(
 
 export async function processDueOutreachMessages(): Promise<number> {
   if (!isOutreachAutomationReady()) return 0;
+  await stopLegacyAdditionalFollowUps();
   await backfillDeliveredFollowUpSequences();
   const reconciliation = await reconcileUncertainOutreachMessages();
   logReconciliationSummary(reconciliation);

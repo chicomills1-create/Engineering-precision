@@ -16,7 +16,10 @@ import {
   assertVerifiedHotMarketContact,
   assertVerifiedOutreachBatch,
 } from "./outreachContactValidation";
-import { approvedOutreachBody } from "./verifiedOutreachBatch";
+import {
+  approvedOutreachBody,
+  approvedOutreachFollowUpMessages,
+} from "./verifiedOutreachBatch";
 import {
   RESEARCH_STATE_ORDER,
   type DiscoveredHotMarketProspect,
@@ -136,76 +139,14 @@ export function hotMarketOutreachBody(contact: {
 
 export function hotMarketOutreachFollowUps(
   contactName: string,
-  audience = "builder",
-  state = "AZ",
+  _audience = "builder",
+  _state = "AZ",
 ): Array<{
   sequenceNumber: number;
   subject: string;
   body: string;
 }> {
-  const firstName = contactName.trim().split(/\s+/)[0] || "there";
-  const subject = hotMarketOutreachSubject(audience, state);
-  const marketLabel = "active";
-  if (audience === "architect") {
-    return [
-      {
-        sequenceNumber: 2,
-        subject: `Re: ${subject}`,
-        body: `Hi ${firstName},
-
-Following up in case one of your ${marketLabel} projects needs added civil/site, drainage, utility, structural, MEP, or permit-response capacity. Apex Grid can support the technical scope while your team retains the client and design relationship.
-
-Do you have any current projects in your pipeline that you would like us to review?`,
-      },
-      {
-        sequenceNumber: 3,
-        subject: `Re: ${subject}`,
-        body: `Hi ${firstName},
-
-Checking back once more. If your team or builder needs a responsive engineering partner for a focused issue, overflow production, or coordinated permit package, Apex Grid is available with a right-sized scope and clear pricing.
-
-Would it be useful for us to review a current project and outline the fastest practical next step?`,
-      },
-      {
-        sequenceNumber: 4,
-        subject: `Re: ${subject}`,
-        body: `Hi ${firstName},
-
-I’ll close the loop after this note. Apex Grid is available as a veteran-owned, PE-led engineering partner when an ${marketLabel} project needs additional technical capacity without disrupting your client relationship.
-
-If a project comes up that you would like us to review, reply with the basic details and we will take a look.`,
-      },
-    ];
-  }
-  return [
-    {
-      sequenceNumber: 2,
-      subject: `Re: ${SUBJECT}`,
-      body: `Hi ${firstName},
-
-Following up in case a structural, civil/site, MEP, or permit-response item is slowing an active project. Apex Grid can review the existing information, right-size the scope, and provide clear pricing before work begins.
-
-Do you have any current projects in your pipeline that you would like us to review?`,
-    },
-    {
-      sequenceNumber: 3,
-      subject: `Re: ${SUBJECT}`,
-      body: `Hi ${firstName},
-
-Checking back once more. If your team needs consistent, PE-led engineering capacity without an oversized scope, Apex Grid can help with focused Civil, Structural, MEP, permit-response, and drafting work.
-
-Would it be useful for us to review a current project and outline the fastest practical next step?`,
-    },
-    {
-      sequenceNumber: 4,
-      subject: `Re: ${SUBJECT}`,
-      body: `Hi ${firstName},
-
-I’ll close the loop after this note. Apex Grid is available when you need veteran-owned, PE-led engineering support with a right-sized scope and clear competitive pricing.
-
-If a project comes up that you would like us to review, reply with the basic details and we will take a look.`,
-    },
-  ];
+  return approvedOutreachFollowUpMessages(contactName);
 }
 
 async function ensureNationalHotMarketCampaign() {

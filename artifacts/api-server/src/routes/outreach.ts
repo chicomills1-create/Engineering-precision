@@ -68,7 +68,8 @@ import {
 } from "../lib/outreachPreparation";
 import { recordContactEvidence } from "../lib/outreachContactEvidence";
 import { reconcileUncertainOutreachMessages } from "../lib/outreachReconciliation";
-import { getVerifiedInitialDeliveryAt } from "../lib/outreachSequence";
+import { getVerifiedInitialOpenAt } from "../lib/outreachSequence";
+import { approvedOutreachFollowUpMessages } from "../lib/verifiedOutreachBatch";
 
 const router: IRouter = Router();
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
@@ -185,6 +186,10 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     [messages],
     [upcomingFollowUps],
     [stoppedSequences],
+    [initialOpeners],
+    [followUpDelivered],
+    [followUpBounced],
+    [followUpReplies],
     [providerProcessedToday],
     [deliveredToday],
     [bouncedToday],
@@ -212,6 +217,34 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
           ne(prospectsTable.contactStatus, "active"),
           inArray(prospectsTable.status, ["replied", "suppressed", "not_a_fit"]),
         ),
+      )),
+    db.select({ value: countDistinct(outreachMessagesTable.prospectId) })
+      .from(outreachMessagesTable)
+      .innerJoin(
+        outreachDeliveryEventsTable,
+        eq(outreachDeliveryEventsTable.outreachMessageId, outreachMessagesTable.id),
+      )
+      .where(and(
+        eq(outreachMessagesTable.sequenceNumber, 1),
+        eq(outreachDeliveryEventsTable.eventType, "open"),
+      )),
+    db.select({ value: count() }).from(outreachMessagesTable).where(and(
+      eq(outreachMessagesTable.sequenceNumber, 2),
+      eq(outreachMessagesTable.status, "delivered"),
+    )),
+    db.select({ value: count() }).from(outreachMessagesTable).where(and(
+      eq(outreachMessagesTable.sequenceNumber, 2),
+      eq(outreachMessagesTable.status, "bounced"),
+    )),
+    db.select({ value: countDistinct(outreachRepliesTable.prospectId) })
+      .from(outreachRepliesTable)
+      .innerJoin(
+        outreachMessagesTable,
+        eq(outreachRepliesTable.outreachMessageId, outreachMessagesTable.id),
+      )
+      .where(and(
+        eq(outreachMessagesTable.sequenceNumber, 2),
+        eq(outreachRepliesTable.messageType, "reply"),
       )),
     db.select({ value: count() })
       .from(outreachDeliveryEventsTable)
@@ -246,6 +279,10 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     messages: messages?.value ?? 0,
     upcomingFollowUps: upcomingFollowUps?.value ?? 0,
     stoppedSequences: stoppedSequences?.value ?? 0,
+    initialOpeners: initialOpeners?.value ?? 0,
+    followUpDelivered: followUpDelivered?.value ?? 0,
+    followUpBounced: followUpBounced?.value ?? 0,
+    followUpReplies: followUpReplies?.value ?? 0,
     sentToday: processedCount,
     providerProcessedToday: processedCount,
     deliveredToday: deliveredToday?.value ?? 0,
@@ -591,15 +628,20 @@ router.post("/outreach/messages/:id/approve", requireAuth, async (req, res): Pro
     if (message.sequenceNumber === 1) {
       row = await approveInitialMessageInPreparationWindow(message.id);
     } else {
-      const deliveredAt = await getVerifiedInitialDeliveryAt(message);
-      const scheduledAt = deliveredAt
-        ? getFollowUpScheduledAt(message.sequenceNumber, deliveredAt)
+      const openedAt = await getVerifiedInitialOpenAt(message);
+      const scheduledAt = openedAt
+        ? getFollowUpScheduledAt(message.sequenceNumber, openedAt)
         : null;
       if (!scheduledAt) {
-        throw new Error("The initial message must be verified delivered before approving a follow-up");
+        throw new Error("The initial message must have a verified open before approving a follow-up");
       }
       [row] = await db.update(outreachMessagesTable)
-        .set({ status: "approved", scheduledAt })
+        .set({
+          status: "approved",
+          scheduledAt,
+          subject: approvedOutreachFollowUpMessages(prospect.contactName ?? "there")[0]!.subject,
+          body: approvedOutreachFollowUpMessages(prospect.contactName ?? "there")[0]!.body,
+        })
         .where(and(
           eq(outreachMessagesTable.id, p.data.id),
           eq(outreachMessagesTable.status, "draft"),

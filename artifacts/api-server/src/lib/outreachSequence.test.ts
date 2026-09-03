@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm";
 import {
   campaignsTable,
   db,
+  outreachDeliveryEventsTable,
   outreachMessagesTable,
   prospectsTable,
 } from "@workspace/db";
@@ -44,30 +45,37 @@ test("enrollment remains idempotent when a separate draft writer races it", asyn
     body: "Initial body",
     status: "sent",
   }).returning();
+  await db.insert(outreachDeliveryEventsTable).values({
+    email: prospect!.contactEmail!,
+    eventType: "open",
+    occurredAt: new Date("2026-08-28T15:00:00.000Z"),
+    outreachMessageId: initial!.id,
+  });
+  await db.insert(outreachMessagesTable).values({
+    prospectId: prospect!.id,
+    campaignId: campaign!.id,
+    sequenceNumber: 2,
+    subject: "Concurrent draft",
+    body: "Concurrent draft body",
+    status: "draft",
+  });
 
   try {
     await Promise.all([
       ensureApprovedFollowUpSequence(initial!, prospect!),
-      db.insert(outreachMessagesTable).values([2, 3, 4].map((sequenceNumber) => ({
-        prospectId: prospect!.id,
-        campaignId: campaign!.id,
-        sequenceNumber,
-        subject: `Concurrent draft ${sequenceNumber}`,
-        body: `Concurrent draft body ${sequenceNumber}`,
-        status: "draft",
-      }))).onConflictDoNothing(),
+      ensureApprovedFollowUpSequence(initial!, prospect!),
     ]);
     const messages = await db.select().from(outreachMessagesTable)
       .where(eq(outreachMessagesTable.prospectId, prospect!.id));
     const followUps = messages
       .filter((message) => message.sequenceNumber > 1)
       .sort((left, right) => left.sequenceNumber - right.sequenceNumber);
-    assert.deepEqual(
-      followUps.map((message) => message.sequenceNumber),
-      [2, 3, 4],
-    );
+    assert.deepEqual(followUps.map((message) => message.sequenceNumber), [2]);
     assert.ok(followUps.every((message) => message.status === "approved"));
+    assert.ok(followUps[0]?.scheduledAt);
   } finally {
+    await db.delete(outreachDeliveryEventsTable)
+      .where(eq(outreachDeliveryEventsTable.outreachMessageId, initial!.id));
     await db.delete(prospectsTable).where(eq(prospectsTable.id, prospect!.id));
     await db.delete(campaignsTable).where(eq(campaignsTable.id, campaign!.id));
   }

@@ -96,6 +96,13 @@ async function createRaceFixture() {
     occurredAt: new Date("2026-08-27T15:00:00.000Z"),
     outreachMessageId: fixture.message.id,
   });
+  await db.insert(outreachDeliveryEventsTable).values({
+    providerMessageId: `race-open-${fixture.message.id}`,
+    email: fixture.prospect.contactEmail!,
+    eventType: "open",
+    occurredAt: new Date("2026-08-27T16:00:00.000Z"),
+    outreachMessageId: fixture.message.id,
+  });
   const [followUp, laterFollowUp] = await db.insert(outreachMessagesTable).values([
     {
       prospectId: fixture.prospect.id,
@@ -104,7 +111,7 @@ async function createRaceFixture() {
       subject: "Race follow-up",
       body: "Race follow-up body",
       status: "approved",
-      scheduledAt: new Date("2026-08-30T15:00:00.000Z"),
+      scheduledAt: new Date("2026-09-01T15:00:00.000Z"),
     },
     {
       prospectId: fixture.prospect.id,

@@ -86,30 +86,12 @@ export function approvedOutreachFollowUpMessages(contactName: string): Array<{
   return [
     {
       sequenceNumber: 2,
-      subject: "Following up on engineering support",
+      subject: SUBJECT,
       body: `Hi ${firstName},
 
- Just following up in case an engineering review or permit response would help on a current project.
+I wanted to follow up in case a focused engineering issue is holding up one of your active projects.
 
- Would it be useful for us to review a current project?`,
-    },
-    {
-      sequenceNumber: 3,
-      subject: "Checking in on your current projects",
-      body: `Hi ${firstName},
-
- I wanted to check whether your team has a current project where focused engineering support could help.
-
- Would it be useful for us to review a current project?`,
-    },
-    {
-      sequenceNumber: 4,
-      subject: "Closing the loop",
-      body: `Hi ${firstName},
-
- I’ll close the loop here. If an engineering need comes up, Apex Grid is available for focused Civil, Structural, or MEP support.
-
- If a project comes up that you would like us to review, reply with the basic details and we will take a look.`,
+Do you have any current projects in your pipeline that you would like us to review?`,
     },
   ];
 }

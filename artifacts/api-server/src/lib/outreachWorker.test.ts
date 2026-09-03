@@ -11,6 +11,7 @@ import {
 import {
   campaignsTable,
   db,
+  outreachDeliveryEventsTable,
   outreachMessagesTable,
   prospectsTable,
 } from "@workspace/db";
@@ -211,6 +212,18 @@ test("a follow-up cannot be claimed until its immediately prior message is deliv
     await db.update(outreachMessagesTable)
       .set({ status: "delivered" })
       .where(eq(outreachMessagesTable.id, initial!.id));
+    await db.insert(outreachDeliveryEventsTable).values({
+      email: prospect!.contactEmail!,
+      eventType: "open",
+      occurredAt: new Date("2026-08-28T15:00:00.000Z"),
+      outreachMessageId: initial!.id,
+    });
+    await db.insert(outreachDeliveryEventsTable).values({
+      email: prospect!.contactEmail!,
+      eventType: "delivered",
+      occurredAt: new Date("2026-08-28T14:00:00.000Z"),
+      outreachMessageId: initial!.id,
+    });
     assert.equal((await claimOutreachMessageForSending(followUp!.id))?.status, "sending");
   } finally {
     await db.delete(prospectsTable).where(eq(prospectsTable.id, prospect!.id));

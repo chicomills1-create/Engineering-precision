@@ -3,6 +3,7 @@ import {
   db,
   outreachDeliveryEventsTable,
   outreachMessagesTable,
+  outreachSuppressionsTable,
   prospectsTable,
   type OutreachMessage,
   type Prospect,
@@ -10,11 +11,12 @@ import {
 import { approvedOutreachFollowUpMessages } from "./verifiedOutreachBatch";
 import { getFollowUpScheduledAt } from "./outreachEligibility";
 
-const FOLLOW_UP_SEQUENCE_NUMBERS = [2, 3, 4] as const;
+const FOLLOW_UP_SEQUENCE_NUMBERS = [2] as const;
+const LEGACY_EXTRA_FOLLOW_UP_SEQUENCE_NUMBERS = [3, 4] as const;
 
 type InitialSequenceMessage = Pick<
   OutreachMessage,
-  "prospectId" | "campaignId" | "sequenceNumber" | "sourceType" | "sourceId"
+  "id" | "prospectId" | "campaignId" | "sequenceNumber" | "sourceType" | "sourceId"
 >;
 
 export async function ensureApprovedFollowUpSequence(
@@ -23,12 +25,21 @@ export async function ensureApprovedFollowUpSequence(
 ): Promise<number> {
   if (initialMessage.sequenceNumber !== 1) return 0;
 
+  const [candidate] = await db.select({
+    contactEmail: prospectsTable.contactEmail,
+  })
+    .from(prospectsTable)
+    .where(eq(prospectsTable.id, initialMessage.prospectId))
+    .limit(1);
+  const candidateEmail = candidate?.contactEmail?.trim().toLowerCase();
+  if (!candidateEmail) return 0;
   const campaignScope = initialMessage.campaignId
     ? `campaign:${initialMessage.campaignId}`
     : "campaign:none";
   const templates = approvedOutreachFollowUpMessages(prospect.contactName ?? "there");
 
   return db.transaction(async (tx) => {
+    await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${candidateEmail}, 0))`);
     await tx.execute(sql`
       select pg_advisory_xact_lock(
         hashtextextended(${`outreach-follow-ups:${initialMessage.prospectId}:${campaignScope}`}, 0)
@@ -37,6 +48,7 @@ export async function ensureApprovedFollowUpSequence(
     const [currentProspect] = await tx.select({
       status: prospectsTable.status,
       contactStatus: prospectsTable.contactStatus,
+      contactEmail: prospectsTable.contactEmail,
     })
       .from(prospectsTable)
       .where(eq(prospectsTable.id, initialMessage.prospectId))
@@ -45,10 +57,43 @@ export async function ensureApprovedFollowUpSequence(
     if (
       !currentProspect
       || currentProspect.contactStatus !== "active"
-      || ["replied", "suppressed", "not_a_fit"].includes(currentProspect.status)
+      || !["approved", "contacted"].includes(currentProspect.status)
     ) {
       return 0;
     }
+    const normalizedEmail = currentProspect.contactEmail?.trim().toLowerCase();
+    if (!normalizedEmail || normalizedEmail !== candidateEmail) return 0;
+    const [suppression] = await tx.select({ id: outreachSuppressionsTable.id })
+      .from(outreachSuppressionsTable)
+      .where(eq(outreachSuppressionsTable.email, normalizedEmail))
+      .limit(1);
+    if (suppression) return 0;
+    const [initialOpened] = await tx.select({
+      occurredAt: outreachDeliveryEventsTable.occurredAt,
+    })
+      .from(outreachDeliveryEventsTable)
+      .where(and(
+        eq(outreachDeliveryEventsTable.outreachMessageId, initialMessage.id),
+        eq(outreachDeliveryEventsTable.eventType, "open"),
+      ))
+      .orderBy(asc(outreachDeliveryEventsTable.occurredAt))
+      .limit(1);
+    if (!initialOpened) return 0;
+
+    await tx.update(outreachMessagesTable)
+      .set({
+        status: "needs_review",
+        scheduledAt: null,
+        error: "Stopped because the approved opener policy permits only one follow-up",
+      })
+      .where(and(
+        eq(outreachMessagesTable.prospectId, initialMessage.prospectId),
+        inArray(
+          outreachMessagesTable.sequenceNumber,
+          [...LEGACY_EXTRA_FOLLOW_UP_SEQUENCE_NUMBERS],
+        ),
+        inArray(outreachMessagesTable.status, ["draft", "approved"]),
+      ));
 
     const scope = initialMessage.campaignId
       ? eq(outreachMessagesTable.campaignId, initialMessage.campaignId)
@@ -64,11 +109,37 @@ export async function ensureApprovedFollowUpSequence(
 
     let enrolled = 0;
     for (const sequenceNumber of FOLLOW_UP_SEQUENCE_NUMBERS) {
+      const template = templates[sequenceNumber - 2]!;
       const current = existingBySequence.get(sequenceNumber);
       if (current) {
+        await tx.update(outreachMessagesTable)
+          .set({ subject: template.subject, body: template.body })
+          .where(and(
+            eq(outreachMessagesTable.id, current.id),
+            inArray(outreachMessagesTable.status, ["draft", "approved"]),
+          ));
+        if (current.status === "approved" && !current.scheduledAt) {
+          const [scheduled] = await tx.update(outreachMessagesTable)
+            .set({
+              scheduledAt: getFollowUpScheduledAt(sequenceNumber, initialOpened.occurredAt),
+              error: null,
+            })
+            .where(and(
+              eq(outreachMessagesTable.id, current.id),
+              eq(outreachMessagesTable.status, "approved"),
+              isNull(outreachMessagesTable.scheduledAt),
+            ))
+            .returning({ id: outreachMessagesTable.id });
+          if (scheduled) enrolled += 1;
+          continue;
+        }
         if (current.status === "draft") {
           const [approved] = await tx.update(outreachMessagesTable)
-            .set({ status: "approved", scheduledAt: null, error: null })
+            .set({
+              status: "approved",
+              scheduledAt: getFollowUpScheduledAt(2, initialOpened.occurredAt),
+              error: null,
+            })
             .where(and(
               eq(outreachMessagesTable.id, current.id),
               eq(outreachMessagesTable.status, "draft"),
@@ -78,8 +149,6 @@ export async function ensureApprovedFollowUpSequence(
         }
         continue;
       }
-
-      const template = templates[sequenceNumber - 2]!;
       const [inserted] = await tx.insert(outreachMessagesTable).values({
         prospectId: initialMessage.prospectId,
         campaignId: initialMessage.campaignId,
@@ -87,7 +156,7 @@ export async function ensureApprovedFollowUpSequence(
         subject: template.subject,
         body: template.body,
         status: "approved",
-        scheduledAt: null,
+        scheduledAt: getFollowUpScheduledAt(sequenceNumber, initialOpened.occurredAt),
         sourceType: initialMessage.sourceType,
         sourceId: initialMessage.sourceId,
       }).onConflictDoNothing().returning({ id: outreachMessagesTable.id });
@@ -97,7 +166,11 @@ export async function ensureApprovedFollowUpSequence(
       }
 
       const [approvedConcurrentDraft] = await tx.update(outreachMessagesTable)
-        .set({ status: "approved", scheduledAt: null, error: null })
+        .set({
+          status: "approved",
+          scheduledAt: getFollowUpScheduledAt(sequenceNumber, initialOpened.occurredAt),
+          error: null,
+        })
         .where(and(
           eq(outreachMessagesTable.prospectId, initialMessage.prospectId),
           scope,
@@ -116,7 +189,7 @@ export async function backfillDeliveredFollowUpSequences(limit = 1000): Promise<
   const candidates = await db.select({
     message: outreachMessagesTable,
     contactName: prospectsTable.contactName,
-    deliveredAt: outreachDeliveryEventsTable.occurredAt,
+    openedAt: outreachDeliveryEventsTable.occurredAt,
   })
     .from(outreachMessagesTable)
     .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
@@ -126,15 +199,14 @@ export async function backfillDeliveredFollowUpSequences(limit = 1000): Promise<
     )
     .where(and(
       eq(outreachMessagesTable.sequenceNumber, 1),
-      eq(outreachMessagesTable.status, "delivered"),
-      eq(outreachDeliveryEventsTable.eventType, "delivered"),
+      eq(outreachDeliveryEventsTable.eventType, "open"),
       eq(prospectsTable.contactStatus, "active"),
       inArray(prospectsTable.status, ["approved", "contacted"]),
       sql`(
         select count(*)
         from ${outreachMessagesTable} as follow_up
-        where follow_up.prospect_id = ${outreachMessagesTable.prospectId}
-          and follow_up.sequence_number in (2, 3, 4)
+          where follow_up.prospect_id = ${outreachMessagesTable.prospectId}
+          and follow_up.sequence_number = 2
           and follow_up.scheduled_at is not null
           and (
             follow_up.campaign_id = ${outreachMessagesTable.campaignId}
@@ -143,7 +215,7 @@ export async function backfillDeliveredFollowUpSequences(limit = 1000): Promise<
               and ${outreachMessagesTable.campaignId} is null
             )
           )
-      ) < 3`,
+      ) < 1`,
     ))
     .orderBy(asc(outreachDeliveryEventsTable.occurredAt))
     .limit(limit);
@@ -173,7 +245,7 @@ export async function backfillDeliveredFollowUpSequences(limit = 1000): Promise<
     for (const followUp of followUps) {
       const scheduledAt = getFollowUpScheduledAt(
         followUp.sequenceNumber,
-        candidate.deliveredAt,
+        candidate.openedAt,
       );
       if (!scheduledAt) continue;
       await db.update(outreachMessagesTable)
@@ -188,6 +260,24 @@ export async function backfillDeliveredFollowUpSequences(limit = 1000): Promise<
   }
 
   return repaired;
+}
+
+export async function stopLegacyAdditionalFollowUps(): Promise<number> {
+  const stopped = await db.update(outreachMessagesTable)
+    .set({
+      status: "needs_review",
+      scheduledAt: null,
+      error: "Stopped because the approved opener policy permits only one follow-up",
+    })
+    .where(and(
+      inArray(
+        outreachMessagesTable.sequenceNumber,
+        [...LEGACY_EXTRA_FOLLOW_UP_SEQUENCE_NUMBERS],
+      ),
+      inArray(outreachMessagesTable.status, ["draft", "approved"]),
+    ))
+    .returning({ id: outreachMessagesTable.id });
+  return stopped.length;
 }
 
 export async function getVerifiedInitialDeliveryAt(
@@ -213,4 +303,29 @@ export async function getVerifiedInitialDeliveryAt(
     .orderBy(asc(outreachDeliveryEventsTable.occurredAt))
     .limit(1);
   return delivery?.occurredAt ?? null;
+}
+
+export async function getVerifiedInitialOpenAt(
+  message: Pick<OutreachMessage, "prospectId" | "campaignId">,
+): Promise<Date | null> {
+  const scope = message.campaignId
+    ? eq(outreachMessagesTable.campaignId, message.campaignId)
+    : isNull(outreachMessagesTable.campaignId);
+  const [opened] = await db.select({
+    occurredAt: outreachDeliveryEventsTable.occurredAt,
+  })
+    .from(outreachMessagesTable)
+    .innerJoin(
+      outreachDeliveryEventsTable,
+      eq(outreachDeliveryEventsTable.outreachMessageId, outreachMessagesTable.id),
+    )
+    .where(and(
+      eq(outreachMessagesTable.prospectId, message.prospectId),
+      scope,
+      eq(outreachMessagesTable.sequenceNumber, 1),
+      eq(outreachDeliveryEventsTable.eventType, "open"),
+    ))
+    .orderBy(asc(outreachDeliveryEventsTable.occurredAt))
+    .limit(1);
+  return opened?.occurredAt ?? null;
 }

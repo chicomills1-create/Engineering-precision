@@ -20,3 +20,9 @@ Automated prospecting may prepare a conservative daily review list, but it must 
 **Why:** The owner explicitly prioritizes sender reputation and non-spam outreach over volume; an incomplete list is safer than weak-fit organizations or uncertain addresses.
 
 **How to apply:** Require public need evidence and deduplication, cap daily imports, leave contacts unverified, and keep approval and sending as separate employee actions.
+
+Engaged prospects receive at most one automated follow-up: only after the initial email has both verified delivery and an opener event, and only after three Phoenix business days. The subject is “A reliable engineering partner for active projects”; the body asks for a reply and has no website CTA outside the signature.
+
+**Why:** Open tracking is only an engagement signal, not proof of intent. One concise reply-first touch balances responsiveness with sender reputation and avoids reviving the superseded multi-message drip.
+
+**How to apply:** Treat reply, bounce, complaint, unsubscribe, suppression, or other delivery-warning evidence as a hard stop; serialize the final evidence check with dispatch, prevent duplicate sequence claims, and report opens separately from delivered, bounced, and thread-attributed human replies.
