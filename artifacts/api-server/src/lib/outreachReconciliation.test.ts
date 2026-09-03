@@ -461,7 +461,7 @@ test("provider evidence reconciles a sending message without redispatch", async 
       occurredAt,
     });
 
-    assert.equal(await reconcileSendingOutreachMessages(occurredAt), 1);
+    assert.equal(await reconcileSendingOutreachMessages(occurredAt, undefined, [fixture.message.id]), 1);
     const [message] = await db.select().from(outreachMessagesTable)
       .where(eq(outreachMessagesTable.id, fixture.message.id));
     assert.equal(message?.status, "sent");
@@ -479,7 +479,7 @@ test("an unknown result is escalated for review and never reset for retry", asyn
       getSendFailureStatus(new Error("SendGrid dispatch result is unknown; message requires reconciliation before retry")),
       "needs_review",
     );
-    assert.equal(await reconcileSendingOutreachMessages(new Date(), 0), 1);
+    assert.equal(await reconcileSendingOutreachMessages(new Date(), 0, [fixture.message.id]), 1);
     const [message] = await db.select().from(outreachMessagesTable)
       .where(eq(outreachMessagesTable.id, fixture.message.id));
     assert.equal(message?.status, "needs_review");
@@ -689,6 +689,7 @@ test("activity bounce suppresses the address and cannot release a resend", async
     await addSendClaims(fixture);
     const summary = await reconcileUncertainOutreachMessages({
       reviewAfterMs: 0,
+      candidateMessageIds: [fixture.message.id],
       lookupActivity: lookupResult(classifySendGridActivity({
         messages: [{
           msg_id: `bounced-${fixture.message.id}`,
@@ -741,6 +742,7 @@ test("provider acceptance reconciles the message and preserves quota without res
     const occurredAt = new Date("2026-08-30T15:00:00.000Z");
     const summary = await reconcileUncertainOutreachMessages({
       reviewAfterMs: 0,
+      candidateMessageIds: [fixture.message.id],
       lookupActivity: async (key) => {
         assert.equal(key, reconciliationKey);
         return {
@@ -783,6 +785,7 @@ test("confirmed provider rejection releases exactly one automatic retry", async 
     };
     const first = await reconcileUncertainOutreachMessages({
       reviewAfterMs: 0,
+      candidateMessageIds: [fixture.message.id],
       lookupActivity: lookupResult(rejected),
     });
     const [released] = await db.select().from(outreachMessagesTable)
@@ -810,6 +813,7 @@ test("confirmed provider rejection releases exactly one automatic retry", async 
     await addSendClaims(fixture);
     const second = await reconcileUncertainOutreachMessages({
       reviewAfterMs: 0,
+      candidateMessageIds: [fixture.message.id],
       lookupActivity: lookupResult(rejected),
     });
     const [failed] = await db.select().from(outreachMessagesTable)
@@ -829,6 +833,7 @@ test("provider activity timeout remains blocked with a clear review reason", asy
     await addSendClaims(fixture);
     const summary = await reconcileUncertainOutreachMessages({
       reviewAfterMs: 0,
+      candidateMessageIds: [fixture.message.id],
       lookupActivity: lookupResult({
         state: "ambiguous",
         reason: "SendGrid activity lookup timed out",
@@ -864,10 +869,12 @@ test("concurrent reconciliation cannot release the same retry twice", async () =
     const results = await Promise.all([
       reconcileUncertainOutreachMessages({
         reviewAfterMs: 0,
+        candidateMessageIds: [fixture.message.id],
         lookupActivity: lookupResult(rejected),
       }),
       reconcileUncertainOutreachMessages({
         reviewAfterMs: 0,
+        candidateMessageIds: [fixture.message.id],
         lookupActivity: lookupResult(rejected),
       }),
     ]);

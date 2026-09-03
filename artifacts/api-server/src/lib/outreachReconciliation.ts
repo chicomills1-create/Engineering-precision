@@ -354,6 +354,7 @@ export async function reconcileUncertainOutreachMessages(options: {
   reviewAfterMs?: number;
   maxLookups?: number;
   lookupActivity?: SendGridActivityLookup;
+  candidateMessageIds?: number[];
 } = {}): Promise<OutreachReconciliationSummary> {
   const now = options.now ?? new Date();
   const reviewAfterMs = options.reviewAfterMs ?? DEFAULT_REVIEW_AFTER_MS;
@@ -373,7 +374,12 @@ export async function reconcileUncertainOutreachMessages(options: {
   })
     .from(outreachMessagesTable)
     .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
-    .where(inArray(outreachMessagesTable.status, ["sending", "needs_review"]))
+    .where(options.candidateMessageIds === undefined
+      ? inArray(outreachMessagesTable.status, ["sending", "needs_review"])
+      : and(
+        inArray(outreachMessagesTable.status, ["sending", "needs_review"]),
+        inArray(outreachMessagesTable.id, options.candidateMessageIds),
+      ))
     .orderBy(asc(outreachMessagesTable.updatedAt));
 
   let lookupCount = 0;

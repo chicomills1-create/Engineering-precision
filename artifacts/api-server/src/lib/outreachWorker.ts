@@ -248,8 +248,13 @@ export function createGuardedAsyncRun(task: () => Promise<void>): () => void {
 export async function reconcileSendingOutreachMessages(
   now = new Date(),
   reviewAfterMs = 15 * 60 * 1000,
+  candidateMessageIds?: number[],
 ): Promise<number> {
-  const result = await reconcileUncertainOutreachMessages({ now, reviewAfterMs });
+  const result = await reconcileUncertainOutreachMessages({
+    now,
+    reviewAfterMs,
+    candidateMessageIds,
+  });
   return result.accepted + result.retryReleased + result.failed + result.ambiguous;
 }
 
