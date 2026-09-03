@@ -10,4 +10,10 @@ description: Lessons from task-agent merges breaking the apex-grid frontend
 
 **Also:** Merges can land botched route files (compile errors, orphaned code) — run the api-server typecheck too. And if a merged task changed the drizzle schema, run `pnpm --filter @workspace/db run push` or every affected endpoint 500s with "column does not exist".
 
+**Large static corpus:** The generated SEO public tree is hundreds of megabytes and makes a normal Vite build too slow for the post-merge timeout. Post-merge validation should compile the real app into temporary output with static-public copying and minification disabled; normal production builds must still include the full corpus.
+
+**Why:** The full post-merge sequence took 213 seconds even after the validation build avoided copying the generated SEO files; the original 120-second limit timed out after database sync and typecheck had begun.
+
+**How to apply:** Keep the lightweight mode gated to the post-merge environment variable and clean its temporary output on exit. Use the ordinary Vite build for deployment and the dedicated build workflow.
+
 **Status (2026-07-28):** Automated. The post-merge script now runs codegen, typecheck, and a production build (fail-fast), and matching validation commands (`codegen`, `typecheck`, `build`) are registered. If a merge breaks the site, post-merge setup fails loudly instead of shipping a black site.
