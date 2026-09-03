@@ -1,0 +1,73 @@
+{
+  "research_scope": "Gilbert, Arizona commercial and public-works projects. Included records have an explicitly named builder/general contractor in an official owner, city, developer, or contractor source. Research completed 2026-09-03. No contact data or inferred contractor assignments are included.",
+  "results": [
+    {
+      "project_location": "Ocotillo Road, Greenfield Road to Higley Road, south Gilbert, Arizona",
+      "project_type": "Public works — road extension, three vehicular bridges, and box culvert",
+      "owner_developer": "Town of Gilbert",
+      "actual_builder_general_contractor": "Sundt Construction",
+      "current_signal_date": "The Town's live project page identifies a $112 million council-approved project; project reporting dated 2025-12-12 says delivery remains in progress with summer 2026 delivery and fall closeout. The construction-industry project article expressly identifies Sundt as general contractor.",
+      "exact_sources": [
+        "https://www.gilbertaz.gov/departments/parks-and-recreation/gilbert-s-new-regional-park/ocotillo-bridge",
+        "https://acppubs.com/RMC/article/6F47E2E8-ocotillo-bridge-and-road-extension-project-paves-the-way-for-growth-and-connectivity",
+        "https://azbex.com/local-projects/arizona-projects-12-12-25"
+      ],
+      "apex_grid_service_fit": "High fit for roadway/site civil, drainage, utility coordination, construction-phase design support, and as-built/redline production.",
+      "confidence": "High — owner, active delivery signal, and the named general contractor are explicit."
+    },
+    {
+      "project_location": "Silo Morrison Ranch, 3340 E. Warner Road, Gilbert, Arizona 85296",
+      "project_type": "231-unit luxury multifamily community",
+      "owner_developer": "Leon Capital Group / Leon Multifamily",
+      "actual_builder_general_contractor": "LMF Construction",
+      "current_signal_date": "2026-08-06 — Leon Capital Group announced Silo Morrison Ranch had opened and leasing was underway. Its release says the community was built by LMF Construction, Leon's in-house general contractor.",
+      "exact_sources": [
+        "https://www.leoncapitalgroup.com/leon-capital-group-opens-two-luxury-multifamily-communities-in-morrisville-north-carolina-and-gilbert-arizona",
+        "https://silomorrisonranch.com/"
+      ],
+      "apex_grid_service_fit": "Strong fit for multifamily closeout/punch support, site and utility issue resolution, tenant/amenity revisions, and follow-on Arizona multifamily preconstruction.",
+      "confidence": "High — developer/owner directly names its in-house general contractor and gives a dated opening/leasing signal."
+    },
+    {
+      "project_location": "Heritage Park, 10 acres in Gilbert's Heritage District / downtown Gilbert, Arizona",
+      "project_type": "Mixed-use — office, retail, multifamily, hotel, public realm and related infrastructure",
+      "owner_developer": "Creation",
+      "actual_builder_general_contractor": "LGE Design Build",
+      "current_signal_date": "LGE's official construction update reports underground utilities complete and buildings rising. The Town project record described Phase 1 as beginning September 2024 and Phase 2 in December 2025; LGE's official project article says it is constructing the office and retail portions for Creation.",
+      "exact_sources": [
+        "https://lgedesignbuild.com/mixed-use-construction-project-looking-to-add-life-to-downtown-gilbert/",
+        "https://www.instagram.com/p/DT0xvXuEgKo/",
+        "https://www.gilbertsunnews.com/news/changes-sought-for-big-downtown-project/article_cd4d0b3a-a988-11ee-bb09-6bd4602da2e7.html"
+      ],
+      "apex_grid_service_fit": "Very strong fit for mixed-use civil/site, utility and drainage coordination; structural/MEP consultant coordination; permit revisions; and construction-document production.",
+      "confidence": "High — the contractor and developer are explicitly named by LGE, with a current official construction update."
+    },
+    {
+      "project_location": "Gilbert Water Tower Plaza, Heritage District, Gilbert, Arizona",
+      "project_type": "Public plaza renovation — splash pad, underground infrastructure repairs, and park amenities",
+      "owner_developer": "Town of Gilbert",
+      "actual_builder_general_contractor": "Willmeng Construction",
+      "current_signal_date": "Willmeng's official project update says it began work in January and completed the 0.7-acre plaza renovation in less than a year; the Town's 2024 reporting confirms the major upgrade was underway. This is a recent completion/closeout signal, not evidence of work still underway.",
+      "exact_sources": [
+        "https://willmeng.com/gilbert-water-tower-grand-opening/",
+        "https://www.12news.com/article/news/local/valley/gilbert-water-tower-plaza-getting-a-major-upgrade-construction-2024/75-96f48b5b-460e-48fb-a3d0-200463e96327"
+      ],
+      "apex_grid_service_fit": "Fit for municipal park/site-civil and underground-utility coordination, drainage, accessibility-related revisions, and closeout/as-built support.",
+      "confidence": "Medium-high — contractor’s own account identifies its role and the work; completion timing is recent but the page does not display a publication date."
+    },
+    {
+      "project_location": "The Collab, 325 N. Ash Street, Gilbert, Arizona",
+      "project_type": "Four-story mixed-use office and ground-floor retail",
+      "owner_developer": "Creation",
+      "actual_builder_general_contractor": "LGE Design Build",
+      "current_signal_date": "LGE's official project page identifies the development as designed and built under one roof by LGE for Creation. Completion reporting also states that spec suites on floors two and three were under construction. This is a recently delivered TI/fit-out signal; the exact date of that fit-out reporting is not stated in the source excerpt.",
+      "exact_sources": [
+        "https://lgedesignbuild.com/projects/the-collab/",
+        "https://www.connectcre.com/stories/lge-delivers-two-developments-across-metro-phoenix/",
+        "https://azbigmedia.com/real-estate/lge-completes-construction-on-the-collab-in-downtown-gilbert/"
+      ],
+      "apex_grid_service_fit": "Fit for office/retail tenant-improvement coordination, MEP/structural revisions, accessibility and permitting support, and fast drawing updates.",
+      "confidence": "Medium-high — owner and design-builder are explicit; the TI activity is explicit but undated in the accessible reporting."
+    }
+  ]
+}

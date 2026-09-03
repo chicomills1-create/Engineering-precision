@@ -1,0 +1,176 @@
+{
+  "research_scope": "Active or imminently active commercial, institutional, industrial, hospitality, and public-works construction in Queen Creek and the nearby southeast Valley, Arizona. Each accepted record identifies an actual builder/general contractor in dated project, owner/developer, city, or contractor reporting. No individual contacts or email addresses are included.",
+  "researched_on": "2026-09-03",
+  "methodology": "Accepted only when a dated source expressly names the contractor/GC/CMAR and a current construction, groundbreaking, or future delivery signal. Official agency and owner/developer links are included where the dated report supplies them. Confidence reflects the directness and recency of that evidence.",
+  "results": [
+    {
+      "rank": 1,
+      "project": "Signal Butte Water Treatment Plant expansion",
+      "sector": "public utility / water infrastructure",
+      "project_location": "84 acres north of Elliot Road and east of Signal Butte Road, Mesa, AZ",
+      "owner_developer": "City of Mesa",
+      "builder_general_contractor": "McCarthy Building Companies, Inc.",
+      "contractor_official_website": "https://www.mccarthy.com",
+      "dated_current_signal": "2026-01-16 — construction reached the major milestone of completing a new 8MG potable-water reservoir; Phase I was scheduled for October 2026 and Phase II for early summer 2027.",
+      "evidence": "Dated project report expressly identifies McCarthy Building Companies as general contractor and Black & Veatch as engineer of record.",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-01-16-26/",
+        "https://azbigmedia.com/real-estate/signal-butte-water-treatment-plant-in-mesa-completes-8-mg-reservoir/"
+      ],
+      "likely_apex_grid_fit": "High: municipal utility/site-civil coordination, drainage, utilities, construction-phase engineering, and multi-phase delivery support.",
+      "confidence": "High"
+    },
+    {
+      "rank": 2,
+      "project": "Elliot & Ellsworth retail development",
+      "sector": "retail / commercial",
+      "project_location": "17-acre intersection of Elliot and Ellsworth roads, Mesa, AZ",
+      "owner_developer": "Diversified Partners Nationwide Real Estate Services",
+      "builder_general_contractor": "BPR Companies",
+      "contractor_official_website": "https://bprcompanies.com",
+      "dated_current_signal": "2026-05-15 — construction was underway on the multi-building, six-retail-building development and its full site infrastructure.",
+      "evidence": "Dated project report expressly identifies BPR Companies as general contractor and Diversified Partners as developer.",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-05-15-26/",
+        "https://azbigmedia.com/real-estate/elliot-ellsworth-retail-development-coming-to-southeast-mesa/"
+      ],
+      "likely_apex_grid_fit": "High: retail pad/site civil, dry-utility coordination, drainage, permitting, and tenant-improvement coordination.",
+      "confidence": "High"
+    },
+    {
+      "rank": 3,
+      "project": "Mesa Gateway Airport checked-baggage improvements",
+      "sector": "aviation / public works",
+      "project_location": "Phoenix-Mesa Gateway Airport, Mesa, AZ",
+      "owner_developer": "Phoenix-Mesa Gateway Airport (airport improvement project)",
+      "builder_general_contractor": "The Weitz Company",
+      "contractor_official_website": "https://www.weitz.com",
+      "dated_current_signal": "2026-05-15 — the 10KSF–12KSF in-line checked-baggage improvement project recently topped out; completion will improve baggage handling efficiency and security operations.",
+      "evidence": "Dated contractor/project report expressly says The Weitz Company serves as general contractor.",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-05-15-26/",
+        "https://www.linkedin.com/posts/weitz-toppingout-aviationconstruction-ugcPost-7458184444815007745-k8n3?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEaAg1EBo3-XJRA2rVRFfrBSSQCsK1_qKTA"
+      ],
+      "likely_apex_grid_fit": "High: airport utility and power coordination, civil/site design support, security-system infrastructure, and construction administration.",
+      "confidence": "High"
+    },
+    {
+      "rank": 4,
+      "project": "Hartford Sylvia Encinas Elementary School rebuild",
+      "sector": "K–12 school / public institutional",
+      "project_location": "Chandler, AZ; replacement campus north of the existing Hartford Sylvia Encinas Elementary School",
+      "owner_developer": "Chandler Unified School District",
+      "builder_general_contractor": "CORE Construction",
+      "contractor_official_website": "https://www.coreconstruction.com",
+      "dated_current_signal": "2026-01-30 — CUSD was set to start construction in February on the approximately $42M rebuild; occupancy is scheduled for July 2027 and full completion for January 2028.",
+      "evidence": "Dated project report expressly names CORE Construction as general contractor.",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-01-30-26/",
+        "https://www.chandlernews.com/arizonan/citynews/chandler-unified-prepares-to-start-hartford-project/article_54889538-1700-4adf-92c8-7b6d9b3eb60a.html"
+      ],
+      "likely_apex_grid_fit": "High: school campus utilities, grading/drainage, accessibility/site coordination, permitting, and construction-phase engineering.",
+      "confidence": "High"
+    },
+    {
+      "rank": 5,
+      "project": "Dr. A.J. Chandler Park renovation — Phase 1",
+      "sector": "public park / civic infrastructure",
+      "project_location": "Downtown Chandler, AZ",
+      "owner_developer": "City of Chandler",
+      "builder_general_contractor": "Willmeng Construction",
+      "contractor_official_website": "https://willmeng.com",
+      "dated_current_signal": "2025-12-31 report: Phase 1 construction was to begin in January 2026; the agreement was awarded by City Council. Scope includes plazas, restrooms, pavilions, shade structures, lighting/power infrastructure, irrigation, and a crosswalk signal.",
+      "evidence": "Project report states the construction services agreement was awarded to Willmeng Construction.",
+      "source_urls": [
+        "https://www.signalsaz.com/articles/chandler-park-renovations-begin-january-2026/",
+        "https://www.chandleraz.gov/explore/chandler-parks/downtown-chandler/downtown-improvements"
+      ],
+      "likely_apex_grid_fit": "High: public-site civil, irrigation, lighting/power, drainage, pedestrian and construction-administration coordination.",
+      "confidence": "High"
+    },
+    {
+      "rank": 6,
+      "project": "Chandler Bay",
+      "sector": "industrial / shallow-bay commercial",
+      "project_location": "1820 E. Germann Road, Chandler, AZ",
+      "owner_developer": "IndiCap and VAC Development",
+      "builder_general_contractor": "Stevens-Leinweber Construction",
+      "contractor_official_website": "https://slcbuilds.com",
+      "dated_current_signal": "2026-04-17 — construction had begun on the 110.5KSF Class A shallow-bay industrial development; completion was scheduled for December 2026.",
+      "evidence": "Dated project report identifies IndiCap and VAC as developers and Stevens-Leinweber Construction as general contractor.",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-04-17-26/"
+      ],
+      "likely_apex_grid_fit": "High: industrial site/civil, utility capacity, drainage, permitting, and tenant-buildout coordination.",
+      "confidence": "High"
+    },
+    {
+      "rank": 7,
+      "project": "Wingate by Wyndham and Hawthorn Suites by Wyndham at SkyBridge Arizona",
+      "sector": "hospitality / commercial",
+      "project_location": "6639 S. Sossaman Road, Mesa, AZ, near Mesa Gateway Airport",
+      "owner_developer": "SkyPlus Hotel Corporation",
+      "builder_general_contractor": "Alston Construction",
+      "contractor_official_website": "https://www.alstonco.com",
+      "dated_current_signal": "2026-04-17 — SkyPlus broke ground on the 70.6KSF, 129-room dual-branded hotel; completion was scheduled for spring 2027.",
+      "evidence": "Dated project report expressly identifies Alston Construction as general contractor.",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-04-17-26/",
+        "https://ktar.com/arizona-real-estate/hotel-development-in-mesa/5847741"
+      ],
+      "likely_apex_grid_fit": "High: hospitality site/utility design coordination, drainage, civil permitting, and construction support.",
+      "confidence": "High"
+    },
+    {
+      "rank": 8,
+      "project": "Gilbert Spectrum Business Park — final building",
+      "sector": "industrial / business park",
+      "project_location": "Gilbert Spectrum Business Park, Gilbert, AZ",
+      "owner_developer": "SunCap Property Group and Inclenberg Investments",
+      "builder_general_contractor": "Graycor",
+      "contractor_official_website": "https://www.graycor.com",
+      "dated_current_signal": "2026-07-10 — the partners broke ground on the 101KSF speculative industrial building, the eighth and final building in the park; delivery is scheduled for Q2 2027.",
+      "evidence": "Dated owner/developer announcement names Graycor as general contractor.",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-07-10-26/",
+        "https://www.gilbertedi.com/suncap-property-group-and-inclenberg-investments-break-ground-on-final-building-at-gilbert-spectrum-business-park/"
+      ],
+      "likely_apex_grid_fit": "High: industrial civil/site, utility routing/capacity, drainage, entitlement-to-delivery coordination, and construction engineering.",
+      "confidence": "High"
+    },
+    {
+      "rank": 9,
+      "project": "ATLAS Exchange Building D",
+      "sector": "industrial / build-to-suit",
+      "project_location": "Eastmark Corridor, Mesa, AZ",
+      "owner_developer": null,
+      "builder_general_contractor": "Sun State Builders",
+      "contractor_official_website": "https://www.sunstatebuilders.com",
+      "dated_current_signal": "2026-03-13 — Sun State Builders announced construction had begun on the 40KSF build-to-suit; rough grading was finished, the pad certified, and column footings poured.",
+      "evidence": "Dated contractor announcement directly identifies Sun State Builders as the active builder. The dated evidence does not name an owner/developer, so none is inferred.",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-03-13-26/",
+        "https://www.linkedin.com/feed/update/urn:li:activity:7429317461864288256/"
+      ],
+      "likely_apex_grid_fit": "High: industrial pad/site, utility, drainage, construction coordination, and additional engineering capacity during vertical construction.",
+      "confidence": "Medium-High"
+    },
+    {
+      "rank": 10,
+      "project": "I-10 Wild Horse Pass Corridor Project — second segment",
+      "sector": "highway / public works",
+      "project_location": "Gas Line Road to south of SR 387, between Phoenix and Casa Grande, AZ",
+      "owner_developer": "Arizona Department of Transportation",
+      "builder_general_contractor": "FNF Construction, Inc.",
+      "contractor_official_website": "https://www.fnfinc.com",
+      "dated_current_signal": "2026-01-16 — construction was set to begin on the 10-mile second segment of the 26-mile I-10 widening project; full four-phase completion is scheduled for late 2029.",
+      "evidence": "Dated project report expressly identifies FNF Construction as contractor; the linked ADOT project release corroborates the public project.",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-01-16-26/",
+        "https://azdot.gov/news/progress-moves-forward-i-10-wild-horse-pass-corridor-project"
+      ],
+      "likely_apex_grid_fit": "High: heavy-civil utility relocation, drainage, roadway/site design coordination, and construction-phase engineering support.",
+      "confidence": "High"
+    }
+  ]
+}

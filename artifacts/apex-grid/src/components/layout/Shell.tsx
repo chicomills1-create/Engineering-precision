@@ -37,7 +37,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
   const navigation = [
     { name: "Portfolio", href: "/portfolio" },
     { name: "Industries", href: "/industries" },
-    { name: "PCM Construction", href: "/team#construction-delivery" },
+    { name: "General Contractor", href: "/team#construction-delivery" },
     { name: "Military", href: "/military" },
     { name: "Resources", href: "/resources" },
     { name: "Company", href: "/about" },

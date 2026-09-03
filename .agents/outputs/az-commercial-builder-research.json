@@ -1,0 +1,605 @@
+{
+  "researchedOn": "2026-09-02",
+  "scope": "Active or imminent commercial, institutional, and public construction in Phoenix, Gilbert, Queen Creek, and nearby southeast Valley markets",
+  "rawProjectRecords": 25,
+  "uniqueBuilders": 16,
+  "builders": [
+    {
+      "builder": "Alston Construction",
+      "builderDomain": "https://www.alstonco.com",
+      "projects": [
+        "Wingate by Wyndham and Hawthorn Suites by Wyndham at SkyBridge Arizona"
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-04-17-26/",
+        "https://ktar.com/arizona-real-estate/hotel-development-in-mesa/5847741"
+      ],
+      "records": [
+        {
+          "project": "Wingate by Wyndham and Hawthorn Suites by Wyndham at SkyBridge Arizona",
+          "location": "6639 S. Sossaman Road, Mesa, AZ, near Mesa Gateway Airport",
+          "owner": "SkyPlus Hotel Corporation",
+          "builder": "Alston Construction",
+          "builderDomain": "https://www.alstonco.com",
+          "currentSignal": "2026-04-17 — SkyPlus broke ground on the 70.6KSF, 129-room dual-branded hotel; completion was scheduled for spring 2027.",
+          "sourceUrls": [
+            "https://azbex.com/local-projects/arizona-projects-04-17-26/",
+            "https://ktar.com/arizona-real-estate/hotel-development-in-mesa/5847741"
+          ],
+          "apexGridFit": "High: hospitality site/utility design coordination, drainage, civil permitting, and construction support.",
+          "confidence": "High",
+          "researchSource": ".agents/outputs/az-commercial-builders-queen-creek.json"
+        }
+      ]
+    },
+    {
+      "builder": "BPR Companies",
+      "builderDomain": "https://bprcompanies.com",
+      "projects": [
+        "Elliot & Ellsworth retail development"
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-05-15-26/",
+        "https://azbigmedia.com/real-estate/elliot-ellsworth-retail-development-coming-to-southeast-mesa/"
+      ],
+      "records": [
+        {
+          "project": "Elliot & Ellsworth retail development",
+          "location": "17-acre intersection of Elliot and Ellsworth roads, Mesa, AZ",
+          "owner": "Diversified Partners Nationwide Real Estate Services",
+          "builder": "BPR Companies",
+          "builderDomain": "https://bprcompanies.com",
+          "currentSignal": "2026-05-15 — construction was underway on the multi-building, six-retail-building development and its full site infrastructure.",
+          "sourceUrls": [
+            "https://azbex.com/local-projects/arizona-projects-05-15-26/",
+            "https://azbigmedia.com/real-estate/elliot-ellsworth-retail-development-coming-to-southeast-mesa/"
+          ],
+          "apexGridFit": "High: retail pad/site civil, dry-utility coordination, drainage, permitting, and tenant-improvement coordination.",
+          "confidence": "High",
+          "researchSource": ".agents/outputs/az-commercial-builders-queen-creek.json"
+        }
+      ]
+    },
+    {
+      "builder": "CORE Construction",
+      "builderDomain": "https://www.coreconstruction.com",
+      "projects": [
+        "Hartford Sylvia Encinas Elementary School rebuild"
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-01-30-26/",
+        "https://www.chandlernews.com/arizonan/citynews/chandler-unified-prepares-to-start-hartford-project/article_54889538-1700-4adf-92c8-7b6d9b3eb60a.html"
+      ],
+      "records": [
+        {
+          "project": "Hartford Sylvia Encinas Elementary School rebuild",
+          "location": "Chandler, AZ; replacement campus north of the existing Hartford Sylvia Encinas Elementary School",
+          "owner": "Chandler Unified School District",
+          "builder": "CORE Construction",
+          "builderDomain": "https://www.coreconstruction.com",
+          "currentSignal": "2026-01-30 — CUSD was set to start construction in February on the approximately $42M rebuild; occupancy is scheduled for July 2027 and full completion for January 2028.",
+          "sourceUrls": [
+            "https://azbex.com/local-projects/arizona-projects-01-30-26/",
+            "https://www.chandlernews.com/arizonan/citynews/chandler-unified-prepares-to-start-hartford-project/article_54889538-1700-4adf-92c8-7b6d9b3eb60a.html"
+          ],
+          "apexGridFit": "High: school campus utilities, grading/drainage, accessibility/site coordination, permitting, and construction-phase engineering.",
+          "confidence": "High",
+          "researchSource": ".agents/outputs/az-commercial-builders-queen-creek.json"
+        }
+      ]
+    },
+    {
+      "builder": "DPR Construction",
+      "builderDomain": null,
+      "projects": [
+        "Goodyear 48MW Liquid-Cooled Data Center"
+      ],
+      "sourceUrls": [
+        "https://www.bizjournals.com/phoenix/press-release/detail/11718/DPR-Construction"
+      ],
+      "records": [
+        {
+          "project": "Goodyear 48MW Liquid-Cooled Data Center",
+          "location": "Goodyear, AZ (Phoenix metro)",
+          "owner": "Confidential",
+          "builder": "DPR Construction",
+          "builderDomain": null,
+          "currentSignal": "DPR states it is currently constructing the high-performing, liquid-cooled 48MW data center in Goodyear.",
+          "sourceUrls": [
+            "https://www.bizjournals.com/phoenix/press-release/detail/11718/DPR-Construction"
+          ],
+          "apexGridFit": "High — liquid-cooled mission-critical facility signals unusually strong electrical/mechanical, structural, and coordination/drafting requirements.",
+          "confidence": "confirmed",
+          "researchSource": ".agents/outputs/az-commercial-builders-phoenix.json"
+        }
+      ]
+    },
+    {
+      "builder": "FNF Construction, Inc.",
+      "builderDomain": "https://www.fnfinc.com",
+      "projects": [
+        "I-10 Wild Horse Pass Corridor Project — second segment"
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-01-16-26/",
+        "https://azdot.gov/news/progress-moves-forward-i-10-wild-horse-pass-corridor-project"
+      ],
+      "records": [
+        {
+          "project": "I-10 Wild Horse Pass Corridor Project — second segment",
+          "location": "Gas Line Road to south of SR 387, between Phoenix and Casa Grande, AZ",
+          "owner": "Arizona Department of Transportation",
+          "builder": "FNF Construction, Inc.",
+          "builderDomain": "https://www.fnfinc.com",
+          "currentSignal": "2026-01-16 — construction was set to begin on the 10-mile second segment of the 26-mile I-10 widening project; full four-phase completion is scheduled for late 2029.",
+          "sourceUrls": [
+            "https://azbex.com/local-projects/arizona-projects-01-16-26/",
+            "https://azdot.gov/news/progress-moves-forward-i-10-wild-horse-pass-corridor-project"
+          ],
+          "apexGridFit": "High: heavy-civil utility relocation, drainage, roadway/site design coordination, and construction-phase engineering support.",
+          "confidence": "High",
+          "researchSource": ".agents/outputs/az-commercial-builders-queen-creek.json"
+        }
+      ]
+    },
+    {
+      "builder": "Graycor",
+      "builderDomain": "https://www.graycor.com",
+      "projects": [
+        "Gilbert Spectrum Business Park — final building"
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-07-10-26/",
+        "https://www.gilbertedi.com/suncap-property-group-and-inclenberg-investments-break-ground-on-final-building-at-gilbert-spectrum-business-park/"
+      ],
+      "records": [
+        {
+          "project": "Gilbert Spectrum Business Park — final building",
+          "location": "Gilbert Spectrum Business Park, Gilbert, AZ",
+          "owner": "SunCap Property Group and Inclenberg Investments",
+          "builder": "Graycor",
+          "builderDomain": "https://www.graycor.com",
+          "currentSignal": "2026-07-10 — the partners broke ground on the 101KSF speculative industrial building, the eighth and final building in the park; delivery is scheduled for Q2 2027.",
+          "sourceUrls": [
+            "https://azbex.com/local-projects/arizona-projects-07-10-26/",
+            "https://www.gilbertedi.com/suncap-property-group-and-inclenberg-investments-break-ground-on-final-building-at-gilbert-spectrum-business-park/"
+          ],
+          "apexGridFit": "High: industrial civil/site, utility routing/capacity, drainage, entitlement-to-delivery coordination, and construction engineering.",
+          "confidence": "High",
+          "researchSource": ".agents/outputs/az-commercial-builders-queen-creek.json"
+        }
+      ]
+    },
+    {
+      "builder": "Haydon Building Corp.",
+      "builderDomain": null,
+      "projects": [
+        "Edged Phoenix Data Center"
+      ],
+      "sourceUrls": [
+        "https://www.datacenterdynamics.com/en/news/edged-tops-out-phoenix-data-center-in-arizona/"
+      ],
+      "records": [
+        {
+          "project": "Edged Phoenix Data Center",
+          "location": "Mesa, AZ (Phoenix metro)",
+          "owner": "Edged Energy",
+          "builder": "Haydon Building Corp.",
+          "builderDomain": null,
+          "currentSignal": "Edged's April 2025 topping-out event was reported as occurring with local general contractor Haydon; the 36MW facility was due online later in 2025.",
+          "sourceUrls": [
+            "https://www.datacenterdynamics.com/en/news/edged-tops-out-phoenix-data-center-in-arizona/"
+          ],
+          "apexGridFit": "High — 36MW data center is a strong MEP/power, structural, civil, and detailed drafting fit.",
+          "confidence": "confirmed",
+          "researchSource": ".agents/outputs/az-commercial-builders-phoenix.json"
+        }
+      ]
+    },
+    {
+      "builder": "LGE Design Build",
+      "builderDomain": null,
+      "projects": [
+        "Pacific Office Automation Southwest Headquarters"
+      ],
+      "sourceUrls": [
+        "https://www.pacificoffice.com/blog/creation-and-lge-design-build-break-ground-on-pacific-office-automation-southwest-headquarters",
+        "https://lgedesignbuild.com/mixed-use-construction-project-looking-to-add-life-to-downtown-gilbert/",
+        "https://www.instagram.com/p/DT0xvXuEgKo/",
+        "https://www.gilbertsunnews.com/news/changes-sought-for-big-downtown-project/article_cd4d0b3a-a988-11ee-bb09-6bd4602da2e7.html",
+        "https://lgedesignbuild.com/projects/the-collab/",
+        "https://www.connectcre.com/stories/lge-delivers-two-developments-across-metro-phoenix/",
+        "https://azbigmedia.com/real-estate/lge-completes-construction-on-the-collab-in-downtown-gilbert/"
+      ],
+      "records": [
+        {
+          "project": "Pacific Office Automation Southwest Headquarters",
+          "location": "1400 W. 3rd Street, Tempe, AZ (Phoenix metro)",
+          "owner": "Creation; Pacific Office Automation is the pre-leasing headquarters user",
+          "builder": "LGE Design Build",
+          "builderDomain": null,
+          "currentSignal": "Owner/user announcement says Creation and LGE broke ground November 17, 2025 and that LGE will act as architect and general contractor for the 75,000-SF headquarters plus a 45,000-SF speculative building.",
+          "sourceUrls": [
+            "https://www.pacificoffice.com/blog/creation-and-lge-design-build-break-ground-on-pacific-office-automation-southwest-headquarters"
+          ],
+          "apexGridFit": "High — ground-up industrial/office headquarters plus spec building, truck court, and utility/site coordination.",
+          "confidence": "confirmed",
+          "researchSource": ".agents/outputs/az-commercial-builders-phoenix.json"
+        },
+        {
+          "project": "",
+          "location": "Heritage Park, 10 acres in Gilbert's Heritage District / downtown Gilbert, Arizona",
+          "owner": "Creation",
+          "builder": "LGE Design Build",
+          "builderDomain": null,
+          "currentSignal": "LGE's official construction update reports underground utilities complete and buildings rising. The Town project record described Phase 1 as beginning September 2024 and Phase 2 in December 2025; LGE's official project article says it is constructing the office and retail portions for Creation.",
+          "sourceUrls": [
+            "https://lgedesignbuild.com/mixed-use-construction-project-looking-to-add-life-to-downtown-gilbert/",
+            "https://www.instagram.com/p/DT0xvXuEgKo/",
+            "https://www.gilbertsunnews.com/news/changes-sought-for-big-downtown-project/article_cd4d0b3a-a988-11ee-bb09-6bd4602da2e7.html"
+          ],
+          "apexGridFit": "Very strong fit for mixed-use civil/site, utility and drainage coordination; structural/MEP consultant coordination; permit revisions; and construction-document production.",
+          "confidence": "High — the contractor and developer are explicitly named by LGE, with a current official construction update.",
+          "researchSource": ".agents/outputs/az-commercial-builders-gilbert.json"
+        },
+        {
+          "project": "",
+          "location": "The Collab, 325 N. Ash Street, Gilbert, Arizona",
+          "owner": "Creation",
+          "builder": "LGE Design Build",
+          "builderDomain": null,
+          "currentSignal": "LGE's official project page identifies the development as designed and built under one roof by LGE for Creation. Completion reporting also states that spec suites on floors two and three were under construction. This is a recently delivered TI/fit-out signal; the exact date of that fit-out reporting is not stated in the source excerpt.",
+          "sourceUrls": [
+            "https://lgedesignbuild.com/projects/the-collab/",
+            "https://www.connectcre.com/stories/lge-delivers-two-developments-across-metro-phoenix/",
+            "https://azbigmedia.com/real-estate/lge-completes-construction-on-the-collab-in-downtown-gilbert/"
+          ],
+          "apexGridFit": "Fit for office/retail tenant-improvement coordination, MEP/structural revisions, accessibility and permitting support, and fast drawing updates.",
+          "confidence": "Medium-high — owner and design-builder are explicit; the TI activity is explicit but undated in the accessible reporting.",
+          "researchSource": ".agents/outputs/az-commercial-builders-gilbert.json"
+        }
+      ]
+    },
+    {
+      "builder": "LMF Construction",
+      "builderDomain": null,
+      "projects": [],
+      "sourceUrls": [
+        "https://www.leoncapitalgroup.com/leon-capital-group-opens-two-luxury-multifamily-communities-in-morrisville-north-carolina-and-gilbert-arizona",
+        "https://silomorrisonranch.com/"
+      ],
+      "records": [
+        {
+          "project": "",
+          "location": "Silo Morrison Ranch, 3340 E. Warner Road, Gilbert, Arizona 85296",
+          "owner": "Leon Capital Group / Leon Multifamily",
+          "builder": "LMF Construction",
+          "builderDomain": null,
+          "currentSignal": "2026-08-06 — Leon Capital Group announced Silo Morrison Ranch had opened and leasing was underway. Its release says the community was built by LMF Construction, Leon's in-house general contractor.",
+          "sourceUrls": [
+            "https://www.leoncapitalgroup.com/leon-capital-group-opens-two-luxury-multifamily-communities-in-morrisville-north-carolina-and-gilbert-arizona",
+            "https://silomorrisonranch.com/"
+          ],
+          "apexGridFit": "Strong fit for multifamily closeout/punch support, site and utility issue resolution, tenant/amenity revisions, and follow-on Arizona multifamily preconstruction.",
+          "confidence": "High — developer/owner directly names its in-house general contractor and gives a dated opening/leasing signal.",
+          "researchSource": ".agents/outputs/az-commercial-builders-gilbert.json"
+        }
+      ]
+    },
+    {
+      "builder": "Lease Crutcher Lewis / GCON joint venture",
+      "builderDomain": null,
+      "projects": [
+        "72MW Data Center (project name not publicly disclosed)"
+      ],
+      "sourceUrls": [
+        "https://lewisbuilds.com/news-insights/lewis-and-gcon-set-first-panels-for-72-mw-data-center-in-phoenix-area"
+      ],
+      "records": [
+        {
+          "project": "72MW Data Center (project name not publicly disclosed)",
+          "location": "Waddell, AZ (Phoenix metro)",
+          "owner": "Not publicly named in contractor update",
+          "builder": "Lease Crutcher Lewis / GCON joint venture",
+          "builderDomain": null,
+          "currentSignal": "The Lewis contractor update says JV crews set the first precast panels on April 2, 2025 for the future 72MW, 445,000-SF two-story data center and will perform site work and underground utilities.",
+          "sourceUrls": [
+            "https://lewisbuilds.com/news-insights/lewis-and-gcon-set-first-panels-for-72-mw-data-center-in-phoenix-area"
+          ],
+          "apexGridFit": "High — large mission-critical shell, precast envelope, site/underground utilities, admin space, loading docks, and heavy MEP coordination.",
+          "confidence": "confirmed",
+          "researchSource": ".agents/outputs/az-commercial-builders-phoenix.json"
+        }
+      ]
+    },
+    {
+      "builder": "McCarthy Building Companies, Inc.",
+      "builderDomain": "https://www.mccarthy.com",
+      "projects": [
+        "Terminal 3 North 2 Concourse",
+        "Signal Butte Water Treatment Plant expansion"
+      ],
+      "sourceUrls": [
+        "https://www.skyharbor.com/about-phx/news-media/press-releases/construction-begins-on-terminal-3-north-2-concourse-at-phoenix-sky-harbor-international-airport/",
+        "https://www.mccarthy.com/insights/construction-begins-on-terminal-3-north-2-concourse-at-phoenix-sky-harbor-international",
+        "https://www.mccarthy.com/insights/phoenix-union-begins-construction-transformation-of-metro-tech-high-school",
+        "https://azbex.com/local-projects/arizona-projects-01-16-26/",
+        "https://azbigmedia.com/real-estate/signal-butte-water-treatment-plant-in-mesa-completes-8-mg-reservoir/"
+      ],
+      "records": [
+        {
+          "project": "Terminal 3 North 2 Concourse",
+          "location": "Phoenix Sky Harbor International Airport, Phoenix, AZ",
+          "owner": "City of Phoenix / Phoenix Sky Harbor International Airport",
+          "builder": "McCarthy Building Companies, Inc.",
+          "builderDomain": null,
+          "currentSignal": "Airport press release says McCarthy recently began construction; demolition/enabling work was expected to begin in April 2025 for the $326M, six-gate concourse.",
+          "sourceUrls": [
+            "https://www.skyharbor.com/about-phx/news-media/press-releases/construction-begins-on-terminal-3-north-2-concourse-at-phoenix-sky-harbor-international-airport/",
+            "https://www.mccarthy.com/insights/construction-begins-on-terminal-3-north-2-concourse-at-phoenix-sky-harbor-international"
+          ],
+          "apexGridFit": "High — airport vertical construction, future retail tenant build-outs, complex phased MEP, structural, and drafting coordination.",
+          "confidence": "confirmed",
+          "researchSource": ".agents/outputs/az-commercial-builders-phoenix.json"
+        },
+        {
+          "project": "Metro Tech High School Campus Transformation",
+          "location": "Northwest corner of Thomas Road and 19th Avenue, Phoenix, AZ",
+          "owner": "Phoenix Union High School District",
+          "builder": "McCarthy Building Companies, Inc.",
+          "builderDomain": null,
+          "currentSignal": "Phoenix Union began construction in August 2025. McCarthy says the multi-phase renovation/new-build program is scheduled for completion ahead of the 2027–28 school year.",
+          "sourceUrls": [
+            "https://www.mccarthy.com/insights/phoenix-union-begins-construction-transformation-of-metro-tech-high-school"
+          ],
+          "apexGridFit": "High — 150,000+ SF renovations plus new CTE learning spaces make this a strong structural/MEP/drafting coordination opportunity.",
+          "confidence": "confirmed",
+          "researchSource": ".agents/outputs/az-commercial-builders-phoenix.json"
+        },
+        {
+          "project": "Signal Butte Water Treatment Plant expansion",
+          "location": "84 acres north of Elliot Road and east of Signal Butte Road, Mesa, AZ",
+          "owner": "City of Mesa",
+          "builder": "McCarthy Building Companies, Inc.",
+          "builderDomain": "https://www.mccarthy.com",
+          "currentSignal": "2026-01-16 — construction reached the major milestone of completing a new 8MG potable-water reservoir; Phase I was scheduled for October 2026 and Phase II for early summer 2027.",
+          "sourceUrls": [
+            "https://azbex.com/local-projects/arizona-projects-01-16-26/",
+            "https://azbigmedia.com/real-estate/signal-butte-water-treatment-plant-in-mesa-completes-8-mg-reservoir/"
+          ],
+          "apexGridFit": "High: municipal utility/site-civil coordination, drainage, utilities, construction-phase engineering, and multi-phase delivery support.",
+          "confidence": "High",
+          "researchSource": ".agents/outputs/az-commercial-builders-queen-creek.json"
+        }
+      ]
+    },
+    {
+      "builder": "Stevens-Leinweber Construction",
+      "builderDomain": "https://slcbuilds.com",
+      "projects": [
+        "Chandler Bay"
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-04-17-26/"
+      ],
+      "records": [
+        {
+          "project": "Chandler Bay",
+          "location": "1820 E. Germann Road, Chandler, AZ",
+          "owner": "IndiCap and VAC Development",
+          "builder": "Stevens-Leinweber Construction",
+          "builderDomain": "https://slcbuilds.com",
+          "currentSignal": "2026-04-17 — construction had begun on the 110.5KSF Class A shallow-bay industrial development; completion was scheduled for December 2026.",
+          "sourceUrls": [
+            "https://azbex.com/local-projects/arizona-projects-04-17-26/"
+          ],
+          "apexGridFit": "High: industrial site/civil, utility capacity, drainage, permitting, and tenant-buildout coordination.",
+          "confidence": "High",
+          "researchSource": ".agents/outputs/az-commercial-builders-queen-creek.json"
+        }
+      ]
+    },
+    {
+      "builder": "Sun State Builders",
+      "builderDomain": "https://www.sunstatebuilders.com",
+      "projects": [
+        "ATLAS Exchange Building D"
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-03-13-26/",
+        "https://www.linkedin.com/feed/update/urn:li:activity:7429317461864288256/"
+      ],
+      "records": [
+        {
+          "project": "ATLAS Exchange Building D",
+          "location": "Eastmark Corridor, Mesa, AZ",
+          "owner": null,
+          "builder": "Sun State Builders",
+          "builderDomain": "https://www.sunstatebuilders.com",
+          "currentSignal": "2026-03-13 — Sun State Builders announced construction had begun on the 40KSF build-to-suit; rough grading was finished, the pad certified, and column footings poured.",
+          "sourceUrls": [
+            "https://azbex.com/local-projects/arizona-projects-03-13-26/",
+            "https://www.linkedin.com/feed/update/urn:li:activity:7429317461864288256/"
+          ],
+          "apexGridFit": "High: industrial pad/site, utility, drainage, construction coordination, and additional engineering capacity during vertical construction.",
+          "confidence": "Medium-High",
+          "researchSource": ".agents/outputs/az-commercial-builders-queen-creek.json"
+        }
+      ]
+    },
+    {
+      "builder": "Sundt Construction",
+      "builderDomain": null,
+      "projects": [
+        "Phoenix Zoo Veterinary Medical Center & Quarantine Campus"
+      ],
+      "sourceUrls": [
+        "https://www.gilbertaz.gov/departments/parks-and-recreation/gilbert-s-new-regional-park/ocotillo-bridge",
+        "https://acppubs.com/RMC/article/6F47E2E8-ocotillo-bridge-and-road-extension-project-paves-the-way-for-growth-and-connectivity",
+        "https://azbex.com/local-projects/arizona-projects-12-12-25",
+        "https://www.sundt.com/projects/phoenix-zoo-veterinary-medical-center-quarantine-campus",
+        "https://www.sundt.com/2025/construction-of-new-veterinary-medical-center-at-phoenix-zoo-underway/",
+        "https://www.phoenixzoo.org/wp-content/uploads/2025/03/Veterinary-Medical-Center-at-the-Phoenix-Zoo-Groundbreaking-FINAL.pdf",
+        "https://www.sundt.com/projects/city-of-phoenix-cave-creek-water-reclamation-plant-rehabilitation/",
+        "https://www.sundt.com/2025/cave-creek-project-sets-new-standard-for-water-reuse/",
+        "https://www.phoenix.gov/administration/departments/waterservices/development-infrastructure/cave-creek-plant.html",
+        "https://www.phoenix.gov/administration/departments/waterservices/water-quality/advanced-purified-water.html",
+        "https://www.sundt.com/projects/phx05-co-location-data-center/"
+      ],
+      "records": [
+        {
+          "project": "",
+          "location": "Ocotillo Road, Greenfield Road to Higley Road, south Gilbert, Arizona",
+          "owner": "Town of Gilbert",
+          "builder": "Sundt Construction",
+          "builderDomain": null,
+          "currentSignal": "The Town's live project page identifies a $112 million council-approved project; project reporting dated 2025-12-12 says delivery remains in progress with summer 2026 delivery and fall closeout. The construction-industry project article expressly identifies Sundt as general contractor.",
+          "sourceUrls": [
+            "https://www.gilbertaz.gov/departments/parks-and-recreation/gilbert-s-new-regional-park/ocotillo-bridge",
+            "https://acppubs.com/RMC/article/6F47E2E8-ocotillo-bridge-and-road-extension-project-paves-the-way-for-growth-and-connectivity",
+            "https://azbex.com/local-projects/arizona-projects-12-12-25"
+          ],
+          "apexGridFit": "High fit for roadway/site civil, drainage, utility coordination, construction-phase design support, and as-built/redline production.",
+          "confidence": "High — owner, active delivery signal, and the named general contractor are explicit.",
+          "researchSource": ".agents/outputs/az-commercial-builders-gilbert.json"
+        },
+        {
+          "project": "Phoenix Zoo Veterinary Medical Center & Quarantine Campus",
+          "location": "Phoenix, AZ",
+          "owner": "Phoenix Zoo – Arizona Center for Nature Conservation",
+          "builder": "Sundt Construction, Inc.",
+          "builderDomain": null,
+          "currentSignal": "Sundt's live project page labels the project \"In Progress\" and says Sundt is providing construction management and building it at cost. The linked Zoo groundbreaking release says completion is expected in late 2026.",
+          "sourceUrls": [
+            "https://www.sundt.com/projects/phoenix-zoo-veterinary-medical-center-quarantine-campus",
+            "https://www.sundt.com/2025/construction-of-new-veterinary-medical-center-at-phoenix-zoo-underway/",
+            "https://www.phoenixzoo.org/wp-content/uploads/2025/03/Veterinary-Medical-Center-at-the-Phoenix-Zoo-Groundbreaking-FINAL.pdf"
+          ],
+          "apexGridFit": "High — healthcare/veterinary building with new structures, site utilities, parking, retaining walls, and substantial MEP/structural coordination.",
+          "confidence": "confirmed",
+          "researchSource": ".agents/outputs/az-commercial-builders-phoenix.json"
+        },
+        {
+          "project": "Cave Creek Water Reclamation Plant Rehabilitation / Pure Water Phoenix",
+          "location": "Phoenix, AZ",
+          "owner": "City of Phoenix",
+          "builder": "Sundt Construction, Inc.",
+          "builderDomain": null,
+          "currentSignal": "Sundt lists this $298.9M CMAR project as \"In Progress.\" City of Phoenix says the first advanced-purified-water facility is currently under construction as part of the rehabilitation.",
+          "sourceUrls": [
+            "https://www.sundt.com/projects/city-of-phoenix-cave-creek-water-reclamation-plant-rehabilitation/",
+            "https://www.sundt.com/2025/cave-creek-project-sets-new-standard-for-water-reuse/",
+            "https://www.phoenix.gov/administration/departments/waterservices/development-infrastructure/cave-creek-plant.html",
+            "https://www.phoenix.gov/administration/departments/waterservices/water-quality/advanced-purified-water.html"
+          ],
+          "apexGridFit": "High — major process, civil, structural, electrical, instrumentation, and MEP-intensive public-utility rehabilitation.",
+          "confidence": "confirmed",
+          "researchSource": ".agents/outputs/az-commercial-builders-phoenix.json"
+        },
+        {
+          "project": "PHX05 Co-Location Data Center",
+          "location": "Phoenix, AZ",
+          "owner": "Confidential",
+          "builder": "Sundt Construction, Inc.",
+          "builderDomain": null,
+          "currentSignal": "Sundt's project record reports a 161,000-SF, 24MW facility delivered in 2026, making it a recently completed/awarded-market signal rather than a directory listing.",
+          "sourceUrls": [
+            "https://www.sundt.com/projects/phx05-co-location-data-center/"
+          ],
+          "apexGridFit": "High — mission-critical data center with 12MW day-one MEP infrastructure, security-driven scope change, tilt-up structural work, and constrained-site coordination.",
+          "confidence": "confirmed",
+          "researchSource": ".agents/outputs/az-commercial-builders-phoenix.json"
+        }
+      ]
+    },
+    {
+      "builder": "The Weitz Company",
+      "builderDomain": "https://www.weitz.com",
+      "projects": [
+        "Mesa Gateway Airport checked-baggage improvements"
+      ],
+      "sourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-05-15-26/",
+        "https://www.linkedin.com/posts/weitz-toppingout-aviationconstruction-ugcPost-7458184444815007745-k8n3?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEaAg1EBo3-XJRA2rVRFfrBSSQCsK1_qKTA"
+      ],
+      "records": [
+        {
+          "project": "Mesa Gateway Airport checked-baggage improvements",
+          "location": "Phoenix-Mesa Gateway Airport, Mesa, AZ",
+          "owner": "Phoenix-Mesa Gateway Airport (airport improvement project)",
+          "builder": "The Weitz Company",
+          "builderDomain": "https://www.weitz.com",
+          "currentSignal": "2026-05-15 — the 10KSF–12KSF in-line checked-baggage improvement project recently topped out; completion will improve baggage handling efficiency and security operations.",
+          "sourceUrls": [
+            "https://azbex.com/local-projects/arizona-projects-05-15-26/",
+            "https://www.linkedin.com/posts/weitz-toppingout-aviationconstruction-ugcPost-7458184444815007745-k8n3?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEaAg1EBo3-XJRA2rVRFfrBSSQCsK1_qKTA"
+          ],
+          "apexGridFit": "High: airport utility and power coordination, civil/site design support, security-system infrastructure, and construction administration.",
+          "confidence": "High",
+          "researchSource": ".agents/outputs/az-commercial-builders-queen-creek.json"
+        }
+      ]
+    },
+    {
+      "builder": "Willmeng Construction",
+      "builderDomain": "https://willmeng.com",
+      "projects": [
+        "GO|99 North",
+        "Dr. A.J. Chandler Park renovation — Phase 1"
+      ],
+      "sourceUrls": [
+        "https://willmeng.com/willmeng-breaks-ground-on-one-of-arizonas-largest-speculative-industrial-facilities",
+        "https://willmeng.com/gilbert-water-tower-grand-opening/",
+        "https://www.12news.com/article/news/local/valley/gilbert-water-tower-plaza-getting-a-major-upgrade-construction-2024/75-96f48b5b-460e-48fb-a3d0-200463e96327",
+        "https://www.signalsaz.com/articles/chandler-park-renovations-begin-january-2026/",
+        "https://www.chandleraz.gov/explore/chandler-parks/downtown-chandler/downtown-improvements"
+      ],
+      "records": [
+        {
+          "project": "GO|99 North",
+          "location": "Southwest Phoenix / 99th Avenue corridor, Phoenix, AZ",
+          "owner": "GO Industrial",
+          "builder": "Willmeng Construction",
+          "builderDomain": null,
+          "currentSignal": "Willmeng's August 6, 2026 project announcement says it has begun work on the 1.1M-SF Class A warehouse/distribution facility.",
+          "sourceUrls": [
+            "https://willmeng.com/willmeng-breaks-ground-on-one-of-arizonas-largest-speculative-industrial-facilities"
+          ],
+          "apexGridFit": "High — million-square-foot speculative industrial shell and distribution use require civil/site, structural, electrical/MEP, and production drafting capacity.",
+          "confidence": "confirmed",
+          "researchSource": ".agents/outputs/az-commercial-builders-phoenix.json"
+        },
+        {
+          "project": "",
+          "location": "Gilbert Water Tower Plaza, Heritage District, Gilbert, Arizona",
+          "owner": "Town of Gilbert",
+          "builder": "Willmeng Construction",
+          "builderDomain": null,
+          "currentSignal": "Willmeng's official project update says it began work in January and completed the 0.7-acre plaza renovation in less than a year; the Town's 2024 reporting confirms the major upgrade was underway. This is a recent completion/closeout signal, not evidence of work still underway.",
+          "sourceUrls": [
+            "https://willmeng.com/gilbert-water-tower-grand-opening/",
+            "https://www.12news.com/article/news/local/valley/gilbert-water-tower-plaza-getting-a-major-upgrade-construction-2024/75-96f48b5b-460e-48fb-a3d0-200463e96327"
+          ],
+          "apexGridFit": "Fit for municipal park/site-civil and underground-utility coordination, drainage, accessibility-related revisions, and closeout/as-built support.",
+          "confidence": "Medium-high — contractor’s own account identifies its role and the work; completion timing is recent but the page does not display a publication date.",
+          "researchSource": ".agents/outputs/az-commercial-builders-gilbert.json"
+        },
+        {
+          "project": "Dr. A.J. Chandler Park renovation — Phase 1",
+          "location": "Downtown Chandler, AZ",
+          "owner": "City of Chandler",
+          "builder": "Willmeng Construction",
+          "builderDomain": "https://willmeng.com",
+          "currentSignal": "2025-12-31 report: Phase 1 construction was to begin in January 2026; the agreement was awarded by City Council. Scope includes plazas, restrooms, pavilions, shade structures, lighting/power infrastructure, irrigation, and a crosswalk signal.",
+          "sourceUrls": [
+            "https://www.signalsaz.com/articles/chandler-park-renovations-begin-january-2026/",
+            "https://www.chandleraz.gov/explore/chandler-parks/downtown-chandler/downtown-improvements"
+          ],
+          "apexGridFit": "High: public-site civil, irrigation, lighting/power, drainage, pedestrian and construction-administration coordination.",
+          "confidence": "High",
+          "researchSource": ".agents/outputs/az-commercial-builders-queen-creek.json"
+        }
+      ]
+    }
+  ]
+}

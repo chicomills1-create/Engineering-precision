@@ -1,0 +1,49 @@
+{
+  "research_scope": "Queen Creek and nearby southeast Valley construction candidates screened for named actual builder/general-contractor evidence.",
+  "researched_on": "2026-09-03",
+  "rejected_or_uncertain": [
+    {
+      "project": "LG Energy Solution Arizona battery manufacturing complex",
+      "location": "Ironwood Road and Pecos Road / SR 24 corridor, Queen Creek, AZ",
+      "owner_developer": "LG Energy Solution Arizona",
+      "dated_signal": "2025-04-22 report says the facility was underway and about halfway completed.",
+      "source_urls": [
+        "https://www.queencreekaz.gov/Home/Components/News/News/13041/13",
+        "https://www.azcentral.com/story/news/local/queen-creek/2025/04/22/the-lg-energy-solutions-plant-is-going-up-in-queen-creek/83143467007"
+      ],
+      "rejection_reason": "No actual general contractor/builder was identified in the reviewed official Town and current news evidence; do not infer one."
+    },
+    {
+      "project": "Amavi Queen Creek",
+      "location": "19211 S. Sossaman Road, Queen Creek, AZ",
+      "owner_developer": "Mill Creek Residential",
+      "dated_signal": "2026-01-16 — Mill Creek Residential broke ground on the 166-home rental community; first move-ins anticipated spring 2027.",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-01-16-26/",
+        "https://inbusinessphx.com/commercial-real-estate/developer-breaks-ground-on-166-home-btr-project-in-queen-creek"
+      ],
+      "rejection_reason": "Active project but reviewed evidence does not identify a builder/general contractor."
+    },
+    {
+      "project": "DSV Mesa freight and logistics facility",
+      "location": "Near Phoenix-Mesa Gateway Airport, Mesa, AZ",
+      "owner_developer": "DSV",
+      "dated_signal": "2026-01-16 — DSV was set to break ground on a 950KSF logistics facility with expected early-2027 completion.",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-01-16-26/",
+        "https://inbusinessphx.com/commercial-real-estate/groundbreaking-set-for-950k-sf-mesa-freight-facility-serving-semiconductor-industry"
+      ],
+      "rejection_reason": "No named actual builder/general contractor in reviewed evidence."
+    },
+    {
+      "project": "FALCO Aluminum manufacturing-campus Phase II",
+      "location": "1350 S. 56th St., Chandler, AZ",
+      "owner_developer": "FALCO Aluminum",
+      "dated_signal": "2026-03-13 — Primak Construction Group completed the 2.9-acre expansion and site-improvement project as CMAR.",
+      "source_urls": [
+        "https://azbex.com/local-projects/arizona-projects-03-13-26/"
+      ],
+      "rejection_reason": "Contractor is identified, but the dated source says the work was completed rather than active; excluded from an active-project list."
+    }
+  ]
+}

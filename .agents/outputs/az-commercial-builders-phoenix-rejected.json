@@ -1,0 +1,30 @@
+[
+  {
+    "project_name": "VAI Resort",
+    "location": "Glendale, AZ (Phoenix metro)",
+    "status": "rejected_uncertain",
+    "reason": "Public sources located establish design/engineering participants and the resort concept, but did not provide an authoritative, current source explicitly naming the actual general contractor. PENTA was not recorded because its role could not be verified.",
+    "source_urls_reviewed": [
+      "https://geneng.net/project/vai-resort/",
+      "https://www.prnewswire.com/news-releases/vai-resort-in-arizona-reveals-bold-architectural-and-design-vision-four-hotel-towers-1-100-rooms-and-a-white-sand-oasis-redefine-luxury-hospitality-301946411.html"
+    ]
+  },
+  {
+    "project_name": "QTS PHX2 DC5",
+    "location": "Phoenix, AZ",
+    "status": "rejected_uncertain",
+    "reason": "QTS construction start was located, but no authoritative project/owner/city/contractor source found in this pass named the actual builder/general contractor. No contractor identity was inferred from nearby market activity.",
+    "source_urls_reviewed": [
+      "https://www.datacenterdynamics.com/en/news/qts-breaks-ground-on-data-center-in-phoenix-arizona/"
+    ]
+  },
+  {
+    "project_name": "Phoenix Children's Hospital expansion",
+    "location": "Phoenix, AZ",
+    "status": "rejected_uncertain",
+    "reason": "The readily available Kitchell portfolio record is for a completed 2017 project, not a current expansion with a verified current builder identity. It was excluded rather than treating the historic construction manager as current.",
+    "source_urls_reviewed": [
+      "https://www.kitchell.com/portfolio/phoenix-childrens-hospital/"
+    ]
+  }
+]

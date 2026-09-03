@@ -1,0 +1,148 @@
+[
+  {
+    "project_name": "Phoenix Zoo Veterinary Medical Center & Quarantine Campus",
+    "location": "Phoenix, AZ",
+    "developer_or_owner": "Phoenix Zoo – Arizona Center for Nature Conservation",
+    "builder_general_contractor": "Sundt Construction, Inc.",
+    "builder_identity_status": "confirmed",
+    "current_construction_signal": "Sundt's live project page labels the project \"In Progress\" and says Sundt is providing construction management and building it at cost. The linked Zoo groundbreaking release says completion is expected in late 2026.",
+    "signal_date": "2025-06-18",
+    "authoritative_source_urls": [
+      "https://www.sundt.com/projects/phoenix-zoo-veterinary-medical-center-quarantine-campus",
+      "https://www.sundt.com/2025/construction-of-new-veterinary-medical-center-at-phoenix-zoo-underway/",
+      "https://www.phoenixzoo.org/wp-content/uploads/2025/03/Veterinary-Medical-Center-at-the-Phoenix-Zoo-Groundbreaking-FINAL.pdf"
+    ],
+    "apex_grid_fit": "High — healthcare/veterinary building with new structures, site utilities, parking, retaining walls, and substantial MEP/structural coordination.",
+    "research_notes": "Builder, owner, Phoenix location, and active status are all explicitly stated by the builder; Zoo source independently identifies Sundt support."
+  },
+  {
+    "project_name": "Cave Creek Water Reclamation Plant Rehabilitation / Pure Water Phoenix",
+    "location": "Phoenix, AZ",
+    "developer_or_owner": "City of Phoenix",
+    "builder_general_contractor": "Sundt Construction, Inc.",
+    "builder_identity_status": "confirmed",
+    "current_construction_signal": "Sundt lists this $298.9M CMAR project as \"In Progress.\" City of Phoenix says the first advanced-purified-water facility is currently under construction as part of the rehabilitation.",
+    "signal_date": "2025-05-02",
+    "authoritative_source_urls": [
+      "https://www.sundt.com/projects/city-of-phoenix-cave-creek-water-reclamation-plant-rehabilitation/",
+      "https://www.sundt.com/2025/cave-creek-project-sets-new-standard-for-water-reuse/",
+      "https://www.phoenix.gov/administration/departments/waterservices/development-infrastructure/cave-creek-plant.html",
+      "https://www.phoenix.gov/administration/departments/waterservices/water-quality/advanced-purified-water.html"
+    ],
+    "apex_grid_fit": "High — major process, civil, structural, electrical, instrumentation, and MEP-intensive public-utility rehabilitation.",
+    "research_notes": "The contractor's project page explicitly names both the City client and Sundt construction role; the City page corroborates current construction."
+  },
+  {
+    "project_name": "Terminal 3 North 2 Concourse",
+    "location": "Phoenix Sky Harbor International Airport, Phoenix, AZ",
+    "developer_or_owner": "City of Phoenix / Phoenix Sky Harbor International Airport",
+    "builder_general_contractor": "McCarthy Building Companies, Inc.",
+    "builder_identity_status": "confirmed",
+    "current_construction_signal": "Airport press release says McCarthy recently began construction; demolition/enabling work was expected to begin in April 2025 for the $326M, six-gate concourse.",
+    "signal_date": "2025-04-03",
+    "authoritative_source_urls": [
+      "https://www.skyharbor.com/about-phx/news-media/press-releases/construction-begins-on-terminal-3-north-2-concourse-at-phoenix-sky-harbor-international-airport/",
+      "https://www.mccarthy.com/insights/construction-begins-on-terminal-3-north-2-concourse-at-phoenix-sky-harbor-international"
+    ],
+    "apex_grid_fit": "High — airport vertical construction, future retail tenant build-outs, complex phased MEP, structural, and drafting coordination.",
+    "research_notes": "Owner/airport release expressly names McCarthy; McCarthy's project release supplies the same active construction signal."
+  },
+  {
+    "project_name": "Metro Tech High School Campus Transformation",
+    "location": "Northwest corner of Thomas Road and 19th Avenue, Phoenix, AZ",
+    "developer_or_owner": "Phoenix Union High School District",
+    "builder_general_contractor": "McCarthy Building Companies, Inc.",
+    "builder_identity_status": "confirmed",
+    "current_construction_signal": "Phoenix Union began construction in August 2025. McCarthy says the multi-phase renovation/new-build program is scheduled for completion ahead of the 2027–28 school year.",
+    "signal_date": "2025-08-14",
+    "authoritative_source_urls": [
+      "https://www.mccarthy.com/insights/phoenix-union-begins-construction-transformation-of-metro-tech-high-school"
+    ],
+    "apex_grid_fit": "High — 150,000+ SF renovations plus new CTE learning spaces make this a strong structural/MEP/drafting coordination opportunity.",
+    "research_notes": "McCarthy explicitly states it built the project and identifies the district, location, construction start, and delivery horizon."
+  },
+  {
+    "project_name": "GO|99 North",
+    "location": "Southwest Phoenix / 99th Avenue corridor, Phoenix, AZ",
+    "developer_or_owner": "GO Industrial",
+    "builder_general_contractor": "Willmeng Construction",
+    "builder_identity_status": "confirmed",
+    "current_construction_signal": "Willmeng's August 6, 2026 project announcement says it has begun work on the 1.1M-SF Class A warehouse/distribution facility.",
+    "signal_date": "2026-08-06",
+    "authoritative_source_urls": [
+      "https://willmeng.com/willmeng-breaks-ground-on-one-of-arizonas-largest-speculative-industrial-facilities"
+    ],
+    "apex_grid_fit": "High — million-square-foot speculative industrial shell and distribution use require civil/site, structural, electrical/MEP, and production drafting capacity.",
+    "research_notes": "Contractor's own announcement directly identifies both its role and GO Industrial as client/developer."
+  },
+  {
+    "project_name": "PHX05 Co-Location Data Center",
+    "location": "Phoenix, AZ",
+    "developer_or_owner": "Confidential",
+    "builder_general_contractor": "Sundt Construction, Inc.",
+    "builder_identity_status": "confirmed",
+    "current_construction_signal": "Sundt's project record reports a 161,000-SF, 24MW facility delivered in 2026, making it a recently completed/awarded-market signal rather than a directory listing.",
+    "signal_date": "2026",
+    "authoritative_source_urls": [
+      "https://www.sundt.com/projects/phx05-co-location-data-center/"
+    ],
+    "apex_grid_fit": "High — mission-critical data center with 12MW day-one MEP infrastructure, security-driven scope change, tilt-up structural work, and constrained-site coordination.",
+    "research_notes": "Owner is intentionally not inferred because Sundt identifies the client as confidential."
+  },
+  {
+    "project_name": "72MW Data Center (project name not publicly disclosed)",
+    "location": "Waddell, AZ (Phoenix metro)",
+    "developer_or_owner": "Not publicly named in contractor update",
+    "builder_general_contractor": "Lease Crutcher Lewis / GCON joint venture",
+    "builder_identity_status": "confirmed",
+    "current_construction_signal": "The Lewis contractor update says JV crews set the first precast panels on April 2, 2025 for the future 72MW, 445,000-SF two-story data center and will perform site work and underground utilities.",
+    "signal_date": "2025-04-02",
+    "authoritative_source_urls": [
+      "https://lewisbuilds.com/news-insights/lewis-and-gcon-set-first-panels-for-72-mw-data-center-in-phoenix-area"
+    ],
+    "apex_grid_fit": "High — large mission-critical shell, precast envelope, site/underground utilities, admin space, loading docks, and heavy MEP coordination.",
+    "research_notes": "Included as Phoenix-metro, not Phoenix proper. The builder identity is explicit; project/owner name is not guessed."
+  },
+  {
+    "project_name": "Edged Phoenix Data Center",
+    "location": "Mesa, AZ (Phoenix metro)",
+    "developer_or_owner": "Edged Energy",
+    "builder_general_contractor": "Haydon Building Corp.",
+    "builder_identity_status": "confirmed",
+    "current_construction_signal": "Edged's April 2025 topping-out event was reported as occurring with local general contractor Haydon; the 36MW facility was due online later in 2025.",
+    "signal_date": "2025-04-14",
+    "authoritative_source_urls": [
+      "https://www.datacenterdynamics.com/en/news/edged-tops-out-phoenix-data-center-in-arizona/"
+    ],
+    "apex_grid_fit": "High — 36MW data center is a strong MEP/power, structural, civil, and detailed drafting fit.",
+    "research_notes": "Included as Phoenix-metro. Builder identity comes from the documented topping-out report; no individual contacts were inferred."
+  },
+  {
+    "project_name": "Goodyear 48MW Liquid-Cooled Data Center",
+    "location": "Goodyear, AZ (Phoenix metro)",
+    "developer_or_owner": "Confidential",
+    "builder_general_contractor": "DPR Construction",
+    "builder_identity_status": "confirmed",
+    "current_construction_signal": "DPR states it is currently constructing the high-performing, liquid-cooled 48MW data center in Goodyear.",
+    "signal_date": "2025",
+    "authoritative_source_urls": [
+      "https://www.bizjournals.com/phoenix/press-release/detail/11718/DPR-Construction"
+    ],
+    "apex_grid_fit": "High — liquid-cooled mission-critical facility signals unusually strong electrical/mechanical, structural, and coordination/drafting requirements.",
+    "research_notes": "Included as Phoenix-metro. DPR did not publicly name the client in the cited construction statement, so none is assigned."
+  },
+  {
+    "project_name": "Pacific Office Automation Southwest Headquarters",
+    "location": "1400 W. 3rd Street, Tempe, AZ (Phoenix metro)",
+    "developer_or_owner": "Creation; Pacific Office Automation is the pre-leasing headquarters user",
+    "builder_general_contractor": "LGE Design Build",
+    "builder_identity_status": "confirmed",
+    "current_construction_signal": "Owner/user announcement says Creation and LGE broke ground November 17, 2025 and that LGE will act as architect and general contractor for the 75,000-SF headquarters plus a 45,000-SF speculative building.",
+    "signal_date": "2025-11-17",
+    "authoritative_source_urls": [
+      "https://www.pacificoffice.com/blog/creation-and-lge-design-build-break-ground-on-pacific-office-automation-southwest-headquarters"
+    ],
+    "apex_grid_fit": "High — ground-up industrial/office headquarters plus spec building, truck court, and utility/site coordination.",
+    "research_notes": "Included as Phoenix-metro. The tenant/user's own announcement explicitly gives LGE's general-contractor role and the precise address."
+  }
+]

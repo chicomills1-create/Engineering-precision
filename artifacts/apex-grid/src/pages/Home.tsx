@@ -354,7 +354,7 @@ export default function Home() {
             {[
               { num: "01", title: "Engineering", desc: "PE-stamped structural, commercial MEP, civil, and assessment services engineered for constructability and plan-check approval.", href: "/services/mep", cta: "Explore Engineering" },
               { num: "02", title: "Architecture", desc: "Concept, space planning, and permit-ready architectural documents coordinated directly with the engineering team.", href: "/services/architecture", cta: "Explore Architecture" },
-              { num: "03", title: "PCM Construction", desc: "Construction delivery, pre-construction planning, and field execution through Phoenix Construction & Management.", href: "/team#construction-delivery", cta: "Meet PCM" },
+              { num: "03", title: "General Contractor", desc: "Construction delivery, pre-construction planning, and field execution through our construction team.", href: "/team#construction-delivery", cta: "Explore Contracting" },
             ].map((division, i) => (
               <motion.div
                 key={division.num}

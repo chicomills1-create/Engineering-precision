@@ -1,0 +1,100 @@
+{
+  "research_scope": "Gilbert, Arizona candidate projects rejected from the qualified file because the source did not establish both a current/recent signal and an actual builder/general contractor, or because it was plainly stale. Retained to prevent unsupported assignments.",
+  "rejected_or_uncertain_results": [
+    {
+      "project_location": "Gilbert Advocacy Center Phase 1, Civic Center Drive and American Heroes Way, Gilbert, Arizona",
+      "owner_developer": "Town of Gilbert",
+      "current_signal_date": "Town page updated 2026-07-20 says 75% complete, finishes ongoing, with fall 2026 completion anticipated.",
+      "reason_rejected": "Strong active-construction signal, but the official city project page and accessible bid material reviewed do not name the Phase 1 general contractor. Do not infer it from project-management, architect, or subcontractor references.",
+      "sources": [
+        "https://www.gilbertaz.gov/departments/public-works/engineering-services/capital-improvement-projects/mf2490-advocacy-center",
+        "https://www.gilbertaz.gov/Home/Components/News/News/6212/352?arch=1"
+      ]
+    },
+    {
+      "project_location": "The Ranch, Gilbert, Arizona",
+      "owner_developer": "Crown Realty & Development / Sunbelt Investment Holdings",
+      "current_signal_date": "Final approval was reported 2025-08-07.",
+      "reason_rejected": "Entitlement/development activity is real, but no official owner, city, permit, bid, or contractor source reviewed identifies the actual general contractor. A contractor must not be guessed from developer or project publicity.",
+      "sources": [
+        "https://www.azfamily.com/2025/08/07/final-approval-given-1b-ranch-development-gilbert/",
+        "https://azbex.com/planning-development/gilbert-planning-approves-entitlements-for-the-ranch-mixed-use"
+      ]
+    },
+    {
+      "project_location": "Freestone Park Pickleball Complex and Splash Pad, Gilbert, Arizona",
+      "owner_developer": "Town of Gilbert",
+      "current_signal_date": "Town RFQ material issued in 2025 for A/E and CMAR procurement.",
+      "reason_rejected": "The reviewed sources are solicitations, not an award notice, and do not identify a selected CMAR/general contractor.",
+      "sources": [
+        "https://www.gilbertaz.gov/Home/Components/RFP/RFP/2022/1140",
+        "https://www.gilbertaz.gov/business/rfp-cip-open-bids"
+      ]
+    },
+    {
+      "project_location": "Gilbert Spectrum V / Northrop Grumman tenant build-out, 1715 W. Elliott Road, Gilbert, Arizona",
+      "owner_developer": "SunCap Property Group",
+      "current_signal_date": "2021-01-29 reporting stated Graycor had delivered the shell and was underway on tenant build-out.",
+      "reason_rejected": "General contractor is explicitly identified as Graycor Construction Company, but the construction signal is from 2021 and is not current/recent enough for the qualified list.",
+      "sources": [
+        "https://azbigmedia.com/real-estate/graycor-delivers-northrop-grumman-building-in-gilbert/"
+      ]
+    },
+    {
+      "project_location": "NOVEL Val Vista, 1727 E. Pecos Road, Gilbert, Arizona",
+      "owner_developer": "Crescent Communities",
+      "current_signal_date": "McShane announced the hire/construction start 2021-01-25.",
+      "reason_rejected": "McShane is confirmed by its official portfolio, but the available construction-start evidence is stale and no current phase or follow-on TI was verified.",
+      "sources": [
+        "https://mcshaneconstruction.com/the-busiest-that-ive-been-mcshane-construction-starts-eighth-multifamily-project-in-phoenix/",
+        "https://mcshaneconstruction.com/portfolio/novel-val-vista-square/"
+      ]
+    },
+    {
+      "project_location": "Soltra at SanTan Village, Gilbert, Arizona",
+      "owner_developer": "Leon Capital Group",
+      "current_signal_date": "McShane's official news item says it was underway in June 2020.",
+      "reason_rejected": "McShane is explicitly named, but the signal is a 2020 construction start and therefore not suitable as a current/recent lead.",
+      "sources": [
+        "https://mcshane-construction.com/kierland-apartments-coming-to-scottsdale/"
+      ]
+    },
+    {
+      "project_location": "Hampton Inn Phoenix / East Mesa, Gilbert, Arizona",
+      "owner_developer": "Not identified in the reviewed official contractor portfolio",
+      "current_signal_date": "Big-D's official hospitality portfolio identifies its Gilbert location but provides no active or recent construction date.",
+      "reason_rejected": "Big-D is supported as builder by the portfolio and a City news story, but no current/recent project timing was verified.",
+      "sources": [
+        "https://big-d.com/projects/category/hospitality-resorts",
+        "https://www.gilbertaz.gov/Home/Components/News/News/813/352"
+      ]
+    },
+    {
+      "project_location": "Earnhardt Dodge, Gilbert, Arizona",
+      "owner_developer": "Earnhardt",
+      "current_signal_date": "Big-D's official project description says Chrysler and Jeep franchises were added at the location in 2009.",
+      "reason_rejected": "Actual builder is identifiable as Big-D Construction, but the available timing is plainly historical.",
+      "sources": [
+        "https://www.big-d.com/projects/earnhardt-dodge"
+      ]
+    },
+    {
+      "project_location": "Gilbert Crossroads Business Park, Germann Road, west Gilbert, Arizona",
+      "owner_developer": "Not identified in the reviewed official builder source",
+      "current_signal_date": "Willmeng's portfolio describes Phase I as two tilt buildings totaling 139,713 square feet but provides no construction or award date.",
+      "reason_rejected": "Willmeng's role is supported by its own project page, but the missing date/current status prevents treating this as a current trigger.",
+      "sources": [
+        "https://willmeng.com/pf/gilbert-crossroads"
+      ]
+    },
+    {
+      "project_location": "Gilbert Municipal Building 1 Renovations, Gilbert, Arizona",
+      "owner_developer": "Town of Gilbert",
+      "current_signal_date": "Willmeng's official portfolio confirms the renovation scope but does not show a construction, award, or completion date.",
+      "reason_rejected": "Actual builder is identifiable as Willmeng, but no current/recent signal was verified.",
+      "sources": [
+        "https://willmeng.com/pf/gilbert-municipal-building-1-renovations"
+      ]
+    }
+  ]
+}
