@@ -104,9 +104,9 @@ function buildHotMarketSearchQuery(
   audience: ResearchAudience,
 ): string {
   const business = audience === "architect"
-    ? "\"commercial architecture firm\""
-    : "\"commercial general contractor\"";
-  const trigger = "(permitting OR \"active project\" OR construction OR expansion OR infrastructure OR bidding OR RFQ OR RFP)";
+    ? "(\"commercial architecture firm\" OR \"luxury residential architect\" OR \"high-end residential design firm\")"
+    : "(\"commercial general contractor\" OR \"luxury custom home builder\")";
+  const trigger = "(permitting OR \"active project\" OR portfolio OR \"in the works\" OR construction OR expansion OR infrastructure OR bidding OR RFQ OR RFP)";
   const contact = "(principal OR partner OR president OR preconstruction OR \"project executive\")";
   return [business, trigger, contact, STATE_NAMES[state], "-directory -yelp"].join(" ");
 }
@@ -293,13 +293,14 @@ export async function discoverPublicHotMarketProspects(input: {
         role: "system",
         content: [
           "Return strict JSON only: {\"prospects\":[...]}.",
-          "Select only commercial architecture firms or builders in the requested state and audience.",
-          "Require a specific current project, permit, expansion, infrastructure, construction, bid, RFQ, RFP, or other active need signal in the supplied results.",
+          "Select commercial architecture firms or builders, plus established luxury-residential architecture/design firms and luxury custom-home builders, in the requested state and audience.",
+          "Luxury-residential firms similar in profile to Candelaria Design Associates or Payne Cole Designs are eligible when public evidence shows a substantial current portfolio, active work, or close collaboration with builders and owners where outsourced Civil, Structural, or MEP support is a credible fit.",
+          "Require a specific current project, permit, expansion, infrastructure, construction, bid, RFQ, RFP, active/in-the-works portfolio, or other strong current need signal in the supplied results.",
           "Require a named current decision-maker or relevant leader, their exact role, and a business email visibly published in the supplied public search result text.",
           "The email must use the target company's own domain. Never guess an address, infer an address from a naming pattern, use a directory/publisher/vendor email, or call paid enrichment.",
           "Use only URLs, names, roles, email addresses, and facts present in the supplied search results. Never invent or fill missing fields.",
           "Return public evidence URLs separately: sourceUrl/projectEvidenceUrl for the need signal, contactSourceUrl for the named role, and emailSourceUrl for the published email. Each URL must be one of the supplied result URLs.",
-          "Exclude directories, aggregators, residential-only firms, vendors, competitors offering the same multidisciplinary engineering services, and ambiguous records.",
+          "Exclude directories, aggregators, ordinary residential-only firms without a strong high-value active portfolio, vendors, competitors offering the same multidisciplinary engineering services, and ambiguous records.",
           "Each item must contain companyName, website, city, state, audience, sourceUrl, projectEvidenceUrl, researchNotes, fitScore, needScore, needSignals, contactName, contactTitle, contactEmail, contactSourceUrl, emailSourceUrl.",
           "Scores are integers from 0 to 100. Return only candidates with needScore >= 75 and fitScore >= 70. Return at most 10.",
         ].join(" "),

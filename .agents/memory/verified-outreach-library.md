@@ -37,11 +37,11 @@ The daily operating baseline is 200 new eligible recipients at 8:00 AM America/P
 
 **How to apply:** Keep operational contact data in the database/register with verification, approval, source, urgency lane, and suppression state. Use FindyMail for enrichment and verification without guessing addresses. Use durable scheduled execution or an always-running worker for the 8:00 AM trigger; an autoscaling in-process interval is not sufficient.
 
-National Hot Market replenishment must prefer zero-credit public evidence and accept honest shortfalls. Require a current project/permit/expansion/infrastructure/construction signal, a named relevant role, and a visibly published company-domain email before automatic approval.
+National Hot Market replenishment must prefer zero-credit public evidence and accept honest shortfalls. Include established luxury-residential architecture/design firms and custom-home builders with substantial active portfolios and builder/owner collaboration, such as the profile represented by Candelaria Design Associates and Payne Cole Designs. Otherwise require a current project/permit/expansion/infrastructure/construction signal. Every record still requires a named relevant role and a visibly published company-domain email before automatic approval.
 
 **Why:** Combining broad market discovery with guessed or weakly attributed contact data would fill the lane numerically while violating the verification standard and risking misdirected outreach.
 
-**How to apply:** Search Arizona first, California second, then rotate through the remaining licensed states. Keep builder and architect copy lanes separate, skip incomplete or duplicate records, and leave unused slots empty rather than lowering evidence requirements.
+**How to apply:** Search Arizona first, California second, then rotate through the remaining licensed states. Treat high-end residential architecture/design and luxury custom-home firms as Hot Market when their current portfolio indicates recurring engineering coordination opportunities. Keep builder and architect copy lanes separate, skip incomplete or duplicate records, and leave unused slots empty rather than lowering contact-evidence requirements.
 
 Run FindyMail name/domain enrichment in small paced batches and retry only explicit rate-limit responses. A successful HTTP response without a returned email is a legitimate no-result, not a reason to try another person.
 
