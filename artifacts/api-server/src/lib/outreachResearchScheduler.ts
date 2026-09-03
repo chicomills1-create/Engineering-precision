@@ -16,6 +16,11 @@ import {
   type ResearchAudience,
   type ResearchState,
 } from "./publicResearch";
+import {
+  getHotMarketResearchStates,
+  isRecurringHotMarketCampaign,
+  isResearchState,
+} from "./hotMarketResearch";
 
 export const OUTREACH_RESEARCH_TIMEZONE = "America/Phoenix";
 export const OUTREACH_RESEARCH_LOCAL_HOUR = 8;
@@ -59,11 +64,12 @@ export function getDailyResearchTarget(scheduleTarget: number, campaignLimit: nu
 }
 
 function validStates(states: string[]): ResearchState[] {
-  return states.filter((state): state is ResearchState => ["AZ", "CA", "TX"].includes(state));
+  return states.filter(isResearchState);
 }
 
-function validAudience(audience: string): ResearchAudience {
-  if (audience === "architect" || audience === "builder") return audience;
+function validAudiences(audience: string): ResearchAudience[] {
+  if (audience === "mixed") return ["architect", "builder"];
+  if (audience === "architect" || audience === "builder") return [audience];
   throw new Error(`Unsupported campaign audience: ${audience}`);
 }
 
@@ -80,15 +86,19 @@ async function completeScheduledResearch(
   schedule: ResearchSchedule,
   campaign: Campaign,
   scheduleRunId: number,
+  runDate: string,
 ): Promise<void> {
-  const states = validStates(campaign.states);
+  const hotMarket = isRecurringHotMarketCampaign(campaign);
+  const states = hotMarket
+    ? getHotMarketResearchStates(runDate)
+    : validStates(campaign.states);
   if (states.length === 0) throw new Error("Campaign has no supported target states");
 
-  const audience = validAudience(campaign.audience);
+  const audiences = validAudiences(campaign.audience);
   const [researchRun] = await db.insert(outreachResearchRunsTable).values({
     campaignId: campaign.id,
     state: states.join(","),
-    audience,
+    audience: campaign.audience,
     query: `Scheduled research for ${campaign.name}`,
     status: "running",
   }).returning();
@@ -97,7 +107,13 @@ async function completeScheduledResearch(
   try {
     const discoveries = [];
     for (const state of states) {
-      discoveries.push(await discoverPublicProspects({ state, audience }));
+      for (const audience of audiences) {
+        discoveries.push(await discoverPublicProspects({
+          state,
+          audience,
+          mode: hotMarket ? "hot_market" : "regular",
+        }));
+      }
     }
 
     const queries = discoveries.map((discovery) => discovery.query);
@@ -116,6 +132,9 @@ async function completeScheduledResearch(
       ? []
       : await db.insert(prospectsTable).values(newCandidates.map((candidate) => ({
         ...candidate,
+        researchNotes: hotMarket
+          ? `Hot-market candidate requiring contact and email verification. ${candidate.researchNotes}`
+          : candidate.researchNotes,
         campaignId: campaign.id,
         researchRunId: researchRun.id,
         status: "review",
@@ -199,7 +218,7 @@ export async function processDueOutreachResearchSchedules(now = new Date()): Pro
     if (!claimed) continue;
 
     try {
-      await completeScheduledResearch(schedule, campaign, claimed.id);
+      await completeScheduledResearch(schedule, campaign, claimed.id, runDate);
       completed += 1;
     } catch (error) {
       logger.error({ err: error, scheduleId: schedule.id }, "Scheduled outreach research run failed");

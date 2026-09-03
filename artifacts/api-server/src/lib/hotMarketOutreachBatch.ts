@@ -107,7 +107,7 @@ export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts
 
 export function hotMarketOutreachSubject(audience = "builder"): string {
   return audience === "architect"
-    ? "A reliable engineering partner for Arizona projects"
+    ? "A reliable engineering partner for active projects"
     : SUBJECT;
 }
 
@@ -164,7 +164,7 @@ export function hotMarketOutreachFollowUps(
         subject: `Re: ${subject}`,
         body: `Hi ${firstName},
 
-Following up in case one of your Arizona projects needs added civil/site, drainage, utility, structural, MEP, or permit-response capacity. Apex Grid can support the technical scope while your team retains the client and design relationship.
+Following up in case one of your current projects needs added civil/site, drainage, utility, structural, MEP, or permit-response capacity. Apex Grid can support the technical scope while your team retains the client and design relationship.
 
 Do you have any current projects in your pipeline that you would like us to review?`,
       },
@@ -182,7 +182,7 @@ Would it be useful for us to review a current project and outline the fastest pr
         subject: `Re: ${subject}`,
         body: `Hi ${firstName},
 
-I’ll close the loop after this note. Apex Grid is available as a veteran-owned, PE-led engineering partner when an Arizona project needs additional technical capacity without disrupting your client relationship.
+I’ll close the loop after this note. Apex Grid is available as a veteran-owned, PE-led engineering partner when a project needs additional technical capacity without disrupting your client relationship.
 
 If a project comes up that you would like us to review, reply with the basic details and we will take a look.`,
       },

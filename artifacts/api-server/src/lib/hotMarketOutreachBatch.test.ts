@@ -53,7 +53,7 @@ test("hot-market referral partners receive relationship-focused copy", () => {
   const body = hotMarketOutreachBody(partner);
   assert.equal(
     hotMarketOutreachSubject(partner.audience),
-    "A reliable engineering partner for Arizona projects",
+    "A reliable engineering partner for active projects",
   );
   assert.match(body, /work alongside architects and design teams/);
   assert.match(body, /without taking over the client relationship/);

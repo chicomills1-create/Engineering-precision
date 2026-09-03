@@ -83,9 +83,6 @@ export const outreachResearchSchedulesTable = pgTable("outreach_research_schedul
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
 }, (table) => [
   uniqueIndex("outreach_research_schedules_campaign_unique").on(table.campaignId),
-  uniqueIndex("outreach_research_schedules_enabled_singleton")
-    .on(sql`((1))`)
-    .where(sql`${table.enabled} = true`),
 ]);
 
 export const outreachResearchScheduleRunsTable = pgTable("outreach_research_schedule_runs", {
@@ -100,7 +97,8 @@ export const outreachResearchScheduleRunsTable = pgTable("outreach_research_sche
   startedAt: timestamp("started_at", { withTimezone: true }).notNull().defaultNow(),
   completedAt: timestamp("completed_at", { withTimezone: true }),
 }, (table) => [
-  uniqueIndex("outreach_research_schedule_runs_date_unique").on(table.runDate),
+  uniqueIndex("outreach_research_schedule_runs_schedule_date_unique")
+    .on(table.scheduleId, table.runDate),
 ]);
 
 export const outreachPreparationRunsTable = pgTable("outreach_preparation_runs", {

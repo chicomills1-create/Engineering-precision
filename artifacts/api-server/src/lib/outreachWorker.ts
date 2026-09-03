@@ -20,6 +20,8 @@ import {
   syncSendGridInboundReplyWebhook,
 } from "./outreachEvents";
 import { processDueOutreachResearchSchedules } from "./outreachResearchScheduler";
+import { ensureRecurringHotMarketResearchSchedule } from "./hotMarketResearch";
+import { prepareNextPhoenixHotMarketOutreach } from "./hotMarketPreparation";
 import { prepareNextPhoenixOutreach } from "./outreachPreparation";
 import {
   reconcileUncertainOutreachMessages,
@@ -304,6 +306,12 @@ export function startOutreachWorker(): void {
           } else if (preparation.state === "failed") {
             logger.error(preparation, "Next Phoenix outreach preparation failed");
           }
+          const hotMarketPreparation = await prepareNextPhoenixHotMarketOutreach();
+          if (hotMarketPreparation.state === "completed") {
+            logger.info(hotMarketPreparation, "Prepared next Phoenix hot-market window");
+          } else if (hotMarketPreparation.state === "failed") {
+            logger.error(hotMarketPreparation, "Next Phoenix hot-market preparation failed");
+          }
         })
         .catch((err: unknown) => logger.error({ err }, "Outreach production scheduler failed"));
     });
@@ -315,7 +323,8 @@ export function startOutreachWorker(): void {
 
   if (status.researchAutomationReady) {
     const runResearch = () => {
-      void processDueOutreachResearchSchedules()
+      void ensureRecurringHotMarketResearchSchedule()
+        .then(() => processDueOutreachResearchSchedules())
         .then((completedCount) => {
           if (completedCount > 0) {
             logger.info({ completedCount }, "Prepared scheduled outreach research lists");

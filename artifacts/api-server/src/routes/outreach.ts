@@ -422,14 +422,7 @@ router.put("/outreach/campaigns/:id/research-schedule", requireAuth, async (req,
     MAX_DAILY_RESEARCH_PROSPECTS,
     Math.max(1, input.data.targetCount ?? campaign.dailyLimit),
   );
-  const [schedule] = await db.transaction(async (tx) => {
-    if (input.data.enabled) {
-      await tx.update(outreachResearchSchedulesTable).set({
-        enabled: false,
-        updatedAt: new Date(),
-      }).where(eq(outreachResearchSchedulesTable.enabled, true));
-    }
-    return tx.insert(outreachResearchSchedulesTable).values({
+  const [schedule] = await db.insert(outreachResearchSchedulesTable).values({
       campaignId: campaign.id,
       enabled: input.data.enabled,
       timezone: OUTREACH_RESEARCH_TIMEZONE,
@@ -445,7 +438,6 @@ router.put("/outreach/campaigns/:id/research-schedule", requireAuth, async (req,
         updatedAt: new Date(),
       },
     }).returning();
-  });
   const [latestRun] = await db.select().from(outreachResearchScheduleRunsTable)
     .where(eq(outreachResearchScheduleRunsTable.scheduleId, schedule!.id))
     .orderBy(desc(outreachResearchScheduleRunsTable.startedAt))

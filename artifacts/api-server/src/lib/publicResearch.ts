@@ -2,7 +2,13 @@ import { createHash } from "node:crypto";
 import { openai } from "@workspace/integrations-openai-ai-server";
 
 export type ResearchAudience = "architect" | "builder";
-export type ResearchState = "AZ" | "CA" | "TX";
+export type ResearchState =
+  | "AL" | "AZ" | "AR" | "CA" | "CO" | "CT" | "DE" | "FL" | "GA" | "HI"
+  | "ID" | "IL" | "IN" | "IA" | "KS" | "KY" | "LA" | "ME" | "MD" | "MA"
+  | "MI" | "MN" | "MS" | "MO" | "MT" | "NE" | "NV" | "NH" | "NJ" | "NM"
+  | "NY" | "NC" | "ND" | "OH" | "OK" | "OR" | "PA" | "RI" | "SC" | "SD"
+  | "TN" | "TX" | "UT" | "VT" | "VA" | "WA" | "WV" | "WI" | "WY";
+export type ResearchMode = "regular" | "hot_market";
 
 export type DiscoveredProspect = {
   companyName: string;
@@ -25,9 +31,55 @@ type SearchResult = {
 };
 
 const STATE_NAMES: Record<ResearchState, string> = {
+  AL: "Alabama",
   AZ: "Arizona",
+  AR: "Arkansas",
   CA: "California",
+  CO: "Colorado",
+  CT: "Connecticut",
+  DE: "Delaware",
+  FL: "Florida",
+  GA: "Georgia",
+  HI: "Hawaii",
+  ID: "Idaho",
+  IL: "Illinois",
+  IN: "Indiana",
+  IA: "Iowa",
+  KS: "Kansas",
+  KY: "Kentucky",
+  LA: "Louisiana",
+  ME: "Maine",
+  MD: "Maryland",
+  MA: "Massachusetts",
+  MI: "Michigan",
+  MN: "Minnesota",
+  MS: "Mississippi",
+  MO: "Missouri",
+  MT: "Montana",
+  NE: "Nebraska",
+  NV: "Nevada",
+  NH: "New Hampshire",
+  NJ: "New Jersey",
+  NM: "New Mexico",
+  NY: "New York",
+  NC: "North Carolina",
+  ND: "North Dakota",
+  OH: "Ohio",
+  OK: "Oklahoma",
+  OR: "Oregon",
+  PA: "Pennsylvania",
+  RI: "Rhode Island",
+  SC: "South Carolina",
+  SD: "South Dakota",
+  TN: "Tennessee",
   TX: "Texas",
+  UT: "Utah",
+  VT: "Vermont",
+  VA: "Virginia",
+  WA: "Washington",
+  WV: "West Virginia",
+  WI: "Wisconsin",
+  WY: "Wyoming",
 };
 
 function decodeHtml(value: string): string {
@@ -65,14 +117,25 @@ function parseSearchResults(html: string): SearchResult[] {
   })).filter((result) => result.title && result.url.startsWith("http"));
 }
 
-function buildSearchQuery(state: ResearchState, audience: ResearchAudience, extra?: string): string {
+function buildSearchQuery(
+  state: ResearchState,
+  audience: ResearchAudience,
+  mode: ResearchMode,
+  extra?: string,
+): string {
   const business = audience === "architect"
     ? "\"commercial architecture firm\""
     : "\"commercial general contractor\"";
-  const intent = audience === "architect"
+  const regularIntent = audience === "architect"
     ? "(\"request for qualifications\" OR \"seeking consultants\" OR hiring OR \"new project\")"
     : "(bidding OR preconstruction OR \"design-build\" OR hiring OR \"new project\")";
-  return [business, intent, STATE_NAMES[state], extra?.trim()].filter(Boolean).join(" ");
+  const hotMarketIntent = "(awarded OR groundbreaking OR expansion OR permit OR preconstruction OR bidding OR RFQ OR RFP OR \"new project\" OR \"under construction\")";
+  return [
+    business,
+    mode === "hot_market" ? hotMarketIntent : regularIntent,
+    STATE_NAMES[state],
+    extra?.trim(),
+  ].filter(Boolean).join(" ");
 }
 
 async function searchPublicWeb(query: string): Promise<SearchResult[]> {
@@ -95,7 +158,7 @@ function isCandidate(value: unknown): value is Omit<DiscoveredProspect, "dedupeK
   return typeof candidate.companyName === "string"
     && typeof candidate.website === "string"
     && typeof candidate.city === "string"
-    && ["AZ", "CA", "TX"].includes(String(candidate.state))
+    && Object.hasOwn(STATE_NAMES, String(candidate.state))
     && ["architect", "builder"].includes(String(candidate.audience))
     && typeof candidate.sourceUrl === "string"
     && typeof candidate.researchNotes === "string"
@@ -119,9 +182,11 @@ function makeDedupeKey(companyName: string, website: string): string {
 export async function discoverPublicProspects(input: {
   state: ResearchState;
   audience: ResearchAudience;
+  mode?: ResearchMode;
   query?: string;
 }): Promise<{ query: string; prospects: DiscoveredProspect[] }> {
-  const query = buildSearchQuery(input.state, input.audience, input.query);
+  const mode = input.mode ?? "regular";
+  const query = buildSearchQuery(input.state, input.audience, mode, input.query);
   const results = await searchPublicWeb(query);
   if (results.length === 0) return { query, prospects: [] };
 
@@ -137,6 +202,9 @@ export async function discoverPublicProspects(input: {
           "Select only commercial architecture firms or builders that match the requested state and audience.",
           "The purpose is to identify companies with credible current need for outsourced structural, MEP, civil, PE-stamping, Title 24, plan-check, or related design support.",
           "Require a need signal in the supplied title/snippet, such as active projects, bidding, RFQ/RFP, consultant demand, preconstruction activity, rapid growth, or a relevant staffing gap.",
+          mode === "hot_market"
+            ? "This is a hot-market search. Require a current, concrete urgency signal such as a newly awarded or announced project, groundbreaking, active permit, expansion, bid, RFQ/RFP, or documented construction activity. Generic capability pages and old portfolio work do not qualify."
+            : "This is regular prospect research; current need evidence is still required.",
           "Exclude directories, aggregators, residential-only firms, vendors, competitors offering the same multidisciplinary engineering services, and companies with no evidence of current need.",
           "Use only URLs and facts present in the supplied search results. Never invent a company, contact, project, location, email, or claim.",
           "Do not return personal contacts or email addresses.",
