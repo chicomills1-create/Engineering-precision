@@ -1,0 +1,56 @@
+{
+  "researchedOn": "2026-09-03",
+  "scope": "Requested Arizona commercial-builder targets rejected under the requirement for project evidence, a current relevant Arizona/local official-company decision-maker, and a suitable public official-domain email. No email was guessed or inferred.",
+  "rejectedRecords": 4,
+  "records": [
+    {
+      "companyName": "DPR Construction",
+      "project": "Goodyear 48MW Liquid-Cooled Data Center",
+      "projectSourceUrl": "https://www.bizjournals.com/phoenix/press-release/detail/11718/DPR-Construction",
+      "projectEvidence": "DPR states it is currently constructing the high-performing, liquid-cooled 48MW data center in Goodyear.",
+      "officialDecisionMaker": "Gretchen Kinsella, Southwest Self-Perform Work Leader, Phoenix, AZ",
+      "contactSourceUrl": "https://www.dpr.com/company/leadership/gretchen-kinsella",
+      "emailEvidenceCheckedUrl": "https://www.dpr.com/press-room",
+      "rejectionReason": "Rejected: DPR's official press-room email is pr@dpr.com, a media address expressly excluded by the task. No suitable public official-domain email for an Arizona/local decision-maker was located on the official pages checked.",
+      "personalizationSentence": "DPR's active 48MW liquid-cooled Goodyear data center would otherwise be a highly relevant mission-critical coordination opportunity."
+    },
+    {
+      "companyName": "Haydon Building Corp.",
+      "project": "Edged Phoenix Data Center",
+      "projectSourceUrl": "https://www.datacenterdynamics.com/en/news/edged-tops-out-phoenix-data-center-in-arizona/",
+      "projectEvidence": "The April 2025 report identifies local general contractor Haydon at the topping-out of the 36MW Mesa data center.",
+      "contactSourceUrl": "https://haydon.com/",
+      "emailEvidenceCheckedUrl": "https://haydon.com/employee-portal",
+      "rejectionReason": "Rejected: the official material checked exposed payroll@haydon.com and hr@haydon.com only; those are payroll/HR addresses, not suitable outreach contacts. No relevant named current Arizona/local decision-maker paired with a suitable public email was found.",
+      "personalizationSentence": "Haydon's role on the 36MW Edged Phoenix data center makes its Arizona mission-critical work relevant, but the public-contact requirement was not met."
+    },
+    {
+      "companyName": "CORE Construction",
+      "project": "Hartford Sylvia Encinas Elementary School rebuild",
+      "projectSourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-01-30-26/",
+        "https://www.chandlernews.com/arizonan/citynews/chandler-unified-prepares-to-start-hartford-project/article_54889538-1700-4adf-92c8-7b6d9b3eb60a.html"
+      ],
+      "projectEvidence": "Construction on the approximately $42M Chandler replacement campus was set to start in February 2026, with completion scheduled for January 2028.",
+      "officialDecisionMaker": "Todd Steffen, President of CORE's Arizona Operations",
+      "contactSourceUrl": "https://coreconstruction.com/news/todd-steffen-has-been-named-one-of-the-50-most-powerful-people-in-arizona-business-for-2025",
+      "emailEvidenceCheckedUrl": "https://coreconstruction.com/careers",
+      "rejectionReason": "Rejected: CORE's official site identifies the Arizona operations leader, but the official pages checked do not display a suitable public contact email. The careers-page domain notice is not a public outreach address.",
+      "personalizationSentence": "CORE's scheduled Hartford Sylvia Encinas Elementary rebuild in Chandler would otherwise be a strong campus utilities, site, and construction-phase engineering conversation."
+    },
+    {
+      "companyName": "Lease Crutcher Lewis / GCON joint venture",
+      "project": "72MW Data Center (project name not publicly disclosed)",
+      "projectSourceUrl": "https://lewisbuilds.com/news-insights/lewis-and-gcon-set-first-panels-for-72-mw-data-center-in-phoenix-area",
+      "projectEvidence": "The official Lewis update says JV crews set first precast panels on April 2, 2025 for the future 72MW, 445,000-SF Waddell data center and will perform site work and underground utilities.",
+      "officialDecisionMaker": "Gabe Gavriilidis, VP | Mission Critical, GCON",
+      "contactSourceUrl": "https://gconinc.com/our-team/senior-leadership/",
+      "emailEvidenceCheckedUrls": [
+        "https://gconinc.com/contact",
+        "https://lewisbuilds.com/contact"
+      ],
+      "rejectionReason": "Rejected: the official GCON contact page provides a form and phone rather than a public email, while Lewis's published addresses are general-inquiries or public-relations inboxes and do not establish a direct public email route to the named Arizona JV decision-maker. The joint venture therefore does not meet all contact requirements.",
+      "personalizationSentence": "The JV's Waddell 72MW data center—already moving into precast, site-work, and underground-utilities execution—would otherwise be an unusually relevant mission-critical prospect."
+    }
+  ]
+}

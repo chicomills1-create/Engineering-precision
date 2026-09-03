@@ -19,6 +19,7 @@ import {
   approvedOutreachSubject,
 } from "./verifiedOutreachBatch";
 import { ensureApprovedFollowUpSequence } from "./outreachSequence";
+import { HOT_MARKET_SOURCE_TYPE } from "./hotMarketOutreachBatch";
 export const OUTREACH_PERSONAL_PREPARATION_TARGET = 150;
 export const OUTREACH_PUBLIC_PREPARATION_TARGET = 50;
 export const OUTREACH_PREPARATION_TARGET =
@@ -402,6 +403,7 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
         state: prospectsTable.state,
         fitScore: prospectsTable.fitScore,
         needScore: prospectsTable.needScore,
+        sourceType: outreachMessagesTable.sourceType,
       })
         .from(outreachMessagesTable)
         .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
@@ -411,32 +413,35 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
           lt(outreachMessagesTable.scheduledAt, targetEnd),
           inArray(outreachMessagesTable.status, ["approved", "sending"]),
         ));
+      const regularTargetInitials = currentTargetInitials.filter(
+        (message) => message.sourceType !== HOT_MARKET_SOURCE_TYPE,
+      );
       const slottedMessageIds = new Set(existingSlots.flatMap((row) => row.messageId ? [row.messageId] : []));
-      const untrackedTargetInitials = currentTargetInitials.filter((message) => !slottedMessageIds.has(message.id));
+      const untrackedTargetInitials = regularTargetInitials.filter((message) => !slottedMessageIds.has(message.id));
       const usedSlots = new Set(existingSlots.map((row) => row.slot));
       const usedProspects = new Set([
         ...existingSlots.map((row) => row.prospectId),
-        ...currentTargetInitials.map((row) => row.prospectId),
+        ...regularTargetInitials.map((row) => row.prospectId),
       ]);
       const remainingCapacity = getPreparationRemainingCapacity(
         existingSlots.length,
         untrackedTargetInitials.length,
       );
-      const existingPublicCount = currentTargetInitials.filter((candidate) => isPublicInbox(
+      const existingPublicCount = regularTargetInitials.filter((candidate) => isPublicInbox(
         candidate.contactEmail,
         candidate.contactName,
         candidate.contactEvidenceType,
       )).length;
-      const existingPersonalCount = currentTargetInitials.length - existingPublicCount;
+      const existingPersonalCount = regularTargetInitials.length - existingPublicCount;
       const selected = selectUniquePreparationCandidates(
         eligible.map((row) => row.prospect),
         {
           personalCap: OUTREACH_PERSONAL_PREPARATION_TARGET - existingPersonalCount,
           publicCap: OUTREACH_PUBLIC_PREPARATION_TARGET - existingPublicCount,
-          usedEmails: currentTargetInitials.flatMap((candidate) =>
+          usedEmails: regularTargetInitials.flatMap((candidate) =>
             candidate.contactEmail ? [candidate.contactEmail] : []
           ),
-          usedDomains: currentTargetInitials.map(companyDomain),
+          usedDomains: regularTargetInitials.map(companyDomain),
         },
       );
       const availableSlots = Array.from(

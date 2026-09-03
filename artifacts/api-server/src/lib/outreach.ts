@@ -63,6 +63,8 @@ export function isDefinitiveSendGridRejection(status: number): boolean {
 const INITIAL_RAMP_DAILY_LIMIT = 200;
 const INITIAL_RAMP_ACTIVE_DAYS = 3;
 const OUTREACH_MONTHLY_LIMIT = 6000;
+const ONE_TIME_HOT_MARKET_DATE = "2026-09-03";
+const ONE_TIME_HOT_MARKET_GLOBAL_LIMIT = 250;
 const DUPLICATE_EMAIL_SEQUENCE_STATUSES = [
   "sending",
   "needs_review",
@@ -120,6 +122,12 @@ export function getOutreachMonthlyLimit(): number {
   return OUTREACH_MONTHLY_LIMIT;
 }
 
+export function getGlobalOutreachDailyLimit(date = new Date()): number {
+  return phoenixDateKey(date) === ONE_TIME_HOT_MARKET_DATE
+    ? ONE_TIME_HOT_MARKET_GLOBAL_LIMIT
+    : INITIAL_RAMP_DAILY_LIMIT;
+}
+
 export function isDuplicateEmailSequenceStatus(status: string): boolean {
   return (DUPLICATE_EMAIL_SEQUENCE_STATUSES as readonly string[]).includes(status);
 }
@@ -154,11 +162,12 @@ async function reserveOutreachSend(
   campaign: Campaign | undefined,
   normalizedEmail: string,
 ): Promise<OutreachReservationIds> {
-  const dateKey = phoenixDateKey();
-  const monthKey = getPhoenixOutreachMonthKey();
+  const now = new Date();
+  const dateKey = phoenixDateKey(now);
+  const monthKey = getPhoenixOutreachMonthKey(now);
   const dailyQuotaKey = `outreach-global:${dateKey}`;
   const monthlyQuotaKey = `outreach-global:${monthKey}`;
-  const dayStart = getPhoenixCalendarDayStart();
+  const dayStart = getPhoenixCalendarDayStart(now);
   const monthStart = new Date(`${monthKey}-01T07:00:00.000Z`);
   return db.transaction(async (tx) => {
     await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${normalizedEmail}, 0))`);
@@ -255,7 +264,7 @@ async function reserveOutreachSend(
       globallyReservedSent?.value ?? 0,
     );
     let dailyReservationId: number | undefined;
-    for (let slot = legacySent + 1; slot <= INITIAL_RAMP_DAILY_LIMIT; slot += 1) {
+    for (let slot = legacySent + 1; slot <= getGlobalOutreachDailyLimit(now); slot += 1) {
       const [inserted] = await tx.insert(outreachSendReservationsTable)
         .values({ messageId: message.id, quotaKey: dailyQuotaKey, slot })
         .onConflictDoNothing()

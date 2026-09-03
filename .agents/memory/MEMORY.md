@@ -30,3 +30,4 @@
 - [SEO corpus audit scaling](seo-corpus-audit-scaling.md) — full-corpus audits must stream metadata and links, never retain every generated HTML document; GSC property totals require a no-dimension query.
 - [LinkedIn approval boundary](linkedin-approval-boundary.md) — LinkedIn stays manual-only; resolve suppressions through linked signals and serialize global daily quotas before status transitions.
 - [Outreach seed startup](outreach-seed-startup.md) — idempotent backfills must skip existing contacts and never block the send scheduler during production startup.
+- [State outreach rollout](state-outreach-rollout.md) — research Arizona first, California next, then other licensed states; Apex Grid covers every state except Alaska.

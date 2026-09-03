@@ -1,0 +1,53 @@
+[
+  {
+    "companyName": "Peak One Builders",
+    "website": "https://peakonebuilders.com/",
+    "city": "Scottsdale",
+    "state": "AZ",
+    "audience": "Luxury custom-home builder owner",
+    "contactName": "Michael Christensen",
+    "contactTitle": "Owner",
+    "contactEmail": null,
+    "companySourceUrl": "https://peakonebuilders.com/",
+    "needSignalSourceUrl": "https://peakonebuilders.com/",
+    "contactSourceUrl": "https://peakonebuilders.com/team",
+    "emailSourceUrl": "https://peakonebuilders.com/contact/",
+    "needSignals": "The official home page currently markets luxury custom homes and high-end remodeling in Scottsdale, Phoenix, Sedona, and surrounding Arizona communities.",
+    "personalizationSentence": null,
+    "rejectionReason": "Rejected: the official site identifies the owner and has a current custom-home signal, but its official contact route is a form/phone only; no visibly published @peakonebuilders.com email was verified."
+  },
+  {
+    "companyName": "Cullum Homes",
+    "website": "https://cullumhomes.com/",
+    "city": "Scottsdale",
+    "state": "AZ",
+    "audience": "Luxury custom-home builder founder",
+    "contactName": "Rod Cullum",
+    "contactTitle": "Founder",
+    "contactEmail": null,
+    "companySourceUrl": "https://cullumhomes.com/",
+    "needSignalSourceUrl": "https://cullumhomes.com/available-homes/",
+    "contactSourceUrl": "https://cullumhomes.com/about",
+    "emailSourceUrl": "https://cullumhomes.com/",
+    "needSignals": "The official available-homes page currently presents move-in-ready for-sale models built through Cullum’s custom-home process.",
+    "personalizationSentence": null,
+    "rejectionReason": "Rejected: official pages verify the company, current projects, and founder leadership, but the official site provides an inquiry form rather than a visibly published company-domain email. Third-party listings were not used."
+  },
+  {
+    "companyName": "UR Development",
+    "website": "https://urdevelopment.com/",
+    "city": "Phoenix",
+    "state": "AZ",
+    "audience": "Luxury home-development CEO",
+    "contactName": "Angel Ureta",
+    "contactTitle": "CEO",
+    "contactEmail": null,
+    "companySourceUrl": "https://urdevelopment.com/",
+    "needSignalSourceUrl": "https://urdevelopment.com/upcoming-projects/",
+    "contactSourceUrl": "https://urdevelopment.com/about-us",
+    "emailSourceUrl": "https://urdevelopment.com/contact-us/",
+    "needSignals": "The official upcoming-projects page lists multiple Paradise Valley high-end homes in planning and design, including Gold Manor, Caliza, and Maverick.",
+    "personalizationSentence": null,
+    "rejectionReason": "Rejected: official pages verify CEO leadership and active project planning, but the official contact page provides a form without a visibly published @urdevelopment.com email. An email shown elsewhere as @urinvestments.com is not the requested company-domain email."
+  }
+]

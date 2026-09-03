@@ -1,0 +1,95 @@
+{
+  "researchedOn": "2026-09-03",
+  "scope": "Outreach-ready verification of the requested Arizona commercial builders. A record is included only where current Arizona project evidence, an official-company current Arizona/local decision-maker, and a public official-domain email were all located.",
+  "qualifiedRecords": 4,
+  "records": [
+    {
+      "companyName": "Sundt Construction",
+      "website": "https://www.sundt.com/",
+      "city": "Tempe",
+      "state": "AZ",
+      "audience": "builder",
+      "contactName": "Travis McCarthy",
+      "contactTitle": "SVP, Southwest District Manager",
+      "contactEmail": "tjmccarthy@sundt.com",
+      "emailLane": "public",
+      "project": "Cave Creek Water Reclamation Plant Rehabilitation / Pure Water Phoenix",
+      "projectLocation": "Phoenix, AZ",
+      "projectEvidence": "Sundt lists the $298.9M CMAR project as In Progress, and the City of Phoenix says the first advanced-purified-water facility is currently under construction.",
+      "projectSourceUrls": [
+        "https://www.sundt.com/projects/city-of-phoenix-cave-creek-water-reclamation-plant-rehabilitation/",
+        "https://www.phoenix.gov/administration/departments/waterservices/development-infrastructure/cave-creek-plant.html"
+      ],
+      "contactSourceUrl": "https://www.sundt.com/about-sundt/regions/arizona",
+      "emailSourceUrl": "https://www.sundt.com/about-sundt/regions/arizona",
+      "personalizationSentence": "I noticed Sundt is advancing the Cave Creek Water Reclamation Plant rehabilitation and Pure Water Phoenix facility, a major Arizona utility effort with extensive process, civil, electrical, and coordination demands.",
+      "approvalStatus": "pending_manual_approval"
+    },
+    {
+      "companyName": "McCarthy Building Companies, Inc.",
+      "website": "https://www.mccarthy.com/",
+      "city": "Phoenix",
+      "state": "AZ",
+      "audience": "builder",
+      "contactName": "Mike Gonzalez",
+      "contactTitle": "Vice President",
+      "contactEmail": "MGonzalez@mccarthy.com",
+      "emailLane": "public",
+      "project": "Terminal 3 North 2 Concourse",
+      "projectLocation": "Phoenix Sky Harbor International Airport, Phoenix, AZ",
+      "projectEvidence": "Phoenix Sky Harbor and McCarthy report that McCarthy began work on the $326M six-gate Terminal 3 North 2 Concourse, with demolition and enabling work beginning in April 2025.",
+      "projectSourceUrls": [
+        "https://www.skyharbor.com/about-phx/news-media/press-releases/construction-begins-on-terminal-3-north-2-concourse-at-phoenix-sky-harbor-international-airport/",
+        "https://www.mccarthy.com/insights/construction-begins-on-terminal-3-north-2-concourse-at-phoenix-sky-harbor-international"
+      ],
+      "contactSourceUrl": "https://www.mccarthy.com/locations/phoenix",
+      "emailSourceUrl": "https://www.mccarthy.com/locations/phoenix",
+      "personalizationSentence": "The Terminal 3 North 2 Concourse work at Sky Harbor stood out as a complex active Phoenix aviation project where phased MEP, structural, and construction coordination are especially consequential.",
+      "approvalStatus": "pending_manual_approval"
+    },
+    {
+      "companyName": "The Weitz Company",
+      "website": "https://www.weitz.com/",
+      "city": "Phoenix",
+      "state": "AZ",
+      "audience": "builder",
+      "contactName": "Frank DAscanio",
+      "contactTitle": "Vice President and General Manager, Arizona Office and Commercial Team",
+      "contactEmail": "Frank.DAscanio@weitz.com",
+      "emailLane": "public",
+      "project": "Mesa Gateway Airport checked-baggage improvements",
+      "projectLocation": "Phoenix-Mesa Gateway Airport, Mesa, AZ",
+      "projectEvidence": "The current project research reports the 10KSF–12KSF in-line checked-baggage improvement project recently topped out and will improve baggage handling efficiency and security operations.",
+      "projectSourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-05-15-26/",
+        "https://www.linkedin.com/posts/weitz-toppingout-aviationconstruction-ugcPost-7458184444815007745-k8n3?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEaAg1EBo3-XJRA2rVRFfrBSSQCsK1_qKTA"
+      ],
+      "contactSourceUrl": "https://www.weitz.com/leaders/frank-dascanio/",
+      "emailSourceUrl": "https://www.weitz.com/leaders/frank-dascanio/",
+      "personalizationSentence": "We saw Weitz recently top out the Mesa Gateway in-line baggage project, where airport power, security-system infrastructure, and construction-administration coordination all matter.",
+      "approvalStatus": "pending_manual_approval"
+    },
+    {
+      "companyName": "FNF Construction, Inc.",
+      "website": "https://www.fnfinc.com/",
+      "city": "Tempe",
+      "state": "AZ",
+      "audience": "builder",
+      "contactName": "Michael Lynch",
+      "contactTitle": "Project Sponsor",
+      "contactEmail": "info@fnfinc.com",
+      "emailLane": "public",
+      "project": "I-10 Wild Horse Pass Corridor Project — second segment",
+      "projectLocation": "Gas Line Road to south of SR 387, between Phoenix and Casa Grande, AZ",
+      "projectEvidence": "The project research reports construction was set to begin on the 10-mile second segment in January 2026, with all four phases scheduled through late 2029.",
+      "projectSourceUrls": [
+        "https://azbex.com/local-projects/arizona-projects-01-16-26/",
+        "https://azdot.gov/news/progress-moves-forward-i-10-wild-horse-pass-corridor-project"
+      ],
+      "contactSourceUrl": "https://fnfinc.com/team?id=michael-lynch",
+      "emailSourceUrl": "https://www.fnfinc.com/Files/dcd8326d-a03d-4950-af76-30095753a821.pdf",
+      "personalizationSentence": "The long-horizon I-10 Wild Horse Pass second-segment work is a strong signal of the utility-relocation, drainage, roadway, and construction-phase coordination FNF will be managing in Arizona.",
+      "approvalStatus": "pending_manual_approval"
+    }
+  ]
+}

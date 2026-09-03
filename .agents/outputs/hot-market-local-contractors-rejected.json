@@ -1,0 +1,22 @@
+{
+  "researchedOn": "2026-09-03",
+  "sourceResearch": ".agents/outputs/az-commercial-builder-research.json",
+  "rejectedRecords": 1,
+  "records": [
+    {
+      "companyName": "LMF Construction",
+      "website": "https://www.lmfconstruction.com/",
+      "project": "Silo Morrison Ranch",
+      "projectLocation": "3340 E. Warner Road, Gilbert, AZ",
+      "projectSourceUrl": "https://www.leoncapitalgroup.com/leon-capital-group-opens-two-luxury-multifamily-communities-in-morrisville-north-carolina-and-gilbert-arizona",
+      "projectEvidence": "Leon Capital Group's August 6, 2026 release says Silo Morrison Ranch opened and was built by its in-house general contractor, LMF Construction.",
+      "companySourceUrl": "https://www.lmfconstruction.com/contact",
+      "rejectionReason": "Unresolved: the official LMF contact page visibly publishes only a phone number, a Garland, Texas address, and a generic web form. It does not visibly publish a company-domain email, and the site does not provide official evidence of a current Arizona-local decision-maker. Do not infer an email address or use the form as an email substitute.",
+      "disqualifyingChecks": {
+        "activeProjectSignalPresent": true,
+        "officialCurrentLocalDecisionMakerPresent": false,
+        "officialPublishedCompanyDomainEmailPresent": false
+      }
+    }
+  ]
+}

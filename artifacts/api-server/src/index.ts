@@ -4,6 +4,7 @@ import { startOutreachWorker } from "./lib/outreachWorker";
 import { startClientJobUploadCleanup } from "./lib/clientJobUploadCleanup";
 import { seedVerifiedOutreachBatch } from "./lib/verifiedOutreachBatch";
 import { ensureOutreachFollowUps, prepareNextPhoenixOutreach } from "./lib/outreachPreparation";
+import { seedHotMarketOutreachBatch } from "./lib/hotMarketOutreachBatch";
 
 const rawPort = process.env["PORT"];
 
@@ -30,6 +31,8 @@ app.listen(port, (err) => {
   startClientJobUploadCleanup();
   void seedVerifiedOutreachBatch()
     .then(async (result) => {
+      const hotMarket = await seedHotMarketOutreachBatch();
+      logger.info(hotMarket, "One-time Arizona hot-market outreach batch reconciled");
       if (result.state === "ready") {
         const preparation = await prepareNextPhoenixOutreach();
         logger.info(
