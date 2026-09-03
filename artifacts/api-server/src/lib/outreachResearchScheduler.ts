@@ -20,12 +20,10 @@ import {
   type ResearchState,
 } from "./publicResearch";
 import {
-  getHotMarketScheduledAt,
   HOT_MARKET_DAILY_TARGET,
   stageVerifiedHotMarketProspects,
 } from "./hotMarketOutreachBatch";
 import { isRecurringHotMarketCampaign } from "./hotMarketResearch";
-import { getNextPhoenixPreparationTarget } from "./outreachPreparation";
 
 export const OUTREACH_RESEARCH_TIMEZONE = "America/Phoenix";
 export const OUTREACH_RESEARCH_LOCAL_HOUR = 8;
@@ -108,6 +106,17 @@ export function getHotMarketResearchStates(
     secondaryStates[(offset + index) % secondaryStates.length]
   ).filter((state): state is ResearchState => Boolean(state));
   return [...RESEARCH_STATE_ORDER.slice(0, Math.min(2, limit)), ...rotatingStates];
+}
+
+export function getHotMarketResearchTarget(
+  now = new Date(),
+): { targetDate: string; scheduledAt: Date } {
+  const { runDate } = getPhoenixResearchWindow(now);
+  const scheduledAt = new Date(`${runDate}T08:10:00-07:00`);
+  return {
+    targetDate: runDate,
+    scheduledAt: scheduledAt.getTime() > now.getTime() ? scheduledAt : now,
+  };
 }
 
 function uniqueHotMarketCandidates(
@@ -193,10 +202,10 @@ export async function processDueHotMarketResearch(
       }
     }
     const candidates = uniqueHotMarketCandidates(discoveries);
-    const target = getNextPhoenixPreparationTarget(now);
+    const target = getHotMarketResearchTarget(now);
     const result = await stageVerifiedHotMarketProspects(candidates, {
       targetDate: target.targetDate,
-      scheduledAt: getHotMarketScheduledAt(target.scheduledAt),
+      scheduledAt: target.scheduledAt,
       targetCount: HOT_MARKET_DAILY_TARGET,
       now,
     });

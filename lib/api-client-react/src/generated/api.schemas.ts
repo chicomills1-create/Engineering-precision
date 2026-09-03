@@ -994,6 +994,31 @@ export interface OutreachDashboard {
   researchAutomationReady: boolean;
 }
 
+export type OutreachHotLeadQualification = typeof OutreachHotLeadQualification[keyof typeof OutreachHotLeadQualification];
+
+
+export const OutreachHotLeadQualification = {
+  clicked: 'clicked',
+  opened: 'opened',
+} as const;
+
+export interface OutreachHotLead {
+  prospectId: number;
+  companyName: string;
+  /** @nullable */
+  contactName: string | null;
+  /** @nullable */
+  contactEmail: string | null;
+  location: string;
+  /** @nullable */
+  campaignName: string | null;
+  openCount: number;
+  clickCount: number;
+  firstEngagedAt: string;
+  latestEngagedAt: string;
+  qualification: OutreachHotLeadQualification;
+}
+
 export type ReferralPartnerRelationshipStatus = typeof ReferralPartnerRelationshipStatus[keyof typeof ReferralPartnerRelationshipStatus];
 
 

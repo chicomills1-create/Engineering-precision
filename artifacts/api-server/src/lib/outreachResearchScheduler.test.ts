@@ -3,6 +3,7 @@ import { test } from "node:test";
 import {
   getDailyResearchTarget,
   getHotMarketResearchStates,
+  getHotMarketResearchTarget,
   getPhoenixResearchWindow,
   HOT_MARKET_RESEARCH_STATES_PER_RUN,
   isResearchScheduleDue,
@@ -68,6 +69,23 @@ test("national hot-market research rotates the remaining licensed states", () =>
   const second = getHotMarketResearchStates("2026-09-04");
   assert.deepEqual(second.slice(0, 2), ["AZ", "CA"]);
   assert.notDeepEqual(first.slice(2), second.slice(2));
+});
+
+test("hot-market research stages for 8:10 Phoenix or catches up immediately when late", () => {
+  assert.deepEqual(
+    getHotMarketResearchTarget(new Date("2026-09-04T15:00:00.000Z")),
+    {
+      targetDate: "2026-09-04",
+      scheduledAt: new Date("2026-09-04T15:10:00.000Z"),
+    },
+  );
+  assert.deepEqual(
+    getHotMarketResearchTarget(new Date("2026-09-04T20:00:00.000Z")),
+    {
+      targetDate: "2026-09-04",
+      scheduledAt: new Date("2026-09-04T20:00:00.000Z"),
+    },
+  );
 });
 
 test("routes the recurring hot-market campaign only through verified hot-market research", () => {

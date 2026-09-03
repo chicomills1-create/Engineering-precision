@@ -99,6 +99,8 @@ export * from './opportunityResearchInputAudience';
 export * from './opportunityResearchInputState';
 export * from './outreachDashboard';
 export * from './outreachDashboardNextPreparationStatus';
+export * from './outreachHotLead';
+export * from './outreachHotLeadQualification';
 export * from './outreachMessage';
 export * from './outreachMessageInput';
 export * from './outreachMessageInputSourceType';

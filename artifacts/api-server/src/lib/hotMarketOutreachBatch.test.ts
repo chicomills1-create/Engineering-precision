@@ -4,8 +4,8 @@ import {
   HOT_MARKET_OUTREACH_CONTACTS,
   HOT_MARKET_DAILY_TARGET,
   HOT_MARKET_RECURRING_SOURCE_TYPE,
-  HOT_MARKET_SEND_AT,
   getHotMarketScheduledAt,
+  getOneTimeHotMarketScheduledAt,
   hotMarketOutreachBody,
   hotMarketOutreachSubject,
   isHotMarketSourceType,
@@ -89,11 +89,18 @@ test("hot-market personalization does not narrow the firm to Scottsdale", () => 
   }
 });
 
-test("the hot-market messages wait until after the regular 8 AM Phoenix batch", () => {
-  assert.equal(HOT_MARKET_SEND_AT.toISOString(), "2026-09-03T15:10:00.000Z");
+test("one-time hot-market messages dynamically wait until after the regular 8 AM Phoenix batch", () => {
   assert.equal(
     getHotMarketScheduledAt(new Date("2026-09-04T15:00:00.000Z")).toISOString(),
     "2026-09-04T15:10:00.000Z",
+  );
+  assert.equal(
+    getOneTimeHotMarketScheduledAt(new Date("2026-09-04T15:01:00.000Z")).toISOString(),
+    "2026-09-05T15:10:00.000Z",
+  );
+  assert.equal(
+    getOneTimeHotMarketScheduledAt(new Date("2027-02-10T14:59:00.000Z")).toISOString(),
+    "2027-02-10T15:10:00.000Z",
   );
 });
 

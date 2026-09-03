@@ -78,15 +78,7 @@ export function isDefinitiveSendGridRejection(status: number): boolean {
 const INITIAL_RAMP_DAILY_LIMIT =
   REGULAR_OUTREACH_DAILY_TARGET + HOT_MARKET_DAILY_TARGET;
 const INITIAL_RAMP_ACTIVE_DAYS = 3;
-const OUTREACH_INITIAL_MONTHLY_LIMIT = 6000;
-const OUTREACH_MONTHLY_RAMP: Readonly<Record<string, number>> = {
-  "2026-09": 6000,
-  "2026-10": 10000,
-  "2026-11": 20000,
-  "2026-12": 35000,
-  "2027-01": 50000,
-};
-const OUTREACH_MAX_MONTHLY_LIMIT = 50000;
+export const OUTREACH_MONTHLY_LIMIT = 6000;
 const DUPLICATE_EMAIL_SEQUENCE_STATUSES = [
   "sending",
   "needs_review",
@@ -141,13 +133,8 @@ export function getPhoenixOutreachMonthKey(date = new Date()): string {
 }
 
 export function getOutreachMonthlyLimit(date = new Date()): number {
-  const monthKey = getPhoenixOutreachMonthKey(date);
-  if (OUTREACH_MONTHLY_RAMP[monthKey] !== undefined) {
-    return OUTREACH_MONTHLY_RAMP[monthKey];
-  }
-  return monthKey < "2026-09"
-    ? OUTREACH_INITIAL_MONTHLY_LIMIT
-    : OUTREACH_MAX_MONTHLY_LIMIT;
+  getPhoenixOutreachMonthKey(date);
+  return OUTREACH_MONTHLY_LIMIT;
 }
 
 export function getGlobalOutreachDailyLimit(

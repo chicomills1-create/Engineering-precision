@@ -623,6 +623,19 @@ paths:
       tags: [outreach]
       responses:
         "200": { description: Summary, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachDashboard" } } } }
+  /outreach/hot-leads:
+    get:
+      operationId: listOutreachHotLeads
+      tags: [outreach]
+      summary: List delivered sequence-one prospects with tracked engagement
+      responses:
+        "200":
+          description: Distinct engaged prospects, ranked by click activity then recency
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/OutreachHotLead" }
   /outreach/replies:
     get:
       operationId: listOutreachReplies
@@ -1680,6 +1693,21 @@ components:
         automationReady: { type: boolean }
         researchAutomationEnabled: { type: boolean }
         researchAutomationReady: { type: boolean }
+    OutreachHotLead:
+      type: object
+      required: [prospectId, companyName, contactName, contactEmail, location, campaignName, openCount, clickCount, firstEngagedAt, latestEngagedAt, qualification]
+      properties:
+        prospectId: { type: number }
+        companyName: { type: string }
+        contactName: { type: [string, "null"] }
+        contactEmail: { type: [string, "null"] }
+        location: { type: string }
+        campaignName: { type: [string, "null"] }
+        openCount: { type: number }
+        clickCount: { type: number }
+        firstEngagedAt: { type: string, format: date-time }
+        latestEngagedAt: { type: string, format: date-time }
+        qualification: { type: string, enum: [clicked, opened] }
     ReferralPartner:
       type: object
       required: [id, referralCode, companyName, source, relationshipStatus, referralCount, convertedCount, createdAt, updatedAt]

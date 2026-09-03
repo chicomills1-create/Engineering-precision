@@ -24,13 +24,12 @@ import {
   RESEARCH_STATE_ORDER,
   type DiscoveredHotMarketProspect,
 } from "./publicResearch";
+import { getNextPhoenixEightAm } from "./outreachEligibility";
 
 export const HOT_MARKET_SOURCE_TYPE = "hot_market_one_time";
 
 export const HOT_MARKET_RECURRING_SOURCE_TYPE = "hot_market_verified_national";
 export const HOT_MARKET_DAILY_TARGET = 50;
-export const HOT_MARKET_TARGET_DATE = "2026-09-03";
-export const HOT_MARKET_SEND_AT = new Date("2026-09-03T15:10:00.000Z");
 const CAMPAIGN_NAME = "Arizona Hot-Market Builders - September 3, 2026";
 const SUBJECT = "Fast engineering support for active projects";
 
@@ -90,7 +89,7 @@ const sourceContacts: SourceContact[] = [
 export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts
   .filter((contact) => !PRIOR_OUTREACH_EMAILS.has(contact.contactEmail.trim().toLowerCase()))
   .map((contact) => ({
-    dedupeKey: `hot-market-2026-09-03-${slug(contact.companyName)}`,
+    dedupeKey: `hot-market-one-time-${slug(contact.companyName)}`,
     companyName: contact.companyName.trim(),
     website: contact.website,
     city: contact.city.trim(),
@@ -129,6 +128,12 @@ export function isHotMarketSourceType(sourceType: string | null): boolean {
     sourceType as typeof HOT_MARKET_SOURCE_TYPES[number],
   );
 }
+
+/** Schedules hot-market outreach ten minutes after the next regular Phoenix window. */
+export function getOneTimeHotMarketScheduledAt(now = new Date()): Date {
+  return getHotMarketScheduledAt(getNextPhoenixEightAm(now));
+}
+
 export function hotMarketOutreachBody(contact: {
   contactName: string;
   personalization: string;
@@ -185,13 +190,11 @@ async function ensureNationalHotMarketCampaign() {
 export async function seedHotMarketOutreachBatch(options: {
   enabled?: boolean;
   now?: Date;
-} = {}): Promise<{ state: "skipped" | "expired" | "ready"; queued: number }> {
+} = {}): Promise<{ state: "skipped" | "ready"; queued: number }> {
   const enabled = options.enabled ?? process.env.OUTREACH_SEED_VERIFIED_BATCH === "true";
   if (!enabled) return { state: "skipped", queued: 0 };
   const now = options.now ?? new Date();
-  if (now.getTime() >= HOT_MARKET_SEND_AT.getTime()) {
-    return { state: "expired", queued: 0 };
-  }
+  const scheduledAt = getOneTimeHotMarketScheduledAt(now);
 
   assertVerifiedOutreachBatch(
     HOT_MARKET_OUTREACH_CONTACTS,
@@ -290,7 +293,7 @@ export async function seedHotMarketOutreachBatch(options: {
           subject: hotMarketOutreachSubject(contact.audience, contact.state),
           body: hotMarketOutreachBody(contact),
           status: "approved",
-          scheduledAt: HOT_MARKET_SEND_AT,
+          scheduledAt,
           sourceType: HOT_MARKET_SOURCE_TYPE,
         },
         ...hotMarketOutreachFollowUps(
@@ -367,7 +370,7 @@ export async function stageVerifiedHotMarketProspects(
         .from(outreachMessagesTable)
         .where(and(
           eq(outreachMessagesTable.sequenceNumber, 1),
-          inArray(outreachMessagesTable.sourceType, [...HOT_MARKET_SOURCE_TYPES]),
+          eq(outreachMessagesTable.sourceType, HOT_MARKET_RECURRING_SOURCE_TYPE),
           gte(outreachMessagesTable.scheduledAt, options.scheduledAt),
           lt(outreachMessagesTable.scheduledAt, targetEnd),
           inArray(outreachMessagesTable.status, ["approved", "sending", "sent", "delivered"]),

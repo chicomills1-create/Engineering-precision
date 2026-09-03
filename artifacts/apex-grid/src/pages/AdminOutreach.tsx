@@ -7,6 +7,7 @@ import { CampaignsTab } from '@/components/outreach/CampaignsTab';
 import { MessagesTab } from '@/components/outreach/MessagesTab';
 import { ClientSafeListTab } from '@/components/outreach/ClientSafeListTab';
 import { ReplyInboxTab } from '@/components/outreach/ReplyInboxTab';
+import { HotLeadsTab } from '@/components/outreach/HotLeadsTab';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useGetOutreachDashboard } from '@workspace/api-client-react';
 
@@ -42,6 +43,9 @@ export default function AdminOutreach() {
                   </span>
                 )}
               </TabsTrigger>
+              <TabsTrigger value="hot-leads" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary" data-testid="tab-hot-leads">
+                Hot Leads
+              </TabsTrigger>
               <TabsTrigger value="prospects" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary" data-testid="tab-prospects">
                 Prospects
               </TabsTrigger>
@@ -58,6 +62,10 @@ export default function AdminOutreach() {
 
             <TabsContent value="inbox" className="mt-0">
               <ReplyInboxTab />
+            </TabsContent>
+
+            <TabsContent value="hot-leads" className="mt-0">
+              <HotLeadsTab />
             </TabsContent>
 
             <TabsContent value="prospects" className="mt-0">

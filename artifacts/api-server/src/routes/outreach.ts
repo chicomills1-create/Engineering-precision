@@ -1,5 +1,5 @@
 import { Router, type IRouter, type Request, type Response } from "express";
-import { and, count, countDistinct, desc, eq, gt, gte, inArray, isNotNull, lt, ne, or } from "drizzle-orm";
+import { and, count, countDistinct, desc, eq, gt, gte, inArray, isNotNull, lt, ne, or, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
@@ -23,6 +23,7 @@ import {
   GenerateOutreachDraftBody, GenerateOutreachDraftParams, GenerateOutreachDraftResponse,
   GetOutreachDashboardResponse, ListCampaignsResponse, ListOutreachMessagesResponse, ListProspectsResponse,
   ListOutreachRepliesResponse,
+  ListOutreachHotLeadsResponse,
   ListOutreachResearchRunsResponse, ListOutreachResearchSchedulesResponse, ListOutreachSuppressionsResponse,
   MarkOutreachProspectRepliedParams, MarkOutreachProspectRepliedResponse,
   ReconcileOutreachMessagesResponse,
@@ -70,6 +71,7 @@ import { recordContactEvidence } from "../lib/outreachContactEvidence";
 import { reconcileUncertainOutreachMessages } from "../lib/outreachReconciliation";
 import { getVerifiedInitialOpenAt } from "../lib/outreachSequence";
 import { approvedOutreachFollowUpMessages } from "../lib/verifiedOutreachBatch";
+import { buildOutreachHotLeads } from "../lib/outreachHotLeads";
 
 const router: IRouter = Router();
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
@@ -299,6 +301,42 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     nextPreparationError: preparation.error,
     ...automationStatus,
   }));
+});
+router.get("/outreach/hot-leads", requireAuth, async (_req, res): Promise<void> => {
+  const engagementRows = await db.select({
+    prospectId: prospectsTable.id,
+    companyName: prospectsTable.companyName,
+    contactName: prospectsTable.contactName,
+    contactEmail: prospectsTable.contactEmail,
+    city: prospectsTable.city,
+    state: prospectsTable.state,
+    campaignName: campaignsTable.name,
+    eventId: outreachDeliveryEventsTable.id,
+    eventType: outreachDeliveryEventsTable.eventType,
+    occurredAt: outreachDeliveryEventsTable.occurredAt,
+  })
+    .from(outreachMessagesTable)
+    .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+    .leftJoin(campaignsTable, eq(outreachMessagesTable.campaignId, campaignsTable.id))
+    .innerJoin(
+      outreachDeliveryEventsTable,
+      eq(outreachDeliveryEventsTable.outreachMessageId, outreachMessagesTable.id),
+    )
+    .where(and(
+      eq(outreachMessagesTable.sequenceNumber, 1),
+      inArray(outreachDeliveryEventsTable.eventType, ["open", "click"]),
+      or(
+        eq(outreachMessagesTable.status, "delivered"),
+        sql`exists (
+          select 1
+          from outreach_delivery_events as delivered_event
+          where delivered_event.outreach_message_id = ${outreachMessagesTable.id}
+            and delivered_event.event_type = 'delivered'
+        )`,
+      ),
+    ));
+
+  res.json(ListOutreachHotLeadsResponse.parse(buildOutreachHotLeads(engagementRows)));
 });
 router.get("/outreach/replies", requireAuth, async (_req, res): Promise<void> => {
   const rows = await db.select().from(outreachRepliesTable).orderBy(desc(outreachRepliesTable.receivedAt));

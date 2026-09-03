@@ -633,6 +633,25 @@ export const GetOutreachDashboardResponse = zod.object({
 
 
 /**
+ * @summary List delivered sequence-one prospects with tracked engagement
+ */
+export const ListOutreachHotLeadsResponseItem = zod.object({
+  "prospectId": zod.number(),
+  "companyName": zod.string(),
+  "contactName": zod.string().nullable(),
+  "contactEmail": zod.string().nullable(),
+  "location": zod.string(),
+  "campaignName": zod.string().nullable(),
+  "openCount": zod.number(),
+  "clickCount": zod.number(),
+  "firstEngagedAt": zod.coerce.date(),
+  "latestEngagedAt": zod.coerce.date(),
+  "qualification": zod.enum(['clicked', 'opened'])
+})
+export const ListOutreachHotLeadsResponse = zod.array(ListOutreachHotLeadsResponseItem)
+
+
+/**
  * @summary List retained inbound outreach replies
  */
 export const ListOutreachRepliesResponseItem = zod.object({

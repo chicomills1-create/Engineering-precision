@@ -75,6 +75,7 @@ import type {
   ListSeoAuditIssuesParams,
   OpportunityResearchInput,
   OutreachDashboard,
+  OutreachHotLead,
   OutreachMessage,
   OutreachMessageInput,
   OutreachMessageUpdate,
@@ -1743,6 +1744,83 @@ export function useGetOutreachDashboard<TData = Awaited<ReturnType<typeof getOut
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
   const queryOptions = getGetOutreachDashboardQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getListOutreachHotLeadsUrl = () => {
+
+
+
+
+  return `/api/outreach/hot-leads`
+}
+
+/**
+ * @summary List delivered sequence-one prospects with tracked engagement
+ */
+export const listOutreachHotLeads = async ( options?: Parameters<typeof customFetch>[1]): Promise<OutreachHotLead[]> => {
+
+  return customFetch<OutreachHotLead[]>(getListOutreachHotLeadsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListOutreachHotLeadsQueryKey = () => {
+    return [
+    `/api/outreach/hot-leads`
+    ] as const;
+    }
+
+
+export const getListOutreachHotLeadsQueryOptions = <TData = Awaited<ReturnType<typeof listOutreachHotLeads>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listOutreachHotLeads>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListOutreachHotLeadsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listOutreachHotLeads>>> = ({ signal }) => listOutreachHotLeads({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listOutreachHotLeads>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListOutreachHotLeadsQueryResult = NonNullable<Awaited<ReturnType<typeof listOutreachHotLeads>>>
+export type ListOutreachHotLeadsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List delivered sequence-one prospects with tracked engagement
+ */
+
+export function useListOutreachHotLeads<TData = Awaited<ReturnType<typeof listOutreachHotLeads>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listOutreachHotLeads>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListOutreachHotLeadsQueryOptions(options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

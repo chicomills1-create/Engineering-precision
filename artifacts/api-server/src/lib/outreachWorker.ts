@@ -38,7 +38,8 @@ import {
 } from "./outreachSequence";
 
 const ADMIN_EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-const MAX_SCHEDULED_MESSAGES_PER_RUN = 200;
+// Allows the 200-message baseline plus currently verified hot-market extras.
+export const MAX_SCHEDULED_MESSAGES_PER_RUN = 300;
 
 export type OutreachAutomationStatus = {
   adminAllowlistReady: boolean;
@@ -263,8 +264,6 @@ export async function processDueOutreachMessages(): Promise<number> {
   await stopLegacyAdditionalFollowUps();
   await stopStaleOpenerFollowUps();
   await backfillDeliveredFollowUpSequences();
-  const reconciliation = await reconcileUncertainOutreachMessages();
-  logReconciliationSummary(reconciliation);
   const due = await db.select().from(outreachMessagesTable)
     .where(and(
       eq(outreachMessagesTable.status, "approved"),
@@ -304,6 +303,10 @@ export async function processDueOutreachMessages(): Promise<number> {
       logger.warn({ messageId: claimed.id, error }, "Scheduled outreach send blocked or failed");
     }
   }
+  // Dispatch already-approved due messages before the potentially slow provider
+  // reconciliation scan so autoscale instances cannot idle before sending.
+  const reconciliation = await reconcileUncertainOutreachMessages();
+  logReconciliationSummary(reconciliation);
   return sentCount;
 }
 
