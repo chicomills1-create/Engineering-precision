@@ -23,6 +23,14 @@ const PRIOR_OUTREACH_EMAILS = new Set([
   "alston@alstonco.com",
   "frank.dascanio@weitz.com",
 ]);
+const BROADER_PERSONALIZATIONS: Record<string, string> = {
+  "Armstrong Construction Group":
+    "Armstrong’s official project portfolio highlights high-end custom homes and major remodels in Arizona’s luxury-home market.",
+  "Moss Custom Homes":
+    "Moss Custom Homes’ portfolio spans luxury residences across several high-end Arizona communities.",
+  SWABACK:
+    "SWABACK’s In the Works collection—especially its Arizona infill and hillside-residence work—stood out as a strong example of projects where early site, drainage, utility, and permitting coordination can protect the design intent.",
+};
 
 type SourceContact = {
   companyName: string;
@@ -89,7 +97,8 @@ export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts
     emailEvidence: contact.emailSourceUrl,
     approvalStatus: "approved",
     personalization: (
-      contact.personalizationSentence
+      BROADER_PERSONALIZATIONS[contact.companyName]
+      ?? contact.personalizationSentence
       ?? contact.personalization
       ?? `${contact.companyName} has current construction activity in Arizona.`
     ).trim(),

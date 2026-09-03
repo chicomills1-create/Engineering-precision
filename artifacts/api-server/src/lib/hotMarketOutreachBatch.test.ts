@@ -58,6 +58,16 @@ test("hot-market referral partners receive relationship-focused copy", () => {
   assert.match(body, /current projects in your pipeline/);
 });
 
+test("hot-market personalization does not narrow the firm to Scottsdale", () => {
+  for (const contact of HOT_MARKET_OUTREACH_CONTACTS) {
+    assert.doesNotMatch(
+      hotMarketOutreachBody(contact),
+      /Scottsdale/i,
+      contact.companyName,
+    );
+  }
+});
+
 test("the hot-market messages wait until after the regular 8 AM Phoenix batch", () => {
   assert.equal(HOT_MARKET_SEND_AT.toISOString(), "2026-09-03T15:10:00.000Z");
 });
