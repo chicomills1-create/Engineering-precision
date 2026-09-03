@@ -105,8 +105,8 @@ function buildHotMarketSearchQuery(
 ): string {
   const business = audience === "architect"
     ? "(\"commercial architecture firm\" OR \"luxury residential architect\" OR \"high-end residential design firm\")"
-    : "(\"commercial general contractor\" OR \"luxury custom home builder\")";
-  const trigger = "(permitting OR \"active project\" OR portfolio OR \"in the works\" OR construction OR expansion OR infrastructure OR bidding OR RFQ OR RFP)";
+    : "(\"commercial general contractor\" OR \"construction company\" OR \"active home builder\" OR \"luxury custom home builder\")";
+  const trigger = "(\"actively building\" OR \"projects in\" OR permitting OR \"active project\" OR portfolio OR \"in the works\" OR construction OR expansion OR infrastructure OR bidding OR RFQ OR RFP)";
   const contact = "(principal OR partner OR president OR preconstruction OR \"project executive\")";
   return [business, trigger, contact, STATE_NAMES[state], "-directory -yelp"].join(" ");
 }
@@ -293,9 +293,9 @@ export async function discoverPublicHotMarketProspects(input: {
         role: "system",
         content: [
           "Return strict JSON only: {\"prospects\":[...]}.",
-          "Select commercial architecture firms or builders, plus established luxury-residential architecture/design firms and luxury custom-home builders, in the requested state and audience.",
-          "Luxury-residential firms similar in profile to Candelaria Design Associates or Payne Cole Designs are eligible when public evidence shows a substantial current portfolio, active work, or close collaboration with builders and owners where outsourced Civil, Structural, or MEP support is a credible fit.",
-          "Require a specific current project, permit, expansion, infrastructure, construction, bid, RFQ, RFP, active/in-the-works portfolio, or other strong current need signal in the supplied results.",
+          "Hot Market primarily means builders, general contractors, and construction companies that public evidence shows are actively building in a target location or growth market, including commercial construction, major contractors, local contractors, production builders, and luxury/custom-home builders.",
+          "Also include architecture and design referral partners serving those active markets, including established luxury-residential firms similar in profile to Candelaria Design Associates or Payne Cole Designs, when their portfolios show recurring builder/owner collaboration where outsourced Civil, Structural, or MEP support is a credible fit.",
+          "Require public evidence of active construction in the location, a specific current project, permit, expansion, infrastructure program, bid, RFQ/RFP, active/in-the-works portfolio, or another strong current market-activity signal.",
           "Require a named current decision-maker or relevant leader, their exact role, and a business email visibly published in the supplied public search result text.",
           "The email must use the target company's own domain. Never guess an address, infer an address from a naming pattern, use a directory/publisher/vendor email, or call paid enrichment.",
           "Use only URLs, names, roles, email addresses, and facts present in the supplied search results. Never invent or fill missing fields.",
