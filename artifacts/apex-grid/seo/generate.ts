@@ -611,6 +611,9 @@ function blogPostPage(post: BlogPost): string {
     { name: post.title },
   ];
   const dateStr = new Date(post.date + "T12:00:00Z").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  const articleAuthor = post.author
+    ? { "@type": "Person", "@id": post.author.personId, name: post.author.name, url: post.author.profileUrl }
+    : { "@type": "Organization", name: "Apex Grid Engineering", url: SITE };
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -619,8 +622,8 @@ function blogPostPage(post: BlogPost): string {
     datePublished: post.date,
     dateModified: post.date,
     articleSection: post.tag,
-    author: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
-    publisher: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
+    author: articleAuthor,
+    publisher: { "@type": "Organization", "@id": `${SITE}/#business`, name: "Apex Grid Engineering", url: SITE },
     mainEntityOfPage: `${SITE}/blog/${post.slug}/`,
   };
   const faqSchema = post.faqs?.length
@@ -643,9 +646,15 @@ ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
   <p class="kicker">${esc(post.tag)} · ${esc(dateStr)} · ${post.minutes} min read</p>
   <h1>${esc(post.title)}</h1>
-  <p class="lede">${esc(post.description)}</p>
+  <p class="lede">${esc(post.description)}</p>${post.author ? `
+  <p>By <a href="${esc(post.author.profileUrl)}" rel="author">${esc(post.author.name)}</a> · ${esc(post.author.role)}</p>` : ""}${post.editorialApproval ? `
+  <p class="note">${esc(post.editorialApproval.label)}</p>` : ""}
 </div></section>
 <section class="block"><div class="container"><div class="prose">${post.html}</div></div></section>
+${post.author ? `<section class="block"><div class="container container--narrow">
+  <h2>About the Author</h2>
+  <p><a href="${esc(post.author.profileUrl)}" rel="author"><strong>${esc(post.author.name)}</strong></a> is ${esc(post.author.role)}. Read his verified founder profile and other expert answers.</p>
+</div></section>` : ""}
 ${post.faqs?.length ? `<section class="block"><div class="container faq">
   <h2>Quick <em>Answers</em></h2>
   ${post.faqs.map((faq) => `<details><summary>${esc(faq.q)}</summary><div class="a">${esc(faq.a)}</div></details>`).join("")}

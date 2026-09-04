@@ -12,9 +12,95 @@ export interface BlogPost {
   html: string;
   /** Optional answer-focused FAQ block rendered visibly and in FAQPage JSON-LD. */
   faqs?: Array<{ q: string; a: string }>;
+  /** Optional named expert author. Omitted posts retain the Apex Grid organization byline. */
+  author?: BlogAuthor;
+  /** Human-reviewed publication status for named-expert articles. */
+  editorialApproval?: {
+    status: "approved";
+    label: string;
+  };
 }
 
+export interface BlogAuthor {
+  name: string;
+  role: string;
+  profileUrl: string;
+  personId: string;
+}
+
+export const JEREMY_MILLS_AUTHOR: BlogAuthor = {
+  name: "Jeremy “Chico” Mills",
+  role: "Founder & CEO, Apex Grid Engineering",
+  profileUrl: "https://apexgrideng.com/jeremy-mills/",
+  personId: "https://apexgrideng.com/jeremy-mills/#person",
+};
+
 export const BLOG_POSTS: BlogPost[] = [
+  {
+    slug: "when-should-owner-call-engineer-before-lease",
+    title: "When Should an Owner Call an Engineer Before Signing a Commercial Lease?",
+    description:
+      "Call an engineer before signing when the space may need structural, HVAC, electrical, plumbing, accessibility, or change-of-use work.",
+    date: "2026-09-04",
+    tag: "Expert Answers",
+    minutes: 5,
+    author: JEREMY_MILLS_AUTHOR,
+    editorialApproval: { status: "approved", label: "Reviewed and approved for publication by Jeremy Mills" },
+    html: `
+<p><strong>Short answer:</strong> Bring an engineer in before signing a commercial lease when the planned use could change the building’s structure, occupancy, utilities, ventilation, accessibility, or permit path. A focused technical review can identify constraints while the tenant still has leverage to negotiate scope, allowances, timing, or an exit condition.</p>
+<h2>What should be checked before the lease is final?</h2>
+<p>Start with the intended use and compare it with the existing space. A restaurant, clinic, laboratory, fitness facility, data room, or production space can place very different demands on the building than an office or retail suite. The review should consider structural loads, rooftop equipment capacity, electrical service, HVAC ventilation and cooling, plumbing connections, accessible routes, fire and life-safety impacts, and whether a change of occupancy may be required.</p>
+<h2>Which warning signs justify an early review?</h2>
+<p>Ask for engineering input when the project needs new rooftop equipment, heavy or vibrating equipment, major wall openings, additional restrooms, a commercial kitchen, process exhaust, EV charging, backup power, or substantial utility upgrades. Existing drawings that are incomplete or inconsistent with field conditions are another reason to verify the site before committing.</p>
+<h2>What should the owner receive?</h2>
+<p>The useful outcome is a concise record of observed conditions, known constraints, open questions, and recommended next steps. It is not a substitute for permit drawings or destructive investigation. It gives the owner and design team a better basis for the lease, project budget, and schedule.</p>
+<h2>Where does Apex Grid fit?</h2>
+<p>Apex Grid can coordinate architecture with <a href="/services/structural">structural engineering</a>, <a href="/services/mep">MEP engineering</a>, and <a href="/services/civil">civil engineering</a> for qualifying commercial scopes. Requirements vary by jurisdiction, so owners should also review the applicable <a href="/locations/">engineering service area</a> before relying on a project schedule.</p>`,
+  },
+  {
+    slug: "what-makes-commercial-permit-set-ready",
+    title: "What Makes a Commercial Permit Set Ready for Submittal?",
+    description:
+      "A permit-ready set aligns scope, codes, existing conditions, disciplines, calculations, and jurisdiction-specific forms before submittal.",
+    date: "2026-09-04",
+    tag: "Expert Answers",
+    minutes: 6,
+    author: JEREMY_MILLS_AUTHOR,
+    editorialApproval: { status: "approved", label: "Reviewed and approved for publication by Jeremy Mills" },
+    html: `
+<p><strong>Short answer:</strong> A commercial permit set is ready when the drawings, calculations, forms, and discipline assumptions describe the same project and address the reviewing jurisdiction’s current requirements. A set is not ready simply because every consultant has issued sheets.</p>
+<h2>Begin with one defined scope</h2>
+<p>The cover sheet, code analysis, plans, schedules, and consultant documents should agree on the address, occupancy, construction type, area, scope of work, and applicable code editions. Existing conditions and new work should be distinguishable. Deferred items, alternates, and owner-provided equipment should be identified rather than left for the reviewer to infer.</p>
+<h2>Coordinate the discipline interfaces</h2>
+<p>Architectural layouts must allow the clearances and routes required by structural, mechanical, electrical, plumbing, civil, accessibility, and fire-life-safety work. Equipment shown on one discipline’s sheets should appear in the loads, connections, supports, and schedules of the others. Sections and details should resolve congested or unusual conditions that plans alone cannot explain.</p>
+<h2>Match the jurisdiction’s submittal rules</h2>
+<p>Code editions, local amendments, digital file standards, calculation requirements, energy documents, special-inspection forms, and professional seals vary. Confirm the current checklist before the issue date. For multi-state programs, use a controlled prototype and document the local changes for each site instead of assuming one package can be submitted everywhere unchanged.</p>
+<h2>Run a final consistency review</h2>
+<p>Before submittal, check sheet references, detail callouts, equipment tags, room names, revision dates, calculation inputs, and required signatures. The goal is not to guarantee a comment-free review; reviewers may interpret requirements differently. The goal is to remove preventable contradictions and give the reviewer a complete, traceable basis for approval.</p>
+<p>Learn more about Apex Grid’s coordinated <a href="/services/mep">MEP engineering</a>, <a href="/services/structural">structural engineering</a>, and <a href="/architecture/">architectural design</a>, or find jurisdiction-focused information in the <a href="/locations/">service-area library</a>.</p>`,
+  },
+  {
+    slug: "how-owners-reduce-engineering-redesign",
+    title: "How Can Owners Reduce Engineering Redesign on Commercial Projects?",
+    description:
+      "Owners reduce redesign by confirming scope, existing conditions, code assumptions, equipment, utilities, and decision deadlines early.",
+    date: "2026-09-04",
+    tag: "Expert Answers",
+    minutes: 5,
+    author: JEREMY_MILLS_AUTHOR,
+    editorialApproval: { status: "approved", label: "Reviewed and approved for publication by Jeremy Mills" },
+    html: `
+<p><strong>Short answer:</strong> Owners reduce redesign by making important assumptions visible early and assigning dates and decision-makers to resolve them. The most expensive revisions usually begin as unanswered questions about scope, existing conditions, equipment, utilities, or authority requirements.</p>
+<h2>Confirm what the project must do</h2>
+<p>Document occupancy, operations, equipment, hours, staffing, phasing, accessibility, security, technology, maintenance access, and turnover requirements. Separate required outcomes from preferences. When the team understands which constraints are fixed, it can evaluate alternatives without repeatedly reopening the entire design.</p>
+<h2>Verify the building and site</h2>
+<p>Existing drawings are a starting point, not proof of current conditions. Verify the structural system, ceiling space, electrical service, HVAC capacity, plumbing and utility locations, roof conditions, site drainage, and accessible routes to the level appropriate for the project. Where concealed conditions matter, identify the investigation or allowance instead of assuming the best case.</p>
+<h2>Lock equipment and utility assumptions</h2>
+<p>Late equipment selections can change loads, clearances, ventilation, power, plumbing, supports, and controls across several disciplines. Establish design criteria and decision dates for owner-furnished and long-lead equipment. Contact utilities early when service capacity, transformers, meters, or relocations may affect the schedule.</p>
+<h2>Keep one current decision record</h2>
+<p>Use a shared log for assumptions, responsible parties, due dates, and resolved decisions. When a decision changes, record which drawings, calculations, budget items, and schedule activities it affects. That discipline helps architecture, engineering, procurement, and construction move from the same information.</p>
+<p>Apex Grid coordinates <a href="/services/mep">MEP</a>, <a href="/services/structural">structural</a>, and <a href="/services/civil">civil engineering</a> with architectural and construction-delivery needs. Owners planning work across jurisdictions can start with the <a href="/locations/">national engineering service-area directory</a>.</p>`,
+  },
   {
     slug: "state-code-adoption-cycles",
     title: "Why State Code Adoption Cycles Should Drive Your Project Schedule",
