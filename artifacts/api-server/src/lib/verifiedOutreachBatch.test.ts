@@ -165,10 +165,13 @@ test("the approved body uses only the approved pipeline closing", () => {
 test("the approved opener follow-up is one concise reply-first touch", () => {
   const followUps = approvedOutreachFollowUpMessages("Alex Rivera");
   assert.deepEqual(followUps.map((followUp) => followUp.sequenceNumber), [2]);
-  assert.equal(followUps[0]?.subject, "A reliable engineering partner for active projects");
+  assert.equal(followUps[0]?.subject, "Ready for us to review an active project?");
+  assert.match(followUps[0]?.body ?? "", /Thanks for taking a look at my earlier note/);
+  assert.match(followUps[0]?.body ?? "", /Reply with the project location and the drawings or scope you have available/);
+  assert.match(followUps[0]?.body ?? "", /right-sized path forward and clear pricing before work begins/);
   assert.ok(followUps.every((followUp) =>
     !/Click the URL|https:\/\/apexgrideng\.com/i.test(followUp.body)
     && !/15.?minute|15 min|schedule|book.*call/i.test(followUp.body)
-    && /reply|projects in your pipeline|would you like us to review/i.test(followUp.body)
+    && /reply|project location|drawings or scope/i.test(followUp.body)
   ));
 });

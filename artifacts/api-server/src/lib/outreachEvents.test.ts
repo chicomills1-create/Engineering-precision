@@ -158,7 +158,8 @@ test("an initial open schedules exactly one reply-first follow-up", async () => 
       followUps.map((message) => message.scheduledAt?.toISOString()),
       ["2026-09-02T15:00:00.000Z"],
     );
-    assert.equal(followUps[0]?.subject, "A reliable engineering partner for active projects");
+    assert.equal(followUps[0]?.subject, "Ready for us to review an active project?");
+    assert.match(followUps[0]?.body ?? "", /Reply with the project location and the drawings or scope you have available/);
     assert.doesNotMatch(followUps[0]?.body ?? "", /https?:\/\/|click/i);
   } finally {
     await cleanEventFixture(fixture);

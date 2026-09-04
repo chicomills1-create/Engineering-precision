@@ -86,12 +86,12 @@ export function approvedOutreachFollowUpMessages(contactName: string): Array<{
   return [
     {
       sequenceNumber: 2,
-      subject: SUBJECT,
+      subject: "Ready for us to review an active project?",
       body: `Hi ${firstName},
 
-I wanted to follow up in case a focused engineering issue is holding up one of your active projects.
+Thanks for taking a look at my earlier note. If you have an active project that could use focused Civil, Structural, or MEP support, the next step is simple.
 
-Do you have any current projects in your pipeline that you would like us to review?`,
+Reply with the project location and the drawings or scope you have available. We’ll review them and let you know where Apex Grid can help, along with a right-sized path forward and clear pricing before work begins.`,
     },
   ];
 }
