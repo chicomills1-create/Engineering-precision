@@ -6,29 +6,47 @@ export const minneapolis: CityData = {
   stateSlug: "minnesota",
   county: "Hennepin County",
   ahj: {
-    office: "City of Minneapolis Community Planning & Economic Development (CPED), Construction Code Services",
-    process: "CPED accepts commercial permit applications and electronic plans through the City's ePermits system and coordinates building review with zoning, fire, public works, and utility requirements. Complex commercial and development proposals can use preliminary development review; separate Public Works approvals apply to site, sewer, water, and right-of-way work.",
+    office: "City of Minneapolis Community Planning & Economic Development, Construction Code Services",
+    process:
+      "Construction Code Services accepts commercial permits and plan-review materials through the City's online permitting system and coordinates reviews with zoning, fire, public works, and environmental health as the project requires. Building permits are distinct from land-use, right-of-way, utility, and site approvals, so projects with demolition, public frontage, or development-review scope need parallel City coordination.",
   },
   codes: {
-    building: "2020 Minnesota State Building Code, based on the 2018 IBC, with Minneapolis ordinances and amendments",
-    energy: "2020 Minnesota Commercial Energy Code, based on ASHRAE 90.1-2019 with Minnesota amendments",
-    amendments: "Minneapolis enforces the state building-code framework with local administrative and ordinance provisions. The city's Truth in Sale of Housing program is residential, while commercial owners should separately account for Minneapolis Building Energy Benchmarking and the city's emissions-reduction policy work; neither replaces energy-code compliance at permit.",
+    building: "2020 Minnesota Building Code, based on the 2018 International Building Code, enforced by Minneapolis",
+    energy: "2020 Minnesota Energy Code commercial provisions, based on ASHRAE 90.1-2016",
+    amendments:
+      "Minnesota's State Building Code is the baseline enforced in Minneapolis; the City cannot replace it with a separate commercial building-code edition. Minneapolis zoning, stormwater, right-of-way, and sustainability ordinances add local requirements, including the City's commercial benchmarking and energy-disclosure program for covered existing buildings.",
   },
   utilities: {
-    electric: "Xcel Energy",
-    notes: "Xcel Energy serves electricity and gas in Minneapolis and coordinates new service and distributed-energy interconnection. Minneapolis Public Works provides water and sanitary sewer and reviews stormwater and right-of-way connections; downtown and redevelopment sites require early utility-location and capacity coordination.",
+    electric: "Xcel Energy provides electric distribution service in Minneapolis",
+    notes:
+      "Xcel Energy coordinates new or upgraded electric service and distributed-energy interconnection; cold-climate electrification and large institutional loads warrant early capacity and service-location review. Minneapolis Public Works provides municipal water, sanitary sewer, and stormwater services.",
   },
-  climateNotes: "Minneapolis is in a severe cold 6A climate, with long heating seasons, large temperature swings, wind, heavy snow, deep frost, and humid summers. Mississippi River floodplain conditions, high groundwater in some areas, clay soils, and snowmelt drainage materially affect site and foundation work.",
-  marketNotes: "Minneapolis construction is sustained by healthcare and medical-device facilities, corporate headquarters, higher education, multifamily infill, public infrastructure, food and industrial users, and redevelopment of older downtown and riverfront buildings. Cold-climate retrofit, district-energy interfaces, and building-performance expectations are recurring considerations rather than niche issues.",
+  climateNotes:
+    "Minneapolis is in ASHRAE climate zone 6A, with long, very cold winters, deep frost, snow and ice, humid summers, and intense convective rainfall. Glacial soils, variable fill, high groundwater in some areas, Mississippi River flood exposure, and freeze-thaw cycles make both geotechnical and drainage investigation important.",
+  marketNotes:
+    "The Minneapolis market is anchored by healthcare, higher education, corporate and institutional campuses, advanced manufacturing, and dense multifamily and mixed-use infill. Downtown office repositioning, adaptive reuse, and transit-oriented development create complex existing-building work, while public infrastructure and climate-resilience investments keep civil and utility scopes active.",
   narratives: {
-    mep: "Minneapolis MEP systems are sized for a real 6A winter: freeze protection, dependable heating, energy recovery, humidification or condensation control where required, and resilient sequences matter before summer cooling is considered. The 2020 Minnesota Commercial Energy Code is the permit baseline; we coordinate Xcel electric service, gas decisions, electrification capacity, and any distributed-energy interconnection early. In dense renovations, existing steam, hydronic, electrical, and shaft constraints deserve field validation before a high-performance replacement plant is promised.",
-    structural: "Minneapolis structural work is driven by snow, drift, wind, and frost rather than seismic. Under the 2020 Minnesota State Building Code, roof geometry and adjacent height changes can make drift and unbalanced snow govern, while foundation and slab details must deal with deep frost, frost heave, variable fill, clay, and groundwater. Riverfront or low-lying sites also need floodplain review; on existing-building additions we verify old framing and roof capacity before placing new mechanical equipment.",
-    civil: "Minneapolis civil design coordinates CPED permitting with Public Works site, water, sewer, stormwater, and right-of-way processes. The city's Stormwater Management Program emphasizes volume reduction and water quality, but cold climate, tight soils, frost, and snow storage constrain how infiltration and bioretention perform in practice. We reserve room for treatment, snowmelt routing, and utilities early and evaluate Mississippi floodplain or high-groundwater limits before assuming an underground or infiltrating solution is feasible.",
-    energy: "Commercial energy design in Minneapolis follows the 2020 Minnesota Commercial Energy Code, based on ASHRAE 90.1-2019 with state amendments. In climate zone 6A, air-barrier continuity, continuous insulation, thermal-bridge control, high-performance glazing, and energy recovery have exceptional value because winter losses and condensation risk are so high. We use modeling or the applicable compliance path to coordinate envelope, lighting, and plant choices, then distinguish that permit deliverable from Minneapolis benchmarking obligations for covered buildings and Xcel incentive opportunities.",
+    mep:
+      "Minneapolis MEP design is cold-climate engineering first: the 2020 Minnesota Energy Code, winter ventilation energy, freeze protection, humidification or moisture control where required, and reliable heating distribution all deserve early attention. Xcel Energy service planning is important when electrifying heating or serving institutional and process loads, because demand and equipment location affect the whole electrical concept. Minneapolis Public Works water and sewer connections, combustion venting where retained, snow-melt loads where proposed, and equipment seismic restraint are coordinated with the electronic permit package. Summer humidity and storm-driven outages still support thoughtful cooling, drainage, and resilience decisions.",
+    structural:
+      "Minneapolis structural design is usually governed by snow, wind, gravity, and frost rather than high seismic demand, but the project-specific Minnesota Building Code analysis remains controlling. Roof snow accumulation and drift at elevation changes, ice dams, wind uplift, and cold-weather enclosure sequencing need to be reflected in details and construction assumptions. Foundations must account for frost depth, glacial soils, fill, groundwater, and settlement, especially on redevelopment parcels. Existing masonry, timber, and steel buildings common in the city also benefit from measured investigation before adaptive-reuse lateral, floor-loading, or façade decisions are set.",
+    civil:
+      "Civil planning in Minneapolis addresses Public Works requirements for water, sanitary, stormwater, streets, and frontage alongside City zoning and right-of-way approvals. Frozen ground and flat urban grades make positive drainage, utility depth and separation, snow-storage impacts, and spring runoff practical layout issues. Stormwater treatment and volume control need space before a constrained infill footprint is finalized, while Mississippi River and local flood considerations may affect finished-floor elevations. State construction-stormwater requirements and a SWPPP apply when disturbance meets Minnesota Pollution Control Agency thresholds.",
+    energy:
+      "Commercial energy compliance is prepared to the 2020 Minnesota Energy Code commercial provisions, which are based on ASHRAE 90.1-2016, not to a generic current IECC assumption. In climate zone 6A, air sealing, continuous insulation, thermal-bridge control, efficient heating, heat recovery, and lighting controls are critical to both code compliance and moisture-safe performance. Minneapolis's benchmarking and disclosure obligations can also matter for covered existing commercial buildings, so retrofit decisions should consider measured operations as well as permit compliance. We coordinate envelope details, HVAC loads, and Xcel service strategy before submitting construction documents.",
   },
   faqs: [
-    { q: "What commercial building and energy codes apply in Minneapolis?", a: "Minneapolis applies the 2020 Minnesota State Building Code, based on the 2018 IBC, and the 2020 Minnesota Commercial Energy Code, based on ASHRAE 90.1-2019 with Minnesota amendments. CPED administers building permits, while local site, utility, and ordinance reviews can run in parallel." },
-    { q: "What loads control structural design in Minneapolis?", a: "Snow, drift, wind, and frost commonly control. Heavy snow and unbalanced drifts can govern roofs, while deep frost, frost heave, clay, fill, and groundwater influence foundations and slabs. Seismic demand is generally low, but riverfront sites can add floodplain requirements." },
-    { q: "Who provides utilities in Minneapolis?", a: "Xcel Energy provides electric and gas service and coordinates interconnection. Minneapolis Public Works provides water and sanitary sewer and reviews stormwater and right-of-way work. Capacity and utility congestion should be addressed early on downtown and redevelopment projects." },
+    {
+      q: "What commercial building and energy codes does Minneapolis enforce?",
+      a: "Minneapolis enforces the statewide 2020 Minnesota Building Code, based on the 2018 IBC. Commercial energy compliance follows the 2020 Minnesota Energy Code provisions based on ASHRAE 90.1-2016, with local zoning and site requirements reviewed separately.",
+    },
+    {
+      q: "Who provides Minneapolis electric, water, and sewer service?",
+      a: "Xcel Energy provides electric distribution service. Minneapolis Public Works provides municipal water, sanitary sewer, and stormwater services; service upgrades and public-side connections should be coordinated separately from the building-permit review.",
+    },
+    {
+      q: "What drives Minneapolis foundation and envelope design?",
+      a: "Very cold winters, deep frost, snow drift, ice, freeze-thaw cycling, and glacial or fill soils are major inputs. A geotechnical report and durable air-, vapor-, and water-control details are important for both structural reliability and energy performance.",
+    },
   ],
 };

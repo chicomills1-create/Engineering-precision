@@ -6,47 +6,50 @@ export const newark: CityData = {
   stateSlug: "new-jersey",
   county: "Essex County",
   ahj: {
-    office: "City of Newark Department of Engineering, Division of Inspections and Enforcement",
+    office:
+      "City of Newark Department of Engineering, Division of Inspections and Enforcement",
     process:
-      "Newark administers local permit intake and inspections under the New Jersey Uniform Construction Code, using its online Citizen Self Service tools for permit activity. Building work can also need Zoning, Planning Board, Historic Preservation, Fire, Engineering, and utility coordination; applicants should establish land-use and site approvals before relying on a building-permit-only schedule.",
+      "Newark's Division of Inspections and Enforcement administers construction permits and inspections, with applications and project records handled through the City's permitting process. Commercial work may also require zoning, planning-board, historic-preservation, fire, health, water/sewer, and public-right-of-way review; a complete approval strategy identifies those City tracks with the building submission.",
   },
   codes: {
-    building: "New Jersey Uniform Construction Code, using the 2021 IBC-based building subcode as adopted by the State, administered by Newark",
-    energy: "New Jersey Uniform Construction Code energy subcode based on the 2021 International Energy Conservation Code, commercial provisions",
+    building:
+      "New Jersey Uniform Construction Code (N.J.A.C. 5:23), using the 2021 I-Codes with New Jersey amendments",
+    energy:
+      "New Jersey Uniform Construction Code energy subcode based on the 2021 IECC; ASHRAE 90.1-2019 is an alternate commercial compliance path",
     amendments:
-      "Newark administers the statewide Uniform Construction Code rather than a separate citywide building-code edition. Local zoning, site-plan, flood-hazard, historic-district, and public-right-of-way requirements can add approvals, while State UCC amendments and the locally adopted administrative process govern construction-code review.",
+      "Newark enforces the statewide Uniform Construction Code rather than a separate City building-code edition. Local zoning, land-development, historic-preservation, fire, water/sewer, and right-of-way requirements remain consequential amendments to the practical permit path, particularly in dense redevelopment areas.",
   },
   utilities: {
-    electric: "Public Service Electric and Gas Company (PSE&G) provides electric and gas service; the City of Newark Department of Water and Sewer Utilities provides water and sewer service",
+    electric: "Public Service Electric and Gas Company (PSE&G) provides electric distribution service",
     notes:
-      "PSE&G coordinates electric/gas service applications, capacity, metering, and distributed-generation interconnection. Newark Water and Sewer Utilities must be engaged for new, enlarged, or altered water and sewer connections; dense urban utility conflicts and combined-sewer conditions make early utility investigation important.",
+      "PSE&G should review new electric service, service upgrades, and distributed-generation interconnection early for high-load, transit-oriented, or electrified projects. Newark's Department of Water and Sewer Utilities administers municipal water and sewer service; regional wastewater treatment and combined-sewer conditions add coordination needs.",
   },
   climateNotes:
-    "Newark is in mixed-humid climate zone 4A, with winter heating, summer humidity, freeze-thaw exposure, heavy rainfall, and urban heat-island effects. Low-lying areas near the Passaic River and Newark Bay need FEMA flood and storm-surge screening, while former industrial sites can require environmental due diligence.",
+    "Newark is in ASHRAE climate zone 4A, with humid summers, winter freeze-thaw, intense rainfall, and tidal/riverine flood exposure along the Passaic River and Newark Bay watershed. Low-lying fill, high groundwater, soft alluvial deposits, legacy industrial conditions, and combined sewers make geotechnical and drainage investigation important on redevelopment sites.",
   marketNotes:
-    "Newark's market is shaped by Newark Liberty International Airport, Port Newark–Elizabeth logistics, rail and highway access, healthcare, universities, multifamily, and redevelopment of former industrial parcels. Dense urban infill and adaptive reuse combine constrained staging, aging utilities, environmental investigation, and flood-resilience questions with high-demand logistics and institutional programs.",
+    "Newark's active sectors include airport and port-related logistics, warehousing, multifamily and mixed-use redevelopment, healthcare and education, transit-oriented development, and industrial modernization. Newark Liberty International Airport, Port Newark/Elizabeth's regional freight ecosystem, and the city's extensive older building stock create projects with demanding utility, environmental, staging, and resilience constraints.",
   narratives: {
     mep:
-      "Newark MEP design works through the State UCC energy subcode in a 4A climate that requires credible winter heating, summer latent control, and freeze protection. Existing-building and urban-infill projects need verified utility rooms, risers, steam or gas conditions where present, and realistic electrical capacity—not generic tenant-fit-out assumptions. PSE&G handles electric and gas service and interconnection, while Newark's municipal water and sewer utility controls connections; coordinating those separate paths early is especially important for electrification, medical, warehouse, and multifamily loads.",
+      "Newark MEP design begins with humid-zone-4A moisture control, winter freeze protection, and the realities of dense existing infrastructure. The New Jersey Uniform Construction Code's energy subcode is based on the 2021 IECC, with ASHRAE 90.1-2019 available as an alternate commercial path, but a code form does not resolve airport-adjacent, logistics, or adaptive-reuse electrical needs. PSE&G service capacity, metering, and interconnection are early design inputs for electrified HVAC, cold storage, manufacturing, and resilient power systems. Water and sewer routing must also advance with Newark's utility review, particularly where old services, combined sewers, or limited equipment-room space make late changes costly.",
     structural:
-      "Newark structural design follows the New Jersey Uniform Construction Code and should begin with verified existing conditions on the City's large stock of industrial, masonry, and adaptive-reuse buildings. Winter weather, wind, snow, and seismic provisions all apply, but foundation uncertainty, contaminated fill, groundwater, and flood exposure can be equally decisive on former industrial or waterfront parcels. Additions, roof equipment, change-of-use loads, and façade interventions need an explicit existing-structure assessment, with special inspections and construction sequencing coordinated through the local permit process.",
+      "Newark structural design is shaped by site conditions, flood resilience, wind, snow, and existing construction more often than by high seismic demand, though the code-required seismic classification remains project-specific. Passaic River and Newark Bay flood screening, alluvial soils, fill, groundwater, and remnants of industrial structures can govern foundation, slab, shoring, and elevation decisions. The statewide 2021-I-Code-based Uniform Construction Code supplies the structural basis; close urban sites add adjacent foundations, party walls, railroad or utility constraints, and staged demolition. Freeze-thaw and wind-driven rain influence façade durability, while rooftop equipment and solar additions require a verified existing roof load path.",
     civil:
-      "Newark civil engineering must fit drainage, water and sewer work, fire access, and construction staging into constrained urban blocks served by aging and crowded infrastructure. We screen Passaic River and Newark Bay flood exposure, FEMA mapping, and site environmental history before committing to below-grade space or finished-floor elevations, then coordinate connection capacity with Newark Water and Sewer Utilities. Site-plan, zoning, streets, and utility approvals may move on different tracks, so stormwater controls and off-site work should be coordinated with City Engineering early.",
+      "Civil engineering in Newark works at the intersection of City water/sewer approval, combined-sewer infrastructure, New Jersey stormwater rules, and a constrained urban watershed. New Jersey's Stormwater Management rules and construction-stormwater requirements apply where their thresholds are met, while tidal backwater, intense rainfall, low relief, groundwater, and contaminated or filled land can limit conventional infiltration and gravity drainage. We establish flood elevations, utility ownership, sewer capacity, outfall conditions, and public-right-of-way needs before locking a site plan. For port- and airport-influenced redevelopment, utility conflicts, truck circulation, environmental due diligence, and resilient grading deserve equal attention.",
     energy:
-      "Newark energy compliance uses New Jersey's UCC energy subcode based on the 2021 IECC commercial provisions. In the mixed-humid climate, enclosure continuity, thermal-bridge control, air sealing, efficient heating and cooling, and humidity management need to be evaluated together, particularly in masonry retrofit work. PSE&G service capacity and the building's actual operating loads guide electrification and solar decisions; permit energy compliance should be documented separately from any longer-term emissions or resilience goals the owner may set.",
+      "Newark commercial energy documentation follows the New Jersey Uniform Construction Code energy subcode based on the 2021 IECC, or ASHRAE 90.1-2019 where that path better fits the building. In mixed-humid zone 4A, continuous insulation, air-barrier continuity, moisture-managed wall and roof assemblies, solar-control glazing, efficient lighting, and humidity-capable outside-air systems are practical performance measures. For warehouses, multifamily buildings, and conversions, energy modeling can reconcile envelope choices with real ventilation, domestic-hot-water, process, and electrification loads. We coordinate those decisions with PSE&G service strategy so the energy design is both permit-ready and operationally feasible.",
   },
   faqs: [
     {
-      q: "What building code applies in Newark?",
-      a: "Newark administers New Jersey's statewide Uniform Construction Code, including the State's 2021 IBC-based building subcode and 2021 IECC-based commercial energy subcode. City zoning, site-plan, flood, historic, and right-of-way approvals can add requirements beyond UCC plan review.",
+      q: "Who issues commercial building permits in Newark?",
+      a: "Newark's Department of Engineering, Division of Inspections and Enforcement administers construction permits and inspections. Depending on the property and scope, zoning, planning, fire, historic-preservation, water/sewer, health, and right-of-way approvals may also be needed.",
     },
     {
-      q: "Who handles building permits in Newark?",
-      a: "The City of Newark Department of Engineering, Division of Inspections and Enforcement administers local construction permits and inspections under the UCC. Depending on the project, Zoning, Planning, Fire, Engineering, Historic Preservation, and utilities may also have review roles.",
+      q: "What building and energy codes apply to Newark commercial work?",
+      a: "Newark enforces New Jersey's statewide Uniform Construction Code, which uses the 2021 I-Codes with New Jersey amendments. The commercial energy subcode is based on the 2021 IECC, and ASHRAE 90.1-2019 is an alternate compliance path.",
     },
     {
-      q: "Which utilities serve Newark commercial buildings?",
-      a: "PSE&G provides electric and gas service. The City of Newark Department of Water and Sewer Utilities provides municipal water and sewer service, and both utility paths should be checked early for an upgrade, redevelopment, or high-load project.",
+      q: "Why should flood, sewer, and utility capacity be screened early in Newark?",
+      a: "Passaic River and Newark Bay watershed flooding, combined-sewer conditions, intense rain, groundwater, fill, and old utilities can change drainage and foundation options. PSE&G service planning and Newark water/sewer coordination should proceed before the building and site layouts are finalized.",
     },
   ],
 };

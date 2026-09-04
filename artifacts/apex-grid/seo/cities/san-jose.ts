@@ -6,47 +6,47 @@ export const sanJose: CityData = {
   stateSlug: "california",
   county: "Santa Clara County",
   ahj: {
-    office: "City of San José Department of Planning, Building and Code Enforcement, Building Division",
+    office: "City of San José Planning, Building and Code Enforcement Department, Building Division",
     process:
-      "San José accepts building-permit applications and electronic plans through its SJPermits portal; commercial work is routed through multi-discipline plan review and applicants respond to consolidated correction cycles online. The city also distinguishes projects requiring Planning approval from building-only scopes, so zoning and development-clearance status should be resolved before a full construction submittal.",
+      "San José's Building Division uses its online permit and plan-review services for applications, plan upload, fees, and status, with coordination among planning, public works, fire, and environmental services where required. Complex development can require planning entitlement and public-improvement approvals before or alongside building permits; a building permit is not a substitute for those separate approvals.",
   },
   codes: {
-    building: "2022 San José Building Code, based on the 2022 California Building Code (2021 IBC) with local amendments",
-    energy: "2022 California Energy Code (Title 24, Part 6), with 2022 CALGreen mandatory measures and San José reach-code provisions",
+    building: "2022 California Building Standards Code (Title 24), including the 2022 California Building Code, with San José amendments",
+    energy: "2022 California Energy Code (Title 24, Part 6), supplemented by the San José Building Reach Code",
     amendments:
-      "San José Municipal Code Title 17 adopts the California codes with local amendments. The city's reach code includes electrification and electric-readiness requirements for covered new construction, while green-building, stormwater, and Bay Area Air Quality Management District requirements can add separate project obligations.",
+      "San José adopts local amendments to the California codes and its Building Reach Code, which advances electrification and electric-ready requirements beyond the statewide minimum for covered new construction and alterations. The precise reach-code trigger and exceptions must be checked against the current municipal code for the project's occupancy and scope.",
   },
   utilities: {
-    electric: "Pacific Gas and Electric Company (PG&E); San José Water and the City of San José Environmental Services Department are major water and wastewater agencies, depending on service area",
+    electric: "Pacific Gas and Electric Company (PG&E)",
     notes:
-      "PG&E reviews new electric service and distributed-generation interconnection, and its service-planning schedule should be confirmed early for large data, lab, and electrified loads. Water service is not citywide under one provider, while the City's Environmental Services Department operates the regional wastewater system and recycled-water program.",
+      "PG&E new-service and distributed-generation processes govern electrical capacity, transformer siting, and interconnection; Silicon Valley's high-density and high-load programs merit early utility screening. Water service is provided by the City of San José in much of the city and by other regulated providers in some areas, while the City operates the San José–Santa Clara Regional Wastewater Facility.",
   },
   climateNotes:
-    "San José is in the warm-summer Santa Clara Valley (ASHRAE 3B/California climate zone 4): dry summers and cool nights support economizer and night-flush strategies, but heat waves increasingly set peak cooling and electrical-demand conditions. Bay Area seismicity, liquefaction-prone valley soils, and wildfire-smoke events are material design inputs.",
+    "San José is largely a warm-dry California climate with long cooling seasons and limited rainfall, while heat waves and wildfire smoke increasingly influence HVAC and indoor-air-quality design. Strong Bay Area seismic hazard, fault rupture considerations near active faults, liquefaction in valley deposits, and localized creek flooding require parcel-specific geotechnical and hazard review.",
   marketNotes:
-    "Silicon Valley demand centers on semiconductor, hardware, R&D, data-intensive office and laboratory fit-outs, alongside multifamily infill around transit and downtown. The city is also advancing major downtown mixed-use and BART-extension-related development, where utility capacity, groundwater, and transportation coordination can govern schedule.",
+    "San José remains a center for technology campuses, R&D, semiconductor-related work, data-intensive facilities, and high-density multifamily and transit-oriented development. Office-market changes have increased reuse and tenant-improvement activity, while clean-tech, advanced manufacturing, and life-science programs continue to demand large electrical capacity and resilient MEP infrastructure.",
   narratives: {
     mep:
-      "San José MEP work pairs Title 24 performance compliance and the city's electrification reach code with programs that often have unusually high process loads. For lab, hardware, and data-intensive space, we separate process and ventilation loads from base-building assumptions, use the valley's cool nights where economizer operation is appropriate, and provide filtration and smoke-response modes for wildfire events. PG&E service capacity and interconnection are early milestones for large electrified loads; water and sewer coordination must identify the actual serving water agency rather than assuming a single city utility.",
+      "San José MEP work couples Title 24 with the City's electrification-oriented Reach Code and a climate where cooling, solar control, and summer electrical demand matter. PG&E capacity and service configuration are early design constraints for labs, advanced manufacturing, data-intensive tenants, and all-electric central plants. Wildfire-smoke events support robust filtration and controllable outside-air sequences, while seismic bracing and shutdown requirements must be integrated into equipment layouts. We coordinate the energy model, reach-code applicability, generator or battery strategy, and utility application with the Building Division submission rather than making electrification a late specification change.",
     structural:
-      "San José structural design is controlled by the 2022 CBC seismic provisions in a high-seismic Santa Clara Valley setting, not by the area's otherwise benign wind climate. Site-specific geotechnical work is central because alluvial soils can bring liquefaction, settlement, and lateral-spread issues, particularly near waterways, while fault-related hazards remain relevant across the region. Building Division review and special-inspection documentation should be coordinated with the SJPermits submittal, and existing tilt-up, office, and industrial conversions deserve a deliberate lateral-system evaluation before new rooftop or equipment loads are added.",
+      "Structural engineering in San José is decisively seismic. The Santa Clara Valley is influenced by nearby active faults, and many sites need careful evaluation of site class, liquefaction, lateral spreading, fault-related hazards, fill, and groundwater before selecting foundations and lateral systems. The 2022 California Building Code and local amendments govern the permit basis, with special inspections and nonstructural seismic coordination important for high-value technology and laboratory equipment. Dense infill projects also require early consideration of shoring, adjacent structures, and construction vibration rather than treating the building frame as an isolated scope.",
     civil:
-      "Civil design begins with the City's stormwater requirements and the Santa Clara Valley Urban Runoff Pollution Prevention Program framework, which require treatment and, for applicable regulated projects, runoff-flow-control measures. Downtown and transit-area projects must also account for constrained public right-of-way, utility conflicts, and floodplain or groundwater conditions. We reserve space for biotreatment, coordinate sanitary and recycled-water connections with Environmental Services and the serving water provider, and align off-site improvement drawings with the Building Division and Public Works sequence.",
+      "San José civil plans coordinate local grading, stormwater, sanitary, water, and public-improvement requirements with the City's development review process. Dry summers do not eliminate drainage risk: the wet season, creek corridors, and localized flood hazards drive finished-floor elevations, treatment, conveyance, and erosion-control planning. Water service territory should be verified parcel by parcel, and sanitary capacity may involve coordination with the regional wastewater system. We protect site area for stormwater treatment, utilities, fire access, accessible routes, and frontage improvements before architectural and entitlement layouts harden.",
     energy:
-      "San José projects use the 2022 California Energy Code and CALGreen, with the city's reach-code electrification and electric-readiness rules checked at concept design rather than appended at permit. Modeling has to reflect the real internal loads of Silicon Valley occupancies; a nominal office model can misstate both compliance and transformer sizing for a lab or equipment-heavy tenant. The dry 3B climate rewards high-performance envelopes, daylighting, controls, and economizer hours, while PG&E rate design and interconnection timing make load flexibility, solar, and storage analysis useful alongside the Title 24 model.",
+      "Energy compliance in San José begins with the 2022 California Energy Code and then tests the current San José Building Reach Code for the project's scope. Efficient all-electric HVAC, heat-pump water heating where applicable, envelope and glazing performance, lighting controls, and solar/load-management decisions must be modeled as a coordinated system. In a warm, dry climate, reducing solar gains and managing cooling peaks can be as consequential as nominal equipment efficiency. PG&E service and interconnection coordination belongs beside the Title 24 documentation, particularly where electrification shifts a project onto a larger service.",
   },
   faqs: [
     {
-      q: "Where are commercial plans submitted in San José?",
-      a: "Commercial building applications and electronic plans are submitted through the City of San José Building Division's SJPermits system. The City routes the submittal for multi-discipline review; projects with planning or development-clearance requirements need those land-use issues addressed in parallel or before building permit issuance.",
+      q: "Which building and energy codes apply in San José?",
+      a: "San José enforces the 2022 California Building Standards Code with local amendments. Commercial energy work follows the 2022 California Energy Code, Title 24 Part 6, and covered work must also be evaluated under the City's Building Reach Code.",
     },
     {
-      q: "Does San José require all-electric construction?",
-      a: "San José's locally adopted reach code adds electrification and electric-readiness requirements for covered new construction beyond California's baseline Title 24 rules. Applicability and any exception depend on the occupancy and project scope, so the current Title 17 requirements should be checked before selecting central plant and service concepts.",
+      q: "Who provides electric, water, and wastewater service in San José?",
+      a: "PG&E provides electric distribution service. The City provides water in much, but not all, of San José, so the provider must be verified by parcel; the City also operates the San José–Santa Clara Regional Wastewater Facility.",
     },
     {
-      q: "What seismic issues are common on San José sites?",
-      a: "San José is a high-seismic CBC jurisdiction, and Santa Clara Valley alluvial soils can create liquefaction, settlement, and lateral-spread concerns. A site-specific geotechnical report informs foundation, lateral, and utility design; seismic review should not be treated as a standard office-buildout detail.",
+      q: "What are the main structural site risks in San José?",
+      a: "Bay Area seismic design is central, with active-fault, liquefaction, lateral-spreading, groundwater, and fill conditions varying significantly by location. A site-specific geotechnical report should inform the CBC seismic analysis, foundation design, and any excavation or shoring strategy.",
     },
   ],
 };

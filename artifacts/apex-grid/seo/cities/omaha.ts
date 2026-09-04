@@ -8,45 +8,45 @@ export const omaha: CityData = {
   ahj: {
     office: "City of Omaha Planning Department, Permits and Inspections Division",
     process:
-      "Omaha Permits and Inspections administers commercial building permits, plan review, and inspections through the city’s online permit services. Building review is coordinated with planning, public works, fire, and utility requirements as needed; projects in floodplain areas or with public infrastructure work require the corresponding engineering and floodplain review before permits can be finalized.",
+      "Omaha's Permits and Inspections Division administers commercial permits and electronic plan review through the city's permit system. Building review is coordinated with planning, fire, public works, zoning, grading, and site requirements as applicable; larger developments should also resolve public infrastructure and utility requirements before final construction documents are submitted.",
   },
   codes: {
-    building: "2018 International Building Code, adopted by the City of Omaha with local amendments",
-    energy: "2018 International Energy Conservation Code, commercial provisions, adopted by the City of Omaha",
+    building: "City of Omaha adopted 2018 International Building Code with Omaha amendments",
+    energy: "City of Omaha adopted 2018 International Energy Conservation Code commercial provisions",
     amendments:
-      "Omaha administers a locally adopted 2018 I-Code package with city amendments, even though Nebraska supplies a statewide baseline. Building-code review is distinct from city public-works, access, drainage, and floodplain requirements, which can control a development schedule on large sites.",
+      "Omaha adopts and amends its own International Codes under Nebraska's locally administered code system. City zoning, floodplain, grading, stormwater, access, and public-works requirements are separate local layers, so the Omaha amendments and applicable site standards should be confirmed for the project address.",
   },
   utilities: {
-    electric: "Omaha Public Power District (OPPD) provides public electric service; Metropolitan Utilities District (M.U.D.) provides natural gas and water service in Omaha",
+    electric: "Omaha Public Power District (OPPD), a public power utility, provides electric service",
     notes:
-      "OPPD should be engaged for load studies, service location, substation/feeder capacity, and distributed-generation interconnection. M.U.D. water and gas main availability, fire-flow, pressure, and extension requirements are key early inputs; sanitary and stormwater connections are coordinated with City Public Works.",
+      "OPPD service planning and distributed-generation interconnection should be started early for high-load commercial, industrial, and data-center work. Metropolitan Utilities District provides water and natural gas; the City of Omaha Public Works Department administers sanitary sewer and stormwater infrastructure.",
   },
   climateNotes:
-    "Omaha is climate zone 5A, with cold winters, hot humid summers, severe thunderstorms, hail, tornado exposure, and substantial freeze-thaw cycling. Missouri River floodplain conditions, rolling loess bluffs, and local drainageways make site-specific geotechnical and floodplain analysis essential.",
+    "Omaha is in ASHRAE climate zone 5A, with cold winters, hot humid summers, large temperature swings, deep frost, snow, hail, and severe thunderstorms/tornadoes. Missouri River floodplain areas, loess deposits, expansive clays, and variable fill make geotechnical and drainage work central to site feasibility.",
   marketNotes:
-    "Omaha’s construction economy includes data centers and other large power users, finance and insurance offices, healthcare, higher education, logistics along I-80 and Eppley air-cargo corridors, and redevelopment in the downtown riverfront and urban core. Public power makes early electrical-capacity conversations especially important for data-intensive and advanced-manufacturing programs.",
+    "Omaha's construction sectors include finance and insurance offices, healthcare, logistics along I-80 and the Missouri River corridor, food/agricultural processing, higher education, and data-center development supported by public power. Downtown redevelopment and greenfield industrial projects present different utility, grading, and review challenges.",
   narratives: {
     mep:
-      "Omaha MEP design must span a cold 5A winter, humid summer cooling, and severe-weather operation. Freeze protection, heating-plant selection, humidification or dehumidification where the program warrants it, and resilient controls are integrated with—not appended to—the 2018 IECC compliance package. OPPD’s public-power network is a major advantage for the city’s large-load economy, but available capacity, service voltage, routing, and lead time remain site-specific; we establish them during schematic design. M.U.D. water, gas, pressure, and fire-flow data likewise inform equipment, fire protection, and domestic-water decisions before the permit set is fixed.",
+      "Omaha MEP design must handle a broad zone 5A range: cold, freeze-prone winters; hot humid summer weather; and rapid seasonal change. Heating-plant selection, pipe and sprinkler freeze protection, economizer operation, humidity control, and robust controls are all important rather than optional refinements. OPPD is a public power utility, and early service-capacity and interconnection conversations are essential for data centers, large offices, processing, and logistics facilities; Metropolitan Utilities District water and gas service and City sewer connections need parallel routing decisions. The local 2018 IECC governs commercial energy documentation, but load profiles, resilience, and winter operation must be reconciled with code compliance before the City review.",
     structural:
-      "Omaha structures are designed around plains wind, snow, hail, frost, and soils rather than a seismic-dominated lateral system. The locally adopted 2018 IBC requires the site-specific wind speed, exposure, roof-zone pressure, cladding, and rooftop-equipment anchorage to be established; ordinary code wind resistance is distinct from an owner-selected ICC 500 tornado refuge. A geotechnical report is central on Omaha’s loess bluffs and variable alluvial ground, where erosion, settlement, slope stability, or moisture-sensitive soils can govern foundation and retaining strategy. Snow drift, freeze-thaw exposure, and roughly 42-inch frost depth inform roof, footing, and exterior detailing.",
+      "Omaha structural design is a wind, snow, frost, and soil problem rather than a high-seismic one. Open exposure and severe storms require a continuous lateral and uplift load path, while snow accumulation and drift deserve close attention on broad industrial, warehouse, and mixed-height roofs. Foundations and exterior work must account for deep frost and freeze-thaw. Loess and expansive clay can produce settlement, moisture sensitivity, or variable bearing, and redevelopment sites may contain uncontrolled fill; a geotechnical report guides the foundation, slab, pavement, and retaining approach. Missouri River floodplain conditions may also control floor datum and equipment elevations. The adopted 2018 IBC and Omaha amendments set the review baseline.",
     civil:
-      "Omaha civil engineering starts with topography and receiving waters. Steep loess terrain can accelerate erosion and constrain grading, while the Missouri River and mapped tributary floodplains trigger floodplain elevation and no-rise considerations. We coordinate access, paving, public infrastructure, detention, water/sewer connections, and outfall feasibility with City Public Works and Permits and Inspections, then design the SWPPP and erosion controls required by Nebraska’s NPDES construction-stormwater program for disturbances of one acre or more. In older districts, combined-sewer or legacy-utility constraints are verified before promising an infiltration or basement strategy.",
+      "Omaha civil design joins City grading and stormwater review with the realities of loess, clay, frost, and intense convective rainfall. Detention, water-quality practices, conveyance, and outfalls must meet Omaha Public Works requirements and work with soils that may not support optimistic infiltration rates. Missouri River and tributary floodplain sites need FEMA and local floodplain coordination before grades, fill, building elevations, or utilities are fixed. Nebraska construction-stormwater permit coverage and a SWPPP apply to qualifying land disturbance. We reserve corridors for OPPD, Metropolitan Utilities District, and City sewer infrastructure early, then coordinate access and any public improvements with the permit and public-works reviewers.",
     energy:
-      "Omaha’s commercial 2018 IECC compliance is a balanced climate-zone 5A problem: continuous insulation, a reliable air barrier, high-performance glazing, heating efficiency, and cooling/dehumidification controls all earn their place. We select prescriptive COMcheck or whole-building modeling based on the actual envelope, lighting, process, and data loads, and submit a coordinated package to the city’s review workflow. For data centers and other high-load facilities, code minimums are only the start—OPPD capacity, cooling-water or air-side strategy, redundancy, and electrical distribution losses should be evaluated alongside the building model. M.U.D. gas and water availability can change the feasible HVAC path.",
+      "Omaha's locally adopted 2018 IECC provides the commercial energy baseline. In heating-dominated zone 5A, continuous insulation, air-barrier continuity, controlled infiltration, high-performance windows, efficient heating, and heat recovery can have major operating impact, while hot humid summers still require efficient cooling and sound moisture control. For data centers and high-load facilities, the meaningful decisions extend beyond a COMcheck line item to cooling architecture, part-load performance, heat rejection, lighting controls, and OPPD service capacity. We select the appropriate prescriptive or performance route, coordinate it with the locally amended code, and make sure utility-service choices do not undermine the modeled or permit design.",
   },
   faqs: [
     {
-      q: "What commercial codes does Omaha enforce?",
-      a: "Omaha enforces a locally adopted 2018 I-Code package, including the 2018 IBC and commercial 2018 IECC, with city amendments. The City of Omaha Planning Department’s Permits and Inspections Division administers review; public-works, floodplain, and site requirements are separate approvals.",
+      q: "What codes apply to commercial work in Omaha?",
+      a: "Omaha has adopted the 2018 IBC and 2018 IECC commercial provisions with City amendments. Nebraska code enforcement is locally administered, so Omaha's amendments plus local zoning, floodplain, stormwater, and public-works requirements should be confirmed for the site.",
     },
     {
-      q: "Who provides electric, gas, and water service in Omaha?",
-      a: "OPPD provides electric service, and M.U.D. provides natural gas and water service in Omaha. City Public Works coordinates sanitary and stormwater connections. Confirm capacity, pressure, routing, extensions, and interconnection requirements for the exact site early in design.",
+      q: "Who provides electric, water, gas, and sewer service in Omaha?",
+      a: "OPPD provides electricity; Metropolitan Utilities District provides water and natural gas; and City of Omaha Public Works administers sanitary sewer and stormwater infrastructure. Early capacity, routing, easement, and interconnection coordination is especially important for high-load projects.",
     },
     {
-      q: "What site hazards should Omaha developments evaluate?",
-      a: "Projects should evaluate Missouri River and tributary floodplain mapping, intense storm runoff, erosion on loess terrain, variable soils, deep frost, wind, hail, and tornado exposure. A geotechnical investigation and early drainage/outfall study are fundamental, especially on sloped or river-adjacent sites.",
+      q: "What site conditions drive Omaha structural and civil design?",
+      a: "Cold weather, frost, snow, severe wind and hail, and flood exposure are important above grade. Below grade, loess, expansive clay, variable fill, and Missouri River floodplain conditions can affect bearing, settlement, infiltration, grading, utility depth, floor elevations, and drainage design, making a site-specific geotechnical evaluation important.",
     },
   ],
 };

@@ -8,45 +8,45 @@ export const cleveland: CityData = {
   ahj: {
     office: "City of Cleveland Department of Building and Housing",
     process:
-      "The Department of Building and Housing administers building permits and plan examination through Cleveland's online permitting services, with zoning, fire prevention, utilities, and right-of-way review involved where applicable. Projects must satisfy the statewide building code as well as City zoning, landmark, utility, and site approvals; lakefront, downtown, and institutional work can require additional coordination.",
+      "The Department of Building and Housing administers construction permits and plan review through the City’s online permitting services. Commercial projects can need building, zoning, fire, landmark, health, utility, and right-of-way coordination; site work is also reviewed in the context of the Northeast Ohio Regional Sewer District requirements.",
   },
   codes: {
     building: "Ohio Building Code, 2024 edition (based on the 2021 IBC), enforced by the City of Cleveland",
     energy: "Ohio Building Code commercial energy provisions based on the 2021 IECC; ASHRAE 90.1 is an alternate compliance path",
     amendments:
-      "Cleveland is a certified local building department enforcing Ohio's mandatory statewide code rather than a separate city building-code edition. Cleveland zoning, fire, landmark-district, utility, and public-right-of-way rules remain separate local approvals and can affect the permit sequence.",
+      "Cleveland enforces Ohio's mandatory statewide commercial code through its certified building department. Local zoning, fire, landmark, utility, and sewer-district requirements are separate design constraints, especially for downtown, lakefront, and adaptive-reuse work.",
   },
   utilities: {
-    electric: "The Cleveland Electric Illuminating Company (FirstEnergy) provides electric distribution service; Cleveland Water provides water service",
+    electric: "Cleveland Public Power serves municipal electric customers; The Illuminating Company serves other parts of the city",
     notes:
-      "FirstEnergy service planning and interconnection should be addressed early for large medical, industrial, and electrification loads. Cleveland Water serves water customers in Cleveland and the region; the Northeast Ohio Regional Sewer District provides regional wastewater and stormwater management, while Dominion Energy Ohio serves natural gas.",
+      "The serving electric utility should be confirmed by parcel, and new load, service upgrades, and distributed generation require its review. Cleveland Division of Water supplies water; wastewater and regional stormwater compliance involve the Northeast Ohio Regional Sewer District.",
   },
   climateNotes:
-    "Cleveland is in ASHRAE climate zone 5A, with cold, snowy winters, Lake Erie lake-effect snow, freeze-thaw cycling, and humid summers. Lakefront wind, high groundwater in some areas, aging fill, and Cuyahoga River or Lake Erie flood exposure call for site-specific investigation.",
+    "Cleveland is in ASHRAE climate zone 5A, but Lake Erie produces lake-effect snow, cold wind, freeze-thaw cycles, and humid summers. Lakefront flood and wave conditions, low-lying drainage areas, soft lacustrine soils, fill, and aging combined sewers are material site and foundation considerations.",
   marketNotes:
-    "Cleveland's economy is anchored by major healthcare and research institutions, advanced manufacturing, higher education, and a diversified industrial base. Downtown and neighborhood adaptive reuse, lakefront and riverfront reinvestment, and logistics and life-sciences development create both existing-building and utility-infrastructure work.",
+    "Cleveland's construction work includes healthcare and research anchored by Cleveland Clinic and University Hospitals, advanced manufacturing, logistics, downtown and waterfront redevelopment, and institutional renovation. Many opportunities are reuse or brownfield projects where existing structure, utilities, environmental conditions, and sewer capacity are more consequential than greenfield grading.",
   narratives: {
     mep:
-      "Cleveland MEP systems are designed for a 5A climate: substantial winter heating and pipe-freeze risk, humid-summer ventilation and dehumidification, and snow-season reliability. Medical, research, manufacturing, and adaptive-reuse projects often need careful phasing, infection-control or process ventilation, and resilient electrical distribution. FirstEnergy capacity and Cleveland Water/NEORSD connections should be coordinated alongside the equipment layout, especially where an older building is being electrified or a service is enlarged. Commercial compliance follows Ohio’s 2021-IECC-based provisions, with the permitted ASHRAE 90.1 path evaluated against the program.",
+      "Cleveland MEP design is heating- and snow-climate focused, but Lake Erie humidity and summer ventilation still require deliberate latent control. The statewide Ohio Building Code uses 2021-IECC commercial provisions, while Cleveland’s existing industrial and institutional stock often requires careful verification of electrical service, steam or hydronic infrastructure, risers, and equipment access. Cleveland Public Power or The Illuminating Company must be identified by parcel before service assumptions are made; capacity and interconnection discussions are early work for medical, research, and manufacturing loads. Water service from Cleveland Division of Water and sewer coordination with NEORSD should proceed in parallel with plumbing and site design.",
     structural:
-      "Cleveland structural work is generally governed by gravity, wind, snow, drift, frost, and existing-condition uncertainty more often than high seismic demand. Lake-effect snow and wind make roof geometry, drainage, drift, cladding, and rooftop-equipment supports important details. For older industrial and downtown buildings, masonry, corrosion, undocumented alterations, and diaphragm continuity require investigation before reuse loads or new mechanical equipment are assigned. A geotechnical evaluation addresses fill, groundwater, and river- or lake-adjacent soils; the 2024 Ohio Building Code is the structural code basis enforced by the City.",
+      "In Cleveland, lake-effect snow, drifting, wind exposure, frost, and durability normally control ahead of seismic demand. The 2024 Ohio Building Code supplies the structural baseline, but roof geometry and adjacent taller structures can amplify drift loads, and Lake Erie exposures intensify wind-driven rain and corrosion concerns. Urban sites may include uncontrolled fill, old foundations, variable lacustrine soils, and groundwater, making geotechnical and existing-condition investigation central to foundation, slab, shoring, and reuse decisions. For lakefront or flood-prone parcels, flood and wave screening belongs before structural elevations and material choices are fixed.",
     civil:
-      "Cleveland civil design must connect local site work to Cleveland Water and the Northeast Ohio Regional Sewer District's regional wastewater and stormwater system. We evaluate grading, conveyance, detention/water quality, utility separation, and public-frontage work early, particularly on tight redevelopment parcels with legacy utilities. Lake Erie, the Cuyahoga River, tributaries, and high groundwater can affect flood screening, finished floors, and outlet design, while winter freeze-thaw affects pavement and drainage details. Ohio EPA construction-stormwater coverage and a SWPPP apply when disturbance meets the state threshold.",
+      "Cleveland civil engineering should start with the actual sewer tributary, NEORSD requirements, and available discharge capacity. The region's combined-sewer legacy, Lake Erie receiving waters, snowmelt, flat grades, and older utilities can limit conventional drainage assumptions. Ohio EPA construction-stormwater coverage applies to qualifying disturbance, while City and sewer-district review guide stormwater, water, sanitary, and right-of-way work. We identify flood exposure, utility conflicts, environmental constraints, and space for detention or green infrastructure early, especially on redevelopment parcels where an old connection or undocumented fill can drive the feasible site plan.",
     energy:
-      "Cleveland commercial energy packages use the Ohio Building Code's 2021-IECC-based energy provisions or the allowed ASHRAE 90.1 alternative. In cold-humid zone 5A, continuous insulation, air-barrier continuity, high-performance glazing, efficient heating, heat recovery, and controlled outside air reduce both energy use and condensation risk. For hospitals, laboratories, and older-building retrofits, the model needs real ventilation, process, and occupancy schedules—not generic office assumptions. We also compare electrification and peak-load choices with FirstEnergy service capacity and the existing building's electrical distribution.",
+      "Cleveland commercial energy documentation follows the Ohio Building Code’s 2021-IECC provisions or its ASHRAE 90.1 alternate path. In cold-humid zone 5A, continuous insulation, airtightness, high-performing fenestration, heating efficiency, and moisture-safe enclosure transitions reduce both energy use and freeze-thaw risk. Lake-effect weather makes roof and façade details particularly consequential. For hospitals, laboratories, and conversions, energy design integrates real ventilation, resiliency, and process loads with the envelope instead of relying on a nominal prescriptive tradeoff; the serving utility’s service capacity informs how electrification options are evaluated.",
   },
   faqs: [
     {
-      q: "What building code does Cleveland enforce?",
-      a: "Cleveland enforces Ohio's mandatory 2024 Ohio Building Code, based on the 2021 IBC. Commercial energy provisions are based on the 2021 IECC, with ASHRAE 90.1 available as an alternate path; local zoning, fire, landmark, utility, and site reviews remain separate.",
+      q: "What codes apply to commercial construction in Cleveland?",
+      a: "Cleveland enforces Ohio's mandatory 2024 Ohio Building Code, based on the 2021 IBC. Commercial energy provisions are based on the 2021 IECC, with ASHRAE 90.1 available as an alternate compliance path.",
     },
     {
-      q: "Which utilities should be coordinated for a Cleveland project?",
-      a: "The Cleveland Electric Illuminating Company provides electric distribution, Cleveland Water provides water, and the Northeast Ohio Regional Sewer District manages regional wastewater and stormwater functions. Large new loads and redevelopment utility connections should be screened early with the applicable utility.",
+      q: "Which electric and water utilities serve Cleveland?",
+      a: "Cleveland Public Power serves municipal electric customers and The Illuminating Company serves other areas, so service territory should be confirmed for the parcel. Cleveland Division of Water provides water, and NEORSD is central to wastewater and regional stormwater coordination.",
     },
     {
-      q: "What site conditions are common in Cleveland?",
-      a: "Lake-effect snow, freeze-thaw, lakefront wind, aging urban fill, groundwater, and Lake Erie or Cuyahoga River flood exposure can affect design. A geotechnical report and flood screening inform foundations, pavement, finished floors, roof drainage, and utility routing.",
+      q: "Why are snow and sewer conditions important in Cleveland?",
+      a: "Lake-effect snow and drifting can govern roof design, while frost, lacustrine soils, fill, and Lake Erie exposure affect foundations and durability. Cleveland's combined-sewer legacy and NEORSD requirements should be evaluated before committing to a drainage and utility layout.",
     },
   ],
 };

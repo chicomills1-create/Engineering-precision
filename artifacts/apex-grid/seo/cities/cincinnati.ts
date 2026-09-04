@@ -6,29 +6,47 @@ export const cincinnati: CityData = {
   stateSlug: "ohio",
   county: "Hamilton County",
   ahj: {
-    office: "City of Cincinnati Buildings and Inspections Department",
-    process: "The Buildings and Inspections Department administers commercial building permits under the Ohio Building Code through the City's online permitting tools. Zoning, fire, historic-conservation, right-of-way, and Metropolitan Sewer District reviews are separate approvals that can run alongside the building permit, particularly on downtown, riverfront, and hillside sites.",
+    office: "City of Cincinnati Department of Buildings and Inspections",
+    process:
+      "The Department of Buildings and Inspections administers building, trade, and related permits through the City’s online systems. Commercial work can also require zoning, fire, historic-conservation, Metropolitan Sewer District, Greater Cincinnati Water Works, and public-right-of-way review, so those approvals should be scoped with the primary permit.",
   },
   codes: {
     building: "Ohio Building Code, 2024 edition (based on the 2021 IBC), enforced by the City of Cincinnati",
     energy: "Ohio Building Code commercial energy provisions based on the 2021 IECC; ASHRAE 90.1 is an alternate compliance path",
-    amendments: "Cincinnati enforces Ohio's mandatory statewide building code through its certified department; zoning, historic conservation, fire, sewer, and public-right-of-way requirements remain local and scope-specific. The Cincinnati Zoning Code and MSD stormwater/sewer requirements do not replace OBC technical compliance.",
+    amendments:
+      "Cincinnati enforces Ohio's mandatory statewide commercial building code through its certified department. City zoning and historic review, plus MSD, water, fire, and right-of-way standards, are local requirements that can change project layout and sequencing without replacing the OBC.",
   },
   utilities: {
-    electric: "Duke Energy Ohio",
-    notes: "Duke Energy Ohio coordinates electric service, gas service, and distributed-generation interconnection. Greater Cincinnati Water Works supplies water, while the Metropolitan Sewer District of Greater Cincinnati administers public sewer and stormwater infrastructure; capacity, separation, and connection requirements merit early review on redevelopment sites.",
+    electric: "Duke Energy Ohio provides electric distribution service",
+    notes:
+      "Duke Energy Ohio should be engaged for service additions, upgrades, and distributed-generation interconnection. Greater Cincinnati Water Works provides water, and the Metropolitan Sewer District of Greater Cincinnati administers wastewater and stormwater services in the City.",
   },
-  climateNotes: "Cincinnati's 5A cold-humid climate brings humid summers, winter freeze-thaw, thunderstorms, and occasional Ohio River flooding. Steep hillsides, loess and residual soils, and older combined-sewer neighborhoods make geotechnical investigation, drainage, and utility routing site-specific exercises.",
-  marketNotes: "Cincinnati's market combines major healthcare and university investment with corporate, consumer-products, advanced-manufacturing, logistics, and riverfront redevelopment work. Dense Over-the-Rhine and downtown rehabilitation, brownfield reuse, and hillside parcels create a different engineering profile from greenfield development along the I-71/I-75 corridors.",
+  climateNotes:
+    "Cincinnati is in ASHRAE climate zone 4A, with hot-humid summers, winter freeze-thaw, severe thunderstorms, and Ohio River flood exposure. Steep hillsides, loess and residual soils, fill, and ravines can make slope stability, retaining systems, and drainage defining constraints.",
+  marketNotes:
+    "Cincinnati has active healthcare, university, advanced-manufacturing, consumer-products, logistics, and urban infill sectors. The Ohio River corridor and established neighborhoods create a mix of industrial redevelopment and hillside or historic retrofit work, while the broader region supports airport- and highway-oriented distribution development.",
   narratives: {
-    mep: "Cincinnati MEP design balances 5A winter heating and pipe-freeze protection with humid-summer ventilation and dehumidification. Duke Energy Ohio service capacity, gas decisions, and any distributed-generation interconnection are coordinated before large health-care, manufacturing, or logistics loads are committed; GCWW and MSD connections are parallel infrastructure decisions. The 2024 Ohio Building Code supplies the permit baseline, but existing downtown buildings often require field verification of electrical rooms, shafts, steam or hydronic systems, and sewer elevations before replacement equipment can be reliably phased.",
-    structural: "Cincinnati structural design follows the 2024 Ohio Building Code, with wind, snow, frost, and gravity loads typically more consequential than seismic demand. The city's hillsides and variable fill demand a geotechnical basis for retaining, foundations, and slope stability; near the Ohio River, floodplain elevation and existing waterfront conditions can shape the first-floor strategy. On dense urban rehabilitation work, verified existing masonry, timber, steel, and foundation conditions are as important as code load calculations, while adjacent-property protection and construction sequencing must fit constrained sites.",
-    civil: "Cincinnati civil design starts with the City's zoning and site approvals and MSD's sewer and stormwater requirements, not simply a detention calculation. Older combined-sewer areas, steep grades, and the Ohio River floodplain can limit discharge points and make separation, sanitary capacity, and construction sequencing central to feasibility. We coordinate GCWW water service, MSD connections, erosion control, and any public right-of-way work early, then use site-specific soils and slopes to test whether infiltration, bioretention, or conventional detention is practical.",
-    energy: "Commercial energy compliance in Cincinnati uses the Ohio Building Code's 2021-IECC provisions or the permitted ASHRAE 90.1 alternate path. In a cold-humid 5A climate, continuous insulation, air-barrier continuity, efficient heating, and controlled outside air reduce winter loss without overlooking summer latent load. We reconcile those measures with Duke Energy Ohio electric service, gas choices, lighting controls, and the constraints of existing façades, documenting the selected path as a permit deliverable rather than treating utility incentives as code compliance.",
+    mep:
+      "Cincinnati MEP design addresses a humid 4A climate with real summer latent loads, winter freeze protection, and storm-resilient electrical planning. Duke Energy Ohio service capacity and interconnection are early decisions for electrified central plants, advanced manufacturing, and high-density redevelopment; GCWW and MSD utility connections should be coordinated with mechanical and site routing. The 2024 Ohio Building Code incorporates 2021-IECC commercial energy provisions, with ASHRAE 90.1 as an alternate path. In older urban buildings, investigations of incoming power, water service, drainage elevations, equipment paths, and risers keep the design grounded in constructible existing conditions.",
+    structural:
+      "Cincinnati structural decisions frequently turn on terrain and existing conditions as much as conventional gravity and lateral loads. The Ohio Building Code provides the 2021-IBC-based basis; seismic demand is generally low, while wind, roof snow, frost, and thunderstorm uplift still require complete load-path detailing. Hillside properties merit a project-specific geotechnical investigation for residual soils, colluvium, groundwater, slope stability, retaining walls, and foundation recommendations. Near the Ohio River and its tributaries, flood screening and elevation decisions come before finalizing foundations. Historic masonry and dense infill also require measured investigation of existing walls, party conditions, and adjacent foundations.",
+    civil:
+      "Cincinnati civil design must respect terrain, watershed, and urban utility realities. MSD review guides sanitary and stormwater connections, while GCWW water facilities and City right-of-way standards affect routing; qualifying land disturbance also needs Ohio EPA construction-stormwater coverage and a SWPPP. Ravines, steep grades, shallow rock or variable soils, and Ohio River floodplain conditions can constrain grading, retaining, outfalls, and feasible stormwater practices. We reserve room for conveyance and water-quality measures early and resolve utility crossings and downstream acceptance before a hillside or redevelopment layout becomes difficult to revise.",
+    energy:
+      "Cincinnati commercial energy compliance is governed by the Ohio Building Code’s 2021-IECC provisions, with ASHRAE 90.1 as an accepted alternative. In mixed-humid zone 4A, a continuous air barrier, rain-managed enclosure, moisture-aware insulation, solar-control glazing, efficient lighting, and humidity-capable ventilation provide meaningful year-round value. For adaptive reuse, improving an old masonry or mixed façade requires attention to moisture transport as well as nominal R-value. We coordinate energy documentation with actual HVAC, plug/process loads, and Duke Energy Ohio service strategy so electrification or heat-recovery choices remain feasible at the building scale.",
   },
   faqs: [
-    { q: "Which commercial building code applies in Cincinnati?", a: "Cincinnati enforces Ohio's mandatory 2024 Ohio Building Code, based on the 2021 IBC. Commercial energy provisions are based on the 2021 IECC, with ASHRAE 90.1 available as an alternate path; local zoning, fire, sewer, and right-of-way reviews remain separate." },
-    { q: "Who provides utility service in Cincinnati?", a: "Duke Energy Ohio provides electric service and coordinates gas and distributed-generation requests. Greater Cincinnati Water Works provides water, and the Metropolitan Sewer District of Greater Cincinnati administers public sewer and stormwater infrastructure." },
-    { q: "What site conditions matter most in Cincinnati?", a: "Hillsides, variable soils and fill, combined sewers in older neighborhoods, and Ohio River floodplain exposure can materially affect foundations, grading, stormwater, and utility connections. Geotechnical and MSD coordination should begin during layout rather than after building design." },
+    {
+      q: "Who reviews commercial permits in Cincinnati?",
+      a: "Cincinnati Department of Buildings and Inspections administers construction permits. Zoning, fire, historic-conservation, GCWW, MSD, and right-of-way approvals may be required in addition to the building permit.",
+    },
+    {
+      q: "What commercial code and energy code apply in Cincinnati?",
+      a: "The City enforces Ohio's 2024 Building Code, based on the 2021 IBC. Its commercial energy provisions are based on the 2021 IECC, with ASHRAE 90.1 available as an alternate path.",
+    },
+    {
+      q: "What site risks are distinctive in Cincinnati?",
+      a: "Hillsides, ravines, variable residual soils, retaining needs, and Ohio River flood exposure can materially affect foundations and drainage. MSD stormwater and sewer review, GCWW water coordination, and Ohio EPA construction-stormwater requirements should be addressed early.",
+    },
   ],
 };
