@@ -9,6 +9,7 @@
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "seo:generate": "tsx seo/generate.ts",
+    "seo:check:bylines": "tsx seo/check-blog-authorship.ts",
     "seo:cities:refresh": "tsx seo/refresh-cities-directory.ts",
     "seo:review": "tsx seo/review-report.ts",
     "seo:review:email": "tsx seo/review-email.ts"

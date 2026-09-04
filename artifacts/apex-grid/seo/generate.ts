@@ -8,6 +8,7 @@ import type { StateData, CityData } from "./types";
 import { SERVICES, type ServiceDef } from "./services";
 import { htmlShell, SITE } from "./shell";
 import { BLOG_POSTS, type BlogPost } from "./blog";
+import { verifyBlogPostAuthorship } from "./check-blog-authorship";
 import { CLIENT_PAGES, WHO_WE_WORK_WITH_HUB, type ClientPage } from "./client-pages";
 import { PROJECT_TYPE_PAGES, PROJECT_TYPES_HUB, type ProjectTypePage } from "./project-type-pages";
 import { EXISTING_BUILDING_PAGES, EXISTING_BUILDING_HUB, type ExistingBuildingPage } from "./existing-building-pages";
@@ -2903,7 +2904,9 @@ async function main() {
     assertSlug(p.slug);
     const pdir = path.join(blogDir, p.slug);
     fs.mkdirSync(pdir, { recursive: true });
-    fs.writeFileSync(path.join(pdir, "index.html"), blogPostPage(p));
+    const html = blogPostPage(p);
+    verifyBlogPostAuthorship(p, html);
+    fs.writeFileSync(path.join(pdir, "index.html"), html);
     pages++;
   }
   // Resources / Knowledge Center
