@@ -32,3 +32,4 @@
 - [Outreach seed startup](outreach-seed-startup.md) — idempotent backfills must skip existing contacts and never block the send scheduler during production startup.
 - [State outreach rollout](state-outreach-rollout.md) — research Arizona first, California next, then other licensed states; Apex Grid covers every state except Alaska.
 - [Hot Market definition](hot-market-definition.md) — national active-opportunity campaign with separate direct builder/contractor and architecture referral-partner lanes.
+- [Outreach advisory-lock hierarchy](outreach-lock-hierarchy.md) — isolate session locks from query connections and never reacquire a recipient lock inside its protected operation.
