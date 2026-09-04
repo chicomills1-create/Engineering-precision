@@ -474,6 +474,21 @@
   <url><loc>https://apexgrideng.com/locations/arizona/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/chandler/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/chandler/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/chandler/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/chandler/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/chandler/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/gilbert/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/gilbert/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/gilbert/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/gilbert/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/gilbert/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/mesa/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/mesa/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/mesa/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/mesa/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/mesa/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/phoenix/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/phoenix/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/phoenix/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -494,7 +509,6 @@
   <url><loc>https://apexgrideng.com/locations/arizona/carefree/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/casa-grande/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/cave-creek/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/arizona/chandler/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/chino-valley/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/clarkdale/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/clifton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -512,7 +526,6 @@
   <url><loc>https://apexgrideng.com/locations/arizona/fountain-hills/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/fredonia/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/gila-bend/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/arizona/gilbert/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/glendale/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/globe/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/goodyear/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -528,7 +541,6 @@
   <url><loc>https://apexgrideng.com/locations/arizona/mammoth/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/marana/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/maricopa/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/arizona/mesa/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/miami/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/nogales/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/oro-valley/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1084,16 +1096,81 @@
   <url><loc>https://apexgrideng.com/locations/california/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/anaheim/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/anaheim/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/anaheim/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/anaheim/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/anaheim/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/bakersfield/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/bakersfield/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/bakersfield/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/bakersfield/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/bakersfield/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/chula-vista/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/chula-vista/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/chula-vista/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/chula-vista/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/chula-vista/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/fresno/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/fresno/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/fresno/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/fresno/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/fresno/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/irvine/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/irvine/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/irvine/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/irvine/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/irvine/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/long-beach/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/long-beach/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/long-beach/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/long-beach/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/long-beach/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/los-angeles/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/los-angeles/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/los-angeles/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/los-angeles/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/los-angeles/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/oakland/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/oakland/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/oakland/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/oakland/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/oakland/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/riverside/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/riverside/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/riverside/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/riverside/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/riverside/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/sacramento/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/sacramento/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/sacramento/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/sacramento/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/sacramento/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-diego/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-diego/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-diego/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-diego/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-diego/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/san-francisco/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/san-francisco/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/san-francisco/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/san-francisco/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/san-francisco/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/san-jose/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/san-jose/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/san-jose/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/san-jose/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/san-jose/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/santa-ana/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/santa-ana/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/santa-ana/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/santa-ana/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/santa-ana/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/stockton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/stockton/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/stockton/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/stockton/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/stockton/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/adelanto/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/agoura-hills/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/alameda/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1103,7 +1180,6 @@
   <url><loc>https://apexgrideng.com/locations/california/alturas/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/amador-city/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/american-canyon/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/anaheim/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/anderson/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/angels/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/antioch/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1120,7 +1196,6 @@
   <url><loc>https://apexgrideng.com/locations/california/avalon/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/avenal/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/azusa/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/bakersfield/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/baldwin-park/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/banning/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/barstow/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1168,7 +1243,6 @@
   <url><loc>https://apexgrideng.com/locations/california/chino/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/chino-hills/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/chowchilla/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/chula-vista/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/citrus-heights/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/claremont/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/clayton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1245,7 +1319,6 @@
   <url><loc>https://apexgrideng.com/locations/california/fountain-valley/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/fowler/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/fremont/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/fresno/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/fullerton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/galt/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/gardena/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1288,7 +1361,6 @@
   <url><loc>https://apexgrideng.com/locations/california/industry/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/inglewood/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/ione/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/irvine/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/irwindale/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/isleton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/jackson/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1329,7 +1401,6 @@
   <url><loc>https://apexgrideng.com/locations/california/loma-linda/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/lomita/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/lompoc/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/long-beach/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/loomis/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/los-alamitos/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/los-altos/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1385,7 +1456,6 @@
   <url><loc>https://apexgrideng.com/locations/california/norwalk/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/novato/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/oakdale/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/oakland/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/oakley/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/oceanside/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/ojai/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1445,7 +1515,6 @@
   <url><loc>https://apexgrideng.com/locations/california/rio-vista/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/ripon/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/riverbank/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/riverside/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/rocklin/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/rohnert-park/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/rolling-hills/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1453,7 +1522,6 @@
   <url><loc>https://apexgrideng.com/locations/california/rosemead/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/roseville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/ross/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/sacramento/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/st-helena/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/salinas/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-anselmo/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1465,12 +1533,10 @@
   <url><loc>https://apexgrideng.com/locations/california/sand-city/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-dimas/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-fernando/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/san-francisco/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-gabriel/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/sanger/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-jacinto/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-joaquin/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/san-jose/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-juan-bautista/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-juan-capistrano/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-leandro/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1481,7 +1547,6 @@
   <url><loc>https://apexgrideng.com/locations/california/san-pablo/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-rafael/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-ramon/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/santa-ana/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/santa-barbara/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/santa-clara/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/santa-clarita/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1515,7 +1580,6 @@
   <url><loc>https://apexgrideng.com/locations/california/south-pasadena/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/south-san-francisco/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/stanton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/stockton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/suisun-city/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/sunnyvale/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/susanville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1580,6 +1644,16 @@
   <url><loc>https://apexgrideng.com/locations/colorado/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/colorado/aurora/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/colorado/aurora/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/colorado/aurora/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/colorado/aurora/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/colorado/aurora/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/colorado/colorado-springs/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/colorado/colorado-springs/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/colorado/colorado-springs/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/colorado/colorado-springs/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/colorado/colorado-springs/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/denver/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/denver/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/denver/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -1594,7 +1668,6 @@
   <url><loc>https://apexgrideng.com/locations/colorado/arvada/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/aspen/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/ault/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/colorado/aurora/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/avon/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/basalt/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/bayfield/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1633,7 +1706,6 @@
   <url><loc>https://apexgrideng.com/locations/colorado/coal-creek/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/cokedale/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/collbran/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/colorado/colorado-springs/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/columbine-valley/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/commerce-city/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/cortez/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1972,6 +2044,16 @@
   <url><loc>https://apexgrideng.com/locations/florida/orlando/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/orlando/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/orlando/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/port-st-lucie/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/port-st-lucie/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/port-st-lucie/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/port-st-lucie/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/port-st-lucie/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/st-petersburg/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/st-petersburg/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/st-petersburg/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/st-petersburg/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/st-petersburg/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/alachua/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/alford/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/altamonte-springs/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -2292,7 +2374,6 @@
   <url><loc>https://apexgrideng.com/locations/florida/port-orange/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/port-richey/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/port-st-joe/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/florida/port-st-lucie/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/punta-gorda/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/quincy/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/raiford/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -2310,7 +2391,6 @@
   <url><loc>https://apexgrideng.com/locations/florida/st-lucie-village/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/st-marks/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/st-pete-beach/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/florida/st-petersburg/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/san-antonio/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/sanford/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/sanibel/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -4442,6 +4522,11 @@
   <url><loc>https://apexgrideng.com/locations/indiana/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/indiana/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/indiana/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/indiana/fort-wayne/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/indiana/fort-wayne/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/indiana/fort-wayne/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/indiana/fort-wayne/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/indiana/fort-wayne/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/indiana/indianapolis/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/indiana/indianapolis/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/indiana/indianapolis/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -4613,7 +4698,6 @@
   <url><loc>https://apexgrideng.com/locations/indiana/flora/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/indiana/fort-branch/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/indiana/fortville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/indiana/fort-wayne/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/indiana/fountain-city/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/indiana/fowler/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/indiana/fowlerton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -5961,6 +6045,11 @@
   <url><loc>https://apexgrideng.com/locations/kansas/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/kansas/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/kansas/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/kansas/wichita/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/kansas/wichita/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/kansas/wichita/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/kansas/wichita/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/kansas/wichita/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/kansas/abbyville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/kansas/abilene/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/kansas/admire/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -6567,7 +6656,6 @@
   <url><loc>https://apexgrideng.com/locations/kansas/white-cloud/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/kansas/whitewater/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/kansas/whiting/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/kansas/wichita/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/kansas/willard/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/kansas/williamsburg/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/kansas/willis/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -7012,6 +7100,11 @@
   <url><loc>https://apexgrideng.com/locations/louisiana/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/louisiana/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/louisiana/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/louisiana/new-orleans/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/louisiana/new-orleans/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/louisiana/new-orleans/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/louisiana/new-orleans/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/louisiana/new-orleans/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/louisiana/abbeville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/louisiana/abita-springs/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/louisiana/addis/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -7212,7 +7305,6 @@
   <url><loc>https://apexgrideng.com/locations/louisiana/newellton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/louisiana/new-iberia/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/louisiana/new-llano/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/louisiana/new-orleans/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/louisiana/new-roads/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/louisiana/noble/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/louisiana/north-hodge/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -7347,10 +7439,14 @@
   <url><loc>https://apexgrideng.com/locations/maryland/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/maryland/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/maryland/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/maryland/baltimore/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/maryland/baltimore/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/maryland/baltimore/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/maryland/baltimore/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/maryland/baltimore/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/maryland/aberdeen/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/maryland/accident/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/maryland/annapolis/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/maryland/baltimore/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/maryland/barclay/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/maryland/barnesville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/maryland/barton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -8118,6 +8214,16 @@
   <url><loc>https://apexgrideng.com/locations/minnesota/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/minnesota/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/minnesota/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/minnesota/minneapolis/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/minnesota/minneapolis/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/minnesota/minneapolis/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/minnesota/minneapolis/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/minnesota/minneapolis/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/minnesota/st-paul/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/minnesota/st-paul/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/minnesota/st-paul/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/minnesota/st-paul/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/minnesota/st-paul/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/minnesota/ada/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/minnesota/adams/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/minnesota/adrian/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -8642,7 +8748,6 @@
   <url><loc>https://apexgrideng.com/locations/minnesota/millville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/minnesota/milroy/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/minnesota/miltona/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/minnesota/minneapolis/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/minnesota/minneiska/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/minnesota/minneota/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/minnesota/minnesota-city/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -8814,7 +8919,6 @@
   <url><loc>https://apexgrideng.com/locations/minnesota/st-martin/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/minnesota/st-marys-point/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/minnesota/st-michael/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/minnesota/st-paul/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/minnesota/st-paul-park/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/minnesota/st-peter/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/minnesota/st-rosa/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -9288,6 +9392,11 @@
   <url><loc>https://apexgrideng.com/locations/missouri/kansas-city/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/kansas-city/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/kansas-city/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/missouri/st-louis/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/missouri/st-louis/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/missouri/st-louis/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/missouri/st-louis/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/missouri/st-louis/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/adrian/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/advance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/agency/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -10051,7 +10160,6 @@
   <url><loc>https://apexgrideng.com/locations/missouri/st-james/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/st-john/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/st-joseph/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/missouri/st-louis/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/st-martins/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/st-mary/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/st-paul/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -10359,6 +10467,16 @@
   <url><loc>https://apexgrideng.com/locations/nebraska/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/nebraska/lincoln/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/nebraska/lincoln/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/nebraska/lincoln/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/nebraska/lincoln/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/nebraska/lincoln/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/nebraska/omaha/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/nebraska/omaha/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/nebraska/omaha/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/nebraska/omaha/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/nebraska/omaha/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/abie/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/adams/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/ainsworth/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -10639,7 +10757,6 @@
   <url><loc>https://apexgrideng.com/locations/nebraska/lewiston/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/lexington/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/liberty/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/nebraska/lincoln/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/lindsay/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/linwood/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/litchfield/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -10717,7 +10834,6 @@
   <url><loc>https://apexgrideng.com/locations/nebraska/odell/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/ogallala/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/ohiowa/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/nebraska/omaha/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/o-neill/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/ong/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/orchard/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -10954,6 +11070,16 @@
   <url><loc>https://apexgrideng.com/locations/new-jersey/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-jersey/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-jersey/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-jersey/jersey-city/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-jersey/jersey-city/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-jersey/jersey-city/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-jersey/jersey-city/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-jersey/jersey-city/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-jersey/newark/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-jersey/newark/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-jersey/newark/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-jersey/newark/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-jersey/newark/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-jersey/absecon/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-jersey/allendale/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-jersey/allenhurst/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -11087,7 +11213,6 @@
   <url><loc>https://apexgrideng.com/locations/new-jersey/interlaken/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-jersey/island-heights/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-jersey/jamesburg/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/new-jersey/jersey-city/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-jersey/keansburg/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-jersey/kearny/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-jersey/kenilworth/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -11141,7 +11266,6 @@
   <url><loc>https://apexgrideng.com/locations/new-jersey/national-park/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-jersey/neptune-city/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-jersey/netcong/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/new-jersey/newark/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-jersey/new-brunswick/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-jersey/newfield/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-jersey/new-milford/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -11396,11 +11520,16 @@
   <url><loc>https://apexgrideng.com/locations/new-york/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/new-york/new-york-city/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/new-york/new-york-city/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/new-york/new-york-city/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/new-york/new-york-city/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/new-york/new-york-city/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-york/buffalo/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-york/buffalo/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-york/buffalo/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-york/buffalo/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-york/buffalo/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-york/new-york/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-york/new-york/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-york/new-york/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-york/new-york/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-york/new-york/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/adams/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/addison/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/afton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -11468,7 +11597,6 @@
   <url><loc>https://apexgrideng.com/locations/new-york/brownville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/brushton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/buchanan/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/new-york/buffalo/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/burdett/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/burke/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/caledonia/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -11765,7 +11893,6 @@
   <url><loc>https://apexgrideng.com/locations/new-york/newport/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/new-rochelle/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/new-square/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/new-york/new-york/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/new-york-mills/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/niagara-falls/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/nichols/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -12005,6 +12132,16 @@
   <url><loc>https://apexgrideng.com/locations/north-carolina/charlotte/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/charlotte/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/charlotte/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/durham/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/durham/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/durham/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/durham/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/durham/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/greensboro/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/greensboro/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/greensboro/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/greensboro/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/greensboro/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/aberdeen/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/ahoskie/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/alamance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -12135,7 +12272,6 @@
   <url><loc>https://apexgrideng.com/locations/north-carolina/dublin/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/duck/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/dunn/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/north-carolina/durham/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/earl/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/east-arcadia/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/east-bend/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -12198,7 +12334,6 @@
   <url><loc>https://apexgrideng.com/locations/north-carolina/grantsboro/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/greenevers/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/green-level/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/north-carolina/greensboro/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/greenville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/grifton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/grimesland/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -12918,11 +13053,26 @@
   <url><loc>https://apexgrideng.com/locations/ohio/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/cincinnati/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/cincinnati/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/cincinnati/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/cincinnati/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/cincinnati/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/cleveland/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/cleveland/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/cleveland/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/cleveland/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/cleveland/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/columbus/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/columbus/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/columbus/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/columbus/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/columbus/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/toledo/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/toledo/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/toledo/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/toledo/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/toledo/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/aberdeen/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/ada/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/adamsville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -13086,14 +13236,12 @@
   <url><loc>https://apexgrideng.com/locations/ohio/chilo/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/chippewa-lake/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/christiansburg/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/ohio/cincinnati/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/circleville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/clarington/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/clarksburg/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/clarksville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/clay-center/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/clayton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/ohio/cleveland/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/cleveland-heights/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/cleves/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/clifton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -13734,7 +13882,6 @@
   <url><loc>https://apexgrideng.com/locations/ohio/timberlake/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/tipp-city/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/tiro/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/ohio/toledo/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/tontogany/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/toronto/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/tremont-city/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -13856,6 +14003,11 @@
   <url><loc>https://apexgrideng.com/locations/oklahoma/oklahoma-city/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/oklahoma/oklahoma-city/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/oklahoma/oklahoma-city/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/oklahoma/tulsa/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/oklahoma/tulsa/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/oklahoma/tulsa/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/oklahoma/tulsa/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/oklahoma/tulsa/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/oklahoma/achille/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/oklahoma/ada/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/oklahoma/adair/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -14386,7 +14538,6 @@
   <url><loc>https://apexgrideng.com/locations/oklahoma/tribbey/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/oklahoma/tryon/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/oklahoma/tullahassee/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/oklahoma/tulsa/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/oklahoma/tupelo/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/oklahoma/tushka/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/oklahoma/tuttle/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -14451,6 +14602,11 @@
   <url><loc>https://apexgrideng.com/locations/oregon/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/oregon/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/oregon/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/oregon/portland/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/oregon/portland/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/oregon/portland/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/oregon/portland/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/oregon/portland/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/oregon/adair-village/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/oregon/adams/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/oregon/adrian/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -14616,7 +14772,6 @@
   <url><loc>https://apexgrideng.com/locations/oregon/philomath/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/oregon/phoenix/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/oregon/pilot-rock/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/oregon/portland/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/oregon/port-orford/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/oregon/powers/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/oregon/prairie-city/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -16327,6 +16482,11 @@
   <url><loc>https://apexgrideng.com/locations/tennessee/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/tennessee/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/tennessee/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/tennessee/memphis/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/tennessee/memphis/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/tennessee/memphis/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/tennessee/memphis/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/tennessee/memphis/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/tennessee/nashville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/tennessee/nashville/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/tennessee/nashville/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -16531,7 +16691,6 @@
   <url><loc>https://apexgrideng.com/locations/tennessee/maynardville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/tennessee/medina/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/tennessee/medon/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/tennessee/memphis/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/tennessee/michie/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/tennessee/middleton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/tennessee/milan/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -16681,16 +16840,31 @@
   <url><loc>https://apexgrideng.com/locations/texas/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/arlington/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/arlington/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/arlington/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/arlington/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/arlington/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/austin/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/austin/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/austin/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/austin/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/austin/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/corpus-christi/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/corpus-christi/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/corpus-christi/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/corpus-christi/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/corpus-christi/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/dallas/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/dallas/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/dallas/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/dallas/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/dallas/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/el-paso/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/el-paso/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/el-paso/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/el-paso/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/el-paso/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/fort-worth/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/fort-worth/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/fort-worth/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -16701,6 +16875,21 @@
   <url><loc>https://apexgrideng.com/locations/texas/houston/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/houston/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/houston/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/laredo/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/laredo/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/laredo/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/laredo/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/laredo/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/lubbock/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/lubbock/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/lubbock/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/lubbock/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/lubbock/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/plano/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/plano/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/plano/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/plano/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/plano/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/san-antonio/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/san-antonio/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/san-antonio/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -16749,7 +16938,6 @@
   <url><loc>https://apexgrideng.com/locations/texas/archer-city/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/arcola/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/argyle/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/texas/arlington/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/arp/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/asherton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/aspermont/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -16941,7 +17129,6 @@
   <url><loc>https://apexgrideng.com/locations/texas/copperas-cove/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/copper-canyon/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/corinth/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/texas/corpus-christi/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/corral-city/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/corrigan/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/corsicana/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -17043,7 +17230,6 @@
   <url><loc>https://apexgrideng.com/locations/texas/el-lago/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/ellinger/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/elmendorf/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/texas/el-paso/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/elsa/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/emhouse/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/emory/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -17308,7 +17494,6 @@
   <url><loc>https://apexgrideng.com/locations/texas/lampasas/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/lancaster/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/la-porte/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/texas/laredo/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/latexo/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/la-vernia/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/la-villa/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -17356,7 +17541,6 @@
   <url><loc>https://apexgrideng.com/locations/texas/lott/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/lovelady/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/lowry-crossing/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/texas/lubbock/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/lucas/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/lueders/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/lufkin/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -17555,7 +17739,6 @@
   <url><loc>https://apexgrideng.com/locations/texas/pittsburg/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/plains/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/plainview/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/texas/plano/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/plantersville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/pleak/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/pleasanton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -18238,6 +18421,11 @@
   <url><loc>https://apexgrideng.com/locations/virginia/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/virginia/virginia-beach/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/virginia/virginia-beach/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/virginia/virginia-beach/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/virginia/virginia-beach/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/virginia/virginia-beach/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/abingdon/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/accomac/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/alberta/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -18448,7 +18636,6 @@
   <url><loc>https://apexgrideng.com/locations/virginia/vienna/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/vinton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/virgilina/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/virginia/virginia-beach/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/wachapreague/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/wakefield/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/warrenton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -18995,6 +19182,16 @@
   <url><loc>https://apexgrideng.com/locations/wisconsin/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/wisconsin/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/wisconsin/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/wisconsin/madison/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/wisconsin/madison/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/wisconsin/madison/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/wisconsin/madison/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/wisconsin/madison/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/wisconsin/milwaukee/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/wisconsin/milwaukee/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/wisconsin/milwaukee/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/wisconsin/milwaukee/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/wisconsin/milwaukee/energy-code-compliance/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/wisconsin/abbotsford/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/wisconsin/adams/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/wisconsin/adell/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -19302,7 +19499,6 @@
   <url><loc>https://apexgrideng.com/locations/wisconsin/lyndon-station/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/wisconsin/lynxville/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/wisconsin/mcfarland/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/wisconsin/madison/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/wisconsin/maiden-rock/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/wisconsin/maine/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/wisconsin/manawa/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -19337,7 +19533,6 @@
   <url><loc>https://apexgrideng.com/locations/wisconsin/milladore/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/wisconsin/milltown/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/wisconsin/milton/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/wisconsin/milwaukee/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/wisconsin/mineral-point/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/wisconsin/minong/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/wisconsin/mishicot/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -19717,10 +19912,6 @@
   <url><loc>https://apexgrideng.com/locations/arizona/paradise-valley/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/glendale/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/glendale/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/arizona/mesa/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/arizona/mesa/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/arizona/chandler/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/arizona/chandler/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/queen-creek/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/phoenix/multifamily-mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/phoenix/structural-inspections/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -19733,14 +19924,6 @@
   <url><loc>https://apexgrideng.com/locations/california/los-angeles/commercial-title-24/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/orange-county/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/orange-county/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/irvine/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/irvine/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/sacramento/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/sacramento/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/san-francisco/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/san-francisco/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/san-jose/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/san-jose/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/palo-alto/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/palo-alto/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/inland-empire/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -19770,32 +19953,24 @@
   <url><loc>https://apexgrideng.com/locations/virginia/manassas/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/richmond/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/richmond/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/virginia/virginia-beach/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/virginia/virginia-beach/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/raleigh/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/raleigh/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/raleigh/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/tucson/geotechnical-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-diego/geotechnical-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/san-francisco/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-francisco/geotechnical-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/orange-county/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/orange-county/geotechnical-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/fort-worth/geotechnical-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/texas/plano/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/texas/plano/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/plano/geotechnical-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/frisco/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/frisco/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/frisco/geotechnical-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/texas/arlington/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/texas/arlington/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/arlington/geotechnical-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/fort-lauderdale/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/fort-lauderdale/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/tampa/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/richmond/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/virginia/virginia-beach/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/norfolk/structural-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/norfolk/mep-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/norfolk/civil-engineering/</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>

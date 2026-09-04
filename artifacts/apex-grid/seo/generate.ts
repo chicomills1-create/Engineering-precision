@@ -1726,6 +1726,20 @@ function locationServicePage(page: LocationServicePage): string {
     .slice(0, 3)
     .map((s) => `<a href="/locations/${page.stateSlug}/${page.citySlug}/${s}/">${toTitle(s)}</a>`)
     .join(" · ");
+  const faqs = [
+    {
+      q: `What does ${toTitle(page.serviceSlug)} in ${page.cityName} include?`,
+      a: page.lede,
+    },
+    {
+      q: `Who reviews ${page.cityName} engineering permit documents?`,
+      a: `${page.ahj} is the listed authority having jurisdiction for this service area. The exact reviewer and submittal path should be confirmed for the project address before design begins.`,
+    },
+    {
+      q: `Which building and energy codes apply in ${page.cityName}?`,
+      a: `The listed building-code basis is ${page.buildingCode}, and the listed energy-code basis is ${page.energyCode}. Project-specific amendments and effective dates should be verified with the permitting authority.`,
+    },
+  ];
   const body = `
     <div class="hero hero--page">
       <div class="hero-inner">
@@ -1769,6 +1783,15 @@ ${relatedLinks ? `        <p>Related services in ${esc(page.cityName)}: ${relate
       </div>
     </section>
 
+    <section class="section section--light">
+      <div class="container container--narrow">
+        <h2>${esc(page.cityName)} ${esc(toTitle(page.serviceSlug))} Questions</h2>
+        <div class="faq-list">
+          ${faqs.map((faq) => `<details><summary>${esc(faq.q)}</summary><div class="a">${esc(faq.a)}</div></details>`).join("")}
+        </div>
+      </div>
+    </section>
+
     <section class="section section--dark cta-band">
       <div class="container">
         <h2>Ready to Start in ${esc(page.cityName)}?</h2>
@@ -1789,12 +1812,21 @@ ${relatedLinks ? `        <p>Related services in ${esc(page.cityName)}: ${relate
     "areaServed": { "@type": "City", "name": page.cityName },
     "serviceType": toTitle(page.serviceSlug),
   };
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
+    })),
+  };
 
   return htmlShell({
     title: page.title,
     description: page.lede,
     canonical: `${SITE}${url}`,
-    schemaJson: [svcSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [svcSchema, faqSchema, breadcrumbSchema(crumbs)],
     body,
   });
 }

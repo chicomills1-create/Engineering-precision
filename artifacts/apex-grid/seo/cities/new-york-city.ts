@@ -1,7 +1,7 @@
 import type { CityData } from "../types";
 
 export const newYorkCity: CityData = {
-  slug: "new-york-city",
+  slug: "new-york",
   name: "New York City",
   stateSlug: "new-york",
   county: "Five boroughs: New York, Kings, Queens, Bronx, and Richmond Counties",
