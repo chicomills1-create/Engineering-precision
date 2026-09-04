@@ -457,8 +457,7 @@ export function startOutreachWorker(): void {
     sendTimer.unref();
     logger.info("Outreach send scheduler enabled");
 
-    runs.runReconciliation();
-    const reconciliationTimer = setInterval(runs.runReconciliation, 60_000);
+    const reconciliationTimer = setInterval(runs.runReconciliation, 30 * 60_000);
     reconciliationTimer.unref();
     logger.info("Outreach reconciliation scheduler enabled");
   }
