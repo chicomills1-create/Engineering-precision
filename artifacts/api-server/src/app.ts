@@ -13,6 +13,7 @@ import {
 } from "./middlewares/clerkProxyMiddleware";
 import router from "./routes";
 import { logger } from "./lib/logger";
+import { wakeOutreachDispatchFromTraffic } from "./lib/outreachWorker";
 
 // In both dev and production builds, dist/index.mjs lives at
 // artifacts/api-server/dist/ — so apex-grid's static output is two levels up.
@@ -81,6 +82,11 @@ app.use(
     },
   }),
 );
+
+app.use((_req, res, next) => {
+  res.once("finish", wakeOutreachDispatchFromTraffic);
+  next();
+});
 
 app.use(CLERK_PROXY_PATH, clerkProxyMiddleware());
 

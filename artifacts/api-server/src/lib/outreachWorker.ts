@@ -53,6 +53,17 @@ export type OutreachAutomationStatus = {
   researchAutomationReady: boolean;
 };
 
+let trafficTriggeredDispatch: (() => void) | undefined;
+
+/**
+ * Autoscale deployments may pause background timers between requests. Site
+ * traffic uses this hook to wake the same overlap-guarded, database-claimed
+ * dispatcher used by the one-minute worker interval.
+ */
+export function wakeOutreachDispatchFromTraffic(): void {
+  trafficTriggeredDispatch?.();
+}
+
 function hasConfiguredAdminEmail(): boolean {
   return (process.env.ADMIN_EMAILS ?? "")
     .split(",")
@@ -438,6 +449,7 @@ export function startOutreachWorker(): void {
         .catch((err: unknown) => logger.error({ err }, "Outreach research scheduler failed"));
     },
   });
+  trafficTriggeredDispatch = runs.runDispatch;
 
   if (status.automationReady) {
     runs.runDispatch();
