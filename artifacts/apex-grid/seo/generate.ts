@@ -339,7 +339,7 @@ ${breadcrumb(crumbs)}
     description: svc.metaDescription(state),
     canonical: `${SITE}${url}`,
     schemaJson: [orgSchema, svcSchema, faqSchema, breadcrumbSchema(crumbs)],
-    body,
+    body: body.replace(/[ \t]+$/gm, ""),
   });
 }
 
@@ -542,7 +542,7 @@ ${breadcrumb(crumbs)}
   <h2>One Organization, <em>Connected Delivery</em></h2>
   <div class="grid3">
     <a class="card" href="/locations/${state.slug}/${city.slug}/"><div class="label">Engineering</div><h3>Engineering in ${esc(city.name)}</h3><p>MEP, structural, civil, and energy-code services.</p></a>
-    ${availableVerticals
+${availableVerticals
       .map(
         (vertical) =>
           `<a class="card" href="${verticalCityUrl(vertical, state.slug, city.slug)}"><div class="label">${esc(vertical.shortName)}</div><h3>${esc(vertical.name)} in ${esc(city.name)}</h3><p>Verified regulated-service coverage in ${esc(state.name)}.</p></a>`,
@@ -2375,7 +2375,7 @@ function staticStandalonePage(page: StaticPageDef): string {
     description: page.description,
     canonical: `${SITE}${url}`,
     schemaJson: [schema, ...(page.schemaJson ?? []), breadcrumbSchema(crumbs)],
-    body,
+    body: body.replace(/[ \t]+$/gm, ""),
   });
 }
 
@@ -3366,7 +3366,7 @@ ${breadcrumb(crumbs)}
     description: `Licensed MEP, structural, civil, and energy-compliance engineering in ${city.name}, ${state.abbrev}. Permitting through ${city.ahj.office} under the ${city.codes.building.split(",")[0].split("(")[0].trim()}.`,
     canonical: `${SITE}/locations/${state.slug}/${city.slug}/`,
     schemaJson: [orgSchema, serviceSchema, faqSchema, breadcrumbSchema(crumbs)],
-    body,
+    body: body.replace(/[ \t]+$/gm, ""),
   });
 }
 

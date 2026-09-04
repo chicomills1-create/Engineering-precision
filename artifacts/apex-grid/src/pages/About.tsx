@@ -305,6 +305,7 @@ const JEREMY_PERSON_SCHEMA = {
   name: "Jeremy Mills",
   alternateName: ["Chico Mills", "Pastor Jeremy Mills", "Pastor Chico Mills"],
   url: `${SITE_URL}/jeremy-mills/`,
+  mainEntityOfPage: { "@id": `${SITE_URL}/jeremy-mills/#profile` },
   jobTitle: "Founder and Chief Executive Officer",
   description:
     "Founder and CEO of Apex Grid Engineering, U.S. Air Force veteran, and Founder and Senior Pastor of 16:3 Faith.",

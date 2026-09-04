@@ -52,6 +52,7 @@ export const APEX_GRID_BUSINESS_SCHEMA = {
   "@type": "ProfessionalService",
   "@id": `${APEX_GRID_SITE_URL}/#business`,
   name: "Apex Grid Engineering",
+  alternateName: "Apex Grid",
   legalName: "Apex Grid Engineering",
   url: `${APEX_GRID_SITE_URL}/`,
   logo: `${APEX_GRID_SITE_URL}/favicon.svg`,
@@ -75,6 +76,13 @@ export const APEX_GRID_BUSINESS_SCHEMA = {
     longitude: -111.5985155,
   },
   areaServed: serviceAreas,
+  founder: {
+    "@type": "Person",
+    "@id": `${APEX_GRID_SITE_URL}/jeremy-mills/#person`,
+    name: "Jeremy Mills",
+    alternateName: "Chico Mills",
+    url: `${APEX_GRID_SITE_URL}/jeremy-mills/`,
+  },
   knowsAbout: knowledgeAreas,
   hasOfferCatalog: {
     "@type": "OfferCatalog",
