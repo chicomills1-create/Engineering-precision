@@ -5,6 +5,7 @@ import {
   outreachMessagesTable,
   outreachQueueAlertsTable,
 } from "@workspace/db";
+import { logger } from "./logger";
 
 export const OUTREACH_QUEUE_GRACE_MS = 5 * 60 * 1000;
 const INCIDENT_KEY = "scheduled-outreach-overdue";
@@ -24,6 +25,11 @@ export type OutreachQueueMonitorResult =
   | { state: "failed"; summary: OutreachQueueAlertSummary; error: string };
 
 type QueueSummaryLoader = (cutoff: Date) => Promise<OutreachQueueAlertSummary | null>;
+type QueueAlertNotifier = (summary: OutreachQueueAlertSummary) => Promise<void>;
+type QueueAlertFallback = (
+  summary: OutreachQueueAlertSummary,
+  primaryError: string,
+) => Promise<void>;
 
 function adminEmails(): string[] {
   return (process.env.ADMIN_EMAILS ?? "")
@@ -31,6 +37,7 @@ function adminEmails(): string[] {
     .map((email) => email.trim())
     .filter(Boolean);
 }
+
 
 function alertFromEmail(): string | undefined {
   return process.env.LEAD_NOTIFY_FROM_EMAIL?.trim()
@@ -73,6 +80,23 @@ async function sendAlert(summary: OutreachQueueAlertSummary): Promise<void> {
   }
 }
 
+async function logFallbackAlert(
+  summary: OutreachQueueAlertSummary,
+  primaryError: string,
+): Promise<void> {
+  logger.error(
+    {
+      incidentKey: INCIDENT_KEY,
+      channel: "operations-log",
+      primaryChannel: "sendgrid",
+      primaryError,
+      ...summary,
+      alertBody: buildOutreachQueueAlertBody(summary),
+    },
+    "URGENT: overdue outreach queue alert delivered through SendGrid-independent fallback",
+  );
+}
+
 async function loadQueueSummary(cutoff: Date): Promise<OutreachQueueAlertSummary | null> {
   const [overdue] = await db.select({
     count: count(),
@@ -103,7 +127,8 @@ async function loadQueueSummary(cutoff: Date): Promise<OutreachQueueAlertSummary
 export async function monitorOverdueOutreachQueue(options: {
   now?: Date;
   graceMs?: number;
-  notify?: (summary: OutreachQueueAlertSummary) => Promise<void>;
+  notify?: QueueAlertNotifier;
+  fallbackNotify?: QueueAlertFallback;
   loadSummary?: QueueSummaryLoader;
 } = {}): Promise<OutreachQueueMonitorResult> {
   const now = options.now ?? new Date();
@@ -131,8 +156,24 @@ export async function monitorOverdueOutreachQueue(options: {
     return { state: "alerted", summary };
   } catch (error) {
     const detail = error instanceof Error ? error.message : "Admin alert failed";
-    await db.delete(outreachQueueAlertsTable)
-      .where(eq(outreachQueueAlertsTable.id, claimed.id));
-    return { state: "failed", summary, error: detail };
+    try {
+      await (options.fallbackNotify ?? logFallbackAlert)(summary, detail);
+      await db.update(outreachQueueAlertsTable).set({
+        status: "fallback_sent",
+        error: detail,
+        sentAt: now,
+      }).where(eq(outreachQueueAlertsTable.id, claimed.id));
+      return { state: "alerted", summary };
+    } catch (fallbackError) {
+      const fallbackDetail = fallbackError instanceof Error
+        ? fallbackError.message
+        : "Fallback admin alert failed";
+      const combinedError = `${detail}; fallback failed: ${fallbackDetail}`;
+      await db.update(outreachQueueAlertsTable).set({
+        status: "failed",
+        error: combinedError,
+      }).where(eq(outreachQueueAlertsTable.id, claimed.id));
+      return { state: "failed", summary, error: combinedError };
+    }
   }
 }
