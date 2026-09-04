@@ -243,7 +243,12 @@ export async function sendClaimedOutreachMessage(
       expectedPersistedStatus: "sending",
       afterProviderDispatch: async (providerMessageId) => {
         if (message.sequenceNumber === 1) {
-          await ensureApprovedFollowUpSequence(message, prospect);
+          await ensureApprovedFollowUpSequence(
+            message,
+            prospect,
+            new Date(),
+            { emailLockAlreadyHeld: true },
+          );
         }
         [persisted] = await db.update(outreachMessagesTable).set({
           status: "sent",

@@ -33,6 +33,7 @@ export async function ensureApprovedFollowUpSequence(
   initialMessage: InitialSequenceMessage,
   prospect: Pick<Prospect, "contactName">,
   now = new Date(),
+  options: { emailLockAlreadyHeld?: boolean } = {},
 ): Promise<number> {
   if (initialMessage.sequenceNumber !== 1) return 0;
 
@@ -50,7 +51,9 @@ export async function ensureApprovedFollowUpSequence(
   const templates = approvedOutreachFollowUpMessages(prospect.contactName ?? "there");
 
   return db.transaction(async (tx) => {
-    await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${candidateEmail}, 0))`);
+    if (!options.emailLockAlreadyHeld) {
+      await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${candidateEmail}, 0))`);
+    }
     await tx.execute(sql`
       select pg_advisory_xact_lock(
         hashtextextended(${`outreach-follow-ups:${initialMessage.prospectId}:${campaignScope}`}, 0)
