@@ -36,6 +36,7 @@ import {
   stopStaleOpenerFollowUps,
   stopLegacyAdditionalFollowUps,
 } from "./outreachSequence";
+import { monitorOverdueOutreachQueue } from "./outreachQueueMonitor";
 
 const ADMIN_EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 // Allows the 200-message baseline plus currently verified hot-market extras.
@@ -281,12 +282,14 @@ export type OutreachWorkerRunOperations = {
   dispatch: () => Promise<void>;
   reconcile: () => Promise<void>;
   research: () => Promise<void>;
+  monitor: () => Promise<void>;
 };
 
 export type OutreachWorkerRuns = {
   runDispatch: () => void;
   runReconciliation: () => void;
   runResearch: () => void;
+  runMonitor: () => void;
 };
 
 /**
@@ -300,6 +303,7 @@ export function createOutreachWorkerRuns(
     runDispatch: createGuardedAsyncRun(operations.dispatch),
     runReconciliation: createGuardedAsyncRun(operations.reconcile),
     runResearch: createGuardedAsyncRun(operations.research),
+    runMonitor: createGuardedAsyncRun(operations.monitor),
   };
 }
 
@@ -417,6 +421,15 @@ export function startOutreachWorker(): void {
           if (sentCount > 0) logger.info({ sentCount }, "Processed scheduled outreach messages");
         })
         .catch((err: unknown) => logger.error({ err }, "Outreach dispatch scheduler failed"));
+      const monitorResult = await monitorOverdueOutreachQueue();
+      if (monitorResult.state === "alerted") {
+        logger.error(monitorResult.summary, "Approved outreach remained queued past its scheduled grace period");
+      } else if (monitorResult.state === "failed") {
+        logger.error(
+          { ...monitorResult.summary, error: monitorResult.error },
+          "Overdue outreach admin alert failed",
+        );
+      }
     },
     reconcile: async () => {
       await processOutreachReconciliation()
@@ -448,6 +461,14 @@ export function startOutreachWorker(): void {
         })
         .catch((err: unknown) => logger.error({ err }, "Outreach research scheduler failed"));
     },
+    monitor: async () => {
+      const result = await monitorOverdueOutreachQueue();
+      if (result.state === "alerted") {
+        logger.error(result.summary, "Approved outreach remained queued past its scheduled grace period");
+      } else if (result.state === "failed") {
+        logger.error({ ...result.summary, error: result.error }, "Overdue outreach admin alert failed");
+      }
+    },
   });
   trafficTriggeredDispatch = runs.runDispatch;
 
@@ -460,6 +481,10 @@ export function startOutreachWorker(): void {
     const reconciliationTimer = setInterval(runs.runReconciliation, 30 * 60_000);
     reconciliationTimer.unref();
     logger.info("Outreach reconciliation scheduler enabled");
+
+    const monitorTimer = setInterval(runs.runMonitor, 60_000);
+    monitorTimer.unref();
+    logger.info("Outreach queue monitor enabled");
   }
 
   if (status.researchAutomationReady) {

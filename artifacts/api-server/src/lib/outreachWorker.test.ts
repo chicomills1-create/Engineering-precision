@@ -266,6 +266,7 @@ test("pending reconciliation does not block a later dispatch tick", async () => 
       });
     },
     research: async () => undefined,
+    monitor: async () => undefined,
   });
 
   runs.runReconciliation();
@@ -289,6 +290,7 @@ test("dispatch lane does not overlap itself", async () => {
     },
     reconcile: async () => undefined,
     research: async () => undefined,
+    monitor: async () => undefined,
   });
 
   runs.runDispatch();
@@ -316,6 +318,7 @@ test("reconciliation lane does not overlap itself", async () => {
       });
     },
     research: async () => undefined,
+    monitor: async () => undefined,
   });
 
   runs.runReconciliation();

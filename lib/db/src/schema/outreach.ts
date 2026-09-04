@@ -143,6 +143,22 @@ export const outreachMessagesTable = pgTable("outreach_messages", {
     .where(sql`${table.sequenceNumber} > 1`),
 ]);
 
+export const outreachQueueAlertsTable = pgTable("outreach_queue_alerts", {
+  id: serial("id").primaryKey(),
+  incidentKey: text("incident_key").notNull(),
+  status: text("status").notNull().default("claimed"),
+  overdueCount: integer("overdue_count").notNull(),
+  scheduledFrom: timestamp("scheduled_from", { withTimezone: true }).notNull(),
+  scheduledThrough: timestamp("scheduled_through", { withTimezone: true }).notNull(),
+  providerAmbiguousCount: integer("provider_ambiguous_count").notNull().default(0),
+  deliveryFailureCount: integer("delivery_failure_count").notNull().default(0),
+  error: text("error"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  sentAt: timestamp("sent_at", { withTimezone: true }),
+}, (table) => [
+  uniqueIndex("outreach_queue_alerts_incident_key_unique").on(table.incidentKey),
+]);
+
 export const outreachPreparationSlotsTable = pgTable("outreach_preparation_slots", {
   id: serial("id").primaryKey(),
   runId: integer("run_id").notNull().references(() => outreachPreparationRunsTable.id, { onDelete: "cascade" }),
@@ -251,6 +267,7 @@ export const insertResearchScheduleRunSchema = createInsertSchema(outreachResear
 export const insertPreparationRunSchema = createInsertSchema(outreachPreparationRunsTable).omit({ id: true, startedAt: true, completedAt: true });
 export const insertPreparationSlotSchema = createInsertSchema(outreachPreparationSlotsTable).omit({ id: true, createdAt: true });
 export const insertOutreachMessageSchema = createInsertSchema(outreachMessagesTable).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertOutreachQueueAlertSchema = createInsertSchema(outreachQueueAlertsTable).omit({ id: true, createdAt: true });
 export const insertOutreachSequenceSendClaimSchema = createInsertSchema(outreachSequenceSendClaimsTable).omit({ id: true, createdAt: true });
 export const insertOutreachSuppressionSchema = createInsertSchema(outreachSuppressionsTable).omit({ id: true, createdAt: true });
 export const insertOutreachDeliveryEventSchema = createInsertSchema(outreachDeliveryEventsTable).omit({ id: true, createdAt: true });
@@ -273,6 +290,7 @@ export type PreparationSlot = typeof outreachPreparationSlotsTable.$inferSelect;
 export type InsertPreparationSlot = z.infer<typeof insertPreparationSlotSchema>;
 export type InsertOutreachMessage = z.infer<typeof insertOutreachMessageSchema>;
 export type OutreachMessage = typeof outreachMessagesTable.$inferSelect;
+export type OutreachQueueAlert = typeof outreachQueueAlertsTable.$inferSelect;
 export type InsertOutreachSuppression = z.infer<typeof insertOutreachSuppressionSchema>;
 export type OutreachSuppression = typeof outreachSuppressionsTable.$inferSelect;
 export type InsertOutreachDeliveryEvent = z.infer<typeof insertOutreachDeliveryEventSchema>;
