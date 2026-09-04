@@ -1,11 +1,11 @@
-import { pool } from "@workspace/db";
+import { advisoryLockPool } from "@workspace/db";
 
 export async function withOutreachEmailLock<T>(
   email: string,
   operation: () => Promise<T>,
 ): Promise<T> {
   const normalizedEmail = email.trim().toLowerCase();
-  const client = await pool.connect();
+  const client = await advisoryLockPool.connect();
   let locked = false;
   try {
     await client.query(

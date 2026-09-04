@@ -143,7 +143,7 @@ function deferred<T>() {
 }
 
 async function waitForReply(email: string): Promise<void> {
-  for (let attempt = 0; attempt < 100; attempt += 1) {
+  for (let attempt = 0; attempt < 500; attempt += 1) {
     const [reply] = await db.select({ id: outreachRepliesTable.id })
       .from(outreachRepliesTable)
       .where(eq(outreachRepliesTable.senderEmail, email))

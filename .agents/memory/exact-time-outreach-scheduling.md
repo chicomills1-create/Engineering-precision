@@ -26,3 +26,9 @@ An automated drip must create every approved sequence row before the initial del
 **Why:** Initial-only campaign rows looked enrolled but produced no follow-ups, because the event handler had nothing to schedule. Existing delivered contacts also needed a safe backfill without duplicates or immediate sends.
 
 **How to apply:** Create unscheduled sequences 2–4 transactionally with sequence 1, schedule them only after verified delivery, and make startup reconciliation safe to rerun with zero duplicate rows.
+
+The standing Apex Grid operating order is outcome-based, not reminder-based: at 8:00 AM America/Phoenix, ensure the approved outreach actually reaches the provider under all safety controls, then replenish verified prospects and prepare the next day's queue. If dispatch fails, continue recovery autonomously instead of merely reporting that it failed.
+
+**Why:** The user explicitly established this as the single daily outreach responsibility after repeated cases where scheduled or approved messages remained unsent.
+
+**How to apply:** Treat a due approved queue as active work until provider handoff evidence is persisted or a safety-critical blocker genuinely requires user action. Verify processed, delivered, bounced, and unresolved counts; after dispatch, research and stage verified replacements for the following Phoenix send window.
