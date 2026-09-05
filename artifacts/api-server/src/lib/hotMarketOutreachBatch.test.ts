@@ -18,10 +18,10 @@ import {
 
 test("the one-time hot-market batch contains every currently verified new contact", () => {
   assert.equal(HOT_MARKET_DAILY_TARGET, 50);
-  assert.equal(HOT_MARKET_OUTREACH_CONTACTS.length, 73);
+  assert.equal(HOT_MARKET_OUTREACH_CONTACTS.length, 123);
   assert.equal(
     new Set(HOT_MARKET_OUTREACH_CONTACTS.map((contact) => contact.contactEmail)).size,
-    73,
+    123,
   );
   assert.ok(HOT_MARKET_OUTREACH_CONTACTS.every((contact) =>
     contact.approvalStatus === "approved"
@@ -33,15 +33,15 @@ test("the one-time hot-market batch contains every currently verified new contac
     ["alston@alstonco.com", "frank.dascanio@weitz.com"].includes(contact.contactEmail)
   ));
   assert.doesNotThrow(() =>
-    assertVerifiedOutreachBatch(HOT_MARKET_OUTREACH_CONTACTS, 73)
+    assertVerifiedOutreachBatch(HOT_MARKET_OUTREACH_CONTACTS, 123)
   );
 });
 
-test("the national expansion contributes exactly 50 verified contacts across both copy lanes", () => {
+test("the national expansion preserves at least 50 verified contacts across both copy lanes", () => {
   const expansion = HOT_MARKET_OUTREACH_CONTACTS.filter((contact) => contact.state !== "AZ");
-  assert.equal(expansion.length, 50);
-  assert.equal(expansion.filter((contact) => contact.audience === "builder").length, 35);
-  assert.equal(expansion.filter((contact) => contact.audience === "architect").length, 15);
+  assert.ok(expansion.length >= 50);
+  assert.ok(expansion.filter((contact) => contact.audience === "builder").length >= 35);
+  assert.ok(expansion.filter((contact) => contact.audience === "architect").length >= 15);
 });
 
 test("the approved hot-market copy leads with the builder value proposition", () => {

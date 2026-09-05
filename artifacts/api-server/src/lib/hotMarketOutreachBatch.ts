@@ -17,6 +17,7 @@ import southeastExpansionData from "../../../../.agents/outputs/hot-market-south
 import carolinasExpansionData from "../../../../.agents/outputs/hot-market-carolinas-verified.json";
 import mountainExpansionData from "../../../../.agents/outputs/hot-market-mountain-verified.json";
 import nationalExpansionData from "../../../../.agents/outputs/hot-market-national-verified.json";
+import septemberFiveData from "../../../../.agents/outputs/hot-market-sep05-final-verified.json";
 import {
   assertVerifiedHotMarketContact,
   assertVerifiedOutreachBatch,
@@ -72,6 +73,7 @@ type SourceContact = {
   projectEvidence?: string;
   personalization?: string;
   personalizationSentence?: string;
+  emailLane?: "personal" | "public";
 };
 
 type ExpansionContact = SourceContact & {
@@ -127,6 +129,7 @@ const sourceContacts: SourceContact[] = [
   ...((commercialRecheckData as { records: SourceContact[] }).records),
   ...((referralPartnerData as { records: SourceContact[] }).records),
   ...expansionContacts,
+  ...(septemberFiveData as SourceContact[]),
 ];
 
 export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts
@@ -151,7 +154,7 @@ export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts
       ?? contact.activeProjectSignal
       ?? contact.projectEvidence
       ?? "Current Arizona construction activity verified from public evidence.",
-    emailLane: "public",
+    emailLane: contact.emailLane ?? "public",
     emailEvidence: contact.emailSourceUrl,
     approvalStatus: "approved",
     personalization: (
@@ -362,7 +365,9 @@ export async function seedHotMarketOutreachBatch(options: {
         emailStatus: "verified",
         status: "approved",
         contactStatus: "active",
-        contactEvidenceType: "official_publication",
+        contactEvidenceType: contact.emailLane === "personal"
+          ? "findymail_verified"
+          : "official_publication",
         contactEvidence: contact.emailEvidence,
         contactEvidenceAt: now,
         contactReviewAt: now,

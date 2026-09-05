@@ -13,6 +13,8 @@ import { VERIFIED_OUTREACH_CONTACTS_AUG_30 } from "./verifiedOutreachContactsAug
 import { VERIFIED_OUTREACH_CONTACTS_AUG_31 } from "./verifiedOutreachContactsAug31";
 import { VERIFIED_OUTREACH_CONTACTS_SEP_02 } from "./verifiedOutreachContactsSep02";
 import { VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC } from "./verifiedOutreachContactsSep02Public";
+import { VERIFIED_OUTREACH_CONTACTS_SEP_05 } from "./verifiedOutreachContactsSep05";
+import { LICENSED_OUTREACH_STATES } from "./hotMarketResearch";
 
 const CAMPAIGN_NAME = "Approved 8 AM Outreach - August 2026";
 const SUBJECT = "A reliable engineering partner for active projects";
@@ -26,6 +28,7 @@ const AUG_30_TARGET = 150;
 const AUG_31_TARGET = 150;
 const SEP_02_TARGET = 145;
 const SEP_02_PUBLIC_TARGET = 41;
+const SEP_05_TARGET = 110;
 
 export function approvedOutreachSubject(): string {
   return SUBJECT;
@@ -110,6 +113,7 @@ export async function seedVerifiedOutreachBatch(options: {
     VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC,
     SEP_02_PUBLIC_TARGET,
   );
+  assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_SEP_05, SEP_05_TARGET);
 
   let [campaign] = await db.select().from(campaignsTable)
     .where(eq(campaignsTable.name, CAMPAIGN_NAME))
@@ -118,7 +122,7 @@ export async function seedVerifiedOutreachBatch(options: {
     [campaign] = await db.insert(campaignsTable).values({
       name: CAMPAIGN_NAME,
       audience: "mixed",
-      states: ["AZ", "CA"],
+      states: [...LICENSED_OUTREACH_STATES],
       dailyLimit: REGULAR_OUTREACH_DAILY_TARGET,
       status: "active",
       subjectTemplate: SUBJECT,
@@ -129,14 +133,14 @@ export async function seedVerifiedOutreachBatch(options: {
   if (
     campaign.dailyLimit !== REGULAR_OUTREACH_DAILY_TARGET
     || campaign.audience !== "mixed"
-    || !campaign.states.includes("AZ")
-    || !campaign.states.includes("CA")
+    || campaign.states.length !== LICENSED_OUTREACH_STATES.length
+    || LICENSED_OUTREACH_STATES.some((state) => !campaign.states.includes(state))
   ) {
     const [updatedCampaign] = await db.update(campaignsTable)
       .set({
         dailyLimit: REGULAR_OUTREACH_DAILY_TARGET,
         audience: "mixed",
-        states: ["AZ", "CA"],
+        states: [...LICENSED_OUTREACH_STATES],
       })
       .where(eq(campaignsTable.id, campaign.id))
       .returning();
@@ -252,6 +256,12 @@ export async function seedVerifiedOutreachBatch(options: {
       prefix: "public-verified-2026-09-02-",
       target: SEP_02_PUBLIC_TARGET,
       label: "September 2 Public",
+    },
+    {
+      contacts: VERIFIED_OUTREACH_CONTACTS_SEP_05,
+      prefix: "verified-2026-09-05-",
+      target: SEP_05_TARGET,
+      label: "September 5",
     },
   ] as const;
 
