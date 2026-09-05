@@ -5,6 +5,7 @@ import { startClientJobUploadCleanup } from "./lib/clientJobUploadCleanup";
 import { seedVerifiedOutreachBatch } from "./lib/verifiedOutreachBatch";
 import { ensureOutreachFollowUps, prepareNextPhoenixOutreach } from "./lib/outreachPreparation";
 import { seedHotMarketOutreachBatch } from "./lib/hotMarketOutreachBatch";
+import { startDailyOutreachProcessScheduler } from "./lib/outreachDailyProcessScheduler";
 
 const rawPort = process.env["PORT"];
 
@@ -20,7 +21,8 @@ if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-app.listen(port, (err) => {
+let stopDailyScheduler: () => Promise<void> = async () => {};
+const server = app.listen(port, (err) => {
   if (err) {
     logger.error({ err }, "Error listening on port");
     process.exit(1);
@@ -28,6 +30,7 @@ app.listen(port, (err) => {
 
   logger.info({ port }, "Server listening");
   startOutreachWorker();
+  stopDailyScheduler = startDailyOutreachProcessScheduler();
   startClientJobUploadCleanup();
   void seedVerifiedOutreachBatch()
     .then(async (result) => {
@@ -47,3 +50,21 @@ app.listen(port, (err) => {
       logger.error({ err: seedError }, "Verified outreach batch preparation failed");
     });
 });
+
+let shuttingDown = false;
+async function shutdown(signal: NodeJS.Signals): Promise<void> {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  logger.info({ signal }, "Shutting down API server");
+  const forceExit = setTimeout(() => process.exit(1), 5_000);
+  forceExit.unref();
+  await Promise.all([
+    stopDailyScheduler(),
+    new Promise<void>((resolve) => server.close(() => resolve())),
+  ]);
+  clearTimeout(forceExit);
+  process.exit(0);
+}
+
+process.once("SIGTERM", () => void shutdown("SIGTERM"));
+process.once("SIGINT", () => void shutdown("SIGINT"));

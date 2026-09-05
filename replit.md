@@ -5,7 +5,7 @@ Marketing website for Apex Grid Engineering — a licensed engineering firm (MEP
 ## Run & Operate
 
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
-- Daily outreach Scheduled Deployment instructions: [`docs/outreach-scheduled-deployment.md`](docs/outreach-scheduled-deployment.md)
+- Daily outreach Reserved VM scheduler instructions: [`docs/outreach-scheduled-deployment.md`](docs/outreach-scheduled-deployment.md)
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec

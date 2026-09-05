@@ -1,12 +1,12 @@
-# Daily outreach scheduled deployment
+# Daily outreach Reserved VM scheduler
 
-The production configuration keeps the existing autoscale API deployment for
-the website and SendGrid webhooks and uses a separate published
-**Scheduled Deployment** from this same project:
+The production API uses a **Reserved VM** so the website, SendGrid webhooks,
+and outreach scheduler remain continuously available in one deployment.
 
-- **Run command:** `pnpm --filter @workspace/api-server run outreach:daily`
-- **UTC cron:** `0,30 15 * * *` (08:00 primary and 08:30 recovery in
-  America/Phoenix, which does not observe daylight saving time)
+The API process starts the durable one-shot runner at 08:00 and 08:30 Phoenix.
+If the VM restarts during either same-morning execution window, it immediately
+recovers the missed slot. The one-shot runner still holds the PostgreSQL
+advisory lock and owns the durable daily claim.
 
 The command is a one-shot runner: it does not start Express. It refuses to run
 unless production outreach and research safeguards are enabled, performs
