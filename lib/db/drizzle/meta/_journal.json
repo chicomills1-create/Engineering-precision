@@ -155,6 +155,13 @@
       "when": 1788546285644,
       "tag": "0021_unusual_eternity",
       "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1788550000000,
+      "tag": "0022_outreach_daily_runs",
+      "breakpoints": true
     }
   ]
 }

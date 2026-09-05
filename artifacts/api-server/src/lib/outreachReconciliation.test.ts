@@ -209,17 +209,24 @@ test("reply processing always wins or is retained around unsent follow-up dispat
       "the pre-dispatch email lock gate",
     );
 
-    const holder = withOutreachEmailLock(replyFirstFixture.prospect.contactEmail!, async () => {
-      replyFirstInbound = captureInboundReply({
-        from: replyFirstFixture.prospect.contactEmail!,
-        subject: "Re: Initial test",
-        text: "Yes, please call me next week.",
-        headers: "Message-ID: <genuine-race-reply@example.com>\nAuto-Submitted: no",
-      });
-      await waitForReply(replyFirstFixture.prospect.contactEmail!);
+    const normalizedReplyFirstEmail = replyFirstFixture.prospect.contactEmail!.trim().toLowerCase();
+    const [matchedBeforeCapture] = await db.select({ id: prospectsTable.id })
+      .from(prospectsTable)
+      .where(eq(prospectsTable.contactEmail, normalizedReplyFirstEmail));
+    assert.equal(matchedBeforeCapture?.id, replyFirstFixture.prospect.id);
+    replyFirstInbound = captureInboundReply({
+      from: normalizedReplyFirstEmail,
+      subject: "Re: Initial test",
+      text: "Yes, please call me next week.",
+      headers: `Message-ID: <genuine-race-reply-${replyFirstFixture.followUp.id}@example.com>\nAuto-Submitted: no`,
     });
-    await holder;
-    await replyFirstInbound;
+    const replyFirstCaptured = await replyFirstInbound;
+    assert.equal(replyFirstCaptured.matchedProspects, 1);
+    const [stoppedBeforeDispatch] = await db.select({
+      status: outreachMessagesTable.status,
+    }).from(outreachMessagesTable)
+      .where(eq(outreachMessagesTable.id, replyFirstFixture.followUp.id));
+    assert.equal(stoppedBeforeDispatch?.status, "replied");
     replyFirstRelease.resolve();
 
     await assert.rejects(replyFirstWorker, /Outreach stopped before provider dispatch/);
@@ -304,7 +311,7 @@ test("reply processing always wins or is retained around unsent follow-up dispat
       from: dispatchFirstFixture.prospect.contactEmail!,
       subject: "Automatic reply: Re: Initial test",
       text: "I am out of the office and will return soon.",
-      headers: "Message-ID: <automatic-race-reply@example.com>\nAuto-Submitted: auto-replied",
+      headers: `Message-ID: <automatic-race-reply-${dispatchFirstFixture.followUp.id}@example.com>\nAuto-Submitted: auto-replied`,
     }).then((result) => {
       dispatchFirstInboundSettled = true;
       return result;

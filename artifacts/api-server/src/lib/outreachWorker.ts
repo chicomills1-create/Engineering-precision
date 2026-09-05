@@ -272,6 +272,13 @@ export function countPersistedOutreachSend(
   return persisted ? sentCount + 1 : sentCount;
 }
 
+export type OutreachDispatchSummary = {
+  claimed: number;
+  providerAccepted: number;
+  stopped: number;
+  unresolved: number;
+};
+
 export function createGuardedAsyncRun(task: () => Promise<void>): () => void {
   let running = false;
   return () => {
@@ -325,8 +332,14 @@ export async function reconcileSendingOutreachMessages(
   return result.accepted + result.retryReleased + result.failed + result.ambiguous;
 }
 
-export async function processDueOutreachMessages(): Promise<number> {
-  if (!isOutreachAutomationReady()) return 0;
+export async function processDueOutreachMessagesWithSummary(): Promise<OutreachDispatchSummary> {
+  const summary: OutreachDispatchSummary = {
+    claimed: 0,
+    providerAccepted: 0,
+    stopped: 0,
+    unresolved: 0,
+  };
+  if (!isOutreachAutomationReady()) return summary;
   await stopLegacyAdditionalFollowUps();
   await stopStaleOpenerFollowUps();
   await backfillDeliveredFollowUpSequences();
@@ -337,13 +350,16 @@ export async function processDueOutreachMessages(): Promise<number> {
     ))
     .orderBy(asc(outreachMessagesTable.scheduledAt))
     .limit(MAX_SCHEDULED_MESSAGES_PER_RUN);
-  let sentCount = 0;
   for (const message of due) {
     const claimed = await claimOutreachMessageForSending(message.id);
-    if (!claimed) continue;
+    if (!claimed) {
+      summary.stopped += 1;
+      continue;
+    }
+    summary.claimed += 1;
     try {
       const persisted = await sendClaimedOutreachMessage(claimed);
-      sentCount = countPersistedOutreachSend(sentCount, persisted);
+      summary.providerAccepted = countPersistedOutreachSend(summary.providerAccepted, persisted);
     } catch (err) {
       const error = err instanceof Error ? err.message : "Scheduled send failed";
       if (err instanceof DailySendLimitError || err instanceof MonthlySendLimitError) {
@@ -366,15 +382,26 @@ export async function processDueOutreachMessages(): Promise<number> {
           eq(outreachMessagesTable.id, claimed.id),
           eq(outreachMessagesTable.status, "sending"),
         ));
+      if (getSendFailureStatus(err) === "needs_review") summary.unresolved += 1;
       logger.warn({ messageId: claimed.id, error }, "Scheduled outreach send blocked or failed");
     }
   }
-  return sentCount;
+  return summary;
+}
+
+export async function processDueOutreachMessages(): Promise<number> {
+  return (await processDueOutreachMessagesWithSummary()).providerAccepted;
 }
 
 export async function processOutreachReconciliation(): Promise<void> {
   const reconciliation = await reconcileUncertainOutreachMessages();
   logReconciliationSummary(reconciliation);
+}
+
+export async function processOutreachReconciliationWithSummary(): Promise<OutreachReconciliationSummary> {
+  const reconciliation = await reconcileUncertainOutreachMessages();
+  logReconciliationSummary(reconciliation);
+  return reconciliation;
 }
 
 function logReconciliationSummary(summary: OutreachReconciliationSummary): void {

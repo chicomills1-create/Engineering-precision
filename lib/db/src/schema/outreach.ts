@@ -116,6 +116,25 @@ export const outreachPreparationRunsTable = pgTable("outreach_preparation_runs",
   uniqueIndex("outreach_preparation_runs_target_date_unique").on(table.targetDate),
 ]);
 
+export const outreachDailyRunsTable = pgTable("outreach_daily_runs", {
+  id: serial("id").primaryKey(),
+  runDate: text("run_date").notNull(),
+  status: text("status").notNull().default("running"),
+  incidentType: text("incident_type"),
+  attemptCount: integer("attempt_count").notNull().default(1),
+  claimedCount: integer("claimed_count").notNull().default(0),
+  providerAcceptedCount: integer("provider_accepted_count").notNull().default(0),
+  deliveredCount: integer("delivered_count").notNull().default(0),
+  bouncedCount: integer("bounced_count").notNull().default(0),
+  stoppedCount: integer("stopped_count").notNull().default(0),
+  unresolvedCount: integer("unresolved_count").notNull().default(0),
+  error: text("error"),
+  startedAt: timestamp("started_at", { withTimezone: true }).notNull().defaultNow(),
+  completedAt: timestamp("completed_at", { withTimezone: true }),
+}, (table) => [
+  uniqueIndex("outreach_daily_runs_run_date_unique").on(table.runDate),
+]);
+
 export const outreachMessagesTable = pgTable("outreach_messages", {
   id: serial("id").primaryKey(),
   prospectId: integer("prospect_id").notNull().references(() => prospectsTable.id, { onDelete: "cascade" }),

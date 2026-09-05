@@ -32,6 +32,11 @@ function getPhoenixDateTime(now: Date): PhoenixDateTime {
   };
 }
 
+export function isPrimaryPhoenixInvocation(now: Date): boolean {
+  const local = getPhoenixDateTime(now);
+  return local.hour === OUTREACH_RESEARCH_LOCAL_HOUR && local.minute === 0;
+}
+
 /**
  * Scheduled Deployments start at 08:00 Phoenix. Only that invocation waits
  * for messages staged by research for 08:10; a later/manual invocation is a
@@ -53,17 +58,55 @@ export function getPhoenixStagedMessageWaitMs(invokedAt: Date, now: Date): numbe
 export type DailyOutreachRunnerOperations = {
   processHotMarketResearch: () => Promise<unknown>;
   processScheduledResearch: () => Promise<number>;
-  processDueMessages: () => Promise<number>;
-  processProviderReconciliation: () => Promise<void>;
+  processDueMessages: () => Promise<DailyOutreachDispatchResult>;
+  processProviderReconciliation: () => Promise<DailyOutreachReconciliationResult>;
   now: () => Date;
   wait: (milliseconds: number) => Promise<void>;
 };
 
+export type DailyOutreachDispatchResult = {
+  claimed: number;
+  providerAccepted: number;
+  stopped: number;
+  unresolved: number;
+};
+
+export type DailyOutreachReconciliationResult = {
+  accepted: number;
+  failed: number;
+  ambiguous: number;
+};
+
 export type DailyOutreachRunnerResult = {
-  initialSent: number;
-  stagedSent: number;
+  claimed: number;
+  providerAccepted: number;
+  delivered: number;
+  bounced: number;
+  stopped: number;
+  unresolved: number;
   waitMs: number;
 };
+
+export type DailyOutreachLease = {
+  tryAcquire: () => Promise<boolean>;
+  release: () => Promise<void>;
+};
+
+export type ExclusiveDailyOutreachResult<T> =
+  | { state: "busy" }
+  | { state: "completed"; result: T };
+
+export async function withExclusiveDailyOutreachRun<T>(
+  lease: DailyOutreachLease,
+  task: () => Promise<T>,
+): Promise<ExclusiveDailyOutreachResult<T>> {
+  if (!await lease.tryAcquire()) return { state: "busy" };
+  try {
+    return { state: "completed", result: await task() };
+  } finally {
+    await lease.release();
+  }
+}
 
 /**
  * Performs one bounded outreach pass. Each operation delegates to the
@@ -77,16 +120,32 @@ export async function runDailyOutreachOnce(
   await operations.processHotMarketResearch();
   await operations.processScheduledResearch();
 
-  const initialSent = await operations.processDueMessages();
+  const initial = await operations.processDueMessages();
   const reconciliation = operations.processProviderReconciliation();
   const waitMs = getPhoenixStagedMessageWaitMs(invokedAt, operations.now());
   if (waitMs === 0) {
-    await reconciliation;
-    return { initialSent, stagedSent: 0, waitMs };
+    const reconciled = await reconciliation;
+    return {
+      claimed: initial.claimed,
+      providerAccepted: initial.providerAccepted + reconciled.accepted,
+      delivered: 0,
+      bounced: reconciled.failed,
+      stopped: initial.stopped,
+      unresolved: initial.unresolved + reconciled.ambiguous,
+      waitMs,
+    };
   }
 
   await operations.wait(waitMs);
-  const stagedSent = await operations.processDueMessages();
-  await reconciliation;
-  return { initialSent, stagedSent, waitMs };
+  const staged = await operations.processDueMessages();
+  const reconciled = await reconciliation;
+  return {
+    claimed: initial.claimed + staged.claimed,
+    providerAccepted: initial.providerAccepted + staged.providerAccepted + reconciled.accepted,
+    delivered: 0,
+    bounced: reconciled.failed,
+    stopped: initial.stopped + staged.stopped,
+    unresolved: initial.unresolved + staged.unresolved + reconciled.ambiguous,
+    waitMs,
+  };
 }

@@ -637,14 +637,31 @@ export async function sendApprovedOutreach(
       }
       assertFollowUpCadenceReady(message.sequenceNumber, message.scheduledAt, lockedEngagement);
     }
-    const [lockedMessage] = await db.select({ status: outreachMessagesTable.status })
-      .from(outreachMessagesTable)
-      .where(eq(outreachMessagesTable.id, message.id))
-      .limit(1);
+    const [[lockedMessage], [lockedProspect], [lockedSuppression]] = await Promise.all([
+      db.select({ status: outreachMessagesTable.status })
+        .from(outreachMessagesTable)
+        .where(eq(outreachMessagesTable.id, message.id))
+        .limit(1),
+      db.select({
+        status: prospectsTable.status,
+        contactStatus: prospectsTable.contactStatus,
+        contactEmail: prospectsTable.contactEmail,
+      })
+        .from(prospectsTable)
+        .where(eq(prospectsTable.id, message.prospectId))
+        .limit(1),
+      db.select({ id: outreachSuppressionsTable.id })
+        .from(outreachSuppressionsTable)
+        .where(eq(outreachSuppressionsTable.email, email))
+        .limit(1),
+    ]);
     const persistedStatusIsEligible = options.expectedPersistedStatus
       ? lockedMessage?.status === options.expectedPersistedStatus
       : lockedMessage?.status === "approved" || lockedMessage?.status === "sending";
-    if (!persistedStatusIsEligible) {
+    const prospectIsEligible = lockedProspect?.contactStatus === "active"
+      && (lockedProspect.status === "approved" || lockedProspect.status === "contacted")
+      && lockedProspect.contactEmail?.trim().toLowerCase() === email;
+    if (!persistedStatusIsEligible || !prospectIsEligible || lockedSuppression) {
       await releaseOutreachReservations(reservations);
       throw new Error("Outreach stopped before provider dispatch");
     }

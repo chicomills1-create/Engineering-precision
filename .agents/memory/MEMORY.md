@@ -33,3 +33,4 @@
 - [State outreach rollout](state-outreach-rollout.md) — research Arizona first, California next, then other licensed states; Apex Grid covers every state except Alaska.
 - [Hot Market definition](hot-market-definition.md) — national active-opportunity campaign with separate direct builder/contractor and architecture referral-partner lanes.
 - [Outreach advisory-lock hierarchy](outreach-lock-hierarchy.md) — isolate session locks from query connections and never reacquire a recipient lock inside its protected operation.
+- [Daily outreach recovery](daily-outreach-recovery.md) — run at 08:00 and 08:30 Phoenix; one durable daily claim prevents overlap and preserves missed/partial incidents.
