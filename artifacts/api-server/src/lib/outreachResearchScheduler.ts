@@ -112,10 +112,12 @@ export function getHotMarketResearchTarget(
   now = new Date(),
 ): { targetDate: string; scheduledAt: Date } {
   const { runDate } = getPhoenixResearchWindow(now);
-  const scheduledAt = new Date(`${runDate}T08:10:00-07:00`);
+  const scheduledAt = new Date(
+    new Date(`${runDate}T08:10:00-07:00`).getTime() + 24 * 60 * 60 * 1000,
+  );
   return {
-    targetDate: runDate,
-    scheduledAt: scheduledAt.getTime() > now.getTime() ? scheduledAt : now,
+    targetDate: getPhoenixResearchWindow(scheduledAt).runDate,
+    scheduledAt,
   };
 }
 

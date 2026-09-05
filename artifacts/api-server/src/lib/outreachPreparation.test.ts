@@ -82,8 +82,8 @@ test("shortfall and stale-run helpers support honest retry-safe runs", () => {
   assert.equal(getPreparationShortfall(149), 1);
   assert.equal(getPreparationShortfall(150), 0);
   const now = new Date("2026-08-29T15:00:00.000Z");
-  assert.equal(isPreparationRunStale(new Date(now.getTime() - 30 * 60_000), now), true);
-  assert.equal(isPreparationRunStale(new Date(now.getTime() - 29 * 60_000), now), false);
+  assert.equal(isPreparationRunStale(new Date(now.getTime() - 20 * 60_000), now), true);
+  assert.equal(isPreparationRunStale(new Date(now.getTime() - 19 * 60_000), now), false);
 });
 
 test("existing manually scheduled messages consume the same 150-message regular window", () => {

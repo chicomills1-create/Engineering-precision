@@ -58,10 +58,29 @@ export function getPhoenixStagedMessageWaitMs(invokedAt: Date, now: Date): numbe
 export type DailyOutreachRunnerOperations = {
   processHotMarketResearch: () => Promise<unknown>;
   processScheduledResearch: () => Promise<number>;
+  prepareRegularOutreach: () => Promise<DailyOutreachPreparationResult>;
+  prepareHotMarketOutreach: () => Promise<DailyHotMarketPreparationResult>;
   processDueMessages: () => Promise<DailyOutreachDispatchResult>;
   processProviderReconciliation: () => Promise<DailyOutreachReconciliationResult>;
   now: () => Date;
   wait: (milliseconds: number) => Promise<void>;
+};
+
+export type DailyOutreachPreparationResult = {
+  state: "skipped" | "completed" | "failed";
+  prepared: number;
+  directPrepared: number;
+  publicPrepared: number;
+  directShortfall: number;
+  publicShortfall: number;
+  shortfall: number;
+};
+
+export type DailyHotMarketPreparationResult = {
+  state: "skipped" | "completed" | "failed";
+  prepared: number;
+  totalScheduled: number;
+  shortfall: number;
 };
 
 export type DailyOutreachDispatchResult = {
@@ -84,6 +103,15 @@ export type DailyOutreachRunnerResult = {
   bounced: number;
   stopped: number;
   unresolved: number;
+  regularPrepared: number;
+  directPrepared: number;
+  publicPrepared: number;
+  directShortfall: number;
+  publicShortfall: number;
+  regularShortfall: number;
+  hotMarketPrepared: number;
+  hotMarketScheduled: number;
+  hotMarketShortfall: number;
   waitMs: number;
 };
 
@@ -119,6 +147,10 @@ export async function runDailyOutreachOnce(
 ): Promise<DailyOutreachRunnerResult> {
   await operations.processHotMarketResearch();
   await operations.processScheduledResearch();
+  const [regularPreparation, hotMarketPreparation] = await Promise.all([
+    operations.prepareRegularOutreach(),
+    operations.prepareHotMarketOutreach(),
+  ]);
 
   const initial = await operations.processDueMessages();
   const reconciliation = operations.processProviderReconciliation();
@@ -132,6 +164,15 @@ export async function runDailyOutreachOnce(
       bounced: reconciled.failed,
       stopped: initial.stopped,
       unresolved: initial.unresolved + reconciled.ambiguous,
+      regularPrepared: regularPreparation.prepared,
+      directPrepared: regularPreparation.directPrepared,
+      publicPrepared: regularPreparation.publicPrepared,
+      directShortfall: regularPreparation.directShortfall,
+      publicShortfall: regularPreparation.publicShortfall,
+      regularShortfall: regularPreparation.shortfall,
+      hotMarketPrepared: hotMarketPreparation.prepared,
+      hotMarketScheduled: hotMarketPreparation.totalScheduled,
+      hotMarketShortfall: hotMarketPreparation.shortfall,
       waitMs,
     };
   }
@@ -146,6 +187,15 @@ export async function runDailyOutreachOnce(
     bounced: reconciled.failed,
     stopped: initial.stopped + staged.stopped,
     unresolved: initial.unresolved + staged.unresolved + reconciled.ambiguous,
+    regularPrepared: regularPreparation.prepared,
+    directPrepared: regularPreparation.directPrepared,
+    publicPrepared: regularPreparation.publicPrepared,
+    directShortfall: regularPreparation.directShortfall,
+    publicShortfall: regularPreparation.publicShortfall,
+    regularShortfall: regularPreparation.shortfall,
+    hotMarketPrepared: hotMarketPreparation.prepared,
+    hotMarketScheduled: hotMarketPreparation.totalScheduled,
+    hotMarketShortfall: hotMarketPreparation.shortfall,
     waitMs,
   };
 }

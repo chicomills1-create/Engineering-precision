@@ -71,19 +71,19 @@ test("national hot-market research rotates the remaining licensed states", () =>
   assert.notDeepEqual(first.slice(2), second.slice(2));
 });
 
-test("hot-market research stages for 8:10 Phoenix or catches up immediately when late", () => {
+test("hot-market research always stages the following Phoenix day at 8:10", () => {
   assert.deepEqual(
     getHotMarketResearchTarget(new Date("2026-09-04T15:00:00.000Z")),
     {
-      targetDate: "2026-09-04",
-      scheduledAt: new Date("2026-09-04T15:10:00.000Z"),
+      targetDate: "2026-09-05",
+      scheduledAt: new Date("2026-09-05T15:10:00.000Z"),
     },
   );
   assert.deepEqual(
     getHotMarketResearchTarget(new Date("2026-09-04T20:00:00.000Z")),
     {
-      targetDate: "2026-09-04",
-      scheduledAt: new Date("2026-09-04T20:00:00.000Z"),
+      targetDate: "2026-09-05",
+      scheduledAt: new Date("2026-09-05T15:10:00.000Z"),
     },
   );
 });

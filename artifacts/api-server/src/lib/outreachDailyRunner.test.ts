@@ -97,6 +97,18 @@ test("researches before dispatching and makes a second pass after the safe wait"
   const result = await runDailyOutreachOnce({
     processHotMarketResearch: async () => { calls.push("hot-market"); },
     processScheduledResearch: async () => { calls.push("scheduled"); return 0; },
+    prepareRegularOutreach: async () => {
+      calls.push("prepare-regular");
+      return {
+        state: "completed", prepared: 150, directPrepared: 100,
+        publicPrepared: 50, directShortfall: 0, publicShortfall: 0,
+        shortfall: 0,
+      };
+    },
+    prepareHotMarketOutreach: async () => {
+      calls.push("prepare-hot-market");
+      return { state: "completed", prepared: 50, totalScheduled: 50, shortfall: 0 };
+    },
     processDueMessages: async () => {
       calls.push(`send-${++sends}`);
       return {
@@ -114,7 +126,16 @@ test("researches before dispatching and makes a second pass after the safe wait"
     wait: async (milliseconds) => { calls.push(`wait-${milliseconds}`); },
   });
 
-  assert.deepEqual(calls, ["hot-market", "scheduled", "send-1", "reconcile", "wait-240000", "send-2"]);
+  assert.deepEqual(calls, [
+    "hot-market",
+    "scheduled",
+    "prepare-regular",
+    "prepare-hot-market",
+    "send-1",
+    "reconcile",
+    "wait-240000",
+    "send-2",
+  ]);
   assert.deepEqual(result, {
     claimed: 3,
     providerAccepted: 3,
@@ -122,6 +143,15 @@ test("researches before dispatching and makes a second pass after the safe wait"
     bounced: 0,
     stopped: 0,
     unresolved: 0,
+    regularPrepared: 150,
+    directPrepared: 100,
+    publicPrepared: 50,
+    directShortfall: 0,
+    publicShortfall: 0,
+    regularShortfall: 0,
+    hotMarketPrepared: 50,
+    hotMarketScheduled: 50,
+    hotMarketShortfall: 0,
     waitMs: 240_000,
   });
 });
@@ -131,6 +161,14 @@ test("does not make a second send pass for catch-up runs", async () => {
   const result = await runDailyOutreachOnce({
     processHotMarketResearch: async () => undefined,
     processScheduledResearch: async () => 0,
+    prepareRegularOutreach: async () => ({
+      state: "completed", prepared: 150, directPrepared: 100,
+      publicPrepared: 50, directShortfall: 0, publicShortfall: 0,
+      shortfall: 0,
+    }),
+    prepareHotMarketOutreach: async () => ({
+      state: "completed", prepared: 50, totalScheduled: 50, shortfall: 0,
+    }),
     processDueMessages: async () => {
       sends += 1;
       return { claimed: 1, providerAccepted: 1, stopped: 0, unresolved: 0 };
@@ -147,6 +185,41 @@ test("does not make a second send pass for catch-up runs", async () => {
     bounced: 0,
     stopped: 0,
     unresolved: 0,
+    regularPrepared: 150,
+    directPrepared: 100,
+    publicPrepared: 50,
+    directShortfall: 0,
+    publicShortfall: 0,
+    regularShortfall: 0,
+    hotMarketPrepared: 50,
+    hotMarketScheduled: 50,
+    hotMarketShortfall: 0,
     waitMs: 0,
   });
+});
+
+test("reports next-day lane shortfalls for durable recovery", async () => {
+  const result = await runDailyOutreachOnce({
+    processHotMarketResearch: async () => undefined,
+    processScheduledResearch: async () => 0,
+    prepareRegularOutreach: async () => ({
+      state: "completed", prepared: 142, directPrepared: 97,
+      publicPrepared: 45, directShortfall: 3, publicShortfall: 5,
+      shortfall: 8,
+    }),
+    prepareHotMarketOutreach: async () => ({
+      state: "completed", prepared: 47, totalScheduled: 47, shortfall: 3,
+    }),
+    processDueMessages: async () => ({
+      claimed: 200, providerAccepted: 200, stopped: 0, unresolved: 0,
+    }),
+    processProviderReconciliation: async () => ({
+      accepted: 0, failed: 0, ambiguous: 0,
+    }),
+    now: () => new Date("2026-01-15T16:00:00.000Z"),
+    wait: async () => assert.fail("catch-up runs must not wait"),
+  });
+
+  assert.equal(result.regularShortfall, 8);
+  assert.equal(result.hotMarketShortfall, 3);
 });

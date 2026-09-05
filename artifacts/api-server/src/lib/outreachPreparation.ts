@@ -23,7 +23,7 @@ import { isHotMarketSourceType } from "./hotMarketOutreachBatch";
 export const OUTREACH_PERSONAL_PREPARATION_TARGET = 100;
 export const OUTREACH_PUBLIC_PREPARATION_TARGET = 50;
 export const OUTREACH_PREPARATION_TARGET = REGULAR_OUTREACH_DAILY_TARGET;
-const STALE_RUN_MS = 30 * 60_000;
+const STALE_RUN_MS = 20 * 60_000;
 const PUBLIC_INBOX_LOCAL_PARTS = new Set([
   "admin", "contact", "hello", "help", "info", "inquiries", "office", "sales", "support",
   "team",
@@ -332,18 +332,80 @@ function canPrepare(prospect: Prospect, campaign: Campaign, suppressedEmails: Se
   }
 }
 
+async function getRegularLaneCountsForWindow(
+  scheduledAt: Date,
+): Promise<{ direct: number; public: number }> {
+  const rows = await db.select({
+    contactEmail: prospectsTable.contactEmail,
+    contactName: prospectsTable.contactName,
+    contactEvidenceType: prospectsTable.contactEvidenceType,
+    sourceType: outreachMessagesTable.sourceType,
+  })
+    .from(outreachMessagesTable)
+    .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+    .where(and(
+      eq(outreachMessagesTable.sequenceNumber, 1),
+      gte(outreachMessagesTable.scheduledAt, scheduledAt),
+      lt(
+        outreachMessagesTable.scheduledAt,
+        new Date(scheduledAt.getTime() + 24 * 60 * 60 * 1000),
+      ),
+      inArray(outreachMessagesTable.status, ["approved", "sending"]),
+    ));
+  const regular = rows.filter((row) => !isHotMarketSourceType(row.sourceType));
+  const publicCount = regular.filter((row) => isPublicInbox(
+    row.contactEmail,
+    row.contactName,
+    row.contactEvidenceType,
+  )).length;
+  return { direct: regular.length - publicCount, public: publicCount };
+}
+
 export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
   state: "skipped" | "completed" | "failed";
   prepared: number;
+  directPrepared: number;
+  publicPrepared: number;
+  directShortfall: number;
+  publicShortfall: number;
   skipped: number;
   shortfall: number;
 }> {
   if (!isPhoenixPreparationWindowOpen(now)) {
-    return { state: "skipped", prepared: 0, skipped: 0, shortfall: 0 };
+    return {
+      state: "skipped", prepared: 0, directPrepared: 0,
+      publicPrepared: 0, directShortfall: 0, publicShortfall: 0,
+      skipped: 0, shortfall: 0,
+    };
   }
   const { targetDate, scheduledAt } = getNextPhoenixPreparationTarget(now);
   const runId = await claimPreparationRun(targetDate, now);
-  if (!runId) return { state: "skipped", prepared: 0, skipped: 0, shortfall: 0 };
+  if (!runId) {
+    const [existing] = await db.select({
+      prepared: outreachPreparationRunsTable.preparedCount,
+      skipped: outreachPreparationRunsTable.skippedCount,
+      shortfall: outreachPreparationRunsTable.shortfallCount,
+    }).from(outreachPreparationRunsTable)
+      .where(eq(outreachPreparationRunsTable.targetDate, targetDate))
+      .limit(1);
+    const laneCounts = await getRegularLaneCountsForWindow(scheduledAt);
+    return {
+      state: "skipped",
+      prepared: existing?.prepared ?? 0,
+      directPrepared: laneCounts.direct,
+      publicPrepared: laneCounts.public,
+      directShortfall: Math.max(
+        0,
+        OUTREACH_PERSONAL_PREPARATION_TARGET - laneCounts.direct,
+      ),
+      publicShortfall: Math.max(
+        0,
+        OUTREACH_PUBLIC_PREPARATION_TARGET - laneCounts.public,
+      ),
+      skipped: existing?.skipped ?? 0,
+      shortfall: existing?.shortfall ?? OUTREACH_PREPARATION_TARGET,
+    };
+  }
 
   try {
     const rows = await db.select({ prospect: prospectsTable, campaign: campaignsTable })
@@ -533,17 +595,38 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
     }
     const skipped = rows.length - prepared;
     const shortfall = getPreparationShortfall(prepared);
+    const laneCounts = await getRegularLaneCountsForWindow(scheduledAt);
     await db.update(outreachPreparationRunsTable).set({
       status: "completed", preparedCount: prepared, skippedCount: skipped,
       shortfallCount: shortfall, completedAt: new Date(), error: null,
     }).where(eq(outreachPreparationRunsTable.id, runId));
-    return { state: "completed", prepared, skipped, shortfall };
+    return {
+      state: "completed",
+      prepared,
+      directPrepared: laneCounts.direct,
+      publicPrepared: laneCounts.public,
+      directShortfall: Math.max(
+        0,
+        OUTREACH_PERSONAL_PREPARATION_TARGET - laneCounts.direct,
+      ),
+      publicShortfall: Math.max(
+        0,
+        OUTREACH_PUBLIC_PREPARATION_TARGET - laneCounts.public,
+      ),
+      skipped,
+      shortfall,
+    };
   } catch (error) {
     const message = error instanceof Error ? error.message : "Outreach preparation failed";
     await db.update(outreachPreparationRunsTable).set({
       status: "failed", error: message, shortfallCount: OUTREACH_PREPARATION_TARGET, completedAt: new Date(),
     }).where(eq(outreachPreparationRunsTable.id, runId));
-    return { state: "failed", prepared: 0, skipped: 0, shortfall: OUTREACH_PREPARATION_TARGET };
+    return {
+      state: "failed", prepared: 0, directPrepared: 0, publicPrepared: 0,
+      directShortfall: OUTREACH_PERSONAL_PREPARATION_TARGET,
+      publicShortfall: OUTREACH_PUBLIC_PREPARATION_TARGET,
+      skipped: 0, shortfall: OUTREACH_PREPARATION_TARGET,
+    };
   }
 }
 

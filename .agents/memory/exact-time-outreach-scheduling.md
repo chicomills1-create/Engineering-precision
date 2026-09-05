@@ -32,3 +32,9 @@ The standing Apex Grid operating order is outcome-based, not reminder-based: at 
 **Why:** The user explicitly established this as the single daily outreach responsibility after repeated cases where scheduled or approved messages remained unsent.
 
 **How to apply:** Treat a due approved queue as active work until provider handoff evidence is persisted or a safety-critical blocker genuinely requires user action. Verify processed, delivered, bounced, and unresolved counts; after dispatch, research and stage verified replacements for the following Phoenix send window.
+
+The durable daily runner must perform next-day preparation itself after research; regular and all Hot Market source variants share their lane caps, and any next-day shortfall keeps the daily run partial for recovery rather than reporting success.
+
+**Why:** A dispatch-only runner can send today's queue while silently leaving tomorrow empty, and inconsistent Hot Market source labels can double-fill the 50-message lane.
+
+**How to apply:** Every primary and recovery pass must persist the authoritative 100 Direct, 50 Public, and 50 Hot Market next-day counts. A skipped or still-running preparation claim must return its persisted shortfall; never convert it to zero.

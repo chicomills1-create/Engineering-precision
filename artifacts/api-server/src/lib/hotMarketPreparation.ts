@@ -16,6 +16,7 @@ import {
   hotMarketOutreachBody,
   hotMarketOutreachFollowUps,
   hotMarketOutreachSubject,
+  isHotMarketSourceType,
 } from "./hotMarketOutreachBatch";
 import {
   getNextPhoenixPreparationTarget,
@@ -25,6 +26,16 @@ import {
 } from "./outreachPreparation";
 import { isRecurringHotMarketCampaign } from "./hotMarketResearch";
 import { logger } from "./logger";
+
+export function getHotMarketRemainingCapacity(existing: number): number {
+  return Math.max(0, HOT_MARKET_DAILY_TARGET - existing);
+}
+
+export function countHotMarketMessages(
+  sourceTypes: Array<string | null>,
+): number {
+  return sourceTypes.filter(isHotMarketSourceType).length;
+}
 
 function canPrepareHotMarket(
   prospect: Prospect,
@@ -121,6 +132,10 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
       row.contactEmail ? [row.contactEmail.trim().toLowerCase()] : []
     ));
     const usedDomains = new Set(targetInitials.map(companyDomain));
+    const currentHotMarketCount = countHotMarketMessages(
+      targetInitials.map((row) => row.sourceType),
+    );
+    const remainingCapacity = getHotMarketRemainingCapacity(currentHotMarketCount);
     const eligible = prioritizePreparationCandidates(
       rows
         .filter(({ prospect, campaign }) =>
@@ -133,6 +148,7 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
     let prepared = 0;
 
     for (const prospect of eligible) {
+      if (prepared >= remainingCapacity) break;
       const email = prospect.contactEmail!.trim().toLowerCase();
       const domain = companyDomain(prospect);
       if (usedEmails.has(email) || usedDomains.has(domain)) continue;
@@ -215,9 +231,6 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
       }
     }
 
-    const currentHotMarketCount = targetInitials.filter(
-      (row) => row.sourceType === HOT_MARKET_SOURCE_TYPE,
-    ).length;
     const totalScheduled = currentHotMarketCount + prepared;
     return {
       state: "completed",

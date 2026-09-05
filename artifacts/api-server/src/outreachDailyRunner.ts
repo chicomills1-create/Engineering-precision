@@ -11,6 +11,9 @@ import {
   processDueHotMarketResearch,
   processDueOutreachResearchSchedules,
 } from "./lib/outreachResearchScheduler";
+import { prepareNextPhoenixOutreach } from "./lib/outreachPreparation";
+import { prepareNextPhoenixHotMarketOutreach } from "./lib/hotMarketPreparation";
+import { sendDailyOutreachReport } from "./lib/outreachDailyReport";
 import {
   isPrimaryPhoenixInvocation,
   runDailyOutreachOnce,
@@ -102,17 +105,32 @@ async function main(): Promise<void> {
   const result = await runDailyOutreachOnce({
     processHotMarketResearch: () => processDueHotMarketResearch(),
     processScheduledResearch: () => processDueOutreachResearchSchedules(),
+    prepareRegularOutreach: () => prepareNextPhoenixOutreach(),
+    prepareHotMarketOutreach: () => prepareNextPhoenixHotMarketOutreach(),
     processDueMessages: () => processDueOutreachMessagesWithSummary(),
     processProviderReconciliation: () => processOutreachReconciliationWithSummary(),
     now: () => new Date(),
     wait,
   }, invokedAt);
-  const status = result.unresolved > 0 ? "partial" : "completed";
+  const hasPreparationShortfall =
+    result.directShortfall > 0
+    || result.publicShortfall > 0
+    || result.hotMarketShortfall > 0;
+  const status = result.unresolved > 0 || hasPreparationShortfall
+    ? "partial"
+    : "completed";
+  const incidentType = result.unresolved > 0
+    ? "partial_run"
+    : hasPreparationShortfall
+      ? "preparation_shortfall"
+      : run.incidentType;
+  const incidentError = hasPreparationShortfall
+    ? `Next-day queue shortfall: ${result.directShortfall} Direct, ${result.publicShortfall} Public, ${result.hotMarketShortfall} Hot Market`
+    : null;
   await db.update(outreachDailyRunsTable).set({
     status,
-    incidentType: result.unresolved > 0
-      ? "partial_run"
-      : run.incidentType,
+    incidentType,
+    error: incidentError,
     claimedCount: result.claimed,
     providerAcceptedCount: result.providerAccepted,
     deliveredCount: result.delivered,
@@ -121,6 +139,18 @@ async function main(): Promise<void> {
     unresolvedCount: result.unresolved,
     completedAt: new Date(),
   }).where(eq(outreachDailyRunsTable.id, run.id));
+  const report = await sendDailyOutreachReport(runDate, result);
+  if (!report.ok) {
+    await db.update(outreachDailyRunsTable).set({
+      status: "partial",
+      incidentType: incidentType ?? "report_failed",
+      error: [incidentError, `Daily proof report failed: ${report.error}`]
+        .filter(Boolean)
+        .join("; "),
+    }).where(eq(outreachDailyRunsTable.id, run.id));
+    logger.error({ error: report.error, runDate }, "Daily outreach proof report failed");
+    return;
+  }
   logger.info(result, "Daily outreach runner completed");
   });
   if (exclusive.state === "busy") {
