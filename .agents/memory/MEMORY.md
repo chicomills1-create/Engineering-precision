@@ -34,3 +34,4 @@
 - [Hot Market definition](hot-market-definition.md) — national active-opportunity campaign with separate direct builder/contractor and architecture referral-partner lanes.
 - [Outreach advisory-lock hierarchy](outreach-lock-hierarchy.md) — isolate session locks from query connections and never reacquire a recipient lock inside its protected operation.
 - [Daily outreach recovery](daily-outreach-recovery.md) — run at 08:00 and 08:30 Phoenix; one durable daily claim prevents overlap and preserves missed/partial incidents.
+- [Outreach startup summary races](outreach-startup-summary-races.md) — Autoscale may run startup preparation twice; trust message-level queue counts over a stale preparation summary.
