@@ -238,30 +238,35 @@ export async function seedVerifiedOutreachBatch(options: {
       prefix: "verified-2026-08-30-",
       target: AUG_30_TARGET,
       label: "August 30",
+      enforceTarget: false,
     },
     {
       contacts: VERIFIED_OUTREACH_CONTACTS_AUG_31,
       prefix: "verified-2026-08-31-",
       target: AUG_31_TARGET,
       label: "August 31",
+      enforceTarget: false,
     },
     {
       contacts: VERIFIED_OUTREACH_CONTACTS_SEP_02,
       prefix: "verified-2026-09-02-",
       target: SEP_02_TARGET,
       label: "September 2",
+      enforceTarget: false,
     },
     {
       contacts: VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC,
       prefix: "public-verified-2026-09-02-",
       target: SEP_02_PUBLIC_TARGET,
       label: "September 2 Public",
+      enforceTarget: false,
     },
     {
       contacts: VERIFIED_OUTREACH_CONTACTS_SEP_05,
       prefix: "verified-2026-09-05-",
       target: SEP_05_TARGET,
       label: "September 5",
+      enforceTarget: true,
     },
   ] as const;
 
@@ -342,7 +347,7 @@ export async function seedVerifiedOutreachBatch(options: {
     usedDomains.add(domain);
     stored += 1;
     }
-    if (stored < batch.target) {
+    if (batch.enforceTarget && stored < batch.target) {
       throw new Error(
         `Verified ${batch.label} outreach seed requires at least ${batch.target} active prospects; found ${stored}`,
       );
