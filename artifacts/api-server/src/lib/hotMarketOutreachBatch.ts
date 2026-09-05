@@ -18,6 +18,7 @@ import carolinasExpansionData from "../../../../.agents/outputs/hot-market-carol
 import mountainExpansionData from "../../../../.agents/outputs/hot-market-mountain-verified.json";
 import nationalExpansionData from "../../../../.agents/outputs/hot-market-national-verified.json";
 import septemberFiveData from "../../../../.agents/outputs/hot-market-sep05-final-verified.json";
+import { HOT_MARKET_CONTACTS_SEP_05 } from "./hotMarketContactsSep05";
 import {
   assertVerifiedHotMarketContact,
   assertVerifiedOutreachBatch,
@@ -130,6 +131,13 @@ const sourceContacts: SourceContact[] = [
   ...((referralPartnerData as { records: SourceContact[] }).records),
   ...expansionContacts,
   ...(septemberFiveData as SourceContact[]),
+  // Additive September 5 top-up with independently recorded FindyMail evidence.
+  ...HOT_MARKET_CONTACTS_SEP_05.map(([companyName, website, city, state, audience, contactName, contactTitle, contactEmail, contactSourceUrl, emailSourceUrl, companySourceUrl, projectSourceUrl]): SourceContact => ({
+    companyName, website, city, state, audience, contactName, contactTitle, contactEmail,
+    contactSourceUrl, emailSourceUrl, companySourceUrl, projectSourceUrl,
+    needSignals: `FindyMail verified name/domain lookup; official service and current-market trigger: ${projectSourceUrl}`,
+    personalizationSentence: `${companyName} has official published services and current market activity relevant to active projects.`,
+  })),
 ];
 
 export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts

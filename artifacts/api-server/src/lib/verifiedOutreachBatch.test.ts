@@ -10,6 +10,7 @@ import { VERIFIED_OUTREACH_CONTACTS_AUG_30 } from "./verifiedOutreachContactsAug
 import { VERIFIED_OUTREACH_CONTACTS_AUG_31 } from "./verifiedOutreachContactsAug31";
 import { VERIFIED_OUTREACH_CONTACTS_SEP_02 } from "./verifiedOutreachContactsSep02";
 import { VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC } from "./verifiedOutreachContactsSep02Public";
+import { VERIFIED_OUTREACH_CONTACTS_SEP_05 } from "./verifiedOutreachContactsSep05";
 import {
   assertOutreachContactData,
   assertVerifiedOutreachBatch,
@@ -102,6 +103,28 @@ test("the September 2 Public fallback library contains 41 official-site contacts
   ));
   assert.doesNotThrow(() =>
     assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC, 41)
+  );
+});
+
+test("the September 5 Public top-up contains exactly 50 distinct official-site contacts", () => {
+  assert.equal(VERIFIED_OUTREACH_CONTACTS_SEP_05.length, 50);
+  assert.equal(
+    new Set(VERIFIED_OUTREACH_CONTACTS_SEP_05.map((contact) => contact.contactEmail)).size,
+    50,
+  );
+  assert.equal(
+    new Set(VERIFIED_OUTREACH_CONTACTS_SEP_05.map((contact) =>
+      new URL(contact.website).hostname.replace(/^www\./, "").toLowerCase()
+    )).size,
+    50,
+  );
+  assert.ok(VERIFIED_OUTREACH_CONTACTS_SEP_05.every((contact) =>
+    contact.emailLane === "public"
+    && contact.contactSourceUrl.startsWith("https://")
+    && contact.sourceUrl.startsWith("https://")
+  ));
+  assert.doesNotThrow(() =>
+    assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_SEP_05, 50)
   );
 });
 

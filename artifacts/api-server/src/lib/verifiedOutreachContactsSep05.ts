@@ -1,44 +1,45 @@
-import qualified from "../../../../.agents/outputs/sep05-regular-final-verified.json";
-
-type RawContact = {
-  audience: string;
-  city: string;
-  companyName: string;
-  contactEmail: string;
-  contactName: string;
-  contactSourceUrl: string;
-  contactTitle: string;
-  needSignals: string;
-  sourceUrl: string;
-  state: string;
-  website: string;
-  emailLane?: "personal" | "public";
-  emailEvidence?: string;
-};
-
-function slug(value: string): string {
-  return value.toLowerCase()
-    .normalize("NFKD")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "")
-    .slice(0, 54);
-}
-
-export const VERIFIED_OUTREACH_CONTACTS_SEP_05 = (qualified as RawContact[])
-  .map((raw) => ({
-    dedupeKey: `verified-2026-09-05-${slug(raw.companyName)}-${slug(raw.contactName)}`,
-    companyName: raw.companyName.trim(),
-    website: raw.website,
-    city: raw.city.trim(),
-    state: raw.state.trim().toUpperCase(),
-    audience: raw.audience === "architect" ? "architect" : "builder",
-    contactName: raw.contactName.trim(),
-    contactTitle: raw.contactTitle.trim(),
-    contactEmail: raw.contactEmail.trim().toLowerCase(),
-    contactSourceUrl: raw.contactSourceUrl,
-    sourceUrl: raw.sourceUrl,
-    needSignals: raw.needSignals.trim(),
-    emailLane: raw.emailLane ?? "personal",
-    emailEvidence: raw.emailEvidence ?? "FindyMail verified name/domain lookup",
-    approvalStatus: "approved",
-  }) as const);
+/** Public-inbox-only September 5 top-up.  Source URLs are the contemporaneous
+ * official-publication research; addresses are normalized only for casing. */
+type Row = [string,string,string,string,string,string,string,string,string,string,string];
+const rows: Row[] = [
+["The Ranch Mine","https://theranchmine.com","Phoenix","AZ","architect","Cavin Costello","Founder | Principal Architect","info@theranchmine.com","https://theranchmine.com/about","https://theranchmine.com/contact","Arizona architecture firm; official site says it designs homes, event venues, and boutique resorts."],
+["Anderson Mason Dale Architects","https://amdarchitects.com","Denver","CO","architect","David C. Pfeifer","Principal | President","info@amdarchitects.com","https://www.amdarchitects.com/people/","https://amdarchitects.com/contact","Denver architecture firm with a published President/Principal."],
+["Suzana Rutar Architect","https://srutar.com","Las Vegas","NV","architect","Suzana Rutar","Principal Architect/Owner","info@srutar.com","https://www.srutar.com/team-profile/","https://www.srutar.com/contact-us/","Licensed architecture practice; its official page lists Las Vegas and commercial project-management services."],
+["JIVE Architecture","https://jivelv.com","Las Vegas","NV","architect","Christopher Knotz","CEO","info@jivelv.com","https://jivelv.com/our-team/","https://jivelv.com/contact","Las Vegas architecture firm focused on gaming and hospitality projects."],
+["LMNT Architecture","https://lmntarch.com","Sandy","UT","architect","BJ Lund","Owner","info@lmntarch.com","https://lmntarch.com/about/","https://lmntarch.com/contact/","Official site describes award-winning architectural and interior designs, including restaurants and commercial spaces."],
+["Plan A Architecture","https://planaarch.com","Santa Fe","NM","architect","Greg C. Reid AIA","Co-Founder + Owner","info@planaarch.com","https://www.planaarch.com/about","https://www.planaarch.com/contact-plan-a-architecture-santa-fe-new-mexico","Full-service Santa Fe firm whose official site cites commercial and hospitality clients."],
+["OZ Architecture","https://ozarch.com","Denver","CO","architect","Mairi Mashburn AIA LEED AP BD+C","Principal | Architecture","hello@ozarch.com","https://ozarch.com/studio/people","https://ozarch.com/","Colorado architecture practice with a named Principal in Architecture published on its people page."],
+["GSBS Architects","https://gsbsarchitects.com","Salt Lake City","UT","architect","Justin Jacobs","Principal","contact@gsbsarchitects.com","https://gsbsarchitects.com/blog","https://gsbsarchitects.com/","Architecture firm with Salt Lake City office; official site announces Justin Jacobs as a Principal."],
+["Engine 8 Architecture","https://e8arch.com","Denver","CO","architect","Anthony Cazes","Founder | Principal Architect","info@e8arch.com","https://e8arch.com/about","https://e8arch.com/contact","Denver-based architecture firm whose official site focuses on commercial architecture and design."],
+["LAI Design Group","https://laidesigngroup.com","Denver","CO","architect","Laura Ireland","Founder | Principal","info@laidesigngroup.com","https://www.laidesigngroup.com/about-lai/","https://laidesigngroup.com/contact","Denver architecture and land-planning firm with multidisciplinary development-facing services."],
+["C&C Bilingual Architecture Studio","https://ccarchs.com","Las Vegas","NV","architect","Carolina Carbajal","Principal","info@ccarchs.com","https://www.ccarchs.com/about","https://ccarchs.com/contact","Las Vegas studio publicly markets commercial and hospitality architectural services."],
+["Topp Remodeling & Construction","https://toppconstruction.com","Sandy","UT","builder","Jeff Topp","Owner","info@toppconstruction.com","https://toppconstruction.com/about-us/","https://toppconstruction.com/contact-us/","Utah general contractor serving homeowners and businesses in Salt Lake County."],
+["Snyder Construction","https://snyder-const.com","Albuquerque","NM","builder","Steve Snyder","President","info@snyder-const.com","https://snyder-const.com/about","https://snyder-const.com/contact","Albuquerque construction firm with official project pages showing commercial general-contractor work."],
+["Carter Construction Consulting","https://carterconstructionconsulting.com","Denver","CO","builder","Matt Carter","Owner | Principal","info@carterconstructionconsulting.com","https://carterconstructionconsulting.com/about/","https://carterconstructionconsulting.com/","Colorado construction-consulting firm offering owner’s-representative and owner’s-project-manager services."],
+["Stone Construction","https://www.stonenv.com","Las Vegas","NV","builder","Chris Stone","Founder | President","INFO@stonenv.com","https://www.stonenv.com/about/","https://www.stonenv.com/","Nevada contractor markets commercial renovation, tenant improvements, and facility maintenance."],
+["Pirtle Construction","https://pirtleconstruction.com","Orlando","FL","builder","Mike Geary","Chief Executive Officer","businessdevelopment@pirtleconstruction.com","https://pirtleconstruction.com/leadership-3/","https://pirtleconstruction.com/","Commercial construction; published business-development inbox"],
+["TMPartners","https://tmpartners.com","Franklin","TN","architect","Anthony Catalano","Principal","info@tmpartners.com","https://tmpartners.com/about/","https://tmpartners.com/","Full-service commercial and mixed-use architecture; principal listed in official page schema"],
+["Trinity Partners","https://trinity-partners.com","Charlotte","NC","builder","Bradley Dunn","Division Partner, Industrial Services","info@trinity-partners.com","https://www.trinity-partners.com/people/bradley-dunn","https://trinity-partners.com/","Commercial real-estate/property-services firm; Industrial Services division partner"],
+["LHB","https://lhbcorp.com","Duluth","MN","architect","Jason Mangan","Chief Executive Officer","Info@LHBcorp.com","https://lhbcorp.com/contact/","https://lhbcorp.com/contact/","Architecture service and commercial market listed"],
+["ISG","https://isginc.com","Mankato","MN","architect","Chad Surprenant","President & CEO","info@isginc.com","https://isginc.com/leadership/","https://isginc.com/contact/","Commercial business unit and architecture/design services"],
+["WSA Studio","https://www.wsastudio.com","Columbus","OH","architect","Aaron Tobin","Principal","hello@wsastudio.com","https://www.wsastudio.com/team","https://www.wsastudio.com/contact","Project-led architecture/design studio"],
+["C.D. Smith Construction","https://www.cdsmith.com","Fond du Lac","WI","builder","Eric Gjesdahl","President & CEO","bids@cdsmith.com","https://www.cdsmith.com/our-team","https://www.cdsmith.com/contact","Preconstruction, construction management, and design-build"],
+["Mandel Group","https://mandelgroup.com","Milwaukee","WI","builder","Barry Mandel","Chairman & CEO","info@mandelgroup.com","https://mandelgroup.com/about/","https://mandelgroup.com/contact/","Multifamily development and property management"],
+["JVM Realty","https://www.jvmrealty.com","Oak Brook","IL","builder","Jay Madary","President & CEO","info@jvmrealty.com","https://www.jvmrealty.com/leadership","https://www.jvmrealty.com/contact-us/","Multifamily investment strategy and property-management services"],
+["Crawford Hoying","https://crawfordhoying.com","Dublin","OH","builder","Brent Crawford","Founder & CEO","marketing@crawfordhoying.com","https://crawfordhoying.com/about/","https://crawfordhoying.com/contact/","Development plus commercial leasing and sales"],
+["Pope Design Group","https://popedesign.com","St. Paul","MN","architect","John Pope","Founder & Principal","marketing@popedesign.com","https://popedesign.com/company/","https://popedesign.com/contact/","Architecture and interior-design services"],
+["Golub & Company","https://www.golubandcompany.com","Chicago","IL","builder","Michael J. Newman","President","hello@goco.com","https://www.golubandcompany.com/our-team/","https://www.golubandcompany.com/contact/","Acquisitions/development and leasing/management capabilities"],
+["GRAEF","https://graef-usa.com","Milwaukee","WI","architect","John Kissinger","President & CEO","marketing@graef-usa.com","https://graef-usa.com/people/john-kissinger/","https://www.graef-usa.com/contact/","Industrial architecture and construction engineering/inspection"],
+["Miron Construction","https://www.miron-construction.com","Neenah","WI","builder","David G. Voss","President & CEO","business.development@miron-construction.com","https://miron-construction.com/our-company/leadership/","https://www.miron-construction.com/contact/","Commercial construction, preconstruction, and virtual construction"],
+["ESG Architecture & Design","https://www.esgarch.com","Minneapolis","MN","architect","Gretchen Camp","Managing Principal","info@esgarch.com","https://www.esgarch.com/leadership/","https://www.esgarch.com/contact/","Commercial/workplace architecture and interior design"],
+];
+// The two final 10-contact official-publication gap sets are retained in the
+// verified research artifact. Their public records are explicitly selected here.
+import gaps from "../../../../.agents/outputs/sep05-public-gap-contacts.json";
+function slug(v:string) { return v.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,""); }
+const selected = [...rows, ...(gaps as Row[])];
+export const VERIFIED_OUTREACH_CONTACTS_SEP_05 = selected.map(([companyName,website,city,state,audience,contactName,contactTitle,contactEmail,contactSourceUrl,sourceUrl,needSignals]) => ({
+  dedupeKey:`public-verified-2026-09-05-${slug(companyName)}-${slug(contactName)}`,companyName,website,city,state,audience,contactName,contactTitle,
+  contactEmail:contactEmail.toLowerCase(),contactSourceUrl,sourceUrl,needSignals,emailLane:"public" as const,
+  emailEvidence:"Officially published public/role inbox",approvalStatus:"approved" as const,
+}));

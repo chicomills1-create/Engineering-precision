@@ -18,10 +18,10 @@ import {
 
 test("the one-time hot-market batch contains every currently verified new contact", () => {
   assert.equal(HOT_MARKET_DAILY_TARGET, 50);
-  assert.equal(HOT_MARKET_OUTREACH_CONTACTS.length, 123);
+  assert.equal(HOT_MARKET_OUTREACH_CONTACTS.length, 128);
   assert.equal(
     new Set(HOT_MARKET_OUTREACH_CONTACTS.map((contact) => contact.contactEmail)).size,
-    123,
+    128,
   );
   assert.ok(HOT_MARKET_OUTREACH_CONTACTS.every((contact) =>
     contact.approvalStatus === "approved"
@@ -33,7 +33,7 @@ test("the one-time hot-market batch contains every currently verified new contac
     ["alston@alstonco.com", "frank.dascanio@weitz.com"].includes(contact.contactEmail)
   ));
   assert.doesNotThrow(() =>
-    assertVerifiedOutreachBatch(HOT_MARKET_OUTREACH_CONTACTS, 123)
+    assertVerifiedOutreachBatch(HOT_MARKET_OUTREACH_CONTACTS, 128)
   );
 });
 

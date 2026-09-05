@@ -14,6 +14,7 @@ import { VERIFIED_OUTREACH_CONTACTS_AUG_31 } from "./verifiedOutreachContactsAug
 import { VERIFIED_OUTREACH_CONTACTS_SEP_02 } from "./verifiedOutreachContactsSep02";
 import { VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC } from "./verifiedOutreachContactsSep02Public";
 import { VERIFIED_OUTREACH_CONTACTS_SEP_05 } from "./verifiedOutreachContactsSep05";
+import { VERIFIED_OUTREACH_CONTACTS_SEP_05_DIRECT } from "./verifiedOutreachContactsSep05Direct";
 import { LICENSED_OUTREACH_STATES } from "./hotMarketResearch";
 
 const CAMPAIGN_NAME = "Approved 8 AM Outreach - August 2026";
@@ -28,8 +29,9 @@ const AUG_30_TARGET = 150;
 const AUG_31_TARGET = 150;
 const SEP_02_TARGET = 145;
 const SEP_02_PUBLIC_TARGET = 41;
-const SEP_05_LIBRARY_TARGET = 117;
-const SEP_05_REQUIRED_TARGET = 110;
+const SEP_05_DIRECT_LIBRARY_TARGET = 117;
+const SEP_05_DIRECT_REQUIRED_TARGET = 110;
+const SEP_05_PUBLIC_TARGET = 50;
 
 export function approvedOutreachSubject(): string {
   return SUBJECT;
@@ -115,8 +117,12 @@ export async function seedVerifiedOutreachBatch(options: {
     SEP_02_PUBLIC_TARGET,
   );
   assertVerifiedOutreachBatch(
+    VERIFIED_OUTREACH_CONTACTS_SEP_05_DIRECT,
+    SEP_05_DIRECT_LIBRARY_TARGET,
+  );
+  assertVerifiedOutreachBatch(
     VERIFIED_OUTREACH_CONTACTS_SEP_05,
-    SEP_05_LIBRARY_TARGET,
+    SEP_05_PUBLIC_TARGET,
   );
 
   let [campaign] = await db.select().from(campaignsTable)
@@ -266,10 +272,17 @@ export async function seedVerifiedOutreachBatch(options: {
       enforceTarget: false,
     },
     {
-      contacts: VERIFIED_OUTREACH_CONTACTS_SEP_05,
+      contacts: VERIFIED_OUTREACH_CONTACTS_SEP_05_DIRECT,
       prefix: "verified-2026-09-05-",
-      target: SEP_05_REQUIRED_TARGET,
+      target: SEP_05_DIRECT_REQUIRED_TARGET,
       label: "September 5",
+      enforceTarget: true,
+    },
+    {
+      contacts: VERIFIED_OUTREACH_CONTACTS_SEP_05,
+      prefix: "public-verified-2026-09-05-",
+      target: SEP_05_PUBLIC_TARGET,
+      label: "September 5 Public",
       enforceTarget: true,
     },
   ] as const;
