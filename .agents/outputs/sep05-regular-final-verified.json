@@ -1284,7 +1284,9 @@
     "needSignals": "Urban infill housing.",
     "sourceUrl": "https://www.aiany.org/about/press-releases/aia-new-york-announces-design-awards-2025-recipients",
     "state": "NY",
-    "website": "https://only-if.com"
+    "website": "https://only-if.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
   },
   {
     "audience": "architect",
@@ -1297,7 +1299,9 @@
     "needSignals": "University innovation campus.",
     "sourceUrl": "https://www.aiany.org/about/press-releases/aia-new-york-announces-design-awards-2025-recipients",
     "state": "NY",
-    "website": "https://www.weissmanfredi.com"
+    "website": "https://www.weissmanfredi.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
   },
   {
     "audience": "architect",
@@ -1310,7 +1314,9 @@
     "needSignals": "Large adaptive-reuse office project.",
     "sourceUrl": "https://www.aiany.org/about/press-releases/aia-new-york-announces-design-awards-2025-recipients",
     "state": "NY",
-    "website": "https://www.cookfox.com"
+    "website": "https://www.cookfox.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
   },
   {
     "audience": "architect",
@@ -1323,7 +1329,9 @@
     "needSignals": "Complex landmark commercial interior.",
     "sourceUrl": "https://www.aiany.org/about/press-releases/aia-new-york-announces-design-awards-2025-recipients",
     "state": "NY",
-    "website": "https://inc.nyc"
+    "website": "https://inc.nyc",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
   },
   {
     "audience": "architect",
@@ -1336,7 +1344,9 @@
     "needSignals": "Building-material and housing research.",
     "sourceUrl": "https://www.aiany.org/about/press-releases/aia-new-york-announces-design-awards-2025-recipients",
     "state": "NY",
-    "website": "https://www.ltlarchitects.com"
+    "website": "https://www.ltlarchitects.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
   },
   {
     "audience": "architect",
@@ -1349,7 +1359,9 @@
     "needSignals": "Commercial mixed-use architecture.",
     "sourceUrl": "https://aiaaustin.org/2025-design-awards",
     "state": "TX",
-    "website": "https://www.chiocodesign.com"
+    "website": "https://www.chiocodesign.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
   },
   {
     "audience": "architect",
@@ -1362,7 +1374,9 @@
     "needSignals": "Community-impact architecture.",
     "sourceUrl": "https://aiaaustin.org/2025-design-awards",
     "state": "TX",
-    "website": "https://thoughtbarn.com"
+    "website": "https://thoughtbarn.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
   },
   {
     "audience": "architect",
@@ -1375,7 +1389,9 @@
     "needSignals": "Architecture and planning practice.",
     "sourceUrl": "https://aiaaustin.org/2025-design-awards",
     "state": "NC",
-    "website": "https://www.clinedesignassoc.com"
+    "website": "https://www.clinedesignassoc.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
   },
   {
     "audience": "architect",
@@ -1388,7 +1404,9 @@
     "needSignals": "Awarded architecture practice.",
     "sourceUrl": "https://www.austinhomemag.com/2025-general-excellence-in-architecture-alterstudio-architecture/",
     "state": "TX",
-    "website": "https://alterstudio.net"
+    "website": "https://alterstudio.net",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
   },
   {
     "audience": "architect",
@@ -1401,7 +1419,9 @@
     "needSignals": "Education and waterfront public project.",
     "sourceUrl": "https://www.architecturalrecord.com/articles/17582-aia-reveals-2025-cote-top-ten-awardees",
     "state": "WA",
-    "website": "https://olsonkundig.com"
+    "website": "https://olsonkundig.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
   },
   {
     "audience": "architect",
@@ -1414,7 +1434,9 @@
     "needSignals": "Environmental nonprofit facilities.",
     "sourceUrl": "https://www.aia.org/design-excellence/award-winners/coter-top-ten-award-2025",
     "state": "PA",
-    "website": "https://kierantimberlake.com"
+    "website": "https://kierantimberlake.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
   },
   {
     "audience": "architect",
@@ -1427,6 +1449,113 @@
     "needSignals": "University health-sciences building.",
     "sourceUrl": "https://www.aia.org/design-excellence/award-winners/coter-top-ten-award-2025",
     "state": "WA",
-    "website": "https://lmnarchitects.com"
+    "website": "https://lmnarchitects.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
+  },
+  {
+    "audience": "architect",
+    "city": "Fayetteville",
+    "companyName": "Marlon Blackwell Architects",
+    "contactEmail": "marlon@marlonblackwell.com",
+    "contactName": "Marlon Blackwell",
+    "contactSourceUrl": "https://www.marlonblackwell.com/office",
+    "contactTitle": "Founding Principal",
+    "needSignals": "Independent-school academic building.",
+    "sourceUrl": "https://www.aia.org/design-excellence/award-winners/coter-top-ten-award-2025",
+    "state": "AR",
+    "website": "https://www.marlonblackwell.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
+  },
+  {
+    "audience": "architect",
+    "city": "Wilkes-Barre",
+    "companyName": "Bohlin Cywinski Jackson",
+    "contactEmail": "pbohlin@bcj.com",
+    "contactName": "Peter Bohlin",
+    "contactSourceUrl": "https://www.bcj.com/people/peter-bohlin/",
+    "contactTitle": "Founding Principal",
+    "needSignals": "Environmental education facility.",
+    "sourceUrl": "https://www.aia.org/design-excellence/award-winners/coter-top-ten-award-2025",
+    "state": "PA",
+    "website": "https://www.bcj.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
+  },
+  {
+    "audience": "architect",
+    "city": "Minneapolis",
+    "companyName": "Meyer, Scherer & Rockcastle",
+    "contactEmail": "thomas@msrdesign.com",
+    "contactName": "Thomas Meyer",
+    "contactSourceUrl": "https://msrdesign.com/people/thomas-meyer/",
+    "contactTitle": "Founder",
+    "needSignals": "High-performance commercial office.",
+    "sourceUrl": "https://www.aia.org/design-excellence/award-winners/coter-top-ten-award-2025",
+    "state": "MN",
+    "website": "https://msrdesign.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
+  },
+  {
+    "audience": "architect",
+    "city": "New York",
+    "companyName": "Morris Adjmi Architects",
+    "contactEmail": "ma@ma.com",
+    "contactName": "Morris Adjmi",
+    "contactSourceUrl": "https://ma.com/people/morris-adjmi/",
+    "contactTitle": "Founder and Principal",
+    "needSignals": "Multifamily mixed-use development.",
+    "sourceUrl": "https://www.aia.org/design-excellence/award-winners/coter-top-ten-award-2025",
+    "state": "NY",
+    "website": "https://ma.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
+  },
+  {
+    "audience": "architect",
+    "city": "New York",
+    "companyName": "Robert A.M. Stern Architects",
+    "contactEmail": "r.stern@ramsa.com",
+    "contactName": "Robert A.M. Stern",
+    "contactSourceUrl": "https://www.ramsa.com/people/robert-a-m-stern",
+    "contactTitle": "Founding Partner",
+    "needSignals": "University cultural and student-center renovation.",
+    "sourceUrl": "https://www.aia.org/design-excellence/award-winners/coter-top-ten-award-2025",
+    "state": "NY",
+    "website": "https://www.ramsa.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
+  },
+  {
+    "audience": "architect",
+    "city": "New York",
+    "companyName": "Dattner Architects",
+    "contactEmail": "wstein@dattner.com",
+    "contactName": "William Stein",
+    "contactSourceUrl": "https://www.dattner.com/people/william-stein/",
+    "contactTitle": "Partner",
+    "needSignals": "Urban residential retrofit.",
+    "sourceUrl": "https://www.aia.org/design-excellence/award-winners/coter-top-ten-award-2025",
+    "state": "NY",
+    "website": "https://www.dattner.com",
+    "emailLane": "personal",
+    "emailEvidence": "FindyMail verified name/domain lookup"
+  },
+  {
+    "audience": "architect",
+    "city": "Santa Barbara",
+    "companyName": "Cearnal Collective",
+    "contactEmail": "bc@cearnal.com",
+    "contactName": "Brian Cearnal",
+    "contactSourceUrl": "https://www.cearnal.com/our-team/brian-cearnal",
+    "contactTitle": "Architect / Partner",
+    "needSignals": "A current AIA San Diego posting says Cearnal Collective is hiring a Project Architect in Santa Barbara to lead teams and plan, develop, manage, and execute a variety of projects. The firm's portfolio spans hospitality, commercial, mixed-use, and interiors.",
+    "sourceUrl": "https://www.cearnal.com/",
+    "state": "CA",
+    "website": "https://www.cearnal.com/",
+    "emailLane": "public",
+    "emailEvidence": "https://www.cearnal.com/our-team/brian-cearnal"
   }
 ]

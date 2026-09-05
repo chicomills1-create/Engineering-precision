@@ -12,6 +12,8 @@ type RawContact = {
   sourceUrl: string;
   state: string;
   website: string;
+  emailLane?: "personal" | "public";
+  emailEvidence?: string;
 };
 
 function slug(value: string): string {
@@ -36,7 +38,7 @@ export const VERIFIED_OUTREACH_CONTACTS_SEP_05 = (qualified as RawContact[])
     contactSourceUrl: raw.contactSourceUrl,
     sourceUrl: raw.sourceUrl,
     needSignals: raw.needSignals.trim(),
-    emailLane: "personal",
-    emailEvidence: "FindyMail verified name/domain lookup",
+    emailLane: raw.emailLane ?? "personal",
+    emailEvidence: raw.emailEvidence ?? "FindyMail verified name/domain lookup",
     approvalStatus: "approved",
   }) as const);

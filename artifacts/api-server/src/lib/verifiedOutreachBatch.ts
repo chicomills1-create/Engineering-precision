@@ -28,7 +28,8 @@ const AUG_30_TARGET = 150;
 const AUG_31_TARGET = 150;
 const SEP_02_TARGET = 145;
 const SEP_02_PUBLIC_TARGET = 41;
-const SEP_05_TARGET = 110;
+const SEP_05_LIBRARY_TARGET = 117;
+const SEP_05_REQUIRED_TARGET = 110;
 
 export function approvedOutreachSubject(): string {
   return SUBJECT;
@@ -113,7 +114,10 @@ export async function seedVerifiedOutreachBatch(options: {
     VERIFIED_OUTREACH_CONTACTS_SEP_02_PUBLIC,
     SEP_02_PUBLIC_TARGET,
   );
-  assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_SEP_05, SEP_05_TARGET);
+  assertVerifiedOutreachBatch(
+    VERIFIED_OUTREACH_CONTACTS_SEP_05,
+    SEP_05_LIBRARY_TARGET,
+  );
 
   let [campaign] = await db.select().from(campaignsTable)
     .where(eq(campaignsTable.name, CAMPAIGN_NAME))
@@ -264,7 +268,7 @@ export async function seedVerifiedOutreachBatch(options: {
     {
       contacts: VERIFIED_OUTREACH_CONTACTS_SEP_05,
       prefix: "verified-2026-09-05-",
-      target: SEP_05_TARGET,
+      target: SEP_05_REQUIRED_TARGET,
       label: "September 5",
       enforceTarget: true,
     },
