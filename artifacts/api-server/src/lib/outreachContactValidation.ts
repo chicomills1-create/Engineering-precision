@@ -18,6 +18,31 @@ export type VerifiedHotMarketContactValidationInput =
     projectEvidenceUrl?: unknown;
   };
 
+export type OutreachPreflightProspect = {
+  companyName: string;
+  contactEmail: string | null;
+  website: string | null;
+  dedupeKey?: string | null;
+  contactStatus?: string | null;
+};
+
+export type OutreachPreflightConflict = {
+  companyName: string;
+  contactEmail: string;
+  domain: string;
+  conflicts: Array<"email" | "domain" | "suppression">;
+  conflictingCompanies: string[];
+};
+
+export type OutreachPreflightReport = {
+  label: string;
+  target: number;
+  total: number;
+  usableCount: number;
+  replacementsNeeded: number;
+  conflicts: OutreachPreflightConflict[];
+};
+
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const INVALID_TEXT_VALUES = new Set([
   "[object object]",
@@ -59,6 +84,65 @@ function isPublicHttpUrl(value: unknown): boolean {
 
 function hostname(value: string): string {
   return new URL(value).hostname.replace(/^www\./, "").toLowerCase();
+}
+
+export function evaluateVerifiedOutreachPreflight(options: {
+  label: string;
+  target: number;
+  contacts: readonly VerifiedBatchContactValidationInput[];
+  activeProspects: readonly OutreachPreflightProspect[];
+  suppressedEmails: readonly string[];
+}): OutreachPreflightReport {
+  const prospectEmails = new Map<string, OutreachPreflightProspect[]>();
+  const prospectDomains = new Map<string, OutreachPreflightProspect[]>();
+  for (const prospect of options.activeProspects) {
+    const email = normalizedText(prospect.contactEmail).toLowerCase();
+    if (email) prospectEmails.set(email, [...(prospectEmails.get(email) ?? []), prospect]);
+    if (prospect.website && isPublicHttpUrl(prospect.website)) {
+      const domain = hostname(prospect.website);
+      prospectDomains.set(domain, [...(prospectDomains.get(domain) ?? []), prospect]);
+    }
+  }
+  const suppressions = new Set(options.suppressedEmails.map((email) => normalizedText(email).toLowerCase()));
+  const conflicts: OutreachPreflightConflict[] = [];
+
+  for (const contact of options.contacts) {
+    const contactEmail = normalizedText(contact.contactEmail).toLowerCase();
+    const domain = hostname(normalizedText(contact.website));
+    const dedupeKey = normalizedText(contact.dedupeKey).toLowerCase();
+    const emailMatches = (prospectEmails.get(contactEmail) ?? []).filter(
+      (prospect) => normalizedText(prospect.dedupeKey).toLowerCase() !== dedupeKey,
+    );
+    const domainMatches = (prospectDomains.get(domain) ?? []).filter(
+      (prospect) => normalizedText(prospect.dedupeKey).toLowerCase() !== dedupeKey,
+    );
+    const kinds: OutreachPreflightConflict["conflicts"] = [];
+    const conflictingCompanies = new Set<string>();
+    for (const prospect of emailMatches) conflictingCompanies.add(prospect.companyName);
+    for (const prospect of domainMatches) conflictingCompanies.add(prospect.companyName);
+    if (emailMatches.length > 0) kinds.push("email");
+    if (domainMatches.length > 0) kinds.push("domain");
+    if (suppressions.has(contactEmail)) kinds.push("suppression");
+    if (kinds.length > 0) {
+      conflicts.push({
+        companyName: normalizedText(contact.companyName),
+        contactEmail,
+        domain,
+        conflicts: kinds,
+        conflictingCompanies: [...conflictingCompanies].sort(),
+      });
+    }
+  }
+
+  const usableCount = options.contacts.length - conflicts.length;
+  return {
+    label: options.label,
+    target: options.target,
+    total: options.contacts.length,
+    usableCount,
+    replacementsNeeded: Math.max(0, options.target - usableCount),
+    conflicts,
+  };
 }
 
 export function isCompanyDomainEmail(emailValue: unknown, websiteValue: unknown): boolean {

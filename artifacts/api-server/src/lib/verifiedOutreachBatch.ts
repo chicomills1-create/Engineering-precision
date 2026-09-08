@@ -6,7 +6,12 @@ import {
   outreachSuppressionsTable,
   prospectsTable,
 } from "@workspace/db";
-import { assertVerifiedOutreachBatch } from "./outreachContactValidation";
+import {
+  assertVerifiedOutreachBatch,
+  evaluateVerifiedOutreachPreflight,
+  type OutreachPreflightReport,
+  type VerifiedBatchContactValidationInput,
+} from "./outreachContactValidation";
 import { VERIFIED_OUTREACH_CONTACTS as LEGACY_VERIFIED_OUTREACH_CONTACTS } from "./verifiedOutreachContacts";
 import { VERIFIED_OUTREACH_CONTACTS_AUG_29 } from "./verifiedOutreachContactsAug29";
 import { VERIFIED_OUTREACH_CONTACTS_AUG_30 } from "./verifiedOutreachContactsAug30";
@@ -102,6 +107,54 @@ Reply with the project location and the drawings or scope you have available. We
   ];
 }
 
+export async function preflightVerifiedOutreachBatch(options: {
+  label: string;
+  target: number;
+  contacts: readonly VerifiedBatchContactValidationInput[];
+  enforceTarget?: boolean;
+  snapshot?: {
+    activeProspects: Array<{
+      companyName: string;
+      contactEmail: string | null;
+      website: string | null;
+      dedupeKey?: string | null;
+      contactStatus?: string | null;
+    }>;
+    suppressedEmails: string[];
+  };
+}): Promise<OutreachPreflightReport> {
+  assertVerifiedOutreachBatch(options.contacts);
+  const snapshot = options.snapshot ?? {
+    activeProspects: await db.select({
+      companyName: prospectsTable.companyName,
+      contactEmail: prospectsTable.contactEmail,
+      website: prospectsTable.website,
+      dedupeKey: prospectsTable.dedupeKey,
+      contactStatus: prospectsTable.contactStatus,
+    }).from(prospectsTable),
+    suppressedEmails: (await db.select({ email: outreachSuppressionsTable.email })
+      .from(outreachSuppressionsTable)).map((row) => row.email),
+  };
+  const report = evaluateVerifiedOutreachPreflight({
+    label: options.label,
+    target: options.target,
+    contacts: options.contacts,
+    activeProspects: snapshot.activeProspects,
+    suppressedEmails: snapshot.suppressedEmails,
+  });
+  if (options.enforceTarget && report.replacementsNeeded > 0) {
+    const blocked = report.conflicts
+      .map((conflict) => `${conflict.companyName} (${conflict.conflicts.join(", ")})`)
+      .join("; ");
+    throw new Error(
+      `${report.label} preflight requires ${report.target} usable contacts; `
+      + `found ${report.usableCount}, replacements needed ${report.replacementsNeeded}. `
+      + `Blocked companies: ${blocked}`,
+    );
+  }
+  return report;
+}
+
 export async function seedVerifiedOutreachBatch(options: {
   enabled?: boolean;
   now?: Date;
@@ -124,6 +177,19 @@ export async function seedVerifiedOutreachBatch(options: {
     VERIFIED_OUTREACH_CONTACTS_SEP_05,
     SEP_05_PUBLIC_TARGET,
   );
+
+  await preflightVerifiedOutreachBatch({
+    contacts: VERIFIED_OUTREACH_CONTACTS_SEP_05_DIRECT,
+    target: SEP_05_DIRECT_REQUIRED_TARGET,
+    label: "September 5",
+    enforceTarget: true,
+  });
+  await preflightVerifiedOutreachBatch({
+    contacts: VERIFIED_OUTREACH_CONTACTS_SEP_05,
+    target: SEP_05_PUBLIC_TARGET,
+    label: "September 5 Public",
+    enforceTarget: true,
+  });
 
   let [campaign] = await db.select().from(campaignsTable)
     .where(eq(campaignsTable.name, CAMPAIGN_NAME))

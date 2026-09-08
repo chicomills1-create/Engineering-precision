@@ -4,6 +4,7 @@ import {
   approvedOutreachBody,
   approvedOutreachFollowUpMessages,
   approvedOutreachSubject,
+  preflightVerifiedOutreachBatch,
   VERIFIED_OUTREACH_CONTACTS,
 } from "./verifiedOutreachBatch";
 import { VERIFIED_OUTREACH_CONTACTS_AUG_30 } from "./verifiedOutreachContactsAug30";
@@ -125,6 +126,93 @@ test("the September 5 Public top-up contains exactly 50 distinct official-site c
   ));
   assert.doesNotThrow(() =>
     assertVerifiedOutreachBatch(VERIFIED_OUTREACH_CONTACTS_SEP_05, 50)
+  );
+});
+
+test("the dated inventory preflight reports exact production conflicts without writes", async () => {
+  const contacts = VERIFIED_OUTREACH_CONTACTS_SEP_05.slice(0, 4);
+  const emailConflict = contacts[0]!;
+  const domainConflict = contacts[1]!;
+  const suppressed = contacts[2]!;
+  const report = await preflightVerifiedOutreachBatch({
+    label: "September 5 Public",
+    target: 4,
+    contacts,
+    snapshot: {
+      activeProspects: [
+        {
+          companyName: "Existing Email Company",
+          contactEmail: emailConflict.contactEmail.toUpperCase(),
+          website: "https://unrelated-existing.example",
+        },
+        {
+          companyName: "Existing Domain Company",
+          contactEmail: "other@unrelated.example",
+          website: domainConflict.website,
+        },
+      ],
+      suppressedEmails: [suppressed.contactEmail.toUpperCase()],
+    },
+  });
+
+  assert.equal(report.usableCount, 1);
+  assert.equal(report.replacementsNeeded, 3);
+  assert.deepEqual(
+    report.conflicts.map(({ companyName, conflicts }) => ({ companyName, conflicts })),
+    [
+      { companyName: emailConflict.companyName, conflicts: ["email"] },
+      { companyName: domainConflict.companyName, conflicts: ["domain"] },
+      { companyName: suppressed.companyName, conflicts: ["suppression"] },
+    ],
+  );
+  assert.deepEqual(report.conflicts[0]?.conflictingCompanies, ["Existing Email Company"]);
+  assert.deepEqual(report.conflicts[1]?.conflictingCompanies, ["Existing Domain Company"]);
+});
+
+test("an enforced dated inventory preflight fails with blocked companies and usable count", async () => {
+  const contacts = VERIFIED_OUTREACH_CONTACTS_SEP_05.slice(0, 2);
+  await assert.rejects(
+    preflightVerifiedOutreachBatch({
+      label: "September 5 Public",
+      target: 2,
+      contacts,
+      enforceTarget: true,
+      snapshot: {
+        activeProspects: [{
+          companyName: "Already Active",
+          contactEmail: contacts[0]!.contactEmail,
+          website: contacts[0]!.website,
+        }],
+        suppressedEmails: [],
+      },
+    }),
+    new RegExp(
+      `September 5 Public preflight requires 2 usable contacts; found 1, replacements needed 1\\. `
+      + `Blocked companies: ${contacts[0]!.companyName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")} \\(email, domain\\)`,
+    ),
+  );
+});
+
+test("the preflight blocks historical non-active prospects just like the production seed", async () => {
+  const contacts = VERIFIED_OUTREACH_CONTACTS_SEP_05.slice(0, 2);
+  const historicalConflict = contacts[0]!;
+  await assert.rejects(
+    preflightVerifiedOutreachBatch({
+      label: "September 5 Public",
+      target: 2,
+      contacts,
+      enforceTarget: true,
+      snapshot: {
+        activeProspects: [{
+          companyName: "Historical Prospect",
+          contactEmail: "different@historical.example",
+          website: historicalConflict.website,
+          contactStatus: "departed",
+        }],
+        suppressedEmails: [],
+      },
+    }),
+    /found 1, replacements needed 1.*Blocked companies: .+ \(domain\)/,
   );
 });
 
