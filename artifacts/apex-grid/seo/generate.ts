@@ -5,6 +5,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { StateData, CityData } from "./types";
+import { CITY_PRIORITIES } from "./city-priorities";
+import { LEGACY_CURATED_CITY_KEYS } from "./legacy-curated-cities";
 import { SERVICES, type ServiceDef } from "./services";
 import { htmlShell, SITE } from "./shell";
 import { BLOG_POSTS, type BlogPost } from "./blog";
@@ -95,6 +97,56 @@ async function loadCities(): Promise<CityData[]> {
   }
   return cities.sort((a, b) => a.name.localeCompare(b.name));
 }
+
+function isReviewedCity(city: CityData): boolean {
+  if (!city.research) return LEGACY_CURATED_CITY_KEYS.has(`${city.stateSlug}/${city.slug}`);
+  const sourceGroups = Object.values(city.research.sources);
+  return city.research.reviewStatus === "approved"
+    && /^\d{4}-\d{2}-\d{2}$/.test(city.research.lastVerified)
+    && city.research.reviewedBy.trim().length > 0
+    && city.research.priority.commercialOpportunity >= 0
+    && city.research.priority.commercialOpportunity <= 100
+    && sourceGroups.every((urls) => urls.length > 0 && urls.every((url) => /^https:\/\//.test(url)));
+}
+
+function assertCityResearch(city: CityData): void {
+  if (!city.research && !LEGACY_CURATED_CITY_KEYS.has(`${city.stateSlug}/${city.slug}`)) {
+    throw new Error(`New city is missing required research evidence: ${city.stateSlug}/${city.slug}`);
+  }
+  if (city.research && !isReviewedCity(city) && city.research.reviewStatus === "approved") {
+    throw new Error(`Approved city has incomplete research evidence: ${city.stateSlug}/${city.slug}`);
+  }
+  if (city.research) {
+    const priority = CITY_PRIORITIES.find((entry) => entry.stateSlug === city.stateSlug && entry.citySlug === city.slug);
+    if (!priority) throw new Error(`Researched city is missing from the priority queue: ${city.stateSlug}/${city.slug}`);
+    if (
+      priority.commercialOpportunity !== city.research.priority.commercialOpportunity ||
+      priority.searchConsoleImpressions !== city.research.priority.searchConsoleImpressions ||
+      priority.searchConsolePeriod !== city.research.priority.searchConsolePeriod
+    ) {
+      throw new Error(`City priority evidence does not match research: ${city.stateSlug}/${city.slug}`);
+    }
+  }
+}
+
+function citySourceList(city: CityData): string {
+  if (!city.research) return "";
+  const labels: Record<keyof CityData["research"]["sources"], string> = {
+    ahj: "Permit authority",
+    codes: "Adopted codes",
+    amendments: "Local amendments",
+    utilities: "Utilities",
+    climate: "Climate",
+    market: "Market context",
+  };
+  return `<section class="block"><div class="container">
+  <h2>Verified <em>Local Sources</em></h2>
+  <p class="note">Reviewed ${esc(city.research.lastVerified)}. Code editions and local requirements can change; confirm the current requirements with the authority having jurisdiction before design.</p>
+  <div class="linkrow">${Object.entries(city.research.sources).flatMap(([group, urls]) =>
+    urls.map((url) => `<a href="${esc(url)}" rel="noopener noreferrer">${esc(labels[group as keyof typeof labels])}</a>`)
+  ).join("")}</div>
+</div></section>`;
+}
 const esc = (s: string) =>
   s
     .replace(/&/g, "&amp;")
@@ -175,13 +227,29 @@ function writeCityQualityReport(states: StateData[], directory: CityDirectory, c
     .filter((city) => !curated.some((c) => c.stateSlug === state.slug && c.slug === city.slug))
     .map((city) => assessLiteCity(state, city)));
   const anomalies = decisions.filter((d) => d.status === "excluded");
+  const reviewed = curated.filter((city) => city.research && isReviewedCity(city));
+  const drafts = curated.filter((city) => city.research && !isReviewedCity(city));
+  const directoryNoindexCount = decisions.length;
   const report = {
-    reportVersion: 1,
-    policy: "Curated CityData and retained legacy cities are indexable. Census directory-lite and derived architecture/GC city pages remain live but are noindex,follow until enriched.",
+    reportVersion: 2,
+    policy: "Approved, fully sourced CityData and grandfathered curated cities are indexable. Draft research and Census directory-lite pages remain live but are noindex,follow.",
+    reviewedPromotions: reviewed.map((city) => ({
+      state: city.stateSlug,
+      slug: city.slug,
+      lastVerified: city.research!.lastVerified,
+      sourceCount: Object.values(city.research!.sources).flat().length,
+      checks: { unique: "pass", sources: "pass", canonical: "pass", internalLinks: "pass" },
+    })),
+    grandfatheredCuratedCount: curated.filter((city) =>
+      !city.research && LEGACY_CURATED_CITY_KEYS.has(`${city.stateSlug}/${city.slug}`)
+    ).length,
+    priorityQueue: CITY_PRIORITIES,
     populationReviewSignal: `population below ${LITE_CITY_MIN_POPULATION} is flagged for human review; population is not proof of page quality`,
-    indexedCount: decisions.filter((d) => d.status === "indexed").length,
-    noindexCount: decisions.filter((d) => d.status === "excluded").length,
-    excludedCount: decisions.filter((d) => d.status === "excluded").length,
+    indexedCount: curated.filter(isReviewedCity).length + RETAINED_LEGACY_LOCATIONS.filter((retained) =>
+      !curated.some((city) => city.stateSlug === retained.stateSlug && city.slug === retained.city.slug)
+    ).length,
+    noindexCount: directoryNoindexCount + drafts.length,
+    excludedCount: directoryNoindexCount + drafts.length,
     excludedReasons: anomalies.reduce<Record<string, number>>((counts, d) => {
       for (const reason of d.reasons) counts[reason] = (counts[reason] ?? 0) + 1;
       return counts;
@@ -1025,7 +1093,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     for (const svc of SERVICES) {
       locationsUrls.push(u(`${SITE}/locations/${s.slug}/${svc.slug}/`, today, "monthly", "0.7"));
     }
-    for (const c of cities.filter((c) => c.stateSlug === s.slug)) {
+    for (const c of cities.filter((c) => c.stateSlug === s.slug && isReviewedCity(c))) {
       locationsUrls.push(u(`${SITE}/locations/${s.slug}/${c.slug}/`, today, "monthly", "0.7"));
       for (const svc of SERVICES) {
         locationsUrls.push(u(`${SITE}/locations/${s.slug}/${c.slug}/${svc.slug}/`, today, "monthly", "0.7"));
@@ -1050,7 +1118,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     for (const state of states.filter((entry) => verticalAvailableInState(vertical, entry.slug))) {
       urls.push(u(`${SITE}${verticalStateUrl(vertical, state.slug)}`, today, "monthly", "0.7"));
       const indexableCitySlugs = new Set([
-        ...cities.filter((c) => c.stateSlug === state.slug).map((c) => c.slug),
+        ...cities.filter((c) => c.stateSlug === state.slug && isReviewedCity(c)).map((c) => c.slug),
         ...RETAINED_LEGACY_LOCATIONS.filter((r) => r.stateSlug === state.slug).map((r) => r.city.slug),
       ]);
       for (const city of allDirectoryCitiesForState(state, directory, cities).filter((entry) => indexableCitySlugs.has(entry.slug))) {
@@ -2854,6 +2922,14 @@ function miscPage(page: MiscPage): string {
 async function main() {
   const states = await loadStates();
   const cities = await loadCities();
+  if (cities[0] && isReviewedCity({ ...cities[0], slug: "unsourced-promotion-gate-probe", research: undefined })) {
+    throw new Error("SEO assertion failed: a new city without approved research passed the promotion gate");
+  }
+  for (const legacyKey of LEGACY_CURATED_CITY_KEYS) {
+    if (!cities.some((city) => `${city.stateSlug}/${city.slug}` === legacyKey && !city.research)) {
+      throw new Error(`SEO assertion failed: stale or researched city remains in the legacy allowlist: ${legacyKey}`);
+    }
+  }
   const directory = loadDirectory();
   validateDirectory(directory, states);
   writeLlmsTxt();
@@ -2866,6 +2942,7 @@ async function main() {
   for (const c of cities) {
     assertSlug(c.slug);
     assertNoMarkupCity(c);
+    assertCityResearch(c);
     if (serviceSlugs.has(c.slug)) throw new Error(`City slug collides with a service slug: ${c.slug}`);
     if (!states.some((s) => s.slug === c.stateSlug)) throw new Error(`City ${c.slug} references unknown state: ${c.stateSlug}`);
   }
@@ -2963,7 +3040,7 @@ async function main() {
             city,
             stateCities,
             curatedBySlug.get(city.slug),
-            Boolean(curatedBySlug.get(city.slug) || RETAINED_LEGACY_LOCATIONS.some((r) => r.stateSlug === state.slug && r.city.slug === city.slug)),
+             Boolean((curatedBySlug.get(city.slug) && isReviewedCity(curatedBySlug.get(city.slug)!)) || RETAINED_LEGACY_LOCATIONS.some((r) => r.stateSlug === state.slug && r.city.slug === city.slug)),
           ),
         );
         pages++;
@@ -3276,10 +3353,51 @@ async function main() {
       }
     }
   }
-  for (const curated of cities.slice(0, 3)) {
+  for (const curated of cities.filter(isReviewedCity).slice(0, 3)) {
     const curatedPath = `/locations/${curated.stateSlug}/${curated.slug}/`;
     const curatedHtml = fs.readFileSync(path.join(PUBLIC, curatedPath.replace(/^\/|\/$/g, ""), "index.html"), "utf8");
     if (curatedHtml.includes('content="noindex,follow"') || !locationsXml.includes(`${SITE}${curatedPath}`)) throw new Error(`SEO assertion failed: curated city policy: ${curatedPath}`);
+  }
+  const reviewedPromotions = cities.filter((city) => city.research && isReviewedCity(city));
+  const uniqueNarratives = new Set<string>();
+  for (const promoted of reviewedPromotions) {
+    const promotedBase = `/locations/${promoted.stateSlug}/${promoted.slug}/`;
+    const expectedSources = Object.values(promoted.research!.sources).flat();
+    for (const narrative of Object.values(promoted.narratives)) {
+      const fingerprint = narrative.toLowerCase().replace(/\s+/g, " ").trim();
+      if (uniqueNarratives.has(fingerprint)) throw new Error(`SEO assertion failed: duplicate promoted-city narrative: ${promotedBase}`);
+      uniqueNarratives.add(fingerprint);
+    }
+    for (const relativePath of [promotedBase, ...SERVICES.map((service) => `${promotedBase}${service.slug}/`)]) {
+      const htmlFile = path.join(PUBLIC, relativePath.replace(/^\/|\/$/g, ""), "index.html");
+      const html = fs.readFileSync(htmlFile, "utf8");
+      const canonical = `${SITE}${relativePath}`;
+      if (!html.includes(`<link rel="canonical" href="${canonical}"`)) {
+        throw new Error(`SEO assertion failed: promoted city canonical mismatch: ${relativePath}`);
+      }
+      if (!html.includes('<meta name="robots" content="index,follow"')) {
+        throw new Error(`SEO assertion failed: promoted city is not index,follow: ${relativePath}`);
+      }
+      for (const source of expectedSources) {
+        if (!html.includes(`href="${source}"`)) throw new Error(`SEO assertion failed: promoted city source missing from ${relativePath}: ${source}`);
+      }
+      if (!locationsXml.includes(`<loc>${canonical}</loc>`)) {
+        throw new Error(`SEO assertion failed: promoted city missing from location sitemap: ${relativePath}`);
+      }
+      if (relativePath === promotedBase) {
+        for (const service of SERVICES) {
+          if (!html.includes(`href="${promotedBase}${service.slug}/"`)) {
+            throw new Error(`SEO assertion failed: promoted city missing internal service link: ${relativePath}${service.slug}/`);
+          }
+        }
+      } else if (!html.includes(`href="${promotedBase}"`)) {
+        throw new Error(`SEO assertion failed: promoted city service missing parent link: ${relativePath}`);
+      }
+    }
+    const stateHtml = fs.readFileSync(path.join(PUBLIC, "locations", promoted.stateSlug, "index.html"), "utf8");
+    if (!stateHtml.includes(`href="${promotedBase}"`)) {
+      throw new Error(`SEO assertion failed: promoted city has no inbound state-page link: ${promotedBase}`);
+    }
   }
   for (const retained of RETAINED_LEGACY_LOCATIONS) {
     const retainedPath = `/locations/${retained.stateSlug}/${retained.city.slug}/`;
@@ -3428,6 +3546,7 @@ ${breadcrumb(crumbs)}
     <div class="card"><div class="label">${esc(city.name)} Market Context</div><p>${esc(city.marketNotes)}</p></div>
   </div>
 </div></section>
+${citySourceList(city)}
 
 <section class="block"><div class="container faq">
   <h2>${esc(city.name)} <em>FAQs</em></h2>
@@ -3456,6 +3575,7 @@ ${breadcrumb(crumbs)}
     description: `Licensed ${svc.name.toLowerCase()} for ${city.name}, ${state.abbrev} commercial projects. Permits through ${city.ahj.office}; designed to the ${city.codes.building.split(",")[0].split("(")[0].trim()} with local amendments.`,
     canonical: `${SITE}${url}`,
     schemaJson: [orgSchema, svcSchema, faqSchema, breadcrumbSchema(crumbs)],
+    robots: isReviewedCity(city) ? "index,follow" : "noindex,follow",
     body,
   });
 }
@@ -3527,6 +3647,7 @@ ${breadcrumb(crumbs)}
   <h2>${esc(city.name)} Engineering <em>FAQs</em></h2>
   ${city.faqs.map((faq) => `<details><summary>${esc(faq.q)}</summary><div class="a">${esc(faq.a)}</div></details>`).join("")}
 </div></section>
+${citySourceList(city)}
 <section class="block"><div class="container">
   <h2>More <em>Locations</em></h2>
   <div class="linkrow">${nearby
@@ -3544,6 +3665,7 @@ ${breadcrumb(crumbs)}
     description: `Licensed MEP, structural, civil, and energy-compliance engineering in ${city.name}, ${state.abbrev}. Permitting through ${city.ahj.office} under the ${city.codes.building.split(",")[0].split("(")[0].trim()}.`,
     canonical: `${SITE}/locations/${state.slug}/${city.slug}/`,
     schemaJson: [orgSchema, serviceSchema, faqSchema, breadcrumbSchema(crumbs)],
+    robots: isReviewedCity(city) ? "index,follow" : "noindex,follow",
     body: body.replace(/[ \t]+$/gm, ""),
   });
 }

@@ -82,4 +82,25 @@ export interface CityData {
     energy: string;
   };
   faqs: { q: string; a: string }[]; // 3 city-specific FAQs with substantive answers
+  /** Required for newly promoted cities. Older curated records are grandfathered
+   * until their next quarterly review, but any record with research metadata must
+   * pass the complete source/review gate before it can be indexed. */
+  research?: {
+    lastVerified: string;
+    reviewStatus: "draft" | "approved";
+    reviewedBy: string;
+    priority: {
+      commercialOpportunity: number; // 0-100, documented market-opportunity score
+      searchConsoleImpressions: number; // latest available page impressions; 0 is valid
+      searchConsolePeriod: string; // YYYY-MM-DD/YYYY-MM-DD or "unavailable"
+    };
+    sources: {
+      ahj: string[];
+      codes: string[];
+      amendments: string[];
+      utilities: string[];
+      climate: string[];
+      market: string[];
+    };
+  };
 }
