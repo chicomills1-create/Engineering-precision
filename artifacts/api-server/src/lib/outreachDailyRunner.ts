@@ -58,6 +58,7 @@ export function getPhoenixStagedMessageWaitMs(invokedAt: Date, now: Date): numbe
 export type DailyOutreachRunnerOperations = {
   processHotMarketResearch: () => Promise<unknown>;
   processScheduledResearch: () => Promise<number>;
+  verifyProspects?: () => Promise<unknown>;
   prepareRegularOutreach: () => Promise<DailyOutreachPreparationResult>;
   prepareHotMarketOutreach: () => Promise<DailyHotMarketPreparationResult>;
   processDueMessages: () => Promise<DailyOutreachDispatchResult>;
@@ -147,6 +148,7 @@ export async function runDailyOutreachOnce(
 ): Promise<DailyOutreachRunnerResult> {
   await operations.processHotMarketResearch();
   await operations.processScheduledResearch();
+  await operations.verifyProspects?.();
   const [regularPreparation, hotMarketPreparation] = await Promise.all([
     operations.prepareRegularOutreach(),
     operations.prepareHotMarketOutreach(),

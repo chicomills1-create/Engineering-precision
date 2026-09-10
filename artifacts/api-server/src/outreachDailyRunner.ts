@@ -11,6 +11,7 @@ import {
   processDueHotMarketResearch,
   processDueOutreachResearchSchedules,
 } from "./lib/outreachResearchScheduler";
+import { verifyNewOutreachProspects } from "./lib/outreachVerification";
 import { prepareNextPhoenixOutreach } from "./lib/outreachPreparation";
 import { prepareNextPhoenixHotMarketOutreach } from "./lib/hotMarketPreparation";
 import { sendDailyOutreachReport } from "./lib/outreachDailyReport";
@@ -105,6 +106,7 @@ async function main(): Promise<void> {
   const result = await runDailyOutreachOnce({
     processHotMarketResearch: () => processDueHotMarketResearch(),
     processScheduledResearch: () => processDueOutreachResearchSchedules(),
+    verifyProspects: () => verifyNewOutreachProspects(),
     prepareRegularOutreach: () => prepareNextPhoenixOutreach(),
     prepareHotMarketOutreach: () => prepareNextPhoenixHotMarketOutreach(),
     processDueMessages: () => processDueOutreachMessagesWithSummary(),
