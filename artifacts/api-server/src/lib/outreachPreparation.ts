@@ -2,6 +2,8 @@ import { and, asc, eq, gt, gte, inArray, lt, lte, or, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
+  outreachCatchUpCohortsTable,
+  outreachCatchUpReservationsTable,
   outreachMessagesTable,
   outreachPreparationRunsTable,
   outreachPreparationSlotsTable,
@@ -20,6 +22,7 @@ import {
 } from "./verifiedOutreachBatch";
 import { ensureApprovedFollowUpSequence } from "./outreachSequence";
 import { isHotMarketSourceType } from "./hotMarketOutreachBatch";
+import { getCatchUpRemainingCapacity } from "./outreachCatchUp";
 export const OUTREACH_PERSONAL_PREPARATION_TARGET = 100;
 export const OUTREACH_PUBLIC_PREPARATION_TARGET = 50;
 export const OUTREACH_PREPARATION_TARGET = REGULAR_OUTREACH_DAILY_TARGET;
@@ -322,6 +325,7 @@ function canPrepare(prospect: Prospect, campaign: Campaign, suppressedEmails: Se
       subject: "", body: "", status: "draft", scheduledAt: null, sentAt: null,
       providerMessageId: null, providerReconciliationKey: null, error: null,
       sourceType: null, sourceId: null, createdAt: new Date(), updatedAt: new Date(),
+      catchUpCohortId: null,
     }, prospect, campaign, {
       requireApprovedMessage: false,
       requireApprovedProspect: false,
@@ -432,6 +436,11 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
         sequenceNumber: outreachSequenceSendClaimsTable.sequenceNumber,
       }).from(outreachSequenceSendClaimsTable).where(eq(outreachSequenceSendClaimsTable.sequenceNumber, 1)),
     ]);
+    const [catchUpCohort] = await db.select().from(outreachCatchUpCohortsTable)
+      .where(eq(outreachCatchUpCohortsTable.name, "Apex Grid fresh verified catch-up")).limit(1);
+    const catchUpRemaining = catchUpCohort?.status === "active"
+      ? await getCatchUpRemainingCapacity()
+      : 0;
     const suppressedEmails = new Set(suppressions.map((row) => row.email.trim().toLowerCase()));
     const initialProspects = new Set(initialMessages.map((row) => row.prospectId));
     const claimedProspects = new Set(claims.map((row) => row.prospectId));
@@ -510,7 +519,10 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
         (_, index) => index + 1,
       ).filter((slot) => !usedSlots.has(slot)).slice(0, remainingCapacity);
 
-      for (const prospect of selected) {
+      const selectedForRun = catchUpCohort?.status === "active"
+        ? selected.slice(0, catchUpRemaining)
+        : selected;
+      for (const prospect of selectedForRun) {
         if (usedProspects.has(prospect.id)) continue;
         const [currentProspect] = await tx.select().from(prospectsTable)
           .where(eq(prospectsTable.id, prospect.id))
@@ -545,6 +557,25 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
             continue;
           }
         }
+        let catchUpCohortId: number | null = null;
+        if (catchUpCohort?.status === "active") {
+          await tx.execute(sql`select ${outreachCatchUpCohortsTable.id}
+            from ${outreachCatchUpCohortsTable}
+            where ${outreachCatchUpCohortsTable.id} = ${catchUpCohort.id}
+            for update`);
+          const [capacityUsed] = await tx.select({ count: sql<number>`count(*)::int` })
+            .from(outreachCatchUpReservationsTable)
+            .where(and(
+              eq(outreachCatchUpReservationsTable.cohortId, catchUpCohort.id),
+              inArray(outreachCatchUpReservationsTable.status, ["reserved", "accepted"]),
+            ));
+          if ((capacityUsed?.count ?? 0) >= catchUpCohort.targetCount) {
+            await tx.delete(outreachPreparationSlotsTable)
+              .where(eq(outreachPreparationSlotsTable.id, slotClaim.id));
+            break;
+          }
+          catchUpCohortId = catchUpCohort.id;
+        }
         const [message] = await tx.insert(outreachMessagesTable).values({
           prospectId: prospect.id,
           campaignId: campaignsByProspect.get(prospect.id)!,
@@ -553,7 +584,14 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
           body: approvedOutreachBody(prospect.contactName!),
           status: "approved",
           scheduledAt,
+          catchUpCohortId,
         }).returning({ id: outreachMessagesTable.id });
+        if (message && catchUpCohortId) {
+          await tx.insert(outreachCatchUpReservationsTable).values({
+            cohortId: catchUpCohortId,
+            messageId: message.id,
+          }).onConflictDoNothing();
+        }
         await tx.insert(outreachMessagesTable).values(
           approvedOutreachFollowUpMessages(prospect.contactName!).map((followUp) => ({
             prospectId: prospect.id,

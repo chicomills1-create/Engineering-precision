@@ -1,0 +1,75 @@
+Here are the final two core production modules required to fully deploy your system. Instruct your Replit Agent to implement them to bridge your high-volume page layout architecture with actual live production traffic.📊 Block 3: Automated JSON-LD Graph Schema Engine (main.py)To maximize visibility in AI answer engines (AEO), your script needs to inject a clean metadata layer directly into the raw HTML payload. This schema framework automatically embeds deep programmatic entity markers—such as exact NAD83 GeoCoordinates projections, target enterprise business designations, and structured localized compliance graphs—onto your pages.Have your Replit Agent integrate this precise metadata parsing block into the page data preparation section of your main.py routing loop:python# Insert this dynamic object compilation inside your render_aeo_seo_page route block
+# It structures explicit, machine-readable data for AI web crawlers
+
+schema_graph = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "ProfessionalService",
+            "@id": f"https://apexgrideng.com{service_slug}-in-{city}-{state}#service",
+            "name": f"Apex Grid {service_info['title']}",
+            "description": page_data["meta_desc"],
+            "url": f"https://apexgrideng.com{service_slug}-in-{city}-{state}",
+            "telephone": "+1-800-555-0199",
+            "priceRange": "$$$$",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": formatted_city,
+                "addressRegion": state_code,
+                "addressCountry": "US"
+            },
+            "areaServed": {
+                "@type": "AdministrativeArea",
+                "name": formatted_city
+            }
+        },
+        {
+            "@type": "GovernmentRequirements",
+            "@id": f"https://apexgrideng.com{service_slug}-in-{city}-{state}#compliance",
+            "name": f"{state_code} Municipal Code Mandate Frameworks",
+            "description": f"Enforced zoning protocols demanding complete adherence to {compliance['code']} rules."
+        }
+    ]
+}
+
+# Pass this dictionary straight to your templates context payload array
+page_data["schema_json"] = schema_graph
+Use code with caution.Then, ensure your templates/pseo_template.html renders it by adding this tag inside your <head> block:html<script type="application/ld+json">
+{{ page.schema_json | tojson | safe }}
+</script>
+Use code with caution.🛡️ Block 4: FastAPI Production Index Routes & Routing Setup (main.py)To go live, your application needs explicit routing setup rules to accurately stream files like sitemap.xml and robots.txt directly to search bots.Have your Replit Agent append these production index routes and static filesystem mounting instructions to the bottom of your primary main.py application engine:pythonimport os
+from fastapi import FastAPI
+from fastapi.responses import FileResponse, PlainTextResponse
+from fastapi.staticfiles import StaticFiles
+
+# (Assuming app = FastAPI() and your existing dynamic route loops are declared above)
+
+# Mount the static file asset directories safely to expose sitemap parts
+if os.path.exists("static"):
+    app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/sitemap.xml", include_in_schema=False)
+async def serve_master_sitemap():
+    """Intercepts standard root search requests and routes bots cleanly to the index file"""
+    target_path = "static/sitemap.xml"
+    if os.path.exists(target_path):
+        return FileResponse(target_path, media_type="application/xml")
+    return PlainTextResponse("Sitemap initialization pending framework compile.", status_code=503)
+
+@app.get("/robots.txt", include_in_schema=False)
+async def serve_robots_txt():
+    """Directs search engines straight to the master sitemap index link"""
+    directives = (
+        "User-agent: *\n"
+        "Allow: / \n"
+        "Disallow: /templates/ \n"
+        "Disallow: /data/ \n\n"
+        "Sitemap: https://apexgrideng.com\n"
+    )
+    return PlainTextResponse(directives, media_type="text/plain")
+
+if __name__ == '__main__':
+    import uvicorn
+    # Boots the production workspace gateway
+    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=False)
+Use code with caution.

@@ -12,6 +12,18 @@ import { createInsertSchema } from "drizzle-zod";
 import { sql } from "drizzle-orm";
 import { z } from "zod/v4";
 
+export const outreachCatchUpCohortsTable = pgTable("outreach_catch_up_cohorts", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  targetCount: integer("target_count").notNull(),
+  status: text("status").notNull().default("active"),
+  activatedAt: timestamp("activated_at", { withTimezone: true }).notNull().defaultNow(),
+  completedAt: timestamp("completed_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [
+  uniqueIndex("outreach_catch_up_cohorts_name_unique").on(table.name),
+]);
+
 export const campaignsTable = pgTable("outreach_campaigns", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
@@ -150,6 +162,7 @@ export const outreachMessagesTable = pgTable("outreach_messages", {
   error: text("error"),
   sourceType: text("source_type"),
   sourceId: integer("source_id"),
+  catchUpCohortId: integer("catch_up_cohort_id").references(() => outreachCatchUpCohortsTable.id, { onDelete: "set null" }),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
 }, (table) => [
@@ -230,6 +243,42 @@ export const outreachDeliveryEventsTable = pgTable("outreach_delivery_events", {
   index("outreach_delivery_events_message_idx").on(table.outreachMessageId),
 ]);
 
+export const outreachProviderHandoffsTable = pgTable("outreach_provider_handoffs", {
+  id: serial("id").primaryKey(),
+  messageId: integer("message_id").notNull().references(() => outreachMessagesTable.id, { onDelete: "cascade" }),
+  reconciliationKey: text("reconciliation_key").notNull(),
+  providerMessageId: text("provider_message_id"),
+  acceptedAt: timestamp("accepted_at", { withTimezone: true }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [
+  uniqueIndex("outreach_provider_handoffs_message_unique").on(table.messageId),
+  uniqueIndex("outreach_provider_handoffs_reconciliation_unique").on(table.reconciliationKey),
+]);
+
+export const outreachCatchUpReservationsTable = pgTable("outreach_catch_up_reservations", {
+  id: serial("id").primaryKey(),
+  cohortId: integer("cohort_id").notNull().references(() => outreachCatchUpCohortsTable.id, { onDelete: "cascade" }),
+  messageId: integer("message_id").notNull().references(() => outreachMessagesTable.id, { onDelete: "cascade" }),
+  status: text("status").notNull().default("reserved"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  releasedAt: timestamp("released_at", { withTimezone: true }),
+}, (table) => [
+  uniqueIndex("outreach_catch_up_reservations_message_unique").on(table.messageId),
+]);
+
+export const outreachCatchUpEnrollmentsTable = pgTable("outreach_catch_up_enrollments", {
+  id: serial("id").primaryKey(),
+  cohortId: integer("cohort_id").notNull().references(() => outreachCatchUpCohortsTable.id, { onDelete: "cascade" }),
+  messageId: integer("message_id").notNull().references(() => outreachMessagesTable.id, { onDelete: "cascade" }),
+  sequenceNumber: integer("sequence_number").notNull(),
+  providerAcceptedAt: timestamp("provider_accepted_at", { withTimezone: true }).notNull(),
+  providerEvidenceEventId: integer("provider_evidence_event_id").references(() => outreachDeliveryEventsTable.id, { onDelete: "set null" }),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+}, (table) => [
+  uniqueIndex("outreach_catch_up_enrollments_message_unique").on(table.messageId),
+  uniqueIndex("outreach_catch_up_enrollments_cohort_message_unique").on(table.cohortId, table.messageId),
+]);
+
 export const outreachSendReservationsTable = pgTable("outreach_send_reservations", {
   id: serial("id").primaryKey(),
   messageId: integer("message_id").notNull().references(() => outreachMessagesTable.id),
@@ -293,6 +342,8 @@ export const insertOutreachDeliveryEventSchema = createInsertSchema(outreachDeli
 export const insertOutreachSendReservationSchema = createInsertSchema(outreachSendReservationsTable).omit({ id: true, createdAt: true });
 export const insertOutreachMonthlySendReservationSchema = createInsertSchema(outreachMonthlySendReservationsTable).omit({ id: true, createdAt: true });
 export const insertClientMonthlyEmailDeliverySchema = createInsertSchema(clientMonthlyEmailDeliveriesTable).omit({ id: true, createdAt: true });
+export const insertOutreachCatchUpCohortSchema = createInsertSchema(outreachCatchUpCohortsTable).omit({ id: true, createdAt: true });
+export const insertOutreachCatchUpEnrollmentSchema = createInsertSchema(outreachCatchUpEnrollmentsTable).omit({ id: true, createdAt: true });
 export type ResearchRun = typeof outreachResearchRunsTable.$inferSelect;
 export type InsertResearchRun = z.infer<typeof insertResearchRunSchema>;
 export type InsertProspect = z.infer<typeof insertProspectSchema>;
@@ -317,3 +368,5 @@ export type OutreachDeliveryEvent = typeof outreachDeliveryEventsTable.$inferSel
 export type InsertOutreachMonthlySendReservation = z.infer<typeof insertOutreachMonthlySendReservationSchema>;
 export type OutreachMonthlySendReservation = typeof outreachMonthlySendReservationsTable.$inferSelect;
 export type ClientMonthlyEmailDelivery = typeof clientMonthlyEmailDeliveriesTable.$inferSelect;
+export type OutreachCatchUpCohort = typeof outreachCatchUpCohortsTable.$inferSelect;
+export type OutreachCatchUpEnrollment = typeof outreachCatchUpEnrollmentsTable.$inferSelect;

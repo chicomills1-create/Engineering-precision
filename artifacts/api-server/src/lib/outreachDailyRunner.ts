@@ -114,6 +114,9 @@ export type DailyOutreachRunnerResult = {
   hotMarketScheduled: number;
   hotMarketShortfall: number;
   waitMs: number;
+  catchUpTarget?: number;
+  catchUpEnrolled?: number;
+  catchUpRemaining?: number;
 };
 
 export type DailyOutreachLease = {

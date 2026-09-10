@@ -1,0 +1,47 @@
+To target all 19,000 US cities programmatically without crashing Replit's memory, you must abandon static CSV files and use dynamic wildcard routing.Instead of hardcoding 19,000 rows, a single smart route in your code can instantly handle every city in America on demand. This keeps your application incredibly lightweight while scaling your footprint to 57,000+ landing pages (19,000 cities × 3 core engineering disciplines).🛠️ The Replit Dynamic Local Scale EngineHave your Replit Agent replace your main.py with this dynamic framework. It uses clean slug parsing to generate custom, localized engineering landing pages on the fly.pythonimport re
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+
+app = FastAPI()
+templates = Jinja2Templates(directory="templates")
+
+# Supported disciplines
+DISCIPLINES = {
+    "mep": "MEP Engineering",
+    "structural": "Structural Engineering",
+    "civil": "Civil Engineering"
+}
+
+def clean_slug_text(text: str) -> str:
+    """Converts hyphens back to clean title-case names (e.g., 'new-york' -> 'New York')"""
+    return " ".join([word.capitalize() for word in text.split("-")])
+
+@app.get("/{discipline}-engineering-{city}-{state}", response_class=HTMLResponse)
+async def render_local_seo_page(request: Request, discipline: str, city: str, state: str):
+    # 1. Validate the discipline type
+    if discipline not in DISCIPLINES:
+        raise HTTPException(status_code=404, detail="Discipline not supported")
+    
+    # 2. Validate state format (expecting 2-letter abbreviation like 'ny', 'ca')
+    if len(state) != 2 or not state.isalpha():
+        raise HTTPException(status_code=404, detail="Invalid location format")
+
+    # 3. Clean variables for on-the-fly optimization
+    formatted_discipline = DISCIPLINES[discipline]
+    formatted_city = clean_slug_text(city)
+    formatted_state = state.upper()
+    
+    # 4. Generate hyper-localized content variables dynamically
+    page_data = {
+        "meta_title": f"{formatted_discipline} Firm in {formatted_city}, {formatted_state} | Apex Grid",
+        "meta_desc": f"Top-rated commercial {formatted_discipline.lower()} consultants serving {formatted_city}, {formatted_state}. Structural blueprints, site civil master planning, and professional MEP designs.",
+        "h1": f"{formatted_discipline} Services in {formatted_city}, {formatted_state}",
+        "city": formatted_city,
+        "state": formatted_state,
+        "discipline": formatted_discipline
+    }
+
+    # Re-use your existing templates/pseo_template.html layout
+    return templates.TemplateResponse("pseo_template.html", {"request": request, "page": page_data})
+Use code with caution.🗺️ Feeding 19,000 Cities to Google (Sitemaps)Because the pages are generated dynamically on-the-fly, Google won't know they exist unless you hand over a map.Tell Replit to build a quick script that loops through a free US cities list and builds segmented XML sitemaps. Google caps individual sitemaps at 50,000 URLs, so you should split them up logically:sitemap-mep-cities.xmlsitemap-structural-cities.xmlsitemap-civil-cities.xml⚠️ Crucial Architecture Warning for All 19,000 CitiesAvoid Low-Quality Thin Content Filters: Google will penalize 19,000 pages if only the city name changes. You must programmatically vary data points. Group cities into regional variables (e.g., if state == 'fl', dynamically inject copy mentioning hurricane wind load compliance; if state == 'ca', dynamically inject seismic structural engineering compliance).

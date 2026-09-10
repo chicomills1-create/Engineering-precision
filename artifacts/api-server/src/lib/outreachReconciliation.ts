@@ -1,5 +1,5 @@
 import { ReplitConnectors } from "@replit/connectors-sdk";
-import { and, asc, desc, eq, inArray, or } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, or, sql } from "drizzle-orm";
 import {
   db,
   outreachDeliveryEventsTable,
@@ -7,11 +7,14 @@ import {
   outreachMonthlySendReservationsTable,
   outreachSendReservationsTable,
   outreachSequenceSendClaimsTable,
+  outreachCatchUpReservationsTable,
+  outreachCatchUpCohortsTable,
   prospectsTable,
   type OutreachDeliveryEvent,
   type OutreachMessage,
 } from "@workspace/db";
 import { suppressOutreachEmail } from "./outreachSuppression";
+import { enrollAcceptedCatchUpMessage } from "./outreachCatchUp";
 
 const ACCEPTED_EVENT_TYPES = new Set(["processed", "deferred", "delivered"]);
 const REJECTED_EVENT_TYPES = new Set(["bounce", "blocked", "dropped"]);
@@ -261,6 +264,10 @@ async function applyAcceptedOutcome(
       inArray(outreachMessagesTable.status, ["sending", "needs_review"]),
     ))
     .returning({ id: outreachMessagesTable.id });
+  // Enrollment still requires immutable HTTP-handoff or provider-event
+  // evidence. This lets a needs_review row recover when that evidence exists
+  // without admitting generic ambiguous historical attempts.
+  if (updated && message.catchUpCohortId) await enrollAcceptedCatchUpMessage(message.id);
   return Boolean(updated);
 }
 
@@ -301,6 +308,11 @@ async function applyRejectedOutcome(
           error: `SendGrid confirmed non-delivery after the one automatic retry: ${outcome.reason}`,
         })
         .where(eq(outreachMessagesTable.id, message.id));
+      await tx.update(outreachCatchUpReservationsTable).set({ status: "released", releasedAt: outcome.occurredAt })
+        .where(and(
+          eq(outreachCatchUpReservationsTable.messageId, message.id),
+          eq(outreachCatchUpReservationsTable.status, "reserved"),
+        ));
       return "failed";
     }
 
@@ -321,6 +333,25 @@ async function applyRejectedOutcome(
         error: `SendGrid confirmed non-delivery; released for one automatic retry: ${outcome.reason}`,
       })
       .where(eq(outreachMessagesTable.id, message.id));
+    if (message.catchUpCohortId) {
+      await tx.update(outreachCatchUpReservationsTable).set({ status: "released", releasedAt: outcome.occurredAt })
+        .where(eq(outreachCatchUpReservationsTable.messageId, message.id));
+      await tx.execute(sql`select ${outreachCatchUpCohortsTable.id} from ${outreachCatchUpCohortsTable}
+        where ${outreachCatchUpCohortsTable.id} = ${message.catchUpCohortId} for update`);
+      const [reserved] = await tx.select({ count: sql<number>`count(*)::int` })
+        .from(outreachCatchUpReservationsTable)
+        .where(and(eq(outreachCatchUpReservationsTable.cohortId, message.catchUpCohortId),
+          eq(outreachCatchUpReservationsTable.status, "reserved")));
+      const [cohort] = await tx.select({ target: outreachCatchUpCohortsTable.targetCount })
+        .from(outreachCatchUpCohortsTable).where(eq(outreachCatchUpCohortsTable.id, message.catchUpCohortId));
+      if ((reserved?.count ?? 0) < (cohort?.target ?? 0)) {
+        await tx.update(outreachCatchUpReservationsTable).set({ status: "reserved", releasedAt: null })
+          .where(eq(outreachCatchUpReservationsTable.messageId, message.id));
+      } else {
+        await tx.update(outreachMessagesTable).set({ status: "needs_review" })
+          .where(eq(outreachMessagesTable.id, message.id));
+      }
+    }
     return "retry_released";
   });
 }
@@ -346,6 +377,11 @@ async function applyTerminalFailure(
       inArray(outreachMessagesTable.status, ["sending", "needs_review", "bounced"]),
     ))
     .returning({ id: outreachMessagesTable.id });
+  await db.update(outreachCatchUpReservationsTable).set({ status: "released", releasedAt: outcome.occurredAt })
+    .where(and(
+      eq(outreachCatchUpReservationsTable.messageId, message.id),
+      eq(outreachCatchUpReservationsTable.status, "reserved"),
+    ));
   return Boolean(updated);
 }
 

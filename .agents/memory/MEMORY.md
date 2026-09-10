@@ -36,3 +36,4 @@
 - [Daily outreach recovery](daily-outreach-recovery.md) — run at 08:00 and 08:30 Phoenix; one durable daily claim prevents overlap and preserves missed/partial incidents.
 - [Outreach startup summary races](outreach-startup-summary-races.md) — Autoscale may run startup preparation twice; trust message-level queue counts over a stale preparation summary.
 - [Outreach verification handoff](outreach-verification-handoff.md) — confirm a named leader on the official company site before using FindyMail for a same-domain address.
+- [Fresh outreach catch-up](fresh-outreach-catch-up.md) — target 2,207 new provider-accepted openers; historical ambiguous attempts never count or replay.

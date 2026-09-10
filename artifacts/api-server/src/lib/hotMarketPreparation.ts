@@ -2,6 +2,8 @@ import { and, eq, gte, inArray, lt, or, sql } from "drizzle-orm";
 import {
   campaignsTable,
   db,
+  outreachCatchUpCohortsTable,
+  outreachCatchUpReservationsTable,
   outreachMessagesTable,
   outreachSequenceSendClaimsTable,
   outreachSuppressionsTable,
@@ -13,6 +15,7 @@ import { assertOutreachEligibilityBase } from "./outreachEligibility";
 import {
   HOT_MARKET_DAILY_TARGET,
   HOT_MARKET_SOURCE_TYPE,
+  HOT_MARKET_RECURRING_SOURCE_TYPE,
   hotMarketOutreachBody,
   hotMarketOutreachFollowUps,
   hotMarketOutreachSubject,
@@ -60,6 +63,7 @@ function canPrepareHotMarket(
       error: null,
       sourceType: HOT_MARKET_SOURCE_TYPE,
       sourceId: null,
+      catchUpCohortId: null,
       createdAt: new Date(),
       updatedAt: new Date(),
     }, prospect, campaign, {
@@ -124,6 +128,11 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
         )),
     ]);
     const suppressedEmails = new Set(suppressions.map((row) => row.email.trim().toLowerCase()));
+    const [catchUpCohort] = await db.select().from(outreachCatchUpCohortsTable)
+      .where(and(
+        eq(outreachCatchUpCohortsTable.name, "Apex Grid fresh verified catch-up"),
+        eq(outreachCatchUpCohortsTable.status, "active"),
+      )).limit(1);
     const usedProspects = new Set([
       ...initialMessages.map((row) => row.prospectId),
       ...claims.map((row) => row.prospectId),
@@ -191,6 +200,26 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
             )).returning({ id: prospectsTable.id });
           if (!promoted) return false;
         }
+        let catchUpCohortId: number | null = null;
+        if (catchUpCohort) {
+          await tx.execute(sql`select ${outreachCatchUpCohortsTable.id}
+            from ${outreachCatchUpCohortsTable}
+            where ${outreachCatchUpCohortsTable.id} = ${catchUpCohort.id}
+            for update`);
+          const [reserved] = await tx.select({ count: sql<number>`count(*)::int` })
+            .from(outreachCatchUpReservationsTable)
+            .where(and(
+              eq(outreachCatchUpReservationsTable.cohortId, catchUpCohort.id),
+              inArray(outreachCatchUpReservationsTable.status, ["reserved", "accepted"]),
+            ));
+          if ((reserved?.count ?? 0) < catchUpCohort.targetCount) {
+            catchUpCohortId = catchUpCohort.id;
+          } else {
+            // Active catch-up work is a hard gate: never create an opener
+            // outside the cohort once its bounded capacity is exhausted.
+            return false;
+          }
+        }
         const personalization = currentProspect.needSignals!.trim();
         await tx.insert(outreachMessagesTable).values([
           {
@@ -205,7 +234,8 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
             }),
             status: "approved",
             scheduledAt,
-            sourceType: HOT_MARKET_SOURCE_TYPE,
+            sourceType: HOT_MARKET_RECURRING_SOURCE_TYPE,
+            catchUpCohortId,
           },
           ...hotMarketOutreachFollowUps(
             currentProspect.contactName!,
@@ -219,9 +249,22 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
             body: followUp.body,
             status: "approved",
             scheduledAt: null,
-            sourceType: HOT_MARKET_SOURCE_TYPE,
+            sourceType: HOT_MARKET_RECURRING_SOURCE_TYPE,
           })),
         ]);
+        if (catchUpCohortId) {
+          const [created] = await tx.select({ id: outreachMessagesTable.id })
+            .from(outreachMessagesTable)
+            .where(and(
+              eq(outreachMessagesTable.prospectId, currentProspect.id),
+              eq(outreachMessagesTable.sequenceNumber, 1),
+              eq(outreachMessagesTable.catchUpCohortId, catchUpCohortId),
+            )).limit(1);
+          if (created) await tx.insert(outreachCatchUpReservationsTable).values({
+            cohortId: catchUpCohortId,
+            messageId: created.id,
+          }).onConflictDoNothing();
+        }
         return true;
       });
       if (inserted) {

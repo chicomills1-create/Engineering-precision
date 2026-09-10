@@ -29,6 +29,11 @@ export function buildDailyOutreachReport(
       `Hot Market scheduled total: ${result.hotMarketScheduled}`,
       `Hot Market shortfall: ${result.hotMarketShortfall}`,
       "",
+      "Apex Grid fresh verified catch-up cohort",
+      `Target: ${result.catchUpTarget ?? 0}`,
+      `Provider-accepted enrollments: ${result.catchUpEnrolled ?? 0}`,
+      `Remaining capacity: ${result.catchUpRemaining ?? 0}`,
+      "",
       result.unresolved === 0
         ? "No ambiguous provider handoffs remain from this run."
         : "Ambiguous provider handoffs remain blocked from automatic resend.",

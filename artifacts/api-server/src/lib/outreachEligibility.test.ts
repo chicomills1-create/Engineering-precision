@@ -103,6 +103,7 @@ const approvedMessage: OutreachMessage = {
   error: null,
   sourceType: null,
   sourceId: null,
+  catchUpCohortId: null,
   createdAt: now,
   updatedAt: now,
 };

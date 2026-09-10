@@ -3,6 +3,8 @@ import {
   campaignsTable,
   db,
   outreachMessagesTable,
+  outreachProviderHandoffsTable,
+  outreachCatchUpReservationsTable,
   prospectsTable,
   type OutreachMessage,
 } from "@workspace/db";
@@ -37,6 +39,7 @@ import {
   stopLegacyAdditionalFollowUps,
 } from "./outreachSequence";
 import { monitorOverdueOutreachQueue } from "./outreachQueueMonitor";
+import { enrollAcceptedCatchUpMessage } from "./outreachCatchUp";
 
 const ADMIN_EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 // Allows the 200-message baseline plus currently verified hot-market extras.
@@ -165,6 +168,11 @@ export async function claimOutreachMessageForSending(messageId: number): Promise
             )
         )`,
       ),
+      sql`${outreachMessagesTable.catchUpCohortId} is null or exists (
+        select 1 from outreach_catch_up_reservations as catch_up_reservation
+        where catch_up_reservation.message_id = ${outreachMessagesTable.id}
+          and catch_up_reservation.status = 'reserved'
+      )`,
       or(
         eq(outreachMessagesTable.sequenceNumber, 1),
         sql`exists (
@@ -216,7 +224,32 @@ export async function claimOutreachMessageForSending(messageId: number): Promise
       ),
     ))
     .returning();
+  if (!claimed) {
+    // Only an opener still approved can have been rejected by eligibility
+    // checks; a concurrent claimant is already sending and keeps its slot.
+    await db.update(outreachCatchUpReservationsTable).set({
+      status: "released",
+      releasedAt: new Date(),
+    }).where(and(
+      eq(outreachCatchUpReservationsTable.messageId, messageId),
+      eq(outreachCatchUpReservationsTable.status, "reserved"),
+      sql`exists (
+        select 1 from outreach_messages rejected
+        where rejected.id = ${messageId} and rejected.status = 'approved'
+      )`,
+    ));
+  }
   return claimed;
+}
+
+export async function releaseDefinitiveCatchUpReservation(messageId: number): Promise<void> {
+  await db.update(outreachCatchUpReservationsTable).set({
+    status: "released",
+    releasedAt: new Date(),
+  }).where(and(
+    eq(outreachCatchUpReservationsTable.messageId, messageId),
+    eq(outreachCatchUpReservationsTable.status, "reserved"),
+  ));
 }
 
 export function getSendFailureStatus(error: unknown): "failed" | "needs_review" {
@@ -242,23 +275,42 @@ export async function sendClaimedOutreachMessage(
       ...options,
       expectedPersistedStatus: "sending",
       afterProviderDispatch: async (providerMessageId) => {
-        if (message.sequenceNumber === 1) {
-          await ensureApprovedFollowUpSequence(
-            message,
-            prospect,
-            new Date(),
-            { emailLockAlreadyHeld: true },
+        try {
+          if (message.catchUpCohortId) {
+            await db.insert(outreachProviderHandoffsTable).values({
+              messageId: message.id,
+              providerMessageId,
+              reconciliationKey: message.providerReconciliationKey ?? `message:${message.id}`,
+              acceptedAt: new Date(),
+            }).onConflictDoNothing();
+            await enrollAcceptedCatchUpMessage(message.id);
+          }
+          if (message.sequenceNumber === 1) {
+            await ensureApprovedFollowUpSequence(
+              message,
+              prospect,
+              new Date(),
+              { emailLockAlreadyHeld: true },
+            );
+          }
+          [persisted] = await db.update(outreachMessagesTable).set({
+            status: "sent",
+            sentAt: new Date(),
+            providerMessageId,
+            error: null,
+          }).where(and(
+            eq(outreachMessagesTable.id, message.id),
+            eq(outreachMessagesTable.status, "sending"),
+          )).returning();
+          if (!persisted) {
+            throw new Error("Accepted provider handoff could not be persisted as sent");
+          }
+        } catch (error) {
+          throw new Error(
+            "Provider dispatch result is unknown: SendGrid accepted the handoff but local persistence failed",
+            { cause: error },
           );
         }
-        [persisted] = await db.update(outreachMessagesTable).set({
-          status: "sent",
-          sentAt: new Date(),
-          providerMessageId,
-          error: null,
-        }).where(and(
-          eq(outreachMessagesTable.id, message.id),
-          eq(outreachMessagesTable.status, "sending"),
-        )).returning();
       },
     },
   );
@@ -383,6 +435,9 @@ export async function processDueOutreachMessagesWithSummary(): Promise<OutreachD
           eq(outreachMessagesTable.status, "sending"),
         ));
       if (getSendFailureStatus(err) === "needs_review") summary.unresolved += 1;
+      if (getSendFailureStatus(err) === "failed") {
+        await releaseDefinitiveCatchUpReservation(claimed.id);
+      }
       logger.warn({ messageId: claimed.id, error }, "Scheduled outreach send blocked or failed");
     }
   }

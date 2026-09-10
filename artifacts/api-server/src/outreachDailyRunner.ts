@@ -14,6 +14,7 @@ import {
 import { verifyNewOutreachProspects } from "./lib/outreachVerification";
 import { prepareNextPhoenixOutreach } from "./lib/outreachPreparation";
 import { prepareNextPhoenixHotMarketOutreach } from "./lib/hotMarketPreparation";
+import { getCatchUpProgress } from "./lib/outreachCatchUp";
 import { sendDailyOutreachReport } from "./lib/outreachDailyReport";
 import {
   isPrimaryPhoenixInvocation,
@@ -114,6 +115,10 @@ async function main(): Promise<void> {
     now: () => new Date(),
     wait,
   }, invokedAt);
+  const catchUp = await getCatchUpProgress();
+  result.catchUpTarget = catchUp.target;
+  result.catchUpEnrolled = catchUp.enrolled;
+  result.catchUpRemaining = catchUp.remaining;
   const hasPreparationShortfall =
     result.directShortfall > 0
     || result.publicShortfall > 0
