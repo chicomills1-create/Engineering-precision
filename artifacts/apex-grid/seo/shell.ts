@@ -3,6 +3,7 @@
  */
 
 const LOGO_SVG = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;color:hsl(0 72% 48%)"><path d="M50 8L8 88h12l30-58 30 58h12L50 8z" fill="currentColor"/><path d="M50 40L30 78h8l12-24 12 24h8L50 40z" fill="currentColor" opacity="0.7"/><path d="M32 74h36v6H32z" fill="currentColor"/></svg>`;
+const PROJECT_YEAR = process.env.APEX_GRID_PROJECT_YEAR?.trim() || "2025";
 
 export const SITE = "https://apexgrideng.com";
 
@@ -85,7 +86,7 @@ function header(): string {
 }
 
 function footer(): string {
-  const year = new Date().getFullYear();
+  const year = PROJECT_YEAR;
   return `<footer><div class="container">
   <div class="fgrid">
     <div>
@@ -109,6 +110,7 @@ export function htmlShell(opts: {
   canonical: string;
   schemaJson: object[];
   body: string;
+  robots?: string;
 }): string {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -122,6 +124,10 @@ export function htmlShell(opts: {
 <meta property="og:description" content="${e(opts.description)}" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="${e(opts.canonical)}" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="${e(opts.title)}" />
+<meta name="twitter:description" content="${e(opts.description)}" />
+<meta name="robots" content="${e(opts.robots ?? "index,follow")}" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

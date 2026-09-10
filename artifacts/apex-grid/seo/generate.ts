@@ -148,6 +148,75 @@ function allDirectoryCitiesForState(state: StateData, directory: CityDirectory, 
   return [...bySlug.values()].sort((a, b) => a.name.localeCompare(b.name));
 }
 
+/** Conservative gate for Census-directory pages: only publish pages with enough
+ * independently useful identity data to avoid state-copy doorway pages. */
+const LITE_CITY_MIN_POPULATION = 10_000;
+type CityQualityDecision = { state: string; slug: string; name: string; status: "indexed" | "excluded"; reasons: string[] };
+function diagnosticSlug(name: string): string {
+  return name.normalize("NFKD").replace(/\p{M}/gu, "").toLowerCase().replace(/[^\p{Letter}\p{Number}]+/gu, "-").replace(/^-|-$/g, "");
+}
+
+function assessLiteCity(state: StateData, city: DirectoryCity): CityQualityDecision {
+  const reasons: string[] = [];
+  if (!city.name.trim() || !/\p{Letter}/u.test(city.name)) reasons.push("invalid-city-name");
+  if (!/^[a-z0-9-]+$/.test(city.slug) || city.slug !== diagnosticSlug(city.name)) reasons.push("city-slug-identity-mismatch");
+  if (!state.slug || !state.name.trim()) reasons.push("invalid-state-identity");
+  if (!Number.isFinite(city.pop) || (city.pop ?? 0) < LITE_CITY_MIN_POPULATION) reasons.push(`review-signal-population-below-${LITE_CITY_MIN_POPULATION}`);
+  return { state: state.slug, slug: city.slug, name: city.name, status: reasons.length ? "excluded" : "indexed", reasons };
+}
+
+function eligibleDirectoryCities(state: StateData, directory: CityDirectory, curated: CityData[]): DirectoryCity[] {
+  const curatedSlugs = new Set(curated.filter((c) => c.stateSlug === state.slug).map((c) => c.slug));
+  return (directory[state.slug] ?? []).filter((city) => !curatedSlugs.has(city.slug) && assessLiteCity(state, city).status === "indexed");
+}
+
+function writeCityQualityReport(states: StateData[], directory: CityDirectory, curated: CityData[]) {
+  const decisions = states.flatMap((state) => (directory[state.slug] ?? [])
+    .filter((city) => !curated.some((c) => c.stateSlug === state.slug && c.slug === city.slug))
+    .map((city) => assessLiteCity(state, city)));
+  const anomalies = decisions.filter((d) => d.status === "excluded");
+  const report = {
+    reportVersion: 1,
+    policy: "Curated CityData and retained legacy cities are indexable. Census directory-lite and derived architecture/GC city pages remain live but are noindex,follow until enriched.",
+    populationReviewSignal: `population below ${LITE_CITY_MIN_POPULATION} is flagged for human review; population is not proof of page quality`,
+    indexedCount: decisions.filter((d) => d.status === "indexed").length,
+    noindexCount: decisions.filter((d) => d.status === "excluded").length,
+    excludedCount: decisions.filter((d) => d.status === "excluded").length,
+    excludedReasons: anomalies.reduce<Record<string, number>>((counts, d) => {
+      for (const reason of d.reasons) counts[reason] = (counts[reason] ?? 0) + 1;
+      return counts;
+    }, {}),
+    anomalies,
+  };
+  const reportDir = path.join(__dirname, "reports");
+  fs.mkdirSync(reportDir, { recursive: true });
+  fs.writeFileSync(path.join(reportDir, "city-page-quality.json"), `${JSON.stringify(report, null, 2)}\n`);
+  return report;
+}
+
+function writeLlmsTxt() {
+  const content = `# Apex Grid Engineering
+
+> Apex Grid Engineering is a professional engineering firm providing structural, MEP, civil, geotechnical, building-assessment, energy-compliance, and municipal plan-check support. The company also publishes information about architecture and construction delivery.
+
+This file is a concise map of canonical public information. It does not imply local offices, guaranteed coverage, or that every listed service is available for every project; scope and jurisdiction requirements should be confirmed with Apex Grid.
+
+## High-value sections
+- Services: ${SITE}/services
+- Industries: ${SITE}/industries
+- Resources: ${SITE}/resources/
+- Glossary: ${SITE}/glossary/
+- Service-area information: ${SITE}/locations/
+- Architecture information: ${SITE}/architecture/
+- General contracting information: ${SITE}/general-contracting/
+- About: ${SITE}/about
+- Contact: ${SITE}/contact
+- HTML sitemap: ${SITE}/sitemap/
+- XML sitemap index: ${SITE}/sitemap_index.xml
+`;
+  fs.writeFileSync(path.join(PUBLIC, "llms.txt"), content);
+}
+
 function legacyLocationRedirectPage(fromPath: string, toPath: string): string {
   const canonical = `${SITE}${toPath}`;
   const body = `<section class="hero"><div class="container">
@@ -297,7 +366,7 @@ ${breadcrumb(crumbs)}
     <div class="cell"><div class="k">Wind</div><div class="v">${esc(state.structural.wind)}</div></div>
     <div class="cell"><div class="k">Snow</div><div class="v">${esc(state.structural.snow)}</div></div>
   </div>
-  <p class="note">Code adoptions change on multi-year cycles and many states allow local amendments. Data reflects our research as of ${new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })} — we verify the governing edition with your permitting jurisdiction at project kickoff.</p>
+  <p class="note">Code adoptions change on multi-year cycles and many states allow local amendments. The researched source verification date is ${esc(state.lastVerified)}; we verify the governing edition with your permitting jurisdiction at project kickoff.</p>
 </div></section>
 
 <section class="block"><div class="container">
@@ -477,7 +546,7 @@ ${breadcrumb(crumbs)}
 
 /** Lightweight service-area page for a Census-listed city without curated data.
  * Inherits verified state-level code/climate facts; never invents city-specific claims. */
-function cityLitePage(state: StateData, city: DirectoryCity, siblings: DirectoryCity[], curated: CityData[]): string {
+function cityLitePage(state: StateData, city: DirectoryCity, siblings: DirectoryCity[], curated: CityData[], indexable = false): string {
   const crumbs = [
     { name: "Home", href: "/" },
     { name: "Service Areas", href: "/locations/" },
@@ -602,6 +671,7 @@ ${availableVerticals
     canonical: `${SITE}/locations/${state.slug}/${city.slug}/`,
     schemaJson: [orgSchema, svcSchema, faqSchema, breadcrumbSchema(crumbs)],
     body,
+    robots: indexable ? "index,follow" : "noindex,follow",
   });
 }
 
@@ -806,8 +876,8 @@ ${d.sections
     body,
   });
 }
-function u(loc: string, lastmod: string, changefreq: string, priority: string): string {
-  return `  <url><loc>${loc}</loc><lastmod>${lastmod}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`;
+function u(loc: string, _lastmod: string, changefreq: string, priority: string): string {
+  return `  <url><loc>${loc}</loc><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>`;
 }
 
 function writeSingleSitemap(filename: string, urls: string[]): void {
@@ -819,7 +889,7 @@ function writeSingleSitemap(filename: string, urls: string[]): void {
 }
 
 function writeSitemap(states: StateData[], cities: CityData[], directory: CityDirectory) {
-  const today = new Date().toISOString().slice(0, 10);
+  const today = "";
 
   // ── Tier 1: Core revenue pages ──────────────────────────────────────────
   const coreUrls: string[] = [
@@ -955,16 +1025,16 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     for (const svc of SERVICES) {
       locationsUrls.push(u(`${SITE}/locations/${s.slug}/${svc.slug}/`, today, "monthly", "0.7"));
     }
-    const curatedSlugs = new Set(cities.filter((c) => c.stateSlug === s.slug).map((c) => c.slug));
     for (const c of cities.filter((c) => c.stateSlug === s.slug)) {
       locationsUrls.push(u(`${SITE}/locations/${s.slug}/${c.slug}/`, today, "monthly", "0.7"));
       for (const svc of SERVICES) {
         locationsUrls.push(u(`${SITE}/locations/${s.slug}/${c.slug}/${svc.slug}/`, today, "monthly", "0.7"));
       }
     }
-    for (const d of directory[s.slug] ?? []) {
-      if (curatedSlugs.has(d.slug)) continue;
-      locationsUrls.push(u(`${SITE}/locations/${s.slug}/${d.slug}/`, today, "monthly", "0.5"));
+    for (const retained of RETAINED_LEGACY_LOCATIONS.filter((entry) => entry.stateSlug === s.slug)) {
+      if (!cities.some((city) => city.stateSlug === s.slug && city.slug === retained.city.slug)) {
+        locationsUrls.push(u(`${SITE}/locations/${s.slug}/${retained.city.slug}/`, today, "monthly", "0.5"));
+      }
     }
   }
   for (const lsp of LOCATION_SERVICE_PAGES) {
@@ -979,7 +1049,11 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     ];
     for (const state of states.filter((entry) => verticalAvailableInState(vertical, entry.slug))) {
       urls.push(u(`${SITE}${verticalStateUrl(vertical, state.slug)}`, today, "monthly", "0.7"));
-      for (const city of allDirectoryCitiesForState(state, directory, cities)) {
+      const indexableCitySlugs = new Set([
+        ...cities.filter((c) => c.stateSlug === state.slug).map((c) => c.slug),
+        ...RETAINED_LEGACY_LOCATIONS.filter((r) => r.stateSlug === state.slug).map((r) => r.city.slug),
+      ]);
+      for (const city of allDirectoryCitiesForState(state, directory, cities).filter((entry) => indexableCitySlugs.has(entry.slug))) {
         urls.push(u(`${SITE}${verticalCityUrl(vertical, state.slug, city.slug)}`, today, "monthly", "0.6"));
       }
     }
@@ -1027,7 +1101,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   // ── Write sitemap index ──────────────────────────────────────────────────
   const indexXml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemaps.map(({ name }) => `  <sitemap>\n    <loc>${SITE}/${name}</loc>\n    <lastmod>${today}</lastmod>\n  </sitemap>`).join("\n")}
+  ${sitemaps.map(({ name }) => `  <sitemap>\n    <loc>${SITE}/${name}</loc>\n  </sitemap>`).join("\n")}
 </sitemapindex>\n`;
   fs.writeFileSync(path.join(PUBLIC, "sitemap_index.xml"), indexXml);
   // Keep sitemap.xml as the index for backward compat with GSC submissions
@@ -1056,8 +1130,8 @@ function resourceArticlePage(article: ResourceArticle): string {
     "@type": "Article",
     headline: article.h1,
     description: article.description,
-    author: { "@id": `${SITE}/#business` },
-    publisher: { "@id": `${SITE}/#business` },
+    author: { "@type": "Organization", "@id": `${SITE}/#business`, name: "Apex Grid Engineering", url: SITE },
+    publisher: { "@id": `${SITE}/#business`, "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
     mainEntityOfPage: `${SITE}${url}`,
   };
   const faqMatches = [...article.html.matchAll(/<h3>([^<]+)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)]
@@ -2782,6 +2856,8 @@ async function main() {
   const cities = await loadCities();
   const directory = loadDirectory();
   validateDirectory(directory, states);
+  writeLlmsTxt();
+  const cityQuality = writeCityQualityReport(states, directory, cities);
   const serviceSlugs = new Set(SERVICES.map((s) => s.slug));
   for (const s of states) {
     assertSlug(s.slug);
@@ -2832,7 +2908,10 @@ async function main() {
       assertSlug(d.slug);
       const cdir = path.join(sdir, d.slug);
       fs.mkdirSync(cdir, { recursive: true });
-      fs.writeFileSync(path.join(cdir, "index.html"), cityLitePage(s, d, dirCities, cities));
+       fs.writeFileSync(
+         path.join(cdir, "index.html"),
+         cityLitePage(s, d, dirCities, cities, RETAINED_LEGACY_LOCATIONS.some((r) => r.stateSlug === s.slug && r.city.slug === d.slug)),
+       );
       pages++;
     }
   }
@@ -2878,7 +2957,14 @@ async function main() {
         fs.mkdirSync(cityDir, { recursive: true });
         fs.writeFileSync(
           path.join(cityDir, "index.html"),
-          verticalCityPage(vertical, state, city, stateCities, curatedBySlug.get(city.slug)),
+          verticalCityPage(
+            vertical,
+            state,
+            city,
+            stateCities,
+            curatedBySlug.get(city.slug),
+            Boolean(curatedBySlug.get(city.slug) || RETAINED_LEGACY_LOCATIONS.some((r) => r.stateSlug === state.slug && r.city.slug === city.slug)),
+          ),
         );
         pages++;
         verticalPages++;
@@ -3157,6 +3243,54 @@ async function main() {
   }
 
   writeSitemap(states, cities, directory);
+  fs.rmSync(path.join(PUBLIC, "city-page-quality.json"), { force: true });
+  if (!fs.existsSync(path.join(PUBLIC, "llms.txt"))) throw new Error("SEO assertion failed: llms.txt was not generated");
+  const sampleArticle = RESOURCE_ARTICLES[0];
+  const articleHtml = fs.readFileSync(path.join(PUBLIC, resourceUrl(sampleArticle).replace(/^\/|\/$/g, ""), "index.html"), "utf8");
+  if (!articleHtml.includes('"@type":"Article"') || articleHtml.includes("Reviewed by") || articleHtml.includes('rel="author"')) {
+    throw new Error("SEO assertion failed: resource Article has an unsupported person byline");
+  }
+  const robotsHtml = fs.readFileSync(path.join(PUBLIC, "locations", "index.html"), "utf8");
+  if (!robotsHtml.includes('<meta name="robots"') || !robotsHtml.includes('name="twitter:card"')) {
+    throw new Error("SEO assertion failed: robots or Twitter metadata is missing");
+  }
+  const qualityPath = path.join(__dirname, "reports", "city-page-quality.json");
+  if (!fs.existsSync(qualityPath) || fs.existsSync(path.join(PUBLIC, "city-page-quality.json"))) {
+    throw new Error("SEO assertion failed: quality report must be repo-local and not public");
+  }
+  const qualityReport = JSON.parse(fs.readFileSync(qualityPath, "utf8")) as { indexedCount: number; excludedCount: number; anomalies: unknown[] };
+  if (qualityReport.indexedCount < 0 || qualityReport.excludedCount < 0 || !Array.isArray(qualityReport.anomalies)) {
+    throw new Error("SEO assertion failed: malformed city quality report");
+  }
+  const locationsXml = fs.readFileSync(path.join(PUBLIC, "sitemap-locations.xml"), "utf8");
+  const liteCandidate = Object.entries(directory).flatMap(([state, entries]) => entries.map((city) => ({ state, city })))
+    .find(({ state, city }) => !cities.some((c) => c.stateSlug === state && c.slug === city.slug) &&
+      !RETAINED_LEGACY_LOCATIONS.some((r) => r.stateSlug === state && r.city.slug === city.slug));
+  if (liteCandidate) {
+    const litePath = path.join(PUBLIC, "locations", liteCandidate.state, liteCandidate.city.slug, "index.html");
+    const liteHtml = fs.readFileSync(litePath, "utf8");
+    if (!liteHtml.includes('<meta name="robots" content="noindex,follow"')) throw new Error("SEO assertion failed: lite page is not noindex");
+    for (const sitemap of ["sitemap-locations.xml", "sitemap-architecture-locations.xml", "sitemap-general-contracting-locations.xml"]) {
+      if (fs.readFileSync(path.join(PUBLIC, sitemap), "utf8").includes(`${SITE}/locations/${liteCandidate.state}/${liteCandidate.city.slug}/`)) {
+        throw new Error(`SEO assertion failed: lite page appears in ${sitemap}`);
+      }
+    }
+  }
+  for (const curated of cities.slice(0, 3)) {
+    const curatedPath = `/locations/${curated.stateSlug}/${curated.slug}/`;
+    const curatedHtml = fs.readFileSync(path.join(PUBLIC, curatedPath.replace(/^\/|\/$/g, ""), "index.html"), "utf8");
+    if (curatedHtml.includes('content="noindex,follow"') || !locationsXml.includes(`${SITE}${curatedPath}`)) throw new Error(`SEO assertion failed: curated city policy: ${curatedPath}`);
+  }
+  for (const retained of RETAINED_LEGACY_LOCATIONS) {
+    const retainedPath = `/locations/${retained.stateSlug}/${retained.city.slug}/`;
+    const retainedFile = path.join(PUBLIC, retainedPath.replace(/^\/|\/$/g, ""), "index.html");
+    if (!fs.existsSync(retainedFile) || fs.readFileSync(retainedFile, "utf8").includes('content="noindex,follow"') || !locationsXml.includes(`${SITE}${retainedPath}`)) {
+      throw new Error(`SEO assertion failed: retained legacy location missing: ${retainedPath}`);
+    }
+  }
+  if (/<lastmod>/.test(fs.readFileSync(path.join(PUBLIC, "sitemap_index.xml"), "utf8")) || /<lastmod>/.test(locationsXml)) {
+    throw new Error("SEO assertion failed: sitemap contains wall-clock lastmod");
+  }
 
   if (process.env.SKIP_SEARCH_ENGINE_SUBMISSION === "1") {
     console.log("Search-engine submission skipped by SKIP_SEARCH_ENGINE_SUBMISSION=1.");
@@ -3275,7 +3409,7 @@ ${breadcrumb(crumbs)}
     <div class="cell"><div class="k">County</div><div class="v">${esc(city.county)}</div></div>
     <div class="cell"><div class="k">Design Climate</div><div class="v">${esc(city.climateNotes)}</div></div>
   </div>
-  <p class="note">Code adoptions and local amendments change on multi-year cycles. Data reflects our research as of ${new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })} — we verify the governing editions with ${esc(city.ahj.office)} at project kickoff.</p>
+  <p class="note">Code adoptions and local amendments change on multi-year cycles. The state source verification date is ${esc(state.lastVerified)}; we verify the governing editions with ${esc(city.ahj.office)} at project kickoff.</p>
 </div></section>
 
 <section class="block"><div class="container">

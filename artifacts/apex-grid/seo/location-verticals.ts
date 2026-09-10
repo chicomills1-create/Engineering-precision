@@ -261,6 +261,7 @@ export function verticalCityPage(
   city: DirectoryCity,
   siblings: DirectoryCity[],
   curatedCity?: CityData,
+  indexable = Boolean(curatedCity),
 ): string {
   if (!verticalAvailableInState(vertical, state.slug)) {
     throw new Error(`${vertical.name} is not enabled for ${state.name}`);
@@ -377,6 +378,7 @@ ${breadcrumb(crumbs)}
     canonical,
     schemaJson: [serviceSchema(vertical, state, city), faqSchema, breadcrumbSchema(crumbs)],
     body,
+    robots: indexable ? "index,follow" : "noindex,follow",
   });
   assertVerticalHtml(html, canonical, true);
   return html;

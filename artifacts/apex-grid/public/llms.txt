@@ -1,0 +1,18 @@
+# Apex Grid Engineering
+
+> Apex Grid Engineering is a professional engineering firm providing structural, MEP, civil, geotechnical, building-assessment, energy-compliance, and municipal plan-check support. The company also publishes information about architecture and construction delivery.
+
+This file is a concise map of canonical public information. It does not imply local offices, guaranteed coverage, or that every listed service is available for every project; scope and jurisdiction requirements should be confirmed with Apex Grid.
+
+## High-value sections
+- Services: https://apexgrideng.com/services
+- Industries: https://apexgrideng.com/industries
+- Resources: https://apexgrideng.com/resources/
+- Glossary: https://apexgrideng.com/glossary/
+- Service-area information: https://apexgrideng.com/locations/
+- Architecture information: https://apexgrideng.com/architecture/
+- General contracting information: https://apexgrideng.com/general-contracting/
+- About: https://apexgrideng.com/about
+- Contact: https://apexgrideng.com/contact
+- HTML sitemap: https://apexgrideng.com/sitemap/
+- XML sitemap index: https://apexgrideng.com/sitemap_index.xml
