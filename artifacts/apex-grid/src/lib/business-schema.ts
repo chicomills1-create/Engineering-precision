@@ -78,10 +78,10 @@ export const APEX_GRID_BUSINESS_SCHEMA = {
   areaServed: serviceAreas,
   founder: {
     "@type": "Person",
-    "@id": `${APEX_GRID_SITE_URL}/jeremy-mills/#person`,
+    "@id": `${APEX_GRID_SITE_URL}/military#jeremy`,
     name: "Jeremy Mills",
     alternateName: "Chico Mills",
-    url: `${APEX_GRID_SITE_URL}/jeremy-mills/`,
+    url: `${APEX_GRID_SITE_URL}/military`,
   },
   knowsAbout: knowledgeAreas,
   hasOfferCatalog: {

@@ -167,7 +167,7 @@ export default function About() {
                 </div>
                 <div className="w-12 h-[2px] bg-primary mb-6" />
                 <h3 className="text-2xl font-display font-bold mb-1">
-                  <Link href="/jeremy-mills/" className="hover:text-primary transition-colors">
+                  <Link href="/military" className="hover:text-primary transition-colors">
                     Jeremy Mills
                   </Link>
                 </h3>
@@ -188,7 +188,7 @@ export default function About() {
                   , a separate faith-centered community focused on Scripture, prayer, and daily discipleship.
                 </p>
                 <Link
-                  href="/jeremy-mills/"
+                  href="/military"
                   className="inline-flex items-center gap-2 mt-6 text-sm font-bold text-primary hover:underline underline-offset-4"
                 >
                   Jeremy’s leadership profile <ArrowRight className="w-4 h-4" />
@@ -301,11 +301,11 @@ export default function About() {
 const JEREMY_PERSON_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Person",
-  "@id": `${SITE_URL}/jeremy-mills/#person`,
+  "@id": `${SITE_URL}/military#jeremy`,
   name: "Jeremy Mills",
   alternateName: ["Chico Mills", "Pastor Jeremy Mills", "Pastor Chico Mills"],
-  url: `${SITE_URL}/jeremy-mills/`,
-  mainEntityOfPage: { "@id": `${SITE_URL}/jeremy-mills/#profile` },
+  url: `${SITE_URL}/military`,
+  mainEntityOfPage: { "@id": `${SITE_URL}/military#jeremy` },
   jobTitle: "Founder and Chief Executive Officer",
   description:
     "Founder and CEO of Apex Grid Engineering, U.S. Air Force veteran, and Founder and Senior Pastor of 16:3 Faith.",
