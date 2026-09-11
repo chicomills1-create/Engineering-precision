@@ -14,6 +14,8 @@
     "seo:test:hub-preservation": "tsx --test seo/route-ownership.test.ts",
     "seo:check:bylines": "tsx seo/check-blog-authorship.ts",
     "seo:cities:refresh": "tsx seo/refresh-cities-directory.ts",
+    "seo:check:city-evidence": "tsx seo/check-city-evidence-links.ts",
+    "seo:test:city-evidence": "tsx --test seo/check-city-evidence-links.test.ts",
     "seo:review": "tsx seo/review-report.ts",
     "seo:review:email": "tsx seo/review-email.ts",
     "seo:audit:claims": "tsx seo/audit-claims.ts",
