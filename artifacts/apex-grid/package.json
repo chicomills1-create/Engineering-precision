@@ -21,7 +21,8 @@
     "seo:audit:claims": "tsx seo/audit-claims.ts",
     "seo:audit:corpus": "tsx seo/audit-corpus.ts",
     "seo:audit:industry-batch": "tsx seo/audit-industry-batch.ts",
-    "seo:audit:industry-discipline-batch": "tsx seo/audit-industry-discipline-batch.ts"
+    "seo:audit:industry-discipline-batch": "tsx seo/audit-industry-discipline-batch.ts",
+    "seo:audit:national-facility-intent-batch": "tsx seo/audit-national-facility-intent-batch.ts"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",

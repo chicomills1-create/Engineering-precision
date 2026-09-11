@@ -67,6 +67,7 @@ import {
   REACT_PRERENDER_SERVICE_ROUTES,
   SEO_GENERATOR_FIXED_INDEX_ROUTES,
 } from "./route-ownership";
+import { NATIONAL_FACILITY_INTENT_PAGES } from "./national-facility-intent-pages";
 
 const PROMOTED_CITY_KEYS = new Set([
   "georgia/atlanta", "texas/austin", "north-carolina/charlotte",
@@ -87,8 +88,9 @@ const RETAINED_INTENT_SLUGS = new Set([
   "structural-engineering-letters", "construction-rfi-submittal-support",
   "value-engineering-design-optimization",
   "deferred-submittal-engineering", "engineer-of-record-transition", "engineering-near-me",
+  ...NATIONAL_FACILITY_INTENT_PAGES.map((page) => page.slug),
 ]);
-const ALL_ENGINEERING_INTENT_PAGES = [...ENGINEERING_INTENT_PAGES, NEAR_ME_ENGINEERING_PAGE]
+const ALL_ENGINEERING_INTENT_PAGES = [...ENGINEERING_INTENT_PAGES, ...NATIONAL_FACILITY_INTENT_PAGES, NEAR_ME_ENGINEERING_PAGE]
   .filter((page) => RETAINED_INTENT_SLUGS.has(page.slug));
 const CONSOLIDATED_INTENT_PAGES = ENGINEERING_INTENT_PAGES.filter((page) => !RETAINED_INTENT_SLUGS.has(page.slug));
 
@@ -1832,6 +1834,13 @@ ${breadcrumb(crumbs)}
 <section class="block"><div class="container">
   <div class="grid2">
   ${PROJECT_TYPE_PAGES.map((p) => `<a class="card" href="/project-types/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 130))}…</p></a>`).join("")}
+  </div>
+</div></section>
+<section class="block"><div class="container">
+  <h2>Facility and project-need <em>engineering</em></h2>
+  <p>Choose the facility or project decision that best matches the work. Each guide explains the information, verification, disciplines, and deliverables that may be required before a scope is proposed.</p>
+  <div class="grid2">
+  ${NATIONAL_FACILITY_INTENT_PAGES.map((p) => `<a class="card" href="/engineering-intent/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.answer.slice(0, 150))}…</p></a>`).join("")}
   </div>
 </div></section>
 <section class="ctaband"><div class="container">
@@ -3625,6 +3634,11 @@ async function main() {
   fs.writeFileSync(path.join(reportDir, "engineering-intent-opportunity-map.json"), `${JSON.stringify({
     generatedFor: "Apex Grid commercial engineering intent expansion",
     canonicalRule: "One URL per intent cluster; location is never inferred from a query.",
+    selectionChecks: {
+      exactRouteScan: `${NATIONAL_FACILITY_INTENT_PAGES.length} proposed slugs had no exact match in the SEO source registry before generation.`,
+      searchConsole: "Production page-query snapshots were checked on 2026-09-11; no snapshots were synced, so no exact-query rows, impressions, or clicks were available for these 25 primary phrases.",
+      decisionBasis: "Retain only facility or project-decision intents with a distinct buyer question, explicit overlap note, and no unsupported location, licensing, credential, client, or performance claim.",
+    },
     opportunities: [
       ...ALL_ENGINEERING_INTENT_PAGES.map((ep) => ({
       slug: ep.slug, primaryIntent: ep.h1, supportingPhrases: ep.phrases, canonicalUrl: `${SITE}/engineering-intent/${ep.slug}/`,

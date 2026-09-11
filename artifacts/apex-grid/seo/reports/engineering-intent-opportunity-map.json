@@ -1,6 +1,11 @@
 {
   "generatedFor": "Apex Grid commercial engineering intent expansion",
   "canonicalRule": "One URL per intent cluster; location is never inferred from a query.",
+  "selectionChecks": {
+    "exactRouteScan": "25 proposed slugs had no exact match in the SEO source registry before generation.",
+    "searchConsole": "Production page-query snapshots were checked on 2026-09-11; no snapshots were synced, so no exact-query rows, impressions, or clicks were available for these 25 primary phrases.",
+    "decisionBasis": "Retain only facility or project-decision intents with a distinct buyer question, explicit overlap note, and no unsupported location, licensing, credential, client, or performance claim."
+  },
   "opportunities": [
     {
       "slug": "structural-engineering-letters",
@@ -65,6 +70,331 @@
       "canonicalUrl": "https://apexgrideng.com/engineering-intent/engineer-of-record-transition/",
       "audience": "Owners, developers, contractors, and project managers",
       "overlapDecision": "Responsibility-transition intent not covered by general services or permit pages.",
+      "decision": "retained"
+    },
+    {
+      "slug": "warehouse-conversion-engineering",
+      "primaryIntent": "Warehouse Conversion Engineering",
+      "supportingPhrases": [
+        "warehouse conversion engineer",
+        "warehouse adaptive reuse engineering",
+        "convert warehouse engineering"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/warehouse-conversion-engineering/",
+      "audience": "Developers, warehouse owners, architects, contractors, and prospective tenants",
+      "overlapDecision": "Facility-specific conversion intent; the adaptive-reuse page remains the general change-of-use canonical.",
+      "decision": "retained"
+    },
+    {
+      "slug": "office-renovation-engineering",
+      "primaryIntent": "Office Renovation Engineering",
+      "supportingPhrases": [
+        "office renovation engineer",
+        "commercial office remodel engineering",
+        "office fit out MEP engineering"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/office-renovation-engineering/",
+      "audience": "Office tenants, building owners, architects, workplace teams, and general contractors",
+      "overlapDecision": "Office-specific renovation intent; broader tenant-improvement and renovation pages remain cross-facility resources.",
+      "decision": "retained"
+    },
+    {
+      "slug": "retail-renovation-engineering",
+      "primaryIntent": "Retail Renovation Engineering",
+      "supportingPhrases": [
+        "retail renovation engineering",
+        "retail store remodel engineer",
+        "retail tenant improvement MEP"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/retail-renovation-engineering/",
+      "audience": "Retailers, franchise teams, landlords, architects, and tenant-improvement contractors",
+      "overlapDecision": "Retail-specific buyer intent without replacing the general tenant-improvement canonical.",
+      "decision": "retained"
+    },
+    {
+      "slug": "medical-office-renovation-engineering",
+      "primaryIntent": "Medical Office Renovation Engineering",
+      "supportingPhrases": [
+        "medical office renovation engineer",
+        "clinic remodel MEP engineering",
+        "outpatient renovation engineering"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/medical-office-renovation-engineering/",
+      "audience": "Medical practices, healthcare owners, architects, equipment planners, and contractors",
+      "overlapDecision": "Outpatient renovation intent; it does not claim healthcare credentials or replace the general healthcare industry page.",
+      "decision": "retained"
+    },
+    {
+      "slug": "laboratory-renovation-engineering",
+      "primaryIntent": "Laboratory Renovation Engineering",
+      "supportingPhrases": [
+        "laboratory renovation engineering",
+        "lab remodel MEP engineer",
+        "laboratory fit out engineering"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/laboratory-renovation-engineering/",
+      "audience": "Laboratory owners, research organizations, architects, equipment planners, and contractors",
+      "overlapDecision": "Laboratory-renovation intent centered on project inputs; no unsupported safety certification or facility credential is claimed.",
+      "decision": "retained"
+    },
+    {
+      "slug": "industrial-facility-renovation-engineering",
+      "primaryIntent": "Industrial Facility Renovation Engineering",
+      "supportingPhrases": [
+        "industrial facility renovation engineering",
+        "manufacturing plant renovation engineer",
+        "industrial building upgrade engineering"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/industrial-facility-renovation-engineering/",
+      "audience": "Manufacturers, industrial owners, plant engineers, equipment vendors, and contractors",
+      "overlapDecision": "Renovation-stage industrial intent; process design and owner safety programs remain outside unstated scope.",
+      "decision": "retained"
+    },
+    {
+      "slug": "school-renovation-engineering",
+      "primaryIntent": "School Renovation Engineering",
+      "supportingPhrases": [
+        "school renovation engineering",
+        "education facility remodel engineer",
+        "school MEP renovation"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/school-renovation-engineering/",
+      "audience": "School owners, education facility teams, architects, program managers, and contractors",
+      "overlapDecision": "Education-facility renovation intent; no public procurement, funding, or local authorization claim is made.",
+      "decision": "retained"
+    },
+    {
+      "slug": "hotel-renovation-engineering",
+      "primaryIntent": "Hotel Renovation Engineering",
+      "supportingPhrases": [
+        "hotel renovation engineering",
+        "hospitality remodel MEP engineer",
+        "hotel guest room renovation engineer"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/hotel-renovation-engineering/",
+      "audience": "Hotel owners, operators, architects, brand teams, and renovation contractors",
+      "overlapDecision": "Hospitality-specific renovation intent; brand compliance and operating decisions remain owner responsibilities.",
+      "decision": "retained"
+    },
+    {
+      "slug": "multifamily-renovation-engineering",
+      "primaryIntent": "Multifamily Renovation Engineering",
+      "supportingPhrases": [
+        "multifamily renovation engineering",
+        "apartment renovation engineer",
+        "multifamily MEP remodel"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/multifamily-renovation-engineering/",
+      "audience": "Multifamily owners, developers, architects, asset managers, and renovation contractors",
+      "overlapDecision": "Multifamily renovation intent; it does not replace broad residential or existing-building service pages.",
+      "decision": "retained"
+    },
+    {
+      "slug": "commercial-kitchen-renovation-engineering",
+      "primaryIntent": "Commercial Kitchen Renovation Engineering",
+      "supportingPhrases": [
+        "commercial kitchen renovation engineer",
+        "restaurant kitchen MEP remodel",
+        "kitchen hood renovation engineering"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/commercial-kitchen-renovation-engineering/",
+      "audience": "Restaurant owners, food-service operators, architects, kitchen consultants, and contractors",
+      "overlapDecision": "Kitchen-renovation intent focused on existing facilities; specialty fire-suppression and health approvals remain with responsible parties.",
+      "decision": "retained"
+    },
+    {
+      "slug": "building-code-compliance-assessment",
+      "primaryIntent": "Building Code Compliance Assessment",
+      "supportingPhrases": [
+        "building code compliance assessment",
+        "existing building code review engineer",
+        "commercial building compliance evaluation"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/building-code-compliance-assessment/",
+      "audience": "Building owners, buyers, facility managers, architects, and legal or insurance teams",
+      "overlapDecision": "Defined compliance-question intent; not a duplicate of a general condition assessment or a guarantee of total compliance.",
+      "decision": "retained"
+    },
+    {
+      "slug": "ada-building-compliance-assessment",
+      "primaryIntent": "ADA Building Compliance Assessment Support",
+      "supportingPhrases": [
+        "ADA building compliance assessment",
+        "commercial accessibility assessment",
+        "ADA renovation engineering review"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/ada-building-compliance-assessment/",
+      "audience": "Property owners, facility managers, architects, developers, and renovation teams",
+      "overlapDecision": "Accessibility-focused project assessment; no legal certification or universal ADA compliance claim is made.",
+      "decision": "retained"
+    },
+    {
+      "slug": "existing-building-code-gap-assessment",
+      "primaryIntent": "Existing Building Code Gap Assessment",
+      "supportingPhrases": [
+        "existing building code gap assessment",
+        "renovation code gap analysis",
+        "building code deficiency review"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/existing-building-code-gap-assessment/",
+      "audience": "Owners, developers, asset managers, architects, and capital-planning teams",
+      "overlapDecision": "Project-trigger gap analysis distinct from general condition and full compliance assessments.",
+      "decision": "retained"
+    },
+    {
+      "slug": "facility-capital-needs-assessment",
+      "primaryIntent": "Facility Capital Needs Assessment",
+      "supportingPhrases": [
+        "facility capital needs assessment",
+        "building capital planning engineer",
+        "facility systems assessment"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/facility-capital-needs-assessment/",
+      "audience": "Facility owners, asset managers, investors, lenders, and property-management teams",
+      "overlapDecision": "Capital-planning intent distinct from transaction diligence and a single-condition engineering assessment.",
+      "decision": "retained"
+    },
+    {
+      "slug": "roof-structure-condition-assessment",
+      "primaryIntent": "Roof Structure Condition Assessment",
+      "supportingPhrases": [
+        "roof structure condition assessment",
+        "commercial roof framing inspection engineer",
+        "roof structural evaluation"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/roof-structure-condition-assessment/",
+      "audience": "Building owners, roof consultants, facility managers, contractors, and insurers",
+      "overlapDecision": "Condition-focused roof intent distinct from design for a specific new rooftop modification.",
+      "decision": "retained"
+    },
+    {
+      "slug": "parking-structure-condition-assessment",
+      "primaryIntent": "Parking Structure Condition Assessment",
+      "supportingPhrases": [
+        "parking structure condition assessment",
+        "parking garage structural assessment",
+        "parking deck engineering inspection"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/parking-structure-condition-assessment/",
+      "audience": "Parking owners, facility managers, property managers, contractors, and capital planners",
+      "overlapDecision": "Parking-structure assessment intent; detailed testing and repair design are separately scoped.",
+      "decision": "retained"
+    },
+    {
+      "slug": "commercial-building-permit-set-engineering",
+      "primaryIntent": "Commercial Building Permit Set Engineering",
+      "supportingPhrases": [
+        "commercial building permit set engineer",
+        "engineering permit drawing package",
+        "commercial permit plans engineering"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/commercial-building-permit-set-engineering/",
+      "audience": "Commercial owners, developers, architects, contractors, and permit coordinators",
+      "overlapDecision": "Buyer intent for a coordinated permit set; discipline pages remain canonical for discipline-specific design searches.",
+      "decision": "retained"
+    },
+    {
+      "slug": "renovation-permit-engineering",
+      "primaryIntent": "Renovation Permit Engineering",
+      "supportingPhrases": [
+        "renovation permit engineering",
+        "commercial remodel permit engineer",
+        "alteration permit drawings engineer"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/renovation-permit-engineering/",
+      "audience": "Building owners, tenants, architects, renovation contractors, and permit coordinators",
+      "overlapDecision": "Permit-stage renovation intent; general renovation pages cover earlier project planning.",
+      "decision": "retained"
+    },
+    {
+      "slug": "change-of-use-permit-engineering",
+      "primaryIntent": "Change of Use Permit Engineering",
+      "supportingPhrases": [
+        "change of use permit engineer",
+        "occupancy change engineering plans",
+        "building use conversion permit engineering"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/change-of-use-permit-engineering/",
+      "audience": "Owners, developers, tenants, architects, contractors, and permit consultants",
+      "overlapDecision": "Permit-specific occupancy-change intent; adaptive reuse remains the broader project-type canonical.",
+      "decision": "retained"
+    },
+    {
+      "slug": "equipment-installation-permit-engineering",
+      "primaryIntent": "Equipment Installation Permit Engineering",
+      "supportingPhrases": [
+        "equipment installation permit engineer",
+        "machinery permit engineering",
+        "commercial equipment anchorage permit"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/equipment-installation-permit-engineering/",
+      "audience": "Facility owners, equipment vendors, contractors, manufacturers, and permit coordinators",
+      "overlapDecision": "Permit-deliverable intent distinct from general equipment replacement planning.",
+      "decision": "retained"
+    },
+    {
+      "slug": "building-envelope-repair-engineering",
+      "primaryIntent": "Building Envelope Repair Engineering",
+      "supportingPhrases": [
+        "building envelope repair engineer",
+        "facade repair structural engineering",
+        "exterior wall repair engineering"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/building-envelope-repair-engineering/",
+      "audience": "Building owners, architects, envelope consultants, property managers, and repair contractors",
+      "overlapDecision": "Structural and engineering repair intent; it does not claim comprehensive envelope consulting or testing unless scoped.",
+      "decision": "retained"
+    },
+    {
+      "slug": "facility-system-modernization-engineering",
+      "primaryIntent": "Facility System Modernization Engineering",
+      "supportingPhrases": [
+        "facility system modernization engineering",
+        "building systems upgrade engineer",
+        "facility infrastructure modernization"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/facility-system-modernization-engineering/",
+      "audience": "Facility owners, capital-program teams, property managers, architects, and contractors",
+      "overlapDecision": "Coordinated modernization intent distinct from a single equipment replacement or energy-only upgrade.",
+      "decision": "retained"
+    },
+    {
+      "slug": "occupied-building-renovation-engineering",
+      "primaryIntent": "Occupied Building Renovation Engineering",
+      "supportingPhrases": [
+        "occupied building renovation engineering",
+        "phased occupied renovation engineer",
+        "renovation engineering during operations"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/occupied-building-renovation-engineering/",
+      "audience": "Facility owners, occupants, architects, construction managers, and renovation contractors",
+      "overlapDecision": "Occupied-facility execution intent; contractor means, methods, site safety, and final sequencing remain contractor responsibilities.",
+      "decision": "retained"
+    },
+    {
+      "slug": "phased-renovation-engineering",
+      "primaryIntent": "Phased Renovation Engineering",
+      "supportingPhrases": [
+        "phased renovation engineering",
+        "multi phase renovation permit plans",
+        "renovation phasing engineer"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/phased-renovation-engineering/",
+      "audience": "Owners, developers, program managers, architects, and construction managers",
+      "overlapDecision": "Permit and coordination intent for multiple stages; general renovation remains the single-phase planning canonical.",
+      "decision": "retained"
+    },
+    {
+      "slug": "pre-design-engineering-assessment",
+      "primaryIntent": "Pre-Design Engineering Assessment",
+      "supportingPhrases": [
+        "pre design engineering assessment",
+        "engineering feasibility assessment",
+        "commercial project engineering due diligence"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/pre-design-engineering-assessment/",
+      "audience": "Owners, developers, architects, investors, contractors, and project planners",
+      "overlapDecision": "Early project-feasibility intent distinct from transaction diligence, final design, and broad condition assessment.",
       "decision": "retained"
     },
     {
