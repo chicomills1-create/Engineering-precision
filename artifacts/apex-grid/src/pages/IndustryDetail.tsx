@@ -59,6 +59,22 @@ export default function IndustryDetail() {
   const industry = getIndustry(slug ?? "");
   const disciplineRoot = industry ? INDUSTRY_DISCIPLINE_ROOTS[industry.slug] : undefined;
   const specialtyLinks = industry ? INDUSTRY_SPECIALTY_LINKS[industry.slug] ?? [] : [];
+  const quickAnswers = industry
+    ? [
+        {
+          question: `What engineering disciplines are coordinated for ${industry.name} projects?`,
+          answer: `${industry.disciplines.map((discipline) => discipline.name).join(", ")} are coordinated around the facility program, applicable codes, and permit deliverables.`,
+        },
+        {
+          question: `What information helps define a ${industry.name} engineering scope?`,
+          answer: `The facility type, project type, existing conditions, jurisdiction, schedule, and required deliverables establish the basis for a project-specific engineering scope.`,
+        },
+        {
+          question: `Which codes and standards may apply to ${industry.name} projects?`,
+          answer: `Applicable requirements can include ${industry.compliance.map((item) => item.code).join(", ")}. The adopted editions and amendments must be confirmed with the authority having jurisdiction for each project.`,
+        },
+      ]
+    : [];
 
   usePageMeta({
     title: industry ? industry.title : "Industry Not Found | Apex Grid Engineering",
@@ -90,6 +106,17 @@ export default function IndustryDetail() {
                 { "@type": "ListItem", position: 2, name: industry.name, item: SITE_URL ? `${SITE_URL}/industries/${industry.slug}/` : `/industries/${industry.slug}/` },
               ],
             },
+            {
+              "@type": "FAQPage",
+              mainEntity: quickAnswers.map((item) => ({
+                "@type": "Question",
+                name: item.question,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: item.answer,
+                },
+              })),
+            },
           ],
         }
       : null,
@@ -102,6 +129,23 @@ export default function IndustryDetail() {
 
   return (
     <div className="flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: quickAnswers.map((item) => ({
+              "@type": "Question",
+              name: item.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: item.answer,
+              },
+            })),
+          }).replace(/</g, "\\u003c"),
+        }}
+      />
       {/* Hero */}
       <section className="relative pt-40 pb-24 bg-background border-b border-border">
         <div className="container mx-auto px-4 md:px-8">
@@ -250,6 +294,26 @@ export default function IndustryDetail() {
                 <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Answer-engine summary */}
+      <section className="py-20 bg-card border-t border-border" aria-labelledby="industry-quick-answers">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-4xl">
+            <p className="font-mono text-xs uppercase tracking-widest text-primary mb-4">Quick Answers</p>
+            <h2 id="industry-quick-answers" className="text-3xl md:text-4xl font-display font-bold mb-10">
+              {industry.name} Engineering Questions
+            </h2>
+            <dl className="divide-y divide-border border-y border-border">
+              {quickAnswers.map((item) => (
+                <div key={item.question} className="py-7">
+                  <dt className="text-lg font-display font-bold mb-3">{item.question}</dt>
+                  <dd className="text-muted-foreground leading-relaxed">{item.answer}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
       </section>
