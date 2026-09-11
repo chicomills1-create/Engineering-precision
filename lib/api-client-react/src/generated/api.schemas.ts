@@ -1707,6 +1707,14 @@ export type SeoPerformanceSyncTotals = {
   pageQueries: number;
 };
 
+export interface SeoPerformanceCompleteness {
+  pages: boolean;
+  queries: boolean;
+  pageQueries: boolean;
+  previousPages: boolean;
+  previousPageQueries: boolean;
+}
+
 export interface SeoPerformanceSync {
   availability: SeoPerformanceSyncAvailability;
   synced: boolean;
@@ -1715,6 +1723,8 @@ export interface SeoPerformanceSync {
   startDate?: string;
   endDate?: string;
   totals: SeoPerformanceSyncTotals;
+  alertsCreated: number;
+  completeness: SeoPerformanceCompleteness;
 }
 
 export type SeoAuditIssueSeverity = typeof SeoAuditIssueSeverity[keyof typeof SeoAuditIssueSeverity];
@@ -1790,6 +1800,49 @@ export interface SeoKeywordRetention {
   opportunities: SeoKeywordOpportunity[];
 }
 
+export type SeoTrafficAlertSeverity = typeof SeoTrafficAlertSeverity[keyof typeof SeoTrafficAlertSeverity];
+
+
+export const SeoTrafficAlertSeverity = {
+  critical: 'critical',
+  warning: 'warning',
+  info: 'info',
+} as const;
+
+export type SeoTrafficAlertReason = typeof SeoTrafficAlertReason[keyof typeof SeoTrafficAlertReason];
+
+
+export const SeoTrafficAlertReason = {
+  position_movement: 'position_movement',
+  redirect: 'redirect',
+  noindex: 'noindex',
+  missing_page: 'missing_page',
+  canonical_change: 'canonical_change',
+  excluded_page: 'excluded_page',
+  traffic_loss: 'traffic_loss',
+} as const;
+
+export interface SeoTrafficAlert {
+  id: number;
+  periodStart: string;
+  periodEnd: string;
+  previousPeriodStart: string;
+  previousPeriodEnd: string;
+  page: string;
+  query: string;
+  severity: SeoTrafficAlertSeverity;
+  reason: SeoTrafficAlertReason;
+  message: string;
+  previousClicks: number;
+  currentClicks: number;
+  previousImpressions: number;
+  currentImpressions: number;
+  previousPosition: string;
+  currentPosition: string;
+  previousAvailable: boolean;
+  createdAt: string;
+}
+
 export interface SeoPerformancePeriodSummary {
   startDate: string;
   endDate: string;
@@ -1816,6 +1869,8 @@ export interface SeoDashboard {
   inventory: SeoDashboardInventory;
   performance: SeoPerformanceSnapshot[];
   keywordRetention: SeoKeywordRetention;
+  trafficAlerts: SeoTrafficAlert[];
+  performanceCompleteness: SeoPerformanceCompleteness;
   performanceHistory: SeoPerformancePeriodSummary[];
   organicAttribution: SeoAttributionRollup[];
   /** @nullable */

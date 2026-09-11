@@ -125,6 +125,7 @@ export interface SearchAnalyticsOutcome {
   availability: SearchAnalyticsAvailability;
   rows: SearchAnalyticsRow[];
   error: string | null;
+  complete: boolean;
 }
 
 /**
@@ -139,35 +140,43 @@ export async function querySearchAnalytics(
   rowLimit = 1000,
 ): Promise<SearchAnalyticsOutcome> {
   const client = getAuth();
-  if (!client) return { availability: "unconfigured", rows: [], error: "Google Search Console credentials are not configured." };
-  if (isQuotaExhausted()) return { availability: "quota_exhausted", rows: [], error: "Google Search Console quota is temporarily exhausted." };
+  if (!client) return { availability: "unconfigured", rows: [], error: "Google Search Console credentials are not configured.", complete: false };
+  if (isQuotaExhausted()) return { availability: "quota_exhausted", rows: [], error: "Google Search Console quota is temporarily exhausted.", complete: false };
   try {
     const token = await client.getAccessToken();
-    if (!token) return { availability: "api_error", rows: [], error: "Unable to obtain a Google Search Console access token." };
-    const response = await fetch(SEARCH_ANALYTICS_ENDPOINT, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        startDate,
-        endDate,
-        ...(dimension === "site"
-          ? {}
-          : { dimensions: dimension === "page_query" ? ["page", "query"] : [dimension] }),
-        rowLimit: dimension === "site" ? 1 : Math.min(Math.max(rowLimit, 1), 25_000),
-      }),
-    });
-    if (response.status === 429) {
-      quotaExhaustedUntil = Date.now() + QUOTA_COOLDOWN_MS;
-      return { availability: "quota_exhausted", rows: [], error: "Google Search Console quota is temporarily exhausted." };
+    if (!token) return { availability: "api_error", rows: [], error: "Unable to obtain a Google Search Console access token.", complete: false };
+    const maxRows = dimension === "site" ? 1 : Math.min(Math.max(rowLimit, 1), 100_000);
+    const rawRows: Array<{ keys?: string[]; clicks?: number; impressions?: number; ctr?: number; position?: number }> = [];
+    let complete = true;
+    while (rawRows.length < maxRows) {
+      const pageSize = Math.min(25_000, maxRows - rawRows.length);
+      const response = await fetch(SEARCH_ANALYTICS_ENDPOINT, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          startDate,
+          endDate,
+          ...(dimension === "site" ? {} : { dimensions: dimension === "page_query" ? ["page", "query"] : [dimension] }),
+          rowLimit: pageSize,
+          startRow: rawRows.length,
+        }),
+      });
+      if (response.status === 429) {
+        quotaExhaustedUntil = Date.now() + QUOTA_COOLDOWN_MS;
+        return { availability: "quota_exhausted", rows: [], error: "Google Search Console quota is temporarily exhausted.", complete: false };
+      }
+      if (!response.ok) return { availability: "api_error", rows: [], error: `Search Analytics request failed (${response.status}).`, complete: false };
+      const payload = (await response.json()) as { rows?: Array<{ keys?: string[]; clicks?: number; impressions?: number; ctr?: number; position?: number }> };
+      const batch = payload.rows ?? [];
+      rawRows.push(...batch);
+      if (batch.length < pageSize) break;
+      if (rawRows.length >= maxRows) complete = false;
     }
-    if (!response.ok) {
-      return { availability: "api_error", rows: [], error: `Search Analytics request failed (${response.status}).` };
-    }
-    const payload = (await response.json()) as { rows?: Array<{ keys?: string[]; clicks?: number; impressions?: number; ctr?: number; position?: number }> };
     return {
       availability: "available",
       error: null,
-      rows: (payload.rows ?? []).map((row) => ({
+      complete,
+      rows: rawRows.map((row) => ({
         key: dimension === "site"
           ? "site"
           : dimension === "page_query"
@@ -181,7 +190,7 @@ export async function querySearchAnalytics(
     };
   } catch (err) {
     logger.warn({ err }, "Search Analytics request failed");
-    return { availability: "api_error", rows: [], error: "Search Analytics request could not be completed." };
+    return { availability: "api_error", rows: [], error: "Search Analytics request could not be completed.", complete: false };
   }
 }
 

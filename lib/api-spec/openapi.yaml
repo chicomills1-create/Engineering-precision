@@ -2091,7 +2091,7 @@ components:
         endDate: { type: string, pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" }
     SeoPerformanceSync:
       type: object
-      required: [availability, synced, totals]
+      required: [availability, synced, totals, alertsCreated, completeness]
       properties:
         availability: { type: string, enum: [available, unconfigured, quota_exhausted, api_error] }
         synced: { type: boolean }
@@ -2099,6 +2099,8 @@ components:
         startDate: { type: string }
         endDate: { type: string }
         totals: { type: object, required: [pages, queries, pageQueries], properties: { pages: { type: number }, queries: { type: number }, pageQueries: { type: number } } }
+        alertsCreated: { type: number }
+        completeness: { $ref: "#/components/schemas/SeoPerformanceCompleteness" }
     SeoAuditIssue:
       type: object
       required: [url, category, severity, message]
@@ -2118,7 +2120,7 @@ components:
         issues: { type: array, items: { $ref: "#/components/schemas/SeoAuditIssue" } }
     SeoDashboard:
       type: object
-      required: [inventory, performance, keywordRetention, performanceHistory, organicAttribution, latestAudit, openIssues]
+      required: [inventory, performance, keywordRetention, trafficAlerts, performanceCompleteness, performanceHistory, organicAttribution, latestAudit, openIssues]
       properties:
         inventory:
           type: object
@@ -2128,6 +2130,8 @@ components:
             byCategory: { type: object, additionalProperties: { type: number } }
         performance: { type: array, items: { $ref: "#/components/schemas/SeoPerformanceSnapshot" } }
         keywordRetention: { $ref: "#/components/schemas/SeoKeywordRetention" }
+        trafficAlerts: { type: array, items: { $ref: "#/components/schemas/SeoTrafficAlert" } }
+        performanceCompleteness: { $ref: "#/components/schemas/SeoPerformanceCompleteness" }
         performanceHistory: { type: array, items: { $ref: "#/components/schemas/SeoPerformancePeriodSummary" } }
         organicAttribution: { type: array, items: { $ref: "#/components/schemas/SeoAttributionRollup" } }
         latestAudit: { type: ["object", "null"], properties: { id: { type: number }, status: { type: string } } }
@@ -2162,6 +2166,37 @@ components:
         impressions: { type: number }
         position: { type: string }
         status: { type: string, enum: [protected, review] }
+    SeoTrafficAlert:
+      type: object
+      required: [id, periodStart, periodEnd, previousPeriodStart, previousPeriodEnd, page, query, severity, reason, message, previousClicks, currentClicks, previousImpressions, currentImpressions, previousPosition, currentPosition, previousAvailable, createdAt]
+      properties:
+        id: { type: number }
+        periodStart: { type: string }
+        periodEnd: { type: string }
+        previousPeriodStart: { type: string }
+        previousPeriodEnd: { type: string }
+        page: { type: string }
+        query: { type: string }
+        severity: { type: string, enum: [critical, warning, info] }
+        reason: { type: string, enum: [position_movement, redirect, noindex, missing_page, canonical_change, excluded_page, traffic_loss] }
+        message: { type: string }
+        previousClicks: { type: number }
+        currentClicks: { type: number }
+        previousImpressions: { type: number }
+        currentImpressions: { type: number }
+        previousPosition: { type: string }
+        currentPosition: { type: string }
+        previousAvailable: { type: boolean }
+        createdAt: { type: string }
+    SeoPerformanceCompleteness:
+      type: object
+      required: [pages, queries, pageQueries, previousPages, previousPageQueries]
+      properties:
+        pages: { type: boolean }
+        queries: { type: boolean }
+        pageQueries: { type: boolean }
+        previousPages: { type: boolean }
+        previousPageQueries: { type: boolean }
     SeoPerformancePeriodSummary:
       type: object
       required: [startDate, endDate, clicks, impressions, position]

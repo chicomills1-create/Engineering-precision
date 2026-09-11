@@ -177,7 +177,7 @@ function DashboardTab() {
         } else if (!res.synced) {
            toast({ title: 'Sync Failed', description: res.error || 'Failed to sync data.', variant: 'destructive' });
         } else {
-           toast({ title: 'Performance Synced', description: `Synced ${res.totals.pages} pages, ${res.totals.queries} queries, and ${res.totals.pageQueries} keyword-to-page pairs.` });
+           toast({ title: 'Performance Synced', description: `Synced ${res.totals.pages} pages and created ${res.alertsCreated} traffic alerts.` });
            void queryClient.invalidateQueries({ queryKey: getGetSeoDashboardQueryKey() });
         }
       },
@@ -264,6 +264,66 @@ function DashboardTab() {
              </div>
           )}
         </div>
+      </div>
+
+      {/* Keyword retention */}
+      <div className="border border-border bg-card p-6 rounded-[2px]">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-5">
+          <div>
+            <h3 className="text-lg font-display font-bold">Keyword Traffic Alerts</h3>
+            <p className="text-sm text-muted-foreground mt-1">
+              Current performance compared with the immediately preceding equal-length period. Alerts require review and never change indexation.
+            </p>
+          </div>
+          <span className="inline-flex items-center gap-1.5 text-amber-400 text-xs">
+            <AlertTriangle className="w-4 h-4" />
+            {dashboard.trafficAlerts.length.toLocaleString()} prioritized
+          </span>
+        </div>
+        {Object.values(dashboard.performanceCompleteness).some((complete) => !complete) && (
+          <div className="mb-5 border border-amber-400/30 bg-amber-400/5 px-4 py-3 text-sm text-amber-300 rounded-[2px]">
+            Search Console capped at least one result set. Alerts shown are prioritized from the available rows; an empty list is not a complete clean bill of health.
+          </div>
+        )}
+        {dashboard.trafficAlerts.length === 0 ? (
+          <div className="py-8 text-center text-sm text-muted-foreground border border-dashed border-border rounded-[2px]">
+            No material losses or excluded-page traffic were found in the latest comparison.
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[900px] text-sm">
+              <thead>
+                <tr className="border-b border-border text-xs uppercase tracking-wider text-muted-foreground text-left">
+                  <th className="pb-3 font-medium">Priority</th>
+                  <th className="pb-3 font-medium">Cause</th>
+                  <th className="pb-3 font-medium">Query / page</th>
+                  <th className="pb-3 font-medium text-right">Clicks</th>
+                  <th className="pb-3 font-medium text-right">Impressions</th>
+                  <th className="pb-3 font-medium text-right">Position</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border/50">
+                {dashboard.trafficAlerts.map((alert) => (
+                  <tr key={alert.id} className="hover:bg-white/[0.02]">
+                    <td className="py-3 pr-4">
+                      <span className={`inline-block text-xs px-2 py-0.5 border rounded-[2px] uppercase ${alert.severity === 'critical' ? 'bg-red-500/10 text-red-400 border-red-500/30' : 'bg-amber-500/10 text-amber-400 border-amber-500/30'}`}>
+                        {alert.severity}
+                      </span>
+                    </td>
+                    <td className="py-3 pr-4 capitalize">{alert.reason.replaceAll('_', ' ')}</td>
+                    <td className="py-3 pr-4">
+                      <div className="font-medium">{alert.query || '(query unavailable)'}</div>
+                      <div className="font-mono text-xs text-muted-foreground max-w-[420px] truncate" title={alert.page}>{alert.page}</div>
+                    </td>
+                    <td className="py-3 text-right font-mono">{alert.previousAvailable ? alert.previousClicks : '—'} → {alert.currentClicks}</td>
+                    <td className="py-3 text-right font-mono text-muted-foreground">{alert.previousAvailable ? alert.previousImpressions : '—'} → {alert.currentImpressions}</td>
+                    <td className="py-3 text-right font-mono text-muted-foreground">{alert.previousAvailable ? parseFloat(alert.previousPosition).toFixed(1) : '—'} → {parseFloat(alert.currentPosition).toFixed(1)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
       {/* Keyword retention */}

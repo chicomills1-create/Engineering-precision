@@ -3,7 +3,7 @@ import { requireAuth } from "../middlewares/requireAuth";
 import { readFile, access, readdir } from "fs/promises";
 import path from "path";
 import { and, desc, eq, sql } from "drizzle-orm";
-import { db, leadsTable, seoAuditIssuesTable, seoAuditRunsTable, seoPerformanceSnapshotsTable } from "@workspace/db";
+import { db, leadsTable, seoAuditIssuesTable, seoAuditRunsTable, seoPerformanceSnapshotsTable, seoTrafficAlertsTable } from "@workspace/db";
 import {
   getCachedResult,
   getCacheStats,
@@ -20,6 +20,7 @@ import {
   type AuditIssueCandidate,
   type AuditMetadata,
 } from "../lib/seoAudit";
+import { buildTrafficAlerts, type PageEvidence, type PageQueryMetric } from "../lib/seoTrafficAlerts";
 
 const router = Router();
 
@@ -348,12 +349,63 @@ router.post(
 );
 
 function dateOnly(value: unknown): string | null {
-  return typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value) ? value : null;
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+  const parsed = new Date(`${value}T00:00:00Z`);
+  return Number.isFinite(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value ? value : null;
 }
 function defaultPerformanceRange(): { startDate: string; endDate: string } {
   const end = new Date(Date.now() - 3 * 86400000);
   const start = new Date(end.getTime() - 179 * 86400000);
   return { startDate: start.toISOString().slice(0, 10), endDate: end.toISOString().slice(0, 10) };
+}
+function precedingPerformanceRange(startDate: string, endDate: string): { startDate: string; endDate: string } {
+  const start = Date.parse(`${startDate}T00:00:00Z`);
+  const end = Date.parse(`${endDate}T00:00:00Z`);
+  const durationDays = Math.round((end - start) / 86400000) + 1;
+  const previousEnd = new Date(start - 86400000);
+  const previousStart = new Date(previousEnd.getTime() - (durationDays - 1) * 86400000);
+  return { startDate: previousStart.toISOString().slice(0, 10), endDate: previousEnd.toISOString().slice(0, 10) };
+}
+function parsePageQueryMetric(row: { key: string; clicks: number; impressions: number; position: number }): PageQueryMetric | null {
+  try {
+    const parsed = JSON.parse(row.key) as { page?: unknown; query?: unknown };
+    if (typeof parsed.page !== "string" || typeof parsed.query !== "string") return null;
+    return { page: parsed.page, query: parsed.query, clicks: row.clicks, impressions: row.impressions, position: row.position };
+  } catch {
+    return null;
+  }
+}
+function parsePageMetric(row: { key: string; clicks: number; impressions: number; position: number }): PageQueryMetric {
+  return { page: row.key, query: "", clicks: row.clicks, impressions: row.impressions, position: row.position };
+}
+async function loadPageEvidence(pages: string[], entries: ParsedEntry[]): Promise<Map<string, PageEvidence>> {
+  const sitemapPaths = new Set(entries.map((entry) => entry.path.endsWith("/") ? entry.path : `${entry.path}/`));
+  let redirects: Record<string, string> = {};
+  try { redirects = JSON.parse(await readFile(path.join(PUBLIC_DIR, "legacy-location-redirects.json"), "utf8")) as Record<string, string>; }
+  catch { /* optional redirect registry */ }
+  const evidence = new Map<string, PageEvidence>();
+  for (let i = 0; i < pages.length; i += 20) await Promise.all(pages.slice(i, i + 20).map(async (page) => {
+    let pathname = page;
+    try { pathname = new URL(page).pathname; } catch { /* raw paths remain review-only */ }
+    const normalizedPath = pathname.endsWith("/") ? pathname : `${pathname}/`;
+    const exists = await staticFileExists(pathname);
+    let html: string | null = null;
+    if (exists) {
+      const stripped = pathname.replace(/^\//, "").replace(/\/$/, "");
+      try { html = await readFile(path.join(PUBLIC_DIR, stripped, "index.html"), "utf8"); }
+      catch { try { html = await readFile(path.join(PUBLIC_DIR, `${stripped}.html`), "utf8"); } catch { /* existence remains useful */ } }
+    }
+    const canonical = html?.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)/i)?.[1] ?? null;
+    evidence.set(page, {
+      protected: sitemapPaths.has(normalizedPath),
+      exists,
+      noindex: Boolean(html && /<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html)),
+      canonical,
+      coverageState: getCachedResult(page)?.coverageState ?? null,
+      redirect: redirects[pathname] !== undefined || redirects[normalizedPath] !== undefined,
+    });
+  }));
+  return evidence;
 }
 async function sitemapEntries(): Promise<ParsedEntry[]> {
   const entries: ParsedEntry[] = [];
@@ -365,32 +417,103 @@ async function sitemapEntries(): Promise<ParsedEntry[]> {
 
 router.post("/seo/dashboard/performance-sync", requireAuth, async (req, res): Promise<void> => {
   const fallback = defaultPerformanceRange();
-  const startDate = dateOnly(req.body?.startDate) ?? fallback.startDate;
-  const endDate = dateOnly(req.body?.endDate) ?? fallback.endDate;
+  const suppliedStart = req.body?.startDate;
+  const suppliedEnd = req.body?.endDate;
+  const startDate = suppliedStart === undefined ? fallback.startDate : dateOnly(suppliedStart);
+  const endDate = suppliedEnd === undefined ? fallback.endDate : dateOnly(suppliedEnd);
+  if (!startDate || !endDate) {
+    res.status(400).json({ error: "Dates must be real calendar dates in YYYY-MM-DD format." }); return;
+  }
   if (startDate > endDate || (Date.parse(`${endDate}T00:00:00Z`) - Date.parse(`${startDate}T00:00:00Z`)) > 185 * 86400000) {
     res.status(400).json({ error: "Date range must be ordered and no longer than 186 days." }); return;
   }
-  const [site, pages, queries, pageQueries] = await Promise.all([
+  const previousRange = precedingPerformanceRange(startDate, endDate);
+  const [site, pages, queries, pageQueries, previousPages, previousPageQueries] = await Promise.all([
     querySearchAnalytics(startDate, endDate, "site"),
-    querySearchAnalytics(startDate, endDate, "page", 25_000),
+    querySearchAnalytics(startDate, endDate, "page", 100_000),
     querySearchAnalytics(startDate, endDate, "query", 25_000),
-    querySearchAnalytics(startDate, endDate, "page_query", 25_000),
+    querySearchAnalytics(startDate, endDate, "page_query", 100_000),
+    querySearchAnalytics(previousRange.startDate, previousRange.endDate, "page", 100_000),
+    querySearchAnalytics(previousRange.startDate, previousRange.endDate, "page_query", 100_000),
   ]);
-  if (site.availability !== "available" || pages.availability !== "available" || queries.availability !== "available" || pageQueries.availability !== "available") {
-    const unavailable = [site, pages, queries, pageQueries].find((result) => result.availability !== "available");
-    res.status(503).json({ availability: unavailable?.availability ?? "api_error", synced: false, error: unavailable?.error ?? "Search Console is unavailable.", totals: { pages: 0, queries: 0, pageQueries: 0 } }); return;
+  if ([site, pages, queries, pageQueries, previousPages, previousPageQueries].some((result) => result.availability !== "available")) {
+    const unavailable = [site, pages, queries, pageQueries, previousPages, previousPageQueries].find((result) => result.availability !== "available");
+    res.status(503).json({
+      availability: unavailable?.availability ?? "api_error",
+      synced: false,
+      error: unavailable?.error ?? "Search Console is unavailable.",
+      totals: { pages: 0, queries: 0, pageQueries: 0 },
+      alertsCreated: 0,
+      completeness: { pages: false, queries: false, pageQueries: false, previousPages: false, previousPageQueries: false },
+    }); return;
   }
+  const completeness = {
+    pages: pages.complete,
+    queries: queries.complete,
+    pageQueries: pageQueries.complete,
+    previousPages: previousPages.complete,
+    previousPageQueries: previousPageQueries.complete,
+  };
   const rows = [
     ...site.rows.map((row) => ({ ...row, dimension: "site" })),
     ...pages.rows.map((row) => ({ ...row, dimension: "page" })),
     ...queries.rows.map((row) => ({ ...row, dimension: "query" })),
     ...pageQueries.rows.map((row) => ({ ...row, dimension: "page_query" })),
   ];
-  if (rows.length) await db.insert(seoPerformanceSnapshotsTable).values(rows.map((row) => ({
+  const currentMetrics = pageQueries.rows.map(parsePageQueryMetric).filter((row): row is PageQueryMetric => row !== null);
+  const previousMetrics = previousPageQueries.rows.map(parsePageQueryMetric).filter((row): row is PageQueryMetric => row !== null);
+  const currentPageMetrics = pages.rows.map(parsePageMetric);
+  const previousPageMetrics = previousPages.rows.map(parsePageMetric);
+  const entries = await sitemapEntries();
+  const evidence = await loadPageEvidence([...new Set([...currentMetrics, ...previousMetrics, ...currentPageMetrics, ...previousPageMetrics].map((row) => row.page))], entries);
+  const fallbackEvidence: PageEvidence = { protected: false, exists: false, noindex: false, canonical: null, coverageState: null, redirect: false };
+  const pageAlerts = buildTrafficAlerts(currentPageMetrics, previousPageMetrics, (page) => evidence.get(page) ?? fallbackEvidence, {
+    currentComplete: pages.complete,
+    previousComplete: previousPages.complete,
+  });
+  const queryAlerts = buildTrafficAlerts(currentMetrics, previousMetrics, (page) => evidence.get(page) ?? fallbackEvidence, {
+    currentComplete: pageQueries.complete,
+    previousComplete: previousPageQueries.complete,
+    includeExcluded: false,
+  });
+  const alerts = [...pageAlerts, ...queryAlerts];
+  const snapshotValues = rows.map((row) => ({
     periodStart: startDate, periodEnd: endDate, dimension: row.dimension, dimensionValue: row.key,
     clicks: Math.round(row.clicks), impressions: Math.round(row.impressions), ctr: String(row.ctr), position: String(row.position),
-  }))).onConflictDoUpdate({ target: [seoPerformanceSnapshotsTable.periodStart, seoPerformanceSnapshotsTable.periodEnd, seoPerformanceSnapshotsTable.dimension, seoPerformanceSnapshotsTable.dimensionValue], set: { clicks: sql`excluded.clicks`, impressions: sql`excluded.impressions`, ctr: sql`excluded.ctr`, position: sql`excluded.position`, syncedAt: new Date() } });
-  res.json({ availability: "available", synced: true, error: null, startDate, endDate, totals: { pages: pages.rows.length, queries: queries.rows.length, pageQueries: pageQueries.rows.length } });
+    completeness,
+  }));
+  const alertValues = alerts.map((alert) => ({
+    periodStart: startDate,
+    periodEnd: endDate,
+    previousPeriodStart: previousRange.startDate,
+    previousPeriodEnd: previousRange.endDate,
+    page: alert.page,
+    query: alert.query,
+    severity: alert.severity,
+    reason: alert.reason,
+    message: alert.message,
+    previousClicks: Math.round(alert.previousClicks),
+    currentClicks: Math.round(alert.currentClicks),
+    previousImpressions: Math.round(alert.previousImpressions),
+    currentImpressions: Math.round(alert.currentImpressions),
+    previousPosition: String(alert.previousPosition),
+    currentPosition: String(alert.currentPosition),
+    previousAvailable: alert.previousAvailable,
+  }));
+  await db.transaction(async (tx) => {
+    await tx.delete(seoPerformanceSnapshotsTable).where(and(
+      eq(seoPerformanceSnapshotsTable.periodStart, startDate),
+      eq(seoPerformanceSnapshotsTable.periodEnd, endDate),
+    ));
+    for (let i = 0; i < snapshotValues.length; i += 500) await tx.insert(seoPerformanceSnapshotsTable).values(snapshotValues.slice(i, i + 500))
+      .onConflictDoNothing();
+    await tx.delete(seoTrafficAlertsTable).where(and(
+      eq(seoTrafficAlertsTable.periodStart, startDate),
+      eq(seoTrafficAlertsTable.periodEnd, endDate),
+    ));
+    for (let i = 0; i < alertValues.length; i += 500) await tx.insert(seoTrafficAlertsTable).values(alertValues.slice(i, i + 500));
+  });
+  res.json({ availability: "available", synced: true, error: null, startDate, endDate, totals: { pages: pages.rows.length, queries: queries.rows.length, pageQueries: pageQueries.rows.length }, alertsCreated: alerts.length, completeness });
 });
 
 router.post("/seo/dashboard/audit", requireAuth, async (req, res): Promise<void> => {
@@ -467,7 +590,7 @@ router.get("/seo/dashboard", requireAuth, async (_req, res): Promise<void> => {
     ),
   ]);
   const latestPeriod = latestPerformancePeriod[0];
-  const [performance, pageQueryPerformance] = latestPeriod
+  const [performance, pageQueryPerformance, trafficAlerts] = latestPeriod
     ? await Promise.all([
       db.select().from(seoPerformanceSnapshotsTable).where(and(
         eq(seoPerformanceSnapshotsTable.periodStart, latestPeriod.periodStart),
@@ -479,8 +602,15 @@ router.get("/seo/dashboard", requireAuth, async (_req, res): Promise<void> => {
       eq(seoPerformanceSnapshotsTable.periodEnd, latestPeriod.periodEnd),
         eq(seoPerformanceSnapshotsTable.dimension, "page_query"),
       )).orderBy(desc(seoPerformanceSnapshotsTable.clicks), desc(seoPerformanceSnapshotsTable.impressions)).limit(25_000),
+      db.select().from(seoTrafficAlertsTable).where(and(
+        eq(seoTrafficAlertsTable.periodStart, latestPeriod.periodStart),
+        eq(seoTrafficAlertsTable.periodEnd, latestPeriod.periodEnd),
+      )).orderBy(
+        sql`case ${seoTrafficAlertsTable.severity} when 'critical' then 2 when 'warning' then 1 else 0 end desc`,
+        desc(seoTrafficAlertsTable.previousClicks),
+      ).limit(250),
     ])
-    : [[], []];
+    : [[], [], []];
   const openIssues = latestAudit[0] ? await db.select().from(seoAuditIssuesTable).where(eq(seoAuditIssuesTable.auditRunId, latestAudit[0].id)).limit(25) : [];
   const keywordRetention = pageQueryPerformance.map((row) => {
     let page = "";
@@ -515,6 +645,12 @@ router.get("/seo/dashboard", requireAuth, async (_req, res): Promise<void> => {
       reviewImpressions: keywordRetention.filter((row) => row.status === "review").reduce((sum, row) => sum + row.impressions, 0),
       opportunities: keywordRetention.filter((row) => row.status === "review").slice(0, 100),
     },
+    trafficAlerts,
+    performanceCompleteness: (() => {
+      const value = performance.find((row) => row.dimension === "site")?.completeness;
+      if (value && typeof value === "object") return value;
+      return { pages: false, queries: false, pageQueries: false, previousPages: false, previousPageQueries: false };
+    })(),
     performanceHistory,
     organicAttribution: leads.filter((lead) => (lead.medium ?? "").toLowerCase() === "organic"),
     latestAudit: latestAudit[0] ?? null,

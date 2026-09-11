@@ -2236,6 +2236,33 @@ export const GetSeoDashboardResponse = zod.object({
   "status": zod.enum(['protected', 'review'])
 }))
 }),
+  "trafficAlerts": zod.array(zod.object({
+  "id": zod.number(),
+  "periodStart": zod.string(),
+  "periodEnd": zod.string(),
+  "previousPeriodStart": zod.string(),
+  "previousPeriodEnd": zod.string(),
+  "page": zod.string(),
+  "query": zod.string(),
+  "severity": zod.enum(['critical', 'warning', 'info']),
+  "reason": zod.enum(['position_movement', 'redirect', 'noindex', 'missing_page', 'canonical_change', 'excluded_page', 'traffic_loss']),
+  "message": zod.string(),
+  "previousClicks": zod.number(),
+  "currentClicks": zod.number(),
+  "previousImpressions": zod.number(),
+  "currentImpressions": zod.number(),
+  "previousPosition": zod.string(),
+  "currentPosition": zod.string(),
+  "previousAvailable": zod.boolean(),
+  "createdAt": zod.string()
+})),
+  "performanceCompleteness": zod.object({
+  "pages": zod.boolean(),
+  "queries": zod.boolean(),
+  "pageQueries": zod.boolean(),
+  "previousPages": zod.boolean(),
+  "previousPageQueries": zod.boolean()
+}),
   "performanceHistory": zod.array(zod.object({
   "startDate": zod.string(),
   "endDate": zod.string(),
@@ -2284,6 +2311,14 @@ export const SyncSeoPerformanceResponse = zod.object({
   "pages": zod.number(),
   "queries": zod.number(),
   "pageQueries": zod.number()
+}),
+  "alertsCreated": zod.number(),
+  "completeness": zod.object({
+  "pages": zod.boolean(),
+  "queries": zod.boolean(),
+  "pageQueries": zod.boolean(),
+  "previousPages": zod.boolean(),
+  "previousPageQueries": zod.boolean()
 })
 })
 

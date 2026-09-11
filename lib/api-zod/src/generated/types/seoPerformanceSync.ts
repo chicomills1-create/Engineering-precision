@@ -5,6 +5,7 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { SeoPerformanceCompleteness } from './seoPerformanceCompleteness';
 import type { SeoPerformanceSyncAvailability } from './seoPerformanceSyncAvailability';
 import type { SeoPerformanceSyncTotals } from './seoPerformanceSyncTotals';
 
@@ -16,4 +17,6 @@ export interface SeoPerformanceSync {
   startDate?: string;
   endDate?: string;
   totals: SeoPerformanceSyncTotals;
+  alertsCreated: number;
+  completeness: SeoPerformanceCompleteness;
 }

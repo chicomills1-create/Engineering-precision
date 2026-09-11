@@ -14,3 +14,9 @@ Search Console property totals must come from a separate Search Analytics query 
 **Why:** Capped page/query results materially undercount a large site and unweighted averages misstate Google performance.
 
 **How to apply:** Persist an explicit site-level row for each reporting period and use it for headline clicks, impressions, CTR, and position. Label dimension-capped tables as top rows rather than totals.
+
+Search Console period comparisons must carry completeness metadata. Never treat a row omitted from a capped result set as zero traffic, and never present an empty alert list as a complete clean result when either period was truncated.
+
+**Why:** Search Analytics dimensions can exceed the API row cap. Treating omitted rows as zero creates false loss alerts, while hiding truncation gives reviewers false confidence.
+
+**How to apply:** Paginate within a bounded cap, compare page totals as well as page/query rows, preserve unknown prior values explicitly, and replace each period's stored generation atomically so stale rows cannot survive a resync.

@@ -10,13 +10,17 @@ import type { SeoAuditIssue } from './seoAuditIssue';
 import type { SeoDashboardInventory } from './seoDashboardInventory';
 import type { SeoDashboardLatestAudit } from './seoDashboardLatestAudit';
 import type { SeoKeywordRetention } from './seoKeywordRetention';
+import type { SeoPerformanceCompleteness } from './seoPerformanceCompleteness';
 import type { SeoPerformancePeriodSummary } from './seoPerformancePeriodSummary';
 import type { SeoPerformanceSnapshot } from './seoPerformanceSnapshot';
+import type { SeoTrafficAlert } from './seoTrafficAlert';
 
 export interface SeoDashboard {
   inventory: SeoDashboardInventory;
   performance: SeoPerformanceSnapshot[];
   keywordRetention: SeoKeywordRetention;
+  trafficAlerts: SeoTrafficAlert[];
+  performanceCompleteness: SeoPerformanceCompleteness;
   performanceHistory: SeoPerformancePeriodSummary[];
   organicAttribution: SeoAttributionRollup[];
   /** @nullable */
