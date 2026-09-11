@@ -1942,7 +1942,6 @@ ${breadcrumb(crumbs)}
 
 function industryDisciplinePage(page: IndustryDisciplinePage): string {
   const url = getIndustryDisciplineUrl(page);
-  const aeoBatch = INDUSTRY_DISCIPLINE_PAGES.slice(0, 25).includes(page);
   const quickAnswers = [
     {
       question: `What can ${page.disciplineLabel.toLowerCase()} include for ${toTitle(page.industrySlug)} projects?`,
@@ -2036,10 +2035,10 @@ ${glossaryTerms.length ? `<section class="block"><div class="container">
   <div class="linkrow">${glossaryTerms.map((t) => `<a href="/engineering-glossary/${t.slug}/">${esc(t.term)}</a>`).join("")}</div>
 </div></section>` : ""}
 
-${aeoBatch ? `<section class="block"><div class="container faq">
+<section class="block"><div class="container faq">
   <h2>Quick <em>Answers</em></h2>
   ${quickAnswers.map((item) => `<details><summary>${esc(item.question)}</summary><div class="a">${esc(item.answer)}</div></details>`).join("\n  ")}
-</div></section>` : ""}
+</div></section>
 
 <section class="ctaband"><div class="container">
   <h2>Start Your Project</h2>
@@ -2051,7 +2050,7 @@ ${aeoBatch ? `<section class="block"><div class="container faq">
     title: page.title,
     description: page.description,
     canonical: `${SITE}${url}`,
-    schemaJson: [orgSchema, pageSchema, breadcrumbSchema(crumbs), ...(aeoBatch ? [faqSchema] : [])],
+    schemaJson: [orgSchema, pageSchema, breadcrumbSchema(crumbs), faqSchema],
     body,
   });
 }

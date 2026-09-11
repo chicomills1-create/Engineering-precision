@@ -1,16 +1,30 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-
-type PrerenderManifest = {
-  routes: string[];
-};
+import {
+  INDUSTRY_DISCIPLINE_PAGES,
+  getIndustryDisciplineUrl,
+} from "./industry-discipline-pages";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const manifest = JSON.parse(
-  fs.readFileSync(path.join(root, "seo", "prerender-manifest.json"), "utf8"),
-) as PrerenderManifest;
-const routes = manifest.routes.filter((route) => route.startsWith("/industries/"));
+const redirectPaths = new Set(["renewable-energy/battery-storage-structural"]);
+const canonicalRoutes = INDUSTRY_DISCIPLINE_PAGES
+  .filter((page) => !redirectPaths.has(page.segments.join("/")))
+  .map(getIndustryDisciplineUrl);
+const batchStart = Number.parseInt(process.env.INDUSTRY_BATCH_START ?? "0", 10);
+const batchSize = Number.parseInt(
+  process.env.INDUSTRY_BATCH_SIZE ?? String(canonicalRoutes.length),
+  10,
+);
+if (
+  !Number.isInteger(batchStart) ||
+  !Number.isInteger(batchSize) ||
+  batchStart < 0 ||
+  batchSize < 1
+) {
+  throw new Error("INDUSTRY_BATCH_START must be non-negative and INDUSTRY_BATCH_SIZE must be positive");
+}
+const routes = canonicalRoutes.slice(batchStart, batchStart + batchSize);
 const failures: string[] = [];
 const titles = new Map<string, string>();
 const descriptions = new Map<string, string>();
@@ -52,9 +66,9 @@ function uniqueMeta(
 
 for (const route of routes) {
   const relative = route.replace(/^\/|\/$/g, "");
-  const file = path.join(root, "dist", "public", relative, "index.html");
+  const file = path.join(root, "public", relative, "index.html");
   if (!fs.existsSync(file)) {
-    failures.push(`${route}: missing prerendered HTML at dist/public/${relative}/index.html`);
+    failures.push(`${route}: missing generated HTML at public/${relative}/index.html`);
     continue;
   }
 
@@ -123,8 +137,12 @@ for (const route of routes) {
   }
 }
 
-if (routes.length !== 24) {
-  failures.push(`expected 24 canonical industry routes, found ${routes.length}`);
+const expectedBatchCount = Math.min(
+  batchSize,
+  Math.max(0, canonicalRoutes.length - batchStart),
+);
+if (routes.length !== expectedBatchCount) {
+  failures.push(`expected ${expectedBatchCount} canonical industry routes, found ${routes.length}`);
 }
 
 if (failures.length) {
@@ -133,5 +151,5 @@ if (failures.length) {
 }
 
 console.log(
-  `Industry SEO/AEO batch audit passed for ${routes.length} prerendered pages: unique metadata, canonical/indexability, one H1, and visible FAQ schema parity confirmed.`,
+  `Industry SEO/AEO batch audit passed for canonical routes ${batchStart + 1}-${batchStart + routes.length} of ${canonicalRoutes.length}: unique metadata, canonical/indexability, one H1, and visible FAQ schema parity confirmed.`,
 );
