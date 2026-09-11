@@ -3905,7 +3905,7 @@ async function main() {
         throw new Error(`SEO assertion failed: promoted city robots policy mismatch: ${relativePath}`);
       }
       for (const source of expectedSources) {
-        if (!html.includes(`href="${source}"`)) throw new Error(`SEO assertion failed: promoted city source missing from ${relativePath}: ${source}`);
+        if (!html.includes(`href="${esc(source)}"`)) throw new Error(`SEO assertion failed: promoted city source missing from ${relativePath}: ${source}`);
       }
       if (locationsXml.includes(`<loc>${canonical}</loc>`) !== shouldIndex) {
         throw new Error(`SEO assertion failed: promoted city sitemap policy mismatch: ${relativePath}`);

@@ -30,6 +30,8 @@
   <url><loc>https://apexgrideng.com/architecture/locations/california/santa-ana/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/california/stockton/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/florida/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/architecture/locations/florida/fort-lauderdale/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/architecture/locations/florida/hialeah/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/florida/jacksonville/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/florida/miami/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/florida/orlando/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -39,20 +41,27 @@
   <url><loc>https://apexgrideng.com/architecture/locations/illinois/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/illinois/chicago/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/louisiana/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/architecture/locations/louisiana/baton-rouge/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/louisiana/new-orleans/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/texas/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/texas/arlington/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/texas/austin/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/architecture/locations/texas/brownsville/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/texas/corpus-christi/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/texas/dallas/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/texas/el-paso/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/texas/fort-worth/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/architecture/locations/texas/frisco/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/texas/houston/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/architecture/locations/texas/irving/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/texas/laredo/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/texas/lubbock/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/architecture/locations/texas/mckinney/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/texas/plano/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/texas/san-antonio/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/architecture/locations/texas/waco/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/washington/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/washington/seattle/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/architecture/locations/washington/spokane/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/architecture/locations/washington/tacoma/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>

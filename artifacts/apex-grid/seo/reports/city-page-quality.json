@@ -15,10 +15,34 @@
       }
     },
     {
+      "state": "pennsylvania",
+      "slug": "allentown",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "california",
       "slug": "anaheim",
       "lastVerified": "2026-09-11",
       "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "michigan",
+      "slug": "ann-arbor",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -111,10 +135,58 @@
       }
     },
     {
+      "state": "louisiana",
+      "slug": "baton-rouge",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "nebraska",
+      "slug": "bellevue",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "montana",
+      "slug": "billings",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "alabama",
       "slug": "birmingham",
       "lastVerified": "2026-09-11",
       "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "idaho",
+      "slug": "boise",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -135,8 +207,44 @@
       }
     },
     {
+      "state": "texas",
+      "slug": "brownsville",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "new-york",
       "slug": "buffalo",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "vermont",
+      "slug": "burlington",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 8,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "iowa",
+      "slug": "cedar-rapids",
       "lastVerified": "2026-09-11",
       "sourceCount": 7,
       "checks": {
@@ -159,6 +267,30 @@
       }
     },
     {
+      "state": "west-virginia",
+      "slug": "charleston",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "south-carolina",
+      "slug": "charleston",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "north-carolina",
       "slug": "charlotte",
       "lastVerified": "2026-09-11",
@@ -173,6 +305,18 @@
     {
       "state": "tennessee",
       "slug": "chattanooga",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "wyoming",
+      "slug": "cheyenne",
       "lastVerified": "2026-09-11",
       "sourceCount": 6,
       "checks": {
@@ -243,6 +387,18 @@
       }
     },
     {
+      "state": "south-carolina",
+      "slug": "columbia",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "ohio",
       "slug": "columbus",
       "lastVerified": "2026-09-11",
@@ -271,6 +427,18 @@
       "slug": "dallas",
       "lastVerified": "2026-09-11",
       "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "ohio",
+      "slug": "dayton",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -339,6 +507,54 @@
       }
     },
     {
+      "state": "north-dakota",
+      "slug": "fargo",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "arkansas",
+      "slug": "fayetteville",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "north-carolina",
+      "slug": "fayetteville",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "florida",
+      "slug": "fort-lauderdale",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "indiana",
       "slug": "fort-wayne",
       "lastVerified": "2026-09-11",
@@ -363,10 +579,34 @@
       }
     },
     {
+      "state": "maryland",
+      "slug": "frederick",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "california",
       "slug": "fresno",
       "lastVerified": "2026-09-11",
       "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "texas",
+      "slug": "frisco",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -411,8 +651,44 @@
       }
     },
     {
+      "state": "wisconsin",
+      "slug": "green-bay",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "north-carolina",
       "slug": "greensboro",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "mississippi",
+      "slug": "gulfport",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "pennsylvania",
+      "slug": "harrisburg",
       "lastVerified": "2026-09-11",
       "sourceCount": 6,
       "checks": {
@@ -447,6 +723,30 @@
       }
     },
     {
+      "state": "florida",
+      "slug": "hialeah",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "hawaii",
+      "slug": "honolulu",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "texas",
       "slug": "houston",
       "lastVerified": "2026-09-11",
@@ -471,10 +771,34 @@
       }
     },
     {
+      "state": "iowa",
+      "slug": "iowa-city",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "california",
       "slug": "irvine",
       "lastVerified": "2026-09-11",
       "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "texas",
+      "slug": "irving",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -639,6 +963,30 @@
       }
     },
     {
+      "state": "new-hampshire",
+      "slug": "manchester",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "texas",
+      "slug": "mckinney",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "tennessee",
       "slug": "memphis",
       "lastVerified": "2026-09-11",
@@ -711,6 +1059,18 @@
       }
     },
     {
+      "state": "connecticut",
+      "slug": "new-haven",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "louisiana",
       "slug": "new-orleans",
       "lastVerified": "2026-09-11",
@@ -739,6 +1099,30 @@
       "slug": "newark",
       "lastVerified": "2026-09-11",
       "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "virginia",
+      "slug": "norfolk",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "oklahoma",
+      "slug": "norman",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -807,6 +1191,18 @@
       }
     },
     {
+      "state": "kansas",
+      "slug": "overland-park",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "pennsylvania",
       "slug": "philadelphia",
       "lastVerified": "2026-09-11",
@@ -867,6 +1263,18 @@
       }
     },
     {
+      "state": "maine",
+      "slug": "portland",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "oregon",
       "slug": "portland",
       "lastVerified": "2026-09-11",
@@ -883,6 +1291,18 @@
       "slug": "providence",
       "lastVerified": "2026-09-11",
       "sourceCount": 8,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "utah",
+      "slug": "provo",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -939,10 +1359,34 @@
       }
     },
     {
+      "state": "minnesota",
+      "slug": "rochester",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "california",
       "slug": "sacramento",
       "lastVerified": "2026-09-11",
       "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "oregon",
+      "slug": "salem",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -1023,6 +1467,18 @@
       }
     },
     {
+      "state": "new-mexico",
+      "slug": "santa-fe",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "georgia",
       "slug": "savannah",
       "lastVerified": "2026-09-11",
@@ -1059,6 +1515,30 @@
       }
     },
     {
+      "state": "south-dakota",
+      "slug": "sioux-falls",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "indiana",
+      "slug": "south-bend",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "nevada",
       "slug": "sparks",
       "lastVerified": "2026-09-11",
@@ -1074,6 +1554,18 @@
       "state": "washington",
       "slug": "spokane",
       "lastVerified": "2026-09-10",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "missouri",
+      "slug": "springfield",
+      "lastVerified": "2026-09-11",
       "sourceCount": 6,
       "checks": {
         "unique": "pass",
@@ -1123,6 +1615,18 @@
       "slug": "stockton",
       "lastVerified": "2026-09-11",
       "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "washington",
+      "slug": "tacoma",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -1203,10 +1707,58 @@
       }
     },
     {
+      "state": "texas",
+      "slug": "waco",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "kansas",
       "slug": "wichita",
       "lastVerified": "2026-09-11",
       "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "delaware",
+      "slug": "wilmington",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 8,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "north-carolina",
+      "slug": "wilmington",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 7,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "massachusetts",
+      "slug": "worcester",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 6,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -1403,11 +1955,11 @@
     }
   ],
   "populationReviewSignal": "population below 10000 is flagged for human review; population is not proof of page quality",
-  "indexedCount": 102,
-  "noindexCount": 19226,
-  "excludedCount": 19226,
+  "indexedCount": 147,
+  "noindexCount": 19182,
+  "excludedCount": 19182,
   "excludedReasons": {
-    "review-signal-population-below-10000": 16143,
+    "review-signal-population-below-10000": 16142,
     "city-slug-identity-mismatch": 18
   },
   "anomalies": [
@@ -19109,15 +19661,6 @@
       "state": "georgia",
       "slug": "zebulon",
       "name": "Zebulon",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-10000"
-      ]
-    },
-    {
-      "state": "hawaii",
-      "slug": "honolulu",
-      "name": "Honolulu",
       "status": "excluded",
       "reasons": [
         "review-signal-population-below-10000"

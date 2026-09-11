@@ -1,0 +1,25 @@
+import type { CityData } from "../types";
+
+export const boise: CityData = {
+  slug: "boise",
+  name: "Boise",
+  stateSlug: "idaho",
+  county: "Ada County",
+  ahj: { office: "City of Boise Planning and Development Services", process: "Commercial permits are submitted and tracked through Boise's online permitting services, with plan review coordinated across building, planning, fire, and public-works requirements. A pre-application meeting is useful for larger projects, and separate zoning, design-review, or right-of-way approvals may be required." },
+  codes: { building: "2018 Idaho Building Code (2018 IBC with Idaho amendments)", energy: "2018 Idaho Energy Conservation Code (2018 IECC with Idaho amendments)", amendments: "Idaho adopts construction codes statewide; Boise's zoning, design-review, fire, and development standards are local overlays rather than a separate city building-code edition. Confirm parcel-specific Boise development standards and adopted fire requirements at intake." },
+  utilities: { electric: "Idaho Power", notes: "Idaho Power provides electric service and manages distributed-generation interconnection. Boise's Public Works Department and Boise City Ada County utility arrangements govern water, wastewater, and stormwater interfaces; service capacity and frontage work should be checked before final civil design." },
+  climateNotes: "Boise is ASHRAE climate zone 5B, with cold winters, hot dry summers, temperature swings, winter inversions, and smoke exposure from regional wildfires.",
+  marketNotes: "Boise's market includes technology and advanced manufacturing, healthcare, logistics, housing, and steady downtown and suburban commercial growth. Rapid expansion makes utility capacity, transportation access, and neighborhood compatibility important schedule items.",
+  narratives: {
+    mep: "Boise MEP design works within 5B heating and cooling swings and periodic wildfire smoke. We coordinate Idaho Power service and interconnection early, select ventilation and filtration strategies that can respond to smoke events, and use the 2018 Idaho energy path to align envelope, HVAC, and lighting decisions before Boise plan review.",
+    structural: "Boise structural work uses Idaho's 2018 IBC basis with site-specific snow, wind, seismic, and geotechnical inputs. The Treasure Valley's variable soils and winter conditions make the geotechnical report important for foundations, while rooftop equipment and snow drift need explicit coordination rather than a generic low-snow assumption.",
+    civil: "Civil work in Boise coordinates municipal development standards, Idaho Power corridors, water and wastewater service, stormwater, and transportation improvements. We screen floodplain and drainage constraints early and reserve space for treatment or detention so a growing suburban site does not discover civil conflicts at building submittal.",
+    energy: "The 2018 Idaho Energy Conservation Code governs commercial compliance. Boise's 5B climate rewards a tight, well-insulated envelope and efficient heat pumps or other high-efficiency systems, while smoke-resilient ventilation and Idaho Power service planning should be considered in the same schematic energy model.",
+  },
+  faqs: [
+    { q: "Is Boise's building code different from Idaho's statewide code?", a: "Idaho adopts the building and energy codes statewide, while Boise adds local zoning, development, design-review, and administrative requirements. Confirm the parcel's overlays and current city submittal requirements with Planning and Development Services." },
+    { q: "Which utility serves Boise commercial projects?", a: "Idaho Power is the electric utility. Water, wastewater, stormwater, and frontage requirements involve Boise and related local public-works providers, so capacity and connection points should be verified for the actual parcel." },
+    { q: "What conditions drive Boise engineering?", a: "Cold winters, hot dry summers, temperature swings, snow, variable Treasure Valley soils, and wildfire smoke are key inputs. The geotechnical report and current city drainage and floodplain requirements should drive site-specific design." },
+  ],
+  research: { lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review", supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"], priority: { commercialOpportunity: 82, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" }, sources: { ahj: ["https://www.cityofboise.org/departments/planning-and-development-services/"], codes: ["https://dbs.idaho.gov/codes-rules/"], amendments: ["https://www.cityofboise.org/departments/planning-and-development-services/"], utilities: ["https://www.idahopower.com/business/"], climate: ["https://www.weather.gov/boi/climate"], market: ["https://commerce.idaho.gov/"] } },
+};

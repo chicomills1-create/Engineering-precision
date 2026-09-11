@@ -1,0 +1,21 @@
+import type { CityData } from "../types";
+export const iowaCity: CityData = {
+  slug: "iowa-city", name: "Iowa City", stateSlug: "iowa", county: "Johnson County",
+  ahj: { office: "City of Iowa City Housing and Inspection Services", process: "Iowa City receives commercial permits and coordinates inspections through Housing and Inspection Services; zoning, site plan, fire, floodplain, and public-works approvals can be separate. Iowa's statewide building-code adoptions supply the commercial baseline." },
+  codes: { building: "2015 International Building Code with Iowa amendments", energy: "2012 International Energy Conservation Code with Iowa amendments", amendments: "The statewide Iowa framework applies, with Iowa City zoning, historic-district, floodplain, stormwater, and public-right-of-way requirements reviewed separately." },
+  utilities: { electric: "MidAmerican Energy", notes: "MidAmerican coordinates electric and gas service. Iowa City provides water and sanitary sewer; confirm service capacity, fire flow, extensions, and watershed/stormwater requirements." },
+  climateNotes: "Iowa City is climate zone 5A, with cold winters, humid summers, freeze-thaw, thunderstorms, and Iowa River floodplain exposure. Loess, alluvial soils, slopes, and groundwater make geotechnical and drainage work site-specific.",
+  marketNotes: "The University of Iowa, UI Health Care, education, research, technology, and downtown infill support Iowa City's institutional and mixed-use market. Campus and historic-area projects need occupied-site, utility, and review coordination.",
+  narratives: {
+    mep: "Iowa City MEP systems must handle 5A winter heating, freeze protection, and summer latent loads. MidAmerican capacity and city water/fire flow are confirmed early for university, healthcare, and mixed-use projects. We pair Iowa's energy baseline with reliable controls and phased operations.",
+    structural: "Iowa City structural design addresses snow, wind, frost, severe storms, and variable loess/alluvial soils. Iowa River floodplain and sloped sites can change foundation and finished-floor assumptions. Historic and campus work adds existing-condition and vibration coordination.",
+    civil: "Civil design coordinates Iowa City grading, stormwater, water, sanitary, floodplain, and public-way reviews. Iowa River drainage, steep or erodible slopes, loess soils, and qualifying construction-stormwater requirements can control outlets and detention. Historic infill also has constrained utility corridors.",
+    energy: "Commercial compliance follows Iowa's 2012 IECC-based requirements with amendments. In 5A, envelope continuity, frost-safe heating, moisture control, and lighting controls affect performance; MidAmerican demand and university schedules should inform system selection."
+  },
+  faqs: [
+    { q: "What building and energy codes apply in Iowa City?", a: "Iowa City uses Iowa's 2015 IBC-based commercial building framework with Iowa amendments and 2012 IECC-based commercial energy requirements." },
+    { q: "Which utilities serve Iowa City?", a: "MidAmerican Energy provides electric and gas service; the City provides water and sanitary sewer. Capacity, fire flow, and extensions are site-specific." },
+    { q: "What makes Iowa City civil work site-specific?", a: "Iowa River floodplain, loess and alluvial soils, slopes, erosion, freeze-thaw, and stormwater outlet requirements can change grading and foundation assumptions." }
+  ],
+  research: { lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review", supportedServiceSlugs: ["mep-engineering","structural-engineering","civil-engineering","energy-code-compliance"], priority: { commercialOpportunity: 75, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" }, sources: { ahj: ["https://www.icgov.org/government/departments-and-divisions/housing-and-inspection-services"], codes: ["https://www.legis.iowa.gov/law/administrativeRules/rules?agency=661&chapter=301"], amendments: ["https://codelibrary.amlegal.com/codes/iowacity/latest/overview"], utilities: ["https://www.midamericanenergy.com/","https://www.icgov.org/government/departments-and-divisions/water-division"], climate: ["https://www.weather.gov/dmx/"], market: ["https://www.iowacityarea.com/"] } }
+};

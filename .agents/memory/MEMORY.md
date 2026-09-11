@@ -46,4 +46,5 @@
 - [SEO generator path ownership](seo-generator-path-ownership.md) — seo:generate can overwrite React-owned hub HTML; run the production build afterward to restore canonical prerenders.
 - [Promoted city evidence inheritance](promoted-city-evidence.md) — specialty location pages can overwrite generic city-service HTML and must preserve the promoted city’s verified source links.
 - [City service slug consistency](city-service-slugs.md) — service-support identifiers must match canonical route slugs; aliases can silently keep valid city pages noindex.
+- [Duplicate city filenames](duplicate-city-filenames.md) — same-name cities in different states need state-qualified module filenames while preserving their canonical city slug.
 - [Autoscale recurring jobs](autoscale-recurring-jobs.md) — in-process timers are not durable schedulers; use persisted slot claims plus startup catch-up and replica-safe claiming.
