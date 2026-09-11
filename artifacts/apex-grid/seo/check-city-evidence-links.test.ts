@@ -26,25 +26,28 @@ test("accepts the expected host and its subdomains but not lookalike domains", (
 });
 
 test("accepts an authoritative redirect to a specific page", async () => {
-  const result = await checkEvidenceTarget(reviewedTarget, {
-    fetchImpl: mockFetch([{ status: 403 }]),
-    now: new Date("2026-12-10T00:00:00Z"),
+  const result = await checkEvidenceTarget(target, {
+    fetchImpl: mockFetch([
+      { status: 301, location: "https://city.example.gov/departments/building/current-codes" },
+      { status: 200 },
+    ]),
+  });
+  assert.equal(result.status, "ok");
+});
+
+test("rejects redirects away from the expected authority", async () => {
+  const result = await checkEvidenceTarget(target, {
+    fetchImpl: mockFetch([{ status: 302, location: "https://example.com/codes" }]),
   });
   assert.equal(result.status, "off-domain-redirect");
 });
 
 test("reports redirects that collapse evidence to a generic landing page", async () => {
-  const result = await checkEvidenceTarget(reviewedTarget, {
-    fetchImpl: mockFetch([{ status: 403 }]),
-    now: new Date("2026-12-10T00:00:00Z"),
-  });
-  assert.equal(result.status, "off-domain-redirect");
-});
-
-test("reports redirects that collapse evidence to a generic landing page", async () => {
-  const result = await checkEvidenceTarget(reviewedTarget, {
-    fetchImpl: mockFetch([{ status: 403 }]),
-    now: new Date("2026-12-10T00:00:00Z"),
+  const result = await checkEvidenceTarget(target, {
+    fetchImpl: mockFetch([
+      { status: 301, location: "https://city.example.gov/" },
+      { status: 200 },
+    ]),
   });
   assert.equal(result.status, "generic-redirect");
 });
@@ -62,9 +65,9 @@ test("reports HTTP and network failures distinctly", async () => {
 
 test("accepts only the reviewed failure class for an explicit exception", async () => {
   const reviewedTarget: EvidenceTarget = {
-    url: "https://msc.fema.gov/portal/home",
-    expectedDomains: ["msc.fema.gov"],
-    references: [{ city: "Example, state", category: "climate" }],
+    url: "https://codes.iccsafe.org/content/AZTEMPEBC2018P1",
+    expectedDomains: ["codes.iccsafe.org"],
+    references: [{ city: "Example, state", category: "codes" }],
   };
 
   const expectedBlock = await checkEvidenceTarget(reviewedTarget, {
@@ -88,11 +91,11 @@ test("accepts only the reviewed failure class for an explicit exception", async 
   }
 });
 
-test("fails a reviewed exception once its review interval expires", async () => {
+test("accepts only the reviewed low-level cause for a network exception", async () => {
   const reviewedTarget: EvidenceTarget = {
-    url: "https://msc.fema.gov/portal/home",
-    expectedDomains: ["msc.fema.gov"],
-    references: [{ city: "Example, state", category: "climate" }],
+    url: "https://novusplace.com/",
+    expectedDomains: ["novusplace.com"],
+    references: [{ city: "Example, state", category: "market" }],
   };
 
   function fetchFailure(code: string): typeof fetch {
@@ -102,18 +105,18 @@ test("fails a reviewed exception once its review interval expires", async () => 
     }) as typeof fetch;
   }
 
-  const expectedReset = await checkEvidenceTarget(reviewedTarget, {
-    fetchImpl: fetchFailure("ECONNRESET"),
-    now: new Date("2026-09-11T00:00:00Z"),
+  const expectedTlsRejection = await checkEvidenceTarget(reviewedTarget, {
+    fetchImpl: fetchFailure("ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE"),
+    now: new Date("2026-12-09T23:59:59Z"),
   });
-  assert.equal(expectedReset.status, "reviewed-exception");
-  assert.equal(expectedReset.networkErrorCode, "ECONNRESET");
+  assert.equal(expectedTlsRejection.status, "reviewed-exception");
+  assert.equal(expectedTlsRejection.networkErrorCode, "ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE");
 
   for (const code of ["ENOTFOUND", "CERT_HAS_EXPIRED", "ETIMEDOUT", "ECONNREFUSED"]) {
     const differentCause = await checkEvidenceTarget(reviewedTarget, {
       fetchImpl: fetchFailure(code),
     });
-    assert.equal(differentCause.status, "inaccessible", `${code} must not match a reviewed ECONNRESET exception`);
+    assert.equal(differentCause.status, "inaccessible", `${code} must not match the reviewed TLS exception`);
     assert.equal(differentCause.networkErrorCode, code);
   }
 
@@ -124,6 +127,22 @@ test("fails a reviewed exception once its review interval expires", async () => 
   });
   assert.equal(timeout.status, "inaccessible");
   assert.equal(timeout.networkErrorCode, "TimeoutError");
+});
+
+test("fails a reviewed exception once its review interval expires", async () => {
+  const reviewedTarget: EvidenceTarget = {
+    url: "https://codes.iccsafe.org/content/AZTEMPEBC2018P1",
+    expectedDomains: ["codes.iccsafe.org"],
+    references: [{ city: "Example, state", category: "codes" }],
+  };
+
+  const result = await checkEvidenceTarget(reviewedTarget, {
+    fetchImpl: mockFetch([{ status: 403 }]),
+    now: new Date("2026-12-10T00:00:00Z"),
+  });
+  assert.equal(result.status, "expired-exception");
+  assert.match(result.detail ?? "", /exception review past due/);
+  assert.match(result.detail ?? "", /previously reviewed 2026-09-11/);
 });
 
 test("formats categorized failures with their city references", () => {

@@ -86,7 +86,7 @@ export const scottsdale: CityData = {
       ],
       climate: [
         "https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/city/time-series",
-        "https://hazards.fema.gov/femaportal/wps/portal/NFHLW",
+        "https://gis-fema.hub.arcgis.com/maps/ae38b6f94eaf4abf97f986fa01921e13/about",
         "https://www.scottsdaleaz.gov/stormwater",
       ],
       market: [

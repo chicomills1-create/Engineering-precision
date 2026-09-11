@@ -86,7 +86,7 @@ export const glendale: CityData = {
       climate: [
         "https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/city/time-series",
         "https://www.ashrae.org/technical-resources/bookstore/standards-62-1-62-2",
-        "https://msc.fema.gov/portal/home",
+        "https://gis-fema.hub.arcgis.com/maps/ae38b6f94eaf4abf97f986fa01921e13/about",
         "https://www.maricopa.gov/1830/Air-Quality",
       ],
       market: [

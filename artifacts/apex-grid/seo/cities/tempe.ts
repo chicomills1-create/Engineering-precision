@@ -85,7 +85,7 @@ export const tempe: CityData = {
         "https://www.weather.gov/psr/",
         "https://www.ncei.noaa.gov/access/us-climate-normals/",
         "https://www.weather.gov/psr/heat",
-        "https://msc.fema.gov/portal/home",
+        "https://gis-fema.hub.arcgis.com/maps/ae38b6f94eaf4abf97f986fa01921e13/about",
       ],
       market: [
         "https://www.tempe.gov/businesses/economic-development",
