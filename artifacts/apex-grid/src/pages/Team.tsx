@@ -18,9 +18,9 @@ import {
 } from "lucide-react";
 
 const STATS = [
-  { value: "20+", label: "Engineers on Staff" },
-  { value: "49", label: "States with PE Licensure" },
-  { value: "4", label: "Core Disciplines In-House" },
+  { value: "Multi-discipline", label: "Engineering Team" },
+  { value: "Multi-state", label: "Coverage Verified Per Project" },
+  { value: "4", label: "Core Disciplines Coordinated" },
   { value: "12-24hr", label: "Typical Quote Turnaround" },
 ];
 
@@ -35,8 +35,8 @@ const GROUPS = [
   {
     icon: PenTool,
     title: "Architectural Design Studio",
-    lead: "Registered architects with multi-state licensure",
-    body: "Full architectural design — concept, space planning, and permit-ready construction documents — produced in the same office as the engineering, so the architecture and the systems behind it never fall out of sync.",
+    lead: "Architecture support subject to credential verification",
+    body: "Full architectural design — concept, space planning, and permit-ready construction documents — coordinated with engineering. The responsible architect, firm authorization, discipline, and authority having jurisdiction are confirmed for each project.",
     scope: ["Concept & schematic design", "Construction documents", "Code & accessibility compliance"],
   },
   {
@@ -70,9 +70,9 @@ const GROUPS = [
   {
     icon: Stamp,
     title: "Licensed Professional Engineers",
-    lead: "In-house PEs, licensed in 49 states",
-    body: "Every project is reviewed and stamped by our in-house Professional Engineers — never outsourced. Multi-state licensure means one firm can carry your project anywhere in the country.",
-    scope: ["Plan review & stamping", "Jurisdiction correspondence", "Multi-state licensure management"],
+    lead: "PE support subject to project-specific verification",
+    body: "Where professional engineering services are engaged, the responsible individual license, firm authorization, discipline, and authority having jurisdiction are verified before any review, seal, or stamp. Availability and delivery arrangements are confirmed in the project scope.",
+    scope: ["Plan review & sealing when authorized", "Jurisdiction correspondence", "Project-specific credential review"],
   },
 ];
 
@@ -96,7 +96,7 @@ export default function Team() {
               The <span className="text-primary">Team</span>
             </h1>
             <p className="text-xl md:text-2xl text-foreground/80 leading-relaxed border-l-4 border-primary pl-6">
-              A multifaceted organization spanning Engineering, Architecture, and General Contracting — with more than 20 engineers on staff and construction delivery through PCM.
+              A multifaceted organization spanning Engineering, Architecture, and General Contracting — with construction delivery through PCM.
             </p>
           </div>
         </div>
@@ -120,7 +120,7 @@ export default function Team() {
           <div className="max-w-3xl mb-16">
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">How We're Organized</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Our clients can keep the full build lifecycle under one accountable organization: Engineering, Architecture, and General Contracting. Every design group below works under the direct review of our in-house Professional Engineers.
+              Our clients can coordinate the build lifecycle across Engineering, Architecture, and General Contracting. Responsible professionals and project delivery arrangements are confirmed for each scope.
             </p>
           </div>
 
@@ -150,7 +150,7 @@ export default function Team() {
             <span className="font-mono text-xs uppercase tracking-widest text-primary mb-4 block">Engineering Leadership</span>
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">The People <span className="text-muted-foreground">Behind the Work</span></h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              A senior engineering team built to move projects from scope to stamped, coordinated deliverables without unnecessary handoffs.
+              A senior engineering team built to move projects from scope to coordinated deliverables, with any responsible professional and sealing role confirmed per project.
             </p>
           </div>
 
@@ -248,7 +248,7 @@ export default function Team() {
               <span className="font-mono text-xs uppercase tracking-widest text-primary mb-4 block">Architectural Design Studio</span>
               <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">Architecture <span className="text-muted-foreground">Leadership</span></h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Our registered architects bring design leadership and permit-ready documentation to the same coordinated team as Apex Grid's structural, MEP, and civil engineers.
+                Architecture support and permit-ready documentation are coordinated with Apex Grid's structural, MEP, and civil engineering scopes. Responsible architect credentials and authorization are verified per project.
               </p>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -265,13 +265,13 @@ export default function Team() {
                 <h3 className="text-3xl font-display font-bold mb-6">Jason Mitchell</h3>
                 <div className="space-y-5 text-muted-foreground leading-relaxed">
                   <p>
-                    Jason Mitchell is a native of Rochester, New York. He holds a Professional Degree of Architecture with Honors from the Illinois Institute of Technology in Chicago, Illinois, and is a licensed architect in Florida, California, Louisiana, Texas, Alabama, and Illinois.
+                     Jason Mitchell is a native of Rochester, New York. He holds a Professional Degree of Architecture with Honors from the Illinois Institute of Technology in Chicago, Illinois. Any architect-of-record role, state license, and firm authorization must be verified against current official records for the specific project.
                   </p>
                   <p>
                     With 17 years of experience, Jason has actively participated in projects throughout the world, ranging from single-family residential to multi-billion-dollar commercial developments. Beyond design, his background includes roles in construction and in various development capacities.
                   </p>
                   <p>
-                    Jason has been appointed to numerous development, political, charitable, and philanthropic boards. He currently leads our architectural work across the Los Angeles, Miami, and Houston markets.
+                     Jason has been appointed to numerous development, political, charitable, and philanthropic boards. He supports architectural coordination for projects in markets where the responsible professional's current credentials and AHJ requirements have been verified.
                   </p>
                 </div>
               </article>
@@ -279,23 +279,23 @@ export default function Team() {
                 <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden">
                   <img
                     src={jamesImg}
-                    alt="James Spencer, Registered Architect and NCARB certificate holder"
+                     alt="James Spencer, architecture professional"
                     className="w-full h-full object-cover object-top"
                     loading="lazy"
                   />
                 </div>
-                <span className="font-mono text-xs uppercase tracking-widest text-primary mb-4 block">Registered Architect · NCARB</span>
+                 <span className="font-mono text-xs uppercase tracking-widest text-primary mb-4 block">Architecture Professional · Credentials Verified Per Project</span>
                 <h3 className="text-3xl font-display font-bold mb-6">James Spencer</h3>
                 <div className="space-y-5 text-muted-foreground leading-relaxed">
                   <p>
-                    James Spencer is a registered architect and NCARB certificate holder supporting Apex Grid's architectural practice.
+                     James Spencer supports Apex Grid's architectural practice. Any registered-architect credential, NCARB status, and project role must be confirmed from current official records before reliance.
                   </p>
                   <p>
-                    James is licensed to practice architecture in California, Arizona, Texas, and Washington, extending the team's architectural coverage across key project markets.
+                     James may support projects where the responsible architect's current state license, firm authorization, discipline, and AHJ requirements have been verified.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-8 pt-6 border-t border-border">
-                  {["California", "Arizona", "Texas", "Washington"].map((state) => (
+                  {["Project-specific state verification", "Firm authorization", "AHJ requirements"].map((state) => (
                     <span key={state} className="px-3 py-1.5 bg-secondary text-xs font-bold uppercase tracking-wider text-foreground">
                       {state}
                     </span>
@@ -344,7 +344,7 @@ export default function Team() {
             Put the Team on Your Project
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-            Send us your scope and get a clear proposal fast — deliverables, timeline, and fee. Any size job, across 49 states.
+            Send us your scope and get a clear proposal fast — deliverables, timeline, and fee. Any size job, multi-state, with project availability confirmed after individual license, firm authorization, discipline, and AHJ requirements are verified.
           </p>
           <Link
             href="/contact"
@@ -359,8 +359,8 @@ export default function Team() {
 }
 
 const PAGE_META = {
-  title: "Our Engineering & Architecture Team | PEs in 49 States | Apex Grid",
-  description: "Meet Apex Grid Engineering's executive, architecture, and engineering team, including Chief People Officer Angel Endres, registered architects Jason Mitchell and James Spencer, and the PCM construction delivery branch.",
+  title: "Our Engineering & Architecture Team | Project-specific credential verification | Apex Grid",
+  description: "Meet Apex Grid Engineering's executive, architecture, and engineering team, including Chief People Officer Angel Endres, architecture professionals, and the PCM construction delivery branch. Credentials and authorization are confirmed per project.",
   path: "/team",
 };
 
@@ -388,10 +388,9 @@ const TEAM_SCHEMA = {
       {
         "@type": "Person",
         name: "James Spencer",
-        jobTitle: "Registered Architect",
-        hasCredential: { "@type": "EducationalOccupationalCredential", credentialCategory: "NCARB Certificate" },
+        jobTitle: "Architecture Professional (credentials verified per project)",
         worksFor: { "@type": "Organization", name: "Apex Grid Engineering" },
-        knowsAbout: ["Architecture", "California architecture", "Arizona architecture", "Texas architecture", "Washington architecture"],
+        knowsAbout: ["Architecture", "Project-specific credential verification", "AHJ coordination"],
       },
       {
         "@type": "Person",
@@ -510,7 +509,7 @@ const PCM_TEAM = [
   {
     name: "Rick Coleman, AIA, LEED",
     role: "Partner · Pre-Construction Services",
-    bio: "Rick is a licensed architect with more than 25 years in architecture, construction management, and real estate development. He leads pre-construction planning, budgeting, scheduling, approvals, and project management.",
+    bio: "Rick brings more than 25 years in architecture, construction management, and real estate development. Any architect-of-record role or license reliance is subject to current credential, firm-authorization, discipline, and AHJ verification for the project. He leads pre-construction planning, budgeting, scheduling, approvals, and project management.",
   },
   {
     name: "Tom Bell",

@@ -42,7 +42,7 @@ export const MEP_RESOURCE_ARTICLES: ResourceArticle[] = [
 <h2>Related Services</h2>
 <ul>
 <li><a href="/services/mep">MEP Engineering Services</a></li>
-<li><a href="/services/architecture">In-House Architecture</a></li>
+<li><a href="/services/architecture">architecture partner or project-specific architecture</a></li>
 <li><a href="/permit-engineering/">Permit Engineering</a></li>
 <li><a href="/contact">Request a Quote</a></li>
 </ul>
@@ -86,12 +86,12 @@ export const MEP_RESOURCE_ARTICLES: ResourceArticle[] = [
 <p>PDF is fine to start and to scope. CAD backgrounds speed production because we can draft directly over them, but we can work from PDFs when CAD isn't available.</p>
 
 <h3>Do you coordinate with the architect and structural engineer?</h3>
-<p>Yes. MEP design is coordinated with the architectural and structural documents. Our in-house architecture and structural teams make that coordination faster on integrated projects.</p>
+<p>Yes. MEP design is coordinated with the architectural and structural documents. Our architecture partner or project-specific architecture and structural teams make that coordination faster on integrated projects.</p>
 
 <h2>Related Services</h2>
 <ul>
 <li><a href="/services/mep">MEP Engineering Services</a></li>
-<li><a href="/services/architecture">In-House Architecture</a></li>
+<li><a href="/services/architecture">architecture partner or project-specific architecture</a></li>
 <li><a href="/services/structural">Structural Engineering</a></li>
 <li><a href="/contact">Request a Quote</a></li>
 </ul>
@@ -140,7 +140,7 @@ export const MEP_RESOURCE_ARTICLES: ResourceArticle[] = [
 <h2>Related Services</h2>
 <ul>
 <li><a href="/services/mep">MEP Engineering Services</a></li>
-<li><a href="/services/architecture">In-House Architecture</a></li>
+<li><a href="/services/architecture">architecture partner or project-specific architecture</a></li>
 <li><a href="/services/structural">Structural Engineering</a></li>
 <li><a href="/contact">Start a Project</a></li>
 </ul>
@@ -413,7 +413,7 @@ export const MEP_RESOURCE_ARTICLES: ResourceArticle[] = [
 <h2>Related Services</h2>
 <ul>
 <li><a href="/services/mep">MEP Engineering Services</a></li>
-<li><a href="/services/architecture">In-House Architecture</a></li>
+<li><a href="/services/architecture">architecture partner or project-specific architecture</a></li>
 <li><a href="/permit-engineering/">Permit Engineering</a></li>
 <li><a href="/contact">Request a Quote</a></li>
 </ul>

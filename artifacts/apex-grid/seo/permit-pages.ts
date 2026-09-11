@@ -26,10 +26,10 @@ export const PERMIT_PAGES: PermitPage[] = [
       "Plumbing PE-stamped drawings",
       "Civil PE-stamped site drawings",
       "Multi-discipline permit packages",
-      "Out-of-state PE licensure for your jurisdiction",
+      "Project-specific PE licensure review for your jurisdiction",
       "Digital and wet-stamped documents",
     ],
-    note: "Apex Grid does not offer PE stamps as a stand-alone service. Our licensed engineers design, calculate, review, and seal their own work — taking full professional responsibility for every document they produce.",
+    note: "Apex Grid does not offer PE stamps as a stand-alone service. Where authorized for a project, the responsible licensed engineer designs, calculates, reviews, and seals work within the applicable scope and takes professional responsibility for those documents.",
   },
   {
     slug: "plan-check-responses",
@@ -105,7 +105,7 @@ export const PERMIT_PAGES: PermitPage[] = [
 
 export const PERMIT_HUB = {
   title: "Permit Engineering & PE Drawings | Apex Grid Engineering",
-  description: "PE-stamped engineering drawings, calculations, plan check responses, and permit revisions for structural, MEP, and civil building permits.",
+  description: "Project-specific PE-stamped engineering drawings, calculations, plan check responses, and permit revisions for structural, MEP, and civil building permits, subject to jurisdiction and engineer review.",
   h1: "Permit-Ready Engineering Drawings and Calculations",
-  lede: "Many commercial building permits require engineering documentation — drawings, calculations, and professional review by appropriately licensed engineers. We produce defined permit packages and support the process from initial submittal through jurisdiction review; approval remains with the authority.",
+  lede: "Many commercial building permits require engineering documentation — drawings, calculations, and professional review by appropriately licensed engineers. After project scope, discipline, jurisdiction, and engineer availability are confirmed, we can produce a defined permit package and support jurisdiction review; approval remains with the authority.",
 };

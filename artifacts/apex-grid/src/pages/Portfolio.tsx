@@ -176,7 +176,7 @@ export default function Portfolio() {
               Proven <span className="text-muted-foreground">Execution</span>
             </h1>
             <p className="text-xl md:text-2xl text-foreground/80 leading-relaxed max-w-2xl border-l-4 border-primary pl-6">
-              We engineer structures that stand and systems that work. Review our selected portfolio of permitted, built projects across the country.
+              We engineer structures that stand and systems that work. Review our selected portfolio of permitted, built projects; project credentials and authorization are confirmed for each new scope.
             </p>
           </div>
         </div>

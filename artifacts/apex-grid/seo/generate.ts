@@ -76,7 +76,7 @@ const PUBLIC = path.resolve(__dirname, "../public");
 const OUT = path.join(PUBLIC, "locations");
 
 /** States where Apex Grid is NOT licensed — no pages are generated for these
- * (the site markets "licensed in 49 states"; claiming licensed services in an
+ * (the site markets "with multi-state PE coverage confirmed per project"; claiming licensed services in an
  * unlicensed state would be a misrepresentation). */
 const UNLICENSED_STATES = new Set(["alaska"]);
 
@@ -555,7 +555,7 @@ ${breadcrumb(crumbs)}
 
 <section class="ctaband"><div class="container">
   <h2>Start Your ${esc(state.name)} Project</h2>
-  <p>With a team of licensed PEs and 20+ engineers on staff, we're ready to take on projects of any size — and we turn quotes around fast. Send us your scope and get a clear proposal: deliverables, timeline, and fee.</p>
+  <p>For projects whose jurisdiction, discipline, and scope pass review, an available licensed PE and coordinated team can be identified. Send us your scope for a proposal; timing and fee depend on the project.</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
 
@@ -669,14 +669,14 @@ function hubPage(states: StateData[], cities: CityData[]): string {
   const body = `
 ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
-  <p class="kicker">Nationwide Coverage</p>
+  <p class="kicker">Verified Service Areas</p>
   <h1>Service <span class="dim">Areas</span></h1>
-  <p class="lede">Apex Grid provides MEP, structural, civil, and energy-compliance engineering across 49 states through multi-state PE licensure — backed by over 15 years of expertise. Every state page below covers the adopted codes, climate drivers, and permitting landscape that shape design there.</p>
+  <p class="lede">Apex Grid publishes MEP, structural, civil, and energy-compliance guidance for multiple jurisdictions. Service availability is not inferred from a location page: before accepting a project, we verify the responsible individual's current license, firm authorization, discipline, and AHJ requirements.</p>
 </div></section>
 <section class="block"><div class="container">
   <h2>One Organization, <em>Three Divisions</em></h2>
   <div class="grid3">
-    <a class="card" href="/locations/"><div class="label">Engineering</div><h3>Engineering Service Areas</h3><p>MEP, structural, civil, and energy-code services across 49 licensed states.</p></a>
+    <a class="card" href="/locations/"><div class="label">Engineering</div><h3>Engineering Service Areas</h3><p>MEP, structural, civil, and energy-code services with project-specific multi-state coverage confirmed.</p></a>
     <a class="card" href="/architecture/locations/"><div class="label">Architecture</div><h3>Architectural Design Locations</h3><p>City and state pages where supplied architect credentials support regulated design services.</p></a>
     <a class="card" href="/general-contracting/locations/"><div class="label">PCM Construction Delivery</div><h3>General Contracting Locations</h3><p>Commercial construction service areas backed by PCM's supplied contractor licenses.</p></a>
     <a class="card" href="/engineering-intent/engineering-near-me/"><div class="label">Project Intake</div><h3>Commercial Engineering Firm Near Me</h3><p>Understand search location, remote plan production, site visits, and jurisdiction review before requesting support.</p></a>
@@ -704,14 +704,14 @@ ${breadcrumb(crumbs)}
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Don't See Your Jurisdiction?</h2>
-  <p>Our team of licensed PEs and 20+ engineers works city-by-city, with fast quote turnaround on every request. Tell us where your project is and we'll confirm licensure and local code requirements in one call.</p>
+  <p>Tell us where your project is and we'll verify the requested discipline, responsible individual's PE licensure, firm authorization, and local code requirements before confirming an available engineering path.</p>
   <a class="cta" href="/contact">Contact Us</a>
 </div></section>`;
 
   return htmlShell({
-    title: "Service Areas | Engineering Services in 49 States | Apex Grid",
+    title: "Service Areas | Engineering Services in Multiple Jurisdictions | Apex Grid",
     description:
-      "Apex Grid Engineering provides licensed MEP, structural, civil, and energy code compliance services across 49 US states. Find your state's codes and requirements.",
+      "Apex Grid Engineering provides multi-state MEP, structural, civil, and energy-code support. Project availability and required professional credentials are verified for the exact jurisdiction and scope.",
     canonical: `${SITE}/locations/`,
     schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
     body,
@@ -745,7 +745,7 @@ function cityLitePage(state: StateData, city: DirectoryCity, siblings: Directory
   const faqs = [
     {
       q: `Does Apex Grid provide engineering services in ${city.name}, ${state.abbrev}?`,
-      a: `Yes. Apex Grid provides MEP, structural, civil, and energy-code engineering for qualifying ${city.name} projects under its multi-state PE licensure. The team confirms the applicable local code editions, amendments, and permit requirements before design begins.`,
+      a: `Potentially, subject to project-specific review. For qualifying ${city.name} projects, Apex Grid confirms the responsible individual's current license, firm authorization, discipline, and AHJ requirements, along with local code editions, amendments, and permit requirements, before design begins.`,
     },
     {
       q: `Which building code applies to a project in ${city.name}?`,
@@ -771,7 +771,7 @@ function cityLitePage(state: StateData, city: DirectoryCity, siblings: Directory
     "@context": "https://schema.org",
     "@type": "Service",
     name: `Engineering Services in ${city.name}, ${state.abbrev}`,
-    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    provider: { "@id": `${SITE}/#business` },
     areaServed: { "@type": "City", name: `${city.name}, ${state.abbrev}` },
     serviceType: "Architectural, MEP, structural, civil, and energy-compliance design",
   };
@@ -835,7 +835,7 @@ ${availableVerticals
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Build in ${esc(city.name)} with Apex Grid</h2>
-  <p>With licensed PEs, an in-house architect, and 20+ engineers on staff, we take on ${esc(city.name)} projects of any size — with fast quote turnaround on every request.</p>
+  <p>With licensed PEs, architecture coordination subject to project-specific credential verification, and a multi-discipline engineering team, we take on ${esc(city.name)} projects of any size — with fast quote turnaround on every request.</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
 
@@ -916,7 +916,7 @@ ${post.faqs?.length ? `<section class="block"><div class="container faq">
   <h2>Have a Project in Mind?</h2>
   <p>${post.tag === "South Africa"
     ? "Planning a South Africa opportunity? We can help define the cross-border brief and identify the local registrations and partnerships that must be verified."
-    : "Architectural, MEP, structural, and civil design under one roof — licensed in 49 states, with fast quote turnaround."}</p>
+    : "Architectural, MEP, structural, and civil design under one roof — with multi-state PE coverage confirmed per project, with fast quote turnaround."}</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
   return htmlShell({
@@ -957,7 +957,7 @@ ${breadcrumb(crumbs)}
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Questions About Your Jurisdiction?</h2>
-  <p>We track code adoptions across 49 states. Tell us where you're building and we'll confirm what applies.</p>
+  <p>We track code adoptions across multiple jurisdictions. Tell us where you're building and we'll confirm what applies.</p>
   <a class="cta" href="/contact">Contact Us</a>
 </div></section>`;
   return htmlShell({
@@ -980,7 +980,7 @@ function disciplinePage(d: DisciplineDef): string {
     "@type": "Service",
     name: d.name,
     serviceType: d.name,
-    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    provider: { "@id": `${SITE}/#business` },
     areaServed: { "@type": "Country", name: "United States" },
     url: `${SITE}${url}`,
     description: d.metaDescription,
@@ -1033,7 +1033,7 @@ ${d.sections
   <div class="linkrow" style="margin-bottom:16px">${others
     .map((o) => `<a href="/${o.slug}/">${esc(o.name)}</a>`)
     .join("")}</div>
-  <div class="linkrow"><a href="/services">All Services</a><a href="/locations/">Service Areas (49 States)</a><a href="/blog/">Engineering Blog</a><a href="/portfolio">Portfolio</a></div>
+  <div class="linkrow"><a href="/services">All Services</a><a href="/locations/">Service Areas (Coverage Confirmed Per Project)</a><a href="/blog/">Engineering Blog</a><a href="/portfolio">Portfolio</a></div>
 </div></section>
 
 <section class="ctaband"><div class="container">
@@ -1438,7 +1438,7 @@ ${breadcrumb(crumbs)}
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Ready to Start Your Project?</h2>
-  <p>Licensed structural, MEP, civil, and geotechnical engineering in 49 states — with fast quote turnaround.</p>
+  <p>Licensed structural, MEP, civil, and geotechnical engineering in multiple jurisdictions — with fast quote turnaround.</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
   return htmlShell({
@@ -1484,7 +1484,7 @@ ${RESOURCE_DISCIPLINES.map((disc) => {
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Ready to Start Your Project?</h2>
-  <p>Licensed structural, MEP, civil, and geotechnical engineering in 49 states — with fast quote turnaround.</p>
+  <p>Licensed structural, MEP, civil, and geotechnical engineering in multiple jurisdictions — with fast quote turnaround.</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
   return htmlShell({
@@ -1508,7 +1508,7 @@ function clientPage(page: ClientPage): string {
     "@context": "https://schema.org",
     "@type": "Service",
     name: page.h1,
-    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    provider: { "@id": `${SITE}/#business` },
     serviceType: "Engineering Consulting",
   };
   const others = CLIENT_PAGES.filter((p) => p.slug !== page.slug).slice(0, 4);
@@ -1708,7 +1708,7 @@ function projectTypePage(page: ProjectTypePage): string {
     "@context": "https://schema.org",
     "@type": "Service",
     name: page.h1,
-    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    provider: { "@id": `${SITE}/#business` },
     serviceType: page.h1,
   };
   const others = PROJECT_TYPE_PAGES.filter((p) => p.slug !== page.slug)
@@ -1739,7 +1739,7 @@ ${contextualInbound}
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Start Your Project</h2>
-  <p>Licensed structural, MEP, civil, and geotechnical engineering in 49 states — with fast quote turnaround. Send us your scope and get a clear proposal.</p>
+  <p>Licensed structural, MEP, civil, and geotechnical engineering in multiple jurisdictions — with fast quote turnaround. Send us your scope and get a clear proposal.</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
   return htmlShell({
@@ -1792,7 +1792,7 @@ function existingBuildingPage(page: ExistingBuildingPage): string {
     "@context": "https://schema.org",
     "@type": "Service",
     name: page.h1,
-    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    provider: { "@id": `${SITE}/#business` },
     serviceType: page.h1,
   };
   const others = EXISTING_BUILDING_PAGES.filter((p) => p.slug !== page.slug).slice(0, 4);
@@ -1871,7 +1871,7 @@ function permitPage(page: PermitPage): string {
     "@context": "https://schema.org",
     "@type": "Service",
     name: page.h1,
-    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    provider: { "@id": `${SITE}/#business` },
     serviceType: "Permit Engineering",
   };
   const contextualInbound = `<p class="note"><a href="/engineering-intent/deferred-submittal-engineering/">Deferred submittal engineering</a> can support an identified later-phase specialty package when the permit documents and authority process allow it.</p>`;
@@ -1897,7 +1897,7 @@ ${contextualInbound}
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Ready to Submit for Permit?</h2>
-  <p>We produce complete, PE-stamped permit packages and support the submittal through final approval. Fast turnaround, 49-state licensure.</p>
+  <p>We produce complete, PE-stamped permit packages and support the submittal through final approval. Fast turnaround, project-specific licensure and stamping.</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
   return htmlShell({
@@ -1926,7 +1926,7 @@ ${breadcrumb(crumbs)}
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Need Engineering for a Permit?</h2>
-  <p>Licensed in 49 states. PE-stamped structural, MEP, and civil engineering for building permits — complete packages delivered on your schedule.</p>
+  <p>For projects whose jurisdiction, discipline, and scope are confirmed during intake, we can coordinate PE-stamped structural, MEP, and civil engineering permit documents; schedule and approval remain subject to the project and authority.</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
   return htmlShell({
@@ -1955,7 +1955,7 @@ function industryDisciplinePage(page: IndustryDisciplinePage): string {
   // Related pages: same industry, different discipline
   const siblings = INDUSTRY_DISCIPLINE_PAGES.filter(
     (p) => p.industrySlug === page.industrySlug && p !== page,
-  );
+  ).slice(0, 4);
 
   // Derive keyword hints from industry slug words + discipline label words
   const industryWords = page.industrySlug.split("-");
@@ -1991,10 +1991,10 @@ ${breadcrumb(crumbs)}
 <section class="block"><div class="container">
   <h2>Why Apex Grid for <em>${esc(page.disciplineLabel)}</em>?</h2>
   <div class="grid2">
-    <div class="card"><div class="label">Licensed in 49 States</div><p>Our engineers hold PE licensure across the continental US, so your project can start without waiting on out-of-state licensing delays.</p></div>
-    <div class="card"><div class="label">20+ Engineers On Staff</div><p>Structural, MEP, civil, and geotech disciplines under one roof means coordinated deliverables and no finger-pointing between firms.</p></div>
+     <div class="card"><div class="label">Project-specific PE coverage review</div><p>We verify the engineer, discipline, jurisdiction, firm authorization, and AHJ requirements for each project before confirming available coverage.</p></div>
+     <div class="card"><div class="label">Coordinated engineering disciplines</div><p>When the requested disciplines and project scope align, our available team can coordinate structural, MEP, civil, and geotechnical deliverables.</p></div>
     <div class="card"><div class="label">Responsive Intake</div><p>We review project requests for an initial proposal response and structure deliverable milestones around your permit or construction schedule when scope and records permit.</p></div>
-    <div class="card"><div class="label">15+ Years of Project Experience</div><p>Across hundreds of commercial, industrial, healthcare, and government projects — we've seen the permitting challenges your project will face.</p></div>
+     <div class="card"><div class="label">Relevant project experience</div><p>We can discuss relevant commercial, industrial, healthcare, and government experience during project review; prior experience does not predict jurisdiction approval.</p></div>
   </div>
 </div></section>
 
@@ -2103,7 +2103,7 @@ function locationServicePage(page: LocationServicePage): string {
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
-        <p>Apex Grid Engineering is a multi-discipline engineering firm licensed in 49 states and headquartered in Queen Creek, Arizona. We provide structural, MEP, civil, and geotechnical engineering for commercial, industrial, multifamily, and government clients — with 15+ years of experience and 20+ licensed engineers on staff.</p>
+        <p>Apex Grid Engineering is a multi-discipline engineering firm with multi-state PE coverage confirmed per project and headquartered in Queen Creek, Arizona. We provide structural, MEP, civil, and geotechnical engineering for commercial, industrial, multifamily, and government clients — with 15+ years of experience and a multi-discipline engineering team on staff.</p>
         <p>We work from architectural PDFs, CAD files, or field measurements, and we're set up to turn projects around on compressed schedules when the situation calls for it.</p>
 ${relatedLinks ? `        <p>Related services in ${esc(page.cityName)}: ${relatedLinks}</p>` : ""}
       </div>
@@ -2129,7 +2129,7 @@ ${relatedLinks ? `        <p>Related services in ${esc(page.cityName)}: ${relate
 
   const svcSchema = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": "Service",
     "name": "Apex Grid Engineering",
     "description": page.lede,
     "url": `${SITE}${url}`,
@@ -2205,7 +2205,7 @@ function solutionPage(page: SolutionPage): string {
     <section class="section section--light">
       <div class="container container--narrow">
         <h2>How Apex Grid Handles This</h2>
-        <p>Apex Grid Engineering is a multi-discipline firm licensed in 49 states — we engineer ${esc(page.category.toLowerCase())} scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package. Our engineers have direct experience with this type of work across commercial, industrial, multifamily, government, and military projects.</p>
+        <p>Apex Grid Engineering is a multi-discipline firm with multi-state PE coverage confirmed per project — we engineer ${esc(page.category.toLowerCase())} scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package. Our engineers have direct experience with this type of work across commercial, industrial, multifamily, government, and military projects.</p>
         <p>We work from architectural PDFs, contractor sketches, or existing CAD files and produce stamped engineering documents, permit drawings, and calculations that building departments accept the first time.</p>
         <h3>Get Started</h3>
         <p>Send us a brief description of your project or attach your drawings. We'll review the scope and respond with a proposal within one business day.</p>
@@ -2243,7 +2243,7 @@ function solutionPage(page: SolutionPage): string {
 
   const spSchema = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": "Service",
     "name": "Apex Grid Engineering",
     "description": page.lede,
     "url": `${SITE}${url}`,
@@ -2329,8 +2329,8 @@ function governmentHubPage(): string {
 
     <section class="section section--dark cta-band">
       <div class="container">
-        <h2>Licensed in 49 States. Ready for Federal Work.</h2>
-        <p>Apex Grid Engineering — SDVOSB-eligible, multi-discipline, and experienced in UFC and federal engineering documentation standards.</p>
+        <h2>Multi-State Team. Ready for Federal Work.</h2>
+        <p>Apex Grid Engineering provides multi-discipline support for federal work. Confirm current professional credentials, SAM.gov registration, SBA certification, and solicitation-specific eligibility from official records before procurement use.</p>
         <a class="btn btn--primary" href="/contact/">Start a Conversation</a>
       </div>
     </section>`;
@@ -2496,7 +2496,7 @@ function structuralExtendedPage(page: StructuralExtendedPage): string {
     <section class="section section--light">
       <div class="container container--narrow">
         <h2>Why Work With Apex Grid</h2>
-        <p>Apex Grid Engineering is a multi-discipline firm licensed in 49 states — headquartered in Queen Creek, Arizona. We provide ${esc(page.h1.toLowerCase())} as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract. Our engineers produce PE-stamped permit packages and respond to plan check comments as part of the scope.</p>
+        <p>Apex Grid Engineering is a multi-discipline firm with multi-state PE coverage confirmed per project — headquartered in Queen Creek, Arizona. We provide ${esc(page.h1.toLowerCase())} as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract. Our engineers produce PE-stamped permit packages and respond to plan check comments as part of the scope.</p>
         <a class="btn btn--primary" href="/contact/">${esc(page.ctaText)}</a>
       </div>
     </section>
@@ -2517,7 +2517,7 @@ function structuralExtendedPage(page: StructuralExtendedPage): string {
     </section>`;
   const schema = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": "Service",
     "name": "Apex Grid Engineering",
     "description": page.lede,
     "url": `${SITE}${url}`,
@@ -2571,7 +2571,7 @@ function title24HubPage(): string {
         <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
       </div>
     </section>`;
-  const schema = { "@context": "https://schema.org", "@type": "ProfessionalService", "name": "Apex Grid Engineering", "description": TITLE_24_HUB.lede, "url": `${SITE}${url}`, "telephone": "+14804900064", "areaServed": "California", "serviceType": "Title 24 Energy Compliance" };
+  const schema = { "@context": "https://schema.org", "@type": "Service", "name": TITLE_24_HUB.h1, "description": TITLE_24_HUB.lede, "url": `${SITE}${url}`, "provider": { "@id": `${SITE}/#business` }, "areaServed": "California", "serviceType": "Title 24 Energy Compliance" };
   return htmlShell({ title: TITLE_24_HUB.title, description: TITLE_24_HUB.description, canonical: `${SITE}${url}`, schemaJson: [schema, breadcrumbSchema(crumbs)], body });
 }
 
@@ -2612,7 +2612,7 @@ function title24SubpagePage(page: Title24Page): string {
         <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
       </div>
     </section>`;
-  const schema = { "@context": "https://schema.org", "@type": "ProfessionalService", "name": "Apex Grid Engineering", "description": page.lede, "url": `${SITE}${url}`, "telephone": "+14804900064", "areaServed": "California", "serviceType": page.h1 };
+  const schema = { "@context": "https://schema.org", "@type": "Service", "name": page.h1, "description": page.lede, "url": `${SITE}${url}`, "provider": { "@id": `${SITE}/#business` }, "areaServed": "California", "serviceType": page.h1 };
   return htmlShell({ title: page.title, description: page.description, canonical: `${SITE}${url}`, schemaJson: [schema, breadcrumbSchema(crumbs)], body });
 }
 
@@ -2697,7 +2697,7 @@ function projectCategoryPage(cat: ProjectCategoryPage): string {
         <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
       </div>
     </section>`;
-  const schema = { "@context": "https://schema.org", "@type": "ProfessionalService", "name": "Apex Grid Engineering", "description": cat.lede, "url": `${SITE}${url}`, "telephone": "+14804900064", "serviceType": cat.h1 };
+  const schema = { "@context": "https://schema.org", "@type": "Service", "name": cat.h1, "description": cat.lede, "url": `${SITE}${url}`, "provider": { "@id": `${SITE}/#business` }, "serviceType": cat.h1 };
   return htmlShell({ title: cat.title, description: cat.description, canonical: `${SITE}${url}`, schemaJson: [schema, breadcrumbSchema(crumbs)], body });
 }
 
@@ -2932,7 +2932,7 @@ ${extendedStructuralCards}
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
-        <p>Apex Grid Engineering is a multi-discipline firm licensed in 49 states — headquartered in Queen Creek, Arizona, with 20+ licensed professional engineers across structural, MEP, civil, and geotechnical disciplines. We provide ${esc(hub.h1.toLowerCase())} as a standalone service or as part of a coordinated multi-discipline package.</p>
+        <p>Apex Grid Engineering is a multi-discipline firm with multi-state PE coverage confirmed per project — headquartered in Queen Creek, Arizona, with a multi-discipline engineering team across structural, MEP, civil, and geotechnical disciplines. We provide ${esc(hub.h1.toLowerCase())} as a standalone service or as part of a coordinated multi-discipline package.</p>
         <p>We work from architectural PDFs, contractor sketches, or existing CAD files and produce stamped engineering documents and permit packages that building departments accept. One business day turnaround on fee proposals.</p>
         <a class="btn btn--primary" href="/contact/">Get a Proposal</a>
       </div>
@@ -2949,7 +2949,7 @@ ${extendedStructuralCards}
 
   const schema = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": "Service",
     "name": "Apex Grid Engineering",
     "description": hub.lede,
     "url": `${SITE}${url}`,
@@ -3012,7 +3012,7 @@ function disciplineSubpagePage(hub: DisciplineHub, sp: DisciplineSubpage): strin
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>How Apex Grid Handles This</h2>
-        <p>Apex Grid Engineering is a multi-discipline firm licensed in 49 states. We provide ${esc(sp.h1.toLowerCase())} as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract. Our engineers produce PE-stamped permit packages that building departments accept — and we respond to plan check comments as part of the scope.</p>
+        <p>Apex Grid Engineering is a multi-discipline firm with multi-state PE coverage confirmed per project. We provide ${esc(sp.h1.toLowerCase())} as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract. Our engineers produce PE-stamped permit packages that building departments accept — and we respond to plan check comments as part of the scope.</p>
         <a class="btn btn--primary" href="/contact/">Send Your Project Details</a>
       </div>
     </section>
@@ -3038,7 +3038,7 @@ function disciplineSubpagePage(hub: DisciplineHub, sp: DisciplineSubpage): strin
 
   const svcSchema = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": "Service",
     "name": "Apex Grid Engineering",
     "description": sp.lede,
     "url": `${SITE}${url}`,
@@ -3847,7 +3847,7 @@ function cityServicePage(state: StateData, city: CityData, svc: ServiceDef, sibl
     "@context": "https://schema.org",
     "@type": "Service",
     name: `${svc.name} in ${city.name}, ${state.abbrev}`,
-    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    provider: { "@id": `${SITE}/#business` },
     areaServed: { "@type": "City", name: `${city.name}, ${state.abbrev}` },
     serviceType: svc.name,
   };
@@ -3914,7 +3914,7 @@ ${citySourceList(city)}
 
 <section class="ctaband"><div class="container">
   <h2>Start Your ${esc(city.name)} Project</h2>
-  <p>With a team of licensed PEs and 20+ engineers on staff, we're ready to take on projects of any size — and we turn quotes around fast. Send us your scope and get a clear proposal: deliverables, timeline, and fee.</p>
+  <p>With a team of licensed PEs and a multi-discipline engineering team, we're ready to take on projects of any size — and we turn quotes around fast. Send us your scope and get a clear proposal: deliverables, timeline, and fee.</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
 
@@ -3953,7 +3953,7 @@ function cityPage(state: StateData, city: CityData, siblingCities: CityData[]): 
     "@context": "https://schema.org",
     "@type": "Service",
     name: `Engineering Services in ${city.name}, ${state.abbrev}`,
-    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    provider: { "@id": `${SITE}/#business` },
     areaServed: { "@type": "City", name: `${city.name}, ${state.abbrev}` },
     serviceType: "MEP, structural, civil, and energy-code engineering",
   };
@@ -4171,7 +4171,7 @@ ${relatedTermLinks ? `<section class="block"><div class="container">
 
 <section class="ctaband"><div class="container">
   <h2>Have a Project That Involves ${esc(term.term)}?</h2>
-  <p>Apex Grid's licensed PEs provide ${esc(categoryLabel.toLowerCase())} services across 49 states — with fast quote turnaround and permit-ready documents.</p>
+  <p>Apex Grid's licensed PEs provide ${esc(categoryLabel.toLowerCase())} services across multiple jurisdictions — with fast quote turnaround and permit-ready documents.</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
 

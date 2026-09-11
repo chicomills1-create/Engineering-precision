@@ -40,7 +40,7 @@ const services = [
     id: "architecture",
     num: "05",
     title: "Architectural Design",
-    desc: "Full architectural design services led by our in-house architect — space planning, building design, and permit-ready architectural documents coordinated with our engineering disciplines from day one.",
+    desc: "Full architectural design services led by our architecture partner or project-specific architect — space planning, building design, and permit-ready architectural documents coordinated with our engineering disciplines from day one.",
     bg: architectureBg,
   },
 ];

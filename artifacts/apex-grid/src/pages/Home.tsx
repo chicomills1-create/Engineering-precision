@@ -31,7 +31,7 @@ export default function Home() {
   const opacityHeroText = useTransform(scrollY, [0, 600], [1, 0]);
 
   const stats = [
-    { label: "States with licensing coverage", value: "49" },
+    { label: "Licensing coverage", value: "Verified per project" },
     { label: "Typical quote turnaround", value: "12–24h" },
     { label: "Integrated divisions", value: "3" },
     { label: "PE-led project work", value: "100%" }
@@ -60,7 +60,7 @@ export default function Home() {
       icon: Building2,
       href: "/for-developers",
       headline: "De-Risk the Deal",
-      description: "Due-diligence assessments, feasibility engineering, and consistent execution across your 49-state portfolio.",
+      description: "Due-diligence assessments, feasibility engineering, and consistent execution across your multi-state, project-specific portfolio.",
     },
     {
       id: "property-managers",

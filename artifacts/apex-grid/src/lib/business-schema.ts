@@ -44,12 +44,12 @@ const services = [
 
 /**
  * Canonical entity used by the React app and generated static pages.
- * ProfessionalService is a Schema.org LocalBusiness subtype and is more
- * specific than a generic Organization node.
+ * Organization is intentional: this is not a claim that Apex Grid maintains
+ * a local ProfessionalService office in every areaServed entry.
  */
 export const APEX_GRID_BUSINESS_SCHEMA = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": "Organization",
   "@id": `${APEX_GRID_SITE_URL}/#business`,
   name: "Apex Grid Engineering",
   alternateName: "Apex Grid",
@@ -57,7 +57,7 @@ export const APEX_GRID_BUSINESS_SCHEMA = {
   url: `${APEX_GRID_SITE_URL}/`,
   logo: `${APEX_GRID_SITE_URL}/favicon.svg`,
   description:
-    "Multi-discipline professional engineering firm providing PE-stamped structural, MEP, civil, geotechnical, building-assessment, energy-compliance, and municipal plan-check support.",
+    "Multi-discipline professional engineering firm providing project-specific structural, MEP, civil, geotechnical, building-assessment, energy-compliance, and municipal plan-check support. areaServed describes service availability and request coverage, not local offices or guaranteed licensure.",
   email: "info@apexgrideng.com",
   telephone: "+1-480-490-0064",
   priceRange: "$$",
@@ -70,12 +70,12 @@ export const APEX_GRID_BUSINESS_SCHEMA = {
     postalCode: "85142",
     addressCountry: "US",
   },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 33.2519632,
-    longitude: -111.5985155,
-  },
   areaServed: serviceAreas,
+  additionalProperty: {
+    "@type": "PropertyValue",
+    name: "Coverage basis",
+    value: "Service availability and request coverage; confirm individual license, firm authorization, discipline, and AHJ requirements per project.",
+  },
   founder: {
     "@type": "Person",
     "@id": `${APEX_GRID_SITE_URL}/military#jeremy`,

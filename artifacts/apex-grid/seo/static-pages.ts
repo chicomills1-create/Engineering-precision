@@ -31,7 +31,7 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
       {
         heading: "Who Is Jeremy Mills?",
         content:
-          "Jeremy Mills is the Founder and CEO of Apex Grid Engineering. He leads the firm’s growth, client service, and mission-driven operating culture as it delivers integrated engineering, architecture, and construction support nationwide.",
+          "Jeremy Mills is the Founder and CEO of Apex Grid Engineering. He leads the firm’s growth, client service, and mission-driven operating culture as it delivers integrated engineering, architecture, and construction support where project-specific credentials and authorization are verified.",
       },
       {
         heading: "Military Service and Leadership",

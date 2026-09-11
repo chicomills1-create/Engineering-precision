@@ -42,13 +42,13 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             <div className="text-lg text-muted-foreground leading-relaxed space-y-6">
               <p>
-                Apex Grid is a multifaceted organization built around three connected capabilities: Engineering, Architecture, and General Contracting. We serve as the technical and delivery backbone for owners, architects, developers, and contractors nationwide.
+                Apex Grid is a multifaceted organization built around three connected capabilities: Engineering, Architecture, and General Contracting. We support owners, architects, developers, and contractors in multiple markets, subject to project-specific professional and firm authorization.
               </p>
               <p>
                 As an integrated design firm—housing Structural, MEP, Civil, and Architectural services under one roof—we eliminate the friction of coordinating between disconnected consultants. Through Phoenix Construction &amp; Management (PCM), our construction delivery branch also carries that coordination into pre-construction and field execution.
               </p>
               <p>
-                We are not an outsourced drafting service. With a team of in-house Professional Engineers and more than 20 engineers on staff, every project is engineered domestically and stamped by PEs licensed in 49 states — and we're built to take on jobs of any size, with fast quote turnaround on every request.
+                We are not an outsourced drafting service. With a multi-discipline Professional Engineer team, every project is engineered domestically and stamping is confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified — and we're built to take on jobs of any size, with fast quote turnaround on every request.
               </p>
             </div>
             
@@ -56,8 +56,8 @@ export default function About() {
               <h3 className="font-display font-bold text-2xl mb-8">By The Numbers</h3>
               <div className="grid grid-cols-2 gap-8">
                 <div>
-                  <div className="text-5xl font-display font-bold text-primary mb-2">49</div>
-                  <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">States Licensed</div>
+                  <div className="text-5xl font-display font-bold text-primary mb-2">Multi-state</div>
+                  <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Coverage Verified Per Project</div>
                 </div>
                 <div>
                   <div className="text-5xl font-display font-bold text-primary mb-2">12-24hr</div>
@@ -97,9 +97,10 @@ export default function About() {
                 Direct PE Accountability
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Every project is overseen and stamped by a licensed
-                Professional Engineer (PE) to ensure absolute compliance and
-                zero-correction submittals.
+                When a regulated scope requires a seal, the responsible
+                professional, applicable license, firm authorization,
+                discipline, and AHJ requirements are confirmed before the
+                project is accepted.
               </p>
             </div>
             <div className="bg-card p-8">
@@ -107,7 +108,7 @@ export default function About() {
                 Unmatched Engineering Scale
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                With a powerful internal roster of 20+ licensed engineers, we
+                With a powerful internal roster of multi-discipline engineering team, we
                 provide senior-level oversight without the project delays
                 typical of smaller boutique firms.
               </p>
@@ -117,8 +118,7 @@ export default function About() {
                 Nationwide Agility, Regional Mastery
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Licensed in 49 states with dedicated local hubs across the
-                Southwest, delivering cross-country reach with deep municipal
+                A multi-state team with project availability confirmed after individual license, firm authorization, discipline, and AHJ requirements are verified, delivering broad reach with deep municipal
                 expertise.
               </p>
             </div>
@@ -284,7 +284,7 @@ export default function About() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-display font-bold mb-4">Procurement &amp; Government Clients</h2>
           <p className="text-muted-foreground max-w-xl mx-auto mb-8">
-            Contracting officers and prime contractors can review our full capabilities reference — disciplines, NAICS codes, 49-state PE licensure, and downloadable capabilities statement.
+            Contracting officers and prime contractors can review our full capabilities reference — disciplines, NAICS codes, multi-state, project-specific PE licensure, and downloadable capabilities statement.
           </p>
           <Link
             href="/capabilities"

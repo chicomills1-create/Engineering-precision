@@ -37,7 +37,7 @@ export const PERMIT_RESOURCE_ARTICLES: ResourceArticle[] = [
 <p>Not always. Many jurisdictions exempt minor residential work below defined thresholds. However, load-bearing modifications, new foundations, and additions typically require stamped structural drawings even on residential projects.</p>
 
 <h3>Does the stamp have to be from an engineer licensed in my state?</h3>
-<p>Yes. Engineers must hold a valid license in the state where the project is located. We maintain PE licensure across 49 states so we can seal projects in the markets we serve.</p>
+<p>Yes. Engineers must hold a valid license in the state where the project is located. For Apex Grid work, project availability and any sealing role are confirmed only after the responsible individual's license, firm authorization, discipline, and AHJ requirements are verified.</p>
 
 <h3>Can one engineer stamp all disciplines?</h3>
 <p>Only the disciplines they are licensed in. Structural, mechanical, and electrical are separate licenses. A multi-discipline firm assigns each scope to a PE licensed in that discipline.</p>
@@ -322,7 +322,7 @@ export const PERMIT_RESOURCE_ARTICLES: ResourceArticle[] = [
 
 <h2>What Stamped Drawings Actually Ensure</h2>
 <h3>Code-Compliant Design</h3>
-<p>Our stamp certifies that the design was prepared or reviewed under our supervision and, in our professional judgment, complies with the governing code. That is a substantive assurance about the quality and safety of the engineering.</p>
+<p>A professional's stamp certifies that the design was prepared or reviewed under the responsible professional's supervision and, in that professional's judgment, complies with the governing code. Any Apex Grid sealing role is subject to project-specific credential and authorization verification.</p>
 
 <h3>A Complete, Reviewable Submittal</h3>
 <p>Good drawings give the reviewer everything they need to evaluate the project. Completeness and coordination reduce the number of comments and speed the path to approval.</p>

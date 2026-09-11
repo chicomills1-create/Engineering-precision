@@ -1348,8 +1348,8 @@ export const GUIDE_PAGES: GuidePage[] = [
           "Single proposal for all required disciplines — structural, MEP, civil, and geotechnical",
           "Coordinated engineering team with internal coordination meetings",
           "Unified permit package with coordinated drawing sets across disciplines",
-          "Licensed in 49 states — one firm for national clients",
-          "Headquarters in Queen Creek, AZ with national project delivery",
+          "multi-state team; project availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified — one firm for national clients",
+          "Business-provided postal contact in Queen Creek, AZ with national project delivery",
         ],
       },
     ],
@@ -1391,9 +1391,9 @@ export const GUIDE_PAGES: GuidePage[] = [
       {
         heading: "PE Licenses at Apex Grid",
         points: [
-          "All permit drawings issued by Apex Grid are stamped by a licensed PE in the project jurisdiction",
-          "Apex Grid maintains PE licenses across structural, mechanical, electrical, plumbing, civil, and geotechnical disciplines",
-          "Licensed in 49 states — we confirm license coverage for each project's jurisdiction",
+          "Where a permit drawing requires a seal, the responsible professional's current license, firm authorization, discipline, and AHJ requirements are verified for the project jurisdiction",
+          "Apex Grid evaluates structural, mechanical, electrical, plumbing, civil, and geotechnical scopes separately; credential availability is not inferred from a service page",
+          "Project availability and any stamping are confirmed per project after current individual license, firm authorization, discipline, and AHJ evidence is reviewed",
         ],
       },
     ],
@@ -1430,9 +1430,9 @@ export const GUIDE_PAGES: GuidePage[] = [
       {
         heading: "PE Stamps on Apex Grid Engineering Documents",
         points: [
-          "All Apex Grid permit drawings carry the stamp of a PE licensed in the project state",
-          "Our PEs review all work they stamp — we do not issue cursory review stamps",
-          "PE license numbers appear on all stamped documents for verification",
+          "Where a seal is required, the responsible PE's current license, firm authorization, discipline, and AHJ requirements are verified for the project state",
+          "Any PE reviews only work within the applicable responsible-charge and professional rules",
+          "License information appears on stamped documents where required for verification",
           "We confirm jurisdiction licensing before accepting each project",
         ],
       },

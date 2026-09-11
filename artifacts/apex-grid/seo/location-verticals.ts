@@ -44,14 +44,14 @@ export const LOCATION_VERTICALS: readonly LocationVertical[] = [
       "washington",
     ],
     stateCredentials: {
-      alabama: "Apex Grid's architecture team includes an architect licensed in Alabama.",
-      arizona: "Apex Grid's architecture team includes an architect licensed in Arizona.",
-      california: "Apex Grid's architecture team includes architects licensed in California.",
-      florida: "Apex Grid's architecture team includes an architect licensed in Florida.",
-      illinois: "Apex Grid's architecture team includes an architect licensed in Illinois.",
-      louisiana: "Apex Grid's architecture team includes an architect licensed in Louisiana.",
-      texas: "Apex Grid's architecture team includes architects licensed in Texas.",
-      washington: "Apex Grid's architecture team includes an architect licensed in Washington.",
+      alabama: "Architect-of-record and firm authorization are confirmed from current Alabama board records before proposal.",
+      arizona: "Architect-of-record and firm authorization are confirmed from current Arizona board records before proposal.",
+      california: "Architect-of-record and firm authorization are confirmed from current California board records before proposal.",
+      florida: "Architect-of-record and firm authorization are confirmed from current Florida board records before proposal.",
+      illinois: "Architect-of-record and firm authorization are confirmed from current Illinois board records before proposal.",
+      louisiana: "Architect-of-record and firm authorization are confirmed from current Louisiana board records before proposal.",
+      texas: "Architect-of-record and firm authorization are confirmed from current Texas board records before proposal.",
+      washington: "Architect-of-record and firm authorization are confirmed from current Washington board records before proposal.",
     },
     scope: [
       "Programming, feasibility, and space planning",
@@ -180,14 +180,14 @@ function providerSchema(vertical: LocationVertical) {
       alternateName: "PCM",
       url: `${SITE}${vertical.coreUrl}`,
       parentOrganization: {
-        "@type": "ProfessionalService",
+        "@type": "Organization",
         name: "Apex Grid Engineering",
         url: SITE,
       },
     };
   }
   return {
-    "@type": "ProfessionalService",
+    "@type": "Organization",
     name: "Apex Grid Engineering",
     url: SITE,
   };
@@ -471,7 +471,7 @@ ${breadcrumb(crumbs)}
 <section class="block"><div class="container">
   <h2>One Organization, <em>Three Connected Divisions</em></h2>
   <div class="grid3">
-    <a class="card" href="/locations/"><div class="label">Engineering</div><h3>Engineering Service Areas</h3><p>MEP, structural, civil, and energy-code services across 49 licensed states.</p></a>
+    <a class="card" href="/locations/"><div class="label">Engineering</div><h3>Engineering Service Areas</h3><p>MEP, structural, civil, and energy-code services across multi-state service availability, confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified.</p></a>
     <a class="card" href="/architecture/locations/"><div class="label">Architecture</div><h3>Architectural Design Service Areas</h3><p>Planning, design, permit documents, and direct engineering coordination.</p></a>
     <a class="card" href="/general-contracting/locations/"><div class="label">PCM Construction Delivery</div><h3>General Contracting Service Areas</h3><p>Pre-construction, construction management, and commercial field delivery.</p></a>
   </div>

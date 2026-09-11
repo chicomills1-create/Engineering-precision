@@ -65,11 +65,6 @@ export default function Contact() {
       "postalCode": "85142",
       "addressCountry": "US",
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 33.2303,
-      "longitude": -111.6105,
-    },
     "areaServed": [
       "United States",
       "Arizona",
@@ -487,7 +482,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Headquarters</h4>
+                    <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Business-provided contact</h4>
                     <p className="text-foreground">22475 E Quintero Rd</p>
                     <p className="text-foreground">Queen Creek, AZ 85142</p>
                   </div>
@@ -508,7 +503,7 @@ export default function Contact() {
                         <span>Houston, TX</span>
                       </li>
                     </ul>
-                    <p className="text-xs text-muted-foreground mt-3">Serving clients in all 49 licensed states</p>
+                    <p className="text-xs text-muted-foreground mt-3">Service availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified.</p>
                   </div>
 
                   <div className="pt-8 border-t border-border">

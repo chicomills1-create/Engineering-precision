@@ -253,7 +253,7 @@ export const BLOG_POSTS: BlogPost[] = [
 <h2>The localization playbook</h2>
 <p>Successful programs split the drawing set into a protected core — the brand-critical layout and systems concept — and a localization layer that is expected to change: foundations, lateral systems, envelope insulation, equipment efficiencies, and site design. Each new jurisdiction gets a code study before drawings move: adopted editions, local amendments, AHJ submittal quirks, and utility requirements, documented once and reused across every site in that territory.</p>
 <h2>Licensure is the quiet constraint</h2>
-<p>Every sheet needs a stamp from an engineer licensed in that state. Programs that rely on ad-hoc local engineers per site trade away consistency and schedule; programs that work with a multi-state licensed firm keep one engineering voice across the whole map. With PE licensure across 49 states, that is precisely the model we run — one team, one standard of documentation, localized correctly for wherever the next site lands.</p>`,
+<p>Every regulated sheet must be sealed by a professional authorized for that jurisdiction and discipline. Programs that rely on ad-hoc local teams per site can lose consistency and schedule. Apex Grid uses one coordination model while confirming the responsible professional's license, required firm authorization, discipline, and AHJ requirements for every location before regulated work begins.</p>`,
   },
   {
     slug: "architectural-design-vs-engineering-commercial-projects",

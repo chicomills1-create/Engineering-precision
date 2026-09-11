@@ -1976,7 +1976,7 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Preferred pricing structures for ongoing project volume",
       "Consistent engineering team assigned to partner account",
       "Engineering template development for prototype projects",
-      "National coverage for multi-market partners — licensed in 49 states",
+      "National coverage for multi-market partners — multi-state team; project availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified",
       "Fast-start on new projects within existing relationship",
       "Portfolio rollout engineering for retail, restaurant, and franchise clients",
       "Government and military contractor ongoing engineering support",

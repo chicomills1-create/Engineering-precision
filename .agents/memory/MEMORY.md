@@ -30,7 +30,8 @@
 - [SEO corpus audit scaling](seo-corpus-audit-scaling.md) — full-corpus audits must stream metadata and links, never retain every generated HTML document; GSC property totals require a no-dimension query.
 - [LinkedIn approval boundary](linkedin-approval-boundary.md) — LinkedIn stays manual-only; resolve suppressions through linked signals and serialize global daily quotas before status transitions.
 - [Outreach seed startup](outreach-seed-startup.md) — idempotent backfills must skip existing contacts and never block the send scheduler during production startup.
-- [State outreach rollout](state-outreach-rollout.md) — research Arizona first, California next, then other licensed states; Apex Grid covers every state except Alaska.
+- [State outreach rollout](state-outreach-rollout.md) — research Arizona first, California next, then other states only with per-project board evidence for responsible license, firm authorization, discipline, and AHJ requirements.
+- [Licensing claim evidence](licensing-claim-evidence.md) — do not infer nationwide or firm licensure from state pages; retain current board evidence tied to the responsible professional and project.
 - [Hot Market definition](hot-market-definition.md) — national active-opportunity campaign with separate direct builder/contractor and architecture referral-partner lanes.
 - [Outreach advisory-lock hierarchy](outreach-lock-hierarchy.md) — isolate session locks from query connections and never reacquire a recipient lock inside its protected operation.
 - [Daily outreach recovery](daily-outreach-recovery.md) — run at 08:00 and 08:30 Phoenix; one durable daily claim prevents overlap and preserves missed/partial incidents.

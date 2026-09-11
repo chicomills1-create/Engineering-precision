@@ -27,7 +27,7 @@ export const CLIENT_PAGES: ClientPage[] = [
       },
       {
         heading: "Structural Engineering for Architects",
-        body: "We design structural systems that work with your architecture — not against it. Column grids, shear wall locations, and structural depths are coordinated with your floor plates and ceiling conditions. Structural calculations, permit drawings, and plan check response support are all in-house. Licensed in 49 states.",
+        body: "We design structural systems that work with your architecture — not against it. Column grids, shear wall locations, and structural depths are coordinated with your floor plates and ceiling conditions. Structural calculations, permit drawings, and plan check response support are coordinated within the project team; responsible credentials and any sealing role are confirmed per project.",
       },
       {
         heading: "MEP Engineering for Architects",
@@ -43,7 +43,7 @@ export const CLIENT_PAGES: ClientPage[] = [
       },
       {
         heading: "PE Review, Sealing, and Plan Check Support",
-        body: "Our engineers review, seal, and stand behind every document they produce. When plan check comments come in, we respond directly — calculations, code citations, and revised drawings. We track comment status and keep the submittal moving.",
+        body: "Where authorized for the project, the responsible engineer reviews and seals the documents within their scope and stands behind that work. When plan check comments come in, we respond directly — calculations, code citations, and revised drawings. We track comment status and keep the submittal moving.",
       },
     ],
     cta: "Send Us Your Architectural Set",
@@ -93,7 +93,7 @@ export const CLIENT_PAGES: ClientPage[] = [
     description: "Integrated engineering support for real estate developers — predevelopment feasibility, full-service design through permit, and national multi-site capability.",
     h1: "Engineering Services for Real Estate Developers",
     kicker: "Engineering for Developers",
-    lede: "From site feasibility and predevelopment analysis through permit-ready construction documents, we provide developers with integrated structural, MEP, civil, and geotechnical engineering for commercial, multifamily, and industrial projects nationwide.",
+        lede: "From site feasibility and predevelopment analysis through permit-ready construction documents, we provide developers with integrated structural, MEP, civil, and geotechnical engineering for commercial, multifamily, and industrial projects where project-specific credentials and authorization are verified.",
     sections: [
       {
         heading: "Predevelopment and Feasibility",
@@ -113,7 +113,7 @@ export const CLIENT_PAGES: ClientPage[] = [
       },
       {
         heading: "Multifamily and Mixed-Use",
-        body: "Multifamily, mixed-use, and podium construction require close coordination between structural, MEP, and the architectural team. We've engineered multifamily projects across multiple states — from wood-frame walkup apartments to concrete podium mid-rises.",
+        body: "Multifamily, mixed-use, and podium construction require close coordination between structural, MEP, and the architectural team. Our selected experience includes projects in multiple states; availability and responsible-professional credentials are confirmed for each new scope.",
       },
       {
         heading: "Portfolio-Scale and Multi-Site Support",
@@ -252,8 +252,8 @@ export const CLIENT_PAGES: ClientPage[] = [
         body: "Many federal facility projects are delivered through design-build or IDIQ contracts. We provide engineering support for federal design-build bids and ongoing IDIQ task orders — from early schematic support through permit-ready final documents.",
       },
       {
-        heading: "Nationwide Licensure",
-        body: "Federal facilities exist in every state. Our multi-state PE licensure across 49 states allows us to support federal contractors regardless of project location — a single engineering partner for a nationwide contract vehicle.",
+        heading: "Project-specific Federal Support",
+        body: "Federal facilities exist in every state. For each pursuit, project availability is confirmed only after the responsible individual's license, firm authorization, discipline, and AHJ requirements are verified; teaming may be appropriate for scopes outside that evidence.",
       },
     ],
     cta: "Contact Us About Your Federal Project",
@@ -339,8 +339,8 @@ export const CLIENT_PAGES: ClientPage[] = [
         body: "Multi-site clients benefit from engineering that applies consistent standards — the same structural system preferences, the same MEP equipment selections, the same drawing standards — across every location. This reduces construction variability, simplifies bidding, and makes operations more predictable.",
       },
       {
-        heading: "National Licensure — 49 States",
-        body: "We hold PE licensure in 49 states, which means a national portfolio client can work with a single engineering firm regardless of where individual sites are located. No need to find a new local engineer for every market.",
+        heading: "National Licensure — multi-state coverage, subject to project-specific credential verification",
+        body: "We hold PE licensure in multi-state coverage, subject to project-specific credential verification, which means a national portfolio client can work with a single engineering firm regardless of where individual sites are located. No need to find a new local engineer for every market.",
       },
       {
         heading: "Retail and Restaurant Chains",

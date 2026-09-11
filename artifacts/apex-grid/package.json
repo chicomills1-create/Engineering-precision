@@ -7,12 +7,13 @@
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
     "build": "vite build --config vite.config.ts && PRERENDER_BUNDLE=1 vite build --ssr src/ssr.tsx --config vite.config.ts && tsx scripts/prerender.ts",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit && pnpm run seo:audit:claims",
     "seo:generate": "tsx seo/generate.ts",
     "seo:check:bylines": "tsx seo/check-blog-authorship.ts",
     "seo:cities:refresh": "tsx seo/refresh-cities-directory.ts",
     "seo:review": "tsx seo/review-report.ts",
-    "seo:review:email": "tsx seo/review-email.ts"
+    "seo:review:email": "tsx seo/review-email.ts",
+    "seo:audit:claims": "tsx seo/audit-claims.ts"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",

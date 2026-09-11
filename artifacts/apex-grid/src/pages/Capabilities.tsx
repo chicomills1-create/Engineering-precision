@@ -49,13 +49,13 @@ export default function Capabilities() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div className="space-y-4 text-foreground/80 leading-relaxed">
                 <p>
-                  Apex Grid Engineering is a multidisciplinary engineering and architecture firm headquartered in Queen Creek, Arizona. We deliver PE-stamped structural engineering, commercial MEP design, civil engineering, building assessments, and geotechnical coordination under one roof.
+                  Apex Grid Engineering is a multidisciplinary engineering and architecture team with a business-provided contact address in Queen Creek, Arizona. We deliver structural engineering, commercial MEP design, civil engineering, building assessments, and geotechnical coordination under one roof; any regulated or stamped scope is confirmed for the project jurisdiction before proposal.
                 </p>
                 <p>
                   The firm is led by Jeremy Mills, a U.S. Air Force veteran who served in Aerospace Medical Service and deployed to Iraq in support of Operation Iraqi Freedom. That service background defines how the firm operates: documented processes, zero tolerance for "close enough," and drawings that survive the full government QA cycle.
                 </p>
                 <p>
-                  Apex Grid is PE-licensed in 49 states and supports projects across Arizona, California, New Mexico, and nationwide. Our permit-ready work includes municipal plan-check navigation and California Title 24 coordination where applicable.
+                  Apex Grid works as a multi-state team. Project availability and any stamped scope are confirmed only after the responsible individual license, firm authorization, discipline, and AHJ requirements are verified. Our work includes municipal plan-check navigation and California Title 24 coordination where applicable.
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-px bg-border">
@@ -226,9 +226,9 @@ export default function Capabilities() {
               <div className="w-8 h-[1px] bg-primary" />
               <span className="font-mono text-xs uppercase tracking-widest text-primary">Licensing</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">PE Licensure — 49 States</h2>
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">Project-Specific Licensing Verification</h2>
             <p className="text-lg text-muted-foreground mb-10 max-w-3xl">
-              Apex Grid engineers hold Professional Engineer licenses across 49 U.S. states, enabling us to stamp and seal construction documents for projects in nearly every jurisdiction in the country.
+              Apex Grid works with licensed professionals across multiple jurisdictions. Before regulated services are proposed, the team confirms the responsible professional's active license, required firm authorization, discipline, and local requirements for the exact project.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
               {LICENSING_HIGHLIGHTS.map(({ label, value }) => (
@@ -274,20 +274,20 @@ export default function Capabilities() {
               <div className="w-8 h-[1px] bg-primary" />
               <span className="font-mono text-xs uppercase tracking-widest text-primary">Ownership &amp; Socioeconomic</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-10">Veteran-Owned &amp; Operated</h2>
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-10">Ownership &amp; Federal Registration</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
               <div className="bg-card p-8 md:col-span-2">
                 <Shield className="w-6 h-6 text-primary mb-4" />
-                <div className="font-bold text-lg mb-3">Service-Disabled Veteran-Owned Small Business (SDVOSB)</div>
+                <div className="font-bold text-lg mb-3">Certification Must Be Confirmed</div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Apex Grid Engineering is majority-owned and operated by Jeremy Mills, a service-disabled U.S. Air Force veteran. This status is relevant for set-aside contracts, evaluation preference programs, and subcontracting plans that include veteran-owned participation goals.
+                  Apex Grid reports veteran ownership and leadership. Procurement teams should confirm any current SBA VetCert status and solicitation-specific eligibility in the official registry before relying on a socioeconomic designation.
                 </p>
               </div>
               <div className="bg-card p-8">
                 <Award className="w-6 h-6 text-primary mb-4" />
-                <div className="font-bold text-lg mb-3">Small Business</div>
+                <div className="font-bold text-lg mb-3">SAM.gov &amp; Size Status</div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Apex Grid qualifies as a small business under applicable SBA size standards for the engineering services NAICS codes listed above.
+                  Confirm current SAM.gov entity registration, representations, UEI/CAGE information, and applicable SBA size status directly in official records before procurement use.
                 </p>
               </div>
             </div>
@@ -327,7 +327,7 @@ export default function Capabilities() {
 }
 
 const SNAPSHOT = [
-  { label: "States Licensed", value: "49" },
+  { label: "Coverage", value: "Multi-state" },
   { label: "Years of Experience", value: "15+" },
   { label: "Core Disciplines", value: "4" },
   { label: "Quote Turnaround", value: "12–24hr" },
@@ -488,10 +488,10 @@ const CODES = [
 ];
 
 const LICENSING_HIGHLIGHTS = [
-  { label: "PE Jurisdictions", value: "49 U.S. states" },
-  { label: "Disciplines Licensed", value: "Structural, MEP, Civil Engineering" },
-  { label: "Architecture Licensure", value: "Licensed Architect on staff" },
-  { label: "DoD Design Authority", value: "UFC-qualified engineering team" },
+  { label: "PE Jurisdictions", value: "Confirmed from current board records per project" },
+  { label: "Engineering Disciplines", value: "Structural, MEP, and civil scope subject to responsible-professional verification" },
+  { label: "Architecture", value: "Architect-of-record and firm authorization confirmed per project" },
+  { label: "Federal Criteria", value: "Applicable UFC requirements identified and qualified personnel confirmed per scope" },
 ];
 
 const NAICS_CODES = [
@@ -505,6 +505,6 @@ const NAICS_CODES = [
 
 const PAGE_META = {
   title: "Firm Capabilities | Engineering Services, NAICS Codes & Licensure | Apex Grid",
-  description: "Complete capabilities reference for procurement officers and prime contractors — disciplines, markets, NAICS codes, 49-state PE licensure, software, codes, and veteran ownership status.",
+  description: "Capabilities reference for procurement officers and prime contractors, with disciplines, markets, NAICS codes, project-specific licensing verification, software, codes, and ownership-verification guidance.",
   path: "/capabilities",
 };

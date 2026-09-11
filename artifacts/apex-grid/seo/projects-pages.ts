@@ -19,7 +19,7 @@ export const PROJECTS_HUB = {
   h1: "Engineering Project Experience",
   kicker: "Our Work",
   lede:
-    "Apex Grid Engineering has completed projects across 49 states — from single-story tenant improvements to multi-building federal facility renovations. Below is an overview of our project experience organized by discipline and industry.",
+    "Apex Grid Engineering has completed projects multi-state, with project availability confirmed after individual license, firm authorization, discipline, and AHJ requirements are verified — from single-story tenant improvements to multi-building federal facility renovations. Below is an overview of our project experience organized by discipline and industry.",
   intro:
     "We are a multi-discipline firm. Our engineers have worked on everything from small commercial remodels to large-scale government and healthcare facilities. While we cannot publish confidential project details, the categories below represent types of projects we actively support.",
 };
@@ -171,7 +171,7 @@ export const PROJECT_CATEGORY_PAGES: ProjectCategoryPage[] = [
     h1: "Government Engineering Experience",
     kicker: "Project Experience",
     lede:
-      "Apex Grid supports government contractors and federal agencies on facility renovation, site improvement, and MEP upgrade projects. Our SDVOSB status makes us a preferred subcontractor for prime contractors pursuing federal small-business set-asides.",
+      "Apex Grid supports government contractors and federal agencies on facility renovation, site improvement, and MEP upgrade projects. Any socioeconomic certification, size status, or set-aside eligibility must be confirmed from current SBA and SAM.gov records for the pursuit.",
     projectTypes: [
       "Federal facility structural renovations",
       "Government building MEP upgrades",
@@ -195,7 +195,7 @@ export const PROJECT_CATEGORY_PAGES: ProjectCategoryPage[] = [
     h1: "Military and Defense Engineering Experience",
     kicker: "Project Experience",
     lede:
-      "As a Service-Disabled Veteran-Owned Small Business (SDVOSB), Apex Grid actively supports prime contractors and design-build teams working on military facility renovations, site improvements, and MEP upgrades across DoD installations.",
+      "Apex Grid supports prime contractors and design-build teams working on military facility renovations, site improvements, and MEP upgrades. Current professional credentials and any procurement classifications must be confirmed from official records for the pursuit.",
     projectTypes: [
       "Dormitory and barracks renovation engineering",
       "Facility structural renovation and repair",
@@ -242,7 +242,7 @@ export const PROJECT_CATEGORY_PAGES: ProjectCategoryPage[] = [
     h1: "Industrial Engineering Projects",
     kicker: "Project Experience",
     lede:
-      "Industrial facilities demand engineering that handles heavy equipment loads, process ventilation, high-bay structural systems, and specialized utilities. Apex Grid supports warehouse, manufacturing, distribution, and specialty industrial clients nationwide.",
+      "Industrial facilities demand engineering that handles heavy equipment loads, process ventilation, high-bay structural systems, and specialized utilities. Apex Grid supports warehouse, manufacturing, distribution, and specialty industrial clients where project-specific credentials and authorization are verified.",
     projectTypes: [
       "Warehouse structural engineering",
       "Manufacturing facility structural design",

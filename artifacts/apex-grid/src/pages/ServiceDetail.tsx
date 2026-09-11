@@ -13,7 +13,7 @@ const servicesData = {
   "mep": {
     title: "MEP Design & Engineering",
     bg: mepBg,
-    desc: "Mechanical, Electrical, and Plumbing systems engineered for operational efficiency, occupant comfort, and stringent code compliance. We also handle full Title 24 energy compliance modeling in-house.",
+    desc: "Mechanical, Electrical, and Plumbing systems engineered for operational efficiency, occupant comfort, and stringent code compliance. Title 24 energy compliance modeling is scoped and assigned to appropriately qualified professionals per project.",
     problemSection: {
       headline: "Coordinated Systems. Zero Guesswork.",
       content: "Uncoordinated MEP drawings are the single largest source of construction RFIs, change orders, and schedule delays. When ducts collide with steel beams in the field, profits evaporate. We engineer clash-free, coordinated systems from day one, modeling exactly how every conduit, pipe, and duct navigates the structural framework. The result? A smooth installation process and no costly surprises during rough-in."
@@ -45,7 +45,7 @@ const servicesData = {
     desc: "From new commercial builds to complex seismic retrofits and ADUs. We engineer robust, material-optimized frameworks that satisfy the most rigorous municipal peer reviews.",
     problemSection: {
       headline: "Drawings Built to Get Approved.",
-      content: "A structural design is useless if it spends months trapped in municipal plan check. We build our permit submittal packages with the reviewer in mind—PE-stamped, accompanied by a complete, cleanly formatted calculation package, adhering strictly to IBC/CBC standards, and fully coordinated with MEP and Civil constraints. We don't submit until we know it will pass."
+      content: "A structural design is useless if it spends months trapped in municipal plan check. We build permit submittal packages with the reviewer in mind—complete, cleanly formatted, coordinated with MEP and Civil constraints, and prepared for the applicable AHJ. Any required seal is provided only after the responsible professional's license, firm authorization, and discipline are verified. No approval outcome is guaranteed."
     },
     scopeHeadline: "Our Structural Approach",
     scopes: [
@@ -129,7 +129,7 @@ const servicesData = {
   "architecture": {
     title: "Architectural Design",
     bg: architectureBg,
-    desc: "Full architectural design services led by our in-house architect, Jason Mitchell. From concept and space planning through permit-ready construction documents — designed alongside our engineers, not handed off to them.",
+    desc: "Full architectural design services led by our architecture partner or project-specific architect, Jason Mitchell. From concept and space planning through permit-ready construction documents — designed alongside our engineers, not handed off to them.",
     problemSection: {
       headline: "Architecture and Engineering. One Roof. One Vision.",
       content: "Most projects bounce between an architecture firm and separate engineering consultants — and every handoff introduces delay, miscommunication, and redesign. Our architectural practice, led by Jason Mitchell, works in the same model as our structural, MEP, and civil teams from the first sketch. The result is a design that's beautiful, buildable, and coordinated before it ever reaches plan check."
@@ -160,11 +160,11 @@ const servicesData = {
 const servicePageMeta: Record<string, { title: string; description: string }> = {
   mep: {
     title: "MEP Design & Engineering | Apex Grid Engineering",
-    description: "Clash-free mechanical, electrical, and plumbing engineering for commercial and industrial projects. Title 24 energy compliance included in-house.",
+    description: "Coordinated mechanical, electrical, and plumbing engineering for commercial and industrial projects. Title 24 energy compliance is scoped per project.",
   },
   structural: {
     title: "Structural Design & Engineering | Apex Grid Engineering",
-    description: "PE-stamped structural drawings built for first-pass permit approval — from new commercial builds to complex seismic retrofits.",
+    description: "Structural drawings prepared for applicable permit review, with responsible-professional credentials verified per project — from new commercial builds to complex seismic retrofits.",
   },
   civil: {
     title: "Civil Engineering | Apex Grid Engineering",
@@ -197,7 +197,7 @@ export default function ServiceDetail() {
     "name": service?.title ?? "Engineering Services",
     "description": service?.desc ?? "",
     "provider": {
-      "@type": "ProfessionalService",
+      "@type": "Organization",
       "@id": "https://apexgrideng.com/#service",
       "name": "Apex Grid Engineering",
       "url": "https://apexgrideng.com/",
@@ -303,14 +303,14 @@ export default function ServiceDetail() {
                   Provide your architectural backgrounds or conceptual narrative. Our team completes an initial review and delivers a comprehensive, fixed-fee engineering proposal typically within 12–24 hours.
                 </p>
                 <ul className="space-y-4 mb-10 text-sm font-medium border-t border-border pt-8">
-                  <li className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary" /> Nationwide PE Licensure
-                  </li>
+                   <li className="flex items-center gap-3">
+                     <CheckCircle2 className="w-5 h-5 text-primary" /> Project-specific license and AHJ review
+                   </li>
                   <li className="flex items-center gap-3">
                     <CheckCircle2 className="w-5 h-5 text-primary" /> Integrated Multi-Discipline
                   </li>
                   <li className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary" /> Guaranteed Proposal Pricing
+                    <CheckCircle2 className="w-5 h-5 text-primary" /> Scope-based proposal pricing
                   </li>
                 </ul>
                 <Link 
