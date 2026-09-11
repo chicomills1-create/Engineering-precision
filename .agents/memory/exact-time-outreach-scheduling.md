@@ -15,11 +15,11 @@ Manual approvals and automatic preparation must allocate from the same date-keye
 
 **How to apply:** Route every initial-message approval through the shared window allocator, enforce one global Phoenix-day ceiling at dispatch, and keep campaign limits as an additional constraint rather than the global limit itself.
 
-The approved operating cycle is autonomous: target 100 Direct regular, 50 Public regular, and 50 verified hot-market initial messages without another approval. Verified hot-market contacts beyond 50 may also send. Hot Lead follow-ups are additional to the 200-message initial-outreach baseline and do not consume the regular campaign's monthly ramp.
+The approved operating cycle is autonomous: target 100 Verified/Direct, 50 Public, 50 Hot Market, and 50 Hot Lead initial messages without another approval. Eligible follow-ups are additional to this 250-message daily baseline.
 
-**Why:** The user chose a 100 Direct + 50 Public + 50 hot-market baseline so daily initial outreach reaches 200 when every verified lane is filled, while strong engaged Hot Leads receive follow-ups without reducing new-prospect capacity.
+**Why:** The user confirmed the fourth 50-message Hot Lead lane is a fixed daily allocation, not an optional overage or only a follow-up category.
 
-**How to apply:** Treat approval as standing authorization for the reviewed process. Enforce 100 Direct, 50 Public, and 50 verified hot-market initial messages per day; allow verified hot-market extras and leave unfilled slots empty. Apply this Phoenix-month ramp to regular campaign emails: September 2026 6,000; October 10,000; November 20,000; December 35,000; January 2027 onward 50,000 maximum. Hot Lead follow-ups are outside the ramp and may raise the monthly total. Keep ambiguous provider outcomes blocked until SendGrid reconciliation proves whether each message was accepted, delivered, or safe to retry.
+**How to apply:** Treat approval as standing authorization for the reviewed process. Enforce separate daily caps of 100 Verified/Direct, 50 Public, 50 Hot Market, and 50 Hot Leads; leave unfilled slots empty rather than borrowing unverified contacts across lanes. Eligible follow-ups are additional. Apply this Phoenix-month ramp to regular campaign emails: September 2026 6,000; October 10,000; November 20,000; December 35,000; January 2027 onward 50,000 maximum. Keep ambiguous provider outcomes blocked until SendGrid reconciliation proves whether each message was accepted, delivered, or safe to retry.
 
 An automated drip must create every approved sequence row before the initial delivery event; delivery handling can only schedule follow-ups that already exist. Reconcile missing rows idempotently on startup and derive their dates from verified delivery evidence.
 
@@ -33,8 +33,8 @@ The standing Apex Grid operating order is outcome-based, not reminder-based: at 
 
 **How to apply:** Treat a due approved queue as active work until provider handoff evidence is persisted or a safety-critical blocker genuinely requires user action. Verify processed, delivered, bounced, and unresolved counts; after dispatch, research and stage verified replacements for the following Phoenix send window.
 
-The durable daily runner must perform next-day preparation itself after research; regular and all Hot Market source variants share their lane caps, and any next-day shortfall keeps the daily run partial for recovery rather than reporting success.
+The durable daily runner must perform next-day preparation itself after research; all source variants within each of the four lanes share that lane's cap, and any next-day shortfall keeps the daily run partial for recovery rather than reporting success.
 
-**Why:** A dispatch-only runner can send today's queue while silently leaving tomorrow empty, and inconsistent Hot Market source labels can double-fill the 50-message lane.
+**Why:** A dispatch-only runner can send today's queue while silently leaving tomorrow empty, and inconsistent source labels can double-fill a lane or omit the separate Hot Lead allocation.
 
-**How to apply:** Every primary and recovery pass must persist the authoritative 100 Direct, 50 Public, and 50 Hot Market next-day counts. A skipped or still-running preparation claim must return its persisted shortfall; never convert it to zero.
+**How to apply:** Every primary and recovery pass must persist the authoritative 100 Verified/Direct, 50 Public, 50 Hot Market, and 50 Hot Lead next-day counts. A skipped or still-running preparation claim must return its persisted shortfall; never convert it to zero.
