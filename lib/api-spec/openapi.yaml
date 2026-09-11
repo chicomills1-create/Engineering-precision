@@ -21,6 +21,43 @@ tags:
   - name: linkedin
     description: Authenticated, manual-only LinkedIn research and review workflow.
 paths:
+  /outreach/inventory/import:
+    post:
+      operationId: importVerifiedOutreachInventory
+      tags: [outreach]
+      summary: Import the bundled verified business inventory (Clerk admin only)
+      responses:
+        "201": { description: Import report, content: { application/json: { schema: { $ref: "#/components/schemas/InventoryImportReport" } } } }
+        "400": { description: Invalid or unsafe source, content: { application/json: { schema: { $ref: "#/components/schemas/ErrorMessage" } } } }
+  /outreach/lane-config:
+    get:
+      operationId: getOutreachLaneConfig
+      tags: [outreach]
+      parameters:
+        - { name: campaignKey, in: query, required: false, schema: { type: string } }
+      responses:
+        "200": { description: Persistent runtime lane configuration, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachLaneConfig" } } } }
+  /outreach/system-config:
+    get:
+      operationId: getOutreachSystemConfig
+      tags: [outreach]
+      summary: Read-only effective outreach schedule and policy
+      responses:
+        "200": { description: Effective authoritative configuration, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachSystemConfig" } } } }
+        "503": { description: Configuration unavailable }
+  /outreach/one-time-override:
+    post:
+      operationId: createOutreachOneTimeOverride
+      tags: [outreach]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OutreachOneTimeOverrideInput"
+      responses:
+        "201": { description: Audited blocked/requested override, content: { application/json: { schema: { $ref: "#/components/schemas/OutreachOneTimeOverride" } } } }
+        "400": { description: Invalid request, content: { application/json: { schema: { $ref: "#/components/schemas/ErrorMessage" } } } }
   /healthz:
     get:
       operationId: healthCheck
@@ -1138,6 +1175,50 @@ paths:
 
 components:
   schemas:
+    InventoryImportReport:
+      type: object
+      required: [batchId, sourceRows, importedPendingQualification, excluded, namedImported, publicImported, namedEligible, publicEligible, exclusions]
+      properties:
+        batchId: { type: string }
+        sourceRows: { type: number }
+        imported: { type: number }
+        importedPendingQualification: { type: number }
+        excluded: { type: number }
+        namedImported: { type: number }
+        publicImported: { type: number }
+        namedEligible: { type: number }
+        publicEligible: { type: number }
+        idempotent: { type: boolean }
+        exclusions: { type: object, additionalProperties: { type: number } }
+    OutreachLaneConfig:
+      type: object
+      required: [campaignKey, effectiveMonth, namedLimit, publicLimit, hotMarketLimit, hotLeadLimit]
+      properties:
+        campaignKey: { type: string }
+        effectiveMonth: { type: string }
+        namedLimit: { type: number }
+        publicLimit: { type: number }
+        hotMarketLimit: { type: number }
+        hotLeadLimit: { type: number }
+    OutreachOneTimeOverrideInput:
+      type: object
+      required: [campaignKey, requestedForDate, requestedLimit]
+      properties:
+        campaignKey: { type: string }
+        requestedForDate: { type: string, format: date }
+        requestedLimit: { type: number, minimum: 1 }
+        reason: { type: string }
+    OutreachOneTimeOverride:
+      type: object
+      required: [campaignKey, requestedForDate, requestedLimit, requestedBy, status, expiresAt]
+      properties:
+        campaignKey: { type: string }
+        requestedForDate: { type: string, format: date }
+        requestedLimit: { type: number }
+        requestedBy: { type: string }
+        status: { type: string, enum: [requested, blocked] }
+        decisionEvidence: { type: string }
+        expiresAt: { type: string, format: date-time }
     HealthStatus:
       type: object
       properties:
@@ -1597,7 +1678,7 @@ components:
         waiting: { type: number }
     OutreachReply:
       type: object
-      required: [id, senderEmail, subject, textBody, messageType, status, forwardStatus, receivedAt, createdAt, updatedAt]
+      required: [id, senderEmail, subject, textBody, messageType, sentiment, status, forwardStatus, receivedAt, createdAt, updatedAt]
       properties:
         id: { type: number }
         senderEmail: { type: string }
@@ -1606,6 +1687,7 @@ components:
         subject: { type: string }
         textBody: { type: string }
         messageType: { type: string, enum: [reply, auto_reply, permanent_closure] }
+        sentiment: { type: string, enum: [neutral, positive, negative, auto] }
         prospectId: { type: [number, "null"] }
         outreachMessageId: { type: [number, "null"] }
         companyName: { type: [string, "null"] }
@@ -1659,7 +1741,7 @@ components:
         token: { type: string, minLength: 1, maxLength: 128 }
     OutreachDashboard:
       type: object
-      required: [prospects, campaigns, messages, upcomingFollowUps, stoppedSequences, initialOpeners, followUpDelivered, followUpBounced, followUpReplies, sentToday, providerProcessedToday, deliveredToday, bouncedToday, unresolvedToday, replies, unreadReplies, nextPreparationDate, nextPreparationTarget, nextPreparationPrepared, nextPreparationShortfall, nextPreparationStatus, nextPreparationCompletedAt, nextPreparationError, adminAllowlistReady, productionConfigReady, sendgridDeliveryPathReady, deliveryEventsReady, replyWebhookReady, automationEnabled, automationReady, researchAutomationEnabled, researchAutomationReady]
+      required: [prospects, campaigns, messages, upcomingFollowUps, stoppedSequences, initialOpeners, followUpDelivered, followUpBounced, followUpReplies, sentToday, providerProcessedToday, deliveredToday, bouncedToday, unresolvedToday, replies, unreadReplies, nextPreparationDate, nextPreparationTarget, nextPreparationPrepared, nextPreparationShortfall, nextPreparationStatus, nextPreparationCompletedAt, nextPreparationError, adminAllowlistReady, productionConfigReady, sendgridDeliveryPathReady, deliveryEventsReady, replyWebhookReady, automationEnabled, automationReady, researchAutomationEnabled, researchAutomationReady, monthlyTarget, sentThisMonth, remainingThisMonth, monthlyPercentComplete, todayTarget, todayRemaining, currentSendingPace, requiredDailyPace, qualifiedInventory, delivered, bounced, deliveryRate, opened, clicked, replied, positiveReplies, negativeReplies, unsubscribed, suppressed, newResearched, newVerified, septemberLanes]
       properties:
         prospects: { type: number }
         campaigns: { type: number }
@@ -1693,6 +1775,50 @@ components:
         automationReady: { type: boolean }
         researchAutomationEnabled: { type: boolean }
         researchAutomationReady: { type: boolean }
+        monthlyTarget: { type: number }
+        sentThisMonth: { type: number }
+        remainingThisMonth: { type: number }
+        monthlyPercentComplete: { type: number }
+        todayTarget: { type: number }
+        todayRemaining: { type: number }
+        currentSendingPace: { type: number }
+        requiredDailyPace: { type: number }
+        qualifiedInventory: { type: number }
+        delivered: { type: number }
+        bounced: { type: number }
+        deliveryRate: { type: number }
+        opened: { type: number }
+        clicked: { type: number }
+        replied: { type: number }
+        positiveReplies: { type: number }
+        negativeReplies: { type: number }
+        unsubscribed: { type: number }
+        suppressed: { type: number }
+        newResearched: { type: number }
+        newVerified: { type: number }
+        septemberLanes:
+          type: [object, "null"]
+          properties:
+            named: { $ref: "#/components/schemas/OutreachLaneProgress" }
+            public: { $ref: "#/components/schemas/OutreachLaneProgress" }
+            hotMarket: { $ref: "#/components/schemas/OutreachLaneProgress" }
+            hotLead: { $ref: "#/components/schemas/OutreachLaneProgress" }
+            totalSent: { type: number }
+            totalTarget: { type: number }
+    OutreachLaneProgress:
+      type: object
+      required: [sent, target]
+      properties:
+        sent: { type: number }
+        target: { type: number }
+    OutreachSystemConfig:
+      type: object
+      required: [version, policy, month, schedule]
+      properties:
+        version: { type: number }
+        month: { type: string }
+        policy: { type: object, additionalProperties: true }
+        schedule: { type: object, additionalProperties: true }
     OutreachHotLead:
       type: object
       required: [prospectId, companyName, contactName, contactEmail, location, campaignName, openCount, clickCount, firstEngagedAt, latestEngagedAt, qualification]

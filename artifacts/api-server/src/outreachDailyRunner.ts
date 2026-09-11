@@ -16,6 +16,7 @@ import { prepareNextPhoenixOutreach } from "./lib/outreachPreparation";
 import { prepareNextPhoenixHotMarketOutreach } from "./lib/hotMarketPreparation";
 import { getCatchUpProgress } from "./lib/outreachCatchUp";
 import { sendDailyOutreachReport } from "./lib/outreachDailyReport";
+import { loadOutreachSystemConfig } from "./lib/outreachSystemConfig";
 import {
   isPrimaryPhoenixInvocation,
   runDailyOutreachOnce,
@@ -59,6 +60,7 @@ function wait(milliseconds: number): Promise<void> {
 }
 
 async function main(): Promise<void> {
+  await loadOutreachSystemConfig();
   validateProductionAutomation();
   const lockClient = await advisoryLockPool.connect();
   const exclusive = await withExclusiveDailyOutreachRun({
@@ -122,7 +124,8 @@ async function main(): Promise<void> {
   const hasPreparationShortfall =
     result.directShortfall > 0
     || result.publicShortfall > 0
-    || result.hotMarketShortfall > 0;
+    || result.hotMarketShortfall > 0
+    || (result.hotLeadShortfall ?? 100) > 0;
   const status = result.unresolved > 0 || hasPreparationShortfall
     ? "partial"
     : "completed";
@@ -132,7 +135,7 @@ async function main(): Promise<void> {
       ? "preparation_shortfall"
       : run.incidentType;
   const incidentError = hasPreparationShortfall
-    ? `Next-day queue shortfall: ${result.directShortfall} Direct, ${result.publicShortfall} Public, ${result.hotMarketShortfall} Hot Market`
+    ? `Next-day queue shortfall: ${result.directShortfall} Named, ${result.publicShortfall} Public, ${result.hotMarketShortfall} Hot Market, ${result.hotLeadShortfall ?? 100} Hot Lead`
     : null;
   await db.update(outreachDailyRunsTable).set({
     status,

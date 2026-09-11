@@ -15,11 +15,17 @@ Manual approvals and automatic preparation must allocate from the same date-keye
 
 **How to apply:** Route every initial-message approval through the shared window allocator, enforce one global Phoenix-day ceiling at dispatch, and keep campaign limits as an additional constraint rather than the global limit itself.
 
-The approved operating cycle is autonomous: target 100 Verified/Direct, 50 Public, 50 Hot Market, and 50 Hot Lead initial messages without another approval. Eligible follow-ups are additional to this 250-message daily baseline.
+The approved September 2026 operating cycle is autonomous: target 100 Verified People, 100 Public Business Emails, 100 Hot Market contacts, and 100 Hot Leads without another approval. Eligible follow-ups are additional to this 400-message daily baseline.
 
-**Why:** The user confirmed the fourth 50-message Hot Lead lane is a fixed daily allocation, not an optional overage or only a follow-up category.
+**Why:** The user replaced the prior 250/day allocation with four equal 100-message lanes and explicitly required the limit to live in persistent campaign configuration.
 
-**How to apply:** Treat approval as standing authorization for the reviewed process. Enforce separate daily caps of 100 Verified/Direct, 50 Public, 50 Hot Market, and 50 Hot Leads; leave unfilled slots empty rather than borrowing unverified contacts across lanes. Eligible follow-ups are additional. Apply this Phoenix-month ramp to regular campaign emails: September 2026 6,000; October 10,000; November 20,000; December 35,000; January 2027 onward 50,000 maximum. Keep ambiguous provider outcomes blocked until SendGrid reconciliation proves whether each message was accepted, delivered, or safe to retry.
+**How to apply:** Read the four lane caps from persistent runtime campaign configuration. Keep named people and evidence-backed public business inboxes as separate eligibility classes; leave unfilled slots empty rather than borrowing unverified contacts. A one-time campaign override must be campaign/date scoped, audited, provider-health and capacity checked, and must never alter the standing 400/day configuration. Keep ambiguous provider outcomes blocked until SendGrid reconciliation proves whether each message was accepted, delivered, or safe to retry.
+
+The authoritative monthly schedule is October 2026: 20,000 total; November: 35,000 total; December: 50,000 total; January 2027 onward: 50,000 total per month.
+
+**Why:** These are monthly targets, not daily limits, and prior versions contained lower or ambiguously labeled values.
+
+**How to apply:** Calculate post-September daily pacing from remaining monthly volume and remaining Phoenix sending days, subject to qualified inventory, provider health, deliverability safeguards, and the 50,000 monthly cap.
 
 An automated drip must create every approved sequence row before the initial delivery event; delivery handling can only schedule follow-ups that already exist. Reconcile missing rows idempotently on startup and derive their dates from verified delivery evidence.
 
@@ -37,4 +43,4 @@ The durable daily runner must perform next-day preparation itself after research
 
 **Why:** A dispatch-only runner can send today's queue while silently leaving tomorrow empty, and inconsistent source labels can double-fill a lane or omit the separate Hot Lead allocation.
 
-**How to apply:** Every primary and recovery pass must persist the authoritative 100 Verified/Direct, 50 Public, 50 Hot Market, and 50 Hot Lead next-day counts. A skipped or still-running preparation claim must return its persisted shortfall; never convert it to zero.
+**How to apply:** Every primary and recovery pass must persist the authoritative configured lane counts (September 2026: 100 each for Named, Public, Hot Market, and Hot Lead). A skipped or still-running preparation claim must return its persisted shortfall; never convert it to zero.

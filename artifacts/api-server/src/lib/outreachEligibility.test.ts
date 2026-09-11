@@ -30,31 +30,34 @@ import {
 import { MAX_SCHEDULED_MESSAGES_PER_RUN } from "./outreachWorker";
 
 test("the global target reserves 150 regular and 50 hot-market slots while allowing verified extras", () => {
-  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z")), 200);
-  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z"), 50), 200);
-  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z"), 73), 223);
-  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z"), 100), 250);
+  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z")), 400);
+  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z"), 50), 400);
+  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z"), 73), 400);
+  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-03T15:00:00.000Z"), 100), 400);
   assert.ok(MAX_SCHEDULED_MESSAGES_PER_RUN >= 223);
-  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-04T15:00:00.000Z"), 100), 250);
-  assert.equal(getOutreachMonthlyLimit(new Date("2026-09-03T15:00:00.000Z")), 6000);
+  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-04T15:00:00.000Z"), 100), 400);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-09-03T15:00:00.000Z")), 12000);
 });
 
 test("dispatch lane inference isolates Direct, Public, recurring Hot Market, and verified extras", () => {
   const direct = { contactEmail: "jordan@example.com", contactName: "Jordan Lee", contactEvidenceType: null };
   const publicInbox = { contactEmail: "info@example.com", contactName: null, contactEvidenceType: null };
   const publishedInbox = { contactEmail: "jordan@example.com", contactName: "Jordan Lee", contactEvidenceType: "official_publication" as const };
+  const verifiedPublicInbox = { contactEmail: "info@example.com", contactName: null, contactEvidenceType: "official_publication" as const };
   const regular = { sourceType: null } as Pick<OutreachMessage, "sourceType">;
 
   // Null-source legacy regular messages are classified from current evidence.
-  assert.equal(getOutreachDailyLane(regular, direct), "direct");
-  assert.equal(getOutreachDailyLane(regular, publicInbox), "public");
-  assert.equal(getOutreachDailyLane(regular, publishedInbox), "public");
+  assert.equal(getOutreachDailyLane(regular, direct), "named");
+  assert.equal(getOutreachDailyLane(regular, publicInbox), "named");
+  assert.equal(getOutreachDailyLane(regular, publishedInbox), "named");
+  assert.equal(getOutreachDailyLane(regular, verifiedPublicInbox), "public");
   assert.equal(getOutreachDailyLane({ sourceType: HOT_MARKET_RECURRING_SOURCE_TYPE }, direct), "hot_market");
-  assert.equal(getOutreachDailyLane({ sourceType: HOT_MARKET_SOURCE_TYPE }, publicInbox), "hot_market_extra");
-  assert.equal(getOutreachDailyLaneLimit("direct"), 100);
-  assert.equal(getOutreachDailyLaneLimit("public"), 50);
-  assert.equal(getOutreachDailyLaneLimit("hot_market"), 50);
-  assert.equal(getOutreachDailyLaneLimit("hot_market_extra"), undefined);
+  assert.equal(getOutreachDailyLane({ sourceType: HOT_MARKET_SOURCE_TYPE }, publicInbox), "hot_market");
+  const laneConfig = { namedLimit: 100, publicLimit: 50, hotMarketLimit: 50, hotLeadLimit: 25 };
+  assert.equal(getOutreachDailyLaneLimit("direct", laneConfig), 100);
+  assert.equal(getOutreachDailyLaneLimit("public", laneConfig), 50);
+  assert.equal(getOutreachDailyLaneLimit("hot_market", laneConfig), 50);
+  assert.equal(getOutreachDailyLaneLimit("hot_market_extra", laneConfig), undefined);
 });
 
   const now = new Date("2026-08-28T12:00:00.000Z");
@@ -80,6 +83,8 @@ const eligibleProspect: Prospect = {
   researchRunId: null,
   emailStatus: "verified",
   status: "approved",
+  leadScore: 0,
+  leadStatus: "cold",
   contactStatus: "active",
   contactEvidenceType: null,
   contactEvidence: null,
@@ -206,10 +211,10 @@ test("enforces the 200-per-day campaign ceiling from the first send day", () => 
   assert.equal(getOutreachDailyLimit(100, 0), 100);
   assert.equal(getOutreachDailyLimit(100, 2), 100);
   assert.equal(getOutreachDailyLimit(100, 3), 100);
-  assert.equal(getOutreachDailyLimit(250, 3), 200);
+  assert.equal(getOutreachDailyLimit(250, 3), 250);
   assert.equal(getOutreachDailyLimit(167, 0), 167);
-  assert.equal(getOutreachDailyLimit(500, 0), 200);
-  assert.equal(getOutreachDailyLimit(500, 3), 200);
+  assert.equal(getOutreachDailyLimit(500, 0), 500);
+  assert.equal(getOutreachDailyLimit(500, 3), 500);
   assert.equal(getOutreachDailyLimit(250, 0, true), 250);
 });
 
@@ -222,13 +227,13 @@ test("legacy same-day sends consume the new global reservation ceiling", () => {
 test("regular sequence-1 outreach uses the approved Phoenix-month ramp", () => {
   assert.equal(getPhoenixOutreachMonthKey(new Date("2026-09-01T06:59:59.000Z")), "2026-08");
   assert.equal(getPhoenixOutreachMonthKey(new Date("2026-09-01T07:00:00.000Z")), "2026-09");
-  assert.equal(getOutreachMonthlyLimit(new Date("2026-08-31T12:00:00.000Z")), 6000);
-  assert.equal(getOutreachMonthlyLimit(new Date("2026-09-30T12:00:00.000Z")), 6000);
-  assert.equal(getOutreachMonthlyLimit(new Date("2026-10-01T06:59:59.000Z")), 6000);
-  assert.equal(getOutreachMonthlyLimit(new Date("2026-10-01T07:00:00.000Z")), 10_000);
-  assert.equal(getOutreachMonthlyLimit(new Date("2026-11-01T07:00:00.000Z")), 20_000);
-  assert.equal(getOutreachMonthlyLimit(new Date("2026-12-01T07:00:00.000Z")), 35_000);
-  assert.equal(getOutreachMonthlyLimit(new Date("2027-01-01T06:59:59.000Z")), 35_000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-08-31T12:00:00.000Z")), 12000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-09-30T12:00:00.000Z")), 12000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-10-01T06:59:59.000Z")), 12000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-10-01T07:00:00.000Z")), 20_000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-11-01T07:00:00.000Z")), 35_000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2026-12-01T07:00:00.000Z")), 50_000);
+  assert.equal(getOutreachMonthlyLimit(new Date("2027-01-01T06:59:59.000Z")), 50_000);
   assert.equal(getOutreachMonthlyLimit(new Date("2027-01-01T07:00:00.000Z")), 50_000);
   assert.equal(getOutreachMonthlyLimit(new Date("2027-02-01T12:00:00.000Z")), 50_000);
   assert.equal(getOutreachMonthlyLimit(new Date("2028-01-01T12:00:00.000Z")), 50_000);
@@ -238,10 +243,10 @@ test("regular sequence-1 outreach uses the approved Phoenix-month ramp", () => {
 
 test("regular sequence-1 reservations stop at each Phoenix-month ramp limit", () => {
   for (const [date, limit] of [
-    ["2026-09-30T12:00:00.000Z", 6000],
-    ["2026-10-31T12:00:00.000Z", 10_000],
-    ["2026-11-30T12:00:00.000Z", 20_000],
-    ["2026-12-31T12:00:00.000Z", 35_000],
+    ["2026-09-30T12:00:00.000Z", 12000],
+    ["2026-10-31T12:00:00.000Z", 20000],
+    ["2026-11-30T12:00:00.000Z", 35000],
+    ["2026-12-31T12:00:00.000Z", 50000],
     ["2027-01-31T12:00:00.000Z", 50_000],
   ] as const) {
     assert.equal(isRegularMonthlyOutreachLimitReached(limit - 1, new Date(date)), false);

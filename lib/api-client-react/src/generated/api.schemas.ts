@@ -5,6 +5,57 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+export type InventoryImportReportExclusions = {[key: string]: number};
+
+export interface InventoryImportReport {
+  batchId: string;
+  sourceRows: number;
+  imported?: number;
+  importedPendingQualification: number;
+  excluded: number;
+  namedImported: number;
+  publicImported: number;
+  namedEligible: number;
+  publicEligible: number;
+  idempotent?: boolean;
+  exclusions: InventoryImportReportExclusions;
+}
+
+export interface OutreachLaneConfig {
+  campaignKey: string;
+  effectiveMonth: string;
+  namedLimit: number;
+  publicLimit: number;
+  hotMarketLimit: number;
+  hotLeadLimit: number;
+}
+
+export interface OutreachOneTimeOverrideInput {
+  campaignKey: string;
+  requestedForDate: string;
+  /** @minimum 1 */
+  requestedLimit: number;
+  reason?: string;
+}
+
+export type OutreachOneTimeOverrideStatus = typeof OutreachOneTimeOverrideStatus[keyof typeof OutreachOneTimeOverrideStatus];
+
+
+export const OutreachOneTimeOverrideStatus = {
+  requested: 'requested',
+  blocked: 'blocked',
+} as const;
+
+export interface OutreachOneTimeOverride {
+  campaignKey: string;
+  requestedForDate: string;
+  requestedLimit: number;
+  requestedBy: string;
+  status: OutreachOneTimeOverrideStatus;
+  decisionEvidence?: string;
+  expiresAt: string;
+}
+
 export interface HealthStatus {
   status: string;
 }
@@ -820,6 +871,16 @@ export const OutreachReplyMessageType = {
   permanent_closure: 'permanent_closure',
 } as const;
 
+export type OutreachReplySentiment = typeof OutreachReplySentiment[keyof typeof OutreachReplySentiment];
+
+
+export const OutreachReplySentiment = {
+  neutral: 'neutral',
+  positive: 'positive',
+  negative: 'negative',
+  auto: 'auto',
+} as const;
+
 export type OutreachReplyStatus = typeof OutreachReplyStatus[keyof typeof OutreachReplyStatus];
 
 
@@ -849,6 +910,7 @@ export interface OutreachReply {
   subject: string;
   textBody: string;
   messageType: OutreachReplyMessageType;
+  sentiment: OutreachReplySentiment;
   /** @nullable */
   prospectId?: number | null;
   /** @nullable */
@@ -957,6 +1019,23 @@ export const OutreachDashboardNextPreparationStatus = {
   failed: 'failed',
 } as const;
 
+export interface OutreachLaneProgress {
+  sent: number;
+  target: number;
+}
+
+/**
+ * @nullable
+ */
+export type OutreachDashboardSeptemberLanes = {
+  named?: OutreachLaneProgress;
+  public?: OutreachLaneProgress;
+  hotMarket?: OutreachLaneProgress;
+  hotLead?: OutreachLaneProgress;
+  totalSent?: number;
+  totalTarget?: number;
+} | null;
+
 export interface OutreachDashboard {
   prospects: number;
   campaigns: number;
@@ -992,6 +1071,40 @@ export interface OutreachDashboard {
   automationReady: boolean;
   researchAutomationEnabled: boolean;
   researchAutomationReady: boolean;
+  monthlyTarget: number;
+  sentThisMonth: number;
+  remainingThisMonth: number;
+  monthlyPercentComplete: number;
+  todayTarget: number;
+  todayRemaining: number;
+  currentSendingPace: number;
+  requiredDailyPace: number;
+  qualifiedInventory: number;
+  delivered: number;
+  bounced: number;
+  deliveryRate: number;
+  opened: number;
+  clicked: number;
+  replied: number;
+  positiveReplies: number;
+  negativeReplies: number;
+  unsubscribed: number;
+  suppressed: number;
+  newResearched: number;
+  newVerified: number;
+  /** @nullable */
+  septemberLanes: OutreachDashboardSeptemberLanes;
+}
+
+export type OutreachSystemConfigPolicy = { [key: string]: unknown };
+
+export type OutreachSystemConfigSchedule = { [key: string]: unknown };
+
+export interface OutreachSystemConfig {
+  version: number;
+  month: string;
+  policy: OutreachSystemConfigPolicy;
+  schedule: OutreachSystemConfigSchedule;
 }
 
 export type OutreachHotLeadQualification = typeof OutreachHotLeadQualification[keyof typeof OutreachHotLeadQualification];
@@ -2175,6 +2288,10 @@ export interface LinkedinDashboard {
 export interface LinkedinRetentionResult {
   expiredPeople: number;
 }
+
+export type GetOutreachLaneConfigParams = {
+campaignKey?: string;
+};
 
 export type ListSeoAuditIssuesParams = {
 severity?: string;

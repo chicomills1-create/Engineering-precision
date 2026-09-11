@@ -117,6 +117,12 @@ export type DailyOutreachRunnerResult = {
   catchUpTarget?: number;
   catchUpEnrolled?: number;
   catchUpRemaining?: number;
+  namedTarget?: number;
+  publicTarget?: number;
+  hotMarketTarget?: number;
+  hotLeadTarget?: number;
+  hotLeadPrepared?: number;
+  hotLeadShortfall?: number;
 };
 
 export type DailyOutreachLease = {
@@ -178,6 +184,9 @@ export async function runDailyOutreachOnce(
       hotMarketPrepared: hotMarketPreparation.prepared,
       hotMarketScheduled: hotMarketPreparation.totalScheduled,
       hotMarketShortfall: hotMarketPreparation.shortfall,
+      hotLeadTarget: 100,
+      hotLeadPrepared: 0,
+      hotLeadShortfall: 100,
       waitMs,
     };
   }
@@ -201,6 +210,9 @@ export async function runDailyOutreachOnce(
     hotMarketPrepared: hotMarketPreparation.prepared,
     hotMarketScheduled: hotMarketPreparation.totalScheduled,
     hotMarketShortfall: hotMarketPreparation.shortfall,
+    hotLeadTarget: 100,
+    hotLeadPrepared: 0,
+    hotLeadShortfall: 100,
     waitMs,
   };
 }

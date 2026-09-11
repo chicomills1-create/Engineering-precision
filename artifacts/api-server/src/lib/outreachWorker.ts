@@ -273,6 +273,7 @@ export async function sendClaimedOutreachMessage(
     campaign,
     {
       ...options,
+      deliverabilityReady: getOutreachAutomationStatus().sendgridDeliveryPathReady || Boolean(options.dispatch),
       expectedPersistedStatus: "sending",
       afterProviderDispatch: async (providerMessageId) => {
         try {

@@ -1,0 +1,385 @@
+That trace is actually useful because Replit finally identified the real problems instead of hiding behind “I can’t send it.”
+
+One important conflict showed up, though: your permanent September plan is 400/day, while this one-time request is 2,027 today. If 2,027 is meant to be a special launch batch, Replit should treat it as an explicit one-time exception—not silently change your permanent September limit.
+
+I’d give Replit this next:
+
+You have now identified the actual production blockers. Stop re-diagnosing them and fix the production workflow through the application's authorized architecture.
+
+Do NOT bypass suppression, unsubscribe, deduplication, bounce, complaint, verification, or provider protections.
+
+PRIORITY 1 — REPAIR SENDGRID PRODUCTION CONNECTIVITY
+
+The deployed production application currently cannot dispatch because the SendGrid production connection is unavailable.
+
+Repair the production SendGrid integration using the application's existing secret-management and deployment configuration.
+
+Requirements:
+
+- Do not print or expose the SendGrid API key.
+- Do not request that the API key be pasted into chat.
+- Verify that the production deployment has access to the correct SendGrid credential.
+- Verify the credential has the permissions required by the existing sending implementation.
+- Perform a harmless authenticated production connectivity test.
+- Confirm whether SendGrid accepts the test request.
+
+Do not proceed to live campaign dispatch until this passes.
+
+---
+
+PRIORITY 2 — REPAIR THE STUCK DAILY WORKER
+
+The September 10 recovery run is incorrectly stuck in "running" with:
+
+Claimed: 0
+Provider accepted: 0
+Unresolved: 2,207
+
+Determine why the worker never progressed.
+
+Check:
+
+- Worker process health
+- Queue claims
+- Database locks
+- Job leases
+- Job timeout/recovery logic
+- Provider availability
+- Retry state
+- Dead-letter handling
+- Scheduler invocation
+
+A run with zero claimed records must not remain permanently "running".
+
+Implement safe stale-job recovery.
+
+If a worker exceeds the configured lease/timeout without progress, it should be transitioned to an appropriate failed/stale state and become retryable.
+
+Do not delete campaign history.
+
+---
+
+PRIORITY 3 — BUILD A GUARDED CSV IMPORTER
+
+Create an authorized production-side CSV ingestion pathway for:
+
+".agents/outputs/verified-business-email-contacts.csv"
+
+This must run inside the deployed API/backend that already has legitimate production write authority.
+
+The importer must NOT grant the AI agent direct unrestricted database write access.
+
+Required flow:
+
+CSV
+→ parse
+→ normalize
+→ validate
+→ deduplicate
+→ suppression check
+→ prior-recipient check
+→ bounce/complaint check
+→ contact classification
+→ eligibility evaluation
+→ outreach_prospects
+→ preparation queue
+
+Create auditable import records.
+
+For every imported row retain:
+
+- source filename
+- import batch ID
+- company
+- contact name
+- title
+- email
+- email type
+- source URL
+- verification status
+- verification method
+- eligibility result
+- exclusion reason
+- imported timestamp
+
+The importer should be idempotent.
+
+Re-importing the same file must not create duplicate prospects.
+
+---
+
+PRIORITY 4 — SUPPORT BOTH NAMED AND PUBLIC BUSINESS CONTACTS
+
+The permanent outreach strategy intentionally contains separate categories:
+
+1. Verified named people
+2. Public business emails
+3. Hot-market contacts
+4. Hot leads
+
+Therefore, do NOT incorrectly apply the named-decision-maker rule to the Public Business Email category.
+
+Maintain different eligibility classes.
+
+NAMED VERIFIED CONTACT
+
+Requirements may include:
+
+- Named individual
+- Business email
+- Appropriate company
+- Relevant title/role
+- Public/source evidence
+- Verification evidence
+
+PUBLIC BUSINESS EMAIL
+
+Examples:
+
+info@
+estimating@
+bids@
+proposals@
+preconstruction@
+development@
+construction@
+projects@
+office@
+contact@
+
+These do NOT require a named individual if:
+
+- The business itself is legitimate.
+- The address is publicly published or otherwise evidence-backed.
+- The company fits the targeted industries.
+- The address has not opted out, bounced, complained, or been suppressed.
+
+Do not label an evidence-backed public company inbox as invalid merely because it is role-based.
+
+Keep it classified separately.
+
+Do NOT fabricate role-based addresses.
+
+---
+
+PRIORITY 5 — FIX THE EMPTY SEPTEMBER 11 PREPARATION RESULT
+
+Today's preparation record currently shows:
+
+Target: 150
+Prepared: 0
+Skipped: 1,046
+Shortfall: 150
+
+Produce a breakdown of why those 1,046 contacts were skipped.
+
+Group skip reasons and counts.
+
+Examples:
+
+Suppression
+Duplicate
+Previously contacted
+Missing source
+Low confidence
+Missing title
+Role-based contact
+Invalid email
+Bounce
+Reply state
+Quota restriction
+Missing qualification evidence
+Other
+
+The dashboard must expose this breakdown so a single "Skipped: 1,046" number is never the only explanation.
+
+---
+
+PRIORITY 6 — CORRECT THE CAMPAIGN LIMIT CONFIGURATION
+
+The old hardcoded limits:
+
+Regular campaign: 150/day
+Hot Market: 50/day
+
+do not match the new permanent September campaign configuration.
+
+The September 2026 operating target is:
+
+400 total emails/day
+
+Primary allocation:
+
+100 Verified People
+100 Public Business Emails
+100 Hot Market Contacts
+100 Hot Leads
+
+Move these limits into persistent campaign configuration rather than hardcoding them in application logic.
+
+The application must read the configuration at runtime.
+
+Do not permanently change September to 2,027/day.
+
+---
+
+TODAY'S 2,027-CONTACT FILE
+
+The CSV contains:
+
+2,027 source contacts
+1,067 named contacts
+960 role-based/public contacts
+
+Treat 2,027 as the SOURCE INVENTORY for today's import.
+
+Run all 2,027 through the guarded importer.
+
+Calculate:
+
+Named eligible: X
+Public-email eligible: X
+Suppressed: X
+Duplicates: X
+Prior recipient exclusions: X
+Invalid: X
+Other exclusions: X
+Total eligible inventory: X
+
+Import all eligible contacts into the prospect database even if they are not all sent today.
+
+This creates usable campaign inventory for future days.
+
+---
+
+TODAY'S SEND POLICY
+
+The permanent September configuration is 400/day.
+
+Therefore the normal production send today must not silently become 2,027/day.
+
+Once:
+
+- SendGrid production connectivity is healthy
+- Worker is healthy
+- CSV importer is operational
+- Eligibility classification is functioning
+- Suppression/deduplication is complete
+
+prepare today's normal September allocation of up to:
+
+400 eligible recipients
+
+using the intended category structure whenever sufficient inventory exists:
+
+100 Verified People
+100 Public Business Emails
+100 Hot Market
+100 Hot Leads
+
+If fewer than 100 exist in a category, report the shortfall and use only whatever fallback behavior is explicitly permitted by campaign configuration.
+
+Do not weaken safeguards simply to reach 400.
+
+---
+
+ONE-TIME 2,027 SEND SUPPORT
+
+Implement support for an explicit administrator-authorized one-time campaign override.
+
+This feature must NOT automatically modify the permanent September 400/day campaign setting.
+
+A one-time override should require:
+
+- Explicit campaign-specific requested limit
+- Suppression checks
+- Deduplication
+- bounce/complaint checks
+- provider health
+- sender-capacity validation
+- logging/audit trail
+
+The override must remain campaign-specific.
+
+After that campaign finishes, normal configuration automatically returns to:
+
+September = 400/day
+
+Do not enable the one-time 2,027 dispatch unless the application's normal sender-capacity and deliverability safeguards determine it can be executed safely.
+
+---
+
+REQUIRED PRODUCTION STATUS REPORT
+
+After implementing the repairs, report:
+
+SENDGRID
+Production connection: HEALTHY / FAILED
+Authentication test: PASS / FAIL
+
+WORKER
+Worker status: HEALTHY / FAILED
+September 10 stale run: RESOLVED / NOT RESOLVED
+
+CSV IMPORT
+Source rows: 2,027
+Imported: X
+Duplicates: X
+Suppressed: X
+Rejected: X
+
+ELIGIBILITY
+Named eligible: X
+Public-email eligible: X
+Hot-market eligible: X
+Hot-lead eligible: X
+
+TODAY
+September daily target: 400
+Prepared: X
+Scheduled: X
+Excluded: X
+
+CAMPAIGN
+Campaign ID: [actual value]
+Scheduled time: [actual value]
+Timezone: America/Phoenix
+Queue status: [actual value]
+
+Do not report "SCHEDULED" unless the production database and scheduler actually confirm it.
+
+Do not report "SENT" unless the provider confirms acceptance.
+
+Do not fabricate statuses.
+
+---
+
+ARCHITECTURE RULE
+
+The correct architecture is:
+
+AI agent
+→ requests authorized backend operation
+
+Authorized deployed backend
+→ validates
+→ writes production records
+→ queues campaign
+
+Worker
+→ claims queue
+→ SendGrid
+
+SendGrid
+→ provider acceptance
+
+Tracking
+→ delivery/bounce/click/reply events
+
+The AI agent should never require unrestricted production database access.
+
+Fix the authorized application pathway instead.The biggest fix in there is #4. Replit discovered 960 role-based emails and then applied the wrong rule to them. Your system explicitly has a “100 public emails” bucket, so estimating@builder.com or info@architecturefirm.com shouldn't fail merely because there isn't a person's first and last name attached—provided the address is genuinely published/evidence-backed.
+
+And I'd absolutely import all 2,027 into the database now even if the normal campaign only sends 400 today. That gives the system several days of inventory instead of making Replit go hunt for the same contacts again tomorrow.
+
+For the 2,027 actual send, make that a separate one-time campaign override if you still want it. That way Replit doesn't “fix” your system by accidentally changing September from 400/day to 2,027/day permanently.

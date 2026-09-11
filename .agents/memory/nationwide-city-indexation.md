@@ -7,4 +7,4 @@ Keep every historical and Census-derived city URL live and browseable, but use `
 
 **Why:** State-level copy with only a city-name or population substitution creates doorway/scaled-content risk. Deleting existing URLs creates a separate 404 and link-equity risk.
 
-**How to apply:** Promote a city to `index,follow` only after adding verified AHJ, code, amendment, utility, climate, and market evidence. Keep sitemap inclusion synchronized with the page’s robots directive.
+**How to apply:** Promote a city to `index,follow` only after adding verified AHJ, code, amendment, utility, climate, and market evidence. Keep sitemap inclusion synchronized with the page’s robots directive. Do not place directory-wide internal-link grids to thousands of noindex cities; preserve live URLs without spending crawl budget advertising every thin page.

@@ -27,7 +27,7 @@ test("preparation does not stage the same Phoenix day before 8 AM", () => {
 
 test("Arizona contacts are prioritized before California contacts", () => {
   const ordered = prioritizePreparationCandidates([
-    { id: 1, companyName: "General Co", website: "https://general.example", contactEmail: "info@general.example", contactName: "Info", state: "AZ", fitScore: 100, needScore: 100 },
+    { id: 1, companyName: "General Co", website: "https://general.example", contactEmail: "info@general.example", contactName: "Info", contactEvidenceType: "official_publication", state: "AZ", fitScore: 100, needScore: 100 },
     { id: 2, companyName: "Personal Co", website: "https://personal.example", contactEmail: "alex@personal.example", contactName: "Alex Rivera", state: "CA", fitScore: 60, needScore: 60 },
   ]);
   assert.deepEqual(ordered.map((candidate) => candidate.id), [1, 2]);
@@ -35,7 +35,7 @@ test("Arizona contacts are prioritized before California contacts", () => {
 
 test("personal contacts are prioritized before public inboxes within a state", () => {
   const ordered = prioritizePreparationCandidates([
-    { id: 1, companyName: "General Co", website: "https://general.example", contactEmail: "info@general.example", contactName: "Info", state: "AZ", fitScore: 100, needScore: 100 },
+    { id: 1, companyName: "General Co", website: "https://general.example", contactEmail: "info@general.example", contactName: "Info", contactEvidenceType: "official_publication", state: "AZ", fitScore: 100, needScore: 100 },
     { id: 2, companyName: "Personal Co", website: "https://personal.example", contactEmail: "alex@personal.example", contactName: "Alex Rivera", state: "AZ", fitScore: 60, needScore: 60 },
   ]);
   assert.deepEqual(ordered.map((candidate) => candidate.id), [2, 1]);
@@ -79,15 +79,15 @@ test("preparation reserves 100 Personal and 50 Public regular slots and de-dupes
 });
 
 test("shortfall and stale-run helpers support honest retry-safe runs", () => {
-  assert.equal(getPreparationShortfall(149), 1);
-  assert.equal(getPreparationShortfall(150), 0);
+  assert.equal(getPreparationShortfall(149, 150), 1);
+  assert.equal(getPreparationShortfall(150, 150), 0);
   const now = new Date("2026-08-29T15:00:00.000Z");
   assert.equal(isPreparationRunStale(new Date(now.getTime() - 20 * 60_000), now), true);
   assert.equal(isPreparationRunStale(new Date(now.getTime() - 19 * 60_000), now), false);
 });
 
 test("existing manually scheduled messages consume the same 150-message regular window", () => {
-  assert.equal(getPreparationRemainingCapacity(100, 20), 30);
-  assert.equal(getPreparationRemainingCapacity(0, 150), 0);
-  assert.throws(() => getPreparationRemainingCapacity(149, 2), /exceeds the 150-message ceiling/);
+  assert.equal(getPreparationRemainingCapacity(100, 20, 150), 30);
+  assert.equal(getPreparationRemainingCapacity(0, 150, 150), 0);
+  assert.throws(() => getPreparationRemainingCapacity(149, 2, 150), /exceeds the 150-message ceiling/);
 });

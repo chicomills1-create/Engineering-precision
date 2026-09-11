@@ -1,9 +1,13 @@
 import type { Campaign, OutreachMessage, Prospect } from "@workspace/db";
 import { assertOutreachContactData } from "./outreachContactValidation";
+import { isEvidenceBackedPublicInbox } from "./publicInboxClassifier";
 
 const EXCLUDED_OUTREACH_CONTACTS = new Map([
   ["atmosphere architects", new Set(["tim boyle", "mike hudson"])],
 ]);
+function isPublicInbox(email: string | null, contactName: string | null, evidenceType?: string | null): boolean {
+  return isEvidenceBackedPublicInbox(email, contactName, evidenceType);
+}
 
 function normalizeIdentity(value: string): string {
   return value.trim().toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -45,10 +49,15 @@ export function assertOutreachEligibilityBase(
   if (prospect.fitScore < 60 || prospect.needScore < 60 || !prospect.needSignals?.trim()) {
     throw new Error("Prospect does not have enough evidence of current need");
   }
-  if (!prospect.contactName?.trim() || !prospect.contactTitle?.trim() || prospect.contactConfidence !== "high") {
+  const publicLane = isPublicInbox(prospect.contactEmail, prospect.contactName, prospect.contactEvidenceType);
+  if (publicLane) {
+    if (prospect.contactEvidenceType !== "official_publication" || !prospect.contactSourceUrl?.trim()) {
+      throw new Error("Public business email requires official publication evidence");
+    }
+  } else if (!prospect.contactName?.trim() || !prospect.contactTitle?.trim() || prospect.contactConfidence !== "high") {
     throw new Error("A high-confidence named decision-maker is required");
   }
-  if (!prospect.contactSourceUrl?.trim()) throw new Error("A public source for the named contact is required");
+  if (!prospect.contactSourceUrl?.trim()) throw new Error("A public source is required");
   if (prospect.emailStatus !== "verified") throw new Error("Prospect email must be verified before sending");
   if (campaign) {
     if (campaign.status !== "active") throw new Error("Campaign must be active before sending");

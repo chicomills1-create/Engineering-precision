@@ -14,6 +14,11 @@ export function DashboardStats() {
   }
 
   const items = [
+    { label: 'Monthly Target', value: stats.monthlyTarget },
+    { label: 'Sent This Month', value: stats.sentThisMonth },
+    { label: 'Remaining This Month', value: stats.remainingThisMonth },
+    { label: 'Required Daily Pace', value: stats.requiredDailyPace },
+    { label: 'Qualified Inventory', value: stats.qualifiedInventory },
     { label: 'Prospects', value: stats.prospects },
     { label: 'Upcoming Follow-ups', value: stats.upcomingFollowUps },
     { label: 'Stopped Sequences', value: stats.stoppedSequences },
@@ -27,6 +32,27 @@ export function DashboardStats() {
 
   return (
     <div className="space-y-3 mb-8">
+      <div className="border border-border bg-card p-4 rounded-[2px]" data-testid="outreach-campaign-progress">
+        <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground">Campaign progress</p>
+        <p className="font-display text-2xl font-bold">{stats.sentThisMonth.toLocaleString()} / {stats.monthlyTarget.toLocaleString()}</p>
+        <p className="text-xs text-muted-foreground">{stats.monthlyPercentComplete.toFixed(1)}% complete · {stats.remainingThisMonth.toLocaleString()} remaining</p>
+      </div>
+      {stats.septemberLanes && (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3" data-testid="september-lane-cards">
+          {([
+            ['Verified', stats.septemberLanes.named],
+            ['Public', stats.septemberLanes.public],
+            ['Hot Markets', stats.septemberLanes.hotMarket],
+            ['Hot Leads', stats.septemberLanes.hotLead],
+          ] as const).map(([label, lane]) => (
+            <div key={label} className="border border-border bg-card p-3 rounded-[2px]">
+              <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground">{label}</p>
+              <p className="font-display text-xl font-bold">{lane?.sent ?? 0} / {lane?.target ?? 0}</p>
+            </div>
+          ))}
+          <div className="col-span-2 md:col-span-4 text-xs text-muted-foreground">Today&apos;s Outreach: {stats.septemberLanes.totalSent} / {stats.septemberLanes.totalTarget}</div>
+        </div>
+      )}
       <div className="flex flex-wrap gap-3" data-testid="outreach-dashboard-stats">
         {items.map((item) => (
           <div key={item.label} className="flex-1 min-w-[130px] border border-border bg-card p-4 rounded-[2px]" data-testid={`stat-${item.label.toLowerCase().replace(' ', '-')}`}>
@@ -37,7 +63,7 @@ export function DashboardStats() {
       </div>
       <div
         className={`border px-4 py-3 rounded-[2px] text-sm ${
-          stats.providerProcessedToday === 150 && stats.unresolvedToday === 0
+          stats.providerProcessedToday === stats.todayTarget && stats.unresolvedToday === 0
             ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
             : 'border-amber-500/30 bg-amber-500/10 text-amber-200'
         }`}
@@ -67,7 +93,7 @@ export function DashboardStats() {
           {stats.nextPreparationStatus === 'not_started'
             ? 'Preparation starts only after today’s Phoenix send window.'
             : stats.nextPreparationStatus === 'pending'
-              ? 'Manual approvals are reserving tomorrow’s shared 150-message window.'
+               ? `Manual approvals are reserving tomorrow’s ${stats.todayTarget.toLocaleString()}-message window.`
             : stats.nextPreparationStatus === 'running'
               ? 'The preparation run is in progress.'
               : stats.nextPreparationStatus === 'failed'

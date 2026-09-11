@@ -7,6 +7,7 @@
  */
 import type { OutreachReplyForwardStatus } from './outreachReplyForwardStatus';
 import type { OutreachReplyMessageType } from './outreachReplyMessageType';
+import type { OutreachReplySentiment } from './outreachReplySentiment';
 import type { OutreachReplyStatus } from './outreachReplyStatus';
 
 export interface OutreachReply {
@@ -19,6 +20,7 @@ export interface OutreachReply {
   subject: string;
   textBody: string;
   messageType: OutreachReplyMessageType;
+  sentiment: OutreachReplySentiment;
   /** @nullable */
   prospectId?: number | null;
   /** @nullable */

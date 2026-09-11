@@ -11,6 +11,7 @@ import clientJobsRouter from "./clientJobs";
 import growthRouter from "./growth";
 import payrollRouter from "./payroll";
 import linkedinRouter from "./linkedin";
+import outreachInventoryRouter from "./outreachInventory";
 
 const router: IRouter = Router();
 
@@ -26,5 +27,6 @@ router.use(clientJobsRouter);
 router.use(growthRouter);
 router.use(payrollRouter);
 router.use(linkedinRouter);
+router.use(outreachInventoryRouter);
 
 export default router;

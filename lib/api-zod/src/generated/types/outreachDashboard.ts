@@ -6,6 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { OutreachDashboardNextPreparationStatus } from './outreachDashboardNextPreparationStatus';
+import type { OutreachDashboardSeptemberLanes } from './outreachDashboardSeptemberLanes';
 
 export interface OutreachDashboard {
   prospects: number;
@@ -42,4 +43,27 @@ export interface OutreachDashboard {
   automationReady: boolean;
   researchAutomationEnabled: boolean;
   researchAutomationReady: boolean;
+  monthlyTarget: number;
+  sentThisMonth: number;
+  remainingThisMonth: number;
+  monthlyPercentComplete: number;
+  todayTarget: number;
+  todayRemaining: number;
+  currentSendingPace: number;
+  requiredDailyPace: number;
+  qualifiedInventory: number;
+  delivered: number;
+  bounced: number;
+  deliveryRate: number;
+  opened: number;
+  clicked: number;
+  replied: number;
+  positiveReplies: number;
+  negativeReplies: number;
+  unsubscribed: number;
+  suppressed: number;
+  newResearched: number;
+  newVerified: number;
+  /** @nullable */
+  septemberLanes: OutreachDashboardSeptemberLanes;
 }

@@ -1,0 +1,704 @@
+Yep. Here’s the combined master instruction with the corrected monthly scaling, the 100/100/100/100 September structure, persistent memory, lead scoring, suppression, verification, and dashboard logic all in one place.
+
+MASTER OUTREACH SYSTEM — PERMANENT OPERATING RULES
+
+These instructions are the permanent operating rules for the outreach system.
+
+These rules must NOT exist only inside an AI conversation.
+
+Store all campaign targets, category allocations, lead-scoring rules, suppression rules, verification requirements, and scaling schedules in persistent application/database configuration.
+
+Every time the application or AI agent starts, it must retrieve these settings before performing outreach-related work.
+
+The database/configuration is the source of truth — NOT conversational AI memory.
+
+Do not forget, reset, reinterpret, or overwrite these rules between sessions unless Jeremy explicitly changes them.
+
+---
+
+1. PRIMARY BUSINESS OBJECTIVE
+
+Build a continuously growing database of legitimate, qualified AEC prospects that could realistically purchase:
+
+- Structural Engineering
+- MEP Engineering
+- Civil Engineering
+- Drafting
+- Permit Drawings
+- Engineering Reviews
+- PE Stamping
+- Engineering Consulting
+- Overflow Engineering
+- Design-Build Engineering Support
+
+Target industries include:
+
+- Architecture Firms
+- General Contractors
+- Commercial Contractors
+- Luxury Custom Home Builders
+- Residential Developers
+- Commercial Developers
+- Multifamily Developers
+- Design-Build Firms
+- Hospitality Developers
+- Restaurant/Retail Contractors
+- Tenant Improvement Contractors
+- Industrial Contractors
+- Construction Management Companies
+- Real Estate Development Companies
+- Engineering Firms requiring overflow/subcontract engineering
+
+The system should continuously research new qualified prospects so the outreach engine has sufficient inventory for current and future monthly targets.
+
+---
+
+2. SEPTEMBER 2026 OUTREACH STRUCTURE
+
+During September 2026, the target is:
+
+400 emails per day
+
+The 400 daily emails should be divided into four primary categories.
+
+CATEGORY A — 100 VERIFIED PEOPLE/DAY
+
+Find approximately 100 newly researched, evidence-backed individual business contacts.
+
+Prioritize decision-makers such as:
+
+Owner
+Founder
+President
+CEO
+COO
+Principal
+Managing Principal
+Architect
+Principal Architect
+Director of Construction
+VP of Construction
+VP of Development
+Preconstruction Director
+Estimating Director
+Business Development Director
+Development Manager
+Project Executive
+Senior Project Manager
+Procurement Manager
+
+Do not fabricate or guess email addresses simply to reach the target.
+
+---
+
+3. CATEGORY B — 100 PUBLIC BUSINESS EMAILS/DAY
+
+Find approximately 100 legitimate publicly listed company email addresses.
+
+Examples include:
+
+info@
+estimating@
+bids@
+proposals@
+procurement@
+preconstruction@
+businessdevelopment@
+development@
+construction@
+projects@
+contact@
+office@
+admin@
+
+These addresses should come from legitimate public business sources whenever possible.
+
+Do not invent role-based addresses because they "probably exist."
+
+The email should have supporting evidence.
+
+---
+
+4. CATEGORY C — 100 HOT MARKET CONTACTS/DAY
+
+Find approximately 100 qualified contacts from markets showing strong construction, development, renovation, permitting, or real-estate activity.
+
+Prioritize:
+
+Architecture
+General Contracting
+Luxury Residential
+Commercial Construction
+Multifamily
+Hospitality
+Retail
+Restaurants
+Tenant Improvements
+Development
+Design-Build
+Industrial Construction
+
+The system should dynamically evaluate geographic markets and prioritize markets showing stronger current opportunities.
+
+Hot-market selection should not remain permanently hardcoded to the same cities or states.
+
+---
+
+5. CATEGORY D — 100 HOT LEADS/DAY
+
+Use approximately 100 daily outreach/follow-up opportunities for prospects showing stronger engagement or buying signals.
+
+Signals may include:
+
+- Previous reply
+- Positive reply
+- Multiple link clicks
+- Single link click
+- Repeated engagement
+- Previous conversation
+- Requested information
+- Proposal/RFQ activity
+- Relevant website activity when legitimately and technically trackable
+- Multiple email opens
+- Single email open
+
+Do NOT treat every open as proof of human engagement.
+
+Email privacy systems, corporate security software, scanners, and automated systems can create misleading open events.
+
+A click is generally a stronger signal than an open.
+
+A genuine reply is considerably stronger than either.
+
+---
+
+6. LEAD-SCORING PRIORITY
+
+Maintain a persistent lead score for every prospect.
+
+General priority should follow this pattern:
+
+Positive Reply / Direct Opportunity
+Highest Priority
+
+Reply
+Extremely High Priority
+
+Multiple Clicks
+Very High Priority
+
+Single Click
+High Priority
+
+Repeated Engagement
+High Priority
+
+Multiple Opens
+Moderate Priority
+
+Single Open
+Low-to-Moderate Signal
+
+No Engagement
+Cold Prospect
+
+Negative Reply
+Do not automatically continue normal cold outreach; classify appropriately.
+
+Unsubscribe / Explicit Do-Not-Contact / Spam Complaint
+Immediately suppress.
+
+Hard Bounce
+Suppress the email address.
+
+Hot leads should progressively move away from generic cold outreach and into appropriate follow-up workflows.
+
+---
+
+7. EMAIL DISCOVERY SYSTEM
+
+"Verified" does NOT mean that the address must come from one specific email-finder API.
+
+Use multiple legitimate discovery methods.
+
+Search:
+
+1. Official company websites
+2. Contact pages
+3. Team pages
+4. Staff directories
+5. Leadership pages
+6. About pages
+7. Proposal/RFQ pages
+8. Public professional directories
+9. Publicly indexed company documents
+10. Public bid/vendor documents
+11. Press releases
+12. Business/chamber listings
+13. Appropriate professional/contractor directories
+14. Search-engine indexed company email addresses
+15. Available enrichment providers
+16. Available email verification providers
+
+If one API exhausts its daily quota:
+
+DO NOT STOP THE ENTIRE RESEARCH PROCESS.
+
+Continue through the other legitimate discovery methods.
+
+---
+
+8. EMAIL VERIFICATION
+
+An email may be considered evidence-backed when sufficient legitimate supporting evidence exists, such as:
+
+- Published on the official company website
+- Published in an official company document
+- Published in a credible professional/business source and matching the company's domain
+- Confirmed by an appropriate verification provider
+- Supported through additional legitimate validation methods
+
+Never fabricate an email address.
+
+Never create an address based solely on patterns such as:
+
+firstname.lastname@domain.com
+
+unless that exact address has sufficient independent supporting evidence.
+
+If a company does not provide a sufficiently supported email:
+
+Skip the contact and research another company.
+
+The solution to missing data is more research — not fabricated data.
+
+---
+
+9. DEDUPLICATION
+
+Before adding or sending to a contact, check:
+
+- Email address
+- Contact record
+- Company name
+- Company domain
+- Previous campaign history
+- Current campaign history
+- Suppression list
+- Bounce list
+- Unsubscribe list
+
+Avoid accidentally contacting the same person repeatedly because the individual appears in multiple prospect sources.
+
+---
+
+10. GLOBAL SUPPRESSION SYSTEM
+
+Maintain a permanent global suppression list.
+
+Never send normal marketing outreach to:
+
+- Unsubscribed recipients
+- Explicit do-not-contact requests
+- Spam complaints
+- Hard-bounced addresses
+- Known invalid addresses
+- Permanently suppressed contacts
+
+Suppression status must override prospect imports.
+
+If a suppressed email is rediscovered from another website, database, API, CSV, directory, or research process, it must remain suppressed.
+
+Never silently re-enable suppressed contacts.
+
+---
+
+11. PERMANENT MONTHLY SCALING SCHEDULE
+
+SEPTEMBER 2026
+
+400 emails/day
+
+Use the:
+
+100 Verified People
+100 Public Emails
+100 Hot Market Contacts
+100 Hot Leads
+
+framework as the primary daily allocation.
+
+---
+
+OCTOBER 2026
+
+20,000 TOTAL EMAILS FOR THE MONTH
+
+This means:
+
+20,000/month — NOT 20,000/day.
+
+Calculate the daily requirement dynamically based on:
+
+- Remaining monthly target
+- Emails already sent
+- Remaining sending days
+- Qualified contact inventory
+- Deliverability
+- Sending infrastructure health
+
+---
+
+12. NOVEMBER 2026
+
+Monthly target:
+
+35,000 TOTAL EMAILS FOR THE MONTH
+
+This means:
+
+35,000/month — NOT 35,000/day.
+
+Continue progressively scaling infrastructure and qualified lead inventory.
+
+---
+
+13. DECEMBER 2026
+
+Monthly target:
+
+50,000 TOTAL EMAILS FOR THE MONTH
+
+This means:
+
+50,000/month — NOT 50,000/day.
+
+---
+
+14. JANUARY 2027 AND FORWARD
+
+Maintain:
+
+50,000 TOTAL EMAILS PER MONTH
+
+This becomes the ongoing monthly operating target unless Jeremy explicitly changes it.
+
+Do not automatically exceed 50,000 emails/month.
+
+---
+
+15. PERMANENT SCALING PATTERN
+
+The permanent campaign progression is:
+
+September 2026
+400/day
+
+October 2026
+20,000/month
+
+November 2026
+35,000/month
+
+December 2026
+50,000/month
+
+January 2027 and Forward
+50,000/month
+
+NEVER reinterpret October, November, or December numbers as daily targets.
+
+---
+
+16. DAILY PACING ENGINE
+
+Beginning October, do not simply hardcode a daily number.
+
+Calculate:
+
+Remaining Monthly Target ÷ Remaining Sending Days = Required Daily Pace
+
+Continuously recalculate this number as the month progresses.
+
+Example:
+
+If the campaign gets ahead of schedule, reduce the required pace.
+
+If legitimate sending interruptions cause it to fall behind, calculate the new pace required to reach the monthly target.
+
+However, do not recklessly increase sending volume simply to catch up.
+
+Deliverability and sender health take priority over blindly reaching a numerical target.
+
+---
+
+17. DELIVERABILITY PROTECTION
+
+Continuously monitor:
+
+- Delivery rate
+- Hard bounce rate
+- Soft bounce rate
+- Spam complaint rate
+- Unsubscribe rate
+- Domain reputation
+- Mailbox reputation
+- Provider throttling
+- Blocklist status
+- Reply rate
+- Positive reply rate
+- Click rate
+
+The monthly target represents the desired campaign capacity.
+
+It does NOT authorize the system to damage sender reputation to reach the number.
+
+If sending health deteriorates, flag the problem and adjust appropriately rather than blindly increasing volume.
+
+---
+
+18. CONTACT DATABASE
+
+Maintain persistent fields including:
+
+Company Name
+Website
+Company Domain
+Industry
+Company Type
+Market
+City
+State
+Contact First Name
+Contact Last Name
+Job Title
+Email
+Email Type
+Email Source
+Source URL
+Verification Method
+Verification Status
+Verification Date
+Lead Source
+Campaign
+Date First Contacted
+Date Last Contacted
+Emails Sent
+Opens
+Unique Opens
+Clicks
+Unique Clicks
+Replies
+Positive Replies
+Negative Replies
+Unsubscribed
+Bounced
+Lead Score
+Lead Status
+Next Follow-Up
+Suppression Status
+Suppression Reason
+Date Suppressed
+
+Historical engagement data should not disappear when a new campaign begins.
+
+---
+
+19. DAILY DASHBOARD
+
+The dashboard must prominently display:
+
+CAMPAIGN PROGRESS
+
+Monthly Target
+Sent This Month
+Remaining This Month
+Percentage Complete
+Today's Target
+Sent Today
+Remaining Today
+Current Sending Pace
+Required Daily Pace
+Qualified Contacts Available
+
+Also display:
+
+Delivered
+Bounced
+Delivery Rate
+Opened
+Clicked
+Replied
+Positive Replies
+Negative Replies
+Unsubscribed
+Suppressed
+New Contacts Found
+New Contacts Verified
+
+During September additionally show:
+
+Verified: X / 100
+Public: X / 100
+Hot Markets: X / 100
+Hot Leads: X / 100
+
+Overall:
+
+Today's Outreach: X / 400
+
+Beginning October, emphasize monthly progress instead.
+
+Example:
+
+October Campaign: 8,450 / 20,000
+
+---
+
+20. RESEARCH INVENTORY
+
+Do not wait until the daily send begins to discover contacts.
+
+Continuously maintain an inventory of qualified future prospects.
+
+The research system and sending system are separate.
+
+The research engine should work ahead so sufficient qualified contacts exist for upcoming campaign volume.
+
+Track:
+
+Contacts Researched
+Contacts Accepted
+Contacts Rejected
+Contacts Verified
+Duplicates Removed
+Suppressed Contacts Found
+Qualified Contacts Ready
+Estimated Days of Contact Inventory
+
+The system should warn when available qualified inventory is becoming insufficient for the upcoming sending schedule.
+
+---
+
+21. HOT LEAD PROTECTION
+
+Do not repeatedly send a hot lead the same generic cold email.
+
+Once meaningful engagement occurs, change the contact's status.
+
+Examples:
+
+Cold
+Contacted
+Engaged
+Hot
+Replied
+Qualified
+Opportunity
+Proposal Requested
+Proposal Sent
+Client
+Not Interested
+Suppressed
+
+Hot leads should receive appropriate follow-up based on their actual behavior and status.
+
+---
+
+22. COMPLIANCE AND OPT-OUT HANDLING
+
+The system must maintain appropriate commercial-email compliance and suppression controls.
+
+Every applicable marketing campaign must honor opt-out requests promptly.
+
+Never intentionally bypass:
+
+- Unsubscribe requests
+- Suppression lists
+- Provider anti-abuse protections
+- Bounce controls
+- Applicable commercial-email requirements
+
+The objective is legitimate B2B business development, not indiscriminate email blasting.
+
+---
+
+23. PERSISTENT MEMORY — CRITICAL REQUIREMENT
+
+THIS SECTION IS MANDATORY.
+
+Do NOT depend on Replit AI conversational memory.
+
+Create persistent configuration/database records for:
+
+Campaign targets
+Monthly scaling schedule
+September category allocations
+Lead scoring
+Suppression rules
+Verification rules
+Sending safeguards
+Campaign status
+Current month progress
+
+On application startup:
+
+1. Load the permanent outreach configuration.
+2. Determine the current campaign month.
+3. Load that month's target.
+4. Load sending history.
+5. Calculate remaining volume.
+6. Calculate required daily pace.
+7. Load suppression records.
+8. Load qualified contact inventory.
+9. Resume campaign operations from the persisted state.
+
+The AI should consult this stored configuration before making campaign decisions.
+
+If a future AI conversation conflicts with the stored configuration because the AI simply "forgot," the persistent configuration remains authoritative.
+
+Only change these rules when Jeremy explicitly instructs the system to modify them.
+
+---
+
+FINAL SOURCE-OF-TRUTH RULE
+
+The outreach strategy is:
+
+SEPTEMBER
+400/day consisting primarily of:
+
+100 Verified People
+100 Public Business Emails
+100 Hot Market Contacts
+100 Hot Leads
+
+OCTOBER
+20,000/month
+
+NOVEMBER
+35,000/month
+
+DECEMBER
+50,000/month
+
+JANUARY AND FORWARD
+50,000/month
+
+Research continuously.
+
+Never fabricate contacts.
+
+Verify and document sources.
+
+Deduplicate aggressively.
+
+Honor suppression and opt-out requests.
+
+Protect deliverability.
+
+Prioritize engaged prospects.
+
+Persist all settings and campaign history.
+
+Do not rely on Replit AI to remember this strategy. The application itself must remember it.I'd use this as the master version and tell Replit to replace the earlier instructions rather than adding another set of rules. That eliminates the chance it sees the old “20,000/day” instruction somewhere and decides to resurrect it three weeks from now. 😂

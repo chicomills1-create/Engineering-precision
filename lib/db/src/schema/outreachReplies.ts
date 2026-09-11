@@ -21,6 +21,7 @@ export const outreachRepliesTable = pgTable("outreach_replies", {
   subject: text("subject").notNull().default(""),
   textBody: text("text_body").notNull().default(""),
   messageType: text("message_type").notNull().default("reply"),
+  sentiment: text("sentiment").notNull().default("neutral"),
   prospectId: integer("prospect_id").references(() => prospectsTable.id, { onDelete: "set null" }),
   outreachMessageId: integer("outreach_message_id").references(() => outreachMessagesTable.id, { onDelete: "set null" }),
   status: text("status").notNull().default("unread"),

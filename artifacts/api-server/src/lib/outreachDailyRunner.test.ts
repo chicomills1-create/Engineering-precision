@@ -152,6 +152,9 @@ test("researches before dispatching and makes a second pass after the safe wait"
     hotMarketPrepared: 50,
     hotMarketScheduled: 50,
     hotMarketShortfall: 0,
+    hotLeadTarget: 100,
+    hotLeadPrepared: 0,
+    hotLeadShortfall: 100,
     waitMs: 240_000,
   });
 });
@@ -194,6 +197,9 @@ test("does not make a second send pass for catch-up runs", async () => {
     hotMarketPrepared: 50,
     hotMarketScheduled: 50,
     hotMarketShortfall: 0,
+    hotLeadTarget: 100,
+    hotLeadPrepared: 0,
+    hotLeadShortfall: 100,
     waitMs: 0,
   });
 });

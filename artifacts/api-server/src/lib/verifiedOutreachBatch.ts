@@ -93,7 +93,7 @@ export function approvedOutreachFollowUpMessages(contactName: string): Array<{
   subject: string;
   body: string;
 }> {
-  const firstName = contactName.trim().split(/\s+/)[0];
+  const firstName = contactName.trim().split(/\s+/)[0] || "team";
   return [
     {
       sequenceNumber: 2,

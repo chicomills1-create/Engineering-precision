@@ -73,6 +73,8 @@ export const prospectsTable = pgTable("outreach_prospects", {
   researchRunId: integer("research_run_id").references(() => outreachResearchRunsTable.id, { onDelete: "set null" }),
   emailStatus: text("email_status").notNull().default("unverified"),
   status: text("status").notNull().default("new"),
+  leadScore: integer("lead_score").notNull().default(0),
+  leadStatus: text("lead_status").notNull().default("cold"),
   contactStatus: text("contact_status").notNull().default("active"),
   contactEvidenceType: text("contact_evidence_type"),
   contactEvidence: text("contact_evidence"),

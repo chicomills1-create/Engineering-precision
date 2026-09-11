@@ -6,6 +6,7 @@ import { seedVerifiedOutreachBatch } from "./lib/verifiedOutreachBatch";
 import { ensureOutreachFollowUps, prepareNextPhoenixOutreach } from "./lib/outreachPreparation";
 import { seedHotMarketOutreachBatch } from "./lib/hotMarketOutreachBatch";
 import { startDailyOutreachProcessScheduler } from "./lib/outreachDailyProcessScheduler";
+import { loadOutreachSystemConfig, setOutreachConfigError } from "./lib/outreachSystemConfig";
 
 const rawPort = process.env["PORT"];
 
@@ -22,13 +23,23 @@ if (Number.isNaN(port) || port <= 0) {
 }
 
 let stopDailyScheduler: () => Promise<void> = async () => {};
-const server = app.listen(port, (err) => {
+const server = app.listen(port, async (err) => {
   if (err) {
     logger.error({ err }, "Error listening on port");
     process.exit(1);
   }
 
   logger.info({ port }, "Server listening");
+  let outreachConfigured = false;
+  try {
+    await loadOutreachSystemConfig();
+    outreachConfigured = true;
+    logger.info("Authoritative outreach configuration loaded");
+  } catch (configError) {
+    setOutreachConfigError(configError);
+    logger.error({ err: configError }, "Outreach is fail-closed: authoritative configuration unavailable");
+  }
+  if (!outreachConfigured) return;
   startOutreachWorker();
   stopDailyScheduler = startDailyOutreachProcessScheduler();
   startClientJobUploadCleanup();

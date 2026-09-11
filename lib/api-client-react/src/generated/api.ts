@@ -39,8 +39,10 @@ import type {
   DraftGenerationInput,
   ErrorMessage,
   GetLinkedinQueueParams,
+  GetOutreachLaneConfigParams,
   GrowthDashboard,
   HealthStatus,
+  InventoryImportReport,
   Lead,
   LeadInput,
   LeadUpdateInput,
@@ -76,12 +78,16 @@ import type {
   OpportunityResearchInput,
   OutreachDashboard,
   OutreachHotLead,
+  OutreachLaneConfig,
   OutreachMessage,
   OutreachMessageInput,
   OutreachMessageUpdate,
+  OutreachOneTimeOverride,
+  OutreachOneTimeOverrideInput,
   OutreachReconciliationSummary,
   OutreachReply,
   OutreachReplyUpdate,
+  OutreachSystemConfig,
   OutreachUnsubscribeInput,
   PayrollEntryInput,
   PayrollInstallmentUpdate,
@@ -143,6 +149,297 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   }
   return result;
 };
+
+export const getImportVerifiedOutreachInventoryUrl = () => {
+
+
+
+
+  return `/api/outreach/inventory/import`
+}
+
+/**
+ * @summary Import the bundled verified business inventory (Clerk admin only)
+ */
+export const importVerifiedOutreachInventory = async ( options?: Parameters<typeof customFetch>[1]): Promise<InventoryImportReport> => {
+
+  return customFetch<InventoryImportReport>(getImportVerifiedOutreachInventoryUrl(),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+
+export const getImportVerifiedOutreachInventoryMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof importVerifiedOutreachInventory>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof importVerifiedOutreachInventory>>, TError,void, TContext> => {
+
+const mutationKey = ['importVerifiedOutreachInventory'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof importVerifiedOutreachInventory>>, void> = () => {
+
+
+          return  importVerifiedOutreachInventory(requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type ImportVerifiedOutreachInventoryMutationResult = NonNullable<Awaited<ReturnType<typeof importVerifiedOutreachInventory>>>
+
+    export type ImportVerifiedOutreachInventoryMutationError = ErrorType<ErrorMessage>
+
+    /**
+ * @summary Import the bundled verified business inventory (Clerk admin only)
+ */
+export const useImportVerifiedOutreachInventory = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof importVerifiedOutreachInventory>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof importVerifiedOutreachInventory>>,
+        TError,
+        void,
+        TContext
+      > => {
+      return useMutation(getImportVerifiedOutreachInventoryMutationOptions(options));
+    }
+
+export const getGetOutreachLaneConfigUrl = (params?: GetOutreachLaneConfigParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : String(value))
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/api/outreach/lane-config?${stringifiedParams}` : `/api/outreach/lane-config`
+}
+
+export const getOutreachLaneConfig = async (params?: GetOutreachLaneConfigParams, options?: Parameters<typeof customFetch>[1]): Promise<OutreachLaneConfig> => {
+
+  return customFetch<OutreachLaneConfig>(getGetOutreachLaneConfigUrl(params),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetOutreachLaneConfigQueryKey = (params?: GetOutreachLaneConfigParams,) => {
+    return [
+    `/api/outreach/lane-config`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getGetOutreachLaneConfigQueryOptions = <TData = Awaited<ReturnType<typeof getOutreachLaneConfig>>, TError = ErrorType<unknown>>(params?: GetOutreachLaneConfigParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getOutreachLaneConfig>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetOutreachLaneConfigQueryKey(params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getOutreachLaneConfig>>> = ({ signal }) => getOutreachLaneConfig(params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getOutreachLaneConfig>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetOutreachLaneConfigQueryResult = NonNullable<Awaited<ReturnType<typeof getOutreachLaneConfig>>>
+export type GetOutreachLaneConfigQueryError = ErrorType<unknown>
+
+
+
+export function useGetOutreachLaneConfig<TData = Awaited<ReturnType<typeof getOutreachLaneConfig>>, TError = ErrorType<unknown>>(
+ params?: GetOutreachLaneConfigParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getOutreachLaneConfig>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetOutreachLaneConfigQueryOptions(params,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getGetOutreachSystemConfigUrl = () => {
+
+
+
+
+  return `/api/outreach/system-config`
+}
+
+/**
+ * @summary Read-only effective outreach schedule and policy
+ */
+export const getOutreachSystemConfig = async ( options?: Parameters<typeof customFetch>[1]): Promise<OutreachSystemConfig> => {
+
+  return customFetch<OutreachSystemConfig>(getGetOutreachSystemConfigUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetOutreachSystemConfigQueryKey = () => {
+    return [
+    `/api/outreach/system-config`
+    ] as const;
+    }
+
+
+export const getGetOutreachSystemConfigQueryOptions = <TData = Awaited<ReturnType<typeof getOutreachSystemConfig>>, TError = ErrorType<void>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getOutreachSystemConfig>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetOutreachSystemConfigQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getOutreachSystemConfig>>> = ({ signal }) => getOutreachSystemConfig({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getOutreachSystemConfig>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetOutreachSystemConfigQueryResult = NonNullable<Awaited<ReturnType<typeof getOutreachSystemConfig>>>
+export type GetOutreachSystemConfigQueryError = ErrorType<void>
+
+
+/**
+ * @summary Read-only effective outreach schedule and policy
+ */
+
+export function useGetOutreachSystemConfig<TData = Awaited<ReturnType<typeof getOutreachSystemConfig>>, TError = ErrorType<void>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getOutreachSystemConfig>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetOutreachSystemConfigQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getCreateOutreachOneTimeOverrideUrl = () => {
+
+
+
+
+  return `/api/outreach/one-time-override`
+}
+
+export const createOutreachOneTimeOverride = async (outreachOneTimeOverrideInput: OutreachOneTimeOverrideInput, options?: Parameters<typeof customFetch>[1]): Promise<OutreachOneTimeOverride> => {
+
+  return customFetch<OutreachOneTimeOverride>(getCreateOutreachOneTimeOverrideUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(outreachOneTimeOverrideInput)
+  }
+);}
+
+
+
+
+
+export const getCreateOutreachOneTimeOverrideMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createOutreachOneTimeOverride>>, TError,{data: BodyType<OutreachOneTimeOverrideInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createOutreachOneTimeOverride>>, TError,{data: BodyType<OutreachOneTimeOverrideInput>}, TContext> => {
+
+const mutationKey = ['createOutreachOneTimeOverride'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createOutreachOneTimeOverride>>, {data: BodyType<OutreachOneTimeOverrideInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createOutreachOneTimeOverride(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateOutreachOneTimeOverrideMutationResult = NonNullable<Awaited<ReturnType<typeof createOutreachOneTimeOverride>>>
+    export type CreateOutreachOneTimeOverrideMutationBody = BodyType<OutreachOneTimeOverrideInput>
+    export type CreateOutreachOneTimeOverrideMutationError = ErrorType<ErrorMessage>
+
+    export const useCreateOutreachOneTimeOverride = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createOutreachOneTimeOverride>>, TError,{data: BodyType<OutreachOneTimeOverrideInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createOutreachOneTimeOverride>>,
+        TError,
+        {data: BodyType<OutreachOneTimeOverrideInput>},
+        TContext
+      > => {
+      return useMutation(getCreateOutreachOneTimeOverrideMutationOptions(options));
+    }
 
 export const getHealthCheckUrl = () => {
 

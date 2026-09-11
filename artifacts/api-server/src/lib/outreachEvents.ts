@@ -6,12 +6,14 @@ import {
   outreachDeliveryEventsTable,
   outreachMessagesTable,
   outreachRepliesTable,
+  outreachSuppressionsTable,
   prospectsTable,
 } from "@workspace/db";
 import { recordContactEvidence } from "./outreachContactEvidence";
 import { withOutreachEmailLock } from "./outreachEmailLock";
 import { suppressOutreachEmail } from "./outreachSuppression";
 import { ensureApprovedFollowUpSequence } from "./outreachSequence";
+import { getOutreachRuntimeConfig, calculateLeadScore, resolveLeadStatus } from "./outreachSystemConfig";
 
 export type SendGridEvent = {
   email?: string;
@@ -217,6 +219,17 @@ export function classifyInboundReply(input: Pick<InboundReplyInput, "subject" | 
   return "reply";
 }
 
+/** Conservative classification: a generic reply is never treated as positive. */
+export function classifyReplySentiment(input: Pick<InboundReplyInput, "subject" | "text" | "headers">): "neutral" | "positive" | "negative" | "auto" {
+  const messageType = classifyInboundReply(input);
+  if (messageType === "auto_reply") return "auto";
+  if (messageType === "permanent_closure") return "negative";
+  const value = `${input.subject}\n${input.text}`.slice(0, 5000).toLowerCase();
+  if (/\b(?:not interested|no interest|remove me|unsubscribe|do not contact|don't contact|stop emailing|stop contacting)\b/.test(value)) return "negative";
+  if (/\b(?:interested|send (?:me )?(?:a )?proposal|rfq|request(?:ed)? (?:a )?(?:quote|proposal)|please (?:send|provide|share)|more information|learn more|schedule (?:a )?(?:call|meeting)|next steps)\b/.test(value)) return "positive";
+  return "neutral";
+}
+
 function inboundDedupeKey(input: InboundReplyInput): { key: string; providerMessageId: string | null } {
   const providerMessageId = inboundMessageId(input.headers);
   const normalized = providerMessageId
@@ -241,6 +254,7 @@ export async function captureInboundReply(input: InboundReplyInput): Promise<{
   const senderEmail = input.from.trim().toLowerCase();
   const receivedAt = input.receivedAt ?? new Date();
   const messageType = classifyInboundReply(input);
+  const sentiment = classifyReplySentiment(input);
   const { key, providerMessageId } = inboundDedupeKey(input);
   const prospects = await db.select().from(prospectsTable)
     .where(eq(prospectsTable.contactEmail, senderEmail))
@@ -266,6 +280,7 @@ export async function captureInboundReply(input: InboundReplyInput): Promise<{
     subject: input.subject.trim().slice(0, 1000),
     textBody: input.text.trim().slice(0, 100_000),
     messageType,
+    sentiment,
     prospectId: primaryProspect?.id ?? null,
     outreachMessageId: referencedMessage?.id ?? null,
     receivedAt,
@@ -315,10 +330,40 @@ export async function captureInboundReply(input: InboundReplyInput): Promise<{
       })
       .where(eq(outreachRepliesTable.id, current.id))
       .returning();
+    for (const prospect of prospects) await recomputeProspectLeadState(prospect.id);
     return processed;
   });
 
   return { reply: reply!, inserted: Boolean(inserted), matchedProspects };
+}
+
+type OutreachExecutor = Pick<typeof db, "select" | "update">;
+
+/** Rebuilds a prospect's state from the complete prospect history, never one message. */
+export async function recomputeProspectLeadState(prospectId: number, executor: OutreachExecutor = db): Promise<void> {
+  const [prospect] = await executor.select().from(prospectsTable).where(eq(prospectsTable.id, prospectId)).limit(1);
+  if (!prospect) return;
+  const events = await executor.select({ eventType: outreachDeliveryEventsTable.eventType })
+    .from(outreachDeliveryEventsTable)
+    .innerJoin(outreachMessagesTable, eq(outreachDeliveryEventsTable.outreachMessageId, outreachMessagesTable.id))
+    .where(eq(outreachMessagesTable.prospectId, prospectId));
+  const replies = await executor.select({ sentiment: outreachRepliesTable.sentiment, messageType: outreachRepliesTable.messageType })
+    .from(outreachRepliesTable).where(eq(outreachRepliesTable.prospectId, prospectId));
+  const [suppression] = prospect.contactEmail
+    ? await executor.select({ reason: outreachSuppressionsTable.reason }).from(outreachSuppressionsTable)
+      .where(eq(outreachSuppressionsTable.email, prospect.contactEmail.trim().toLowerCase())).limit(1)
+    : [];
+  const substantive = replies.filter((reply) => reply.messageType === "reply" && reply.sentiment !== "auto");
+  const positive = substantive.some((reply) => reply.sentiment === "positive");
+  const negative = substantive.some((reply) => reply.sentiment === "negative");
+  const policy = getOutreachRuntimeConfig()?.policy;
+  if (!policy) return;
+  const clicks = events.filter((event) => event.eventType === "click").length;
+  const opens = events.filter((event) => event.eventType === "open").length;
+  await executor.update(prospectsTable).set({
+    leadScore: calculateLeadScore(policy, { positiveReply: positive, reply: substantive.length > 0, clickCount: clicks, openCount: opens, negativeReply: negative }),
+    leadStatus: resolveLeadStatus({ suppressed: Boolean(suppression), positiveReply: positive, reply: substantive.length > 0, clickCount: clicks, openCount: opens, negativeReply: negative }),
+  }).where(eq(prospectsTable.id, prospectId));
 }
 
 export async function recordInboundReplyForwarding(
@@ -434,6 +479,7 @@ export async function processSendGridEvents(events: SendGridEvent[]): Promise<nu
         pendingError: `Sequence stopped after ${eventType}`,
       });
     }
+    if (matchedMessage) await recomputeProspectLeadState(matchedMessage.prospectId);
     processed += 1;
   }
   return processed;
@@ -448,6 +494,7 @@ export async function processInboundReply(email: string): Promise<number> {
       evidenceType: "forwarded_reply",
       evidenceNote: "Inbound reply received by the protected reply webhook",
     });
+    await recomputeProspectLeadState(prospect.id);
   }
   return prospects.length;
 }

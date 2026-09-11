@@ -9,6 +9,70 @@ import * as zod from 'zod';
 
 
 /**
+ * @summary Import the bundled verified business inventory (Clerk admin only)
+ */
+export const ImportVerifiedOutreachInventoryResponse = zod.object({
+  "batchId": zod.string(),
+  "sourceRows": zod.number(),
+  "imported": zod.number().optional(),
+  "importedPendingQualification": zod.number(),
+  "excluded": zod.number(),
+  "namedImported": zod.number(),
+  "publicImported": zod.number(),
+  "namedEligible": zod.number(),
+  "publicEligible": zod.number(),
+  "idempotent": zod.boolean().optional(),
+  "exclusions": zod.record(zod.string(), zod.number())
+})
+
+
+export const GetOutreachLaneConfigQueryParams = zod.object({
+  "campaignKey": zod.coerce.string().optional()
+})
+
+export const GetOutreachLaneConfigResponse = zod.object({
+  "campaignKey": zod.string(),
+  "effectiveMonth": zod.string(),
+  "namedLimit": zod.number(),
+  "publicLimit": zod.number(),
+  "hotMarketLimit": zod.number(),
+  "hotLeadLimit": zod.number()
+})
+
+
+/**
+ * @summary Read-only effective outreach schedule and policy
+ */
+export const GetOutreachSystemConfigResponse = zod.object({
+  "version": zod.number(),
+  "month": zod.string(),
+  "policy": zod.record(zod.string(), zod.unknown()),
+  "schedule": zod.record(zod.string(), zod.unknown())
+})
+
+
+
+
+
+export const CreateOutreachOneTimeOverrideBody = zod.object({
+  "campaignKey": zod.string(),
+  "requestedForDate": zod.coerce.date(),
+  "requestedLimit": zod.number().min(1),
+  "reason": zod.string().optional()
+})
+
+export const CreateOutreachOneTimeOverrideResponse = zod.object({
+  "campaignKey": zod.string(),
+  "requestedForDate": zod.coerce.date(),
+  "requestedLimit": zod.number(),
+  "requestedBy": zod.string(),
+  "status": zod.enum(['requested', 'blocked']),
+  "decisionEvidence": zod.string().optional(),
+  "expiresAt": zod.coerce.date()
+})
+
+
+/**
  * Returns server health status
  * @summary Health check
  */
@@ -628,7 +692,48 @@ export const GetOutreachDashboardResponse = zod.object({
   "automationEnabled": zod.boolean(),
   "automationReady": zod.boolean(),
   "researchAutomationEnabled": zod.boolean(),
-  "researchAutomationReady": zod.boolean()
+  "researchAutomationReady": zod.boolean(),
+  "monthlyTarget": zod.number(),
+  "sentThisMonth": zod.number(),
+  "remainingThisMonth": zod.number(),
+  "monthlyPercentComplete": zod.number(),
+  "todayTarget": zod.number(),
+  "todayRemaining": zod.number(),
+  "currentSendingPace": zod.number(),
+  "requiredDailyPace": zod.number(),
+  "qualifiedInventory": zod.number(),
+  "delivered": zod.number(),
+  "bounced": zod.number(),
+  "deliveryRate": zod.number(),
+  "opened": zod.number(),
+  "clicked": zod.number(),
+  "replied": zod.number(),
+  "positiveReplies": zod.number(),
+  "negativeReplies": zod.number(),
+  "unsubscribed": zod.number(),
+  "suppressed": zod.number(),
+  "newResearched": zod.number(),
+  "newVerified": zod.number(),
+  "septemberLanes": zod.object({
+  "named": zod.object({
+  "sent": zod.number(),
+  "target": zod.number()
+}).optional(),
+  "public": zod.object({
+  "sent": zod.number(),
+  "target": zod.number()
+}).optional(),
+  "hotMarket": zod.object({
+  "sent": zod.number(),
+  "target": zod.number()
+}).optional(),
+  "hotLead": zod.object({
+  "sent": zod.number(),
+  "target": zod.number()
+}).optional(),
+  "totalSent": zod.number().optional(),
+  "totalTarget": zod.number().optional()
+}).nullable()
 })
 
 
@@ -662,6 +767,7 @@ export const ListOutreachRepliesResponseItem = zod.object({
   "subject": zod.string(),
   "textBody": zod.string(),
   "messageType": zod.enum(['reply', 'auto_reply', 'permanent_closure']),
+  "sentiment": zod.enum(['neutral', 'positive', 'negative', 'auto']),
   "prospectId": zod.number().nullish(),
   "outreachMessageId": zod.number().nullish(),
   "companyName": zod.string().nullish(),
@@ -712,6 +818,7 @@ export const UpdateOutreachReplyResponse = zod.object({
   "subject": zod.string(),
   "textBody": zod.string(),
   "messageType": zod.enum(['reply', 'auto_reply', 'permanent_closure']),
+  "sentiment": zod.enum(['neutral', 'positive', 'negative', 'auto']),
   "prospectId": zod.number().nullish(),
   "outreachMessageId": zod.number().nullish(),
   "companyName": zod.string().nullish(),

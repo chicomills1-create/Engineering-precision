@@ -29,6 +29,7 @@ import {
 } from "./outreachPreparation";
 import { isRecurringHotMarketCampaign } from "./hotMarketResearch";
 import { logger } from "./logger";
+import { getAuthoritativeLaneConfig } from "./outreachLaneConfig";
 
 export function getHotMarketRemainingCapacity(existing: number): number {
   return Math.max(0, HOT_MARKET_DAILY_TARGET - existing);
@@ -86,6 +87,7 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
     return { state: "skipped", prepared: 0, totalScheduled: 0, shortfall: 0 };
   }
   const { scheduledAt } = getNextPhoenixPreparationTarget(now);
+  const laneConfig = await getAuthoritativeLaneConfig();
   const targetEnd = new Date(scheduledAt.getTime() + 24 * 60 * 60 * 1000);
 
   try {
@@ -144,7 +146,7 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
     const currentHotMarketCount = countHotMarketMessages(
       targetInitials.map((row) => row.sourceType),
     );
-    const remainingCapacity = getHotMarketRemainingCapacity(currentHotMarketCount);
+    const remainingCapacity = Math.max(0, laneConfig.hotMarketLimit - currentHotMarketCount);
     const eligible = prioritizePreparationCandidates(
       rows
         .filter(({ prospect, campaign }) =>
@@ -279,7 +281,7 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
       state: "completed",
       prepared,
       totalScheduled,
-      shortfall: Math.max(0, HOT_MARKET_DAILY_TARGET - totalScheduled),
+      shortfall: Math.max(0, laneConfig.hotMarketLimit - totalScheduled),
     };
   } catch (error) {
     logger.error({ err: error }, "Recurring hot-market preparation failed");
@@ -287,7 +289,7 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
       state: "failed",
       prepared: 0,
       totalScheduled: 0,
-      shortfall: HOT_MARKET_DAILY_TARGET,
+      shortfall: laneConfig.hotMarketLimit,
     };
   }
 }

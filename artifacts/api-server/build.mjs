@@ -21,6 +21,7 @@ async function buildAll() {
     ],
     platform: "node",
     bundle: true,
+    loader: { ".csv": "text" },
     format: "esm",
     outdir: distDir,
     outExtension: { ".js": ".mjs" },
