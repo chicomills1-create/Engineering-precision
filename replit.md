@@ -51,6 +51,11 @@ _Populate as you build — non-obvious choices a reader couldn't infer from the 
 - `pnpm --filter @workspace/apex-grid run seo:review:email` — same check, emails the result via the SendGrid connector (`seo/review-email.ts`; supports `--dry-run`). Recipient: `REVIEW_NOTIFY_EMAIL` → falls back to `LEAD_NOTIFY_EMAIL`; sender: `REVIEW_NOTIFY_FROM_EMAIL` → `LEAD_NOTIFY_FROM_EMAIL` → recipient. Sender must be SendGrid-verified or SendGrid returns 403.
 - To run it quarterly: create a Scheduled Deployment in the Publishing tool with schedule "9am on the 1st of January, April, July, and October" (cron `0 9 1 1,4,7,10 *`) and run command `pnpm --filter @workspace/apex-grid run seo:review:email`.
 
+## Weekly city-evidence link monitoring
+
+- `pnpm --filter @workspace/apex-grid run seo:check:city-evidence:scheduled` checks approved city evidence with concurrency 2, prevents overlapping local runs, and emails the categorized failure report only when issues exist. It never regenerates SEO pages.
+- The production API checks for a due run every Monday at 9am Phoenix time and at startup/hourly thereafter. A database-backed weekly claim prevents replica overlap and provides one catch-up attempt after crashes or autoscale dormancy. Recipient: `CITY_EVIDENCE_NOTIFY_EMAIL` → `REVIEW_NOTIFY_EMAIL` → `LEAD_NOTIFY_EMAIL` → `ADMIN_EMAILS`; sender: `CITY_EVIDENCE_NOTIFY_FROM_EMAIL` → `REVIEW_NOTIFY_FROM_EMAIL` → `LEAD_NOTIFY_FROM_EMAIL` → first recipient.
+
 ## User preferences
 
 _Populate as you build — explicit user instructions worth remembering across sessions._

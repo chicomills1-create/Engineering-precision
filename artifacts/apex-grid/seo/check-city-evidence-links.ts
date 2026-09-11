@@ -1,13 +1,16 @@
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { ReplitConnectors } from "@replit/connectors-sdk";
 import type { CityData } from "./types.ts";
 
 const SOURCE_CATEGORIES = ["ahj", "codes", "amendments", "utilities", "climate", "market"] as const;
 const DEFAULT_TIMEOUT_MS = 10_000;
 const DEFAULT_CONCURRENCY = 6;
 const MAX_REDIRECTS = 5;
-
+const LOCK_MAX_AGE_MS = 60 * 60_000;
+const LOCK_PATH = path.join(os.tmpdir(), "apex-grid-city-evidence-check.lock");
 type SourceCategory = typeof SOURCE_CATEGORIES[number];
 
 export interface EvidenceReference {
@@ -326,33 +329,115 @@ function parsePositiveInteger(flag: string, fallback: number): number {
   return value;
 }
 
-function printReport(results: LinkResult[]): void {
-  const failures = results.filter((result) => result.status !== "ok" && result.status !== "reviewed-exception");
+export function formatReport(results: LinkResult[]): string {
+  const healthy = results.filter((result) => result.status === "ok");
   const exceptions = results.filter((result) => result.status === "reviewed-exception");
-  console.log(`City evidence link health: ${results.length - failures.length}/${results.length} accepted (${exceptions.length} reviewed exception(s)); ${failures.length} issue(s).`);
+  const failures = results.filter((result) => result.status !== "ok" && result.status !== "reviewed-exception");
+  const lines = [
+    `City evidence link health: ${healthy.length}/${results.length} healthy; ${exceptions.length} reviewed exception(s); ${failures.length} issue(s).`,
+  ];
   for (const result of exceptions) {
-    console.warn(`\n[${result.status}] ${result.url}`);
-    if (result.detail) console.warn(`  detail: ${result.detail}`);
-    console.warn(`  used by: ${result.references.map(({ city, category }) => `${city} (${category})`).join(", ")}`);
+    lines.push("", `[${result.status}] ${result.url}`);
+    if (result.detail) lines.push(`  detail: ${result.detail}`);
+    lines.push(`  used by: ${result.references.map(({ city, category }) => `${city} (${category})`).join(", ")}`);
   }
   for (const result of failures) {
-    console.error(`\n[${result.status}] ${result.url}`);
-    if (result.finalUrl && result.finalUrl !== result.url) console.error(`  final: ${result.finalUrl}`);
-    if (result.statusCode) console.error(`  HTTP: ${result.statusCode}`);
-    if (result.detail) console.error(`  detail: ${result.detail}`);
-    console.error(`  used by: ${result.references.map(({ city, category }) => `${city} (${category})`).join(", ")}`);
+    lines.push("", `[${result.status}] ${result.url}`);
+    if (result.finalUrl && result.finalUrl !== result.url) lines.push(`  final: ${result.finalUrl}`);
+    if (result.statusCode) lines.push(`  HTTP: ${result.statusCode}`);
+    if (result.detail) lines.push(`  detail: ${result.detail}`);
+    lines.push(`  used by: ${result.references.map(({ city, category }) => `${city} (${category})`).join(", ")}`);
   }
+  return lines.join("\n");
 }
 
 async function main(): Promise<void> {
-  const concurrency = parsePositiveInteger("--concurrency", DEFAULT_CONCURRENCY);
-  const timeoutMs = parsePositiveInteger("--timeout-ms", DEFAULT_TIMEOUT_MS);
-  const targets = collectApprovedEvidence(await loadCities());
-  console.log(`Checking ${targets.length} unique approved city evidence URLs (concurrency ${concurrency}, timeout ${timeoutMs}ms)...`);
-  const results = await checkEvidenceTargets(targets, { concurrency, timeoutMs });
-  printReport(results);
-  if (results.some((result) => result.status !== "ok" && result.status !== "reviewed-exception")) process.exitCode = 1;
+  const releaseLock = acquireLock();
+  try {
+    const concurrency = parsePositiveInteger("--concurrency", DEFAULT_CONCURRENCY);
+    const timeoutMs = parsePositiveInteger("--timeout-ms", DEFAULT_TIMEOUT_MS);
+    const targets = collectApprovedEvidence(await loadCities());
+    console.log(`Checking ${targets.length} unique approved city evidence URLs (concurrency ${concurrency}, timeout ${timeoutMs}ms)...`);
+    const results = await checkEvidenceTargets(targets, { concurrency, timeoutMs });
+    const report = formatReport(results);
+    const failures = results.filter((result) => result.status !== "ok" && result.status !== "reviewed-exception");
+    if (failures.length === 0) {
+      console.log(report);
+      return;
+    }
+    console.error(report);
+    if (process.argv.includes("--notify-failures")) {
+      await notifyFailures(report, failures.length);
+      console.log(`City evidence alert sent for ${failures.length} issue(s).`);
+      return;
+    }
+    process.exitCode = 1;
+  } finally {
+    releaseLock();
+  }
 }
 
 const isCli = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isCli) await main();
+
+function acquireLock(): () => void {
+  try {
+    const stat = fs.statSync(LOCK_PATH);
+    if (Date.now() - stat.mtimeMs > LOCK_MAX_AGE_MS) fs.unlinkSync(LOCK_PATH);
+  } catch (error) {
+    if (!(error instanceof Error && "code" in error && error.code === "ENOENT")) throw error;
+  }
+  let descriptor: number;
+  try {
+    descriptor = fs.openSync(LOCK_PATH, "wx");
+  } catch (error) {
+    if (error instanceof Error && "code" in error && error.code === "EEXIST") {
+      throw new Error("A city evidence check is already running");
+    }
+    throw error;
+  }
+  fs.writeFileSync(descriptor, `${process.pid}\n${new Date().toISOString()}\n`);
+  return () => {
+    fs.closeSync(descriptor);
+    fs.rmSync(LOCK_PATH, { force: true });
+  };
+}
+
+async function notifyFailures(report: string, failureCount: number): Promise<void> {
+  const recipients = (
+    process.env.CITY_EVIDENCE_NOTIFY_EMAIL
+    || process.env.REVIEW_NOTIFY_EMAIL
+    || process.env.LEAD_NOTIFY_EMAIL
+    || process.env.ADMIN_EMAILS
+    || ""
+  ).split(",").map((email) => email.trim()).filter(Boolean);
+  const from = process.env.CITY_EVIDENCE_NOTIFY_FROM_EMAIL
+    || process.env.REVIEW_NOTIFY_FROM_EMAIL
+    || process.env.LEAD_NOTIFY_FROM_EMAIL
+    || recipients[0];
+  if (recipients.length === 0 || !from) {
+    throw new Error("City evidence alert recipient/sender is not configured");
+  }
+
+  const response = await new ReplitConnectors().proxy("sendgrid", "/v3/mail/send", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      personalizations: [{ to: recipients.map((email) => ({ email })) }],
+      from: { email: from, name: "Apex Grid City Evidence Monitor" },
+      subject: `[Action required] ${failureCount} city evidence link issue${failureCount === 1 ? "" : "s"}`,
+      content: [{
+        type: "text/plain",
+        value: [
+          "The scheduled city evidence check found links that need team review.",
+          "No SEO pages were regenerated.",
+          "",
+          report,
+        ].join("\n"),
+      }],
+    }),
+  });
+  if (!response.ok) {
+    throw new Error(`SendGrid responded ${response.status}: ${await response.text().catch(() => "")}`);
+  }
+}

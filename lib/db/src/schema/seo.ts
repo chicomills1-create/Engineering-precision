@@ -102,6 +102,15 @@ export const seoAuditIssuesTable = pgTable(
   ],
 );
 
+export const cityEvidenceCheckRunsTable = pgTable("city_evidence_check_runs", {
+  slot: text("slot").primaryKey(),
+  status: text("status").notNull(), // running | completed | failed
+  attemptCount: integer("attempt_count").notNull().default(1),
+  startedAt: timestamp("started_at", { withTimezone: true }).notNull().defaultNow(),
+  completedAt: timestamp("completed_at", { withTimezone: true }),
+  error: text("error"),
+});
+
 export const insertSeoPerformanceSnapshotSchema = createInsertSchema(seoPerformanceSnapshotsTable).omit({ id: true, syncedAt: true });
 export const insertSeoTrafficAlertSchema = createInsertSchema(seoTrafficAlertsTable).omit({ id: true, createdAt: true });
 export const insertSeoAuditRunSchema = createInsertSchema(seoAuditRunsTable).omit({ id: true, startedAt: true });

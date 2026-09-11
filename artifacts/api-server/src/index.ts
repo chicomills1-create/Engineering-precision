@@ -7,6 +7,7 @@ import { ensureOutreachFollowUps, prepareNextPhoenixOutreach } from "./lib/outre
 import { seedHotMarketOutreachBatch } from "./lib/hotMarketOutreachBatch";
 import { startDailyOutreachProcessScheduler } from "./lib/outreachDailyProcessScheduler";
 import { loadOutreachSystemConfig, setOutreachConfigError } from "./lib/outreachSystemConfig";
+import { startCityEvidenceScheduler } from "./lib/cityEvidenceScheduler";
 
 const rawPort = process.env["PORT"];
 
@@ -23,6 +24,7 @@ if (Number.isNaN(port) || port <= 0) {
 }
 
 let stopDailyScheduler: () => Promise<void> = async () => {};
+let stopCityEvidenceScheduler: () => Promise<void> = async () => {};
 const server = app.listen(port, async (err) => {
   if (err) {
     logger.error({ err }, "Error listening on port");
@@ -30,6 +32,7 @@ const server = app.listen(port, async (err) => {
   }
 
   logger.info({ port }, "Server listening");
+  stopCityEvidenceScheduler = startCityEvidenceScheduler();
   let outreachConfigured = false;
   try {
     await loadOutreachSystemConfig();
@@ -71,6 +74,7 @@ async function shutdown(signal: NodeJS.Signals): Promise<void> {
   forceExit.unref();
   await Promise.all([
     stopDailyScheduler(),
+    stopCityEvidenceScheduler(),
     new Promise<void>((resolve) => server.close(() => resolve())),
   ]);
   clearTimeout(forceExit);

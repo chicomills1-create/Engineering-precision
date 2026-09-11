@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { checkEvidenceTarget, isExpectedDomain, type EvidenceTarget } from "./check-city-evidence-links.ts";
+import { checkEvidenceTarget, formatReport, isExpectedDomain, type EvidenceTarget } from "./check-city-evidence-links.ts";
 
 const target: EvidenceTarget = {
   url: "https://city.example.gov/departments/building/codes",
@@ -125,4 +125,18 @@ test("accepts only the reviewed low-level cause for a network exception", async 
   });
   assert.equal(timeout.status, "inaccessible");
   assert.equal(timeout.networkErrorCode, "TimeoutError");
+});
+
+test("formats categorized failures with their city references", () => {
+  const report = formatReport([{
+    ...target,
+    status: "http-error",
+    statusCode: 404,
+    finalUrl: target.url,
+    detail: "Not Found",
+  }]);
+  assert.match(report, /0\/1 healthy; 0 reviewed exception\(s\); 1 issue/);
+  assert.match(report, /\[http-error\]/);
+  assert.match(report, /HTTP: 404/);
+  assert.match(report, /Example, state \(codes\)/);
 });
