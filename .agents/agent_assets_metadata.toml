@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "yvjyRMxqa9q9smLD8BO0W"
+uri = "file://.agents/outputs/verified-business-email-contacts.csv"
+type = "table"
+title = "2,027 Verified AEC Business Contacts"
+description = "Exactly 2,027 unique, source-backed business contacts with company, domain, email type, verification method, source URL, and verification date. Production-history, suppression, reply, email, and domain duplicates were excluded."
+logical_id = "8d3ebd7d-745c-407d-9960-2ff29901293f"
+content_hash = "sha256:d896d563a12b4390ea59c778137f48b256c25b795572833c1389f88149c19f80"
+size = 531777
+mtime_ms = 1789135829337
+storage_uri = "gcs://replit-rams-assets-riker/rams/assets/repl:665246ac-e3fe-4402-b00b-8349e04fb07b/8d3ebd7d-745c-407d-9960-2ff29901293f/e7c73fac-56a8-46e9-b50c-770cbd45d2fe"
+storage_version_token = "1789135869075646"
+content_type = "text/csv"

@@ -25,6 +25,7 @@
 - [Exact-time outreach scheduling](exact-time-outreach-scheduling.md) — daily target is 100 Verified/Direct + 50 Public + 50 Hot Market + 50 Hot Leads; eligible follow-ups are additional.
 - [Verified outreach library](verified-outreach-library.md) — build an auditable AZ-first, then CA prospect pool; target 100 Direct + 50 Public + 50 Hot Market initial emails daily.
 - [Free-first outreach research](free-first-outreach-research.md) — use official registries and firm pages before targeted enrichment; never infer emails from patterns.
+- [Public business email sourcing](public-business-email-sourcing.md) — finder APIs are fallback tools; sourced and validated official-domain role mailboxes can qualify.
 - [Outreach stop serialization](outreach-stop-serialization.md) — evidence, suppression, sending, and seeding must share database locks so a stopped contact cannot be revived by a race.
 - [Reply/send dispatch ordering](reply-send-dispatch-ordering.md) — hold the per-email lock through provider dispatch; recheck persisted send state under it so replies can stop unsent follow-ups.
 - [SEO corpus audit scaling](seo-corpus-audit-scaling.md) — full-corpus audits must stream metadata and links, never retain every generated HTML document; GSC property totals require a no-dimension query.
