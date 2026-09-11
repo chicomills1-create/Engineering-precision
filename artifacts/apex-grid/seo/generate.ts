@@ -262,7 +262,7 @@ function allDirectoryCitiesForState(state: StateData, directory: CityDirectory, 
 
 /** Conservative gate for Census-directory pages: only publish pages with enough
  * independently useful identity data to avoid state-copy doorway pages. */
-const LITE_CITY_MIN_POPULATION = 500;
+const LITE_CITY_MIN_POPULATION = 1;
 type CityQualityDecision = { state: string; slug: string; name: string; status: "indexed" | "excluded"; reasons: string[] };
 function diagnosticSlug(name: string): string {
   return name.normalize("NFKD").replace(/\p{M}/gu, "").toLowerCase().replace(/[^\p{Letter}\p{Number}]+/gu, "-").replace(/^-|-$/g, "");

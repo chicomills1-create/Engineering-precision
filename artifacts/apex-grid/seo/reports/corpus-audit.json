@@ -1,14 +1,14 @@
 {
   "generatedAt": "deterministic",
   "htmlPages": 26409,
-  "sitemapUrls": 19428,
-  "indexablePages": 19430,
-  "noindexPages": 6956,
+  "sitemapUrls": 26297,
+  "indexablePages": 26299,
+  "noindexPages": 87,
   "redirectPages": 58,
   "duplicateCanonicalGroups": 0,
   "sitemapOmissions": 0,
   "failures": 0,
-  "internalLinksToNoindex": 6922,
+  "internalLinksToNoindex": 53,
   "indexableSourceLinksToNoindex": 1,
-  "excludedSourceLinksToNoindex": 6921
+  "excludedSourceLinksToNoindex": 52
 }
