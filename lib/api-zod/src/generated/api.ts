@@ -2222,6 +2222,20 @@ export const GetSeoDashboardResponse = zod.object({
   "ctr": zod.string().optional(),
   "position": zod.string().optional()
 })),
+  "keywordRetention": zod.object({
+  "protectedCount": zod.number(),
+  "reviewCount": zod.number(),
+  "reviewClicks": zod.number(),
+  "reviewImpressions": zod.number(),
+  "opportunities": zod.array(zod.object({
+  "page": zod.string(),
+  "query": zod.string(),
+  "clicks": zod.number(),
+  "impressions": zod.number(),
+  "position": zod.string(),
+  "status": zod.enum(['protected', 'review'])
+}))
+}),
   "performanceHistory": zod.array(zod.object({
   "startDate": zod.string(),
   "endDate": zod.string(),
@@ -2268,7 +2282,8 @@ export const SyncSeoPerformanceResponse = zod.object({
   "endDate": zod.string().optional(),
   "totals": zod.object({
   "pages": zod.number(),
-  "queries": zod.number()
+  "queries": zod.number(),
+  "pageQueries": zod.number()
 })
 })
 

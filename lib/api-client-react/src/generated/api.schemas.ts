@@ -1704,6 +1704,7 @@ export const SeoPerformanceSyncAvailability = {
 export type SeoPerformanceSyncTotals = {
   pages: number;
   queries: number;
+  pageQueries: number;
 };
 
 export interface SeoPerformanceSync {
@@ -1764,6 +1765,31 @@ export interface SeoPerformanceSnapshot {
   position?: string;
 }
 
+export type SeoKeywordOpportunityStatus = typeof SeoKeywordOpportunityStatus[keyof typeof SeoKeywordOpportunityStatus];
+
+
+export const SeoKeywordOpportunityStatus = {
+  protected: 'protected',
+  review: 'review',
+} as const;
+
+export interface SeoKeywordOpportunity {
+  page: string;
+  query: string;
+  clicks: number;
+  impressions: number;
+  position: string;
+  status: SeoKeywordOpportunityStatus;
+}
+
+export interface SeoKeywordRetention {
+  protectedCount: number;
+  reviewCount: number;
+  reviewClicks: number;
+  reviewImpressions: number;
+  opportunities: SeoKeywordOpportunity[];
+}
+
 export interface SeoPerformancePeriodSummary {
   startDate: string;
   endDate: string;
@@ -1789,6 +1815,7 @@ export interface SeoAttributionRollup {
 export interface SeoDashboard {
   inventory: SeoDashboardInventory;
   performance: SeoPerformanceSnapshot[];
+  keywordRetention: SeoKeywordRetention;
   performanceHistory: SeoPerformancePeriodSummary[];
   organicAttribution: SeoAttributionRollup[];
   /** @nullable */

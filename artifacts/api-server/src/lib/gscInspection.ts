@@ -135,8 +135,8 @@ export interface SearchAnalyticsOutcome {
 export async function querySearchAnalytics(
   startDate: string,
   endDate: string,
-  dimension: "page" | "query" | "site",
-  rowLimit = 250,
+  dimension: "page" | "query" | "page_query" | "site",
+  rowLimit = 1000,
 ): Promise<SearchAnalyticsOutcome> {
   const client = getAuth();
   if (!client) return { availability: "unconfigured", rows: [], error: "Google Search Console credentials are not configured." };
@@ -150,8 +150,10 @@ export async function querySearchAnalytics(
       body: JSON.stringify({
         startDate,
         endDate,
-        ...(dimension === "site" ? {} : { dimensions: [dimension] }),
-        rowLimit: dimension === "site" ? 1 : Math.min(Math.max(rowLimit, 1), 1000),
+        ...(dimension === "site"
+          ? {}
+          : { dimensions: dimension === "page_query" ? ["page", "query"] : [dimension] }),
+        rowLimit: dimension === "site" ? 1 : Math.min(Math.max(rowLimit, 1), 25_000),
       }),
     });
     if (response.status === 429) {
@@ -166,7 +168,11 @@ export async function querySearchAnalytics(
       availability: "available",
       error: null,
       rows: (payload.rows ?? []).map((row) => ({
-        key: dimension === "site" ? "site" : row.keys?.[0] ?? "",
+        key: dimension === "site"
+          ? "site"
+          : dimension === "page_query"
+            ? JSON.stringify({ page: row.keys?.[0] ?? "", query: row.keys?.[1] ?? "" })
+            : row.keys?.[0] ?? "",
         clicks: row.clicks ?? 0,
         impressions: row.impressions ?? 0,
         ctr: row.ctr ?? 0,

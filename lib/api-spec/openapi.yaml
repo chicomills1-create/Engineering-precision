@@ -2098,7 +2098,7 @@ components:
         error: { type: [string, "null"] }
         startDate: { type: string }
         endDate: { type: string }
-        totals: { type: object, required: [pages, queries], properties: { pages: { type: number }, queries: { type: number } } }
+        totals: { type: object, required: [pages, queries, pageQueries], properties: { pages: { type: number }, queries: { type: number }, pageQueries: { type: number } } }
     SeoAuditIssue:
       type: object
       required: [url, category, severity, message]
@@ -2118,7 +2118,7 @@ components:
         issues: { type: array, items: { $ref: "#/components/schemas/SeoAuditIssue" } }
     SeoDashboard:
       type: object
-      required: [inventory, performance, performanceHistory, organicAttribution, latestAudit, openIssues]
+      required: [inventory, performance, keywordRetention, performanceHistory, organicAttribution, latestAudit, openIssues]
       properties:
         inventory:
           type: object
@@ -2127,6 +2127,7 @@ components:
             totalUrls: { type: number }
             byCategory: { type: object, additionalProperties: { type: number } }
         performance: { type: array, items: { $ref: "#/components/schemas/SeoPerformanceSnapshot" } }
+        keywordRetention: { $ref: "#/components/schemas/SeoKeywordRetention" }
         performanceHistory: { type: array, items: { $ref: "#/components/schemas/SeoPerformancePeriodSummary" } }
         organicAttribution: { type: array, items: { $ref: "#/components/schemas/SeoAttributionRollup" } }
         latestAudit: { type: ["object", "null"], properties: { id: { type: number }, status: { type: string } } }
@@ -2140,6 +2141,27 @@ components:
         impressions: { type: number }
         ctr: { type: string }
         position: { type: string }
+    SeoKeywordRetention:
+      type: object
+      required: [protectedCount, reviewCount, reviewClicks, reviewImpressions, opportunities]
+      properties:
+        protectedCount: { type: number }
+        reviewCount: { type: number }
+        reviewClicks: { type: number }
+        reviewImpressions: { type: number }
+        opportunities:
+          type: array
+          items: { $ref: "#/components/schemas/SeoKeywordOpportunity" }
+    SeoKeywordOpportunity:
+      type: object
+      required: [page, query, clicks, impressions, position, status]
+      properties:
+        page: { type: string }
+        query: { type: string }
+        clicks: { type: number }
+        impressions: { type: number }
+        position: { type: string }
+        status: { type: string, enum: [protected, review] }
     SeoPerformancePeriodSummary:
       type: object
       required: [startDate, endDate, clicks, impressions, position]

@@ -9,12 +9,14 @@ import type { SeoAttributionRollup } from './seoAttributionRollup';
 import type { SeoAuditIssue } from './seoAuditIssue';
 import type { SeoDashboardInventory } from './seoDashboardInventory';
 import type { SeoDashboardLatestAudit } from './seoDashboardLatestAudit';
+import type { SeoKeywordRetention } from './seoKeywordRetention';
 import type { SeoPerformancePeriodSummary } from './seoPerformancePeriodSummary';
 import type { SeoPerformanceSnapshot } from './seoPerformanceSnapshot';
 
 export interface SeoDashboard {
   inventory: SeoDashboardInventory;
   performance: SeoPerformanceSnapshot[];
+  keywordRetention: SeoKeywordRetention;
   performanceHistory: SeoPerformancePeriodSummary[];
   organicAttribution: SeoAttributionRollup[];
   /** @nullable */

@@ -177,7 +177,7 @@ function DashboardTab() {
         } else if (!res.synced) {
            toast({ title: 'Sync Failed', description: res.error || 'Failed to sync data.', variant: 'destructive' });
         } else {
-           toast({ title: 'Performance Synced', description: `Synced ${res.totals.pages} pages and ${res.totals.queries} queries.` });
+           toast({ title: 'Performance Synced', description: `Synced ${res.totals.pages} pages, ${res.totals.queries} queries, and ${res.totals.pageQueries} keyword-to-page pairs.` });
            void queryClient.invalidateQueries({ queryKey: getGetSeoDashboardQueryKey() });
         }
       },
@@ -266,12 +266,77 @@ function DashboardTab() {
         </div>
       </div>
 
+      {/* Keyword retention */}
+      <div className="border border-border bg-card p-6 rounded-[2px]">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-5">
+          <div>
+            <h3 className="text-lg font-display font-bold">Keyword Coverage Protection</h3>
+            <p className="text-sm text-muted-foreground mt-1">
+              Search Console queries mapped to their actual landing pages. Pages outside the current sitemap are held for review, not automatically discarded.
+            </p>
+          </div>
+          <div className="flex gap-3 text-xs">
+            <span className="inline-flex items-center gap-1.5 text-emerald-400">
+              <CheckCircle2 className="w-4 h-4" />
+              {dashboard.keywordRetention.protectedCount.toLocaleString()} protected
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-amber-400">
+              <AlertTriangle className="w-4 h-4" />
+              {dashboard.keywordRetention.reviewCount.toLocaleString()} review
+            </span>
+          </div>
+        </div>
+
+        {dashboard.keywordRetention.opportunities.length === 0 ? (
+          <div className="py-8 text-center text-sm text-muted-foreground border border-dashed border-border rounded-[2px]">
+            Sync Search Console to check whether any historical keyword traffic lands outside the protected sitemap.
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-2 gap-4 mb-5">
+              <div className="border border-amber-400/20 bg-amber-400/5 p-4 rounded-[2px]">
+                <p className="text-xs uppercase tracking-wider text-muted-foreground">Clicks needing review</p>
+                <p className="font-display text-2xl font-bold mt-1">{dashboard.keywordRetention.reviewClicks.toLocaleString()}</p>
+              </div>
+              <div className="border border-amber-400/20 bg-amber-400/5 p-4 rounded-[2px]">
+                <p className="text-xs uppercase tracking-wider text-muted-foreground">Impressions needing review</p>
+                <p className="font-display text-2xl font-bold mt-1">{dashboard.keywordRetention.reviewImpressions.toLocaleString()}</p>
+              </div>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[760px] text-sm">
+                <thead>
+                  <tr className="border-b border-border text-xs uppercase tracking-wider text-muted-foreground text-left">
+                    <th className="pb-3 font-medium">Query</th>
+                    <th className="pb-3 font-medium">Landing page</th>
+                    <th className="pb-3 font-medium text-right">Clicks</th>
+                    <th className="pb-3 font-medium text-right">Impressions</th>
+                    <th className="pb-3 font-medium text-right">Position</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/50">
+                  {dashboard.keywordRetention.opportunities.map((item, index) => (
+                    <tr key={`${item.page}-${item.query}-${index}`} className="hover:bg-white/[0.02]">
+                      <td className="py-3 pr-4 font-medium">{item.query || '(query unavailable)'}</td>
+                      <td className="py-3 pr-4 max-w-[360px] truncate font-mono text-xs text-muted-foreground" title={item.page}>{item.page || 'Unknown page'}</td>
+                      <td className="py-3 text-right font-mono">{item.clicks.toLocaleString()}</td>
+                      <td className="py-3 text-right font-mono text-muted-foreground">{item.impressions.toLocaleString()}</td>
+                      <td className="py-3 text-right font-mono text-muted-foreground">{parseFloat(item.position).toFixed(1)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+      </div>
+
       {/* Performance Section */}
       <div className="border border-border bg-card p-6 rounded-[2px]">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div>
             <h3 className="text-lg font-display font-bold">Search Performance</h3>
-            <p className="text-sm text-muted-foreground mt-1">Top pages and queries from Google Search Console (Last 30 Days)</p>
+             <p className="text-sm text-muted-foreground mt-1">Top pages and queries from Google Search Console (Last 180 Days)</p>
           </div>
           <button
             type="button"

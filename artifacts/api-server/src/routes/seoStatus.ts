@@ -352,7 +352,7 @@ function dateOnly(value: unknown): string | null {
 }
 function defaultPerformanceRange(): { startDate: string; endDate: string } {
   const end = new Date(Date.now() - 3 * 86400000);
-  const start = new Date(end.getTime() - 27 * 86400000);
+  const start = new Date(end.getTime() - 179 * 86400000);
   return { startDate: start.toISOString().slice(0, 10), endDate: end.toISOString().slice(0, 10) };
 }
 async function sitemapEntries(): Promise<ParsedEntry[]> {
@@ -367,28 +367,30 @@ router.post("/seo/dashboard/performance-sync", requireAuth, async (req, res): Pr
   const fallback = defaultPerformanceRange();
   const startDate = dateOnly(req.body?.startDate) ?? fallback.startDate;
   const endDate = dateOnly(req.body?.endDate) ?? fallback.endDate;
-  if (startDate > endDate || (Date.parse(`${endDate}T00:00:00Z`) - Date.parse(`${startDate}T00:00:00Z`)) > 92 * 86400000) {
-    res.status(400).json({ error: "Date range must be ordered and no longer than 93 days." }); return;
+  if (startDate > endDate || (Date.parse(`${endDate}T00:00:00Z`) - Date.parse(`${startDate}T00:00:00Z`)) > 185 * 86400000) {
+    res.status(400).json({ error: "Date range must be ordered and no longer than 186 days." }); return;
   }
-  const [site, pages, queries] = await Promise.all([
+  const [site, pages, queries, pageQueries] = await Promise.all([
     querySearchAnalytics(startDate, endDate, "site"),
-    querySearchAnalytics(startDate, endDate, "page"),
-    querySearchAnalytics(startDate, endDate, "query"),
+    querySearchAnalytics(startDate, endDate, "page", 25_000),
+    querySearchAnalytics(startDate, endDate, "query", 25_000),
+    querySearchAnalytics(startDate, endDate, "page_query", 25_000),
   ]);
-  if (site.availability !== "available" || pages.availability !== "available" || queries.availability !== "available") {
-    const unavailable = [site, pages, queries].find((result) => result.availability !== "available");
-    res.status(503).json({ availability: unavailable?.availability ?? "api_error", synced: false, error: unavailable?.error ?? "Search Console is unavailable.", totals: { pages: 0, queries: 0 } }); return;
+  if (site.availability !== "available" || pages.availability !== "available" || queries.availability !== "available" || pageQueries.availability !== "available") {
+    const unavailable = [site, pages, queries, pageQueries].find((result) => result.availability !== "available");
+    res.status(503).json({ availability: unavailable?.availability ?? "api_error", synced: false, error: unavailable?.error ?? "Search Console is unavailable.", totals: { pages: 0, queries: 0, pageQueries: 0 } }); return;
   }
   const rows = [
     ...site.rows.map((row) => ({ ...row, dimension: "site" })),
     ...pages.rows.map((row) => ({ ...row, dimension: "page" })),
     ...queries.rows.map((row) => ({ ...row, dimension: "query" })),
+    ...pageQueries.rows.map((row) => ({ ...row, dimension: "page_query" })),
   ];
   if (rows.length) await db.insert(seoPerformanceSnapshotsTable).values(rows.map((row) => ({
     periodStart: startDate, periodEnd: endDate, dimension: row.dimension, dimensionValue: row.key,
     clicks: Math.round(row.clicks), impressions: Math.round(row.impressions), ctr: String(row.ctr), position: String(row.position),
   }))).onConflictDoUpdate({ target: [seoPerformanceSnapshotsTable.periodStart, seoPerformanceSnapshotsTable.periodEnd, seoPerformanceSnapshotsTable.dimension, seoPerformanceSnapshotsTable.dimensionValue], set: { clicks: sql`excluded.clicks`, impressions: sql`excluded.impressions`, ctr: sql`excluded.ctr`, position: sql`excluded.position`, syncedAt: new Date() } });
-  res.json({ availability: "available", synced: true, error: null, startDate, endDate, totals: { pages: pages.rows.length, queries: queries.rows.length } });
+  res.json({ availability: "available", synced: true, error: null, startDate, endDate, totals: { pages: pages.rows.length, queries: queries.rows.length, pageQueries: pageQueries.rows.length } });
 });
 
 router.post("/seo/dashboard/audit", requireAuth, async (req, res): Promise<void> => {
@@ -432,6 +434,7 @@ router.get("/seo/dashboard/issues", requireAuth, async (req, res): Promise<void>
 
 router.get("/seo/dashboard", requireAuth, async (_req, res): Promise<void> => {
   const entries = await sitemapEntries();
+  const sitemapPaths = new Set(entries.map((entry) => entry.path.endsWith("/") ? entry.path : `${entry.path}/`));
   const [latestAudit, latestPerformancePeriod, performanceHistory, leads] = await Promise.all([
     db.select().from(seoAuditRunsTable).orderBy(desc(seoAuditRunsTable.completedAt)).limit(1),
     db.select({
@@ -464,19 +467,54 @@ router.get("/seo/dashboard", requireAuth, async (_req, res): Promise<void> => {
     ),
   ]);
   const latestPeriod = latestPerformancePeriod[0];
-  const performance = latestPeriod
-    ? await db.select().from(seoPerformanceSnapshotsTable).where(and(
+  const [performance, pageQueryPerformance] = latestPeriod
+    ? await Promise.all([
+      db.select().from(seoPerformanceSnapshotsTable).where(and(
+        eq(seoPerformanceSnapshotsTable.periodStart, latestPeriod.periodStart),
+        eq(seoPerformanceSnapshotsTable.periodEnd, latestPeriod.periodEnd),
+        sql`${seoPerformanceSnapshotsTable.dimension} <> 'page_query'`,
+      )).orderBy(desc(seoPerformanceSnapshotsTable.clicks)).limit(500),
+      db.select().from(seoPerformanceSnapshotsTable).where(and(
       eq(seoPerformanceSnapshotsTable.periodStart, latestPeriod.periodStart),
       eq(seoPerformanceSnapshotsTable.periodEnd, latestPeriod.periodEnd),
-    )).orderBy(desc(seoPerformanceSnapshotsTable.clicks)).limit(500)
-    : [];
+        eq(seoPerformanceSnapshotsTable.dimension, "page_query"),
+      )).orderBy(desc(seoPerformanceSnapshotsTable.clicks), desc(seoPerformanceSnapshotsTable.impressions)).limit(25_000),
+    ])
+    : [[], []];
   const openIssues = latestAudit[0] ? await db.select().from(seoAuditIssuesTable).where(eq(seoAuditIssuesTable.auditRunId, latestAudit[0].id)).limit(25) : [];
+  const keywordRetention = pageQueryPerformance.map((row) => {
+    let page = "";
+    let query = "";
+    try {
+      const parsed = JSON.parse(row.dimensionValue) as { page?: unknown; query?: unknown };
+      page = typeof parsed.page === "string" ? parsed.page : "";
+      query = typeof parsed.query === "string" ? parsed.query : "";
+    } catch { /* malformed historical rows stay visible as at-risk */ }
+    let pathname = page;
+    try { pathname = new URL(page).pathname; } catch { /* retain raw path */ }
+    const normalizedPath = pathname.endsWith("/") ? pathname : `${pathname}/`;
+    return {
+      page,
+      query,
+      clicks: row.clicks,
+      impressions: row.impressions,
+      position: row.position,
+      status: sitemapPaths.has(normalizedPath) ? "protected" : "review",
+    };
+  }).sort((a, b) => b.clicks - a.clicks || b.impressions - a.impressions);
   res.json({
     inventory: {
       totalUrls: entries.length,
       byCategory: Object.fromEntries(entries.reduce((m, e) => m.set(e.category, (m.get(e.category) ?? 0) + 1), new Map<string, number>())),
     },
     performance,
+    keywordRetention: {
+      protectedCount: keywordRetention.filter((row) => row.status === "protected").length,
+      reviewCount: keywordRetention.filter((row) => row.status === "review").length,
+      reviewClicks: keywordRetention.filter((row) => row.status === "review").reduce((sum, row) => sum + row.clicks, 0),
+      reviewImpressions: keywordRetention.filter((row) => row.status === "review").reduce((sum, row) => sum + row.impressions, 0),
+      opportunities: keywordRetention.filter((row) => row.status === "review").slice(0, 100),
+    },
     performanceHistory,
     organicAttribution: leads.filter((lead) => (lead.medium ?? "").toLowerCase() === "organic"),
     latestAudit: latestAudit[0] ?? null,

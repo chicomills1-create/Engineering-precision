@@ -9,4 +9,5 @@
 export type SeoPerformanceSyncTotals = {
   pages: number;
   queries: number;
+  pageQueries: number;
 };
