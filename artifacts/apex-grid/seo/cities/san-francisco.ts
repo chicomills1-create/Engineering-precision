@@ -49,4 +49,17 @@ export const sanFrancisco: CityData = {
       a: "It is the City's mandatory seismic retrofit program for certain older wood-frame multi-unit residential buildings with soft, weak, or open-front conditions. It is separate from ordinary voluntary improvement design; DBI records and the building's construction and occupancy determine whether a property is covered.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 95, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.sf.gov/departments--department-building-inspection"],
+      codes: ["https://www.hcd.ca.gov/building-standards"],
+      amendments: ["https://www.sf.gov/information--building-codes"],
+      utilities: ["https://www.pge.com/en/business.html", "https://www.sfpuc.gov/"],
+      climate: ["https://www.weather.gov/mtr/"],
+      market: ["https://sf.gov/departments/office-economic-and-workforce-development"],
+    },
+  },
 };

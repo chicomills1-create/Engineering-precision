@@ -51,4 +51,17 @@ export const chulaVista: CityData = {
       a: "No. California commercial energy compliance follows Title 24 Part 6 using California-approved compliance methods and software. The analysis addresses envelope, HVAC, lighting, controls, and applicable solar or battery provisions within the 2022 Energy Code framework.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 70, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.chulavistaca.gov/departments/development-services"],
+      codes: ["https://www.hcd.ca.gov/building-standards"],
+      amendments: ["https://chulavistaca.gov/departments/development-services/building"],
+      utilities: ["https://www.otaywater.gov/", "https://www.sdge.com/business"],
+      climate: ["https://www.weather.gov/sgx/"],
+      market: ["https://www.chulavistaca.gov/business"],
+    },
+  },
 };

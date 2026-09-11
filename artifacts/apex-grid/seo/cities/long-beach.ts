@@ -49,4 +49,17 @@ export const longBeach: CityData = {
       a: "Long Beach is a high-seismic California jurisdiction, and some coastal or fill sites also have liquefaction, high groundwater, coastal-flood, and sea-level-rise considerations. A site-specific geotechnical report and flood/coastal screening guide foundation, finished-floor, drainage, and critical-equipment design.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 86, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.longbeach.gov/lbds/"],
+      codes: ["https://www.hcd.ca.gov/building-standards"],
+      amendments: ["https://www.longbeach.gov/lbds/building-code/"],
+      utilities: ["https://www.longbeach.gov/energyresources/", "https://www.sce.com/business"],
+      climate: ["https://www.weather.gov/lox/"],
+      market: ["https://www.longbeach.gov/economicdevelopment/"],
+    },
+  },
 };

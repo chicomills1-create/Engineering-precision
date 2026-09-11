@@ -52,4 +52,17 @@ export const sanDiego: CityData = {
       a: "SDG&E has among the highest commercial electricity rates in the country, so demand-charge management, right-sized services, and on-site solar have an outsized effect on operating cost. Combined with the city's Climate Action Plan electrification goals, this makes energy strategy a first-order design decision, not an afterthought.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 91, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.sandiego.gov/development-services"],
+      codes: ["https://www.hcd.ca.gov/building-standards"],
+      amendments: ["https://www.sandiego.gov/development-services/permits/what-you-need-know"],
+      utilities: ["https://www.sdge.com/business", "https://www.sandiego.gov/public-utilities"],
+      climate: ["https://www.weather.gov/sgx/"],
+      market: ["https://www.sandiego.gov/economic-development"],
+    },
+  },
 };

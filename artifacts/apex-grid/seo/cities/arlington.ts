@@ -49,4 +49,17 @@ export const arlington: CityData = {
       a: "Expansive North Texas soils can cause seasonal shrink-swell movement. A project geotechnical report determines the solution, which may include a post-tensioned slab, drilled piers, grade beams, void forms, and drainage/moisture-control detailing.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 84, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.arlingtontx.gov/City-Hall/Departments/Community-Development-and-Planning/Building-Inspections"],
+      codes: ["https://www.arlingtontx.gov/City-Hall/Departments/Community-Development-and-Planning/Building-Inspections/Codes-and-Ordinances"],
+      amendments: ["https://www.arlingtontx.gov/City-Hall/Departments/Community-Development-and-Planning/Building-Inspections/Codes-and-Ordinances"],
+      utilities: ["https://www.oncor.com/", "https://www.arlingtontx.gov/City-Hall/Departments/Water-Utilities"],
+      climate: ["https://www.weather.gov/fwd/"],
+      market: ["https://www.arlingtontx.gov/City-Hall/Departments/Strategic-Development"],
+    },
+  },
 };

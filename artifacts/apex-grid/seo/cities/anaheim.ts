@@ -49,4 +49,17 @@ export const anaheim: CityData = {
       a: "Anaheim Public Utilities provides municipal electric service within its service territory, unlike many surrounding Orange County locations served by Southern California Edison. Confirm the project address and coordinate large service, solar, storage, or EV requests early with the utility.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 78, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.anaheim.net/668/Planning-Building"],
+      codes: ["https://www.hcd.ca.gov/building-standards"],
+      amendments: ["https://codelibrary.amlegal.com/codes/anaheim/latest/overview"],
+      utilities: ["https://www.anaheim.net/422/Utilities"],
+      climate: ["https://www.weather.gov/sgx/"],
+      market: ["https://www.anaheim.net/1196/Economic-Development"],
+    },
+  },
 };

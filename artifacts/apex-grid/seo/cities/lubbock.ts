@@ -51,4 +51,17 @@ export const lubbock: CityData = {
       a: "Long dry periods are interrupted by intense thunderstorms. Flat grades, large paved sites, limited downstream conveyance, and the need for safe overland flow can create ponding and flood risk, so finished-floor elevations, detention, drainage routes, and outfalls need to be established before the layout is fixed.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 76, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://ci.lubbock.tx.us/departments/building-safety"],
+      codes: ["https://ci.lubbock.tx.us/departments/building-safety/codes"],
+      amendments: ["https://library.municode.com/tx/lubbock/codes/code_of_ordinances"],
+      utilities: ["https://lpandl.com/", "https://ci.lubbock.tx.us/departments/water-utilities"],
+      climate: ["https://www.weather.gov/lub/"],
+      market: ["https://lubbockeda.org/"],
+    },
+  },
 };

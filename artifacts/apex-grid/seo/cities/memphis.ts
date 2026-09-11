@@ -49,4 +49,17 @@ export const memphis: CityData = {
       a: "Memphis Light, Gas and Water provides electric, gas, and water service and distributes TVA power. The City manages sewer and drainage infrastructure. Large service loads, interconnection requests, utility easements, and downstream capacity should be coordinated during design.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 86, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.memphistn.gov/government/the-division-of-planning-and-development"],
+      codes: ["https://www.memphistn.gov/government/office-of-construction-code-enforcement"],
+      amendments: ["https://www.memphistn.gov/government/office-of-construction-code-enforcement"],
+      utilities: ["https://www.mlgw.com/commercial"],
+      climate: ["https://www.weather.gov/meg/"],
+      market: ["https://www.memphistn.gov/government/economic-development"],
+    },
+  },
 };

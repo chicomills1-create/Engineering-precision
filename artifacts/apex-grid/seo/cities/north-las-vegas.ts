@@ -49,4 +49,17 @@ export const northLasVegas: CityData = {
       a: "Yes. Intense storms can create rapid runoff in washes and undeveloped basins. Detention, conveyance, finished-floor elevation, and regional flood-control coordination are central to site feasibility even where annual precipitation is low.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 89, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.cityofnorthlasvegas.com/business/development-services"],
+      codes: ["https://www.cityofnorthlasvegas.com/business/development-services/building-safety"],
+      amendments: ["https://www.cityofnorthlasvegas.com/business/development-services/building-safety"],
+      utilities: ["https://www.nvenergy.com/account-services/business"],
+      climate: ["https://www.weather.gov/vef/"],
+      market: ["https://www.cityofnorthlasvegas.com/business"],
+    },
+  },
 };

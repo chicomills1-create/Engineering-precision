@@ -49,4 +49,17 @@ export const stockton: CityData = {
       a: "Delta flood exposure, low-relief drainage, high groundwater, alluvial soils, subsidence, and possible liquefaction make site-specific analysis important. FEMA mapping and a geotechnical report guide finished floors, foundations, drainage, pavement, and utility elevations.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 60, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.stocktonca.gov/government/departments/community_development"],
+      codes: ["https://www.hcd.ca.gov/building-standards"],
+      amendments: ["https://www.stocktonca.gov/government/departments/community_development/building"],
+      utilities: ["https://www.stocktonca.gov/government/departments/municipal_utilities", "https://www.pge.com/en/business.html"],
+      climate: ["https://www.weather.gov/sto/"],
+      market: ["https://www.stocktonca.gov/government/departments/economic_development"],
+    },
+  },
 };

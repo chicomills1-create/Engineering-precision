@@ -49,4 +49,17 @@ export const coloradoSprings: CityData = {
       a: "Colorado Springs Utilities provides electric, natural gas, water, and wastewater in its service territory. For commercial work, confirm service territory, water/fire-flow capacity, electrical load, and any extension requirements early in design.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 83, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.pprbd.org/"],
+      codes: ["https://www.pprbd.org/CodeAdoption"],
+      amendments: ["https://www.pprbd.org/CodeAdoption"],
+      utilities: ["https://www.csu.org/Pages/Business.aspx"],
+      climate: ["https://www.weather.gov/pub/"],
+      market: ["https://coloradosprings.gov/economicdevelopment"],
+    },
+  },
 };

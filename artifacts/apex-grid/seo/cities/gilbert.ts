@@ -40,4 +40,17 @@ export const gilbert: CityData = {
     { q: "Who provides electric service in Gilbert?", a: "SRP is the principal electric provider in Gilbert, but the serving territory should be confirmed for the parcel. Engage SRP early for capacity, transformer location, metering, and solar interconnection." },
     { q: "How does monsoon weather affect Gilbert site design?", a: "Brief, intense monsoon storms can create concentrated runoff despite the dry climate. Early grading and drainage design should evaluate washes, streets, off-site conveyance, and FEMA flood hazards where mapped, alongside wind uplift for roofs and equipment." },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 84, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.gilbertaz.gov/departments/development-services"],
+      codes: ["https://www.gilbertaz.gov/departments/development-services/building-safety"],
+      amendments: ["https://www.gilbertaz.gov/departments/development-services/building-safety/codes"],
+      utilities: ["https://www.srpnet.com/business"],
+      climate: ["https://www.weather.gov/psr/"],
+      market: ["https://www.gilbertaz.gov/departments/economic-development"],
+    },
+  },
 };

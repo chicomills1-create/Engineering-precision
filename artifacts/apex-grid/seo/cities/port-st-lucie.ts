@@ -49,4 +49,17 @@ export const portStLucie: CityData = {
       a: "Assess the parcel's FEMA mapping, City floodplain requirements, basin and canal or river outfall, tailwater, high groundwater, and stormwater-storage needs. River and canal conditions around the St. Lucie River/North Fork differ from interior rainfall flooding, so grading and finished-floor elevations cannot be set from a citywide assumption.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 74, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.cityofpsl.com/government/departments/building-department"],
+      codes: ["https://www.cityofpsl.com/government/departments/building-department/codes"],
+      amendments: ["https://www.cityofpsl.com/government/departments/building-department/codes"],
+      utilities: ["https://www.cityofpsl.com/government/departments/utilities"],
+      climate: ["https://www.weather.gov/mlb/"],
+      market: ["https://www.cityofpsl.com/government/departments/economic-development"],
+    },
+  },
 };

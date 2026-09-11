@@ -49,4 +49,17 @@ export const stPetersburg: CityData = {
       a: "The city has both Tampa Bay and Boca Ciega Bay waterfront exposure plus inland rainfall flooding. Tidal tailwater and storm surge affect coastal outfalls and building elevations differently from an inland drainage basin, so FEMA mapping, City floodplain review, grades, and outfall conditions must be evaluated parcel by parcel.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 82, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.stpete.org/government/departments/development_services"],
+      codes: ["https://www.stpete.org/government/departments/development_services/building_services"],
+      amendments: ["https://www.stpete.org/government/departments/development_services/building_services"],
+      utilities: ["https://www.stpete.org/government/departments/public_works/water_resources"],
+      climate: ["https://www.weather.gov/tbw/"],
+      market: ["https://www.stpete.org/government/departments/economic_development"],
+    },
+  },
 };

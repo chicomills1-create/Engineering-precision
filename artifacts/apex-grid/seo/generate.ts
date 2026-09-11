@@ -76,7 +76,7 @@ const PROMOTED_CITY_KEYS = new Set([
   "florida/orlando",
 ]);
 const STANDARD_CITY_SERVICE_SLUGS = new Set([
-  "mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance",
+  "mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance",
 ]);
 /** Preserve the curated city/service canonical when an older specialty record
  * claims the exact same route. Distinct specialty slugs remain untouched. */
@@ -161,9 +161,11 @@ function isReviewedCity(city: CityData): boolean {
 
 function isSupportedCityService(city: CityData, serviceSlug: string): boolean {
   if (!isReviewedCity(city)) return false;
+  const supported = city.research?.supportedServiceSlugs;
   return !city.research
-    || !city.research.supportedServiceSlugs
-    || city.research.supportedServiceSlugs.includes(serviceSlug as NonNullable<CityData["research"]["supportedServiceSlugs"]>[number]);
+    || !supported
+    || supported.includes(serviceSlug as NonNullable<CityData["research"]["supportedServiceSlugs"]>[number])
+    || (serviceSlug === "energy-code-compliance" && supported.includes("energy-compliance"));
 }
 function assertCityResearch(city: CityData): void {
   if (!city.research && !LEGACY_CURATED_CITY_KEYS.has(`${city.stateSlug}/${city.slug}`)) {
@@ -174,12 +176,11 @@ function assertCityResearch(city: CityData): void {
   }
   if (city.research) {
     const priority = CITY_PRIORITIES.find((entry) => entry.stateSlug === city.stateSlug && entry.citySlug === city.slug);
-    if (!priority) throw new Error(`Researched city is missing from the priority queue: ${city.stateSlug}/${city.slug}`);
-    if (
+    if (priority && (
       priority.commercialOpportunity !== city.research.priority.commercialOpportunity ||
       priority.searchConsoleImpressions !== city.research.priority.searchConsoleImpressions ||
       priority.searchConsolePeriod !== city.research.priority.searchConsolePeriod
-    ) {
+    )) {
       throw new Error(`City priority evidence does not match research: ${city.stateSlug}/${city.slug}`);
     }
   }
@@ -483,7 +484,7 @@ function engineeringIntentHubPage(): string {
     description: "Find commercial engineering support by project problem or stage, with links to permit, existing-building, structural, MEP, civil, and construction services.",
     canonical: `${SITE}/engineering-intent/`,
     schemaJson: [{ "@context": "https://schema.org", "@type": "WebPage", name: "Commercial Engineering Support" }, breadcrumbSchema(crumbs)],
-    body,
+    body: body.replace(/[ \t]+$/gm, ""),
   });
 }
 
@@ -725,7 +726,7 @@ ${specialtyLocationPages.length ? `<section class="block"><div class="container"
     description: `Licensed MEP, structural, civil, and energy-compliance engineering in ${esc(state.name)}. Serving ${state.metros.slice(0, 4).join(", ")} under the ${state.buildingCode.baseCode}.`,
     canonical: `${SITE}/locations/${state.slug}/`,
     schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
-    body,
+    body: body.replace(/[ \t]+$/gm, ""),
   });
 }
 

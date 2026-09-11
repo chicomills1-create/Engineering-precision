@@ -40,4 +40,17 @@ export const plano: CityData = {
     { q: "Who handles electrical service for a Plano project?", a: "Oncor Electric Delivery handles regulated delivery facilities, meters, new service, and interconnection. Plano is in ERCOT's competitive market, so the customer separately chooses a retail electric provider for energy supply." },
     { q: "Why are soils important for Plano construction?", a: "Plano's Blackland Prairie clay can expand and shrink with seasonal moisture changes. Foundation, pavement, and utility-trench design should follow a project geotechnical report and a coordinated site moisture-management strategy." },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 91, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.plano.gov/119/Building-Inspections"],
+      codes: ["https://www.plano.gov/120/Building-Codes"],
+      amendments: ["https://www.plano.gov/120/Building-Codes"],
+      utilities: ["https://www.oncor.com/", "https://www.plano.gov/858/Utilities"],
+      climate: ["https://www.weather.gov/fwd/"],
+      market: ["https://www.plano.gov/1170/Economic-Development"],
+    },
+  },
 };

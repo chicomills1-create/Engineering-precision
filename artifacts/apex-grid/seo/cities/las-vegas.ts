@@ -49,4 +49,17 @@ export const lasVegas: CityData = {
       a: "The Colorado River/Lake Mead shortage drives strict conservation and turf-restriction rules from the Las Vegas Valley Water District and SNWA that shape landscape and irrigation design. Despite the arid climate, intense flash floods require detention and conveyance coordinated with the Clark County Regional Flood Control District.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 95, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.clarkcountynv.gov/government/departments/building___fire_prevention/index.php", "https://www.lasvegasnevada.gov/Government/Departments/Building-Safety"],
+      codes: ["https://www.clarkcountynv.gov/government/departments/building___fire_prevention/codes.php"],
+      amendments: ["https://www.clarkcountynv.gov/government/departments/building___fire_prevention/codes.php"],
+      utilities: ["https://www.nvenergy.com/account-services/business"],
+      climate: ["https://www.weather.gov/vef/"],
+      market: ["https://www.lvgea.org/"],
+    },
+  },
 };

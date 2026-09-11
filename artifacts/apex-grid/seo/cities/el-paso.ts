@@ -49,4 +49,17 @@ export const elPaso: CityData = {
       a: "El Paso’s dry climate is punctuated by high-intensity monsoon storms. Arroyos, the Rio Grande floodplain, and steep mountain runoff can create fast flows, so grading, detention, safe overland flow paths, and FEMA floodplain constraints require early site-specific analysis.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 83, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.elpasotexas.gov/planning-and-inspections/"],
+      codes: ["https://www.elpasotexas.gov/planning-and-inspections/building-codes/"],
+      amendments: ["https://library.municode.com/tx/el_paso/codes/code_of_ordinances"],
+      utilities: ["https://www.epelectric.com/", "https://www.epwater.org/"],
+      climate: ["https://www.weather.gov/epz/"],
+      market: ["https://www.elpasotexas.gov/economic-development/"],
+    },
+  },
 };

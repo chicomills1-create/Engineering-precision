@@ -49,4 +49,17 @@ export const laredo: CityData = {
       a: "Low annual rainfall does not eliminate flood risk: intense thunderstorms can produce rapid runoff to arroyos, City systems, or the Rio Grande basin. Caliche and variable soils also affect foundations, pavements, utility trenches, and infiltration, so design needs site-specific drainage, floodplain, and geotechnical information.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 79, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.cityoflaredo.com/development-services/"],
+      codes: ["https://www.cityoflaredo.com/development-services/building-development-services/"],
+      amendments: ["https://library.municode.com/tx/laredo/codes/code_of_ordinances"],
+      utilities: ["https://www.aeptexas.com/", "https://www.cityoflaredo.com/utilities/"],
+      climate: ["https://www.weather.gov/ewx/"],
+      market: ["https://www.cityoflaredo.com/economic-development/"],
+    },
+  },
 };

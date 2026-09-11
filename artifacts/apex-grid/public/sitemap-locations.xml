@@ -40,6 +40,7 @@
   <url><loc>https://apexgrideng.com/locations/arizona/phoenix/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/phoenix/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/phoenix/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arizona/phoenix/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/scottsdale/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/scottsdale/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/scottsdale/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -99,6 +100,7 @@
   <url><loc>https://apexgrideng.com/locations/california/los-angeles/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/los-angeles/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/los-angeles/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/los-angeles/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/oakland/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/oakland/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/oakland/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -158,6 +160,7 @@
   <url><loc>https://apexgrideng.com/locations/colorado/denver/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/denver/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/colorado/denver/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/colorado/denver/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/connecticut/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/locations/connecticut/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/connecticut/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -192,6 +195,7 @@
   <url><loc>https://apexgrideng.com/locations/florida/orlando/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/orlando/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/orlando/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/orlando/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/port-st-lucie/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/port-st-lucie/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/port-st-lucie/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -202,6 +206,11 @@
   <url><loc>https://apexgrideng.com/locations/florida/st-petersburg/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/st-petersburg/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/st-petersburg/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/tampa/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/tampa/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/tampa/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/tampa/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/florida/tampa/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/georgia/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/locations/georgia/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/georgia/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -211,6 +220,17 @@
   <url><loc>https://apexgrideng.com/locations/georgia/atlanta/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/georgia/atlanta/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/georgia/atlanta/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/georgia/atlanta/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/georgia/augusta/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/georgia/augusta/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/georgia/augusta/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/georgia/augusta/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/georgia/augusta/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/georgia/macon/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/georgia/macon/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/georgia/macon/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/georgia/macon/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/georgia/macon/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/georgia/savannah/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/georgia/savannah/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/georgia/savannah/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -466,6 +486,7 @@
   <url><loc>https://apexgrideng.com/locations/north-carolina/charlotte/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/charlotte/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/charlotte/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/charlotte/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/durham/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/durham/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/durham/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -476,6 +497,11 @@
   <url><loc>https://apexgrideng.com/locations/north-carolina/greensboro/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/greensboro/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/greensboro/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/raleigh/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/raleigh/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/raleigh/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/raleigh/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/raleigh/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-dakota/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-dakota/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-dakota/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -571,6 +597,11 @@
   <url><loc>https://apexgrideng.com/locations/tennessee/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/tennessee/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/tennessee/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/tennessee/chattanooga/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/tennessee/chattanooga/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/tennessee/chattanooga/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/tennessee/chattanooga/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/tennessee/chattanooga/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/tennessee/knoxville/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/tennessee/knoxville/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/tennessee/knoxville/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -600,6 +631,7 @@
   <url><loc>https://apexgrideng.com/locations/texas/austin/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/austin/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/austin/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/austin/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/corpus-christi/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/corpus-christi/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/corpus-christi/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -609,6 +641,7 @@
   <url><loc>https://apexgrideng.com/locations/texas/dallas/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/dallas/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/dallas/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/dallas/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/el-paso/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/el-paso/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/el-paso/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -623,6 +656,7 @@
   <url><loc>https://apexgrideng.com/locations/texas/houston/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/houston/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/houston/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/houston/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/laredo/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/laredo/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/laredo/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -663,6 +697,11 @@
   <url><loc>https://apexgrideng.com/locations/virginia/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/virginia/richmond/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/virginia/richmond/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/virginia/richmond/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/virginia/richmond/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/virginia/richmond/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/virginia-beach/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/virginia-beach/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/virginia-beach/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -744,8 +783,6 @@
   <url><loc>https://apexgrideng.com/locations/texas/san-antonio/camp-bullis-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/houston/geotechnical-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/leander/geotechnical-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/florida/tampa/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/florida/tampa/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/miami/multifamily-structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/northern-virginia/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/northern-virginia/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -753,11 +790,6 @@
   <url><loc>https://apexgrideng.com/locations/virginia/quantico/engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/manassas/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/manassas/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/virginia/richmond/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/virginia/richmond/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/north-carolina/raleigh/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/north-carolina/raleigh/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/north-carolina/raleigh/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/arizona/tucson/geotechnical-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-diego/geotechnical-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-francisco/geotechnical-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -771,8 +803,6 @@
   <url><loc>https://apexgrideng.com/locations/texas/arlington/geotechnical-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/fort-lauderdale/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/florida/fort-lauderdale/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/florida/tampa/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://apexgrideng.com/locations/virginia/richmond/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/norfolk/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/norfolk/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/virginia/norfolk/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>

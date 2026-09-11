@@ -19,7 +19,7 @@ export const savannah: CityData = {
     { q: "Is water and sewer approval required for Savannah commercial renovations?", a: "The city's permit guidance states that commercial renovations need the required water and sewer approval form before the building permit can be issued." },
   ],
   research: {
-    lastVerified: "2026-09-10", reviewStatus: "approved", reviewedBy: "Apex Grid SEO research",
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
     priority: { commercialOpportunity: 79, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.savannahga.gov/375/Development-Services-Department"],

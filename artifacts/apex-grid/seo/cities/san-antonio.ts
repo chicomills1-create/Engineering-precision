@@ -49,4 +49,17 @@ export const sanAntonio: CityData = {
       a: "CPS Energy, the municipally owned utility (the largest of its kind in the U.S.), serves San Antonio and much of Bexar County, so rates, interconnection, and commercial demand charges all run through CPS Energy. Development Services coordinates the final utility release with CPS Energy after inspections, so we align the electrical design and inspection sequence accordingly.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 93, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.sa.gov/Directory/Departments/DSD"],
+      codes: ["https://www.sa.gov/Directory/Departments/DSD/Construction-Codes"],
+      amendments: ["https://www.sa.gov/Directory/Departments/DSD/Construction-Codes"],
+      utilities: ["https://www.cpsenergy.com/", "https://www.saws.org/"],
+      climate: ["https://www.weather.gov/ewx/"],
+      market: ["https://www.sanantonio.gov/EDD"],
+    },
+  },
 };

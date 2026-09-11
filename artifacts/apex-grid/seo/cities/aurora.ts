@@ -49,4 +49,17 @@ export const aurora: CityData = {
       a: "Expansive Front Range claystone can move with moisture changes and damage unsupported slabs, foundations, and pavements. The site geotechnical report establishes the appropriate foundation, void-form, drainage, and moisture-management approach before structural design is finalized.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 84, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.auroragov.org/city_hall/development_services"],
+      codes: ["https://www.auroragov.org/city_hall/development_services/building_division"],
+      amendments: ["https://www.auroragov.org/city_hall/development_services/building_division/codes"],
+      utilities: ["https://www.xcelenergy.com/Working_with_Us/Builders"],
+      climate: ["https://www.weather.gov/bou/"],
+      market: ["https://www.auroragov.org/business_services/economic_development"],
+    },
+  },
 };

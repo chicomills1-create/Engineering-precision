@@ -31,4 +31,17 @@ export const durham: CityData = {
     { q: "What codes govern Durham commercial projects?", a: "Durham enforces the state-amended 2024 North Carolina State Building Code and 2024 North Carolina Energy Conservation Code. The Durham Unified Development Ordinance, watershed overlays, stormwater rules, and utility standards add local requirements." },
     { q: "Why are watershed and utilities important in Durham early design?", a: "Falls Lake watershed protections, riparian buffers, rolling terrain, clay soils, and stream crossings can constrain impervious area, grading, drainage, and outfalls. City water and sewer capacity or extension requirements should be evaluated before a research, lab, or multifamily layout is fixed." },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 86, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.durhamnc.gov/484/Inspections"],
+      codes: ["https://www.ncosfm.gov/codes"],
+      amendments: ["https://udo.durhamnc.gov/udo"],
+      utilities: ["https://www.duke-energy.com/business"],
+      climate: ["https://www.weather.gov/rah/"],
+      market: ["https://durhamchamber.org/economic-development/"],
+    },
+  },
 };

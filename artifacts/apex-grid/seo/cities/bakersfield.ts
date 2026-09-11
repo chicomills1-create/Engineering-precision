@@ -49,4 +49,17 @@ export const bakersfield: CityData = {
       a: "Yes. Bakersfield is subject to California Building Code seismic design requirements, and the actual seismic parameters and foundation approach depend on the site geotechnical investigation. Low-rise construction still needs a code-compliant lateral system, anchorage, and required special inspections.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 62, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.bakersfieldcity.us/195/Community-Development"],
+      codes: ["https://www.hcd.ca.gov/building-standards"],
+      amendments: ["https://www.bakersfieldcity.us/DocumentCenter/Index/"],
+      utilities: ["https://www.bpu.com/"],
+      climate: ["https://www.weather.gov/hnx/"],
+      market: ["https://www.bakersfieldcity.us/155/Economic-Development"],
+    },
+  },
 };

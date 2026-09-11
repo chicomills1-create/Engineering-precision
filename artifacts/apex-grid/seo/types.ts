@@ -91,7 +91,7 @@ export interface CityData {
     reviewedBy: string;
     /** City/service canonical owners approved for indexation. Other generated
      * city/service combinations remain live but noindex,follow. */
-    supportedServiceSlugs?: Array<"mep-engineering" | "structural-engineering" | "civil-engineering" | "energy-compliance">;
+    supportedServiceSlugs?: Array<"mep-engineering" | "structural-engineering" | "civil-engineering" | "energy-code-compliance" | "energy-compliance">;
     priority: {
       commercialOpportunity: number; // 0-100, documented market-opportunity score
       searchConsoleImpressions: number; // latest available page impressions; 0 is valid

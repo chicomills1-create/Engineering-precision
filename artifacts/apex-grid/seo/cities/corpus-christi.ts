@@ -49,4 +49,17 @@ export const corpusChristi: CityData = {
       a: "Projects should evaluate hurricane wind, wind-driven rain, storm surge, FEMA flood exposure, heavy rainfall, salt-air corrosion, and extreme heat. Site-specific flood and geotechnical information informs finished floors, drainage, structural load paths, material protection, and critical-equipment placement.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 82, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.corpuschristitx.gov/government/departments/development-services"],
+      codes: ["https://www.corpuschristitx.gov/government/departments/development-services/building-permits"],
+      amendments: ["https://library.municode.com/tx/corpus_christi/codes/code_of_ordinances"],
+      utilities: ["https://www.aeptexas.com/", "https://www.corpuschristitx.gov/government/departments/water"],
+      climate: ["https://www.weather.gov/crp/"],
+      market: ["https://portofcc.com/"],
+    },
+  },
 };

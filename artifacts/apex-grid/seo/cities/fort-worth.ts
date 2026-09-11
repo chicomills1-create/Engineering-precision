@@ -49,4 +49,17 @@ export const fortWorth: CityData = {
       a: "Expansive clay can move substantially as moisture changes, affecting slabs, piers, pavements, and buried utilities. The report establishes soil movement potential and design parameters, while civil grading and drainage must support the structural moisture-management recommendations.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 94, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.fortworthtexas.gov/departments/development-services"],
+      codes: ["https://www.fortworthtexas.gov/departments/development-services/permits/codes"],
+      amendments: ["https://www.fortworthtexas.gov/departments/development-services/permits/codes"],
+      utilities: ["https://www.oncor.com/", "https://www.fortworthtexas.gov/departments/water"],
+      climate: ["https://www.weather.gov/fwd/"],
+      market: ["https://www.fortworthtexas.gov/departments/economic-development"],
+    },
+  },
 };

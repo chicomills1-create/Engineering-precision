@@ -31,4 +31,17 @@ export const oakland: CityData = {
     { q: "What makes structural design in Oakland different?", a: "Oakland sits beside the Hayward Fault in a high-seismic region. Bay-margin fill can be liquefiable and settlement-prone, while Oakland Hills sites can have slope-stability issues; the lateral system, foundations, and geotechnical recommendations must therefore be coordinated early under the 2022 Oakland Building Construction Code." },
     { q: "Which utilities serve Oakland projects?", a: "PG&E provides electric and gas service and handles interconnection, EBMUD provides water, and the City of Oakland operates the sanitary sewer collection system. Capacity, service upgrades, and congested street utility work should be checked early, especially for all-electric projects." },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 88, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.oaklandca.gov/departments/planning-building"],
+      codes: ["https://www.hcd.ca.gov/building-standards"],
+      amendments: ["https://www.oaklandca.gov/topics/building-codes"],
+      utilities: ["https://www.eastbaymuds.com/", "https://www.pge.com/en/business.html"],
+      climate: ["https://www.weather.gov/mtr/"],
+      market: ["https://www.oaklandca.gov/departments/economic-workforce-development"],
+    },
+  },
 };

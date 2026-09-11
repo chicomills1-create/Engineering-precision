@@ -49,4 +49,17 @@ export const riverside: CityData = {
       a: "Riverside projects need high-seismic CBC design and parcel-specific geotechnical evaluation. Depending on location, alluvial soils, liquefaction, flood exposure, wildfire smoke or wildland-urban-interface conditions, and extreme inland heat can affect foundations, drainage, exterior equipment, and resilience planning.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 73, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://riversideca.gov/cedd"],
+      codes: ["https://www.hcd.ca.gov/building-standards"],
+      amendments: ["https://riversideca.gov/cedd/building-safety"],
+      utilities: ["https://riversideca.gov/utilities", "https://www.sce.com/business"],
+      climate: ["https://www.weather.gov/sgx/"],
+      market: ["https://riversideca.gov/economicdevelopment"],
+    },
+  },
 };

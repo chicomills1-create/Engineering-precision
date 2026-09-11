@@ -49,4 +49,17 @@ export const santaAna: CityData = {
       a: "Southern California Edison provides electric service and manages service upgrades and interconnection. The City of Santa Ana Public Works Agency provides water and sewer services; both electric capacity and water/sewer connection conditions should be confirmed early on dense or high-demand projects.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 76, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.santa-ana.org/departments/planning-and-building-agency/"],
+      codes: ["https://www.hcd.ca.gov/building-standards"],
+      amendments: ["https://www.santa-ana.org/municipal-code/"],
+      utilities: ["https://www.sce.com/business", "https://www.cityofsantaana.org/water"],
+      climate: ["https://www.weather.gov/sgx/"],
+      market: ["https://www.santa-ana.org/economic-development"],
+    },
+  },
 };

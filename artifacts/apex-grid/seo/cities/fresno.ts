@@ -49,4 +49,17 @@ export const fresno: CityData = {
       a: "Fresno has long hot, dry summers with high cooling peaks, so equipment high-ambient performance, solar heat gain, electrical demand, and controls are core design issues. Wildfire smoke and local air-quality conditions also support filtration and outdoor-air operating modes that a mild-climate design may not need.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 68, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.fresno.gov/departments/development-and-resource-management/"],
+      codes: ["https://www.hcd.ca.gov/building-standards"],
+      amendments: ["https://www.fresno.gov/cityclerk/municipal-code/"],
+      utilities: ["https://www.fresno.gov/publicutilities/", "https://www.pge.com/en/business.html"],
+      climate: ["https://www.weather.gov/hnx/"],
+      market: ["https://www.fresno.gov/economic-development/"],
+    },
+  },
 };

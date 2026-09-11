@@ -49,4 +49,17 @@ export const sparks: CityData = {
       a: "Truckee Meadows Water Authority is the region’s principal water provider, and the Truckee Meadows Water Reclamation Facility serves the Reno-Sparks-Washoe County regional wastewater system. City permit and utility coordination should confirm available service, fire flow, sewer connection, and any extension requirements for the specific parcel.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 81, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.cityofsparks.us/government/departments/community-services/building"],
+      codes: ["https://www.cityofsparks.us/government/departments/community-services/building"],
+      amendments: ["https://www.cityofsparks.us/government/departments/community-services/building"],
+      utilities: ["https://www.nvenergy.com/account-services/business"],
+      climate: ["https://www.weather.gov/rev/"],
+      market: ["https://www.renoindustrial.com/"],
+    },
+  },
 };

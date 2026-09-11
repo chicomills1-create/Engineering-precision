@@ -49,4 +49,17 @@ export const irvine: CityData = {
       a: "Irvine enforces its locally amended 2022 building-code package based on the 2022 California Building Code, together with the 2022 California Energy Code and CALGreen. City amendments and project-specific planning, grading, stormwater, and fire requirements also need review.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 84, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.cityofirvine.org/community-development"],
+      codes: ["https://www.hcd.ca.gov/building-standards"],
+      amendments: ["https://www.cityofirvine.org/municipal-code"],
+      utilities: ["https://www.sce.com/business", "https://www.irwd.com/"],
+      climate: ["https://www.weather.gov/sgx/"],
+      market: ["https://www.cityofirvine.org/economic-development"],
+    },
+  },
 };

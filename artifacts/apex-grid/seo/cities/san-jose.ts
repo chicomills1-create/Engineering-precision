@@ -49,4 +49,17 @@ export const sanJose: CityData = {
       a: "Bay Area seismic design is central, with active-fault, liquefaction, lateral-spreading, groundwater, and fill conditions varying significantly by location. A site-specific geotechnical report should inform the CBC seismic analysis, foundation design, and any excavation or shoring strategy.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 93, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.sanjoseca.gov/your-government/departments-offices/planning-building-code-enforcement"],
+      codes: ["https://www.hcd.ca.gov/building-standards"],
+      amendments: ["https://www.sanjoseca.gov/your-government/departments-offices/planning-building-code-enforcement/building-code"],
+      utilities: ["https://www.sanjoseca.gov/your-government/departments-offices/energy", "https://www.pge.com/en/business.html"],
+      climate: ["https://www.weather.gov/mtr/"],
+      market: ["https://www.sanjoseca.gov/business-development"],
+    },
+  },
 };

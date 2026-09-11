@@ -49,4 +49,17 @@ export const sacramento: CityData = {
       a: "The Sacramento and American River system creates floodplain and groundwater issues on some parcels, while alluvial soils, settlement, and liquefaction screening can affect foundation and drainage design. City drainage and floodplain review should be coordinated with the geotechnical investigation.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 83, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.cityofsacramento.gov/community-development"],
+      codes: ["https://www.hcd.ca.gov/building-standards"],
+      amendments: ["https://www.cityofsacramento.gov/community-development/building"],
+      utilities: ["https://www.smud.org/en/Business-Solutions", "https://www.cityofsacramento.gov/utilities"],
+      climate: ["https://www.weather.gov/sto/"],
+      market: ["https://www.cityofsacramento.gov/Mayors-Office/Economic-Development"],
+    },
+  },
 };

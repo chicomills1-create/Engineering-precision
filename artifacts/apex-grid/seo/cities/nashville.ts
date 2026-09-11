@@ -52,4 +52,17 @@ export const nashville: CityData = {
       a: "Both are central. Middle Tennessee's karst limestone produces sinkholes and solution cavities that can require deep or grouted foundations and careful stormwater siting to avoid concentrating runoff over voids, so the geotechnical report governs foundation choices. Along the Cumberland River corridor, Metro's floodplain ordinances can control grading, fill, and finished-floor and equipment elevations, which we integrate early with the structural and civil design.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 93, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.nashville.gov/departments/codes"],
+      codes: ["https://www.nashville.gov/departments/codes/codes-enforcement"],
+      amendments: ["https://www.nashville.gov/departments/codes/codes-enforcement"],
+      utilities: ["https://www.nespower.com/business"],
+      climate: ["https://www.weather.gov/ohx/"],
+      market: ["https://www.nashville.gov/departments/planning/economic-development"],
+    },
+  },
 };

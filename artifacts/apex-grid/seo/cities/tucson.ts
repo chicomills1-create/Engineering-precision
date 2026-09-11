@@ -49,4 +49,17 @@ export const tucson: CityData = {
       a: "Tucson enforces water-harvesting requirements that direct site stormwater into landscape areas, alongside detention/retention sized for intense monsoon rainfall. Where mapped washes cross a site, review coordinates with the Pima County Regional Flood Control District, so harvesting basins and drainage should be laid out in the first site-plan pass.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 82, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.tucsonaz.gov/Departments/Planning-Development-Services"],
+      codes: ["https://www.tucsonaz.gov/Departments/Planning-Development-Services/Building-Development"],
+      amendments: ["https://www.tucsonaz.gov/Departments/Planning-Development-Services/Building-Development"],
+      utilities: ["https://www.tep.com/business"],
+      climate: ["https://www.weather.gov/twc/"],
+      market: ["https://www.tucsonaz.gov/Departments/Economic-Development"],
+    },
+  },
 };

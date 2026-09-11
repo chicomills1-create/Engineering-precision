@@ -52,4 +52,17 @@ export const miami: CityData = {
       a: "Heavily. Structural design targets 170+ mph HVHZ wind with impact protection and NOA-approved assemblies, and the structural and electrical datum is set to FEMA base flood elevation plus freeboard because surge is inseparable from wind. On the civil side, a high water table over limestone drives exfiltration and drainage-well systems permitted through SFWMD, and rising groundwater from sea-level rise increasingly shapes grading and drainage.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 96, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.miami.gov/Permits-Construction"],
+      codes: ["https://www.miamidade.gov/global/economy/building.page"],
+      amendments: ["https://www.miamidade.gov/global/economy/building.page"],
+      utilities: ["https://www.fpl.com/business.html"],
+      climate: ["https://www.weather.gov/mfl/"],
+      market: ["https://www.miamidade.gov/global/economy/home.page"],
+    },
+  },
 };

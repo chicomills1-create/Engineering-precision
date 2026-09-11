@@ -49,4 +49,17 @@ export const henderson: CityData = {
       a: "NV Energy electrical capacity and service configuration should be discussed early for large cooling, medical, industrial, or logistics loads. City water/wastewater availability and Southern Nevada’s conservation requirements also affect utility layout, irrigation, and site planning.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 87, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.cityofhenderson.com/government/departments/community-development-and-services/development-services"],
+      codes: ["https://www.cityofhenderson.com/government/departments/community-development-and-services/development-services/building-codes"],
+      amendments: ["https://www.cityofhenderson.com/government/departments/community-development-and-services/development-services/building-codes"],
+      utilities: ["https://www.nvenergy.com/account-services/business"],
+      climate: ["https://www.weather.gov/vef/"],
+      market: ["https://www.cityofhenderson.com/business"],
+    },
+  },
 };

@@ -49,4 +49,17 @@ export const jacksonville: CityData = {
       a: "They create different flood mechanisms: tidal and riverine flooding along the St. Johns, storm surge and coastal hazards nearer the Atlantic, and intense rainfall throughout the city. FEMA mapping, local floodplain requirements, outfall tailwater, and finished-floor elevations must be evaluated for the parcel rather than relying on a citywide assumption.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 86, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.jacksonville.gov/Departments/Planning-and-Development/Building-and-Inspection"],
+      codes: ["https://www.jacksonville.gov/Departments/Planning-and-Development/Building-and-Inspection/Building-Codes"],
+      amendments: ["https://www.jacksonville.gov/Departments/Planning-and-Development/Building-and-Inspection/Building-Codes"],
+      utilities: ["https://www.jea.com/Business_Accounts/"],
+      climate: ["https://www.weather.gov/jax/"],
+      market: ["https://www.jaxusa.org/"],
+    },
+  },
 };

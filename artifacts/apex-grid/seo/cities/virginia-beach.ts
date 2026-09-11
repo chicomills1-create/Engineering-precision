@@ -31,4 +31,17 @@ export const virginiaBeach: CityData = {
     { q: "Do Virginia Beach projects need coastal flood design?", a: "Many do. Sites near the ocean, Back Bay, Lynnhaven, and tidal tributaries may be in FEMA flood zones or Coastal A Zones. Design flood elevation, flood-damage-resistant materials, high groundwater, scour, access, and exterior-equipment elevation should be resolved with the city's floodplain review at the outset." },
     { q: "Who provides utilities in Virginia Beach?", a: "Dominion Energy Virginia provides electric service and handles interconnection. The City of Virginia Beach Department of Public Utilities provides water and sanitary sewer, while Public Works reviews drainage and stormwater, so electrical capacity and coastal utility elevations need early coordination." },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 85, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.vbgov.com/government/departments/planning/permits-inspections"],
+      codes: ["https://www.dhcd.virginia.gov/virginia-uniform-statewide-building-code"],
+      amendments: ["https://www.vbgov.com/government/departments/public-works/storm-water"],
+      utilities: ["https://www.dominionenergy.com/virginia/start-stop-service"],
+      climate: ["https://www.weather.gov/akq/"],
+      market: ["https://www.virginiachamber.com/economic-development/"],
+    },
+  },
 };

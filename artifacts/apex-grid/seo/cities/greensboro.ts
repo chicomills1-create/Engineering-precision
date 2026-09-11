@@ -31,4 +31,17 @@ export const greensboro: CityData = {
     { q: "Which codes apply to commercial projects in Greensboro?", a: "Greensboro enforces the state-amended 2024 North Carolina State Building Code and the 2024 North Carolina Energy Conservation Code. The City Land Development Ordinance, stormwater rules, utility standards, and erosion-control requirements add local site requirements." },
     { q: "What utility and site issues should be addressed early?", a: "Duke Energy electric service and City Water Resources water and wastewater capacity should be screened during planning. Piedmont clays, variable residual soils, erosion risk, and stormwater treatment needs can materially affect grading and developable area." },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 81, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.greensboro-nc.gov/departments/engineering-inspections"],
+      codes: ["https://www.ncosfm.gov/codes"],
+      amendments: ["https://www.greensboro-nc.gov/departments/planning/ordinances"],
+      utilities: ["https://www.duke-energy.com/business"],
+      climate: ["https://www.weather.gov/rah/"],
+      market: ["https://www.greensboro.org/economic-development"],
+    },
+  },
 };
