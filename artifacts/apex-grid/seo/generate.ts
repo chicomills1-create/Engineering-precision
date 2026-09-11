@@ -54,6 +54,14 @@ import { RESOURCE_ARTICLES, RESOURCE_DISCIPLINES, disciplineOf, resourceUrl, typ
 import { GLOSSARY_TERMS, sortedGlossaryTerms, glossaryByLetter, relatedGlossaryTerms, type GlossaryTerm } from "./glossary";
 import { APEX_GRID_BUSINESS_SCHEMA } from "../src/lib/business-schema";
 import { ENGINEERING_INTENT_PAGES, NEAR_ME_ENGINEERING_PAGE, type EngineeringIntentPage } from "./engineering-intent-pages";
+import {
+  assertNoConflictingOutputOwners,
+  assertRouteOwnership,
+  REACT_OWNED_SHARED_ROUTES,
+  REACT_PRERENDER_ROUTES,
+  REACT_PRERENDER_SERVICE_ROUTES,
+  SEO_GENERATOR_FIXED_INDEX_ROUTES,
+} from "./route-ownership";
 const RETAINED_INTENT_SLUGS = new Set([
   "structural-engineering-letters", "construction-rfi-submittal-support",
   "value-engineering-design-optimization",
@@ -3142,6 +3150,35 @@ function miscPage(page: MiscPage): string {
 }
 
 async function main() {
+  assertRouteOwnership();
+  const generatedTopLevelRoutes = [
+    ...SEO_GENERATOR_FIXED_INDEX_ROUTES,
+    ...LOCATION_VERTICALS.map((page) => `/${page.slug}`),
+    ...DISCIPLINES.map((page) => `/${page.slug}`),
+    ...DISCIPLINE_HUBS.map((page) => `/${page.slug}`),
+    ...STATIC_STANDALONE_PAGES.map((page) => `/${page.dir}`),
+    ...MISC_PAGES
+      .map((page) => `/${page.slug}`)
+      .filter(
+        (route) =>
+          !REACT_OWNED_SHARED_ROUTES.includes(
+            route as (typeof REACT_OWNED_SHARED_ROUTES)[number],
+          ),
+      ),
+  ];
+  assertNoConflictingOutputOwners({
+    "react-prerender": [
+      ...REACT_PRERENDER_ROUTES,
+      ...REACT_PRERENDER_SERVICE_ROUTES,
+      ...ALL_INDUSTRIES.map((industry) => `/industries/${industry.slug}/`),
+    ],
+    "seo-generator": [
+      ...generatedTopLevelRoutes,
+      ...INDUSTRY_DISCIPLINE_PAGES.map(
+        (page) => `/industries/${page.segments.join("/")}`,
+      ),
+    ],
+  });
   const states = await loadStates();
   const cities = await loadCities();
   if (cities[0] && isReviewedCity({ ...cities[0], slug: "unsourced-promotion-gate-probe", research: undefined })) {
@@ -3307,10 +3344,15 @@ async function main() {
   }
   // Resources / Knowledge Center
   const resourcesDir = path.join(PUBLIC, "resources");
+  const resourcesHubPath = path.join(resourcesDir, "index.html");
+  const reactResourcesHub = fs.existsSync(resourcesHubPath)
+    ? fs.readFileSync(resourcesHubPath)
+    : undefined;
   fs.rmSync(resourcesDir, { recursive: true, force: true });
   fs.mkdirSync(resourcesDir, { recursive: true });
-  fs.writeFileSync(path.join(resourcesDir, "index.html"), resourcesHubPage());
-  pages++;
+  if (reactResourcesHub) {
+    fs.writeFileSync(resourcesHubPath, reactResourcesHub);
+  }
   for (const disc of RESOURCE_DISCIPLINES) {
     assertSlug(disc.slug);
     const ddir = path.join(resourcesDir, disc.slug);
@@ -3633,9 +3675,12 @@ async function main() {
     pages++;
   }
 
-  // Misc standalone pages (capabilities, government-contracting, trust pages)
+  // Misc standalone pages. React-owned hubs are never emitted by this pipeline.
   for (const mp of MISC_PAGES) {
     assertSlug(mp.slug);
+    if (REACT_OWNED_SHARED_ROUTES.includes(`/${mp.slug}` as (typeof REACT_OWNED_SHARED_ROUTES)[number])) {
+      continue;
+    }
     const mpDir = path.join(PUBLIC, mp.slug);
     fs.rmSync(mpDir, { recursive: true, force: true });
     fs.mkdirSync(mpDir, { recursive: true });

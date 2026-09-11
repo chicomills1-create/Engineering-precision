@@ -3,8 +3,8 @@ name: SEO generator path ownership
 description: How to avoid retaining stale static-generator output for routes also owned by React prerendering.
 ---
 
-Some hub routes are written by both the large SEO generator and the React prerender build. After running the SEO generator, finish with the production build so the checked-in HTML for shared routes reflects the canonical React render.
+Every generated route must have one output owner. React owns shared application hubs, while the large SEO generator may own static child pages beneath those hubs without replacing the hub HTML.
 
-**Why:** The SEO generator can replace React-owned hub pages with a different static template even when a task only targets deep generated pages. The subsequent production build restores those shared routes while preserving generated deep-page output.
+**Why:** Letting both pipelines write the same route caused SEO-only regeneration to replace canonical React output and create unrelated file churn.
 
-**How to apply:** After SEO regeneration, inspect changed paths outside the intended generated family, run the configured production build, and confirm only intended generated pages remain changed.
+**How to apply:** Declare new prerendered or generated route families in the shared ownership registry. Preserve a React-owned hub when clearing generator-owned children, and run the standard typecheck plus regeneration when route ownership changes.

@@ -2,6 +2,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { ALL_INDUSTRIES } from "../src/data/industries/index";
 import { writeNormalizedInternalLinkReport } from "../seo/generate";
+import {
+  assertRouteOwnership,
+  REACT_PRERENDER_ROUTES,
+  REACT_PRERENDER_SERVICE_ROUTES,
+} from "../seo/route-ownership";
 
 const root = path.resolve(import.meta.dirname, "..");
 const sourceTemplate = fs.readFileSync(path.join(root, "index.html"), "utf8");
@@ -28,10 +33,21 @@ const routeMeta: Record<string, [string, string]> = {
   "/terms": ["Terms of Use | Apex Grid Engineering", "Terms governing use of the Apex Grid Engineering website and project inquiry process."],
 };
 
-const serviceIds = ["mep", "structural", "civil", "assessments", "architecture"];
+assertRouteOwnership();
+const missingRouteMetadata = REACT_PRERENDER_ROUTES.filter((route) => !routeMeta[route]);
+if (missingRouteMetadata.length > 0) {
+  throw new Error(`React prerender routes are missing metadata: ${missingRouteMetadata.join(", ")}`);
+}
+const undeclaredRoutes = Object.keys(routeMeta).filter(
+  (route) => !REACT_PRERENDER_ROUTES.includes(route as (typeof REACT_PRERENDER_ROUTES)[number]),
+);
+if (undeclaredRoutes.length > 0) {
+  throw new Error(`React prerender routes are missing ownership declarations: ${undeclaredRoutes.join(", ")}`);
+}
+
 const routes = [
-  ...Object.keys(routeMeta),
-  ...serviceIds.map((id) => `/services/${id}`),
+  ...REACT_PRERENDER_ROUTES,
+  ...REACT_PRERENDER_SERVICE_ROUTES,
   ...ALL_INDUSTRIES.map((industry) => `/industries/${industry.slug}/`),
 ];
 
