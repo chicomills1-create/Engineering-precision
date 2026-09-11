@@ -1,11 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { INDUSTRY_DISCIPLINE_PAGES, getIndustryDisciplineUrl } from "./industry-discipline-pages";
+import {
+  CANONICAL_INDUSTRY_DISCIPLINE_PAGES,
+  getIndustryDisciplineUrl,
+} from "./industry-discipline-pages";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const failures: string[] = [];
-const batch = INDUSTRY_DISCIPLINE_PAGES.slice(0, 25);
+const batch = CANONICAL_INDUSTRY_DISCIPLINE_PAGES.slice(0, 25);
 
 const decode = (value: string) =>
   value.replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#x27;|&#39;/g, "'").replace(/\s+/g, " ").trim();

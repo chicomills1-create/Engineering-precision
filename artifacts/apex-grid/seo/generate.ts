@@ -15,7 +15,13 @@ import { CLIENT_PAGES, WHO_WE_WORK_WITH_HUB, type ClientPage } from "./client-pa
 import { PROJECT_TYPE_PAGES, PROJECT_TYPES_HUB, type ProjectTypePage } from "./project-type-pages";
 import { EXISTING_BUILDING_PAGES, EXISTING_BUILDING_HUB, type ExistingBuildingPage } from "./existing-building-pages";
 import { PERMIT_PAGES, PERMIT_HUB, type PermitPage } from "./permit-pages";
-import { INDUSTRY_DISCIPLINE_PAGES, getIndustryDisciplineUrl, type IndustryDisciplinePage } from "./industry-discipline-pages";
+import {
+  CANONICAL_INDUSTRY_DISCIPLINE_PAGES,
+  INDUSTRY_DISCIPLINE_PAGES,
+  INDUSTRY_DISCIPLINE_REDIRECTS,
+  getIndustryDisciplineUrl,
+  type IndustryDisciplinePage,
+} from "./industry-discipline-pages";
 import { LOCATION_SERVICE_PAGES, type LocationServicePage } from "./location-service-pages";
 import { SOLUTION_PAGES, type SolutionPage } from "./solutions-pages";
 import { GUIDE_PAGES, GUIDES_HUB, type GuidePage } from "./guides-pages";
@@ -1186,7 +1192,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const ind of ALL_INDUSTRIES) {
     industriesUrls.push(u(`${SITE}/industries/${ind.slug}`, today, "monthly", "0.8"));
   }
-  for (const idp of INDUSTRY_DISCIPLINE_PAGES.filter((page) => !INDUSTRY_REDIRECTS.has(page.segments.join("/")))) {
+  for (const idp of CANONICAL_INDUSTRY_DISCIPLINE_PAGES) {
     industriesUrls.push(u(`${SITE}${getIndustryDisciplineUrl(idp)}`, today, "monthly", "0.8"));
   }
 
@@ -1967,7 +1973,7 @@ function industryDisciplinePage(page: IndustryDisciplinePage): string {
   crumbs.push({ name: page.disciplineLabel });
 
   // Related pages: same industry, different discipline
-  const siblings = INDUSTRY_DISCIPLINE_PAGES.filter(
+  const siblings = CANONICAL_INDUSTRY_DISCIPLINE_PAGES.filter(
     (p) => p.industrySlug === page.industrySlug && p !== page,
   ).slice(0, 4);
 
@@ -3403,7 +3409,7 @@ async function main() {
     const segments = idp.segments;
     const dir = path.join(indDisciplineDir, ...segments);
     fs.mkdirSync(dir, { recursive: true });
-    const redirect = INDUSTRY_REDIRECTS.get(segments.join("/"));
+    const redirect = INDUSTRY_DISCIPLINE_REDIRECTS.get(segments.join("/"));
     fs.writeFileSync(path.join(dir, "index.html"), redirect ? redirectPage(redirect.newPath, redirect.title) : industryDisciplinePage(idp));
     pages++;
   }
@@ -3832,7 +3838,7 @@ async function main() {
 
   const dirCount = Object.values(directory).reduce((a, v) => a + v.length, 0);
   const disciplineSubpageCount = DISCIPLINE_HUBS.reduce((a, h) => a + h.subpages.length, 0);
-  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${verticalPages} architecture/GC vertical pages, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PARTNER_PAGES.length} construction partner pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${INDUSTRY_DISCIPLINE_PAGES.length} industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, 1 sitemap page + sitemap.xml`);
+  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${verticalPages} architecture/GC vertical pages, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PARTNER_PAGES.length} construction partner pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${CANONICAL_INDUSTRY_DISCIPLINE_PAGES.length} canonical industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, 1 sitemap page + sitemap.xml`);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
@@ -4220,12 +4226,6 @@ const GUIDE_REDIRECTS = new Map<string, { newPath: string; title: string }>([
   ["mep-engineering-cost", { newPath: "/resources/mep/mep-engineering-cost/", title: "How Much Does MEP Engineering Cost?" }],
   ["mep-engineering-timeline", { newPath: "/resources/mep/mep-engineering-timeline/", title: "How Long Does MEP Engineering Take?" }],
   ["what-does-pe-stamp-mean", { newPath: "/resources/permit/what-is-a-pe-stamp/", title: "What Does a PE Stamp Mean?" }],
-]);
-const INDUSTRY_REDIRECTS = new Map<string, { newPath: string; title: string }>([
-  ["renewable-energy/battery-storage-structural", {
-    newPath: "/solutions/bess-structural-engineering/",
-    title: "Structural Engineering for Battery Energy Storage Systems",
-  }],
 ]);
 const PROJECT_TYPE_REDIRECTS = new Map<string, { newPath: string; title: string }>([
   ["parking-expansions", {

@@ -2,15 +2,14 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
-  INDUSTRY_DISCIPLINE_PAGES,
+  CANONICAL_INDUSTRY_DISCIPLINE_PAGES,
   getIndustryDisciplineUrl,
 } from "./industry-discipline-pages";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const redirectPaths = new Set(["renewable-energy/battery-storage-structural"]);
-const canonicalRoutes = INDUSTRY_DISCIPLINE_PAGES
-  .filter((page) => !redirectPaths.has(page.segments.join("/")))
-  .map(getIndustryDisciplineUrl);
+const canonicalRoutes = CANONICAL_INDUSTRY_DISCIPLINE_PAGES.map(
+  getIndustryDisciplineUrl,
+);
 const batchStart = Number.parseInt(process.env.INDUSTRY_BATCH_START ?? "0", 10);
 const batchSize = Number.parseInt(
   process.env.INDUSTRY_BATCH_SIZE ?? String(canonicalRoutes.length),

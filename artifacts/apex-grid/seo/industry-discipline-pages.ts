@@ -2021,6 +2021,22 @@ export const INDUSTRY_DISCIPLINE_PAGES: IndustryDisciplinePage[] = [
   },
 ];
 
+export const INDUSTRY_DISCIPLINE_REDIRECTS = new Map<
+  string,
+  { newPath: string; title: string }
+>([
+  ["renewable-energy/battery-storage-structural", {
+    newPath: "/solutions/bess-structural-engineering/",
+    title: "Structural Engineering for Battery Energy Storage Systems",
+  }],
+]);
+
+/** Published, indexable industry-discipline pages. Redirect aliases are excluded. */
+export const CANONICAL_INDUSTRY_DISCIPLINE_PAGES =
+  INDUSTRY_DISCIPLINE_PAGES.filter(
+    (page) => !INDUSTRY_DISCIPLINE_REDIRECTS.has(page.segments.join("/")),
+  );
+
 /** Returns the URL path for an industry-discipline page */
 export function getIndustryDisciplineUrl(page: IndustryDisciplinePage): string {
   return `/industries/${page.segments.join("/")}/`;
