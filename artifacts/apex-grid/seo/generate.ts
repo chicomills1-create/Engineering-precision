@@ -47,6 +47,15 @@ import { ALL_INDUSTRIES } from "../src/data/industries";
 import { RESOURCE_ARTICLES, RESOURCE_DISCIPLINES, disciplineOf, resourceUrl, type ResourceArticle, type ResourceDiscipline } from "./resources";
 import { GLOSSARY_TERMS, sortedGlossaryTerms, glossaryByLetter, relatedGlossaryTerms, type GlossaryTerm } from "./glossary";
 import { APEX_GRID_BUSINESS_SCHEMA } from "../src/lib/business-schema";
+import { ENGINEERING_INTENT_PAGES, NEAR_ME_ENGINEERING_PAGE, type EngineeringIntentPage } from "./engineering-intent-pages";
+const RETAINED_INTENT_SLUGS = new Set([
+  "structural-engineering-letters", "construction-rfi-submittal-support",
+  "value-engineering-design-optimization",
+  "deferred-submittal-engineering", "engineer-of-record-transition", "engineering-near-me",
+]);
+const ALL_ENGINEERING_INTENT_PAGES = [...ENGINEERING_INTENT_PAGES, NEAR_ME_ENGINEERING_PAGE]
+  .filter((page) => RETAINED_INTENT_SLUGS.has(page.slug));
+const CONSOLIDATED_INTENT_PAGES = ENGINEERING_INTENT_PAGES.filter((page) => !RETAINED_INTENT_SLUGS.has(page.slug));
 
 type CityDirectory = Record<string, DirectoryCity[]>; // stateSlug -> cities
 
@@ -271,6 +280,7 @@ This file is a concise map of canonical public information. It does not imply lo
 
 ## High-value sections
 - Services: ${SITE}/services
+- Commercial engineering search hub: ${SITE}/engineering-intent/engineering-near-me/
 - Industries: ${SITE}/industries
 - Resources: ${SITE}/resources/
 - Glossary: ${SITE}/glossary/
@@ -333,6 +343,70 @@ function breadcrumbSchema(items: { name: string; href?: string }[]) {
       ...(i.href ? { item: `${SITE}${i.href}` } : {}),
     })),
   };
+}
+
+function engineeringIntentPage(page: EngineeringIntentPage): string {
+  const crumbs = [{ name: "Home", href: "/" }, { name: "Engineering Services", href: "/services" }, { name: page.h1 }];
+  const serviceSchema = {
+    "@context": "https://schema.org", "@type": "Service", name: page.h1,
+    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    serviceType: "Professional Engineering Services",
+  };
+  const faqSchema = {
+    "@context": "https://schema.org", "@type": "FAQPage",
+    mainEntity: page.faqs.map((faq) => ({ "@type": "Question", name: faq.q, acceptedAnswer: { "@type": "Answer", text: faq.a } })),
+  };
+  const related = [
+    ["/services/structural", "Structural Engineering"],
+    ["/mep-engineering/", "MEP Engineering"],
+    ["/civil-engineering/", "Civil Engineering"],
+    ["/permit-engineering/", "Permit Engineering"],
+    ["/existing-building-engineering/", "Existing Building Engineering"],
+    ["/locations/", "Verified Service Areas"],
+    ["/contact", "Request a Project Review"],
+  ];
+  const nearMeLinks = page.slug === "engineering-near-me"
+    ? `<section class="block"><div class="container"><h2>Verified service-area <em>information</em></h2><p>These are information pages for specific reviewed markets, not local-office or local-pack claims. Confirm current jurisdiction and project requirements during intake.</p><div class="linkrow"><a href="/locations/">All service areas</a><a href="/locations/arizona/phoenix/">Phoenix, Arizona</a><a href="/locations/arizona/scottsdale/">Scottsdale, Arizona</a><a href="/locations/california/los-angeles/">Los Angeles, California</a><a href="/locations/texas/austin/">Austin, Texas</a><a href="/locations/texas/dallas/">Dallas, Texas</a><a href="/locations/florida/tampa/">Tampa, Florida</a></div></div></section>`
+    : "";
+  const body = `<main>${breadcrumb(crumbs)}
+<section class="hero"><div class="container"><p class="kicker">${esc(page.kicker)}</p><h1>${esc(page.h1)}</h1><p class="lede">${esc(page.answer)}</p></div></section>
+${page.sections.map((s) => `<section class="block"><div class="container"><h2>${esc(s.heading)}</h2><div class="prose"><p>${esc(s.body)}</p></div></div></section>`).join("")}
+<section class="block"><div class="container"><h2>Who this is for</h2><p>${esc(page.audience)} can begin with the project address, requested outcome, available records, and relevant schedule or jurisdiction information.</p></div></section>
+<section class="block"><div class="container faq"><h2>${esc(page.h1)} <em>FAQs</em></h2>${page.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="a">${esc(f.a)}</div></details>`).join("")}</div></section>
+<section class="block"><div class="container"><h2>Related <em>Engineering Resources</em></h2><div class="linkrow">${related.map(([href, label]) => `<a href="${href}">${label}</a>`).join("")}</div></div></section>
+${nearMeLinks}
+<section class="ctaband"><div class="container"><h2>Discuss Your Engineering Scope</h2><p>Send the project address, records, desired deliverable, jurisdiction, site-access details, and timing constraint. Scheduling is subject to scope and engineer availability.</p><a class="cta" href="/contact">Request a Proposal</a></div></section></main>`;
+  return htmlShell({
+    title: page.title, description: page.description, canonical: `${SITE}/engineering-intent/${page.slug}/`,
+    schemaJson: [serviceSchema, faqSchema, breadcrumbSchema(crumbs)], body,
+  });
+}
+
+function engineeringIntentHubPage(): string {
+  const crumbs = [{ name: "Home", href: "/" }, { name: "Engineering Support" }];
+  const cards = ALL_ENGINEERING_INTENT_PAGES.map((p) =>
+    `<a class="card" href="/engineering-intent/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.answer.slice(0, 170))}…</p></a>`).join("");
+  const existing = [
+    ["/permit-engineering/plan-check-responses/", "Permit plan-check responses"],
+    ["/permit-engineering/city-comments/", "Permit city comments"],
+    ["/permit-engineering/pe-stamped-drawings/", "PE-stamped drawings"],
+    ["/existing-building-engineering/condition-assessments/", "Existing-building condition assessments"],
+    ["/existing-building-engineering/no-existing-plans/", "Engineering with no original plans"],
+    ["/existing-building-engineering/field-verification/", "Existing-condition field verification"],
+    ["/solutions/", "Engineering solutions by problem"],
+  ];
+  const body = `${breadcrumb(crumbs)}
+<section class="hero"><div class="container"><p class="kicker">Commercial Engineering Support</p><h1>Engineering Support by Problem and Project Stage</h1><p class="lede">A practical starting point for owners, contractors, architects, and developers who need a defined engineering deliverable. Choose the project problem or stage below; scope, records, jurisdiction, site access, licensure, and engineer availability determine the appropriate path.</p></div></section>
+<section class="block"><div class="container"><h2>Retained <em>Commercial Support</em></h2><div class="grid2">${cards}</div></div></section>
+<section class="block"><div class="container"><h2>Existing canonical <em>services</em></h2><p>Several high-intent searches are already covered by stronger canonical pages. These links consolidate fast-track scheduling, permit corrections and stamped plans, acquisition diligence, post-event assessment, and existing-condition documentation without creating duplicate URLs.</p><div class="linkrow">${existing.map(([href, label]) => `<a href="${href}">${label}</a>`).join("")}</div></div></section>
+<section class="block"><div class="container"><h2>Start with a <em>complete intake</em></h2><p>Send the project address and jurisdiction, requested outcome, drawings or photographs, relevant permit or construction correspondence, site-access conditions, desired deliverable, and schedule constraint. A proposal or initial response is not a guarantee of engineering completion, site-visit availability, or permit approval.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>`;
+  return htmlShell({
+    title: "Commercial Engineering Support by Project Stage",
+    description: "Find commercial engineering support by project problem or stage, with links to permit, existing-building, structural, MEP, civil, and construction services.",
+    canonical: `${SITE}/engineering-intent/`,
+    schemaJson: [{ "@context": "https://schema.org", "@type": "WebPage", name: "Commercial Engineering Support" }, breadcrumbSchema(crumbs)],
+    body,
+  });
 }
 
 const orgSchema = APEX_GRID_BUSINESS_SCHEMA;
@@ -574,6 +648,7 @@ ${breadcrumb(crumbs)}
     <a class="card" href="/locations/"><div class="label">Engineering</div><h3>Engineering Service Areas</h3><p>MEP, structural, civil, and energy-code services across 49 licensed states.</p></a>
     <a class="card" href="/architecture/locations/"><div class="label">Architecture</div><h3>Architectural Design Locations</h3><p>City and state pages where supplied architect credentials support regulated design services.</p></a>
     <a class="card" href="/general-contracting/locations/"><div class="label">PCM Construction Delivery</div><h3>General Contracting Locations</h3><p>Commercial construction service areas backed by PCM's supplied contractor licenses.</p></a>
+    <a class="card" href="/engineering-intent/engineering-near-me/"><div class="label">Project Intake</div><h3>Commercial Engineering Firm Near Me</h3><p>Understand search location, remote plan production, site visits, and jurisdiction review before requesting support.</p></a>
   </div>
 </div></section>
 <section class="block"><div class="container">
@@ -932,7 +1007,7 @@ ${d.sections
 
 <section class="ctaband"><div class="container">
   <h2>Put a Licensed ${esc(d.shortName)} Engineer on Your Project</h2>
-  <p>Send us your backgrounds or a project description. With licensed PEs in 49 states and 20+ engineers on staff, we return a fixed-fee proposal — deliverables, timeline, and fee — typically within 12–24 hours.</p>
+  <p>Send us your backgrounds or a project description. We can review the request and, when information is sufficient, provide an initial proposal response; engineering timing remains subject to scope, records, jurisdiction, access, and engineer availability.</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
 
@@ -1002,6 +1077,10 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const pp of PERMIT_PAGES) {
     servicesUrls.push(u(`${SITE}/permit-engineering/${pp.slug}/`, today, "monthly", "0.7"));
   }
+  for (const ep of ALL_ENGINEERING_INTENT_PAGES) {
+    servicesUrls.push(u(`${SITE}/engineering-intent/${ep.slug}/`, today, "monthly", "0.8"));
+  }
+  servicesUrls.push(u(`${SITE}/engineering-intent/`, today, "monthly", "0.8"));
   servicesUrls.push(u(`${SITE}/existing-building-engineering/`, today, "monthly", "0.8"));
   for (const eb of EXISTING_BUILDING_PAGES) {
     servicesUrls.push(u(`${SITE}/existing-building-engineering/${eb.slug}/`, today, "monthly", "0.7"));
@@ -1238,7 +1317,7 @@ ${related.length ? `<section class="block"><div class="container">
 </div></section>` : ""}
 <section class="ctaband"><div class="container">
   <h2>Have a Project in Mind?</h2>
-  <p>Integrated structural, MEP, civil, and geotechnical engineering — licensed in 49 states. Send us your scope and get a clear proposal within 24 hours.</p>
+  <p>Integrated structural, MEP, civil, and geotechnical engineering. Send us your scope for an initial response; engineering timing remains subject to scope, records, jurisdiction, access, and engineer availability.</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
   return htmlShell({
@@ -1346,8 +1425,10 @@ function clientPage(page: ClientPage): string {
     serviceType: "Engineering Consulting",
   };
   const others = CLIENT_PAGES.filter((p) => p.slug !== page.slug).slice(0, 4);
+  const contextualInbound = `<p class="note"><a href="/engineering-intent/construction-rfi-submittal-support/">Construction RFI and submittal engineering support</a> can help when a client-side project question needs a documented discipline review.</p>`;
   const body = `
 ${breadcrumb(crumbs)}
+${contextualInbound}
 <section class="hero"><div class="container">
   <p class="kicker">${esc(page.kicker)}</p>
   <h1>${esc(page.h1)}</h1>
@@ -1366,7 +1447,7 @@ ${page.sections.map((s) => `
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Start Working With Apex Grid</h2>
-  <p>Licensed in 49 states, 20+ engineers on staff, 12–24 hour quote turnaround. Tell us about your project and we'll respond fast.</p>
+  <p>Tell us about your project and we will review the request for an initial response; any engineering schedule depends on scope, records, jurisdiction, access, and engineer availability.</p>
   <a class="cta" href="${esc(page.ctaHref)}">${esc(page.cta)}</a>
 </div></section>`;
   return htmlShell({
@@ -1402,7 +1483,7 @@ ${breadcrumb(crumbs)}
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Not Sure Where to Start?</h2>
-  <p>Tell us about your project and we'll take it from there — clear proposal, fast turnaround, licensed engineers in 49 states.</p>
+  <p>Tell us about your project and we will clarify the scope, records, jurisdiction, access, and available engineering path.</p>
   <a class="cta" href="/contact">Contact Us</a>
 </div></section>`;
   return htmlShell({
@@ -1546,8 +1627,10 @@ function projectTypePage(page: ProjectTypePage): string {
   const others = PROJECT_TYPE_PAGES.filter((p) => p.slug !== page.slug)
     .filter((p) => page.relatedSlugs.includes(p.slug) || true)
     .slice(0, 4);
+  const contextualInbound = `<p class="note"><a href="/engineering-intent/value-engineering-design-optimization/">Value engineering and design optimization</a> can support project-stage alternatives and constructability decisions.</p>`;
   const body = `
 ${breadcrumb(crumbs)}
+${contextualInbound}
 <section class="hero"><div class="container">
   <p class="kicker">${esc(page.kicker)}</p>
   <h1>${esc(page.h1)}</h1>
@@ -1626,8 +1709,10 @@ function existingBuildingPage(page: ExistingBuildingPage): string {
     serviceType: page.h1,
   };
   const others = EXISTING_BUILDING_PAGES.filter((p) => p.slug !== page.slug).slice(0, 4);
+  const contextualInbound = `<p class="note"><a href="/engineering-intent/structural-engineering-letters/">Structural engineering letters</a> and <a href="/engineering-intent/engineer-of-record-transition/">engineer-of-record transition support</a> are available when an existing-building question needs documented responsibility.</p>`;
   const body = `
 ${breadcrumb(crumbs)}
+${contextualInbound}
 <section class="hero"><div class="container">
   <p class="kicker">${esc(page.kicker)}</p>
   <h1>${esc(page.h1)}</h1>
@@ -1702,9 +1787,11 @@ function permitPage(page: PermitPage): string {
     provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
     serviceType: "Permit Engineering",
   };
+  const contextualInbound = `<p class="note"><a href="/engineering-intent/deferred-submittal-engineering/">Deferred submittal engineering</a> can support an identified later-phase specialty package when the permit documents and authority process allow it.</p>`;
   const others = PERMIT_PAGES.filter((p) => p.slug !== page.slug).slice(0, 4);
   const body = `
 ${breadcrumb(crumbs)}
+${contextualInbound}
 <section class="hero"><div class="container">
   <p class="kicker">${esc(page.kicker)}</p>
   <h1>${esc(page.h1)}</h1>
@@ -1819,7 +1906,7 @@ ${breadcrumb(crumbs)}
   <div class="grid2">
     <div class="card"><div class="label">Licensed in 49 States</div><p>Our engineers hold PE licensure across the continental US, so your project can start without waiting on out-of-state licensing delays.</p></div>
     <div class="card"><div class="label">20+ Engineers On Staff</div><p>Structural, MEP, civil, and geotech disciplines under one roof means coordinated deliverables and no finger-pointing between firms.</p></div>
-    <div class="card"><div class="label">Fast Turnaround</div><p>We quote within 24 hours and structure deliverable milestones around your permit or construction schedule — not ours.</p></div>
+    <div class="card"><div class="label">Responsive Intake</div><p>We review project requests for an initial proposal response and structure deliverable milestones around your permit or construction schedule when scope and records permit.</p></div>
     <div class="card"><div class="label">15+ Years of Project Experience</div><p>Across hundreds of commercial, industrial, healthcare, and government projects — we've seen the permitting challenges your project will face.</p></div>
   </div>
 </div></section>
@@ -1840,7 +1927,7 @@ ${glossaryTerms.length ? `<section class="block"><div class="container">
 
 <section class="ctaband"><div class="container">
   <h2>Start Your Project</h2>
-  <p>Licensed PEs, 20+ engineers, and fast proposals. Send us your scope and get a clear quote: deliverables, schedule, and fee — usually within 24 hours.</p>
+  <p>Licensed professional engineering support and clear proposals. Send us your scope for an initial response outlining potential deliverables, schedule factors, and fee basis.</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
 
@@ -2592,7 +2679,10 @@ function htmlSitemapPage(): string {
               <li><a href="/permit-engineering/">Permit Engineering</a></li>
               <li><a href="/existing-building-engineering/">Existing Buildings</a></li>
               <li><a href="/engineering-reports/">Engineering Reports</a></li>
+              <li><a href="/engineering-intent/engineering-near-me/">Engineering Firm Near Me</a></li>
             </ul>
+            <h2>Project-stage support</h2>
+            <ul>${ALL_ENGINEERING_INTENT_PAGES.map((p) => `<li><a href="/engineering-intent/${p.slug}/">${esc(p.h1)}</a></li>`).join("")}</ul>
             <h2>Industries</h2>
             <ul>
               <li><a href="/industries/">All Industries</a></li>
@@ -3204,6 +3294,76 @@ async function main() {
     pages++;
   }
 
+  // Canonical commercial engineering intent pages (non-location).
+  const intentDir = path.join(PUBLIC, "engineering-intent");
+  fs.rmSync(intentDir, { recursive: true, force: true });
+  fs.mkdirSync(intentDir, { recursive: true });
+  fs.writeFileSync(path.join(intentDir, "index.html"), engineeringIntentHubPage());
+  pages++;
+  const seenTitles = new Set<string>();
+  const seenH1 = new Set<string>();
+  for (const existing of [...PERMIT_PAGES, ...EXISTING_BUILDING_PAGES]) {
+    seenTitles.add(existing.title); seenH1.add(existing.h1);
+  }
+  for (const ep of ALL_ENGINEERING_INTENT_PAGES) {
+    assertSlug(ep.slug);
+    if (ep.title.length < 50 || ep.title.length > 60) throw new Error(`SEO assertion failed: intent title length: ${ep.slug}`);
+    if (ep.description.length < 140 || ep.description.length > 180) throw new Error(`SEO assertion failed: intent description length: ${ep.slug}`);
+    if (seenTitles.has(ep.title) || seenH1.has(ep.h1)) throw new Error(`SEO assertion failed: duplicate intent title or H1: ${ep.slug}`);
+    seenTitles.add(ep.title); seenH1.add(ep.h1);
+    const dir = path.join(intentDir, ep.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = engineeringIntentPage(ep);
+    const mainMatch = html.match(/<main>([\s\S]*?)<\/main>/i);
+    const visibleText = (mainMatch?.[1] ?? "").replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    const jsonLd = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
+    if (!mainMatch || visibleText.split(/\s+/).length < 700 || ep.faqs.length < 4 || !html.includes("<h1>") || !html.includes('"@type":"Service"') || !html.includes('"@type":"FAQPage"') ||
+      !html.includes('"@type":"BreadcrumbList"') || html.includes('name="robots" content="noindex')) {
+      throw new Error(`SEO assertion failed: malformed indexable intent page: ${ep.slug} (${visibleText.split(/\s+/).length} words, main=${Boolean(mainMatch)}, faqs=${ep.faqs.length})`);
+    }
+    if (!jsonLd.some((schema) => schema["@type"] === "Service") || !jsonLd.some((schema) => schema["@type"] === "FAQPage")) {
+      throw new Error(`SEO assertion failed: invalid JSON-LD intent schema: ${ep.slug}`);
+    }
+    if (/(?:we|apex grid|our)\s+(?:guarantee|guaranteed|offer a fixed price|have local offices|provide coverage everywhere|promise emergency availability)/i.test(html)) {
+      throw new Error(`SEO assertion failed: prohibited claim on intent page: ${ep.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  const intentHubHtml = fs.readFileSync(path.join(intentDir, "index.html"), "utf8");
+  for (const ep of ALL_ENGINEERING_INTENT_PAGES) {
+    if (!intentHubHtml.includes(`/engineering-intent/${ep.slug}/`)) {
+      throw new Error(`SEO assertion failed: retained intent page lacks contextual inbound link: ${ep.slug}`);
+    }
+  }
+  const reportDir = path.join(__dirname, "reports");
+  fs.mkdirSync(reportDir, { recursive: true });
+  fs.writeFileSync(path.join(reportDir, "engineering-intent-opportunity-map.json"), `${JSON.stringify({
+    generatedFor: "Apex Grid commercial engineering intent expansion",
+    canonicalRule: "One URL per intent cluster; location is never inferred from a query.",
+    opportunities: [
+      ...ALL_ENGINEERING_INTENT_PAGES.map((ep) => ({
+      slug: ep.slug, primaryIntent: ep.h1, supportingPhrases: ep.phrases, canonicalUrl: `${SITE}/engineering-intent/${ep.slug}/`,
+      audience: ep.audience, overlapDecision: ep.overlap,
+      decision: "retained",
+    })),
+      ...CONSOLIDATED_INTENT_PAGES.map((ep) => ({
+        slug: ep.slug, primaryIntent: ep.h1, supportingPhrases: ep.phrases,
+        canonicalUrl: ep.slug === "fast-turnaround-engineering" ? `${SITE}/solutions/fast-track-engineering/` :
+          ep.slug === "permit-correction-engineering" ? `${SITE}/solutions/permit-correction-engineering/` :
+          ep.slug === "failed-inspection-correction-engineering" ? `${SITE}/solutions/permit-correction-engineering/` :
+          ep.slug === "pe-stamped-plans-calculations" ? `${SITE}/permit-engineering/pe-stamped-drawings/` :
+          ep.slug === "engineering-due-diligence" ? `${SITE}/existing-building-engineering/condition-assessments/` :
+          ep.slug === "urgent-building-assessment" ? `${SITE}/existing-building-engineering/condition-assessments/` :
+          ep.slug === "as-built-existing-condition-documentation" ? `${SITE}/existing-building-engineering/field-verification/` : `${SITE}/services/`,
+        audience: ep.audience, overlapDecision: ep.overlap, decision: "consolidated into existing canonical",
+      })),
+    ],
+  }, null, 2)}\n`);
+  if (/"24-hour turnaround|24–hour turnaround|guaranteed (?:completion|approval)|local offices|coverage everywhere|fixed-fee proposal/i.test(JSON.stringify(SOLUTION_PAGES))) {
+    throw new Error("SEO assertion failed: prohibited turnaround, locality, or fixed-fee claim remains in solution definitions");
+  }
+
   // Solutions pages
   const solutionsDir = path.join(PUBLIC, "solutions");
   fs.rmSync(solutionsDir, { recursive: true, force: true });
@@ -3338,6 +3498,53 @@ async function main() {
   const qualityReport = JSON.parse(fs.readFileSync(qualityPath, "utf8")) as { indexedCount: number; excludedCount: number; anomalies: unknown[] };
   if (qualityReport.indexedCount < 0 || qualityReport.excludedCount < 0 || !Array.isArray(qualityReport.anomalies)) {
     throw new Error("SEO assertion failed: malformed city quality report");
+  }
+  const servicesSitemap = fs.readFileSync(path.join(PUBLIC, "sitemap-services.xml"), "utf8");
+  const sitemapLocs = new Set([...servicesSitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]));
+  for (const ep of ALL_ENGINEERING_INTENT_PAGES) {
+    if (!sitemapLocs.has(`${SITE}/engineering-intent/${ep.slug}/`)) {
+      throw new Error(`SEO assertion failed: intent URL missing from sitemap: ${ep.slug}`);
+    }
+  }
+  if (!sitemapLocs.has(`${SITE}/engineering-intent/`)) throw new Error("SEO assertion failed: intent hub missing from sitemap");
+  const nonIntentFiles: string[] = [];
+  const collectHtml = (dir: string) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory() && entry.name !== "engineering-intent" && entry.name !== "sitemap") collectHtml(full);
+      else if (entry.isFile() && entry.name === "index.html") nonIntentFiles.push(full);
+    }
+  };
+  collectHtml(PUBLIC);
+  const corpusTitles = new Set<string>();
+  const corpusH1s = new Set<string>();
+  for (const file of nonIntentFiles) {
+    const source = fs.readFileSync(file, "utf8");
+    const title = source.match(/<title>([^<]+)<\/title>/i)?.[1]?.trim();
+    const h1 = source.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1]?.replace(/<[^>]+>/g, "").trim();
+    if (title) corpusTitles.add(title);
+    if (h1) corpusH1s.add(h1);
+  }
+  for (const ep of ALL_ENGINEERING_INTENT_PAGES) {
+    if (corpusTitles.has(ep.title) || corpusH1s.has(ep.h1)) throw new Error(`SEO assertion failed: intent collision in generated corpus: ${ep.slug}`);
+    const target = `/engineering-intent/${ep.slug}/`;
+    if (!nonIntentFiles.some((file) => fs.readFileSync(file, "utf8").includes(`href="${target}"`))) {
+      throw new Error(`SEO assertion failed: no contextual inbound link outside intent/sitemap: ${ep.slug}`);
+    }
+  }
+  const expectedConsolidations: Record<string, string> = {
+    "fast-turnaround-engineering": `${SITE}/solutions/fast-track-engineering/`,
+    "permit-correction-engineering": `${SITE}/solutions/permit-correction-engineering/`,
+    "failed-inspection-correction-engineering": `${SITE}/solutions/permit-correction-engineering/`,
+    "pe-stamped-plans-calculations": `${SITE}/permit-engineering/pe-stamped-drawings/`,
+    "engineering-due-diligence": `${SITE}/existing-building-engineering/condition-assessments/`,
+    "urgent-building-assessment": `${SITE}/existing-building-engineering/condition-assessments/`,
+    "as-built-existing-condition-documentation": `${SITE}/existing-building-engineering/field-verification/`,
+  };
+  for (const [slug, canonical] of Object.entries(expectedConsolidations)) {
+    const record = JSON.parse(fs.readFileSync(path.join(__dirname, "reports/engineering-intent-opportunity-map.json"), "utf8"))
+      .opportunities.find((item: { slug: string; canonicalUrl: string }) => item.slug === slug);
+    if (!record || record.canonicalUrl !== canonical) throw new Error(`SEO assertion failed: consolidation canonical mismatch: ${slug}`);
   }
   const locationsXml = fs.readFileSync(path.join(PUBLIC, "sitemap-locations.xml"), "utf8");
   const liteCandidate = Object.entries(directory).flatMap(([state, entries]) => entries.map((city) => ({ state, city })))

@@ -1,0 +1,181 @@
+{
+  "generatedFor": "Apex Grid commercial engineering intent expansion",
+  "canonicalRule": "One URL per intent cluster; location is never inferred from a query.",
+  "opportunities": [
+    {
+      "slug": "structural-engineering-letters",
+      "primaryIntent": "Structural Engineering Letters",
+      "supportingPhrases": [
+        "engineer letter for structural condition",
+        "structural letter report",
+        "licensed engineer opinion letter"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/structural-engineering-letters/",
+      "audience": "Owners, property managers, contractors, and insurers",
+      "overlapDecision": "Specific written deliverable; not a duplicate of broad existing-building assessments.",
+      "decision": "retained"
+    },
+    {
+      "slug": "construction-rfi-submittal-support",
+      "primaryIntent": "Construction RFI and Submittal Engineering",
+      "supportingPhrases": [
+        "engineering RFI response",
+        "submittal review engineer",
+        "construction engineering support"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/construction-rfi-submittal-support/",
+      "audience": "General contractors, construction managers, architects, and owners",
+      "overlapDecision": "Construction-delivery support distinct from design and permit pages.",
+      "decision": "retained"
+    },
+    {
+      "slug": "value-engineering-design-optimization",
+      "primaryIntent": "Value Engineering and Design Optimization",
+      "supportingPhrases": [
+        "engineering value analysis",
+        "design optimization engineer",
+        "constructability engineering review"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/value-engineering-design-optimization/",
+      "audience": "Owners, developers, architects, and contractors",
+      "overlapDecision": "Decision and optimization intent distinct from discipline design pages.",
+      "decision": "retained"
+    },
+    {
+      "slug": "deferred-submittal-engineering",
+      "primaryIntent": "Deferred Submittal Engineering",
+      "supportingPhrases": [
+        "deferred submittal engineer",
+        "deferred permit package",
+        "delegated design engineering"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/deferred-submittal-engineering/",
+      "audience": "Contractors, architects, specialty trades, and owners",
+      "overlapDecision": "Specific later-phase permit package distinct from general permit engineering.",
+      "decision": "retained"
+    },
+    {
+      "slug": "engineer-of-record-transition",
+      "primaryIntent": "Engineer of Record Transition Support",
+      "supportingPhrases": [
+        "engineer of record replacement",
+        "engineering project takeover",
+        "responsible engineer transition"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/engineer-of-record-transition/",
+      "audience": "Owners, developers, contractors, and project managers",
+      "overlapDecision": "Responsibility-transition intent not covered by general services or permit pages.",
+      "decision": "retained"
+    },
+    {
+      "slug": "engineering-near-me",
+      "primaryIntent": "Commercial Engineering Firm Near Me",
+      "supportingPhrases": [
+        "engineering firm near me",
+        "commercial engineer near me",
+        "structural engineer near me",
+        "MEP engineer near me",
+        "civil engineer near me",
+        "professional engineer near me",
+        "PE engineer near me",
+        "permit engineer near me",
+        "engineer for stamped plans near me"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/engineering-intent/engineering-near-me/",
+      "audience": "Commercial property owners, contractors, architects, developers, and facility teams",
+      "overlapDecision": "One canonical near-me hub consolidates proximity synonyms; no duplicate city or discipline near-me pages.",
+      "decision": "retained"
+    },
+    {
+      "slug": "fast-turnaround-engineering",
+      "primaryIntent": "Fast-Turnaround Engineering Support",
+      "supportingPhrases": [
+        "expedited engineering services",
+        "urgent engineering review",
+        "rapid engineering support"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/solutions/fast-track-engineering/",
+      "audience": "Owners, contractors, architects, and property managers",
+      "overlapDecision": "Distinct workflow intent; does not duplicate permit or assessment service pages.",
+      "decision": "consolidated into existing canonical"
+    },
+    {
+      "slug": "permit-correction-engineering",
+      "primaryIntent": "Permit Correction Engineering",
+      "supportingPhrases": [
+        "permit plan check corrections",
+        "engineering response to permit comments",
+        "permit resubmittal engineer"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/solutions/permit-correction-engineering/",
+      "audience": "Owners, architects, contractors, and permit coordinators",
+      "overlapDecision": "Expands permit correction workflow; deeper than general permit engineering.",
+      "decision": "consolidated into existing canonical"
+    },
+    {
+      "slug": "pe-stamped-plans-calculations",
+      "primaryIntent": "PE-Stamped Plans and Calculations",
+      "supportingPhrases": [
+        "signed and sealed engineering plans",
+        "professional engineer calculations",
+        "stamped structural drawings"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/permit-engineering/pe-stamped-drawings/",
+      "audience": "Owners, architects, contractors, and permit applicants",
+      "overlapDecision": "Package-focused intent distinct from discipline and permit hubs.",
+      "decision": "consolidated into existing canonical"
+    },
+    {
+      "slug": "failed-inspection-correction-engineering",
+      "primaryIntent": "Failed Inspection Correction Engineering",
+      "supportingPhrases": [
+        "inspection failure engineer",
+        "engineering for failed building inspection",
+        "inspection correction plans"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/solutions/permit-correction-engineering/",
+      "audience": "Contractors, owners, and permit coordinators",
+      "overlapDecision": "Post-inspection correction intent distinct from pre-submittal permit engineering.",
+      "decision": "consolidated into existing canonical"
+    },
+    {
+      "slug": "engineering-due-diligence",
+      "primaryIntent": "Pre-Acquisition Engineering Due Diligence",
+      "supportingPhrases": [
+        "commercial property engineering due diligence",
+        "building acquisition engineering review",
+        "property condition engineer"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/existing-building-engineering/condition-assessments/",
+      "audience": "Developers, investors, lenders, and property owners",
+      "overlapDecision": "Transaction-stage assessment distinct from general existing-building pages.",
+      "decision": "consolidated into existing canonical"
+    },
+    {
+      "slug": "urgent-building-assessment",
+      "primaryIntent": "Urgent and Post-Event Building Assessment",
+      "supportingPhrases": [
+        "storm damage structural assessment",
+        "urgent building engineer",
+        "post-disaster building assessment"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/existing-building-engineering/condition-assessments/",
+      "audience": "Owners, insurers, facility managers, and public agencies",
+      "overlapDecision": "Post-event urgency and availability language distinguish this from routine assessments.",
+      "decision": "consolidated into existing canonical"
+    },
+    {
+      "slug": "as-built-existing-condition-documentation",
+      "primaryIntent": "As-Built and Existing-Condition Documentation",
+      "supportingPhrases": [
+        "existing condition drawings",
+        "commercial as-built documentation",
+        "measured building drawings"
+      ],
+      "canonicalUrl": "https://apexgrideng.com/existing-building-engineering/field-verification/",
+      "audience": "Owners, architects, contractors, and facility teams",
+      "overlapDecision": "Documentation deliverable complements, but does not duplicate, existing-building evaluation.",
+      "decision": "consolidated into existing canonical"
+    }
+  ]
+}

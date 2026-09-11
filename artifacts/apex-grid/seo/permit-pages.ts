@@ -55,15 +55,15 @@ export const PERMIT_PAGES: PermitPage[] = [
     description: "Written engineering responses to city building department plan check comments — calculations, code references, and revised drawings as required.",
     h1: "Engineering Responses to City Permit Comments",
     kicker: "City Permit Comment Responses",
-    lede: "City plan check comments are a normal part of the permitting process. Our engineering team drafts formal written responses, provides supporting calculations and code references, and issues revised drawings — keeping the permit on track.",
+    lede: "City plan check comments are a normal part of the permitting process. Our engineering team drafts formal written responses, provides supporting calculations and code references, and issues revised drawings for the authority's review; approval remains with that authority.",
     topics: [
       "Formal written response to each plan check comment",
       "Supporting structural calculations",
       "Code section references and interpretations",
       "Revised drawing sheets",
       "Coordination with architect on combined responses",
-      "Tracking comment status through approval",
-      "Multi-jurisdiction experience across 49 states",
+      "Tracking comment status through the jurisdiction's review process",
+      "Jurisdiction-specific requirements confirmed during intake",
     ],
   },
   {
@@ -107,5 +107,5 @@ export const PERMIT_HUB = {
   title: "Permit Engineering & PE Drawings | Apex Grid Engineering",
   description: "PE-stamped engineering drawings, calculations, plan check responses, and permit revisions for structural, MEP, and civil building permits.",
   h1: "Permit-Ready Engineering Drawings and Calculations",
-  lede: "Every commercial building permit requires engineering documentation — drawings, calculations, and PE stamps from licensed professional engineers. We produce complete permit packages and support the permit process from initial submittal through final approval.",
+  lede: "Many commercial building permits require engineering documentation — drawings, calculations, and professional review by appropriately licensed engineers. We produce defined permit packages and support the process from initial submittal through jurisdiction review; approval remains with the authority.",
 };

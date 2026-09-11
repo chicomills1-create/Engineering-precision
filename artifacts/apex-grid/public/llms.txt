@@ -6,6 +6,7 @@ This file is a concise map of canonical public information. It does not imply lo
 
 ## High-value sections
 - Services: https://apexgrideng.com/services
+- Commercial engineering search hub: https://apexgrideng.com/engineering-intent/engineering-near-me/
 - Industries: https://apexgrideng.com/industries
 - Resources: https://apexgrideng.com/resources/
 - Glossary: https://apexgrideng.com/glossary/
