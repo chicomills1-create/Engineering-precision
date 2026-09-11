@@ -359,7 +359,7 @@ ${breadcrumb(crumbs)}
   <div class="linkrow" style="margin-bottom:16px">
     <a href="/locations/${state.slug}/${city.slug}/">Engineering services in ${esc(city.name)}</a>
     <a href="${esc(vertical.coreUrl)}">${esc(vertical.shortName)} capabilities</a>
-    ${siblingVertical ? `<a href="${verticalCityUrl(siblingVertical, state.slug, city.slug)}">${esc(siblingVertical.name)} in ${esc(city.name)}</a>` : ""}
+    ${indexable && siblingVertical ? `<a href="${verticalCityUrl(siblingVertical, state.slug, city.slug)}">${esc(siblingVertical.name)} in ${esc(city.name)}</a>` : ""}
   </div>
   <div class="linkrow">${nearby
     .map((item) => `<a href="${verticalCityUrl(vertical, state.slug, item.slug)}">${esc(vertical.shortName)} in ${esc(item.name)}</a>`)

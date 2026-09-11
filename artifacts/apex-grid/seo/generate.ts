@@ -340,6 +340,28 @@ function legacyLocationRedirectPage(fromPath: string, toPath: string): string {
   });
 }
 
+/**
+ * A city alias is an alias for the complete location subtree, not only the
+ * city landing URL. Expand the reviewed base manifest to service children so
+ * old bookmarks receive a real server 301 instead of a duplicate HTML page.
+ */
+function expandedLegacyLocationRedirects(): Record<string, string> {
+  const redirects: Record<string, string> = { ...LEGACY_LOCATION_REDIRECTS };
+  for (const [from, to] of Object.entries(LEGACY_LOCATION_REDIRECTS)) {
+    if (!from.startsWith("/locations/") || !from.endsWith("/") || from.split("/").length !== 4) continue;
+    for (const service of SERVICES) {
+      redirects[`${from}${service.slug}/`] = `${to}${service.slug}/`;
+    }
+  }
+  const stLouisFrom = "/locations/missouri/st-louis/";
+  const stLouisTo = "/locations/missouri/saint-louis/";
+  redirects[stLouisFrom] = stLouisTo;
+  for (const service of SERVICES) {
+    redirects[`${stLouisFrom}${service.slug}/`] = `${stLouisTo}${service.slug}/`;
+  }
+  return redirects;
+}
+
 /** Non-HTML data fields must not contain markup. */
 function assertNoMarkup(state: StateData) {
   const flat = JSON.stringify(state);
@@ -591,7 +613,7 @@ function assertNoMarkupCity(city: CityData) {
   }
 }
 function statePage(state: StateData, cities: CityData[]): string {
-  const stateCities = cities.filter((c) => c.stateSlug === state.slug);
+  const stateCities = cities.filter((c) => c.stateSlug === state.slug && isReviewedCity(c));
   const specialtyLocationPages = LOCATION_SERVICE_PAGES.filter((p) => p.stateSlug === state.slug);
   const specialtyCityRoots = [...new Set(specialtyLocationPages.map((p) => p.citySlug))]
     .filter((slug) => !stateCities.some((city) => city.slug === slug));
@@ -700,7 +722,7 @@ ${breadcrumb(crumbs)}
 <section class="block"><div class="container">
   <h2>Major <em>Metro Markets</em></h2>
   <div class="grid3">
-  ${cities
+   ${cities.filter(isReviewedCity)
     .map(
       (c) => `<a class="card" href="/locations/${c.stateSlug}/${c.slug}/"><div class="label">${esc(c.county)}</div><h3>${esc(c.name)}</h3><p>${esc(c.codes.building.split(",")[0].split("(")[0].trim())} · ${esc(c.utilities.electric.split("—")[0].split("(")[0].trim())}</p></a>`,
     )
@@ -743,7 +765,7 @@ function cityLitePage(state: StateData, city: DirectoryCity, siblings: Directory
     { name: city.name },
   ];
   const nearby =
-    Number.isFinite(city.lat) && Number.isFinite(city.lng)
+    indexable && Number.isFinite(city.lat) && Number.isFinite(city.lng)
       ? siblings
           .filter((item) => item.slug !== city.slug && Number.isFinite(item.lat) && Number.isFinite(item.lng))
           .map((item) => ({
@@ -753,10 +775,13 @@ function cityLitePage(state: StateData, city: DirectoryCity, siblings: Directory
           .sort((a, b) => a.distance - b.distance)
           .slice(0, 10)
           .map(({ city: item }) => item)
-      : siblings.filter((item) => item.slug !== city.slug).slice(0, 10);
-  const curatedInState = curated.filter((c) => c.stateSlug === state.slug);
+      : [];
+  // Directory-lite pages remain live for compatibility, but must not form a
+  // doorway grid with other noindex pages. Only reviewed city owners are
+  // useful contextual destinations from this page.
+  const curatedInState = curated.filter((c) => c.stateSlug === state.slug && isReviewedCity(c));
   const populationContext = city.pop ? ` (population approximately ${city.pop.toLocaleString("en-US")})` : "";
-  const availableVerticals = verticalsForState(state.slug);
+  const availableVerticals = indexable ? verticalsForState(state.slug) : [];
   const faqs = [
     {
       q: `Does Apex Grid provide engineering services in ${city.name}, ${state.abbrev}?`,
@@ -1160,6 +1185,8 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     u(`${SITE}/for-contractors`, today, "monthly", "0.8"),
     u(`${SITE}/for-developers`, today, "monthly", "0.8"),
     u(`${SITE}/for-property-managers`, today, "monthly", "0.8"),
+    u(`${SITE}/capabilities-statement.html`, today, "monthly", "0.7"),
+    u(`${SITE}/licensing-service-coverage/`, today, "monthly", "0.7"),
     u(`${SITE}/sitemap/`, today, "monthly", "0.3"),
   ];
   for (const page of STATIC_STANDALONE_PAGES.filter((entry) => entry.sitemapCategory === "core")) {
@@ -2424,6 +2451,16 @@ function guidePage(page: GuidePage): string {
 
     ${breadcrumb(crumbs)}
 
+    <section class="section section--white faq">
+      <div class="container container--narrow">
+        <h2>Quick Answer</h2>
+        <details open>
+          <summary>${esc(page.h1)}</summary>
+          <div class="a">${esc(page.shortAnswer)}</div>
+        </details>
+      </div>
+    </section>
+
     ${sectionsHtml}
 
     <section class="section section--dark cta-band">
@@ -2438,13 +2475,11 @@ function guidePage(page: GuidePage): string {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: page.sections.flatMap((s) =>
-      s.points.map((p) => ({
-        "@type": "Question",
-        name: s.heading,
-        acceptedAnswer: { "@type": "Answer", text: p },
-      })),
-    ).slice(0, 10),
+    mainEntity: [{
+      "@type": "Question",
+      name: page.h1,
+      acceptedAnswer: { "@type": "Answer", text: page.shortAnswer },
+    }],
   };
 
   return htmlShell({
@@ -2744,6 +2779,21 @@ function projectCategoryPage(cat: ProjectCategoryPage): string {
 function staticStandalonePage(page: StaticPageDef): string {
   const url = `/${page.dir}/`;
   const crumbs = [{ name: "Home", href: "/" }, { name: page.h1 }];
+  const faqSchema = page.schemaJson?.find((schema) => schema["@type"] === "FAQPage") as
+    | { mainEntity?: Array<{ name?: string; acceptedAnswer?: { text?: string } }> }
+    | undefined;
+  const faqItems = (faqSchema?.mainEntity ?? []).filter(
+    (item): item is { name: string; acceptedAnswer: { text: string } } =>
+      typeof item.name === "string" && typeof item.acceptedAnswer?.text === "string",
+  );
+  const faqHtml = faqItems.length
+    ? `<section class="section section--white faq">
+      <div class="container container--narrow">
+        <h2>Quick Answers</h2>
+        ${faqItems.map((item) => `<details><summary>${esc(item.name)}</summary><div class="a">${esc(item.acceptedAnswer.text)}</div></details>`).join("")}
+      </div>
+    </section>`
+    : "";
   const sectionsHtml = page.sections
     .map(
       (s) => `
@@ -2767,6 +2817,7 @@ function staticStandalonePage(page: StaticPageDef): string {
     </div>
     ${breadcrumb(crumbs)}
     ${sectionsHtml}
+    ${faqHtml}
     <section class="section section--dark cta-band">
       <div class="container">
         <h2>${esc(page.ctaHeading)}</h2>
@@ -3209,7 +3260,7 @@ async function main() {
   fs.mkdirSync(PUBLIC, { recursive: true });
   fs.writeFileSync(
     path.join(PUBLIC, "legacy-location-redirects.json"),
-    `${JSON.stringify(LEGACY_LOCATION_REDIRECTS, null, 2)}\n`,
+    `${JSON.stringify(expandedLegacyLocationRedirects(), null, 2)}\n`,
   );
   fs.rmSync(OUT, { recursive: true, force: true });
   fs.mkdirSync(OUT, { recursive: true });
@@ -3252,7 +3303,7 @@ async function main() {
       pages++;
     }
   }
-  for (const [fromPath, toPath] of Object.entries(LEGACY_LOCATION_REDIRECTS)) {
+  for (const [fromPath, toPath] of Object.entries(expandedLegacyLocationRedirects())) {
     const legacyDir = path.join(PUBLIC, fromPath.replace(/^\/|\/$/g, ""));
     fs.mkdirSync(legacyDir, { recursive: true });
     fs.writeFileSync(path.join(legacyDir, "index.html"), legacyLocationRedirectPage(fromPath, toPath));
@@ -3283,14 +3334,24 @@ async function main() {
     const cityCountByState = Object.fromEntries(
       states
         .filter((state) => verticalAvailableInState(vertical, state.slug))
-        .map((state) => [state.slug, allDirectoryCitiesForState(state, directory, cities).length]),
+        .map((state) => [state.slug, [
+          ...cities.filter((city) => city.stateSlug === state.slug && isReviewedCity(city)).map((city) => city.slug),
+          ...RETAINED_LEGACY_LOCATIONS.filter((retained) => retained.stateSlug === state.slug).map((retained) => retained.city.slug),
+        ].length]),
     );
     fs.writeFileSync(path.join(locationsDir, "index.html"), verticalHubPage(vertical, states, cityCountByState));
     pages++;
     verticalPages++;
 
     for (const state of states.filter((entry) => verticalAvailableInState(vertical, entry.slug))) {
-      const stateCities = allDirectoryCitiesForState(state, directory, cities);
+      // State and vertical hubs link only to reviewed/indexable city owners.
+      // Directory-lite URLs remain directly addressable noindex,follow pages,
+      // but are deliberately excluded from these broad anchor grids.
+      const allStateCities = allDirectoryCitiesForState(state, directory, cities);
+      const stateCities = allStateCities.filter((city) =>
+        cities.some((curated) => curated.stateSlug === state.slug && curated.slug === city.slug && isReviewedCity(curated))
+        || RETAINED_LEGACY_LOCATIONS.some((retained) => retained.stateSlug === state.slug && retained.city.slug === city.slug),
+      );
       const stateDir = path.join(locationsDir, state.slug);
       fs.mkdirSync(stateDir, { recursive: true });
       fs.writeFileSync(path.join(stateDir, "index.html"), verticalStatePage(vertical, state, stateCities));
@@ -3298,9 +3359,11 @@ async function main() {
       verticalPages++;
 
       const curatedBySlug = new Map(
-        cities.filter((city) => city.stateSlug === state.slug).map((city) => [city.slug, city]),
+        cities
+          .filter((city) => city.stateSlug === state.slug && isReviewedCity(city))
+          .map((city) => [city.slug, city]),
       );
-      for (const city of stateCities) {
+      for (const city of allStateCities) {
         const cityDir = path.join(stateDir, city.slug);
         fs.mkdirSync(cityDir, { recursive: true });
         fs.writeFileSync(
@@ -3309,7 +3372,7 @@ async function main() {
             vertical,
             state,
             city,
-            stateCities,
+             stateCities,
             curatedBySlug.get(city.slug),
              Boolean((curatedBySlug.get(city.slug) && isReviewedCity(curatedBySlug.get(city.slug)!)) || RETAINED_LEGACY_LOCATIONS.some((r) => r.stateSlug === state.slug && r.city.slug === city.slug)),
           ),
@@ -3904,7 +3967,7 @@ function cityServicePage(state: StateData, city: CityData, svc: ServiceDef, sibl
     { name: svc.shortName },
   ];
   const otherSvcs = SERVICES.filter((x) => x.slug !== svc.slug);
-  const nearby = siblingCities.filter((c) => c.slug !== city.slug).slice(0, 8);
+  const nearby = siblingCities.filter((c) => c.slug !== city.slug && isReviewedCity(c)).slice(0, 8);
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -4006,8 +4069,8 @@ function cityPage(state: StateData, city: CityData, siblingCities: CityData[]): 
     { name: state.name, href: `/locations/${state.slug}/` },
     { name: city.name },
   ];
-  const nearby = siblingCities.filter((c) => c.slug !== city.slug);
-  const availableVerticals = verticalsForState(state.slug);
+  const nearby = siblingCities.filter((c) => c.slug !== city.slug && isReviewedCity(c));
+  const availableVerticals = isReviewedCity(city) ? verticalsForState(state.slug) : [];
   const specialtyLocationPages = LOCATION_SERVICE_PAGES.filter(
     (p) => p.stateSlug === state.slug && p.citySlug === city.slug,
   );

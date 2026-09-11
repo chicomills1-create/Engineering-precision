@@ -59,6 +59,7 @@ export default function IndustryDetail() {
   const industry = getIndustry(slug ?? "");
   const disciplineRoot = industry ? INDUSTRY_DISCIPLINE_ROOTS[industry.slug] : undefined;
   const specialtyLinks = industry ? INDUSTRY_SPECIALTY_LINKS[industry.slug] ?? [] : [];
+  const industryArticle = industry && /^[aeiou]/i.test(industry.name) ? "an" : "a";
   const quickAnswers = industry
     ? [
         {
@@ -66,7 +67,7 @@ export default function IndustryDetail() {
           answer: `${industry.disciplines.map((discipline) => discipline.name).join(", ")} are coordinated around the facility program, applicable codes, and permit deliverables.`,
         },
         {
-          question: `What information helps define a ${industry.name} engineering scope?`,
+          question: `What information helps define ${industryArticle} ${industry.name} engineering scope?`,
           answer: `The facility type, project type, existing conditions, jurisdiction, schedule, and required deliverables establish the basis for a project-specific engineering scope.`,
         },
         {
@@ -159,6 +160,27 @@ export default function IndustryDetail() {
             <p className="text-xl md:text-2xl text-primary font-display font-semibold mb-8">{industry.h2}</p>
             {industry.intro.map((p, i) => (
               <p key={i} className="text-lg text-foreground/80 leading-relaxed mb-5">{p}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-background border-b border-border">
+        <div className="container mx-auto px-4 md:px-8 max-w-5xl">
+          <p className="font-mono text-xs uppercase tracking-widest text-primary mb-3">Quick Answers</p>
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-8">
+            {industry.name} engineering questions
+          </h2>
+          <div className="faq space-y-3">
+            {quickAnswers.map((item) => (
+              <details key={item.question} className="border border-border bg-card">
+                <summary className="cursor-pointer px-5 py-4 font-display font-semibold">
+                  {item.question}
+                </summary>
+                <div className="a px-5 pb-5 text-foreground/80 leading-relaxed">
+                  {item.answer}
+                </div>
+              </details>
             ))}
           </div>
         </div>
