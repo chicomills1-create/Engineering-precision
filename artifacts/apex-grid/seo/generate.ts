@@ -279,7 +279,11 @@ function assessLiteCity(state: StateData, city: DirectoryCity): CityQualityDecis
 
 function eligibleDirectoryCities(state: StateData, directory: CityDirectory, curated: CityData[]): DirectoryCity[] {
   const curatedSlugs = new Set(curated.filter((c) => c.stateSlug === state.slug).map((c) => c.slug));
-  return (directory[state.slug] ?? []).filter((city) => !curatedSlugs.has(city.slug) && assessLiteCity(state, city).status === "indexed");
+  return (directory[state.slug] ?? []).filter((city) =>
+    !curatedSlugs.has(city.slug)
+    && !(state.slug === "missouri" && city.slug === "st-louis")
+    && assessLiteCity(state, city).status === "indexed"
+  );
 }
 
 function writeCityQualityReport(states: StateData[], directory: CityDirectory, curated: CityData[]) {
@@ -289,10 +293,11 @@ function writeCityQualityReport(states: StateData[], directory: CityDirectory, c
   const anomalies = decisions.filter((d) => d.status === "excluded");
   const reviewed = curated.filter((city) => city.research && isReviewedCity(city));
   const drafts = curated.filter((city) => city.research && !isReviewedCity(city));
-  const directoryNoindexCount = decisions.length;
+  const indexedDirectoryCount = decisions.filter((decision) => decision.status === "indexed").length;
+  const directoryNoindexCount = decisions.length - indexedDirectoryCount;
   const report = {
-    reportVersion: 2,
-    policy: "Approved, fully sourced CityData and grandfathered curated cities are indexable. Draft research and Census directory-lite pages remain live but are noindex,follow.",
+    reportVersion: 3,
+    policy: `Approved CityData pages and Census-verified incorporated places with population at or above ${LITE_CITY_MIN_POPULATION.toLocaleString("en-US")} are indexable as consolidated city-intent hubs. Smaller or incomplete directory records remain live noindex,follow.`,
     reviewedPromotions: reviewed.map((city) => ({
       state: city.stateSlug,
       slug: city.slug,
@@ -305,7 +310,8 @@ function writeCityQualityReport(states: StateData[], directory: CityDirectory, c
     ).length,
     priorityQueue: CITY_PRIORITIES,
     populationReviewSignal: `population below ${LITE_CITY_MIN_POPULATION} is flagged for human review; population is not proof of page quality`,
-    indexedCount: curated.filter(isReviewedCity).length + RETAINED_LEGACY_LOCATIONS.filter((retained) =>
+    indexedDirectoryCount,
+    indexedCount: indexedDirectoryCount + curated.filter(isReviewedCity).length + RETAINED_LEGACY_LOCATIONS.filter((retained) =>
       !curated.some((city) => city.stateSlug === retained.stateSlug && city.slug === retained.city.slug)
     ).length,
     noindexCount: directoryNoindexCount + drafts.length,
@@ -641,8 +647,9 @@ function assertNoMarkupCity(city: CityData) {
     throw new Error(`City ${city.slug} contains disallowed markup`);
   }
 }
-function statePage(state: StateData, cities: CityData[]): string {
+function statePage(state: StateData, cities: CityData[], directory: CityDirectory): string {
   const stateCities = cities.filter((c) => c.stateSlug === state.slug && isReviewedCity(c));
+  const directoryCities = eligibleDirectoryCities(state, directory, cities);
   const specialtyLocationPages = LOCATION_SERVICE_PAGES.filter((p) => p.stateSlug === state.slug);
   const specialtyCityRoots = [...new Set(specialtyLocationPages.map((p) => p.citySlug))]
     .filter((slug) => !stateCities.some((city) => city.slug === slug));
@@ -672,6 +679,13 @@ ${state.slug === "hawaii" ? `<section class="block"><div class="container">
   <div class="grid2">
     <a class="card" href="/locations/hawaii/honolulu/"><div class="label">Honolulu, HI</div><h3>Engineering Services in Honolulu</h3><p>Review the Honolulu service-area page for local project and permitting context.</p></a>
   </div>
+</div></section>` : ""}
+${directoryCities.length ? `<section class="block"><div class="container">
+  <h2>More ${esc(state.name)} <em>City Coverage</em></h2>
+  <p class="prose">Explore consolidated engineering hubs for Census-verified incorporated places across ${esc(state.name)}. Each hub covers the major discipline, facility, permit, assessment, renovation, and buyer-intent clusters under one canonical city URL.</p>
+  <div class="linkrow">${directoryCities
+    .map((city) => `<a href="/locations/${state.slug}/${city.slug}/">${esc(city.name)} engineering services</a>`)
+    .join("")}</div>
 </div></section>` : ""}
 ${availableVerticals.length ? `<section class="block"><div class="container">
   <h2>Architecture &amp; Construction <em>Coverage</em></h2>
@@ -811,6 +825,22 @@ function cityLitePage(state: StateData, city: DirectoryCity, siblings: Directory
   const curatedInState = curated.filter((c) => c.stateSlug === state.slug && isReviewedCity(c));
   const populationContext = city.pop ? ` (population approximately ${city.pop.toLocaleString("en-US")})` : "";
   const availableVerticals = indexable ? verticalsForState(state.slug) : [];
+  const capabilityClusters = [
+    ["MEP Engineering", "Mechanical and HVAC design, electrical power and lighting, plumbing systems, equipment coordination, controls, and multidisciplinary MEP documentation."],
+    ["Structural Engineering", "New structural systems, renovations, additions, adaptive reuse, equipment support, condition assessments, repair design, and existing-building analysis."],
+    ["Civil & Site Engineering", "Site planning, grading, drainage, stormwater, utility coordination, accessibility, paving, and permit-support documentation."],
+    ["Energy & Building Performance", "Commercial energy-code compliance, COMcheck support, envelope and lighting coordination, mechanical-system efficiency, and performance documentation."],
+    ["Geotechnical & Existing Conditions", "Subsurface investigation coordination, foundation recommendations, due diligence, property condition assessments, and renovation feasibility support."],
+    ["Permit & Plan-Review Support", "Permit drawings, calculations, specifications, agency responses, deferred-submittal coordination, corrections, and construction-phase engineering support."],
+  ];
+  const projectClusters = [
+    ["Commercial & Tenant Improvement", "Offices, retail, restaurants, mixed-use properties, tenant improvements, renovations, additions, and change-of-use projects."],
+    ["Industrial & Advanced Manufacturing", "Manufacturing, warehouses, logistics facilities, process-support spaces, clean environments, laboratories, and technology facilities."],
+    ["Healthcare & Institutional", "Hospitals, clinics, medical offices, schools, universities, civic buildings, public facilities, and mission-critical renovations."],
+    ["Housing & Hospitality", "Multifamily housing, senior living, hotels, resorts, residential amenities, and building-system modernization."],
+    ["Federal, Municipal & Infrastructure", "Government facilities, public works, utility coordination, transportation-support facilities, resilience, and capital-improvement projects."],
+    ["Assessments, Retrofits & Repairs", "Facility condition assessments, structural evaluations, energy upgrades, equipment replacements, seismic and wind reviews, and repair programs."],
+  ];
   const faqs = [
     {
       q: `Does Apex Grid provide engineering services in ${city.name}, ${state.abbrev}?`,
@@ -874,6 +904,19 @@ ${availableVerticals
     (s) => `<a class="card" href="/locations/${state.slug}/${s.slug}/"><div class="label">${esc(s.shortName)}</div><h3>${esc(s.name)} in ${esc(state.name)}</h3><p>${esc(s.intro)}</p></a>`,
   ).join("")}
   </div>
+</div></section>
+<section class="block"><div class="container">
+  <h2>${esc(city.name)} Engineering <em>Capabilities</em></h2>
+  <p class="prose">Apex Grid organizes related search intents under this single canonical ${esc(city.name)} engineering hub so owners, architects, contractors, developers, facility managers, and public agencies can find the relevant discipline without duplicate location pages.</p>
+  <div class="grid3">${capabilityClusters
+    .map(([title, description]) => `<div class="card"><div class="label">${esc(city.name)}</div><h3>${esc(title)} in ${esc(city.name)}</h3><p>${esc(description)}</p></div>`)
+    .join("")}</div>
+</div></section>
+<section class="block"><div class="container">
+  <h2>Project Types in <em>${esc(city.name)}</em></h2>
+  <div class="grid3">${projectClusters
+    .map(([title, description]) => `<div class="card"><div class="label">${esc(state.abbrev)}</div><h3>${esc(title)}</h3><p>${esc(description)}</p></div>`)
+    .join("")}</div>
 </div></section>
 <section class="block"><div class="container">
   <h2>${esc(state.name)} <em>Design Environment</em></h2>
@@ -1331,6 +1374,9 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
         locationsUrls.push(u(`${SITE}/locations/${s.slug}/${c.slug}/${svc.slug}/`, today, "monthly", "0.7"));
       }
     }
+    for (const city of eligibleDirectoryCities(s, directory, cities)) {
+      locationsUrls.push(u(`${SITE}/locations/${s.slug}/${city.slug}/`, today, "monthly", "0.5"));
+    }
     for (const retained of RETAINED_LEGACY_LOCATIONS.filter((entry) => entry.stateSlug === s.slug)) {
       if (!cities.some((city) => city.stateSlug === s.slug && city.slug === retained.city.slug)) {
         locationsUrls.push(u(`${SITE}/locations/${s.slug}/${retained.city.slug}/`, today, "monthly", "0.5"));
@@ -1351,6 +1397,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
       urls.push(u(`${SITE}${verticalStateUrl(vertical, state.slug)}`, today, "monthly", "0.7"));
       const indexableCitySlugs = new Set([
         ...cities.filter((c) => c.stateSlug === state.slug && isReviewedCity(c)).map((c) => c.slug),
+        ...eligibleDirectoryCities(state, directory, cities).map((city) => city.slug),
         ...RETAINED_LEGACY_LOCATIONS.filter((r) => r.stateSlug === state.slug).map((r) => r.city.slug),
       ]);
       for (const city of allDirectoryCitiesForState(state, directory, cities).filter((entry) => indexableCitySlugs.has(entry.slug))) {
@@ -3315,7 +3362,7 @@ async function main() {
   for (const s of states) {
     const sdir = path.join(OUT, s.slug);
     fs.mkdirSync(sdir, { recursive: true });
-    fs.writeFileSync(path.join(sdir, "index.html"), statePage(s, cities));
+    fs.writeFileSync(path.join(sdir, "index.html"), statePage(s, cities, directory));
     pages++;
     for (const svc of SERVICES) {
       const dir = path.join(sdir, svc.slug);
@@ -3344,7 +3391,14 @@ async function main() {
       fs.mkdirSync(cdir, { recursive: true });
        fs.writeFileSync(
          path.join(cdir, "index.html"),
-         cityLitePage(s, d, dirCities, cities, RETAINED_LEGACY_LOCATIONS.some((r) => r.stateSlug === s.slug && r.city.slug === d.slug)),
+         cityLitePage(
+           s,
+           d,
+           dirCities,
+           cities,
+           assessLiteCity(s, d).status === "indexed"
+             || RETAINED_LEGACY_LOCATIONS.some((r) => r.stateSlug === s.slug && r.city.slug === d.slug),
+         ),
        );
       pages++;
     }
@@ -3382,6 +3436,7 @@ async function main() {
         .filter((state) => verticalAvailableInState(vertical, state.slug))
         .map((state) => [state.slug, [
           ...cities.filter((city) => city.stateSlug === state.slug && isReviewedCity(city)).map((city) => city.slug),
+          ...eligibleDirectoryCities(state, directory, cities).map((city) => city.slug),
           ...RETAINED_LEGACY_LOCATIONS.filter((retained) => retained.stateSlug === state.slug).map((retained) => retained.city.slug),
         ].length]),
     );
@@ -3396,6 +3451,7 @@ async function main() {
       const allStateCities = allDirectoryCitiesForState(state, directory, cities);
       const stateCities = allStateCities.filter((city) =>
         cities.some((curated) => curated.stateSlug === state.slug && curated.slug === city.slug && isReviewedCity(curated))
+        || assessLiteCity(state, city).status === "indexed"
         || RETAINED_LEGACY_LOCATIONS.some((retained) => retained.stateSlug === state.slug && retained.city.slug === city.slug),
       );
       const stateDir = path.join(locationsDir, state.slug);
@@ -3420,7 +3476,11 @@ async function main() {
             city,
              stateCities,
             curatedBySlug.get(city.slug),
-             Boolean((curatedBySlug.get(city.slug) && isReviewedCity(curatedBySlug.get(city.slug)!)) || RETAINED_LEGACY_LOCATIONS.some((r) => r.stateSlug === state.slug && r.city.slug === city.slug)),
+             Boolean(
+               (curatedBySlug.get(city.slug) && isReviewedCity(curatedBySlug.get(city.slug)!))
+               || assessLiteCity(state, city).status === "indexed"
+               || RETAINED_LEGACY_LOCATIONS.some((r) => r.stateSlug === state.slug && r.city.slug === city.slug)
+             ),
           ),
         );
         pages++;

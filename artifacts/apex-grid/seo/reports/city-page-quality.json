@@ -1,6 +1,6 @@
 {
-  "reportVersion": 2,
-  "policy": "Approved, fully sourced CityData and grandfathered curated cities are indexable. Draft research and Census directory-lite pages remain live but are noindex,follow.",
+  "reportVersion": 3,
+  "policy": "Approved CityData pages and Census-verified incorporated places with population at or above 10,000 are indexable as consolidated city-intent hubs. Smaller or incomplete directory records remain live noindex,follow.",
   "reviewedPromotions": [
     {
       "state": "new-mexico",
@@ -1955,9 +1955,10 @@
     }
   ],
   "populationReviewSignal": "population below 10000 is flagged for human review; population is not proof of page quality",
-  "indexedCount": 147,
-  "noindexCount": 19182,
-  "excludedCount": 19182,
+  "indexedDirectoryCount": 3040,
+  "indexedCount": 3187,
+  "noindexCount": 16142,
+  "excludedCount": 16142,
   "excludedReasons": {
     "review-signal-population-below-10000": 16142,
     "city-slug-identity-mismatch": 18
