@@ -51,7 +51,7 @@ export const dallas: CityData = {
   ],
   research: {
     lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid editorial review",
-    supportedServiceSlugs: ["mep-engineering", "structural-engineering"],
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 95, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://dallascityhall.com/departments/sustainabledevelopment/buildinginspection/Pages/default.aspx"],

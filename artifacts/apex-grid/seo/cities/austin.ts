@@ -51,7 +51,7 @@ export const austin: CityData = {
   ],
   research: {
     lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid editorial review",
-    supportedServiceSlugs: ["mep-engineering", "structural-engineering"],
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 92, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.austintexas.gov/department/development-services"],

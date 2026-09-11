@@ -39,18 +39,6 @@
       }
     },
     {
-      "state": "illinois",
-      "slug": "chicago",
-      "lastVerified": "2026-09-11",
-      "sourceCount": 6,
-      "checks": {
-        "unique": "pass",
-        "sources": "pass",
-        "canonical": "pass",
-        "internalLinks": "pass"
-      }
-    },
-    {
       "state": "texas",
       "slug": "dallas",
       "lastVerified": "2026-09-11",
@@ -327,9 +315,9 @@
     }
   ],
   "populationReviewSignal": "population below 10000 is flagged for human review; population is not proof of page quality",
-  "indexedCount": 96,
-  "noindexCount": 19230,
-  "excludedCount": 19230,
+  "indexedCount": 95,
+  "noindexCount": 19231,
+  "excludedCount": 19231,
   "excludedReasons": {
     "review-signal-population-below-10000": 16143,
     "city-slug-identity-mismatch": 18
