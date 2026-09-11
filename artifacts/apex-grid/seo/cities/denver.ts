@@ -49,4 +49,17 @@ export const denver: CityData = {
       a: "Denver applies its own criteria alongside the Mile High Flood District (MHFD/UDFCD) standards for detention, water-quality capture, and full-spectrum drainage, plus green-infrastructure and post-construction stormwater requirements. These consume developable area, so detention and water-quality features should be laid out in the first site-plan pass.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid editorial review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering"],
+    priority: { commercialOpportunity: 89, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Community-Planning-and-Development"],
+      codes: ["https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Community-Planning-and-Development/Building-Codes-Policies-and-Guides"],
+      amendments: ["https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Community-Planning-and-Development/Building-Codes-Policies-and-Guides"],
+      utilities: ["https://co.my.xcelenergy.com/s/business"],
+      climate: ["https://www.weather.gov/bou/"],
+      market: ["https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Denver-Economic-Development-Opportunity"],
+    },
+  },
 };

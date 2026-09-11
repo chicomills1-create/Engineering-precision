@@ -52,4 +52,17 @@ export const chicago: CityData = {
       a: "Chicago is a cold-humid climate zone 5A city, so heating loads, ground snow and drift loads, wind, and frost-depth foundations govern more than seismic — which is low (generally SDC A–B). Downtown high-rises add the Chicago Building Code's high-rise and wind provisions, and deep foundations to hardpan or rock are common.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid editorial review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering"],
+    priority: { commercialOpportunity: 91, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.chicago.gov/city/en/depts/bldgs.html"],
+      codes: ["https://www.chicago.gov/city/en/depts/bldgs/provdrs/codes.html"],
+      amendments: ["https://www.chicago.gov/city/en/depts/bldgs/provdrs/codes.html"],
+      utilities: ["https://www.comed.com/"],
+      climate: ["https://www.weather.gov/lot/"],
+      market: ["https://worldbusinesschicago.com/"],
+    },
+  },
 };

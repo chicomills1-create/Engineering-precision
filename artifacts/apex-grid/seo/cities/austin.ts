@@ -49,4 +49,17 @@ export const austin: CityData = {
       a: "Austin Energy, the city's municipally owned utility, provides service inside its territory - it is not part of the ERCOT competitive-retail market there, so rates, interconnection, and demand charges all run through Austin Energy. It also administers the Green Building program, so we coordinate capacity, transformer lead times, and Green Building goals with Austin Energy early.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid editorial review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering"],
+    priority: { commercialOpportunity: 92, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.austintexas.gov/department/development-services"],
+      codes: ["https://www.austintexas.gov/page/building-technical-codes"],
+      amendments: ["https://www.austintexas.gov/page/building-technical-codes"],
+      utilities: ["https://austinenergy.com/"],
+      climate: ["https://www.weather.gov/ewx/"],
+      market: ["https://www.austintexas.gov/department/economic-development"],
+    },
+  },
 };

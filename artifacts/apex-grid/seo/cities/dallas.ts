@@ -49,4 +49,17 @@ export const dallas: CityData = {
       a: "Significantly. The Blackland Prairie clays are highly expansive, so foundation design follows the project geotechnical report - typically post-tensioned slabs, drilled piers, or grade beams on void forms with moisture-control detailing to manage seasonal shrink-swell movement.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid editorial review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering"],
+    priority: { commercialOpportunity: 95, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://dallascityhall.com/departments/sustainabledevelopment/buildinginspection/Pages/default.aspx"],
+      codes: ["https://dallascityhall.com/departments/sustainabledevelopment/buildinginspection/Pages/construction_codes.aspx"],
+      amendments: ["https://dallascityhall.com/departments/sustainabledevelopment/buildinginspection/Pages/construction_codes.aspx"],
+      utilities: ["https://www.oncor.com/"],
+      climate: ["https://www.weather.gov/fwd/"],
+      market: ["https://www.dallasecodev.org/"],
+    },
+  },
 };

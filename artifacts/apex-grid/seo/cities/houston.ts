@@ -49,4 +49,17 @@ export const houston: CityData = {
       a: "CenterPoint Energy Houston Electric owns the regulated wires and handles the meter, service upgrades, and interconnection, while Houston is in the ERCOT competitive-retail market where you choose a retail electric provider for supply. We coordinate capacity and transformer lead times with CenterPoint at schematic design.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid editorial review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering"],
+    priority: { commercialOpportunity: 95, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.houstonpermittingcenter.org/"],
+      codes: ["https://www.houstonpermittingcenter.org/building-code-enforcement/houston-construction-code"],
+      amendments: ["https://www.houstonpermittingcenter.org/building-code-enforcement/houston-construction-code"],
+      utilities: ["https://www.centerpointenergy.com/en-us/business"],
+      climate: ["https://www.weather.gov/hgx/"],
+      market: ["https://www.houstontx.gov/ecodev/"],
+    },
+  },
 };

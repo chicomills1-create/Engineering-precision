@@ -52,4 +52,17 @@ export const charlotte: CityData = {
       a: "The City of Charlotte's Post-Construction Stormwater Ordinance requires water-quality treatment and runoff-volume control on top of quantity control, with tighter standards in the water-supply watersheds around Mountain Island Lake and Lake Wylie. Combined with UDO tree and buffer requirements and NCDEQ NPDES construction coverage for sites over an acre, BMP footprints can materially reduce developable area, so we resolve stormwater layout early.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid editorial review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering"],
+    priority: { commercialOpportunity: 88, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://code.mecknc.gov/"],
+      codes: ["https://www.ncosfm.gov/codes"],
+      amendments: ["https://code.mecknc.gov/"],
+      utilities: ["https://www.duke-energy.com/business"],
+      climate: ["https://www.weather.gov/gsp/"],
+      market: ["https://charlotteregion.com/"],
+    },
+  },
 };

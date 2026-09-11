@@ -22,7 +22,7 @@ import {
   getIndustryDisciplineUrl,
   type IndustryDisciplinePage,
 } from "./industry-discipline-pages";
-import { LOCATION_SERVICE_PAGES, type LocationServicePage } from "./location-service-pages";
+import { LOCATION_SERVICE_PAGES as RAW_LOCATION_SERVICE_PAGES, type LocationServicePage } from "./location-service-pages";
 import { SOLUTION_PAGES, type SolutionPage } from "./solutions-pages";
 import { GUIDE_PAGES, GUIDES_HUB, type GuidePage } from "./guides-pages";
 import { DISCIPLINE_HUBS, type DisciplineHub, type DisciplineSubpage } from "./discipline-pages";
@@ -53,7 +53,11 @@ import { ALL_INDUSTRIES } from "../src/data/industries";
 import { RESOURCE_ARTICLES, RESOURCE_DISCIPLINES, disciplineOf, resourceUrl, type ResourceArticle, type ResourceDiscipline } from "./resources";
 import { GLOSSARY_TERMS, sortedGlossaryTerms, glossaryByLetter, relatedGlossaryTerms, type GlossaryTerm } from "./glossary";
 import { APEX_GRID_BUSINESS_SCHEMA } from "../src/lib/business-schema";
-import { ENGINEERING_INTENT_PAGES, NEAR_ME_ENGINEERING_PAGE, type EngineeringIntentPage } from "./engineering-intent-pages";
+import {
+  ENGINEERING_INTENT_PAGES,
+  NEAR_ME_ENGINEERING_PAGE,
+  type EngineeringIntentPage,
+} from "./engineering-intent-pages";
 import {
   assertNoConflictingOutputOwners,
   assertRouteOwnership,
@@ -63,6 +67,22 @@ import {
   REACT_PRERENDER_SERVICE_ROUTES,
   SEO_GENERATOR_FIXED_INDEX_ROUTES,
 } from "./route-ownership";
+
+const PROMOTED_CITY_KEYS = new Set([
+  "georgia/atlanta", "texas/austin", "north-carolina/charlotte",
+  "illinois/chicago", "texas/dallas", "colorado/denver",
+  "texas/houston", "california/los-angeles", "arizona/phoenix",
+  "florida/orlando",
+]);
+const STANDARD_CITY_SERVICE_SLUGS = new Set([
+  "mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance",
+]);
+/** Preserve the curated city/service canonical when an older specialty record
+ * claims the exact same route. Distinct specialty slugs remain untouched. */
+const LOCATION_SERVICE_PAGES = RAW_LOCATION_SERVICE_PAGES.filter((page) =>
+  !(PROMOTED_CITY_KEYS.has(`${page.stateSlug}/${page.citySlug}`) && STANDARD_CITY_SERVICE_SLUGS.has(page.serviceSlug)),
+);
+
 const RETAINED_INTENT_SLUGS = new Set([
   "structural-engineering-letters", "construction-rfi-submittal-support",
   "value-engineering-design-optimization",
@@ -137,6 +157,12 @@ function isReviewedCity(city: CityData): boolean {
     && sourceGroups.every((urls) => urls.length > 0 && urls.every((url) => /^https:\/\//.test(url)));
 }
 
+function isSupportedCityService(city: CityData, serviceSlug: string): boolean {
+  if (!isReviewedCity(city)) return false;
+  return !city.research
+    || !city.research.supportedServiceSlugs
+    || city.research.supportedServiceSlugs.includes(serviceSlug as NonNullable<CityData["research"]["supportedServiceSlugs"]>[number]);
+}
 function assertCityResearch(city: CityData): void {
   if (!city.research && !LEGACY_CURATED_CITY_KEYS.has(`${city.stateSlug}/${city.slug}`)) {
     throw new Error(`New city is missing required research evidence: ${city.stateSlug}/${city.slug}`);
@@ -1298,7 +1324,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     }
     for (const c of cities.filter((c) => c.stateSlug === s.slug && isReviewedCity(c))) {
       locationsUrls.push(u(`${SITE}/locations/${s.slug}/${c.slug}/`, today, "monthly", "0.7"));
-      for (const svc of SERVICES) {
+      for (const svc of SERVICES.filter((service) => isSupportedCityService(c, service.slug))) {
         locationsUrls.push(u(`${SITE}/locations/${s.slug}/${c.slug}/${svc.slug}/`, today, "monthly", "0.7"));
       }
     }
@@ -3858,14 +3884,16 @@ async function main() {
       if (!html.includes(`<link rel="canonical" href="${canonical}"`)) {
         throw new Error(`SEO assertion failed: promoted city canonical mismatch: ${relativePath}`);
       }
-      if (!html.includes('<meta name="robots" content="index,follow"')) {
-        throw new Error(`SEO assertion failed: promoted city is not index,follow: ${relativePath}`);
+      const serviceSlug = relativePath === promotedBase ? undefined : relativePath.split("/").filter(Boolean).at(-1);
+      const shouldIndex = !serviceSlug || isSupportedCityService(promoted, serviceSlug);
+      if (!html.includes(`<meta name="robots" content="${shouldIndex ? "index,follow" : "noindex,follow"}"`)) {
+        throw new Error(`SEO assertion failed: promoted city robots policy mismatch: ${relativePath}`);
       }
       for (const source of expectedSources) {
         if (!html.includes(`href="${source}"`)) throw new Error(`SEO assertion failed: promoted city source missing from ${relativePath}: ${source}`);
       }
-      if (!locationsXml.includes(`<loc>${canonical}</loc>`)) {
-        throw new Error(`SEO assertion failed: promoted city missing from location sitemap: ${relativePath}`);
+      if (locationsXml.includes(`<loc>${canonical}</loc>`) !== shouldIndex) {
+        throw new Error(`SEO assertion failed: promoted city sitemap policy mismatch: ${relativePath}`);
       }
       if (relativePath === promotedBase) {
         for (const service of SERVICES) {
@@ -4068,7 +4096,7 @@ ${citySourceList(city)}
     description: `Licensed ${svc.name.toLowerCase()} for ${city.name}, ${state.abbrev} commercial projects. Permits through ${city.ahj.office}; designed to the ${city.codes.building.split(",")[0].split("(")[0].trim()} with local amendments.`,
     canonical: `${SITE}${url}`,
     schemaJson: [orgSchema, svcSchema, faqSchema, breadcrumbSchema(crumbs)],
-    robots: isReviewedCity(city) ? "index,follow" : "noindex,follow",
+    robots: isSupportedCityService(city, svc.slug) ? "index,follow" : "noindex,follow",
     body,
   });
 }

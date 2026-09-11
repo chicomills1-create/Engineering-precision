@@ -52,4 +52,17 @@ export const losAngeles: CityData = {
       a: "The Los Angeles Department of Water and Power (LADWP), a municipal utility, provides both electricity and water inside city limits — not Southern California Edison, which serves many surrounding jurisdictions. Because one agency handles power and water, we coordinate new service, capacity, and interconnection with LADWP early in design.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid editorial review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering"],
+    priority: { commercialOpportunity: 94, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.ladbs.org/"],
+      codes: ["https://www.ladbs.org/services/core-services/plan-check-permit/plan-check-permit-special-assistance/building-code"],
+      amendments: ["https://www.ladbs.org/services/core-services/plan-check-permit/plan-check-permit-special-assistance/building-code"],
+      utilities: ["https://www.ladwp.com/commercial-services"],
+      climate: ["https://www.weather.gov/lox/"],
+      market: ["https://ewddlacity.com/"],
+    },
+  },
 };

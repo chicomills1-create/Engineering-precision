@@ -52,4 +52,17 @@ export const atlanta: CityData = {
       a: "Significantly. Atlanta's Post-Development Stormwater Management Ordinance requires runoff reduction and water-quality treatment on erosive red-clay soils, and the city's tree-protection ordinance, enforced by the arborist with recompense obligations, can consume developable area. We resolve BMP layout, detention, and tree impacts in the first site-plan pass because they directly shape the buildable footprint.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid editorial review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering"],
+    priority: { commercialOpportunity: 91, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.atlantaga.gov/i-want-to/obtain-a-building-permit"],
+      codes: ["https://www.atlantaga.gov/government/departments/city-planning/ordinances-regulations/construction-codes"],
+      amendments: ["https://www.atlantaga.gov/government/departments/city-planning/ordinances-regulations/construction-codes"],
+      utilities: ["https://www.georgiapower.com/business.html"],
+      climate: ["https://www.weather.gov/ffc/"],
+      market: ["https://www.investatlanta.com/"],
+    },
+  },
 };

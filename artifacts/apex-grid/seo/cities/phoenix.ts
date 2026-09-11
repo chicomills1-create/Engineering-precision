@@ -49,4 +49,17 @@ export const phoenix: CityData = {
       a: "It depends on the parcel — the APS/SRP territory boundary runs through the metro. The answer affects rate structures, demand charges, and interconnection timelines, so we confirm the serving utility during schematic design, before sizing the electrical service.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid editorial review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering"],
+    priority: { commercialOpportunity: 94, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.phoenix.gov/administration/departments/pdd.html"],
+      codes: ["https://www.phoenix.gov/administration/departments/pdd/building-codes.html"],
+      amendments: ["https://www.phoenix.gov/administration/departments/pdd/building-codes.html"],
+      utilities: ["https://www.aps.com/en/Business"],
+      climate: ["https://www.weather.gov/psr/"],
+      market: ["https://www.investinphoenix.com/"],
+    },
+  },
 };

@@ -52,4 +52,17 @@ export const orlando: CityData = {
       a: "It can be decisive. Sinkhole and soft-ground potential over limestone means the geotechnical report governs foundation selection — sometimes driving deep foundations or ground improvement — and it shapes stormwater pond siting so runoff is not concentrated over potential features. Combined with high water tables, karst is a central reason we coordinate structural and civil design with subsurface findings early.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid editorial review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering"],
+    priority: { commercialOpportunity: 88, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.orlando.gov/Building-Development/Permits-Inspections"],
+      codes: ["https://www.orlando.gov/Building-Development/Permits-Inspections/Get-a-Permit"],
+      amendments: ["https://www.orlando.gov/Building-Development/Permits-Inspections/Get-a-Permit"],
+      utilities: ["https://www.ouc.com/business/"],
+      climate: ["https://www.weather.gov/mlb/"],
+      market: ["https://www.orlando.gov/Our-Government/Departments-Offices/Economic-Development"],
+    },
+  },
 };
