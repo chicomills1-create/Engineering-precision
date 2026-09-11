@@ -49,4 +49,17 @@ export const grandRapids: CityData = {
       a: "Consumers Energy electric capacity and interconnection need early review for large or electrified loads. City water and wastewater connections, Grand River floodplain screening, groundwater, glacial soils, and applicable erosion and construction-stormwater controls should shape the site plan early.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 78, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.grandrapidsmi.gov/Government/Departments/Community-Development/Development-Center"],
+      codes: ["https://www.michigan.gov/lara/bureau-list/bcc/rules-and-codes"],
+      amendments: ["https://www.grandrapidsmi.gov/Government/Departments/Community-Development"],
+      utilities: ["https://www.consumersenergy.com/business", "https://www.grandrapidsmi.gov/Government/Departments/Public-Works/Water-Sewer"],
+      climate: ["https://www.weather.gov/grr/"],
+      market: ["https://www.rightplace.org/"],
+    },
+  },
 };

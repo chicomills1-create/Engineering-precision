@@ -52,4 +52,19 @@ export const seattle: CityData = {
       a: "Seattle City Light supplies nearly carbon-free, hydro-dominant electricity, which makes building electrification both cost-effective and low-emission. Because Seattle's emissions performance standard caps operational carbon, designing electrified heat-pump systems on a clean grid aligns code compliance, emissions goals, and operating cost — so we plan for it from the outset.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11",
+    reviewStatus: "approved",
+    reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 92, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.seattle.gov/sdci/permits"],
+      codes: ["https://www.seattle.gov/sdci/codes/codes-we-enforce"],
+      amendments: ["https://www.seattle.gov/sdci/codes/codes-we-enforce"],
+      utilities: ["https://www.seattle.gov/city-light/business-solutions", "https://www.seattle.gov/utilities"],
+      climate: ["https://www.weather.gov/sew/climate"],
+      market: ["https://www.seattle.gov/economic-development"],
+    },
+  },
 };

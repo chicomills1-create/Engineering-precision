@@ -49,4 +49,17 @@ export const indianapolis: CityData = {
       a: "Rule 5 requires a SWPPP and construction-stormwater permit for qualifying land disturbance. Flat grades, clay/alluvial soils, extensive truck-court pavement, local drainage infrastructure, and White River watershed floodplain conditions mean detention and a lawful outlet need to be resolved before the layout is fixed.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 90, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.indy.gov/activity/apply-for-a-building-permit"],
+      codes: ["https://www.in.gov/dhs/fire-and-building-safety/code-enforcement/indiana-building-codes/"],
+      amendments: ["https://www.indy.gov/activity/apply-for-a-building-permit"],
+      utilities: ["https://www.aesindiana.com/", "https://www.indy.gov/activity/water-and-sewer-service"],
+      climate: ["https://www.weather.gov/ind/"],
+      market: ["https://www.indychamber.com/"],
+    },
+  },
 };

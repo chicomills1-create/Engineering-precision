@@ -49,4 +49,17 @@ export const saintLouis: CityData = {
       a: "Hot-humid storms, river and localized flood exposure, freeze-thaw, variable fill, and loess or expansive-soil conditions can affect a project. Historic urban parcels also frequently need investigation of existing foundations, utilities, and drainage before design is finalized.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 87, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.stlouis-mo.gov/government/departments/public-safety/building/"],
+      codes: ["https://www.stlouis-mo.gov/government/departments/public-safety/building/codes.cfm"],
+      amendments: ["https://www.stlouis-mo.gov/government/departments/public-safety/building/codes.cfm"],
+      utilities: ["https://www.ameren.com/business", "https://www.stlwater.com/"],
+      climate: ["https://www.weather.gov/lsx/"],
+      market: ["https://www.gstl.org/"],
+    },
+  },
 };

@@ -49,4 +49,17 @@ export const cleveland: CityData = {
       a: "Lake-effect snow and drifting can govern roof design, while frost, lacustrine soils, fill, and Lake Erie exposure affect foundations and durability. Cleveland's combined-sewer legacy and NEORSD requirements should be evaluated before committing to a drainage and utility layout.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 84, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.clevelandohio.gov/city-hall/departments/building-housing"],
+      codes: ["https://com.ohio.gov/divisions-and-programs/industrial-compliance/building-code"],
+      amendments: ["https://codelibrary.amlegal.com/codes/cleveland/latest/cleveland_oh/0-0-0-1"],
+      utilities: ["https://www.cpp.org/", "https://www.clevelandwater.com/"],
+      climate: ["https://www.weather.gov/cle/"],
+      market: ["https://selectcleveland.com/"],
+    },
+  },
 };

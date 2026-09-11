@@ -49,4 +49,17 @@ export const minneapolis: CityData = {
       a: "Very cold winters, deep frost, snow drift, ice, freeze-thaw cycling, and glacial or fill soils are major inputs. A geotechnical report and durable air-, vapor-, and water-control details are important for both structural reliability and energy performance.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 88, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.minneapolismn.gov/government/departments/community-planning-economic-development/permits/"],
+      codes: ["https://www.dli.mn.gov/business/codes-and-laws/2020-minnesota-state-building-code"],
+      amendments: ["https://www.minneapolismn.gov/government/departments/community-planning-economic-development/permits/"],
+      utilities: ["https://www.xcelenergy.com/", "https://www.minneapolismn.gov/government/departments/public-works/surface-water-sewers/"],
+      climate: ["https://www.weather.gov/mpx/"],
+      market: ["https://www.greatermsp.org/"],
+    },
+  },
 };

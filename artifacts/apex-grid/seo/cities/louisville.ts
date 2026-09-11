@@ -49,4 +49,17 @@ export const louisville: CityData = {
       a: "LG&E should be involved for electric, gas, and distributed-generation service planning; Louisville Water provides potable water; and MSD manages wastewater, drainage, and stormwater infrastructure. Large loads, new connections, and older-system capacity should be addressed during layout rather than after permit submission.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 84, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://louisvilleky.gov/government/construction-review"],
+      codes: ["https://louisvilleky.gov/government/construction-review/building-codes"],
+      amendments: ["https://louisvilleky.gov/government/construction-review/building-codes"],
+      utilities: ["https://lge-ku.com/business", "https://louisvillewater.com/"],
+      climate: ["https://www.weather.gov/lmk/"],
+      market: ["https://louisvilleky.gov/government/economic-development"],
+    },
+  },
 };

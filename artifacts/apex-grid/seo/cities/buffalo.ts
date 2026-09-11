@@ -49,4 +49,19 @@ export const buffalo: CityData = {
       a: "Lake-effect snow and wind drive roof and enclosure design, while snowmelt, Lake Erie and creek flood hazards, groundwater, and constrained urban sewers shape site drainage. Older and industrial sites can also contain fill, prior foundations, or environmental conditions that need investigation.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11",
+    reviewStatus: "approved",
+    reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 76, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.buffalony.gov/277/Permit-Information"],
+      codes: ["https://www.dos.ny.gov/DCEA/"],
+      amendments: ["https://www.buffalony.gov/DocumentCenter/Index/"],
+      utilities: ["https://www.nationalgridus.com/Upstate-NY-Home", "https://www.buffalony.gov/425/Water"],
+      climate: ["https://www.fema.gov/flood-maps"],
+      market: ["https://www.buffalony.gov/1118/Economic-Development"]
+    }
+  },
 };

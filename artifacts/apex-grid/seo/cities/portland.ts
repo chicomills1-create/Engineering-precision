@@ -49,4 +49,19 @@ export const portland: CityData = {
       a: "A Portland site should be screened for Cascadia seismic effects, liquefaction or soft alluvial soils, groundwater, winter-rain drainage, and—in appropriate locations—flood exposure. The City's Stormwater Management Manual and site-specific infiltration testing can affect usable area and grading from the outset.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11",
+    reviewStatus: "approved",
+    reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 88, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.portland.gov/bds/permit-review-process"],
+      codes: ["https://www.oregon.gov/bcd/codes-stand/pages/adopted-codes.aspx"],
+      amendments: ["https://www.portland.gov/bps/planning/zoning-code"],
+      utilities: ["https://portlandgeneral.com/business", "https://www.portland.gov/water", "https://www.portland.gov/bes"],
+      climate: ["https://www.weather.gov/pqr/climate"],
+      market: ["https://prosperportland.us/"],
+    },
+  },
 };

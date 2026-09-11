@@ -49,4 +49,17 @@ export const detroit: CityData = {
       a: "Detroit’s combined-sewer legacy, Detroit River watershed, flat grades, and locally high groundwater can limit conventional drainage assumptions. DWSD connection and drainage requirements, floodplain screening, green-infrastructure planning, and applicable Part 91/NPDES controls should be addressed before a redevelopment layout is locked.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 88, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://detroitmi.gov/departments/buildings-safety-engineering-and-environmental-department"],
+      codes: ["https://www.michigan.gov/lara/bureau-list/bcc/rules-and-codes"],
+      amendments: ["https://detroitmi.gov/departments/buildings-safety-engineering-and-environmental-department"],
+      utilities: ["https://www.dteenergy.com/us/en/business.html", "https://detroitmi.gov/departments/detroit-water-and-sewerage-department"],
+      climate: ["https://www.weather.gov/dtx/"],
+      market: ["https://www.degc.org/"],
+    },
+  },
 };

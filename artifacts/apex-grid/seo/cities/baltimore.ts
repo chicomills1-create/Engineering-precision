@@ -49,4 +49,19 @@ export const baltimore: CityData = {
       a: "BGE service capacity and interconnection, plus DPW water, wastewater, and storm-drain connections, should be screened before the layout is fixed. Harbor-area flood exposure, combined-sewer constraints, fill, groundwater, and Maryland stormwater controls can materially change site design.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11",
+    reviewStatus: "approved",
+    reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 82, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://dhcd.baltimorecity.gov/permits"],
+      codes: ["https://dhcd.baltimorecity.gov/codes"],
+      amendments: ["https://codes.baltimorecity.gov/"],
+      utilities: ["https://www.bge.com/Services/Pages/StartStopMove.aspx", "https://publicworks.baltimorecity.gov/"],
+      climate: ["https://www.fema.gov/flood-maps"],
+      market: ["https://www.portofbaltimore.com/"]
+    }
+  },
 };

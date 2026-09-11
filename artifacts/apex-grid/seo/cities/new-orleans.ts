@@ -49,4 +49,17 @@ export const newOrleans: CityData = {
       a: "New Orleans has low elevations, a high water table, soft deltaic soils, subsidence, and FEMA flood hazards. Floodplain rules can establish floor and equipment elevations, while the geotechnical report informs settlement, buoyancy, foundations, slabs, pavement, and excavation planning.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 86, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://nola.gov/next/safety-and-permits/topics/permits/"],
+      codes: ["https://lsuccc.la.gov/"],
+      amendments: ["https://nola.gov/next/safety-and-permits/topics/building-codes/"],
+      utilities: ["https://www.entergy.com/business", "https://www.swbno.org/"],
+      climate: ["https://www.weather.gov/lix/"],
+      market: ["https://portnola.com/"],
+    },
+  },
 };

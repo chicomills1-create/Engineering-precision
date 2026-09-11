@@ -49,4 +49,17 @@ export const toledo: CityData = {
       a: "They can affect winter weather, wind-driven rain, snow, and flooding, but exposure is parcel-specific. Riverine or shoreline flood mapping, storm-sewer tailwater, grades, and erosion control should be checked alongside geotechnical conditions rather than using a citywide flood assumption.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 74, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://toledo.oh.gov/services/building-inspection"],
+      codes: ["https://com.ohio.gov/divisions-and-programs/industrial-compliance/building-code"],
+      amendments: ["https://toledo.oh.gov/services/building-inspection"],
+      utilities: ["https://www.firstenergycorp.com/toledoedison.html", "https://toledo.oh.gov/services/public-utilities"],
+      climate: ["https://www.weather.gov/cle/"],
+      market: ["https://toledochamber.com/"],
+    },
+  },
 };

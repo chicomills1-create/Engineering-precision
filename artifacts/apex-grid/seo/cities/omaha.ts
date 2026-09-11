@@ -49,4 +49,17 @@ export const omaha: CityData = {
       a: "Cold weather, frost, snow, severe wind and hail, and flood exposure are important above grade. Below grade, loess, expansive clay, variable fill, and Missouri River floodplain conditions can affect bearing, settlement, infiltration, grading, utility depth, floor elevations, and drainage design, making a site-specific geotechnical evaluation important.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 82, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.omahane.gov/Planning/Building"],
+      codes: ["https://www.omahane.gov/Planning/Building/Building-Codes"],
+      amendments: ["https://www.omahane.gov/Planning/Building/Building-Codes"],
+      utilities: ["https://www.oppd.com/business/", "https://omahawaterworks.org/"],
+      climate: ["https://www.weather.gov/oax/"],
+      market: ["https://www.omahachamber.org/"],
+    },
+  },
 };

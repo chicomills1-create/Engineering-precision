@@ -49,4 +49,17 @@ export const kansasCity: CityData = {
       a: "Projects must account for tributary drainage and Missouri/Kansas River floodplain conditions, stormwater and detention requirements, and variable loess or expansive-clay soils. Kansas City Water Services and Development Services requirements, plus Missouri DNR construction-stormwater coverage for qualifying disturbance, should be incorporated before site layout is finalized.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 88, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.kcmo.gov/city-hall/departments/city-planning-development"],
+      codes: ["https://www.kcmo.gov/city-hall/departments/city-planning-development/development-services"],
+      amendments: ["https://library.municode.com/mo/kansas_city/codes/code_of_ordinances"],
+      utilities: ["https://www.evergy.com/solutions-and-rebates/business", "https://www.kcwater.us/"],
+      climate: ["https://www.weather.gov/eax/"],
+      market: ["https://www.kc.org/"],
+    },
+  },
 };

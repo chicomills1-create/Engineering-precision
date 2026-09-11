@@ -51,4 +51,19 @@ export const philadelphia: CityData = {
       a: "Philadelphia Water Department regulates stormwater and operates a combined sewer system in much of the city. Its Green City, Clean Waters approach relies on detention, infiltration, and greened infrastructure where conditions allow. Small infill sites still need to account for runoff, utility conflicts, soil and groundwater conditions, and potentially flood exposure near the Delaware and Schuylkill.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11",
+    reviewStatus: "approved",
+    reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 96, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.phila.gov/departments/department-of-licenses-and-inspections/"],
+      codes: ["https://www.phila.gov/departments/department-of-licenses-and-inspections/about-us/codes/"],
+      amendments: ["https://www.phila.gov/departments/department-of-licenses-and-inspections/about-us/codes/"],
+      utilities: ["https://www.peco.com/Business", "https://www.phila.gov/departments/philadelphia-water-department/"],
+      climate: ["https://www.fema.gov/flood-maps"],
+      market: ["https://www.phila.gov/departments/department-of-commerce/"]
+    }
+  },
 };

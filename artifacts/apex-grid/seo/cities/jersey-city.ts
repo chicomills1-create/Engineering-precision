@@ -31,4 +31,19 @@ export const jerseyCity: CityData = {
     { q: "Who provides electric, water, and sewer service in Jersey City?", a: "PSE&G provides electric and gas service. The Jersey City Municipal Utilities Authority operates water and wastewater systems; service, capacity, connection, and right-of-way coordination should begin early on dense redevelopment sites." },
     { q: "What makes Jersey City waterfront engineering different?", a: "Hudson River waterfront and low-lying sites can face coastal flood and storm-surge exposure, high groundwater, filled land, and variable soils. NJDEP flood or waterfront approvals, foundation investigation, resilient equipment elevation, and constrained utility routing can affect the critical path." },
   ],
+  research: {
+    lastVerified: "2026-09-11",
+    reviewStatus: "approved",
+    reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 91, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.jerseycitynj.gov/cityhall/building"],
+      codes: ["https://www.nj.gov/dca/codes/codreg/"],
+      amendments: ["https://www.jerseycitynj.gov/cityhall/planningzoning"],
+      utilities: ["https://www.pseg.com/", "https://www.jcmua.com/"],
+      climate: ["https://www.fema.gov/flood-maps"],
+      market: ["https://www.jerseycitynj.gov/cityhall/HEDC"]
+    }
+  },
 };

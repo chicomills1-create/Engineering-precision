@@ -31,4 +31,17 @@ export const stPaul: CityData = {
     { q: "Who provides utilities in St. Paul?", a: "Xcel Energy provides electric and natural-gas service. Saint Paul Regional Water Services provides water, while Saint Paul Public Works manages sewer and stormwater infrastructure; the applicable watershed district may add review requirements." },
     { q: "What structural conditions govern St. Paul projects?", a: "Snow, drift, wind, and deep frost commonly govern, with frost heave, clay, fill, and groundwater influencing foundations. Mississippi River bluff or floodplain locations can add slope-stability and flood-resilience requirements." },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 83, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.stpaul.gov/departments/safety-inspections"],
+      codes: ["https://www.dli.mn.gov/business/codes-and-laws/2020-minnesota-state-building-code"],
+      amendments: ["https://www.stpaul.gov/departments/safety-inspections"],
+      utilities: ["https://www.xcelenergy.com/", "https://www.stpaul.gov/departments/saint-paul-regional-water-services"],
+      climate: ["https://www.weather.gov/mpx/"],
+      market: ["https://www.stpaul.gov/departments/planning-and-economic-development"],
+    },
+  },
 };

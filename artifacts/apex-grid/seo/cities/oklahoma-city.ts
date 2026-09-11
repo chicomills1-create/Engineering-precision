@@ -49,4 +49,17 @@ export const oklahomaCity: CityData = {
       a: "OG&E should be engaged for electric capacity, routing, and interconnection, and Oklahoma City Utilities for water and wastewater availability, mains, and extensions. Because the city covers a very large area and crosses county lines, utility availability needs to be confirmed for the exact parcel.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 83, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.okc.gov/departments/development-services"],
+      codes: ["https://www.okc.gov/departments/development-services/development-center/codes"],
+      amendments: ["https://www.okc.gov/departments/development-services/development-center/codes"],
+      utilities: ["https://www.oge.com/business", "https://www.okc.gov/utilities"],
+      climate: ["https://www.weather.gov/oun/"],
+      market: ["https://www.okcchamber.com/"],
+    },
+  },
 };

@@ -49,4 +49,19 @@ export const providence: CityData = {
       a: "Rhode Island Energy provides electric service, Providence Water provides water, and the Narragansett Bay Commission provides wastewater service. Bay flooding, wind, groundwater, fill or organic soils, salt air, and dense utility conditions should be evaluated early.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11",
+    reviewStatus: "approved",
+    reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 78, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.providenceri.gov/inspection-standards/"],
+      codes: ["https://ribcc.ri.gov/"],
+      amendments: ["https://www.providenceri.gov/planning/"],
+      utilities: ["https://www.rienergy.com/ri-home", "https://www.providenceri.gov/providence-water/", "https://www.narrabay.com/"],
+      climate: ["https://www.fema.gov/flood-maps"],
+      market: ["https://commerceri.com/"]
+    }
+  },
 };

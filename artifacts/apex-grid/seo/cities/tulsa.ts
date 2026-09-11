@@ -49,4 +49,17 @@ export const tulsa: CityData = {
       a: "PSO should be involved for electric capacity, service routing, and distributed-generation interconnection. City of Tulsa Utilities should confirm water pressure/fire flow, sewer capacity, and any extension requirements. Those site-specific answers should inform design before equipment and grading layouts are locked.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 81, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.cityoftulsa.org/government/departments/development-services/"],
+      codes: ["https://www.cityoftulsa.org/government/departments/development-services/codes/"],
+      amendments: ["https://www.cityoftulsa.org/government/departments/development-services/codes/"],
+      utilities: ["https://www.psoklahoma.com/business", "https://www.cityoftulsa.org/government/departments/water-and-sewer/"],
+      climate: ["https://www.weather.gov/tsa/"],
+      market: ["https://www.tulsachamber.com/"],
+    },
+  },
 };

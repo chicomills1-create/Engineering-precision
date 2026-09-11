@@ -40,4 +40,17 @@ export const madison: CityData = {
     { q: "Who provides utilities for Madison commercial buildings?", a: "MGE provides electric and gas service in much of Madison; City of Madison Water Utility provides water, and city engineering operates sanitary sewer and stormwater systems. Confirm territory and site-specific capacity, pressure, fire flow, and connection needs early." },
     { q: "Why is stormwater planning important in Madison?", a: "Madison's sites drain to a connected lake watershed, so runoff quality, detention, erosion control, lake or floodplain conditions, and public-system capacity can shape the layout. Early City Engineering coordination is especially valuable for infill and lake-adjacent properties." },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 80, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.cityofmadison.com/development-services-center"],
+      codes: ["https://dsps.wi.gov/Pages/Programs/CommercialBuildings/Default.aspx"],
+      amendments: ["https://library.municode.com/wi/madison/codes/code_of_ordinances"],
+      utilities: ["https://www.mge.com/", "https://www.cityofmadison.com/water"],
+      climate: ["https://www.weather.gov/mkx/"],
+      market: ["https://madisonregion.org/"],
+    },
+  },
 };

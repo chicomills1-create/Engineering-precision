@@ -49,4 +49,17 @@ export const wichita: CityData = {
       a: "Severe thunderstorms, hail, tornado exposure, intense rainfall, freeze-thaw, and variable clay or alluvial soils are common inputs. Wind load paths, roof and equipment anchorage, drainage, floodplain screening, and geotechnical recommendations should be resolved before a site plan is fixed.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 77, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.wichita.gov/700/Building-Safety"],
+      codes: ["https://www.wichita.gov/700/Building-Safety"],
+      amendments: ["https://www.wichita.gov/700/Building-Safety"],
+      utilities: ["https://www.evergy.com/solutions-and-rebates/business", "https://www.wichita.gov/255/Public-Works-Utilities"],
+      climate: ["https://www.weather.gov/ict/"],
+      market: ["https://www.greaterwichitapartnership.org/"],
+    },
+  },
 };

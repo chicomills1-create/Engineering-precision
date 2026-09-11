@@ -49,4 +49,17 @@ export const cincinnati: CityData = {
       a: "Hillsides, ravines, variable residual soils, retaining needs, and Ohio River flood exposure can materially affect foundations and drainage. MSD stormwater and sewer review, GCWW water coordination, and Ohio EPA construction-stormwater requirements should be addressed early.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 82, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.cincinnati-oh.gov/building-inspections/"],
+      codes: ["https://com.ohio.gov/divisions-and-programs/industrial-compliance/building-code"],
+      amendments: ["https://library.municode.com/oh/cincinnati/codes/code_of_ordinances"],
+      utilities: ["https://www.duke-energy.com/home/products/electric/ohio", "https://www.cincinnati-oh.gov/water/"],
+      climate: ["https://www.weather.gov/iln/"],
+      market: ["https://choosecincy.com/"],
+    },
+  },
 };

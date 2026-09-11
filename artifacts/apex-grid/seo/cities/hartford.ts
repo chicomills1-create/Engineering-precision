@@ -49,4 +49,19 @@ export const hartford: CityData = {
       a: "Eversource provides electric distribution service, and the Metropolitan District Commission provides water and wastewater service. Connecticut River floodplain screening, groundwater, urban fill, glacial soils, and constrained urban utility corridors should be addressed early with City and utility coordination.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11",
+    reviewStatus: "approved",
+    reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 74, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.hartfordct.gov/Government/Departments/Development-Services"],
+      codes: ["https://portal.ct.gov/dcp/building-codes-and-standards"],
+      amendments: ["https://www.hartfordct.gov/Government/Departments/Development-Services/Building-Inspections"],
+      utilities: ["https://www.eversource.com/content/residential", "https://themdc.org/"],
+      climate: ["https://www.fema.gov/flood-maps"],
+      market: ["https://portal.ct.gov/DECD"]
+    }
+  },
 };

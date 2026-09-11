@@ -49,4 +49,17 @@ export const birmingham: CityData = {
       a: "Alabama Power provides electricity, Birmingham Water Works Board provides water, and Jefferson County Environmental Services provides wastewater service. New services, capacity, extensions, easements, and distributed generation should be coordinated while the site and electrical layout are still flexible.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 78, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.birminghamal.gov/1232/Permits-and-Inspections"],
+      codes: ["https://www.birminghamal.gov/1229/Building-Codes"],
+      amendments: ["https://www.birminghamal.gov/1229/Building-Codes"],
+      utilities: ["https://www.alabamapower.com/business.html", "https://www.bwwb.org/"],
+      climate: ["https://www.weather.gov/bmx/"],
+      market: ["https://www.uab.edu/medicine/home/"],
+    },
+  },
 };

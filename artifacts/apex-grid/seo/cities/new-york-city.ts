@@ -49,4 +49,19 @@ export const newYorkCity: CityData = {
       a: "The filing path depends on scope and location. Beyond DOB, zoning or land-use actions can involve City Planning, designated properties can require Landmarks Preservation Commission approval, fire-protection scopes can involve FDNY, and sewer or water connections can require DEP review. Waterfront and coastal flood-zone sites also need flood-resilient design and may involve additional state or federal permits.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11",
+    reviewStatus: "approved",
+    reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 100, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.nyc.gov/site/buildings/index.page"],
+      codes: ["https://www.nyc.gov/site/buildings/codes/2022-construction-codes.page"],
+      amendments: ["https://www.nyc.gov/site/buildings/codes/2022-construction-codes.page", "https://www.nyc.gov/site/dep/environment/local-law-97.page"],
+      utilities: ["https://www.coned.com/en/services-and-outages/service-management", "https://www.nyc.gov/site/dep/about/about-DEP.page"],
+      climate: ["https://www.fema.gov/flood-maps"],
+      market: ["https://www.nyc.gov/site/hpd/about/what-we-do.page"]
+    }
+  },
 };

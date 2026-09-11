@@ -40,4 +40,17 @@ export const lincoln: CityData = {
     { q: "Who provides electric and water service in Lincoln?", a: "Lincoln Electric System provides electricity, and Lincoln Water System provides water and wastewater service. Confirm parcel-specific capacity, service routing, pressure, fire flow, and extension obligations early." },
     { q: "What conditions should a Lincoln site study address?", a: "A Lincoln site study should address Salt Creek or tributary flood hazards where mapped, concentrated storm runoff, variable soils, frost, wind, hail, and tornado exposure. A geotechnical report and early drainage/outfall analysis are especially important on sloped or floodplain-adjacent sites." },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 74, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.lincoln.ne.gov/City/Departments/Building-Safety"],
+      codes: ["https://www.lincoln.ne.gov/City/Departments/Building-Safety/Codes"],
+      amendments: ["https://www.lincoln.ne.gov/City/Departments/Building-Safety/Codes"],
+      utilities: ["https://www.les.com/business", "https://www.lincoln.ne.gov/City/Departments/LTU/Utilities"],
+      climate: ["https://www.weather.gov/oax/"],
+      market: ["https://selectlincoln.org/"],
+    },
+  },
 };

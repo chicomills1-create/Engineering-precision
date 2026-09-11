@@ -49,4 +49,17 @@ export const desMoines: CityData = {
       a: "MidAmerican Energy provides electric service, Des Moines Water Works provides water, and the City manages sanitary sewer and stormwater systems. Cold winters, tight or variable soils, and Des Moines/Raccoon River floodplain conditions make early utility, geotechnical, and drainage coordination important.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 79, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.dsm.city/departments/community_development/permit_development_center/index.php"],
+      codes: ["https://www.legis.iowa.gov/law/administrativeRules/rules?agency=661"],
+      amendments: ["https://www.dsm.city/departments/community_development/permit_development_center/building_codes.php"],
+      utilities: ["https://www.midamericanenergy.com/business", "https://www.dsm.city/departments/public_works-utilities"],
+      climate: ["https://www.weather.gov/dmx/"],
+      market: ["https://www.dsmpartnership.com/"],
+    },
+  },
 };

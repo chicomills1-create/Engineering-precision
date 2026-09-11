@@ -51,4 +51,19 @@ export const boston: CityData = {
       a: "Low-lying and waterfront parcels can be subject to FEMA flood requirements, storm-surge and sea-level-rise resilience analysis, and potentially state wetlands or Chapter 91 review. Elsewhere, the dominant constraint is often the existing building: hidden conditions in historic masonry or timber construction, tight utility corridors, occupied tenants, and excavation beside neighboring foundations must be addressed before a conventional new-build solution is assumed.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11",
+    reviewStatus: "approved",
+    reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 94, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.boston.gov/departments/inspectional-services"],
+      codes: ["https://www.mass.gov/info-details/building-code"],
+      amendments: ["https://www.boston.gov/departments/environment/berdo"],
+      utilities: ["https://www.eversource.com/content/residential", "https://www.bwsc.org/"],
+      climate: ["https://www.fema.gov/flood-maps"],
+      market: ["https://www.mass.gov/orgs/massachusetts-life-sciences-center"]
+    }
+  },
 };

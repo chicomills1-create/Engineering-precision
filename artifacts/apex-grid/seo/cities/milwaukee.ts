@@ -49,4 +49,17 @@ export const milwaukee: CityData = {
       a: "We Energies provides electricity and should review major new loads and interconnection. Milwaukee Water Works provides drinking water; MMSD is central to regional wastewater and stormwater coordination, with City DPW and Wisconsin DNR requirements also affecting site work.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 86, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://city.milwaukee.gov/DNS"],
+      codes: ["https://dsps.wi.gov/Pages/Programs/CommercialBuildings/Default.aspx"],
+      amendments: ["https://city.milwaukee.gov/DNS/Plans-Examinations"],
+      utilities: ["https://www.we-energies.com/", "https://city.milwaukee.gov/water"],
+      climate: ["https://www.weather.gov/mkx/"],
+      market: ["https://www.mmac.org/"],
+    },
+  },
 };

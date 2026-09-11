@@ -51,4 +51,19 @@ export const pittsburgh: CityData = {
       a: "Pittsburgh administers Pennsylvania’s Uniform Construction Code, whose current commercial energy provisions are based on the 2018 IECC. The compliance approach must be coordinated with PLI’s locally administered permit process. In the city’s cold-humid climate, a renovation also needs moisture-safe enclosure details and an early check of Duquesne Light capacity if electrification is planned.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11",
+    reviewStatus: "approved",
+    reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 84, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://pittsburghpa.gov/pli"],
+      codes: ["https://www.pa.gov/agencies/dli/programs-services/plan-review-and-inspection/uc-code"],
+      amendments: ["https://pittsburghpa.gov/pli"],
+      utilities: ["https://www.duquesnelight.com/your-home", "https://www.pittsburghpa.gov/Water"],
+      climate: ["https://www.fema.gov/flood-maps"],
+      market: ["https://pittsburghpa.gov/mayor/economic-development"]
+    }
+  },
 };

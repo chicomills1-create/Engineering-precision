@@ -49,4 +49,19 @@ export const albuquerque: CityData = {
       a: "Although annual precipitation is low, summer monsoons can generate short, intense flows through arroyos and across developed areas. A site needs early review of arroyo/floodplain constraints, tributary flow paths, erosion control, detention, and outfall conditions, often with City and AMAFCA coordination.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11",
+    reviewStatus: "approved",
+    reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 78, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.cabq.gov/planning/building-safety"],
+      codes: ["https://www.rld.nm.gov/construction-industries/other-construction-regulations/building-codes/"],
+      amendments: ["https://www.cabq.gov/planning/building-safety/codes"],
+      utilities: ["https://www.pnm.com/business", "https://www.abcwua.org/"],
+      climate: ["https://www.weather.gov/abq/climate"],
+      market: ["https://www.cabq.gov/economicdevelopment"],
+    },
+  },
 };

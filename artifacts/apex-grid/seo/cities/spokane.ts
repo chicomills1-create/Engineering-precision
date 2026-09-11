@@ -20,6 +20,7 @@ export const spokane: CityData = {
   ],
   research: {
     lastVerified: "2026-09-10", reviewStatus: "approved", reviewedBy: "Apex Grid SEO research",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 82, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://my.spokanecity.org/business/commercial/permit-process"],

@@ -52,4 +52,19 @@ export const newark: CityData = {
       a: "Passaic River and Newark Bay watershed flooding, combined-sewer conditions, intense rain, groundwater, fill, and old utilities can change drainage and foundation options. PSE&G service planning and Newark water/sewer coordination should proceed before the building and site layouts are finalized.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11",
+    reviewStatus: "approved",
+    reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
+    priority: { commercialOpportunity: 87, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.newarknj.gov/departments/engineering"],
+      codes: ["https://www.nj.gov/dca/codes/codreg/"],
+      amendments: ["https://www.newarknj.gov/government/departments/planning"],
+      utilities: ["https://www.pseg.com/", "https://www.newarknj.gov/departments/water-sewer"],
+      climate: ["https://www.fema.gov/flood-maps"],
+      market: ["https://www.newarknj.gov/government/departments/economic-housing-development"]
+    }
+  },
 };

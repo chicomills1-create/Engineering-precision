@@ -49,4 +49,17 @@ export const columbus: CityData = {
       a: "Cold winters bring frost and freeze-thaw exposure, while glacial clays and till can limit infiltration and create variable bearing or groundwater conditions. Columbus drainage and utility review, the City Stormwater Drainage Manual, and Ohio EPA construction-stormwater requirements should be addressed with geotechnical information early in layout.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 92, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.columbus.gov/Business-Development/Building-and-Zoning-Services"],
+      codes: ["https://com.ohio.gov/divisions-and-programs/industrial-compliance/building-code"],
+      amendments: ["https://library.municode.com/oh/columbus/codes/code_of_ordinances"],
+      utilities: ["https://www.aepohio.com/", "https://www.columbus.gov/Services/Public-Utilities"],
+      climate: ["https://www.weather.gov/iln/"],
+      market: ["https://columbusregion.com/"],
+    },
+  },
 };

@@ -49,4 +49,19 @@ export const saltLakeCity: CityData = {
       a: "The 5B cold-dry climate makes it a heating-and-cooling balance: winters bring freeze protection, snow loads, and snow-melt needs, while dry summers favor economizers. Winter inversions and valley air quality push electrification and low-emission systems, aligning with the city's sustainability goals.",
     },
   ],
+  research: {
+    lastVerified: "2026-09-11",
+    reviewStatus: "approved",
+    reviewedBy: "Apex Grid evidence review",
+    supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
+    priority: { commercialOpportunity: 86, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
+    sources: {
+      ahj: ["https://www.slc.gov/buildingservices/"],
+      codes: ["https://dopl.utah.gov/utah-state-construction-code/"],
+      amendments: ["https://www.slc.gov/can/ordinances/"],
+      utilities: ["https://www.rockymountainpower.net/"],
+      climate: ["https://www.weather.gov/slc/climate"],
+      market: ["https://slchamber.com/economic-development/"],
+    },
+  },
 };
