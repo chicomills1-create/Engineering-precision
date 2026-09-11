@@ -159,14 +159,21 @@ function Router() {
   );
 }
 
-function App() {
+export function App({ ssrPath }: { ssrPath?: string } = {}) {
+  const ssrLocation = ssrPath
+    ? Object.assign(
+        () => [ssrPath, (_path: string) => undefined] as [string, (path: string) => void],
+        { searchHook: () => '' },
+      )
+    : undefined;
+
   // Ensure dark mode is active as requested
   useEffect(() => {
     document.documentElement.classList.add('dark');
   }, []);
 
   return (
-    <WouterRouter base={basePath}>
+    <WouterRouter base={basePath} {...(ssrLocation ? { hook: ssrLocation } : {})}>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Router />

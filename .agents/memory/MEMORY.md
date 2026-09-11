@@ -39,3 +39,4 @@
 - [Fresh outreach catch-up](fresh-outreach-catch-up.md) — target 2,207 new provider-accepted openers; historical ambiguous attempts never count or replay.
 - [Nationwide city indexation](nationwide-city-indexation.md) — keep all city URLs live, but index only reviewed local-data pages; directory-lite pages stay noindex until enriched.
 - [Engineering keyword canonicals](engineering-keyword-canonicals.md) — one substantial page per buyer intent; consolidate synonyms and “near me” phrases without inventing locality or guarantees.
+- [React SEO prerender routing](react-seo-prerender-routing.md) — validate final prerendered HTML after SSR, and resolve slashless routes to exact directory indexes before SPA fallback.

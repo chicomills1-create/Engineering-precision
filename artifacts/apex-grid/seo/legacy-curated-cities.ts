@@ -48,7 +48,6 @@ export const LEGACY_CURATED_CITY_KEYS = new Set([
   "minnesota/st-paul",
   "missouri/kansas-city",
   "missouri/saint-louis",
-  "missouri/st-louis",
   "nebraska/lincoln",
   "nebraska/omaha",
   "nevada/henderson",

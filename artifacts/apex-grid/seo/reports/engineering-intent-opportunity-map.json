@@ -176,6 +176,20 @@
       "audience": "Owners, architects, contractors, and facility teams",
       "overlapDecision": "Documentation deliverable complements, but does not duplicate, existing-building evaluation.",
       "decision": "consolidated into existing canonical"
+    },
+    {
+      "slug": "bess-structural",
+      "primaryIntent": "Structural engineering for battery energy storage systems",
+      "canonicalUrl": "https://apexgrideng.com/solutions/bess-structural-engineering/",
+      "decision": "consolidated: the solution page is the stronger single buyer-intent canonical; the industry path is project-type context.",
+      "rationale": "Both pages target structural design of BESS pads, containers, anchorage, and rooftop loads. Keeping one solution canonical avoids splitting the same structural buyer intent."
+    },
+    {
+      "slug": "parking-lot-expansion",
+      "primaryIntent": "Parking lot expansion engineering",
+      "canonicalUrl": "https://apexgrideng.com/solutions/parking-lot-expansion-engineering/",
+      "decision": "consolidated: solution canonical retained; project-type page is the broader project-planning context.",
+      "rationale": "Both pages describe civil design for expanding parking, including grading, drainage, pavement, ADA, and permits. A single solution URL is clearer for the service buyer."
     }
   ]
 }

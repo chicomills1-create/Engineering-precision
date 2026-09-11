@@ -195,6 +195,9 @@ export default function Resources() {
               <span className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-primary" /> 12–24h for most standard requests
               </span>
+              <a href="/sitemap/" className="hover:text-primary transition-colors">
+                Browse the complete site index
+              </a>
             </div>
           </div>
         </div>

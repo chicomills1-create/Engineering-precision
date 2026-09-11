@@ -2,6 +2,7 @@
 
 # compiled output
 dist
+artifacts/apex-grid/.prerender/
 tmp
 out-tsc
 *.tsbuildinfo

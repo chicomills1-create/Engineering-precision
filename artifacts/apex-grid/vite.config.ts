@@ -21,6 +21,7 @@ if (Number.isNaN(port) || port <= 0) {
 
 const basePath = process.env.BASE_PATH;
 const isPostMergeValidation = process.env.POST_MERGE_VALIDATION === '1';
+const isPrerenderBundle = process.env.PRERENDER_BUNDLE === '1';
 
 /** Injects the Google Search Console verification <meta> tag into <head> at
  *  build/dev time when VITE_GOOGLE_SITE_VERIFICATION is set. This ensures
@@ -53,7 +54,7 @@ function staticDirIndex() {
       server.middlewares.use((req, _res, next) => {
         if (req.url) {
           const [pathname, query] = req.url.split('?');
-          if (/^\/(locations|architecture|general-contracting|south-africa|blog|resources|who-we-work-with|project-types|existing-building-engineering|permit-engineering|industries|solutions|government|guides|structural-engineering|mep-engineering|mechanical-engineering|electrical-engineering|plumbing-engineering|civil-engineering|geotechnical-engineering|capabilities|government-contracting|engineering-process|quality-control|professional-engineering|title-24|projects|engineering-reports|jeremy-mills|sitemap|engineering-glossary)(\/|$)/.test(pathname)) {
+          if (/^\/(locations|architecture|general-contracting|south-africa|blog|resources|who-we-work-with|project-types|existing-building-engineering|permit-engineering|industries|solutions|government|guides|structural-engineering|mep-engineering|mechanical-engineering|electrical-engineering|plumbing-engineering|civil-engineering|geotechnical-engineering|capabilities|government-contracting|engineering-process|quality-control|professional-engineering|title-24|projects|engineering-reports|jeremy-mills|sitemap|engineering-glossary|about|contact|for-architects|for-contractors|for-developers|for-property-managers|services|portfolio|military|team|privacy|terms)(\/|$)/.test(pathname)) {
             const rewritten = pathname.endsWith('/')
               ? `${pathname}index.html`
               : !path.extname(pathname)
@@ -72,7 +73,7 @@ export default defineConfig({
   base: basePath,
   // Post-merge validation compiles the real app without copying the 598 MB
   // generated SEO corpus. Normal development and production builds are unchanged.
-  publicDir: isPostMergeValidation ? false : 'public',
+  publicDir: isPostMergeValidation || isPrerenderBundle ? false : 'public',
   plugins: [
     gscVerificationPlugin(),
     staticDirIndex(),
@@ -109,10 +110,10 @@ export default defineConfig({
   build: {
     outDir: path.resolve(
       import.meta.dirname,
-      isPostMergeValidation ? '.post-merge-dist' : 'dist/public',
+      isPostMergeValidation ? '.post-merge-dist' : isPrerenderBundle ? '.prerender' : 'dist/public',
     ),
     emptyOutDir: true,
-    minify: isPostMergeValidation ? false : 'esbuild',
+    minify: isPostMergeValidation || isPrerenderBundle ? false : 'esbuild',
     reportCompressedSize: !isPostMergeValidation,
     rollupOptions: {
       output: {

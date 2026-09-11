@@ -39,7 +39,7 @@
       }
     }
   ],
-  "grandfatheredCuratedCount": 90,
+  "grandfatheredCuratedCount": 89,
   "priorityQueue": [
     {
       "stateSlug": "washington",
@@ -67,9 +67,9 @@
     }
   ],
   "populationReviewSignal": "population below 10000 is flagged for human review; population is not proof of page quality",
-  "indexedCount": 94,
-  "noindexCount": 19232,
-  "excludedCount": 19232,
+  "indexedCount": 93,
+  "noindexCount": 19233,
+  "excludedCount": 19233,
   "excludedReasons": {
     "review-signal-population-below-10000": 16143,
     "city-slug-identity-mismatch": 18

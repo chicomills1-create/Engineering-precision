@@ -104,7 +104,11 @@ async function loadCities(): Promise<CityData[]> {
     const val = Object.values(mod)[0] as CityData;
     cities.push(val);
   }
-  return cities.sort((a, b) => a.name.localeCompare(b.name));
+  // The abbreviated St. Louis dataset is historical source material only;
+  // its old URLs are emitted as redirects to the normalized city tree.
+  return cities
+    .filter((city) => !(city.stateSlug === "missouri" && city.slug === "st-louis"))
+    .sort((a, b) => a.name.localeCompare(b.name));
 }
 
 function isReviewedCity(city: CityData): boolean {
@@ -206,6 +210,9 @@ function allDirectoryCitiesForState(state: StateData, directory: CityDirectory, 
       designation: existing?.designation ?? "City",
     });
   }
+  // Saint Louis is the sole canonical spelling used by the location tree.
+  // The historical "st-louis" paths are emitted as redirects below.
+  if (state.slug === "missouri") bySlug.delete("st-louis");
   return [...bySlug.values()].sort((a, b) => a.name.localeCompare(b.name));
 }
 
@@ -356,7 +363,12 @@ function engineeringIntentPage(page: EngineeringIntentPage): string {
     "@context": "https://schema.org", "@type": "FAQPage",
     mainEntity: page.faqs.map((faq) => ({ "@type": "Question", name: faq.q, acceptedAnswer: { "@type": "Answer", text: faq.a } })),
   };
+  const siblingIntentLinks = ALL_ENGINEERING_INTENT_PAGES
+    .filter((candidate) => candidate.slug !== page.slug)
+    .slice(0, 3)
+    .map((candidate) => [`/engineering-intent/${candidate.slug}/`, candidate.h1] as [string, string]);
   const related = [
+    ["/engineering-intent/", "Engineering support by project stage"],
     ["/services/structural", "Structural Engineering"],
     ["/mep-engineering/", "MEP Engineering"],
     ["/civil-engineering/", "Civil Engineering"],
@@ -364,6 +376,7 @@ function engineeringIntentPage(page: EngineeringIntentPage): string {
     ["/existing-building-engineering/", "Existing Building Engineering"],
     ["/locations/", "Verified Service Areas"],
     ["/contact", "Request a Project Review"],
+    ...siblingIntentLinks,
   ];
   const nearMeLinks = page.slug === "engineering-near-me"
     ? `<section class="block"><div class="container"><h2>Verified service-area <em>information</em></h2><p>These are information pages for specific reviewed markets, not local-office or local-pack claims. Confirm current jurisdiction and project requirements during intake.</p><div class="linkrow"><a href="/locations/">All service areas</a><a href="/locations/arizona/phoenix/">Phoenix, Arizona</a><a href="/locations/arizona/scottsdale/">Scottsdale, Arizona</a><a href="/locations/california/los-angeles/">Los Angeles, California</a><a href="/locations/texas/austin/">Austin, Texas</a><a href="/locations/texas/dallas/">Dallas, Texas</a><a href="/locations/florida/tampa/">Tampa, Florida</a></div></div></section>`
@@ -564,6 +577,9 @@ function assertNoMarkupCity(city: CityData) {
 }
 function statePage(state: StateData, cities: CityData[]): string {
   const stateCities = cities.filter((c) => c.stateSlug === state.slug);
+  const specialtyLocationPages = LOCATION_SERVICE_PAGES.filter((p) => p.stateSlug === state.slug);
+  const specialtyCityRoots = [...new Set(specialtyLocationPages.map((p) => p.citySlug))]
+    .filter((slug) => !stateCities.some((city) => city.slug === slug));
   const availableVerticals = verticalsForState(state.slug);
   const crumbs = [
     { name: "Home", href: "/" },
@@ -585,6 +601,12 @@ ${breadcrumb(crumbs)}
   ).join("")}
   </div>
 </div></section>
+${state.slug === "hawaii" ? `<section class="block"><div class="container">
+  <h2>Engineering Coverage in <em>Honolulu</em></h2>
+  <div class="grid2">
+    <a class="card" href="/locations/hawaii/honolulu/"><div class="label">Honolulu, HI</div><h3>Engineering Services in Honolulu</h3><p>Review the Honolulu service-area page for local project and permitting context.</p></a>
+  </div>
+</div></section>` : ""}
 ${availableVerticals.length ? `<section class="block"><div class="container">
   <h2>Architecture &amp; Construction <em>Coverage</em></h2>
   <div class="grid2">${availableVerticals
@@ -618,6 +640,15 @@ ${
 </div></section>`
     : ""
 }
+${specialtyLocationPages.length ? `<section class="block"><div class="container">
+  <h2>${esc(state.name)} <em>Specialty Location Services</em></h2>
+  ${specialtyCityRoots.length ? `<div class="linkrow">${specialtyCityRoots.map((slug) =>
+    `<a href="/locations/${state.slug}/${slug}/">${esc(slug.replace(/-/g, " "))} service area</a>`
+  ).join("")}</div>` : ""}
+  <div class="linkrow">${specialtyLocationPages.map((p) =>
+    `<a href="/locations/${p.stateSlug}/${p.citySlug}/${p.serviceSlug}/">${esc(p.title)}</a>`
+  ).join("")}</div>
+</div></section>` : ""}
 <section class="ctaband"><div class="container">
   <h2>Build in ${esc(state.name)} with Apex Grid</h2>
   <p>${esc(state.permitting)}</p>
@@ -1031,6 +1062,68 @@ function writeSingleSitemap(filename: string, urls: string[]): void {
   fs.writeFileSync(path.join(PUBLIC, filename), xml);
 }
 
+/** Audit only generated, indexable sitemap HTML. This deliberately ignores
+ * directory-lite/noindex pages and redirect stubs so navigation quality is
+ * measured against the real crawl corpus. */
+export function writeNormalizedInternalLinkReport(): void {
+  const sitemapFiles = fs.readdirSync(PUBLIC)
+    .filter((name) => /^sitemap(?:-[\w-]+)?\.xml$/.test(name));
+  const normalize = (raw: string): string => {
+    try {
+      const parsed = new URL(raw, SITE);
+      let pathname = parsed.pathname.replace(/\/+/g, "/");
+      if (!pathname.endsWith("/")) pathname += "/";
+      return pathname;
+    } catch {
+      return "";
+    }
+  };
+  const urls = new Set<string>();
+  for (const file of sitemapFiles) {
+    const xml = fs.readFileSync(path.join(PUBLIC, file), "utf8");
+    for (const match of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+      const normalized = normalize(match[1]);
+      if (normalized) urls.add(normalized);
+    }
+  }
+  const indexable = new Set<string>();
+  const htmlByPath = new Map<string, string>();
+  for (const url of urls) {
+    const file = path.join(PUBLIC, url.replace(/^\/|\/$/g, ""), "index.html");
+    if (!fs.existsSync(file)) continue;
+    const html = fs.readFileSync(file, "utf8");
+    if (/<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html)
+      || /http-equiv=["']refresh["']/i.test(html)) continue;
+    indexable.add(url);
+    htmlByPath.set(url, html);
+  }
+  const inbound = new Map<string, Set<string>>([...indexable].map((url) => [url, new Set<string>()]));
+  for (const [source, html] of htmlByPath) {
+    for (const match of html.matchAll(/href=["']([^"'#]+)["']/gi)) {
+      const target = normalize(match[1]);
+      if (target && target !== source && indexable.has(target)) inbound.get(target)!.add(source);
+    }
+  }
+  const zeroInbound = [...indexable].filter((url) => inbound.get(url)!.size === 0).sort();
+  const oneOrLess = [...indexable].filter((url) => inbound.get(url)!.size <= 1).sort();
+  const report = {
+    generatedAt: "deterministic",
+    indexablePages: indexable.size,
+    zeroInbound,
+    oneOrLessInbound: oneOrLess,
+    counts: { zeroInbound: zeroInbound.length, oneOrLessInbound: oneOrLess.length },
+    inboundByUrl: Object.fromEntries([...indexable].sort().map((url) => [url, inbound.get(url)!.size])),
+  };
+  const reportDir = path.join(__dirname, "reports");
+  fs.mkdirSync(reportDir, { recursive: true });
+  fs.writeFileSync(path.join(reportDir, "internal-link-report.json"), `${JSON.stringify(report, null, 2)}\n`);
+  const allowlisted = new Set(["/privacy/", "/terms/", "/contact/"]);
+  const failures = zeroInbound.filter((url) => !allowlisted.has(url));
+  if (failures.length) {
+    throw new Error(`SEO assertion failed: ${failures.length} indexable sitemap pages have zero contextual inbound links (see seo/reports/internal-link-report.json)`);
+  }
+}
+
 function writeSitemap(states: StateData[], cities: CityData[], directory: CityDirectory) {
   const today = "";
 
@@ -1093,7 +1186,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const ind of ALL_INDUSTRIES) {
     industriesUrls.push(u(`${SITE}/industries/${ind.slug}`, today, "monthly", "0.8"));
   }
-  for (const idp of INDUSTRY_DISCIPLINE_PAGES) {
+  for (const idp of INDUSTRY_DISCIPLINE_PAGES.filter((page) => !INDUSTRY_REDIRECTS.has(page.segments.join("/")))) {
     industriesUrls.push(u(`${SITE}${getIndustryDisciplineUrl(idp)}`, today, "monthly", "0.8"));
   }
 
@@ -1106,7 +1199,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     solutionsUrls.push(u(`${SITE}/${sp.dir}/${sp.slug}/`, today, "monthly", "0.7"));
   }
   solutionsUrls.push(u(`${SITE}/project-types/`, today, "monthly", "0.8"));
-  for (const pt of PROJECT_TYPE_PAGES) {
+  for (const pt of PROJECT_TYPE_PAGES.filter((page) => !PROJECT_TYPE_REDIRECTS.has(page.slug))) {
     solutionsUrls.push(u(`${SITE}/project-types/${pt.slug}/`, today, "monthly", "0.7"));
   }
   solutionsUrls.push(u(`${SITE}/who-we-work-with/`, today, "monthly", "0.8"));
@@ -1139,19 +1232,8 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const a of RESOURCE_ARTICLES) {
     resourcesUrls.push(u(`${SITE}${resourceUrl(a)}`, today, "monthly", "0.7"));
   }
-  // Legacy resource pages — pre-reorganisation URLs preserved at their original paths
-  for (const slug of [
-    "how-much-does-mep-engineering-cost",
-    "ashrae-90-1-vs-iecc-commercial-energy-code",
-    "commercial-building-permit-process-what-engineers-deliver",
-    "title-24-energy-compliance-commercial-buildings",
-    "vrf-vs-rooftop-unit-commercial-hvac",
-    "what-does-a-structural-engineer-do-that-an-architect-doesnt",
-  ]) {
-    resourcesUrls.push(u(`${SITE}/resources/${slug}/`, today, "monthly", "0.7"));
-  }
   resourcesUrls.push(u(`${SITE}/guides/`, today, "monthly", "0.8"));
-  for (const gp of GUIDE_PAGES) {
+  for (const gp of GUIDE_PAGES.filter((page) => !GUIDE_REDIRECTS.has(page.slug))) {
     resourcesUrls.push(u(`${SITE}/guides/${gp.slug}/`, today, "monthly", "0.7"));
   }
   resourcesUrls.push(u(`${SITE}/blog/`, today, "weekly", "0.7"));
@@ -1394,6 +1476,11 @@ ${RESOURCE_DISCIPLINES.map((disc) => {
     <a class="card" href="/engineering-glossary/"><div class="label">Glossary</div><h3>Engineering Glossary</h3><p>Definitions for 80+ structural, MEP, civil, and geotechnical engineering terms — written for architects, contractors, and owners who encounter unfamiliar language on drawings and specs.</p></a>
     <a class="card" href="/guides/"><div class="label">Guides</div><h3>Engineering Guides</h3><p>Step-by-step guides covering permit submittals, code compliance, coordination workflows, and what to expect at each phase of a project.</p></a>
   </div>
+</div></section>
+<section class="block"><div class="container">
+  <h2>Plan by <em>Project Need</em></h2>
+  <p>Looking for a defined engineering deliverable rather than a general guide? Use the <a href="/engineering-intent/">engineering support hub</a> to compare permit, construction, assessment, and documentation paths.</p>
+  <p class="note">For a complete page index, browse the <a href="/sitemap/">HTML sitemap</a>.</p>
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Ready to Start Your Project?</h2>
@@ -1868,7 +1955,7 @@ function industryDisciplinePage(page: IndustryDisciplinePage): string {
   // Related pages: same industry, different discipline
   const siblings = INDUSTRY_DISCIPLINE_PAGES.filter(
     (p) => p.industrySlug === page.industrySlug && p !== page,
-  ).slice(0, 4);
+  );
 
   // Derive keyword hints from industry slug words + discipline label words
   const industryWords = page.industrySlug.split("-");
@@ -2332,7 +2419,7 @@ function guidePage(page: GuidePage): string {
 
 function guidesHubPage(): string {
   const categories: Record<string, GuidePage[]> = {};
-  for (const p of GUIDE_PAGES) {
+  for (const p of GUIDE_PAGES.filter((page) => !GUIDE_REDIRECTS.has(page.slug))) {
     const cat = p.kicker.split(" · ")[0];
     if (!categories[cat]) categories[cat] = [];
     categories[cat].push(p);
@@ -2385,6 +2472,9 @@ function structuralExtendedPage(page: StructuralExtendedPage): string {
     { name: "Structural Engineering", href: "/structural-engineering/" },
     { name: page.h1 },
   ];
+  const relatedStructural = STRUCTURAL_EXTENDED_PAGES
+    .filter((candidate) => candidate.slug !== page.slug)
+    .slice(0, 4);
   const body = `
     <div class="hero hero--page">
       <div class="hero-inner">
@@ -2410,6 +2500,13 @@ function structuralExtendedPage(page: StructuralExtendedPage): string {
         <a class="btn btn--primary" href="/contact/">${esc(page.ctaText)}</a>
       </div>
     </section>
+    <section class="section section--white"><div class="container">
+      <h2>Related <em>Structural Engineering</em></h2>
+      <div class="card-grid card-grid--3">
+        ${relatedStructural.map((candidate) => `<a class="card" href="/structural-engineering/${candidate.slug}/"><h3>${esc(candidate.h1)}</h3><p>${esc(candidate.lede.slice(0, 120))}…</p></a>`).join("\n")}
+      </div>
+      <a class="btn btn--secondary" href="/structural-engineering/">Back to Structural Engineering</a>
+    </div></section>
     <section class="section section--dark cta-band">
       <div class="container">
         <h2>Ready to Move Forward?</h2>
@@ -2790,6 +2887,15 @@ function disciplineHubPage(hub: DisciplineHub): string {
         `<a class="card" href="/${hub.slug}/${sp.slug}/"><div class="label">${esc(sp.kicker)}</div><h3>${esc(sp.h1)}</h3><p>${esc(sp.lede.slice(0, 120))}…</p></a>`,
     )
     .join("\n          ");
+  const extendedStructuralCards = hub.slug === "structural-engineering"
+    ? `<section class="section section--white"><div class="container">
+        <h2>Structural <em>Specialty Services</em></h2>
+        <p class="lede">Explore focused structural scopes for existing buildings, equipment, site structures, and building modifications.</p>
+        <div class="card-grid card-grid--3">${STRUCTURAL_EXTENDED_PAGES.map((sp) =>
+          `<a class="card" href="/structural-engineering/${sp.slug}/"><div class="label">${esc(sp.kicker)}</div><h3>${esc(sp.h1)}</h3><p>${esc(sp.lede.slice(0, 140))}…</p></a>`
+        ).join("\n")}</div>
+      </div></section>`
+    : "";
 
   const body = `
     <div class="hero hero--page">
@@ -2821,6 +2927,7 @@ function disciplineHubPage(hub: DisciplineHub): string {
         </div>
       </div>
     </section>
+${extendedStructuralCards}
 
     <section class="section section--white">
       <div class="container container--narrow">
@@ -3088,6 +3195,17 @@ async function main() {
     fs.writeFileSync(path.join(legacyDir, "index.html"), legacyLocationRedirectPage(fromPath, toPath));
     pages++;
   }
+  // St. Louis was historically emitted under an abbreviated city slug. Keep
+  // every old service child live, but make the normalized city tree canonical.
+  const stLouisServices = SERVICES.map((service) => service.slug);
+  for (const suffix of ["", ...stLouisServices]) {
+    const fromPath = `/locations/missouri/st-louis/${suffix ? `${suffix}/` : ""}`;
+    const toPath = `/locations/missouri/saint-louis/${suffix ? `${suffix}/` : ""}`;
+    const legacyDir = path.join(PUBLIC, fromPath.replace(/^\/|\/$/g, ""));
+    fs.mkdirSync(legacyDir, { recursive: true });
+    fs.writeFileSync(path.join(legacyDir, "index.html"), legacyLocationRedirectPage(fromPath, toPath));
+    pages++;
+  }
   let verticalPages = 0;
   for (const vertical of LOCATION_VERTICALS) {
     const verticalDir = path.join(PUBLIC, vertical.slug);
@@ -3225,7 +3343,8 @@ async function main() {
     assertSlug(pt.slug);
     const pdir = path.join(ptDir, pt.slug);
     fs.mkdirSync(pdir, { recursive: true });
-    fs.writeFileSync(path.join(pdir, "index.html"), projectTypePage(pt));
+    const redirect = PROJECT_TYPE_REDIRECTS.get(pt.slug);
+    fs.writeFileSync(path.join(pdir, "index.html"), redirect ? redirectPage(redirect.newPath, redirect.title) : projectTypePage(pt));
     pages++;
   }
 
@@ -3265,7 +3384,8 @@ async function main() {
     const segments = idp.segments;
     const dir = path.join(indDisciplineDir, ...segments);
     fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(path.join(dir, "index.html"), industryDisciplinePage(idp));
+    const redirect = INDUSTRY_REDIRECTS.get(segments.join("/"));
+    fs.writeFileSync(path.join(dir, "index.html"), redirect ? redirectPage(redirect.newPath, redirect.title) : industryDisciplinePage(idp));
     pages++;
   }
 
@@ -3290,7 +3410,11 @@ async function main() {
     assertSlug(gp.slug);
     const dir = path.join(guidesDir, gp.slug);
     fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(path.join(dir, "index.html"), guidePage(gp));
+    const redirect = GUIDE_REDIRECTS.get(gp.slug);
+    fs.writeFileSync(
+      path.join(dir, "index.html"),
+      redirect ? redirectPage(redirect.newPath, redirect.title) : guidePage(gp),
+    );
     pages++;
   }
 
@@ -3358,6 +3482,20 @@ async function main() {
           ep.slug === "as-built-existing-condition-documentation" ? `${SITE}/existing-building-engineering/field-verification/` : `${SITE}/services/`,
         audience: ep.audience, overlapDecision: ep.overlap, decision: "consolidated into existing canonical",
       })),
+       {
+         slug: "bess-structural",
+         primaryIntent: "Structural engineering for battery energy storage systems",
+         canonicalUrl: `${SITE}/solutions/bess-structural-engineering/`,
+         decision: "consolidated: the solution page is the stronger single buyer-intent canonical; the industry path is project-type context.",
+         rationale: "Both pages target structural design of BESS pads, containers, anchorage, and rooftop loads. Keeping one solution canonical avoids splitting the same structural buyer intent.",
+       },
+       {
+         slug: "parking-lot-expansion",
+         primaryIntent: "Parking lot expansion engineering",
+         canonicalUrl: `${SITE}/solutions/parking-lot-expansion-engineering/`,
+         decision: "consolidated: solution canonical retained; project-type page is the broader project-planning context.",
+         rationale: "Both pages describe civil design for expanding parking, including grading, drainage, pavement, ADA, and permits. A single solution URL is clearer for the service buyer.",
+       },
     ],
   }, null, 2)}\n`);
   if (/"24-hour turnaround|24–hour turnaround|guaranteed (?:completion|approval)|local offices|coverage everywhere|fixed-fee proposal/i.test(JSON.stringify(SOLUTION_PAGES))) {
@@ -3395,16 +3533,6 @@ async function main() {
     const dir = path.join(glossaryDir, gt.slug);
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(path.join(dir, "index.html"), glossaryPage(gt));
-    pages++;
-  }
-
-  // Structural extended subpages (additional spec-slug pages under /structural-engineering/)
-  const structuralHubDir = path.join(PUBLIC, "structural-engineering");
-  for (const sp of STRUCTURAL_EXTENDED_PAGES) {
-    assertSlug(sp.slug);
-    const spDir = path.join(structuralHubDir, sp.slug);
-    if (!fs.existsSync(spDir)) fs.mkdirSync(spDir, { recursive: true });
-    fs.writeFileSync(path.join(spDir, "index.html"), structuralExtendedPage(sp));
     pages++;
   }
 
@@ -3467,6 +3595,17 @@ async function main() {
       fs.writeFileSync(path.join(spDir, "index.html"), disciplineSubpagePage(hub, sp));
       pages++;
     }
+  }
+
+  // Additional structural pages must be written after the discipline hub,
+  // because rebuilding that hub clears its directory first.
+  const structuralHubDir = path.join(PUBLIC, "structural-engineering");
+  for (const sp of STRUCTURAL_EXTENDED_PAGES) {
+    assertSlug(sp.slug);
+    const spDir = path.join(structuralHubDir, sp.slug);
+    fs.mkdirSync(spDir, { recursive: true });
+    fs.writeFileSync(path.join(spDir, "index.html"), structuralExtendedPage(sp));
+    pages++;
   }
 
   // Misc standalone pages (capabilities, government-contracting, trust pages)
@@ -3677,10 +3816,12 @@ async function main() {
   console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${verticalPages} architecture/GC vertical pages, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PARTNER_PAGES.length} construction partner pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${INDUSTRY_DISCIPLINE_PAGES.length} industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, 1 sitemap page + sitemap.xml`);
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}
 
 function cityServicePage(state: StateData, city: CityData, svc: ServiceDef, siblingCities: CityData[]): string {
   const url = `/locations/${state.slug}/${city.slug}/${svc.slug}/`;
@@ -3796,6 +3937,9 @@ function cityPage(state: StateData, city: CityData, siblingCities: CityData[]): 
   ];
   const nearby = siblingCities.filter((c) => c.slug !== city.slug);
   const availableVerticals = verticalsForState(state.slug);
+  const specialtyLocationPages = LOCATION_SERVICE_PAGES.filter(
+    (p) => p.stateSlug === state.slug && p.citySlug === city.slug,
+  );
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -3855,6 +3999,12 @@ ${breadcrumb(crumbs)}
   ${city.faqs.map((faq) => `<details><summary>${esc(faq.q)}</summary><div class="a">${esc(faq.a)}</div></details>`).join("")}
 </div></section>
 ${citySourceList(city)}
+${specialtyLocationPages.length ? `<section class="block"><div class="container">
+  <h2>${esc(city.name)} <em>Specialty Services</em></h2>
+  <div class="linkrow">${specialtyLocationPages.map((p) =>
+    `<a href="/locations/${p.stateSlug}/${p.citySlug}/${p.serviceSlug}/">${esc(p.title)}</a>`
+  ).join("")}</div>
+</div></section>` : ""}
 <section class="block"><div class="container">
   <h2>More <em>Locations</em></h2>
   <div class="linkrow">${nearby
@@ -4044,3 +4194,23 @@ const LEGACY_RESOURCE_REDIRECTS: Array<{ slug: string; newPath: string; title: s
   { slug: "title-24-energy-compliance-commercial-buildings",           newPath: "/title-24/",                                         title: "California Title 24 Energy Compliance" },
   { slug: "vrf-vs-rooftop-unit-commercial-hvac",                      newPath: "/resources/mep/hvac-load-calculation/",               title: "VRF vs. Rooftop Unit — HVAC Resources" },
 ];
+
+/** Guide URLs whose intent is fully served by the deeper resource article. */
+const GUIDE_REDIRECTS = new Map<string, { newPath: string; title: string }>([
+  ["structural-engineering-cost", { newPath: "/resources/structural/structural-engineering-cost/", title: "How Much Does Structural Engineering Cost?" }],
+  ["mep-engineering-cost", { newPath: "/resources/mep/mep-engineering-cost/", title: "How Much Does MEP Engineering Cost?" }],
+  ["mep-engineering-timeline", { newPath: "/resources/mep/mep-engineering-timeline/", title: "How Long Does MEP Engineering Take?" }],
+  ["what-does-pe-stamp-mean", { newPath: "/resources/permit/what-is-a-pe-stamp/", title: "What Does a PE Stamp Mean?" }],
+]);
+const INDUSTRY_REDIRECTS = new Map<string, { newPath: string; title: string }>([
+  ["renewable-energy/battery-storage-structural", {
+    newPath: "/solutions/bess-structural-engineering/",
+    title: "Structural Engineering for Battery Energy Storage Systems",
+  }],
+]);
+const PROJECT_TYPE_REDIRECTS = new Map<string, { newPath: string; title: string }>([
+  ["parking-expansions", {
+    newPath: "/solutions/parking-lot-expansion-engineering/",
+    title: "Parking Lot Expansion Engineering",
+  }],
+]);

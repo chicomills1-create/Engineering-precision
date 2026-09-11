@@ -129,6 +129,30 @@ if (fs.existsSync(staticRoot)) {
       app.get(from, (_req, res) => res.redirect(301, to));
     }
   }
+  // Keep canonical marketing URLs slashless while still serving their exact
+  // prerendered directory index. express.static with redirects disabled only
+  // resolves the trailing-slash form and would otherwise fall through to the
+  // generic SPA shell.
+  app.use((req, res, next) => {
+    if (req.method !== "GET" && req.method !== "HEAD") return next();
+    if (req.path === "/" || path.extname(req.path)) return next();
+
+    let relativePath: string;
+    try {
+      relativePath = decodeURIComponent(req.path).replace(/^\/+|\/+$/g, "");
+    } catch {
+      return next();
+    }
+
+    const directoryIndex = path.resolve(staticRoot, relativePath, "index.html");
+    if (
+      directoryIndex.startsWith(`${staticRoot}${path.sep}`) &&
+      fs.existsSync(directoryIndex)
+    ) {
+      return res.sendFile(directoryIndex);
+    }
+    return next();
+  });
   app.use(express.static(staticRoot, { index: "index.html", redirect: false }));
 }
 

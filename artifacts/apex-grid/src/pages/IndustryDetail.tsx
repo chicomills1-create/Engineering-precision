@@ -4,9 +4,59 @@ import { getIndustry, INDUSTRIES_BY_CLUSTER } from "@/data/industries";
 import { usePageMeta, useJsonLd, SITE_URL } from "@/lib/seo";
 import NotFound from "./not-found";
 
+const INDUSTRY_DISCIPLINE_ROOTS: Record<string, string> = {
+  "healthcare-engineering": "healthcare",
+  "agriculture-cannabis-facility-engineering": "agriculture",
+  "industrial-warehouse-engineering": "industrial-warehouse",
+  "multifamily-residential-engineering": "multifamily",
+  "data-center-engineering": "data-centers",
+  "manufacturing-facility-engineering": "manufacturing",
+  "military-defense-engineering": "military-defense",
+  "life-science-laboratory-engineering": "life-science",
+  "restaurants-food-service-engineering": "restaurants",
+  "student-housing-engineering": "student-housing",
+};
+
+const DISCIPLINE_SLUGS: Record<string, string> = {
+  "structural engineering": "structural-engineering",
+  "mep engineering": "mep-engineering",
+  "mechanical engineering": "mechanical-engineering",
+  "electrical engineering": "electrical-engineering",
+  "civil engineering": "civil-engineering",
+  "geotechnical engineering": "geotechnical-engineering",
+};
+
+const INDUSTRY_SPECIALTY_LINKS: Record<string, { href: string; label: string }[]> = {
+  "agriculture-cannabis-facility-engineering": [{ href: "/industries/cannabis/mep-engineering/", label: "Cannabis facility MEP engineering" }],
+  "data-center-engineering": [{ href: "/industries/distribution-centers/engineering/", label: "Distribution center engineering" }],
+  "healthcare-engineering": [
+    { href: "/industries/healthcare/clinics/mep-engineering/", label: "Clinic MEP engineering" },
+    { href: "/industries/healthcare/hospitals/mep-engineering/", label: "Hospital MEP engineering" },
+    { href: "/industries/healthcare/medical-office-buildings/mep-engineering/", label: "Medical office MEP engineering" },
+  ],
+  "industrial-warehouse-engineering": [
+    { href: "/industries/industrial-warehouse/warehouse-mep-engineering/", label: "Warehouse MEP engineering" },
+    { href: "/industries/industrial-warehouse/warehouse-structural-engineering/", label: "Warehouse structural engineering" },
+  ],
+  "life-science-cleanroom-engineering": [{ href: "/industries/life-science/cleanroom-mep-engineering/", label: "Cleanroom MEP engineering" }],
+  "manufacturing-facility-engineering": [
+    { href: "/industries/manufacturing/mep-engineering/", label: "Manufacturing MEP engineering" },
+    { href: "/industries/manufacturing/structural-engineering/", label: "Manufacturing structural engineering" },
+  ],
+  "military-defense-engineering": [{ href: "/industries/military-defense/mechanical-engineering/", label: "Military mechanical engineering" }],
+  "multifamily-residential-engineering": [
+    { href: "/industries/multifamily/apartments/mep-engineering/", label: "Apartment MEP engineering" },
+    { href: "/industries/multifamily/apartments/structural-engineering/", label: "Apartment structural engineering" },
+    { href: "/industries/student-housing/mep-engineering/", label: "Student housing MEP engineering" },
+  ],
+  "restaurants-food-service-engineering": [{ href: "/industries/restaurants/commercial-kitchen-mep/", label: "Commercial kitchen MEP engineering" }],
+};
+
 export default function IndustryDetail() {
   const { slug } = useParams<{ slug: string }>();
   const industry = getIndustry(slug ?? "");
+  const disciplineRoot = industry ? INDUSTRY_DISCIPLINE_ROOTS[industry.slug] : undefined;
+  const specialtyLinks = industry ? INDUSTRY_SPECIALTY_LINKS[industry.slug] ?? [] : [];
 
   usePageMeta({
     title: industry ? industry.title : "Industry Not Found | Apex Grid Engineering",
@@ -105,7 +155,9 @@ export default function IndustryDetail() {
             {industry.disciplines.map((d) => (
               <div key={d.name} className="border border-border p-8 bg-card/50">
                 <h3 className="text-2xl font-display font-bold mb-4">
-                  {d.href ? (
+                  {disciplineRoot && DISCIPLINE_SLUGS[d.name.toLowerCase()] ? (
+                    <Link href={`/industries/${disciplineRoot}/${DISCIPLINE_SLUGS[d.name.toLowerCase()]}/`} className="hover:text-primary transition-colors">{d.name}</Link>
+                  ) : d.href ? (
                     <Link href={d.href} className="hover:text-primary transition-colors">{d.name}</Link>
                   ) : (
                     d.name
@@ -132,6 +184,21 @@ export default function IndustryDetail() {
           </div>
         </div>
       </section>
+
+      {specialtyLinks.length > 0 && (
+        <section className="py-16 bg-muted/30">
+          <div className="container mx-auto px-4 md:px-8">
+            <h2 className="text-3xl font-display font-bold mb-8">Specialty <span className="text-primary">Project Types</span></h2>
+            <div className="flex flex-wrap gap-3">
+              {specialtyLinks.map((link) => (
+                <Link key={link.href} href={link.href} className="border border-border bg-card px-5 py-3 text-sm font-medium hover:border-primary transition-colors">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Facility types / project types / deliverables */}
       <section className="py-24 bg-card border-t border-border">
