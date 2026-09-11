@@ -40,6 +40,7 @@
 - [Outreach verification handoff](outreach-verification-handoff.md) — confirm a named leader on the official company site before using FindyMail for a same-domain address.
 - [Fresh outreach catch-up](fresh-outreach-catch-up.md) — target 2,207 new provider-accepted openers; historical ambiguous attempts never count or replay.
 - [Nationwide city indexation](nationwide-city-indexation.md) — keep all city URLs live, but index only reviewed local-data pages; directory-lite pages stay noindex until enriched.
+- [Census place population refresh](census-place-population.md) — the Census API now redirects keyless calls to HTML; use the downloadable ACS table file and join place GEOIDs.
 - [Engineering keyword canonicals](engineering-keyword-canonicals.md) — one substantial page per buyer intent; consolidate synonyms and “near me” phrases without inventing locality or guarantees.
 - [React SEO prerender routing](react-seo-prerender-routing.md) — validate final prerendered HTML after SSR, and resolve slashless routes to exact directory indexes before SPA fallback.
 - [Prerendered AEO schema](prerendered-aeo-schema.md) — React effect-based JSON-LD is absent from static HTML; critical FAQ schema must render during SSR and match visible answers.

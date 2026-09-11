@@ -5,6 +5,8 @@ export interface DirectoryCity {
   slug: string;
   name: string;
   pop?: number;
+  populationYear?: number;
+  populationSource?: string;
   geoid?: string;
   designation?: string;
   lat?: number;

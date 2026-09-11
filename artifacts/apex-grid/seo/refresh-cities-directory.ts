@@ -16,6 +16,9 @@ import {
 
 const GAZETTEER_URL =
   "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2025_Gazetteer/2025_Gaz_place_national.zip";
+const ACS_POPULATION_YEAR = 2024;
+const ACS_POPULATION_URL =
+  `https://www2.census.gov/programs-surveys/acs/summary_file/${ACS_POPULATION_YEAR}/table-based-SF/data/5YRData/acsdt5y${ACS_POPULATION_YEAR}-b01003.dat`;
 const DIRECTORY_PATH = path.join(import.meta.dirname, "cities-directory.json");
 
 interface ExistingCity {
@@ -39,6 +42,8 @@ interface DirectoryCity extends ExistingCity {
   lsad: string;
   lat: number;
   lng: number;
+  populationYear?: number;
+  populationSource?: string;
 }
 
 type CityDirectory = Record<string, ExistingCity[]>;
@@ -172,6 +177,29 @@ async function main() {
   const stateFipsToAbbreviation: Record<string, string> = {
     "01": "AL", "02": "AK", "04": "AZ", "05": "AR", "06": "CA", "08": "CO", "09": "CT", "10": "DE", "12": "FL", "13": "GA", "15": "HI", "16": "ID", "17": "IL", "18": "IN", "19": "IA", "20": "KS", "21": "KY", "22": "LA", "23": "ME", "24": "MD", "25": "MA", "26": "MI", "27": "MN", "28": "MS", "29": "MO", "30": "MT", "31": "NE", "32": "NV", "33": "NH", "34": "NJ", "35": "NM", "36": "NY", "37": "NC", "38": "ND", "39": "OH", "40": "OK", "41": "OR", "42": "PA", "44": "RI", "45": "SC", "46": "SD", "47": "TN", "48": "TX", "49": "UT", "50": "VT", "51": "VA", "53": "WA", "54": "WV", "55": "WI", "56": "WY",
   };
+  const populationByGeoid = new Map<string, number>();
+  const populationResponse = await fetch(ACS_POPULATION_URL, {
+    headers: { "User-Agent": "Apex-Grid-Census-Directory-Refresh/1.0" },
+  });
+  if (!populationResponse.ok) {
+    throw new Error(`Census ACS population download failed: ${populationResponse.status} ${populationResponse.statusText}`);
+  }
+  const [populationHeader, ...populationRows] = (await populationResponse.text()).trim().split(/\r?\n/);
+  const populationColumns = populationHeader.split("|");
+  const geoidIndex = populationColumns.indexOf("GEO_ID");
+  const populationIndex = populationColumns.indexOf("B01003_E001");
+  if (geoidIndex < 0 || populationIndex < 0) {
+    throw new Error(`Unexpected Census ACS population columns: ${populationHeader}`);
+  }
+  for (const row of populationRows) {
+    const values = row.split("|");
+    const geoId = values[geoidIndex] ?? "";
+    if (!geoId.startsWith("1600000US")) continue;
+    const population = Number(values[populationIndex]);
+    if (Number.isFinite(population) && population > 0) {
+      populationByGeoid.set(geoId.slice("1600000US".length), population);
+    }
+  }
   for (const city of source) {
     const stateSlug = STATE_SLUGS[stateFipsToAbbreviation[city.GEOID.slice(0, 2)] ?? ""];
     if (!stateSlug || !Object.hasOwn(current, stateSlug) || city.FUNCSTAT !== "A" || city.LSAD === "57") continue;
@@ -198,7 +226,8 @@ async function main() {
         while (used.has(slug)) slug = `${baseSlug}-${city.GEOID}-${suffix++}`;
       }
       used.add(slug);
-      const pop = priorPopulation.get(`${stateSlug}/${slug}`);
+      const acsPopulation = populationByGeoid.get(city.GEOID);
+      const pop = acsPopulation ?? priorPopulation.get(`${stateSlug}/${slug}`);
       const latitude = Number(city.INTPTLAT);
       const longitude = Number(city.INTPTLONG);
       if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
@@ -210,6 +239,12 @@ async function main() {
         slug,
         name,
         ...(pop === undefined ? {} : { pop }),
+        ...(acsPopulation === undefined
+          ? {}
+          : {
+              populationYear: ACS_POPULATION_YEAR,
+              populationSource: ACS_POPULATION_URL,
+            }),
         geoid: city.GEOID,
         designation,
         lsad: city.LSAD,

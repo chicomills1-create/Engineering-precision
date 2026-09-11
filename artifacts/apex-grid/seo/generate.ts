@@ -262,7 +262,7 @@ function allDirectoryCitiesForState(state: StateData, directory: CityDirectory, 
 
 /** Conservative gate for Census-directory pages: only publish pages with enough
  * independently useful identity data to avoid state-copy doorway pages. */
-const LITE_CITY_MIN_POPULATION = 10_000;
+const LITE_CITY_MIN_POPULATION = 2_500;
 type CityQualityDecision = { state: string; slug: string; name: string; status: "indexed" | "excluded"; reasons: string[] };
 function diagnosticSlug(name: string): string {
   return name.normalize("NFKD").replace(/\p{M}/gu, "").toLowerCase().replace(/[^\p{Letter}\p{Number}]+/gu, "-").replace(/^-|-$/g, "");
@@ -810,7 +810,12 @@ function cityLitePage(state: StateData, city: DirectoryCity, siblings: Directory
   const nearby =
     indexable && Number.isFinite(city.lat) && Number.isFinite(city.lng)
       ? siblings
-          .filter((item) => item.slug !== city.slug && Number.isFinite(item.lat) && Number.isFinite(item.lng))
+          .filter((item) =>
+            item.slug !== city.slug
+            && Number.isFinite(item.lat)
+            && Number.isFinite(item.lng)
+            && assessLiteCity(state, item).status === "indexed"
+          )
           .map((item) => ({
             city: item,
             distance: Math.hypot((item.lat ?? 0) - (city.lat ?? 0), (item.lng ?? 0) - (city.lng ?? 0)),
@@ -823,7 +828,9 @@ function cityLitePage(state: StateData, city: DirectoryCity, siblings: Directory
   // doorway grid with other noindex pages. Only reviewed city owners are
   // useful contextual destinations from this page.
   const curatedInState = curated.filter((c) => c.stateSlug === state.slug && isReviewedCity(c));
-  const populationContext = city.pop ? ` (population approximately ${city.pop.toLocaleString("en-US")})` : "";
+  const populationContext = city.pop
+    ? ` (population approximately ${city.pop.toLocaleString("en-US")}${city.populationYear ? ` based on the ${city.populationYear} American Community Survey` : ""})`
+    : "";
   const availableVerticals = indexable ? verticalsForState(state.slug) : [];
   const capabilityClusters = [
     ["MEP Engineering", "Mechanical and HVAC design, electrical power and lighting, plumbing systems, equipment coordination, controls, and multidisciplinary MEP documentation."],
@@ -3925,8 +3932,15 @@ async function main() {
   }
   const locationsXml = fs.readFileSync(path.join(PUBLIC, "sitemap-locations.xml"), "utf8");
   const liteCandidate = Object.entries(directory).flatMap(([state, entries]) => entries.map((city) => ({ state, city })))
-    .find(({ state, city }) => !cities.some((c) => c.stateSlug === state && c.slug === city.slug) &&
-      !RETAINED_LEGACY_LOCATIONS.some((r) => r.stateSlug === state && r.city.slug === city.slug));
+    .find(({ state, city }) => {
+      const stateData = states.find((entry) => entry.slug === state);
+      return Boolean(
+        stateData
+        && assessLiteCity(stateData, city).status === "excluded"
+        && !cities.some((c) => c.stateSlug === state && c.slug === city.slug)
+        && !RETAINED_LEGACY_LOCATIONS.some((r) => r.stateSlug === state && r.city.slug === city.slug)
+      );
+    });
   if (liteCandidate) {
     const litePath = path.join(PUBLIC, "locations", liteCandidate.state, liteCandidate.city.slug, "index.html");
     const liteHtml = fs.readFileSync(litePath, "utf8");
