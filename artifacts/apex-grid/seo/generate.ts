@@ -3826,68 +3826,76 @@ async function main() {
     throw new Error("SEO assertion failed: sitemap contains wall-clock lastmod");
   }
 
-  if (process.env.SKIP_SEARCH_ENGINE_SUBMISSION === "1") {
-    console.log("Search-engine submission skipped by SKIP_SEARCH_ENGINE_SUBMISSION=1.");
-  } else {
-    // Google deprecated their ping URL in 2023. GSC and the robots.txt sitemap
-    // directive are the correct Google discovery paths; Bing still accepts a ping.
-    const sitemapIndexUrl = `${SITE}/sitemap_index.xml`;
-    try {
-      const bingRes = await fetch(`https://www.bing.com/ping?sitemap=${encodeURIComponent(sitemapIndexUrl)}`);
-      console.log(`Bing ping: ${bingRes.status}`);
-    } catch {
-      console.log("Bing ping skipped (no network).");
-    }
-
-    // Submit all generated URLs to IndexNow in protocol-safe batches.
-    const INDEXNOW_KEY = "b3d4e5f6a7c8d9e0f1a2b3c4d5e6f7a8";
-    const INDEXNOW_HOST = new URL(SITE).hostname;
-    try {
-    // Collect all <loc> values from every sitemap file the index references.
-    const indexXml = fs.readFileSync(path.join(PUBLIC, "sitemap_index.xml"), "utf8");
-    const sitemapNames = [...indexXml.matchAll(/<loc>[^<]*\/([^/<]+\.xml)<\/loc>/g)].map((m) => m[1]);
-    const allUrls: string[] = [];
-    for (const name of sitemapNames) {
-      const filePath = path.join(PUBLIC, name);
-      if (!fs.existsSync(filePath)) continue;
-      const xml = fs.readFileSync(filePath, "utf8");
-      const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-      allUrls.push(...locs);
-    }
-    if (allUrls.length === 0) {
-      console.log("IndexNow skipped (no URLs found in sitemaps).");
-    } else {
-      const BATCH = 10_000;
-      let submitted = 0;
-      for (let i = 0; i < allUrls.length; i += BATCH) {
-        const batch = allUrls.slice(i, i + BATCH);
-        const res = await fetch("https://api.indexnow.org/indexnow", {
-          method: "POST",
-          headers: { "Content-Type": "application/json; charset=utf-8" },
-          body: JSON.stringify({
-            host: INDEXNOW_HOST,
-            key: INDEXNOW_KEY,
-            keyLocation: `${SITE}/${INDEXNOW_KEY}.txt`,
-            urlList: batch,
-          }),
-        });
-        submitted += batch.length;
-        console.log(`IndexNow batch ${Math.ceil((i + BATCH) / BATCH)}: ${res.status} (${batch.length} URLs)`);
-      }
-      console.log(`IndexNow: submitted ${submitted} URLs total.`);
-    }
-    } catch {
-      console.log("IndexNow skipped (no network).");
-    }
-  }
-
   const dirCount = Object.values(directory).reduce((a, v) => a + v.length, 0);
   const disciplineSubpageCount = DISCIPLINE_HUBS.reduce((a, h) => a + h.subpages.length, 0);
   console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${verticalPages} architecture/GC vertical pages, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PARTNER_PAGES.length} construction partner pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${CANONICAL_INDUSTRY_DISCIPLINE_PAGES.length} canonical industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, 1 sitemap page + sitemap.xml`);
 }
 
+async function notifySearchEngines() {
+  const sitemapIndexPath = path.join(PUBLIC, "sitemap_index.xml");
+  if (!fs.existsSync(sitemapIndexPath)) {
+    throw new Error("Search-engine notification requires generated sitemaps. Run seo:generate first.");
+  }
+
+  // Google deprecated their ping URL in 2023. GSC and the robots.txt sitemap
+  // directive are the correct Google discovery paths; Bing still accepts a ping.
+  const sitemapIndexUrl = `${SITE}/sitemap_index.xml`;
+  const bingRes = await fetch(`https://www.bing.com/ping?sitemap=${encodeURIComponent(sitemapIndexUrl)}`);
+  console.log(`Bing ping: ${bingRes.status}`);
+  if (!bingRes.ok) {
+    throw new Error(`Bing sitemap ping failed with status ${bingRes.status}.`);
+  }
+
+  // Submit all generated URLs to IndexNow in protocol-safe batches.
+  const INDEXNOW_KEY = "b3d4e5f6a7c8d9e0f1a2b3c4d5e6f7a8";
+  const INDEXNOW_HOST = new URL(SITE).hostname;
+  const indexXml = fs.readFileSync(sitemapIndexPath, "utf8");
+  const sitemapNames = [...indexXml.matchAll(/<loc>[^<]*\/([^/<]+\.xml)<\/loc>/g)].map((m) => m[1]);
+  const allUrls: string[] = [];
+  for (const name of sitemapNames) {
+    const filePath = path.join(PUBLIC, name);
+    if (!fs.existsSync(filePath)) {
+      throw new Error(`Search-engine notification is missing referenced sitemap: ${name}`);
+    }
+    const xml = fs.readFileSync(filePath, "utf8");
+    const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+    allUrls.push(...locs);
+  }
+  if (allUrls.length === 0) {
+    throw new Error("Search-engine notification found no URLs in generated sitemaps.");
+  }
+
+  const BATCH = 10_000;
+  let submitted = 0;
+  for (let i = 0; i < allUrls.length; i += BATCH) {
+    const batch = allUrls.slice(i, i + BATCH);
+    const res = await fetch("https://api.indexnow.org/indexnow", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify({
+        host: INDEXNOW_HOST,
+        key: INDEXNOW_KEY,
+        keyLocation: `${SITE}/${INDEXNOW_KEY}.txt`,
+        urlList: batch,
+      }),
+    });
+    console.log(`IndexNow batch ${Math.ceil((i + BATCH) / BATCH)}: ${res.status} (${batch.length} URLs)`);
+    if (!res.ok) {
+      throw new Error(`IndexNow submission failed with status ${res.status}.`);
+    }
+    submitted += batch.length;
+  }
+  console.log(`IndexNow: submitted ${submitted} URLs total.`);
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  main().catch((e) => {
+  const command = process.argv[2];
+  const operation = command === "--notify-search-engines"
+    ? notifySearchEngines()
+    : command
+      ? Promise.reject(new Error(`Unknown argument: ${command}`))
+      : main();
+  operation.catch((e) => {
     console.error(e);
     process.exit(1);
   });

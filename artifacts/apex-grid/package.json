@@ -9,6 +9,7 @@
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit && pnpm run seo:check:route-ownership && pnpm run seo:audit:claims",
     "seo:generate": "tsx seo/generate.ts",
+    "seo:notify-search-engines": "tsx seo/generate.ts --notify-search-engines",
     "seo:check:route-ownership": "tsx -e \"import { assertRouteOwnership } from './seo/route-ownership.ts'; assertRouteOwnership();\"",
     "seo:check:bylines": "tsx seo/check-blog-authorship.ts",
     "seo:cities:refresh": "tsx seo/refresh-cities-directory.ts",
