@@ -34,6 +34,7 @@
   <url><loc>https://apexgrideng.com/general-contracting/locations/arizona/goodyear/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/arizona/guadalupe/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/arizona/holbrook/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/arizona/kearny/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/arizona/kingman/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/arizona/lake-havasu-city/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/arizona/litchfield-park/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -63,6 +64,7 @@
   <url><loc>https://apexgrideng.com/general-contracting/locations/arizona/snowflake/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/arizona/somerton/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/arizona/south-tucson/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/arizona/springerville/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/arizona/st-johns/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/arizona/star-valley/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/arizona/superior/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -114,10 +116,12 @@
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/bell-gardens/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/bellflower/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/belmont/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/california/belvedere/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/benicia/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/berkeley/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/beverly-hills/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/big-bear-lake/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/california/biggs/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/bishop/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/blythe/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/brawley/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -158,6 +162,7 @@
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/clovis/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/coachella/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/coalinga/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/california/colfax/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/colton/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/colusa/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/commerce/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -245,6 +250,7 @@
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/hercules/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/hermosa-beach/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/hesperia/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/california/hidden-hills/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/highland/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/hillsborough/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/hollister/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -389,6 +395,7 @@
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/pomona/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/port-hueneme/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/porterville/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/california/portola/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/portola-valley/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/poway/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/rancho-cordova/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -432,6 +439,7 @@
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/san-jacinto/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/san-joaquin/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/san-jose/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/california/san-juan-bautista/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/san-juan-capistrano/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/san-leandro/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/california/san-luis-obispo/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -554,7 +562,9 @@
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/burien/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/burlington/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/camas/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/washington/carnation/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/cashmere/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/washington/castle-rock/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/centralia/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/chehalis/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/chelan/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -566,6 +576,7 @@
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/college-place/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/colville/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/connell/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/washington/cosmopolis/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/covington/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/dayton/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/deer-park/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -589,6 +600,7 @@
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/forks/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/friday-harbor/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/gig-harbor/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/washington/gold-bar/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/goldendale/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/grandview/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/granger/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -615,6 +627,7 @@
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/maple-valley/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/marysville/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/mattawa/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/washington/mccleary/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/medical-lake/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/medina/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/mercer-island/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -627,11 +640,14 @@
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/mountlake-terrace/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/moxee/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/mukilteo/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/washington/napavine/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/newcastle/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/washington/newport/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/normandy-park/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/north-bend/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/oak-harbor/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/ocean-shores/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/washington/okanogan/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/olympia/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/omak/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/orting/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -646,6 +662,7 @@
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/pullman/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/puyallup/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/quincy/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/washington/rainier/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/raymond/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/redmond/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/renton/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -669,6 +686,7 @@
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/sumner/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/sunnyside/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/tacoma/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/washington/tenino/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/toppenish/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/tukwila/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/tumwater/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -681,7 +699,9 @@
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/washougal/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/wenatchee/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/west-richland/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/washington/westport/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/white-salmon/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://apexgrideng.com/general-contracting/locations/washington/winlock/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/woodinville/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/woodland/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://apexgrideng.com/general-contracting/locations/washington/yakima/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
