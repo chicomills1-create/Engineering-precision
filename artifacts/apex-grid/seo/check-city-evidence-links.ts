@@ -21,11 +21,131 @@ export interface EvidenceTarget {
   references: EvidenceReference[];
 }
 
-export type LinkStatus = "ok" | "http-error" | "inaccessible" | "off-domain-redirect" | "generic-redirect";
+export type LinkStatus = "ok" | "reviewed-exception" | "http-error" | "inaccessible" | "off-domain-redirect" | "generic-redirect";
+
+interface ReviewedException {
+  reviewedOn: string;
+  reason: string;
+  expectedStatus: Exclude<LinkStatus, "ok" | "reviewed-exception">;
+  expectedStatusCode?: number;
+  expectedNetworkErrorCode?: string;
+}
+
+const REVIEWED_EXCEPTIONS: Readonly<Record<string, ReviewedException>> = {
+  "https://codes.iccsafe.org/content/AZTEMPEBC2018P1": {
+    reviewedOn: "2026-09-11",
+    reason: "Official ICC code text remains available to browsers but rejects this safe automated health check.",
+    expectedStatus: "http-error",
+    expectedStatusCode: 403,
+  },
+  "https://codes.iccsafe.org/content/IBC2024V2.0": {
+    reviewedOn: "2026-09-11",
+    reason: "Official ICC code text remains available to browsers but rejects this safe automated health check.",
+    expectedStatus: "http-error",
+    expectedStatusCode: 403,
+  },
+  "https://codes.iccsafe.org/content/IECC2024": {
+    reviewedOn: "2026-09-11",
+    reason: "Official ICC code text remains available to browsers but rejects this safe automated health check.",
+    expectedStatus: "http-error",
+    expectedStatusCode: 403,
+  },
+  "https://codes.iccsafe.org/content/IMC2024V2.0": {
+    reviewedOn: "2026-09-11",
+    reason: "Official ICC code text remains available to browsers but rejects this safe automated health check.",
+    expectedStatus: "http-error",
+    expectedStatusCode: 403,
+  },
+  "https://codes.iccsafe.org/content/IPC2024V2.0": {
+    reviewedOn: "2026-09-11",
+    reason: "Official ICC code text remains available to browsers but rejects this safe automated health check.",
+    expectedStatus: "http-error",
+    expectedStatusCode: 403,
+  },
+  "https://novusplace.com/": {
+    reviewedOn: "2026-09-11",
+    reason: "Official Novus Innovation Corridor project site is intermittently unavailable to automated clients.",
+    expectedStatus: "inaccessible",
+    expectedNetworkErrorCode: "ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE",
+  },
+  "https://msc.fema.gov/portal/home": {
+    reviewedOn: "2026-09-11",
+    reason: "Official FEMA flood-map portal consistently rejects or drops safe automated checks; retain for its interactive authoritative map.",
+    expectedStatus: "inaccessible",
+    expectedNetworkErrorCode: "ECONNRESET",
+  },
+  "https://hazards.fema.gov/femaportal/wps/portal/NFHLW": {
+    reviewedOn: "2026-09-11",
+    reason: "Official FEMA National Flood Hazard Layer portal consistently rejects or drops safe automated checks.",
+    expectedStatus: "inaccessible",
+    expectedNetworkErrorCode: "ECONNRESET",
+  },
+  "https://www.atlantaga.gov/government/departments/city-planning/ordinances-regulations/construction-codes": {
+    reviewedOn: "2026-09-11",
+    reason: "Official City of Atlanta source returns 403 to automated clients.",
+    expectedStatus: "http-error",
+    expectedStatusCode: 403,
+  },
+  "https://www.atlantaga.gov/i-want-to/obtain-a-building-permit": {
+    reviewedOn: "2026-09-11",
+    reason: "Official City of Atlanta source returns 403 to automated clients.",
+    expectedStatus: "http-error",
+    expectedStatusCode: 403,
+  },
+  "https://www.duke-energy.com/business": {
+    reviewedOn: "2026-09-11",
+    reason: "Official Duke Energy business source returns 403 to automated clients.",
+    expectedStatus: "http-error",
+    expectedStatusCode: 403,
+  },
+  "https://ewdd.lacity.gov/": {
+    reviewedOn: "2026-09-11",
+    reason: "Official Los Angeles Economic and Workforce Development source returns 403 to automated clients.",
+    expectedStatus: "http-error",
+    expectedStatusCode: 403,
+  },
+  "https://www.oncor.com/content/oncorwww/us/en/home/about-us/service-area-map.html": {
+    reviewedOn: "2026-09-11",
+    reason: "Official Oncor service-area map consistently times out for automated clients.",
+    expectedStatus: "inaccessible",
+    expectedNetworkErrorCode: "TimeoutError",
+  },
+  "https://www.srpnet.com/about/service-area-territory": {
+    reviewedOn: "2026-09-11",
+    reason: "Official SRP service-territory source returns 403 to automated clients.",
+    expectedStatus: "http-error",
+    expectedStatusCode: 403,
+  },
+  "https://www.tempe.gov/businesses/building-code": {
+    reviewedOn: "2026-09-11",
+    reason: "Official City of Tempe source returns 403 to automated clients.",
+    expectedStatus: "http-error",
+    expectedStatusCode: 403,
+  },
+  "https://www.tempe.gov/businesses/development-services": {
+    reviewedOn: "2026-09-11",
+    reason: "Official City of Tempe source returns 403 to automated clients.",
+    expectedStatus: "http-error",
+    expectedStatusCode: 403,
+  },
+  "https://www.tempe.gov/businesses/economic-development": {
+    reviewedOn: "2026-09-11",
+    reason: "Official City of Tempe source returns 403 to automated clients.",
+    expectedStatus: "http-error",
+    expectedStatusCode: 403,
+  },
+  "https://www.tempe.gov/government/municipal-utilities/water": {
+    reviewedOn: "2026-09-11",
+    reason: "Official City of Tempe source returns 403 to automated clients.",
+    expectedStatus: "http-error",
+    expectedStatusCode: 403,
+  },
+};
 
 export interface LinkResult extends EvidenceTarget {
   status: LinkStatus;
   statusCode?: number;
+  networkErrorCode?: string;
   finalUrl?: string;
   detail?: string;
 }
@@ -130,7 +250,8 @@ export async function checkEvidenceTarget(target: EvidenceTarget, options: Check
       }
 
       if (!response.ok) {
-        return { ...target, status: "http-error", statusCode: response.status, finalUrl: current.href, detail: response.statusText || "HTTP failure" };
+        const failure: LinkResult = { ...target, status: "http-error", statusCode: response.status, finalUrl: current.href, detail: response.statusText || "HTTP failure" };
+        return applyReviewedException(failure);
       }
       if (isGenericRedirect(new URL(target.url), current)) {
         return { ...target, status: "generic-redirect", statusCode: response.status, finalUrl: current.href, detail: "redirect ended at a generic landing page" };
@@ -138,10 +259,39 @@ export async function checkEvidenceTarget(target: EvidenceTarget, options: Check
       return { ...target, status: "ok", statusCode: response.status, finalUrl: current.href };
     }
   } catch (error) {
-    const detail = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
-    return { ...target, status: "inaccessible", finalUrl: current.href, detail };
+    const { detail, networkErrorCode } = describeNetworkError(error);
+    return applyReviewedException({ ...target, status: "inaccessible", finalUrl: current.href, detail, networkErrorCode });
   }
   return { ...target, status: "inaccessible", finalUrl: current.href, detail: "unexpected checker state" };
+}
+
+function describeNetworkError(error: unknown): { detail: string; networkErrorCode: string } {
+  const parts: string[] = [];
+  let current: unknown = error;
+  let networkErrorCode: string | undefined;
+  while (current instanceof Error) {
+    const code = "code" in current && typeof current.code === "string" ? current.code : undefined;
+    parts.push(`${current.name}${code ? ` [${code}]` : ""}: ${current.message}`);
+    networkErrorCode ??= code;
+    current = current.cause;
+  }
+  const root = error instanceof Error ? error : undefined;
+  return {
+    detail: parts.length > 0 ? parts.join(" <- ") : String(error),
+    networkErrorCode: networkErrorCode ?? root?.name ?? "UnknownNetworkError",
+  };
+}
+
+function applyReviewedException(result: LinkResult): LinkResult {
+  const exception = REVIEWED_EXCEPTIONS[result.url];
+  if (!exception || result.status !== exception.expectedStatus) return result;
+  if (exception.expectedStatusCode !== undefined && result.statusCode !== exception.expectedStatusCode) return result;
+  if (exception.expectedNetworkErrorCode !== undefined && result.networkErrorCode !== exception.expectedNetworkErrorCode) return result;
+  return {
+    ...result,
+    status: "reviewed-exception",
+    detail: `${result.detail ?? result.status}; reviewed ${exception.reviewedOn}: ${exception.reason}`,
+  };
 }
 
 export async function checkEvidenceTargets(targets: EvidenceTarget[], options: CheckOptions = {}): Promise<LinkResult[]> {
@@ -177,8 +327,14 @@ function parsePositiveInteger(flag: string, fallback: number): number {
 }
 
 function printReport(results: LinkResult[]): void {
-  const failures = results.filter((result) => result.status !== "ok");
-  console.log(`City evidence link health: ${results.length - failures.length}/${results.length} healthy; ${failures.length} issue(s).`);
+  const failures = results.filter((result) => result.status !== "ok" && result.status !== "reviewed-exception");
+  const exceptions = results.filter((result) => result.status === "reviewed-exception");
+  console.log(`City evidence link health: ${results.length - failures.length}/${results.length} accepted (${exceptions.length} reviewed exception(s)); ${failures.length} issue(s).`);
+  for (const result of exceptions) {
+    console.warn(`\n[${result.status}] ${result.url}`);
+    if (result.detail) console.warn(`  detail: ${result.detail}`);
+    console.warn(`  used by: ${result.references.map(({ city, category }) => `${city} (${category})`).join(", ")}`);
+  }
   for (const result of failures) {
     console.error(`\n[${result.status}] ${result.url}`);
     if (result.finalUrl && result.finalUrl !== result.url) console.error(`  final: ${result.finalUrl}`);
@@ -195,7 +351,7 @@ async function main(): Promise<void> {
   console.log(`Checking ${targets.length} unique approved city evidence URLs (concurrency ${concurrency}, timeout ${timeoutMs}ms)...`);
   const results = await checkEvidenceTargets(targets, { concurrency, timeoutMs });
   printReport(results);
-  if (results.some((result) => result.status !== "ok")) process.exitCode = 1;
+  if (results.some((result) => result.status !== "ok" && result.status !== "reviewed-exception")) process.exitCode = 1;
 }
 
 const isCli = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);

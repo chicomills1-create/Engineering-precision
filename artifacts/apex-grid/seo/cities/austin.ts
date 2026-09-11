@@ -54,12 +54,12 @@ export const austin: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 92, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.austintexas.gov/department/development-services"],
+      ahj: ["https://www.austintexas.gov/development-services"],
       codes: ["https://www.austintexas.gov/page/building-technical-codes"],
       amendments: ["https://www.austintexas.gov/page/building-technical-codes"],
       utilities: ["https://austinenergy.com/"],
       climate: ["https://www.weather.gov/ewx/"],
-      market: ["https://www.austintexas.gov/department/economic-development"],
+      market: ["https://www.austintexas.gov/economic-development/programs?page=1"],
     },
   },
 };

@@ -57,12 +57,12 @@ export const losAngeles: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 94, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.ladbs.org/"],
-      codes: ["https://www.ladbs.org/services/core-services/plan-check-permit/plan-check-permit-special-assistance/building-code"],
-      amendments: ["https://www.ladbs.org/services/core-services/plan-check-permit/plan-check-permit-special-assistance/building-code"],
+      ahj: ["https://dbs.lacity.gov/"],
+      codes: ["https://dbs.lacity.gov/forms-and-publications?cats=193"],
+      amendments: ["https://dbs.lacity.gov/los-angeles-city-code-documents"],
       utilities: ["https://www.ladwp.com/commercial-services"],
       climate: ["https://www.weather.gov/lox/"],
-      market: ["https://ewddlacity.com/"],
+      market: ["https://ewdd.lacity.gov/"],
     },
   },
 };

@@ -66,31 +66,29 @@ export const tempe: CityData = {
     },
     sources: {
       ahj: [
-        "https://www.tempe.gov/government/community-development/development-services",
-        "https://www.tempe.gov/government/community-development/building-safety",
+        "https://www.tempe.gov/businesses/development-services",
       ],
       codes: [
-        "https://www.tempe.gov/government/community-development/building-safety/building-codes-and-amendments",
+        "https://www.tempe.gov/businesses/building-code",
         "https://codes.iccsafe.org/content/AZTEMPEBC2018P1",
         "https://library.municode.com/az/tempe/codes/city_code?nodeId=CH8BUBURE",
       ],
       amendments: [
-        "https://www.tempe.gov/government/community-development/building-safety/plan-review/green-building-code",
+        "https://www.tempe.gov/businesses/building-code",
         "https://library.municode.com/az/tempe/codes/city_code?nodeId=CH8BUBURE",
       ],
       utilities: [
-        "https://www.srpnet.com/",
-        "https://www.tempe.gov/government/public-works/water",
-        "https://www.tempe.gov/government/public-works/wastewater",
+        "https://www.srpnet.com/about/service-area-territory",
+        "https://www.tempe.gov/government/municipal-utilities/water",
       ],
       climate: [
-        "https://www.energy.gov/eere/buildings/climate-zone-map",
+        "https://www.weather.gov/psr/",
         "https://www.ncei.noaa.gov/access/us-climate-normals/",
         "https://www.weather.gov/psr/heat",
         "https://msc.fema.gov/portal/home",
       ],
       market: [
-        "https://www.tempe.gov/government/economic-development",
+        "https://www.tempe.gov/businesses/economic-development",
         "https://novusplace.com/",
         "https://research.asu.edu/",
       ],

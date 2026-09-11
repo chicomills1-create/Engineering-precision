@@ -55,8 +55,8 @@ export const houston: CityData = {
     priority: { commercialOpportunity: 95, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.houstonpermittingcenter.org/"],
-      codes: ["https://www.houstonpermittingcenter.org/building-code-enforcement/houston-construction-code"],
-      amendments: ["https://www.houstonpermittingcenter.org/building-code-enforcement/houston-construction-code"],
+      codes: ["https://www.houstonpermittingcenter.org/houston-code-archive"],
+      amendments: ["https://www.houstonpermittingcenter.org/construction-code-modernization/code-amendment"],
       utilities: ["https://www.centerpointenergy.com/en-us/business"],
       climate: ["https://www.weather.gov/hgx/"],
       market: ["https://www.houstontx.gov/ecodev/"],

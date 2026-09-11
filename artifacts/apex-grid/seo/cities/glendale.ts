@@ -94,7 +94,6 @@ export const glendale: CityData = {
         "https://www.glendaleaz.gov/Business/Airport",
         "https://www.glendaleaz.gov/Business/Airport/About-the-Airport",
         "https://www.glendaleaz.gov/Business/Airport/Doing-business-at-GEU",
-        "https://www.glendaleaz.gov/Explore/Sports-Entertainment",
       ],
     },
   },

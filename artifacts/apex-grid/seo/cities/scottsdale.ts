@@ -82,7 +82,7 @@ export const scottsdale: CityData = {
       utilities: [
         "https://www.scottsdaleaz.gov/utilities",
         "https://www.scottsdaleaz.gov/water",
-        "https://www.aps.com/en/Residential/Service-Plans/Service-Area",
+        "https://www.aps.com/en/Business/Service-Plans/Service-Area-Maps",
       ],
       climate: [
         "https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/city/time-series",

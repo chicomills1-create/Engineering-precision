@@ -55,8 +55,8 @@ export const phoenix: CityData = {
     priority: { commercialOpportunity: 94, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.phoenix.gov/administration/departments/pdd.html"],
-      codes: ["https://www.phoenix.gov/administration/departments/pdd/building-codes.html"],
-      amendments: ["https://www.phoenix.gov/administration/departments/pdd/building-codes.html"],
+      codes: ["https://www.phoenix.gov/pdd/devcode/buildingcode"],
+      amendments: ["https://www.phoenix.gov/pdd/devcode/buildingcode"],
       utilities: ["https://www.aps.com/en/Business"],
       climate: ["https://www.weather.gov/psr/"],
       market: ["https://www.investinphoenix.com/"],

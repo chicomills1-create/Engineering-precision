@@ -57,7 +57,7 @@ export const dallas: CityData = {
       ahj: ["https://dallascityhall.com/departments/sustainabledevelopment/buildinginspection/Pages/default.aspx"],
       codes: ["https://dallascityhall.com/departments/sustainabledevelopment/buildinginspection/Pages/construction_codes.aspx"],
       amendments: ["https://dallascityhall.com/departments/sustainabledevelopment/buildinginspection/Pages/construction_codes.aspx"],
-      utilities: ["https://www.oncor.com/"],
+      utilities: ["https://www.oncor.com/content/oncorwww/us/en/home/about-us/service-area-map.html"],
       climate: ["https://www.weather.gov/fwd/"],
       market: ["https://www.dallasecodev.org/"],
     },

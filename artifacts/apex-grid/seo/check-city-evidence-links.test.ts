@@ -62,3 +62,67 @@ test("reports HTTP and network failures distinctly", async () => {
   });
   assert.equal(inaccessible.status, "inaccessible");
 });
+
+test("accepts only the reviewed failure class for an explicit exception", async () => {
+  const reviewedTarget: EvidenceTarget = {
+    url: "https://www.atlantaga.gov/i-want-to/obtain-a-building-permit",
+    expectedDomains: ["atlantaga.gov"],
+    references: [{ city: "Atlanta, georgia", category: "ahj" }],
+  };
+
+  const expectedBlock = await checkEvidenceTarget(reviewedTarget, {
+    fetchImpl: mockFetch([{ status: 403 }]),
+  });
+  assert.equal(expectedBlock.status, "reviewed-exception");
+  assert.match(expectedBlock.detail ?? "", /reviewed 2026-09-11/);
+
+  const unexpectedRedirect = await checkEvidenceTarget(reviewedTarget, {
+    fetchImpl: mockFetch([{ status: 302, location: "https://example.com/" }]),
+  });
+  assert.equal(unexpectedRedirect.status, "off-domain-redirect");
+
+  for (const status of [404, 410, 500, 503]) {
+    const newlyStale = await checkEvidenceTarget(reviewedTarget, {
+      fetchImpl: mockFetch([{ status }]),
+    });
+    assert.equal(newlyStale.status, "http-error", `${status} must not match a reviewed 403 exception`);
+    assert.equal(newlyStale.statusCode, status);
+  }
+});
+
+test("accepts only the reviewed low-level cause for a network exception", async () => {
+  const reviewedTarget: EvidenceTarget = {
+    url: "https://msc.fema.gov/portal/home",
+    expectedDomains: ["msc.fema.gov"],
+    references: [{ city: "Example, state", category: "climate" }],
+  };
+
+  function fetchFailure(code: string): typeof fetch {
+    return (async () => {
+      const cause = Object.assign(new Error("network operation failed"), { code });
+      throw new TypeError("fetch failed", { cause });
+    }) as typeof fetch;
+  }
+
+  const expectedReset = await checkEvidenceTarget(reviewedTarget, {
+    fetchImpl: fetchFailure("ECONNRESET"),
+  });
+  assert.equal(expectedReset.status, "reviewed-exception");
+  assert.equal(expectedReset.networkErrorCode, "ECONNRESET");
+
+  for (const code of ["ENOTFOUND", "CERT_HAS_EXPIRED", "ETIMEDOUT", "ECONNREFUSED"]) {
+    const differentCause = await checkEvidenceTarget(reviewedTarget, {
+      fetchImpl: fetchFailure(code),
+    });
+    assert.equal(differentCause.status, "inaccessible", `${code} must not match a reviewed ECONNRESET exception`);
+    assert.equal(differentCause.networkErrorCode, code);
+  }
+
+  const timeout = await checkEvidenceTarget(reviewedTarget, {
+    fetchImpl: (async () => {
+      throw new DOMException("operation timed out", "TimeoutError");
+    }) as typeof fetch,
+  });
+  assert.equal(timeout.status, "inaccessible");
+  assert.equal(timeout.networkErrorCode, "TimeoutError");
+});

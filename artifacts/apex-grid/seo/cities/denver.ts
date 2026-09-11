@@ -59,7 +59,7 @@ export const denver: CityData = {
       amendments: ["https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Community-Planning-and-Development/Building-Codes-Policies-and-Guides"],
       utilities: ["https://co.my.xcelenergy.com/s/business"],
       climate: ["https://www.weather.gov/bou/"],
-      market: ["https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Denver-Economic-Development-Opportunity"],
+      market: ["https://www.denvergov.org/Government/Agencies-Departments-Offices/Agencies-Departments-Offices-Directory/Economic-Development-Opportunity"],
     },
   },
 };
