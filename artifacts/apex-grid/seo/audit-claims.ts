@@ -1,6 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  ARIZONA_IDENTITY_REVIEW,
+  evaluateArizonaIdentityReview,
+  type ArizonaIdentityReview,
+} from "./official-evidence/claims";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const generalProhibited = [
@@ -58,6 +63,7 @@ const identityProhibited = [
 ] as const;
 
 const prohibited = [...generalProhibited, ...identityProhibited];
+const EVIDENCE_GATE_MARKER = "claims-audit: evidence-gated";
 
 const regressionClaims = [
   ["Apex Grid holds PE licenses across ", "49 U.S. states"].join(""),
@@ -118,6 +124,114 @@ for (const claim of regressionClaims) {
   }
 }
 
+const capturedReview: ArizonaIdentityReview = {
+  ...ARIZONA_IDENTITY_REVIEW,
+  corporationCommission: {
+    ...ARIZONA_IDENTITY_REVIEW.corporationCommission,
+    matchingEntityCaptured: true,
+    officialEntityName: "Verified fixture entity",
+    entityId: "fixture-entity-id",
+    status: "Active",
+    capture: {
+      sourceUrl: "https://arizonabusinesscenter.azcc.gov/businesssearch",
+      capturedAt: "2026-09-11",
+      capturePath: "official-evidence/fixtures/acc-capture.pdf",
+    },
+  },
+  boardOfTechnicalRegistration: {
+    ...ARIZONA_IDENTITY_REVIEW.boardOfTechnicalRegistration,
+    matchingBusinessRegistrationCaptured: true,
+    businessRegistration: {
+      registrationNumber: "fixture-registration",
+      registeredName: "Verified fixture entity",
+      status: "Current",
+      statusDate: "2026-09-11",
+      expirationDate: "2027-09-11",
+      disciplines: ["Engineering"],
+    },
+    responsibleProfessional: {
+      name: "Verified fixture professional",
+      licenseNumber: "fixture-license",
+      profession: "Professional Engineer",
+      discipline: "Engineering",
+      status: "Active",
+      expirationDate: "2027-09-11",
+    },
+    businessCapture: {
+      sourceUrl: "https://azbtr.portalus.thentiacloud.net/",
+      capturedAt: "2026-09-11",
+      capturePath: "official-evidence/fixtures/btr-business-capture.pdf",
+    },
+    responsibleProfessionalCapture: {
+      sourceUrl: "https://azbtr.portalus.thentiacloud.net/",
+      capturedAt: "2026-09-11",
+      capturePath: "official-evidence/fixtures/btr-professional-capture.pdf",
+    },
+  },
+};
+const currentIdentity = evaluateArizonaIdentityReview(
+  capturedReview,
+  new Date("2026-10-01T00:00:00.000Z"),
+);
+if (
+  currentIdentity.corporationCommission === null ||
+  currentIdentity.boardOfTechnicalRegistration === null
+) {
+  throw new Error("Claims audit fixture rejected current captured Arizona evidence");
+}
+const staleIdentity = evaluateArizonaIdentityReview(
+  capturedReview,
+  new Date("2026-12-10T00:00:00.000Z"),
+);
+if (
+  staleIdentity.corporationCommission !== null ||
+  staleIdentity.boardOfTechnicalRegistration !== null
+) {
+  throw new Error("Claims audit fixture published stale Arizona evidence");
+}
+const uncapturedIdentity = evaluateArizonaIdentityReview(
+  ARIZONA_IDENTITY_REVIEW,
+  new Date("2026-10-01T00:00:00.000Z"),
+);
+if (
+  uncapturedIdentity.corporationCommission !== null ||
+  uncapturedIdentity.boardOfTechnicalRegistration !== null
+) {
+  throw new Error("Claims audit fixture published uncaptured Arizona evidence");
+}
+const expiredBusinessIdentity = evaluateArizonaIdentityReview(
+  {
+    ...capturedReview,
+    boardOfTechnicalRegistration: {
+      ...capturedReview.boardOfTechnicalRegistration,
+      businessRegistration: {
+        ...capturedReview.boardOfTechnicalRegistration.businessRegistration!,
+        expirationDate: "2026-10-15",
+      },
+    },
+  },
+  new Date("2026-10-15T00:00:00.000Z"),
+);
+if (expiredBusinessIdentity.boardOfTechnicalRegistration !== null) {
+  throw new Error("Claims audit fixture published an expired BTR business registration");
+}
+const expiredProfessionalIdentity = evaluateArizonaIdentityReview(
+  {
+    ...capturedReview,
+    boardOfTechnicalRegistration: {
+      ...capturedReview.boardOfTechnicalRegistration,
+      responsibleProfessional: {
+        ...capturedReview.boardOfTechnicalRegistration.responsibleProfessional!,
+        expirationDate: "2026-10-20",
+      },
+    },
+  },
+  new Date("2026-10-20T00:00:00.000Z"),
+);
+if (expiredProfessionalIdentity.boardOfTechnicalRegistration !== null) {
+  throw new Error("Claims audit fixture published an expired responsible professional");
+}
+
 const extensions = new Set([".ts", ".tsx", ".html"]);
 const failures: string[] = [];
 const checkedFiles = new Set<string>();
@@ -125,7 +239,11 @@ const checkedFiles = new Set<string>();
 function checkFile(full: string) {
   if (checkedFiles.has(full) || full === fileURLToPath(import.meta.url)) return;
   checkedFiles.add(full);
-  const text = fs.readFileSync(full, "utf8");
+  const text = fs
+    .readFileSync(full, "utf8")
+    .split("\n")
+    .filter((line) => !line.includes(EVIDENCE_GATE_MARKER))
+    .join("\n");
   for (const pattern of prohibited) {
     if (pattern.test(text)) failures.push(`${path.relative(root, full)}: ${pattern}`);
   }

@@ -1,5 +1,5 @@
 /** Official evidence register for licensing and business-identity claims. */
-export const OFFICIAL_EVIDENCE_REVIEW_DATE = "2026-09-11";
+export const OFFICIAL_EVIDENCE_REVIEW_INTERVAL_DAYS = 90;
 
 export const OFFICIAL_EVIDENCE = {
   arizonaCorporations: {
@@ -48,38 +48,163 @@ export const OFFICIAL_EVIDENCE = {
   },
 } as const;
 
-/**
- * Captured result of the official identity review.
- *
- * These are negative search findings, not proof that no registration exists.
- * A matching detail record or filing must be saved before publishing an ACC
- * entity ID, legal name, entity status, BTR business registration, responsible
- * professional, or regulator-sourced address.
- */
-export const ARIZONA_IDENTITY_REVIEW = {
+type OfficialCapture = {
+  sourceUrl: string;
+  capturedAt: string;
+  capturePath: string | null;
+};
+
+export type ArizonaIdentityReview = {
+  reviewedAt: string;
+  supersededAt: string | null;
+  reviewer: string;
   corporationCommission: {
-    searchedNames: ["Apex Grid", "Apex Grid Engineering", "Jeremy Mills"],
-    matchingEntityCaptured: false,
-    legalName: null,
-    entityId: null,
-    status: null,
-    filings: [],
-  },
+    searchedNames: readonly string[];
+    matchingEntityCaptured: boolean;
+    officialEntityName: string | null;
+    entityId: string | null;
+    entityType: string | null;
+    status: string | null;
+    statusDate: string | null;
+    knownPlaceOfBusiness: string | null;
+    statutoryAgent: string | null;
+    latestFilingType: string | null;
+    latestFilingDate: string | null;
+    filings: readonly {
+      type: string;
+      filedAt: string;
+      capture: OfficialCapture;
+    }[];
+    capture: OfficialCapture | null;
+  };
   boardOfTechnicalRegistration: {
-    searchedNames: ["Apex Grid", "Apex Grid Engineering", "Jeremy Mills"],
-    matchingBusinessRegistrationCaptured: false,
-    businessRegistration: null,
-    responsibleProfessional: null,
+    searchedNames: readonly string[];
+    matchingBusinessRegistrationCaptured: boolean;
+    businessRegistration: {
+      registrationNumber: string;
+      registeredName: string;
+      status: string;
+      statusDate: string | null;
+      expirationDate: string | null;
+      disciplines: readonly string[];
+    } | null;
+    responsibleProfessional: {
+      name: string;
+      licenseNumber: string;
+      profession: string;
+      discipline: string;
+      status: string;
+      expirationDate: string | null;
+    } | null;
+    businessCapture: OfficialCapture | null;
+    responsibleProfessionalCapture: OfficialCapture | null;
+  };
+};
+
+/**
+ * Append each manual review and retain its official capture paths. Never replace
+ * a prior entry: mark it superseded when a later review is recorded.
+ *
+ * A search with no matching detail record is a negative finding, not proof that
+ * no registration exists. capturePath must point to a preserved official PDF,
+ * image, or HTML export before an identity field can be published.
+ */
+export const ARIZONA_IDENTITY_REVIEW_HISTORY: readonly ArizonaIdentityReview[] = [
+  {
+    reviewedAt: "2026-09-11",
+    supersededAt: null,
+    reviewer: "Replit Agent",
+    corporationCommission: {
+      searchedNames: ["Apex Grid", "Apex Grid Engineering", "Jeremy Mills"],
+      matchingEntityCaptured: false,
+      officialEntityName: null,
+      entityId: null,
+      entityType: null,
+      status: null,
+      statusDate: null,
+      knownPlaceOfBusiness: null,
+      statutoryAgent: null,
+      latestFilingType: null,
+      latestFilingDate: null,
+      filings: [],
+      capture: null,
+    },
+    boardOfTechnicalRegistration: {
+      searchedNames: ["Apex Grid", "Apex Grid Engineering", "Jeremy Mills"],
+      matchingBusinessRegistrationCaptured: false,
+      businessRegistration: null,
+      responsibleProfessional: null,
+      businessCapture: null,
+      responsibleProfessionalCapture: null,
+    },
   },
-  contactRecord: {
-    streetAddress: "22475 E Quintero Rd",
-    locality: "Queen Creek, AZ 85142",
-    telephone: "(480) 490-0064",
-    evidenceBasis: "Business-provided contact information",
-    officialAddressType: null,
-    note: "Do not describe this as an ACC known place of business, statutory-agent address, mailing address, BTR address, or headquarters until a matching official record is captured.",
-  },
-} as const;
+] as const;
+
+export const ARIZONA_IDENTITY_REVIEW =
+  ARIZONA_IDENTITY_REVIEW_HISTORY[ARIZONA_IDENTITY_REVIEW_HISTORY.length - 1];
+export const OFFICIAL_EVIDENCE_REVIEW_DATE = ARIZONA_IDENTITY_REVIEW.reviewedAt;
+
+const ACTIVE_OFFICIAL_STATUSES = new Set(["active", "current", "good standing"]);
+
+function addUtcDays(isoDate: string, days: number) {
+  const date = new Date(`${isoDate}T00:00:00.000Z`);
+  date.setUTCDate(date.getUTCDate() + days);
+  return date;
+}
+
+function isUnexpired(isoDate: string | null, asOf: Date) {
+  if (isoDate === null) return false;
+  const expiration = new Date(`${isoDate}T00:00:00.000Z`);
+  return !Number.isNaN(expiration.getTime()) && asOf < expiration;
+}
+
+export function evaluateArizonaIdentityReview(
+  review: ArizonaIdentityReview,
+  asOf: Date,
+) {
+  const reviewIsCurrent =
+    review.supersededAt === null &&
+    asOf < addUtcDays(review.reviewedAt, OFFICIAL_EVIDENCE_REVIEW_INTERVAL_DAYS);
+  const acc = review.corporationCommission;
+  const btr = review.boardOfTechnicalRegistration;
+  const accIsPublishable =
+    reviewIsCurrent &&
+    acc.matchingEntityCaptured &&
+    acc.capture?.capturePath != null &&
+    acc.officialEntityName != null &&
+    acc.entityId != null &&
+    acc.status != null &&
+    ACTIVE_OFFICIAL_STATUSES.has(acc.status.toLowerCase());
+  const businessStatus = btr.businessRegistration?.status;
+  const professionalStatus = btr.responsibleProfessional?.status;
+  const btrIsPublishable =
+    reviewIsCurrent &&
+    btr.matchingBusinessRegistrationCaptured &&
+    btr.businessCapture?.capturePath != null &&
+    btr.responsibleProfessionalCapture?.capturePath != null &&
+    businessStatus != null &&
+    professionalStatus != null &&
+    ACTIVE_OFFICIAL_STATUSES.has(businessStatus.toLowerCase()) &&
+    ACTIVE_OFFICIAL_STATUSES.has(professionalStatus.toLowerCase()) &&
+    isUnexpired(btr.businessRegistration?.expirationDate ?? null, asOf) &&
+    isUnexpired(btr.responsibleProfessional?.expirationDate ?? null, asOf);
+
+  return {
+    reviewIsCurrent,
+    nextReviewDueAt: addUtcDays(
+      review.reviewedAt,
+      OFFICIAL_EVIDENCE_REVIEW_INTERVAL_DAYS,
+    )
+      .toISOString()
+      .slice(0, 10),
+    corporationCommission: accIsPublishable ? acc : null,
+    boardOfTechnicalRegistration: btrIsPublishable ? btr : null,
+  };
+}
+
+export function getPublishableArizonaIdentity(asOf = new Date()) {
+  return evaluateArizonaIdentityReview(ARIZONA_IDENTITY_REVIEW, asOf);
+}
 
 export const LICENSING_CLAIM =
   "Apex Grid is a multi-state engineering team. Service availability and stamping are confirmed per project only after the responsible individual license, firm authorization, discipline, and authority-having-jurisdiction requirements are verified.";

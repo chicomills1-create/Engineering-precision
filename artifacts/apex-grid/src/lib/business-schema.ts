@@ -1,4 +1,10 @@
+import { getPublishableArizonaIdentity } from "../../seo/official-evidence/claims";
+
 export const APEX_GRID_SITE_URL = "https://apexgrideng.com";
+
+const verifiedArizonaIdentity = getPublishableArizonaIdentity();
+const verifiedCorporation = verifiedArizonaIdentity.corporationCommission;
+const verifiedBtr = verifiedArizonaIdentity.boardOfTechnicalRegistration;
 
 const serviceAreas = [
   { "@type": "State", name: "Arizona" },
@@ -53,6 +59,16 @@ export const APEX_GRID_BUSINESS_SCHEMA = {
   "@id": `${APEX_GRID_SITE_URL}/#business`,
   name: "Apex Grid Engineering",
   alternateName: "Apex Grid",
+  ...(verifiedCorporation
+    ? {
+        legalName: verifiedCorporation.officialEntityName, // claims-audit: evidence-gated
+        identifier: {
+          "@type": "PropertyValue",
+          propertyID: "Arizona Corporation Commission entity ID",
+          value: verifiedCorporation.entityId,
+        },
+      }
+    : {}),
   url: `${APEX_GRID_SITE_URL}/`,
   logo: `${APEX_GRID_SITE_URL}/favicon.svg`,
   description:
@@ -61,11 +77,27 @@ export const APEX_GRID_BUSINESS_SCHEMA = {
   priceRange: "$$",
   currenciesAccepted: "USD",
   areaServed: serviceAreas,
-  additionalProperty: {
-    "@type": "PropertyValue",
-    name: "Coverage basis",
-    value: "Service availability and request coverage; confirm individual license, firm authorization, discipline, and AHJ requirements per project.",
-  },
+  additionalProperty: [
+    {
+      "@type": "PropertyValue",
+      name: "Coverage basis",
+      value: "Service availability and request coverage; confirm individual license, firm authorization, discipline, and AHJ requirements per project.",
+    },
+    ...(verifiedBtr
+      ? [
+          {
+            "@type": "PropertyValue",
+            name: "Arizona BTR business registration",
+            value: verifiedBtr.businessRegistration!.registrationNumber,
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Arizona responsible professional",
+            value: `${verifiedBtr.responsibleProfessional!.name} — ${verifiedBtr.responsibleProfessional!.profession}, ${verifiedBtr.responsibleProfessional!.discipline}, license ${verifiedBtr.responsibleProfessional!.licenseNumber}`,
+          },
+        ]
+      : []),
+  ],
   knowsAbout: knowledgeAreas,
   hasOfferCatalog: {
     "@type": "OfferCatalog",
