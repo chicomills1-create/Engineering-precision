@@ -14,7 +14,8 @@
     "seo:review": "tsx seo/review-report.ts",
     "seo:review:email": "tsx seo/review-email.ts",
     "seo:audit:claims": "tsx seo/audit-claims.ts",
-    "seo:audit:industry-batch": "tsx seo/audit-industry-batch.ts"
+    "seo:audit:industry-batch": "tsx seo/audit-industry-batch.ts",
+    "seo:audit:industry-discipline-batch": "tsx seo/audit-industry-discipline-batch.ts"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",

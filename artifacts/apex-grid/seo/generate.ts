@@ -1942,6 +1942,21 @@ ${breadcrumb(crumbs)}
 
 function industryDisciplinePage(page: IndustryDisciplinePage): string {
   const url = getIndustryDisciplineUrl(page);
+  const aeoBatch = INDUSTRY_DISCIPLINE_PAGES.slice(0, 25).includes(page);
+  const quickAnswers = [
+    {
+      question: `What can ${page.disciplineLabel.toLowerCase()} include for ${toTitle(page.industrySlug)} projects?`,
+      answer: `Typical scope topics include ${page.topics.slice(0, 3).join(", ")}. Final scope depends on the facility, existing conditions, jurisdiction, and requested deliverables.`,
+    },
+    {
+      question: `What information is needed to scope this ${page.disciplineLabel.toLowerCase()} work?`,
+      answer: "Available drawings, site or facility conditions, intended use, project phase, jurisdiction, schedule, and required deliverables help establish a project-specific scope.",
+    },
+    {
+      question: "How are applicable codes and professional requirements confirmed?",
+      answer: "The adopted codes, amendments, responsible professional, discipline, firm authorization, and authority-having-jurisdiction requirements must be verified for each project before coverage is confirmed.",
+    },
+  ];
   // Build breadcrumb from segments
   const crumbs: { name: string; href?: string }[] = [{ name: "Home", href: "/" }, { name: "Industries", href: "/industries/" }];
   if (page.segments.length > 2) {
@@ -1971,6 +1986,15 @@ function industryDisciplinePage(page: IndustryDisciplinePage): string {
     provider: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
     url: `${SITE}${url}`,
     areaServed: { "@type": "Country", name: "United States" },
+  };
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: quickAnswers.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
   };
 
   const body = `
@@ -2012,6 +2036,11 @@ ${glossaryTerms.length ? `<section class="block"><div class="container">
   <div class="linkrow">${glossaryTerms.map((t) => `<a href="/engineering-glossary/${t.slug}/">${esc(t.term)}</a>`).join("")}</div>
 </div></section>` : ""}
 
+${aeoBatch ? `<section class="block"><div class="container faq">
+  <h2>Quick <em>Answers</em></h2>
+  ${quickAnswers.map((item) => `<details><summary>${esc(item.question)}</summary><div class="a">${esc(item.answer)}</div></details>`).join("\n  ")}
+</div></section>` : ""}
+
 <section class="ctaband"><div class="container">
   <h2>Start Your Project</h2>
   <p>Licensed professional engineering support and clear proposals. Send us your scope for an initial response outlining potential deliverables, schedule factors, and fee basis.</p>
@@ -2022,7 +2051,7 @@ ${glossaryTerms.length ? `<section class="block"><div class="container">
     title: page.title,
     description: page.description,
     canonical: `${SITE}${url}`,
-    schemaJson: [orgSchema, pageSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [orgSchema, pageSchema, breadcrumbSchema(crumbs), ...(aeoBatch ? [faqSchema] : [])],
     body,
   });
 }
