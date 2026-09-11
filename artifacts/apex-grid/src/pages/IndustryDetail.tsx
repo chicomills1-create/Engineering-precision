@@ -81,15 +81,6 @@ export default function IndustryDetail() {
                 "@type": "Organization",
                 name: "Apex Grid Engineering",
                 url: SITE_URL || undefined,
-                telephone: "+1-480-490-0064",
-                address: {
-                  "@type": "PostalAddress",
-                  streetAddress: "22475 E Quintero Rd",
-                  addressLocality: "Queen Creek",
-                  addressRegion: "AZ",
-                  postalCode: "85142",
-                  addressCountry: "US",
-                },
               },
             },
             {

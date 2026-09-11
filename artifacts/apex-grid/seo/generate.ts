@@ -2103,7 +2103,7 @@ function locationServicePage(page: LocationServicePage): string {
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
-        <p>Apex Grid Engineering is a multi-discipline engineering firm with multi-state PE coverage confirmed per project and headquartered in Queen Creek, Arizona. We provide structural, MEP, civil, and geotechnical engineering for commercial, industrial, multifamily, and government clients — with 15+ years of experience and a multi-discipline engineering team on staff.</p>
+        <p>Apex Grid Engineering is a multi-discipline engineering firm with multi-state PE coverage confirmed per project and a business-provided operating and contact address in Queen Creek, Arizona. We provide structural, MEP, civil, and geotechnical engineering for commercial, industrial, multifamily, and government clients — with 15+ years of experience and a multi-discipline engineering team on staff.</p>
         <p>We work from architectural PDFs, CAD files, or field measurements, and we're set up to turn projects around on compressed schedules when the situation calls for it.</p>
 ${relatedLinks ? `        <p>Related services in ${esc(page.cityName)}: ${relatedLinks}</p>` : ""}
       </div>
@@ -2133,8 +2133,6 @@ ${relatedLinks ? `        <p>Related services in ${esc(page.cityName)}: ${relate
     "name": "Apex Grid Engineering",
     "description": page.lede,
     "url": `${SITE}${url}`,
-    "telephone": "+14804900064",
-    "address": { "@type": "PostalAddress", "addressLocality": "Queen Creek", "addressRegion": "AZ", "postalCode": "85142" },
     "areaServed": { "@type": "City", "name": page.cityName },
     "serviceType": toTitle(page.serviceSlug),
   };
@@ -2247,8 +2245,6 @@ function solutionPage(page: SolutionPage): string {
     "name": "Apex Grid Engineering",
     "description": page.lede,
     "url": `${SITE}${url}`,
-    "telephone": "+14804900064",
-    "address": { "@type": "PostalAddress", "addressLocality": "Queen Creek", "addressRegion": "AZ", "postalCode": "85142" },
     "serviceType": page.category,
   };
 
@@ -2496,7 +2492,7 @@ function structuralExtendedPage(page: StructuralExtendedPage): string {
     <section class="section section--light">
       <div class="container container--narrow">
         <h2>Why Work With Apex Grid</h2>
-        <p>Apex Grid Engineering is a multi-discipline firm with multi-state PE coverage confirmed per project — headquartered in Queen Creek, Arizona. We provide ${esc(page.h1.toLowerCase())} as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract. Our engineers produce PE-stamped permit packages and respond to plan check comments as part of the scope.</p>
+        <p>Apex Grid Engineering is a multi-discipline firm with multi-state PE coverage confirmed per project and a business-provided operating and contact address in Queen Creek, Arizona. We provide ${esc(page.h1.toLowerCase())} as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract. Our engineers produce PE-stamped permit packages and respond to plan check comments as part of the scope.</p>
         <a class="btn btn--primary" href="/contact/">${esc(page.ctaText)}</a>
       </div>
     </section>
@@ -2521,7 +2517,6 @@ function structuralExtendedPage(page: StructuralExtendedPage): string {
     "name": "Apex Grid Engineering",
     "description": page.lede,
     "url": `${SITE}${url}`,
-    "telephone": "+14804900064",
     "serviceType": page.h1,
   };
   return htmlShell({ title: page.title, description: page.description, canonical: `${SITE}${url}`, schemaJson: [schema, breadcrumbSchema(crumbs)], body });
@@ -2932,7 +2927,7 @@ ${extendedStructuralCards}
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
-        <p>Apex Grid Engineering is a multi-discipline firm with multi-state PE coverage confirmed per project — headquartered in Queen Creek, Arizona, with a multi-discipline engineering team across structural, MEP, civil, and geotechnical disciplines. We provide ${esc(hub.h1.toLowerCase())} as a standalone service or as part of a coordinated multi-discipline package.</p>
+        <p>Apex Grid Engineering is a multi-discipline firm with multi-state PE coverage confirmed per project, a business-provided operating and contact address in Queen Creek, Arizona, and a multi-discipline engineering team across structural, MEP, civil, and geotechnical disciplines. We provide ${esc(hub.h1.toLowerCase())} as a standalone service or as part of a coordinated multi-discipline package.</p>
         <p>We work from architectural PDFs, contractor sketches, or existing CAD files and produce stamped engineering documents and permit packages that building departments accept. One business day turnaround on fee proposals.</p>
         <a class="btn btn--primary" href="/contact/">Get a Proposal</a>
       </div>
@@ -2953,8 +2948,6 @@ ${extendedStructuralCards}
     "name": "Apex Grid Engineering",
     "description": hub.lede,
     "url": `${SITE}${url}`,
-    "telephone": "+14804900064",
-    "address": { "@type": "PostalAddress", "addressLocality": "Queen Creek", "addressRegion": "AZ", "postalCode": "85142" },
     "serviceType": hub.h1,
   };
 
@@ -3042,8 +3035,6 @@ function disciplineSubpagePage(hub: DisciplineHub, sp: DisciplineSubpage): strin
     "name": "Apex Grid Engineering",
     "description": sp.lede,
     "url": `${SITE}${url}`,
-    "telephone": "+14804900064",
-    "address": { "@type": "PostalAddress", "addressLocality": "Queen Creek", "addressRegion": "AZ", "postalCode": "85142" },
     "serviceType": sp.h1,
   };
 

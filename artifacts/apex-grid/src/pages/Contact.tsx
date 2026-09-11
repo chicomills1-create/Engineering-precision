@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { usePageMeta, useJsonLd } from "@/lib/seo";
+import { APEX_GRID_BUSINESS_SCHEMA } from "@/lib/business-schema";
 import { Check, FileText, Loader2, Upload, X } from "lucide-react";
 
 const ACCEPTED_TYPES = ".pdf,.dwg,.dxf,.rvt,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.jpg,.jpeg,.png,.tif,.tiff";
@@ -50,32 +51,7 @@ const DOCUMENT_CHECKLIST = [
 export default function Contact() {
   usePageMeta(PAGE_META);
 
-  useJsonLd({
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Apex Grid Engineering",
-    "url": "https://apexgrideng.com/",
-    "email": "info@apexgrideng.com",
-    "telephone": "+1-480-490-0064",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "22475 E Quintero Rd",
-      "addressLocality": "Queen Creek",
-      "addressRegion": "AZ",
-      "postalCode": "85142",
-      "addressCountry": "US",
-    },
-    "areaServed": [
-      "United States",
-      "Arizona",
-      "California",
-      "Texas",
-      "Florida",
-      "Nevada",
-    ],
-    "priceRange": "$$",
-    "openingHours": "Mo-Fr 08:00-18:00",
-  });
+  useJsonLd(APEX_GRID_BUSINESS_SCHEMA);
 
   const { toast } = useToast();
   const [isSuccess, setIsSuccess] = useState(false);
@@ -476,15 +452,18 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">General Inquiries</h4>
+                    <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Business-provided contact</h4>
                     <p className="text-foreground">info@apexgrideng.com</p>
                     <p className="text-foreground">(480) 490-0064</p>
                   </div>
 
                   <div>
-                    <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Business-provided contact</h4>
+                    <h4 className="text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Operating / contact address</h4>
                     <p className="text-foreground">22475 E Quintero Rd</p>
                     <p className="text-foreground">Queen Creek, AZ 85142</p>
+                    <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
+                      Business-provided; not presented as a statutory-agent, ACC mailing, or regulator-verified firm address.
+                    </p>
                   </div>
 
                   <div>

@@ -1,5 +1,5 @@
 /** Official evidence register for licensing and business-identity claims. */
-export const OFFICIAL_EVIDENCE_REVIEW_DATE = "2026-09-10";
+export const OFFICIAL_EVIDENCE_REVIEW_DATE = "2026-09-11";
 
 export const OFFICIAL_EVIDENCE = {
   arizonaCorporations: {
@@ -48,8 +48,41 @@ export const OFFICIAL_EVIDENCE = {
   },
 } as const;
 
+/**
+ * Captured result of the official identity review.
+ *
+ * These are negative search findings, not proof that no registration exists.
+ * A matching detail record or filing must be saved before publishing an ACC
+ * entity ID, legal name, entity status, BTR business registration, responsible
+ * professional, or regulator-sourced address.
+ */
+export const ARIZONA_IDENTITY_REVIEW = {
+  corporationCommission: {
+    searchedNames: ["Apex Grid", "Apex Grid Engineering", "Jeremy Mills"],
+    matchingEntityCaptured: false,
+    legalName: null,
+    entityId: null,
+    status: null,
+    filings: [],
+  },
+  boardOfTechnicalRegistration: {
+    searchedNames: ["Apex Grid", "Apex Grid Engineering", "Jeremy Mills"],
+    matchingBusinessRegistrationCaptured: false,
+    businessRegistration: null,
+    responsibleProfessional: null,
+  },
+  contactRecord: {
+    streetAddress: "22475 E Quintero Rd",
+    locality: "Queen Creek, AZ 85142",
+    telephone: "(480) 490-0064",
+    evidenceBasis: "Business-provided contact information",
+    officialAddressType: null,
+    note: "Do not describe this as an ACC known place of business, statutory-agent address, mailing address, BTR address, or headquarters until a matching official record is captured.",
+  },
+} as const;
+
 export const LICENSING_CLAIM =
   "Apex Grid is a multi-state engineering team. Service availability and stamping are confirmed per project only after the responsible individual license, firm authorization, discipline, and authority-having-jurisdiction requirements are verified.";
 
 export const EVIDENCE_LIMITATION =
-  "Official sources explain regulator and process requirements; the records reviewed do not independently verify Apex Grid's claimed state count, project-specific direct licensure, firm registrations, named-license mappings, architect credentials, SDVOSB certification, SAM.gov registration, street address, phone, or coordinates.";
+  "Official sources explain regulator and process requirements; no matching ACC entity detail or Arizona BTR business/responsible-professional record was captured for Apex Grid. The review therefore does not independently verify a legal entity name, entity ID or status, relevant filings, Arizona firm registration, named-license mapping, street address, phone, coordinates, claimed state count, architect credentials, SDVOSB certification, or SAM.gov registration.";

@@ -38,7 +38,7 @@ export const MISC_PAGES: MiscPage[] = [
       },
       {
         heading: "Firm Overview",
-        content: "Apex Grid Engineering is headquartered in Queen Creek, Arizona.",
+        content: "Apex Grid Engineering uses a business-provided operating and contact address in Queen Creek, Arizona; it is not presented as a regulator-verified headquarters, statutory-agent address, or official mailing address.",
         bullets: [
           "Multi-state PE coverage confirmed per project — one firm for multi-market clients",
           "15+ years of combined engineering experience",

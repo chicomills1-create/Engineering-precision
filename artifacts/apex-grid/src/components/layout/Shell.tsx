@@ -356,7 +356,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
               <h4 className="font-display font-bold mb-6 text-sm uppercase tracking-widest text-muted-foreground">Contact</h4>
               <ul className="space-y-4 text-sm text-foreground/80">
                 <li>
-                  <span className="block font-medium text-foreground mb-1">Business-provided contact</span>
+                  <span className="block font-medium text-foreground mb-1">Business-provided operating / contact address</span>
                   22475 E Quintero Rd<br />Queen Creek, AZ 85142
                 </li>
                 <li className="pt-4 border-t border-border/50">
