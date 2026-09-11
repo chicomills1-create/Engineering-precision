@@ -3448,7 +3448,7 @@ async function main() {
     if (!jsonLd.some((schema) => schema["@type"] === "Service") || !jsonLd.some((schema) => schema["@type"] === "FAQPage")) {
       throw new Error(`SEO assertion failed: invalid JSON-LD intent schema: ${ep.slug}`);
     }
-    if (/(?:we|apex grid|our)\s+(?:guarantee|guaranteed|offer a fixed price|have local offices|provide coverage everywhere|promise emergency availability)/i.test(html)) {
+    if (/(?:we|apex grid|our)\s+(?:guarantee|guaranteed|offer a fixed price|claim a nearby office|provide coverage everywhere|promise emergency availability)/i.test(html)) {
       throw new Error(`SEO assertion failed: prohibited claim on intent page: ${ep.slug}`);
     }
     fs.writeFileSync(path.join(dir, "index.html"), html);
@@ -3498,7 +3498,7 @@ async function main() {
        },
     ],
   }, null, 2)}\n`);
-  if (/"24-hour turnaround|24–hour turnaround|guaranteed (?:completion|approval)|local offices|coverage everywhere|fixed-fee proposal/i.test(JSON.stringify(SOLUTION_PAGES))) {
+  if (/"24-hour turnaround|24–hour turnaround|guaranteed (?:completion|approval)|claimed nearby office|coverage everywhere|fixed-fee proposal/i.test(JSON.stringify(SOLUTION_PAGES))) {
     throw new Error("SEO assertion failed: prohibited turnaround, locality, or fixed-fee claim remains in solution definitions");
   }
 

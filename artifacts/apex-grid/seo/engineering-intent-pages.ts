@@ -257,7 +257,7 @@ export const NEAR_ME_ENGINEERING_PAGE: EngineeringIntentPage = {
     { heading: "Confirm the right service area", body: "Use the verified state and city service-area links below to review applicable local information. Apex Grid does not create local presence claims from a search phrase; jurisdiction, licensure, and project-specific requirements are confirmed during intake." },
   ],
   faqs: [
-    { q: "Does Apex Grid have an engineering office near me?", a: "This page does not represent local offices. Search results depend on your actual location; ask us to review the project jurisdiction and whether remote work or a site visit is appropriate." },
+    { q: "Does Apex Grid have an engineering office near me?", a: "No physical office is claimed on this page. Search results depend on your actual location; ask us to review the project jurisdiction and whether remote work or a site visit is appropriate." },
     { q: "Can I hire a structural, MEP, or civil engineer near me?", a: "We can review those commercial engineering needs through one intake path, subject to discipline, project records, jurisdiction, licensure, site access, and qualified engineer availability." },
     { q: "Can you provide PE-stamped plans near me?", a: "A responsible engineer must confirm the project scope, jurisdictional authority, records, and basis for signing and sealing. Stamping is not automatic from a location-based inquiry." },
     { q: "How do I find the right permit engineer?", a: "Send the permit jurisdiction, correction notice or submittal requirements, existing plans, requested deliverable, and project address so the appropriate discipline and review path can be assessed." },

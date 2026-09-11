@@ -11,9 +11,9 @@ const site = (process.env.VITE_SITE_URL ?? "https://apexgrideng.com").replace(/\
 
 const routeMeta: Record<string, [string, string]> = {
   "/": ["PE-Stamped MEP & Structural Engineering | Apex Grid", "PE-stamped structural, commercial MEP, civil, and building-assessment engineering from Arizona, with Title 24 and municipal plan-check support."],
-  "/about": ["About Apex Grid Engineering | Integrated Engineering Firm", "Apex Grid Engineering is an integrated engineering, architecture, and general contracting organization serving owners, architects, developers, and contractors nationwide."],
+  "/about": ["About Apex Grid Engineering | Integrated Engineering Firm", "Apex Grid Engineering coordinates engineering, architecture, and general contracting support, with regulated scope confirmed for each project jurisdiction."],
   "/contact": ["Contact Us | Request an Engineering Proposal | Apex Grid", "Start your project with Apex Grid Engineering. Request a proposal for architectural, MEP, structural, or civil design services — initial review response typically within 12-24 hours for most standard requests."],
-  "/for-architects": ["MEP & Structural Engineering for Architects | Apex Grid", "A consulting engineering partner built for architects: coordinated MEP, structural, and civil design, clean Revit/CAD backgrounds, fast RFI turnaround, and permit-ready stamped documents in 49 states."],
+  "/for-architects": ["MEP & Structural Engineering for Architects | Apex Grid", "Coordinated MEP, structural, and civil design support for architects, with deliverables and signing requirements confirmed for each project jurisdiction."],
   "/for-contractors": ["Construction Engineering Support for Contractors | Apex Grid", "Responsive MEP, structural, civil, and architectural engineering support for contractors, including coordinated permit documents, RFIs, submittals, and field-ready solutions."],
   "/for-developers": ["Engineering for Developers | Feasibility to Permit | Apex Grid", "Engineering support for developers from due diligence and feasibility through coordinated, permit-ready MEP, structural, civil, and architectural documents."],
   "/for-property-managers": ["Engineering for Property Managers | Apex Grid", "Practical engineering support for property managers, including building assessments, repair planning, code requirements, and coordinated design services."],
@@ -23,7 +23,7 @@ const routeMeta: Record<string, [string, string]> = {
   "/military": ["Military & Defense Engineering | Veteran-Led Firm | Apex Grid", "Veteran-led engineering firm shaped by U.S. Air Force Aerospace Medical Service and Operation Iraqi Freedom experience. UFC and ATFP design, mission-critical MEP, and permit-ready documents for military and defense facilities."],
   "/resources": ["Engineering Resources & Answers | Apex Grid Engineering", "Answer-first guides on structural, MEP, civil, geotechnical, PE stamping, Title 24, and municipal plan-check requirements."],
   "/team": ["Apex Grid Engineering Team | Licensed Professionals", "Meet the Apex Grid Engineering team delivering coordinated architecture, MEP, structural, civil, and construction services."],
-  "/capabilities": ["Firm Capabilities | Engineering Services, NAICS Codes & Licensure | Apex Grid", "Complete capabilities reference for procurement officers and prime contractors — disciplines, markets, NAICS codes, 49-state PE licensure, software, codes, and veteran ownership status."],
+  "/capabilities": ["Firm Capabilities | Engineering Services, NAICS Codes & Licensure | Apex Grid", "Capabilities reference for procurement officers and prime contractors covering disciplines, markets, NAICS codes, software, codes, and project-specific credential verification."],
   "/privacy": ["Privacy Policy | Apex Grid Engineering", "How Apex Grid Engineering collects, uses, and protects information submitted through its website."],
   "/terms": ["Terms of Use | Apex Grid Engineering", "Terms governing use of the Apex Grid Engineering website and project inquiry process."],
 };

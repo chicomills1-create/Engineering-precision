@@ -110,7 +110,7 @@ export default defineConfig({
   build: {
     outDir: path.resolve(
       import.meta.dirname,
-      isPostMergeValidation ? '.post-merge-dist' : isPrerenderBundle ? '.prerender' : 'dist/public',
+      isPrerenderBundle ? '.prerender' : isPostMergeValidation ? '.post-merge-dist' : 'dist/public',
     ),
     emptyOutDir: true,
     minify: isPostMergeValidation || isPrerenderBundle ? false : 'esbuild',

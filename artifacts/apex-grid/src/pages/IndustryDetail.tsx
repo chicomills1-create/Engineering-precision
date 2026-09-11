@@ -28,7 +28,11 @@ const DISCIPLINE_SLUGS: Record<string, string> = {
 
 const INDUSTRY_SPECIALTY_LINKS: Record<string, { href: string; label: string }[]> = {
   "agriculture-cannabis-facility-engineering": [{ href: "/industries/cannabis/mep-engineering/", label: "Cannabis facility MEP engineering" }],
-  "data-center-engineering": [{ href: "/industries/distribution-centers/engineering/", label: "Distribution center engineering" }],
+  "data-center-engineering": [
+    { href: "/industries/distribution-centers/engineering/", label: "Distribution center engineering" },
+    { href: "/industries/mission-critical/electrical-engineering/", label: "Mission-critical electrical engineering" },
+    { href: "/industries/mission-critical/mechanical-engineering/", label: "Mission-critical mechanical engineering" },
+  ],
   "healthcare-engineering": [
     { href: "/industries/healthcare/clinics/mep-engineering/", label: "Clinic MEP engineering" },
     { href: "/industries/healthcare/hospitals/mep-engineering/", label: "Hospital MEP engineering" },
@@ -37,19 +41,17 @@ const INDUSTRY_SPECIALTY_LINKS: Record<string, { href: string; label: string }[]
   "industrial-warehouse-engineering": [
     { href: "/industries/industrial-warehouse/warehouse-mep-engineering/", label: "Warehouse MEP engineering" },
     { href: "/industries/industrial-warehouse/warehouse-structural-engineering/", label: "Warehouse structural engineering" },
-  ],
-  "life-science-cleanroom-engineering": [{ href: "/industries/life-science/cleanroom-mep-engineering/", label: "Cleanroom MEP engineering" }],
-  "manufacturing-facility-engineering": [
     { href: "/industries/manufacturing/mep-engineering/", label: "Manufacturing MEP engineering" },
     { href: "/industries/manufacturing/structural-engineering/", label: "Manufacturing structural engineering" },
   ],
+  "life-science-cleanroom-engineering": [{ href: "/industries/life-science/cleanroom-mep-engineering/", label: "Cleanroom MEP engineering" }],
   "military-defense-engineering": [{ href: "/industries/military-defense/mechanical-engineering/", label: "Military mechanical engineering" }],
   "multifamily-residential-engineering": [
     { href: "/industries/multifamily/apartments/mep-engineering/", label: "Apartment MEP engineering" },
     { href: "/industries/multifamily/apartments/structural-engineering/", label: "Apartment structural engineering" },
     { href: "/industries/student-housing/mep-engineering/", label: "Student housing MEP engineering" },
   ],
-  "restaurants-food-service-engineering": [{ href: "/industries/restaurants/commercial-kitchen-mep/", label: "Commercial kitchen MEP engineering" }],
+  "restaurant-food-service-engineering": [{ href: "/industries/restaurants/commercial-kitchen-mep/", label: "Commercial kitchen MEP engineering" }],
 };
 
 export default function IndustryDetail() {

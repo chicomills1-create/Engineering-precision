@@ -16,4 +16,10 @@ description: Lessons from task-agent merges breaking the apex-grid frontend
 
 **How to apply:** Keep the lightweight mode gated to the post-merge environment variable and clean its temporary output on exit. Use the ordinary Vite build for deployment and the dedicated build workflow.
 
+**Generated-output audits:** Regenerate the static SEO corpus with search-engine submission disabled, then build/prerender, then run audits that scan `public/`.
+
+**Why:** Claim and link audits otherwise inspect stale generated HTML and reject a merge even when its source generator contains the fix. Post-merge temporary-output mode can also accidentally redirect the SSR bundle away from the fixed path imported by the prerender script, causing current component changes to be rendered with a stale bundle.
+
+**How to apply:** The prerender-bundle output path takes precedence over temporary client-build output. Keep generated-corpus audits after prerendering, and do not weaken an audit to make setup pass.
+
 **Status (2026-07-28):** Automated. The post-merge script now runs codegen, typecheck, and a production build (fail-fast), and matching validation commands (`codegen`, `typecheck`, `build`) are registered. If a merge breaks the site, post-merge setup fails loudly instead of shipping a black site.
