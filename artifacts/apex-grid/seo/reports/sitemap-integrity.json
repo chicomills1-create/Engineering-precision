@@ -1,0 +1,27 @@
+{
+  "generatedAt": "deterministic",
+  "sitemapFiles": [
+    "sitemap-architecture-locations.xml",
+    "sitemap-core.xml",
+    "sitemap-general-contracting-locations.xml",
+    "sitemap-industries.xml",
+    "sitemap-locations.xml",
+    "sitemap-resources.xml",
+    "sitemap-services.xml",
+    "sitemap-solutions.xml"
+  ],
+  "auditedUrls": 1517,
+  "passedUrls": 1517,
+  "failedUrls": 0,
+  "classifications": {
+    "addedRankingPages": [
+      "https://apexgrideng.com/licensing-service-coverage/"
+    ],
+    "intentionallyExcludedLegalPages": [
+      "https://apexgrideng.com/privacy",
+      "https://apexgrideng.com/terms"
+    ],
+    "aliasPolicy": "Legacy location aliases are excluded from sitemaps and emitted in legacy-location-redirects.json for HTTP 301 handling."
+  },
+  "failures": []
+}

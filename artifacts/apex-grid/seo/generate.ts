@@ -341,9 +341,9 @@ function legacyLocationRedirectPage(fromPath: string, toPath: string): string {
 }
 
 /**
- * A city alias is an alias for the complete location subtree, not only the
- * city landing URL. Expand the reviewed base manifest to service children so
- * old bookmarks receive a real server 301 instead of a duplicate HTML page.
+ * A city alias owns the complete location subtree, not only its landing URL.
+ * Expand reviewed city aliases to service children so old bookmarks receive
+ * a server-side 301 rather than a duplicate generated page.
  */
 function expandedLegacyLocationRedirects(): Record<string, string> {
   const redirects: Record<string, string> = { ...LEGACY_LOCATION_REDIRECTS };
@@ -352,12 +352,6 @@ function expandedLegacyLocationRedirects(): Record<string, string> {
     for (const service of SERVICES) {
       redirects[`${from}${service.slug}/`] = `${to}${service.slug}/`;
     }
-  }
-  const stLouisFrom = "/locations/missouri/st-louis/";
-  const stLouisTo = "/locations/missouri/saint-louis/";
-  redirects[stLouisFrom] = stLouisTo;
-  for (const service of SERVICES) {
-    redirects[`${stLouisFrom}${service.slug}/`] = `${stLouisTo}${service.slug}/`;
   }
   return redirects;
 }
@@ -615,8 +609,6 @@ function assertNoMarkupCity(city: CityData) {
 function statePage(state: StateData, cities: CityData[]): string {
   const stateCities = cities.filter((c) => c.stateSlug === state.slug && isReviewedCity(c));
   const specialtyLocationPages = LOCATION_SERVICE_PAGES.filter((p) => p.stateSlug === state.slug);
-  const specialtyCityRoots = [...new Set(specialtyLocationPages.map((p) => p.citySlug))]
-    .filter((slug) => !stateCities.some((city) => city.slug === slug));
   const availableVerticals = verticalsForState(state.slug);
   const crumbs = [
     { name: "Home", href: "/" },
@@ -679,9 +671,6 @@ ${
 }
 ${specialtyLocationPages.length ? `<section class="block"><div class="container">
   <h2>${esc(state.name)} <em>Specialty Location Services</em></h2>
-  ${specialtyCityRoots.length ? `<div class="linkrow">${specialtyCityRoots.map((slug) =>
-    `<a href="/locations/${state.slug}/${slug}/">${esc(slug.replace(/-/g, " "))} service area</a>`
-  ).join("")}</div>` : ""}
   <div class="linkrow">${specialtyLocationPages.map((p) =>
     `<a href="/locations/${p.stateSlug}/${p.citySlug}/${p.serviceSlug}/">${esc(p.title)}</a>`
   ).join("")}</div>
@@ -722,7 +711,7 @@ ${breadcrumb(crumbs)}
 <section class="block"><div class="container">
   <h2>Major <em>Metro Markets</em></h2>
   <div class="grid3">
-   ${cities.filter(isReviewedCity)
+  ${cities
     .map(
       (c) => `<a class="card" href="/locations/${c.stateSlug}/${c.slug}/"><div class="label">${esc(c.county)}</div><h3>${esc(c.name)}</h3><p>${esc(c.codes.building.split(",")[0].split("(")[0].trim())} · ${esc(c.utilities.electric.split("—")[0].split("(")[0].trim())}</p></a>`,
     )
@@ -765,7 +754,7 @@ function cityLitePage(state: StateData, city: DirectoryCity, siblings: Directory
     { name: city.name },
   ];
   const nearby =
-    indexable && Number.isFinite(city.lat) && Number.isFinite(city.lng)
+    Number.isFinite(city.lat) && Number.isFinite(city.lng)
       ? siblings
           .filter((item) => item.slug !== city.slug && Number.isFinite(item.lat) && Number.isFinite(item.lng))
           .map((item) => ({
@@ -775,13 +764,10 @@ function cityLitePage(state: StateData, city: DirectoryCity, siblings: Directory
           .sort((a, b) => a.distance - b.distance)
           .slice(0, 10)
           .map(({ city: item }) => item)
-      : [];
-  // Directory-lite pages remain live for compatibility, but must not form a
-  // doorway grid with other noindex pages. Only reviewed city owners are
-  // useful contextual destinations from this page.
-  const curatedInState = curated.filter((c) => c.stateSlug === state.slug && isReviewedCity(c));
+      : siblings.filter((item) => item.slug !== city.slug).slice(0, 10);
+  const curatedInState = curated.filter((c) => c.stateSlug === state.slug);
   const populationContext = city.pop ? ` (population approximately ${city.pop.toLocaleString("en-US")})` : "";
-  const availableVerticals = indexable ? verticalsForState(state.slug) : [];
+  const availableVerticals = verticalsForState(state.slug);
   const faqs = [
     {
       q: `Does Apex Grid provide engineering services in ${city.name}, ${state.abbrev}?`,
@@ -1186,12 +1172,12 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     u(`${SITE}/for-developers`, today, "monthly", "0.8"),
     u(`${SITE}/for-property-managers`, today, "monthly", "0.8"),
     u(`${SITE}/capabilities-statement.html`, today, "monthly", "0.7"),
-    u(`${SITE}/licensing-service-coverage/`, today, "monthly", "0.7"),
     u(`${SITE}/sitemap/`, today, "monthly", "0.3"),
   ];
   for (const page of STATIC_STANDALONE_PAGES.filter((entry) => entry.sitemapCategory === "core")) {
     coreUrls.push(u(`${SITE}/${page.dir}/`, today, "monthly", "0.7"));
   }
+  coreUrls.push(u(`${SITE}/licensing-service-coverage/`, today, "monthly", "0.7"));
 
   // ── Tier 1-2: Service discipline hubs + deep subpages ───────────────────
   const servicesUrls: string[] = [];
@@ -1226,7 +1212,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     u(`${SITE}/industries`, today, "monthly", "0.7"),
   ];
   for (const ind of ALL_INDUSTRIES) {
-    industriesUrls.push(u(`${SITE}/industries/${ind.slug}`, today, "monthly", "0.8"));
+    industriesUrls.push(u(`${SITE}/industries/${ind.slug}/`, today, "monthly", "0.8"));
   }
   for (const idp of CANONICAL_INDUSTRY_DISCIPLINE_PAGES) {
     industriesUrls.push(u(`${SITE}${getIndustryDisciplineUrl(idp)}`, today, "monthly", "0.8"));
@@ -1261,12 +1247,13 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     }
   }
   for (const mp of MISC_PAGES) {
-    solutionsUrls.push(u(`${SITE}/${mp.slug}/`, today, "monthly", "0.8"));
+    const canonicalPath = mp.slug === "capabilities" ? `/${mp.slug}` : `/${mp.slug}/`;
+    solutionsUrls.push(u(`${SITE}${canonicalPath}`, today, "monthly", "0.8"));
   }
 
   // ── Tier 5: Resources (blog, guides, resource articles, glossary) ────────
   const resourcesUrls: string[] = [
-    u(`${SITE}/resources/`, today, "monthly", "0.8"),
+    u(`${SITE}/resources`, today, "monthly", "0.8"),
   ];
   for (const d of RESOURCE_DISCIPLINES) {
     resourcesUrls.push(u(`${SITE}/resources/${d.slug}/`, today, "monthly", "0.7"));
@@ -1382,6 +1369,112 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   console.log(`Sitemap index: ${sitemaps.length} sitemaps, ${totalUrls} total URLs`);
   for (const { name, urls } of sitemaps) {
     console.log(`  ${name}: ${urls.length} URLs`);
+  }
+}
+
+type SitemapAuditEntry = {
+  url: string;
+  file: string;
+  present: boolean;
+  indexable: boolean;
+  nonRedirecting: boolean;
+  selfCanonical: boolean;
+};
+
+function generatedHtmlPath(pathname: string): string {
+  if (pathname === "/") return path.join(PUBLIC, "index.html");
+  if (path.extname(pathname)) return path.join(PUBLIC, pathname.replace(/^\/+/, ""));
+  return path.join(PUBLIC, pathname.replace(/^\/|\/$/g, ""), "index.html");
+}
+
+function assertLocationHubsLinkOnlyIndexableCities(states: StateData[]): void {
+  const hubFiles = [
+    ...states.map((state) => path.join(PUBLIC, "locations", state.slug, "index.html")),
+    ...LOCATION_VERTICALS.flatMap((vertical) =>
+      states
+        .filter((state) => verticalAvailableInState(vertical, state.slug))
+        .map((state) => path.join(PUBLIC, vertical.slug, "locations", state.slug, "index.html"))
+    ),
+  ];
+  const violations: Array<{ hub: string; target: string }> = [];
+
+  for (const hubFile of hubFiles) {
+    if (!fs.existsSync(hubFile)) continue;
+    const html = fs.readFileSync(hubFile, "utf8");
+    for (const match of html.matchAll(/href=["']([^"'#?]+)["']/gi)) {
+      const targetPath = new URL(match[1], SITE).pathname;
+      if (!/^\/(?:locations|architecture\/locations|general-contracting\/locations)\/[^/]+\/[^/]+\/$/.test(targetPath)) {
+        continue;
+      }
+      const targetFile = generatedHtmlPath(targetPath);
+      if (!fs.existsSync(targetFile)) continue;
+      const targetHtml = fs.readFileSync(targetFile, "utf8");
+      if (/<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*\bnoindex\b/i.test(targetHtml)) {
+        violations.push({
+          hub: `/${path.relative(PUBLIC, hubFile).split(path.sep).join("/")}`,
+          target: targetPath,
+        });
+      }
+    }
+  }
+
+  if (violations.length) {
+    throw new Error(`SEO assertion failed: ${violations.length} location hub links target noindex city pages: ${JSON.stringify(violations.slice(0, 10))}`);
+  }
+}
+
+/** Proves that every submitted URL resolves to generated HTML that is eligible
+ * for indexing. This is intentionally stricter than the internal-link report:
+ * a sitemap entry may not be a redirect or canonicalize to another URL. */
+export function writeSitemapIntegrityAudit(): void {
+  const sitemapFiles = fs.readdirSync(PUBLIC)
+    .filter((name) => /^sitemap-[\w-]+\.xml$/.test(name))
+    .sort();
+  const entries: SitemapAuditEntry[] = [];
+
+  for (const file of sitemapFiles) {
+    const xml = fs.readFileSync(path.join(PUBLIC, file), "utf8");
+    for (const match of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+      const url = match[1];
+      const parsed = new URL(url);
+      const htmlPath = generatedHtmlPath(parsed.pathname);
+      const present = fs.existsSync(htmlPath);
+      const html = present ? fs.readFileSync(htmlPath, "utf8") : "";
+      const robots = html.match(/<meta[^>]+name=["']robots["'][^>]+content=["']([^"']+)/i)?.[1] ?? "";
+      const canonical = html.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)/i)?.[1] ?? "";
+      const expectedCanonical = `${SITE}${parsed.pathname}`;
+      entries.push({
+        url,
+        file,
+        present,
+        indexable: present && !/\bnoindex\b/i.test(robots),
+        nonRedirecting: present && !/http-equiv=["']refresh["']/i.test(html),
+        selfCanonical: canonical === expectedCanonical,
+      });
+    }
+  }
+
+  const failures = entries.filter((entry) =>
+    !entry.present || !entry.indexable || !entry.nonRedirecting || !entry.selfCanonical
+  );
+  const report = {
+    generatedAt: "deterministic",
+    sitemapFiles,
+    auditedUrls: entries.length,
+    passedUrls: entries.length - failures.length,
+    failedUrls: failures.length,
+    classifications: {
+      addedRankingPages: [`${SITE}/licensing-service-coverage/`],
+      intentionallyExcludedLegalPages: [`${SITE}/privacy`, `${SITE}/terms`],
+      aliasPolicy: "Legacy location aliases are excluded from sitemaps and emitted in legacy-location-redirects.json for HTTP 301 handling.",
+    },
+    failures,
+  };
+  const reportDir = path.join(__dirname, "reports");
+  fs.mkdirSync(reportDir, { recursive: true });
+  fs.writeFileSync(path.join(reportDir, "sitemap-integrity.json"), `${JSON.stringify(report, null, 2)}\n`);
+  if (failures.length) {
+    throw new Error(`SEO assertion failed: ${failures.length} sitemap URLs failed integrity checks (see seo/reports/sitemap-integrity.json)`);
   }
 }
 
@@ -3309,17 +3402,6 @@ async function main() {
     fs.writeFileSync(path.join(legacyDir, "index.html"), legacyLocationRedirectPage(fromPath, toPath));
     pages++;
   }
-  // St. Louis was historically emitted under an abbreviated city slug. Keep
-  // every old service child live, but make the normalized city tree canonical.
-  const stLouisServices = SERVICES.map((service) => service.slug);
-  for (const suffix of ["", ...stLouisServices]) {
-    const fromPath = `/locations/missouri/st-louis/${suffix ? `${suffix}/` : ""}`;
-    const toPath = `/locations/missouri/saint-louis/${suffix ? `${suffix}/` : ""}`;
-    const legacyDir = path.join(PUBLIC, fromPath.replace(/^\/|\/$/g, ""));
-    fs.mkdirSync(legacyDir, { recursive: true });
-    fs.writeFileSync(path.join(legacyDir, "index.html"), legacyLocationRedirectPage(fromPath, toPath));
-    pages++;
-  }
   let verticalPages = 0;
   for (const vertical of LOCATION_VERTICALS) {
     const verticalDir = path.join(PUBLIC, vertical.slug);
@@ -3334,36 +3416,38 @@ async function main() {
     const cityCountByState = Object.fromEntries(
       states
         .filter((state) => verticalAvailableInState(vertical, state.slug))
-        .map((state) => [state.slug, [
-          ...cities.filter((city) => city.stateSlug === state.slug && isReviewedCity(city)).map((city) => city.slug),
-          ...RETAINED_LEGACY_LOCATIONS.filter((retained) => retained.stateSlug === state.slug).map((retained) => retained.city.slug),
-        ].length]),
+        .map((state) => {
+          const indexableSlugs = new Set([
+            ...cities.filter((city) => city.stateSlug === state.slug && isReviewedCity(city)).map((city) => city.slug),
+            ...RETAINED_LEGACY_LOCATIONS.filter((entry) => entry.stateSlug === state.slug).map((entry) => entry.city.slug),
+          ]);
+          return [
+            state.slug,
+            allDirectoryCitiesForState(state, directory, cities).filter((city) => indexableSlugs.has(city.slug)).length,
+          ];
+        }),
     );
     fs.writeFileSync(path.join(locationsDir, "index.html"), verticalHubPage(vertical, states, cityCountByState));
     pages++;
     verticalPages++;
 
     for (const state of states.filter((entry) => verticalAvailableInState(vertical, entry.slug))) {
-      // State and vertical hubs link only to reviewed/indexable city owners.
-      // Directory-lite URLs remain directly addressable noindex,follow pages,
-      // but are deliberately excluded from these broad anchor grids.
-      const allStateCities = allDirectoryCitiesForState(state, directory, cities);
-      const stateCities = allStateCities.filter((city) =>
-        cities.some((curated) => curated.stateSlug === state.slug && curated.slug === city.slug && isReviewedCity(curated))
-        || RETAINED_LEGACY_LOCATIONS.some((retained) => retained.stateSlug === state.slug && retained.city.slug === city.slug),
-      );
+      const stateCities = allDirectoryCitiesForState(state, directory, cities);
+      const indexableCitySlugs = new Set([
+        ...cities.filter((city) => city.stateSlug === state.slug && isReviewedCity(city)).map((city) => city.slug),
+        ...RETAINED_LEGACY_LOCATIONS.filter((entry) => entry.stateSlug === state.slug).map((entry) => entry.city.slug),
+      ]);
+      const linkedStateCities = stateCities.filter((city) => indexableCitySlugs.has(city.slug));
       const stateDir = path.join(locationsDir, state.slug);
       fs.mkdirSync(stateDir, { recursive: true });
-      fs.writeFileSync(path.join(stateDir, "index.html"), verticalStatePage(vertical, state, stateCities));
+      fs.writeFileSync(path.join(stateDir, "index.html"), verticalStatePage(vertical, state, linkedStateCities));
       pages++;
       verticalPages++;
 
       const curatedBySlug = new Map(
-        cities
-          .filter((city) => city.stateSlug === state.slug && isReviewedCity(city))
-          .map((city) => [city.slug, city]),
+        cities.filter((city) => city.stateSlug === state.slug).map((city) => [city.slug, city]),
       );
-      for (const city of allStateCities) {
+      for (const city of stateCities) {
         const cityDir = path.join(stateDir, city.slug);
         fs.mkdirSync(cityDir, { recursive: true });
         fs.writeFileSync(
@@ -3372,7 +3456,7 @@ async function main() {
             vertical,
             state,
             city,
-             stateCities,
+            stateCities,
             curatedBySlug.get(city.slug),
              Boolean((curatedBySlug.get(city.slug) && isReviewedCity(curatedBySlug.get(city.slug)!)) || RETAINED_LEGACY_LOCATIONS.some((r) => r.stateSlug === state.slug && r.city.slug === city.slug)),
           ),
@@ -3745,6 +3829,8 @@ async function main() {
   }
 
   writeSitemap(states, cities, directory);
+  assertLocationHubsLinkOnlyIndexableCities(states);
+  writeSitemapIntegrityAudit();
   fs.rmSync(path.join(PUBLIC, "city-page-quality.json"), { force: true });
   if (!fs.existsSync(path.join(PUBLIC, "llms.txt"))) throw new Error("SEO assertion failed: llms.txt was not generated");
   const sampleArticle = RESOURCE_ARTICLES[0];
@@ -3967,7 +4053,7 @@ function cityServicePage(state: StateData, city: CityData, svc: ServiceDef, sibl
     { name: svc.shortName },
   ];
   const otherSvcs = SERVICES.filter((x) => x.slug !== svc.slug);
-  const nearby = siblingCities.filter((c) => c.slug !== city.slug && isReviewedCity(c)).slice(0, 8);
+  const nearby = siblingCities.filter((c) => c.slug !== city.slug).slice(0, 8);
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -4069,8 +4155,8 @@ function cityPage(state: StateData, city: CityData, siblingCities: CityData[]): 
     { name: state.name, href: `/locations/${state.slug}/` },
     { name: city.name },
   ];
-  const nearby = siblingCities.filter((c) => c.slug !== city.slug && isReviewedCity(c));
-  const availableVerticals = isReviewedCity(city) ? verticalsForState(state.slug) : [];
+  const nearby = siblingCities.filter((c) => c.slug !== city.slug);
+  const availableVerticals = verticalsForState(state.slug);
   const specialtyLocationPages = LOCATION_SERVICE_PAGES.filter(
     (p) => p.stateSlug === state.slug && p.citySlug === city.slug,
   );
