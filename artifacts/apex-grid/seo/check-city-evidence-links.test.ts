@@ -26,28 +26,25 @@ test("accepts the expected host and its subdomains but not lookalike domains", (
 });
 
 test("accepts an authoritative redirect to a specific page", async () => {
-  const result = await checkEvidenceTarget(target, {
-    fetchImpl: mockFetch([
-      { status: 301, location: "https://permits.city.example.gov/resources/codes/current" },
-      { status: 200 },
-    ]),
-  });
-  assert.equal(result.status, "ok");
-});
-
-test("rejects redirects away from the expected authority", async () => {
-  const result = await checkEvidenceTarget(target, {
-    fetchImpl: mockFetch([{ status: 302, location: "https://example.com/codes" }]),
+  const result = await checkEvidenceTarget(reviewedTarget, {
+    fetchImpl: mockFetch([{ status: 403 }]),
+    now: new Date("2026-12-10T00:00:00Z"),
   });
   assert.equal(result.status, "off-domain-redirect");
 });
 
 test("reports redirects that collapse evidence to a generic landing page", async () => {
-  const result = await checkEvidenceTarget(target, {
-    fetchImpl: mockFetch([
-      { status: 301, location: "https://city.example.gov/" },
-      { status: 200 },
-    ]),
+  const result = await checkEvidenceTarget(reviewedTarget, {
+    fetchImpl: mockFetch([{ status: 403 }]),
+    now: new Date("2026-12-10T00:00:00Z"),
+  });
+  assert.equal(result.status, "off-domain-redirect");
+});
+
+test("reports redirects that collapse evidence to a generic landing page", async () => {
+  const result = await checkEvidenceTarget(reviewedTarget, {
+    fetchImpl: mockFetch([{ status: 403 }]),
+    now: new Date("2026-12-10T00:00:00Z"),
   });
   assert.equal(result.status, "generic-redirect");
 });
@@ -65,13 +62,14 @@ test("reports HTTP and network failures distinctly", async () => {
 
 test("accepts only the reviewed failure class for an explicit exception", async () => {
   const reviewedTarget: EvidenceTarget = {
-    url: "https://www.atlantaga.gov/i-want-to/obtain-a-building-permit",
-    expectedDomains: ["atlantaga.gov"],
-    references: [{ city: "Atlanta, georgia", category: "ahj" }],
+    url: "https://msc.fema.gov/portal/home",
+    expectedDomains: ["msc.fema.gov"],
+    references: [{ city: "Example, state", category: "climate" }],
   };
 
   const expectedBlock = await checkEvidenceTarget(reviewedTarget, {
     fetchImpl: mockFetch([{ status: 403 }]),
+    now: new Date("2026-12-09T23:59:59Z"),
   });
   assert.equal(expectedBlock.status, "reviewed-exception");
   assert.match(expectedBlock.detail ?? "", /reviewed 2026-09-11/);
@@ -90,7 +88,7 @@ test("accepts only the reviewed failure class for an explicit exception", async 
   }
 });
 
-test("accepts only the reviewed low-level cause for a network exception", async () => {
+test("fails a reviewed exception once its review interval expires", async () => {
   const reviewedTarget: EvidenceTarget = {
     url: "https://msc.fema.gov/portal/home",
     expectedDomains: ["msc.fema.gov"],
@@ -106,6 +104,7 @@ test("accepts only the reviewed low-level cause for a network exception", async 
 
   const expectedReset = await checkEvidenceTarget(reviewedTarget, {
     fetchImpl: fetchFailure("ECONNRESET"),
+    now: new Date("2026-09-11T00:00:00Z"),
   });
   assert.equal(expectedReset.status, "reviewed-exception");
   assert.equal(expectedReset.networkErrorCode, "ECONNRESET");

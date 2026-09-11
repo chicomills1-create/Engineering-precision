@@ -9,6 +9,8 @@ const SOURCE_CATEGORIES = ["ahj", "codes", "amendments", "utilities", "climate",
 const DEFAULT_TIMEOUT_MS = 10_000;
 const DEFAULT_CONCURRENCY = 6;
 const MAX_REDIRECTS = 5;
+
+const EXCEPTION_REVIEW_INTERVAL_DAYS = 90;
 const LOCK_MAX_AGE_MS = 60 * 60_000;
 const LOCK_PATH = path.join(os.tmpdir(), "apex-grid-city-evidence-check.lock");
 type SourceCategory = typeof SOURCE_CATEGORIES[number];
@@ -24,12 +26,13 @@ export interface EvidenceTarget {
   references: EvidenceReference[];
 }
 
-export type LinkStatus = "ok" | "reviewed-exception" | "http-error" | "inaccessible" | "off-domain-redirect" | "generic-redirect";
+export type LinkStatus = "ok" | "reviewed-exception" | "expired-exception" | "http-error" | "inaccessible" | "off-domain-redirect" | "generic-redirect";
 
 interface ReviewedException {
   reviewedOn: string;
+  reviewIntervalDays: number;
   reason: string;
-  expectedStatus: Exclude<LinkStatus, "ok" | "reviewed-exception">;
+  expectedStatus: Exclude<LinkStatus, "ok" | "reviewed-exception" | "expired-exception">;
   expectedStatusCode?: number;
   expectedNetworkErrorCode?: string;
 }
@@ -37,108 +40,126 @@ interface ReviewedException {
 const REVIEWED_EXCEPTIONS: Readonly<Record<string, ReviewedException>> = {
   "https://codes.iccsafe.org/content/AZTEMPEBC2018P1": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official ICC code text remains available to browsers but rejects this safe automated health check.",
     expectedStatus: "http-error",
     expectedStatusCode: 403,
   },
   "https://codes.iccsafe.org/content/IBC2024V2.0": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official ICC code text remains available to browsers but rejects this safe automated health check.",
     expectedStatus: "http-error",
     expectedStatusCode: 403,
   },
   "https://codes.iccsafe.org/content/IECC2024": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official ICC code text remains available to browsers but rejects this safe automated health check.",
     expectedStatus: "http-error",
     expectedStatusCode: 403,
   },
   "https://codes.iccsafe.org/content/IMC2024V2.0": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official ICC code text remains available to browsers but rejects this safe automated health check.",
     expectedStatus: "http-error",
     expectedStatusCode: 403,
   },
   "https://codes.iccsafe.org/content/IPC2024V2.0": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official ICC code text remains available to browsers but rejects this safe automated health check.",
     expectedStatus: "http-error",
     expectedStatusCode: 403,
   },
   "https://novusplace.com/": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official Novus Innovation Corridor project site is intermittently unavailable to automated clients.",
     expectedStatus: "inaccessible",
     expectedNetworkErrorCode: "ERR_SSL_SSL/TLS_ALERT_HANDSHAKE_FAILURE",
   },
   "https://msc.fema.gov/portal/home": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official FEMA flood-map portal consistently rejects or drops safe automated checks; retain for its interactive authoritative map.",
     expectedStatus: "inaccessible",
     expectedNetworkErrorCode: "ECONNRESET",
   },
   "https://hazards.fema.gov/femaportal/wps/portal/NFHLW": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official FEMA National Flood Hazard Layer portal consistently rejects or drops safe automated checks.",
     expectedStatus: "inaccessible",
     expectedNetworkErrorCode: "ECONNRESET",
   },
   "https://www.atlantaga.gov/government/departments/city-planning/ordinances-regulations/construction-codes": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official City of Atlanta source returns 403 to automated clients.",
     expectedStatus: "http-error",
     expectedStatusCode: 403,
   },
   "https://www.atlantaga.gov/i-want-to/obtain-a-building-permit": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official City of Atlanta source returns 403 to automated clients.",
     expectedStatus: "http-error",
     expectedStatusCode: 403,
   },
   "https://www.duke-energy.com/business": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official Duke Energy business source returns 403 to automated clients.",
     expectedStatus: "http-error",
     expectedStatusCode: 403,
   },
   "https://ewdd.lacity.gov/": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official Los Angeles Economic and Workforce Development source returns 403 to automated clients.",
     expectedStatus: "http-error",
     expectedStatusCode: 403,
   },
   "https://www.oncor.com/content/oncorwww/us/en/home/about-us/service-area-map.html": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official Oncor service-area map consistently times out for automated clients.",
     expectedStatus: "inaccessible",
     expectedNetworkErrorCode: "TimeoutError",
   },
   "https://www.srpnet.com/about/service-area-territory": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official SRP service-territory source returns 403 to automated clients.",
     expectedStatus: "http-error",
     expectedStatusCode: 403,
   },
   "https://www.tempe.gov/businesses/building-code": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official City of Tempe source returns 403 to automated clients.",
     expectedStatus: "http-error",
     expectedStatusCode: 403,
   },
   "https://www.tempe.gov/businesses/development-services": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official City of Tempe source returns 403 to automated clients.",
     expectedStatus: "http-error",
     expectedStatusCode: 403,
   },
   "https://www.tempe.gov/businesses/economic-development": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official City of Tempe source returns 403 to automated clients.",
     expectedStatus: "http-error",
     expectedStatusCode: 403,
   },
   "https://www.tempe.gov/government/municipal-utilities/water": {
     reviewedOn: "2026-09-11",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
     reason: "Official City of Tempe source returns 403 to automated clients.",
     expectedStatus: "http-error",
     expectedStatusCode: 403,
@@ -157,6 +178,7 @@ export interface CheckOptions {
   concurrency?: number;
   timeoutMs?: number;
   fetchImpl?: typeof fetch;
+  now?: Date;
 }
 
 function normalizedHost(host: string): string {
@@ -254,7 +276,7 @@ export async function checkEvidenceTarget(target: EvidenceTarget, options: Check
 
       if (!response.ok) {
         const failure: LinkResult = { ...target, status: "http-error", statusCode: response.status, finalUrl: current.href, detail: response.statusText || "HTTP failure" };
-        return applyReviewedException(failure);
+        return applyReviewedException(failure, options.now);
       }
       if (isGenericRedirect(new URL(target.url), current)) {
         return { ...target, status: "generic-redirect", statusCode: response.status, finalUrl: current.href, detail: "redirect ended at a generic landing page" };
@@ -263,7 +285,7 @@ export async function checkEvidenceTarget(target: EvidenceTarget, options: Check
     }
   } catch (error) {
     const { detail, networkErrorCode } = describeNetworkError(error);
-    return applyReviewedException({ ...target, status: "inaccessible", finalUrl: current.href, detail, networkErrorCode });
+    return applyReviewedException({ ...target, status: "inaccessible", finalUrl: current.href, detail, networkErrorCode }, options.now);
   }
   return { ...target, status: "inaccessible", finalUrl: current.href, detail: "unexpected checker state" };
 }
@@ -285,11 +307,20 @@ function describeNetworkError(error: unknown): { detail: string; networkErrorCod
   };
 }
 
-function applyReviewedException(result: LinkResult): LinkResult {
+function applyReviewedException(result: LinkResult, now = new Date()): LinkResult {
   const exception = REVIEWED_EXCEPTIONS[result.url];
   if (!exception || result.status !== exception.expectedStatus) return result;
   if (exception.expectedStatusCode !== undefined && result.statusCode !== exception.expectedStatusCode) return result;
   if (exception.expectedNetworkErrorCode !== undefined && result.networkErrorCode !== exception.expectedNetworkErrorCode) return result;
+  const reviewedAt = Date.parse(`${exception.reviewedOn}T00:00:00Z`);
+  const expiresAt = reviewedAt + exception.reviewIntervalDays * 24 * 60 * 60 * 1000;
+  if (!Number.isFinite(reviewedAt) || now.getTime() >= expiresAt) {
+    return {
+      ...result,
+      status: "expired-exception",
+      detail: `${result.detail ?? result.status}; exception review past due (previously reviewed ${exception.reviewedOn}, interval ${exception.reviewIntervalDays} days): ${exception.reason}`,
+    };
+  }
   return {
     ...result,
     status: "reviewed-exception",
