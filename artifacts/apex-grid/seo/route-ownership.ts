@@ -1,3 +1,6 @@
+import fs from "node:fs";
+import path from "node:path";
+
 export type OutputPipeline = "react-prerender" | "seo-generator";
 
 export const REACT_PRERENDER_ROUTES = [
@@ -85,5 +88,21 @@ export function assertRouteOwnership(): void {
     if (SEO_GENERATOR_FIXED_INDEX_ROUTES.includes(route)) {
       throw new Error(`React-owned shared route is still claimed by the SEO generator: ${route}`);
     }
+  }
+}
+
+/**
+ * Removes generated descendants without changing a React-owned hub file.
+ * If the hub does not exist, this leaves it absent.
+ */
+export function resetGeneratedChildrenPreservingHub(hubDir: string): void {
+  const hubPath = path.join(hubDir, "index.html");
+  const hubHtml = fs.existsSync(hubPath) ? fs.readFileSync(hubPath) : undefined;
+
+  fs.rmSync(hubDir, { recursive: true, force: true });
+  fs.mkdirSync(hubDir, { recursive: true });
+
+  if (hubHtml !== undefined) {
+    fs.writeFileSync(hubPath, hubHtml);
   }
 }

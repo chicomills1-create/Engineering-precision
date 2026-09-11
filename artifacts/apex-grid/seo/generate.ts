@@ -57,6 +57,7 @@ import { ENGINEERING_INTENT_PAGES, NEAR_ME_ENGINEERING_PAGE, type EngineeringInt
 import {
   assertNoConflictingOutputOwners,
   assertRouteOwnership,
+  resetGeneratedChildrenPreservingHub,
   REACT_OWNED_SHARED_ROUTES,
   REACT_PRERENDER_ROUTES,
   REACT_PRERENDER_SERVICE_ROUTES,
@@ -3344,15 +3345,7 @@ async function main() {
   }
   // Resources / Knowledge Center
   const resourcesDir = path.join(PUBLIC, "resources");
-  const resourcesHubPath = path.join(resourcesDir, "index.html");
-  const reactResourcesHub = fs.existsSync(resourcesHubPath)
-    ? fs.readFileSync(resourcesHubPath)
-    : undefined;
-  fs.rmSync(resourcesDir, { recursive: true, force: true });
-  fs.mkdirSync(resourcesDir, { recursive: true });
-  if (reactResourcesHub) {
-    fs.writeFileSync(resourcesHubPath, reactResourcesHub);
-  }
+  resetGeneratedChildrenPreservingHub(resourcesDir);
   for (const disc of RESOURCE_DISCIPLINES) {
     assertSlug(disc.slug);
     const ddir = path.join(resourcesDir, disc.slug);
