@@ -2112,7 +2112,7 @@ function toTitle(slug: string): string {
 
 // ─── Location × Service Pages ─────────────────────────────────────────────
 
-function locationServicePage(page: LocationServicePage): string {
+function locationServicePage(page: LocationServicePage, city?: CityData): string {
   const url = `/locations/${page.stateSlug}/${page.citySlug}/${page.serviceSlug}/`;
   const cityUrl = `/locations/${page.stateSlug}/${page.citySlug}/`;
   const crumbs = [
@@ -2164,6 +2164,8 @@ function locationServicePage(page: LocationServicePage): string {
         </ul>
       </div>
     </section>
+
+    ${city ? citySourceList(city) : ""}
 
     <section class="section section--light">
       <div class="container container--narrow">
@@ -3527,7 +3529,8 @@ async function main() {
     assertSlug(lsp.serviceSlug);
     const dir = path.join(OUT, lsp.stateSlug, lsp.citySlug, lsp.serviceSlug);
     fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(path.join(dir, "index.html"), locationServicePage(lsp));
+    const city = cities.find((candidate) => candidate.stateSlug === lsp.stateSlug && candidate.slug === lsp.citySlug);
+    fs.writeFileSync(path.join(dir, "index.html"), locationServicePage(lsp, city));
     pages++;
   }
 

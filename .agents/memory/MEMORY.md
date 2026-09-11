@@ -44,3 +44,4 @@
 - [React SEO prerender routing](react-seo-prerender-routing.md) — validate final prerendered HTML after SSR, and resolve slashless routes to exact directory indexes before SPA fallback.
 - [Prerendered AEO schema](prerendered-aeo-schema.md) — React effect-based JSON-LD is absent from static HTML; critical FAQ schema must render during SSR and match visible answers.
 - [SEO generator path ownership](seo-generator-path-ownership.md) — seo:generate can overwrite React-owned hub HTML; run the production build afterward to restore canonical prerenders.
+- [Promoted city evidence inheritance](promoted-city-evidence.md) — specialty location pages can overwrite generic city-service HTML and must preserve the promoted city’s verified source links.

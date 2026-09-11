@@ -3,6 +3,18 @@
   "policy": "Approved, fully sourced CityData and grandfathered curated cities are indexable. Draft research and Census directory-lite pages remain live but are noindex,follow.",
   "reviewedPromotions": [
     {
+      "state": "arizona",
+      "slug": "glendale",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 23,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "tennessee",
       "slug": "knoxville",
       "lastVerified": "2026-09-10",
@@ -27,6 +39,18 @@
       }
     },
     {
+      "state": "arizona",
+      "slug": "scottsdale",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 18,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
       "state": "washington",
       "slug": "spokane",
       "lastVerified": "2026-09-10",
@@ -37,10 +61,46 @@
         "canonical": "pass",
         "internalLinks": "pass"
       }
+    },
+    {
+      "state": "arizona",
+      "slug": "tempe",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 17,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
     }
   ],
   "grandfatheredCuratedCount": 89,
   "priorityQueue": [
+    {
+      "stateSlug": "arizona",
+      "citySlug": "scottsdale",
+      "commercialOpportunity": 90,
+      "searchConsoleImpressions": 0,
+      "searchConsolePeriod": "unavailable",
+      "rationale": "Major commercial, hospitality, healthcare, mixed-use, and custom-residential market with distinct Scottsdale code amendments and SPUR permitting."
+    },
+    {
+      "stateSlug": "arizona",
+      "citySlug": "tempe",
+      "commercialOpportunity": 89,
+      "searchConsoleImpressions": 0,
+      "searchConsolePeriod": "unavailable",
+      "rationale": "Dense university, office, multifamily, laboratory, technology, and adaptive-reuse market with distinct Tempe permitting and utility requirements."
+    },
+    {
+      "stateSlug": "arizona",
+      "citySlug": "glendale",
+      "commercialOpportunity": 87,
+      "searchConsoleImpressions": 0,
+      "searchConsolePeriod": "unavailable",
+      "rationale": "West Valley commercial, industrial, healthcare, aviation, sports, entertainment, and mixed-use growth with city-specific review and utility requirements."
+    },
     {
       "stateSlug": "washington",
       "citySlug": "spokane",
@@ -67,9 +127,9 @@
     }
   ],
   "populationReviewSignal": "population below 10000 is flagged for human review; population is not proof of page quality",
-  "indexedCount": 93,
-  "noindexCount": 19233,
-  "excludedCount": 19233,
+  "indexedCount": 96,
+  "noindexCount": 19230,
+  "excludedCount": 19230,
   "excludedReasons": {
     "review-signal-population-below-10000": 16143,
     "city-slug-identity-mismatch": 18
