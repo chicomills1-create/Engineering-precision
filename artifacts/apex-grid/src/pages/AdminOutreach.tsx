@@ -8,6 +8,7 @@ import { MessagesTab } from '@/components/outreach/MessagesTab';
 import { ClientSafeListTab } from '@/components/outreach/ClientSafeListTab';
 import { ReplyInboxTab } from '@/components/outreach/ReplyInboxTab';
 import { HotLeadsTab } from '@/components/outreach/HotLeadsTab';
+import { VerifiedInventoryImport } from '@/components/outreach/VerifiedInventoryImport';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useGetOutreachDashboard } from '@workspace/api-client-react';
 
@@ -32,6 +33,9 @@ export default function AdminOutreach() {
           
           <AdminNav />
           <DashboardStats />
+           <div className="mb-8">
+             <VerifiedInventoryImport />
+           </div>
 
           <Tabs defaultValue="inbox" className="space-y-8">
             <TabsList className="bg-card border border-border h-auto p-1 flex-wrap" data-testid="outreach-tabs">

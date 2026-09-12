@@ -15,6 +15,19 @@ import sourceCsv from "../data/verified-business-email-contacts.csv";
 
 export const SOURCE_FILENAME = "verified-business-email-contacts.csv";
 const HEADERS = ["company_name", "website", "company_type", "city", "state", "contact_first_name", "contact_last_name", "job_title", "email", "email_type", "verification_status", "verification_method", "source_url", "date_verified"];
+const RECOVERED_HEADERS = ["day", "lane", "company", "contact_name", "title", "email", "website", "city", "state", "segment", "project_signal", "source_url"];
+const STATE_CODES: Record<string, string> = {
+  Alabama: "AL", Alaska: "AK", Arizona: "AZ", Arkansas: "AR", California: "CA", Colorado: "CO",
+  Connecticut: "CT", Delaware: "DE", Florida: "FL", Georgia: "GA", Hawaii: "HI", Idaho: "ID",
+  Illinois: "IL", Indiana: "IN", Iowa: "IA", Kansas: "KS", Kentucky: "KY", Louisiana: "LA",
+  Maine: "ME", Maryland: "MD", Massachusetts: "MA", Michigan: "MI", Minnesota: "MN",
+  Mississippi: "MS", Missouri: "MO", Montana: "MT", Nebraska: "NE", Nevada: "NV",
+  "New Hampshire": "NH", "New Jersey": "NJ", "New Mexico": "NM", "New York": "NY",
+  "North Carolina": "NC", "North Dakota": "ND", Ohio: "OH", Oklahoma: "OK", Oregon: "OR",
+  Pennsylvania: "PA", "Rhode Island": "RI", "South Carolina": "SC", "South Dakota": "SD",
+  Tennessee: "TN", Texas: "TX", Utah: "UT", Vermont: "VT", Virginia: "VA", Washington: "WA",
+  "West Virginia": "WV", Wisconsin: "WI", Wyoming: "WY",
+};
 import { APPROVED_PUBLIC_INBOX_LOCAL_PARTS } from "./publicInboxClassifier";
 const clean = (value: string | undefined) => (value ?? "").trim();
 const normalizeEmail = (value: string) => value.trim().toLowerCase();
@@ -31,7 +44,15 @@ function csvRows(input: string): string[][] {
   if (cell || row.length) { row.push(cell); rows.push(row); }
   return rows;
 }
-function websiteDomain(url: string) { try { return new URL(url).hostname.replace(/^www\./, "").toLowerCase(); } catch { return ""; } }
+function websiteDomain(url: string) {
+  const value = url.trim();
+  if (!value) return "";
+  try {
+    return new URL(/^https?:\/\//i.test(value) ? value : `https://${value}`).hostname.replace(/^www\./, "").toLowerCase();
+  } catch {
+    return "";
+  }
+}
 function identity(value: string) { return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim(); }
 export type InventoryReport = {
   sourceRows: number; importedPendingQualification: number; excluded: number;
@@ -137,6 +158,198 @@ export async function importVerifiedInventory(actor: string): Promise<Record<str
    });
   } catch (error) {
     await db.update(outreachImportBatchesTable).set({ status: "failed", error: error instanceof Error ? error.message : "Import failed" }).where(eq(outreachImportBatchesTable.batchId, batchId));
+    throw error;
+  }
+}
+
+export async function importRecoveredFindyMailInventory(input: {
+  actor: string;
+  sourceFilename: string;
+  csv: string;
+}): Promise<Record<string, unknown>> {
+  const parsed = csvRows(input.csv);
+  const header = parsed.shift()?.map(clean);
+  if (header?.join(",") !== RECOVERED_HEADERS.join(",")) {
+    throw new Error(`CSV header must be exactly: ${RECOVERED_HEADERS.join(", ")}`);
+  }
+  if (!parsed.length) throw new Error("CSV contains no contact rows");
+  if (parsed.length > 10_000) throw new Error("CSV exceeds the 10,000-row import limit");
+
+  const batchId = createHash("sha256").update(input.csv).digest("hex");
+  const sourceFilename = input.sourceFilename.replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 255) || "findymail-recovered.csv";
+  let [batch] = await db.select().from(outreachImportBatchesTable).where(eq(outreachImportBatchesTable.batchId, batchId)).limit(1);
+  if (!batch) {
+    [batch] = await db.insert(outreachImportBatchesTable).values({
+      batchId,
+      sourceFilename,
+      sourceRowCount: parsed.length,
+      createdBy: input.actor,
+    }).onConflictDoNothing().returning();
+  }
+  if (!batch) [batch] = await db.select().from(outreachImportBatchesTable).where(eq(outreachImportBatchesTable.batchId, batchId)).limit(1);
+  if (!batch) throw new Error("Unable to create import batch");
+  if (batch.status === "completed") {
+    const rows = await db.select({
+      eligibilityResult: outreachImportRowsTable.eligibilityResult,
+      emailType: outreachImportRowsTable.emailType,
+      exclusionReason: outreachImportRowsTable.exclusionReason,
+    }).from(outreachImportRowsTable).where(eq(outreachImportRowsTable.batchId, batchId));
+    return { batchId, ...(batch.report ?? reportFromRows(rows, parsed.length)), idempotent: true };
+  }
+
+  try {
+    return await db.transaction(async (tx) => {
+      await tx.execute(sql`select id from outreach_import_batches where id = ${batch!.id} for update`);
+      const [locked] = await tx.select().from(outreachImportBatchesTable).where(eq(outreachImportBatchesTable.id, batch!.id)).limit(1);
+      if (locked?.status === "completed") {
+        const rows = await tx.select({
+          eligibilityResult: outreachImportRowsTable.eligibilityResult,
+          emailType: outreachImportRowsTable.emailType,
+          exclusionReason: outreachImportRowsTable.exclusionReason,
+        }).from(outreachImportRowsTable).where(eq(outreachImportRowsTable.batchId, batchId));
+        return { batchId, ...(locked.report ?? reportFromRows(rows, parsed.length)), idempotent: true };
+      }
+
+      batch = locked ?? batch;
+      const [existingRows, prospects, suppressions, events, messages, claims, replies, campaigns] = await Promise.all([
+        tx.select({ sourceRow: outreachImportRowsTable.sourceRow }).from(outreachImportRowsTable).where(eq(outreachImportRowsTable.batchId, batchId)),
+        tx.select().from(prospectsTable),
+        tx.select({ email: outreachSuppressionsTable.email }).from(outreachSuppressionsTable),
+        tx.select({ email: outreachDeliveryEventsTable.email }).from(outreachDeliveryEventsTable)
+          .where(inArray(outreachDeliveryEventsTable.eventType, ["bounce", "complaint", "unsubscribe", "invalid"])),
+        tx.select({ email: prospectsTable.contactEmail }).from(outreachMessagesTable)
+          .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id)),
+        tx.select({ prospectId: outreachSequenceSendClaimsTable.prospectId }).from(outreachSequenceSendClaimsTable),
+        tx.select({ prospectId: outreachRepliesTable.prospectId }).from(outreachRepliesTable)
+          .where(isNotNull(outreachRepliesTable.prospectId)),
+        tx.select().from(campaignsTable).where(eq(campaignsTable.status, "active")),
+      ]);
+
+      const done = new Set(existingRows.map((row) => row.sourceRow));
+      const seenEmails = new Set(prospects.flatMap((prospect) => prospect.contactEmail ? [normalizeEmail(prospect.contactEmail)] : []));
+      const seenDomains = new Set(prospects.flatMap((prospect) => prospect.website ? [websiteDomain(prospect.website)] : []).filter(Boolean));
+      const suppressed = new Set(suppressions.map((row) => normalizeEmail(row.email)));
+      const bad = new Set(events.map((row) => normalizeEmail(row.email)));
+      const prior = new Set(messages.flatMap((row) => row.email ? [normalizeEmail(row.email)] : []));
+      const blockedProspects = new Set([
+        ...claims.map((row) => row.prospectId),
+        ...replies.flatMap((row) => row.prospectId ? [row.prospectId] : []),
+      ]);
+      for (const prospect of prospects) {
+        if (blockedProspects.has(prospect.id) || prospect.contactStatus !== "active" || ["replied", "suppressed", "not_a_fit"].includes(prospect.status)) {
+          if (prospect.contactEmail) prior.add(normalizeEmail(prospect.contactEmail));
+        }
+      }
+
+      for (let index = 0; index < parsed.length; index += 1) {
+        const sourceRow = index + 2;
+        if (done.has(sourceRow)) continue;
+        const values = parsed[index]!.map(clean);
+        const row = Object.fromEntries(RECOVERED_HEADERS.map((key, column) => [key, values[column] ?? ""]));
+        const email = normalizeEmail(row.email);
+        const emailDomain = email.split("@")[1] ?? "";
+        const companyDomain = websiteDomain(row.website);
+        const state = STATE_CODES[row.state] ?? row.state.toUpperCase();
+        const audience = row.segment.toLowerCase().includes("architect")
+          ? "architect"
+          : row.segment.toLowerCase().includes("builder")
+            ? "builder"
+            : "mixed";
+        const campaign = campaigns.find((candidate) =>
+          (candidate.audience === "mixed" || candidate.audience === audience) && candidate.states.includes(state),
+        );
+
+        let exclusion: string | null = null;
+        if (row.lane.toLowerCase() !== "verified") exclusion = "invalid_lane";
+        else if (!row.company) exclusion = "missing_company";
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) exclusion = "invalid_email";
+        else if (!companyDomain || companyDomain !== emailDomain) exclusion = "email_domain_mismatch";
+        else if (!state || !campaign) exclusion = "ineligible_campaign_state";
+        else if (suppressed.has(email)) exclusion = "suppressed_or_unsubscribed";
+        else if (bad.has(email)) exclusion = "bounce_complaint_or_invalid";
+        else if (prior.has(email)) exclusion = "prior_recipient";
+        else if (seenEmails.has(email)) exclusion = "duplicate_email";
+        else if (seenDomains.has(companyDomain)) exclusion = "duplicate_domain";
+        else if (!row.source_url || !row.project_signal) exclusion = "missing_verification_evidence";
+        else if (!row.contact_name || !row.title) exclusion = "missing_named_identity_or_title";
+        else if (
+          identity(row.company).includes("atmosphere architects")
+          && ["tim boyle", "mike hudson"].includes(identity(row.contact_name))
+        ) exclusion = "client_relationship_exclusion";
+
+        let prospectId: number | null = null;
+        if (!exclusion) {
+          const [prospect] = await tx.insert(prospectsTable).values({
+            campaignId: campaign!.id,
+            companyName: row.company,
+            website: row.website,
+            city: row.city || "Unknown",
+            state,
+            audience,
+            sourceUrl: row.source_url,
+            researchNotes: `Recovered verified inventory${row.day ? `; source day ${row.day}` : ""}`,
+            fitScore: 85,
+            needScore: 80,
+            needSignals: row.project_signal,
+            contactName: row.contact_name,
+            contactTitle: row.title,
+            contactEmail: email,
+            contactConfidence: "high",
+            contactSourceUrl: row.source_url,
+            dedupeKey: `findymail-recovered:${email}`,
+            emailStatus: "verified",
+            status: "approved",
+            contactStatus: "active",
+            contactEvidenceType: "findymail_verified",
+            contactEvidence: "Recovered FindyMail-verified contact; no re-verification performed",
+            contactEvidenceAt: new Date(),
+          }).onConflictDoNothing().returning({ id: prospectsTable.id });
+          prospectId = prospect?.id ?? null;
+          if (prospectId) {
+            seenEmails.add(email);
+            seenDomains.add(companyDomain);
+          } else {
+            exclusion = "duplicate_email";
+          }
+        }
+
+        await tx.insert(outreachImportRowsTable).values({
+          batchId,
+          sourceRow,
+          sourceFilename,
+          company: row.company,
+          contactName: row.contact_name || null,
+          title: row.title || null,
+          email,
+          emailType: "named_verified",
+          sourceUrl: row.source_url || null,
+          verificationStatus: "verified",
+          verificationMethod: "findymail",
+          eligibilityResult: exclusion ? "excluded" : "send_eligible",
+          exclusionReason: exclusion,
+          prospectId,
+        });
+      }
+
+      const allRows = await tx.select({
+        eligibilityResult: outreachImportRowsTable.eligibilityResult,
+        emailType: outreachImportRowsTable.emailType,
+        exclusionReason: outreachImportRowsTable.exclusionReason,
+      }).from(outreachImportRowsTable).where(eq(outreachImportRowsTable.batchId, batchId));
+      const report = reportFromRows(allRows, parsed.length);
+      await tx.update(outreachImportBatchesTable).set({
+        status: "completed",
+        completedAt: new Date(),
+        error: null,
+        report,
+      }).where(eq(outreachImportBatchesTable.id, batch.id));
+      return { batchId, ...report, idempotent: false };
+    });
+  } catch (error) {
+    await db.update(outreachImportBatchesTable).set({
+      status: "failed",
+      error: error instanceof Error ? error.message : "Import failed",
+    }).where(eq(outreachImportBatchesTable.batchId, batchId));
     throw error;
   }
 }

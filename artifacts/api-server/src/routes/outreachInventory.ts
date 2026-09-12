@@ -2,7 +2,8 @@ import { Router, type IRouter } from "express";
 import { getAuth } from "@clerk/express";
 import { z } from "zod";
 import { requireAuth } from "../middlewares/requireAuth";
-import { createOneTimeOverride, getLaneConfig, importVerifiedInventory } from "../lib/outreachInventory";
+import express from "express";
+import { createOneTimeOverride, getLaneConfig, importRecoveredFindyMailInventory, importVerifiedInventory } from "../lib/outreachInventory";
 import { currentOutreachCampaignKey } from "../lib/outreachLaneConfig";
 import { getOutreachRuntimeConfig } from "../lib/outreachSystemConfig";
 
@@ -13,6 +14,28 @@ router.post("/outreach/inventory/import", requireAuth, async (req, res) => {
   try { res.status(201).json(await importVerifiedInventory(actor)); }
   catch (error) { req.log.error({ err: error }, "Guarded inventory import failed"); res.status(400).json({ error: error instanceof Error ? error.message : "Import failed" }); }
 });
+router.post(
+  "/outreach/inventory/import-upload",
+  requireAuth,
+  express.text({ type: ["text/csv", "text/plain"], limit: "2mb" }),
+  async (req, res) => {
+    const actor = getAuth(req)?.userId;
+    if (!actor) { res.status(401).json({ error: "Unauthorized" }); return; }
+    if (typeof req.body !== "string") { res.status(400).json({ error: "A CSV file is required" }); return; }
+    try {
+      res.status(201).json(await importRecoveredFindyMailInventory({
+        actor,
+        sourceFilename: typeof req.headers["x-source-filename"] === "string"
+          ? req.headers["x-source-filename"]
+          : "findymail-recovered.csv",
+        csv: req.body,
+      }));
+    } catch (error) {
+      req.log.error({ err: error }, "Recovered FindyMail inventory import failed");
+      res.status(400).json({ error: error instanceof Error ? error.message : "Import failed" });
+    }
+  },
+);
 router.get("/outreach/lane-config", requireAuth, async (req, res) => {
   const campaignKey = typeof req.query.campaignKey === "string" ? req.query.campaignKey : currentOutreachCampaignKey();
   res.json(await getLaneConfig(campaignKey));
