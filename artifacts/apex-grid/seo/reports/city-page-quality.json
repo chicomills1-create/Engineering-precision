@@ -1954,13 +1954,14 @@
       "rationale": "Port-driven industrial and logistics growth plus hospitality, institutional, and coastal-resilience design demand."
     }
   ],
-  "populationReviewSignal": "population below 1 is flagged for human review; population is not proof of page quality",
-  "indexedDirectoryCount": 19137,
-  "indexedCount": 19284,
-  "noindexCount": 45,
-  "excludedCount": 45,
+  "populationReviewSignal": "confirmed zero-population and unavailable-population records remain excluded; population is not proof of page quality",
+  "indexedDirectoryCount": 19156,
+  "indexedCount": 19303,
+  "noindexCount": 26,
+  "excludedCount": 26,
   "excludedReasons": {
-    "review-signal-population-below-1": 27,
+    "population-unavailable": 4,
+    "confirmed-zero-population": 4,
     "city-slug-identity-mismatch": 18
   },
   "anomalies": [
@@ -1970,17 +1971,10 @@
       "name": "Diamondhead",
       "status": "excluded",
       "reasons": [
-        "review-signal-population-below-1"
-      ]
-    },
-    {
-      "state": "arkansas",
-      "slug": "victoria",
-      "name": "Victoria",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
+        "population-unavailable"
+      ],
+      "populationStatus": "unavailable",
+      "populationEvidenceNote": "No matching record in the 2024 ACS or 2024 Population Estimates file; place is present in the 2025 Census Gazetteer."
     },
     {
       "state": "colorado",
@@ -1988,8 +1982,11 @@
       "name": "Carbonate",
       "status": "excluded",
       "reasons": [
-        "review-signal-population-below-1"
-      ]
+        "confirmed-zero-population"
+      ],
+      "populationStatus": "confirmed-zero",
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2024/cities/totals/sub-est2024.csv"
     },
     {
       "state": "georgia",
@@ -1997,26 +1994,10 @@
       "name": "Mulberry",
       "status": "excluded",
       "reasons": [
-        "review-signal-population-below-1"
-      ]
-    },
-    {
-      "state": "idaho",
-      "slug": "clayton",
-      "name": "Clayton",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
-    },
-    {
-      "state": "idaho",
-      "slug": "warm-river",
-      "name": "Warm River",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
+        "population-unavailable"
+      ],
+      "populationStatus": "unavailable",
+      "populationEvidenceNote": "No matching record in the 2024 ACS or 2024 Population Estimates file; place is present in the 2025 Census Gazetteer."
     },
     {
       "state": "illinois",
@@ -2025,7 +2006,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "illinois",
@@ -2034,16 +2017,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
-    },
-    {
-      "state": "kansas",
-      "slug": "cedar",
-      "name": "Cedar",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "kentucky",
@@ -2051,8 +2027,11 @@
       "name": "South Park View",
       "status": "excluded",
       "reasons": [
-        "review-signal-population-below-1"
-      ]
+        "confirmed-zero-population"
+      ],
+      "populationStatus": "confirmed-zero",
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2024/cities/totals/sub-est2024.csv"
     },
     {
       "state": "louisiana",
@@ -2060,8 +2039,10 @@
       "name": "St. George",
       "status": "excluded",
       "reasons": [
-        "review-signal-population-below-1"
-      ]
+        "population-unavailable"
+      ],
+      "populationStatus": "unavailable",
+      "populationEvidenceNote": "No matching record in the 2024 ACS or 2024 Population Estimates file; place is present in the 2025 Census Gazetteer."
     },
     {
       "state": "minnesota",
@@ -2069,8 +2050,10 @@
       "name": "Baldwin",
       "status": "excluded",
       "reasons": [
-        "review-signal-population-below-1"
-      ]
+        "population-unavailable"
+      ],
+      "populationStatus": "unavailable",
+      "populationEvidenceNote": "No matching record in the 2024 ACS or 2024 Population Estimates file; place is present in the 2025 Census Gazetteer."
     },
     {
       "state": "minnesota",
@@ -2079,25 +2062,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
-    },
-    {
-      "state": "missouri",
-      "slug": "bigelow",
-      "name": "Bigelow",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
-    },
-    {
-      "state": "missouri",
-      "slug": "charmwood",
-      "name": "Charmwood",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "missouri",
@@ -2105,71 +2072,11 @@
       "name": "Corning",
       "status": "excluded",
       "reasons": [
-        "review-signal-population-below-1"
-      ]
-    },
-    {
-      "state": "missouri",
-      "slug": "friedenswald",
-      "name": "Friedenswald",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
-    },
-    {
-      "state": "missouri",
-      "slug": "stotesbury",
-      "name": "Stotesbury",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
-    },
-    {
-      "state": "nebraska",
-      "slug": "burton",
-      "name": "Burton",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
-    },
-    {
-      "state": "new-york",
-      "slug": "dering-harbor",
-      "name": "Dering Harbor",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
-    },
-    {
-      "state": "north-carolina",
-      "slug": "fontana-dam",
-      "name": "Fontana Dam",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
-    },
-    {
-      "state": "north-dakota",
-      "slug": "kief",
-      "name": "Kief",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
-    },
-    {
-      "state": "ohio",
-      "slug": "brinkhaven",
-      "name": "Brinkhaven",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
+        "confirmed-zero-population"
+      ],
+      "populationStatus": "confirmed-zero",
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2024/cities/totals/sub-est2024.csv"
     },
     {
       "state": "ohio",
@@ -2178,7 +2085,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "ohio",
@@ -2187,7 +2096,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "oklahoma",
@@ -2195,8 +2106,11 @@
       "name": "Mule Barn",
       "status": "excluded",
       "reasons": [
-        "review-signal-population-below-1"
-      ]
+        "confirmed-zero-population"
+      ],
+      "populationStatus": "confirmed-zero",
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2024/cities/totals/sub-est2024.csv"
     },
     {
       "state": "pennsylvania",
@@ -2205,7 +2119,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "pennsylvania",
@@ -2214,7 +2130,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "pennsylvania",
@@ -2223,16 +2141,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
-    },
-    {
-      "state": "pennsylvania",
-      "slug": "green-hills",
-      "name": "Green Hills",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "pennsylvania",
@@ -2241,7 +2152,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "pennsylvania",
@@ -2250,16 +2163,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
-    },
-    {
-      "state": "pennsylvania",
-      "slug": "mount-lebanon-municipality",
-      "name": "Mount Lebanon municipality",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "pennsylvania",
@@ -2268,16 +2174,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
-    },
-    {
-      "state": "pennsylvania",
-      "slug": "penn-hills-municipality",
-      "name": "Penn Hills municipality",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "pennsylvania",
@@ -2286,25 +2185,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
-    },
-    {
-      "state": "pennsylvania",
-      "slug": "valley-hi",
-      "name": "Valley-Hi",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
-    },
-    {
-      "state": "south-dakota",
-      "slug": "hillsview",
-      "name": "Hillsview",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "texas",
@@ -2313,16 +2196,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
-    },
-    {
-      "state": "texas",
-      "slug": "los-ybanez",
-      "name": "Los Ybanez",
-      "status": "excluded",
-      "reasons": [
-        "review-signal-population-below-1"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "texas",
@@ -2331,7 +2207,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "texas",
@@ -2340,7 +2218,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "wisconsin",
@@ -2349,7 +2229,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "wisconsin",
@@ -2358,7 +2240,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     },
     {
       "state": "wisconsin",
@@ -2367,7 +2251,9 @@
       "status": "excluded",
       "reasons": [
         "city-slug-identity-mismatch"
-      ]
+      ],
+      "populationYear": 2024,
+      "populationSource": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b01003.dat"
     }
   ]
 }

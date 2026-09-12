@@ -1072,6 +1072,7 @@
   <url><loc>https://apexgrideng.com/locations/arkansas/valley-springs/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arkansas/van-buren/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arkansas/vandervoort/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/arkansas/victoria/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arkansas/vilonia/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arkansas/viola/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/arkansas/wabbaseka/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -3108,6 +3109,7 @@
   <url><loc>https://apexgrideng.com/locations/idaho/challis/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/idaho/chubbuck/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/idaho/clark-fork/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/idaho/clayton/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/idaho/clifton/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/idaho/coeur-d-alene/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/idaho/cottonwood/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -3267,6 +3269,7 @@
   <url><loc>https://apexgrideng.com/locations/idaho/victor/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/idaho/wallace/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/idaho/wardner/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/idaho/warm-river/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/idaho/weippe/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/idaho/weiser/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/idaho/wendell/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -6219,6 +6222,7 @@
   <url><loc>https://apexgrideng.com/locations/kansas/carlton/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/kansas/cassoday/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/kansas/cawker-city/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/kansas/cedar/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/kansas/cedar-point/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/kansas/cedar-vale/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/kansas/centralia/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -9586,6 +9590,7 @@
   <url><loc>https://apexgrideng.com/locations/missouri/bethel/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/beverly-hills/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/bevier/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/missouri/bigelow/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/big-lake/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/billings/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/birch-tree/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -9676,6 +9681,7 @@
   <url><loc>https://apexgrideng.com/locations/missouri/champ/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/charlack/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/charleston/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/missouri/charmwood/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/chesterfield/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/chilhowee/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/chillicothe/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -9822,6 +9828,7 @@
   <url><loc>https://apexgrideng.com/locations/missouri/freeman/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/freistatt/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/fremont-hills/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/missouri/friedenswald/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/frohna/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/frontenac/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/fulton/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -10319,6 +10326,7 @@
   <url><loc>https://apexgrideng.com/locations/missouri/stella/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/stewartsville/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/stockton/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/missouri/stotesbury/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/stotts-city/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/stoutland/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/missouri/stoutsville/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -10672,6 +10680,7 @@
   <url><loc>https://apexgrideng.com/locations/nebraska/brunswick/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/burchard/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/burr/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/nebraska/burton/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/burwell/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/bushnell/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/nebraska/butte/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -11793,6 +11802,7 @@
   <url><loc>https://apexgrideng.com/locations/new-york/delhi/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/depew/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/deposit/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/new-york/dering-harbor/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/deruyter/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/dexter/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/new-york/dobbs-ferry/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -12441,6 +12451,7 @@
   <url><loc>https://apexgrideng.com/locations/north-carolina/farmville/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/flat-rock/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/fletcher/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-carolina/fontana-dam/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/forest-city/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/forest-hills/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-carolina/fountain/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -13003,6 +13014,7 @@
   <url><loc>https://apexgrideng.com/locations/north-dakota/kathryn/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-dakota/kenmare/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-dakota/kensal/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/north-dakota/kief/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-dakota/killdeer/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-dakota/kindred/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/north-dakota/knox/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -13318,6 +13330,7 @@
   <url><loc>https://apexgrideng.com/locations/ohio/brewster/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/brice/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/bridgeport/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/ohio/brinkhaven/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/broadview-heights/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/brooklyn/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/ohio/brooklyn-heights/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -15374,6 +15387,7 @@
   <url><loc>https://apexgrideng.com/locations/pennsylvania/gratz/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/great-bend/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/greencastle/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/pennsylvania/green-hills/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/green-lane/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/greensboro/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/greensburg/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -15597,6 +15611,7 @@
   <url><loc>https://apexgrideng.com/locations/pennsylvania/mount-joy/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/mount-oliver/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/mount-penn/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/pennsylvania/mount-lebanon-municipality/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/mount-pleasant/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/mount-pocono/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/mount-union/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -15697,6 +15712,7 @@
   <url><loc>https://apexgrideng.com/locations/pennsylvania/penbrook/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/penn/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/penndel/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/pennsylvania/penn-hills-municipality/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/penn-lake-park/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/pennsburg/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/pennsbury-village/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -15924,6 +15940,7 @@
   <url><loc>https://apexgrideng.com/locations/pennsylvania/ursina/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/utica/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/valencia/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/pennsylvania/valley-hi/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/vanderbilt/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/vandergrift/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/pennsylvania/vandling/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -16462,6 +16479,7 @@
   <url><loc>https://apexgrideng.com/locations/south-dakota/hetland/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/south-dakota/highmore/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/south-dakota/hill-city/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/south-dakota/hillsview/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/south-dakota/hitchcock/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/south-dakota/hosmer/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/south-dakota/hot-springs/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -17724,6 +17742,7 @@
   <url><loc>https://apexgrideng.com/locations/texas/lorenzo/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/los-fresnos/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/los-indios/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://apexgrideng.com/locations/texas/los-ybanez/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/lott/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/lovelady/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/texas/lowry-crossing/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>

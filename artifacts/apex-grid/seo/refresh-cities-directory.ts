@@ -19,6 +19,8 @@ const GAZETTEER_URL =
 const ACS_POPULATION_YEAR = 2024;
 const ACS_POPULATION_URL =
   `https://www2.census.gov/programs-surveys/acs/summary_file/${ACS_POPULATION_YEAR}/table-based-SF/data/5YRData/acsdt5y${ACS_POPULATION_YEAR}-b01003.dat`;
+const PEP_POPULATION_URL =
+  "https://www2.census.gov/programs-surveys/popest/datasets/2020-2024/cities/totals/sub-est2024.csv";
 const DIRECTORY_PATH = path.join(import.meta.dirname, "cities-directory.json");
 
 interface ExistingCity {
@@ -44,6 +46,15 @@ interface DirectoryCity extends ExistingCity {
   lng: number;
   populationYear?: number;
   populationSource?: string;
+  populationDataset?: "ACS 5-year" | "Population Estimates Program";
+  populationStatus?: "verified-positive" | "confirmed-zero" | "unavailable";
+  populationEvidenceNote?: string;
+}
+
+interface PepPopulation {
+  geoid: string;
+  name: string;
+  population: number;
 }
 
 type CityDirectory = Record<string, ExistingCity[]>;
@@ -156,6 +167,79 @@ function slugify(name: string): string {
   return slug;
 }
 
+function parseCsvLine(line: string): string[] {
+  const values: string[] = [];
+  let value = "";
+  let quoted = false;
+  for (let index = 0; index < line.length; index++) {
+    const character = line[index];
+    if (character === "\"") {
+      if (quoted && line[index + 1] === "\"") {
+        value += "\"";
+        index++;
+      } else {
+        quoted = !quoted;
+      }
+    } else if (character === "," && !quoted) {
+      values.push(value);
+      value = "";
+    } else {
+      value += character;
+    }
+  }
+  values.push(value);
+  return values;
+}
+
+function parsePepPopulations(text: string): Map<string, PepPopulation> {
+  const [header, ...rows] = text.trim().split(/\r?\n/);
+  const columns = parseCsvLine(header);
+  const required = ["SUMLEV", "STATE", "PLACE", "COUSUB", "NAME", "POPESTIMATE2024"];
+  if (!required.every((column) => columns.includes(column))) {
+    throw new Error(`Unexpected Census Population Estimates columns: ${header}`);
+  }
+  const indexOf = (column: string) => columns.indexOf(column);
+  const populations = new Map<string, PepPopulation>();
+  for (const row of rows) {
+    const values = parseCsvLine(row);
+    const summaryLevel = values[indexOf("SUMLEV")];
+    if (summaryLevel !== "162" && summaryLevel !== "061") continue;
+    const geography = summaryLevel === "162"
+      ? values[indexOf("PLACE")]
+      : values[indexOf("COUSUB")];
+    const geoid = `${values[indexOf("STATE")]}${geography}`;
+    const population = Number(values[indexOf("POPESTIMATE2024")]);
+    if (!/^\d{7}$/.test(geoid) || !Number.isFinite(population) || population < 0) continue;
+    populations.set(geoid, {
+      geoid,
+      name: values[indexOf("NAME")],
+      population,
+    });
+  }
+  return populations;
+}
+
+// The 2025 place Gazetteer introduced replacement place identifiers for three
+// municipalities whose 2024 PEP estimates remain under their preceding Census
+// geography. These explicit crosswalks prevent fuzzy name or population joins.
+const PEP_GEOGRAPHY_CROSSWALKS: Readonly<Record<string, {
+  pepGeoid: string;
+  note: string;
+}>> = {
+  "3908859": {
+    pepGeoid: "3929288",
+    note: "2025 Gazetteer Brinkhaven place matched to the 2024 PEP record named Gann (Brinkhaven) village.",
+  },
+  "4251794": {
+    pepGeoid: "4251696",
+    note: "2025 Gazetteer Mount Lebanon municipality matched to the 2024 PEP Mount Lebanon township estimate.",
+  },
+  "4259040": {
+    pepGeoid: "4259032",
+    note: "2025 Gazetteer Penn Hills municipality matched to the 2024 PEP Penn Hills township estimate.",
+  },
+};
+
 async function main() {
   const current = JSON.parse(fs.readFileSync(DIRECTORY_PATH, "utf8")) as CityDirectory;
   const response = await fetch(GAZETTEER_URL, {
@@ -200,6 +284,13 @@ async function main() {
       populationByGeoid.set(geoId.slice("1600000US".length), population);
     }
   }
+  const pepResponse = await fetch(PEP_POPULATION_URL, {
+    headers: { "User-Agent": "Apex-Grid-Census-Directory-Refresh/1.0" },
+  });
+  if (!pepResponse.ok) {
+    throw new Error(`Census Population Estimates download failed: ${pepResponse.status} ${pepResponse.statusText}`);
+  }
+  const pepPopulationByGeoid = parsePepPopulations(await pepResponse.text());
   for (const city of source) {
     const stateSlug = STATE_SLUGS[stateFipsToAbbreviation[city.GEOID.slice(0, 2)] ?? ""];
     if (!stateSlug || !Object.hasOwn(current, stateSlug) || city.FUNCSTAT !== "A" || city.LSAD === "57") continue;
@@ -227,24 +318,44 @@ async function main() {
       }
       used.add(slug);
       const acsPopulation = populationByGeoid.get(city.GEOID);
-      const pop = acsPopulation ?? priorPopulation.get(`${stateSlug}/${slug}`);
+      const crosswalk = PEP_GEOGRAPHY_CROSSWALKS[city.GEOID];
+      const pepPopulation = pepPopulationByGeoid.get(crosswalk?.pepGeoid ?? city.GEOID);
+      const priorPop = priorPopulation.get(`${stateSlug}/${slug}`);
+      const population = acsPopulation !== undefined
+        ? {
+            pop: acsPopulation,
+            populationYear: ACS_POPULATION_YEAR,
+            populationSource: ACS_POPULATION_URL,
+          }
+        : pepPopulation !== undefined
+          ? {
+              pop: pepPopulation.population,
+              populationYear: 2024,
+              populationSource: PEP_POPULATION_URL,
+              populationDataset: "Population Estimates Program" as const,
+              populationStatus: pepPopulation.population > 0 ? "verified-positive" as const : "confirmed-zero" as const,
+              populationEvidenceNote: crosswalk?.note,
+            }
+          : priorPop !== undefined
+            ? {
+                pop: priorPop,
+                populationEvidenceNote: "Retained from the previously reviewed directory because neither 2024 Census population file contains this 2025 Gazetteer geography.",
+              }
+            : {
+                populationStatus: "unavailable" as const,
+                populationEvidenceNote: "No matching record in the 2024 ACS or 2024 Population Estimates file; place is present in the 2025 Census Gazetteer.",
+              };
       const latitude = Number(city.INTPTLAT);
       const longitude = Number(city.INTPTLONG);
       if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
         throw new Error(`Invalid Census coordinates for ${city.GEOID}`);
       }
-      if (pop === undefined) addedWithoutPopulation++;
+      if (population.pop === undefined) addedWithoutPopulation++;
       else retainedPopulation++;
       refreshedCities.push({
         slug,
         name,
-        ...(pop === undefined ? {} : { pop }),
-        ...(acsPopulation === undefined
-          ? {}
-          : {
-              populationYear: ACS_POPULATION_YEAR,
-              populationSource: ACS_POPULATION_URL,
-            }),
+        ...population,
         geoid: city.GEOID,
         designation,
         lsad: city.LSAD,
@@ -280,7 +391,7 @@ async function main() {
   const temporaryPath = `${DIRECTORY_PATH}.${process.pid}.tmp`;
   fs.writeFileSync(temporaryPath, `${JSON.stringify(refreshed, null, 2)}\n`);
   fs.renameSync(temporaryPath, DIRECTORY_PATH);
-  console.log(`Refreshed ${count} active incorporated Census places across ${Object.keys(refreshed).length} states; retained ${retainedPopulation} population values and added ${addedWithoutPopulation} verified places without population claims.`);
+  console.log(`Refreshed ${count} active incorporated Census places across ${Object.keys(refreshed).length} states; retained ${retainedPopulation} population values and documented ${addedWithoutPopulation} places without an available population value.`);
 }
 
 main().catch((error: unknown) => {

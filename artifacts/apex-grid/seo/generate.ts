@@ -263,7 +263,17 @@ function allDirectoryCitiesForState(state: StateData, directory: CityDirectory, 
 /** Conservative gate for Census-directory pages: only publish pages with enough
  * independently useful identity data to avoid state-copy doorway pages. */
 const LITE_CITY_MIN_POPULATION = 1;
-type CityQualityDecision = { state: string; slug: string; name: string; status: "indexed" | "excluded"; reasons: string[] };
+type CityQualityDecision = {
+  state: string;
+  slug: string;
+  name: string;
+  status: "indexed" | "excluded";
+  reasons: string[];
+  populationStatus?: DirectoryCity["populationStatus"];
+  populationYear?: number;
+  populationSource?: string;
+  populationEvidenceNote?: string;
+};
 function diagnosticSlug(name: string): string {
   return name.normalize("NFKD").replace(/\p{M}/gu, "").toLowerCase().replace(/[^\p{Letter}\p{Number}]+/gu, "-").replace(/^-|-$/g, "");
 }
@@ -273,8 +283,20 @@ function assessLiteCity(state: StateData, city: DirectoryCity): CityQualityDecis
   if (!city.name.trim() || !/\p{Letter}/u.test(city.name)) reasons.push("invalid-city-name");
   if (!/^[a-z0-9-]+$/.test(city.slug) || city.slug !== diagnosticSlug(city.name)) reasons.push("city-slug-identity-mismatch");
   if (!state.slug || !state.name.trim()) reasons.push("invalid-state-identity");
-  if (!Number.isFinite(city.pop) || (city.pop ?? 0) < LITE_CITY_MIN_POPULATION) reasons.push(`review-signal-population-below-${LITE_CITY_MIN_POPULATION}`);
-  return { state: state.slug, slug: city.slug, name: city.name, status: reasons.length ? "excluded" : "indexed", reasons };
+  if (city.populationStatus === "confirmed-zero") reasons.push("confirmed-zero-population");
+  else if (city.populationStatus === "unavailable") reasons.push("population-unavailable");
+  else if (!Number.isFinite(city.pop) || (city.pop ?? 0) < LITE_CITY_MIN_POPULATION) reasons.push(`review-signal-population-below-${LITE_CITY_MIN_POPULATION}`);
+  return {
+    state: state.slug,
+    slug: city.slug,
+    name: city.name,
+    status: reasons.length ? "excluded" : "indexed",
+    reasons,
+    populationStatus: city.populationStatus,
+    populationYear: city.populationYear,
+    populationSource: city.populationSource,
+    populationEvidenceNote: city.populationEvidenceNote,
+  };
 }
 
 function eligibleDirectoryCities(state: StateData, directory: CityDirectory, curated: CityData[]): DirectoryCity[] {
@@ -309,7 +331,7 @@ function writeCityQualityReport(states: StateData[], directory: CityDirectory, c
       !city.research && LEGACY_CURATED_CITY_KEYS.has(`${city.stateSlug}/${city.slug}`)
     ).length,
     priorityQueue: CITY_PRIORITIES,
-    populationReviewSignal: `population below ${LITE_CITY_MIN_POPULATION} is flagged for human review; population is not proof of page quality`,
+    populationReviewSignal: `confirmed zero-population and unavailable-population records remain excluded; population is not proof of page quality`,
     indexedDirectoryCount,
     indexedCount: indexedDirectoryCount + curated.filter(isReviewedCity).length + RETAINED_LEGACY_LOCATIONS.filter((retained) =>
       !curated.some((city) => city.stateSlug === retained.stateSlug && city.slug === retained.city.slug)
@@ -828,8 +850,11 @@ function cityLitePage(state: StateData, city: DirectoryCity, siblings: Directory
   // doorway grid with other noindex pages. Only reviewed city owners are
   // useful contextual destinations from this page.
   const curatedInState = curated.filter((c) => c.stateSlug === state.slug && isReviewedCity(c));
+  const populationDatasetLabel = city.populationDataset === "Population Estimates Program"
+    ? "Population Estimates Program"
+    : "American Community Survey";
   const populationContext = city.pop
-    ? ` (population approximately ${city.pop.toLocaleString("en-US")}${city.populationYear ? ` based on the ${city.populationYear} American Community Survey` : ""})`
+    ? ` (population approximately ${city.pop.toLocaleString("en-US")}${city.populationYear ? ` based on the ${city.populationYear} ${populationDatasetLabel}` : ""})`
     : "";
   const availableVerticals = indexable ? verticalsForState(state.slug) : [];
   const capabilityClusters = [

@@ -7,6 +7,9 @@ export interface DirectoryCity {
   pop?: number;
   populationYear?: number;
   populationSource?: string;
+  populationDataset?: "ACS 5-year" | "Population Estimates Program";
+  populationStatus?: "verified-positive" | "confirmed-zero" | "unavailable";
+  populationEvidenceNote?: string;
   geoid?: string;
   designation?: string;
   lat?: number;
