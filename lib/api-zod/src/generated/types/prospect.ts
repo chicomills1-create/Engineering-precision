@@ -10,7 +10,6 @@ import type { ProspectContactConfidence } from './prospectContactConfidence';
 import type { ProspectContactEvidenceType } from './prospectContactEvidenceType';
 import type { ProspectContactStatus } from './prospectContactStatus';
 import type { ProspectEmailStatus } from './prospectEmailStatus';
-import type { ProspectState } from './prospectState';
 import type { ProspectStatus } from './prospectStatus';
 
 export interface Prospect {
@@ -21,7 +20,7 @@ export interface Prospect {
   /** @nullable */
   website?: string | null;
   city: string;
-  state: ProspectState;
+  state: string;
   audience: ProspectAudience;
   /** @nullable */
   sourceUrl?: string | null;

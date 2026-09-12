@@ -33,6 +33,22 @@ export type HotLeadQueueReport = {
 
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
 
+export function isDedicatedHotLeadSource(sourceType: string | null): boolean {
+  return sourceType === "hot_lead" || sourceType === "hot_lead_verified";
+}
+
+export function canConvertGenericFollowUp(input: {
+  status: string;
+  sentAt: Date | null;
+  providerMessageId: string | null;
+  providerReconciliationKey: string | null;
+}): boolean {
+  return ["draft", "approved", "needs_review"].includes(input.status)
+    && !input.sentAt
+    && !input.providerMessageId
+    && !input.providerReconciliationKey;
+}
+
 export async function enqueueSeptemberClickerFollowUps(): Promise<HotLeadQueueReport> {
   return db.transaction(async (tx) => {
     await tx.execute(sql`
@@ -124,19 +140,6 @@ export async function enqueueSeptemberClickerFollowUps(): Promise<HotLeadQueueRe
         candidate = corrected;
       }
 
-      const [existingFollowUp] = await tx.select({ id: outreachMessagesTable.id })
-        .from(outreachMessagesTable)
-        .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
-        .where(and(
-          eq(outreachMessagesTable.sequenceNumber, 2),
-          sql`lower(trim(${prospectsTable.contactEmail})) = ${email}`,
-        ))
-        .limit(1);
-      if (existingFollowUp) {
-        skippedEmails.push({ email, reason: "follow_up_already_exists" });
-        continue;
-      }
-
       if (candidate.contactStatus !== "active" || !["approved", "contacted"].includes(candidate.prospectStatus)) {
         skippedEmails.push({ email, reason: "recipient_not_active" });
         continue;
@@ -184,6 +187,55 @@ export async function enqueueSeptemberClickerFollowUps(): Promise<HotLeadQueueRe
       }
 
       const [template] = hotLeadFollowUpMessages(candidate.contactName ?? "there");
+      const [existingDedicatedFollowUp] = await tx.select({ id: outreachMessagesTable.id })
+        .from(outreachMessagesTable)
+        .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+        .where(and(
+          eq(outreachMessagesTable.sequenceNumber, 2),
+          inArray(outreachMessagesTable.sourceType, ["hot_lead", "hot_lead_verified"]),
+          sql`lower(trim(${prospectsTable.contactEmail})) = ${email}`,
+        ))
+        .limit(1);
+      if (existingDedicatedFollowUp) {
+        skippedEmails.push({ email, reason: "follow_up_already_exists" });
+        continue;
+      }
+
+      const [conflictingGenericFollowUp] = await tx.select({
+        id: outreachMessagesTable.id,
+        status: outreachMessagesTable.status,
+        sentAt: outreachMessagesTable.sentAt,
+        providerMessageId: outreachMessagesTable.providerMessageId,
+        providerReconciliationKey: outreachMessagesTable.providerReconciliationKey,
+      })
+        .from(outreachMessagesTable)
+        .where(and(
+          eq(outreachMessagesTable.prospectId, candidate.prospectId),
+          candidate.campaignId == null
+            ? sql`${outreachMessagesTable.campaignId} is null`
+            : eq(outreachMessagesTable.campaignId, candidate.campaignId),
+          eq(outreachMessagesTable.sequenceNumber, 2),
+        ))
+        .limit(1);
+
+      if (conflictingGenericFollowUp) {
+        if (!canConvertGenericFollowUp(conflictingGenericFollowUp)) {
+          skippedEmails.push({ email, reason: "prior_follow_up_already_dispatched" });
+          continue;
+        }
+        await tx.update(outreachMessagesTable).set({
+          subject: template!.subject,
+          body: template!.body,
+          status: "approved",
+          scheduledAt: SEND_AT,
+          sourceType: "hot_lead",
+          sourceId: candidate.initialMessageId,
+          error: null,
+        }).where(eq(outreachMessagesTable.id, conflictingGenericFollowUp.id));
+        createdEmails.push(email);
+        continue;
+      }
+
       const [inserted] = await tx.insert(outreachMessagesTable).values({
         prospectId: candidate.prospectId,
         campaignId: candidate.campaignId,
@@ -197,7 +249,7 @@ export async function enqueueSeptemberClickerFollowUps(): Promise<HotLeadQueueRe
       }).onConflictDoNothing().returning({ id: outreachMessagesTable.id });
 
       if (!inserted) {
-        skippedEmails.push({ email, reason: "follow_up_already_exists" });
+        skippedEmails.push({ email, reason: "follow_up_conflict_created_concurrently" });
         continue;
       }
       createdEmails.push(email);

@@ -8,7 +8,6 @@
 import type { ProspectInputAudience } from './prospectInputAudience';
 import type { ProspectInputContactConfidence } from './prospectInputContactConfidence';
 import type { ProspectInputEmailStatus } from './prospectInputEmailStatus';
-import type { ProspectInputState } from './prospectInputState';
 import type { ProspectInputStatus } from './prospectInputStatus';
 
 export interface ProspectInput {
@@ -17,7 +16,8 @@ export interface ProspectInput {
   website?: string;
   /** @minLength 1 */
   city: string;
-  state: ProspectInputState;
+  /** @pattern ^[A-Z]{2}$ */
+  state: string;
   audience: ProspectInputAudience;
   sourceUrl?: string;
   researchNotes?: string;

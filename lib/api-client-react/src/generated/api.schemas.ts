@@ -426,15 +426,6 @@ export interface ClientJobStatusNotificationInput {
   status: ClientJobStatus;
 }
 
-export type ProspectState = typeof ProspectState[keyof typeof ProspectState];
-
-
-export const ProspectState = {
-  AZ: 'AZ',
-  CA: 'CA',
-  TX: 'TX',
-} as const;
-
 export type ProspectAudience = typeof ProspectAudience[keyof typeof ProspectAudience];
 
 
@@ -496,6 +487,8 @@ export const ProspectContactEvidenceType = {
   forwarded_reply: 'forwarded_reply',
   temporary_unavailability: 'temporary_unavailability',
   departed: 'departed',
+  official_publication: 'official_publication',
+  findymail_verified: 'findymail_verified',
 } as const;
 
 export interface Prospect {
@@ -506,7 +499,7 @@ export interface Prospect {
   /** @nullable */
   website?: string | null;
   city: string;
-  state: ProspectState;
+  state: string;
   audience: ProspectAudience;
   /** @nullable */
   sourceUrl?: string | null;
@@ -551,15 +544,6 @@ export interface Prospect {
   createdAt: string;
   updatedAt: string;
 }
-
-export type ProspectInputState = typeof ProspectInputState[keyof typeof ProspectInputState];
-
-
-export const ProspectInputState = {
-  AZ: 'AZ',
-  CA: 'CA',
-  TX: 'TX',
-} as const;
 
 export type ProspectInputAudience = typeof ProspectInputAudience[keyof typeof ProspectInputAudience];
 
@@ -607,7 +591,8 @@ export interface ProspectInput {
   website?: string;
   /** @minLength 1 */
   city: string;
-  state: ProspectInputState;
+  /** @pattern ^[A-Z]{2}$ */
+  state: string;
   audience: ProspectInputAudience;
   sourceUrl?: string;
   researchNotes?: string;
@@ -690,15 +675,6 @@ export const CampaignAudience = {
   mixed: 'mixed',
 } as const;
 
-export type CampaignStatesItem = typeof CampaignStatesItem[keyof typeof CampaignStatesItem];
-
-
-export const CampaignStatesItem = {
-  AZ: 'AZ',
-  CA: 'CA',
-  TX: 'TX',
-} as const;
-
 export type CampaignStatus = typeof CampaignStatus[keyof typeof CampaignStatus];
 
 
@@ -712,7 +688,7 @@ export interface Campaign {
   id: number;
   name: string;
   audience: CampaignAudience;
-  states: CampaignStatesItem[];
+  states: string[];
   /**
      * @minimum 1
      * @maximum 150
@@ -736,15 +712,6 @@ export const CampaignInputAudience = {
   mixed: 'mixed',
 } as const;
 
-export type CampaignInputStatesItem = typeof CampaignInputStatesItem[keyof typeof CampaignInputStatesItem];
-
-
-export const CampaignInputStatesItem = {
-  AZ: 'AZ',
-  CA: 'CA',
-  TX: 'TX',
-} as const;
-
 export type CampaignInputStatus = typeof CampaignInputStatus[keyof typeof CampaignInputStatus];
 
 
@@ -758,8 +725,11 @@ export interface CampaignInput {
   /** @minLength 1 */
   name: string;
   audience: CampaignInputAudience;
-  /** @minItems 1 */
-  states: CampaignInputStatesItem[];
+  /**
+     * @minItems 1
+     * @items.pattern ^[A-Z]{2}$
+     */
+  states: string[];
   /**
      * @minimum 1
      * @maximum 150

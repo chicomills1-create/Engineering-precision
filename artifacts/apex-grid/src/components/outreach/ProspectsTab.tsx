@@ -38,7 +38,7 @@ const prospectSchema = z.object({
   companyName: z.string().min(1, 'Company name required'),
   website: z.string().optional(),
   city: z.string().min(1, 'City required'),
-  state: z.enum(['AZ', 'CA', 'TX']),
+  state: z.string().regex(/^[A-Z]{2}$/, 'Use a two-letter state or province code'),
   audience: z.enum(['architect', 'builder']),
   sourceUrl: z.string().optional(),
   researchNotes: z.string().optional(),

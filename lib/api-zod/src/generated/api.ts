@@ -870,7 +870,7 @@ export const ListProspectsResponseItem = zod.object({
   "companyName": zod.string(),
   "website": zod.string().nullish(),
   "city": zod.string(),
-  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "state": zod.string(),
   "audience": zod.enum(['architect', 'builder']),
   "sourceUrl": zod.string().nullish(),
   "researchNotes": zod.string().nullish(),
@@ -887,7 +887,7 @@ export const ListProspectsResponseItem = zod.object({
   "emailStatus": zod.enum(['unverified', 'verified', 'invalid']),
   "status": zod.enum(['new', 'review', 'approved', 'contacted', 'replied', 'not_a_fit', 'suppressed']),
   "contactStatus": zod.enum(['active', 'replied', 'temporary_unavailable', 'departed', 'replacement_pending']),
-  "contactEvidenceType": zod.union([zod.literal('forwarded_reply'),zod.literal('temporary_unavailability'),zod.literal('departed'),zod.literal(null)]).nullable(),
+  "contactEvidenceType": zod.union([zod.literal('forwarded_reply'),zod.literal('temporary_unavailability'),zod.literal('departed'),zod.literal('official_publication'),zod.literal('findymail_verified'),zod.literal(null)]).nullable(),
   "contactEvidence": zod.string().nullable(),
   "contactEvidenceAt": zod.string().nullable(),
   "contactReviewAt": zod.string().nullable(),
@@ -899,6 +899,7 @@ export const ListProspectsResponse = zod.array(ListProspectsResponseItem)
 
 
 
+export const createProspectBodyStateRegExp = new RegExp('^[A-Z]{2}$');
 export const createProspectBodyFitScoreMin = 0;
 export const createProspectBodyFitScoreMax = 100;
 
@@ -913,7 +914,7 @@ export const CreateProspectBody = zod.object({
   "companyName": zod.string().min(1),
   "website": zod.string().optional(),
   "city": zod.string().min(1),
-  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "state": zod.string().regex(createProspectBodyStateRegExp),
   "audience": zod.enum(['architect', 'builder']),
   "sourceUrl": zod.string().optional(),
   "researchNotes": zod.string().optional(),
@@ -945,7 +946,7 @@ export const CreateProspectResponse = zod.object({
   "companyName": zod.string(),
   "website": zod.string().nullish(),
   "city": zod.string(),
-  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "state": zod.string(),
   "audience": zod.enum(['architect', 'builder']),
   "sourceUrl": zod.string().nullish(),
   "researchNotes": zod.string().nullish(),
@@ -962,7 +963,7 @@ export const CreateProspectResponse = zod.object({
   "emailStatus": zod.enum(['unverified', 'verified', 'invalid']),
   "status": zod.enum(['new', 'review', 'approved', 'contacted', 'replied', 'not_a_fit', 'suppressed']),
   "contactStatus": zod.enum(['active', 'replied', 'temporary_unavailable', 'departed', 'replacement_pending']),
-  "contactEvidenceType": zod.union([zod.literal('forwarded_reply'),zod.literal('temporary_unavailability'),zod.literal('departed'),zod.literal(null)]).nullable(),
+  "contactEvidenceType": zod.union([zod.literal('forwarded_reply'),zod.literal('temporary_unavailability'),zod.literal('departed'),zod.literal('official_publication'),zod.literal('findymail_verified'),zod.literal(null)]).nullable(),
   "contactEvidence": zod.string().nullable(),
   "contactEvidenceAt": zod.string().nullable(),
   "contactReviewAt": zod.string().nullable(),
@@ -977,6 +978,7 @@ export const UpdateProspectParams = zod.object({
 
 
 
+export const updateProspectBodyOneStateRegExp = new RegExp('^[A-Z]{2}$');
 export const updateProspectBodyOneFitScoreMin = 0;
 export const updateProspectBodyOneFitScoreMax = 100;
 
@@ -991,7 +993,7 @@ export const UpdateProspectBody = zod.object({
   "companyName": zod.string().min(1),
   "website": zod.string().optional(),
   "city": zod.string().min(1),
-  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "state": zod.string().regex(updateProspectBodyOneStateRegExp),
   "audience": zod.enum(['architect', 'builder']),
   "sourceUrl": zod.string().optional(),
   "researchNotes": zod.string().optional(),
@@ -1023,7 +1025,7 @@ export const UpdateProspectResponse = zod.object({
   "companyName": zod.string(),
   "website": zod.string().nullish(),
   "city": zod.string(),
-  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "state": zod.string(),
   "audience": zod.enum(['architect', 'builder']),
   "sourceUrl": zod.string().nullish(),
   "researchNotes": zod.string().nullish(),
@@ -1040,7 +1042,7 @@ export const UpdateProspectResponse = zod.object({
   "emailStatus": zod.enum(['unverified', 'verified', 'invalid']),
   "status": zod.enum(['new', 'review', 'approved', 'contacted', 'replied', 'not_a_fit', 'suppressed']),
   "contactStatus": zod.enum(['active', 'replied', 'temporary_unavailable', 'departed', 'replacement_pending']),
-  "contactEvidenceType": zod.union([zod.literal('forwarded_reply'),zod.literal('temporary_unavailability'),zod.literal('departed'),zod.literal(null)]).nullable(),
+  "contactEvidenceType": zod.union([zod.literal('forwarded_reply'),zod.literal('temporary_unavailability'),zod.literal('departed'),zod.literal('official_publication'),zod.literal('findymail_verified'),zod.literal(null)]).nullable(),
   "contactEvidence": zod.string().nullable(),
   "contactEvidenceAt": zod.string().nullable(),
   "contactReviewAt": zod.string().nullable(),
@@ -1129,7 +1131,7 @@ export const RecordOutreachContactEvidenceResponse = zod.object({
   "companyName": zod.string(),
   "website": zod.string().nullish(),
   "city": zod.string(),
-  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "state": zod.string(),
   "audience": zod.enum(['architect', 'builder']),
   "sourceUrl": zod.string().nullish(),
   "researchNotes": zod.string().nullish(),
@@ -1146,7 +1148,7 @@ export const RecordOutreachContactEvidenceResponse = zod.object({
   "emailStatus": zod.enum(['unverified', 'verified', 'invalid']),
   "status": zod.enum(['new', 'review', 'approved', 'contacted', 'replied', 'not_a_fit', 'suppressed']),
   "contactStatus": zod.enum(['active', 'replied', 'temporary_unavailable', 'departed', 'replacement_pending']),
-  "contactEvidenceType": zod.union([zod.literal('forwarded_reply'),zod.literal('temporary_unavailability'),zod.literal('departed'),zod.literal(null)]).nullable(),
+  "contactEvidenceType": zod.union([zod.literal('forwarded_reply'),zod.literal('temporary_unavailability'),zod.literal('departed'),zod.literal('official_publication'),zod.literal('findymail_verified'),zod.literal(null)]).nullable(),
   "contactEvidence": zod.string().nullable(),
   "contactEvidenceAt": zod.string().nullable(),
   "contactReviewAt": zod.string().nullable(),
@@ -1177,7 +1179,7 @@ export const MarkOutreachProspectRepliedResponse = zod.object({
   "companyName": zod.string(),
   "website": zod.string().nullish(),
   "city": zod.string(),
-  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "state": zod.string(),
   "audience": zod.enum(['architect', 'builder']),
   "sourceUrl": zod.string().nullish(),
   "researchNotes": zod.string().nullish(),
@@ -1194,7 +1196,7 @@ export const MarkOutreachProspectRepliedResponse = zod.object({
   "emailStatus": zod.enum(['unverified', 'verified', 'invalid']),
   "status": zod.enum(['new', 'review', 'approved', 'contacted', 'replied', 'not_a_fit', 'suppressed']),
   "contactStatus": zod.enum(['active', 'replied', 'temporary_unavailable', 'departed', 'replacement_pending']),
-  "contactEvidenceType": zod.union([zod.literal('forwarded_reply'),zod.literal('temporary_unavailability'),zod.literal('departed'),zod.literal(null)]).nullable(),
+  "contactEvidenceType": zod.union([zod.literal('forwarded_reply'),zod.literal('temporary_unavailability'),zod.literal('departed'),zod.literal('official_publication'),zod.literal('findymail_verified'),zod.literal(null)]).nullable(),
   "contactEvidence": zod.string().nullable(),
   "contactEvidenceAt": zod.string().nullable(),
   "contactReviewAt": zod.string().nullable(),
@@ -1211,7 +1213,7 @@ export const ListCampaignsResponseItem = zod.object({
   "id": zod.number(),
   "name": zod.string(),
   "audience": zod.enum(['architect', 'builder', 'mixed']),
-  "states": zod.array(zod.enum(['AZ', 'CA', 'TX'])),
+  "states": zod.array(zod.string()),
   "dailyLimit": zod.number().min(1).max(listCampaignsResponseDailyLimitMax),
   "status": zod.enum(['draft', 'active', 'paused']),
   "subjectTemplate": zod.string().nullish(),
@@ -1223,6 +1225,7 @@ export const ListCampaignsResponse = zod.array(ListCampaignsResponseItem)
 
 
 
+export const createCampaignBodyStatesItemRegExp = new RegExp('^[A-Z]{2}$');
 
 export const createCampaignBodyDailyLimitDefault = 150;
 export const createCampaignBodyDailyLimitMax = 150;
@@ -1232,7 +1235,7 @@ export const createCampaignBodyDailyLimitMax = 150;
 export const CreateCampaignBody = zod.object({
   "name": zod.string().min(1),
   "audience": zod.enum(['architect', 'builder', 'mixed']),
-  "states": zod.array(zod.enum(['AZ', 'CA', 'TX'])).min(1),
+  "states": zod.array(zod.string().regex(createCampaignBodyStatesItemRegExp)).min(1),
   "dailyLimit": zod.number().min(1).max(createCampaignBodyDailyLimitMax).default(createCampaignBodyDailyLimitDefault),
   "status": zod.enum(['draft', 'active', 'paused']).optional(),
   "subjectTemplate": zod.string().optional(),
@@ -1247,7 +1250,7 @@ export const CreateCampaignResponse = zod.object({
   "id": zod.number(),
   "name": zod.string(),
   "audience": zod.enum(['architect', 'builder', 'mixed']),
-  "states": zod.array(zod.enum(['AZ', 'CA', 'TX'])),
+  "states": zod.array(zod.string()),
   "dailyLimit": zod.number().min(1).max(createCampaignResponseDailyLimitMax),
   "status": zod.enum(['draft', 'active', 'paused']),
   "subjectTemplate": zod.string().nullish(),
@@ -1262,6 +1265,7 @@ export const UpdateCampaignParams = zod.object({
 })
 
 
+export const updateCampaignBodyOneStatesItemRegExp = new RegExp('^[A-Z]{2}$');
 
 export const updateCampaignBodyOneDailyLimitDefault = 150;
 export const updateCampaignBodyOneDailyLimitMax = 150;
@@ -1271,7 +1275,7 @@ export const updateCampaignBodyOneDailyLimitMax = 150;
 export const UpdateCampaignBody = zod.object({
   "name": zod.string().min(1),
   "audience": zod.enum(['architect', 'builder', 'mixed']),
-  "states": zod.array(zod.enum(['AZ', 'CA', 'TX'])).min(1),
+  "states": zod.array(zod.string().regex(updateCampaignBodyOneStatesItemRegExp)).min(1),
   "dailyLimit": zod.number().min(1).max(updateCampaignBodyOneDailyLimitMax).default(updateCampaignBodyOneDailyLimitDefault),
   "status": zod.enum(['draft', 'active', 'paused']).optional(),
   "subjectTemplate": zod.string().optional(),
@@ -1286,7 +1290,7 @@ export const UpdateCampaignResponse = zod.object({
   "id": zod.number(),
   "name": zod.string(),
   "audience": zod.enum(['architect', 'builder', 'mixed']),
-  "states": zod.array(zod.enum(['AZ', 'CA', 'TX'])),
+  "states": zod.array(zod.string()),
   "dailyLimit": zod.number().min(1).max(updateCampaignResponseDailyLimitMax),
   "status": zod.enum(['draft', 'active', 'paused']),
   "subjectTemplate": zod.string().nullish(),
@@ -1634,7 +1638,7 @@ export const RunOutreachResearchResponse = zod.object({
   "companyName": zod.string(),
   "website": zod.string().nullish(),
   "city": zod.string(),
-  "state": zod.enum(['AZ', 'CA', 'TX']),
+  "state": zod.string(),
   "audience": zod.enum(['architect', 'builder']),
   "sourceUrl": zod.string().nullish(),
   "researchNotes": zod.string().nullish(),
@@ -1651,7 +1655,7 @@ export const RunOutreachResearchResponse = zod.object({
   "emailStatus": zod.enum(['unverified', 'verified', 'invalid']),
   "status": zod.enum(['new', 'review', 'approved', 'contacted', 'replied', 'not_a_fit', 'suppressed']),
   "contactStatus": zod.enum(['active', 'replied', 'temporary_unavailable', 'departed', 'replacement_pending']),
-  "contactEvidenceType": zod.union([zod.literal('forwarded_reply'),zod.literal('temporary_unavailability'),zod.literal('departed'),zod.literal(null)]).nullable(),
+  "contactEvidenceType": zod.union([zod.literal('forwarded_reply'),zod.literal('temporary_unavailability'),zod.literal('departed'),zod.literal('official_publication'),zod.literal('findymail_verified'),zod.literal(null)]).nullable(),
   "contactEvidence": zod.string().nullable(),
   "contactEvidenceAt": zod.string().nullable(),
   "contactReviewAt": zod.string().nullable(),

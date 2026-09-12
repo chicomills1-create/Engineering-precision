@@ -6,14 +6,13 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { CampaignAudience } from './campaignAudience';
-import type { CampaignStatesItem } from './campaignStatesItem';
 import type { CampaignStatus } from './campaignStatus';
 
 export interface Campaign {
   id: number;
   name: string;
   audience: CampaignAudience;
-  states: CampaignStatesItem[];
+  states: string[];
   /**
      * @minimum 1
      * @maximum 150

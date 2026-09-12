@@ -16,4 +16,6 @@ export const ProspectContactEvidenceType = {
   forwarded_reply: 'forwarded_reply',
   temporary_unavailability: 'temporary_unavailability',
   departed: 'departed',
+  official_publication: 'official_publication',
+  findymail_verified: 'findymail_verified',
 } as const;

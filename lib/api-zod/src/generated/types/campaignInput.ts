@@ -6,15 +6,17 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { CampaignInputAudience } from './campaignInputAudience';
-import type { CampaignInputStatesItem } from './campaignInputStatesItem';
 import type { CampaignInputStatus } from './campaignInputStatus';
 
 export interface CampaignInput {
   /** @minLength 1 */
   name: string;
   audience: CampaignInputAudience;
-  /** @minItems 1 */
-  states: CampaignInputStatesItem[];
+  /**
+     * @minItems 1
+     * @items.pattern ^[A-Z]{2}$
+     */
+  states: string[];
   /**
      * @minimum 1
      * @maximum 150
