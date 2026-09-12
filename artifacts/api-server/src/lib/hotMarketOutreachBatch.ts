@@ -37,6 +37,8 @@ export const HOT_MARKET_SOURCE_TYPE = "hot_market_one_time";
 
 export const HOT_MARKET_RECURRING_SOURCE_TYPE = "hot_market_verified_national";
 export const HOT_MARKET_DAILY_TARGET = 100;
+/** Reviewed one-time inventory size. Change only when approving an inventory update. */
+export const APPROVED_HOT_MARKET_INVENTORY_SIZE = 129;
 const CAMPAIGN_NAME = "Verified National Hot-Market Expansion - September 4, 2026";
 const SUBJECT = "Fast engineering support for active projects";
 
@@ -298,7 +300,7 @@ export async function seedHotMarketOutreachBatch(options: {
 
   assertVerifiedOutreachBatch(
     HOT_MARKET_OUTREACH_CONTACTS,
-    HOT_MARKET_OUTREACH_CONTACTS.length,
+    APPROVED_HOT_MARKET_INVENTORY_SIZE,
   );
   const hotMarketDailyLimit = Math.max(
     HOT_MARKET_DAILY_TARGET,

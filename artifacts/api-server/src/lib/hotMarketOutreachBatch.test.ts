@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
+  APPROVED_HOT_MARKET_INVENTORY_SIZE,
   HOT_MARKET_OUTREACH_CONTACTS,
   HOT_MARKET_DAILY_TARGET,
   HOT_MARKET_RECURRING_SOURCE_TYPE,
@@ -18,10 +19,19 @@ import {
 
 test("the one-time hot-market batch contains every currently verified new contact", () => {
   assert.equal(HOT_MARKET_DAILY_TARGET, 100);
-  assert.equal(HOT_MARKET_OUTREACH_CONTACTS.length, 129);
+  assert.equal(
+    HOT_MARKET_OUTREACH_CONTACTS.length,
+    APPROVED_HOT_MARKET_INVENTORY_SIZE,
+  );
   assert.equal(
     new Set(HOT_MARKET_OUTREACH_CONTACTS.map((contact) => contact.contactEmail)).size,
-    129,
+    APPROVED_HOT_MARKET_INVENTORY_SIZE,
+  );
+  assert.equal(
+    new Set(HOT_MARKET_OUTREACH_CONTACTS.map(
+      (contact) => new URL(contact.website).hostname.replace(/^www\./, "").toLowerCase(),
+    )).size,
+    APPROVED_HOT_MARKET_INVENTORY_SIZE,
   );
   assert.ok(HOT_MARKET_OUTREACH_CONTACTS.every((contact) =>
     contact.approvalStatus === "approved"
@@ -33,7 +43,10 @@ test("the one-time hot-market batch contains every currently verified new contac
     ["alston@alstonco.com", "frank.dascanio@weitz.com"].includes(contact.contactEmail)
   ));
   assert.doesNotThrow(() =>
-    assertVerifiedOutreachBatch(HOT_MARKET_OUTREACH_CONTACTS, 129)
+    assertVerifiedOutreachBatch(
+      HOT_MARKET_OUTREACH_CONTACTS,
+      APPROVED_HOT_MARKET_INVENTORY_SIZE,
+    )
   );
 });
 
