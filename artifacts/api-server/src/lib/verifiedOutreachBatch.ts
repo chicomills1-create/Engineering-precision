@@ -46,13 +46,14 @@ export function approvedOutreachBody(contactName: string): string {
   const firstName = contactName.trim().split(/\s+/)[0];
   return `Hi ${firstName},
 
-If a focused engineering issue is taking too long or costing more than it should, Apex Grid can help. Our licensed Civil, Structural, and MEP PEs stamp our designs, and focused reviews or design responses typically turn around in 12–24 hours.
 
-We’re Arizona-based, but licensed to support projects across 49 states, so we can stay useful when your team or partners work outside Arizona.
+Apex Grid is a veteran-owned engineering organization providing full-discipline support — Civil, Structural, MEP, drainage, utility, permit-response, and drafting.
 
- We right-size the scope, review what you already have, and provide clear pricing before work begins.
 
-Do you have any current projects in your pipeline that you would like us to review?`;
+We’re licensed in 49 states, and we work fast: focused reviews typically turn around in 12–24 hours.
+
+
+Do you have an active project in your pipeline that you would like us to review?`;
 }
 
 export function approvedOutreachFollowUps(contactName: string): Array<{
