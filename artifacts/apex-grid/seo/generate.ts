@@ -81,6 +81,20 @@ import {
   PLAN_CHECK_CORRECTIONS_PAGE,
   type PlanCheckCorrectionsPage,
 } from "./plan-check-corrections-page";
+import {
+  BATCH2_CORE_SERVICE_SLUGS,
+  type Batch2Faq,
+  type Batch2StateExpansion,
+  type Batch2Metro,
+  type Batch2CoreServicePage,
+} from "./batch2-core-service-types";
+import georgiaBatch2 from "./batch2-georgia";
+import illinoisBatch2 from "./batch2-illinois";
+import michiganBatch2 from "./batch2-michigan";
+import newYorkBatch2 from "./batch2-new-york";
+import northCarolinaBatch2 from "./batch2-north-carolina";
+import ohioBatch2 from "./batch2-ohio";
+import pennsylvaniaBatch2 from "./batch2-pennsylvania";
 
 const PROMOTED_CITY_KEYS = new Set([
   "georgia/atlanta", "texas/austin", "north-carolina/charlotte",
@@ -1668,6 +1682,17 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   }
   for (const lsp of LOCATION_SERVICE_PAGES) {
     locationsUrls.push(u(`${SITE}/locations/${lsp.stateSlug}/${lsp.citySlug}/${lsp.serviceSlug}/`, today, "monthly", "0.7"));
+  }
+  // Batch 2 researched state and service owners are appended after
+  // generic location candidates; the sitemap dedupe pass below keeps each
+  // canonical route exactly once.
+  for (const expansion of BATCH2_EXPANSIONS) {
+    locationsUrls.push(u(`${SITE}/locations/${expansion.stateSlug}/`, today, "monthly", "0.8"));
+    for (const metro of expansion.metros) {
+      for (const service of metro.services) {
+        locationsUrls.push(u(`${SITE}/locations/${expansion.stateSlug}/${metro.slug}/${service.serviceSlug}/`, today, "monthly", "0.8"));
+      }
+    }
   }
   for (const cityUrl of CALIFORNIA_ADU_CITY_URLS) {
     locationsUrls.push(u(`${SITE}${cityUrl}`, today, "monthly", "0.7"));
@@ -3580,6 +3605,320 @@ function miscPage(page: MiscPage): string {
   });
 }
 
+const BATCH2_EXPANSIONS: Batch2StateExpansion[] = [
+  georgiaBatch2,
+  illinoisBatch2,
+  michiganBatch2,
+  newYorkBatch2,
+  northCarolinaBatch2,
+  ohioBatch2,
+  pennsylvaniaBatch2,
+];
+const BATCH2_EXPECTED_STATE_SLUGS = new Set([
+  "georgia",
+  "illinois",
+  "michigan",
+  "new-york",
+  "north-carolina",
+  "ohio",
+  "pennsylvania",
+]);
+
+function batch2FaqSchema(faqs: Batch2Faq[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+}
+
+function batch2VisibleWordCount(html: string): number {
+  const main = html.match(/<main>([\s\S]*?)<\/main>/i)?.[1] ?? "";
+  return main
+    .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+}
+
+function assertBatch2FaqParity(
+  html: string,
+  faqs: Batch2Faq[],
+  label: string,
+  minimumWords: number,
+): void {
+  const h1Count = (html.match(/<h1(?:\s[^>]*)?>/gi) ?? []).length;
+  const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .map((match) => JSON.parse(match[1]) as {
+      "@type"?: string;
+      mainEntity?: Array<{ name: string; acceptedAnswer?: { text?: string } }>;
+    });
+  const faqSchema = schemas.find((schema) => schema["@type"] === "FAQPage");
+  const visibleWords = batch2VisibleWordCount(html);
+  const schemaFaqs = faqSchema?.mainEntity ?? [];
+  const parity = schemaFaqs.length === faqs.length
+    && faqs.every((faq, index) =>
+      schemaFaqs[index]?.name === faq.question
+      && schemaFaqs[index]?.acceptedAnswer?.text === faq.answer
+      && html.includes(esc(faq.question))
+      && html.includes(esc(faq.answer)));
+  if (
+    h1Count !== 1
+    || visibleWords < minimumWords
+    || !html.includes(`<link rel="canonical" href="${SITE}${label}"`)
+    || html.includes('name="robots" content="noindex')
+    || !html.includes('name="robots" content="index,follow"')
+    || !faqSchema
+    || !parity
+  ) {
+    throw new Error(`SEO assertion failed: malformed Batch2 page ${label} (${visibleWords} words, ${h1Count} H1s)`);
+  }
+}
+
+function assertBatch2Expansions(): void {
+  if (BATCH2_EXPANSIONS.length !== 7) {
+    throw new Error(`SEO assertion failed: expected exactly 7 Batch2 expansions, found ${BATCH2_EXPANSIONS.length}`);
+  }
+  const actualStateSlugs = new Set(BATCH2_EXPANSIONS.map((expansion) => expansion.stateSlug));
+  if (
+    actualStateSlugs.size !== BATCH2_EXPECTED_STATE_SLUGS.size
+    || [...BATCH2_EXPECTED_STATE_SLUGS].some((slug) => !actualStateSlugs.has(slug))
+  ) {
+    throw new Error(`SEO assertion failed: Batch2 state slugs do not match the expected set`);
+  }
+  const metroKeys = new Set<string>();
+  const titles = new Set<string>();
+  const descriptions = new Set<string>();
+  const h1s = new Set<string>();
+  const routes = new Set<string>();
+  let serviceCount = 0;
+  for (const expansion of BATCH2_EXPANSIONS) {
+    assertSlug(expansion.stateSlug);
+    if (expansion.metros.length < 5 || expansion.metros.length > 8) {
+      throw new Error(`SEO assertion failed: ${expansion.stateSlug} must have 5-8 metros`);
+    }
+    for (const metro of expansion.metros) {
+      assertSlug(metro.slug);
+      const metroKey = `${expansion.stateSlug}/${metro.slug}`;
+      if (metroKeys.has(metroKey)) throw new Error(`SEO assertion failed: duplicate Batch2 metro key ${metroKey}`);
+      metroKeys.add(metroKey);
+      const serviceSlugs = metro.services.map((service) => service.serviceSlug);
+      const uniqueServiceSlugs = new Set(serviceSlugs);
+      if (
+        metro.services.length !== BATCH2_CORE_SERVICE_SLUGS.length
+        || uniqueServiceSlugs.size !== BATCH2_CORE_SERVICE_SLUGS.length
+        || BATCH2_CORE_SERVICE_SLUGS.some((slug) => !uniqueServiceSlugs.has(slug))
+      ) {
+        throw new Error(`SEO assertion failed: ${metroKey} must have exactly the five Batch2 services`);
+      }
+      for (const service of metro.services) {
+        serviceCount++;
+        const route = `/locations/${expansion.stateSlug}/${metro.slug}/${service.serviceSlug}/`;
+        if (titles.has(service.title) || descriptions.has(service.description) || h1s.has(service.h1) || routes.has(route)) {
+          throw new Error(`SEO assertion failed: duplicate Batch2 service metadata or route: ${route}`);
+        }
+        titles.add(service.title);
+        descriptions.add(service.description);
+        h1s.add(service.h1);
+        routes.add(route);
+        if (
+          service.sections.length < 3
+          || service.permitSteps.length < 4
+          || service.faqs.length < 3
+          || service.sources.length < 4
+          || service.sources.some((source) => !/^https:\/\//.test(source.url))
+        ) {
+          throw new Error(`SEO assertion failed: incomplete Batch2 service record: ${route}`);
+        }
+      }
+    }
+  }
+  if (metroKeys.size !== 45) {
+    throw new Error(`SEO assertion failed: expected exactly 45 unique Batch2 metro keys, found ${metroKeys.size}`);
+  }
+  if (serviceCount !== 225) {
+    throw new Error(`SEO assertion failed: expected exactly 225 Batch2 service records, found ${serviceCount}`);
+  }
+}
+
+function batch2SourceLinks(sources: Array<{ label: string; url: string }>): string {
+  return sources.map((source) =>
+    `<a href="${esc(source.url)}" rel="noopener noreferrer">${esc(source.label)}</a>`,
+  ).join("");
+}
+
+function batch2MetroPage(expansion: Batch2StateExpansion, metro: Batch2Metro): string {
+  const url = `/locations/${expansion.stateSlug}/${metro.slug}/`;
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Service Areas", href: "/locations/" },
+    { name: expansion.stateName, href: `/locations/${expansion.stateSlug}/` },
+    { name: metro.name },
+  ];
+  const body = `<main>
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container"><p class="kicker">${esc(expansion.stateAbbrev)} • ${esc(metro.county)}</p><h1>Engineering Services in ${esc(metro.name)}</h1><p class="lede">Apex Grid’s five researched engineering services for ${esc(metro.name)}, ${esc(expansion.stateName)}. The responsible professional and local authority confirm project-specific scope, licensure, code edition, and filing requirements.</p></div></section>
+<section class="block"><div class="container"><h2>${esc(metro.name)} <em>Service Paths</em></h2><div class="grid2">${metro.services.map((service) =>
+    `<a class="card" href="${esc(`${url}${service.serviceSlug}/`)}"><div class="label">${esc(service.kicker)}</div><h3>${esc(service.h1)}</h3><p>${esc(service.lede)}</p></a>`,
+  ).join("")}</div></div></section>
+<section class="block"><div class="container"><h2>Local <em>project context</em></h2><div class="prose">${metro.services.slice(0, 3).map((service) =>
+    `<p><strong>${esc(service.serviceSlug)}:</strong> ${esc(service.localConditions)} ${esc(service.projectTypes)}</p>`,
+  ).join("")}</div></div></section>
+<section class="ctaband"><div class="container"><h2>Discuss a ${esc(metro.name)} project</h2><p>Send the address, scope, drawings, authority, and requested deliverable. Availability, responsible licensure, and timing are confirmed per project.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
+</main>`;
+  return htmlShell({
+    title: `${metro.name} Engineering Services | ${expansion.stateName} | Apex Grid`,
+    description: `Structural, MEP, civil, energy-compliance, and PE-stamped drawing guidance for ${metro.name}, ${expansion.stateName}.`,
+    canonical: `${SITE}${url}`,
+    schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+function batch2StatePage(expansion: Batch2StateExpansion, stateCities: CityData[]): string {
+  const url = `/locations/${expansion.stateSlug}/`;
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Service Areas", href: "/locations/" },
+    { name: expansion.stateName },
+  ];
+  const firstMetro = expansion.metros[0];
+  const serviceLinks = BATCH2_CORE_SERVICE_SLUGS.map((slug) => {
+    const service = firstMetro.services.find((candidate) => candidate.serviceSlug === slug)!;
+    return `<a href="/locations/${expansion.stateSlug}/${firstMetro.slug}/${slug}/">${esc(service.serviceSlug)} in ${esc(expansion.stateName)}</a>`;
+  }).join("");
+  const metroLinks = expansion.metros.map((metro) => {
+    const links = metro.services.map((service) =>
+      `<a href="/locations/${expansion.stateSlug}/${metro.slug}/${service.serviceSlug}/">${esc(service.serviceSlug)}</a>`,
+    ).join("");
+    return `<article class="card"><h3><a href="/locations/${expansion.stateSlug}/${metro.slug}/">${esc(metro.name)}</a></h3><p>${esc(metro.county)}</p><div class="linkrow">${links}</div></article>`;
+  }).join("");
+  const establishedCityLinks = stateCities.map((city) =>
+    `<a href="/locations/${expansion.stateSlug}/${city.slug}/">${esc(city.name)}</a>`,
+  ).join("");
+  const body = `<main>
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container"><p class="kicker">${esc(expansion.hub.kicker)}</p><h1>${esc(expansion.hub.h1)}</h1><p class="lede">${esc(expansion.hub.lede)}</p></div></section>
+${expansion.hub.sections.map((section) => `<section class="block"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p></div></div></section>`).join("")}
+<section class="block"><div class="container"><h2>Five researched <em>local services</em></h2><p class="prose">Each linked service is organized around the selected metro’s permit authority, code context, local physical conditions, typical project types, permit steps, official references, and responsible-professional boundaries. These pages are information resources, not local-office claims or guarantees of licensure, approval, schedule, or construction outcome.</p><div class="linkrow">${serviceLinks}</div></div></section>
+<section class="block"><div class="container"><h2>${esc(expansion.stateName)} <em>metros and services</em></h2><div class="grid2">${metroLinks}</div></div></section>
+<section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
+<section class="block"><div class="container faq"><h2>${esc(expansion.stateName)} <em>FAQs</em></h2>${expansion.hub.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
+<section class="block"><div class="container"><h2>Official <em>sources</em></h2><p class="note">Review the current authority, code, licensing, and environmental information before design or filing.</p><div class="linkrow">${batch2SourceLinks(expansion.hub.sources)}</div></div></section>
+<section class="ctaband"><div class="container"><h2>Start a ${esc(expansion.stateName)} project</h2><p>Send the project address, jurisdiction, scope, records, and desired deliverable. Code edition, responsible licensure, authority review, and schedule remain project-specific.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
+</main>`;
+  const html = htmlShell({
+    title: expansion.hub.title,
+    description: expansion.hub.description,
+    canonical: `${SITE}${url}`,
+    schemaJson: [orgSchema, breadcrumbSchema(crumbs), batch2FaqSchema(expansion.hub.faqs)],
+    body,
+  });
+  assertBatch2FaqParity(html, expansion.hub.faqs, url, 500);
+  return html;
+}
+
+function batch2ServicePage(
+  expansion: Batch2StateExpansion,
+  metro: Batch2Metro,
+  service: Batch2CoreServicePage,
+  curatedCity?: CityData,
+): string {
+  const url = `/locations/${expansion.stateSlug}/${metro.slug}/${service.serviceSlug}/`;
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Service Areas", href: "/locations/" },
+    { name: expansion.stateName, href: `/locations/${expansion.stateSlug}/` },
+    { name: metro.name, href: `/locations/${expansion.stateSlug}/${metro.slug}/` },
+    { name: service.serviceSlug },
+  ];
+  const localServiceLinks = metro.services.map((candidate) =>
+    `<a href="/locations/${expansion.stateSlug}/${metro.slug}/${candidate.serviceSlug}/">${esc(candidate.serviceSlug)} in ${esc(metro.name)}</a>`,
+  ).join("");
+  const approvedCitySources = curatedCity?.research
+    ? Object.values(curatedCity.research.sources).flat()
+    : [];
+  const sources = [
+    ...service.sources,
+    ...approvedCitySources.map((url) => ({ label: `${metro.name} approved city evidence`, url })),
+  ].filter((source, index, all) => all.findIndex((candidate) => candidate.url === source.url) === index);
+  const sourceLinks = batch2SourceLinks(sources);
+  const body = `<main>
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container"><p class="kicker">${esc(service.kicker)}</p><h1>${esc(service.h1)}</h1><p class="lede">${esc(service.lede)}</p></div></section>
+<section class="block"><div class="container"><h2>Permit <em>authority</em></h2><div class="prose"><p>${esc(service.permitAuthority)}</p></div></div></section>
+<section class="block"><div class="container"><h2>Code <em>context</em></h2><div class="prose"><p>${esc(service.codeContext)}</p></div></div></section>
+<section class="block"><div class="container"><h2>Local <em>conditions</em></h2><div class="prose"><p>${esc(service.localConditions)}</p></div></div></section>
+<section class="block"><div class="container"><h2>Typical <em>project types</em></h2><div class="prose"><p>${esc(service.projectTypes)}</p></div></div></section>
+${service.sections.map((section) => `<section class="block"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p></div></div></section>`).join("")}
+<section class="block"><div class="container"><h2>Permit and engineering <em>steps</em></h2><ol class="scope">${service.permitSteps.map((step) => `<li>${esc(step)}</li>`).join("")}</ol></div></section>
+<section class="block"><div class="container faq"><h2>${esc(service.h1)} <em>FAQs</em></h2>${service.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
+<section class="block"><div class="container"><h2>All five ${esc(metro.name)} <em>services</em></h2><div class="linkrow">${localServiceLinks}</div></div></section>
+<section class="block"><div class="container"><h2>Official <em>sources</em></h2><p class="note">These official sources support the local permit, code, utility, climate, and environmental context. The current AHJ and adopted requirements control.</p><div class="linkrow">${sourceLinks}</div></div></section>
+<section class="ctaband"><div class="container"><h2>Discuss your ${esc(metro.name)} scope</h2><p>Send the address, existing records, proposed use, authority correspondence, and requested deliverable. Responsible professional review and availability are confirmed before work begins.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
+</main>`;
+  const html = htmlShell({
+    title: service.title,
+    description: service.description,
+    canonical: `${SITE}${url}`,
+    schemaJson: [
+      orgSchema,
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: service.h1,
+        serviceType: service.serviceSlug,
+        provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+        areaServed: { "@type": "City", name: metro.name, containedInPlace: { "@type": "State", name: expansion.stateName } },
+      },
+      batch2FaqSchema(service.faqs),
+      breadcrumbSchema(crumbs),
+    ],
+    body,
+  });
+  assertBatch2FaqParity(html, service.faqs, url, 350);
+  return html;
+}
+
+function renderBatch2Pages(cities: CityData[]): number {
+  assertBatch2Expansions();
+  let pages = 0;
+  for (const expansion of BATCH2_EXPANSIONS) {
+    const stateDir = path.join(OUT, expansion.stateSlug);
+    fs.mkdirSync(stateDir, { recursive: true });
+    fs.writeFileSync(
+      path.join(stateDir, "index.html"),
+      batch2StatePage(
+        expansion,
+        cities.filter((city) => city.stateSlug === expansion.stateSlug),
+      ),
+    );
+    pages++;
+    for (const metro of expansion.metros) {
+      const metroDir = path.join(stateDir, metro.slug);
+      fs.mkdirSync(metroDir, { recursive: true });
+      const curatedCity = cities.find(
+        (city) => city.stateSlug === expansion.stateSlug && city.slug === metro.slug,
+      );
+      for (const service of metro.services) {
+        const serviceDir = path.join(metroDir, service.serviceSlug);
+        fs.mkdirSync(serviceDir, { recursive: true });
+        fs.writeFileSync(
+          path.join(serviceDir, "index.html"),
+          batch2ServicePage(expansion, metro, service, curatedCity),
+        );
+        pages++;
+      }
+    }
+  }
+  return pages;
+}
+
 async function main() {
   assertRouteOwnership();
   const generatedTopLevelRoutes = [
@@ -3916,6 +4255,11 @@ async function main() {
     pages++;
   }
 
+  // Batch 2 is intentionally rendered last among location owners. Its
+  // researched state hubs and metro service pages therefore win any route
+  // collisions with generic state, city, or location-service templates.
+  pages += renderBatch2Pages(cities);
+
   // California ADU structural engineering source pages. These are deliberately
   // separate from the generic location/service templates: the source records
   // carry local authority, site-condition, process, FAQ, and citation detail.
@@ -4189,6 +4533,19 @@ async function main() {
   writeSitemap(states, cities, directory);
   const generatedLocationsSitemap = fs.readFileSync(path.join(PUBLIC, "sitemap-locations.xml"), "utf8");
   const generatedServicesSitemap = fs.readFileSync(path.join(PUBLIC, "sitemap-services.xml"), "utf8");
+  const batch2SitemapRoutes = BATCH2_EXPANSIONS.flatMap((expansion) => [
+    `/locations/${expansion.stateSlug}/`,
+    ...expansion.metros.flatMap((metro) => [
+      ...metro.services.map((service) => `/locations/${expansion.stateSlug}/${metro.slug}/${service.serviceSlug}/`),
+    ]),
+  ]);
+  for (const route of batch2SitemapRoutes) {
+    const marker = `<loc>${SITE}${route}</loc>`;
+    const occurrenceCount = generatedLocationsSitemap.split(marker).length - 1;
+    if (occurrenceCount !== 1) {
+      throw new Error(`SEO assertion failed: Batch2 route must appear once in sitemap-locations.xml: ${route} (${occurrenceCount})`);
+    }
+  }
   for (const cityPage of CALIFORNIA_ADU_CITY_RECORDS) {
     const citySlug = cityPage.slug.replace(/-adu-structural-engineering$/, "");
     const cityRoot = `/locations/california/${citySlug}/`;
