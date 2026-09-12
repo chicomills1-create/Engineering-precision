@@ -7,4 +7,4 @@ Generated SEO corpora at the scale of tens of thousands of HTML files must remai
 
 **Why:** At roughly 25,000 generated pages, Vite exhausted the Linux file-watcher limit and the web workflow crashed with `ENOSPC`. Disabling the public directory would also break direct development previews of static SEO routes, so watcher exclusion is the safe boundary.
 
-**How to apply:** Whenever a new generated static route family is added, include its public-directory glob in the Vite watcher ignore list and restart the web workflow to confirm it stays running. Keep the static directory-index middleware aware of new top-level route families.
+**How to apply:** Ignore the entire public directory in Vite's watcher because generation also rewrites root sitemap and report files; Vite still serves ignored public files in development. Keep the static directory-index middleware aware of new top-level route families, and restart the web workflow after config changes.

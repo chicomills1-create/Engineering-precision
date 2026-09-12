@@ -142,13 +142,11 @@ export default defineConfig({
     host: '0.0.0.0',
     allowedHosts: true,
     // Keep generated SEO routes previewable without asking Linux to watch
-    // tens of thousands of static HTML files for hot-reload changes.
+    // tens of thousands of static HTML, sitemap, and report files for
+    // hot-reload changes. Ignoring public only disables file watching;
+    // Vite's public-file middleware still serves these files in development.
     watch: {
-      ignored: [
-        '**/public/locations/**',
-        '**/public/architecture/**',
-        '**/public/general-contracting/**',
-      ],
+      ignored: ['**/public/**'],
     },
     fs: {
       strict: true,
