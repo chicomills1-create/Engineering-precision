@@ -4,6 +4,8 @@ const CONTACT_NAME = "Jeremy Mills";
 const CONTACT_TITLE = "CEO · USAF Veteran";
 const CONTACT_PHONE = "480-490-0064";
 const COMPANY_SITE = "https://apexgrideng.com";
+const MAILING_ADDRESS_LINE_1 = "22475 E Quintero Rd";
+const MAILING_ADDRESS_LINE_2 = "Queen Creek, AZ 85142";
 // Email clients inconsistently render SVGs, so use the deployed PNG logo.
 const COMPANY_LOGO = `${COMPANY_SITE}/logo.png`;
 
@@ -82,7 +84,7 @@ export function renderBrandedEmail(body: string, unsubscribeUrl: string, recipie
 } {
   const personalizedBody = personalizeBody(body, recipientName);
   const safeUnsubscribeUrl = escapeEmailHtml(validateMarketingUnsubscribeUrl(unsubscribeUrl).toString());
-  const plainText = `${personalizedBody}\n\nBest regards,\n${CONTACT_NAME}\n${CONTACT_TITLE}\n${LEGAL_COMPANY_NAME}\nVeteran-owned engineering company\n${CONTACT_PHONE}\n${COMPANY_SITE}\n\nUnsubscribe: ${unsubscribeUrl}`;
+  const plainText = `${personalizedBody}\n\nBest regards,\n${CONTACT_NAME}\n${CONTACT_TITLE}\n${LEGAL_COMPANY_NAME}\n${MAILING_ADDRESS_LINE_1}\n${MAILING_ADDRESS_LINE_2}\nVeteran-owned engineering company\n${CONTACT_PHONE}\n${COMPANY_SITE}\n\nUnsubscribe: ${unsubscribeUrl}`;
   const html = `<!doctype html>
 <html lang="en">
   <head>
@@ -120,6 +122,8 @@ export function renderBrandedEmail(body: string, unsubscribeUrl: string, recipie
                       <div style="padding-left:13px;color:#202124;font-size:16px;font-weight:700;line-height:1.4;">${CONTACT_NAME}</div>
                       <div style="padding-left:13px;color:#202124;font-size:14px;line-height:1.5;">${CONTACT_TITLE}</div>
                       <div style="padding-left:13px;color:#202124;font-size:14px;font-weight:700;line-height:1.5;">${LEGAL_COMPANY_NAME}</div>
+                       <div style="padding-left:13px;color:#5f6368;font-size:13px;line-height:1.5;">${MAILING_ADDRESS_LINE_1}</div>
+                       <div style="padding-left:13px;color:#5f6368;font-size:13px;line-height:1.5;">${MAILING_ADDRESS_LINE_2}</div>
                       <div style="padding-left:13px;color:#5f6368;font-size:13px;line-height:1.5;">Veteran-owned engineering company</div>
                       <div style="padding-left:13px;font-size:14px;line-height:1.5;"><a href="tel:+14804900064" style="color:#245b8f;text-decoration:none;">${CONTACT_PHONE}</a></div>
                       <div style="padding-left:13px;font-size:14px;line-height:1.5;"><a href="${COMPANY_SITE}" style="color:#245b8f;text-decoration:none;">apexgrideng.com</a></div>

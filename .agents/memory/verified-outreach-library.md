@@ -7,6 +7,12 @@ Maintain a persistent, auditable prospect library rather than relying on convers
 
 Only add a recipient after public company/contact evidence and a successful business-email verification. Require a domain-matched email, a named decision-maker with a relevant role, public source URLs, and one recipient per normalized company. Keep rejected, ambiguous, mismatched, and incomplete records out of the send queue.
 
+When merged source batches contain both a generic public mailbox and a verified named mailbox for the same company, retain the stronger named contact and remove the generic duplicate before seeding.
+
+**Why:** Independent approved research batches can converge on the same firm; keeping both violates the one-company rule and can send duplicate outreach.
+
+**How to apply:** Deduplicate across the fully assembled inventory, not only within each source file, and preserve the named, domain-matched contact when its evidence remains valid.
+
 When extracting emails from public pages, attribute each address to the target company itself. Reject publisher, directory, vendor, partner, placeholder, and unclear third-party addresses; a different domain is acceptable only when the page explicitly identifies it as the target company's contact domain.
 
 **Why:** Search-result and article pages often expose a valid email that belongs to the publisher rather than the company being researched. Saving those addresses creates false leads and can misdirect outreach.
