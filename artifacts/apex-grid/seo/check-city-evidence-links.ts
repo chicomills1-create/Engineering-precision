@@ -452,6 +452,12 @@ async function notifyFailures(report: string, failureCount: number): Promise<voi
           report,
         ].join("\n"),
       }],
+      tracking_settings: {
+        click_tracking: {
+          enable: false,
+          enable_text: false,
+        },
+      },
     }),
   });
   if (!response.ok) {

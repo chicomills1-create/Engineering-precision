@@ -68,7 +68,6 @@ import {
   SEO_GENERATOR_FIXED_INDEX_ROUTES,
 } from "./route-ownership";
 import { NATIONAL_FACILITY_INTENT_PAGES } from "./national-facility-intent-pages";
-import { populationAllowsIndexing } from "./census-population";
 
 const PROMOTED_CITY_KEYS = new Set([
   "georgia/atlanta", "texas/austin", "north-carolina/charlotte",
@@ -101,22 +100,6 @@ function loadDirectory(): CityDirectory {
   const p = path.join(__dirname, "cities-directory.json");
   if (!fs.existsSync(p)) return {};
   const directory = JSON.parse(fs.readFileSync(p, "utf8")) as CityDirectory;
-  // Older refresh output recorded the official source and value but predated
-  // populationStatus. Normalize that historical shape once at the load boundary
-  // so every downstream indexation decision still consumes an explicit status.
-  for (const entries of Object.values(directory)) {
-    for (const city of entries) {
-      if (
-        city.populationStatus === undefined
-        && Number.isFinite(city.pop)
-        && (city.pop ?? 0) > 0
-        && city.populationYear === 2024
-        && city.populationSource?.includes("census.gov/")
-      ) {
-        city.populationStatus = "verified-positive";
-      }
-    }
-  }
   for (const { stateSlug, city } of RETAINED_LEGACY_LOCATIONS) {
     const entries = directory[stateSlug] ?? [];
     if (!entries.some((entry) => entry.slug === city.slug)) entries.push(city);
@@ -300,11 +283,9 @@ function assessLiteCity(state: StateData, city: DirectoryCity): CityQualityDecis
   if (!city.name.trim() || !/\p{Letter}/u.test(city.name)) reasons.push("invalid-city-name");
   if (!/^[a-z0-9-]+$/.test(city.slug) || city.slug !== diagnosticSlug(city.name)) reasons.push("city-slug-identity-mismatch");
   if (!state.slug || !state.name.trim()) reasons.push("invalid-state-identity");
-  if (!populationAllowsIndexing(city.populationStatus)) {
-    reasons.push(city.populationStatus === "confirmed-zero" ? "confirmed-zero-population" : "population-unavailable");
-  } else if (!Number.isFinite(city.pop) || (city.pop ?? 0) < LITE_CITY_MIN_POPULATION) {
-    reasons.push(`review-signal-population-below-${LITE_CITY_MIN_POPULATION}`);
-  }
+  if (city.populationStatus === "confirmed-zero") reasons.push("confirmed-zero-population");
+  else if (city.populationStatus === "unavailable") reasons.push("population-unavailable");
+  else if (!Number.isFinite(city.pop) || (city.pop ?? 0) < LITE_CITY_MIN_POPULATION) reasons.push(`review-signal-population-below-${LITE_CITY_MIN_POPULATION}`);
   return {
     state: state.slug,
     slug: city.slug,
