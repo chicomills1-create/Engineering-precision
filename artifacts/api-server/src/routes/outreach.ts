@@ -96,6 +96,7 @@ async function getAttributionLabel(sourceType: AttributionSourceType | null, sou
     const [partner] = await db.select({ companyName: referralPartnersTable.companyName, contactName: referralPartnersTable.contactName }).from(referralPartnersTable).where(eq(referralPartnersTable.id, sourceId)).limit(1);
     return partner ? [partner.companyName, partner.contactName].filter(Boolean).join(" · ") : null;
   }
+  if (sourceType !== "public_opportunity") return null;
   const [opportunity] = await db.select({ title: publicOpportunitiesTable.title, buyerOrFirm: publicOpportunitiesTable.buyerOrFirm }).from(publicOpportunitiesTable).where(eq(publicOpportunitiesTable.id, sourceId)).limit(1);
   return opportunity ? [opportunity.title, opportunity.buyerOrFirm].filter(Boolean).join(" · ") : null;
 }

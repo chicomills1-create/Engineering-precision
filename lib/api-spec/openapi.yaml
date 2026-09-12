@@ -1647,7 +1647,7 @@ components:
         sentAt: { type: [string, "null"] }
         providerMessageId: { type: [string, "null"] }
         error: { type: [string, "null"] }
-        sourceType: { type: [string, "null"], enum: [lead, referral_partner, public_opportunity, null] }
+        sourceType: { type: [string, "null"], enum: [lead, referral_partner, public_opportunity, hot_lead, hot_lead_verified, hot_market_one_time, hot_market_verified_national, null] }
         sourceId: { type: [number, "null"] }
         sourceLabel: { type: [string, "null"] }
         createdAt: { type: string }

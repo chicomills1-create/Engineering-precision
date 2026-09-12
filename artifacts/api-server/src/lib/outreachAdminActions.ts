@@ -1,4 +1,4 @@
-import { and, eq, gte, inArray, lt, or, sql } from "drizzle-orm";
+import { and, eq, gte, inArray, lt, sql } from "drizzle-orm";
 import {
   db,
   outreachDeliveryEventsTable,
@@ -51,6 +51,7 @@ export async function enqueueSeptemberClickerFollowUps(): Promise<HotLeadQueueRe
       contactStatus: prospectsTable.contactStatus,
       sourceType: outreachMessagesTable.sourceType,
       sourceId: outreachMessagesTable.sourceId,
+      initialMessageStatus: outreachMessagesTable.status,
       clickedAt: outreachDeliveryEventsTable.occurredAt,
     })
       .from(outreachMessagesTable)
@@ -64,16 +65,6 @@ export async function enqueueSeptemberClickerFollowUps(): Promise<HotLeadQueueRe
         eq(outreachDeliveryEventsTable.eventType, "click"),
         gte(outreachDeliveryEventsTable.occurredAt, CLICK_START),
         lt(outreachDeliveryEventsTable.occurredAt, CLICK_END),
-        or(
-          eq(outreachMessagesTable.status, "delivered"),
-          sql`exists (
-            select 1
-            from outreach_delivery_events as delivered_event
-            where delivered_event.outreach_message_id = ${outreachMessagesTable.id}
-              and delivered_event.event_type = 'delivered'
-              and delivered_event.occurred_at <= ${outreachDeliveryEventsTable.occurredAt}
-          )`,
-        ),
       ));
 
     const byEmail = new Map<string, typeof clickedRows[number]>();
@@ -113,6 +104,7 @@ export async function enqueueSeptemberClickerFollowUps(): Promise<HotLeadQueueRe
           contactStatus: prospectsTable.contactStatus,
           sourceType: outreachMessagesTable.sourceType,
           sourceId: outreachMessagesTable.sourceId,
+          initialMessageStatus: outreachMessagesTable.status,
           clickedAt: sql<Date>`${observed.clickedAt}`,
         })
           .from(prospectsTable)
@@ -150,7 +142,7 @@ export async function enqueueSeptemberClickerFollowUps(): Promise<HotLeadQueueRe
         continue;
       }
 
-      const [suppression, negativeEvent, reply] = await Promise.all([
+      const [suppression, negativeEvent, reply, deliveredEvidence] = await Promise.all([
         tx.select({ id: outreachSuppressionsTable.id })
           .from(outreachSuppressionsTable)
           .where(sql`lower(trim(${outreachSuppressionsTable.email})) = ${email}`)
@@ -166,6 +158,13 @@ export async function enqueueSeptemberClickerFollowUps(): Promise<HotLeadQueueRe
           .from(outreachRepliesTable)
           .where(eq(outreachRepliesTable.prospectId, candidate.prospectId))
           .limit(1),
+        tx.select({ id: outreachDeliveryEventsTable.id })
+          .from(outreachDeliveryEventsTable)
+          .where(and(
+            eq(outreachDeliveryEventsTable.outreachMessageId, candidate.initialMessageId),
+            eq(outreachDeliveryEventsTable.eventType, "delivered"),
+          ))
+          .limit(1),
       ]);
       if (suppression.length) {
         skippedEmails.push({ email, reason: "suppressed_or_unsubscribed" });
@@ -177,6 +176,10 @@ export async function enqueueSeptemberClickerFollowUps(): Promise<HotLeadQueueRe
       }
       if (reply.length) {
         skippedEmails.push({ email, reason: "already_replied" });
+        continue;
+      }
+      if (candidate.initialMessageStatus !== "delivered" && !deliveredEvidence.length) {
+        skippedEmails.push({ email, reason: "missing_delivery_evidence" });
         continue;
       }
 

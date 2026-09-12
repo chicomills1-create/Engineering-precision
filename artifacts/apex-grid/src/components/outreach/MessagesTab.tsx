@@ -128,6 +128,11 @@ export function MessagesTab() {
   const suppressForm = useForm<SuppressFormValues>({ resolver: zodResolver(suppressSchema) });
   function onEdit(data: EditMessageFormValues) {
     if (!isEditOpen) return;
+    const editableSourceType = isEditOpen.sourceType === 'lead'
+      || isEditOpen.sourceType === 'referral_partner'
+      || isEditOpen.sourceType === 'public_opportunity'
+      ? isEditOpen.sourceType
+      : undefined;
     updateMutation.mutate({
       id: isEditOpen.id,
       data: {
@@ -137,8 +142,8 @@ export function MessagesTab() {
         subject: data.subject,
         body: data.body,
         scheduledAt: isEditOpen.scheduledAt || undefined,
-        sourceType: isEditOpen.sourceType || undefined,
-        sourceId: isEditOpen.sourceId || undefined,
+        sourceType: editableSourceType,
+        sourceId: editableSourceType ? isEditOpen.sourceId || undefined : undefined,
       }
     });
   }

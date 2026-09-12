@@ -6,9 +6,13 @@ import {
   Eye,
 } from 'lucide-react';
 import { useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import {
+  getGetOutreachDashboardQueryKey,
+  getListOutreachHotLeadsQueryKey,
+  getListOutreachMessagesQueryKey,
   useListOutreachHotLeads,
   type OutreachHotLead,
 } from '@workspace/api-client-react';
@@ -53,21 +57,58 @@ export function HotLeadsTab() {
     skipped: number;
     skippedEmails: Array<{ email: string; reason: string }>;
   } | null>(null);
+  const [queueError, setQueueError] = useState<string | null>(null);
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   async function queueSeptemberClickers() {
     setQueueing(true);
+    setQueueError(null);
+    setQueueReport(null);
     try {
       const response = await fetch(`${import.meta.env.BASE_URL}api/outreach/hot-leads/september-clickers/enqueue`, {
         method: 'POST',
         credentials: 'include',
       });
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.error || 'Queue action failed');
-      setQueueReport(result);
-      toast({ title: 'Hot-lead follow-ups queued', description: `${result.created} created; ${result.skipped} skipped.` });
+      const responseText = await response.text();
+      let result: {
+        cohortCount?: number;
+        created?: number;
+        skipped?: number;
+        skippedEmails?: Array<{ email: string; reason: string }>;
+        error?: string;
+      };
+      try {
+        result = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        result = {};
+      }
+      if (!response.ok) {
+        throw new Error(result.error || `Queue action failed (${response.status})`);
+      }
+      if (typeof result.cohortCount !== 'number'
+        || typeof result.created !== 'number'
+        || typeof result.skipped !== 'number'
+        || !Array.isArray(result.skippedEmails)) {
+        throw new Error('The server returned an invalid queue report.');
+      }
+      const report = {
+        cohortCount: result.cohortCount,
+        created: result.created,
+        skipped: result.skipped,
+        skippedEmails: result.skippedEmails,
+      };
+      setQueueReport(report);
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: getListOutreachMessagesQueryKey() }),
+        queryClient.invalidateQueries({ queryKey: getGetOutreachDashboardQueryKey() }),
+        queryClient.invalidateQueries({ queryKey: getListOutreachHotLeadsQueryKey() }),
+      ]);
+      toast({ title: 'Hot-lead follow-ups queued', description: `${report.created} created; ${report.skipped} skipped.` });
     } catch (error) {
-      toast({ title: 'Nothing was queued', description: error instanceof Error ? error.message : 'The queue action failed.', variant: 'destructive' });
+      const message = error instanceof Error ? error.message : 'The queue action failed.';
+      setQueueError(message);
+      toast({ title: 'Nothing was queued', description: message, variant: 'destructive' });
     } finally {
       setQueueing(false);
     }
@@ -132,6 +173,12 @@ export function HotLeadsTab() {
               {queueReport.skippedEmails.map((item) => <li key={item.email}>{item.email}: {item.reason.replaceAll('_', ' ')}</li>)}
             </ul>
           )}
+        </div>
+      )}
+      {queueError && (
+        <div className="border border-destructive/40 bg-destructive/5 p-4 text-sm" role="alert" data-testid="september-clicker-queue-error">
+          <p className="font-semibold text-destructive">No follow-ups were created</p>
+          <p className="mt-1 text-muted-foreground">{queueError}</p>
         </div>
       )}
 

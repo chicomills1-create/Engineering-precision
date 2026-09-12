@@ -798,6 +798,10 @@ export const OutreachMessageSourceType = {
   lead: 'lead',
   referral_partner: 'referral_partner',
   public_opportunity: 'public_opportunity',
+  hot_lead: 'hot_lead',
+  hot_lead_verified: 'hot_lead_verified',
+  hot_market_one_time: 'hot_market_one_time',
+  hot_market_verified_national: 'hot_market_verified_national',
 } as const;
 
 export interface OutreachMessage {
