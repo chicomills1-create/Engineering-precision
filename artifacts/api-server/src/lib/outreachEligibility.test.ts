@@ -151,6 +151,27 @@ test("eligible outreach returns a normalized email", () => {
   assert.equal(assertOutreachEligibilityBase(approvedMessage, eligibleProspect, activeCampaign), "alex@example.com");
 });
 
+test("officially published public inboxes do not require named-contact confidence", () => {
+  assert.equal(
+    assertOutreachEligibilityBase(
+      approvedMessage,
+      {
+        ...eligibleProspect,
+        website: "https://quinnevans.com",
+        sourceUrl: "https://quinnevans.com/projects",
+        contactEmail: "info@quinnevans.com",
+        contactName: "Office",
+        contactTitle: null,
+        contactConfidence: "medium",
+        contactEvidenceType: "official_publication",
+        contactSourceUrl: "https://quinnevans.com/contact",
+      },
+      activeCampaign,
+    ),
+    "info@quinnevans.com",
+  );
+});
+
 test("draft approval validates sending safeguards without requiring prior approval", () => {
   assert.equal(
     assertOutreachEligibilityBase(

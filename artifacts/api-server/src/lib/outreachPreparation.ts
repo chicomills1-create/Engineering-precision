@@ -489,7 +489,6 @@ export async function prepareNextPhoenixOutreach(
       .where(and(
         inArray(prospectsTable.status, ["approved", "review"]),
         eq(prospectsTable.emailStatus, "verified"),
-        eq(prospectsTable.contactConfidence, "high"),
         eq(campaignsTable.status, "active"),
       ));
     const [suppressions, initialMessages, claims] = await Promise.all([
