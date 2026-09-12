@@ -37,6 +37,17 @@ export type PreparationCandidate = Pick<Prospect,
   "id" | "companyName" | "website" | "contactEmail" | "contactName" | "state" | "fitScore" | "needScore"
 > & { contactEvidenceType?: Prospect["contactEvidenceType"] };
 
+/**
+ * The normal preparation API always resolves the following Phoenix day.  The
+ * emergency staging recovery is the only caller that supplies an explicit
+ * window, allowing it to fill an interrupted current-day window without
+ * changing the normal scheduler's target.
+ */
+export type PhoenixPreparationTarget = {
+  targetDate: string;
+  scheduledAt: Date;
+};
+
 function phoenixDateKey(now: Date): string {
   const parts = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Phoenix",
@@ -57,6 +68,12 @@ export function getNextPhoenixPreparationTarget(now = new Date()): {
   return { targetDate: phoenixDateKey(scheduledAt), scheduledAt };
 }
 
+export function getCurrentPhoenixPreparationTarget(now = new Date()): PhoenixPreparationTarget {
+  const targetDate = phoenixDateKey(now);
+  const scheduledAt = new Date(`${targetDate}T08:00:00-07:00`);
+  return { targetDate, scheduledAt };
+}
+
 export function isPhoenixPreparationWindowOpen(now = new Date()): boolean {
   const todayAtEight = new Date(`${phoenixDateKey(now)}T08:00:00-07:00`);
   return now.getTime() >= todayAtEight.getTime();
@@ -70,7 +87,7 @@ export function isPublicInbox(
   return isEvidenceBackedPublicInbox(email, contactName, evidenceType);
 }
 
-export function companyDomain(candidate: PreparationCandidate): string {
+export function companyDomain(candidate: Pick<PreparationCandidate, "companyName" | "website">): string {
   if (candidate.website?.trim()) {
     try {
       return new URL(candidate.website).hostname.replace(/^www\./, "").toLowerCase();
@@ -402,7 +419,10 @@ async function getRegularLaneCountsForWindow(
   return { direct: regular.length - publicCount, public: publicCount };
 }
 
-export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
+export async function prepareNextPhoenixOutreach(
+  now = new Date(),
+  target?: PhoenixPreparationTarget,
+): Promise<{
   state: "skipped" | "completed" | "failed";
   prepared: number;
   directPrepared: number;
@@ -412,19 +432,22 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
   skipped: number;
   shortfall: number;
 }> {
-  if (!isPhoenixPreparationWindowOpen(now)) {
+  if (!target && !isPhoenixPreparationWindowOpen(now)) {
     return {
       state: "skipped", prepared: 0, directPrepared: 0,
       publicPrepared: 0, directShortfall: 0, publicShortfall: 0,
       skipped: 0, shortfall: 0,
     };
   }
-  const { targetDate, scheduledAt } = getNextPhoenixPreparationTarget(now);
+  const resolvedTarget = target ?? getNextPhoenixPreparationTarget(now);
+  const { targetDate, scheduledAt } = resolvedTarget;
   const [laneConfig, runtimeConfig] = await Promise.all([
     getAuthoritativeLaneConfig(),
     loadOutreachSystemConfig(now),
   ]);
-  const targetCount = configuredDailyAllowance(runtimeConfig, now);
+  const targetCount = target
+    ? laneConfig.namedLimit + laneConfig.publicLimit
+    : configuredDailyAllowance(runtimeConfig, now);
   const runId = await claimPreparationRun(targetDate, now, targetCount);
   if (!runId) {
     const [existing] = await db.select({
@@ -471,6 +494,8 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
         status: outreachMessagesTable.status,
         scheduledAt: outreachMessagesTable.scheduledAt,
         contactEmail: prospectsTable.contactEmail,
+        companyName: prospectsTable.companyName,
+        website: prospectsTable.website,
       })
         .from(outreachMessagesTable)
         .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
@@ -479,7 +504,12 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
         prospectId: outreachSequenceSendClaimsTable.prospectId,
         campaignScope: outreachSequenceSendClaimsTable.campaignScope,
         sequenceNumber: outreachSequenceSendClaimsTable.sequenceNumber,
-      }).from(outreachSequenceSendClaimsTable).where(eq(outreachSequenceSendClaimsTable.sequenceNumber, 1)),
+        contactEmail: prospectsTable.contactEmail,
+        companyName: prospectsTable.companyName,
+        website: prospectsTable.website,
+      }).from(outreachSequenceSendClaimsTable)
+        .innerJoin(prospectsTable, eq(outreachSequenceSendClaimsTable.prospectId, prospectsTable.id))
+        .where(eq(outreachSequenceSendClaimsTable.sequenceNumber, 1)),
     ]);
     const [catchUpCohort] = await db.select().from(outreachCatchUpCohortsTable)
       .where(eq(outreachCatchUpCohortsTable.name, "Apex Grid fresh verified catch-up")).limit(1);
@@ -558,9 +588,14 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
            publicCap: laneConfig.publicLimit - existingPublicCount,
            usedEmails: [
              ...initialMessages.flatMap((candidate) => candidate.contactEmail ? [candidate.contactEmail] : []),
+              ...claims.flatMap((candidate) => candidate.contactEmail ? [candidate.contactEmail] : []),
              ...currentTargetInitials.flatMap((candidate) => candidate.contactEmail ? [candidate.contactEmail] : []),
            ],
-           usedDomains: currentTargetInitials.map(companyDomain),
+            usedDomains: [
+              ...initialMessages.map(companyDomain),
+              ...claims.map(companyDomain),
+              ...currentTargetInitials.map(companyDomain),
+            ],
         },
       );
       const availableSlots = Array.from(
@@ -586,15 +621,33 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
           || !canPrepare(currentProspect, campaign, suppressedEmails)
         ) continue;
         await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${candidateEmail}, 0))`);
+        const candidateDomain = companyDomain(currentProspect);
+        await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${candidateDomain}, 0))`);
         const [emailAlreadyUsed] = await tx.select({ id: outreachMessagesTable.id })
           .from(outreachMessagesTable)
           .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
           .where(and(
             eq(outreachMessagesTable.sequenceNumber, 1),
-            sql`lower(trim(${prospectsTable.contactEmail})) = ${candidateEmail}`,
+            or(
+              sql`lower(trim(${prospectsTable.contactEmail})) = ${candidateEmail}`,
+              sql`lower(${prospectsTable.website}) like ${`%${candidateDomain}%`}`,
+            ),
           ))
           .limit(1);
         if (emailAlreadyUsed) continue;
+        const [claimAlreadyUsed] = await tx.select({ id: outreachSequenceSendClaimsTable.id })
+          .from(outreachSequenceSendClaimsTable)
+          .innerJoin(prospectsTable, eq(outreachSequenceSendClaimsTable.prospectId, prospectsTable.id))
+          .where(and(
+            eq(outreachSequenceSendClaimsTable.sequenceNumber, 1),
+            or(
+              eq(outreachSequenceSendClaimsTable.prospectId, currentProspect.id),
+              sql`lower(trim(${prospectsTable.contactEmail})) = ${candidateEmail}`,
+              sql`lower(${prospectsTable.website}) like ${`%${candidateDomain}%`}`,
+            ),
+          ))
+          .limit(1);
+        if (claimAlreadyUsed) continue;
         const slot = availableSlots.shift();
         if (slot === undefined) break;
         const [slotClaim] = await tx.insert(outreachPreparationSlotsTable).values({

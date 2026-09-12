@@ -6,8 +6,13 @@ import { seedVerifiedOutreachBatch } from "./lib/verifiedOutreachBatch";
 import { ensureOutreachFollowUps, prepareNextPhoenixOutreach } from "./lib/outreachPreparation";
 import { seedHotMarketOutreachBatch } from "./lib/hotMarketOutreachBatch";
 import { startDailyOutreachProcessScheduler } from "./lib/outreachDailyProcessScheduler";
-import { loadOutreachSystemConfig, setOutreachConfigError } from "./lib/outreachSystemConfig";
+import {
+  ensureAuthoritativeOutreachConfig,
+  loadOutreachSystemConfig,
+  setOutreachConfigError,
+} from "./lib/outreachSystemConfig";
 import { startCityEvidenceScheduler } from "./lib/cityEvidenceScheduler";
+import { recoverCurrentPhoenixOutreach } from "./lib/outreachPhoenixRecovery";
 
 const rawPort = process.env["PORT"];
 
@@ -35,6 +40,8 @@ const server = app.listen(port, async (err) => {
   stopCityEvidenceScheduler = startCityEvidenceScheduler();
   let outreachConfigured = false;
   try {
+    const configBootstrap = await ensureAuthoritativeOutreachConfig();
+    logger.info({ state: configBootstrap }, "Authoritative outreach configuration bootstrap checked");
     await loadOutreachSystemConfig();
     outreachConfigured = true;
     logger.info("Authoritative outreach configuration loaded");
@@ -43,6 +50,25 @@ const server = app.listen(port, async (err) => {
     logger.error({ err: configError }, "Outreach is fail-closed: authoritative configuration unavailable");
   }
   if (!outreachConfigured) return;
+  const recovery = await recoverCurrentPhoenixOutreach({
+    enabled: process.env.NODE_ENV === "production",
+  });
+  logger.info(
+    {
+      state: recovery.state,
+      targetDate: recovery.targetDate,
+      namedScheduled: recovery.regular?.directPrepared,
+      namedShortfall: recovery.regular?.directShortfall,
+      publicScheduled: recovery.regular?.publicPrepared,
+      publicShortfall: recovery.regular?.publicShortfall,
+      hotMarketScheduled: recovery.hotMarket?.totalScheduled,
+      hotMarketShortfall: recovery.hotMarket?.shortfall,
+      hotLeadScheduled: recovery.hotLead?.totalScheduled,
+      hotLeadShortfall: recovery.hotLead?.shortfall,
+      error: recovery.error,
+    },
+    "Staging Phoenix outreach recovery checked before worker startup",
+  );
   startOutreachWorker();
   stopDailyScheduler = startDailyOutreachProcessScheduler();
   startClientJobUploadCleanup();

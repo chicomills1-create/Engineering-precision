@@ -10,7 +10,11 @@ import {
 } from "@workspace/db";
 import { approvedOutreachBody, approvedOutreachFollowUpMessages, approvedOutreachSubject } from "./verifiedOutreachBatch";
 import { getAuthoritativeLaneConfig } from "./outreachLaneConfig";
-import { getNextPhoenixPreparationTarget, isPhoenixPreparationWindowOpen } from "./outreachPreparation";
+import {
+  type PhoenixPreparationTarget,
+  getNextPhoenixPreparationTarget,
+  isPhoenixPreparationWindowOpen,
+} from "./outreachPreparation";
 import { logger } from "./logger";
 
 export type OutreachEngagementRow = {
@@ -75,16 +79,19 @@ function companyDomain(prospect: Pick<Prospect, "companyName" | "website">): str
  * transaction so this remains safe when regular and hot-market preparation
  * run concurrently.
  */
-export async function prepareNextPhoenixHotLeadOutreach(now = new Date()): Promise<{
+export async function prepareNextPhoenixHotLeadOutreach(
+  now = new Date(),
+  target?: PhoenixPreparationTarget,
+): Promise<{
   state: "skipped" | "completed" | "failed";
   prepared: number;
   totalScheduled: number;
   shortfall: number;
 }> {
-  if (!isPhoenixPreparationWindowOpen(now)) {
+  if (!target && !isPhoenixPreparationWindowOpen(now)) {
     return { state: "skipped", prepared: 0, totalScheduled: 0, shortfall: 0 };
   }
-  const { scheduledAt } = getNextPhoenixPreparationTarget(now);
+  const { scheduledAt } = target ?? getNextPhoenixPreparationTarget(now);
   const targetEnd = new Date(scheduledAt.getTime() + 24 * 60 * 60_000);
   const laneConfig = await getAuthoritativeLaneConfig();
 
@@ -104,12 +111,23 @@ export async function prepareNextPhoenixHotLeadOutreach(now = new Date()): Promi
       ));
     const [suppressions, initialMessages, claims, targetMessages] = await Promise.all([
       db.select({ email: outreachSuppressionsTable.email }).from(outreachSuppressionsTable),
-      db.select({ prospectId: outreachMessagesTable.prospectId, contactEmail: prospectsTable.contactEmail })
+      db.select({
+        prospectId: outreachMessagesTable.prospectId,
+        contactEmail: prospectsTable.contactEmail,
+        companyName: prospectsTable.companyName,
+        website: prospectsTable.website,
+      })
         .from(outreachMessagesTable)
         .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
         .where(eq(outreachMessagesTable.sequenceNumber, 1)),
-      db.select({ prospectId: outreachSequenceSendClaimsTable.prospectId })
+      db.select({
+        prospectId: outreachSequenceSendClaimsTable.prospectId,
+        contactEmail: prospectsTable.contactEmail,
+        companyName: prospectsTable.companyName,
+        website: prospectsTable.website,
+      })
         .from(outreachSequenceSendClaimsTable)
+        .innerJoin(prospectsTable, eq(outreachSequenceSendClaimsTable.prospectId, prospectsTable.id))
         .where(eq(outreachSequenceSendClaimsTable.sequenceNumber, 1)),
       db.select({
         prospectId: outreachMessagesTable.prospectId,
@@ -129,12 +147,21 @@ export async function prepareNextPhoenixHotLeadOutreach(now = new Date()): Promi
       ...claims.map((row) => row.prospectId),
       ...targetMessages.map((row) => row.prospectId),
     ]);
-    const usedEmails = new Set(initialMessages.flatMap((row) =>
-      row.contactEmail ? [row.contactEmail.trim().toLowerCase()] : []
-    ));
-    const usedDomains = new Set(rows
-      .filter(({ prospect }) => usedProspects.has(prospect.id))
-      .map(({ prospect }) => companyDomain(prospect)));
+    const usedEmails = new Set([
+      ...initialMessages.flatMap((row) =>
+        row.contactEmail ? [row.contactEmail.trim().toLowerCase()] : []
+      ),
+      ...claims.flatMap((row) =>
+        row.contactEmail ? [row.contactEmail.trim().toLowerCase()] : []
+      ),
+    ]);
+    const usedDomains = new Set([
+      ...initialMessages.map(companyDomain),
+      ...claims.map(companyDomain),
+      ...rows
+        .filter(({ prospect }) => usedProspects.has(prospect.id))
+        .map(({ prospect }) => companyDomain(prospect)),
+    ]);
     const existingHotLeads = targetMessages.filter((row) =>
       row.sourceType === "hot_lead" || row.sourceType === "hot_lead_verified"
     ).length;
@@ -178,14 +205,27 @@ export async function prepareNextPhoenixHotLeadOutreach(now = new Date()): Promi
             or(
               eq(outreachMessagesTable.prospectId, candidate.id),
               sql`lower(trim(${prospectsTable.contactEmail})) = ${email}`,
+              sql`lower(${prospectsTable.website}) like ${`%${domain}%`}`,
             ),
           )).limit(1);
         const [suppression] = await tx.select({ id: outreachSuppressionsTable.id })
           .from(outreachSuppressionsTable)
           .where(eq(outreachSuppressionsTable.email, email))
           .limit(1);
+        const [claimed] = await tx.select({ id: outreachSequenceSendClaimsTable.id })
+          .from(outreachSequenceSendClaimsTable)
+          .innerJoin(prospectsTable, eq(outreachSequenceSendClaimsTable.prospectId, prospectsTable.id))
+          .where(and(
+            eq(outreachSequenceSendClaimsTable.sequenceNumber, 1),
+            or(
+              eq(outreachSequenceSendClaimsTable.prospectId, candidate.id),
+              sql`lower(trim(${prospectsTable.contactEmail})) = ${email}`,
+              sql`lower(${prospectsTable.website}) like ${`%${domain}%`}`,
+            ),
+          ))
+          .limit(1);
         const campaign = campaignsByProspect.get(candidate.id);
-        if (blocked || suppression || !campaign) return false;
+        if (blocked || claimed || suppression || !campaign) return false;
         await tx.insert(outreachMessagesTable).values([
           {
             prospectId: candidate.id,

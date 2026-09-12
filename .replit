@@ -2,7 +2,7 @@ modules = ["nodejs-24", "python-base-3.13", "postgresql-16"]
 
 [deployment]
 router = "application"
-deploymentTarget = "autoscale"
+deploymentTarget = "vm"
 
 [deployment.postBuild]
 args = ["pnpm", "store", "prune"]
@@ -93,3 +93,4 @@ SENDGRID_EVENT_PATH_VERIFIED = "true"
 SENDGRID_EVENT_WEBHOOK_PUBLIC_KEY = "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAENM2ILkNGiBwUVA7MnnfFn5gO9DwyNH0gNp/MQ9oLuxfOJR7clhoyTpB2KyO4dR0NKTI+0LQrYReC9GzULXmuhA=="
 SENDGRID_ISOLATION_VERIFIED = "true"
 OUTREACH_SEED_VERIFIED_BATCH = "true"
+OUTREACH_CONFIG_BOOTSTRAP_ENABLED = "true"

@@ -22,6 +22,7 @@ import {
   isHotMarketSourceType,
 } from "./hotMarketOutreachBatch";
 import {
+  type PhoenixPreparationTarget,
   getNextPhoenixPreparationTarget,
   isPhoenixPreparationWindowOpen,
   prioritizePreparationCandidates,
@@ -77,16 +78,19 @@ function canPrepareHotMarket(
   }
 }
 
-export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Promise<{
+export async function prepareNextPhoenixHotMarketOutreach(
+  now = new Date(),
+  target?: PhoenixPreparationTarget,
+): Promise<{
   state: "skipped" | "completed" | "failed";
   prepared: number;
   totalScheduled: number;
   shortfall: number;
 }> {
-  if (!isPhoenixPreparationWindowOpen(now)) {
+  if (!target && !isPhoenixPreparationWindowOpen(now)) {
     return { state: "skipped", prepared: 0, totalScheduled: 0, shortfall: 0 };
   }
-  const { scheduledAt } = getNextPhoenixPreparationTarget(now);
+  const { scheduledAt } = target ?? getNextPhoenixPreparationTarget(now);
   const laneConfig = await getAuthoritativeLaneConfig();
   const targetEnd = new Date(scheduledAt.getTime() + 24 * 60 * 60 * 1000);
 
@@ -103,11 +107,23 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
       ));
     const [suppressions, initialMessages, claims, targetInitials] = await Promise.all([
       db.select({ email: outreachSuppressionsTable.email }).from(outreachSuppressionsTable),
-      db.select({ prospectId: outreachMessagesTable.prospectId })
+      db.select({
+        prospectId: outreachMessagesTable.prospectId,
+        companyName: prospectsTable.companyName,
+        website: prospectsTable.website,
+        contactEmail: prospectsTable.contactEmail,
+      })
         .from(outreachMessagesTable)
+        .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
         .where(eq(outreachMessagesTable.sequenceNumber, 1)),
-      db.select({ prospectId: outreachSequenceSendClaimsTable.prospectId })
+      db.select({
+        prospectId: outreachSequenceSendClaimsTable.prospectId,
+        companyName: prospectsTable.companyName,
+        website: prospectsTable.website,
+        contactEmail: prospectsTable.contactEmail,
+      })
         .from(outreachSequenceSendClaimsTable)
+        .innerJoin(prospectsTable, eq(outreachSequenceSendClaimsTable.prospectId, prospectsTable.id))
         .where(eq(outreachSequenceSendClaimsTable.sequenceNumber, 1)),
       db.select({
         id: prospectsTable.id,
@@ -139,10 +155,22 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
       ...initialMessages.map((row) => row.prospectId),
       ...claims.map((row) => row.prospectId),
     ]);
-    const usedEmails = new Set(targetInitials.flatMap((row) =>
+    const usedEmails = new Set([
+      ...initialMessages.flatMap((row) =>
+        row.contactEmail ? [row.contactEmail.trim().toLowerCase()] : []
+      ),
+      ...claims.flatMap((row) =>
+        row.contactEmail ? [row.contactEmail.trim().toLowerCase()] : []
+      ),
+      ...targetInitials.flatMap((row) =>
       row.contactEmail ? [row.contactEmail.trim().toLowerCase()] : []
-    ));
-    const usedDomains = new Set(targetInitials.map(companyDomain));
+      ),
+    ]);
+    const usedDomains = new Set([
+      ...initialMessages.map(companyDomain),
+      ...claims.map(companyDomain),
+      ...targetInitials.map(companyDomain),
+    ]);
     const currentHotMarketCount = countHotMarketMessages(
       targetInitials.map((row) => row.sourceType),
     );
@@ -164,8 +192,22 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
       const domain = companyDomain(prospect);
       if (usedEmails.has(email) || usedDomains.has(domain)) continue;
       const inserted = await db.transaction(async (tx) => {
+        await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${`hot-market-window:${scheduledAt.toISOString()}`}, 0))`);
         await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${email}, 0))`);
         await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${domain}, 0))`);
+        const [currentCount] = await tx.select({ value: sql<number>`count(*)::int` })
+          .from(outreachMessagesTable)
+          .where(and(
+            eq(outreachMessagesTable.sequenceNumber, 1),
+            gte(outreachMessagesTable.scheduledAt, scheduledAt),
+            lt(outreachMessagesTable.scheduledAt, targetEnd),
+            inArray(outreachMessagesTable.sourceType, [
+              HOT_MARKET_SOURCE_TYPE,
+              HOT_MARKET_RECURRING_SOURCE_TYPE,
+            ]),
+            inArray(outreachMessagesTable.status, ["approved", "sending", "sent", "delivered"]),
+          ));
+        if ((currentCount?.value ?? 0) >= laneConfig.hotMarketLimit) return false;
         const [currentProspect] = await tx.select().from(prospectsTable)
           .where(eq(prospectsTable.id, prospect.id))
           .limit(1);
@@ -188,6 +230,19 @@ export async function prepareNextPhoenixHotMarketOutreach(now = new Date()): Pro
           ))
           .limit(1);
         if (blocked) return false;
+        const [claimed] = await tx.select({ id: outreachSequenceSendClaimsTable.id })
+          .from(outreachSequenceSendClaimsTable)
+          .innerJoin(prospectsTable, eq(outreachSequenceSendClaimsTable.prospectId, prospectsTable.id))
+          .where(and(
+            eq(outreachSequenceSendClaimsTable.sequenceNumber, 1),
+            or(
+              eq(outreachSequenceSendClaimsTable.prospectId, currentProspect.id),
+              sql`lower(trim(${prospectsTable.contactEmail})) = ${email}`,
+              sql`lower(${prospectsTable.website}) like ${`%${domain}%`}`,
+            ),
+          ))
+          .limit(1);
+        if (claimed) return false;
         const [suppression] = await tx.select({ id: outreachSuppressionsTable.id })
           .from(outreachSuppressionsTable)
           .where(eq(outreachSuppressionsTable.email, email))

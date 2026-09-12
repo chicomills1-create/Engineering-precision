@@ -34,8 +34,103 @@ export type OutreachRuntimeConfig = {
   schedule: OutreachPolicy["monthlySchedules"][number];
 };
 
+const AUTHORITATIVE_OUTREACH_POLICY_V1: OutreachPolicy = {
+  monthlySchedules: [
+    {
+      month: "2026-09",
+      monthlyTarget: 12_000,
+      dailyTarget: 400,
+      laneAllocations: { named: 100, public: 100, hotMarket: 100, hotLead: 100 },
+    },
+    { month: "2026-10", monthlyTarget: 20_000 },
+    { month: "2026-11", monthlyTarget: 35_000 },
+    { month: "2026-12", monthlyTarget: 50_000 },
+    { month: "2027-01", monthlyTarget: 50_000 },
+  ],
+  forwardMonthlyCap: 50_000,
+  scoring: {
+    positiveReply: 100,
+    reply: 90,
+    multipleClicks: 70,
+    click: 55,
+    repeatedEngagement: 50,
+    multipleOpens: 25,
+    singleOpen: 10,
+    negativeReply: -30,
+  },
+  verification: {
+    requireEvidence: true,
+    allowedMethods: [
+      "official_website",
+      "official_document",
+      "credible_directory",
+      "verification_provider",
+    ],
+  },
+  suppression: {
+    reasons: [
+      "unsubscribe",
+      "do_not_contact",
+      "spam_complaint",
+      "hard_bounce",
+      "invalid",
+      "permanent",
+    ],
+    precedence: "absolute",
+  },
+  sendingSafeguards: {
+    timezone: "America/Phoenix",
+    requireQualifiedInventory: true,
+    requireDeliverabilityReady: true,
+    maxMonthly: 50_000,
+  },
+  lifecycleStatuses: [
+    "cold",
+    "contacted",
+    "engaged",
+    "hot",
+    "replied",
+    "qualified",
+    "opportunity",
+    "proposal_requested",
+    "proposal_sent",
+    "client",
+    "not_interested",
+    "suppressed",
+  ],
+};
+
 let runtime: OutreachRuntimeConfig | null = null;
 let loadError: Error | null = null;
+
+export async function ensureAuthoritativeOutreachConfig(): Promise<
+  "disabled" | "present" | "inserted"
+> {
+  if (
+    process.env.NODE_ENV !== "production"
+    || process.env.OUTREACH_CONFIG_BOOTSTRAP_ENABLED !== "true"
+  ) {
+    return "disabled";
+  }
+
+  const [existing] = await db.select({ id: outreachSystemConfigsTable.id })
+    .from(outreachSystemConfigsTable)
+    .limit(1);
+  if (existing) return "present";
+
+  const [inserted] = await db.insert(outreachSystemConfigsTable).values({
+    version: 1,
+    status: "active",
+    policy: AUTHORITATIVE_OUTREACH_POLICY_V1,
+  }).onConflictDoNothing().returning({ id: outreachSystemConfigsTable.id });
+
+  if (inserted) return "inserted";
+  const [raced] = await db.select({ id: outreachSystemConfigsTable.id })
+    .from(outreachSystemConfigsTable)
+    .limit(1);
+  if (raced) return "present";
+  throw new Error("Authoritative outreach configuration bootstrap did not create a row");
+}
 
 export function phoenixMonthKey(now = new Date()): string {
   const parts = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
