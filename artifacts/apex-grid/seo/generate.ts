@@ -68,6 +68,19 @@ import {
   SEO_GENERATOR_FIXED_INDEX_ROUTES,
 } from "./route-ownership";
 import { NATIONAL_FACILITY_INTENT_PAGES } from "./national-facility-intent-pages";
+import {
+  CALIFORNIA_ADU_STATE_PAGE,
+  CALIFORNIA_ADU_CITY_PAGES,
+  type CaliforniaAduPage,
+} from "./california-adu-pages-south";
+import {
+  CALIFORNIA_ADU_STRUCTURAL_PAGES,
+  type CaliforniaAduStructuralPage,
+} from "./california-adu-pages-north";
+import {
+  PLAN_CHECK_CORRECTIONS_PAGE,
+  type PlanCheckCorrectionsPage,
+} from "./plan-check-corrections-page";
 
 const PROMOTED_CITY_KEYS = new Set([
   "georgia/atlanta", "texas/austin", "north-carolina/charlotte",
@@ -444,6 +457,242 @@ function breadcrumbSchema(items: { name: string; href?: string }[]) {
       ...(i.href ? { item: `${SITE}${i.href}` } : {}),
     })),
   };
+}
+
+type AduRenderedSection = { heading: string; body: string; bullets?: string[] };
+type AduRenderedPage = {
+  kind: "state" | "city";
+  citySlug?: string;
+  cityName?: string;
+  title: string;
+  description: string;
+  h1: string;
+  kicker: string;
+  lede: string;
+  sections: AduRenderedSection[];
+  permitSteps: string[];
+  timeline: string;
+  faqs: Array<{ question: string; answer: string }>;
+  internalLinks: Array<{ label: string; href: string }>;
+  sources: string[];
+};
+
+const CALIFORNIA_ADU_CITY_RECORDS: Array<CaliforniaAduPage | CaliforniaAduStructuralPage> = [
+  ...CALIFORNIA_ADU_CITY_PAGES,
+  ...CALIFORNIA_ADU_STRUCTURAL_PAGES,
+];
+const CALIFORNIA_ADU_STATE_URL = "/services/california-adu-structural-engineering/";
+const CALIFORNIA_ADU_CITY_URLS = CALIFORNIA_ADU_CITY_RECORDS.map((page) => {
+  const citySlug = page.slug.replace(/-adu-structural-engineering$/, "");
+  return `/locations/california/${citySlug}/adu-structural-engineering/`;
+});
+const PLAN_CHECK_CORRECTIONS_URL = PLAN_CHECK_CORRECTIONS_PAGE.path;
+
+function normalizeCaliforniaAduPage(
+  page: CaliforniaAduPage | CaliforniaAduStructuralPage,
+): AduRenderedPage {
+  if ("kind" in page) {
+    const citySlug = page.kind === "city"
+      ? page.slug.replace(/-adu-structural-engineering$/, "")
+      : undefined;
+    const sections: AduRenderedSection[] = [
+      { heading: "Local permitting authority", body: page.authority.name },
+      { heading: "How the permit process works", body: page.authority.process },
+      { heading: "Code conditions", body: page.codeConditions },
+      { heading: "Physical and existing-building constraints", body: page.physicalConstraints },
+      ...page.sections,
+    ];
+    return {
+      kind: page.kind,
+      citySlug,
+      cityName: citySlug ? page.h1.replace(/ ADU Structural Engineering$/, "") : undefined,
+      title: page.title,
+      description: page.description,
+      h1: page.h1,
+      kicker: page.kicker,
+      lede: page.lede,
+      sections,
+      permitSteps: page.permitSteps,
+      timeline: page.timelineGuidance,
+      faqs: page.faqs.map((faq) => ({ question: faq.question, answer: faq.answer })),
+      internalLinks: page.internalLinks,
+      sources: page.sources,
+    };
+  }
+
+  const citySlug = page.slug.replace(/-adu-structural-engineering$/, "");
+  return {
+    kind: "city",
+    citySlug,
+    cityName: page.city,
+    title: page.title,
+    description: page.description,
+    h1: page.h1,
+    kicker: page.kicker,
+    lede: page.lede,
+    sections: [
+      { heading: "Local permitting authority and context", body: page.sections.localContext },
+      { heading: "Structural engineering scope", body: page.sections.structuralEngineering },
+      { heading: "Permit path", body: page.sections.permitPath },
+      { heading: "Project timeline", body: page.sections.timeline },
+    ],
+    permitSteps: page.permitSteps,
+    timeline: `${page.timelineGuidance.statutoryWindow} ${page.timelineGuidance.totalDuration}`,
+    faqs: page.faqs.map((faq) => ({ question: faq.q, answer: faq.a })),
+    internalLinks: page.internalLinks,
+    sources: [
+      ...page.sources.state,
+      ...page.sources.city,
+      ...page.sources.localConditions,
+    ],
+  };
+}
+
+function californiaAduPage(page: AduRenderedPage): string {
+  const url = page.kind === "state"
+    ? CALIFORNIA_ADU_STATE_URL
+    : `/locations/california/${page.citySlug}/adu-structural-engineering/`;
+  const crumbs = page.kind === "state"
+    ? [
+      { name: "Home", href: "/" },
+      { name: "Engineering Services", href: "/services" },
+      { name: "California ADU Structural Engineering" },
+    ]
+    : [
+      { name: "Home", href: "/" },
+      { name: "Service Areas", href: "/locations/" },
+      { name: "California", href: "/locations/california/" },
+      { name: page.cityName ?? "California city", href: `/locations/california/${page.citySlug}/` },
+      { name: "ADU Structural Engineering" },
+    ];
+  const cityLinks = page.kind === "state"
+    ? CALIFORNIA_ADU_CITY_RECORDS.map((candidate, index) => {
+      const normalized = normalizeCaliforniaAduPage(candidate);
+      return {
+        label: `${normalized.cityName ?? "California"} ADU structural engineering`,
+        href: CALIFORNIA_ADU_CITY_URLS[index],
+      };
+    })
+    : [];
+  const relatedLinks = [
+    ...page.internalLinks,
+    { label: "California ADU structural engineering statewide", href: CALIFORNIA_ADU_STATE_URL },
+    { label: "Plan-check corrections engineering support", href: PLAN_CHECK_CORRECTIONS_URL },
+    ...(page.kind === "city" && page.citySlug
+      ? [{ label: `All engineering services in ${page.cityName ?? page.citySlug}`, href: `/locations/california/${page.citySlug}/` }]
+      : []),
+    ...cityLinks,
+  ].filter((link, index, links) => links.findIndex((candidate) => candidate.href === link.href) === index);
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: page.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: page.h1,
+    serviceType: "ADU structural engineering",
+    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    areaServed: page.kind === "state"
+      ? { "@type": "State", name: "California" }
+      : { "@type": "City", name: page.cityName, containedInPlace: { "@type": "State", name: "California" } },
+  };
+  const sourceLinks = page.sources.map((source, index) => {
+    let host = source;
+    try {
+      host = new URL(source).hostname.replace(/^www\./, "");
+    } catch {
+      // Source URLs are validated by the source modules; retain the URL as label if parsing fails.
+    }
+    return `<a href="${esc(source)}" rel="noopener noreferrer">Official source ${index + 1}: ${esc(host)}</a>`;
+  }).join("");
+  const body = `<main>
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container"><p class="kicker">${esc(page.kicker)}</p><h1>${esc(page.h1)}</h1><p class="lede">${esc(page.lede)}</p></div></section>
+${page.sections.map((section) => `<section class="block"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p>${section.bullets ? `<ul class="scope">${section.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul>` : ""}</div></div></section>`).join("")}
+<section class="block"><div class="container"><h2>ADU permit and engineering <em>process</em></h2><ol class="scope">${page.permitSteps.map((step) => `<li>${esc(step)}</li>`).join("")}</ol><p class="note">${esc(page.timeline)}</p></div></section>
+<section class="block"><div class="container faq"><h2>${esc(page.h1)} <em>FAQs</em></h2>${page.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
+<section class="block"><div class="container"><h2>Related <em>engineering resources</em></h2><div class="linkrow">${relatedLinks.map((link) => `<a href="${esc(link.href)}">${esc(link.label)}</a>`).join("")}</div></div></section>
+<section class="block"><div class="container"><h2>Official <em>sources</em></h2><p class="note">These government and technical sources provide the regulatory and hazard context described on this page. The current local authority and adopted code edition control the project.</p><div class="linkrow">${sourceLinks}</div></div></section>
+<section class="ctaband"><div class="container"><h2>Discuss Your California ADU Scope</h2><p>Send the address, jurisdiction, ADU type, architectural plans, existing-condition records, photographs, and schedule. Scope, licensure, site access, and engineer availability are confirmed before work begins.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
+</main>`;
+  return htmlShell({
+    title: page.title,
+    description: page.description,
+    canonical: `${SITE}${url}`,
+    schemaJson: [orgSchema, serviceSchema, faqSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+function planCheckCorrectionsPage(page: PlanCheckCorrectionsPage): string {
+  const url = page.path;
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Engineering Services", href: "/services" },
+    { name: "Plan-Check Corrections Engineering" },
+  ];
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: page.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
+    })),
+  };
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: page.h1,
+    serviceType: "Plan-check corrections engineering",
+    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+  };
+  const sourceLinks = page.sources.map((source) =>
+    `<a href="${esc(source.url)}" rel="noopener noreferrer">${esc(source.name)}</a>`,
+  ).join("");
+  const body = `<main>
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container"><p class="kicker">${esc(page.kicker)}</p><h1>${esc(page.h1)}</h1><p class="lede">${esc(page.lede)}</p></div></section>
+${page.sections.map((section) => `<section class="block"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p>${section.bullets ? `<ul class="scope">${section.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul>` : ""}</div></div></section>`).join("")}
+<section class="block"><div class="container"><h2>Correction response <em>process</em></h2><ol class="scope">${page.process.map((step) => `<li><strong>Step ${step.number}: ${esc(step.heading)}.</strong> ${esc(step.body)}</li>`).join("")}</ol></div></section>
+<section class="block"><div class="container"><h2>Scope <em>boundaries</em></h2><ul class="scope">${page.boundaries.map((boundary) => `<li>${esc(boundary)}</li>`).join("")}</ul></div></section>
+<section class="block"><div class="container faq"><h2>Plan-check corrections <em>FAQs</em></h2>${page.faqs.map((faq) => `<details><summary>${esc(faq.q)}</summary><div class="a">${esc(faq.a)}</div></details>`).join("")}</div></section>
+<section class="block"><div class="container"><h2>Related <em>permit resources</em></h2><div class="linkrow">${page.internalLinks.map((link) => `<a href="${esc(link.href)}" title="${esc(link.context)}">${esc(link.label)}</a>`).join("")}</div></div></section>
+<section class="block"><div class="container"><h2>Official <em>sources</em></h2><div class="grid2">${page.sources.map((source) => `<div class="card"><h3><a href="${esc(source.url)}" rel="noopener noreferrer">${esc(source.name)}</a></h3><p>${esc(source.relevance)}</p></div>`).join("")}</div></div></section>
+<section class="ctaband"><div class="container"><h2>Send the correction record for review</h2><p>${esc(page.audience)} can send the complete notice, submitted set, calculations, permit number, jurisdiction, and current backgrounds. The authority retains approval responsibility.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
+</main>`;
+  return htmlShell({
+    title: page.title,
+    description: page.description,
+    canonical: `${SITE}${url}`,
+    schemaJson: [orgSchema, serviceSchema, faqSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+function assertIndexableFaqPage(html: string, faqs: Array<{ question: string; answer: string }>, label: string): void {
+  const h1Count = (html.match(/<h1(?:\s[^>]*)?>/gi) ?? []).length;
+  const main = html.match(/<main>([\s\S]*?)<\/main>/i)?.[1] ?? "";
+  const visibleWords = main
+    .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+  const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .map((match) => JSON.parse(match[1]) as { ["@type"]?: string; mainEntity?: Array<{ name: string; acceptedAnswer: { text: string } }> });
+  const faqSchema = schemas.find((schema) => schema["@type"] === "FAQPage");
+  if (h1Count !== 1 || visibleWords < 700 || html.includes('name="robots" content="noindex') || !faqSchema
+    || faqSchema.mainEntity?.length !== faqs.length
+    || faqs.some((faq) => !faqSchema.mainEntity?.some((entry) => entry.name === faq.question && entry.acceptedAnswer.text === faq.answer))) {
+    throw new Error(`SEO assertion failed: malformed indexable source page: ${label} (${visibleWords} visible words, ${h1Count} H1s)`);
+  }
 }
 
 function engineeringIntentPage(page: EngineeringIntentPage): string {
@@ -1324,6 +1573,8 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const eb of EXISTING_BUILDING_PAGES) {
     servicesUrls.push(u(`${SITE}/existing-building-engineering/${eb.slug}/`, today, "monthly", "0.7"));
   }
+  servicesUrls.push(u(`${SITE}${CALIFORNIA_ADU_STATE_URL}`, today, "monthly", "0.8"));
+  servicesUrls.push(u(`${SITE}${PLAN_CHECK_CORRECTIONS_URL}`, today, "monthly", "0.8"));
 
   // ── Tier 2: Industries ───────────────────────────────────────────────────
   const industriesUrls: string[] = [
@@ -1417,6 +1668,9 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   }
   for (const lsp of LOCATION_SERVICE_PAGES) {
     locationsUrls.push(u(`${SITE}/locations/${lsp.stateSlug}/${lsp.citySlug}/${lsp.serviceSlug}/`, today, "monthly", "0.7"));
+  }
+  for (const cityUrl of CALIFORNIA_ADU_CITY_URLS) {
+    locationsUrls.push(u(`${SITE}${cityUrl}`, today, "monthly", "0.7"));
   }
 
   const verticalLocationUrls = new Map<string, string[]>();
@@ -3662,6 +3916,50 @@ async function main() {
     pages++;
   }
 
+  // California ADU structural engineering source pages. These are deliberately
+  // separate from the generic location/service templates: the source records
+  // carry local authority, site-condition, process, FAQ, and citation detail.
+  if (CALIFORNIA_ADU_CITY_RECORDS.length !== 15) {
+    throw new Error(`SEO assertion failed: expected 15 California ADU city records, found ${CALIFORNIA_ADU_CITY_RECORDS.length}`);
+  }
+  const aduState = normalizeCaliforniaAduPage(CALIFORNIA_ADU_STATE_PAGE);
+  const aduStateDir = path.join(PUBLIC, "services", "california-adu-structural-engineering");
+  fs.mkdirSync(aduStateDir, { recursive: true });
+  const aduStateHtml = californiaAduPage(aduState);
+  assertIndexableFaqPage(aduStateHtml, aduState.faqs, CALIFORNIA_ADU_STATE_URL);
+  fs.writeFileSync(path.join(aduStateDir, "index.html"), aduStateHtml);
+  pages++;
+  for (const sourcePage of CALIFORNIA_ADU_CITY_RECORDS) {
+    const aduCity = normalizeCaliforniaAduPage(sourcePage);
+    if (!aduCity.citySlug) throw new Error(`SEO assertion failed: ADU city page has no city slug: ${sourcePage.slug}`);
+    if (!cities.some((city) => city.stateSlug === "california" && city.slug === aduCity.citySlug)) {
+      throw new Error(`SEO assertion failed: ADU city has no existing California root route: ${aduCity.citySlug}`);
+    }
+    const aduCityDir = path.join(OUT, "california", aduCity.citySlug, "adu-structural-engineering");
+    fs.mkdirSync(aduCityDir, { recursive: true });
+    const aduCityHtml = californiaAduPage(aduCity);
+    assertIndexableFaqPage(aduCityHtml, aduCity.faqs, aduCity.citySlug);
+    fs.writeFileSync(path.join(aduCityDir, "index.html"), aduCityHtml);
+    pages++;
+  }
+
+  // Dedicated plan-check correction service route. This remains under the
+  // service namespace while the existing broad permit-correction page keeps
+  // its own canonical intent.
+  const planCheckDir = path.join(PUBLIC, "services", PLAN_CHECK_CORRECTIONS_PAGE.slug);
+  fs.mkdirSync(planCheckDir, { recursive: true });
+  const planCheckHtml = planCheckCorrectionsPage(PLAN_CHECK_CORRECTIONS_PAGE);
+  assertIndexableFaqPage(
+    planCheckHtml,
+    PLAN_CHECK_CORRECTIONS_PAGE.faqs.map((faq) => ({
+      question: faq.q,
+      answer: faq.a,
+    })),
+    PLAN_CHECK_CORRECTIONS_PAGE.path,
+  );
+  fs.writeFileSync(path.join(planCheckDir, "index.html"), planCheckHtml);
+  pages++;
+
   // Guides pages
   const guidesDir = path.join(PUBLIC, "guides");
   fs.rmSync(guidesDir, { recursive: true, force: true });
@@ -3889,6 +4187,26 @@ async function main() {
   }
 
   writeSitemap(states, cities, directory);
+  const generatedLocationsSitemap = fs.readFileSync(path.join(PUBLIC, "sitemap-locations.xml"), "utf8");
+  const generatedServicesSitemap = fs.readFileSync(path.join(PUBLIC, "sitemap-services.xml"), "utf8");
+  for (const cityPage of CALIFORNIA_ADU_CITY_RECORDS) {
+    const citySlug = cityPage.slug.replace(/-adu-structural-engineering$/, "");
+    const cityRoot = `/locations/california/${citySlug}/`;
+    const cityRootFile = path.join(PUBLIC, cityRoot.replace(/^\/|\/$/g, ""), "index.html");
+    if (!fs.existsSync(cityRootFile) || !generatedLocationsSitemap.includes(`<loc>${SITE}${cityRoot}</loc>`)) {
+      throw new Error(`SEO assertion failed: existing California metro root route was not retained: ${cityRoot}`);
+    }
+  }
+  for (const requiredUrl of [CALIFORNIA_ADU_STATE_URL, PLAN_CHECK_CORRECTIONS_URL]) {
+    if (!generatedServicesSitemap.includes(`<loc>${SITE}${requiredUrl}</loc>`)) {
+      throw new Error(`SEO assertion failed: required service URL missing from sitemap: ${requiredUrl}`);
+    }
+  }
+  for (const requiredUrl of CALIFORNIA_ADU_CITY_URLS) {
+    if (!generatedLocationsSitemap.includes(`<loc>${SITE}${requiredUrl}</loc>`)) {
+      throw new Error(`SEO assertion failed: required ADU city URL missing from sitemap: ${requiredUrl}`);
+    }
+  }
   fs.rmSync(path.join(PUBLIC, "city-page-quality.json"), { force: true });
   if (!fs.existsSync(path.join(PUBLIC, "llms.txt"))) throw new Error("SEO assertion failed: llms.txt was not generated");
   const sampleArticle = RESOURCE_ARTICLES[0];
