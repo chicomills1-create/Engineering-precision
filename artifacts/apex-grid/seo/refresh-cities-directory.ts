@@ -13,6 +13,7 @@ import {
   RETAINED_LEGACY_LOCATIONS,
   locationPath,
 } from "./legacy-locations";
+import { parseAcsPopulations, parsePepPopulations, resolvePopulation } from "./census-population";
 
 const GAZETTEER_URL =
   "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2025_Gazetteer/2025_Gaz_place_national.zip";
@@ -49,12 +50,6 @@ interface DirectoryCity extends ExistingCity {
   populationDataset?: "ACS 5-year" | "Population Estimates Program";
   populationStatus?: "verified-positive" | "confirmed-zero" | "unavailable";
   populationEvidenceNote?: string;
-}
-
-interface PepPopulation {
-  geoid: string;
-  name: string;
-  population: number;
 }
 
 type CityDirectory = Record<string, ExistingCity[]>;
@@ -167,58 +162,6 @@ function slugify(name: string): string {
   return slug;
 }
 
-function parseCsvLine(line: string): string[] {
-  const values: string[] = [];
-  let value = "";
-  let quoted = false;
-  for (let index = 0; index < line.length; index++) {
-    const character = line[index];
-    if (character === "\"") {
-      if (quoted && line[index + 1] === "\"") {
-        value += "\"";
-        index++;
-      } else {
-        quoted = !quoted;
-      }
-    } else if (character === "," && !quoted) {
-      values.push(value);
-      value = "";
-    } else {
-      value += character;
-    }
-  }
-  values.push(value);
-  return values;
-}
-
-function parsePepPopulations(text: string): Map<string, PepPopulation> {
-  const [header, ...rows] = text.trim().split(/\r?\n/);
-  const columns = parseCsvLine(header);
-  const required = ["SUMLEV", "STATE", "PLACE", "COUSUB", "NAME", "POPESTIMATE2024"];
-  if (!required.every((column) => columns.includes(column))) {
-    throw new Error(`Unexpected Census Population Estimates columns: ${header}`);
-  }
-  const indexOf = (column: string) => columns.indexOf(column);
-  const populations = new Map<string, PepPopulation>();
-  for (const row of rows) {
-    const values = parseCsvLine(row);
-    const summaryLevel = values[indexOf("SUMLEV")];
-    if (summaryLevel !== "162" && summaryLevel !== "061") continue;
-    const geography = summaryLevel === "162"
-      ? values[indexOf("PLACE")]
-      : values[indexOf("COUSUB")];
-    const geoid = `${values[indexOf("STATE")]}${geography}`;
-    const population = Number(values[indexOf("POPESTIMATE2024")]);
-    if (!/^\d{7}$/.test(geoid) || !Number.isFinite(population) || population < 0) continue;
-    populations.set(geoid, {
-      geoid,
-      name: values[indexOf("NAME")],
-      population,
-    });
-  }
-  return populations;
-}
-
 // The 2025 place Gazetteer introduced replacement place identifiers for three
 // municipalities whose 2024 PEP estimates remain under their preceding Census
 // geography. These explicit crosswalks prevent fuzzy name or population joins.
@@ -261,29 +204,13 @@ async function main() {
   const stateFipsToAbbreviation: Record<string, string> = {
     "01": "AL", "02": "AK", "04": "AZ", "05": "AR", "06": "CA", "08": "CO", "09": "CT", "10": "DE", "12": "FL", "13": "GA", "15": "HI", "16": "ID", "17": "IL", "18": "IN", "19": "IA", "20": "KS", "21": "KY", "22": "LA", "23": "ME", "24": "MD", "25": "MA", "26": "MI", "27": "MN", "28": "MS", "29": "MO", "30": "MT", "31": "NE", "32": "NV", "33": "NH", "34": "NJ", "35": "NM", "36": "NY", "37": "NC", "38": "ND", "39": "OH", "40": "OK", "41": "OR", "42": "PA", "44": "RI", "45": "SC", "46": "SD", "47": "TN", "48": "TX", "49": "UT", "50": "VT", "51": "VA", "53": "WA", "54": "WV", "55": "WI", "56": "WY",
   };
-  const populationByGeoid = new Map<string, number>();
   const populationResponse = await fetch(ACS_POPULATION_URL, {
     headers: { "User-Agent": "Apex-Grid-Census-Directory-Refresh/1.0" },
   });
   if (!populationResponse.ok) {
     throw new Error(`Census ACS population download failed: ${populationResponse.status} ${populationResponse.statusText}`);
   }
-  const [populationHeader, ...populationRows] = (await populationResponse.text()).trim().split(/\r?\n/);
-  const populationColumns = populationHeader.split("|");
-  const geoidIndex = populationColumns.indexOf("GEO_ID");
-  const populationIndex = populationColumns.indexOf("B01003_E001");
-  if (geoidIndex < 0 || populationIndex < 0) {
-    throw new Error(`Unexpected Census ACS population columns: ${populationHeader}`);
-  }
-  for (const row of populationRows) {
-    const values = row.split("|");
-    const geoId = values[geoidIndex] ?? "";
-    if (!geoId.startsWith("1600000US")) continue;
-    const population = Number(values[populationIndex]);
-    if (Number.isFinite(population) && population > 0) {
-      populationByGeoid.set(geoId.slice("1600000US".length), population);
-    }
-  }
+  const populationByGeoid = parseAcsPopulations(await populationResponse.text());
   const pepResponse = await fetch(PEP_POPULATION_URL, {
     headers: { "User-Agent": "Apex-Grid-Census-Directory-Refresh/1.0" },
   });
@@ -317,34 +244,22 @@ async function main() {
         while (used.has(slug)) slug = `${baseSlug}-${city.GEOID}-${suffix++}`;
       }
       used.add(slug);
-      const acsPopulation = populationByGeoid.get(city.GEOID);
       const crosswalk = PEP_GEOGRAPHY_CROSSWALKS[city.GEOID];
-      const pepPopulation = pepPopulationByGeoid.get(crosswalk?.pepGeoid ?? city.GEOID);
       const priorPop = priorPopulation.get(`${stateSlug}/${slug}`);
-      const population = acsPopulation !== undefined
+      const resolvedPopulation = resolvePopulation(city.GEOID, populationByGeoid, pepPopulationByGeoid, crosswalk);
+      const population = resolvedPopulation.populationStatus !== "unavailable"
         ? {
-            pop: acsPopulation,
-            populationYear: ACS_POPULATION_YEAR,
-            populationSource: ACS_POPULATION_URL,
+            ...resolvedPopulation,
+            populationYear: 2024,
+            populationSource: resolvedPopulation.populationDataset === "ACS 5-year" ? ACS_POPULATION_URL : PEP_POPULATION_URL,
           }
-        : pepPopulation !== undefined
+        : priorPop !== undefined
           ? {
-              pop: pepPopulation.population,
-              populationYear: 2024,
-              populationSource: PEP_POPULATION_URL,
-              populationDataset: "Population Estimates Program" as const,
-              populationStatus: pepPopulation.population > 0 ? "verified-positive" as const : "confirmed-zero" as const,
-              populationEvidenceNote: crosswalk?.note,
+              pop: priorPop,
+              populationStatus: "unavailable" as const,
+              populationEvidenceNote: "Retained from the previously reviewed directory because neither 2024 Census population file contains this 2025 Gazetteer geography.",
             }
-          : priorPop !== undefined
-            ? {
-                pop: priorPop,
-                populationEvidenceNote: "Retained from the previously reviewed directory because neither 2024 Census population file contains this 2025 Gazetteer geography.",
-              }
-            : {
-                populationStatus: "unavailable" as const,
-                populationEvidenceNote: "No matching record in the 2024 ACS or 2024 Population Estimates file; place is present in the 2025 Census Gazetteer.",
-              };
+          : resolvedPopulation;
       const latitude = Number(city.INTPTLAT);
       const longitude = Number(city.INTPTLONG);
       if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
