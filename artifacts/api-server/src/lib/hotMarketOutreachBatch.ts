@@ -140,8 +140,16 @@ const sourceContacts: SourceContact[] = [
   })),
 ];
 
+const uniqueCompanyDomains = new Set<string>();
+
 export const HOT_MARKET_OUTREACH_CONTACTS = sourceContacts
   .filter((contact) => !PRIOR_OUTREACH_EMAILS.has(contact.contactEmail.trim().toLowerCase()))
+  .filter((contact) => {
+    const domain = companyDomain(contact.website);
+    if (uniqueCompanyDomains.has(domain)) return false;
+    uniqueCompanyDomains.add(domain);
+    return true;
+  })
   .map((contact) => ({
     dedupeKey: `hot-market-one-time-${slug(contact.companyName)}`,
     companyName: contact.companyName.trim(),
