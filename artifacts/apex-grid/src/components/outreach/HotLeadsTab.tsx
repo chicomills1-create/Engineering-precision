@@ -5,6 +5,9 @@ import {
   Building2,
   Eye,
 } from 'lucide-react';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 import {
   useListOutreachHotLeads,
   type OutreachHotLead,
@@ -43,6 +46,32 @@ function QualificationBadge({ lead }: { lead: OutreachHotLead }) {
 
 export function HotLeadsTab() {
   const { data: leads, isLoading, isError } = useListOutreachHotLeads();
+  const [queueing, setQueueing] = useState(false);
+  const [queueReport, setQueueReport] = useState<{
+    cohortCount: number;
+    created: number;
+    skipped: number;
+    skippedEmails: Array<{ email: string; reason: string }>;
+  } | null>(null);
+  const { toast } = useToast();
+
+  async function queueSeptemberClickers() {
+    setQueueing(true);
+    try {
+      const response = await fetch(`${import.meta.env.BASE_URL}api/outreach/hot-leads/september-clickers/enqueue`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || 'Queue action failed');
+      setQueueReport(result);
+      toast({ title: 'Hot-lead follow-ups queued', description: `${result.created} created; ${result.skipped} skipped.` });
+    } catch (error) {
+      toast({ title: 'Nothing was queued', description: error instanceof Error ? error.message : 'The queue action failed.', variant: 'destructive' });
+    } finally {
+      setQueueing(false);
+    }
+  }
 
   if (isLoading) {
     return (
@@ -83,13 +112,28 @@ export function HotLeadsTab() {
     <section className="space-y-5" data-testid="tab-content-hot-leads">
       <div className="flex flex-col gap-3 border border-amber-500/25 bg-amber-500/5 p-5 sm:flex-row sm:items-start">
         <Flame className="mt-0.5 h-5 w-5 shrink-0 text-amber-500" />
-        <div>
+        <div className="flex-1">
           <h2 className="font-display text-lg font-semibold">Hot Leads</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             {leads.length} delivered prospect{leads.length === 1 ? '' : 's'} with a tracked first-touch open or click. Clicks rank first, followed by the most recent engagement.
           </p>
         </div>
+        <Button type="button" onClick={queueSeptemberClickers} disabled={queueing} data-testid="button-queue-september-clickers">
+          <Flame className="mr-2 h-4 w-4" />
+          {queueing ? 'Creating follow-ups…' : 'Queue All 110 Clicker Follow-Ups'}
+        </Button>
       </div>
+      {queueReport && (
+        <div className="border border-border bg-card p-4 text-sm" data-testid="september-clicker-queue-report">
+          <p className="font-semibold">{queueReport.created} follow-ups created; {queueReport.skipped} skipped</p>
+          <p className="text-muted-foreground">Validated cohort: {queueReport.cohortCount} distinct clicker emails.</p>
+          {queueReport.skippedEmails.length > 0 && (
+            <ul className="mt-2 max-h-48 list-disc overflow-auto pl-5 text-xs text-muted-foreground">
+              {queueReport.skippedEmails.map((item) => <li key={item.email}>{item.email}: {item.reason.replaceAll('_', ' ')}</li>)}
+            </ul>
+          )}
+        </div>
+      )}
 
       <ResponsiveTableContainer className="overflow-hidden border border-border bg-card">
         <ResponsiveTable>

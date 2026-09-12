@@ -3,7 +3,17 @@ import { getAuth } from "@clerk/express";
 import { z } from "zod";
 import { requireAuth } from "../middlewares/requireAuth";
 import express from "express";
-import { createOneTimeOverride, getLaneConfig, importRecoveredFindyMailInventory, importVerifiedInventory } from "../lib/outreachInventory";
+import {
+  confirmPublicInventory,
+  ATTACHED_PUBLIC_SOURCE_CSV,
+  ATTACHED_PUBLIC_SOURCE_FILENAME,
+  createOneTimeOverride,
+  getLaneConfig,
+  importRecoveredFindyMailInventory,
+  importVerifiedInventory,
+  previewPublicInventory,
+} from "../lib/outreachInventory";
+import { enqueueSeptemberClickerFollowUps } from "../lib/outreachAdminActions";
 import { currentOutreachCampaignKey } from "../lib/outreachLaneConfig";
 import { getOutreachRuntimeConfig } from "../lib/outreachSystemConfig";
 
@@ -36,6 +46,71 @@ router.post(
     }
   },
 );
+router.post(
+  "/outreach/inventory/public-preview",
+  requireAuth,
+  async (req, res): Promise<void> => {
+    const actor = getAuth(req)?.userId;
+    if (!actor) { res.status(401).json({ error: "Unauthorized" }); return; }
+    try {
+      res.json(await previewPublicInventory({
+        actor,
+        sourceFilename: ATTACHED_PUBLIC_SOURCE_FILENAME,
+        csv: ATTACHED_PUBLIC_SOURCE_CSV,
+      }));
+    } catch (error) {
+      req.log.warn({ err: error, actor }, "Public inventory preview rejected");
+      res.status(400).json({ error: error instanceof Error ? error.message : "Preview failed" });
+    }
+  },
+);
+router.post(
+  "/outreach/inventory/public-confirm",
+  requireAuth,
+  async (req, res): Promise<void> => {
+    const actor = getAuth(req)?.userId;
+    const previewBatchId = typeof req.headers["x-preview-batch-id"] === "string"
+      ? req.headers["x-preview-batch-id"]
+      : "";
+    const acceptedDigest = typeof req.headers["x-preview-accepted-digest"] === "string"
+      ? req.headers["x-preview-accepted-digest"]
+      : "";
+    const confirmationToken = typeof req.headers["x-preview-confirmation-token"] === "string"
+      ? req.headers["x-preview-confirmation-token"]
+      : "";
+    const confirmed = req.headers["x-confirm-import"] === "yes";
+    if (!actor) { res.status(401).json({ error: "Unauthorized" }); return; }
+    if (!confirmed || !previewBatchId || !acceptedDigest || !confirmationToken) {
+      res.status(400).json({ error: "Explicit confirmation and a matching preview are required" });
+      return;
+    }
+    try {
+      res.status(201).json(await confirmPublicInventory({
+        actor,
+        previewBatchId,
+        acceptedDigest,
+        confirmationToken,
+        sourceFilename: ATTACHED_PUBLIC_SOURCE_FILENAME,
+        csv: ATTACHED_PUBLIC_SOURCE_CSV,
+      }));
+    } catch (error) {
+      req.log.error({ err: error, actor }, "Confirmed public inventory import failed");
+      res.status(400).json({ error: error instanceof Error ? error.message : "Import failed" });
+    }
+  },
+);
+router.post("/outreach/hot-leads/september-clickers/enqueue", requireAuth, async (req, res): Promise<void> => {
+  const actor = getAuth(req)?.userId;
+  if (!actor) { res.status(401).json({ error: "Unauthorized" }); return; }
+  try {
+    const report = await enqueueSeptemberClickerFollowUps();
+    req.log.info({ actor, created: report.created, skipped: report.skipped }, "September clicker follow-ups queued");
+    res.status(201).json(report);
+  } catch (error) {
+    req.log.warn({ err: error, actor }, "September clicker follow-up queue action rejected");
+    res.status(409).json({ error: error instanceof Error ? error.message : "Queue action failed" });
+  }
+});
 router.get("/outreach/lane-config", requireAuth, async (req, res) => {
   const campaignKey = typeof req.query.campaignKey === "string" ? req.query.campaignKey : currentOutreachCampaignKey();
   res.json(await getLaneConfig(campaignKey));

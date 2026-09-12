@@ -147,6 +147,9 @@ export async function ensureApprovedFollowUpSequence(
       const template = templates[sequenceNumber - 2]!;
       const current = existingBySequence.get(sequenceNumber);
       if (current) {
+        if (current.sourceType === "hot_lead" || current.sourceType === "hot_lead_verified") {
+          continue;
+        }
         await tx.update(outreachMessagesTable)
           .set({ subject: template.subject, body: template.body })
           .where(and(
