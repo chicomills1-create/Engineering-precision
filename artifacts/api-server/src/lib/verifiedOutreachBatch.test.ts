@@ -265,9 +265,19 @@ test("the approved body uses only the approved pipeline closing", () => {
     "A reliable engineering partner for active projects",
   );
   const body = approvedOutreachBody("Alex Rivera");
-  assert.match(body, /^Hi Alex,/);
-  assert.match(body, /Arizona-based, but licensed to support projects across 49 states/);
-  assert.match(body, /Do you have any current projects in your pipeline that you would like us to review\?$/);
+  assert.equal(
+    body,
+    `Hi Alex,
+
+
+Apex Grid is a veteran-owned engineering organization providing full-discipline support — Civil, Structural, MEP, drainage, utility, permit-response, and drafting.
+
+
+We’re licensed in 49 states, and we work fast: focused reviews typically turn around in 12–24 hours.
+
+
+Do you have an active project in your pipeline that you would like us to review?`,
+  );
   assert.doesNotMatch(body, /Click the URL|https:\/\/apexgrideng\.com/i);
   assert.doesNotMatch(body, /15.?minute|15 min|schedule|book.*call/i);
   assert.doesNotMatch(body, /plan-review comment|field condition|waiting on engineering answers/i);
