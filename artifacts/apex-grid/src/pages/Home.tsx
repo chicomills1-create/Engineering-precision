@@ -31,7 +31,7 @@ export default function Home() {
   const opacityHeroText = useTransform(scrollY, [0, 600], [1, 0]);
 
   const stats = [
-    { label: "Licensing coverage", value: "Verified per project" },
+    { label: "Licensing coverage", value: "Licensure confirmed for each project jurisdiction" },
     { label: "Typical quote turnaround", value: "12–24h" },
     { label: "Integrated divisions", value: "3" },
     { label: "PE-led project work", value: "100%" }
