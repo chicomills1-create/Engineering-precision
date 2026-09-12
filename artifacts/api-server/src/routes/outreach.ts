@@ -74,6 +74,7 @@ import { approvedOutreachFollowUpMessages } from "../lib/verifiedOutreachBatch";
 import { buildOutreachHotLeads } from "../lib/outreachHotLeads";
 import { getOutreachRuntimeConfig, requiredDailyPace } from "../lib/outreachSystemConfig";
 import { getOutreachDailyLane } from "../lib/outreach";
+import { SEPTEMBER_OUTREACH_LANE_TARGETS, SEPTEMBER_OUTREACH_TOTAL_TARGET } from "../lib/outreachLaneConfig";
 
 const router: IRouter = Router();
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
@@ -187,10 +188,14 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     : new Date(0);
   const monthlyEnd = new Date(Date.UTC(monthStart.getUTCFullYear(), monthStart.getUTCMonth() + 1, 1));
   const monthlyWindow = and(gte(outreachMessagesTable.sentAt, monthStart), lt(outreachMessagesTable.sentAt, monthlyEnd));
-  const todayWindow = and(
-    gte(outreachMessagesTable.scheduledAt, start),
-    lt(outreachMessagesTable.scheduledAt, end),
-  );
+   const sentTodayWindow = and(
+     gte(outreachMessagesTable.sentAt, start),
+     lt(outreachMessagesTable.sentAt, end),
+   );
+   const eventTodayWindow = and(
+     gte(outreachDeliveryEventsTable.occurredAt, start),
+     lt(outreachDeliveryEventsTable.occurredAt, end),
+   );
   const [
     [prospects],
     [campaigns],
@@ -202,6 +207,7 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     [followUpBounced],
     [followUpReplies],
     [providerProcessedToday],
+     [acceptedToday],
     [deliveredToday],
     [bouncedToday],
     [unresolvedToday],
@@ -277,19 +283,24 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
         eq(outreachDeliveryEventsTable.outreachMessageId, outreachMessagesTable.id),
       )
       .where(and(
-        todayWindow,
+       eventTodayWindow,
         eq(outreachDeliveryEventsTable.eventType, "processed"),
       )),
+     db.select({ value: count() }).from(outreachMessagesTable).where(and(
+       sentTodayWindow,
+       eq(outreachMessagesTable.sequenceNumber, 1),
+       isNotNull(outreachMessagesTable.sentAt),
+     )),
     db.select({ value: count() }).from(outreachMessagesTable).where(and(
-      todayWindow,
+       sentTodayWindow,
       eq(outreachMessagesTable.status, "delivered"),
     )),
     db.select({ value: count() }).from(outreachMessagesTable).where(and(
-      todayWindow,
+       sentTodayWindow,
       eq(outreachMessagesTable.status, "bounced"),
     )),
     db.select({ value: count() }).from(outreachMessagesTable).where(and(
-      todayWindow,
+       sentTodayWindow,
       inArray(outreachMessagesTable.status, ["approved", "sending", "failed", "needs_review"]),
     )),
     db.select({ value: count() }).from(outreachMessagesTable).where(eq(outreachMessagesTable.status, "replied")),
@@ -310,18 +321,54 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
      db.select({ value: count() }).from(prospectsTable).where(and(gte(prospectsTable.createdAt, monthStart), lt(prospectsTable.createdAt, monthlyEnd), eq(prospectsTable.emailStatus, "verified"))),
   ]);
   const processedCount = providerProcessedToday?.value ?? 0;
+  const acceptedCount = acceptedToday?.value ?? 0;
   const laneSent = { named: 0, public: 0, hotMarket: 0, hotLead: 0 };
+  const laneQueued = { named: 0, public: 0, hotMarket: 0, hotLead: 0 };
   if (runtimeConfig?.month === "2026-09") {
     const currentMessages = await db.select({
       sourceType: outreachMessagesTable.sourceType,
+      status: outreachMessagesTable.status,
+      sentAt: outreachMessagesTable.sentAt,
       contactEmail: prospectsTable.contactEmail,
       contactName: prospectsTable.contactName,
       contactEvidenceType: prospectsTable.contactEvidenceType,
     }).from(outreachMessagesTable).innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
-      .where(and(eq(outreachMessagesTable.sequenceNumber, 1), gte(outreachMessagesTable.sentAt, start), lt(outreachMessagesTable.sentAt, end)));
+      .where(and(
+        eq(outreachMessagesTable.sequenceNumber, 1),
+        or(
+          and(gte(outreachMessagesTable.sentAt, start), lt(outreachMessagesTable.sentAt, end)),
+          and(
+            gte(outreachMessagesTable.scheduledAt, start),
+            lt(outreachMessagesTable.scheduledAt, end),
+            inArray(outreachMessagesTable.status, ["approved", "sending"]),
+            eq(prospectsTable.contactStatus, "active"),
+            inArray(prospectsTable.status, ["approved", "contacted"]),
+            sql`not exists (
+              select 1 from outreach_suppressions as dashboard_suppression
+              where dashboard_suppression.email = lower(trim(${prospectsTable.contactEmail}))
+            )`,
+            sql`${outreachMessagesTable.catchUpCohortId} is null or exists (
+              select 1 from outreach_catch_up_reservations as dashboard_catch_up
+              where dashboard_catch_up.message_id = ${outreachMessagesTable.id}
+                and dashboard_catch_up.status = 'reserved'
+            )`,
+          ),
+        ),
+      ));
     for (const message of currentMessages) {
       const laneName = getOutreachDailyLane(message, message);
-      if (laneName in laneSent) laneSent[laneName as keyof typeof laneSent] += 1;
+      const key = laneName === "hot_market" || laneName === "hot_market_extra"
+        ? "hotMarket"
+        : laneName === "hot_lead"
+          ? "hotLead"
+          : laneName === "direct"
+            ? "named"
+            : laneName;
+      if (message.sentAt && message.sentAt >= start && message.sentAt < end) {
+        laneSent[key] += 1;
+      } else if (message.status === "approved" || message.status === "sending") {
+        laneQueued[key] += 1;
+      }
     }
   }
   const monthlyTarget = runtimeConfig?.schedule.monthlyTarget ?? 0;
@@ -329,7 +376,8 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
   const remainingMonth = Math.max(0, monthlyTarget - sentMonth);
   const lane = runtimeConfig?.schedule.laneAllocations;
   const remainingSendingDays = Math.max(1, 30 - Number(new Intl.DateTimeFormat("en-US", { timeZone: "America/Phoenix", day: "numeric" }).format(new Date())));
-  const todayTarget = runtimeConfig?.schedule.dailyTarget ?? requiredDailyPace(monthlyTarget, sentMonth, remainingSendingDays);
+  const todayTarget = runtimeConfig?.schedule.dailyTarget
+    ?? (runtimeConfig?.month === "2026-09" ? SEPTEMBER_OUTREACH_TOTAL_TARGET : requiredDailyPace(monthlyTarget, sentMonth, remainingSendingDays));
   res.json(GetOutreachDashboardResponse.parse({
     prospects: prospects?.value ?? 0,
     campaigns: campaigns?.value ?? 0,
@@ -340,7 +388,7 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     followUpDelivered: followUpDelivered?.value ?? 0,
     followUpBounced: followUpBounced?.value ?? 0,
     followUpReplies: followUpReplies?.value ?? 0,
-    sentToday: processedCount,
+    sentToday: acceptedCount,
     providerProcessedToday: processedCount,
     deliveredToday: deliveredToday?.value ?? 0,
     bouncedToday: bouncedToday?.value ?? 0,
@@ -357,8 +405,8 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     ...automationStatus,
     monthlyTarget, sentThisMonth: sentMonth, remainingThisMonth: remainingMonth,
     monthlyPercentComplete: monthlyTarget ? Math.min(100, (sentMonth / monthlyTarget) * 100) : 0,
-    todayTarget, todayRemaining: Math.max(0, todayTarget - processedCount),
-    currentSendingPace: processedCount,
+    todayTarget, todayRemaining: Math.max(0, todayTarget - acceptedCount),
+    currentSendingPace: acceptedCount,
     requiredDailyPace: requiredDailyPace(monthlyTarget, sentMonth, remainingSendingDays),
     qualifiedInventory: qualifiedInventory?.value ?? 0,
     delivered: monthlyDelivered?.value ?? 0, bounced: monthlyBounced?.value ?? 0,
@@ -369,9 +417,11 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     suppressed: suppressed?.value ?? 0, newResearched: newResearched?.value ?? 0,
     newVerified: newVerified?.value ?? 0,
     septemberLanes: runtimeConfig?.month === "2026-09" && lane ? {
-      named: { sent: laneSent.named, target: lane.named }, public: { sent: laneSent.public, target: lane.public },
-      hotMarket: { sent: laneSent.hotMarket, target: lane.hotMarket }, hotLead: { sent: laneSent.hotLead, target: lane.hotLead },
-      totalSent: Object.values(laneSent).reduce((sum, value) => sum + value, 0), totalTarget: lane.named + lane.public + lane.hotMarket + lane.hotLead,
+      named: { sent: laneSent.named, target: SEPTEMBER_OUTREACH_LANE_TARGETS.named, shortage: Math.max(0, SEPTEMBER_OUTREACH_LANE_TARGETS.named - laneSent.named - laneQueued.named) },
+      public: { sent: laneSent.public, target: SEPTEMBER_OUTREACH_LANE_TARGETS.public, shortage: Math.max(0, SEPTEMBER_OUTREACH_LANE_TARGETS.public - laneSent.public - laneQueued.public) },
+      hotMarket: { sent: laneSent.hotMarket, target: SEPTEMBER_OUTREACH_LANE_TARGETS.hot_market, shortage: Math.max(0, SEPTEMBER_OUTREACH_LANE_TARGETS.hot_market - laneSent.hotMarket - laneQueued.hotMarket) },
+      hotLead: { sent: laneSent.hotLead, target: SEPTEMBER_OUTREACH_LANE_TARGETS.hot_lead, shortage: Math.max(0, SEPTEMBER_OUTREACH_LANE_TARGETS.hot_lead - laneSent.hotLead - laneQueued.hotLead) },
+      totalSent: Object.values(laneSent).reduce((sum, value) => sum + value, 0), totalTarget: SEPTEMBER_OUTREACH_TOTAL_TARGET,
     } : null,
   }));
 });

@@ -4,6 +4,7 @@ import {
   getNextPhoenixPreparationTarget,
   getPreparationShortfall,
   getPreparationRemainingCapacity,
+  getLaneShortfalls,
   isPhoenixPreparationWindowOpen,
   isPreparationRunStale,
   prioritizePreparationCandidates,
@@ -41,7 +42,7 @@ test("personal contacts are prioritized before public inboxes within a state", (
   assert.deepEqual(ordered.map((candidate) => candidate.id), [2, 1]);
 });
 
-test("preparation reserves 100 Personal and 50 Public regular slots and de-dupes identities", () => {
+test("preparation reserves 100 Named and 100 Public regular slots and de-dupes identities", () => {
   const candidates: PreparationCandidate[] = Array.from({ length: 202 }, (_, index) => ({
     id: index,
     companyName: `Company ${index}`,
@@ -69,25 +70,35 @@ test("preparation reserves 100 Personal and 50 Public regular slots and de-dupes
     needScore: 80,
   })));
   const selected = selectUniquePreparationCandidates(candidates);
-  assert.equal(selected.length, 150);
+  assert.equal(selected.length, 155);
   assert.equal(selected.filter((candidate) =>
     candidate.contactEvidenceType === "official_publication"
-  ).length, 50);
+  ).length, 55);
   assert.equal(selected.filter((candidate) =>
     candidate.contactEvidenceType !== "official_publication"
   ).length, 100);
 });
 
 test("shortfall and stale-run helpers support honest retry-safe runs", () => {
-  assert.equal(getPreparationShortfall(149, 150), 1);
-  assert.equal(getPreparationShortfall(150, 150), 0);
+  assert.equal(getPreparationShortfall(199, 200), 1);
+  assert.equal(getPreparationShortfall(200, 200), 0);
   const now = new Date("2026-08-29T15:00:00.000Z");
   assert.equal(isPreparationRunStale(new Date(now.getTime() - 20 * 60_000), now), true);
   assert.equal(isPreparationRunStale(new Date(now.getTime() - 19 * 60_000), now), false);
 });
 
-test("existing manually scheduled messages consume the same 150-message regular window", () => {
-  assert.equal(getPreparationRemainingCapacity(100, 20, 150), 30);
-  assert.equal(getPreparationRemainingCapacity(0, 150, 150), 0);
-  assert.throws(() => getPreparationRemainingCapacity(149, 2, 150), /exceeds the 150-message ceiling/);
+test("lane shortfall accounting never borrows an unfinished lane", () => {
+  assert.deepEqual(
+    getLaneShortfalls(
+      { named: 100, public: 94, hotMarket: 100, hotLead: 81 },
+      { named: 100, public: 100, hotMarket: 100, hotLead: 100 },
+    ),
+    { named: 0, public: 6, hotMarket: 0, hotLead: 19, total: 25 },
+  );
+});
+
+test("existing manually scheduled messages consume the same 200-message regular window", () => {
+  assert.equal(getPreparationRemainingCapacity(100, 20, 200), 80);
+  assert.equal(getPreparationRemainingCapacity(0, 200, 200), 0);
+  assert.throws(() => getPreparationRemainingCapacity(199, 2, 200), /exceeds the 200-message ceiling/);
 });

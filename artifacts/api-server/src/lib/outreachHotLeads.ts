@@ -1,3 +1,18 @@
+import { and, eq, gte, inArray, lt, or, sql } from "drizzle-orm";
+import {
+  campaignsTable,
+  db,
+  outreachMessagesTable,
+  outreachSequenceSendClaimsTable,
+  outreachSuppressionsTable,
+  prospectsTable,
+  type Prospect,
+} from "@workspace/db";
+import { approvedOutreachBody, approvedOutreachFollowUpMessages, approvedOutreachSubject } from "./verifiedOutreachBatch";
+import { getAuthoritativeLaneConfig } from "./outreachLaneConfig";
+import { getNextPhoenixPreparationTarget, isPhoenixPreparationWindowOpen } from "./outreachPreparation";
+import { logger } from "./logger";
+
 export type OutreachEngagementRow = {
   prospectId: number;
   companyName: string;
@@ -10,6 +25,215 @@ export type OutreachEngagementRow = {
   eventType: string;
   occurredAt: Date;
 };
+
+export type HotLeadCandidate = Pick<Prospect,
+  "id" | "companyName" | "website" | "contactEmail" | "contactName" | "contactTitle"
+  | "state" | "fitScore" | "needScore" | "leadScore" | "leadStatus" | "createdAt"
+> & { latestEngagedAt?: Date | null };
+
+/**
+ * Hot-lead ordering intentionally gives recency precedence over score. This
+ * keeps a newly qualified September lead from being displaced by an older,
+ * marginally stronger record, while the score breaks same-day ties.
+ */
+export function prioritizeHotLeadCandidates<T extends HotLeadCandidate>(candidates: T[]): T[] {
+  return [...candidates].sort((left, right) =>
+    right.createdAt.getTime() - left.createdAt.getTime()
+    || (right.latestEngagedAt?.getTime() ?? 0) - (left.latestEngagedAt?.getTime() ?? 0)
+    || right.leadScore - left.leadScore
+    || (right.fitScore + right.needScore) - (left.fitScore + left.needScore)
+    || left.id - right.id,
+  );
+}
+
+function phoenixDateKey(now: Date): string {
+  const values = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Phoenix",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(now).map((part) => [part.type, part.value]));
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
+function companyDomain(prospect: Pick<Prospect, "companyName" | "website">): string {
+  if (prospect.website) {
+    try {
+      return new URL(prospect.website).hostname.replace(/^www\./, "").toLowerCase();
+    } catch {
+      // Use the same stable fallback as regular preparation.
+    }
+  }
+  return prospect.companyName.trim().toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+/**
+ * Stages the independent September Hot Leads lane. Only records that have
+ * already been explicitly promoted to a hot/qualified lead are considered;
+ * engagement does not silently authorize a second opener to a prior
+ * recipient. Existing opener/email/suppression checks are repeated inside the
+ * transaction so this remains safe when regular and hot-market preparation
+ * run concurrently.
+ */
+export async function prepareNextPhoenixHotLeadOutreach(now = new Date()): Promise<{
+  state: "skipped" | "completed" | "failed";
+  prepared: number;
+  totalScheduled: number;
+  shortfall: number;
+}> {
+  if (!isPhoenixPreparationWindowOpen(now)) {
+    return { state: "skipped", prepared: 0, totalScheduled: 0, shortfall: 0 };
+  }
+  const { scheduledAt } = getNextPhoenixPreparationTarget(now);
+  const targetEnd = new Date(scheduledAt.getTime() + 24 * 60 * 60_000);
+  const laneConfig = await getAuthoritativeLaneConfig();
+
+  try {
+    const rows = await db.select({ prospect: prospectsTable, campaign: campaignsTable })
+      .from(prospectsTable)
+      .innerJoin(campaignsTable, eq(prospectsTable.campaignId, campaignsTable.id))
+      .where(and(
+        inArray(prospectsTable.status, ["approved", "review"]),
+        eq(prospectsTable.contactStatus, "active"),
+        eq(prospectsTable.emailStatus, "verified"),
+        or(
+          inArray(prospectsTable.leadStatus, ["hot", "qualified"]),
+          gte(prospectsTable.leadScore, 50),
+        ),
+        eq(campaignsTable.status, "active"),
+      ));
+    const [suppressions, initialMessages, claims, targetMessages] = await Promise.all([
+      db.select({ email: outreachSuppressionsTable.email }).from(outreachSuppressionsTable),
+      db.select({ prospectId: outreachMessagesTable.prospectId, contactEmail: prospectsTable.contactEmail })
+        .from(outreachMessagesTable)
+        .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+        .where(eq(outreachMessagesTable.sequenceNumber, 1)),
+      db.select({ prospectId: outreachSequenceSendClaimsTable.prospectId })
+        .from(outreachSequenceSendClaimsTable)
+        .where(eq(outreachSequenceSendClaimsTable.sequenceNumber, 1)),
+      db.select({
+        prospectId: outreachMessagesTable.prospectId,
+        sourceType: outreachMessagesTable.sourceType,
+      })
+        .from(outreachMessagesTable)
+        .where(and(
+          eq(outreachMessagesTable.sequenceNumber, 1),
+          gte(outreachMessagesTable.scheduledAt, scheduledAt),
+          lt(outreachMessagesTable.scheduledAt, targetEnd),
+          inArray(outreachMessagesTable.status, ["approved", "sending", "sent", "delivered"]),
+        )),
+    ]);
+    const suppressed = new Set(suppressions.map((row) => row.email.trim().toLowerCase()));
+    const usedProspects = new Set([
+      ...initialMessages.map((row) => row.prospectId),
+      ...claims.map((row) => row.prospectId),
+      ...targetMessages.map((row) => row.prospectId),
+    ]);
+    const usedEmails = new Set(initialMessages.flatMap((row) =>
+      row.contactEmail ? [row.contactEmail.trim().toLowerCase()] : []
+    ));
+    const usedDomains = new Set(rows
+      .filter(({ prospect }) => usedProspects.has(prospect.id))
+      .map(({ prospect }) => companyDomain(prospect)));
+    const existingHotLeads = targetMessages.filter((row) =>
+      row.sourceType === "hot_lead" || row.sourceType === "hot_lead_verified"
+    ).length;
+    const remaining = Math.max(0, laneConfig.hotLeadLimit - existingHotLeads);
+    const campaignsByProspect = new Map(rows.map(({ prospect, campaign }) => [prospect.id, campaign]));
+    const candidates = prioritizeHotLeadCandidates(
+      rows.map(({ prospect }) => prospect).filter((prospect) => {
+        const email = prospect.contactEmail?.trim().toLowerCase();
+        return Boolean(email)
+          && !usedProspects.has(prospect.id)
+          && !suppressed.has(email!)
+          && !usedEmails.has(email!)
+          && !usedDomains.has(companyDomain(prospect))
+          && Boolean(prospect.contactName?.trim());
+      }),
+    );
+    let prepared = 0;
+    for (const candidate of candidates) {
+      if (prepared >= remaining) break;
+      const email = candidate.contactEmail!.trim().toLowerCase();
+      const domain = companyDomain(candidate);
+      const inserted = await db.transaction(async (tx) => {
+        await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${`hot-lead-window:${phoenixDateKey(scheduledAt)}`}, 0))`);
+        await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${email}, 0))`);
+        await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${domain}, 0))`);
+        const [currentCount] = await tx.select({ value: sql<number>`count(*)::int` })
+          .from(outreachMessagesTable)
+          .where(and(
+            eq(outreachMessagesTable.sequenceNumber, 1),
+            eq(outreachMessagesTable.sourceType, "hot_lead_verified"),
+            gte(outreachMessagesTable.scheduledAt, scheduledAt),
+            lt(outreachMessagesTable.scheduledAt, targetEnd),
+            inArray(outreachMessagesTable.status, ["approved", "sending", "sent", "delivered"]),
+          ));
+        if ((currentCount?.value ?? 0) >= laneConfig.hotLeadLimit) return false;
+        const [blocked] = await tx.select({ id: outreachMessagesTable.id })
+          .from(outreachMessagesTable)
+          .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+          .where(and(
+            eq(outreachMessagesTable.sequenceNumber, 1),
+            or(
+              eq(outreachMessagesTable.prospectId, candidate.id),
+              sql`lower(trim(${prospectsTable.contactEmail})) = ${email}`,
+            ),
+          )).limit(1);
+        const [suppression] = await tx.select({ id: outreachSuppressionsTable.id })
+          .from(outreachSuppressionsTable)
+          .where(eq(outreachSuppressionsTable.email, email))
+          .limit(1);
+        const campaign = campaignsByProspect.get(candidate.id);
+        if (blocked || suppression || !campaign) return false;
+        await tx.insert(outreachMessagesTable).values([
+          {
+            prospectId: candidate.id,
+            campaignId: campaign.id,
+            sequenceNumber: 1,
+            subject: approvedOutreachSubject(),
+            body: approvedOutreachBody(candidate.contactName!),
+            status: "approved",
+            scheduledAt,
+            sourceType: "hot_lead_verified",
+          },
+          ...approvedOutreachFollowUpMessages(candidate.contactName!).map((followUp) => ({
+            prospectId: candidate.id,
+            campaignId: campaign.id,
+            sequenceNumber: followUp.sequenceNumber,
+            subject: followUp.subject,
+            body: followUp.body,
+            status: "approved",
+            scheduledAt: null,
+            sourceType: "hot_lead_verified",
+          })),
+        ]);
+        return true;
+      });
+      if (inserted) {
+        prepared += 1;
+        usedEmails.add(email);
+        usedDomains.add(domain);
+        usedProspects.add(candidate.id);
+      }
+    }
+    const totalScheduled = existingHotLeads + prepared;
+    return {
+      state: "completed",
+      prepared,
+      totalScheduled,
+      shortfall: Math.max(0, laneConfig.hotLeadLimit - totalScheduled),
+    };
+  } catch (error) {
+    logger.error({ err: error }, "September hot-lead preparation failed");
+    return {
+      state: "failed",
+      prepared: 0,
+      totalScheduled: 0,
+      shortfall: laneConfig.hotLeadLimit,
+    };
+  }
+}
 
 export function buildOutreachHotLeads(rows: OutreachEngagementRow[]) {
   const leads = new Map<number, {

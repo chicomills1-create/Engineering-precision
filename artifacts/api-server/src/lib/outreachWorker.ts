@@ -13,6 +13,7 @@ import {
   DailySendLimitError,
   isUnknownSendResultError,
   MonthlySendLimitError,
+  ProviderRateLimitError,
   sendApprovedOutreach,
   type OutreachSendOptions,
 } from "./outreach";
@@ -27,6 +28,7 @@ import {
 } from "./outreachResearchScheduler";
 import { ensureRecurringHotMarketResearchSchedule } from "./hotMarketResearch";
 import { prepareNextPhoenixOutreach } from "./outreachPreparation";
+import { prepareNextPhoenixHotLeadOutreach } from "./outreachHotLeads";
 import {
   reconcileUncertainOutreachMessages,
   type OutreachReconciliationSummary,
@@ -42,8 +44,8 @@ import { monitorOverdueOutreachQueue } from "./outreachQueueMonitor";
 import { enrollAcceptedCatchUpMessage } from "./outreachCatchUp";
 
 const ADMIN_EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-// Allows the 200-message baseline plus currently verified hot-market extras.
-export const MAX_SCHEDULED_MESSAGES_PER_RUN = 300;
+// The September contract has four independent 100-message lanes.
+export const MAX_SCHEDULED_MESSAGES_PER_RUN = 400;
 
 export type OutreachAutomationStatus = {
   adminAllowlistReady: boolean;
@@ -429,6 +431,21 @@ export async function processDueOutreachMessagesWithSummary(): Promise<OutreachD
           ));
         continue;
       }
+      if (err instanceof ProviderRateLimitError) {
+        const retryAt = new Date(Date.now() + err.retryAfterMs);
+        await db.update(outreachMessagesTable)
+          .set({
+            status: "approved",
+            scheduledAt: retryAt,
+            error: `${err.message}; deferred to ${retryAt.toISOString()}`,
+          })
+          .where(and(
+            eq(outreachMessagesTable.id, claimed.id),
+            eq(outreachMessagesTable.status, "sending"),
+          ));
+        logger.warn({ messageId: claimed.id, retryAt, error: err.message }, "Provider rate limit deferred outreach without consuming quota");
+        continue;
+      }
       await db.update(outreachMessagesTable)
         .set({ status: getSendFailureStatus(err), error })
         .where(and(
@@ -523,10 +540,11 @@ export function startOutreachWorker(): void {
       await processOutreachReconciliation()
         .then(async () => {
           const preparation = await prepareNextPhoenixOutreach();
+          const hotLeads = await prepareNextPhoenixHotLeadOutreach();
           if (preparation.state === "completed") {
-            logger.info(preparation, "Prepared next Phoenix outreach window");
+            logger.info({ ...preparation, hotLeads }, "Prepared next Phoenix outreach window");
           } else if (preparation.state === "failed") {
-            logger.error(preparation, "Next Phoenix outreach preparation failed");
+            logger.error({ ...preparation, hotLeads }, "Next Phoenix outreach preparation failed");
           }
         })
         .catch((err: unknown) => logger.error({ err }, "Outreach reconciliation scheduler failed"));

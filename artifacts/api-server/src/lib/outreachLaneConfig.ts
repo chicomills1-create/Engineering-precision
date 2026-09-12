@@ -4,6 +4,15 @@ import { getOutreachRuntimeConfig } from "./outreachSystemConfig";
 
 export type OutreachLane = "named" | "public" | "hot_market" | "hot_lead";
 
+/** September's four lanes are deliberately equal and independent. */
+export const SEPTEMBER_OUTREACH_LANE_TARGETS = {
+  named: 100,
+  public: 100,
+  hot_market: 100,
+  hot_lead: 100,
+} as const;
+export const SEPTEMBER_OUTREACH_TOTAL_TARGET = 400;
+
 export type OutreachLaneConfig = {
   campaignKey: string;
   effectiveMonth: string;

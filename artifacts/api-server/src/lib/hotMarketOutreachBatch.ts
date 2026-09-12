@@ -36,7 +36,7 @@ import { getNextPhoenixEightAm } from "./outreachEligibility";
 export const HOT_MARKET_SOURCE_TYPE = "hot_market_one_time";
 
 export const HOT_MARKET_RECURRING_SOURCE_TYPE = "hot_market_verified_national";
-export const HOT_MARKET_DAILY_TARGET = 50;
+export const HOT_MARKET_DAILY_TARGET = 100;
 const CAMPAIGN_NAME = "Verified National Hot-Market Expansion - September 4, 2026";
 const SUBJECT = "Fast engineering support for active projects";
 

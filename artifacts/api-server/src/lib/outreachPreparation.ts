@@ -26,10 +26,11 @@ import { getCatchUpRemainingCapacity } from "./outreachCatchUp";
 import { getAuthoritativeLaneConfig, laneConfigTotal } from "./outreachLaneConfig";
 import { isEvidenceBackedPublicInbox } from "./publicInboxClassifier";
 import { configuredDailyAllowance, loadOutreachSystemConfig } from "./outreachSystemConfig";
+import { getOutreachDailyLane } from "./outreach";
 // These are compatibility defaults only; authoritative lane config supplies
 // all production targets and no caller may clamp to these values.
 export const OUTREACH_PERSONAL_PREPARATION_TARGET = 100;
-export const OUTREACH_PUBLIC_PREPARATION_TARGET = 50;
+export const OUTREACH_PUBLIC_PREPARATION_TARGET = 100;
 const STALE_RUN_MS = 20 * 60_000;
 
 export type PreparationCandidate = Pick<Prospect,
@@ -135,6 +136,36 @@ export function selectUniquePreparationCandidates<T extends PreparationCandidate
 
 export function getPreparationShortfall(prepared: number, target: number): number {
   return Math.max(0, target - prepared);
+}
+
+export function getLaneShortfalls(counts: {
+  named: number;
+  public: number;
+  hotMarket: number;
+  hotLead: number;
+}, targets: {
+  named: number;
+  public: number;
+  hotMarket: number;
+  hotLead: number;
+}): {
+  named: number;
+  public: number;
+  hotMarket: number;
+  hotLead: number;
+  total: number;
+} {
+  const named = Math.max(0, targets.named - counts.named);
+  const publicShortfall = Math.max(0, targets.public - counts.public);
+  const hotMarket = Math.max(0, targets.hotMarket - counts.hotMarket);
+  const hotLead = Math.max(0, targets.hotLead - counts.hotLead);
+  return {
+    named,
+    public: publicShortfall,
+    hotMarket,
+    hotLead,
+    total: named + publicShortfall + hotMarket + hotLead,
+  };
 }
 
 export function getPreparationRemainingCapacity(slotted: number, untracked: number, target: number): number {
@@ -261,29 +292,30 @@ export async function approveInitialMessageInPreparationWindow(
     ]);
     const slottedMessageIds = new Set(slots.flatMap((slot) => slot.messageId ? [slot.messageId] : []));
     const untrackedCount = targetInitials.filter((candidate) => !slottedMessageIds.has(candidate.id)).length;
-    const regularTargetInitials = targetInitials.filter((candidate) =>
-      !isHotMarketSourceType(candidate.sourceType)
-      && candidate.sourceType !== "hot_lead"
-      && candidate.sourceType !== "hot_lead_verified"
-    );
-    const publicCount = regularTargetInitials.filter((candidate) => isPublicInbox(
-      candidate.contactEmail,
-      candidate.contactName,
-      candidate.contactEvidenceType,
-    )).length;
-    const personalCount = regularTargetInitials.length - publicCount;
-    const publicLane = isPublicInbox(
-      prospect.contactEmail,
-      prospect.contactName,
-      prospect.contactEvidenceType,
-    );
-    if (
-      publicLane
-        ? publicCount >= laneConfig.publicLimit
-        : personalCount >= laneConfig.namedLimit
-    ) {
-      throw new Error(`The target outreach ${publicLane ? "Public" : "Personal"} lane is full`);
-    }
+     const laneCounts = { named: 0, public: 0, hot_market: 0, hot_lead: 0 };
+     for (const candidate of targetInitials) {
+       const candidateLane = getOutreachDailyLane(candidate, candidate);
+       if (candidateLane in laneCounts) {
+         laneCounts[candidateLane as keyof typeof laneCounts] += 1;
+       }
+     }
+     const messageLane = getOutreachDailyLane(message, prospect);
+     const laneLimit = messageLane === "public"
+       ? laneConfig.publicLimit
+       : messageLane === "named" || messageLane === "direct"
+         ? laneConfig.namedLimit
+         : messageLane === "hot_market"
+           ? laneConfig.hotMarketLimit
+           : laneConfig.hotLeadLimit;
+     const quotaLane = messageLane === "direct"
+       ? "named"
+       : messageLane === "hot_market_extra"
+         ? "hot_market"
+         : messageLane;
+     const laneCount = laneCounts[quotaLane];
+     if (laneCount >= laneLimit) {
+       throw new Error(`The target outreach ${messageLane} lane is full`);
+     }
     const remainingCapacity = Math.max(0, targetCount - slots.length - untrackedCount);
     if (remainingCapacity === 0) throw new Error("The target outreach window is full");
     const usedSlots = new Set(slots.map((slot) => slot.slot));
@@ -357,7 +389,11 @@ async function getRegularLaneCountsForWindow(
       ),
       inArray(outreachMessagesTable.status, ["approved", "sending"]),
     ));
-  const regular = rows.filter((row) => !isHotMarketSourceType(row.sourceType));
+   const regular = rows.filter((row) =>
+     !isHotMarketSourceType(row.sourceType)
+     && row.sourceType !== "hot_lead"
+     && row.sourceType !== "hot_lead_verified"
+   );
   const publicCount = regular.filter((row) => isPublicInbox(
     row.contactEmail,
     row.contactName,
@@ -434,8 +470,11 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
         campaignId: outreachMessagesTable.campaignId,
         status: outreachMessagesTable.status,
         scheduledAt: outreachMessagesTable.scheduledAt,
+        contactEmail: prospectsTable.contactEmail,
       })
-        .from(outreachMessagesTable).where(eq(outreachMessagesTable.sequenceNumber, 1)),
+        .from(outreachMessagesTable)
+        .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+        .where(eq(outreachMessagesTable.sequenceNumber, 1)),
       db.select({
         prospectId: outreachSequenceSendClaimsTable.prospectId,
         campaignScope: outreachSequenceSendClaimsTable.campaignScope,
@@ -517,10 +556,11 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
         {
            personalCap: laneConfig.namedLimit - existingPersonalCount,
            publicCap: laneConfig.publicLimit - existingPublicCount,
-          usedEmails: regularTargetInitials.flatMap((candidate) =>
-            candidate.contactEmail ? [candidate.contactEmail] : []
-          ),
-          usedDomains: regularTargetInitials.map(companyDomain),
+           usedEmails: [
+             ...initialMessages.flatMap((candidate) => candidate.contactEmail ? [candidate.contactEmail] : []),
+             ...currentTargetInitials.flatMap((candidate) => candidate.contactEmail ? [candidate.contactEmail] : []),
+           ],
+           usedDomains: currentTargetInitials.map(companyDomain),
         },
       );
       const availableSlots = Array.from(
@@ -533,6 +573,8 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
         : selected;
       for (const prospect of selectedForRun) {
         if (usedProspects.has(prospect.id)) continue;
+        const candidateEmail = prospect.contactEmail?.trim().toLowerCase();
+        if (!candidateEmail) continue;
         const [currentProspect] = await tx.select().from(prospectsTable)
           .where(eq(prospectsTable.id, prospect.id))
           .limit(1);
@@ -543,6 +585,16 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
           || !["approved", "review"].includes(currentProspect.status)
           || !canPrepare(currentProspect, campaign, suppressedEmails)
         ) continue;
+        await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${candidateEmail}, 0))`);
+        const [emailAlreadyUsed] = await tx.select({ id: outreachMessagesTable.id })
+          .from(outreachMessagesTable)
+          .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+          .where(and(
+            eq(outreachMessagesTable.sequenceNumber, 1),
+            sql`lower(trim(${prospectsTable.contactEmail})) = ${candidateEmail}`,
+          ))
+          .limit(1);
+        if (emailAlreadyUsed) continue;
         const slot = availableSlots.shift();
         if (slot === undefined) break;
         const [slotClaim] = await tx.insert(outreachPreparationSlotsTable).values({
@@ -641,11 +693,14 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
       await ensureApprovedFollowUpSequence(row.message, { contactName: row.contactName });
     }
     const skipped = rows.length - prepared;
-     const shortfall = Math.max(0, targetCount - prepared);
     const laneCounts = await getRegularLaneCountsForWindow(scheduledAt);
+    // This service owns only the Named and Public lanes. Hot Market and Hot
+    // Lead are prepared independently and must not inflate this shortfall.
+    const regularShortfall = Math.max(0, laneConfig.namedLimit - laneCounts.direct)
+      + Math.max(0, laneConfig.publicLimit - laneCounts.public);
     await db.update(outreachPreparationRunsTable).set({
       status: "completed", preparedCount: prepared, skippedCount: skipped,
-      shortfallCount: shortfall, completedAt: new Date(), error: null,
+      shortfallCount: regularShortfall, completedAt: new Date(), error: null,
     }).where(eq(outreachPreparationRunsTable.id, runId));
     return {
       state: "completed",
@@ -661,18 +716,20 @@ export async function prepareNextPhoenixOutreach(now = new Date()): Promise<{
          laneConfig.publicLimit - laneCounts.public,
       ),
       skipped,
-      shortfall,
+      shortfall: regularShortfall,
     };
   } catch (error) {
     const message = error instanceof Error ? error.message : "Outreach preparation failed";
     await db.update(outreachPreparationRunsTable).set({
-      status: "failed", error: message, shortfallCount: targetCount, completedAt: new Date(),
+      status: "failed", error: message,
+      shortfallCount: laneConfig.namedLimit + laneConfig.publicLimit,
+      completedAt: new Date(),
     }).where(eq(outreachPreparationRunsTable.id, runId));
     return {
       state: "failed", prepared: 0, directPrepared: 0, publicPrepared: 0,
       directShortfall: laneConfig.namedLimit,
       publicShortfall: laneConfig.publicLimit,
-      skipped: 0, shortfall: targetCount,
+       skipped: 0, shortfall: laneConfig.namedLimit + laneConfig.publicLimit,
     };
   }
 }

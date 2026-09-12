@@ -14,6 +14,7 @@ import {
 import { verifyNewOutreachProspects } from "./lib/outreachVerification";
 import { prepareNextPhoenixOutreach } from "./lib/outreachPreparation";
 import { prepareNextPhoenixHotMarketOutreach } from "./lib/hotMarketPreparation";
+import { prepareNextPhoenixHotLeadOutreach } from "./lib/outreachHotLeads";
 import { getCatchUpProgress } from "./lib/outreachCatchUp";
 import { sendDailyOutreachReport } from "./lib/outreachDailyReport";
 import { loadOutreachSystemConfig } from "./lib/outreachSystemConfig";
@@ -112,6 +113,7 @@ async function main(): Promise<void> {
     verifyProspects: () => verifyNewOutreachProspects(),
     prepareRegularOutreach: () => prepareNextPhoenixOutreach(),
     prepareHotMarketOutreach: () => prepareNextPhoenixHotMarketOutreach(),
+    prepareHotLeadOutreach: () => prepareNextPhoenixHotLeadOutreach(),
     processDueMessages: () => processDueOutreachMessagesWithSummary(),
     processProviderReconciliation: () => processOutreachReconciliationWithSummary(),
     now: () => new Date(),

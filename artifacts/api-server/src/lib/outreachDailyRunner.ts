@@ -61,6 +61,7 @@ export type DailyOutreachRunnerOperations = {
   verifyProspects?: () => Promise<unknown>;
   prepareRegularOutreach: () => Promise<DailyOutreachPreparationResult>;
   prepareHotMarketOutreach: () => Promise<DailyHotMarketPreparationResult>;
+  prepareHotLeadOutreach?: () => Promise<DailyHotLeadPreparationResult>;
   processDueMessages: () => Promise<DailyOutreachDispatchResult>;
   processProviderReconciliation: () => Promise<DailyOutreachReconciliationResult>;
   now: () => Date;
@@ -78,6 +79,13 @@ export type DailyOutreachPreparationResult = {
 };
 
 export type DailyHotMarketPreparationResult = {
+  state: "skipped" | "completed" | "failed";
+  prepared: number;
+  totalScheduled: number;
+  shortfall: number;
+};
+
+export type DailyHotLeadPreparationResult = {
   state: "skipped" | "completed" | "failed";
   prepared: number;
   totalScheduled: number;
@@ -162,6 +170,9 @@ export async function runDailyOutreachOnce(
     operations.prepareRegularOutreach(),
     operations.prepareHotMarketOutreach(),
   ]);
+  const hotLeadPreparation = operations.prepareHotLeadOutreach
+    ? await operations.prepareHotLeadOutreach()
+    : { state: "skipped" as const, prepared: 0, totalScheduled: 0, shortfall: 100 };
 
   const initial = await operations.processDueMessages();
   const reconciliation = operations.processProviderReconciliation();
@@ -184,9 +195,9 @@ export async function runDailyOutreachOnce(
       hotMarketPrepared: hotMarketPreparation.prepared,
       hotMarketScheduled: hotMarketPreparation.totalScheduled,
       hotMarketShortfall: hotMarketPreparation.shortfall,
-      hotLeadTarget: 100,
-      hotLeadPrepared: 0,
-      hotLeadShortfall: 100,
+       hotLeadTarget: hotLeadPreparation.totalScheduled + hotLeadPreparation.shortfall,
+       hotLeadPrepared: hotLeadPreparation.totalScheduled,
+       hotLeadShortfall: hotLeadPreparation.shortfall,
       waitMs,
     };
   }
@@ -210,9 +221,9 @@ export async function runDailyOutreachOnce(
     hotMarketPrepared: hotMarketPreparation.prepared,
     hotMarketScheduled: hotMarketPreparation.totalScheduled,
     hotMarketShortfall: hotMarketPreparation.shortfall,
-    hotLeadTarget: 100,
-    hotLeadPrepared: 0,
-    hotLeadShortfall: 100,
+    hotLeadTarget: hotLeadPreparation.totalScheduled + hotLeadPreparation.shortfall,
+    hotLeadPrepared: hotLeadPreparation.totalScheduled,
+    hotLeadShortfall: hotLeadPreparation.shortfall,
     waitMs,
   };
 }

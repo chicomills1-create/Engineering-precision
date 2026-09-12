@@ -1811,6 +1811,7 @@ components:
       properties:
         sent: { type: number }
         target: { type: number }
+        shortage: { type: number }
     OutreachSystemConfig:
       type: object
       required: [version, policy, month, schedule]

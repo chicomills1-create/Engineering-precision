@@ -43,8 +43,9 @@ import {
   approvedOutreachFollowUpMessages,
   approvedOutreachSubject,
 } from "./verifiedOutreachBatch";
-import { getAuthoritativeLaneConfig, laneConfigTotal } from "./outreachLaneConfig";
+import { getAuthoritativeLaneConfig, laneConfigTotal, SEPTEMBER_OUTREACH_TOTAL_TARGET } from "./outreachLaneConfig";
 import { loadOutreachSystemConfig } from "./outreachSystemConfig";
+import { isEvidenceBackedPublicInbox } from "./publicInboxClassifier";
 
 export type GeneratedDraft = { subject: string; body: string; followUps: { subject: string; body: string }[] };
 const PUBLIC_GREETING_PARTS = new Set(["info", "estimating", "bids", "proposals", "preconstruction", "development", "construction", "projects", "office", "contact"]);
@@ -118,16 +119,11 @@ export function getOutreachDailyLane(
   // sourceType/campaign field, so they must not be guessed into this lane.
   if (message.sourceType === "hot_lead" || message.sourceType === "hot_lead_verified") return "hot_lead";
   if (isHotMarketSourceType(message.sourceType)) return "hot_market";
-  const localPart = prospect.contactEmail?.trim().toLowerCase().split("@")[0] ?? "";
-  const normalizedName = prospect.contactName?.trim().toLowerCase().replace(/[^a-z]/g, "") ?? "";
-  const genericContactName = !normalizedName
-    || normalizedName === localPart.replace(/[^a-z]/g, "")
-    || /(?:office|team|desk|inquiries)$/i.test(prospect.contactName?.trim() ?? "");
-  return prospect.contactEvidenceType === "official_publication"
-    && PUBLIC_INBOX_LOCAL_PARTS.has(localPart)
-    && genericContactName
-    ? "public"
-    : "named";
+  return isEvidenceBackedPublicInbox(
+    prospect.contactEmail,
+    prospect.contactName,
+    prospect.contactEvidenceType,
+  ) ? "public" : "named";
 }
 
 export function getOutreachDailyLaneLimit(
@@ -152,6 +148,17 @@ export class MonthlySendLimitError extends Error {
   constructor() {
     super("Monthly send limit reached");
     this.name = "MonthlySendLimitError";
+  }
+}
+
+/** A known provider throttle is safe to release and retry; it is not an
+ * ambiguous handoff and therefore must never be moved to needs_review. */
+export class ProviderRateLimitError extends Error {
+  readonly retryAfterMs: number;
+  constructor(retryAfterMs = 5 * 60_000) {
+    super("SendGrid rate limited the message; retry scheduled without consuming quota");
+    this.name = "ProviderRateLimitError";
+    this.retryAfterMs = retryAfterMs;
   }
 }
 
@@ -206,7 +213,7 @@ export function getGlobalOutreachDailyLimit(
 ): number {
   phoenixDateKey(date);
   return getPhoenixOutreachMonthKey(date) === "2026-09"
-    ? 400
+    ? SEPTEMBER_OUTREACH_TOTAL_TARGET
     : Math.max(0, hotMarketMessageCount);
 }
 
@@ -363,7 +370,7 @@ async function reserveOutreachSend(
         .where(and(eq(outreachMessagesTable.sequenceNumber, 1), gte(outreachMessagesTable.sentAt, monthStart), lt(outreachMessagesTable.sentAt, monthEnd)));
       const [reserved] = await tx.select({ value: count() }).from(outreachMonthlySendReservationsTable)
         .innerJoin(outreachMessagesTable, eq(outreachMonthlySendReservationsTable.messageId, outreachMessagesTable.id))
-        .where(and(eq(outreachMonthlySendReservationsTable.quotaKey, monthlyQuotaKey), eq(outreachMessagesTable.sequenceNumber, 1), inArray(outreachMessagesTable.status, ["approved", "sending"])));
+        .where(and(eq(outreachMonthlySendReservationsTable.quotaKey, monthlyQuotaKey), eq(outreachMessagesTable.sequenceNumber, 1), inArray(outreachMessagesTable.status, ["approved", "sending", "needs_review"])));
       const monthlyTarget = Math.min(50_000, runtime.schedule.monthlyTarget);
       const used = (sent?.value ?? 0) + (reserved?.value ?? 0);
       const remainingMonth = Math.max(0, monthlyTarget - used);
@@ -374,12 +381,36 @@ async function reserveOutreachSend(
         if (weekday !== 0 && weekday !== 6) remainingDays += 1;
       }
       const dailyAllowance = monthKey === "2026-09" ? 400 : Math.min(remainingMonth, Math.ceil(remainingMonth / Math.max(1, remainingDays)));
-      const campaignCap = campaign?.dailyLimit;
       const [todayReserved] = await tx.select({ value: count() }).from(outreachMonthlySendReservationsTable)
         .innerJoin(outreachMessagesTable, eq(outreachMonthlySendReservationsTable.messageId, outreachMessagesTable.id))
-        .where(and(eq(outreachMonthlySendReservationsTable.quotaKey, monthlyQuotaKey), gte(outreachMonthlySendReservationsTable.createdAt, dayStart), inArray(outreachMessagesTable.status, ["approved", "sending"])));
-      const allowed = Math.min(dailyAllowance, campaignCap && campaignCap > 0 ? campaignCap : dailyAllowance);
-      if (remainingMonth <= 0 || (todayReserved?.value ?? 0) >= allowed) throw new DailySendLimitError();
+        .where(and(eq(outreachMonthlySendReservationsTable.quotaKey, monthlyQuotaKey), gte(outreachMonthlySendReservationsTable.createdAt, dayStart), inArray(outreachMessagesTable.status, ["approved", "sending", "needs_review"])));
+      if (remainingMonth <= 0 || (todayReserved?.value ?? 0) >= dailyAllowance) {
+        throw new DailySendLimitError();
+      }
+      const campaignCap = campaign?.dailyLimit;
+      if (monthKey !== "2026-09" && campaign?.id && campaignCap && campaignCap > 0) {
+        const [campaignUsedToday] = await tx.select({ value: count() })
+          .from(outreachMessagesTable)
+          .where(and(
+            eq(outreachMessagesTable.campaignId, campaign.id),
+            eq(outreachMessagesTable.sequenceNumber, 1),
+            gte(outreachMessagesTable.sentAt, dayStart),
+          ));
+        const [campaignReservedToday] = await tx.select({ value: count() })
+          .from(outreachMonthlySendReservationsTable)
+          .innerJoin(
+            outreachMessagesTable,
+            eq(outreachMonthlySendReservationsTable.messageId, outreachMessagesTable.id),
+          )
+          .where(and(
+            eq(outreachMessagesTable.campaignId, campaign.id),
+            gte(outreachMonthlySendReservationsTable.createdAt, dayStart),
+            inArray(outreachMessagesTable.status, ["approved", "sending", "needs_review"]),
+          ));
+        if ((campaignUsedToday?.value ?? 0) + (campaignReservedToday?.value ?? 0) >= campaignCap) {
+          throw new DailySendLimitError();
+        }
+      }
       if (monthKey === "2026-09") {
         const [laneRows, laneReservations] = await Promise.all([
           tx.select({
@@ -398,11 +429,19 @@ async function reserveOutreachSend(
           }).from(outreachMonthlySendReservationsTable)
             .innerJoin(outreachMessagesTable, eq(outreachMonthlySendReservationsTable.messageId, outreachMessagesTable.id))
             .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
-            .where(and(eq(outreachMonthlySendReservationsTable.quotaKey, monthlyQuotaKey), gte(outreachMonthlySendReservationsTable.createdAt, dayStart), inArray(outreachMessagesTable.status, ["approved", "sending"]))),
+            .where(and(eq(outreachMonthlySendReservationsTable.quotaKey, monthlyQuotaKey), gte(outreachMonthlySendReservationsTable.createdAt, dayStart), inArray(outreachMessagesTable.status, ["approved", "sending", "needs_review"]))),
         ]);
         const laneCount = [...laneRows, ...laneReservations]
           .filter((row) => getOutreachDailyLane(row, row) === lane).length;
-        if (laneCount >= 100) throw new DailySendLimitError();
+        const laneLimit = runtime.schedule.laneAllocations
+          ? getOutreachDailyLaneLimit(lane, {
+            namedLimit: runtime.schedule.laneAllocations.named,
+            publicLimit: runtime.schedule.laneAllocations.public,
+            hotMarketLimit: runtime.schedule.laneAllocations.hotMarket,
+            hotLeadLimit: runtime.schedule.laneAllocations.hotLead,
+          })
+          : undefined;
+        if (laneLimit !== undefined && laneCount >= laneLimit) throw new DailySendLimitError();
       }
       for (let slot = used + 1; slot <= monthlyTarget; slot += 1) {
         const [inserted] = await tx.insert(outreachMonthlySendReservationsTable)
@@ -624,8 +663,7 @@ export async function sendApprovedOutreach(
       throw new Error("Outreach stopped before provider dispatch");
     }
 
-    let response: Awaited<ReturnType<ReplitConnectors["proxy"]>>;
-    try {
+    let response: Awaited<ReturnType<ReplitConnectors["proxy"]>> | undefined;
     const requestBody = JSON.stringify({
       personalizations: [{
         to: [{ email }],
@@ -647,38 +685,47 @@ export async function sendApprovedOutreach(
         { type: "text/html", value: emailContent.html },
       ],
     });
-      await options.beforeProviderDispatch?.();
-      response = options.dispatch
-        ? await options.dispatch({
-            body: requestBody,
-            email,
-            fromEmail: from,
-            replyToEmail: replyTo,
-          })
-        : dedicatedSendGridKey
-        ? await fetch("https://api.sendgrid.com/v3/mail/send", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${dedicatedSendGridKey}`,
-          },
-          body: requestBody,
-        })
-      : await new ReplitConnectors().proxy("sendgrid", "/v3/mail/send", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            ...(sendgridSubuser ? { "on-behalf-of": sendgridSubuser } : {}),
-          },
-          body: requestBody,
-        });
-    } catch {
+    for (let attempt = 0; attempt < 4; attempt += 1) {
+      try {
+        await options.beforeProviderDispatch?.();
+        response = options.dispatch
+          ? await options.dispatch({ body: requestBody, email, fromEmail: from, replyToEmail: replyTo })
+          : dedicatedSendGridKey
+            ? await fetch("https://api.sendgrid.com/v3/mail/send", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${dedicatedSendGridKey}`,
+              },
+              body: requestBody,
+            })
+            : await new ReplitConnectors().proxy("sendgrid", "/v3/mail/send", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                ...(sendgridSubuser ? { "on-behalf-of": sendgridSubuser } : {}),
+              },
+              body: requestBody,
+            });
+      } catch {
+        throw new Error("SendGrid dispatch result is unknown; message requires reconciliation before retry");
+      }
+      if (response.ok || response.status !== 429 || attempt === 3) break;
+      // A response proves the provider did not accept this attempt. Pace the
+      // retry instead of consuming the daily lane with a false failure.
+      await new Promise((resolve) => setTimeout(resolve, 100 * 2 ** attempt));
+    }
+    if (!response) {
       throw new Error("SendGrid dispatch result is unknown; message requires reconciliation before retry");
     }
     if (!response.ok) {
     if (isDefinitiveSendGridRejection(response.status)) {
       await releaseOutreachReservations(reservations);
       throw new Error(`SendGrid rejected the message with status ${response.status}`);
+    }
+    if (response.status === 429) {
+      await releaseOutreachReservations(reservations);
+      throw new ProviderRateLimitError();
     }
     throw new Error(`SendGrid dispatch result is unknown after status ${response.status}; message requires reconciliation before retry`);
     }

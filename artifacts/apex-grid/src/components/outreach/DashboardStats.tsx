@@ -40,17 +40,18 @@ export function DashboardStats() {
       {stats.septemberLanes && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3" data-testid="september-lane-cards">
           {([
-            ['Verified', stats.septemberLanes.named],
+            ['Verified / Named', stats.septemberLanes.named],
             ['Public', stats.septemberLanes.public],
-            ['Hot Markets', stats.septemberLanes.hotMarket],
-            ['Hot Leads', stats.septemberLanes.hotLead],
+            ['Hit Market', stats.septemberLanes.hotMarket],
+            ['September Hot Leads', stats.septemberLanes.hotLead],
           ] as const).map(([label, lane]) => (
             <div key={label} className="border border-border bg-card p-3 rounded-[2px]">
               <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground">{label}</p>
               <p className="font-display text-xl font-bold">{lane?.sent ?? 0} / {lane?.target ?? 0}</p>
+              <p className="text-xs text-muted-foreground">{lane?.shortage ?? Math.max(0, (lane?.target ?? 0) - (lane?.sent ?? 0))} shortage</p>
             </div>
           ))}
-          <div className="col-span-2 md:col-span-4 text-xs text-muted-foreground">Today&apos;s Outreach: {stats.septemberLanes.totalSent} / {stats.septemberLanes.totalTarget}</div>
+          <div className="col-span-2 md:col-span-4 text-xs text-muted-foreground">Total Sent Today: {stats.septemberLanes.totalSent} / {stats.septemberLanes.totalTarget}</div>
         </div>
       )}
       <div className="flex flex-wrap gap-3" data-testid="outreach-dashboard-stats">

@@ -9,4 +9,5 @@
 export interface OutreachLaneProgress {
   sent: number;
   target: number;
+  shortage?: number;
 }

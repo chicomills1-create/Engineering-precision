@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { buildOutreachHotLeads } from "./outreachHotLeads";
+import { buildOutreachHotLeads, prioritizeHotLeadCandidates } from "./outreachHotLeads";
 
 test("hot leads deduplicate persisted engagement events and rank clicks before opens", () => {
   const leads = buildOutreachHotLeads([
@@ -26,4 +26,23 @@ test("hot leads deduplicate persisted engagement events and rank clicks before o
     qualification: "clicked",
   });
   assert.equal(leads[1]?.qualification, "opened");
+});
+
+test("September hot-lead preparation prioritizes newest records before strength", () => {
+  const base = {
+    website: null,
+    contactEmail: "lead@example.com",
+    contactName: "Lead",
+    contactTitle: "Principal",
+    state: "AZ",
+    fitScore: 80,
+    needScore: 80,
+    leadScore: 10,
+    leadStatus: "hot",
+  } as const;
+  const ordered = prioritizeHotLeadCandidates([
+    { ...base, id: 1, companyName: "Older", createdAt: new Date("2026-09-02T12:00:00Z") },
+    { ...base, id: 2, companyName: "Newest", leadScore: 1, createdAt: new Date("2026-09-05T12:00:00Z") },
+  ]);
+  assert.deepEqual(ordered.map((lead) => lead.id), [2, 1]);
 });

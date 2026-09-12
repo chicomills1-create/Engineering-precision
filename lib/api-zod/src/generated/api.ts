@@ -717,19 +717,23 @@ export const GetOutreachDashboardResponse = zod.object({
   "septemberLanes": zod.object({
   "named": zod.object({
   "sent": zod.number(),
-  "target": zod.number()
+  "target": zod.number(),
+  "shortage": zod.number().optional()
 }).optional(),
   "public": zod.object({
   "sent": zod.number(),
-  "target": zod.number()
+  "target": zod.number(),
+  "shortage": zod.number().optional()
 }).optional(),
   "hotMarket": zod.object({
   "sent": zod.number(),
-  "target": zod.number()
+  "target": zod.number(),
+  "shortage": zod.number().optional()
 }).optional(),
   "hotLead": zod.object({
   "sent": zod.number(),
-  "target": zod.number()
+  "target": zod.number(),
+  "shortage": zod.number().optional()
 }).optional(),
   "totalSent": zod.number().optional(),
   "totalTarget": zod.number().optional()
