@@ -49,3 +49,4 @@
 - [City service slug consistency](city-service-slugs.md) — service-support identifiers must match canonical route slugs; aliases can silently keep valid city pages noindex.
 - [Duplicate city filenames](duplicate-city-filenames.md) — same-name cities in different states need state-qualified module filenames while preserving their canonical city slug.
 - [Autoscale recurring jobs](autoscale-recurring-jobs.md) — in-process timers are not durable schedulers; use persisted slot claims plus startup catch-up and replica-safe claiming.
+- [Outreach acquisition versus sending](outreach-acquisition-vs-sending.md) — research failures must not block existing eligible inventory from the four independent send lanes.

@@ -59,6 +59,10 @@ export type DailyOutreachRunnerOperations = {
   processHotMarketResearch: () => Promise<unknown>;
   processScheduledResearch: () => Promise<number>;
   verifyProspects?: () => Promise<unknown>;
+  onResearchError?: (
+    stage: "hot-market-research" | "scheduled-research" | "verification",
+    error: unknown,
+  ) => void;
   prepareRegularOutreach: () => Promise<DailyOutreachPreparationResult>;
   prepareHotMarketOutreach: () => Promise<DailyHotMarketPreparationResult>;
   prepareHotLeadOutreach?: () => Promise<DailyHotLeadPreparationResult>;
@@ -163,9 +167,19 @@ export async function runDailyOutreachOnce(
   operations: DailyOutreachRunnerOperations,
   invokedAt = operations.now(),
 ): Promise<DailyOutreachRunnerResult> {
-  await operations.processHotMarketResearch();
-  await operations.processScheduledResearch();
-  await operations.verifyProspects?.();
+  const researchOperations = [
+    ["hot-market-research", operations.processHotMarketResearch],
+    ["scheduled-research", operations.processScheduledResearch],
+    ["verification", operations.verifyProspects],
+  ] as const;
+  for (const [stage, operation] of researchOperations) {
+    if (!operation) continue;
+    try {
+      await operation();
+    } catch (error) {
+      operations.onResearchError?.(stage, error);
+    }
+  }
   const [regularPreparation, hotMarketPreparation] = await Promise.all([
     operations.prepareRegularOutreach(),
     operations.prepareHotMarketOutreach(),

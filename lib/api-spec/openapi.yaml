@@ -1807,11 +1807,14 @@ components:
             totalTarget: { type: number }
     OutreachLaneProgress:
       type: object
-      required: [sent, target]
+      required: [sent, target, eligible, remainingQuota, shortage, reason]
       properties:
         sent: { type: number }
         target: { type: number }
+        eligible: { type: number }
+        remainingQuota: { type: number }
         shortage: { type: number }
+        reason: { type: [string, "null"] }
     OutreachSystemConfig:
       type: object
       required: [version, policy, month, schedule]

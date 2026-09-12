@@ -24,10 +24,10 @@ import {
   stageVerifiedHotMarketProspects,
 } from "./hotMarketOutreachBatch";
 import { isRecurringHotMarketCampaign } from "./hotMarketResearch";
+import { getOutreachDiscoveryDailyCap } from "./outreachThroughputConfig";
 
 export const OUTREACH_RESEARCH_TIMEZONE = "America/Phoenix";
 export const OUTREACH_RESEARCH_LOCAL_HOUR = 8;
-export const MAX_DAILY_RESEARCH_PROSPECTS = 150;
 export const HOT_MARKET_RESEARCH_STATES_PER_RUN = 8;
 const HOT_MARKET_RESEARCH_QUERY_PREFIX = "hot-market-replenishment:";
 const HOT_MARKET_RESEARCH_AUDIENCES: ResearchAudience[] = ["builder", "architect"];
@@ -68,7 +68,7 @@ export function usesGenericResearchPipeline(campaign: Pick<Campaign, "name">): b
 
 export function getDailyResearchTarget(scheduleTarget: number, campaignLimit: number): number {
   return Math.min(
-    MAX_DAILY_RESEARCH_PROSPECTS,
+    getOutreachDiscoveryDailyCap(),
     Math.max(1, scheduleTarget, campaignLimit),
   );
 }

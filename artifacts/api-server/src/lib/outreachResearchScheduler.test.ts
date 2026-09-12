@@ -7,7 +7,6 @@ import {
   getPhoenixResearchWindow,
   HOT_MARKET_RESEARCH_STATES_PER_RUN,
   isResearchScheduleDue,
-  MAX_DAILY_RESEARCH_PROSPECTS,
   OUTREACH_RESEARCH_LOCAL_HOUR,
   OUTREACH_RESEARCH_TIMEZONE,
   usesGenericResearchPipeline,
@@ -47,10 +46,9 @@ test("runs only enabled schedules on active campaigns after the local hour", () 
   assert.equal(isResearchScheduleDue(schedule as any, { status: "paused" } as any, atEight), false);
 });
 
-test("caps daily scheduled research at the 150-per-day monthly-safe target", () => {
-  assert.equal(MAX_DAILY_RESEARCH_PROSPECTS, 150);
-  assert.equal(getDailyResearchTarget(10, 167), 150);
-  assert.equal(getDailyResearchTarget(167, 500), 150);
+test("uses the configurable discovery cap independently of sending capacity", () => {
+  assert.equal(getDailyResearchTarget(10, 167), 167);
+  assert.equal(getDailyResearchTarget(167, 500), 400);
   assert.equal(getDailyResearchTarget(5, 5), 5);
 });
 

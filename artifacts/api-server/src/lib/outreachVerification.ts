@@ -7,8 +7,9 @@ import {
   campaignsTable,
   type Prospect,
 } from "@workspace/db";
+import { getOutreachVerificationBatchCap } from "./outreachThroughputConfig";
 
-export const DEFAULT_VERIFICATION_BATCH_SIZE = 150;
+export const DEFAULT_VERIFICATION_BATCH_SIZE = 400;
 
 export type CompanyEvidence = {
   name: string;
@@ -133,9 +134,9 @@ async function verifyProspect(prospect: Prospect): Promise<CompanyEvidence & { e
 }
 
 export async function verifyNewOutreachProspects(
-  batchSize = DEFAULT_VERIFICATION_BATCH_SIZE,
+  batchSize = getOutreachVerificationBatchCap(),
 ): Promise<{ checked: number; promoted: number }> {
-  const capped = Math.max(1, Math.min(batchSize, DEFAULT_VERIFICATION_BATCH_SIZE));
+  const capped = Math.max(1, Math.min(batchSize, getOutreachVerificationBatchCap()));
   const candidates = await db.select({ prospect: prospectsTable })
     .from(prospectsTable)
     .innerJoin(campaignsTable, eq(prospectsTable.campaignId, campaignsTable.id))

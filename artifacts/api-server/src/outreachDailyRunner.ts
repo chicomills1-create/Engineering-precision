@@ -111,6 +111,9 @@ async function main(): Promise<void> {
     processHotMarketResearch: () => processDueHotMarketResearch(),
     processScheduledResearch: () => processDueOutreachResearchSchedules(),
     verifyProspects: () => verifyNewOutreachProspects(),
+    onResearchError: (stage, error) => {
+      logger.error({ err: error, stage, runDate }, "Outreach acquisition stage failed; continuing with existing eligible inventory");
+    },
     prepareRegularOutreach: () => prepareNextPhoenixOutreach(),
     prepareHotMarketOutreach: () => prepareNextPhoenixHotMarketOutreach(),
     prepareHotLeadOutreach: () => prepareNextPhoenixHotLeadOutreach(),

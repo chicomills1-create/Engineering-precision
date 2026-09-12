@@ -48,7 +48,11 @@ export function DashboardStats() {
             <div key={label} className="border border-border bg-card p-3 rounded-[2px]">
               <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground">{label}</p>
               <p className="font-display text-xl font-bold">{lane?.sent ?? 0} / {lane?.target ?? 0}</p>
-              <p className="text-xs text-muted-foreground">{lane?.shortage ?? Math.max(0, (lane?.target ?? 0) - (lane?.sent ?? 0))} shortage</p>
+              <p className="text-xs text-muted-foreground">Eligible: {lane?.eligible ?? 0}</p>
+              <p className="text-xs text-muted-foreground">Remaining quota: {lane?.remainingQuota ?? 0}</p>
+              {lane?.reason && (
+                <p className="mt-1 text-xs text-amber-300">Reason: {lane.reason}</p>
+              )}
             </div>
           ))}
           <div className="col-span-2 md:col-span-4 text-xs text-muted-foreground">Total Sent Today: {stats.septemberLanes.totalSent} / {stats.septemberLanes.totalTarget}</div>

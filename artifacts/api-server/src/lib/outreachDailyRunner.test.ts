@@ -159,6 +159,43 @@ test("researches before dispatching and makes a second pass after the safe wait"
   });
 });
 
+test("continues preparing and dispatching existing inventory when acquisition fails", async () => {
+  const calls: string[] = [];
+  const errors: string[] = [];
+  const result = await runDailyOutreachOnce({
+    processHotMarketResearch: async () => { throw new Error("hot-market unavailable"); },
+    processScheduledResearch: async () => { throw new Error("discovery unavailable"); },
+    verifyProspects: async () => { throw new Error("verification unavailable"); },
+    onResearchError: (stage) => { errors.push(stage); },
+    prepareRegularOutreach: async () => {
+      calls.push("prepare-regular");
+      return {
+        state: "completed", prepared: 200, directPrepared: 100,
+        publicPrepared: 100, directShortfall: 0, publicShortfall: 0, shortfall: 0,
+      };
+    },
+    prepareHotMarketOutreach: async () => {
+      calls.push("prepare-hot-market");
+      return { state: "completed", prepared: 100, totalScheduled: 100, shortfall: 0 };
+    },
+    prepareHotLeadOutreach: async () => ({
+      state: "completed", prepared: 100, totalScheduled: 100, shortfall: 0,
+    }),
+    processDueMessages: async () => {
+      calls.push("send");
+      return { claimed: 400, providerAccepted: 400, stopped: 0, unresolved: 0 };
+    },
+    processProviderReconciliation: async () => ({ accepted: 0, failed: 0, ambiguous: 0 }),
+    now: () => new Date("2026-01-15T16:00:00.000Z"),
+    wait: async () => assert.fail("catch-up runs must not wait"),
+  });
+
+  assert.deepEqual(errors, ["hot-market-research", "scheduled-research", "verification"]);
+  assert.deepEqual(calls, ["prepare-regular", "prepare-hot-market", "send"]);
+  assert.equal(result.providerAccepted, 400);
+  assert.equal(result.regularPrepared + result.hotMarketPrepared + (result.hotLeadPrepared ?? 0), 400);
+});
+
 test("does not make a second send pass for catch-up runs", async () => {
   let sends = 0;
   const result = await runDailyOutreachOnce({

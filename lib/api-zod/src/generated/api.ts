@@ -718,22 +718,34 @@ export const GetOutreachDashboardResponse = zod.object({
   "named": zod.object({
   "sent": zod.number(),
   "target": zod.number(),
-  "shortage": zod.number().optional()
+  "eligible": zod.number(),
+  "remainingQuota": zod.number(),
+  "shortage": zod.number(),
+  "reason": zod.string().nullable()
 }).optional(),
   "public": zod.object({
   "sent": zod.number(),
   "target": zod.number(),
-  "shortage": zod.number().optional()
+  "eligible": zod.number(),
+  "remainingQuota": zod.number(),
+  "shortage": zod.number(),
+  "reason": zod.string().nullable()
 }).optional(),
   "hotMarket": zod.object({
   "sent": zod.number(),
   "target": zod.number(),
-  "shortage": zod.number().optional()
+  "eligible": zod.number(),
+  "remainingQuota": zod.number(),
+  "shortage": zod.number(),
+  "reason": zod.string().nullable()
 }).optional(),
   "hotLead": zod.object({
   "sent": zod.number(),
   "target": zod.number(),
-  "shortage": zod.number().optional()
+  "eligible": zod.number(),
+  "remainingQuota": zod.number(),
+  "shortage": zod.number(),
+  "reason": zod.string().nullable()
 }).optional(),
   "totalSent": zod.number().optional(),
   "totalTarget": zod.number().optional()

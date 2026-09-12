@@ -46,10 +46,10 @@ import { suppressOutreachEmail } from "../lib/outreachSuppression";
 import { discoverPublicProspects } from "../lib/publicResearch";
 import { claimOutreachMessageForSending, getOutreachAutomationStatus, sendClaimedOutreachMessage } from "../lib/outreachWorker";
 import {
-  MAX_DAILY_RESEARCH_PROSPECTS,
   OUTREACH_RESEARCH_LOCAL_HOUR,
   OUTREACH_RESEARCH_TIMEZONE,
 } from "../lib/outreachResearchScheduler";
+import { getOutreachDiscoveryDailyCap } from "../lib/outreachThroughputConfig";
 import {
   claimClientMonthlyDelivery,
   finishClientMonthlyDelivery,
@@ -378,6 +378,18 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
   const remainingSendingDays = Math.max(1, 30 - Number(new Intl.DateTimeFormat("en-US", { timeZone: "America/Phoenix", day: "numeric" }).format(new Date())));
   const todayTarget = runtimeConfig?.schedule.dailyTarget
     ?? (runtimeConfig?.month === "2026-09" ? SEPTEMBER_OUTREACH_TOTAL_TARGET : requiredDailyPace(monthlyTarget, sentMonth, remainingSendingDays));
+  const laneProgress = (sent: number, eligible: number, target: number) => {
+    const remainingQuota = Math.max(0, target - sent);
+    const shortage = Math.max(0, remainingQuota - eligible);
+    return {
+      sent,
+      target,
+      eligible,
+      remainingQuota,
+      shortage,
+      reason: shortage > 0 ? "No additional eligible contacts" : null,
+    };
+  };
   res.json(GetOutreachDashboardResponse.parse({
     prospects: prospects?.value ?? 0,
     campaigns: campaigns?.value ?? 0,
@@ -417,10 +429,10 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
     suppressed: suppressed?.value ?? 0, newResearched: newResearched?.value ?? 0,
     newVerified: newVerified?.value ?? 0,
     septemberLanes: runtimeConfig?.month === "2026-09" && lane ? {
-      named: { sent: laneSent.named, target: SEPTEMBER_OUTREACH_LANE_TARGETS.named, shortage: Math.max(0, SEPTEMBER_OUTREACH_LANE_TARGETS.named - laneSent.named - laneQueued.named) },
-      public: { sent: laneSent.public, target: SEPTEMBER_OUTREACH_LANE_TARGETS.public, shortage: Math.max(0, SEPTEMBER_OUTREACH_LANE_TARGETS.public - laneSent.public - laneQueued.public) },
-      hotMarket: { sent: laneSent.hotMarket, target: SEPTEMBER_OUTREACH_LANE_TARGETS.hot_market, shortage: Math.max(0, SEPTEMBER_OUTREACH_LANE_TARGETS.hot_market - laneSent.hotMarket - laneQueued.hotMarket) },
-      hotLead: { sent: laneSent.hotLead, target: SEPTEMBER_OUTREACH_LANE_TARGETS.hot_lead, shortage: Math.max(0, SEPTEMBER_OUTREACH_LANE_TARGETS.hot_lead - laneSent.hotLead - laneQueued.hotLead) },
+      named: laneProgress(laneSent.named, laneQueued.named, SEPTEMBER_OUTREACH_LANE_TARGETS.named),
+      public: laneProgress(laneSent.public, laneQueued.public, SEPTEMBER_OUTREACH_LANE_TARGETS.public),
+      hotMarket: laneProgress(laneSent.hotMarket, laneQueued.hotMarket, SEPTEMBER_OUTREACH_LANE_TARGETS.hot_market),
+      hotLead: laneProgress(laneSent.hotLead, laneQueued.hotLead, SEPTEMBER_OUTREACH_LANE_TARGETS.hot_lead),
       totalSent: Object.values(laneSent).reduce((sum, value) => sum + value, 0), totalTarget: SEPTEMBER_OUTREACH_TOTAL_TARGET,
     } : null,
   }));
@@ -617,7 +629,7 @@ router.put("/outreach/campaigns/:id/research-schedule", requireAuth, async (req,
     return;
   }
   const targetCount = Math.min(
-    MAX_DAILY_RESEARCH_PROSPECTS,
+    getOutreachDiscoveryDailyCap(),
     Math.max(1, input.data.targetCount ?? campaign.dailyLimit),
   );
   const [schedule] = await db.insert(outreachResearchSchedulesTable).values({
