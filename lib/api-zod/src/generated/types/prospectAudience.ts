@@ -12,4 +12,5 @@ export type ProspectAudience = typeof ProspectAudience[keyof typeof ProspectAudi
 export const ProspectAudience = {
   architect: 'architect',
   builder: 'builder',
+  mixed: 'mixed',
 } as const;

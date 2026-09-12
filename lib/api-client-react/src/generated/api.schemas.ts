@@ -432,6 +432,7 @@ export type ProspectAudience = typeof ProspectAudience[keyof typeof ProspectAudi
 export const ProspectAudience = {
   architect: 'architect',
   builder: 'builder',
+  mixed: 'mixed',
 } as const;
 
 export type ProspectContactConfidence = typeof ProspectContactConfidence[keyof typeof ProspectContactConfidence];
@@ -551,6 +552,7 @@ export type ProspectInputAudience = typeof ProspectInputAudience[keyof typeof Pr
 export const ProspectInputAudience = {
   architect: 'architect',
   builder: 'builder',
+  mixed: 'mixed',
 } as const;
 
 export type ProspectInputContactConfidence = typeof ProspectInputContactConfidence[keyof typeof ProspectInputContactConfidence];

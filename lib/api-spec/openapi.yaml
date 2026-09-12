@@ -1539,7 +1539,7 @@ components:
         website: { type: [string, "null"] }
         city: { type: string }
         state: { type: string }
-        audience: { type: string, enum: [architect, builder] }
+        audience: { type: string, enum: [architect, builder, mixed] }
         sourceUrl: { type: [string, "null"] }
         researchNotes: { type: [string, "null"] }
         fitScore: { type: number, minimum: 0, maximum: 100 }
@@ -1569,7 +1569,7 @@ components:
         website: { type: string }
         city: { type: string, minLength: 1 }
         state: { type: string, pattern: "^[A-Z]{2}$" }
-        audience: { type: string, enum: [architect, builder] }
+        audience: { type: string, enum: [architect, builder, mixed] }
         sourceUrl: { type: string }
         researchNotes: { type: string }
         fitScore: { type: number, minimum: 0, maximum: 100 }

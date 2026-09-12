@@ -39,7 +39,7 @@ const prospectSchema = z.object({
   website: z.string().optional(),
   city: z.string().min(1, 'City required'),
   state: z.string().regex(/^[A-Z]{2}$/, 'Use a two-letter state or province code'),
-  audience: z.enum(['architect', 'builder']),
+  audience: z.enum(['architect', 'builder', 'mixed']),
   sourceUrl: z.string().optional(),
   researchNotes: z.string().optional(),
   fitScore: z.coerce.number().min(0).max(100).optional(),
@@ -470,7 +470,7 @@ export function ProspectsTab() {
                             <FormLabel>Audience</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl><SelectTrigger data-testid="select-prospect-audience"><SelectValue /></SelectTrigger></FormControl>
-                              <SelectContent><SelectItem value="architect">Architect</SelectItem><SelectItem value="builder">Builder</SelectItem></SelectContent>
+                              <SelectContent><SelectItem value="architect">Architect</SelectItem><SelectItem value="builder">Builder</SelectItem><SelectItem value="mixed">Mixed</SelectItem></SelectContent>
                             </Select>
                             <FormMessage />
                           </FormItem>

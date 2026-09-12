@@ -25,4 +25,4 @@ An admin tab that waits on several endpoint queries must be debugged as a compos
 
 **Why:** The queue UI masked campaign and prospect response-validation failures behind its generic message after the message endpoint itself was fixed.
 
-**How to apply:** Inspect every parallel query and production validation error before attributing a composite loading failure to its primary-named resource.
+**How to apply:** Inspect every parallel query and production validation error before attributing a composite loading failure to its primary-named resource. Before declaring a contract fixed, query every persisted enum-like field used by the full response schema, not only the field named by the first exception.
