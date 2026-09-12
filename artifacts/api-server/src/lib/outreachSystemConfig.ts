@@ -2,17 +2,35 @@ import { and, desc, eq } from "drizzle-orm";
 import { z } from "zod/v4";
 import { db, outreachSystemConfigsTable } from "@workspace/db";
 
+export const OUTREACH_UNCAPPED = "uncapped" as const;
+const laneLimitSchema = z.union([
+  z.number().int().nonnegative(),
+  z.literal(OUTREACH_UNCAPPED),
+]);
+const laneAllocationsSchema = z.object({
+  named: z.number().int().nonnegative(),
+  public: z.number().int().nonnegative(),
+  hotMarket: z.number().int().nonnegative(),
+  hotLead: laneLimitSchema,
+  /** A shared ceiling for verified named and hot-market messages. */
+  namedHotMarketShared: z.number().int().nonnegative().optional(),
+  /** Public company inboxes are only used after named-contact selection. */
+  publicFallbackOnly: z.boolean().optional(),
+});
+type LaneAllocations = z.infer<typeof laneAllocationsSchema>;
 const policySchema = z.object({
   monthlySchedules: z.array(z.object({
     month: z.string().regex(/^\d{4}-\d{2}$/),
     monthlyTarget: z.number().int().nonnegative(),
     dailyTarget: z.number().int().positive().optional(),
-    laneAllocations: z.object({
-      named: z.number().int().nonnegative(),
-      public: z.number().int().nonnegative(),
-      hotMarket: z.number().int().nonnegative(),
-      hotLead: z.number().int().nonnegative(),
-    }).optional(),
+    laneAllocations: laneAllocationsSchema.optional(),
+    /**
+     * v2 changes the September allocation during the month. Keeping the
+     * previous shape in the policy makes the cutover date explicit and lets
+     * old rows remain authoritative before the cutover.
+     */
+    allocationEffectiveFrom: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+    preEffectiveLaneAllocations: laneAllocationsSchema.optional(),
   })).min(1),
   forwardMonthlyCap: z.number().int().positive(),
   scoring: z.record(z.string(), z.number()),
@@ -100,36 +118,106 @@ const AUTHORITATIVE_OUTREACH_POLICY_V1: OutreachPolicy = {
   ],
 };
 
+/** JOB 2 policy: v1 remains in force through September 12 Phoenix time. */
+export const AUTHORITATIVE_OUTREACH_POLICY_V2: OutreachPolicy = {
+  ...AUTHORITATIVE_OUTREACH_POLICY_V1,
+  monthlySchedules: [
+    {
+      month: "2026-09",
+      monthlyTarget: 12_000,
+      dailyTarget: 400,
+      allocationEffectiveFrom: "2026-09-13",
+      preEffectiveLaneAllocations: {
+        named: 100,
+        public: 100,
+        hotMarket: 100,
+        hotLead: 100,
+      },
+      laneAllocations: {
+        named: 200,
+        public: 100,
+        hotMarket: 200,
+        hotLead: OUTREACH_UNCAPPED,
+        namedHotMarketShared: 200,
+        publicFallbackOnly: true,
+      },
+    },
+    ...AUTHORITATIVE_OUTREACH_POLICY_V1.monthlySchedules.slice(1).map((schedule) => ({
+      ...schedule,
+      laneAllocations: {
+        named: 200,
+        public: 100,
+        hotMarket: 200,
+        hotLead: OUTREACH_UNCAPPED,
+        namedHotMarketShared: 200,
+        publicFallbackOnly: true,
+      },
+    })),
+  ],
+  verification: {
+    ...AUTHORITATIVE_OUTREACH_POLICY_V1.verification,
+    allowedMethods: [
+      "official_website",
+      "official_document",
+      "credible_directory",
+      "verification_provider",
+      "findymail",
+    ],
+    namedContactProvider: "FindyMail",
+    namedContactEvidence: "FindyMail verified name/domain lookup",
+  },
+};
+
 let runtime: OutreachRuntimeConfig | null = null;
 let loadError: Error | null = null;
 
 export async function ensureAuthoritativeOutreachConfig(): Promise<
   "disabled" | "present" | "inserted"
 > {
-  if (
-    process.env.NODE_ENV !== "production"
-    || process.env.OUTREACH_CONFIG_BOOTSTRAP_ENABLED !== "true"
-  ) {
+  if (process.env.NODE_ENV !== "production") {
     return "disabled";
   }
+
+  const v1BootstrapEnabled = process.env.OUTREACH_CONFIG_BOOTSTRAP_ENABLED === "true";
+  const v2BootstrapEnabled = process.env.OUTREACH_CONFIG_V2_BOOTSTRAP_ENABLED === "true";
+  if (!v1BootstrapEnabled && !v2BootstrapEnabled) return "disabled";
 
   const [existing] = await db.select({ id: outreachSystemConfigsTable.id })
     .from(outreachSystemConfigsTable)
     .limit(1);
-  if (existing) return "present";
+  let changed = false;
+  if (!existing && v1BootstrapEnabled) {
+    const [inserted] = await db.insert(outreachSystemConfigsTable).values({
+      version: 1,
+      status: "active",
+      policy: AUTHORITATIVE_OUTREACH_POLICY_V1,
+    }).onConflictDoNothing().returning({ id: outreachSystemConfigsTable.id });
+    changed = Boolean(inserted);
+    if (!inserted) {
+      const [raced] = await db.select({ id: outreachSystemConfigsTable.id })
+        .from(outreachSystemConfigsTable)
+        .limit(1);
+      if (!raced) throw new Error("Authoritative outreach configuration bootstrap did not create a row");
+    }
+  }
 
-  const [inserted] = await db.insert(outreachSystemConfigsTable).values({
-    version: 1,
-    status: "active",
-    policy: AUTHORITATIVE_OUTREACH_POLICY_V1,
-  }).onConflictDoNothing().returning({ id: outreachSystemConfigsTable.id });
-
-  if (inserted) return "inserted";
-  const [raced] = await db.select({ id: outreachSystemConfigsTable.id })
-    .from(outreachSystemConfigsTable)
-    .limit(1);
-  if (raced) return "present";
-  throw new Error("Authoritative outreach configuration bootstrap did not create a row");
+  // This is intentionally separate from v1 bootstrap: a production
+  // read-only agent can publish v2 without replacing or mutating v1.
+  if (process.env.OUTREACH_CONFIG_V2_BOOTSTRAP_ENABLED === "true") {
+    const [v2] = await db.select({ id: outreachSystemConfigsTable.id })
+      .from(outreachSystemConfigsTable)
+      .where(eq(outreachSystemConfigsTable.version, 2))
+      .limit(1);
+    if (!v2) {
+      const [insertedV2] = await db.insert(outreachSystemConfigsTable).values({
+        version: 2,
+        status: "active",
+        policy: AUTHORITATIVE_OUTREACH_POLICY_V2,
+      }).onConflictDoNothing().returning({ id: outreachSystemConfigsTable.id });
+      changed = changed || Boolean(insertedV2);
+    }
+  }
+  return changed ? "inserted" : "present";
 }
 
 export function phoenixMonthKey(now = new Date()): string {
@@ -146,6 +234,26 @@ function resolveSchedule(policy: OutreachPolicy, month: string) {
     .filter((schedule) => schedule.month <= month)
     .sort((a, b) => b.month.localeCompare(a.month))[0];
   return forward?.month >= "2027-01" ? forward : undefined;
+}
+
+export function phoenixDateKey(now = new Date()): string {
+  const parts = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Phoenix", year: "numeric", month: "2-digit", day: "2-digit",
+  }).formatToParts(now).map((part) => [part.type, part.value]));
+  return `${parts.year}-${parts.month}-${parts.day}`;
+}
+
+export function effectiveLaneAllocations(
+  schedule: OutreachPolicy["monthlySchedules"][number],
+  now = new Date(),
+): LaneAllocations | undefined {
+  if (
+    schedule.allocationEffectiveFrom
+    && phoenixDateKey(now) < schedule.allocationEffectiveFrom
+  ) {
+    return schedule.preEffectiveLaneAllocations ?? schedule.laneAllocations;
+  }
+  return schedule.laneAllocations;
 }
 
 export async function loadOutreachSystemConfig(
@@ -183,7 +291,19 @@ export function requiredDailyPace(target: number, sent: number, remainingSending
 /** Calendar pacing used by preparation and reservation callers alike. */
 export function configuredDailyAllowance(runtimeConfig: OutreachRuntimeConfig, now = new Date()): number {
   const target = Math.min(50_000, runtimeConfig.schedule.monthlyTarget);
-  if (runtimeConfig.month === "2026-09") return 400;
+  const allocations = effectiveLaneAllocations(runtimeConfig.schedule, now);
+  if (allocations?.namedHotMarketShared !== undefined) {
+    return allocations.namedHotMarketShared + allocations.public;
+  }
+  if (runtimeConfig.month === "2026-09") {
+    if (allocations) {
+      const namedAndHotMarket = allocations.namedHotMarketShared
+        ?? allocations.named + allocations.hotMarket;
+      const hotLead = allocations.hotLead === OUTREACH_UNCAPPED ? 0 : allocations.hotLead;
+      return namedAndHotMarket + allocations.public + hotLead;
+    }
+    return 400;
+  }
   const parts = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Phoenix", year: "numeric", month: "2-digit", day: "2-digit",
   }).formatToParts(now).reduce<Record<string, string>>((result, part) => {

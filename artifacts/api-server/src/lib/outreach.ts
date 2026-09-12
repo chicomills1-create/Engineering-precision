@@ -43,8 +43,17 @@ import {
   approvedOutreachFollowUpMessages,
   approvedOutreachSubject,
 } from "./verifiedOutreachBatch";
-import { getAuthoritativeLaneConfig, laneConfigTotal, SEPTEMBER_OUTREACH_TOTAL_TARGET } from "./outreachLaneConfig";
-import { loadOutreachSystemConfig } from "./outreachSystemConfig";
+import {
+  getAuthoritativeLaneConfig,
+  isUncappedLaneLimit,
+  SEPTEMBER_OUTREACH_TOTAL_TARGET,
+} from "./outreachLaneConfig";
+import {
+  configuredDailyAllowance,
+  effectiveLaneAllocations,
+  loadOutreachSystemConfig,
+  OUTREACH_UNCAPPED,
+} from "./outreachSystemConfig";
 import { isEvidenceBackedPublicInbox } from "./publicInboxClassifier";
 
 export type GeneratedDraft = { subject: string; body: string; followUps: { subject: string; body: string }[] };
@@ -128,8 +137,8 @@ export function getOutreachDailyLane(
 
 export function getOutreachDailyLaneLimit(
   lane: OutreachDailyLane,
-  config: { namedLimit: number; publicLimit: number; hotMarketLimit: number; hotLeadLimit: number },
-): number | undefined {
+  config: { namedLimit: number; publicLimit: number; hotMarketLimit: number; hotLeadLimit: number | typeof OUTREACH_UNCAPPED },
+): number | typeof OUTREACH_UNCAPPED | undefined {
   if (lane === "named" || lane === "direct") return config.namedLimit;
   if (lane === "public") return config.publicLimit;
   if (lane === "hot_market") return config.hotMarketLimit;
@@ -211,10 +220,14 @@ export function getGlobalOutreachDailyLimit(
   date = new Date(),
   hotMarketMessageCount = 0,
 ): number {
-  phoenixDateKey(date);
-  return getPhoenixOutreachMonthKey(date) === "2026-09"
-    ? SEPTEMBER_OUTREACH_TOTAL_TARGET
-    : Math.max(0, hotMarketMessageCount);
+  const month = getPhoenixOutreachMonthKey(date);
+  if (month === "2026-09") {
+    return phoenixDateKey(date) < "2026-09-13"
+      ? SEPTEMBER_OUTREACH_TOTAL_TARGET
+      : 300;
+  }
+  if (month > "2026-09") return 300;
+  return Math.max(0, hotMarketMessageCount);
 }
 
 export function isDuplicateEmailSequenceStatus(status: string): boolean {
@@ -364,6 +377,7 @@ async function reserveOutreachSend(
 
     let dailyReservationId: number | undefined;
     if (message.sequenceNumber === 1) {
+      const effectiveAllocations = effectiveLaneAllocations(runtime.schedule, now);
       const monthEnd = new Date(`${monthKey}-01T07:00:00.000Z`);
       monthEnd.setUTCMonth(monthEnd.getUTCMonth() + 1);
       const [sent] = await tx.select({ value: count() }).from(outreachMessagesTable)
@@ -380,11 +394,24 @@ async function reserveOutreachSend(
         const weekday = new Date(Date.UTC(Number(monthKey.slice(0, 4)), Number(monthKey.slice(5, 7)) - 1, day)).getUTCDay();
         if (weekday !== 0 && weekday !== 6) remainingDays += 1;
       }
-      const dailyAllowance = monthKey === "2026-09" ? 400 : Math.min(remainingMonth, Math.ceil(remainingMonth / Math.max(1, remainingDays)));
-      const [todayReserved] = await tx.select({ value: count() }).from(outreachMonthlySendReservationsTable)
+       const dailyAllowance = monthKey === "2026-09"
+         ? configuredDailyAllowance(runtime, now)
+         : Math.min(remainingMonth, Math.ceil(remainingMonth / Math.max(1, remainingDays)));
+      const todayReservedRows = await tx.select({
+        sourceType: outreachMessagesTable.sourceType,
+        contactEmail: prospectsTable.contactEmail,
+        contactName: prospectsTable.contactName,
+        contactEvidenceType: prospectsTable.contactEvidenceType,
+      }).from(outreachMonthlySendReservationsTable)
         .innerJoin(outreachMessagesTable, eq(outreachMonthlySendReservationsTable.messageId, outreachMessagesTable.id))
+        .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
         .where(and(eq(outreachMonthlySendReservationsTable.quotaKey, monthlyQuotaKey), gte(outreachMonthlySendReservationsTable.createdAt, dayStart), inArray(outreachMessagesTable.status, ["approved", "sending", "needs_review"])));
-      if (remainingMonth <= 0 || (todayReserved?.value ?? 0) >= dailyAllowance) {
+      const todayReserved = todayReservedRows.filter((row) =>
+        !(getOutreachDailyLane(row, row) === "hot_lead"
+          && effectiveAllocations?.hotLead === OUTREACH_UNCAPPED)
+      ).length;
+      const uncappedHotLead = lane === "hot_lead" && effectiveAllocations?.hotLead === OUTREACH_UNCAPPED;
+       if (remainingMonth <= 0 || (!uncappedHotLead && todayReserved >= dailyAllowance)) {
         throw new DailySendLimitError();
       }
       const campaignCap = campaign?.dailyLimit;
@@ -433,15 +460,28 @@ async function reserveOutreachSend(
         ]);
         const laneCount = [...laneRows, ...laneReservations]
           .filter((row) => getOutreachDailyLane(row, row) === lane).length;
-        const laneLimit = runtime.schedule.laneAllocations
+        const laneLimit = effectiveAllocations
           ? getOutreachDailyLaneLimit(lane, {
-            namedLimit: runtime.schedule.laneAllocations.named,
-            publicLimit: runtime.schedule.laneAllocations.public,
-            hotMarketLimit: runtime.schedule.laneAllocations.hotMarket,
-            hotLeadLimit: runtime.schedule.laneAllocations.hotLead,
+            namedLimit: effectiveAllocations.named,
+            publicLimit: effectiveAllocations.public,
+            hotMarketLimit: effectiveAllocations.hotMarket,
+            hotLeadLimit: effectiveAllocations.hotLead,
           })
           : undefined;
-        if (laneLimit !== undefined && laneCount >= laneLimit) throw new DailySendLimitError();
+        if (laneLimit !== undefined && !isUncappedLaneLimit(laneLimit)) {
+          const sharedLane = lane === "named" || lane === "direct" || lane === "hot_market";
+          const sharedLimit = effectiveAllocations?.namedHotMarketShared;
+          if (sharedLane && sharedLimit !== undefined) {
+            const sharedCount = [...laneRows, ...laneReservations]
+              .filter((row) => {
+                const rowLane = getOutreachDailyLane(row, row);
+                return rowLane === "named" || rowLane === "hot_market";
+              }).length;
+            if (sharedCount >= sharedLimit) throw new DailySendLimitError();
+          } else if (laneCount >= laneLimit) {
+            throw new DailySendLimitError();
+          }
+        }
       }
       for (let slot = used + 1; slot <= monthlyTarget; slot += 1) {
         const [inserted] = await tx.insert(outreachMonthlySendReservationsTable)

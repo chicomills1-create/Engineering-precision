@@ -1,8 +1,13 @@
 import { and, eq } from "drizzle-orm";
 import { db, outreachLaneConfigsTable } from "@workspace/db";
-import { getOutreachRuntimeConfig } from "./outreachSystemConfig";
+import {
+  effectiveLaneAllocations,
+  getOutreachRuntimeConfig,
+  OUTREACH_UNCAPPED,
+} from "./outreachSystemConfig";
 
 export type OutreachLane = "named" | "public" | "hot_market" | "hot_lead";
+export type OutreachLaneLimit = number | typeof OUTREACH_UNCAPPED;
 
 /** September's four lanes are deliberately equal and independent. */
 export const SEPTEMBER_OUTREACH_LANE_TARGETS = {
@@ -19,7 +24,8 @@ export type OutreachLaneConfig = {
   namedLimit: number;
   publicLimit: number;
   hotMarketLimit: number;
-  hotLeadLimit: number;
+  hotLeadLimit: OutreachLaneLimit;
+  namedHotMarketSharedLimit?: number;
   persisted: boolean;
 };
 
@@ -40,23 +46,30 @@ export function currentOutreachCampaignKey(now = new Date()): string {
 export async function getAuthoritativeLaneConfig(
   campaignKey = currentOutreachCampaignKey(),
   effectiveMonth = phoenixMonthKey(),
+  now = new Date(),
 ): Promise<OutreachLaneConfig> {
   const [row] = await db.select().from(outreachLaneConfigsTable).where(and(
     eq(outreachLaneConfigsTable.campaignKey, campaignKey),
     eq(outreachLaneConfigsTable.effectiveMonth, effectiveMonth),
   )).limit(1);
-  if (row) return { ...row, persisted: true };
-  const configured = getOutreachRuntimeConfig()?.schedule;
+  const runtime = getOutreachRuntimeConfig();
+  const configured = runtime?.schedule;
+  // Version 2 is the authoritative cutover and must not be shadowed by a
+  // legacy persisted four-lane row. Before v2, preserve that row behavior.
+  if (row && runtime?.version !== 2) return { ...row, persisted: true };
   if (configured?.laneAllocations) {
+    const allocations = effectiveLaneAllocations(configured, now) ?? configured.laneAllocations;
     return {
       campaignKey, effectiveMonth,
-      namedLimit: configured.laneAllocations.named,
-      publicLimit: configured.laneAllocations.public,
-      hotMarketLimit: configured.laneAllocations.hotMarket,
-      hotLeadLimit: configured.laneAllocations.hotLead,
+      namedLimit: allocations.named,
+      publicLimit: allocations.public,
+      hotMarketLimit: allocations.hotMarket,
+      hotLeadLimit: allocations.hotLead,
+      namedHotMarketSharedLimit: allocations.namedHotMarketShared,
       persisted: true,
     };
   }
+  if (row) return { ...row, persisted: true };
   if (configured) {
     // Post-September is monthly pacing, not four fixed lanes. Keep a
     // reservation lane for every source while the global transaction cap
@@ -69,7 +82,7 @@ export async function getAuthoritativeLaneConfig(
   throw new Error("Authoritative outreach lane configuration is unavailable; outreach is fail-closed");
 }
 
-export function laneLimit(config: OutreachLaneConfig, lane: OutreachLane): number {
+export function laneLimit(config: OutreachLaneConfig, lane: OutreachLane): OutreachLaneLimit {
   if (lane === "named") return config.namedLimit;
   if (lane === "public") return config.publicLimit;
   if (lane === "hot_market") return config.hotMarketLimit;
@@ -77,5 +90,16 @@ export function laneLimit(config: OutreachLaneConfig, lane: OutreachLane): numbe
 }
 
 export function laneConfigTotal(config: OutreachLaneConfig): number {
-  return config.namedLimit + config.publicLimit + config.hotMarketLimit + config.hotLeadLimit;
+  const namedAndHotMarket = config.namedHotMarketSharedLimit
+    ?? config.namedLimit + config.hotMarketLimit;
+  if (config.hotLeadLimit === OUTREACH_UNCAPPED) return namedAndHotMarket + config.publicLimit;
+  return namedAndHotMarket + config.publicLimit + config.hotLeadLimit;
+}
+
+export function isUncappedLaneLimit(limit: OutreachLaneLimit): limit is typeof OUTREACH_UNCAPPED {
+  return limit === OUTREACH_UNCAPPED;
+}
+
+export function getNamedHotMarketSharedLimit(config: OutreachLaneConfig): number {
+  return config.namedHotMarketSharedLimit ?? config.hotMarketLimit;
 }

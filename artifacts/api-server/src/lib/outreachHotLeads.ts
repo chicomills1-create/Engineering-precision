@@ -8,8 +8,15 @@ import {
   prospectsTable,
   type Prospect,
 } from "@workspace/db";
-import { approvedOutreachBody, approvedOutreachFollowUpMessages, approvedOutreachSubject } from "./verifiedOutreachBatch";
-import { getAuthoritativeLaneConfig } from "./outreachLaneConfig";
+import {
+  approvedOutreachBody,
+  approvedOutreachSubject,
+  hotLeadFollowUpMessages,
+} from "./verifiedOutreachBatch";
+import {
+  getAuthoritativeLaneConfig,
+  isUncappedLaneLimit,
+} from "./outreachLaneConfig";
 import {
   type PhoenixPreparationTarget,
   getNextPhoenixPreparationTarget,
@@ -93,7 +100,8 @@ export async function prepareNextPhoenixHotLeadOutreach(
   }
   const { scheduledAt } = target ?? getNextPhoenixPreparationTarget(now);
   const targetEnd = new Date(scheduledAt.getTime() + 24 * 60 * 60_000);
-  const laneConfig = await getAuthoritativeLaneConfig();
+  const laneConfig = await getAuthoritativeLaneConfig(undefined, undefined, scheduledAt);
+  const hotLeadLimit = laneConfig.hotLeadLimit;
 
   try {
     const rows = await db.select({ prospect: prospectsTable, campaign: campaignsTable })
@@ -165,7 +173,9 @@ export async function prepareNextPhoenixHotLeadOutreach(
     const existingHotLeads = targetMessages.filter((row) =>
       row.sourceType === "hot_lead" || row.sourceType === "hot_lead_verified"
     ).length;
-    const remaining = Math.max(0, laneConfig.hotLeadLimit - existingHotLeads);
+    const remaining = isUncappedLaneLimit(hotLeadLimit)
+      ? Infinity
+      : Math.max(0, hotLeadLimit - existingHotLeads);
     const campaignsByProspect = new Map(rows.map(({ prospect, campaign }) => [prospect.id, campaign]));
     const candidates = prioritizeHotLeadCandidates(
       rows.map(({ prospect }) => prospect).filter((prospect) => {
@@ -196,7 +206,10 @@ export async function prepareNextPhoenixHotLeadOutreach(
             lt(outreachMessagesTable.scheduledAt, targetEnd),
             inArray(outreachMessagesTable.status, ["approved", "sending", "sent", "delivered"]),
           ));
-        if ((currentCount?.value ?? 0) >= laneConfig.hotLeadLimit) return false;
+        if (
+          !isUncappedLaneLimit(hotLeadLimit)
+          && (currentCount?.value ?? 0) >= hotLeadLimit
+        ) return false;
         const [blocked] = await tx.select({ id: outreachMessagesTable.id })
           .from(outreachMessagesTable)
           .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
@@ -237,7 +250,7 @@ export async function prepareNextPhoenixHotLeadOutreach(
             scheduledAt,
             sourceType: "hot_lead_verified",
           },
-          ...approvedOutreachFollowUpMessages(candidate.contactName!).map((followUp) => ({
+          ...hotLeadFollowUpMessages(candidate.contactName!).map((followUp) => ({
             prospectId: candidate.id,
             campaignId: campaign.id,
             sequenceNumber: followUp.sequenceNumber,
@@ -262,7 +275,9 @@ export async function prepareNextPhoenixHotLeadOutreach(
       state: "completed",
       prepared,
       totalScheduled,
-      shortfall: Math.max(0, laneConfig.hotLeadLimit - totalScheduled),
+      shortfall: isUncappedLaneLimit(hotLeadLimit)
+        ? 0
+        : Math.max(0, hotLeadLimit - totalScheduled),
     };
   } catch (error) {
     logger.error({ err: error }, "September hot-lead preparation failed");
@@ -270,7 +285,7 @@ export async function prepareNextPhoenixHotLeadOutreach(
       state: "failed",
       prepared: 0,
       totalScheduled: 0,
-      shortfall: laneConfig.hotLeadLimit,
+      shortfall: isUncappedLaneLimit(hotLeadLimit) ? 0 : hotLeadLimit,
     };
   }
 }

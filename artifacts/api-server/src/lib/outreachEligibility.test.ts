@@ -23,6 +23,8 @@ import {
   isRegularMonthlyOutreachLimitReached,
   isDuplicateEmailSequenceStatus,
 } from "./outreach";
+import { laneConfigTotal } from "./outreachLaneConfig";
+import { OUTREACH_UNCAPPED } from "./outreachSystemConfig";
 import {
   HOT_MARKET_RECURRING_SOURCE_TYPE,
   HOT_MARKET_SOURCE_TYPE,
@@ -37,6 +39,11 @@ test("the global target reserves 150 regular and 50 hot-market slots while allow
   assert.ok(MAX_SCHEDULED_MESSAGES_PER_RUN >= 223);
   assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-04T15:00:00.000Z"), 100), 400);
   assert.equal(getOutreachMonthlyLimit(new Date("2026-09-03T15:00:00.000Z")), 12000);
+});
+
+test("JOB 2 global regular allowance changes on the Phoenix cutover date", () => {
+  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-12T15:00:00.000Z")), 400);
+  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-13T15:00:00.000Z")), 300);
 });
 
 test("dispatch lane inference isolates Direct, Public, recurring Hot Market, and verified extras", () => {
@@ -58,6 +65,21 @@ test("dispatch lane inference isolates Direct, Public, recurring Hot Market, and
   assert.equal(getOutreachDailyLaneLimit("public", laneConfig), 50);
   assert.equal(getOutreachDailyLaneLimit("hot_market", laneConfig), 50);
   assert.equal(getOutreachDailyLaneLimit("hot_market_extra", laneConfig), undefined);
+});
+
+test("JOB 2 models hot leads as uncapped and keeps named plus hot-market shared", () => {
+  const laneConfig = {
+    campaignKey: "2026-09",
+    effectiveMonth: "2026-09",
+    persisted: true,
+    namedLimit: 200,
+    publicLimit: 100,
+    hotMarketLimit: 200,
+    hotLeadLimit: OUTREACH_UNCAPPED,
+    namedHotMarketSharedLimit: 200,
+  };
+  assert.equal(getOutreachDailyLaneLimit("hot_lead", laneConfig), OUTREACH_UNCAPPED);
+  assert.equal(laneConfigTotal(laneConfig), 300);
 });
 
   const now = new Date("2026-08-28T12:00:00.000Z");

@@ -46,7 +46,7 @@ export async function recoverCurrentPhoenixOutreach(options: {
     // Resolve this before any preparation begins.  Each lane preparation also
     // reads the value, while this check makes recovery fail closed if startup
     // was called before authoritative configuration was actually available.
-    const laneConfig = await getAuthoritativeLaneConfig();
+    const laneConfig = await getAuthoritativeLaneConfig(undefined, undefined, target.scheduledAt);
     const [regular, hotMarket, hotLead] = await Promise.all([
       prepareNextPhoenixOutreach(now, target),
       prepareNextPhoenixHotMarketOutreach(now, target),

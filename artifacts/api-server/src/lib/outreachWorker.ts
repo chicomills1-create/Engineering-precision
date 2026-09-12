@@ -44,8 +44,9 @@ import { monitorOverdueOutreachQueue } from "./outreachQueueMonitor";
 import { enrollAcceptedCatchUpMessage } from "./outreachCatchUp";
 
 const ADMIN_EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-// The September contract has four independent 100-message lanes.
-export const MAX_SCHEDULED_MESSAGES_PER_RUN = 400;
+// The monthly safeguard remains authoritative; post-cutover hot leads are not
+// constrained by the capped 300-message named/hot-market/public allocation.
+export const MAX_SCHEDULED_MESSAGES_PER_RUN = 50_000;
 
 export type OutreachAutomationStatus = {
   adminAllowlistReady: boolean;

@@ -30,7 +30,11 @@ import {
 } from "./outreachPreparation";
 import { isRecurringHotMarketCampaign } from "./hotMarketResearch";
 import { logger } from "./logger";
-import { getAuthoritativeLaneConfig } from "./outreachLaneConfig";
+import {
+  getAuthoritativeLaneConfig,
+  getNamedHotMarketSharedLimit,
+} from "./outreachLaneConfig";
+import { getOutreachDailyLane } from "./outreach";
 
 export function getHotMarketRemainingCapacity(existing: number): number {
   return Math.max(0, HOT_MARKET_DAILY_TARGET - existing);
@@ -91,8 +95,9 @@ export async function prepareNextPhoenixHotMarketOutreach(
     return { state: "skipped", prepared: 0, totalScheduled: 0, shortfall: 0 };
   }
   const { scheduledAt } = target ?? getNextPhoenixPreparationTarget(now);
-  const laneConfig = await getAuthoritativeLaneConfig();
+  const laneConfig = await getAuthoritativeLaneConfig(undefined, undefined, scheduledAt);
   const targetEnd = new Date(scheduledAt.getTime() + 24 * 60 * 60 * 1000);
+  const sharedLimit = getNamedHotMarketSharedLimit(laneConfig);
 
   try {
     const rows = await db.select({ prospect: prospectsTable, campaign: campaignsTable })
@@ -132,6 +137,7 @@ export async function prepareNextPhoenixHotMarketOutreach(
         website: prospectsTable.website,
         state: prospectsTable.state,
         contactName: prospectsTable.contactName,
+        contactEvidenceType: prospectsTable.contactEvidenceType,
         fitScore: prospectsTable.fitScore,
         needScore: prospectsTable.needScore,
         sourceType: outreachMessagesTable.sourceType,
@@ -174,7 +180,11 @@ export async function prepareNextPhoenixHotMarketOutreach(
     const currentHotMarketCount = countHotMarketMessages(
       targetInitials.map((row) => row.sourceType),
     );
-    const remainingCapacity = Math.max(0, laneConfig.hotMarketLimit - currentHotMarketCount);
+    const sharedNamedHotMarket = laneConfig.namedHotMarketSharedLimit !== undefined;
+    const currentNamedCount = sharedNamedHotMarket
+      ? targetInitials.filter((row) => getOutreachDailyLane(row, row) === "named").length
+      : 0;
+    const remainingCapacity = Math.max(0, sharedLimit - currentHotMarketCount - currentNamedCount);
     const eligible = prioritizePreparationCandidates(
       rows
         .filter(({ prospect, campaign }) =>
@@ -195,19 +205,25 @@ export async function prepareNextPhoenixHotMarketOutreach(
         await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${`hot-market-window:${scheduledAt.toISOString()}`}, 0))`);
         await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${email}, 0))`);
         await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${domain}, 0))`);
-        const [currentCount] = await tx.select({ value: sql<number>`count(*)::int` })
+        const currentWindowRows = await tx.select({
+          sourceType: outreachMessagesTable.sourceType,
+          contactEmail: prospectsTable.contactEmail,
+          contactName: prospectsTable.contactName,
+          contactEvidenceType: prospectsTable.contactEvidenceType,
+        })
           .from(outreachMessagesTable)
+          .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
           .where(and(
             eq(outreachMessagesTable.sequenceNumber, 1),
             gte(outreachMessagesTable.scheduledAt, scheduledAt),
             lt(outreachMessagesTable.scheduledAt, targetEnd),
-            inArray(outreachMessagesTable.sourceType, [
-              HOT_MARKET_SOURCE_TYPE,
-              HOT_MARKET_RECURRING_SOURCE_TYPE,
-            ]),
             inArray(outreachMessagesTable.status, ["approved", "sending", "sent", "delivered"]),
           ));
-        if ((currentCount?.value ?? 0) >= laneConfig.hotMarketLimit) return false;
+        const currentSharedCount = currentWindowRows.filter((row) => {
+          const lane = getOutreachDailyLane(row, row);
+          return lane === "hot_market" || (sharedNamedHotMarket && lane === "named");
+        }).length;
+        if (currentSharedCount >= sharedLimit) return false;
         const [currentProspect] = await tx.select().from(prospectsTable)
           .where(eq(prospectsTable.id, prospect.id))
           .limit(1);
@@ -336,7 +352,7 @@ export async function prepareNextPhoenixHotMarketOutreach(
       state: "completed",
       prepared,
       totalScheduled,
-      shortfall: Math.max(0, laneConfig.hotMarketLimit - totalScheduled),
+      shortfall: Math.max(0, sharedLimit - totalScheduled - currentNamedCount),
     };
   } catch (error) {
     logger.error({ err: error }, "Recurring hot-market preparation failed");
@@ -344,7 +360,7 @@ export async function prepareNextPhoenixHotMarketOutreach(
       state: "failed",
       prepared: 0,
       totalScheduled: 0,
-      shortfall: laneConfig.hotMarketLimit,
+      shortfall: sharedLimit,
     };
   }
 }

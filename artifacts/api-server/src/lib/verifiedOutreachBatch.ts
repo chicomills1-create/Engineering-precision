@@ -56,39 +56,6 @@ We’re licensed in 49 states, and we work fast: focused reviews typically turn 
 Do you have an active project in your pipeline that you would like us to review?`;
 }
 
-export function approvedOutreachFollowUps(contactName: string): Array<{
-  subject: string;
-  body: string;
-}> {
-  const firstName = contactName.trim().split(/\s+/)[0] || "there";
-  return [
-    {
-      subject: `Re: ${SUBJECT}`,
-      body: `Hi ${firstName},
-
-I wanted to follow up in case a focused Civil, Structural, or MEP issue is holding up one of your current projects. Apex Grid can review the existing information, right-size the scope, and provide clear pricing before work begins.
-
-Do you have any current projects in your pipeline that you would like us to review?`,
-    },
-    {
-      subject: `Re: ${SUBJECT}`,
-      body: `Hi ${firstName},
-
-Checking back once more. If an engineering review, permit response, or stamped design package is moving too slowly or has grown beyond the work actually needed, our licensed team may be able to help.
-
-Would it be useful for us to review a current project and outline the fastest practical next step?`,
-    },
-    {
-      subject: `Re: ${SUBJECT}`,
-      body: `Hi ${firstName},
-
-I will close the loop after this note. Apex Grid is available when you need focused, clearly priced Civil, Structural, or MEP support without an oversized scope.
-
-If a project comes up that you would like us to review, reply with the basic details and we will take a look.`,
-    },
-  ];
-}
-
 export function approvedOutreachFollowUpMessages(contactName: string): Array<{
   sequenceNumber: number;
   subject: string;
@@ -106,6 +73,19 @@ Thanks for taking a look at my earlier note. If you have an active project that 
 Reply with the project location and the drawings or scope you have available. We’ll review them and let you know where Apex Grid can help, along with a right-sized path forward and clear pricing before work begins.`,
     },
   ];
+}
+
+export function hotLeadFollowUpMessages(contactName: string): Array<{
+  sequenceNumber: number;
+  subject: string;
+  body: string;
+}> {
+  const firstName = contactName.trim().split(/\s+/)[0] || "there";
+  return [{
+    sequenceNumber: 2,
+    subject: `Following up, ${firstName}`,
+      body: `Hi ${firstName}, Saw you stopped by our site — figured I'd follow up personally. We're a veteran-owned engineering firm (MEP, structural, civil) licensed in 49 states. Most of our developer and builder clients call us when plan-check is threatening their timeline. We clear corrections fast and stamp what needs stamping. If you've got an active project, reply with the address — I'll have a quote back to you within 24 hours. Jeremy Mills / CEO · USAF Veteran / Apex Grid Engineering PLLC / 22475 E Quintero Rd, Queen Creek, AZ 85142`,
+  }];
 }
 
 export async function preflightVerifiedOutreachBatch(options: {

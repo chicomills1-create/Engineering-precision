@@ -4,6 +4,7 @@ import {
   approvedOutreachBody,
   approvedOutreachFollowUpMessages,
   approvedOutreachSubject,
+  hotLeadFollowUpMessages,
   preflightVerifiedOutreachBatch,
   VERIFIED_OUTREACH_CONTACTS,
 } from "./verifiedOutreachBatch";
@@ -295,4 +296,13 @@ test("the approved opener follow-up is one concise reply-first touch", () => {
     && !/15.?minute|15 min|schedule|book.*call/i.test(followUp.body)
     && /reply|project location|drawings or scope/i.test(followUp.body)
   ));
+});
+
+test("the hot-lead sequence uses its single dedicated follow-up template", () => {
+  const followUps = hotLeadFollowUpMessages("Alex Rivera");
+  assert.deepEqual(followUps, [{
+    sequenceNumber: 2,
+    subject: "Following up, Alex",
+    body: "Hi Alex, Saw you stopped by our site — figured I'd follow up personally. We're a veteran-owned engineering firm (MEP, structural, civil) licensed in 49 states. Most of our developer and builder clients call us when plan-check is threatening their timeline. We clear corrections fast and stamp what needs stamping. If you've got an active project, reply with the address — I'll have a quote back to you within 24 hours. Jeremy Mills / CEO · USAF Veteran / Apex Grid Engineering PLLC / 22475 E Quintero Rd, Queen Creek, AZ 85142",
+  }]);
 });
