@@ -76,7 +76,7 @@ function documentFor(template: string, route: string, body: string): string {
     .replace(/<meta property="og:url"[^>]*>/, `<meta property="og:url" content="${canonical}" />`)
     .replace(/<meta name="twitter:title"[^>]*>/, `<meta name="twitter:title" content="${esc(title)}" />`)
     .replace(/<meta name="twitter:description"[^>]*>/, `<meta name="twitter:description" content="${esc(description)}" />`)
-    .replace("</head>", `    <link rel="canonical" href="${canonical}" />\n  </head>`)
+    .replace(/<link rel="canonical"[^>]*>/, `<link rel="canonical" href="${canonical}" />`)
     .replace(/<div id="root"><\/div>/, `<div id="root">${body}</div>`)
     .replace(/<script type="module" src="[^"]+"><\/script>/, `<script type="application/ld+json">${schema}</script>\n    <script type="module" src="/src/main.tsx"></script>`);
 }

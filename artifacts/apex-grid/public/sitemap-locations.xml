@@ -1130,6 +1130,11 @@
   <url><loc>https://apexgrideng.com/locations/california/chula-vista/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/chula-vista/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/chula-vista/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/fremont/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/fremont/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/fremont/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/fremont/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/fremont/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/fresno/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/fresno/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/fresno/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -1165,6 +1170,11 @@
   <url><loc>https://apexgrideng.com/locations/california/sacramento/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/sacramento/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/sacramento/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/san-bernardino/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/san-bernardino/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/san-bernardino/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/san-bernardino/civil-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/locations/california/san-bernardino/energy-code-compliance/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-diego/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-diego/mep-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-diego/structural-engineering/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -1337,7 +1347,6 @@
   <url><loc>https://apexgrideng.com/locations/california/foster-city/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/fountain-valley/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/fowler/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/fremont/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/fullerton/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/galt/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/gardena/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
@@ -1544,7 +1553,6 @@
   <url><loc>https://apexgrideng.com/locations/california/st-helena/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/salinas/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-anselmo/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://apexgrideng.com/locations/california/san-bernardino/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-bruno/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-buenaventura-ventura/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://apexgrideng.com/locations/california/san-carlos/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>

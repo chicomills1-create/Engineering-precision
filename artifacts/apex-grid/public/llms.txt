@@ -17,6 +17,3 @@ This file is a concise map of canonical public information. It does not imply lo
 - Contact: https://apexgrideng.com/contact
 - HTML sitemap: https://apexgrideng.com/sitemap/
 - XML sitemap index: https://apexgrideng.com/sitemap_index.xml
-
-## Licensure
-- Apex Grid Engineering is licensed in 49 US states (all except Alaska).

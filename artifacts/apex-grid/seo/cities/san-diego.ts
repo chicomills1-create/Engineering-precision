@@ -8,48 +8,48 @@ export const sanDiego: CityData = {
   ahj: {
     office: "City of San Diego Development Services Department (DSD)",
     process:
-      "San Diego DSD runs plan review through its OpenDSD portal with electronic submittal and permitting. The city offers a Self-Certification program that lets licensed design professionals certify code compliance for eligible projects to shorten review, and an over-the-counter (OTC) path for simpler scopes. Complex commercial projects go through full plan check with multi-discipline routing, and DSD publishes review-cycle timelines that drive project scheduling.",
+      "DSD publishes permits, codes, application guidance, and review-status resources through its Development Services site and OpenDSD portal. Eligible scopes may use quicker-processing options such as self-certification or over-the-counter review, while larger commercial work receives full multi-discipline review and may also need Planning, Fire-Rescue, Public Utilities, and right-of-way approvals.",
   },
   codes: {
     building:
-      "2022 San Diego Municipal Code building regulations based on the 2022 California Building Code (2021 IBC) with local amendments",
+      "2025 California Building Standards Code (Title 24), effective for projects submitted on or after January 1, 2026, with City of San Diego local amendments in the Municipal Code and Land Development Code",
     energy:
-      "2022 California Energy Code (Title 24, Part 6), enforced with 2022 CALGreen mandatory measures",
+      "2025 California Energy Code (Title 24, Part 6), effective January 1, 2026, with applicable San Diego amendments and CALGreen requirements",
     amendments:
-      "San Diego adopts the state model codes with local amendments and has pursued a Climate Action Plan-driven Building Electrification push, encouraging or requiring all-electric readiness in new construction beyond the state baseline. Coastal zone, brush/wildland-urban-interface, and steep-hillside overlays add project-specific requirements, so confirm the current DSD amendment and overlay package for the parcel.",
+      "DSD publishes local amendments to the 2025 California Building Standards Code and identifies the 2025 code as effective for projects submitted on or after January 1, 2026. San Diego's Land Development Code, stormwater standards, brush-management and wildland-urban-interface rules, coastal overlays, and grading requirements can add parcel-specific obligations.",
   },
   utilities: {
     electric:
-      "San Diego Gas & Electric (SDG&E) — the investor-owned utility serving the city and region, alongside community choice aggregators like San Diego Community Power for generation",
+      "San Diego Gas & Electric (SDG&E) delivers electric service; community-choice providers may supply generation, while the City of San Diego Public Utilities Department provides water and wastewater service",
     notes:
-      "SDG&E carries some of the highest commercial electricity rates in the country, so demand-charge management and right-sized services materially affect operating cost. New services and interconnection go through SDG&E's design and application process with real lead times, while the City of San Diego Public Utilities Department provides water and sewer.",
+      "SDG&E handles new electric service and distributed-generation interconnection, so service capacity, transformer space, demand charges, and schedule should be confirmed early. Public Utilities water and sewer capacity, meters, and extensions should be coordinated with the civil and fire-flow design.",
   },
   climateNotes:
-    "San Diego sits mostly in ASHRAE climate zone 3B (California zone 7 near the coast, warmer inland) with an exceptionally mild marine climate, modest cooling loads, and long economizer-favorable shoulder seasons; coastal salt-air corrosion and inland wildland-interface heat are the two dominant site-specific drivers.",
+    "San Diego is predominantly a mild marine Southern California climate with warmer inland conditions, long dry periods, occasional intense winter rain, coastal salt exposure, and Santa Ana wind events. High seismic hazard, liquefaction-prone areas, steep slopes, and wildland-urban-interface fire exposure vary substantially by parcel.",
   marketNotes:
-    "San Diego's construction market is anchored by life sciences and biotech lab space (especially the Torrey Pines and UTC corridors), defense and Navy-related work, healthcare, higher education, and dense transit-oriented multifamily. Lab and cleanroom fit-outs drive heavy MEP demand, while coastal-zone and hillside constraints plus wildfire-interface requirements add entitlement and design complexity across much of the city.",
+    "San Diego's commercial market is anchored by life sciences and biotechnology around Torrey Pines and UTC, defense and Navy-related work, healthcare, higher education, tourism, and transit-oriented multifamily. Laboratories and cleanrooms create intensive MEP and reliability needs, while coastal, hillside, brush-management, and stormwater constraints make early site feasibility important.",
   narratives: {
     mep:
-      "MEP design in San Diego benefits from one of the mildest climates in the country — a marine 3B zone with modest cooling loads and generous economizer hours — but the market skews toward lab and life-science space where ventilation, redundancy, and process loads dominate the design. We design outside-air and exhaust systems for lab safety, coordinate high-reliability power for research equipment, and exploit the mild climate for free cooling where the program allows. Electrically, SDG&E's high commercial rates make demand-charge management and correctly sized services worth real engineering attention, so we confirm SDG&E service capacity, interconnection timing, and rate structure early in design.",
+      "San Diego MEP design pairs the current Title 24 and DSD code package with a mild marine climate that can support right-sized systems and useful economizer hours. Life-science, healthcare, and defense programs can nevertheless be ventilation-, exhaust-, redundancy-, and process-load dominated, so outdoor-air, pressure relationships, emergency power, and equipment heat rejection need program-specific analysis. We verify SDG&E service capacity, transformer and interconnection requirements, and water demand early, especially where electrification or laboratory loads could outgrow an existing service.",
     structural:
-      "Structural work in San Diego is high-seismic: sites commonly fall in Seismic Design Category D, with the Rose Canyon fault zone and other active faults influencing near-fault design and fault-rupture setback considerations for some parcels. DSD enforces the 2022 CBC seismic provisions, and coastal soils, liquefaction-prone areas, and steep hillsides all funnel design decisions through the geotechnical report. Coastal corrosion drives detailing and material selection near the shoreline, and special-inspection programs are administered through the city's plan-check process — worth setting up alongside the OpenDSD submittal so structural review proceeds without rework.",
+      "San Diego structural design must account for high seismic demand, active fault systems including the Rose Canyon system, and site-specific soil conditions. The current DSD code materials point to the locally amended 2025 California code cycle; the geotechnical report then drives liquefaction, settlement, slope, and foundation decisions. Coastal corrosion, hillside retaining, equipment anchorage, and special-inspection planning should be coordinated with architecture and MEP before the OpenDSD submittal.",
     civil:
-      "Civil design in San Diego must meet the region's stringent stormwater standards, with the city's Storm Water Standards manual requiring on-site retention and treatment (Priority Development Project BMPs) that consume site area and should be laid out in the first grading pass. Coastal Zone permitting, steep-hillside grading rules, and wildland-urban-interface brush management overlays add layers depending on the parcel, and public-right-of-way work coordinates with city engineering. We design to city and regional standards, plan grading and drainage against the mild-but-flashy coastal storm regime, and coordinate water and sewer capacity with the Public Utilities Department early.",
+      "San Diego civil design is strongly shaped by the City's stormwater standards and development-project BMP requirements, which can require meaningful on-site treatment or retention area. Coastal Zone review, steep-hillside grading, brush-management setbacks, flood screening, and right-of-way work change the site plan by location. We lay out stormwater, fire access, SDG&E corridors, and Public Utilities water and sewer connections together rather than leaving BMP and utility space to the end of building design.",
     energy:
-      "Energy compliance in San Diego targets the 2022 California Energy Code (Title 24, Part 6) with 2022 CALGreen, demonstrated through Title 24 modeling rather than a simple prescriptive checklist. The city's Climate Action Plan pushes building electrification and all-electric readiness beyond the state baseline, so we plan for electric-ready or all-electric systems where the program and ordinances point that way. In the mild 3B marine climate, envelope, glazing, and efficient right-sized HVAC drive compliance, and because SDG&E rates are so high, on-site solar and load management are usually strong economic moves that we coordinate with the compliance model and SDG&E interconnection from schematic design.",
+      "For projects submitted under the current cycle, San Diego energy compliance uses the 2025 California Energy Code, Title 24 Part 6, with CALGreen and applicable local requirements. Mild coastal conditions favor efficient envelopes, glazing, heat pumps, controls, and carefully modeled schedules, while inland sites require more attention to cooling peaks. SDG&E service capacity, demand management, solar/storage interconnection, and the project's electrification strategy belong in the same early design conversation as the Title 24 model.",
   },
   faqs: [
     {
-      q: "What is San Diego's Self-Certification program?",
-      a: "The City of San Diego DSD allows licensed design professionals to self-certify code compliance for eligible project types, which can shorten plan review. It does not waive code requirements — DSD audits submittals — but for qualifying commercial scopes it compresses the schedule compared with full plan check.",
+      q: "What California code cycle does San Diego currently use?",
+      a: "DSD identifies the 2025 California Building Standards Code and local amendments as effective for projects submitted on or after January 1, 2026. The permit submission date and project-specific DSD materials control, and Title 24 Part 6 is the corresponding California energy-code framework.",
     },
     {
-      q: "How does San Diego's high seismic risk affect my project?",
-      a: "San Diego sites are typically Seismic Design Category D under the 2022 CBC, and the active Rose Canyon fault system means some parcels also face near-fault and fault-setback considerations. A geotechnical report drives foundation and lateral design, and DSD structural review is rigorous, so seismic design is central from the start.",
+      q: "Can a San Diego project use self-certification or quicker processing?",
+      a: "Some eligible scopes can use DSD quicker-processing options, including self-certification or over-the-counter review. Eligibility does not remove code, zoning, fire, stormwater, or utility obligations; DSD's current program guidance should be checked before relying on a shortened review path.",
     },
     {
-      q: "Why do San Diego energy and utility costs matter so much in design?",
-      a: "SDG&E has among the highest commercial electricity rates in the country, so demand-charge management, right-sized services, and on-site solar have an outsized effect on operating cost. Combined with the city's Climate Action Plan electrification goals, this makes energy strategy a first-order design decision, not an afterthought.",
+      q: "Which utility decisions should happen before a large San Diego load is designed?",
+      a: "Confirm SDG&E service voltage and capacity, transformer location, interconnection requirements, and the applicable generation or demand-charge arrangement. Coordinate those findings with City Public Utilities water and sewer capacity, especially for laboratories, healthcare, all-electric buildings, EV charging, and other high-load uses.",
     },
   ],
   research: {
@@ -58,8 +58,8 @@ export const sanDiego: CityData = {
     priority: { commercialOpportunity: 91, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.sandiego.gov/development-services"],
-      codes: ["https://www.hcd.ca.gov/building-standards"],
-      amendments: ["https://www.sandiego.gov/development-services/permits/what-you-need-know"],
+      codes: ["https://www.bsc.ca.gov/Codes.aspx", "https://www.hcd.ca.gov/building-standards", "https://www.energy.ca.gov/programs-and-topics/programs/building-energy-efficiency-standards", "https://www.sandiego.gov/development-services/codes-regulations"],
+      amendments: ["https://www.sandiego.gov/development-services/codes-regulations"],
       utilities: ["https://www.sdge.com/business", "https://www.sandiego.gov/public-utilities"],
       climate: ["https://www.weather.gov/sgx/"],
       market: ["https://www.sandiego.gov/economic-development"],

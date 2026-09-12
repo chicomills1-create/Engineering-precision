@@ -7,41 +7,62 @@ export const oakland: CityData = {
   county: "Alameda County",
   ahj: {
     office: "City of Oakland Planning & Building Department, Bureau of Building",
-    process: "Oakland accepts permit applications and electronic plan sets through its Online Permit Center/Accela system, with coordinated review by building, planning, fire, public works, and environmental reviewers as applicable. Larger, complex, or entitlement-driven proposals benefit from pre-application discussion because zoning, design review, public improvements, and CEQA can run alongside building plan check.",
+    process:
+      "Oakland's Planning & Building Department provides building-code, permit, inspection, and plan-check services through its One-Stop Permit Center and online services. Building review may run alongside Planning, Fire, Public Works, environmental, and utility work; larger infill, industrial, and entitlement-driven projects benefit from confirming those parallel requirements before submittal.",
   },
   codes: {
-    building: "2022 Oakland Building Construction Code, based on the 2022 California Building Code (Title 24, Part 2) with Oakland amendments",
-    energy: "2022 California Energy Code (Title 24, Part 6), including Oakland's local energy reach-code amendments",
-    amendments: "Oakland's 2022 reach code requires most new construction to be all-electric, with limited exceptions, and local green-building provisions supplement statewide CALGreen. The city also has seismic retrofit requirements for certain existing soft-story residential buildings; project teams must use the Oakland code package rather than relying only on statewide Title 24.",
+    building:
+      "2025 California Building Standards Code (Title 24), effective January 1, 2026, with Oakland amendments and local administrative requirements",
+    energy:
+      "2025 California Energy Code (Title 24, Part 6), effective January 1, 2026, with applicable Oakland reach-code and green-building requirements",
+    amendments:
+      "Oakland's Building Codes page identifies the 2025 California code adoption and publishes Oakland amendments and code bulletins. Local all-electric, green-building, seismic-retrofit, stormwater, zoning, and existing-building requirements must be checked separately rather than substituting a statewide-only analysis.",
   },
   utilities: {
-    electric: "Pacific Gas and Electric Company (PG&E)",
-    notes: "PG&E provides electric and gas service and administers new service and distributed-generation interconnection. East Bay Municipal Utility District (EBMUD) supplies water and the City of Oakland operates the sanitary sewer collection system; service upgrades in built-out corridors need early capacity and trenching coordination.",
+    electric:
+      "Pacific Gas and Electric Company (PG&E) provides electric service and interconnection; East Bay Municipal Utility District (EBMUD) supplies water, while Oakland manages local sanitary-sewer functions",
+    notes:
+      "PG&E service upgrades, transformer space, and distributed-generation interconnection should be established before an all-electric or industrial load is fixed. EBMUD water and fire-flow information, Oakland sewer and right-of-way requirements, and congested existing utilities need early civil coordination.",
   },
-  climateNotes: "Oakland's bay-influenced climate is mild and dry in summer, but bay fog, salt air, winter rain, and episodic heat and wildfire smoke affect enclosure and MEP decisions. High seismic hazard, liquefaction in Bay-margin fill, landslide-prone hillsides, and sea-level-rise exposure at the estuary and port are core design constraints.",
-  marketNotes: "Oakland combines Port of Oakland logistics and industrial facilities, multifamily and mixed-use infill, downtown office repositioning, healthcare, and adaptive reuse of older commercial and warehouse buildings. The city’s all-electric policy and Bay Area seismic, environmental, and utility constraints make early feasibility work more valuable than a generic California template.",
+  climateNotes:
+    "Oakland has a mild, bay-influenced climate with dry summers, winter rain, fog and wind, and occasional inland heat. Bay-margin fill brings liquefaction, settlement, tidal and groundwater concerns; Oakland Hills parcels add landslide and slope-stability issues, while wildfire smoke and seismic exposure affect enclosure and MEP resilience.",
+  marketNotes:
+    "Oakland combines Port of Oakland logistics and industrial facilities with multifamily and mixed-use infill, healthcare, adaptive reuse, downtown office repositioning, and older warehouse conversion. Seismic, environmental, utility, and local electrification requirements make feasibility and existing-condition verification especially important on constrained East Bay sites.",
   narratives: {
-    mep: "Oakland MEP design begins with the 2022 Title 24 Energy Code and the city's all-electric reach code, so heat-pump HVAC and water heating, electrical distribution, and realistic PG&E service capacity are concept-stage questions. The temperate bay climate supports efficient low-load systems and economizer opportunities, while heat events and wildfire smoke demand cooling resilience, filtration, and controllable outdoor-air modes. We coordinate water demand with EBMUD and model Title 24 in approved software rather than treating COMcheck as a California compliance path.",
-    structural: "Oakland is a high-seismic Bay Area jurisdiction: the Hayward Fault is immediately east of the city, and Bay-margin fill can create liquefaction and settlement risk while hillside sites bring landslide and slope-stability issues. The 2022 Oakland Building Construction Code applies California's high-seismic provisions with city amendments, so lateral systems, diaphragm and collector detailing, nonstructural anchorage, and geotechnical recommendations are developed as one package. Existing warehouse and masonry conversion work needs field verification before seismic upgrade scope is assumed.",
-    civil: "Oakland civil design has to resolve post-construction stormwater treatment under the city's Stormwater Management Requirements and Alameda Countywide Clean Water Program framework, often on dense parcels with shallow utilities. Bay-margin sites add rising groundwater, tidal flooding, and sea-level-rise considerations; hillside sites instead confront steep grading and erosion control. We reserve LID treatment footprint, coordinate EBMUD water and city sewer connections, and align frontage or right-of-way work with Oakland Public Works before submitting the building package.",
-    energy: "Oakland energy compliance is a Title 24 performance or prescriptive exercise using approved California software, augmented by the city's all-electric reach code and CALGreen—not an IECC or COMcheck project. Mild coastal conditions reward envelope, glazing, lighting, heat-pump, and controls trade-offs, but the electrical design must accommodate electric space and water heating and PG&E service realities. We also separate permit compliance from Oakland's Building Energy Benchmarking Ordinance obligations for covered existing commercial and multifamily buildings.",
+    mep:
+      "Oakland MEP design must coordinate the current Title 24, Part 6 cycle with Oakland's locally applicable reach-code and electrification requirements. The bay climate supports right-sized systems and economizer opportunities, but wildfire smoke, heat events, and industrial or laboratory ventilation can change filtration, outdoor-air, and controls decisions. We confirm PG&E service capacity, transformer and interconnection requirements, and EBMUD water demand early so electric space and water heating do not create an unplanned utility or equipment-room constraint.",
+    structural:
+      "Oakland is a high-seismic Bay Area jurisdiction next to the Hayward Fault, with Bay-margin fill that can be liquefiable or settlement-prone and hillsides that can require slope-stability work. The locally amended California code package, geotechnical report, and existing-building survey must be treated as one design basis. Warehouse and masonry conversions need field verification of diaphragms, collectors, foundations, and connections before new occupancy loads or retrofit scope are assumed.",
+    civil:
+      "Oakland civil design has to fit stormwater treatment, access, utilities, and public improvements onto often small or previously developed parcels. Bay-margin sites require screening for tidal flooding, groundwater, settlement, and sea-level-rise resilience; hillside sites instead bring steep grading and erosion-control demands. We reserve the stormwater-management footprint, coordinate EBMUD water and Oakland sewer connections, and resolve Public Works frontage or right-of-way work before the building plan consumes that space.",
+    energy:
+      "Oakland energy compliance uses the applicable California Title 24, Part 6 method plus Oakland's current local reach-code and green-building requirements; it is not an IECC or COMcheck-only project. Mild conditions favor envelope, glazing, lighting controls, heat pumps, and right-sized HVAC, but an all-electric building still needs realistic PG&E service and load-management planning. We also separate permit compliance from Oakland's requirements for covered existing-building benchmarking and operations so the owner receives a usable long-term energy plan.",
   },
   faqs: [
-    { q: "Does Oakland require all-electric new commercial buildings?", a: "Oakland's local energy reach code requires most new construction to be all-electric, with limited exceptions. That makes heat-pump HVAC and water heating, electrical capacity, and PG&E service planning early design decisions in addition to meeting the 2022 California Energy Code." },
-    { q: "What makes structural design in Oakland different?", a: "Oakland sits beside the Hayward Fault in a high-seismic region. Bay-margin fill can be liquefiable and settlement-prone, while Oakland Hills sites can have slope-stability issues; the lateral system, foundations, and geotechnical recommendations must therefore be coordinated early under the 2022 Oakland Building Construction Code." },
-    { q: "Which utilities serve Oakland projects?", a: "PG&E provides electric and gas service and handles interconnection, EBMUD provides water, and the City of Oakland operates the sanitary sewer collection system. Capacity, service upgrades, and congested street utility work should be checked early, especially for all-electric projects." },
+    {
+      q: "What code cycle does Oakland identify for current permits?",
+      a: "Oakland's Building Codes page identifies the 2025 California Building Standards Code and 2025 California Energy Code (Title 24, Part 6) as taking effect January 1, 2026, with Oakland amendments and local materials. The City's current code bulletins control project-specific reach-code and administrative requirements.",
+    },
+    {
+      q: "Does Oakland's local code affect an all-electric commercial design?",
+      a: "Yes. Oakland publishes local reach-code and green-building requirements in addition to the state Title 24 baseline, and the applicable project type and exceptions matter. Confirm the current Oakland amendment package, then size electrical service, heat-pump equipment, water heating, EV charging, and PG&E infrastructure together.",
+    },
+    {
+      q: "What site conditions deserve early Oakland investigation?",
+      a: "Bay-margin fill and waterfront parcels should be screened for liquefaction, settlement, groundwater, tidal flooding, and sea-level-rise exposure. Oakland Hills parcels need slope and landslide review, while every site needs seismic, stormwater, existing-utility, and EBMUD water-capacity coordination.",
+    },
   ],
   research: {
     lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review",
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 88, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.oaklandca.gov/departments/planning-building"],
-      codes: ["https://www.hcd.ca.gov/building-standards"],
-      amendments: ["https://www.oaklandca.gov/topics/building-codes"],
-      utilities: ["https://www.eastbaymuds.com/", "https://www.pge.com/en/business.html"],
+      ahj: ["https://www.oaklandca.gov/Planning-Building"],
+      codes: ["https://www.bsc.ca.gov/Codes.aspx", "https://www.hcd.ca.gov/building-standards", "https://www.energy.ca.gov/programs-and-topics/programs/building-energy-efficiency-standards", "https://www.oaklandca.gov/Planning-Building/Building-Construction-Permits-Inspections/Building-Codes"],
+      amendments: ["https://www.oaklandca.gov/Planning-Building/Building-Construction-Permits-Inspections/Building-Codes"],
+      utilities: ["https://www.pge.com/en/business-resources.html", "https://www.ebmud.com/"],
       climate: ["https://www.weather.gov/mtr/"],
-      market: ["https://www.oaklandca.gov/departments/economic-workforce-development"],
+      market: ["https://www.oaklandca.gov/Government/Departments/Economic-Workforce-Development"],
     },
   },
 };

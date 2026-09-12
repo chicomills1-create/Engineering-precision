@@ -30,7 +30,7 @@
       "state": "california",
       "slug": "anaheim",
       "lastVerified": "2026-09-11",
-      "sourceCount": 6,
+      "sourceCount": 9,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -114,7 +114,7 @@
       "state": "california",
       "slug": "bakersfield",
       "lastVerified": "2026-09-11",
-      "sourceCount": 6,
+      "sourceCount": 9,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -342,7 +342,7 @@
       "state": "california",
       "slug": "chula-vista",
       "lastVerified": "2026-09-11",
-      "sourceCount": 7,
+      "sourceCount": 12,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -592,9 +592,21 @@
     },
     {
       "state": "california",
+      "slug": "fremont",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 15,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "california",
       "slug": "fresno",
       "lastVerified": "2026-09-11",
-      "sourceCount": 7,
+      "sourceCount": 9,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -786,7 +798,7 @@
       "state": "california",
       "slug": "irvine",
       "lastVerified": "2026-09-11",
-      "sourceCount": 7,
+      "sourceCount": 12,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -906,7 +918,7 @@
       "state": "california",
       "slug": "los-angeles",
       "lastVerified": "2026-09-11",
-      "sourceCount": 6,
+      "sourceCount": 10,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -1146,7 +1158,7 @@
       "state": "california",
       "slug": "oakland",
       "lastVerified": "2026-09-11",
-      "sourceCount": 7,
+      "sourceCount": 10,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -1350,7 +1362,7 @@
       "state": "california",
       "slug": "riverside",
       "lastVerified": "2026-09-11",
-      "sourceCount": 7,
+      "sourceCount": 12,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -1374,7 +1386,7 @@
       "state": "california",
       "slug": "sacramento",
       "lastVerified": "2026-09-11",
-      "sourceCount": 7,
+      "sourceCount": 9,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -1420,9 +1432,21 @@
     },
     {
       "state": "california",
+      "slug": "san-bernardino",
+      "lastVerified": "2026-09-11",
+      "sourceCount": 9,
+      "checks": {
+        "unique": "pass",
+        "sources": "pass",
+        "canonical": "pass",
+        "internalLinks": "pass"
+      }
+    },
+    {
+      "state": "california",
       "slug": "san-diego",
       "lastVerified": "2026-09-11",
-      "sourceCount": 7,
+      "sourceCount": 10,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -1434,7 +1458,7 @@
       "state": "california",
       "slug": "san-francisco",
       "lastVerified": "2026-09-11",
-      "sourceCount": 7,
+      "sourceCount": 10,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -1446,7 +1470,7 @@
       "state": "california",
       "slug": "san-jose",
       "lastVerified": "2026-09-11",
-      "sourceCount": 7,
+      "sourceCount": 12,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -1614,7 +1638,7 @@
       "state": "california",
       "slug": "stockton",
       "lastVerified": "2026-09-11",
-      "sourceCount": 7,
+      "sourceCount": 9,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -1955,7 +1979,7 @@
     }
   ],
   "populationReviewSignal": "confirmed zero-population and unavailable-population records remain excluded; population is not proof of page quality",
-  "indexedDirectoryCount": 19156,
+  "indexedDirectoryCount": 19154,
   "indexedCount": 19303,
   "noindexCount": 26,
   "excludedCount": 26,

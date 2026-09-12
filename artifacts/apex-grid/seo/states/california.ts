@@ -4,15 +4,15 @@ export const california: StateData = {
   slug: "california",
   name: "California",
   abbrev: "CA",
-  lastVerified: "2026-07-28",
+  lastVerified: "2026-09-11",
   buildingCode: {
-    name: "2022 California Building Code (Title 24, Part 2)",
-    baseCode: "2021 IBC with extensive California amendments",
+    name: "2025 California Building Code (Title 24, Part 2), effective January 1, 2026",
+    baseCode: "2025 California Building Code (based on the 2024 IBC) with local amendments",
     notes:
-      "California enforces a statewide code through Title 24, published by the Building Standards Commission on a three-year cycle. The 2022 edition is in force statewide, with local jurisdictions permitted to adopt more stringent amendments based on local conditions.",
+      "California enforces a statewide code through Title 24, published by the Building Standards Commission on a three-year cycle. The 2025 edition took effect statewide January 1, 2026, with local jurisdictions permitted to adopt more stringent amendments based on local conditions.",
   },
   energyCode: {
-    commercial: "Title 24, Part 6 (2022 California Energy Code)",
+    commercial: "Title 24, Part 6 (2025 California Energy Code), effective January 1, 2026",
     notes:
       "California does not use IECC — it runs its own performance- and prescriptive-based Title 24 Part 6, among the most stringent energy codes in the nation. Compliance is demonstrated through certified software (e.g., approved performance-path tools), not COMcheck.",
     beyondCode:
@@ -51,12 +51,12 @@ export const california: StateData = {
     civil:
       "Civil and site engineering in California runs headlong into some of the strictest stormwater and environmental regulation in the country. The statewide MS4 permits and regional water board requirements push low-impact development — bioretention, infiltration, and volume capture of the design storm — well beyond simple detention, and CEQA review can gate a project long before grading begins. We design site drainage, water-quality treatment, and utility connections to each municipality's published standards while coordinating with coastal commissions, fire agencies in the wildland-urban interface, and air districts on dust and grading. Post-construction stormwater management plans and SWPPP documentation are effectively mandatory on any meaningful disturbance, so we resolve treatment-basin footprints and infiltration feasibility during preliminary layout to protect developable area.",
     energy:
-      "Energy compliance in California means Title 24 Part 6 — a code unlike any other, with no COMcheck and no IECC path. We demonstrate compliance through state-approved performance software, trading off envelope, mechanical, lighting, and increasingly on-site solar and battery storage that the code now requires for many building types. Because the 2022 edition and local reach codes push hard toward all-electric buildings, we treat heat-pump systems and demand-flexible controls as compliance tools, not afterthoughts. CALGreen mandatory measures add water-efficiency, commissioning, and material requirements on top of the energy code. In cooling-dominated inland zones we prioritize low-SHGC glazing and cool roofs, while coastal projects capture credit from natural ventilation and reduced mechanical cooling — the right strategy is entirely climate-zone specific.",
+      "Energy compliance in California means Title 24 Part 6 — a code unlike any other, with no COMcheck and no IECC path. We demonstrate compliance through state-approved performance software, trading off envelope, mechanical, lighting, and increasingly on-site solar and battery storage that the code requires for many building types. Because the 2025 edition and applicable local reach codes emphasize efficient electric systems and demand flexibility, we evaluate heat-pump systems and demand-responsive controls as compliance tools, not afterthoughts. CALGreen mandatory measures add water-efficiency, commissioning, and material requirements on top of the energy code. In cooling-dominated inland zones we prioritize low-SHGC glazing and cool roofs, while coastal projects capture credit from natural ventilation and reduced mechanical cooling — the right strategy is entirely climate-zone specific.",
   },
   faqs: [
     {
       q: "Does California use the IECC for commercial energy compliance?",
-      a: "No. California runs its own Title 24, Part 6 energy code, which is generally more stringent than the IECC and requires compliance through state-approved software rather than COMcheck. The 2022 edition applies statewide, and many cities layer on all-electric reach codes.",
+      a: "No. California runs its own Title 24, Part 6 energy code, which requires compliance through state-approved software rather than COMcheck. The 2025 edition took effect statewide January 1, 2026, and local reach-code requirements must be confirmed with the permitting jurisdiction.",
     },
     {
       q: "What seismic design category applies to California commercial buildings?",
@@ -64,7 +64,7 @@ export const california: StateData = {
     },
     {
       q: "Do I need to design an all-electric building in California?",
-      a: "Increasingly, yes — many California jurisdictions have adopted reach codes that restrict or prohibit new natural gas infrastructure. Even where gas is allowed, the 2022 Title 24 code strongly favors heat-pump systems, so we typically design electrification-ready or fully electric mechanical systems.",
+      a: "It depends on the jurisdiction and project. The 2025 Title 24 energy code applies statewide, while local reach codes may add electrification requirements. Confirm the current city ordinance before selecting gas or electric systems.",
     },
     {
       q: "How does stormwater regulation affect a California site plan?",

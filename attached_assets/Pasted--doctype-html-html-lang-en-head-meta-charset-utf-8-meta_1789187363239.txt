@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>${COMPANY_NAME}</title>
+    <style>
+      @media only screen and (max-width:600px) {
+        .email-shell { padding:20px 14px 26px !important; }
+        .email-content { width:100% !important; }
+        .email-copy { font-size:16px !important; line-height:1.6 !important; }
+      }
+      @media (prefers-color-scheme:dark) {
+        .email-body, .email-content { background-color:#ffffff !important; color:#202124 !important; }
+        .email-copy { color:#273449 !important; }
+      }
+    </style>
+  </head>
+  <body class="email-body" style="margin:0;padding:0;background:#ffffff;color:#202124;">
+    <div style="display:none;max-height:0;max-width:0;overflow:hidden;mso-hide:all;opacity:0;">${escapeEmailHtml(normalizedPreheader(personalizedBody))}&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;background:#ffffff;">
+      <tr>
+        <td class="email-shell" align="left" style="padding:24px 18px 32px;">
+          <table class="email-content" role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:640px;">
+            <tr>
+              <td style="padding:0;font-family:Arial,Helvetica,sans-serif;">
+                <div class="email-copy">${renderBodyHtml(personalizedBody)}</div>
+                <p style="margin:28px 0 12px;color:#202124;font-size:16px;line-height:1.5;">Best regards,</p>
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0;">
+                  <tr>
+                    <td valign="top" style="padding:0 13px 0 0;">
+                      <img src="${COMPANY_LOGO}" width="48" height="48" alt="Apex Grid Engineering logo" style="display:block;width:48px;height:48px;border:0;outline:none;text-decoration:none;">
+                    </td>
+                    <td valign="top" style="padding:0;border-left:1px solid #d9dee5;">
+                      <div style="padding-left:13px;color:#202124;font-size:16px;font-weight:700;line-height:1.4;">${CONTACT_NAME}</div>
+                      <div style="padding-left:13px;color:#202124;font-size:14px;line-height:1.5;">${CONTACT_TITLE}</div>
+                      <div style="padding-left:13px;color:#202124;font-size:14px;font-weight:700;line-height:1.5;">${LEGAL_COMPANY_NAME}</div>
+                      <div style="padding-left:13px;color:#5f6368;font-size:13px;line-height:1.5;">Veteran-owned engineering company</div>
+                      <div style="padding-left:13px;font-size:14px;line-height:1.5;"><a href="tel:+14804900064" style="color:#245b8f;text-decoration:none;">${CONTACT_PHONE}</a></div>
+                      <div style="padding-left:13px;font-size:14px;line-height:1.5;"><a href="${COMPANY_SITE}" style="color:#245b8f;text-decoration:none;">apexgrideng.com</a></div>
+                    </td>
+                  </tr>
+                </table>
+                <p style="margin:26px 0 0;color:#80868b;font-size:11px;line-height:1.5;"><a href="${safeUnsubscribeUrl}" style="color:#80868b;text-decoration:underline;">Unsubscribe</a></p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
