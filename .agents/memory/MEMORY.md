@@ -50,3 +50,4 @@
 - [Duplicate city filenames](duplicate-city-filenames.md) — same-name cities in different states need state-qualified module filenames while preserving their canonical city slug.
 - [Autoscale recurring jobs](autoscale-recurring-jobs.md) — in-process timers are not durable schedulers; use persisted slot claims plus startup catch-up and replica-safe claiming.
 - [Outreach acquisition versus sending](outreach-acquisition-vs-sending.md) — research failures must not block existing eligible inventory from the four independent send lanes.
+- [FindyMail persistence gap](findymail-persistence-gap.md) — provider searches have no usage ledger; credits can be consumed without a persisted prospect or verification record.
