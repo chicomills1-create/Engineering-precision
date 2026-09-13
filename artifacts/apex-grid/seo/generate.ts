@@ -101,6 +101,7 @@ import northCarolinaBatch2 from "./batch2-north-carolina";
 import ohioBatch2 from "./batch2-ohio";
 import pennsylvaniaBatch2 from "./batch2-pennsylvania";
 import { BATCH3_EXPANSIONS, BATCH3_EXPECTED_STATE_SLUGS } from "./batch3-expansions";
+import { BATCH4_EXPANSIONS, BATCH4_EXPECTED_STATE_SLUGS } from "./batch4-expansions";
 
 const PROMOTED_CITY_KEYS = new Set([
   "georgia/atlanta", "texas/austin", "north-carolina/charlotte",
@@ -1696,7 +1697,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   // Batch 2 researched state and service owners are appended after
   // generic location candidates; the sitemap dedupe pass below keeps each
   // canonical route exactly once.
-  for (const expansion of [...BATCH2_EXPANSIONS, ...BATCH3_EXPANSIONS]) {
+  for (const expansion of [...BATCH2_EXPANSIONS, ...BATCH3_EXPANSIONS, ...BATCH4_EXPANSIONS]) {
     locationsUrls.push(u(`${SITE}/locations/${expansion.stateSlug}/`, today, "monthly", "0.8"));
     for (const metro of expansion.metros) {
       for (const service of metro.services) {
@@ -4281,6 +4282,7 @@ async function main() {
   // collisions with generic state, city, or location-service templates.
   pages += renderResearchedExpansionPages(cities, BATCH2_EXPANSIONS, BATCH2_EXPECTED_STATE_SLUGS, 45, "Batch2");
   pages += renderResearchedExpansionPages(cities, BATCH3_EXPANSIONS, BATCH3_EXPECTED_STATE_SLUGS, 80, "Batch3");
+  pages += renderResearchedExpansionPages(cities, BATCH4_EXPANSIONS, BATCH4_EXPECTED_STATE_SLUGS, 75, "Batch4");
 
   // California ADU structural engineering source pages. These are deliberately
   // separate from the generic location/service templates: the source records
@@ -4555,7 +4557,7 @@ async function main() {
   writeSitemap(states, cities, directory);
   const generatedLocationsSitemap = fs.readFileSync(path.join(PUBLIC, "sitemap-locations.xml"), "utf8");
   const generatedServicesSitemap = fs.readFileSync(path.join(PUBLIC, "sitemap-services.xml"), "utf8");
-  const researchedSitemapRoutes = [...BATCH2_EXPANSIONS, ...BATCH3_EXPANSIONS].flatMap((expansion) => [
+  const researchedSitemapRoutes = [...BATCH2_EXPANSIONS, ...BATCH3_EXPANSIONS, ...BATCH4_EXPANSIONS].flatMap((expansion) => [
     `/locations/${expansion.stateSlug}/`,
     ...expansion.metros.flatMap((metro) => [
       ...metro.services.map((service) => `/locations/${expansion.stateSlug}/${metro.slug}/${service.serviceSlug}/`),
