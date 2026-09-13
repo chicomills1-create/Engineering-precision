@@ -100,6 +100,7 @@ import newYorkBatch2 from "./batch2-new-york";
 import northCarolinaBatch2 from "./batch2-north-carolina";
 import ohioBatch2 from "./batch2-ohio";
 import pennsylvaniaBatch2 from "./batch2-pennsylvania";
+import { BATCH3_EXPANSIONS, BATCH3_EXPECTED_STATE_SLUGS } from "./batch3-expansions";
 
 const PROMOTED_CITY_KEYS = new Set([
   "georgia/atlanta", "texas/austin", "north-carolina/charlotte",
@@ -1695,7 +1696,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   // Batch 2 researched state and service owners are appended after
   // generic location candidates; the sitemap dedupe pass below keeps each
   // canonical route exactly once.
-  for (const expansion of BATCH2_EXPANSIONS) {
+  for (const expansion of [...BATCH2_EXPANSIONS, ...BATCH3_EXPANSIONS]) {
     locationsUrls.push(u(`${SITE}/locations/${expansion.stateSlug}/`, today, "monthly", "0.8"));
     for (const metro of expansion.metros) {
       for (const service of metro.services) {
@@ -3689,16 +3690,21 @@ function assertBatch2FaqParity(
   }
 }
 
-function assertBatch2Expansions(): void {
-  if (BATCH2_EXPANSIONS.length !== 7) {
-    throw new Error(`SEO assertion failed: expected exactly 7 Batch2 expansions, found ${BATCH2_EXPANSIONS.length}`);
+function assertResearchedExpansions(
+  expansions: Batch2StateExpansion[],
+  expectedStateSlugs: Set<string>,
+  expectedMetros: number,
+  label: string,
+): void {
+  if (expansions.length !== expectedStateSlugs.size) {
+    throw new Error(`SEO assertion failed: expected exactly ${expectedStateSlugs.size} ${label} expansions, found ${expansions.length}`);
   }
-  const actualStateSlugs = new Set(BATCH2_EXPANSIONS.map((expansion) => expansion.stateSlug));
+  const actualStateSlugs = new Set(expansions.map((expansion) => expansion.stateSlug));
   if (
-    actualStateSlugs.size !== BATCH2_EXPECTED_STATE_SLUGS.size
-    || [...BATCH2_EXPECTED_STATE_SLUGS].some((slug) => !actualStateSlugs.has(slug))
+    actualStateSlugs.size !== expectedStateSlugs.size
+    || [...expectedStateSlugs].some((slug) => !actualStateSlugs.has(slug))
   ) {
-    throw new Error(`SEO assertion failed: Batch2 state slugs do not match the expected set`);
+    throw new Error(`SEO assertion failed: ${label} state slugs do not match the expected set`);
   }
   const metroKeys = new Set<string>();
   const titles = new Set<string>();
@@ -3706,7 +3712,7 @@ function assertBatch2Expansions(): void {
   const h1s = new Set<string>();
   const routes = new Set<string>();
   let serviceCount = 0;
-  for (const expansion of BATCH2_EXPANSIONS) {
+  for (const expansion of expansions) {
     assertSlug(expansion.stateSlug);
     if (expansion.metros.length < 5 || expansion.metros.length > 8) {
       throw new Error(`SEO assertion failed: ${expansion.stateSlug} must have 5-8 metros`);
@@ -3714,7 +3720,7 @@ function assertBatch2Expansions(): void {
     for (const metro of expansion.metros) {
       assertSlug(metro.slug);
       const metroKey = `${expansion.stateSlug}/${metro.slug}`;
-      if (metroKeys.has(metroKey)) throw new Error(`SEO assertion failed: duplicate Batch2 metro key ${metroKey}`);
+      if (metroKeys.has(metroKey)) throw new Error(`SEO assertion failed: duplicate ${label} metro key ${metroKey}`);
       metroKeys.add(metroKey);
       const serviceSlugs = metro.services.map((service) => service.serviceSlug);
       const uniqueServiceSlugs = new Set(serviceSlugs);
@@ -3723,13 +3729,13 @@ function assertBatch2Expansions(): void {
         || uniqueServiceSlugs.size !== BATCH2_CORE_SERVICE_SLUGS.length
         || BATCH2_CORE_SERVICE_SLUGS.some((slug) => !uniqueServiceSlugs.has(slug))
       ) {
-        throw new Error(`SEO assertion failed: ${metroKey} must have exactly the five Batch2 services`);
+        throw new Error(`SEO assertion failed: ${metroKey} must have exactly the five researched services`);
       }
       for (const service of metro.services) {
         serviceCount++;
         const route = `/locations/${expansion.stateSlug}/${metro.slug}/${service.serviceSlug}/`;
         if (titles.has(service.title) || descriptions.has(service.description) || h1s.has(service.h1) || routes.has(route)) {
-          throw new Error(`SEO assertion failed: duplicate Batch2 service metadata or route: ${route}`);
+          throw new Error(`SEO assertion failed: duplicate ${label} service metadata or route: ${route}`);
         }
         titles.add(service.title);
         descriptions.add(service.description);
@@ -3742,16 +3748,16 @@ function assertBatch2Expansions(): void {
           || service.sources.length < 4
           || service.sources.some((source) => !/^https:\/\//.test(source.url))
         ) {
-          throw new Error(`SEO assertion failed: incomplete Batch2 service record: ${route}`);
+          throw new Error(`SEO assertion failed: incomplete ${label} service record: ${route}`);
         }
       }
     }
   }
-  if (metroKeys.size !== 45) {
-    throw new Error(`SEO assertion failed: expected exactly 45 unique Batch2 metro keys, found ${metroKeys.size}`);
+  if (metroKeys.size !== expectedMetros) {
+    throw new Error(`SEO assertion failed: expected exactly ${expectedMetros} unique ${label} metro keys, found ${metroKeys.size}`);
   }
-  if (serviceCount !== 225) {
-    throw new Error(`SEO assertion failed: expected exactly 225 Batch2 service records, found ${serviceCount}`);
+  if (serviceCount !== expectedMetros * BATCH2_CORE_SERVICE_SLUGS.length) {
+    throw new Error(`SEO assertion failed: expected exactly ${expectedMetros * BATCH2_CORE_SERVICE_SLUGS.length} ${label} service records, found ${serviceCount}`);
   }
 }
 
@@ -3894,10 +3900,16 @@ ${service.sections.map((section) => `<section class="block"><div class="containe
   return html;
 }
 
-function renderBatch2Pages(cities: CityData[]): number {
-  assertBatch2Expansions();
+function renderResearchedExpansionPages(
+  cities: CityData[],
+  expansions: Batch2StateExpansion[],
+  expectedStateSlugs: Set<string>,
+  expectedMetros: number,
+  label: string,
+): number {
+  assertResearchedExpansions(expansions, expectedStateSlugs, expectedMetros, label);
   let pages = 0;
-  for (const expansion of BATCH2_EXPANSIONS) {
+  for (const expansion of expansions) {
     const stateDir = path.join(OUT, expansion.stateSlug);
     fs.mkdirSync(stateDir, { recursive: true });
     fs.writeFileSync(
@@ -4267,7 +4279,8 @@ async function main() {
   // Batch 2 is intentionally rendered last among location owners. Its
   // researched state hubs and metro service pages therefore win any route
   // collisions with generic state, city, or location-service templates.
-  pages += renderBatch2Pages(cities);
+  pages += renderResearchedExpansionPages(cities, BATCH2_EXPANSIONS, BATCH2_EXPECTED_STATE_SLUGS, 45, "Batch2");
+  pages += renderResearchedExpansionPages(cities, BATCH3_EXPANSIONS, BATCH3_EXPECTED_STATE_SLUGS, 80, "Batch3");
 
   // California ADU structural engineering source pages. These are deliberately
   // separate from the generic location/service templates: the source records
@@ -4542,17 +4555,17 @@ async function main() {
   writeSitemap(states, cities, directory);
   const generatedLocationsSitemap = fs.readFileSync(path.join(PUBLIC, "sitemap-locations.xml"), "utf8");
   const generatedServicesSitemap = fs.readFileSync(path.join(PUBLIC, "sitemap-services.xml"), "utf8");
-  const batch2SitemapRoutes = BATCH2_EXPANSIONS.flatMap((expansion) => [
+  const researchedSitemapRoutes = [...BATCH2_EXPANSIONS, ...BATCH3_EXPANSIONS].flatMap((expansion) => [
     `/locations/${expansion.stateSlug}/`,
     ...expansion.metros.flatMap((metro) => [
       ...metro.services.map((service) => `/locations/${expansion.stateSlug}/${metro.slug}/${service.serviceSlug}/`),
     ]),
   ]);
-  for (const route of batch2SitemapRoutes) {
+  for (const route of researchedSitemapRoutes) {
     const marker = `<loc>${SITE}${route}</loc>`;
     const occurrenceCount = generatedLocationsSitemap.split(marker).length - 1;
     if (occurrenceCount !== 1) {
-      throw new Error(`SEO assertion failed: Batch2 route must appear once in sitemap-locations.xml: ${route} (${occurrenceCount})`);
+      throw new Error(`SEO assertion failed: researched expansion route must appear once in sitemap-locations.xml: ${route} (${occurrenceCount})`);
     }
   }
   for (const cityPage of CALIFORNIA_ADU_CITY_RECORDS) {
