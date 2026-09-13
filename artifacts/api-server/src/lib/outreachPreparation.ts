@@ -91,6 +91,15 @@ export function isPublicInbox(
   return isEvidenceBackedPublicInbox(email, contactName, evidenceType);
 }
 
+export function getPreparationPersonalizationName(
+  prospect: Pick<Prospect, "companyName" | "contactEmail" | "contactName" | "contactEvidenceType">,
+): string {
+  if (isPublicInbox(prospect.contactEmail, prospect.contactName, prospect.contactEvidenceType)) {
+    return prospect.contactName?.trim() || prospect.companyName;
+  }
+  return prospect.contactName ?? "";
+}
+
 export function companyDomain(candidate: Pick<PreparationCandidate, "companyName" | "website">): string {
   if (candidate.website?.trim()) {
     try {
@@ -704,12 +713,13 @@ export async function prepareNextPhoenixOutreach(
           }
           catchUpCohortId = catchUpCohort.id;
         }
+        const personalizationName = getPreparationPersonalizationName(currentProspect);
         const [message] = await tx.insert(outreachMessagesTable).values({
           prospectId: prospect.id,
           campaignId: campaignsByProspect.get(prospect.id)!,
           sequenceNumber: 1,
           subject: approvedOutreachSubject(),
-          body: approvedOutreachBody(prospect.contactName!),
+          body: approvedOutreachBody(personalizationName),
           status: "approved",
           scheduledAt,
           catchUpCohortId,
@@ -721,7 +731,7 @@ export async function prepareNextPhoenixOutreach(
           }).onConflictDoNothing();
         }
         await tx.insert(outreachMessagesTable).values(
-          approvedOutreachFollowUpMessages(prospect.contactName!).map((followUp) => ({
+          approvedOutreachFollowUpMessages(personalizationName).map((followUp) => ({
             prospectId: prospect.id,
             campaignId: campaignsByProspect.get(prospect.id)!,
             sequenceNumber: followUp.sequenceNumber,

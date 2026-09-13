@@ -4,6 +4,7 @@ import {
   getNextPhoenixPreparationTarget,
   getPreparationShortfall,
   getPreparationRemainingCapacity,
+  getPreparationPersonalizationName,
   getLaneShortfalls,
   isPhoenixPreparationWindowOpen,
   isPreparationRunStale,
@@ -40,6 +41,21 @@ test("personal contacts are prioritized before public inboxes within a state", (
     { id: 2, companyName: "Personal Co", website: "https://personal.example", contactEmail: "alex@personal.example", contactName: "Alex Rivera", state: "AZ", fitScore: 60, needScore: 60 },
   ]);
   assert.deepEqual(ordered.map((candidate) => candidate.id), [2, 1]);
+});
+
+test("public inbox preparation falls back to the company name without changing named personalization", () => {
+  assert.equal(getPreparationPersonalizationName({
+    companyName: "Public Company",
+    contactEmail: "info@public.example",
+    contactName: null,
+    contactEvidenceType: "official_publication",
+  }), "Public Company");
+  assert.equal(getPreparationPersonalizationName({
+    companyName: "Named Company",
+    contactEmail: "alex@named.example",
+    contactName: "Alex Rivera",
+    contactEvidenceType: "findymail_verified",
+  }), "Alex Rivera");
 });
 
 test("preparation reserves 100 Named and 100 Public regular slots and de-dupes identities", () => {
