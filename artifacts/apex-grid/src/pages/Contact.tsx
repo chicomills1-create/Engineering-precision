@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { usePageMeta, useJsonLd } from "@/lib/seo";
 import { APEX_GRID_BUSINESS_SCHEMA } from "@/lib/business-schema";
+import { LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "@/lib/licensing";
 import { Check, FileText, Loader2, Upload, X } from "lucide-react";
 
 const ACCEPTED_TYPES = ".pdf,.dwg,.dxf,.rvt,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.jpg,.jpeg,.png,.tif,.tiff";
@@ -482,7 +483,7 @@ export default function Contact() {
                         <span>Houston, TX</span>
                       </li>
                     </ul>
-                    <p className="text-xs text-muted-foreground mt-3">Service availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified.</p>
+                    <p className="text-xs text-muted-foreground mt-3">{LICENSING_COVERAGE_STATEMENT} {PROJECT_JURISDICTION_NOTE}</p>
                   </div>
 
                   <div className="pt-8 border-t border-border">

@@ -6,6 +6,8 @@ import project2 from "@assets/generated_images/project-2.webp";
 import project3 from "@assets/generated_images/project-3.webp";
 import { useJsonLd, usePageMeta } from "@/lib/seo";
 import { APEX_GRID_BUSINESS_SCHEMA } from "@/lib/business-schema";
+import { LicensingCoverage } from "@/components/LicensingCoverage";
+import { LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "@/lib/licensing";
 import { MotionConfig, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 const staggerContainer = {
@@ -31,7 +33,7 @@ export default function Home() {
   const opacityHeroText = useTransform(scrollY, [0, 600], [1, 0]);
 
   const stats = [
-    { label: "Licensing coverage", value: "Licensure confirmed for each project jurisdiction" },
+    { label: "Licensing coverage", value: "Licensed in 49 states" },
     { label: "Typical quote turnaround", value: "12–24h" },
     { label: "Integrated divisions", value: "3" },
     { label: "PE-led project work", value: "100%" }
@@ -60,7 +62,7 @@ export default function Home() {
       icon: Building2,
       href: "/for-developers",
       headline: "De-Risk the Deal",
-      description: "Due-diligence assessments, feasibility engineering, and consistent execution across your multi-state, project-specific portfolio.",
+      description: `Due-diligence assessments, feasibility engineering, and consistent execution across your portfolio. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
     },
     {
       id: "property-managers",
@@ -203,6 +205,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <LicensingCoverage />
 
       {/* Audiences Routing */}
       <section className="py-24 md:py-32 bg-background relative border-b border-border">

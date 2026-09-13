@@ -3,6 +3,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { useState, useEffect, useRef } from "react";
 import { FEATURED_INDUSTRIES } from "@/data/industries";
+import { LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "@/lib/licensing";
 
 export function Shell({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -296,6 +297,9 @@ export function Shell({ children }: { children: React.ReactNode }) {
               </Link>
               <p className="text-muted-foreground text-sm max-w-sm mb-8 leading-relaxed">
                 De-risking projects from concept to permit. Integrated Architecture, MEP, Structural, and Civil design backed by licensed professionals.
+              </p>
+              <p className="text-muted-foreground text-sm max-w-sm mb-8 leading-relaxed">
+                {LICENSING_COVERAGE_STATEMENT} {PROJECT_JURISDICTION_NOTE}
               </p>
               <a href="mailto:info@apexgrideng.com" className="inline-flex h-12 px-6 bg-secondary text-foreground font-semibold text-sm items-center justify-center rounded-sm hover:bg-white/10 transition-colors focus-visible:ring-2 focus-visible:ring-primary">
                 info@apexgrideng.com

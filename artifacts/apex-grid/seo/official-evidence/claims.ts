@@ -207,7 +207,7 @@ export function getPublishableArizonaIdentity(asOf = new Date()) {
 }
 
 export const LICENSING_CLAIM =
-  "Apex Grid is a multi-state engineering team. Service availability and stamping are confirmed per project only after the responsible individual license, firm authorization, discipline, and authority-having-jurisdiction requirements are verified.";
+  "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction.";
 
 export const EVIDENCE_LIMITATION =
   "Official sources explain regulator and process requirements; no matching ACC entity detail or Arizona BTR business/responsible-professional record was captured for Apex Grid. The review therefore does not independently verify a legal entity name, entity ID or status, relevant filings, Arizona firm registration, named-license mapping, street address, phone, coordinates, claimed state count, architect credentials, SDVOSB certification, or SAM.gov registration.";

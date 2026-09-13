@@ -16,10 +16,11 @@ import {
   PenTool,
   ArrowRight,
 } from "lucide-react";
+import { LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "@/lib/licensing";
 
 const STATS = [
   { value: "Multi-discipline", label: "Engineering Team" },
-  { value: "Multi-state", label: "Coverage Verified Per Project" },
+  { value: LICENSING_COVERAGE_STATEMENT, label: PROJECT_JURISDICTION_NOTE },
   { value: "4", label: "Core Disciplines Coordinated" },
   { value: "12-24hr", label: "Typical Quote Turnaround" },
 ];
@@ -344,7 +345,7 @@ export default function Team() {
             Put the Team on Your Project
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-            Send us your scope and get a clear proposal fast — deliverables, timeline, and fee. Any size job, multi-state, with project availability confirmed after individual license, firm authorization, discipline, and AHJ requirements are verified.
+            Send us your scope and get a clear proposal fast — deliverables, timeline, and fee. Any size job across our coverage area. {LICENSING_COVERAGE_STATEMENT} {PROJECT_JURISDICTION_NOTE}
           </p>
           <Link
             href="/contact"

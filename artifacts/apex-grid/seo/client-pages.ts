@@ -1,5 +1,7 @@
 /** Who We Work With — client and partner audience pages. */
 
+import { LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "../src/lib/licensing";
+
 export interface ClientPage {
   slug: string;
   title: string;
@@ -339,8 +341,8 @@ export const CLIENT_PAGES: ClientPage[] = [
         body: "Multi-site clients benefit from engineering that applies consistent standards — the same structural system preferences, the same MEP equipment selections, the same drawing standards — across every location. This reduces construction variability, simplifies bidding, and makes operations more predictable.",
       },
       {
-        heading: "National Licensure — multi-state coverage, subject to project-specific credential verification",
-        body: "We hold PE licensure in multi-state coverage, subject to project-specific credential verification, which means a national portfolio client can work with a single engineering firm regardless of where individual sites are located. No need to find a new local engineer for every market.",
+        heading: "Licensed in 49 states",
+        body: `${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} A national portfolio client can work with a single engineering firm regardless of where individual sites are located. No need to find a new local engineer for every market.`,
       },
       {
         heading: "Retail and Restaurant Chains",

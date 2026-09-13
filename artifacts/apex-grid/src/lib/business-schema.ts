@@ -1,4 +1,5 @@
 import { getPublishableArizonaIdentity } from "../../seo/official-evidence/claims";
+import { LICENSED_STATES, LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "./licensing";
 
 export const APEX_GRID_SITE_URL = "https://apexgrideng.com";
 
@@ -7,9 +8,7 @@ const verifiedCorporation = verifiedArizonaIdentity.corporationCommission;
 const verifiedBtr = verifiedArizonaIdentity.boardOfTechnicalRegistration;
 
 const serviceAreas = [
-  { "@type": "State", name: "Arizona" },
-  { "@type": "State", name: "California" },
-  { "@type": "State", name: "New Mexico" },
+  ...LICENSED_STATES.map((name) => ({ "@type": "State" as const, name })),
   { "@type": "City", name: "Phoenix, Arizona" },
   { "@type": "City", name: "Scottsdale, Arizona" },
   { "@type": "City", name: "Mesa, Arizona" },
@@ -72,7 +71,7 @@ export const APEX_GRID_BUSINESS_SCHEMA = {
   url: `${APEX_GRID_SITE_URL}/`,
   logo: `${APEX_GRID_SITE_URL}/favicon.svg`,
   description:
-    "Multi-discipline professional engineering firm providing project-specific structural, MEP, civil, geotechnical, building-assessment, energy-compliance, and municipal plan-check support. areaServed describes service availability and request coverage, not local offices or guaranteed licensure.",
+    `${LICENSING_COVERAGE_STATEMENT} Multi-discipline structural, MEP, civil, geotechnical, building-assessment, energy-compliance, and municipal plan-check support.`,
   email: "info@apexgrideng.com",
   priceRange: "$$",
   currenciesAccepted: "USD",
@@ -81,7 +80,7 @@ export const APEX_GRID_BUSINESS_SCHEMA = {
     {
       "@type": "PropertyValue",
       name: "Coverage basis",
-      value: "Service availability and request coverage; confirm individual license, firm authorization, discipline, and AHJ requirements per project.",
+      value: PROJECT_JURISDICTION_NOTE,
     },
     ...(verifiedBtr
       ? [

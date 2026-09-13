@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { ArrowRight, Download, Shield, Zap, Layers, HardHat, Building2, FileCheck, Award, Globe } from "lucide-react";
 import { useJsonLd, usePageMeta } from "@/lib/seo";
 import { APEX_GRID_BUSINESS_SCHEMA } from "@/lib/business-schema";
+import { LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "@/lib/licensing";
 
 export default function Capabilities() {
   usePageMeta(PAGE_META);
@@ -55,7 +56,7 @@ export default function Capabilities() {
                   The firm is led by Jeremy Mills, a U.S. Air Force veteran who served in Aerospace Medical Service and deployed to Iraq in support of Operation Iraqi Freedom. That service background defines how the firm operates: documented processes, zero tolerance for "close enough," and drawings that survive the full government QA cycle.
                 </p>
                 <p>
-                  Apex Grid works as a multi-state team. Project availability and any stamped scope are confirmed only after the responsible individual license, firm authorization, discipline, and AHJ requirements are verified. Our work includes municipal plan-check navigation and California Title 24 coordination where applicable.
+                  {LICENSING_COVERAGE_STATEMENT} {PROJECT_JURISDICTION_NOTE} Our work includes municipal plan-check navigation and California Title 24 coordination where applicable.
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-px bg-border">
@@ -327,7 +328,7 @@ export default function Capabilities() {
 }
 
 const SNAPSHOT = [
-  { label: "Coverage", value: "Multi-state" },
+  { label: "Coverage", value: "Licensed in 49 states" },
   { label: "Years of Experience", value: "15+" },
   { label: "Core Disciplines", value: "4" },
   { label: "Quote Turnaround", value: "12–24hr" },

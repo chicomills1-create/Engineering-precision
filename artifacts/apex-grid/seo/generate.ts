@@ -54,6 +54,11 @@ import { RESOURCE_ARTICLES, RESOURCE_DISCIPLINES, disciplineOf, resourceUrl, typ
 import { GLOSSARY_TERMS, sortedGlossaryTerms, glossaryByLetter, relatedGlossaryTerms, type GlossaryTerm } from "./glossary";
 import { APEX_GRID_BUSINESS_SCHEMA } from "../src/lib/business-schema";
 import {
+  LICENSED_STATES_TEXT,
+  LICENSING_COVERAGE_STATEMENT,
+  PROJECT_JURISDICTION_NOTE,
+} from "../src/lib/licensing";
+import {
   ENGINEERING_INTENT_PAGES,
   NEAR_ME_ENGINEERING_PAGE,
   type EngineeringIntentPage,
@@ -140,7 +145,7 @@ const PUBLIC = path.resolve(__dirname, "../public");
 const OUT = path.join(PUBLIC, "locations");
 
 /** States where Apex Grid is NOT licensed — no pages are generated for these
- * (the site markets "with multi-state PE coverage confirmed per project"; claiming licensed services in an
+ * (the site publishes its reviewed licensing coverage; claiming licensed services in an
  * unlicensed state would be a misrepresentation). */
 const UNLICENSED_STATES = new Set(["alaska"]);
 
@@ -1036,12 +1041,16 @@ ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
   <p class="kicker">Verified Service Areas</p>
   <h1>Service <span class="dim">Areas</span></h1>
-  <p class="lede">Apex Grid publishes MEP, structural, civil, and energy-compliance guidance for multiple jurisdictions. Service availability is not inferred from a location page: before accepting a project, we verify the responsible individual's current license, firm authorization, discipline, and AHJ requirements.</p>
+  <p class="lede">${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}</p>
+</div></section>
+<section class="block"><div class="container">
+  <h2>Complete <em>Licensing Coverage</em></h2>
+  <p>${LICENSED_STATES_TEXT}.</p>
 </div></section>
 <section class="block"><div class="container">
   <h2>One Organization, <em>Three Divisions</em></h2>
   <div class="grid3">
-    <a class="card" href="/locations/"><div class="label">Engineering</div><h3>Engineering Service Areas</h3><p>MEP, structural, civil, and energy-code services with project-specific multi-state coverage confirmed.</p></a>
+    <a class="card" href="/locations/"><div class="label">Engineering</div><h3>Engineering Service Areas</h3><p>${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}</p></a>
     <a class="card" href="/architecture/locations/"><div class="label">Architecture</div><h3>Architectural Design Locations</h3><p>City and state pages where supplied architect credentials support regulated design services.</p></a>
     <a class="card" href="/general-contracting/locations/"><div class="label">PCM Construction Delivery</div><h3>General Contracting Locations</h3><p>Commercial construction service areas backed by PCM's supplied contractor licenses.</p></a>
     <a class="card" href="/engineering-intent/engineering-near-me/"><div class="label">Project Intake</div><h3>Commercial Engineering Firm Near Me</h3><p>Understand search location, remote plan production, site visits, and jurisdiction review before requesting support.</p></a>
@@ -1074,9 +1083,9 @@ ${breadcrumb(crumbs)}
 </div></section>`;
 
   return htmlShell({
-    title: "Service Areas | Engineering Services in Multiple Jurisdictions | Apex Grid",
+    title: "Licensed in 49 states | Engineering Service Areas | Apex Grid",
     description:
-      "Apex Grid Engineering provides multi-state MEP, structural, civil, and energy-code support. Project availability and required professional credentials are verified for the exact jurisdiction and scope.",
+      `${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
     canonical: `${SITE}/locations/`,
     schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
     body,
@@ -1323,7 +1332,7 @@ ${post.faqs?.length ? `<section class="block"><div class="container faq">
   <h2>Have a Project in Mind?</h2>
   <p>${post.tag === "South Africa"
     ? "Planning a South Africa opportunity? We can help define the cross-border brief and identify the local registrations and partnerships that must be verified."
-    : "Architectural, MEP, structural, and civil design under one roof — with multi-state PE coverage confirmed per project, with fast quote turnaround."}</p>
+    : `${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`}</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
   return htmlShell({
@@ -1440,7 +1449,7 @@ ${d.sections
   <div class="linkrow" style="margin-bottom:16px">${others
     .map((o) => `<a href="/${o.slug}/">${esc(o.name)}</a>`)
     .join("")}</div>
-  <div class="linkrow"><a href="/services">All Services</a><a href="/locations/">Service Areas (Coverage Confirmed Per Project)</a><a href="/blog/">Engineering Blog</a><a href="/portfolio">Portfolio</a></div>
+  <div class="linkrow"><a href="/services">All Services</a><a href="/locations/">Engineering Service Areas</a><a href="/blog/">Engineering Blog</a><a href="/portfolio">Portfolio</a></div>
 </div></section>
 
 <section class="ctaband"><div class="container">
@@ -1867,7 +1876,7 @@ ${breadcrumb(crumbs)}
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Ready to Start Your Project?</h2>
-  <p>Licensed structural, MEP, civil, and geotechnical engineering in multiple jurisdictions — with fast quote turnaround.</p>
+  <p>${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
   return htmlShell({
@@ -1913,7 +1922,7 @@ ${RESOURCE_DISCIPLINES.map((disc) => {
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Ready to Start Your Project?</h2>
-  <p>Licensed structural, MEP, civil, and geotechnical engineering in multiple jurisdictions — with fast quote turnaround.</p>
+  <p>${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
   return htmlShell({
@@ -2168,7 +2177,7 @@ ${contextualInbound}
 </div></section>
 <section class="ctaband"><div class="container">
   <h2>Start Your Project</h2>
-  <p>Licensed structural, MEP, civil, and geotechnical engineering in multiple jurisdictions — with fast quote turnaround. Send us your scope and get a clear proposal.</p>
+  <p>${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} Send us your scope and get a clear proposal.</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
   return htmlShell({
@@ -2577,7 +2586,7 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
-        <p>Apex Grid Engineering is a multi-discipline engineering firm with multi-state PE coverage confirmed per project and a business-provided operating and contact address in Queen Creek, Arizona. We provide structural, MEP, civil, and geotechnical engineering for commercial, industrial, multifamily, and government clients — with 15+ years of experience and a multi-discipline engineering team on staff.</p>
+        <p>${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} We provide structural, MEP, civil, and geotechnical engineering for commercial, industrial, multifamily, and government clients.</p>
         <p>We work from architectural PDFs, CAD files, or field measurements, and we're set up to turn projects around on compressed schedules when the situation calls for it.</p>
 ${relatedLinks ? `        <p>Related services in ${esc(page.cityName)}: ${relatedLinks}</p>` : ""}
       </div>
@@ -2677,7 +2686,7 @@ function solutionPage(page: SolutionPage): string {
     <section class="section section--light">
       <div class="container container--narrow">
         <h2>How Apex Grid Handles This</h2>
-        <p>Apex Grid Engineering is a multi-discipline firm with multi-state PE coverage confirmed per project — we engineer ${esc(page.category.toLowerCase())} scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package. Our engineers have direct experience with this type of work across commercial, industrial, multifamily, government, and military projects.</p>
+        <p>${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} We engineer ${esc(page.category.toLowerCase())} scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package.</p>
         <p>We work from architectural PDFs, contractor sketches, or existing CAD files and produce stamped engineering documents, permit drawings, and calculations that building departments accept the first time.</p>
         <h3>Get Started</h3>
         <p>Send us a brief description of your project or attach your drawings. We'll review the scope and respond with a proposal within one business day.</p>
@@ -2799,7 +2808,7 @@ function governmentHubPage(): string {
 
     <section class="section section--dark cta-band">
       <div class="container">
-        <h2>Multi-State Team. Ready for Federal Work.</h2>
+        <h2>Licensed Reach. Ready for Federal Work.</h2>
         <p>Apex Grid Engineering provides multi-discipline support for federal work. Confirm current professional credentials, SAM.gov registration, SBA certification, and solicitation-specific eligibility from official records before procurement use.</p>
         <a class="btn btn--primary" href="/contact/">Start a Conversation</a>
       </div>
@@ -2974,7 +2983,7 @@ function structuralExtendedPage(page: StructuralExtendedPage): string {
     <section class="section section--light">
       <div class="container container--narrow">
         <h2>Why Work With Apex Grid</h2>
-        <p>Apex Grid Engineering is a multi-discipline firm with multi-state PE coverage confirmed per project and a business-provided operating and contact address in Queen Creek, Arizona. We provide ${esc(page.h1.toLowerCase())} as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract. Our engineers produce PE-stamped permit packages and respond to plan check comments as part of the scope.</p>
+        <p>${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} We provide ${esc(page.h1.toLowerCase())} as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract.</p>
         <a class="btn btn--primary" href="/contact/">${esc(page.ctaText)}</a>
       </div>
     </section>
@@ -3425,7 +3434,7 @@ ${extendedStructuralCards}
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
-        <p>Apex Grid Engineering is a multi-discipline firm with multi-state PE coverage confirmed per project, a business-provided operating and contact address in Queen Creek, Arizona, and a multi-discipline engineering team across structural, MEP, civil, and geotechnical disciplines. We provide ${esc(hub.h1.toLowerCase())} as a standalone service or as part of a coordinated multi-discipline package.</p>
+        <p>${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} We provide ${esc(hub.h1.toLowerCase())} as a standalone service or as part of a coordinated multi-discipline package.</p>
         <p>We work from architectural PDFs, contractor sketches, or existing CAD files and produce stamped engineering documents and permit packages that building departments accept. One business day turnaround on fee proposals.</p>
         <a class="btn btn--primary" href="/contact/">Get a Proposal</a>
       </div>
@@ -3503,7 +3512,7 @@ function disciplineSubpagePage(hub: DisciplineHub, sp: DisciplineSubpage): strin
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>How Apex Grid Handles This</h2>
-        <p>Apex Grid Engineering is a multi-discipline firm with multi-state PE coverage confirmed per project. We provide ${esc(sp.h1.toLowerCase())} as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract. Our engineers produce PE-stamped permit packages that building departments accept — and we respond to plan check comments as part of the scope.</p>
+        <p>${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} We provide ${esc(sp.h1.toLowerCase())} as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract.</p>
         <a class="btn btn--primary" href="/contact/">Send Your Project Details</a>
       </div>
     </section>
@@ -5133,7 +5142,7 @@ ${relatedTermLinks ? `<section class="block"><div class="container">
 
 <section class="ctaband"><div class="container">
   <h2>Have a Project That Involves ${esc(term.term)}?</h2>
-  <p>Apex Grid's licensed PEs provide ${esc(categoryLabel.toLowerCase())} services across multiple jurisdictions — with fast quote turnaround and permit-ready documents.</p>
+  <p>${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}</p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
 

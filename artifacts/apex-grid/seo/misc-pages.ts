@@ -1,6 +1,7 @@
 /** Standalone static SEO pages — capabilities, government contracting, trust pages.
  *  Each renders as a single static HTML file at its canonical URL.
  */
+import { LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "../src/lib/licensing";
 
 export interface MiscPage {
   slug: string;           // URL: /{slug}/
@@ -19,7 +20,7 @@ export const MISC_PAGES: MiscPage[] = [
   {
     slug: "capabilities",
     title: "Engineering Capabilities | Apex Grid Engineering",
-    description: "Apex Grid Engineering capabilities statement — structural, MEP, civil, and geotechnical engineering for commercial, industrial, multifamily, and government projects. Multi-state PE coverage confirmed per project.",
+    description: `Apex Grid Engineering capabilities statement — structural, MEP, civil, and geotechnical engineering for commercial, industrial, multifamily, and government projects. ${LICENSING_COVERAGE_STATEMENT}`,
     h1: "Engineering Capabilities",
     kicker: "Capabilities",
     lede: "Apex Grid Engineering is a multi-discipline engineering team providing structural, mechanical, electrical, plumbing, civil, and geotechnical support for commercial, industrial, multifamily, and government clients. Project availability, stamping, professional credentials, and procurement classifications are confirmed from current official records for each scope.",
@@ -40,7 +41,7 @@ export const MISC_PAGES: MiscPage[] = [
         heading: "Firm Overview",
         content: "Apex Grid Engineering uses a business-provided operating and contact address in Queen Creek, Arizona; it is not presented as a regulator-verified headquarters, statutory-agent address, or official mailing address.",
         bullets: [
-          "Multi-state PE coverage confirmed per project — one firm for multi-market clients",
+          `${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
           "15+ years of combined engineering experience",
           "multi-discipline engineering team on staff",
           "Veteran ownership is business-provided; current SBA VetCert status must be confirmed in the official registry",
@@ -160,7 +161,7 @@ export const MISC_PAGES: MiscPage[] = [
           "Engineering subconsultant for AE firms pursuing government design contracts",
           "Engineering subcontractor for general contractors on government construction",
           "Teaming support subject to current official certification and solicitation requirements",
-          "National coverage — multi-state team; project availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified for multi-installation contracts",
+          `${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
           "Fast onboarding for active government contract pursuit",
           "Teaming agreement execution and technical proposal support",
         ],

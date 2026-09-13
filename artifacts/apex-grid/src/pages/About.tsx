@@ -5,6 +5,8 @@ import officeImg from "@assets/generated_images/office.webp";
 import jeremyImg from "@assets/generated_images/jeremy-mills.webp";
 import jasonLuhnImg from "@assets/generated_images/jason-luhn.webp";
 import angelImg from "@assets/file_00000000b85c8230ad55cc8b03100eea_1788058580363.png";
+import { LicensingCoverage } from "@/components/LicensingCoverage";
+import { LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "@/lib/licensing";
 
 export default function About() {
   usePageMeta(PAGE_META);
@@ -48,7 +50,7 @@ export default function About() {
                 As an integrated design firm—housing Structural, MEP, Civil, and Architectural services under one roof—we eliminate the friction of coordinating between disconnected consultants. Through Phoenix Construction &amp; Management (PCM), our construction delivery branch also carries that coordination into pre-construction and field execution.
               </p>
               <p>
-                We are not an outsourced drafting service. With a multi-discipline Professional Engineer team, every project is engineered domestically and stamping is confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified — and we're built to take on jobs of any size, with fast quote turnaround on every request.
+                We are not an outsourced drafting service. {LICENSING_COVERAGE_STATEMENT} {PROJECT_JURISDICTION_NOTE}
               </p>
             </div>
             
@@ -56,8 +58,8 @@ export default function About() {
               <h3 className="font-display font-bold text-2xl mb-8">By The Numbers</h3>
               <div className="grid grid-cols-2 gap-8">
                 <div>
-                  <div className="text-5xl font-display font-bold text-primary mb-2">Multi-state</div>
-                  <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Coverage Verified Per Project</div>
+                  <div className="text-5xl font-display font-bold text-primary mb-2">Licensed in 49 states</div>
+                  <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Every State Except Alaska</div>
                 </div>
                 <div>
                   <div className="text-5xl font-display font-bold text-primary mb-2">12-24hr</div>
@@ -76,6 +78,8 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      <LicensingCoverage />
 
       <section className="py-24 bg-background border-y border-border">
         <div className="container mx-auto px-4 md:px-8">
@@ -118,8 +122,7 @@ export default function About() {
                 Nationwide Agility, Regional Mastery
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                A multi-state team with project availability confirmed after individual license, firm authorization, discipline, and AHJ requirements are verified, delivering broad reach with deep municipal
-                expertise.
+                {LICENSING_COVERAGE_STATEMENT} {PROJECT_JURISDICTION_NOTE}
               </p>
             </div>
           </div>
@@ -284,7 +287,7 @@ export default function About() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-display font-bold mb-4">Procurement &amp; Government Clients</h2>
           <p className="text-muted-foreground max-w-xl mx-auto mb-8">
-            Contracting officers and prime contractors can review our full capabilities reference — disciplines, NAICS codes, multi-state, project-specific PE licensure, and downloadable capabilities statement.
+            Contracting officers and prime contractors can review our full capabilities reference — disciplines, NAICS codes, licensing coverage, and downloadable capabilities statement.
           </p>
           <Link
             href="/capabilities"

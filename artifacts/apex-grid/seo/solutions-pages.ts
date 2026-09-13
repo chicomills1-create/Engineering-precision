@@ -1976,7 +1976,7 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Preferred pricing structures for ongoing project volume",
       "Consistent engineering team assigned to partner account",
       "Engineering template development for prototype projects",
-      "National coverage for multi-market partners — multi-state team; project availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified",
+      "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction.",
       "Fast-start on new projects within existing relationship",
       "Portfolio rollout engineering for retail, restaurant, and franchise clients",
       "Government and military contractor ongoing engineering support",

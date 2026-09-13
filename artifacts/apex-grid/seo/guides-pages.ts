@@ -2,6 +2,8 @@
  *  Rendered at /guides/{slug}/
  */
 
+import { LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "../src/lib/licensing";
+
 export interface GuidePage {
   slug: string;
   title: string;
@@ -1348,7 +1350,7 @@ export const GUIDE_PAGES: GuidePage[] = [
           "Single proposal for all required disciplines — structural, MEP, civil, and geotechnical",
           "Coordinated engineering team with internal coordination meetings",
           "Unified permit package with coordinated drawing sets across disciplines",
-          "multi-state team; project availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified — one firm for national clients",
+          `${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} One firm for national clients`,
           "Business-provided postal contact in Queen Creek, AZ with national project delivery",
         ],
       },
@@ -1393,7 +1395,7 @@ export const GUIDE_PAGES: GuidePage[] = [
         points: [
           "Where a permit drawing requires a seal, the responsible professional's current license, firm authorization, discipline, and AHJ requirements are verified for the project jurisdiction",
           "Apex Grid evaluates structural, mechanical, electrical, plumbing, civil, and geotechnical scopes separately; credential availability is not inferred from a service page",
-          "Project availability and any stamping are confirmed per project after current individual license, firm authorization, discipline, and AHJ evidence is reviewed",
+          `${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
         ],
       },
     ],

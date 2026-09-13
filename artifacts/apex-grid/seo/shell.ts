@@ -1,6 +1,7 @@
 /** Shared HTML shell for statically generated SEO pages.
  * Mirrors the React app's red/black branding (Space Grotesk / Inter, HSL 0 0% 3% bg, red 0 72% 48%).
  */
+import { LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "../src/lib/licensing";
 
 const LOGO_SVG = `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;color:hsl(0 72% 48%)"><path d="M50 8L8 88h12l30-58 30 58h12L50 8z" fill="currentColor"/><path d="M50 40L30 78h8l12-24 12 24h8L50 40z" fill="currentColor" opacity="0.7"/><path d="M32 74h36v6H32z" fill="currentColor"/></svg>`;
 const PROJECT_YEAR = process.env.APEX_GRID_PROJECT_YEAR?.trim() || "2025";
@@ -92,6 +93,7 @@ function footer(): string {
     <div>
       <a class="brand" href="/" style="margin-bottom:18px">${LOGO_SVG}<span>APEX GRID</span></a>
        <p style="color:var(--muted);max-width:340px;margin-top:16px">Engineering, Architecture, and General Contracting under one organization—from concept and permit documents through construction delivery.</p>
+       <p style="color:var(--muted);max-width:340px;margin-top:12px">${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}</p>
     </div>
      <div><h4>Firm</h4><ul><li><a href="/about">About Us</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/resources">Resources</a></li><li><a href="/blog/">Blog</a></li><li><a href="/south-africa/">South Africa Insights</a></li><li><a href="/locations/">Service Areas</a></li><li><a href="/licensing-service-coverage/">Licensing &amp; Coverage</a></li><li><a href="/contact">Contact</a></li></ul></div>
     <div><h4>Services</h4><ul><li><a href="/services/mep">MEP Engineering</a></li><li><a href="/services/structural">Structural Design</a></li><li><a href="/services/civil">Civil Engineering</a></li><li><a href="/architecture/">Architectural Design</a></li><li><a href="/general-contracting/">General Contracting</a></li></ul></div>

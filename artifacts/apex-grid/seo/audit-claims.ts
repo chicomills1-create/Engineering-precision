@@ -6,6 +6,10 @@ import {
   evaluateArizonaIdentityReview,
   type ArizonaIdentityReview,
 } from "./official-evidence/claims";
+import {
+  LICENSED_STATES_TEXT,
+  LICENSING_COVERAGE_STATEMENT,
+} from "../src/lib/licensing";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const generalProhibited = [
@@ -64,6 +68,15 @@ const identityProhibited = [
 
 const prohibited = [...generalProhibited, ...identityProhibited];
 const EVIDENCE_GATE_MARKER = "claims-audit: evidence-gated";
+const AUTHORIZED_LICENSING_TEXT = [
+  LICENSING_COVERAGE_STATEMENT,
+  "Licensed in 49 states",
+  LICENSED_STATES_TEXT,
+] as const;
+
+function withoutAuthorizedLicensingText(text: string) {
+  return AUTHORIZED_LICENSING_TEXT.reduce((result, statement) => result.replaceAll(statement, ""), text);
+}
 
 const regressionClaims = [
   ["Apex Grid holds PE licenses across ", "49 U.S. states"].join(""),
@@ -104,6 +117,7 @@ const regressionClaims = [
   ["ACC-verified business address: ", "Queen Creek, Arizona."].join(""),
 ];
 const allowedStatements = [
+  LICENSING_COVERAGE_STATEMENT,
   "A PE must hold a current license in the applicable jurisdiction.",
   "NCARB explains how architect credentials and registration requirements vary by jurisdiction.",
   "A permit-ready package cannot guarantee approval because the AHJ makes the final decision.",
@@ -114,7 +128,7 @@ const allowedStatements = [
   "This contact address is not presented as a regulator-verified headquarters, statutory-agent address, or official mailing address.",
 ];
 for (const statement of allowedStatements) {
-  if (prohibited.some((pattern) => pattern.test(statement))) {
+  if (prohibited.some((pattern) => pattern.test(withoutAuthorizedLicensingText(statement)))) {
     throw new Error(`Claims audit allowed statement was falsely rejected: ${statement}`);
   }
 }
@@ -239,11 +253,11 @@ const checkedFiles = new Set<string>();
 function checkFile(full: string) {
   if (checkedFiles.has(full) || full === fileURLToPath(import.meta.url)) return;
   checkedFiles.add(full);
-  const text = fs
+  const text = withoutAuthorizedLicensingText(fs
     .readFileSync(full, "utf8")
     .split("\n")
     .filter((line) => !line.includes(EVIDENCE_GATE_MARKER))
-    .join("\n");
+    .join("\n"));
   for (const pattern of prohibited) {
     if (pattern.test(text)) failures.push(`${path.relative(root, full)}: ${pattern}`);
   }

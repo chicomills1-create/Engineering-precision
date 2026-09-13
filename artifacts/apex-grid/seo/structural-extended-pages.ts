@@ -20,7 +20,7 @@ export const STRUCTURAL_EXTENDED_PAGES: StructuralExtendedPage[] = [
     slug: "seismic-retrofit",
     title: "Seismic Retrofit Engineering | Existing Buildings | Apex Grid",
     description:
-      "Seismic retrofit structural engineering for existing commercial, multifamily, and public buildings. PE-stamped strengthening plans in multi-state coverage, subject to project-specific credential verification.",
+      "Seismic retrofit structural engineering for existing commercial, multifamily, and public buildings. Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction.",
     h1: "Seismic Retrofit Engineering for Existing Buildings",
     kicker: "Structural Engineering",
     lede:

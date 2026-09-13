@@ -1,5 +1,6 @@
 import type { CityData, StateData } from "./types";
 import { htmlShell, SITE } from "./shell";
+import { LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "../src/lib/licensing";
 
 export interface DirectoryCity {
   slug: string;
@@ -476,7 +477,7 @@ ${breadcrumb(crumbs)}
 <section class="block"><div class="container">
   <h2>One Organization, <em>Three Connected Divisions</em></h2>
   <div class="grid3">
-    <a class="card" href="/locations/"><div class="label">Engineering</div><h3>Engineering Service Areas</h3><p>MEP, structural, civil, and energy-code services across multi-state service availability, confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified.</p></a>
+    <a class="card" href="/locations/"><div class="label">Engineering</div><h3>Engineering Service Areas</h3><p>${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}</p></a>
     <a class="card" href="/architecture/locations/"><div class="label">Architecture</div><h3>Architectural Design Service Areas</h3><p>Planning, design, permit documents, and direct engineering coordination.</p></a>
     <a class="card" href="/general-contracting/locations/"><div class="label">PCM Construction Delivery</div><h3>General Contracting Service Areas</h3><p>Pre-construction, construction management, and commercial field delivery.</p></a>
   </div>

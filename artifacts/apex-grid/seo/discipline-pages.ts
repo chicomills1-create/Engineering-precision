@@ -3,6 +3,8 @@
  *  Subpage URLs: /{discipline.slug}/{subpage.slug}/
  */
 
+import { LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "../src/lib/licensing";
+
 export interface DisciplineSubpage {
   slug: string;
   title: string;
@@ -33,11 +35,11 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
   {
     slug: "structural-engineering",
     title: "Structural Engineering Services | Apex Grid Engineering",
-    description: "Licensed structural engineering for commercial, industrial, multifamily, and government projects — calculations, permit drawings, inspections, and seismic design from engineers multi-state team; project availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified.",
+    description: `Licensed structural engineering for commercial, industrial, multifamily, and government projects — calculations, permit drawings, inspections, and seismic design from engineers. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
     h1: "Structural Engineering",
     kicker: "Structural Engineering",
     lede: "Apex Grid Engineering provides structural engineering across every building type — commercial, industrial, multifamily, government, and military. Our structural engineers design the systems that hold buildings up, analyze existing structures for modifications and repairs, and produce the stamped calculations and drawings that building departments require.",
-    intro: "Structural engineering is the technical discipline responsible for designing and evaluating the load-carrying systems of buildings and structures — the framing, connections, foundations, and lateral force-resisting elements that keep buildings safe under gravity, seismic, and wind loads. Apex Grid structural engineers work on new construction, tenant improvements, building modifications, existing-building evaluations, and repair design across commercial, industrial, multifamily, and government project types. We are multi-state team; project availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified and maintain structural engineers on staff with experience in steel, concrete, wood, and masonry structural systems.",
+    intro: `Structural engineering is the technical discipline responsible for designing and evaluating the load-carrying systems of buildings and structures — the framing, connections, foundations, and lateral force-resisting elements that keep buildings safe under gravity, seismic, and wind loads. Apex Grid structural engineers work on new construction, tenant improvements, building modifications, existing-building evaluations, and repair design across commercial, industrial, multifamily, and government project types. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} We maintain structural engineers on staff with experience in steel, concrete, wood, and masonry structural systems.`,
     capabilities: [
       "New construction structural system design — steel, concrete, wood, masonry",
       "Tenant improvement and building modification structural engineering",
@@ -56,7 +58,7 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
       {
         slug: "commercial",
         title: "Commercial Structural Engineering | Apex Grid Engineering",
-        description: "Structural engineering for commercial buildings — office, retail, restaurant, medical, mixed-use — new construction, tenant improvements, renovations, and modifications. multi-state team; project availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified.",
+        description: `Structural engineering for commercial buildings — office, retail, restaurant, medical, mixed-use — new construction, tenant improvements, renovations, and modifications. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
         h1: "Commercial Structural Engineering",
         kicker: "Structural Engineering · Commercial",
         lede: "Commercial structural engineering spans new construction, tenant improvements, building modifications, and existing-building evaluations across office, retail, restaurant, medical, and mixed-use building types. Apex Grid provides commercial structural engineering with a focus on permit-ready deliverables, efficient turnaround, and engineering that coordinates with your architectural team.",
@@ -439,7 +441,7 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
   {
     slug: "mep-engineering",
     title: "MEP Engineering Services | Apex Grid Engineering",
-    description: "Full MEP engineering — mechanical, electrical, and plumbing — for commercial, restaurant, medical, multifamily, and industrial projects. PE-stamped permit packages multi-state team; project availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified.",
+    description: `Full MEP engineering — mechanical, electrical, and plumbing — for commercial, restaurant, medical, multifamily, and industrial projects with PE-stamped permit packages. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
     h1: "MEP Engineering",
     kicker: "MEP Engineering",
     lede: "MEP engineering — mechanical, electrical, and plumbing — covers the systems that make buildings function: HVAC, power distribution, lighting, plumbing, gas, and exhaust. Apex Grid provides full MEP engineering as a coordinated multi-discipline package or as individual discipline services, producing PE-stamped permit drawings for commercial, restaurant, medical, industrial, and multifamily projects.",
@@ -455,14 +457,14 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
       "MEP coordination across all three disciplines simultaneously",
       "Restaurant, medical, lab, and industrial specialty MEP",
       "EV charging and solar electrical engineering",
-      "PE-stamped MEP permit packages in all multi-state service availability, confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified",
+      `PE-stamped MEP permit packages. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
       "Plan check comment response for MEP corrections",
     ],
     subpages: [
       {
         slug: "commercial",
         title: "Commercial MEP Engineering | Apex Grid Engineering",
-        description: "Full MEP engineering for commercial buildings — office, retail, restaurant, medical, and mixed-use. Mechanical, electrical, and plumbing permit packages multi-state team; project availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified.",
+        description: `Full MEP engineering for commercial buildings — office, retail, restaurant, medical, and mixed-use. Mechanical, electrical, and plumbing permit packages. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
         h1: "Commercial MEP Engineering",
         kicker: "MEP Engineering · Commercial",
         lede: "Commercial MEP engineering covers the mechanical, electrical, and plumbing systems for office buildings, retail spaces, restaurants, medical offices, and mixed-use commercial projects — new construction, tenant improvements, and renovations. Apex Grid delivers coordinated MEP permit packages across all three disciplines.",
@@ -654,7 +656,7 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
         description: "Complete MEP permit packages — mechanical, electrical, and plumbing drawings and calculations, PE-stamped and ready for building department submittal.",
         h1: "MEP Permit Packages",
         kicker: "MEP Engineering · Permit",
-        lede: "An MEP permit package is the complete set of stamped mechanical, electrical, and plumbing drawings and supporting documentation required for a building permit. Apex Grid assembles complete MEP permit packages coordinated across all three disciplines — organized, complete, and ready for building department submittal in all multi-state service availability, confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified.",
+        lede: `An MEP permit package is the complete set of stamped mechanical, electrical, and plumbing drawings and supporting documentation required for a building permit. Apex Grid assembles complete MEP permit packages coordinated across all three disciplines — organized, complete, and ready for building department submittal. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
         scope: [
           "Mechanical drawings — HVAC plans, schedules, and details",
           "Electrical drawings — one-line diagram, panel schedules, lighting plan",
@@ -710,7 +712,7 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
   {
     slug: "mechanical-engineering",
     title: "Mechanical Engineering Services | Apex Grid Engineering",
-    description: "Mechanical engineering for commercial, restaurant, medical, and industrial projects — HVAC design, kitchen exhaust, ventilation, and energy compliance. PE-stamped permits in multi-state coverage, subject to project-specific credential verification.",
+    description: `Mechanical engineering for commercial, restaurant, medical, and industrial projects — HVAC design, kitchen exhaust, ventilation, and energy compliance with PE-stamped permits. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
     h1: "Mechanical Engineering",
     kicker: "Mechanical Engineering",
     lede: "Mechanical engineering designs the systems that condition, ventilate, and exhaust air in commercial buildings — HVAC systems, kitchen exhaust and make-up air, industrial ventilation, specialty process systems, and energy code compliance. Apex Grid mechanical engineers produce PE-stamped permit drawings for commercial, restaurant, medical, industrial, and multifamily projects.",
@@ -980,11 +982,11 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
   {
     slug: "electrical-engineering",
     title: "Electrical Engineering Services | Apex Grid Engineering",
-    description: "Electrical engineering for commercial, industrial, multifamily, and government projects — service sizing, one-line diagrams, load studies, solar, EV charging, and PE-stamped permits in multi-state coverage, subject to project-specific credential verification.",
+    description: `Electrical engineering for commercial, industrial, multifamily, and government projects — service sizing, one-line diagrams, load studies, solar, EV charging, and PE-stamped permits. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
     h1: "Electrical Engineering",
     kicker: "Electrical Engineering",
     lede: "Electrical engineering designs the power distribution, lighting, emergency power, and specialty electrical systems for commercial buildings. Apex Grid electrical engineers produce PE-stamped permit drawings for commercial, industrial, multifamily, and government projects — from electrical service sizing and one-line diagrams through solar interconnection, EV charging, and emergency power design.",
-    intro: "Commercial electrical engineering covers the design of power distribution systems — from the utility service entrance through the main switchgear, distribution panels, branch circuits, and end-use equipment. It also encompasses specialty systems: emergency generators, battery storage, solar PV interconnection, EV charging, arc flash analysis, and low-voltage systems. Apex Grid electrical engineers are multi-state team; project availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified and provide complete electrical permit packages coordinated with mechanical and plumbing engineering.",
+    intro: `Commercial electrical engineering covers the design of power distribution systems — from the utility service entrance through the main switchgear, distribution panels, branch circuits, and end-use equipment. It also encompasses specialty systems: emergency generators, battery storage, solar PV interconnection, EV charging, arc flash analysis, and low-voltage systems. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} Apex Grid electrical engineers provide complete electrical permit packages coordinated with mechanical and plumbing engineering.`,
     capabilities: [
       "Electrical service sizing and utility coordination",
       "One-line diagrams and panel schedule design",
@@ -996,7 +998,7 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
       "Arc flash analysis and labeling",
       "Lighting design and control system engineering",
       "Power distribution for industrial and data center facilities",
-      "PE-stamped electrical permit packages in multi-state coverage, subject to project-specific credential verification",
+      `PE-stamped electrical permit packages. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
       "Plan check response for electrical corrections",
     ],
     subpages: [
@@ -1251,7 +1253,7 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
   {
     slug: "plumbing-engineering",
     title: "Plumbing Engineering Services | Apex Grid Engineering",
-    description: "Plumbing engineering for commercial, restaurant, medical, and multifamily buildings — domestic water, sanitary, gas piping, grease interceptors, and PE-stamped permits in multi-state coverage, subject to project-specific credential verification.",
+    description: `Plumbing engineering for commercial, restaurant, medical, and multifamily buildings — domestic water, sanitary, gas piping, grease interceptors, and PE-stamped permits. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
     h1: "Plumbing Engineering",
     kicker: "Plumbing Engineering",
     lede: "Plumbing engineering designs the water, sanitary, and gas systems that supply and drain commercial buildings — from domestic water service sizing through fixture connections, sanitary drainage, grease interceptors, gas piping, and specialty systems for medical and laboratory facilities. Apex Grid plumbing engineers produce PE-stamped permit drawings for commercial, restaurant, medical, and multifamily projects.",
@@ -1266,7 +1268,7 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
       "Water heater and domestic hot water system engineering",
       "Plumbing fixture unit calculations",
       "Storm drainage and rainwater system design",
-      "PE-stamped plumbing permit packages in multi-state coverage, subject to project-specific credential verification",
+      `PE-stamped plumbing permit packages. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
     ],
     subpages: [
       {
@@ -1466,10 +1468,10 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
   {
     slug: "civil-engineering",
     title: "Civil Engineering Services | Apex Grid Engineering",
-    description: "Civil engineering for commercial sites — grading, drainage, parking, utilities, stormwater, and ADA improvements. PE-stamped civil permit drawings multi-state team; project availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified.",
+    description: `Civil engineering for commercial sites — grading, drainage, parking, utilities, stormwater, and ADA improvements with PE-stamped civil permit drawings. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
     h1: "Civil Engineering",
     kicker: "Civil Engineering",
-    lede: "Civil engineering designs the site improvements that connect commercial buildings to the surrounding infrastructure — grading, drainage, utilities, parking, driveways, stormwater management, and ADA accessibility. Apex Grid provides civil engineering for commercial, multifamily, industrial, and government site development projects, producing PE-stamped civil permit drawings multi-state team; project availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified.",
+    lede: `Civil engineering designs the site improvements that connect commercial buildings to the surrounding infrastructure — grading, drainage, utilities, parking, driveways, stormwater management, and ADA accessibility. Apex Grid provides civil engineering for commercial, multifamily, industrial, and government site development projects, producing PE-stamped civil permit drawings. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
     intro: "Civil engineering for building sites encompasses the technical disciplines that design what happens on and under the ground around a building: site grading to direct water away from the structure, drainage systems to manage storm runoff, utility connections to water, sewer, and storm infrastructure, parking and access improvements, and stormwater management to comply with environmental regulations. Apex Grid civil engineers work alongside structural and MEP engineers on commercial development projects, providing civil engineering as a standalone service or as part of a coordinated multi-discipline package.",
     capabilities: [
       "Commercial site grading and drainage engineering",
@@ -1482,7 +1484,7 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
       "Erosion control plan",
       "Traffic engineering — turn lanes, sight distance, access",
       "Land development civil engineering",
-      "PE-stamped civil permit drawings in all multi-state service availability, confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified",
+      `PE-stamped civil permit drawings. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
       "Civil plan check response support",
     ],
     subpages: [
@@ -1573,7 +1575,7 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
         description: "Stormwater management engineering for commercial sites — retention, detention, infiltration, and LID design to meet municipal, state, and federal stormwater requirements.",
         h1: "Stormwater Management Engineering",
         kicker: "Civil Engineering · Stormwater",
-        lede: "Stormwater management engineering controls the quantity and quality of runoff from commercial development — meeting regulatory requirements that prevent downstream flooding, erosion, and water quality degradation. Apex Grid engineers stormwater management systems for commercial sites across all multi-state service availability, confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified, designing systems that meet local municipal and state stormwater standards.",
+        lede: `Stormwater management engineering controls the quantity and quality of runoff from commercial development — meeting regulatory requirements that prevent downstream flooding, erosion, and water quality degradation. Apex Grid engineers stormwater management systems for commercial sites, ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} designing systems that meet local municipal and state stormwater standards.`,
         scope: [
           "Pre- and post-development hydrology analysis",
           "Stormwater retention basin design",
@@ -1737,7 +1739,7 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
   {
     slug: "geotechnical-engineering",
     title: "Geotechnical Engineering Services | Apex Grid Engineering",
-    description: "Geotechnical engineering and soil investigations for commercial, multifamily, and industrial projects — soil borings, foundation recommendations, and geotechnical reports. multi-state team; project availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified.",
+    description: `Geotechnical engineering and soil investigations for commercial, multifamily, and industrial projects — soil borings, foundation recommendations, and geotechnical reports. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
     h1: "Geotechnical Engineering",
     kicker: "Geotechnical Engineering",
     lede: "Geotechnical engineering investigates subsurface conditions — soil types, bearing capacity, groundwater, and expansive or problematic soil conditions — and translates those findings into foundation recommendations, earthwork specifications, and design parameters for structural and civil engineers. Apex Grid provides geotechnical engineering for commercial, multifamily, industrial, and government projects.",

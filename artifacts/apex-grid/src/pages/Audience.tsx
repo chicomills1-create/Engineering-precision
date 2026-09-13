@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { usePageMeta } from "@/lib/seo";
+import { LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "@/lib/licensing";
 
 export type AudienceKey = "architects" | "contractors" | "developers" | "property-managers";
 
@@ -27,7 +28,7 @@ const AUDIENCES: Record<AudienceKey, AudienceDef> = {
     meta: {
       title: "MEP & Structural Engineering for Architects | Apex Grid",
       description:
-        "A consulting engineering partner built for architects: coordinated MEP, structural, and civil design, clean Revit/CAD backgrounds, fast RFI turnaround, and permit-ready stamped documents in multi-state coverage, subject to project-specific credential verification.",
+        `A consulting engineering partner built for architects: coordinated MEP, structural, and civil design, clean Revit/CAD backgrounds, fast RFI turnaround, and permit-ready stamped documents. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
     },
     kicker: "For Architects",
     h1: ["An Engineering Partner That", "Protects Your Design Intent"],
@@ -38,13 +39,13 @@ const AUDIENCES: Record<AudienceKey, AudienceDef> = {
       { title: "Slow consultant turnaround", desc: "Waiting a week for a load letter or an RFI response stalls your whole document set. We commit to fast response times and communicate schedule honestly." },
       { title: "Uncoordinated systems", desc: "MEP and structural designed in silos create clashes your team has to catch. Our disciplines sit under one roof and coordinate before drawings reach you." },
       { title: "Design intent casualties", desc: "Exposed structure, tight plenums, and feature ceilings die when engineers won't iterate. We treat your design intent as a constraint, not an inconvenience." },
-      { title: "Multi-state licensing gaps", desc: "A client takes you to a new state and your usual engineer isn't licensed there. We carry PE licensure in multi-state coverage, subject to project-specific credential verification, so your team doesn't have to re-qualify consultants per project." },
+      { title: "Multi-state licensing gaps", desc: `A client takes you to a new state and your usual engineer isn't licensed there. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} Your team doesn't have to re-qualify consultants per project.` },
     ],
     deliverTitle: "What You Get From Apex Grid",
     delivers: [
       { title: "All disciplines, one contract", desc: "MEP, structural, and civil engineering coordinated internally — one point of contact, one coordinated model, fewer clashes in your set." },
       { title: "Clean, timely backgrounds", desc: "Revit and CAD deliverables that drop into your workflow, issued on the schedule we agreed to." },
-      { title: "Code research you can lean on", desc: "We track code adoptions and amendments multi-state, with project availability confirmed after individual license, firm authorization, discipline, and AHJ requirements are verified and flag jurisdiction-specific issues early, before they become redesign." },
+      { title: "Code research you can lean on", desc: `We track code adoptions and amendments across jurisdictions. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} We flag jurisdiction-specific issues early, before they become redesign.` },
       { title: "Permit-ready stamped documents", desc: "Complete, checked, PE-stamped sets that move through plan review with minimal comments." },
     ],
     workflowTitle: "How We Plug Into Your Process",
@@ -63,7 +64,7 @@ const AUDIENCES: Record<AudienceKey, AudienceDef> = {
     meta: {
       title: "Engineering for General Contractors & Design-Build | Apex Grid",
       description:
-        "Design-build and design-assist engineering for GCs: fast permit sets, value engineering that holds up in plan review, deferred submittals, and stamped MEP, structural, and civil documents in multi-state coverage, subject to project-specific credential verification.",
+        `Design-build and design-assist engineering for GCs: fast permit sets, value engineering that holds up in plan review, deferred submittals, and stamped MEP, structural, and civil documents. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
     },
     kicker: "For General Contractors",
     h1: ["Engineering That Moves at", "Construction Speed"],
@@ -79,7 +80,7 @@ const AUDIENCES: Record<AudienceKey, AudienceDef> = {
     deliverTitle: "What You Get From Apex Grid",
     delivers: [
       { title: "Design-build partnership", desc: "We work directly under GCs on design-build and design-assist deliveries, engineering to your means, methods, and budget from the first sketch." },
-      { title: "Fast, permit-ready documents", desc: "PE-stamped MEP, structural, and civil sets built to clear plan review with minimal comments — in any of multi-state coverage, subject to project-specific credential verification." },
+      { title: "Fast, permit-ready documents", desc: `PE-stamped MEP, structural, and civil sets built to clear plan review with minimal comments. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}` },
       { title: "Real value engineering", desc: "VE that reduces cost without triggering redesign or review flags: right-sized equipment, efficient framing, practical routing." },
       { title: "Construction-phase backup", desc: "RFI responses, field revisions, deferred submittals, and letters for the inspector — turned around on construction timelines." },
     ],
@@ -99,7 +100,7 @@ const AUDIENCES: Record<AudienceKey, AudienceDef> = {
     meta: {
       title: "Engineering for Real Estate Developers | Apex Grid",
       description:
-        "Feasibility-to-permit engineering for developers: due-diligence assessments, utility and entitlement support, right-sized MEP and structural design, and one engineering partner across a multi-state, project-specific portfolio.",
+        `Feasibility-to-permit engineering for developers: due-diligence assessments, utility and entitlement support, right-sized MEP and structural design, and one engineering partner across a broad portfolio. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
     },
     kicker: "For Developers",
     h1: ["De-Risk the Deal.", "Then Deliver It."],
@@ -110,14 +111,14 @@ const AUDIENCES: Record<AudienceKey, AudienceDef> = {
       { title: "Surprises after close", desc: "Service upgrades, structural deficiencies, and code triggers discovered post-acquisition come straight out of your returns. Our due-diligence assessments surface them before you commit." },
       { title: "Pro formas built on guesses", desc: "Without early engineering input, construction budgets carry padding — or worse, gaps. We give you real system concepts and loads at the feasibility stage." },
       { title: "Permits pacing the pro forma", desc: "Every month in entitlement and plan review costs carry. Complete, jurisdiction-aware documents shorten the review cycle." },
-      { title: "A new consultant in every market", desc: "Portfolio growth shouldn't mean re-vetting engineers city by city. One firm, multi-state coverage, subject to project-specific credential verification, consistent deliverables." },
+      { title: "A new consultant in every market", desc: `Portfolio growth shouldn't mean re-vetting engineers city by city. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} One firm, consistent deliverables.` },
     ],
     deliverTitle: "What You Get From Apex Grid",
     delivers: [
       { title: "Due-diligence assessments", desc: "Building condition and systems assessments during your inspection period — what's at end of life, what code will trigger, what it costs to fix." },
       { title: "Feasibility engineering", desc: "Utility load estimates, structural feasibility, and site engineering input while the deal is still being shaped." },
       { title: "Right-sized design", desc: "MEP, structural, and civil design tuned to the asset strategy — build-to-sell, build-to-hold, or reposition." },
-      { title: "Portfolio consistency", desc: "The same engineering team, standards, and responsiveness on every project, in whichever of multi-state coverage, subject to project-specific credential verification the next deal lands." },
+      { title: "Portfolio consistency", desc: `The same engineering team, standards, and responsiveness on every project, wherever the next deal lands. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}` },
     ],
     workflowTitle: "From LOI to Certificate of Occupancy",
     workflow: [
@@ -135,7 +136,7 @@ const AUDIENCES: Record<AudienceKey, AudienceDef> = {
     meta: {
       title: "Engineering for Property Managers & Building Owners | Apex Grid",
       description:
-        "Engineering support for property and facility managers: tenant improvement design, building assessments, capital planning input, equipment replacement engineering, and fast stamped documents in multi-state coverage, subject to project-specific credential verification.",
+        `Engineering support for property and facility managers: tenant improvement design, building assessments, capital planning input, equipment replacement engineering, and fast stamped documents. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}`,
     },
     kicker: "For Property & Facility Managers",
     h1: ["An Engineer on Call for", "Every Building You Run"],
@@ -153,7 +154,7 @@ const AUDIENCES: Record<AudienceKey, AudienceDef> = {
       { title: "TI design and permitting", desc: "Stamped MEP and structural drawings for tenant build-outs, sized to the space and matched to the base building." },
       { title: "Building assessments", desc: "Condition assessments of MEP and structural systems with remaining-life estimates and budget-grade replacement costs." },
       { title: "Replacement engineering", desc: "Design and specifications for equipment replacements — RTUs, boilers, panels, roofs-as-structure — that keep bids honest." },
-      { title: "One partner, whole portfolio", desc: "multi-state team; project availability and stamping are confirmed per project after individual license, firm authorization, discipline, and AHJ requirements are verified, so a portfolio that spans markets still gets one phone number and one standard of work." },
+      { title: "One partner, whole portfolio", desc: `A portfolio that spans markets still gets one phone number and one standard of work. ${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}` },
     ],
     workflowTitle: "How Engagements Typically Run",
     workflow: [
@@ -291,7 +292,7 @@ export default function Audience({ audience }: { audience: AudienceKey }) {
                 </li>
                 <li>
                   <a href="/locations/" className="text-foreground/80 hover:text-primary transition-colors inline-flex items-center gap-2">
-                    <ArrowRight className="w-4 h-4 text-primary" /> Service Areas (multi-state coverage, subject to project-specific credential verification)
+                    <ArrowRight className="w-4 h-4 text-primary" /> Engineering Service Areas
                   </a>
                 </li>
               </ul>

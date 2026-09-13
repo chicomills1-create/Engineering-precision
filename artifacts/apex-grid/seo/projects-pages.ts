@@ -19,7 +19,7 @@ export const PROJECTS_HUB = {
   h1: "Engineering Project Experience",
   kicker: "Our Work",
   lede:
-    "Apex Grid Engineering has completed projects multi-state, with project availability confirmed after individual license, firm authorization, discipline, and AHJ requirements are verified — from single-story tenant improvements to multi-building federal facility renovations. Below is an overview of our project experience organized by discipline and industry.",
+    "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction. Below is an overview of project experience organized by discipline and industry.",
   intro:
     "We are a multi-discipline firm. Our engineers have worked on everything from small commercial remodels to large-scale government and healthcare facilities. While we cannot publish confidential project details, the categories below represent types of projects we actively support.",
 };
