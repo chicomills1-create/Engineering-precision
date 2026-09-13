@@ -12,10 +12,10 @@ import {
   phoenixMonthKey,
 } from "./outreachLaneConfig";
 import sourceCsv from "../data/verified-business-email-contacts.csv";
-import attachedPublicCsv from "../../../../attached_assets/apex-bank-public-524-import-2026-09-12_1789233375190.csv";
+import attachedPublicCsv from "../../../../attached_assets/apex-public-import-426_1789326232738.csv";
 
 export const SOURCE_FILENAME = "verified-business-email-contacts.csv";
-export const ATTACHED_PUBLIC_SOURCE_FILENAME = "apex-bank-public-524-import-2026-09-12.csv";
+export const ATTACHED_PUBLIC_SOURCE_FILENAME = "apex-public-import-426.csv";
 export const ATTACHED_PUBLIC_SOURCE_CSV = attachedPublicCsv;
 const HEADERS = ["company_name", "website", "company_type", "city", "state", "contact_first_name", "contact_last_name", "job_title", "email", "email_type", "verification_status", "verification_method", "source_url", "date_verified"];
 const RECOVERED_HEADERS = ["day", "lane", "company", "contact_name", "title", "email", "website", "city", "state", "segment", "project_signal", "source_url"];

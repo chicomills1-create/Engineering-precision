@@ -162,7 +162,7 @@ export function VerifiedInventoryImport() {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="rounded-sm border border-border bg-muted/30 p-3 text-sm text-muted-foreground">
-          Source: apex-bank-public-524-import-2026-09-12.csv · 524 public-lane rows
+          Source: apex-public-import-426.csv · 426 public-lane rows
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button type="button" variant="outline" onClick={previewPublicCsv} disabled={previewing || confirming} data-testid="button-preview-public-csv">
