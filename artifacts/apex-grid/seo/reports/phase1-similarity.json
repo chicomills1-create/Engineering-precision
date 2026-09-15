@@ -5,10 +5,10 @@
   "comparisons": 79800,
   "violations": 0,
   "failures": 0,
-  "maxObservedSimilarity": 0.7606,
+  "maxObservedSimilarity": 0.79,
   "maxObservedPair": [
-    "/metros/san-antonio-new-braunfels-tx/pe-stamp/",
-    "/metros/san-francisco-oakland-fremont-ca/pe-stamp/"
+    "/metros/nashville-davidson-murfreesboro-franklin-tn/pe-stamp/",
+    "/metros/knoxville-tn/pe-stamp/"
   ],
   "topMatches": []
 }

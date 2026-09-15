@@ -5,10 +5,10 @@
   "comparisons": 79800,
   "violations": 0,
   "failures": 0,
-  "maxObservedSimilarity": 0.7578,
+  "maxObservedSimilarity": 0.7912,
   "maxObservedPair": [
-    "/metros/niles-mi/",
-    "/metros/saginaw-mi/"
+    "/metros/niles-mi/pe-stamp/",
+    "/metros/saginaw-mi/pe-stamp/"
   ],
   "topMatches": []
 }

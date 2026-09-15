@@ -1,0 +1,17 @@
+{
+  "generatedAt": "deterministic",
+  "threshold": 0.85,
+  "inclusive": true,
+  "phase7Pages": 101,
+  "existingAnswerPages": 19,
+  "comparisonCorpusPages": 322,
+  "comparisons": 27371,
+  "violations": 0,
+  "failures": 0,
+  "maxObservedSimilarity": 0.5704,
+  "maxObservedPair": [
+    "/answers/what-should-an-engineering-fee-proposal-include/",
+    "/answers/why-engineering-proposals-list-assumptions-and-exclusions/"
+  ],
+  "topMatches": []
+}

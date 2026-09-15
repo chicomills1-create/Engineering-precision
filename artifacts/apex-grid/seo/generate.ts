@@ -146,6 +146,30 @@ import {
   type Phase5Metro,
   type Phase5ServiceSlug,
 } from "./phase5-metros";
+import type { Phase7AeoSeed, Phase7Cluster } from "./phase7-types";
+import { PHASE7_COST_PAGES } from "./phase7-cost-pages";
+import { PHASE7_TIMELINE_PAGES } from "./phase7-timeline-pages";
+import { PHASE7_HIRING_PAGES } from "./phase7-hiring-pages";
+import { PHASE7_LICENSING_PAGES } from "./phase7-licensing-pages";
+import { PHASE7_PERMIT_PAGES } from "./phase7-permit-pages";
+import { PHASE7_TECHNICAL_PAGES } from "./phase7-technical-pages";
+
+const PHASE7_AEO_PAGES: Phase7AeoSeed[] = [
+  ...PHASE7_COST_PAGES,
+  ...PHASE7_TIMELINE_PAGES,
+  ...PHASE7_HIRING_PAGES,
+  ...PHASE7_LICENSING_PAGES,
+  ...PHASE7_PERMIT_PAGES,
+  ...PHASE7_TECHNICAL_PAGES,
+];
+const PHASE7_CLUSTER_COUNTS: Record<Phase7Cluster, number> = {
+  "Cost and pricing": 20,
+  "Project timelines": 18,
+  "Hiring and vetting": 16,
+  "PE licensing": 16,
+  "Plan check and permits": 14,
+  "Technical explainers": 17,
+};
 
 const PROMOTED_CITY_KEYS = new Set([
   "georgia/atlanta", "texas/austin", "north-carolina/charlotte",
@@ -767,6 +791,74 @@ function assertIndexableFaqPage(html: string, faqs: Array<{ question: string; an
 const PHASE0_UPDATED_DATE = "2026-09-15";
 const PHASE0_EDITORIAL_AUTHOR = "Apex Grid Engineering";
 const PHASE0_JEREMY_AUTHOR = "Jeremy Mills, CEO & Founder, Apex Grid Engineering — USAF Veteran";
+const ALL_AEO_PAGES: Array<Phase0AeoPage | Phase7AeoSeed> = [...PHASE0_AEO_PAGES, ...PHASE7_AEO_PAGES];
+
+const PHASE7_COMMON_FAQ = {
+  question: "Does this answer guarantee a permit or project outcome?",
+  answer: "No. The answer provides general engineering orientation. The responsible professional confirms the project scope and evidence, while the authority having jurisdiction controls its requirements, review, interpretation, and approval decision.",
+};
+
+function phase7Faqs(page: Phase7AeoSeed): Array<{ question: string; answer: string }> {
+  return [
+    { question: `What is the short answer about ${page.topic.toLowerCase()}?`, answer: page.answer },
+    {
+      question: `What does ${page.topic.toLowerCase()} depend on?`,
+      answer: `The answer depends on the project scope, governing jurisdiction, current records, design inputs, and the responsible professional's independent review. ${page.answer}`,
+    },
+    PHASE7_COMMON_FAQ,
+    {
+      question: "What should I send for an initial engineering review?",
+      answer: "Send the project address, plain-language scope, current drawings, existing-condition records, relevant calculations or comments, schedule, and the authority or code information already available. The responsible engineer will identify gaps.",
+    },
+  ];
+}
+
+function assertPhase7Corpus(): void {
+  if (PHASE7_AEO_PAGES.length !== 101) {
+    throw new Error(`SEO assertion failed: Phase 7 requires exactly 101 new seeds (found ${PHASE7_AEO_PAGES.length})`);
+  }
+  const existingSlugs = new Set([
+    ...PHASE0_AEO_PAGES.map((page) => page.slug),
+    ...PHASE0_PLAN_CHECK_PLAYBOOKS.map((page) => page.slug),
+    ...PHASE0_RESOURCE_PAGES.map((page) => page.slug),
+    ...GUIDE_PAGES.map((page) => page.slug),
+  ]);
+  const existingHeadings = new Set([
+    ...PHASE0_AEO_PAGES.flatMap((page) => [page.title.toLowerCase(), page.h1.toLowerCase()]),
+    ...PHASE0_PLAN_CHECK_PLAYBOOKS.flatMap((page) => [page.title, "h1" in page ? page.h1 : undefined].filter((value): value is string => Boolean(value)).map((value) => value.toLowerCase())),
+    ...PHASE0_RESOURCE_PAGES.flatMap((page) => [page.title, "h1" in page ? page.h1 : undefined].filter((value): value is string => Boolean(value)).map((value) => value.toLowerCase())),
+    ...GUIDE_PAGES.flatMap((page) => [page.title, "h1" in page ? page.h1 : undefined].filter((value): value is string => Boolean(value)).map((value) => value.toLowerCase())),
+  ]);
+  const slugs = new Set<string>();
+  const counts = {} as Record<Phase7Cluster, number>;
+  for (const page of PHASE7_AEO_PAGES) {
+    if (slugs.has(page.slug) || existingSlugs.has(page.slug)
+      || existingHeadings.has(page.title.toLowerCase()) || existingHeadings.has(page.h1.toLowerCase())) {
+      throw new Error(`SEO assertion failed: Phase 7 slug overlaps an existing corpus route: ${page.slug}`);
+    }
+    slugs.add(page.slug);
+    counts[page.cluster] = (counts[page.cluster] ?? 0) + 1;
+    if (!/^\/(?:services|permit-engineering|pe-stamp|[a-z0-9-]+\/)/.test(page.serviceHref)
+      || !page.answer.trim() || page.answer.length < 120
+      || !/^[a-z0-9-]+$/.test(page.slug)) {
+      throw new Error(`SEO assertion failed: incomplete Phase 7 seed: ${page.slug}`);
+    }
+  }
+  for (const cluster of Object.keys(PHASE7_CLUSTER_COUNTS) as Phase7Cluster[]) {
+    if (counts[cluster] !== PHASE7_CLUSTER_COUNTS[cluster]) {
+      throw new Error(`SEO assertion failed: Phase 7 ${cluster} count is ${counts[cluster] ?? 0}, expected ${PHASE7_CLUSTER_COUNTS[cluster]}`);
+    }
+  }
+  const reportDir = path.join(__dirname, "reports");
+  fs.mkdirSync(reportDir, { recursive: true });
+  fs.writeFileSync(path.join(reportDir, "phase7-corpus.json"), `${JSON.stringify({
+    generatedAt: "deterministic",
+    existingAnswerPages: PHASE0_AEO_PAGES.length,
+    phase7SeedPages: PHASE7_AEO_PAGES.length,
+    answerLibraryPages: PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length,
+    clusterCounts: PHASE7_CLUSTER_COUNTS,
+  }, null, 2)}\n`);
+}
 
 function phase0FaqSchema(faqs: Array<{ question: string; answer: string }>) {
   return {
@@ -789,7 +881,7 @@ function phase0FaqMarkup(faqs: Array<{ question: string; answer: string }>): str
 function assertPhase0Page(html: string, canonical: string, faqs: Array<{ question: string; answer: string }>, label: string): void {
   const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
     .map((match) => JSON.parse(match[1]) as { "@type"?: string; mainEntity?: unknown[] });
-  if (!html.includes('data-phase0="true"')
+  if ((!html.includes('data-phase0="true"') && !html.includes('data-phase7="true"'))
     || (html.match(/<h1(?:\s[^>]*)?>/gi) ?? []).length !== 1
     || !html.includes(`<link rel="canonical" href="${SITE}${canonical}"`)
     || html.includes('name="robots" content="noindex')
@@ -815,6 +907,7 @@ function phase0ArticleFrame(
     links?: Array<{ label: string; href: string }>;
     schemaType?: "Article" | "Service" | "WebPage";
     author?: string;
+    marker?: string;
   },
 ): string {
   const crumbs = [{ name: "Home", href: "/" }, { name: opts.h1 }];
@@ -840,14 +933,15 @@ function phase0ArticleFrame(
     author: authorSchema,
     publisher: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
   };
-  const body = `<main data-phase0="true">
+  const body = `<main ${opts.marker ? `data-${opts.marker}="true"` : 'data-phase0="true"'}>
   ${breadcrumb(crumbs)}
   <section class="hero"><div class="container"><p class="kicker">${esc(opts.kicker)}</p><h1>${esc(opts.h1)}</h1><p class="lede">${esc(opts.answer)}</p>
     <p class="note">By ${esc(author)} · Updated ${PHASE0_UPDATED_DATE}</p>
   </div></section>
   ${opts.sections.map((section) => `<section class="block"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p>${section.bullets ? `<ul class="scope">${section.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul>` : ""}</div></div></section>`).join("")}
-  ${opts.links?.length ? `<section class="block"><div class="container"><h2>Related Phase 0 Resources</h2><div class="linkrow">${opts.links.map((link) => `<a href="${esc(link.href)}"${/^https:\/\//.test(link.href) ? ' rel="noopener noreferrer"' : ""}>${esc(link.label)}</a>`).join("")}</div></div></section>` : ""}
+  ${opts.links?.length ? `<section class="block"><div class="container"><h2>Related Engineering Resources</h2><div class="linkrow">${opts.links.map((link) => `<a href="${esc(link.href)}"${/^https:\/\//.test(link.href) ? ' rel="noopener noreferrer"' : ""}>${esc(link.label)}</a>`).join("")}</div></div></section>` : ""}
   ${phase0FaqMarkup(opts.faqs)}
+  <section class="ctaband"><div class="container"><h2>Discuss your engineering scope</h2><p>Share the project address, current records, requested deliverable, authority information, and schedule. Apex Grid confirms professional responsibility, availability, and scope before work begins.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
   </main>`;
   return htmlShell({
     title: opts.title,
@@ -858,9 +952,24 @@ function phase0ArticleFrame(
   });
 }
 
-function phase0AeoPage(page: Phase0AeoPage): string {
-  const related = PHASE0_AEO_PAGES.filter((candidate) => candidate.slug !== page.slug).slice(0, 3)
-    .map((candidate) => ({ label: candidate.h1, href: `/answers/${candidate.slug}/` }));
+function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
+  const phase7 = "cluster" in page;
+  const related = phase7
+    ? PHASE7_AEO_PAGES
+      .filter((candidate) => candidate.slug !== page.slug && candidate.cluster === page.cluster)
+      .slice(0, 3)
+      .map((candidate) => ({ label: candidate.h1, href: `/answers/${candidate.slug}/` }))
+    : PHASE0_AEO_PAGES
+      .filter((candidate) => candidate.slug !== page.slug).slice(0, 3)
+      .map((candidate) => ({ label: candidate.h1, href: `/answers/${candidate.slug}/` }));
+  const serviceHref = "cluster" in page ? page.serviceHref : "/services/";
+  const links = [
+    ...related,
+    { label: "Engineering service for this question", href: serviceHref },
+    { label: "Metro engineering guides", href: "/metros/" },
+    { label: "Verified service areas", href: "/locations/" },
+  ];
+  const faqs = "cluster" in page ? phase7Faqs(page) : page.faqs;
   return phase0ArticleFrame({
     canonical: `/answers/${page.slug}/`,
     title: page.title,
@@ -873,10 +982,11 @@ function phase0AeoPage(page: Phase0AeoPage): string {
       { heading: "How the answer is applied", body: `The correct application of ${page.topic.toLowerCase()} starts with the actual project, not a generic promise. Confirm the jurisdiction, adopted code, design scope, existing conditions, required deliverables, and professional responsibility before relying on a conclusion. A responsible engineer documents assumptions and identifies information that still needs verification.` },
       { heading: "What can change the result", body: "Project type, occupancy, existing construction, site conditions, code edition, agency requirements, and changes made after the original design can change the work. A concise answer is useful for orientation, but the signed or sealed project record must reflect the current scope and the authority's process.", bullets: ["Confirm the authority having jurisdiction and current checklist", "Use current drawings, calculations, field evidence, and equipment information", "Separate engineering decisions from owner, architect, contractor, utility, and agency decisions", "Record assumptions, limitations, and questions requiring direct AHJ confirmation"] },
     ],
-    faqs: page.faqs,
-    links: related,
+    faqs,
+    links,
     schemaType: "Article",
     author: PHASE0_JEREMY_AUTHOR,
+    marker: "cluster" in page ? "phase7" : undefined,
   });
 }
 
@@ -907,6 +1017,26 @@ function phase0CollectionHub(
     links,
     schemaType: "WebPage",
   });
+}
+
+function phase1MetroFaqs(metro: Phase1Metro, serviceLabel?: string): Array<{ question: string; answer: string }> {
+  const subject = serviceLabel
+    ? `${serviceLabel} for the ${metro.metroName} metro`
+    : `engineering guides for the ${metro.metroName} metro`;
+  return [
+    {
+      question: `What does ${subject} cover?`,
+      answer: `This guide explains planning, records, coordination, and professional boundaries for ${subject}. The exact project scope, responsible professional, and deliverables are confirmed from current records.`,
+    },
+    {
+      question: "Do these metro pages guarantee permit approval?",
+      answer: "No. The authority having jurisdiction controls its checklist, interpretation, inspections, review, and approval. A general metro guide cannot promise a local outcome.",
+    },
+    {
+      question: "What should I send for a metro engineering review?",
+      answer: "Send the project address, scope, current drawings, existing-condition evidence, equipment or utility information, prior comments, applicable authority information, and requested deliverables. The responsible professional identifies what else is needed.",
+    },
+  ];
 }
 
 function phase0ServicePage(page: Phase0ServicePage): string {
@@ -1182,6 +1312,7 @@ const phase1ServiceSummaries: Record<Phase1ServiceSlug, string> = {
 
 function phase1MetroHubPage(metro: Phase1Metro): string {
   const url = `/metros/${metro.slug}/`;
+  const faqs = phase1MetroFaqs(metro);
   const crumbs = [
     { name: "Home", href: "/" },
     { name: "Metro engineering guides", href: "/metros/" },
@@ -1197,6 +1328,7 @@ ${breadcrumb(crumbs)}
 <section class="block"><div class="container"><h2>${esc(metro.representativeCity)} <em>engineering paths</em></h2><div class="grid2">${links}</div></div></section>
 <section class="block"><div class="container"><h2>Evidence before <em>design decisions</em></h2><div class="prose"><p>${esc(metro.editorial.documentationLens)}</p><p>${esc(metro.editorial.deliveryLens)}</p><p>For an initial review, gather the project address, scope narrative, current architectural backgrounds, existing-condition photographs or measurements, equipment information, site or geotechnical records where relevant, prior comments, and requested deliverables. The responsible professional identifies what is sufficient for the defined question.</p></div></div></section>
 <section class="block"><div class="container"><h2>2025 Census <em>source record</em></h2><div class="prose"><p>CBSA ${metro.cbsaCode} is ranked ${metro.rank} among the eligible Metro Code 2 records in the final annual 2025 BPS sheet, ordered by Total descending. “Total” is used as published by Census; it is not a forecast, project count, engineering volume, or promise of demand.</p><p><a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">View the official Census BPS workbook (${PHASE1_SERVICE_SLUGS.length ? "MSA Units Ann" : "source"})</a></p></div></div></section>
+${phase0FaqMarkup(faqs)}
 <section class="ctaband"><div class="container"><h2>Discuss a ${esc(metro.representativeCity)} project</h2><p>Share the address, scope, drawings, existing records, authority information already available, and requested deliverables.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
 </main>`;
   const schema = {
@@ -1212,7 +1344,7 @@ ${breadcrumb(crumbs)}
     title: `${metro.representativeCity} Metro Engineering Guides | Apex Grid`,
     description: `Permit, structural, MEP, energy, corrections, calculations, and professional-seal guidance for the ${metro.metroName} metro.`,
     canonical: `${SITE}${url}`,
-    schemaJson: [schema, breadcrumbSchema(crumbs)],
+    schemaJson: [schema, phase0FaqSchema(faqs), breadcrumbSchema(crumbs)],
     body,
   }));
 }
@@ -1220,6 +1352,7 @@ ${breadcrumb(crumbs)}
 function phase1MetroServicePage(metro: Phase1Metro, service: Phase1ServiceSlug): string {
   const url = `/metros/${metro.slug}/${service}/`;
   const label = phase1ServiceLabels[service];
+  const faqs = phase1MetroFaqs(metro, label);
   const crumbs = [
     { name: "Home", href: "/" },
     { name: "Metro engineering guides", href: "/metros/" },
@@ -1302,6 +1435,7 @@ ${breadcrumb(crumbs)}
 <section class="block"><div class="container"><h2>${esc(metro.representativeCity)} metro <em>context</em></h2><div class="prose"><p>${esc(metro.editorial.planningLens)}</p><p>${esc(metro.editorial.coordinationLens)}</p><p>${esc(metro.editorial.documentationLens)}</p></div></div></section>
 <section class="block"><div class="container"><h2>Professional <em>boundaries</em></h2><div class="prose"><p>Availability, scope, professional responsibility, applicable licensure, and filing requirements are confirmed per project. This guide does not invent an AHJ requirement, claim an office or project, promise approval, or publish a price. The authority having jurisdiction controls its review and decision.</p><p>The Census BPS final annual 2025 workbook reports ${metro.permitTotal2025.toLocaleString("en-US")} permitted housing units for this Metro Code 2 record, rank ${metro.rank} among the eligible records. <a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">Read the official source workbook</a>.</p></div></div></section>
 <section class="block"><div class="container"><h2>Related ${esc(metro.representativeCity)} <em>guides</em></h2><div class="linkrow">${related}</div></div></section>
+${phase0FaqMarkup(faqs)}
 <section class="ctaband"><div class="container"><h2>Define the ${esc(label.toLowerCase())} scope</h2><p>Send the address, project scope, current documents, existing-condition evidence, comments, schedule dependencies, and requested deliverables.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
 </main>`;
   const serviceSchema = {
@@ -1318,7 +1452,7 @@ ${breadcrumb(crumbs)}
     title: `${label} ${metro.representativeCity} Metro | Apex Grid`,
     description: `${label} guidance for the ${metro.metroName} metro: scope, documents, coordination, and responsible project review.`,
     canonical: `${SITE}${url}`,
-    schemaJson: [serviceSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [serviceSchema, phase0FaqSchema(faqs), breadcrumbSchema(crumbs)],
     body,
   }));
 }
@@ -1376,6 +1510,11 @@ function phase5MetroServicePage(metro: Phase5Metro, service: Phase5ServiceSlug):
 
 function phase1MetroCollectionPage(): string {
   const crumbs = [{ name: "Home", href: "/" }, { name: "Metro engineering guides" }];
+  const faqs = [
+    { question: "What are the metro engineering guides?", answer: "They are jurisdiction-neutral planning and documentation guides organized around reviewed Census metro records. They help a project team identify questions, records, coordination needs, and responsible-professional boundaries without inventing local requirements." },
+    { question: "Do the metro guides guarantee local permit approval?", answer: "No. The authority having jurisdiction controls its current checklist, code interpretation, inspections, review, and approval. A general metro guide cannot promise a local outcome." },
+    { question: "What should I provide for a metro engineering review?", answer: "Provide the project address, proposed scope, current drawings, existing-condition evidence, equipment or utility information, prior comments, authority information, and requested deliverables. The responsible professional identifies any additional records needed." },
+  ];
   const allMetros = [...PHASE1_METROS, ...PHASE2_METROS, ...PHASE3_METROS, ...PHASE4_METROS, ...PHASE5_METROS];
   const links = allMetros.map((metro) =>
     `<a class="card" href="/metros/${metro.slug}/"><div class="label">Rank ${metro.rank} · CBSA ${metro.cbsaCode}</div><h3>${esc(metro.metroName)}</h3><p>${metro.permitTotal2025.toLocaleString("en-US")} permitted units in the final annual 2025 Census BPS record.</p></a>`,
@@ -1385,6 +1524,7 @@ ${breadcrumb(crumbs)}
   <section class="hero"><div class="container"><p class="kicker">Census BPS metro corpus · Phases 1–5</p><h1>Metro Engineering Guides</h1><p class="lede">Apex Grid's collection covers 250 eligible Metro Code 2 records from the Census BPS final annual 2025 workbook, ranked by Total descending. These guides are jurisdiction-neutral and do not infer local requirements.</p><p class="note">By ${esc(PHASE1_AUTHOR)}</p></div></section>
 <section class="block"><div class="container"><h2>Browse the <em>eligible metro records</em></h2><div class="grid2">${links}</div></div></section>
   <section class="block"><div class="container"><h2>Source and <em>method</em></h2><div class="prose"><p>Source: <a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">${PHASE1_SOURCE_URL}</a>. The corpus parses the “MSA Units Ann” sheet, keeps eligible Metro / Micro Code 2 records intersecting the reviewed eligibility footprint, and selects ranks 1 through 250 after ordering Total descending and removing prior-phase duplicates. Territories and records outside the reviewed footprint are excluded.</p><p>Representative city and state labels identify the metro record's primary label only. They do not claim an office, project, AHJ fact, county service area, or guaranteed coverage.</p></div></div></section>
+${phase0FaqMarkup(faqs)}
 </main>`;
   return phase1Html(htmlShell({
     title: "Metro Engineering Guides | Apex Grid Engineering",
@@ -1396,7 +1536,7 @@ ${breadcrumb(crumbs)}
       name: "Metro Engineering Guides",
       url: `${SITE}/metros/`,
       numberOfItems: allMetros.length,
-    }, breadcrumbSchema(crumbs)],
+    }, phase0FaqSchema(faqs), breadcrumbSchema(crumbs)],
     body,
   }));
 }
@@ -2222,7 +2362,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const page of PHASE0_SERVICE_PAGES) {
     servicesUrls.push(u(`${SITE}${page.path}`, today, "monthly", "0.8"));
   }
-  for (const page of PHASE0_AEO_PAGES) {
+  for (const page of ALL_AEO_PAGES) {
     servicesUrls.push(u(`${SITE}/answers/${page.slug}/`, today, "monthly", "0.7"));
   }
 
@@ -4438,6 +4578,20 @@ function batch2SourceLinks(sources: Array<{ label: string; url: string }>): stri
 
 function batch2MetroPage(expansion: Batch2StateExpansion, metro: Batch2Metro): string {
   const url = `/locations/${expansion.stateSlug}/${metro.slug}/`;
+  const faqs: Batch2Faq[] = [
+    {
+      question: `What do the ${metro.name} engineering service paths cover?`,
+      answer: `They provide general planning context for the researched service paths in ${metro.name}. The project's address, records, scope, responsible professional, and current authority requirements determine the actual deliverables.`,
+    },
+    {
+      question: "Do these metro pages guarantee permit approval?",
+      answer: "No. The authority having jurisdiction controls its checklist, interpretation, inspections, review, and approval. A general metro guide cannot promise a local outcome.",
+    },
+    {
+      question: "What should I send for an initial metro engineering review?",
+      answer: "Send the project address, proposed scope, current drawings, existing-condition evidence, authority correspondence, relevant equipment or utility information, and requested deliverables. The responsible professional identifies additional records needed.",
+    },
+  ];
   const crumbs = [
     { name: "Home", href: "/" },
     { name: "Service Areas", href: "/locations/" },
@@ -4453,13 +4607,14 @@ ${breadcrumb(crumbs)}
 <section class="block"><div class="container"><h2>Local <em>project context</em></h2><div class="prose">${metro.services.slice(0, 3).map((service) =>
     `<p><strong>${esc(service.serviceSlug)}:</strong> ${esc(service.localConditions)} ${esc(service.projectTypes)}</p>`,
   ).join("")}</div></div></section>
+<section class="block"><div class="container faq"><h2>${esc(metro.name)} <em>FAQs</em></h2>${faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
 <section class="ctaband"><div class="container"><h2>Discuss a ${esc(metro.name)} project</h2><p>Send the address, scope, drawings, authority, and requested deliverable. Availability, responsible licensure, and timing are confirmed per project.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
 </main>`;
   return htmlShell({
     title: `${metro.name} Engineering Services | ${expansion.stateName} | Apex Grid`,
     description: `Structural, MEP, civil, energy-compliance, and PE-stamped drawing guidance for ${metro.name}, ${expansion.stateName}.`,
     canonical: `${SITE}${url}`,
-    schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [orgSchema, batch2FaqSchema(faqs), breadcrumbSchema(crumbs)],
     body,
   });
 }
@@ -4611,6 +4766,7 @@ function renderResearchedExpansionPages(
 
 async function main() {
   assertRouteOwnership();
+  assertPhase7Corpus();
   const generatedTopLevelRoutes = [
     ...SEO_GENERATOR_FIXED_INDEX_ROUTES,
     ...LOCATION_VERTICALS.map((page) => `/${page.slug}`),
@@ -5098,8 +5254,9 @@ async function main() {
     "Engineering Answers for Permit and Design Questions",
     "Phase 0 National AEO Collection",
     "These concise answers address recurring engineering and permit questions, then point to the project inputs and professional boundaries that matter in a real submission.",
-    PHASE0_AEO_PAGES.map((page) => ({ label: page.h1, href: `/answers/${page.slug}/` })),
+    ALL_AEO_PAGES.map((page) => ({ label: page.h1, href: `/answers/${page.slug}/` })),
   );
+  fs.rmSync(phase0AnswersDir, { recursive: true, force: true });
   fs.mkdirSync(phase0AnswersDir, { recursive: true });
   assertPhase0Page(answerHubHtml, "/answers/", [
     { question: "Are these pages static and indexable?", answer: "Yes. Phase 0 pages are generated as static HTML with a self-canonical URL and index,follow metadata, then included in the generated sitemap." },
@@ -5118,6 +5275,23 @@ async function main() {
     }
     fs.writeFileSync(path.join(dir, "index.html"), html);
     pages++;
+  }
+  for (const answerPage of PHASE7_AEO_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, phase7Faqs(answerPage), answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`)
+      || !html.includes('href="/estimate"')
+      || !html.includes(`href="${esc(answerPage.serviceHref)}"`)) {
+      throw new Error(`SEO assertion failed: incomplete Phase 7 answer page ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  if (PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length !== 120) {
+    throw new Error(`SEO assertion failed: answer library requires exactly 120 pages (found ${PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length})`);
   }
   const peStampDir = path.join(PUBLIC, "pe-stamp");
   fs.mkdirSync(peStampDir, { recursive: true });
@@ -5620,6 +5794,9 @@ async function main() {
     counts: {
       servicePages: PHASE0_SERVICE_PAGES.length,
       aeoPages: PHASE0_AEO_PAGES.length,
+      phase7AeoPages: PHASE7_AEO_PAGES.length,
+      answerLibraryPages: PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length,
+      phase7Clusters: PHASE7_CLUSTER_COUNTS,
       peStampHub: 1,
       peStampStatePages: states.length,
       metroPlanCheckPlaybooks: PHASE0_PLAN_CHECK_PLAYBOOKS.length,
@@ -5636,7 +5813,7 @@ async function main() {
       reportPath: "seo/reports/existing-corpus-quality.json",
     },
   }, null, 2)}\n`);
-  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${verticalPages} architecture/GC vertical pages, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PARTNER_PAGES.length} construction partner pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${CANONICAL_INDUSTRY_DISCIPLINE_PAGES.length} canonical industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, Phase 0: ${PHASE0_SERVICE_PAGES.length} services + ${PHASE0_AEO_PAGES.length} AEO + ${states.length + 1} PE stamp + ${PHASE0_PLAN_CHECK_PLAYBOOKS.length} playbooks + ${PHASE0_RESOURCE_PAGES.length} resources, 1 sitemap page + sitemap.xml`);
+  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${verticalPages} architecture/GC vertical pages, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PARTNER_PAGES.length} construction partner pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${CANONICAL_INDUSTRY_DISCIPLINE_PAGES.length} canonical industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, Answer library: ${PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length} (${PHASE0_AEO_PAGES.length} existing + ${PHASE7_AEO_PAGES.length} Phase 7), Phase 0: ${PHASE0_SERVICE_PAGES.length} services + ${PHASE0_AEO_PAGES.length} AEO + ${states.length + 1} PE stamp + ${PHASE0_PLAN_CHECK_PLAYBOOKS.length} playbooks + ${PHASE0_RESOURCE_PAGES.length} resources, 1 sitemap page + sitemap.xml`);
 }
 
 async function notifySearchEngines() {

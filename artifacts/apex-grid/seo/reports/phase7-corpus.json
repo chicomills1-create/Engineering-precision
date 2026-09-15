@@ -1,0 +1,14 @@
+{
+  "generatedAt": "deterministic",
+  "existingAnswerPages": 19,
+  "phase7SeedPages": 101,
+  "answerLibraryPages": 120,
+  "clusterCounts": {
+    "Cost and pricing": 20,
+    "Project timelines": 18,
+    "Hiring and vetting": 16,
+    "PE licensing": 16,
+    "Plan check and permits": 14,
+    "Technical explainers": 17
+  }
+}

@@ -126,9 +126,13 @@ export function htmlShell(opts: {
 <meta property="og:description" content="${e(opts.description)}" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="${e(opts.canonical)}" />
+<meta property="og:image" content="${e(`${SITE}/logo.png`)}" />
+<meta property="og:image:alt" content="Apex Grid Engineering logo" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="${e(opts.title)}" />
 <meta name="twitter:description" content="${e(opts.description)}" />
+<meta name="twitter:image" content="${e(`${SITE}/logo.png`)}" />
+<meta name="twitter:image:alt" content="Apex Grid Engineering logo" />
 <meta name="robots" content="${e(opts.robots ?? "index,follow")}" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />

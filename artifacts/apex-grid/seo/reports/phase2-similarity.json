@@ -5,10 +5,10 @@
   "comparisons": 79800,
   "violations": 0,
   "failures": 0,
-  "maxObservedSimilarity": 0.7582,
+  "maxObservedSimilarity": 0.7912,
   "maxObservedPair": [
-    "/metros/hickory-lenoir-morganton-nc/",
-    "/metros/fayetteville-nc/"
+    "/metros/gainesville-fl/pe-stamp/",
+    "/metros/tallahassee-fl/pe-stamp/"
   ],
   "topMatches": []
 }

@@ -5,7 +5,7 @@
   "comparisons": 12090,
   "violations": 0,
   "failures": 0,
-  "maxObservedSimilarity": 0.7834,
+  "maxObservedSimilarity": 0.7945,
   "maxObservedPair": [
     "/resources/phase-0/electrical-service-sizing-review/",
     "/resources/phase-0/hvac-load-calculation-inputs-review/"

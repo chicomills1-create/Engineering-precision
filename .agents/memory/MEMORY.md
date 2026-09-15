@@ -11,7 +11,7 @@
 - [GSC URL inspection](gsc-url-inspection.md) — indexing verdicts come from a service-account key (GOOGLE_SERVICE_ACCOUNT_KEY) added as a GSC property user; quota 2k/day forces capped batches + 1h in-memory cache.
 - [Wikipedia image download](wikipedia-image-download.md) — Wikimedia CDN thumb URLs 400/403 in Replit; use Wikipedia API imageinfo to get canonical file URL, then fetch that; add 1-2s delays to avoid 429.
 - [Large static corpus in Vite](large-static-corpus-vite.md) — 25k+ generated SEO files exceed Linux watcher limits; exclude generated trees from Vite watch without disabling static serving.
-- [South Africa positioning](south-africa-positioning.md) — build authority with informational content; publish local commercial-service claims only after credentials and partners are verified.
+- [South Africa positioning](south-africa-positioning.md) — expansion is paused; do not recreate the removed South Africa blog cluster or add local commercial-service claims.
 - [Outreach automation safety](outreach-automation-safety.md) — keep follow-ups manual until delivery events and reply detection can stop sequences reliably.
 - [Private upload claims](private-upload-claims.md) — private object paths are not ownership; bind uploads to one-time claims and consume them atomically with the owning record.
 - [Past-client monthly outreach](past-client-monthly-outreach.md) — consent is canonical per normalized email; claim one send per Phoenix month before provider dispatch.

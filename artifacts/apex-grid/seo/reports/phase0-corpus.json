@@ -4,6 +4,16 @@
   "counts": {
     "servicePages": 2,
     "aeoPages": 19,
+    "phase7AeoPages": 101,
+    "answerLibraryPages": 120,
+    "phase7Clusters": {
+      "Cost and pricing": 20,
+      "Project timelines": 18,
+      "Hiring and vetting": 16,
+      "PE licensing": 16,
+      "Plan check and permits": 14,
+      "Technical explainers": 17
+    },
     "peStampHub": 1,
     "peStampStatePages": 49,
     "metroPlanCheckPlaybooks": 10,

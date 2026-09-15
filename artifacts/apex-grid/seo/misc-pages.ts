@@ -439,14 +439,7 @@ export const MISC_PAGES: MiscPage[] = [
           "A successful cross-border project preserves the owner's brand and operating requirements while localizing professional responsibility, codes and standards, climate assumptions, utilities, materials, procurement, and construction details.",
       },
     ],
-    relatedLinks: [
-      { label: "Planning a Commercial Building Project in South Africa", href: "/blog/south-africa-commercial-building-project-guide/" },
-      { label: "SANS 10400 Commercial Building Overview", href: "/blog/sans-10400-commercial-building-design-overview/" },
-      { label: "Commercial Building Energy Efficiency", href: "/blog/south-africa-commercial-building-energy-efficiency/" },
-      { label: "Architect vs. Engineer in South Africa", href: "/blog/architect-vs-engineer-south-africa-commercial-projects/" },
-      { label: "Construction Procurement and CIDB", href: "/blog/south-africa-construction-procurement-cidb-guide/" },
-      { label: "U.S.–South Africa Cross-Border Delivery", href: "/blog/us-south-africa-cross-border-project-delivery/" },
-    ],
+    relatedLinks: [],
     ctaHeading: "Discuss a South Africa Opportunity",
     ctaText:
       "Tell Apex Grid about the owner, site, project type, and local team. We will identify where cross-border coordination may help and what South African registrations or partners must be verified before proceeding.",

@@ -5,10 +5,10 @@
   "comparisons": 79800,
   "violations": 0,
   "failures": 0,
-  "maxObservedSimilarity": 0.7564,
+  "maxObservedSimilarity": 0.7898,
   "maxObservedPair": [
-    "/metros/oxnard-thousand-oaks-ventura-ca/",
-    "/metros/modesto-ca/"
+    "/metros/oxnard-thousand-oaks-ventura-ca/pe-stamp/",
+    "/metros/modesto-ca/pe-stamp/"
   ],
   "topMatches": []
 }
