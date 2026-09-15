@@ -98,11 +98,19 @@ export default function Estimate() {
         squareFootage: data.squareFootage,
         state: data.state,
       });
+      const estimateHeadline = calcResult.type === "custom"
+        ? calcResult.message
+        : `$${Math.round(calcResult.headline!).toLocaleString("en-US")}`;
+      const estimateRange = calcResult.type === "custom"
+        ? "Custom quote — scope review required"
+        : `$${Math.round(calcResult.low!).toLocaleString("en-US")} - $${Math.round(calcResult.high!).toLocaleString("en-US")}`;
 
       const message = `Estimate Request:
 Project Type: ${data.projectType}
 Square Footage: ${data.squareFootage} sqft
 Location: ${data.city}, ${data.state}
+Estimate Headline: ${estimateHeadline}
+Estimate Range: ${estimateRange}
 ${calcResult.calcBreakdown}
 
 Non-binding ballpark for budgeting only — final proposal follows a scope review.`;

@@ -2,6 +2,26 @@ import { ReplitConnectors } from "@replit/connectors-sdk";
 import type { LeadInput } from "@workspace/api-zod";
 import { signDownloadPath } from "./downloadToken";
 
+const ESTIMATE_NOTIFICATION_EMAIL = "Chicomills1@gmail.com";
+
+interface SendGridResponse {
+  ok: boolean;
+  status: number;
+  text(): Promise<string>;
+}
+
+interface SendGridProxy {
+  proxy(
+    connector: string,
+    path: string,
+    options: {
+      method: string;
+      headers: Record<string, string>;
+      body: string;
+    },
+  ): Promise<SendGridResponse>;
+}
+
 /**
  * Sends a notification email about a new lead via the SendGrid connector.
  * Never throws — failures are logged by the caller and must not break
@@ -9,9 +29,14 @@ import { signDownloadPath } from "./downloadToken";
  */
 export async function sendLeadNotificationEmail(
   lead: LeadInput,
+  options: { connectors?: SendGridProxy } = {},
 ): Promise<{ ok: true } | { ok: false; error: string }> {
-  const to = process.env.LEAD_NOTIFY_EMAIL;
-  const from = process.env.LEAD_NOTIFY_FROM_EMAIL || to;
+  const isEstimateLead = lead.source === "estimate";
+  const to = isEstimateLead
+    ? ESTIMATE_NOTIFICATION_EMAIL
+    : process.env.LEAD_NOTIFY_EMAIL;
+  const from =
+    process.env.LEAD_NOTIFY_FROM_EMAIL || process.env.LEAD_NOTIFY_EMAIL;
 
   if (!to || !from) {
     return {
@@ -53,7 +78,7 @@ export async function sendLeadNotificationEmail(
     ...attachmentLines,
   ].filter((line): line is string => line !== null);
 
-  const connectors = new ReplitConnectors();
+  const connectors = options.connectors ?? new ReplitConnectors();
   const response = await connectors.proxy("sendgrid", "/v3/mail/send", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -61,7 +86,9 @@ export async function sendLeadNotificationEmail(
       personalizations: [{ to: [{ email: to }] }],
       from: { email: from, name: "Apex Grid Engineering Website" },
       reply_to: { email: lead.email, name: lead.name },
-      subject: `New inquiry from ${lead.name}${lead.company ? ` (${lead.company})` : ""}`,
+      subject: isEstimateLead
+        ? "New RFQ lead — /estimate"
+        : `New inquiry from ${lead.name}${lead.company ? ` (${lead.company})` : ""}`,
       content: [{ type: "text/plain", value: lines.join("\n") }],
     }),
   });
