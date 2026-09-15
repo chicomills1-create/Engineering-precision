@@ -211,6 +211,13 @@
       "when": 1789151000000,
       "tag": "0029_city_evidence_check_runs",
       "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "7",
+      "when": 1789152000000,
+      "tag": "0030_estimate_proposals",
+      "breakpoints": true
     }
   ]
 }

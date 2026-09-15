@@ -18,9 +18,93 @@ tags:
     description: Authenticated B2B outreach management.
   - name: client-jobs
     description: Public project intake and authenticated client job history.
+  - name: estimates
+    description: Contract-first estimate persistence and handoff operations.
   - name: linkedin
     description: Authenticated, manual-only LinkedIn research and review workflow.
 paths:
+  /estimates/proposals:
+    post:
+      operationId: createEstimateProposal
+      tags: [estimates]
+      summary: Recompute and persist a planning estimate proposal
+      description: The server recomputes pricing using the requested immutable rule version. Client-supplied prices are ignored.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EstimateProposalInput"
+      responses:
+        "201":
+          description: Persisted estimate proposal
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EstimateProposalResponse"
+        "400":
+          description: Invalid intake or upload claim
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Proposal could not be persisted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+  /estimates/{estimateId}:
+    get:
+      operationId: getEstimate
+      tags: [estimates]
+      summary: Get the saved reproducible estimate result
+      parameters:
+        - name: estimateId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^EST-[A-Z2-9]{12,32}$"
+      responses:
+        "200":
+          description: Saved estimate snapshot
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EstimateSnapshot"
+        "404":
+          description: Estimate not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+  /estimates/{estimateId}/pdf:
+    get:
+      operationId: getEstimatePdf
+      tags: [estimates]
+      summary: Download a deterministic PDF of the saved estimate
+      parameters:
+        - name: estimateId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^EST-[A-Z2-9]{12,32}$"
+      responses:
+        "200":
+          description: Application PDF
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        "404":
+          description: Estimate not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
   /outreach/inventory/import:
     post:
       operationId: importVerifiedOutreachInventory
@@ -1529,6 +1613,105 @@ components:
       properties:
         status:
           $ref: "#/components/schemas/ClientJobStatus"
+    EstimateUploadClaim:
+      type: object
+      required: [path, name, claimToken]
+      properties:
+        path: { type: string, minLength: 1, maxLength: 512 }
+        name: { type: string, minLength: 1, maxLength: 255 }
+        claimToken: { type: string, minLength: 32, maxLength: 128 }
+    EstimateProposalInput:
+      type: object
+      required: [ruleVersion, intake, contact, project, attribution, documents]
+      additionalProperties: false
+      properties:
+        ruleVersion: { type: string, minLength: 1, maxLength: 120 }
+        intake:
+          type: object
+          additionalProperties: false
+          properties:
+            state: { type: string, maxLength: 2 }
+            disciplines: { type: array, minItems: 1, items: { type: string } }
+            discipline: { type: string }
+            projectType: { type: string, minLength: 1, maxLength: 160 }
+            calculationType: { type: string }
+            schedule: { type: string, enum: [standard, rush, emergency] }
+            sheetCount: { type: number, minimum: 1 }
+            sizeBand: { type: string, enum: [small, medium, large, very-large] }
+            uploadMetadata: { type: object, additionalProperties: true }
+            requiredByDate: { type: string, format: date }
+            siteVisit: { type: boolean }
+            existing: { type: [string, number] }
+            floors: { type: [string, number] }
+            system: { type: [string, number] }
+            documentation: { type: [string, number] }
+            jurisdiction: { type: [string, number] }
+            complexity: { type: object, additionalProperties: true }
+            corrections: { type: boolean }
+            coordination: { type: boolean }
+            reviewScope: { type: string, maxLength: 2000 }
+            unknownInputs: { type: array, items: { type: string } }
+            unknownFlags: { type: array, items: { type: string } }
+            uncertainFlags: { type: array, items: { type: string } }
+            uncertain: { type: boolean }
+            partnerRoute: { type: boolean }
+            routingMode: { type: string, enum: [direct, partner] }
+            servicePath: { type: string, enum: [pe-review-sealing, engineering-calculations, calculations-stamped-drawings, partner-routing] }
+            path: { type: string, enum: [pe-review-sealing, engineering-calculations, calculations-stamped-drawings, partner-routing] }
+        contact:
+          type: object
+          required: [name, email, phone]
+          additionalProperties: false
+          properties:
+            name: { type: string, minLength: 1, maxLength: 160 }
+            email: { type: string, minLength: 5, maxLength: 320, pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$" }
+            phone: { type: string, minLength: 1, maxLength: 40 }
+            company: { type: string, maxLength: 200 }
+        project:
+          type: object
+          required: [city]
+          additionalProperties: false
+          properties:
+            city: { type: string, minLength: 1, maxLength: 240 }
+            projectName: { type: string, maxLength: 240 }
+            notes: { type: string, maxLength: 10000 }
+        attribution:
+          type: object
+          additionalProperties: true
+        partnerProfile:
+          type: object
+          additionalProperties: false
+          required: [volume, states, disciplines, workflow, agreement]
+          properties:
+            volume: { type: string, minLength: 1, maxLength: 200 }
+            states: { type: array, items: { type: string }, minItems: 1 }
+            disciplines: { type: array, items: { type: string }, minItems: 1 }
+            workflow: { type: string, minLength: 1, maxLength: 2000 }
+            agreement: { type: boolean }
+        documents:
+          type: array
+          maxItems: 20
+          items:
+            $ref: "#/components/schemas/EstimateUploadClaim"
+    EstimateProposalResponse:
+      type: object
+      required: [estimateId, proposalId, pricing, pdfUrl, notificationQueued]
+      properties:
+        estimateId: { type: string }
+        proposalId: { type: number }
+        pricing:
+          type: object
+          additionalProperties: true
+        pdfUrl: { type: string }
+        notificationQueued: { type: boolean }
+    EstimateSnapshot:
+      type: object
+      required: [estimateId, ruleVersion, intake, result]
+      properties:
+        estimateId: { type: string }
+        ruleVersion: { type: string }
+        intake: { type: object, additionalProperties: true }
+        result: { type: object, additionalProperties: true }
     Prospect:
       type: object
       required: [id, campaignId, companyName, city, state, audience, fitScore, needScore, emailStatus, status, contactStatus, contactEvidenceType, contactEvidence, contactEvidenceAt, contactReviewAt, createdAt, updatedAt]

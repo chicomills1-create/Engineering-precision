@@ -97,20 +97,39 @@ export function buildClientJobStatusNotificationPayload(
   };
 }
 
-export async function sendClientJobNotificationEmail(
+export function buildEstimateProposalNotificationContent(
   job: ClientJob,
   documents: ClientJobDocument[],
-): Promise<{ ok: true } | { ok: false; error: string }> {
-  const to = process.env.LEAD_NOTIFY_EMAIL;
-  const from = process.env.LEAD_NOTIFY_FROM_EMAIL || to;
-  if (!to || !from) {
-    return {
-      ok: false,
-      error: "LEAD_NOTIFY_EMAIL is not configured; skipping client job notification",
-    };
-  }
-
+): { subject: string; body: string } {
   const baseUrl = process.env.PUBLIC_SITE_URL || "https://apexgrideng.com";
+  const estimateSnapshot =
+    job.estimateSnapshot && typeof job.estimateSnapshot === "object"
+      ? (job.estimateSnapshot as Record<string, unknown>)
+      : null;
+  const estimateResult =
+    estimateSnapshot?.result && typeof estimateSnapshot.result === "object"
+      ? (estimateSnapshot.result as Record<string, unknown>)
+      : null;
+  const fee =
+    estimateResult?.fee && typeof estimateResult.fee === "object"
+      ? (estimateResult.fee as Record<string, unknown>)
+      : null;
+  const perDiscipline =
+    Array.isArray(estimateResult?.perDisciplinePrices)
+      ? estimateResult.perDisciplinePrices
+      : [];
+  const factors =
+    estimateResult?.factorBreakdown && typeof estimateResult.factorBreakdown === "object"
+      ? JSON.stringify(estimateResult.factorBreakdown)
+      : null;
+  const partnerRoute =
+    job.servicePath === "partner-routing" ||
+    job.routingMode === "partner" ||
+    Boolean(estimateSnapshot?.partnerProfile || estimateSnapshot?.partnerQualification);
+  const partnerProfile =
+    estimateSnapshot?.partnerProfile && typeof estimateSnapshot.partnerProfile === "object"
+      ? (estimateSnapshot.partnerProfile as Record<string, unknown>)
+      : null;
   const attachmentLines = documents.map((document) => {
     const wildcard = document.objectPath.replace(/^\/objects\//, "");
     const token = signDownloadPath(document.objectPath);
@@ -126,6 +145,39 @@ export async function sendClientJobNotificationEmail(
     `Services: ${job.services}`,
     job.timeline ? `Timeline: ${job.timeline}` : null,
     job.budgetContext ? `Budget context: ${job.budgetContext}` : null,
+    job.estimateId ? `Estimate ID: ${job.estimateId}` : null,
+    job.servicePath ? `Service path: ${job.servicePath}` : null,
+    job.routingMode ? `Routing: ${job.routingMode}` : null,
+    job.schedule ? `Schedule: ${job.schedule}` : null,
+    job.requiredByDate ? `Required by: ${job.requiredByDate}` : null,
+    partnerProfile
+      ? `Partner profile: states=${JSON.stringify(partnerProfile.states ?? [])}; disciplines=${JSON.stringify(partnerProfile.disciplines ?? [])}; volume=${String(partnerProfile.volume ?? "")}; workflow=${String(partnerProfile.workflow ?? "")}`
+      : null,
+    estimateResult ? `Coverage: ${String(estimateResult.coverage ?? "unknown")}` : null,
+    estimateResult?.eligibilityLanguage
+      ? `Result summary: ${String(estimateResult.eligibilityLanguage)}`
+      : null,
+    fee ? `Server-calculated fee: ${String(fee.low)} - ${String(fee.high)} (mid ${String(fee.mid)})` : null,
+    estimateResult?.turnaround && typeof estimateResult.turnaround === "object"
+      ? `Turnaround: ${String((estimateResult.turnaround as Record<string, unknown>).label ?? "To be confirmed")}`
+      : null,
+    perDiscipline.length > 0
+      ? `Per-discipline prices: ${perDiscipline.map((entry) => {
+          const item = entry as Record<string, unknown>;
+          const itemFee = item.fee as Record<string, unknown> | undefined;
+          return `${String(item.discipline)} ${String(itemFee?.low)}-${String(itemFee?.high)} (mid ${String(itemFee?.mid)})`;
+        }).join("; ")}`
+      : null,
+    factors ? `Factor breakdown: ${factors}` : null,
+    Array.isArray(estimateResult?.assumptions)
+      ? `Assumptions: ${(estimateResult.assumptions as unknown[]).map(String).join(" | ")}`
+      : null,
+    Array.isArray(estimateResult?.missingItems) && estimateResult.missingItems.length > 0
+      ? `Missing items: ${(estimateResult.missingItems as unknown[]).map(String).join(" | ")}`
+      : null,
+    job.estimateId
+      ? "Planning range only; no acceptance, sealing, or permit approval is promised."
+      : null,
     "",
     "Scope:",
     job.scope,
@@ -133,6 +185,32 @@ export async function sendClientJobNotificationEmail(
     "",
     `Review: ${baseUrl}/admin`,
   ].filter((line): line is string => line !== null);
+  const subject = job.estimateId
+    ? [
+        "New estimate proposal",
+        `[${job.estimateId}]`,
+        partnerRoute ? "[PARTNER ROUTE]" : null,
+        job.schedule === "rush" || job.schedule === "emergency" ? "[RUSH]" : null,
+        estimateResult?.highValue === true ? "[HIGH VALUE]" : null,
+      ].filter((part): part is string => Boolean(part)).join(" ")
+    : `New client project: ${job.projectType}${job.companyName ? ` — ${job.companyName}` : ""}`;
+  return { subject, body: lines.join("\n") };
+}
+
+export async function sendClientJobNotificationEmail(
+  job: ClientJob,
+  documents: ClientJobDocument[],
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const to = process.env.LEAD_NOTIFY_EMAIL;
+  const from = process.env.LEAD_NOTIFY_FROM_EMAIL || to;
+  if (!to || !from) {
+    return {
+      ok: false,
+      error: "LEAD_NOTIFY_EMAIL is not configured; skipping client job notification",
+    };
+  }
+
+  const { subject, body } = buildEstimateProposalNotificationContent(job, documents);
 
   const connectors = new ReplitConnectors();
   const response = await connectors.proxy("sendgrid", "/v3/mail/send", {
@@ -142,8 +220,8 @@ export async function sendClientJobNotificationEmail(
       personalizations: [{ to: [{ email: to }] }],
       from: { email: from, name: "Apex Grid Engineering Client Portal" },
       reply_to: { email: job.submitterEmail, name: job.submitterName },
-      subject: `New client project: ${job.projectType}${job.companyName ? ` — ${job.companyName}` : ""}`,
-      content: [{ type: "text/plain", value: lines.join("\n") }],
+      subject,
+      content: [{ type: "text/plain", value: body }],
     }),
   });
   if (!response.ok) {

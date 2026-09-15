@@ -9,6 +9,152 @@ import * as zod from 'zod';
 
 
 /**
+ * The server recomputes pricing using the requested immutable rule version. Client-supplied prices are ignored.
+ * @summary Recompute and persist a planning estimate proposal
+ */
+export const createEstimateProposalBodyRuleVersionMax = 120;
+
+export const createEstimateProposalBodyIntakeStateMax = 2;
+
+
+export const createEstimateProposalBodyIntakeProjectTypeMax = 160;
+
+
+export const createEstimateProposalBodyIntakeReviewScopeMax = 2000;
+
+export const createEstimateProposalBodyContactNameMax = 160;
+
+export const createEstimateProposalBodyContactEmailMin = 5;
+export const createEstimateProposalBodyContactEmailMax = 320;
+
+
+export const createEstimateProposalBodyContactEmailRegExp = new RegExp('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+export const createEstimateProposalBodyContactPhoneMax = 40;
+
+export const createEstimateProposalBodyContactCompanyMax = 200;
+
+export const createEstimateProposalBodyProjectCityMax = 240;
+
+export const createEstimateProposalBodyProjectProjectNameMax = 240;
+
+export const createEstimateProposalBodyProjectNotesMax = 10000;
+
+export const createEstimateProposalBodyPartnerProfileVolumeMax = 200;
+
+
+
+export const createEstimateProposalBodyPartnerProfileWorkflowMax = 2000;
+
+export const createEstimateProposalBodyDocumentsItemPathMax = 512;
+
+export const createEstimateProposalBodyDocumentsItemNameMax = 255;
+
+export const createEstimateProposalBodyDocumentsItemClaimTokenMin = 32;
+export const createEstimateProposalBodyDocumentsItemClaimTokenMax = 128;
+
+export const createEstimateProposalBodyDocumentsMax = 20;
+
+
+
+export const CreateEstimateProposalBody = zod.object({
+  "ruleVersion": zod.string().min(1).max(createEstimateProposalBodyRuleVersionMax),
+  "intake": zod.object({
+  "state": zod.string().max(createEstimateProposalBodyIntakeStateMax).optional(),
+  "disciplines": zod.array(zod.string()).min(1).optional(),
+  "discipline": zod.string().optional(),
+  "projectType": zod.string().min(1).max(createEstimateProposalBodyIntakeProjectTypeMax).optional(),
+  "calculationType": zod.string().optional(),
+  "schedule": zod.enum(['standard', 'rush', 'emergency']).optional(),
+  "sheetCount": zod.number().min(1).optional(),
+  "sizeBand": zod.enum(['small', 'medium', 'large', 'very-large']).optional(),
+  "uploadMetadata": zod.record(zod.string(), zod.unknown()).optional(),
+  "requiredByDate": zod.coerce.date().optional(),
+  "siteVisit": zod.boolean().optional(),
+  "existing": zod.union([zod.string(),zod.number()]).optional(),
+  "floors": zod.union([zod.string(),zod.number()]).optional(),
+  "system": zod.union([zod.string(),zod.number()]).optional(),
+  "documentation": zod.union([zod.string(),zod.number()]).optional(),
+  "jurisdiction": zod.union([zod.string(),zod.number()]).optional(),
+  "complexity": zod.record(zod.string(), zod.unknown()).optional(),
+  "corrections": zod.boolean().optional(),
+  "coordination": zod.boolean().optional(),
+  "reviewScope": zod.string().max(createEstimateProposalBodyIntakeReviewScopeMax).optional(),
+  "unknownInputs": zod.array(zod.string()).optional(),
+  "unknownFlags": zod.array(zod.string()).optional(),
+  "uncertainFlags": zod.array(zod.string()).optional(),
+  "uncertain": zod.boolean().optional(),
+  "partnerRoute": zod.boolean().optional(),
+  "routingMode": zod.enum(['direct', 'partner']).optional(),
+  "servicePath": zod.enum(['pe-review-sealing', 'engineering-calculations', 'calculations-stamped-drawings', 'partner-routing']).optional(),
+  "path": zod.enum(['pe-review-sealing', 'engineering-calculations', 'calculations-stamped-drawings', 'partner-routing']).optional()
+}),
+  "contact": zod.object({
+  "name": zod.string().min(1).max(createEstimateProposalBodyContactNameMax),
+  "email": zod.string().min(createEstimateProposalBodyContactEmailMin).max(createEstimateProposalBodyContactEmailMax).regex(createEstimateProposalBodyContactEmailRegExp),
+  "phone": zod.string().min(1).max(createEstimateProposalBodyContactPhoneMax),
+  "company": zod.string().max(createEstimateProposalBodyContactCompanyMax).optional()
+}),
+  "project": zod.object({
+  "city": zod.string().min(1).max(createEstimateProposalBodyProjectCityMax),
+  "projectName": zod.string().max(createEstimateProposalBodyProjectProjectNameMax).optional(),
+  "notes": zod.string().max(createEstimateProposalBodyProjectNotesMax).optional()
+}),
+  "attribution": zod.record(zod.string(), zod.unknown()),
+  "partnerProfile": zod.object({
+  "volume": zod.string().min(1).max(createEstimateProposalBodyPartnerProfileVolumeMax),
+  "states": zod.array(zod.string()).min(1),
+  "disciplines": zod.array(zod.string()).min(1),
+  "workflow": zod.string().min(1).max(createEstimateProposalBodyPartnerProfileWorkflowMax),
+  "agreement": zod.boolean()
+}).optional(),
+  "documents": zod.array(zod.object({
+  "path": zod.string().min(1).max(createEstimateProposalBodyDocumentsItemPathMax),
+  "name": zod.string().min(1).max(createEstimateProposalBodyDocumentsItemNameMax),
+  "claimToken": zod.string().min(createEstimateProposalBodyDocumentsItemClaimTokenMin).max(createEstimateProposalBodyDocumentsItemClaimTokenMax)
+})).max(createEstimateProposalBodyDocumentsMax)
+})
+
+export const CreateEstimateProposalResponse = zod.object({
+  "estimateId": zod.string(),
+  "proposalId": zod.number(),
+  "pricing": zod.record(zod.string(), zod.unknown()),
+  "pdfUrl": zod.string(),
+  "notificationQueued": zod.boolean()
+})
+
+
+/**
+ * @summary Get the saved reproducible estimate result
+ */
+export const getEstimatePathEstimateIdRegExp = new RegExp('^EST-[A-Z2-9]{12,32}$');
+
+
+export const GetEstimateParams = zod.object({
+  "estimateId": zod.coerce.string().regex(getEstimatePathEstimateIdRegExp)
+})
+
+export const GetEstimateResponse = zod.object({
+  "estimateId": zod.string(),
+  "ruleVersion": zod.string(),
+  "intake": zod.record(zod.string(), zod.unknown()),
+  "result": zod.record(zod.string(), zod.unknown())
+})
+
+
+/**
+ * @summary Download a deterministic PDF of the saved estimate
+ */
+export const getEstimatePdfPathEstimateIdRegExp = new RegExp('^EST-[A-Z2-9]{12,32}$');
+
+
+export const GetEstimatePdfParams = zod.object({
+  "estimateId": zod.coerce.string().regex(getEstimatePdfPathEstimateIdRegExp)
+})
+
+export const GetEstimatePdfResponse = zod.unknown()
+
+
+/**
  * @summary Import the bundled verified business inventory (Clerk admin only)
  */
 export const ImportVerifiedOutreachInventoryResponse = zod.object({

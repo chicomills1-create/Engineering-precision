@@ -38,6 +38,9 @@ import type {
   ContactEvidenceResult,
   DraftGenerationInput,
   ErrorMessage,
+  EstimateProposalInput,
+  EstimateProposalResponse,
+  EstimateSnapshot,
   GetLinkedinQueueParams,
   GetOutreachLaneConfigParams,
   GrowthDashboard,
@@ -149,6 +152,232 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   }
   return result;
 };
+
+export const getCreateEstimateProposalUrl = () => {
+
+
+
+
+  return `/api/estimates/proposals`
+}
+
+/**
+ * The server recomputes pricing using the requested immutable rule version. Client-supplied prices are ignored.
+ * @summary Recompute and persist a planning estimate proposal
+ */
+export const createEstimateProposal = async (estimateProposalInput: EstimateProposalInput, options?: Parameters<typeof customFetch>[1]): Promise<EstimateProposalResponse> => {
+
+  return customFetch<EstimateProposalResponse>(getCreateEstimateProposalUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(estimateProposalInput)
+  }
+);}
+
+
+
+
+
+export const getCreateEstimateProposalMutationOptions = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createEstimateProposal>>, TError,{data: BodyType<EstimateProposalInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof createEstimateProposal>>, TError,{data: BodyType<EstimateProposalInput>}, TContext> => {
+
+const mutationKey = ['createEstimateProposal'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof createEstimateProposal>>, {data: BodyType<EstimateProposalInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  createEstimateProposal(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CreateEstimateProposalMutationResult = NonNullable<Awaited<ReturnType<typeof createEstimateProposal>>>
+    export type CreateEstimateProposalMutationBody = BodyType<EstimateProposalInput>
+    export type CreateEstimateProposalMutationError = ErrorType<ErrorMessage>
+
+    /**
+ * @summary Recompute and persist a planning estimate proposal
+ */
+export const useCreateEstimateProposal = <TError = ErrorType<ErrorMessage>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createEstimateProposal>>, TError,{data: BodyType<EstimateProposalInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof createEstimateProposal>>,
+        TError,
+        {data: BodyType<EstimateProposalInput>},
+        TContext
+      > => {
+      return useMutation(getCreateEstimateProposalMutationOptions(options));
+    }
+
+export const getGetEstimateUrl = (estimateId: string,) => {
+
+
+
+
+  return `/api/estimates/${estimateId}`
+}
+
+/**
+ * @summary Get the saved reproducible estimate result
+ */
+export const getEstimate = async (estimateId: string, options?: Parameters<typeof customFetch>[1]): Promise<EstimateSnapshot> => {
+
+  return customFetch<EstimateSnapshot>(getGetEstimateUrl(estimateId),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetEstimateQueryKey = (estimateId: string,) => {
+    return [
+    `/api/estimates/${estimateId}`
+    ] as const;
+    }
+
+
+export const getGetEstimateQueryOptions = <TData = Awaited<ReturnType<typeof getEstimate>>, TError = ErrorType<ErrorMessage>>(estimateId: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getEstimate>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetEstimateQueryKey(estimateId);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getEstimate>>> = ({ signal }) => getEstimate(estimateId, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: estimateId !== null && estimateId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getEstimate>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetEstimateQueryResult = NonNullable<Awaited<ReturnType<typeof getEstimate>>>
+export type GetEstimateQueryError = ErrorType<ErrorMessage>
+
+
+/**
+ * @summary Get the saved reproducible estimate result
+ */
+
+export function useGetEstimate<TData = Awaited<ReturnType<typeof getEstimate>>, TError = ErrorType<ErrorMessage>>(
+ estimateId: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getEstimate>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetEstimateQueryOptions(estimateId,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getGetEstimatePdfUrl = (estimateId: string,) => {
+
+
+
+
+  return `/api/estimates/${estimateId}/pdf`
+}
+
+/**
+ * @summary Download a deterministic PDF of the saved estimate
+ */
+export const getEstimatePdf = async (estimateId: string, options?: Parameters<typeof customFetch>[1]): Promise<Blob> => {
+
+  return customFetch<Blob>(getGetEstimatePdfUrl(estimateId),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetEstimatePdfQueryKey = (estimateId: string,) => {
+    return [
+    `/api/estimates/${estimateId}/pdf`
+    ] as const;
+    }
+
+
+export const getGetEstimatePdfQueryOptions = <TData = Awaited<ReturnType<typeof getEstimatePdf>>, TError = ErrorType<ErrorMessage>>(estimateId: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getEstimatePdf>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetEstimatePdfQueryKey(estimateId);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getEstimatePdf>>> = ({ signal }) => getEstimatePdf(estimateId, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: estimateId !== null && estimateId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getEstimatePdf>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetEstimatePdfQueryResult = NonNullable<Awaited<ReturnType<typeof getEstimatePdf>>>
+export type GetEstimatePdfQueryError = ErrorType<ErrorMessage>
+
+
+/**
+ * @summary Download a deterministic PDF of the saved estimate
+ */
+
+export function useGetEstimatePdf<TData = Awaited<ReturnType<typeof getEstimatePdf>>, TError = ErrorType<ErrorMessage>>(
+ estimateId: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getEstimatePdf>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetEstimatePdfQueryOptions(estimateId,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
 
 export const getImportVerifiedOutreachInventoryUrl = () => {
 

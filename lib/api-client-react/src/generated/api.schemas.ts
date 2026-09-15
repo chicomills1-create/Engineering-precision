@@ -426,6 +426,203 @@ export interface ClientJobStatusNotificationInput {
   status: ClientJobStatus;
 }
 
+export interface EstimateUploadClaim {
+  /**
+     * @minLength 1
+     * @maxLength 512
+     */
+  path: string;
+  /**
+     * @minLength 1
+     * @maxLength 255
+     */
+  name: string;
+  /**
+     * @minLength 32
+     * @maxLength 128
+     */
+  claimToken: string;
+}
+
+export type EstimateProposalInputIntakeSchedule = typeof EstimateProposalInputIntakeSchedule[keyof typeof EstimateProposalInputIntakeSchedule];
+
+
+export const EstimateProposalInputIntakeSchedule = {
+  standard: 'standard',
+  rush: 'rush',
+  emergency: 'emergency',
+} as const;
+
+export type EstimateProposalInputIntakeSizeBand = typeof EstimateProposalInputIntakeSizeBand[keyof typeof EstimateProposalInputIntakeSizeBand];
+
+
+export const EstimateProposalInputIntakeSizeBand = {
+  small: 'small',
+  medium: 'medium',
+  large: 'large',
+  'very-large': 'very-large',
+} as const;
+
+export type EstimateProposalInputIntakeUploadMetadata = { [key: string]: unknown };
+
+export type EstimateProposalInputIntakeComplexity = { [key: string]: unknown };
+
+export type EstimateProposalInputIntakeRoutingMode = typeof EstimateProposalInputIntakeRoutingMode[keyof typeof EstimateProposalInputIntakeRoutingMode];
+
+
+export const EstimateProposalInputIntakeRoutingMode = {
+  direct: 'direct',
+  partner: 'partner',
+} as const;
+
+export type EstimateProposalInputIntakeServicePath = typeof EstimateProposalInputIntakeServicePath[keyof typeof EstimateProposalInputIntakeServicePath];
+
+
+export const EstimateProposalInputIntakeServicePath = {
+  'pe-review-sealing': 'pe-review-sealing',
+  'engineering-calculations': 'engineering-calculations',
+  'calculations-stamped-drawings': 'calculations-stamped-drawings',
+  'partner-routing': 'partner-routing',
+} as const;
+
+export type EstimateProposalInputIntakePath = typeof EstimateProposalInputIntakePath[keyof typeof EstimateProposalInputIntakePath];
+
+
+export const EstimateProposalInputIntakePath = {
+  'pe-review-sealing': 'pe-review-sealing',
+  'engineering-calculations': 'engineering-calculations',
+  'calculations-stamped-drawings': 'calculations-stamped-drawings',
+  'partner-routing': 'partner-routing',
+} as const;
+
+export type EstimateProposalInputIntake = {
+  /** @maxLength 2 */
+  state?: string;
+  /** @minItems 1 */
+  disciplines?: string[];
+  discipline?: string;
+  /**
+     * @minLength 1
+     * @maxLength 160
+     */
+  projectType?: string;
+  calculationType?: string;
+  schedule?: EstimateProposalInputIntakeSchedule;
+  /** @minimum 1 */
+  sheetCount?: number;
+  sizeBand?: EstimateProposalInputIntakeSizeBand;
+  uploadMetadata?: EstimateProposalInputIntakeUploadMetadata;
+  requiredByDate?: string;
+  siteVisit?: boolean;
+  existing?: string | number;
+  floors?: string | number;
+  system?: string | number;
+  documentation?: string | number;
+  jurisdiction?: string | number;
+  complexity?: EstimateProposalInputIntakeComplexity;
+  corrections?: boolean;
+  coordination?: boolean;
+  /** @maxLength 2000 */
+  reviewScope?: string;
+  unknownInputs?: string[];
+  unknownFlags?: string[];
+  uncertainFlags?: string[];
+  uncertain?: boolean;
+  partnerRoute?: boolean;
+  routingMode?: EstimateProposalInputIntakeRoutingMode;
+  servicePath?: EstimateProposalInputIntakeServicePath;
+  path?: EstimateProposalInputIntakePath;
+};
+
+export type EstimateProposalInputContact = {
+  /**
+     * @minLength 1
+     * @maxLength 160
+     */
+  name: string;
+  /**
+     * @minLength 5
+     * @maxLength 320
+     * @pattern ^[^@\s]+@[^@\s]+\.[^@\s]+$
+     */
+  email: string;
+  /**
+     * @minLength 1
+     * @maxLength 40
+     */
+  phone: string;
+  /** @maxLength 200 */
+  company?: string;
+};
+
+export type EstimateProposalInputProject = {
+  /**
+     * @minLength 1
+     * @maxLength 240
+     */
+  city: string;
+  /** @maxLength 240 */
+  projectName?: string;
+  /** @maxLength 10000 */
+  notes?: string;
+};
+
+export type EstimateProposalInputAttribution = { [key: string]: unknown };
+
+export type EstimateProposalInputPartnerProfile = {
+  /**
+     * @minLength 1
+     * @maxLength 200
+     */
+  volume: string;
+  /** @minItems 1 */
+  states: string[];
+  /** @minItems 1 */
+  disciplines: string[];
+  /**
+     * @minLength 1
+     * @maxLength 2000
+     */
+  workflow: string;
+  agreement: boolean;
+};
+
+export interface EstimateProposalInput {
+  /**
+     * @minLength 1
+     * @maxLength 120
+     */
+  ruleVersion: string;
+  intake: EstimateProposalInputIntake;
+  contact: EstimateProposalInputContact;
+  project: EstimateProposalInputProject;
+  attribution: EstimateProposalInputAttribution;
+  partnerProfile?: EstimateProposalInputPartnerProfile;
+  /** @maxItems 20 */
+  documents: EstimateUploadClaim[];
+}
+
+export type EstimateProposalResponsePricing = { [key: string]: unknown };
+
+export interface EstimateProposalResponse {
+  estimateId: string;
+  proposalId: number;
+  pricing: EstimateProposalResponsePricing;
+  pdfUrl: string;
+  notificationQueued: boolean;
+}
+
+export type EstimateSnapshotIntake = { [key: string]: unknown };
+
+export type EstimateSnapshotResult = { [key: string]: unknown };
+
+export interface EstimateSnapshot {
+  estimateId: string;
+  ruleVersion: string;
+  intake: EstimateSnapshotIntake;
+  result: EstimateSnapshotResult;
+}
+
 export type ProspectAudience = typeof ProspectAudience[keyof typeof ProspectAudience];
 
 

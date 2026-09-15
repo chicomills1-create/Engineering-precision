@@ -1,6 +1,8 @@
 import {
   boolean,
   integer,
+  index,
+  jsonb,
   pgTable,
   serial,
   text,
@@ -51,9 +53,20 @@ export const clientJobsTable = pgTable("client_jobs", {
   archivedAt: timestamp("archived_at", { withTimezone: true }),
   monthlyEmailOptIn: boolean("monthly_email_opt_in").notNull().default(false),
   monthlyEmailOptedAt: timestamp("monthly_email_opted_at", { withTimezone: true }),
+  estimateId: text("estimate_id"),
+  estimateSnapshot: jsonb("estimate_snapshot"),
+  pricingRuleVersion: text("pricing_rule_version"),
+  routingMode: text("routing_mode"),
+  requiredByDate: text("required_by_date"),
+  servicePath: text("service_path"),
+  schedule: text("schedule"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow().$onUpdate(() => new Date()),
-});
+}, (table) => [
+  uniqueIndex("client_jobs_estimate_id_unique").on(table.estimateId),
+  index("client_jobs_service_path_idx").on(table.servicePath),
+  index("client_jobs_schedule_idx").on(table.schedule),
+]);
 
 export const clientJobUploadsTable = pgTable("client_job_uploads", {
   id: serial("id").primaryKey(),
@@ -83,7 +96,9 @@ export const insertClientJobDocumentSchema = createInsertSchema(clientJobDocumen
 
 export type ClientCompany = typeof clientCompaniesTable.$inferSelect;
 export type ClientMembership = typeof clientMembershipsTable.$inferSelect;
-export type ClientJob = typeof clientJobsTable.$inferSelect;
+type ClientJobEstimateFields = "estimateId" | "estimateSnapshot" | "pricingRuleVersion" | "routingMode" | "requiredByDate" | "servicePath" | "schedule";
+export type ClientJob = Omit<typeof clientJobsTable.$inferSelect, ClientJobEstimateFields>
+  & Partial<Pick<typeof clientJobsTable.$inferSelect, ClientJobEstimateFields>>;
 export type ClientJobUpload = typeof clientJobUploadsTable.$inferSelect;
 export type ClientJobDocument = typeof clientJobDocumentsTable.$inferSelect;
 export type InsertClientJob = z.infer<typeof insertClientJobSchema>;
