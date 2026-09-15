@@ -166,21 +166,21 @@ export default function Home() {
             
             <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
               <Link
-                href="/request-proposal?utm_source=website&utm_medium=organic&utm_campaign=homepage_hero"
+                href="/estimate"
                 className="w-full sm:w-auto h-16 px-10 bg-primary text-white font-bold text-sm uppercase tracking-[0.15em] flex items-center justify-center gap-3 rounded-sm hover:bg-primary/90 transition-all group relative overflow-hidden focus-visible:ring-4 focus-visible:ring-primary/50"
               >
                 <div className="absolute inset-0 w-full h-full bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
                 <span className="relative z-10 flex items-center gap-3 whitespace-nowrap">
-                  Request a Proposal
+                  Get an Instant Estimate
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
               <Link
-                href="/estimate"
+                href="/request-proposal?utm_source=website&utm_medium=organic&utm_campaign=homepage_hero"
                 className="w-full sm:w-auto h-16 px-10 bg-white text-primary font-bold text-sm uppercase tracking-[0.15em] flex items-center justify-center gap-3 rounded-sm hover:bg-white/90 transition-all group focus-visible:ring-4 focus-visible:ring-white/50"
               >
                 <span className="flex items-center gap-3 whitespace-nowrap">
-                  Get an Instant Estimate
+                  Request a Proposal
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
@@ -212,6 +212,21 @@ export default function Home() {
               <div className="text-[10px] md:text-xs font-mono uppercase tracking-[0.15em] md:tracking-[0.2em] text-muted-foreground group-hover:text-white transition-colors duration-300">{stat.label}</div>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-background py-5" aria-label="Instant engineering fee estimator">
+        <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 text-center sm:flex-row sm:px-8 sm:text-left">
+          <p className="font-display text-xl font-semibold text-white md:text-2xl">
+            Ballpark your engineering fees in under a minute.
+          </p>
+          <Link
+            href="/estimate"
+            className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-sm bg-primary px-7 text-xs font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-primary/90 focus-visible:ring-4 focus-visible:ring-primary/50"
+          >
+            Get an Instant Estimate
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </div>
       </section>
 

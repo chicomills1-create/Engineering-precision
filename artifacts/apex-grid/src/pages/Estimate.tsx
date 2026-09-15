@@ -7,7 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { usePageMeta } from "@/lib/seo";
+import { SITE_URL, usePageMeta } from "@/lib/seo";
 import { Check, Loader2, ArrowRight, ArrowLeft, Calculator, FileText } from "lucide-react";
 import { 
   ESTIMATE_PROJECT_TYPES, 
@@ -45,6 +45,43 @@ const PAGE_META = {
   title: "Instant Ballpark Estimator | Apex Grid Engineering",
   description: "Get an instant, non-binding ballpark estimate for your engineering project. Preconstruction intake for MEP, Structural, Civil, and more.",
   path: "/estimate",
+};
+
+const ESTIMATE_FAQS = [
+  {
+    question: "How does the instant engineering estimator work?",
+    answer: "The estimator uses the project type, approximate area, and location you provide to produce a preliminary, non-binding planning range. It is an early budgeting tool, not a proposal, construction estimate, permit-fee quote, or guarantee of final scope.",
+  },
+  {
+    question: "What affects MEP engineering fees?",
+    answer: "MEP engineering effort depends on the building use and size, system complexity, existing-condition information, equipment selections, utility requirements, coordination needs, energy-code scope, permit deliverables, schedule, and the quality of the starting documents.",
+  },
+  {
+    question: "What affects structural engineering fees?",
+    answer: "Structural fees depend on the structural system, loads, building configuration, existing conditions, available drawings, site observations, calculations, connection or foundation scope, coordination, and the documents required by the authority having jurisdiction.",
+  },
+  {
+    question: "How quickly will I receive the ballpark estimate?",
+    answer: "The estimator displays a preliminary result after you provide the requested project information. A final proposal takes longer because the team must review the actual scope, available records, jurisdiction, disciplines, deliverables, and schedule.",
+  },
+  {
+    question: "Is the estimator result a final engineering proposal?",
+    answer: "No. The result is a non-binding ballpark for early planning. Apex Grid confirms project-specific scope, professional responsibility, licensing, assumptions, exclusions, availability, and final fees before any engagement begins.",
+  },
+];
+
+const ESTIMATE_FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `${SITE_URL}/estimate#faq`,
+  mainEntity: ESTIMATE_FAQS.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
 };
 
 export default function Estimate() {
@@ -229,6 +266,10 @@ Non-binding ballpark for budgeting only — final proposal follows a scope revie
 
   return (
     <div className="flex flex-col min-h-screen pt-32 pb-20 bg-background relative overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(ESTIMATE_FAQ_SCHEMA).replace(/</g, "\\u003c") }}
+      />
       <div className="absolute inset-0 pointer-events-none bg-grid-white opacity-20 mask-image:linear-gradient(to_bottom,white,transparent)"></div>
       
       <div className="container mx-auto px-4 max-w-4xl relative z-10">
@@ -529,6 +570,23 @@ Non-binding ballpark for budgeting only — final proposal follows a scope revie
             </Form>
           </div>
         </div>
+
+        <section className="mt-16 border-t border-border pt-12" aria-labelledby="estimate-faq-heading">
+          <div className="mb-8 max-w-2xl">
+            <p className="mb-3 font-mono text-xs font-bold uppercase tracking-widest text-primary">Estimator FAQ</p>
+            <h2 id="estimate-faq-heading" className="font-display text-3xl font-bold text-white md:text-4xl">
+              Frequently Asked Questions
+            </h2>
+          </div>
+          <div className="grid gap-px border border-border bg-border">
+            {ESTIMATE_FAQS.map((item) => (
+              <div key={item.question} className="bg-card p-6 md:p-8">
+                <h3 className="mb-3 font-display text-xl font-semibold text-white">{item.question}</h3>
+                <p className="leading-relaxed text-muted-foreground">{item.answer}</p>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );

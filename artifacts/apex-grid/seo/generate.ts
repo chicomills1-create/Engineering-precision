@@ -965,6 +965,9 @@ function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
   const serviceHref = "cluster" in page ? page.serviceHref : "/services/";
   const links = [
     ...related,
+    ...("cluster" in page && page.cluster === "Cost and pricing"
+      ? [{ label: "Use our instant estimator", href: "/estimate" }]
+      : []),
     { label: "Engineering service for this question", href: serviceHref },
     { label: "Metro engineering guides", href: "/metros/" },
     { label: "Verified service areas", href: "/locations/" },
