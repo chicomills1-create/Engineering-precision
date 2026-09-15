@@ -1,0 +1,14 @@
+{
+  "generatedAt": "deterministic",
+  "threshold": 0.85,
+  "phase3Pages": 400,
+  "comparisons": 79800,
+  "violations": 0,
+  "failures": 0,
+  "maxObservedSimilarity": 0.7564,
+  "maxObservedPair": [
+    "/metros/oxnard-thousand-oaks-ventura-ca/",
+    "/metros/modesto-ca/"
+  ],
+  "topMatches": []
+}
