@@ -19,6 +19,9 @@
     <loc>https://apexgrideng.com/sitemap-locations.xml</loc>
   </sitemap>
   <sitemap>
+    <loc>https://apexgrideng.com/sitemap-metros.xml</loc>
+  </sitemap>
+  <sitemap>
     <loc>https://apexgrideng.com/sitemap-architecture-locations.xml</loc>
   </sitemap>
   <sitemap>

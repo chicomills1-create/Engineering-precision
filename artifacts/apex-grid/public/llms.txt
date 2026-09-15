@@ -11,6 +11,7 @@ This file is a concise map of canonical public information. It does not imply lo
 - Resources: https://apexgrideng.com/resources/
 - Glossary: https://apexgrideng.com/glossary/
 - Service-area information: https://apexgrideng.com/locations/
+- Census metro engineering guides: https://apexgrideng.com/metros/
 - Architecture information: https://apexgrideng.com/architecture/
 - General contracting information: https://apexgrideng.com/general-contracting/
 - About: https://apexgrideng.com/about

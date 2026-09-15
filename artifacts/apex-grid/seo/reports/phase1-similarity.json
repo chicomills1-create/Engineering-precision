@@ -1,0 +1,14 @@
+{
+  "generatedAt": "deterministic",
+  "threshold": 0.85,
+  "phase1Pages": 400,
+  "comparisons": 79800,
+  "violations": 0,
+  "failures": 0,
+  "maxObservedSimilarity": 0.7606,
+  "maxObservedPair": [
+    "/metros/san-antonio-new-braunfels-tx/pe-stamp/",
+    "/metros/san-francisco-oakland-fremont-ca/pe-stamp/"
+  ],
+  "topMatches": []
+}

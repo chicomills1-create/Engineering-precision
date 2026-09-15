@@ -41,6 +41,7 @@ export const SEO_GENERATOR_FIXED_INDEX_ROUTES = [
   "/engineering-glossary",
   "/title-24",
   "/projects",
+  "/metros",
   "/sitemap",
 ] as const;
 
@@ -86,7 +87,7 @@ export function assertRouteOwnership(): void {
     if (!REACT_PRERENDER_ROUTES.includes(route)) {
       throw new Error(`React-owned shared route is not prerendered: ${route}`);
     }
-    if (SEO_GENERATOR_FIXED_INDEX_ROUTES.includes(route)) {
+    if ((SEO_GENERATOR_FIXED_INDEX_ROUTES as readonly string[]).includes(route)) {
       throw new Error(`React-owned shared route is still claimed by the SEO generator: ${route}`);
     }
   }

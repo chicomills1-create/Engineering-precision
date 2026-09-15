@@ -113,6 +113,13 @@ import {
   type Phase0ResourcePage,
   type Phase0ServicePage,
 } from "./phase0-corpus";
+import {
+  PHASE1_METROS,
+  PHASE1_SERVICE_SLUGS,
+  PHASE1_SOURCE_URL,
+  type Phase1Metro,
+  type Phase1ServiceSlug,
+} from "./phase1-metros";
 
 const PROMOTED_CITY_KEYS = new Set([
   "georgia/atlanta", "texas/austin", "north-carolina/charlotte",
@@ -156,6 +163,7 @@ function loadDirectory(): CityDirectory {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC = path.resolve(__dirname, "../public");
 const OUT = path.join(PUBLIC, "locations");
+const METROS_OUT = path.join(PUBLIC, "metros");
 
 /** States where Apex Grid is NOT licensed — no pages are generated for these
  * (the site publishes its reviewed licensing coverage; claiming licensed services in an
@@ -409,6 +417,7 @@ This file is a concise map of canonical public information. It does not imply lo
 - Resources: ${SITE}/resources/
 - Glossary: ${SITE}/glossary/
 - Service-area information: ${SITE}/locations/
+- Census metro engineering guides: ${SITE}/metros/
 - Architecture information: ${SITE}/architecture/
 - General contracting information: ${SITE}/general-contracting/
 - About: ${SITE}/about
@@ -1115,6 +1124,202 @@ function engineeringIntentHubPage(): string {
 }
 
 const orgSchema = APEX_GRID_BUSINESS_SCHEMA;
+
+const PHASE1_AUTHOR = "Jeremy Mills, CEO & Founder, Apex Grid Engineering — USAF Veteran";
+const PHASE1_FOOTER_REPLACEMENT = "Engineering availability, professional responsibility, and jurisdiction-specific requirements are confirmed for each project.";
+function phase1Html(html: string): string {
+  return html.replace(
+    "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction.",
+    PHASE1_FOOTER_REPLACEMENT,
+  );
+}
+const phase1ServiceLabels: Record<Phase1ServiceSlug, string> = {
+  "permit-guide": "Permit Guide",
+  "structural-engineering": "Structural Engineering",
+  "mep-engineering": "MEP Engineering",
+  "pe-stamp": "Professional Seal Guidance",
+  "plan-check-corrections": "Plan-Check Corrections",
+  "energy-compliance": "Energy Compliance",
+  "engineering-calculations": "Engineering Calculations",
+};
+const phase1ServiceSummaries: Record<Phase1ServiceSlug, string> = {
+  "permit-guide": "A project-specific permit path starts with the current drawings, scope, criteria, and filing requirements—not a generic checklist.",
+  "structural-engineering": "Structural scope connects existing conditions, gravity and lateral assumptions, member checks, details, and coordinated permit documents.",
+  "mep-engineering": "MEP coordination brings mechanical, electrical, and plumbing design inputs together with architectural backgrounds, equipment, utilities, and code documentation.",
+  "pe-stamp": "A professional seal identifies responsibility for eligible engineering work after the responsible professional performs or independently reviews that defined scope.",
+  "plan-check-corrections": "Correction support turns reviewer comments into an accountable response matrix, coordinated revisions, and a clear record of what remains unresolved.",
+  "energy-compliance": "Energy documentation follows the adopted path, project inputs, envelope and system choices, calculations or modeling, and the authority's submission requirements.",
+  "engineering-calculations": "Calculations make design decisions traceable by documenting inputs, assumptions, methods, checks, and conclusions for the defined scope.",
+};
+
+function phase1MetroHubPage(metro: Phase1Metro): string {
+  const url = `/metros/${metro.slug}/`;
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Metro engineering guides", href: "/metros/" },
+    { name: `${metro.representativeCity} metro` },
+  ];
+  const links = PHASE1_SERVICE_SLUGS.map((slug) =>
+    `<a class="card" href="${url}${slug}/"><div class="label">${phase1ServiceLabels[slug]}</div><h3>${metro.representativeCity} ${phase1ServiceLabels[slug]}</h3><p>${phase1ServiceSummaries[slug]}</p></a>`,
+  ).join("");
+  const body = `<main data-phase1="true">
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container"><p class="kicker">Census CBSA ${metro.cbsaCode} · 2025 permit context</p><h1>Engineering Guides for the ${esc(metro.metroName)} Metro</h1><p class="lede">A practical, jurisdiction-neutral engineering guide for the ${esc(metro.metroName)} metropolitan area, represented by ${esc(metro.representativeCity)}, ${esc(metro.representativeState)}. The 2025 Census BPS final annual record reports ${metro.permitTotal2025.toLocaleString("en-US")} permitted housing units for this ranked metro record.</p><p class="note">By ${esc(PHASE1_AUTHOR)}</p></div></section>
+<section class="block"><div class="container"><h2>How to use this <em>metro guide</em></h2><div class="prose"><p>${esc(metro.editorial.planningLens)}</p><p>${esc(metro.editorial.coordinationLens)}</p><p>This page uses the Census metro record for market context only. It does not invent a local permitting fact, identify an authority's current checklist, promise coverage, or substitute for a project intake and responsible professional review.</p></div></div></section>
+<section class="block"><div class="container"><h2>${esc(metro.representativeCity)} <em>engineering paths</em></h2><div class="grid2">${links}</div></div></section>
+<section class="block"><div class="container"><h2>Evidence before <em>design decisions</em></h2><div class="prose"><p>${esc(metro.editorial.documentationLens)}</p><p>${esc(metro.editorial.deliveryLens)}</p><p>For an initial review, gather the project address, scope narrative, current architectural backgrounds, existing-condition photographs or measurements, equipment information, site or geotechnical records where relevant, prior comments, and requested deliverables. The responsible professional identifies what is sufficient for the defined question.</p></div></div></section>
+<section class="block"><div class="container"><h2>2025 Census <em>source record</em></h2><div class="prose"><p>CBSA ${metro.cbsaCode} is ranked ${metro.rank} among the eligible Metro Code 2 records in the final annual 2025 BPS sheet, ordered by Total descending. “Total” is used as published by Census; it is not a forecast, project count, engineering volume, or promise of demand.</p><p><a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">View the official Census BPS workbook (${PHASE1_SERVICE_SLUGS.length ? "MSA Units Ann" : "source"})</a></p></div></div></section>
+<section class="ctaband"><div class="container"><h2>Discuss a ${esc(metro.representativeCity)} project</h2><p>Share the address, scope, drawings, existing records, authority information already available, and requested deliverables.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
+</main>`;
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `Engineering Guides for the ${metro.metroName} Metro`,
+    url: `${SITE}${url}`,
+    description: `Engineering planning and documentation guides for the ${metro.metroName} metro, with Census CBSA ${metro.cbsaCode} context.`,
+    isPartOf: { "@type": "WebSite", name: "Apex Grid Engineering", url: SITE },
+    about: { "@type": "Place", name: metro.metroName },
+  };
+  return phase1Html(htmlShell({
+    title: `${metro.representativeCity} Metro Engineering Guides | Apex Grid`,
+    description: `Permit, structural, MEP, energy, corrections, calculations, and professional-seal guidance for the ${metro.metroName} metro.`,
+    canonical: `${SITE}${url}`,
+    schemaJson: [schema, breadcrumbSchema(crumbs)],
+    body,
+  }));
+}
+
+function phase1MetroServicePage(metro: Phase1Metro, service: Phase1ServiceSlug): string {
+  const url = `/metros/${metro.slug}/${service}/`;
+  const label = phase1ServiceLabels[service];
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Metro engineering guides", href: "/metros/" },
+    { name: `${metro.representativeCity} metro`, href: `/metros/${metro.slug}/` },
+    { name: label },
+  ];
+  const related = PHASE1_SERVICE_SLUGS.filter((candidate) => candidate !== service)
+    .map((candidate) => `<a href="/metros/${metro.slug}/${candidate}/">${esc(phase1ServiceLabels[candidate])} for ${esc(metro.representativeCity)}</a>`).join("");
+  const serviceDetails: Record<Phase1ServiceSlug, { heading: string; paragraphs: string[]; bullets: string[] }> = {
+    "permit-guide": {
+      heading: "Build a project-specific permit path",
+      paragraphs: [
+        "A permit guide should identify the project type, work boundary, discipline responsibilities, drawing index, calculation needs, forms, file requirements, and review questions that must be confirmed with the authority having jurisdiction. It should not pretend that a general metro label determines an authority's current process.",
+        metro.editorial.planningLens,
+        "Separate intake, completeness review, technical review, correction response, resubmittal, and approval. Those steps may involve different parties and records; a schedule should name dependencies rather than promise a universal duration.",
+      ],
+      bullets: ["Current architectural and engineering backgrounds", "Project address, scope, occupancy, and alteration boundary", "Applicable code edition and authority checklist to confirm", "Drawing, calculation, form, and file-format inventory", "Comment ownership and controlled resubmittal record"],
+    },
+    "structural-engineering": {
+      heading: "Connect the load path to the permit set",
+      paragraphs: [
+        "Structural engineering starts with the question the project must answer: new gravity load, lateral change, opening, foundation condition, equipment support, repair, or another defined scope. The engineer confirms existing evidence and design criteria before accepting responsibility for conclusions.",
+        metro.editorial.coordinationLens,
+        "A defensible package coordinates plans, details, notes, schedules, and calculations. It distinguishes observed conditions from assumptions and flags when field verification, survey, testing, or geotechnical information is needed.",
+      ],
+      bullets: ["Existing-condition and field evidence review", "Gravity, lateral, connection, and foundation checks as applicable", "Equipment, opening, diaphragm, and support coordination", "Details and calculations tied to sheet references", "Revision responses that preserve technical traceability"],
+    },
+    "mep-engineering": {
+      heading: "Coordinate building systems before issue",
+      paragraphs: [
+        "MEP engineering turns owner requirements, architectural backgrounds, equipment data, utility information, and operating assumptions into coordinated mechanical, electrical, and plumbing documents. The exact discipline scope follows the project and the required deliverables.",
+        metro.editorial.coordinationLens,
+        "Resolve equipment clearances, distribution routes, service capacity, ventilation, controls, domestic water, drainage, and access interfaces early. Missing manufacturer data or utility information should remain visible as an intake item rather than being silently guessed.",
+      ],
+      bullets: ["HVAC loads, equipment schedules, distribution, and controls", "Electrical service, demand, power, lighting, and equipment connections", "Plumbing fixture, domestic-water, sanitary, storm, or gas scope", "Architectural, structural, utility, and equipment coordination", "Schedules, notes, calculations, and revision control"],
+    },
+    "pe-stamp": {
+      heading: "Treat a professional seal as responsibility",
+      paragraphs: [
+        "A professional seal is tied to the defined engineering work and the person authorized to accept professional responsibility for it. It is not a detached signature, a commodity, or a substitute for design and independent review.",
+        metro.editorial.documentationLens,
+        "The responsible professional determines whether the requested work is within competence, authorization, and applicable jurisdictional rules. The project team should provide enough records for that decision and should never treat this guide as a claim that a particular document may be sealed.",
+      ],
+      bullets: ["Defined scope and professional responsibility", "Design basis, calculations, drawings, and coordination record", "License and jurisdiction questions confirmed for the project", "Eligible deliverables identified before issue", "No promise of authority acceptance or approval"],
+    },
+    "plan-check-corrections": {
+      heading: "Turn comments into controlled revisions",
+      paragraphs: [
+        "Correction support begins with the exact reviewer notice, current permit set, document index, and response instructions. The team then separates technical revisions from applicant actions, missing records, interpretation questions, and items owned by another discipline.",
+        metro.editorial.coordinationLens,
+        "A good response matrix cites the original comment, states the action, identifies the revised sheet or calculation, and leaves a visible owner for any unresolved question. It supports review; it cannot decide the authority's interpretation or guarantee approval.",
+      ],
+      bullets: ["Comment-by-comment response matrix", "Drawing, calculation, and schedule revision tracking", "Discipline ownership and coordination checks", "Assumption and evidence gap log", "Resubmittal package and file-control review"],
+    },
+    "energy-compliance": {
+      heading: "Document the adopted energy path",
+      paragraphs: [
+        "Energy compliance depends on the adopted code edition, project type, alteration status, climate inputs, envelope assemblies, lighting, HVAC, controls, service water, and required reports or forms. Confirm the applicable path with the project team and authority instead of copying an assumed checklist.",
+        metro.editorial.planningLens,
+        "The record should connect model or calculation inputs to drawings and schedules. When design changes affect an assembly, equipment efficiency, lighting power, or control sequence, update the analysis and identify the affected documents.",
+      ],
+      bullets: ["Code-path and edition confirmation", "Envelope, fenestration, lighting, HVAC, and controls inputs", "Prescriptive, trade-off, or performance documentation as applicable", "Model assumptions and output review", "Coordinated forms, reports, schedules, and comment responses"],
+    },
+    "engineering-calculations": {
+      heading: "Make engineering decisions traceable",
+      paragraphs: [
+        "Engineering calculations are the technical record behind a defined decision: capacity, load, sizing, anchorage, drainage, utility, energy, or correction response. They should expose the input data, assumptions, criteria, methods, combinations, checks, and conclusions needed for review.",
+        metro.editorial.documentationLens,
+        "The responsible engineer decides whether drawings, dimensions, field evidence, equipment data, survey, geotechnical information, or testing is sufficient. A calculation book cannot cure an unknown project scope or stand in for the authority's review.",
+      ],
+      bullets: ["Inputs, criteria, assumptions, and exclusions", "Traceable methods and load or sizing checks", "Drawing and detail references", "Independent review and revision record", "Clear handoffs for survey, testing, geotechnical, or construction work"],
+    },
+  };
+  const details = serviceDetails[service];
+  const body = `<main data-phase1="true">
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container"><p class="kicker">${esc(label)} · ${esc(metro.representativeCity)} metro</p><h1>${esc(label)} for the ${esc(metro.metroName)} Metro</h1><p class="lede">${esc(phase1ServiceSummaries[service])} This guide uses CBSA ${metro.cbsaCode} and the 2025 Census permit record only as transparent market context.</p><p class="note">By ${esc(PHASE1_AUTHOR)}</p></div></section>
+<section class="block"><div class="container"><h2>${esc(details.heading)}</h2><div class="prose">${details.paragraphs.map((paragraph) => `<p>${esc(paragraph)}</p>`).join("")}</div></div></section>
+<section class="block"><div class="container"><h2>Scope and <em>intake evidence</em></h2><div class="prose"><p>${esc(metro.editorial.deliveryLens)}</p><ul class="scope">${details.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul></div></div></section>
+<section class="block"><div class="container"><h2>${esc(metro.representativeCity)} metro <em>context</em></h2><div class="prose"><p>${esc(metro.editorial.planningLens)}</p><p>${esc(metro.editorial.coordinationLens)}</p><p>${esc(metro.editorial.documentationLens)}</p></div></div></section>
+<section class="block"><div class="container"><h2>Professional <em>boundaries</em></h2><div class="prose"><p>Availability, scope, professional responsibility, applicable licensure, and filing requirements are confirmed per project. This guide does not invent an AHJ requirement, claim an office or project, promise approval, or publish a price. The authority having jurisdiction controls its review and decision.</p><p>The Census BPS final annual 2025 workbook reports ${metro.permitTotal2025.toLocaleString("en-US")} permitted housing units for this Metro Code 2 record, rank ${metro.rank} among the eligible records. <a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">Read the official source workbook</a>.</p></div></div></section>
+<section class="block"><div class="container"><h2>Related ${esc(metro.representativeCity)} <em>guides</em></h2><div class="linkrow">${related}</div></div></section>
+<section class="ctaband"><div class="container"><h2>Define the ${esc(label.toLowerCase())} scope</h2><p>Send the address, project scope, current documents, existing-condition evidence, comments, schedule dependencies, and requested deliverables.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
+</main>`;
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `${label} for the ${metro.metroName} Metro`,
+    serviceType: label,
+    description: phase1ServiceSummaries[service],
+    url: `${SITE}${url}`,
+    provider: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
+    areaServed: { "@type": "Place", name: metro.metroName },
+  };
+  return phase1Html(htmlShell({
+    title: `${label} ${metro.representativeCity} Metro | Apex Grid`,
+    description: `${label} guidance for the ${metro.metroName} metro: scope, documents, coordination, and responsible project review.`,
+    canonical: `${SITE}${url}`,
+    schemaJson: [serviceSchema, breadcrumbSchema(crumbs)],
+    body,
+  }));
+}
+
+function phase1MetroCollectionPage(): string {
+  const crumbs = [{ name: "Home", href: "/" }, { name: "Metro engineering guides" }];
+  const links = PHASE1_METROS.map((metro) =>
+    `<a class="card" href="/metros/${metro.slug}/"><div class="label">Rank ${metro.rank} · CBSA ${metro.cbsaCode}</div><h3>${esc(metro.metroName)}</h3><p>${metro.permitTotal2025.toLocaleString("en-US")} permitted units in the final annual 2025 Census BPS record.</p></a>`,
+  ).join("");
+  const body = `<main data-phase1="true">
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container"><p class="kicker">Phase 1 · Census BPS metro corpus</p><h1>Metro Engineering Guides</h1><p class="lede">Apex Grid's Phase 1 collection covers the top 50 eligible Metro Code 2 records from the Census BPS final annual 2025 workbook, ranked by Total descending. These guides are jurisdiction-neutral and do not infer local requirements.</p><p class="note">By ${esc(PHASE1_AUTHOR)}</p></div></section>
+<section class="block"><div class="container"><h2>Browse the <em>eligible metro records</em></h2><div class="grid2">${links}</div></div></section>
+<section class="block"><div class="container"><h2>Source and <em>method</em></h2><div class="prose"><p>Source: <a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">${PHASE1_SOURCE_URL}</a>. The corpus parses the “MSA Units Ann” sheet, keeps eligible Metro / Micro Code 2 records, and selects the first 50 records after ordering Total descending.</p><p>Representative city and state labels identify the metro record's primary label only. They do not claim an office, project, AHJ fact, county service area, or guaranteed coverage.</p></div></div></section>
+</main>`;
+  return phase1Html(htmlShell({
+    title: "Metro Engineering Guides | Apex Grid Engineering",
+    description: "Browse Apex Grid's 50 Census BPS metro engineering guides for permit, structural, MEP, energy, corrections, seals, and calculations.",
+    canonical: `${SITE}/metros/`,
+    schemaJson: [{
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: "Metro Engineering Guides",
+      url: `${SITE}/metros/`,
+      numberOfItems: PHASE1_METROS.length,
+    }, breadcrumbSchema(crumbs)],
+    body,
+  }));
+}
 
 const INDUSTRY_ROOT_SLUGS: Readonly<Record<string, string>> = {
   agriculture: "agriculture-cannabis-facility-engineering",
@@ -2056,6 +2261,15 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const cityUrl of CALIFORNIA_ADU_CITY_URLS) {
     locationsUrls.push(u(`${SITE}${cityUrl}`, today, "monthly", "0.7"));
   }
+  const metrosUrls: string[] = [
+    u(`${SITE}/metros/`, today, "monthly", "0.8"),
+  ];
+  for (const metro of PHASE1_METROS) {
+    metrosUrls.push(u(`${SITE}/metros/${metro.slug}/`, today, "monthly", "0.8"));
+    for (const service of PHASE1_SERVICE_SLUGS) {
+      metrosUrls.push(u(`${SITE}/metros/${metro.slug}/${service}/`, today, "monthly", "0.7"));
+    }
+  }
 
   const verticalLocationUrls = new Map<string, string[]>();
   for (const vertical of LOCATION_VERTICALS) {
@@ -2085,6 +2299,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     { name: "sitemap-solutions.xml",  urls: solutionsUrls },
     { name: "sitemap-resources.xml",  urls: resourcesUrls },
     { name: "sitemap-locations.xml",  urls: locationsUrls },
+    { name: "sitemap-metros.xml",     urls: metrosUrls },
     {
       name: "sitemap-architecture-locations.xml",
       urls: verticalLocationUrls.get("architecture") ?? [],
@@ -3694,6 +3909,7 @@ function htmlSitemapPage(): string {
             <h2>Key Locations</h2>
             <ul>
               <li><a href="/locations/">All Service Areas</a></li>
+              <li><a href="/metros/">Census Metro Engineering Guides</a></li>
               <li><a href="/locations/arizona/">Arizona</a></li>
               <li><a href="/locations/california/">California</a></li>
               <li><a href="/locations/texas/">Texas</a></li>
@@ -4395,6 +4611,25 @@ async function main() {
              || RETAINED_LEGACY_LOCATIONS.some((r) => r.stateSlug === s.slug && r.city.slug === d.slug),
          ),
        );
+      pages++;
+    }
+  }
+  // Phase 1 Census metro guides use a new namespace so the established
+  // /locations/ tree and its route ownership remain untouched.
+  fs.rmSync(METROS_OUT, { recursive: true, force: true });
+  fs.mkdirSync(METROS_OUT, { recursive: true });
+  fs.writeFileSync(path.join(METROS_OUT, "index.html"), phase1MetroCollectionPage());
+  pages++;
+  for (const metro of PHASE1_METROS) {
+    assertSlug(metro.slug);
+    const metroDir = path.join(METROS_OUT, metro.slug);
+    fs.mkdirSync(metroDir, { recursive: true });
+    fs.writeFileSync(path.join(metroDir, "index.html"), phase1MetroHubPage(metro));
+    pages++;
+    for (const service of PHASE1_SERVICE_SLUGS) {
+      const serviceDir = path.join(metroDir, service);
+      fs.mkdirSync(serviceDir, { recursive: true });
+      fs.writeFileSync(path.join(serviceDir, "index.html"), phase1MetroServicePage(metro, service));
       pages++;
     }
   }
