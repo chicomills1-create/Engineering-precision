@@ -54,9 +54,9 @@ export const birmingham: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
     priority: { commercialOpportunity: 78, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.birminghamal.gov/1232/Permits-and-Inspections"],
-      codes: ["https://www.birminghamal.gov/1229/Building-Codes"],
-      amendments: ["https://www.birminghamal.gov/1229/Building-Codes"],
+      ahj: ["https://www.birminghamal.gov/government/city-departments/pep/divisions-pep/permitting-inspection-division"],
+      codes: ["https://www.birminghamal.gov/government/city-departments/pep/divisions-pep/permitting-inspection-division"],
+      amendments: ["https://www.birminghamal.gov/government/city-departments/pep/divisions-pep/permitting-inspection-division"],
       utilities: ["https://www.alabamapower.com/business.html", "https://www.bwwb.org/"],
       climate: ["https://www.weather.gov/bmx/"],
       market: ["https://www.uab.edu/medicine/home/"],

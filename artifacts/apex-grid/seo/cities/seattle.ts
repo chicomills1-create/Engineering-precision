@@ -60,10 +60,10 @@ export const seattle: CityData = {
     priority: { commercialOpportunity: 92, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.seattle.gov/sdci/permits"],
-      codes: ["https://www.seattle.gov/sdci/codes/codes-we-enforce"],
-      amendments: ["https://www.seattle.gov/sdci/codes/codes-we-enforce"],
+      codes: ["https://www.seattle.gov/construction-and-inspections/codes"],
+      amendments: ["https://www.seattle.gov/construction-and-inspections/codes"],
       utilities: ["https://www.seattle.gov/city-light/business-solutions", "https://www.seattle.gov/utilities"],
-      climate: ["https://www.weather.gov/sew/climate"],
+      climate: ["https://www.weather.gov/wrh/climate?wfo=sew"],
       market: ["https://www.seattle.gov/economic-development"],
     },
   },

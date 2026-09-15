@@ -46,8 +46,8 @@ export const chandler: CityData = {
     priority: { commercialOpportunity: 88, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.chandleraz.gov/government/departments/development-services"],
-      codes: ["https://www.chandleraz.gov/government/departments/development-services/building-safety"],
-      amendments: ["https://www.chandleraz.gov/government/departments/development-services/building-safety/codes"],
+      codes: ["https://www.chandleraz.gov/government/departments/development-services"],
+      amendments: ["https://www.chandleraz.gov/government/departments/development-services"],
       utilities: ["https://www.srpnet.com/business"],
       climate: ["https://www.weather.gov/psr/"],
       market: ["https://www.chandleraz.gov/business"],

@@ -54,9 +54,9 @@ export const reno: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 84, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.reno.gov/government/departments/development-services"],
-      codes: ["https://www.reno.gov/government/departments/development-services/building-and-safety"],
-      amendments: ["https://www.reno.gov/government/departments/development-services/building-and-safety"],
+      ahj: ["https://reno.gov/business-development/development-services/building-permits.php"],
+      codes: ["https://www.reno.gov/Documents/Community/Previous%20Editions/BiggestLittleRecapJuly2025.pdf"],
+      amendments: ["https://www.reno.gov/Documents/Community/Previous%20Editions/BiggestLittleRecapJuly2025.pdf"],
       utilities: ["https://www.nvenergy.com/account-services/business"],
       climate: ["https://www.weather.gov/rev/"],
       market: ["https://www.edawn.org/"],

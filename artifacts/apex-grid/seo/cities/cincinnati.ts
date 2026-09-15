@@ -54,10 +54,10 @@ export const cincinnati: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 82, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.cincinnati-oh.gov/building-inspections/"],
+      ahj: ["https://www.cincinnati-oh.gov/buildings/about-buildings-inspections/"],
       codes: ["https://com.ohio.gov/divisions-and-programs/industrial-compliance/building-code"],
       amendments: ["https://library.municode.com/oh/cincinnati/codes/code_of_ordinances"],
-      utilities: ["https://www.duke-energy.com/home/products/electric/ohio", "https://www.cincinnati-oh.gov/water/"],
+      utilities: ["https://www.duke-energy.com/business/products/ohio-customer-choice/gas-choice-overview", "https://www.cincinnati-oh.gov/water/"],
       climate: ["https://www.weather.gov/iln/"],
       market: ["https://choosecincy.com/"],
     },

@@ -57,7 +57,7 @@ export const coloradoSprings: CityData = {
       ahj: ["https://www.pprbd.org/"],
       codes: ["https://www.pprbd.org/CodeAdoption"],
       amendments: ["https://www.pprbd.org/CodeAdoption"],
-      utilities: ["https://www.csu.org/Pages/Business.aspx"],
+      utilities: ["https://www.csu.org/business/economic-development"],
       climate: ["https://www.weather.gov/pub/"],
       market: ["https://coloradosprings.gov/economicdevelopment"],
     },

@@ -55,7 +55,7 @@ export const elPaso: CityData = {
     priority: { commercialOpportunity: 83, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.elpasotexas.gov/planning-and-inspections/"],
-      codes: ["https://www.elpasotexas.gov/planning-and-inspections/building-codes/"],
+      codes: ["https://www.elpasotexas.gov/assets/Documents/CoEP/Planning-and-Inspections/Applications/Building-Permit-Applications/Adopted-Codes-and-Amendments.pdf"],
       amendments: ["https://library.municode.com/tx/el_paso/codes/code_of_ordinances"],
       utilities: ["https://www.epelectric.com/", "https://www.epwater.org/"],
       climate: ["https://www.weather.gov/epz/"],

@@ -34,7 +34,7 @@ export const macon: CityData = {
     priority: { commercialOpportunity: 74, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.maconbibb.us/planning-zoning/"],
-      codes: ["https://dca.georgia.gov/local-government-assistance/construction-codes-industrialized-buildings"],
+      codes: ["https://dca.georgia.gov/community-assistance/construction-codes/current-state-minimum-codes-construction"],
       amendments: ["https://www.maconbibb.us/planning-zoning/"],
       utilities: ["https://www.maconwater.org/"],
       climate: ["https://www.weather.gov/ffc/"],

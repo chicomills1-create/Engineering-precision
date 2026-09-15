@@ -71,7 +71,7 @@ export const siouxFalls: CityData = {
       codes: ["https://www.siouxfalls.gov/government/departments/planning-and-development-services/building-services"],
       amendments: ["https://www.siouxfalls.gov/government/departments/planning-and-development-services/building-services"],
       utilities: ["https://www.xcelenergy.com/working_with_us/business"],
-      climate: ["https://www.weather.gov/fsd/climate"],
+      climate: ["https://www.weather.gov/wrh/climate?wfo=fsd"],
       market: ["https://siouxfallsdevelopment.com/"],
     },
   },

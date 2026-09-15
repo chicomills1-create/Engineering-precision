@@ -54,9 +54,9 @@ export const jacksonville: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 86, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.jacksonville.gov/Departments/Planning-and-Development/Building-and-Inspection"],
-      codes: ["https://www.jacksonville.gov/Departments/Planning-and-Development/Building-and-Inspection/Building-Codes"],
-      amendments: ["https://www.jacksonville.gov/Departments/Planning-and-Development/Building-and-Inspection/Building-Codes"],
+      ahj: ["https://www.jacksonville.gov/departments/public-works/building-inspection-division/services"],
+      codes: ["https://www.jacksonville.gov/departments/public-works/building-inspection-division/services"],
+      amendments: ["https://www.jacksonville.gov/departments/public-works/building-inspection-division/services"],
       utilities: ["https://www.jea.com/Business_Accounts/"],
       climate: ["https://www.weather.gov/jax/"],
       market: ["https://www.jaxusa.org/"],

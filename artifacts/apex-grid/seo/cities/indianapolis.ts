@@ -55,7 +55,7 @@ export const indianapolis: CityData = {
     priority: { commercialOpportunity: 90, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.indy.gov/activity/apply-for-a-building-permit"],
-      codes: ["https://www.in.gov/dhs/fire-and-building-safety/code-enforcement/indiana-building-codes/"],
+      codes: ["https://www.in.gov/dhs/boards-and-commissions/fpbsc-rules/"],
       amendments: ["https://www.indy.gov/activity/apply-for-a-building-permit"],
       utilities: ["https://www.aesindiana.com/", "https://www.indy.gov/activity/water-and-sewer-service"],
       climate: ["https://www.weather.gov/ind/"],

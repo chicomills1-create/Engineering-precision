@@ -57,11 +57,11 @@ export const saltLakeCity: CityData = {
     priority: { commercialOpportunity: 86, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.slc.gov/buildingservices/"],
-      codes: ["https://dopl.utah.gov/utah-state-construction-code/"],
-      amendments: ["https://www.slc.gov/can/ordinances/"],
+      codes: ["https://commerce.utah.gov/dopl/building-inspector/laws-and-rules/"],
+      amendments: ["https://www.slc.gov/buildingservices/building-permits/"],
       utilities: ["https://www.rockymountainpower.net/"],
-      climate: ["https://www.weather.gov/slc/climate"],
-      market: ["https://slchamber.com/economic-development/"],
+      climate: ["https://www.weather.gov/wrh/climate?wfo=slc"],
+      market: ["https://slchamber.com/advocacy/initiatives/"],
     },
   },
 };

@@ -246,7 +246,7 @@
       "state": "iowa",
       "slug": "cedar-rapids",
       "lastVerified": "2026-09-11",
-      "sourceCount": 7,
+      "sourceCount": 6,
       "checks": {
         "unique": "pass",
         "sources": "pass",
@@ -1566,7 +1566,7 @@
       "state": "nevada",
       "slug": "sparks",
       "lastVerified": "2026-09-11",
-      "sourceCount": 6,
+      "sourceCount": 3,
       "checks": {
         "unique": "pass",
         "sources": "pass",

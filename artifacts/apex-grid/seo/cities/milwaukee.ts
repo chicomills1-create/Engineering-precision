@@ -56,7 +56,7 @@ export const milwaukee: CityData = {
     sources: {
       ahj: ["https://city.milwaukee.gov/DNS"],
       codes: ["https://dsps.wi.gov/Pages/Programs/CommercialBuildings/Default.aspx"],
-      amendments: ["https://city.milwaukee.gov/DNS/Plans-Examinations"],
+      amendments: ["https://city.milwaukee.gov/dns"],
       utilities: ["https://www.we-energies.com/", "https://city.milwaukee.gov/water"],
       climate: ["https://www.weather.gov/mkx/"],
       market: ["https://www.mmac.org/"],

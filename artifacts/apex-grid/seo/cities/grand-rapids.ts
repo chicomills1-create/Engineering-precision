@@ -54,10 +54,10 @@ export const grandRapids: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 78, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.grandrapidsmi.gov/Government/Departments/Community-Development/Development-Center"],
-      codes: ["https://www.michigan.gov/lara/bureau-list/bcc/rules-and-codes"],
+      ahj: ["https://www.grandrapidsmi.gov/grow-and-thrive/development-center/inspections/"],
+      codes: ["https://michigan.gov/lara/bureau-list/bcc"],
       amendments: ["https://www.grandrapidsmi.gov/Government/Departments/Community-Development"],
-      utilities: ["https://www.consumersenergy.com/business", "https://www.grandrapidsmi.gov/Government/Departments/Public-Works/Water-Sewer"],
+      utilities: ["https://www.consumersenergy.com/business", "https://www.grandrapidsmi.gov/living-in-gr/water-and-sewer-services/"],
       climate: ["https://www.weather.gov/grr/"],
       market: ["https://www.rightplace.org/"],
     },

@@ -57,11 +57,11 @@ export const buffalo: CityData = {
     priority: { commercialOpportunity: 76, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.buffalony.gov/277/Permit-Information"],
-      codes: ["https://www.dos.ny.gov/DCEA/"],
+      codes: ["https://dos.ny.gov/building-standards-and-codes"],
       amendments: ["https://www.buffalony.gov/DocumentCenter/Index/"],
       utilities: ["https://www.nationalgridus.com/Upstate-NY-Home", "https://www.buffalony.gov/425/Water"],
       climate: ["https://www.fema.gov/flood-maps"],
-      market: ["https://www.buffalony.gov/1118/Economic-Development"]
+      market: ["https://www.buffalony.gov/308/Office-of-Strategic-Planning"]
     }
   },
 };

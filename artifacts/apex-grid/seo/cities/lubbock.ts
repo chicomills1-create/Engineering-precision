@@ -56,10 +56,10 @@ export const lubbock: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 76, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://ci.lubbock.tx.us/departments/building-safety"],
-      codes: ["https://ci.lubbock.tx.us/departments/building-safety/codes"],
+      ahj: ["https://www.mylubbock.us/529/Building-Safety"],
+      codes: ["https://www.mylubbock.us/529/Building-Safety"],
       amendments: ["https://library.municode.com/tx/lubbock/codes/code_of_ordinances"],
-      utilities: ["https://lpandl.com/", "https://ci.lubbock.tx.us/departments/water-utilities"],
+      utilities: ["https://lpandl.com/", "https://www.mylubbock.us/water"],
       climate: ["https://www.weather.gov/lub/"],
       market: ["https://lubbockeda.org/"],
     },

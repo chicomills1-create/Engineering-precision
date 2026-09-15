@@ -48,10 +48,10 @@ export const santaFe: CityData = {
     priority: { commercialOpportunity: 67, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://santafenm.gov/land-use"],
-      codes: ["https://www.rld.nm.gov/construction-industries/codes/"],
+      codes: ["https://www.rld.nm.gov/construction-industries/"],
       amendments: ["https://santafenm.gov/land-use/historic-preservation"],
-      utilities: ["https://www.pnm.com/business", "https://santafenm.gov/public-works/water"],
-      climate: ["https://www.weather.gov/abq/climate"],
+      utilities: ["https://www.pnm.com/business", "https://santafenm.gov/public-utilities/water"],
+      climate: ["https://www.weather.gov/wrh/climate?wfo=abq"],
       market: ["https://edd.newmexico.gov/"],
     },
   },

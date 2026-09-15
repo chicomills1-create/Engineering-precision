@@ -54,9 +54,6 @@ export const sparks: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 81, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.cityofsparks.us/government/departments/community-services/building"],
-      codes: ["https://www.cityofsparks.us/government/departments/community-services/building"],
-      amendments: ["https://www.cityofsparks.us/government/departments/community-services/building"],
       utilities: ["https://www.nvenergy.com/account-services/business"],
       climate: ["https://www.weather.gov/rev/"],
       market: ["https://www.renoindustrial.com/"],

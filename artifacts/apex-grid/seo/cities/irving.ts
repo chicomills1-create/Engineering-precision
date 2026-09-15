@@ -18,6 +18,6 @@ export const irving: CityData = {
     { q: "What foundation issue is common in Irving?", a: "Expansive North Texas clay is common. A project geotechnical report should control the choice among post-tensioned slabs, drilled piers, and grade-beam systems and establish moisture and drainage detailing." }
   ],
   research: { lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review", supportedServiceSlugs: ["mep-engineering","structural-engineering","civil-engineering","energy-code-compliance"], priority: { commercialOpportunity: 84, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" }, sources: {
-    ahj: ["https://www.cityofirving.org/150/Building-Inspection"], codes: ["https://www.cityofirving.org/150/Building-Inspection"], amendments: ["https://www.cityofirving.org/DocumentCenter"], utilities: ["https://www.oncor.com/"], climate: ["https://www.weather.gov/fwd/"], market: ["https://irvingtexas.com/"]
+    ahj: ["https://irvingtx.gov/building-inspections"], codes: ["https://irvingtx.gov/building-inspections"], amendments: ["https://www.cityofirving.org/DocumentCenter"], utilities: ["https://www.oncor.com/"], climate: ["https://www.weather.gov/fwd/"], market: ["https://irvingtexas.com/"]
   }}
 };

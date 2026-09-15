@@ -54,12 +54,12 @@ export const stPetersburg: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 82, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.stpete.org/government/departments/development_services"],
-      codes: ["https://www.stpete.org/government/departments/development_services/building_services"],
-      amendments: ["https://www.stpete.org/government/departments/development_services/building_services"],
-      utilities: ["https://www.stpete.org/government/departments/public_works/water_resources"],
+      ahj: ["https://www.stpete.org/business/building_permitting/building_permits.php"],
+      codes: ["https://www.stpete.org/business/building_permitting/building_permits.php"],
+      amendments: ["https://www.stpete.org/business/building_permitting/building_permits.php"],
+      utilities: ["https://www.stpete.org/connect_with_us/directories/water_resources.php"],
       climate: ["https://www.weather.gov/tbw/"],
-      market: ["https://www.stpete.org/government/departments/economic_development"],
+      market: ["https://www.stpete.org/business/economic_development/index.php"],
     },
   },
 };

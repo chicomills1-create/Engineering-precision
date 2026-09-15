@@ -36,7 +36,7 @@ export const durham: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 86, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.durhamnc.gov/484/Inspections"],
+      ahj: ["https://www.Durhamnc.gov/293/City-County-Building-Safety"],
       codes: ["https://www.ncosfm.gov/codes"],
       amendments: ["https://udo.durhamnc.gov/udo"],
       utilities: ["https://www.duke-energy.com/business"],

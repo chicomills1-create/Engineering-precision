@@ -67,7 +67,7 @@ export const fargo: CityData = {
     },
     sources: {
       ahj: ["https://fargond.gov/city-government/departments/inspections"],
-      codes: ["https://www.nd.gov/labor/building-codes"],
+      codes: ["https://www.commerce.nd.gov/community-services/building-codes"],
       amendments: ["https://fargond.gov/city-government/departments/inspections"],
       utilities: ["https://www.xcelenergy.com/working_with_us/business"],
       climate: ["https://www.weather.gov/fgf/climate"],

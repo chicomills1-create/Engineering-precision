@@ -59,9 +59,9 @@ export const pittsburgh: CityData = {
     priority: { commercialOpportunity: 84, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://pittsburghpa.gov/pli"],
-      codes: ["https://www.pa.gov/agencies/dli/programs-services/plan-review-and-inspection/uc-code"],
+      codes: ["https://www.pa.gov/agencies/dli/programs-services/labor-management-relations/bureau-of-occupational-and-industrial-safety/uniform-construction-code-home"],
       amendments: ["https://pittsburghpa.gov/pli"],
-      utilities: ["https://www.duquesnelight.com/your-home", "https://www.pittsburghpa.gov/Water"],
+      utilities: ["https://www.duquesnelight.com/business", "https://www.pittsburghpa.gov/Water"],
       climate: ["https://www.fema.gov/flood-maps"],
       market: ["https://pittsburghpa.gov/mayor/economic-development"]
     }

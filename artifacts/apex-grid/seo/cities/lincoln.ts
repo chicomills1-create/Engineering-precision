@@ -48,7 +48,7 @@ export const lincoln: CityData = {
       ahj: ["https://www.lincoln.ne.gov/City/Departments/Building-Safety"],
       codes: ["https://www.lincoln.ne.gov/City/Departments/Building-Safety/Codes"],
       amendments: ["https://www.lincoln.ne.gov/City/Departments/Building-Safety/Codes"],
-      utilities: ["https://www.les.com/business", "https://www.lincoln.ne.gov/City/Departments/LTU/Utilities"],
+      utilities: ["https://www.les.com/rates/business-rates", "https://www.lincoln.ne.gov/City/Departments/LTU/Utilities"],
       climate: ["https://www.weather.gov/oax/"],
       market: ["https://selectlincoln.org/"],
     },

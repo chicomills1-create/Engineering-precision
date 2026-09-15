@@ -18,6 +18,6 @@ export const frisco: CityData = {
     { q: "What soil condition affects Frisco foundations?", a: "Expansive clay is common across North Texas. The project geotechnical report should establish foundation type, slab movement criteria, site drainage, and moisture-control measures." }
   ],
   research: { lastVerified: "2026-09-11", reviewStatus: "approved", reviewedBy: "Apex Grid evidence review", supportedServiceSlugs: ["mep-engineering","structural-engineering","civil-engineering","energy-code-compliance"], priority: { commercialOpportunity: 88, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" }, sources: {
-    ahj: ["https://www.friscotexas.gov/121/Building-Inspections"], codes: ["https://www.friscotexas.gov/121/Building-Inspections"], amendments: ["https://www.friscotexas.gov/DocumentCenter"], utilities: ["https://www.coserv.com/"], climate: ["https://www.weather.gov/fwd/"], market: ["https://www.friscotexas.gov/"]
+    ahj: ["https://www.friscotexas.gov/395/Building-Inspections"], codes: ["https://www.friscotexas.gov/395/Building-Inspections"], amendments: ["https://www.friscotexas.gov/DocumentCenter"], utilities: ["https://www.coserv.com/"], climate: ["https://www.weather.gov/fwd/"], market: ["https://www.friscotexas.gov/"]
   }}
 };

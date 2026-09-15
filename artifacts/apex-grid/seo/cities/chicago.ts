@@ -58,8 +58,8 @@ export const chicago: CityData = {
     priority: { commercialOpportunity: 91, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.chicago.gov/city/en/depts/bldgs.html"],
-      codes: ["https://www.chicago.gov/city/en/depts/bldgs/provdrs/codes.html"],
-      amendments: ["https://www.chicago.gov/city/en/depts/bldgs/provdrs/codes.html"],
+      codes: ["https://www.chicago.gov/city/en/depts/bldgs/provdrs/bldg_code.html"],
+      amendments: ["https://www.chicago.gov/city/en/depts/bldgs/provdrs/bldg_code.html"],
       utilities: ["https://www.comed.com/"],
       climate: ["https://www.weather.gov/lot/"],
       market: ["https://worldbusinesschicago.com/"],

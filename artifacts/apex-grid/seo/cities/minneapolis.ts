@@ -54,10 +54,10 @@ export const minneapolis: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 88, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.minneapolismn.gov/government/departments/community-planning-economic-development/permits/"],
+      ahj: ["https://www.minneapolismn.gov/business-services/licenses-permits-inspections/"],
       codes: ["https://www.dli.mn.gov/business/codes-and-laws/2020-minnesota-state-building-code"],
-      amendments: ["https://www.minneapolismn.gov/government/departments/community-planning-economic-development/permits/"],
-      utilities: ["https://www.xcelenergy.com/", "https://www.minneapolismn.gov/government/departments/public-works/surface-water-sewers/"],
+      amendments: ["https://www.minneapolismn.gov/business-services/licenses-permits-inspections/"],
+      utilities: ["https://www.xcelenergy.com/", "https://www.minneapolismn.gov/resident-services/property-housing/housing/property-maintenance/sewers/"],
       climate: ["https://www.weather.gov/mpx/"],
       market: ["https://www.greatermsp.org/"],
     },

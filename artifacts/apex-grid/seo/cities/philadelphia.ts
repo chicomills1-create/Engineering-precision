@@ -59,8 +59,8 @@ export const philadelphia: CityData = {
     priority: { commercialOpportunity: 96, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.phila.gov/departments/department-of-licenses-and-inspections/"],
-      codes: ["https://www.phila.gov/departments/department-of-licenses-and-inspections/about-us/codes/"],
-      amendments: ["https://www.phila.gov/departments/department-of-licenses-and-inspections/about-us/codes/"],
+      codes: ["https://codelibrary.amlegal.com/codes/philadelphia/latest/philadelphia_pa/0-0-0-267468"],
+      amendments: ["https://codelibrary.amlegal.com/codes/philadelphia/latest/philadelphia_pa/0-0-0-267468"],
       utilities: ["https://www.peco.com/Business", "https://www.phila.gov/departments/philadelphia-water-department/"],
       climate: ["https://www.fema.gov/flood-maps"],
       market: ["https://www.phila.gov/departments/department-of-commerce/"]

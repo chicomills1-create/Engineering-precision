@@ -54,9 +54,9 @@ export const newOrleans: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
     priority: { commercialOpportunity: 86, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://nola.gov/next/safety-and-permits/topics/permits/"],
+      ahj: ["https://nola.gov/guide-to-building-permits/"],
       codes: ["https://lsuccc.la.gov/"],
-      amendments: ["https://nola.gov/next/safety-and-permits/topics/building-codes/"],
+      amendments: ["https://nola.gov/building-code/"],
       utilities: ["https://www.entergy.com/business", "https://www.swbno.org/"],
       climate: ["https://www.weather.gov/lix/"],
       market: ["https://portnola.com/"],

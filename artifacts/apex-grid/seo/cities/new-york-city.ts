@@ -59,7 +59,7 @@ export const newYorkCity: CityData = {
       ahj: ["https://www.nyc.gov/site/buildings/index.page"],
       codes: ["https://www.nyc.gov/site/buildings/codes/2022-construction-codes.page"],
       amendments: ["https://www.nyc.gov/site/buildings/codes/2022-construction-codes.page", "https://www.nyc.gov/site/dep/environment/local-law-97.page"],
-      utilities: ["https://www.coned.com/en/services-and-outages/service-management", "https://www.nyc.gov/site/dep/about/about-DEP.page"],
+      utilities: ["https://www.coned.com/en/services-and-outages/service-management-page", "https://www.nyc.gov/site/dep/about/about-DEP.page"],
       climate: ["https://www.fema.gov/flood-maps"],
       market: ["https://www.nyc.gov/site/hpd/about/what-we-do.page"]
     }

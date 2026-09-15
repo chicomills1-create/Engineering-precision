@@ -41,7 +41,7 @@ export const greensboro: CityData = {
       amendments: ["https://www.greensboro-nc.gov/departments/planning/ordinances"],
       utilities: ["https://www.duke-energy.com/business"],
       climate: ["https://www.weather.gov/rah/"],
-      market: ["https://www.greensboro.org/economic-development"],
+      market: ["https://www.greensboro-nc.gov/business/economic-development"],
     },
   },
 };

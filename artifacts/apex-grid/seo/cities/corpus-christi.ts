@@ -54,8 +54,8 @@ export const corpusChristi: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 82, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.corpuschristitx.gov/government/departments/development-services"],
-      codes: ["https://www.corpuschristitx.gov/government/departments/development-services/building-permits"],
+      ahj: ["https://www.corpuschristitx.gov/department-directory/development-services/"],
+      codes: ["https://www.corpuschristitx.gov/department-directory/development-services/construction-codes-and-ordinances/"],
       amendments: ["https://library.municode.com/tx/corpus_christi/codes/code_of_ordinances"],
       utilities: ["https://www.aeptexas.com/", "https://www.corpuschristitx.gov/government/departments/water"],
       climate: ["https://www.weather.gov/crp/"],

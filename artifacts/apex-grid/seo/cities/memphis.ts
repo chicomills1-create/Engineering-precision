@@ -54,9 +54,9 @@ export const memphis: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 86, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.memphistn.gov/government/the-division-of-planning-and-development"],
-      codes: ["https://www.memphistn.gov/government/office-of-construction-code-enforcement"],
-      amendments: ["https://www.memphistn.gov/government/office-of-construction-code-enforcement"],
+      ahj: ["https://memphistn.gov/gov-guide/"],
+      codes: ["https://memphistn.gov/gov-guide/"],
+      amendments: ["https://memphistn.gov/gov-guide/"],
       utilities: ["https://www.mlgw.com/commercial"],
       climate: ["https://www.weather.gov/meg/"],
       market: ["https://www.memphistn.gov/government/economic-development"],

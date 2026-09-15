@@ -55,7 +55,7 @@ export const detroit: CityData = {
     priority: { commercialOpportunity: 88, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://detroitmi.gov/departments/buildings-safety-engineering-and-environmental-department"],
-      codes: ["https://www.michigan.gov/lara/bureau-list/bcc/rules-and-codes"],
+      codes: ["https://michigan.gov/lara/bureau-list/bcc"],
       amendments: ["https://detroitmi.gov/departments/buildings-safety-engineering-and-environmental-department"],
       utilities: ["https://www.dteenergy.com/us/en/business.html", "https://detroitmi.gov/departments/detroit-water-and-sewerage-department"],
       climate: ["https://www.weather.gov/dtx/"],

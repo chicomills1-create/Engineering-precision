@@ -58,11 +58,11 @@ export const nashville: CityData = {
     priority: { commercialOpportunity: 93, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.nashville.gov/departments/codes"],
-      codes: ["https://www.nashville.gov/departments/codes/codes-enforcement"],
-      amendments: ["https://www.nashville.gov/departments/codes/codes-enforcement"],
-      utilities: ["https://www.nespower.com/business"],
+      codes: ["https://www.nashville.gov/departments/codes/codes-administration"],
+      amendments: ["https://www.nashville.gov/departments/codes/codes-administration"],
+      utilities: ["https://www.nespower.com/"],
       climate: ["https://www.weather.gov/ohx/"],
-      market: ["https://www.nashville.gov/departments/planning/economic-development"],
+      market: ["https://www.nashville.gov/departments/mayor/economic-opportunity"],
     },
   },
 };

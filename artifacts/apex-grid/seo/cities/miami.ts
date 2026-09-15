@@ -58,8 +58,8 @@ export const miami: CityData = {
     priority: { commercialOpportunity: 96, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.miami.gov/Permits-Construction"],
-      codes: ["https://www.miamidade.gov/global/economy/building.page"],
-      amendments: ["https://www.miamidade.gov/global/economy/building.page"],
+      codes: ["https://www.miamidade.gov/global/economy/building/plan-review.page"],
+      amendments: ["https://www.miamidade.gov/global/economy/building/plan-review.page"],
       utilities: ["https://www.fpl.com/business.html"],
       climate: ["https://www.weather.gov/mfl/"],
       market: ["https://www.miamidade.gov/global/economy/home.page"],

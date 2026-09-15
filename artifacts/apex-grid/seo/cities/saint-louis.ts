@@ -57,7 +57,7 @@ export const saintLouis: CityData = {
       ahj: ["https://www.stlouis-mo.gov/government/departments/public-safety/building/"],
       codes: ["https://www.stlouis-mo.gov/government/departments/public-safety/building/codes.cfm"],
       amendments: ["https://www.stlouis-mo.gov/government/departments/public-safety/building/codes.cfm"],
-      utilities: ["https://www.ameren.com/business", "https://www.stlwater.com/"],
+      utilities: ["https://www.ameren.com/economic-development/missouri", "https://www.stlwater.com/"],
       climate: ["https://www.weather.gov/lsx/"],
       market: ["https://www.gstl.org/"],
     },

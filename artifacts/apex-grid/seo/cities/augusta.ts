@@ -34,11 +34,11 @@ export const augusta: CityData = {
     priority: { commercialOpportunity: 76, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.augustaga.gov/303/Planning-Development"],
-      codes: ["https://www.augustaga.gov/1013/Building-Development"],
-      amendments: ["https://dca.georgia.gov/local-government-assistance/construction-codes-industrialized-buildings"],
-      utilities: ["https://www.augustaga.gov/1007/Utilities"],
+      codes: ["https://www.augustaga.gov/190/Construction"],
+      amendments: ["https://dca.georgia.gov/community-assistance/construction-codes/current-state-minimum-codes-construction"],
+      utilities: ["https://www.augustaga.gov/3178/Utilities"],
       climate: ["https://www.weather.gov/cae/"],
-      market: ["https://www.augustaga.gov/311/Economic-Development"],
+      market: ["https://www.augustaga.gov/871/Economic-Development"],
     },
   },
 };

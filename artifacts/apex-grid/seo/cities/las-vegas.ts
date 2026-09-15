@@ -55,8 +55,8 @@ export const lasVegas: CityData = {
     priority: { commercialOpportunity: 95, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.clarkcountynv.gov/government/departments/building___fire_prevention/index.php", "https://www.lasvegasnevada.gov/Government/Departments/Building-Safety"],
-      codes: ["https://www.clarkcountynv.gov/government/departments/building___fire_prevention/codes.php"],
-      amendments: ["https://www.clarkcountynv.gov/government/departments/building___fire_prevention/codes.php"],
+      codes: ["https://www.clarkcountynv.gov/government/departments/building___fire_prevention/how-do-i"],
+      amendments: ["https://www.clarkcountynv.gov/government/departments/building___fire_prevention/how-do-i"],
       utilities: ["https://www.nvenergy.com/account-services/business"],
       climate: ["https://www.weather.gov/vef/"],
       market: ["https://www.lvgea.org/"],

@@ -55,8 +55,8 @@ export const louisville: CityData = {
     priority: { commercialOpportunity: 84, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://louisvilleky.gov/government/construction-review"],
-      codes: ["https://louisvilleky.gov/government/construction-review/building-codes"],
-      amendments: ["https://louisvilleky.gov/government/construction-review/building-codes"],
+      codes: ["https://dhbc.ky.gov/newstatic_info.aspx?static_id=297"],
+      amendments: ["https://dhbc.ky.gov/newstatic_info.aspx?static_id=297"],
       utilities: ["https://lge-ku.com/business", "https://louisvillewater.com/"],
       climate: ["https://www.weather.gov/lmk/"],
       market: ["https://louisvilleky.gov/government/economic-development"],

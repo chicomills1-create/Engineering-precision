@@ -57,7 +57,7 @@ export const hartford: CityData = {
     priority: { commercialOpportunity: 74, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.hartfordct.gov/Government/Departments/Development-Services"],
-      codes: ["https://portal.ct.gov/dcp/building-codes-and-standards"],
+      codes: ["https://portal.ct.gov/das/office-of-state-building-inspector"],
       amendments: ["https://www.hartfordct.gov/Government/Departments/Development-Services/Building-Inspections"],
       utilities: ["https://www.eversource.com/content/residential", "https://themdc.org/"],
       climate: ["https://www.fema.gov/flood-maps"],

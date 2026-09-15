@@ -61,10 +61,10 @@ export const newark: CityData = {
     sources: {
       ahj: ["https://www.newarknj.gov/departments/engineering"],
       codes: ["https://www.nj.gov/dca/codes/codreg/"],
-      amendments: ["https://www.newarknj.gov/government/departments/planning"],
-      utilities: ["https://www.pseg.com/", "https://www.newarknj.gov/departments/water-sewer"],
+      amendments: ["https://www.newarknj.gov/257/Division-of-Planning-Zoning"],
+      utilities: ["https://www.pseg.com/", "https://water.newarknj.gov/about"],
       climate: ["https://www.fema.gov/flood-maps"],
-      market: ["https://www.newarknj.gov/government/departments/economic-housing-development"]
+      market: ["https://www.newarknj.gov/172/Economic-Housing-Development"]
     }
   },
 };

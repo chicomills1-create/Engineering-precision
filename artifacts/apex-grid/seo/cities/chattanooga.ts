@@ -33,9 +33,9 @@ export const chattanooga: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 81, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://chattanooga.gov/government/departments/land-development-office"],
+      ahj: ["https://chattanooga.gov/government/public-works-0"],
       codes: ["https://www.tn.gov/commerce/fire/codes-enforcement.html"],
-      amendments: ["https://chattanooga.gov/government/departments/land-development-office"],
+      amendments: ["https://chattanooga.gov/government/public-works-0"],
       utilities: ["https://epb.com/"],
       climate: ["https://www.weather.gov/mrx/"],
       market: ["https://chattanoogachamber.com/"],

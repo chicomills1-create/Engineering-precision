@@ -57,12 +57,12 @@ export const anaheim: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 78, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.anaheim.net/department/125/planning-and-building"],
+      ahj: ["https://www.anaheim.net/490/Planning-Building"],
       codes: ["https://www.bsc.ca.gov/Codes.aspx", "https://www.hcd.ca.gov/building-standards", "https://www.energy.ca.gov/programs-and-topics/programs/building-energy-efficiency-standards", "https://codelibrary.amlegal.com/codes/anaheim/latest/overview"],
       amendments: ["https://codelibrary.amlegal.com/codes/anaheim/latest/overview"],
-      utilities: ["https://www.anaheim.net/department/123/public-utilities"],
+      utilities: ["https://www.anaheim.net/6099/Public-Utilities"],
       climate: ["https://www.weather.gov/sgx/"],
-      market: ["https://www.anaheim.net/department/118/community-and-economic-development"],
+      market: ["https://www.anaheim.net/6280/Economic-Development"],
     },
   },
 };

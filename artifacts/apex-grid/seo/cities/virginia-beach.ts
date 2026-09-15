@@ -37,7 +37,7 @@ export const virginiaBeach: CityData = {
     priority: { commercialOpportunity: 85, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.vbgov.com/government/departments/planning/permits-inspections"],
-      codes: ["https://www.dhcd.virginia.gov/virginia-uniform-statewide-building-code"],
+      codes: ["https://law.lis.virginia.gov/admincode/title13/agency5/preface/"],
       amendments: ["https://www.vbgov.com/government/departments/public-works/storm-water"],
       utilities: ["https://www.dominionenergy.com/virginia/start-stop-service"],
       climate: ["https://www.weather.gov/akq/"],

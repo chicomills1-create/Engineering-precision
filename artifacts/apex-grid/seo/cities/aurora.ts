@@ -54,12 +54,12 @@ export const aurora: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-compliance"],
     priority: { commercialOpportunity: 84, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.auroragov.org/city_hall/development_services"],
-      codes: ["https://www.auroragov.org/city_hall/development_services/building_division"],
-      amendments: ["https://www.auroragov.org/city_hall/development_services/building_division/codes"],
+      ahj: ["https://www.auroragov.org/city_hall/departments/development_assistance"],
+      codes: ["https://www.auroragov.org/business_services/building_division"],
+      amendments: ["https://www.auroragov.org/business_services/building_division"],
       utilities: ["https://www.xcelenergy.com/Working_with_Us/Builders"],
       climate: ["https://www.weather.gov/bou/"],
-      market: ["https://www.auroragov.org/business_services/economic_development"],
+      market: ["https://www.auroragov.org/business_services/economic___business_development"],
     },
   },
 };

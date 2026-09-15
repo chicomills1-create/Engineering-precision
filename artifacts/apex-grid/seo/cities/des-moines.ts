@@ -54,10 +54,10 @@ export const desMoines: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
     priority: { commercialOpportunity: 79, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.dsm.city/departments/community_development/permit_development_center/index.php"],
+      ahj: ["https://www.dsm.city/departments/development_services/permit_development_center/index.php"],
       codes: ["https://www.legis.iowa.gov/law/administrativeRules/rules?agency=661"],
-      amendments: ["https://www.dsm.city/departments/community_development/permit_development_center/building_codes.php"],
-      utilities: ["https://www.midamericanenergy.com/business", "https://www.dsm.city/departments/public_works-utilities"],
+      amendments: ["https://www.dsm.city/departments/development_services/permit_development_center/construction_codes.php"],
+      utilities: ["https://www.midamericanenergy.com/business", "https://www.dsm.city/departments/public_works/water/index.php"],
       climate: ["https://www.weather.gov/dmx/"],
       market: ["https://www.dsmpartnership.com/"],
     },

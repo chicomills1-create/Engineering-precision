@@ -37,7 +37,7 @@ export const richmond: CityData = {
     priority: { commercialOpportunity: 87, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
       ahj: ["https://www.rva.gov/planning-development-review"],
-      codes: ["https://www.dhcd.virginia.gov/virginia-uniform-statewide-building-code"],
+      codes: ["https://law.lis.virginia.gov/admincode/title13/agency5/preface/"],
       amendments: ["https://www.rva.gov/planning-development-review"],
       utilities: ["https://www.dominionenergy.com/virginia/start-stop-service", "https://www.rva.gov/public-utilities"],
       climate: ["https://www.weather.gov/akq/"],

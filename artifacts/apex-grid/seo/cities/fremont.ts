@@ -77,7 +77,7 @@ export const fremont: CityData = {
       ],
       climate: [
         "https://www.weather.gov/mtr/",
-        "https://www.usgs.gov/programs/earthquake-hazards/science/hayward-fault",
+        "https://www.usgs.gov/news/featured-story/hayward-fault-it-due-a-repeat-powerful-1868-earthquake",
       ],
       market: [
         "https://www.fremont.gov/government/departments/economic-development",

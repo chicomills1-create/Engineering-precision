@@ -56,8 +56,8 @@ export const baltimore: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
     priority: { commercialOpportunity: 82, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://dhcd.baltimorecity.gov/permits"],
-      codes: ["https://dhcd.baltimorecity.gov/codes"],
+      ahj: ["https://www.baltimorecity.gov/dhcd/our-work/permits-and-inspections"],
+      codes: ["https://codes.baltimorecity.gov/us/md/cities/baltimore/code/building-codes"],
       amendments: ["https://codes.baltimorecity.gov/"],
       utilities: ["https://www.bge.com/Services/Pages/StartStopMove.aspx", "https://publicworks.baltimorecity.gov/"],
       climate: ["https://www.fema.gov/flood-maps"],

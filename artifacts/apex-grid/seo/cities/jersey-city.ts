@@ -38,12 +38,12 @@ export const jerseyCity: CityData = {
     supportedServiceSlugs: ["mep-engineering", "structural-engineering", "civil-engineering", "energy-code-compliance"],
     priority: { commercialOpportunity: 91, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable" },
     sources: {
-      ahj: ["https://www.jerseycitynj.gov/cityhall/building"],
+      ahj: ["https://www.jerseycitynj.gov/CityHall/HousingAndDevelopment/constructioncode"],
       codes: ["https://www.nj.gov/dca/codes/codreg/"],
-      amendments: ["https://www.jerseycitynj.gov/cityhall/planningzoning"],
+      amendments: ["https://www.jerseycitynj.gov/cityhall/HousingAndDevelopment/cityplanning"],
       utilities: ["https://www.pseg.com/", "https://www.jcmua.com/"],
       climate: ["https://www.fema.gov/flood-maps"],
-      market: ["https://www.jerseycitynj.gov/cityhall/HEDC"]
+      market: ["https://www.jerseycitynj.gov/cityhall/HousingAndDevelopment"]
     }
   },
 };

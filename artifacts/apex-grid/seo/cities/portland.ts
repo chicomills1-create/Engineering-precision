@@ -58,9 +58,9 @@ export const portland: CityData = {
     sources: {
       ahj: ["https://www.portland.gov/bds/permit-review-process"],
       codes: ["https://www.oregon.gov/bcd/codes-stand/pages/adopted-codes.aspx"],
-      amendments: ["https://www.portland.gov/bps/planning/zoning-code"],
+      amendments: ["https://www.portland.gov/so/group/762"],
       utilities: ["https://portlandgeneral.com/business", "https://www.portland.gov/water", "https://www.portland.gov/bes"],
-      climate: ["https://www.weather.gov/pqr/climate"],
+      climate: ["https://www.weather.gov/wrh/climate?wfo=pqr"],
       market: ["https://prosperportland.us/"],
     },
   },

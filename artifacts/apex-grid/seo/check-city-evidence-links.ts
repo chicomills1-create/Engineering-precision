@@ -38,6 +38,27 @@ interface ReviewedException {
 }
 
 const REVIEWED_EXCEPTIONS: Readonly<Record<string, ReviewedException>> = {
+  // Reviewed in a real browser: NYC DEP serves this official page normally but masks it with 403 or 404 responses to automated link checks.
+  "https://www.nyc.gov/site/dep/about/about-DEP.page": {
+    reviewedOn: "2026-09-14",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
+    reason: "Retained as the official NYC DEP source; the page loads in real browsers but masks bot-blocking responses as HTTP 403 or 404.",
+    expectedStatus: "http-error",
+  },
+  // Reviewed in a real browser: NYC DEP serves this Local Law 97 page normally but masks it with 403 or 404 responses to automated link checks.
+  "https://www.nyc.gov/site/dep/environment/local-law-97.page": {
+    reviewedOn: "2026-09-14",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
+    reason: "Retained as the official NYC DEP Local Law 97 source; the page loads in real browsers but masks bot-blocking responses as HTTP 403 or 404.",
+    expectedStatus: "http-error",
+  },
+  // Reviewed in a real browser: NYC HPD serves this official page normally but masks it with 403 or 404 responses to automated link checks.
+  "https://www.nyc.gov/site/hpd/about/what-we-do.page": {
+    reviewedOn: "2026-09-14",
+    reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
+    reason: "Retained as the official NYC HPD market source; the page loads in real browsers but masks bot-blocking responses as HTTP 403 or 404.",
+    expectedStatus: "http-error",
+  },
   "https://codes.iccsafe.org/content/AZTEMPEBC2018P1": {
     reviewedOn: "2026-09-11",
     reviewIntervalDays: EXCEPTION_REVIEW_INTERVAL_DAYS,
@@ -199,7 +220,7 @@ export function collectApprovedEvidence(cities: CityData[]): EvidenceTarget[] {
   for (const city of cities) {
     if (city.research?.reviewStatus !== "approved") continue;
     for (const category of SOURCE_CATEGORIES) {
-      for (const source of city.research.sources[category]) {
+      for (const source of city.research.sources[category] ?? []) {
         const details = sourceDetails(source);
         const key = `${details.url}\0${details.expectedDomains.sort().join(",")}`;
         const existing = targets.get(key);
