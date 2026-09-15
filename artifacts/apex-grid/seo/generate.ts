@@ -120,6 +120,12 @@ import {
   type Phase1Metro,
   type Phase1ServiceSlug,
 } from "./phase1-metros";
+import {
+  PHASE2_METROS,
+  PHASE2_SERVICE_SLUGS,
+  type Phase2Metro,
+  type Phase2ServiceSlug,
+} from "./phase2-metros";
 
 const PROMOTED_CITY_KEYS = new Set([
   "georgia/atlanta", "texas/austin", "north-carolina/charlotte",
@@ -1295,16 +1301,29 @@ ${breadcrumb(crumbs)}
   }));
 }
 
+/** Phase 2 intentionally reuses the reviewed Phase 1 renderer and content
+ * boundaries while carrying a distinct audit marker.  The records themselves
+ * remain typed and source-linked in phase2-metros.ts. */
+function phase2MetroHubPage(metro: Phase2Metro): string {
+  return phase1MetroHubPage(metro as Phase1Metro).replace(/data-phase1="true"/g, 'data-phase2="true"');
+}
+
+function phase2MetroServicePage(metro: Phase2Metro, service: Phase2ServiceSlug): string {
+  return phase1MetroServicePage(metro as Phase1Metro, service as Phase1ServiceSlug)
+    .replace(/data-phase1="true"/g, 'data-phase2="true"');
+}
+
 function phase1MetroCollectionPage(): string {
   const crumbs = [{ name: "Home", href: "/" }, { name: "Metro engineering guides" }];
-  const links = PHASE1_METROS.map((metro) =>
+  const allMetros = [...PHASE1_METROS, ...PHASE2_METROS];
+  const links = allMetros.map((metro) =>
     `<a class="card" href="/metros/${metro.slug}/"><div class="label">Rank ${metro.rank} · CBSA ${metro.cbsaCode}</div><h3>${esc(metro.metroName)}</h3><p>${metro.permitTotal2025.toLocaleString("en-US")} permitted units in the final annual 2025 Census BPS record.</p></a>`,
   ).join("");
-  const body = `<main data-phase1="true">
+  const body = `<main data-metros="true">
 ${breadcrumb(crumbs)}
-<section class="hero"><div class="container"><p class="kicker">Phase 1 · Census BPS metro corpus</p><h1>Metro Engineering Guides</h1><p class="lede">Apex Grid's Phase 1 collection covers the top 50 eligible Metro Code 2 records from the Census BPS final annual 2025 workbook, ranked by Total descending. These guides are jurisdiction-neutral and do not infer local requirements.</p><p class="note">By ${esc(PHASE1_AUTHOR)}</p></div></section>
+<section class="hero"><div class="container"><p class="kicker">Census BPS metro corpus · Phases 1 and 2</p><h1>Metro Engineering Guides</h1><p class="lede">Apex Grid's collection covers 100 eligible Metro Code 2 records from the Census BPS final annual 2025 workbook, ranked by Total descending. These guides are jurisdiction-neutral and do not infer local requirements.</p><p class="note">By ${esc(PHASE1_AUTHOR)}</p></div></section>
 <section class="block"><div class="container"><h2>Browse the <em>eligible metro records</em></h2><div class="grid2">${links}</div></div></section>
-<section class="block"><div class="container"><h2>Source and <em>method</em></h2><div class="prose"><p>Source: <a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">${PHASE1_SOURCE_URL}</a>. The corpus parses the “MSA Units Ann” sheet, keeps eligible Metro / Micro Code 2 records, and selects the first 50 records after ordering Total descending.</p><p>Representative city and state labels identify the metro record's primary label only. They do not claim an office, project, AHJ fact, county service area, or guaranteed coverage.</p></div></div></section>
+<section class="block"><div class="container"><h2>Source and <em>method</em></h2><div class="prose"><p>Source: <a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">${PHASE1_SOURCE_URL}</a>. The corpus parses the “MSA Units Ann” sheet, keeps eligible Metro / Micro Code 2 records intersecting the reviewed eligibility footprint, and selects ranks 1 through 100 after ordering Total descending. Territories and records outside the reviewed footprint are excluded.</p><p>Representative city and state labels identify the metro record's primary label only. They do not claim an office, project, AHJ fact, county service area, or guaranteed coverage.</p></div></div></section>
 </main>`;
   return phase1Html(htmlShell({
     title: "Metro Engineering Guides | Apex Grid Engineering",
@@ -1315,7 +1334,7 @@ ${breadcrumb(crumbs)}
       "@type": "CollectionPage",
       name: "Metro Engineering Guides",
       url: `${SITE}/metros/`,
-      numberOfItems: PHASE1_METROS.length,
+      numberOfItems: allMetros.length,
     }, breadcrumbSchema(crumbs)],
     body,
   }));
@@ -2267,6 +2286,12 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const metro of PHASE1_METROS) {
     metrosUrls.push(u(`${SITE}/metros/${metro.slug}/`, today, "monthly", "0.8"));
     for (const service of PHASE1_SERVICE_SLUGS) {
+      metrosUrls.push(u(`${SITE}/metros/${metro.slug}/${service}/`, today, "monthly", "0.7"));
+    }
+  }
+  for (const metro of PHASE2_METROS) {
+    metrosUrls.push(u(`${SITE}/metros/${metro.slug}/`, today, "monthly", "0.8"));
+    for (const service of PHASE2_SERVICE_SLUGS) {
       metrosUrls.push(u(`${SITE}/metros/${metro.slug}/${service}/`, today, "monthly", "0.7"));
     }
   }
@@ -4614,7 +4639,7 @@ async function main() {
       pages++;
     }
   }
-  // Phase 1 Census metro guides use a new namespace so the established
+  // Census metro guides use a new namespace so the established
   // /locations/ tree and its route ownership remain untouched.
   fs.rmSync(METROS_OUT, { recursive: true, force: true });
   fs.mkdirSync(METROS_OUT, { recursive: true });
@@ -4630,6 +4655,19 @@ async function main() {
       const serviceDir = path.join(metroDir, service);
       fs.mkdirSync(serviceDir, { recursive: true });
       fs.writeFileSync(path.join(serviceDir, "index.html"), phase1MetroServicePage(metro, service));
+      pages++;
+    }
+  }
+  for (const metro of PHASE2_METROS) {
+    assertSlug(metro.slug);
+    const metroDir = path.join(METROS_OUT, metro.slug);
+    fs.mkdirSync(metroDir, { recursive: true });
+    fs.writeFileSync(path.join(metroDir, "index.html"), phase2MetroHubPage(metro));
+    pages++;
+    for (const service of PHASE2_SERVICE_SLUGS) {
+      const serviceDir = path.join(metroDir, service);
+      fs.mkdirSync(serviceDir, { recursive: true });
+      fs.writeFileSync(path.join(serviceDir, "index.html"), phase2MetroServicePage(metro, service));
       pages++;
     }
   }
