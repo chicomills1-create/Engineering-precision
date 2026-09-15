@@ -54,23 +54,23 @@ export default function About() {
               </p>
             </div>
             
-            <div className="bg-background p-10 border border-border">
+            <div className="border border-border bg-background p-6 sm:p-10">
               <h3 className="font-display font-bold text-2xl mb-8">By The Numbers</h3>
-              <div className="grid grid-cols-2 gap-8">
-                <div>
-                  <div className="text-5xl font-display font-bold text-primary mb-2">Licensed in 49 states</div>
+              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+                <div className="min-w-0">
+                  <div className="mb-2 break-words font-display text-3xl font-bold leading-tight text-primary sm:text-4xl lg:text-5xl">Licensed in 49 states</div>
                   <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Every State Except Alaska</div>
                 </div>
-                <div>
-                  <div className="text-5xl font-display font-bold text-primary mb-2">12-24hr</div>
+                <div className="min-w-0">
+                  <div className="mb-2 break-words font-display text-3xl font-bold leading-tight text-primary sm:text-4xl lg:text-5xl">12-24hr</div>
                   <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Initial Review Response</div>
                 </div>
-                <div>
-                  <div className="text-5xl font-display font-bold text-primary mb-2">15</div>
+                <div className="min-w-0">
+                  <div className="mb-2 break-words font-display text-3xl font-bold leading-tight text-primary sm:text-4xl lg:text-5xl">15</div>
                   <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Years of Expertise</div>
                 </div>
-                <div>
-                  <div className="text-5xl font-display font-bold text-primary mb-2">4</div>
+                <div className="min-w-0">
+                  <div className="mb-2 break-words font-display text-3xl font-bold leading-tight text-primary sm:text-4xl lg:text-5xl">4</div>
                   <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Core Disciplines</div>
                 </div>
               </div>
