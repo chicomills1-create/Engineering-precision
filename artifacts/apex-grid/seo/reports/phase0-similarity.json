@@ -1,8 +1,8 @@
 {
   "generatedAt": "deterministic",
   "threshold": 0.85,
-  "phase0Pages": 156,
-  "comparisons": 12090,
+  "phase0Pages": 166,
+  "comparisons": 13695,
   "violations": 0,
   "failures": 0,
   "maxObservedSimilarity": 0.7945,

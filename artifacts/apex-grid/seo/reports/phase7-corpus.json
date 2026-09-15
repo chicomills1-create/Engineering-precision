@@ -1,8 +1,8 @@
 {
   "generatedAt": "deterministic",
-  "existingAnswerPages": 19,
+  "existingAnswerPages": 29,
   "phase7SeedPages": 101,
-  "answerLibraryPages": 120,
+  "answerLibraryPages": 130,
   "clusterCounts": {
     "Cost and pricing": 20,
     "Project timelines": 18,

@@ -907,6 +907,7 @@ function phase0ArticleFrame(
     links?: Array<{ label: string; href: string }>;
     schemaType?: "Article" | "Service" | "WebPage";
     author?: string;
+    founderNote?: string;
     marker?: string;
   },
 ): string {
@@ -936,7 +937,7 @@ function phase0ArticleFrame(
   const body = `<main ${opts.marker ? `data-${opts.marker}="true"` : 'data-phase0="true"'}>
   ${breadcrumb(crumbs)}
   <section class="hero"><div class="container"><p class="kicker">${esc(opts.kicker)}</p><h1>${esc(opts.h1)}</h1><p class="lede">${esc(opts.answer)}</p>
-    <p class="note">By ${esc(author)} · Updated ${PHASE0_UPDATED_DATE}</p>
+    <p class="note">By ${esc(author)} · Updated ${PHASE0_UPDATED_DATE}</p>${opts.founderNote ? `<p class="founder-note">${esc(opts.founderNote)}</p>` : ""}
   </div></section>
   ${opts.sections.map((section) => `<section class="block"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p>${section.bullets ? `<ul class="scope">${section.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul>` : ""}</div></div></section>`).join("")}
   ${opts.links?.length ? `<section class="block"><div class="container"><h2>Related Engineering Resources</h2><div class="linkrow">${opts.links.map((link) => `<a href="${esc(link.href)}"${/^https:\/\//.test(link.href) ? ' rel="noopener noreferrer"' : ""}>${esc(link.label)}</a>`).join("")}</div></div></section>` : ""}
@@ -962,17 +963,26 @@ function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
     : PHASE0_AEO_PAGES
       .filter((candidate) => candidate.slug !== page.slug).slice(0, 3)
       .map((candidate) => ({ label: candidate.h1, href: `/answers/${candidate.slug}/` }));
-  const serviceHref = "cluster" in page ? page.serviceHref : "/services/";
+  const serviceHref = "cluster" in page ? page.serviceHref : (page.serviceHref ?? "/services/");
   const links = [
     ...related,
     ...("cluster" in page && page.cluster === "Cost and pricing"
       ? [{ label: "Use our instant estimator", href: "/estimate" }]
       : []),
+    ...("cluster" in page ? [] : (page.extraLinks ?? [])),
     { label: "Engineering service for this question", href: serviceHref },
     { label: "Metro engineering guides", href: "/metros/" },
     { label: "Verified service areas", href: "/locations/" },
   ];
   const faqs = "cluster" in page ? phase7Faqs(page) : page.faqs;
+  const customSections = "cluster" in page ? undefined : page.sections;
+  const sections = !customSections?.length
+    ? [
+      { heading: "The concise answer", body: page.answer },
+      { heading: "How the answer is applied", body: `The correct application of ${page.topic.toLowerCase()} starts with the actual project, not a generic promise. Confirm the jurisdiction, adopted code, design scope, existing conditions, required deliverables, and professional responsibility before relying on a conclusion. A responsible engineer documents assumptions and identifies information that still needs verification.` },
+      { heading: "What can change the result", body: "Project type, occupancy, existing construction, site conditions, code edition, agency requirements, and changes made after the original design can change the work. A concise answer is useful for orientation, but the signed or sealed project record must reflect the current scope and the authority's process.", bullets: ["Confirm the authority having jurisdiction and current checklist", "Use current drawings, calculations, field evidence, and equipment information", "Separate engineering decisions from owner, architect, contractor, utility, and agency decisions", "Record assumptions, limitations, and questions requiring direct AHJ confirmation"] },
+    ]
+    : customSections;
   return phase0ArticleFrame({
     canonical: `/answers/${page.slug}/`,
     title: page.title,
@@ -980,15 +990,12 @@ function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
     h1: page.h1,
     kicker: `AEO Answer · ${page.topic}`,
     answer: page.answer,
-    sections: [
-      { heading: "The concise answer", body: page.answer },
-      { heading: "How the answer is applied", body: `The correct application of ${page.topic.toLowerCase()} starts with the actual project, not a generic promise. Confirm the jurisdiction, adopted code, design scope, existing conditions, required deliverables, and professional responsibility before relying on a conclusion. A responsible engineer documents assumptions and identifies information that still needs verification.` },
-      { heading: "What can change the result", body: "Project type, occupancy, existing construction, site conditions, code edition, agency requirements, and changes made after the original design can change the work. A concise answer is useful for orientation, but the signed or sealed project record must reflect the current scope and the authority's process.", bullets: ["Confirm the authority having jurisdiction and current checklist", "Use current drawings, calculations, field evidence, and equipment information", "Separate engineering decisions from owner, architect, contractor, utility, and agency decisions", "Record assumptions, limitations, and questions requiring direct AHJ confirmation"] },
-    ],
+    sections,
     faqs,
     links,
     schemaType: "Article",
     author: PHASE0_JEREMY_AUTHOR,
+    founderNote: "cluster" in page ? undefined : page.founderNote,
     marker: "cluster" in page ? "phase7" : undefined,
   });
 }
@@ -5430,8 +5437,8 @@ async function main() {
     fs.writeFileSync(path.join(dir, "index.html"), html);
     pages++;
   }
-  if (PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length !== 120) {
-    throw new Error(`SEO assertion failed: answer library requires exactly 120 pages (found ${PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length})`);
+  if (PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length !== 130) {
+    throw new Error(`SEO assertion failed: answer library requires exactly 130 pages (found ${PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length})`);
   }
   const peStampDir = path.join(PUBLIC, "pe-stamp");
   fs.mkdirSync(peStampDir, { recursive: true });

@@ -80,17 +80,17 @@ test("Phase 7 seeds do not overlap the existing answer corpus", () => {
   assert.ok(phase7Pages.every((page) => /^[a-z0-9-]+$/.test(page.slug) && /^\/[a-z0-9/_-]+\/?$/.test(page.serviceHref)));
 });
 
-test("generated answer library has 120 static indexable self-canonical pages", () => {
+test("generated answer library has 130 static indexable self-canonical pages", () => {
   const answerDir = path.join(publicDir, "answers");
   if (!fs.existsSync(answerDir)) return;
   const files = allPages.map((page) => path.join(answerDir, page.slug, "index.html"));
-  assert.equal(files.filter(fs.existsSync).length, 120);
+  assert.equal(files.filter(fs.existsSync).length, 130);
   assert.ok(fs.existsSync(path.join(answerDir, "index.html")));
   const sitemap = fs.readFileSync(path.join(publicDir, "sitemap-services.xml"), "utf8");
   const answerUrls = [...sitemap.matchAll(/<loc>(https:\/\/apexgrideng\.com\/answers\/[^<]+)<\/loc>/g)]
     .map((match) => match[1]);
-  assert.equal(answerUrls.length, 120);
-  assert.equal(new Set(answerUrls).size, 120);
+  assert.equal(answerUrls.length, 130);
+  assert.equal(new Set(answerUrls).size, 130);
   assert.match(sitemap, /<loc>https:\/\/apexgrideng\.com\/answers\/<\/loc>/);
 
   for (const page of allPages) {
