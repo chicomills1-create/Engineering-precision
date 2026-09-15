@@ -230,6 +230,10 @@ Non-binding ballpark for budgeting only — final proposal follows a scope revie
           </div>
           <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">Instant Ballpark Estimate</h1>
           <p className="text-lg text-muted-foreground">Provide basic project parameters for a preliminary, non-binding cost assessment.</p>
+          <div className="mt-5 inline-flex items-center gap-2 border border-primary/30 bg-primary/10 px-4 py-2 text-sm font-semibold text-foreground">
+            <Check className="h-4 w-4 text-primary" aria-hidden="true" />
+            Licensed in 49 states
+          </div>
         </div>
 
         <div className="bg-card border border-border shadow-2xl">
