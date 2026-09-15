@@ -1,0 +1,15 @@
+{
+  "generatedAt": "deterministic",
+  "threshold": 0.85,
+  "inclusive": true,
+  "estimatorPages": 49,
+  "comparisons": 1176,
+  "violations": 0,
+  "failures": 0,
+  "maxObservedSimilarity": 0.2475,
+  "maxObservedPair": [
+    "/engineering-cost-estimator/kansas/",
+    "/engineering-cost-estimator/missouri/"
+  ],
+  "topMatches": []
+}

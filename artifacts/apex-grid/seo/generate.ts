@@ -1130,6 +1130,135 @@ function peStampStatePage(state: StateData, slug: string): string {
   });
 }
 
+function estimatorLocationLinks(
+  state: StateData,
+  cities: CityData[],
+  directory: CityDirectory,
+): Array<{ name: string; href: string }> {
+  const available = allDirectoryCitiesForState(state, directory, cities);
+  const byName = new Map(available.map((city) => [diagnosticSlug(city.name), city]));
+  const selected: DirectoryCity[] = [];
+  for (const metro of state.metros) {
+    const normalizedMetro = diagnosticSlug(metro);
+    const city = byName.get(normalizedMetro)
+      ?? byName.get(normalizedMetro.replace(/-city$/, ""))
+      ?? available.find((candidate) =>
+        candidate.slug === normalizedMetro || candidate.slug === normalizedMetro.replace(/-city$/, ""),
+      );
+    if (city && !selected.some((entry) => entry.slug === city.slug)) selected.push(city);
+  }
+  // A few reviewed metro labels (for example, a multi-city metro or an
+  // island community) do not match a Census place slug exactly. Keep the
+  // fallback within this state's existing generated location tree.
+  for (const city of available) {
+    if (selected.length >= 3) break;
+    if (!selected.some((entry) => entry.slug === city.slug)) selected.push(city);
+  }
+  const links = [
+    { name: `${state.name} service area`, href: `/locations/${state.slug}/` },
+    ...selected.slice(0, 6).map((city) => ({
+      name: city.name,
+      href: `/locations/${state.slug}/${city.slug}/`,
+    })),
+  ];
+  if (selected[0]) {
+    links.push({
+      name: `${selected[0].name} MEP engineering`,
+      href: `/locations/${state.slug}/${selected[0].slug}/mep-engineering/`,
+    });
+  }
+  for (const specialty of LOCATION_SERVICE_PAGES.filter((page) => page.stateSlug === state.slug).slice(0, 3)) {
+    const href = `/locations/${specialty.stateSlug}/${specialty.citySlug}/${specialty.serviceSlug}/`;
+    if (!links.some((link) => link.href === href)) {
+      links.push({ name: specialty.title, href });
+    }
+  }
+  return links;
+}
+
+function engineeringCostEstimatorPage(
+  state: StateData,
+  cities: CityData[],
+  directory: CityDirectory,
+): string {
+  const canonicalPath = `/engineering-cost-estimator/${state.slug}/`;
+  const officialPeSources = PE_STATE_SOURCE_LINKS[state.slug];
+  if (!officialPeSources) throw new Error(`Missing official PE board links for estimator page: ${state.slug}`);
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Engineering Cost Estimator", href: "/estimate" },
+    { name: `${state.name} estimator` },
+  ];
+  const locationLinks = estimatorLocationLinks(state, cities, directory);
+  const faqs = [
+    ...state.faqs.map((faq) => ({ question: faq.q, answer: faq.a })),
+    {
+      question: `How much does a PE stamp cost in ${state.name}?`,
+      answer: `There is no responsible flat rate for a PE stamp in ${state.name}. The engineering fee depends on the defined discipline and deliverables, project size and occupancy, current drawings and calculations, existing-condition evidence, site or geotechnical information where relevant, coordination and revision scope, schedule, and the ${state.licensure.board}'s applicable rules. A PE seal is part of professional engineering work and is not a detached signature, guarantee, or approval shortcut.`,
+    },
+  ];
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `Engineering Cost Estimator for ${state.name} Projects`,
+    description: `Project-input guidance for scoping structural, MEP, civil, and energy engineering costs in ${state.name} without publishing invented rates.`,
+    provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
+    areaServed: { "@type": "State", name: state.name },
+    serviceType: "Engineering cost estimation and project intake",
+    url: `${SITE}${canonicalPath}`,
+  };
+  const faqSchema = phase0FaqSchema(faqs);
+  const body = `<main data-estimator-state="${esc(state.slug)}">
+${breadcrumb(crumbs)}
+<section class="hero"><div class="container">
+  <p class="kicker">${esc(state.name)} · Engineering Intake</p>
+  <h1>${esc(state.name)} Engineering Cost Estimator</h1>
+  <p class="lede">Understand the project inputs that shape a responsible structural, MEP, civil, or energy engineering estimate in ${esc(state.name)}. This page explains scope, code, climate, permitting, and professional-review variables; it does not invent a rate or promise an outcome.</p>
+</div></section>
+<section class="block"><div class="container">
+  <h2>How engineering estimates are scoped in ${esc(state.name)}</h2>
+  <div class="prose"><p>${esc(state.narratives.mep)} ${esc(state.narratives.structural)}</p><p>A useful estimate starts with the engineering question and the records available to answer it. Cost inputs can include the disciplines requested, building size and occupancy, new versus existing conditions, drawing and calculation quality, field verification, equipment and utility information, site or geotechnical records, permit deliverables, coordination, revisions, and schedule. Apex Grid confirms those assumptions during intake instead of publishing a made-up ${esc(state.name)} rate.</p></div>
+  <ul class="scope"><li>Discipline, deliverables, and seal requirements</li><li>Project size, occupancy, systems, and design stage</li><li>Existing conditions, measurements, surveys, and geotechnical evidence</li><li>AHJ checklist, code path, comments, and revision history</li><li>Coordination participants, access, schedule, and review cycles</li></ul>
+</div></section>
+<section class="block"><div class="container">
+  <h2>${esc(state.name)} code adoption and energy requirements</h2>
+  <div class="prose"><p>${esc(state.buildingCode.name)}. ${esc(state.buildingCode.notes)} ${esc(state.buildingCode.baseCode)}.</p><p>The commercial energy code is ${esc(state.energyCode.commercial)}. ${esc(state.energyCode.notes)}${state.energyCode.beyondCode ? ` ${esc(state.energyCode.beyondCode)}` : ""}</p><p>These reviewed facts are dated ${esc(state.lastVerified)}. The engineer still confirms the current edition, amendments, and submission checklist with the specific authority having jurisdiction before relying on them for an estimate.</p></div>
+</div></section>
+<section class="block"><div class="container">
+  <h2>${esc(state.name)} climate and structural drivers</h2>
+  <div class="prose"><p>${esc(state.climate.zones)} affects envelope, HVAC, moisture, and energy inputs. Relevant drivers include ${esc(state.climate.drivers.join("; "))}.</p><p>Structural scoping also considers seismic conditions (${esc(state.structural.seismic)}), wind exposure (${esc(state.structural.wind)}), and snow (${esc(state.structural.snow)}). ${state.structural.other ? esc(state.structural.other) : ""}</p><p>${esc(state.narratives.civil)} ${esc(state.narratives.energy)}</p></div>
+</div></section>
+<section class="block"><div class="container">
+  <h2>${esc(state.name)} permitting and market context</h2>
+  <div class="prose"><p>${esc(state.permitting)}</p><p>${esc(state.marketNotes)}</p><p>Permitting context changes the records and coordination an estimate needs. The AHJ controls completeness, interpretation, review, corrections, and approval; an estimate is not a permit promise.</p></div>
+</div></section>
+<section class="block"><div class="container">
+  <h2>${esc(state.name)} PE board and responsible-charge notes</h2>
+  <div class="prose"><p>The licensing board for ${esc(state.name)} is the ${esc(state.licensure.board)}. ${esc(state.licensure.notes)}</p><p>Before a document is sealed, confirm project jurisdiction, discipline, adopted code, responsible charge, existing-condition evidence, and the board and AHJ rules that apply. A PE stamp is part of defined engineering responsibility, not a commodity purchased separately from the review that supports it.</p></div>
+  <div class="linkrow"><a href="${esc(officialPeSources.boardUrl)}" rel="noopener noreferrer">${esc(state.name)} official engineering board</a><a href="${esc(officialPeSources.lookupUrl)}" rel="noopener noreferrer">${esc(state.name)} official license lookup</a></div>
+</div></section>
+<section class="block"><div class="container">
+  <h2>${esc(state.name)} metro coverage and location guides</h2>
+  <p class="prose">The reviewed StateData market list includes ${esc(state.metros.join(", "))}. Existing location pages provide context for these markets; they do not imply a local office, guaranteed availability, or a project result.</p>
+  <div class="linkrow">${locationLinks.map((link) => `<a href="${esc(link.href)}">${esc(link.name)} engineering location guide</a>`).join("")}</div>
+</div></section>
+<section class="block"><div class="container">
+  <h2>What to send for a ${esc(state.name)} project estimate</h2>
+  <div class="prose"><p>Start with the project address, plain-language scope, current drawings, photographs or measurements, equipment and utility information, survey or geotechnical records where relevant, adopted-code information, AHJ comments, desired deliverables, and schedule. The responsible engineer identifies gaps and confirms whether the requested work can be accepted.</p></div>
+  <div class="linkrow"><a href="/pe-stamp/${esc(state.slug)}/">${esc(state.name)} PE stamp and license resources</a><a href="/answers/">Engineering answers library</a><a href="/answers/how-much-does-a-pe-stamp-cost/">PE stamp cost guidance</a></div>
+</div></section>
+<section class="block"><div class="container"><h2>${esc(state.name)} estimator FAQs</h2><div class="faq">${faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></div></section>
+<section class="ctaband"><div class="container"><h2>Start your ${esc(state.name)} project estimate</h2><p>Share the project address, records, requested engineering scope, authority information, and schedule through the estimate intake. Scope, professional responsibility, availability, and any fee proposal are confirmed after review.</p><a class="cta" href="/estimate">Open the Engineering Estimate</a></div></section>
+</main>`;
+  return htmlShell({
+    title: `${state.name} Engineering Cost Estimator | PE, Structural, MEP & Civil | Apex Grid`,
+    description: `${state.name} engineering cost estimator guidance: understand scope, code, climate, permitting, PE review, and project inputs without invented rates.`,
+    canonical: `${SITE}${canonicalPath}`,
+    schemaJson: [serviceSchema, faqSchema, breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
 function phase0PlaybookPage(playbook: Phase0Playbook & { angle: string }): string {
   const faqs = [
     { question: `What is the first step for ${playbook.city} plan-check corrections?`, answer: `Preserve the official correction notice and permit record, identify the current submitted set, and build a comment matrix before changing drawings or calculations. ${playbook.angle}` },
@@ -1780,6 +1909,7 @@ ${specialtyLocationPages.length ? `<section class="block"><div class="container"
 <section class="ctaband"><div class="container">
   <h2>Build in ${esc(state.name)} with Apex Grid</h2>
   <p>${esc(state.permitting)}</p>
+  <p><a href="/engineering-cost-estimator/${esc(state.slug)}/">${esc(state.name)} engineering cost estimator</a></p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
 
@@ -2369,6 +2499,11 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     servicesUrls.push(u(`${SITE}/answers/${page.slug}/`, today, "monthly", "0.7"));
   }
 
+  // ── State estimator expansion: one reviewed page per licensed state ─────
+  const estimatorUrls = states.map((state) =>
+    u(`${SITE}/engineering-cost-estimator/${state.slug}/`, today, "monthly", "0.8"),
+  );
+
   // ── Tier 2: Industries ───────────────────────────────────────────────────
   const industriesUrls: string[] = [
     u(`${SITE}/industries`, today, "monthly", "0.7"),
@@ -2542,6 +2677,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   const sitemaps: Array<{ name: string; urls: string[] }> = [
     { name: "sitemap-core.xml",       urls: coreUrls },
     { name: "sitemap-services.xml",   urls: servicesUrls },
+    { name: "sitemap-estimators.xml", urls: estimatorUrls },
     { name: "sitemap-industries.xml", urls: industriesUrls },
     { name: "sitemap-solutions.xml",  urls: solutionsUrls },
     { name: "sitemap-resources.xml",  urls: resourcesUrls },
@@ -4652,7 +4788,7 @@ ${expansion.hub.sections.map((section) => `<section class="block"><div class="co
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
 <section class="block"><div class="container faq"><h2>${esc(expansion.stateName)} <em>FAQs</em></h2>${expansion.hub.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
 <section class="block"><div class="container"><h2>Official <em>sources</em></h2><p class="note">Review the current authority, code, licensing, and environmental information before design or filing.</p><div class="linkrow">${batch2SourceLinks(expansion.hub.sources)}</div></div></section>
-<section class="ctaband"><div class="container"><h2>Start a ${esc(expansion.stateName)} project</h2><p>Send the project address, jurisdiction, scope, records, and desired deliverable. Code edition, responsible licensure, authority review, and schedule remain project-specific.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
+<section class="ctaband"><div class="container"><h2>Start a ${esc(expansion.stateName)} project</h2><p>Send the project address, jurisdiction, scope, records, and desired deliverable. Code edition, responsible licensure, authority review, and schedule remain project-specific.</p><p><a href="/engineering-cost-estimator/${esc(expansion.stateSlug)}/">${esc(expansion.stateName)} engineering cost estimator</a></p><a class="cta" href="/contact">Request a Project Review</a></div></section>
 </main>`;
   const html = htmlShell({
     title: expansion.hub.title,
@@ -4772,6 +4908,7 @@ async function main() {
   assertPhase7Corpus();
   const generatedTopLevelRoutes = [
     ...SEO_GENERATOR_FIXED_INDEX_ROUTES,
+    "/engineering-cost-estimator",
     ...LOCATION_VERTICALS.map((page) => `/${page.slug}`),
     ...DISCIPLINES.map((page) => `/${page.slug}`),
     ...DISCIPLINE_HUBS.map((page) => `/${page.slug}`),
@@ -5606,6 +5743,22 @@ async function main() {
     fs.rmSync(mpDir, { recursive: true, force: true });
     fs.mkdirSync(mpDir, { recursive: true });
     fs.writeFileSync(path.join(mpDir, "index.html"), miscPage(mp));
+    pages++;
+  }
+
+  // State-specific estimator pages use only the reviewed StateData corpus.
+  // Keep the directory separate from /estimate so the estimator engine route
+  // remains React-owned and unchanged.
+  const estimatorOut = path.join(PUBLIC, "engineering-cost-estimator");
+  fs.rmSync(estimatorOut, { recursive: true, force: true });
+  fs.mkdirSync(estimatorOut, { recursive: true });
+  for (const state of states) {
+    const stateEstimatorDir = path.join(estimatorOut, state.slug);
+    fs.mkdirSync(stateEstimatorDir, { recursive: true });
+    fs.writeFileSync(
+      path.join(stateEstimatorDir, "index.html"),
+      engineeringCostEstimatorPage(state, cities, directory),
+    );
     pages++;
   }
 
