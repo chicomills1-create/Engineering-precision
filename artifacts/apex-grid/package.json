@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
-    "build": "vite build --config vite.config.ts && PRERENDER_BUNDLE=1 vite build --ssr src/ssr.tsx --config vite.config.ts && tsx scripts/prerender.ts && pnpm run seo:audit:corpus",
+    "build": "SEO_DIRECT_TO_DIST=1 vite build --config vite.config.ts && tsx scripts/copy-static-public-assets.ts && SEO_OUTPUT_DIR=dist/public pnpm run seo:generate && PRERENDER_BUNDLE=1 vite build --ssr src/ssr.tsx --config vite.config.ts && SEO_OUTPUT_DIR=dist/public tsx scripts/prerender.ts && SEO_OUTPUT_DIR=dist/public pnpm run seo:audit:corpus",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit && pnpm run seo:check:route-ownership && pnpm run seo:test:hub-preservation && pnpm run seo:audit:claims && pnpm run seo:audit:corpus",
     "seo:generate": "tsx seo/generate.ts",

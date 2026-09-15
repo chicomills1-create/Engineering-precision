@@ -12,6 +12,9 @@ import {
 } from "../src/lib/licensing";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const generatedRoot = process.env.SEO_OUTPUT_DIR
+  ? path.resolve(root, process.env.SEO_OUTPUT_DIR)
+  : path.join(root, "public");
 const generalProhibited = [
   /\b49(?:\s+U\.?S\.?)?\s+states\b/i,
   /\b49-state\b/i,
@@ -295,9 +298,9 @@ const representativeGeneratedPages = [
   "locations/arizona/queen-creek/index.html",
 ];
 for (const relative of representativeGeneratedPages) {
-  const full = path.join(root, "public", relative);
+  const full = path.join(generatedRoot, relative);
   if (!fs.existsSync(full)) {
-    failures.push(`public/${relative}: representative generated page is missing`);
+    failures.push(`${path.relative(root, generatedRoot)}/${relative}: representative generated page is missing`);
   } else {
     checkFile(full);
   }

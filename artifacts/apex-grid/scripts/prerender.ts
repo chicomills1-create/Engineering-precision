@@ -12,6 +12,9 @@ const root = path.resolve(import.meta.dirname, "..");
 const sourceTemplate = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const distRoot = path.join(root, "dist/public");
 const distTemplate = fs.readFileSync(path.join(distRoot, "index.html"), "utf8");
+const outputTargets = process.env.SEO_OUTPUT_DIR
+  ? [[distRoot, distTemplate] as const]
+  : [[path.join(root, "public"), sourceTemplate] as const, [distRoot, distTemplate] as const];
 const site = (process.env.VITE_SITE_URL ?? "https://apexgrideng.com").replace(/\/$/, "");
 
 const routeMeta: Record<string, [string, string]> = {
@@ -87,7 +90,7 @@ const outputs: string[] = [];
 for (const route of routes) {
   const body = ssr.renderRoute(route);
   const relative = route === "/" ? "" : route.replace(/^\/|\/$/g, "");
-  for (const [base, template] of [[path.join(root, "public"), sourceTemplate], [distRoot, distTemplate]] as const) {
+  for (const [base, template] of outputTargets) {
     const target = path.join(base, relative, "index.html");
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.writeFileSync(target, documentFor(template, route, body));
@@ -99,7 +102,7 @@ for (const route of routes) {
 const aliases: Record<string, string> = { agriculture: "agriculture-cannabis-facility-engineering", aviation: "aviation-hangar-engineering", cannabis: "agriculture-cannabis-facility-engineering", "cold-storage": "cold-storage-food-processing-engineering", "commercial-office": "commercial-office-engineering", "data-centers": "data-center-engineering", education: "educational-facility-engineering", "ev-automotive": "ev-charging-automotive-engineering", government: "government-civic-engineering", healthcare: "healthcare-engineering", hospitality: "retail-hospitality-engineering", "industrial-warehouse": "industrial-warehouse-engineering", "life-science": "life-science-cleanroom-engineering", "military-defense": "military-defense-engineering", multifamily: "multifamily-residential-engineering", parking: "parking-structure-engineering", "religious-worship": "religious-worship-facility-engineering", "renewable-energy": "solar-renewable-energy-engineering", restaurants: "restaurant-food-service-engineering", retail: "retail-hospitality-engineering", "senior-living": "senior-living-assisted-care-engineering", "student-housing": "multifamily-residential-engineering", telecommunications: "telecommunications-engineering" };
 for (const [alias, canonical] of Object.entries(aliases)) {
   const html = `<!doctype html><html><head><meta http-equiv="refresh" content="0;url=/industries/${canonical}/"><link rel="canonical" href="${site}/industries/${canonical}/"><meta name="robots" content="noindex"></head><body><a href="/industries/${canonical}/">Continue to the canonical industry page</a></body></html>`;
-  for (const base of [path.join(root, "public"), distRoot]) {
+  for (const [base] of outputTargets) {
     const target = path.join(base, "industries", alias, "index.html");
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.writeFileSync(target, html);

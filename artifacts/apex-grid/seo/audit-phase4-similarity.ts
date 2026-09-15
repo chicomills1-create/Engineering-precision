@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 import { PHASE4_METROS, PHASE4_SERVICE_SLUGS } from "./phase4-metros";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PUBLIC = path.resolve(__dirname, "../public");
+const PUBLIC = process.env.SEO_OUTPUT_DIR ? path.resolve(__dirname, "..", process.env.SEO_OUTPUT_DIR) : path.resolve(__dirname, "../public");
 const REPORT = path.join(__dirname, "reports", "phase4-similarity.json");
 const LIMIT = 0.85;
 

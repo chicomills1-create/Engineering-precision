@@ -13,7 +13,7 @@ import { PHASE2_METROS } from "./phase2-metros";
 import { PHASE3_METROS } from "./phase3-metros";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const publicDir = path.resolve(here, "../public");
+const publicDir = process.env.SEO_OUTPUT_DIR ? path.resolve(here, "..", process.env.SEO_OUTPUT_DIR) : path.resolve(here, "../public");
 
 test("Phase 4 corpus is the ranked 151-200 Census metro set", () => {
   assert.equal(PHASE4_METROS.length, 50);

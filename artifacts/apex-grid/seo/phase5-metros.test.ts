@@ -9,7 +9,8 @@ import { PHASE3_METROS } from "./phase3-metros";
 import { PHASE4_METROS } from "./phase4-metros";
 import { PHASE5_METROS, PHASE5_SERVICE_SLUGS, PHASE5_SOURCE_URL } from "./phase5-metros";
 
-const publicDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../public");
+const here = path.dirname(fileURLToPath(import.meta.url));
+const publicDir = process.env.SEO_OUTPUT_DIR ? path.resolve(here, "..", process.env.SEO_OUTPUT_DIR) : path.resolve(here, "../public");
 
 test("Phase 5 is the next 50 eligible Census metros after Phases 1-4", () => {
   const prior = new Set([...PHASE1_METROS, ...PHASE2_METROS, ...PHASE3_METROS, ...PHASE4_METROS].map((metro) => metro.cbsaCode));

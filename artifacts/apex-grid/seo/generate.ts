@@ -187,7 +187,9 @@ function loadDirectory(): CityDirectory {
 }
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PUBLIC = path.resolve(__dirname, "../public");
+const PUBLIC = process.env.SEO_OUTPUT_DIR
+  ? path.resolve(__dirname, "..", process.env.SEO_OUTPUT_DIR)
+  : path.resolve(__dirname, "../public");
 const OUT = path.join(PUBLIC, "locations");
 const METROS_OUT = path.join(PUBLIC, "metros");
 

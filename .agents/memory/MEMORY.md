@@ -52,3 +52,4 @@
 - [Outreach acquisition versus sending](outreach-acquisition-vs-sending.md) — research failures must not block existing eligible inventory from the four independent send lanes.
 - [FindyMail persistence gap](findymail-persistence-gap.md) — provider searches have no usage ledger; credits can be consumed without a persisted prospect or verification record.
 - [Outreach admin response contracts](outreach-admin-contracts.md) — internal message source types must remain readable by admin APIs; cohort counts precede per-recipient safety skips.
+- [Direct-to-dist SEO builds](direct-to-dist-seo-builds.md) — production generates the SEO corpus in dist; local build time rose because regeneration replaced Vite’s copy step.

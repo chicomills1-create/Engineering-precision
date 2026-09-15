@@ -22,6 +22,7 @@ if (Number.isNaN(port) || port <= 0) {
 const basePath = process.env.BASE_PATH;
 const isPostMergeValidation = process.env.POST_MERGE_VALIDATION === '1';
 const isPrerenderBundle = process.env.PRERENDER_BUNDLE === '1';
+const isDirectToDistBuild = process.env.SEO_DIRECT_TO_DIST === '1';
 
 /** Injects the Google Search Console verification <meta> tag into <head> at
  *  build/dev time when VITE_GOOGLE_SITE_VERIFICATION is set. This ensures
@@ -73,7 +74,7 @@ export default defineConfig({
   base: basePath,
   // Post-merge validation compiles the real app without copying the 598 MB
   // generated SEO corpus. Normal development and production builds are unchanged.
-  publicDir: isPostMergeValidation || isPrerenderBundle ? false : 'public',
+  publicDir: isPostMergeValidation || isPrerenderBundle || isDirectToDistBuild ? false : 'public',
   plugins: [
     gscVerificationPlugin(),
     staticDirIndex(),

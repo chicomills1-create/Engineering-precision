@@ -10,7 +10,7 @@ import {
 } from "./phase1-metros";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const publicDir = path.resolve(here, "../public");
+const publicDir = process.env.SEO_OUTPUT_DIR ? path.resolve(here, "..", process.env.SEO_OUTPUT_DIR) : path.resolve(here, "../public");
 
 test("Phase 1 corpus is the ranked top 50 Census metro set", () => {
   assert.equal(PHASE1_METROS.length, 50);
