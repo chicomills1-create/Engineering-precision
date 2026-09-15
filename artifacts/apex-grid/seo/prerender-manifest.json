@@ -4,6 +4,7 @@
     "/",
     "/about",
     "/contact",
+    "/estimate",
     "/for-architects",
     "/for-contractors",
     "/for-developers",
@@ -72,5 +73,5 @@
     "student-housing": "multifamily-residential-engineering",
     "telecommunications": "telecommunications-engineering"
   },
-  "count": 45
+  "count": 46
 }
