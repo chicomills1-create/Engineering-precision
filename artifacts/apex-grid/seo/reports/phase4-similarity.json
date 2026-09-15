@@ -1,0 +1,14 @@
+{
+  "generatedAt": "deterministic",
+  "threshold": 0.85,
+  "phase4Pages": 400,
+  "comparisons": 79800,
+  "violations": 0,
+  "failures": 0,
+  "maxObservedSimilarity": 0.7578,
+  "maxObservedPair": [
+    "/metros/hinesville-ga/",
+    "/metros/dalton-ga/"
+  ],
+  "topMatches": []
+}
