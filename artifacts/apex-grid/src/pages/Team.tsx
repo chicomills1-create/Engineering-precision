@@ -105,9 +105,9 @@ export default function Team() {
 
       <section className="py-16 bg-card border-y border-border">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4">
-            {STATS.map((s) => (
-              <div key={s.label} className="min-w-0">
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-5">
+            {STATS.map((s, index) => (
+              <div key={s.label} className={`min-w-0 ${index === 1 ? "md:col-span-2" : ""}`}>
                 <div className="mb-2 break-words font-display text-3xl font-bold leading-tight text-primary sm:text-4xl lg:text-5xl">{s.value}</div>
                 <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">{s.label}</div>
               </div>
