@@ -102,6 +102,17 @@ import ohioBatch2 from "./batch2-ohio";
 import pennsylvaniaBatch2 from "./batch2-pennsylvania";
 import { BATCH3_EXPANSIONS, BATCH3_EXPECTED_STATE_SLUGS } from "./batch3-expansions";
 import { BATCH4_EXPANSIONS, BATCH4_EXPECTED_STATE_SLUGS } from "./batch4-expansions";
+import {
+  PE_STATE_SOURCE_LINKS,
+  PHASE0_AEO_PAGES,
+  PHASE0_PLAN_CHECK_PLAYBOOKS,
+  PHASE0_RESOURCE_PAGES,
+  PHASE0_SERVICE_PAGES,
+  type Phase0AeoPage,
+  type Phase0Playbook,
+  type Phase0ResourcePage,
+  type Phase0ServicePage,
+} from "./phase0-corpus";
 
 const PROMOTED_CITY_KEYS = new Set([
   "georgia/atlanta", "texas/austin", "north-carolina/charlotte",
@@ -714,6 +725,323 @@ function assertIndexableFaqPage(html: string, faqs: Array<{ question: string; an
     || faqs.some((faq) => !faqSchema.mainEntity?.some((entry) => entry.name === faq.question && entry.acceptedAnswer.text === faq.answer))) {
     throw new Error(`SEO assertion failed: malformed indexable source page: ${label} (${visibleWords} visible words, ${h1Count} H1s)`);
   }
+}
+
+const PHASE0_UPDATED_DATE = "2026-09-15";
+const PHASE0_EDITORIAL_AUTHOR = "Apex Grid Engineering";
+const PHASE0_JEREMY_AUTHOR = "Jeremy Mills, CEO & Founder, Apex Grid Engineering — USAF Veteran";
+
+function phase0FaqSchema(faqs: Array<{ question: string; answer: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+}
+
+function phase0FaqMarkup(faqs: Array<{ question: string; answer: string }>): string {
+  return `<section class="block"><div class="container"><h2>Frequently Asked Questions</h2><div class="faq">
+    ${faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}
+  </div></div></section>`;
+}
+
+function assertPhase0Page(html: string, canonical: string, faqs: Array<{ question: string; answer: string }>, label: string): void {
+  const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .map((match) => JSON.parse(match[1]) as { "@type"?: string; mainEntity?: unknown[] });
+  if (!html.includes('data-phase0="true"')
+    || (html.match(/<h1(?:\s[^>]*)?>/gi) ?? []).length !== 1
+    || !html.includes(`<link rel="canonical" href="${SITE}${canonical}"`)
+    || html.includes('name="robots" content="noindex')
+    || !html.includes("By ")
+    || html.includes("Apex Grid Engineering PE Team")
+    || !html.includes(`Updated ${PHASE0_UPDATED_DATE}`)
+    || schemas.find((schema) => schema["@type"] === "FAQPage")?.mainEntity?.length !== faqs.length
+  ) {
+    throw new Error(`SEO assertion failed: malformed Phase 0 page ${label}`);
+  }
+}
+
+function phase0ArticleFrame(
+  opts: {
+    canonical: string;
+    title: string;
+    description: string;
+    h1: string;
+    kicker: string;
+    answer: string;
+    sections: Array<{ heading: string; body: string; bullets?: string[] }>;
+    faqs: Array<{ question: string; answer: string }>;
+    links?: Array<{ label: string; href: string }>;
+    schemaType?: "Article" | "Service" | "WebPage";
+    author?: string;
+  },
+): string {
+  const crumbs = [{ name: "Home", href: "/" }, { name: opts.h1 }];
+  const author = opts.author ?? PHASE0_EDITORIAL_AUTHOR;
+  const authorSchema = author === PHASE0_JEREMY_AUTHOR
+    ? {
+      "@type": "Person",
+      name: "Jeremy Mills",
+      jobTitle: "CEO & Founder",
+      description: "USAF Veteran",
+      worksFor: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
+    }
+    : { "@type": "Organization", name: PHASE0_EDITORIAL_AUTHOR, url: SITE };
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": opts.schemaType ?? "Article",
+    headline: opts.h1,
+    name: opts.h1,
+    description: opts.description,
+    url: `${SITE}${opts.canonical}`,
+    datePublished: PHASE0_UPDATED_DATE,
+    dateModified: PHASE0_UPDATED_DATE,
+    author: authorSchema,
+    publisher: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
+  };
+  const body = `<main data-phase0="true">
+  ${breadcrumb(crumbs)}
+  <section class="hero"><div class="container"><p class="kicker">${esc(opts.kicker)}</p><h1>${esc(opts.h1)}</h1><p class="lede">${esc(opts.answer)}</p>
+    <p class="note">By ${esc(author)} · Updated ${PHASE0_UPDATED_DATE}</p>
+  </div></section>
+  ${opts.sections.map((section) => `<section class="block"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p>${section.bullets ? `<ul class="scope">${section.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul>` : ""}</div></div></section>`).join("")}
+  ${opts.links?.length ? `<section class="block"><div class="container"><h2>Related Phase 0 Resources</h2><div class="linkrow">${opts.links.map((link) => `<a href="${esc(link.href)}"${/^https:\/\//.test(link.href) ? ' rel="noopener noreferrer"' : ""}>${esc(link.label)}</a>`).join("")}</div></div></section>` : ""}
+  ${phase0FaqMarkup(opts.faqs)}
+  </main>`;
+  return htmlShell({
+    title: opts.title,
+    description: opts.description,
+    canonical: `${SITE}${opts.canonical}`,
+    schemaJson: [schema, phase0FaqSchema(opts.faqs), breadcrumbSchema(crumbs)],
+    body,
+  });
+}
+
+function phase0AeoPage(page: Phase0AeoPage): string {
+  const related = PHASE0_AEO_PAGES.filter((candidate) => candidate.slug !== page.slug).slice(0, 3)
+    .map((candidate) => ({ label: candidate.h1, href: `/answers/${candidate.slug}/` }));
+  return phase0ArticleFrame({
+    canonical: `/answers/${page.slug}/`,
+    title: page.title,
+    description: page.description,
+    h1: page.h1,
+    kicker: `AEO Answer · ${page.topic}`,
+    answer: page.answer,
+    sections: [
+      { heading: "The concise answer", body: page.answer },
+      { heading: "How the answer is applied", body: `The correct application of ${page.topic.toLowerCase()} starts with the actual project, not a generic promise. Confirm the jurisdiction, adopted code, design scope, existing conditions, required deliverables, and professional responsibility before relying on a conclusion. A responsible engineer documents assumptions and identifies information that still needs verification.` },
+      { heading: "What can change the result", body: "Project type, occupancy, existing construction, site conditions, code edition, agency requirements, and changes made after the original design can change the work. A concise answer is useful for orientation, but the signed or sealed project record must reflect the current scope and the authority's process.", bullets: ["Confirm the authority having jurisdiction and current checklist", "Use current drawings, calculations, field evidence, and equipment information", "Separate engineering decisions from owner, architect, contractor, utility, and agency decisions", "Record assumptions, limitations, and questions requiring direct AHJ confirmation"] },
+    ],
+    faqs: page.faqs,
+    links: related,
+    schemaType: "Article",
+    author: PHASE0_JEREMY_AUTHOR,
+  });
+}
+
+function phase0CollectionHub(
+  canonical: string,
+  title: string,
+  description: string,
+  h1: string,
+  kicker: string,
+  answer: string,
+  links: Array<{ label: string; href: string }>,
+): string {
+  return phase0ArticleFrame({
+    canonical,
+    title,
+    description,
+    h1,
+    kicker,
+    answer,
+    sections: [
+      { heading: "How to use this collection", body: "These pages are national, general guidance. They explain useful questions and records without inventing local permit outcomes, county requirements, client records, or project pricing. Confirm the current jurisdiction, code edition, authority checklist, and responsible professional before relying on a page for a live project." },
+      { heading: "A consistent professional boundary", body: "Apex Grid's public guidance does not replace a project proposal, site investigation, design analysis, permit review, inspection, or board decision. Scope, licensing, responsible charge, and deliverables are confirmed for each project." },
+    ],
+    faqs: [
+      { question: "Are these pages static and indexable?", answer: "Yes. Phase 0 pages are generated as static HTML with a self-canonical URL and index,follow metadata, then included in the generated sitemap." },
+      { question: "Do these pages contain local guarantees or pricing?", answer: "No. The corpus intentionally excludes invented local records, near-me doorway pages, county guides, and inline location pricing." },
+    ],
+    links,
+    schemaType: "WebPage",
+  });
+}
+
+function phase0ServicePage(page: Phase0ServicePage): string {
+  return phase0ArticleFrame({
+    canonical: page.path,
+    title: page.title,
+    description: page.description,
+    h1: page.h1,
+    kicker: "Phase 0 Service Scope",
+    answer: page.answer,
+    sections: [
+      ...page.sections,
+      {
+        heading: "A founder's standard for project clarity",
+        body: "Jeremy Mills, CEO & Founder, Apex Grid Engineering — USAF Veteran, emphasizes clear scope, traceable inputs, and direct communication about what remains unverified. That founder perspective does not replace the independent judgment or professional responsibility of the licensed engineer assigned to an accepted project.",
+      },
+    ],
+    faqs: page.faqs,
+    links: [
+      { label: "Engineering answers library", href: "/answers/" },
+      { label: "Plan-check correction playbooks", href: "/plan-check-playbooks/" },
+      { label: "Engineering project resources", href: "/resources/phase-0/" },
+      { label: "PE-stamped engineering hub", href: "/pe-stamp/" },
+      { label: "Plan-check correction support", href: "/services/plan-check-corrections-engineer/" },
+      { label: "Contact Apex Grid", href: "/contact/" },
+    ],
+    schemaType: "Service",
+  });
+}
+
+function peStampHubPage(): string {
+  const crumbs = [{ name: "Home", href: "/" }, { name: "PE Stamp Resources" }];
+  const stateLinks = Object.keys(PE_STATE_SOURCE_LINKS).sort().map((slug) => ({
+    label: `${slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())} PE stamp information`,
+    href: `/pe-stamp/${slug}/`,
+  }));
+  const faqs = [
+    { question: "Is a PE stamp a stand-alone product?", answer: "No. A seal represents a responsible engineer's professional review and responsibility for eligible work within the engineer's authorization and applicable rules." },
+    { question: "Where can I verify a professional engineer license?", answer: "Use the official board and license-verification resources linked for the relevant state, then confirm project-specific authorization and scope directly with the responsible professional." },
+    { question: "Does a PE stamp guarantee permit approval?", answer: "No. The AHJ controls its completeness review, interpretation, comments, and approval decision." },
+  ];
+  return phase0ArticleFrame({
+    canonical: "/pe-stamp/",
+    title: "PE Stamp and License Verification Resources | Apex Grid",
+    description: "State-by-state professional engineering board and license-verification resources, plus responsible PE document guidance from Apex Grid Engineering.",
+    h1: "PE Stamp and Professional Engineer Verification Resources",
+    kicker: "Professional Responsibility · State Resources",
+    answer: "A PE seal belongs to defined engineering work that a responsible, authorized professional engineer has performed or independently reviewed. This hub links to official state board and license-verification resources without implying a project license, local office, or guaranteed approval.",
+    sections: [
+      { heading: "Use the official state source first", body: "Board rules, seal requirements, comity processes, and verification systems change. Open the relevant state page below, follow the board's current instructions, and confirm the engineer's authorization for the project's discipline, location, and scope. NCEES, a project owner, or a contractor cannot substitute for the state's official record.", bullets: ["State board landing page", "Official license lookup or verification page", "Project-specific authorization and responsible charge", "AHJ submission and signature requirements"] },
+      { heading: "A seal is tied to professional responsibility", body: "Apex Grid does not sell a stamp-for-hire service. Where a project is accepted, the responsible engineer defines the scope, reviews the design basis, performs or verifies the necessary work, coordinates eligible documents, and determines whether signing or sealing is appropriate. Construction, agency, utility, architecture, survey, geotechnical, and specialty responsibilities remain distinct." },
+      { heading: "Founder perspective", body: "Jeremy Mills, CEO & Founder, Apex Grid Engineering — USAF Veteran, supports a verification-first approach: confirm the official license record, define the engineering scope, and identify the responsible licensed professional before relying on a seal. This founder statement does not represent Jeremy as a professional engineer." },
+    ],
+    faqs,
+    links: stateLinks,
+    schemaType: "WebPage",
+  });
+}
+
+function peStampStatePage(state: StateData, slug: string): string {
+  const links = PE_STATE_SOURCE_LINKS[slug];
+  if (!links) throw new Error(`Missing official PE board links for ${slug}`);
+  const stateName = state.name;
+  const faqs = [
+    { question: `How do I verify a PE license in ${stateName}?`, answer: `Start with the official ${stateName} board and license-verification links on this page. Confirm the record directly with the board and separately confirm that the engineer is authorized for the project's discipline and scope.` },
+    { question: `Does a ${stateName} PE seal guarantee approval?`, answer: "No. A seal communicates professional responsibility for eligible engineering work. The authority having jurisdiction controls its review, comments, interpretation, and approval decision." },
+    { question: `What should a ${stateName} project team confirm before sealing?`, answer: `Confirm the project location, discipline, adopted code, AHJ submission rules, existing-condition evidence, and the engineer's ability to accept responsible charge. ${state.licensure.notes}` },
+  ];
+  return phase0ArticleFrame({
+    canonical: `/pe-stamp/${slug}/`,
+    title: `PE Stamp and License Lookup in ${stateName} | Apex Grid`,
+    description: `Official ${stateName} professional engineering board and license-verification resources, with project-specific PE responsibility guidance from Apex Grid Engineering.`,
+    h1: `PE Stamp and License Verification in ${stateName}`,
+    kicker: `${stateName} · Official Board Resources`,
+    answer: `For a ${stateName} project, use the state's official engineering board and license-verification resources before relying on a professional credential. A PE seal still requires independent engineering review, professional responsibility, and compliance with the project jurisdiction's submission rules.`,
+    sections: [
+      { heading: `Official ${stateName} board and lookup links`, body: "These links are provided as starting points to the official state sources. A board's current instructions and online record control; confirm the page, status, discipline, and authorization directly before a project submission.", bullets: [`${stateName} engineering licensing board`, "Official license verification or lookup", `Project code and AHJ requirements for ${stateName}`, "Responsible engineer and scope confirmation"] },
+      { heading: "Project-specific engineering responsibility", body: `The ${stateName} board resource does not approve a design or transfer responsibility to a contractor, owner, or another engineer. The responsible professional reviews the project inputs, code basis, calculations, drawings, and existing conditions, then determines which documents can be signed or sealed. ${state.buildingCode.notes} ${state.licensure.notes}` },
+      { heading: "Useful project inputs", body: `A ${stateName} PE may need the project address, current architectural backgrounds, discipline scope, adopted code information, site and existing-condition evidence, equipment data, calculations, AHJ checklist, and any correction notice. ${state.permitting} ${state.climate.drivers.join("; ")} are examples of why project inputs must be confirmed rather than assumed.` },
+    ],
+    faqs,
+    links: [
+      { label: `${stateName} official board`, href: links.boardUrl },
+      { label: `${stateName} official license lookup`, href: links.lookupUrl },
+      { label: "PE stamp hub", href: "/pe-stamp/" },
+    ],
+    schemaType: "WebPage",
+  });
+}
+
+function phase0PlaybookPage(playbook: Phase0Playbook & { angle: string }): string {
+  const faqs = [
+    { question: `What is the first step for ${playbook.city} plan-check corrections?`, answer: `Preserve the official correction notice and permit record, identify the current submitted set, and build a comment matrix before changing drawings or calculations. ${playbook.angle}` },
+    { question: "Can a plan-check playbook promise approval?", answer: "No. It provides a general coordination method. The AHJ decides completeness, interpretation, comments, review timing, and approval." },
+    { question: "Which project information should be assembled?", answer: "Collect the complete notice, current and prior submittals, calculations, architectural background, project address, permit number, equipment data, field evidence, and the authority's current resubmittal instructions." },
+    { question: "What if a comment belongs to another discipline?", answer: "Assign the item to the responsible architect, engineer, contractor, utility, fire authority, or other specialist and record the dependency instead of claiming that an engineering response resolves it." },
+  ];
+  return phase0ArticleFrame({
+    canonical: `/plan-check-playbooks/${playbook.slug}/`,
+    title: playbook.title,
+    description: `General plan-check correction guidance for ${playbook.city}, ${playbook.state}: preserve official records, coordinate engineering responses, and separate AHJ decisions from project-team work.`,
+    h1: `${playbook.city} Plan Check Correction Playbook`,
+    kicker: `${playbook.city}, ${playbook.state} · General Guidance`,
+    answer: `This playbook is a general, non-invented workflow for ${playbook.city} plan-check corrections. It does not assert a local approval timeline, a particular code interpretation, or a project-specific agency decision. ${playbook.angle}`,
+    sections: [
+      { heading: "Preserve the official record", body: `Begin with the ${playbook.city} permit record and correction notice linked below. Save the submitted drawing index, calculations, response forms, correspondence, and portal instructions as received. Record the review cycle and date without guessing what the authority meant beyond the written comment. ${playbook.angle}` },
+      { heading: "Build a comment matrix", body: "For every item, copy the comment number and wording, identify the cited sheet or detail, classify the response as comply, clarify, revise, or refer, assign the responsible discipline, and list the evidence needed. A comment that changes the design basis requires engineering work; an owner, zoning, fire, utility, or planning decision must remain with the appropriate party.", bullets: ["Exact comment and original reference", "Responsible discipline and project-team owner", "Calculation, drawing, schedule, or letter needed", "Open input, field verification, or AHJ question", "Revision identifier and final response location"] },
+      { heading: "Coordinate before resubmitting", body: "Check the response against the full current set. A structural opening can affect architecture and MEP routing; an equipment change can affect structure, electrical service, controls, and energy documentation; a civil change can affect grading, drainage, utilities, and accessibility. The project applicant follows the official portal, fee, file-naming, signature, and authorization instructions.", bullets: ["Current sheets and revision clouds", "Updated calculations and schedules", "Cross-discipline consistency", "Professional seals where authorized and required", "Applicant and AHJ actions kept separate from engineering work"] },
+      { heading: "Use sources without inventing local facts", body: `The ${playbook.city} links below are official starting points, not evidence of a particular project's outcome. Confirm the current checklist, adopted code, permit status, authority, and submission path directly. Model-code resources provide context but do not establish the local adoption or amendment.` },
+    ],
+    faqs,
+    links: playbook.sources.map((source) => ({ label: source.label, href: source.url })),
+    schemaType: "Article",
+  });
+}
+
+function phase0ResourcePage(page: Phase0ResourcePage): string {
+  const design = page.track === "design";
+  const review = page.track === "review";
+  const sections = design
+    ? [
+      { heading: "Start with the design decision", body: `${page.answer} Before selecting a detail, calculation method, assembly, or system, write the decision in one sentence: what must be designed, for which project condition, and what document will prove it. For this ${page.category} topic, the design team should identify ${page.checklist}. That short brief prevents a preliminary idea from being mistaken for a permit-ready conclusion.` },
+      { heading: "Build an input register, not a wish list", body: `The design register should name the source and status of each input: current, assumed, pending, or rejected. For ${page.category}, this normally means checking ${page.checklist} against the current architectural background, project address, code edition, owner criteria, and known field constraints. Note who can confirm each open item. A missing measurement or unselected product is a design dependency, not an invitation to invent a value.` , bullets: ["Design question and acceptance criterion", "Source, date, and confidence for each input", "Code provisions or engineering method to be used", "Interfaces with architecture, MEP, civil, contractor, and owner scope", "Open decisions that must be resolved before issue"] },
+      { heading: "Example design deliverable", body: `A useful ${page.category} design record connects the selected approach to a drawing, schedule, calculation, or narrative. It should show the governing assumptions, the condition the design addresses, the limits of applicability, and the coordination detail a reviewer or builder will need. For ${page.title.toLowerCase()}, the output is not just a checklist: it is a controlled design decision that can be checked against later revisions.` },
+      { heading: "Design gate before handoff", body: "Before the design moves to review, compare it with the latest background and ask whether changed geometry, occupancy, equipment, loads, utilities, or site evidence affects the conclusion. The responsible engineer decides whether further analysis, a site observation, survey, geotechnical input, testing, or product data is required. Record unresolved items visibly rather than hiding them in a general note." },
+    ]
+    : review
+      ? [
+        { heading: "Define what the reviewer is testing", body: `A review of ${page.title.toLowerCase()} is not a second reading of every page. It tests a defined question: whether the record is complete, internally consistent, traceable to its sources, and suitable for the next project decision. Use the following evidence as the starting set: ${page.checklist}. Then state what would cause the reviewer to stop and request more information.` },
+        { heading: "Use evidence tests and contradiction checks", body: `For this ${page.category} review, compare the current document against the source record, the coordinated drawing set, and the applicable authority or code instructions. Look for mismatched dimensions, stale schedules, unexplained assumptions, missing references, and changes that appear on one sheet but not another. A reviewer should be able to reproduce the conclusion from the cited evidence rather than infer it from a confident sentence.`, bullets: ["Identity and revision test: is this the current record?", "Completeness test: are the required inputs and attachments present?", "Consistency test: do related sheets, schedules, and calculations agree?", "Responsibility test: is the correct professional or authority answering?", "Exception test: are unresolved items and limitations visible?"] },
+        { heading: "Turn findings into actionable comments", body: `A useful review finding says what is wrong, where it occurs, why it matters, and what evidence or revision would close it. For ${page.title.toLowerCase()}, distinguish a missing input from a calculation error, a coordination conflict from an AHJ interpretation, and a formatting issue from a design change. Assign each finding to its owner and preserve the original reference so a later response can be checked.` },
+        { heading: "Close the review with a disposition record", body: "The reviewer should issue a dated disposition: accepted, accepted with noted limitation, revise and return, or refer to another project participant. Link each disposition to the revised sheet, calculation, field record, or agency answer. This is quality control, not an approval promise; the AHJ and responsible engineer retain their own professional and regulatory decisions." },
+      ]
+      : [
+        { heading: "Issue a usable delivery record", body: `${page.answer} At delivery, the question is whether the next person can identify, open, rely on, and coordinate the correct record. For ${page.category}, preserve ${page.checklist} in the transmittal or controlled project index. State what is included, what is excluded, which revision is current, and what action remains with the recipient.` },
+        { heading: "Handoff details that prevent rework", body: `A ${page.title.toLowerCase()} handoff should identify the recipient, issue date, file names, revision, source documents, professional seal or signature status when applicable, and dependencies outside the package. Explain the practical interface: what the architect must coordinate, what the contractor must verify in the field, what the owner must decide, and what the AHJ may still request. Never treat an uploaded file as proof that another party accepted it.`, bullets: ["Controlled transmittal and revision identifier", "Drawing, calculation, schedule, and specification references", "Field, product, utility, or testing dependencies", "Recipient action and response date when known", "Archive location for superseded and final records"] },
+        { heading: "Manage changes after issue", body: `Changes to ${page.category} information can be triggered by a substitution, field condition, correction notice, owner decision, or authority comment. Compare the change with the issued basis before replacing a file. Mark affected documents, update the index, explain the reason for revision, and have the responsible professional determine whether the change requires a new calculation, seal, site verification, or AHJ submission.` },
+        { heading: "Closeout is evidence, not a promise", body: "A complete delivery record helps a project team locate what was issued and what remains open; it does not certify concealed construction, guarantee inspection results, or transfer responsibility for work outside the defined scope. Retain the accepted transmittal, response, field evidence, and final revision according to the project record requirements, and identify any deferred or delegated work plainly." },
+      ];
+  const faqs = design
+    ? [
+      { question: `What must be decided before ${page.title.toLowerCase()} begins?`, answer: `Define the design question, intended use, applicable authority, and evidence needed. For this topic, start with ${page.checklist}.` },
+      { question: "What makes a design input reliable?", answer: "A reliable input has an identifiable source, date, scope, and status. The responsible professional decides whether it is sufficient or needs field verification, testing, survey, geotechnical work, or product data." },
+      { question: "Can a preliminary design value be used as the final permit basis?", answer: "Not automatically. Preliminary values must be checked against the current coordinated design and applicable code before they support an issued or sealed document." },
+    ]
+    : review
+      ? [
+        { question: `What does a reviewer look for in ${page.title.toLowerCase()}?`, answer: `The reviewer tests identity, completeness, consistency, responsibility, and limitations. The starting evidence includes ${page.checklist}.` },
+        { question: "How should an unresolved finding be handled?", answer: "Record the exact issue, affected document, consequence, owner, and evidence needed to close it. Do not silently fill a missing input or convert an AHJ question into an engineering conclusion." },
+        { question: "Does a quality review equal AHJ approval?", answer: "No. Internal review improves traceability and coordination; the authority having jurisdiction controls its own interpretation and decision." },
+      ]
+      : [
+        { question: `What belongs in the delivery record for ${page.title.toLowerCase()}?`, answer: `Include the controlled revision, source references, recipient action, and dependencies. For this topic, preserve ${page.checklist}.` },
+        { question: "What happens when the project changes after issue?", answer: "Compare the change with the issued basis, update affected documents and the transmittal, and ask the responsible professional whether new analysis, field evidence, signatures, seals, or AHJ action is required." },
+        { question: "Does transmitting a document transfer responsibility?", answer: "No. A transmittal identifies what was sent; it does not transfer professional responsibility or prove that an owner, contractor, specialist, or AHJ accepted the work." },
+      ];
+  return phase0ArticleFrame({
+    canonical: `/resources/phase-0/${page.slug}/`,
+    title: `${page.title} | Apex Grid`,
+    description: `${page.answer} General engineering project guidance with a ${page.track} perspective.`,
+    h1: page.title,
+    kicker: `Phase 0 Resource · ${page.category}`,
+    answer: page.answer,
+    sections,
+    faqs,
+    links: [
+      { label: "Engineering calculations service", href: "/services/engineering-calculations/" },
+      { label: "Energy compliance service", href: "/services/energy-compliance/" },
+      { label: "PE stamp hub", href: "/pe-stamp/" },
+    ],
+    schemaType: "Article",
+  });
 }
 
 function engineeringIntentPage(page: EngineeringIntentPage): string {
@@ -1601,6 +1929,17 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   }
   servicesUrls.push(u(`${SITE}${CALIFORNIA_ADU_STATE_URL}`, today, "monthly", "0.8"));
   servicesUrls.push(u(`${SITE}${PLAN_CHECK_CORRECTIONS_URL}`, today, "monthly", "0.8"));
+  servicesUrls.push(u(`${SITE}/pe-stamp/`, today, "monthly", "0.8"));
+  servicesUrls.push(u(`${SITE}/answers/`, today, "monthly", "0.8"));
+  for (const state of states) {
+    servicesUrls.push(u(`${SITE}/pe-stamp/${state.slug}/`, today, "monthly", "0.7"));
+  }
+  for (const page of PHASE0_SERVICE_PAGES) {
+    servicesUrls.push(u(`${SITE}${page.path}`, today, "monthly", "0.8"));
+  }
+  for (const page of PHASE0_AEO_PAGES) {
+    servicesUrls.push(u(`${SITE}/answers/${page.slug}/`, today, "monthly", "0.7"));
+  }
 
   // ── Tier 2: Industries ───────────────────────────────────────────────────
   const industriesUrls: string[] = [
@@ -1666,6 +2005,14 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   resourcesUrls.push(u(`${SITE}/engineering-glossary/`, today, "monthly", "0.8"));
   for (const gt of GLOSSARY_TERMS) {
     resourcesUrls.push(u(`${SITE}/engineering-glossary/${gt.slug}/`, today, "yearly", "0.6"));
+  }
+  for (const page of PHASE0_PLAN_CHECK_PLAYBOOKS) {
+    resourcesUrls.push(u(`${SITE}/plan-check-playbooks/${page.slug}/`, today, "monthly", "0.7"));
+  }
+  resourcesUrls.push(u(`${SITE}/plan-check-playbooks/`, today, "monthly", "0.7"));
+  resourcesUrls.push(u(`${SITE}/resources/phase-0/`, today, "monthly", "0.7"));
+  for (const page of PHASE0_RESOURCE_PAGES) {
+    resourcesUrls.push(u(`${SITE}/resources/phase-0/${page.slug}/`, today, "monthly", "0.6"));
   }
 
   // ── Tier 4: Locations ────────────────────────────────────────────────────
@@ -4329,6 +4676,145 @@ async function main() {
   fs.writeFileSync(path.join(planCheckDir, "index.html"), planCheckHtml);
   pages++;
 
+  // Confirmed Phase 0 corpus: national AEO answers, professional-engineer
+  // verification resources, service pages, and general metro playbooks.
+  if (states.length !== 49 || Object.keys(PE_STATE_SOURCE_LINKS).length !== 49) {
+    throw new Error(`SEO assertion failed: Phase 0 PE corpus requires 49 licensed states (found ${states.length} states and ${Object.keys(PE_STATE_SOURCE_LINKS).length} source records)`);
+  }
+  for (const state of states) {
+    if (!PE_STATE_SOURCE_LINKS[state.slug]) {
+      throw new Error(`SEO assertion failed: missing official PE source links for ${state.slug}`);
+    }
+  }
+  const phase0ServiceDir = path.join(PUBLIC, "services");
+  for (const servicePage of PHASE0_SERVICE_PAGES) {
+    assertSlug(servicePage.slug);
+    const dir = path.join(phase0ServiceDir, servicePage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0ServicePage(servicePage);
+    assertPhase0Page(html, servicePage.path, servicePage.faqs, servicePage.path);
+    if (!html.includes(esc(PHASE0_JEREMY_AUTHOR))) {
+      throw new Error(`SEO assertion failed: missing Jeremy Mills founder mention on ${servicePage.path}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  const phase0AnswersDir = path.join(PUBLIC, "answers");
+  const answerHubHtml = phase0CollectionHub(
+    "/answers/",
+    "Engineering Answers for Permit and Design Questions | Apex Grid",
+    "Concise, national engineering answers with FAQ schema and professional-engineering context for permit, PE, structural, MEP, and energy questions.",
+    "Engineering Answers for Permit and Design Questions",
+    "Phase 0 National AEO Collection",
+    "These concise answers address recurring engineering and permit questions, then point to the project inputs and professional boundaries that matter in a real submission.",
+    PHASE0_AEO_PAGES.map((page) => ({ label: page.h1, href: `/answers/${page.slug}/` })),
+  );
+  fs.mkdirSync(phase0AnswersDir, { recursive: true });
+  assertPhase0Page(answerHubHtml, "/answers/", [
+    { question: "Are these pages static and indexable?", answer: "Yes. Phase 0 pages are generated as static HTML with a self-canonical URL and index,follow metadata, then included in the generated sitemap." },
+    { question: "Do these pages contain local guarantees or pricing?", answer: "No. The corpus intentionally excludes invented local records, near-me doorway pages, county guides, and inline location pricing." },
+  ], "answers");
+  fs.writeFileSync(path.join(phase0AnswersDir, "index.html"), answerHubHtml);
+  pages++;
+  for (const answerPage of PHASE0_AEO_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+      throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  const peStampDir = path.join(PUBLIC, "pe-stamp");
+  fs.mkdirSync(peStampDir, { recursive: true });
+  const peHubHtml = peStampHubPage();
+  assertPhase0Page(peHubHtml, "/pe-stamp/", [
+    { question: "Is a PE stamp a stand-alone product?", answer: "A seal represents a responsible engineer's professional review and responsibility for eligible work within the engineer's authorization and applicable rules." },
+    { question: "Where can I verify a professional engineer license?", answer: "Use the official board and license-verification resources linked for the relevant state, then confirm project-specific authorization and scope directly with the responsible professional." },
+    { question: "Does a PE stamp guarantee permit approval?", answer: "No. The AHJ controls its completeness review, interpretation, comments, and approval decision." },
+  ], "pe-stamp");
+  fs.writeFileSync(path.join(peStampDir, "index.html"), peHubHtml);
+  pages++;
+  for (const state of states) {
+    const dir = path.join(peStampDir, state.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = peStampStatePage(state, state.slug);
+    const stateFaqs = [
+      { question: `How do I verify a PE license in ${state.name}?`, answer: `Start with the official ${state.name} board and license-verification links on this page. Confirm the record directly with the board and separately confirm that the engineer is authorized for the project's discipline and scope.` },
+      { question: `Does a ${state.name} PE seal guarantee approval?`, answer: "No. A seal communicates professional responsibility for eligible engineering work. The authority having jurisdiction controls its review, comments, interpretation, and approval decision." },
+      { question: `What should a ${state.name} project team confirm before sealing?`, answer: `Confirm the project location, discipline, adopted code, AHJ submission rules, existing-condition evidence, and the engineer's ability to accept responsible charge. ${state.licensure.notes}` },
+    ];
+    assertPhase0Page(html, `/pe-stamp/${state.slug}/`, stateFaqs, `pe-stamp/${state.slug}`);
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  const playbooksDir = path.join(PUBLIC, "plan-check-playbooks");
+  const playbookHubHtml = phase0CollectionHub(
+    "/plan-check-playbooks/",
+    "Plan Check Correction Playbooks | Apex Grid Engineering",
+    "General, source-linked plan-check correction playbooks for ten major metros, with non-invented guidance on comment logs, engineering revisions, and resubmittals.",
+    "Plan Check Correction Playbooks",
+    "Phase 0 Metro Review Guidance",
+    "These playbooks explain a repeatable correction-response workflow while leaving code interpretation, review timing, and approval decisions to the applicable authority.",
+    PHASE0_PLAN_CHECK_PLAYBOOKS.map((page) => ({ label: `${page.city} plan-check playbook`, href: `/plan-check-playbooks/${page.slug}/` })),
+  );
+  fs.mkdirSync(playbooksDir, { recursive: true });
+  assertPhase0Page(playbookHubHtml, "/plan-check-playbooks/", [
+    { question: "Are these pages static and indexable?", answer: "Yes. Phase 0 pages are generated as static HTML with a self-canonical URL and index,follow metadata, then included in the generated sitemap." },
+    { question: "Do these pages contain local guarantees or pricing?", answer: "No. The corpus intentionally excludes invented local records, near-me doorway pages, county guides, and inline location pricing." },
+  ], "plan-check-playbooks");
+  fs.writeFileSync(path.join(playbooksDir, "index.html"), playbookHubHtml);
+  pages++;
+  for (const playbook of PHASE0_PLAN_CHECK_PLAYBOOKS) {
+    assertSlug(playbook.slug);
+    const dir = path.join(playbooksDir, playbook.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0PlaybookPage(playbook);
+    const playbookFaqs = [
+      { question: `What is the first step for ${playbook.city} plan-check corrections?`, answer: `Preserve the official correction notice and permit record, identify the current submitted set, and build a comment matrix before changing drawings or calculations. ${(playbook as Phase0Playbook & { angle: string }).angle}` },
+      { question: "Can a plan-check playbook promise approval?", answer: "No. It provides a general coordination method. The AHJ decides completeness, interpretation, comments, review timing, and approval." },
+      { question: "Which project information should be assembled?", answer: "Collect the complete notice, current and prior submittals, calculations, architectural background, project address, permit number, equipment data, field evidence, and the authority's current resubmittal instructions." },
+      { question: "What if a comment belongs to another discipline?", answer: "Assign the item to the responsible architect, engineer, contractor, utility, fire authority, or other specialist and record the dependency instead of claiming that an engineering response resolves it." },
+    ];
+    assertPhase0Page(html, `/plan-check-playbooks/${playbook.slug}/`, playbookFaqs, playbook.slug);
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  const phase0ResourcesDir = path.join(PUBLIC, "resources", "phase-0");
+  const resourceHubHtml = phase0CollectionHub(
+    "/resources/phase-0/",
+    "Phase 0 Engineering Project Resources | Apex Grid",
+    "Differentiated national engineering resources for permit intake, calculations, existing conditions, MEP, energy, civil, structural, and plan-check coordination.",
+    "Phase 0 Engineering Project Resources",
+    "Phase 0 Supporting Resource Collection",
+    "This collection turns recurring engineering project decisions into practical records and review methods without inventing local facts or replacing professional judgment.",
+    PHASE0_RESOURCE_PAGES.map((page) => ({ label: page.title, href: `/resources/phase-0/${page.slug}/` })),
+  );
+  fs.mkdirSync(phase0ResourcesDir, { recursive: true });
+  assertPhase0Page(resourceHubHtml, "/resources/phase-0/", [
+    { question: "Are these pages static and indexable?", answer: "Yes. Phase 0 pages are generated as static HTML with a self-canonical URL and index,follow metadata, then included in the generated sitemap." },
+    { question: "Do these pages contain local guarantees or pricing?", answer: "No. The corpus intentionally excludes invented local records, near-me doorway pages, county guides, and inline location pricing." },
+  ], "resources/phase-0");
+  fs.writeFileSync(path.join(phase0ResourcesDir, "index.html"), resourceHubHtml);
+  pages++;
+  for (const resourcePage of PHASE0_RESOURCE_PAGES) {
+    assertSlug(resourcePage.slug);
+    const dir = path.join(phase0ResourcesDir, resourcePage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0ResourcePage(resourcePage);
+    const resourceFaqs = [
+      { question: `What is the key idea in ${resourcePage.title}?`, answer: resourcePage.answer },
+      { question: "What should the project team record?", answer: `Record ${resourcePage.checklist} The record should identify what is known, what is assumed, who owns an unresolved decision, and which document contains the current conclusion.` },
+      { question: "Does this resource replace professional engineering review?", answer: "No. It is general coordination guidance. The responsible engineer and applicable authority determine the project-specific design, documentation, and professional responsibility." },
+    ];
+    assertPhase0Page(html, `/resources/phase-0/${resourcePage.slug}/`, resourceFaqs, resourcePage.slug);
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+
   // Guides pages
   const guidesDir = path.join(PUBLIC, "guides");
   fs.rmSync(guidesDir, { recursive: true, force: true });
@@ -4737,7 +5223,29 @@ async function main() {
 
   const dirCount = Object.values(directory).reduce((a, v) => a + v.length, 0);
   const disciplineSubpageCount = DISCIPLINE_HUBS.reduce((a, h) => a + h.subpages.length, 0);
-  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${verticalPages} architecture/GC vertical pages, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PARTNER_PAGES.length} construction partner pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${CANONICAL_INDUSTRY_DISCIPLINE_PAGES.length} canonical industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, 1 sitemap page + sitemap.xml`);
+  fs.writeFileSync(path.join(reportDir, "phase0-corpus.json"), `${JSON.stringify({
+    generatedAt: "deterministic",
+    policy: "National guidance only; no Alaska, county guides, near-me pages, invented local records, or inline location pricing.",
+    counts: {
+      servicePages: PHASE0_SERVICE_PAGES.length,
+      aeoPages: PHASE0_AEO_PAGES.length,
+      peStampHub: 1,
+      peStampStatePages: states.length,
+      metroPlanCheckPlaybooks: PHASE0_PLAN_CHECK_PLAYBOOKS.length,
+      supportingResources: PHASE0_RESOURCE_PAGES.length,
+      collectionHubs: 3,
+      totalPhase0Pages: PHASE0_SERVICE_PAGES.length + PHASE0_AEO_PAGES.length + 1 + states.length + PHASE0_PLAN_CHECK_PLAYBOOKS.length + PHASE0_RESOURCE_PAGES.length + 3,
+    },
+    aeoUpdatedDate: PHASE0_UPDATED_DATE,
+    peSourceStates: Object.keys(PE_STATE_SOURCE_LINKS).sort(),
+    metroPlaybooks: PHASE0_PLAN_CHECK_PLAYBOOKS.map((page) => ({ city: page.city, state: page.state, slug: page.slug })),
+    existingCorpusQuality: {
+      directoryLiteNoindexPolicy: "Directory-derived records failing the conservative identity/slug/population gate are emitted noindex,follow; approved curated records use the separate research gate. Passing directory records may remain indexable as lightweight pages.",
+      scalableAuditScript: "seo:audit:existing-corpus streams one locations HTML file at a time, counts thin/noindex pages, and fingerprints normalized copy for exact duplicate groups without O(n²) all-pairs comparison.",
+      reportPath: "seo/reports/existing-corpus-quality.json",
+    },
+  }, null, 2)}\n`);
+  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${verticalPages} architecture/GC vertical pages, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PARTNER_PAGES.length} construction partner pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${CANONICAL_INDUSTRY_DISCIPLINE_PAGES.length} canonical industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, Phase 0: ${PHASE0_SERVICE_PAGES.length} services + ${PHASE0_AEO_PAGES.length} AEO + ${states.length + 1} PE stamp + ${PHASE0_PLAN_CHECK_PLAYBOOKS.length} playbooks + ${PHASE0_RESOURCE_PAGES.length} resources, 1 sitemap page + sitemap.xml`);
 }
 
 async function notifySearchEngines() {

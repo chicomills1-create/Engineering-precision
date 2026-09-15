@@ -1,0 +1,123 @@
+{
+  "generatedAt": "deterministic",
+  "policy": "National guidance only; no Alaska, county guides, near-me pages, invented local records, or inline location pricing.",
+  "counts": {
+    "servicePages": 2,
+    "aeoPages": 19,
+    "peStampHub": 1,
+    "peStampStatePages": 49,
+    "metroPlanCheckPlaybooks": 10,
+    "supportingResources": 72,
+    "collectionHubs": 3,
+    "totalPhase0Pages": 156
+  },
+  "aeoUpdatedDate": "2026-09-15",
+  "peSourceStates": [
+    "alabama",
+    "arizona",
+    "arkansas",
+    "california",
+    "colorado",
+    "connecticut",
+    "delaware",
+    "florida",
+    "georgia",
+    "hawaii",
+    "idaho",
+    "illinois",
+    "indiana",
+    "iowa",
+    "kansas",
+    "kentucky",
+    "louisiana",
+    "maine",
+    "maryland",
+    "massachusetts",
+    "michigan",
+    "minnesota",
+    "mississippi",
+    "missouri",
+    "montana",
+    "nebraska",
+    "nevada",
+    "new-hampshire",
+    "new-jersey",
+    "new-mexico",
+    "new-york",
+    "north-carolina",
+    "north-dakota",
+    "ohio",
+    "oklahoma",
+    "oregon",
+    "pennsylvania",
+    "rhode-island",
+    "south-carolina",
+    "south-dakota",
+    "tennessee",
+    "texas",
+    "utah",
+    "vermont",
+    "virginia",
+    "washington",
+    "west-virginia",
+    "wisconsin",
+    "wyoming"
+  ],
+  "metroPlaybooks": [
+    {
+      "city": "Phoenix",
+      "state": "Arizona",
+      "slug": "phoenix-plan-check-correction-playbook"
+    },
+    {
+      "city": "Dallas",
+      "state": "Texas",
+      "slug": "dallas-plan-check-correction-playbook"
+    },
+    {
+      "city": "Denver",
+      "state": "Colorado",
+      "slug": "denver-plan-check-correction-playbook"
+    },
+    {
+      "city": "Houston",
+      "state": "Texas",
+      "slug": "houston-plan-check-correction-playbook"
+    },
+    {
+      "city": "Atlanta",
+      "state": "Georgia",
+      "slug": "atlanta-plan-check-correction-playbook"
+    },
+    {
+      "city": "Chicago",
+      "state": "Illinois",
+      "slug": "chicago-plan-check-correction-playbook"
+    },
+    {
+      "city": "Los Angeles",
+      "state": "California",
+      "slug": "los-angeles-plan-check-correction-playbook"
+    },
+    {
+      "city": "Miami",
+      "state": "Florida",
+      "slug": "miami-plan-check-correction-playbook"
+    },
+    {
+      "city": "Seattle",
+      "state": "Washington",
+      "slug": "seattle-plan-check-correction-playbook"
+    },
+    {
+      "city": "Boston",
+      "state": "Massachusetts",
+      "slug": "boston-plan-check-correction-playbook"
+    }
+  ],
+  "existingCorpusQuality": {
+    "directoryLiteNoindexPolicy": "Directory-derived records failing the conservative identity/slug/population gate are emitted noindex,follow; approved curated records use the separate research gate. Passing directory records may remain indexable as lightweight pages.",
+    "scalableAuditScript": "seo:audit:existing-corpus streams one locations HTML file at a time, counts thin/noindex pages, and fingerprints normalized copy for exact duplicate groups without O(n²) all-pairs comparison.",
+    "reportPath": "seo/reports/existing-corpus-quality.json"
+  }
+}

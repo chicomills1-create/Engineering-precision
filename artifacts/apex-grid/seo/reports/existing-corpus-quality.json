@@ -1,0 +1,18 @@
+{
+  "generatedAt": "deterministic",
+  "scope": "public/locations/**/*.html",
+  "corpusPages": 21024,
+  "indexablePages": 20981,
+  "noindexPages": 26,
+  "redirectPages": 17,
+  "thinWordLimit": 400,
+  "thinIndexablePages": 0,
+  "thinIndexableSamples": [],
+  "exactDuplicateIndexableGroups": 0,
+  "exactDuplicateIndexableSamples": [],
+  "policy": {
+    "directoryLite": "Directory-derived pages that fail identity, slug, or population review are generated noindex,follow; records that pass the conservative gate may be indexable. Curated researched pages use the separate research gate.",
+    "similarity": "This audit uses streaming normalized-text fingerprints and bounded reports. It does not run O(n²) all-pairs comparisons across the existing corpus. Phase 0 pages use the separate 85% similarity audit.",
+    "interpretation": "Thin or duplicate findings are review signals, not automatic deletion or unsupported local claims."
+  }
+}

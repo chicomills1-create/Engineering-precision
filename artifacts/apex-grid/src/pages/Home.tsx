@@ -175,6 +175,15 @@ export default function Home() {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
+              <Link
+                href="/estimate"
+                className="w-full sm:w-auto h-16 px-10 bg-white text-primary font-bold text-sm uppercase tracking-[0.15em] flex items-center justify-center gap-3 rounded-sm hover:bg-white/90 transition-all group focus-visible:ring-4 focus-visible:ring-white/50"
+              >
+                <span className="flex items-center gap-3 whitespace-nowrap">
+                  Get an Instant Estimate
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </Link>
               <Link 
                 href="/portfolio" 
                 className="w-full sm:w-auto h-16 px-10 bg-black/40 backdrop-blur-md border border-white/20 text-white font-bold text-sm uppercase tracking-[0.15em] flex items-center justify-center rounded-sm hover:border-white/60 hover:bg-white/10 transition-colors whitespace-nowrap focus-visible:ring-2 focus-visible:ring-white/50"

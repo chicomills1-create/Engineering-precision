@@ -1,0 +1,14 @@
+{
+  "generatedAt": "deterministic",
+  "threshold": 0.85,
+  "phase0Pages": 156,
+  "comparisons": 12090,
+  "violations": 0,
+  "failures": 0,
+  "maxObservedSimilarity": 0.7834,
+  "maxObservedPair": [
+    "/resources/phase-0/electrical-service-sizing-review/",
+    "/resources/phase-0/hvac-load-calculation-inputs-review/"
+  ],
+  "topMatches": []
+}
