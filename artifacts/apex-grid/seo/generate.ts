@@ -139,6 +139,13 @@ import {
   type Phase4Metro,
   type Phase4ServiceSlug,
 } from "./phase4-metros";
+import {
+  PHASE5_METROS,
+  PHASE5_SERVICE_SLUGS,
+  PHASE5_SOURCE_URL,
+  type Phase5Metro,
+  type Phase5ServiceSlug,
+} from "./phase5-metros";
 
 const PROMOTED_CITY_KEYS = new Set([
   "georgia/atlanta", "texas/austin", "north-carolina/charlotte",
@@ -1351,17 +1358,31 @@ function phase4MetroServicePage(metro: Phase4Metro, service: Phase4ServiceSlug):
     .replaceAll(PHASE1_SOURCE_URL, PHASE4_SOURCE_URL);
 }
 
+/** Phase 5 keeps the reviewed Phase 1 renderer and content boundaries while
+ * using its own audit marker and typed Census records. */
+function phase5MetroHubPage(metro: Phase5Metro): string {
+  return phase1MetroHubPage(metro as Phase1Metro)
+    .replace(/data-phase1="true"/g, 'data-phase5="true"')
+    .replaceAll(PHASE1_SOURCE_URL, PHASE5_SOURCE_URL);
+}
+
+function phase5MetroServicePage(metro: Phase5Metro, service: Phase5ServiceSlug): string {
+  return phase1MetroServicePage(metro as Phase1Metro, service as Phase1ServiceSlug)
+    .replace(/data-phase1="true"/g, 'data-phase5="true"')
+    .replaceAll(PHASE1_SOURCE_URL, PHASE5_SOURCE_URL);
+}
+
 function phase1MetroCollectionPage(): string {
   const crumbs = [{ name: "Home", href: "/" }, { name: "Metro engineering guides" }];
-  const allMetros = [...PHASE1_METROS, ...PHASE2_METROS, ...PHASE3_METROS, ...PHASE4_METROS];
+  const allMetros = [...PHASE1_METROS, ...PHASE2_METROS, ...PHASE3_METROS, ...PHASE4_METROS, ...PHASE5_METROS];
   const links = allMetros.map((metro) =>
     `<a class="card" href="/metros/${metro.slug}/"><div class="label">Rank ${metro.rank} · CBSA ${metro.cbsaCode}</div><h3>${esc(metro.metroName)}</h3><p>${metro.permitTotal2025.toLocaleString("en-US")} permitted units in the final annual 2025 Census BPS record.</p></a>`,
   ).join("");
   const body = `<main data-metros="true">
 ${breadcrumb(crumbs)}
-  <section class="hero"><div class="container"><p class="kicker">Census BPS metro corpus · Phases 1–4</p><h1>Metro Engineering Guides</h1><p class="lede">Apex Grid's collection covers 200 eligible Metro Code 2 records from the Census BPS final annual 2025 workbook, ranked by Total descending. These guides are jurisdiction-neutral and do not infer local requirements.</p><p class="note">By ${esc(PHASE1_AUTHOR)}</p></div></section>
+  <section class="hero"><div class="container"><p class="kicker">Census BPS metro corpus · Phases 1–5</p><h1>Metro Engineering Guides</h1><p class="lede">Apex Grid's collection covers 250 eligible Metro Code 2 records from the Census BPS final annual 2025 workbook, ranked by Total descending. These guides are jurisdiction-neutral and do not infer local requirements.</p><p class="note">By ${esc(PHASE1_AUTHOR)}</p></div></section>
 <section class="block"><div class="container"><h2>Browse the <em>eligible metro records</em></h2><div class="grid2">${links}</div></div></section>
- <section class="block"><div class="container"><h2>Source and <em>method</em></h2><div class="prose"><p>Source: <a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">${PHASE1_SOURCE_URL}</a>. The corpus parses the “MSA Units Ann” sheet, keeps eligible Metro / Micro Code 2 records intersecting the reviewed eligibility footprint, and selects ranks 1 through 200 after ordering Total descending. Territories and records outside the reviewed footprint are excluded.</p><p>Representative city and state labels identify the metro record's primary label only. They do not claim an office, project, AHJ fact, county service area, or guaranteed coverage.</p></div></div></section>
+  <section class="block"><div class="container"><h2>Source and <em>method</em></h2><div class="prose"><p>Source: <a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">${PHASE1_SOURCE_URL}</a>. The corpus parses the “MSA Units Ann” sheet, keeps eligible Metro / Micro Code 2 records intersecting the reviewed eligibility footprint, and selects ranks 1 through 250 after ordering Total descending and removing prior-phase duplicates. Territories and records outside the reviewed footprint are excluded.</p><p>Representative city and state labels identify the metro record's primary label only. They do not claim an office, project, AHJ fact, county service area, or guaranteed coverage.</p></div></div></section>
 </main>`;
   return phase1Html(htmlShell({
     title: "Metro Engineering Guides | Apex Grid Engineering",
@@ -2342,6 +2363,12 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const metro of PHASE4_METROS) {
     metrosUrls.push(u(`${SITE}/metros/${metro.slug}/`, today, "monthly", "0.8"));
     for (const service of PHASE4_SERVICE_SLUGS) {
+      metrosUrls.push(u(`${SITE}/metros/${metro.slug}/${service}/`, today, "monthly", "0.7"));
+    }
+  }
+  for (const metro of PHASE5_METROS) {
+    metrosUrls.push(u(`${SITE}/metros/${metro.slug}/`, today, "monthly", "0.8"));
+    for (const service of PHASE5_SERVICE_SLUGS) {
       metrosUrls.push(u(`${SITE}/metros/${metro.slug}/${service}/`, today, "monthly", "0.7"));
     }
   }
@@ -4744,6 +4771,19 @@ async function main() {
       const serviceDir = path.join(metroDir, service);
       fs.mkdirSync(serviceDir, { recursive: true });
       fs.writeFileSync(path.join(serviceDir, "index.html"), phase4MetroServicePage(metro, service));
+      pages++;
+    }
+  }
+  for (const metro of PHASE5_METROS) {
+    assertSlug(metro.slug);
+    const metroDir = path.join(METROS_OUT, metro.slug);
+    fs.mkdirSync(metroDir, { recursive: true });
+    fs.writeFileSync(path.join(metroDir, "index.html"), phase5MetroHubPage(metro));
+    pages++;
+    for (const service of PHASE5_SERVICE_SLUGS) {
+      const serviceDir = path.join(metroDir, service);
+      fs.mkdirSync(serviceDir, { recursive: true });
+      fs.writeFileSync(path.join(serviceDir, "index.html"), phase5MetroServicePage(metro, service));
       pages++;
     }
   }

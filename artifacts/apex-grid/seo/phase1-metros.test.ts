@@ -41,8 +41,8 @@ test("generated Phase 1 namespace has exactly eight indexable pages per metro", 
   const sitemap = path.join(publicDir, "sitemap-metros.xml");
   if (fs.existsSync(sitemap)) {
     const sitemapUrls = [...fs.readFileSync(sitemap, "utf8").matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-    assert.equal(sitemapUrls.length, 1601);
-    assert.equal(new Set(sitemapUrls).size, 1601);
+    assert.equal(sitemapUrls.length, 2001);
+    assert.equal(new Set(sitemapUrls).size, 2001);
   }
   for (const metro of PHASE1_METROS) {
     const dir = path.join(publicDir, "metros", metro.slug);
