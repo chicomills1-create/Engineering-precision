@@ -208,19 +208,19 @@ router.post("/estimates/proposals", express.json(), async (req: Request, res: Re
       return { job, documents: savedDocuments };
     });
 
-    void sendClientJobNotificationEmail(created.job, created.documents)
-      .then((notification) => {
-        if (!notification.ok) {
-          req.log.error(
-            estimateFailureLogContext(requestId(req), id, "notification"),
-            "Estimate proposal notification failed",
-          );
-        }
-      })
-      .catch(() => req.log.error(
-        estimateFailureLogContext(requestId(req), id, "notification"),
-        "Estimate proposal notification failed",
-      ));
+    void (async () => {
+      let sendResult: "success" | "failure" = "failure";
+      try {
+        const notification = await sendClientJobNotificationEmail(created.job, created.documents);
+        sendResult = notification.ok ? "success" : "failure";
+      } catch {
+        sendResult = "failure";
+      }
+      req.log.info(
+        { estimateId: id, recipient: process.env.LEAD_NOTIFY_EMAIL ?? null, sendResult },
+        "Estimate proposal notification dispatch",
+      );
+    })();
     const response = {
       estimateId: id,
       proposalId: created.job.id,
