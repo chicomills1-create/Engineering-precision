@@ -135,6 +135,13 @@
   <url><loc>https://apexgrideng.com/project-types/capital-improvements/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/project-types/equipment-replacement/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/project-types/energy-upgrades/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/project-types/facility-upgrades/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/project-types/accessibility-upgrades/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/project-types/building-repairs/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/project-types/code-compliance-upgrades/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/project-types/permit-corrections/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/project-types/plan-check-responses/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://apexgrideng.com/project-types/utility-upgrades/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/project-types/site-expansions/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://apexgrideng.com/who-we-work-with/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://apexgrideng.com/who-we-work-with/architects/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>

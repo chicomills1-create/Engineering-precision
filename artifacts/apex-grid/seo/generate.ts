@@ -3148,6 +3148,15 @@ function projectTypePage(page: ProjectTypePage): string {
     provider: { "@id": `${SITE}/#business` },
     serviceType: page.h1,
   };
+  const faqSchema = page.faqs ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: page.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  } : null;
   const others = PROJECT_TYPE_PAGES.filter((p) => p.slug !== page.slug)
     .filter((p) => page.relatedSlugs.includes(p.slug) || true)
     .slice(0, 4);
@@ -3159,7 +3168,12 @@ ${contextualInbound}
   <p class="kicker">${esc(page.kicker)}</p>
   <h1>${esc(page.h1)}</h1>
   <p class="lede">${esc(page.lede)}</p>
+  ${page.founderPerspective ? `<p class="note">By Jeremy Mills, CEO &amp; Founder, Apex Grid Engineering — USAF Veteran</p>` : ""}
 </div></section>
+${page.founderPerspective ? `<section class="block"><div class="container prose">
+  <h2>My founder perspective</h2>
+  <p>I base this guidance on the project type and the engineering coordination it commonly requires. ${esc(page.founderPerspective)}</p>
+</div></section>` : ""}
 <section class="block"><div class="container">
   <h2>Engineering <em>Disciplines Involved</em></h2>
   <ul class="scope">${page.disciplines.map((d) => `<li>${esc(d)}</li>`).join("")}</ul>
@@ -3174,16 +3188,20 @@ ${contextualInbound}
   ${others.map((p) => `<a class="card" href="/project-types/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 120))}…</p></a>`).join("")}
   </div>
 </div></section>
+${page.faqs ? `<section class="block"><div class="container">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq">${page.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div>
+</div></section>` : ""}
 <section class="ctaband"><div class="container">
   <h2>Start Your Project</h2>
   <p>${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} Send us your scope and get a clear proposal.</p>
-  <a class="cta" href="/contact">Request a Proposal</a>
+  <a class="cta" href="${page.founderPerspective ? "/estimate/" : "/contact"}">Request a Proposal</a>
 </div></section>`;
   return htmlShell({
     title: page.title,
     description: page.description,
     canonical: `${SITE}/project-types/${page.slug}/`,
-    schemaJson: [orgSchema, svcSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [orgSchema, svcSchema, ...(faqSchema ? [faqSchema] : []), breadcrumbSchema(crumbs)],
     body,
   });
 }
