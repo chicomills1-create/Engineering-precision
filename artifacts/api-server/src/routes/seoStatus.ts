@@ -22,6 +22,7 @@ import {
   type AuditMetadata,
 } from "../lib/seoAudit";
 import { buildTrafficAlerts, type PageEvidence, type PageQueryMetric } from "../lib/seoTrafficAlerts";
+import { sitemapPathKey } from "./seoStatusPath";
 
 const router = Router();
 
@@ -387,8 +388,9 @@ function parsePageQueryMetric(row: { key: string; clicks: number; impressions: n
 function parsePageMetric(row: { key: string; clicks: number; impressions: number; position: number }): PageQueryMetric {
   return { page: row.key, query: "", clicks: row.clicks, impressions: row.impressions, position: row.position };
 }
+
 async function loadPageEvidence(pages: string[], entries: ParsedEntry[]): Promise<Map<string, PageEvidence>> {
-  const sitemapPaths = new Set(entries.map((entry) => entry.path.endsWith("/") ? entry.path : `${entry.path}/`));
+  const sitemapPaths = new Set(entries.map((entry) => sitemapPathKey(entry.path)));
   let redirects: Record<string, string> = {};
   try { redirects = JSON.parse(await readFile(path.join(PUBLIC_DIR, "legacy-location-redirects.json"), "utf8")) as Record<string, string>; }
   catch { /* optional redirect registry */ }
@@ -396,7 +398,7 @@ async function loadPageEvidence(pages: string[], entries: ParsedEntry[]): Promis
   for (let i = 0; i < pages.length; i += 20) await Promise.all(pages.slice(i, i + 20).map(async (page) => {
     let pathname = page;
     try { pathname = new URL(page).pathname; } catch { /* raw paths remain review-only */ }
-    const normalizedPath = pathname.endsWith("/") ? pathname : `${pathname}/`;
+    const normalizedPath = sitemapPathKey(pathname);
     const exists = await staticFileExists(pathname);
     let html: string | null = null;
     if (exists) {
@@ -411,7 +413,9 @@ async function loadPageEvidence(pages: string[], entries: ParsedEntry[]): Promis
       noindex: Boolean(html && /<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html)),
       canonical,
       coverageState: getCachedResult(page)?.coverageState ?? null,
-      redirect: redirects[pathname] !== undefined || redirects[normalizedPath] !== undefined,
+      redirect: redirects[pathname] !== undefined
+        || redirects[normalizedPath] !== undefined
+        || redirects[`${normalizedPath}/`] !== undefined,
     });
   }));
   return evidence;
@@ -566,7 +570,7 @@ router.get("/seo/dashboard/issues", requireAuth, async (req, res): Promise<void>
 
 router.get("/seo/dashboard", requireAuth, async (_req, res): Promise<void> => {
   const entries = await sitemapEntries();
-  const sitemapPaths = new Set(entries.map((entry) => entry.path.endsWith("/") ? entry.path : `${entry.path}/`));
+  const sitemapPaths = new Set(entries.map((entry) => sitemapPathKey(entry.path)));
   const [latestAudit, latestPerformancePeriod, performanceHistory, leads] = await Promise.all([
     db.select().from(seoAuditRunsTable).orderBy(desc(seoAuditRunsTable.completedAt)).limit(1),
     db.select({
@@ -631,7 +635,7 @@ router.get("/seo/dashboard", requireAuth, async (_req, res): Promise<void> => {
     } catch { /* malformed historical rows stay visible as at-risk */ }
     let pathname = page;
     try { pathname = new URL(page).pathname; } catch { /* retain raw path */ }
-    const normalizedPath = pathname.endsWith("/") ? pathname : `${pathname}/`;
+    const normalizedPath = sitemapPathKey(pathname);
     return {
       page,
       query,
@@ -641,6 +645,9 @@ router.get("/seo/dashboard", requireAuth, async (_req, res): Promise<void> => {
       status: sitemapPaths.has(normalizedPath) ? "protected" : "review",
     };
   }).sort((a, b) => b.clicks - a.clicks || b.impressions - a.impressions);
+  const currentTrafficAlerts = trafficAlerts.filter(
+    (alert) => alert.reason !== "excluded_page" || !sitemapPaths.has(sitemapPathKey(alert.page)),
+  );
   res.json({
     inventory: {
       totalUrls: entries.length,
@@ -654,7 +661,7 @@ router.get("/seo/dashboard", requireAuth, async (_req, res): Promise<void> => {
       reviewImpressions: keywordRetention.filter((row) => row.status === "review").reduce((sum, row) => sum + row.impressions, 0),
       opportunities: keywordRetention.filter((row) => row.status === "review").slice(0, 100),
     },
-    trafficAlerts,
+    trafficAlerts: currentTrafficAlerts,
     performanceCompleteness: (() => {
       const value = performance.find((row) => row.dimension === "site")?.completeness;
       if (value && typeof value === "object") return value;
