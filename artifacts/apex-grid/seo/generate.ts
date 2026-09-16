@@ -535,20 +535,7 @@ function legacyLocationRedirectPage(fromPath: string, toPath: string): string {
  * old bookmarks receive a real server 301 instead of a duplicate HTML page.
  */
 function expandedLegacyLocationRedirects(): Record<string, string> {
-  const redirects: Record<string, string> = { ...LEGACY_LOCATION_REDIRECTS };
-  for (const [from, to] of Object.entries(LEGACY_LOCATION_REDIRECTS)) {
-    if (!from.startsWith("/locations/") || !from.endsWith("/") || from.split("/").length !== 4) continue;
-    for (const service of SERVICES) {
-      redirects[`${from}${service.slug}/`] = `${to}${service.slug}/`;
-    }
-  }
-  const stLouisFrom = "/locations/missouri/st-louis/";
-  const stLouisTo = "/locations/missouri/saint-louis/";
-  redirects[stLouisFrom] = stLouisTo;
-  for (const service of SERVICES) {
-    redirects[`${stLouisFrom}${service.slug}/`] = `${stLouisTo}${service.slug}/`;
-  }
-  return redirects;
+  return { ...LEGACY_LOCATION_REDIRECTS };
 }
 
 /** Non-HTML data fields must not contain markup. */
@@ -5258,17 +5245,6 @@ async function main() {
     }
   }
   for (const [fromPath, toPath] of Object.entries(expandedLegacyLocationRedirects())) {
-    const legacyDir = path.join(PUBLIC, fromPath.replace(/^\/|\/$/g, ""));
-    fs.mkdirSync(legacyDir, { recursive: true });
-    fs.writeFileSync(path.join(legacyDir, "index.html"), legacyLocationRedirectPage(fromPath, toPath));
-    pages++;
-  }
-  // St. Louis was historically emitted under an abbreviated city slug. Keep
-  // every old service child live, but make the normalized city tree canonical.
-  const stLouisServices = SERVICES.map((service) => service.slug);
-  for (const suffix of ["", ...stLouisServices]) {
-    const fromPath = `/locations/missouri/st-louis/${suffix ? `${suffix}/` : ""}`;
-    const toPath = `/locations/missouri/saint-louis/${suffix ? `${suffix}/` : ""}`;
     const legacyDir = path.join(PUBLIC, fromPath.replace(/^\/|\/$/g, ""));
     fs.mkdirSync(legacyDir, { recursive: true });
     fs.writeFileSync(path.join(legacyDir, "index.html"), legacyLocationRedirectPage(fromPath, toPath));

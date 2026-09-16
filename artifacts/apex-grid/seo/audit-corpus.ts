@@ -27,6 +27,7 @@ type Page = {
   canonical?: string;
   noindex: boolean;
   redirect: boolean;
+  contentWords: number;
   faqs: Array<{ q: string; a: string }>;
   internalLinks: string[];
 };
@@ -43,6 +44,16 @@ function decodeHtml(value: string): string {
     .replace(/&#39;/g, "'")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">");
+}
+
+function visibleContentWords(html: string): number {
+  const body = html.match(/<body\b[^>]*>([\s\S]*?)<\/body>/i)?.[1] ?? html;
+  const visible = decodeHtml(
+    body
+      .replace(/<(script|style|noscript|svg|header|nav|footer)\b[^>]*>[\s\S]*?<\/\1>/gi, " ")
+      .replace(/<[^>]+>/g, " "),
+  );
+  return visible.match(/[\p{L}\p{N}]+(?:[’'-][\p{L}\p{N}]+)*/gu)?.length ?? 0;
 }
 
 async function* htmlFiles(dir: string): AsyncGenerator<string> {
@@ -133,6 +144,7 @@ async function loadPage(file: string): Promise<Page> {
     canonical: canonical ? normalize(canonical) : undefined,
     noindex: /\bnoindex\b/i.test(robots),
     redirect: REDIRECT_MARKERS.some((marker) => marker.test(html)),
+    contentWords: visibleContentWords(html),
     faqs,
     internalLinks: [...html.matchAll(/<a[^>]+href=["'](\/[^"'#?]*)/gi)].map((match) => normalize(match[1])),
   };
@@ -167,6 +179,16 @@ async function main() {
     ? JSON.parse(fs.readFileSync(redirectsFile, "utf8")) as Record<string, string>
     : {};
   const sitemapRedirectUrls = sitemap.filter((url) => Object.hasOwn(registeredRedirects, url));
+  const invalidRedirectTargets: string[] = [];
+  for (const [source, destination] of Object.entries(registeredRedirects)) {
+    const targetUrl = normalize(destination);
+    const target = pages.get(targetUrl);
+    if (!target) invalidRedirectTargets.push(`${source} -> ${destination}: target has no generated HTML`);
+    else if (target.noindex) invalidRedirectTargets.push(`${source} -> ${destination}: target is noindex`);
+    else if (target.redirect) invalidRedirectTargets.push(`${source} -> ${destination}: target redirects again`);
+    else if (target.canonical !== targetUrl) invalidRedirectTargets.push(`${source} -> ${destination}: target is not self-canonical`);
+    else if (target.contentWords < 100) invalidRedirectTargets.push(`${source} -> ${destination}: target has only ${target.contentWords} visible content words`);
+  }
   const internalLinksToNoindex = [...pages.values()].reduce(
     (total, page) => total + page.internalLinks.filter((target) => pages.get(target)?.noindex).length,
     0,
@@ -179,6 +201,7 @@ async function main() {
     );
   const excludedSourceLinksToNoindex = internalLinksToNoindex - indexableSourceLinksToNoindex;
   const failures: string[] = [];
+  for (const failure of invalidRedirectTargets) failures.push(`invalid legacy redirect target: ${failure}`);
   for (const url of sitemap) {
     const page = pages.get(url);
     if (Object.hasOwn(registeredRedirects, url)) failures.push(`sitemap URL is registered to redirect: ${url} -> ${registeredRedirects[url]}`);
@@ -204,6 +227,12 @@ async function main() {
     .map(([canonical]) => canonical)
     .sort();
   for (const url of omitted) failures.push(`indexable SEO-owned canonical omitted from sitemap: ${url}`);
+  const thinIndexablePages = [...pages.values()]
+    .filter((page) => !page.noindex && !page.redirect && !LEGAL_ALLOWLIST.has(page.url) && page.contentWords < 100)
+    .sort((a, b) => a.url.localeCompare(b.url));
+  for (const page of thinIndexablePages) {
+    failures.push(`indexable page has only ${page.contentWords} visible content words: ${page.url}`);
+  }
   const report = {
     generatedAt: "deterministic",
     htmlPages: pages.size,
@@ -212,6 +241,8 @@ async function main() {
     noindexPages: noindex,
     redirectPages: redirects,
     sitemapRedirectUrls: sitemapRedirectUrls.length,
+    invalidRedirectTargets: invalidRedirectTargets.length,
+    thinIndexablePages: thinIndexablePages.length,
     duplicateCanonicalGroups: duplicateGroups.length,
     sitemapOmissions: omitted.length,
     failures: failures.length,
