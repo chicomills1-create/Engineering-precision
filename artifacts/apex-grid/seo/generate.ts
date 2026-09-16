@@ -51,6 +51,7 @@ import {
 } from "./legacy-locations";
 import { ALL_INDUSTRIES } from "../src/data/industries";
 import { RESOURCE_ARTICLES, RESOURCE_DISCIPLINES, disciplineOf, resourceUrl, type ResourceArticle, type ResourceDiscipline } from "./resources";
+import { AUDIENCE_RESOURCE_HUBS, audienceResourceHubPage, AUDIENCE_RESOURCE_AUTHOR } from "./audience-resource-hubs";
 import { GLOSSARY_TERMS, sortedGlossaryTerms, glossaryByLetter, relatedGlossaryTerms, type GlossaryTerm } from "./glossary";
 import { APEX_GRID_BUSINESS_SCHEMA } from "../src/lib/business-schema";
 import {
@@ -2563,6 +2564,9 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   }
   for (const a of RESOURCE_ARTICLES) {
     resourcesUrls.push(u(`${SITE}${resourceUrl(a)}`, today, "monthly", "0.7"));
+  }
+  for (const page of AUDIENCE_RESOURCE_HUBS) {
+    resourcesUrls.push(u(`${SITE}/resources/${page.slug}/`, today, "monthly", "0.8"));
   }
   resourcesUrls.push(u(`${SITE}/guides/`, today, "monthly", "0.8"));
   for (const gp of GUIDE_PAGES.filter((page) => !GUIDE_REDIRECTS.has(page.slug))) {
@@ -5216,6 +5220,25 @@ async function main() {
     const adir = path.join(resourcesDir, disciplineOf(article).slug, article.slug);
     fs.mkdirSync(adir, { recursive: true });
     fs.writeFileSync(path.join(adir, "index.html"), resourceArticlePage(article));
+    pages++;
+  }
+  for (const audiencePage of AUDIENCE_RESOURCE_HUBS) {
+    const titleLength = audiencePage.title.length;
+    const descriptionLength = audiencePage.description.length;
+    if (titleLength < 50 || titleLength > 60 || descriptionLength < 150 || descriptionLength > 160) {
+      throw new Error(`SEO assertion failed: audience resource metadata length for ${audiencePage.slug} (${titleLength}/${descriptionLength})`);
+    }
+    if (audiencePage.faqs.length < 4 || audiencePage.faqs.length > 6) {
+      throw new Error(`SEO assertion failed: audience resource FAQ count for ${audiencePage.slug}`);
+    }
+    const audienceDir = path.join(resourcesDir, audiencePage.slug);
+    fs.mkdirSync(audienceDir, { recursive: true });
+    const html = audienceResourceHubPage(audiencePage);
+    if (!html.includes(`By ${AUDIENCE_RESOURCE_AUTHOR}`) || !html.includes(`rel="canonical" href="${SITE}/resources/${audiencePage.slug}/"`)
+      || !html.includes('"@type":"FAQPage"') || !html.includes('href="/estimate/"')) {
+      throw new Error(`SEO assertion failed: malformed audience resource hub ${audiencePage.slug}`);
+    }
+    fs.writeFileSync(path.join(audienceDir, "index.html"), html);
     pages++;
   }
   // Legacy /resources/{slug}/ redirect stubs (URLs moved to discipline subdirs)

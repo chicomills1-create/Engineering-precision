@@ -14,6 +14,29 @@ const audienceFilters: Array<{ key: AudienceKey | "all"; label: string }> = [
   { key: "developers", label: "Developers & owners" },
 ];
 
+const audienceResourceCenters = [
+  {
+    href: "/resources/architects/",
+    title: "Architect resources",
+    description: "Scope, handoff, existing-condition, and multidisciplinary coordination guidance for design teams.",
+  },
+  {
+    href: "/resources/contractors/",
+    title: "Contractor resources",
+    description: "Field documentation, RFI, plan-check, and design-response guidance for construction teams.",
+  },
+  {
+    href: "/resources/developers/",
+    title: "Developer resources",
+    description: "Feasibility, due-diligence, budgeting, and design-handoff guidance for project planning.",
+  },
+  {
+    href: "/resources/property-managers/",
+    title: "Property manager resources",
+    description: "Existing-building records, tenant improvement, repair, and capital-planning guidance.",
+  },
+] as const;
+
 const articles = [
   {
     id: 1,
@@ -336,6 +359,39 @@ export default function Resources() {
                )}
             </div>
           )}
+        </div>
+      </section>
+
+      <section className="py-20 bg-background border-t border-border">
+        <div className="container mx-auto px-4 md:px-8">
+          <p className="text-xs font-mono uppercase tracking-[0.24em] text-primary mb-5">
+            Resources by role
+          </p>
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+            Start with the decisions your team owns.
+          </h2>
+          <p className="text-muted-foreground max-w-2xl leading-relaxed mb-10">
+            Each resource center organizes practical engineering guidance around a different project role, without replacing the project-specific work of the responsible design team.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {audienceResourceCenters.map((center) => (
+              <a
+                key={center.href}
+                href={center.href}
+                className="group border border-border bg-card p-7 hover:border-primary/50 transition-colors"
+              >
+                <h3 className="font-display text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                  {center.title}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+                  {center.description}
+                </p>
+                <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+                  Browse resources <ArrowRight className="w-4 h-4 text-primary group-hover:translate-x-1 transition-transform" />
+                </span>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
       
