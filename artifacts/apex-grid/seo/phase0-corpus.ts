@@ -409,7 +409,321 @@ export const PHASE0_BATCH1_AEO_PAGES: Phase0AeoPage[] = [
   },
 ];
 
+/**
+ * Apex SEO/AEO Batch 2. These cost-intent records explain fee drivers and
+ * deliverables without turning professional engineering into a detached price
+ * quote. Keep the founder voice and bespoke sections intact when expanding this
+ * batch.
+ */
+export const PHASE0_BATCH2_AEO_PAGES: Phase0AeoPage[] = [
+  {
+    slug: "how-much-does-structural-engineering-cost",
+    title: "How Much Does a Structural Engineer Cost? | Apex Grid",
+    description: "Structural engineering fees depend on the question, existing conditions, analysis, drawings, site work, and permit deliverables—not a single advertised price.",
+    h1: "How much does a structural engineer cost?",
+    answer: "Structural engineering does not have one responsible universal price. The fee follows the defined question, building size and complexity, existing-condition evidence, calculations, drawings, field work, coordination, revisions, and jurisdictional deliverables. Ask for a written proposal that states scope, assumptions, exclusions, and what the responsible engineer will actually deliver instead of comparing an isolated seal or a vague per-square-foot number.",
+    topic: "Structural Engineering Cost",
+    serviceHref: "/services/structural",
+    founderNote: "I'm Jeremy Mills, CEO & Founder of Apex Grid Engineering and a U.S. Air Force veteran. Apex Grid is veteran-owned; I'm not a PE, and this perspective does not replace the responsible engineer's judgment.",
+    sections: [
+      {
+        heading: "What the structural question actually includes",
+        body: "A fee starts with the decision the project needs to make. A narrow beam check from reliable plans is different from an addition, a distress investigation, a foundation evaluation, or a complete permit set. I ask clients to describe the decision, requested deliverable, property address, and construction stage so the responsible engineer can separate a feasible scope from a guess.",
+        bullets: ["The structural question and the decisions the deliverable must support", "New work, existing-building review, investigation, or correction response", "Drawings, calculations, report, details, schedules, and sealing needs", "Interfaces with architecture, geotechnical work, survey, MEP, and the contractor"],
+      },
+      {
+        heading: "Records, field work, and analysis drive effort",
+        body: "Existing conditions can be the largest uncertainty. Complete drawings, measurements, photographs, prior permits, soil information, and product data can reduce rework, while concealed framing, distress, alterations, or missing foundations may require a site visit or additional investigation. I would rather identify that uncertainty in the proposal than make a confident fee comparison from an assumed typical house.",
+        bullets: ["Building age, construction type, spans, loads, and alteration history", "Field measurements, access, openings, testing, or site observations", "Code edition, wind and seismic criteria, soil information, and design loads", "Coordination time, review cycles, revisions, and schedule constraints"],
+      },
+      {
+        heading: "Compare proposals by deliverables, not just totals",
+        body: "A useful proposal makes the fee auditable. It identifies the engineer's discipline and responsibility, the documents included, the assumptions relied on, the number and type of review cycles, and work that remains with the owner, architect, contractor, surveyor, or authority. The lowest number may exclude the investigation or coordination needed to reach a defensible conclusion.",
+        bullets: ["Scope, deliverable format, sheets, calculations, and report contents", "Assumptions and exclusions for concealed conditions, testing, and construction", "Site visits, meetings, plan-check responses, and revision terms", "Professional authorization, seal limits, insurance, and responsible-charge contact"],
+      },
+    ],
+    extraLinks: [
+      { label: "Engineering calculations services", href: "/services/engineering-calculations/" },
+      { label: "What does a PE stamp cost?", href: "/answers/how-much-does-a-pe-stamp-cost/" },
+      { label: "What documents does a PE need?", href: "/answers/what-documents-does-a-pe-need/" },
+    ],
+    faqs: [
+      { question: "Can structural engineering be priced per square foot?", answer: "A square-foot metric may be a preliminary budgeting tool for a narrowly defined, comparable scope, but it does not establish the fee for an existing-condition investigation, unusual loads, complex alterations, field work, or permit coordination. The written scope controls." },
+      { question: "What should a structural engineering proposal include?", answer: "Look for the project question, drawings and calculations included, site or field work, assumptions, exclusions, responsible professional, seal limits, coordination, revision or plan-check terms, schedule, and payment conditions. Ask about anything that is unclear before authorizing work." },
+      { question: "Why can two structural engineering proposals differ?", answer: "Proposals may address different deliverables, existing-condition uncertainty, analysis depth, field verification, coordination, assumptions, or revision responsibility. Compare the actual scope and exclusions rather than treating different totals as equivalent." },
+      { question: "Does a structural engineering fee guarantee permit approval?", answer: "No. Engineering supports a defined submission, but the authority having jurisdiction controls its checklist, interpretation, review, comments, and approval decision. A proposal should never promise an outcome it does not control." },
+    ],
+  },
+  {
+    slug: "load-bearing-wall-removal-cost",
+    title: "Load-Bearing Wall Removal Cost and Scope | Apex Grid",
+    description: "Load-bearing wall removal costs depend on scope, existing framing, supports, shoring, access, finishes, and permit coordination—not a fixed beam price.",
+    h1: "How much does load-bearing wall removal cost?",
+    answer: "There is no responsible fixed price for removing a load-bearing wall. The structural-engineering proposal and the contractor's proposal cover different work: the engineer investigates the load path and designs eligible permanent support, while the contractor prices demolition, shoring means and methods, labor, materials, protection, and construction. Existing framing, span, reactions, foundations, utilities, finishes, access, and permit requirements drive both scopes, so separate coordinated proposals matter.",
+    topic: "Load-Bearing Wall Removal Cost",
+    serviceHref: "/services/structural",
+    founderNote: "I'm Jeremy Mills, CEO & Founder of Apex Grid Engineering and a U.S. Air Force veteran. Apex Grid is veteran-owned; I'm not a PE, and this perspective does not replace the responsible engineer's judgment.",
+    sections: [
+      {
+        heading: "The structural engineer's scope",
+        body: "The engineer first determines what the wall supports and how the reaction reaches the foundation. The design may include a beam, header, posts, frame, bearing checks, connections, and foundation work, along with calculations and permit drawings when required. I tell homeowners to ask whether the proposal addresses the complete load path rather than only naming a beam size.",
+        bullets: ["Existing floor, roof, wall, and lateral loads above the opening", "Beam or frame design, deflection, bearing, connections, and restraint", "Posts, footings, slab or crawlspace support, and concentrated reactions", "Field verification, calculations, drawings, details, seal, and AHJ responses if included"],
+      },
+      {
+        heading: "The contractor's scope is separate",
+        body: "The contractor turns the accepted design into construction pricing. That proposal can include demolition, protection of finishes, material procurement, labor, disposal, temporary shoring means and methods, posts or footings, inspections, patching, and coordination with plumbing or electrical trades. Shoring design or engineering observation should be named separately when the project requires it; it should not be silently assumed.",
+        bullets: ["Demolition, dust and finish protection, hauling, and disposal", "Temporary support, sequencing, access, safety, and means-and-methods planning", "Beam, posts, connectors, footing work, installation labor, and equipment", "Framing repair, drywall, flooring, paint, utilities, inspections, and closeout"],
+      },
+      {
+        heading: "Why separate proposals should be coordinated",
+        body: "An engineering fee is not a contractor quote, and a contractor's allowance is not a structural design. Compare them only after the project team has defined the opening, permanent support, assumptions, temporary-work boundaries, finish expectations, and permit path. I recommend asking the engineer and contractor to identify conflicts before demolition, because a change in span or support can change both proposals.",
+        bullets: ["Match the contractor's scope to the current signed structural documents", "Confirm who owns shoring design, site observation, and inspection coordination", "Separate structural, architectural, MEP, fire, and finish work", "Hold contingency for concealed conditions without disguising it as a guaranteed price"],
+      },
+    ],
+    extraLinks: [
+      { label: "Load-bearing wall engineering guide", href: "/answers/load-bearing-wall-removal/" },
+      { label: "Structural engineering services", href: "/services/structural/" },
+      { label: "Permit-ready engineering package", href: "/answers/what-is-a-permit-ready-engineering-package/" },
+    ],
+    faqs: [
+      { question: "Does a structural engineer price the entire wall-removal project?", answer: "Usually no. The engineer prices the agreed investigation, structural design, calculations, drawings, and other professional services. The contractor separately prices construction, demolition, temporary support means and methods, materials, trades, finishes, and site logistics unless the proposal expressly says otherwise." },
+      { question: "Why should I not rely on a fixed beam price?", answer: "Beam size and cost depend on span, loads, material, bearing, posts, foundations, access, fire or finish requirements, and the actual existing framing. A fixed number before those conditions are verified can omit necessary engineering or construction work." },
+      { question: "Is temporary shoring included in the engineering fee?", answer: "Not automatically. The proposal should state whether the engineer designs or reviews temporary shoring, while the contractor remains responsible for safe construction means and methods unless another written arrangement applies. Ask both parties to define the boundary." },
+      { question: "What should I send before requesting proposals?", answer: "Send the address, proposed opening, plans, photos of both sides and the spaces above and below, framing and foundation information, prior alterations, utility constraints, desired finishes, and any AHJ comments. The engineer and contractor can then identify missing verification." },
+    ],
+  },
+  {
+    slug: "residential-structural-engineering-fees",
+    title: "Residential Structural Engineering Fees | Apex Grid",
+    description: "Residential structural engineering fees follow home's scope, conditions, field work, calculations, drawings, and deliverables—not a universal house rate.",
+    h1: "How are residential structural engineering fees determined?",
+    answer: "Residential structural engineering fees are determined by the home's actual question and the work needed to answer it responsibly. A proposal may cover a limited analysis, an existing-condition assessment, addition or remodel design, permit drawings, calculations, a report, site work, or review responses. House size alone is not enough to establish the scope; construction type, alterations, access, loads, records, jurisdiction, and requested deliverables matter.",
+    topic: "Residential Structural Engineering Fees",
+    serviceHref: "/services/structural",
+    founderNote: "I'm Jeremy Mills, CEO & Founder of Apex Grid Engineering and a U.S. Air Force veteran. Apex Grid is veteran-owned; I'm not a PE, and this perspective does not replace the responsible engineer's judgment.",
+    sections: [
+      {
+        heading: "Start with the home's decision",
+        body: "Residential requests often use the same words for very different services. A remodel may need a beam detail, a second story may need a whole load-path evaluation, and cracking may need an assessment before anyone designs a repair. I ask what the owner, architect, contractor, lender, insurer, or AHJ needs to decide so the responsible engineer can propose a proportionate deliverable.",
+        bullets: ["Remodel, opening, addition, deck, roof, solar, or equipment change", "Condition assessment, repair recommendation, letter, report, or permit set", "New design, independent review, correction response, or construction support", "The exact audience and decision the engineering document must support"],
+      },
+      {
+        heading: "Existing homes create real fee variables",
+        body: "A residential fee can change when drawings are incomplete, framing is concealed, prior work is undocumented, or the foundation cannot be understood from the available record. Photos and measurements may support a limited review, but the engineer decides whether a site visit, openings, survey, geotechnical information, or testing is necessary. I prefer those limits stated before a homeowner mistakes a preliminary opinion for a design.",
+        bullets: ["Age, construction type, additions, alterations, and observed distress", "Framing spans, bearing points, foundation type, soil, and drainage", "Access, measurements, openings, site observation, and evidence quality", "Wind, seismic, snow, occupancy, equipment, and adopted-code criteria"],
+      },
+      {
+        heading: "Read the fee proposal as a responsibility map",
+        body: "A useful residential proposal says which sheets, calculations, details, report, visit, meetings, and revision cycles are included. It also identifies exclusions such as architecture, survey, geotechnical work, testing, contractor means and methods, and AHJ decisions. I encourage homeowners to ask who is responsible for each handoff, not just whether a document will be stamped.",
+        bullets: ["Named deliverables and professional responsibility for the defined scope", "Assumptions, exclusions, concealed conditions, and information needed from the owner", "Site visit, coordination, plan-check response, and revision allowances", "Clear distinction between engineering, construction, architecture, and agency work"],
+      },
+    ],
+    extraLinks: [
+      { label: "Structural engineering services", href: "/services/structural/" },
+      { label: "What documents does a PE need?", href: "/answers/what-documents-does-a-pe-need/" },
+      { label: "When does a PE need a site visit?", href: "/answers/when-does-a-pe-need-a-site-visit/" },
+    ],
+    faqs: [
+      { question: "Are residential structural engineering fees based only on home size?", answer: "No. Size can affect scope, but the engineering question, existing construction, loads, records, field verification, complexity, deliverables, coordination, and jurisdictional requirements are usually more informative than floor area alone." },
+      { question: "What is commonly included in a residential structural proposal?", answer: "Depending on the project, it may include an agreed site review, analysis, calculations, drawings, details, report, seal where authorized, and defined coordination. The proposal must identify exactly what is included and what remains outside the scope." },
+      { question: "Can a residential engineer work from homeowner photographs?", answer: "Photographs can be valuable evidence for a limited review, but they may not establish concealed framing, dimensions, connections, foundations, or distress. The responsible engineer decides whether photographs are sufficient or a visit and additional verification are needed." },
+      { question: "Does a residential engineering fee include the contractor's work?", answer: "No, unless a separate agreement expressly says so. Engineering design and construction pricing are different scopes; the contractor remains responsible for construction planning, means and methods, labor, materials, and installation." },
+    ],
+  },
+  {
+    slug: "pe-stamp-cost-for-house-plans",
+    title: "PE Stamp Cost for House Plans Explained | Apex Grid",
+    description: "PE stamp cost for house plans follows the engineer's review, design responsibility, calculations, drawings, site evidence, and jurisdictional requirements.",
+    h1: "How much does a PE stamp cost for house plans?",
+    answer: "A PE stamp for house plans should not be purchased as a detached signature. The fee follows the work the responsible professional must perform or independently review: the home's design basis, structural or other engineering scope, calculations, current drawings, existing conditions, coordination, revisions, and jurisdictional requirements. A proposal should identify the deliverables and professional responsibility rather than promise a fixed seal price or approval.",
+    topic: "PE Stamp Cost for House Plans",
+    serviceHref: "/services/structural",
+    founderNote: "I'm Jeremy Mills, CEO & Founder of Apex Grid Engineering and a U.S. Air Force veteran. Apex Grid is veteran-owned; I'm not a PE, and this perspective does not replace the responsible engineer's judgment.",
+    sections: [
+      {
+        heading: "A seal follows engineering responsibility",
+        body: "House plans can include architectural backgrounds, structural design, energy documents, site work, or specialty systems, and a PE is responsible only for eligible engineering work within the engineer's competence and authorization. I explain this boundary early because the word stamp can make a complete design review sound like a simple administrative step.",
+        bullets: ["Identify the discipline, project location, and documents proposed for sealing", "Confirm the engineer's authorization, competence, and ability to accept responsibility", "Define whether the work is new design, independent review, or correction response", "Keep architectural, survey, geotechnical, construction, and AHJ duties separate"],
+      },
+      {
+        heading: "House-plan review needs a verifiable design basis",
+        body: "The engineer needs enough information to understand the loads, geometry, materials, connections, foundations, site criteria, and changes from the current plan set. A PDF may be useful, but missing calculations, unverified dimensions, unclear details, or a changed architectural background can require redesign or field verification. The fee should reflect the actual record, not an assumed typical plan.",
+        bullets: ["Current coordinated architectural and structural drawings", "Design loads, spans, member sizes, details, calculations, and material criteria", "Site address, wind and seismic information, soil or foundation evidence where relevant", "Prior reviews, revisions, product data, and authority submission requirements"],
+      },
+      {
+        heading: "Ask what the proposal and seal cover",
+        body: "Before authorizing work, ask for the sheet list, calculation or review depth, site visit terms, revisions, plan-check responses, and seal limits. An engineer may decline to seal if the work cannot be independently verified or falls outside the accepted scope. I would treat a low isolated-signature offer as a warning sign, not a shortcut.",
+        bullets: ["Named drawings, calculations, narratives, forms, and sealed deliverables", "Assumptions, exclusions, field verification, and concealed-condition boundaries", "Coordination and revision terms after architectural or authority changes", "No guarantee of permit approval, construction quality, or unrelated design work"],
+      },
+    ],
+    extraLinks: [
+      { label: "How much does a PE stamp cost?", href: "/answers/how-much-does-a-pe-stamp-cost/" },
+      { label: "Risks of buying a PE stamp online", href: "/answers/risks-of-buying-pe-stamps-fiverr-upwork/" },
+      { label: "PE stamp and responsible charge", href: "/answers/what-is-responsible-charge/" },
+    ],
+    faqs: [
+      { question: "Can I buy a PE stamp for an already finished house plan?", answer: "A responsible engineer should not sell an isolated signature. The engineer must determine whether the design can be independently reviewed or must be redesigned, verify the basis and current documents, and accept responsibility only for eligible work within the applicable rules." },
+      { question: "What affects the cost of sealing house plans?", answer: "Review depth, new versus existing work, drawing quality, calculations, site and soil information, project location, discipline scope, coordination, revisions, and the required AHJ deliverables can all affect the fee. A written proposal should explain these assumptions." },
+      { question: "Does a PE stamp guarantee that a house plan will be approved?", answer: "No. A seal communicates professional responsibility for defined engineering work; the AHJ controls its checklist, interpretation, review, comments, and approval decision. Approval cannot responsibly be promised by the engineer or Apex Grid." },
+      { question: "What should I send an engineer for a house-plan review?", answer: "Send the address, current plan set, structural sheets and calculations if available, site and foundation information, design criteria, prior comments, desired submission, and any changes already made. The engineer will identify what requires verification." },
+    ],
+  },
+  {
+    slug: "engineered-deck-drawing-cost",
+    title: "Engineered Deck Drawing Cost and Scope | Apex Grid",
+    description: "Deck drawing costs depend on geometry, loads, ledger and footing conditions, site evidence, permit sheets, and revision scope—not a universal deck rate.",
+    h1: "How much do engineered deck drawings cost?",
+    answer: "There is no responsible universal price for engineered deck drawings. The fee depends on the deck's geometry, height, materials, occupancy and loads, attachment to the house, posts and beams, stairs and guards, footings, site conditions, available records, required calculations, permit format, and revisions. Ask for a proposal that defines the drawings, assumptions, field verification, and coordination rather than a detached price for a sheet.",
+    topic: "Engineered Deck Drawing Cost",
+    serviceHref: "/services/structural",
+    founderNote: "I'm Jeremy Mills, CEO & Founder of Apex Grid Engineering and a U.S. Air Force veteran. Apex Grid is veteran-owned; I'm not a PE, and this perspective does not replace the responsible engineer's judgment.",
+    sections: [
+      {
+        heading: "Deck geometry and load path set the design",
+        body: "A deck drawing is more than a plan view. The engineer traces occupant and dead loads through joists, beams, posts, connections, ledger or independent support, and footings, then considers lateral stability, stairs, guards, and the house interface. I ask clients to send a dimensioned sketch and photos so the scope starts with the actual arrangement.",
+        bullets: ["Deck dimensions, elevations, spans, cantilevers, stairs, and guard layout", "Joists, beams, posts, connections, ledger, rim, and house attachment", "Footings, soil, drainage, frost or seismic criteria, and adjacent conditions", "Materials, occupancy or use, snow and wind exposure, and serviceability needs"],
+      },
+      {
+        heading: "Existing conditions can change the deliverable",
+        body: "A proposed ledger may meet an altered wall, a footing may be near a property or utility constraint, or a house may not provide the assumed attachment. Missing records and concealed framing can require measurements or a site visit. The responsible engineer decides whether photos are enough and records limitations so a permit drawing does not quietly rely on an unsupported detail.",
+        bullets: ["House framing, rim board, band joist, wall layers, and waterproofing evidence", "Existing deck condition, settlement, corrosion, decay, or unapproved alterations", "Site access, excavation limits, utilities, setbacks, and neighboring conditions", "Authority checklist, adopted code, drawing format, and required calculations"],
+      },
+      {
+        heading: "Review the drawing package before comparing fees",
+        body: "A proposal should say whether it includes calculations, plans, elevations, sections, connection and footing details, notes, a site visit, a seal where authorized, and responses to review comments. Contractor pricing, deck construction, waterproofing installation, and safe means and methods are separate scopes. I recommend coordinating the final deck geometry before procurement.",
+        bullets: ["Current dimensioned deck plans and structural details", "Calculations and sealed sheets when required and accepted for the scope", "Assumptions and exclusions for survey, soils, testing, construction, and finishes", "Revision, site-observation, contractor-question, and plan-check response terms"],
+      },
+    ],
+    extraLinks: [
+      { label: "Engineered deck drawings guide", href: "/answers/engineered-deck-drawings/" },
+      { label: "Structural engineering services", href: "/services/structural/" },
+      { label: "What are engineering calculations?", href: "/answers/what-are-engineering-calculations-for-a-permit/" },
+    ],
+    faqs: [
+      { question: "Do all decks need engineered drawings?", answer: "The requirement depends on the deck's design, height, loads, location, adopted code, and AHJ process. Even where a prescriptive path may apply, unusual geometry, attachment, site conditions, or permit requirements can call for engineering. Confirm the current local requirement." },
+      { question: "What is included in engineered deck drawings?", answer: "Depending on the proposal, the package can include a plan, elevations, sections, member and connection details, footing information, structural notes, calculations, and a seal where authorized and required. The proposal should identify the exact sheets and exclusions." },
+      { question: "Can a contractor provide the deck engineering?", answer: "A contractor can provide construction expertise and may coordinate a qualified engineer, but engineering responsibility belongs to the responsible professional. Confirm who performs the design, who seals eligible documents, and how the contractor's construction scope is separated." },
+      { question: "Will engineered deck drawings guarantee a permit?", answer: "No. Drawings support the defined submission, but the AHJ controls its checklist, interpretation, review, corrections, and approval. The engineer can coordinate a response within scope but cannot guarantee the agency's decision." },
+    ],
+  },
+  {
+    slug: "adu-plan-engineering-cost",
+    title: "ADU Plan Engineering Cost and Scope Guide | Apex Grid",
+    description: "ADU engineering costs depend on the addition, structure, foundation, site, utilities, calculations, permit sheets, and coordination—not a fixed package price.",
+    h1: "How much does ADU plan engineering cost?",
+    answer: "ADU plan engineering has no responsible universal package price. The fee depends on whether the ADU is detached, attached, or a conversion; the existing structure and foundation; new gravity and lateral loads; site and utility constraints; code and jurisdictional requirements; calculations; drawings; coordination; and revisions. A useful proposal states what engineering and permit deliverables are included, what the architect or other specialists provide, and what remains unverified.",
+    topic: "ADU Plan Engineering Cost",
+    serviceHref: "/services/structural",
+    founderNote: "I'm Jeremy Mills, CEO & Founder of Apex Grid Engineering and a U.S. Air Force veteran. Apex Grid is veteran-owned; I'm not a PE, and this perspective does not replace the responsible engineer's judgment.",
+    sections: [
+      {
+        heading: "ADU configuration changes the engineering question",
+        body: "A detached ADU is a new structure; an attached addition transfers new reactions into the house; and a garage or room conversion may expose existing foundations and framing that were never documented for the proposed use. I ask for the plan concept, levels, dimensions, construction type, and intended permit path so the responsible engineer can define the right analysis.",
+        bullets: ["Detached, attached, addition, garage conversion, or interior conversion scope", "New floor, roof, wall, foundation, lateral, stair, and connection design", "Existing-house capacity, altered framing, and interfaces between old and new work", "Architecture, MEP, energy, civil, geotechnical, and utility coordination boundaries"],
+      },
+      {
+        heading: "Site and existing information matter",
+        body: "ADU engineering can depend on grading, drainage, soil, setbacks, utilities, access, wind and seismic criteria, and the existing home's foundation. Drawings and photographs help, but they may not verify concealed framing or capacity. The responsible engineer identifies when a site visit, survey, geotechnical report, or additional investigation is necessary rather than filling gaps with a typical ADU assumption.",
+        bullets: ["Address, jurisdiction, adopted code, site plan, grades, and utility information", "Existing plans, foundation records, field measurements, and alteration history", "Soil, groundwater, slope, drainage, frost, wind, and seismic information", "Current architectural backgrounds and coordinated equipment or service loads"],
+      },
+      {
+        heading: "Make the ADU proposal deliverable-specific",
+        body: "Compare ADU proposals by sheets, calculations, details, forms, coordination, site work, and revision terms. Architecture, energy compliance, civil design, utility approvals, survey, construction pricing, and permit decisions may be separate. I recommend a scope matrix that names each handoff so a low engineering number does not conceal missing work needed for the submission.",
+        bullets: ["Structural plans, sections, schedules, details, calculations, and seal limits", "Existing-building evaluation and new-to-existing connection assumptions", "Coordination with architecture, energy, MEP, civil, utilities, and geotechnical work", "Plan-check responses, revisions, exclusions, schedule, and professional responsibility"],
+      },
+    ],
+    extraLinks: [
+      { label: "Structural engineering services", href: "/services/structural/" },
+      { label: "Permit-ready engineering package", href: "/answers/what-is-a-permit-ready-engineering-package/" },
+      { label: "What documents does a PE need?", href: "/answers/what-documents-does-a-pe-need/" },
+    ],
+    faqs: [
+      { question: "Does an ADU plan package always include structural engineering?", answer: "The required scope depends on the ADU configuration, adopted code, existing conditions, and AHJ checklist. Some projects use prescriptive provisions for portions of the work, while additions, conversions, unusual sites, and permit requirements may require project-specific engineering." },
+      { question: "What makes an ADU engineering proposal more complete?", answer: "Look for the configuration, existing-building review, site and foundation assumptions, drawings, calculations, connection and lateral details, coordination, seal limits, revisions, plan-check terms, and clear exclusions for architecture, civil, MEP, energy, survey, and geotechnical work." },
+      { question: "Can an engineer guarantee ADU approval?", answer: "No. The AHJ controls zoning, planning, building, utility, completeness, correction, and approval decisions. Engineering can address a defined technical scope, but it cannot promise that every agency or permit step will be accepted." },
+      { question: "What should I send for an ADU engineering estimate?", answer: "Send the property address, site and floor plans, proposed ADU type and dimensions, existing drawings, photos, foundation information, soils or survey records, desired permit deliverables, utility constraints, and any comments already received." },
+    ],
+  },
+  {
+    slug: "retaining-wall-engineering-cost",
+    title: "Retaining Wall Engineering Cost and Scope | Apex Grid",
+    description: "Retaining wall engineering costs depend on geometry, soil, water, surcharge, drainage, stability, access, drawings, and permit needs—not wall height alone.",
+    h1: "How much does retaining wall engineering cost?",
+    answer: "Retaining wall engineering has no responsible universal price based on height alone. The fee depends on wall geometry and materials, retained and foundation soils, groundwater and drainage, surcharge, slope and global stability, adjacent structures and property limits, seismic or wind criteria, construction access, geotechnical information, calculations, drawings, and permit deliverables. Ask for a proposal that states the geotechnical basis, analyses, details, assumptions, and exclusions.",
+    topic: "Retaining Wall Engineering Cost",
+    serviceHref: "/services/structural",
+    founderNote: "I'm Jeremy Mills, CEO & Founder of Apex Grid Engineering and a U.S. Air Force veteran. Apex Grid is veteran-owned; I'm not a PE, and this perspective does not replace the responsible engineer's judgment.",
+    sections: [
+      {
+        heading: "Height is only one wall variable",
+        body: "A retaining wall responds to earth, water, surcharge, wind or seismic effects where applicable, and the conditions behind and below it. The engineer evaluates sliding, overturning, bearing, structural capacity, drainage, and sometimes global stability, then coordinates the result with grading and site constraints. I discourage comparing a wall proposal from height alone.",
+        bullets: ["Wall height, length, alignment, geometry, material, and supported level", "Backfill, foundation soil, groundwater, drainage, and soil-strength assumptions", "Surcharge from buildings, driveways, vehicles, fences, pools, or stored materials", "Slope, adjacent property, global stability, seismic criteria, and constructability"],
+      },
+      {
+        heading: "Geotechnical and site evidence drive scope",
+        body: "The structural design relies on a defensible understanding of soil and water. A geotechnical report may provide parameters, but the structural engineer still applies them to the wall and documents assumptions. On a constrained or distressed site, survey, field observation, drainage evidence, or additional investigation may be needed. The proposal should say which information is provided and which specialist owns it.",
+        bullets: ["Geotechnical recommendations and the parameters the design may use", "Topographic survey, property limits, utilities, easements, and adjacent structures", "Drainage outlet, waterproofing, filter, backdrain, and maintenance assumptions", "Excavation, access, temporary support, construction sequence, and inspection boundaries"],
+      },
+      {
+        heading: "Compare analyses and deliverables",
+        body: "A useful retaining-wall proposal identifies the design basis, stability checks, structural calculations, plans, sections, reinforcement or connection details, drainage notes, and permit coordination included. Civil grading, geotechnical services, survey, testing, contractor means and methods, and property approvals may be separate. I recommend resolving these handoffs before excavation or material ordering.",
+        bullets: ["Plan, profile, sections, foundation, reinforcement, connection, and drainage details", "Sliding, overturning, bearing, structural capacity, and global-stability scope", "Assumptions for soil, water, surcharge, adjacent work, and construction sequence", "Revision, site-observation, testing, contractor, and plan-check response terms"],
+      },
+    ],
+    extraLinks: [
+      { label: "Retaining wall engineering inputs", href: "/resources/retaining-wall-engineering-inputs-design/" },
+      { label: "Structural engineering services", href: "/services/structural/" },
+      { label: "Engineering calculations for a permit", href: "/answers/what-are-engineering-calculations-for-a-permit/" },
+    ],
+    faqs: [
+      { question: "Can retaining wall engineering be priced from wall height?", answer: "Height is important but not sufficient. Soil, water, surcharge, geometry, slope, adjacent structures, stability, materials, site access, geotechnical information, drawings, and authority requirements can change the scope substantially." },
+      { question: "Does the structural engineer provide the geotechnical report?", answer: "Not automatically. A geotechnical professional may provide soil and groundwater recommendations, while the structural engineer uses appropriate parameters in the wall design. The proposal should identify whether geotechnical, survey, testing, and drainage work are included or separate." },
+      { question: "Does retaining wall engineering include construction shoring?", answer: "Not unless the written scope includes it. Permanent wall design and temporary excavation support or contractor means and methods are different responsibilities. Confirm who designs, reviews, and implements temporary work before excavation." },
+      { question: "Will retaining wall engineering guarantee approval?", answer: "No. The engineer can prepare a defined technical package, but the AHJ, property owner, utility, geotechnical, and other authorities retain their separate review and approval decisions." },
+    ],
+  },
+  {
+    slug: "foundation-assessment-cost",
+    title: "Foundation Assessment and Home Inspection Cost | Apex Grid",
+    description: "Foundation assessment costs depend on the question, distress, access, records, field work, testing, report depth, and follow-up—not a single inspection price.",
+    h1: "How much does a foundation assessment or structural home inspection cost?",
+    answer: "A foundation assessment or structural home inspection has no responsible universal price. The fee follows the question being asked, visible distress, building age and construction, access to the foundation and framing, available records, measurements, field observation, testing or specialist input, report depth, and any repair design or follow-up required. A general home inspection, a structural engineer's assessment, and a repair design are different deliverables and should be proposed separately.",
+    topic: "Foundation Assessment and Structural Home Inspection Cost",
+    serviceHref: "/services/structural",
+    founderNote: "I'm Jeremy Mills, CEO & Founder of Apex Grid Engineering and a U.S. Air Force veteran. Apex Grid is veteran-owned; I'm not a PE, and this perspective does not replace the responsible engineer's judgment.",
+    sections: [
+      {
+        heading: "Define what the assessment must answer",
+        body: "A buyer may need a limited condition opinion, an owner may be investigating cracks or settlement, and a permit project may need a design basis for repairs. Those questions require different records, observation, analysis, and reporting. I ask clients to identify the concern, location, history, desired decision, and audience so the responsible engineer does not promise a broad conclusion from a narrow visit.",
+        bullets: ["Observed cracks, settlement, movement, water, rotation, or bearing concerns", "Pre-purchase, maintenance, insurance, repair-planning, or permit purpose", "Condition opinion, engineering report, repair concept, calculations, or permit design", "Areas to access, concealed conditions, urgency, and decisions the report must support"],
+      },
+      {
+        heading: "Evidence and access determine confidence",
+        body: "A visual visit can document accessible conditions, but it cannot see every footing, connection, soil layer, or concealed defect. The engineer may need plans, measurements, elevation data, drainage history, prior repairs, soil information, probes, testing, or specialist input. I would rather state those limits in the report than imply that a short inspection certifies an entire house.",
+        bullets: ["Construction type, foundation system, age, alterations, and prior repairs", "Interior and exterior photos, measurements, floor elevations, and crack monitoring", "Crawlspace, basement, attic, drainage, grading, and access conditions", "Soil, groundwater, testing, opening, survey, or geotechnical information when needed"],
+      },
+      {
+        heading: "Separate assessment from repair design",
+        body: "An assessment report may explain observed conditions and recommend next steps without designing a repair. If a repair is feasible, the next scope may include calculations, drawings, details, contractor coordination, and permit responses. A general home inspector, structural engineer, contractor, geotechnical professional, and AHJ have different roles; the proposal should show which conclusion belongs to whom.",
+        bullets: ["Inspection or assessment observations, limitations, photographs, and report format", "Engineering analysis, repair alternatives, calculations, drawings, and seal scope", "Testing, monitoring, geotechnical, survey, contractor, and specialty handoffs", "Follow-up visits, construction observation, revisions, and authority coordination"],
+      },
+    ],
+    extraLinks: [
+      { label: "Structural home inspection guide", href: "/answers/structural-home-inspection/" },
+      { label: "When does a PE need a site visit?", href: "/answers/when-does-a-pe-need-a-site-visit/" },
+      { label: "Structural engineering services", href: "/services/structural/" },
+    ],
+    faqs: [
+      { question: "Is a structural engineer's assessment the same as a home inspection?", answer: "No. A general home inspection and a structural engineer's assessment have different training, scope, reporting, and intended decisions. Read the proposal to see what systems, conditions, analysis, limitations, and deliverables are included." },
+      { question: "Can an engineer determine foundation problems from photographs?", answer: "Photographs can help with triage, but they may not show movement, dimensions, concealed conditions, drainage, soils, or the complete load path. The responsible engineer decides whether an in-person visit, measurements, testing, or other evidence is needed." },
+      { question: "Does an assessment include foundation repair design?", answer: "Not automatically. An assessment may document conditions and recommend next steps; repair design, calculations, drawings, permit coordination, and construction observation should be listed as separate included services when authorized." },
+      { question: "Will a foundation assessment guarantee that a home is safe?", answer: "No inspection or assessment can responsibly guarantee every condition is known or future performance is assured. The engineer reports the observed scope, evidence, assumptions, limitations, and recommendations for the defined question." },
+    ],
+  },
+];
+
 PHASE0_AEO_PAGES.push(...PHASE0_BATCH1_AEO_PAGES);
+PHASE0_AEO_PAGES.push(...PHASE0_BATCH2_AEO_PAGES);
 
 export type Phase0ServicePage = {
   slug: string;
