@@ -53,3 +53,4 @@
 - [FindyMail persistence gap](findymail-persistence-gap.md) — provider searches have no usage ledger; credits can be consumed without a persisted prospect or verification record.
 - [Outreach admin response contracts](outreach-admin-contracts.md) — internal message source types must remain readable by admin APIs; cohort counts precede per-recipient safety skips.
 - [Direct-to-dist SEO builds](direct-to-dist-seo-builds.md) — production generates the SEO corpus in dist; local build time rose because regeneration replaced Vite’s copy step.
+- [Deployment cutover startup](deployment-cutover-startup.md) — pre-listen health-check 500s can be a transient artifact cutover condition; verify again after the API port opens.
