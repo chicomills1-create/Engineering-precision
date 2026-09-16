@@ -2588,8 +2588,8 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
       throw new Error(`SEO assertion failed: Phase 11 route must occur exactly once in sitemap-solutions.xml: ${route} (${matches.length})`);
     }
   }
-  if (solutionsUrls.filter((entry) => phase11SitemapEntries.some((route) => entry.includes(`<loc>${route}</loc>`))).length !== 8) {
-    throw new Error("SEO assertion failed: sitemap-solutions.xml must contain exactly eight Phase 11 case-study routes");
+  if (solutionsUrls.filter((entry) => phase11SitemapEntries.some((route) => entry.includes(`<loc>${route}</loc>`))).length !== 9) {
+    throw new Error("SEO assertion failed: sitemap-solutions.xml must contain exactly nine Phase 11 case-study routes");
   }
 
   // ── Tier 5: Resources (blog, guides, resource articles, glossary) ────────

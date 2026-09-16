@@ -76,6 +76,20 @@ const data: Array<Omit<Project, "description"> & { description: string }> = [
     ],
   },
   {
+    slug: "alpenlight-worship-center", title: "Alpenlight Worship Center Case Study | Apex Grid", description: "Alpenlight Worship Center case study: long-span sanctuary framing, high-volume ventilation, acoustic-sensitive duct routing, parking, and event-day traffic.",
+    h1: "Alpenlight Worship Center", sector: "Religious / Assembly", location: "Colorado Springs, CO", year: "2024", disciplines: ["Structural", "MEP", "Civil"], image: "/images/case-studies/project-6.webp",
+    projectDescription: "A 1,800-seat worship facility with long-span steel roof framing over a column-free sanctuary. Assembly occupancy drove the engineering: high-volume ventilation sized for peak occupancy swings, acoustic-sensitive duct routing to keep mechanical noise out of the sanctuary, and site design for surge parking and traffic flow on event days.",
+    stats: [{ label: "Seats", value: "1,800" }, { label: "Clear Span", value: "140 ft" }, { label: "Site Area", value: "11 Acres" }],
+    links: [{ label: "Worship facility engineering", href: "/industries/religious-worship-facility-engineering/" }, { label: "Structural engineering projects", href: "/projects/structural/" }, { label: "MEP engineering projects", href: "/projects/mep/" }, { label: "Portfolio", href: "/portfolio/" }],
+    faqs: [
+      { question: "What type of project is Alpenlight Worship Center?", answer: "The portfolio records Alpenlight Worship Center as a 1,800-seat religious and assembly facility in Colorado Springs, Colorado." },
+      { question: "How was the sanctuary structure described?", answer: "The published record describes long-span steel roof framing over a column-free sanctuary, with a recorded clear span of 140 feet." },
+      { question: "What ventilation conditions shaped the MEP work?", answer: "High-volume ventilation was sized for the peak occupancy swings associated with assembly use." },
+      { question: "How did the design address sanctuary acoustics?", answer: "The portfolio describes acoustic-sensitive duct routing intended to keep mechanical noise out of the sanctuary." },
+      { question: "What site conditions were included?", answer: "The published scope includes an 11-acre site, surge parking, and traffic flow for event days." },
+    ],
+  },
+  {
     slug: "cumberland-forge-corporate-center", title: "Cumberland Forge Corporate Center Case Study | Apex Grid", description: "Cumberland Forge Corporate Center case study: core-and-shell engineering, tenant-ready MEP infrastructure, open floor plates, and rooftop loads.",
     h1: "Cumberland Forge Corporate Center", sector: "Commercial Office", location: "Nashville, TN", year: "2023", disciplines: ["MEP", "Structural"], image: "/images/case-studies/project-7.webp",
     projectDescription: "Core-and-shell engineering for a Class A office campus, with tenant-ready MEP infrastructure designed for flexible floor-plate demising. Right-sized central plant capacity, vertical distribution planned around future tenant improvements, and structural framing optimized for open floor plates and rooftop amenity loads.",
@@ -124,6 +138,7 @@ const founderPerspectiveBySlug: Record<string, string> = {
   "saguaro-gate-medical-campus": "This record shows why I approach healthcare work across the site and the building. Retaining walls, detention basins, isolation rooms, and medical gas routing sit in different technical lanes, but the published scope makes their coordination part of the same project story.",
   "windlass-logistics-hub": "The Windlass record puts deployment and daily movement at the center of my reading. Tilt-up construction, reduced steel tonnage, rooftop solar support, and pavement for autonomous truck traffic describe a project where structural and civil decisions need to stay connected to the facility’s use.",
   "ironquill-lofts": "I find the useful lesson in this record’s interfaces: a 5-over-2 podium, dense urban infill, underpinning beside historic structures, and centralized VRF systems each shape the engineering conversation. I would keep the structural and MEP decisions coordinated with the residential goal of maximizing ceiling heights.",
+  "alpenlight-worship-center": "I read the Alpenlight record as an assembly-space coordination problem. The long-span sanctuary, occupancy swings, acoustically sensitive duct routing, surge parking, and event-day traffic all come from the published record, and I would keep those structural, MEP, and civil conditions connected throughout the engineering conversation.",
   "cumberland-forge-corporate-center": "I read Cumberland Forge through flexibility. The published record pairs open floor plates and rooftop amenity loads with tenant-ready MEP, future tenant improvements, and a right-sized central plant, so my perspective is to preserve options without losing a clear core-and-shell baseline.",
   "marketplace-at-cholla-verde": "The Marketplace record is a good reminder that an open-air center is still one coordinated site. I would keep grading, shared retention, utilities to the pads, kitchen ventilation, grease systems, and heavy electrical services connected across the shell buildings described in the portfolio.",
   "basalt-bend-stem-academy": "I read Basalt Bend as a learning environment and an active-campus coordination problem. The record names laboratory ventilation, fume exhaust, utilities, courtyards, and phased construction, so my perspective is to make those needs understandable while the existing campus stays in session.",

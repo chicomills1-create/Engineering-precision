@@ -4,14 +4,14 @@ import fs from "node:fs";
 import path from "node:path";
 import { PHASE11_AUTHOR, PHASE11_PROJECT_CASE_STUDIES, phase11Page, phase11Url } from "./phase11-project-case-studies";
 
-test("Phase 11 has exactly eight portfolio-record case studies", () => {
-  const expectedSlugs = ["kestrel-point-tower", "bluewire-data-campus", "saguaro-gate-medical-campus", "windlass-logistics-hub", "ironquill-lofts", "cumberland-forge-corporate-center", "marketplace-at-cholla-verde", "basalt-bend-stem-academy"];
+test("Phase 11 has exactly nine portfolio-record case studies", () => {
+  const expectedSlugs = ["kestrel-point-tower", "bluewire-data-campus", "saguaro-gate-medical-campus", "windlass-logistics-hub", "ironquill-lofts", "alpenlight-worship-center", "cumberland-forge-corporate-center", "marketplace-at-cholla-verde", "basalt-bend-stem-academy"];
   assert.deepEqual(PHASE11_PROJECT_CASE_STUDIES.map(p => p.slug), expectedSlugs);
-  assert.equal(PHASE11_PROJECT_CASE_STUDIES.length, 8);
+  assert.equal(PHASE11_PROJECT_CASE_STUDIES.length, 9);
   const routes = PHASE11_PROJECT_CASE_STUDIES.map(phase11Url);
-  assert.equal(new Set(routes).size, 8);
-  assert.equal(new Set(PHASE11_PROJECT_CASE_STUDIES.map(p => p.title)).size, 8);
-  assert.equal(new Set(PHASE11_PROJECT_CASE_STUDIES.map(p => p.description)).size, 8);
+  assert.equal(new Set(routes).size, 9);
+  assert.equal(new Set(PHASE11_PROJECT_CASE_STUDIES.map(p => p.title)).size, 9);
+  assert.equal(new Set(PHASE11_PROJECT_CASE_STUDIES.map(p => p.description)).size, 9);
   for (const page of PHASE11_PROJECT_CASE_STUDIES) {
     assert.match(page.title, /Apex Grid$/);
     assert.ok(page.title.length >= 35 && page.title.length <= 65);
