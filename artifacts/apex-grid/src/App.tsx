@@ -16,6 +16,7 @@ import About from '@/pages/About';
 import Team from '@/pages/Team';
 import Contact from '@/pages/Contact';
 import RequestProposal from '@/pages/RequestProposal';
+import RfpRfqSubmission from '@/pages/RfpRfqSubmission';
 import Unsubscribe from '@/pages/Unsubscribe';
 import Audience from '@/pages/Audience';
 import Estimate from '@/pages/Estimate';
@@ -107,6 +108,7 @@ function Router() {
         <Route path="/team" component={Team} />
         <Route path="/contact" component={Contact} />
         <Route path="/request-proposal" component={RequestProposal} />
+        <Route path="/procurement/submit-rfp-rfq/" component={RfpRfqSubmission} />
         <Route path="/estimate" component={Estimate} />
         <Route path="/submit-project">
           <LazyClient page="submit" />

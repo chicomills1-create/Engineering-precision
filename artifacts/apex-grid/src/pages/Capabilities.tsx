@@ -306,6 +306,13 @@ export default function Capabilities() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
+              href="/procurement/submit-rfp-rfq/"
+              className="inline-flex h-14 px-8 bg-primary text-white font-bold text-sm uppercase tracking-wider items-center justify-center gap-3 rounded-[2px] hover:bg-primary/90 transition-colors"
+            >
+              Submit RFP or RFQ
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
               href="/procurement/"
               className="inline-flex h-14 px-8 border border-primary bg-background text-foreground font-bold text-sm uppercase tracking-wider items-center justify-center gap-3 rounded-[2px] hover:bg-primary/10 transition-colors"
             >
@@ -316,7 +323,7 @@ export default function Capabilities() {
               href="/capabilities-statement.html"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-14 px-8 bg-primary text-white font-bold text-sm uppercase tracking-wider items-center justify-center gap-3 rounded-[2px] hover:bg-primary/90 transition-colors"
+              className="inline-flex h-14 px-8 border border-border bg-background text-foreground font-bold text-sm uppercase tracking-wider items-center justify-center gap-3 rounded-[2px] hover:bg-white/5 transition-colors"
             >
               <Download className="w-4 h-4" />
               Capabilities Statement

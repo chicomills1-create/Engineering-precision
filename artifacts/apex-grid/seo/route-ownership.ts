@@ -15,6 +15,7 @@ export const REACT_PRERENDER_ROUTES = [
   "/industries",
   "/services",
   "/portfolio",
+  "/procurement/submit-rfp-rfq/",
   "/military",
   "/resources",
   "/team",

@@ -84,6 +84,7 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
       },
     ],
     relatedLinks: [
+      { href: "/procurement/submit-rfp-rfq/", label: "Submit an RFP or RFQ package" },
       { href: "/capabilities", label: "Review Apex Grid capabilities" },
       { href: "/capabilities-statement.html", label: "Open the capabilities statement" },
       { href: "/licensing-service-coverage/", label: "Check licensing and service coverage" },
@@ -94,7 +95,7 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
     ctaHeading: "Send the Project Requirements",
     ctaText:
       "Share the solicitation, scope, location, disciplines, schedule, and available documents so Apex Grid can evaluate the opportunity and prepare a project-specific response.",
-    ctaHref: "/estimate/",
+    ctaHref: "/procurement/submit-rfp-rfq/",
     schemaJson: [
       {
         "@context": "https://schema.org",

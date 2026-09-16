@@ -2479,6 +2479,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     u(`${SITE}/for-contractors`, today, "monthly", "0.8"),
     u(`${SITE}/for-developers`, today, "monthly", "0.8"),
     u(`${SITE}/for-property-managers`, today, "monthly", "0.8"),
+    u(`${SITE}/procurement/submit-rfp-rfq/`, today, "monthly", "0.8"),
     u(`${SITE}/capabilities-statement.html`, today, "monthly", "0.7"),
     u(`${SITE}/licensing-service-coverage/`, today, "monthly", "0.7"),
     u(`${SITE}/sitemap/`, today, "monthly", "0.3"),
