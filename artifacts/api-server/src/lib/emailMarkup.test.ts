@@ -14,6 +14,12 @@ test("renders outreach as readable HTML while retaining a plain-text fallback", 
   assert.match(content.html, /CEO · USAF Veteran/);
   assert.match(content.html, /Veteran-owned engineering company/);
   assert.match(content.html, /href="https:\/\/apexgrideng\.com"[^>]*>apexgrideng\.com<\/a>/);
+  assert.match(content.html, /href="https:\/\/apexgrideng\.com\/estimate"[^>]*>Get My Instant Ballpark Estimate<\/a>/);
+  assert.match(content.plainText, /Get My Instant Ballpark Estimate: https:\/\/apexgrideng\.com\/estimate/);
+  assert.ok(
+    content.html.indexOf("Get My Instant Ballpark Estimate") < content.html.indexOf("Best regards,"),
+    "estimate CTA must render before the sign-off",
+  );
   assert.match(content.html, /https:\/\/apexgrideng\.com\/logo\.png/);
   assert.match(content.html, /Apex Grid Engineering PLLC[\s\S]*22475 E Quintero Rd[\s\S]*Queen Creek, AZ 85142/);
   assert.match(content.plainText, /Apex Grid Engineering PLLC\n22475 E Quintero Rd\nQueen Creek, AZ 85142/);
