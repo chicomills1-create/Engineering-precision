@@ -2,6 +2,7 @@ import { Router } from "express";
 import { requireAuth } from "../middlewares/requireAuth";
 import { readFile, access, readdir } from "fs/promises";
 import path from "path";
+import { fileURLToPath } from "url";
 import { and, desc, eq, sql } from "drizzle-orm";
 import { db, leadsTable, seoAuditIssuesTable, seoAuditRunsTable, seoPerformanceSnapshotsTable, seoTrafficAlertsTable } from "@workspace/db";
 import {
@@ -24,8 +25,16 @@ import { buildTrafficAlerts, type PageEvidence, type PageQueryMetric } from "../
 
 const router = Router();
 
-// Resolve the apex-grid public directory relative to the CWD (artifacts/api-server)
-const PUBLIC_DIR = path.resolve(process.cwd(), "../apex-grid/public");
+// The production process starts from the workspace root, while development
+// starts from the package directory. Resolve from the built server bundle so
+// sitemap inventory works in both environments.
+const API_BUNDLE_DIR = path.dirname(fileURLToPath(import.meta.url));
+const PUBLIC_DIR = path.resolve(
+  API_BUNDLE_DIR,
+  process.env.NODE_ENV === "production"
+    ? "../../apex-grid/dist/public"
+    : "../../apex-grid/public",
+);
 
 type SitemapCategory =
   | "core" | "services" | "industries" | "solutions" | "resources" | "locations"

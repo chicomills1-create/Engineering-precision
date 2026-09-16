@@ -50,7 +50,15 @@ import {
   RETAINED_LEGACY_LOCATIONS,
 } from "./legacy-locations";
 import { ALL_INDUSTRIES } from "../src/data/industries";
-import { RESOURCE_ARTICLES, RESOURCE_DISCIPLINES, disciplineOf, resourceUrl, type ResourceArticle, type ResourceDiscipline } from "./resources";
+import {
+  RESOURCE_ARTICLES,
+  RESOURCE_DISCIPLINES,
+  ROOT_CANONICAL_RESOURCE_SLUGS,
+  disciplineOf,
+  resourceUrl,
+  type ResourceArticle,
+  type ResourceDiscipline,
+} from "./resources";
 import { AUDIENCE_RESOURCE_HUBS, audienceResourceHubPage, AUDIENCE_RESOURCE_AUTHOR } from "./audience-resource-hubs";
 import {
   PRIORITY_MARKET_HUBS,
@@ -5339,10 +5347,17 @@ async function main() {
   }
   for (const article of RESOURCE_ARTICLES) {
     assertSlug(article.slug);
-    const adir = path.join(resourcesDir, disciplineOf(article).slug, article.slug);
+    const adir = path.join(PUBLIC, resourceUrl(article).replace(/^\/|\/$/g, ""));
     fs.mkdirSync(adir, { recursive: true });
     fs.writeFileSync(path.join(adir, "index.html"), resourceArticlePage(article));
     pages++;
+  }
+  // Preserve previously published discipline-nested URLs after restoring the
+  // original root resource URLs as the canonical, indexable article owners.
+  for (const article of RESOURCE_ARTICLES.filter((entry) => ROOT_CANONICAL_RESOURCE_SLUGS.has(entry.slug))) {
+    const oldDir = path.join(resourcesDir, disciplineOf(article).slug, article.slug);
+    fs.mkdirSync(oldDir, { recursive: true });
+    fs.writeFileSync(path.join(oldDir, "index.html"), redirectPage(resourceUrl(article), article.h1));
   }
   for (const audiencePage of AUDIENCE_RESOURCE_HUBS) {
     const titleLength = audiencePage.title.length;
@@ -5363,13 +5378,6 @@ async function main() {
     fs.writeFileSync(path.join(audienceDir, "index.html"), html);
     pages++;
   }
-  // Legacy /resources/{slug}/ redirect stubs (URLs moved to discipline subdirs)
-  for (const r of LEGACY_RESOURCE_REDIRECTS) {
-    const rdir = path.join(resourcesDir, r.slug);
-    fs.mkdirSync(rdir, { recursive: true });
-    fs.writeFileSync(path.join(rdir, "index.html"), redirectPage(r.newPath, r.title));
-  }
-
   // Who We Work With
   const wwwDir = path.join(PUBLIC, "who-we-work-with");
   fs.rmSync(wwwDir, { recursive: true, force: true });
@@ -6648,17 +6656,6 @@ ${relatedTermLinks ? `<section class="block"><div class="container">
     body,
   });
 }
-
-/** Legacy top-level /resources/{slug}/ pages that were reorganised into discipline
- * subdirectories. We write permanent redirect stubs so indexed URLs stay live. */
-const LEGACY_RESOURCE_REDIRECTS: Array<{ slug: string; newPath: string; title: string }> = [
-  { slug: "how-much-does-mep-engineering-cost",                       newPath: "/resources/mep/mep-engineering-cost/",                title: "How Much Does MEP Engineering Cost?" },
-  { slug: "what-does-a-structural-engineer-do-that-an-architect-doesnt", newPath: "/resources/structural/structural-engineer-vs-architect/", title: "Structural Engineer vs. Architect" },
-  { slug: "ashrae-90-1-vs-iecc-commercial-energy-code",               newPath: "/resources/mep/",                                    title: "Commercial Energy Code — MEP Resources" },
-  { slug: "commercial-building-permit-process-what-engineers-deliver", newPath: "/resources/permit/permit-ready-engineering-package/", title: "The Commercial Building Permit Process" },
-  { slug: "title-24-energy-compliance-commercial-buildings",           newPath: "/title-24/",                                         title: "California Title 24 Energy Compliance" },
-  { slug: "vrf-vs-rooftop-unit-commercial-hvac",                      newPath: "/resources/mep/hvac-load-calculation/",               title: "VRF vs. Rooftop Unit — HVAC Resources" },
-];
 
 /** Guide URLs whose intent is fully served by the deeper resource article. */
 const GUIDE_REDIRECTS = new Map<string, { newPath: string; title: string }>([

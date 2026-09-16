@@ -147,7 +147,7 @@ function CategoryBadge({ value }: { value: string }) {
 // --- Tab Components ---
 
 function DashboardTab() {
-  const { data: dashboard, isLoading, error } = useGetSeoDashboard();
+  const { data: dashboard, isLoading, error, refetch: refreshSitemap, isFetching: isRefreshingSitemap } = useGetSeoDashboard();
   const syncPerf = useSyncSeoPerformance();
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -223,7 +223,18 @@ function DashboardTab() {
       {/* Breakdowns */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="border border-border bg-card p-6 rounded-[2px] flex flex-col">
-          <h3 className="text-lg font-display font-bold mb-4">Sitemap Index</h3>
+          <div className="flex items-center justify-between gap-3 mb-4">
+            <h3 className="text-lg font-display font-bold">Sitemap Index</h3>
+            <button
+              type="button"
+              onClick={() => void refreshSitemap()}
+              disabled={isRefreshingSitemap}
+              className="inline-flex items-center gap-2 h-8 px-3 border border-border bg-transparent text-xs text-muted-foreground hover:text-foreground hover:border-primary/50 rounded-[2px] transition-colors disabled:opacity-50"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${isRefreshingSitemap ? 'animate-spin' : ''}`} />
+              {isRefreshingSitemap ? 'Crawling…' : 'Refresh Sitemap'}
+            </button>
+          </div>
           <div className="space-y-3 flex-1">
              {Object.entries(dashboard.inventory.byCategory).map(([cat, count]) => (
                 <div key={cat} className="flex justify-between items-center text-sm border-b border-border/50 pb-2 last:border-0 last:pb-0">

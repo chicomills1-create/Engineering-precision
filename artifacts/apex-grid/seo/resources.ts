@@ -40,8 +40,20 @@ export function disciplineOf(article: ResourceArticle): ResourceDiscipline {
   return d;
 }
 
+export const ROOT_CANONICAL_RESOURCE_SLUGS = new Set([
+  "ashrae-90-1-vs-iecc-commercial-energy-code",
+  "commercial-building-permit-process-what-engineers-deliver",
+  "how-much-does-mep-engineering-cost",
+  "title-24-energy-compliance-commercial-buildings",
+  "vrf-vs-rooftop-unit-commercial-hvac",
+  "what-does-a-structural-engineer-do-that-an-architect-doesnt",
+]);
+
 /** Canonical URL path for a resource article. */
 export function resourceUrl(article: ResourceArticle): string {
+  if (ROOT_CANONICAL_RESOURCE_SLUGS.has(article.slug)) {
+    return `/resources/${article.slug}/`;
+  }
   return `/resources/${disciplineOf(article).slug}/${article.slug}/`;
 }
 
