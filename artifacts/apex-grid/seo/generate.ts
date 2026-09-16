@@ -58,6 +58,12 @@ import {
   priorityMarketHubPage,
   priorityMarketHubUrl,
 } from "./priority-market-hubs";
+import {
+  PHASE9_INDUSTRY_SERVICE_PAGES,
+  PHASE9_INBOUND_TARGETS,
+  phase9Page,
+  phase9Url,
+} from "./phase9-industry-service";
 import { GLOSSARY_TERMS, sortedGlossaryTerms, glossaryByLetter, relatedGlossaryTerms, type GlossaryTerm } from "./glossary";
 import { APEX_GRID_BUSINESS_SCHEMA } from "../src/lib/business-schema";
 import {
@@ -2535,6 +2541,9 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   }
   for (const idp of CANONICAL_INDUSTRY_DISCIPLINE_PAGES) {
     industriesUrls.push(u(`${SITE}${getIndustryDisciplineUrl(idp)}`, today, "monthly", "0.8"));
+  }
+  for (const page of PHASE9_INDUSTRY_SERVICE_PAGES) {
+    industriesUrls.push(u(`${SITE}${phase9Url(page)}`, today, "monthly", "0.8"));
   }
 
   // ── Tier 3: Solutions ────────────────────────────────────────────────────
@@ -5345,6 +5354,43 @@ async function main() {
     const redirect = INDUSTRY_DISCIPLINE_REDIRECTS.get(segments.join("/"));
     fs.writeFileSync(path.join(dir, "index.html"), redirect ? redirectPage(redirect.newPath, redirect.title) : industryDisciplinePage(idp));
     pages++;
+  }
+  // Phase 9 strongest industry × service combinations. These focused pages
+  // intentionally use their own five-FAQ, founder-voice renderer rather than
+  // weakening the established generic industry-discipline contract.
+  for (const page of PHASE9_INDUSTRY_SERVICE_PAGES) {
+    const route = phase9Url(page);
+    const dir = path.join(indDisciplineDir, ...page.segments);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase9Page(page);
+    if (
+      !html.includes(`By Jeremy Mills, CEO & Founder, Apex Grid Engineering — USAF Veteran`)
+      || !html.includes(`rel="canonical" href="${SITE}${route}"`)
+      || (html.match(/"@type":"FAQPage"/g) ?? []).length !== 1
+      || (html.match(/<details><summary>/g) ?? []).length !== 5
+      || !html.includes('"@type":"Service"')
+      || !html.includes('"@type":"BreadcrumbList"')
+      || !html.includes('href="/estimate/"')
+    ) {
+      throw new Error(`SEO assertion failed: incomplete Phase 9 industry-service page ${route}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  // Link each new specialty page from an established family page. This keeps
+  // discovery contextual without changing the established page canonicals.
+  for (const page of PHASE9_INDUSTRY_SERVICE_PAGES) {
+    const route = phase9Url(page);
+    const parentRoute = PHASE9_INBOUND_TARGETS[route];
+    if (!parentRoute) throw new Error(`SEO assertion failed: missing Phase 9 inbound target ${route}`);
+    const parentFile = path.join(PUBLIC, parentRoute.replace(/^\/|\/$/g, ""), "index.html");
+    if (!fs.existsSync(parentFile)) throw new Error(`SEO assertion failed: missing Phase 9 inbound parent ${parentRoute}`);
+    const parentHtml = fs.readFileSync(parentFile, "utf8");
+    const marker = `phase9-inbound-${route}`;
+    if (!parentHtml.includes(marker)) {
+      const inbound = `<section class="block phase9-inbound" id="${marker}"><div class="container"><h2>Specialty <em>industry scopes</em></h2><p>For a narrower facility or operating condition, I also maintain a focused engineering scope:</p><p><a href="${route}">${page.h1}</a></p></div></section>`;
+      fs.writeFileSync(parentFile, parentHtml.replace("</body>", `${inbound}</body>`));
+    }
   }
 
   // Location × Service pages (non-curated cities + new service slugs)

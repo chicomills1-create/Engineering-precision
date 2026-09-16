@@ -1,8 +1,8 @@
 {
   "generatedAt": "deterministic",
   "scope": "public/locations/**/*.html",
-  "corpusPages": 21024,
-  "indexablePages": 20981,
+  "corpusPages": 21029,
+  "indexablePages": 20986,
   "noindexPages": 26,
   "redirectPages": 17,
   "thinWordLimit": 400,
