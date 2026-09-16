@@ -13,9 +13,138 @@ export interface StaticPageDef {
   ctaText: string;
   sitemapCategory?: "core" | "solutions";
   schemaJson?: Record<string, unknown>[];
+  showFounderByline?: boolean;
+  relatedLinks?: { href: string; label: string }[];
+  ctaHref?: string;
 }
 
 export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
+  {
+    slug: "procurement",
+    dir: "procurement",
+    sitemapCategory: "core",
+    title: "Procurement Vendor Information | Apex Grid Engineering",
+    description:
+      "Vendor information for procurement teams evaluating Apex Grid Engineering, with capability, qualification, coverage, teaming, and project-intake resources.",
+    h1: "Procurement Vendor Information",
+    kicker: "Vendor Qualification Resources",
+    lede:
+      "This page gives procurement teams one place to evaluate Apex Grid Engineering, locate current qualification resources, and identify the project information needed for a scoped response.",
+    showFounderByline: true,
+    sections: [
+      {
+        heading: "My Founder Perspective",
+        content:
+          "I want procurement teams to be able to separate verified company information from assumptions. This page points to available records and resources for capability review, licensing and service coverage, public-sector coordination, and project intake. Project-specific availability, authorization, and discipline requirements still need confirmation before award.",
+      },
+      {
+        heading: "Start With the Current Capabilities Record",
+        content:
+          "Use the Apex Grid capabilities page and downloadable capability statement as the starting point for company qualifications, service categories, and procurement review. Those resources should be checked with the solicitation and any project-specific qualification requirements rather than treated as a substitute for them.",
+        bullets: [
+          "Company capability and service overview",
+          "Downloadable capability statement",
+          "Engineering, architecture, and construction-delivery resources",
+          "Public-sector and teaming information",
+        ],
+      },
+      {
+        heading: "Confirm Coverage for the Specific Project",
+        content:
+          "Licensing and service coverage depend on the project location, discipline, scope, responsible professional, and authority having jurisdiction. Procurement teams should use the current coverage page as an initial reference and request project-specific confirmation before relying on a qualification statement.",
+        bullets: [
+          "Project state and local jurisdiction",
+          "Required professional disciplines",
+          "Anticipated permit or agency review path",
+          "Firm and responsible-professional requirements",
+        ],
+      },
+      {
+        heading: "Information That Supports a Responsive Review",
+        content:
+          "A clear procurement request helps us determine whether the opportunity fits our services and whether the requested schedule and deliverables can be supported. The most useful package identifies the buyer, project, location, scope, disciplines, due date, selection process, and available technical documents.",
+        bullets: [
+          "Solicitation or reference number and issuing organization",
+          "Project name, address, and jurisdiction",
+          "Requested disciplines, deliverables, and procurement method",
+          "Submission deadline, anticipated schedule, and selection criteria",
+          "Plans, specifications, exhibits, addenda, or existing reports",
+          "Required forms, certifications, insurance, or contract terms",
+        ],
+      },
+      {
+        heading: "Teaming and Subconsultant Evaluation",
+        content:
+          "For teaming requests, identify the prime contractor or lead consultant, the exact scope being considered for Apex Grid, the project location, the proposal deadline, and any mandatory qualification criteria. We evaluate each opportunity against available staff, relevant disciplines, schedule, contracting requirements, and project-specific authorization.",
+      },
+      {
+        heading: "Request Project-Specific Vendor Information",
+        content:
+          "If the solicitation requires information not contained in the public resources linked here, send the requirement with the project details. We will confirm what can be provided for that opportunity rather than presenting a general company statement as project-specific proof.",
+      },
+    ],
+    relatedLinks: [
+      { href: "/capabilities", label: "Review Apex Grid capabilities" },
+      { href: "/capabilities-statement.html", label: "Open the capabilities statement" },
+      { href: "/licensing-service-coverage/", label: "Check licensing and service coverage" },
+      { href: "/government/", label: "Review government project support" },
+      { href: "/government-contracting/", label: "Explore government contracting services" },
+      { href: "/military", label: "Read about veteran-led service" },
+    ],
+    ctaHeading: "Send the Project Requirements",
+    ctaText:
+      "Share the solicitation, scope, location, disciplines, schedule, and available documents so Apex Grid can evaluate the opportunity and prepare a project-specific response.",
+    ctaHref: "/estimate/",
+    schemaJson: [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": "https://apexgrideng.com/procurement/#faq",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "Where should procurement teams start when evaluating Apex Grid?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Start with the Apex Grid capabilities page and downloadable capability statement, then compare those resources with the solicitation’s project-specific qualification requirements.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How should licensing and service coverage be confirmed?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Confirm coverage for the project location, discipline, scope, responsible professional, and authority having jurisdiction before award. The public coverage page is an initial reference, not project-specific authorization.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What information helps Apex Grid review a procurement opportunity?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Provide the issuing organization, solicitation number, project location, requested disciplines and deliverables, submission deadline, schedule, selection criteria, and available plans, specifications, exhibits, or addenda.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What should a teaming request include?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Identify the prime contractor or lead consultant, the proposed Apex Grid scope, project location, proposal deadline, schedule, and mandatory qualification or contracting requirements.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Can procurement teams request project-specific vendor documents?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes. Send the solicitation requirement with the project details so Apex Grid can confirm which current documents can be provided for that specific opportunity.",
+            },
+          },
+        ],
+      },
+    ],
+  },
   {
     slug: "jeremy-mills",
     dir: "jeremy-mills",

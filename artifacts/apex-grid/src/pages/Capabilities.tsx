@@ -305,6 +305,13 @@ export default function Capabilities() {
             Download our one-page capabilities statement for your procurement file, or reach out directly to discuss a specific solicitation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/procurement/"
+              className="inline-flex h-14 px-8 border border-primary bg-background text-foreground font-bold text-sm uppercase tracking-wider items-center justify-center gap-3 rounded-[2px] hover:bg-primary/10 transition-colors"
+            >
+              Procurement Information
+              <ArrowRight className="w-4 h-4" />
+            </Link>
             <a
               href="/capabilities-statement.html"
               target="_blank"

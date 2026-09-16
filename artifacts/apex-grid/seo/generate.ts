@@ -4208,6 +4208,7 @@ function projectCategoryPage(cat: ProjectCategoryPage): string {
 
 function staticStandalonePage(page: StaticPageDef): string {
   const url = `/${page.dir}/`;
+  const enhanced = page.showFounderByline === true;
   const crumbs = [{ name: "Home", href: "/" }, { name: page.h1 }];
   const faqSchema = page.schemaJson?.find((schema) => schema["@type"] === "FAQPage") as
     | { mainEntity?: Array<{ name?: string; acceptedAnswer?: { text?: string } }> }
@@ -4217,7 +4218,16 @@ function staticStandalonePage(page: StaticPageDef): string {
       typeof item.name === "string" && typeof item.acceptedAnswer?.text === "string",
   );
   const faqHtml = faqItems.length
-    ? `<section class="section section--white faq">
+    ? enhanced
+      ? `<section class="block">
+      <div class="container">
+        <div class="faq">
+        <h2>Quick Answers</h2>
+        ${faqItems.map((item) => `<details><summary>${esc(item.name)}</summary><div class="a">${esc(item.acceptedAnswer.text)}</div></details>`).join("")}
+        </div>
+      </div>
+    </section>`
+      : `<section class="section section--white faq">
       <div class="container container--narrow">
         <h2>Quick Answers</h2>
         ${faqItems.map((item) => `<details><summary>${esc(item.name)}</summary><div class="a">${esc(item.acceptedAnswer.text)}</div></details>`).join("")}
@@ -4226,7 +4236,16 @@ function staticStandalonePage(page: StaticPageDef): string {
     : "";
   const sectionsHtml = page.sections
     .map(
-      (s) => `
+      (s) => enhanced
+        ? `
+    <section class="block">
+      <div class="container prose">
+        <h2>${esc(s.heading)}</h2>
+        <p>${esc(s.content)}</p>
+        ${s.bullets ? `<ul class="scope">${s.bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>` : ""}
+      </div>
+    </section>`
+        : `
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>${esc(s.heading)}</h2>
@@ -4236,7 +4255,39 @@ function staticStandalonePage(page: StaticPageDef): string {
     </section>`,
     )
     .join("");
-  const body = `
+  const relatedHtml = page.relatedLinks?.length
+    ? `<section class="block">
+      <div class="container">
+        <h2>Related Qualification Resources</h2>
+        <div class="linkrow">${page.relatedLinks.map((link) => `<a href="${esc(link.href)}">${esc(link.label)}</a>`).join("")}</div>
+      </div>
+    </section>`
+    : "";
+  const ctaHref = page.ctaHref ?? "/contact/";
+  const body = enhanced ? `
+    <div class="hero">
+      <div class="container">
+        <div class="kicker">${esc(page.kicker)}</div>
+        <h1>${esc(page.h1)}</h1>
+        <p class="lede">${esc(page.lede)}</p>
+         ${page.showFounderByline ? `<p class="note">By Jeremy Mills, CEO &amp; Founder, Apex Grid Engineering — USAF Veteran</p>` : ""}
+        <div class="linkrow" style="margin-top:22px"><a href="${esc(ctaHref)}">${page.ctaHref ? "Request a Project Review" : "Contact Us"}</a></div>
+      </div>
+    </div>
+    ${breadcrumb(crumbs)}
+    ${sectionsHtml}
+     ${relatedHtml}
+    ${faqHtml}
+    <section class="ctaband">
+      <div class="container">
+        <h2>${esc(page.ctaHeading)}</h2>
+        <p>${esc(page.ctaText)}</p>
+        <div class="linkrow">
+          <a href="${esc(ctaHref)}">${page.ctaHref ? "Request an Estimate" : "Get in Touch"}</a>
+          <a href="tel:+14804900064">480-490-0064</a>
+        </div>
+      </div>
+    </section>` : `
     <div class="hero hero--page">
       <div class="hero-inner">
         <div class="kicker">${esc(page.kicker)}</div>
