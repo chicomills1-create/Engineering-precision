@@ -80,17 +80,17 @@ test("Phase 7 seeds do not overlap the existing answer corpus", () => {
   assert.ok(phase7Pages.every((page) => /^[a-z0-9-]+$/.test(page.slug) && /^\/[a-z0-9/_-]+\/?$/.test(page.serviceHref)));
 });
 
-test("generated answer library has 138 static indexable self-canonical pages", () => {
+test("generated answer library has 148 static indexable self-canonical pages", () => {
   const answerDir = path.join(publicDir, "answers");
   if (!fs.existsSync(answerDir)) return;
   const files = allPages.map((page) => path.join(answerDir, page.slug, "index.html"));
-  assert.equal(files.filter(fs.existsSync).length, 138);
+  assert.equal(files.filter(fs.existsSync).length, 148);
   assert.ok(fs.existsSync(path.join(answerDir, "index.html")));
   const sitemap = fs.readFileSync(path.join(publicDir, "sitemap-services.xml"), "utf8");
   const answerUrls = [...sitemap.matchAll(/<loc>(https:\/\/apexgrideng\.com\/answers\/[^<]+)<\/loc>/g)]
     .map((match) => match[1]);
-  assert.equal(answerUrls.length, 138);
-  assert.equal(new Set(answerUrls).size, 138);
+  assert.equal(answerUrls.length, 148);
+  assert.equal(new Set(answerUrls).size, 148);
   assert.match(sitemap, /<loc>https:\/\/apexgrideng\.com\/answers\/<\/loc>/);
 
   for (const page of allPages) {
@@ -111,7 +111,8 @@ test("generated answer library has 138 static indexable self-canonical pages", (
     const faq = schemas.find((schema) => schema["@type"] === "FAQPage") as {
       mainEntity?: Array<{ name: string; acceptedAnswer: { text: string } }>;
     } | undefined;
-    assert.equal(faq?.mainEntity?.length, 4);
+    const expectedFaqCount = "faqs" in page ? page.faqs.length : 4;
+    assert.equal(faq?.mainEntity?.length, expectedFaqCount);
     for (const entry of faq?.mainEntity ?? []) {
       assert.ok(html.includes(entry.name.replace(/&/g, "&amp;")));
       assert.ok(html.includes(entry.acceptedAnswer.text.replace(/&/g, "&amp;")));

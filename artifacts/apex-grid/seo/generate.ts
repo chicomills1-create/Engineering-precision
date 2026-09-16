@@ -5437,8 +5437,8 @@ async function main() {
     fs.writeFileSync(path.join(dir, "index.html"), html);
     pages++;
   }
-  if (PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length !== 138) {
-    throw new Error(`SEO assertion failed: answer library requires exactly 138 pages (found ${PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length})`);
+  if (PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length !== 148) {
+    throw new Error(`SEO assertion failed: answer library requires exactly 148 pages (found ${PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length})`);
   }
   const peStampDir = path.join(PUBLIC, "pe-stamp");
   fs.mkdirSync(peStampDir, { recursive: true });
