@@ -10,6 +10,8 @@ export interface ClientPage {
   kicker: string;
   lede: string;
   sections: { heading: string; body: string }[];
+  relatedLinks?: { label: string; href: string }[];
+  faqs?: { question: string; answer: string }[];
   cta: string;
   ctaHref: string;
 }
@@ -359,6 +361,206 @@ export const CLIENT_PAGES: ClientPage[] = [
     ],
     cta: "Tell Us About Your Portfolio",
     ctaHref: "/contact",
+  },
+  {
+    slug: "builders",
+    title: "Engineering Services for Builders | Apex Grid Engineering",
+    description: "Structural, MEP, civil, and geotechnical engineering support for builders planning coordinated new construction, additions, and repeatable projects.",
+    h1: "Engineering Support for Builders",
+    kicker: "Engineering for Builders",
+    lede: "I help builders define the engineering work behind a buildable project before assumptions reach pricing, permitting, or the field. The right scope depends on the site, building type, delivery method, jurisdiction, and project team.",
+    sections: [
+      {
+        heading: "Define the Project Before Design Advances",
+        body: "I start with the project address, intended use, available survey and soils information, architectural concept, utility context, delivery plan, and the decisions your team needs from engineering. Separating confirmed inputs from open questions creates a more defensible basis for scope, fee, and schedule.",
+      },
+      {
+        heading: "Coordinate Structure, Systems, and Site Work",
+        body: "Building design can involve structural framing, foundations, HVAC, electrical distribution, plumbing, grading, drainage, utilities, and geotechnical recommendations. I help identify the interfaces assigned to Apex Grid and the information that must come from the architect, builder, owner, specialty consultants, and authority having jurisdiction.",
+      },
+      {
+        heading: "Support Repeatable Building Programs",
+        body: "For builders using standard plans or recurring building types, I review what can remain consistent and what must be evaluated for each site. Local loads, soils, utilities, energy requirements, amendments, and responsible-professional authorization can change the engineering even when the program looks similar.",
+      },
+      {
+        heading: "Prepare for Permit and Construction Handoffs",
+        body: "A useful handoff identifies the intended deliverables, design assumptions, coordination milestones, deferred items, and known field-verification needs. Permit acceptance and construction outcomes remain subject to the completed design, site conditions, contractor execution, and authority review.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Engineering project types", href: "/project-types/" },
+      { label: "New-construction engineering", href: "/project-types/new-construction/" },
+      { label: "Engineering services", href: "/services/" },
+      { label: "Who Apex Grid works with", href: "/who-we-work-with/" },
+    ],
+    faqs: [
+      { question: "What should a builder provide for an engineering estimate?", answer: "Share the project location, intended use, current drawings, site records, requested disciplines, delivery method, target milestone, and known jurisdictional requirements. I will identify missing inputs rather than price from unsupported assumptions." },
+      { question: "Can one engineering package be reused on multiple building sites?", answer: "Some design standards may be repeatable, but each site can have different loads, soils, utilities, codes, amendments, and authorization requirements. Reuse must be evaluated for the actual location and scope." },
+      { question: "Who controls permit approval for a builder's project?", answer: "The authority having jurisdiction controls its interpretation, review, and approval. I prepare the agreed engineering scope from available project information and respond to review comments within that scope." },
+      { question: "When should a builder involve engineering?", answer: "Early involvement is useful when structural systems, site constraints, utilities, equipment, or permit requirements affect layout and cost. The appropriate timing depends on which decision the engineering work must support." },
+    ],
+    cta: "Request a Builder Project Estimate",
+    ctaHref: "/estimate/",
+  },
+  {
+    slug: "owner-representatives",
+    title: "Engineering Support for Owner Representatives | Apex Grid",
+    description: "Independent engineering scope, coordination, and document support for owner representatives managing design, procurement, and construction decisions.",
+    h1: "Engineering Support for Owner Representatives",
+    kicker: "Engineering for Owner Representatives",
+    lede: "I help owner representatives turn program goals, existing records, consultant inputs, and project constraints into a defined engineering scope. My role is to make responsibilities and decisions clear without replacing the authority of the owner, design professionals, contractor, or jurisdiction.",
+    sections: [
+      {
+        heading: "Translate Owner Priorities Into Engineering Scope",
+        body: "An owner representative often has to reconcile budget, operations, schedule, risk, and procurement requirements before a complete design exists. I help document the requested outcome, affected systems, available evidence, review milestones, and engineering deliverables needed for the next owner decision.",
+      },
+      {
+        heading: "Create Comparable Procurement Inputs",
+        body: "Engineering proposals are easier to compare when they share a clear basis: disciplines, deliverables, assumptions, exclusions, site visits, existing-condition responsibilities, coordination boundaries, and comment-response expectations. I can review the available package and identify questions that should be resolved before selection.",
+      },
+      {
+        heading: "Maintain a Traceable Decision Record",
+        body: "Owner-side coordination benefits from a written record of what was observed, what remains unverified, who owns each decision, and which document is current. That record helps prevent preliminary comments, superseded sketches, or unapproved alternatives from being treated as final direction.",
+      },
+      {
+        heading: "Review Project-Specific Responsibility",
+        body: "Licensure, firm authorization, sealing responsibility, and jurisdictional requirements are confirmed for the actual project and discipline before commitment. I do not treat a general capability statement as proof that every scope can be performed in every location.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Engineering procurement information", href: "/procurement/" },
+      { label: "Submit an RFP or RFQ package", href: "/procurement/submit-rfp-rfq/" },
+      { label: "Engineering process", href: "/engineering-process/" },
+      { label: "Who Apex Grid works with", href: "/who-we-work-with/" },
+    ],
+    faqs: [
+      { question: "What can an owner representative send for an initial review?", answer: "Send the project location, owner objectives, current drawings and reports, procurement schedule, requested disciplines, known constraints, and the decision or deliverable the owner needs next." },
+      { question: "Can Apex Grid help define an engineering RFP scope?", answer: "Yes. I can review available project information and identify disciplines, deliverables, assumptions, coordination points, and unresolved inputs that should be addressed in the solicitation." },
+      { question: "Does owner-side engineering review replace the engineer of record?", answer: "No. Advisory or scope review does not transfer the professional responsibility assigned to the engineer of record or other project participants. Responsibilities must be stated for the specific engagement." },
+      { question: "How are jurisdictional requirements handled?", answer: "The authority having jurisdiction controls its current requirements and approval decisions. I identify known questions and verify project-specific professional authorization before committing to regulated work." },
+    ],
+    cta: "Request an Owner-Side Engineering Estimate",
+    ctaHref: "/estimate/",
+  },
+  {
+    slug: "construction-managers",
+    title: "Engineering Support for Construction Managers | Apex Grid",
+    description: "Engineering coordination support for construction managers handling existing conditions, RFIs, submittals, field changes, and permit documentation.",
+    h1: "Engineering Support for Construction Managers",
+    kicker: "Engineering for Construction Management",
+    lede: "I support construction managers by turning project questions into reviewable engineering inputs. Clear location references, current documents, verified field evidence, and an explicit decision request help the responsible design team respond without guessing.",
+    sections: [
+      {
+        heading: "Organize Existing-Condition Evidence",
+        body: "When field conditions differ from the issued documents, I need the exact location, current sheet references, dimensions, oriented photos, observed materials, access limitations, and the question requiring review. The construction manager can improve response quality by separating verified observations from proposed solutions.",
+      },
+      {
+        heading: "Route RFIs and Submittals to the Right Discipline",
+        body: "A field issue may affect structure, HVAC, electrical, plumbing, architecture, fire protection, civil work, or several disciplines at once. I help define the engineering interface and document which parties must coordinate before a response is treated as construction direction.",
+      },
+      {
+        heading: "Control Revisions and Superseded Information",
+        body: "Schedule pressure makes document control critical. Responses should identify the governing drawings, affected details, assumptions, and whether a formal revision or permit resubmittal is required. Preliminary discussions and superseded sketches should not remain in the active field set.",
+      },
+      {
+        heading: "Plan Around Review Dependencies",
+        body: "Response timing depends on the quality of the record, complexity of the issue, affected disciplines, site access, responsible-professional review, and jurisdictional process. I define the needed inputs and review path rather than promise a universal turnaround.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Contractor engineering resources", href: "/resources/contractors/" },
+      { label: "Construction RFI support", href: "/engineering-intent/construction-rfi-submittal-support/" },
+      { label: "Engineering for general contractors", href: "/who-we-work-with/general-contractors/" },
+      { label: "Who Apex Grid works with", href: "/who-we-work-with/" },
+    ],
+    faqs: [
+      { question: "What information should accompany a construction RFI?", answer: "Include the exact location, current drawing references, verified condition, clear photos and dimensions, affected work, schedule context, and the specific decision requested. Identify proposed solutions separately from observed facts." },
+      { question: "Can a construction manager authorize an engineering field change?", answer: "Authorization depends on the contracts and assigned professional responsibilities. Engineering changes require review by the responsible parties and should not be inferred from an informal discussion." },
+      { question: "When does a field response require revised permit documents?", answer: "That depends on the nature of the change and the authority having jurisdiction. The design team should evaluate whether calculations, drawings, deferred-submittal records, or a formal permit revision are required." },
+      { question: "Does Apex Grid promise a fixed RFI turnaround?", answer: "No. Timing depends on complete inputs, issue complexity, affected disciplines, field verification, professional review, and current workload. I will identify missing information and the practical review path." },
+    ],
+    cta: "Request a Construction Support Estimate",
+    ctaHref: "/estimate/",
+  },
+  {
+    slug: "portfolio-clients",
+    title: "Engineering Support for Property Portfolios | Apex Grid",
+    description: "Consistent engineering records, condition review, repair design, and capital-project support for teams managing portfolios of existing properties.",
+    h1: "Engineering Support for Portfolio Clients",
+    kicker: "Engineering for Property Portfolios",
+    lede: "I help portfolio teams apply a consistent engineering process across existing properties without pretending every asset has the same conditions. Shared intake standards and decision records make site-specific work easier to scope, compare, and prioritize.",
+    sections: [
+      {
+        heading: "Standardize Intake Across Existing Assets",
+        body: "A portfolio program benefits from one repeatable intake: property address, building use and age, affected area, observed condition, available drawings, prior reports, maintenance history, photographs, and the business decision the review must support. Consistent inputs make differences between properties more visible.",
+      },
+      {
+        heading: "Support Capital Planning With Defined Evidence",
+        body: "Condition observations can inform repair planning and capital priorities when limitations are clear. I distinguish visual observations, available records, calculations, concealed conditions, and items requiring further investigation so the owner can use the work for the decision it was prepared to support.",
+      },
+      {
+        heading: "Coordinate Repairs and System Replacements",
+        body: "Portfolio projects may involve structural repairs, rooftop equipment, electrical capacity, plumbing changes, drainage, tenant improvements, accessibility, or permit corrections. I define the assigned engineering scope and interfaces for each property rather than applying one generic solution across the portfolio.",
+      },
+      {
+        heading: "Preserve Site-Specific Accountability",
+        body: "Standards can be shared, but conclusions remain tied to the actual property, records, jurisdiction, and responsible professionals. Each engagement confirms location-specific scope, authorization, and deliverables before work proceeds.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Property-manager resources", href: "/resources/property-managers/" },
+      { label: "Engineering for facility managers", href: "/who-we-work-with/facility-managers/" },
+      { label: "Engineering for property owners", href: "/who-we-work-with/property-owners/" },
+      { label: "Who Apex Grid works with", href: "/who-we-work-with/" },
+    ],
+    faqs: [
+      { question: "How should a portfolio team request engineering across several properties?", answer: "Use a consistent property intake, then identify the specific condition, decision, records, and requested deliverable at each site. I can help separate shared program standards from property-specific engineering." },
+      { question: "Can one condition assessment represent an entire portfolio?", answer: "No. A review is limited to the assets, areas, records, and conditions actually evaluated. Sampling can support a defined program decision only when its limits are explicit." },
+      { question: "Can Apex Grid rank portfolio repairs by urgency?", answer: "Engineering observations can help identify condition significance and investigation needs within the agreed scope. Owners must combine that information with operations, occupancy, budget, and other professional advice." },
+      { question: "Are engineering standards identical in every portfolio market?", answer: "No. Codes, amendments, climate loads, site conditions, utilities, and professional authorization vary. Shared standards still require project-specific review." },
+    ],
+    cta: "Request a Portfolio Engineering Estimate",
+    ctaHref: "/estimate/",
+  },
+  {
+    slug: "national-accounts",
+    title: "Engineering Support for National Accounts | Apex Grid",
+    description: "Program-level engineering coordination for national account teams managing recurring projects, vendors, standards, and site-specific requirements.",
+    h1: "Engineering Support for National Accounts",
+    kicker: "Engineering for National Programs",
+    lede: "I help national account teams create a consistent engineering intake and coordination process while preserving the site-specific review each project requires. The goal is clearer scope and records across markets, not unsupported claims of identical coverage everywhere.",
+    sections: [
+      {
+        heading: "Create a Program-Level Engineering Playbook",
+        body: "A useful program defines project types, decision owners, standard source documents, expected deliverables, naming conventions, review milestones, escalation paths, and record retention. I help identify where engineering fits within that process and which inputs remain site-specific.",
+      },
+      {
+        heading: "Adapt Standards to Each Location",
+        body: "Prototype plans, preferred equipment, and standard details can improve consistency, but local loads, existing conditions, utilities, codes, amendments, permit procedures, and responsible-professional requirements still control the actual engineering approach. Each assignment receives its own scope review.",
+      },
+      {
+        heading: "Coordinate Vendors and Project Teams",
+        body: "National programs often involve owners, account managers, architects, contractors, equipment vendors, landlords, and local reviewers. I define the engineering interfaces assigned to Apex Grid and document unresolved dependencies so a vendor assumption does not silently become a design decision.",
+      },
+      {
+        heading: "Report on Work Without Overstating Coverage",
+        body: "Program reporting can track intake status, missing information, review milestones, and deliverables. Availability, discipline, licensure, firm authorization, and sealing responsibility are verified for each project before commitment rather than inferred from the size of the overall program.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Engineering for multi-site clients", href: "/who-we-work-with/multi-site-clients/" },
+      { label: "Engineering capabilities", href: "/capabilities/" },
+      { label: "Licensing and project coverage", href: "/licensing/" },
+      { label: "Who Apex Grid works with", href: "/who-we-work-with/" },
+    ],
+    faqs: [
+      { question: "What is the difference between a national account and a multi-site project?", answer: "A national account usually adds program governance, recurring procurement, standard records, vendor coordination, and reporting across projects. Each individual site still requires its own engineering scope and authorization review." },
+      { question: "Can Apex Grid use one standard design in every state?", answer: "Not without project-specific review. Site conditions, adopted codes, amendments, loads, utilities, equipment, and professional authorization can require changes even when a prototype is consistent." },
+      { question: "How should a national account start an engineering program?", answer: "Start with representative project types, expected annual volume, locations, current standards, source documents, participating vendors, desired deliverables, and the internal decisions the engineering process must support." },
+      { question: "Does a national program guarantee availability in every market?", answer: "No. I confirm capacity, discipline, responsible-professional licensure, firm authorization, and jurisdictional requirements for each assignment before Apex Grid commits." },
+    ],
+    cta: "Request a National Program Estimate",
+    ctaHref: "/estimate/",
   },
 ];
 

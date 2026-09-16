@@ -2949,8 +2949,17 @@ function clientPage(page: ClientPage): string {
     provider: { "@id": `${SITE}/#business` },
     serviceType: "Engineering Consulting",
   };
+  const faqSchema = page.faqs ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: page.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  } : null;
   const others = CLIENT_PAGES.filter((p) => p.slug !== page.slug).slice(0, 4);
-  const contextualInbound = `<p class="note"><a href="/engineering-intent/construction-rfi-submittal-support/">Construction RFI and submittal engineering support</a> can help when a client-side project question needs a documented discipline review.</p>`;
+  const contextualInbound = `<div class="container"><p class="note"><a href="/engineering-intent/construction-rfi-submittal-support/">Construction RFI and submittal engineering support</a> can help when a client-side project question needs a documented discipline review.</p></div>`;
   const body = `
 ${breadcrumb(crumbs)}
 ${contextualInbound}
@@ -2958,12 +2967,15 @@ ${contextualInbound}
   <p class="kicker">${esc(page.kicker)}</p>
   <h1>${esc(page.h1)}</h1>
   <p class="lede">${esc(page.lede)}</p>
+  <p class="byline">By Jeremy Mills, CEO &amp; Founder, Apex Grid Engineering — USAF Veteran</p>
 </div></section>
 ${page.sections.map((s) => `
 <section class="block"><div class="container">
   <h2>${esc(s.heading)}</h2>
   <div class="prose"><p>${esc(s.body)}</p></div>
 </div></section>`).join("")}
+${page.relatedLinks ? `<section class="block"><div class="container"><h2>Related Engineering Resources</h2><ul>${page.relatedLinks.map((related) => `<li><a href="${esc(related.href)}">${esc(related.label)}</a></li>`).join("")}</ul></div></section>` : ""}
+${page.faqs ? `<section class="block faq"><div class="container"><h2>Frequently Asked Questions</h2>${page.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>` : ""}
 <section class="block"><div class="container">
   <h2>Other <em>Clients We Serve</em></h2>
   <div class="grid2">
@@ -2979,7 +2991,7 @@ ${page.sections.map((s) => `
     title: page.title,
     description: page.description,
     canonical: `${SITE}/who-we-work-with/${page.slug}/`,
-    schemaJson: [orgSchema, svcSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [orgSchema, svcSchema, ...(faqSchema ? [faqSchema] : []), breadcrumbSchema(crumbs)],
     body,
   });
 }
