@@ -52,6 +52,12 @@ import {
 import { ALL_INDUSTRIES } from "../src/data/industries";
 import { RESOURCE_ARTICLES, RESOURCE_DISCIPLINES, disciplineOf, resourceUrl, type ResourceArticle, type ResourceDiscipline } from "./resources";
 import { AUDIENCE_RESOURCE_HUBS, audienceResourceHubPage, AUDIENCE_RESOURCE_AUTHOR } from "./audience-resource-hubs";
+import {
+  PRIORITY_MARKET_HUBS,
+  PRIORITY_MARKET_AUTHOR,
+  priorityMarketHubPage,
+  priorityMarketHubUrl,
+} from "./priority-market-hubs";
 import { GLOSSARY_TERMS, sortedGlossaryTerms, glossaryByLetter, relatedGlossaryTerms, type GlossaryTerm } from "./glossary";
 import { APEX_GRID_BUSINESS_SCHEMA } from "../src/lib/business-schema";
 import {
@@ -1835,6 +1841,7 @@ function assertNoMarkupCity(city: CityData) {
 function statePage(state: StateData, cities: CityData[], directory: CityDirectory): string {
   const stateCities = cities.filter((c) => c.stateSlug === state.slug && isReviewedCity(c));
   const directoryCities = eligibleDirectoryCities(state, directory, cities);
+  const priorityMarkets = PRIORITY_MARKET_HUBS.filter((page) => page.stateSlug === state.slug);
   const specialtyLocationPages = LOCATION_SERVICE_PAGES.filter((p) => p.stateSlug === state.slug);
   const specialtyCityRoots = [...new Set(specialtyLocationPages.map((p) => p.citySlug))]
     .filter((slug) => !stateCities.some((city) => city.slug === slug));
@@ -1859,6 +1866,13 @@ ${breadcrumb(crumbs)}
   ).join("")}
   </div>
 </div></section>
+${priorityMarkets.length ? `<section class="block"><div class="container">
+  <h2>Priority ${esc(state.name)} <em>Markets</em></h2>
+  <p class="prose">Use these regional and city hubs to organize jurisdiction, existing-condition, discipline, and project-scope questions before requesting engineering.</p>
+  <div class="grid2">${priorityMarkets.map((market) =>
+    `<a class="card" href="${priorityMarketHubUrl(market)}"><div class="label">${esc(market.market)}</div><h3>${esc(market.market)} Engineering Services</h3><p>${esc(market.description)}</p></a>`
+  ).join("")}</div>
+</div></section>` : ""}
 ${state.slug === "hawaii" ? `<section class="block"><div class="container">
   <h2>Engineering Coverage in <em>Honolulu</em></h2>
   <div class="grid2">
@@ -2615,6 +2629,9 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   }
   for (const lsp of LOCATION_SERVICE_PAGES) {
     locationsUrls.push(u(`${SITE}/locations/${lsp.stateSlug}/${lsp.citySlug}/${lsp.serviceSlug}/`, today, "monthly", "0.7"));
+  }
+  for (const page of PRIORITY_MARKET_HUBS) {
+    locationsUrls.push(u(`${SITE}${priorityMarketHubUrl(page)}`, today, "monthly", "0.8"));
   }
   // Batch 2 researched state and service owners are appended after
   // generic location candidates; the sitemap dedupe pass below keeps each
@@ -5339,6 +5356,26 @@ async function main() {
     fs.mkdirSync(dir, { recursive: true });
     const city = cities.find((candidate) => candidate.stateSlug === lsp.stateSlug && candidate.slug === lsp.citySlug);
     fs.writeFileSync(path.join(dir, "index.html"), locationServicePage(lsp, city));
+    pages++;
+  }
+
+  // Roadmap Phase 8 priority regional and city hubs. Render after generic
+  // location owners so these reviewed pages replace any directory placeholders.
+  for (const market of PRIORITY_MARKET_HUBS) {
+    const route = priorityMarketHubUrl(market);
+    const dir = path.join(PUBLIC, route.replace(/^\/|\/$/g, ""));
+    fs.mkdirSync(dir, { recursive: true });
+    const html = priorityMarketHubPage(market);
+    if (
+      !html.includes(`By ${PRIORITY_MARKET_AUTHOR}`)
+      || !html.includes(`rel="canonical" href="${SITE}${route}"`)
+      || !html.includes('"@type":"FAQPage"')
+      || !html.includes('"@type":"CollectionPage"')
+      || !html.includes('href="/estimate/"')
+    ) {
+      throw new Error(`SEO assertion failed: incomplete priority market hub ${route}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
     pages++;
   }
 
