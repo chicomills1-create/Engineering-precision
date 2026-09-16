@@ -671,7 +671,7 @@ export const PHASE0_BATCH2_AEO_PAGES: Phase0AeoPage[] = [
       },
     ],
     extraLinks: [
-      { label: "Retaining wall engineering inputs", href: "/resources/retaining-wall-engineering-inputs-design/" },
+      { label: "Retaining wall engineering inputs", href: "/resources/phase-0/retaining-wall-engineering-inputs-design/" },
       { label: "Structural engineering services", href: "/services/structural/" },
       { label: "Engineering calculations for a permit", href: "/answers/what-are-engineering-calculations-for-a-permit/" },
     ],
