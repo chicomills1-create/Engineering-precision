@@ -20,6 +20,8 @@ export const LEGACY_LOCATION_REDIRECTS: Readonly<Record<string, string>> = {
   "/locations/new-york/new-york-city/structural-engineering/": "/locations/new-york/new-york/structural-engineering/",
   "/locations/new-york/new-york-city/civil-engineering/": "/locations/new-york/new-york/civil-engineering/",
   "/locations/new-york/new-york-city/energy-code-compliance/": "/locations/new-york/new-york/energy-code-compliance/",
+  "/locations/new-york/new-york-city/energy-compliance/": "/locations/new-york/new-york/energy-compliance/",
+  "/locations/new-york/new-york-city/pe-stamped-drawings/": "/locations/new-york/new-york/pe-stamped-drawings/",
   "/locations/pennsylvania/bethel-park/": "/locations/pennsylvania/bethel-park-municipality/",
   "/locations/pennsylvania/monroeville/": "/locations/pennsylvania/monroeville-municipality/",
   "/locations/pennsylvania/murrysville/": "/locations/pennsylvania/murrysville-municipality/",

@@ -162,6 +162,11 @@ async function main() {
     if (page.redirect) redirects++;
   }
   const sitemap = sitemapUrls();
+  const redirectsFile = path.join(PUBLIC, "legacy-location-redirects.json");
+  const registeredRedirects = fs.existsSync(redirectsFile)
+    ? JSON.parse(fs.readFileSync(redirectsFile, "utf8")) as Record<string, string>
+    : {};
+  const sitemapRedirectUrls = sitemap.filter((url) => Object.hasOwn(registeredRedirects, url));
   const internalLinksToNoindex = [...pages.values()].reduce(
     (total, page) => total + page.internalLinks.filter((target) => pages.get(target)?.noindex).length,
     0,
@@ -176,7 +181,8 @@ async function main() {
   const failures: string[] = [];
   for (const url of sitemap) {
     const page = pages.get(url);
-    if (!page) failures.push(`sitemap URL has no HTML corpus page: ${url}`);
+    if (Object.hasOwn(registeredRedirects, url)) failures.push(`sitemap URL is registered to redirect: ${url} -> ${registeredRedirects[url]}`);
+    else if (!page) failures.push(`sitemap URL has no HTML corpus page: ${url}`);
     else if (page.noindex) failures.push(`sitemap URL is noindex: ${url}`);
     else if (page.redirect) failures.push(`sitemap URL is a redirect: ${url}`);
     else if (!page.canonical || page.canonical !== url) failures.push(`sitemap URL is not self-canonical: ${url}`);
@@ -205,6 +211,7 @@ async function main() {
     indexablePages: [...pages.values()].filter((page) => !page.noindex && !page.redirect).length,
     noindexPages: noindex,
     redirectPages: redirects,
+    sitemapRedirectUrls: sitemapRedirectUrls.length,
     duplicateCanonicalGroups: duplicateGroups.length,
     sitemapOmissions: omitted.length,
     failures: failures.length,

@@ -1,10 +1,10 @@
 {
   "generatedAt": "deterministic",
   "scope": "public/locations/**/*.html",
-  "corpusPages": 21029,
-  "indexablePages": 20986,
+  "corpusPages": 21031,
+  "indexablePages": 20980,
   "noindexPages": 26,
-  "redirectPages": 17,
+  "redirectPages": 25,
   "thinWordLimit": 400,
   "thinIndexablePages": 0,
   "thinIndexableSamples": [],

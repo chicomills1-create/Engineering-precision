@@ -829,7 +829,7 @@ const missouriBatch4: Batch2StateExpansion = {
   },
   metros: [
     { slug: "kansas-city", name: "Kansas City", county: "Jackson County", services: kansasCity },
-    { slug: "st-louis", name: "St. Louis", county: "City of St. Louis", services: stLouis },
+    { slug: "saint-louis", name: "St. Louis", county: "City of St. Louis", services: stLouis },
     { slug: "springfield", name: "Springfield", county: "Greene County", services: springfield },
     { slug: "columbia", name: "Columbia", county: "Boone County", services: columbia },
     { slug: "independence", name: "Independence", county: "Jackson County", services: independence },

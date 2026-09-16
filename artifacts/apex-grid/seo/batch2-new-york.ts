@@ -83,7 +83,7 @@ const batch2NewYork: Batch2StateExpansion = {
   },
   metros: [
     {
-      slug: "new-york-city",
+      slug: "new-york",
       name: "New York City",
       county: "Bronx, Kings, New York, Queens, and Richmond Counties",
       services: [
