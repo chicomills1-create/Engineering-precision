@@ -45,6 +45,7 @@
 - [React SEO prerender routing](react-seo-prerender-routing.md) — validate final prerendered HTML after SSR, and resolve slashless routes to exact directory indexes before SPA fallback.
 - [Prerendered AEO schema](prerendered-aeo-schema.md) — React effect-based JSON-LD is absent from static HTML; critical FAQ schema must render during SSR and match visible answers.
 - [SEO generator path ownership](seo-generator-path-ownership.md) — seo:generate can overwrite React-owned hub HTML; run the production build afterward to restore canonical prerenders.
+- [SEO generator cleanup ordering](seo-generator-cleanup-ordering.md) — write nested static additions only after any parent-tree cleanup/rebuild, or sitemap URLs can survive while their HTML and inbound links are deleted.
 - [Promoted city evidence inheritance](promoted-city-evidence.md) — specialty location pages can overwrite generic city-service HTML and must preserve the promoted city’s verified source links.
 - [City service slug consistency](city-service-slugs.md) — service-support identifiers must match canonical route slugs; aliases can silently keep valid city pages noindex.
 - [Duplicate city filenames](duplicate-city-filenames.md) — same-name cities in different states need state-qualified module filenames while preserving their canonical city slug.

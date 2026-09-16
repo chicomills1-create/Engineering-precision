@@ -64,6 +64,7 @@ import {
   phase9Page,
   phase9Url,
 } from "./phase9-industry-service";
+import { PHASE11_PROJECT_CASE_STUDIES, phase11Page, phase11Url } from "./phase11-project-case-studies";
 import { GLOSSARY_TERMS, sortedGlossaryTerms, glossaryByLetter, relatedGlossaryTerms, type GlossaryTerm } from "./glossary";
 import { APEX_GRID_BUSINESS_SCHEMA } from "../src/lib/business-schema";
 import {
@@ -2569,6 +2570,9 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const cat of PROJECT_CATEGORY_PAGES) {
     solutionsUrls.push(u(`${SITE}/projects/${cat.slug}/`, today, "monthly", "0.7"));
   }
+  for (const project of PHASE11_PROJECT_CASE_STUDIES) {
+    solutionsUrls.push(u(`${SITE}${phase11Url(project)}`, today, "monthly", "0.7"));
+  }
   for (const sp of STATIC_STANDALONE_PAGES) {
     if (sp.sitemapCategory !== "core") {
       solutionsUrls.push(u(`${SITE}/${sp.dir}/`, today, "monthly", "0.8"));
@@ -2576,6 +2580,16 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   }
   for (const mp of MISC_PAGES) {
     solutionsUrls.push(u(`${SITE}/${mp.slug}/`, today, "monthly", "0.8"));
+  }
+  const phase11SitemapEntries = PHASE11_PROJECT_CASE_STUDIES.map((project) => `${SITE}${phase11Url(project)}`);
+  for (const route of phase11SitemapEntries) {
+    const matches = solutionsUrls.filter((entry) => entry.includes(`<loc>${route}</loc>`));
+    if (matches.length !== 1) {
+      throw new Error(`SEO assertion failed: Phase 11 route must occur exactly once in sitemap-solutions.xml: ${route} (${matches.length})`);
+    }
+  }
+  if (solutionsUrls.filter((entry) => phase11SitemapEntries.some((route) => entry.includes(`<loc>${route}</loc>`))).length !== 8) {
+    throw new Error("SEO assertion failed: sitemap-solutions.xml must contain exactly eight Phase 11 case-study routes");
   }
 
   // ── Tier 5: Resources (blog, guides, resource articles, glossary) ────────
@@ -5377,6 +5391,7 @@ async function main() {
     fs.writeFileSync(path.join(dir, "index.html"), html);
     pages++;
   }
+
   // Link each new specialty page from an established family page. This keeps
   // discovery contextual without changing the established page canonicals.
   for (const page of PHASE9_INDUSTRY_SERVICE_PAGES) {
@@ -5800,6 +5815,42 @@ async function main() {
     fs.mkdirSync(catDir, { recursive: true });
     fs.writeFileSync(path.join(catDir, "index.html"), projectCategoryPage(cat));
     pages++;
+  }
+
+  // Phase 11 portfolio case studies must be generated after the project tree
+  // is rebuilt so the cleanup above cannot delete the detail routes or inbound links.
+  const phase11ImageSourceDir = path.resolve(__dirname, "../../../attached_assets/generated_images");
+  const phase11ImageOutputDir = path.join(PUBLIC, "images", "case-studies");
+  fs.mkdirSync(phase11ImageOutputDir, { recursive: true });
+  for (const project of PHASE11_PROJECT_CASE_STUDIES) {
+    const route = phase11Url(project);
+    const dir = path.join(PUBLIC, route.replace(/^\/|\/$/g, ""));
+    const imageName = path.basename(project.image);
+    const imageSource = path.join(phase11ImageSourceDir, imageName);
+    if (!fs.existsSync(imageSource)) throw new Error(`SEO assertion failed: missing Phase 11 source image ${imageSource}`);
+    fs.copyFileSync(imageSource, path.join(phase11ImageOutputDir, imageName));
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase11Page(project);
+    if (!html.includes(`By Jeremy Mills, CEO & Founder, Apex Grid Engineering — USAF Veteran`)
+      || !html.includes(`rel="canonical" href="${SITE}${route}"`)
+      || (html.match(/<h1(?:\s[^>]*)?>/g) ?? []).length !== 1
+      || (html.match(/"@type":"FAQPage"/g) ?? []).length !== 1
+      || !html.includes('"@type":"Article"')
+      || !html.includes('"@type":"BreadcrumbList"')
+      || !html.includes('href="/estimate/"')
+      || !html.includes("<img ")) {
+      throw new Error(`SEO assertion failed: incomplete Phase 11 project case study ${route}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+
+    const parentRoute = project.links.find(link => link.href.startsWith("/projects/"))?.href ?? "/projects/";
+    const parentFile = path.join(PUBLIC, parentRoute.replace(/^\/|\/$/g, ""), "index.html");
+    if (!fs.existsSync(parentFile)) throw new Error(`SEO assertion failed: missing Phase 11 inbound parent ${parentRoute}`);
+    const parentHtml = fs.readFileSync(parentFile, "utf8");
+    const marker = `phase11-inbound-${project.slug}`;
+    const inbound = `<section class="block phase11-inbound" id="${marker}"><div class="container"><h2>Selected <em>case study</em></h2><p><a href="${route}">${project.title}</a></p></div></section>`;
+    fs.writeFileSync(parentFile, parentHtml.replace("</body>", `${inbound}</body>`));
   }
 
   // Static standalone pages (engineering-reports, etc.)
