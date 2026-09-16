@@ -492,10 +492,12 @@ const BASE_RESOURCE_ARTICLES: ResourceArticle[] = [
 <p>Plumbing engineering covers domestic cold and hot water distribution, sanitary waste and vent systems, storm drainage, gas piping, and specialty systems like medical gas, laboratory gas, or commercial kitchen utilities. Plumbing engineers size piping systems, verify code-required fixture counts, coordinate roof drain locations with structural, and design specialty systems to applicable standards.</p>
 
 <h2>Why Integrated MEP Matters</h2>
-<p>Mechanical, electrical, and plumbing systems share the same space inside a building — above ceilings, in walls, in mechanical rooms and electrical rooms. When these systems are coordinated by a single MEP engineering team (or a tightly coordinated set of disciplines), conflicts are caught on paper instead of in the field. Clash detection, coordinated routing, and shared equipment room design are all part of what integrated MEP engineering provides.</p>
+<p>Mechanical, electrical, and plumbing systems share the same space inside a building — above ceilings, in walls, in mechanical rooms and electrical rooms. When these systems are coordinated by a single MEP engineering team (or a tightly coordinated set of disciplines), conflicts are caught on paper instead of in the field. Our guide to <a href="/answers/mep-engineering-scope-of-work/">MEP engineering scope and deliverables</a> explains how those responsibilities should be defined.</p>
+
+<p>Project teams comparing roles can review <a href="/answers/mep-engineer-vs-mechanical-engineer/">MEP engineers versus mechanical engineers</a>. Specialized facilities should define their criteria early; see the requirements for <a href="/answers/cleanroom-mep-engineering-requirements/">cleanroom MEP engineering</a> and <a href="/answers/medical-office-mep-requirements/">medical office MEP engineering</a>.</p>
 
 <h2>When Do You Need MEP Engineering?</h2>
-<p>Any project that modifies existing building systems or installs new ones requires MEP engineering for the permit. This includes commercial renovations, tenant improvements, restaurant build-outs, healthcare clinic fit-outs, multifamily new construction, industrial facility changes, equipment upgrades, and virtually all new commercial construction. MEP documents — stamped by licensed professional engineers — are part of every commercial building permit submittal.</p>
+<p>Projects that modify building systems may require MEP engineering for permit, depending on scope and jurisdiction. Commercial renovations, tenant improvements, restaurants, clinics, multifamily work, industrial changes, and equipment upgrades commonly need coordinated documents. Review <a href="/answers/mep-permit-drawings-requirements/">what MEP permit drawings may need to include</a> before setting the submission scope.</p>
     `,
   },
 
@@ -929,6 +931,8 @@ const LEGACY_RESOURCE_ARTICLES: ResourceArticle[] = [
 
 <h2>How to Get an Accurate Quote</h2>
 <p>To receive a meaningful fee proposal, provide the MEP firm with: project address and jurisdiction, gross square footage and number of stories, occupancy type, anticipated HVAC system type, existing conditions and as-built drawings (for renovations), and target permit submission date. A reputable MEP firm will return a fee proposal within a week.</p>
+
+<p>Use project-specific cost guidance for <a href="/answers/vrf-vs-traditional-hvac-cost/">VRF versus traditional HVAC</a>, <a href="/answers/cleanroom-mep-engineering-requirements/">cleanroom systems</a>, and <a href="/answers/medical-office-mep-requirements/">medical office MEP</a>. When the wider site scope is still being assembled, review <a href="/answers/geotechnical-engineering-cost/">geotechnical fees and investigation scope</a> and <a href="/answers/civil-engineering-cost-commercial-project/">commercial civil engineering costs</a> separately.</p>
     `,
   },
   {

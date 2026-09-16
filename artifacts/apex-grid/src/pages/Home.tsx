@@ -438,6 +438,21 @@ export default function Home() {
                 );
               })}
             </div>
+            <p className="mx-auto mt-10 max-w-4xl text-center text-sm leading-7 text-muted-foreground">
+              Planning a coordinated project? Start with what an{" "}
+              <a href="/answers/mep-engineering-scope-of-work/" className="text-foreground underline decoration-primary/60 underline-offset-4 hover:text-primary">
+                MEP engineering scope includes
+              </a>
+              , then review realistic scope drivers for{" "}
+              <a href="/answers/civil-engineering-cost-commercial-project/" className="text-foreground underline decoration-primary/60 underline-offset-4 hover:text-primary">
+                commercial civil engineering costs
+              </a>{" "}
+              and{" "}
+              <a href="/answers/geotechnical-engineering-cost/" className="text-foreground underline decoration-primary/60 underline-offset-4 hover:text-primary">
+                geotechnical engineering fees
+              </a>
+              .
+            </p>
           </div>
         </div>
       </section>

@@ -8,6 +8,7 @@
 
 import { PHASE0_BATCH3_PROJECT_PAGES_A } from "./phase0-batch3-project-pages-a";
 import { PHASE0_BATCH3_PROJECT_PAGES_B } from "./phase0-batch3-project-pages-b";
+import { WAVE_B_ANSWER_PAGES } from "./wave-b-answer-pages";
 
 export type Phase0Faq = { question: string; answer: string };
 export type Phase0AeoSection = { heading: string; body: string; bullets?: string[] };
@@ -26,6 +27,12 @@ export type Phase0AeoPage = {
   serviceHref?: string;
   extraLinks?: Phase0AeoLink[];
   founderNote?: string;
+  /** AEO-enhanced pages put a 40–60 word quotable answer directly below the byline. */
+  directAnswer?: string;
+  /** Compact citable facts rendered as a semantic table. */
+  facts?: Array<{ label: string; value: string }>;
+  /** Emits HowTo JSON-LD from the visible question-led process sections. */
+  howTo?: boolean;
 };
 
 export const PHASE0_AEO_PAGES: Phase0AeoPage[] = [
@@ -732,6 +739,7 @@ export const PHASE0_BATCH3_PROJECT_PAGES: Phase0AeoPage[] = [
   ...PHASE0_BATCH3_PROJECT_PAGES_B,
 ];
 PHASE0_AEO_PAGES.push(...PHASE0_BATCH3_PROJECT_PAGES);
+PHASE0_AEO_PAGES.push(...WAVE_B_ANSWER_PAGES);
 
 export type Phase0ServicePage = {
   slug: string;

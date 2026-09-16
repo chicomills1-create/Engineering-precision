@@ -4,6 +4,10 @@
 
 This file is a concise map of canonical public information. It does not imply local offices, guaranteed coverage, or that every listed service is available for every project; scope and jurisdiction requirements should be confirmed with Apex Grid.
 
+## Licensing
+- Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska.
+- The responsible professional's current license, firm authorization, discipline, and project-jurisdiction requirements are confirmed before work begins.
+
 ## High-value sections
 - Services: https://apexgrideng.com/services
 - Commercial engineering search hub: https://apexgrideng.com/engineering-intent/engineering-near-me/

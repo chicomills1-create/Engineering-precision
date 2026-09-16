@@ -3,9 +3,9 @@
   "policy": "National guidance only; no Alaska, county guides, near-me pages, invented local records, or inline location pricing.",
   "counts": {
     "servicePages": 2,
-    "aeoPages": 47,
+    "aeoPages": 57,
     "phase7AeoPages": 101,
-    "answerLibraryPages": 148,
+    "answerLibraryPages": 158,
     "phase7Clusters": {
       "Cost and pricing": 20,
       "Project timelines": 18,
@@ -19,7 +19,7 @@
     "metroPlanCheckPlaybooks": 10,
     "supportingResources": 72,
     "collectionHubs": 3,
-    "totalPhase0Pages": 184
+    "totalPhase0Pages": 194
   },
   "aeoUpdatedDate": "2026-09-15",
   "peSourceStates": [

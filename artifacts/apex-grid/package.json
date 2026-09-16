@@ -14,6 +14,7 @@
     "seo:test:hub-preservation": "tsx --test seo/route-ownership.test.ts",
     "seo:check:bylines": "tsx seo/check-blog-authorship.ts",
     "seo:test:phase0": "tsx --test seo/phase0-corpus.test.ts",
+    "seo:test:wave-b": "tsx --test seo/wave-b-answer-pages.test.ts",
     "seo:test:phase1": "tsx --test seo/phase1-metros.test.ts",
     "seo:test:phase2": "tsx --test seo/phase2-metros.test.ts",
     "seo:test:phase3": "tsx --test seo/phase3-metros.test.ts",

@@ -484,6 +484,10 @@ function writeLlmsTxt() {
 
 This file is a concise map of canonical public information. It does not imply local offices, guaranteed coverage, or that every listed service is available for every project; scope and jurisdiction requirements should be confirmed with Apex Grid.
 
+## Licensing
+- Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska.
+- The responsible professional's current license, firm authorization, discipline, and project-jurisdiction requirements are confirmed before work begins.
+
 ## High-value sections
 - Services: ${SITE}/services
 - Commercial engineering search hub: ${SITE}/engineering-intent/engineering-near-me/
@@ -931,6 +935,9 @@ function phase0ArticleFrame(
     author?: string;
     founderNote?: string;
     marker?: string;
+    directAnswer?: string;
+    facts?: Array<{ label: string; value: string }>;
+    howTo?: boolean;
   },
 ): string {
   const crumbs = [{ name: "Home", href: "/" }, { name: opts.h1 }];
@@ -956,21 +963,42 @@ function phase0ArticleFrame(
     author: authorSchema,
     publisher: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
   };
+  const howToSchema = opts.howTo ? {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: opts.h1,
+    description: opts.directAnswer ?? opts.answer,
+    step: opts.sections.map((section, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: section.heading,
+      text: section.body,
+      url: `${SITE}${opts.canonical}#step-${index + 1}`,
+    })),
+  } : undefined;
+  const hero = opts.directAnswer
+    ? `<section class="hero"><div class="container"><p class="kicker">${esc(opts.kicker)}</p><h1>${esc(opts.h1)}</h1>
+      <p class="note">By ${esc(author)} · Updated ${PHASE0_UPDATED_DATE}</p>
+      <div class="direct-answer" aria-label="Direct answer"><p>${esc(opts.directAnswer)}</p></div>
+      ${opts.founderNote ? `<p class="founder-note">${esc(opts.founderNote)}</p>` : ""}
+    </div></section>`
+    : `<section class="hero"><div class="container"><p class="kicker">${esc(opts.kicker)}</p><h1>${esc(opts.h1)}</h1><p class="lede">${esc(opts.answer)}</p>
+      <p class="note">By ${esc(author)} · Updated ${PHASE0_UPDATED_DATE}</p>${opts.founderNote ? `<p class="founder-note">${esc(opts.founderNote)}</p>` : ""}
+    </div></section>`;
   const body = `<main ${opts.marker ? `data-${opts.marker}="true"` : 'data-phase0="true"'}>
   ${breadcrumb(crumbs)}
-  <section class="hero"><div class="container"><p class="kicker">${esc(opts.kicker)}</p><h1>${esc(opts.h1)}</h1><p class="lede">${esc(opts.answer)}</p>
-    <p class="note">By ${esc(author)} · Updated ${PHASE0_UPDATED_DATE}</p>${opts.founderNote ? `<p class="founder-note">${esc(opts.founderNote)}</p>` : ""}
-  </div></section>
-  ${opts.sections.map((section) => `<section class="block"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p>${section.bullets ? `<ul class="scope">${section.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul>` : ""}</div></div></section>`).join("")}
-  ${opts.links?.length ? `<section class="block"><div class="container"><h2>Related Engineering Resources</h2><div class="linkrow">${opts.links.map((link) => `<a href="${esc(link.href)}"${/^https:\/\//.test(link.href) ? ' rel="noopener noreferrer"' : ""}>${esc(link.label)}</a>`).join("")}</div></div></section>` : ""}
-  ${phase0FaqMarkup(opts.faqs)}
-  <section class="ctaband"><div class="container"><h2>Discuss your engineering scope</h2><p>Share the project address, current records, requested deliverable, authority information, and schedule. Apex Grid confirms professional responsibility, availability, and scope before work begins.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
+  ${hero}
+  ${opts.facts?.length ? `<section class="block"><div class="container"><h2>What facts should you use to plan this scope?</h2><div class="prose"><table><thead><tr><th>Planning fact</th><th>Project-specific value</th></tr></thead><tbody>${opts.facts.map((fact) => `<tr><th scope="row">${esc(fact.label)}</th><td>${esc(fact.value)}</td></tr>`).join("")}</tbody></table></div></div></section>` : ""}
+  ${opts.sections.map((section, index) => `<section class="block" id="step-${index + 1}"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p>${section.bullets ? `<ul class="scope">${section.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul>` : ""}</div></div></section>`).join("")}
+  ${opts.links?.length ? `<section class="block"><div class="container"><h2>${opts.directAnswer ? "Which related engineering resources can help?" : "Related Engineering Resources"}</h2><div class="linkrow">${opts.links.map((link) => `<a href="${esc(link.href)}"${/^https:\/\//.test(link.href) ? ' rel="noopener noreferrer"' : ""}>${esc(link.label)}</a>`).join("")}</div></div></section>` : ""}
+  ${opts.directAnswer ? `<section class="block"><div class="container"><h2>What else do project teams ask?</h2><div class="faq">${opts.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></div></section>` : phase0FaqMarkup(opts.faqs)}
+  <section class="ctaband"><div class="container"><h2>${opts.directAnswer ? "Ready to discuss your engineering scope?" : "Discuss your engineering scope"}</h2><p>Share the project address, current records, requested deliverable, authority information, and schedule. Apex Grid confirms professional responsibility, availability, and scope before work begins.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
   </main>`;
   return htmlShell({
     title: opts.title,
     description: opts.description,
     canonical: `${SITE}${opts.canonical}`,
-    schemaJson: [schema, phase0FaqSchema(opts.faqs), breadcrumbSchema(crumbs)],
+    schemaJson: [schema, phase0FaqSchema(opts.faqs), ...(howToSchema ? [howToSchema] : []), breadcrumbSchema(crumbs)],
     body,
   });
 }
@@ -1019,6 +1047,9 @@ function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
     author: PHASE0_JEREMY_AUTHOR,
     founderNote: "cluster" in page ? undefined : page.founderNote,
     marker: "cluster" in page ? "phase7" : undefined,
+    directAnswer: "cluster" in page ? undefined : page.directAnswer,
+    facts: "cluster" in page ? undefined : page.facts,
+    howTo: "cluster" in page ? undefined : page.howTo,
   });
 }
 
@@ -5648,8 +5679,8 @@ async function main() {
     fs.writeFileSync(path.join(dir, "index.html"), html);
     pages++;
   }
-  if (PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length !== 148) {
-    throw new Error(`SEO assertion failed: answer library requires exactly 148 pages (found ${PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length})`);
+  if (PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length !== 158) {
+    throw new Error(`SEO assertion failed: answer library requires exactly 158 pages (found ${PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length})`);
   }
   const peStampDir = path.join(PUBLIC, "pe-stamp");
   fs.mkdirSync(peStampDir, { recursive: true });
@@ -6604,6 +6635,9 @@ function glossaryPage(term: GlossaryTerm): string {
   const relatedServiceLinks = term.relatedServices
     .map((rs) => `<a class="card" href="${esc(rs.href)}"><div class="label">${esc(categoryLabel)}</div><h3>${esc(rs.label)}</h3></a>`)
     .join("");
+  const contextualAnswerLinks = term.answerLinks?.length
+    ? `<p>For project planning, read ${term.answerLinks.map((link) => `<a href="${esc(link.href)}">${esc(link.label)}</a>`).join(" and ")}.</p>`
+    : "";
 
   const definitionSchema = {
     "@context": "https://schema.org",
@@ -6623,7 +6657,7 @@ ${breadcrumb(crumbs)}
 
 <section class="block"><div class="container">
   <h2>What Engineers Mean by <em>${esc(term.term)}</em></h2>
-  <div class="prose"><p>${esc(term.extended)}</p></div>
+  <div class="prose"><p>${esc(term.extended)}</p>${contextualAnswerLinks}</div>
 </div></section>
 
 ${relatedServiceLinks ? `<section class="block"><div class="container">

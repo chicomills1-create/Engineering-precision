@@ -15,6 +15,8 @@ export interface GlossaryTerm {
   relatedTerms: string[];
   /** display labels for related services with URL paths */
   relatedServices: { label: string; href: string }[];
+  /** Contextual answer links rendered inside the explanatory content section. */
+  answerLinks?: { label: string; href: string }[];
 }
 
 export const GLOSSARY_TERMS: GlossaryTerm[] = [
@@ -252,6 +254,10 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     relatedServices: [
       { label: "MEP Engineering", href: "/services/mep" },
       { label: "Mechanical Engineering", href: "/services/mep" },
+    ],
+    answerLinks: [
+      { label: "how engineers design a VRF system", href: "/answers/vrf-system-engineering-design/" },
+      { label: "how VRF cost compares with traditional HVAC", href: "/answers/vrf-vs-traditional-hvac-cost/" },
     ],
   },
 
@@ -953,6 +959,9 @@ export const GLOSSARY_TERMS: GlossaryTerm[] = [
     relatedTerms: ["slab", "foundation", "dead-load", "live-load"],
     relatedServices: [
       { label: "Structural Engineering", href: "/services/structural" },
+    ],
+    answerLinks: [
+      { label: "the post-tensioned concrete design process and cost drivers", href: "/answers/post-tensioned-concrete-design-cost/" },
     ],
   },
 

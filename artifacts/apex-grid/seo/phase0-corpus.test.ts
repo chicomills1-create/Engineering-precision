@@ -10,11 +10,12 @@ import {
   PHASE0_RESOURCE_PAGES,
   PHASE0_SERVICE_PAGES,
 } from "./phase0-corpus";
+import { WAVE_B_ANSWER_PAGES } from "./wave-b-answer-pages";
 
 test("Phase 0 corpus keeps the confirmed page inventory", () => {
   assert.equal(Object.keys(PE_STATE_SOURCE_LINKS).length, 49);
   assert.ok(!Object.hasOwn(PE_STATE_SOURCE_LINKS, "alaska"));
-  assert.equal(PHASE0_AEO_PAGES.length, 47);
+  assert.equal(PHASE0_AEO_PAGES.length, 57);
   assert.equal(PHASE0_SERVICE_PAGES.length, 2);
   assert.equal(PHASE0_PLAN_CHECK_PLAYBOOKS.length, 10);
   assert.ok(PHASE0_RESOURCE_PAGES.length >= 70);
@@ -159,5 +160,38 @@ test("Phase 0 Batch 3 lists ten deduplicated project answer records", () => {
     assert.ok(page.sections?.filter((section) => /\bI(?:'m| ask| look| do| explain| recommend| tell| start| want)\b/.test(section.body)).length >= 2);
     assert.ok(page.faqs.length >= 4 && page.faqs.length <= 6);
     assert.equal(new Set(page.faqs.map((faq) => faq.question)).size, page.faqs.length);
+  }
+});
+
+test("Wave B lists ten bespoke founder answer records", () => {
+  const expectedSlugs = [
+    "mep-engineering-scope-of-work",
+    "mep-engineer-vs-mechanical-engineer",
+    "cleanroom-mep-engineering-requirements",
+    "post-tensioned-concrete-design-cost",
+    "vrf-system-engineering-design",
+    "medical-office-mep-requirements",
+    "vrf-vs-traditional-hvac-cost",
+    "geotechnical-engineering-cost",
+    "civil-engineering-cost-commercial-project",
+    "mep-permit-drawings-requirements",
+  ];
+  assert.deepEqual(WAVE_B_ANSWER_PAGES.map((page) => page.slug), expectedSlugs);
+  assert.deepEqual(expectedSlugs.filter((slug) => PHASE0_AEO_PAGES.some((page) => page.slug === slug)), expectedSlugs);
+  for (const page of WAVE_B_ANSWER_PAGES) {
+    assert.ok(page.title.length >= 50 && page.title.length <= 60, `${page.slug}: title length ${page.title.length}`);
+    assert.ok(page.description.length >= 150 && page.description.length <= 160, `${page.slug}: description length ${page.description.length}`);
+    assert.ok(page.answer.length > 220);
+    assert.ok(page.sections && page.sections.length >= 3);
+    assert.ok(page.sections.every((section) => section.body.length >= 180));
+    assert.ok(page.sections.every((section) => (section.bullets?.length ?? 0) >= 4));
+    assert.ok(page.sections.some((section) => /\bI(?:'m| ask| tell| recommend| discourage| prefer| start)\b/.test(section.body)));
+    assert.match(page.founderNote ?? "", /Jeremy Mills/);
+    assert.match(page.founderNote ?? "", /CEO & Founder/);
+    assert.match(page.founderNote ?? "", /U\.S\. Air Force veteran/);
+    assert.doesNotMatch(page.founderNote ?? "", /Jeremy Mills,\s*PE\b/);
+    assert.ok(page.faqs.length >= 4 && page.faqs.length <= 6);
+    assert.equal(new Set(page.faqs.map((faq) => faq.question)).size, page.faqs.length);
+    assert.ok((page.extraLinks?.length ?? 0) >= 2);
   }
 });
