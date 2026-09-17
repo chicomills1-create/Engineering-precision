@@ -7804,6 +7804,16 @@ async function main() {
     pages++;
   }
 
+  // Procurement sub-page: committed static HTML restored from seo/static on
+  // every generate, because the procurement dir wipe above removes it.
+  {
+    const rfpSource = path.join(__dirname, "static", "submit-rfp-rfq.html");
+    const rfpDir = path.join(PUBLIC, "procurement", "submit-rfp-rfq");
+    fs.mkdirSync(rfpDir, { recursive: true });
+    fs.writeFileSync(path.join(rfpDir, "index.html"), fs.readFileSync(rfpSource, "utf8"));
+    pages++;
+  }
+
   // HTML sitemap page
   const sitemapPageDir = path.join(PUBLIC, "sitemap");
   fs.rmSync(sitemapPageDir, { recursive: true, force: true });
