@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Data Center Commissioning: 5 Levels Explained | Apex Grid</title>
+<meta name="description" content="Mission-critical commissioning runs five levels — factory witness, installation verification, functional testing, integrated systems testing, and operations verification. Learn what each level proves." />
+<link rel="canonical" href="https://apexgrideng.com/answers/data-center-commissioning-levels-explained/" />
+<meta property="og:title" content="Data Center Commissioning: 5 Levels Explained | Apex Grid" />
+<meta property="og:description" content="Mission-critical commissioning runs five levels — factory witness, installation verification, functional testing, integrated systems testing, and operations verification. Learn what each level proves." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://apexgrideng.com/answers/data-center-commissioning-levels-explained/" />
+<meta property="og:image" content="https://apexgrideng.com/logo.png" />
+<meta property="og:image:alt" content="Apex Grid Engineering logo" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Data Center Commissioning: 5 Levels Explained | Apex Grid" />
+<meta name="twitter:description" content="Mission-critical commissioning runs five levels — factory witness, installation verification, functional testing, integrated systems testing, and operations verification. Learn what each level proves." />
+<meta name="twitter:image" content="https://apexgrideng.com/logo.png" />
+<meta name="twitter:image:alt" content="Apex Grid Engineering logo" />
+<meta name="robots" content="index,follow" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "What Is Data Center Commissioning, and What Are the 5 Levels?", "name": "What Is Data Center Commissioning, and What Are the 5 Levels?", "description": "Mission-critical commissioning runs five levels — factory witness, installation verification, functional testing, integrated systems testing, and operations verification. Learn what each level proves.", "url": "https://apexgrideng.com/answers/data-center-commissioning-levels-explained/", "datePublished": "2026-09-16", "dateModified": "2026-09-16", "author": {"@type": "Person", "name": "Jeremy Mills", "jobTitle": "CEO & Founder", "description": "USAF Veteran", "worksFor": {"@type": "Organization", "name": "Apex Grid Engineering", "url": "https://apexgrideng.com"}}, "publisher": {"@type": "Organization", "name": "Apex Grid Engineering", "url": "https://apexgrideng.com"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How is this different from standard building commissioning?", "acceptedAnswer": {"@type": "Answer", "text": "Standard building commissioning verifies that systems perform per the design intent. Mission-critical commissioning adds two things standard Cx usually lacks: rigorous Level 1 factory witness testing of the major electrical and mechanical equipment, and Level 4 integrated systems testing that proves the whole facility rides through failure scenarios. The difference is proving survival, not just operation."}}, {"@type": "Question", "name": "Why does data center commissioning cost more?", "acceptedAnswer": {"@type": "Answer", "text": "Five levels instead of the usual scope, factory witness travel and time for long-lead equipment, complex integrated test scripts that have to be written specifically for the facility, re-testing after deficiencies are corrected, and a commissioning authority with mission-critical experience. It costs more because it verifies more — and because the cost of an undiscovered deficiency dwarfs the Cx fee."}}, {"@type": "Question", "name": "When does commissioning start?", "acceptedAnswer": {"@type": "Answer", "text": "In design — not at the end of construction. The commissioning specification, design reviews, and factory witness planning all happen while drawings are being produced. Level 1 factory testing happens at manufacturers while the building is still going up. Projects that 'start commissioning' at substantial completion are really starting rework discovery."}}, {"@type": "Question", "name": "What happens if integrated systems testing fails?", "acceptedAnswer": {"@type": "Answer", "text": "The deficiency is logged, the root cause is found and fixed, and the test is repeated. That cycle is the entire point of IST — finding the failure in a controlled test rather than during a real outage. The project schedule must carry contingency for re-testing; a schedule with no room for a failed IST is a schedule built on hope."}}, {"@type": "Question", "name": "Who should perform the commissioning?", "acceptedAnswer": {"@type": "Answer", "text": "An independent commissioning authority — ideally neither the installing contractor nor the engineer of record — so the verification is credible. The CxA writes the test scripts, witnesses the tests, tracks deficiencies to closure, and signs off that the facility is ready. Independence is what makes the sign-off worth something."}}]}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:hsl(0 0% 3%);--card:hsl(0 0% 5%);--border:hsl(0 0% 12%);--fg:hsl(0 0% 92%);--muted:hsl(0 0% 62%);--primary:hsl(0 72% 48%);--primary-fg:#fff}
+body{background:var(--bg);color:var(--fg);font-family:'Inter',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.display{font-family:'Space Grotesk',sans-serif;line-height:1.15;letter-spacing:-0.01em}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--border);background:hsl(0 0% 3%/.95);position:sticky;top:0;z-index:50;backdrop-filter:blur(8px)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+.brand{display:flex;align-items:center;gap:12px;font-family:'Space Grotesk';font-weight:700;font-size:19px;letter-spacing:-.01em}
+.brand small{display:block;font-size:9px;letter-spacing:.3em;color:var(--muted);font-weight:500}
+.navlinks{display:flex;gap:18px;font-size:13px;color:hsl(0 0% 80%);align-items:center}
+.navlinks a:hover{color:var(--primary)}
+.cta{background:var(--primary);color:var(--primary-fg);font-weight:700;font-size:14px;padding:12px 24px;border-radius:2px}
+.cta:hover{background:hsl(0 72% 42%)}
+.hero{padding:96px 0 64px;border-bottom:1px solid var(--border);position:relative}
+.hero .kicker{color:var(--primary);font-family:'Space Grotesk';font-size:12px;letter-spacing:.25em;text-transform:uppercase;margin-bottom:20px;font-weight:600}
+.hero h1{font-size:clamp(34px,5vw,58px);font-weight:700;margin-bottom:24px}
+.hero h1 .dim{color:var(--muted)}
+.hero .lede{font-size:19px;color:hsl(0 0% 78%);max-width:760px;border-left:4px solid var(--primary);padding-left:22px}
+.breadcrumb{padding:20px 0 0;font-size:12px;font-family:'Space Grotesk';text-transform:uppercase;letter-spacing:.12em;color:var(--muted);overflow-wrap:anywhere}
+.breadcrumb a:hover{color:var(--primary)}
+.breadcrumb span{margin:0 8px;color:hsl(0 0% 30%)}
+section.block{padding:56px 0;border-bottom:1px solid var(--border)}
+section.block h2{font-size:28px;margin-bottom:20px}
+section.block h2 em{color:var(--primary);font-style:normal}
+.prose p{color:hsl(0 0% 74%);margin-bottom:18px;max-width:820px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--border);padding:26px}
+.card h3{font-size:16px;margin-bottom:10px;color:var(--fg)}
+.card p{font-size:14px;color:var(--muted)}
+.card .label{font-family:'Space Grotesk';font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--primary);margin-bottom:12px;font-weight:600}
+ul.scope{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;max-width:900px}
+ul.scope li{background:var(--card);border:1px solid var(--border);padding:14px 18px;font-size:14px;color:hsl(0 0% 78%);border-left:3px solid var(--primary)}
+.faq{max-width:860px}
+.faq details{border:1px solid var(--border);background:var(--card);margin-bottom:10px}
+.faq summary{cursor:pointer;padding:18px 22px;font-family:'Space Grotesk';font-weight:600;font-size:15px}
+.faq .a{padding:0 22px 18px;color:var(--muted);font-size:14.5px}
+.linkrow{display:flex;flex-wrap:wrap;gap:10px}
+.linkrow a{border:1px solid var(--border);background:var(--card);padding:10px 16px;font-size:13px;color:hsl(0 0% 78%)}
+.linkrow a:hover{border-color:var(--primary);color:var(--primary)}
+.ctaband{padding:72px 0;text-align:left}
+.ctaband h2{font-size:32px;margin-bottom:14px}
+.ctaband p{color:var(--muted);margin-bottom:28px;max-width:640px}
+footer{border-top:1px solid var(--border);background:var(--card);padding:64px 0 32px;font-size:14px}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1.2fr 1fr 1fr;gap:32px}
+@media(max-width:1000px){.navlinks>a:not(.cta){display:none}}
+@media(max-width:600px){
+  .topbar .container{width:calc(100% - 24px)}
+  .brand small{display:none}
+  .navlinks{gap:8px}
+  .navlinks .cta{padding:10px 13px;font-size:11px;letter-spacing:.06em}
+  .hero h1{overflow-wrap:anywhere}
+}
+@media(max-width:800px){.fgrid{grid-template-columns:1fr 1fr}}
+footer h4{font-family:'Space Grotesk';font-size:12px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:18px}
+footer ul{list-style:none}
+footer li{margin-bottom:12px;color:hsl(0 0% 78%)}
+footer a:hover{color:var(--primary)}
+.fbottom{margin-top:48px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted)}
+.note{font-size:12.5px;color:hsl(0 0% 45%);max-width:820px;margin-top:8px}
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.statgrid .cell{background:var(--bg);padding:22px}
+.statgrid .cell .k{font-family:'Space Grotesk';font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);margin-bottom:8px;font-weight:600}
+.statgrid .cell .v{font-size:14.5px;color:hsl(0 0% 80%)}
+</style>
+
+</head>
+<body>
+<header><div class="container nav">
+  <a class="brand" href="/"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;color:hsl(0 72% 48%)"><path d="M50 8L8 88h12l30-58 30 58h12L50 8z" fill="currentColor"/><path d="M50 40L30 78h8l12-24 12 24h8L50 40z" fill="currentColor" opacity="0.7"/><path d="M32 74h36v6H32z" fill="currentColor"/></svg><span>APEX GRID<small>ENGINEERING · ARCHITECTURE · GC</small></span></a>
+  <nav class="navlinks">
+    <a href="/services">Engineering</a><a href="/architecture/">Architecture</a><a href="/general-contracting/">General Contracting</a><a href="/industries">Industries</a><a href="/resources">Resources</a><a href="/locations/">Service Areas</a>
+    <a class="cta" href="/contact">Contact Us</a>
+  </nav>
+</div></header>
+<main data-phase0="true">
+  <nav class="breadcrumb container"><a href="/">Home</a><span>/</span>What Is Data Center Commissioning, and What Are the 5 Levels?</nav>
+  <section class="hero"><div class="container"><p class="kicker">AEO Answer · Data Center Commissioning</p><h1>What Is Data Center Commissioning, and What Are the 5 Levels?</h1>
+      <p class="note">By Jeremy Mills, CEO &amp; Founder, Apex Grid Engineering — USAF Veteran. · Updated 2026-09-16</p>
+      <div class="direct-answer" aria-label="Direct answer"><p>Data center commissioning proves — through five levels — that the facility actually does what the design promised before it goes live. Level 1 is factory witness testing of major equipment; Level 2 verifies installation; Level 3 covers startup and functional testing of each system; Level 4 is integrated systems testing (IST), the famous pull-the-plug test where the whole facility must ride through utility loss and equipment failures; Level 5 verifies ongoing operations. IST is what separates mission-critical commissioning from standard building commissioning: the facility must prove it survives failures, not just that its systems start.</p></div>
+      <p class="founder-note">I&#39;m Jeremy Mills, CEO &amp; Founder of Apex Grid Engineering and a U.S. Air Force veteran. I&#39;m not a PE; our licensed professionals make the technical, compliance, and project-specific decisions.</p>
+    </div></section>
+<section class="block"><div class="container"><h2>What happens at each of the 5 levels?</h2><div class="prose"><p>Mission-critical commissioning is organized in five levels, each proving something the previous level could not. Skipping a level doesn't save money — it moves the discovery of problems to a more expensive phase.</p><table><thead><tr><th>Level</th><th>Name</th><th>What it proves</th></tr></thead><tbody><tr><th scope="row">Level 1</th><td>Factory witness testing (FAT)</td><td>Major equipment — generators, UPS, switchgear, chillers — performs to spec before it ships</td></tr><tr><th scope="row">Level 2</th><td>Installation verification</td><td>Equipment is installed per drawings and specs; pre-functional checklists are complete</td></tr><tr><th scope="row">Level 3</th><td>Startup &amp; functional testing</td><td>Each system energizes, starts, and performs against its sequence of operations</td></tr><tr><th scope="row">Level 4</th><td>Integrated systems testing (IST)</td><td>The whole facility rides through failure scenarios — utility loss, equipment failures — as one system</td></tr><tr><th scope="row">Level 5</th><td>Operations verification</td><td>Ongoing and seasonal testing, staff training, O&amp;M documentation, monitoring validation</td></tr></tbody></table><p>Levels 1 through 3 verify components and systems. Level 4 verifies the facility. That distinction is the whole reason mission-critical commissioning exists as its own discipline.</p></div></div></section><section class="block"><div class="container"><h2>What does integrated systems testing actually test?</h2><div class="prose"><p>IST is the pull-the-plug test: the utility feed is dropped and the facility must carry on without the IT load ever noticing. Generators start, the UPS bridges the gap, cooling rides through on emergency power, and the controls execute the emergency sequences — all while the data hall stays powered and cooled. Then the single-failure scenarios: lose one UPS module, lose one generator, lose a chiller. At the target tier, the facility absorbs each failure and stays up.</p><ul class="scope"><li>Full utility loss with automatic transfer to standby generation — the headline test</li><li>Single-component failures: UPS module, generator, chiller, pump, CRAH unit</li><li>Controls verification: sequences execute in the right order with the right timing</li><li>Concurrent maintainability proof: transfer to maintenance bypass without dropping load</li><li>Failed tests are the deliverable working as intended — find it now, fix it now, re-test</li></ul><p>IST is the most valuable engineering in the project. Everything before it is preparation; everything after it is operations. An owner should attend, watch, and ask hard questions — this is the moment the design's promises get kept or broken.</p></div></div></section><section class="block"><div class="container"><h2>What is the factory witness role — FAT and SAT?</h2><div class="prose"><p>Factory acceptance testing, witnessed by the owner, engineer, or commissioning authority, catches manufacturing defects and specification deviations before equipment ships. A generator with the wrong breaker frame, a UPS with miswired controls, a chiller that can't hit its performance curve — all of these are found at the factory in hours, versus found in the field in weeks with the project schedule burning. Site acceptance testing then confirms the equipment performs after installation, rigging, and connection.</p><ul class="scope"><li>Witness the long-lead, mission-critical gear: generators, paralleling switchgear, UPS, chillers</li><li>Test to the specification's performance points, not the manufacturer's standard demo</li><li>Document every deviation and require correction before shipment — not after</li><li>Skipping witness on critical equipment is false economy, every time</li></ul><p>I advise owners to treat factory witness as non-negotiable for the equipment the facility can't operate without. The travel cost is trivial next to a field retrofit on installed switchgear.</p></div></div></section><section class="block"><div class="container"><h2>What should owners require in the commissioning specification?</h2><div class="prose"><p>The Cx spec is written during design, and it sets the rules for everything that follows. A strong spec names an independent commissioning authority, requires written test scripts with explicit pass/fail criteria for every level, mandates witnessing, establishes deficiency tracking through to closure, and defines the Level 4 IST scenarios before construction is complete — so the tests aren't invented at the last minute.</p><ul class="scope"><li>Independent CxA with mission-critical experience, contracted to the owner</li><li>Written test scripts with pass/fail criteria — no improvised testing</li><li>Deficiency log with assigned responsibility and closure verification</li><li>O&amp;M documentation, as-built sequences, and operator training as contract deliverables</li><li>Schedule position: Cx runs parallel to construction, with IST near substantial completion</li></ul><p>On schedule: IST needs the building essentially complete — all systems installed, started, and individually tested. Plan the construction sequence around that milestone, and carry contingency for re-testing. The projects that struggle are the ones that treated commissioning as a final checkbox instead of a parallel workstream.</p></div></div></section><section class="block"><div class="container"><h2>Which related engineering resources can help?</h2><div class="linkrow"><a href="/answers/data-center-tier-levels-mep-design/">Data center tier levels &amp; MEP design</a><a href="/answers/data-center-cooling-design-high-density/">High-density data center cooling</a><a href="/answers/data-center-electrical-design-power-distribution/">Data center electrical design</a><a href="/answers/data-center-commissioning-levels-explained/">Data center commissioning levels</a><a href="/answers/data-center-mep-engineering-cost/">Data center MEP engineering cost</a><a href="/answers/edge-data-center-server-room-mep-design/">Edge &amp; server room MEP design</a><a href="/mechanical-engineering/data-center-cooling/">Data center cooling services</a><a href="/answers/building-commissioning-explained/">Building commissioning explained</a><a href="/answers/electrical-selective-coordination-explained/">Selective coordination explained</a><a href="/answers/how-much-does-mep-engineering-cost/">MEP engineering cost guide</a><a href="/answers/what-is-mep-engineering/">What is MEP engineering?</a><a href="/metros/">Metro engineering guides</a><a href="/locations/">Verified service areas</a></div></div></section><section class="block"><div class="container"><h2>What else do project teams ask?</h2><div class="faq"><details><summary>How is this different from standard building commissioning?</summary><div class="a">Standard building commissioning verifies that systems perform per the design intent. Mission-critical commissioning adds two things standard Cx usually lacks: rigorous Level 1 factory witness testing of the major electrical and mechanical equipment, and Level 4 integrated systems testing that proves the whole facility rides through failure scenarios. The difference is proving survival, not just operation.</div></details><details><summary>Why does data center commissioning cost more?</summary><div class="a">Five levels instead of the usual scope, factory witness travel and time for long-lead equipment, complex integrated test scripts that have to be written specifically for the facility, re-testing after deficiencies are corrected, and a commissioning authority with mission-critical experience. It costs more because it verifies more — and because the cost of an undiscovered deficiency dwarfs the Cx fee.</div></details><details><summary>When does commissioning start?</summary><div class="a">In design — not at the end of construction. The commissioning specification, design reviews, and factory witness planning all happen while drawings are being produced. Level 1 factory testing happens at manufacturers while the building is still going up. Projects that 'start commissioning' at substantial completion are really starting rework discovery.</div></details><details><summary>What happens if integrated systems testing fails?</summary><div class="a">The deficiency is logged, the root cause is found and fixed, and the test is repeated. That cycle is the entire point of IST — finding the failure in a controlled test rather than during a real outage. The project schedule must carry contingency for re-testing; a schedule with no room for a failed IST is a schedule built on hope.</div></details><details><summary>Who should perform the commissioning?</summary><div class="a">An independent commissioning authority — ideally neither the installing contractor nor the engineer of record — so the verification is credible. The CxA writes the test scripts, witnesses the tests, tracks deficiencies to closure, and signs off that the facility is ready. Independence is what makes the sign-off worth something.</div></details></div></div></section><section class="ctaband"><div class="container"><h2>Ready to discuss your engineering scope?</h2><p>Share the project address, current records, requested deliverable, authority information, and schedule. Apex Grid confirms professional responsibility, availability, and scope before work begins.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
+  </main>
+<footer><div class="container">
+   <div class="fgrid">
+    <div>
+      <a class="brand" href="/" style="margin-bottom:18px"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;color:hsl(0 72% 48%)"><path d="M50 8L8 88h12l30-58 30 58h12L50 8z" fill="currentColor"/><path d="M50 40L30 78h8l12-24 12 24h8L50 40z" fill="currentColor" opacity="0.7"/><path d="M32 74h36v6H32z" fill="currentColor"/></svg><span>APEX GRID</span></a>
+       <p style="color:var(--muted);max-width:340px;margin-top:16px">Engineering, Architecture, and General Contracting under one organization—from concept and permit documents through construction delivery.</p>
+       <p style="color:var(--muted);max-width:340px;margin-top:12px">Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction.</p>
+    </div>
+     <div><h4>Firm</h4><ul><li><a href="/about">About Us</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/resources">Resources</a></li><li><a href="/blog/">Blog</a></li><li><a href="/south-africa/">South Africa Insights</a></li><li><a href="/locations/">Service Areas</a></li><li><a href="/licensing-service-coverage/">Licensing &amp; Coverage</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div><h4>Services</h4><ul><li><a href="/services/mep">MEP Engineering</a></li><li><a href="/services/structural">Structural Design</a></li><li><a href="/services/civil">Civil Engineering</a></li><li><a href="/architecture/">Architectural Design</a></li><li><a href="/general-contracting/">General Contracting</a></li></ul></div>
+    <div><h4>Disciplines</h4><ul><li><a href="/structural-engineering/">Structural Engineering</a></li><li><a href="/mep-engineering/">MEP Engineering</a></li><li><a href="/civil-engineering/">Civil Engineering</a></li><li><a href="/mechanical-engineering/">Mechanical (HVAC)</a></li><li><a href="/electrical-engineering/">Electrical Engineering</a></li><li><a href="/plumbing-engineering/">Plumbing Engineering</a></li></ul></div>
+     <div><h4>Business-provided contact</h4><ul><li>Operating / contact address<br/>22475 E Quintero Rd<br/>Queen Creek, AZ 85142</li><li><a href="mailto:info@apexgrideng.com">info@apexgrideng.com</a></li><li><a href="tel:+14804900064">(480) 490-0064</a></li></ul></div>
+  </div>
+  <div class="fbottom"><p>© 2025 Apex Grid Engineering. All rights reserved.</p><p><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></p></div>
+</div></footer>
+</body>
+</html>
