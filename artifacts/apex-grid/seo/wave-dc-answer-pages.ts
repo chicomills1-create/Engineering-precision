@@ -19,7 +19,7 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "Why do spa finishes fail when the engineering is wrong?",
-        answer: "Persistent high humidity attacks everything: paint blisters, wood swells, metal corrodes, and hidden mold grows inside walls. The failure is almost never the finish material  it's air that was never properly dried or a vapor retarder that was never detailed. Getting the dew point right inside wall assemblies is an engineering task, not a decorating one.",
+        answer: "Persistent high humidity attacks everything: paint blisters, wood swells, metal corrodes, and hidden mold grows inside walls. The failure is almost never the finish material — it's air that was never properly dried or a vapor retarder that was never detailed. Getting the dew point right inside wall assemblies is an engineering task, not a decorating one.",
       },
       {
         question: "Do treatment rooms need special electrical design?",
@@ -132,11 +132,11 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "What structural issues come up in wellness centers?",
-        answer: "Long spans for studios and pools, heavy point loads from equipment and water features, and vibration  group fitness, running tracks, and weights above occupied space need floor systems designed for dynamic loads. Plunge pools and hydrotherapy tubs concentrate thousands of pounds on small footprints, so the slab and framing have to be checked for the filled weight plus occupants.",
+        answer: "Long spans for studios and pools, heavy point loads from equipment and water features, and vibration — group fitness, running tracks, and weights above occupied space need floor systems designed for dynamic loads. Plunge pools and hydrotherapy tubs concentrate thousands of pounds on small footprints, so the slab and framing have to be checked for the filled weight plus occupants.",
       },
       {
         question: "How is energy use managed across so many zones?",
-        answer: "With heat recovery and scheduling. Heat rejected from the fitness cooling can preheat pool or domestic water, and ventilation energy recovery cuts the cost of all that outdoor air. Scheduling matters too  zones get setback when unoccupied instead of conditioning empty rooms around the clock. California projects also have to clear the 2025 California Energy Code / 2025 Standards, effective January 1, 2026.",
+        answer: "With heat recovery and scheduling. Heat rejected from the fitness cooling can preheat pool or domestic water, and ventilation energy recovery cuts the cost of all that outdoor air. Scheduling matters too — zones get setback when unoccupied instead of conditioning empty rooms around the clock. California projects also have to clear the 2025 California Energy Code / 2025 Standards, effective January 1, 2026.",
       },
       {
         question: "What civil engineering does a wellness center site need?",
@@ -185,7 +185,7 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "Why does water chemistry matter so much in thermal spas?",
-        answer: "Hot mineral water attacks materials that would last decades in potable service  copper pinholes, steel corrodes, and standard equipment seals fail. A water analysis showing mineral content, pH, and temperature lets the engineer specify compatible piping, heat exchanger materials, and equipment. Designing without it is guessing with expensive consequences.",
+        answer: "Hot mineral water attacks materials that would last decades in potable service — copper pinholes, steel corrodes, and standard equipment seals fail. A water analysis showing mineral content, pH, and temperature lets the engineer specify compatible piping, heat exchanger materials, and equipment. Designing without it is guessing with expensive consequences.",
       },
       {
         question: "How is the pool water heated in a thermal spa?",
@@ -246,7 +246,7 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "What structural waterproofing does a bathhouse need?",
-        answer: "Below-grade and slab areas need membrane waterproofing, and the structure in humid zones needs corrosion protection  coated or stainless embeds, protected reinforcement cover, and drainage that keeps water away from structural elements. Waterproofing is a system of membrane, drainage, and detailing, not a single product, and it has to be designed before concrete is placed.",
+        answer: "Below-grade and slab areas need membrane waterproofing, and the structure in humid zones needs corrosion protection — coated or stainless embeds, protected reinforcement cover, and drainage that keeps water away from structural elements. Waterproofing is a system of membrane, drainage, and detailing, not a single product, and it has to be designed before concrete is placed.",
       },
       {
         question: "How is drainage designed for constantly wet floors?",
@@ -254,7 +254,7 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "What electrical rules apply in bathhouse wet areas?",
-        answer: "Wet and damp location ratings throughout, GFCI protection for receptacles and equipment near water, corrosion-resistant fixtures and enclosures, and strict clearances between electrical equipment and pools or tubs per the electrical code. Lighting in particular needs fixtures rated for the environment  standard commercial fixtures fail fast in bathhouse air.",
+        answer: "Wet and damp location ratings throughout, GFCI protection for receptacles and equipment near water, corrosion-resistant fixtures and enclosures, and strict clearances between electrical equipment and pools or tubs per the electrical code. Lighting in particular needs fixtures rated for the environment — standard commercial fixtures fail fast in bathhouse air.",
       },
     ],
     sections: [
@@ -299,7 +299,7 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "How is a commercial sauna heater sized?",
-        answer: "By room volume, construction, and heater type, following the manufacturer's sizing tables  not by guesswork. Electric heaters are rated in kilowatts against cubic footage, and undersizing means the room never reaches temperature while oversizing stresses the electrical service. The electrical design provides a dedicated circuit sized to the heater's full load plus controls.",
+        answer: "By room volume, construction, and heater type, following the manufacturer's sizing tables — not by guesswork. Electric heaters are rated in kilowatts against cubic footage, and undersizing means the room never reaches temperature while oversizing stresses the electrical service. The electrical design provides a dedicated circuit sized to the heater's full load plus controls.",
       },
       {
         question: "What clearances do sauna heaters require?",
@@ -307,11 +307,11 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "Do commercial saunas need ventilation?",
-        answer: "Yes. Codes require ventilation for sauna rooms  typically supply low and exhaust high  to provide fresh air and control humidity. The ventilation design balances air quality against heat loss, often with controls that manage the exchange rate. It also serves a safety function by preventing the room from becoming oxygen-depleted at high occupancy.",
+        answer: "Yes. Codes require ventilation for sauna rooms — typically supply low and exhaust high — to provide fresh air and control humidity. The ventilation design balances air quality against heat loss, often with controls that manage the exchange rate. It also serves a safety function by preventing the room from becoming oxygen-depleted at high occupancy.",
       },
       {
         question: "What controls are required on a commercial sauna?",
-        answer: "At minimum a thermostat with a high-limit cutoff that shuts the heater down if temperature exceeds the safe setpoint, and a timer that prevents indefinite operation  many jurisdictions cap continuous run time. Commercial installations should have controls outside the room or with keyed overrides so operation is managed, not left to occupants.",
+        answer: "At minimum a thermostat with a high-limit cutoff that shuts the heater down if temperature exceeds the safe setpoint, and a timer that prevents indefinite operation — many jurisdictions cap continuous run time. Commercial installations should have controls outside the room or with keyed overrides so operation is managed, not left to occupants.",
       },
     ],
     sections: [
@@ -356,19 +356,19 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "How is a commercial steam generator sized?",
-        answer: "By room volume in cubic feet, adjusted for construction materials  glass and stone lose heat faster than insulated tile walls  using the manufacturer's sizing guidance. Undersizing means the room never fills with steam; the generator runs constantly and still disappoints. Water quality matters as much as size: hard water scales generators fast, so treatment or softening is part of the design.",
+        answer: "By room volume in cubic feet, adjusted for construction materials — glass and stone lose heat faster than insulated tile walls — using the manufacturer's sizing guidance. Undersizing means the room never fills with steam; the generator runs constantly and still disappoints. Water quality matters as much as size: hard water scales generators fast, so treatment or softening is part of the design.",
       },
       {
         question: "Why do steam room ceilings need to slope?",
-        answer: "So condensate runs down the walls instead of raining on occupants. A flat or minimally sloped ceiling collects condensation that drips  unpleasant and a sign the moisture isn't being managed. The standard detail slopes the ceiling toward the walls, with the waterproof membrane continuous behind the finish, so water sheets down to a perimeter drain or wall base.",
+        answer: "So condensate runs down the walls instead of raining on occupants. A flat or minimally sloped ceiling collects condensation that drips — unpleasant and a sign the moisture isn't being managed. The standard detail slopes the ceiling toward the walls, with the waterproof membrane continuous behind the finish, so water sheets down to a perimeter drain or wall base.",
       },
       {
         question: "What waterproofing does a steam room need?",
-        answer: "A continuous waterproof membrane on walls, ceiling, and floor  typically a sheet or liquid membrane rated for steam exposure  with all penetrations, corners, and the door frame sealed. Cement backer board alone is not waterproofing. The membrane system, the sloped surfaces, and the drain form one assembly, and the drawings should show it as a section, not a note.",
+        answer: "A continuous waterproof membrane on walls, ceiling, and floor — typically a sheet or liquid membrane rated for steam exposure — with all penetrations, corners, and the door frame sealed. Cement backer board alone is not waterproofing. The membrane system, the sloped surfaces, and the drain form one assembly, and the drawings should show it as a section, not a note.",
       },
       {
         question: "What fails first in a poorly built steam room?",
-        answer: "The hidden structure. Moisture gets behind the tile through unsealed penetrations or missing membrane, and wood framing, fasteners, and adjacent drywall deteriorate out of sight. Visible symptoms  musty odor, loose tile, corroded fixtures  show up years after the damage starts. That's why the engineering focuses on the envelope you can't see.",
+        answer: "The hidden structure. Moisture gets behind the tile through unsealed penetrations or missing membrane, and wood framing, fasteners, and adjacent drywall deteriorate out of sight. Visible symptoms — musty odor, loose tile, corroded fixtures — show up years after the damage starts. That's why the engineering focuses on the envelope you can't see.",
       },
     ],
     sections: [
@@ -413,7 +413,7 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "Why is salt air so destructive to building materials?",
-        answer: "Because salt is hygroscopic and electrolytic  it pulls moisture from the air and accelerates galvanic corrosion on metals, wicks into porous materials, and crystallizes in cracks where it expands and spalls finishes. In a halotherapy room the salt is deliberately aerosolized, so exposure is continuous and uniform. Standard commercial materials are simply not specified for that environment.",
+        answer: "Because salt is hygroscopic and electrolytic — it pulls moisture from the air and accelerates galvanic corrosion on metals, wicks into porous materials, and crystallizes in cracks where it expands and spalls finishes. In a halotherapy room the salt is deliberately aerosolized, so exposure is continuous and uniform. Standard commercial materials are simply not specified for that environment.",
       },
       {
         question: "What materials survive in a salt cave?",
@@ -425,7 +425,7 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "Do salt caves need special cleaning or drainage?",
-        answer: "Drainage, usually not  these are dry rooms. But surfaces need to tolerate regular cleaning that removes salt buildup without driving moisture into the assembly, and the design should include access for servicing the generator and replacing filters. Floor finishes need to handle salt foot traffic without degrading.",
+        answer: "Drainage, usually not — these are dry rooms. But surfaces need to tolerate regular cleaning that removes salt buildup without driving moisture into the assembly, and the design should include access for servicing the generator and replacing filters. Floor finishes need to handle salt foot traffic without degrading.",
       },
     ],
     sections: [
@@ -470,15 +470,15 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "How heavy is a filled float tank?",
-        answer: "A typical commercial pod or cabin with 10 to 12 inches of Epsom-salt-saturated water weighs 1,200 to 1,800 pounds including the occupant  water is 8.3 pounds per gallon and the salt adds roughly 30 percent more density. That load concentrates on a footprint of maybe 25 square feet. The structural engineer checks the slab or framing for that concentrated load, plus deflection limits that keep the tank level.",
+        answer: "A typical commercial pod or cabin with 10 to 12 inches of Epsom-salt-saturated water weighs 1,200 to 1,800 pounds including the occupant — water is 8.3 pounds per gallon and the salt adds roughly 30 percent more density. That load concentrates on a footprint of maybe 25 square feet. The structural engineer checks the slab or framing for that concentrated load, plus deflection limits that keep the tank level.",
       },
       {
         question: "Can float tanks go on an upper floor?",
-        answer: "Sometimes, with engineering. The floor system has to be verified for the concentrated filled weight, deflection under sustained load, and vibration  and getting a thousand-plus-pound tank up the stairs or elevator is its own logistics problem. Slab-on-grade is simplest. On framed floors, I want the tank near bearing walls or columns, never mid-span of a long joist, unless the framing is reinforced.",
+        answer: "Sometimes, with engineering. The floor system has to be verified for the concentrated filled weight, deflection under sustained load, and vibration — and getting a thousand-plus-pound tank up the stairs or elevator is its own logistics problem. Slab-on-grade is simplest. On framed floors, I want the tank near bearing walls or columns, never mid-span of a long joist, unless the framing is reinforced.",
       },
       {
         question: "What plumbing does a float room need?",
-        answer: "A water supply for filling and top-offs, a floor drain  ideally a trench or area drain  for the salt water that escapes during entry, exit, and cleaning, and a shower nearby since bathers rinse before and after floating. The drain and waterproofing details matter more than the supply: salt water on an unprotected floor destroys finishes and finds its way into the structure.",
+        answer: "A water supply for filling and top-offs, a floor drain — ideally a trench or area drain — for the salt water that escapes during entry, exit, and cleaning, and a shower nearby since bathers rinse before and after floating. The drain and waterproofing details matter more than the supply: salt water on an unprotected floor destroys finishes and finds its way into the structure.",
       },
       {
         question: "How is the room kept quiet and dark?",
@@ -527,7 +527,7 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "Why is nitrogen dangerous in a cryotherapy room?",
-        answer: "Liquid nitrogen expands to roughly 700 times its liquid volume as gas, and that gas is odorless, colorless, and displaces oxygen. In an enclosed room, a leak or normal venting can drop oxygen below safe levels without any warning the senses can detect. Oxygen deficiency causes rapid unconsciousness  which is why the engineering centers on detection, ventilation, and alarms rather than on anyone noticing a problem.",
+        answer: "Liquid nitrogen expands to roughly 700 times its liquid volume as gas, and that gas is odorless, colorless, and displaces oxygen. In an enclosed room, a leak or normal venting can drop oxygen below safe levels without any warning the senses can detect. Oxygen deficiency causes rapid unconsciousness — which is why the engineering centers on detection, ventilation, and alarms rather than on anyone noticing a problem.",
       },
       {
         question: "What do oxygen-depletion sensors do?",
@@ -535,7 +535,7 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "How is nitrogen vented safely?",
-        answer: "With dedicated exhaust that captures nitrogen at low points  floor-level exhaust grilles in the chamber room  discharging directly outdoors away from intakes, windows, and occupied areas. Supply air replaces it from high points to create a sweeping pattern. The ventilation runs continuously during operation, not on demand, because nitrogen release is continuous.",
+        answer: "With dedicated exhaust that captures nitrogen at low points — floor-level exhaust grilles in the chamber room — discharging directly outdoors away from intakes, windows, and occupied areas. Supply air replaces it from high points to create a sweeping pattern. The ventilation runs continuously during operation, not on demand, because nitrogen release is continuous.",
       },
       {
         question: "What construction details matter around extreme cold?",
@@ -584,11 +584,11 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "How much power does commercial red light equipment draw?",
-        answer: "Full-body panels and therapy beds typically draw 1 to 3 kilowatts each, and a room with several units plus a bed can present 6 to 10 kilowatts of connected load. The electrical design needs the manufacturer cut sheets for every device, dedicated circuits per the listings, and panel and service capacity that covers the whole studio running at once  not one room at a time.",
+        answer: "Full-body panels and therapy beds typically draw 1 to 3 kilowatts each, and a room with several units plus a bed can present 6 to 10 kilowatts of connected load. The electrical design needs the manufacturer cut sheets for every device, dedicated circuits per the listings, and panel and service capacity that covers the whole studio running at once — not one room at a time.",
       },
       {
         question: "Why does red light therapy need so much cooling?",
-        answer: "Because nearly every watt the panels consume becomes heat in the room. A 5-kilowatt equipment load in a 150-square-foot room overwhelms standard comfort cooling fast. The HVAC load calculation treats the therapy devices as the dominant internal gain, and the system is sized to hold temperature with all units running  which is the normal operating condition, not the peak.",
+        answer: "Because nearly every watt the panels consume becomes heat in the room. A 5-kilowatt equipment load in a 150-square-foot room overwhelms standard comfort cooling fast. The HVAC load calculation treats the therapy devices as the dominant internal gain, and the system is sized to hold temperature with all units running — which is the normal operating condition, not the peak.",
       },
       {
         question: "Do the panels need special circuits or grounding?",
@@ -596,7 +596,7 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "What should the room lighting and finishes be?",
-        answer: "Dimmable ambient lighting that can go low enough not to compete with the therapy glow, with controls simple enough for staff to run between sessions. Finishes should be light-friendly  no highly reflective surfaces that create glare  and the room needs the same acoustic privacy as any treatment room since sessions are quiet and personal.",
+        answer: "Dimmable ambient lighting that can go low enough not to compete with the therapy glow, with controls simple enough for staff to run between sessions. Finishes should be light-friendly — no highly reflective surfaces that create glare — and the room needs the same acoustic privacy as any treatment room since sessions are quiet and personal.",
       },
     ],
     sections: [
@@ -641,19 +641,19 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "Why is fire safety the top concern with hyperbaric chambers?",
-        answer: "Because elevated oxygen partial pressure makes ordinary materials ignite at lower energy and burn far faster than in normal air. A spark that's harmless in a normal room can start a fire in an oxygen-enriched one. The engineering response includes strict controls on materials inside and near the chamber, elimination of ignition sources, electrical area classification, and fire suppression designed for the specific hazard  this is the discipline that drives the whole project.",
+        answer: "Because elevated oxygen partial pressure makes ordinary materials ignite at lower energy and burn far faster than in normal air. A spark that's harmless in a normal room can start a fire in an oxygen-enriched one. The engineering response includes strict controls on materials inside and near the chamber, elimination of ignition sources, electrical area classification, and fire suppression designed for the specific hazard — this is the discipline that drives the whole project.",
       },
       {
         question: "What structural work does a hyperbaric chamber need?",
-        answer: "Floor capacity verification for a concentrated load of several thousand pounds, anchorage design for stability and seismic forces, and a level, suitable foundation or platform per the manufacturer. The chamber can't deflect or rock, and the structural drawings need to show the exact support and anchorage  the chamber supplier's requirements and the structural design have to agree.",
+        answer: "Floor capacity verification for a concentrated load of several thousand pounds, anchorage design for stability and seismic forces, and a level, suitable foundation or platform per the manufacturer. The chamber can't deflect or rock, and the structural drawings need to show the exact support and anchorage — the chamber supplier's requirements and the structural design have to agree.",
       },
       {
         question: "How is medical oxygen supplied to the chamber?",
-        answer: "Through piped medical-grade oxygen with materials and cleaning standards for oxygen service, pressure regulation, monitoring, and alarms  designed to the medical gas code. The design includes source equipment or cylinder manifolds with automatic changeover, zone valves, and area alarms, plus ventilation of any oxygen storage or manifold rooms. Oxygen piping is a specialized design, not standard plumbing.",
+        answer: "Through piped medical-grade oxygen with materials and cleaning standards for oxygen service, pressure regulation, monitoring, and alarms — designed to the medical gas code. The design includes source equipment or cylinder manifolds with automatic changeover, zone valves, and area alarms, plus ventilation of any oxygen storage or manifold rooms. Oxygen piping is a specialized design, not standard plumbing.",
       },
       {
         question: "What happens to occupants in a power failure or emergency?",
-        answer: "The design needs an emergency plan engineered into the building: chambers depressurize on a controlled sequence, emergency lighting and communication work without normal power, and staff can reach and extract occupants. Egress paths from the chamber room have to stay usable, and the emergency sequence  what happens automatically versus what staff do  gets documented and coordinated with the chamber manufacturer.",
+        answer: "The design needs an emergency plan engineered into the building: chambers depressurize on a controlled sequence, emergency lighting and communication work without normal power, and staff can reach and extract occupants. Egress paths from the chamber room have to stay usable, and the emergency sequence — what happens automatically versus what staff do — gets documented and coordinated with the chamber manufacturer.",
       },
     ],
     sections: [
@@ -698,7 +698,7 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "Do IV clinics need the same engineering as a medical office?",
-        answer: "Close. They don't need operating-room air changes, but they do need clinical-grade electrical, code-required handwash stations, medical refrigeration power, and air quality above retail standard  especially where immunocompromised clients are treated. The right benchmark is a light clinical or infusion-center standard, not a spa or lounge.",
+        answer: "Close. They don't need operating-room air changes, but they do need clinical-grade electrical, code-required handwash stations, medical refrigeration power, and air quality above retail standard — especially where immunocompromised clients are treated. The right benchmark is a light clinical or infusion-center standard, not a spa or lounge.",
       },
       {
         question: "What plumbing fixtures does an IV clinic require?",
@@ -706,11 +706,11 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "Why does pharmaceutical refrigeration need special power?",
-        answer: "Because losing a refrigerator full of biologics or compounded pharmaceuticals to a tripped breaker or an accidental switch-off is a five-figure loss and a compliance event. The design puts medical refrigerators on dedicated circuits, clearly labeled, ideally with power monitoring or alarms  and never on a circuit with a wall switch.",
+        answer: "Because losing a refrigerator full of biologics or compounded pharmaceuticals to a tripped breaker or an accidental switch-off is a five-figure loss and a compliance event. The design puts medical refrigerators on dedicated circuits, clearly labeled, ideally with power monitoring or alarms — and never on a circuit with a wall switch.",
       },
       {
         question: "How is comfort handled for clients sitting through infusions?",
-        answer: "With zoned HVAC and individual control. Infusion clients sit motionless for 45 to 90 minutes and chill easily, while staff moving around want it cooler. The design gives treatment areas their own zone with accessible thermostat control, plus blanket warmers on the equipment plan  comfort is a clinical requirement here, not a luxury.",
+        answer: "With zoned HVAC and individual control. Infusion clients sit motionless for 45 to 90 minutes and chill easily, while staff moving around want it cooler. The design gives treatment areas their own zone with accessible thermostat control, plus blanket warmers on the equipment plan — comfort is a clinical requirement here, not a luxury.",
       },
     ],
     sections: [
@@ -755,7 +755,7 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "Why does each acupuncture room need its own HVAC zone?",
-        answer: "Because a motionless patient loses heat steadily and wants a warm, draft-free room, while staff and waiting areas want normal commercial temperatures. One thermostat for the whole clinic guarantees someone is uncomfortable. Individual room control  whether dedicated zones or smart terminal units  is the difference between a clinic that feels cared-for and one that feels drafty.",
+        answer: "Because a motionless patient loses heat steadily and wants a warm, draft-free room, while staff and waiting areas want normal commercial temperatures. One thermostat for the whole clinic guarantees someone is uncomfortable. Individual room control — whether dedicated zones or smart terminal units — is the difference between a clinic that feels cared-for and one that feels drafty.",
       },
       {
         question: "How is acoustic privacy achieved between treatment rooms?",
@@ -763,7 +763,7 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "What electrical do electroacupuncture devices need?",
-        answer: "Standard receptacles on properly loaded circuits are usually enough  these are low-power devices  but the design needs to know the device count per room and keep them off circuits shared with heavy loads. Heat lamps add meaningful load in multiples, so the receptacle and circuit layout accounts for the real equipment list, not just code-minimum outlets.",
+        answer: "Standard receptacles on properly loaded circuits are usually enough — these are low-power devices — but the design needs to know the device count per room and keep them off circuits shared with heavy loads. Heat lamps add meaningful load in multiples, so the receptacle and circuit layout accounts for the real equipment list, not just code-minimum outlets.",
       },
       {
         question: "Do acupuncture clinics need special plumbing?",
@@ -812,15 +812,15 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "How is HVAC noise kept out of massage rooms?",
-        answer: "By designing to a low noise criterion from the start: low-velocity ductwork, lined ducts or sound attenuators where needed, equipment on vibration isolation, and terminal units selected for quiet operation at the actual airflow. The noise target gets written into the mechanical spec and verified at commissioning  hoping the system is quiet is not a strategy.",
+        answer: "By designing to a low noise criterion from the start: low-velocity ductwork, lined ducts or sound attenuators where needed, equipment on vibration isolation, and terminal units selected for quiet operation at the actual airflow. The noise target gets written into the mechanical spec and verified at commissioning — hoping the system is quiet is not a strategy.",
       },
       {
         question: "What plumbing does a high-volume massage clinic need?",
-        answer: "A commercial laundry sized to the sheet and towel turnover  often multiple loads per hour  with a water heater and drain capacity to match, sinks in or near treatment rooms per the practice's protocol, and service sinks for housekeeping. The water heater sizing is the classic miss: residential-grade equipment can't recover fast enough for back-to-back laundry loads.",
+        answer: "A commercial laundry sized to the sheet and towel turnover — often multiple loads per hour — with a water heater and drain capacity to match, sinks in or near treatment rooms per the practice's protocol, and service sinks for housekeeping. The water heater sizing is the classic miss: residential-grade equipment can't recover fast enough for back-to-back laundry loads.",
       },
       {
         question: "How many treatment rooms can share an HVAC zone?",
-        answer: "As few as the budget allows, ideally one zone per room. Clients are motionless and sensitive to temperature, and different modalities  deep tissue versus hot stone  want different room conditions. At minimum, group no more than two or three rooms per zone, and never put treatment rooms on the same zone as the lobby or laundry.",
+        answer: "As few as the budget allows, ideally one zone per room. Clients are motionless and sensitive to temperature, and different modalities — deep tissue versus hot stone — want different room conditions. At minimum, group no more than two or three rooms per zone, and never put treatment rooms on the same zone as the lobby or laundry.",
       },
       {
         question: "What accessibility requirements apply to massage rooms?",
@@ -869,7 +869,7 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "What makes the ADL suite an engineering challenge?",
-        answer: "It's a complete apartment  kitchen, bathroom, laundry  inside a clinic, and every fixture has to actually work. That means real water, drainage, venting, gas or electric for the kitchen, and electrical for the laundry, all coordinated in a small footprint and all accessible. It also needs to meet both residential-function expectations and commercial code, which is a combination most fixture layouts never face.",
+        answer: "It's a complete apartment — kitchen, bathroom, laundry — inside a clinic, and every fixture has to actually work. That means real water, drainage, venting, gas or electric for the kitchen, and electrical for the laundry, all coordinated in a small footprint and all accessible. It also needs to meet both residential-function expectations and commercial code, which is a combination most fixture layouts never face.",
       },
       {
         question: "What structural capacity does OT gym equipment need?",
@@ -877,11 +877,11 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "How is accessibility different in an OT clinic versus a normal office?",
-        answer: "It's the product, not just compliance. Clearances, reach ranges, door hardware, fixture heights, and turning space all get designed for the patients' actual abilities  which means going beyond code minimums in the treatment areas. The design team should walk the plan with the therapists, because the clinical staff knows what the code doesn't say.",
+        answer: "It's the product, not just compliance. Clearances, reach ranges, door hardware, fixture heights, and turning space all get designed for the patients' actual abilities — which means going beyond code minimums in the treatment areas. The design team should walk the plan with the therapists, because the clinical staff knows what the code doesn't say.",
       },
       {
         question: "What lighting do therapy gyms need?",
-        answer: "Bright, even, low-glare lighting for task work and safety  patients are relearning movement, so shadows and glare are hazards, not annoyances. High color rendering helps therapists assess skin tone and condition. Lighting controls should be simple and reachable, with the ability to dim for specific treatment protocols.",
+        answer: "Bright, even, low-glare lighting for task work and safety — patients are relearning movement, so shadows and glare are hazards, not annoyances. High color rendering helps therapists assess skin tone and condition. Lighting controls should be simple and reachable, with the ability to dim for specific treatment protocols.",
       },
     ],
     sections: [
@@ -930,15 +930,15 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "What is the difference between privacy and intelligibility in these rooms?",
-        answer: "Privacy keeps sound from leaking between rooms  wall ratings, sealed doors, duct detailing. Intelligibility is about sound behavior inside the room  controlling reverberation so speech is clear without echo. A speech therapy room needs both: private from neighbors, and clear inside. They require different treatments and both have to be designed, not assumed.",
+        answer: "Privacy keeps sound from leaking between rooms — wall ratings, sealed doors, duct detailing. Intelligibility is about sound behavior inside the room — controlling reverberation so speech is clear without echo. A speech therapy room needs both: private from neighbors, and clear inside. They require different treatments and both have to be designed, not assumed.",
       },
       {
         question: "How are therapy rooms tuned for speech?",
-        answer: "With absorption placed to control reverberation time into the range where speech is clearest  typically under half a second for small therapy rooms  using acoustic panels, carpet or suitable flooring, and soft furnishings. The design avoids large parallel hard surfaces that create flutter echo, and the HVAC diffusers get selected for quiet throw that doesn't add noise to the tuned room.",
+        answer: "With absorption placed to control reverberation time into the range where speech is clearest — typically under half a second for small therapy rooms — using acoustic panels, carpet or suitable flooring, and soft furnishings. The design avoids large parallel hard surfaces that create flutter echo, and the HVAC diffusers get selected for quiet throw that doesn't add noise to the tuned room.",
       },
       {
         question: "Do speech therapy clinics need special electrical or data?",
-        answer: "Beyond standard clinic needs: good lighting for observing mouth and facial movements  bright, even, high color rendering  plus data and recording capability where sessions are documented or reviewed. Some clinics use audio/video recording for assessment, which needs data drops, camera power, and acoustic treatment that accounts for the recording equipment.",
+        answer: "Beyond standard clinic needs: good lighting for observing mouth and facial movements — bright, even, high color rendering — plus data and recording capability where sessions are documented or reviewed. Some clinics use audio/video recording for assessment, which needs data drops, camera power, and acoustic treatment that accounts for the recording equipment.",
       },
     ],
     sections: [
@@ -983,19 +983,19 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "How is HVAC sized for hot yoga?",
-        answer: "To the real class cycle: drive an empty room to 95-105F before class, hold temperature with 20-30 heat-generating occupants, then recover for the next class. That means heating capacity well beyond comfort norms, plus ventilation that brings in fresh air without dumping the heat. The load calculation models the schedule  back-to-back classes are the design condition, not a single session.",
+        answer: "To the real class cycle: drive an empty room to 95-105F before class, hold temperature with 20-30 heat-generating occupants, then recover for the next class. That means heating capacity well beyond comfort norms, plus ventilation that brings in fresh air without dumping the heat. The load calculation models the schedule — back-to-back classes are the design condition, not a single session.",
       },
       {
         question: "Why does ventilation matter so much in a yoga room?",
-        answer: "A room full of people breathing deeply in heat consumes oxygen and generates CO2 and humidity fast. Without generous fresh air, the room feels heavy and stale no matter the temperature. The design delivers high ventilation rates at low velocity  practitioners should feel fresh air, not drafts  with quiet equipment since silence is part of the practice.",
+        answer: "A room full of people breathing deeply in heat consumes oxygen and generates CO2 and humidity fast. Without generous fresh air, the room feels heavy and stale no matter the temperature. The design delivers high ventilation rates at low velocity — practitioners should feel fresh air, not drafts — with quiet equipment since silence is part of the practice.",
       },
       {
         question: "What structural work does a sprung floor need?",
-        answer: "The slab or framing gets checked for the sprung assembly's weight plus the dynamic loads of group movement, with deflection limits that keep the floor feeling solid. The sprung system itself  foam, sleepers, or engineered panels  gets specified with the flooring contractor, and the structural engineer verifies the substrate can carry it plus the occupancy load.",
+        answer: "The slab or framing gets checked for the sprung assembly's weight plus the dynamic loads of group movement, with deflection limits that keep the floor feeling solid. The sprung system itself — foam, sleepers, or engineered panels — gets specified with the flooring contractor, and the structural engineer verifies the substrate can carry it plus the occupancy load.",
       },
       {
         question: "How should studio lighting and acoustics be designed?",
-        answer: "Fully dimmable warm lighting with simple scene controls  bright for setup, low for practice, with no flicker or buzz. Acoustics need enough absorption to keep the instructor intelligible without echo, but not so dead the room feels flat. The sound system gets coordinated with the acoustic treatment so music and voice both work in the same space.",
+        answer: "Fully dimmable warm lighting with simple scene controls — bright for setup, low for practice, with no flicker or buzz. Acoustics need enough absorption to keep the instructor intelligible without echo, but not so dead the room feels flat. The sound system gets coordinated with the acoustic treatment so music and voice both work in the same space.",
       },
     ],
     sections: [
@@ -1040,19 +1040,19 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "How much space does each reformer need?",
-        answer: "Plan on roughly 25 to 35 square feet per reformer including working clearance  the machine footprint plus room for the instructor to move around it and for straps and extensions. The room layout gets drawn with actual equipment dimensions, not generic rectangles, because reformers, towers, and chairs all have different footprints and clearance needs.",
+        answer: "Plan on roughly 25 to 35 square feet per reformer including working clearance — the machine footprint plus room for the instructor to move around it and for straps and extensions. The room layout gets drawn with actual equipment dimensions, not generic rectangles, because reformers, towers, and chairs all have different footprints and clearance needs.",
       },
       {
         question: "Do reformers need structural anchorage?",
-        answer: "Some do, per the manufacturer  wall-mounted or tower units especially. Even freestanding reformers need a level, stable floor; the structural check covers the concentrated loads and confirms the slab is level enough that carriages track true. On upper floors, the floor system gets verified for the full equipment complement plus dynamic loads.",
+        answer: "Some do, per the manufacturer — wall-mounted or tower units especially. Even freestanding reformers need a level, stable floor; the structural check covers the concentrated loads and confirms the slab is level enough that carriages track true. On upper floors, the floor system gets verified for the full equipment complement plus dynamic loads.",
       },
       {
         question: "Why is floor levelness so important in a Pilates studio?",
-        answer: "Reformers are precision machines: carriages roll on tracks, springs load evenly, and straps align symmetrically. A slab that's out of level makes carriages drift and loads uneven, which clients feel immediately. The design specifies floor levelness tolerances and verifies the existing slab before equipment is ordered  grinding or topping a slab after the fact is disruptive and expensive.",
+        answer: "Reformers are precision machines: carriages roll on tracks, springs load evenly, and straps align symmetrically. A slab that's out of level makes carriages drift and loads uneven, which clients feel immediately. The design specifies floor levelness tolerances and verifies the existing slab before equipment is ordered — grinding or topping a slab after the fact is disruptive and expensive.",
       },
       {
         question: "What HVAC and lighting do Pilates rooms need?",
-        answer: "Quiet, zoned HVAC with low-velocity air distribution  no drafts across a focused class  and ventilation sized to the exertion level, which is moderate but sustained. Lighting should be bright and even for the instructor to read alignment and form, with dimming for warm-up and cool-down phases. Flicker-free sources matter under sustained gaze.",
+        answer: "Quiet, zoned HVAC with low-velocity air distribution — no drafts across a focused class — and ventilation sized to the exertion level, which is moderate but sustained. Lighting should be bright and even for the instructor to read alignment and form, with dimming for warm-up and cool-down phases. Flicker-free sources matter under sustained gaze.",
       },
     ],
     sections: [
@@ -1097,19 +1097,19 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "How are ballet barres anchored?",
-        answer: "Per the manufacturer: typically to wall blocking or structural backing with specified fasteners, or to floor-mounted standards. The backing  plywood or blocking in the wall at barre height  has to be in the framing drawings before drywall, because retrofitting backing means opening finished walls. Freestanding barres avoid the wall issue but need floor space and stability checks.",
+        answer: "Per the manufacturer: typically to wall blocking or structural backing with specified fasteners, or to floor-mounted standards. The backing — plywood or blocking in the wall at barre height — has to be in the framing drawings before drywall, because retrofitting backing means opening finished walls. Freestanding barres avoid the wall issue but need floor space and stability checks.",
       },
       {
         question: "Why do barre studios need acoustic isolation?",
-        answer: "Because the class runs on loud, bass-heavy music with rhythmic movement, often early morning or evening in buildings with neighbors above, below, or beside. Without designed isolation  decoupled walls, floating or isolated floors, sealed penetrations  low-frequency energy transmits structurally and becomes a neighbor complaint or a lease violation. The acoustic design targets the actual music spectrum, not generic office noise.",
+        answer: "Because the class runs on loud, bass-heavy music with rhythmic movement, often early morning or evening in buildings with neighbors above, below, or beside. Without designed isolation — decoupled walls, floating or isolated floors, sealed penetrations — low-frequency energy transmits structurally and becomes a neighbor complaint or a lease violation. The acoustic design targets the actual music spectrum, not generic office noise.",
       },
       {
         question: "How much cooling does a barre class need?",
-        answer: "A lot for the room size. Twenty-plus people doing continuous exertion generate several kilowatts of sensible and latent heat in a small space. The HVAC load calculation uses the real class size and exertion level, and the system needs the ventilation to match  CO2 and humidity climb fast in a packed, high-energy room.",
+        answer: "A lot for the room size. Twenty-plus people doing continuous exertion generate several kilowatts of sensible and latent heat in a small space. The HVAC load calculation uses the real class size and exertion level, and the system needs the ventilation to match — CO2 and humidity climb fast in a packed, high-energy room.",
       },
       {
         question: "What flooring works for barre?",
-        answer: "A resilient, joint-friendly surface  sprung wood, cushioned vinyl, or engineered dance flooring  over a properly prepared substrate. The structural engineer verifies the slab or framing for the assembly plus the rhythmic loading, and the surface needs to handle the lateral forces of barre work without being slippery. Concrete sealed for looks is the wrong answer for joints.",
+        answer: "A resilient, joint-friendly surface — sprung wood, cushioned vinyl, or engineered dance flooring — over a properly prepared substrate. The structural engineer verifies the slab or framing for the assembly plus the rhythmic loading, and the surface needs to handle the lateral forces of barre work without being slippery. Concrete sealed for looks is the wrong answer for joints.",
       },
     ],
     sections: [
@@ -1154,15 +1154,15 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "How much heat does a spin class generate?",
-        answer: "Roughly 600 to 900 watts per rider at high exertion, so a 40-rider class presents 24 to 36 kilowatts of heat  the equivalent of a small commercial kitchen's worth of thermal load in one room. The cooling calculation uses the real rider count at real exertion, and the system is selected to hold temperature through the class, not just reach it at the start.",
+        answer: "Roughly 600 to 900 watts per rider at high exertion, so a 40-rider class presents 24 to 36 kilowatts of heat — the equivalent of a small commercial kitchen's worth of thermal load in one room. The cooling calculation uses the real rider count at real exertion, and the system is selected to hold temperature through the class, not just reach it at the start.",
       },
       {
         question: "Why do spin rooms need so much ventilation?",
-        answer: "Forty people breathing hard consume oxygen and dump CO2 and moisture at extraordinary rates. Without high air changes, CO2 climbs to levels that cause headaches and fatigue  the opposite of the workout's intent  and humidity makes the room feel oppressive. The design typically targets air changes well above standard assembly rates, with the ventilation heat-recovered where practical.",
+        answer: "Forty people breathing hard consume oxygen and dump CO2 and moisture at extraordinary rates. Without high air changes, CO2 climbs to levels that cause headaches and fatigue — the opposite of the workout's intent — and humidity makes the room feel oppressive. The design typically targets air changes well above standard assembly rates, with the ventilation heat-recovered where practical.",
       },
       {
         question: "How loud do spin studios get, and how is that contained?",
-        answer: "Routinely 95+ dBA with the music and instructor system at full energy. Containment needs serious acoustic assemblies  high-mass decoupled walls, isolated floor/ceiling, acoustically rated doors  designed for low-frequency music energy. In multi-tenant buildings, the acoustic design often drives the room's location: slab-on-grade or otherwise isolated from sensitive neighbors.",
+        answer: "Routinely 95+ dBA with the music and instructor system at full energy. Containment needs serious acoustic assemblies — high-mass decoupled walls, isolated floor/ceiling, acoustically rated doors — designed for low-frequency music energy. In multi-tenant buildings, the acoustic design often drives the room's location: slab-on-grade or otherwise isolated from sensitive neighbors.",
       },
       {
         question: "What electrical does the theatrical experience need?",
@@ -1211,19 +1211,19 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "How are heavy bags structurally supported?",
-        answer: "Through engineered mounts: wall-mounted or ceiling-suspended rack systems anchored to structure  not to drywall or ceiling tile  with backing, through-bolts, or structural connections designed for the dynamic load. A 100-pound bag in full swing imposes impact and cyclic forces multiples of its static weight, and the anchorage gets designed for those dynamic forces with the manufacturer's mounting requirements.",
+        answer: "Through engineered mounts: wall-mounted or ceiling-suspended rack systems anchored to structure — not to drywall or ceiling tile — with backing, through-bolts, or structural connections designed for the dynamic load. A 100-pound bag in full swing imposes impact and cyclic forces multiples of its static weight, and the anchorage gets designed for those dynamic forces with the manufacturer's mounting requirements.",
       },
       {
         question: "What structural work does a boxing ring need?",
-        answer: "A level platform  typically 16 to 24 feet square  with a resilient canvas-over-foam-over-wood assembly on a verified structure. The platform concentrates the ring weight plus fighters' dynamic loads on its footprint, so the slab or framing gets checked, and the platform itself needs to be level and stable. The design also accounts for getting the platform materials into the space.",
+        answer: "A level platform — typically 16 to 24 feet square — with a resilient canvas-over-foam-over-wood assembly on a verified structure. The platform concentrates the ring weight plus fighters' dynamic loads on its footprint, so the slab or framing gets checked, and the platform itself needs to be level and stable. The design also accounts for getting the platform materials into the space.",
       },
       {
         question: "What flooring suits a boxing club?",
-        answer: "Impact-absorbing commercial flooring  rubber, foam-tile systems, or sprung assemblies  over a properly prepared slab, with different zones for bags, ring, and conditioning. The surface has to absorb jump-rope and footwork impact, resist tearing from pivoting feet, and stay in place under lateral forces. The structural slab underneath gets checked for the concentrated equipment loads.",
+        answer: "Impact-absorbing commercial flooring — rubber, foam-tile systems, or sprung assemblies — over a properly prepared slab, with different zones for bags, ring, and conditioning. The surface has to absorb jump-rope and footwork impact, resist tearing from pivoting feet, and stay in place under lateral forces. The structural slab underneath gets checked for the concentrated equipment loads.",
       },
       {
         question: "How is boxing gym noise controlled?",
-        answer: "With acoustic isolation designed for impact and low-frequency energy: decoupled wall and ceiling assemblies, floating or isolated floor treatments where structure-borne thud transmits, and sealed penetrations. Bag impacts transmit through structure efficiently, so the isolation strategy addresses structure-borne paths, not just airborne sound. Neighbor-compatible locations  away from quiet tenants  are the first and cheapest acoustic decision.",
+        answer: "With acoustic isolation designed for impact and low-frequency energy: decoupled wall and ceiling assemblies, floating or isolated floor treatments where structure-borne thud transmits, and sealed penetrations. Bag impacts transmit through structure efficiently, so the isolation strategy addresses structure-borne paths, not just airborne sound. Neighbor-compatible locations — away from quiet tenants — are the first and cheapest acoustic decision.",
       },
     ],
     sections: [
@@ -1276,11 +1276,11 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "Should the mat area be raised or at floor level?",
-        answer: "Raised platforms improve visibility for coaching and spectating but add structural design  platform framing, edge protection, and access. Floor-level mats on a proper slab are simpler structurally. Either way the surface system needs impact absorption, seam integrity, and cleanability. The decision affects the structural drawings, so it gets made before design, not during construction.",
+        answer: "Raised platforms improve visibility for coaching and spectating but add structural design — platform framing, edge protection, and access. Floor-level mats on a proper slab are simpler structurally. Either way the surface system needs impact absorption, seam integrity, and cleanability. The decision affects the structural drawings, so it gets made before design, not during construction.",
       },
       {
         question: "How is hygiene engineered into an MMA gym?",
-        answer: "Through ventilation, materials, and plumbing: high air exchange to manage the close-contact environment, non-porous cleanable mat and floor surfaces with sealed seams, and accessible cleaning  hose bibs, floor drains in wash-down areas, and a laundry for gis and towels. The HVAC design also controls humidity, because damp mats are a hygiene problem as well as a comfort one.",
+        answer: "Through ventilation, materials, and plumbing: high air exchange to manage the close-contact environment, non-porous cleanable mat and floor surfaces with sealed seams, and accessible cleaning — hose bibs, floor drains in wash-down areas, and a laundry for gis and towels. The HVAC design also controls humidity, because damp mats are a hygiene problem as well as a comfort one.",
       },
     ],
     sections: [
@@ -1325,15 +1325,15 @@ export const WAVE_DC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "What does a cold plunge need structurally and electrically?",
-        answer: "Structural verification for the filled water weight  a commercial plunge tub can exceed a thousand pounds  on the actual floor structure, plus a dedicated GFCI-protected circuit for the chiller and filtration pump sized to the equipment cut sheets. The chiller also rejects heat, so its location needs ventilation or outdoor placement with proper clearances.",
+        answer: "Structural verification for the filled water weight — a commercial plunge tub can exceed a thousand pounds — on the actual floor structure, plus a dedicated GFCI-protected circuit for the chiller and filtration pump sized to the equipment cut sheets. The chiller also rejects heat, so its location needs ventilation or outdoor placement with proper clearances.",
       },
       {
         question: "How are hot and cold zones kept comfortable in one space?",
-        answer: "With HVAC zoning that treats them as different rooms: the sauna and heat areas get ventilation and cooling for the adjacent spaces, the plunge area gets dehumidification, and the lounge gets quiet comfort cooling  each on its own control. Physical separation, even partial, helps enormously; a fully open plan forces the systems to fight each other.",
+        answer: "With HVAC zoning that treats them as different rooms: the sauna and heat areas get ventilation and cooling for the adjacent spaces, the plunge area gets dehumidification, and the lounge gets quiet comfort cooling — each on its own control. Physical separation, even partial, helps enormously; a fully open plan forces the systems to fight each other.",
       },
       {
         question: "What drainage does a recovery lounge need?",
-        answer: "Floor drains or trench drains in all wet zones  around plunges, outside sauna and steam entries, at any rinse showers  with waterproofed floors sloped to drain, plus trapped and vented connections. Plunge tubs need a drain-down path for water changes, and the filtration backwash needs proper routing. Wet-zone drainage gets designed like a small bathhouse.",
+        answer: "Floor drains or trench drains in all wet zones — around plunges, outside sauna and steam entries, at any rinse showers — with waterproofed floors sloped to drain, plus trapped and vented connections. Plunge tubs need a drain-down path for water changes, and the filtration backwash needs proper routing. Wet-zone drainage gets designed like a small bathhouse.",
       },
       {
         question: "How is the lounge kept quiet with all that equipment?",
