@@ -9,6 +9,7 @@
 import { PHASE0_BATCH3_PROJECT_PAGES_A } from "./phase0-batch3-project-pages-a";
 import { PHASE0_BATCH3_PROJECT_PAGES_B } from "./phase0-batch3-project-pages-b";
 import { WAVE_B_ANSWER_PAGES } from "./wave-b-answer-pages";
+import { WAVE_C_ANSWER_PAGES } from "./wave-c-answer-pages";
 
 export type Phase0Faq = { question: string; answer: string };
 export type Phase0AeoSection = { heading: string; body: string; bullets?: string[] };
@@ -740,6 +741,7 @@ export const PHASE0_BATCH3_PROJECT_PAGES: Phase0AeoPage[] = [
 ];
 PHASE0_AEO_PAGES.push(...PHASE0_BATCH3_PROJECT_PAGES);
 PHASE0_AEO_PAGES.push(...WAVE_B_ANSWER_PAGES);
+PHASE0_AEO_PAGES.push(...WAVE_C_ANSWER_PAGES);
 
 export type Phase0ServicePage = {
   slug: string;

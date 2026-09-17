@@ -1,0 +1,255 @@
+import type { Phase0AeoPage } from "./phase0-corpus";
+
+const founderNote = "I'm Jeremy Mills, CEO & Founder of Apex Grid Engineering and a U.S. Air Force veteran. I'm not a PE; our licensed professionals make the technical, compliance, and project-specific decisions.";
+
+const sharedLinks = [
+  { label: "Title 24 energy compliance for commercial buildings", href: "/resources/title-24-energy-compliance-commercial-buildings/" },
+  { label: "What is Title 24?", href: "/answers/what-is-title-24/" },
+  { label: "Title 24 versus the IECC", href: "/answers/title-24-vs-iecc/" },
+  { label: "Energy-code compliance services", href: "/services/energy-code-compliance/" },
+];
+
+export const WAVE_C_ANSWER_PAGES: Phase0AeoPage[] = [
+  {
+    slug: "title-24-compliance-process",
+    title: "Title 24 Compliance Process: Step-by-Step | Apex Grid",
+    description: "Follow California's Title 24 Part 6 compliance process from code-cycle selection and energy modeling through permit forms, installation, testing, and closeout.",
+    h1: "What Is the Title 24 Compliance Process?",
+    answer: "Title 24, Part 6 compliance is a documented process that connects the applicable California Energy Code edition to the permitted design and installed work. The team identifies the project scope and compliance path, prepares calculations and certificates, coordinates them with the drawings, answers plan-check comments, and completes required installation, verification, acceptance, and closeout records.",
+    topic: "Title 24 Compliance Process",
+    serviceHref: "/services/energy-code-compliance/",
+    founderNote,
+    directAnswer: "The Title 24 compliance process starts by selecting the California Energy Code edition tied to the permit application date. The team then defines the project scope, chooses a prescriptive or performance path, completes calculations and compliance documents, coordinates the permit set, responds to plan check, and records required installation, verification, and acceptance testing.",
+    facts: [
+      { label: "2022 Energy Code effective date", value: "January 1, 2023" },
+      { label: "2025 Energy Code effective date", value: "January 1, 2026" },
+      { label: "Performance software", value: "CBECC-Res or CBECC-Com, or other software approved for the applicable method" },
+      { label: "Residential document sequence", value: "CF1R design, CF2R installation, and applicable CF3R verification certificates" },
+      { label: "Nonresidential document sequence", value: "NRCC compliance, NRCI installation, NRCV verification, and NRCA acceptance certificates as applicable" },
+    ],
+    howTo: true,
+    sections: [
+      {
+        heading: "How do you establish the applicable code and project scope?",
+        body: "I start with the permit application date, jurisdiction, occupancy, project type, and exact work being permitted. California updates the Energy Code on a three-year cycle. The 2022 standards apply to permit applications filed on or after January 1, 2023, while the 2025 standards apply on or after January 1, 2026. New construction, additions, alterations, and changes of use can trigger different provisions, so the scope has to be mapped before calculations begin.",
+        bullets: ["Confirm the permit application date and enforcing agency", "Identify new, addition, alteration, and change-of-use work", "Separate residential and nonresidential compliance obligations", "Record assumptions that require owner, architect, contractor, or AHJ confirmation"],
+      },
+      {
+        heading: "How are calculations and permit documents prepared?",
+        body: "The design team selects the allowed prescriptive or performance approach and coordinates envelope, lighting, mechanical, service-water-heating, controls, and covered-process inputs. Performance work uses approved compliance software; CBECC-Res and CBECC-Com are California's public reference programs for their respective building types. Design certificates—such as residential CF1R or nonresidential NRCC documents—must agree with the drawings, schedules, specifications, and modeled assemblies submitted for permit.",
+        bullets: ["Model the actual geometry, assemblies, systems, controls, schedules, and efficiencies", "Use the correct approved software version for the applicable code cycle", "Place required compliance information in the permit set", "Check that forms, calculations, plans, and specifications describe the same design"],
+      },
+      {
+        heading: "What happens during plan check and construction?",
+        body: "The enforcing agency reviews the submitted package and may issue comments about inputs, mandatory measures, signatures, registration, or coordination. After permit, installers document completed work. Residential projects commonly use CF2R installation certificates and applicable CF3R field-verification certificates completed by certified HERS raters. Nonresidential projects use applicable NRCI installation, NRCV verification, and NRCA acceptance documents. The required records depend on the measures in the approved design.",
+        bullets: ["Answer each plan-check comment against the coordinated design record", "Revise calculations and every affected drawing or form together", "Assign installation certificates to the responsible installing parties", "Schedule HERS verification or acceptance testing before work becomes inaccessible"],
+      },
+      {
+        heading: "Which closeout mistakes can break the compliance chain?",
+        body: "A permit model is not the end of compliance. Substituted equipment, changed glazing, revised lighting controls, altered ductwork, or missing tests can separate construction from the approved basis. I recommend maintaining a live compliance matrix from design through closeout. The responsible professionals, installers, HERS raters, acceptance-test technicians, and enforcement agency each have distinct roles; one signature does not replace another party's required record.",
+        bullets: ["Recheck substitutions against the approved model and mandatory measures", "Preserve registered certificates and accepted revisions", "Resolve failed verification or acceptance tests before closeout", "Confirm the final certificate set matches installed conditions"],
+      },
+    ],
+    extraLinks: sharedLinks,
+    faqs: [
+      { question: "Is Title 24 the same as the California Energy Code?", answer: "Title 24 contains all parts of the California Building Standards Code. Part 6 is the California Building Energy Efficiency Standards, commonly called the California Energy Code." },
+      { question: "Does every project require an energy model?", answer: "No. Some projects can use an allowed prescriptive approach, while others use or require a performance approach. Scope, building type, measures, and the applicable code determine the path." },
+      { question: "What is submitted with the permit application?", answer: "The package can include plans, specifications, calculations, and applicable design certificates such as CF1R documents for residential work or NRCC documents for nonresidential work." },
+      { question: "When is a HERS rater involved?", answer: "A certified HERS rater performs field verification and diagnostic testing for residential measures that require it. The approved compliance documents identify applicable measures and certificates." },
+      { question: "Who approves Title 24 compliance?", answer: "The local enforcement agency reviews the permit and closeout documents. Designers, installers, raters, and acceptance-test technicians document their assigned work but do not replace the authority's approval." },
+    ],
+  },
+  {
+    slug: "title-24-compliance-cost-timeline",
+    title: "Title 24 Compliance Cost and Timeline | Apex Grid",
+    description: "Understand what drives Title 24 engineering fees and schedules, including modeling, compliance forms, drawing coordination, plan check, field verification, and revisions.",
+    h1: "How Much Does Title 24 Compliance Cost and How Long Does It Take?",
+    answer: "Title 24 compliance has no universal fee or guaranteed duration. Cost and schedule depend on building type, floor area, project scope, compliance path, envelope and system complexity, input quality, modeling iterations, documentation, coordination, plan-check cycles, construction changes, HERS verification, and acceptance testing. A responsible proposal separates engineering production from agency review and field closeout.",
+    topic: "Title 24 Cost and Timeline",
+    serviceHref: "/services/energy-code-compliance/",
+    founderNote,
+    directAnswer: "Title 24 compliance cost and timing depend on building type, project scope, prescriptive versus performance analysis, model complexity, available design information, required forms, and review cycles. A focused package with complete inputs can move quickly; incomplete drawings, late equipment changes, performance modeling, plan-check revisions, HERS verification, or acceptance testing extend both engineering effort and total schedule.",
+    facts: [
+      { label: "State fee schedule", value: "None; professional fees are scope-specific" },
+      { label: "Code-cycle checkpoint", value: "Permit application date determines whether the 2022 or 2025 Energy Code applies" },
+      { label: "Design schedule components", value: "Input review, calculations or model, forms, drawing coordination, quality control, and submittal" },
+      { label: "External schedule components", value: "AHJ intake and review, contractor installation, HERS verification, acceptance testing, and closeout" },
+    ],
+    howTo: true,
+    sections: [
+      {
+        heading: "What determines the engineering fee for Title 24 compliance?",
+        body: "I do not treat Title 24 as a flat form-filling charge. A small alteration with settled assemblies and equipment is different from a new commercial building with multiple space types, complex glazing, lighting controls, HVAC systems, and performance tradeoffs. The proposal should state the code cycle, building scope, compliance method, required certificates, drawing coordination, included model iterations, plan-check responses, and construction-phase services.",
+        bullets: ["Building type, conditioned area, occupancy, and alteration scope", "Envelope, lighting, HVAC, controls, service water heating, and covered processes", "Prescriptive documentation versus whole-building performance modeling", "Number of alternatives, revisions, submissions, and construction changes"],
+      },
+      {
+        heading: "How long does design-phase compliance usually take?",
+        body: "A useful schedule starts only after the necessary inputs are available. Focused prescriptive documentation can take less effort than a whole-building performance model, but neither should be promised before reviewing the project. Modeling may require geometry setup, zoning, schedules, assemblies, system definitions, proposed-versus-standard comparison, and design revisions. I separate that production period from the jurisdiction's intake and plan-check queue, which the consultant does not control.",
+        bullets: ["Set an input-complete milestone before starting the production clock", "Identify who supplies envelope, lighting, mechanical, and controls data", "Reserve time for internal quality control and drawing coordination", "Track agency review and consultant response as separate schedule periods"],
+      },
+      {
+        heading: "Why do plan check and construction change the timeline?",
+        body: "A plan-check comment can require clarification, corrected inputs, revised forms, or changes across drawings and calculations. During procurement, a substituted rooftop unit, glazing product, water heater, luminaire, or control sequence can affect the compliance basis. Residential HERS measures and nonresidential acceptance tests also depend on installed systems and qualified field participants. Late scheduling or failed tests can delay closeout even when the original permit analysis was timely.",
+        bullets: ["Budget for at least the review cycles expressly included in the proposal", "Require energy-impacting substitutions to be reviewed before installation", "Schedule raters and acceptance-test technicians early", "Distinguish permit issuance from final compliance closeout"],
+      },
+      {
+        heading: "What information produces the most reliable cost and schedule?",
+        body: "For an estimate, I ask for the address, jurisdiction, permit date target, occupancy, floor area, project narrative, architectural drawings, envelope assemblies, lighting plans and controls, mechanical schedules, service-water-heating information, and any prior compliance files or comments. A proposal based on actual inputs can identify exclusions and decision dates; a generic price cannot reveal whether the design is ready to model.",
+        bullets: ["Current architectural and engineering backgrounds", "Window, wall, roof, lighting, HVAC, and water-heating selections", "Owner performance goals and alternatives requiring study", "Permit milestones, procurement dates, and known agency comments"],
+      },
+    ],
+    extraLinks: sharedLinks,
+    faqs: [
+      { question: "Is there a standard price for a Title 24 report?", answer: "No. California does not set a universal professional fee. Building type, scope, method, complexity, inputs, deliverables, revisions, and construction-phase services determine the work." },
+      { question: "Can Title 24 compliance be completed in one day?", answer: "A limited, complete scope may move quickly, but no responsible schedule should be promised before the inputs, code cycle, method, forms, and coordination requirements are reviewed." },
+      { question: "Does the fee include plan-check responses?", answer: "Only if the proposal says so. It should state the included review cycles and how owner changes, redesign, substitutions, or comments outside the original scope are handled." },
+      { question: "Are HERS and acceptance-testing fees included?", answer: "Not automatically. Field verification and acceptance testing may be contracted separately from design compliance services. The proposal should identify who retains and pays each participant." },
+      { question: "What causes the most avoidable delay?", answer: "Incomplete inputs, inconsistent drawings, late equipment selections, unreviewed substitutions, missed registration requirements, and field testing scheduled after systems become inaccessible commonly create rework." },
+    ],
+  },
+  {
+    slug: "title-24-commercial-buildings",
+    title: "Title 24 Requirements for Commercial Buildings | Apex Grid",
+    description: "Review California Title 24 Part 6 requirements for commercial envelopes, lighting, mechanical systems, controls, documentation, acceptance testing, and permits.",
+    h1: "What Title 24 Requirements Apply to Commercial Buildings?",
+    answer: "California commercial buildings must comply with the applicable Title 24, Part 6 mandatory measures and an allowed prescriptive or performance path. The permit design can address envelope assemblies, fenestration, lighting power and controls, HVAC efficiency and controls, ventilation interfaces, service water heating, covered processes, commissioning, solar or storage provisions, documentation, and acceptance testing as applicable.",
+    topic: "Commercial Title 24 Requirements",
+    serviceHref: "/services/energy-code-compliance/",
+    founderNote,
+    directAnswer: "Title 24, Part 6 applies California energy requirements to commercial building envelopes, lighting, mechanical systems, service water heating, controls, and covered processes. Projects must satisfy mandatory measures plus an allowed prescriptive or performance path, document the design for permit, and complete applicable installation certificates, commissioning activities, verification, and acceptance testing before closeout.",
+    facts: [
+      { label: "Current cycle transition", value: "2022 standards: January 1, 2023; 2025 standards: January 1, 2026" },
+      { label: "Nonresidential design certificate", value: "NRCC Certificate of Compliance" },
+      { label: "Construction certificates", value: "Applicable NRCI installation, NRCV verification, and NRCA acceptance documents" },
+      { label: "Performance reference software", value: "CBECC-Com for nonresidential performance compliance" },
+    ],
+    sections: [
+      {
+        heading: "Which envelope requirements affect a commercial project?",
+        body: "I look at the envelope as a coordinated system rather than a list of isolated R-values. Roofs, walls, floors, doors, windows, skylights, air barriers, cool-roof properties, and alterations all interact with climate zone, space conditioning, orientation, geometry, and compliance method. Performance modeling can evaluate tradeoffs, but mandatory measures still apply. Product data and drawings must identify the assemblies actually intended for construction.",
+        bullets: ["Climate zone, conditioned boundaries, and space classifications", "Opaque assembly insulation and thermal properties", "Fenestration area, U-factor, solar heat gain, and orientation", "Air sealing, roofing properties, alterations, and additions"],
+      },
+      {
+        heading: "How do lighting and controls comply with Title 24?",
+        body: "Commercial lighting work can involve allowed lighting power, area controls, multilevel controls, occupancy sensing, automatic shutoff, daylighting controls, demand response, and exterior-lighting provisions. Requirements depend on space type and project scope. The compliance documents, fixture schedule, control diagrams, sequences, specifications, and electrical plans should agree. Acceptance testing may be required for designated lighting-control systems.",
+        bullets: ["Interior and exterior lighting power documentation", "Occupancy, scheduling, daylighting, and multilevel controls", "Control zoning, sensor locations, sequences, and commissioning", "Applicable NRCA lighting-control acceptance tests"],
+      },
+      {
+        heading: "What mechanical requirements must the design team coordinate?",
+        body: "Mechanical compliance can include equipment efficiency, sizing, fan power, ventilation-related energy provisions, economizers, heat recovery, duct and piping insulation, controls, thermostatic zoning, demand control, and commissioning requirements. The exact provisions depend on system type, capacity, climate, occupancy, and project scope. A model result does not excuse missing mandatory measures, and equipment substitutions must be checked against the approved compliance basis.",
+        bullets: ["Equipment type, capacity, rated efficiency, and sizing basis", "Fan systems, ductwork, piping, insulation, and leakage provisions", "Economizers, ventilation controls, heat recovery, and zoning", "Sequences, setpoints, scheduling, sensors, and acceptance testing"],
+      },
+      {
+        heading: "What belongs in the commercial permit and closeout package?",
+        body: "The permit record commonly includes applicable NRCC certificates, calculations or performance output, plans, schedules, notes, details, and specifications. Construction records can include NRCI certificates from installers, NRCV verification where required, and NRCA certificates for acceptance-tested systems. Commissioning documents may also apply. I recommend assigning every required document and test before permit issuance so closeout is not left to guesswork.",
+        bullets: ["Coordinate the NRCC package with every affected discipline", "Identify certificate authors, installers, verifiers, and acceptance testers", "Track approved revisions and energy-impacting substitutions", "Deliver final registered or signed records required by the enforcing agency"],
+      },
+    ],
+    extraLinks: sharedLinks,
+    faqs: [
+      { question: "Does Title 24 apply only to new commercial buildings?", answer: "No. Additions and alterations can trigger applicable requirements, subject to the scope, exceptions, and provisions of the governing code cycle." },
+      { question: "Can a commercial project use a prescriptive path?", answer: "Yes, when the project can satisfy the applicable mandatory and prescriptive requirements. A performance path may be used where allowed to evaluate tradeoffs against the standard design." },
+      { question: "What is an NRCC form?", answer: "NRCC means Nonresidential Certificate of Compliance. Applicable NRCC documents record design-phase compliance information for the permit package." },
+      { question: "Is CBECC-Com required for every commercial project?", answer: "No. CBECC-Com is California's public reference software for nonresidential performance compliance. Prescriptive projects and approved alternative software follow their applicable documentation paths." },
+      { question: "What is Title 24 acceptance testing?", answer: "Qualified technicians test designated installed systems or controls and document results on applicable NRCA certificates. Required tests depend on the measures and systems in the project." },
+    ],
+  },
+  {
+    slug: "title-24-vs-ashrae-90-1",
+    title: "Title 24 vs ASHRAE 90.1: Key Differences | Apex Grid",
+    description: "Compare California Title 24 Part 6 with ASHRAE Standard 90.1 by legal role, adoption, scope, compliance paths, modeling rules, forms, and field verification.",
+    h1: "How Is Title 24 Different From ASHRAE 90.1?",
+    answer: "Title 24, Part 6 is California's enforceable building energy code. ASHRAE Standard 90.1 is a national consensus standard establishing minimum energy-efficiency requirements for most sites and buildings except low-rise residential buildings. Jurisdictions can adopt or reference 90.1, but a California project follows the applicable California Energy Code and approved compliance procedures rather than substituting 90.1 by preference.",
+    topic: "Title 24 versus ASHRAE 90.1",
+    serviceHref: "/services/energy-code-compliance/",
+    founderNote,
+    directAnswer: "Title 24, Part 6 is California's legally adopted building energy code and includes state-specific compliance methods, documents, and field requirements. ASHRAE 90.1 is a national consensus standard for energy-efficient design of most buildings except low-rise residential buildings. A project follows the standard adopted by its jurisdiction; the two are not interchangeable compliance reports.",
+    facts: [
+      { label: "Title 24 legal role", value: "California Building Energy Efficiency Standards in Title 24, Part 6" },
+      { label: "ASHRAE 90.1 role", value: "National consensus minimum energy standard for most sites and buildings except low-rise residential buildings" },
+      { label: "California performance software", value: "CBECC-Res and CBECC-Com reference programs" },
+      { label: "Governing decision", value: "Project location, permit date, adopted code, amendments, and AHJ requirements" },
+    ],
+    sections: [
+      {
+        heading: "What legal role does each energy standard play?",
+        body: "I separate a standard's technical content from its legal status. California adopts Title 24 through the California Building Standards Code, and local enforcement agencies administer it. ASHRAE develops Standard 90.1 through a national consensus process. It becomes enforceable where a jurisdiction adopts or references it. A design team's preference, owner standard, or familiar modeling tool does not override the code legally applicable to the permit.",
+        bullets: ["Title 24 Part 6 is California-specific regulation", "ASHRAE 90.1 is a model consensus standard", "Adoption and amendments establish enforceability", "The AHJ confirms the accepted compliance route and documentation"],
+      },
+      {
+        heading: "How do their scopes and compliance methods differ?",
+        body: "Both frameworks address energy use in building envelopes, lighting, mechanical systems, service water heating, controls, and other covered systems, but their definitions, climate data, mandatory provisions, prescriptive limits, performance baselines, and modeling rules differ. Title 24 includes California climate zones and state compliance infrastructure. ASHRAE 90.1 uses its own sections, appendices, climate framework, and performance-rating methods. Results cannot be transferred between methods without a code-based analysis.",
+        bullets: ["Different definitions, exceptions, mandatory provisions, and thresholds", "Different climate classifications and envelope criteria", "Different baseline and proposed-building modeling rules", "Different software approval, documentation, and review conventions"],
+      },
+      {
+        heading: "Is Title 24 always more stringent than ASHRAE 90.1?",
+        body: "Title 24 is often described as more stringent because California has pursued aggressive efficiency goals and state-specific requirements. I would not use that phrase as a substitute for a provision-by-provision comparison. Stringency varies by edition, building type, system, metric, and compliance path. A project must satisfy its governing standard even if another standard appears more demanding on one selected measure.",
+        bullets: ["Compare matched editions and the same project scope", "Evaluate mandatory requirements before modeled tradeoffs", "Do not compare one component while ignoring whole-building rules", "Document owner criteria that exceed the legal minimum separately"],
+      },
+      {
+        heading: "When might a project team evaluate both standards?",
+        body: "A California project may still reference ASHRAE 90.1 for an owner program, portfolio standard, federal requirement, certification system, or technical comparison, while Title 24 remains the permit basis. Outside California, a jurisdiction may adopt an IECC edition, ASHRAE 90.1, or another amended code. I recommend creating a compliance matrix that identifies which requirement comes from law, which comes from the owner, and which documentation satisfies each obligation.",
+        bullets: ["California permit compliance under the applicable Title 24 cycle", "Owner, lender, federal, or certification criteria referencing 90.1", "Cross-state portfolios using different adopted standards", "Separate calculations and records where methods are not interchangeable"],
+      },
+    ],
+    extraLinks: [
+      ...sharedLinks,
+      { label: "ASHRAE Standard 90.1 overview", href: "https://www.ashrae.org/technical-resources/bookstore/standard-90-1" },
+    ],
+    faqs: [
+      { question: "Is ASHRAE 90.1 a national building code?", answer: "It is a national consensus energy standard, not automatically law everywhere. A jurisdiction or governing program must adopt or reference it for it to control a project." },
+      { question: "Can ASHRAE 90.1 replace Title 24 in California?", answer: "Not merely by design-team choice. California permit compliance follows the applicable Title 24 requirements and approved methods unless the enforcing framework expressly allows another route." },
+      { question: "Which standard applies to low-rise residential buildings?", answer: "ASHRAE 90.1 excludes low-rise residential buildings from its primary scope. California residential projects follow the applicable Title 24 residential provisions and compliance procedures." },
+      { question: "Is Title 24 stricter than ASHRAE 90.1?", answer: "It can be more stringent in important areas, but the answer depends on matched editions, scope, systems, and compliance methods. The governing code must be followed regardless of a broad comparison." },
+      { question: "Can the same energy model prove compliance with both?", answer: "Not automatically. The standards use different baselines, rules, climate data, inputs, and documentation. Each required analysis must follow its governing method." },
+    ],
+  },
+  {
+    slug: "title-24-common-failures-how-to-pass",
+    title: "Common Title 24 Failures and How to Pass | Apex Grid",
+    description: "Prevent common Title 24 plan-check and field failures involving models, forms, envelope data, equipment, controls, HERS verification, and acceptance testing.",
+    h1: "What Are Common Title 24 Failures and How Do You Pass?",
+    answer: "Common Title 24 failures occur when the compliance model, certificates, drawings, specifications, installed products, controls, and field tests do not describe the same project. Passing requires the correct code cycle and scope, complete inputs, coordinated documents, signed or registered certificates, timely responses, controlled substitutions, and successful required HERS verification or nonresidential acceptance testing.",
+    topic: "Title 24 Failures and Corrections",
+    serviceHref: "/services/energy-code-compliance/",
+    founderNote,
+    directAnswer: "Title 24 reviews and field checks commonly fail because the wrong code cycle was used, inputs are incomplete, compliance forms conflict with plans, mandatory measures are missing, equipment or glazing changed, signatures are absent, or required HERS verification and acceptance tests were not scheduled. Pass by coordinating one traceable compliance record from design through closeout.",
+    facts: [
+      { label: "First code-cycle check", value: "Permit application date: 2022 standards from January 1, 2023; 2025 standards from January 1, 2026" },
+      { label: "Residential field records", value: "Applicable CF2R installation and CF3R verification certificates" },
+      { label: "Nonresidential field records", value: "Applicable NRCI, NRCV, and NRCA certificates" },
+      { label: "Core quality-control rule", value: "Model, forms, plans, specifications, substitutions, and installed work must remain coordinated" },
+    ],
+    howTo: true,
+    sections: [
+      {
+        heading: "Why do Title 24 packages fail plan check?",
+        body: "I see preventable comments begin with an incorrect code cycle, undefined addition or alteration scope, missing registration or signatures, incomplete mandatory measures, and forms that conflict with plans. A model may list one window performance, lighting power, rooftop-unit efficiency, or control sequence while the drawings show another. Reviewers also need enough information to trace compliance claims to assemblies, schedules, details, and specifications.",
+        bullets: ["Verify code cycle, occupancy, climate zone, and project scope", "Use complete, current architectural and engineering inputs", "Match every modeled measure to a drawing or specification", "Complete required signatures, registration, and document identifiers"],
+      },
+      {
+        heading: "How should a team answer Title 24 plan-check comments?",
+        body: "A good response preserves the reviewer’s wording, identifies the affected requirement, states the resolution, and points to every revised sheet, calculation, and certificate. I avoid changing only the narrative while leaving the model or plans behind. When a comment depends on interpretation, the responsible professional should document the basis and contact the enforcing agency when confirmation is necessary rather than inventing an answer.",
+        bullets: ["Create a numbered response matching the agency comment list", "Revise the model, forms, drawings, and specifications together", "Cloud or otherwise identify document changes as required", "Track unresolved owner selections and AHJ interpretations explicitly"],
+      },
+      {
+        heading: "Which field conditions cause verification or acceptance failures?",
+        body: "Field failures often follow unreviewed substitutions, inaccessible test points, incorrect sensor locations, incomplete controls programming, duct or refrigerant issues, missing insulation, or installed products that differ from approved values. Residential HERS verification and nonresidential acceptance testing are not paperwork-only exercises. Qualified participants must inspect or test applicable measures and document results; failed work must be corrected and retested under the governing process.",
+        bullets: ["Review energy-impacting substitutions before purchase and installation", "Coordinate access for balancing, controls, HERS, and acceptance tests", "Verify sequences, setpoints, sensors, schedules, and equipment data", "Correct failed measures and preserve the final accepted certificates"],
+      },
+      {
+        heading: "What closeout process gives a project the best chance to pass?",
+        body: "The practical solution is a compliance responsibility matrix created during design and maintained through construction. It should assign each calculation, certificate, signature, inspection, test, and final record to a named project role and due date. Before closeout, compare the approved basis with installed conditions, resolve changes, collect applicable CF2R, CF3R, NRCI, NRCV, and NRCA documents, and confirm the authority's final submission requirements.",
+        bullets: ["Assign document and test ownership before permit issuance", "Hold a preconstruction compliance handoff with installers and testers", "Maintain an approved-substitution and revision log", "Audit the final certificate set before requesting agency closeout"],
+      },
+    ],
+    extraLinks: sharedLinks,
+    faqs: [
+      { question: "What is the most common Title 24 plan-check problem?", answer: "Document inconsistency is a frequent cause: the model or forms describe different envelope, lighting, mechanical, controls, or equipment information than the permit drawings." },
+      { question: "Can missing signatures cause rejection?", answer: "Yes. Applicable certificates must be completed, signed, and registered as required by the code cycle and compliance process." },
+      { question: "What happens if equipment changes after permit?", answer: "The responsible team should check the substitution against efficiency, capacity, controls, model inputs, mandatory measures, and approved documents, then revise the record when required." },
+      { question: "Can a failed HERS or acceptance test be ignored?", answer: "No. Required failed measures must be corrected and retested or otherwise resolved through the applicable compliance and enforcement process." },
+      { question: "Does complete documentation guarantee approval?", answer: "No. Complete, coordinated records improve review readiness, but the enforcement agency controls interpretation, acceptance, correction requirements, and final approval." },
+    ],
+  },
+];

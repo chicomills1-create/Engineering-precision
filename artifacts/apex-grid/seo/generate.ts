@@ -929,6 +929,7 @@ function phase0ArticleFrame(
 ): string {
   const crumbs = [{ name: "Home", href: "/" }, { name: opts.h1 }];
   const author = opts.author ?? PHASE0_EDITORIAL_AUTHOR;
+  const byline = `By ${esc(author)}${author === PHASE0_JEREMY_AUTHOR ? "." : ""}`;
   const authorSchema = author === PHASE0_JEREMY_AUTHOR
     ? {
       "@type": "Person",
@@ -965,12 +966,12 @@ function phase0ArticleFrame(
   } : undefined;
   const hero = opts.directAnswer
     ? `<section class="hero"><div class="container"><p class="kicker">${esc(opts.kicker)}</p><h1>${esc(opts.h1)}</h1>
-      <p class="note">By ${esc(author)} · Updated ${PHASE0_UPDATED_DATE}</p>
+      <p class="note">${byline} · Updated ${PHASE0_UPDATED_DATE}</p>
       <div class="direct-answer" aria-label="Direct answer"><p>${esc(opts.directAnswer)}</p></div>
       ${opts.founderNote ? `<p class="founder-note">${esc(opts.founderNote)}</p>` : ""}
     </div></section>`
     : `<section class="hero"><div class="container"><p class="kicker">${esc(opts.kicker)}</p><h1>${esc(opts.h1)}</h1><p class="lede">${esc(opts.answer)}</p>
-      <p class="note">By ${esc(author)} · Updated ${PHASE0_UPDATED_DATE}</p>${opts.founderNote ? `<p class="founder-note">${esc(opts.founderNote)}</p>` : ""}
+      <p class="note">${byline} · Updated ${PHASE0_UPDATED_DATE}</p>${opts.founderNote ? `<p class="founder-note">${esc(opts.founderNote)}</p>` : ""}
     </div></section>`;
   const body = `<main ${opts.marker ? `data-${opts.marker}="true"` : 'data-phase0="true"'}>
   ${breadcrumb(crumbs)}
@@ -5655,8 +5656,8 @@ async function main() {
     fs.writeFileSync(path.join(dir, "index.html"), html);
     pages++;
   }
-  if (PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length !== 158) {
-    throw new Error(`SEO assertion failed: answer library requires exactly 158 pages (found ${PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length})`);
+  if (PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length !== 163) {
+    throw new Error(`SEO assertion failed: answer library requires exactly 163 pages (found ${PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length})`);
   }
   const peStampDir = path.join(PUBLIC, "pe-stamp");
   fs.mkdirSync(peStampDir, { recursive: true });
