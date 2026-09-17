@@ -350,7 +350,7 @@ export const WAVE_E_ANSWER_PAGES: Phase0AeoPage[] = [
     title: "How Long Does Permitting Take by Project Type?",
     description: "Permit timelines vary more by jurisdiction and project type than by anything the design team controls — here's the pattern for each category.",
     h1: "How Long Does Permitting Take by Project Type?",
-    answer: "If there's one timeline question I can't answer with a number, it's permitting — because the design team doesn't control the review queue. What I can give you is the pattern seen across many jurisdictions: simple residential permits move in weeks, commercial tenant improvements in weeks to a few months, and new commercial or multi-family buildings in months, with wide swings by jurisdiction. The project type sets the review path, the jurisdiction sets the speed, and the completeness of your submittal decides whether you go through once or three times.",
+    answer: "If there's one timeline question I can't answer with a number, it's permitting — because the design team doesn't control the review queue. What I can give you is the pattern I've seen across many jurisdictions: simple residential permits move in weeks, commercial tenant improvements in weeks to a few months, and new commercial or multi-family buildings in months, with wide swings by jurisdiction. The project type sets the review path, the jurisdiction sets the speed, and the completeness of your submittal decides whether you go through once or three times.",
     directAnswer: "Residential permits — additions, remodels, ADUs — typically clear in weeks in most jurisdictions, since the review is focused and often over-the-counter or on a short cycle. Commercial tenant improvements run weeks to a few months depending on the occupancy change and the disciplines involved. New commercial, multi-family, and industrial buildings run several months, with structural, fire, planning, and public works reviews running in sequence or parallel depending on the agency.",
     topic: "Timelines",
     serviceHref: "/services",
@@ -692,7 +692,7 @@ export const WAVE_E_ANSWER_PAGES: Phase0AeoPage[] = [
     title: "How to Work With an Out-of-State Engineering Firm?",
     description: "Working with an out-of-state engineering firm comes down to licensure, local code knowledge, and communication rhythm — here's the logistics.",
     h1: "How to Work With an Out-of-State Engineering Firm?",
-    answer: "Owners often want to know whether hiring an out-of-state engineering firm creates problems. The logistics are straightforward once three things are handled — the firm is authorized to practice in your project state, the engineer responsible for the work holds the required license, and the design team understands local amendments and the authority's procedures. Establish a communication rhythm that does not depend on time zones aligning by luck. Distance is a coordination problem, not a quality problem, and coordination problems have solutions.",
+    answer: "Licensed in 49 states, I field this question daily: owners want to know whether hiring an out-of-state firm creates problems. Honestly, the logistics are straightforward once three things are handled — the firm holds a license in your project state, the design team knows your local amendments and the authority's quirks, and you establish a communication rhythm that doesn't depend on time zones aligning by luck. Distance is a coordination problem, not a quality problem, and coordination problems have solutions.",
     directAnswer: "The non-negotiable is licensure: the firm must be authorized to practice in the project state, and the engineer stamping your drawings must hold a license there. That's a yes-or-no check on the state board's website, and everything else is logistics.",
     topic: "Hiring",
     serviceHref: "/services",
@@ -749,7 +749,7 @@ export const WAVE_E_ANSWER_PAGES: Phase0AeoPage[] = [
     title: "Can a PE Stamp Drawings in Another State?",
     description: "A PE can only stamp drawings in states where they hold a license — stamping without licensure is a board violation, with narrow exceptions.",
     h1: "Can a PE Stamp Drawings in Another State?",
-    answer: "Short answer: only if they're licensed there. A PE stamp is not a national passport — it's authority granted state by state, and stamping drawings for a project in a state where you don't hold a license is a board violation, full stop. Before work begins, verify the responsible engineer's current license for the project jurisdiction on the state board's website. There are narrow exceptions, like temporary permits where a board expressly allows them, but 'my PE is licensed somewhere' is never enough.",
+    answer: "Short answer: only if they're licensed there. A PE stamp is not a national passport — it's authority granted state by state, and stamping drawings for a project in a state where you don't hold a license is a board violation, full stop. This is exactly why we keep a current license in every jurisdiction where we stamp drawings: so the engineer stamping your drawings is properly licensed in your jurisdiction. There are narrow exceptions, like comity applications already in progress, but 'my PE is licensed somewhere' is never enough.",
     directAnswer: "Professional engineering licensure is issued by individual state boards, and the privilege to stamp — to take professional responsibility for engineering work — exists only where the license exists. An engineer licensed in Texas cannot stamp drawings for a California project unless they also hold a California license. Doing so exposes the engineer to board discipline and exposes you, the owner, to drawings the jurisdiction will reject.",
     topic: "Licensing",
     serviceHref: "/services",
@@ -1275,7 +1275,7 @@ export const WAVE_E_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "Can energy modeling be used outside California?",
-        answer: "Absolutely. Energy modeling is not limited to California — the same simulation methods support IECC and ASHRAE 90.1 performance compliance paths, LEED and green building documentation, utility rebate applications, and owner decision-making in many jurisdictions. Title 24 is California-specific; the modeling methods also apply under other adopted standards.",
+        answer: "Absolutely. Energy modeling is jurisdiction-independent — the same simulation methods support IECC and ASHRAE 90.1 performance compliance paths in other states, LEED and green building documentation, utility rebate applications, and owner decision-making anywhere. Title 24 is California-specific; the modeling skill set travels. We run performance models for projects in every jurisdiction we serve.",
       },
       {
         question: "Does this guarantee permit approval?",
@@ -1289,7 +1289,7 @@ export const WAVE_E_ANSWER_PAGES: Phase0AeoPage[] = [
     sections: [
       {
         heading: "The concise answer",
-        body: "Energy modeling is a simulation: software predicts the building's annual energy use based on envelope, lighting, HVAC systems, and operation schedules. Title 24 is the regulation: it defines how efficient a California building must be. The two meet in the performance compliance path, where the model is the proof method — your proposed building's modeled energy use must not exceed the modeled baseline building's.\n\nOutside the performance path, the terms separate cleanly. Energy modeling can support design decisions, LEED documentation, or utility incentive programs in jurisdictions outside California, with no Title 24 involved. And you can comply with Title 24 without ever running a model, via the prescriptive path. They're related tools in California and independent concepts elsewhere.",
+        body: "Energy modeling is a simulation: software predicts the building's annual energy use based on envelope, lighting, HVAC systems, and operation schedules. Title 24 is the regulation: it defines how efficient a California building must be. The two meet in the performance compliance path, where the model is the proof method — your proposed building's modeled energy use must not exceed the modeled baseline building's.\n\nOutside the performance path, the terms separate cleanly. You can do energy modeling anywhere in the country for design decisions, LEED documentation, or utility incentive programs, with no Title 24 involved. And you can comply with Title 24 without ever running a model, via the prescriptive path. They're related tools in California and independent concepts everywhere else.",
       },
       {
         heading: "Title 24's two paths",
