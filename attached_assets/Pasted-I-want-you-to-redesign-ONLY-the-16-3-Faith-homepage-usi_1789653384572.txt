@@ -1,0 +1,442 @@
+I want you to redesign ONLY the 16:3 Faith homepage using the attached concept image as the visual target.
+
+IMPORTANT: The Sanctuary/Roster page already has the visual identity I want. The homepage needs to feel like it belongs to that exact same application.
+
+DO NOT rebuild the website.
+DO NOT create a separate demo page.
+DO NOT replace working components.
+DO NOT change the backend.
+DO NOT change database functionality.
+DO NOT change authentication.
+DO NOT change Messenger.
+DO NOT change Notifications.
+DO NOT change Cart.
+DO NOT change routing.
+DO NOT change the Sanctuary audio system.
+DO NOT change how the persistent music player works.
+DO NOT change the existing bottom-navigation destinations.
+
+This is a HOMEPAGE VISUAL REDESIGN.
+
+FIRST:
+Inspect the existing homepage code and identify:
+1. Homepage component
+2. Header/navigation component
+3. Search component
+4. Existing hero
+5. Music player component
+6. Bottom navigation
+7. Existing routes/click handlers
+8. Existing image assets
+9. Existing Sanctuary/Roster styling
+
+Reuse those components.
+
+DO NOT duplicate existing functionality.
+
+-----------------------------------------
+VISUAL TARGET
+-----------------------------------------
+
+Use the attached homepage concept as the primary visual reference and the existing Roster page as the design-system reference.
+
+The current homepage is too flat and feels like a traditional website.
+
+I want it to feel cinematic like the Roster.
+
+The visual language should be:
+
+BLACK
+WARM GOLD
+AMBER LIGHT
+CINEMATIC PHOTOGRAPHY
+ROUNDED GOLD-OUTLINED CARDS
+SOFT GOLD BOKEH
+DEEP SHADOWS
+PREMIUM TYPOGRAPHY
+URBAN
+FAITH-CENTERED
+HUMAN
+
+Gold should look like LIGHT hitting black.
+
+Do NOT simply turn everything yellow/gold.
+
+-----------------------------------------
+1. HEADER
+-----------------------------------------
+
+Keep the existing 16:3 Faith logo and all existing header functionality:
+
+Messenger
+Notifications
+Cart
+Menu
+
+Do not change their functionality.
+
+Visually integrate the header into the black/gold environment.
+
+Use:
+- deep black background
+- subtle amber glow
+- thin gold separation
+- existing white/gold icon treatment
+
+Keep it clean.
+
+-----------------------------------------
+2. SEARCH
+-----------------------------------------
+
+Keep:
+
+SEARCH 16:3 FAITH
+
+Redesign the search container using:
+
+- rounded corners
+- thin warm-gold border
+- dark translucent background
+- subtle amber inner glow
+- gold search icon
+- widely spaced uppercase text
+
+It should visually match the Roster cards.
+
+-----------------------------------------
+3. 16:3 FAITH PRESENTS
+-----------------------------------------
+
+Place:
+
+16:3 FAITH PRESENTS
+
+above the hero.
+
+Use small uppercase gold lettering with wide tracking.
+
+Add thin gold horizontal lines on each side.
+
+This should look like an editorial/media brand signature.
+
+-----------------------------------------
+4. HERO
+-----------------------------------------
+
+This is the biggest visual change.
+
+The hero should feel like a cinematic scene instead of a rectangular website banner.
+
+Keep the messaging:
+
+WHERE WE
+FIND THE ONE
+
+FAITH OVER FEAR
+
+NO JUDGMENT.
+NO HATE.
+NO PERFECT PEOPLE.
+
+JUST JESUS.
+
+REAL PEOPLE. REAL LIFE.
+
+Use the attached concept as the layout reference.
+
+The background should use cinematic photography with warm amber/gold practical lighting.
+
+Apply a strong black gradient so the text remains readable.
+
+Add subtle gold atmosphere/bokeh.
+
+Use a very large condensed/bold headline.
+
+WHERE WE FIND THE ONE should dominate the screen.
+
+Use warm ivory instead of harsh pure white.
+
+FAITH OVER FEAR:
+gold text
+with a vertical gold accent line.
+
+JUST JESUS:
+large gold typography.
+
+Do NOT put all of this inside lots of little boxes.
+
+Let the photography, typography and lighting create the hierarchy.
+
+-----------------------------------------
+5. CTA BUTTONS
+-----------------------------------------
+
+Keep the existing functionality for:
+
+WATCH THE MOVEMENT
+ENTER 16:3
+
+WATCH THE MOVEMENT:
+
+Use a premium metallic amber/gold gradient.
+
+Rounded approximately 20-24px.
+
+Black text/icons.
+
+ENTER 16:3:
+
+Dark black/translucent background.
+
+Thin gold border.
+
+Warm white text.
+
+Both buttons should be large, tactile and mobile friendly.
+
+-----------------------------------------
+6. JOIN THE COMMUNITY
+-----------------------------------------
+
+After the CTA buttons add:
+
+JOIN THE COMMUNITY
+
+Then create a 2x2 visual feature grid:
+
+COMMUNITY
+Real People. Real Support.
+
+SANCTUARY
+Music For A Higher Purpose.
+
+BIBLE
+Truth For Everyday Life.
+
+DEVOTIONAL
+Pause. Pray. Proceed.
+
+IMPORTANT:
+
+These should look like the existing Sanctuary artist cards.
+
+Each card should have:
+
+- cinematic photography
+- warm amber lighting
+- dark bottom gradient
+- approximately 22-26px rounded corners
+- thin muted-gold border
+- gold icon
+- gold title
+- small muted supporting text
+- circular arrow control
+- subtle gold glow
+
+DO NOT make these generic dashboard buttons.
+
+They should feel like MEDIA CARDS.
+
+Use the existing routes for each destination.
+
+-----------------------------------------
+7. MUSIC PLAYER
+-----------------------------------------
+
+DO NOT rebuild the music player.
+
+DO NOT touch audio logic.
+
+DO NOT change persistent playback.
+
+DO NOT reset the song when navigating.
+
+Take the EXISTING player and change its presentation only.
+
+Visually match the attached concept:
+
+- rounded black glass panel
+- thin gold border
+- subtle amber glow
+- album artwork
+- NOW PLAYING in small gold letters
+- track title
+- artist/category
+- existing playback controls
+- gold primary play/pause button
+- gold progress treatment
+
+ALL EXISTING PLAYER FUNCTIONS MUST CONTINUE WORKING.
+
+-----------------------------------------
+8. BOTTOM NAVIGATION
+-----------------------------------------
+
+Keep:
+
+COMMUNITY
+SANCTUARY
+BIBLE
+DEVOTIONAL
+
+Keep all existing destinations.
+
+Restyle the existing navigation so it matches the Roster:
+
+- deep black panel
+- large rounded container
+- thin gold outline
+- gold icons
+- warm white labels
+- subtle separation between navigation items
+
+Do NOT create a second bottom navigation.
+
+-----------------------------------------
+9. DESIGN TOKENS
+-----------------------------------------
+
+Use approximately:
+
+Background:
+#050505
+
+Panel:
+#0A0907
+
+Primary Gold:
+#F5B52C
+
+Light Gold:
+#FFD66B
+
+Dark Gold:
+#A66A0A
+
+Warm White:
+#F4F0E8
+
+Muted Text:
+#AAA69E
+
+Gold Border:
+rgba(245,181,44,.55)
+
+Subtle Border:
+rgba(245,181,44,.22)
+
+Use subtle radial amber gradients behind important areas.
+
+Avoid large areas of flat gray.
+
+-----------------------------------------
+10. CARD GEOMETRY
+-----------------------------------------
+
+The Roster page is the reference.
+
+Use approximately:
+
+Cards:
+22-28px radius
+
+Large controls:
+20-24px radius
+
+Player:
+24-28px radius
+
+Bottom navigation:
+28-32px radius
+
+Borders:
+approximately 1px muted gold
+
+Do NOT overdo shadows.
+
+Use soft black shadows with restrained amber glow.
+
+-----------------------------------------
+11. MOBILE
+-----------------------------------------
+
+MOBILE FIRST.
+
+The screenshots I provided are mobile and that is the priority.
+
+Verify at:
+
+360px
+390px
+412px
+430px
+
+Nothing should:
+
+- overlap
+- clip
+- overflow horizontally
+- disappear behind the player
+- disappear behind bottom navigation
+
+Maintain proper safe-area spacing on Android/iPhone.
+
+-----------------------------------------
+12. VERY IMPORTANT
+-----------------------------------------
+
+Do not independently redesign the visual direction.
+
+The attached concept image is the target.
+
+The existing Roster page is the design-system reference.
+
+I want the user to move:
+
+Homepage → Sanctuary → Roster
+
+and feel like they never left the same environment.
+
+Right now the homepage and Roster feel like two different designs.
+
+Fix that.
+
+-----------------------------------------
+IMPLEMENTATION PROCESS
+-----------------------------------------
+
+Before writing code:
+
+1. Inspect the existing implementation.
+2. Tell me which homepage files/components you found.
+3. Tell me which existing components can be reused.
+4. Identify the styling used by the Roster.
+5. Reuse that styling where practical.
+6. Then implement the homepage redesign.
+
+Do NOT replace functioning architecture merely because it is easier.
+
+After implementation:
+
+Check the browser visually against the attached reference.
+
+Specifically verify:
+
+- hero proportions
+- typography
+- gold/black balance
+- card imagery
+- rounded geometry
+- player positioning
+- bottom navigation
+- mobile overflow
+- persistent player behavior
+- all existing navigation
+
+If your first implementation only changes fonts, colors, borders or border-radius, it is NOT complete.
+
+The major transformation comes from:
+PHOTOGRAPHY + LIGHTING + LAYOUT + TYPOGRAPHY + CARDS.
+
+Do not publish until the homepage has been visually checked.
