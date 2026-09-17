@@ -1013,7 +1013,6 @@ export const WAVE_BI_ANSWER_PAGES: Phase0AeoPage[] = [
     ],
     founderNote,
   },
-,
   {
     slug: "community-solar-design",
     title: "How Are Community Solar Projects Engineered and Structured?",
