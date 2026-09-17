@@ -7336,6 +7336,54 @@ async function main() {
     fs.writeFileSync(path.join(dir, "index.html"), html);
     pages++;
   }
+  for (const answerPage of WAVE_ED_ANSWER_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+      throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  for (const answerPage of WAVE_EE_ANSWER_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+      throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  for (const answerPage of WAVE_EF_ANSWER_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+      throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  for (const answerPage of WAVE_EG_ANSWER_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+      throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
   for (const answerPage of PHASE7_AEO_PAGES) {
     assertSlug(answerPage.slug);
     const dir = path.join(phase0AnswersDir, answerPage.slug);
