@@ -27,3 +27,4 @@ export * from "./payroll";
 export * from "./seo";
 export * from "./linkedin";
 export * from "./outreachInventory";
+export * from "./assistantAccess";

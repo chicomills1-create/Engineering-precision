@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Show } from '@clerk/react';
+import { useUser } from '@clerk/react';
 import { Redirect } from 'wouter';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
@@ -18,6 +18,7 @@ import {
   Play
 } from 'lucide-react';
 import { AdminNav } from '@/components/layout/AdminNav';
+import { useAssistantStatus } from '@/components/admin/AssistantAccess';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import {
@@ -1047,14 +1048,17 @@ function SeoDashboardPage() {
 }
 
 export default function AdminSeo() {
+  const { isSignedIn, isLoaded } = useUser();
+  const assistant = useAssistantStatus();
+  const assistantSignedIn = assistant.data?.status === 'authenticated';
+
+  if (!isLoaded || assistant.isLoading) {
+    return <div className="flex min-h-[70vh] items-center justify-center text-muted-foreground">Loading…</div>;
+  }
+  if (!isSignedIn && !assistantSignedIn) {
+    return <Redirect to="/sign-in" />;
+  }
   return (
-    <>
-      <Show when="signed-in">
-        <SeoDashboardPage />
-      </Show>
-      <Show when="signed-out">
-        <Redirect to="/sign-in" />
-      </Show>
-    </>
+    <SeoDashboardPage />
   );
 }

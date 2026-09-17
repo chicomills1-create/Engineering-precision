@@ -13,6 +13,7 @@ import payrollRouter from "./payroll";
 import linkedinRouter from "./linkedin";
 import outreachInventoryRouter from "./outreachInventory";
 import estimateProposalsRouter from "./estimateProposals";
+import assistantAccessRouter from "./assistantAccess";
 
 const router: IRouter = Router();
 
@@ -30,5 +31,6 @@ router.use(payrollRouter);
 router.use(linkedinRouter);
 router.use(outreachInventoryRouter);
 router.use(estimateProposalsRouter);
+router.use(assistantAccessRouter);
 
 export default router;

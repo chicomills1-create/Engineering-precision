@@ -218,6 +218,13 @@
       "when": 1789152000000,
       "tag": "0030_estimate_proposals",
       "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1789619000000,
+      "tag": "0031_assistant_access",
+      "breakpoints": true
     }
   ]
 }

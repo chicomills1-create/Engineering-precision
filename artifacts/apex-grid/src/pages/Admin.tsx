@@ -15,6 +15,7 @@ import {
 import { Download, Inbox, Mail, Phone, ShieldAlert, Trash2, Users } from 'lucide-react';
 import { AdminNav } from '@/components/layout/AdminNav';
 import { ClientJobsReview } from '@/components/admin/ClientJobsReview';
+import { AssistantAccessManager } from '@/components/admin/AssistantAccess';
 
 const STATUSES = [LeadStatus.new, LeadStatus.contacted, LeadStatus.closed] as const;
 
@@ -374,6 +375,7 @@ export default function Admin() {
   return (
     <>
       <Show when="signed-in">
+        <AssistantAccessManager />
         <LeadsList />
         <ClientJobsReview />
         <SubscribersSection />

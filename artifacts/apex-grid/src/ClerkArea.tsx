@@ -11,6 +11,7 @@ import { useEffect, useRef } from 'react';
 import { ClerkProvider, SignIn, SignUp, useClerk } from '@clerk/react';
 import { publishableKeyFromHost } from '@clerk/react/internal';
 import { dark } from '@clerk/themes';
+import { AssistantAccessEntry } from '@/components/admin/AssistantAccess';
 
 export const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 export const clerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
@@ -96,8 +97,9 @@ export function ClerkQueryClientCacheInvalidator() {
 
 function SignInPage() {
   return (
-    <div className="flex min-h-[70vh] items-center justify-center bg-background px-4 py-16">
+    <div className="flex min-h-[70vh] flex-col items-center justify-center gap-5 bg-background px-4 py-16 lg:flex-row lg:items-start">
       <SignIn routing="path" path={`${basePath}/sign-in`} signUpUrl={`${basePath}/sign-up`} />
+      <AssistantAccessEntry />
     </div>
   );
 }

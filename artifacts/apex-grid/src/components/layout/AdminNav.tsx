@@ -1,12 +1,17 @@
 import { Link, useLocation } from 'wouter';
 import { useClerk } from '@clerk/react';
 import { LogOut } from 'lucide-react';
+import { useQueryClient } from '@tanstack/react-query';
+import { assistantStatusQueryKey, useAssistantStatus } from '@/components/admin/AssistantAccess';
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 export function AdminNav() {
   const [location] = useLocation();
   const { signOut } = useClerk();
+  const queryClient = useQueryClient();
+  const assistant = useAssistantStatus();
+  const isAssistant = assistant.data?.status === 'authenticated';
 
   const links = [
     { href: '/admin', label: 'Jobs & Inquiries' },
@@ -20,7 +25,7 @@ export function AdminNav() {
 
   return (
     <div className="flex flex-wrap items-center gap-2 mb-6">
-      {links.map((link) => {
+       {links.filter((link) => !isAssistant || link.href === '/admin/seo').map((link) => {
         // location matches exact or starts with for active state?
         // simple exact match
         const isActive = location === link.href;
@@ -42,7 +47,20 @@ export function AdminNav() {
       <div className="flex-1" />
       <button
         type="button"
-        onClick={() => signOut({ redirectUrl: basePath || '/' })}
+        onClick={async () => {
+          if (isAssistant) {
+            await fetch(`${import.meta.env.VITE_API_BASE_URL ?? '/api'}/assistant-access/sign-out`, {
+              method: 'POST',
+              credentials: 'include',
+              headers: { 'Content-Type': 'application/json' },
+              body: '{}',
+            });
+            queryClient.setQueryData(assistantStatusQueryKey, { status: 'none' });
+            window.location.assign(`${basePath}/sign-in`);
+            return;
+          }
+          await signOut({ redirectUrl: basePath || '/' });
+        }}
         className="inline-flex items-center gap-2 h-9 px-4 border border-border text-sm text-muted-foreground hover:text-foreground hover:border-primary/50 rounded-[2px] transition-colors"
         data-testid="button-admin-nav-sign-out"
       >
