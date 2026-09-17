@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How Is Busway Power Distribution Designed for a Data Hall?</title>
+<meta name="description" content="Busway sizing, plug-in unit selection, dual-path layouts, and seismic bracing — the full engineering details behind overhead power distribution design." />
+<link rel="canonical" href="https://apexgrideng.com/answers/busway-design-guide/" />
+<meta property="og:title" content="How Is Busway Power Distribution Designed for a Data Hall?" />
+<meta property="og:description" content="Busway sizing, plug-in unit selection, dual-path layouts, and seismic bracing — the full engineering details behind overhead power distribution design." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://apexgrideng.com/answers/busway-design-guide/" />
+<meta property="og:image" content="https://apexgrideng.com/logo.png" />
+<meta property="og:image:alt" content="Apex Grid Engineering logo" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="How Is Busway Power Distribution Designed for a Data Hall?" />
+<meta name="twitter:description" content="Busway sizing, plug-in unit selection, dual-path layouts, and seismic bracing — the full engineering details behind overhead power distribution design." />
+<meta name="twitter:image" content="https://apexgrideng.com/logo.png" />
+<meta name="twitter:image:alt" content="Apex Grid Engineering logo" />
+<meta name="robots" content="index,follow" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How Is Busway Power Distribution Designed for a Data Hall?","name":"How Is Busway Power Distribution Designed for a Data Hall?","description":"Busway sizing, plug-in unit selection, dual-path layouts, and seismic bracing — the full engineering details behind overhead power distribution design.","url":"https://apexgrideng.com/answers/busway-design-guide/","datePublished":"2026-09-15","dateModified":"2026-09-15","author":{"@type":"Person","name":"Jeremy Mills","jobTitle":"CEO & Founder","description":"USAF Veteran","worksFor":{"@type":"Organization","name":"Apex Grid Engineering","url":"https://apexgrideng.com"}},"publisher":{"@type":"Organization","name":"Apex Grid Engineering","url":"https://apexgrideng.com"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is busway sized for a data hall?","acceptedAnswer":{"@type":"Answer","text":"By the diversified load of the racks each run serves, plus a growth margin the owner will actually use — typically 20 to 25 percent. The bus ampacity must carry the peak diversified load, and the plug-in units are sized per tap for the rack or PDU they feed. Oversizing the bus moderately is cheap insurance; undersizing it means replacing runs later, which defeats the purpose."}},{"@type":"Question","name":"What are plug-in units and how are they selected?","acceptedAnswer":{"@type":"Answer","text":"Plug-in units are the tap devices that connect to the busway at its plug-in openings and drop power to the rack PDUs — they contain the breaker or fused protection for that tap. Selection is by the load: the PDU rating, the breaker size coordinated with upstream protection, and the drop cable or bus connection to the rack. Standardizing plug-in unit types across the hall simplifies spares and maintenance."}},{"@type":"Question","name":"How do you coordinate busway with other overhead systems?","acceptedAnswer":{"@type":"Answer","text":"In the BIM coordination model, with busway treated as a first-class system rather than an afterthought. The runs need clear paths over the rack rows, clearances from cable tray and piping, and coordination with containment structures and lighting. The structural engineer needs the hanger and bracing loads. I insist busway routing is locked before construction, because field-rerouting rigid bus sections is nothing like pulling cable around an obstacle."}},{"@type":"Question","name":"What seismic requirements apply to busway?","acceptedAnswer":{"@type":"Answer","text":"Overhead busway is a classic seismic bracing design item: rigid runs need longitudinal and transverse sway bracing at engineered intervals, with hanger rods stiffened or replaced by rigid supports. The bracing design follows the building code's component requirements based on the seismic design category, and the anchors into the structure need the structural engineer's review. In high seismic regions, this is a significant engineering and installation scope."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://apexgrideng.com/"},{"@type":"ListItem","position":2,"name":"How Is Busway Power Distribution Designed for a Data Hall?"}]}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:hsl(0 0% 3%);--card:hsl(0 0% 5%);--border:hsl(0 0% 12%);--fg:hsl(0 0% 92%);--muted:hsl(0 0% 62%);--primary:hsl(0 72% 48%);--primary-fg:#fff}
+body{background:var(--bg);color:var(--fg);font-family:'Inter',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.display{font-family:'Space Grotesk',sans-serif;line-height:1.15;letter-spacing:-0.01em}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--border);background:hsl(0 0% 3%/.95);position:sticky;top:0;z-index:50;backdrop-filter:blur(8px)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+.brand{display:flex;align-items:center;gap:12px;font-family:'Space Grotesk';font-weight:700;font-size:19px;letter-spacing:-.01em}
+.brand small{display:block;font-size:9px;letter-spacing:.3em;color:var(--muted);font-weight:500}
+.navlinks{display:flex;gap:18px;font-size:13px;color:hsl(0 0% 80%);align-items:center}
+.navlinks a:hover{color:var(--primary)}
+.cta{background:var(--primary);color:var(--primary-fg);font-weight:700;font-size:14px;padding:12px 24px;border-radius:2px}
+.cta:hover{background:hsl(0 72% 42%)}
+.hero{padding:96px 0 64px;border-bottom:1px solid var(--border);position:relative}
+.hero .kicker{color:var(--primary);font-family:'Space Grotesk';font-size:12px;letter-spacing:.25em;text-transform:uppercase;margin-bottom:20px;font-weight:600}
+.hero h1{font-size:clamp(34px,5vw,58px);font-weight:700;margin-bottom:24px}
+.hero h1 .dim{color:var(--muted)}
+.hero .lede{font-size:19px;color:hsl(0 0% 78%);max-width:760px;border-left:4px solid var(--primary);padding-left:22px}
+.breadcrumb{padding:20px 0 0;font-size:12px;font-family:'Space Grotesk';text-transform:uppercase;letter-spacing:.12em;color:var(--muted);overflow-wrap:anywhere}
+.breadcrumb a:hover{color:var(--primary)}
+.breadcrumb span{margin:0 8px;color:hsl(0 0% 30%)}
+section.block{padding:56px 0;border-bottom:1px solid var(--border)}
+section.block h2{font-size:28px;margin-bottom:20px}
+section.block h2 em{color:var(--primary);font-style:normal}
+.prose p{color:hsl(0 0% 74%);margin-bottom:18px;max-width:820px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--border);padding:26px}
+.card h3{font-size:16px;margin-bottom:10px;color:var(--fg)}
+.card p{font-size:14px;color:var(--muted)}
+.card .label{font-family:'Space Grotesk';font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--primary);margin-bottom:12px;font-weight:600}
+ul.scope{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;max-width:900px}
+ul.scope li{background:var(--card);border:1px solid var(--border);padding:14px 18px;font-size:14px;color:hsl(0 0% 78%);border-left:3px solid var(--primary)}
+.faq{max-width:860px}
+.faq details{border:1px solid var(--border);background:var(--card);margin-bottom:10px}
+.faq summary{cursor:pointer;padding:18px 22px;font-family:'Space Grotesk';font-weight:600;font-size:15px}
+.faq .a{padding:0 22px 18px;color:var(--muted);font-size:14.5px}
+.linkrow{display:flex;flex-wrap:wrap;gap:10px}
+.linkrow a{border:1px solid var(--border);background:var(--card);padding:10px 16px;font-size:13px;color:hsl(0 0% 78%)}
+.linkrow a:hover{border-color:var(--primary);color:var(--primary)}
+.ctaband{padding:72px 0;text-align:left}
+.ctaband h2{font-size:32px;margin-bottom:14px}
+.ctaband p{color:var(--muted);margin-bottom:28px;max-width:640px}
+footer{border-top:1px solid var(--border);background:var(--card);padding:64px 0 32px;font-size:14px}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1.2fr 1fr 1fr;gap:32px}
+@media(max-width:1000px){.navlinks>a:not(.cta){display:none}}
+@media(max-width:600px){
+  .topbar .container{width:calc(100% - 24px)}
+  .brand small{display:none}
+  .navlinks{gap:8px}
+  .navlinks .cta{padding:10px 13px;font-size:11px;letter-spacing:.06em}
+  .hero h1{overflow-wrap:anywhere}
+}
+@media(max-width:800px){.fgrid{grid-template-columns:1fr 1fr}}
+footer h4{font-family:'Space Grotesk';font-size:12px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:18px}
+footer ul{list-style:none}
+footer li{margin-bottom:12px;color:hsl(0 0% 78%)}
+footer a:hover{color:var(--primary)}
+.fbottom{margin-top:48px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted)}
+.note{font-size:12.5px;color:hsl(0 0% 45%);max-width:820px;margin-top:8px}
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.statgrid .cell{background:var(--bg);padding:22px}
+.statgrid .cell .k{font-family:'Space Grotesk';font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);margin-bottom:8px;font-weight:600}
+.statgrid .cell .v{font-size:14.5px;color:hsl(0 0% 80%)}
+</style>
+</head>
+<body>
+<header><div class="container nav">
+  <a class="brand" href="/"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;color:hsl(0 72% 48%)"><path d="M50 8L8 88h12l30-58 30 58h12L50 8z" fill="currentColor"/><path d="M50 40L30 78h8l12-24 12 24h8L50 40z" fill="currentColor" opacity="0.7"/><path d="M32 74h36v6H32z" fill="currentColor"/></svg><span>APEX GRID<small>ENGINEERING · ARCHITECTURE · GC</small></span></a>
+  <nav class="navlinks">
+    <a href="/services">Engineering</a><a href="/architecture/">Architecture</a><a href="/general-contracting/">General Contracting</a><a href="/industries">Industries</a><a href="/resources">Resources</a><a href="/locations/">Service Areas</a>
+    <a class="cta" href="/contact">Contact Us</a>
+  </nav>
+</div></header>
+<main data-phase0="true">
+  <nav class="breadcrumb container"><a href="/">Home</a><span>/</span>How Is Busway Power Distribution Designed for a Data Hall?</nav>
+  <section class="hero"><div class="container"><p class="kicker">AEO Answer · Data Centers</p><h1>How Is Busway Power Distribution Designed for a Data Hall?</h1>
+      <p class="note">By Jeremy Mills, CEO &amp; Founder, Apex Grid Engineering — USAF Veteran. · Updated 2026-09-15</p>
+      <div class="direct-answer" aria-label="Direct answer"><p>Busway distribution design sizes overhead bus runs for the diversified rack load plus growth, selects plug-in tap units per rack, coordinates dual A/B runs for redundant architectures, engineers seismic bracing and overhead coordination with other systems, and verifies protection coordination on the busway&#39;s actual impedance characteristics.</p></div>
+      <p class="founder-note">I&#39;m Jeremy Mills, CEO &amp; Founder of Apex Grid Engineering and a U.S. Air Force veteran. I&#39;m not a PE; our licensed professionals make the technical, compliance, and project-specific decisions.</p>
+    </div></section>
+  
+  <section class="block" id="step-1"><div class="container"><h2>The concise answer</h2><div class="prose"><p>Busway distribution design sizes overhead bus runs for the diversified rack load plus growth, selects plug-in tap units per rack, coordinates dual A/B runs for redundant architectures, engineers seismic bracing and overhead coordination with other systems, and verifies protection coordination on the busway&#39;s actual impedance characteristics.
+
+The design has two halves that need equal attention. The electrical half — sizing, protection, coordination — is well-understood engineering. The physical half — routing, supports, seismic bracing, and coordination with every other overhead system — is where busway projects succeed or struggle. A perfectly sized bus run that can&#39;t be routed without clashing with the containment structure is a design failure, not an installation problem.</p></div></div></section><section class="block" id="step-2"><div class="container"><h2>The engineering details that matter</h2><div class="prose"><p>Protection coordination on busway deserves specific attention because busway impedance differs from cable — available fault currents at tap points will differ from what cable-based rules of thumb predict. The coordination study must model the actual busway characteristics, or breaker selectivity between the upstream feeder and the plug-in units won&#39;t behave as intended.
+
+Voltage drop is rarely the constraint it is with cable, thanks to busway&#39;s low impedance — but the plug-in connections themselves need torque and maintenance attention over the facility&#39;s life, and the design should provide for infrared inspection access. Grounding continuity through plug-in joints is a design and installation verification item: the equipment ground path must be proven continuous across every joint and tap, because a high-impedance ground in a data hall is a power quality and safety problem.</p></div></div></section><section class="block" id="step-3"><div class="container"><h2>Busway design checklist</h2><div class="prose"><p>Good busway design is coordination-heavy but pays back for decades. Here&#39;s what I verify.
+
+Engineer the overhead, not just the electrical.</p><ul class="scope"><li>Bus ampacity sized for diversified peak load plus a realistic growth margin, dual runs for dual-path architectures</li><li>Plug-in units standardized and coordinated with upstream protection on actual busway impedance</li><li>Overhead routing locked in BIM coordination — busway, tray, piping, containment, and structure resolved together</li><li>Seismic bracing engineered for the seismic design category, with structural review of hanger and brace anchors</li><li>Grounding continuity and infrared inspection access designed in, not discovered missing during commissioning</li></ul></div></div></section>
+  <section class="block"><div class="container"><h2>Which related engineering resources can help?</h2><div class="linkrow"><a href="/answers/do-i-need-a-structural-engineer/">When should I hire a structural engineer?</a><a href="/answers/what-is-a-pe-stamp/">What does a PE stamp mean?</a><a href="/answers/what-is-mep-engineering/">What is MEP engineering?</a><a href="/answers/data-center-electrical-design-power-distribution/">Data center electrical design and power distribution</a><a href="/answers/ups-critical-power-design/">Critical power UPS design</a><a href="/answers/mep-coordination-drawings-explained/">MEP coordination drawings explained</a><a href="/estimate">Get an engineering estimate</a><a href="/services/mep/">Engineering service for this question</a><a href="/metros/">Metro engineering guides</a><a href="/locations/">Verified service areas</a></div></div></section>
+  <section class="block"><div class="container"><h2>What else do project teams ask?</h2><div class="faq"><details><summary>How is busway sized for a data hall?</summary><div class="a">By the diversified load of the racks each run serves, plus a growth margin the owner will actually use — typically 20 to 25 percent. The bus ampacity must carry the peak diversified load, and the plug-in units are sized per tap for the rack or PDU they feed. Oversizing the bus moderately is cheap insurance; undersizing it means replacing runs later, which defeats the purpose.</div></details><details><summary>What are plug-in units and how are they selected?</summary><div class="a">Plug-in units are the tap devices that connect to the busway at its plug-in openings and drop power to the rack PDUs — they contain the breaker or fused protection for that tap. Selection is by the load: the PDU rating, the breaker size coordinated with upstream protection, and the drop cable or bus connection to the rack. Standardizing plug-in unit types across the hall simplifies spares and maintenance.</div></details><details><summary>How do you coordinate busway with other overhead systems?</summary><div class="a">In the BIM coordination model, with busway treated as a first-class system rather than an afterthought. The runs need clear paths over the rack rows, clearances from cable tray and piping, and coordination with containment structures and lighting. The structural engineer needs the hanger and bracing loads. I insist busway routing is locked before construction, because field-rerouting rigid bus sections is nothing like pulling cable around an obstacle.</div></details><details><summary>What seismic requirements apply to busway?</summary><div class="a">Overhead busway is a classic seismic bracing design item: rigid runs need longitudinal and transverse sway bracing at engineered intervals, with hanger rods stiffened or replaced by rigid supports. The bracing design follows the building code&#39;s component requirements based on the seismic design category, and the anchors into the structure need the structural engineer&#39;s review. In high seismic regions, this is a significant engineering and installation scope.</div></details></div></div></section>
+  <section class="ctaband"><div class="container"><h2>Ready to discuss your engineering scope?</h2><p>Share the project address, current records, requested deliverable, authority information, and schedule. Apex Grid confirms professional responsibility, availability, and scope before work begins.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
+  </main>
+<footer><div class="container">
+   <div class="fgrid">
+    <div>
+      <a class="brand" href="/" style="margin-bottom:18px"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;color:hsl(0 72% 48%)"><path d="M50 8L8 88h12l30-58 30 58h12L50 8z" fill="currentColor"/><path d="M50 40L30 78h8l12-24 12 24h8L50 40z" fill="currentColor" opacity="0.7"/><path d="M32 74h36v6H32z" fill="currentColor"/></svg><span>APEX GRID</span></a>
+       <p style="color:var(--muted);max-width:340px;margin-top:16px">Engineering, Architecture, and General Contracting under one organization—from concept and permit documents through construction delivery.</p>
+       <p style="color:var(--muted);max-width:340px;margin-top:12px">Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction.</p>
+    </div>
+     <div><h4>Firm</h4><ul><li><a href="/about">About Us</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/resources">Resources</a></li><li><a href="/blog/">Blog</a></li><li><a href="/south-africa/">South Africa Insights</a></li><li><a href="/locations/">Service Areas</a></li><li><a href="/licensing-service-coverage/">Licensing &amp; Coverage</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div><h4>Services</h4><ul><li><a href="/services/mep">MEP Engineering</a></li><li><a href="/services/structural">Structural Design</a></li><li><a href="/services/civil">Civil Engineering</a></li><li><a href="/architecture/">Architectural Design</a></li><li><a href="/general-contracting/">General Contracting</a></li></ul></div>
+    <div><h4>Disciplines</h4><ul><li><a href="/structural-engineering/">Structural Engineering</a></li><li><a href="/mep-engineering/">MEP Engineering</a></li><li><a href="/civil-engineering/">Civil Engineering</a></li><li><a href="/mechanical-engineering/">Mechanical (HVAC)</a></li><li><a href="/electrical-engineering/">Electrical Engineering</a></li><li><a href="/plumbing-engineering/">Plumbing Engineering</a></li></ul></div>
+     <div><h4>Business-provided contact</h4><ul><li>Operating / contact address<br/>22475 E Quintero Rd<br/>Queen Creek, AZ 85142</li><li><a href="mailto:info@apexgrideng.com">info@apexgrideng.com</a></li><li><a href="tel:+14804900064">(480) 490-0064</a></li></ul></div>
+  </div>
+  <div class="fbottom"><p>© 2025 Apex Grid Engineering. All rights reserved.</p><p><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></p></div>
+</div></footer>
+</body>
+</html>
