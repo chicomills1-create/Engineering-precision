@@ -25,7 +25,7 @@ function copyNonHtmlFiles(directory: string) {
 }
 
 copyNonHtmlFiles(source);
-for (const relative of ["capabilities-statement.html", "licensing-service-coverage/index.html"]) {
+for (const relative of ["capabilities-statement.html", "licensing-service-coverage/index.html", "procurement/submit-rfp-rfq/index.html"]) {
   const input = path.join(source, relative);
   const output = path.join(destination, relative);
   fs.mkdirSync(path.dirname(output), { recursive: true });
