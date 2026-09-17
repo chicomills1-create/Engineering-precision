@@ -458,7 +458,7 @@ export const WAVE_AO_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "military-barracks-design",
     title: "What Engineering Goes Into Modern Military Barracks Design?",
@@ -686,7 +686,7 @@ export const WAVE_AO_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "convention-center-design",
     title: "How Is a Modern Convention Center Engineered for Big Events?",
@@ -914,7 +914,7 @@ export const WAVE_AO_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "rodeo-arena-design",
     title: "How Are Rodeo Arenas Engineered for Animals and Crowds?",
@@ -1142,7 +1142,7 @@ export const WAVE_AO_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "movie-theater-design",
     title: "How Are Modern Movie Theaters Engineered for Picture and Sound?",
