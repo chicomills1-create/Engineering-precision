@@ -175,6 +175,8 @@ import { PHASE7_HIRING_PAGES } from "./phase7-hiring-pages";
 import { PHASE7_LICENSING_PAGES } from "./phase7-licensing-pages";
 import { PHASE7_PERMIT_PAGES } from "./phase7-permit-pages";
 import { PHASE7_TECHNICAL_PAGES } from "./phase7-technical-pages";
+import { WAVE_D_ANSWER_PAGES } from "./wave-d-answer-pages";
+import { WAVE_E_ANSWER_PAGES } from "./wave-e-answer-pages";
 
 const PHASE7_AEO_PAGES: Phase7AeoSeed[] = [
   ...PHASE7_COST_PAGES,
@@ -804,7 +806,7 @@ function assertIndexableFaqPage(html: string, faqs: Array<{ question: string; an
 const PHASE0_UPDATED_DATE = "2026-09-15";
 const PHASE0_EDITORIAL_AUTHOR = "Apex Grid Engineering";
 const PHASE0_JEREMY_AUTHOR = "Jeremy Mills, CEO & Founder, Apex Grid Engineering — USAF Veteran";
-const ALL_AEO_PAGES: Array<Phase0AeoPage | Phase7AeoSeed> = [...PHASE0_AEO_PAGES, ...PHASE7_AEO_PAGES];
+const ALL_AEO_PAGES: Array<Phase0AeoPage | Phase7AeoSeed> = [...PHASE0_AEO_PAGES, ...PHASE7_AEO_PAGES, ...WAVE_D_ANSWER_PAGES, ...WAVE_E_ANSWER_PAGES];
 
 const PHASE7_COMMON_FAQ = {
   question: "Does this answer guarantee a permit or project outcome?",
@@ -5642,6 +5644,30 @@ async function main() {
     fs.writeFileSync(path.join(dir, "index.html"), html);
     pages++;
   }
+  for (const answerPage of WAVE_D_ANSWER_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+      throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  for (const answerPage of WAVE_E_ANSWER_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+      throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
   for (const answerPage of PHASE7_AEO_PAGES) {
     assertSlug(answerPage.slug);
     const dir = path.join(phase0AnswersDir, answerPage.slug);
@@ -5658,6 +5684,9 @@ async function main() {
   }
   if (PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length !== 163) {
     throw new Error(`SEO assertion failed: answer library requires exactly 163 pages (found ${PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length})`);
+  }
+  if (WAVE_D_ANSWER_PAGES.length !== 9 || WAVE_E_ANSWER_PAGES.length !== 23) {
+    throw new Error(`SEO assertion failed: wave-d/wave-e require 9 + 23 answer pages (found ${WAVE_D_ANSWER_PAGES.length} + ${WAVE_E_ANSWER_PAGES.length})`);
   }
   const peStampDir = path.join(PUBLIC, "pe-stamp");
   fs.mkdirSync(peStampDir, { recursive: true });
