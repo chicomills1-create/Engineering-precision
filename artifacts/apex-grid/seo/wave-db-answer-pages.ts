@@ -59,7 +59,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "tea-blending-design",
     title: "How Are Tea Blending Facilities Engineered for Consistency?",
@@ -116,7 +116,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "drive-thru-coffee-design",
     title: "What Makes a Drive-Thru Coffee Site Succeed at Rush Hour?",
@@ -173,7 +173,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "coffee-kiosk-design",
     title: "How Do You Engineer a Coffee Kiosk in a Tiny Footprint?",
@@ -230,7 +230,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "cold-brew-design",
     title: "What Engineering Goes Into a Cold Brew Production Room?",
@@ -287,7 +287,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "tea-house-design",
     title: "How Is a Traditional Tea House Engineered for True Comfort?",
@@ -344,7 +344,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "bubble-tea-design",
     title: "What Does It Take to Engineer a High-Volume Bubble Tea Shop?",
@@ -401,7 +401,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "espresso-bar-design",
     title: "How Much Electrical Power Does an Espresso Bar Really Need?",
@@ -458,7 +458,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "roastery-cafe-design",
     title: "How Do You Combine a Roastery and a Cafe in One Building?",
@@ -515,7 +515,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "coffee-lab-design",
     title: "What Engineering Does a Coffee Quality Lab Truly Require?",
@@ -572,7 +572,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "cupping-lab-design",
     title: "How Is a Coffee Cupping Lab Designed for Accurate Tasting?",
@@ -629,7 +629,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "coffee-packaging-design",
     title: "What Engineering Sits Behind a Coffee Packaging Line Today?",
@@ -686,7 +686,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "coffee-distribution-design",
     title: "How Are Coffee Distribution Centers Engineered for Quality?",
@@ -743,7 +743,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "decaf-processing-design",
     title: "How Is a Decaffeination Plant Engineered to Operate Safely?",
@@ -800,7 +800,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "coffee-waste-design",
     title: "How Should Coffee Facilities Handle Waste and Wastewater?",
@@ -857,7 +857,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "coffee-water-treatment-design",
     title: "Why Does Coffee Production Need Engineered Water Treatment?",
@@ -914,7 +914,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "coffee-electrical-design",
     title: "How Is Electrical Design Done for Demanding Coffee Facilities?",
@@ -971,7 +971,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "coffee-fire-protection-design",
     title: "What Fire Protection Does a Working Coffee Roastery Need?",
@@ -1028,7 +1028,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "matcha-bar-design",
     title: "How Do You Engineer a Matcha Bar Built for Daily Volume?",
@@ -1085,7 +1085,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "tea-room-design",
     title: "What Engineering Goes Into a Modern, Comfortable Tea Room?",
@@ -1142,7 +1142,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "coffee-bar-design",
     title: "How Is a High-Volume Coffee Bar Engineered for the Rush?",
@@ -1199,7 +1199,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "coffee-warehouse-design",
     title: "How Are Green Coffee Warehouses Engineered for Preservation?",
@@ -1256,7 +1256,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "coffeehouse-design",
     title: "What Engineering Does a Coffeehouse Build-Out Truly Need?",
@@ -1313,7 +1313,7 @@ export const WAVE_DB_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
-  },,
+  },
   {
     slug: "tea-shop-design",
     title: "How Do You Engineer a Tea Shop Built to Last for Decades?",
