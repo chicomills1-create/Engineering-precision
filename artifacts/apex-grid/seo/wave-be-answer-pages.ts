@@ -1105,7 +1105,7 @@ export const WAVE_BE_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         heading: "Defining the maintenance program first",
-        answer: "The shop serves the maintenance program. Without it, you're designing a very expensive box.\n\nWhat I need from the railroad before design.",
+        body: "The shop serves the maintenance program. Without it, you're designing a very expensive box.\n\nWhat I need from the railroad before design.",
         bullets: [
           "Define the maintenance tasks — what gets lifted, dropped, and serviced — to size cranes and pits",
           "Confirm locomotive dimensions, weights, and clearances for bays and doors",
