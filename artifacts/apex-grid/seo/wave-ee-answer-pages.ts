@@ -463,7 +463,7 @@ export const WAVE_EE_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "How is headquarters engineering different from a regular office?",
-        answer: "Depth and durability. A headquarters carries the company's identity, hosts its most critical people and functions, and is expected to last — so the engineering runs deeper: more redundancy, more flexibility, higher-quality systems, and infrastructure sized for growth the company hasn't planned yet. A regular office is designed to lease; a headquarters is designed to endure.",
+        answer: "Depth and durability. A headquarters carries the company's identity, hosts its most critical people and functions, and is expected to last — so the engineering runs deeper: more redundancy, more flexibility, higher-quality systems, and infrastructure sized for growth the company hasn't planned yet. A regular office is designed to lease; a headquarters building is designed to endure.",
       },
       {
         question: "What security engineering does a headquarters need?",

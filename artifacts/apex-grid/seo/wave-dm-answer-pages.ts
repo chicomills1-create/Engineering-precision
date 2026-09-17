@@ -1041,7 +1041,7 @@ export const WAVE_DM_ANSWER_PAGES: Phase0AeoPage[] = [
     sections: [
       {
         heading: "The concise answer",
-        body: "Military headquarters design is the engineering of command and installation HQ buildings. It covers secure communications and IT infrastructure, continuity-of-operations power and systems, force-protection for a high-value facility, productive office environments, and the ceremonial and public spaces headquarters buildings traditionally include.\n\nA headquarters is where decisions are made that affect lives. The building's job is to make sure those decisions can always be made — powered, connected, secure, and in a workplace worthy of the people making them.",
+        body: "Military headquarters design is the engineering of command and installation HQ buildings. It covers secure communications and IT infrastructure, continuity-of-operations power and systems, force-protection for a high-value facility, productive office environments, and the ceremonial and public spaces headquarters buildings traditionally include.\n\nA headquarters building is where decisions are made that affect lives. The building's job is to make sure those decisions can always be made — powered, connected, secure, and in a workplace worthy of the people making them.",
       },
       {
         heading: "The systems behind command",
