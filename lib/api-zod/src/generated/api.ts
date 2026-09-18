@@ -2524,6 +2524,31 @@ export const ListSeoAuditIssuesResponseItem = zod.object({
 export const ListSeoAuditIssuesResponse = zod.array(ListSeoAuditIssuesResponseItem)
 
 
+export const GetSeoFunnelResponse = zod.object({
+  "byMonth": zod.array(zod.object({
+  "month": zod.string().describe('Calendar month as YYYY-MM'),
+  "new": zod.number(),
+  "contacted": zod.number(),
+  "won": zod.number().describe('Won or closed-won statuses'),
+  "closed": zod.number().describe('Closed-lost statuses'),
+  "total": zod.number()
+})),
+  "byTopic": zod.array(zod.object({
+  "topic": zod.string(),
+  "clicks": zod.number(),
+  "impressions": zod.number(),
+  "leads": zod.number()
+})),
+  "totals": zod.object({
+  "leads": zod.number(),
+  "organicLeads": zod.number().describe('Leads with medium=organic'),
+  "won": zod.number(),
+  "winRate": zod.number()
+}),
+  "generatedAt": zod.string()
+})
+
+
 export const GetLinkedinDashboardResponse = zod.object({
   "people": zod.number(),
   "companies": zod.number(),
