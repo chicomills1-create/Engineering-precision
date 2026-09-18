@@ -317,6 +317,10 @@ import { WAVE_EL_ANSWER_PAGES } from "./wave-el-answer-pages";
 import { WAVE_EM_ANSWER_PAGES } from "./wave-em-answer-pages";
 import { WAVE_EN_ANSWER_PAGES } from "./wave-en-answer-pages";
 import { WAVE_EO_ANSWER_PAGES } from "./wave-eo-answer-pages";
+import { WAVE_EP_ANSWER_PAGES } from "./wave-ep-answer-pages";
+import { WAVE_EQ_ANSWER_PAGES } from "./wave-eq-answer-pages";
+import { WAVE_ER_ANSWER_PAGES } from "./wave-er-answer-pages";
+import { WAVE_ES_ANSWER_PAGES } from "./wave-es-answer-pages";
 
 const PHASE7_AEO_PAGES: Phase7AeoSeed[] = [
   ...PHASE7_COST_PAGES,
@@ -946,7 +950,7 @@ function assertIndexableFaqPage(html: string, faqs: Array<{ question: string; an
 const PHASE0_UPDATED_DATE = "2026-09-15";
 const PHASE0_EDITORIAL_AUTHOR = "Apex Grid Engineering";
 const PHASE0_JEREMY_AUTHOR = "Jeremy Mills, CEO & Founder, Apex Grid Engineering — USAF Veteran";
-const ALL_AEO_PAGES: Array<Phase0AeoPage | Phase7AeoSeed> = [...PHASE0_AEO_PAGES, ...PHASE7_AEO_PAGES, ...WAVE_D_ANSWER_PAGES, ...WAVE_E_ANSWER_PAGES, ...WAVE_F_ANSWER_PAGES, ...WAVE_G_ANSWER_PAGES, ...WAVE_H_ANSWER_PAGES, ...WAVE_I_ANSWER_PAGES, ...WAVE_J_ANSWER_PAGES, ...WAVE_K_ANSWER_PAGES, ...WAVE_L_ANSWER_PAGES, ...WAVE_M_ANSWER_PAGES, ...WAVE_N_ANSWER_PAGES, ...WAVE_O_ANSWER_PAGES, ...WAVE_P_ANSWER_PAGES, ...WAVE_Q_ANSWER_PAGES, ...WAVE_R_ANSWER_PAGES, ...WAVE_S_ANSWER_PAGES, ...WAVE_T_ANSWER_PAGES, ...WAVE_U_ANSWER_PAGES, ...WAVE_V_ANSWER_PAGES, ...WAVE_W_ANSWER_PAGES, ...WAVE_X_ANSWER_PAGES, ...WAVE_Y_ANSWER_PAGES, ...WAVE_Z_ANSWER_PAGES, ...WAVE_AA_ANSWER_PAGES, ...WAVE_AB_ANSWER_PAGES, ...WAVE_AC_ANSWER_PAGES, ...WAVE_AD_ANSWER_PAGES, ...WAVE_AE_ANSWER_PAGES, ...WAVE_AF_ANSWER_PAGES, ...WAVE_AG_ANSWER_PAGES, ...WAVE_AH_ANSWER_PAGES, ...WAVE_AI_ANSWER_PAGES, ...WAVE_AJ_ANSWER_PAGES, ...WAVE_AK_ANSWER_PAGES, ...WAVE_AL_ANSWER_PAGES, ...WAVE_AM_ANSWER_PAGES, ...WAVE_AN_ANSWER_PAGES, ...WAVE_AO_ANSWER_PAGES, ...WAVE_AP_ANSWER_PAGES, ...WAVE_AQ_ANSWER_PAGES, ...WAVE_AR_ANSWER_PAGES, ...WAVE_AS_ANSWER_PAGES, ...WAVE_AT_ANSWER_PAGES, ...WAVE_AU_ANSWER_PAGES, ...WAVE_AV_ANSWER_PAGES, ...WAVE_AW_ANSWER_PAGES, ...WAVE_AX_ANSWER_PAGES, ...WAVE_AY_ANSWER_PAGES, ...WAVE_AZ_ANSWER_PAGES, ...WAVE_BA_ANSWER_PAGES, ...WAVE_BB_ANSWER_PAGES, ...WAVE_BC_ANSWER_PAGES, ...WAVE_BD_ANSWER_PAGES, ...WAVE_BE_ANSWER_PAGES, ...WAVE_BF_ANSWER_PAGES, ...WAVE_BG_ANSWER_PAGES, ...WAVE_BH_ANSWER_PAGES, ...WAVE_BI_ANSWER_PAGES, ...WAVE_BJ_ANSWER_PAGES, ...WAVE_BK_ANSWER_PAGES, ...WAVE_BL_ANSWER_PAGES, ...WAVE_BM_ANSWER_PAGES, ...WAVE_BN_ANSWER_PAGES, ...WAVE_BO_ANSWER_PAGES, ...WAVE_BP_ANSWER_PAGES, ...WAVE_BQ_ANSWER_PAGES, ...WAVE_BR_ANSWER_PAGES, ...WAVE_BS_ANSWER_PAGES, ...WAVE_BT_ANSWER_PAGES, ...WAVE_BU_ANSWER_PAGES, ...WAVE_BV_ANSWER_PAGES, ...WAVE_BW_ANSWER_PAGES, ...WAVE_BX_ANSWER_PAGES, ...WAVE_BY_ANSWER_PAGES, ...WAVE_BZ_ANSWER_PAGES, ...WAVE_CA_ANSWER_PAGES, ...WAVE_CB_ANSWER_PAGES, ...WAVE_CC_ANSWER_PAGES, ...WAVE_CD_ANSWER_PAGES, ...WAVE_CE_ANSWER_PAGES, ...WAVE_CF_ANSWER_PAGES, ...WAVE_CG_ANSWER_PAGES, ...WAVE_CH_ANSWER_PAGES, ...WAVE_CI_ANSWER_PAGES, ...WAVE_CJ_ANSWER_PAGES, ...WAVE_CK_ANSWER_PAGES, ...WAVE_CL_ANSWER_PAGES, ...WAVE_CM_ANSWER_PAGES, ...WAVE_CN_ANSWER_PAGES, ...WAVE_CO_ANSWER_PAGES, ...WAVE_CP_ANSWER_PAGES, ...WAVE_CQ_ANSWER_PAGES, ...WAVE_CR_ANSWER_PAGES, ...WAVE_CS_ANSWER_PAGES, ...WAVE_CT_ANSWER_PAGES, ...WAVE_CU_ANSWER_PAGES, ...WAVE_CV_ANSWER_PAGES, ...WAVE_CW_ANSWER_PAGES, ...WAVE_CX_ANSWER_PAGES, ...WAVE_CY_ANSWER_PAGES, ...WAVE_CZ_ANSWER_PAGES, ...WAVE_DA_ANSWER_PAGES, ...WAVE_DB_ANSWER_PAGES, ...WAVE_DC_ANSWER_PAGES, ...WAVE_DD_ANSWER_PAGES, ...WAVE_DE_ANSWER_PAGES, ...WAVE_DF_ANSWER_PAGES, ...WAVE_DG_ANSWER_PAGES, ...WAVE_DH_ANSWER_PAGES, ...WAVE_DI_ANSWER_PAGES, ...WAVE_DJ_ANSWER_PAGES, ...WAVE_DK_ANSWER_PAGES, ...WAVE_DL_ANSWER_PAGES, ...WAVE_DM_ANSWER_PAGES, ...WAVE_DN_ANSWER_PAGES, ...WAVE_DO_ANSWER_PAGES, ...WAVE_DP_ANSWER_PAGES, ...WAVE_DQ_ANSWER_PAGES, ...WAVE_DR_ANSWER_PAGES, ...WAVE_DS_ANSWER_PAGES, ...WAVE_DT_ANSWER_PAGES, ...WAVE_DU_ANSWER_PAGES, ...WAVE_DV_ANSWER_PAGES, ...WAVE_DW_ANSWER_PAGES, ...WAVE_DX_ANSWER_PAGES, ...WAVE_DY_ANSWER_PAGES, ...WAVE_DZ_ANSWER_PAGES, ...WAVE_EA_ANSWER_PAGES, ...WAVE_EB_ANSWER_PAGES, ...WAVE_EC_ANSWER_PAGES, ...WAVE_ED_ANSWER_PAGES, ...WAVE_EE_ANSWER_PAGES, ...WAVE_EF_ANSWER_PAGES, ...WAVE_EG_ANSWER_PAGES, ...WAVE_EH_ANSWER_PAGES, ...WAVE_EI_ANSWER_PAGES, ...WAVE_EJ_ANSWER_PAGES, ...WAVE_EK_ANSWER_PAGES, ...WAVE_EL_ANSWER_PAGES, ...WAVE_EM_ANSWER_PAGES, ...WAVE_EN_ANSWER_PAGES, ...WAVE_EO_ANSWER_PAGES];
+const ALL_AEO_PAGES: Array<Phase0AeoPage | Phase7AeoSeed> = [...PHASE0_AEO_PAGES, ...PHASE7_AEO_PAGES, ...WAVE_D_ANSWER_PAGES, ...WAVE_E_ANSWER_PAGES, ...WAVE_F_ANSWER_PAGES, ...WAVE_G_ANSWER_PAGES, ...WAVE_H_ANSWER_PAGES, ...WAVE_I_ANSWER_PAGES, ...WAVE_J_ANSWER_PAGES, ...WAVE_K_ANSWER_PAGES, ...WAVE_L_ANSWER_PAGES, ...WAVE_M_ANSWER_PAGES, ...WAVE_N_ANSWER_PAGES, ...WAVE_O_ANSWER_PAGES, ...WAVE_P_ANSWER_PAGES, ...WAVE_Q_ANSWER_PAGES, ...WAVE_R_ANSWER_PAGES, ...WAVE_S_ANSWER_PAGES, ...WAVE_T_ANSWER_PAGES, ...WAVE_U_ANSWER_PAGES, ...WAVE_V_ANSWER_PAGES, ...WAVE_W_ANSWER_PAGES, ...WAVE_X_ANSWER_PAGES, ...WAVE_Y_ANSWER_PAGES, ...WAVE_Z_ANSWER_PAGES, ...WAVE_AA_ANSWER_PAGES, ...WAVE_AB_ANSWER_PAGES, ...WAVE_AC_ANSWER_PAGES, ...WAVE_AD_ANSWER_PAGES, ...WAVE_AE_ANSWER_PAGES, ...WAVE_AF_ANSWER_PAGES, ...WAVE_AG_ANSWER_PAGES, ...WAVE_AH_ANSWER_PAGES, ...WAVE_AI_ANSWER_PAGES, ...WAVE_AJ_ANSWER_PAGES, ...WAVE_AK_ANSWER_PAGES, ...WAVE_AL_ANSWER_PAGES, ...WAVE_AM_ANSWER_PAGES, ...WAVE_AN_ANSWER_PAGES, ...WAVE_AO_ANSWER_PAGES, ...WAVE_AP_ANSWER_PAGES, ...WAVE_AQ_ANSWER_PAGES, ...WAVE_AR_ANSWER_PAGES, ...WAVE_AS_ANSWER_PAGES, ...WAVE_AT_ANSWER_PAGES, ...WAVE_AU_ANSWER_PAGES, ...WAVE_AV_ANSWER_PAGES, ...WAVE_AW_ANSWER_PAGES, ...WAVE_AX_ANSWER_PAGES, ...WAVE_AY_ANSWER_PAGES, ...WAVE_AZ_ANSWER_PAGES, ...WAVE_BA_ANSWER_PAGES, ...WAVE_BB_ANSWER_PAGES, ...WAVE_BC_ANSWER_PAGES, ...WAVE_BD_ANSWER_PAGES, ...WAVE_BE_ANSWER_PAGES, ...WAVE_BF_ANSWER_PAGES, ...WAVE_BG_ANSWER_PAGES, ...WAVE_BH_ANSWER_PAGES, ...WAVE_BI_ANSWER_PAGES, ...WAVE_BJ_ANSWER_PAGES, ...WAVE_BK_ANSWER_PAGES, ...WAVE_BL_ANSWER_PAGES, ...WAVE_BM_ANSWER_PAGES, ...WAVE_BN_ANSWER_PAGES, ...WAVE_BO_ANSWER_PAGES, ...WAVE_BP_ANSWER_PAGES, ...WAVE_BQ_ANSWER_PAGES, ...WAVE_BR_ANSWER_PAGES, ...WAVE_BS_ANSWER_PAGES, ...WAVE_BT_ANSWER_PAGES, ...WAVE_BU_ANSWER_PAGES, ...WAVE_BV_ANSWER_PAGES, ...WAVE_BW_ANSWER_PAGES, ...WAVE_BX_ANSWER_PAGES, ...WAVE_BY_ANSWER_PAGES, ...WAVE_BZ_ANSWER_PAGES, ...WAVE_CA_ANSWER_PAGES, ...WAVE_CB_ANSWER_PAGES, ...WAVE_CC_ANSWER_PAGES, ...WAVE_CD_ANSWER_PAGES, ...WAVE_CE_ANSWER_PAGES, ...WAVE_CF_ANSWER_PAGES, ...WAVE_CG_ANSWER_PAGES, ...WAVE_CH_ANSWER_PAGES, ...WAVE_CI_ANSWER_PAGES, ...WAVE_CJ_ANSWER_PAGES, ...WAVE_CK_ANSWER_PAGES, ...WAVE_CL_ANSWER_PAGES, ...WAVE_CM_ANSWER_PAGES, ...WAVE_CN_ANSWER_PAGES, ...WAVE_CO_ANSWER_PAGES, ...WAVE_CP_ANSWER_PAGES, ...WAVE_CQ_ANSWER_PAGES, ...WAVE_CR_ANSWER_PAGES, ...WAVE_CS_ANSWER_PAGES, ...WAVE_CT_ANSWER_PAGES, ...WAVE_CU_ANSWER_PAGES, ...WAVE_CV_ANSWER_PAGES, ...WAVE_CW_ANSWER_PAGES, ...WAVE_CX_ANSWER_PAGES, ...WAVE_CY_ANSWER_PAGES, ...WAVE_CZ_ANSWER_PAGES, ...WAVE_DA_ANSWER_PAGES, ...WAVE_DB_ANSWER_PAGES, ...WAVE_DC_ANSWER_PAGES, ...WAVE_DD_ANSWER_PAGES, ...WAVE_DE_ANSWER_PAGES, ...WAVE_DF_ANSWER_PAGES, ...WAVE_DG_ANSWER_PAGES, ...WAVE_DH_ANSWER_PAGES, ...WAVE_DI_ANSWER_PAGES, ...WAVE_DJ_ANSWER_PAGES, ...WAVE_DK_ANSWER_PAGES, ...WAVE_DL_ANSWER_PAGES, ...WAVE_DM_ANSWER_PAGES, ...WAVE_DN_ANSWER_PAGES, ...WAVE_DO_ANSWER_PAGES, ...WAVE_DP_ANSWER_PAGES, ...WAVE_DQ_ANSWER_PAGES, ...WAVE_DR_ANSWER_PAGES, ...WAVE_DS_ANSWER_PAGES, ...WAVE_DT_ANSWER_PAGES, ...WAVE_DU_ANSWER_PAGES, ...WAVE_DV_ANSWER_PAGES, ...WAVE_DW_ANSWER_PAGES, ...WAVE_DX_ANSWER_PAGES, ...WAVE_DY_ANSWER_PAGES, ...WAVE_DZ_ANSWER_PAGES, ...WAVE_EA_ANSWER_PAGES, ...WAVE_EB_ANSWER_PAGES, ...WAVE_EC_ANSWER_PAGES, ...WAVE_ED_ANSWER_PAGES, ...WAVE_EE_ANSWER_PAGES, ...WAVE_EF_ANSWER_PAGES, ...WAVE_EG_ANSWER_PAGES, ...WAVE_EH_ANSWER_PAGES, ...WAVE_EI_ANSWER_PAGES, ...WAVE_EJ_ANSWER_PAGES, ...WAVE_EK_ANSWER_PAGES, ...WAVE_EL_ANSWER_PAGES, ...WAVE_EM_ANSWER_PAGES, ...WAVE_EN_ANSWER_PAGES, ...WAVE_EO_ANSWER_PAGES, ...WAVE_EP_ANSWER_PAGES, ...WAVE_EQ_ANSWER_PAGES, ...WAVE_ER_ANSWER_PAGES, ...WAVE_ES_ANSWER_PAGES];
 
 const PHASE7_COMMON_FAQ = {
   question: "Does this answer guarantee a permit or project outcome?",
@@ -7488,6 +7492,54 @@ async function main() {
     fs.writeFileSync(path.join(dir, "index.html"), html);
     pages++;
   }
+  for (const answerPage of WAVE_EP_ANSWER_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+      throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  for (const answerPage of WAVE_EQ_ANSWER_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+      throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  for (const answerPage of WAVE_ER_ANSWER_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+      throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  for (const answerPage of WAVE_ES_ANSWER_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+      throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
   for (const answerPage of PHASE7_AEO_PAGES) {
     assertSlug(answerPage.slug);
     const dir = path.join(phase0AnswersDir, answerPage.slug);
@@ -7604,8 +7656,8 @@ async function main() {
   if (WAVE_DZ_ANSWER_PAGES.length !== 24 || WAVE_EA_ANSWER_PAGES.length !== 24 || WAVE_EB_ANSWER_PAGES.length !== 24 || WAVE_EC_ANSWER_PAGES.length !== 24) {
     throw new Error(`SEO assertion failed: wave-dz/ea/eb/ec require 24 answer pages each (found ${WAVE_DZ_ANSWER_PAGES.length} + ${WAVE_EA_ANSWER_PAGES.length} + ${WAVE_EB_ANSWER_PAGES.length} + ${WAVE_EC_ANSWER_PAGES.length})`);
   }
-  if (WAVE_ED_ANSWER_PAGES.length !== 24 || WAVE_EE_ANSWER_PAGES.length !== 24 || WAVE_EF_ANSWER_PAGES.length !== 24 || WAVE_EG_ANSWER_PAGES.length !== 24 || WAVE_EH_ANSWER_PAGES.length !== 24 || WAVE_EI_ANSWER_PAGES.length !== 24 || WAVE_EJ_ANSWER_PAGES.length !== 24 || WAVE_EK_ANSWER_PAGES.length !== 24 || WAVE_EL_ANSWER_PAGES.length !== 24 || WAVE_EM_ANSWER_PAGES.length !== 24 || WAVE_EN_ANSWER_PAGES.length !== 24 || WAVE_EO_ANSWER_PAGES.length !== 24) {
-    throw new Error(`SEO assertion failed: wave-ed/ee/ef/eg/eh/ei/ej/ek/el/em/en/eo require 24 answer pages each (found ${WAVE_ED_ANSWER_PAGES.length} + ${WAVE_EE_ANSWER_PAGES.length} + ${WAVE_EF_ANSWER_PAGES.length} + ${WAVE_EG_ANSWER_PAGES.length} + ${WAVE_EH_ANSWER_PAGES.length} + ${WAVE_EI_ANSWER_PAGES.length} + ${WAVE_EJ_ANSWER_PAGES.length} + ${WAVE_EK_ANSWER_PAGES.length} + ${WAVE_EL_ANSWER_PAGES.length} + ${WAVE_EM_ANSWER_PAGES.length} + ${WAVE_EN_ANSWER_PAGES.length} + ${WAVE_EO_ANSWER_PAGES.length})`);
+  if (WAVE_ED_ANSWER_PAGES.length !== 24 || WAVE_EE_ANSWER_PAGES.length !== 24 || WAVE_EF_ANSWER_PAGES.length !== 24 || WAVE_EG_ANSWER_PAGES.length !== 24 || WAVE_EH_ANSWER_PAGES.length !== 24 || WAVE_EI_ANSWER_PAGES.length !== 24 || WAVE_EJ_ANSWER_PAGES.length !== 24 || WAVE_EK_ANSWER_PAGES.length !== 24 || WAVE_EL_ANSWER_PAGES.length !== 24 || WAVE_EM_ANSWER_PAGES.length !== 24 || WAVE_EN_ANSWER_PAGES.length !== 24 || WAVE_EO_ANSWER_PAGES.length !== 24 || WAVE_EP_ANSWER_PAGES.length !== 24 || WAVE_EQ_ANSWER_PAGES.length !== 24 || WAVE_ER_ANSWER_PAGES.length !== 24 || WAVE_ES_ANSWER_PAGES.length !== 24) {
+    throw new Error(`SEO assertion failed: wave-ed/ee/ef/eg/eh/ei/ej/ek/el/em/en/eo/ep/eq/er/es require 24 answer pages each (found ${WAVE_ED_ANSWER_PAGES.length} + ${WAVE_EE_ANSWER_PAGES.length} + ${WAVE_EF_ANSWER_PAGES.length} + ${WAVE_EG_ANSWER_PAGES.length} + ${WAVE_EH_ANSWER_PAGES.length} + ${WAVE_EI_ANSWER_PAGES.length} + ${WAVE_EJ_ANSWER_PAGES.length} + ${WAVE_EK_ANSWER_PAGES.length} + ${WAVE_EL_ANSWER_PAGES.length} + ${WAVE_EM_ANSWER_PAGES.length} + ${WAVE_EN_ANSWER_PAGES.length} + ${WAVE_EO_ANSWER_PAGES.length} + ${WAVE_EP_ANSWER_PAGES.length} + ${WAVE_EQ_ANSWER_PAGES.length} + ${WAVE_ER_ANSWER_PAGES.length} + ${WAVE_ES_ANSWER_PAGES.length})`);
   }
   const peStampDir = path.join(PUBLIC, "pe-stamp");
   fs.mkdirSync(peStampDir, { recursive: true });
