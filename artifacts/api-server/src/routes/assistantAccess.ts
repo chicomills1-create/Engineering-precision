@@ -3,6 +3,7 @@ import { randomBytes, randomUUID, createHash } from "node:crypto";
 import { and, desc, eq, gt, isNull, sql } from "drizzle-orm";
 import {
   assistantAccessRequestsTable,
+  assistantApiTokensTable,
   assistantSessionsTable,
   db,
 } from "@workspace/db";
@@ -282,6 +283,91 @@ router.post("/assistant-access/sign-out", async (req, res): Promise<void> => {
   }
   clearCookie(res, SESSION_COOKIE);
   res.json({ signedOut: true });
+});
+
+const API_TOKEN_PREFIX = "agx_";
+const API_TOKEN_DEFAULT_TTL_MS = 365 * 24 * 60 * 60 * 1000; // 1 year
+const VALID_TOKEN_SCOPES = new Set(["seo", "admin-read"]);
+
+function generateApiToken(): string {
+  return API_TOKEN_PREFIX + randomBytes(32).toString("base64url");
+}
+
+function normalizeScopes(input: unknown): string {
+  const list = Array.isArray(input) ? input : typeof input === "string" ? input.split(",") : [];
+  const scopes = [...new Set(
+    list.map((s) => String(s).trim().toLowerCase()).filter((s) => VALID_TOKEN_SCOPES.has(s)),
+  )];
+  return scopes.length > 0 ? scopes.join(",") : "seo";
+}
+
+router.post("/assistant-access/tokens", requireOwnerAuth, async (req, res): Promise<void> => {
+  if (!sameOrigin(req)) {
+    res.status(403).json({ error: "Invalid origin" });
+    return;
+  }
+  const auth = getAuth(req);
+  const token = generateApiToken();
+  const rawName = typeof req.body?.name === "string" ? req.body.name.trim() : "";
+  const name = rawName.length > 0 ? rawName.slice(0, 80) : "Assistant token";
+  const scopes = normalizeScopes(req.body?.scopes);
+  const expiresInDays = Number(req.body?.expiresInDays);
+  const expiresAt = Number.isFinite(expiresInDays) && expiresInDays > 0
+    ? new Date(Date.now() + expiresInDays * 24 * 60 * 60 * 1000)
+    : new Date(Date.now() + API_TOKEN_DEFAULT_TTL_MS);
+  const id = randomUUID();
+  await db.insert(assistantApiTokensTable).values({
+    id,
+    name,
+    tokenHash: hashToken(token),
+    scopes,
+    expiresAt,
+    createdByClerkUserId: String(auth.userId),
+  });
+  // The plaintext token is returned ONCE and never stored anywhere server-side.
+  res.status(201).json({ id, name, scopes, expiresAt: expiresAt.toISOString(), token });
+});
+
+router.get("/assistant-access/tokens", requireOwnerAuth, async (_req, res): Promise<void> => {
+  const tokens = await db.select({
+    id: assistantApiTokensTable.id,
+    name: assistantApiTokensTable.name,
+    scopes: assistantApiTokensTable.scopes,
+    createdAt: assistantApiTokensTable.createdAt,
+    lastUsedAt: assistantApiTokensTable.lastUsedAt,
+    expiresAt: assistantApiTokensTable.expiresAt,
+    revokedAt: assistantApiTokensTable.revokedAt,
+  }).from(assistantApiTokensTable)
+    .orderBy(desc(assistantApiTokensTable.createdAt));
+  res.json({
+    tokens: tokens.map((token) => ({
+      ...token,
+      createdAt: token.createdAt.toISOString(),
+      lastUsedAt: token.lastUsedAt ? token.lastUsedAt.toISOString() : null,
+      expiresAt: token.expiresAt ? token.expiresAt.toISOString() : null,
+      revokedAt: token.revokedAt ? token.revokedAt.toISOString() : null,
+    })),
+  });
+});
+
+router.post("/assistant-access/tokens/:id/revoke", requireOwnerAuth, async (req, res): Promise<void> => {
+  if (!sameOrigin(req)) {
+    res.status(403).json({ error: "Invalid origin" });
+    return;
+  }
+  const auth = getAuth(req);
+  const [revoked] = await db.update(assistantApiTokensTable)
+    .set({ revokedAt: new Date(), revokedByClerkUserId: String(auth.userId) })
+    .where(and(
+      eq(assistantApiTokensTable.id, String(req.params.id)),
+      isNull(assistantApiTokensTable.revokedAt),
+    ))
+    .returning({ id: assistantApiTokensTable.id });
+  if (!revoked) {
+    res.status(404).json({ error: "Token not found or already revoked" });
+    return;
+  }
+  res.json({ revoked: revoked.id });
 });
 
 export default router;

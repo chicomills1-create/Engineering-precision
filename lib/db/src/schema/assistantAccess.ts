@@ -35,3 +35,20 @@ export const assistantSessionsTable = pgTable("assistant_sessions", {
 
 export type AssistantAccessRequest = typeof assistantAccessRequestsTable.$inferSelect;
 export type AssistantSession = typeof assistantSessionsTable.$inferSelect;
+export const assistantApiTokensTable = pgTable("assistant_api_tokens", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  tokenHash: text("token_hash").notNull(),
+  scopes: text("scopes").notNull().default("seo"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  lastUsedAt: timestamp("last_used_at", { withTimezone: true }),
+  expiresAt: timestamp("expires_at", { withTimezone: true }),
+  revokedAt: timestamp("revoked_at", { withTimezone: true }),
+  createdByClerkUserId: text("created_by_clerk_user_id"),
+  revokedByClerkUserId: text("revoked_by_clerk_user_id"),
+}, (table) => [
+  uniqueIndex("assistant_api_tokens_hash_unique").on(table.tokenHash),
+  index("assistant_api_tokens_active_idx").on(table.revokedAt, table.expiresAt),
+]);
+
+export type AssistantApiToken = typeof assistantApiTokensTable.$inferSelect;
