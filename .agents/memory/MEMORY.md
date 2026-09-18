@@ -56,3 +56,4 @@
 - [Direct-to-dist SEO builds](direct-to-dist-seo-builds.md) — production generates the SEO corpus in dist; local build time rose because regeneration replaced Vite’s copy step.
 - [Deployment cutover startup](deployment-cutover-startup.md) — pre-listen health-check 500s can be a transient artifact cutover condition; verify again after the API port opens.
 - [Sitemap exact-URL status](sitemap-exact-url-status.md) — every listed URL must return 200 without redirects; generated self-canonical HTML alone cannot prove this.
+- [SEO wave parser coverage](seo-wave-parser-coverage.md) — standalone tsc can pass malformed wave modules; direct seo:generate is the required parser gate.

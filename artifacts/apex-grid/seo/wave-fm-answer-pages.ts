@@ -297,7 +297,7 @@ export const WAVE_FM_ANSWER_PAGES: Phase0AeoPage[] = [
     ],
     founderNote,
   },
-]  {
+  {
     slug: "car-rental-maintenance-garage-ventilation",
     title: "How Is Ventilation Designed for Rental Car Repair Shops?",
     description: "Rental repair shops run engines indoors all day, making exhaust capture critical. Tailpipe extraction, ventilation, and makeup air designed for tech safety.",
@@ -591,7 +591,7 @@ export const WAVE_FM_ANSWER_PAGES: Phase0AeoPage[] = [
     ],
     founderNote,
   },
-]  {
+  {
     slug: "car-rental-lot-stormwater-design",
     title: "What Stormwater Treatment BMPs Do Rental Car Lots Need?",
     description: "Rental lots wash oil, metals, and sediment into storm drains with every rain. Treatment BMPs engineers specify: separators, bioretention, compliant discharge.",
@@ -885,7 +885,7 @@ export const WAVE_FM_ANSWER_PAGES: Phase0AeoPage[] = [
     ],
     founderNote,
   },
-]  {
+  {
     slug: "rental-car-fleet-parking-design",
     title: "How Should Fleet Parking Be Laid Out at Rental Facilities?",
     description: "Fleet parking layout decides how fast rental cars move from ready line to customer. How engineers design stall geometry, circulation, and zoning for fleet flow.",
