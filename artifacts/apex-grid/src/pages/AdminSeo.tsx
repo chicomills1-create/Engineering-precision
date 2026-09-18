@@ -18,6 +18,7 @@ import {
   Play
 } from 'lucide-react';
 import { AdminNav } from '@/components/layout/AdminNav';
+import { ProfitTab } from '@/components/admin/SeoProfitTab';
 import { useAssistantStatus } from '@/components/admin/AssistantAccess';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
@@ -206,7 +207,7 @@ function DashboardTab() {
         {[
           { label: 'Total URLs', value: dashboard.inventory.totalUrls.toLocaleString(), icon: Globe, color: 'text-primary' },
           { label: 'Organic Inquiries', value: totalInquiries.toLocaleString(), icon: Activity, color: 'text-emerald-400' },
-          { label: 'GSC Clicks (30d)', value: displayClicks > 0 ? displayClicks.toLocaleString() : '—', icon: MousePointerClick, color: 'text-blue-400' },
+          { label: 'GSC Clicks (180d)', value: displayClicks > 0 ? displayClicks.toLocaleString() : '—', icon: MousePointerClick, color: 'text-blue-400' },
           { label: 'GSC Impressions', value: displayImpressions > 0 ? displayImpressions.toLocaleString() : '—', icon: Eye, color: 'text-purple-400' },
         ].map(({ label, value, icon: Icon, color }) => (
           <div key={label} className="border border-border bg-card p-4 rounded-[2px] flex items-start gap-4">
@@ -1031,6 +1032,12 @@ function SeoDashboardPage() {
           >
             URL Inventory
           </TabsTrigger>
+          <TabsTrigger 
+            value="profit" 
+            className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none px-0 py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Traffic &amp; Profit
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="dashboard" className="mt-0 focus-visible:outline-none focus-visible:ring-0">
@@ -1041,6 +1048,9 @@ function SeoDashboardPage() {
         </TabsContent>
         <TabsContent value="inventory" className="mt-0 focus-visible:outline-none focus-visible:ring-0">
           <UrlInventoryTab />
+        </TabsContent>
+        <TabsContent value="profit" className="mt-0 focus-visible:outline-none focus-visible:ring-0">
+          <ProfitTab />
         </TabsContent>
       </Tabs>
     </div>
