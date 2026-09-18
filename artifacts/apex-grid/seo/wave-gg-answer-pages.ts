@@ -199,7 +199,6 @@ export const WAVE_GG_ANSWER_PAGES: Phase0AeoPage[] = [
     ],
     founderNote,
   },
-];
   {
     slug: "slag-handling-design",
     title: "How Should Slag Handling Systems Be Engineered for Mills?",
@@ -396,7 +395,6 @@ export const WAVE_GG_ANSWER_PAGES: Phase0AeoPage[] = [
     ],
     founderNote,
   },
-];
   {
     slug: "overhead-crane-electrification-design",
     title: "What Does Crane Electrification Engineering Involve Today?",
@@ -593,7 +591,6 @@ export const WAVE_GG_ANSWER_PAGES: Phase0AeoPage[] = [
     ],
     founderNote,
   },
-];
   {
     slug: "heavy-industry-substation-design",
     title: "How Are Heavy Industry Substations Engineered for Reliability?",
@@ -790,7 +787,6 @@ export const WAVE_GG_ANSWER_PAGES: Phase0AeoPage[] = [
     ],
     founderNote,
   },
-];
   {
     slug: "textile-dye-house-design",
     title: "What Engineering Makes a Textile Dye House Compliant and Safe?",
@@ -987,7 +983,6 @@ export const WAVE_GG_ANSWER_PAGES: Phase0AeoPage[] = [
     ],
     founderNote,
   },
-];
   {
     slug: "heavy-equipment-maintenance-design",
     title: "What Does Maintenance-Focused Heavy Equipment Design Require?",
