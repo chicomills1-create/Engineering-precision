@@ -2056,6 +2056,40 @@ export interface SeoDashboard {
   openIssues: SeoAuditIssue[];
 }
 
+export type SeoFunnelTotals = {
+  leads: number;
+  /** Leads with medium=organic */
+  organicLeads: number;
+  won: number;
+  winRate: number;
+};
+
+export interface SeoFunnelMonth {
+  /** Calendar month as YYYY-MM */
+  month: string;
+  new: number;
+  contacted: number;
+  /** Won or closed-won statuses */
+  won: number;
+  /** Closed-lost statuses */
+  closed: number;
+  total: number;
+}
+
+export interface SeoFunnelTopic {
+  topic: string;
+  clicks: number;
+  impressions: number;
+  leads: number;
+}
+
+export interface SeoFunnel {
+  byMonth: SeoFunnelMonth[];
+  byTopic: SeoFunnelTopic[];
+  totals: SeoFunnelTotals;
+  generatedAt: string;
+}
+
 export interface LinkedinCompany {
   id: number;
   name: string;
