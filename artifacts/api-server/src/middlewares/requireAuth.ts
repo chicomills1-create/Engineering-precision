@@ -66,16 +66,24 @@ export async function requireOwnerAuth(
 }
 
 /**
- * Scopes a permanent Bearer API token may carry. Token management endpoints
- * are never reachable via Bearer — they require Clerk owner auth.
+ * Scopes a permanent Bearer API token may carry.
+ *
+ * Both scopes are bounded to /api/seo/* — the same boundary as the
+ * pairing-session cookie — so a token can never reach unrelated portal
+ * APIs (billing, outreach, user management). "seo" allows any method on
+ * /api/seo/* (dashboards, sync, audits); "admin-read" is GET-only on
+ * /api/seo/* for least-privilege readers. Token management endpoints
+ * (/api/assistant-access*) are never reachable via Bearer — they require
+ * Clerk owner auth.
  */
 function tokenMayAccessRoute(scopes: string, method: string, originalUrl: string): boolean {
   if (originalUrl.startsWith("/api/assistant-access")) return false;
   const scopeSet = new Set(
     scopes.split(",").map((s) => s.trim().toLowerCase()).filter((s) => s.length > 0),
   );
-  if (scopeSet.has("seo") && originalUrl.startsWith("/api/seo")) return true;
-  if (scopeSet.has("admin-read") && method === "GET" && originalUrl.startsWith("/api/")) return true;
+  if (!originalUrl.startsWith("/api/seo")) return false;
+  if (scopeSet.has("seo")) return true;
+  if (scopeSet.has("admin-read") && method === "GET") return true;
   return false;
 }
 
