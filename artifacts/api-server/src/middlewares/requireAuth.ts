@@ -1,7 +1,7 @@
 import { getAuth, clerkClient } from "@clerk/express";
 import type { Request, Response, NextFunction } from "express";
-import { and, eq, gt, isNull } from "drizzle-orm";
-import { assistantSessionsTable, db } from "@workspace/db";
+import { and, eq, gt, isNull, or } from "drizzle-orm";
+import { assistantApiTokensTable, assistantSessionsTable, db } from "@workspace/db";
 import { createHash } from "node:crypto";
 
 const ASSISTANT_SESSION_COOKIE = "apex_assistant_session";
@@ -65,6 +65,20 @@ export async function requireOwnerAuth(
   next();
 }
 
+/**
+ * Scopes a permanent Bearer API token may carry. Token management endpoints
+ * are never reachable via Bearer — they require Clerk owner auth.
+ */
+function tokenMayAccessRoute(scopes: string, method: string, originalUrl: string): boolean {
+  if (originalUrl.startsWith("/api/assistant-access")) return false;
+  const scopeSet = new Set(
+    scopes.split(",").map((s) => s.trim().toLowerCase()).filter((s) => s.length > 0),
+  );
+  if (scopeSet.has("seo") && originalUrl.startsWith("/api/seo")) return true;
+  if (scopeSet.has("admin-read") && method === "GET" && originalUrl.startsWith("/api/")) return true;
+  return false;
+}
+
 export async function requireAuth(
   req: Request,
   res: Response,
@@ -95,6 +109,34 @@ export async function requireAuth(
         .where(eq(assistantSessionsTable.id, session.id));
       next();
       return;
+    }
+  }
+
+  const authHeader = req.headers.authorization;
+  if (typeof authHeader === "string" && authHeader.startsWith("Bearer ")) {
+    const token = authHeader.slice("Bearer ".length).trim();
+    if (token.length >= 32) {
+      const [row] = await db
+        .select({ id: assistantApiTokensTable.id, scopes: assistantApiTokensTable.scopes })
+        .from(assistantApiTokensTable)
+        .where(and(
+          eq(assistantApiTokensTable.tokenHash, hashToken(token)),
+          isNull(assistantApiTokensTable.revokedAt),
+          or(
+            isNull(assistantApiTokensTable.expiresAt),
+            gt(assistantApiTokensTable.expiresAt, new Date()),
+          ),
+        ))
+        .limit(1);
+      if (row && tokenMayAccessRoute(row.scopes, req.method, req.originalUrl)) {
+        res.locals.assistantAccess = true;
+        res.locals.assistantTokenId = row.id;
+        void db.update(assistantApiTokensTable)
+          .set({ lastUsedAt: new Date() })
+          .where(eq(assistantApiTokensTable.id, row.id));
+        next();
+        return;
+      }
     }
   }
 
