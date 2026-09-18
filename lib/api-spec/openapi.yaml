@@ -1163,6 +1163,12 @@ paths:
         - { name: limit, in: query, schema: { type: number, minimum: 1, maximum: 500 } }
       responses:
         "200": { description: Latest audit issues, content: { application/json: { schema: { type: array, items: { $ref: "#/components/schemas/SeoAuditIssue" } } } } }
+  /seo/dashboard/funnel:
+    get:
+      operationId: getSeoFunnel
+      tags: [seo]
+      responses:
+        "200": { description: Estimate funnel by month and topic, content: { application/json: { schema: { $ref: "#/components/schemas/SeoFunnel" } } } }
   /linkedin/dashboard:
     get: { operationId: getLinkedinDashboard, tags: [linkedin], responses: { "200": { description: Dashboard, content: { application/json: { schema: { $ref: "#/components/schemas/LinkedinDashboard" } } } } } }
   /linkedin/provider:
@@ -2403,6 +2409,39 @@ components:
         referrer: { type: ["string", "null"] }
         count: { type: number }
 
+    SeoFunnel:
+      type: object
+      required: [byMonth, byTopic, totals, generatedAt]
+      properties:
+        byMonth: { type: array, items: { $ref: "#/components/schemas/SeoFunnelMonth" } }
+        byTopic: { type: array, items: { $ref: "#/components/schemas/SeoFunnelTopic" } }
+        totals:
+          type: object
+          required: [leads, organicLeads, won, winRate]
+          properties:
+            leads: { type: number }
+            organicLeads: { type: number, description: "Leads with medium=organic" }
+            won: { type: number }
+            winRate: { type: number }
+        generatedAt: { type: string }
+    SeoFunnelMonth:
+      type: object
+      required: [month, new, contacted, won, closed, total]
+      properties:
+        month: { type: string, description: "Calendar month as YYYY-MM" }
+        new: { type: number }
+        contacted: { type: number }
+        won: { type: number, description: "Won or closed-won statuses" }
+        closed: { type: number, description: "Closed-lost statuses" }
+        total: { type: number }
+    SeoFunnelTopic:
+      type: object
+      required: [topic, clicks, impressions, leads]
+      properties:
+        topic: { type: string }
+        clicks: { type: number }
+        impressions: { type: number }
+        leads: { type: number }
     LinkedinCompany:
       type: object
       required: [id, name, normalizedName, confidence, status, createdAt, updatedAt]
