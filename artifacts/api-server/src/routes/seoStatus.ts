@@ -5,6 +5,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { and, desc, eq, sql } from "drizzle-orm";
 import { db, leadsTable, seoAuditIssuesTable, seoAuditRunsTable, seoPerformanceSnapshotsTable, seoTrafficAlertsTable } from "@workspace/db";
+import { GetSeoFunnelResponse } from "@workspace/api-zod";
 import {
   getCachedResult,
   getCacheStats,
@@ -672,6 +673,140 @@ router.get("/seo/dashboard", requireAuth, async (_req, res): Promise<void> => {
     latestAudit: latestAudit[0] ?? null,
     openIssues,
   });
+});
+
+// ── Estimate funnel (Traffic & Profit tab) ──────────────────────────────────
+// Aggregates CRM leads by month and joins landing pages to sitemap topics,
+// with the latest Search Console period's page-level traffic per topic.
+// Lead statuses are free text in the DB; they are normalized server-side:
+//   won       = 'won' | 'closed'   (the closed-won convention used by the CRM)
+//   closed    = 'lost'             (closed-lost)
+//   contacted = 'contacted' | 'proposal' | similar in-progress states
+//   new       = everything else
+type LeadFunnelBucket = "new" | "contacted" | "won" | "closed";
+
+function normalizeLeadBucket(status: string | null | undefined): LeadFunnelBucket {
+  const s = (status ?? "").trim().toLowerCase();
+  if (s === "won" || s === "closed") return "won";
+  if (s === "lost") return "closed";
+  if (["contacted", "proposal", "quoted", "in_progress", "follow_up", "nurture"].includes(s)) return "contacted";
+  return "new";
+}
+
+const FUNNEL_TOPIC_LABELS: Record<string, string> = {
+  core: "Core pages",
+  services: "Services",
+  industries: "Industries",
+  solutions: "Solutions",
+  resources: "Resources",
+  locations: "Locations",
+  architecture_locations: "Architecture locations",
+  general_contracting_locations: "General contracting locations",
+  other: "Other pages",
+};
+
+router.get("/seo/dashboard/funnel", requireAuth, async (req, res): Promise<void> => {
+  try {
+    const [latestPeriodRows, leadRows, entries] = await Promise.all([
+      db.select({
+        periodStart: seoPerformanceSnapshotsTable.periodStart,
+        periodEnd: seoPerformanceSnapshotsTable.periodEnd,
+      }).from(seoPerformanceSnapshotsTable).orderBy(desc(seoPerformanceSnapshotsTable.syncedAt)).limit(1),
+      db.select({
+        status: leadsTable.status,
+        medium: leadsTable.medium,
+        landingPath: leadsTable.landingPath,
+        createdAt: leadsTable.createdAt,
+      }).from(leadsTable),
+      sitemapEntries(),
+    ]);
+    const latestPeriod = latestPeriodRows[0] ?? null;
+
+    // ── byMonth: leads grouped by UTC calendar month with status breakdown ──
+    const monthBuckets = new Map<string, Record<LeadFunnelBucket, number>>();
+    for (const lead of leadRows) {
+      const month = lead.createdAt.toISOString().slice(0, 7);
+      const bucket = monthBuckets.get(month) ?? { new: 0, contacted: 0, won: 0, closed: 0 };
+      bucket[normalizeLeadBucket(lead.status)] += 1;
+      monthBuckets.set(month, bucket);
+    }
+    const byMonth = [...monthBuckets.entries()]
+      .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+      .map(([month, counts]) => ({
+        month,
+        ...counts,
+        total: counts.new + counts.contacted + counts.won + counts.closed,
+      }));
+
+    // ── byTopic: landing_path → sitemap category → topic label ──
+    const pathToCategory = new Map<string, string>();
+    for (const entry of entries) pathToCategory.set(sitemapPathKey(entry.path), entry.category);
+    const topicOfPath = (value: string | null | undefined): string => {
+      let pathname = value ?? "";
+      try {
+        pathname = new URL(value ?? "", "https://apexgrideng.com").pathname;
+      } catch {
+        // keep the raw value; sitemapPathKey normalizes what it can
+      }
+      const category = pathToCategory.get(sitemapPathKey(pathname)) ?? "other";
+      return FUNNEL_TOPIC_LABELS[category] ?? category;
+    };
+
+    const leadsByTopic = new Map<string, number>();
+    for (const lead of leadRows) {
+      if (!lead.landingPath) continue;
+      const topic = topicOfPath(lead.landingPath);
+      leadsByTopic.set(topic, (leadsByTopic.get(topic) ?? 0) + 1);
+    }
+
+    const trafficByTopic = new Map<string, { clicks: number; impressions: number }>();
+    if (latestPeriod) {
+      const pageRows = await db.select({
+        dimensionValue: seoPerformanceSnapshotsTable.dimensionValue,
+        clicks: seoPerformanceSnapshotsTable.clicks,
+        impressions: seoPerformanceSnapshotsTable.impressions,
+      }).from(seoPerformanceSnapshotsTable).where(and(
+        eq(seoPerformanceSnapshotsTable.periodStart, latestPeriod.periodStart),
+        eq(seoPerformanceSnapshotsTable.periodEnd, latestPeriod.periodEnd),
+        eq(seoPerformanceSnapshotsTable.dimension, "page"),
+      ));
+      for (const row of pageRows) {
+        const topic = topicOfPath(row.dimensionValue);
+        const agg = trafficByTopic.get(topic) ?? { clicks: 0, impressions: 0 };
+        agg.clicks += row.clicks ?? 0;
+        agg.impressions += row.impressions ?? 0;
+        trafficByTopic.set(topic, agg);
+      }
+    }
+
+    const byTopic = [...new Set([...trafficByTopic.keys(), ...leadsByTopic.keys()])]
+      .map((topic) => ({
+        topic,
+        clicks: trafficByTopic.get(topic)?.clicks ?? 0,
+        impressions: trafficByTopic.get(topic)?.impressions ?? 0,
+        leads: leadsByTopic.get(topic) ?? 0,
+      }))
+      .sort((a, b) => b.leads - a.leads || b.clicks - a.clicks);
+
+    // ── totals ──
+    const won = leadRows.filter((lead) => normalizeLeadBucket(lead.status) === "won").length;
+    const organicLeads = leadRows.filter((lead) => (lead.medium ?? "").trim().toLowerCase() === "organic").length;
+
+    res.json(GetSeoFunnelResponse.parse({
+      byMonth,
+      byTopic,
+      totals: {
+        leads: leadRows.length,
+        organicLeads,
+        won,
+        winRate: leadRows.length > 0 ? won / leadRows.length : 0,
+      },
+      generatedAt: new Date().toISOString(),
+    }));
+  } catch (err) {
+    req.log.error({ err }, "Failed to build SEO funnel");
+    res.status(500).json({ error: "Failed to build SEO funnel" });
+  }
 });
 
 export default router;
