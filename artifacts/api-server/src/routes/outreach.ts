@@ -60,7 +60,6 @@ import { validateAttributionPair, validateAttributionSourceStatus, type Attribut
 import {
   assertOutreachEligibilityBase,
   getFollowUpScheduledAt,
-  getNextPhoenixEightAm,
   getPhoenixCalendarDayStart,
 } from "../lib/outreachEligibility";
 import {
@@ -74,7 +73,7 @@ import { approvedOutreachFollowUpMessages } from "../lib/verifiedOutreachBatch";
 import { buildOutreachHotLeads } from "../lib/outreachHotLeads";
 import { getOutreachRuntimeConfig, requiredDailyPace } from "../lib/outreachSystemConfig";
 import { getOutreachDailyLane } from "../lib/outreach";
-import { SEPTEMBER_OUTREACH_LANE_TARGETS, SEPTEMBER_OUTREACH_TOTAL_TARGET } from "../lib/outreachLaneConfig";
+import { SEPTEMBER_OUTREACH_LANE_TARGETS, SEPTEMBER_OUTREACH_RELAUNCH_DAILY_TARGET } from "../lib/outreachLaneConfig";
 
 const router: IRouter = Router();
 const normalizeEmail = (email: string) => email.trim().toLowerCase();
@@ -378,7 +377,7 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
   const lane = runtimeConfig?.schedule.laneAllocations;
   const remainingSendingDays = Math.max(1, 30 - Number(new Intl.DateTimeFormat("en-US", { timeZone: "America/Phoenix", day: "numeric" }).format(new Date())));
   const todayTarget = runtimeConfig?.schedule.dailyTarget
-    ?? (runtimeConfig?.month === "2026-09" ? SEPTEMBER_OUTREACH_TOTAL_TARGET : requiredDailyPace(monthlyTarget, sentMonth, remainingSendingDays));
+    ?? (runtimeConfig?.month === "2026-09" ? SEPTEMBER_OUTREACH_RELAUNCH_DAILY_TARGET : requiredDailyPace(monthlyTarget, sentMonth, remainingSendingDays));
   const laneProgress = (sent: number, eligible: number, target: number) => {
     const remainingQuota = Math.max(0, target - sent);
     const shortage = Math.max(0, remainingQuota - eligible);
@@ -434,7 +433,7 @@ router.get("/outreach/dashboard", requireAuth, async (_req, res): Promise<void> 
       public: laneProgress(laneSent.public, laneQueued.public, SEPTEMBER_OUTREACH_LANE_TARGETS.public),
       hotMarket: laneProgress(laneSent.hotMarket, laneQueued.hotMarket, SEPTEMBER_OUTREACH_LANE_TARGETS.hot_market),
       hotLead: laneProgress(laneSent.hotLead, laneQueued.hotLead, SEPTEMBER_OUTREACH_LANE_TARGETS.hot_lead),
-      totalSent: Object.values(laneSent).reduce((sum, value) => sum + value, 0), totalTarget: SEPTEMBER_OUTREACH_TOTAL_TARGET,
+      totalSent: Object.values(laneSent).reduce((sum, value) => sum + value, 0), totalTarget: SEPTEMBER_OUTREACH_RELAUNCH_DAILY_TARGET,
     } : null,
   }));
 });
@@ -621,7 +620,7 @@ router.put("/outreach/campaigns/:id/research-schedule", requireAuth, async (req,
     return;
   }
   if (input.data.localHour !== undefined && input.data.localHour !== OUTREACH_RESEARCH_LOCAL_HOUR) {
-    res.status(400).json({ error: "Morning research is fixed at 8:00 AM Phoenix time" });
+    res.status(400).json({ error: "Evening research is fixed at 8:00 PM Phoenix time" });
     return;
   }
   const [campaign] = await db.select().from(campaignsTable).where(eq(campaignsTable.id, params.data.id));

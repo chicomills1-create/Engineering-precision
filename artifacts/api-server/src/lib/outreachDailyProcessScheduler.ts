@@ -18,7 +18,7 @@ export function getNextPhoenixDailyRunnerDeadline(
   const month = phoenixNow.getUTCMonth();
   const day = phoenixNow.getUTCDate();
   const minutes = phoenixNow.getUTCHours() * 60 + phoenixNow.getUTCMinutes();
-  const primary = 8 * 60;
+  const primary = 20 * 60;
   const recovery = primary + 30;
   const recoveryGraceEnd = recovery + RECOVERY_GRACE_MINUTES;
 
@@ -45,23 +45,23 @@ export function getNextPhoenixDailyRunnerDeadline(
   const deadline = new Date(targetPhoenix + PHOENIX_OFFSET_MS);
   const labelDate = new Date(targetPhoenix);
   const date = labelDate.toISOString().slice(0, 10);
-  const time = targetMinutes === primary ? "08:00" : "08:30";
+  const time = targetMinutes === primary ? "20:00" : "20:30";
   const candidate = {
     slot: `${date}T${time}`,
     deadline: deadline.getTime() <= now.getTime() ? now : deadline,
   };
   if (candidate.slot !== lastStartedSlot) return candidate;
 
-  if (candidate.slot.endsWith("T08:00")) {
+  if (candidate.slot.endsWith("T20:00")) {
     return {
-      slot: `${date}T08:30`,
-      deadline: new Date(Date.UTC(year, month, targetDay, 15, 30)),
+      slot: `${date}T20:30`,
+      deadline: new Date(Date.UTC(year, month, targetDay, 20, 30) + PHOENIX_OFFSET_MS),
     };
   }
-  const nextDayPhoenix = Date.UTC(year, month, targetDay + 1, 8, 0);
+  const nextDayPhoenix = Date.UTC(year, month, targetDay + 1, 20, 0);
   const nextDate = new Date(nextDayPhoenix).toISOString().slice(0, 10);
   return {
-    slot: `${nextDate}T08:00`,
+    slot: `${nextDate}T20:00`,
     deadline: new Date(nextDayPhoenix + PHOENIX_OFFSET_MS),
   };
 }
@@ -137,6 +137,6 @@ export function startDailyOutreachProcessScheduler(): () => Promise<void> {
   };
 
   scheduleNext();
-  logger.info("Daily outreach process scheduler enabled for 08:00 and 08:30 Phoenix");
+  logger.info("Daily outreach process scheduler enabled for 20:00 and 20:30 Phoenix");
   return stop;
 }

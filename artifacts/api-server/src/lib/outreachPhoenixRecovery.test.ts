@@ -5,24 +5,24 @@ import {
   getNextPhoenixPreparationTarget,
 } from "./outreachPreparation";
 import {
-  isBeforePhoenixEight,
+  isBeforePhoenixEightPm,
   recoverCurrentPhoenixOutreach,
 } from "./outreachPhoenixRecovery";
 
-const beforeEight = new Date("2026-08-29T14:59:59.000Z");
-const atEight = new Date("2026-08-29T15:00:00.000Z");
+const beforeEightPm = new Date("2026-08-30T02:59:59.000Z");
+const atEightPm = new Date("2026-08-30T03:00:00.000Z");
 
-test("staging recovery targets today's Phoenix 08:00 window before the cutoff", () => {
-  assert.equal(isBeforePhoenixEight(beforeEight), true);
-  assert.deepEqual(getCurrentPhoenixPreparationTarget(beforeEight), {
+test("staging recovery targets today's Phoenix 20:00 window before the cutoff", () => {
+  assert.equal(isBeforePhoenixEightPm(beforeEightPm), true);
+  assert.deepEqual(getCurrentPhoenixPreparationTarget(beforeEightPm), {
     targetDate: "2026-08-29",
-    scheduledAt: new Date("2026-08-29T15:00:00.000Z"),
+    scheduledAt: new Date("2026-08-30T03:00:00.000Z"),
   });
 });
 
-test("recovery refuses the current day at or after 08:00 Phoenix", async () => {
+test("recovery refuses the current day at or after 20:00 Phoenix", async () => {
   const result = await recoverCurrentPhoenixOutreach({
-    now: atEight,
+    now: atEightPm,
     enabled: true,
   });
   assert.equal(result.state, "refused");
@@ -30,7 +30,7 @@ test("recovery refuses the current day at or after 08:00 Phoenix", async () => {
 });
 
 test("ordinary preparation retains its following-day target", () => {
-  const target = getNextPhoenixPreparationTarget(beforeEight);
+  const target = getNextPhoenixPreparationTarget(beforeEightPm);
   assert.equal(target.targetDate, "2026-08-30");
-  assert.equal(target.scheduledAt.toISOString(), "2026-08-30T15:00:00.000Z");
+  assert.equal(target.scheduledAt.toISOString(), "2026-08-31T03:00:00.000Z");
 });

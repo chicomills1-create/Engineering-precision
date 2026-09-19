@@ -9,7 +9,10 @@ import {
 } from "@workspace/db";
 import { getOutreachVerificationBatchCap } from "./outreachThroughputConfig";
 
-export const DEFAULT_VERIFICATION_BATCH_SIZE = 400;
+export const DEFAULT_VERIFICATION_BATCH_SIZE = 600;
+
+/** Marker for FindyMail authorization/credit exhaustion; the batch stops, it never retries into a 402. */
+export const FINDYMAIL_CREDIT_ERROR_MARKER = "FindyMail connector authorization/credit error";
 
 export type CompanyEvidence = {
   name: string;
@@ -94,7 +97,7 @@ async function findyMail(name: string, domain: string): Promise<string | undefin
     body: JSON.stringify({ name, domain }),
   });
   if ([401, 403, 402, 429].includes(response.status)) {
-    throw new Error(`FindyMail connector authorization/credit error (${response.status})`);
+    throw new Error(`${FINDYMAIL_CREDIT_ERROR_MARKER} (${response.status})`);
   }
   if (!response.ok) return undefined;
   const value = await response.json() as FindyMailResult;
@@ -119,23 +122,53 @@ async function fetchOfficialEvidence(website: string): Promise<CompanyEvidence |
   return undefined;
 }
 
-async function verifyProspect(prospect: Prospect): Promise<CompanyEvidence & { email: string; evidenceType: string } | undefined> {
-  if (!prospect.website) return undefined;
+type ProspectContactLookup =
+  | { verified: CompanyEvidence & { email: string; evidenceType: string } }
+  | { noResult: true };
+
+type KnownVerifiedContacts = {
+  emails: Set<string>;
+  domains: Set<string>;
+};
+
+/**
+ * Resolves a send-ready contact for one prospect with strict credit
+ * discipline. FindyMail (1 finder credit per name/domain lookup) is the LAST
+ * resort in this chain:
+ *  1. prospects whose company domain already has a verified contact are
+ *     skipped before any network call;
+ *  2. free official-publication evidence is tried first (no credit);
+ *  3. the finder call fires only for a named leader with no public inbox
+ *     and no already-verified email/domain match.
+ */
+async function findProspectContactEmail(
+  prospect: Prospect,
+  known: KnownVerifiedContacts,
+  onFinderCall: () => void,
+): Promise<ProspectContactLookup> {
+  if (!prospect.website) return { noResult: true };
   const domain = normalizeDomain(prospect.website);
-  if (!domain) return undefined;
+  if (!domain) return { noResult: true };
+  if (known.domains.has(domain)) return { noResult: true };
+  const existingEmail = prospect.contactEmail?.trim().toLowerCase();
+  if (existingEmail && known.emails.has(existingEmail)) return { noResult: true };
   const evidence = await fetchOfficialEvidence(prospect.website);
-  if (!evidence) return undefined;
+  if (!evidence) return { noResult: true };
   if (evidence.email && validatePublicInboxEvidence(evidence.email, evidence, prospect.website)) {
-    return { ...evidence, email: evidence.email, evidenceType: "official_publication" };
+    return { verified: { ...evidence, email: evidence.email, evidenceType: "official_publication" } };
   }
+  if (evidence.email && known.emails.has(evidence.email.toLowerCase())) return { noResult: true };
+  onFinderCall();
   const email = await findyMail(evidence.name, domain);
-  if (!email || !isCompanyEmail(email, prospect.website)) return undefined;
-  return { ...evidence, email: email.trim().toLowerCase(), evidenceType: "findymail_verified" };
+  if (!email || !isCompanyEmail(email, prospect.website)) return { noResult: true };
+  const normalized = email.trim().toLowerCase();
+  if (known.emails.has(normalized)) return { noResult: true };
+  return { verified: { ...evidence, email: normalized, evidenceType: "findymail_verified" } };
 }
 
 export async function verifyNewOutreachProspects(
   batchSize = getOutreachVerificationBatchCap(),
-): Promise<{ checked: number; promoted: number }> {
+): Promise<{ checked: number; promoted: number; finderCalls: number; creditBlocked: boolean }> {
   const capped = Math.max(1, Math.min(batchSize, getOutreachVerificationBatchCap()));
   const candidates = await db.select({ prospect: prospectsTable })
     .from(prospectsTable)
@@ -147,10 +180,53 @@ export async function verifyNewOutreachProspects(
       eq(campaignsTable.status, "active"),
     ))
     .limit(capped);
+  // Dedupe BEFORE any finder call: every already-verified email and company
+  // domain is loaded once so the batch never re-spends credits on them.
+  const alreadyVerified = await db.select({
+    email: prospectsTable.contactEmail,
+    website: prospectsTable.website,
+  })
+    .from(prospectsTable)
+    .where(eq(prospectsTable.emailStatus, "verified"));
+  const known: KnownVerifiedContacts = {
+    emails: new Set(alreadyVerified.flatMap((row) => row.email ? [row.email.trim().toLowerCase()] : [])),
+    domains: new Set(alreadyVerified.flatMap((row) => {
+      const domain = normalizeDomain(row.website ?? "");
+      return domain ? [domain] : [];
+    })),
+  };
   let promoted = 0;
+  let finderCalls = 0;
+  let creditBlocked = false;
   for (const { prospect } of candidates) {
-    const verified = await verifyProspect(prospect);
-    if (!verified) continue;
+    let lookup: ProspectContactLookup;
+    try {
+      lookup = await findProspectContactEmail(prospect, known, () => { finderCalls += 1; });
+    } catch (error) {
+      if (error instanceof Error && error.message.includes(FINDYMAIL_CREDIT_ERROR_MARKER)) {
+        // Credits (or authorization) are exhausted: stop the batch now
+        // instead of burning through the remaining candidates or retrying
+        // into a 402. The candidate stays "unknown" and is retried tomorrow.
+        creditBlocked = true;
+        break;
+      }
+      // Transient failures (site down, network) stay in the retry pool.
+      continue;
+    }
+    if ("noResult" in lookup) {
+      // Definitive no-result: park the prospect at "low" confidence so the
+      // daily batch stops re-spending (credits and scrape time) on it every
+      // day. It stays unverified; an admin can reset it to "unknown"
+      // if fresh evidence appears.
+      await db.update(prospectsTable)
+        .set({ contactConfidence: "low", updatedAt: new Date() })
+        .where(and(
+          eq(prospectsTable.id, prospect.id),
+          eq(prospectsTable.contactConfidence, "unknown"),
+        ));
+      continue;
+    }
+    const verified = lookup.verified;
     await db.transaction(async (tx) => {
       await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${"outreach-verify:" + prospect.id}, 0))`);
       const [suppressed] = await tx.select({ id: outreachSuppressionsTable.id })
@@ -187,8 +263,13 @@ export async function verifyNewOutreachProspects(
             and ${campaignsTable.status} = 'active'
         )`,
       )).returning({ id: prospectsTable.id });
-      if (updated) promoted += 1;
+      if (updated) {
+        promoted += 1;
+        known.emails.add(verified.email);
+        const domain = normalizeDomain(prospect.website ?? "");
+        if (domain) known.domains.add(domain);
+      }
     });
   }
-  return { checked: candidates.length, promoted };
+  return { checked: candidates.length, promoted, finderCalls, creditBlocked };
 }

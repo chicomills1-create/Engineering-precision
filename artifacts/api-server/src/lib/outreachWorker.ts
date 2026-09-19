@@ -17,7 +17,7 @@ import {
   sendApprovedOutreach,
   type OutreachSendOptions,
 } from "./outreach";
-import { getNextPhoenixEightAm } from "./outreachEligibility";
+import { getNextPhoenixEightPm } from "./outreachEligibility";
 import {
   isReplyWebhookConfigured,
   syncSendGridInboundReplyWebhook,
@@ -419,7 +419,7 @@ export async function processDueOutreachMessagesWithSummary(): Promise<OutreachD
     } catch (err) {
       const error = err instanceof Error ? err.message : "Scheduled send failed";
       if (err instanceof DailySendLimitError || err instanceof MonthlySendLimitError) {
-        const scheduledAt = getNextPhoenixEightAm();
+        const scheduledAt = getNextPhoenixEightPm();
         await db.update(outreachMessagesTable)
           .set({
             status: "approved",

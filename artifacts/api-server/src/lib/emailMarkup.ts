@@ -4,8 +4,6 @@ const CONTACT_NAME = "Jeremy Mills";
 const CONTACT_TITLE = "CEO · USAF Veteran";
 const CONTACT_PHONE = "480-490-0064";
 const COMPANY_SITE = "https://apexgrideng.com";
-const ESTIMATE_URL = `${COMPANY_SITE}/estimate`;
-const ESTIMATE_CTA = "Get My Instant Ballpark Estimate";
 const MAILING_ADDRESS_LINE_1 = "22475 E Quintero Rd";
 const MAILING_ADDRESS_LINE_2 = "Queen Creek, AZ 85142";
 // Email clients inconsistently render SVGs, so use the deployed PNG logo.
@@ -86,7 +84,7 @@ export function renderBrandedEmail(body: string, unsubscribeUrl: string, recipie
 } {
   const personalizedBody = personalizeBody(body, recipientName);
   const safeUnsubscribeUrl = escapeEmailHtml(validateMarketingUnsubscribeUrl(unsubscribeUrl).toString());
-  const plainText = `${personalizedBody}\n\n${ESTIMATE_CTA}: ${ESTIMATE_URL}\n\nBest regards,\n${CONTACT_NAME}\n${CONTACT_TITLE}\n${LEGAL_COMPANY_NAME}\n${MAILING_ADDRESS_LINE_1}\n${MAILING_ADDRESS_LINE_2}\nVeteran-owned engineering company\n${CONTACT_PHONE}\n${COMPANY_SITE}\n\nUnsubscribe: ${unsubscribeUrl}`;
+  const plainText = `${personalizedBody}\n\nBest regards,\n${CONTACT_NAME}\n${CONTACT_TITLE}\n${LEGAL_COMPANY_NAME}\n${MAILING_ADDRESS_LINE_1}\n${MAILING_ADDRESS_LINE_2}\nVeteran-owned engineering company\n${CONTACT_PHONE}\n${COMPANY_SITE}\n\nUnsubscribe: ${unsubscribeUrl}`;
   const html = `<!doctype html>
 <html lang="en">
   <head>
@@ -114,13 +112,6 @@ export function renderBrandedEmail(body: string, unsubscribeUrl: string, recipie
             <tr>
               <td style="padding:0;font-family:Arial,Helvetica,sans-serif;">
                 <div class="email-copy">${renderBodyHtml(personalizedBody)}</div>
-                 <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:4px 0 28px;">
-                   <tr>
-                     <td style="border-radius:4px;background:#245b8f;">
-                       <a href="${ESTIMATE_URL}" style="display:inline-block;padding:13px 20px;color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:700;line-height:1.25;text-decoration:none;">${ESTIMATE_CTA}</a>
-                     </td>
-                   </tr>
-                 </table>
                 <p style="margin:28px 0 12px;color:#202124;font-size:16px;line-height:1.5;">Best regards,</p>
                 <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0;">
                   <tr>

@@ -111,18 +111,18 @@ test("hot-market personalization does not narrow the firm to Scottsdale", () => 
   }
 });
 
-test("one-time hot-market messages dynamically wait until after the regular 8 AM Phoenix batch", () => {
+test("one-time hot-market messages dynamically wait until after the regular 8 PM Phoenix batch", () => {
   assert.equal(
     getHotMarketScheduledAt(new Date("2026-09-04T15:00:00.000Z")).toISOString(),
     "2026-09-04T15:10:00.000Z",
   );
   assert.equal(
     getOneTimeHotMarketScheduledAt(new Date("2026-09-04T15:01:00.000Z")).toISOString(),
-    "2026-09-05T15:10:00.000Z",
+    "2026-09-05T03:10:00.000Z",
   );
   assert.equal(
     getOneTimeHotMarketScheduledAt(new Date("2027-02-10T14:59:00.000Z")).toISOString(),
-    "2027-02-10T15:10:00.000Z",
+    "2027-02-11T03:10:00.000Z",
   );
 });
 

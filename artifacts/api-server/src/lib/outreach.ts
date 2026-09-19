@@ -46,6 +46,7 @@ import {
 import {
   getAuthoritativeLaneConfig,
   isUncappedLaneLimit,
+  SEPTEMBER_OUTREACH_RELAUNCH_DAILY_TARGET,
   SEPTEMBER_OUTREACH_TOTAL_TARGET,
 } from "./outreachLaneConfig";
 import {
@@ -224,9 +225,9 @@ export function getGlobalOutreachDailyLimit(
   if (month === "2026-09") {
     return phoenixDateKey(date) < "2026-09-13"
       ? SEPTEMBER_OUTREACH_TOTAL_TARGET
-      : 300;
+      : SEPTEMBER_OUTREACH_RELAUNCH_DAILY_TARGET;
   }
-  if (month > "2026-09") return 300;
+  if (month > "2026-09") return SEPTEMBER_OUTREACH_RELAUNCH_DAILY_TARGET;
   return Math.max(0, hotMarketMessageCount);
 }
 
@@ -533,7 +534,7 @@ export async function generateProspectDraft(prospect: Prospect): Promise<Generat
 If a focused engineering issue is taking too long or costing more than it should, Apex Grid can help. Our licensed Civil, Structural, and MEP PEs provide focused reviews and design responses with clear pricing before work begins.
 
 Do you have any current projects in your pipeline that you would like us to review?`;
-    return { subject: approvedOutreachSubject(), body, followUps: approvedOutreachFollowUpMessages("") };
+    return { subject: approvedOutreachSubject(prospect.companyName), body, followUps: approvedOutreachFollowUpMessages("") };
   }
   if (!prospect.contactName || !prospect.contactTitle) {
     throw new Error("A named decision-maker and role are required before drafting");
@@ -642,7 +643,7 @@ export async function sendApprovedOutreach(
       .find((followUp) => followUp.sequenceNumber === message.sequenceNumber)
     : undefined;
   const currentSubject = currentRegularFollowUp?.subject ?? (usesCurrentSharedCopy
-      ? approvedOutreachSubject()
+      ? approvedOutreachSubject(currentProspect.companyName)
     : message.subject);
   const currentBody = currentRegularFollowUp?.body ?? (usesCurrentSharedCopy
       ? message.sequenceNumber === 1

@@ -143,7 +143,7 @@ export function DashboardStats() {
       >
         <span className="font-medium">
           {stats.researchAutomationReady
-            ? 'The 8:00 AM Phoenix research worker is ready.'
+            ? 'The 8:00 PM Phoenix research worker is ready.'
             : 'Morning research is waiting for production enablement.'}
         </span>{' '}
         <span>

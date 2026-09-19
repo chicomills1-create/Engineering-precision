@@ -17,7 +17,8 @@ import { prepareNextPhoenixHotMarketOutreach } from "./lib/hotMarketPreparation"
 import { prepareNextPhoenixHotLeadOutreach } from "./lib/outreachHotLeads";
 import { getCatchUpProgress } from "./lib/outreachCatchUp";
 import { sendDailyOutreachReport } from "./lib/outreachDailyReport";
-import { loadOutreachSystemConfig } from "./lib/outreachSystemConfig";
+import { loadOutreachSystemConfig, configuredDailyAllowance } from "./lib/outreachSystemConfig";
+import { getOutreachVerificationBatchCap } from "./lib/outreachThroughputConfig";
 import {
   isPrimaryPhoenixInvocation,
   runDailyOutreachOnce,
@@ -110,9 +111,29 @@ async function main(): Promise<void> {
   const result = await runDailyOutreachOnce({
     processHotMarketResearch: () => processDueHotMarketResearch(),
     processScheduledResearch: () => processDueOutreachResearchSchedules(),
-    verifyProspects: () => verifyNewOutreachProspects(),
+    verifyProspects: async () => {
+      // Credit discipline: cap the daily finder/verification batch to what
+      // the day's send target actually needs (the configured daily
+      // allowance), never an open-ended research backlog.
+      const runtimeConfig = await loadOutreachSystemConfig().catch(() => null);
+      const need = runtimeConfig
+        ? configuredDailyAllowance(runtimeConfig, new Date())
+        : getOutreachVerificationBatchCap();
+      const report = await verifyNewOutreachProspects(need);
+      if (report.creditBlocked) {
+        // Fail loudly: the runner records this in acquisitionErrors so it
+        // lands in the daily report and the run record instead of silently
+        // continuing with shrinking inventory.
+        const error = new Error(
+          `FindyMail credits exhausted after ${report.finderCalls} finder calls; verification stopped with ${report.promoted} promoted.`,
+        ) as Error & { verificationSummary?: unknown };
+        error.verificationSummary = report;
+        throw error;
+      }
+      return report;
+    },
     onResearchError: (stage, error) => {
-      logger.error({ err: error, stage, runDate }, "Outreach acquisition stage failed; continuing with existing eligible inventory");
+      logger.error({ err: error, stage, runDate }, "Outreach acquisition stage failed; recorded for the daily report");
     },
     prepareRegularOutreach: () => prepareNextPhoenixOutreach(),
     prepareHotMarketOutreach: () => prepareNextPhoenixHotMarketOutreach(),
@@ -131,17 +152,23 @@ async function main(): Promise<void> {
     || result.publicShortfall > 0
     || result.hotMarketShortfall > 0
     || (result.hotLeadShortfall ?? 100) > 0;
-  const status = result.unresolved > 0 || hasPreparationShortfall
+  const hasAcquisitionFailure = result.acquisitionErrors.length > 0;
+  const status = result.unresolved > 0 || hasPreparationShortfall || hasAcquisitionFailure
     ? "partial"
     : "completed";
   const incidentType = result.unresolved > 0
     ? "partial_run"
-    : hasPreparationShortfall
-      ? "preparation_shortfall"
-      : run.incidentType;
-  const incidentError = hasPreparationShortfall
-    ? `Next-day queue shortfall: ${result.directShortfall} Named, ${result.publicShortfall} Public, ${result.hotMarketShortfall} Hot Market, ${result.hotLeadShortfall ?? 100} Hot Lead`
+    : hasAcquisitionFailure
+      ? "acquisition_failed"
+      : hasPreparationShortfall
+        ? "preparation_shortfall"
+        : run.incidentType;
+  const acquisitionIncident = result.acquisitionErrors.length > 0
+    ? `Acquisition failures: ${result.acquisitionErrors.map((failure) => `${failure.stage}: ${failure.message}`).join(" | ")}`
     : null;
+  const incidentError = [hasPreparationShortfall
+    ? `Next-day queue shortfall: ${result.directShortfall} Named, ${result.publicShortfall} Public, ${result.hotMarketShortfall} Hot Market, ${result.hotLeadShortfall ?? 100} Hot Lead`
+    : null, acquisitionIncident].filter(Boolean).join("; ") || null;
   await db.update(outreachDailyRunsTable).set({
     status,
     incidentType,
