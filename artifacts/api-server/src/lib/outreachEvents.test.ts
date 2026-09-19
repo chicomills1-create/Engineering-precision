@@ -156,7 +156,7 @@ test("an initial open schedules exactly one reply-first follow-up", async () => 
     assert.ok(followUps.every((message) => message.status === "approved"));
     assert.deepEqual(
       followUps.map((message) => message.scheduledAt?.toISOString()),
-      ["2026-09-02T15:00:00.000Z"],
+      ["2026-09-02T03:00:00.000Z"],
     );
     assert.equal(followUps[0]?.subject, "Ready for us to review an active project?");
     assert.match(followUps[0]?.body ?? "", /Reply with the project location and the drawings or scope you have available/);
@@ -200,7 +200,7 @@ test("a delivered initial click schedules one follow-up from the first engagemen
       .where(eq(outreachMessagesTable.prospectId, fixture.prospect.id)))
       .filter((message) => message.sequenceNumber === 2);
     assert.equal(followUps.length, 1);
-    assert.equal(followUps[0]?.scheduledAt?.toISOString(), "2026-09-02T15:00:00.000Z");
+    assert.equal(followUps[0]?.scheduledAt?.toISOString(), "2026-09-02T03:00:00.000Z");
   } finally {
     await cleanEventFixture(fixture);
   }

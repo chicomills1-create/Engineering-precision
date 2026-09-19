@@ -19,6 +19,7 @@ test("daily outreach report includes dispatch proof and next-day lane counts", (
     hotMarketPrepared: 50,
     hotMarketScheduled: 50,
     hotMarketShortfall: 0,
+    acquisitionErrors: [],
     waitMs: 0,
   });
 

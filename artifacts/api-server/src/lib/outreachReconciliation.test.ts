@@ -111,7 +111,7 @@ async function createRaceFixture() {
       subject: "Race follow-up",
       body: "Race follow-up body",
       status: "approved",
-      scheduledAt: new Date("2026-09-01T15:00:00.000Z"),
+      scheduledAt: new Date("2026-09-02T15:00:00.000Z"),
     },
     {
       prospectId: fixture.prospect.id,
