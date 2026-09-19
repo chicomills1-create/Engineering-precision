@@ -12,6 +12,7 @@ import {
 import {
   ensureApprovedFollowUpSequence,
   isOpenerFollowUpWithinWindow,
+  isSafeDeterministicFollowUpRetry,
 } from "./outreachSequence";
 
 test("opener reminders accept only opens from the prior 30 days", () => {
@@ -28,6 +29,25 @@ test("opener reminders accept only opens from the prior 30 days", () => {
     isOpenerFollowUpWithinWindow(new Date("2026-09-03T15:00:00.001Z"), now),
     false,
   );
+});
+
+test("only deterministic pre-handoff follow-up failures can be retried", () => {
+  const base = {
+    status: "failed",
+    error: "Follow-up cannot send before its Phoenix opener-based business cadence",
+    sentAt: null,
+    providerMessageId: null,
+    providerReconciliationKey: null,
+  };
+  assert.equal(isSafeDeterministicFollowUpRetry(base), true);
+  assert.equal(isSafeDeterministicFollowUpRetry({
+    ...base,
+    error: "SendGrid activity has no matching record yet; retry remains blocked pending clear provider evidence",
+  }), false);
+  assert.equal(isSafeDeterministicFollowUpRetry({
+    ...base,
+    providerMessageId: "provider-evidence",
+  }), false);
 });
 
 test("enrollment remains idempotent when a separate draft writer races it", async () => {

@@ -1,8 +1,10 @@
 import { and, asc, eq, gte, inArray, isNull, lte, sql } from "drizzle-orm";
 import {
+  campaignsTable,
   db,
   outreachDeliveryEventsTable,
   outreachMessagesTable,
+  outreachSequenceSendClaimsTable,
   outreachSuppressionsTable,
   prospectsTable,
   type OutreachMessage,
@@ -15,6 +17,23 @@ const FOLLOW_UP_SEQUENCE_NUMBERS = [2] as const;
 const LEGACY_EXTRA_FOLLOW_UP_SEQUENCE_NUMBERS = [3, 4] as const;
 export const OPENER_FOLLOW_UP_MAX_AGE_DAYS = 30;
 const OPENER_FOLLOW_UP_MAX_AGE_MS = OPENER_FOLLOW_UP_MAX_AGE_DAYS * 24 * 60 * 60 * 1000;
+const DETERMINISTIC_PREFLIGHT_FAILURES = new Set([
+  "Follow-up cannot send before its Phoenix opener-based business cadence",
+  "Message cannot send before its scheduled time",
+]);
+
+export function isSafeDeterministicFollowUpRetry(
+  message: Pick<
+    OutreachMessage,
+    "status" | "error" | "sentAt" | "providerMessageId" | "providerReconciliationKey"
+  >,
+): boolean {
+  return message.status === "failed"
+    && Boolean(message.error && DETERMINISTIC_PREFLIGHT_FAILURES.has(message.error))
+    && message.sentAt === null
+    && message.providerMessageId === null
+    && message.providerReconciliationKey === null;
+}
 
 export function isOpenerFollowUpWithinWindow(
   engagedAt: Date,
@@ -59,6 +78,12 @@ export async function ensureApprovedFollowUpSequence(
         hashtextextended(${`outreach-follow-ups:${initialMessage.prospectId}:${campaignScope}`}, 0)
       )
     `);
+    if (!initialMessage.campaignId) return 0;
+    const [currentCampaign] = await tx.select({ status: campaignsTable.status })
+      .from(campaignsTable)
+      .where(eq(campaignsTable.id, initialMessage.campaignId))
+      .limit(1);
+    if (currentCampaign?.status !== "active") return 0;
     const [currentProspect] = await tx.select({
       status: prospectsTable.status,
       contactStatus: prospectsTable.contactStatus,
@@ -181,6 +206,32 @@ export async function ensureApprovedFollowUpSequence(
             .where(and(
               eq(outreachMessagesTable.id, current.id),
               eq(outreachMessagesTable.status, "draft"),
+            ))
+            .returning({ id: outreachMessagesTable.id });
+          if (approved) enrolled += 1;
+          continue;
+        }
+        if (isSafeDeterministicFollowUpRetry(current)) {
+          const [approved] = await tx.update(outreachMessagesTable)
+            .set({
+              subject: template.subject,
+              body: template.body,
+              status: "approved",
+              scheduledAt: getFollowUpScheduledAt(sequenceNumber, initialEngagement.occurredAt),
+              error: null,
+            })
+            .where(and(
+              eq(outreachMessagesTable.id, current.id),
+              eq(outreachMessagesTable.status, "failed"),
+              inArray(outreachMessagesTable.error, [...DETERMINISTIC_PREFLIGHT_FAILURES]),
+              isNull(outreachMessagesTable.sentAt),
+              isNull(outreachMessagesTable.providerMessageId),
+              isNull(outreachMessagesTable.providerReconciliationKey),
+              sql`not exists (
+                select 1
+                from ${outreachSequenceSendClaimsTable} as retry_claim
+                where retry_claim.message_id = ${outreachMessagesTable.id}
+              )`,
             ))
             .returning({ id: outreachMessagesTable.id });
           if (approved) enrolled += 1;
