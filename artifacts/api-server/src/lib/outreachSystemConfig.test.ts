@@ -48,24 +48,24 @@ test("JOB 2 keeps v1 allocation through September 12 and cuts over on September 
   const before = effectiveLaneAllocations(schedule, new Date("2026-09-13T06:59:59Z"));
   const after = effectiveLaneAllocations(schedule, new Date("2026-09-13T07:00:00Z"));
   assert.deepEqual(before, { named: 100, public: 100, hotMarket: 100, hotLead: 100 });
-  assert.equal(after?.named, 200);
+  assert.equal(after?.named, 500);
   assert.equal(after?.public, 100);
-  assert.equal(after?.hotMarket, 200);
-  assert.equal(after?.namedHotMarketShared, 200);
+  assert.equal(after?.hotMarket, 0);
+  assert.equal(after?.namedHotMarketShared, 500);
   assert.equal(after?.hotLead, OUTREACH_UNCAPPED);
   assert.equal(
     configuredDailyAllowance(
       { version: 2, policy: AUTHORITATIVE_OUTREACH_POLICY_V2, month: "2026-10", schedule: AUTHORITATIVE_OUTREACH_POLICY_V2.monthlySchedules[1]! },
       new Date("2026-10-01T15:00:00Z"),
     ),
-    300,
+    600,
   );
 });
 test("JOB 2 regular daily allowance is shared named/hot-market plus public", () => {
   const schedule = AUTHORITATIVE_OUTREACH_POLICY_V2.monthlySchedules[0]!;
   const runtime = { version: 2, policy: AUTHORITATIVE_OUTREACH_POLICY_V2, month: "2026-09", schedule };
   assert.equal(configuredDailyAllowance(runtime, new Date("2026-09-12T15:00:00Z")), 400);
-  assert.equal(configuredDailyAllowance(runtime, new Date("2026-09-13T15:00:00Z")), 300);
+  assert.equal(configuredDailyAllowance(runtime, new Date("2026-09-13T15:00:00Z")), 600);
 });
 test("forward schedule never exceeds cap", () => assert.ok((scheduleForMonth(policy, "2030-01")?.monthlyTarget ?? Infinity) <= policy.forwardMonthlyCap));
 test("score ordering and suppression precedence are deterministic", () => {
