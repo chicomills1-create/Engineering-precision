@@ -22,7 +22,7 @@ import { VERIFIED_OUTREACH_CONTACTS_SEP_05 } from "./verifiedOutreachContactsSep
 import { VERIFIED_OUTREACH_CONTACTS_SEP_05_DIRECT } from "./verifiedOutreachContactsSep05Direct";
 import { LICENSED_OUTREACH_STATES } from "./hotMarketResearch";
 
-const CAMPAIGN_NAME = "Approved 8 AM Outreach - August 2026";
+const CAMPAIGN_NAME = "Approved 8 PM Outreach - September 2026";
 export const REGULAR_OUTREACH_DAILY_TARGET = 150;
 export const VERIFIED_OUTREACH_CONTACTS = [
   ...LEGACY_VERIFIED_OUTREACH_CONTACTS,
