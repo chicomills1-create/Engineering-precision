@@ -105,8 +105,8 @@ function phoenixDateParts(date: Date): { year: string; month: string; day: strin
 export function getFollowUpScheduledAt(sequenceNumber: number, baseDate = new Date()): Date | null {
   if (sequenceNumber !== 2) return null;
   const parts = phoenixDateParts(baseDate);
-  const openedPhoenixMorning = new Date(`${parts.year}-${parts.month}-${parts.day}T08:00:00-07:00`);
-  let candidate = openedPhoenixMorning;
+  const openedPhoenixEvening = new Date(`${parts.year}-${parts.month}-${parts.day}T20:00:00-07:00`);
+  let candidate = openedPhoenixEvening;
   let businessDays = 0;
   while (businessDays < ENGAGEMENT_FOLLOW_UP_BUSINESS_DAYS) {
     candidate = new Date(candidate.getTime() + 24 * 60 * 60 * 1000);
@@ -133,7 +133,7 @@ export function assertFollowUpCadenceReady(
   }
 }
 
-export function getNextPhoenixEightAm(now = new Date()): Date {
+export function getNextPhoenixEightPm(now = new Date()): Date {
   const dateParts = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Phoenix",
     year: "numeric",
@@ -141,10 +141,10 @@ export function getNextPhoenixEightAm(now = new Date()): Date {
     day: "2-digit",
   }).formatToParts(now);
   const values = Object.fromEntries(dateParts.map((part) => [part.type, part.value]));
-  const todayAtEight = new Date(`${values.year}-${values.month}-${values.day}T08:00:00-07:00`);
-  return todayAtEight.getTime() > now.getTime()
-    ? todayAtEight
-    : new Date(todayAtEight.getTime() + 24 * 60 * 60 * 1000);
+  const todayAtEightPm = new Date(`${values.year}-${values.month}-${values.day}T20:00:00-07:00`);
+  return todayAtEightPm.getTime() > now.getTime()
+    ? todayAtEightPm
+    : new Date(todayAtEightPm.getTime() + 24 * 60 * 60 * 1000);
 }
 
 export function getPhoenixCalendarDayStart(now = new Date()): Date {

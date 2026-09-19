@@ -21,7 +21,7 @@ export type PhoenixRecoveryResult = {
   error?: string;
 };
 
-export function isBeforePhoenixEight(now: Date): boolean {
+export function isBeforePhoenixEightPm(now: Date): boolean {
   const target = getCurrentPhoenixPreparationTarget(now);
   return now.getTime() < target.scheduledAt.getTime();
 }
@@ -33,12 +33,12 @@ export async function recoverCurrentPhoenixOutreach(options: {
   const now = options.now ?? new Date();
   // Recovery only stages approved queue rows; it has no dispatch/provider
   // dependency.  Keeping this enabled at startup is what makes a Reserved VM
-  // restart before 08:00 useful, while the Phoenix cutoff remains a hard gate.
+  // restart before 20:00 useful, while the Phoenix cutoff remains a hard gate.
   const enabled = options.enabled ?? true;
   if (!enabled) return { state: "skipped", targetDate: null };
 
   const target = getCurrentPhoenixPreparationTarget(now);
-  if (!isBeforePhoenixEight(now)) {
+  if (!isBeforePhoenixEightPm(now)) {
     return { state: "refused", targetDate: target.targetDate, target };
   }
 

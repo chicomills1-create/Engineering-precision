@@ -22,8 +22,7 @@ import { VERIFIED_OUTREACH_CONTACTS_SEP_05 } from "./verifiedOutreachContactsSep
 import { VERIFIED_OUTREACH_CONTACTS_SEP_05_DIRECT } from "./verifiedOutreachContactsSep05Direct";
 import { LICENSED_OUTREACH_STATES } from "./hotMarketResearch";
 
-const CAMPAIGN_NAME = "Approved 8 AM Outreach - August 2026";
-const SUBJECT = "A reliable engineering partner for active projects";
+const CAMPAIGN_NAME = "Approved 8 PM Outreach - September 2026";
 export const REGULAR_OUTREACH_DAILY_TARGET = 150;
 export const VERIFIED_OUTREACH_CONTACTS = [
   ...LEGACY_VERIFIED_OUTREACH_CONTACTS,
@@ -38,22 +37,25 @@ const SEP_05_DIRECT_LIBRARY_TARGET = 117;
 const SEP_05_DIRECT_REQUIRED_TARGET = 110;
 const SEP_05_PUBLIC_TARGET = 50;
 
-export function approvedOutreachSubject(): string {
-  return SUBJECT;
+/**
+ * September 2026 relaunch subject. The firm name is resolved at message
+ * creation/send time; when no company name is available the subject falls
+ * back to a generic but still honest variant.
+ */
+export function approvedOutreachSubject(companyName?: string | null): string {
+  const firm = companyName?.trim();
+  return `Engineering bandwidth for ${firm || "your team"}`;
 }
 
 export function approvedOutreachBody(contactName: string): string {
   const firstName = contactName.trim().split(/\s+/)[0];
   return `Hi ${firstName},
 
+If your team is overloaded with MEP, structural, or civil projects and racing against deadlines, we can take some of that off your plate.
 
-Apex Grid is a veteran-owned engineering organization providing full-discipline support — Civil, Structural, MEP, drainage, utility, permit-response, and drafting.
+At Apex Grid Engineering, we provide on-demand engineering support to help firms clear backlogs and meet delivery timelines — without the hassle of hiring. We’re a veteran-owned firm, licensed in 49 states.
 
-
-We’re licensed in 49 states, and we work fast: focused reviews typically turn around in 12–24 hours.
-
-
-Do you have an active project in your pipeline that you would like us to review?`;
+If you have a project that needs extra bandwidth, just reply with the details or drawings. We’ll review it and send you a tailored proposal.`;
 }
 
 export function approvedOutreachFollowUpMessages(contactName: string): Array<{

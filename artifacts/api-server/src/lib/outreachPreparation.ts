@@ -67,20 +67,20 @@ export function getNextPhoenixPreparationTarget(now = new Date()): {
   targetDate: string;
   scheduledAt: Date;
 } {
-  const todayAtEight = new Date(`${phoenixDateKey(now)}T08:00:00-07:00`);
-  const scheduledAt = new Date(todayAtEight.getTime() + 24 * 60 * 60 * 1000);
+  const todayAtEightPm = new Date(`${phoenixDateKey(now)}T20:00:00-07:00`);
+  const scheduledAt = new Date(todayAtEightPm.getTime() + 24 * 60 * 60 * 1000);
   return { targetDate: phoenixDateKey(scheduledAt), scheduledAt };
 }
 
 export function getCurrentPhoenixPreparationTarget(now = new Date()): PhoenixPreparationTarget {
   const targetDate = phoenixDateKey(now);
-  const scheduledAt = new Date(`${targetDate}T08:00:00-07:00`);
+  const scheduledAt = new Date(`${targetDate}T20:00:00-07:00`);
   return { targetDate, scheduledAt };
 }
 
 export function isPhoenixPreparationWindowOpen(now = new Date()): boolean {
-  const todayAtEight = new Date(`${phoenixDateKey(now)}T08:00:00-07:00`);
-  return now.getTime() >= todayAtEight.getTime();
+  const todayAtEightPm = new Date(`${phoenixDateKey(now)}T20:00:00-07:00`);
+  return now.getTime() >= todayAtEightPm.getTime();
 }
 
 export function isPublicInbox(
@@ -626,7 +626,12 @@ export async function prepareNextPhoenixOutreach(
         (_, index) => index + 1,
       ).filter((slot) => !usedSlots.has(slot)).slice(0, remainingCapacity);
 
-      const selectedForRun = catchUpCohort?.status === "active"
+      // The one-time catch-up cohort must never starve normal daily
+      // preparation: it gates the run only while it is still active AND
+      // still has reserved capacity left. An exhausted or finished cohort
+      // falls through to normal daily inventory.
+      const catchUpEnrolling = catchUpCohort?.status === "active" && catchUpRemaining > 0;
+      const selectedForRun = catchUpEnrolling
         ? selected.slice(0, catchUpRemaining)
         : selected;
       for (const prospect of selectedForRun) {
@@ -695,7 +700,7 @@ export async function prepareNextPhoenixOutreach(
           }
         }
         let catchUpCohortId: number | null = null;
-        if (catchUpCohort?.status === "active") {
+        if (catchUpEnrolling) {
           await tx.execute(sql`select ${outreachCatchUpCohortsTable.id}
             from ${outreachCatchUpCohortsTable}
             where ${outreachCatchUpCohortsTable.id} = ${catchUpCohort.id}
@@ -718,7 +723,7 @@ export async function prepareNextPhoenixOutreach(
           prospectId: prospect.id,
           campaignId: campaignsByProspect.get(prospect.id)!,
           sequenceNumber: 1,
-          subject: approvedOutreachSubject(),
+          subject: approvedOutreachSubject(currentProspect.companyName),
           body: approvedOutreachBody(personalizationName),
           status: "approved",
           scheduledAt,

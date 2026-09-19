@@ -263,25 +263,29 @@ test("the seed validator quarantines duplicate identities before database writes
 test("the approved body uses only the approved pipeline closing", () => {
   assert.equal(
     approvedOutreachSubject(),
-    "A reliable engineering partner for active projects",
+    "Engineering bandwidth for your team",
+  );
+  assert.equal(
+    approvedOutreachSubject("Acme Architects"),
+    "Engineering bandwidth for Acme Architects",
   );
   const body = approvedOutreachBody("Alex Rivera");
   assert.equal(
     body,
     `Hi Alex,
 
+If your team is overloaded with MEP, structural, or civil projects and racing against deadlines, we can take some of that off your plate.
 
-Apex Grid is a veteran-owned engineering organization providing full-discipline support — Civil, Structural, MEP, drainage, utility, permit-response, and drafting.
+At Apex Grid Engineering, we provide on-demand engineering support to help firms clear backlogs and meet delivery timelines — without the hassle of hiring. We’re a veteran-owned firm, licensed in 49 states.
 
-
-We’re licensed in 49 states, and we work fast: focused reviews typically turn around in 12–24 hours.
-
-
-Do you have an active project in your pipeline that you would like us to review?`,
+If you have a project that needs extra bandwidth, just reply with the details or drawings. We’ll review it and send you a tailored proposal.`,
   );
   assert.doesNotMatch(body, /Click the URL|https:\/\/apexgrideng\.com/i);
   assert.doesNotMatch(body, /15.?minute|15 min|schedule|book.*call/i);
   assert.doesNotMatch(body, /plan-review comment|field condition|waiting on engineering answers/i);
+  // The estimator CTA lives outside the body (and was removed from the
+  // branded footer); it must not sneak back into campaign copy.
+  assert.doesNotMatch(body, /estimate|ballpark/i);
 });
 
 test("the approved opener follow-up is one concise reply-first touch", () => {

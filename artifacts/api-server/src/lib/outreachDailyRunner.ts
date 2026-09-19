@@ -1,5 +1,5 @@
 const OUTREACH_RESEARCH_TIMEZONE = "America/Phoenix";
-const OUTREACH_RESEARCH_LOCAL_HOUR = 8;
+const OUTREACH_RESEARCH_LOCAL_HOUR = 20;
 const PHOENIX_DISPATCH_MINUTE = 10;
 const PHOENIX_OFFSET = "-07:00";
 
@@ -38,8 +38,8 @@ export function isPrimaryPhoenixInvocation(now: Date): boolean {
 }
 
 /**
- * Scheduled Deployments start at 08:00 Phoenix. Only that invocation waits
- * for messages staged by research for 08:10; a later/manual invocation is a
+ * Scheduled Deployments start at 20:00 Phoenix. Only that invocation waits
+ * for messages staged by research for 20:10; a later/manual invocation is a
  * catch-up run and must never be held open.
  */
 export function getPhoenixStagedMessageWaitMs(invokedAt: Date, now: Date): number {
@@ -135,6 +135,12 @@ export type DailyOutreachRunnerResult = {
   hotLeadTarget?: number;
   hotLeadPrepared?: number;
   hotLeadShortfall?: number;
+  /** Stages of the acquisition pass (research/verification) that failed instead of silently continuing. */
+  acquisitionErrors: Array<{ stage: string; message: string }>;
+  /** Verification pass rollup when the injected verifyProspects reports it. */
+  verificationPromoted?: number;
+  verificationFinderCalls?: number;
+  verificationCreditBlocked?: boolean;
 };
 
 export type DailyOutreachLease = {
@@ -172,11 +178,35 @@ export async function runDailyOutreachOnce(
     ["scheduled-research", operations.processScheduledResearch],
     ["verification", operations.verifyProspects],
   ] as const;
+  const acquisitionErrors: Array<{ stage: string; message: string }> = [];
+  const readSummary = (value: unknown): typeof verificationSummary => {
+    if (!value || typeof value !== "object") return {};
+    const summary = value as { promoted?: unknown; finderCalls?: unknown; creditBlocked?: unknown };
+    return {
+      promoted: typeof summary.promoted === "number" ? summary.promoted : undefined,
+      finderCalls: typeof summary.finderCalls === "number" ? summary.finderCalls : undefined,
+      creditBlocked: typeof summary.creditBlocked === "boolean" ? summary.creditBlocked : undefined,
+    };
+  };
+  let verificationSummary: ReturnType<typeof readSummary> = {};
   for (const [stage, operation] of researchOperations) {
     if (!operation) continue;
     try {
-      await operation();
+      const outcome = await operation();
+      if (stage === "verification") verificationSummary = readSummary(outcome);
     } catch (error) {
+      if (stage === "verification") {
+        // A credit-blocked verification still reports what it accomplished
+        // before stopping (the wire attaches the summary to the error).
+        verificationSummary = readSummary((error as { verificationSummary?: unknown } | null)?.verificationSummary);
+      }
+      // Acquisition failures are recorded on the result instead of being
+      // silently swallowed: a failed research/verification stage must show up
+      // in the daily report, not just in the logs.
+      acquisitionErrors.push({
+        stage,
+        message: error instanceof Error ? error.message : String(error),
+      });
       operations.onResearchError?.(stage, error);
     }
   }
@@ -212,6 +242,10 @@ export async function runDailyOutreachOnce(
        hotLeadTarget: hotLeadPreparation.totalScheduled + hotLeadPreparation.shortfall,
        hotLeadPrepared: hotLeadPreparation.totalScheduled,
        hotLeadShortfall: hotLeadPreparation.shortfall,
+       acquisitionErrors,
+       verificationPromoted: verificationSummary.promoted,
+       verificationFinderCalls: verificationSummary.finderCalls,
+       verificationCreditBlocked: verificationSummary.creditBlocked,
       waitMs,
     };
   }
@@ -238,6 +272,10 @@ export async function runDailyOutreachOnce(
     hotLeadTarget: hotLeadPreparation.totalScheduled + hotLeadPreparation.shortfall,
     hotLeadPrepared: hotLeadPreparation.totalScheduled,
     hotLeadShortfall: hotLeadPreparation.shortfall,
+    acquisitionErrors,
+    verificationPromoted: verificationSummary.promoted,
+    verificationFinderCalls: verificationSummary.finderCalls,
+    verificationCreditBlocked: verificationSummary.creditBlocked,
     waitMs,
   };
 }

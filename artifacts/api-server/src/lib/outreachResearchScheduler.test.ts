@@ -13,7 +13,7 @@ import {
 } from "./outreachResearchScheduler";
 import { RESEARCH_STATE_ORDER } from "./publicResearch";
 
-test("uses the Phoenix calendar day and 8 AM boundary", () => {
+test("uses the Phoenix calendar day and 8 PM boundary", () => {
   assert.deepEqual(
     getPhoenixResearchWindow(new Date("2026-08-29T14:59:00.000Z")),
     { runDate: "2026-08-29", localHour: 7 },
@@ -23,7 +23,7 @@ test("uses the Phoenix calendar day and 8 AM boundary", () => {
     { runDate: "2026-08-29", localHour: 8 },
   );
   assert.equal(OUTREACH_RESEARCH_TIMEZONE, "America/Phoenix");
-  assert.equal(OUTREACH_RESEARCH_LOCAL_HOUR, 8);
+  assert.equal(OUTREACH_RESEARCH_LOCAL_HOUR, 20);
 });
 
 test("keeps the Phoenix date stable across the UTC year boundary", () => {
@@ -34,21 +34,21 @@ test("keeps the Phoenix date stable across the UTC year boundary", () => {
 });
 
 test("runs only enabled schedules on active campaigns after the local hour", () => {
-  const beforeEight = new Date("2026-08-29T14:59:00.000Z");
-  const atEight = new Date("2026-08-29T15:00:00.000Z");
-  const schedule = { enabled: true, localHour: 8 };
+  const beforeEightPm = new Date("2026-08-30T02:59:00.000Z");
+  const atEightPm = new Date("2026-08-30T03:00:00.000Z");
+  const schedule = { enabled: true, localHour: 20 };
   const campaign = { status: "active" };
 
-  assert.equal(isResearchScheduleDue(schedule as any, campaign as any, beforeEight), false);
-  assert.equal(isResearchScheduleDue({ ...schedule, localHour: 7 } as any, campaign as any, beforeEight), false);
-  assert.equal(isResearchScheduleDue(schedule as any, campaign as any, atEight), true);
-  assert.equal(isResearchScheduleDue({ ...schedule, enabled: false } as any, campaign as any, atEight), false);
-  assert.equal(isResearchScheduleDue(schedule as any, { status: "paused" } as any, atEight), false);
+  assert.equal(isResearchScheduleDue(schedule as any, campaign as any, beforeEightPm), false);
+  assert.equal(isResearchScheduleDue({ ...schedule, localHour: 7 } as any, campaign as any, beforeEightPm), false);
+  assert.equal(isResearchScheduleDue(schedule as any, campaign as any, atEightPm), true);
+  assert.equal(isResearchScheduleDue({ ...schedule, enabled: false } as any, campaign as any, atEightPm), false);
+  assert.equal(isResearchScheduleDue(schedule as any, { status: "paused" } as any, atEightPm), false);
 });
 
 test("uses the configurable discovery cap independently of sending capacity", () => {
   assert.equal(getDailyResearchTarget(10, 167), 167);
-  assert.equal(getDailyResearchTarget(167, 500), 400);
+  assert.equal(getDailyResearchTarget(167, 500), 500);
   assert.equal(getDailyResearchTarget(5, 5), 5);
 });
 
@@ -69,19 +69,19 @@ test("national hot-market research rotates the remaining licensed states", () =>
   assert.notDeepEqual(first.slice(2), second.slice(2));
 });
 
-test("hot-market research always stages the following Phoenix day at 8:10", () => {
+test("hot-market research always stages the following Phoenix day at 8:10 PM", () => {
   assert.deepEqual(
     getHotMarketResearchTarget(new Date("2026-09-04T15:00:00.000Z")),
     {
       targetDate: "2026-09-05",
-      scheduledAt: new Date("2026-09-05T15:10:00.000Z"),
+      scheduledAt: new Date("2026-09-06T03:10:00.000Z"),
     },
   );
   assert.deepEqual(
     getHotMarketResearchTarget(new Date("2026-09-04T20:00:00.000Z")),
     {
       targetDate: "2026-09-05",
-      scheduledAt: new Date("2026-09-05T15:10:00.000Z"),
+      scheduledAt: new Date("2026-09-06T03:10:00.000Z"),
     },
   );
 });

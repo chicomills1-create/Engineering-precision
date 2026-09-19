@@ -72,7 +72,7 @@ export function CampaignsTab() {
         toast({
           title: schedule.enabled ? 'Morning list enabled' : 'Morning list paused',
           description: schedule.enabled
-            ? `Up to ${schedule.targetCount} qualified organizations will be added at 8:00 AM Phoenix time.`
+            ? `Up to ${schedule.targetCount} qualified organizations will be added at 8:00 PM Phoenix time.`
             : 'No automatic research will run for this campaign.',
         });
       },
@@ -291,7 +291,7 @@ export function CampaignsTab() {
                 <ResponsiveTableHead>Audience</ResponsiveTableHead>
                 <ResponsiveTableHead>States</ResponsiveTableHead>
                 <ResponsiveTableHead className="text-right">Daily Limit</ResponsiveTableHead>
-                 <ResponsiveTableHead>8 AM Approval List</ResponsiveTableHead>
+                 <ResponsiveTableHead>8 PM Approval List</ResponsiveTableHead>
                 <ResponsiveTableHead className="text-center">Status</ResponsiveTableHead>
                 <ResponsiveTableHead className="text-right">Actions</ResponsiveTableHead>
               </ResponsiveTableRow>
@@ -309,13 +309,13 @@ export function CampaignsTab() {
                     </div>
                   </ResponsiveTableCell>
                   <ResponsiveTableCell mobileLabel="Daily Limit" className="text-right align-top max-md:text-left">{campaign.dailyLimit}</ResponsiveTableCell>
-                  <ResponsiveTableCell mobileLabel="8 AM Approval List" className="align-top">
+                  <ResponsiveTableCell mobileLabel="8 PM Approval List" className="align-top">
                     <div className="flex items-center gap-2">
                       <Badge variant={schedule?.enabled ? 'default' : 'outline'} data-testid={`research-schedule-${campaign.id}`}>
                         {schedule?.enabled ? 'Enabled' : 'Off'}
                       </Badge>
                       <span className="text-xs text-muted-foreground">
-                        {schedule?.enabled ? `8:00 AM Phoenix · up to ${schedule.targetCount}` : 'Approval only'}
+                        {schedule?.enabled ? `8:00 PM Phoenix · up to ${schedule.targetCount}` : 'Approval only'}
                       </span>
                     </div>
                     {schedule?.lastRunDate && (
@@ -349,9 +349,9 @@ export function CampaignsTab() {
                            data-testid={`action-toggle-research-schedule-${campaign.id}`}
                          >
                            {schedule?.enabled ? (
-                             <><Pause className="w-4 h-4 mr-2" /> Pause 8 AM List</>
+                             <><Pause className="w-4 h-4 mr-2" /> Pause 8 PM List</>
                            ) : (
-                             <><CalendarClock className="w-4 h-4 mr-2" /> Enable 8 AM List</>
+                             <><CalendarClock className="w-4 h-4 mr-2" /> Enable 8 PM List</>
                            )}
                          </DropdownMenuItem>
                         {campaign.status !== 'draft' && (

@@ -9,14 +9,16 @@ import {
 export type OutreachLane = "named" | "public" | "hot_market" | "hot_lead";
 export type OutreachLaneLimit = number | typeof OUTREACH_UNCAPPED;
 
-/** September's four lanes are deliberately equal and independent. */
+/** September 2026 relaunch lanes: 500 verified named + 100 public + uncapped hot leads. */
 export const SEPTEMBER_OUTREACH_LANE_TARGETS = {
-  named: 100,
+  named: 500,
   public: 100,
-  hot_market: 100,
+  hot_market: 0,
   hot_lead: 100,
 } as const;
 export const SEPTEMBER_OUTREACH_TOTAL_TARGET = 400;
+/** September 19 relaunch daily target: 500 verified + 100 public. Hot leads are uncapped. */
+export const SEPTEMBER_OUTREACH_RELAUNCH_DAILY_TARGET = 600;
 
 export type OutreachLaneConfig = {
   campaignKey: string;

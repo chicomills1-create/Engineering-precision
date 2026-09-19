@@ -8,7 +8,7 @@ import {
 } from "./outreachDailyRunner";
 
 test("distinguishes the primary Phoenix invocation from recovery", () => {
-  assert.equal(isPrimaryPhoenixInvocation(new Date("2026-01-15T15:00:00.000Z")), true);
+  assert.equal(isPrimaryPhoenixInvocation(new Date("2026-01-16T03:00:00.000Z")), true);
   assert.equal(isPrimaryPhoenixInvocation(new Date("2026-01-15T15:30:00.000Z")), false);
 });
 
@@ -62,25 +62,25 @@ test("exclusive lease is released when a run fails", async () => {
   assert.equal(held, false);
 });
 
-test("waits from the 08:00 Phoenix scheduled invocation until 08:10", () => {
-  const invokedAt = new Date("2026-01-15T15:00:00.000Z");
-  const afterResearch = new Date("2026-01-15T15:04:30.000Z");
+test("waits from the 20:00 Phoenix scheduled invocation until 20:10", () => {
+  const invokedAt = new Date("2026-01-16T03:00:00.000Z");
+  const afterResearch = new Date("2026-01-16T03:04:30.000Z");
 
   assert.equal(getPhoenixStagedMessageWaitMs(invokedAt, afterResearch), 330_000);
 });
 
-test("does not wait after 08:10 or for a catch-up invocation", () => {
+test("does not wait after 20:10 or for a catch-up invocation", () => {
   assert.equal(
     getPhoenixStagedMessageWaitMs(
-      new Date("2026-01-15T15:00:00.000Z"),
-      new Date("2026-01-15T15:11:00.000Z"),
+      new Date("2026-01-16T03:00:00.000Z"),
+      new Date("2026-01-16T03:11:00.000Z"),
     ),
     0,
   );
   assert.equal(
     getPhoenixStagedMessageWaitMs(
-      new Date("2026-01-15T16:00:00.000Z"),
-      new Date("2026-01-15T16:01:00.000Z"),
+      new Date("2026-01-16T04:00:00.000Z"),
+      new Date("2026-01-16T04:01:00.000Z"),
     ),
     0,
   );
@@ -89,8 +89,8 @@ test("does not wait after 08:10 or for a catch-up invocation", () => {
 test("researches before dispatching and makes a second pass after the safe wait", async () => {
   const calls: string[] = [];
   const times = [
-    new Date("2026-01-15T15:00:00.000Z"),
-    new Date("2026-01-15T15:06:00.000Z"),
+    new Date("2026-01-16T03:00:00.000Z"),
+    new Date("2026-01-16T03:06:00.000Z"),
   ];
   let sends = 0;
 
@@ -155,6 +155,10 @@ test("researches before dispatching and makes a second pass after the safe wait"
     hotLeadTarget: 100,
     hotLeadPrepared: 0,
     hotLeadShortfall: 100,
+    acquisitionErrors: [],
+    verificationPromoted: undefined,
+    verificationFinderCalls: undefined,
+    verificationCreditBlocked: undefined,
     waitMs: 240_000,
   });
 });
@@ -237,6 +241,10 @@ test("does not make a second send pass for catch-up runs", async () => {
     hotLeadTarget: 100,
     hotLeadPrepared: 0,
     hotLeadShortfall: 100,
+    acquisitionErrors: [],
+    verificationPromoted: undefined,
+    verificationFinderCalls: undefined,
+    verificationCreditBlocked: undefined,
     waitMs: 0,
   });
 });

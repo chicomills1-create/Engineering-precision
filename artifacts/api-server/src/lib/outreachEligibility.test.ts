@@ -7,7 +7,7 @@ import {
   assertScheduledTimeReady,
   assertSequenceDeliveryReady,
   getFollowUpScheduledAt,
-  getNextPhoenixEightAm,
+  getNextPhoenixEightPm,
   getPhoenixCalendarDayStart,
   isOutreachContactExcluded,
 } from "./outreachEligibility";
@@ -43,7 +43,7 @@ test("the global target reserves 150 regular and 50 hot-market slots while allow
 
 test("JOB 2 global regular allowance changes on the Phoenix cutover date", () => {
   assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-12T15:00:00.000Z")), 400);
-  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-13T15:00:00.000Z")), 300);
+  assert.equal(getGlobalOutreachDailyLimit(new Date("2026-09-13T15:00:00.000Z")), 600);
 });
 
 test("dispatch lane inference isolates Direct, Public, recurring Hot Market, and verified extras", () => {
@@ -371,7 +371,7 @@ test("follow-up requires the immediately prior sequence to be delivered", () => 
 test("the single opener follow-up waits three Phoenix business days", () => {
   const fridayOpen = new Date("2026-08-28T12:00:00.000Z");
   assert.equal(getFollowUpScheduledAt(1, fridayOpen), null);
-  assert.equal(getFollowUpScheduledAt(2, fridayOpen)?.toISOString(), "2026-09-02T15:00:00.000Z");
+  assert.equal(getFollowUpScheduledAt(2, fridayOpen)?.toISOString(), "2026-09-02T03:00:00.000Z");
   assert.equal(getFollowUpScheduledAt(3, fridayOpen), null);
   assert.equal(getFollowUpScheduledAt(4, fridayOpen), null);
 });
@@ -408,14 +408,18 @@ test("manual and automatic sends cannot bypass their due time", () => {
   );
 });
 
-test("queues approved outreach for the next 8 AM Phoenix window", () => {
+test("queues approved outreach for the next 8 PM Phoenix window", () => {
   assert.equal(
-    getNextPhoenixEightAm(new Date("2026-08-29T14:00:00.000Z")).toISOString(),
-    "2026-08-29T15:00:00.000Z",
+    getNextPhoenixEightPm(new Date("2026-08-29T14:00:00.000Z")).toISOString(),
+    "2026-08-30T03:00:00.000Z",
   );
   assert.equal(
-    getNextPhoenixEightAm(new Date("2026-08-29T15:01:00.000Z")).toISOString(),
-    "2026-08-30T15:00:00.000Z",
+    getNextPhoenixEightPm(new Date("2026-08-29T15:01:00.000Z")).toISOString(),
+    "2026-08-30T03:00:00.000Z",
+  );
+  assert.equal(
+    getNextPhoenixEightPm(new Date("2026-08-30T03:01:00.000Z")).toISOString(),
+    "2026-08-31T03:00:00.000Z",
   );
 });
 

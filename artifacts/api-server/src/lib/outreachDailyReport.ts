@@ -35,6 +35,14 @@ export function buildDailyOutreachReport(
       `Hot Lead prepared: ${result.hotLeadPrepared ?? 0}`,
       `Hot Lead shortfall: ${result.hotLeadShortfall ?? 100}`,
       "",
+      "Acquisition and verification",
+      `Verification promoted: ${result.verificationPromoted ?? 0}`,
+      `FindyMail finder calls (1 credit each): ${result.verificationFinderCalls ?? 0}`,
+      `FindyMail credit-blocked: ${result.verificationCreditBlocked ? "YES" : "no"}`,
+      result.acquisitionErrors.length > 0
+        ? `Acquisition failures: ${result.acquisitionErrors.map((failure) => `${failure.stage}: ${failure.message}`).join(" | ")}`
+        : "No acquisition failures.",
+      "",
       "Apex Grid fresh verified catch-up cohort",
       `Target: ${result.catchUpTarget ?? 0}`,
       `Provider-accepted enrollments: ${result.catchUpEnrolled ?? 0}`,

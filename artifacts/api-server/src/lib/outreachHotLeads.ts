@@ -113,7 +113,8 @@ export async function prepareNextPhoenixHotLeadOutreach(
         eq(prospectsTable.emailStatus, "verified"),
         or(
           inArray(prospectsTable.leadStatus, ["hot", "qualified"]),
-          gte(prospectsTable.leadScore, 50),
+          // September 2026 relaunch: hot = any verified open (score 10) or click (55).
+          gte(prospectsTable.leadScore, 10),
         ),
         eq(campaignsTable.status, "active"),
       ));
@@ -244,7 +245,7 @@ export async function prepareNextPhoenixHotLeadOutreach(
             prospectId: candidate.id,
             campaignId: campaign.id,
             sequenceNumber: 1,
-            subject: approvedOutreachSubject(),
+            subject: approvedOutreachSubject(candidate.companyName),
             body: approvedOutreachBody(candidate.contactName!),
             status: "approved",
             scheduledAt,

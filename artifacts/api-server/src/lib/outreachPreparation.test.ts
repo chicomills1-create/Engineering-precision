@@ -13,18 +13,18 @@ import {
   type PreparationCandidate,
 } from "./outreachPreparation";
 
-test("preparation always targets the following Phoenix day at 8 AM", () => {
+test("preparation always targets the following Phoenix day at 8 PM", () => {
   const target = getNextPhoenixPreparationTarget(new Date("2026-08-29T14:00:00.000Z"));
   assert.equal(target.targetDate, "2026-08-30");
-  assert.equal(target.scheduledAt.toISOString(), "2026-08-30T15:00:00.000Z");
+  assert.equal(target.scheduledAt.toISOString(), "2026-08-31T03:00:00.000Z");
 });
 
-test("preparation does not stage the same Phoenix day before 8 AM", () => {
+test("preparation does not stage the same Phoenix day before 8 PM", () => {
   const now = new Date("2026-08-29T12:00:00.000Z");
   const target = getNextPhoenixPreparationTarget(now);
   assert.equal(target.targetDate, "2026-08-30");
   assert.equal(isPhoenixPreparationWindowOpen(now), false);
-  assert.equal(isPhoenixPreparationWindowOpen(new Date("2026-08-29T15:00:00.000Z")), true);
+  assert.equal(isPhoenixPreparationWindowOpen(new Date("2026-08-30T03:00:00.000Z")), true);
 });
 
 test("Arizona contacts are prioritized before California contacts", () => {

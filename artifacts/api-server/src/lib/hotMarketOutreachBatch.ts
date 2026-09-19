@@ -31,7 +31,7 @@ import {
   RESEARCH_STATE_ORDER,
   type DiscoveredHotMarketProspect,
 } from "./publicResearch";
-import { getNextPhoenixEightAm } from "./outreachEligibility";
+import { getNextPhoenixEightPm } from "./outreachEligibility";
 
 export const HOT_MARKET_SOURCE_TYPE = "hot_market_one_time";
 
@@ -197,7 +197,7 @@ export function isHotMarketSourceType(sourceType: string | null): boolean {
 
 /** Schedules hot-market outreach ten minutes after the next regular Phoenix window. */
 export function getOneTimeHotMarketScheduledAt(now = new Date()): Date {
-  return getHotMarketScheduledAt(getNextPhoenixEightAm(now));
+  return getHotMarketScheduledAt(getNextPhoenixEightPm(now));
 }
 
 export function hotMarketOutreachBody(contact: {

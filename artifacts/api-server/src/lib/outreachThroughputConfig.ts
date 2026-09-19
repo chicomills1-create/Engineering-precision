@@ -1,5 +1,5 @@
-const DEFAULT_DISCOVERY_DAILY_CAP = 400;
-const DEFAULT_VERIFICATION_BATCH_CAP = 400;
+const DEFAULT_DISCOVERY_DAILY_CAP = 1000;
+const DEFAULT_VERIFICATION_BATCH_CAP = 600;
 const MAX_CONFIGURABLE_RESEARCH_CAP = 1_000;
 
 function positiveBoundedInteger(value: string | undefined, fallback: number): number {

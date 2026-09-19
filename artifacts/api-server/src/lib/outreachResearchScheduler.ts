@@ -27,7 +27,7 @@ import { isRecurringHotMarketCampaign } from "./hotMarketResearch";
 import { getOutreachDiscoveryDailyCap } from "./outreachThroughputConfig";
 
 export const OUTREACH_RESEARCH_TIMEZONE = "America/Phoenix";
-export const OUTREACH_RESEARCH_LOCAL_HOUR = 8;
+export const OUTREACH_RESEARCH_LOCAL_HOUR = 20;
 export const HOT_MARKET_RESEARCH_STATES_PER_RUN = 8;
 const HOT_MARKET_RESEARCH_QUERY_PREFIX = "hot-market-replenishment:";
 const HOT_MARKET_RESEARCH_AUDIENCES: ResearchAudience[] = ["builder", "architect"];
@@ -113,7 +113,7 @@ export function getHotMarketResearchTarget(
 ): { targetDate: string; scheduledAt: Date } {
   const { runDate } = getPhoenixResearchWindow(now);
   const scheduledAt = new Date(
-    new Date(`${runDate}T08:10:00-07:00`).getTime() + 24 * 60 * 60 * 1000,
+    new Date(`${runDate}T20:10:00-07:00`).getTime() + 24 * 60 * 60 * 1000,
   );
   return {
     targetDate: getPhoenixResearchWindow(scheduledAt).runDate,

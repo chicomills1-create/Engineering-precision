@@ -124,8 +124,8 @@ export const AUTHORITATIVE_OUTREACH_POLICY_V2: OutreachPolicy = {
   monthlySchedules: [
     {
       month: "2026-09",
-      monthlyTarget: 12_000,
-      dailyTarget: 400,
+      monthlyTarget: 18_000,
+      dailyTarget: 600,
       allocationEffectiveFrom: "2026-09-13",
       preEffectiveLaneAllocations: {
         named: 100,
@@ -134,22 +134,22 @@ export const AUTHORITATIVE_OUTREACH_POLICY_V2: OutreachPolicy = {
         hotLead: 100,
       },
       laneAllocations: {
-        named: 200,
+        named: 500,
         public: 100,
-        hotMarket: 200,
+        hotMarket: 0,
         hotLead: OUTREACH_UNCAPPED,
-        namedHotMarketShared: 200,
+        namedHotMarketShared: 500,
         publicFallbackOnly: true,
       },
     },
     ...AUTHORITATIVE_OUTREACH_POLICY_V1.monthlySchedules.slice(1).map((schedule) => ({
       ...schedule,
       laneAllocations: {
-        named: 200,
+        named: 500,
         public: 100,
-        hotMarket: 200,
+        hotMarket: 0,
         hotLead: OUTREACH_UNCAPPED,
-        namedHotMarketShared: 200,
+        namedHotMarketShared: 500,
         publicFallbackOnly: true,
       },
     })),
