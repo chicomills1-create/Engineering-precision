@@ -168,6 +168,12 @@ export const AUTHORITATIVE_OUTREACH_POLICY_V2: OutreachPolicy = {
   },
 };
 
+/**
+ * Relaunch policy. Version 3 preserves the corrected 500 named / 100 public
+ * allocation even when production already contains an older version-2 row.
+ */
+export const AUTHORITATIVE_OUTREACH_POLICY_V3: OutreachPolicy = AUTHORITATIVE_OUTREACH_POLICY_V2;
+
 let runtime: OutreachRuntimeConfig | null = null;
 let loadError: Error | null = null;
 
@@ -201,20 +207,20 @@ export async function ensureAuthoritativeOutreachConfig(): Promise<
     }
   }
 
-  // This is intentionally separate from v1 bootstrap: a production
-  // read-only agent can publish v2 without replacing or mutating v1.
+  // This is intentionally separate from v1 bootstrap. Insert a new immutable
+  // policy version instead of mutating the stale production version-2 row.
   if (process.env.OUTREACH_CONFIG_V2_BOOTSTRAP_ENABLED === "true") {
-    const [v2] = await db.select({ id: outreachSystemConfigsTable.id })
+    const [v3] = await db.select({ id: outreachSystemConfigsTable.id })
       .from(outreachSystemConfigsTable)
-      .where(eq(outreachSystemConfigsTable.version, 2))
+      .where(eq(outreachSystemConfigsTable.version, 3))
       .limit(1);
-    if (!v2) {
-      const [insertedV2] = await db.insert(outreachSystemConfigsTable).values({
-        version: 2,
+    if (!v3) {
+      const [insertedV3] = await db.insert(outreachSystemConfigsTable).values({
+        version: 3,
         status: "active",
-        policy: AUTHORITATIVE_OUTREACH_POLICY_V2,
+        policy: AUTHORITATIVE_OUTREACH_POLICY_V3,
       }).onConflictDoNothing().returning({ id: outreachSystemConfigsTable.id });
-      changed = changed || Boolean(insertedV2);
+      changed = changed || Boolean(insertedV3);
     }
   }
   return changed ? "inserted" : "present";

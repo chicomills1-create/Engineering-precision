@@ -58,7 +58,7 @@ export async function getAuthoritativeLaneConfig(
   const configured = runtime?.schedule;
   // Version 2 is the authoritative cutover and must not be shadowed by a
   // legacy persisted four-lane row. Before v2, preserve that row behavior.
-  if (row && runtime?.version !== 2) return { ...row, persisted: true };
+  if (row && (runtime?.version ?? 0) < 2) return { ...row, persisted: true };
   if (configured?.laneAllocations) {
     const allocations = effectiveLaneAllocations(configured, now) ?? configured.laneAllocations;
     return {

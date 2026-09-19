@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   AUTHORITATIVE_OUTREACH_POLICY_V2,
+  AUTHORITATIVE_OUTREACH_POLICY_V3,
   calculateLeadScore,
   configuredDailyAllowance,
   effectiveLaneAllocations,
@@ -66,6 +67,23 @@ test("JOB 2 regular daily allowance is shared named/hot-market plus public", () 
   const runtime = { version: 2, policy: AUTHORITATIVE_OUTREACH_POLICY_V2, month: "2026-09", schedule };
   assert.equal(configuredDailyAllowance(runtime, new Date("2026-09-12T15:00:00Z")), 400);
   assert.equal(configuredDailyAllowance(runtime, new Date("2026-09-13T15:00:00Z")), 600);
+});
+test("relaunch policy advances to an immutable version with 500 named plus 100 public", () => {
+  const schedule = AUTHORITATIVE_OUTREACH_POLICY_V3.monthlySchedules[0]!;
+  const allocations = effectiveLaneAllocations(schedule, new Date("2026-09-19T15:00:00Z"));
+  assert.equal(schedule.dailyTarget, 600);
+  assert.equal(allocations?.named, 500);
+  assert.equal(allocations?.public, 100);
+  assert.equal(allocations?.hotMarket, 0);
+  assert.equal(allocations?.namedHotMarketShared, 500);
+  assert.equal(allocations?.hotLead, OUTREACH_UNCAPPED);
+  assert.equal(
+    configuredDailyAllowance(
+      { version: 3, policy: AUTHORITATIVE_OUTREACH_POLICY_V3, month: "2026-09", schedule },
+      new Date("2026-09-19T15:00:00Z"),
+    ),
+    600,
+  );
 });
 test("forward schedule never exceeds cap", () => assert.ok((scheduleForMonth(policy, "2030-01")?.monthlyTarget ?? Infinity) <= policy.forwardMonthlyCap));
 test("score ordering and suppression precedence are deterministic", () => {
