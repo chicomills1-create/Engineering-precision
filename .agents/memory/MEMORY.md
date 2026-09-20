@@ -57,3 +57,4 @@
 - [Deployment cutover startup](deployment-cutover-startup.md) — pre-listen health-check 500s can be a transient artifact cutover condition; verify again after the API port opens.
 - [Sitemap exact-URL status](sitemap-exact-url-status.md) — every listed URL must return 200 without redirects; generated self-canonical HTML alone cannot prove this.
 - [SEO wave parser coverage](seo-wave-parser-coverage.md) — standalone tsc can pass malformed wave modules; direct seo:generate is the required parser gate.
+- [Production import environment](production-import-environment.md) — production read checks do not make workspace shell scripts use production; verify the script’s own PRE count before writes.
