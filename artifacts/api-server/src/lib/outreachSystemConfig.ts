@@ -136,22 +136,20 @@ export const AUTHORITATIVE_OUTREACH_POLICY_V2: OutreachPolicy = {
       },
       laneAllocations: {
         named: 500,
-        public: 100,
+        public: 0,
         hotMarket: 0,
-        hotLead: OUTREACH_UNCAPPED,
+        hotLead: 100,
         namedHotMarketShared: 500,
-        publicFallbackOnly: true,
       },
     },
     ...AUTHORITATIVE_OUTREACH_POLICY_V1.monthlySchedules.slice(1).map((schedule) => ({
       ...schedule,
       laneAllocations: {
         named: 500,
-        public: 100,
+        public: 0,
         hotMarket: 0,
-        hotLead: OUTREACH_UNCAPPED,
+        hotLead: 100,
         namedHotMarketShared: 500,
-        publicFallbackOnly: true,
       },
     })),
   ],
@@ -169,10 +167,7 @@ export const AUTHORITATIVE_OUTREACH_POLICY_V2: OutreachPolicy = {
   },
 };
 
-/**
- * Relaunch policy. Version 3 preserves the corrected 500 named / 100 public
- * allocation even when production already contains an older version-2 row.
- */
+/** Relaunch policy retained for compatibility with already-inserted rows. */
 export const AUTHORITATIVE_OUTREACH_POLICY_V3: OutreachPolicy = AUTHORITATIVE_OUTREACH_POLICY_V2;
 
 /**
@@ -180,19 +175,7 @@ export const AUTHORITATIVE_OUTREACH_POLICY_V3: OutreachPolicy = AUTHORITATIVE_OU
  * (named, public, and hot-market) share 500 slots; hot leads receive 100.
  * Sequence-2 messages remain additional and do not consume either allocation.
  */
-export const AUTHORITATIVE_OUTREACH_POLICY_V4: OutreachPolicy = {
-  ...AUTHORITATIVE_OUTREACH_POLICY_V2,
-  monthlySchedules: AUTHORITATIVE_OUTREACH_POLICY_V2.monthlySchedules.map((schedule) => ({
-    ...schedule,
-    laneAllocations: {
-      named: 500,
-      public: 0,
-      hotMarket: 0,
-      hotLead: 100,
-      namedHotMarketShared: 500,
-    },
-  })),
-};
+export const AUTHORITATIVE_OUTREACH_POLICY_V4: OutreachPolicy = AUTHORITATIVE_OUTREACH_POLICY_V2;
 
 let runtime: OutreachRuntimeConfig | null = null;
 let loadError: Error | null = null;
@@ -227,9 +210,27 @@ export async function ensureAuthoritativeOutreachConfig(): Promise<
     }
   }
 
-  // This is intentionally separate from v1 bootstrap. Insert new immutable
-  // policy versions instead of mutating stale production rows.
+  // This is intentionally separate from v1 bootstrap. Owner-approved policy
+  // changes update version 2 idempotently while preserving later rows.
   if (process.env.OUTREACH_CONFIG_V2_BOOTSTRAP_ENABLED === "true") {
+    const [v2] = await db.select({ id: outreachSystemConfigsTable.id })
+      .from(outreachSystemConfigsTable)
+      .where(eq(outreachSystemConfigsTable.version, 2))
+      .limit(1);
+    if (v2) {
+      await db.update(outreachSystemConfigsTable).set({
+        status: "active",
+        policy: AUTHORITATIVE_OUTREACH_POLICY_V2,
+      }).where(eq(outreachSystemConfigsTable.id, v2.id));
+      changed = true;
+    } else {
+      const [insertedV2] = await db.insert(outreachSystemConfigsTable).values({
+        version: 2,
+        status: "active",
+        policy: AUTHORITATIVE_OUTREACH_POLICY_V2,
+      }).onConflictDoNothing().returning({ id: outreachSystemConfigsTable.id });
+      changed = changed || Boolean(insertedV2);
+    }
     const [v3] = await db.select({ id: outreachSystemConfigsTable.id })
       .from(outreachSystemConfigsTable)
       .where(eq(outreachSystemConfigsTable.version, 3))
