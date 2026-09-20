@@ -3,6 +3,7 @@ import { z } from "zod/v4";
 import { db, outreachSystemConfigsTable } from "@workspace/db";
 
 export const OUTREACH_UNCAPPED = "uncapped" as const;
+export const NIGHTLY_TOTAL_INITIAL_TARGET = 600;
 const laneLimitSchema = z.union([
   z.number().int().nonnegative(),
   z.literal(OUTREACH_UNCAPPED),

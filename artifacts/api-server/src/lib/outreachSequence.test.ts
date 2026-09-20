@@ -139,14 +139,22 @@ test("backfill repairs only deterministic pre-provider failures with populated s
     states: ["AZ"],
     status: "active",
   }).returning();
-  const cases = [
+  const cases: ReadonlyArray<{
+    key: string;
+    expected: "approved" | "failed";
+    error?: string;
+    claimed?: boolean;
+    suppressed?: boolean;
+    inactive?: boolean;
+    providerMessageId?: string;
+  }> = [
     { key: "safe", expected: "approved" },
     { key: "ambiguous", expected: "failed", error: "SendGrid activity has no matching record yet; retry remains blocked pending clear provider evidence" },
     { key: "claimed", expected: "failed", claimed: true },
     { key: "suppressed", expected: "failed", suppressed: true },
     { key: "inactive", expected: "failed", inactive: true },
     { key: "provider", expected: "failed", providerMessageId: "provider-evidence" },
-  ] as const;
+  ];
   const prospectIds: number[] = [];
   const messageIds = new Map<string, number>();
   const suppressedEmails: string[] = [];

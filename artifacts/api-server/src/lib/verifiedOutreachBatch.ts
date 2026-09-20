@@ -184,7 +184,7 @@ export async function seedVerifiedOutreachBatch(options: {
       states: [...LICENSED_OUTREACH_STATES],
       dailyLimit: REGULAR_OUTREACH_DAILY_TARGET,
       status: "active",
-      subjectTemplate: SUBJECT,
+      subjectTemplate: approvedOutreachSubject(),
       bodyTemplate: "Approved personalized Apex Grid outreach copy",
     }).returning();
   }

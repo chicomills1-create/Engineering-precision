@@ -1620,7 +1620,7 @@ export type ResearchScheduleLocalHour = typeof ResearchScheduleLocalHour[keyof t
 
 
 export const ResearchScheduleLocalHour = {
-  NUMBER_8: 8,
+  NUMBER_20: 20,
 } as const;
 
 /**
@@ -1666,7 +1666,7 @@ export type ResearchScheduleInputLocalHour = typeof ResearchScheduleInputLocalHo
 
 
 export const ResearchScheduleInputLocalHour = {
-  NUMBER_8: 8,
+  NUMBER_20: 20,
 } as const;
 
 export interface ResearchScheduleInput {

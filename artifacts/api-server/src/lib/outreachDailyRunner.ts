@@ -1,3 +1,5 @@
+import { NIGHTLY_TOTAL_INITIAL_TARGET } from "./outreachSystemConfig";
+import { getNextPhoenixPreparationTarget } from "./outreachPreparation";
 const OUTREACH_RESEARCH_TIMEZONE = "America/Phoenix";
 const OUTREACH_RESEARCH_LOCAL_HOUR = 20;
 const PHOENIX_DISPATCH_MINUTE = 10;
@@ -66,6 +68,11 @@ export type DailyOutreachRunnerOperations = {
   prepareRegularOutreach: () => Promise<DailyOutreachPreparationResult>;
   prepareHotMarketOutreach: () => Promise<DailyHotMarketPreparationResult>;
   prepareHotLeadOutreach?: () => Promise<DailyHotLeadPreparationResult>;
+  countInitialMessagesInWindow?: (scheduledAt: Date) => Promise<number>;
+  topUpVerifiedPreparation?: (scheduledAt: Date, needed: number) => Promise<{
+    prepared: number;
+    shortfall: number;
+  }>;
   processDueMessages: () => Promise<DailyOutreachDispatchResult>;
   processProviderReconciliation: () => Promise<DailyOutreachReconciliationResult>;
   now: () => Date;
@@ -135,6 +142,8 @@ export type DailyOutreachRunnerResult = {
   hotLeadTarget?: number;
   hotLeadPrepared?: number;
   hotLeadShortfall?: number;
+  topUpPrepared?: number;
+  topUpShortfall?: number;
   /** Stages of the acquisition pass (research/verification) that failed instead of silently continuing. */
   acquisitionErrors: Array<{ stage: string; message: string }>;
   /** Verification pass rollup when the injected verifyProspects reports it. */
@@ -142,6 +151,10 @@ export type DailyOutreachRunnerResult = {
   verificationFinderCalls?: number;
   verificationCreditBlocked?: boolean;
 };
+
+export function calculateVerifiedTopUpNeeded(windowCount: number): number {
+  return Math.max(0, NIGHTLY_TOTAL_INITIAL_TARGET - Math.max(0, windowCount));
+}
 
 export type DailyOutreachLease = {
   tryAcquire: () => Promise<boolean>;
@@ -173,13 +186,18 @@ export async function runDailyOutreachOnce(
   operations: DailyOutreachRunnerOperations,
   invokedAt = operations.now(),
 ): Promise<DailyOutreachRunnerResult> {
+  type VerificationSummary = {
+    promoted?: number;
+    finderCalls?: number;
+    creditBlocked?: boolean;
+  };
   const researchOperations = [
     ["hot-market-research", operations.processHotMarketResearch],
     ["scheduled-research", operations.processScheduledResearch],
     ["verification", operations.verifyProspects],
   ] as const;
   const acquisitionErrors: Array<{ stage: string; message: string }> = [];
-  const readSummary = (value: unknown): typeof verificationSummary => {
+  const readSummary = (value: unknown): VerificationSummary => {
     if (!value || typeof value !== "object") return {};
     const summary = value as { promoted?: unknown; finderCalls?: unknown; creditBlocked?: unknown };
     return {
@@ -188,7 +206,7 @@ export async function runDailyOutreachOnce(
       creditBlocked: typeof summary.creditBlocked === "boolean" ? summary.creditBlocked : undefined,
     };
   };
-  let verificationSummary: ReturnType<typeof readSummary> = {};
+  let verificationSummary: VerificationSummary = {};
   for (const [stage, operation] of researchOperations) {
     if (!operation) continue;
     try {
@@ -222,6 +240,17 @@ export async function runDailyOutreachOnce(
   const hotLeadPreparation = operations.prepareHotLeadOutreach
     ? await operations.prepareHotLeadOutreach()
     : { state: "skipped" as const, prepared: 0, totalScheduled: 0, shortfall: 100 };
+  const scheduledAt = getNextPhoenixPreparationTarget(invokedAt).scheduledAt;
+  const windowCount = operations.countInitialMessagesInWindow
+    ? await operations.countInitialMessagesInWindow(scheduledAt)
+    : regularPreparation.prepared + hotMarketPreparation.totalScheduled
+      + hotLeadPreparation.totalScheduled;
+  const topUpNeeded = calculateVerifiedTopUpNeeded(windowCount);
+  const topUp = operations.topUpVerifiedPreparation && topUpNeeded > 0
+    ? await operations.topUpVerifiedPreparation(scheduledAt, topUpNeeded)
+    : operations.topUpVerifiedPreparation
+      ? { prepared: 0, shortfall: 0 }
+      : undefined;
 
   const initial = await operations.processDueMessages();
   const reconciliation = operations.processProviderReconciliation();
@@ -247,6 +276,7 @@ export async function runDailyOutreachOnce(
        hotLeadTarget: hotLeadPreparation.totalScheduled + hotLeadPreparation.shortfall,
        hotLeadPrepared: hotLeadPreparation.totalScheduled,
        hotLeadShortfall: hotLeadPreparation.shortfall,
+       ...(topUp ? { topUpPrepared: topUp.prepared, topUpShortfall: topUp.shortfall } : {}),
        acquisitionErrors,
        verificationPromoted: verificationSummary.promoted,
        verificationFinderCalls: verificationSummary.finderCalls,
@@ -277,6 +307,7 @@ export async function runDailyOutreachOnce(
     hotLeadTarget: hotLeadPreparation.totalScheduled + hotLeadPreparation.shortfall,
     hotLeadPrepared: hotLeadPreparation.totalScheduled,
     hotLeadShortfall: hotLeadPreparation.shortfall,
+    ...(topUp ? { topUpPrepared: topUp.prepared, topUpShortfall: topUp.shortfall } : {}),
     acquisitionErrors,
     verificationPromoted: verificationSummary.promoted,
     verificationFinderCalls: verificationSummary.finderCalls,
