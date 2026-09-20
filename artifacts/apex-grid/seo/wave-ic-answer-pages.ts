@@ -565,7 +565,7 @@ export const WAVE_IC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "How do I know if my pier-and-beam foundation needs repair?",
-        answer: "Common signs are sloping or bouncy floors, doors and windows that stick, visible gaps between the floor and baseboards, and cracked drywall above doorways. An engineer confirms the diagnosis with an elevation survey that maps exactly where the floor has moved. Seasonal movement in expansive clay is normal  -  the survey distinguishes that from permanent settlement that warrants repair.",
+        answer: "Common signs are sloping or bouncy floors, doors and windows that stick, visible gaps between the floor and baseboards, and cracked drywall above doorways. An engineer confirms the diagnosis with an elevation survey that maps exactly where the floor has moved. Seasonal movement in expansive clay is normal - the survey distinguishes that from permanent settlement that warrants repair.",
       },
       {
         question: "What causes pier-and-beam foundations to fail in Dallas?",
@@ -573,11 +573,11 @@ export const WAVE_IC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "Can a pier-and-beam house be lifted back to perfectly level?",
-        answer: "Usually it can be brought very close to level, but the engineer sets a realistic tolerance based on the house's age and condition. Older homes have wood framing that has taken a permanent set, and forcing it perfectly flat can crack finishes and strain plumbing. The repair target is a uniform, stable floor within the tolerance the engineer specifies  -  typically a fraction of an inch over the span of a room.",
+        answer: "Usually it can be brought very close to level, but the engineer sets a realistic tolerance based on the house's age and condition. Older homes have wood framing that has taken a permanent set, and forcing it perfectly flat can crack finishes and strain plumbing. The repair target is a uniform, stable floor within the tolerance the engineer specifies - typically a fraction of an inch over the span of a room.",
       },
       {
         question: "Do pier-and-beam repairs need a permit in the Dallas area?",
-        answer: "In most cases, yes  -  structural foundation work requires a building permit, and the requirements vary by jurisdiction. The City of Dallas reviews engineer-sealed repair drawings for addresses inside city limits, while unincorporated Dallas County and independent municipalities like Highland Park run their own permitting processes with different submittals and timelines. The authority having jurisdiction decides what is approved; an engineer cannot promise a particular outcome.",
+        answer: "In most cases, yes - structural foundation work requires a building permit, and the requirements vary by jurisdiction. The City of Dallas reviews engineer-sealed repair drawings for addresses inside city limits, while unincorporated Dallas County and independent municipalities like Highland Park run their own permitting processes with different submittals and timelines. The authority having jurisdiction decides what is approved; an engineer cannot promise a particular outcome.",
       },
     ],
     extraLinks: [
@@ -614,7 +614,7 @@ export const WAVE_IC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "What is a slope-stability analysis?",
-        answer: "It is a geotechnical calculation that models the hillside as a potential sliding mass and computes a factor of safety against failure. The engineer tests multiple possible slide surfaces  -  shallow soil slides and deeper rock-seam failures  -  under the worst credible water conditions. The analysis determines whether the natural slope is stable, how construction cuts change that stability, and what foundation and retaining systems are needed to keep it stable.",
+        answer: "It is a geotechnical calculation that models the hillside as a potential sliding mass and computes a factor of safety against failure. The engineer tests multiple possible slide surfaces - shallow soil slides and deeper rock-seam failures - under the worst credible water conditions. The analysis determines whether the natural slope is stable, how construction cuts change that stability, and what foundation and retaining systems are needed to keep it stable.",
       },
       {
         question: "How is water managed around a hillside home?",
@@ -663,7 +663,7 @@ export const WAVE_IC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "How does the roof hold a tilt-wall building together?",
-        answer: "The steel roof deck acts as a horizontal diaphragm  -  a giant flat beam  -  that collects wind forces from the tall wall panels and delivers them to the braced bays or shear panels. The engineer designs the deck fastening pattern and the ledger connections at each wall so those forces transfer positively. Without a properly engineered diaphragm, each wall would stand alone against the wind.",
+        answer: "The steel roof deck acts as a horizontal diaphragm - a giant flat beam - that collects wind forces from the tall wall panels and delivers them to the braced bays or shear panels. The engineer designs the deck fastening pattern and the ledger connections at each wall so those forces transfer positively. Without a properly engineered diaphragm, each wall would stand alone against the wind.",
       },
       {
         question: "Does the permit process differ between Houston and Harris County?",
@@ -700,7 +700,7 @@ export const WAVE_IC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "What is adaptive reuse in structural engineering?",
-        answer: "Adaptive reuse converts an existing building to a new purpose while keeping its essential structure  -  the Pearl's brewhouse became restaurants, shops, and a hotel instead of being demolished. The structural engineer assesses what the building can carry, strengthens what falls short of the new use, and upgrades lateral and fire performance, all while preserving the character-defining features that make the building worth saving.",
+        answer: "Adaptive reuse converts an existing building to a new purpose while keeping its essential structure - the Pearl's brewhouse became restaurants, shops, and a hotel instead of being demolished. The structural engineer assesses what the building can carry, strengthens what falls short of the new use, and upgrades lateral and fire performance, all while preserving the character-defining features that make the building worth saving.",
       },
       {
         question: "Why couldn't the Pearl's buildings be used as-is for restaurants and hotels?",
@@ -712,7 +712,7 @@ export const WAVE_IC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "Who decides how a historic building meets current code?",
-        answer: "The authority having jurisdiction  -  in the Pearl's case, the City of San Antonio. Existing-building code provisions give the framework: evaluate current conditions, upgrade for the new occupancy, and propose equivalent alternatives where literal new-construction compliance is impossible. The design team proposes the path, but the AHJ reviews and approves it. No engineer can promise a particular compliance outcome in advance.",
+        answer: "The authority having jurisdiction - in the Pearl's case, the City of San Antonio. Existing-building code provisions give the framework: evaluate current conditions, upgrade for the new occupancy, and propose equivalent alternatives where literal new-construction compliance is impossible. The design team proposes the path, but the AHJ reviews and approves it. No engineer can promise a particular compliance outcome in advance.",
       },
     ],
     extraLinks: [
@@ -753,11 +753,11 @@ export const WAVE_IC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "Can an existing coastal home get windstorm certification?",
-        answer: "There are certification paths for existing structures, typically tied to qualifying alterations such as a full re-roof or structural retrofit. The requirements focus on what can be verified: roof deck attachment, opening protection, and accessible connections. An engineer evaluates the structure, designs the upgrades, and the work goes through the program's inspection stages. Not every older home can be certified economically  -  the inspection may reveal connection deficiencies that are expensive to correct behind finished walls.",
+        answer: "There are certification paths for existing structures, typically tied to qualifying alterations such as a full re-roof or structural retrofit. The requirements focus on what can be verified: roof deck attachment, opening protection, and accessible connections. An engineer evaluates the structure, designs the upgrades, and the work goes through the program's inspection stages. Not every older home can be certified economically - the inspection may reveal connection deficiencies that are expensive to correct behind finished walls.",
       },
       {
         question: "Do I need both a city permit and windstorm certification?",
-        answer: "Yes, they are separate. The city or county building department issues the building permit and certificate of occupancy under the building code, with its own submittal process and inspectors. The TDI windstorm program separately certifies the structure for TWIA insurance eligibility. Both authorities review against their own requirements and each decides its own approvals  -  one does not substitute for the other.",
+        answer: "Yes, they are separate. The city or county building department issues the building permit and certificate of occupancy under the building code, with its own submittal process and inspectors. The TDI windstorm program separately certifies the structure for TWIA insurance eligibility. Both authorities review against their own requirements and each decides its own approvals - one does not substitute for the other.",
       },
     ],
     extraLinks: [
@@ -794,11 +794,11 @@ export const WAVE_IC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "How do engineers handle crowd-induced vibration?",
-        answer: "By tuning the structure's natural frequencies away from the frequencies of rhythmic crowd movement and by designing connections for fatigue. Engineers use dynamic load models based on measured stadium events, then verify the seating bowl, cantilevers, and stairs against them. The goal is a bowl that feels solid under a full, excited crowd  -  no perceptible bounce or sway.",
+        answer: "By tuning the structure's natural frequencies away from the frequencies of rhythmic crowd movement and by designing connections for fatigue. Engineers use dynamic load models based on measured stadium events, then verify the seating bowl, cantilevers, and stairs against them. The goal is a bowl that feels solid under a full, excited crowd - no perceptible bounce or sway.",
       },
       {
         question: "Why do Arlington venues need deep foundations?",
-        answer: "North Texas clay is expansive and compressible near the surface  -  a poor bearing material for the enormous concentrated loads of stadium columns and long-span roof supports. Drilled piers bypass the troublesome upper soils and socket into stable strata below, giving each column a reliable, settlement-controlled support.",
+        answer: "North Texas clay is expansive and compressible near the surface - a poor bearing material for the enormous concentrated loads of stadium columns and long-span roof supports. Drilled piers bypass the troublesome upper soils and socket into stable strata below, giving each column a reliable, settlement-controlled support.",
       },
       {
         question: "Who permits construction in the entertainment district?",
@@ -843,11 +843,11 @@ export const WAVE_IC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "How are corporate campuses built in phases without structural problems?",
-        answer: "Each phase is designed as a structurally independent building with its own lateral system and foundations, so one phase never depends on a future phase for stability. The engineer coordinates shared elements  -  parking structures, utility tunnels, central plants  -  and details expansion joints and future connections where phases will eventually meet.",
+        answer: "Each phase is designed as a structurally independent building with its own lateral system and foundations, so one phase never depends on a future phase for stability. The engineer coordinates shared elements - parking structures, utility tunnels, central plants - and details expansion joints and future connections where phases will eventually meet.",
       },
       {
         question: "Who reviews corporate campus construction in Plano?",
-        answer: "The City of Plano, through its development review and building permit process  -  site plans, building permits for each phase, and separate permits for structures like parking garages and central utility plants. Each follows the city's submittal requirements and review timelines. The authority having jurisdiction evaluates every submittal and decides the approval; phased projects should expect multiple concurrent reviews.",
+        answer: "The City of Plano, through its development review and building permit process - site plans, building permits for each phase, and separate permits for structures like parking garages and central utility plants. Each follows the city's submittal requirements and review timelines. The authority having jurisdiction evaluates every submittal and decides the approval; phased projects should expect multiple concurrent reviews.",
       },
     ],
     extraLinks: [
@@ -880,11 +880,11 @@ export const WAVE_IC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "What is a stormwater detention basin?",
-        answer: "It is an engineered facility  -  often a park, lake, or sports field  -  designed to temporarily store stormwater runoff and release it slowly through a controlled outlet. By holding back the peak flow and releasing it after the bayou's peak passes, detention lowers maximum flood levels downstream. Houston-area development regulations generally require new projects to provide detention so they do not worsen flooding for their neighbors.",
+        answer: "It is an engineered facility - often a park, lake, or sports field - designed to temporarily store stormwater runoff and release it slowly through a controlled outlet. By holding back the peak flow and releasing it after the bayou's peak passes, detention lowers maximum flood levels downstream. Houston-area development regulations generally require new projects to provide detention so they do not worsen flooding for their neighbors.",
       },
       {
         question: "Why does Houston flood so badly?",
-        answer: "Flat terrain, clay soils that absorb almost no water, intense Gulf Coast rainfall, and decades of development that replaced absorbent prairie with impervious pavement. The bayou system can only carry so much water, and when rainfall exceeds its capacity  -  as in Harvey's 50-plus inches  -  water leaves the channels. Mitigation focuses on storing runoff upstream, moving it efficiently through improved channels, and keeping people and structures out of the highest-risk areas.",
+        answer: "Flat terrain, clay soils that absorb almost no water, intense Gulf Coast rainfall, and decades of development that replaced absorbent prairie with impervious pavement. The bayou system can only carry so much water, and when rainfall exceeds its capacity - as in Harvey's 50-plus inches - water leaves the channels. Mitigation focuses on storing runoff upstream, moving it efficiently through improved channels, and keeping people and structures out of the highest-risk areas.",
       },
       {
         question: "What is the home buyout program?",
@@ -929,7 +929,7 @@ export const WAVE_IC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "What are breakaway walls?",
-        answer: "Walls below the elevated floor engineered to collapse under a specified water pressure without damaging the foundation or the structure above. They enclose storage or parking at grade while ensuring floodwaters pass through rather than building up pressure against the piles. Building anything structural  -  or placing mechanical equipment  -  behind breakaway walls defeats their purpose and violates the floodplain rules.",
+        answer: "Walls below the elevated floor engineered to collapse under a specified water pressure without damaging the foundation or the structure above. They enclose storage or parking at grade while ensuring floodwaters pass through rather than building up pressure against the piles. Building anything structural - or placing mechanical equipment - behind breakaway walls defeats their purpose and violates the floodplain rules.",
       },
       {
         question: "How high must a Galveston home be elevated?",
@@ -937,7 +937,7 @@ export const WAVE_IC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "Who approves a home elevation project in Galveston?",
-        answer: "The City of Galveston  -  its building division issues the permit and its floodplain administrator reviews the design against the local floodplain ordinance and the FEMA maps. The finished project requires an elevation certificate from a licensed surveyor. The city as the authority having jurisdiction decides whether the project complies; the engineer designs to the ordinance but cannot promise the approval.",
+        answer: "The City of Galveston - its building division issues the permit and its floodplain administrator reviews the design against the local floodplain ordinance and the FEMA maps. The finished project requires an elevation certificate from a licensed surveyor. The city as the authority having jurisdiction decides whether the project complies; the engineer designs to the ordinance but cannot promise the approval.",
       },
     ],
     extraLinks: [
@@ -970,11 +970,11 @@ export const WAVE_IC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "Why is wind such a big deal in Lubbock?",
-        answer: "The Llano Estacado is flat and open, giving the wind a long, unobstructed fetch that produces high design pressures  -  the worst exposure category in the wind standards. Add severe straight-line winds from spring thunderstorms and occasional tornadoes, and wind becomes the controlling structural load for most buildings. The engineering responds with higher design pressures, continuous load paths, and hardened envelopes.",
+        answer: "The Llano Estacado is flat and open, giving the wind a long, unobstructed fetch that produces high design pressures - the worst exposure category in the wind standards. Add severe straight-line winds from spring thunderstorms and occasional tornadoes, and wind becomes the controlling structural load for most buildings. The engineering responds with higher design pressures, continuous load paths, and hardened envelopes.",
       },
       {
         question: "What is a continuous load path?",
-        answer: "An unbroken chain of engineered connections from the roof covering down to the foundation: roof deck to framing, framing to walls, walls to foundation, foundation to the ground. Each link is sized for the wind force it carries. If any link is missing or undersized  -  a rafter without a hurricane tie, a wall without anchor bolts  -  the wind can exploit that weak point and the building can fail progressively.",
+        answer: "An unbroken chain of engineered connections from the roof covering down to the foundation: roof deck to framing, framing to walls, walls to foundation, foundation to the ground. Each link is sized for the wind force it carries. If any link is missing or undersized - a rafter without a hurricane tie, a wall without anchor bolts - the wind can exploit that weak point and the building can fail progressively.",
       },
       {
         question: "Do I need impact-rated windows in Lubbock?",
@@ -1015,11 +1015,11 @@ export const WAVE_IC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "What is beach renourishment?",
-        answer: "The engineered placement of sand  -  usually dredged from offshore borrow areas  -  onto an eroding beach to rebuild its width and elevation to a designed template. The sand is matched to the native beach's grain size, and the project is designed with a renourishment interval because natural currents continue to move sand. It is the primary erosion management tool on developed barrier islands like South Padre.",
+        answer: "The engineered placement of sand - usually dredged from offshore borrow areas - onto an eroding beach to rebuild its width and elevation to a designed template. The sand is matched to the native beach's grain size, and the project is designed with a renourishment interval because natural currents continue to move sand. It is the primary erosion management tool on developed barrier islands like South Padre.",
       },
       {
         question: "Why are dunes so important for erosion protection?",
-        answer: "Dunes absorb storm wave energy before it reaches buildings and roads, and they store a reservoir of sand the beach draws on during erosive storms. A vegetated dune with sea oats and proper fencing can trap windblown sand and grow over time. Once dunes are flattened by development or foot traffic, the next storm's surge reaches structures directly  -  which is why dune protection ordinances restrict building and walking on them.",
+        answer: "Dunes absorb storm wave energy before it reaches buildings and roads, and they store a reservoir of sand the beach draws on during erosive storms. A vegetated dune with sea oats and proper fencing can trap windblown sand and grow over time. Once dunes are flattened by development or foot traffic, the next storm's surge reaches structures directly - which is why dune protection ordinances restrict building and walking on them.",
       },
       {
         question: "Do seawalls or groins stop erosion?",
@@ -1060,19 +1060,19 @@ export const WAVE_IC_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "Why is drainage so critical for foundations in Austin clay?",
-        answer: "Austin's clay is expansive  -  it swells when wet and shrinks when dry, moving foundations with it. Drainage controls the water, and controlling the water controls the movement. Poor drainage lets water pond against the foundation and saturate one side while the other stays dry, producing the differential movement that cracks slabs and walls. A complete drainage design keeps soil moisture stable around the entire perimeter.",
+        answer: "Austin's clay is expansive - it swells when wet and shrinks when dry, moving foundations with it. Drainage controls the water, and controlling the water controls the movement. Poor drainage lets water pond against the foundation and saturate one side while the other stays dry, producing the differential movement that cracks slabs and walls. A complete drainage design keeps soil moisture stable around the entire perimeter.",
       },
       {
         question: "What is a French drain and where does it go?",
-        answer: "A French drain is a perforated pipe bedded in gravel  -  often wrapped in filter fabric  -  that collects subsurface water and carries it away by gravity. Around a foundation it runs at the footing elevation, intercepting groundwater before it reaches the wall or slab. It discharges to daylight downhill or to a sump pump where gravity drainage is not possible.",
+        answer: "A French drain is a perforated pipe bedded in gravel - often wrapped in filter fabric - that collects subsurface water and carries it away by gravity. Around a foundation it runs at the footing elevation, intercepting groundwater before it reaches the wall or slab. It discharges to daylight downhill or to a sump pump where gravity drainage is not possible.",
       },
       {
         question: "Can tree roots really damage a foundation?",
-        answer: "Yes, through desiccation rather than physical pushing. A mature tree draws hundreds of gallons of water daily from the surrounding clay, drying and shrinking the soil  -  including the soil under a nearby foundation edge. The result is the localized settlement Austin engineers diagnose constantly. Root barriers installed between the tree and the structure intercept the feeder roots before they reach the foundation zone.",
+        answer: "Yes, through desiccation rather than physical pushing. A mature tree draws hundreds of gallons of water daily from the surrounding clay, drying and shrinking the soil - including the soil under a nearby foundation edge. The result is the localized settlement Austin engineers diagnose constantly. Root barriers installed between the tree and the structure intercept the feeder roots before they reach the foundation zone.",
       },
       {
         question: "Do I need a permit for drainage work in Austin?",
-        answer: "It depends on the scope and location. Regrading, retaining walls, and drainage systems that alter site runoff typically need permits  -  through the City of Austin's development process inside city limits, or Travis County's process in unincorporated areas. Work that changes drainage patterns affecting neighboring properties gets particular scrutiny. The authority having jurisdiction sets the requirements and decides the approval.",
+        answer: "It depends on the scope and location. Regrading, retaining walls, and drainage systems that alter site runoff typically need permits - through the City of Austin's development process inside city limits, or Travis County's process in unincorporated areas. Work that changes drainage patterns affecting neighboring properties gets particular scrutiny. The authority having jurisdiction sets the requirements and decides the approval.",
       },
     ],
     extraLinks: [
