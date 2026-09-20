@@ -407,10 +407,7 @@ async function reserveOutreachSend(
         .innerJoin(outreachMessagesTable, eq(outreachMonthlySendReservationsTable.messageId, outreachMessagesTable.id))
         .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
         .where(and(eq(outreachMonthlySendReservationsTable.quotaKey, monthlyQuotaKey), gte(outreachMonthlySendReservationsTable.createdAt, dayStart), inArray(outreachMessagesTable.status, ["approved", "sending", "needs_review"])));
-      const todayReserved = todayReservedRows.filter((row) =>
-        !(getOutreachDailyLane(row, row) === "hot_lead"
-          && effectiveAllocations?.hotLead === OUTREACH_UNCAPPED)
-      ).length;
+       const todayReserved = todayReservedRows.length;
       const uncappedHotLead = lane === "hot_lead" && effectiveAllocations?.hotLead === OUTREACH_UNCAPPED;
        if (remainingMonth <= 0 || (!uncappedHotLead && todayReserved >= dailyAllowance)) {
         throw new DailySendLimitError();
@@ -470,13 +467,14 @@ async function reserveOutreachSend(
           })
           : undefined;
         if (laneLimit !== undefined && !isUncappedLaneLimit(laneLimit)) {
-          const sharedLane = lane === "named" || lane === "direct" || lane === "hot_market";
+           const sharedLane = lane === "named" || lane === "direct"
+             || lane === "public" || lane === "hot_market";
           const sharedLimit = effectiveAllocations?.namedHotMarketShared;
           if (sharedLane && sharedLimit !== undefined) {
             const sharedCount = [...laneRows, ...laneReservations]
               .filter((row) => {
                 const rowLane = getOutreachDailyLane(row, row);
-                return rowLane === "named" || rowLane === "hot_market";
+                 return rowLane === "named" || rowLane === "public" || rowLane === "hot_market";
               }).length;
             if (sharedCount >= sharedLimit) throw new DailySendLimitError();
           } else if (laneCount >= laneLimit) {

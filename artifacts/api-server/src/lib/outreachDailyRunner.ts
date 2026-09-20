@@ -210,10 +210,15 @@ export async function runDailyOutreachOnce(
       operations.onResearchError?.(stage, error);
     }
   }
-  const [regularPreparation, hotMarketPreparation] = await Promise.all([
-    operations.prepareRegularOutreach(),
-    operations.prepareHotMarketOutreach(),
-  ]);
+  const regularPreparation = await operations.prepareRegularOutreach();
+  // Hot-market contacts are selected by regular preparation as part of the
+  // unified verified pool. The former dedicated lane must not stage extras.
+  const hotMarketPreparation = {
+    state: "skipped" as const,
+    prepared: 0,
+    totalScheduled: 0,
+    shortfall: 0,
+  };
   const hotLeadPreparation = operations.prepareHotLeadOutreach
     ? await operations.prepareHotLeadOutreach()
     : { state: "skipped" as const, prepared: 0, totalScheduled: 0, shortfall: 100 };

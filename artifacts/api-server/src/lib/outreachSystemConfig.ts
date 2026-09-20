@@ -12,7 +12,7 @@ const laneAllocationsSchema = z.object({
   public: z.number().int().nonnegative(),
   hotMarket: z.number().int().nonnegative(),
   hotLead: laneLimitSchema,
-  /** A shared ceiling for verified named and hot-market messages. */
+  /** A shared ceiling for every verified sequence-1 message. */
   namedHotMarketShared: z.number().int().nonnegative().optional(),
   /** Public company inboxes are only used after named-contact selection. */
   publicFallbackOnly: z.boolean().optional(),
@@ -174,6 +174,25 @@ export const AUTHORITATIVE_OUTREACH_POLICY_V2: OutreachPolicy = {
  */
 export const AUTHORITATIVE_OUTREACH_POLICY_V3: OutreachPolicy = AUTHORITATIVE_OUTREACH_POLICY_V2;
 
+/**
+ * Owner-approved unified-pool policy: all verified sequence-1 sources
+ * (named, public, and hot-market) share 500 slots; hot leads receive 100.
+ * Sequence-2 messages remain additional and do not consume either allocation.
+ */
+export const AUTHORITATIVE_OUTREACH_POLICY_V4: OutreachPolicy = {
+  ...AUTHORITATIVE_OUTREACH_POLICY_V2,
+  monthlySchedules: AUTHORITATIVE_OUTREACH_POLICY_V2.monthlySchedules.map((schedule) => ({
+    ...schedule,
+    laneAllocations: {
+      named: 500,
+      public: 0,
+      hotMarket: 0,
+      hotLead: 100,
+      namedHotMarketShared: 500,
+    },
+  })),
+};
+
 let runtime: OutreachRuntimeConfig | null = null;
 let loadError: Error | null = null;
 
@@ -207,8 +226,8 @@ export async function ensureAuthoritativeOutreachConfig(): Promise<
     }
   }
 
-  // This is intentionally separate from v1 bootstrap. Insert a new immutable
-  // policy version instead of mutating the stale production version-2 row.
+  // This is intentionally separate from v1 bootstrap. Insert new immutable
+  // policy versions instead of mutating stale production rows.
   if (process.env.OUTREACH_CONFIG_V2_BOOTSTRAP_ENABLED === "true") {
     const [v3] = await db.select({ id: outreachSystemConfigsTable.id })
       .from(outreachSystemConfigsTable)
@@ -221,6 +240,18 @@ export async function ensureAuthoritativeOutreachConfig(): Promise<
         policy: AUTHORITATIVE_OUTREACH_POLICY_V3,
       }).onConflictDoNothing().returning({ id: outreachSystemConfigsTable.id });
       changed = changed || Boolean(insertedV3);
+    }
+    const [v4] = await db.select({ id: outreachSystemConfigsTable.id })
+      .from(outreachSystemConfigsTable)
+      .where(eq(outreachSystemConfigsTable.version, 4))
+      .limit(1);
+    if (!v4) {
+      const [insertedV4] = await db.insert(outreachSystemConfigsTable).values({
+        version: 4,
+        status: "active",
+        policy: AUTHORITATIVE_OUTREACH_POLICY_V4,
+      }).onConflictDoNothing().returning({ id: outreachSystemConfigsTable.id });
+      changed = changed || Boolean(insertedV4);
     }
   }
   return changed ? "inserted" : "present";
@@ -299,7 +330,9 @@ export function configuredDailyAllowance(runtimeConfig: OutreachRuntimeConfig, n
   const target = Math.min(50_000, runtimeConfig.schedule.monthlyTarget);
   const allocations = effectiveLaneAllocations(runtimeConfig.schedule, now);
   if (allocations?.namedHotMarketShared !== undefined) {
-    return allocations.namedHotMarketShared + allocations.public;
+    return allocations.hotLead === OUTREACH_UNCAPPED
+      ? allocations.namedHotMarketShared + allocations.public
+      : allocations.namedHotMarketShared + allocations.hotLead;
   }
   if (runtimeConfig.month === "2026-09") {
     if (allocations) {

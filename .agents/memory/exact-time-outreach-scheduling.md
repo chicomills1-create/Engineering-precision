@@ -15,11 +15,11 @@ Manual approvals and automatic preparation must allocate from the same date-keye
 
 **How to apply:** Route every initial-message approval through the shared window allocator, enforce one global Phoenix-day ceiling at dispatch, and keep campaign limits as an additional constraint rather than the global limit itself.
 
-The approved September 2026 operating cycle is autonomous: target 100 Verified People, 100 Public Business Emails, 100 Hot Market contacts, and 100 Hot Leads without another approval. Eligible follow-ups are additional to this 400-message daily baseline.
+The approved operating cycle is autonomous: the 20:00 America/Phoenix run targets one 500-contact verified pool plus 100 hot leads. Named/shared, public, and hot-market contacts all draw from the same verified pool; there is no separate hot-market lane or cap. Eligible sequence-2 follow-ups are additional to the 600 initial-message target.
 
-**Why:** The user replaced the prior 250/day allocation with four equal 100-message lanes and explicitly required the limit to live in persistent campaign configuration.
+**Why:** The owner corrected the prior lane model: “500 verified” means every verified source in one pool, not 500 named plus separate public or hot-market capacity. Hot leads are capped at 100.
 
-**How to apply:** Read the four lane caps from persistent runtime campaign configuration. Keep named people and evidence-backed public business inboxes as separate eligibility classes; leave unfilled slots empty rather than borrowing unverified contacts. A one-time campaign override must be campaign/date scoped, audited, provider-health and capacity checked, and must never alter the standing 400/day configuration. Keep ambiguous provider outcomes blocked until SendGrid reconciliation proves whether each message was accepted, delivered, or safe to retry.
+**How to apply:** Enforce a shared 500-message sequence-1 quota across named, public, and hot-market sources, plus a separate 100-message hot-lead quota. Keep source labels only for evidence and reporting, never as extra capacity. A one-time override must be campaign/date scoped, audited, provider-health and capacity checked, and must not alter the standing policy. Keep ambiguous provider outcomes blocked until SendGrid reconciliation proves whether each message was accepted, delivered, or safe to retry.
 
 The authoritative monthly schedule is October 2026: 20,000 total; November: 35,000 total; December: 50,000 total; January 2027 onward: 50,000 total per month.
 
@@ -39,8 +39,8 @@ The standing Apex Grid operating order is outcome-based, not reminder-based: at 
 
 **How to apply:** Treat a due approved queue as active work until provider handoff evidence is persisted or a safety-critical blocker genuinely requires user action. Verify processed, delivered, bounced, and unresolved counts; after dispatch, research and stage verified replacements for the following Phoenix send window.
 
-The durable daily runner must perform next-day preparation itself after research; all source variants within each of the four lanes share that lane's cap, and any next-day shortfall keeps the daily run partial for recovery rather than reporting success.
+The durable daily runner must perform next-day preparation itself after research; all verified source variants share the unified verified-pool cap, and any next-day shortfall keeps the daily run partial for recovery rather than reporting success.
 
-**Why:** A dispatch-only runner can send today's queue while silently leaving tomorrow empty, and inconsistent source labels can double-fill a lane or omit the separate Hot Lead allocation.
+**Why:** A dispatch-only runner can send today's queue while silently leaving tomorrow empty, and source labels must not create extra capacity outside the unified verified pool.
 
-**How to apply:** Every primary and recovery pass must persist the authoritative configured lane counts (September 2026: 100 each for Named, Public, Hot Market, and Hot Lead). A skipped or still-running preparation claim must return its persisted shortfall; never convert it to zero.
+**How to apply:** Every primary and recovery pass must persist the authoritative configured targets: 500 verified and 100 hot leads, with sequence-2 follow-ups reported separately. A skipped or still-running preparation claim must return its persisted shortfall; never convert it to zero.

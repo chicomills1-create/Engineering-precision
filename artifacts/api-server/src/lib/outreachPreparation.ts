@@ -136,6 +136,7 @@ export function selectUniquePreparationCandidates<T extends PreparationCandidate
   options: {
     personalCap?: number;
     publicCap?: number;
+    totalCap?: number;
     usedEmails?: Iterable<string>;
     usedDomains?: Iterable<string>;
   } = {},
@@ -146,6 +147,7 @@ export function selectUniquePreparationCandidates<T extends PreparationCandidate
   const domains = new Set(Array.from(options.usedDomains ?? [], (domain) => domain.trim().toLowerCase()));
   let personalCount = 0;
   let publicCount = 0;
+  let totalCount = 0;
   return prioritizePreparationCandidates(candidates).filter((candidate) => {
     const email = candidate.contactEmail?.trim().toLowerCase() ?? "";
     const domain = companyDomain(candidate);
@@ -155,11 +157,13 @@ export function selectUniquePreparationCandidates<T extends PreparationCandidate
       candidate.contactName,
       candidate.contactEvidenceType,
     );
+    if (totalCount >= (options.totalCap ?? Number.POSITIVE_INFINITY)) return false;
     if (publicLane ? publicCount >= publicCap : personalCount >= personalCap) return false;
     emails.add(email);
     domains.add(domain);
     if (publicLane) publicCount += 1;
     else personalCount += 1;
+    totalCount += 1;
     return true;
   });
 }
@@ -281,7 +285,7 @@ export async function approveInitialMessageInPreparationWindow(
     getAuthoritativeLaneConfig(undefined, undefined, scheduledAt),
     loadOutreachSystemConfig(now),
   ]);
-  const targetCount = configuredDailyAllowance(runtimeConfig, now);
+  const targetCount = getNamedHotMarketSharedLimit(laneConfig);
     const targetDate = phoenixDateKey(scheduledAt);
     await tx.insert(outreachPreparationRunsTable).values({
       targetDate,
@@ -330,19 +334,21 @@ export async function approveInitialMessageInPreparationWindow(
        }
      }
      const messageLane = getOutreachDailyLane(message, prospect);
-     const laneLimit = messageLane === "public"
-       ? laneConfig.publicLimit
-       : messageLane === "named" || messageLane === "direct"
-         ? laneConfig.namedLimit
-         : messageLane === "hot_market"
-           ? laneConfig.hotMarketLimit
-           : laneConfig.hotLeadLimit;
+      const verifiedPoolLane = messageLane === "public"
+        || messageLane === "named"
+        || messageLane === "direct"
+        || messageLane === "hot_market";
+      const laneLimit = verifiedPoolLane
+        ? getNamedHotMarketSharedLimit(laneConfig)
+        : laneConfig.hotLeadLimit;
      const quotaLane = messageLane === "direct"
        ? "named"
        : messageLane === "hot_market_extra"
          ? "hot_market"
          : messageLane;
-     const laneCount = laneCounts[quotaLane];
+      const laneCount = verifiedPoolLane
+        ? laneCounts.named + laneCounts.public + laneCounts.hot_market
+        : laneCounts[quotaLane];
       if (!isUncappedLaneLimit(laneLimit) && laneCount >= laneLimit) {
        throw new Error(`The target outreach ${messageLane} lane is full`);
      }
@@ -459,9 +465,7 @@ export async function prepareNextPhoenixOutreach(
     getAuthoritativeLaneConfig(undefined, undefined, scheduledAt),
     loadOutreachSystemConfig(now),
   ]);
-  const targetCount = target
-    ? getNamedHotMarketSharedLimit(laneConfig) + laneConfig.publicLimit
-    : configuredDailyAllowance(runtimeConfig, scheduledAt);
+  const targetCount = getNamedHotMarketSharedLimit(laneConfig);
   const runId = await claimPreparationRun(targetDate, now, targetCount);
   if (!runId) {
     const [existing] = await db.select({
@@ -472,7 +476,8 @@ export async function prepareNextPhoenixOutreach(
       .where(eq(outreachPreparationRunsTable.targetDate, targetDate))
       .limit(1);
     const laneCounts = await getRegularLaneCountsForWindow(scheduledAt);
-    const namedAvailable = Math.max(0, getNamedHotMarketSharedLimit(laneConfig) - laneCounts.hotMarket);
+    const verifiedPrepared = laneCounts.direct + laneCounts.public + laneCounts.hotMarket;
+    const verifiedShortfall = Math.max(0, targetCount - verifiedPrepared);
     return {
       state: "skipped",
       prepared: existing?.prepared ?? 0,
@@ -480,11 +485,11 @@ export async function prepareNextPhoenixOutreach(
       publicPrepared: laneCounts.public,
       directShortfall: Math.max(
         0,
-        namedAvailable - laneCounts.direct,
+        verifiedShortfall,
       ),
       publicShortfall: Math.max(
         0,
-        laneConfig.publicLimit - laneCounts.public,
+        0,
       ),
       skipped: existing?.skipped ?? 0,
       shortfall: existing?.shortfall ?? targetCount,
@@ -572,9 +577,8 @@ export async function prepareNextPhoenixOutreach(
           lt(outreachMessagesTable.scheduledAt, targetEnd),
           inArray(outreachMessagesTable.status, ["approved", "sending"]),
         ));
-      const regularTargetInitials = currentTargetInitials.filter(
-        (message) => !isHotMarketSourceType(message.sourceType)
-          && message.sourceType !== "hot_lead"
+       const regularTargetInitials = currentTargetInitials.filter(
+         (message) => message.sourceType !== "hot_lead"
           && message.sourceType !== "hot_lead_verified",
       );
       const slottedMessageIds = new Set(existingSlots.flatMap((row) => row.messageId ? [row.messageId] : []));
@@ -589,26 +593,12 @@ export async function prepareNextPhoenixOutreach(
         untrackedTargetInitials.length,
         targetCount,
       );
-      const existingPublicCount = regularTargetInitials.filter((candidate) => isPublicInbox(
-        candidate.contactEmail,
-        candidate.contactName,
-        candidate.contactEvidenceType,
-      )).length;
-      const existingPersonalCount = regularTargetInitials.length - existingPublicCount;
-      const existingHotMarketCount = currentTargetInitials.filter((candidate) =>
-        isHotMarketSourceType(candidate.sourceType)
-      ).length;
-      const namedSharedRemaining = Math.max(
-        0,
-        getNamedHotMarketSharedLimit(laneConfig)
-          - existingHotMarketCount
-          - existingPersonalCount,
-      );
       const selected = selectUniquePreparationCandidates(
         eligible.map((row) => row.prospect),
         {
-           personalCap: namedSharedRemaining,
-           publicCap: laneConfig.publicLimit - existingPublicCount,
+            personalCap: remainingCapacity,
+            publicCap: remainingCapacity,
+            totalCap: remainingCapacity,
            usedEmails: [
              ...initialMessages.flatMap((candidate) => candidate.contactEmail ? [candidate.contactEmail] : []),
               ...claims.flatMap((candidate) => candidate.contactEmail ? [candidate.contactEmail] : []),

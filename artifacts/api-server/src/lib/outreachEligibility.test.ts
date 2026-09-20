@@ -67,19 +67,19 @@ test("dispatch lane inference isolates Direct, Public, recurring Hot Market, and
   assert.equal(getOutreachDailyLaneLimit("hot_market_extra", laneConfig), undefined);
 });
 
-test("JOB 2 models hot leads as uncapped and keeps named plus hot-market shared", () => {
+test("owner policy has one 500 verified pool and 100 hot leads", () => {
   const laneConfig = {
     campaignKey: "2026-09",
     effectiveMonth: "2026-09",
     persisted: true,
     namedLimit: 200,
-    publicLimit: 100,
-    hotMarketLimit: 200,
-    hotLeadLimit: OUTREACH_UNCAPPED,
-    namedHotMarketSharedLimit: 200,
+    publicLimit: 0,
+    hotMarketLimit: 0,
+    hotLeadLimit: 100,
+    namedHotMarketSharedLimit: 500,
   };
-  assert.equal(getOutreachDailyLaneLimit("hot_lead", laneConfig), OUTREACH_UNCAPPED);
-  assert.equal(laneConfigTotal(laneConfig), 300);
+  assert.equal(getOutreachDailyLaneLimit("hot_lead", laneConfig), 100);
+  assert.equal(laneConfigTotal(laneConfig), 600);
 });
 
   const now = new Date("2026-08-28T12:00:00.000Z");

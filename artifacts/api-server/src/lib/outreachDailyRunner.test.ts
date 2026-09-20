@@ -130,7 +130,6 @@ test("researches before dispatching and makes a second pass after the safe wait"
     "hot-market",
     "scheduled",
     "prepare-regular",
-    "prepare-hot-market",
     "send-1",
     "reconcile",
     "wait-240000",
@@ -149,8 +148,8 @@ test("researches before dispatching and makes a second pass after the safe wait"
     directShortfall: 0,
     publicShortfall: 0,
     regularShortfall: 0,
-    hotMarketPrepared: 50,
-    hotMarketScheduled: 50,
+    hotMarketPrepared: 0,
+    hotMarketScheduled: 0,
     hotMarketShortfall: 0,
     hotLeadTarget: 100,
     hotLeadPrepared: 0,
@@ -195,9 +194,9 @@ test("continues preparing and dispatching existing inventory when acquisition fa
   });
 
   assert.deepEqual(errors, ["hot-market-research", "scheduled-research", "verification"]);
-  assert.deepEqual(calls, ["prepare-regular", "prepare-hot-market", "send"]);
+  assert.deepEqual(calls, ["prepare-regular", "send"]);
   assert.equal(result.providerAccepted, 400);
-  assert.equal(result.regularPrepared + result.hotMarketPrepared + (result.hotLeadPrepared ?? 0), 400);
+  assert.equal(result.regularPrepared + (result.hotLeadPrepared ?? 0), 300);
 });
 
 test("does not make a second send pass for catch-up runs", async () => {
@@ -235,8 +234,8 @@ test("does not make a second send pass for catch-up runs", async () => {
     directShortfall: 0,
     publicShortfall: 0,
     regularShortfall: 0,
-    hotMarketPrepared: 50,
-    hotMarketScheduled: 50,
+    hotMarketPrepared: 0,
+    hotMarketScheduled: 0,
     hotMarketShortfall: 0,
     hotLeadTarget: 100,
     hotLeadPrepared: 0,
@@ -272,5 +271,5 @@ test("reports next-day lane shortfalls for durable recovery", async () => {
   });
 
   assert.equal(result.regularShortfall, 8);
-  assert.equal(result.hotMarketShortfall, 3);
+  assert.equal(result.hotMarketShortfall, 0);
 });

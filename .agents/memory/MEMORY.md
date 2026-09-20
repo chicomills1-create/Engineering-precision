@@ -22,7 +22,7 @@
 - [Unknown outreach sends](unknown-outreach-sends.md) — retain immutable sequence claims for transport errors and ambiguous provider responses; reconcile by stable custom key.
 - [Outreach delivery evidence](outreach-delivery-evidence.md) — “prepared” and `sent_at` are not proof of handoff; report SendGrid processed, delivered, bounced, and unresolved separately.
 - [Client outreach exclusions](client-outreach-exclusions.md) — Atmosphere Architects clients Tim Boyle and Mike Hudson must never receive Apex Grid outreach.
-- [Exact-time outreach scheduling](exact-time-outreach-scheduling.md) — daily target is 100 Verified/Direct + 50 Public + 50 Hot Market + 50 Hot Leads; eligible follow-ups are additional.
+- [Exact-time outreach scheduling](exact-time-outreach-scheduling.md) — nightly target is one 500-contact verified pool plus 100 hot leads; eligible sequence-2 follow-ups are additional.
 - [Verified outreach library](verified-outreach-library.md) — build an auditable AZ-first, then CA prospect pool; target 100 Direct + 50 Public + 50 Hot Market initial emails daily.
 - [Free-first outreach research](free-first-outreach-research.md) — use official registries and firm pages before targeted enrichment; never infer emails from patterns.
 - [Public business email sourcing](public-business-email-sourcing.md) — finder APIs are fallback tools; sourced and validated official-domain role mailboxes can qualify.

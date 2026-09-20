@@ -95,6 +95,29 @@ test("preparation reserves 100 Named and 100 Public regular slots and de-dupes i
   ).length, 100);
 });
 
+test("unified verified selection allows any source mix up to one shared cap", () => {
+  const candidates: PreparationCandidate[] = Array.from({ length: 700 }, (_, index) => ({
+    id: index,
+    companyName: `Unified ${index}`,
+    website: `https://unified-${index}.example`,
+    contactEmail: index % 2 === 0
+      ? `person-${index}@unified-${index}.example`
+      : `info@unified-${index}.example`,
+    contactName: index % 2 === 0 ? `Person ${index}` : null,
+    contactEvidenceType: index % 2 === 0 ? "findymail_verified" : "official_publication",
+    state: "AZ",
+    fitScore: 80,
+    needScore: 80,
+  }));
+  const selected = selectUniquePreparationCandidates(candidates, {
+    personalCap: 500,
+    publicCap: 500,
+    totalCap: 500,
+  });
+  assert.equal(selected.length, 500);
+  assert.ok(selected.some((candidate) => candidate.contactEvidenceType === "official_publication"));
+});
+
 test("shortfall and stale-run helpers support honest retry-safe runs", () => {
   assert.equal(getPreparationShortfall(199, 200), 1);
   assert.equal(getPreparationShortfall(200, 200), 0);

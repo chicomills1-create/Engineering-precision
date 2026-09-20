@@ -9,15 +9,15 @@ import {
 export type OutreachLane = "named" | "public" | "hot_market" | "hot_lead";
 export type OutreachLaneLimit = number | typeof OUTREACH_UNCAPPED;
 
-/** September 2026 relaunch lanes: 500 verified named + 100 public + uncapped hot leads. */
+/** September 2026 relaunch: one 500-contact verified pool plus 100 hot leads. */
 export const SEPTEMBER_OUTREACH_LANE_TARGETS = {
   named: 500,
-  public: 100,
+  public: 0,
   hot_market: 0,
   hot_lead: 100,
 } as const;
 export const SEPTEMBER_OUTREACH_TOTAL_TARGET = 400;
-/** September 19 relaunch daily target: 500 verified + 100 public. Hot leads are uncapped. */
+/** Nightly sequence-1 target: 500 verified contacts plus 100 hot leads. */
 export const SEPTEMBER_OUTREACH_RELAUNCH_DAILY_TARGET = 600;
 
 export type OutreachLaneConfig = {
@@ -92,10 +92,10 @@ export function laneLimit(config: OutreachLaneConfig, lane: OutreachLane): Outre
 }
 
 export function laneConfigTotal(config: OutreachLaneConfig): number {
-  const namedAndHotMarket = config.namedHotMarketSharedLimit
+  const verifiedPool = config.namedHotMarketSharedLimit
     ?? config.namedLimit + config.hotMarketLimit;
-  if (config.hotLeadLimit === OUTREACH_UNCAPPED) return namedAndHotMarket + config.publicLimit;
-  return namedAndHotMarket + config.publicLimit + config.hotLeadLimit;
+  if (config.hotLeadLimit === OUTREACH_UNCAPPED) return verifiedPool;
+  return verifiedPool + config.hotLeadLimit;
 }
 
 export function isUncappedLaneLimit(limit: OutreachLaneLimit): limit is typeof OUTREACH_UNCAPPED {

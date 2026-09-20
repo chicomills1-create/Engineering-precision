@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   AUTHORITATIVE_OUTREACH_POLICY_V2,
   AUTHORITATIVE_OUTREACH_POLICY_V3,
+  AUTHORITATIVE_OUTREACH_POLICY_V4,
   calculateLeadScore,
   configuredDailyAllowance,
   effectiveLaneAllocations,
@@ -84,6 +85,19 @@ test("relaunch policy advances to an immutable version with 500 named plus 100 p
     ),
     600,
   );
+});
+test("owner policy unifies every verified source under 500 and caps hot leads at 100", () => {
+  const schedule = AUTHORITATIVE_OUTREACH_POLICY_V4.monthlySchedules[0]!;
+  const allocations = effectiveLaneAllocations(schedule, new Date("2026-09-20T15:00:00Z"));
+  assert.equal(schedule.dailyTarget, 600);
+  assert.equal(allocations?.namedHotMarketShared, 500);
+  assert.equal(allocations?.public, 0);
+  assert.equal(allocations?.hotMarket, 0);
+  assert.equal(allocations?.hotLead, 100);
+  assert.equal(configuredDailyAllowance(
+    { version: 4, policy: AUTHORITATIVE_OUTREACH_POLICY_V4, month: "2026-09", schedule },
+    new Date("2026-09-20T15:00:00Z"),
+  ), 600);
 });
 test("forward schedule never exceeds cap", () => assert.ok((scheduleForMonth(policy, "2030-01")?.monthlyTarget ?? Infinity) <= policy.forwardMonthlyCap));
 test("score ordering and suppression precedence are deterministic", () => {
