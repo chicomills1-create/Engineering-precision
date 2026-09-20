@@ -6,6 +6,7 @@ import { seedVerifiedOutreachBatch } from "./lib/verifiedOutreachBatch";
 import { ensureOutreachFollowUps, prepareNextPhoenixOutreach } from "./lib/outreachPreparation";
 import { seedHotMarketOutreachBatch } from "./lib/hotMarketOutreachBatch";
 import { startDailyOutreachProcessScheduler } from "./lib/outreachDailyProcessScheduler";
+import { startOutreachStartupJobs } from "./lib/outreachStartup";
 import {
   ensureAuthoritativeOutreachConfig,
   loadOutreachSystemConfig,
@@ -69,26 +70,22 @@ const server = app.listen(port, async (err) => {
     },
     "Staging Phoenix outreach recovery checked before worker startup",
   );
-  startOutreachWorker();
-  stopDailyScheduler = startDailyOutreachProcessScheduler();
   startClientJobUploadCleanup();
-  void seedVerifiedOutreachBatch()
-    .then(async (result) => {
-      const hotMarket = await seedHotMarketOutreachBatch();
-      logger.info(hotMarket, "One-time Arizona hot-market outreach batch reconciled");
-      if (result.state === "ready") {
-        const preparation = await prepareNextPhoenixOutreach();
-        logger.info(
-          { prepared: preparation.prepared, shortfall: preparation.shortfall },
-          "Verified outreach candidates routed through daily preparation",
-        );
-      }
-      const followUps = await ensureOutreachFollowUps();
-      logger.info(followUps, "Outreach follow-up sequences reconciled");
-    })
-    .catch((seedError: unknown) => {
-      logger.error({ err: seedError }, "Verified outreach batch preparation failed");
-    });
+  const startup = await startOutreachStartupJobs({
+    ensureFollowUps: () => ensureOutreachFollowUps(),
+    armSchedulers: () => {
+      startOutreachWorker();
+      stopDailyScheduler = startDailyOutreachProcessScheduler();
+    },
+    seedVerified: () => seedVerifiedOutreachBatch(),
+    prepareVerified: async () => {
+      const preparation = await prepareNextPhoenixOutreach();
+      return { prepared: preparation.prepared, shortfall: preparation.shortfall };
+    },
+    seedHotMarket: () => seedHotMarketOutreachBatch(),
+    logger,
+  });
+  void startup.background;
 });
 
 let shuttingDown = false;

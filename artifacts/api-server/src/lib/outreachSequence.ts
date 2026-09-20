@@ -305,19 +305,47 @@ export async function backfillDeliveredFollowUpSequences(
       eq(prospectsTable.contactStatus, "active"),
       inArray(prospectsTable.status, ["approved", "contacted"]),
       sql`(
-        select count(*)
-        from ${outreachMessagesTable} as follow_up
+        not exists (
+          select 1
+          from ${outreachMessagesTable} as follow_up
           where follow_up.prospect_id = ${outreachMessagesTable.prospectId}
-          and follow_up.sequence_number = 2
-          and follow_up.scheduled_at is not null
-          and (
-            follow_up.campaign_id = ${outreachMessagesTable.campaignId}
-            or (
-              follow_up.campaign_id is null
-              and ${outreachMessagesTable.campaignId} is null
+            and follow_up.sequence_number = 2
+            and follow_up.scheduled_at is not null
+            and (
+              follow_up.campaign_id = ${outreachMessagesTable.campaignId}
+              or (
+                follow_up.campaign_id is null
+                and ${outreachMessagesTable.campaignId} is null
+              )
             )
-          )
-      ) < 1`,
+        )
+        or exists (
+          select 1
+          from ${outreachMessagesTable} as retryable_follow_up
+          where retryable_follow_up.prospect_id = ${outreachMessagesTable.prospectId}
+            and retryable_follow_up.sequence_number = 2
+            and retryable_follow_up.status = 'failed'
+            and retryable_follow_up.error in (
+              'Follow-up cannot send before its Phoenix opener-based business cadence',
+              'Message cannot send before its scheduled time'
+            )
+            and retryable_follow_up.sent_at is null
+            and retryable_follow_up.provider_message_id is null
+            and retryable_follow_up.provider_reconciliation_key is null
+            and not exists (
+              select 1
+              from ${outreachSequenceSendClaimsTable} as retry_claim
+              where retry_claim.message_id = retryable_follow_up.id
+            )
+            and (
+              retryable_follow_up.campaign_id = ${outreachMessagesTable.campaignId}
+              or (
+                retryable_follow_up.campaign_id is null
+                and ${outreachMessagesTable.campaignId} is null
+              )
+            )
+        )
+      )`,
     ))
     .orderBy(asc(outreachDeliveryEventsTable.occurredAt))
     .limit(limit);
