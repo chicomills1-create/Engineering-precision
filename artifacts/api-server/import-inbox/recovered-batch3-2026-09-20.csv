@@ -1,0 +1,64 @@
+day,lane,company,contact_name,title,email,website,city,state,segment,project_signal,source_url
+,verified,Kirksey Architecture,Wes Good,President & CEO,wesg@kirksey.com,kirksey.com,,TX,architect,Findymail-verified contact; research batch 3 2026-09-20,kirksey.com
+,verified,Studio RED Architects,Trung Doan,Founder,doan@studioredarchitects.com,studioredarchitects.com,,TX,architect,Findymail-verified contact; research batch 3 2026-09-20,studioredarchitects.com
+,verified,Studio RED Architects,Gwyndolyn Mowbray Anderson,Principal,mowbray@studioredarchitects.com,studioredarchitects.com,,TX,architect,Findymail-verified contact; research batch 3 2026-09-20,studioredarchitects.com
+,verified,Jackson & Ryan Architects,Kim Raborn Hanschen,Principal,khanschen@jacksonryan.com,jacksonryan.com,,TX,architect,Findymail-verified contact; research batch 3 2026-09-20,jacksonryan.com
+,verified,YDS Architects,Yifu Pan,Principal Architect & Founder,ypan@ydsarch.com,ydsarch.com,,CA,architect,Findymail-verified contact; research batch 3 2026-09-20,ydsarch.com
+,verified,YDS Architects,Wayne Pickerel,Vice President,wp@ydsarch.com,ydsarch.com,,CA,architect,Findymail-verified contact; research batch 3 2026-09-20,ydsarch.com
+,verified,AUX Architecture,Brian Wickersham,Founding Partner,wickersham@auxarchitecture.com,auxarchitecture.com,,CA,architect,Findymail-verified contact; research batch 3 2026-09-20,auxarchitecture.com
+,verified,Kuth Ranieri Architects,Byron Kuth,Principal Architect,bk@kuthranieri.com,kuthranieri.com,,CA,architect,Findymail-verified contact; research batch 3 2026-09-20,kuthranieri.com
+,verified,Kuth Ranieri Architects,Elizabeth Ranieri,Principal Architect,er@kuthranieri.com,kuthranieri.com,,CA,architect,Findymail-verified contact; research batch 3 2026-09-20,kuthranieri.com
+,verified,Scrafano Architects,Elissa Scrafano,Founder,elissa@scrafano.net,scrafano.net,,IL,architect,Findymail-verified contact; research batch 3 2026-09-20,scrafano.net
+,verified,Pieper O'Brien Herr Architects,Loren Wright,Principal / Senior Vice President,loren.wright@poharchitects.com,poharchitects.com,,GA,architect,Findymail-verified contact; research batch 3 2026-09-20,poharchitects.com
+,verified,West Architecture Studio,Scott West,Principal Architect,scott@westarchitecture.com,westarchitecture.com,,GA,architect,Findymail-verified contact; research batch 3 2026-09-20,westarchitecture.com
+,verified,Insight Architects,Vincent Gino Ciccarelli,Founder,vciccarelli@insightarch.com,insightarch.com,,NC,architect,Findymail-verified contact; research batch 3 2026-09-20,insightarch.com
+,verified,ARCHITECTUREFIRM,Danny MacNelly,Owner,dmacnelly@architecturefirm.co,architecturefirm.co,,VA,architect,Findymail-verified contact; research batch 3 2026-09-20,architecturefirm.co
+,verified,ARCHITECTUREFIRM,Katie MacNelly,Owner,kmacnelly@architecturefirm.co,architecturefirm.co,,VA,architect,Findymail-verified contact; research batch 3 2026-09-20,architecturefirm.co
+,verified,MZA,Ming Zhang,Founder,ming.zhang@mza-us.com,mza-us.com,,WA,architect,Findymail-verified contact; research batch 3 2026-09-20,mza-us.com
+,verified,Grouparchitect,Brian Palidar,Founder,brian@grouparch.com,grouparch.com,,WA,architect,Findymail-verified contact; research batch 3 2026-09-20,grouparch.com
+,verified,4D Architects,Barbara Pickens,Founder,barbara@4darchitects.com,4darchitects.com,,WA,architect,Findymail-verified contact; research batch 3 2026-09-20,4darchitects.com
+,verified,4D Architects,Ben Mulder,Founder,ben@4darchitects.com,4darchitects.com,,WA,architect,Findymail-verified contact; research batch 3 2026-09-20,4darchitects.com
+,verified,Runberg Architecture Group,Brian Runberg,Founder,brianr@runberg.com,runberg.com,,WA,architect,Findymail-verified contact; research batch 3 2026-09-20,runberg.com
+,verified,KEPHART,Bryce Hall,President,bryceh@kephart.com,kephart.com,,CO,architect,Findymail-verified contact; research batch 3 2026-09-20,kephart.com
+,verified,Zbranek & Holt Custom Homes,Steve Zbranek,Partner,steve@zhcustomhomes.com,zhcustomhomes.com,,TX,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,zhcustomhomes.com
+,verified,Zbranek & Holt Custom Homes,Tony Holt,Partner,tony@zhcustomhomes.com,zhcustomhomes.com,,TX,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,zhcustomhomes.com
+,verified,Bart Reines,Bart Reines,,bart@bartreines.com,bartreines.com,,FL,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,bartreines.com
+,verified,Farnsworth Builders,Wes Farnsworth,CEO,wes@farnsworthbuilders.com,farnsworthbuilders.com,,CA,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,farnsworthbuilders.com
+,verified,Burkhart Brothers Construction,Bryan Burkhart,Co-founder,bryan@burkhartbros.com,burkhartbros.com,,CA,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,burkhartbros.com
+,verified,Burkhart Brothers Construction,Mark Burkhart,Co-founder,mark@burkhartbros.com,burkhartbros.com,,CA,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,burkhartbros.com
+,verified,Gonterman Custom Homes,Jason Gonterman,Founder,jason@gontermanconstruction.com,gontermanconstruction.com,,CA,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,gontermanconstruction.com
+,verified,Amward Homes,Michael Ward,,michaelward@amwardhomes.com,amwardhomes.com,,NC,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,amwardhomes.com
+,verified,Amward Homes,Kent Ward,,kentward@amwardhomes.com,amwardhomes.com,,NC,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,amwardhomes.com
+,verified,Reward Builders,Wayne Holt,Founder,wayneholt@rewardbuilders.com,rewardbuilders.com,,NC,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,rewardbuilders.com
+,verified,Rembrey Homes,Rick Thoennes III,CEO,rick@rembrey.com,rembrey.com,,SC,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,rembrey.com
+,verified,Harrison Custom Homes,Scott Harrison,,scott@harrisoncustomhomes.com,harrisoncustomhomes.com,,CO,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,harrisoncustomhomes.com
+,verified,Latsis Homes,Jim Latsis,,jlatsis@latsiscustomhomes.com,latsiscustomhomes.com,,CO,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,latsiscustomhomes.com
+,verified,Latsis Homes,Kathryn Latsis,,klatsis@latsiscustomhomes.com,latsiscustomhomes.com,,CO,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,latsiscustomhomes.com
+,verified,Kingdom & Co.,Lincoln Rogers,Managing Partner,lincoln@kingdomandco.com,kingdomandco.com,,NV,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,kingdomandco.com
+,verified,Kingdom & Co.,Brian Horner,Head of Construction,brian@kingdomandco.com,kingdomandco.com,,NV,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,kingdomandco.com
+,verified,JAG Development,Jeff Gibson,Co-founder,jeff@jagre.com,jagre.com,,NV,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,jagre.com
+,verified,JAG Development,Addi Gibson,Co-founder,addi@jagre.com,jagre.com,,NV,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,jagre.com
+,verified,Whitestone Custom Homes,Tim Rice,Founder,tr@whitestonehomes.com,whitestonehomes.com,,TX,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,whitestonehomes.com
+,verified,Fairview Custom Homes,Steve Hamblen,Founder,steve@fairviewllc.com,fairviewllc.com,,SC,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,fairviewllc.com
+,verified,Hill Construction Company,Ryan Hill,Managing Member,rhill@hillconstructioncompany.com,hillconstructioncompany.com,,CA,luxury-builder,Findymail-verified contact; research batch 3 2026-09-20,hillconstructioncompany.com
+,verified,AFT Construction,Brad Leavitt,President,brad.l@aftconstruction.com,aftconstruction.com,,AZ,builder,Findymail-verified contact; research batch 3 2026-09-20,aftconstruction.com
+,verified,Hunter Contracting Co.,Max Taddei,CEO and Owner,maxt@huntercontracting.com,huntercontracting.com,,AZ,gc,Findymail-verified contact; research batch 3 2026-09-20,huntercontracting.com
+,verified,The Crowther Group,Thomas Crowther,President and CEO,tcrowther@thecrowthergroup.com,thecrowthergroup.com,,TX,gc,Findymail-verified contact; research batch 3 2026-09-20,thecrowthergroup.com
+,verified,Tony McClung & Company,Tony McClung,Owner and Operating Officer,tony@tonymcclung.com,tonymcclung.com,,TX,builder,Findymail-verified contact; research batch 3 2026-09-20,tonymcclung.com
+,verified,Andrew General Contractors,Todd Andrew,President,tandrew@andrewgc.com,andrewgc.com,,FL,gc,Findymail-verified contact; research batch 3 2026-09-20,andrewgc.com
+,verified,Roger B. Kennedy Construction,"Roger B. Kennedy, Jr.",President,rkennedy@rbkennedy.com,rbkennedy.com,,FL,gc,Findymail-verified contact; research batch 3 2026-09-20,rbkennedy.com
+,verified,Tampa Shell Contractors,Jaafar Shwaish,President and Owner,jaafar.s@tampashellcontractors.com,tampashellcontractors.com,,FL,gc,Findymail-verified contact; research batch 3 2026-09-20,tampashellcontractors.com
+,verified,G.J. Gardner Homes Tampa,David Gembutis,Franchise Owner,david.gembutis@gjgardner.com,gjgardner.com,,FL,builder,Findymail-verified contact; research batch 3 2026-09-20,gjgardner.com
+,verified,G.J. Gardner Homes Tampa,Geni Gembutis,Franchise Owner,geni.gembutis@gjgardner.com,gjgardner.com,,FL,builder,Findymail-verified contact; research batch 3 2026-09-20,gjgardner.com
+,verified,MTBH Studios,Richard McGinniss,Founding Partner,richard@mtbhstudios.com,mtbhstudios.com,,FL,builder,Findymail-verified contact; research batch 3 2026-09-20,mtbhstudios.com
+,verified,T&G Constructors,Rick Gonzalez,President and Co-founder,rgonzalez@t-and-g.com,t-and-g.com,,FL,gc,Findymail-verified contact; research batch 3 2026-09-20,t-and-g.com
+,verified,T&G Constructors,Joe Easton,Principal and VP Operations,jeaston@t-and-g.com,t-and-g.com,,FL,gc,Findymail-verified contact; research batch 3 2026-09-20,t-and-g.com
+,verified,Tampa Bay Quality Builders,David Dikmen,Owner,david.dikmen@tampabayqualitybuilders.com,tampabayqualitybuilders.com,,FL,builder,Findymail-verified contact; research batch 3 2026-09-20,tampabayqualitybuilders.com
+,verified,Coblentz Homes,Chris Coblentz,Owner & President,chris@coblentzhomes.com,coblentzhomes.com,,OH,builder,Findymail-verified contact; research batch 3 2026-09-20,coblentzhomes.com
+,verified,Dover Home Remodelers,Jim Orr,President and Owner,orrj@doverremodeling.com,doverremodeling.com,,OH,builder,Findymail-verified contact; research batch 3 2026-09-20,doverremodeling.com
+,verified,Marvista Design + Build,Michael Jacobs,Owner and President,mjacobs@marvistadesignbuild.com,marvistadesignbuild.com,,PA,builder,Findymail-verified contact; research batch 3 2026-09-20,marvistadesignbuild.com
+,verified,Kastler Construction,Rick Kastler,Owner,rick@kastlerconstruction.com,kastlerconstruction.com,,MI,builder,Findymail-verified contact; research batch 3 2026-09-20,kastlerconstruction.com
+,verified,PRM Custom Builders,Paul Mooney,Owner-Operator,pmooney@prmcustombuilders.com,prmcustombuilders.com,,MI,builder,Findymail-verified contact; research batch 3 2026-09-20,prmcustombuilders.com
+,verified,"Sellinger Associates, Inc.",Michael O. Sellinger,President,msellinger@sellingerinc.com,sellingerinc.com,,MI,engineer,Findymail-verified contact; research batch 3 2026-09-20,sellingerinc.com
+,verified,Charles Cudd Company,Charles Cudd,Owner and Principal,ccudd@charlescudd.com,charlescudd.com,,MN,builder,Findymail-verified contact; research batch 3 2026-09-20,charlescudd.com
+,verified,Charles Cudd Company,Rick Denman,Owner and Principal,rdenman@charlescudd.com,charlescudd.com,,MN,builder,Findymail-verified contact; research batch 3 2026-09-20,charlescudd.com
