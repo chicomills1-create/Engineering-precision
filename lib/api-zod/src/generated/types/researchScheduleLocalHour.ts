@@ -10,5 +10,5 @@ export type ResearchScheduleLocalHour = typeof ResearchScheduleLocalHour[keyof t
 
 
 export const ResearchScheduleLocalHour = {
-  NUMBER_8: 8,
+  NUMBER_20: 20,
 } as const;

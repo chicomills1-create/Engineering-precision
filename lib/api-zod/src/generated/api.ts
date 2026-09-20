@@ -1455,7 +1455,7 @@ export const ListOutreachResearchSchedulesResponseItem = zod.object({
   "campaignId": zod.number(),
   "enabled": zod.boolean(),
   "timezone": zod.enum(['America/Phoenix']),
-  "localHour": zod.literal(8),
+  "localHour": zod.literal(20),
   "targetCount": zod.number().min(1).max(listOutreachResearchSchedulesResponseTargetCountMax),
   "createdAt": zod.string(),
   "updatedAt": zod.string(),
@@ -1473,7 +1473,7 @@ export const UpdateOutreachResearchScheduleParams = zod.object({
   "id": zod.coerce.number()
 })
 
-export const updateOutreachResearchScheduleBodyLocalHourDefault = 8;
+export const updateOutreachResearchScheduleBodyLocalHourDefault = 20;
 export const updateOutreachResearchScheduleBodyTargetCountDefault = 167;
 export const updateOutreachResearchScheduleBodyTargetCountMax = 167;
 
@@ -1481,7 +1481,7 @@ export const updateOutreachResearchScheduleBodyTargetCountMax = 167;
 
 export const UpdateOutreachResearchScheduleBody = zod.object({
   "enabled": zod.boolean(),
-  "localHour": zod.literal(8).default(updateOutreachResearchScheduleBodyLocalHourDefault),
+  "localHour": zod.literal(20).default(updateOutreachResearchScheduleBodyLocalHourDefault),
   "targetCount": zod.number().min(1).max(updateOutreachResearchScheduleBodyTargetCountMax).default(updateOutreachResearchScheduleBodyTargetCountDefault)
 })
 
@@ -1494,7 +1494,7 @@ export const UpdateOutreachResearchScheduleResponse = zod.object({
   "campaignId": zod.number(),
   "enabled": zod.boolean(),
   "timezone": zod.enum(['America/Phoenix']),
-  "localHour": zod.literal(8),
+  "localHour": zod.literal(20),
   "targetCount": zod.number().min(1).max(updateOutreachResearchScheduleResponseTargetCountMax),
   "createdAt": zod.string(),
   "updatedAt": zod.string(),
