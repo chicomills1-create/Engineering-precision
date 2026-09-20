@@ -3,6 +3,7 @@ import { Eye, Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
 
 type ImportReport = {
@@ -18,18 +19,104 @@ type ImportReport = {
   publicImported?: number;
 };
 
+type ImportProgress = {
+  processed: number;
+  total: number;
+};
+
+/**
+ * Read a text/event-stream response body and invoke onEvent for each frame.
+ * Throws if a terminal "error" event arrives; resolves when the stream ends.
+ */
+async function readImportStream(
+  response: Response,
+  onEvent: (event: string, data: any) => void,
+): Promise<void> {
+  const reader = response.body?.getReader();
+  if (!reader) throw new Error('Streaming is not supported in this browser.');
+  const decoder = new TextDecoder();
+  let buffer = '';
+  const dispatchFrame = (frame: string) => {
+    let eventName = '';
+    const dataLines: string[] = [];
+    for (const line of frame.split('\n')) {
+      if (line.startsWith('event:')) eventName = line.slice(6).trim();
+      else if (line.startsWith('data:')) dataLines.push(line.slice(5).trim());
+    }
+    if (!eventName) return;
+    try {
+      onEvent(eventName, JSON.parse(dataLines.join('\n')));
+    } catch {
+      /* ignore malformed frame */
+    }
+  };
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    let idx: number;
+    while ((idx = buffer.indexOf('\n\n')) !== -1) {
+      dispatchFrame(buffer.slice(0, idx));
+      buffer = buffer.slice(idx + 2);
+    }
+  }
+  if (buffer.trim()) dispatchFrame(buffer);
+}
+
 export function VerifiedInventoryImport() {
   const [file, setFile] = useState<File | null>(null);
   const [importing, setImporting] = useState(false);
+  const [progress, setProgress] = useState<ImportProgress | null>(null);
   const [report, setReport] = useState<ImportReport | null>(null);
   const [publicPreview, setPublicPreview] = useState<ImportReport | null>(null);
   const [previewing, setPreviewing] = useState(false);
   const [confirming, setConfirming] = useState(false);
   const { toast } = useToast();
 
+  function duplicateCount(data: ImportReport): number {
+    return (data.exclusions?.duplicate_email ?? 0) + (data.exclusions?.duplicate_domain ?? 0);
+  }
+
+  /** Fallback when the event stream drops mid-import: poll the batch status. */
+  async function pollImportStatus(batchId: string | null) {
+    if (!batchId) throw new Error('The import connection dropped before it could be tracked. Please try again.');
+    const deadline = Date.now() + 10 * 60 * 1000;
+    for (;;) {
+      const statusResponse = await fetch(
+        `${import.meta.env.BASE_URL}api/outreach/inventory/import-status/${batchId}`,
+        { credentials: 'include' },
+      );
+      if (!statusResponse.ok) throw new Error('Could not check import status.');
+      const status = await statusResponse.json();
+      if (status.status === 'completed') {
+        setProgress({ processed: status.sourceRowCount, total: status.sourceRowCount });
+        const doneReport = { batchId, ...status.report } as ImportReport;
+        setReport(doneReport);
+        toast({
+          title: 'Verified contacts imported',
+          description: `Imported ${doneReport.namedEligible} new · ${duplicateCount(doneReport)} duplicates skipped.`,
+        });
+        return;
+      }
+      if (status.status === 'failed') throw new Error(status.error || 'Import failed');
+      if (Date.now() > deadline) {
+        toast({
+          title: 'Import still running',
+          description: 'The import is still processing on the server. Check back shortly.',
+        });
+        return;
+      }
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+    }
+  }
+
   async function runImport() {
     if (!file) return;
     setImporting(true);
+    setProgress(null);
+    setReport(null);
+    let batchId: string | null = null;
+    let finished = false;
     try {
       const response = await fetch(`${import.meta.env.BASE_URL}api/outreach/inventory/import-upload`, {
         method: 'POST',
@@ -40,13 +127,34 @@ export function VerifiedInventoryImport() {
         },
         body: await file.text(),
       });
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.error || 'Import failed');
-      setReport(result);
-      toast({
-        title: result.idempotent ? 'Import already completed' : 'Verified contacts imported',
-        description: `${result.namedEligible} new prospects; ${result.excluded} excluded.`,
+      const contentType = response.headers.get('content-type') || '';
+      if (!response.ok || !contentType.includes('text/event-stream')) {
+        const result = await response.json().catch(() => ({}));
+        throw new Error(result.error || `Import failed (HTTP ${response.status})`);
+      }
+      await readImportStream(response, (event, data) => {
+        if (event === 'start' || event === 'preparing') {
+          batchId = data.batchId ?? batchId;
+        } else if (event === 'progress') {
+          setProgress({ processed: data.processed, total: data.total });
+        } else if (event === 'done') {
+          finished = true;
+          setProgress({ processed: data.sourceRows, total: data.sourceRows });
+          setReport(data);
+          toast({
+            title: data.idempotent ? 'Import already completed' : 'Verified contacts imported',
+            description: `Imported ${data.namedEligible} new · ${duplicateCount(data)} duplicates skipped.`,
+          });
+        } else if (event === 'error') {
+          finished = true;
+          throw new Error(data.error || 'Import failed');
+        }
       });
+      if (!finished) {
+        // Stream ended without a terminal event (connection cut) — the import
+        // keeps running server-side; track it via the status endpoint.
+        await pollImportStatus(batchId);
+      }
     } catch (error) {
       toast({
         title: 'Import failed',
@@ -80,7 +188,7 @@ export function VerifiedInventoryImport() {
   }
 
   async function confirmPublicImport() {
-    if (!publicPreview?.batchId || !publicPreview.acceptedDigest || !publicPreview.confirmationToken) return;
+    if (!publicPreview?.batchId || !publicPreview?.acceptedDigest || !publicPreview.confirmationToken) return;
     setConfirming(true);
     try {
       const response = await fetch(`${import.meta.env.BASE_URL}api/outreach/inventory/public-confirm`, {
@@ -107,6 +215,10 @@ export function VerifiedInventoryImport() {
     }
   }
 
+  const progressPercent = progress && progress.total > 0
+    ? Math.min(100, Math.round((progress.processed / progress.total) * 100))
+    : 0;
+
   return (
     <div className="grid gap-6 lg:grid-cols-2">
     <Card data-testid="verified-inventory-import">
@@ -125,6 +237,7 @@ export function VerifiedInventoryImport() {
             onChange={(event) => {
               setFile(event.target.files?.[0] ?? null);
               setReport(null);
+              setProgress(null);
             }}
             data-testid="input-verified-inventory-csv"
           />
@@ -138,6 +251,16 @@ export function VerifiedInventoryImport() {
             {importing ? 'Importing…' : 'Import Verified CSV'}
           </Button>
         </div>
+        {(importing || progress) && (
+          <div className="space-y-2" data-testid="verified-import-progress">
+            <Progress value={progressPercent} />
+            <p className="text-sm text-muted-foreground">
+              {progress && progress.total > 0
+                ? `${progressPercent}% · ${progress.processed.toLocaleString()} of ${progress.total.toLocaleString()} rows`
+                : 'Preparing import…'}
+            </p>
+          </div>
+        )}
         {report && (
           <div className="rounded-sm border border-border bg-muted/30 p-4 text-sm" data-testid="verified-import-report">
             <p className="font-semibold">{report.namedEligible} new prospects accepted</p>
