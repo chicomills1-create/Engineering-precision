@@ -1,8 +1,12 @@
 import { Router, type IRouter } from "express";
 import { getAuth } from "@clerk/express";
 import { z } from "zod";
+import { eq } from "drizzle-orm";
+import { createHash } from "node:crypto";
 import { requireAuth } from "../middlewares/requireAuth";
 import express from "express";
+import { db, outreachImportBatchesTable } from "@workspace/db";
+import { IMPORT_SSE_HEADERS, sendImportEvent } from "../lib/importSse";
 import {
   confirmPublicInventory,
   ATTACHED_PUBLIC_SOURCE_CSV,
@@ -32,18 +36,54 @@ router.post(
     const actor = getAuth(req)?.userId;
     if (!actor) { res.status(401).json({ error: "Unauthorized" }); return; }
     if (typeof req.body !== "string") { res.status(400).json({ error: "A CSV file is required" }); return; }
+    const csv = req.body;
+    // Deterministic batch id (same derivation as importRecoveredFindyMailInventory)
+    // so the client can poll import status if the event stream drops.
+    const batchId = createHash("sha256").update(csv).digest("hex");
+    res.writeHead(201, IMPORT_SSE_HEADERS);
+    sendImportEvent(res, "start", { batchId });
+    sendImportEvent(res, "preparing", { batchId });
     try {
-      res.status(201).json(await importRecoveredFindyMailInventory({
-        actor,
-        sourceFilename: typeof req.headers["x-source-filename"] === "string"
-          ? req.headers["x-source-filename"]
-          : "findymail-recovered.csv",
-        csv: req.body,
-      }));
+      const result = await importRecoveredFindyMailInventory(
+        {
+          actor,
+          sourceFilename: typeof req.headers["x-source-filename"] === "string"
+            ? req.headers["x-source-filename"]
+            : "findymail-recovered.csv",
+          csv,
+        },
+        (processed, total) => {
+          sendImportEvent(res, "progress", { batchId, processed, total });
+        },
+      );
+      sendImportEvent(res, "done", result);
     } catch (error) {
       req.log.error({ err: error }, "Recovered FindyMail inventory import failed");
-      res.status(400).json({ error: error instanceof Error ? error.message : "Import failed" });
+      sendImportEvent(res, "error", { error: error instanceof Error ? error.message : "Import failed" });
+    } finally {
+      if (!res.writableEnded) res.end();
     }
+  },
+);
+router.get(
+  "/outreach/inventory/import-status/:batchId",
+  requireAuth,
+  async (req, res): Promise<void> => {
+    const actor = getAuth(req)?.userId;
+    if (!actor) { res.status(401).json({ error: "Unauthorized" }); return; }
+    const batchId = req.params.batchId;
+    if (!/^[0-9a-f]{64}$/.test(batchId)) { res.status(400).json({ error: "Invalid batch id" }); return; }
+    const [batch] = await db.select({
+      batchId: outreachImportBatchesTable.batchId,
+      status: outreachImportBatchesTable.status,
+      sourceFilename: outreachImportBatchesTable.sourceFilename,
+      sourceRowCount: outreachImportBatchesTable.sourceRowCount,
+      error: outreachImportBatchesTable.error,
+      completedAt: outreachImportBatchesTable.completedAt,
+      report: outreachImportBatchesTable.report,
+    }).from(outreachImportBatchesTable).where(eq(outreachImportBatchesTable.batchId, batchId)).limit(1);
+    if (!batch) { res.status(404).json({ error: "Import batch not found" }); return; }
+    res.json(batch);
   },
 );
 router.post(
