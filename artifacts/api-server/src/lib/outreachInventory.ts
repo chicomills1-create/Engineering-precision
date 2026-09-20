@@ -172,11 +172,16 @@ export async function importVerifiedInventory(actor: string): Promise<Record<str
   }
 }
 
-export async function importRecoveredFindyMailInventory(input: {
-  actor: string;
-  sourceFilename: string;
-  csv: string;
-}): Promise<Record<string, unknown>> {
+export type RecoveredInventoryProgress = (processed: number, total: number) => void;
+
+export async function importRecoveredFindyMailInventory(
+  input: {
+    actor: string;
+    sourceFilename: string;
+    csv: string;
+  },
+  onProgress?: RecoveredInventoryProgress,
+): Promise<Record<string, unknown>> {
   const parsed = csvRows(input.csv);
   const header = parsed.shift()?.map(clean);
   if (header?.join(",") !== RECOVERED_HEADERS.join(",")) {
@@ -251,6 +256,16 @@ export async function importRecoveredFindyMailInventory(input: {
         }
       }
 
+      const totalRows = parsed.length;
+      // Progress reporting is best-effort: it must never break the import itself.
+      const emitProgress = (processed: number) => {
+        try {
+          onProgress?.(processed, totalRows);
+        } catch {
+          /* progress callbacks are best-effort */
+        }
+      };
+      emitProgress(0);
       for (let index = 0; index < parsed.length; index += 1) {
         const sourceRow = index + 2;
         if (done.has(sourceRow)) continue;
@@ -339,6 +354,8 @@ export async function importRecoveredFindyMailInventory(input: {
           exclusionReason: exclusion,
           prospectId,
         });
+        const processedRows = index + 1;
+        if (processedRows === totalRows || processedRows % 25 === 0) emitProgress(processedRows);
       }
 
       const allRows = await tx.select({
