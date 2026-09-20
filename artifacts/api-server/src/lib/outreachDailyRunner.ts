@@ -186,13 +186,18 @@ export async function runDailyOutreachOnce(
   operations: DailyOutreachRunnerOperations,
   invokedAt = operations.now(),
 ): Promise<DailyOutreachRunnerResult> {
+  type VerificationSummary = {
+    promoted?: number;
+    finderCalls?: number;
+    creditBlocked?: boolean;
+  };
   const researchOperations = [
     ["hot-market-research", operations.processHotMarketResearch],
     ["scheduled-research", operations.processScheduledResearch],
     ["verification", operations.verifyProspects],
   ] as const;
   const acquisitionErrors: Array<{ stage: string; message: string }> = [];
-  const readSummary = (value: unknown): typeof verificationSummary => {
+  const readSummary = (value: unknown): VerificationSummary => {
     if (!value || typeof value !== "object") return {};
     const summary = value as { promoted?: unknown; finderCalls?: unknown; creditBlocked?: unknown };
     return {
@@ -201,7 +206,7 @@ export async function runDailyOutreachOnce(
       creditBlocked: typeof summary.creditBlocked === "boolean" ? summary.creditBlocked : undefined,
     };
   };
-  let verificationSummary: ReturnType<typeof readSummary> = {};
+  let verificationSummary: VerificationSummary = {};
   for (const [stage, operation] of researchOperations) {
     if (!operation) continue;
     try {

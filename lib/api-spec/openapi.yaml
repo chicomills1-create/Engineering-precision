@@ -2166,7 +2166,7 @@ components:
         campaignId: { type: number }
         enabled: { type: boolean }
         timezone: { type: string, enum: [America/Phoenix] }
-        localHour: { type: number, enum: [8] }
+        localHour: { type: number, enum: [20] }
         targetCount: { type: number, minimum: 1, maximum: 167 }
         createdAt: { type: string }
         updatedAt: { type: string }
@@ -2181,7 +2181,7 @@ components:
       required: [enabled]
       properties:
         enabled: { type: boolean }
-        localHour: { type: number, enum: [8], default: 8 }
+        localHour: { type: number, enum: [20], default: 20 }
         targetCount: { type: number, minimum: 1, maximum: 167, default: 167 }
     ResearchRunResponse:
       type: object

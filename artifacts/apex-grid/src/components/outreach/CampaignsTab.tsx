@@ -123,7 +123,7 @@ export function CampaignsTab() {
       id: campaign.id,
       data: {
         enabled: !schedule?.enabled,
-        localHour: 8,
+        localHour: 20,
         targetCount: Math.min(150, campaign.dailyLimit),
       },
     });
