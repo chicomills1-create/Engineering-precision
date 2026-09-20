@@ -29,7 +29,11 @@ import {
   isUncappedLaneLimit,
 } from "./outreachLaneConfig";
 import { isEvidenceBackedPublicInbox } from "./publicInboxClassifier";
-import { configuredDailyAllowance, loadOutreachSystemConfig } from "./outreachSystemConfig";
+import {
+  configuredDailyAllowance,
+  loadOutreachSystemConfig,
+  NIGHTLY_TOTAL_INITIAL_TARGET,
+} from "./outreachSystemConfig";
 import { getOutreachDailyLane } from "./outreach";
 // These are compatibility defaults only; authoritative lane config supplies
 // all production targets and no caller may clamp to these values.
@@ -805,6 +809,201 @@ export async function prepareNextPhoenixOutreach(
        skipped: 0, shortfall: getNamedHotMarketSharedLimit(laneConfig) + laneConfig.publicLimit,
     };
   }
+}
+
+/**
+ * Fills the nightly initial-message ceiling after the lane-owned preparations
+ * have run. This deliberately uses the same verified inventory and
+ * transaction-level duplicate protections as regular preparation, but does
+ * not apply the regular lane caps: those caps are precisely what this
+ * recovery path is intended to fill.
+ */
+export async function topUpVerifiedPreparation(
+  scheduledAt: Date,
+  needed: number,
+): Promise<{ prepared: number; shortfall: number }> {
+  const target = Math.max(0, Math.floor(needed));
+  if (target === 0) return { prepared: 0, shortfall: 0 };
+  const now = new Date();
+  const targetDate = phoenixDateKey(scheduledAt);
+  const runId = await claimPreparationRun(targetDate, now, NIGHTLY_TOTAL_INITIAL_TARGET);
+  const run = runId
+    ? runId
+    : (await db.select({ id: outreachPreparationRunsTable.id })
+      .from(outreachPreparationRunsTable)
+      .where(eq(outreachPreparationRunsTable.targetDate, targetDate))
+      .limit(1))[0]?.id;
+  if (!run) return { prepared: 0, shortfall: target };
+
+  const rows = await db.select({ prospect: prospectsTable, campaign: campaignsTable })
+    .from(prospectsTable)
+    .innerJoin(campaignsTable, eq(prospectsTable.campaignId, campaignsTable.id))
+    .where(and(
+      inArray(prospectsTable.status, ["approved", "review"]),
+      eq(prospectsTable.emailStatus, "verified"),
+      eq(campaignsTable.status, "active"),
+    ));
+  const [suppressions, initialMessages, claims] = await Promise.all([
+    db.select({ email: outreachSuppressionsTable.email }).from(outreachSuppressionsTable),
+    db.select({
+      prospectId: outreachMessagesTable.prospectId,
+      contactEmail: prospectsTable.contactEmail,
+      companyName: prospectsTable.companyName,
+      website: prospectsTable.website,
+    }).from(outreachMessagesTable)
+      .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+      .where(eq(outreachMessagesTable.sequenceNumber, 1)),
+    db.select({
+      prospectId: outreachSequenceSendClaimsTable.prospectId,
+      contactEmail: prospectsTable.contactEmail,
+      companyName: prospectsTable.companyName,
+      website: prospectsTable.website,
+    }).from(outreachSequenceSendClaimsTable)
+      .innerJoin(prospectsTable, eq(outreachSequenceSendClaimsTable.prospectId, prospectsTable.id))
+      .where(eq(outreachSequenceSendClaimsTable.sequenceNumber, 1)),
+  ]);
+  const suppressedEmails = new Set(suppressions.map((row) => row.email.trim().toLowerCase()));
+  const usedProspects = new Set([
+    ...initialMessages.map((row) => row.prospectId),
+    ...claims.map((row) => row.prospectId),
+  ]);
+  const usedEmails = new Set([
+    ...initialMessages.flatMap((row) => row.contactEmail ? [row.contactEmail] : []),
+    ...claims.flatMap((row) => row.contactEmail ? [row.contactEmail] : []),
+  ].map((email) => email.trim().toLowerCase()));
+  const usedDomains = new Set([
+    ...initialMessages.map(companyDomain),
+    ...claims.map(companyDomain),
+  ]);
+  const eligible = rows
+    .filter(({ prospect, campaign }) =>
+      canPrepare(prospect, campaign, suppressedEmails)
+      && !usedProspects.has(prospect.id))
+    .map(({ prospect }) => prospect);
+  const selected = selectUniquePreparationCandidates(eligible, {
+    personalCap: target,
+    publicCap: target,
+    usedEmails,
+    usedDomains,
+  }).slice(0, target);
+  let prepared = 0;
+  await db.transaction(async (tx) => {
+    await tx.execute(sql`select ${outreachPreparationRunsTable.id}
+      from ${outreachPreparationRunsTable}
+      where ${outreachPreparationRunsTable.id} = ${run}
+      for update`);
+    const existingSlots = await tx.select({
+      slot: outreachPreparationSlotsTable.slot,
+    }).from(outreachPreparationSlotsTable)
+      .where(eq(outreachPreparationSlotsTable.targetDate, targetDate));
+    const usedSlots = new Set(existingSlots.map((row) => row.slot));
+    const availableSlots = Array.from({ length: NIGHTLY_TOTAL_INITIAL_TARGET }, (_, i) => i + 1)
+      .filter((slot) => !usedSlots.has(slot));
+    for (const prospect of selected) {
+      if (prepared >= target) break;
+      const email = prospect.contactEmail?.trim().toLowerCase();
+      if (!email) continue;
+      await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${email}, 0))`);
+      const domain = companyDomain(prospect);
+      await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${domain}, 0))`);
+      const [currentProspect] = await tx.select().from(prospectsTable)
+        .where(eq(prospectsTable.id, prospect.id)).limit(1);
+      const [campaign] = currentProspect?.campaignId
+        ? await tx.select().from(campaignsTable)
+          .where(eq(campaignsTable.id, currentProspect.campaignId)).limit(1)
+        : [];
+      const currentEmail = currentProspect?.contactEmail?.trim().toLowerCase();
+      const [currentSuppression] = currentEmail
+        ? await tx.select({ id: outreachSuppressionsTable.id })
+          .from(outreachSuppressionsTable)
+          .where(eq(outreachSuppressionsTable.email, currentEmail)).limit(1)
+        : [];
+      if (
+        !currentProspect || !campaign
+        || !["approved", "review"].includes(currentProspect.status)
+        || currentProspect.emailStatus !== "verified"
+        || campaign.status !== "active"
+        || currentSuppression
+        || !canPrepare(currentProspect, campaign, suppressedEmails)
+      ) continue;
+      const currentDomain = companyDomain(currentProspect);
+      const [existing] = await tx.select({ id: outreachMessagesTable.id })
+        .from(outreachMessagesTable)
+        .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+        .where(and(
+          eq(outreachMessagesTable.sequenceNumber, 1),
+          or(eq(outreachMessagesTable.prospectId, prospect.id),
+            sql`lower(trim(${prospectsTable.contactEmail})) = ${email}`,
+            sql`lower(${prospectsTable.website}) like ${`%${currentDomain}%`}`),
+        )).limit(1);
+      if (existing) continue;
+      const [existingClaim] = await tx.select({ id: outreachSequenceSendClaimsTable.id })
+        .from(outreachSequenceSendClaimsTable)
+        .innerJoin(prospectsTable, eq(outreachSequenceSendClaimsTable.prospectId, prospectsTable.id))
+        .where(and(
+          eq(outreachSequenceSendClaimsTable.sequenceNumber, 1),
+          or(eq(outreachSequenceSendClaimsTable.prospectId, currentProspect.id),
+            sql`lower(trim(${prospectsTable.contactEmail})) = ${currentEmail}`,
+            sql`lower(${prospectsTable.website}) like ${`%${currentDomain}%`}`),
+        )).limit(1);
+      if (existingClaim) continue;
+      const slot = availableSlots.shift();
+      if (slot === undefined) break;
+      const [slotRow] = await tx.insert(outreachPreparationSlotsTable).values({
+        runId: run, targetDate, slot, prospectId: prospect.id,
+      }).onConflictDoNothing().returning({ id: outreachPreparationSlotsTable.id });
+      if (!slotRow) continue;
+      try {
+       if (currentProspect.status === "review") {
+        const [promoted] = await tx.update(prospectsTable)
+          .set({ status: "approved" })
+          .where(and(eq(prospectsTable.id, prospect.id), eq(prospectsTable.status, "review")))
+          .returning({ id: prospectsTable.id });
+        if (!promoted) {
+          await tx.delete(outreachPreparationSlotsTable)
+            .where(eq(outreachPreparationSlotsTable.id, slotRow.id));
+          continue;
+        }
+      }
+      const name = getPreparationPersonalizationName(currentProspect);
+      const [message] = await tx.insert(outreachMessagesTable).values({
+        prospectId: currentProspect.id, campaignId: campaign.id, sequenceNumber: 1,
+        subject: approvedOutreachSubject(), body: approvedOutreachBody(name),
+        status: "approved", scheduledAt,
+      }).returning({ id: outreachMessagesTable.id });
+      if (!message) {
+        await tx.delete(outreachPreparationSlotsTable)
+          .where(eq(outreachPreparationSlotsTable.id, slotRow.id));
+        continue;
+      }
+      await tx.insert(outreachMessagesTable).values(
+        approvedOutreachFollowUpMessages(name).map((followUp) => ({
+          prospectId: currentProspect.id, campaignId: campaign.id,
+          sequenceNumber: followUp.sequenceNumber, subject: followUp.subject,
+          body: followUp.body, status: "approved" as const, scheduledAt: null,
+        })),
+      ).onConflictDoNothing();
+      await tx.update(outreachPreparationSlotsTable).set({ messageId: message.id })
+        .where(eq(outreachPreparationSlotsTable.id, slotRow.id));
+      prepared += 1;
+      } catch (error) {
+        await tx.delete(outreachPreparationSlotsTable)
+          .where(eq(outreachPreparationSlotsTable.id, slotRow.id));
+        throw error;
+      }
+    }
+    await tx.update(outreachPreparationRunsTable).set({
+      preparedCount: sql`${outreachPreparationRunsTable.preparedCount} + ${prepared}`,
+      shortfallCount: sql`greatest(
+        0,
+        ${NIGHTLY_TOTAL_INITIAL_TARGET} - (
+          ${outreachPreparationRunsTable.preparedCount} + ${prepared}
+        )
+      )`,
+      status: "completed", completedAt: new Date(), error: null,
+    }).where(eq(outreachPreparationRunsTable.id, run));
+  });
+  return { prepared, shortfall: Math.max(0, target - prepared) };
 }
 
 /**

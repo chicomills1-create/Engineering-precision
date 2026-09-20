@@ -1,5 +1,5 @@
-import { eq, sql } from "drizzle-orm";
-import { advisoryLockPool, db, pool } from "@workspace/db";
+import { and, eq, gte, inArray, lt, sql } from "drizzle-orm";
+import { advisoryLockPool, db, outreachMessagesTable, pool } from "@workspace/db";
 import { outreachDailyRunsTable } from "@workspace/db/schema";
 import { logger } from "./lib/logger";
 import {
@@ -12,7 +12,10 @@ import {
   processDueOutreachResearchSchedules,
 } from "./lib/outreachResearchScheduler";
 import { verifyNewOutreachProspects } from "./lib/outreachVerification";
-import { prepareNextPhoenixOutreach } from "./lib/outreachPreparation";
+import {
+  prepareNextPhoenixOutreach,
+  topUpVerifiedPreparation,
+} from "./lib/outreachPreparation";
 import { prepareNextPhoenixHotMarketOutreach } from "./lib/hotMarketPreparation";
 import { prepareNextPhoenixHotLeadOutreach } from "./lib/outreachHotLeads";
 import { getCatchUpProgress } from "./lib/outreachCatchUp";
@@ -138,6 +141,18 @@ async function main(): Promise<void> {
     prepareRegularOutreach: () => prepareNextPhoenixOutreach(),
     prepareHotMarketOutreach: () => prepareNextPhoenixHotMarketOutreach(),
     prepareHotLeadOutreach: () => prepareNextPhoenixHotLeadOutreach(),
+    countInitialMessagesInWindow: async (scheduledAt) => {
+      const [row] = await db.select({ count: sql<number>`count(*)::int` })
+        .from(outreachMessagesTable)
+        .where(and(
+          eq(outreachMessagesTable.sequenceNumber, 1),
+          gte(outreachMessagesTable.scheduledAt, scheduledAt),
+          lt(outreachMessagesTable.scheduledAt, new Date(scheduledAt.getTime() + 24 * 60 * 60 * 1000)),
+          inArray(outreachMessagesTable.status, ["approved", "sending", "sent", "delivered"]),
+        ));
+      return row?.count ?? 0;
+    },
+    topUpVerifiedPreparation: (scheduledAt, needed) => topUpVerifiedPreparation(scheduledAt, needed),
     processDueMessages: () => processDueOutreachMessagesWithSummary(),
     processProviderReconciliation: () => processOutreachReconciliationWithSummary(),
     now: () => new Date(),

@@ -34,6 +34,8 @@ export function buildDailyOutreachReport(
       `Hot Lead target: ${result.hotLeadTarget ?? 100}`,
       `Hot Lead prepared: ${result.hotLeadPrepared ?? 0}`,
       `Hot Lead shortfall: ${result.hotLeadShortfall ?? 100}`,
+      `Top-up verified: ${result.topUpPrepared ?? 0}`,
+      `Top-up verified shortfall: ${result.topUpShortfall ?? 0}`,
       "",
       "Acquisition and verification",
       `Verification promoted: ${result.verificationPromoted ?? 0}`,
