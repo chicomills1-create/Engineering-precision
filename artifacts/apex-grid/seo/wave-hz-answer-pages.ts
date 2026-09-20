@@ -33,7 +33,7 @@ export const WAVE_HZ_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "How deep do drilled piers go in Denver expansive soils?",
-        answer: "There is no standard depth  -  the geotechnical report sets it from boring and swell-test data for each site. Piers must extend below the moisture-active zone into soil or bedrock that does not move with seasonal wetting and drying, and the report also fixes the allowable bearing capacity and uplift design values. The structural engineer sizes every pier from those numbers.",
+        answer: "There is no standard depth - the geotechnical report sets it from boring and swell-test data for each site. Piers must extend below the moisture-active zone into soil or bedrock that does not move with seasonal wetting and drying, and the report also fixes the allowable bearing capacity and uplift design values. The structural engineer sizes every pier from those numbers.",
       },
       {
         question: "What are void forms and why do they matter?",
@@ -41,7 +41,7 @@ export const WAVE_HZ_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "Does the permit path differ between Denver and the surrounding counties?",
-        answer: "Yes. The City and County of Denver reviews foundation designs through its own building department and amendments, while unincorporated sites in Douglas, Arapahoe, or Jefferson counties go through the respective county building division. The engineering is the same, but submittal portals, review timelines, fees, and inspection scheduling differ  -  and the AHJ in each case decides whether the design is approved.",
+        answer: "Yes. The City and County of Denver reviews foundation designs through its own building department and amendments, while unincorporated sites in Douglas, Arapahoe, or Jefferson counties go through the respective county building division. The engineering is the same, but submittal portals, review timelines, fees, and inspection scheduling differ - and the AHJ in each case decides whether the design is approved.",
       },
     ],
     extraLinks: [
@@ -86,7 +86,7 @@ export const WAVE_HZ_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "How is liquefaction handled in the Salt Lake Valley?",
-        answer: "The geotechnical engineer evaluates liquefaction potential from borings and groundwater data. Where the hazard is confirmed, mitigation typically means ground improvement such as stone columns, deep foundations that bypass the liquefiable layer, or mat foundations designed for uniform settlement  -  with the structural details accounting for downdrag and lateral spreading. The AHJ reviews the geotechnical recommendations and the structural design together.",
+        answer: "The geotechnical engineer evaluates liquefaction potential from borings and groundwater data. Where the hazard is confirmed, mitigation typically means ground improvement such as stone columns, deep foundations that bypass the liquefiable layer, or mat foundations designed for uniform settlement - with the structural details accounting for downdrag and lateral spreading. The AHJ reviews the geotechnical recommendations and the structural design together.",
       },
       {
         question: "Does the permit process differ between Salt Lake City and unincorporated Salt Lake County?",
@@ -127,11 +127,11 @@ export const WAVE_HZ_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "Why do foothills homes always need a geotechnical report?",
-        answer: "Because the design inputs  -  bearing depth, allowable soil pressure, cut-slope angles, retaining wall pressures, and drainage requirements  -  can only come from borings and lab tests on that specific slope. Foothills soils vary lot to lot: colluvium depth, clay content, and groundwater all change across short distances. The building department requires the report precisely because flat-lot assumptions fail on hillsides.",
+        answer: "Because the design inputs - bearing depth, allowable soil pressure, cut-slope angles, retaining wall pressures, and drainage requirements - can only come from borings and lab tests on that specific slope. Foothills soils vary lot to lot: colluvium depth, clay content, and groundwater all change across short distances. The building department requires the report precisely because flat-lot assumptions fail on hillsides.",
       },
       {
         question: "Are retaining walls engineered separately from the house?",
-        answer: "Yes, in practice. Retaining walls are designed with their own geotechnical parameters for lateral earth pressure, surcharge loads, and drainage, and they are reviewed as structural elements with calculations. Tall walls or walls supporting structures need permits of their own. The house foundation and the site walls are coordinated  -  a wall failure must never be able to take the house with it  -  but each is engineered for its own loads.",
+        answer: "Yes, in practice. Retaining walls are designed with their own geotechnical parameters for lateral earth pressure, surcharge loads, and drainage, and they are reviewed as structural elements with calculations. Tall walls or walls supporting structures need permits of their own. The house foundation and the site walls are coordinated - a wall failure must never be able to take the house with it - but each is engineered for its own loads.",
       },
       {
         question: "How does a slope change the foundation type?",
@@ -176,19 +176,19 @@ export const WAVE_HZ_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "What is a bond beam and why does adobe need one?",
-        answer: "A bond beam is a continuous beam  -  traditionally timber, now often reinforced concrete  -  running along the top of every bearing wall and tying them into a single ring. Adobe walls have almost no tensile strength, so without a bond beam each wall stands alone against lateral forces. The beam distributes earthquake and wind loads around the building and gives the roof a positive anchorage, making it the most effective structural upgrade for a historic adobe.",
+        answer: "A bond beam is a continuous beam - traditionally timber, now often reinforced concrete - running along the top of every bearing wall and tying them into a single ring. Adobe walls have almost no tensile strength, so without a bond beam each wall stands alone against lateral forces. The beam distributes earthquake and wind loads around the building and gives the roof a positive anchorage, making it the most effective structural upgrade for a historic adobe.",
       },
       {
         question: "Why is cement plaster bad for adobe walls?",
-        answer: "Portland cement plaster is rigid and nearly impermeable, while adobe is soft and breathable. Moisture that enters the wall  -  from the ground, from leaks, from humidity  -  cannot escape through cement stucco, so it accumulates in the adobe behind the shell and dissolves the mud mortar. The wall can fail internally while the stucco still looks intact. Lime plaster breathes and flexes with the wall, which is why restoration standards require it on historic adobe.",
+        answer: "Portland cement plaster is rigid and nearly impermeable, while adobe is soft and breathable. Moisture that enters the wall - from the ground, from leaks, from humidity - cannot escape through cement stucco, so it accumulates in the adobe behind the shell and dissolves the mud mortar. The wall can fail internally while the stucco still looks intact. Lime plaster breathes and flexes with the wall, which is why restoration standards require it on historic adobe.",
       },
       {
         question: "Can adobe buildings meet modern seismic requirements?",
-        answer: "They can be substantially improved, though a historic adobe will not perform like new ductile construction. The engineer's approach  -  bond beams, roof anchorage, crack stitching, and selective underpinning  -  follows established practice for earthen buildings and targets the known failure modes: walls separating at corners and roofs displacing off walls. The AHJ reviews the retrofit design against the applicable existing-building provisions and decides what is approved.",
+        answer: "They can be substantially improved, though a historic adobe will not perform like new ductile construction. The engineer's approach - bond beams, roof anchorage, crack stitching, and selective underpinning - follows established practice for earthen buildings and targets the known failure modes: walls separating at corners and roofs displacing off walls. The AHJ reviews the retrofit design against the applicable existing-building provisions and decides what is approved.",
       },
       {
         question: "How does landmarks review affect an adobe restoration in Albuquerque?",
-        answer: "In designated historic districts such as Old Town, exterior work goes through the city's Landmarks Commission for compatibility review before or alongside the building permit. The commission evaluates materials, plaster finishes, and visible alterations against historic standards  -  which is why cement stucco and incompatible alterations are rejected there. Outside the districts, restoration follows the standard building safety permit path, with Bernalillo County as the AHJ for unincorporated areas.",
+        answer: "In designated historic districts such as Old Town, exterior work goes through the city's Landmarks Commission for compatibility review before or alongside the building permit. The commission evaluates materials, plaster finishes, and visible alterations against historic standards - which is why cement stucco and incompatible alterations are rejected there. Outside the districts, restoration follows the standard building safety permit path, with Bernalillo County as the AHJ for unincorporated areas.",
       },
     ],
     extraLinks: [
@@ -225,11 +225,11 @@ export const WAVE_HZ_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "What are the defensible space zones?",
-        answer: "The standard layout uses three zones measured from the structure: an inner zone of about five feet kept noncombustible  -  hardscape, no woody plants or mulch against the house; a middle zone to roughly thirty feet with managed, irrigated, widely spaced landscaping; and an outer zone to about one hundred feet where native vegetation is thinned and pruned. On slopes the zones extend farther on the downhill side because fire spreads faster uphill.",
+        answer: "The standard layout uses three zones measured from the structure: an inner zone of about five feet kept noncombustible - hardscape, no woody plants or mulch against the house; a middle zone to roughly thirty feet with managed, irrigated, widely spaced landscaping; and an outer zone to about one hundred feet where native vegetation is thinned and pruned. On slopes the zones extend farther on the downhill side because fire spreads faster uphill.",
       },
       {
         question: "Does defensible space guarantee a home survives a wildfire?",
-        answer: "No. Defensible space is engineered to reduce ignition risk and give firefighters a place to work  -  it cannot stop ember storms, extreme winds, or a fire burning through untreated neighboring fuels. It works as part of a system with home hardening: ember-resistant vents, noncombustible roofing and siding, and enclosed eaves. No engineer or fire district promises survival; the design improves the odds.",
+        answer: "No. Defensible space is engineered to reduce ignition risk and give firefighters a place to work - it cannot stop ember storms, extreme winds, or a fire burning through untreated neighboring fuels. It works as part of a system with home hardening: ember-resistant vents, noncombustible roofing and siding, and enclosed eaves. No engineer or fire district promises survival; the design improves the odds.",
       },
       {
         question: "How do slopes change defensible space requirements?",
@@ -237,7 +237,7 @@ export const WAVE_HZ_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "Who reviews defensible space plans around Reno?",
-        answer: "It depends on the parcel. The City of Reno handles sites inside city limits, Washoe County covers unincorporated areas, and the Truckee Meadows Fire Protection District sets fire-protection standards across much of the region  -  with each applying its own requirements, inspection programs, and timelines. The engineer confirms which agencies have jurisdiction over the lot before the zone plan is drawn.",
+        answer: "It depends on the parcel. The City of Reno handles sites inside city limits, Washoe County covers unincorporated areas, and the Truckee Meadows Fire Protection District sets fire-protection standards across much of the region - with each applying its own requirements, inspection programs, and timelines. The engineer confirms which agencies have jurisdiction over the lot before the zone plan is drawn.",
       },
     ],
     extraLinks: [
@@ -274,19 +274,19 @@ export const WAVE_HZ_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "What does a Class A roof rating mean?",
-        answer: "Class A is the highest fire rating for roof coverings under the standard test, meaning the assembly resists severe fire exposure  -  including burning brands landing on the roof  -  better than Class B or C rated materials. Most asphalt shingle, metal, tile, and slate assemblies can achieve Class A. In WUI areas the code typically requires Class A as the minimum, because the roof is the largest surface embers can land on.",
+        answer: "Class A is the highest fire rating for roof coverings under the standard test, meaning the assembly resists severe fire exposure - including burning brands landing on the roof - better than Class B or C rated materials. Most asphalt shingle, metal, tile, and slate assemblies can achieve Class A. In WUI areas the code typically requires Class A as the minimum, because the roof is the largest surface embers can land on.",
       },
       {
         question: "Why do vents matter so much in wildfire hardening?",
-        answer: "Attic and foundation vents are open pathways into the building's concealed spaces, and embers readily enter through standard large-mesh vent screens. Once inside an attic, an ember has dry wood framing and no one watching  -  the fire can grow undetected until it breaks through. Ember-resistant vents use fine corrosion-resistant mesh or listed baffle devices that block embers while still providing the ventilation the building code requires.",
+        answer: "Attic and foundation vents are open pathways into the building's concealed spaces, and embers readily enter through standard large-mesh vent screens. Once inside an attic, an ember has dry wood framing and no one watching - the fire can grow undetected until it breaks through. Ember-resistant vents use fine corrosion-resistant mesh or listed baffle devices that block embers while still providing the ventilation the building code requires.",
       },
       {
         question: "Do hardened homes still need defensible space?",
-        answer: "Yes  -  hardening and defensible space are two halves of one system. Hardening keeps embers and heat from entering the structure; defensible space keeps the fire's intensity down around the structure and gives firefighters room to work. A hardened home surrounded by unmanaged fuels, or a cleared lot around an unhardened home, each leaves the other half of the ignition equation unsolved.",
+        answer: "Yes - hardening and defensible space are two halves of one system. Hardening keeps embers and heat from entering the structure; defensible space keeps the fire's intensity down around the structure and gives firefighters room to work. A hardened home surrounded by unmanaged fuels, or a cleared lot around an unhardened home, each leaves the other half of the ignition equation unsolved.",
       },
       {
         question: "Do WUI requirements differ between foothill counties and cities?",
-        answer: "Yes. Much of the Denver-area WUI is unincorporated county land, where the county's adopted wildfire provisions govern  -  and those provisions differ between counties in their hazard mapping, material requirements, and review checklists. Inside a municipality, the city's building code applies, which may include its own WUI amendments or none at all. The engineer verifies the parcel's jurisdiction first, because the same design can face different requirements on either side of a boundary line.",
+        answer: "Yes. Much of the Denver-area WUI is unincorporated county land, where the county's adopted wildfire provisions govern - and those provisions differ between counties in their hazard mapping, material requirements, and review checklists. Inside a municipality, the city's building code applies, which may include its own WUI amendments or none at all. The engineer verifies the parcel's jurisdiction first, because the same design can face different requirements on either side of a boundary line.",
       },
     ],
     extraLinks: [
@@ -323,19 +323,19 @@ export const WAVE_HZ_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "What is hydrostatic uplift?",
-        answer: "Hydrostatic uplift is the upward force groundwater exerts on any structure below the water table  -  water pressure pushing up on the bottom of slabs and footings. It increases with depth below the water level, and on a deep basement it can exceed the weight of the building itself. Engineers calculate it from the design high-water level and resist it with the structure's dead weight plus tension piles, thickened mats, or anchors where needed.",
+        answer: "Hydrostatic uplift is the upward force groundwater exerts on any structure below the water table - water pressure pushing up on the bottom of slabs and footings. It increases with depth below the water level, and on a deep basement it can exceed the weight of the building itself. Engineers calculate it from the design high-water level and resist it with the structure's dead weight plus tension piles, thickened mats, or anchors where needed.",
       },
       {
         question: "What is the difference between waterproofing and dampproofing?",
-        answer: "Dampproofing resists moisture vapor and minor dampness in soil that drains well; waterproofing resists water under hydrostatic pressure. Below the water table, dampproofing is not enough  -  the design needs true waterproofing: low-permeability concrete, waterstops at joints, and a membrane or crystalline system rated for the head of water the site will see. The geotechnical report's groundwater data decides which level of protection the code requires.",
+        answer: "Dampproofing resists moisture vapor and minor dampness in soil that drains well; waterproofing resists water under hydrostatic pressure. Below the water table, dampproofing is not enough - the design needs true waterproofing: low-permeability concrete, waterstops at joints, and a membrane or crystalline system rated for the head of water the site will see. The geotechnical report's groundwater data decides which level of protection the code requires.",
       },
       {
         question: "How is groundwater measured before foundation design?",
-        answer: "The geotechnical engineer drills borings and records both the depth where water is first encountered and where it stabilizes after drilling, then often installs piezometers  -  small monitoring wells  -  to track the water level across seasons. Permeability tests establish how fast water moves through the soil. The design uses the high-water condition from this data, not a single dry-season reading.",
+        answer: "The geotechnical engineer drills borings and records both the depth where water is first encountered and where it stabilizes after drilling, then often installs piezometers - small monitoring wells - to track the water level across seasons. Permeability tests establish how fast water moves through the soil. The design uses the high-water condition from this data, not a single dry-season reading.",
       },
       {
         question: "Do dewatering discharges need permits in Salt Lake City?",
-        answer: "Yes. Dewatering effluent cannot be discharged to the storm drain system, a waterway, or neighboring property without the proper approvals  -  the city regulates storm drain discharges and the state regulates discharges to waters of the state. The dewatering plan, including treatment for sediment, is part of the permit submittal. Inside city limits Salt Lake City is the AHJ; in unincorporated areas it is Salt Lake County, and discharge rules follow the receiving system.",
+        answer: "Yes. Dewatering effluent cannot be discharged to the storm drain system, a waterway, or neighboring property without the proper approvals - the city regulates storm drain discharges and the state regulates discharges to waters of the state. The dewatering plan, including treatment for sediment, is part of the permit submittal. Inside city limits Salt Lake City is the AHJ; in unincorporated areas it is Salt Lake County, and discharge rules follow the receiving system.",
       },
     ],
     extraLinks: [
@@ -372,19 +372,19 @@ export const WAVE_HZ_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "What is ACHD and why does it review subdivisions?",
-        answer: "The Ada County Highway District is the single countywide agency responsible for nearly all public roadways in Ada County  -  a consolidation unusual in the West. Because the streets a subdivision builds become ACHD's to maintain, the district reviews street sections, frontage improvements, traffic impact studies, and access points for every development, concurrently with the city's land-use review. Its standards govern the pavement the homebuyer will drive on.",
+        answer: "The Ada County Highway District is the single countywide agency responsible for nearly all public roadways in Ada County - a consolidation unusual in the West. Because the streets a subdivision builds become ACHD's to maintain, the district reviews street sections, frontage improvements, traffic impact studies, and access points for every development, concurrently with the city's land-use review. Its standards govern the pavement the homebuyer will drive on.",
       },
       {
         question: "How is stormwater handled in new Boise subdivisions?",
-        answer: "The civil engineer models pre- and post-development hydrology and sizes detention facilities  -  ponds, underground vaults, or a combination  -  to release runoff at no more than pre-development peak rates, per the local stormwater manual. Treatment devices handle the first flush of pollutants off new streets. Plans assign long-term maintenance to the HOA, city, or a district, and the reviewer checks the calculations before approving the drainage design.",
+        answer: "The civil engineer models pre- and post-development hydrology and sizes detention facilities - ponds, underground vaults, or a combination - to release runoff at no more than pre-development peak rates, per the local stormwater manual. Treatment devices handle the first flush of pollutants off new streets. Plans assign long-term maintenance to the HOA, city, or a district, and the reviewer checks the calculations before approving the drainage design.",
       },
       {
         question: "What are preliminary and final plats?",
-        answer: "The preliminary plat is the land-use approval: it fixes the street network, lot layout, densities, open space, and phasing, and carries the conditions of approval. The final plat is the legal instrument recorded with the county that actually creates the lots, dedicates the streets, and establishes utility easements. Construction drawings  -  streets, grading, drainage, utilities  -  are engineered between the two, and lots cannot be sold until the final plat records.",
+        answer: "The preliminary plat is the land-use approval: it fixes the street network, lot layout, densities, open space, and phasing, and carries the conditions of approval. The final plat is the legal instrument recorded with the county that actually creates the lots, dedicates the streets, and establishes utility easements. Construction drawings - streets, grading, drainage, utilities - are engineered between the two, and lots cannot be sold until the final plat records.",
       },
       {
         question: "Does the review path differ for city versus county subdivisions?",
-        answer: "Yes. Land annexed into Boise, Meridian, Eagle, or Kuna goes through that city's planning and public works review, while development that stays unincorporated goes through Ada County  -  but ACHD reviews the roadways in both cases, and irrigation districts and serving utilities review their pieces regardless of jurisdiction. Each agency applies its own standards, timelines, and fees, and the project is approved only when every agency with jurisdiction accepts its portion.",
+        answer: "Yes. Land annexed into Boise, Meridian, Eagle, or Kuna goes through that city's planning and public works review, while development that stays unincorporated goes through Ada County - but ACHD reviews the roadways in both cases, and irrigation districts and serving utilities review their pieces regardless of jurisdiction. Each agency applies its own standards, timelines, and fees, and the project is approved only when every agency with jurisdiction accepts its portion.",
       },
     ],
     extraLinks: [
@@ -421,15 +421,15 @@ export const WAVE_HZ_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "What is the base flood elevation?",
-        answer: "The base flood elevation is the computed height that floodwater is expected to reach during the base flood  -  the flood having a one-percent chance of occurring in any given year, often called the 100-year flood. It is shown on FEMA's flood maps and is the reference elevation for building requirements: the lowest floor of a new structure must sit above it, usually with added freeboard. A licensed surveyor documents compliance with an elevation certificate.",
+        answer: "The base flood elevation is the computed height that floodwater is expected to reach during the base flood - the flood having a one-percent chance of occurring in any given year, often called the 100-year flood. It is shown on FEMA's flood maps and is the reference elevation for building requirements: the lowest floor of a new structure must sit above it, usually with added freeboard. A licensed surveyor documents compliance with an elevation certificate.",
       },
       {
         question: "What is the difference between the floodway and the flood fringe?",
-        answer: "The floodway is the river channel plus the adjacent overbank land that must remain open to carry the base flood's discharge  -  development there is severely restricted and must be proven to cause no rise in flood levels. The flood fringe is the remainder of the mapped floodplain: development is allowed there if structures are elevated above the base flood elevation and floodproofed per the ordinance. The map panel shows which zone a site falls in.",
+        answer: "The floodway is the river channel plus the adjacent overbank land that must remain open to carry the base flood's discharge - development there is severely restricted and must be proven to cause no rise in flood levels. The flood fringe is the remainder of the mapped floodplain: development is allowed there if structures are elevated above the base flood elevation and floodproofed per the ordinance. The map panel shows which zone a site falls in.",
       },
       {
         question: "What is AMAFCA?",
-        answer: "The Albuquerque Metropolitan Arroyo Flood Control Authority is the regional agency that plans, builds, and maintains flood-control facilities for arroyos and stormwater across the Albuquerque area. Development that alters runoff to an AMAFCA facility or builds near one goes through the authority's drainage review for channel capacity, erosion protection, and downstream effects  -  separate from, and in addition to, the city's floodplain permit.",
+        answer: "The Albuquerque Metropolitan Arroyo Flood Control Authority is the regional agency that plans, builds, and maintains flood-control facilities for arroyos and stormwater across the Albuquerque area. Development that alters runoff to an AMAFCA facility or builds near one goes through the authority's drainage review for channel capacity, erosion protection, and downstream effects - separate from, and in addition to, the city's floodplain permit.",
       },
       {
         question: "Does floodplain permitting differ between Albuquerque and Bernalillo County?",
@@ -470,11 +470,11 @@ export const WAVE_HZ_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "Does evaporative cooling work in Reno?",
-        answer: "Yes, when the air is dry  -  which is most of Reno's summer. An evaporative cooler can deliver comfortable cooling at much lower energy use than refrigerated air conditioning in single-digit humidity. Its limits are real: it adds indoor moisture, it cannot filter wildfire smoke, and its cooling effect fades during humid monsoon pulses. The engineer weighs those tradeoffs per project, and many homes pair evaporative cooling for living areas with filtered refrigerated cooling for bedrooms.",
+        answer: "Yes, when the air is dry - which is most of Reno's summer. An evaporative cooler can deliver comfortable cooling at much lower energy use than refrigerated air conditioning in single-digit humidity. Its limits are real: it adds indoor moisture, it cannot filter wildfire smoke, and its cooling effect fades during humid monsoon pulses. The engineer weighs those tradeoffs per project, and many homes pair evaporative cooling for living areas with filtered refrigerated cooling for bedrooms.",
       },
       {
         question: "Why does Manual J matter more in a desert climate?",
-        answer: "Because the loads are lopsided in ways rules of thumb miss: nearly all sensible cooling with almost no latent load, intense solar gain through unshaded glass, and a dominant heating season. A rule-of-thumb tonnage sized for a humid climate will be wrong in both directions in Reno  -  oversized for the mild latent load, undersized for the solar-driven sensible peak. Room-by-room Manual J is the only way to get zoning, equipment selection, and duct sizing right.",
+        answer: "Because the loads are lopsided in ways rules of thumb miss: nearly all sensible cooling with almost no latent load, intense solar gain through unshaded glass, and a dominant heating season. A rule-of-thumb tonnage sized for a humid climate will be wrong in both directions in Reno - oversized for the mild latent load, undersized for the solar-driven sensible peak. Room-by-room Manual J is the only way to get zoning, equipment selection, and duct sizing right.",
       },
       {
         question: "How is wildfire smoke addressed in HVAC design?",
@@ -523,15 +523,15 @@ export const WAVE_HZ_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "How much capacity does HVAC equipment lose at Denver's altitude?",
-        answer: "There is no single percentage  -  the loss depends on the equipment type and the manufacturer. Airside capacity drops roughly in proportion to the air-density reduction, while gas-fired equipment follows each manufacturer's altitude-derating tables, which specify the input reduction per thousand feet above a threshold elevation. The engineer applies the specific manufacturer's data for each scheduled unit rather than using a blanket factor.",
+        answer: "There is no single percentage - the loss depends on the equipment type and the manufacturer. Airside capacity drops roughly in proportion to the air-density reduction, while gas-fired equipment follows each manufacturer's altitude-derating tables, which specify the input reduction per thousand feet above a threshold elevation. The engineer applies the specific manufacturer's data for each scheduled unit rather than using a blanket factor.",
       },
       {
         question: "Do heat pumps need altitude derating too?",
-        answer: "Yes, on the airside. A heat pump's indoor and outdoor coils move heat through air, so the reduced air density at Denver's elevation cuts the delivered heating and cooling capacity just as it does for a conventional air conditioner  -  the engineer selects from altitude-corrected performance data. The refrigeration circuit itself is less affected, but defrost behavior and outdoor-fan performance still get checked against the manufacturer's elevation guidance.",
+        answer: "Yes, on the airside. A heat pump's indoor and outdoor coils move heat through air, so the reduced air density at Denver's elevation cuts the delivered heating and cooling capacity just as it does for a conventional air conditioner - the engineer selects from altitude-corrected performance data. The refrigeration circuit itself is less affected, but defrost behavior and outdoor-fan performance still get checked against the manufacturer's elevation guidance.",
       },
       {
         question: "Does mechanical review differ between Denver and the surrounding counties?",
-        answer: "The engineering is identical  -  altitude derating applies across the whole metro  -  but the permit path follows the parcel. Projects in the City and County of Denver go through Denver's building department with its mechanical review checklists, while unincorporated sites go through Douglas, Arapahoe, Jefferson, or Adams county building divisions. Each AHJ has its own submittal portal, review timelines, and inspection scheduling, and each decides whether the derating documentation is adequate.",
+        answer: "The engineering is identical - altitude derating applies across the whole metro - but the permit path follows the parcel. Projects in the City and County of Denver go through Denver's building department with its mechanical review checklists, while unincorporated sites go through Douglas, Arapahoe, Jefferson, or Adams county building divisions. Each AHJ has its own submittal portal, review timelines, and inspection scheduling, and each decides whether the derating documentation is adequate.",
       },
     ],
     extraLinks: [
@@ -568,7 +568,7 @@ export const WAVE_HZ_ANSWER_PAGES: Phase0AeoPage[] = [
     faqs: [
       {
         question: "What is a Class 4 impact rating?",
-        answer: "Class 4 is the highest impact-resistance classification for asphalt shingles under the standardized steel-ball test, indicating the shingle survived the largest test impacts without fracturing. It is the rating insurers and engineers look for in hail country. The engineer specifies the classification  -  verified by the product's test listing  -  rather than relying on a manufacturer's hail claims.",
+        answer: "Class 4 is the highest impact-resistance classification for asphalt shingles under the standardized steel-ball test, indicating the shingle survived the largest test impacts without fracturing. It is the rating insurers and engineers look for in hail country. The engineer specifies the classification - verified by the product's test listing - rather than relying on a manufacturer's hail claims.",
       },
       {
         question: "Is metal roofing better for hail?",
@@ -580,7 +580,7 @@ export const WAVE_HZ_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "Do re-roof permits differ between Denver and the foothill counties?",
-        answer: "Yes. The City and County of Denver issues re-roof permits through its building department with the city's submittal requirements, while unincorporated Jefferson, Douglas, Boulder, and Arapahoe county sites permit through their respective county building divisions. Requirements  -  assembly documentation, impact classification, underlayment and fastening details, inspection hold points  -  vary by AHJ, so the contractor confirms the jurisdiction before filing.",
+        answer: "Yes. The City and County of Denver issues re-roof permits through its building department with the city's submittal requirements, while unincorporated Jefferson, Douglas, Boulder, and Arapahoe county sites permit through their respective county building divisions. Requirements - assembly documentation, impact classification, underlayment and fastening details, inspection hold points - vary by AHJ, so the contractor confirms the jurisdiction before filing.",
       },
     ],
     extraLinks: [
