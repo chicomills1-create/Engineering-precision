@@ -22,11 +22,11 @@ services:
     region: ohio
     buildCommand: >-
       export npm_config_prefix="$HOME/.npm-global" &&
-      export PATH="$HOME/.npm-global/bin:$PATH" &&
-      npm install -g pnpm@9 --no-audit --no-fund &&
-      pnpm install --no-frozen-lockfile &&
-      pnpm --filter @workspace/api-server run build &&
-      pnpm --filter @workspace/apex-grid run build
+      npm install -g pnpm@9 --no-audit --no-fund >/dev/null 2>&1 &&
+      PNPM_CJS="$HOME/.npm-global/lib/node_modules/pnpm/bin/pnpm.cjs" &&
+      node "$PNPM_CJS" install --no-frozen-lockfile &&
+      node "$PNPM_CJS" --filter @workspace/api-server run build &&
+      node "$PNPM_CJS" --filter @workspace/apex-grid run build
     startCommand: pnpm --filter @workspace/api-server run start
     healthCheckPath: /
     envVars:
@@ -135,10 +135,10 @@ services:
     schedule: "0 15 * * *"
     buildCommand: >-
       export npm_config_prefix="$HOME/.npm-global" &&
-      export PATH="$HOME/.npm-global/bin:$PATH" &&
-      npm install -g pnpm@9 --no-audit --no-fund &&
-      pnpm install --no-frozen-lockfile &&
-      pnpm --filter @workspace/api-server run build
+      npm install -g pnpm@9 --no-audit --no-fund >/dev/null 2>&1 &&
+      PNPM_CJS="$HOME/.npm-global/lib/node_modules/pnpm/bin/pnpm.cjs" &&
+      node "$PNPM_CJS" install --no-frozen-lockfile &&
+      node "$PNPM_CJS" --filter @workspace/api-server run build
     startCommand: pnpm --filter @workspace/api-server run outreach:daily
     envVars:
       - key: NODE_VERSION
@@ -173,10 +173,10 @@ services:
     schedule: "30 15 * * *"
     buildCommand: >-
       export npm_config_prefix="$HOME/.npm-global" &&
-      export PATH="$HOME/.npm-global/bin:$PATH" &&
-      npm install -g pnpm@9 --no-audit --no-fund &&
-      pnpm install --no-frozen-lockfile &&
-      pnpm --filter @workspace/api-server run build
+      npm install -g pnpm@9 --no-audit --no-fund >/dev/null 2>&1 &&
+      PNPM_CJS="$HOME/.npm-global/lib/node_modules/pnpm/bin/pnpm.cjs" &&
+      node "$PNPM_CJS" install --no-frozen-lockfile &&
+      node "$PNPM_CJS" --filter @workspace/api-server run build
     startCommand: pnpm --filter @workspace/api-server run outreach:daily
     envVars:
       - key: NODE_VERSION
