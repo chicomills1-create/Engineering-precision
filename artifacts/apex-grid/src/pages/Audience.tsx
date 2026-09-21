@@ -273,6 +273,13 @@ export default function Audience({ audience }: { audience: AudienceKey }) {
                     </Link>
                   </li>
                 ))}
+                {audience !== "property-managers" && (
+                  <li>
+                    <Link href="/pe-stamp/" className="text-foreground/80 hover:text-primary transition-colors inline-flex items-center gap-2">
+                      <ArrowRight className="w-4 h-4 text-primary" /> Need a PE stamp?
+                    </Link>
+                  </li>
+                )}
               </ul>
             </div>
             <div>

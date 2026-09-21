@@ -24,6 +24,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Route, Switch, Router as WouterRouter, useLocation } from 'wouter';
 import { lazy, Suspense, useEffect } from 'react';
 import Capabilities from '@/pages/Capabilities';
+import PeStamp from '@/pages/PeStamp';
 
 const ClerkArea = lazy(() => import('@/ClerkArea'));
 const ClientArea = lazy(() => import('@/ClientArea'));
@@ -92,6 +93,7 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/services" component={Services} />
         <Route path="/services/:id" component={ServiceDetail} />
+        <Route path="/pe-stamp" component={PeStamp} />
         <Route path="/privacy">
           <Legal page="privacy" />
         </Route>

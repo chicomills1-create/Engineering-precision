@@ -7,4 +7,4 @@ Every generated route must have one output owner. React owns shared application 
 
 **Why:** Letting both pipelines write the same route caused SEO-only regeneration to replace canonical React output and create unrelated file churn.
 
-**How to apply:** Declare new prerendered or generated route families in the shared ownership registry. Preserve a React-owned hub when clearing generator-owned children, and run the standard typecheck plus regeneration when route ownership changes.
+**How to apply:** Declare new prerendered or generated route families in the shared ownership registry. Preserve a React-owned hub when clearing generator-owned children. For effect-based metadata or JSON-LD, add the static equivalent to the prerender pipeline, match both source and bundled Vite module tags, and verify the final `dist` HTML after the production build.

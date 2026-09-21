@@ -20,6 +20,7 @@ export const REACT_PRERENDER_ROUTES = [
   "/resources",
   "/team",
   "/capabilities",
+  "/pe-stamp",
   "/privacy",
   "/terms",
 ] as const;
@@ -50,7 +51,7 @@ export const SEO_GENERATOR_FIXED_INDEX_ROUTES = [
  * Routes that both pipelines historically emitted. These are now exclusively
  * React-owned; the SEO generator may manage children without replacing the hub.
  */
-export const REACT_OWNED_SHARED_ROUTES = ["/resources", "/capabilities"] as const;
+export const REACT_OWNED_SHARED_ROUTES = ["/resources", "/capabilities", "/pe-stamp"] as const;
 
 export const REACT_PRERENDER_SERVICE_ROUTES = [
   "/services/mep",

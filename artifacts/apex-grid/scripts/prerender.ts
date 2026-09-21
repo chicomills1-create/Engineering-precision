@@ -34,6 +34,7 @@ const routeMeta: Record<string, [string, string]> = {
   "/resources": ["Engineering Resources & Answers | Apex Grid Engineering", "Answer-first guides on structural, MEP, civil, geotechnical, PE stamping, Title 24, and municipal plan-check requirements."],
   "/team": ["Apex Grid Engineering Team | Licensed Professionals", "Meet the Apex Grid Engineering team delivering coordinated architecture, MEP, structural, civil, and construction services."],
   "/capabilities": ["Firm Capabilities | Engineering Services, NAICS Codes & Licensure | Apex Grid", "Capabilities reference for procurement officers and prime contractors covering disciplines, markets, NAICS codes, software, codes, and project-specific credential verification."],
+  "/pe-stamp": ["Need a PE Stamp? Fast PE Review & Seal in 49 States | Apex Grid Engineering", "Fast, trusted PE review-and-seal for structural, MEP, and civil drawings. Licensed engineers, real review, sealed sets back in days. Send us your plans."],
   "/privacy": ["Privacy Policy | Apex Grid Engineering", "How Apex Grid Engineering collects, uses, and protects information submitted through its website."],
   "/terms": ["Terms of Use | Apex Grid Engineering", "Terms governing use of the Apex Grid Engineering website and project inquiry process."],
 };
@@ -71,8 +72,25 @@ function metadata(route: string): [string, string] {
 
 function documentFor(template: string, route: string, body: string): string {
   const [title, description] = metadata(route);
-  const canonical = `${site}${route === "/" ? "/" : route}`;
-  const schema = JSON.stringify({ "@context": "https://schema.org", "@type": "WebPage", name: title, description, url: canonical });
+  const canonicalPath = route === "/pe-stamp" ? "/pe-stamp/" : route === "/" ? "/" : route;
+  const canonical = `${site}${canonicalPath}`;
+  const schema = JSON.stringify(route === "/pe-stamp"
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "PE Review and Seal",
+        description,
+        url: canonical,
+        serviceType: "Professional Engineer review and seal",
+        areaServed: "United States",
+        provider: {
+          "@type": "Organization",
+          "@id": `${site}/#business`,
+          name: "Apex Grid Engineering",
+          url: `${site}/`,
+        },
+      }
+    : { "@context": "https://schema.org", "@type": "WebPage", name: title, description, url: canonical });
   return template
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(title)}</title>`)
     .replace(/<meta name="description"[^>]*>/, `<meta name="description" content="${esc(description)}" />`)
@@ -83,7 +101,10 @@ function documentFor(template: string, route: string, body: string): string {
     .replace(/<meta name="twitter:description"[^>]*>/, `<meta name="twitter:description" content="${esc(description)}" />`)
     .replace(/<link rel="canonical"[^>]*>/, `<link rel="canonical" href="${canonical}" />`)
     .replace(/<div id="root"><\/div>/, `<div id="root">${body}</div>`)
-    .replace(/<script type="module" src="[^"]+"><\/script>/, `<script type="application/ld+json">${schema}</script>\n    <script type="module" src="/src/main.tsx"></script>`);
+    .replace(
+      /(<script type="module"[^>]*src="[^"]+"[^>]*><\/script>)/,
+      `<script type="application/ld+json">${schema}</script>\n    $1`,
+    );
 }
 
 const ssr = await import("../.prerender/ssr.js");

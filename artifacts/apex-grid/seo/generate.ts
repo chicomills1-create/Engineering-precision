@@ -2025,6 +2025,9 @@ function staticIndexExists(urlPath: string): boolean {
   );
 }
 
+/** Shared "Need a PE stamp in [City]?" block — injected into location pages. */
+function peStampBlock(opts: { placeName: string; county: string; stateName: string; ahj: string; discipline?: string; }): string { const disc = opts.discipline ? `${esc(opts.discipline)} ` : ""; return `<section class="block"><div class="container"> <h2>Need a PE stamp in <em>${esc(opts.placeName)}</em>?</h2> <div class="prose"><p>Permit stuck waiting on a seal? Apex Grid's licensed engineers provide fast ${disc}review-and-seal for drawings in ${esc(opts.placeName)} and across ${esc(opts.county)} — reviewed under responsible charge and sealed for submittal to ${esc(opts.ahj)}. Typical turnaround is 3–5 business days once we have a complete package.</p></div> <div class="linkrow"><a class="cta" href="/pe-stamp/">Send us your plans</a> <a href="/pe-stamp/">How PE review-and-seal works</a></div> </div></section>`; }
+
 function servicePage(state: StateData, svc: ServiceDef, allStates: StateData[]): string {
   const url = `/locations/${state.slug}/${svc.slug}/`;
   const crumbs = [
@@ -2060,6 +2063,14 @@ ${breadcrumb(crumbs)}
   <h1>${esc(svc.h1)} <span class="dim">in ${esc(state.name)}</span></h1>
   <p class="lede">${esc(svc.intro)}</p>
 </div></section>
+
+${peStampBlock({
+  placeName: state.name,
+  county: `${state.name} (statewide)`,
+  stateName: state.name,
+  ahj: `the applicable ${state.name} permitting authority`,
+  discipline: svc.shortName,
+})}
 
 <section class="block"><div class="container">
   <h2>${esc(svc.shortName)} Engineering for <em>${esc(state.name)}</em> Conditions</h2>
@@ -3871,6 +3882,14 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
         <a class="btn btn--primary" href="/contact/">Request a Proposal</a>
       </div>
     </div>
+
+    ${peStampBlock({
+      placeName: page.cityName,
+      county: page.county,
+      stateName: page.stateName,
+      ahj: page.ahj,
+      discipline: toTitle(page.serviceSlug),
+    })}
 
     ${breadcrumb(crumbs)}
 
@@ -9117,14 +9136,8 @@ async function main() {
   }
   const peStampDir = path.join(PUBLIC, "pe-stamp");
   fs.mkdirSync(peStampDir, { recursive: true });
-  const peHubHtml = peStampHubPage();
-  assertPhase0Page(peHubHtml, "/pe-stamp/", [
-    { question: "Is a PE stamp a stand-alone product?", answer: "A seal represents a responsible engineer's professional review and responsibility for eligible work within the engineer's authorization and applicable rules." },
-    { question: "Where can I verify a professional engineer license?", answer: "Use the official board and license-verification resources linked for the relevant state, then confirm project-specific authorization and scope directly with the responsible professional." },
-    { question: "Does a PE stamp guarantee permit approval?", answer: "No. The AHJ controls its completeness review, interpretation, comments, and approval decision." },
-  ], "pe-stamp");
-  fs.writeFileSync(path.join(peStampDir, "index.html"), peHubHtml);
-  pages++;
+  // The React prerender owns /pe-stamp/; preserve its hub while continuing to
+  // generate the state-specific children below it.
   for (const state of states) {
     const dir = path.join(peStampDir, state.slug);
     fs.mkdirSync(dir, { recursive: true });
@@ -9681,12 +9694,13 @@ async function main() {
       phase7AeoPages: PHASE7_AEO_PAGES.length,
       answerLibraryPages: PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length,
       phase7Clusters: PHASE7_CLUSTER_COUNTS,
-      peStampHub: 1,
+      peStampHub: 0,
+      peStampHubOwner: "React prerender",
       peStampStatePages: states.length,
       metroPlanCheckPlaybooks: PHASE0_PLAN_CHECK_PLAYBOOKS.length,
       supportingResources: PHASE0_RESOURCE_PAGES.length,
       collectionHubs: 3,
-      totalPhase0Pages: PHASE0_SERVICE_PAGES.length + PHASE0_AEO_PAGES.length + 1 + states.length + PHASE0_PLAN_CHECK_PLAYBOOKS.length + PHASE0_RESOURCE_PAGES.length + 3,
+      totalPhase0Pages: PHASE0_SERVICE_PAGES.length + PHASE0_AEO_PAGES.length + states.length + PHASE0_PLAN_CHECK_PLAYBOOKS.length + PHASE0_RESOURCE_PAGES.length + 3,
     },
     aeoUpdatedDate: PHASE0_UPDATED_DATE,
     peSourceStates: Object.keys(PE_STATE_SOURCE_LINKS).sort(),
@@ -9697,7 +9711,7 @@ async function main() {
       reportPath: "seo/reports/existing-corpus-quality.json",
     },
   }, null, 2)}\n`);
-  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${verticalPages} architecture/GC vertical pages, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PARTNER_PAGES.length} construction partner pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${CANONICAL_INDUSTRY_DISCIPLINE_PAGES.length} canonical industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, Answer library: ${PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length} (${PHASE0_AEO_PAGES.length} existing + ${PHASE7_AEO_PAGES.length} Phase 7), Phase 0: ${PHASE0_SERVICE_PAGES.length} services + ${PHASE0_AEO_PAGES.length} AEO + ${states.length + 1} PE stamp + ${PHASE0_PLAN_CHECK_PLAYBOOKS.length} playbooks + ${PHASE0_RESOURCE_PAGES.length} resources, 1 sitemap page + sitemap.xml`);
+  console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${verticalPages} architecture/GC vertical pages, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PARTNER_PAGES.length} construction partner pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${CANONICAL_INDUSTRY_DISCIPLINE_PAGES.length} canonical industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, Answer library: ${PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length} (${PHASE0_AEO_PAGES.length} existing + ${PHASE7_AEO_PAGES.length} Phase 7), Phase 0: ${PHASE0_SERVICE_PAGES.length} services + ${PHASE0_AEO_PAGES.length} AEO + ${states.length} PE stamp state pages + ${PHASE0_PLAN_CHECK_PLAYBOOKS.length} playbooks + ${PHASE0_RESOURCE_PAGES.length} resources, 1 React-owned PE stamp hub, 1 sitemap page + sitemap.xml`);
 }
 
 async function notifySearchEngines() {
@@ -9911,6 +9925,12 @@ ${breadcrumb(crumbs)}
   <h1>Engineering Services <span class="dim">in ${esc(city.name)}</span></h1>
   <p class="lede">MEP, structural, civil, and energy-compliance engineering for ${esc(city.name)} projects — permitted through ${esc(city.ahj.office)} and designed to the city's adopted codes and amendments.</p>
 </div></section>
+${peStampBlock({
+  placeName: city.name,
+  county: city.county,
+  stateName: state.name,
+  ahj: city.ahj.office,
+})}
 <section class="block"><div class="container">
   <h2>Services in <em>${esc(city.name)}</em></h2>
   <div class="grid2">
