@@ -4,7 +4,7 @@ import { renderBrandedEmail } from "./emailMarkup";
 
 test("renders outreach as readable HTML while retaining a plain-text fallback", () => {
   const content = renderBrandedEmail(
-    "Hello <Principal>.\n\nWe can help with the current review.",
+    "Hello <Principal>.\n\nWe can help with the current review.\n\nNeed a PE stamp? We got you — we can review and stamp your finished design: https://apexgrideng.com/pe-stamp/",
     "https://apexgrideng.com/unsubscribe?email=test%40example.com&token=long-token",
   );
 
@@ -14,6 +14,14 @@ test("renders outreach as readable HTML while retaining a plain-text fallback", 
   assert.match(content.html, /CEO · USAF Veteran/);
   assert.match(content.html, /Veteran-owned engineering company/);
   assert.match(content.html, /href="https:\/\/apexgrideng\.com"[^>]*>apexgrideng\.com<\/a>/);
+  assert.match(
+    content.html,
+    /Need a PE stamp\? We got you — we can review and stamp your finished design: <a href="https:\/\/apexgrideng\.com\/pe-stamp\/"[^>]*>https:\/\/apexgrideng\.com\/pe-stamp\/<\/a>/,
+  );
+  assert.match(
+    content.plainText,
+    /Need a PE stamp\? We got you — we can review and stamp your finished design: https:\/\/apexgrideng\.com\/pe-stamp\//,
+  );
   // September 2026 relaunch: no estimator CTA in campaign email.
   assert.doesNotMatch(content.html, /Get My Instant Ballpark Estimate/);
   assert.doesNotMatch(content.html, /apexgrideng\.com\/estimate/);
