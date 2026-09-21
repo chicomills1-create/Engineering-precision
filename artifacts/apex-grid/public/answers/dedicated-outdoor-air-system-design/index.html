@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How Is a Dedicated Outdoor Air System (DOAS) Properly Designed?</title>
+<meta name="description" content="Dedicated outdoor air systems decouple ventilation from sensible cooling. How engineers size DOAS units, recover energy, and control humidity." />
+<link rel="canonical" href="https://apexgrideng.com/answers/dedicated-outdoor-air-system-design/" />
+<meta property="og:title" content="How Is a Dedicated Outdoor Air System (DOAS) Properly Designed?" />
+<meta property="og:description" content="Dedicated outdoor air systems decouple ventilation from sensible cooling. How engineers size DOAS units, recover energy, and control humidity." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://apexgrideng.com/answers/dedicated-outdoor-air-system-design/" />
+<meta property="og:image" content="https://apexgrideng.com/logo.png" />
+<meta property="og:image:alt" content="Apex Grid Engineering logo" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="How Is a Dedicated Outdoor Air System (DOAS) Properly Designed?" />
+<meta name="twitter:description" content="Dedicated outdoor air systems decouple ventilation from sensible cooling. How engineers size DOAS units, recover energy, and control humidity." />
+<meta name="twitter:image" content="https://apexgrideng.com/logo.png" />
+<meta name="twitter:image:alt" content="Apex Grid Engineering logo" />
+<meta name="robots" content="index,follow" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How Is a Dedicated Outdoor Air System (DOAS) Properly Designed?","name":"How Is a Dedicated Outdoor Air System (DOAS) Properly Designed?","description":"Dedicated outdoor air systems decouple ventilation from sensible cooling. How engineers size DOAS units, recover energy, and control humidity.","url":"https://apexgrideng.com/answers/dedicated-outdoor-air-system-design/","datePublished":"2026-09-15","dateModified":"2026-09-15","author":{"@type":"Person","name":"Jeremy Mills","jobTitle":"CEO & Founder","description":"USAF Veteran","worksFor":{"@type":"Organization","name":"Apex Grid Engineering","url":"https://apexgrideng.com"}},"publisher":{"@type":"Organization","name":"Apex Grid Engineering","url":"https://apexgrideng.com"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is a DOAS different from a conventional VAV system?","acceptedAnswer":{"@type":"Answer","text":"A conventional VAV air handler mixes outdoor ventilation air with recirculated room air and uses that single airstream for both ventilation and sensible cooling, which forces compromises — especially on humidity, since the coil must satisfy the thermostat first and dehumidification happens only incidentally. A DOAS separates the jobs: one unit delivers exactly the required ventilation air, dried to a controlled dew point, and independent zone equipment handles sensible temperature. The result is precise humidity control, smaller ductwork, and no more overcooled, clammy spaces on mild humid days."}},{"@type":"Question","name":"What supply air temperature should a DOAS deliver?","acceptedAnswer":{"@type":"Answer","text":"Typically neutral — around 60 to 65°F — after dehumidifying to a low dew point in the mid-50s or lower. The sequence is cool deep to wring out moisture, then reheat to neutral so the ventilation air doesn't add unwanted cooling to the zones. Reheat energy is minimized with energy recovery doing most of the work and, where codes allow, recovered condenser heat. Supplying cold saturated air directly would overcool zones and risk condensation at diffusers; supplying warm humid air would defeat the purpose."}},{"@type":"Question","name":"What energy recovery works best with a DOAS?","acceptedAnswer":{"@type":"Answer","text":"Enthalpy wheels are the most common choice because they recover both sensible heat and moisture, which matters enormously when the unit's job is latent removal — the wheel pre-dries incoming outdoor air using exhaust air energy before the cooling coil sees it. Where cross-contamination between exhaust and supply is a concern, such as labs or healthcare, I use runaround loops or heat pipes that keep the airstreams fully separated at some efficiency cost. Fixed-plate exchangers suit smaller units. I select on effectiveness, frost control, maintenance access, and whether the airstreams may ever mix."}},{"@type":"Question","name":"Can a DOAS be added to an existing building?","acceptedAnswer":{"@type":"Answer","text":"Yes, and it's one of the best HVAC retrofits for buildings with chronic humidity problems. The DOAS unit — often a rooftop unit — supplies ventilation air to the existing zones, and the existing equipment is relieved of the latent load it was never handling well. The retrofit needs a path for the dedicated ventilation ductwork, which is smaller than conventional ductwork but still real, and controls integration so the old and new systems coordinate. I evaluate the existing equipment's remaining life honestly: sometimes the DOAS pairs with it for years, sometimes replacement is the better investment."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://apexgrideng.com/"},{"@type":"ListItem","position":2,"name":"How Is a Dedicated Outdoor Air System (DOAS) Properly Designed?"}]}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:hsl(0 0% 3%);--card:hsl(0 0% 5%);--border:hsl(0 0% 12%);--fg:hsl(0 0% 92%);--muted:hsl(0 0% 62%);--primary:hsl(0 72% 48%);--primary-fg:#fff}
+body{background:var(--bg);color:var(--fg);font-family:'Inter',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.display{font-family:'Space Grotesk',sans-serif;line-height:1.15;letter-spacing:-0.01em}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--border);background:hsl(0 0% 3%/.95);position:sticky;top:0;z-index:50;backdrop-filter:blur(8px)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+.brand{display:flex;align-items:center;gap:12px;font-family:'Space Grotesk';font-weight:700;font-size:19px;letter-spacing:-.01em}
+.brand small{display:block;font-size:9px;letter-spacing:.3em;color:var(--muted);font-weight:500}
+.navlinks{display:flex;gap:18px;font-size:13px;color:hsl(0 0% 80%);align-items:center}
+.navlinks a:hover{color:var(--primary)}
+.cta{background:var(--primary);color:var(--primary-fg);font-weight:700;font-size:14px;padding:12px 24px;border-radius:2px}
+.cta:hover{background:hsl(0 72% 42%)}
+.hero{padding:96px 0 64px;border-bottom:1px solid var(--border);position:relative}
+.hero .kicker{color:var(--primary);font-family:'Space Grotesk';font-size:12px;letter-spacing:.25em;text-transform:uppercase;margin-bottom:20px;font-weight:600}
+.hero h1{font-size:clamp(34px,5vw,58px);font-weight:700;margin-bottom:24px}
+.hero h1 .dim{color:var(--muted)}
+.hero .lede{font-size:19px;color:hsl(0 0% 78%);max-width:760px;border-left:4px solid var(--primary);padding-left:22px}
+.breadcrumb{padding:20px 0 0;font-size:12px;font-family:'Space Grotesk';text-transform:uppercase;letter-spacing:.12em;color:var(--muted);overflow-wrap:anywhere}
+.breadcrumb a:hover{color:var(--primary)}
+.breadcrumb span{margin:0 8px;color:hsl(0 0% 30%)}
+section.block{padding:56px 0;border-bottom:1px solid var(--border)}
+section.block h2{font-size:28px;margin-bottom:20px}
+section.block h2 em{color:var(--primary);font-style:normal}
+.prose p{color:hsl(0 0% 74%);margin-bottom:18px;max-width:820px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--border);padding:26px}
+.card h3{font-size:16px;margin-bottom:10px;color:var(--fg)}
+.card p{font-size:14px;color:var(--muted)}
+.card .label{font-family:'Space Grotesk';font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--primary);margin-bottom:12px;font-weight:600}
+ul.scope{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;max-width:900px}
+ul.scope li{background:var(--card);border:1px solid var(--border);padding:14px 18px;font-size:14px;color:hsl(0 0% 78%);border-left:3px solid var(--primary)}
+.faq{max-width:860px}
+.faq details{border:1px solid var(--border);background:var(--card);margin-bottom:10px}
+.faq summary{cursor:pointer;padding:18px 22px;font-family:'Space Grotesk';font-weight:600;font-size:15px}
+.faq .a{padding:0 22px 18px;color:var(--muted);font-size:14.5px}
+.linkrow{display:flex;flex-wrap:wrap;gap:10px}
+.linkrow a{border:1px solid var(--border);background:var(--card);padding:10px 16px;font-size:13px;color:hsl(0 0% 78%)}
+.linkrow a:hover{border-color:var(--primary);color:var(--primary)}
+.ctaband{padding:72px 0;text-align:left}
+.ctaband h2{font-size:32px;margin-bottom:14px}
+.ctaband p{color:var(--muted);margin-bottom:28px;max-width:640px}
+footer{border-top:1px solid var(--border);background:var(--card);padding:64px 0 32px;font-size:14px}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1.2fr 1fr 1fr;gap:32px}
+@media(max-width:1000px){.navlinks>a:not(.cta){display:none}}
+@media(max-width:600px){
+  .topbar .container{width:calc(100% - 24px)}
+  .brand small{display:none}
+  .navlinks{gap:8px}
+  .navlinks .cta{padding:10px 13px;font-size:11px;letter-spacing:.06em}
+  .hero h1{overflow-wrap:anywhere}
+}
+@media(max-width:800px){.fgrid{grid-template-columns:1fr 1fr}}
+footer h4{font-family:'Space Grotesk';font-size:12px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:18px}
+footer ul{list-style:none}
+footer li{margin-bottom:12px;color:hsl(0 0% 78%)}
+footer a:hover{color:var(--primary)}
+.fbottom{margin-top:48px;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted)}
+.note{font-size:12.5px;color:hsl(0 0% 45%);max-width:820px;margin-top:8px}
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.statgrid .cell{background:var(--bg);padding:22px}
+.statgrid .cell .k{font-family:'Space Grotesk';font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);margin-bottom:8px;font-weight:600}
+.statgrid .cell .v{font-size:14.5px;color:hsl(0 0% 80%)}
+</style>
+</head>
+<body>
+<header><div class="container nav">
+  <a class="brand" href="/"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;color:hsl(0 72% 48%)"><path d="M50 8L8 88h12l30-58 30 58h12L50 8z" fill="currentColor"/><path d="M50 40L30 78h8l12-24 12 24h8L50 40z" fill="currentColor" opacity="0.7"/><path d="M32 74h36v6H32z" fill="currentColor"/></svg><span>APEX GRID<small>ENGINEERING · ARCHITECTURE · GC</small></span></a>
+  <nav class="navlinks">
+    <a href="/services">Engineering</a><a href="/architecture/">Architecture</a><a href="/general-contracting/">General Contracting</a><a href="/industries">Industries</a><a href="/resources">Resources</a><a href="/locations/">Service Areas</a>
+    <a class="cta" href="/contact">Contact Us</a>
+  </nav>
+</div></header>
+<main data-phase0="true">
+  <nav class="breadcrumb container"><a href="/">Home</a><span>/</span>How Is a Dedicated Outdoor Air System (DOAS) Properly Designed?</nav>
+  <section class="hero"><div class="container"><p class="kicker">AEO Answer · MEP Systems Engineering</p><h1>How Is a Dedicated Outdoor Air System (DOAS) Properly Designed?</h1>
+      <p class="note">By Jeremy Mills, CEO &amp; Founder, Apex Grid Engineering — USAF Veteran. · Updated 2026-09-15</p>
+      <div class="direct-answer" aria-label="Direct answer"><p>A DOAS is designed to deliver 100 percent of ventilation air dehumidified to a controlled dew point and reheated neutral, with energy recovery, while separate zone equipment handles sensible loads — decoupling ventilation from cooling for better humidity control and lower fan energy.</p></div>
+      <p class="founder-note">I&#39;m Jeremy Mills, CEO &amp; Founder of Apex Grid Engineering and a U.S. Air Force veteran. I&#39;m not a PE; our licensed professionals make the technical, compliance, and project-specific decisions.</p>
+    </div></section>
+  
+  <section class="block" id="step-1"><div class="container"><h2>Decoupling ventilation from sensible cooling</h2><div class="prose"><p>The decoupling concept reorganizes the entire airside design. Ventilation air quantities are set by code and occupancy — typically a small fraction of the air a conventional system moves — so the DOAS ductwork, fans, and unit are all sized to that smaller quantity. Zone-level sensible loads are handled by water-side or refrigerant-side terminal equipment that needs no ductwork at all in the case of chilled beams or radiant, or small local ductwork for fan coils. Shaft space shrinks, ceiling plenums open up, and fan energy drops because the building moves far less air.
+
+This separation also fixes the part-load humidity problem that plagues conventional systems. On a mild but humid day, a VAV system satisfies thermostats quickly and its cooling coil barely runs — so moisture stays in the air and the building feels clammy. A DOAS doesn&#39;t care about the sensible load: it keeps delivering dried ventilation air at its design dew point regardless, holding space humidity steady through every part-load condition. For owners in humid climates, that alone justifies the architecture.</p></div></div></section><section class="block" id="step-2"><div class="container"><h2>Energy recovery and latent handling</h2><div class="prose"><p>The energy recovery device is the economic engine of a DOAS. Conditioning 100 percent outdoor air is expensive — every cubic foot must be heated, cooled, and dehumidified from ambient to supply conditions — and recovery cuts that load dramatically by transferring heat and moisture between the exhaust and supply airstreams. I size and select the recovery device for the climate&#39;s dominant penalty: moisture recovery matters most where summers are humid, sensible effectiveness where winters are brutal, and frost control where wheels can ice.
+
+Downstream of recovery, the cooling coil does the deep dehumidification work, selected for a low apparatus dew point with face-and-bypass or variable geometry control so it can hold dew point across part-load conditions. Reheat brings the air back to neutral — I prefer recovered heat or heat-pump-based reheat over new energy wherever practical. The complete sequence reads as a chain: recover, cool deep, reheat to neutral, deliver. I trend supply dew point continuously, because a DOAS that drifts off its dew point is silently failing its one essential job.</p></div></div></section><section class="block" id="step-3"><div class="container"><h2>Controls and integration</h2><div class="prose"><p>DOAS controls coordinate three things: how much air, how dry, and when. Demand-controlled ventilation modulates outdoor air with occupancy — CO2 sensors in densely occupied spaces, occupancy sensors or schedules elsewhere — while never dropping below the code minimum. Dew-point control on the supply holds the latent line regardless of outdoor conditions. And integration with the terminal systems prevents fighting: the DOAS maintains ventilation and humidity baselines while zone equipment answers thermostats, with the BAS arbitrating any overlap.
+
+Commissioning a DOAS means proving the decoupling works. I verify ventilation rates at design and turndown, measure supply dew point across outdoor conditions, confirm the terminal equipment holds sensible setpoints without the DOAS&#39;s help, and test the failure modes — what happens to humidity if the DOAS trips, and how fast the BAS alarms. The owner gets trend logs proving humidity control through a humid season, which is the performance record conventional systems can never produce.
+
+• Size the DOAS from ventilation plus latent load — never from the sensible load
+• Deliver supply air dehumidified to a controlled dew point, reheated to neutral
+• Make energy recovery integral, selected for the climate&#39;s dominant penalty
+• Control on dew point and demand-controlled ventilation, not just dry-bulb temperature
+• Pair with chilled beams, VRF, fan coils, or radiant — and commission the pair as one system</p></div></div></section>
+  <section class="block"><div class="container"><h2>Which related engineering resources can help?</h2><div class="linkrow"><a href="/answers/do-i-need-a-structural-engineer/">When should I hire a structural engineer?</a><a href="/answers/what-is-a-pe-stamp/">What does a PE stamp mean?</a><a href="/answers/what-is-mep-engineering/">What is MEP engineering?</a><a href="/answers/dedicated-outdoor-air-systems-doas/">What Is a Dedicated Outdoor Air System?</a><a href="/answers/doas-design/">How Is DOAS Design Done Right?</a><a href="/answers/dedicated-outdoor-air-systems/">How Do Dedicated Outdoor Air Systems Work?</a><a href="/estimate">Get an engineering estimate</a><a href="/services/mep/">Engineering service for this question</a><a href="/metros/">Metro engineering guides</a><a href="/locations/">Verified service areas</a></div></div></section>
+  <section class="block"><div class="container"><h2>What else do project teams ask?</h2><div class="faq"><details><summary>How is a DOAS different from a conventional VAV system?</summary><div class="a">A conventional VAV air handler mixes outdoor ventilation air with recirculated room air and uses that single airstream for both ventilation and sensible cooling, which forces compromises — especially on humidity, since the coil must satisfy the thermostat first and dehumidification happens only incidentally. A DOAS separates the jobs: one unit delivers exactly the required ventilation air, dried to a controlled dew point, and independent zone equipment handles sensible temperature. The result is precise humidity control, smaller ductwork, and no more overcooled, clammy spaces on mild humid days.</div></details><details><summary>What supply air temperature should a DOAS deliver?</summary><div class="a">Typically neutral — around 60 to 65°F — after dehumidifying to a low dew point in the mid-50s or lower. The sequence is cool deep to wring out moisture, then reheat to neutral so the ventilation air doesn&#39;t add unwanted cooling to the zones. Reheat energy is minimized with energy recovery doing most of the work and, where codes allow, recovered condenser heat. Supplying cold saturated air directly would overcool zones and risk condensation at diffusers; supplying warm humid air would defeat the purpose.</div></details><details><summary>What energy recovery works best with a DOAS?</summary><div class="a">Enthalpy wheels are the most common choice because they recover both sensible heat and moisture, which matters enormously when the unit&#39;s job is latent removal — the wheel pre-dries incoming outdoor air using exhaust air energy before the cooling coil sees it. Where cross-contamination between exhaust and supply is a concern, such as labs or healthcare, I use runaround loops or heat pipes that keep the airstreams fully separated at some efficiency cost. Fixed-plate exchangers suit smaller units. I select on effectiveness, frost control, maintenance access, and whether the airstreams may ever mix.</div></details><details><summary>Can a DOAS be added to an existing building?</summary><div class="a">Yes, and it&#39;s one of the best HVAC retrofits for buildings with chronic humidity problems. The DOAS unit — often a rooftop unit — supplies ventilation air to the existing zones, and the existing equipment is relieved of the latent load it was never handling well. The retrofit needs a path for the dedicated ventilation ductwork, which is smaller than conventional ductwork but still real, and controls integration so the old and new systems coordinate. I evaluate the existing equipment&#39;s remaining life honestly: sometimes the DOAS pairs with it for years, sometimes replacement is the better investment.</div></details></div></div></section>
+  <section class="ctaband"><div class="container"><h2>Ready to discuss your engineering scope?</h2><p>Share the project address, current records, requested deliverable, authority information, and schedule. Apex Grid confirms professional responsibility, availability, and scope before work begins.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
+  </main>
+<footer><div class="container">
+   <div class="fgrid">
+    <div>
+      <a class="brand" href="/" style="margin-bottom:18px"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;color:hsl(0 72% 48%)"><path d="M50 8L8 88h12l30-58 30 58h12L50 8z" fill="currentColor"/><path d="M50 40L30 78h8l12-24 12 24h8L50 40z" fill="currentColor" opacity="0.7"/><path d="M32 74h36v6H32z" fill="currentColor"/></svg><span>APEX GRID</span></a>
+       <p style="color:var(--muted);max-width:340px;margin-top:16px">Engineering, Architecture, and General Contracting under one organization—from concept and permit documents through construction delivery.</p>
+       <p style="color:var(--muted);max-width:340px;margin-top:12px">Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction.</p>
+    </div>
+     <div><h4>Firm</h4><ul><li><a href="/about">About Us</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/resources">Resources</a></li><li><a href="/blog/">Blog</a></li><li><a href="/south-africa/">South Africa Insights</a></li><li><a href="/locations/">Service Areas</a></li><li><a href="/licensing-service-coverage/">Licensing &amp; Coverage</a></li><li><a href="/contact">Contact</a></li></ul></div>
+    <div><h4>Services</h4><ul><li><a href="/services/mep">MEP Engineering</a></li><li><a href="/services/structural">Structural Design</a></li><li><a href="/services/civil">Civil Engineering</a></li><li><a href="/architecture/">Architectural Design</a></li><li><a href="/general-contracting/">General Contracting</a></li></ul></div>
+    <div><h4>Disciplines</h4><ul><li><a href="/structural-engineering/">Structural Engineering</a></li><li><a href="/mep-engineering/">MEP Engineering</a></li><li><a href="/civil-engineering/">Civil Engineering</a></li><li><a href="/mechanical-engineering/">Mechanical (HVAC)</a></li><li><a href="/electrical-engineering/">Electrical Engineering</a></li><li><a href="/plumbing-engineering/">Plumbing Engineering</a></li></ul></div>
+     <div><h4>Business-provided contact</h4><ul><li>Operating / contact address<br/>22475 E Quintero Rd<br/>Queen Creek, AZ 85142</li><li><a href="mailto:info@apexgrideng.com">info@apexgrideng.com</a></li><li><a href="tel:+14804900064">(480) 490-0064</a></li></ul></div>
+  </div>
+  <div class="fbottom"><p>© 2025 Apex Grid Engineering. All rights reserved.</p><p><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></p></div>
+</div></footer>
+</body>
+</html>
