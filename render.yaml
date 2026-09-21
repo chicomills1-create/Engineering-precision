@@ -24,9 +24,9 @@ services:
       export npm_config_prefix="$HOME/.npm-global" &&
       npm install -g pnpm@9 --no-audit --no-fund >/dev/null 2>&1 &&
       PNPM_CJS="$HOME/.npm-global/lib/node_modules/pnpm/bin/pnpm.cjs" &&
-      node "$PNPM_CJS" install --no-frozen-lockfile &&
-      node "$PNPM_CJS" --filter @workspace/api-server run build &&
-      node "$PNPM_CJS" --filter @workspace/apex-grid run build
+      NODE_ENV=development node "$PNPM_CJS" install --no-frozen-lockfile &&
+      NODE_OPTIONS="--max-old-space-size=4096" node "$PNPM_CJS" --filter @workspace/api-server run build &&
+      NODE_OPTIONS="--max-old-space-size=4096" node "$PNPM_CJS" --filter @workspace/apex-grid run build
     startCommand: pnpm --filter @workspace/api-server run start
     healthCheckPath: /
     envVars:
