@@ -2,12 +2,6 @@ import { and, eq, gte, inArray, isNull, lt, sql } from "drizzle-orm";
 import {
   db,
   campaignsTable,
-  campaignsTable,
-  campaignsTable,
-  campaignsTable,
-  campaignsTable,
-  campaignsTable,
-  campaignsTable,
   outreachDeliveryEventsTable,
   outreachMessagesTable,
   outreachRepliesTable,
@@ -271,6 +265,154 @@ export async function enqueueSeptemberClickerFollowUps(): Promise<HotLeadQueueRe
       scheduledAt: SEND_AT.toISOString(),
       createdEmails,
       skippedEmails,
+    };
+  });
+}
+
+export type BulkApproveNeedsReviewFollowUpsSkip = {
+  email: string;
+  reason: string;
+};
+
+export type BulkApproveNeedsReviewFollowUpsResult = {
+  candidates: number;
+  approved: number;
+  skipped: BulkApproveNeedsReviewFollowUpsSkip[];
+  scheduledAtDistribution: {
+    byDay: Record<string, number>;
+    min: string | null;
+    max: string | null;
+  };
+};
+
+export async function bulkApproveNeedsReviewFollowUps(
+  dryRun: boolean,
+): Promise<BulkApproveNeedsReviewFollowUpsResult> {
+  return db.transaction(async (tx) => {
+    await tx.execute(sql`
+      select pg_advisory_xact_lock(
+        hashtextextended('admin:bulk-approve-needs-review-follow-ups', 0)
+      )
+    `);
+
+    const candidateRows = await tx.select()
+      .from(outreachMessagesTable)
+      .where(and(
+        eq(outreachMessagesTable.status, "needs_review"),
+        eq(outreachMessagesTable.sequenceNumber, 2),
+        isNull(outreachMessagesTable.sentAt),
+        isNull(outreachMessagesTable.providerMessageId),
+        isNull(outreachMessagesTable.providerReconciliationKey),
+      ));
+
+    let approved = 0;
+    const skipped: BulkApproveNeedsReviewFollowUpsSkip[] = [];
+    const scheduledTimes: Date[] = [];
+
+    for (const message of candidateRows) {
+      const [prospect] = await tx.select()
+        .from(prospectsTable)
+        .where(eq(prospectsTable.id, message.prospectId))
+        .limit(1);
+      if (!prospect) {
+        skipped.push({ email: "(missing email)", reason: "missing_prospect" });
+        continue;
+      }
+      const email = prospect.contactEmail ?? "(missing email)";
+
+      if (message.campaignId == null) {
+        skipped.push({ email, reason: "missing_campaign" });
+        continue;
+      }
+      const [campaign] = await tx.select()
+        .from(campaignsTable)
+        .where(eq(campaignsTable.id, message.campaignId))
+        .limit(1);
+      if (!campaign) {
+        skipped.push({ email, reason: "missing_campaign" });
+        continue;
+      }
+
+      let eligibleEmail: string;
+      try {
+        eligibleEmail = assertOutreachEligibilityBase(
+          message,
+          prospect,
+          campaign,
+          { requireApprovedMessage: false, requireApprovedProspect: false },
+        );
+      } catch (error) {
+        skipped.push({
+          email,
+          reason: error instanceof Error ? error.message : "Message is not eligible for outreach",
+        });
+        continue;
+      }
+
+      const [suppression] = await tx.select({ id: outreachSuppressionsTable.id })
+        .from(outreachSuppressionsTable)
+        .where(eq(outreachSuppressionsTable.email, eligibleEmail))
+        .limit(1);
+      if (suppression) {
+        skipped.push({ email, reason: "suppressed" });
+        continue;
+      }
+
+      const engagementAt = await getVerifiedInitialEngagementAt(message);
+      if (!engagementAt) {
+        skipped.push({ email, reason: "no_verified_engagement" });
+        continue;
+      }
+
+      const scheduledAt = getFollowUpScheduledAt(2, engagementAt);
+      if (!scheduledAt) {
+        skipped.push({ email, reason: "no_verified_engagement" });
+        continue;
+      }
+      const template = approvedOutreachFollowUpMessages(prospect.contactName ?? "there")[0]!;
+
+      if (dryRun) {
+        scheduledTimes.push(scheduledAt);
+        approved += 1;
+        continue;
+      }
+
+      const updated = await tx.update(outreachMessagesTable)
+        .set({
+          status: "approved",
+          scheduledAt,
+          subject: template.subject,
+          body: template.body,
+        })
+        .where(and(
+          eq(outreachMessagesTable.id, message.id),
+          eq(outreachMessagesTable.status, "needs_review"),
+        ))
+        .returning({ id: outreachMessagesTable.id });
+      if (updated.length) {
+        scheduledTimes.push(scheduledAt);
+        approved += updated.length;
+      }
+    }
+
+    const byDay: Record<string, number> = {};
+    for (const scheduledAt of scheduledTimes) {
+      const day = scheduledAt.toISOString().slice(0, 10);
+      byDay[day] = (byDay[day] ?? 0) + 1;
+    }
+    const sortedTimes = scheduledTimes
+      .map((scheduledAt) => scheduledAt.toISOString())
+      .sort();
+
+    return {
+      candidates: candidateRows.length,
+      approved,
+      skipped,
+      scheduledAtDistribution: {
+        byDay,
+        min: sortedTimes[0] ?? null,
+        max: sortedTimes.at(-1) ?? null,
+      },
     };
   });
 }
