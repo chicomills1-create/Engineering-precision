@@ -1,13 +1,22 @@
-import { and, eq, gte, inArray, lt, sql } from "drizzle-orm";
+import { and, eq, gte, inArray, isNull, lt, sql } from "drizzle-orm";
 import {
   db,
+  campaignsTable,
+  campaignsTable,
+  campaignsTable,
+  campaignsTable,
+  campaignsTable,
+  campaignsTable,
+  campaignsTable,
   outreachDeliveryEventsTable,
   outreachMessagesTable,
   outreachRepliesTable,
   outreachSuppressionsTable,
   prospectsTable,
 } from "@workspace/db";
-import { hotLeadFollowUpMessages } from "./verifiedOutreachBatch";
+import { approvedOutreachFollowUpMessages, hotLeadFollowUpMessages } from "./verifiedOutreachBatch";
+import { assertOutreachEligibilityBase, getFollowUpScheduledAt } from "./outreachEligibility";
+import { getVerifiedInitialEngagementAt } from "./outreachSequence";
 
 const CLICK_START = new Date("2026-09-01T07:00:00.000Z");
 const CLICK_END = new Date("2026-09-13T07:00:00.000Z");
