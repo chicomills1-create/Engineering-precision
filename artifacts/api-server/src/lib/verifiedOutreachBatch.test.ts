@@ -278,9 +278,15 @@ If your team is overloaded with MEP, structural, or civil projects and racing ag
 
 At Apex Grid Engineering, we provide on-demand engineering support to help firms clear backlogs and meet delivery timelines — without the hassle of hiring. We’re a veteran-owned firm, licensed in 49 states.
 
-If you have a project that needs extra bandwidth, just reply with the details or drawings. We’ll review it and send you a tailored proposal.`,
+If you have a project that needs extra bandwidth, just reply with the details or drawings. We’ll review it and send you a tailored proposal.
+
+Need a PE stamp? We got you — we can review and stamp your finished design: https://apexgrideng.com/pe-stamp/`,
   );
-  assert.doesNotMatch(body, /Click the URL|https:\/\/apexgrideng\.com/i);
+  assert.match(
+    body,
+    /Need a PE stamp\? We got you — we can review and stamp your finished design: https:\/\/apexgrideng\.com\/pe-stamp\//,
+  );
+  assert.doesNotMatch(body, /Click the URL/i);
   assert.doesNotMatch(body, /15.?minute|15 min|schedule|book.*call/i);
   assert.doesNotMatch(body, /plan-review comment|field condition|waiting on engineering answers/i);
   // The estimator CTA lives outside the body (and was removed from the

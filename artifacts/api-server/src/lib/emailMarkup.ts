@@ -4,6 +4,7 @@ const CONTACT_NAME = "Jeremy Mills";
 const CONTACT_TITLE = "CEO · USAF Veteran";
 const CONTACT_PHONE = "480-490-0064";
 const COMPANY_SITE = "https://apexgrideng.com";
+const PE_STAMP_URL = `${COMPANY_SITE}/pe-stamp/`;
 const MAILING_ADDRESS_LINE_1 = "22475 E Quintero Rd";
 const MAILING_ADDRESS_LINE_2 = "Queen Creek, AZ 85142";
 // Email clients inconsistently render SVGs, so use the deployed PNG logo.
@@ -42,7 +43,15 @@ function renderBodyHtml(body: string): string {
     .trim()
     .split(/\n{2,}/)
     .filter(Boolean)
-    .map((paragraph) => `<p style="margin:0 0 18px;color:#273449;font-size:16px;line-height:1.65;word-break:break-word;overflow-wrap:anywhere;">${escapeEmailHtml(paragraph).replaceAll("\n", "<br>")}</p>`)
+    .map((paragraph) => {
+      const html = escapeEmailHtml(paragraph)
+        .replaceAll(
+          PE_STAMP_URL,
+          `<a href="${PE_STAMP_URL}" style="color:#245b8f;text-decoration:underline;">${PE_STAMP_URL}</a>`,
+        )
+        .replaceAll("\n", "<br>");
+      return `<p style="margin:0 0 18px;color:#273449;font-size:16px;line-height:1.65;word-break:break-word;overflow-wrap:anywhere;">${html}</p>`;
+    })
     .join("");
 }
 
