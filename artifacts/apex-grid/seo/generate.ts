@@ -5923,7 +5923,7 @@ async function main() {
   ], "answers");
   fs.writeFileSync(path.join(phase0AnswersDir, "index.html"), answerHubHtml);
   pages++;
-  for (const answerPage of PHASE0_AEO_PAGES) {
+  for (const answerPage of ALL_AEO_PAGES) {
     assertSlug(answerPage.slug);
     const dir = path.join(phase0AnswersDir, answerPage.slug);
     fs.mkdirSync(dir, { recursive: true });
