@@ -9036,7 +9036,7 @@ async function main() {
     assertSlug(answerPage.slug);
     const dir = path.join(phase0AnswersDir, answerPage.slug);
     fs.mkdirSync(dir, { recursive: true });
-    const html = phase0AeoPage(answerPage);
+    const html = phase0AeoPage(answerPage).replace(/[ \t]+\n/g, "\n");
     assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
     if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
       throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);

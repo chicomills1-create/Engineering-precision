@@ -72,7 +72,7 @@ export const WAVE_JO_ANSWER_PAGES: Phase0AeoPage[] = [
       },
       {
         question: "Can one PE seal all three MEP disciplines in Georgia?",
-        answer: "A Georgia PE may seal only work within their area of competence and responsible charge. In practice, MEP firms staff or coordinate licensed engineers across mechanical, electrical, and plumbing as the project requires, and the sealing engineer takes responsible charge of the design being sealed — meaning they directed or personally verified the engineering. What is not acceptable is sealing another discipline's design without a genuine review. Our process assigns responsible charge clearly on every project so the seal always reflects real engineering oversight of the systems it covers.",
+        answer: "A Georgia PE may seal only work within their area of competence and responsible charge. In practice, MEP firms staff or coordinate licensed engineers across mechanical, electrical, and plumbing as the project requires, and the sealing engineer takes responsible charge of the design being sealed — meaning they directed or personally verified the engineering. What is not acceptable is sealing another discipline's design without a genuine review. For a given project, Apex Grid assigns responsible charge by discipline so each seal reflects documented review and real engineering oversight of the systems it covers.",
       },
       {
         question: "What should be in the MEP review package for an Atlanta permit?",
