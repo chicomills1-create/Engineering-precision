@@ -1,0 +1,200 @@
+# Render blueprint — Apex Grid Engineering (Replit exit)
+# Repo: chicomills1-create/Engineering-precision | branch: migration/replit-exit-base
+#
+# Topology mirrors the Replit Reserved VM:
+#   - ONE web service: Express API + static frontend (artifacts/apex-grid/dist/public)
+#     + SendGrid webhooks. In-process schedulers (clientJobUploadCleanup,
+#     cityEvidenceScheduler, outreachWorker) run here too.
+#   - TWO cron jobs: the outreach daily runner at 08:00 and 08:30 Phoenix.
+#     Phoenix is UTC-7 year-round (no DST) -> 15:00 and 15:30 UTC.
+#   - Postgres STAYS on Neon (ep-snowy-resonance-ax38m1ci.c-4.us-east-2.aws.neon.tech/neondb).
+#     No Render database is provisioned. DATABASE_URL is filled in the dashboard.
+#
+# Replit-specific vars (REPLIT_DEV_DOMAIN, REPLIT_DOMAINS) were intentionally
+# dropped per the rebuild-don't-preserve migration principle.
+# PUBLIC_SITE_URL must be updated to the new host / apexgrideng.com after DNS cutover.
+
+services:
+  - type: web
+    name: apex-grid-app
+    runtime: node
+    plan: starter
+    region: ohio
+    buildCommand: >-
+      corepack enable &&
+      corepack prepare pnpm@9 --activate &&
+      pnpm install &&
+      pnpm --filter @workspace/api-server run build &&
+      pnpm --filter @workspace/apex-grid run build
+    startCommand: pnpm --filter @workspace/api-server run start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: NODE_ENV
+        value: production
+      # --- Postgres (Neon, unchanged) ---
+      - key: DATABASE_URL
+        sync: false
+      # --- Auth / sessions ---
+      - key: CLERK_PUBLISHABLE_KEY
+        sync: false
+      - key: CLERK_SECRET_KEY
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
+      - key: ADMIN_EMAILS
+        sync: false
+      # --- Outreach / SendGrid ---
+      - key: OUTREACH_AUTOMATION_ENABLED
+        sync: false
+      - key: OUTREACH_CAMPAIGN_KEY
+        sync: false
+      - key: OUTREACH_CONFIG_BOOTSTRAP_ENABLED
+        sync: false
+      - key: OUTREACH_CONFIG_V2_BOOTSTRAP_ENABLED
+        sync: false
+      - key: OUTREACH_DISCOVERY_DAILY_CAP
+        sync: false
+      - key: OUTREACH_FROM_EMAIL
+        sync: false
+      - key: OUTREACH_REPLY_PATH_VERIFIED
+        sync: false
+      - key: OUTREACH_REPLY_TO_EMAIL
+        sync: false
+      - key: OUTREACH_REPLY_WEBHOOK_TOKEN
+        sync: false
+      - key: OUTREACH_RESEARCH_AUTOMATION_ENABLED
+        sync: false
+      - key: OUTREACH_SEED_VERIFIED_BATCH
+        sync: false
+      - key: OUTREACH_VERIFICATION_BATCH_CAP
+        sync: false
+      - key: SENDGRID_DEDICATED_API_KEY
+        sync: false
+      - key: SENDGRID_EVENT_FORWARD_URL
+        sync: false
+      - key: SENDGRID_EVENT_PATH_VERIFIED
+        sync: false
+      - key: SENDGRID_EVENT_WEBHOOK_PUBLIC_KEY
+        sync: false
+      - key: SENDGRID_ISOLATION_VERIFIED
+        sync: false
+      - key: SENDGRID_SUBUSER_USERNAME
+        sync: false
+      - key: SENDGRID_SUBUSER_VERIFIED
+        sync: false
+      - key: UNSUBSCRIBE_SECRET
+        sync: false
+      # --- Notifications ---
+      - key: LEAD_NOTIFY_EMAIL
+        sync: false
+      - key: LEAD_NOTIFY_FROM_EMAIL
+        sync: false
+      - key: STATUS_NOTIFICATION_FROM_EMAIL
+        sync: false
+      - key: STATUS_NOTIFICATION_REPLY_TO_EMAIL
+        sync: false
+      # --- Site ---
+      - key: PUBLIC_SITE_URL
+        sync: false
+      - key: TURNSTILE_SECRET_KEY
+        sync: false
+      - key: LOG_LEVEL
+        sync: false
+      # --- LinkedIn (official program) ---
+      - key: LINKEDIN_API_VERSION
+        sync: false
+      - key: LINKEDIN_OFFICIAL_ACCESS_TOKEN
+        sync: false
+      - key: LINKEDIN_OFFICIAL_CLIENT_SECRET
+        sync: false
+      - key: LINKEDIN_OFFICIAL_ORGANIZATION_ID
+        sync: false
+      - key: LINKEDIN_OFFICIAL_PROVIDER_APPROVED
+        sync: false
+      - key: LINKEDIN_OFFICIAL_PROVIDER_ENABLED
+        sync: false
+      - key: LINKEDIN_OFFICIAL_SCOPES
+        sync: false
+      # --- Misc ---
+      - key: GOOGLE_SERVICE_ACCOUNT_KEY
+        sync: false
+      - key: PRIVATE_OBJECT_DIR
+        sync: false
+      - key: PUBLIC_OBJECT_SEARCH_PATHS
+        sync: false
+
+  # Outreach daily runner — 08:00 Phoenix (slot 1)
+  - type: cron
+    name: apex-outreach-0800
+    runtime: node
+    plan: starter
+    region: ohio
+    schedule: "0 15 * * *"
+    buildCommand: >-
+      corepack enable &&
+      corepack prepare pnpm@9 --activate &&
+      pnpm install &&
+      pnpm --filter @workspace/api-server run build
+    startCommand: pnpm --filter @workspace/api-server run outreach:daily
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: OUTREACH_CAMPAIGN_KEY
+        sync: false
+      - key: SENDGRID_DEDICATED_API_KEY
+        sync: false
+      - key: SENDGRID_SUBUSER_USERNAME
+        sync: false
+      - key: SENDGRID_SUBUSER_VERIFIED
+        sync: false
+      - key: OUTREACH_FROM_EMAIL
+        sync: false
+      - key: OUTREACH_REPLY_TO_EMAIL
+        sync: false
+      - key: UNSUBSCRIBE_SECRET
+        sync: false
+      - key: LOG_LEVEL
+        sync: false
+
+  # Outreach daily runner — 08:30 Phoenix (slot 2)
+  - type: cron
+    name: apex-outreach-0830
+    runtime: node
+    plan: starter
+    region: ohio
+    schedule: "30 15 * * *"
+    buildCommand: >-
+      corepack enable &&
+      corepack prepare pnpm@9 --activate &&
+      pnpm install &&
+      pnpm --filter @workspace/api-server run build
+    startCommand: pnpm --filter @workspace/api-server run outreach:daily
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: OUTREACH_CAMPAIGN_KEY
+        sync: false
+      - key: SENDGRID_DEDICATED_API_KEY
+        sync: false
+      - key: SENDGRID_SUBUSER_USERNAME
+        sync: false
+      - key: SENDGRID_SUBUSER_VERIFIED
+        sync: false
+      - key: OUTREACH_FROM_EMAIL
+        sync: false
+      - key: OUTREACH_REPLY_TO_EMAIL
+        sync: false
+      - key: UNSUBSCRIBE_SECRET
+        sync: false
+      - key: LOG_LEVEL
+        sync: false
