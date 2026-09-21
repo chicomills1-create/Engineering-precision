@@ -443,12 +443,51 @@ async function getRegularLaneCountsForWindow(
   return { direct: regular.length - publicCount, public: publicCount, hotMarket };
 }
 
+export type PreparationInvocationAccounting = {
+  state: "skipped" | "completed" | "failed";
+  prepared: number;
+  windowQueued: number;
+  skippedBecause?: string;
+  error?: string;
+};
+
+export function getPreparationInvocationAccounting(input:
+  | { state: "completed"; insertedThisRun: number; windowQueued: number }
+  | { state: "skipped"; windowQueued: number; runId: number; startedAt: Date }
+  | { state: "failed"; error: unknown }
+): PreparationInvocationAccounting {
+  if (input.state === "completed") {
+    return {
+      state: "completed",
+      prepared: input.insertedThisRun,
+      windowQueued: input.windowQueued,
+    };
+  }
+  if (input.state === "skipped") {
+    return {
+      state: "skipped",
+      prepared: 0,
+      windowQueued: input.windowQueued,
+      skippedBecause: `run ${input.runId} already claimed at ${input.startedAt.toISOString()}`,
+    };
+  }
+  return {
+    state: "failed",
+    prepared: 0,
+    windowQueued: 0,
+    error: input.error instanceof Error ? input.error.message : String(input.error),
+  };
+}
+
 export async function prepareNextPhoenixOutreach(
   now = new Date(),
   target?: PhoenixPreparationTarget,
 ): Promise<{
   state: "skipped" | "completed" | "failed";
   prepared: number;
+  windowQueued: number;
+  skippedBecause?: string;
+  error?: string;
   directPrepared: number;
   publicPrepared: number;
   directShortfall: number;
@@ -458,7 +497,9 @@ export async function prepareNextPhoenixOutreach(
 }> {
   if (!target && !isPhoenixPreparationWindowOpen(now)) {
     return {
-      state: "skipped", prepared: 0, directPrepared: 0,
+      state: "skipped", prepared: 0, windowQueued: 0,
+      skippedBecause: "Phoenix preparation window is not open",
+      directPrepared: 0,
       publicPrepared: 0, directShortfall: 0, publicShortfall: 0,
       skipped: 0, shortfall: 0,
     };
@@ -473,7 +514,8 @@ export async function prepareNextPhoenixOutreach(
   const runId = await claimPreparationRun(targetDate, now, targetCount);
   if (!runId) {
     const [existing] = await db.select({
-      prepared: outreachPreparationRunsTable.preparedCount,
+      id: outreachPreparationRunsTable.id,
+      startedAt: outreachPreparationRunsTable.startedAt,
       skipped: outreachPreparationRunsTable.skippedCount,
       shortfall: outreachPreparationRunsTable.shortfallCount,
     }).from(outreachPreparationRunsTable)
@@ -482,9 +524,21 @@ export async function prepareNextPhoenixOutreach(
     const laneCounts = await getRegularLaneCountsForWindow(scheduledAt);
     const verifiedPrepared = laneCounts.direct + laneCounts.public + laneCounts.hotMarket;
     const verifiedShortfall = Math.max(0, targetCount - verifiedPrepared);
+    const accounting = existing
+      ? getPreparationInvocationAccounting({
+        state: "skipped",
+        windowQueued: verifiedPrepared,
+        runId: existing.id,
+        startedAt: existing.startedAt,
+      })
+      : {
+        state: "skipped" as const,
+        prepared: 0,
+        windowQueued: verifiedPrepared,
+        skippedBecause: `run for ${targetDate} already claimed`,
+      };
     return {
-      state: "skipped",
-      prepared: existing?.prepared ?? 0,
+      ...accounting,
       directPrepared: laneCounts.direct,
       publicPrepared: laneCounts.public,
       directShortfall: Math.max(
@@ -548,7 +602,7 @@ export async function prepareNextPhoenixOutreach(
       && !claimedProspects.has(prospect.id));
     const campaignsByProspect = new Map(rows.map((row) => [row.prospect.id, row.campaign.id]));
     const campaignByProspect = new Map(rows.map((row) => [row.prospect.id, row.campaign]));
-    const prepared = await db.transaction(async (tx) => {
+    const preparation = await db.transaction(async (tx) => {
       await tx.execute(sql`select ${outreachPreparationRunsTable.id}
         from ${outreachPreparationRunsTable}
         where ${outreachPreparationRunsTable.id} = ${runId}
@@ -628,6 +682,7 @@ export async function prepareNextPhoenixOutreach(
       const selectedForRun = catchUpEnrolling
         ? selected.slice(0, catchUpRemaining)
         : selected;
+      let insertedThisRun = 0;
       for (const prospect of selectedForRun) {
         if (usedProspects.has(prospect.id)) continue;
         const candidateEmail = prospect.contactEmail?.trim().toLowerCase();
@@ -723,6 +778,7 @@ export async function prepareNextPhoenixOutreach(
           scheduledAt,
           catchUpCohortId,
         }).returning({ id: outreachMessagesTable.id });
+        insertedThisRun += 1;
         if (message && catchUpCohortId) {
           await tx.insert(outreachCatchUpReservationsTable).values({
             cohortId: catchUpCohortId,
@@ -748,10 +804,13 @@ export async function prepareNextPhoenixOutreach(
       const slots = await tx.select({ id: outreachPreparationSlotsTable.id })
         .from(outreachPreparationSlotsTable)
         .where(eq(outreachPreparationSlotsTable.targetDate, targetDate));
-      return Math.min(
-        slots.length + untrackedTargetInitials.length,
-         targetCount,
-      );
+      return {
+        insertedThisRun,
+        windowQueued: Math.min(
+          slots.length + untrackedTargetInitials.length,
+          targetCount,
+        ),
+      };
     });
     const preparedInitials = await db.select({
       message: outreachMessagesTable,
@@ -768,7 +827,7 @@ export async function prepareNextPhoenixOutreach(
     for (const row of preparedInitials) {
       await ensureApprovedFollowUpSequence(row.message, { contactName: row.contactName });
     }
-    const skipped = rows.length - prepared;
+    const skipped = rows.length - preparation.insertedThisRun;
     const laneCounts = await getRegularLaneCountsForWindow(scheduledAt);
     // This service owns only the Named and Public lanes. Hot Market and Hot
     // Lead are prepared independently and must not inflate this shortfall.
@@ -776,12 +835,16 @@ export async function prepareNextPhoenixOutreach(
     const regularShortfall = Math.max(0, namedAvailable - laneCounts.direct)
       + Math.max(0, laneConfig.publicLimit - laneCounts.public);
     await db.update(outreachPreparationRunsTable).set({
-      status: "completed", preparedCount: prepared, skippedCount: skipped,
+      status: "completed", preparedCount: preparation.insertedThisRun, skippedCount: skipped,
       shortfallCount: regularShortfall, completedAt: new Date(), error: null,
     }).where(eq(outreachPreparationRunsTable.id, runId));
-    return {
+    const accounting = getPreparationInvocationAccounting({
       state: "completed",
-      prepared,
+      insertedThisRun: preparation.insertedThisRun,
+      windowQueued: preparation.windowQueued,
+    });
+    return {
+      ...accounting,
       directPrepared: laneCounts.direct,
       publicPrepared: laneCounts.public,
       directShortfall: Math.max(
@@ -802,8 +865,10 @@ export async function prepareNextPhoenixOutreach(
       shortfallCount: getNamedHotMarketSharedLimit(laneConfig) + laneConfig.publicLimit,
       completedAt: new Date(),
     }).where(eq(outreachPreparationRunsTable.id, runId));
+    const accounting = getPreparationInvocationAccounting({ state: "failed", error: message });
     return {
-      state: "failed", prepared: 0, directPrepared: 0, publicPrepared: 0,
+      ...accounting,
+      directPrepared: 0, publicPrepared: 0,
       directShortfall: getNamedHotMarketSharedLimit(laneConfig),
       publicShortfall: laneConfig.publicLimit,
        skipped: 0, shortfall: getNamedHotMarketSharedLimit(laneConfig) + laneConfig.publicLimit,

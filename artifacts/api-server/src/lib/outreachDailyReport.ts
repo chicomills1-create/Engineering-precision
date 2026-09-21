@@ -25,14 +25,31 @@ export function buildDailyOutreachReport(
       `Public prepared: ${result.publicPrepared}`,
       `Public shortfall: ${result.publicShortfall}`,
       `Public target: ${result.publicTarget ?? result.publicPrepared + result.publicShortfall}`,
-      `Regular prepared total: ${result.regularPrepared}`,
+      `Regular preparation state: ${result.regularState}`,
+      `Regular prepared this run: ${result.regularPreparedThisRun}`,
+      `Regular queued for window: ${result.regularWindowQueued}`,
+      ...(result.regularState === "skipped" && result.regularSkippedBecause
+        ? [`Skipped because: ${result.regularSkippedBecause}`]
+        : []),
+      ...(result.regularError ? [`Preparation error: ${result.regularError}`] : []),
       `Regular shortfall: ${result.regularShortfall}`,
-      `Hot Market prepared this run: ${result.hotMarketPrepared}`,
-      `Hot Market scheduled total: ${result.hotMarketScheduled}`,
+      `Hot Market preparation state: ${result.hotMarketState}`,
+      `Hot Market prepared this run: ${result.hotMarketPreparedThisRun}`,
+      `Hot Market queued for window: ${result.hotMarketWindowQueued}`,
+      ...(result.hotMarketState === "skipped" && result.hotMarketSkippedBecause
+        ? [`Hot Market skipped because: ${result.hotMarketSkippedBecause}`]
+        : []),
+      ...(result.hotMarketError ? [`Hot Market preparation error: ${result.hotMarketError}`] : []),
       `Hot Market shortfall: ${result.hotMarketShortfall}`,
       `Hot Market target: ${result.hotMarketTarget ?? result.hotMarketScheduled + result.hotMarketShortfall}`,
       `Hot Lead target: ${result.hotLeadTarget ?? 100}`,
-      `Hot Lead prepared: ${result.hotLeadPrepared ?? 0}`,
+      `Hot Lead preparation state: ${result.hotLeadState}`,
+      `Hot Lead prepared this run: ${result.hotLeadPreparedThisRun}`,
+      `Hot Lead queued for window: ${result.hotLeadWindowQueued}`,
+      ...(result.hotLeadState === "skipped" && result.hotLeadSkippedBecause
+        ? [`Hot Lead skipped because: ${result.hotLeadSkippedBecause}`]
+        : []),
+      ...(result.hotLeadError ? [`Hot Lead preparation error: ${result.hotLeadError}`] : []),
       `Hot Lead shortfall: ${result.hotLeadShortfall ?? 100}`,
       `Top-up verified: ${result.topUpPrepared ?? 0}`,
       `Top-up verified shortfall: ${result.topUpShortfall ?? 0}`,

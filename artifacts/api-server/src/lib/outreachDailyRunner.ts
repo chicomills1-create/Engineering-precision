@@ -82,6 +82,9 @@ export type DailyOutreachRunnerOperations = {
 export type DailyOutreachPreparationResult = {
   state: "skipped" | "completed" | "failed";
   prepared: number;
+  windowQueued?: number;
+  error?: string;
+  skippedBecause?: string;
   directPrepared: number;
   publicPrepared: number;
   directShortfall: number;
@@ -93,6 +96,9 @@ export type DailyHotMarketPreparationResult = {
   state: "skipped" | "completed" | "failed";
   prepared: number;
   totalScheduled: number;
+  windowQueued?: number;
+  error?: string;
+  skippedBecause?: string;
   shortfall: number;
 };
 
@@ -100,6 +106,9 @@ export type DailyHotLeadPreparationResult = {
   state: "skipped" | "completed" | "failed";
   prepared: number;
   totalScheduled: number;
+  windowQueued?: number;
+  error?: string;
+  skippedBecause?: string;
   shortfall: number;
 };
 
@@ -124,12 +133,22 @@ export type DailyOutreachRunnerResult = {
   stopped: number;
   unresolved: number;
   regularPrepared: number;
+  regularState: "skipped" | "completed" | "failed";
+  regularPreparedThisRun: number;
+  regularWindowQueued: number;
+  regularError?: string;
+  regularSkippedBecause?: string;
   directPrepared: number;
   publicPrepared: number;
   directShortfall: number;
   publicShortfall: number;
   regularShortfall: number;
   hotMarketPrepared: number;
+  hotMarketState: "skipped" | "completed" | "failed";
+  hotMarketPreparedThisRun: number;
+  hotMarketWindowQueued: number;
+  hotMarketError?: string;
+  hotMarketSkippedBecause?: string;
   hotMarketScheduled: number;
   hotMarketShortfall: number;
   waitMs: number;
@@ -141,6 +160,11 @@ export type DailyOutreachRunnerResult = {
   hotMarketTarget?: number;
   hotLeadTarget?: number;
   hotLeadPrepared?: number;
+  hotLeadState: "skipped" | "completed" | "failed";
+  hotLeadPreparedThisRun: number;
+  hotLeadWindowQueued: number;
+  hotLeadError?: string;
+  hotLeadSkippedBecause?: string;
   hotLeadShortfall?: number;
   topUpPrepared?: number;
   topUpShortfall?: number;
@@ -231,15 +255,20 @@ export async function runDailyOutreachOnce(
   const regularPreparation = await operations.prepareRegularOutreach();
   // Hot-market contacts are selected by regular preparation as part of the
   // unified verified pool. The former dedicated lane must not stage extras.
-  const hotMarketPreparation = {
+  const hotMarketPreparation: DailyHotMarketPreparationResult = {
     state: "skipped" as const,
     prepared: 0,
     totalScheduled: 0,
+    windowQueued: 0,
+    skippedBecause: "dedicated hot-market preparation is disabled in the unified verified pool",
     shortfall: 0,
   };
   const hotLeadPreparation = operations.prepareHotLeadOutreach
     ? await operations.prepareHotLeadOutreach()
-    : { state: "skipped" as const, prepared: 0, totalScheduled: 0, shortfall: 100 };
+    : {
+      state: "skipped" as const, prepared: 0, totalScheduled: 0, windowQueued: 0,
+      skippedBecause: "hot-lead preparation operation is not configured", shortfall: 100,
+    };
   const scheduledAt = getNextPhoenixPreparationTarget(invokedAt).scheduledAt;
   const windowCount = operations.countInitialMessagesInWindow
     ? await operations.countInitialMessagesInWindow(scheduledAt)
@@ -265,16 +294,37 @@ export async function runDailyOutreachOnce(
       stopped: initial.stopped,
       unresolved: initial.unresolved + reconciled.ambiguous,
       regularPrepared: regularPreparation.prepared,
+      regularState: regularPreparation.state,
+      regularPreparedThisRun: regularPreparation.prepared,
+      regularWindowQueued: regularPreparation.windowQueued ?? regularPreparation.prepared,
+      ...(regularPreparation.error ? { regularError: regularPreparation.error } : {}),
+      ...(regularPreparation.skippedBecause
+        ? { regularSkippedBecause: regularPreparation.skippedBecause }
+        : {}),
       directPrepared: regularPreparation.directPrepared,
       publicPrepared: regularPreparation.publicPrepared,
       directShortfall: regularPreparation.directShortfall,
       publicShortfall: regularPreparation.publicShortfall,
       regularShortfall: regularPreparation.shortfall,
       hotMarketPrepared: hotMarketPreparation.prepared,
+      hotMarketState: hotMarketPreparation.state,
+      hotMarketPreparedThisRun: hotMarketPreparation.prepared,
+      hotMarketWindowQueued: hotMarketPreparation.windowQueued ?? hotMarketPreparation.totalScheduled,
+      ...(hotMarketPreparation.error ? { hotMarketError: hotMarketPreparation.error } : {}),
+      ...(hotMarketPreparation.skippedBecause
+        ? { hotMarketSkippedBecause: hotMarketPreparation.skippedBecause }
+        : {}),
       hotMarketScheduled: hotMarketPreparation.totalScheduled,
       hotMarketShortfall: hotMarketPreparation.shortfall,
        hotLeadTarget: hotLeadPreparation.totalScheduled + hotLeadPreparation.shortfall,
-       hotLeadPrepared: hotLeadPreparation.totalScheduled,
+       hotLeadPrepared: hotLeadPreparation.prepared,
+       hotLeadState: hotLeadPreparation.state,
+       hotLeadPreparedThisRun: hotLeadPreparation.prepared,
+       hotLeadWindowQueued: hotLeadPreparation.windowQueued ?? hotLeadPreparation.totalScheduled,
+       ...(hotLeadPreparation.error ? { hotLeadError: hotLeadPreparation.error } : {}),
+       ...(hotLeadPreparation.skippedBecause
+         ? { hotLeadSkippedBecause: hotLeadPreparation.skippedBecause }
+         : {}),
        hotLeadShortfall: hotLeadPreparation.shortfall,
        ...(topUp ? { topUpPrepared: topUp.prepared, topUpShortfall: topUp.shortfall } : {}),
        acquisitionErrors,
@@ -296,16 +346,37 @@ export async function runDailyOutreachOnce(
     stopped: initial.stopped + staged.stopped,
     unresolved: initial.unresolved + staged.unresolved + reconciled.ambiguous,
     regularPrepared: regularPreparation.prepared,
+    regularState: regularPreparation.state,
+    regularPreparedThisRun: regularPreparation.prepared,
+    regularWindowQueued: regularPreparation.windowQueued ?? regularPreparation.prepared,
+    ...(regularPreparation.error ? { regularError: regularPreparation.error } : {}),
+    ...(regularPreparation.skippedBecause
+      ? { regularSkippedBecause: regularPreparation.skippedBecause }
+      : {}),
     directPrepared: regularPreparation.directPrepared,
     publicPrepared: regularPreparation.publicPrepared,
     directShortfall: regularPreparation.directShortfall,
     publicShortfall: regularPreparation.publicShortfall,
     regularShortfall: regularPreparation.shortfall,
     hotMarketPrepared: hotMarketPreparation.prepared,
+    hotMarketState: hotMarketPreparation.state,
+    hotMarketPreparedThisRun: hotMarketPreparation.prepared,
+    hotMarketWindowQueued: hotMarketPreparation.windowQueued ?? hotMarketPreparation.totalScheduled,
+    ...(hotMarketPreparation.error ? { hotMarketError: hotMarketPreparation.error } : {}),
+    ...(hotMarketPreparation.skippedBecause
+      ? { hotMarketSkippedBecause: hotMarketPreparation.skippedBecause }
+      : {}),
     hotMarketScheduled: hotMarketPreparation.totalScheduled,
     hotMarketShortfall: hotMarketPreparation.shortfall,
     hotLeadTarget: hotLeadPreparation.totalScheduled + hotLeadPreparation.shortfall,
-    hotLeadPrepared: hotLeadPreparation.totalScheduled,
+    hotLeadPrepared: hotLeadPreparation.prepared,
+    hotLeadState: hotLeadPreparation.state,
+    hotLeadPreparedThisRun: hotLeadPreparation.prepared,
+    hotLeadWindowQueued: hotLeadPreparation.windowQueued ?? hotLeadPreparation.totalScheduled,
+    ...(hotLeadPreparation.error ? { hotLeadError: hotLeadPreparation.error } : {}),
+    ...(hotLeadPreparation.skippedBecause
+      ? { hotLeadSkippedBecause: hotLeadPreparation.skippedBecause }
+      : {}),
     hotLeadShortfall: hotLeadPreparation.shortfall,
     ...(topUp ? { topUpPrepared: topUp.prepared, topUpShortfall: topUp.shortfall } : {}),
     acquisitionErrors,

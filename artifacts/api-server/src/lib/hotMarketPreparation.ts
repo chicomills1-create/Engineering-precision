@@ -89,10 +89,20 @@ export async function prepareNextPhoenixHotMarketOutreach(
   state: "skipped" | "completed" | "failed";
   prepared: number;
   totalScheduled: number;
+  windowQueued: number;
+  skippedBecause?: string;
+  error?: string;
   shortfall: number;
 }> {
   if (!target && !isPhoenixPreparationWindowOpen(now)) {
-    return { state: "skipped", prepared: 0, totalScheduled: 0, shortfall: 0 };
+    return {
+      state: "skipped",
+      prepared: 0,
+      totalScheduled: 0,
+      windowQueued: 0,
+      skippedBecause: "Phoenix preparation window is not open",
+      shortfall: 0,
+    };
   }
   const { scheduledAt } = target ?? getNextPhoenixPreparationTarget(now);
   const laneConfig = await getAuthoritativeLaneConfig(undefined, undefined, scheduledAt);
@@ -352,6 +362,7 @@ export async function prepareNextPhoenixHotMarketOutreach(
       state: "completed",
       prepared,
       totalScheduled,
+      windowQueued: totalScheduled,
       shortfall: Math.max(0, sharedLimit - totalScheduled - currentNamedCount),
     };
   } catch (error) {
@@ -360,6 +371,8 @@ export async function prepareNextPhoenixHotMarketOutreach(
       state: "failed",
       prepared: 0,
       totalScheduled: 0,
+      windowQueued: 0,
+      error: error instanceof Error ? error.message : "Recurring hot-market preparation failed",
       shortfall: sharedLimit,
     };
   }

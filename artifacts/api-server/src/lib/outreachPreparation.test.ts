@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
   getNextPhoenixPreparationTarget,
+  getPreparationInvocationAccounting,
   getPreparationShortfall,
   getPreparationRemainingCapacity,
   getPreparationPersonalizationName,
@@ -140,4 +141,54 @@ test("existing manually scheduled messages consume the same 200-message regular 
   assert.equal(getPreparationRemainingCapacity(100, 20, 200), 80);
   assert.equal(getPreparationRemainingCapacity(0, 200, 200), 0);
   assert.throws(() => getPreparationRemainingCapacity(199, 2, 200), /exceeds the 200-message ceiling/);
+});
+
+test("skipped preparation reports zero inserts and the claiming run", () => {
+  assert.deepEqual(getPreparationInvocationAccounting({
+    state: "skipped",
+    windowQueued: 392,
+    runId: 2650,
+    startedAt: new Date("2026-09-21T03:31:47.197Z"),
+  }), {
+    state: "skipped",
+    prepared: 0,
+    windowQueued: 392,
+    skippedBecause: "run 2650 already claimed at 2026-09-21T03:31:47.197Z",
+  });
+});
+
+test("claimed preparation with no eligible inserts reports zero prepared", () => {
+  assert.deepEqual(getPreparationInvocationAccounting({
+    state: "completed",
+    insertedThisRun: 0,
+    windowQueued: 0,
+  }), {
+    state: "completed",
+    prepared: 0,
+    windowQueued: 0,
+  });
+});
+
+test("preparation reports inserted messages separately from the queued window", () => {
+  assert.deepEqual(getPreparationInvocationAccounting({
+    state: "completed",
+    insertedThisRun: 3,
+    windowQueued: 392,
+  }), {
+    state: "completed",
+    prepared: 3,
+    windowQueued: 392,
+  });
+});
+
+test("failed preparation reports zero prepared and preserves the error", () => {
+  assert.deepEqual(getPreparationInvocationAccounting({
+    state: "failed",
+    error: new Error("insert failed"),
+  }), {
+    state: "failed",
+    prepared: 0,
+    windowQueued: 0,
+    error: "insert failed",
+  });
 });

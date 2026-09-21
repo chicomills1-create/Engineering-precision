@@ -93,10 +93,20 @@ export async function prepareNextPhoenixHotLeadOutreach(
   state: "skipped" | "completed" | "failed";
   prepared: number;
   totalScheduled: number;
+  windowQueued: number;
+  skippedBecause?: string;
+  error?: string;
   shortfall: number;
 }> {
   if (!target && !isPhoenixPreparationWindowOpen(now)) {
-    return { state: "skipped", prepared: 0, totalScheduled: 0, shortfall: 0 };
+    return {
+      state: "skipped",
+      prepared: 0,
+      totalScheduled: 0,
+      windowQueued: 0,
+      skippedBecause: "Phoenix preparation window is not open",
+      shortfall: 0,
+    };
   }
   const { scheduledAt } = target ?? getNextPhoenixPreparationTarget(now);
   const targetEnd = new Date(scheduledAt.getTime() + 24 * 60 * 60_000);
@@ -276,6 +286,7 @@ export async function prepareNextPhoenixHotLeadOutreach(
       state: "completed",
       prepared,
       totalScheduled,
+      windowQueued: totalScheduled,
       shortfall: isUncappedLaneLimit(hotLeadLimit)
         ? 0
         : Math.max(0, hotLeadLimit - totalScheduled),
@@ -286,6 +297,8 @@ export async function prepareNextPhoenixHotLeadOutreach(
       state: "failed",
       prepared: 0,
       totalScheduled: 0,
+      windowQueued: 0,
+      error: error instanceof Error ? error.message : "September hot-lead preparation failed",
       shortfall: isUncappedLaneLimit(hotLeadLimit) ? 0 : hotLeadLimit,
     };
   }
