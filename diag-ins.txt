@@ -1,0 +1,10 @@
+252:   252	  const [created] = await db.insert(outreachPreparationRunsTable).values({
+294:   294	    await tx.insert(outreachPreparationRunsTable).values({
+376:   376	    await tx.insert(outreachPreparationSlotsTable).values({
+675:   675	        const [slotClaim] = await tx.insert(outreachPreparationSlotsTable).values({
+716:   716	        const [message] = await tx.insert(outreachMessagesTable).values({
+727:   727	          await tx.insert(outreachCatchUpReservationsTable).values({
+732:   732	        await tx.insert(outreachMessagesTable).values(
+952:   952	      const [slotRow] = await tx.insert(outreachPreparationSlotsTable).values({
+969:   969	      const [message] = await tx.insert(outreachMessagesTable).values({
+979:   979	      await tx.insert(outreachMessagesTable).values(

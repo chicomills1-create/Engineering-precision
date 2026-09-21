@@ -1,0 +1,45 @@
+######## P1: preparation target/limit
+21:    21	  REGULAR_OUTREACH_DAILY_TARGET,
+28:    28	  getNamedHotMarketSharedLimit,
+29:    29	  isUncappedLaneLimit,
+35:    35	  NIGHTLY_TOTAL_INITIAL_TARGET,
+39:    39	// all production targets and no caller may clamp to these values.
+40:    40	export const OUTREACH_PERSONAL_PREPARATION_TARGET = 100;
+41:    41	export const OUTREACH_PUBLIC_PREPARATION_TARGET = 100;
+52:    52	 * changing the normal scheduler's target.
+55:    55	  targetDate: string;
+71:    71	  targetDate: string;
+76:    76	  return { targetDate: phoenixDateKey(scheduledAt), scheduledAt };
+80:    80	  const targetDate = phoenixDateKey(now);
+81:    81	  const scheduledAt = new Date(`${targetDate}T20:00:00-07:00`);
+82:    82	  return { targetDate, scheduledAt };
+148:   148	  const personalCap = Math.max(0, options.personalCap ?? OUTREACH_PERSONAL_PREPARATION_TARGET);
+149:   149	  const publicCap = Math.max(0, options.publicCap ?? OUTREACH_PUBLIC_PREPARATION_TARGET);
+175:   175	export function getPreparationShortfall(prepared: number, target: number): number {
+176:   176	  return Math.max(0, target - prepared);
+184:   184	}, targets: {
+196:   196	  const named = Math.max(0, targets.named - counts.named);
+197:   197	  const publicShortfall = Math.max(0, targets.public - counts.public);
+198:   198	  const hotMarket = Math.max(0, targets.hotMarket - counts.hotMarket);
+199:   199	  const hotLead = Math.max(0, targets.hotLead - counts.hotLead);
+209:   209	export function getPreparationRemainingCapacity(slotted: number, untracked: number, target: number): number {
+211:   211	  if (total > target) {
+212:   212	    throw new Error(`Target window already exceeds the ${target}-message ceiling`);
+214:   214	  return target - total;
+221:   221	async function claimPreparationRun(targetDate: string, now: Date, targetCount: number): Promise<number | undefined> {
+228:   228	    targetCount,
+231:   231	      ${targetCount} - ${outreachPreparationRunsTable.preparedCount}
+
+######## P2: hotlead target
+21:    21	  type PhoenixPreparationTarget,
+22:    22	  getNextPhoenixPreparationTarget,
+91:    91	  target?: PhoenixPreparationTarget,
+98:    98	  if (!target && !isPhoenixPreparationWindowOpen(now)) {
+100:   100	  }
+101:   101	  const { scheduledAt } = target ?? getNextPhoenixPreparationTarget(now);
+102:   102	  const targetEnd = new Date(scheduledAt.getTime() + 24 * 60 * 60_000);
+121:   121	    const [suppressions, initialMessages, claims, targetMessages] = await Promise.all([
+149:   149	          lt(outreachMessagesTable.scheduledAt, targetEnd),
+157:   157	      ...targetMessages.map((row) => row.prospectId),
+174:   174	    const existingHotLeads = targetMessages.filter((row) =>
+207:   207	            lt(outreachMessagesTable.scheduledAt, targetEnd),

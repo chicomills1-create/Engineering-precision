@@ -1,0 +1,1062 @@
+     1	import { and, asc, eq, gt, gte, inArray, lt, lte, or, sql } from "drizzle-orm";
+     2	import {
+     3	  campaignsTable,
+     4	  db,
+     5	  outreachCatchUpCohortsTable,
+     6	  outreachCatchUpReservationsTable,
+     7	  outreachMessagesTable,
+     8	  outreachPreparationRunsTable,
+     9	  outreachPreparationSlotsTable,
+    10	  outreachSequenceSendClaimsTable,
+    11	  outreachSuppressionsTable,
+    12	  prospectsTable,
+    13	  type Campaign,
+    14	  type Prospect,
+    15	} from "@workspace/db";
+    16	import { assertOutreachEligibilityBase } from "./outreachEligibility";
+    17	import {
+    18	  approvedOutreachBody,
+    19	  approvedOutreachFollowUpMessages,
+    20	  approvedOutreachSubject,
+    21	  REGULAR_OUTREACH_DAILY_TARGET,
+    22	} from "./verifiedOutreachBatch";
+    23	import { ensureApprovedFollowUpSequence } from "./outreachSequence";
+    24	import { isHotMarketSourceType } from "./hotMarketOutreachBatch";
+    25	import { getCatchUpRemainingCapacity } from "./outreachCatchUp";
+    26	import {
+    27	  getAuthoritativeLaneConfig,
+    28	  getNamedHotMarketSharedLimit,
+    29	  isUncappedLaneLimit,
+    30	} from "./outreachLaneConfig";
+    31	import { isEvidenceBackedPublicInbox } from "./publicInboxClassifier";
+    32	import {
+    33	  configuredDailyAllowance,
+    34	  loadOutreachSystemConfig,
+    35	  NIGHTLY_TOTAL_INITIAL_TARGET,
+    36	} from "./outreachSystemConfig";
+    37	import { getOutreachDailyLane } from "./outreach";
+    38	// These are compatibility defaults only; authoritative lane config supplies
+    39	// all production targets and no caller may clamp to these values.
+    40	export const OUTREACH_PERSONAL_PREPARATION_TARGET = 100;
+    41	export const OUTREACH_PUBLIC_PREPARATION_TARGET = 100;
+    42	const STALE_RUN_MS = 20 * 60_000;
+    43	
+    44	export type PreparationCandidate = Pick<Prospect,
+    45	  "id" | "companyName" | "website" | "contactEmail" | "contactName" | "state" | "fitScore" | "needScore"
+    46	> & { contactEvidenceType?: Prospect["contactEvidenceType"] };
+    47	
+    48	/**
+    49	 * The normal preparation API always resolves the following Phoenix day.  The
+    50	 * emergency staging recovery is the only caller that supplies an explicit
+    51	 * window, allowing it to fill an interrupted current-day window without
+    52	 * changing the normal scheduler's target.
+    53	 */
+    54	export type PhoenixPreparationTarget = {
+    55	  targetDate: string;
+    56	  scheduledAt: Date;
+    57	};
+    58	
+    59	function phoenixDateKey(now: Date): string {
+    60	  const parts = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
+    61	    timeZone: "America/Phoenix",
+    62	    year: "numeric",
+    63	    month: "2-digit",
+    64	    day: "2-digit",
+    65	  }).formatToParts(now).map((part) => [part.type, part.value]));
+    66	  return `${parts.year}-${parts.month}-${parts.day}`;
+    67	}
+    68	
+    69	/** Always returns the next Phoenix calendar day, never today's send window. */
+    70	export function getNextPhoenixPreparationTarget(now = new Date()): {
+    71	  targetDate: string;
+    72	  scheduledAt: Date;
+    73	} {
+    74	  const todayAtEightPm = new Date(`${phoenixDateKey(now)}T20:00:00-07:00`);
+    75	  const scheduledAt = new Date(todayAtEightPm.getTime() + 24 * 60 * 60 * 1000);
+    76	  return { targetDate: phoenixDateKey(scheduledAt), scheduledAt };
+    77	}
+    78	
+    79	export function getCurrentPhoenixPreparationTarget(now = new Date()): PhoenixPreparationTarget {
+    80	  const targetDate = phoenixDateKey(now);
+    81	  const scheduledAt = new Date(`${targetDate}T20:00:00-07:00`);
+    82	  return { targetDate, scheduledAt };
+    83	}
+    84	
+    85	export function isPhoenixPreparationWindowOpen(now = new Date()): boolean {
+    86	  const todayAtEightPm = new Date(`${phoenixDateKey(now)}T20:00:00-07:00`);
+    87	  return now.getTime() >= todayAtEightPm.getTime();
+    88	}
+    89	
+    90	export function isPublicInbox(
+    91	  email: string | null,
+    92	  contactName: string | null,
+    93	  evidenceType?: string | null,
+    94	): boolean {
+    95	  return isEvidenceBackedPublicInbox(email, contactName, evidenceType);
+    96	}
+    97	
+    98	export function getPreparationPersonalizationName(
+    99	  prospect: Pick<Prospect, "companyName" | "contactEmail" | "contactName" | "contactEvidenceType">,
+   100	): string {
+   101	  if (isPublicInbox(prospect.contactEmail, prospect.contactName, prospect.contactEvidenceType)) {
+   102	    return prospect.contactName?.trim() || prospect.companyName;
+   103	  }
+   104	  return prospect.contactName ?? "";
+   105	}
+   106	
+   107	export function companyDomain(candidate: Pick<PreparationCandidate, "companyName" | "website">): string {
+   108	  if (candidate.website?.trim()) {
+   109	    try {
+   110	      return new URL(candidate.website).hostname.replace(/^www\./, "").toLowerCase();
+   111	    } catch {
+   112	      // Eligibility does not require a website; use a stable company fallback below.
+   113	    }
+   114	  }
+   115	  return candidate.companyName.trim().toLowerCase().replace(/[^a-z0-9]/g, "");
+   116	}
+   117	
+   118	export function prioritizePreparationCandidates<T extends PreparationCandidate>(candidates: T[]): T[] {
+   119	  const statePriority = (state: string) => state === "AZ" ? 0 : state === "CA" ? 1 : 2;
+   120	  return [...candidates].sort((left, right) => {
+   121	    const stateDifference = statePriority(left.state) - statePriority(right.state);
+   122	    if (stateDifference !== 0) return stateDifference;
+   123	    const laneDifference = Number(isPublicInbox(
+   124	      left.contactEmail,
+   125	      left.contactName,
+   126	      left.contactEvidenceType,
+   127	    )) - Number(isPublicInbox(
+   128	      right.contactEmail,
+   129	      right.contactName,
+   130	      right.contactEvidenceType,
+   131	    ));
+   132	    if (laneDifference !== 0) return laneDifference;
+   133	    const qualityDifference = (right.fitScore + right.needScore) - (left.fitScore + left.needScore);
+   134	    return qualityDifference || left.id - right.id;
+   135	  });
+   136	}
+   137	
+   138	export function selectUniquePreparationCandidates<T extends PreparationCandidate>(
+   139	  candidates: T[],
+   140	  options: {
+   141	    personalCap?: number;
+   142	    publicCap?: number;
+   143	    totalCap?: number;
+   144	    usedEmails?: Iterable<string>;
+   145	    usedDomains?: Iterable<string>;
+   146	  } = {},
+   147	): T[] {
+   148	  const personalCap = Math.max(0, options.personalCap ?? OUTREACH_PERSONAL_PREPARATION_TARGET);
+   149	  const publicCap = Math.max(0, options.publicCap ?? OUTREACH_PUBLIC_PREPARATION_TARGET);
+   150	  const emails = new Set(Array.from(options.usedEmails ?? [], (email) => email.trim().toLowerCase()));
+   151	  const domains = new Set(Array.from(options.usedDomains ?? [], (domain) => domain.trim().toLowerCase()));
+   152	  let personalCount = 0;
+   153	  let publicCount = 0;
+   154	  let totalCount = 0;
+   155	  return prioritizePreparationCandidates(candidates).filter((candidate) => {
+   156	    const email = candidate.contactEmail?.trim().toLowerCase() ?? "";
+   157	    const domain = companyDomain(candidate);
+   158	    if (!email || !domain || emails.has(email) || domains.has(domain)) return false;
+   159	    const publicLane = isPublicInbox(
+   160	      candidate.contactEmail,
+   161	      candidate.contactName,
+   162	      candidate.contactEvidenceType,
+   163	    );
+   164	    if (totalCount >= (options.totalCap ?? Number.POSITIVE_INFINITY)) return false;
+   165	    if (publicLane ? publicCount >= publicCap : personalCount >= personalCap) return false;
+   166	    emails.add(email);
+   167	    domains.add(domain);
+   168	    if (publicLane) publicCount += 1;
+   169	    else personalCount += 1;
+   170	    totalCount += 1;
+   171	    return true;
+   172	  });
+   173	}
+   174	
+   175	export function getPreparationShortfall(prepared: number, target: number): number {
+   176	  return Math.max(0, target - prepared);
+   177	}
+   178	
+   179	export function getLaneShortfalls(counts: {
+   180	  named: number;
+   181	  public: number;
+   182	  hotMarket: number;
+   183	  hotLead: number;
+   184	}, targets: {
+   185	  named: number;
+   186	  public: number;
+   187	  hotMarket: number;
+   188	  hotLead: number;
+   189	}): {
+   190	  named: number;
+   191	  public: number;
+   192	  hotMarket: number;
+   193	  hotLead: number;
+   194	  total: number;
+   195	} {
+   196	  const named = Math.max(0, targets.named - counts.named);
+   197	  const publicShortfall = Math.max(0, targets.public - counts.public);
+   198	  const hotMarket = Math.max(0, targets.hotMarket - counts.hotMarket);
+   199	  const hotLead = Math.max(0, targets.hotLead - counts.hotLead);
+   200	  return {
+   201	    named,
+   202	    public: publicShortfall,
+   203	    hotMarket,
+   204	    hotLead,
+   205	    total: named + publicShortfall + hotMarket + hotLead,
+   206	  };
+   207	}
+   208	
+   209	export function getPreparationRemainingCapacity(slotted: number, untracked: number, target: number): number {
+   210	  const total = slotted + untracked;
+   211	  if (total > target) {
+   212	    throw new Error(`Target window already exceeds the ${target}-message ceiling`);
+   213	  }
+   214	  return target - total;
+   215	}
+   216	
+   217	export function isPreparationRunStale(startedAt: Date, now: Date): boolean {
+   218	  return startedAt.getTime() <= now.getTime() - STALE_RUN_MS;
+   219	}
+   220	
+   221	async function claimPreparationRun(targetDate: string, now: Date, targetCount: number): Promise<number | undefined> {
+   222	  const staleCutoff = new Date(now.getTime() - STALE_RUN_MS);
+   223	  const [recovered] = await db.update(outreachPreparationRunsTable).set({
+   224	    status: "running",
+   225	    startedAt: now,
+   226	    completedAt: null,
+   227	    error: null,
+   228	    targetCount,
+   229	    shortfallCount: sql`greatest(
+   230	      0,
+   231	      ${targetCount} - ${outreachPreparationRunsTable.preparedCount}
+   232	    )`,
+   233	  }).where(and(
+   234	    eq(outreachPreparationRunsTable.targetDate, targetDate),
+   235	    or(
+   236	      inArray(outreachPreparationRunsTable.status, ["failed", "pending"]),
+   237	      and(
+   238	        eq(outreachPreparationRunsTable.status, "completed"),
+   239	        gt(outreachPreparationRunsTable.shortfallCount, 0),
+   240	      ),
+   241	      and(
+   242	        eq(outreachPreparationRunsTable.status, "completed"),
+   243	        lt(outreachPreparationRunsTable.targetCount, targetCount),
+   244	      ),
+   245	      and(
+   246	        eq(outreachPreparationRunsTable.status, "running"),
+   247	        lte(outreachPreparationRunsTable.startedAt, staleCutoff),
+   248	      ),
+   249	    ),
+   250	  )).returning({ id: outreachPreparationRunsTable.id });
+   251	  if (recovered) return recovered.id;
+   252	  const [created] = await db.insert(outreachPreparationRunsTable).values({
+   253	    targetDate,
+   254	    targetCount,
+   255	  }).onConflictDoNothing().returning({ id: outreachPreparationRunsTable.id });
+   256	  return created?.id;
+   257	}
+   258	
+   259	export async function approveInitialMessageInPreparationWindow(
+   260	  messageId: number,
+   261	  now = new Date(),
+   262	): Promise<typeof outreachMessagesTable.$inferSelect> {
+   263	  return db.transaction(async (tx) => {
+   264	    const [message] = await tx.select().from(outreachMessagesTable)
+   265	      .where(eq(outreachMessagesTable.id, messageId))
+   266	      .limit(1);
+   267	    if (!message || message.status !== "draft" || message.sequenceNumber !== 1) {
+   268	      throw new Error("Only draft initial messages can use the preparation window");
+   269	    }
+   270	    const [prospect] = await tx.select().from(prospectsTable)
+   271	      .where(eq(prospectsTable.id, message.prospectId))
+   272	      .limit(1);
+   273	    if (!prospect) throw new Error("Prospect not found");
+   274	    const [campaign] = message.campaignId
+   275	      ? await tx.select().from(campaignsTable).where(eq(campaignsTable.id, message.campaignId)).limit(1)
+   276	      : [];
+   277	    if (message.campaignId && !campaign) throw new Error("Campaign not found");
+   278	    const email = assertOutreachEligibilityBase(message, prospect, campaign, {
+   279	      requireApprovedMessage: false,
+   280	    });
+   281	    const [suppression] = await tx.select({ id: outreachSuppressionsTable.id })
+   282	      .from(outreachSuppressionsTable)
+   283	      .where(eq(outreachSuppressionsTable.email, email))
+   284	      .limit(1);
+   285	    if (suppression) throw new Error("Address is suppressed");
+   286	
+   287	    const { scheduledAt } = getNextPhoenixPreparationTarget(now);
+   288	  const [laneConfig, runtimeConfig] = await Promise.all([
+   289	    getAuthoritativeLaneConfig(undefined, undefined, scheduledAt),
+   290	    loadOutreachSystemConfig(now),
+   291	  ]);
+   292	  const targetCount = getNamedHotMarketSharedLimit(laneConfig);
+   293	    const targetDate = phoenixDateKey(scheduledAt);
+   294	    await tx.insert(outreachPreparationRunsTable).values({
+   295	      targetDate,
+   296	      status: "pending",
+   297	      targetCount,
+   298	      shortfallCount: targetCount,
+   299	    }).onConflictDoNothing();
+   300	    const [run] = await tx.select().from(outreachPreparationRunsTable)
+   301	      .where(eq(outreachPreparationRunsTable.targetDate, targetDate))
+   302	      .limit(1);
+   303	    if (!run) throw new Error("Unable to allocate the preparation window");
+   304	    await tx.execute(sql`select ${outreachPreparationRunsTable.id}
+   305	      from ${outreachPreparationRunsTable}
+   306	      where ${outreachPreparationRunsTable.id} = ${run.id}
+   307	      for update`);
+   308	
+   309	    const targetEnd = new Date(scheduledAt.getTime() + 24 * 60 * 60 * 1000);
+   310	    const [slots, targetInitials] = await Promise.all([
+   311	      tx.select({
+   312	        slot: outreachPreparationSlotsTable.slot,
+   313	        messageId: outreachPreparationSlotsTable.messageId,
+   314	      }).from(outreachPreparationSlotsTable)
+   315	        .where(eq(outreachPreparationSlotsTable.targetDate, targetDate)),
+   316	      tx.select({
+   317	        id: outreachMessagesTable.id,
+   318	        contactEmail: prospectsTable.contactEmail,
+   319	        contactName: prospectsTable.contactName,
+   320	        contactEvidenceType: prospectsTable.contactEvidenceType,
+   321	        sourceType: outreachMessagesTable.sourceType,
+   322	      }).from(outreachMessagesTable)
+   323	        .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+   324	        .where(and(
+   325	          eq(outreachMessagesTable.sequenceNumber, 1),
+   326	          gte(outreachMessagesTable.scheduledAt, scheduledAt),
+   327	          lt(outreachMessagesTable.scheduledAt, targetEnd),
+   328	          inArray(outreachMessagesTable.status, ["approved", "sending"]),
+   329	        )),
+   330	    ]);
+   331	    const slottedMessageIds = new Set(slots.flatMap((slot) => slot.messageId ? [slot.messageId] : []));
+   332	    const untrackedCount = targetInitials.filter((candidate) => !slottedMessageIds.has(candidate.id)).length;
+   333	     const laneCounts = { named: 0, public: 0, hot_market: 0, hot_lead: 0 };
+   334	     for (const candidate of targetInitials) {
+   335	       const candidateLane = getOutreachDailyLane(candidate, candidate);
+   336	       if (candidateLane in laneCounts) {
+   337	         laneCounts[candidateLane as keyof typeof laneCounts] += 1;
+   338	       }
+   339	     }
+   340	     const messageLane = getOutreachDailyLane(message, prospect);
+   341	      const verifiedPoolLane = messageLane === "public"
+   342	        || messageLane === "named"
+   343	        || messageLane === "direct"
+   344	        || messageLane === "hot_market";
+   345	      const laneLimit = verifiedPoolLane
+   346	        ? getNamedHotMarketSharedLimit(laneConfig)
+   347	        : laneConfig.hotLeadLimit;
+   348	     const quotaLane = messageLane === "direct"
+   349	       ? "named"
+   350	       : messageLane === "hot_market_extra"
+   351	         ? "hot_market"
+   352	         : messageLane;
+   353	      const laneCount = verifiedPoolLane
+   354	        ? laneCounts.named + laneCounts.public + laneCounts.hot_market
+   355	        : laneCounts[quotaLane];
+   356	      if (!isUncappedLaneLimit(laneLimit) && laneCount >= laneLimit) {
+   357	       throw new Error(`The target outreach ${messageLane} lane is full`);
+   358	     }
+   359	    const remainingCapacity = Math.max(0, targetCount - slots.length - untrackedCount);
+   360	    if (remainingCapacity === 0) throw new Error("The target outreach window is full");
+   361	    const usedSlots = new Set(slots.map((slot) => slot.slot));
+   362	    const slot = Array.from(
+   363	      { length: targetCount },
+   364	      (_, index) => index + 1,
+   365	    ).find((candidate) => !usedSlots.has(candidate));
+   366	    if (!slot) throw new Error("The target outreach window is full");
+   367	
+   368	    const [approved] = await tx.update(outreachMessagesTable)
+   369	      .set({ status: "approved", scheduledAt })
+   370	      .where(and(
+   371	        eq(outreachMessagesTable.id, message.id),
+   372	        eq(outreachMessagesTable.status, "draft"),
+   373	      ))
+   374	      .returning();
+   375	    if (!approved) throw new Error("Message is no longer available for approval");
+   376	    await tx.insert(outreachPreparationSlotsTable).values({
+   377	      runId: run.id,
+   378	      targetDate,
+   379	      slot,
+   380	      prospectId: prospect.id,
+   381	      messageId: approved.id,
+   382	    });
+   383	    const preparedCount = slots.length + untrackedCount + 1;
+   384	    await tx.update(outreachPreparationRunsTable).set({
+   385	      preparedCount,
+   386	      shortfallCount: getPreparationShortfall(preparedCount, targetCount),
+   387	    }).where(eq(outreachPreparationRunsTable.id, run.id));
+   388	    return approved;
+   389	  });
+   390	}
+   391	
+   392	function canPrepare(prospect: Prospect, campaign: Campaign, suppressedEmails: Set<string>): boolean {
+   393	  const email = prospect.contactEmail?.trim().toLowerCase();
+   394	  if (!email || suppressedEmails.has(email)) return false;
+   395	  try {
+   396	    assertOutreachEligibilityBase({
+   397	      id: 0, prospectId: prospect.id, campaignId: campaign.id, sequenceNumber: 1,
+   398	      subject: "", body: "", status: "draft", scheduledAt: null, sentAt: null,
+   399	      providerMessageId: null, providerReconciliationKey: null, error: null,
+   400	      sourceType: null, sourceId: null, createdAt: new Date(), updatedAt: new Date(),
+   401	      catchUpCohortId: null,
+   402	    }, prospect, campaign, {
+   403	      requireApprovedMessage: false,
+   404	      requireApprovedProspect: false,
+   405	    });
+   406	    return true;
+   407	  } catch {
+   408	    return false;
+   409	  }
+   410	}
+   411	
+   412	async function getRegularLaneCountsForWindow(
+   413	  scheduledAt: Date,
+   414	): Promise<{ direct: number; public: number; hotMarket: number }> {
+   415	  const rows = await db.select({
+   416	    contactEmail: prospectsTable.contactEmail,
+   417	    contactName: prospectsTable.contactName,
+   418	    contactEvidenceType: prospectsTable.contactEvidenceType,
+   419	    sourceType: outreachMessagesTable.sourceType,
+   420	  })
+   421	    .from(outreachMessagesTable)
+   422	    .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+   423	    .where(and(
+   424	      eq(outreachMessagesTable.sequenceNumber, 1),
+   425	      gte(outreachMessagesTable.scheduledAt, scheduledAt),
+   426	      lt(
+   427	        outreachMessagesTable.scheduledAt,
+   428	        new Date(scheduledAt.getTime() + 24 * 60 * 60 * 1000),
+   429	      ),
+   430	      inArray(outreachMessagesTable.status, ["approved", "sending"]),
+   431	    ));
+   432	   const hotMarket = rows.filter((row) => isHotMarketSourceType(row.sourceType)).length;
+   433	   const regular = rows.filter((row) =>
+   434	     !isHotMarketSourceType(row.sourceType)
+   435	     && row.sourceType !== "hot_lead"
+   436	     && row.sourceType !== "hot_lead_verified"
+   437	   );
+   438	  const publicCount = regular.filter((row) => isPublicInbox(
+   439	    row.contactEmail,
+   440	    row.contactName,
+   441	    row.contactEvidenceType,
+   442	  )).length;
+   443	  return { direct: regular.length - publicCount, public: publicCount, hotMarket };
+   444	}
+   445	
+   446	export async function prepareNextPhoenixOutreach(
+   447	  now = new Date(),
+   448	  target?: PhoenixPreparationTarget,
+   449	): Promise<{
+   450	  state: "skipped" | "completed" | "failed";
+   451	  prepared: number;
+   452	  directPrepared: number;
+   453	  publicPrepared: number;
+   454	  directShortfall: number;
+   455	  publicShortfall: number;
+   456	  skipped: number;
+   457	  shortfall: number;
+   458	}> {
+   459	  if (!target && !isPhoenixPreparationWindowOpen(now)) {
+   460	    return {
+   461	      state: "skipped", prepared: 0, directPrepared: 0,
+   462	      publicPrepared: 0, directShortfall: 0, publicShortfall: 0,
+   463	      skipped: 0, shortfall: 0,
+   464	    };
+   465	  }
+   466	  const resolvedTarget = target ?? getNextPhoenixPreparationTarget(now);
+   467	  const { targetDate, scheduledAt } = resolvedTarget;
+   468	  const [laneConfig, runtimeConfig] = await Promise.all([
+   469	    getAuthoritativeLaneConfig(undefined, undefined, scheduledAt),
+   470	    loadOutreachSystemConfig(now),
+   471	  ]);
+   472	  const targetCount = getNamedHotMarketSharedLimit(laneConfig);
+   473	  const runId = await claimPreparationRun(targetDate, now, targetCount);
+   474	  if (!runId) {
+   475	    const [existing] = await db.select({
+   476	      prepared: outreachPreparationRunsTable.preparedCount,
+   477	      skipped: outreachPreparationRunsTable.skippedCount,
+   478	      shortfall: outreachPreparationRunsTable.shortfallCount,
+   479	    }).from(outreachPreparationRunsTable)
+   480	      .where(eq(outreachPreparationRunsTable.targetDate, targetDate))
+   481	      .limit(1);
+   482	    const laneCounts = await getRegularLaneCountsForWindow(scheduledAt);
+   483	    const verifiedPrepared = laneCounts.direct + laneCounts.public + laneCounts.hotMarket;
+   484	    const verifiedShortfall = Math.max(0, targetCount - verifiedPrepared);
+   485	    return {
+   486	      state: "skipped",
+   487	      prepared: existing?.prepared ?? 0,
+   488	      directPrepared: laneCounts.direct,
+   489	      publicPrepared: laneCounts.public,
+   490	      directShortfall: Math.max(
+   491	        0,
+   492	        verifiedShortfall,
+   493	      ),
+   494	      publicShortfall: Math.max(
+   495	        0,
+   496	        0,
+   497	      ),
+   498	      skipped: existing?.skipped ?? 0,
+   499	      shortfall: existing?.shortfall ?? targetCount,
+   500	    };
+   501	  }
+   502	
+   503	  try {
+   504	    const rows = await db.select({ prospect: prospectsTable, campaign: campaignsTable })
+   505	      .from(prospectsTable)
+   506	      .innerJoin(campaignsTable, eq(prospectsTable.campaignId, campaignsTable.id))
+   507	      .where(and(
+   508	        inArray(prospectsTable.status, ["approved", "review"]),
+   509	        eq(prospectsTable.emailStatus, "verified"),
+   510	        eq(campaignsTable.status, "active"),
+   511	      ));
+   512	    const [suppressions, initialMessages, claims] = await Promise.all([
+   513	      db.select({ email: outreachSuppressionsTable.email }).from(outreachSuppressionsTable),
+   514	      db.select({
+   515	        prospectId: outreachMessagesTable.prospectId,
+   516	        campaignId: outreachMessagesTable.campaignId,
+   517	        status: outreachMessagesTable.status,
+   518	        scheduledAt: outreachMessagesTable.scheduledAt,
+   519	        contactEmail: prospectsTable.contactEmail,
+   520	        companyName: prospectsTable.companyName,
+   521	        website: prospectsTable.website,
+   522	      })
+   523	        .from(outreachMessagesTable)
+   524	        .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+   525	        .where(eq(outreachMessagesTable.sequenceNumber, 1)),
+   526	      db.select({
+   527	        prospectId: outreachSequenceSendClaimsTable.prospectId,
+   528	        campaignScope: outreachSequenceSendClaimsTable.campaignScope,
+   529	        sequenceNumber: outreachSequenceSendClaimsTable.sequenceNumber,
+   530	        contactEmail: prospectsTable.contactEmail,
+   531	        companyName: prospectsTable.companyName,
+   532	        website: prospectsTable.website,
+   533	      }).from(outreachSequenceSendClaimsTable)
+   534	        .innerJoin(prospectsTable, eq(outreachSequenceSendClaimsTable.prospectId, prospectsTable.id))
+   535	        .where(eq(outreachSequenceSendClaimsTable.sequenceNumber, 1)),
+   536	    ]);
+   537	    const [catchUpCohort] = await db.select().from(outreachCatchUpCohortsTable)
+   538	      .where(eq(outreachCatchUpCohortsTable.name, "Apex Grid fresh verified catch-up")).limit(1);
+   539	    const catchUpRemaining = catchUpCohort?.status === "active"
+   540	      ? await getCatchUpRemainingCapacity()
+   541	      : 0;
+   542	    const suppressedEmails = new Set(suppressions.map((row) => row.email.trim().toLowerCase()));
+   543	    const initialProspects = new Set(initialMessages.map((row) => row.prospectId));
+   544	    const claimedProspects = new Set(claims.map((row) => row.prospectId));
+   545	    const eligible = rows.filter(({ prospect, campaign }) =>
+   546	      canPrepare(prospect, campaign, suppressedEmails)
+   547	      && !initialProspects.has(prospect.id)
+   548	      && !claimedProspects.has(prospect.id));
+   549	    const campaignsByProspect = new Map(rows.map((row) => [row.prospect.id, row.campaign.id]));
+   550	    const campaignByProspect = new Map(rows.map((row) => [row.prospect.id, row.campaign]));
+   551	    const prepared = await db.transaction(async (tx) => {
+   552	      await tx.execute(sql`select ${outreachPreparationRunsTable.id}
+   553	        from ${outreachPreparationRunsTable}
+   554	        where ${outreachPreparationRunsTable.id} = ${runId}
+   555	        for update`);
+   556	      const existingSlots = await tx.select({
+   557	        slot: outreachPreparationSlotsTable.slot,
+   558	        prospectId: outreachPreparationSlotsTable.prospectId,
+   559	        messageId: outreachPreparationSlotsTable.messageId,
+   560	      }).from(outreachPreparationSlotsTable)
+   561	        .where(eq(outreachPreparationSlotsTable.targetDate, targetDate));
+   562	      const targetEnd = new Date(scheduledAt.getTime() + 24 * 60 * 60 * 1000);
+   563	      const currentTargetInitials = await tx.select({
+   564	        id: outreachMessagesTable.id,
+   565	        prospectId: outreachMessagesTable.prospectId,
+   566	        companyName: prospectsTable.companyName,
+   567	        website: prospectsTable.website,
+   568	        contactEmail: prospectsTable.contactEmail,
+   569	        contactName: prospectsTable.contactName,
+   570	        contactEvidenceType: prospectsTable.contactEvidenceType,
+   571	        state: prospectsTable.state,
+   572	        fitScore: prospectsTable.fitScore,
+   573	        needScore: prospectsTable.needScore,
+   574	        sourceType: outreachMessagesTable.sourceType,
+   575	      })
+   576	        .from(outreachMessagesTable)
+   577	        .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+   578	        .where(and(
+   579	          eq(outreachMessagesTable.sequenceNumber, 1),
+   580	          gte(outreachMessagesTable.scheduledAt, scheduledAt),
+   581	          lt(outreachMessagesTable.scheduledAt, targetEnd),
+   582	          inArray(outreachMessagesTable.status, ["approved", "sending"]),
+   583	        ));
+   584	       const regularTargetInitials = currentTargetInitials.filter(
+   585	         (message) => message.sourceType !== "hot_lead"
+   586	          && message.sourceType !== "hot_lead_verified",
+   587	      );
+   588	      const slottedMessageIds = new Set(existingSlots.flatMap((row) => row.messageId ? [row.messageId] : []));
+   589	      const untrackedTargetInitials = regularTargetInitials.filter((message) => !slottedMessageIds.has(message.id));
+   590	      const usedSlots = new Set(existingSlots.map((row) => row.slot));
+   591	      const usedProspects = new Set([
+   592	        ...existingSlots.map((row) => row.prospectId),
+   593	        ...regularTargetInitials.map((row) => row.prospectId),
+   594	      ]);
+   595	      const remainingCapacity = getPreparationRemainingCapacity(
+   596	        existingSlots.length,
+   597	        untrackedTargetInitials.length,
+   598	        targetCount,
+   599	      );
+   600	      const selected = selectUniquePreparationCandidates(
+   601	        eligible.map((row) => row.prospect),
+   602	        {
+   603	            personalCap: remainingCapacity,
+   604	            publicCap: remainingCapacity,
+   605	            totalCap: remainingCapacity,
+   606	           usedEmails: [
+   607	             ...initialMessages.flatMap((candidate) => candidate.contactEmail ? [candidate.contactEmail] : []),
+   608	              ...claims.flatMap((candidate) => candidate.contactEmail ? [candidate.contactEmail] : []),
+   609	             ...currentTargetInitials.flatMap((candidate) => candidate.contactEmail ? [candidate.contactEmail] : []),
+   610	           ],
+   611	            usedDomains: [
+   612	              ...initialMessages.map(companyDomain),
+   613	              ...claims.map(companyDomain),
+   614	              ...currentTargetInitials.map(companyDomain),
+   615	            ],
+   616	        },
+   617	      );
+   618	      const availableSlots = Array.from(
+   619	         { length: targetCount },
+   620	        (_, index) => index + 1,
+   621	      ).filter((slot) => !usedSlots.has(slot)).slice(0, remainingCapacity);
+   622	
+   623	      // The one-time catch-up cohort must never starve normal daily
+   624	      // preparation: it gates the run only while it is still active AND
+   625	      // still has reserved capacity left. An exhausted or finished cohort
+   626	      // falls through to normal daily inventory.
+   627	      const catchUpEnrolling = catchUpCohort?.status === "active" && catchUpRemaining > 0;
+   628	      const selectedForRun = catchUpEnrolling
+   629	        ? selected.slice(0, catchUpRemaining)
+   630	        : selected;
+   631	      for (const prospect of selectedForRun) {
+   632	        if (usedProspects.has(prospect.id)) continue;
+   633	        const candidateEmail = prospect.contactEmail?.trim().toLowerCase();
+   634	        if (!candidateEmail) continue;
+   635	        const [currentProspect] = await tx.select().from(prospectsTable)
+   636	          .where(eq(prospectsTable.id, prospect.id))
+   637	          .limit(1);
+   638	        const campaign = campaignByProspect.get(prospect.id);
+   639	        if (
+   640	          !currentProspect
+   641	          || !campaign
+   642	          || !["approved", "review"].includes(currentProspect.status)
+   643	          || !canPrepare(currentProspect, campaign, suppressedEmails)
+   644	        ) continue;
+   645	        await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${candidateEmail}, 0))`);
+   646	        const candidateDomain = companyDomain(currentProspect);
+   647	        await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${candidateDomain}, 0))`);
+   648	        const [emailAlreadyUsed] = await tx.select({ id: outreachMessagesTable.id })
+   649	          .from(outreachMessagesTable)
+   650	          .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+   651	          .where(and(
+   652	            eq(outreachMessagesTable.sequenceNumber, 1),
+   653	            or(
+   654	              sql`lower(trim(${prospectsTable.contactEmail})) = ${candidateEmail}`,
+   655	              sql`lower(${prospectsTable.website}) like ${`%${candidateDomain}%`}`,
+   656	            ),
+   657	          ))
+   658	          .limit(1);
+   659	        if (emailAlreadyUsed) continue;
+   660	        const [claimAlreadyUsed] = await tx.select({ id: outreachSequenceSendClaimsTable.id })
+   661	          .from(outreachSequenceSendClaimsTable)
+   662	          .innerJoin(prospectsTable, eq(outreachSequenceSendClaimsTable.prospectId, prospectsTable.id))
+   663	          .where(and(
+   664	            eq(outreachSequenceSendClaimsTable.sequenceNumber, 1),
+   665	            or(
+   666	              eq(outreachSequenceSendClaimsTable.prospectId, currentProspect.id),
+   667	              sql`lower(trim(${prospectsTable.contactEmail})) = ${candidateEmail}`,
+   668	              sql`lower(${prospectsTable.website}) like ${`%${candidateDomain}%`}`,
+   669	            ),
+   670	          ))
+   671	          .limit(1);
+   672	        if (claimAlreadyUsed) continue;
+   673	        const slot = availableSlots.shift();
+   674	        if (slot === undefined) break;
+   675	        const [slotClaim] = await tx.insert(outreachPreparationSlotsTable).values({
+   676	          runId,
+   677	          targetDate,
+   678	          slot,
+   679	          prospectId: prospect.id,
+   680	        }).onConflictDoNothing().returning({ id: outreachPreparationSlotsTable.id });
+   681	        if (!slotClaim) continue;
+   682	        if (currentProspect.status === "review") {
+   683	          const [promoted] = await tx.update(prospectsTable)
+   684	            .set({ status: "approved" })
+   685	            .where(and(
+   686	              eq(prospectsTable.id, currentProspect.id),
+   687	              eq(prospectsTable.status, "review"),
+   688	            ))
+   689	            .returning({ id: prospectsTable.id });
+   690	          if (!promoted) {
+   691	            await tx.delete(outreachPreparationSlotsTable)
+   692	              .where(eq(outreachPreparationSlotsTable.id, slotClaim.id));
+   693	            continue;
+   694	          }
+   695	        }
+   696	        let catchUpCohortId: number | null = null;
+   697	        if (catchUpEnrolling) {
+   698	          await tx.execute(sql`select ${outreachCatchUpCohortsTable.id}
+   699	            from ${outreachCatchUpCohortsTable}
+   700	            where ${outreachCatchUpCohortsTable.id} = ${catchUpCohort.id}
+   701	            for update`);
+   702	          const [capacityUsed] = await tx.select({ count: sql<number>`count(*)::int` })
+   703	            .from(outreachCatchUpReservationsTable)
+   704	            .where(and(
+   705	              eq(outreachCatchUpReservationsTable.cohortId, catchUpCohort.id),
+   706	              inArray(outreachCatchUpReservationsTable.status, ["reserved", "accepted"]),
+   707	            ));
+   708	          if ((capacityUsed?.count ?? 0) >= catchUpCohort.targetCount) {
+   709	            await tx.delete(outreachPreparationSlotsTable)
+   710	              .where(eq(outreachPreparationSlotsTable.id, slotClaim.id));
+   711	            break;
+   712	          }
+   713	          catchUpCohortId = catchUpCohort.id;
+   714	        }
+   715	        const personalizationName = getPreparationPersonalizationName(currentProspect);
+   716	        const [message] = await tx.insert(outreachMessagesTable).values({
+   717	          prospectId: prospect.id,
+   718	          campaignId: campaignsByProspect.get(prospect.id)!,
+   719	          sequenceNumber: 1,
+   720	          subject: approvedOutreachSubject(currentProspect.companyName),
+   721	          body: approvedOutreachBody(personalizationName),
+   722	          status: "approved",
+   723	          scheduledAt,
+   724	          catchUpCohortId,
+   725	        }).returning({ id: outreachMessagesTable.id });
+   726	        if (message && catchUpCohortId) {
+   727	          await tx.insert(outreachCatchUpReservationsTable).values({
+   728	            cohortId: catchUpCohortId,
+   729	            messageId: message.id,
+   730	          }).onConflictDoNothing();
+   731	        }
+   732	        await tx.insert(outreachMessagesTable).values(
+   733	          approvedOutreachFollowUpMessages(personalizationName).map((followUp) => ({
+   734	            prospectId: prospect.id,
+   735	            campaignId: campaignsByProspect.get(prospect.id)!,
+   736	            sequenceNumber: followUp.sequenceNumber,
+   737	            subject: followUp.subject,
+   738	            body: followUp.body,
+   739	            status: "approved",
+   740	            scheduledAt: null,
+   741	          })),
+   742	        ).onConflictDoNothing();
+   743	        await tx.update(outreachPreparationSlotsTable)
+   744	          .set({ messageId: message!.id })
+   745	          .where(eq(outreachPreparationSlotsTable.id, slotClaim.id));
+   746	        usedProspects.add(prospect.id);
+   747	      }
+   748	      const slots = await tx.select({ id: outreachPreparationSlotsTable.id })
+   749	        .from(outreachPreparationSlotsTable)
+   750	        .where(eq(outreachPreparationSlotsTable.targetDate, targetDate));
+   751	      return Math.min(
+   752	        slots.length + untrackedTargetInitials.length,
+   753	         targetCount,
+   754	      );
+   755	    });
+   756	    const preparedInitials = await db.select({
+   757	      message: outreachMessagesTable,
+   758	      contactName: prospectsTable.contactName,
+   759	    })
+   760	      .from(outreachMessagesTable)
+   761	      .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+   762	      .where(and(
+   763	        eq(outreachMessagesTable.sequenceNumber, 1),
+   764	        eq(outreachMessagesTable.status, "approved"),
+   765	        gte(outreachMessagesTable.scheduledAt, scheduledAt),
+   766	        lt(outreachMessagesTable.scheduledAt, new Date(scheduledAt.getTime() + 24 * 60 * 60 * 1000)),
+   767	      ));
+   768	    for (const row of preparedInitials) {
+   769	      await ensureApprovedFollowUpSequence(row.message, { contactName: row.contactName });
+   770	    }
+   771	    const skipped = rows.length - prepared;
+   772	    const laneCounts = await getRegularLaneCountsForWindow(scheduledAt);
+   773	    // This service owns only the Named and Public lanes. Hot Market and Hot
+   774	    // Lead are prepared independently and must not inflate this shortfall.
+   775	    const namedAvailable = Math.max(0, getNamedHotMarketSharedLimit(laneConfig) - laneCounts.hotMarket);
+   776	    const regularShortfall = Math.max(0, namedAvailable - laneCounts.direct)
+   777	      + Math.max(0, laneConfig.publicLimit - laneCounts.public);
+   778	    await db.update(outreachPreparationRunsTable).set({
+   779	      status: "completed", preparedCount: prepared, skippedCount: skipped,
+   780	      shortfallCount: regularShortfall, completedAt: new Date(), error: null,
+   781	    }).where(eq(outreachPreparationRunsTable.id, runId));
+   782	    return {
+   783	      state: "completed",
+   784	      prepared,
+   785	      directPrepared: laneCounts.direct,
+   786	      publicPrepared: laneCounts.public,
+   787	      directShortfall: Math.max(
+   788	        0,
+   789	         namedAvailable - laneCounts.direct,
+   790	      ),
+   791	      publicShortfall: Math.max(
+   792	        0,
+   793	         laneConfig.publicLimit - laneCounts.public,
+   794	      ),
+   795	      skipped,
+   796	      shortfall: regularShortfall,
+   797	    };
+   798	  } catch (error) {
+   799	    const message = error instanceof Error ? error.message : "Outreach preparation failed";
+   800	    await db.update(outreachPreparationRunsTable).set({
+   801	      status: "failed", error: message,
+   802	      shortfallCount: getNamedHotMarketSharedLimit(laneConfig) + laneConfig.publicLimit,
+   803	      completedAt: new Date(),
+   804	    }).where(eq(outreachPreparationRunsTable.id, runId));
+   805	    return {
+   806	      state: "failed", prepared: 0, directPrepared: 0, publicPrepared: 0,
+   807	      directShortfall: getNamedHotMarketSharedLimit(laneConfig),
+   808	      publicShortfall: laneConfig.publicLimit,
+   809	       skipped: 0, shortfall: getNamedHotMarketSharedLimit(laneConfig) + laneConfig.publicLimit,
+   810	    };
+   811	  }
+   812	}
+   813	
+   814	/**
+   815	 * Fills the nightly initial-message ceiling after the lane-owned preparations
+   816	 * have run. This deliberately uses the same verified inventory and
+   817	 * transaction-level duplicate protections as regular preparation, but does
+   818	 * not apply the regular lane caps: those caps are precisely what this
+   819	 * recovery path is intended to fill.
+   820	 */
+   821	export async function topUpVerifiedPreparation(
+   822	  scheduledAt: Date,
+   823	  needed: number,
+   824	): Promise<{ prepared: number; shortfall: number }> {
+   825	  const target = Math.max(0, Math.floor(needed));
+   826	  if (target === 0) return { prepared: 0, shortfall: 0 };
+   827	  const now = new Date();
+   828	  const targetDate = phoenixDateKey(scheduledAt);
+   829	  const runId = await claimPreparationRun(targetDate, now, NIGHTLY_TOTAL_INITIAL_TARGET);
+   830	  const run = runId
+   831	    ? runId
+   832	    : (await db.select({ id: outreachPreparationRunsTable.id })
+   833	      .from(outreachPreparationRunsTable)
+   834	      .where(eq(outreachPreparationRunsTable.targetDate, targetDate))
+   835	      .limit(1))[0]?.id;
+   836	  if (!run) return { prepared: 0, shortfall: target };
+   837	
+   838	  const rows = await db.select({ prospect: prospectsTable, campaign: campaignsTable })
+   839	    .from(prospectsTable)
+   840	    .innerJoin(campaignsTable, eq(prospectsTable.campaignId, campaignsTable.id))
+   841	    .where(and(
+   842	      inArray(prospectsTable.status, ["approved", "review"]),
+   843	      eq(prospectsTable.emailStatus, "verified"),
+   844	      eq(campaignsTable.status, "active"),
+   845	    ));
+   846	  const [suppressions, initialMessages, claims] = await Promise.all([
+   847	    db.select({ email: outreachSuppressionsTable.email }).from(outreachSuppressionsTable),
+   848	    db.select({
+   849	      prospectId: outreachMessagesTable.prospectId,
+   850	      contactEmail: prospectsTable.contactEmail,
+   851	      companyName: prospectsTable.companyName,
+   852	      website: prospectsTable.website,
+   853	    }).from(outreachMessagesTable)
+   854	      .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+   855	      .where(eq(outreachMessagesTable.sequenceNumber, 1)),
+   856	    db.select({
+   857	      prospectId: outreachSequenceSendClaimsTable.prospectId,
+   858	      contactEmail: prospectsTable.contactEmail,
+   859	      companyName: prospectsTable.companyName,
+   860	      website: prospectsTable.website,
+   861	    }).from(outreachSequenceSendClaimsTable)
+   862	      .innerJoin(prospectsTable, eq(outreachSequenceSendClaimsTable.prospectId, prospectsTable.id))
+   863	      .where(eq(outreachSequenceSendClaimsTable.sequenceNumber, 1)),
+   864	  ]);
+   865	  const suppressedEmails = new Set(suppressions.map((row) => row.email.trim().toLowerCase()));
+   866	  const usedProspects = new Set([
+   867	    ...initialMessages.map((row) => row.prospectId),
+   868	    ...claims.map((row) => row.prospectId),
+   869	  ]);
+   870	  const usedEmails = new Set([
+   871	    ...initialMessages.flatMap((row) => row.contactEmail ? [row.contactEmail] : []),
+   872	    ...claims.flatMap((row) => row.contactEmail ? [row.contactEmail] : []),
+   873	  ].map((email) => email.trim().toLowerCase()));
+   874	  const usedDomains = new Set([
+   875	    ...initialMessages.map(companyDomain),
+   876	    ...claims.map(companyDomain),
+   877	  ]);
+   878	  const eligible = rows
+   879	    .filter(({ prospect, campaign }) =>
+   880	      canPrepare(prospect, campaign, suppressedEmails)
+   881	      && !usedProspects.has(prospect.id))
+   882	    .map(({ prospect }) => prospect);
+   883	  const selected = selectUniquePreparationCandidates(eligible, {
+   884	    personalCap: target,
+   885	    publicCap: target,
+   886	    usedEmails,
+   887	    usedDomains,
+   888	  }).slice(0, target);
+   889	  let prepared = 0;
+   890	  await db.transaction(async (tx) => {
+   891	    await tx.execute(sql`select ${outreachPreparationRunsTable.id}
+   892	      from ${outreachPreparationRunsTable}
+   893	      where ${outreachPreparationRunsTable.id} = ${run}
+   894	      for update`);
+   895	    const existingSlots = await tx.select({
+   896	      slot: outreachPreparationSlotsTable.slot,
+   897	    }).from(outreachPreparationSlotsTable)
+   898	      .where(eq(outreachPreparationSlotsTable.targetDate, targetDate));
+   899	    const usedSlots = new Set(existingSlots.map((row) => row.slot));
+   900	    const availableSlots = Array.from({ length: NIGHTLY_TOTAL_INITIAL_TARGET }, (_, i) => i + 1)
+   901	      .filter((slot) => !usedSlots.has(slot));
+   902	    for (const prospect of selected) {
+   903	      if (prepared >= target) break;
+   904	      const email = prospect.contactEmail?.trim().toLowerCase();
+   905	      if (!email) continue;
+   906	      await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${email}, 0))`);
+   907	      const domain = companyDomain(prospect);
+   908	      await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${domain}, 0))`);
+   909	      const [currentProspect] = await tx.select().from(prospectsTable)
+   910	        .where(eq(prospectsTable.id, prospect.id)).limit(1);
+   911	      const [campaign] = currentProspect?.campaignId
+   912	        ? await tx.select().from(campaignsTable)
+   913	          .where(eq(campaignsTable.id, currentProspect.campaignId)).limit(1)
+   914	        : [];
+   915	      const currentEmail = currentProspect?.contactEmail?.trim().toLowerCase();
+   916	      const [currentSuppression] = currentEmail
+   917	        ? await tx.select({ id: outreachSuppressionsTable.id })
+   918	          .from(outreachSuppressionsTable)
+   919	          .where(eq(outreachSuppressionsTable.email, currentEmail)).limit(1)
+   920	        : [];
+   921	      if (
+   922	        !currentProspect || !campaign
+   923	        || !["approved", "review"].includes(currentProspect.status)
+   924	        || currentProspect.emailStatus !== "verified"
+   925	        || campaign.status !== "active"
+   926	        || currentSuppression
+   927	        || !canPrepare(currentProspect, campaign, suppressedEmails)
+   928	      ) continue;
+   929	      const currentDomain = companyDomain(currentProspect);
+   930	      const [existing] = await tx.select({ id: outreachMessagesTable.id })
+   931	        .from(outreachMessagesTable)
+   932	        .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+   933	        .where(and(
+   934	          eq(outreachMessagesTable.sequenceNumber, 1),
+   935	          or(eq(outreachMessagesTable.prospectId, prospect.id),
+   936	            sql`lower(trim(${prospectsTable.contactEmail})) = ${email}`,
+   937	            sql`lower(${prospectsTable.website}) like ${`%${currentDomain}%`}`),
+   938	        )).limit(1);
+   939	      if (existing) continue;
+   940	      const [existingClaim] = await tx.select({ id: outreachSequenceSendClaimsTable.id })
+   941	        .from(outreachSequenceSendClaimsTable)
+   942	        .innerJoin(prospectsTable, eq(outreachSequenceSendClaimsTable.prospectId, prospectsTable.id))
+   943	        .where(and(
+   944	          eq(outreachSequenceSendClaimsTable.sequenceNumber, 1),
+   945	          or(eq(outreachSequenceSendClaimsTable.prospectId, currentProspect.id),
+   946	            sql`lower(trim(${prospectsTable.contactEmail})) = ${currentEmail}`,
+   947	            sql`lower(${prospectsTable.website}) like ${`%${currentDomain}%`}`),
+   948	        )).limit(1);
+   949	      if (existingClaim) continue;
+   950	      const slot = availableSlots.shift();
+   951	      if (slot === undefined) break;
+   952	      const [slotRow] = await tx.insert(outreachPreparationSlotsTable).values({
+   953	        runId: run, targetDate, slot, prospectId: prospect.id,
+   954	      }).onConflictDoNothing().returning({ id: outreachPreparationSlotsTable.id });
+   955	      if (!slotRow) continue;
+   956	      try {
+   957	       if (currentProspect.status === "review") {
+   958	        const [promoted] = await tx.update(prospectsTable)
+   959	          .set({ status: "approved" })
+   960	          .where(and(eq(prospectsTable.id, prospect.id), eq(prospectsTable.status, "review")))
+   961	          .returning({ id: prospectsTable.id });
+   962	        if (!promoted) {
+   963	          await tx.delete(outreachPreparationSlotsTable)
+   964	            .where(eq(outreachPreparationSlotsTable.id, slotRow.id));
+   965	          continue;
+   966	        }
+   967	      }
+   968	      const name = getPreparationPersonalizationName(currentProspect);
+   969	      const [message] = await tx.insert(outreachMessagesTable).values({
+   970	        prospectId: currentProspect.id, campaignId: campaign.id, sequenceNumber: 1,
+   971	        subject: approvedOutreachSubject(), body: approvedOutreachBody(name),
+   972	        status: "approved", scheduledAt,
+   973	      }).returning({ id: outreachMessagesTable.id });
+   974	      if (!message) {
+   975	        await tx.delete(outreachPreparationSlotsTable)
+   976	          .where(eq(outreachPreparationSlotsTable.id, slotRow.id));
+   977	        continue;
+   978	      }
+   979	      await tx.insert(outreachMessagesTable).values(
+   980	        approvedOutreachFollowUpMessages(name).map((followUp) => ({
+   981	          prospectId: currentProspect.id, campaignId: campaign.id,
+   982	          sequenceNumber: followUp.sequenceNumber, subject: followUp.subject,
+   983	          body: followUp.body, status: "approved" as const, scheduledAt: null,
+   984	        })),
+   985	      ).onConflictDoNothing();
+   986	      await tx.update(outreachPreparationSlotsTable).set({ messageId: message.id })
+   987	        .where(eq(outreachPreparationSlotsTable.id, slotRow.id));
+   988	      prepared += 1;
+   989	      } catch (error) {
+   990	        await tx.delete(outreachPreparationSlotsTable)
+   991	          .where(eq(outreachPreparationSlotsTable.id, slotRow.id));
+   992	        throw error;
+   993	      }
+   994	    }
+   995	    await tx.update(outreachPreparationRunsTable).set({
+   996	      preparedCount: sql`${outreachPreparationRunsTable.preparedCount} + ${prepared}`,
+   997	      shortfallCount: sql`greatest(
+   998	        0,
+   999	        ${NIGHTLY_TOTAL_INITIAL_TARGET} - (
+  1000	          ${outreachPreparationRunsTable.preparedCount} + ${prepared}
+  1001	        )
+  1002	      )`,
+  1003	      status: "completed", completedAt: new Date(), error: null,
+  1004	    }).where(eq(outreachPreparationRunsTable.id, run));
+  1005	  });
+  1006	  return { prepared, shortfall: Math.max(0, target - prepared) };
+  1007	}
+  1008	
+  1009	/**
+  1010	 * Reconciles the single opener-qualified follow-up for legacy initial messages.
+  1011	 * The sequence helper schedules only when a recorded open exists.
+  1012	 */
+  1013	export async function ensureOutreachFollowUps(): Promise<{ created: number; scheduled: number }> {
+  1014	  const rows = await db.select({
+  1015	    initial: outreachMessagesTable,
+  1016	    prospect: prospectsTable,
+  1017	  }).from(outreachMessagesTable)
+  1018	    .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+  1019	    .where(eq(outreachMessagesTable.sequenceNumber, 1));
+  1020	  let created = 0;
+  1021	  let scheduled = 0;
+  1022	
+  1023	  for (const { initial, prospect } of rows) {
+  1024	    if (
+  1025	      !initial.campaignId
+  1026	      || !["approved", "sending", "sent", "delivered"].includes(initial.status)
+  1027	      || prospect.contactStatus !== "active"
+  1028	      || !prospect.contactName?.trim()
+  1029	    ) continue;
+  1030	
+  1031	    const createdCount = await ensureApprovedFollowUpSequence(initial, {
+  1032	      contactName: prospect.contactName,
+  1033	    });
+  1034	    created += createdCount;
+  1035	    scheduled += createdCount;
+  1036	  }
+  1037	  return { created, scheduled };
+  1038	}
+  1039	
+  1040	export async function getNextOutreachPreparationStatus(now = new Date()): Promise<{
+  1041	  targetDate: string;
+  1042	  targetCount: number;
+  1043	  preparedCount: number;
+  1044	  shortfallCount: number;
+  1045	  status: string;
+  1046	  completedAt: Date | null;
+  1047	  error: string | null;
+  1048	}> {
+  1049	  const { targetDate } = getNextPhoenixPreparationTarget(now);
+  1050	  const [run] = await db.select().from(outreachPreparationRunsTable)
+  1051	    .where(eq(outreachPreparationRunsTable.targetDate, targetDate))
+  1052	    .limit(1);
+  1053	  return {
+  1054	    targetDate,
+  1055	    targetCount: run?.targetCount ?? 0,
+  1056	    preparedCount: run?.preparedCount ?? 0,
+  1057	    shortfallCount: run?.shortfallCount ?? 0,
+  1058	    status: run?.status ?? "not_started",
+  1059	    completedAt: run?.completedAt ?? null,
+  1060	    error: run?.error ?? null,
+  1061	  };
+  1062	}

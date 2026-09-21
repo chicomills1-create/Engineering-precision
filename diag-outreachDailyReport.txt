@@ -1,0 +1,100 @@
+     1	import { ReplitConnectors } from "@replit/connectors-sdk";
+     2	import type { DailyOutreachRunnerResult } from "./outreachDailyRunner";
+     3	
+     4	export function buildDailyOutreachReport(
+     5	  runDate: string,
+     6	  result: DailyOutreachRunnerResult,
+     7	): { subject: string; body: string } {
+     8	  return {
+     9	    subject: `Apex Grid outreach ${runDate}: ${result.providerAccepted} provider accepted`,
+    10	    body: [
+    11	      `Phoenix date: ${runDate}`,
+    12	      "",
+    13	      "Today's dispatch evidence",
+    14	      `Claimed: ${result.claimed}`,
+    15	      `Provider accepted: ${result.providerAccepted}`,
+    16	      `Delivered at reconciliation: ${result.delivered}`,
+    17	      `Bounced/rejected: ${result.bounced}`,
+    18	      `Stopped by safeguards: ${result.stopped}`,
+    19	      `Unresolved: ${result.unresolved}`,
+    20	      "",
+    21	      "Next Phoenix day's prepared queue",
+    22	      `Direct prepared: ${result.directPrepared}`,
+    23	      `Direct shortfall: ${result.directShortfall}`,
+    24	      `Named target: ${result.namedTarget ?? result.directPrepared + result.directShortfall}`,
+    25	      `Public prepared: ${result.publicPrepared}`,
+    26	      `Public shortfall: ${result.publicShortfall}`,
+    27	      `Public target: ${result.publicTarget ?? result.publicPrepared + result.publicShortfall}`,
+    28	      `Regular prepared total: ${result.regularPrepared}`,
+    29	      `Regular shortfall: ${result.regularShortfall}`,
+    30	      `Hot Market prepared this run: ${result.hotMarketPrepared}`,
+    31	      `Hot Market scheduled total: ${result.hotMarketScheduled}`,
+    32	      `Hot Market shortfall: ${result.hotMarketShortfall}`,
+    33	      `Hot Market target: ${result.hotMarketTarget ?? result.hotMarketScheduled + result.hotMarketShortfall}`,
+    34	      `Hot Lead target: ${result.hotLeadTarget ?? 100}`,
+    35	      `Hot Lead prepared: ${result.hotLeadPrepared ?? 0}`,
+    36	      `Hot Lead shortfall: ${result.hotLeadShortfall ?? 100}`,
+    37	      `Top-up verified: ${result.topUpPrepared ?? 0}`,
+    38	      `Top-up verified shortfall: ${result.topUpShortfall ?? 0}`,
+    39	      "",
+    40	      "Acquisition and verification",
+    41	      `Verification promoted: ${result.verificationPromoted ?? 0}`,
+    42	      `FindyMail finder calls (1 credit each): ${result.verificationFinderCalls ?? 0}`,
+    43	      `FindyMail credit-blocked: ${result.verificationCreditBlocked ? "YES" : "no"}`,
+    44	      result.acquisitionErrors.length > 0
+    45	        ? `Acquisition failures: ${result.acquisitionErrors.map((failure) => `${failure.stage}: ${failure.message}`).join(" | ")}`
+    46	        : "No acquisition failures.",
+    47	      "",
+    48	      "Apex Grid fresh verified catch-up cohort",
+    49	      `Target: ${result.catchUpTarget ?? 0}`,
+    50	      `Provider-accepted enrollments: ${result.catchUpEnrolled ?? 0}`,
+    51	      `Remaining capacity: ${result.catchUpRemaining ?? 0}`,
+    52	      "",
+    53	      result.unresolved === 0
+    54	        ? "No ambiguous provider handoffs remain from this run."
+    55	        : "Ambiguous provider handoffs remain blocked from automatic resend.",
+    56	    ].join("\n"),
+    57	  };
+    58	}
+    59	
+    60	export async function sendDailyOutreachReport(
+    61	  runDate: string,
+    62	  result: DailyOutreachRunnerResult,
+    63	): Promise<{ ok: true } | { ok: false; error: string }> {
+    64	  const to = process.env.LEAD_NOTIFY_EMAIL?.trim();
+    65	  const from = (
+    66	    process.env.LEAD_NOTIFY_FROM_EMAIL
+    67	    || process.env.OUTREACH_FROM_EMAIL
+    68	    || to
+    69	  )?.trim();
+    70	  if (!to || !from) {
+    71	    return { ok: false, error: "Daily outreach report email is not configured" };
+    72	  }
+    73	
+    74	  const report = buildDailyOutreachReport(runDate, result);
+    75	  try {
+    76	    const response = await new ReplitConnectors().proxy("sendgrid", "/v3/mail/send", {
+    77	      method: "POST",
+    78	      headers: { "Content-Type": "application/json" },
+    79	      body: JSON.stringify({
+    80	        personalizations: [{ to: [{ email: to }] }],
+    81	        from: { email: from, name: "Apex Grid Outreach Automation" },
+    82	        subject: report.subject,
+    83	        content: [{ type: "text/plain", value: report.body }],
+    84	      }),
+    85	    });
+    86	    if (!response.ok) {
+    87	      const errorBody = await response.text().catch(() => "");
+    88	      return {
+    89	        ok: false,
+    90	        error: `SendGrid report response ${response.status}: ${errorBody}`,
+    91	      };
+    92	    }
+    93	    return { ok: true };
+    94	  } catch (error) {
+    95	    return {
+    96	      ok: false,
+    97	      error: error instanceof Error ? error.message : "Daily outreach report failed",
+    98	    };
+    99	  }
+   100	}

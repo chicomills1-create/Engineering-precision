@@ -1,0 +1,5 @@
+ status | count 
+--------+-------
+(0 rows)
+
+EXIT:0

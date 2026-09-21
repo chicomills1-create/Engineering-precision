@@ -1,0 +1,28 @@
+######## K1: safeguard in worker
+47:    47	// The monthly safeguard remains authoritative; post-cutover hot leads are not
+
+######## K2: stopped in worker
+334:   334	  stopped: number;
+395:   395	    stopped: 0,
+412:   412	      summary.stopped += 1;
+
+######## K3: claim in worker
+67:    67	 * traffic uses this hook to wake the same overlap-guarded, database-claimed
+139:   139	export async function claimOutreachMessageForSending(messageId: number): Promise<OutreachMessage | undefined> {
+140:   140	  const [claimed] = await db.update(outreachMessagesTable)
+230:   230	  if (!claimed) {
+232:   232	    // checks; a concurrent claimant is already sending and keeps its slot.
+245:   245	  return claimed;
+262:   262	export async function sendClaimedOutreachMessage(
+332:   332	  claimed: number;
+393:   393	    claimed: 0,
+410:   410	    const claimed = await claimOutreachMessageForSending(message.id);
+411:   411	    if (!claimed) {
+415:   415	    summary.claimed += 1;
+417:   417	      const persisted = await sendClaimedOutreachMessage(claimed);
+430:   430	            eq(outreachMessagesTable.id, claimed.id),
+444:   444	            eq(outreachMessagesTable.id, claimed.id),
+447:   447	        logger.warn({ messageId: claimed.id, retryAt, error: err.message }, "Provider rate limit deferred outreach without consuming quota");
+453:   453	          eq(outreachMessagesTable.id, claimed.id),
+458:   458	        await releaseDefinitiveCatchUpReservation(claimed.id);
+460:   460	      logger.warn({ messageId: claimed.id, error }, "Scheduled outreach send blocked or failed");

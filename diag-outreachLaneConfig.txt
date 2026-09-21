@@ -1,0 +1,107 @@
+     1	import { and, eq } from "drizzle-orm";
+     2	import { db, outreachLaneConfigsTable } from "@workspace/db";
+     3	import {
+     4	  effectiveLaneAllocations,
+     5	  getOutreachRuntimeConfig,
+     6	  OUTREACH_UNCAPPED,
+     7	} from "./outreachSystemConfig";
+     8	
+     9	export type OutreachLane = "named" | "public" | "hot_market" | "hot_lead";
+    10	export type OutreachLaneLimit = number | typeof OUTREACH_UNCAPPED;
+    11	
+    12	/** September 2026 relaunch: one 500-contact verified pool plus 100 hot leads. */
+    13	export const SEPTEMBER_OUTREACH_LANE_TARGETS = {
+    14	  named: 500,
+    15	  public: 0,
+    16	  hot_market: 0,
+    17	  hot_lead: 100,
+    18	} as const;
+    19	export const SEPTEMBER_OUTREACH_TOTAL_TARGET = 400;
+    20	/** Nightly sequence-1 target: 500 verified contacts plus 100 hot leads. */
+    21	export const SEPTEMBER_OUTREACH_RELAUNCH_DAILY_TARGET = 600;
+    22	
+    23	export type OutreachLaneConfig = {
+    24	  campaignKey: string;
+    25	  effectiveMonth: string;
+    26	  namedLimit: number;
+    27	  publicLimit: number;
+    28	  hotMarketLimit: number;
+    29	  hotLeadLimit: OutreachLaneLimit;
+    30	  namedHotMarketSharedLimit?: number;
+    31	  persisted: boolean;
+    32	};
+    33	
+    34	export function phoenixMonthKey(now = new Date()): string {
+    35	  const parts = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
+    36	    timeZone: "America/Phoenix",
+    37	    year: "numeric",
+    38	    month: "2-digit",
+    39	  }).formatToParts(now).map((part) => [part.type, part.value]));
+    40	  return `${parts.year}-${parts.month}`;
+    41	}
+    42	
+    43	/** The operational campaign key is intentionally month-scoped, not a code date. */
+    44	export function currentOutreachCampaignKey(now = new Date()): string {
+    45	  return process.env.OUTREACH_CAMPAIGN_KEY?.trim() || phoenixMonthKey(now);
+    46	}
+    47	
+    48	export async function getAuthoritativeLaneConfig(
+    49	  campaignKey = currentOutreachCampaignKey(),
+    50	  effectiveMonth = phoenixMonthKey(),
+    51	  now = new Date(),
+    52	): Promise<OutreachLaneConfig> {
+    53	  const [row] = await db.select().from(outreachLaneConfigsTable).where(and(
+    54	    eq(outreachLaneConfigsTable.campaignKey, campaignKey),
+    55	    eq(outreachLaneConfigsTable.effectiveMonth, effectiveMonth),
+    56	  )).limit(1);
+    57	  const runtime = getOutreachRuntimeConfig();
+    58	  const configured = runtime?.schedule;
+    59	  // Version 2 is the authoritative cutover and must not be shadowed by a
+    60	  // legacy persisted four-lane row. Before v2, preserve that row behavior.
+    61	  if (row && (runtime?.version ?? 0) < 2) return { ...row, persisted: true };
+    62	  if (configured?.laneAllocations) {
+    63	    const allocations = effectiveLaneAllocations(configured, now) ?? configured.laneAllocations;
+    64	    return {
+    65	      campaignKey, effectiveMonth,
+    66	      namedLimit: allocations.named,
+    67	      publicLimit: allocations.public,
+    68	      hotMarketLimit: allocations.hotMarket,
+    69	      hotLeadLimit: allocations.hotLead,
+    70	      namedHotMarketSharedLimit: allocations.namedHotMarketShared,
+    71	      persisted: true,
+    72	    };
+    73	  }
+    74	  if (row) return { ...row, persisted: true };
+    75	  if (configured) {
+    76	    // Post-September is monthly pacing, not four fixed lanes. Keep a
+    77	    // reservation lane for every source while the global transaction cap
+    78	    // remains authoritative.
+    79	    // The transaction computes the exact remaining-day pace. This fallback is
+    80	    // only a per-lane shape for callers that need lane metadata.
+    81	    const daily = Math.max(1, configured.dailyTarget ?? configured.monthlyTarget);
+    82	    return { campaignKey, effectiveMonth, namedLimit: daily, publicLimit: daily, hotMarketLimit: daily, hotLeadLimit: daily, persisted: true };
+    83	  }
+    84	  throw new Error("Authoritative outreach lane configuration is unavailable; outreach is fail-closed");
+    85	}
+    86	
+    87	export function laneLimit(config: OutreachLaneConfig, lane: OutreachLane): OutreachLaneLimit {
+    88	  if (lane === "named") return config.namedLimit;
+    89	  if (lane === "public") return config.publicLimit;
+    90	  if (lane === "hot_market") return config.hotMarketLimit;
+    91	  return config.hotLeadLimit;
+    92	}
+    93	
+    94	export function laneConfigTotal(config: OutreachLaneConfig): number {
+    95	  const verifiedPool = config.namedHotMarketSharedLimit
+    96	    ?? config.namedLimit + config.hotMarketLimit;
+    97	  if (config.hotLeadLimit === OUTREACH_UNCAPPED) return verifiedPool;
+    98	  return verifiedPool + config.hotLeadLimit;
+    99	}
+   100	
+   101	export function isUncappedLaneLimit(limit: OutreachLaneLimit): limit is typeof OUTREACH_UNCAPPED {
+   102	  return limit === OUTREACH_UNCAPPED;
+   103	}
+   104	
+   105	export function getNamedHotMarketSharedLimit(config: OutreachLaneConfig): number {
+   106	  return config.namedHotMarketSharedLimit ?? config.hotMarketLimit;
+   107	}

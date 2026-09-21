@@ -1,0 +1,91 @@
+   380	  reviewAfterMs = 15 * 60 * 1000,
+   381	  candidateMessageIds?: number[],
+   382	): Promise<number> {
+   383	  const result = await reconcileUncertainOutreachMessages({
+   384	    now,
+   385	    reviewAfterMs,
+   386	    candidateMessageIds,
+   387	  });
+   388	  return result.accepted + result.retryReleased + result.failed + result.ambiguous;
+   389	}
+   390	
+   391	export async function processDueOutreachMessagesWithSummary(): Promise<OutreachDispatchSummary> {
+   392	  const summary: OutreachDispatchSummary = {
+   393	    claimed: 0,
+   394	    providerAccepted: 0,
+   395	    stopped: 0,
+   396	    unresolved: 0,
+   397	  };
+   398	  if (!isOutreachAutomationReady()) return summary;
+   399	  await stopLegacyAdditionalFollowUps();
+   400	  await stopStaleOpenerFollowUps();
+   401	  await backfillDeliveredFollowUpSequences();
+   402	  const due = await db.select().from(outreachMessagesTable)
+   403	    .where(and(
+   404	      eq(outreachMessagesTable.status, "approved"),
+   405	      lte(outreachMessagesTable.scheduledAt, new Date()),
+   406	    ))
+   407	    .orderBy(asc(outreachMessagesTable.scheduledAt))
+   408	    .limit(MAX_SCHEDULED_MESSAGES_PER_RUN);
+   409	  for (const message of due) {
+   410	    const claimed = await claimOutreachMessageForSending(message.id);
+   411	    if (!claimed) {
+   412	      summary.stopped += 1;
+   413	      continue;
+   414	    }
+   415	    summary.claimed += 1;
+   416	    try {
+   417	      const persisted = await sendClaimedOutreachMessage(claimed);
+   418	      summary.providerAccepted = countPersistedOutreachSend(summary.providerAccepted, persisted);
+   419	    } catch (err) {
+   420	      const error = err instanceof Error ? err.message : "Scheduled send failed";
+   421	      if (err instanceof DailySendLimitError || err instanceof MonthlySendLimitError) {
+   422	        const scheduledAt = getNextPhoenixEightPm();
+   423	        await db.update(outreachMessagesTable)
+   424	          .set({
+   425	            status: "approved",
+   426	            scheduledAt,
+   427	            error: `${err.message}; deferred to ${scheduledAt.toISOString()}`,
+   428	          })
+   429	          .where(and(
+   430	            eq(outreachMessagesTable.id, claimed.id),
+   431	            eq(outreachMessagesTable.status, "sending"),
+   432	          ));
+   433	        continue;
+   434	      }
+   435	      if (err instanceof ProviderRateLimitError) {
+   436	        const retryAt = new Date(Date.now() + err.retryAfterMs);
+   437	        await db.update(outreachMessagesTable)
+   438	          .set({
+   439	            status: "approved",
+   440	            scheduledAt: retryAt,
+   441	            error: `${err.message}; deferred to ${retryAt.toISOString()}`,
+   442	          })
+   443	          .where(and(
+   444	            eq(outreachMessagesTable.id, claimed.id),
+   445	            eq(outreachMessagesTable.status, "sending"),
+   446	          ));
+   447	        logger.warn({ messageId: claimed.id, retryAt, error: err.message }, "Provider rate limit deferred outreach without consuming quota");
+   448	        continue;
+   449	      }
+   450	      await db.update(outreachMessagesTable)
+   451	        .set({ status: getSendFailureStatus(err), error })
+   452	        .where(and(
+   453	          eq(outreachMessagesTable.id, claimed.id),
+   454	          eq(outreachMessagesTable.status, "sending"),
+   455	        ));
+   456	      if (getSendFailureStatus(err) === "needs_review") summary.unresolved += 1;
+   457	      if (getSendFailureStatus(err) === "failed") {
+   458	        await releaseDefinitiveCatchUpReservation(claimed.id);
+   459	      }
+   460	      logger.warn({ messageId: claimed.id, error }, "Scheduled outreach send blocked or failed");
+   461	    }
+   462	  }
+   463	  return summary;
+   464	}
+   465	
+   466	export async function processDueOutreachMessages(): Promise<number> {
+   467	  return (await processDueOutreachMessagesWithSummary()).providerAccepted;
+   468	}
+   469	
+   470	export async function processOutreachReconciliation(): Promise<void> {

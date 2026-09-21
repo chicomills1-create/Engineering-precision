@@ -1,0 +1,11 @@
+ count 
+-------
+     0
+(1 row)
+
+  status  | count 
+----------+-------
+ approved |   118
+(1 row)
+
+DONE

@@ -1,0 +1,77 @@
+     1	import { getAuthoritativeLaneConfig, type OutreachLaneConfig } from "./outreachLaneConfig";
+     2	import {
+     3	  getCurrentPhoenixPreparationTarget,
+     4	  type PhoenixPreparationTarget,
+     5	  prepareNextPhoenixOutreach,
+     6	} from "./outreachPreparation";
+     7	import { prepareNextPhoenixHotMarketOutreach } from "./hotMarketPreparation";
+     8	import { prepareNextPhoenixHotLeadOutreach } from "./outreachHotLeads";
+     9	
+    10	export type PhoenixRecoveryResult = {
+    11	  state: "skipped" | "refused" | "completed" | "failed";
+    12	  targetDate: string | null;
+    13	  target?: PhoenixPreparationTarget;
+    14	  laneConfig?: Pick<
+    15	    OutreachLaneConfig,
+    16	    "namedLimit" | "publicLimit" | "hotMarketLimit" | "hotLeadLimit"
+    17	  >;
+    18	  regular?: Awaited<ReturnType<typeof prepareNextPhoenixOutreach>>;
+    19	  hotMarket?: Awaited<ReturnType<typeof prepareNextPhoenixHotMarketOutreach>>;
+    20	  hotLead?: Awaited<ReturnType<typeof prepareNextPhoenixHotLeadOutreach>>;
+    21	  error?: string;
+    22	};
+    23	
+    24	export function isBeforePhoenixEightPm(now: Date): boolean {
+    25	  const target = getCurrentPhoenixPreparationTarget(now);
+    26	  return now.getTime() < target.scheduledAt.getTime();
+    27	}
+    28	
+    29	export async function recoverCurrentPhoenixOutreach(options: {
+    30	  now?: Date;
+    31	  enabled?: boolean;
+    32	} = {}): Promise<PhoenixRecoveryResult> {
+    33	  const now = options.now ?? new Date();
+    34	  // Recovery only stages approved queue rows; it has no dispatch/provider
+    35	  // dependency.  Keeping this enabled at startup is what makes a Reserved VM
+    36	  // restart before 20:00 useful, while the Phoenix cutoff remains a hard gate.
+    37	  const enabled = options.enabled ?? true;
+    38	  if (!enabled) return { state: "skipped", targetDate: null };
+    39	
+    40	  const target = getCurrentPhoenixPreparationTarget(now);
+    41	  if (!isBeforePhoenixEightPm(now)) {
+    42	    return { state: "refused", targetDate: target.targetDate, target };
+    43	  }
+    44	
+    45	  try {
+    46	    // Resolve this before any preparation begins.  Each lane preparation also
+    47	    // reads the value, while this check makes recovery fail closed if startup
+    48	    // was called before authoritative configuration was actually available.
+    49	    const laneConfig = await getAuthoritativeLaneConfig(undefined, undefined, target.scheduledAt);
+    50	    const [regular, hotMarket, hotLead] = await Promise.all([
+    51	      prepareNextPhoenixOutreach(now, target),
+    52	      prepareNextPhoenixHotMarketOutreach(now, target),
+    53	      prepareNextPhoenixHotLeadOutreach(now, target),
+    54	    ]);
+    55	    return {
+    56	      state: "completed",
+    57	      targetDate: target.targetDate,
+    58	      target,
+    59	      laneConfig: {
+    60	        namedLimit: laneConfig.namedLimit,
+    61	        publicLimit: laneConfig.publicLimit,
+    62	        hotMarketLimit: laneConfig.hotMarketLimit,
+    63	        hotLeadLimit: laneConfig.hotLeadLimit,
+    64	      },
+    65	      regular,
+    66	      hotMarket,
+    67	      hotLead,
+    68	    };
+    69	  } catch (error) {
+    70	    return {
+    71	      state: "failed",
+    72	      targetDate: target.targetDate,
+    73	      target,
+    74	      error: error instanceof Error ? error.message : String(error),
+    75	    };
+    76	  }
+    77	}

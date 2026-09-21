@@ -1,0 +1,179 @@
+     1	import { ReplitConnectors } from "@replit/connectors-sdk";
+     2	import { and, count, eq, inArray, lte, min, max } from "drizzle-orm";
+     3	import {
+     4	  db,
+     5	  outreachMessagesTable,
+     6	  outreachQueueAlertsTable,
+     7	} from "@workspace/db";
+     8	import { logger } from "./logger";
+     9	
+    10	export const OUTREACH_QUEUE_GRACE_MS = 5 * 60 * 1000;
+    11	const INCIDENT_KEY = "scheduled-outreach-overdue";
+    12	
+    13	export type OutreachQueueAlertSummary = {
+    14	  overdueCount: number;
+    15	  scheduledFrom: Date;
+    16	  scheduledThrough: Date;
+    17	  providerAmbiguousCount: number;
+    18	  deliveryFailureCount: number;
+    19	};
+    20	
+    21	export type OutreachQueueMonitorResult =
+    22	  | { state: "clear" }
+    23	  | { state: "deduplicated"; summary: OutreachQueueAlertSummary }
+    24	  | { state: "alerted"; summary: OutreachQueueAlertSummary }
+    25	  | { state: "failed"; summary: OutreachQueueAlertSummary; error: string };
+    26	
+    27	type QueueSummaryLoader = (cutoff: Date) => Promise<OutreachQueueAlertSummary | null>;
+    28	type QueueAlertNotifier = (summary: OutreachQueueAlertSummary) => Promise<void>;
+    29	type QueueAlertFallback = (
+    30	  summary: OutreachQueueAlertSummary,
+    31	  primaryError: string,
+    32	) => Promise<void>;
+    33	
+    34	function adminEmails(): string[] {
+    35	  return (process.env.ADMIN_EMAILS ?? "")
+    36	    .split(",")
+    37	    .map((email) => email.trim())
+    38	    .filter(Boolean);
+    39	}
+    40	
+    41	
+    42	function alertFromEmail(): string | undefined {
+    43	  return process.env.LEAD_NOTIFY_FROM_EMAIL?.trim()
+    44	    || process.env.OUTREACH_FROM_EMAIL?.trim()
+    45	    || adminEmails()[0];
+    46	}
+    47	
+    48	export function buildOutreachQueueAlertBody(summary: OutreachQueueAlertSummary): string {
+    49	  return [
+    50	    "Scheduled outreach is still waiting in the approved queue after the 5-minute grace period.",
+    51	    "",
+    52	    `Approved and overdue: ${summary.overdueCount}`,
+    53	    `Scheduled window: ${summary.scheduledFrom.toISOString()} through ${summary.scheduledThrough.toISOString()}`,
+    54	    "",
+    55	    `Provider ambiguity (sending/needs review): ${summary.providerAmbiguousCount}`,
+    56	    `Known delivery failures (failed/bounced): ${summary.deliveryFailureCount}`,
+    57	    "",
+    58	    "This alert indicates scheduler inactivity for the approved queue. Provider ambiguity and known delivery failures are shown separately and are not automatically retried by this monitor.",
+    59	    "Normal recovery remains protected by database claims, suppression checks, quotas, and reconciliation locks.",
+    60	  ].join("\n");
+    61	}
+    62	
+    63	async function sendAlert(summary: OutreachQueueAlertSummary): Promise<void> {
+    64	  const to = adminEmails();
+    65	  const from = alertFromEmail();
+    66	  if (to.length === 0 || !from) throw new Error("Admin alert email is not configured");
+    67	
+    68	  const response = await new ReplitConnectors().proxy("sendgrid", "/v3/mail/send", {
+    69	    method: "POST",
+    70	    headers: { "Content-Type": "application/json" },
+    71	    body: JSON.stringify({
+    72	      personalizations: [{ to: to.map((email) => ({ email })) }],
+    73	      from: { email: from, name: "Apex Grid Outreach Monitor" },
+    74	      subject: `[Action required] ${summary.overdueCount} scheduled outreach email${summary.overdueCount === 1 ? "" : "s"} still queued`,
+    75	      content: [{ type: "text/plain", value: buildOutreachQueueAlertBody(summary) }],
+    76	    }),
+    77	  });
+    78	  if (!response.ok) {
+    79	    throw new Error(`SendGrid responded ${response.status}: ${await response.text().catch(() => "")}`);
+    80	  }
+    81	}
+    82	
+    83	async function logFallbackAlert(
+    84	  summary: OutreachQueueAlertSummary,
+    85	  primaryError: string,
+    86	): Promise<void> {
+    87	  logger.error(
+    88	    {
+    89	      incidentKey: INCIDENT_KEY,
+    90	      channel: "operations-log",
+    91	      primaryChannel: "sendgrid",
+    92	      primaryError,
+    93	      ...summary,
+    94	      alertBody: buildOutreachQueueAlertBody(summary),
+    95	    },
+    96	    "URGENT: overdue outreach queue alert delivered through SendGrid-independent fallback",
+    97	  );
+    98	}
+    99	
+   100	async function loadQueueSummary(cutoff: Date): Promise<OutreachQueueAlertSummary | null> {
+   101	  const [overdue] = await db.select({
+   102	    count: count(),
+   103	    scheduledFrom: min(outreachMessagesTable.scheduledAt),
+   104	    scheduledThrough: max(outreachMessagesTable.scheduledAt),
+   105	  }).from(outreachMessagesTable).where(and(
+   106	    eq(outreachMessagesTable.status, "approved"),
+   107	    lte(outreachMessagesTable.scheduledAt, cutoff),
+   108	  ));
+   109	  const overdueCount = Number(overdue?.count ?? 0);
+   110	  if (overdueCount === 0 || !overdue?.scheduledFrom || !overdue.scheduledThrough) return null;
+   111	
+   112	  const [providerAmbiguous, deliveryFailures] = await Promise.all([
+   113	    db.select({ count: count() }).from(outreachMessagesTable)
+   114	      .where(inArray(outreachMessagesTable.status, ["sending", "needs_review"])),
+   115	    db.select({ count: count() }).from(outreachMessagesTable)
+   116	      .where(inArray(outreachMessagesTable.status, ["failed", "bounced"])),
+   117	  ]);
+   118	  return {
+   119	    overdueCount,
+   120	    scheduledFrom: overdue.scheduledFrom,
+   121	    scheduledThrough: overdue.scheduledThrough,
+   122	    providerAmbiguousCount: Number(providerAmbiguous[0]?.count ?? 0),
+   123	    deliveryFailureCount: Number(deliveryFailures[0]?.count ?? 0),
+   124	  };
+   125	}
+   126	
+   127	export async function monitorOverdueOutreachQueue(options: {
+   128	  now?: Date;
+   129	  graceMs?: number;
+   130	  notify?: QueueAlertNotifier;
+   131	  fallbackNotify?: QueueAlertFallback;
+   132	  loadSummary?: QueueSummaryLoader;
+   133	} = {}): Promise<OutreachQueueMonitorResult> {
+   134	  const now = options.now ?? new Date();
+   135	  const cutoff = new Date(now.getTime() - (options.graceMs ?? OUTREACH_QUEUE_GRACE_MS));
+   136	  const summary = await (options.loadSummary ?? loadQueueSummary)(cutoff);
+   137	  if (!summary) {
+   138	    await db.delete(outreachQueueAlertsTable).where(eq(outreachQueueAlertsTable.incidentKey, INCIDENT_KEY));
+   139	    return { state: "clear" };
+   140	  }
+   141	
+   142	  const [claimed] = await db.insert(outreachQueueAlertsTable).values({
+   143	    incidentKey: INCIDENT_KEY,
+   144	    overdueCount: summary.overdueCount,
+   145	    scheduledFrom: summary.scheduledFrom,
+   146	    scheduledThrough: summary.scheduledThrough,
+   147	    providerAmbiguousCount: summary.providerAmbiguousCount,
+   148	    deliveryFailureCount: summary.deliveryFailureCount,
+   149	  }).onConflictDoNothing({ target: outreachQueueAlertsTable.incidentKey }).returning();
+   150	  if (!claimed) return { state: "deduplicated", summary };
+   151	
+   152	  try {
+   153	    await (options.notify ?? sendAlert)(summary);
+   154	    await db.update(outreachQueueAlertsTable).set({ status: "sent", sentAt: now })
+   155	      .where(eq(outreachQueueAlertsTable.id, claimed.id));
+   156	    return { state: "alerted", summary };
+   157	  } catch (error) {
+   158	    const detail = error instanceof Error ? error.message : "Admin alert failed";
+   159	    try {
+   160	      await (options.fallbackNotify ?? logFallbackAlert)(summary, detail);
+   161	      await db.update(outreachQueueAlertsTable).set({
+   162	        status: "fallback_sent",
+   163	        error: detail,
+   164	        sentAt: now,
+   165	      }).where(eq(outreachQueueAlertsTable.id, claimed.id));
+   166	      return { state: "alerted", summary };
+   167	    } catch (fallbackError) {
+   168	      const fallbackDetail = fallbackError instanceof Error
+   169	        ? fallbackError.message
+   170	        : "Fallback admin alert failed";
+   171	      const combinedError = `${detail}; fallback failed: ${fallbackDetail}`;
+   172	      await db.update(outreachQueueAlertsTable).set({
+   173	        status: "failed",
+   174	        error: combinedError,
+   175	      }).where(eq(outreachQueueAlertsTable.id, claimed.id));
+   176	      return { state: "failed", summary, error: combinedError };
+   177	    }
+   178	  }
+   179	}

@@ -1,0 +1,24 @@
+######## M1: outer entry ops wiring
+7:185:   185	export async function runDailyOutreachOnce(
+21:     7	  processDueOutreachMessagesWithSummary,
+25:    11	  processDueHotMarketResearch,
+26:    12	  processDueOutreachResearchSchedules,
+33:    19	import { prepareNextPhoenixHotMarketOutreach } from "./lib/hotMarketPreparation";
+41:    27	  runDailyOutreachOnce,
+128:   114	  const result = await runDailyOutreachOnce({
+129:   115	    processHotMarketResearch: () => processDueHotMarketResearch(),
+130:   116	    processScheduledResearch: () => processDueOutreachResearchSchedules(),
+155:   141	    prepareRegularOutreach: () => prepareNextPhoenixOutreach(),
+156:   142	    prepareHotMarketOutreach: () => prepareNextPhoenixHotMarketOutreach(),
+157:   143	    prepareHotLeadOutreach: () => prepareNextPhoenixHotLeadOutreach(),
+170:   156	    processDueMessages: () => processDueOutreachMessagesWithSummary(),
+637:185:   185	export async function runDailyOutreachOnce(
+1273:    30	  namedHotMarketSharedLimit?: number;
+1313:    70	      namedHotMarketSharedLimit: allocations.namedHotMarketShared,
+1338:    95	  const verifiedPool = config.namedHotMarketSharedLimit
+1348:   105	export function getNamedHotMarketSharedLimit(config: OutreachLaneConfig): number {
+1349:   106	  return config.namedHotMarketSharedLimit ?? config.hotMarketLimit;
+
+######## M2: hotMarket batch send path
+292:export async function seedHotMarketOutreachBatch(options: {
+441:export async function stageVerifiedHotMarketProspects(

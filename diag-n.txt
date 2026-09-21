@@ -1,0 +1,44 @@
+######## N1: reconciliation report sending
+
+######## N2: outer entry report call
+   176	    : hasAcquisitionFailure
+   177	      ? "acquisition_failed"
+   178	      : hasPreparationShortfall
+   179	        ? "preparation_shortfall"
+   180	        : run.incidentType;
+   181	  const acquisitionIncident = result.acquisitionErrors.length > 0
+   182	    ? `Acquisition failures: ${result.acquisitionErrors.map((failure) => `${failure.stage}: ${failure.message}`).join(" | ")}`
+   183	    : null;
+   184	  const incidentError = [hasPreparationShortfall
+   185	    ? `Next-day queue shortfall: ${result.directShortfall} Named, ${result.publicShortfall} Public, ${result.hotMarketShortfall} Hot Market, ${result.hotLeadShortfall ?? 100} Hot Lead`
+   186	    : null, acquisitionIncident].filter(Boolean).join("; ") || null;
+   187	  await db.update(outreachDailyRunsTable).set({
+   188	    status,
+   189	    incidentType,
+   190	    error: incidentError,
+   191	    claimedCount: result.claimed,
+   192	    providerAcceptedCount: result.providerAccepted,
+   193	    deliveredCount: result.delivered,
+   194	    bouncedCount: result.bounced,
+   195	    stoppedCount: result.stopped,
+   196	    unresolvedCount: result.unresolved,
+   197	    completedAt: new Date(),
+   198	  }).where(eq(outreachDailyRunsTable.id, run.id));
+   199	  const report = await sendDailyOutreachReport(runDate, result);
+   200	  if (!report.ok) {
+   201	    await db.update(outreachDailyRunsTable).set({
+   202	      status: "partial",
+   203	      incidentType: incidentType ?? "report_failed",
+   204	      error: [incidentError, `Daily proof report failed: ${report.error}`]
+   205	        .filter(Boolean)
+   206	        .join("; "),
+   207	    }).where(eq(outreachDailyRunsTable.id, run.id));
+   208	    logger.error({ error: report.error, runDate }, "Daily outreach proof report failed");
+   209	    return;
+   210	  }
+   211	  logger.info(result, "Daily outreach runner completed");
+   212	  });
+   213	  if (exclusive.state === "busy") {
+   214	    lockClient.release();
+   215	    logger.info("Daily outreach runner skipped: another invocation holds the exclusive lease");
+   216	  }

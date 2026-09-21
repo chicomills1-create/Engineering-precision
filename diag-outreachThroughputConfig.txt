@@ -1,0 +1,28 @@
+     1	const DEFAULT_DISCOVERY_DAILY_CAP = 1000;
+     2	const DEFAULT_VERIFICATION_BATCH_CAP = 600;
+     3	const MAX_CONFIGURABLE_RESEARCH_CAP = 1_000;
+     4	
+     5	function positiveBoundedInteger(value: string | undefined, fallback: number): number {
+     6	  if (!value) return fallback;
+     7	  const parsed = Number(value);
+     8	  if (!Number.isInteger(parsed) || parsed < 1 || parsed > MAX_CONFIGURABLE_RESEARCH_CAP) {
+     9	    return fallback;
+    10	  }
+    11	  return parsed;
+    12	}
+    13	
+    14	export function getOutreachDiscoveryDailyCap(): number {
+    15	  return positiveBoundedInteger(
+    16	    process.env.OUTREACH_DISCOVERY_DAILY_CAP,
+    17	    DEFAULT_DISCOVERY_DAILY_CAP,
+    18	  );
+    19	}
+    20	
+    21	export function getOutreachVerificationBatchCap(): number {
+    22	  return positiveBoundedInteger(
+    23	    process.env.OUTREACH_VERIFICATION_BATCH_CAP,
+    24	    DEFAULT_VERIFICATION_BATCH_CAP,
+    25	  );
+    26	}
+    27	
+    28	export const OUTREACH_RESEARCH_CAP_MAXIMUM = MAX_CONFIGURABLE_RESEARCH_CAP;

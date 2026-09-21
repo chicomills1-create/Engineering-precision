@@ -1,0 +1,351 @@
+     1	import { and, eq, gte, inArray, lt, or, sql } from "drizzle-orm";
+     2	import {
+     3	  campaignsTable,
+     4	  db,
+     5	  outreachMessagesTable,
+     6	  outreachSequenceSendClaimsTable,
+     7	  outreachSuppressionsTable,
+     8	  prospectsTable,
+     9	  type Prospect,
+    10	} from "@workspace/db";
+    11	import {
+    12	  approvedOutreachBody,
+    13	  approvedOutreachSubject,
+    14	  hotLeadFollowUpMessages,
+    15	} from "./verifiedOutreachBatch";
+    16	import {
+    17	  getAuthoritativeLaneConfig,
+    18	  isUncappedLaneLimit,
+    19	} from "./outreachLaneConfig";
+    20	import {
+    21	  type PhoenixPreparationTarget,
+    22	  getNextPhoenixPreparationTarget,
+    23	  isPhoenixPreparationWindowOpen,
+    24	} from "./outreachPreparation";
+    25	import { logger } from "./logger";
+    26	
+    27	export type OutreachEngagementRow = {
+    28	  prospectId: number;
+    29	  companyName: string;
+    30	  contactName: string | null;
+    31	  contactEmail: string | null;
+    32	  city: string;
+    33	  state: string;
+    34	  campaignName: string | null;
+    35	  eventId: number;
+    36	  eventType: string;
+    37	  occurredAt: Date;
+    38	};
+    39	
+    40	export type HotLeadCandidate = Pick<Prospect,
+    41	  "id" | "companyName" | "website" | "contactEmail" | "contactName" | "contactTitle"
+    42	  | "state" | "fitScore" | "needScore" | "leadScore" | "leadStatus" | "createdAt"
+    43	> & { latestEngagedAt?: Date | null };
+    44	
+    45	/**
+    46	 * Hot-lead ordering intentionally gives recency precedence over score. This
+    47	 * keeps a newly qualified September lead from being displaced by an older,
+    48	 * marginally stronger record, while the score breaks same-day ties.
+    49	 */
+    50	export function prioritizeHotLeadCandidates<T extends HotLeadCandidate>(candidates: T[]): T[] {
+    51	  return [...candidates].sort((left, right) =>
+    52	    right.createdAt.getTime() - left.createdAt.getTime()
+    53	    || (right.latestEngagedAt?.getTime() ?? 0) - (left.latestEngagedAt?.getTime() ?? 0)
+    54	    || right.leadScore - left.leadScore
+    55	    || (right.fitScore + right.needScore) - (left.fitScore + left.needScore)
+    56	    || left.id - right.id,
+    57	  );
+    58	}
+    59	
+    60	function phoenixDateKey(now: Date): string {
+    61	  const values = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
+    62	    timeZone: "America/Phoenix",
+    63	    year: "numeric",
+    64	    month: "2-digit",
+    65	    day: "2-digit",
+    66	  }).formatToParts(now).map((part) => [part.type, part.value]));
+    67	  return `${values.year}-${values.month}-${values.day}`;
+    68	}
+    69	
+    70	function companyDomain(prospect: Pick<Prospect, "companyName" | "website">): string {
+    71	  if (prospect.website) {
+    72	    try {
+    73	      return new URL(prospect.website).hostname.replace(/^www\./, "").toLowerCase();
+    74	    } catch {
+    75	      // Use the same stable fallback as regular preparation.
+    76	    }
+    77	  }
+    78	  return prospect.companyName.trim().toLowerCase().replace(/[^a-z0-9]/g, "");
+    79	}
+    80	
+    81	/**
+    82	 * Stages the independent September Hot Leads lane. Only records that have
+    83	 * already been explicitly promoted to a hot/qualified lead are considered;
+    84	 * engagement does not silently authorize a second opener to a prior
+    85	 * recipient. Existing opener/email/suppression checks are repeated inside the
+    86	 * transaction so this remains safe when regular and hot-market preparation
+    87	 * run concurrently.
+    88	 */
+    89	export async function prepareNextPhoenixHotLeadOutreach(
+    90	  now = new Date(),
+    91	  target?: PhoenixPreparationTarget,
+    92	): Promise<{
+    93	  state: "skipped" | "completed" | "failed";
+    94	  prepared: number;
+    95	  totalScheduled: number;
+    96	  shortfall: number;
+    97	}> {
+    98	  if (!target && !isPhoenixPreparationWindowOpen(now)) {
+    99	    return { state: "skipped", prepared: 0, totalScheduled: 0, shortfall: 0 };
+   100	  }
+   101	  const { scheduledAt } = target ?? getNextPhoenixPreparationTarget(now);
+   102	  const targetEnd = new Date(scheduledAt.getTime() + 24 * 60 * 60_000);
+   103	  const laneConfig = await getAuthoritativeLaneConfig(undefined, undefined, scheduledAt);
+   104	  const hotLeadLimit = laneConfig.hotLeadLimit;
+   105	
+   106	  try {
+   107	    const rows = await db.select({ prospect: prospectsTable, campaign: campaignsTable })
+   108	      .from(prospectsTable)
+   109	      .innerJoin(campaignsTable, eq(prospectsTable.campaignId, campaignsTable.id))
+   110	      .where(and(
+   111	        inArray(prospectsTable.status, ["approved", "review"]),
+   112	        eq(prospectsTable.contactStatus, "active"),
+   113	        eq(prospectsTable.emailStatus, "verified"),
+   114	        or(
+   115	          inArray(prospectsTable.leadStatus, ["hot", "qualified"]),
+   116	          // September 2026 relaunch: hot = any verified open (score 10) or click (55).
+   117	          gte(prospectsTable.leadScore, 10),
+   118	        ),
+   119	        eq(campaignsTable.status, "active"),
+   120	      ));
+   121	    const [suppressions, initialMessages, claims, targetMessages] = await Promise.all([
+   122	      db.select({ email: outreachSuppressionsTable.email }).from(outreachSuppressionsTable),
+   123	      db.select({
+   124	        prospectId: outreachMessagesTable.prospectId,
+   125	        contactEmail: prospectsTable.contactEmail,
+   126	        companyName: prospectsTable.companyName,
+   127	        website: prospectsTable.website,
+   128	      })
+   129	        .from(outreachMessagesTable)
+   130	        .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+   131	        .where(eq(outreachMessagesTable.sequenceNumber, 1)),
+   132	      db.select({
+   133	        prospectId: outreachSequenceSendClaimsTable.prospectId,
+   134	        contactEmail: prospectsTable.contactEmail,
+   135	        companyName: prospectsTable.companyName,
+   136	        website: prospectsTable.website,
+   137	      })
+   138	        .from(outreachSequenceSendClaimsTable)
+   139	        .innerJoin(prospectsTable, eq(outreachSequenceSendClaimsTable.prospectId, prospectsTable.id))
+   140	        .where(eq(outreachSequenceSendClaimsTable.sequenceNumber, 1)),
+   141	      db.select({
+   142	        prospectId: outreachMessagesTable.prospectId,
+   143	        sourceType: outreachMessagesTable.sourceType,
+   144	      })
+   145	        .from(outreachMessagesTable)
+   146	        .where(and(
+   147	          eq(outreachMessagesTable.sequenceNumber, 1),
+   148	          gte(outreachMessagesTable.scheduledAt, scheduledAt),
+   149	          lt(outreachMessagesTable.scheduledAt, targetEnd),
+   150	          inArray(outreachMessagesTable.status, ["approved", "sending", "sent", "delivered"]),
+   151	        )),
+   152	    ]);
+   153	    const suppressed = new Set(suppressions.map((row) => row.email.trim().toLowerCase()));
+   154	    const usedProspects = new Set([
+   155	      ...initialMessages.map((row) => row.prospectId),
+   156	      ...claims.map((row) => row.prospectId),
+   157	      ...targetMessages.map((row) => row.prospectId),
+   158	    ]);
+   159	    const usedEmails = new Set([
+   160	      ...initialMessages.flatMap((row) =>
+   161	        row.contactEmail ? [row.contactEmail.trim().toLowerCase()] : []
+   162	      ),
+   163	      ...claims.flatMap((row) =>
+   164	        row.contactEmail ? [row.contactEmail.trim().toLowerCase()] : []
+   165	      ),
+   166	    ]);
+   167	    const usedDomains = new Set([
+   168	      ...initialMessages.map(companyDomain),
+   169	      ...claims.map(companyDomain),
+   170	      ...rows
+   171	        .filter(({ prospect }) => usedProspects.has(prospect.id))
+   172	        .map(({ prospect }) => companyDomain(prospect)),
+   173	    ]);
+   174	    const existingHotLeads = targetMessages.filter((row) =>
+   175	      row.sourceType === "hot_lead" || row.sourceType === "hot_lead_verified"
+   176	    ).length;
+   177	    const remaining = isUncappedLaneLimit(hotLeadLimit)
+   178	      ? Infinity
+   179	      : Math.max(0, hotLeadLimit - existingHotLeads);
+   180	    const campaignsByProspect = new Map(rows.map(({ prospect, campaign }) => [prospect.id, campaign]));
+   181	    const candidates = prioritizeHotLeadCandidates(
+   182	      rows.map(({ prospect }) => prospect).filter((prospect) => {
+   183	        const email = prospect.contactEmail?.trim().toLowerCase();
+   184	        return Boolean(email)
+   185	          && !usedProspects.has(prospect.id)
+   186	          && !suppressed.has(email!)
+   187	          && !usedEmails.has(email!)
+   188	          && !usedDomains.has(companyDomain(prospect))
+   189	          && Boolean(prospect.contactName?.trim());
+   190	      }),
+   191	    );
+   192	    let prepared = 0;
+   193	    for (const candidate of candidates) {
+   194	      if (prepared >= remaining) break;
+   195	      const email = candidate.contactEmail!.trim().toLowerCase();
+   196	      const domain = companyDomain(candidate);
+   197	      const inserted = await db.transaction(async (tx) => {
+   198	        await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${`hot-lead-window:${phoenixDateKey(scheduledAt)}`}, 0))`);
+   199	        await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${email}, 0))`);
+   200	        await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${domain}, 0))`);
+   201	        const [currentCount] = await tx.select({ value: sql<number>`count(*)::int` })
+   202	          .from(outreachMessagesTable)
+   203	          .where(and(
+   204	            eq(outreachMessagesTable.sequenceNumber, 1),
+   205	            eq(outreachMessagesTable.sourceType, "hot_lead_verified"),
+   206	            gte(outreachMessagesTable.scheduledAt, scheduledAt),
+   207	            lt(outreachMessagesTable.scheduledAt, targetEnd),
+   208	            inArray(outreachMessagesTable.status, ["approved", "sending", "sent", "delivered"]),
+   209	          ));
+   210	        if (
+   211	          !isUncappedLaneLimit(hotLeadLimit)
+   212	          && (currentCount?.value ?? 0) >= hotLeadLimit
+   213	        ) return false;
+   214	        const [blocked] = await tx.select({ id: outreachMessagesTable.id })
+   215	          .from(outreachMessagesTable)
+   216	          .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+   217	          .where(and(
+   218	            eq(outreachMessagesTable.sequenceNumber, 1),
+   219	            or(
+   220	              eq(outreachMessagesTable.prospectId, candidate.id),
+   221	              sql`lower(trim(${prospectsTable.contactEmail})) = ${email}`,
+   222	              sql`lower(${prospectsTable.website}) like ${`%${domain}%`}`,
+   223	            ),
+   224	          )).limit(1);
+   225	        const [suppression] = await tx.select({ id: outreachSuppressionsTable.id })
+   226	          .from(outreachSuppressionsTable)
+   227	          .where(eq(outreachSuppressionsTable.email, email))
+   228	          .limit(1);
+   229	        const [claimed] = await tx.select({ id: outreachSequenceSendClaimsTable.id })
+   230	          .from(outreachSequenceSendClaimsTable)
+   231	          .innerJoin(prospectsTable, eq(outreachSequenceSendClaimsTable.prospectId, prospectsTable.id))
+   232	          .where(and(
+   233	            eq(outreachSequenceSendClaimsTable.sequenceNumber, 1),
+   234	            or(
+   235	              eq(outreachSequenceSendClaimsTable.prospectId, candidate.id),
+   236	              sql`lower(trim(${prospectsTable.contactEmail})) = ${email}`,
+   237	              sql`lower(${prospectsTable.website}) like ${`%${domain}%`}`,
+   238	            ),
+   239	          ))
+   240	          .limit(1);
+   241	        const campaign = campaignsByProspect.get(candidate.id);
+   242	        if (blocked || claimed || suppression || !campaign) return false;
+   243	        await tx.insert(outreachMessagesTable).values([
+   244	          {
+   245	            prospectId: candidate.id,
+   246	            campaignId: campaign.id,
+   247	            sequenceNumber: 1,
+   248	            subject: approvedOutreachSubject(candidate.companyName),
+   249	            body: approvedOutreachBody(candidate.contactName!),
+   250	            status: "approved",
+   251	            scheduledAt,
+   252	            sourceType: "hot_lead_verified",
+   253	          },
+   254	          ...hotLeadFollowUpMessages(candidate.contactName!).map((followUp) => ({
+   255	            prospectId: candidate.id,
+   256	            campaignId: campaign.id,
+   257	            sequenceNumber: followUp.sequenceNumber,
+   258	            subject: followUp.subject,
+   259	            body: followUp.body,
+   260	            status: "approved",
+   261	            scheduledAt: null,
+   262	            sourceType: "hot_lead_verified",
+   263	          })),
+   264	        ]);
+   265	        return true;
+   266	      });
+   267	      if (inserted) {
+   268	        prepared += 1;
+   269	        usedEmails.add(email);
+   270	        usedDomains.add(domain);
+   271	        usedProspects.add(candidate.id);
+   272	      }
+   273	    }
+   274	    const totalScheduled = existingHotLeads + prepared;
+   275	    return {
+   276	      state: "completed",
+   277	      prepared,
+   278	      totalScheduled,
+   279	      shortfall: isUncappedLaneLimit(hotLeadLimit)
+   280	        ? 0
+   281	        : Math.max(0, hotLeadLimit - totalScheduled),
+   282	    };
+   283	  } catch (error) {
+   284	    logger.error({ err: error }, "September hot-lead preparation failed");
+   285	    return {
+   286	      state: "failed",
+   287	      prepared: 0,
+   288	      totalScheduled: 0,
+   289	      shortfall: isUncappedLaneLimit(hotLeadLimit) ? 0 : hotLeadLimit,
+   290	    };
+   291	  }
+   292	}
+   293	
+   294	export function buildOutreachHotLeads(rows: OutreachEngagementRow[]) {
+   295	  const leads = new Map<number, {
+   296	    prospectId: number;
+   297	    companyName: string;
+   298	    contactName: string | null;
+   299	    contactEmail: string | null;
+   300	    location: string;
+   301	    campaignName: string | null;
+   302	    eventIds: Set<number>;
+   303	    openCount: number;
+   304	    clickCount: number;
+   305	    firstEngagedAt: Date;
+   306	    latestEngagedAt: Date;
+   307	  }>();
+   308	  for (const row of rows) {
+   309	    if (row.eventType !== "open" && row.eventType !== "click") continue;
+   310	    if (leads.get(row.prospectId)?.eventIds.has(row.eventId)) continue;
+   311	    const current = leads.get(row.prospectId);
+   312	    if (current) {
+   313	      current.eventIds.add(row.eventId);
+   314	        if (row.eventType === "click") current.clickCount += 1;
+   315	        if (row.eventType === "open") current.openCount += 1;
+   316	      if (row.occurredAt < current.firstEngagedAt) current.firstEngagedAt = row.occurredAt;
+   317	      if (row.occurredAt > current.latestEngagedAt) {
+   318	        current.latestEngagedAt = row.occurredAt;
+   319	        current.campaignName = row.campaignName;
+   320	      }
+   321	      continue;
+   322	    }
+   323	    leads.set(row.prospectId, {
+   324	      prospectId: row.prospectId,
+   325	      companyName: row.companyName,
+   326	      contactName: row.contactName,
+   327	      contactEmail: row.contactEmail,
+   328	      location: [row.city, row.state].filter(Boolean).join(", "),
+   329	      campaignName: row.campaignName,
+   330	      eventIds: new Set([row.eventId]),
+   331	      openCount: row.eventType === "open" ? 1 : 0,
+   332	      clickCount: row.eventType === "click" ? 1 : 0,
+   333	      firstEngagedAt: row.occurredAt,
+   334	      latestEngagedAt: row.occurredAt,
+   335	    });
+   336	  }
+   337	  return [...leads.values()]
+   338	    .sort((a, b) =>
+   339	      Number(b.clickCount > 0) - Number(a.clickCount > 0)
+   340	      || Number(b.openCount > 0) - Number(a.openCount > 0)
+   341	      || b.latestEngagedAt.getTime() - a.latestEngagedAt.getTime()
+   342	      || a.prospectId - b.prospectId,
+   343	    )
+   344	    .map(({ eventIds: _eventIds, firstEngagedAt, latestEngagedAt, clickCount, ...lead }) => ({
+   345	      ...lead,
+   346	      clickCount,
+   347	      firstEngagedAt: firstEngagedAt.toISOString(),
+   348	      latestEngagedAt: latestEngagedAt.toISOString(),
+   349	      qualification: clickCount > 0 ? "clicked" as const : "opened" as const,
+   350	    }));
+   351	}

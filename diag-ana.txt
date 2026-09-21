@@ -1,0 +1,1451 @@
+######## S1: runner fn index
+37:    37	export function isPrimaryPhoenixInvocation(now: Date): boolean {
+47:    47	export function getPhoenixStagedMessageWaitMs(invokedAt: Date, now: Date): number {
+119:   119	export type DailyOutreachRunnerResult = {
+155:   155	export function calculateVerifiedTopUpNeeded(windowCount: number): number {
+168:   168	export async function withExclusiveDailyOutreachRun<T>(
+185:   185	export async function runDailyOutreachOnce(
+188:   188	): Promise<DailyOutreachRunnerResult> {
+
+######## S2: report senders
+artifacts/api-server/src/lib/outreachDailyReport.ts:60:export async function sendDailyOutreachReport(
+artifacts/api-server/src/outreachDailyRunner.ts:22:import { sendDailyOutreachReport } from "./lib/outreachDailyReport";
+artifacts/api-server/src/outreachDailyRunner.ts:199:  const report = await sendDailyOutreachReport(runDate, result);
+######## S3: src/outreachDailyRunner.ts (outer entry)
+     1	import { and, eq, gte, inArray, lt, sql } from "drizzle-orm";
+     2	import { advisoryLockPool, db, outreachMessagesTable, pool } from "@workspace/db";
+     3	import { outreachDailyRunsTable } from "@workspace/db/schema";
+     4	import { logger } from "./lib/logger";
+     5	import {
+     6	  getOutreachAutomationStatus,
+     7	  processDueOutreachMessagesWithSummary,
+     8	  processOutreachReconciliationWithSummary,
+     9	} from "./lib/outreachWorker";
+    10	import {
+    11	  processDueHotMarketResearch,
+    12	  processDueOutreachResearchSchedules,
+    13	} from "./lib/outreachResearchScheduler";
+    14	import { verifyNewOutreachProspects } from "./lib/outreachVerification";
+    15	import {
+    16	  prepareNextPhoenixOutreach,
+    17	  topUpVerifiedPreparation,
+    18	} from "./lib/outreachPreparation";
+    19	import { prepareNextPhoenixHotMarketOutreach } from "./lib/hotMarketPreparation";
+    20	import { prepareNextPhoenixHotLeadOutreach } from "./lib/outreachHotLeads";
+    21	import { getCatchUpProgress } from "./lib/outreachCatchUp";
+    22	import { sendDailyOutreachReport } from "./lib/outreachDailyReport";
+    23	import { loadOutreachSystemConfig, configuredDailyAllowance } from "./lib/outreachSystemConfig";
+    24	import { getOutreachVerificationBatchCap } from "./lib/outreachThroughputConfig";
+    25	import {
+    26	  isPrimaryPhoenixInvocation,
+    27	  runDailyOutreachOnce,
+    28	  withExclusiveDailyOutreachRun,
+    29	} from "./lib/outreachDailyRunner";
+    30	
+    31	const DAILY_RUNNER_ADVISORY_LOCK_KEY = 1_728_000_001;
+    32	
+    33	const phoenixDateFormatter = new Intl.DateTimeFormat("en-CA", {
+    34	  timeZone: "America/Phoenix",
+    35	  year: "numeric",
+    36	  month: "2-digit",
+    37	  day: "2-digit",
+    38	});
+    39	
+    40	function phoenixRunDate(now: Date): string {
+    41	  return phoenixDateFormatter.format(now);
+    42	}
+    43	
+    44	function validateProductionAutomation(): void {
+    45	  const status = getOutreachAutomationStatus();
+    46	  if (process.env.NODE_ENV === "production" && status.automationReady && status.researchAutomationReady) {
+    47	    return;
+    48	  }
+    49	
+    50	  logger.error({
+    51	    nodeEnv: process.env.NODE_ENV,
+    52	    adminAllowlistReady: status.adminAllowlistReady,
+    53	    productionConfigReady: status.productionConfigReady,
+    54	    sendgridDeliveryPathReady: status.sendgridDeliveryPathReady,
+    55	    deliveryEventsReady: status.deliveryEventsReady,
+    56	    replyWebhookReady: status.replyWebhookReady,
+    57	    automationEnabled: status.automationEnabled,
+    58	    researchAutomationEnabled: status.researchAutomationEnabled,
+    59	  }, "Daily outreach runner refused to start: production automation safeguards are not ready");
+    60	  throw new Error("Production outreach and research automation safeguards are required");
+    61	}
+    62	
+    63	function wait(milliseconds: number): Promise<void> {
+    64	  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+    65	}
+    66	
+    67	async function main(): Promise<void> {
+    68	  await loadOutreachSystemConfig();
+    69	  validateProductionAutomation();
+    70	  const lockClient = await advisoryLockPool.connect();
+    71	  const exclusive = await withExclusiveDailyOutreachRun({
+    72	    tryAcquire: async () => {
+    73	      try {
+    74	        const result = await lockClient.query<{ acquired: boolean }>(
+    75	          "select pg_try_advisory_lock($1) as acquired",
+    76	          [DAILY_RUNNER_ADVISORY_LOCK_KEY],
+    77	        );
+    78	        return result.rows[0]?.acquired === true;
+    79	      } catch (error) {
+    80	        lockClient.release();
+    81	        throw error;
+    82	      }
+    83	    },
+    84	    release: async () => {
+    85	      try {
+    86	        await lockClient.query("select pg_advisory_unlock($1)", [DAILY_RUNNER_ADVISORY_LOCK_KEY]);
+    87	      } finally {
+    88	        lockClient.release();
+    89	      }
+    90	    },
+    91	    }, async () => {
+    92	  const invokedAt = new Date();
+    93	  const runDate = phoenixRunDate(invokedAt);
+    94	  const [run] = await db.insert(outreachDailyRunsTable).values({
+    95	    runDate,
+    96	    incidentType: isPrimaryPhoenixInvocation(invokedAt) ? null : "missed_primary",
+    97	    startedAt: invokedAt,
+    98	  }).onConflictDoUpdate({
+    99	    target: outreachDailyRunsTable.runDate,
+   100	    set: {
+   101	      status: "running",
+   102	      attemptCount: sql`${outreachDailyRunsTable.attemptCount} + 1`,
+   103	      error: null,
+   104	      startedAt: invokedAt,
+   105	      completedAt: null,
+   106	    },
+   107	    setWhere: sql`${outreachDailyRunsTable.status} <> 'completed'`,
+   108	  }).returning();
+   109	  if (!run) {
+   110	    logger.info({ runDate }, "Daily outreach runner skipped: date already completed");
+   111	    return;
+   112	  }
+   113	
+   114	  const result = await runDailyOutreachOnce({
+   115	    processHotMarketResearch: () => processDueHotMarketResearch(),
+   116	    processScheduledResearch: () => processDueOutreachResearchSchedules(),
+   117	    verifyProspects: async () => {
+   118	      // Credit discipline: cap the daily finder/verification batch to what
+   119	      // the day's send target actually needs (the configured daily
+   120	      // allowance), never an open-ended research backlog.
+   121	      const runtimeConfig = await loadOutreachSystemConfig().catch(() => null);
+   122	      const need = runtimeConfig
+   123	        ? configuredDailyAllowance(runtimeConfig, new Date())
+   124	        : getOutreachVerificationBatchCap();
+   125	      const report = await verifyNewOutreachProspects(need);
+   126	      if (report.creditBlocked) {
+   127	        // Fail loudly: the runner records this in acquisitionErrors so it
+   128	        // lands in the daily report and the run record instead of silently
+   129	        // continuing with shrinking inventory.
+   130	        const error = new Error(
+   131	          `FindyMail credits exhausted after ${report.finderCalls} finder calls; verification stopped with ${report.promoted} promoted.`,
+   132	        ) as Error & { verificationSummary?: unknown };
+   133	        error.verificationSummary = report;
+   134	        throw error;
+   135	      }
+   136	      return report;
+   137	    },
+   138	    onResearchError: (stage, error) => {
+   139	      logger.error({ err: error, stage, runDate }, "Outreach acquisition stage failed; recorded for the daily report");
+   140	    },
+   141	    prepareRegularOutreach: () => prepareNextPhoenixOutreach(),
+   142	    prepareHotMarketOutreach: () => prepareNextPhoenixHotMarketOutreach(),
+   143	    prepareHotLeadOutreach: () => prepareNextPhoenixHotLeadOutreach(),
+   144	    countInitialMessagesInWindow: async (scheduledAt) => {
+   145	      const [row] = await db.select({ count: sql<number>`count(*)::int` })
+   146	        .from(outreachMessagesTable)
+   147	        .where(and(
+   148	          eq(outreachMessagesTable.sequenceNumber, 1),
+   149	          gte(outreachMessagesTable.scheduledAt, scheduledAt),
+   150	          lt(outreachMessagesTable.scheduledAt, new Date(scheduledAt.getTime() + 24 * 60 * 60 * 1000)),
+   151	          inArray(outreachMessagesTable.status, ["approved", "sending", "sent", "delivered"]),
+   152	        ));
+   153	      return row?.count ?? 0;
+   154	    },
+   155	    topUpVerifiedPreparation: (scheduledAt, needed) => topUpVerifiedPreparation(scheduledAt, needed),
+   156	    processDueMessages: () => processDueOutreachMessagesWithSummary(),
+   157	    processProviderReconciliation: () => processOutreachReconciliationWithSummary(),
+   158	    now: () => new Date(),
+   159	    wait,
+   160	  }, invokedAt);
+   161	  const catchUp = await getCatchUpProgress();
+   162	  result.catchUpTarget = catchUp.target;
+   163	  result.catchUpEnrolled = catchUp.enrolled;
+   164	  result.catchUpRemaining = catchUp.remaining;
+   165	  const hasPreparationShortfall =
+   166	    result.directShortfall > 0
+   167	    || result.publicShortfall > 0
+   168	    || result.hotMarketShortfall > 0
+   169	    || (result.hotLeadShortfall ?? 100) > 0;
+   170	  const hasAcquisitionFailure = result.acquisitionErrors.length > 0;
+   171	  const status = result.unresolved > 0 || hasPreparationShortfall || hasAcquisitionFailure
+   172	    ? "partial"
+   173	    : "completed";
+   174	  const incidentType = result.unresolved > 0
+   175	    ? "partial_run"
+   176	    : hasAcquisitionFailure
+   177	      ? "acquisition_failed"
+   178	      : hasPreparationShortfall
+   179	        ? "preparation_shortfall"
+   180	        : run.incidentType;
+   181	  const acquisitionIncident = result.acquisitionErrors.length > 0
+   182	    ? `Acquisition failures: ${result.acquisitionErrors.map((failure) => `${failure.stage}: ${failure.message}`).join(" | ")}`
+   183	    : null;
+   184	  const incidentError = [hasPreparationShortfall
+   185	    ? `Next-day queue shortfall: ${result.directShortfall} Named, ${result.publicShortfall} Public, ${result.hotMarketShortfall} Hot Market, ${result.hotLeadShortfall ?? 100} Hot Lead`
+   186	    : null, acquisitionIncident].filter(Boolean).join("; ") || null;
+   187	  await db.update(outreachDailyRunsTable).set({
+   188	    status,
+   189	    incidentType,
+   190	    error: incidentError,
+   191	    claimedCount: result.claimed,
+   192	    providerAcceptedCount: result.providerAccepted,
+   193	    deliveredCount: result.delivered,
+   194	    bouncedCount: result.bounced,
+   195	    stoppedCount: result.stopped,
+   196	    unresolvedCount: result.unresolved,
+   197	    completedAt: new Date(),
+   198	  }).where(eq(outreachDailyRunsTable.id, run.id));
+   199	  const report = await sendDailyOutreachReport(runDate, result);
+   200	  if (!report.ok) {
+   201	    await db.update(outreachDailyRunsTable).set({
+   202	      status: "partial",
+   203	      incidentType: incidentType ?? "report_failed",
+   204	      error: [incidentError, `Daily proof report failed: ${report.error}`]
+   205	        .filter(Boolean)
+   206	        .join("; "),
+   207	    }).where(eq(outreachDailyRunsTable.id, run.id));
+   208	    logger.error({ error: report.error, runDate }, "Daily outreach proof report failed");
+   209	    return;
+   210	  }
+   211	  logger.info(result, "Daily outreach runner completed");
+   212	  });
+   213	  if (exclusive.state === "busy") {
+   214	    lockClient.release();
+   215	    logger.info("Daily outreach runner skipped: another invocation holds the exclusive lease");
+   216	  }
+   217	}
+   218	
+   219	try {
+   220	  await main();
+   221	} catch (err) {
+   222	  const runDate = phoenixRunDate(new Date());
+   223	  const error = err instanceof Error ? err.message : "Daily outreach runner failed";
+   224	  await db.insert(outreachDailyRunsTable).values({
+   225	    runDate,
+   226	    status: "failed",
+   227	    incidentType: "run_failed",
+   228	    error,
+   229	    completedAt: new Date(),
+   230	  }).onConflictDoUpdate({
+   231	    target: outreachDailyRunsTable.runDate,
+   232	    set: {
+   233	      status: "failed",
+   234	      incidentType: "run_failed",
+   235	      error,
+   236	      completedAt: new Date(),
+   237	    },
+   238	    setWhere: sql`${outreachDailyRunsTable.status} <> 'completed'`,
+   239	  }).catch((incidentError) => logger.error({ incidentError }, "Failed to persist daily outreach incident"));
+   240	  logger.error({ err }, "Daily outreach runner failed");
+   241	  process.exitCode = 1;
+   242	} finally {
+   243	  await Promise.all([pool.end(), advisoryLockPool.end()]);
+   244	}
+
+######## S4: outreachDailyProcessScheduler.ts
+     1	import { spawn, type ChildProcess } from "node:child_process";
+     2	import { logger } from "./logger";
+     3	
+     4	const PHOENIX_OFFSET_MS = 7 * 60 * 60_000;
+     5	const RECOVERY_GRACE_MINUTES = 30;
+     6	
+     7	export type DailyRunnerDeadline = {
+     8	  slot: string;
+     9	  deadline: Date;
+    10	};
+    11	
+    12	export function getNextPhoenixDailyRunnerDeadline(
+    13	  now: Date,
+    14	  lastStartedSlot?: string,
+    15	): DailyRunnerDeadline {
+    16	  const phoenixNow = new Date(now.getTime() - PHOENIX_OFFSET_MS);
+    17	  const year = phoenixNow.getUTCFullYear();
+    18	  const month = phoenixNow.getUTCMonth();
+    19	  const day = phoenixNow.getUTCDate();
+    20	  const minutes = phoenixNow.getUTCHours() * 60 + phoenixNow.getUTCMinutes();
+    21	  const primary = 20 * 60;
+    22	  const recovery = primary + 30;
+    23	  const recoveryGraceEnd = recovery + RECOVERY_GRACE_MINUTES;
+    24	
+    25	  let targetDay = day;
+    26	  let targetMinutes: number;
+    27	  if (minutes < primary) {
+    28	    targetMinutes = primary;
+    29	  } else if (minutes < recovery) {
+    30	    targetMinutes = primary;
+    31	  } else if (minutes < recoveryGraceEnd) {
+    32	    targetMinutes = recovery;
+    33	  } else {
+    34	    targetDay += 1;
+    35	    targetMinutes = primary;
+    36	  }
+    37	
+    38	  const targetPhoenix = Date.UTC(
+    39	    year,
+    40	    month,
+    41	    targetDay,
+    42	    Math.floor(targetMinutes / 60),
+    43	    targetMinutes % 60,
+    44	  );
+    45	  const deadline = new Date(targetPhoenix + PHOENIX_OFFSET_MS);
+    46	  const labelDate = new Date(targetPhoenix);
+    47	  const date = labelDate.toISOString().slice(0, 10);
+    48	  const time = targetMinutes === primary ? "20:00" : "20:30";
+    49	  const candidate = {
+    50	    slot: `${date}T${time}`,
+    51	    deadline: deadline.getTime() <= now.getTime() ? now : deadline,
+    52	  };
+    53	  if (candidate.slot !== lastStartedSlot) return candidate;
+    54	
+    55	  if (candidate.slot.endsWith("T20:00")) {
+    56	    return {
+    57	      slot: `${date}T20:30`,
+    58	      deadline: new Date(Date.UTC(year, month, targetDay, 20, 30) + PHOENIX_OFFSET_MS),
+    59	    };
+    60	  }
+    61	  const nextDayPhoenix = Date.UTC(year, month, targetDay + 1, 20, 0);
+    62	  const nextDate = new Date(nextDayPhoenix).toISOString().slice(0, 10);
+    63	  return {
+    64	    slot: `${nextDate}T20:00`,
+    65	    deadline: new Date(nextDayPhoenix + PHOENIX_OFFSET_MS),
+    66	  };
+    67	}
+    68	
+    69	function spawnDailyOutreachProcess(): ChildProcess {
+    70	  return spawn(
+    71	    process.execPath,
+    72	    ["--enable-source-maps", "artifacts/api-server/dist/outreachDailyRunner.mjs"],
+    73	    {
+    74	      cwd: process.cwd(),
+    75	      env: process.env,
+    76	      stdio: "inherit",
+    77	    },
+    78	  );
+    79	}
+    80	
+    81	export function startDailyOutreachProcessScheduler(): () => Promise<void> {
+    82	  if (process.env.NODE_ENV !== "production") return async () => {};
+    83	  let timer: NodeJS.Timeout | undefined;
+    84	  let child: ChildProcess | undefined;
+    85	  let stopping = false;
+    86	  let lastStartedSlot: string | undefined;
+    87	
+    88	  const scheduleNext = () => {
+    89	    if (stopping || child) return;
+    90	    const next = getNextPhoenixDailyRunnerDeadline(new Date(), lastStartedSlot);
+    91	    const delay = Math.max(0, next.deadline.getTime() - Date.now());
+    92	    timer = setTimeout(() => {
+    93	      timer = undefined;
+    94	      if (stopping) return;
+    95	      logger.info({ slot: next.slot }, "Starting durable daily outreach process");
+    96	      child = spawnDailyOutreachProcess();
+    97	      let failedToSpawn = false;
+    98	      child.once("spawn", () => {
+    99	        lastStartedSlot = next.slot;
+   100	      });
+   101	      child.once("error", (error) => {
+   102	        failedToSpawn = true;
+   103	        logger.error({ err: error, slot: next.slot }, "Durable daily outreach process failed to start");
+   104	      });
+   105	      child.once("close", (code, signal) => {
+   106	        if (code === 0) {
+   107	          logger.info({ slot: next.slot }, "Durable daily outreach process completed");
+   108	        } else {
+   109	          logger.error(
+   110	            { code, signal, slot: next.slot },
+   111	            "Durable daily outreach process failed",
+   112	          );
+   113	        }
+   114	        child = undefined;
+   115	        if (failedToSpawn && !stopping) {
+   116	          timer = setTimeout(scheduleNext, 60_000);
+   117	          timer.unref();
+   118	        } else {
+   119	          scheduleNext();
+   120	        }
+   121	      });
+   122	    }, delay);
+   123	    timer.unref();
+   124	  };
+   125	
+   126	  const stop = async () => {
+   127	    stopping = true;
+   128	    if (timer) clearTimeout(timer);
+   129	    if (child && child.exitCode === null) {
+   130	      const activeChild = child;
+   131	      activeChild.kill("SIGTERM");
+   132	      await Promise.race([
+   133	        new Promise<void>((resolve) => activeChild.once("close", () => resolve())),
+   134	        new Promise<void>((resolve) => setTimeout(resolve, 4_000)),
+   135	      ]);
+   136	    }
+   137	  };
+   138	
+   139	  scheduleNext();
+   140	  logger.info("Daily outreach process scheduler enabled for 20:00 and 20:30 Phoenix");
+   141	  return stop;
+   142	}
+######## S5: outreachQueueMonitor.ts FULL
+     1	import { ReplitConnectors } from "@replit/connectors-sdk";
+     2	import { and, count, eq, inArray, lte, min, max } from "drizzle-orm";
+     3	import {
+     4	  db,
+     5	  outreachMessagesTable,
+     6	  outreachQueueAlertsTable,
+     7	} from "@workspace/db";
+     8	import { logger } from "./logger";
+     9	
+    10	export const OUTREACH_QUEUE_GRACE_MS = 5 * 60 * 1000;
+    11	const INCIDENT_KEY = "scheduled-outreach-overdue";
+    12	
+    13	export type OutreachQueueAlertSummary = {
+    14	  overdueCount: number;
+    15	  scheduledFrom: Date;
+    16	  scheduledThrough: Date;
+    17	  providerAmbiguousCount: number;
+    18	  deliveryFailureCount: number;
+    19	};
+    20	
+    21	export type OutreachQueueMonitorResult =
+    22	  | { state: "clear" }
+    23	  | { state: "deduplicated"; summary: OutreachQueueAlertSummary }
+    24	  | { state: "alerted"; summary: OutreachQueueAlertSummary }
+    25	  | { state: "failed"; summary: OutreachQueueAlertSummary; error: string };
+    26	
+    27	type QueueSummaryLoader = (cutoff: Date) => Promise<OutreachQueueAlertSummary | null>;
+    28	type QueueAlertNotifier = (summary: OutreachQueueAlertSummary) => Promise<void>;
+    29	type QueueAlertFallback = (
+    30	  summary: OutreachQueueAlertSummary,
+    31	  primaryError: string,
+    32	) => Promise<void>;
+    33	
+    34	function adminEmails(): string[] {
+    35	  return (process.env.ADMIN_EMAILS ?? "")
+    36	    .split(",")
+    37	    .map((email) => email.trim())
+    38	    .filter(Boolean);
+    39	}
+    40	
+    41	
+    42	function alertFromEmail(): string | undefined {
+    43	  return process.env.LEAD_NOTIFY_FROM_EMAIL?.trim()
+    44	    || process.env.OUTREACH_FROM_EMAIL?.trim()
+    45	    || adminEmails()[0];
+    46	}
+    47	
+    48	export function buildOutreachQueueAlertBody(summary: OutreachQueueAlertSummary): string {
+    49	  return [
+    50	    "Scheduled outreach is still waiting in the approved queue after the 5-minute grace period.",
+    51	    "",
+    52	    `Approved and overdue: ${summary.overdueCount}`,
+    53	    `Scheduled window: ${summary.scheduledFrom.toISOString()} through ${summary.scheduledThrough.toISOString()}`,
+    54	    "",
+    55	    `Provider ambiguity (sending/needs review): ${summary.providerAmbiguousCount}`,
+    56	    `Known delivery failures (failed/bounced): ${summary.deliveryFailureCount}`,
+    57	    "",
+    58	    "This alert indicates scheduler inactivity for the approved queue. Provider ambiguity and known delivery failures are shown separately and are not automatically retried by this monitor.",
+    59	    "Normal recovery remains protected by database claims, suppression checks, quotas, and reconciliation locks.",
+    60	  ].join("\n");
+    61	}
+    62	
+    63	async function sendAlert(summary: OutreachQueueAlertSummary): Promise<void> {
+    64	  const to = adminEmails();
+    65	  const from = alertFromEmail();
+    66	  if (to.length === 0 || !from) throw new Error("Admin alert email is not configured");
+    67	
+    68	  const response = await new ReplitConnectors().proxy("sendgrid", "/v3/mail/send", {
+    69	    method: "POST",
+    70	    headers: { "Content-Type": "application/json" },
+    71	    body: JSON.stringify({
+    72	      personalizations: [{ to: to.map((email) => ({ email })) }],
+    73	      from: { email: from, name: "Apex Grid Outreach Monitor" },
+    74	      subject: `[Action required] ${summary.overdueCount} scheduled outreach email${summary.overdueCount === 1 ? "" : "s"} still queued`,
+    75	      content: [{ type: "text/plain", value: buildOutreachQueueAlertBody(summary) }],
+    76	    }),
+    77	  });
+    78	  if (!response.ok) {
+    79	    throw new Error(`SendGrid responded ${response.status}: ${await response.text().catch(() => "")}`);
+    80	  }
+    81	}
+    82	
+    83	async function logFallbackAlert(
+    84	  summary: OutreachQueueAlertSummary,
+    85	  primaryError: string,
+    86	): Promise<void> {
+    87	  logger.error(
+    88	    {
+    89	      incidentKey: INCIDENT_KEY,
+    90	      channel: "operations-log",
+    91	      primaryChannel: "sendgrid",
+    92	      primaryError,
+    93	      ...summary,
+    94	      alertBody: buildOutreachQueueAlertBody(summary),
+    95	    },
+    96	    "URGENT: overdue outreach queue alert delivered through SendGrid-independent fallback",
+    97	  );
+    98	}
+    99	
+   100	async function loadQueueSummary(cutoff: Date): Promise<OutreachQueueAlertSummary | null> {
+   101	  const [overdue] = await db.select({
+   102	    count: count(),
+   103	    scheduledFrom: min(outreachMessagesTable.scheduledAt),
+   104	    scheduledThrough: max(outreachMessagesTable.scheduledAt),
+   105	  }).from(outreachMessagesTable).where(and(
+   106	    eq(outreachMessagesTable.status, "approved"),
+   107	    lte(outreachMessagesTable.scheduledAt, cutoff),
+   108	  ));
+   109	  const overdueCount = Number(overdue?.count ?? 0);
+   110	  if (overdueCount === 0 || !overdue?.scheduledFrom || !overdue.scheduledThrough) return null;
+   111	
+   112	  const [providerAmbiguous, deliveryFailures] = await Promise.all([
+   113	    db.select({ count: count() }).from(outreachMessagesTable)
+   114	      .where(inArray(outreachMessagesTable.status, ["sending", "needs_review"])),
+   115	    db.select({ count: count() }).from(outreachMessagesTable)
+   116	      .where(inArray(outreachMessagesTable.status, ["failed", "bounced"])),
+   117	  ]);
+   118	  return {
+   119	    overdueCount,
+   120	    scheduledFrom: overdue.scheduledFrom,
+   121	    scheduledThrough: overdue.scheduledThrough,
+   122	    providerAmbiguousCount: Number(providerAmbiguous[0]?.count ?? 0),
+   123	    deliveryFailureCount: Number(deliveryFailures[0]?.count ?? 0),
+   124	  };
+   125	}
+   126	
+   127	export async function monitorOverdueOutreachQueue(options: {
+   128	  now?: Date;
+   129	  graceMs?: number;
+   130	  notify?: QueueAlertNotifier;
+   131	  fallbackNotify?: QueueAlertFallback;
+   132	  loadSummary?: QueueSummaryLoader;
+   133	} = {}): Promise<OutreachQueueMonitorResult> {
+   134	  const now = options.now ?? new Date();
+   135	  const cutoff = new Date(now.getTime() - (options.graceMs ?? OUTREACH_QUEUE_GRACE_MS));
+   136	  const summary = await (options.loadSummary ?? loadQueueSummary)(cutoff);
+   137	  if (!summary) {
+   138	    await db.delete(outreachQueueAlertsTable).where(eq(outreachQueueAlertsTable.incidentKey, INCIDENT_KEY));
+   139	    return { state: "clear" };
+   140	  }
+   141	
+   142	  const [claimed] = await db.insert(outreachQueueAlertsTable).values({
+   143	    incidentKey: INCIDENT_KEY,
+   144	    overdueCount: summary.overdueCount,
+   145	    scheduledFrom: summary.scheduledFrom,
+   146	    scheduledThrough: summary.scheduledThrough,
+   147	    providerAmbiguousCount: summary.providerAmbiguousCount,
+   148	    deliveryFailureCount: summary.deliveryFailureCount,
+   149	  }).onConflictDoNothing({ target: outreachQueueAlertsTable.incidentKey }).returning();
+   150	  if (!claimed) return { state: "deduplicated", summary };
+   151	
+   152	  try {
+   153	    await (options.notify ?? sendAlert)(summary);
+   154	    await db.update(outreachQueueAlertsTable).set({ status: "sent", sentAt: now })
+   155	      .where(eq(outreachQueueAlertsTable.id, claimed.id));
+   156	    return { state: "alerted", summary };
+   157	  } catch (error) {
+   158	    const detail = error instanceof Error ? error.message : "Admin alert failed";
+   159	    try {
+   160	      await (options.fallbackNotify ?? logFallbackAlert)(summary, detail);
+   161	      await db.update(outreachQueueAlertsTable).set({
+   162	        status: "fallback_sent",
+   163	        error: detail,
+   164	        sentAt: now,
+   165	      }).where(eq(outreachQueueAlertsTable.id, claimed.id));
+   166	      return { state: "alerted", summary };
+   167	    } catch (fallbackError) {
+   168	      const fallbackDetail = fallbackError instanceof Error
+   169	        ? fallbackError.message
+   170	        : "Fallback admin alert failed";
+   171	      const combinedError = `${detail}; fallback failed: ${fallbackDetail}`;
+   172	      await db.update(outreachQueueAlertsTable).set({
+   173	        status: "failed",
+   174	        error: combinedError,
+   175	      }).where(eq(outreachQueueAlertsTable.id, claimed.id));
+   176	      return { state: "failed", summary, error: combinedError };
+   177	    }
+   178	  }
+   179	}
+
+######## S6: sendDailyOutreachReport FULL
+    55	        : "Ambiguous provider handoffs remain blocked from automatic resend.",
+    56	    ].join("\n"),
+    57	  };
+    58	}
+    59	
+    60	export async function sendDailyOutreachReport(
+    61	  runDate: string,
+    62	  result: DailyOutreachRunnerResult,
+    63	): Promise<{ ok: true } | { ok: false; error: string }> {
+    64	  const to = process.env.LEAD_NOTIFY_EMAIL?.trim();
+    65	  const from = (
+    66	    process.env.LEAD_NOTIFY_FROM_EMAIL
+    67	    || process.env.OUTREACH_FROM_EMAIL
+    68	    || to
+    69	  )?.trim();
+    70	  if (!to || !from) {
+    71	    return { ok: false, error: "Daily outreach report email is not configured" };
+    72	  }
+    73	
+    74	  const report = buildDailyOutreachReport(runDate, result);
+    75	  try {
+    76	    const response = await new ReplitConnectors().proxy("sendgrid", "/v3/mail/send", {
+    77	      method: "POST",
+    78	      headers: { "Content-Type": "application/json" },
+    79	      body: JSON.stringify({
+    80	        personalizations: [{ to: [{ email: to }] }],
+    81	        from: { email: from, name: "Apex Grid Outreach Automation" },
+    82	        subject: report.subject,
+    83	        content: [{ type: "text/plain", value: report.body }],
+    84	      }),
+    85	    });
+    86	    if (!response.ok) {
+    87	      const errorBody = await response.text().catch(() => "");
+    88	      return {
+    89	        ok: false,
+    90	        error: `SendGrid report response ${response.status}: ${errorBody}`,
+    91	      };
+    92	    }
+    93	    return { ok: true };
+    94	  } catch (error) {
+    95	    return {
+    96	      ok: false,
+    97	      error: error instanceof Error ? error.message : "Daily outreach report failed",
+    98	    };
+    99	  }
+   100	}
+######## S7: runner key sections
+107:   107	  claimed: number;
+108:   108	  providerAccepted: number;
+120:   120	  claimed: number;
+121:   121	  providerAccepted: number;
+182:   182	 * production worker's database-claimed implementations, so concurrent
+185:   185	export async function runDailyOutreachOnce(
+261:   261	      claimed: initial.claimed,
+262:   262	      providerAccepted: initial.providerAccepted + reconciled.accepted,
+292:   292	    claimed: initial.claimed + staged.claimed,
+293:   293	    providerAccepted: initial.providerAccepted + staged.providerAccepted + reconciled.accepted,
+
+######## S8: reconciliation size+head
+497 diag-outreachReconciliation.txt
+     1	import { ReplitConnectors } from "@replit/connectors-sdk";
+     2	import { and, asc, desc, eq, inArray, or, sql } from "drizzle-orm";
+     3	import {
+     4	  db,
+     5	  outreachDeliveryEventsTable,
+     6	  outreachMessagesTable,
+     7	  outreachMonthlySendReservationsTable,
+     8	  outreachSendReservationsTable,
+     9	  outreachSequenceSendClaimsTable,
+    10	  outreachCatchUpReservationsTable,
+    11	  outreachCatchUpCohortsTable,
+    12	  prospectsTable,
+    13	  type OutreachDeliveryEvent,
+    14	  type OutreachMessage,
+    15	} from "@workspace/db";
+    16	import { suppressOutreachEmail } from "./outreachSuppression";
+    17	import { enrollAcceptedCatchUpMessage } from "./outreachCatchUp";
+    18	
+    19	const ACCEPTED_EVENT_TYPES = new Set(["processed", "deferred", "delivered"]);
+    20	const REJECTED_EVENT_TYPES = new Set(["bounce", "blocked", "dropped"]);
+    21	const RETRY_RELEASE_EVENT_TYPE = "reconciliation_retry_released";
+    22	const DEFAULT_REVIEW_AFTER_MS = 15 * 60 * 1000;
+    23	const DEFAULT_MAX_LOOKUPS = 5;
+    24	const SENDGRID_ACTIVITY_TIMEOUT_MS = 10_000;
+    25	
+    26	type SendGridActivityMessage = {
+    27	  msg_id?: string;
+    28	  status?: string;
+    29	  last_event_time?: string;
+    30	  events?: Array<string | { event_name?: string; event?: string; reason?: string; response?: string }>;
+    31	};
+    32	type SendGridActivityEvent = NonNullable<SendGridActivityMessage["events"]>[number];
+    33	
+    34	type SendGridActivityResponse = {
+    35	  messages?: SendGridActivityMessage[];
+    36	};
+    37	
+    38	export type ProviderActivityOutcome =
+    39	  | {
+    40	      state: "accepted";
+    41	      providerMessageId: string | null;
+    42	      occurredAt: Date;
+    43	      delivered: boolean;
+    44	      reason: string;
+    45	    }
+    46	  | {
+    47	      state: "not_accepted";
+    48	      providerMessageId: string | null;
+    49	      occurredAt: Date;
+    50	      reason: string;
+    51	    }
+    52	  | {
+    53	      state: "terminal_failure";
+    54	      providerMessageId: string | null;
+    55	      occurredAt: Date;
+    56	      eventType: "bounce" | "blocked" | "dropped";
+    57	      reason: string;
+    58	    }
+    59	  | {
+    60	      state: "ambiguous";
+    61	      reason: string;
+    62	    };
+    63	
+    64	export type SendGridActivityLookup = (
+    65	  reconciliationKey: string,
+    66	) => Promise<ProviderActivityOutcome>;
+    67	
+    68	export type OutreachReconciliationSummary = {
+    69	  checked: number;
+    70	  accepted: number;
+    71	  retryReleased: number;
+    72	  failed: number;
+    73	  ambiguous: number;
+    74	  waiting: number;
+    75	};
+    76	
+    77	function eventName(event: SendGridActivityEvent): string {
+    78	  return (typeof event === "string" ? event : event.event_name ?? event.event ?? "")
+    79	    .trim()
+    80	    .toLowerCase();
+    81	}
+    82	
+    83	function eventReason(event: SendGridActivityEvent): string | null {
+    84	  if (typeof event === "string") return null;
+    85	  return (event.reason ?? event.response ?? "").trim() || null;
+    86	}
+    87	
+    88	function parseOccurredAt(value: string | undefined): Date {
+    89	  const parsed = value ? new Date(value) : new Date();
+    90	  return Number.isNaN(parsed.getTime()) ? new Date() : parsed;
+    91	}
+    92	
+    93	export function classifySendGridActivity(
+    94	  activity: SendGridActivityResponse,
+    95	): ProviderActivityOutcome {
+    96	  const messages = activity.messages ?? [];
+    97	  if (messages.length === 0) {
+    98	    return {
+    99	      state: "ambiguous",
+   100	      reason: "SendGrid activity has no matching record yet",
+######## S9: reconciliation FULL
+     1	import { ReplitConnectors } from "@replit/connectors-sdk";
+     2	import { and, asc, desc, eq, inArray, or, sql } from "drizzle-orm";
+     3	import {
+     4	  db,
+     5	  outreachDeliveryEventsTable,
+     6	  outreachMessagesTable,
+     7	  outreachMonthlySendReservationsTable,
+     8	  outreachSendReservationsTable,
+     9	  outreachSequenceSendClaimsTable,
+    10	  outreachCatchUpReservationsTable,
+    11	  outreachCatchUpCohortsTable,
+    12	  prospectsTable,
+    13	  type OutreachDeliveryEvent,
+    14	  type OutreachMessage,
+    15	} from "@workspace/db";
+    16	import { suppressOutreachEmail } from "./outreachSuppression";
+    17	import { enrollAcceptedCatchUpMessage } from "./outreachCatchUp";
+    18	
+    19	const ACCEPTED_EVENT_TYPES = new Set(["processed", "deferred", "delivered"]);
+    20	const REJECTED_EVENT_TYPES = new Set(["bounce", "blocked", "dropped"]);
+    21	const RETRY_RELEASE_EVENT_TYPE = "reconciliation_retry_released";
+    22	const DEFAULT_REVIEW_AFTER_MS = 15 * 60 * 1000;
+    23	const DEFAULT_MAX_LOOKUPS = 5;
+    24	const SENDGRID_ACTIVITY_TIMEOUT_MS = 10_000;
+    25	
+    26	type SendGridActivityMessage = {
+    27	  msg_id?: string;
+    28	  status?: string;
+    29	  last_event_time?: string;
+    30	  events?: Array<string | { event_name?: string; event?: string; reason?: string; response?: string }>;
+    31	};
+    32	type SendGridActivityEvent = NonNullable<SendGridActivityMessage["events"]>[number];
+    33	
+    34	type SendGridActivityResponse = {
+    35	  messages?: SendGridActivityMessage[];
+    36	};
+    37	
+    38	export type ProviderActivityOutcome =
+    39	  | {
+    40	      state: "accepted";
+    41	      providerMessageId: string | null;
+    42	      occurredAt: Date;
+    43	      delivered: boolean;
+    44	      reason: string;
+    45	    }
+    46	  | {
+    47	      state: "not_accepted";
+    48	      providerMessageId: string | null;
+    49	      occurredAt: Date;
+    50	      reason: string;
+    51	    }
+    52	  | {
+    53	      state: "terminal_failure";
+    54	      providerMessageId: string | null;
+    55	      occurredAt: Date;
+    56	      eventType: "bounce" | "blocked" | "dropped";
+    57	      reason: string;
+    58	    }
+    59	  | {
+    60	      state: "ambiguous";
+    61	      reason: string;
+    62	    };
+    63	
+    64	export type SendGridActivityLookup = (
+    65	  reconciliationKey: string,
+    66	) => Promise<ProviderActivityOutcome>;
+    67	
+    68	export type OutreachReconciliationSummary = {
+    69	  checked: number;
+    70	  accepted: number;
+    71	  retryReleased: number;
+    72	  failed: number;
+    73	  ambiguous: number;
+    74	  waiting: number;
+    75	};
+    76	
+    77	function eventName(event: SendGridActivityEvent): string {
+    78	  return (typeof event === "string" ? event : event.event_name ?? event.event ?? "")
+    79	    .trim()
+    80	    .toLowerCase();
+    81	}
+    82	
+    83	function eventReason(event: SendGridActivityEvent): string | null {
+    84	  if (typeof event === "string") return null;
+    85	  return (event.reason ?? event.response ?? "").trim() || null;
+    86	}
+    87	
+    88	function parseOccurredAt(value: string | undefined): Date {
+    89	  const parsed = value ? new Date(value) : new Date();
+    90	  return Number.isNaN(parsed.getTime()) ? new Date() : parsed;
+    91	}
+    92	
+    93	export function classifySendGridActivity(
+    94	  activity: SendGridActivityResponse,
+    95	): ProviderActivityOutcome {
+    96	  const messages = activity.messages ?? [];
+    97	  if (messages.length === 0) {
+    98	    return {
+    99	      state: "ambiguous",
+   100	      reason: "SendGrid activity has no matching record yet",
+   101	    };
+   102	  }
+   103	
+   104	  const latest = [...messages].sort((left, right) =>
+   105	    parseOccurredAt(right.last_event_time).getTime() - parseOccurredAt(left.last_event_time).getTime()
+   106	  )[0]!;
+   107	  const status = latest.status?.trim().toLowerCase() ?? "";
+   108	  const events = latest.events ?? [];
+   109	  const names = events.map(eventName);
+   110	  const occurredAt = parseOccurredAt(latest.last_event_time);
+   111	  const providerMessageId = latest.msg_id?.trim() || null;
+   112	
+   113	  if (status === "not_delivered" || names.some((name) => REJECTED_EVENT_TYPES.has(name))) {
+   114	    const rejection = events.find((event) => REJECTED_EVENT_TYPES.has(eventName(event)));
+   115	    const rejectionType = rejection ? eventName(rejection) : "dropped";
+   116	    return {
+   117	      state: "terminal_failure",
+   118	      providerMessageId,
+   119	      occurredAt,
+   120	      eventType: REJECTED_EVENT_TYPES.has(rejectionType)
+   121	        ? rejectionType as "bounce" | "blocked" | "dropped"
+   122	        : "dropped",
+   123	      reason: rejection
+   124	        ? eventReason(rejection) ?? "SendGrid activity confirms non-delivery"
+   125	        : "SendGrid activity confirms non-delivery",
+   126	    };
+   127	  }
+   128	  if (status === "delivered" || names.includes("delivered")) {
+   129	    return {
+   130	      state: "accepted",
+   131	      providerMessageId,
+   132	      occurredAt,
+   133	      delivered: true,
+   134	      reason: "SendGrid activity confirms delivery",
+   135	    };
+   136	  }
+   137	  if (
+   138	    ["processed", "processing"].includes(status)
+   139	    || names.some((name) => ACCEPTED_EVENT_TYPES.has(name))
+   140	  ) {
+   141	    return {
+   142	      state: "accepted",
+   143	      providerMessageId,
+   144	      occurredAt,
+   145	      delivered: false,
+   146	      reason: "SendGrid activity confirms provider acceptance",
+   147	    };
+   148	  }
+   149	  return {
+   150	    state: "ambiguous",
+   151	    reason: `SendGrid activity returned unresolved status "${status || "unknown"}"`,
+   152	  };
+   153	}
+   154	
+   155	function escapeSendGridQueryValue(value: string): string {
+   156	  return value.replaceAll("\\", "\\\\").replaceAll('"', '\\"');
+   157	}
+   158	
+   159	async function requestSendGridActivity(path: string): Promise<Response> {
+   160	  const dedicatedSendGridKey = process.env.SENDGRID_ISOLATION_VERIFIED === "true"
+   161	    ? process.env.SENDGRID_DEDICATED_API_KEY?.trim()
+   162	    : undefined;
+   163	  const sendgridSubuser = process.env.SENDGRID_SUBUSER_USERNAME?.trim();
+   164	  if (dedicatedSendGridKey) {
+   165	    return fetch(`https://api.sendgrid.com${path}`, {
+   166	      method: "GET",
+   167	      headers: { Authorization: `Bearer ${dedicatedSendGridKey}` },
+   168	      signal: AbortSignal.timeout(SENDGRID_ACTIVITY_TIMEOUT_MS),
+   169	    });
+   170	  }
+   171	  return new ReplitConnectors().proxy("sendgrid", path, {
+   172	    method: "GET",
+   173	    headers: sendgridSubuser ? { "on-behalf-of": sendgridSubuser } : undefined,
+   174	  });
+   175	}
+   176	
+   177	export const lookupSendGridActivity: SendGridActivityLookup = async (reconciliationKey) => {
+   178	  const query = `(unique_args['outreach_reconciliation_key']="${escapeSendGridQueryValue(reconciliationKey)}")`;
+   179	  const path = `/v3/messages?limit=10&query=${encodeURIComponent(query)}`;
+   180	  let response: Response;
+   181	  try {
+   182	    response = await Promise.race([
+   183	      requestSendGridActivity(path),
+   184	      new Promise<never>((_resolve, reject) => {
+   185	        const timer = setTimeout(
+   186	          () => reject(new Error("request timed out")),
+   187	          SENDGRID_ACTIVITY_TIMEOUT_MS,
+   188	        );
+   189	        timer.unref();
+   190	      }),
+   191	    ]);
+   192	  } catch (error) {
+   193	    const detail = error instanceof Error ? error.message : "request failed";
+   194	    return {
+   195	      state: "ambiguous",
+   196	      reason: `SendGrid activity lookup timed out or failed: ${detail}`,
+   197	    };
+   198	  }
+   199	  if (!response.ok) {
+   200	    return {
+   201	      state: "ambiguous",
+   202	      reason: `SendGrid activity lookup returned status ${response.status}`,
+   203	    };
+   204	  }
+   205	  try {
+   206	    return classifySendGridActivity(await response.json() as SendGridActivityResponse);
+   207	  } catch {
+   208	    return {
+   209	      state: "ambiguous",
+   210	      reason: "SendGrid activity lookup returned an invalid response",
+   211	    };
+   212	  }
+   213	};
+   214	
+   215	function classifyRecordedEvents(
+   216	  events: OutreachDeliveryEvent[],
+   217	): ProviderActivityOutcome | null {
+   218	  const rejected = events.find((event) => REJECTED_EVENT_TYPES.has(event.eventType));
+   219	  if (rejected) {
+   220	    return {
+   221	      state: "terminal_failure",
+   222	      providerMessageId: rejected.providerMessageId,
+   223	      occurredAt: rejected.occurredAt,
+   224	      eventType: rejected.eventType as "bounce" | "blocked" | "dropped",
+   225	      reason: rejected.reason ?? "Recorded SendGrid event confirms non-delivery",
+   226	    };
+   227	  }
+   228	  const delivered = events.find((event) => event.eventType === "delivered");
+   229	  if (delivered) {
+   230	    return {
+   231	      state: "accepted",
+   232	      providerMessageId: delivered.providerMessageId,
+   233	      occurredAt: delivered.occurredAt,
+   234	      delivered: true,
+   235	      reason: "Recorded SendGrid event confirms delivery",
+   236	    };
+   237	  }
+   238	  const accepted = events.find((event) => ACCEPTED_EVENT_TYPES.has(event.eventType));
+   239	  if (accepted) {
+   240	    return {
+   241	      state: "accepted",
+   242	      providerMessageId: accepted.providerMessageId,
+   243	      occurredAt: accepted.occurredAt,
+   244	      delivered: false,
+   245	      reason: "Recorded SendGrid event confirms provider acceptance",
+   246	    };
+   247	  }
+   248	  return null;
+   249	}
+   250	
+   251	async function applyAcceptedOutcome(
+   252	  message: OutreachMessage,
+   253	  outcome: Extract<ProviderActivityOutcome, { state: "accepted" }>,
+   254	): Promise<boolean> {
+   255	  const [updated] = await db.update(outreachMessagesTable)
+   256	    .set({
+   257	      status: outcome.delivered ? "delivered" : "sent",
+   258	      sentAt: outcome.occurredAt,
+   259	      providerMessageId: outcome.providerMessageId ?? undefined,
+   260	      error: null,
+   261	    })
+   262	    .where(and(
+   263	      eq(outreachMessagesTable.id, message.id),
+   264	      inArray(outreachMessagesTable.status, ["sending", "needs_review"]),
+   265	    ))
+   266	    .returning({ id: outreachMessagesTable.id });
+   267	  // Enrollment still requires immutable HTTP-handoff or provider-event
+   268	  // evidence. This lets a needs_review row recover when that evidence exists
+   269	  // without admitting generic ambiguous historical attempts.
+   270	  if (updated && message.catchUpCohortId) await enrollAcceptedCatchUpMessage(message.id);
+   271	  return Boolean(updated);
+   272	}
+   273	
+   274	async function applyRejectedOutcome(
+   275	  message: OutreachMessage,
+   276	  email: string,
+   277	  outcome: Extract<ProviderActivityOutcome, { state: "not_accepted" }>,
+   278	): Promise<"retry_released" | "failed" | "unchanged"> {
+   279	  return db.transaction(async (tx) => {
+   280	    const [current] = await tx.select({ status: outreachMessagesTable.status })
+   281	      .from(outreachMessagesTable)
+   282	      .where(eq(outreachMessagesTable.id, message.id))
+   283	      .for("update");
+   284	    if (!current || !["sending", "needs_review"].includes(current.status)) return "unchanged";
+   285	
+   286	    const [priorRetry] = await tx.select({ id: outreachDeliveryEventsTable.id })
+   287	      .from(outreachDeliveryEventsTable)
+   288	      .where(and(
+   289	        eq(outreachDeliveryEventsTable.outreachMessageId, message.id),
+   290	        eq(outreachDeliveryEventsTable.eventType, RETRY_RELEASE_EVENT_TYPE),
+   291	      ))
+   292	      .limit(1);
+   293	
+   294	    await Promise.all([
+   295	      tx.delete(outreachSendReservationsTable)
+   296	        .where(eq(outreachSendReservationsTable.messageId, message.id)),
+   297	      tx.delete(outreachMonthlySendReservationsTable)
+   298	        .where(eq(outreachMonthlySendReservationsTable.messageId, message.id)),
+   299	      tx.delete(outreachSequenceSendClaimsTable)
+   300	        .where(eq(outreachSequenceSendClaimsTable.messageId, message.id)),
+   301	    ]);
+   302	
+   303	    if (priorRetry) {
+   304	      await tx.update(outreachMessagesTable)
+   305	        .set({
+   306	          status: "failed",
+   307	          providerMessageId: outcome.providerMessageId ?? undefined,
+   308	          error: `SendGrid confirmed non-delivery after the one automatic retry: ${outcome.reason}`,
+   309	        })
+   310	        .where(eq(outreachMessagesTable.id, message.id));
+   311	      await tx.update(outreachCatchUpReservationsTable).set({ status: "released", releasedAt: outcome.occurredAt })
+   312	        .where(and(
+   313	          eq(outreachCatchUpReservationsTable.messageId, message.id),
+   314	          eq(outreachCatchUpReservationsTable.status, "reserved"),
+   315	        ));
+   316	      return "failed";
+   317	    }
+   318	
+   319	    await tx.insert(outreachDeliveryEventsTable).values({
+   320	      providerMessageId: outcome.providerMessageId,
+   321	      email,
+   322	      eventType: RETRY_RELEASE_EVENT_TYPE,
+   323	      reason: outcome.reason,
+   324	      occurredAt: outcome.occurredAt,
+   325	      outreachMessageId: message.id,
+   326	      reconciliationKey: message.providerReconciliationKey,
+   327	    });
+   328	    await tx.update(outreachMessagesTable)
+   329	      .set({
+   330	        status: "approved",
+   331	        scheduledAt: new Date(),
+   332	        providerMessageId: null,
+   333	        error: `SendGrid confirmed non-delivery; released for one automatic retry: ${outcome.reason}`,
+   334	      })
+   335	      .where(eq(outreachMessagesTable.id, message.id));
+   336	    if (message.catchUpCohortId) {
+   337	      await tx.update(outreachCatchUpReservationsTable).set({ status: "released", releasedAt: outcome.occurredAt })
+   338	        .where(eq(outreachCatchUpReservationsTable.messageId, message.id));
+   339	      await tx.execute(sql`select ${outreachCatchUpCohortsTable.id} from ${outreachCatchUpCohortsTable}
+   340	        where ${outreachCatchUpCohortsTable.id} = ${message.catchUpCohortId} for update`);
+   341	      const [reserved] = await tx.select({ count: sql<number>`count(*)::int` })
+   342	        .from(outreachCatchUpReservationsTable)
+   343	        .where(and(eq(outreachCatchUpReservationsTable.cohortId, message.catchUpCohortId),
+   344	          eq(outreachCatchUpReservationsTable.status, "reserved")));
+   345	      const [cohort] = await tx.select({ target: outreachCatchUpCohortsTable.targetCount })
+   346	        .from(outreachCatchUpCohortsTable).where(eq(outreachCatchUpCohortsTable.id, message.catchUpCohortId));
+   347	      if ((reserved?.count ?? 0) < (cohort?.target ?? 0)) {
+   348	        await tx.update(outreachCatchUpReservationsTable).set({ status: "reserved", releasedAt: null })
+   349	          .where(eq(outreachCatchUpReservationsTable.messageId, message.id));
+   350	      } else {
+   351	        await tx.update(outreachMessagesTable).set({ status: "needs_review" })
+   352	          .where(eq(outreachMessagesTable.id, message.id));
+   353	      }
+   354	    }
+   355	    return "retry_released";
+   356	  });
+   357	}
+   358	
+   359	async function applyTerminalFailure(
+   360	  message: OutreachMessage,
+   361	  email: string,
+   362	  outcome: Extract<ProviderActivityOutcome, { state: "terminal_failure" }>,
+   363	): Promise<boolean> {
+   364	  await suppressOutreachEmail(email, outcome.eventType, {
+   365	    pendingStatus: "bounced",
+   366	    pendingError: outcome.reason,
+   367	    emailStatus: "invalid",
+   368	  });
+   369	  const [updated] = await db.update(outreachMessagesTable)
+   370	    .set({
+   371	      status: "bounced",
+   372	      providerMessageId: outcome.providerMessageId ?? undefined,
+   373	      error: outcome.reason,
+   374	    })
+   375	    .where(and(
+   376	      eq(outreachMessagesTable.id, message.id),
+   377	      inArray(outreachMessagesTable.status, ["sending", "needs_review", "bounced"]),
+   378	    ))
+   379	    .returning({ id: outreachMessagesTable.id });
+   380	  await db.update(outreachCatchUpReservationsTable).set({ status: "released", releasedAt: outcome.occurredAt })
+   381	    .where(and(
+   382	      eq(outreachCatchUpReservationsTable.messageId, message.id),
+   383	      eq(outreachCatchUpReservationsTable.status, "reserved"),
+   384	    ));
+   385	  return Boolean(updated);
+   386	}
+   387	
+   388	export async function reconcileUncertainOutreachMessages(options: {
+   389	  now?: Date;
+   390	  reviewAfterMs?: number;
+   391	  maxLookups?: number;
+   392	  lookupActivity?: SendGridActivityLookup;
+   393	  candidateMessageIds?: number[];
+   394	} = {}): Promise<OutreachReconciliationSummary> {
+   395	  const now = options.now ?? new Date();
+   396	  const reviewAfterMs = options.reviewAfterMs ?? DEFAULT_REVIEW_AFTER_MS;
+   397	  const maxLookups = options.maxLookups ?? DEFAULT_MAX_LOOKUPS;
+   398	  const lookupActivity = options.lookupActivity ?? lookupSendGridActivity;
+   399	  const summary: OutreachReconciliationSummary = {
+   400	    checked: 0,
+   401	    accepted: 0,
+   402	    retryReleased: 0,
+   403	    failed: 0,
+   404	    ambiguous: 0,
+   405	    waiting: 0,
+   406	  };
+   407	  const messages = await db.select({
+   408	    message: outreachMessagesTable,
+   409	    email: prospectsTable.contactEmail,
+   410	  })
+   411	    .from(outreachMessagesTable)
+   412	    .innerJoin(prospectsTable, eq(outreachMessagesTable.prospectId, prospectsTable.id))
+   413	    .where(options.candidateMessageIds === undefined
+   414	      ? inArray(outreachMessagesTable.status, ["sending", "needs_review"])
+   415	      : and(
+   416	        inArray(outreachMessagesTable.status, ["sending", "needs_review"]),
+   417	        inArray(outreachMessagesTable.id, options.candidateMessageIds),
+   418	      ))
+   419	    .orderBy(asc(outreachMessagesTable.updatedAt));
+   420	
+   421	  let lookupCount = 0;
+   422	  for (const { message, email } of messages) {
+   423	    const events = await db.select().from(outreachDeliveryEventsTable)
+   424	      .where(or(
+   425	        eq(outreachDeliveryEventsTable.outreachMessageId, message.id),
+   426	        ...(message.providerReconciliationKey
+   427	          ? [eq(outreachDeliveryEventsTable.reconciliationKey, message.providerReconciliationKey)]
+   428	          : []),
+   429	      ))
+   430	      .orderBy(desc(outreachDeliveryEventsTable.occurredAt));
+   431	    let outcome = classifyRecordedEvents(events);
+   432	
+   433	    if (!outcome) {
+   434	      if (
+   435	        message.status === "sending"
+   436	        && now.getTime() - message.updatedAt.getTime() < reviewAfterMs
+   437	      ) {
+   438	        summary.waiting += 1;
+   439	        continue;
+   440	      }
+   441	      summary.checked += 1;
+   442	      if (!message.providerReconciliationKey) {
+   443	        outcome = {
+   444	          state: "ambiguous",
+   445	          reason: "No stable SendGrid reconciliation key is stored; review provider activity manually",
+   446	        };
+   447	      } else if (lookupCount >= maxLookups) {
+   448	        summary.waiting += 1;
+   449	        summary.checked -= 1;
+   450	        continue;
+   451	      } else {
+   452	        lookupCount += 1;
+   453	        outcome = await lookupActivity(message.providerReconciliationKey);
+   454	      }
+   455	    } else {
+   456	      summary.checked += 1;
+   457	    }
+   458	
+   459	    if (outcome.state === "accepted") {
+   460	      if (await applyAcceptedOutcome(message, outcome)) summary.accepted += 1;
+   461	      continue;
+   462	    }
+   463	    if (outcome.state === "terminal_failure") {
+   464	      if (await applyTerminalFailure(
+   465	        message,
+   466	        email?.trim().toLowerCase() || "unknown@example.invalid",
+   467	        outcome,
+   468	      )) {
+   469	        summary.failed += 1;
+   470	      }
+   471	      continue;
+   472	    }
+   473	    if (outcome.state === "not_accepted") {
+   474	      const applied = await applyRejectedOutcome(
+   475	        message,
+   476	        email?.trim().toLowerCase() || "unknown@example.invalid",
+   477	        outcome,
+   478	      );
+   479	      if (applied === "retry_released") summary.retryReleased += 1;
+   480	      if (applied === "failed") summary.failed += 1;
+   481	      continue;
+   482	    }
+   483	
+   484	    const [updated] = await db.update(outreachMessagesTable)
+   485	      .set({
+   486	        status: "needs_review",
+   487	        error: `${outcome.reason}; retry remains blocked pending clear provider evidence`,
+   488	      })
+   489	      .where(and(
+   490	        eq(outreachMessagesTable.id, message.id),
+   491	        inArray(outreachMessagesTable.status, ["sending", "needs_review"]),
+   492	      ))
+   493	      .returning({ id: outreachMessagesTable.id });
+   494	    if (updated) summary.ambiguous += 1;
+   495	  }
+   496	  return summary;
+   497	}
+######## S10: lane config FULL
+     1	import { and, eq } from "drizzle-orm";
+     2	import { db, outreachLaneConfigsTable } from "@workspace/db";
+     3	import {
+     4	  effectiveLaneAllocations,
+     5	  getOutreachRuntimeConfig,
+     6	  OUTREACH_UNCAPPED,
+     7	} from "./outreachSystemConfig";
+     8	
+     9	export type OutreachLane = "named" | "public" | "hot_market" | "hot_lead";
+    10	export type OutreachLaneLimit = number | typeof OUTREACH_UNCAPPED;
+    11	
+    12	/** September 2026 relaunch: one 500-contact verified pool plus 100 hot leads. */
+    13	export const SEPTEMBER_OUTREACH_LANE_TARGETS = {
+    14	  named: 500,
+    15	  public: 0,
+    16	  hot_market: 0,
+    17	  hot_lead: 100,
+    18	} as const;
+    19	export const SEPTEMBER_OUTREACH_TOTAL_TARGET = 400;
+    20	/** Nightly sequence-1 target: 500 verified contacts plus 100 hot leads. */
+    21	export const SEPTEMBER_OUTREACH_RELAUNCH_DAILY_TARGET = 600;
+    22	
+    23	export type OutreachLaneConfig = {
+    24	  campaignKey: string;
+    25	  effectiveMonth: string;
+    26	  namedLimit: number;
+    27	  publicLimit: number;
+    28	  hotMarketLimit: number;
+    29	  hotLeadLimit: OutreachLaneLimit;
+    30	  namedHotMarketSharedLimit?: number;
+    31	  persisted: boolean;
+    32	};
+    33	
+    34	export function phoenixMonthKey(now = new Date()): string {
+    35	  const parts = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
+    36	    timeZone: "America/Phoenix",
+    37	    year: "numeric",
+    38	    month: "2-digit",
+    39	  }).formatToParts(now).map((part) => [part.type, part.value]));
+    40	  return `${parts.year}-${parts.month}`;
+    41	}
+    42	
+    43	/** The operational campaign key is intentionally month-scoped, not a code date. */
+    44	export function currentOutreachCampaignKey(now = new Date()): string {
+    45	  return process.env.OUTREACH_CAMPAIGN_KEY?.trim() || phoenixMonthKey(now);
+    46	}
+    47	
+    48	export async function getAuthoritativeLaneConfig(
+    49	  campaignKey = currentOutreachCampaignKey(),
+    50	  effectiveMonth = phoenixMonthKey(),
+    51	  now = new Date(),
+    52	): Promise<OutreachLaneConfig> {
+    53	  const [row] = await db.select().from(outreachLaneConfigsTable).where(and(
+    54	    eq(outreachLaneConfigsTable.campaignKey, campaignKey),
+    55	    eq(outreachLaneConfigsTable.effectiveMonth, effectiveMonth),
+    56	  )).limit(1);
+    57	  const runtime = getOutreachRuntimeConfig();
+    58	  const configured = runtime?.schedule;
+    59	  // Version 2 is the authoritative cutover and must not be shadowed by a
+    60	  // legacy persisted four-lane row. Before v2, preserve that row behavior.
+    61	  if (row && (runtime?.version ?? 0) < 2) return { ...row, persisted: true };
+    62	  if (configured?.laneAllocations) {
+    63	    const allocations = effectiveLaneAllocations(configured, now) ?? configured.laneAllocations;
+    64	    return {
+    65	      campaignKey, effectiveMonth,
+    66	      namedLimit: allocations.named,
+    67	      publicLimit: allocations.public,
+    68	      hotMarketLimit: allocations.hotMarket,
+    69	      hotLeadLimit: allocations.hotLead,
+    70	      namedHotMarketSharedLimit: allocations.namedHotMarketShared,
+    71	      persisted: true,
+    72	    };
+    73	  }
+    74	  if (row) return { ...row, persisted: true };
+    75	  if (configured) {
+    76	    // Post-September is monthly pacing, not four fixed lanes. Keep a
+    77	    // reservation lane for every source while the global transaction cap
+    78	    // remains authoritative.
+    79	    // The transaction computes the exact remaining-day pace. This fallback is
+    80	    // only a per-lane shape for callers that need lane metadata.
+    81	    const daily = Math.max(1, configured.dailyTarget ?? configured.monthlyTarget);
+    82	    return { campaignKey, effectiveMonth, namedLimit: daily, publicLimit: daily, hotMarketLimit: daily, hotLeadLimit: daily, persisted: true };
+    83	  }
+    84	  throw new Error("Authoritative outreach lane configuration is unavailable; outreach is fail-closed");
+    85	}
+    86	
+    87	export function laneLimit(config: OutreachLaneConfig, lane: OutreachLane): OutreachLaneLimit {
+    88	  if (lane === "named") return config.namedLimit;
+    89	  if (lane === "public") return config.publicLimit;
+    90	  if (lane === "hot_market") return config.hotMarketLimit;
+    91	  return config.hotLeadLimit;
+    92	}
+    93	
+    94	export function laneConfigTotal(config: OutreachLaneConfig): number {
+    95	  const verifiedPool = config.namedHotMarketSharedLimit
+    96	    ?? config.namedLimit + config.hotMarketLimit;
+    97	  if (config.hotLeadLimit === OUTREACH_UNCAPPED) return verifiedPool;
+    98	  return verifiedPool + config.hotLeadLimit;
+    99	}
+   100	
+   101	export function isUncappedLaneLimit(limit: OutreachLaneLimit): limit is typeof OUTREACH_UNCAPPED {
+   102	  return limit === OUTREACH_UNCAPPED;
+   103	}
+   104	
+   105	export function getNamedHotMarketSharedLimit(config: OutreachLaneConfig): number {
+   106	  return config.namedHotMarketSharedLimit ?? config.hotMarketLimit;
+   107	}
+
+######## S11: throughput config
+     1	const DEFAULT_DISCOVERY_DAILY_CAP = 1000;
+     2	const DEFAULT_VERIFICATION_BATCH_CAP = 600;
+     3	const MAX_CONFIGURABLE_RESEARCH_CAP = 1_000;
+     4	
+     5	function positiveBoundedInteger(value: string | undefined, fallback: number): number {
+     6	  if (!value) return fallback;
+     7	  const parsed = Number(value);
+     8	  if (!Number.isInteger(parsed) || parsed < 1 || parsed > MAX_CONFIGURABLE_RESEARCH_CAP) {
+     9	    return fallback;
+    10	  }
+    11	  return parsed;
+    12	}
+    13	
+    14	export function getOutreachDiscoveryDailyCap(): number {
+    15	  return positiveBoundedInteger(
+    16	    process.env.OUTREACH_DISCOVERY_DAILY_CAP,
+    17	    DEFAULT_DISCOVERY_DAILY_CAP,
+    18	  );
+    19	}
+    20	
+    21	export function getOutreachVerificationBatchCap(): number {
+    22	  return positiveBoundedInteger(
+    23	    process.env.OUTREACH_VERIFICATION_BATCH_CAP,
+    24	    DEFAULT_VERIFICATION_BATCH_CAP,
+    25	  );
+    26	}
+    27	
+    28	export const OUTREACH_RESEARCH_CAP_MAXIMUM = MAX_CONFIGURABLE_RESEARCH_CAP;
+######## S12: runner flow cont (lines 248-320)
+   248	  const topUpNeeded = calculateVerifiedTopUpNeeded(windowCount);
+   249	  const topUp = operations.topUpVerifiedPreparation && topUpNeeded > 0
+   250	    ? await operations.topUpVerifiedPreparation(scheduledAt, topUpNeeded)
+   251	    : operations.topUpVerifiedPreparation
+   252	      ? { prepared: 0, shortfall: 0 }
+   253	      : undefined;
+   254	
+   255	  const initial = await operations.processDueMessages();
+   256	  const reconciliation = operations.processProviderReconciliation();
+   257	  const waitMs = getPhoenixStagedMessageWaitMs(invokedAt, operations.now());
+   258	  if (waitMs === 0) {
+   259	    const reconciled = await reconciliation;
+   260	    return {
+   261	      claimed: initial.claimed,
+   262	      providerAccepted: initial.providerAccepted + reconciled.accepted,
+   263	      delivered: 0,
+   264	      bounced: reconciled.failed,
+   265	      stopped: initial.stopped,
+   266	      unresolved: initial.unresolved + reconciled.ambiguous,
+   267	      regularPrepared: regularPreparation.prepared,
+   268	      directPrepared: regularPreparation.directPrepared,
+   269	      publicPrepared: regularPreparation.publicPrepared,
+   270	      directShortfall: regularPreparation.directShortfall,
+   271	      publicShortfall: regularPreparation.publicShortfall,
+   272	      regularShortfall: regularPreparation.shortfall,
+   273	      hotMarketPrepared: hotMarketPreparation.prepared,
+   274	      hotMarketScheduled: hotMarketPreparation.totalScheduled,
+   275	      hotMarketShortfall: hotMarketPreparation.shortfall,
+   276	       hotLeadTarget: hotLeadPreparation.totalScheduled + hotLeadPreparation.shortfall,
+   277	       hotLeadPrepared: hotLeadPreparation.totalScheduled,
+   278	       hotLeadShortfall: hotLeadPreparation.shortfall,
+   279	       ...(topUp ? { topUpPrepared: topUp.prepared, topUpShortfall: topUp.shortfall } : {}),
+   280	       acquisitionErrors,
+   281	       verificationPromoted: verificationSummary.promoted,
+   282	       verificationFinderCalls: verificationSummary.finderCalls,
+   283	       verificationCreditBlocked: verificationSummary.creditBlocked,
+   284	      waitMs,
+   285	    };
+   286	  }
+   287	
+   288	  await operations.wait(waitMs);
+   289	  const staged = await operations.processDueMessages();
+   290	  const reconciled = await reconciliation;
+   291	  return {
+   292	    claimed: initial.claimed + staged.claimed,
+   293	    providerAccepted: initial.providerAccepted + staged.providerAccepted + reconciled.accepted,
+   294	    delivered: 0,
+   295	    bounced: reconciled.failed,
+   296	    stopped: initial.stopped + staged.stopped,
+   297	    unresolved: initial.unresolved + staged.unresolved + reconciled.ambiguous,
+   298	    regularPrepared: regularPreparation.prepared,
+   299	    directPrepared: regularPreparation.directPrepared,
+   300	    publicPrepared: regularPreparation.publicPrepared,
+   301	    directShortfall: regularPreparation.directShortfall,
+   302	    publicShortfall: regularPreparation.publicShortfall,
+   303	    regularShortfall: regularPreparation.shortfall,
+   304	    hotMarketPrepared: hotMarketPreparation.prepared,
+   305	    hotMarketScheduled: hotMarketPreparation.totalScheduled,
+   306	    hotMarketShortfall: hotMarketPreparation.shortfall,
+   307	    hotLeadTarget: hotLeadPreparation.totalScheduled + hotLeadPreparation.shortfall,
+   308	    hotLeadPrepared: hotLeadPreparation.totalScheduled,
+   309	    hotLeadShortfall: hotLeadPreparation.shortfall,
+   310	    ...(topUp ? { topUpPrepared: topUp.prepared, topUpShortfall: topUp.shortfall } : {}),
+   311	    acquisitionErrors,
+   312	    verificationPromoted: verificationSummary.promoted,
+   313	    verificationFinderCalls: verificationSummary.finderCalls,
+   314	    verificationCreditBlocked: verificationSummary.creditBlocked,
+   315	    waitMs,
+   316	  };
+   317	}
