@@ -292,6 +292,13 @@ export default function ServiceDetail() {
                   </div>
                 </div>
               )}
+              {(["structural", "mep", "civil"] as const).includes(serviceId as "structural" | "mep" | "civil") && (
+                <div className="pt-8 border-t border-border">
+                  <Link href="/pe-stamp/" className="text-foreground/80 hover:text-primary transition-colors inline-flex items-center gap-2 font-medium">
+                    Need a PE stamp? <ArrowRight className="w-4 h-4 text-primary" />
+                  </Link>
+                </div>
+              )}
             </div>
 
             {/* Sidebar CTA */}

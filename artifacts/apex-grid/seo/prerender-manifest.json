@@ -17,6 +17,7 @@
     "/resources",
     "/team",
     "/capabilities",
+    "/pe-stamp",
     "/privacy",
     "/terms",
     "/services/mep",
@@ -74,5 +75,5 @@
     "student-housing": "multifamily-residential-engineering",
     "telecommunications": "telecommunications-engineering"
   },
-  "count": 47
+  "count": 48
 }
