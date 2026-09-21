@@ -1175,7 +1175,7 @@ function assertPhase0Page(html: string, canonical: string, faqs: Array<{ questio
     || !html.includes("By ")
     || html.includes("Apex Grid Engineering PE Team")
     || !html.includes(`Updated ${PHASE0_UPDATED_DATE}`)
-|| false
+    || schemas.find((schema) => schema["@type"] === "FAQPage")?.mainEntity?.length !== faqs.length
   ) {
     throw new Error(`SEO assertion failed: malformed Phase 0 page ${label}`);
   }
@@ -5928,7 +5928,8 @@ async function main() {
     const dir = path.join(phase0AnswersDir, answerPage.slug);
     fs.mkdirSync(dir, { recursive: true });
     const html = phase0AeoPage(answerPage);
-    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    const answerFaqs = "cluster" in answerPage ? phase7Faqs(answerPage) : answerPage.faqs;
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerFaqs, answerPage.slug);
     if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
       throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
     }
