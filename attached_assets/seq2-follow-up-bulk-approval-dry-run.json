@@ -1,0 +1,4554 @@
+{
+  "candidates": 1708,
+  "approved": 575,
+  "skipped": [
+    {
+      "email": "info@mendelsonarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "neal@triplepointconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "sam@fratantoniluxuryestates.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "smills@cmaofwi.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tony@bellacustomhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tatyanab@eglinbresler.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jesus@dustarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "travis@e5db.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cpcondron@condronhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mikebartoletta@taralonhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@buildwithmbd.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@pbcdesignbuild.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@smp-architects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@butlerarmsden.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@pacificsoutherndevelopment.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@kenzyarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ballen@emc2group.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "lance@laurcondevelopment.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "steve@ironwoodcustombuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@cuneoconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "fbejarano@bteamconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "adam@schaffnerhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "stan@sheldenarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jmbest@baileymarshallcorporation.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "sstreeter@streeterhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "paul@paulfickhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cherie@nieshomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bbeckel@kraemerna.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jamee@jameeparish.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "april@rootdowndesigns.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ryan@mangini.us",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tlawry@mckimcreed.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "clark@ivoryhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "greg@bdhawaii.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "adaml@klingerllc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "flemingherring@clancytheys.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "arolston@inc.nyc",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "groby@kahlerslater.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jim@horrocks.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "sl@venturacustomhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ch@hiltonarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bill@sbshvac.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "emily@mediciarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rlynch@domebuilds.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@boto.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@noorcontractor.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "architects@dbvw.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "apmi@apmi.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@cottonarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "suzanne@verdebuild.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "joe.caldwell@bartwest.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@letterfour.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@cdrremodeling.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "andrew.byrne@grimshaw.global",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@ccarchs.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "r.smith@smith-arc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "sajjan@jasamgroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "todd@headwatersarch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ronsmith@ls3p.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dhaustin@avrpstudios.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rob@rcpconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "gerhard@mayerarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "karen@marjang.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "eric@mykennedyhome.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@rorockettdesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bill.butler@wlbutler.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "page@reppmclain.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "les@sunkotaconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@blueskybuilt.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bstidworthy@bhinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rick@hamiltecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "vdipofi@ssoe.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "yong@hparchs.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jlb@broeskearchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "llafleur@capforminc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dharbaugh@nacarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "sbaker@bakertriangle.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "taz@tazkhatristudios.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jimb@burgesspnw.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "chad@oppenoffice.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "pan@trevorpan.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bborders@arc-az.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dala@houseofform.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "omar@goldenpeakbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tim@temac.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "marketing@level10gc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "adam@iegeneralbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ruben@matadorconstructionaz.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@wassoncc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dhart@steinberghart.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@apb-inc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mrosales@rosalespartners.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@play-architecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott@welchbuildersinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "anthony@anthonymullarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@snapadu.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brock@prairiehillsconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brad@lastarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@structuralassoc.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "jill@graefconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@cookbonner.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "salexander@abccre.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@sdaarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "andy@northvalleybuilding.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jose@capstoneconstructors.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@ridgemont.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mcshane@studiomurnane.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "shawnpelowitz@cushingterrell.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "kevinalter@alterstudio.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tstrevey@bhbinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@ambrosconstructioninc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mplaskoff@plaskoff.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "steve.birdwell@reconservices.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mgreenawalt@rosendin.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "j.cooper@saundersinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@oarchinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "giles@infinitybuildersabq.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tchalmers@cegconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mdern@dern-ad.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "doug.bauer@tripointehomes.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "gjoeris@joeris.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "heidi@studio-2g.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@speedwayci.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "doug@tefarch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mkramer@sme-usa.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "pat@reeve-knight.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "andy@ausonio.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@peakonebuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "apu@buildrcg.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "inquiry@cullumhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "chad@mcgraw-homes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tregan@whiting-turner.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "amy.squitieri@meadhunt.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "carrie.stokes@bargedesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@selfhelpenterprises.org",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "nmelloh@johnsonmelloh.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott@forgexcraft.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "eric@excelsf.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rick@chaffeyconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@intotostudio.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brad@demottearchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@prestigedesignbuildnj.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "steve@drakecontracting.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mgates@ericksonhall.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "leoadaly@leoadaly.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "contact@trivers.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@vhdconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@cliftondevelopmentgroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brian@azretailconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "steve@gheenbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "david@diamondhomeswa.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "erics@cgschmidt.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@6dpmcm.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mytterberg@myarchitecture.build",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bverrier@architecturalteam.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "hbassi@bbgconstruct.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cbobo@boboconstructioninc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "readytobuild@jewettconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "lslater@slaterbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "steve@fdc-comp.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rpayne@adenacorporation.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@amdarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "gjacoby@browningday.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "contact@pcaz.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott@krumconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dreese@turnerbatson.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@lucrumbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "joe@hamelcontracting.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "john.power@powerconstructioninc-sf.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "eric@rodearchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ahovnanian@khov.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@mikinc.us",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "connect@pivotnorthdesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bthomas@austin-ind.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "csolomon@sam.biz",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@jivelv.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dwise@harpergc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dshatto@lochgroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cschultz@bradburystamm.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "megan@humphreys.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tom.schiller@korteco.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jmm@mittelstaedt.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ah4@haagenco.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@wendellburnettearchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@aranagroupinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "hello@lewisschoeplein.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@cearnal.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "si@greenprojectarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@shokatiarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ronald.tutor@tutorperini.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "graham.benes@pdbgroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@gi-solution.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "yet@fieldpaoli.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jlevi@ozarch.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "jholt@holtconstructioninc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@rocabconstructions.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "abooth@vcbo.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jclapp@hacin.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "careers@barnhartreese.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "marketing@ids-a.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brad@fresnoconstruction.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "kieran@kierantimberlake.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@cmragusa.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "office@kooarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "steve@ganderbuilders.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "info@toppconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@stovallconstruction.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@westvillagegc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "stephanier@machado-silvetti.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "emarley@swaimaia.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@wjarc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "victor.suchodolski@sargentlundy.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "hello@hollandbasham.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "wade@copperbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@lettire.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "chandra@leverarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "hastings@hastingsarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "sgales@architectonepa.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brian@lessardbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mjg@johnegreen.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "andy@czphx.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tim.ramerth@widseth.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "veronica.benitez@metriceng.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "chris@residecustomhomes.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "mark.mccluggage@glmv.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jryan@jackryanarchitect.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jmartinez@martinezcutri.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "laura.knauss@lionakis.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tcox@tca-arch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "sspina@johnsonfain.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jjones@ajcarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dan.rogers@blach.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "thuffaker@engtechnd.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ted@lott3metz.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "info@paramountassets.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rob.moore@big-d.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@theranchmine.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mick@homesbydephillips.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "marketing@graef-usa.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "information@rrmm.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "daniel.aguirre@wilsonco.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "nick@nfullerton.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "steve@greatbearbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ma@ma.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "derek@finmarkconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jdivall@panattoni.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "construction@guidoco.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "mnoyd@oza.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "pkennedy@v3co.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ccousins@mcmillanpazdansmith.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@sierravalleybuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "toby@apglobalcontractors.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "skathol@schemmer.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "akelly@xtenarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dave@shames.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@agcsf.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "john@sekashomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@cmtconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@sdhstudio.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "gellis@jacobsenconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tom@padgettconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@rushmorecc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "msileno@hardestyhanover.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@4rmula.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jamie@wintersgriffith.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "paul@hprovinelli.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "office@commonwealthcontracts.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@costahomebuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@dfwcad.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "andreweitreim@architectureinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "nflannery@satpon.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@finecraftcontractors.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@hobbsinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@kchva.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "moswald@hwgc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@landmark-se.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brian@callahanarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@paramountconstruction.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@raleigh-architecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@rspcompanies.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "todd@newerahomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "matt.mcclellan@mmbuildings.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "thomas@msrdesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@ecohomebuildersinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@avatardesignbuild.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@byrddb.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@dempsey-design.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "gmay@phillipsmay.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@gf55.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@h3hc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@jsainc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@trustonyx.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "pholt@holtconsultingco.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bill@maclayarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@battagliahomesllc.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "sara@bairdarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@lhparch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@oakpoint.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@prattliving.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@sw-architect.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@sweetsparkman.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dalef@centurycommunities.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@mcdowellmountainbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@jaavahomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@bespokebuilder.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "nelson.mitchell@historymaker.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "info@dominioncustomhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jramus@rex-ny.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "hello@huffconstructionsf.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@cmcg.llc",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@handhbuilds.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@vecinogroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@betterenterprisesinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jmcnally@mansonconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "sean@studio-ard.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "katerina.prochaska@jacksonmain.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "clint@cp-cre.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jsimpson@tvsdesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@panoramic.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@srutar.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "rstrandquest@matern.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@snyder-const.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@anderssonwise.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@mandelgroup.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "tony@dillonbuilds.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "feuer@orsett.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "asf@only-if.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "info@wtd-architecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@757building.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@alfonsoarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jamie@chiocodesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@structures.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@designblendz.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "vincentbrownbill@coopercarry.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@edenrestorations.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@homebytom.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@precisiongeneralcontracting.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@alcarenovations.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@atelierdrome.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@bellefirma.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "admin@blalockandpartners.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@cardeldevelopment.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tgray@fishbeck.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@eldonhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@crestwoodkc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@blacksquirrelconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "office@buildingstudio.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@chamblessking.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@eldridgecompany.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@jdb-builders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@deltamaxgc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@capedreamsbd.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@jaxtimer.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@usmodularinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@withbldg.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@tristone-group.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@bearcc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "walters@angelescontractor.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@foxchasecontracting.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@haggertybuilds.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "johnm@mbharch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@mcleancontracting.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@llhomestx.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@malonebrothersinc.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "info@mfarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@sfpinnacle.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@myersla.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@blockandco.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "info@dwelldevelopment.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@hudsonmeridian.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@salazarch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@hybridarc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@maximhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@studiotalo.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@morosconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@purbilt.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@sandyspringbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@tractionarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@gerard-construction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@sladearch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@lifestyledevgroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@marrcon.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@nine12architects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@raymondchanarchitect.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@gastarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@thisisbawinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@envision-builds.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@herlongarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bmyron@petrainc.net",
+      "reason": "suppressed"
+    },
+    {
+      "email": "info@studiomayo.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@studiomet.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@builtbythurman.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@loudermilkhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "office@mmcustomconst.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "steven.raasch@zastudios.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@constructelements.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@hacsb.org",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@norconinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@roccolettieri.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@ryanstreet.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@tevebaugh.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@theadupro.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@quartersawndesignbuild.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@hammerandhand.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@garveyhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mike@strpartners.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@walkerworkshop.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@hhlarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@napolitanohomes.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "info@pqh.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@thesdcc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@alliedworks.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@bafcorp.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "office@woodtinarch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "hello@method-studio.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "atucker@csoinc.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "contact@aswhobart.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@bellwoodcm.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@triceconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@tnhok.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@tmarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "joshhall@meja.us",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@aparallel.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@pdsarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@walkermacy.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@winnwittman.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dpeterson@ermco.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@prinallenbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@kincoconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "office@besthomeinthesouth.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@swankenterprises.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@pshhc.org",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@i-beamdesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@winndesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "contact@gbarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@jdcaldwellarchitect.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@northsidebuilders.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "josephlansdell@poyntersheetmetal.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@castlebldrs.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "info@waechterarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@mshco.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott@vaughnindustries.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@dacdevelopments.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@evolutionli.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@forumarchitectsllc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@gossenhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@jaks.construction",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@jsbrowncompany.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "craig@oklahome.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tschliemann@ennead.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "info@rameyco.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@ladallman.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "hector@architectsmagnus.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "afoley@brookfieldhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@trademark-homes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "projects@shedbuilt.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@truenorthlincoln.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jstewart@eastwoodhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@wildmanchalmers.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "harkins@harkinsbuilders.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "information@bcmg.us",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "greg.krause@jaynescorp.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@studiommerge.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "benk@rileycon.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "janknibbe@cameratahomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "walton@dosterconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "keith@kelschconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "chavez@rchavezconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dryan@ryanfp.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jblack@asg-architects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "clark@icraftsmanship.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "roy@socalcontractor.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@lmntarch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mark@severgroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@carterconstructionconsulting.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ed@efarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@laidesigngroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ted@paragoncustom.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dsternberg@sternbergbenjamin.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "chris@living-home.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "radams@yellowstonetraditions.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "business.development@miron-construction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mbronfman@jamestownlp.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "cgoode@gvsa.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@stonenv.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott@bardwellhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "contact@modusstudio.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mike@sonoranclassic.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "office@hvcollins.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "josh@brooksconstruct.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "david@davidturnercompanies.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@bvh.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tfisher@fishercustomhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "r.stern@ramsa.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@bdota.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "general@hourigan.group",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "dchatham@chathamlegacy.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "glusink@drmp.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "richard@richardharphomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mike@potterarchitecture.us",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tbutler@generalexcavating.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "curtism@cmautah.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "johng@klingercompanies.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "peterg@collaborativedesignstudio.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dsummers@cfevans.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "todd@wilsonbuildersllc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ksullivan@payette.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ja@aidlin-darling-design.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@krparchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@10-19architecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "gregd@dzico.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@mattconstruction.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "erik@finhomecontracting.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cgrubb@grubbproperties.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dswift@bsbdesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "shilton@meritagehomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@e-projectinternational.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "celliott@elliottworkgroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@flansburgh.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "contact@koalpllc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dnmoeller@snyder-associates.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@meridianhomesinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "coria@randoco.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@schubermitchell.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "rhet@rhet-arch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dick@ghilotti.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@herdman-ad.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rcook@cookfox.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@ldapartners.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@pcdremodeling.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@prprobuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@yanceycompany.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@americasgeneralcontracting.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rgay@thoughtbarn.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@centricarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mike@kernsteel.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "phayes@pharchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@leebuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "billw@engberganderson.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "info@marwoodconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@rittermaher.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@dabarhomebuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@suffixarchitect.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@vanderhornarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@studioziga.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@mc2ch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jlittle@seadarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@newkeyconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rick@hendelhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@flhfl.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "info@klaussmithdesignstudio.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott@sonorawestdev.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "joe@frei-remodeling.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bchisholm@mbkahn.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tim@ellismechanicalinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "lhe@rellioninc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ilan@drexelluxuryhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott@blaserluxhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "robert@brunobuilt.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "steve@milionishomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "joe@stonecreekbuilding.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tobyt@shadowcreekhomes.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bill@parkinsonbuildinggroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rick@thebuttorffcompany.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "webb@form-designbuild.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "richard@jacksonbuilthomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "eli@eclipseconstructiongroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "greg@duttonstudio.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rich@loverdebuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "awarren@maracayhomes.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "joe@ggcustomhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mike@selectbuildersnow.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dsf@fultonhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "paul@paulgrayhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "andrew@josephdouglashomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dan@skycresthomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ranjit@coppercreekhomes.us",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "erick@kurberconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "daniel@modal-design.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scot@wbbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bill@bolteconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "kirk@knadesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mark.woodson@woodsoneng.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "ogayle@loringengineers.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "patrick.sheehan@gza.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "gaetano@laplacadevelopment.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mimirzian@imirzian-architects.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "diane@hollystreetstudio.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "randy@rjmayerdevelopment.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jrettman@neigc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "deirdre.mcdaniel@salasobrien.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "robert@wallisdesignstudio.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brandon@groveparkconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bthompson@bobthompsonhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "harrison@bauhaus.co",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "roger@altavistamasterbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "louis@carmelbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "vince@longocustombuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jtorcivia@torcon.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "david@hwaconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tripployd@loydbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dfrosch@kootenia.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "yarin@createconstructionca.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jimf@agappdesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bgeer@manniksmithgroup.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "mark@mnicholsdesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scarlisle@gowightman.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mtbrumfield@heapy.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "khammer@ghafari.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "carol@studio-allen.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "pmcmullen@phillipsinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "charleyf@sma.design",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "shari@sharisaiki.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "pbenedict@mcmgrp.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "kurt.sandman@sandmanse.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mcummings@mikenbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jlusin@45arch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tony.nguyen@nandcoconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "paul.foley@kisingercampo.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ace@newframeworks.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott@aspektarch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "michaelc@michaelcrews.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jeffl@lai-hawaii.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mark.pugh@3notch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "npeters@peterscustomhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "paul.steelman@steelmanpartners.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "michelle@truehomebuildersca.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "eric@studiomeja.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "clark.prothero@rkci.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "robert@scheffy.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "blakew@designwestarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "chris@lolointeriors.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mschottelkotte@gbbn.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bbrown@bennett-pless.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "judy@ironwoodcustomhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rcottle@babcockdesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "richt@eua.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "chris.hawkins@hawkins1.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "peter@rotelle.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jpoppen@hrgreen.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dan@prime1builders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "adrake@sw-electric.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "keithd@musserbuilder.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "babak@utopiadc.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rrehkopf@orionbuilt.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brandi@buildauthentic.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jkoehne@ahattersley.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "evan.beattie@gff.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jiml@svl.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dpowell@bokapowell.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "trainorb@ventana.vc",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "paul@bianchi-tillettdevelopers.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bdeetjen@premiumconcrete.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jrich@wendlerinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mprice@commonwealthelectric.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jr@mcneillburbank.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "phil@greatwoodhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dkotecki@gpdgroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "isaac@nickelsonco.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ethan@srd.homes",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brett@builtbybrett.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jbeckenhauer@beckenhauerconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jkurtzer@cheeverconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "danielle@s8designbuild.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "paul@paulcavindesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dee@elmsid.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "wyates@wgyates.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jsusman@stgdesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "msilver@cobbfendley.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott@5gstudio.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "matta@mosaicarch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ldornberger@locatiarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "gil@goadu.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tobin@tobinsmitharchitect.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "sberry@lk-architecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dlwadman@wadman.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "randy@rciwyo.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brian.raine@arup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jim@bridgerbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bill@nantucketarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jevans@northforkbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "nick@foxhillbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mpelletier@maugel.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cmyers@mycon.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cyoung@plummer.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "blaze@bmaarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bartlett@marmonmok.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "elliott@elmbuilds.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rod@aeengineeringinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rex.kirby@verdex.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "jpoole@pooleandcompany.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bogdan@blcremodeling.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "thomas@dillardjones.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "john@sparanomooney.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "don@donlulayhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rhett@bonnerbuchanan.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "erik@ertarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rob@lacherconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jarcher@svcc.biz",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@battleridgebuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "josh@evolveresidential.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "justin@ngcgroupinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jfriedman@jfak.net",
+      "reason": "suppressed"
+    },
+    {
+      "email": "casey@builtbyvbr.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jamie@farmerpaynearchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "josh@bonsaidesignbuild.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "robbiee@mjharris.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rmills@jbuild.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "charles@vitruviusbuilt.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ron@wolfordbuilthomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "glewis@glai-architecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "andy@homoly.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott@nestarch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mwoodley@woodleyarch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "chuckg@omega3llc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "anthony@salcito.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brandt@vertical-arts.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "jimmywu@proworkpacific.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jim@bloomfielddevelopment.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "nathan@unfoldingarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "vince@kimbelconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bob.brown@moderncompaniesinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jeremiahj@ipscontractor.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "vincem@rgross.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tjones@blueheron.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "matthew@korarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "lisa@mcnelisarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "aburton@creeksidehomes.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "robert@oshatz.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "todd@bdogbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "craig@germaniaconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cbarton@cbhhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "marshall@homeworkshawaii.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "troy@homecraftersreno.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "e.martin@hjmartin.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mike@ajborzillo.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tweigandt@areaelectric.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "andrew@jhbuilder.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rgilbert@stillwaterarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "michael@customhomelife.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "joseortega@cdcbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brett@southerlynhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "gus@lopezbuilding.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "scotty@shcsavannah.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jason@orthoberhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "v.barabakh@fortresshome.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott.kepp@rlgbuilds.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brian@deepsouthcustomhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "matt@insitustudio.us",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "charles@oxidearchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "chris@pccbuilds.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rebecca@anfa.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "mark@thetantcompanies.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "steve@boydluxuryhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jdarby@thebeachcompany.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "shabbir@burhanidesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "fsengas@sengaarch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tim@laiarchitect.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brian@thejonesstudio.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cgriggs@gmaconstructiongroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "opickell@pickellbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dustin@bopparchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dave@sigmabuildersllc.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "jason@adapturedb.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "gschleusner@1call2build.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dmeleca@melecallc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tparker@f5design.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "carrieb@designwithma.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "terrys@tlstroh.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "sbohm@schaefer-arch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "craig@sharphomesks.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "andy@roblbuilding.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jason@perfectionbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "john@jewellhomesinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "lkrejci@avant-architects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "glattig@clarkenersen.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "michael.schnaare@thelawrencegroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "lbooth@boothhansen.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bob@coppertreehomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "john@luxehomesdesignbuild.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tony@burghomesllc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jskok@mcintoshporis.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "steve@peabuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "vitas@vmaxhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "andrew@porth.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "michael@majorcontracting.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mark@mainbuilt.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "curt@curthofer.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "matt@mcnaughtonbrothers.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "matt@mjbrownrenovations.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dan@dwellingindy.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mike@creekhillcustomhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jim.young@tealcreekhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "patti@aletogroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "leo@vetterhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jvetter@vetterarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "toddb@creamcityconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jgoettsch@gpchicago.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ashley@hg80architecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "laura.riley@wright-pierce.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "steven.tardy@fpaengineers.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "wmiller@wrallp.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "david.keith@hanbury.design",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "ed.chamberlayne@primeeng.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mcapasso@cacindinc.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "don@stockellhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "shelli@mittmannarchitect.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "olson@cesoinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "beth@mergearchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jfralick@hrg-inc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "lmeilink@ballinger.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "lfinnegan@smma.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "caleb@centerislandcontracting.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "chris@murphybrothers.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mmichno@harriscompany.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "gshaw@shawhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott@ssccolorado.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "chris@greystonecb.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott@faulknerperrin.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott@newleafcustom.com",
+      "reason": "Prospect email must be verified before sending"
+    },
+    {
+      "email": "adam@lingenfelterluxuryhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "chris@burtonhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "alex@rcldev.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mike@harcresthomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ted@thompson-cbg.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "kevin@whitneyblair.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cvaughan@vaughanbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rory@captivaluxuryhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dmatz@darland.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "pjc@pjcarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "lee@iridiumdev.io",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "peterv@pva.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jsmith@smithbrothersconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "billw@pipco-co.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bbrinks@buist.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "wes.christmas@clarkdietz.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dreeves@prim.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "lskuse@rccllc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "patkenney@fawilhelm.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "terrybaum@ottobaum.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "kreishman@hsuoffice.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "gcondron@conlancompany.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "grighter@berkelandcompany.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "abc@vwbarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ali@capitoldesignbuild.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "sdunn@exeterbuilding.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ej@esjohnson.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "peter@cadouxaia.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ajorgensen@hawtinjorgensen.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ecp@petersonandcollins.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rrandermann@bgeinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "kschroeder@kaizenarch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bobbi@hepperolson.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "joconnell@kendall-heaton.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dudley@deffenbaughhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "emily@mottramarch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "vinny@atlascompaniesusa.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "buhlrich@dbrinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "reid@reidsmitharchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "les@designarcgroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rex@croziergedney.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "thomas.bitnar@bitnararchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bmeuth@msengr.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jarred@buildparamount.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jason.stephen@gateway-const.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jconrad@manhard.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cataldo@cataldobuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "troy@schaumarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mhutker@hutkerarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "gpeterson@geo-logic.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "julio@dibicoinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bill@weidmannremodeling.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mreed@eereed.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jlong@jalong.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "smearig@gray-civil.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ckennedy@ma-ke-arch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "do@oneillrosearchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ms@msmearch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "marbury@tcccontractors.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jim.oleary@haskell.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "zachryj@zachrygroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "vtyer@taconicbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "htellepsen@tellepsen.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bob.snider@ssainc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bcombs@prismelectric.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "briano@gordonfinchhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tom@thomasbaioarchitect.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mstockstill@mstockstillarchitect.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brian.lane@comfortsystemsusa.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "roberto@structuredevelopmentnw.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "chase@hitechelectric.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "randy@randyjeffcoatbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "steveh@teamhumphrey.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "daniel@rotharc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "james@kvcbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "markh@jbhenderson.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mhammer@hammerarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "gk@glennkeyesarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tim@catalystarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "doug@dougmoorehomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "georgegina@gcservicesinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "steve.asher@asherhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "nathan@delpinocustomhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "skumar@journeymanco.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "fkrenek@embreegroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "kyle@kellyconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bob@bluewaterhomebuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "wjaycox@jaycoxarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "justin@yankeecustombuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tim@adraarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "harry@harryhuntarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "eric@ericwatson.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "louis@contadinoarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "katherine@gbdarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "troy@ironhideconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "chrisb@bresterconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ckendall@hecallahan.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "kirk@kirkmichelsarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rheldt@ae.design",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "marnie@marniehomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "larry@pearsondesigngroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "johndzarnowski@fgmarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "todd@amyxhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bgerrard@gerrardbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "williamsb@pondco.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mgarber@cgaconsultants.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ddickey@espassociates.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "russ@insightarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "david@wginc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mmiller@miller-roodell.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bweiss@wsbeng.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "plangue@axisarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jay@pathe.studio",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "paul@muellerhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "gpotter@sunrise-eng.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "kevin.lewis@hendersonengineers.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "psutch@cphcorp.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "paul@jpaulbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tsukut@jgaarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "danny@grahambuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brian.moran@femoran.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mkratofil@msconsultants.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "keller@armstrongbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "njohnson@parametrix.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "srosenthal@schooleycaldwell.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bbowers@bowersdesignbuild.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scottb@bechtlearchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "twinter@paradigmhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dadams@reaveley.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "joel@goldenrulebuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "burgin@burginlambert.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "wsellon@vanderweil.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "sanand@dbhms.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brycec@metcalfbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tyson@newwestbc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "david@stonecrofthomes.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "csmith@parkwayconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "peggy.mcdonough@mhtn.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "selsheikh@olcdesigns.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "justin@coastalcontracting.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "sdoyleahern@emht.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "lmurtha@stateline7.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rick@adamskirbyhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "joe.surmeier@pec1.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "csolum@thinkaec.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "nathan@massarossa.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott@mcgregorhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dave.mcivor@lamprynearson.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "shawn@shawnforthhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "srajavelu@njraarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "sharnitz@vanert.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "russ@casabellaconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ryan@buildwell.biz",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jjorjorian@lgaarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "keenan@buildcornerstone.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "kdinkins@taylorelectricco.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "eamonn@parkearchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mpynn@sunvalleyarchitect.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bgingrich@hsbarch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott.whitlock@whitlockbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bobg@gardner-builders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rsommer@ljbinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bmcfarland@jrwa.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rhenckel@dirchomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brian@bgcons.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "john.diament@diamentbuilding.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "kris@pgaw.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jnash@jimmynashhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jason@jbarwickconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jon.gilmore@tonnandblank.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jframe@framearchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jcrane@boydjones.biz",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "darrin@bharchitects.biz",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "aimee@evolvearchitecturewy.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "justin@vfla.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "audrey@cwxarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mcdermott@huitt-zollars.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "david@thearchitectfirm.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cblack@quiddity.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "chelsey@prairiedesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "darrick@kochmannbros.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jmorris@edgewoodproperties.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "plee@tetonheritagebuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rob.jordahl@jordahlcustomhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jthompson@dccm.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "drobison@auduboncompanies.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "shoff@carollo.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "howard@cedarknollshomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jfduran@wdgarch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rpertzborn@intrinsikarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rreif@bpce.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ddall@clarkebuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dwoody@jordanfosterconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "gjones@jones-architecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "derek.mateos@matcon.build",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cwilliams@cpwarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "andy@bigforkbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rjimenez@mnkarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "thilton@tnpinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "sarah@sarahjacobyarchitect.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "andy@stidcoconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tylerf@malmquist.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dougj@jacksoncontractorgroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dougpenny@pennyconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ryan@sheltercustombuiltliving.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brandon@myelliotthome.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jason@scharconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dave@meltebeke.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rachel@swallowtailarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dt@garvinconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "josiah@jndesignbuild.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tcat@catalanoarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "pv@vdtconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "frank@mhbi.us",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "stephens@broadleafarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mattl@garrettecustomhomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "anthony@derosabuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "scott.reynolds@catamountinc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cliff@cronkduch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "t.lozier@lochwoodlozier.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tnixon@lrsarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ji@skillarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "john@marinelliarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dwadia@wadiaassociates.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jmeyer@meyerandmeyerarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "michael@michaelwenrich.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "smalcom@knickerbockergroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "staceymorrison@gannestonconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "tsmith@fransenpittman.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "cneston@baskervill.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@kaufmanlynn.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@plazaconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@stellar.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "troy.ritter@charteredcompanies.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "craig.hartman@som.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mike@tridentcpm.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "newell@adarch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@francoarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@pacific33architects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "david@dsantanaarchitect.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@mvwcontractors.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@schmidt-tomey.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@greaterpacificconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "debra@designlinkarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "lance@lea-architects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "michelle@morstudio.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "john@salustroarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jonathan@cochisetech.net",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jeff@galloconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "lawrence@ljbuildersaz.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "melissa@studioblitz.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "annie@chugooding.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "markj@jensen-architects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "killefer@kfalosangeles.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "keith@kirleyarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "suzan@ow-office.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@macyarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@coonanbonds.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@patelarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ddougherty@visioneeringstudios.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "dmoore@watg.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "frank@buildcpconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rstarbird@clunegc.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rnetzer@cbi-sd.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jjackson@jrmcm.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jim@klassensmith.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@baldwin-builders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "contact@krouseconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "justind@pinnerconstruction.com",
+      "reason": "suppressed"
+    },
+    {
+      "email": "jon.foad@rsconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jm@jmadstudio.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@dwdbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "biancap@dpeyuma.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cristobald@veconstructionaz.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ross.brown@bnbuilders.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@pac-construction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@bycor.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@gravesconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dream@acgarizona.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "contact@fennrogers.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "cammieb@camelothomes.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@fratantonidesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "rwrobinette@robinettearchitect.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "andre@az-cb.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "kendall@bax-az.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "frank@cdg-architects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "greg@cornellarchitecture.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "joe@woodpartners.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "alston@alstonco.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dmccord@art-team.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@bannonconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mrust@rust-architect.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "martin@stickleydesign.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@woodruffaz.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@structuresgroup.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@hokansonarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@idarchitecturestudio.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "ghandel@handelarchitects.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "bernardo@arquitectonica.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@augustbuilding.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "marilyn.spurr@spurrconstruction.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "steve@designbuildsystem.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "vchacon@cmprosaz.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@coltonconst.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "info@coyotecontractors.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "joshua@simoncre.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mathompson@choateco.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jeizenberg@kearch.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "d.slack@bakerdevelopmentcorp.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "dcolton@coltoncommercial.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "brown@powersbrown.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "mark.macdonald@dm-dev.com",
+      "reason": "no_verified_engagement"
+    },
+    {
+      "email": "jon.dominy@domusstudio.com",
+      "reason": "no_verified_engagement"
+    }
+  ],
+  "scheduledAtDistribution": {
+    "byDay": {
+      "2026-09-24": 248,
+      "2026-09-09": 164,
+      "2026-09-10": 25,
+      "2026-09-23": 6,
+      "2026-09-22": 41,
+      "2026-09-04": 9,
+      "2026-09-18": 40,
+      "2026-09-21": 37,
+      "2026-09-25": 4,
+      "2026-09-16": 1
+    },
+    "min": "2026-09-04T03:00:00.000Z",
+    "max": "2026-09-25T03:00:00.000Z"
+  }
+}
