@@ -21,9 +21,10 @@ services:
     plan: starter
     region: ohio
     buildCommand: >-
-      corepack enable &&
-      corepack prepare pnpm@9 --activate &&
-      pnpm install &&
+      export npm_config_prefix="$HOME/.npm-global" &&
+      export PATH="$HOME/.npm-global/bin:$PATH" &&
+      npm install -g pnpm@9 --no-audit --no-fund &&
+      pnpm install --no-frozen-lockfile &&
       pnpm --filter @workspace/api-server run build &&
       pnpm --filter @workspace/apex-grid run build
     startCommand: pnpm --filter @workspace/api-server run start
@@ -133,9 +134,10 @@ services:
     region: ohio
     schedule: "0 15 * * *"
     buildCommand: >-
-      corepack enable &&
-      corepack prepare pnpm@9 --activate &&
-      pnpm install &&
+      export npm_config_prefix="$HOME/.npm-global" &&
+      export PATH="$HOME/.npm-global/bin:$PATH" &&
+      npm install -g pnpm@9 --no-audit --no-fund &&
+      pnpm install --no-frozen-lockfile &&
       pnpm --filter @workspace/api-server run build
     startCommand: pnpm --filter @workspace/api-server run outreach:daily
     envVars:
@@ -170,9 +172,10 @@ services:
     region: ohio
     schedule: "30 15 * * *"
     buildCommand: >-
-      corepack enable &&
-      corepack prepare pnpm@9 --activate &&
-      pnpm install &&
+      export npm_config_prefix="$HOME/.npm-global" &&
+      export PATH="$HOME/.npm-global/bin:$PATH" &&
+      npm install -g pnpm@9 --no-audit --no-fund &&
+      pnpm install --no-frozen-lockfile &&
       pnpm --filter @workspace/api-server run build
     startCommand: pnpm --filter @workspace/api-server run outreach:daily
     envVars:
