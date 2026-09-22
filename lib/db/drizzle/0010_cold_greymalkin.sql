@@ -1,4 +1,4 @@
-CREATE TABLE "growth_public_opportunities" (
+CREATE TABLE IF NOT EXISTS "growth_public_opportunities" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"title" text NOT NULL,
 	"source_url" text NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE "growth_public_opportunities" (
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "growth_referral_partners" (
+CREATE TABLE IF NOT EXISTS "growth_referral_partners" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"company_name" text NOT NULL,
 	"contact_name" text,
@@ -32,11 +32,11 @@ CREATE TABLE "growth_referral_partners" (
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-ALTER TABLE "leads" ADD COLUMN "source" text;--> statement-breakpoint
-ALTER TABLE "leads" ADD COLUMN "medium" text;--> statement-breakpoint
-ALTER TABLE "leads" ADD COLUMN "campaign" text;--> statement-breakpoint
-ALTER TABLE "leads" ADD COLUMN "landing_path" text;--> statement-breakpoint
-ALTER TABLE "leads" ADD COLUMN "referrer" text;--> statement-breakpoint
-ALTER TABLE "leads" ADD COLUMN "referral_partner_id" integer;--> statement-breakpoint
-ALTER TABLE "outreach_messages" ADD COLUMN "source_type" text;--> statement-breakpoint
-ALTER TABLE "outreach_messages" ADD COLUMN "source_id" integer;
+ALTER TABLE "leads" ADD COLUMN IF NOT EXISTS "source" text;--> statement-breakpoint
+ALTER TABLE "leads" ADD COLUMN IF NOT EXISTS "medium" text;--> statement-breakpoint
+ALTER TABLE "leads" ADD COLUMN IF NOT EXISTS "campaign" text;--> statement-breakpoint
+ALTER TABLE "leads" ADD COLUMN IF NOT EXISTS "landing_path" text;--> statement-breakpoint
+ALTER TABLE "leads" ADD COLUMN IF NOT EXISTS "referrer" text;--> statement-breakpoint
+ALTER TABLE "leads" ADD COLUMN IF NOT EXISTS "referral_partner_id" integer;--> statement-breakpoint
+ALTER TABLE "outreach_messages" ADD COLUMN IF NOT EXISTS "source_type" text;--> statement-breakpoint
+ALTER TABLE "outreach_messages" ADD COLUMN IF NOT EXISTS "source_id" integer;
