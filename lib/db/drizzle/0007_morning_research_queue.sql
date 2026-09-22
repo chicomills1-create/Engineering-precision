@@ -1,4 +1,4 @@
-CREATE TABLE "outreach_research_schedule_runs" (
+CREATE TABLE IF NOT EXISTS "outreach_research_schedule_runs" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"schedule_id" integer NOT NULL,
 	"run_date" text NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE "outreach_research_schedule_runs" (
 	"completed_at" timestamp with time zone
 );
 --> statement-breakpoint
-CREATE TABLE "outreach_research_schedules" (
+CREATE TABLE IF NOT EXISTS "outreach_research_schedules" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"campaign_id" integer NOT NULL,
 	"enabled" boolean DEFAULT false NOT NULL,
@@ -23,11 +23,21 @@ CREATE TABLE "outreach_research_schedules" (
 );
 --> statement-breakpoint
 DROP INDEX "client_monthly_delivery_email_period_unique";--> statement-breakpoint
-ALTER TABLE "outreach_research_runs" ADD COLUMN "skipped_count" integer DEFAULT 0 NOT NULL;--> statement-breakpoint
-ALTER TABLE "outreach_research_schedule_runs" ADD CONSTRAINT "outreach_research_schedule_runs_schedule_id_outreach_research_schedules_id_fk" FOREIGN KEY ("schedule_id") REFERENCES "public"."outreach_research_schedules"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "outreach_research_schedules" ADD CONSTRAINT "outreach_research_schedules_campaign_id_outreach_campaigns_id_fk" FOREIGN KEY ("campaign_id") REFERENCES "public"."outreach_campaigns"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-CREATE UNIQUE INDEX "outreach_research_schedule_runs_schedule_date_unique" ON "outreach_research_schedule_runs" USING btree ("schedule_id","run_date");--> statement-breakpoint
-CREATE UNIQUE INDEX "outreach_research_schedules_campaign_unique" ON "outreach_research_schedules" USING btree ("campaign_id");--> statement-breakpoint
+ALTER TABLE "outreach_research_runs" ADD COLUMN IF NOT EXISTS "skipped_count" integer DEFAULT 0 NOT NULL;--> statement-breakpoint
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'outreach_research_schedule_runs_schedule_id_outreach_research_schedules_id_fk') THEN
+    ALTER TABLE "outreach_research_schedule_runs" ADD CONSTRAINT "outreach_research_schedule_runs_schedule_id_outreach_research_schedules_id_fk" FOREIGN KEY ("schedule_id") REFERENCES "public"."outreach_research_schedules"("id") ON DELETE cascade ON UPDATE no action;
+  END IF;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'outreach_research_schedules_campaign_id_outreach_campaigns_id_fk') THEN
+    ALTER TABLE "outreach_research_schedules" ADD CONSTRAINT "outreach_research_schedules_campaign_id_outreach_campaigns_id_fk" FOREIGN KEY ("campaign_id") REFERENCES "public"."outreach_campaigns"("id") ON DELETE cascade ON UPDATE no action;
+  END IF;
+END $$;
+--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "outreach_research_schedule_runs_schedule_date_unique" ON "outreach_research_schedule_runs" USING btree ("schedule_id","run_date");--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "outreach_research_schedules_campaign_unique" ON "outreach_research_schedules" USING btree ("campaign_id");--> statement-breakpoint
 WITH ranked_prospects AS (
 	SELECT
 		"id",
@@ -40,8 +50,8 @@ SET "dedupe_key" = NULL
 FROM ranked_prospects
 WHERE "outreach_prospects"."id" = ranked_prospects."id"
 	AND ranked_prospects.duplicate_number > 1;--> statement-breakpoint
-CREATE UNIQUE INDEX "outreach_prospects_dedupe_key_unique" ON "outreach_prospects" USING btree ("dedupe_key");--> statement-breakpoint
-CREATE UNIQUE INDEX "client_monthly_delivery_email_period_unique" ON "client_monthly_email_deliveries" USING btree (lower(trim("recipient_email")),"period_key");--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "outreach_prospects_dedupe_key_unique" ON "outreach_prospects" USING btree ("dedupe_key");--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "client_monthly_delivery_email_period_unique" ON "client_monthly_email_deliveries" USING btree (lower(trim("recipient_email")),"period_key");--> statement-breakpoint
 INSERT INTO "outreach_campaigns" ("name", "audience", "states", "daily_limit", "status")
 SELECT 'Daily Qualified Arizona Architects', 'architect', ARRAY['AZ']::text[], 10, 'active'
 WHERE NOT EXISTS (
