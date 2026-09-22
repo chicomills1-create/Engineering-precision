@@ -1,4 +1,4 @@
-CREATE TABLE "client_monthly_email_deliveries" (
+CREATE TABLE IF NOT EXISTS "client_monthly_email_deliveries" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"client_job_id" integer,
 	"recipient_name" text NOT NULL,
@@ -12,6 +12,6 @@ CREATE TABLE "client_monthly_email_deliveries" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-ALTER TABLE "client_jobs" ADD COLUMN "archived_at" timestamp with time zone;--> statement-breakpoint
-ALTER TABLE "client_jobs" ADD COLUMN "monthly_email_opt_in" boolean DEFAULT false NOT NULL;--> statement-breakpoint
-ALTER TABLE "client_jobs" ADD COLUMN "monthly_email_opted_at" timestamp with time zone;
+ALTER TABLE "client_jobs" ADD COLUMN IF NOT EXISTS "archived_at" timestamp with time zone;--> statement-breakpoint
+ALTER TABLE "client_jobs" ADD COLUMN IF NOT EXISTS "monthly_email_opt_in" boolean DEFAULT false NOT NULL;--> statement-breakpoint
+ALTER TABLE "client_jobs" ADD COLUMN IF NOT EXISTS "monthly_email_opted_at" timestamp with time zone;
