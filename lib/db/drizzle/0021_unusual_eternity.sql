@@ -1,4 +1,4 @@
-CREATE TABLE "outreach_queue_alerts" (
+CREATE TABLE IF NOT EXISTS "outreach_queue_alerts" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"incident_key" text NOT NULL,
 	"status" text DEFAULT 'claimed' NOT NULL,
@@ -12,4 +12,4 @@ CREATE TABLE "outreach_queue_alerts" (
 	"sent_at" timestamp with time zone
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX "outreach_queue_alerts_incident_key_unique" ON "outreach_queue_alerts" USING btree ("incident_key");
+CREATE UNIQUE INDEX IF NOT EXISTS "outreach_queue_alerts_incident_key_unique" ON "outreach_queue_alerts" USING btree ("incident_key");
