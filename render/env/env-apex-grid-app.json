@@ -1,0 +1,178 @@
+[
+  {
+    "key": "NODE_VERSION",
+    "value": "24"
+  },
+  {
+    "key": "NODE_ENV",
+    "value": "production"
+  },
+  {
+    "key": "DATABASE_URL",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "CLERK_PUBLISHABLE_KEY",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "CLERK_SECRET_KEY",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "SESSION_SECRET",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "ADMIN_EMAILS",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "OUTREACH_AUTOMATION_ENABLED",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "OUTREACH_CAMPAIGN_KEY",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "OUTREACH_CONFIG_BOOTSTRAP_ENABLED",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "OUTREACH_CONFIG_V2_BOOTSTRAP_ENABLED",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "OUTREACH_DISCOVERY_DAILY_CAP",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "OUTREACH_FROM_EMAIL",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "OUTREACH_REPLY_PATH_VERIFIED",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "OUTREACH_REPLY_TO_EMAIL",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "OUTREACH_REPLY_WEBHOOK_TOKEN",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "OUTREACH_RESEARCH_AUTOMATION_ENABLED",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "OUTREACH_SEED_VERIFIED_BATCH",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "OUTREACH_VERIFICATION_BATCH_CAP",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "SENDGRID_DEDICATED_API_KEY",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "SENDGRID_EVENT_FORWARD_URL",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "SENDGRID_EVENT_PATH_VERIFIED",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "SENDGRID_EVENT_WEBHOOK_PUBLIC_KEY",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "SENDGRID_ISOLATION_VERIFIED",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "SENDGRID_SUBUSER_USERNAME",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "SENDGRID_SUBUSER_VERIFIED",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "UNSUBSCRIBE_SECRET",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "LEAD_NOTIFY_EMAIL",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "LEAD_NOTIFY_FROM_EMAIL",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "STATUS_NOTIFICATION_FROM_EMAIL",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "STATUS_NOTIFICATION_REPLY_TO_EMAIL",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "PUBLIC_SITE_URL",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "TURNSTILE_SECRET_KEY",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "LOG_LEVEL",
+    "value": "info"
+  },
+  {
+    "key": "LINKEDIN_API_VERSION",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "LINKEDIN_OFFICIAL_ACCESS_TOKEN",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "LINKEDIN_OFFICIAL_CLIENT_SECRET",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "LINKEDIN_OFFICIAL_ORGANIZATION_ID",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "LINKEDIN_OFFICIAL_PROVIDER_APPROVED",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "LINKEDIN_OFFICIAL_PROVIDER_ENABLED",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "LINKEDIN_OFFICIAL_SCOPES",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "GOOGLE_SERVICE_ACCOUNT_KEY",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "PRIVATE_OBJECT_DIR",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "PUBLIC_OBJECT_SEARCH_PATHS",
+    "value": "__NEEDS_JEREMY__"
+  }
+]
