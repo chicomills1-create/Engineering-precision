@@ -53,4 +53,4 @@ FROM ranked_follow_ups AS ranked
 WHERE duplicate.id = ranked.id
   AND ranked.duplicate_rank > 1;
 --> statement-breakpoint
-CREATE UNIQUE INDEX "outreach_messages_follow_up_sequence_unique" ON "outreach_messages" USING btree ("prospect_id",coalesce("campaign_id", 0),"sequence_number") WHERE "outreach_messages"."sequence_number" > 1;
+CREATE UNIQUE INDEX IF NOT EXISTS "outreach_messages_follow_up_sequence_unique" ON "outreach_messages" USING btree ("prospect_id",coalesce("campaign_id", 0),"sequence_number") WHERE "outreach_messages"."sequence_number" > 1;
