@@ -1,0 +1,46 @@
+[
+  {
+    "key": "NODE_VERSION",
+    "value": "24"
+  },
+  {
+    "key": "NODE_ENV",
+    "value": "production"
+  },
+  {
+    "key": "DATABASE_URL",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "OUTREACH_CAMPAIGN_KEY",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "SENDGRID_DEDICATED_API_KEY",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "SENDGRID_SUBUSER_USERNAME",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "SENDGRID_SUBUSER_VERIFIED",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "OUTREACH_FROM_EMAIL",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "OUTREACH_REPLY_TO_EMAIL",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "UNSUBSCRIBE_SECRET",
+    "value": "__NEEDS_JEREMY__"
+  },
+  {
+    "key": "LOG_LEVEL",
+    "value": "info"
+  }
+]
