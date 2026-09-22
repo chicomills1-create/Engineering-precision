@@ -5,8 +5,8 @@
 #   - ONE web service: Express API + static frontend (artifacts/apex-grid/dist/public)
 #     + SendGrid webhooks. In-process schedulers (clientJobUploadCleanup,
 #     cityEvidenceScheduler, outreachWorker) run here too.
-#   - TWO cron jobs: the outreach daily runner at 08:00 and 08:30 Phoenix.
-#     Phoenix is UTC-7 year-round (no DST) -> 15:00 and 15:30 UTC.
+#   - TWO cron jobs: the outreach daily runner at 20:00 and 20:30 Phoenix.
+#     Phoenix is UTC-7 year-round (no DST) -> 03:00 and 03:30 UTC.
 #   - Postgres STAYS on Neon (ep-snowy-resonance-ax38m1ci.c-4.us-east-2.aws.neon.tech/neondb).
 #     No Render database is provisioned. DATABASE_URL is filled in the dashboard.
 #
@@ -126,18 +126,18 @@ services:
       - key: PUBLIC_OBJECT_SEARCH_PATHS
         sync: false
 
-  # Outreach daily runner — 08:00 Phoenix (slot 1)
+  # Outreach daily runner — 20:00 Phoenix (slot 1)
   - type: cron
     name: apex-outreach-0800
     runtime: node
     plan: starter
     region: ohio
-    schedule: "0 15 * * *"
+    schedule: "0 3 * * *"
     buildCommand: >-
       export npm_config_prefix="$HOME/.npm-global" &&
       npm install -g pnpm@9 --no-audit --no-fund >/dev/null 2>&1 &&
       PNPM_CJS="$HOME/.npm-global/lib/node_modules/pnpm/bin/pnpm.cjs" &&
-      node "$PNPM_CJS" install --no-frozen-lockfile &&
+      NODE_ENV=development node "$PNPM_CJS" install --no-frozen-lockfile &&
       node "$PNPM_CJS" --filter @workspace/api-server run build
     startCommand: pnpm --filter @workspace/api-server run outreach:daily
     envVars:
@@ -164,18 +164,18 @@ services:
       - key: LOG_LEVEL
         sync: false
 
-  # Outreach daily runner — 08:30 Phoenix (slot 2)
+  # Outreach daily runner — 20:30 Phoenix (slot 2)
   - type: cron
     name: apex-outreach-0830
     runtime: node
     plan: starter
     region: ohio
-    schedule: "30 15 * * *"
+    schedule: "30 3 * * *"
     buildCommand: >-
       export npm_config_prefix="$HOME/.npm-global" &&
       npm install -g pnpm@9 --no-audit --no-fund >/dev/null 2>&1 &&
       PNPM_CJS="$HOME/.npm-global/lib/node_modules/pnpm/bin/pnpm.cjs" &&
-      node "$PNPM_CJS" install --no-frozen-lockfile &&
+      NODE_ENV=development node "$PNPM_CJS" install --no-frozen-lockfile &&
       node "$PNPM_CJS" --filter @workspace/api-server run build
     startCommand: pnpm --filter @workspace/api-server run outreach:daily
     envVars:
