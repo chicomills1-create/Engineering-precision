@@ -1,4 +1,4 @@
-CREATE TABLE "outreach_replies" (
+CREATE TABLE IF NOT EXISTS "outreach_replies" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"dedupe_key" text NOT NULL,
 	"provider_message_id" text,
@@ -25,8 +25,18 @@ CREATE TABLE "outreach_replies" (
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-ALTER TABLE "outreach_replies" ADD CONSTRAINT "outreach_replies_prospect_id_outreach_prospects_id_fk" FOREIGN KEY ("prospect_id") REFERENCES "public"."outreach_prospects"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "outreach_replies" ADD CONSTRAINT "outreach_replies_outreach_message_id_outreach_messages_id_fk" FOREIGN KEY ("outreach_message_id") REFERENCES "public"."outreach_messages"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
-CREATE UNIQUE INDEX "outreach_replies_dedupe_unique" ON "outreach_replies" USING btree ("dedupe_key");--> statement-breakpoint
-CREATE INDEX "outreach_replies_status_idx" ON "outreach_replies" USING btree ("status","received_at");--> statement-breakpoint
-CREATE INDEX "outreach_replies_prospect_idx" ON "outreach_replies" USING btree ("prospect_id");
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'outreach_replies_prospect_id_outreach_prospects_id_fk') THEN
+    ALTER TABLE "outreach_replies" ADD CONSTRAINT "outreach_replies_prospect_id_outreach_prospects_id_fk" FOREIGN KEY ("prospect_id") REFERENCES "public"."outreach_prospects"("id") ON DELETE set null ON UPDATE no action;
+  END IF;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'outreach_replies_outreach_message_id_outreach_messages_id_fk') THEN
+    ALTER TABLE "outreach_replies" ADD CONSTRAINT "outreach_replies_outreach_message_id_outreach_messages_id_fk" FOREIGN KEY ("outreach_message_id") REFERENCES "public"."outreach_messages"("id") ON DELETE set null ON UPDATE no action;
+  END IF;
+END $$;
+--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "outreach_replies_dedupe_unique" ON "outreach_replies" USING btree ("dedupe_key");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "outreach_replies_status_idx" ON "outreach_replies" USING btree ("status","received_at");--> statement-breakpoint
+CREATE INDEX IF NOT EXISTS "outreach_replies_prospect_idx" ON "outreach_replies" USING btree ("prospect_id");
