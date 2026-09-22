@@ -1,11 +1,11 @@
-CREATE TABLE "client_companies" (
+CREATE TABLE IF NOT EXISTS "client_companies" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "client_job_documents" (
+CREATE TABLE IF NOT EXISTS "client_job_documents" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"job_id" integer NOT NULL,
 	"name" text NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE "client_job_documents" (
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "client_jobs" (
+CREATE TABLE IF NOT EXISTS "client_jobs" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"company_id" integer,
 	"membership_id" integer,
@@ -33,7 +33,7 @@ CREATE TABLE "client_jobs" (
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "client_memberships" (
+CREATE TABLE IF NOT EXISTS "client_memberships" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"company_id" integer NOT NULL,
 	"clerk_user_id" text NOT NULL,
@@ -43,8 +43,28 @@ CREATE TABLE "client_memberships" (
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-ALTER TABLE "client_job_documents" ADD CONSTRAINT "client_job_documents_job_id_client_jobs_id_fk" FOREIGN KEY ("job_id") REFERENCES "public"."client_jobs"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "client_jobs" ADD CONSTRAINT "client_jobs_company_id_client_companies_id_fk" FOREIGN KEY ("company_id") REFERENCES "public"."client_companies"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "client_jobs" ADD CONSTRAINT "client_jobs_membership_id_client_memberships_id_fk" FOREIGN KEY ("membership_id") REFERENCES "public"."client_memberships"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "client_memberships" ADD CONSTRAINT "client_memberships_company_id_client_companies_id_fk" FOREIGN KEY ("company_id") REFERENCES "public"."client_companies"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-CREATE UNIQUE INDEX "client_memberships_clerk_user_unique" ON "client_memberships" USING btree ("clerk_user_id");
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'client_job_documents_job_id_client_jobs_id_fk') THEN
+    ALTER TABLE "client_job_documents" ADD CONSTRAINT "client_job_documents_job_id_client_jobs_id_fk" FOREIGN KEY ("job_id") REFERENCES "public"."client_jobs"("id") ON DELETE cascade ON UPDATE no action;
+  END IF;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'client_jobs_company_id_client_companies_id_fk') THEN
+    ALTER TABLE "client_jobs" ADD CONSTRAINT "client_jobs_company_id_client_companies_id_fk" FOREIGN KEY ("company_id") REFERENCES "public"."client_companies"("id") ON DELETE set null ON UPDATE no action;
+  END IF;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'client_jobs_membership_id_client_memberships_id_fk') THEN
+    ALTER TABLE "client_jobs" ADD CONSTRAINT "client_jobs_membership_id_client_memberships_id_fk" FOREIGN KEY ("membership_id") REFERENCES "public"."client_memberships"("id") ON DELETE set null ON UPDATE no action;
+  END IF;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'client_memberships_company_id_client_companies_id_fk') THEN
+    ALTER TABLE "client_memberships" ADD CONSTRAINT "client_memberships_company_id_client_companies_id_fk" FOREIGN KEY ("company_id") REFERENCES "public"."client_companies"("id") ON DELETE cascade ON UPDATE no action;
+  END IF;
+END $$;
+--> statement-breakpoint
+CREATE UNIQUE INDEX IF NOT EXISTS "client_memberships_clerk_user_unique" ON "client_memberships" USING btree ("clerk_user_id");
