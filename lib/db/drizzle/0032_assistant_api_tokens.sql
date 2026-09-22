@@ -14,3 +14,4 @@ CREATE TABLE IF NOT EXISTS "assistant_api_tokens" (
 CREATE UNIQUE INDEX IF NOT EXISTS "assistant_api_tokens_hash_unique" ON "assistant_api_tokens" ("token_hash");
 --> statement-breakpoint
 CREATE INDEX IF NOT EXISTS "assistant_api_tokens_active_idx" ON "assistant_api_tokens" ("revoked_at", "expires_at");
+
