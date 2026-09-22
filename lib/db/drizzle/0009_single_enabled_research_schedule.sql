@@ -11,4 +11,4 @@ SET "enabled" = false,
 FROM ranked_schedules
 WHERE "outreach_research_schedules"."id" = ranked_schedules."id"
 	AND ranked_schedules.enabled_rank > 1;--> statement-breakpoint
-CREATE UNIQUE INDEX "outreach_research_schedules_enabled_singleton" ON "outreach_research_schedules" USING btree (((1))) WHERE "outreach_research_schedules"."enabled" = true;
+CREATE UNIQUE INDEX IF NOT EXISTS "outreach_research_schedules_enabled_singleton" ON "outreach_research_schedules" USING btree (((1))) WHERE "outreach_research_schedules"."enabled" = true;
