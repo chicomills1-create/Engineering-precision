@@ -171,7 +171,7 @@ function PageShell({ children, faq }: { children: React.ReactNode; faq: object }
       <div className="mx-auto max-w-3xl relative z-10">
         {children}
         <section className="mt-24 border-t border-border/50 pt-12" aria-labelledby="estimate-faq-heading">
-          <h2 id="estimate-faq-heading" className="font-display text-xl uppercase tracking-widest text-muted-foreground">Questions</h2>
+          <h2 id="estimate-faq-heading" className="font-display text-xl uppercase tracking-widest text-muted-foreground">Frequently Asked Questions</h2>
           <div className="mt-6 grid gap-2">
             {ESTIMATE_FAQS.map((item) => (
               <div key={item.question} className="border border-border/50 bg-secondary/10 p-5">
