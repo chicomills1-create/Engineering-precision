@@ -29,6 +29,13 @@ services:
       NODE_OPTIONS="--max-old-space-size=4096" node "$PNPM_CJS" --filter @workspace/apex-grid run build
     startCommand: pnpm --filter @workspace/api-server run start
     healthCheckPath: /
+    # Persistent disk for estimator/contact-form uploads (replaces Replit GCS
+    # object storage, which cannot run on Render). Server default UPLOAD_DIR
+    # matches this mount path.
+    disk:
+      name: apex-uploads
+      mountPath: /var/apex-uploads
+      sizeGB: 1
     envVars:
       - key: NODE_VERSION
         value: "24"
