@@ -592,7 +592,7 @@ export default function Estimate() {
                 Estimate received!
               </h1>
               <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
-                Thanks, {contact.name.split(" ")[0] || "there"}. We'll review your project and be in touch shortly with next steps.
+                Thanks,{" "}{contact.name.split(" ")[0] || "there"}. We'll review your project and be in touch shortly with next steps.
               </p>
               <div className="mt-8 inline-block border border-border bg-card px-8 py-5">
                 <div className="text-xs uppercase tracking-widest text-muted-foreground">Estimate ID</div>
