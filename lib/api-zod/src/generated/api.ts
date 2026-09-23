@@ -9,7 +9,9 @@ import * as zod from 'zod';
 
 
 /**
- * The server recomputes pricing using the requested immutable rule version. Client-supplied prices are ignored.
+ * The server recomputes an internal planning range using the requested immutable
+ * rule version. The customer-facing quoted ballpark (what the customer actually
+ * saw on screen) is supplied by the client and persisted as customerQuote.
  * @summary Recompute and persist a planning estimate proposal
  */
 export const createEstimateProposalBodyRuleVersionMax = 120;
@@ -56,7 +58,13 @@ export const createEstimateProposalBodyDocumentsMax = 20;
 
 
 
-export const CreateEstimateProposalBody = zod.object({
+export const createEstimateProposalBodyBallparkLowMax = 100000000;
+
+export const createEstimateProposalBodyBallparkHighMax = 100000000;
+
+export const createEstimateProposalBodyBallparkCustomMax = 120;
+
+export const createEstimateProposalBodyBallparkSummaryMax = 500;export const CreateEstimateProposalBody = zod.object({
   "ruleVersion": zod.string().min(1).max(createEstimateProposalBodyRuleVersionMax),
   "intake": zod.object({
   "state": zod.string().max(createEstimateProposalBodyIntakeStateMax).optional(),
@@ -111,7 +119,13 @@ export const CreateEstimateProposalBody = zod.object({
   "path": zod.string().min(1).max(createEstimateProposalBodyDocumentsItemPathMax),
   "name": zod.string().min(1).max(createEstimateProposalBodyDocumentsItemNameMax),
   "claimToken": zod.string().min(createEstimateProposalBodyDocumentsItemClaimTokenMin).max(createEstimateProposalBodyDocumentsItemClaimTokenMax)
-})).max(createEstimateProposalBodyDocumentsMax)
+})).max(createEstimateProposalBodyDocumentsMax),
+  "ballpark": zod.object({
+  "low": zod.number().min(0).max(createEstimateProposalBodyBallparkLowMax).optional(),
+  "high": zod.number().min(0).max(createEstimateProposalBodyBallparkHighMax).optional(),
+  "custom": zod.string().max(createEstimateProposalBodyBallparkCustomMax).optional(),
+  "summary": zod.string().max(createEstimateProposalBodyBallparkSummaryMax).optional()
+}).optional()
 })
 
 export const CreateEstimateProposalResponse = zod.object({
