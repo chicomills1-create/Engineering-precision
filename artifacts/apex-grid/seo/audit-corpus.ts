@@ -39,9 +39,12 @@ function normalize(value: string): string {
 
 function decodeHtml(value: string): string {
   return value
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&#x27;/gi, "'")
     .replace(/&#39;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&#x60;/g, "`")
+    .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">");
 }
