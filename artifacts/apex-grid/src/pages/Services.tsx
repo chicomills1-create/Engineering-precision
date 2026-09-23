@@ -7,40 +7,49 @@ import assessmentBg from "@assets/generated_images/assessment-bg.webp";
 import architectureBg from "@assets/generated_images/architecture-bg.webp";
 import { usePageMeta } from "@/lib/seo";
 
+/**
+ * Services index — problem-first. Each card names the problem the visitor
+ * has, what we do about it, and one tap to get a price.
+ */
 const services = [
   {
     id: "mep",
     num: "01",
+    problem: "Building systems not coordinated?",
     title: "MEP Design & Engineering",
-    desc: "Coordinated mechanical, electrical, and plumbing design — plus Title 24 and energy code compliance — so your building systems are clear on paper, buildable on site, and ready for review.",
+    fix: "Mechanical, electrical, and plumbing designed to work together — plus Title 24 — so nothing collides in the field.",
     bg: mepBg,
   },
   {
     id: "structural",
     num: "02",
+    problem: "Need it to stand up — and pass plan check?",
     title: "Structural Design & Engineering",
-    desc: "Practical structural engineering for buildings — including ADUs, additions, seismic retrofits, and inspections — focused on safety, constructability, and clear documentation.",
+    fix: "Practical structural design for buildings, ADUs, additions, and retrofits. Safe, buildable, clearly documented.",
     bg: structuralBg,
   },
   {
     id: "civil",
     num: "03",
+    problem: "Raw land that needs to become a site?",
     title: "Civil Engineering",
-    desc: "Site feasibility to grading plan — we document decisions clearly so water drains, utilities run, and the ground is shaped to support what's being built.",
+    fix: "Grading, drainage, and utilities — so water drains, utilities run, and the ground is ready to build on.",
     bg: civilBg,
   },
   {
     id: "assessments",
     num: "04",
+    problem: "Not sure what you're dealing with?",
     title: "Building Assessments",
-    desc: "Independent judgment and reporting when conditions change, damage is suspected, or verification is required.",
+    fix: "Independent engineering judgment when conditions change, damage is suspected, or you need verification.",
     bg: assessmentBg,
   },
   {
     id: "architecture",
     num: "05",
+    problem: "Need the design, not just the engineering?",
     title: "Architectural Design",
-    desc: "Full architectural design services led by our architecture partner or project-specific architect — space planning, building design, and permit-ready architectural documents coordinated with our engineering disciplines from day one.",
+    fix: "Full architectural design — concept through permit-ready documents — coordinated with our engineers from day one.",
     bg: architectureBg,
   },
 ];
@@ -52,23 +61,13 @@ export default function Services() {
     <div className="flex flex-col">
       <section className="relative pt-40 pb-24 overflow-hidden bg-background">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-10 h-px bg-primary" />
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-primary">
-              Capabilities
-            </span>
-          </div>
-          <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.05]">
-            One Firm.
-            <br />
-            <span className="text-muted-foreground italic">
-              Five Lines Of Service.
-            </span>
+          <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] text-white">
+            What's the problem?<br />
+            <span className="text-muted-foreground italic font-light">We'll fix it.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-lg text-foreground/80 border-l-2 border-primary pl-6">
-            Architectural design, MEP design, structural and civil engineering,
-            and building assessments — so you don't have to coordinate multiple
-            firms to get one project across the line.
+            Tap a problem below. Every one of them ends the same way — a clear price,
+            a fast turnaround, and drawings that pass plan check.
           </p>
         </div>
       </section>
@@ -79,12 +78,13 @@ export default function Services() {
             <Link
               key={s.id}
               href={`/services/${s.id}`}
-              className="group relative overflow-hidden border border-border bg-card hover:border-primary/60 transition-colors"
+              className="group relative overflow-hidden border border-border bg-card hover:border-primary/60 transition-colors rounded-sm focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
             >
               <div className="absolute inset-0">
                 <img
                   src={s.bg}
-                  alt={s.title}
+                  alt=""
+                  aria-hidden="true"
                   className="w-full h-full object-cover opacity-20 group-hover:opacity-30 group-hover:scale-105 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/40" />
@@ -93,14 +93,15 @@ export default function Services() {
                 <span className="font-display text-6xl font-bold text-primary/40 group-hover:text-primary transition-colors">
                   {s.num}
                 </span>
-                <h2 className="mt-6 font-display text-2xl md:text-3xl font-bold tracking-tight">
+                <p className="mt-6 text-primary font-bold text-lg">{s.problem}</p>
+                <h2 className="mt-2 font-display text-2xl md:text-3xl font-bold tracking-tight text-white">
                   {s.title}
                 </h2>
                 <p className="mt-4 text-sm md:text-base text-foreground/70 leading-relaxed flex-1">
-                  {s.desc}
+                  {s.fix}
                 </p>
                 <span className="mt-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-primary">
-                  Explore Discipline
+                  Get my price
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
               </div>
@@ -111,20 +112,19 @@ export default function Services() {
 
       <section className="pb-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="border border-border bg-card p-12 md:p-16 text-center">
-            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight">
-              Fewer Handoffs. Clearer Responsibility.
+          <div className="border border-border bg-card p-12 md:p-16 text-center rounded-sm">
+            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-white">
+              Not sure which one you need?
             </h2>
             <p className="mt-6 max-w-2xl mx-auto text-foreground/70">
-              When one firm owns coordination from site layout through MEP and
-              structural design to permit-ready drawings, you get fewer
-              surprises and a single point of accountability.
+              Tap through the estimator — it figures out what you need and gives you
+              a ballpark price in under a minute.
             </p>
             <Link
-              href="/contact"
-              className="mt-10 inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 font-mono text-sm uppercase tracking-[0.2em] hover:bg-primary/90 transition-colors"
+              href="/estimate"
+              className="mt-10 inline-flex h-16 items-center gap-3 bg-primary text-white px-10 font-bold text-sm uppercase tracking-[0.15em] hover:bg-primary/90 transition-colors rounded-sm focus-visible:ring-4 focus-visible:ring-primary/50 focus-visible:outline-none"
             >
-              Contact Us Today
+              Start My Estimate
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -135,7 +135,7 @@ export default function Services() {
 }
 
 const PAGE_META = {
-  title: "Services | Architecture, MEP, Structural, Civil | Apex Grid",
-  description: "Explore our architectural design, MEP engineering, structural design, civil/site design, and Title 24 energy compliance services — from HVAC load calcs to seismic retrofitting.",
+  title: "Engineering Services | MEP, Structural, Civil, Architecture | Apex Grid",
+  description: "What's the problem? MEP design, structural engineering, civil/site work, building assessments, and architectural design — clear prices, fast turnaround, drawings that pass plan check.",
   path: "/services",
 };
