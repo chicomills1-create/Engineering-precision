@@ -12,6 +12,7 @@ import {
 } from "@workspace/estimate-engine";
 import {
   assembleProposalPayload,
+  type BallparkQuote,
   defaultAttribution,
   dispatchEstimateAnalytics,
   validateEstimateFile,
@@ -325,6 +326,16 @@ export default function Estimate() {
           ? { status: "uploaded", fileCount: documents.length, fileNames: documents.map((d) => d.name) }
           : { status: "not-started", fileCount: 0 },
       };
+      const needTitle = NEEDS.find((n) => n.value === need)?.title ?? need;
+      const quoteSummary = [
+        needTitle,
+        projectType,
+        needsSize ? SQFT_SIZES.find((s) => s.midpoint === sqft)?.label : null,
+        `State: ${state}`,
+      ].filter((part): part is string => Boolean(part)).join(" · ");
+      const ballparkQuote: BallparkQuote = isCustom(ballpark)
+        ? { custom: ballpark.custom, summary: quoteSummary }
+        : { low: ballpark.low, high: ballpark.high, summary: quoteSummary };
       const response = await submitEstimateProposal(assembleProposalPayload({
         ruleVersion: RULE_VERSION,
         intake,
@@ -332,6 +343,7 @@ export default function Estimate() {
         city: city.trim(),
         attribution: defaultAttribution(window.location, document.referrer),
         documents,
+        ballpark: ballparkQuote,
       }));
       setProposal(response);
       dispatchEstimateAnalytics({ name: "proposal-submitted", payload: {} });
@@ -598,6 +610,11 @@ export default function Estimate() {
                 <div className="text-xs uppercase tracking-widest text-muted-foreground">Estimate ID</div>
                 <div className="mt-1 font-mono text-2xl font-bold">{proposal.estimateId}</div>
               </div>
+              {documents.length > 0 && (
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Attached: {documents.map((d) => d.name).join(", ")}
+                </p>
+              )}
               {proposal.pdfUrl && (
                 <div className="mt-8">
                   <a href={proposal.pdfUrl} download
