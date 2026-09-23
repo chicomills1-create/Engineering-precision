@@ -15,8 +15,6 @@ import {
 } from "@workspace/api-zod";
 import {
   calculateEstimate,
-  createPdfSummaryModel,
-  generatePdfSummaryText,
   type EstimateIntake,
 } from "@workspace/estimate-engine";
 import { getAuth } from "@clerk/express";
@@ -165,6 +163,9 @@ router.post("/estimates/proposals", express.json(), async (req: Request, res: Re
       assumptions: result.assumptions,
       attribution: data.attribution ?? null,
       partnerProfile: data.partnerProfile ?? null,
+      // The customer-facing quoted ballpark the customer actually saw on
+      // screen. This is what the proposal PDF and notifications must show.
+      customerQuote: data.ballpark ?? null,
     } as Record<string, unknown>;
     const legacy = legacyJobFields({
       intake,
@@ -263,6 +264,73 @@ router.get("/estimates/:estimateId", async (req: Request, res: Response): Promis
   res.json(GetEstimateResponse.parse(publicSnapshot(job.estimateId, job.estimateSnapshot as Record<string, unknown>)));
 });
 
+function usd(value: number | null | undefined): string {
+  if (value === null || value === undefined || !Number.isFinite(value)) return "Unavailable";
+  return "$" + Math.round(value).toLocaleString("en-US");
+}
+
+type CustomerQuote = {
+  low?: number;
+  high?: number;
+  custom?: string;
+  summary?: string;
+};
+
+type ProposalJobRow = {
+  estimateId: string | null;
+  submitterName: string;
+  submitterEmail: string;
+  submitterPhone: string | null;
+  companyName: string | null;
+  projectType: string;
+  projectLocation: string;
+  servicePath: string | null;
+  createdAt: Date | string | null;
+};
+
+function customerProposalBody(
+  job: ProposalJobRow,
+  quote: CustomerQuote | null,
+  documentNames: string[],
+  turnaroundLabel: string | null,
+): string {
+  const quoteLine =
+    quote && (quote.low !== undefined || quote.high !== undefined)
+      ? `Quoted ballpark: ${usd(quote.low)} – ${usd(quote.high)}`
+      : quote?.custom
+        ? `Quoted ballpark: ${quote.custom}`
+        : null;
+  const lines = [
+    "Apex Grid Engineering",
+    "Engineering estimate proposal",
+    "",
+    `Estimate ID: ${job.estimateId}`,
+    `Date: ${job.createdAt instanceof Date ? job.createdAt.toISOString().slice(0, 10) : String(job.createdAt ?? "").slice(0, 10)}`,
+    "",
+    "Contact",
+    `  Name: ${job.submitterName}`,
+    `  Email: ${job.submitterEmail}`,
+    job.submitterPhone ? `  Phone: ${job.submitterPhone}` : null,
+    job.companyName ? `  Company: ${job.companyName}` : null,
+    `  Project city: ${job.projectLocation}`,
+    "",
+    "Project",
+    quote?.summary ? `  ${quote.summary}` : null,
+    `  Project type: ${job.projectType}`,
+    job.servicePath ? `  Service path: ${job.servicePath}` : null,
+    "",
+    "Quote",
+    quoteLine,
+    turnaroundLabel ? `  Typical turnaround: ${turnaroundLabel}` : null,
+    ...(documentNames.length > 0
+      ? ["", "Attached documents:", ...documentNames.map((name) => `  - ${name}`)]
+      : []),
+    "",
+    "This ballpark is a planning number based on the project details above. Final pricing is confirmed after an engineer reviews your project. This estimate is not binding and never implies permit approval.",
+  ].filter((line): line is string => line !== null);
+  return lines.join("\n");
+}
+
 router.get("/estimates/:estimateId/pdf", async (req: Request, res: Response): Promise<void> => {
   const params = GetEstimateParams.safeParse(req.params);
   if (!params.success) {
@@ -270,17 +338,34 @@ router.get("/estimates/:estimateId/pdf", async (req: Request, res: Response): Pr
     return;
   }
   const [job] = await db.select({
+    id: clientJobsTable.id,
     estimateId: clientJobsTable.estimateId,
     estimateSnapshot: clientJobsTable.estimateSnapshot,
+    submitterName: clientJobsTable.submitterName,
+    submitterEmail: clientJobsTable.submitterEmail,
+    submitterPhone: clientJobsTable.submitterPhone,
+    companyName: clientJobsTable.companyName,
+    projectType: clientJobsTable.projectType,
+    projectLocation: clientJobsTable.projectLocation,
+    servicePath: clientJobsTable.servicePath,
+    createdAt: clientJobsTable.createdAt,
   }).from(clientJobsTable).where(eq(clientJobsTable.estimateId, params.data.estimateId));
-  const snapshot = job?.estimateSnapshot as Record<string, unknown> | null | undefined;
-  const savedResult = snapshot?.result as Parameters<typeof createPdfSummaryModel>[0] | undefined;
-  if (!job?.estimateId || !snapshot || !savedResult) {
+  if (!job?.estimateId) {
     res.status(404).json({ error: "Estimate not found." });
     return;
   }
-  const summary = generatePdfSummaryText(savedResult);
-  const body = `${summary}\nEstimate ID: ${job.estimateId}`;
+  const snapshot = (job.estimateSnapshot ?? {}) as Record<string, unknown>;
+  const quote = (snapshot.customerQuote ?? null) as CustomerQuote | null;
+  const savedResult = snapshot.result as { turnaround?: { label?: string } } | undefined;
+  const documents = await db.select({ name: clientJobDocumentsTable.name })
+    .from(clientJobDocumentsTable)
+    .where(eq(clientJobDocumentsTable.jobId, job.id));
+  const body = customerProposalBody(
+    job,
+    quote,
+    documents.map((document) => document.name),
+    savedResult?.turnaround?.label ?? null,
+  );
   res.type("application/pdf");
   res.setHeader("Content-Disposition", `attachment; filename="${job.estimateId}.pdf"`);
   res.send(writeEstimatePdf(body));
