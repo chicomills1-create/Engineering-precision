@@ -176,7 +176,7 @@ function PageShell({ children, faq }: { children: React.ReactNode; faq: object }
             {ESTIMATE_FAQS.map((item) => (
               <div key={item.question} className="border border-border/50 bg-secondary/10 p-5">
                 <h3 className="font-display text-base font-bold text-foreground">{item.question}</h3>
-                <div className="a mt-2 text-sm leading-relaxed text-muted-foreground">{item.answer}</div>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
               </div>
             ))}
           </div>
@@ -256,20 +256,20 @@ export default function Estimate() {
 
   const pickNeed = (value: Need) => {
     setNeed(value);
-    dispatchEstimateAnalytics({ name: "estimate-need-selected", payload: { need: value } });
+    dispatchEstimateAnalytics({ name: "step-completed", payload: { step: "need-selected" } });
     goTo(2);
   };
 
   const pickProjectType = (value: ProjectType) => {
     setProjectType(value);
     setSqft(null);
-    dispatchEstimateAnalytics({ name: "estimate-type-selected", payload: { projectType: value } });
+    dispatchEstimateAnalytics({ name: "step-completed", payload: { step: "type-selected" } });
     goTo(FLAT_TYPES.includes(value) ? 4 : 3);
   };
 
   const pickSize = (midpoint: number) => {
     setSqft(midpoint);
-    dispatchEstimateAnalytics({ name: "estimate-size-selected", payload: { sqft: midpoint, state } });
+    dispatchEstimateAnalytics({ name: "step-completed", payload: { step: "size-selected" } });
     goTo(4);
   };
 
