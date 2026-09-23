@@ -6,10 +6,12 @@ import express, {
   type Response,
 } from 'express';
 
+import { ObjectStorageService } from '../lib/objectStorage';
 import {
   ObjectNotFoundError,
-  ObjectStorageService,
-} from '../lib/objectStorage';
+  readUploadFile,
+  saveUploadFile,
+} from '../lib/localUploadStorage';
 import { verifyDownloadToken } from '../lib/downloadToken';
 
 const router: IRouter = Router();
@@ -106,23 +108,7 @@ router.post(
     }
 
     try {
-      const { uploadURL, objectPath } =
-        await objectStorageService.getObjectEntityUploadURL();
-
-      const putResponse = await fetch(uploadURL, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/octet-stream' },
-        body,
-        signal: AbortSignal.timeout(60_000),
-      });
-      if (!putResponse.ok) {
-        req.log.error(
-          { status: putResponse.status },
-          'Storage PUT failed for proxied upload',
-        );
-        res.status(502).json({ error: 'Failed to store file' });
-        return;
-      }
+      const objectPath = await saveUploadFile(body, ext);
 
       res.json({ objectPath, name });
     } catch (error) {
@@ -191,26 +177,14 @@ router.get('/storage/objects/*path', async (req: Request, res: Response) => {
   }
 
   try {
-    const objectFile = await objectStorageService.getObjectEntityFile(objectPath);
-    const response = await objectStorageService.downloadObject(objectFile);
-
-    res.status(response.status);
-    response.headers.forEach((value, key) => res.setHeader(key, value));
+    const data = await readUploadFile(objectPath);
 
     const rawFilename = wildcardPath.split('/').pop() ?? 'attachment';
     const safeFilename = rawFilename.replace(/[^a-zA-Z0-9._-]/g, '_');
     res.setHeader('Content-Type', 'application/octet-stream');
     res.setHeader('Content-Disposition', `attachment; filename="${safeFilename}"`);
     res.setHeader('X-Content-Type-Options', 'nosniff');
-
-    if (response.body) {
-      const nodeStream = Readable.fromWeb(
-        response.body as ReadableStream<Uint8Array>,
-      );
-      nodeStream.pipe(res);
-    } else {
-      res.end();
-    }
+    res.send(data);
   } catch (error) {
     if (error instanceof ObjectNotFoundError) {
       req.log.warn({ err: error }, 'Object not found');
