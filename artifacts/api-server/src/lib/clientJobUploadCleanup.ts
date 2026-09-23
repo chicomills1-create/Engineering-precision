@@ -5,7 +5,7 @@ import {
   type ClientJobUpload,
 } from "@workspace/db";
 import { logger } from "./logger";
-import { ObjectStorageService } from "./objectStorage";
+import { deleteUploadFile } from "./localUploadStorage";
 
 /**
  * Uploads are retained for seven days after they are created. This gives a
@@ -15,7 +15,6 @@ import { ObjectStorageService } from "./objectStorage";
 export const CLIENT_JOB_UPLOAD_RETENTION_DAYS = 7;
 export const CLIENT_JOB_UPLOAD_CLEANUP_INTERVAL_MS = 24 * 60 * 60 * 1000;
 
-const objectStorageService = new ObjectStorageService();
 
 export function getClientJobUploadCleanupCutoff(now: Date = new Date()): Date {
   return new Date(
@@ -85,7 +84,7 @@ export async function cleanupAbandonedClientJobUploads(
           return false;
         }
 
-        await objectStorageService.deleteObjectEntity(upload.objectPath);
+        await deleteUploadFile(upload.objectPath);
         const [removed] = await tx
           .delete(clientJobUploadsTable)
           .where(
