@@ -32,6 +32,15 @@ export type Attribution = {
   utm_content?: string;
 };
 
+export type BallparkQuote = {
+  low?: number;
+  high?: number;
+  /** For project types quoted as a fixed text range instead of computed numbers. */
+  custom?: string;
+  /** Human-readable summary of the selections that produced the quote. */
+  summary?: string;
+};
+
 export type ProposalPayload = {
   ruleVersion: string;
   intake: EstimateIntake | PartnerRoutingIntake;
@@ -40,6 +49,8 @@ export type ProposalPayload = {
   attribution: Attribution;
   documents: UploadedDocument[];
   partnerProfile?: PartnerProfile;
+  /** The customer-facing ballpark the customer actually saw on screen. */
+  ballpark?: BallparkQuote;
 };
 
 export type PartnerProfile = {
@@ -159,6 +170,7 @@ export function assembleProposalPayload(args: {
   attribution: Attribution;
   documents: UploadedDocument[];
   partnerProfile?: PartnerProfile;
+  ballpark?: BallparkQuote;
 }): ProposalPayload {
   return {
     ruleVersion: args.ruleVersion,
@@ -168,6 +180,7 @@ export function assembleProposalPayload(args: {
     attribution: args.attribution,
     documents: args.documents,
     partnerProfile: args.partnerProfile,
+    ballpark: args.ballpark,
   };
 }
 
