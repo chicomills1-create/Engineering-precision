@@ -1,184 +1,104 @@
 import { Link, useParams } from "wouter";
-import { ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ALL_INDUSTRIES } from "@/data/industries";
 import mepBg from "@assets/generated_images/mep-bg.webp";
 import structuralBg from "@assets/generated_images/structural-bg.webp";
 import civilBg from "@assets/generated_images/civil-bg.webp";
 import assessmentBg from "@assets/generated_images/assessment-bg.webp";
 import architectureBg from "@assets/generated_images/architecture-bg.webp";
 import NotFound from "./not-found";
-import { INDUSTRIES_BY_CLUSTER } from "@/data/industries";
 import { usePageMeta, useJsonLd, SITE_URL } from "@/lib/seo";
 
+/**
+ * Per-service page — problem-first. The problem, the fix, what you get,
+ * one tap to a price. No methodology lessons.
+ */
 const servicesData = {
   "mep": {
     title: "MEP Design & Engineering",
     bg: mepBg,
-    desc: "Mechanical, Electrical, and Plumbing systems engineered for operational efficiency, occupant comfort, and stringent code compliance. Title 24 energy compliance modeling is scoped and assigned to appropriately qualified professionals per project.",
-    problemSection: {
-      headline: "Coordinated Systems. Zero Guesswork.",
-      content: "Uncoordinated MEP drawings are the single largest source of construction RFIs, change orders, and schedule delays. When ducts collide with steel beams in the field, profits evaporate. We engineer clash-free, coordinated systems from day one, modeling exactly how every conduit, pipe, and duct navigates the structural framework. The result? A smooth installation process and no costly surprises during rough-in."
-    },
-    scopeHeadline: "Scope of Expertise",
-    scopes: [
-      {
-        title: "HVAC & Ventilation",
-        desc: "Precision load calculations, duct routing, and equipment selection for optimal air quality and thermal comfort. Systems designed to minimize energy consumption and footprint."
-      },
-      {
-        title: "Electrical Distribution",
-        desc: "Robust power distribution, lighting design, and emergency backup systems. We ensure adequate capacity for current needs and future scalability."
-      },
-      {
-        title: "Plumbing & Drainage",
-        desc: "Domestic water, sanitary waste, and specialized piping networks engineered for reliability, code compliance, and water conservation."
-      },
-      {
-        title: "Energy & Title 24 Compliance",
-        desc: "Stringent energy modeling integrated directly into the design process to pass municipal sustainability requirements without sacrificing performance."
-      }
+    problem: "Uncoordinated MEP drawings are the #1 source of RFIs, change orders, and schedule delays.",
+    fix: "We engineer clash-free, coordinated mechanical, electrical, and plumbing systems from day one — modeled around the structure, ready for review. Title 24 handled too.",
+    youGet: [
+      "Coordinated HVAC, electrical, and plumbing design",
+      "Load calculations and equipment selection",
+      "Title 24 energy compliance documentation",
+      "Drawings built to clear plan check",
     ],
-    sectors: ["Residential", "Commercial", "Mixed-Use", "Light Industrial"]
   },
   "structural": {
     title: "Structural Design & Engineering",
     bg: structuralBg,
-    desc: "From new commercial builds to complex seismic retrofits and ADUs. We engineer robust, material-optimized frameworks that satisfy the most rigorous municipal peer reviews.",
-    problemSection: {
-      headline: "Drawings Built to Get Approved.",
-      content: "A structural design is useless if it spends months trapped in municipal plan check. We build permit submittal packages with the reviewer in mind—complete, cleanly formatted, coordinated with MEP and Civil constraints, and prepared for the applicable AHJ. Any required seal is provided only after the responsible professional's license, firm authorization, and discipline are verified. No approval outcome is guaranteed."
-    },
-    scopeHeadline: "Our Structural Approach",
-    scopes: [
-      {
-        title: "Building Design",
-        desc: "Comprehensive structural framing for steel, concrete, masonry, and timber buildings, focusing on architectural intent and constructability."
-      },
-      {
-        title: "Assessments & Inspections",
-        desc: "Post-event evaluations, structural integrity reviews, and due diligence reporting for acquisitions or adaptive reuse projects."
-      },
-      {
-        title: "Foundations & Retaining",
-        desc: "Shallow and deep foundation systems, subterranean retaining walls, and shoring solutions tailored to site-specific geotechnical reports."
-      },
-      {
-        title: "Seismic & Retrofits",
-        desc: "Advanced dynamic analysis and retrofitting strategies for unreinforced masonry (URM), soft-story buildings, and historic preservation."
-      }
+    problem: "A structural design is useless if it spends months stuck in plan check.",
+    fix: "We prepare clean, complete structural packages with the reviewer in mind — coordinated with MEP and civil, sealed by a licensed PE where required.",
+    youGet: [
+      "New builds, additions, ADUs, and retrofits",
+      "Foundation and retaining wall design",
+      "Seismic and wind analysis",
+      "PE-stamped drawings where required",
     ],
-    sectors: []
   },
   "civil": {
     title: "Civil Engineering",
     bg: civilBg,
-    desc: "Site feasibility, precise grading, and intelligent stormwater management. We bridge the critical gap between raw land and vertical construction.",
-    problemSection: {
-      headline: "Laying the Groundwork for Vertical Success.",
-      content: "The success of any development is dictated before the foundation is poured. Poor grading or inadequate utility sizing can stall a project indefinitely. We handle the complex topography, regulatory hurdles, and utility coordination to ensure your site is perfectly prepped, code-compliant, and ready for vertical execution."
-    },
-    scopeHeadline: "Civil Engineering Scope",
-    scopes: [
-      {
-        title: "Site Feasibility",
-        desc: "Pre-acquisition site analysis, conceptual grading, and utility availability studies to expose hidden developmental costs early."
-      },
-      {
-        title: "Grading & Drainage",
-        desc: "Topographical mastery to balance cut and fill, manage surface water flow, and establish accessible paths of travel (ADA compliance)."
-      },
-      {
-        title: "Utilities Infrastructure",
-        desc: "Sizing and routing of domestic water, fire lines, sanitary sewer, and dry utilities to service the demands of the new facility."
-      },
-      {
-        title: "Stormwater & Detention",
-        desc: "Low Impact Development (LID) strategies, bio-retention basins, and underground detention systems to meet strict environmental runoff mandates."
-      }
+    problem: "Poor grading or undersized utilities can stall a project before the foundation is poured.",
+    fix: "We handle the site work — grading, drainage, stormwater, utilities — so the land is ready for vertical construction.",
+    youGet: [
+      "Site grading and drainage plans",
+      "Stormwater management",
+      "Utility sizing and routing",
+      "Permit-ready site documents",
     ],
-    sectors: []
   },
   "assessments": {
     title: "Building Assessments",
     bg: assessmentBg,
-    desc: "Independent engineering judgment for property transactions, renovations, and forensic analysis. We tell you exactly what you're buying or building on.",
-    problemSection: {
-      headline: "When Do You Need an Assessment?",
-      content: "Whether you are a developer acquiring a value-add commercial property, an owner dealing with mysterious structural settling, or a tenant planning a massive equipment upgrade—you need facts, not assumptions. Our assessments provide plain-English, actionable intelligence on the exact condition, capacity, and remaining lifespan of a building's core systems."
-    },
-    scopeHeadline: "Assessment Deliverables",
-    scopes: [
-      {
-        title: "Condition Reports",
-        desc: "Thorough visual inspections outlining immediate hazards, deferred maintenance, and anticipated capital expenditures."
-      },
-      {
-        title: "MEP Life-Expectancy",
-        desc: "Detailed inventory and analysis of aging HVAC, electrical gear, and plumbing, with cost-to-replace projections."
-      },
-      {
-        title: "Seismic Risk (PML)",
-        desc: "Probable Maximum Loss studies to satisfy lender requirements and evaluate the structural survivability of major seismic events."
-      },
-      {
-        title: "Code Violation Reviews",
-        desc: "Forensic analysis of unpermitted additions and changes of use to determine the feasibility of legalizing existing conditions."
-      }
+    problem: "Buying, renovating, or troubleshooting a building? You need facts, not assumptions.",
+    fix: "Independent engineering judgment — plain-English reporting on condition, capacity, and what it will cost to fix.",
+    youGet: [
+      "Condition reports with capital planning",
+      "MEP equipment life-expectancy analysis",
+      "Structural and seismic risk review",
+      "Clear, actionable recommendations",
     ],
-    sectors: []
   },
   "architecture": {
     title: "Architectural Design",
     bg: architectureBg,
-    desc: "Full architectural design services led by our architecture partner or project-specific architect, Jason Mitchell. From concept and space planning through permit-ready construction documents — designed alongside our engineers, not handed off to them.",
-    problemSection: {
-      headline: "Architecture and Engineering. One Roof. One Vision.",
-      content: "Most projects bounce between an architecture firm and separate engineering consultants — and every handoff introduces delay, miscommunication, and redesign. Our architectural practice, led by Jason Mitchell, works in the same model as our structural, MEP, and civil teams from the first sketch. The result is a design that's beautiful, buildable, and coordinated before it ever reaches plan check."
-    },
-    scopeHeadline: "Architectural Services",
-    scopes: [
-      {
-        title: "Concept & Schematic Design",
-        desc: "Site-responsive massing, space planning, and schematic layouts that balance program requirements, budget, and code constraints from the very first pass."
-      },
-      {
-        title: "Design Development",
-        desc: "Materials, building envelope, interior layouts, and accessibility — developed in lockstep with structural and MEP systems so nothing gets value-engineered out later."
-      },
-      {
-        title: "Construction Documents",
-        desc: "Complete, permit-ready architectural drawing sets — floor plans, elevations, sections, details, and schedules — coordinated sheet-by-sheet with our engineering documents."
-      },
-      {
-        title: "Code & Accessibility Compliance",
-        desc: "Building code analysis, egress planning, ADA compliance, and jurisdiction-specific requirements resolved during design, not during plan check corrections."
-      }
+    problem: "Bouncing between an architect and separate engineers means delays and redesign at every handoff.",
+    fix: "Our architectural team designs alongside our engineers from the first sketch — beautiful, buildable, and coordinated before it ever reaches plan check.",
+    youGet: [
+      "Concept and schematic design",
+      "Permit-ready construction documents",
+      "Code and accessibility compliance",
+      "Designed with engineering, not handed off to it",
     ],
-    sectors: ["Residential", "Commercial", "Mixed-Use", "Institutional"]
   }
 };
 
 const servicePageMeta: Record<string, { title: string; description: string }> = {
   mep: {
     title: "MEP Design & Engineering | Apex Grid Engineering",
-    description: "Coordinated mechanical, electrical, and plumbing engineering for commercial and industrial projects. Title 24 energy compliance is scoped per project.",
+    description: "Coordinated mechanical, electrical, and plumbing engineering — plus Title 24. Clear prices, fast turnaround, drawings that pass plan check.",
   },
   structural: {
     title: "Structural Design & Engineering | Apex Grid Engineering",
-    description: "Structural drawings prepared for applicable permit review, with responsible-professional credentials verified per project — from new commercial builds to complex seismic retrofits.",
+    description: "Practical structural design for buildings, ADUs, additions, and retrofits — PE-stamped where required. Get your price in under a minute.",
   },
   civil: {
     title: "Civil Engineering | Apex Grid Engineering",
-    description: "Site feasibility, grading, stormwater management, and utility coordination. We bridge raw land to vertical construction.",
+    description: "Grading, drainage, stormwater, and utility coordination — permit-ready site documents. Best price, fastest turnaround.",
   },
   assessments: {
     title: "Building Assessments | Apex Grid Engineering",
-    description: "Condition reports, MEP life-expectancy analysis, seismic PML studies, and code violation reviews for acquisitions and renovations.",
+    description: "Independent engineering assessments — condition reports, MEP life-expectancy, seismic risk. Facts, not assumptions.",
   },
   architecture: {
     title: "Architectural Design | Apex Grid Engineering",
-    description: "Full architectural services from concept through permit-ready construction documents — coordinated alongside our engineering disciplines under one roof.",
+    description: "Architectural design coordinated with engineering from day one — concept through permit-ready documents.",
   },
 };
+
 export default function ServiceDetail() {
   const params = useParams();
   const serviceId = params.id as keyof typeof servicesData;
@@ -195,7 +115,7 @@ export default function ServiceDetail() {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": service?.title ?? "Engineering Services",
-    "description": service?.desc ?? "",
+    "description": service?.fix ?? "",
     "provider": {
       "@type": "Organization",
       "@id": "https://apexgrideng.com/#service",
@@ -211,120 +131,81 @@ export default function ServiceDetail() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero Header */}
-      <section className="relative pt-40 pb-32 overflow-hidden bg-background border-b border-border">
+      {/* Problem → fix hero */}
+      <section className="relative pt-40 pb-28 overflow-hidden bg-background border-b border-border">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-background/80 mix-blend-multiply z-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10" />
           {service.bg && (
-            <img 
-              src={service.bg} 
-              alt={service.title} 
+            <img
+              src={service.bg}
+              alt=""
+              aria-hidden="true"
               className="w-full h-full object-cover opacity-50"
             />
           )}
         </div>
-        
+
         <div className="container mx-auto px-4 md:px-8 relative z-20">
-          <div className="max-w-4xl">
+          <div className="max-w-3xl">
             <Link href="/services" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors mb-8">
-              Services <ArrowRight className="w-3 h-3" />
+              All services <ArrowRight className="w-3 h-3" />
             </Link>
-            <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight mb-8">
+            <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight mb-8 text-white">
               {service.title}
             </h1>
-            <p className="text-xl md:text-2xl text-foreground/80 leading-relaxed border-l-4 border-primary pl-6">
-              {service.desc}
+            <p className="text-xl md:text-2xl text-primary font-bold leading-relaxed border-l-4 border-primary pl-6 mb-6">
+              {service.problem}
+            </p>
+            <p className="text-lg text-foreground/80 leading-relaxed max-w-2xl">
+              {service.fix}
+            </p>
+            <p className="text-lg text-foreground/80 leading-relaxed max-w-2xl mt-4">
+              <strong className="text-white">Turnaround:</strong> most standard scopes move from kickoff to sealed drawings in weeks, not months — and your quote lands within 12–24 hours.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Narrative Section */}
-      <section className="py-24 bg-card border-b border-border">
+      {/* What you get + price CTA */}
+      <section className="py-24 bg-card">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-8">
-              {service.problemSection.headline}
-            </h2>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              {service.problemSection.content}
-            </p>
-          </div>
-        </div>
-      </section>
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-16 max-w-6xl mx-auto">
 
-      {/* Scopes Grid */}
-      <section className="py-32 bg-background">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-16">
-            
-            {/* Main Content */}
-            <div className="space-y-12">
-              <h2 className="text-3xl font-display font-bold mb-12 flex items-center gap-4">
+            <div>
+              <h2 className="text-3xl font-display font-bold mb-10 text-white flex items-center gap-4">
                 <span className="w-12 h-1 bg-primary inline-block"></span>
-                {service.scopeHeadline}
+                What you get
               </h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {service.scopes.map((scope, idx) => (
-                  <div key={idx} className="bg-card border border-border p-8 hover:border-primary/50 transition-colors group">
-                    <div className="text-4xl font-display font-bold text-border group-hover:text-primary transition-colors mb-6">
-                      0{idx + 1}
-                    </div>
-                    <h3 className="text-xl font-bold mb-4">{scope.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {scope.desc}
-                    </p>
-                  </div>
+              <ul className="space-y-5">
+                {service.youGet.map((item) => (
+                  <li key={item} className="flex items-start gap-4 text-lg text-foreground/90">
+                    <CheckCircle2 className="w-6 h-6 text-primary shrink-0 mt-0.5" />
+                    {item}
+                  </li>
                 ))}
-              </div>
-
-              {service.sectors && service.sectors.length > 0 && (
-                <div className="mt-16 pt-16 border-t border-border">
-                  <h3 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-6">Sectors Served</h3>
-                  <div className="flex flex-wrap gap-4">
-                    {service.sectors.map((sector, i) => (
-                      <div key={i} className="px-6 py-3 bg-secondary text-sm font-bold tracking-wider">
-                        {sector}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-              {(["structural", "mep", "civil"] as const).includes(serviceId as "structural" | "mep" | "civil") && (
-                <div className="pt-8 border-t border-border">
-                  <Link href="/pe-stamp/" className="text-foreground/80 hover:text-primary transition-colors inline-flex items-center gap-2 font-medium">
-                    Need a PE stamp? <ArrowRight className="w-4 h-4 text-primary" />
-                  </Link>
-                </div>
-              )}
+              </ul>
             </div>
 
-            {/* Sidebar CTA */}
             <div className="relative">
-              <div className="sticky top-32 bg-card border border-border p-8">
+              <div className="sticky top-32 bg-background border border-border p-8 rounded-sm">
                 <div className="w-12 h-1 bg-primary mb-6"></div>
-                <h3 className="font-display font-bold text-2xl mb-4">Engage Our Team</h3>
+                <h3 className="font-display font-bold text-2xl mb-4 text-white">Get your price</h3>
                 <p className="text-muted-foreground mb-8 text-sm leading-relaxed">
-                  Provide your architectural backgrounds or conceptual narrative. Our team completes an initial review and delivers a comprehensive, fixed-fee engineering proposal typically within 12–24 hours.
+                  Answer a few quick questions and get a ballpark range in under a minute.
+                  Quote back within 12–24 hours.
                 </p>
-                <ul className="space-y-4 mb-10 text-sm font-medium border-t border-border pt-8">
-                   <li className="flex items-center gap-3">
-                     <CheckCircle2 className="w-5 h-5 text-primary" /> Project-specific license and AHJ review
-                   </li>
-                  <li className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary" /> Integrated Multi-Discipline
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-primary" /> Scope-based proposal pricing
-                  </li>
-                </ul>
-                <Link 
-                  href="/contact" 
-                  className="flex h-14 bg-primary text-white font-bold text-sm uppercase tracking-wider items-center justify-center w-full hover:bg-primary/90 transition-colors"
+                <Link
+                  href="/estimate"
+                  className="flex h-14 bg-primary text-white font-bold text-sm uppercase tracking-wider items-center justify-center w-full hover:bg-primary/90 transition-colors rounded-sm focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
                 >
-                  Request a Proposal
+                  Start My Estimate
+                </Link>
+                <Link
+                  href="/contact"
+                  className="mt-4 flex h-14 border border-border text-foreground font-bold text-sm uppercase tracking-wider items-center justify-center w-full hover:border-primary/50 transition-colors rounded-sm"
+                >
+                  Send Us Your Plans
                 </Link>
               </div>
             </div>
@@ -333,30 +214,22 @@ export default function ServiceDetail() {
         </div>
       </section>
 
-      {/* Industry cross-links */}
-      <section className="py-24 bg-card border-t border-border">
-        <div className="container mx-auto px-4 md:px-8">
-          <h2 className="text-3xl font-display font-bold mb-4">Industries We Serve</h2>
-          <p className="text-muted-foreground max-w-3xl mb-12">
-            {service.title} scoped and coordinated for the specific codes, systems, and review agencies of your sector.
+      {/* Industries we serve */}
+      <section className="py-16 bg-background border-t border-border">
+        <div className="container mx-auto px-4 md:px-8 max-w-6xl">
+          <h2 className="text-2xl font-display font-bold mb-4 text-white">Industries we serve</h2>
+          <p className="text-muted-foreground mb-8 max-w-2xl">
+            {service.title} scoped for the codes, systems, and review agencies of your sector.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10">
-            {INDUSTRIES_BY_CLUSTER.map(({ cluster, industries }) => (
-              <div key={cluster.id}>
-                <div className="text-xs font-mono uppercase tracking-widest text-primary mb-4">{cluster.name}</div>
-                <ul className="space-y-2">
-                  {industries.map((industry) => (
-                    <li key={industry.slug}>
-                      <Link
-                        href={`/industries/${industry.slug}`}
-                        className="text-sm text-foreground/80 hover:text-primary transition-colors font-medium"
-                      >
-                        {industry.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <div className="flex flex-wrap gap-3">
+            {ALL_INDUSTRIES.map((industry) => (
+              <Link
+                key={industry.slug}
+                href={`/industries/${industry.slug}/`}
+                className="px-4 py-2 border border-border text-sm text-foreground/80 hover:text-primary hover:border-primary/50 transition-colors rounded-sm"
+              >
+                {industry.name}
+              </Link>
             ))}
           </div>
         </div>
