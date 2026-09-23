@@ -176,7 +176,7 @@ function PageShell({ children, faq }: { children: React.ReactNode; faq: object }
             {ESTIMATE_FAQS.map((item) => (
               <div key={item.question} className="border border-border/50 bg-secondary/10 p-5">
                 <h3 className="font-display text-base font-bold text-foreground">{item.question}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
+                <div className="a mt-2 text-sm leading-relaxed text-muted-foreground">{item.answer}</div>
               </div>
             ))}
           </div>
