@@ -122,6 +122,17 @@ export function buildEstimateProposalNotificationContent(
     estimateResult?.factorBreakdown && typeof estimateResult.factorBreakdown === "object"
       ? JSON.stringify(estimateResult.factorBreakdown)
       : null;
+  const customerQuote =
+    estimateSnapshot?.customerQuote && typeof estimateSnapshot.customerQuote === "object"
+      ? (estimateSnapshot.customerQuote as Record<string, unknown>)
+      : null;
+  const quotedLine = customerQuote
+    ? typeof customerQuote.custom === "string" && customerQuote.custom
+      ? `Quoted ballpark (customer saw this): ${String(customerQuote.custom)}`
+      : Number.isFinite(Number(customerQuote.low)) && Number.isFinite(Number(customerQuote.high))
+        ? `Quoted ballpark (customer saw this): $${Number(customerQuote.low).toLocaleString("en-US")} – $${Number(customerQuote.high).toLocaleString("en-US")}`
+        : null
+    : null;
   const partnerRoute =
     job.servicePath === "partner-routing" ||
     job.routingMode === "partner" ||
@@ -157,7 +168,8 @@ export function buildEstimateProposalNotificationContent(
     estimateResult?.eligibilityLanguage
       ? `Result summary: ${String(estimateResult.eligibilityLanguage)}`
       : null,
-    fee ? `Server-calculated fee: ${String(fee.low)} - ${String(fee.high)} (mid ${String(fee.mid)})` : null,
+    quotedLine,
+    fee ? `Server-calculated fee (internal planning range): $${Number(fee.low).toLocaleString("en-US")} - $${Number(fee.high).toLocaleString("en-US")} (mid $${Number(fee.mid).toLocaleString("en-US")})` : null,
     estimateResult?.turnaround && typeof estimateResult.turnaround === "object"
       ? `Turnaround: ${String((estimateResult.turnaround as Record<string, unknown>).label ?? "To be confirmed")}`
       : null,
@@ -165,7 +177,7 @@ export function buildEstimateProposalNotificationContent(
       ? `Per-discipline prices: ${perDiscipline.map((entry) => {
           const item = entry as Record<string, unknown>;
           const itemFee = item.fee as Record<string, unknown> | undefined;
-          return `${String(item.discipline)} ${String(itemFee?.low)}-${String(itemFee?.high)} (mid ${String(itemFee?.mid)})`;
+          return `${String(item.discipline)} $${Number(itemFee?.low).toLocaleString("en-US")}-$${Number(itemFee?.high).toLocaleString("en-US")} (mid $${Number(itemFee?.mid).toLocaleString("en-US")})`;
         }).join("; ")}`
       : null,
     factors ? `Factor breakdown: ${factors}` : null,
