@@ -1,4 +1,3 @@
-import { Readable } from "stream";
 import { createHash, randomBytes } from "crypto";
 import { clerkClient, getAuth } from "@clerk/express";
 import express, { Router, type IRouter, type Request, type Response } from "express";
@@ -26,7 +25,11 @@ import {
   UploadClientJobDocumentResponse,
 } from "@workspace/api-zod";
 import { requireAuth } from "../middlewares/requireAuth";
-import { ObjectNotFoundError, ObjectStorageService } from "../lib/objectStorage";
+import {
+  ObjectNotFoundError,
+  readUploadFile,
+  saveUploadFile,
+} from "../lib/localUploadStorage";
 import { signDownloadPath } from "../lib/downloadToken";
 import {
   buildClientJobNotificationPreview,
@@ -36,7 +39,6 @@ import {
 } from "../lib/clientJobNotifications";
 
 const router: IRouter = Router();
-const objectStorageService = new ObjectStorageService();
 const MAX_UPLOAD_BYTES = 20 * 1024 * 1024;
 const ALLOWED_EXTENSIONS = new Set([
   "pdf", "dwg", "dxf", "rvt", "doc", "docx", "xls", "xlsx", "ppt",
@@ -204,18 +206,7 @@ router.post(
     }
 
     try {
-      const { uploadURL, objectPath } =
-        await objectStorageService.getObjectEntityUploadURL();
-      const putResponse = await fetch(uploadURL, {
-        method: "PUT",
-        headers: { "Content-Type": "application/octet-stream" },
-        body,
-        signal: AbortSignal.timeout(60_000),
-      });
-      if (!putResponse.ok) {
-        res.status(502).json({ error: "Failed to store file." });
-        return;
-      }
+      const objectPath = await saveUploadFile(body, extension);
 
       const uploadToken = randomBytes(32).toString("hex");
       await db.insert(clientJobUploadsTable).values({
@@ -617,22 +608,15 @@ router.get(
     }
 
     try {
-      const file = await objectStorageService.getObjectEntityFile(
-        result.document.objectPath,
-      );
-      const response = await objectStorageService.downloadObject(file, 300);
+      const data = await readUploadFile(result.document.objectPath);
       res.setHeader(
         "Content-Disposition",
         `attachment; filename="${result.document.name.replace(/["\r\n]/g, "_")}"`,
       );
-      for (const [key, value] of response.headers.entries()) {
-        res.setHeader(key, value);
-      }
-      if (!response.body) {
-        res.status(500).json({ error: "Document unavailable." });
-        return;
-      }
-      Readable.fromWeb(response.body as never).pipe(res);
+      res.setHeader("Content-Type", "application/octet-stream");
+      res.setHeader("X-Content-Type-Options", "nosniff");
+      res.setHeader("Cache-Control", "private, max-age=300");
+      res.send(data);
     } catch (error) {
       if (error instanceof ObjectNotFoundError) {
         res.status(404).json({ error: "Document not found." });
