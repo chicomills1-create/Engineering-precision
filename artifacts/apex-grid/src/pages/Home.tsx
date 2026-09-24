@@ -16,18 +16,21 @@ const NEEDS = [
     title: "Plans need a PE stamp?",
     body: "Send us your drawings. A licensed PE reviews and seals them.",
     cta: "Stamp my plans",
+    need: "pe-review-sealing",
   },
   {
     icon: PencilRuler,
     title: "Need engineering design?",
     body: "Structural, MEP, civil — designed from the ground up, ready for permit.",
     cta: "Design my project",
+    need: "calculations-stamped-drawings",
   },
   {
     icon: Calculator,
     title: "Need calculations?",
     body: "Load calcs, energy calcs, Title 24 — the numbers your permit needs.",
     cta: "Run the numbers",
+    need: "engineering-calculations",
   },
 ];
 
@@ -66,6 +69,12 @@ const REVIEWS = [
     role: "Principal Architect, JL Mitchell Architects PC",
     quote:
       "Worked with Jeremy on a project — solid engineering and clear communication from start to finish.",
+  },
+  {
+    name: "Griffin Phillips",
+    role: "Owner, Atlas Geophysics",
+    quote:
+      "Straightforward to work with — quick turnaround on our stamp and a fair price. No runaround.",
   },
 ];
 
@@ -106,7 +115,7 @@ export default function Home() {
               {NEEDS.map((need) => (
                 <Link
                   key={need.title}
-                  href="/estimate"
+                  href={`/estimate?need=${need.need}`}
                   className="group flex flex-col items-center bg-card/90 backdrop-blur border border-border hover:border-primary transition-colors p-8 rounded-sm focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none min-h-[220px] justify-center"
                 >
                   <need.icon className="w-10 h-10 text-primary mb-5 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
@@ -297,3 +306,4 @@ const PAGE_META = {
   description: "Need plans stamped, engineering designed, or calculations run? Veteran-owned engineering firm licensed in 49 states. Best price, fastest turnaround — get your ballpark in under a minute.",
   path: "/",
 };
+
