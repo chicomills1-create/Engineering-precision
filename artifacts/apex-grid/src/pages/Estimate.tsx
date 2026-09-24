@@ -42,7 +42,7 @@ const PAGE_META = {
 const ESTIMATE_FAQS = [
   { question: "How much will my design cost?", answer: "Tap through three quick questions and you'll see an instant ballpark range plus our typical turnaround. Final pricing is confirmed after we review your project." },
   { question: "Is the ballpark price binding?", answer: "No — it's a planning number to get you started. We've been known to beat competitor pricing, and your final quote comes after a quick review of your plans." },
-  { question: "How fast is the turnaround?", answer: "PE stamp reviews typically run 5–10 business days; full calculations 10–20 business days. Upload your plans with your estimate and we'll confirm a date." },
+  { question: "How fast is the turnaround?", answer: "PE stamp reviews come back in 12 to 24 hours — our engineers stamp fast. Full engineering calculations take 2–5 business days depending on scope. Upload your plans with your estimate and we'll confirm a date." },
 ];
 const ESTIMATE_FAQ_SCHEMA = {
   "@context": "https://schema.org", "@type": "FAQPage", "@id": `${SITE_URL}/estimate#faq`,
@@ -83,9 +83,9 @@ const SQFT_SIZES: Array<{ label: string; midpoint: number }> = [
 const FLAT_TYPES: ProjectType[] = ["ADU / residential", "Title 24 energy compliance only", "Plan-check corrections"];
 
 const TURNAROUND: Record<Need, string> = {
-  "pe-review-sealing": "5–10 business days",
-  "engineering-calculations": "10–20 business days",
-  "calculations-stamped-drawings": "10–20 business days",
+  "pe-review-sealing": "12–24 hours",
+  "engineering-calculations": "2–5 business days",
+  "calculations-stamped-drawings": "2–5 business days",
 };
 
 /* ------------------------- internal server mappings ------------------------ */
