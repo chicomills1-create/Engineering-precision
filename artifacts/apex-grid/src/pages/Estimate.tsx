@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Calculator, Check, Download, FileCheck, Loader2, Stamp, Upload, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SITE_URL, usePageMeta } from "@/lib/seo";
@@ -42,7 +42,7 @@ const PAGE_META = {
 const ESTIMATE_FAQS = [
   { question: "How much will my design cost?", answer: "Tap through three quick questions and you'll see an instant ballpark range plus our typical turnaround. Final pricing is confirmed after we review your project." },
   { question: "Is the ballpark price binding?", answer: "No — it's a planning number to get you started. We've been known to beat competitor pricing, and your final quote comes after a quick review of your plans." },
-  { question: "How fast is the turnaround?", answer: "PE stamp reviews come back in 12 to 24 hours — our engineers stamp fast. Full engineering calculations take 2–5 business days depending on scope. Upload your plans with your estimate and we'll confirm a date." },
+  { question: "How fast is the turnaround?", answer: "PE stamp reviews come back in 12 to 24 hours — our engineers stamp fast. Full engineering calculations are scoped to your project — upload your plans with your estimate and we'll confirm a delivery date." },
 ];
 const ESTIMATE_FAQ_SCHEMA = {
   "@context": "https://schema.org", "@type": "FAQPage", "@id": `${SITE_URL}/estimate#faq`,
@@ -84,8 +84,8 @@ const FLAT_TYPES: ProjectType[] = ["ADU / residential", "Title 24 energy complia
 
 const TURNAROUND: Record<Need, string> = {
   "pe-review-sealing": "12–24 hours",
-  "engineering-calculations": "2–5 business days",
-  "calculations-stamped-drawings": "2–5 business days",
+  "engineering-calculations": "Scoped to your project",
+  "calculations-stamped-drawings": "Scoped to your project",
 };
 
 /* ------------------------- internal server mappings ------------------------ */
@@ -241,6 +241,18 @@ export default function Estimate() {
   const [proposal, setProposal] = useState<ProposalResponse | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
+
+  /* Preselect the need when a referring page links in with ?need=<need-value>
+     (e.g. homepage problem cards). Invalid values are ignored. */
+  useEffect(() => {
+    const param = new URLSearchParams(window.location.search).get("need");
+    if (param && (NEEDS as Array<{ value: string }>).some((n) => n.value === param)) {
+      setNeed(param as Need);
+      setScreen(2);
+      window.scrollTo({ top: 0 });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const needsSize = projectType !== null && !FLAT_TYPES.includes(projectType);
   const ballpark: Ballpark | null =
@@ -630,3 +642,4 @@ export default function Estimate() {
     </PageShell>
   );
 }
+
