@@ -48,6 +48,27 @@ const SERVICES = [
   { name: "Architectural Design", href: "/services/architecture" },
 ];
 
+const REVIEWS = [
+  {
+    name: "Mathew Hughes",
+    role: "Apex client",
+    quote:
+      "Jeremy handled our stamping — fast, professional, and everything sealed right the first time.",
+  },
+  {
+    name: "Ammad Riaz",
+    role: "Engineer",
+    quote:
+      "Jeremy worked with me on the design for my parents — responsive, thorough, and delivered exactly what we needed.",
+  },
+  {
+    name: "Jason Mitchell",
+    role: "Principal Architect, JL Mitchell Architects PC",
+    quote:
+      "Worked with Jeremy on a project — solid engineering and clear communication from start to finish.",
+  },
+];
+
 export default function Home() {
   usePageMeta(PAGE_META);
   useJsonLd(APEX_GRID_BUSINESS_SCHEMA);
@@ -205,6 +226,36 @@ export default function Home() {
               Meet the Firm
               <ArrowRight className="w-4 h-4" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* What clients say */}
+      <section className="py-20 md:py-28 bg-background border-b border-border" aria-label="Client reviews">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mx-auto text-center mb-14">
+            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mb-6">
+              What clients say
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Real projects. Real people. Here's what it's like working with us.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
+            {REVIEWS.map((r) => (
+              <figure
+                key={r.name}
+                className="bg-card border border-border hover:border-primary/60 p-8 rounded-sm flex flex-col transition-colors"
+              >
+                <blockquote className="text-foreground/90 leading-relaxed mb-6 flex-1">
+                  &ldquo;{r.quote}&rdquo;
+                </blockquote>
+                <figcaption>
+                  <div className="text-white font-bold">{r.name}</div>
+                  <div className="text-sm text-muted-foreground">{r.role}</div>
+                </figcaption>
+              </figure>
+            ))}
           </div>
         </div>
       </section>
