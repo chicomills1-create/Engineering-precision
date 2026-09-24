@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Phone } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { useState, useEffect, useRef } from "react";
 import { FEATURED_INDUSTRIES } from "@/data/industries";
@@ -174,6 +174,14 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 </Link>
               );
             })}
+            <a
+              href="tel:+14804900064"
+              className="h-10 px-4 text-primary hover:text-primary/80 font-bold text-sm tracking-wide flex items-center gap-2 rounded-sm transition-colors whitespace-nowrap focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+              aria-label="Call Apex Grid Engineering at (480) 490-0064"
+            >
+              <Phone className="w-4 h-4" />
+              (480) 490-0064
+            </a>
             <Link
               href="/estimate"
               className="h-10 px-6 border border-primary/30 text-primary hover:bg-primary/5 font-bold text-xs uppercase tracking-wider flex items-center justify-center rounded-sm transition-colors"
@@ -279,6 +287,14 @@ export function Shell({ children }: { children: React.ReactNode }) {
               </Link>
             </div>
             <div className="flex flex-col gap-2 mt-2">
+              <a
+                href="tel:+14804900064"
+                className="h-12 w-full border border-primary/30 text-primary hover:bg-primary/5 font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 rounded-sm transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <Phone className="w-4 h-4" />
+                Call (480) 490-0064
+              </a>
               <Link
                 href="/estimate"
                 className="h-12 w-full border border-primary/30 text-primary hover:bg-primary/5 font-bold text-sm uppercase tracking-wider flex items-center justify-center rounded-sm transition-colors"
