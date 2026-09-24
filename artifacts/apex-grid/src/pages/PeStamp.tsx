@@ -17,14 +17,14 @@ const steps = [
   {
     title: "Sealed and returned",
     description:
-      "Sealed drawings and calculations come back to you, ready for permit submittal to your AHJ. Typical turnaround 3–5 business days on a complete package.",
+      "Sealed drawings and calculations come back to you, ready for permit submittal to your AHJ. Typical turnaround 12–24 hours on a complete package.",
   },
 ];
 
 const trustPoints = [
   "Licensed in 49 states — our PEs seal wherever your project permits", // claims-audit: evidence-gated
   "Real engineering review — responsible-charge review on every set, never a rubber stamp",
-  "Fast turnaround — most review-and-seal packages back in 3–5 business days",
+  "Fast turnaround — most review-and-seal packages back in 12–24 hours",
   "Trusted relationships — firms send us plans weekly and come back.",
 ];
 
@@ -37,7 +37,7 @@ const faqs = [
   {
     question: "How fast is turnaround?",
     answer:
-      "Typical turnaround is 3–5 business days from the time we receive a complete package. Rush review is available when a permit deadline is driving the schedule — tell us the date and we'll tell you honestly whether we can hit it.",
+      "Typical turnaround is 12–24 hours from the time we receive a complete package. Rush review is available when a permit deadline is driving the schedule — tell us the date and we'll tell you honestly whether we can hit it.",
   },
   {
     question: "Which states do you cover?",
