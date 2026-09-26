@@ -69,30 +69,30 @@ export function Shell({ children }: { children: React.ReactNode }) {
           scrolled ? "bg-background/95 backdrop-blur-xl border-b border-white/10 py-3 shadow-2xl shadow-black/60" : "bg-gradient-to-b from-black/90 via-black/50 to-transparent py-6"
         }`}
       >
-        <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+        <div className="mx-auto px-4 md:px-8 max-w-[1720px] flex items-center justify-between">
+          <div className="flex items-center gap-2 shrink-0">
             <Link href="/" className="group flex items-center gap-3">
               <Logo className="w-8 h-8 text-primary group-hover:scale-105 transition-transform" />
               <div className="flex flex-col">
                 <span className="font-display font-bold text-lg leading-none tracking-tight group-hover:text-primary transition-colors">
                   APEX GRID
                 </span>
-                <span className="text-[8px] uppercase tracking-[0.12em] text-muted-foreground leading-none mt-1 whitespace-nowrap">
+                <span className="hidden min-[1800px]:block text-[8px] uppercase tracking-[0.12em] text-muted-foreground leading-none mt-1 whitespace-nowrap">
                   Engineering · Architecture · General Contracting
                 </span>
               </div>
             </Link>
           </div>
 
-          <nav className="hidden xl:flex items-center gap-6 2xl:gap-8">
+          <nav className="hidden 2xl:flex items-center gap-4 2xl:gap-6 shrink-0" aria-label="Primary">
             {navigation.map((item) => {
               if (item.name === "Industries") {
                 return (
-                  <div key="services-group" className="flex items-center gap-6 2xl:gap-8">
+                  <div key="services-group" className="flex items-center gap-4 2xl:gap-6">
                      <div className="group/ind relative">
                       <Link
                         href={item.href}
-                        className={`flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary ${
+                        className={`flex items-center gap-1 text-sm font-medium whitespace-nowrap transition-colors hover:text-primary ${
                           location.startsWith("/industries") ? "text-primary" : "text-muted-foreground"
                         }`}
                       >
@@ -128,7 +128,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                        <button
                          type="button"
                          aria-haspopup="menu"
-                         className={`flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary ${
+                         className={`flex items-center gap-1 text-sm font-medium whitespace-nowrap transition-colors hover:text-primary ${
                         location.startsWith("/services") ? "text-primary" : "text-muted-foreground"
                        }`}>
                         Services <ChevronDown className="w-4 h-4 opacity-50 group-hover/nav:rotate-180 transition-transform" />
@@ -166,7 +166,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
+                  className={`text-sm font-medium whitespace-nowrap transition-colors hover:text-primary ${
                     location === item.href ? "text-primary" : "text-muted-foreground"
                   }`}
                 >
@@ -176,7 +176,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
             })}
             <a
               href="tel:+14804900064"
-              className="h-10 px-4 text-primary hover:text-primary/80 font-bold text-sm tracking-wide flex items-center gap-2 rounded-sm transition-colors whitespace-nowrap focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+              className="h-10 px-2 text-primary hover:text-primary/80 font-bold text-sm tracking-wide flex items-center gap-2 rounded-sm transition-colors whitespace-nowrap focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
               aria-label="Call Apex Grid Engineering at (480) 490-0064"
             >
               <Phone className="w-4 h-4" />
@@ -184,13 +184,13 @@ export function Shell({ children }: { children: React.ReactNode }) {
             </a>
             <Link
               href="/estimate"
-              className="h-10 px-6 border border-primary/30 text-primary hover:bg-primary/5 font-bold text-xs uppercase tracking-wider flex items-center justify-center rounded-sm transition-colors"
+              className="h-10 px-5 whitespace-nowrap border border-primary/30 text-primary hover:bg-primary/5 font-bold text-xs uppercase tracking-wider flex items-center justify-center rounded-sm transition-colors"
             >
               Estimate
             </Link>
             <Link
               href="/request-proposal?utm_source=website&utm_medium=organic&utm_campaign=site_header"
-              className="h-10 min-w-[150px] whitespace-nowrap px-6 bg-primary text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center rounded-sm hover:bg-primary/90 transition-colors"
+              className="h-10 min-w-[140px] whitespace-nowrap px-5 bg-primary text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center rounded-sm hover:bg-primary/90 transition-colors"
             >
               Request Proposal
             </Link>
@@ -199,7 +199,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
           <button
             ref={mobileMenuButtonRef}
             type="button"
-            className="xl:hidden p-2 -mr-2 text-muted-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
+            className="2xl:hidden p-2 -mr-2 text-muted-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMobileMenuOpen}
@@ -212,7 +212,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-           <div id="mobile-navigation" className="xl:hidden absolute top-full left-0 w-full bg-card/95 backdrop-blur-xl border-b border-border p-4 flex flex-col gap-2 max-h-[85vh] overflow-y-auto shadow-2xl">
+           <div id="mobile-navigation" className="2xl:hidden absolute top-full left-0 w-full bg-card/95 backdrop-blur-xl border-b border-border p-4 flex flex-col gap-2 max-h-[85vh] overflow-y-auto shadow-2xl">
             {navigation.map((item) => (
               <div key={item.name} className="flex flex-col">
                 <Link
