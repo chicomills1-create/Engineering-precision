@@ -2,7 +2,6 @@ import { useJsonLd, usePageMeta } from "@/lib/seo";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import jeremyImg from "@assets/generated_images/jeremy-mills.webp";
-import jasonLuhnImg from "@assets/generated_images/jason-luhn.webp";
 import angelImg from "@assets/file_00000000b85c8230ad55cc8b03100eea_1788058580363.png";
 
 /**
@@ -15,12 +14,6 @@ const LEADERS = [
     role: "Founder & CEO · U.S. Air Force Veteran",
     image: jeremyImg,
     bio: "Founded Apex Grid on mission-first discipline — accountability, clear communication, no excuses.",
-  },
-  {
-    name: "Jason Luhn, PE",
-    role: "Chief Operating Officer · Professional Engineer",
-    image: jasonLuhnImg,
-    bio: "The firm's technical anchor. Sets the engineering standard across every discipline.",
   },
   {
     name: "Angel Endres",
@@ -184,9 +177,10 @@ const TEAM_SCHEMA = {
       {
         "@type": "Person",
         name: "Jason Luhn",
-        jobTitle: "Chief Operating Officer, Professional Engineer",
+        jobTitle: "Principal Structural Engineer (PE)",
         worksFor: { "@type": "Organization", name: "Apex Grid Engineering" },
       },
     ],
   },
 };
+
