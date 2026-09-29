@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
-    "build": "SEO_DIRECT_TO_DIST=1 vite build --config vite.config.ts && tsx scripts/copy-static-public-assets.ts && SEO_OUTPUT_DIR=dist/public pnpm run seo:generate && PRERENDER_BUNDLE=1 vite build --ssr src/ssr.tsx --config vite.config.ts && SEO_OUTPUT_DIR=dist/public tsx scripts/prerender.ts && SEO_OUTPUT_DIR=dist/public pnpm run seo:audit:corpus && SEO_OUTPUT_DIR=dist/public pnpm run seo:validate:sitemap-http",
+    "build": "SEO_DIRECT_TO_DIST=1 vite build --config vite.config.ts && tsx scripts/copy-static-public-assets.ts && SEO_OUTPUT_DIR=dist/public pnpm run seo:generate && SEO_OUTPUT_DIR=dist/public pnpm run seo:generate:mass-push && PRERENDER_BUNDLE=1 vite build --ssr src/ssr.tsx --config vite.config.ts && SEO_OUTPUT_DIR=dist/public tsx scripts/prerender.ts && SEO_OUTPUT_DIR=dist/public pnpm run seo:audit:corpus && SEO_OUTPUT_DIR=dist/public pnpm run seo:validate:sitemap-http",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit && pnpm run seo:check:route-ownership && pnpm run seo:test:hub-preservation && pnpm run seo:test:estimators && pnpm run seo:audit:estimators-similarity && pnpm run seo:audit:claims && pnpm run seo:audit:corpus && pnpm run seo:validate:sitemap-http",
     "seo:generate": "tsx seo/generate.ts",
@@ -49,7 +49,8 @@
     "seo:audit:industry-discipline-batch": "tsx seo/audit-industry-discipline-batch.ts",
     "seo:audit:national-facility-intent-batch": "tsx seo/audit-national-facility-intent-batch.ts",
     "test:estimate-pricing": "tsx --test src/lib/estimate-pricing.test.ts",
-    "test:estimate-flow": "tsx --test src/lib/estimate-flow.test.ts"
+    "test:estimate-flow": "tsx --test src/lib/estimate-flow.test.ts",
+    "seo:generate:mass-push": "tsx seo/mass-push-generate.ts"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",
