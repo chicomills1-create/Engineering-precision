@@ -3,7 +3,6 @@ import { ArrowRight } from "lucide-react";
 import { SITE_URL, useJsonLd, usePageMeta } from "@/lib/seo";
 import officeImg from "@assets/generated_images/office.webp";
 import jeremyImg from "@assets/generated_images/jeremy-mills.webp";
-import jasonLuhnImg from "@assets/generated_images/jason-luhn.webp";
 import angelImg from "@assets/file_00000000b85c8230ad55cc8b03100eea_1788058580363.png";
 import { LICENSING_COVERAGE_STATEMENT } from "@/lib/licensing";
 
@@ -120,23 +119,6 @@ export default function About() {
               <div className="bg-card border border-border p-8 rounded-sm">
                 <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden rounded-sm">
                   <img
-                    src={jasonLuhnImg}
-                    alt="Jason Luhn, PE — Chief Operating Officer of Apex Grid Engineering"
-                    className="w-full h-full object-cover object-top"
-                    loading="lazy"
-                  />
-                </div>
-                <h3 className="text-2xl font-display font-bold mb-1 text-white">Jason Luhn, PE</h3>
-                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Chief Operating Officer · Professional Engineer</div>
-                <p className="text-muted-foreground leading-relaxed">
-                  Jason is the firm's technical anchor. A licensed Professional Engineer,
-                  he sets the engineering standard across every discipline — constructable
-                  drawings, code-first design, documents that pass review the first time.
-                </p>
-              </div>
-              <div className="bg-card border border-border p-8 rounded-sm">
-                <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden rounded-sm">
-                  <img
                     src={angelImg}
                     alt="Angel Endres, Chief People Officer of Apex Grid Engineering"
                     className="w-full h-full object-cover object-top"
@@ -206,3 +188,4 @@ const PAGE_META = {
   description: "Apex Grid Engineering — veteran-owned engineering firm with 20+ engineers and 10+ PEs. Structural, MEP, civil, and architectural design, licensed in 49 states.",
   path: "/about",
 };
+
