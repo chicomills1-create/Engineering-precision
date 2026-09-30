@@ -15,6 +15,7 @@ import {
 import router from "./routes";
 import { logger } from "./lib/logger";
 import { wakeOutreachDispatchFromTraffic } from "./lib/outreachWorker";
+import { mountApexDynamicRoutes } from "./dynamic/index.js";
 
 // In both dev and production builds, dist/index.mjs lives at
 // artifacts/api-server/dist/ — so apex-grid's static output is two levels up.
@@ -119,6 +120,12 @@ app.use(
     ),
   })),
 );
+
+// Apex dynamic variation routes: /{service}/{state}/{city}/{variation}/
+// 696,456 URLs rendered server-side on demand (no per-page files).
+// Mounted BEFORE static — only matches the 4-segment variation pattern,
+// so existing static URLs are never intercepted.
+mountApexDynamicRoutes(app);
 
 // Serve pre-rendered SEO pages with proper directory-index resolution.
 // express.static resolves /structural-engineering/ → dist/public/structural-engineering/index.html
