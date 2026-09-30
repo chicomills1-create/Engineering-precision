@@ -1867,6 +1867,456 @@ export const VARIATIONS: Record<string, VariationDef> = {
       [`Can I build on a coastal bluff in ${c}?`, `Sometimes — with geotechnical bluff-stability analysis, commission-mandated setbacks (often 50–100+ feet from the bluff edge), and designs accounting for long-term erosion. The geotechnical engineer's bluff-retreat analysis determines the buildable area; the commission enforces it. Feasibility with geotechnical input comes before the land purchase.`],
     ],
   },
+
+  "brewery": {
+    title: (t, c, a) => `${t} for Breweries in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for breweries and taprooms in ${c}, ${s}: process piping, glycol cooling, tank loads, and health-department-ready engineered plans.`,
+    h1: (t, c, a) => `${t} for breweries in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Breweries in ${c} are industrial process facilities wearing a hospitality face: behind the taproom sit steam boilers, glycol chillers, pressurized fermentation tanks, and floor drains everywhere — all of which need engineered design under ${s} codes. Here's how ${cp.blurb} works for brewery and taproom projects.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `process steam or direct-fire heating with boiler sizing and gas train design, glycol chilling looped to each fermenter with heat-load calcs, CO2 monitoring and ventilation in cellar areas (an asphyxiation hazard reviewers take seriously), trench drains with chemical-resistant piping, and electrical service sized for the combined brewing, cooling, and packaging loads. In ${c}, the health department reviews the taproom while building plan check covers the production side — the MEP set has to satisfy both`
+        : p === "structural"
+        ? `fermentation and bright tanks impose concentrated loads that change dramatically between full and empty — the slab and footings get designed for the worst case, with seismic anchorage for every vessel per ASCE 7. Mezzanines for grain storage or offices add another load path, and in ${c} older industrial shells almost always need the existing slab cored and verified before a single tank is ordered`
+        : `process wastewater pretreatment before discharge to the ${c} sanitary system (high-BOD brewery effluent triggers industrial pretreatment permits), loading dock and truck court paving designed for delivery axle loads, outdoor seating drainage, and stormwater treatment for the expanded impervious area. The civil package is also where fire-lane access around tank farms gets resolved`;
+      return [
+        ["Why breweries are not restaurant TI", `A taproom looks like a restaurant build-out, but the production floor is light industrial: ${sc.codeRef} apply alongside health and fire codes, and the process equipment drives structural and utility decisions that dwarf the hospitality scope. In ${c}, the single most common brewery permitting failure is designing the taproom first and treating the cellar as an afterthought — the tanks, drains, and ventilation dictate the building, not the other way around.`],
+        [`${cp.name} scope for breweries`, `On brewery work in ${c}, ${sys}. Fees follow ${sc.feeNote}, and brewery fees run above typical TI because the process scope is essentially a second engineering project inside the building.`],
+        ["Sequencing a brewery build", `Lock the brewing equipment list — tank sizes, boiler type, packaging line — before engineering starts, because every vessel changes loads, drains, and utilities. Confirm process-wastewater discharge terms with ${c} utilities during site selection; pretreatment requirements have killed otherwise-ready sites. And order long-lead tanks early: the structural design needs certified equipment weights and anchor details, not catalog estimates.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`What engineering does a brewery need in ${c}?`, `Full MEP with process piping, glycol, steam, and CO2 ventilation design; structural for tank loads, slabs, and seismic anchorage; and civil for process wastewater, paving, and stormwater. The taproom adds health-department review on top. It's one of the most multi-discipline small projects in ${s}.`],
+      [`Do fermentation tanks need seismic anchorage?`, `Yes — in ${s}, tanks are nonstructural components requiring anchorage design per ASCE 7, and a full 15-barrel fermenter weighs as much as a loaded box truck. Unanchored tanks are a top correction item on brewery plan checks.`],
+      [`Can I put a brewery in an existing warehouse?`, `Often yes, and it's the most common path — but the existing slab, roof structure, and utilities must be verified by the engineer first. Slab thickness, panel capacity, gas service size, and floor-drain feasibility are the four checks that decide whether the shell works or needs expensive upgrades.`],
+    ],
+  },
+
+  "data-center": {
+    title: (t, c, a) => `${t} for Data Centers in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for data centers in ${c}, ${s}: cooling, redundant power, UPS and generator backup, and mission-critical engineered design.`,
+    h1: (t, c, a) => `${t} for data centers in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Data centers in ${c} are utility-scale engineering problems: a single hall can draw more power than the neighborhood around it, and the cooling never stops. ${cp.blurb} for data centers is about redundancy at every layer — here's what that means in ${s}.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `cooling design around the IT load with N+1 or 2N redundancy — chilled water, DX, or evaporative depending on ${c} climate and water availability — plus UPS strings, generator plants with paralleling switchgear, and automatic transfer schemes that hold the load through a utility outage. Power density per rack drives everything: the electrical one-line, the cooling layout, and the utility service negotiation all start from watts per square foot. In ${s}, the utility interconnection study is frequently the project critical path`
+        : p === "structural"
+        ? `floor loading for server racks and battery strings far beyond office design — 250 psf and up in halls, with concentrated UPS and switchgear loads. Seismic bracing for racks, cable tray, and piping per ASCE 7, plus vibration and deflection criteria that protect spinning disks and fiber connections. In ${c}, the structural set also covers screen walls, generator enclosures, and fuel tank supports`
+        : `substation and utility duct-bank coordination (often the largest civil scope on the project), water supply for evaporative cooling with backflow and metering, security setbacks and anti-ram barriers, and stormwater for the big impervious footprint. The civil package also handles construction-phase logistics for delivering transformers and generators that arrive on multi-axle trailers`;
+      return [
+        ["Redundancy is the design", `Every data center system in ${c} gets designed twice: the primary path and the backup path that carries the load when the first fails. That philosophy — concurrent maintainability — flows through ${sc.codeRef} and into every drawing: dual power feeds, redundant cooling, and controls that fail over without human intervention. Value-engineering redundancy out is how outages happen.`],
+        [`${cp.name} scope for data centers`, `For data center work in ${c}, ${sys}. Fees track ${sc.feeNote}; data center engineering is among the highest per-square-foot because the systems are dense, redundant, and documented to commissioning standards.`],
+        ["The utility conversation comes first", `Before site design advances in ${c}, the engineer and owner need the utility's answer on available capacity, service voltage, and interconnection timeline — a 10 MW load doesn't connect like a retail building. Substation lead times in ${s} can exceed the building construction schedule, so the utility application should precede the building permit, not follow it.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`What does data center engineering cost in ${s}?`, `Data center MEP and structural engineering runs well above standard commercial rates because of redundancy, power density, and commissioning documentation. Fees follow ${sc.feeNote} — and the IT load (MW) is the primary driver, not square footage.`],
+      [`How much power does a data center need?`, `Modern halls run from a few MW for enterprise facilities to 50+ MW for hyperscale. The engineer sizes everything — utility service, generators, UPS, cooling — from the IT load, so an accurate load projection from the operator is the single most important design input.`],
+      [`Do data centers need special structural design?`, `Yes. Rack halls, battery rooms, and electrical rooms carry loads far beyond typical commercial floors, and seismic bracing for racks and overhead systems is a code requirement. The structural engineer also designs for the heavy yard equipment — transformers, generators, and chillers — that surrounds the building.`],
+    ],
+  },
+
+  "greenhouse": {
+    title: (t, c, a) => `${t} for Greenhouses in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for greenhouses in ${c}, ${s}: climate controls, irrigation, supplemental lighting, and engineered growing facilities.`,
+    h1: (t, c, a) => `${t} for greenhouses in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `A commercial greenhouse in ${c} is a building whose entire job is controlling climate: temperature, humidity, light, and irrigation have to hold steady while ${s} weather does whatever it wants outside. Here's how ${cp.blurb} serves greenhouse and controlled-environment agriculture projects.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `heating and cooling sized for the crop's climate setpoints — not human comfort — with dehumidification handling the massive moisture load from transpiration. Supplemental LED lighting adds both electrical load and heat the HVAC must remove, and irrigation/fertigation needs designed water treatment, pumping, and drainage. In ${c}, energy modeling matters because greenhouse conditioning can dominate the operating budget`
+        : p === "structural"
+        ? `light-gauge or aluminum frame design for wind and snow per ASCE 7 — greenhouse glazing sheds load differently than conventional roofs, and drifting snow against gutter-connected ranges is a real failure mode in ${s}. Foundations are typically grade beams or piers, and the structure must also carry hanging baskets, shade systems, and irrigation booms as suspended loads`
+        : `grading that keeps the pad above flood and ponding levels, water supply for irrigation demand (often the largest site utility), runoff management for the impervious greenhouse footprint, and access drives for delivery and harvest traffic. In ${c}, well capacity and water rights can gate the whole project — confirm supply before design`;
+      return [
+        ["Greenhouses are process buildings", `Reviewers in ${c} increasingly treat commercial greenhouses as agricultural-industrial facilities: ${sc.codeRef} apply, and energy and water use get scrutiny. The engineering has to serve the crop cycle — a tomato greenhouse and a cannabis facility have very different climate, lighting, and security requirements, and the design starts from the grower's environmental recipe.`],
+        [`${cp.name} scope for greenhouses`, `For greenhouse projects in ${c}, ${sys}. Fees follow ${sc.feeNote}; the MEP scope is usually the largest because climate control is the product.`],
+        ["What greenhouse owners underestimate", `Water and power. A commercial range can use more water than the farmhouse it sits behind, and supplemental lighting can trigger a utility service upgrade. Get the irrigation demand and lighting load to the engineer — and the utility — during site selection in ${c}, not after the pad is poured.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`Do I need engineered plans for a greenhouse in ${c}?`, `For commercial greenhouses — yes. ${c} requires structural design for wind and snow loads on the frame and glazing, plus MEP for heating, cooling, lighting, and irrigation. Small hobby houses may qualify for prescriptive paths, but anything commercial needs an engineer.`],
+      [`How are greenhouses heated and cooled?`, `Typically unit heaters or hot-water radiant for heating, and natural ventilation with exhaust fans, evaporative pads, or full mechanical cooling depending on the crop and ${s} climate. The engineer sizes systems to the crop's temperature and humidity setpoints, which are tighter than human-comfort ranges.`],
+      [`What is the biggest engineering risk on greenhouses?`, `Snow and wind on lightweight frames — greenhouse collapses under drifted snow are a known failure pattern. The structural design must address unbalanced snow loads on gutter-connected ranges specifically, not just uniform roof snow.`],
+    ],
+  },
+
+  "hangar": {
+    title: (t, c, a) => `${t} for Aircraft Hangars in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for aircraft hangars in ${c}, ${s}: long-span frames, hangar doors, foam suppression, and apron-ready engineered design.`,
+    h1: (t, c, a) => `${t} for aircraft hangars in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `An aircraft hangar in ${c} is a big clear box with one enormous moving wall: the door can span 100 feet or more, and everything about the building — structure, power, fire protection — orbits that opening. Here's how ${cp.blurb} works for hangar projects in ${s}.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `high-bay heating (radiant tube or unit heaters) for a volume that's mostly empty air, hangar door power with manual override, and fire suppression — foam systems for larger hangars per NFPA 409, which drives water supply and containment design. Fueling areas need classified electrical per NEC, and in ${c} the fire marshal's hangar requirements often exceed the base building code`
+        : p === "structural"
+        ? `long-span rigid frames or trusses clearing the full door opening, with the door header designed for the stacked or bottom-rolling door loads. Wind uplift on the big roof area and lateral design for the open front wall are the governing cases in ${s}. The slab gets aircraft wheel loads — point loads far beyond typical industrial — and door rails need precise, level foundations`
+        : `apron and taxi-lane paving designed for aircraft weights (not truck ESALs), fuel farm secondary containment, oil-water separators on hangar drains, and stormwater for the large impervious area. In ${c}, airport authority design standards overlay the municipal code — the civil set has to satisfy both, and FAA-adjacent height and glare rules constrain the site plan`;
+      return [
+        ["The door drives the building", `Every hangar decision in ${c} starts with the door: bi-fold, hydraulic, or bottom-rolling — each imposes different header loads, power needs, and foundation details. ${sc.codeRef} all show up, but the door manufacturer's structural and electrical requirements are project-specific inputs the engineer needs before framing design begins.`],
+        [`${cp.name} scope for hangars`, `On hangar work in ${c}, ${sys}. Fees track ${sc.feeNote}; hangars are efficient per square foot but the door and suppression systems concentrate the engineering.`],
+        ["Fire protection is the surprise scope", `Owners budget for the steel box and forget NFPA 409: hangars over certain sizes and fuel quantities trigger foam suppression, which means water supply upgrades, containment, and a fire protection engineer on the team. Confirm the suppression trigger with the ${c} fire marshal during programming — it changes the MEP budget significantly.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`What size hangar door do I need?`, `It depends on the aircraft: wingspan plus clearance, typically door width at 110–120% of wingspan. The engineer needs the design aircraft locked early because door width sets the structural span, the header design, and the power requirements.`],
+      [`Do hangars need fire sprinklers?`, `It depends on size, construction type, and fuel quantity — NFPA 409 sets hangar-specific thresholds that differ from standard commercial rules. Larger hangars trigger foam systems, not just water sprinklers. The ${c} fire marshal makes the final call, so confirm during programming.`],
+      [`Can I build a hangar on leased airport land?`, `Yes — it's the most common arrangement. The airport authority's design standards and lease terms overlay municipal code, so the engineering team designs to both. Ground-lease terms also affect how the structure is financed and permitted in ${c}.`],
+    ],
+  },
+
+  "stadium": {
+    title: (t, c, a) => `${t} for Stadiums in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for stadiums and arenas in ${c}, ${s}: grandstand structures, crowd systems, broadcast power, and large-venue engineered design.`,
+    h1: (t, c, a) => `${t} for stadiums in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Stadiums and arenas in ${c} concentrate every engineering challenge at once: thousands of occupants, long-span roofs, broadcast-grade power, and life-safety systems that have to work perfectly on game day. ${cp.blurb} for venues is large-team engineering — here's the landscape in ${s}.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `crowd-comfort HVAC for concourses and clubs with smoke-control and pressurization for egress, broadcast and event power with redundant feeds, concessions MEP (essentially a food hall inside the venue), and emergency voice/alarm communication across a noisy bowl. In ${c}, the life-safety and smoke-control sequences are engineered systems with their own commissioning — not just devices on a plan`
+        : p === "structural"
+        ? `grandstand and bleacher structures designed for synchronized crowd loading and vibration — human-induced vibration criteria govern member sizing as much as strength. Long-span roof structures over the bowl, seismic design for the occupied structure, and expansion detailing for a building that moves with temperature. In ${s}, the structural peer review is typically a jurisdictional requirement, not an option`
+        : `parking for peak-event demand (often 3–4x daily use), traffic and pedestrian circulation engineered with the ${c} traffic engineer, stormwater for one of the largest impervious footprints in the city, and utility extensions sized for event-day peaks. The civil scope also covers construction logistics for a multi-year build that can't disrupt the surrounding district`;
+      return [
+        ["Venues are engineered for the worst 3 hours", `A stadium in ${c} sits empty most days and holds a small city on event day — ${sc.codeRef} all get applied to the peak condition: full occupancy, full concessions, full broadcast. Egress modeling, structural crowd loading, and utility peaks are designed for the sellout, which is why venue engineering doesn't scale down linearly from the seat count.`],
+        [`${cp.name} scope for stadiums`, `For venue work in ${c}, ${sys}. Fees follow ${sc.feeNote}; stadium engineering is procured as a multi-firm team with the structural and MEP leads coordinating through a single BIM model.`],
+        ["What drives venue schedules", `Steel and precast lead times, not drawings. The long-span roof and grandstand precast order before the permit is fully clean in most ${c} venue programs, which means the structural design has to be procurement-ready early. Owners who treat a stadium like a big office building on schedule discover the specialty trades set the pace.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`How is stadium structural design different?`, `Crowd-induced vibration governs: thousands of people moving in rhythm can excite a grandstand's natural frequency, so the engineer designs for dynamic response, not just static strength. Long-span roofs, seismic demands for occupied structures, and peer review requirements complete the picture in ${s}.`],
+      [`What MEP systems are unique to venues?`, `Smoke control for the bowl and concourses, broadcast/event power with redundancy, high-density concessions MEP, and emergency communication that works over crowd noise. The life-safety sequence of operations is an engineered deliverable with dedicated commissioning.`],
+      [`How long does stadium engineering take?`, `Design for a major venue typically runs 12–24 months with a large integrated team, plus extended permitting with ${c} and specialty reviews. It's program-driven: the event calendar often sets an immovable opening date that the entire design and construction sequence works backward from.`],
+    ],
+  },
+
+  "theater": {
+    title: (t, c, a) => `${t} for Theaters in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for theaters and cinemas in ${c}, ${s}: acoustic HVAC, stage systems, raked seating, and performance-venue engineered design.`,
+    h1: (t, c, a) => `${t} for theaters in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Theaters in ${c} are buildings designed around silence and sightlines: the HVAC can't be heard, the structure can't transmit vibration to the stage, and every seat needs an unobstructed view. Here's how ${cp.blurb} serves theater and cinema projects in ${s}.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `low-velocity, acoustically-treated HVAC targeting NC-20 to NC-25 in the auditorium — ductwork gets lined, oversized, and isolated so the system is inaudible during quiet passages. Stage lighting and sound power with dimming and isolated grounds, projection booth ventilation, and lobby systems that handle intermission surges. In ${c}, the acoustic consultant's criteria become MEP design requirements, not suggestions`
+        : p === "structural"
+        ? `fly tower and gridiron steel for flown scenery, catwalk and tension-grid framing, raked seating structure with vibration isolation from the stage house, and long-span auditorium roofs clear of columns. In ${s}, the stage machinery loads — battens, curtains, lighting bridges — are owner-furnished inputs the structural engineer designs the building around`
+        : `parking for peak-show demand, drop-off and queueing for sold-out performances, site lighting that preserves the marquee visibility without glare, and stormwater for the large roof. For historic theater renovations in ${c}, the civil scope often includes alley and service access that the original building never had`;
+      return [
+        ["Silence is a design criterion", `In a theater in ${c}, background noise has a number: NC-25 or lower in the auditorium, and every ${cp.blurb} decision serves it. ${sc.codeRef} apply, but the acoustic criteria overlay them — duct velocities, equipment locations, and structural isolation details all trace back to what the audience should not hear.`],
+        [`${cp.name} scope for theaters`, `On theater work in ${c}, ${sys}. Fees track ${sc.feeNote}; theaters carry an acoustic consultant whose criteria become binding inputs to the engineering.`],
+        ["Renovation vs. new build", `Historic theater renovations in ${c} are the harder engineering problem: the structure must be verified and often strengthened for new stage loads, MEP has to thread through a building with no chases, and accessibility upgrades touch everything. New-build theaters are straightforward by comparison — the constraints are known from day one.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`Why is theater HVAC so specialized?`, `Because the audience can hear it. Theater HVAC is designed to NC-20/25 background noise levels — roughly a whisper — which means oversized low-velocity ductwork, silencers, and vibration-isolated equipment. Standard commercial HVAC practice would be plainly audible during quiet scenes.`],
+      [`What structural work does a theater need?`, `Fly towers, catwalks, raked seating, and long-span column-free auditoriums, all with vibration isolation so footfall and equipment don't reach the stage. In renovations, verifying and strengthening the existing structure for new stage machinery is often the largest structural scope.`],
+      [`Do cinemas need the same engineering as live theaters?`, `Less — cinemas need raked seating structure, acoustic separation between auditoriums, and projection booth design, but no fly tower or stage machinery. The acoustic criteria still govern the MEP, since projector noise and HVAC can't intrude on the auditoriums.`],
+    ],
+  },
+
+  "museum": {
+    title: (t, c, a) => `${t} for Museums in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for museums in ${c}, ${s}: archival climate control, exhibit lighting, vibration isolation, and collection-safe engineered design.`,
+    h1: (t, c, a) => `${t} for museums in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Museums in ${c} are engineered around the collection: temperature and humidity have to hold within a few percent around the clock, light levels are capped to protect artifacts, and vibration from the street can't reach the galleries. Here's how ${cp.blurb} serves museum projects in ${s}.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `tight-tolerance HVAC holding 70°F/50% RH (or the conservator's spec) with N+1 redundancy — a climate failure can damage a collection overnight. UV-filtered exhibit lighting with strict foot-candle limits, security and fire-suppression systems coordinated with collection protection (clean-agent in vaults and storage), and loading-dock airlocks that keep unconditioned air out of galleries. In ${c}, the conservator's environmental spec becomes the MEP design basis`
+        : p === "structural"
+        ? `heavy exhibit and sculpture loads with concentrated point loads the structural engineer designs to the curator's layout, vibration isolation from street and rail traffic (a real criterion with measured limits, not a judgment call), long-span gallery spaces clear of columns, and seismic protection for the collection — base isolation or restrained pedestals in higher seismic zones of ${s}. Atrium and skylight framing must also manage daylight without UV exposure`
+        : `bus and school-group drop-off circulation, plaza and forecourt drainage that protects the below-grade collection storage from any water intrusion, site security with anti-ram rated barriers, and stormwater for the large roof and hardscape. In ${c}, museum expansions on tight urban sites often need the civil engineer to thread new utilities and loading around a landmarked existing building`;
+      return [
+        ["The collection sets the criteria", `Every museum engineering decision in ${c} traces to conservation: ${sc.codeRef} apply, but the conservator's environmental and lighting specs overlay them as binding requirements. A gallery that meets code but drifts 10% in humidity fails its actual purpose — which is why the engineer designs to the collection spec first and the building code second.`],
+        [`${cp.name} scope for museums`, `For museum work in ${c}, ${sys}. Fees follow ${sc.feeNote}; museums carry conservators and exhibit designers whose criteria become engineering inputs, and the redundancy requirements push MEP scope above typical cultural buildings.`],
+        ["What museum boards underestimate", `Operating cost. The tight-tolerance HVAC that protects the collection runs 24/7/365 and dominates the utility budget — energy modeling during design in ${c} isn't a code exercise, it's the board's financial planning. Designing for maintainability (filter access, redundant trains that allow service without shutdown) pays back for decades.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`Why do museums need such tight climate control?`, `Organic materials — canvas, wood, paper, textiles — expand, contract, and degrade with temperature and humidity swings. The standard museum spec (around 70°F and 50% RH, tightly held) prevents cracking, warping, and mold. The MEP engineer designs redundant systems because a single failure during a ${s} summer could damage irreplaceable works.`],
+      [`What is vibration criteria in museum design?`, `A measured limit on floor vibration from footfall, traffic, and equipment, set so visitors don't feel the floor move and sensitive exhibits aren't disturbed. Near rail or heavy traffic in ${c}, the structural engineer may specify isolation joints, stiffened floors, or base isolation to meet it.`],
+      [`Do museums need special fire protection?`, `Yes — collection storage and vaults typically get clean-agent suppression (no water damage), while galleries use preaction sprinklers that only charge when a detector trips. The fire protection engineer coordinates suppression choice with the conservator's requirements for each space type.`],
+    ],
+  },
+
+  "library": {
+    title: (t, c, a) => `${t} for Libraries in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for libraries in ${c}, ${s}: book-stack loading, reading-room comfort, community spaces, and civic-building engineered design.`,
+    h1: (t, c, a) => `${t} for libraries in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Libraries in ${c} are quiet workhorses: book stacks impose some of the heaviest floor loads in any civic building, reading rooms need calm air and good light, and community rooms swing from empty to packed. Here's how ${cp.blurb} serves library projects in ${s}.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `HVAC zoned for stack areas (stable temperature and humidity protect the collection), reading rooms with low-velocity quiet air distribution, and community/multipurpose rooms with ventilation that handles full-house events. Lighting design balances daylighting for reading with UV control for the stacks, and in ${c} the energy-code compliance for a daylit civic building is a full modeling exercise`
+        : p === "structural"
+        ? `book-stack live loads of 150 psf — triple typical office loading — which governs slab, beam, and footing design wherever compact shelving goes. Long-span reading rooms clear of columns, and in ${s} seismic design for a public-occupancy building with the stacks treated as contents requiring anchorage. Renovations of Carnegie-era libraries in ${c} usually need the existing floors verified or strengthened before a single new shelf goes in`
+        : `parking sized for peak program demand (story time and evening events, not just daily use), accessible routes and drop-off at the main entry, plaza drainage, and site lighting for evening hours. For branch libraries in ${c}, the civil scope often includes shared parking agreements and joint-use site planning with adjacent civic buildings`;
+      return [
+        ["Stacks drive the structure", `The defining engineering fact of a library in ${c} is the weight of books: ${sc.codeRef} set the rules, but 150 psf stack loading sets the member sizes. Compact/mobile shelving concentrates that load further — the structural engineer needs the shelving layout and vendor weights before framing design, not after.`],
+        [`${cp.name} scope for libraries`, `On library work in ${c}, ${sys}. Fees track ${sc.feeNote}; libraries are efficient civic buildings, with the structural stack scope and the daylit MEP design as the two specialty areas.`],
+        ["Designing for the library's second life", `Modern libraries in ${c} are community centers that happen to hold books: makerspaces, recording studios, and event rooms all need power, ventilation, and acoustic separation the original program didn't contemplate. The engineer who designs spare electrical capacity and flexible HVAC zoning gives the building a future the board will thank them for.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`Why do library floors need to be so strong?`, `Books are extraordinarily heavy in aggregate — code requires 150 psf live load for stack areas, versus 50 psf for offices. Compact shelving is heavier still. The structural engineer designs slabs, beams, and foundations for the stack layout, which is why shelving plans come before framing plans.`],
+      [`Do libraries need special HVAC?`, `Quieter and more zoned than typical commercial: reading rooms need low-velocity air distribution for acoustic comfort, stacks need stable temperature and humidity, and community rooms need ventilation for variable occupancy. It's three different HVAC problems in one building.`],
+      [`Can an old building become a library?`, `Often — but the floor structure must be verified for stack loads first, which is the most common deal-breaker. A ${c} building with light framing may need strengthening that costs more than the TI itself. The structural assessment comes before lease or purchase, not after.`],
+    ],
+  },
+
+  "fire-station": {
+    title: (t, c, a) => `${t} for Fire Stations in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for fire stations in ${c}, ${s}: apparatus bays, alerting systems, essential-facility seismic design, and first-responder-ready engineering.`,
+    h1: (t, c, a) => `${t} for fire stations in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Fire stations in ${c} are essential facilities: they have to survive the earthquake, keep the trucks rolling, and get crews from bunk to bay in under a minute — all while housing people 24/7. Here's how ${cp.blurb} serves fire station projects in ${s}.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `apparatus bay vehicle-exhaust capture (diesel exhaust is the recognized health hazard driving the design), station alerting systems integrated with dispatch, decontamination and gear laundry with dedicated ventilation, living-quarter HVAC zoned for shift sleep, and emergency power that keeps the station operational through a utility outage. In ${c}, the alerting and communications systems are engineered with the fire department's radio and dispatch standards`
+        : p === "structural"
+        ? `essential-facility seismic design — Risk Category IV in ${s}, meaning higher forces and stricter detailing so the station functions after the design earthquake. Apparatus bay door headers spanning the full bay width, hose-drying tower framing, and slabs designed for 40-ton apparatus point loads. The structural set also covers the fuel island canopy and training tower where applicable`
+        : `apron paving in front of the bays designed for apparatus turning and outrigger loads, direct egress onto the arterial with traffic-signal preemption coordinated with ${c}, fuel storage with secondary containment, and stormwater for the site. The civil engineer also resolves the conflict every station site has: fast truck egress versus pedestrian safety at the sidewalk`;
+      return [
+        ["Essential means after the earthquake", `A fire station in ${c} is designed to a higher standard than the buildings around it: ${sc.codeRef} apply at essential-facility levels, with seismic forces and detailing intended to keep the station operational when the community needs it most. Nonstructural anchorage — generators, communications racks, gear lockers — gets the same attention as the frame.`],
+        [`${cp.name} scope for fire stations`, `For station work in ${c}, ${sys}. Fees follow ${sc.feeNote}; the essential-facility classification and the specialty systems (alerting, exhaust capture, decon) make stations more engineering-intensive per square foot than typical municipal buildings.`],
+        ["The turnout-time plan", `Sixty seconds from alert to wheels rolling drives the floor plan: bunk-to-bay circulation, pole or slide placement, and alerting zoning are architectural, but the engineer enables them — bay door operators on emergency power, exhaust capture that doesn't slow egress, and lighting that snaps to full on alert. In ${c}, the department's operations staff should review the MEP and structural concepts before design development, not at the permit counter.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`What makes fire station design different?`, `The essential-facility classification: the station must remain operational after the design earthquake, which raises seismic forces and detailing above standard commercial. Add 24/7 living quarters, diesel exhaust hazards in the bays, and sub-minute turnout requirements, and it's a specialty building type.`],
+      [`Why do apparatus bays need exhaust systems?`, `Diesel exhaust is a known carcinogen, and firefighters historically had the highest exposure in their own station. Code and department standards in ${s} now require source-capture exhaust that connects to each truck automatically — it's a health-driven engineered system, not optional ventilation.`],
+      [`How are fire station sites selected?`, `Response-time coverage modeling picks the location; then the civil engineer confirms the site works — apparatus egress onto the street network, signal preemption feasibility with ${c}, and room for the apron, fueling, and future expansion. A site that fails the turning-radius check fails the project.`],
+    ],
+  },
+
+  "bank": {
+    title: (t, c, a) => `${t} for Banks in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for banks in ${c}, ${s}: vault structures, branch MEP, drive-thru lanes, and financial-facility engineered design.`,
+    h1: (t, c, a) => `${t} for banks in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Bank branches in ${c} are small buildings with outsized engineering: the vault alone is a concrete fortress inside a retail box, and drive-thru lanes, ATMs, and security systems each bring their own design requirements. Here's how ${cp.blurb} serves bank and financial projects in ${s}.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `vault ventilation (a sealed concrete box still needs air), branch HVAC with after-hours setback for the unoccupied vault zone, security and access-control power and pathways coordinated with the bank's security vendor, drive-thru pneumatic tube and audio systems, and ATM vestibule heating and lighting. In ${c}, the MEP engineer also coordinates emergency power for the security and IT systems that can't go dark`
+        : p === "structural"
+        ? `the vault: reinforced concrete walls, floor, and ceiling designed for the specified burglary resistance (UL ratings), with the massive dead load carried on thickened slabs or dedicated footings. Safe-deposit and cash-handling areas get the same treatment at smaller scale, and in ${s} the night-depository and ATM surrounds need impact and forced-entry detailing. Teller-line bullet-resistant assemblies bear on structure the engineer verifies`
+        : `drive-thru lane stacking, geometrics, and canopy clearances per ${c} standards, ATM drive-up lanes separated from teller lanes, site security lighting photometrics, and stormwater for the highly impervious branch site. The civil set also handles the queuing analysis ${c} requires — a bank that stacks cars into the arterial doesn't get its permit`;
+      return [
+        ["The vault is a building inside the building", `Bank engineering in ${c} starts with the vault spec: ${sc.codeRef} govern the branch, but the vault's UL burglary rating dictates concrete thickness, rebar, and the door frame the structural engineer details. The vault is typically designed first and the branch wrapped around it — reversing that order is how projects end up with a vault that doesn't fit the structure.`],
+        [`${cp.name} scope for banks`, `On bank work in ${c}, ${sys}. Fees track ${sc.feeNote}; branches are small but the vault, security coordination, and drive-thru civil work concentrate the engineering.`],
+        ["What slows bank permits", `Security-vendor coordination and drive-thru traffic review. The bank's security consultant specifies systems the MEP engineer has to power and pathway — and that spec often arrives late. Meanwhile ${c} traffic review of the drive-thru queuing can force site plan revisions. Get both the security spec and the traffic study scoped during programming, not during plan check.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`What does the vault structure require?`, `Reinforced concrete on all six sides to the specified UL burglary rating, with the door frame cast or grouted per the vault door manufacturer's details. The structural engineer designs for the vault's enormous dead load plus the building around it — in ${c}, the vault foundation is often the deepest element on the site.`],
+      [`Do bank branches need special MEP?`, `Beyond the vault ventilation and security-system power, branches are straightforward commercial MEP — with two twists: after-hours zoning that doesn't condition the empty vault, and emergency power for security, communications, and IT. The security vendor's power and pathway requirements are the coordination item that most affects the electrical design.`],
+      [`How many drive-thru lanes can a site fit?`, `That's a civil and traffic question: ${c} requires stacking length per lane so queues don't reach the street, plus turning geometrics for the design vehicle. The site plan balances lanes, ATM access, and pedestrian safety — on tight urban branches in ${s}, the drive-thru often determines whether the site works at all.`],
+    ],
+  },
+
+  "parking-garage": {
+    title: (t, c, a) => `${t} for Parking Garages in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for parking structures in ${c}, ${s}: post-tensioned decks, ventilation, EV charging, and durable garage engineering.`,
+    h1: (t, c, a) => `${t} for parking garages in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Parking garages in ${c} look simple and punish simplification: open decks move with temperature, de-icing salts attack the concrete, and every ramp, turn, and clearance has to work for real drivers. Here's how ${cp.blurb} serves parking structure projects in ${s}.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `enclosed-level CO ventilation with gas detection and controls, LED lighting design with uniformity for safety and energy code, EV charging distribution with load management (the fastest-growing garage MEP scope in ${c}), deck drainage with oil separation, and fire suppression and standpipes per the garage's open/closed classification. The electrical service has to anticipate charging growth — designing for today's EV count guarantees an expensive retrofit`
+        : p === "structural"
+        ? `post-tensioned or conventional concrete decks designed for vehicle loads, thermal movement, and long-term durability — the structural engineer details pour strips, expansion joints, and drainage slopes as one system. Ramp geometrics, helixes, and speed-bump-free transitions get structural coordination, and in ${s} seismic design for the open frame with its irregular diaphragm behavior. Waterproofing membranes and corrosion protection are structural durability decisions, not finishes`
+        : `grading that delivers the required ramp slopes and clearances, stormwater for one of the most impervious structures in ${c}, traffic circulation and entry/exit geometrics coordinated with the street network, and pedestrian routes separated from vehicle paths. The civil engineer also designs the construction-phase shoring and dewatering for below-grade levels`;
+      return [
+        ["Durability is the design", `A garage in ${c} fails slowly and expensively: ${sc.codeRef} set the minimums, but chloride intrusion, joint failure, and drainage ponding are what actually kill decks. The engineering details that matter most — membrane selection, joint placement, drain slopes, concrete cover — are invisible on opening day and decisive at year twenty.`],
+        [`${cp.name} scope for parking garages`, `For garage work in ${c}, ${sys}. Fees follow ${sc.feeNote}; garages are among the most cost-efficient structures per square foot, but the durability detailing and EV infrastructure are where the engineering judgment concentrates.`],
+        ["EV charging changes the electrical", `Every new garage in ${c} should be EV-ready: conduit, panel space, and service capacity for a large fraction of stalls, even if day-one chargers are few. Retrofitting charging into a garage with no spare capacity means new service, new distribution, and coring finished decks — an order of magnitude more expensive than designing it in.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`How long should a parking garage last?`, `50+ years with proper design and maintenance — but only if durability is engineered in: membranes, joint details, drainage, and concrete cover. Garages in ${s} that skip these details face major restoration at year 15–20. The structural engineer's durability spec is the difference.`],
+      [`Do parking garages need ventilation?`, `Enclosed levels do — CO monitoring with demand-controlled exhaust fans is the code requirement in ${c}. Open decks ventilate naturally by meeting openness criteria in the code. The classification (open vs. enclosed) drives the entire MEP scope, so it's established early in design.`],
+      [`Can an existing garage add EV charging?`, `Usually yes, but the electrical capacity check comes first: service size, panel space, and feeder routes through a finished concrete structure. A load study by the MEP engineer tells you how many chargers the existing service supports before anyone buys hardware.`],
+    ],
+  },
+
+  "rooftop": {
+    title: (t, c, a) => `${t} for Rooftop Projects in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for rooftop additions and equipment in ${c}, ${s}: structural verification, dunnage, screening, and code-compliant rooftop engineering.`,
+    h1: (t, c, a) => `${t} for rooftop projects in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Every rooftop project in ${c} starts with the same question: can the existing roof carry it? New equipment, penthouses, solar arrays, and rooftop amenities all land on structure designed for a different load — and the engineer proves it works before anything goes up. Here's how ${cp.blurb} handles rooftop work in ${s}.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `rooftop unit replacement and additions with curb, disconnect, and refrigerant-line routing, screening that meets ${c} mechanical screening ordinances without choking airflow, and coordination of new roof penetrations with the roofing warranty (the roofer's details are part of the MEP package). In ${s}, energy code triggers on equipment replacement — a like-for-like swap can still require controls and efficiency upgrades`
+        : p === "structural"
+        ? `verification of the existing roof framing for the new loads — the engineer reviews the original structural drawings, field-verifies the framing, and calculates whether the proposed equipment, dunnage, screen walls, or penthouse works with or without strengthening. New rooftop structures get full lateral design for wind and seismic, and in ${c} the anchorage of screen walls and equipment for wind uplift is the most-reviewed detail on the structural set`
+        : `roof drainage redesign where new equipment or structures change flow paths — overflow scuppers and secondary drainage per code so a clogged primary drain doesn't pond the roof. For rooftop amenity decks in ${c}, the civil scope covers the plaza drainage and the waterproofing-protection assembly the structural engineer details`;
+      return [
+        ["Verify before you buy the equipment", `Rooftop engineering in ${c} is investigation-first: ${sc.codeRef} govern the new work, but the existing building's capacity governs the project. The structural verification — drawings review, field measurement, and calculation — should precede equipment procurement, because a roof that needs strengthening changes the budget before the crane is scheduled.`],
+        [`${cp.name} scope for rooftop work`, `On rooftop projects in ${c}, ${sys}. Fees track ${sc.feeNote}; rooftop scopes are compact but investigation-heavy, and the verification report is often the most valuable deliverable.`],
+        ["The screening trap", `${c} screening ordinances require equipment hidden from street view — but solid screen walls become sails in the wind, adding lateral load the existing roof may not have. The structural engineer sizes the screen-wall framing and its anchorage for wind, and the MEP engineer keeps clearances for airflow and service. Design the screen and the structure together, not as separate afterthoughts.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`Can my building's roof support new HVAC units?`, `Maybe — that's exactly what the structural verification determines. The engineer checks the original design drawings, confirms the as-built framing in the field, and runs the numbers for the new unit weights plus code-required live and environmental loads. In ${c}, this verification is a standard (and inexpensive) engineering service.`],
+      [`Do rooftop additions need a permit in ${c}?`, `Yes — equipment, screen walls, penthouses, and amenities all trigger building permits with structural review. Even equipment swaps can trigger energy-code upgrades. The permit package includes the structural verification or new design plus MEP for the equipment itself.`],
+      [`What is dunnage?`, `The steel framing that spreads equipment loads across the roof structure — curbs, rails, and platforms that keep a 2,000-pound unit from point-loading a roof designed for uniform snow. The structural engineer sizes dunnage to the equipment weights and the verified capacity of the framing below.`],
+    ],
+  },
+
+  "acoustic-design": {
+    title: (t, c, a) => `${t}: Acoustic Design in ${c}, ${a}`,
+    desc: (t, c, s) => `Acoustic engineering with ${t.toLowerCase()} in ${c}, ${s}: sound isolation, NC-rated HVAC, vibration control, and quiet-building design.`,
+    h1: (t, c, a) => `${t}: acoustic design in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Acoustic design in ${c} is engineering you experience by not noticing it: the office where you can't hear the conference room, the residence where traffic disappears, the theater where the HVAC is silent. ${cp.blurb} carries the acoustic scope — here's how it works in ${s}.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `HVAC designed to background-noise criteria (NC/RC ratings) — oversized low-velocity ductwork, silencers at air handlers, and vibration-isolated equipment so the mechanical system doesn't become the noise source. Sound-masking systems for open offices, and in ${c} the acoustic consultant's NC targets become binding MEP design inputs on performance venues, studios, and high-end residential`
+        : p === "structural"
+        ? `sound-isolation assemblies: STC-rated walls, IIC-rated floor-ceilings, and floating floors where footfall can't transmit — each an assembly the structural engineer details for both acoustic performance and structural adequacy. Resilient connections, isolated slabs, and mass-air-mass detailing, with field verification that the built assembly matches the rated design. In ${s}, the structural details are where acoustic designs most often fail in construction`
+        : `site-noise assessment that sets the building's exterior envelope requirement — traffic, rail, and airport noise contours around ${c} determine the STC rating the facade must achieve. Setbacks, berms, and building orientation are the civil and site-design tools that reduce the noise reaching the building before the envelope has to stop it`;
+      return [
+        ["Acoustics is a number, not a feeling", `Acoustic engineering in ${c} works to measured criteria: ${sc.codeRef} set the baseline, but NC ratings for background noise, STC/IIC for isolation, and vibration criteria for sensitive spaces are the real design targets. The acoustic consultant (or the engineer wearing that hat) specifies numbers, and every ${cp.blurb} decision is checked against them.`],
+        [`${cp.name} scope for acoustic design`, `For acoustic scopes in ${c}, ${sys}. Fees follow ${sc.feeNote}; acoustic work is usually a specialty overlay on a base building project, with the criteria-setting and verification testing as the distinct deliverables.`],
+        ["Where acoustic designs die", `In the field: a 1/4-inch gap at a partition top, a rigid pipe hanger bridging an isolated ceiling, ductwork touching structure — each a flanking path that defeats the rated assembly. In ${c}, the acoustic scope should include construction observation of the critical details, because the best-rated assembly on paper performs at its weakest field connection.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`What is an NC rating?`, `Noise Criteria — the standard curve set rating background noise in a room, from NC-20 (very quiet: theaters, studios) to NC-45 (busy offices). The MEP engineer designs HVAC airflow, ductwork, and equipment selection to hit the NC target for each space type in ${c}.`],
+      [`What is the difference between STC and IIC?`, `STC (Sound Transmission Class) rates how well a wall or floor blocks airborne sound — voices, music. IIC (Impact Insulation Class) rates footfall and impact noise through floors. A luxury condo in ${c} needs both: STC so you don't hear the neighbor's TV, IIC so you don't hear their footsteps.`],
+      [`Can you fix noise in an existing building?`, `Sometimes — the engineer first measures and identifies the paths (flanking, duct-borne, structure-borne), then designs targeted treatments. Low-frequency and structure-borne noise are the hardest to retrofit. An acoustic assessment in ${c} before spending money tells you whether the fix is a sealant detail or a rebuild.`],
+    ],
+  },
+
+  "waterproofing": {
+    title: (t, c, a) => `${t}: Waterproofing in ${c}, ${a}`,
+    desc: (t, c, s) => `Building waterproofing engineering with ${t.toLowerCase()} in ${c}, ${s}: below-grade systems, plaza decks, envelope detailing, and leak-free design.`,
+    h1: (t, c, a) => `${t}: waterproofing in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Waterproofing in ${c} is the engineering discipline of keeping water where it belongs: below-grade walls dry, plaza decks draining, and envelopes shedding ${s} storms without a drop inside. It's detailed, unforgiving, and almost always cheaper designed than repaired. Here's the ${cp.blurb} scope.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `below-grade drainage and sump-pump systems sized for the water table the geotechnical report establishes, dehumidification for below-grade occupied space, and coordination of every MEP penetration through waterproofed walls — each penetration is a detailed, sequenced installation, not a cored hole. In ${c}, the MEP engineer also designs the leak-detection and monitoring for critical below-grade rooms`
+        : p === "structural"
+        ? `waterproof concrete design — waterstops at every joint, crack-control reinforcement, and hydrostatic pressure design for the below-grade walls and slabs. The structural engineer details the joints the waterproofing membrane depends on: a membrane over a moving, cracking joint fails regardless of product quality. In ${s}, the structural and waterproofing details are drawn as one coordinated set, because the warranty lives or dies at the interfaces`
+        : `site drainage that keeps water away from the building — grading, perimeter drains, and stormwater systems sized so the waterproofing never sees more water than it was designed for. In ${c}, the civil engineer also manages construction-phase dewatering, which has to hold the excavation dry while the permanent waterproofing goes in`;
+      return [
+        ["Waterproofing is a system, not a product", `No membrane compensates for bad detailing: ${sc.codeRef} set minimums, but successful waterproofing in ${c} is the coordinated result of structural joint design, drainage that relieves hydrostatic pressure, and installation sequencing the drawings actually show. The projects that leak are the ones where waterproofing was a spec section instead of a designed system.`],
+        [`${cp.name} scope for waterproofing`, `For waterproofing scopes in ${c}, ${sys}. Fees track ${sc.feeNote}; waterproofing engineering is front-loaded — the design and detailing effort that prevents a seven-figure leak repair later.`],
+        ["The below-grade investigation", `Every below-grade waterproofing design in ${c} starts with the geotechnical report's water table and soil chemistry — the highest seasonal water level sets the hydrostatic design, and sulfates or chlorides in the soil attack both concrete and membranes. Designing waterproofing without the geotech data is guessing at the loads.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`What is the difference between waterproofing and dampproofing?`, `Dampproofing resists soil moisture; waterproofing resists hydrostatic water pressure. Below the water table in ${c}, only true waterproofing — membranes or waterproof concrete with waterstops — qualifies. The geotechnical report's water-table elevation decides which one the project needs.`],
+      [`Why do basements leak in new buildings?`, `Almost always detailing and sequencing: joints without waterstops, penetrations cored after the membrane, drainage that clogs or was never connected. The membrane product is rarely the failure — the details and the installation order are. That's why the engineer details waterproofing as a system with the structural joints.`],
+      [`Can waterproofing be fixed after construction?`, `Interior fixes manage water; they don't waterproof. True remediation usually means exterior excavation or injection grouting — both expensive and disruptive. In ${c}, the cost ratio of designed waterproofing to post-construction remediation is routinely 1:10 or worse.`],
+    ],
+  },
+
+  "elevator": {
+    title: (t, c, a) => `${t} for Elevators in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for elevator and escalator projects in ${c}, ${s}: hoistway structures, machine rooms, seismic design, and vertical-transportation engineering.`,
+    h1: (t, c, a) => `${t} for elevators in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Adding an elevator in ${c} means threading a concrete-and-steel shaft through an existing building — or designing the shaft into new construction so the elevator contractor's equipment fits the first time. Here's how ${cp.blurb} serves elevator and escalator projects in ${s}.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `hoistway ventilation and machine-room (or machine-room-less) cooling, elevator power with emergency/standby recall sequences, fire-service access and shunt-trip coordination, and sump/pit drainage. In ${c}, the elevator contractor provides equipment data — car weights, rail loads, machine loads — that become structural and electrical design inputs the engineer must receive before the shaft is drawn`
+        : p === "structural"
+        ? `hoistway framing: concrete or steel shaft walls designed for rail-bracket loads (the rails guide a moving multi-ton car), the pit with its buffers and waterproofing, machine beams or support for MRL equipment, and seismic design of the shaft and counterweight per ASME A17.1 as adopted in ${s}. For retrofit elevators in ${c}, the structural engineer also verifies the existing floors where the shaft lands and the roof where it terminates`
+        : `site access for the elevator installation — the car, rails, and machine arrive as long, heavy pieces that need crane or freight access the civil and architectural plans provide. For exterior or parking-structure elevators in ${c}, the civil scope covers the pad, drainage, and accessible route to the new entry`;
+      return [
+        ["The equipment data comes first", `Elevator engineering in ${c} is equipment-driven: ${sc.codeRef} govern, but the specific car, counterweight, rail, and machine the owner selects set the loads, dimensions, and power the engineer designs to. Starting shaft design before the elevator submittal data arrives is how shafts get built too small — the industry's most expensive rework.`],
+        [`${cp.name} scope for elevators`, `On elevator work in ${c}, ${sys}. Fees follow ${sc.feeNote}; elevator scopes are compact but coordination-intensive, with the equipment vendor's data as the critical-path input.`],
+        ["Retrofit elevators in existing buildings", `The harder problem in ${c}: the shaft has to land on existing structure, dodge existing MEP, and meet accessibility and fire-service requirements the original building never contemplated. The structural assessment of the host building — and the field verification of what's actually there — precedes any shaft design.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`Can an elevator be added to an existing building?`, `Usually yes — interior shafts, exterior additions, and parking-structure elevators are all standard retrofit types in ${c}. The structural engineer first verifies the host building can accept the shaft loads and the pit excavation; the elevator vendor's equipment data then drives the shaft design.`],
+      [`What does the engineer need from the elevator contractor?`, `Certified equipment data: car and counterweight weights, rail bracket loads and spacing, machine loads and locations, power requirements, pit depths, and overhead clearances. In ${s}, the structural and electrical design can't be finalized until this data is in hand.`],
+      [`Do elevators need emergency power?`, `Yes — code requires standby or emergency power for elevator recall and at least one car's operation during outages in most building types in ${c}. The MEP engineer coordinates the power source, transfer sequence, and fire-service controls with the elevator vendor.`],
+    ],
+  },
+
+  "generator": {
+    title: (t, c, a) => `${t} for Generator Systems in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for backup generator systems in ${c}, ${s}: sizing, fuel, sound attenuation, seismic anchorage, and emergency-power engineering.`,
+    h1: (t, c, a) => `${t} for generator systems in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Backup generators in ${c} are insurance you engineer: the sizing study, fuel strategy, and sound design decide whether the lights stay on — and whether the neighbors stay happy. Here's how ${cp.blurb} serves generator and emergency-power projects in ${s}.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `load analysis and generator sizing (kW/kVA with motor-starting and harmonic analysis, not just connected load), automatic transfer switch schemes and selective coordination, fuel system design — diesel day-tanks and storage or natural-gas service with utility coordination — exhaust routing with emissions compliance, and sound-attenuated enclosures designed to ${c} noise ordinance limits at the property line. In ${s}, the fuel-storage permitting (fire marshal, air quality) runs parallel to the building permit`
+        : p === "structural"
+        ? `generator pad and vibration-isolated mounting — a multi-ton machine that shakes — with seismic anchorage per ASCE 7 so the emergency system survives the event it's meant to ride through. Enclosure and screen-wall framing for wind, fuel-tank supports and secondary containment structures, and in ${c} the structural design of rooftop generator installations where the host roof must be verified first`
+        : `fuel delivery access and spill containment grading, setbacks from property lines and buildings per ${c} fire code, acoustic screening with landscaping or walls, and stormwater for the generator yard. The civil site plan also resolves the exhaust discharge location — away from air intakes and operable windows, which the MEP engineer specifies`;
+      return [
+        ["Sizing is the engineering", `Generator projects in ${c} succeed or fail at the load study: ${sc.codeRef} set the installation rules, but the one-line diagram, transfer scheme, and fuel autonomy all flow from an accurate picture of what must stay powered and for how long. Oversizing wastes capital and ruins efficiency; undersizing fails the facility when it matters.`],
+        [`${cp.name} scope for generators`, `For generator work in ${c}, ${sys}. Fees track ${sc.feeNote}; the load study and the fuel/noise permitting are the two efforts owners most often underestimate.`],
+        ["The neighbor problem", `Generators are loud and test regularly — ${c} noise ordinances and conditional-use permits govern testing hours and property-line sound levels. The acoustic design (enclosure rating, exhaust silencers, testing schedule) should be settled during programming in ${s}, because retrofitting attenuation onto an installed generator costs multiples of designing it in.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`How big a generator do I need?`, `That's the load study: the engineer inventories critical loads, analyzes motor starting and harmonics, and sizes the machine with appropriate margin — typically 125% of the calculated standby load. In ${c}, guessing from square footage is how projects end up with generators that trip on startup.`],
+      [`Diesel or natural gas?`, `Diesel offers on-site fuel autonomy (days of runtime with storage) but needs fuel permitting, polishing, and emissions compliance. Natural gas avoids storage but depends on utility reliability — which has failed during the same storms that cause outages in ${s}. The engineer models both against the facility's required runtime.`],
+      [`Do generators need seismic anchorage?`, `Yes — emergency systems are designated seismic systems in ${s}, and the anchorage is designed so the generator stays put and functional through the design earthquake. An unanchored generator that walks off its pad during the event it was bought for is the definition of a failed design.`],
+    ],
+  },
+
+  "kitchen-design": {
+    title: (t, c, a) => `${t} for Commercial Kitchens in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for commercial kitchens in ${c}, ${s}: exhaust hoods, grease waste, gas, and health-department-ready kitchen engineering.`,
+    h1: (t, c, a) => `${t} for commercial kitchens in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Commercial kitchens in ${c} pack the densest MEP of any building space: Type I hoods over every cooking surface, grease waste to interceptors, gas trains, and dishwashing steam — all reviewed by the health department alongside building plan check. Here's how ${cp.blurb} serves commercial kitchen projects in ${s}.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `Type I kitchen exhaust hoods sized to the cooking equipment lineup with dedicated makeup air (the most-missed design element — exhaust without makeup air starves the building), grease duct construction and clearances per code, gas piping with seismic shutoff valves where ${s} requires, plumbing with grease interceptor sizing coordinated with the health department, and electrical service with load calcs for the cooking, refrigeration, and dishwashing loads. In ${c}, the equipment schedule locks before design — every fryer and range changes the engineering`
+        : p === "structural"
+        ? `rooftop exhaust fan and makeup-air unit supports with curbs and seismic/wind anchorage, walk-in cooler and freezer floor loading, and verification of the existing roof structure in retrofit kitchens — older ${c} retail shells frequently need the roof checked before the first fan goes up. Mezzanine storage and heavy cooking equipment get their own load paths to the foundation`
+        : `grease interceptor location, sizing, and sanitary connection with the health department's approval, kitchen waste routing separated from dining restrooms, loading and delivery access for food service, and trash/corral drainage. In ${c}, the interceptor is often outside the building footprint — the civil engineer coordinates its location with paving, landscaping, and utility conflicts`;
+      return [
+        ["Start from the equipment list", `Kitchen engineering in ${c} is equipment-driven: ${sc.codeRef} govern, but the cooking lineup — what cooks, how, and at what BTU — sets exhaust rates, gas sizes, electrical loads, and grease waste. Designing the kitchen before the equipment is selected is the industry's classic expensive mistake; the health department agrees, since it reviews the equipment plan first.`],
+        [`${cp.name} scope for commercial kitchens`, `For kitchen work in ${c}, ${sys}. Fees follow ${sc.feeNote}; kitchens are the densest MEP per square foot in commercial construction, and the dual health/building review adds coordination the fee reflects.`],
+        ["Makeup air is the silent killer", `Exhaust 5,000 CFM from a kitchen without designed makeup air and the building goes negative: doors won't close, pilot lights flutter, and the dining room smells like the fryer. In ${c}, plan check now flags unbalanced kitchen ventilation routinely — the makeup-air design isn't optional, it's the other half of the exhaust system.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`What is a Type I hood?`, `The grease-rated exhaust hood required over commercial cooking equipment that produces grease-laden vapors — fryers, ranges, grills. Type I hoods need welded grease duct, specific clearances to combustibles, and dedicated makeup air. In ${c}, the hood type and size come from the equipment lineup, and plan check verifies the match.`],
+      [`Do I need a grease interceptor in ${c}?`, `For commercial food service — almost certainly yes. The health department and the ${c} sewer authority both require grease separation before discharge, with sizing based on fixture units or seating. The interceptor location (usually outside, below grade) is a civil design item that affects the whole site plan.`],
+      [`Can I convert a retail space to a restaurant kitchen?`, `Often, but the investigation comes first: panel capacity, gas service size, roof structure for exhaust fans, and whether the sanitary lateral can accept a grease interceptor. In ${c}, base-building capacity shortfalls are the most common reason restaurant conversions stall — verify during lease negotiation.`],
+    ],
+  },
+
+  "cleanroom": {
+    title: (t, c, a) => `${t} for Cleanrooms in ${c}, ${a}`,
+    desc: (t, c, s) => `${t} for cleanrooms and labs in ${c}, ${s}: HEPA filtration, pressurization cascades, process utilities, and contamination-controlled engineering.`,
+    h1: (t, c, a) => `${t} for cleanrooms in <span class="hl">${c}, ${a}</span>`,
+    lede: (t, c, s, cp) => `Cleanrooms in ${c} are buildings that manufacture air: particle counts, pressurization cascades, and temperature control held to tolerances that make office HVAC look casual. Semiconductor, pharma, and biotech work in ${s} demands engineering at a different precision — here's the ${cp.blurb} scope.`,
+    sections: (t, c, s, cp, sc, sp) => {
+      const p = sc.profile;
+      const sys = p === "mep"
+        ? `HEPA/ULPA filtration with air-change rates set by the ISO classification (tens to hundreds of changes per hour), pressurization cascades that step pressure from the cleanest room outward, process utilities — DI water, process gases, vacuum, specialty exhaust — each a designed distribution system, and N+1 redundancy on the air handlers because a cleanroom that loses filtration loses product. In ${c}, the sequence of operations and the commissioning/validation protocol are engineered deliverables, not contractor means and methods`
+        : p === "structural"
+        ? `vibration criteria for lithography and metrology tools — measured in micro-inches per second, with the structural engineer designing stiffened floors or isolated foundations to meet them. Heavy process equipment and interstitial mechanical floors add concentrated loads, and in ${s} the seismic design covers both the structure and the nonstructural cleanroom envelope that must remain particle-tight after an event`
+        : `chemical storage and waste treatment with secondary containment, loading docks designed for tool move-in (semiconductor tools arrive on air-ride trailers and need precise, level access), and water supply for the enormous process-water demand. In ${c}, the industrial wastewater discharge permit for cleanroom effluent is a long-lead agency approval that starts during programming`;
+      return [
+        ["Classification drives everything", `Cleanroom engineering in ${c} starts with the ISO class: ${sc.codeRef} apply, but ISO 14644's particle limits set air-change rates, filtration levels, pressurization, and gowning sequences. A Class 100 (ISO 5) suite and a Class 100,000 (ISO 8) corridor are different buildings sharing a roof — the engineer zones them accordingly.`],
+        [`${cp.name} scope for cleanrooms`, `For cleanroom work in ${c}, ${sys}. Fees track ${sc.feeNote}; cleanrooms are among the highest engineering intensity per square foot in any building type, with validation and commissioning as major scope components.`],
+        ["Vibration is the hidden criterion", `The tools dictate the structure: semiconductor lithography can't tolerate floor vibration the human body can't even feel. In ${c}, the vibration survey of the site — measuring ambient ground motion before design — determines whether the project needs a standard slab, a stiffened waffle slab, or an isolated foundation. That survey happens during site selection, not after the building is framed.`],
+      ];
+    },
+    faqs: (t, c, s, cp, sc) => [
+      [`What ISO class do I need?`, `It depends on the process: semiconductor lithography needs ISO 3–5, pharma sterile filling ISO 5–7, medical device assembly ISO 7–8. The process engineer or tool vendor specifies the class; the MEP engineer then designs air changes, filtration, and pressurization to achieve it in ${c}.`],
+      [`Why are cleanrooms so expensive to engineer?`, `Precision at every layer: redundant HEPA air handlers, process utility distribution, vibration-controlled structure, and a validation protocol proving the room performs. The commissioning and qualification documentation alone can exceed the design fee of a conventional building in ${s}.`],
+      [`Can an existing building become a cleanroom?`, `Sometimes — the checks are floor vibration (measure first), floor-to-floor height for the deep mechanical distribution, and structural capacity for the heavy air handlers. In ${c}, vibration is the most common disqualifier: a site next to rail or heavy traffic may never meet the tool spec regardless of the building.`],
+    ],
+  },
 };
 
 /* Render a variation page. Deps injected: {PLACE_TYPES, PLACE_LOOKUP, STATE_META,
