@@ -1,7 +1,8 @@
 /* Apex dynamic variation routes — Express integration.
  *
  * Serves NEW keyword-variation URLs: /{service}/{state}/{city}/{variation}/
- *   3 services × 49 states × 19,346 cities × 12 intent families = 696,456 URLs
+ *   3 services × 49 states × 19,346 cities × 82 intent families = 4,759,116 URLs
+ *   Every page carries FAQPage schema for AEO (AI engine citations).
  * Rendered server-side on demand. No per-page files.
  *
  * Mount BEFORE the static/prerendered middleware in app.ts so dynamic routes
@@ -70,7 +71,8 @@ const STATE_PROFILES: Record<string, Record<string, unknown>> = {};
 function layout(o: { title: string; description: string; canonical: string; jsonLd: string; body: string }): string {
   let schemaJson: unknown[] = [];
   try {
-    schemaJson = [JSON.parse(o.jsonLd)];
+    const parsed = JSON.parse(o.jsonLd);
+    schemaJson = Array.isArray(parsed) ? parsed : [parsed];
   } catch {
     // keep empty
   }
