@@ -13,10 +13,9 @@
  */
 
 import type { Express, Request, Response, NextFunction } from "express";
-import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { SITE, esc, htmlShell } from "./apex-shell.js";
+import cityData from "./apex-cities.json";
 import {
   VARIATIONS,
   VARIATION_SERVICES,
@@ -28,17 +27,11 @@ import {
 
 // ---------- City data ----------
 // Bundled JSON: 19,346 cities across 49 licensed states (+DC). Alaska excluded.
-const __dir = path.dirname(fileURLToPath(import.meta.url));
-const CITY_DATA_PATH = path.join(__dir, "apex-cities.json");
-
+// Static import — esbuild inlines it into the bundle (no runtime fs dependency).
 const PLACE_LOOKUP: Map<string, CityPlace> = (() => {
   const m = new Map<string, CityPlace>();
-  try {
-    const arr = JSON.parse(fs.readFileSync(CITY_DATA_PATH, "utf8")) as CityPlace[];
-    for (const pl of arr) m.set(`${pl.s}/${pl.c}`, pl);
-  } catch (err) {
-    console.error("[apex-dynamic] Failed to load city data:", (err as Error).message);
-  }
+  const arr = cityData as CityPlace[];
+  for (const pl of arr) m.set(`${pl.s}/${pl.c}`, pl);
   console.log(`[apex-dynamic] PLACE_LOOKUP: ${m.size} cities`);
   return m;
 })();
