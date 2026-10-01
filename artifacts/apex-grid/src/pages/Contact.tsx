@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -9,14 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { usePageMeta, useJsonLd } from "@/lib/seo";
 import { APEX_GRID_BUSINESS_SCHEMA } from "@/lib/business-schema";
-import { Check, FileText, Loader2, Upload, X, Stamp, PencilRuler, Calculator } from "lucide-react";
-
-const ACCEPTED_TYPES = ".pdf,.dwg,.dxf,.rvt,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.jpg,.jpeg,.png,.tif,.tiff";
-
-interface UploadedFile {
-  name: string;
-  objectPath: string;
-}
+import { Check, Stamp, PencilRuler, Calculator } from "lucide-react";
 
 const leadSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -30,8 +23,8 @@ const leadSchema = z.object({
 type LeadFormValues = z.infer<typeof leadSchema>;
 
 const PAGE_META = {
-  title: "Contact Us | Send Us Your Project | Apex Grid",
-  description: "Send Apex Grid Engineering your project — what you need, your details, done. Response within 12–24 hours for most standard requests.",
+  title: "Contact Us | Apex Grid Engineering",
+  description: "Get in touch with Apex Grid Engineering. Send us a message and we'll get back to you within 12–24 hours.",
   path: "/contact",
 };
 
@@ -48,26 +41,8 @@ export default function Contact() {
 
   const { toast } = useToast();
   const [isSuccess, setIsSuccess] = useState(false);
-  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
-  const [isDragging, setIsDragging] = useState(false);
-  const [uploadingFiles, setUploadingFiles] = useState<Set<string>>(new Set());
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const createLead = useCreateLead();
-
-  /** Upload a file directly through the server (proxied — no presigned URL). */
-  const uploadFileDirect = useCallback(async (file: File): Promise<{ objectPath: string } | null> => {
-    const response = await fetch("/api/storage/uploads", {
-      method: "POST",
-      headers: { "x-file-name": encodeURIComponent(file.name) },
-      body: file,
-    });
-    if (!response.ok) {
-      const err = await response.json().catch(() => ({})) as { error?: string };
-      throw new Error(err.error ?? "Upload failed");
-    }
-    return response.json() as Promise<{ objectPath: string }>;
-  }, []);
 
   const form = useForm<LeadFormValues>({
     resolver: zodResolver(leadSchema),
@@ -83,42 +58,6 @@ export default function Contact() {
 
   const selectedNeed = form.watch("need");
 
-  const handleFiles = useCallback(async (files: FileList | File[]) => {
-    const fileArray = Array.from(files);
-    const MAX_UPLOAD_BYTES = 20 * 1024 * 1024;
-    for (const file of fileArray) {
-      if (file.size > MAX_UPLOAD_BYTES) {
-        toast({ variant: "destructive", title: "File Too Large", description: `${file.name} exceeds the 20 MB limit.` });
-        continue;
-      }
-      const key = `${file.name}-${file.size}`;
-      setUploadingFiles(prev => new Set(prev).add(key));
-      try {
-        const result = await uploadFileDirect(file);
-        if (result) {
-          setUploadedFiles(prev => [...prev, { name: file.name, objectPath: result.objectPath }]);
-        } else {
-          toast({ variant: "destructive", title: "Upload Failed", description: `Could not upload ${file.name}. Please try again.` });
-        }
-      } catch (err) {
-        const msg = err instanceof Error ? err.message : `Could not upload ${file.name}.`;
-        toast({ variant: "destructive", title: "Upload Failed", description: msg });
-      } finally {
-        setUploadingFiles(prev => { const next = new Set(prev); next.delete(key); return next; });
-      }
-    }
-  }, [uploadFileDirect, toast]);
-
-  const onDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
-    if (e.dataTransfer.files.length > 0) handleFiles(e.dataTransfer.files);
-  }, [handleFiles]);
-
-  const removeFile = (objectPath: string) => {
-    setUploadedFiles(prev => prev.filter(f => f.objectPath !== objectPath));
-  };
-
   const onSubmit = async (data: LeadFormValues) => {
     try {
       const params = new URLSearchParams(window.location.search);
@@ -131,7 +70,7 @@ export default function Contact() {
           phone: data.phone,
           services: data.need,
           message: data.message,
-          attachments: uploadedFiles.map(f => f.objectPath),
+          attachments: [],
           source: params.get("utm_source") || (document.referrer ? "referral" : "direct"),
           medium: params.get("utm_medium") || undefined,
           campaign: params.get("utm_campaign") || undefined,
@@ -146,9 +85,7 @@ export default function Contact() {
       toast({
         variant: "destructive",
         title: "Submission Failed",
-        description: uploadedFiles.length > 0
-          ? "Your uploaded documents are still attached. Please try submitting again."
-          : "There was an error submitting your request. Please try again.",
+        description: "There was an error submitting your message. Please try again.",
       });
     }
   };
@@ -162,18 +99,16 @@ export default function Contact() {
           </div>
           <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">Got it.</h1>
           <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
-            Your project is in our system. A lead engineer will review it and get back
-            to you within 12–24 hours.
+            Your message is on its way. We'll get back to you within 12–24 hours.
           </p>
           <button
             onClick={() => {
               form.reset();
-              setUploadedFiles([]);
               setIsSuccess(false);
             }}
             className="h-14 px-8 border border-border text-foreground font-bold text-sm uppercase tracking-wider hover:bg-card transition-colors rounded-sm"
           >
-            Send Another Project
+            Send Another Message
           </button>
         </div>
       </div>
@@ -185,25 +120,11 @@ export default function Contact() {
       <section className="pt-32 pb-16 bg-background border-b border-border">
         <div className="container mx-auto px-4 md:px-8 max-w-3xl text-center">
           <h1 className="text-5xl md:text-6xl font-display font-bold leading-tight mb-6 text-white">
-            Send us your project
+            Get in touch
           </h1>
           <p className="text-xl text-foreground/80 leading-relaxed">
-            Three taps, your details, done. We respond within 12–24 hours.
+            Send us a message — we'll get back to you within 12–24 hours.
           </p>
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
-            <div className="bg-card border border-border p-5 rounded-sm">
-              <div className="font-mono text-xs uppercase tracking-widest text-primary mb-2">1 · Send it</div>
-              <p className="text-sm text-foreground/80 leading-relaxed">Pick what you need and attach your plans or photos — whatever you've got.</p>
-            </div>
-            <div className="bg-card border border-border p-5 rounded-sm">
-              <div className="font-mono text-xs uppercase tracking-widest text-primary mb-2">2 · We scope it</div>
-              <p className="text-sm text-foreground/80 leading-relaxed">A licensed engineer reviews your project and prices the work — no guesswork.</p>
-            </div>
-            <div className="bg-card border border-border p-5 rounded-sm">
-              <div className="font-mono text-xs uppercase tracking-widest text-primary mb-2">3 · You decide</div>
-              <p className="text-sm text-foreground/80 leading-relaxed">Clear quote with scope, timeline, and fee. No obligation, no sales calls.</p>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -298,9 +219,9 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Step 3 — details + files */}
+              {/* Step 3 — your message */}
               <div>
-                <div className="text-lg font-display font-bold text-white mb-5">3. Tell us about it</div>
+                <div className="text-lg font-display font-bold text-white mb-5">3. Your message</div>
                 <FormField
                   control={form.control}
                   name="message"
@@ -308,7 +229,7 @@ export default function Contact() {
                     <FormItem>
                       <FormControl>
                         <Textarea
-                          placeholder="What are you building? Where? When do you need it? *"
+                          placeholder="What can we help you with? *"
                           className="min-h-[140px] bg-background border-border rounded-sm focus-visible:ring-primary resize-none text-base p-4"
                           {...field}
                         />
@@ -317,83 +238,14 @@ export default function Contact() {
                     </FormItem>
                   )}
                 />
-
-                {/* File drop zone */}
-                <div
-                  role="button"
-                  tabIndex={0}
-                  aria-label="Upload project documents"
-                  className={`mt-4 border-2 border-dashed transition-colors cursor-pointer rounded-sm ${
-                    isDragging ? "border-primary bg-primary/5" : "border-border hover:border-primary/50 hover:bg-primary/5"
-                  }`}
-                  onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
-                  onDragLeave={() => setIsDragging(false)}
-                  onDrop={onDrop}
-                  onClick={() => fileInputRef.current?.click()}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter" || event.key === " ") {
-                      event.preventDefault();
-                      fileInputRef.current?.click();
-                    }
-                  }}
-                >
-                  <div className="flex flex-col items-center justify-center py-8 px-6 text-center">
-                    <Upload className="w-7 h-7 text-muted-foreground mb-2" />
-                    <p className="text-sm font-medium text-foreground mb-1">
-                      Got plans or drawings? Drop them here
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      PDF, DWG, images — up to 20 MB each (optional)
-                    </p>
-                  </div>
-                </div>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  multiple
-                  accept={ACCEPTED_TYPES}
-                  className="hidden"
-                  onChange={(e) => e.target.files && handleFiles(e.target.files)}
-                />
-
-                {uploadingFiles.size > 0 && (
-                  <div className="space-y-2 mt-3">
-                    {Array.from(uploadingFiles).map((key) => (
-                      <div key={key} className="flex items-center gap-3 bg-background border border-border px-4 py-3 rounded-sm">
-                        <Loader2 className="w-4 h-4 text-primary animate-spin shrink-0" />
-                        <span className="text-sm text-muted-foreground truncate">Uploading…</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {uploadedFiles.length > 0 && (
-                  <div className="space-y-2 mt-3">
-                    {uploadedFiles.map((file) => (
-                      <div key={file.objectPath} className="flex items-center gap-3 bg-background border border-primary/20 px-4 py-3 rounded-sm">
-                        <FileText className="w-4 h-4 text-primary shrink-0" />
-                        <span className="text-sm text-foreground truncate flex-1">{file.name}</span>
-                        <Check className="w-4 h-4 text-primary shrink-0" />
-                        <button
-                          type="button"
-                          onClick={() => removeFile(file.objectPath)}
-                          className="ml-2 text-muted-foreground hover:text-destructive transition-colors shrink-0"
-                          aria-label="Remove file"
-                        >
-                          <X className="w-4 h-4" />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
 
               <button
                 type="submit"
-                disabled={createLead.isPending || uploadingFiles.size > 0}
+                disabled={createLead.isPending}
                 className="h-16 w-full bg-primary text-white font-bold text-base uppercase tracking-wider flex items-center justify-center hover:bg-primary/90 transition-colors disabled:opacity-50 rounded-sm focus-visible:ring-4 focus-visible:ring-primary/50 focus-visible:outline-none"
               >
-                {createLead.isPending ? "Sending..." : uploadingFiles.size > 0 ? "Uploading Files…" : "Send It"}
+                {createLead.isPending ? "Sending..." : "Send Message"}
               </button>
               <p className="text-center text-sm text-muted-foreground -mt-6">
                 Prefer email? <a href="mailto:info@apexgrideng.com" className="text-primary hover:underline">info@apexgrideng.com</a>
