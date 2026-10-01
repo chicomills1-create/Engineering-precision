@@ -136,6 +136,12 @@ import {
   type Phase0ServicePage,
 } from "./phase0-corpus";
 import {
+  STAMPING_SERVICE_HUBS,
+  STAMPING_SERVICE_PAGES,
+  type StampingServiceHub,
+  type StampingServicePage,
+} from "./stamping-service-pages";
+import {
   PHASE1_METROS,
   PHASE1_SERVICE_SLUGS,
   PHASE1_SOURCE_URL,
@@ -1545,6 +1551,36 @@ function peStampStatePage(state: StateData, slug: string): string {
   });
 }
 
+function stampingServicePage(page: StampingServicePage): string {
+  return phase0ArticleFrame({
+    canonical: `/${page.serviceSlug}/${page.stateSlug}/`,
+    title: page.title,
+    description: page.description,
+    h1: page.h1,
+    kicker: page.kicker,
+    answer: page.answer,
+    sections: page.sections,
+    faqs: page.faqs,
+    links: page.links,
+    schemaType: "Service",
+  });
+}
+
+function stampingServiceHub(hub: StampingServiceHub): string {
+  return phase0ArticleFrame({
+    canonical: `/${hub.serviceSlug}/`,
+    title: hub.title,
+    description: hub.description,
+    h1: hub.h1,
+    kicker: hub.kicker,
+    answer: hub.answer,
+    sections: hub.sections,
+    faqs: hub.faqs,
+    links: hub.links,
+    schemaType: "Service",
+  });
+}
+
 function estimatorLocationLinks(
   state: StateData,
   cities: CityData[],
@@ -2930,6 +2966,14 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const page of PHASE0_SERVICE_PAGES) {
     servicesUrls.push(u(`${SITE}${page.path}`, today, "monthly", "0.8"));
   }
+  // ── Stamping service pages (national hubs + state pages) ───────────────
+  const stampingUrls: string[] = [];
+  for (const hub of STAMPING_SERVICE_HUBS) {
+    stampingUrls.push(u(`${SITE}/${hub.serviceSlug}/`, today, "monthly", "0.8"));
+  }
+  for (const page of STAMPING_SERVICE_PAGES) {
+    stampingUrls.push(u(`${SITE}/${page.serviceSlug}/${page.stateSlug}/`, today, "monthly", "0.7"));
+  }
   for (const page of ALL_AEO_PAGES) {
     servicesUrls.push(u(`${SITE}/answers/${page.slug}/`, today, "monthly", "0.7"));
   }
@@ -3134,6 +3178,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   const sitemaps: Array<{ name: string; urls: string[] }> = [
     { name: "sitemap-core.xml",       urls: coreUrls },
     { name: "sitemap-services.xml",   urls: servicesUrls },
+    { name: "sitemap-stamping.xml",   urls: stampingUrls },
     { name: "sitemap-estimators.xml", urls: estimatorUrls },
     { name: "sitemap-industries.xml", urls: industriesUrls },
     { name: "sitemap-solutions.xml",  urls: solutionsUrls },
@@ -9378,6 +9423,25 @@ async function main() {
     fs.writeFileSync(path.join(dir, "index.html"), html);
     pages++;
   }
+  // ── Stamping service pages: 4 national hubs + 200 state service pages ──
+  for (const hub of STAMPING_SERVICE_HUBS) {
+    assertSlug(hub.serviceSlug);
+    const hubDir = path.join(PUBLIC, hub.serviceSlug);
+    fs.mkdirSync(hubDir, { recursive: true });
+    const hubHtml = stampingServiceHub(hub);
+    assertPhase0Page(hubHtml, `/${hub.serviceSlug}/`, hub.faqs, hub.serviceSlug);
+    fs.writeFileSync(path.join(hubDir, "index.html"), hubHtml);
+    pages++;
+    for (const page of STAMPING_SERVICE_PAGES.filter((p) => p.serviceSlug === hub.serviceSlug)) {
+      assertSlug(page.stateSlug);
+      const dir = path.join(hubDir, page.stateSlug);
+      fs.mkdirSync(dir, { recursive: true });
+      const html = stampingServicePage(page);
+      assertPhase0Page(html, `/${page.serviceSlug}/${page.stateSlug}/`, page.faqs, `${page.serviceSlug}/${page.stateSlug}`);
+      fs.writeFileSync(path.join(dir, "index.html"), html);
+      pages++;
+    }
+  }
   const playbooksDir = path.join(PUBLIC, "plan-check-playbooks");
   const playbookHubHtml = phase0CollectionHub(
     "/plan-check-playbooks/",
@@ -9939,6 +10003,7 @@ async function main() {
     },
   }, null, 2)}\n`);
   console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${verticalPages} architecture/GC vertical pages, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PARTNER_PAGES.length} construction partner pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${CANONICAL_INDUSTRY_DISCIPLINE_PAGES.length} canonical industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, Answer library: ${PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length} (${PHASE0_AEO_PAGES.length} existing + ${PHASE7_AEO_PAGES.length} Phase 7), Phase 0: ${PHASE0_SERVICE_PAGES.length} services + ${PHASE0_AEO_PAGES.length} AEO + ${states.length} PE stamp state pages + ${PHASE0_PLAN_CHECK_PLAYBOOKS.length} playbooks + ${PHASE0_RESOURCE_PAGES.length} resources, 1 React-owned PE stamp hub, 1 sitemap page + sitemap.xml`);
+  console.log(`Stamping services: ${STAMPING_SERVICE_PAGES.length} state pages + ${STAMPING_SERVICE_HUBS.length} hubs -> sitemap-stamping.xml`);
 }
 
 async function notifySearchEngines() {
