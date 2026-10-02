@@ -67,6 +67,21 @@ import {
   priorityMarketHubUrl,
 } from "./priority-market-hubs";
 import {
+  FOOD_PROCESSING_STATES,
+  FOOD_PROCESSING_CITIES,
+  FOOD_PROCESSING_ANSWERS,
+} from "./food-processing-data";
+import {
+  foodProcessingHubPage,
+  foodProcessingStatePage,
+  foodProcessingCityPage,
+  foodProcessingAnswerPage,
+  foodProcessingHubUrl,
+  foodProcessingStateUrl,
+  foodProcessingCityUrl,
+  foodProcessingAnswerUrl,
+} from "./food-processing";
+import {
   PHASE9_INDUSTRY_SERVICE_PAGES,
   PHASE9_INBOUND_TARGETS,
   phase9Page,
@@ -141,6 +156,16 @@ import {
   type StampingServiceHub,
   type StampingServicePage,
 } from "./stamping-service-pages";
+import {
+  DATACENTER_HUB,
+  DATACENTER_STATE_PAGES,
+  type DataCenterCityPage,
+  type DataCenterPage,
+  type DataCenterStatePage,
+} from "./datacenter-pages";
+import { DATACENTER_CITY_PAGES_A } from "./datacenter-city-pages-a";
+import { DATACENTER_CITY_PAGES_B } from "./datacenter-city-pages-b";
+import { DATACENTER_ANSWER_PAGES } from "./datacenter-answer-pages";
 import {
   PHASE1_METROS,
   PHASE1_SERVICE_SLUGS,
@@ -1581,6 +1606,26 @@ function stampingServiceHub(hub: StampingServiceHub): string {
   });
 }
 
+const DATACENTER_CITY_PAGES: DataCenterCityPage[] = [
+  ...DATACENTER_CITY_PAGES_A,
+  ...DATACENTER_CITY_PAGES_B,
+];
+
+function datacenterPageFrame(page: DataCenterPage, canonical: string): string {
+  return phase0ArticleFrame({
+    canonical,
+    title: page.title,
+    description: page.description,
+    h1: page.h1,
+    kicker: page.kicker,
+    answer: page.answer,
+    sections: page.sections,
+    faqs: page.faqs,
+    links: page.links,
+    schemaType: "Service",
+  });
+}
+
 function estimatorLocationLinks(
   state: StateData,
   cities: CityData[],
@@ -2974,6 +3019,18 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const page of STAMPING_SERVICE_PAGES) {
     stampingUrls.push(u(`${SITE}/${page.serviceSlug}/${page.stateSlug}/`, today, "monthly", "0.7"));
   }
+  // ── Data Center Tier 1 sector pages (hub + states + cities + AEO) ───────
+  const datacenterUrls: string[] = [];
+  datacenterUrls.push(u(`${SITE}/data-center-design/`, today, "monthly", "0.8"));
+  for (const page of DATACENTER_STATE_PAGES) {
+    datacenterUrls.push(u(`${SITE}/data-center-design/${page.stateSlug}/`, today, "monthly", "0.7"));
+  }
+  for (const page of DATACENTER_CITY_PAGES) {
+    datacenterUrls.push(u(`${SITE}/data-center-design/${page.stateSlug}/${page.citySlug}/`, today, "monthly", "0.7"));
+  }
+  for (const page of DATACENTER_ANSWER_PAGES) {
+    datacenterUrls.push(u(`${SITE}/answers/${page.slug}/`, today, "monthly", "0.7"));
+  }
   for (const page of ALL_AEO_PAGES) {
     servicesUrls.push(u(`${SITE}/answers/${page.slug}/`, today, "monthly", "0.7"));
   }
@@ -3174,11 +3231,26 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     verticalLocationUrls.set(vertical.slug, urls);
   }
 
+  // ── Food processing plant engineering sector ─────────────────────────────
+  const foodProcessingUrls: string[] = [
+    u(`${SITE}${foodProcessingHubUrl()}`, today, "monthly", "0.9"),
+  ];
+  for (const fpState of FOOD_PROCESSING_STATES) {
+    foodProcessingUrls.push(u(`${SITE}${foodProcessingStateUrl(fpState)}`, today, "monthly", "0.8"));
+    for (const fpCity of FOOD_PROCESSING_CITIES.filter((c) => c.stateSlug === fpState.slug)) {
+      foodProcessingUrls.push(u(`${SITE}${foodProcessingCityUrl(fpState, fpCity)}`, today, "monthly", "0.7"));
+    }
+  }
+  for (const fpAnswer of FOOD_PROCESSING_ANSWERS) {
+    foodProcessingUrls.push(u(`${SITE}${foodProcessingAnswerUrl(fpAnswer)}`, today, "monthly", "0.7"));
+  }
+
   // ── Write individual sitemaps ────────────────────────────────────────────
   const sitemaps: Array<{ name: string; urls: string[] }> = [
     { name: "sitemap-core.xml",       urls: coreUrls },
     { name: "sitemap-services.xml",   urls: servicesUrls },
     { name: "sitemap-stamping.xml",   urls: stampingUrls },
+    { name: "sitemap-datacenter.xml", urls: datacenterUrls },
     { name: "sitemap-estimators.xml", urls: estimatorUrls },
     { name: "sitemap-industries.xml", urls: industriesUrls },
     { name: "sitemap-solutions.xml",  urls: solutionsUrls },
@@ -3193,6 +3265,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
       name: "sitemap-general-contracting-locations.xml",
       urls: verticalLocationUrls.get("general-contracting") ?? [],
     },
+    { name: "sitemap-food-processing.xml", urls: foodProcessingUrls },
   ];
   const seenUrls = new Set<string>();
   const duplicateUrls: string[] = [];
@@ -5967,6 +6040,73 @@ async function main() {
     }
     fs.writeFileSync(path.join(dir, "index.html"), html);
     pages++;
+  }
+
+  // Food processing plant engineering sector (seo/food-processing-tier):
+  // hub + 50 state hubs + city pages + AEO answers. Rendered here with the
+  // same assertion discipline as the priority market hubs.
+  {
+    const fpHubRoute = foodProcessingHubUrl();
+    const fpHubHtml = foodProcessingHubPage(FOOD_PROCESSING_STATES, FOOD_PROCESSING_ANSWERS);
+    if (
+      !fpHubHtml.includes('rel="canonical"')
+      || !fpHubHtml.includes('"@type":"FAQPage"')
+      || !fpHubHtml.includes('href="/estimate/"')
+    ) {
+      throw new Error(`SEO assertion failed: incomplete food processing hub ${fpHubRoute}`);
+    }
+    const fpHubDir = path.join(PUBLIC, fpHubRoute.replace(/^\/|\/$/g, ""));
+    fs.mkdirSync(fpHubDir, { recursive: true });
+    fs.writeFileSync(path.join(fpHubDir, "index.html"), fpHubHtml);
+    pages++;
+    FOOD_PROCESSING_STATES.forEach((fpState, fpStateIdx) => {
+      assertSlug(fpState.slug);
+      const fpCities = FOOD_PROCESSING_CITIES.filter((c) => c.stateSlug === fpState.slug);
+      const fpStateRoute = foodProcessingStateUrl(fpState);
+      const fpStateHtml = foodProcessingStatePage(fpState, fpCities, FOOD_PROCESSING_ANSWERS, fpStateIdx);
+      if (
+        !fpStateHtml.includes('"@type":"FAQPage"')
+        || !fpStateHtml.includes(`rel="canonical" href="${SITE}${fpStateRoute}"`)
+        || !fpStateHtml.includes('href="/estimate/"')
+      ) {
+        throw new Error(`SEO assertion failed: incomplete food processing state page ${fpStateRoute}`);
+      }
+      const fpStateDir = path.join(PUBLIC, fpStateRoute.replace(/^\/|\/$/g, ""));
+      fs.mkdirSync(fpStateDir, { recursive: true });
+      fs.writeFileSync(path.join(fpStateDir, "index.html"), fpStateHtml);
+      pages++;
+      fpCities.forEach((fpCity, fpCityIdx) => {
+        assertSlug(fpCity.slug);
+        const fpCityRoute = foodProcessingCityUrl(fpState, fpCity);
+        const fpCityHtml = foodProcessingCityPage(fpState, fpCity, FOOD_PROCESSING_ANSWERS, fpStateIdx * 7 + fpCityIdx);
+        if (
+          !fpCityHtml.includes(`rel="canonical" href="${SITE}${fpCityRoute}"`)
+          || !fpCityHtml.includes('href="/estimate/"')
+        ) {
+          throw new Error(`SEO assertion failed: incomplete food processing city page ${fpCityRoute}`);
+        }
+        const fpCityDir = path.join(PUBLIC, fpCityRoute.replace(/^\/|\/$/g, ""));
+        fs.mkdirSync(fpCityDir, { recursive: true });
+        fs.writeFileSync(path.join(fpCityDir, "index.html"), fpCityHtml);
+        pages++;
+      });
+    });
+    for (const fpAnswer of FOOD_PROCESSING_ANSWERS) {
+      assertSlug(fpAnswer.slug);
+      const fpAnswerRoute = foodProcessingAnswerUrl(fpAnswer);
+      const fpAnswerHtml = foodProcessingAnswerPage(fpAnswer, FOOD_PROCESSING_ANSWERS);
+      if (
+        !fpAnswerHtml.includes('"@type":"FAQPage"')
+        || !fpAnswerHtml.includes(`rel="canonical" href="${SITE}${fpAnswerRoute}"`)
+        || !fpAnswerHtml.includes('href="/estimate/"')
+      ) {
+        throw new Error(`SEO assertion failed: incomplete food processing answer ${fpAnswerRoute}`);
+      }
+      const fpAnswerDir = path.join(PUBLIC, fpAnswerRoute.replace(/^\/|\/$/g, ""));
+      fs.mkdirSync(fpAnswerDir, { recursive: true });
+      fs.writeFileSync(path.join(fpAnswerDir, "index.html"), fpAnswerHtml);
+      pages++;
+    }
   }
 
   // Batch 2 is intentionally rendered last among location owners. Its
@@ -9442,6 +9582,46 @@ async function main() {
       pages++;
     }
   }
+  // ── Data Center Tier 1 sector pages: hub + 50 states + 108 cities ───────
+  {
+    const dcDir = path.join(PUBLIC, "data-center-design");
+    fs.mkdirSync(dcDir, { recursive: true });
+    const hubHtml = datacenterPageFrame(DATACENTER_HUB, "/data-center-design/");
+    assertPhase0Page(hubHtml, "/data-center-design/", DATACENTER_HUB.faqs, "data-center-design");
+    fs.writeFileSync(path.join(dcDir, "index.html"), hubHtml);
+    pages++;
+    for (const page of DATACENTER_STATE_PAGES) {
+      assertSlug(page.stateSlug);
+      const dir = path.join(dcDir, page.stateSlug);
+      fs.mkdirSync(dir, { recursive: true });
+      const html = datacenterPageFrame(page, `/data-center-design/${page.stateSlug}/`);
+      assertPhase0Page(html, `/data-center-design/${page.stateSlug}/`, page.faqs, `data-center-design/${page.stateSlug}`);
+      fs.writeFileSync(path.join(dir, "index.html"), html);
+      pages++;
+    }
+    for (const page of DATACENTER_CITY_PAGES) {
+      assertSlug(page.citySlug);
+      const dir = path.join(dcDir, page.stateSlug, page.citySlug);
+      fs.mkdirSync(dir, { recursive: true });
+      const html = datacenterPageFrame(page, `/data-center-design/${page.stateSlug}/${page.citySlug}/`);
+      assertPhase0Page(html, `/data-center-design/${page.stateSlug}/${page.citySlug}/`, page.faqs, `data-center-design/${page.stateSlug}/${page.citySlug}`);
+      fs.writeFileSync(path.join(dir, "index.html"), html);
+      pages++;
+    }
+  }
+  // ── Data Center Tier 1 AEO answer pages (own sitemap, not services) ─────
+  for (const answerPage of DATACENTER_ANSWER_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+      throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
   const playbooksDir = path.join(PUBLIC, "plan-check-playbooks");
   const playbookHubHtml = phase0CollectionHub(
     "/plan-check-playbooks/",
@@ -10004,6 +10184,7 @@ async function main() {
   }, null, 2)}\n`);
   console.log(`Generated ${pages} pages: ${states.length} states, ${cities.length} curated cities, ~${dirCount} directory cities, ${verticalPages} architecture/GC vertical pages, ${BLOG_POSTS.length} blog posts, ${RESOURCE_ARTICLES.length} resource articles, ${CLIENT_PAGES.length} client pages, ${PARTNER_PAGES.length} construction partner pages, ${PROJECT_TYPE_PAGES.length} project-type pages, ${EXISTING_BUILDING_PAGES.length} existing-building pages, ${PERMIT_PAGES.length} permit pages, ${CANONICAL_INDUSTRY_DISCIPLINE_PAGES.length} canonical industry×discipline pages, ${LOCATION_SERVICE_PAGES.length} location×service pages, ${SOLUTION_PAGES.length} solution pages, ${GLOSSARY_TERMS.length} glossary pages, ${GUIDE_PAGES.length} guide pages, ${DISCIPLINE_HUBS.length} discipline hubs + ${disciplineSubpageCount} subpages, ${MISC_PAGES.length} misc pages, ${STRUCTURAL_EXTENDED_PAGES.length} structural-extended subpages, ${1 + TITLE_24_PAGES.length} title-24 pages, ${1 + PROJECT_CATEGORY_PAGES.length} project pages, ${STATIC_STANDALONE_PAGES.length} standalone pages, Answer library: ${PHASE0_AEO_PAGES.length + PHASE7_AEO_PAGES.length} (${PHASE0_AEO_PAGES.length} existing + ${PHASE7_AEO_PAGES.length} Phase 7), Phase 0: ${PHASE0_SERVICE_PAGES.length} services + ${PHASE0_AEO_PAGES.length} AEO + ${states.length} PE stamp state pages + ${PHASE0_PLAN_CHECK_PLAYBOOKS.length} playbooks + ${PHASE0_RESOURCE_PAGES.length} resources, 1 React-owned PE stamp hub, 1 sitemap page + sitemap.xml`);
   console.log(`Stamping services: ${STAMPING_SERVICE_PAGES.length} state pages + ${STAMPING_SERVICE_HUBS.length} hubs -> sitemap-stamping.xml`);
+  console.log(`Data Center Tier 1: hub + ${DATACENTER_STATE_PAGES.length} states + ${DATACENTER_CITY_PAGES.length} cities + ${DATACENTER_ANSWER_PAGES.length} AEO -> sitemap-datacenter.xml`);
 }
 
 async function notifySearchEngines() {
@@ -10459,6 +10640,7 @@ const PROJECT_TYPE_REDIRECTS = new Map<string, { newPath: string; title: string 
     title: "Parking Lot Expansion Engineering",
   }],
 ]);
+
 
 
 
