@@ -548,6 +548,9 @@ import { WAVE_KW_ANSWER_PAGES } from "./wave-kw-answer-pages";
 import { WAVE_KX_ANSWER_PAGES } from "./wave-kx-answer-pages";
 import { WAVE_KY_ANSWER_PAGES } from "./wave-ky-answer-pages";
 import { WAVE_KZ_ANSWER_PAGES } from "./wave-kz-answer-pages";
+import { WAVE_SEMI1_ANSWER_PAGES } from "./wave-semi1-answer-pages";
+import { WAVE_SEMI2_ANSWER_PAGES } from "./wave-semi2-answer-pages";
+import { WAVE_SEMI3_ANSWER_PAGES } from "./wave-semi3-answer-pages";
 
 const PHASE7_AEO_PAGES: Phase7AeoSeed[] = [
   ...PHASE7_COST_PAGES,
@@ -5161,7 +5164,10 @@ const BATCH2_EXPANSIONS: Batch2StateExpansion[] = [
   newYorkBatch2,
   northCarolinaBatch2,
   ohioBatch2,
-  pennsylvaniaBatch2,
+  pennsylvaniaBatch2,,
+  ...WAVE_SEMI1_ANSWER_PAGES,
+  ...WAVE_SEMI2_ANSWER_PAGES,
+  ...WAVE_SEMI3_ANSWER_PAGES,
 ];
 const BATCH2_EXPECTED_STATE_SLUGS = new Set([
   "georgia",
@@ -9255,6 +9261,42 @@ async function main() {
     pages++;
   }
   for (const answerPage of WAVE_JJ_ANSWER_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+      throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  for (const answerPage of WAVE_SEMI1_ANSWER_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+      throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  for (const answerPage of WAVE_SEMI2_ANSWER_PAGES) {
+    assertSlug(answerPage.slug);
+    const dir = path.join(phase0AnswersDir, answerPage.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = phase0AeoPage(answerPage);
+    assertPhase0Page(html, `/answers/${answerPage.slug}/`, answerPage.faqs, answerPage.slug);
+    if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+      throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${answerPage.slug}`);
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+  for (const answerPage of WAVE_SEMI3_ANSWER_PAGES) {
     assertSlug(answerPage.slug);
     const dir = path.join(phase0AnswersDir, answerPage.slug);
     fs.mkdirSync(dir, { recursive: true });
