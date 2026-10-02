@@ -548,6 +548,34 @@ import { WAVE_KW_ANSWER_PAGES } from "./wave-kw-answer-pages";
 import { WAVE_KX_ANSWER_PAGES } from "./wave-kx-answer-pages";
 import { WAVE_KY_ANSWER_PAGES } from "./wave-ky-answer-pages";
 import { WAVE_KZ_ANSWER_PAGES } from "./wave-kz-answer-pages";
+import { WAVE_KI_ANSWER_PAGES } from "./wave-ki-answer-pages";
+import { WAVE_KJ_ANSWER_PAGES } from "./wave-kj-answer-pages";
+import { WAVE_KK_ANSWER_PAGES } from "./wave-kk-answer-pages";
+import { WAVE_LO_ANSWER_PAGES } from "./wave-lo-answer-pages";
+import { WAVE_LP_ANSWER_PAGES } from "./wave-lp-answer-pages";
+import { WAVE_LQ_ANSWER_PAGES } from "./wave-lq-answer-pages";
+import { WAVE_LR_ANSWER_PAGES } from "./wave-lr-answer-pages";
+import { WAVE_LS_ANSWER_PAGES } from "./wave-ls-answer-pages";
+import { WAVE_LT_ANSWER_PAGES } from "./wave-lt-answer-pages";
+import { WAVE_LU_ANSWER_PAGES } from "./wave-lu-answer-pages";
+import { WAVE_LV_ANSWER_PAGES } from "./wave-lv-answer-pages";
+import { WAVE_LW_ANSWER_PAGES } from "./wave-lw-answer-pages";
+import { WAVE_LX_ANSWER_PAGES } from "./wave-lx-answer-pages";
+import { WAVE_LY_ANSWER_PAGES } from "./wave-ly-answer-pages";
+import { WAVE_LZ_ANSWER_PAGES } from "./wave-lz-answer-pages";
+import { WAVE_MA_ANSWER_PAGES } from "./wave-ma-answer-pages";
+import { WAVE_MB_ANSWER_PAGES } from "./wave-mb-answer-pages";
+import { WAVE_MC_ANSWER_PAGES } from "./wave-mc-answer-pages";
+import { WAVE_MD_ANSWER_PAGES } from "./wave-md-answer-pages";
+import { WAVE_ME_ANSWER_PAGES } from "./wave-me-answer-pages";
+import { WAVE_MF_ANSWER_PAGES } from "./wave-mf-answer-pages";
+import { WAVE_MG_ANSWER_PAGES } from "./wave-mg-answer-pages";
+import { WAVE_MH_ANSWER_PAGES } from "./wave-mh-answer-pages";
+import { WAVE_MI_ANSWER_PAGES } from "./wave-mi-answer-pages";
+import { WAVE_MJ_ANSWER_PAGES } from "./wave-mj-answer-pages";
+import { WAVE_MK_ANSWER_PAGES } from "./wave-mk-answer-pages";
+import { WAVE_ML_ANSWER_PAGES } from "./wave-ml-answer-pages";
+import { WAVE_MM_ANSWER_PAGES } from "./wave-mm-answer-pages";
 
 const PHASE7_AEO_PAGES: Phase7AeoSeed[] = [
   ...PHASE7_COST_PAGES,
@@ -1178,6 +1206,36 @@ const PHASE0_UPDATED_DATE = "2026-09-15";
 const PHASE0_EDITORIAL_AUTHOR = "Apex Grid Engineering";
 const PHASE0_JEREMY_AUTHOR = "Jeremy Mills, CEO & Founder, Apex Grid Engineering — USAF Veteran";
 const ALL_AEO_PAGES: Array<Phase0AeoPage | Phase7AeoSeed> = [...PHASE0_AEO_PAGES, ...PHASE7_AEO_PAGES, ...WAVE_D_ANSWER_PAGES, ...WAVE_E_ANSWER_PAGES, ...WAVE_F_ANSWER_PAGES, ...WAVE_G_ANSWER_PAGES, ...WAVE_H_ANSWER_PAGES, ...WAVE_I_ANSWER_PAGES, ...WAVE_J_ANSWER_PAGES, ...WAVE_K_ANSWER_PAGES, ...WAVE_L_ANSWER_PAGES, ...WAVE_M_ANSWER_PAGES, ...WAVE_N_ANSWER_PAGES, ...WAVE_O_ANSWER_PAGES, ...WAVE_P_ANSWER_PAGES, ...WAVE_Q_ANSWER_PAGES, ...WAVE_R_ANSWER_PAGES, ...WAVE_S_ANSWER_PAGES, ...WAVE_T_ANSWER_PAGES, ...WAVE_U_ANSWER_PAGES, ...WAVE_V_ANSWER_PAGES, ...WAVE_W_ANSWER_PAGES, ...WAVE_X_ANSWER_PAGES, ...WAVE_Y_ANSWER_PAGES, ...WAVE_Z_ANSWER_PAGES, ...WAVE_AA_ANSWER_PAGES, ...WAVE_AB_ANSWER_PAGES, ...WAVE_AC_ANSWER_PAGES, ...WAVE_AD_ANSWER_PAGES, ...WAVE_AE_ANSWER_PAGES, ...WAVE_AF_ANSWER_PAGES, ...WAVE_AG_ANSWER_PAGES, ...WAVE_AH_ANSWER_PAGES, ...WAVE_AI_ANSWER_PAGES, ...WAVE_AJ_ANSWER_PAGES, ...WAVE_AK_ANSWER_PAGES, ...WAVE_AL_ANSWER_PAGES, ...WAVE_AM_ANSWER_PAGES, ...WAVE_AN_ANSWER_PAGES, ...WAVE_AO_ANSWER_PAGES, ...WAVE_AP_ANSWER_PAGES, ...WAVE_AQ_ANSWER_PAGES, ...WAVE_AR_ANSWER_PAGES, ...WAVE_AS_ANSWER_PAGES, ...WAVE_AT_ANSWER_PAGES, ...WAVE_AU_ANSWER_PAGES, ...WAVE_AV_ANSWER_PAGES, ...WAVE_AW_ANSWER_PAGES, ...WAVE_AX_ANSWER_PAGES, ...WAVE_AY_ANSWER_PAGES, ...WAVE_AZ_ANSWER_PAGES, ...WAVE_BA_ANSWER_PAGES, ...WAVE_BB_ANSWER_PAGES, ...WAVE_BC_ANSWER_PAGES, ...WAVE_BD_ANSWER_PAGES, ...WAVE_BE_ANSWER_PAGES, ...WAVE_BF_ANSWER_PAGES, ...WAVE_BG_ANSWER_PAGES, ...WAVE_BH_ANSWER_PAGES, ...WAVE_BI_ANSWER_PAGES, ...WAVE_BJ_ANSWER_PAGES, ...WAVE_BK_ANSWER_PAGES, ...WAVE_BL_ANSWER_PAGES, ...WAVE_BM_ANSWER_PAGES, ...WAVE_BN_ANSWER_PAGES, ...WAVE_BO_ANSWER_PAGES, ...WAVE_BP_ANSWER_PAGES, ...WAVE_BQ_ANSWER_PAGES, ...WAVE_BR_ANSWER_PAGES, ...WAVE_BS_ANSWER_PAGES, ...WAVE_BT_ANSWER_PAGES, ...WAVE_BU_ANSWER_PAGES, ...WAVE_BV_ANSWER_PAGES, ...WAVE_BW_ANSWER_PAGES, ...WAVE_BX_ANSWER_PAGES, ...WAVE_BY_ANSWER_PAGES, ...WAVE_BZ_ANSWER_PAGES, ...WAVE_CA_ANSWER_PAGES, ...WAVE_CB_ANSWER_PAGES, ...WAVE_CC_ANSWER_PAGES, ...WAVE_CD_ANSWER_PAGES, ...WAVE_CE_ANSWER_PAGES, ...WAVE_CF_ANSWER_PAGES, ...WAVE_CG_ANSWER_PAGES, ...WAVE_CH_ANSWER_PAGES, ...WAVE_CI_ANSWER_PAGES, ...WAVE_CJ_ANSWER_PAGES, ...WAVE_CK_ANSWER_PAGES, ...WAVE_CL_ANSWER_PAGES, ...WAVE_CM_ANSWER_PAGES, ...WAVE_CN_ANSWER_PAGES, ...WAVE_CO_ANSWER_PAGES, ...WAVE_CP_ANSWER_PAGES, ...WAVE_CQ_ANSWER_PAGES, ...WAVE_CR_ANSWER_PAGES, ...WAVE_CS_ANSWER_PAGES, ...WAVE_CT_ANSWER_PAGES, ...WAVE_CU_ANSWER_PAGES, ...WAVE_CV_ANSWER_PAGES, ...WAVE_CW_ANSWER_PAGES, ...WAVE_CX_ANSWER_PAGES, ...WAVE_CY_ANSWER_PAGES, ...WAVE_CZ_ANSWER_PAGES, ...WAVE_DA_ANSWER_PAGES, ...WAVE_DB_ANSWER_PAGES, ...WAVE_DC_ANSWER_PAGES, ...WAVE_DD_ANSWER_PAGES, ...WAVE_DE_ANSWER_PAGES, ...WAVE_DF_ANSWER_PAGES, ...WAVE_DG_ANSWER_PAGES, ...WAVE_DH_ANSWER_PAGES, ...WAVE_DI_ANSWER_PAGES, ...WAVE_DJ_ANSWER_PAGES, ...WAVE_DK_ANSWER_PAGES, ...WAVE_DL_ANSWER_PAGES, ...WAVE_DM_ANSWER_PAGES, ...WAVE_DN_ANSWER_PAGES, ...WAVE_DO_ANSWER_PAGES, ...WAVE_DP_ANSWER_PAGES, ...WAVE_DQ_ANSWER_PAGES, ...WAVE_DR_ANSWER_PAGES, ...WAVE_DS_ANSWER_PAGES, ...WAVE_DT_ANSWER_PAGES, ...WAVE_DU_ANSWER_PAGES, ...WAVE_DV_ANSWER_PAGES, ...WAVE_DW_ANSWER_PAGES, ...WAVE_DX_ANSWER_PAGES, ...WAVE_DY_ANSWER_PAGES, ...WAVE_DZ_ANSWER_PAGES, ...WAVE_EA_ANSWER_PAGES, ...WAVE_EB_ANSWER_PAGES, ...WAVE_EC_ANSWER_PAGES, ...WAVE_ED_ANSWER_PAGES, ...WAVE_EE_ANSWER_PAGES, ...WAVE_EF_ANSWER_PAGES, ...WAVE_EG_ANSWER_PAGES, ...WAVE_EH_ANSWER_PAGES, ...WAVE_EI_ANSWER_PAGES, ...WAVE_EJ_ANSWER_PAGES, ...WAVE_EK_ANSWER_PAGES, ...WAVE_EL_ANSWER_PAGES, ...WAVE_EM_ANSWER_PAGES, ...WAVE_EN_ANSWER_PAGES, ...WAVE_EO_ANSWER_PAGES, ...WAVE_EP_ANSWER_PAGES, ...WAVE_EQ_ANSWER_PAGES, ...WAVE_ER_ANSWER_PAGES, ...WAVE_ES_ANSWER_PAGES, ...WAVE_ET_ANSWER_PAGES, ...WAVE_EU_ANSWER_PAGES, ...WAVE_EV_ANSWER_PAGES, ...WAVE_EW_ANSWER_PAGES, ...WAVE_EX_ANSWER_PAGES, ...WAVE_EY_ANSWER_PAGES, ...WAVE_EZ_ANSWER_PAGES, ...WAVE_FA_ANSWER_PAGES, ...WAVE_FB_ANSWER_PAGES, ...WAVE_FC_ANSWER_PAGES, ...WAVE_FD_ANSWER_PAGES, ...WAVE_FE_ANSWER_PAGES, ...WAVE_FG_ANSWER_PAGES, ...WAVE_FH_ANSWER_PAGES, ...WAVE_FI_ANSWER_PAGES, ...WAVE_FJ_ANSWER_PAGES, ...WAVE_FK_ANSWER_PAGES, ...WAVE_FL_ANSWER_PAGES, ...WAVE_FM_ANSWER_PAGES, ...WAVE_FN_ANSWER_PAGES, ...WAVE_FO_ANSWER_PAGES, ...WAVE_FP_ANSWER_PAGES, ...WAVE_FQ_ANSWER_PAGES, ...WAVE_FR_ANSWER_PAGES, ...WAVE_FS_ANSWER_PAGES, ...WAVE_FT_ANSWER_PAGES, ...WAVE_FU_ANSWER_PAGES, ...WAVE_FV_ANSWER_PAGES, ...WAVE_FW_ANSWER_PAGES, ...WAVE_FX_ANSWER_PAGES, ...WAVE_FY_ANSWER_PAGES, ...WAVE_FZ_ANSWER_PAGES, ...WAVE_GA_ANSWER_PAGES, ...WAVE_GB_ANSWER_PAGES, ...WAVE_GC_ANSWER_PAGES, ...WAVE_GD_ANSWER_PAGES, ...WAVE_GE_ANSWER_PAGES, ...WAVE_GF_ANSWER_PAGES, ...WAVE_GG_ANSWER_PAGES, ...WAVE_GH_ANSWER_PAGES, ...WAVE_GI_ANSWER_PAGES, ...WAVE_GJ_ANSWER_PAGES, ...WAVE_GK_ANSWER_PAGES, ...WAVE_GL_ANSWER_PAGES, ...WAVE_GM_ANSWER_PAGES, ...WAVE_GN_ANSWER_PAGES, ...WAVE_GO_ANSWER_PAGES, ...WAVE_GP_ANSWER_PAGES, ...WAVE_GQ_ANSWER_PAGES, ...WAVE_GR_ANSWER_PAGES, ...WAVE_GS_ANSWER_PAGES, ...WAVE_GT_ANSWER_PAGES, ...WAVE_GU_ANSWER_PAGES, ...WAVE_GV_ANSWER_PAGES, ...WAVE_GW_ANSWER_PAGES, ...WAVE_GX_ANSWER_PAGES, ...WAVE_GY_ANSWER_PAGES, ...WAVE_GZ_ANSWER_PAGES, ...WAVE_HA_ANSWER_PAGES, ...WAVE_HB_ANSWER_PAGES, ...WAVE_HC_ANSWER_PAGES, ...WAVE_HD_ANSWER_PAGES, ...WAVE_HE_ANSWER_PAGES, ...WAVE_HF_ANSWER_PAGES, ...WAVE_HG_ANSWER_PAGES, ...WAVE_HH_ANSWER_PAGES, ...WAVE_HI_ANSWER_PAGES, ...WAVE_HJ_ANSWER_PAGES, ...WAVE_HK_ANSWER_PAGES, ...WAVE_HL_ANSWER_PAGES, ...WAVE_HM_ANSWER_PAGES, ...WAVE_HN_ANSWER_PAGES, ...WAVE_HO_ANSWER_PAGES, ...WAVE_HP_ANSWER_PAGES, ...WAVE_HQ_ANSWER_PAGES, ...WAVE_HR_ANSWER_PAGES, ...WAVE_HS_ANSWER_PAGES, ...WAVE_HT_ANSWER_PAGES, ...WAVE_HU_ANSWER_PAGES, ...WAVE_HV_ANSWER_PAGES, ...WAVE_HW_ANSWER_PAGES, ...WAVE_HX_ANSWER_PAGES, ...WAVE_HY_ANSWER_PAGES, ...WAVE_HZ_ANSWER_PAGES, ...WAVE_IA_ANSWER_PAGES, ...WAVE_IB_ANSWER_PAGES, ...WAVE_IC_ANSWER_PAGES, ...WAVE_ID_ANSWER_PAGES, ...WAVE_IE_ANSWER_PAGES, ...WAVE_IF_ANSWER_PAGES, ...WAVE_IG_ANSWER_PAGES, ...WAVE_IH_ANSWER_PAGES, ...WAVE_II_ANSWER_PAGES, ...WAVE_IJ_ANSWER_PAGES, ...WAVE_IK_ANSWER_PAGES, ...WAVE_IL_ANSWER_PAGES,...WAVE_IM_ANSWER_PAGES,...WAVE_IN_ANSWER_PAGES,...WAVE_IO_ANSWER_PAGES,...WAVE_IP_ANSWER_PAGES,...WAVE_IQ_ANSWER_PAGES,...WAVE_IR_ANSWER_PAGES,...WAVE_IS_ANSWER_PAGES,...WAVE_IT_ANSWER_PAGES,...WAVE_IU_ANSWER_PAGES,...WAVE_IV_ANSWER_PAGES,...WAVE_IW_ANSWER_PAGES,...WAVE_IX_ANSWER_PAGES,...WAVE_IY_ANSWER_PAGES,...WAVE_IZ_ANSWER_PAGES,...WAVE_JA_ANSWER_PAGES,...WAVE_JB_ANSWER_PAGES,...WAVE_JK_ANSWER_PAGES,...WAVE_JL_ANSWER_PAGES,...WAVE_JM_ANSWER_PAGES,...WAVE_JN_ANSWER_PAGES,...WAVE_JO_ANSWER_PAGES,...WAVE_JP_ANSWER_PAGES,...WAVE_JQ_ANSWER_PAGES,...WAVE_JR_ANSWER_PAGES,...WAVE_KS_ANSWER_PAGES,...WAVE_KT_ANSWER_PAGES,...WAVE_KU_ANSWER_PAGES,...WAVE_KV_ANSWER_PAGES,...WAVE_KW_ANSWER_PAGES,...WAVE_KX_ANSWER_PAGES,...WAVE_KY_ANSWER_PAGES,...WAVE_KZ_ANSWER_PAGES,...WAVE_JC_ANSWER_PAGES,...WAVE_JD_ANSWER_PAGES,...WAVE_JE_ANSWER_PAGES,...WAVE_JF_ANSWER_PAGES,...WAVE_JG_ANSWER_PAGES,...WAVE_JH_ANSWER_PAGES,...WAVE_JI_ANSWER_PAGES,...WAVE_JJ_ANSWER_PAGES,...WAVE_ID_B60_ANSWER_PAGES, ...WAVE_IE_B60_ANSWER_PAGES, ...WAVE_IF_B60_ANSWER_PAGES, ...WAVE_IG_B60_ANSWER_PAGES, ...WAVE_IH_B60_ANSWER_PAGES, ...WAVE_II_B60_ANSWER_PAGES,...WAVE_IJ_B61_ANSWER_PAGES, ...WAVE_IK_B61_ANSWER_PAGES, ...WAVE_IL_B61_ANSWER_PAGES, ...WAVE_IM_B61_ANSWER_PAGES, ...WAVE_IN_B61_ANSWER_PAGES, ...WAVE_IO_B61_ANSWER_PAGES,...WAVE_IP_B62_ANSWER_PAGES, ...WAVE_IQ_B62_ANSWER_PAGES, ...WAVE_IR_B62_ANSWER_PAGES, ...WAVE_IS_B62_ANSWER_PAGES, ...WAVE_IT_B62_ANSWER_PAGES, ...WAVE_IU_B62_ANSWER_PAGES,...WAVE_IV_B63_ANSWER_PAGES, ...WAVE_IW_B63_ANSWER_PAGES, ...WAVE_IX_B63_ANSWER_PAGES,...WAVE_IY_B64_ANSWER_PAGES, ...WAVE_IZ_B64_ANSWER_PAGES, ...WAVE_JA_B64_ANSWER_PAGES,...WAVE_JB_B65_ANSWER_PAGES, ...WAVE_JC_B65_ANSWER_PAGES, ...WAVE_JD_B65_ANSWER_PAGES, ...WAVE_JE_B65_ANSWER_PAGES, ...WAVE_JF_B65_ANSWER_PAGES, ...WAVE_JG_B65_ANSWER_PAGES,...WAVE_JH_B66_ANSWER_PAGES, ...WAVE_JI_B66_ANSWER_PAGES, ...WAVE_JJ_B66_ANSWER_PAGES, ...WAVE_JK_B66_ANSWER_PAGES, ...WAVE_JL_B66_ANSWER_PAGES, ...WAVE_JM_B66_ANSWER_PAGES,...WAVE_JN_B67_ANSWER_PAGES, ...WAVE_JO_B67_ANSWER_PAGES, ...WAVE_JP_B67_ANSWER_PAGES, ...WAVE_JQ_B67_ANSWER_PAGES, ...WAVE_JR_B67_ANSWER_PAGES, ...WAVE_JS_ANSWER_PAGES, ...WAVE_JT_ANSWER_PAGES,...WAVE_JU_ANSWER_PAGES, ...WAVE_JV_ANSWER_PAGES, ...WAVE_JW_ANSWER_PAGES, ...WAVE_JX_ANSWER_PAGES, ...WAVE_JY_ANSWER_PAGES, ...WAVE_JZ_ANSWER_PAGES, ...WAVE_KA_ANSWER_PAGES,...WAVE_KB_ANSWER_PAGES, ...WAVE_KC_ANSWER_PAGES, ...WAVE_KD_ANSWER_PAGES, ...WAVE_KE_ANSWER_PAGES, ...WAVE_KF_ANSWER_PAGES, ...WAVE_KG_ANSWER_PAGES, ...WAVE_KH_ANSWER_PAGES,...WAVE_KL_ANSWER_PAGES, ...WAVE_KM_ANSWER_PAGES, ...WAVE_KN_ANSWER_PAGES, ...WAVE_KO_ANSWER_PAGES, ...WAVE_KP_ANSWER_PAGES, ...WAVE_KQ_ANSWER_PAGES, ...WAVE_KR_ANSWER_PAGES, ...WAVE_KS_B71_ANSWER_PAGES, ...WAVE_KT_B71_ANSWER_PAGES, ...WAVE_KU_B71_ANSWER_PAGES, ...WAVE_KV_B71_ANSWER_PAGES, ...WAVE_KW_B71_ANSWER_PAGES, ...WAVE_KX_B71_ANSWER_PAGES, ...WAVE_KY_B71_ANSWER_PAGES, ...WAVE_LA_ANSWER_PAGES, ...WAVE_LB_ANSWER_PAGES, ...WAVE_LC_ANSWER_PAGES, ...WAVE_LD_ANSWER_PAGES, ...WAVE_LE_ANSWER_PAGES, ...WAVE_LF_ANSWER_PAGES, ...WAVE_LG_ANSWER_PAGES, ...WAVE_LN_ANSWER_PAGES, ...WAVE_LH_ANSWER_PAGES, ...WAVE_LI_ANSWER_PAGES, ...WAVE_LJ_ANSWER_PAGES, ...WAVE_LK_ANSWER_PAGES, ...WAVE_LL_ANSWER_PAGES, ...WAVE_LM_ANSWER_PAGES,];
+const VERTICAL_FARMING_PAGES: Phase0AeoPage[] = [
+  ...WAVE_KI_ANSWER_PAGES,
+  ...WAVE_KJ_ANSWER_PAGES,
+  ...WAVE_KK_ANSWER_PAGES,
+  ...WAVE_LO_ANSWER_PAGES,
+  ...WAVE_LP_ANSWER_PAGES,
+  ...WAVE_LQ_ANSWER_PAGES,
+  ...WAVE_LR_ANSWER_PAGES,
+  ...WAVE_LS_ANSWER_PAGES,
+  ...WAVE_LT_ANSWER_PAGES,
+  ...WAVE_LU_ANSWER_PAGES,
+  ...WAVE_LV_ANSWER_PAGES,
+  ...WAVE_LW_ANSWER_PAGES,
+  ...WAVE_LX_ANSWER_PAGES,
+  ...WAVE_LY_ANSWER_PAGES,
+  ...WAVE_LZ_ANSWER_PAGES,
+  ...WAVE_MA_ANSWER_PAGES,
+  ...WAVE_MB_ANSWER_PAGES,
+  ...WAVE_MC_ANSWER_PAGES,
+  ...WAVE_MD_ANSWER_PAGES,
+  ...WAVE_ME_ANSWER_PAGES,
+  ...WAVE_MF_ANSWER_PAGES,
+  ...WAVE_MG_ANSWER_PAGES,
+  ...WAVE_MH_ANSWER_PAGES,
+  ...WAVE_MI_ANSWER_PAGES,
+  ...WAVE_MJ_ANSWER_PAGES,
+  ...WAVE_MK_ANSWER_PAGES,
+  ...WAVE_ML_ANSWER_PAGES,
+  ...WAVE_MM_ANSWER_PAGES
+];
 
 const PHASE7_COMMON_FAQ = {
   question: "Does this answer guarantee a permit or project outcome?",
@@ -1411,6 +1469,106 @@ function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
     directAnswer: "cluster" in page ? undefined : page.directAnswer,
     facts: "cluster" in page ? undefined : page.facts,
     howTo: "cluster" in page ? undefined : page.howTo,
+  });
+}
+
+// ── Vertical farming sector: canonical mapping, link graph, page render ──
+const VF_STATE_SLUGS = [
+  "alabama", "arizona", "arkansas", "california", "colorado", "connecticut",
+  "delaware", "district-of-columbia", "florida", "georgia", "hawaii", "idaho",
+  "illinois", "indiana", "iowa", "kansas", "kentucky", "louisiana", "maine",
+  "maryland", "massachusetts", "michigan", "minnesota", "mississippi", "missouri",
+  "montana", "nebraska", "nevada", "new-hampshire", "new-jersey", "new-mexico",
+  "new-york", "north-carolina", "north-dakota", "ohio", "oklahoma", "oregon",
+  "pennsylvania", "rhode-island", "south-carolina", "south-dakota", "tennessee",
+  "texas", "utah", "vermont", "virginia", "washington", "west-virginia",
+  "wisconsin", "wyoming",
+];
+
+type VfPageKind = "hub" | "state" | "city" | "answer";
+
+function vfStateOf(rest: string): string {
+  if (VF_STATE_SLUGS.includes(rest)) return rest;
+  const match = VF_STATE_SLUGS.filter((s) => rest.startsWith(`${s}-`)).sort((a, b) => b.length - a.length)[0];
+  if (!match) throw new Error(`SEO assertion failed: vertical farming slug has no state: ${rest}`);
+  return match;
+}
+
+function vfPageKind(slug: string): VfPageKind {
+  if (slug === "vertical-farming-design") return "hub";
+  if (slug.startsWith("vertical-farming-design-")) {
+    const rest = slug.slice("vertical-farming-design-".length);
+    return rest === vfStateOf(rest) ? "state" : "city";
+  }
+  if (slug.startsWith("vertical-farming-")) return "answer";
+  throw new Error(`SEO assertion failed: not a vertical farming slug: ${slug}`);
+}
+
+function vfCanonical(slug: string): string {
+  const kind = vfPageKind(slug);
+  if (kind === "hub") return "/vertical-farming-design/";
+  if (kind === "answer") return `/answers/${slug}/`;
+  const rest = slug.slice("vertical-farming-design-".length);
+  const state = vfStateOf(rest);
+  return kind === "state"
+    ? `/vertical-farming-design/${state}/`
+    : `/vertical-farming-design/${state}/${rest.slice(state.length + 1)}/`;
+}
+
+function verticalFarmingPage(page: Phase0AeoPage): string {
+  const kind = vfPageKind(page.slug);
+  const seen = new Set<string>();
+  const links: Array<{ label: string; href: string }> = [];
+  const addLink = (label: string, href: string): void => {
+    if (seen.has(href)) return;
+    seen.add(href);
+    links.push({ label, href });
+  };
+  for (const link of page.extraLinks ?? []) addLink(link.label, link.href);
+  const vfStates = VERTICAL_FARMING_PAGES.filter((p) => vfPageKind(p.slug) === "state");
+  const vfAnswers = VERTICAL_FARMING_PAGES.filter((p) => vfPageKind(p.slug) === "answer");
+  const stateOf = (slug: string): string => vfStateOf(slug.slice("vertical-farming-design-".length));
+  if (kind === "hub") {
+    for (const s of vfStates) addLink(s.h1, vfCanonical(s.slug));
+    for (const a of vfAnswers) addLink(a.h1, vfCanonical(a.slug));
+  } else if (kind === "state") {
+    const myState = stateOf(page.slug);
+    for (const c of VERTICAL_FARMING_PAGES.filter((p) => vfPageKind(p.slug) === "city" && stateOf(p.slug) === myState)) {
+      addLink(c.h1, vfCanonical(c.slug));
+    }
+    const idx = vfStates.findIndex((p) => p.slug === page.slug);
+    for (let j = 0; j < 3; j++) {
+      const a = vfAnswers[(idx * 3 + j) % vfAnswers.length];
+      addLink(a.h1, vfCanonical(a.slug));
+    }
+  } else if (kind === "city") {
+    const myState = stateOf(page.slug);
+    const sibs = VERTICAL_FARMING_PAGES.filter((p) => vfPageKind(p.slug) === "city" && p.slug !== page.slug && stateOf(p.slug) === myState);
+    for (const c of sibs) addLink(c.h1, vfCanonical(c.slug));
+    const allCities = VERTICAL_FARMING_PAGES.filter((p) => vfPageKind(p.slug) === "city");
+    const idx = allCities.findIndex((p) => p.slug === page.slug);
+    for (let j = 0; j < 2; j++) {
+      const a = vfAnswers[(idx * 2 + j) % vfAnswers.length];
+      addLink(a.h1, vfCanonical(a.slug));
+    }
+  } else {
+    addLink("Vertical farming engineering hub", "/vertical-farming-design/");
+  }
+  addLink("Engineering service for this question", page.serviceHref ?? "/services/mep/");
+  return phase0ArticleFrame({
+    canonical: vfCanonical(page.slug),
+    title: page.title,
+    description: page.description,
+    h1: page.h1,
+    kicker: kind === "answer" ? `AEO Answer \u00b7 ${page.topic}` : `Vertical Farming \u00b7 ${page.topic}`,
+    answer: page.answer,
+    sections: page.sections ?? [],
+    faqs: page.faqs,
+    links,
+    schemaType: "Article",
+    author: PHASE0_JEREMY_AUTHOR,
+    founderNote: page.founderNote,
+    directAnswer: page.directAnswer,
   });
 }
 
@@ -3174,6 +3332,12 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     verticalLocationUrls.set(vertical.slug, urls);
   }
 
+  const verticalFarmingUrls: string[] = VERTICAL_FARMING_PAGES.map((vfPage) => {
+    const kind = vfPageKind(vfPage.slug);
+    const priority = kind === "hub" ? "0.9" : kind === "city" ? "0.7" : "0.8";
+    return u(`${SITE}${vfCanonical(vfPage.slug)}`, today, "monthly", priority);
+  });
+
   // ── Write individual sitemaps ────────────────────────────────────────────
   const sitemaps: Array<{ name: string; urls: string[] }> = [
     { name: "sitemap-core.xml",       urls: coreUrls },
@@ -3192,6 +3356,10 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     {
       name: "sitemap-general-contracting-locations.xml",
       urls: verticalLocationUrls.get("general-contracting") ?? [],
+    },
+    {
+      name: "sitemap-vertical-farming.xml",
+      urls: verticalFarmingUrls,
     },
   ];
   const seenUrls = new Set<string>();
@@ -4877,6 +5045,7 @@ function htmlSitemapPage(): string {
               <li><a href="/blog/">Blog</a></li>
               <li><a href="/guides/">Engineering Guides</a></li>
               <li><a href="/engineering-glossary/">Engineering Glossary</a></li>
+              <li><a href="/vertical-farming-design/">Vertical Farming &amp; CEA Design</a></li>
             </ul>
           </div>
           <div class="sitemap-col">
@@ -5500,6 +5669,7 @@ async function main() {
   const generatedTopLevelRoutes = [
     ...SEO_GENERATOR_FIXED_INDEX_ROUTES,
     "/engineering-cost-estimator",
+    "/vertical-farming-design",
     ...LOCATION_VERTICALS.map((page) => `/${page.slug}`),
     ...DISCIPLINES.map((page) => `/${page.slug}`),
     ...DISCIPLINE_HUBS.map((page) => `/${page.slug}`),
@@ -9286,6 +9456,38 @@ async function main() {
     }
     fs.writeFileSync(path.join(dir, "index.html"), html);
     pages++;
+  }
+  // ── Vertical farming sector: 323 pages ───────────────────────────────────
+  {
+    const vfDir = path.join(PUBLIC, "vertical-farming-design");
+    fs.rmSync(vfDir, { recursive: true, force: true });
+    fs.mkdirSync(vfDir, { recursive: true });
+    let vfRendered = 0;
+    for (const vfPage of VERTICAL_FARMING_PAGES) {
+      assertSlug(vfPage.slug);
+      const kind = vfPageKind(vfPage.slug);
+      const html = verticalFarmingPage(vfPage);
+      const canonical = vfCanonical(vfPage.slug);
+      assertPhase0Page(html, canonical, vfPage.faqs, vfPage.slug);
+      if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`) || html.includes("Jeremy Mills, PE")) {
+        throw new Error(`SEO assertion failed: invalid Jeremy Mills author voice on ${vfPage.slug}`);
+      }
+      let dir: string;
+      if (kind === "answer") {
+        dir = path.join(phase0AnswersDir, vfPage.slug);
+      } else if (kind === "hub") {
+        dir = vfDir;
+      } else {
+        const rest = vfPage.slug.slice("vertical-farming-design-".length);
+        const state = vfStateOf(rest);
+        dir = kind === "state" ? path.join(vfDir, state) : path.join(vfDir, state, rest.slice(state.length + 1));
+      }
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(path.join(dir, "index.html"), html);
+      pages++;
+      vfRendered++;
+    }
+    console.log(`Vertical farming sector: ${vfRendered} pages rendered`);
   }
   for (const answerPage of PHASE7_AEO_PAGES) {
     assertSlug(answerPage.slug);
