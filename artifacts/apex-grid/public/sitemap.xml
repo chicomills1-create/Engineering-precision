@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-senior-living.xml</loc>
+  </sitemap>
+  <sitemap>
     <loc>https://apexgrideng.com/sitemap-core.xml</loc>
   </sitemap>
   <sitemap>
     <loc>https://apexgrideng.com/sitemap-services.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-stamping.xml</loc>
   </sitemap>
   <sitemap>
     <loc>https://apexgrideng.com/sitemap-estimators.xml</loc>
