@@ -6,6 +6,9 @@
   <sitemap>
     <loc>https://apexgrideng.com/sitemap-services.xml</loc>
   </sitemap>
+    <sitemap>
+    <loc>https://apexgrideng.com/sitemap-ev-battery.xml</loc>
+  </sitemap>
   <sitemap>
     <loc>https://apexgrideng.com/sitemap-estimators.xml</loc>
   </sitemap>

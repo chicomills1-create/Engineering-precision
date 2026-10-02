@@ -45,6 +45,7 @@ export const SEO_GENERATOR_FIXED_INDEX_ROUTES = [
   "/projects",
   "/metros",
   "/sitemap",
+  "/ev-battery-plant-design",
 ] as const;
 
 /**
