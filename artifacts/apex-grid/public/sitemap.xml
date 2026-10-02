@@ -30,4 +30,8 @@
   <sitemap>
     <loc>https://apexgrideng.com/sitemap-general-contracting-locations.xml</loc>
   </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-food-processing.xml</loc>
+  </sitemap>
 </sitemapindex>
+
