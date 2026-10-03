@@ -30,4 +30,16 @@
   <sitemap>
     <loc>https://apexgrideng.com/sitemap-general-contracting-locations.xml</loc>
   </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-franchise-0.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-franchise-1.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-franchise-2.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-franchise-3.xml</loc>
+  </sitemap>
 </sitemapindex>
