@@ -1,4 +1,5 @@
 import { useParams, Link } from "wouter";
+import { useEffect } from "react";
 
 /** Wave 1 state hub: /wave1/:service/:state/ — links to city pages (one cohort). */
 // key: `${serviceSlug}/${stateSlug}` -> {title, cities: [{city, city_slug, metro}]}
@@ -7514,6 +7515,7 @@ export default function Wave1StateHub() {
   const serviceSlug = params.service as string;
   const stateSlug = params.state as string;
   const hub = STATE_HUBS[`${serviceSlug}/${stateSlug}`];
+  useEffect(() => { if (hub) document.title = `${hub.title} in ${hub.state} | Apex Grid`; }, [hub]);
   if (!hub) {
     return (<div className="min-h-screen flex items-center justify-center"><p>Page not found.</p></div>);
   }

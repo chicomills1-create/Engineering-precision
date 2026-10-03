@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { useEffect } from "react";
 
 /** Wave 1 index hub: /wave1/ — links to 6 service hubs. */
 const SERVICE_HUBS = [
@@ -11,6 +12,7 @@ const SERVICE_HUBS = [
 ];
 
 export default function Wave1Index() {
+  useEffect(() => { document.title = "Engineering Services by Location | Apex Grid"; }, []);
   return (
     <div className="min-h-screen bg-white">
       <main className="max-w-4xl mx-auto px-4 py-12">

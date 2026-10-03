@@ -1427,6 +1427,26 @@ export default function Wave1CityPage() {
     });
   }, [landingUrl, cohortId, serviceKey, metroName, state]);
 
+  // ── SEO head: title, meta description, canonical in document head ──
+  // (SPA: set via DOM since these routes are client-rendered)
+  useEffect(() => {
+    document.title = pageTitle;
+    let meta = document.querySelector('meta[name="description"]');
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.setAttribute("name", "description");
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute("content", metaDescription);
+    let canon = document.querySelector('link[rel="canonical"]');
+    if (!canon) {
+      canon = document.createElement("link");
+      canon.setAttribute("rel", "canonical");
+      document.head.appendChild(canon);
+    }
+    canon.setAttribute("href", landingUrl);
+  }, [pageTitle, metaDescription, landingUrl]);
+
   // CTA carries attribution params for the estimate page
   const attributionParams = new URLSearchParams({
     src: "wave1",
