@@ -3209,6 +3209,34 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     }
   }
 
+
+  // ── Wave 1: high-value metro x core-service pages (25,000 URLs, 180 cohorts) ──
+  // Reads seo/wave1-sitemap-data.json; per-cohort sitemaps for funnel tracking.
+  // Regenerated deterministically here so `seo:generate` keeps these files and
+  // their sitemap_index.xml entries instead of wiping them. Cohorts are
+  // (service, state) pairs; template_version tracked in cohort-tracking.json.
+  const WAVE1_DATA: {
+    template_version: string;
+    cohorts: Record<string, { service: string; state_abbr: string; service_slugs: string[]; cities: string[][] }>;
+  } = JSON.parse(
+    fs.readFileSync(path.join(__dirname, "wave1-sitemap-data.json"), "utf8")
+  );
+  const wave1SitemapEntries: Array<{ name: string; urls: string[] }> = [];
+  for (const cohortId of Object.keys(WAVE1_DATA.cohorts).sort()) {
+    const cohort = WAVE1_DATA.cohorts[cohortId];
+    const wave1Urls: string[] = [];
+    for (const slug of cohort.service_slugs) {
+      for (const pair of cohort.cities) {
+        wave1Urls.push(u(`${SITE}/wave1/${slug}/${pair[0]}/${pair[1]}/`, today, "monthly", "0.6"));
+      }
+    }
+    wave1Urls.sort();
+    wave1SitemapEntries.push({
+      name: `sitemap-wave1-${cohort.service}-${cohort.state_abbr}.xml`,
+      urls: wave1Urls,
+    });
+  }
+
   const sitemaps: Array<{ name: string; urls: string[] }> = [
     { name: "sitemap-core.xml",       urls: coreUrls },
     { name: "sitemap-services.xml",   urls: servicesUrls },
@@ -3228,6 +3256,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
       urls: verticalLocationUrls.get("general-contracting") ?? [],
     },
     ...citySitemapEntries,
+    ...wave1SitemapEntries,
   ];
   const seenUrls = new Set<string>();
   const duplicateUrls: string[] = [];

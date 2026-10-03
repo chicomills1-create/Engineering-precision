@@ -31,6 +31,7 @@ import BuildingCityPage from "./pages/BuildingCityPage";
 import SpecialtyCityPage from "./pages/SpecialtyCityPage";
 import ProjectCityPage from "./pages/ProjectCityPage";
 import ServiceLocalCityPage from "./pages/ServiceLocalCityPage";
+import Wave1CityPage from "./pages/Wave1CityPage";
 
 const ClerkArea = lazy(() => import('@/ClerkArea'));
 const ClientArea = lazy(() => import('@/ClientArea'));
@@ -116,6 +117,7 @@ function Router() {
         <Route path="/specialties/:specialty/:city/:state/" component={SpecialtyCityPage} />
         <Route path="/projects/:project/:city/:state/" component={ProjectCityPage} />
         <Route path="/services-local/:service/:city/:state/" component={ServiceLocalCityPage} />
+        <Route path="/wave1/:service/:city/:state/" component={Wave1CityPage} />
         <Route path="/military" component={Military} />
         <Route path="/resources" component={Resources} />
         <Route path="/about" component={About} />
