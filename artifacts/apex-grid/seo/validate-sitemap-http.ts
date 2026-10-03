@@ -14,6 +14,28 @@ const PUBLIC = process.env.SEO_OUTPUT_DIR
 const SITE = "https://apexgrideng.com";
 const CONCURRENCY = 96;
 
+/**
+ * Dynamic client-side routes (wouter) that have no static file on disk.
+ * The production SPA serves index.html for these and the React router
+ * renders the page. The file-based model below would 404 them, so we
+ * treat any URL matching these prefixes as valid (200).
+ *
+ * Pattern: /<prefix>/<segment>/<city-slug>/<state-slug>/
+ */
+const DYNAMIC_ROUTE_PREFIXES = new Set([
+  "franchise",
+  "verticals",
+  "buildings",
+  "specialties",
+  "project-types",
+  "services-local",
+]);
+
+function isDynamicRoute(pathname: string): boolean {
+  const segs = pathname.replace(/^\/+|\/+$/g, "").split("/");
+  return segs.length === 4 && DYNAMIC_ROUTE_PREFIXES.has(segs[0]);
+}
+
 function sitemapUrls(): string[] {
   const urls: string[] = [];
   for (const filename of fs.readdirSync(PUBLIC)) {
@@ -55,6 +77,11 @@ async function main() {
     const redirectTarget = redirects[pathname];
     if (redirectTarget) {
       res.writeHead(301, { location: redirectTarget }).end();
+      return;
+    }
+    // Dynamic SPA routes have no static file — they are valid client routes.
+    if (isDynamicRoute(pathname)) {
+      res.writeHead(200).end();
       return;
     }
     const file = safeFileForUrl(pathname);
