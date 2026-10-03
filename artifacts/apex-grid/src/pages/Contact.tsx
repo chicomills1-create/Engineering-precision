@@ -255,6 +255,97 @@ export default function Contact() {
           </Form>
         </div>
       </section>
+      {/* Info section — services, details, FAQ */}
+      <section className="py-20 bg-background border-t border-border">
+        <div className="container mx-auto px-4 md:px-8 max-w-3xl">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">
+            Engineering support, coast to coast
+          </h2>
+          <p className="text-lg text-foreground/80 leading-relaxed mb-6">
+            Apex Grid Engineering is a full-service MEP, structural, and civil engineering firm
+            licensed in 49 states. Whether you need a PE stamp on finished plans, a complete
+            ground-up design, or fast engineering calculations to keep a project moving, our team
+            delivers stamped, permit-ready documents with some of the fastest turnarounds in the
+            industry — initial responses within 12 to 24 hours.
+          </p>
+          <p className="text-lg text-foreground/80 leading-relaxed mb-12">
+            We serve architects, general contractors, developers, franchise owners, and property
+            owners nationwide. From single-site tenant improvements to multi-state franchise
+            rollouts and prototype stamping programs, one point of contact covers every
+            jurisdiction your project touches.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <div>
+              <h3 className="text-xl font-display font-bold text-white mb-4">Contact details</h3>
+              <ul className="space-y-3 text-foreground/80">
+                <li>
+                  <span className="font-semibold text-white">Email: </span>
+                  <a href="mailto:info@apexgrideng.com" className="text-primary hover:underline">info@apexgrideng.com</a>
+                </li>
+                <li>
+                  <span className="font-semibold text-white">Phone: </span>(480) 490-0064
+                </li>
+                <li>
+                  <span className="font-semibold text-white">Hours: </span>Monday–Friday, 7:00 AM – 6:00 PM MST
+                </li>
+                <li>
+                  <span className="font-semibold text-white">Service area: </span>All 49 licensed states — Arizona, California, Texas, Florida, and nationwide
+                </li>
+                <li>
+                  <span className="font-semibold text-white">Response time: </span>12–24 hours on every inquiry
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xl font-display font-bold text-white mb-4">What we can do for you</h3>
+              <ul className="space-y-3 text-foreground/80 list-disc list-inside">
+                <li>PE stamping and plan sealing in 49 states</li>
+                <li>MEP, structural, and civil engineering design</li>
+                <li>Engineering calculations and peer review</li>
+                <li>Plan-check corrections and permit expediting</li>
+                <li>Title 24 and energy code compliance</li>
+                <li>Franchise and multi-site rollout engineering</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 className="text-2xl font-display font-bold text-white mb-8">Common questions</h3>
+          <div className="space-y-8">
+            <div>
+              <h4 className="text-lg font-bold text-white mb-2">How fast can I get my plans stamped?</h4>
+              <p className="text-foreground/80 leading-relaxed">
+                Most stamping requests are reviewed within 12 to 24 hours. Straightforward
+                residential and light-commercial plans are often turned around in one to two
+                business days; larger or multi-discipline projects get a firm timeline up front.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-lg font-bold text-white mb-2">Do you work in my state?</h4>
+              <p className="text-foreground/80 leading-relaxed">
+                We hold active engineering licensure in 49 states — every state except Alaska.
+                If your project is in the continental United States, we can stamp it.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-lg font-bold text-white mb-2">What do you need from me to start?</h4>
+              <p className="text-foreground/80 leading-relaxed">
+                Just send your plans and the project location using the form above. Include
+                drawings in PDF or CAD format if you have them, plus any plan-check comments
+                or jurisdiction requirements. We will confirm scope and pricing before any work begins.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-lg font-bold text-white mb-2">Can you handle multi-site or franchise rollouts?</h4>
+              <p className="text-foreground/80 leading-relaxed">
+                Yes — multi-site programs are one of our specialties. We adapt a single
+                prototype across dozens or hundreds of jurisdictions, handling the
+                state-by-state stamping, code variations, and permit coordination under one roof.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
