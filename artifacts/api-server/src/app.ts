@@ -47,12 +47,36 @@ function normalizePathname(value: string): string {
   return withoutQuery === "/" ? "/" : withoutQuery.replace(/\/+$/, "");
 }
 
+// Sitemap families whose URLs are client-rendered dynamic routes (wouter) with
+// no static HTML on disk: franchise / verticals / buildings / specialties /
+// projects / services-local city pages and wave1 metro pages (~2.1M URLs).
+// Preloading all of them into a Set at boot OOMs the server, so they are
+// recognized by path pattern (isDynamicSpaPath) instead. Only the small
+// statically-generated sitemap families are preloaded below.
+const DYNAMIC_SPA_SITEMAP_FAMILY = /^(?:franchise|verticals|buildings|specialties|projects|services-local|wave1)/;
+const DYNAMIC_SPA_PATH_PREFIXES = new Set([
+  "franchise",
+  "verticals",
+  "buildings",
+  "specialties",
+  "projects",
+  "services-local",
+  "wave1",
+]);
+
+function isDynamicSpaPath(pathname: string): boolean {
+  const segs = pathname.replace(/^\/+|\/+$/g, "").split("/");
+  return segs.length === 4 && DYNAMIC_SPA_PATH_PREFIXES.has(segs[0]);
+}
+
 function loadSitemapPaths(): Set<string> {
   const paths = new Set<string>();
   if (!fs.existsSync(staticRoot)) return paths;
 
   for (const filename of fs.readdirSync(staticRoot)) {
     if (!/^sitemap(?:[-_].+)?\.xml$/.test(filename)) continue;
+    const family = filename.replace(/^sitemap[-_]/, "").replace(/\.xml$/, "");
+    if (DYNAMIC_SPA_SITEMAP_FAMILY.test(family)) continue;
     const xml = fs.readFileSync(path.join(staticRoot, filename), "utf8");
     for (const match of xml.matchAll(/<loc>(https:\/\/apexgrideng\.com)?([^<]+)<\/loc>/g)) {
       const pathname = match[2];
@@ -176,6 +200,7 @@ app.use((req, res) => {
     const pathname = normalizePathname(req.path);
     const isKnownSpaPath =
       sitemapPaths.has(pathname) ||
+      isDynamicSpaPath(pathname) ||
       explicitSpaPaths.has(pathname) ||
       pathname.startsWith("/sign-in/") ||
       pathname.startsWith("/sign-up/");
@@ -186,3 +211,4 @@ app.use((req, res) => {
 });
 
 export default app;
+
