@@ -26,6 +26,9 @@ import { lazy, Suspense, useEffect } from 'react';
 import Capabilities from '@/pages/Capabilities';
 import PeStamp from '@/pages/PeStamp';
 import FranchiseCityPage from "./pages/FranchiseCityPage";
+import VerticalCityPage from "./pages/VerticalCityPage";
+import BuildingCityPage from "./pages/BuildingCityPage";
+import SpecialtyCityPage from "./pages/SpecialtyCityPage";
 
 const ClerkArea = lazy(() => import('@/ClerkArea'));
 const ClientArea = lazy(() => import('@/ClientArea'));
@@ -105,7 +108,10 @@ function Router() {
         <Route path="/industries" component={Industries} />
         <Route path="/industries/:slug" component={IndustryDetail} />
         <Route path="/industries/:slug/" component={IndustryDetail} />
-  <Route path="/franchise/:category/:city/:state/" component={FranchiseCityPage} />
+        <Route path="/franchise/:category/:city/:state/" component={FranchiseCityPage} />
+        <Route path="/verticals/:vertical/:city/:state/" component={VerticalCityPage} />
+        <Route path="/buildings/:building/:city/:state/" component={BuildingCityPage} />
+        <Route path="/specialties/:specialty/:city/:state/" component={SpecialtyCityPage} />
         <Route path="/military" component={Military} />
         <Route path="/resources" component={Resources} />
         <Route path="/about" component={About} />

@@ -42,4 +42,37 @@
   <sitemap>
     <loc>https://apexgrideng.com/sitemap-franchise-3.xml</loc>
   </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-verticals-0.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-verticals-1.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-verticals-2.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-verticals-3.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-buildings-0.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-buildings-1.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-buildings-2.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-buildings-3.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-specialties-0.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-specialties-1.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-specialties-2.xml</loc>
+  </sitemap>
 </sitemapindex>
