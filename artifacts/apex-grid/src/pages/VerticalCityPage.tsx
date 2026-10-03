@@ -7,7 +7,7 @@ import { useMemo } from "react";
  * Serves all Tier 1 industry vertical × city combinations dynamically.
  * Example: /verticals/data-center/austin/texas/
  *
- * 10 verticals × 19,355 cities = 193,550 URLs
+ * 24 verticals × 19,355 cities = 464,520 URLs
  */
 
 interface VerticalInfo {
@@ -167,6 +167,216 @@ const VERTICALS: Record<string, VerticalInfo> = {
       "Site civil: grading, ADA stalls, lighting photometrics, drainage, and striping plans",
       "Fleet depots: high-count charger layouts, managed charging, and depot power infrastructure",
       "Permitting: plan sets, electrical calcs, and AHJ submittals tuned for fast approval",
+    ],
+  },
+  "healthcare": {
+    name: "Healthcare",
+    title: "Healthcare Facility Engineering",
+    description:
+      "MEP and structural engineering for the full healthcare spectrum — hospitals, outpatient clinics, surgery centers, behavioral health, and medical office buildings. Medical gas distribution (oxygen, medical air, vacuum, WAGD), emergency power per NEC Articles 700/701/702, and infection-control HVAC with isolation rooms and pressure relationships that protect patients. OSHPD/HCAI-grade seismic and plan-review rigor applied in every state, with phased occupied-renovation engineering that keeps facilities running during construction. PE-stamped drawings accepted by AHJs in all 49 states.",
+    edge:
+      "Healthcare construction happens inside buildings that never close. We engineer ICRA barriers, interim life-safety measures, and phased MEP cutovers into every package — so the ED stays open, the ORs stay sterile, and your schedule survives the real world.",
+    services: [
+      "Medical gas systems: oxygen, medical air, vacuum, nitrous, and WAGD with zone valves and alarms",
+      "Emergency power: generator plants, automatic transfer switches, and critical branch circuiting",
+      "HVAC: isolation rooms, OR airflow, pharmacy compounding, and airborne infection control",
+      "Structural: seismic design, equipment anchorage, and vibration control for imaging suites",
+      "Life safety: fire alarm, voice evacuation, smoke control, and defend-in-place egress design",
+    ],
+  },
+  "education": {
+    name: "Education",
+    title: "Education Facility Engineering",
+    description:
+      "Engineering for K-12 schools, universities, and training facilities — new campuses, classroom wings, STEM labs, and occupied summer renovations. Classroom acoustics and daylighting that support learning, high-efficiency HVAC sized for real occupancy schedules, and security vestibules with access control integration. Gymnasium and auditorium structures, commercial kitchens for school nutrition programs, and technology infrastructure for 1:1 device environments — with PE stamps in all 49 states.",
+    edge:
+      "School construction lives on a 10-week summer clock. We release permit and bid packages on academic-calendar timing, engineer summer-only utility cutovers, and design occupied-building phasing that keeps classes in session and contractors moving.",
+    services: [
+      "HVAC: high-efficiency systems, demand-control ventilation, and classroom acoustics",
+      "Electrical: classroom power, LED lighting, emergency egress, and technology backbone",
+      "Plumbing: restroom groups, science lab rough-in, and commercial kitchen support",
+      "Structural: gym and auditorium framing, storm shelters, and seismic upgrades",
+      "Security and access: vestibule design, access control, camera rough-in, and mass notification",
+    ],
+  },
+  "hospitality": {
+    name: "Hospitality",
+    title: "Hospitality Engineering",
+    description:
+      "Engineering for hotels, resorts, and hospitality developments — new builds, flag conversions, and PIP-driven renovations. Guest-room MEP with quiet HVAC and reliable hot water, lobby and amenity spaces with architectural lighting integration, and commercial kitchens engineered for real throughput. Pool and spa systems, laundry facilities, parking structures, and brand-standard compliance for major flags — stamped engineering in 49 states.",
+    edge:
+      "Hotel renovations happen over occupied floors. We sequence MEP riser replacements floor-by-floor, engineer after-hours cutovers that keep guests sleeping, and deliver PIP packages that satisfy the flag inspector and the general manager alike.",
+    services: [
+      "Guest-room MEP: quiet fan-coil and VRF systems, plumbing stacks, and reliable domestic hot water",
+      "Commercial kitchens: grease exhaust, makeup air, gas distribution, and health-code compliance",
+      "Pool and spa: natatorium dehumidification, pool equipment, and aquatic safety systems",
+      "Electrical: emergency power, lighting design, EV charging, and brand-standard compliance",
+      "Structural: podium and tower framing, amenity decks, and renovation structural assessments",
+    ],
+  },
+  "multifamily": {
+    name: "Multifamily",
+    title: "Multifamily Residential Engineering",
+    description:
+      "Engineering for apartment communities, condominiums, and mixed-use residential — garden-style, mid-rise, and high-rise. Unit MEP with individual metering, corridor ventilation and pressurization, and amenity spaces engineered like hospitality. Podium structures, parking garage ventilation, fire protection for Type III and Type V construction, and energy-code compliance that protects your pro forma — PE-stamped in 49 states.",
+    edge:
+      "Multifamily margins live in the details — one extra plumbing stack per unit times 300 units is real money. We value-engineer MEP distribution for repeatability across unit plans while keeping acoustic and energy performance where residents feel it.",
+    services: [
+      "Unit MEP: stacked plumbing, individual HVAC, sub-metering, and electrical distribution",
+      "Corridor and garage systems: ventilation, pressurization, and CO monitoring",
+      "Fire protection: sprinkler design for Type III/V, standpipes, and fire alarm",
+      "Structural: podium slabs, wood-frame engineering, and lateral design for wind and seismic",
+      "Energy compliance: envelope coordination, lighting, and Title 24 / IECC documentation",
+    ],
+  },
+  "senior-living": {
+    name: "Senior Living",
+    title: "Senior Living Engineering",
+    description:
+      "Engineering for independent living, assisted living, and memory care communities. Resident-room MEP designed for comfort and accessibility, nurse-call and wander-management infrastructure, and commercial kitchens serving dining programs. Emergency power for life-safety and resident comfort loads, gentle lighting design for aging eyes, and HVAC zoning that keeps memory-care wings secure and comfortable — with PE stamps in 49 states.",
+    edge:
+      "Senior living is healthcare-adjacent hospitality — residents notice everything. We engineer quiet systems, glare-free lighting, and fail-safe emergency power, because comfort and reliability are the product your residents are buying.",
+    services: [
+      "Resident MEP: quiet HVAC, accessible plumbing fixtures, and individual climate control",
+      "Life-safety systems: nurse call, wander management, fire alarm, and emergency power",
+      "Dining and kitchen: commercial kitchens, servery support, and dining-room HVAC",
+      "Lighting: circadian-friendly design, wayfinding, and fall-prevention illumination",
+      "Structural: wood-frame and podium engineering, plus renovation assessments for conversions",
+    ],
+  },
+  "student-housing": {
+    name: "Student Housing",
+    title: "Student Housing Engineering",
+    description:
+      "Engineering for purpose-built student housing — off-campus apartments, residence halls, and mixed-use student developments. High-density unit MEP with individual metering and robust finishes, amenity spaces (fitness, study, social) engineered for heavy use, and parking structures with EV readiness. Fast-track delivery for August move-in deadlines, durable systems that survive student wear, and energy performance that keeps operating costs down — stamped in 49 states.",
+    edge:
+      "Student housing has exactly one non-negotiable: August. We engineer to the academic calendar — releasing packages for summer construction sprints, designing systems that commission in weeks, and building durability in so turnover season doesn't eat your maintenance budget.",
+    services: [
+      "Unit MEP: high-density plumbing, individual HVAC, metering, and robust fixture selection",
+      "Amenity engineering: fitness ventilation, study lounges, pools, and social spaces",
+      "Electrical: high-capacity distribution, lighting, access control, and Wi-Fi backbone",
+      "Fire protection: sprinkler and alarm design for dense residential occupancy",
+      "Structural: podium and mid-rise framing, amenity decks, and parking structures",
+    ],
+  },
+  "industrial": {
+    name: "Industrial",
+    title: "Industrial Facility Engineering",
+    description:
+      "MEP and structural engineering for industrial buildings — warehouses, flex space, light manufacturing, and distribution. Clear-height structural design, dock and grade-door coordination, ESFR fire protection, and power distribution sized for real tenant loads. Tilt-up and PEMB structures, truck-court civil design, and speculative shells engineered for fast tenant improvements — PE-stamped in 49 states.",
+    edge:
+      "Industrial buildings lease on speed and flexibility. We engineer speculative shells with oversized power, generous clear heights, and demising-ready MEP — so your building signs tenants while competitors are still in plan check.",
+    services: [
+      "Structural: tilt-up panels, PEMB frames, long-span joists, and heavy floor loading",
+      "Fire protection: ESFR sprinklers, fire pumps, and rack-storage protection",
+      "Electrical: service sizing for tenant loads, dock power, and lighting to IES levels",
+      "Site civil: truck courts, trailer parking, drainage, and dock-equipment coordination",
+      "HVAC: warehouse ventilation, office conditioning, and process exhaust rough-in",
+    ],
+  },
+  "logistics": {
+    name: "Logistics",
+    title: "Logistics Facility Engineering",
+    description:
+      "Engineering for logistics and supply-chain facilities — regional distribution hubs, cross-dock terminals, and last-mile depots. High-bay structures with leveler and restraint coordination, ESFR sprinkler systems for high-piled storage, and yard design for tractor-trailer circulation. Conveyor and sortation power, fleet EV charging infrastructure, and automation-ready electrical distribution — stamped for 49-state deployment.",
+    edge:
+      "Logistics buildings are machines for moving freight. We engineer the full machine — dock equipment, yard flow, automation power, and charging — so your throughput numbers work on day one, not after a retrofit.",
+    services: [
+      "Dock systems: levelers, restraints, seals, and dock-door power and controls",
+      "Fire protection: ESFR systems, in-rack sprinklers, and high-piled storage compliance",
+      "Electrical: sortation power, conveyor distribution, and fleet charging infrastructure",
+      "Structural: high-bay framing, mezzanines, and rack-anchorage engineering",
+      "Site: truck courts, trailer staging, fuel islands, and stormwater management",
+    ],
+  },
+  "distribution-center": {
+    name: "Distribution Center",
+    title: "Distribution Center Engineering",
+    description:
+      "Engineering for large-format distribution centers — 500,000+ SF fulfillment and bulk-distribution facilities. 40-foot clear-height structures, robotic and AS/RS-ready floor flatness, and power distribution for automation at scale. ESFR fire protection with smoke and heat venting, massive truck courts with 190-foot depths, and employee amenity areas — with PE stamps accepted by AHJs in all 49 states.",
+    edge:
+      "Modern distribution centers are half warehouse, half data center — automation draws serious power and generates serious heat. We engineer the electrical backbone and thermal management that let robots and people work the same floor.",
+    services: [
+      "Structural: 40-ft clear heights, super-flat floors, and racking-anchorage design",
+      "Automation power: AS/RS, robotics, and conveyor electrical distribution",
+      "Fire protection: ESFR, smoke/heat vents, and fire pump systems for high-piled storage",
+      "HVAC: destratification, office conditioning, and battery-charging ventilation",
+      "Site civil: deep truck courts, rail spurs, trailer parking, and drainage",
+    ],
+  },
+  "manufacturing": {
+    name: "Manufacturing",
+    title: "Manufacturing Facility Engineering",
+    description:
+      "Engineering for manufacturing plants — discrete assembly, process manufacturing, and advanced production facilities. Heavy structural design for cranes, presses, and process equipment; process utilities including compressed air, process water, and specialty gases. Production-floor HVAC with makeup air and exhaust balance, dust collection and fume extraction, and electrical distribution for production lines — stamped in 49 states.",
+    edge:
+      "Manufacturing engineering is production engineering — every design decision lands on throughput. We coordinate utilities to your process flow, engineer crane and equipment loads into the structure from day one, and phase construction so lines keep running.",
+    services: [
+      "Process utilities: compressed air, process water, gases, vacuum, and chemical distribution",
+      "Structural: crane girders, equipment foundations, mezzanines, and vibration isolation",
+      "HVAC: makeup air, process exhaust, dust collection, and production-floor ventilation",
+      "Electrical: production-line power, MCCs, emergency power, and power quality",
+      "Life safety: hazardous materials compliance, fire protection, and emergency egress",
+    ],
+  },
+  "cold-storage": {
+    name: "Cold Storage",
+    title: "Cold Storage Engineering",
+    description:
+      "Engineering for refrigerated warehouses and cold-chain facilities — freezer, cooler, and multi-temp distribution. Ammonia and CO2 refrigeration systems, insulated metal panel envelopes with vapor barriers, and underfloor heating to prevent frost heave. Blast freezing, tempering rooms, dock refrigeration, and backup power that protects inventory through outages — PE-stamped in 49 states.",
+    edge:
+      "Cold storage fails at the envelope and the power feed — one warm dock door or one dead compressor and product is lost. We engineer redundant refrigeration, sealed thermal envelopes, and emergency power sized for the full cooling load.",
+    services: [
+      "Refrigeration: ammonia, CO2, and synthetic systems with redundancy and controls",
+      "Envelope: insulated panels, vapor barriers, and thermal-break detailing",
+      "Structural: frost-heave protection, underfloor heat, and rack-loading design",
+      "Electrical: emergency power for full refrigeration load and dock equipment",
+      "Fire protection: dry and pre-action systems rated for freezer environments",
+    ],
+  },
+  "food-processing": {
+    name: "Food Processing",
+    title: "Food Processing Facility Engineering",
+    description:
+      "Engineering for food and beverage manufacturing — USDA/FDA-inspected plants, commercial bakeries, beverage bottling, and protein processing. Sanitary design with washdown-rated MEP, food-grade process utilities (steam, chilled water, compressed air), and floor drainage engineered for sanitation. Refrigeration, ammonia safety compliance (PSM/RMP), and production-floor HVAC that controls condensation and airborne contamination — stamped in 49 states.",
+    edge:
+      "Food plants get audited by inspectors who can shut you down. We design to USDA and FDA expectations from the first sketch — sloped floors to drains, sealed penetrations, washdown-rated everything — so your plant passes inspection and stays in production.",
+    services: [
+      "Sanitary MEP: washdown-rated electrical, sloped drainage, and sealed penetrations",
+      "Process utilities: culinary steam, chilled water, food-grade air, and CIP systems",
+      "Refrigeration: ammonia/CO2 systems with PSM/RMP compliance and safety controls",
+      "HVAC: condensation control, positive-pressure packaging rooms, and odor control",
+      "Structural: equipment platforms, mezzanines, and vibration isolation for processing lines",
+    ],
+  },
+  "cannabis": {
+    name: "Cannabis",
+    title: "Cannabis Facility Engineering",
+    description:
+      "Engineering for licensed cannabis cultivation, extraction, and processing facilities. Cultivation HVAC with precise VPD control, dehumidification, and odor mitigation; extraction rooms with C1D1/C1D2 hazardous-location electrical and ventilation. CO2 enrichment, irrigation and fertigation utilities, security infrastructure per state regulations, and energy systems designed around cultivation's heavy electrical loads — stamped in 49 states where licensed.",
+    edge:
+      "Cannabis facilities are equal parts greenhouse, laboratory, and fortress — and regulators inspect all three. We engineer the environmental precision your crop needs, the hazardous-location safety your extraction demands, and the security infrastructure your license requires.",
+    services: [
+      "Cultivation HVAC: dehumidification, VPD control, and multi-zone environmental systems",
+      "Extraction safety: C1D1/C1D2 electrical, ventilation, and gas detection",
+      "Odor control: carbon filtration, negative-pressure design, and exhaust treatment",
+      "Electrical: high-capacity service for lighting loads, backup power, and metering",
+      "Security and compliance: camera rough-in, access control, and state-regulation layouts",
+    ],
+  },
+  "solar": {
+    name: "Solar",
+    title: "Solar Project Engineering",
+    description:
+      "Engineering for solar developments — utility-scale farms, commercial rooftop arrays, and carport canopies. Structural analysis of roof and ground-mount capacity, ballasted and attached racking design, and electrical engineering for inverters, combiners, and medium-voltage interconnection. Geotechnical coordination for driven piles, drainage and access-road civil design, and AHJ permit packages — with PE stamps in 49 states.",
+    edge:
+      "Solar projects die in interconnection queues and structural surprises. We front-load the engineering that matters — roof capacity verification, utility coordination, and permit-ready plan sets — so your project moves from PPA to permission to build without rework.",
+    services: [
+      "Structural: roof load analysis, racking design, and foundation engineering for ground-mount",
+      "Electrical: string design, inverter and combiner layouts, and MV interconnection",
+      "Utility coordination: interconnection applications, studies, and meter requirements",
+      "Civil: grading, drainage, access roads, and erosion control for solar farms",
+      "Permitting: structural calcs, electrical plans, and AHJ submittal packages",
     ],
   },
 };

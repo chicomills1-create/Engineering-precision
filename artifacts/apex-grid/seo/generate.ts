@@ -3175,6 +3175,40 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   }
 
   // ── Write individual sitemaps ────────────────────────────────────────────
+  // ── Batch city sitemaps: <prefix>/<item>/<city>/<state> (franchise + SEO batches) ──
+  // Regenerated deterministically here so `seo:generate` keeps these files and
+  // their sitemap_index.xml entries instead of wiping them. URL order matches
+  // the static files: items outer loop, cities inner loop, 50k chunks.
+  const CITY_SLUG_PAIRS: string[][] = JSON.parse(
+    fs.readFileSync(path.join(__dirname, "city-slugs.json"), "utf8")
+  );
+  const CITY_SITEMAP_GROUPS: Array<{ prefix: string; nameBase: string; slugs: string[] }> = [
+    { prefix: "franchise", nameBase: "sitemap-franchise", slugs: ["fast-food-franchise", "coffee-shop-franchise", "fitness-franchise", "retail-franchise", "restaurant-franchise", "hotel-franchise", "automotive-franchise", "healthcare-franchise", "education-franchise", "convenience-store-franchise"] },
+    { prefix: "verticals", nameBase: "sitemap-verticals", slugs: ["data-center", "semiconductor", "life-sciences", "biotech", "pharmaceutical", "aerospace", "defense", "battery-storage", "microgrid", "ev-charging"] },
+    { prefix: "verticals", nameBase: "sitemap-verticals-t2", slugs: ["healthcare", "education", "hospitality", "multifamily", "senior-living", "student-housing", "industrial", "logistics", "distribution-center", "manufacturing", "cold-storage", "food-processing", "cannabis", "solar"] },
+    { prefix: "projects", nameBase: "sitemap-projects", slugs: ["new-construction", "renovation", "tenant-improvement", "building-addition", "adu-accessory-dwelling", "commercial-remodel", "historic-renovation", "adaptive-reuse", "ground-up-construction", "design-build", "fast-track-construction", "phased-construction", "shell-buildout", "core-and-shell", "interior-fit-out", "building-expansion"] },
+    { prefix: "services-local", nameBase: "sitemap-services-local", slugs: ["electrical-engineering", "plumbing-engineering", "hvac-engineering", "fire-protection-engineering", "energy-modeling", "commissioning-engineering", "structural-analysis", "seismic-retrofit", "building-envelope", "lighting-design", "power-systems", "building-controls", "water-systems", "wastewater-systems", "stormwater-management"] },
+    { prefix: "buildings", nameBase: "sitemap-buildings", slugs: ["data-center-building", "hospital", "healthcare-facility", "university-building", "industrial-facility", "manufacturing-facility", "warehouse", "multifamily-building", "apartment-building", "hotel-building"] },
+    { prefix: "buildings", nameBase: "sitemap-buildings-t2", slugs: ["office-building", "retail-building", "restaurant-building", "school-building", "church-building", "library-building", "museum-building", "theater-building", "stadium-building", "airport-terminal", "parking-structure", "medical-office", "dental-office", "veterinary-clinic", "bank-building", "courthouse-building", "fire-station", "police-station"] },
+    { prefix: "specialties", nameBase: "sitemap-specialties", slugs: ["pe-stamping", "plan-check-corrections", "title-24-compliance", "feasibility-study", "permit-expediting", "energy-code-compliance"] },
+    { prefix: "specialties", nameBase: "sitemap-specialties-t2", slugs: ["structural-peer-review", "mep-peer-review", "code-consulting", "accessibility-compliance", "leed-certification", "net-zero-design", "envelope-commissioning", "forensic-engineering", "expert-witness"] },
+  ];
+  const citySitemapEntries: Array<{ name: string; urls: string[] }> = [];
+  for (const group of CITY_SITEMAP_GROUPS) {
+    const allUrls: string[] = [];
+    for (const slug of group.slugs) {
+      for (const pair of CITY_SLUG_PAIRS) {
+        allUrls.push(u(`${SITE}/${group.prefix}/${slug}/${pair[0]}/${pair[1]}/`, today, "monthly", "0.6"));
+      }
+    }
+    for (let i = 0; i < allUrls.length; i += 50000) {
+      citySitemapEntries.push({
+        name: `${group.nameBase}-${i / 50000}.xml`,
+        urls: allUrls.slice(i, i + 50000),
+      });
+    }
+  }
+
   const sitemaps: Array<{ name: string; urls: string[] }> = [
     { name: "sitemap-core.xml",       urls: coreUrls },
     { name: "sitemap-services.xml",   urls: servicesUrls },
@@ -3193,6 +3227,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
       name: "sitemap-general-contracting-locations.xml",
       urls: verticalLocationUrls.get("general-contracting") ?? [],
     },
+    ...citySitemapEntries,
   ];
   const seenUrls = new Set<string>();
   const duplicateUrls: string[] = [];

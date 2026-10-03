@@ -7,7 +7,7 @@ import { useMemo } from "react";
  * Serves all engineering specialty × city combinations dynamically.
  * Example: /specialties/pe-stamping/austin/texas/
  *
- * 6 specialties × 19,355 cities = 116,130 URLs
+ * 15 specialties × 19,355 cities = 290,325 URLs
  */
 
 interface SpecialtyInfo {
@@ -107,6 +107,141 @@ const SPECIALTIES: Record<string, SpecialtyInfo> = {
       "State amendments: NYCECC, WSEC, and other state-specific energy code variants",
       "Lighting and controls: power density, daylighting, and control-sequence compliance",
       "Commissioning: Cx specifications, functional testing support, and documentation",
+    ],
+  },
+  "structural-peer-review": {
+    name: "Structural Peer Review",
+    title: "Structural Peer Review Services",
+    description:
+      "Independent structural peer review by licensed PEs — a second set of expert eyes on structural designs before they become expensive field problems. Design-criteria verification, load-path and lateral-system review, connection and detailing checks, and constructability assessment. Required by many jurisdictions for complex structures and valued by owners who want risk off the table — available in 49 states.",
+    edge:
+      "Peer review isn't criticism — it's cheap insurance. Finding a load-path gap or a connection detail that doesn't work costs a few hours at a desk; finding it after the steel is up costs a fortune. We review like we're signing it, because our professional judgment is on the line too.",
+    services: [
+      "Design review: criteria, codes, and load verification against the structural drawings",
+      "Lateral systems: wind and seismic load-path and detailing review",
+      "Connections: moment-frame, braced-frame, and collector connection checks",
+      "Constructability: detailing review for buildability and trade coordination",
+      "Report: stamped review letters and comment resolution for AHJs and owners",
+    ],
+  },
+  "mep-peer-review": {
+    name: "MEP Peer Review",
+    title: "MEP Peer Review Services",
+    description:
+      "Independent MEP peer review by licensed engineers — verifying mechanical, electrical, and plumbing designs for code compliance, coordination, and performance before construction. System sizing verification, controls-sequence review, energy-code compliance checks, and cross-discipline coordination assessment. The quality gate sophisticated owners require — in 49 states.",
+    edge:
+      "MEP systems are where buildings fail quietly — oversized equipment short-cycling, controls fighting each other, ventilation that never met code. A peer review catches the design-stage errors that become decade-long operating costs, for a fraction of the price.",
+    services: [
+      "System sizing: load-calc verification and equipment selection review",
+      "Controls: sequence-of-operation review for implementability and performance",
+      "Energy code: Title 24, IECC, and ASHRAE 90.1 compliance verification",
+      "Coordination: cross-discipline clash and routing review",
+      "Report: stamped findings with prioritized corrective recommendations",
+    ],
+  },
+  "code-consulting": {
+    name: "Code Consulting",
+    title: "Building Code Consulting Services",
+    description:
+      "Building code consulting by licensed engineers — navigating IBC, IECC, NEC, NFPA, and local amendments without the guesswork. Code-path analysis, alternate-means-and-methods requests, occupancy and egress studies, and AHJ negotiation support. When the code is ambiguous or the project is unusual, we find the compliant path that keeps the project moving — in 49 states.",
+    edge:
+      "Code officials respect engineers who speak their language — chapter and verse, with the analysis to back it up. We don't argue code; we document it, propose compliant alternatives, and get to yes with the AHJ while your schedule stays intact.",
+    services: [
+      "Code analysis: IBC, IECC, NEC, and NFPA compliance pathfinding",
+      "Alternate methods: AMMR submittals and performance-based compliance",
+      "Occupancy and egress: studies, occupant-load analysis, and exiting plans",
+      "AHJ negotiation: plan-check response strategy and meeting representation",
+      "Due diligence: code-risk assessment for acquisitions and developments",
+    ],
+  },
+  "accessibility-compliance": {
+    name: "Accessibility Compliance",
+    title: "ADA Accessibility Compliance Services",
+    description:
+      "ADA and accessibility compliance engineering — making buildings genuinely accessible, not just technically permitted. ADA Standards and FHA compliance review, CASp-style deficiency surveys, path-of-travel and restroom upgrade design, and Title III barrier-removal planning. Lawsuit-risk reduction for owners and real usability for occupants — in 49 states.",
+    edge:
+      "Accessibility lawsuits don't target bad actors — they target measurable barriers. We survey like a plaintiff's expert would, prioritize fixes by risk and cost, and engineer upgrades that satisfy the standards and actually work for people with disabilities.",
+    services: [
+      "Surveys: ADA deficiency identification and prioritized remediation plans",
+      "Restroom design: compliant layouts, fixtures, and clearances",
+      "Path of travel: entries, ramps, parking, and circulation upgrades",
+      "Plan review: accessibility compliance check of new-construction drawings",
+      "Barrier removal: Title III readily-achievable planning and cost opinions",
+    ],
+  },
+  "leed-certification": {
+    name: "LEED Certification",
+    title: "LEED Certification Consulting",
+    description:
+      "LEED certification consulting and energy prerequisite engineering — guiding projects to Certified, Silver, Gold, or Platinum. Credit strategy and feasibility analysis, energy modeling for EA credits, commissioning coordination, and LEED documentation management. We engineer the MEP and energy systems that earn the points, not just the paperwork — in 49 states.",
+    edge:
+      "LEED points are cheapest when they're designed in, not bolted on. We run the credit strategy during schematic design — when energy, water, and materials decisions still cost nothing — and engineer the systems that make certification a natural outcome, not a rescue mission.",
+    services: [
+      "Credit strategy: feasibility, scorecard development, and certification roadmaps",
+      "Energy: modeling, commissioning, and EA prerequisite/credit documentation",
+      "MEP engineering: systems designed to earn energy and IEQ credits",
+      "Documentation: LEED Online submittal preparation and review responses",
+      "Existing buildings: LEED O+M certification and recertification support",
+    ],
+  },
+  "net-zero-design": {
+    name: "Net Zero Design",
+    title: "Net Zero Energy Design Services",
+    description:
+      "Net-zero-energy building design — engineering buildings that produce as much energy as they consume. Load-reduction-first MEP design, envelope optimization, all-electric system strategies, and on-site renewable sizing (solar PV, geothermal). Energy modeling to prove the zero balance, utility interconnection coordination, and monitoring-based verification — by licensed engineers in 49 states.",
+    edge:
+      "Net zero is a math problem with a construction budget — and the math only works if efficiency comes before renewables. We drive loads down first (envelope, HVAC, lighting), then size the solar array for what's left, so the zero-energy target survives value engineering.",
+    services: [
+      "Load reduction: envelope, HVAC, and lighting optimization for minimal EUI",
+      "All-electric design: heat-pump systems, induction, and fossil-fuel elimination",
+      "Renewable sizing: solar PV array design and production modeling",
+      "Energy modeling: zero-energy balance proof and EUI targeting",
+      "Verification: metering, monitoring, and performance-period support",
+    ],
+  },
+  "envelope-commissioning": {
+    name: "Envelope Commissioning",
+    title: "Building Envelope Commissioning",
+    description:
+      "Building enclosure commissioning (BECx) — verifying the air barrier, waterproofing, and thermal envelope perform as designed. Enclosure commissioning plans, submittal and mockup review, field testing (blower-door, water-spray, infrared), and construction observation. NIBS Guideline 3-based process for new construction and major renovations — in 49 states.",
+    edge:
+      "The envelope is the building's largest system and the least tested — until it leaks. We test the air barrier and waterproofing while they're still accessible, witness the details that drawings can't fully describe, and document an enclosure that performs for decades.",
+    services: [
+      "BECx plans: enclosure commissioning specifications and test protocols",
+      "Mockup review: performance mockup design review and test witnessing",
+      "Field testing: air-barrier, water-penetration, and thermographic testing",
+      "Observation: critical-detail inspections during enclosure construction",
+      "Documentation: enclosure commissioning reports for LEED and owner turnover",
+    ],
+  },
+  "forensic-engineering": {
+    name: "Forensic Engineering",
+    title: "Forensic Engineering Investigation",
+    description:
+      "Forensic engineering investigation of building failures — structural distress, water intrusion, MEP system failures, and construction defects. Field investigation, non-destructive testing coordination, failure-mechanism analysis, and repair-design engineering. Expert documentation for insurance claims and litigation support — by licensed PEs in 49 states.",
+    edge:
+      "Forensic work demands engineering judgment under adversarial scrutiny — every conclusion has to survive the other side's expert. We investigate methodically, document relentlessly, and opine only where the evidence supports it, which is why our findings hold up.",
+    services: [
+      "Failure investigation: structural, envelope, and MEP failure analysis",
+      "Field testing: NDT coordination, moisture mapping, and load testing",
+      "Cause determination: failure-mechanism analysis with documented evidence",
+      "Repair design: engineered remediation and restoration drawings",
+      "Documentation: reports suitable for insurance and legal proceedings",
+    ],
+  },
+  "expert-witness": {
+    name: "Expert Witness",
+    title: "Engineering Expert Witness Services",
+    description:
+      "Licensed PE expert-witness services for construction litigation — standard-of-care opinions, defect analysis, and delay and cost evaluation. Deposition and trial testimony, expert reports meeting jurisdictional requirements, and case consultation from filing through verdict. Our experts are practicing design engineers, not professional witnesses — credible because we do the work we opine about, in 49 states.",
+    edge:
+      "Juries and judges can tell the difference between a hired gun and a working engineer. Our experts stamp buildings for a living — the same judgment we apply to your case is the judgment building departments trust every day, and that credibility shows on the stand.",
+    services: [
+      "Standard of care: professional-negligence opinions by practicing PEs",
+      "Defect analysis: construction-defect investigation and repair-cost opinions",
+      "Reports: expert disclosures meeting federal and state requirements",
+      "Testimony: deposition and trial testimony with demonstrative support",
+      "Consultation: case strategy, document review, and rebuttal analysis",
     ],
   },
 };

@@ -7,7 +7,7 @@ import { useMemo } from "react";
  * Serves all building type × city combinations dynamically.
  * Example: /buildings/hospital/austin/texas/
  *
- * 10 building types × 19,355 cities = 193,550 URLs
+ * 28 building types × 19,355 cities = 541,940 URLs
  */
 
 interface BuildingInfo {
@@ -167,6 +167,276 @@ const BUILDINGS: Record<string, BuildingInfo> = {
       "Food and beverage: commercial kitchen MEP, grease waste, and bar/restaurant support",
       "Pool and spa: dehumidification, pool equipment, and sauna/steam systems",
       "Brand compliance: engineering to major-flag standards, PIP renovations, and prototype adaptation",
+    ],
+  },
+  "office-building": {
+    name: "Office Building",
+    title: "Office Building Engineering",
+    description:
+      "MEP and structural engineering for office buildings — low-rise, mid-rise, and high-rise commercial office. Floor-plate MEP with flexible HVAC zoning for tenant churn, raised-floor and underfloor air options, and base-building systems sized for dense occupancy. Lobby and amenity engineering, parking structure integration, and energy performance that keeps the building competitive — PE-stamped in 49 states.",
+    edge:
+      "Office buildings compete on operating costs and tenant experience. We engineer efficient central plants, flexible floor systems that absorb tenant changes without base-building work, and lobbies that lease space — the engineering behind full occupancy.",
+    services: [
+      "HVAC: VAV and underfloor air distribution with flexible tenant zoning",
+      "Electrical: base-building service, tenant metering, and emergency power",
+      "Structural: steel and concrete framing, long-span floors, and lateral design",
+      "Plumbing: core restrooms, tenant rough-in, and water-efficient fixtures",
+      "Amenity: lobbies, fitness centers, conference facilities, and rooftop decks",
+    ],
+  },
+  "retail-building": {
+    name: "Retail Building",
+    title: "Retail Building Engineering",
+    description:
+      "Engineering for retail buildings — shopping centers, power centers, grocery-anchored developments, and standalone stores. Storefront structural design, rooftop-unit HVAC with tenant zoning, and parking-lot lighting and civil design. Grocery refrigeration coordination, restaurant-tenant grease and gas rough-in, and fast-track delivery for retail opening dates — PE-stamped in 49 states.",
+    edge:
+      "Retail runs on opening dates — a missed holiday season is a lost year. We engineer retail shells with tenant-ready infrastructure (power, gas, grease rough-in) and deliver permit sets on retail timelines, so stores open when the lease says they open.",
+    services: [
+      "Shell structure: long-span framing, storefront support, and canopy design",
+      "HVAC: rooftop units, tenant zoning, and makeup air for food tenants",
+      "Site: parking lots, lighting photometrics, signage power, and drainage",
+      "Tenant infrastructure: grease waste, gas, and power rough-in for restaurant pads",
+      "Grocery: refrigeration heat rejection, dock coordination, and backup power",
+    ],
+  },
+  "restaurant-building": {
+    name: "Restaurant Building",
+    title: "Restaurant Building Engineering",
+    description:
+      "Engineering for standalone restaurants and food-service buildings — quick-service, fast-casual, and full-service dining. Commercial kitchen MEP: Type I grease exhaust with makeup air, gas distribution, and grease interceptors. Dining-room HVAC and acoustics, drive-thru stacking and site design, walk-in refrigeration, and health-department-compliant plumbing — PE-stamped in 49 states.",
+    edge:
+      "Restaurants are MEP-intensive buildings wearing a hospitality costume — the kitchen is an industrial process. We engineer the exhaust, gas, grease, and refrigeration backbone that health inspectors approve and kitchen crews can actually work in.",
+    services: [
+      "Kitchen exhaust: Type I hoods, grease duct, makeup air, and pollution control",
+      "Gas and plumbing: distribution, interceptors, and health-code compliance",
+      "Refrigeration: walk-ins, remote condensing units, and heat rejection",
+      "Dining HVAC: comfort, acoustics, and odor control between kitchen and dining",
+      "Site: drive-thru lanes, stacking, patio utilities, and grease-trap access",
+    ],
+  },
+  "school-building": {
+    name: "School Building",
+    title: "School Building Engineering",
+    description:
+      "Engineering for K-12 school buildings — elementary, middle, and high school facilities. Classroom HVAC with CO2-based demand ventilation, acoustic design for learning environments, and security vestibules with electronic access. Gymnasiums, cafeterias with commercial kitchens, science labs, and storm-shelter design — with PE stamps in 49 states.",
+    edge:
+      "Schools get one construction window: summer. We engineer for the academic calendar — permit packages timed to board approvals, summer-only utility cutovers, and systems simple enough for district maintenance staff to run for 30 years.",
+    services: [
+      "Classroom HVAC: ventilation, acoustics, and energy-efficient system design",
+      "Electrical: classroom power, lighting, emergency egress, and technology",
+      "Gym and cafeteria: long-span structures, kitchen MEP, and bleacher support",
+      "Security: vestibules, access control, camera rough-in, and mass notification",
+      "Storm shelters: ICC 500 safe-room design and structural hardening",
+    ],
+  },
+  "church-building": {
+    name: "Church Building",
+    title: "Church Building Engineering",
+    description:
+      "Engineering for churches and worship facilities — sanctuaries, fellowship halls, education wings, and multi-purpose worship centers. Sanctuary acoustics and HVAC designed for variable occupancy (50 on Wednesday, 500 on Sunday), theatrical lighting and AVL infrastructure, and commercial kitchens for fellowship dining. Phased construction for growing congregations — PE-stamped in 49 states.",
+    edge:
+      "Churches are built by volunteers' donations and operated by volunteers — every dollar matters twice. We engineer systems that are efficient to run, simple to maintain, and phased to match capital campaigns, so the building serves the mission instead of consuming it.",
+    services: [
+      "Sanctuary HVAC: variable-occupancy design, quiet operation, and zoned control",
+      "Acoustics and AVL: sound reinforcement, theatrical lighting, and broadcast rough-in",
+      "Structural: clear-span sanctuaries, balcony framing, and steeple engineering",
+      "Fellowship: commercial kitchens, multi-purpose halls, and education wings",
+      "Phasing: master-planned expansions timed to congregation growth",
+    ],
+  },
+  "library-building": {
+    name: "Library Building",
+    title: "Library Building Engineering",
+    description:
+      "Engineering for public and academic libraries — reading rooms, stacks, children's areas, and community meeting spaces. Preservation-grade HVAC for archives and special collections, quiet systems for reading environments, and lighting designed for long study sessions. High-density stack structural loading, public computing infrastructure, and flexible community spaces — PE-stamped in 49 states.",
+    edge:
+      "Libraries are civic living rooms — they have to be comfortable for hours, quiet enough to think, and tough enough for thousands of daily visitors. We engineer the invisible comfort (air quality, acoustics, light) that makes a library feel like the best room in town.",
+    services: [
+      "HVAC: quiet systems, preservation environments for archives, and zoned control",
+      "Structural: high-density stack loading and long-span reading rooms",
+      "Lighting: circadian-friendly design for study areas and display lighting",
+      "Electrical: public computing power, device charging, and emergency systems",
+      "Community: meeting rooms, maker spaces, and children's area engineering",
+    ],
+  },
+  "museum-building": {
+    name: "Museum Building",
+    title: "Museum Building Engineering",
+    description:
+      "Engineering for museums and galleries — collection galleries, archives, and public exhibit spaces. Museum-grade climate control (tight temperature and humidity tolerances for collections), low-UV exhibition lighting, and security infrastructure. Vibration control for sensitive artifacts, loading-dock and crate-handling logistics, and public assembly egress — PE-stamped in 49 states.",
+    edge:
+      "Museums protect irreplaceable objects while welcoming the public — two missions that fight each other. We engineer gallery environments that hold preservation tolerances through 10,000-visitor days, with security and lighting systems worthy of what's on the walls.",
+    services: [
+      "Climate control: tight-tolerance HVAC for galleries, archives, and storage",
+      "Lighting: low-UV exhibition lighting, track systems, and daylight control",
+      "Security: intrusion, access control, and camera infrastructure coordination",
+      "Structural: vibration control, heavy-object support, and seismic artifact protection",
+      "Logistics: loading docks, crate handling, and registrar workspace engineering",
+    ],
+  },
+  "theater-building": {
+    name: "Theater Building",
+    title: "Theater Building Engineering",
+    description:
+      "Engineering for theaters and performing-arts venues — proscenium houses, black boxes, and concert halls. Performance HVAC (silent systems for 1,000-seat houses), theatrical rigging structural support, and stage lighting power distribution. Acoustic isolation between performance and lobby spaces, orchestra pit ventilation, and fly-tower structures — PE-stamped in 49 states.",
+    edge:
+      "A theater's engineering has one job: disappear. Silent air, invisible structure holding tons of rigging, lighting power that never flickers — we engineer the infrastructure that lets the audience forget the building exists and remember the performance.",
+    services: [
+      "Performance HVAC: ultra-quiet systems, displacement ventilation, and pit conditioning",
+      "Rigging structure: fly towers, gridirons, and point-load support for theatrical rigging",
+      "Electrical: dimming, stage lighting power, and show-power distribution",
+      "Acoustics: isolation detailing, HVAC noise control, and room-shaping coordination",
+      "Life safety: assembly egress, smoke control, and emergency systems for large crowds",
+    ],
+  },
+  "stadium-building": {
+    name: "Stadium Building",
+    title: "Stadium and Arena Engineering",
+    description:
+      "Engineering for stadiums, arenas, and large sports venues — bowl structures, concourses, suites, and support facilities. Long-span roof structures, crowd-loading structural design, and concession MEP (kitchens, beer systems, high-volume restrooms). Broadcast infrastructure, field lighting power, and mass-egress life safety for 50,000+ occupants — PE-stamped in 49 states.",
+    edge:
+      "Stadiums are small cities that fill in an hour and empty in twenty minutes. We engineer the structure for crowd dynamics, the MEP for peak-event loads, and the egress for the worst-case scenario — because 50,000 people trust the building with their Saturday.",
+    services: [
+      "Bowl structure: rakers, long-span roofs, and crowd-dynamic loading design",
+      "Concourse MEP: concessions, kitchens, restrooms, and beer-system rough-in",
+      "Broadcast: camera platforms, cabling infrastructure, and production power",
+      "Field systems: sports lighting power, turf drainage, and irrigation",
+      "Life safety: mass egress, smoke control, and emergency planning for large crowds",
+    ],
+  },
+  "airport-terminal": {
+    name: "Airport Terminal",
+    title: "Airport Terminal Engineering",
+    description:
+      "Engineering for airport terminals and aviation facilities — holdrooms, concourses, baggage systems, and concessions. High-bay structural design, baggage-handling power and controls, and passenger-flow HVAC for peak travel days. Security checkpoint infrastructure, jet-bridge power, and FAA/TSA coordination — PE-stamped in 49 states.",
+    edge:
+      "Terminals never close and never forgive downtime — a failed baggage system makes the evening news. We engineer redundant systems, maintainable equipment layouts, and construction phasing that keeps flights moving while the building gets built around them.",
+    services: [
+      "Baggage systems: power, controls, and structural support for handling equipment",
+      "Concourse MEP: high-bay HVAC, lighting, and passenger-comfort systems",
+      "Security: checkpoint power, screening-equipment infrastructure, and TSA coordination",
+      "Apron systems: jet-bridge power, ground-support electrical, and fueling coordination",
+      "Phasing: occupied-terminal construction sequencing and interim operations",
+    ],
+  },
+  "parking-structure": {
+    name: "Parking Structure",
+    title: "Parking Structure Engineering",
+    description:
+      "Structural and MEP engineering for parking garages — cast-in-place, precast, and steel structures from 100 to 3,000 stalls. Post-tensioned and precast design, vehicle-loading analysis, and durability detailing for deicing exposure. Garage ventilation and CO monitoring, EV charging infrastructure, lighting and security systems, and ADA-accessible parking design — PE-stamped in 49 states.",
+    edge:
+      "Parking structures live the hardest life of any building — deicing salts, thermal movement, and 4,000-pound dynamic loads, every day for 50 years. We engineer durability first: proper drainage, protected reinforcement, and ventilation that keeps the structure (and its users) healthy.",
+    services: [
+      "Structural: post-tensioned, precast, and steel garage design with durability detailing",
+      "Ventilation: garage exhaust, CO monitoring, and code-compliant air changes",
+      "EV charging: infrastructure, load management, and future-ready distribution",
+      "Lighting and security: photometric design, emergency egress, and camera systems",
+      "Waterproofing: deck coatings, drainage, and expansion-joint detailing",
+    ],
+  },
+  "medical-office": {
+    name: "Medical Office",
+    title: "Medical Office Building Engineering",
+    description:
+      "Engineering for medical office buildings — multi-specialty clinics, outpatient surgery centers, and diagnostic imaging. Exam-room HVAC with privacy acoustics, procedure-room ventilation, and medical gas rough-in. Imaging suite structural and shielding coordination (MRI, CT, X-ray), emergency power for critical loads, and patient-flow MEP zoning — PE-stamped in 49 states.",
+    edge:
+      "Medical offices are clinical spaces patients judge like hospitality — comfort, quiet, and confidence. We engineer exam-room acoustics for privacy, procedure ventilation for safety, and the shielding and structural coordination that imaging equipment demands.",
+    services: [
+      "Exam and procedure: HVAC, medical gases, and privacy-acoustic design",
+      "Imaging: structural support, RF shielding, and cooling for MRI/CT/X-ray",
+      "Surgery centers: OR-grade ventilation, emergency power, and sterile processing",
+      "Electrical: critical-branch power, lighting, and nurse-call infrastructure",
+      "Patient experience: quiet systems, wayfinding lighting, and comfort zoning",
+    ],
+  },
+  "dental-office": {
+    name: "Dental Office",
+    title: "Dental Office Engineering",
+    description:
+      "Engineering for dental practices — general dentistry, orthodontics, oral surgery, and multi-operatory clinics. Operatory HVAC with quiet operation, dental vacuum and compressed-air systems, and nitrous oxide distribution with scavenging. X-ray and CBCT shielding, sterilization-center plumbing, and chair-side utility rough-in — PE-stamped in 49 states.",
+    edge:
+      "Dental operatories are compact clinical factories — every chair needs vacuum, air, water, and power in a 10-foot square. We engineer the utility matrix behind the walls so equipment installs cleanly, operates quietly, and passes inspection the first time.",
+    services: [
+      "Operatory utilities: dental vacuum, compressed air, and water distribution",
+      "Nitrous oxide: distribution, scavenging, and room ventilation for sedation",
+      "Imaging: X-ray and CBCT shielding calculations and room design",
+      "Sterilization: plumbing, ventilation, and equipment support for sterile processing",
+      "HVAC: quiet systems, odor control, and procedure-room ventilation",
+    ],
+  },
+  "veterinary-clinic": {
+    name: "Veterinary Clinic",
+    title: "Veterinary Clinic Engineering",
+    description:
+      "Engineering for veterinary clinics and animal hospitals — exam rooms, surgery suites, kennels, and grooming. Surgery-suite ventilation and medical gas, kennel HVAC with odor control and noise management, and wet-table plumbing with hair and solids handling. X-ray shielding, isolation wards for infectious cases, and durable finishes — PE-stamped in 49 states.",
+    edge:
+      "Vet clinics combine surgery-suite precision with kennel-level durability — and odors that will clear a waiting room. We engineer the ventilation zoning, acoustic separation, and washdown-rated systems that keep the clinic smelling clean and running quiet.",
+    services: [
+      "Surgery: ventilation, medical gases, and sterile-procedure support",
+      "Kennel HVAC: odor control, noise management, and disease-control zoning",
+      "Plumbing: wet tables, grooming, trench drains, and solids handling",
+      "Imaging: X-ray shielding and equipment-room engineering",
+      "Isolation: infectious-disease wards with dedicated ventilation",
+    ],
+  },
+  "bank-building": {
+    name: "Bank Building",
+    title: "Bank Building Engineering",
+    description:
+      "Engineering for bank branches and financial buildings — lobbies, teller lines, offices, and operations centers. Vault structural design and anchorage, drive-thru teller lanes and pneumatic tube systems, and ATM vestibule security. Cash-handling HVAC and access control, night-deposit and safe-deposit areas, and corporate office MEP — PE-stamped in 49 states.",
+    edge:
+      "Bank branches are security buildings that have to feel welcoming — the engineering tension is real. We design vault structures and cash-handling security into welcoming lobbies, with the access control and surveillance infrastructure that keeps everyone safe.",
+    services: [
+      "Vault: structural design, anchorage, and UL-rated construction coordination",
+      "Drive-thru: teller lanes, pneumatic tubes, and canopy engineering",
+      "Security: access control, camera rough-in, and alarm infrastructure",
+      "Cash handling: HVAC, lighting, and secure-room design for operations",
+      "Branch MEP: lobby comfort, office systems, and ATM vestibule conditioning",
+    ],
+  },
+  "courthouse-building": {
+    name: "Courthouse Building",
+    title: "Courthouse Engineering",
+    description:
+      "Engineering for courthouses and justice facilities — courtrooms, chambers, holding areas, and clerk offices. Courtroom acoustics and HVAC for formal proceedings, secure circulation separating public, staff, and in-custody movement, and holding-cell ventilation and plumbing. Blast-resistant design considerations, sally-port engineering, and the security infrastructure justice facilities demand — PE-stamped in 49 states.",
+    edge:
+      "Courthouses run three separate buildings in one — public, staff, and secure — that can never mix. We engineer the circulation, the acoustic privacy, and the security systems that keep proceedings dignified and everyone safe.",
+    services: [
+      "Courtroom: acoustics, HVAC, and AV infrastructure for proceedings",
+      "Secure circulation: separated public/staff/in-custody paths and sally ports",
+      "Holding: cell ventilation, plumbing, and security-electronics rough-in",
+      "Structural: blast considerations, progressive-collapse review, and secure framing",
+      "Security: access control, duress, camera, and screening infrastructure",
+    ],
+  },
+  "fire-station": {
+    name: "Fire Station",
+    title: "Fire Station Engineering",
+    description:
+      "Engineering for fire stations — apparatus bays, living quarters, training facilities, and admin. Bay exhaust extraction and decontamination (carcinogen control), rapid-response alerting infrastructure, and turnout-gear storage ventilation. Essential-facility seismic design, backup power for full station operation, and drive-through bay site design — PE-stamped in 49 states.",
+    edge:
+      "Fire stations are essential facilities — they have to function through the disaster everyone else is fleeing. We engineer seismic resilience, full backup power, and decontamination systems that protect firefighters from the carcinogens their gear carries home.",
+    services: [
+      "Apparatus bays: exhaust extraction, decontamination, and gear-storage ventilation",
+      "Alerting: station alerting infrastructure, lighting, and rapid-response systems",
+      "Essential facility: seismic design, backup power, and disaster resilience",
+      "Living quarters: quiet HVAC, kitchen, and dormitory comfort systems",
+      "Site: drive-through bays, apron design, and emergency vehicle circulation",
+    ],
+  },
+  "police-station": {
+    name: "Police Station",
+    title: "Police Station Engineering",
+    description:
+      "Engineering for police stations and law-enforcement facilities — patrol operations, investigations, holding, and evidence. Secure evidence storage HVAC and access control, interview-room recording infrastructure, and holding-cell ventilation and plumbing. 24/7 operations-center power and cooling, sally-port design, and the security hardening these facilities require — PE-stamped in 49 states.",
+    edge:
+      "Police stations operate 24/7/365 with zero tolerance for system failure — dispatch can't go dark. We engineer redundant power and cooling for operations centers, secure evidence environments, and the hardened infrastructure that keeps the facility running through anything.",
+    services: [
+      "Operations: redundant power, cooling, and communications for 24/7 dispatch",
+      "Evidence: secure storage HVAC, access control, and chain-of-custody design",
+      "Holding: cell ventilation, plumbing, and security-electronics coordination",
+      "Interview: recording infrastructure, acoustics, and observation-room design",
+      "Hardening: secure entries, sally ports, and blast-resistant considerations",
     ],
   },
 };
