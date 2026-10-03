@@ -27,7 +27,7 @@ const DYNAMIC_ROUTE_PREFIXES = new Set([
   "verticals",
   "buildings",
   "specialties",
-  "project-types",
+  "projects",
   "services-local",
 ]);
 
