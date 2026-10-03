@@ -1,0 +1,4086 @@
+{
+ "wave": 1,
+ "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+ "template_version": "wave1-v1",
+ "content_data_source_version": "wave1-content-v1",
+ "total_urls": 25000,
+ "total_cohorts": 180,
+ "deployment": {
+  "commit_sha": "3d3251a4872524ae160dc9383a33dbfe1a997e78",
+  "branch": "migration/apex-fix",
+  "repo": "chicomills1-create/engineering-precision",
+  "deployment_date": "2026-10-03T07:35:21.189783+00:00"
+ },
+ "measurement_window": "2-4 weeks after Google begins crawling",
+ "freeze_policy": "No content/template changes during measurement window. Infrastructure monitoring only.",
+ "cohorts": {
+  "wave1-civil-al": {
+   "cohort_id": "wave1-civil-al",
+   "sitemap_file": "sitemap-wave1-civil-al.xml",
+   "service": "civil",
+   "state": "Alabama",
+   "state_abbr": "al",
+   "metros": [
+    "Birmingham"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-ar": {
+   "cohort_id": "wave1-civil-ar",
+   "sitemap_file": "sitemap-wave1-civil-ar.xml",
+   "service": "civil",
+   "state": "Arkansas",
+   "state_abbr": "ar",
+   "metros": [
+    "Little Rock"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-az": {
+   "cohort_id": "wave1-civil-az",
+   "sitemap_file": "sitemap-wave1-civil-az.xml",
+   "service": "civil",
+   "state": "Arizona",
+   "state_abbr": "az",
+   "metros": [
+    "Phoenix",
+    "Tucson"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-ca": {
+   "cohort_id": "wave1-civil-ca",
+   "sitemap_file": "sitemap-wave1-civil-ca.xml",
+   "service": "civil",
+   "state": "California",
+   "state_abbr": "ca",
+   "metros": [
+    "Los Angeles",
+    "San Diego",
+    "San Francisco"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 264,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-co": {
+   "cohort_id": "wave1-civil-co",
+   "sitemap_file": "sitemap-wave1-civil-co.xml",
+   "service": "civil",
+   "state": "Colorado",
+   "state_abbr": "co",
+   "metros": [
+    "Denver"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-fl": {
+   "cohort_id": "wave1-civil-fl",
+   "sitemap_file": "sitemap-wave1-civil-fl.xml",
+   "service": "civil",
+   "state": "Florida",
+   "state_abbr": "fl",
+   "metros": [
+    "Jacksonville",
+    "Miami",
+    "Orlando",
+    "Tampa"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 352,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-ga": {
+   "cohort_id": "wave1-civil-ga",
+   "sitemap_file": "sitemap-wave1-civil-ga.xml",
+   "service": "civil",
+   "state": "Georgia",
+   "state_abbr": "ga",
+   "metros": [
+    "Atlanta"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-il": {
+   "cohort_id": "wave1-civil-il",
+   "sitemap_file": "sitemap-wave1-civil-il.xml",
+   "service": "civil",
+   "state": "Illinois",
+   "state_abbr": "il",
+   "metros": [
+    "Chicago"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-in": {
+   "cohort_id": "wave1-civil-in",
+   "sitemap_file": "sitemap-wave1-civil-in.xml",
+   "service": "civil",
+   "state": "Indiana",
+   "state_abbr": "in",
+   "metros": [
+    "Indianapolis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-ky": {
+   "cohort_id": "wave1-civil-ky",
+   "sitemap_file": "sitemap-wave1-civil-ky.xml",
+   "service": "civil",
+   "state": "Kentucky",
+   "state_abbr": "ky",
+   "metros": [
+    "Louisville"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 40,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-la": {
+   "cohort_id": "wave1-civil-la",
+   "sitemap_file": "sitemap-wave1-civil-la.xml",
+   "service": "civil",
+   "state": "Louisiana",
+   "state_abbr": "la",
+   "metros": [
+    "New Orleans"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-ma": {
+   "cohort_id": "wave1-civil-ma",
+   "sitemap_file": "sitemap-wave1-civil-ma.xml",
+   "service": "civil",
+   "state": "Massachusetts",
+   "state_abbr": "ma",
+   "metros": [
+    "Boston"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-md": {
+   "cohort_id": "wave1-civil-md",
+   "sitemap_file": "sitemap-wave1-civil-md.xml",
+   "service": "civil",
+   "state": "Maryland",
+   "state_abbr": "md",
+   "metros": [
+    "Baltimore"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-mi": {
+   "cohort_id": "wave1-civil-mi",
+   "sitemap_file": "sitemap-wave1-civil-mi.xml",
+   "service": "civil",
+   "state": "Michigan",
+   "state_abbr": "mi",
+   "metros": [
+    "Detroit"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-mn": {
+   "cohort_id": "wave1-civil-mn",
+   "sitemap_file": "sitemap-wave1-civil-mn.xml",
+   "service": "civil",
+   "state": "Minnesota",
+   "state_abbr": "mn",
+   "metros": [
+    "Minneapolis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-mo": {
+   "cohort_id": "wave1-civil-mo",
+   "sitemap_file": "sitemap-wave1-civil-mo.xml",
+   "service": "civil",
+   "state": "Missouri",
+   "state_abbr": "mo",
+   "metros": [
+    "Kansas City",
+    "St. Louis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-nc": {
+   "cohort_id": "wave1-civil-nc",
+   "sitemap_file": "sitemap-wave1-civil-nc.xml",
+   "service": "civil",
+   "state": "North Carolina",
+   "state_abbr": "nc",
+   "metros": [
+    "Charlotte",
+    "Raleigh"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-nm": {
+   "cohort_id": "wave1-civil-nm",
+   "sitemap_file": "sitemap-wave1-civil-nm.xml",
+   "service": "civil",
+   "state": "New Mexico",
+   "state_abbr": "nm",
+   "metros": [
+    "Albuquerque"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-nv": {
+   "cohort_id": "wave1-civil-nv",
+   "sitemap_file": "sitemap-wave1-civil-nv.xml",
+   "service": "civil",
+   "state": "Nevada",
+   "state_abbr": "nv",
+   "metros": [
+    "Las Vegas"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 76,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-ny": {
+   "cohort_id": "wave1-civil-ny",
+   "sitemap_file": "sitemap-wave1-civil-ny.xml",
+   "service": "civil",
+   "state": "New York",
+   "state_abbr": "ny",
+   "metros": [
+    "New York"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-oh": {
+   "cohort_id": "wave1-civil-oh",
+   "sitemap_file": "sitemap-wave1-civil-oh.xml",
+   "service": "civil",
+   "state": "Ohio",
+   "state_abbr": "oh",
+   "metros": [
+    "Cincinnati",
+    "Cleveland",
+    "Columbus"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 264,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-ok": {
+   "cohort_id": "wave1-civil-ok",
+   "sitemap_file": "sitemap-wave1-civil-ok.xml",
+   "service": "civil",
+   "state": "Oklahoma",
+   "state_abbr": "ok",
+   "metros": [
+    "Oklahoma City",
+    "Tulsa"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-or": {
+   "cohort_id": "wave1-civil-or",
+   "sitemap_file": "sitemap-wave1-civil-or.xml",
+   "service": "civil",
+   "state": "Oregon",
+   "state_abbr": "or",
+   "metros": [
+    "Portland"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-pa": {
+   "cohort_id": "wave1-civil-pa",
+   "sitemap_file": "sitemap-wave1-civil-pa.xml",
+   "service": "civil",
+   "state": "Pennsylvania",
+   "state_abbr": "pa",
+   "metros": [
+    "Philadelphia",
+    "Pittsburgh"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-tn": {
+   "cohort_id": "wave1-civil-tn",
+   "sitemap_file": "sitemap-wave1-civil-tn.xml",
+   "service": "civil",
+   "state": "Tennessee",
+   "state_abbr": "tn",
+   "metros": [
+    "Memphis",
+    "Nashville"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-tx": {
+   "cohort_id": "wave1-civil-tx",
+   "sitemap_file": "sitemap-wave1-civil-tx.xml",
+   "service": "civil",
+   "state": "Texas",
+   "state_abbr": "tx",
+   "metros": [
+    "Austin",
+    "Dallas",
+    "El Paso",
+    "Houston",
+    "San Antonio"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 440,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-ut": {
+   "cohort_id": "wave1-civil-ut",
+   "sitemap_file": "sitemap-wave1-civil-ut.xml",
+   "service": "civil",
+   "state": "Utah",
+   "state_abbr": "ut",
+   "metros": [
+    "Salt Lake City"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-va": {
+   "cohort_id": "wave1-civil-va",
+   "sitemap_file": "sitemap-wave1-civil-va.xml",
+   "service": "civil",
+   "state": "Virginia",
+   "state_abbr": "va",
+   "metros": [
+    "Richmond",
+    "Virginia Beach"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-wa": {
+   "cohort_id": "wave1-civil-wa",
+   "sitemap_file": "sitemap-wave1-civil-wa.xml",
+   "service": "civil",
+   "state": "Washington",
+   "state_abbr": "wa",
+   "metros": [
+    "Seattle"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-civil-wi": {
+   "cohort_id": "wave1-civil-wi",
+   "sitemap_file": "sitemap-wave1-civil-wi.xml",
+   "service": "civil",
+   "state": "Wisconsin",
+   "state_abbr": "wi",
+   "metros": [
+    "Milwaukee"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-al": {
+   "cohort_id": "wave1-electrical-al",
+   "sitemap_file": "sitemap-wave1-electrical-al.xml",
+   "service": "electrical",
+   "state": "Alabama",
+   "state_abbr": "al",
+   "metros": [
+    "Birmingham"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-ar": {
+   "cohort_id": "wave1-electrical-ar",
+   "sitemap_file": "sitemap-wave1-electrical-ar.xml",
+   "service": "electrical",
+   "state": "Arkansas",
+   "state_abbr": "ar",
+   "metros": [
+    "Little Rock"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-az": {
+   "cohort_id": "wave1-electrical-az",
+   "sitemap_file": "sitemap-wave1-electrical-az.xml",
+   "service": "electrical",
+   "state": "Arizona",
+   "state_abbr": "az",
+   "metros": [
+    "Phoenix",
+    "Tucson"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-ca": {
+   "cohort_id": "wave1-electrical-ca",
+   "sitemap_file": "sitemap-wave1-electrical-ca.xml",
+   "service": "electrical",
+   "state": "California",
+   "state_abbr": "ca",
+   "metros": [
+    "Los Angeles",
+    "San Diego",
+    "San Francisco"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 264,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-co": {
+   "cohort_id": "wave1-electrical-co",
+   "sitemap_file": "sitemap-wave1-electrical-co.xml",
+   "service": "electrical",
+   "state": "Colorado",
+   "state_abbr": "co",
+   "metros": [
+    "Denver"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-fl": {
+   "cohort_id": "wave1-electrical-fl",
+   "sitemap_file": "sitemap-wave1-electrical-fl.xml",
+   "service": "electrical",
+   "state": "Florida",
+   "state_abbr": "fl",
+   "metros": [
+    "Jacksonville",
+    "Miami",
+    "Orlando",
+    "Tampa"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 352,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-ga": {
+   "cohort_id": "wave1-electrical-ga",
+   "sitemap_file": "sitemap-wave1-electrical-ga.xml",
+   "service": "electrical",
+   "state": "Georgia",
+   "state_abbr": "ga",
+   "metros": [
+    "Atlanta"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-il": {
+   "cohort_id": "wave1-electrical-il",
+   "sitemap_file": "sitemap-wave1-electrical-il.xml",
+   "service": "electrical",
+   "state": "Illinois",
+   "state_abbr": "il",
+   "metros": [
+    "Chicago"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-in": {
+   "cohort_id": "wave1-electrical-in",
+   "sitemap_file": "sitemap-wave1-electrical-in.xml",
+   "service": "electrical",
+   "state": "Indiana",
+   "state_abbr": "in",
+   "metros": [
+    "Indianapolis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-ky": {
+   "cohort_id": "wave1-electrical-ky",
+   "sitemap_file": "sitemap-wave1-electrical-ky.xml",
+   "service": "electrical",
+   "state": "Kentucky",
+   "state_abbr": "ky",
+   "metros": [
+    "Louisville"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 44,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-la": {
+   "cohort_id": "wave1-electrical-la",
+   "sitemap_file": "sitemap-wave1-electrical-la.xml",
+   "service": "electrical",
+   "state": "Louisiana",
+   "state_abbr": "la",
+   "metros": [
+    "New Orleans"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-ma": {
+   "cohort_id": "wave1-electrical-ma",
+   "sitemap_file": "sitemap-wave1-electrical-ma.xml",
+   "service": "electrical",
+   "state": "Massachusetts",
+   "state_abbr": "ma",
+   "metros": [
+    "Boston"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-md": {
+   "cohort_id": "wave1-electrical-md",
+   "sitemap_file": "sitemap-wave1-electrical-md.xml",
+   "service": "electrical",
+   "state": "Maryland",
+   "state_abbr": "md",
+   "metros": [
+    "Baltimore"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-mi": {
+   "cohort_id": "wave1-electrical-mi",
+   "sitemap_file": "sitemap-wave1-electrical-mi.xml",
+   "service": "electrical",
+   "state": "Michigan",
+   "state_abbr": "mi",
+   "metros": [
+    "Detroit"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-mn": {
+   "cohort_id": "wave1-electrical-mn",
+   "sitemap_file": "sitemap-wave1-electrical-mn.xml",
+   "service": "electrical",
+   "state": "Minnesota",
+   "state_abbr": "mn",
+   "metros": [
+    "Minneapolis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-mo": {
+   "cohort_id": "wave1-electrical-mo",
+   "sitemap_file": "sitemap-wave1-electrical-mo.xml",
+   "service": "electrical",
+   "state": "Missouri",
+   "state_abbr": "mo",
+   "metros": [
+    "Kansas City",
+    "St. Louis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-nc": {
+   "cohort_id": "wave1-electrical-nc",
+   "sitemap_file": "sitemap-wave1-electrical-nc.xml",
+   "service": "electrical",
+   "state": "North Carolina",
+   "state_abbr": "nc",
+   "metros": [
+    "Charlotte",
+    "Raleigh"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-nm": {
+   "cohort_id": "wave1-electrical-nm",
+   "sitemap_file": "sitemap-wave1-electrical-nm.xml",
+   "service": "electrical",
+   "state": "New Mexico",
+   "state_abbr": "nm",
+   "metros": [
+    "Albuquerque"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-nv": {
+   "cohort_id": "wave1-electrical-nv",
+   "sitemap_file": "sitemap-wave1-electrical-nv.xml",
+   "service": "electrical",
+   "state": "Nevada",
+   "state_abbr": "nv",
+   "metros": [
+    "Las Vegas"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 76,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-ny": {
+   "cohort_id": "wave1-electrical-ny",
+   "sitemap_file": "sitemap-wave1-electrical-ny.xml",
+   "service": "electrical",
+   "state": "New York",
+   "state_abbr": "ny",
+   "metros": [
+    "New York"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-oh": {
+   "cohort_id": "wave1-electrical-oh",
+   "sitemap_file": "sitemap-wave1-electrical-oh.xml",
+   "service": "electrical",
+   "state": "Ohio",
+   "state_abbr": "oh",
+   "metros": [
+    "Cincinnati",
+    "Cleveland",
+    "Columbus"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 264,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-ok": {
+   "cohort_id": "wave1-electrical-ok",
+   "sitemap_file": "sitemap-wave1-electrical-ok.xml",
+   "service": "electrical",
+   "state": "Oklahoma",
+   "state_abbr": "ok",
+   "metros": [
+    "Oklahoma City",
+    "Tulsa"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-or": {
+   "cohort_id": "wave1-electrical-or",
+   "sitemap_file": "sitemap-wave1-electrical-or.xml",
+   "service": "electrical",
+   "state": "Oregon",
+   "state_abbr": "or",
+   "metros": [
+    "Portland"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-pa": {
+   "cohort_id": "wave1-electrical-pa",
+   "sitemap_file": "sitemap-wave1-electrical-pa.xml",
+   "service": "electrical",
+   "state": "Pennsylvania",
+   "state_abbr": "pa",
+   "metros": [
+    "Philadelphia",
+    "Pittsburgh"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-tn": {
+   "cohort_id": "wave1-electrical-tn",
+   "sitemap_file": "sitemap-wave1-electrical-tn.xml",
+   "service": "electrical",
+   "state": "Tennessee",
+   "state_abbr": "tn",
+   "metros": [
+    "Memphis",
+    "Nashville"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-tx": {
+   "cohort_id": "wave1-electrical-tx",
+   "sitemap_file": "sitemap-wave1-electrical-tx.xml",
+   "service": "electrical",
+   "state": "Texas",
+   "state_abbr": "tx",
+   "metros": [
+    "Austin",
+    "Dallas",
+    "El Paso",
+    "Houston",
+    "San Antonio"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 440,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-ut": {
+   "cohort_id": "wave1-electrical-ut",
+   "sitemap_file": "sitemap-wave1-electrical-ut.xml",
+   "service": "electrical",
+   "state": "Utah",
+   "state_abbr": "ut",
+   "metros": [
+    "Salt Lake City"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-va": {
+   "cohort_id": "wave1-electrical-va",
+   "sitemap_file": "sitemap-wave1-electrical-va.xml",
+   "service": "electrical",
+   "state": "Virginia",
+   "state_abbr": "va",
+   "metros": [
+    "Richmond",
+    "Virginia Beach"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-wa": {
+   "cohort_id": "wave1-electrical-wa",
+   "sitemap_file": "sitemap-wave1-electrical-wa.xml",
+   "service": "electrical",
+   "state": "Washington",
+   "state_abbr": "wa",
+   "metros": [
+    "Seattle"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-electrical-wi": {
+   "cohort_id": "wave1-electrical-wi",
+   "sitemap_file": "sitemap-wave1-electrical-wi.xml",
+   "service": "electrical",
+   "state": "Wisconsin",
+   "state_abbr": "wi",
+   "metros": [
+    "Milwaukee"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-al": {
+   "cohort_id": "wave1-mechanical-hvac-al",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-al.xml",
+   "service": "mechanical-hvac",
+   "state": "Alabama",
+   "state_abbr": "al",
+   "metros": [
+    "Birmingham"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-ar": {
+   "cohort_id": "wave1-mechanical-hvac-ar",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-ar.xml",
+   "service": "mechanical-hvac",
+   "state": "Arkansas",
+   "state_abbr": "ar",
+   "metros": [
+    "Little Rock"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-az": {
+   "cohort_id": "wave1-mechanical-hvac-az",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-az.xml",
+   "service": "mechanical-hvac",
+   "state": "Arizona",
+   "state_abbr": "az",
+   "metros": [
+    "Phoenix",
+    "Tucson"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-ca": {
+   "cohort_id": "wave1-mechanical-hvac-ca",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-ca.xml",
+   "service": "mechanical-hvac",
+   "state": "California",
+   "state_abbr": "ca",
+   "metros": [
+    "Los Angeles",
+    "San Diego",
+    "San Francisco"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 264,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-co": {
+   "cohort_id": "wave1-mechanical-hvac-co",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-co.xml",
+   "service": "mechanical-hvac",
+   "state": "Colorado",
+   "state_abbr": "co",
+   "metros": [
+    "Denver"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-fl": {
+   "cohort_id": "wave1-mechanical-hvac-fl",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-fl.xml",
+   "service": "mechanical-hvac",
+   "state": "Florida",
+   "state_abbr": "fl",
+   "metros": [
+    "Jacksonville",
+    "Miami",
+    "Orlando",
+    "Tampa"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 352,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-ga": {
+   "cohort_id": "wave1-mechanical-hvac-ga",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-ga.xml",
+   "service": "mechanical-hvac",
+   "state": "Georgia",
+   "state_abbr": "ga",
+   "metros": [
+    "Atlanta"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-il": {
+   "cohort_id": "wave1-mechanical-hvac-il",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-il.xml",
+   "service": "mechanical-hvac",
+   "state": "Illinois",
+   "state_abbr": "il",
+   "metros": [
+    "Chicago"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-in": {
+   "cohort_id": "wave1-mechanical-hvac-in",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-in.xml",
+   "service": "mechanical-hvac",
+   "state": "Indiana",
+   "state_abbr": "in",
+   "metros": [
+    "Indianapolis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-ky": {
+   "cohort_id": "wave1-mechanical-hvac-ky",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-ky.xml",
+   "service": "mechanical-hvac",
+   "state": "Kentucky",
+   "state_abbr": "ky",
+   "metros": [
+    "Louisville"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 44,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-la": {
+   "cohort_id": "wave1-mechanical-hvac-la",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-la.xml",
+   "service": "mechanical-hvac",
+   "state": "Louisiana",
+   "state_abbr": "la",
+   "metros": [
+    "New Orleans"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-ma": {
+   "cohort_id": "wave1-mechanical-hvac-ma",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-ma.xml",
+   "service": "mechanical-hvac",
+   "state": "Massachusetts",
+   "state_abbr": "ma",
+   "metros": [
+    "Boston"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-md": {
+   "cohort_id": "wave1-mechanical-hvac-md",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-md.xml",
+   "service": "mechanical-hvac",
+   "state": "Maryland",
+   "state_abbr": "md",
+   "metros": [
+    "Baltimore"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-mi": {
+   "cohort_id": "wave1-mechanical-hvac-mi",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-mi.xml",
+   "service": "mechanical-hvac",
+   "state": "Michigan",
+   "state_abbr": "mi",
+   "metros": [
+    "Detroit"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-mn": {
+   "cohort_id": "wave1-mechanical-hvac-mn",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-mn.xml",
+   "service": "mechanical-hvac",
+   "state": "Minnesota",
+   "state_abbr": "mn",
+   "metros": [
+    "Minneapolis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-mo": {
+   "cohort_id": "wave1-mechanical-hvac-mo",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-mo.xml",
+   "service": "mechanical-hvac",
+   "state": "Missouri",
+   "state_abbr": "mo",
+   "metros": [
+    "Kansas City",
+    "St. Louis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-nc": {
+   "cohort_id": "wave1-mechanical-hvac-nc",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-nc.xml",
+   "service": "mechanical-hvac",
+   "state": "North Carolina",
+   "state_abbr": "nc",
+   "metros": [
+    "Charlotte",
+    "Raleigh"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-nm": {
+   "cohort_id": "wave1-mechanical-hvac-nm",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-nm.xml",
+   "service": "mechanical-hvac",
+   "state": "New Mexico",
+   "state_abbr": "nm",
+   "metros": [
+    "Albuquerque"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-nv": {
+   "cohort_id": "wave1-mechanical-hvac-nv",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-nv.xml",
+   "service": "mechanical-hvac",
+   "state": "Nevada",
+   "state_abbr": "nv",
+   "metros": [
+    "Las Vegas"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 76,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-ny": {
+   "cohort_id": "wave1-mechanical-hvac-ny",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-ny.xml",
+   "service": "mechanical-hvac",
+   "state": "New York",
+   "state_abbr": "ny",
+   "metros": [
+    "New York"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-oh": {
+   "cohort_id": "wave1-mechanical-hvac-oh",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-oh.xml",
+   "service": "mechanical-hvac",
+   "state": "Ohio",
+   "state_abbr": "oh",
+   "metros": [
+    "Cincinnati",
+    "Cleveland",
+    "Columbus"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 264,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-ok": {
+   "cohort_id": "wave1-mechanical-hvac-ok",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-ok.xml",
+   "service": "mechanical-hvac",
+   "state": "Oklahoma",
+   "state_abbr": "ok",
+   "metros": [
+    "Oklahoma City",
+    "Tulsa"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-or": {
+   "cohort_id": "wave1-mechanical-hvac-or",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-or.xml",
+   "service": "mechanical-hvac",
+   "state": "Oregon",
+   "state_abbr": "or",
+   "metros": [
+    "Portland"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-pa": {
+   "cohort_id": "wave1-mechanical-hvac-pa",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-pa.xml",
+   "service": "mechanical-hvac",
+   "state": "Pennsylvania",
+   "state_abbr": "pa",
+   "metros": [
+    "Philadelphia",
+    "Pittsburgh"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-tn": {
+   "cohort_id": "wave1-mechanical-hvac-tn",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-tn.xml",
+   "service": "mechanical-hvac",
+   "state": "Tennessee",
+   "state_abbr": "tn",
+   "metros": [
+    "Memphis",
+    "Nashville"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-tx": {
+   "cohort_id": "wave1-mechanical-hvac-tx",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-tx.xml",
+   "service": "mechanical-hvac",
+   "state": "Texas",
+   "state_abbr": "tx",
+   "metros": [
+    "Austin",
+    "Dallas",
+    "El Paso",
+    "Houston",
+    "San Antonio"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 440,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-ut": {
+   "cohort_id": "wave1-mechanical-hvac-ut",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-ut.xml",
+   "service": "mechanical-hvac",
+   "state": "Utah",
+   "state_abbr": "ut",
+   "metros": [
+    "Salt Lake City"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-va": {
+   "cohort_id": "wave1-mechanical-hvac-va",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-va.xml",
+   "service": "mechanical-hvac",
+   "state": "Virginia",
+   "state_abbr": "va",
+   "metros": [
+    "Richmond",
+    "Virginia Beach"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-wa": {
+   "cohort_id": "wave1-mechanical-hvac-wa",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-wa.xml",
+   "service": "mechanical-hvac",
+   "state": "Washington",
+   "state_abbr": "wa",
+   "metros": [
+    "Seattle"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mechanical-hvac-wi": {
+   "cohort_id": "wave1-mechanical-hvac-wi",
+   "sitemap_file": "sitemap-wave1-mechanical-hvac-wi.xml",
+   "service": "mechanical-hvac",
+   "state": "Wisconsin",
+   "state_abbr": "wi",
+   "metros": [
+    "Milwaukee"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-al": {
+   "cohort_id": "wave1-mep-al",
+   "sitemap_file": "sitemap-wave1-mep-al.xml",
+   "service": "mep",
+   "state": "Alabama",
+   "state_abbr": "al",
+   "metros": [
+    "Birmingham"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-ar": {
+   "cohort_id": "wave1-mep-ar",
+   "sitemap_file": "sitemap-wave1-mep-ar.xml",
+   "service": "mep",
+   "state": "Arkansas",
+   "state_abbr": "ar",
+   "metros": [
+    "Little Rock"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-az": {
+   "cohort_id": "wave1-mep-az",
+   "sitemap_file": "sitemap-wave1-mep-az.xml",
+   "service": "mep",
+   "state": "Arizona",
+   "state_abbr": "az",
+   "metros": [
+    "Phoenix",
+    "Tucson"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-ca": {
+   "cohort_id": "wave1-mep-ca",
+   "sitemap_file": "sitemap-wave1-mep-ca.xml",
+   "service": "mep",
+   "state": "California",
+   "state_abbr": "ca",
+   "metros": [
+    "Los Angeles",
+    "San Diego",
+    "San Francisco"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 264,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-co": {
+   "cohort_id": "wave1-mep-co",
+   "sitemap_file": "sitemap-wave1-mep-co.xml",
+   "service": "mep",
+   "state": "Colorado",
+   "state_abbr": "co",
+   "metros": [
+    "Denver"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-fl": {
+   "cohort_id": "wave1-mep-fl",
+   "sitemap_file": "sitemap-wave1-mep-fl.xml",
+   "service": "mep",
+   "state": "Florida",
+   "state_abbr": "fl",
+   "metros": [
+    "Jacksonville",
+    "Miami",
+    "Orlando",
+    "Tampa"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 352,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-ga": {
+   "cohort_id": "wave1-mep-ga",
+   "sitemap_file": "sitemap-wave1-mep-ga.xml",
+   "service": "mep",
+   "state": "Georgia",
+   "state_abbr": "ga",
+   "metros": [
+    "Atlanta"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-il": {
+   "cohort_id": "wave1-mep-il",
+   "sitemap_file": "sitemap-wave1-mep-il.xml",
+   "service": "mep",
+   "state": "Illinois",
+   "state_abbr": "il",
+   "metros": [
+    "Chicago"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-in": {
+   "cohort_id": "wave1-mep-in",
+   "sitemap_file": "sitemap-wave1-mep-in.xml",
+   "service": "mep",
+   "state": "Indiana",
+   "state_abbr": "in",
+   "metros": [
+    "Indianapolis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-ky": {
+   "cohort_id": "wave1-mep-ky",
+   "sitemap_file": "sitemap-wave1-mep-ky.xml",
+   "service": "mep",
+   "state": "Kentucky",
+   "state_abbr": "ky",
+   "metros": [
+    "Louisville"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 44,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-la": {
+   "cohort_id": "wave1-mep-la",
+   "sitemap_file": "sitemap-wave1-mep-la.xml",
+   "service": "mep",
+   "state": "Louisiana",
+   "state_abbr": "la",
+   "metros": [
+    "New Orleans"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-ma": {
+   "cohort_id": "wave1-mep-ma",
+   "sitemap_file": "sitemap-wave1-mep-ma.xml",
+   "service": "mep",
+   "state": "Massachusetts",
+   "state_abbr": "ma",
+   "metros": [
+    "Boston"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-md": {
+   "cohort_id": "wave1-mep-md",
+   "sitemap_file": "sitemap-wave1-mep-md.xml",
+   "service": "mep",
+   "state": "Maryland",
+   "state_abbr": "md",
+   "metros": [
+    "Baltimore"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-mi": {
+   "cohort_id": "wave1-mep-mi",
+   "sitemap_file": "sitemap-wave1-mep-mi.xml",
+   "service": "mep",
+   "state": "Michigan",
+   "state_abbr": "mi",
+   "metros": [
+    "Detroit"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-mn": {
+   "cohort_id": "wave1-mep-mn",
+   "sitemap_file": "sitemap-wave1-mep-mn.xml",
+   "service": "mep",
+   "state": "Minnesota",
+   "state_abbr": "mn",
+   "metros": [
+    "Minneapolis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-mo": {
+   "cohort_id": "wave1-mep-mo",
+   "sitemap_file": "sitemap-wave1-mep-mo.xml",
+   "service": "mep",
+   "state": "Missouri",
+   "state_abbr": "mo",
+   "metros": [
+    "Kansas City",
+    "St. Louis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-nc": {
+   "cohort_id": "wave1-mep-nc",
+   "sitemap_file": "sitemap-wave1-mep-nc.xml",
+   "service": "mep",
+   "state": "North Carolina",
+   "state_abbr": "nc",
+   "metros": [
+    "Charlotte",
+    "Raleigh"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-nm": {
+   "cohort_id": "wave1-mep-nm",
+   "sitemap_file": "sitemap-wave1-mep-nm.xml",
+   "service": "mep",
+   "state": "New Mexico",
+   "state_abbr": "nm",
+   "metros": [
+    "Albuquerque"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-nv": {
+   "cohort_id": "wave1-mep-nv",
+   "sitemap_file": "sitemap-wave1-mep-nv.xml",
+   "service": "mep",
+   "state": "Nevada",
+   "state_abbr": "nv",
+   "metros": [
+    "Las Vegas"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 76,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-ny": {
+   "cohort_id": "wave1-mep-ny",
+   "sitemap_file": "sitemap-wave1-mep-ny.xml",
+   "service": "mep",
+   "state": "New York",
+   "state_abbr": "ny",
+   "metros": [
+    "New York"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-oh": {
+   "cohort_id": "wave1-mep-oh",
+   "sitemap_file": "sitemap-wave1-mep-oh.xml",
+   "service": "mep",
+   "state": "Ohio",
+   "state_abbr": "oh",
+   "metros": [
+    "Cincinnati",
+    "Cleveland",
+    "Columbus"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 264,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-ok": {
+   "cohort_id": "wave1-mep-ok",
+   "sitemap_file": "sitemap-wave1-mep-ok.xml",
+   "service": "mep",
+   "state": "Oklahoma",
+   "state_abbr": "ok",
+   "metros": [
+    "Oklahoma City",
+    "Tulsa"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-or": {
+   "cohort_id": "wave1-mep-or",
+   "sitemap_file": "sitemap-wave1-mep-or.xml",
+   "service": "mep",
+   "state": "Oregon",
+   "state_abbr": "or",
+   "metros": [
+    "Portland"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-pa": {
+   "cohort_id": "wave1-mep-pa",
+   "sitemap_file": "sitemap-wave1-mep-pa.xml",
+   "service": "mep",
+   "state": "Pennsylvania",
+   "state_abbr": "pa",
+   "metros": [
+    "Philadelphia",
+    "Pittsburgh"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-tn": {
+   "cohort_id": "wave1-mep-tn",
+   "sitemap_file": "sitemap-wave1-mep-tn.xml",
+   "service": "mep",
+   "state": "Tennessee",
+   "state_abbr": "tn",
+   "metros": [
+    "Memphis",
+    "Nashville"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-tx": {
+   "cohort_id": "wave1-mep-tx",
+   "sitemap_file": "sitemap-wave1-mep-tx.xml",
+   "service": "mep",
+   "state": "Texas",
+   "state_abbr": "tx",
+   "metros": [
+    "Austin",
+    "Dallas",
+    "El Paso",
+    "Houston",
+    "San Antonio"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 440,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-ut": {
+   "cohort_id": "wave1-mep-ut",
+   "sitemap_file": "sitemap-wave1-mep-ut.xml",
+   "service": "mep",
+   "state": "Utah",
+   "state_abbr": "ut",
+   "metros": [
+    "Salt Lake City"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-va": {
+   "cohort_id": "wave1-mep-va",
+   "sitemap_file": "sitemap-wave1-mep-va.xml",
+   "service": "mep",
+   "state": "Virginia",
+   "state_abbr": "va",
+   "metros": [
+    "Richmond",
+    "Virginia Beach"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-wa": {
+   "cohort_id": "wave1-mep-wa",
+   "sitemap_file": "sitemap-wave1-mep-wa.xml",
+   "service": "mep",
+   "state": "Washington",
+   "state_abbr": "wa",
+   "metros": [
+    "Seattle"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-mep-wi": {
+   "cohort_id": "wave1-mep-wi",
+   "sitemap_file": "sitemap-wave1-mep-wi.xml",
+   "service": "mep",
+   "state": "Wisconsin",
+   "state_abbr": "wi",
+   "metros": [
+    "Milwaukee"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-al": {
+   "cohort_id": "wave1-plumbing-al",
+   "sitemap_file": "sitemap-wave1-plumbing-al.xml",
+   "service": "plumbing",
+   "state": "Alabama",
+   "state_abbr": "al",
+   "metros": [
+    "Birmingham"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-ar": {
+   "cohort_id": "wave1-plumbing-ar",
+   "sitemap_file": "sitemap-wave1-plumbing-ar.xml",
+   "service": "plumbing",
+   "state": "Arkansas",
+   "state_abbr": "ar",
+   "metros": [
+    "Little Rock"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-az": {
+   "cohort_id": "wave1-plumbing-az",
+   "sitemap_file": "sitemap-wave1-plumbing-az.xml",
+   "service": "plumbing",
+   "state": "Arizona",
+   "state_abbr": "az",
+   "metros": [
+    "Phoenix",
+    "Tucson"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-ca": {
+   "cohort_id": "wave1-plumbing-ca",
+   "sitemap_file": "sitemap-wave1-plumbing-ca.xml",
+   "service": "plumbing",
+   "state": "California",
+   "state_abbr": "ca",
+   "metros": [
+    "Los Angeles",
+    "San Diego",
+    "San Francisco"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 264,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-co": {
+   "cohort_id": "wave1-plumbing-co",
+   "sitemap_file": "sitemap-wave1-plumbing-co.xml",
+   "service": "plumbing",
+   "state": "Colorado",
+   "state_abbr": "co",
+   "metros": [
+    "Denver"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-fl": {
+   "cohort_id": "wave1-plumbing-fl",
+   "sitemap_file": "sitemap-wave1-plumbing-fl.xml",
+   "service": "plumbing",
+   "state": "Florida",
+   "state_abbr": "fl",
+   "metros": [
+    "Jacksonville",
+    "Miami",
+    "Orlando",
+    "Tampa"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 352,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-ga": {
+   "cohort_id": "wave1-plumbing-ga",
+   "sitemap_file": "sitemap-wave1-plumbing-ga.xml",
+   "service": "plumbing",
+   "state": "Georgia",
+   "state_abbr": "ga",
+   "metros": [
+    "Atlanta"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-il": {
+   "cohort_id": "wave1-plumbing-il",
+   "sitemap_file": "sitemap-wave1-plumbing-il.xml",
+   "service": "plumbing",
+   "state": "Illinois",
+   "state_abbr": "il",
+   "metros": [
+    "Chicago"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-in": {
+   "cohort_id": "wave1-plumbing-in",
+   "sitemap_file": "sitemap-wave1-plumbing-in.xml",
+   "service": "plumbing",
+   "state": "Indiana",
+   "state_abbr": "in",
+   "metros": [
+    "Indianapolis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-ky": {
+   "cohort_id": "wave1-plumbing-ky",
+   "sitemap_file": "sitemap-wave1-plumbing-ky.xml",
+   "service": "plumbing",
+   "state": "Kentucky",
+   "state_abbr": "ky",
+   "metros": [
+    "Louisville"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 40,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-la": {
+   "cohort_id": "wave1-plumbing-la",
+   "sitemap_file": "sitemap-wave1-plumbing-la.xml",
+   "service": "plumbing",
+   "state": "Louisiana",
+   "state_abbr": "la",
+   "metros": [
+    "New Orleans"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-ma": {
+   "cohort_id": "wave1-plumbing-ma",
+   "sitemap_file": "sitemap-wave1-plumbing-ma.xml",
+   "service": "plumbing",
+   "state": "Massachusetts",
+   "state_abbr": "ma",
+   "metros": [
+    "Boston"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-md": {
+   "cohort_id": "wave1-plumbing-md",
+   "sitemap_file": "sitemap-wave1-plumbing-md.xml",
+   "service": "plumbing",
+   "state": "Maryland",
+   "state_abbr": "md",
+   "metros": [
+    "Baltimore"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-mi": {
+   "cohort_id": "wave1-plumbing-mi",
+   "sitemap_file": "sitemap-wave1-plumbing-mi.xml",
+   "service": "plumbing",
+   "state": "Michigan",
+   "state_abbr": "mi",
+   "metros": [
+    "Detroit"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-mn": {
+   "cohort_id": "wave1-plumbing-mn",
+   "sitemap_file": "sitemap-wave1-plumbing-mn.xml",
+   "service": "plumbing",
+   "state": "Minnesota",
+   "state_abbr": "mn",
+   "metros": [
+    "Minneapolis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-mo": {
+   "cohort_id": "wave1-plumbing-mo",
+   "sitemap_file": "sitemap-wave1-plumbing-mo.xml",
+   "service": "plumbing",
+   "state": "Missouri",
+   "state_abbr": "mo",
+   "metros": [
+    "Kansas City",
+    "St. Louis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-nc": {
+   "cohort_id": "wave1-plumbing-nc",
+   "sitemap_file": "sitemap-wave1-plumbing-nc.xml",
+   "service": "plumbing",
+   "state": "North Carolina",
+   "state_abbr": "nc",
+   "metros": [
+    "Charlotte",
+    "Raleigh"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-nm": {
+   "cohort_id": "wave1-plumbing-nm",
+   "sitemap_file": "sitemap-wave1-plumbing-nm.xml",
+   "service": "plumbing",
+   "state": "New Mexico",
+   "state_abbr": "nm",
+   "metros": [
+    "Albuquerque"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-nv": {
+   "cohort_id": "wave1-plumbing-nv",
+   "sitemap_file": "sitemap-wave1-plumbing-nv.xml",
+   "service": "plumbing",
+   "state": "Nevada",
+   "state_abbr": "nv",
+   "metros": [
+    "Las Vegas"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 76,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-ny": {
+   "cohort_id": "wave1-plumbing-ny",
+   "sitemap_file": "sitemap-wave1-plumbing-ny.xml",
+   "service": "plumbing",
+   "state": "New York",
+   "state_abbr": "ny",
+   "metros": [
+    "New York"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-oh": {
+   "cohort_id": "wave1-plumbing-oh",
+   "sitemap_file": "sitemap-wave1-plumbing-oh.xml",
+   "service": "plumbing",
+   "state": "Ohio",
+   "state_abbr": "oh",
+   "metros": [
+    "Cincinnati",
+    "Cleveland",
+    "Columbus"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 264,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-ok": {
+   "cohort_id": "wave1-plumbing-ok",
+   "sitemap_file": "sitemap-wave1-plumbing-ok.xml",
+   "service": "plumbing",
+   "state": "Oklahoma",
+   "state_abbr": "ok",
+   "metros": [
+    "Oklahoma City",
+    "Tulsa"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-or": {
+   "cohort_id": "wave1-plumbing-or",
+   "sitemap_file": "sitemap-wave1-plumbing-or.xml",
+   "service": "plumbing",
+   "state": "Oregon",
+   "state_abbr": "or",
+   "metros": [
+    "Portland"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-pa": {
+   "cohort_id": "wave1-plumbing-pa",
+   "sitemap_file": "sitemap-wave1-plumbing-pa.xml",
+   "service": "plumbing",
+   "state": "Pennsylvania",
+   "state_abbr": "pa",
+   "metros": [
+    "Philadelphia",
+    "Pittsburgh"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-tn": {
+   "cohort_id": "wave1-plumbing-tn",
+   "sitemap_file": "sitemap-wave1-plumbing-tn.xml",
+   "service": "plumbing",
+   "state": "Tennessee",
+   "state_abbr": "tn",
+   "metros": [
+    "Memphis",
+    "Nashville"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-tx": {
+   "cohort_id": "wave1-plumbing-tx",
+   "sitemap_file": "sitemap-wave1-plumbing-tx.xml",
+   "service": "plumbing",
+   "state": "Texas",
+   "state_abbr": "tx",
+   "metros": [
+    "Austin",
+    "Dallas",
+    "El Paso",
+    "Houston",
+    "San Antonio"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 440,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-ut": {
+   "cohort_id": "wave1-plumbing-ut",
+   "sitemap_file": "sitemap-wave1-plumbing-ut.xml",
+   "service": "plumbing",
+   "state": "Utah",
+   "state_abbr": "ut",
+   "metros": [
+    "Salt Lake City"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-va": {
+   "cohort_id": "wave1-plumbing-va",
+   "sitemap_file": "sitemap-wave1-plumbing-va.xml",
+   "service": "plumbing",
+   "state": "Virginia",
+   "state_abbr": "va",
+   "metros": [
+    "Richmond",
+    "Virginia Beach"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-wa": {
+   "cohort_id": "wave1-plumbing-wa",
+   "sitemap_file": "sitemap-wave1-plumbing-wa.xml",
+   "service": "plumbing",
+   "state": "Washington",
+   "state_abbr": "wa",
+   "metros": [
+    "Seattle"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-plumbing-wi": {
+   "cohort_id": "wave1-plumbing-wi",
+   "sitemap_file": "sitemap-wave1-plumbing-wi.xml",
+   "service": "plumbing",
+   "state": "Wisconsin",
+   "state_abbr": "wi",
+   "metros": [
+    "Milwaukee"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-al": {
+   "cohort_id": "wave1-structural-al",
+   "sitemap_file": "sitemap-wave1-structural-al.xml",
+   "service": "structural",
+   "state": "Alabama",
+   "state_abbr": "al",
+   "metros": [
+    "Birmingham"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-ar": {
+   "cohort_id": "wave1-structural-ar",
+   "sitemap_file": "sitemap-wave1-structural-ar.xml",
+   "service": "structural",
+   "state": "Arkansas",
+   "state_abbr": "ar",
+   "metros": [
+    "Little Rock"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-az": {
+   "cohort_id": "wave1-structural-az",
+   "sitemap_file": "sitemap-wave1-structural-az.xml",
+   "service": "structural",
+   "state": "Arizona",
+   "state_abbr": "az",
+   "metros": [
+    "Phoenix",
+    "Tucson"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-ca": {
+   "cohort_id": "wave1-structural-ca",
+   "sitemap_file": "sitemap-wave1-structural-ca.xml",
+   "service": "structural",
+   "state": "California",
+   "state_abbr": "ca",
+   "metros": [
+    "Los Angeles",
+    "San Diego",
+    "San Francisco"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 264,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-co": {
+   "cohort_id": "wave1-structural-co",
+   "sitemap_file": "sitemap-wave1-structural-co.xml",
+   "service": "structural",
+   "state": "Colorado",
+   "state_abbr": "co",
+   "metros": [
+    "Denver"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-fl": {
+   "cohort_id": "wave1-structural-fl",
+   "sitemap_file": "sitemap-wave1-structural-fl.xml",
+   "service": "structural",
+   "state": "Florida",
+   "state_abbr": "fl",
+   "metros": [
+    "Jacksonville",
+    "Miami",
+    "Orlando",
+    "Tampa"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 352,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-ga": {
+   "cohort_id": "wave1-structural-ga",
+   "sitemap_file": "sitemap-wave1-structural-ga.xml",
+   "service": "structural",
+   "state": "Georgia",
+   "state_abbr": "ga",
+   "metros": [
+    "Atlanta"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-il": {
+   "cohort_id": "wave1-structural-il",
+   "sitemap_file": "sitemap-wave1-structural-il.xml",
+   "service": "structural",
+   "state": "Illinois",
+   "state_abbr": "il",
+   "metros": [
+    "Chicago"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-in": {
+   "cohort_id": "wave1-structural-in",
+   "sitemap_file": "sitemap-wave1-structural-in.xml",
+   "service": "structural",
+   "state": "Indiana",
+   "state_abbr": "in",
+   "metros": [
+    "Indianapolis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-ky": {
+   "cohort_id": "wave1-structural-ky",
+   "sitemap_file": "sitemap-wave1-structural-ky.xml",
+   "service": "structural",
+   "state": "Kentucky",
+   "state_abbr": "ky",
+   "metros": [
+    "Louisville"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 44,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-la": {
+   "cohort_id": "wave1-structural-la",
+   "sitemap_file": "sitemap-wave1-structural-la.xml",
+   "service": "structural",
+   "state": "Louisiana",
+   "state_abbr": "la",
+   "metros": [
+    "New Orleans"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-ma": {
+   "cohort_id": "wave1-structural-ma",
+   "sitemap_file": "sitemap-wave1-structural-ma.xml",
+   "service": "structural",
+   "state": "Massachusetts",
+   "state_abbr": "ma",
+   "metros": [
+    "Boston"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-md": {
+   "cohort_id": "wave1-structural-md",
+   "sitemap_file": "sitemap-wave1-structural-md.xml",
+   "service": "structural",
+   "state": "Maryland",
+   "state_abbr": "md",
+   "metros": [
+    "Baltimore"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-mi": {
+   "cohort_id": "wave1-structural-mi",
+   "sitemap_file": "sitemap-wave1-structural-mi.xml",
+   "service": "structural",
+   "state": "Michigan",
+   "state_abbr": "mi",
+   "metros": [
+    "Detroit"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-mn": {
+   "cohort_id": "wave1-structural-mn",
+   "sitemap_file": "sitemap-wave1-structural-mn.xml",
+   "service": "structural",
+   "state": "Minnesota",
+   "state_abbr": "mn",
+   "metros": [
+    "Minneapolis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-mo": {
+   "cohort_id": "wave1-structural-mo",
+   "sitemap_file": "sitemap-wave1-structural-mo.xml",
+   "service": "structural",
+   "state": "Missouri",
+   "state_abbr": "mo",
+   "metros": [
+    "Kansas City",
+    "St. Louis"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-nc": {
+   "cohort_id": "wave1-structural-nc",
+   "sitemap_file": "sitemap-wave1-structural-nc.xml",
+   "service": "structural",
+   "state": "North Carolina",
+   "state_abbr": "nc",
+   "metros": [
+    "Charlotte",
+    "Raleigh"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-nm": {
+   "cohort_id": "wave1-structural-nm",
+   "sitemap_file": "sitemap-wave1-structural-nm.xml",
+   "service": "structural",
+   "state": "New Mexico",
+   "state_abbr": "nm",
+   "metros": [
+    "Albuquerque"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-nv": {
+   "cohort_id": "wave1-structural-nv",
+   "sitemap_file": "sitemap-wave1-structural-nv.xml",
+   "service": "structural",
+   "state": "Nevada",
+   "state_abbr": "nv",
+   "metros": [
+    "Las Vegas"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 76,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-ny": {
+   "cohort_id": "wave1-structural-ny",
+   "sitemap_file": "sitemap-wave1-structural-ny.xml",
+   "service": "structural",
+   "state": "New York",
+   "state_abbr": "ny",
+   "metros": [
+    "New York"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-oh": {
+   "cohort_id": "wave1-structural-oh",
+   "sitemap_file": "sitemap-wave1-structural-oh.xml",
+   "service": "structural",
+   "state": "Ohio",
+   "state_abbr": "oh",
+   "metros": [
+    "Cincinnati",
+    "Cleveland",
+    "Columbus"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 264,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-ok": {
+   "cohort_id": "wave1-structural-ok",
+   "sitemap_file": "sitemap-wave1-structural-ok.xml",
+   "service": "structural",
+   "state": "Oklahoma",
+   "state_abbr": "ok",
+   "metros": [
+    "Oklahoma City",
+    "Tulsa"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-or": {
+   "cohort_id": "wave1-structural-or",
+   "sitemap_file": "sitemap-wave1-structural-or.xml",
+   "service": "structural",
+   "state": "Oregon",
+   "state_abbr": "or",
+   "metros": [
+    "Portland"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-pa": {
+   "cohort_id": "wave1-structural-pa",
+   "sitemap_file": "sitemap-wave1-structural-pa.xml",
+   "service": "structural",
+   "state": "Pennsylvania",
+   "state_abbr": "pa",
+   "metros": [
+    "Philadelphia",
+    "Pittsburgh"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-tn": {
+   "cohort_id": "wave1-structural-tn",
+   "sitemap_file": "sitemap-wave1-structural-tn.xml",
+   "service": "structural",
+   "state": "Tennessee",
+   "state_abbr": "tn",
+   "metros": [
+    "Memphis",
+    "Nashville"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-tx": {
+   "cohort_id": "wave1-structural-tx",
+   "sitemap_file": "sitemap-wave1-structural-tx.xml",
+   "service": "structural",
+   "state": "Texas",
+   "state_abbr": "tx",
+   "metros": [
+    "Austin",
+    "Dallas",
+    "El Paso",
+    "Houston",
+    "San Antonio"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 440,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-ut": {
+   "cohort_id": "wave1-structural-ut",
+   "sitemap_file": "sitemap-wave1-structural-ut.xml",
+   "service": "structural",
+   "state": "Utah",
+   "state_abbr": "ut",
+   "metros": [
+    "Salt Lake City"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-va": {
+   "cohort_id": "wave1-structural-va",
+   "sitemap_file": "sitemap-wave1-structural-va.xml",
+   "service": "structural",
+   "state": "Virginia",
+   "state_abbr": "va",
+   "metros": [
+    "Richmond",
+    "Virginia Beach"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 176,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-wa": {
+   "cohort_id": "wave1-structural-wa",
+   "sitemap_file": "sitemap-wave1-structural-wa.xml",
+   "service": "structural",
+   "state": "Washington",
+   "state_abbr": "wa",
+   "metros": [
+    "Seattle"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  },
+  "wave1-structural-wi": {
+   "cohort_id": "wave1-structural-wi",
+   "sitemap_file": "sitemap-wave1-structural-wi.xml",
+   "service": "structural",
+   "state": "Wisconsin",
+   "state_abbr": "wi",
+   "metros": [
+    "Milwaukee"
+   ],
+   "templates": [
+    "commercial",
+    "industrial",
+    "residential",
+    "standard"
+   ],
+   "template_version": "wave1-v1",
+   "content_data_source_version": "wave1-content-v1",
+   "url_count": 88,
+   "launch_timestamp": "2026-10-03T07:35:21.189783+00:00",
+   "deployment_date": "2026-10-03T07:35:21.189783+00:00",
+   "date_published": "2026-10-03"
+  }
+ }
+}

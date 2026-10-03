@@ -23,6 +23,68 @@ import { submitEstimateProposal, uploadEstimateDocument, type ProposalResponse }
 import { FLAT_RATES, SQFT_RATES, getStateMultiplier, type SqftProjectType } from "@/lib/estimate-pricing";
 
 /**
+ * Wave 1 first-touch attribution (immutable).
+ * First-touch is stored in localStorage by Wave 1 landing pages and NEVER overwritten.
+ * Conversion-touch is the current page/params at submit time.
+ * Both are attached to the RFQ for full-funnel cohort attribution.
+ */
+const WAVE1_FIRST_TOUCH_KEY = "apex_first_touch";
+
+interface Wave1Attribution {
+  first_touch_landing_url?: string;
+  first_touch_cohort_id?: string;
+  first_touch_service?: string;
+  first_touch_metro?: string;
+  first_touch_state?: string;
+  first_touch_template_version?: string;
+  first_touch_timestamp?: string;
+  conversion_src?: string;
+  conversion_cohort_id?: string;
+  conversion_service?: string;
+  conversion_metro?: string;
+  conversion_state?: string;
+  conversion_template_version?: string;
+  conversion_landing_url?: string;
+}
+
+function getWave1Attribution(): Wave1Attribution {
+  const out: Wave1Attribution = {};
+  try {
+    // First-touch: immutable, from localStorage
+    if (typeof window !== "undefined" && window.localStorage) {
+      const raw = window.localStorage.getItem(WAVE1_FIRST_TOUCH_KEY);
+      if (raw) {
+        const ft = JSON.parse(raw);
+        out.first_touch_landing_url = ft.landing_url;
+        out.first_touch_cohort_id = ft.cohort_id;
+        out.first_touch_service = ft.service;
+        out.first_touch_metro = ft.metro;
+        out.first_touch_state = ft.state;
+        out.first_touch_template_version = ft.template_version;
+        out.first_touch_timestamp = ft.timestamp;
+      }
+    }
+    // Conversion-touch: current URL params (Wave 1 CTA carries these)
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("src") === "wave1") {
+        out.conversion_src = "wave1";
+        out.conversion_cohort_id = params.get("cohort") || undefined;
+        out.conversion_service = params.get("service") || undefined;
+        out.conversion_metro = params.get("metro") || undefined;
+        out.conversion_state = params.get("state") || undefined;
+        out.conversion_template_version = params.get("tv") || undefined;
+        out.conversion_landing_url = params.get("landing") || undefined;
+      }
+    }
+  } catch {
+    // attribution degrades gracefully
+  }
+  return out;
+}
+
+/**
+/**
  * Simplified tap-tap-tap estimator.
  *
  * 3 taps -> ballpark price + turnaround -> lead capture -> confirmation.
@@ -353,7 +415,7 @@ export default function Estimate() {
         intake,
         contact: { ...contact, name: contact.name.trim(), email: contact.email.trim(), phone: contact.phone.trim() },
         city: city.trim(),
-        attribution: defaultAttribution(window.location, document.referrer),
+        attribution: { ...defaultAttribution(window.location, document.referrer), ...getWave1Attribution() },
         documents,
         ballpark: ballparkQuote,
       }));

@@ -1,5 +1,5 @@
 import { useParams } from "wouter";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 
 /**
  * Wave 1: high-value metro x core-service dynamic pages.
@@ -12,6 +12,45 @@ import { useMemo } from "react";
  */
 
 export const WAVE1_TEMPLATE_VERSION = "wave1-v1";
+
+/**
+ * Wave 1 attribution: first-touch is IMMUTABLE.
+ * On first Wave 1 pageview, store {landing_url, cohort_id, service, metro, state,
+ * template_version, timestamp} in localStorage under "apex_first_touch".
+ * Never overwritten — later pageviews (even other Wave 1 pages) do not replace it.
+ * The estimate page reads this for RFQ attribution alongside conversion-touch.
+ */
+const FIRST_TOUCH_KEY = "apex_first_touch";
+
+export interface FirstTouchAttribution {
+  landing_url: string;
+  cohort_id: string;
+  service: string;
+  metro: string;
+  state: string;
+  template_version: string;
+  timestamp: string;
+}
+
+function recordFirstTouch(attribution: FirstTouchAttribution): void {
+  try {
+    if (typeof window === "undefined" || !window.localStorage) return;
+    if (window.localStorage.getItem(FIRST_TOUCH_KEY)) return; // immutable: never overwrite
+    window.localStorage.setItem(FIRST_TOUCH_KEY, JSON.stringify(attribution));
+  } catch {
+    // storage unavailable — attribution degrades gracefully
+  }
+}
+
+export function getFirstTouch(): FirstTouchAttribution | null {
+  try {
+    if (typeof window === "undefined" || !window.localStorage) return null;
+    const raw = window.localStorage.getItem(FIRST_TOUCH_KEY);
+    return raw ? (JSON.parse(raw) as FirstTouchAttribution) : null;
+  } catch {
+    return null;
+  }
+}
 
 interface ServiceInfo { name: string; title: string; description: string; edge: string; services: string[]; }
 const SERVICES: Record<string, ServiceInfo> = {
@@ -238,6 +277,40 @@ const METRO_NOTES: Record<string, string> = {
 };
 
 // city-state slug pair -> metro name, for metro market notes
+// state slug -> abbreviation (for cohort IDs)
+const STATE_ABBR: Record<string, string> = {
+  "alabama": "al",
+  "arizona": "az",
+  "arkansas": "ar",
+  "california": "ca",
+  "colorado": "co",
+  "florida": "fl",
+  "georgia": "ga",
+  "illinois": "il",
+  "indiana": "in",
+  "kentucky": "ky",
+  "louisiana": "la",
+  "maryland": "md",
+  "massachusetts": "ma",
+  "michigan": "mi",
+  "minnesota": "mn",
+  "missouri": "mo",
+  "nevada": "nv",
+  "new-mexico": "nm",
+  "new-york": "ny",
+  "north-carolina": "nc",
+  "ohio": "oh",
+  "oklahoma": "ok",
+  "oregon": "or",
+  "pennsylvania": "pa",
+  "tennessee": "tn",
+  "texas": "tx",
+  "utah": "ut",
+  "virginia": "va",
+  "washington": "wa",
+  "wisconsin": "wi",
+};
+
 const CITY_TO_METRO: Record<string, string> = {
   "phoenix/arizona": "Phoenix",
   "mesa/arizona": "Phoenix",
@@ -1335,6 +1408,37 @@ export default function Wave1CityPage() {
   const metroName = CITY_TO_METRO[`${citySlug}/${stateSlug}`];
   const metroNote = (metroName && METRO_NOTES[metroName]) || "";
 
+  // ── Wave 1 attribution (first-touch immutable) ──
+  const serviceKey = mapping[0];
+  const templateKey = mapping[1];
+  const stateAbbr = STATE_ABBR[stateSlug] || "";
+  const cohortId = `wave1-${serviceKey}-${stateAbbr}`;
+  const landingUrl = `https://apexgrideng.com/wave1/${serviceSlug}/${citySlug}/${stateSlug}/`;
+
+  useEffect(() => {
+    recordFirstTouch({
+      landing_url: landingUrl,
+      cohort_id: cohortId,
+      service: serviceKey,
+      metro: metroName || "",
+      state: state,
+      template_version: WAVE1_TEMPLATE_VERSION,
+      timestamp: new Date().toISOString(),
+    });
+  }, [landingUrl, cohortId, serviceKey, metroName, state]);
+
+  // CTA carries attribution params for the estimate page
+  const attributionParams = new URLSearchParams({
+    src: "wave1",
+    cohort: cohortId,
+    service: serviceKey,
+    metro: metroName || "",
+    state: state,
+    tv: WAVE1_TEMPLATE_VERSION,
+    landing: landingUrl,
+  }).toString();
+  const estimateHref = `/estimate?${attributionParams}`;
+
   const pageTitle = `${fullTitle} in ${city}, ${state} | Apex Grid`;
   const metaDescription =
     `${fullTitle} services in ${city}, ${state} — ${service.description} ` +
@@ -1367,7 +1471,17 @@ export default function Wave1CityPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div
+      className="min-h-screen bg-white"
+      data-wave1-cohort={cohortId}
+      data-wave1-service={serviceKey}
+      data-wave1-template={templateKey}
+      data-wave1-template-version={WAVE1_TEMPLATE_VERSION}
+      data-wave1-metro={metroName || ""}
+      data-wave1-state={state}
+    >
+      <meta name="wave1:cohort" content={cohortId} />
+      <meta name="wave1:template_version" content={WAVE1_TEMPLATE_VERSION} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <main className="max-w-4xl mx-auto px-4 py-12">
@@ -1447,7 +1561,7 @@ export default function Wave1CityPage() {
               quote back in 24 hours and permit-ready drawings on your schedule.
             </p>
             <a
-              href="/estimate"
+              href={estimateHref}
               className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700"
             >
               Send Us Your Project
