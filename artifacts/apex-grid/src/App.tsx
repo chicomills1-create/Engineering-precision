@@ -25,6 +25,7 @@ import { Route, Switch, Router as WouterRouter, useLocation } from 'wouter';
 import { lazy, Suspense, useEffect } from 'react';
 import Capabilities from '@/pages/Capabilities';
 import PeStamp from '@/pages/PeStamp';
+import FranchiseCityPage from "./pages/FranchiseCityPage";
 
 const ClerkArea = lazy(() => import('@/ClerkArea'));
 const ClientArea = lazy(() => import('@/ClientArea'));
@@ -104,6 +105,7 @@ function Router() {
         <Route path="/industries" component={Industries} />
         <Route path="/industries/:slug" component={IndustryDetail} />
         <Route path="/industries/:slug/" component={IndustryDetail} />
+  <Route path="/franchise/:category/:city/:state/" component={FranchiseCityPage} />
         <Route path="/military" component={Military} />
         <Route path="/resources" component={Resources} />
         <Route path="/about" component={About} />
