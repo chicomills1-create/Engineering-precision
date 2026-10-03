@@ -17,8 +17,10 @@ const PUBLIC = process.env.SEO_OUTPUT_DIR
 const SITE = "https://apexgrideng.com";
 const LEGAL_ALLOWLIST = new Set(["/privacy", "/privacy/", "/terms", "/terms/"]);
 // Dynamic routes rendered client-side via wouter — no static HTML files exist
-// in the generated corpus for these. They are valid sitemap URLs that the
-// file-based audit cannot verify, so they are skipped rather than failed.
+// in the generated corpus for these (franchise/verticals/buildings/
+// specialties/projects/services-local city pages and wave1 metro pages).
+// They are valid sitemap URLs that the file-based audit cannot verify,
+// so they are skipped rather than failed.
 const DYNAMIC_ROUTE_PREFIXES = [
   "/franchise/",
   "/verticals/",
@@ -26,6 +28,7 @@ const DYNAMIC_ROUTE_PREFIXES = [
   "/specialties/",
   "/projects/",
   "/services-local/",
+  "/wave1/",
 ];
 
 function isDynamicRoute(url: string): boolean {

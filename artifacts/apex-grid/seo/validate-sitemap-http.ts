@@ -21,6 +21,7 @@ const CONCURRENCY = 96;
  * treat any URL matching these prefixes as valid (200).
  *
  * Pattern: /<prefix>/<segment>/<city-slug>/<state-slug>/
+ * (wave1 metro pages share the same 4-segment shape)
  */
 const DYNAMIC_ROUTE_PREFIXES = new Set([
   "franchise",
@@ -29,6 +30,7 @@ const DYNAMIC_ROUTE_PREFIXES = new Set([
   "specialties",
   "projects",
   "services-local",
+  "wave1",
 ]);
 
 function isDynamicRoute(pathname: string): boolean {
