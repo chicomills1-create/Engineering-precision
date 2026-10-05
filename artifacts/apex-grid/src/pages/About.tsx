@@ -92,7 +92,7 @@ export default function About() {
             <p className="text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-16">
               Founder-led. The people who answer for the work.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="bg-card border border-border p-8 rounded-sm">
                 <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden rounded-sm">
                   <img
@@ -130,6 +130,39 @@ export default function About() {
                 <p className="text-muted-foreground leading-relaxed">
                   Angel leads the people and culture behind the firm — 15+ years of HR
                   leadership, including deep experience in the engineering industry.
+                </p>
+              </div>
+              <div className="bg-card border border-border p-8 rounded-sm">
+                <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden rounded-sm">
+                  <img
+                    src="/images/team/josh-gordon.webp"
+                    alt="Josh Gordon, Personal Assistant to the CEO of Apex Grid Engineering"
+                    className="w-full h-full object-cover object-top"
+                    loading="lazy"
+                  />
+                </div>
+                <h3 className="text-2xl font-display font-bold mb-1 text-white">Josh Gordon</h3>
+                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Personal Assistant to the CEO</div>
+                <p className="text-muted-foreground leading-relaxed">
+                  Josh Gordon is Personal Assistant to Jeremy Mills, Founder and CEO of Apex Grid Engineering. As the firm&apos;s front door, Josh manages executive communications, coordinates bid and proposal submissions across the firm&apos;s 49-state practice, and keeps fast-moving operations on schedule. Known for responsiveness, discretion, and detail-driven execution.
+                </p>
+              </div>
+              <div className="bg-card border border-border p-8 rounded-sm">
+                <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden rounded-sm">
+                  <img
+                    src="/images/team/shan-fernando.webp"
+                    alt="Hishan Fernando, Head of Engineering of Apex Grid Engineering"
+                    className="w-full h-full object-cover object-top"
+                    loading="lazy"
+                  />
+                </div>
+                <h3 className="text-2xl font-display font-bold mb-1 text-white">Hishan Fernando</h3>
+                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Head of Engineering</div>
+                <p className="text-muted-foreground leading-relaxed">
+                  Shan leads Apex Grid&apos;s engineering and drafting operations. Jeremy&apos;s verdict: &ldquo;The guy can literally design anything.&rdquo;
+                </p>
+                <p className="text-muted-foreground leading-relaxed mt-4">
+                  He heads design across structural, MEP, and civil scopes — the engineering engine behind the firm&apos;s coverage model, with licensed Professional Engineers stamping and sealing every regulated deliverable.
                 </p>
               </div>
             </div>
