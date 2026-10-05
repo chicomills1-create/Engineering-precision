@@ -1,0 +1,148 @@
+/* Apex dynamic variation routes — Express integration.
+ *
+ * Serves NEW keyword-variation URLs: /{service}/{state}/{city}/{variation}/
+ *   3 services × 49 states × 19,346 cities × 82 intent families = 4,759,116 URLs
+ *   Every page carries FAQPage schema for AEO (AI engine citations).
+ * Rendered server-side on demand. No per-page files.
+ *
+ * Mount BEFORE the static/prerendered middleware in app.ts so dynamic routes
+ * take precedence. Unknown cities or invalid patterns fall through via next().
+ *
+ * SEO SAFETY: existing static URLs are never intercepted — this handler only
+ * matches the /{service}/{state}/{city}/{variation}/ pattern, which has no
+ * static equivalent.
+ */
+
+import type { Express, Request, Response, NextFunction } from "express";
+import path from "node:path";
+import { SITE, esc, htmlShell } from "./apex-shell.js";
+import cityData from "./apex-cities.json";
+import {
+  VARIATIONS,
+  VARIATION_SERVICES,
+  PLACE_TYPES,
+  type CityPlace,
+  type StateMeta,
+  type VariationDeps,
+} from "./apex-variations.js";
+
+// ---------- City data ----------
+// Bundled JSON: 19,346 cities across 49 licensed states (+DC). Alaska excluded.
+// Static import — esbuild inlines it into the bundle (no runtime fs dependency).
+const PLACE_LOOKUP: Map<string, CityPlace> = (() => {
+  const m = new Map<string, CityPlace>();
+  const arr = cityData as CityPlace[];
+  for (const pl of arr) m.set(`${pl.s}/${pl.c}`, pl);
+  console.log(`[apex-dynamic] PLACE_LOOKUP: ${m.size} cities`);
+  return m;
+})();
+
+// State slug -> { abbr, name } — 49 licensed states (excludes Alaska per Jeremy)
+const STATE_NAMES: Record<string, [string, string]> = {
+  alabama: ["AL", "Alabama"], arizona: ["AZ", "Arizona"],
+  arkansas: ["AR", "Arkansas"], california: ["CA", "California"], colorado: ["CO", "Colorado"],
+  connecticut: ["CT", "Connecticut"], delaware: ["DE", "Delaware"],
+  "district-of-columbia": ["DC", "District of Columbia"], florida: ["FL", "Florida"],
+  georgia: ["GA", "Georgia"], hawaii: ["HI", "Hawaii"], idaho: ["ID", "Idaho"],
+  illinois: ["IL", "Illinois"], indiana: ["IN", "Indiana"], iowa: ["IA", "Iowa"],
+  kansas: ["KS", "Kansas"], kentucky: ["KY", "Kentucky"], louisiana: ["LA", "Louisiana"],
+  maine: ["ME", "Maine"], maryland: ["MD", "Maryland"], massachusetts: ["MA", "Massachusetts"],
+  michigan: ["MI", "Michigan"], minnesota: ["MN", "Minnesota"], mississippi: ["MS", "Mississippi"],
+  missouri: ["MO", "Missouri"], montana: ["MT", "Montana"], nebraska: ["NE", "Nebraska"],
+  nevada: ["NV", "Nevada"], "new-hampshire": ["NH", "New Hampshire"],
+  "new-jersey": ["NJ", "New Jersey"], "new-mexico": ["NM", "New Mexico"],
+  "new-york": ["NY", "New York"], "north-carolina": ["NC", "North Carolina"],
+  "north-dakota": ["ND", "North Dakota"], ohio: ["OH", "Ohio"], oklahoma: ["OK", "Oklahoma"],
+  oregon: ["OR", "Oregon"], pennsylvania: ["PA", "Pennsylvania"],
+  "rhode-island": ["RI", "Rhode Island"], "south-carolina": ["SC", "South Carolina"],
+  "south-dakota": ["SD", "South Dakota"], tennessee: ["TN", "Tennessee"], texas: ["TX", "Texas"],
+  utah: ["UT", "Utah"], vermont: ["VT", "Vermont"], virginia: ["VA", "Virginia"],
+  washington: ["WA", "Washington"], "west-virginia": ["WV", "West Virginia"],
+  wisconsin: ["WI", "Wisconsin"], wyoming: ["WY", "Wyoming"],
+};
+const STATE_META: Record<string, StateMeta> = {};
+for (const [slug, [abbr, name]] of Object.entries(STATE_NAMES)) {
+  STATE_META[slug] = { abbr, name };
+}
+const STATE_PROFILES: Record<string, Record<string, unknown>> = {};
+
+// ---------- Chrome adapters ----------
+// layout() adapts apex-variations' page object to the htmlShell() signature.
+function layout(o: { title: string; description: string; canonical: string; jsonLd: string; body: string }): string {
+  let schemaJson: unknown[] = [];
+  try {
+    const parsed = JSON.parse(o.jsonLd);
+    schemaJson = Array.isArray(parsed) ? parsed : [parsed];
+  } catch {
+    // keep empty
+  }
+  return htmlShell({
+    title: o.title,
+    description: o.description,
+    canonical: o.canonical,
+    schemaJson,
+    body: o.body,
+  });
+}
+
+function quoteCTA(): string {
+  return `<section class="ctaband"><div class="container"><h2>Discuss your engineering scope</h2><p>Share the project address, current records, requested deliverable, authority information, and schedule. Apex Grid confirms professional responsibility, availability, and scope before work begins.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>`;
+}
+
+const DEPS: VariationDeps = {
+  PLACE_TYPES,
+  PLACE_LOOKUP,
+  STATE_META,
+  STATE_PROFILES,
+  layout,
+  esc,
+  quoteCTA,
+  SITE,
+};
+
+// Import variationPage after DEPS (circular-safe: variations module has no deps on this file)
+import { variationPage } from "./apex-variations.js";
+
+const VARIATION_RE =
+  /^\/(mep-engineering|structural-engineering|civil-engineering)\/([a-z-]+)\/([a-z0-9-]+)\/(best|cost|commercial|residential|firm|services|hire|permit|near-me|emergency|repair-vs-replace|questions|adu|restaurant|office|warehouse|retail|hotel|school|church|medical|multifamily|single-family|mixed-use|industrial|storage|gym|daycare|senior-living|student-housing|car-wash|gas-station|hvac-design|electrical-design|plumbing-design|lighting-design|foundation-design|seismic-retrofit|structural-calculations|energy-modeling|drainage-design|grading-design|utility-design|fire-protection|building-envelope|retaining-wall|pavement-design|solar-design|ev-charging|low-voltage|septic-design|commissioning|timeline|process|consultation|quote|inspection|design-build|plan-check-corrections|permit-expediting|feasibility-study|site-assessment|peer-review|as-built|due-diligence|pre-design|value-engineering|historic-building|flood-zone|hillside|high-wind|snow-load|expansive-soil|infill|tenant-improvement|change-of-use|addition|remodel|new-construction|shell-building|brownfield|coastal|brewery|data-center|greenhouse|hangar|stadium|theater|museum|library|fire-station|bank|parking-garage|rooftop|acoustic-design|waterproofing|elevator|generator|kitchen-design|cleanroom|home-builder|distribution-center|manufacturing-plant|cold-storage|self-storage|car-dealership|fast-food|coffee-shop|bar-nightclub|casino|airport-terminal|train-station|golf-course|recreation-center|swimming-pool|convention-center|movie-theater|funeral-home|veterinary-clinic|dental-office|urgent-care|assisted-living|memory-care|charter-school|logistics-hub|public-parks|community-center|courthouse|city-hall|police-station|post-office|winery|distillery|food-processing|pharmaceutical-plant|research-lab|semiconductor-fab|solar-farm|battery-storage|water-treatment|high-rise|condominium|townhouse|rv-park|marina|equestrian-facility|aquarium|amusement-park|pickleball-courts|strip-mall)\/?$/;
+
+/** Mount the dynamic variation routes on the Express app. Call before static middleware. */
+export function mountApexDynamicRoutes(app: Express): void {
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    if (req.method !== "GET" && req.method !== "HEAD") return next();
+    // Skip anything with a file extension (assets, sitemaps, etc.)
+    if (path.extname(req.path)) return next();
+
+    const m = req.path.match(VARIATION_RE);
+    if (!m) return next();
+
+    const [, svc, state, city, variation] = m;
+    // Alaska is excluded (49 licensed states only)
+    if (state === "alaska") return next();
+    // Unknown state slug → not our route
+    if (!STATE_META[state]) return next();
+
+    // GSC fix (2026-10-05): never 500 on dynamic render failures.
+    // If variationPage throws (bad data, edge-case city, OOM pressure),
+    // fall through to the SPA/404 handler instead of returning 500 to Googlebot.
+    // 5xx errors burn crawl budget and suppress indexation site-wide.
+    let html: string | null;
+    try {
+      html = variationPage(DEPS, svc, state, city, variation);
+    } catch (err) {
+      console.error(`[apex-dynamic] render failed for ${req.path}:`, err instanceof Error ? err.message : err);
+      return next();
+    }
+    if (!html) return next(); // unknown city → fall through to static/404 handling
+
+    res.status(200);
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
+    res.setHeader("Cache-Control", "public, max-age=3600");
+    res.setHeader("X-Renderer", "apex-dynamic");
+    res.send(html);
+  });
+
+  console.log(
+    `[apex-dynamic] mounted: ${VARIATION_SERVICES.length} services × ${Object.keys(STATE_META).length} states × ${PLACE_LOOKUP.size} cities × ${Object.keys(VARIATIONS).length} variations`
+  );
+}
