@@ -1,5 +1,5 @@
 import { useParams } from "wouter";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 
 /**
  * Dynamic specialty × city page: /specialties/:specialty/:city/:state/
@@ -257,6 +257,20 @@ function slugToState(slug: string): string {
 export default function SpecialtyCityPage() {
   const params = useParams();
   const specialtySlug = params.specialty as string;
+
+  // Thin programmatic page (specialties-t2 only): noindexed to conserve crawl
+  // budget (2026-10-06). specialties t1 (pe-stamping etc.) stays indexable.
+  const isThinSpecialty = new Set(["structural-peer-review", "mep-peer-review", "code-consulting", "accessibility-compliance", "leed-certification", "net-zero-design", "envelope-commissioning", "forensic-engineering", "expert-witness"]).has(specialtySlug);
+  useEffect(() => {
+    if (!isThinSpecialty) return;
+    const meta = document.createElement("meta");
+    meta.name = "robots";
+    meta.content = "noindex,follow";
+    document.head.appendChild(meta);
+    return () => {
+      document.head.removeChild(meta);
+    };
+  }, [isThinSpecialty]);
   const citySlug = params.city as string;
   const stateSlug = params.state as string;
 
