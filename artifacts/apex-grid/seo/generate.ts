@@ -554,6 +554,54 @@ import { WAVE_QM_TIER1_B } from "./wave-qm-tier1-b";
 import { WAVE_QM_TIER1_C } from "./wave-qm-tier1-c";
 import { WAVE_QM_TIER1_D } from "./wave-qm-tier1-d";
 import { WAVE_QM_TIER1_E } from "./wave-qm-tier1-e";
+import { WAVE_QM_TIER2_A } from "./wave-qm-tier2-a";
+import { WAVE_QM_TIER2_B } from "./wave-qm-tier2-b";
+import { WAVE_QM_TIER2_C } from "./wave-qm-tier2-c";
+import { WAVE_QM_TIER2_D } from "./wave-qm-tier2-d";
+import { WAVE_QM_TIER2_E } from "./wave-qm-tier2-e";
+import { WAVE_QM_TIER2_F } from "./wave-qm-tier2-f";
+import { WAVE_QM_TIER2_G } from "./wave-qm-tier2-g";
+import { WAVE_QM_TIER2_H } from "./wave-qm-tier2-h";
+import { WAVE_QM_TIER2_I } from "./wave-qm-tier2-i";
+import { WAVE_QM_TIER2_J } from "./wave-qm-tier2-j";
+import { WAVE_QM_TIER2_K } from "./wave-qm-tier2-k";
+import { WAVE_QM_TIER2_L } from "./wave-qm-tier2-l";
+import { WAVE_QM_TIER2_M } from "./wave-qm-tier2-m";
+import { WAVE_QM_TIER2_N } from "./wave-qm-tier2-n";
+import { WAVE_QM_TIER2_O } from "./wave-qm-tier2-o";
+import { WAVE_QM_TIER2_P } from "./wave-qm-tier2-p";
+import { WAVE_QM_TIER2_Q } from "./wave-qm-tier2-q";
+import { WAVE_QM_TIER2_R } from "./wave-qm-tier2-r";
+import { WAVE_QM_TIER2_S } from "./wave-qm-tier2-s";
+import { WAVE_QM_TIER2_T } from "./wave-qm-tier2-t";
+import { WAVE_QM_TIER2_U } from "./wave-qm-tier2-u";
+import { WAVE_QM_TIER2_V } from "./wave-qm-tier2-v";
+import { WAVE_QM_TIER2_W } from "./wave-qm-tier2-w";
+import { WAVE_QM_TIER2_X } from "./wave-qm-tier2-x";
+import { WAVE_QM_TIER2_Y } from "./wave-qm-tier2-y";
+import { WAVE_QM_TIER2_Z } from "./wave-qm-tier2-z";
+import { WAVE_QM_TIER2_AA } from "./wave-qm-tier2-aa";
+import { WAVE_QM_TIER2_AB } from "./wave-qm-tier2-ab";
+import { WAVE_QM_TIER2_AC } from "./wave-qm-tier2-ac";
+import { WAVE_QM_TIER2_AD } from "./wave-qm-tier2-ad";
+import { WAVE_QM_TIER2_AE } from "./wave-qm-tier2-ae";
+import { WAVE_QM_TIER2_AF } from "./wave-qm-tier2-af";
+import { WAVE_QM_TIER2_AG } from "./wave-qm-tier2-ag";
+import { WAVE_QM_TIER2_AH } from "./wave-qm-tier2-ah";
+import { WAVE_QM_TIER2_AI } from "./wave-qm-tier2-ai";
+import { WAVE_QM_TIER2_AJ } from "./wave-qm-tier2-aj";
+import { WAVE_QM_TIER2_AK } from "./wave-qm-tier2-ak";
+import { WAVE_QM_TIER2_AL } from "./wave-qm-tier2-al";
+import { WAVE_QM_TIER2_AM } from "./wave-qm-tier2-am";
+import { WAVE_QM_TIER2_AN } from "./wave-qm-tier2-an";
+import { WAVE_QM_TIER2_AO } from "./wave-qm-tier2-ao";
+import { WAVE_QM_TIER2_AP } from "./wave-qm-tier2-ap";
+import { WAVE_QM_TIER2_AQ } from "./wave-qm-tier2-aq";
+import { WAVE_QM_TIER2_AR } from "./wave-qm-tier2-ar";
+import { WAVE_QM_TIER2_AS } from "./wave-qm-tier2-as";
+import { WAVE_QM_TIER2_AT } from "./wave-qm-tier2-at";
+import { WAVE_QM_TIER2_AU } from "./wave-qm-tier2-au";
+import { WAVE_QM_TIER2_AV } from "./wave-qm-tier2-av";
 
 const PHASE7_AEO_PAGES: Phase7AeoSeed[] = [
   ...PHASE7_COST_PAGES,
@@ -1596,6 +1644,58 @@ const QUERY_MATRIX_TIER1_PAGES: QueryMatrixPage[] = [
   ...WAVE_QM_TIER1_C,
   ...WAVE_QM_TIER1_D,
   ...WAVE_QM_TIER1_E,
+];
+
+// ── Query Matrix Tier 2: all cluster pages ─────────────────────────────
+const QUERY_MATRIX_TIER2_PAGES: QueryMatrixPage[] = [
+  ...WAVE_QM_TIER2_A,
+  ...WAVE_QM_TIER2_B,
+  ...WAVE_QM_TIER2_C,
+  ...WAVE_QM_TIER2_D,
+  ...WAVE_QM_TIER2_E,
+  ...WAVE_QM_TIER2_F,
+  ...WAVE_QM_TIER2_G,
+  ...WAVE_QM_TIER2_H,
+  ...WAVE_QM_TIER2_I,
+  ...WAVE_QM_TIER2_J,
+  ...WAVE_QM_TIER2_K,
+  ...WAVE_QM_TIER2_L,
+  ...WAVE_QM_TIER2_M,
+  ...WAVE_QM_TIER2_N,
+  ...WAVE_QM_TIER2_O,
+  ...WAVE_QM_TIER2_P,
+  ...WAVE_QM_TIER2_Q,
+  ...WAVE_QM_TIER2_R,
+  ...WAVE_QM_TIER2_S,
+  ...WAVE_QM_TIER2_T,
+  ...WAVE_QM_TIER2_U,
+  ...WAVE_QM_TIER2_V,
+  ...WAVE_QM_TIER2_W,
+  ...WAVE_QM_TIER2_X,
+  ...WAVE_QM_TIER2_Y,
+  ...WAVE_QM_TIER2_Z,
+  ...WAVE_QM_TIER2_AA,
+  ...WAVE_QM_TIER2_AB,
+  ...WAVE_QM_TIER2_AC,
+  ...WAVE_QM_TIER2_AD,
+  ...WAVE_QM_TIER2_AE,
+  ...WAVE_QM_TIER2_AF,
+  ...WAVE_QM_TIER2_AG,
+  ...WAVE_QM_TIER2_AH,
+  ...WAVE_QM_TIER2_AI,
+  ...WAVE_QM_TIER2_AJ,
+  ...WAVE_QM_TIER2_AK,
+  ...WAVE_QM_TIER2_AL,
+  ...WAVE_QM_TIER2_AM,
+  ...WAVE_QM_TIER2_AN,
+  ...WAVE_QM_TIER2_AO,
+  ...WAVE_QM_TIER2_AP,
+  ...WAVE_QM_TIER2_AQ,
+  ...WAVE_QM_TIER2_AR,
+  ...WAVE_QM_TIER2_AS,
+  ...WAVE_QM_TIER2_AT,
+  ...WAVE_QM_TIER2_AU,
+  ...WAVE_QM_TIER2_AV,
 ];
 
 function stampingServiceHub(hub: StampingServiceHub): string {
@@ -3012,6 +3112,12 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const page of QUERY_MATRIX_TIER1_PAGES) {
     queryMatrixUrls.push(u(`${SITE}${page.canonical}`, today, "monthly", "0.8"));
   }
+
+  // ── Query Matrix Tier 2 cluster pages ────────────────────────────────
+  const queryMatrixTier2Urls: string[] = [];
+  for (const page of QUERY_MATRIX_TIER2_PAGES) {
+    queryMatrixTier2Urls.push(u(`${SITE}${page.canonical}`, today, "monthly", "0.8"));
+  }
   for (const page of ALL_AEO_PAGES) {
     servicesUrls.push(u(`${SITE}/answers/${page.slug}/`, today, "monthly", "0.7"));
   }
@@ -3280,6 +3386,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     { name: "sitemap-services.xml",   urls: servicesUrls },
     { name: "sitemap-stamping.xml",   urls: stampingUrls },
     { name: "sitemap-query-matrix.xml", urls: queryMatrixUrls },
+    { name: "sitemap-query-matrix-tier2.xml", urls: queryMatrixTier2Urls },
     { name: "sitemap-estimators.xml", urls: estimatorUrls },
     { name: "sitemap-industries.xml", urls: industriesUrls },
     { name: "sitemap-solutions.xml",  urls: solutionsUrls },
@@ -9547,6 +9654,17 @@ async function main() {
 
   // ── Query Matrix Tier 1 cluster pages ────────────────────────────────
   for (const page of QUERY_MATRIX_TIER1_PAGES) {
+    assertSlug(page.slug);
+    const dir = path.join(PUBLIC, page.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = queryMatrixClusterPage(page);
+    assertPhase0Page(html, page.canonical, page.faqs, page.slug);
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
+
+  // ── Query Matrix Tier 2 cluster pages ────────────────────────────────
+  for (const page of QUERY_MATRIX_TIER2_PAGES) {
     assertSlug(page.slug);
     const dir = path.join(PUBLIC, page.slug);
     fs.mkdirSync(dir, { recursive: true });
