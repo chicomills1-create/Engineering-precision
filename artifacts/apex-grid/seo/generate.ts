@@ -548,6 +548,12 @@ import { WAVE_KW_ANSWER_PAGES } from "./wave-kw-answer-pages";
 import { WAVE_KX_ANSWER_PAGES } from "./wave-kx-answer-pages";
 import { WAVE_KY_ANSWER_PAGES } from "./wave-ky-answer-pages";
 import { WAVE_KZ_ANSWER_PAGES } from "./wave-kz-answer-pages";
+import type { QueryMatrixPage } from "./query-matrix-types";
+import { WAVE_QM_TIER1_A } from "./wave-qm-tier1-a";
+import { WAVE_QM_TIER1_B } from "./wave-qm-tier1-b";
+import { WAVE_QM_TIER1_C } from "./wave-qm-tier1-c";
+import { WAVE_QM_TIER1_D } from "./wave-qm-tier1-d";
+import { WAVE_QM_TIER1_E } from "./wave-qm-tier1-e";
 
 const PHASE7_AEO_PAGES: Phase7AeoSeed[] = [
   ...PHASE7_COST_PAGES,
@@ -1565,6 +1571,32 @@ function stampingServicePage(page: StampingServicePage): string {
     schemaType: "Service",
   });
 }
+
+/** Query Matrix Tier 1 cluster page — one authoritative page per keyword cluster. */
+function queryMatrixClusterPage(page: QueryMatrixPage): string {
+  return phase0ArticleFrame({
+    canonical: page.canonical,
+    title: page.title,
+    description: page.description,
+    h1: page.h1,
+    kicker: page.kicker,
+    answer: page.answer,
+    sections: page.sections,
+    faqs: page.faqs,
+    links: page.links,
+    schemaType: "Service",
+    directAnswer: page.directAnswer,
+  });
+}
+
+// ── Query Matrix Tier 1: all cluster pages ─────────────────────────────
+const QUERY_MATRIX_TIER1_PAGES: QueryMatrixPage[] = [
+  ...WAVE_QM_TIER1_A,
+  ...WAVE_QM_TIER1_B,
+  ...WAVE_QM_TIER1_C,
+  ...WAVE_QM_TIER1_D,
+  ...WAVE_QM_TIER1_E,
+];
 
 function stampingServiceHub(hub: StampingServiceHub): string {
   return phase0ArticleFrame({
@@ -2974,6 +3006,12 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   for (const page of STAMPING_SERVICE_PAGES) {
     stampingUrls.push(u(`${SITE}/${page.serviceSlug}/${page.stateSlug}/`, today, "monthly", "0.7"));
   }
+
+  // ── Query Matrix Tier 1 cluster pages ────────────────────────────────
+  const queryMatrixUrls: string[] = [];
+  for (const page of QUERY_MATRIX_TIER1_PAGES) {
+    queryMatrixUrls.push(u(`${SITE}${page.canonical}`, today, "monthly", "0.8"));
+  }
   for (const page of ALL_AEO_PAGES) {
     servicesUrls.push(u(`${SITE}/answers/${page.slug}/`, today, "monthly", "0.7"));
   }
@@ -3241,6 +3279,7 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     { name: "sitemap-core.xml",       urls: coreUrls },
     { name: "sitemap-services.xml",   urls: servicesUrls },
     { name: "sitemap-stamping.xml",   urls: stampingUrls },
+    { name: "sitemap-query-matrix.xml", urls: queryMatrixUrls },
     { name: "sitemap-estimators.xml", urls: estimatorUrls },
     { name: "sitemap-industries.xml", urls: industriesUrls },
     { name: "sitemap-solutions.xml",  urls: solutionsUrls },
@@ -9505,6 +9544,17 @@ async function main() {
       fs.writeFileSync(path.join(dir, "index.html"), html);
       pages++;
     }
+
+  // ── Query Matrix Tier 1 cluster pages ────────────────────────────────
+  for (const page of QUERY_MATRIX_TIER1_PAGES) {
+    assertSlug(page.slug);
+    const dir = path.join(PUBLIC, page.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const html = queryMatrixClusterPage(page);
+    assertPhase0Page(html, page.canonical, page.faqs, page.slug);
+    fs.writeFileSync(path.join(dir, "index.html"), html);
+    pages++;
+  }
   }
   const playbooksDir = path.join(PUBLIC, "plan-check-playbooks");
   const playbookHubHtml = phase0CollectionHub(
