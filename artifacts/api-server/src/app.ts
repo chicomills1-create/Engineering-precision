@@ -64,6 +64,40 @@ const DYNAMIC_SPA_PATH_PREFIXES = new Set([
   "wave1",
 ]);
 
+// ── Thin programmatic city pages: noindex to conserve crawl budget ──────────
+// These 4-segment city routes serve ~1.7M near-duplicate pages (franchise,
+// verticals, buildings, projects, specialties-t2). They stay live for users
+// but send X-Robots-Tag: noindex so Google concentrates crawl budget on the
+// money pages (locations/, wave1, services). specialties t1 (pe-stamping
+// etc.) and services-local remain indexable.
+const NOINDEX_SPA_PREFIXES = new Set([
+  "franchise",
+  "verticals",
+  "buildings",
+  "projects",
+]);
+const NOINDEX_SPECIALTY_T2_SLUGS = new Set([
+  "structural-peer-review",
+  "mep-peer-review",
+  "code-consulting",
+  "accessibility-compliance",
+  "leed-certification",
+  "net-zero-design",
+  "envelope-commissioning",
+  "forensic-engineering",
+  "expert-witness",
+]);
+
+function isNoindexSpaPath(pathname: string): boolean {
+  const segs = pathname.replace(/^\/+|\/+$/g, "").split("/");
+  if (segs.length !== 4) return false;
+  if (NOINDEX_SPA_PREFIXES.has(segs[0])) return true;
+  if (segs[0] === "specialties" && NOINDEX_SPECIALTY_T2_SLUGS.has(segs[1])) {
+    return true;
+  }
+  return false;
+}
+
 function isDynamicSpaPath(pathname: string): boolean {
   const segs = pathname.replace(/^\/+|\/+$/g, "").split("/");
   return segs.length === 4 && DYNAMIC_SPA_PATH_PREFIXES.has(segs[0]);
@@ -204,6 +238,10 @@ app.use((req, res) => {
       explicitSpaPaths.has(pathname) ||
       pathname.startsWith("/sign-in/") ||
       pathname.startsWith("/sign-up/");
+    // Thin programmatic city pages: keep live for users, noindex for crawlers.
+    if (isNoindexSpaPath(pathname)) {
+      res.set("X-Robots-Tag", "noindex, follow");
+    }
     res.status(isKnownSpaPath ? 200 : 404).sendFile(indexHtml);
   } else {
     res.status(404).send("Not found");
