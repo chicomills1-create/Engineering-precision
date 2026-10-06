@@ -20,7 +20,7 @@ export const SERVICES: ServiceDef[] = [
     name: "MEP Engineering",
     shortName: "MEP",
     h1: "MEP Engineering",
-    metaTitle: (s) => `MEP Engineering in ${s.name} | Mechanical, Electrical & Plumbing Design | Apex Grid`,
+    metaTitle: (s) => `Best MEP Engineer in ${s.name} | Fast Turnaround | Apex Grid Engineering`,
     metaDescription: (s) =>
       `Licensed MEP engineering for ${s.name} commercial projects. HVAC, electrical, and plumbing design engineered for ${s.climate.zones.split(";")[0].split("(")[0].trim()} climate conditions and ${s.abbrev} code requirements.`,
     narrativeKey: "mep",
@@ -40,7 +40,7 @@ export const SERVICES: ServiceDef[] = [
     name: "Structural Engineering",
     shortName: "Structural",
     h1: "Structural Engineering",
-    metaTitle: (s) => `Structural Engineering in ${s.name} | Commercial Structural Design | Apex Grid`,
+    metaTitle: (s) => `Best Structural Engineer in ${s.name} | Fast Turnaround | Apex Grid Engineering`,
     metaDescription: (s) =>
       `Structural engineering for ${s.name}: new design, retrofits, and assessments engineered for ${s.abbrev} seismic, wind, and snow requirements under the adopted ${s.buildingCode.baseCode.split(" with")[0]}.`,
     narrativeKey: "structural",
@@ -60,7 +60,7 @@ export const SERVICES: ServiceDef[] = [
     name: "Civil & Site Engineering",
     shortName: "Civil",
     h1: "Civil & Site Engineering",
-    metaTitle: (s) => `Civil Engineering in ${s.name} | Site Design, Grading & Stormwater | Apex Grid`,
+    metaTitle: (s) => `Best Civil Engineer in ${s.name} | Fast Turnaround | Apex Grid Engineering`,
     metaDescription: (s) =>
       `Civil and site engineering for ${s.name} development: grading, drainage, stormwater management, and utility design aligned with ${s.abbrev} jurisdiction standards and permitting.`,
     narrativeKey: "civil",
@@ -82,12 +82,8 @@ export const SERVICES: ServiceDef[] = [
     h1: "Energy Code Compliance",
     metaTitle: (s) =>
       s.abbrev === "CA"
-        ? `Title 24 Energy Compliance in California | T24 Reports & Energy Code | Apex Grid`
-        : (() => {
-            let code = s.energyCode.commercial.split(" —")[0].split(";")[0].split(",")[0].split("(")[0].trim();
-            if (code.length > 40) code = "Commercial Energy Code Services";
-            return `Energy Code Compliance in ${s.name} | ${code} | Apex Grid`;
-          })(),
+        ? `Best Title 24 Energy Consultant in California | Fast Turnaround | Apex Grid Engineering`
+        : `Best Energy Engineer in ${s.name} | Fast Turnaround | Apex Grid Engineering`,
     metaDescription: (s) =>
       `Commercial energy code compliance in ${s.name}: ${s.energyCode.commercial.split(";")[0]}. Compliance documentation, energy modeling, and plan-check support from licensed engineers.`,
     narrativeKey: "energy",

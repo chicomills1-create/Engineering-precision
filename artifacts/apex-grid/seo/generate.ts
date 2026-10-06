@@ -10308,7 +10308,7 @@ ${citySourceList(city)}
 </div></section>`;
 
   return htmlShell({
-    title: `${svc.name} in ${city.name}, ${state.abbrev} | Licensed PE Firm | Apex Grid`,
+    title: `Best ${svc.shortName} Engineer in ${city.name} | Fast Turnaround | Apex Grid Engineering`,
     description: `Licensed ${svc.name.toLowerCase()} for ${city.name}, ${state.abbrev} commercial projects. Permits through ${city.ahj.office}; designed to the ${city.codes.building.split(",")[0].split("(")[0].trim()} with local amendments.`,
     canonical: `${SITE}${url}`,
     schemaJson: [orgSchema, svcSchema, faqSchema, breadcrumbSchema(crumbs)],
