@@ -2205,7 +2205,32 @@ function staticIndexExists(urlPath: string): boolean {
 /** Shared "Need a PE stamp in [City]?" block — injected into location pages. */
 function peStampBlock(opts: { placeName: string; county: string; stateName: string; ahj: string; discipline?: string; }): string { const disc = opts.discipline ? `${esc(opts.discipline)} ` : ""; return `<section class="block"><div class="container"> <h2>Need a PE stamp in <em>${esc(opts.placeName)}</em>?</h2> <div class="prose"><p>Permit stuck waiting on a seal? Apex Grid's licensed engineers provide fast ${disc}review-and-seal for drawings in ${esc(opts.placeName)} and across ${esc(opts.county)} — reviewed under responsible charge and sealed for submittal to ${esc(opts.ahj)}. Typical turnaround is 3–5 business days once we have a complete package.</p></div> <div class="linkrow"><a class="cta" href="/pe-stamp/">Send us your plans</a> <a href="/pe-stamp/">How PE review-and-seal works</a></div> </div></section>`; }
 
-function servicePage(state: StateData, svc: ServiceDef, allStates: StateData[]): string {
+
+/** Priority money-page links: top commercial-opportunity cities x core disciplines.
+ *  Pushes internal authority toward the highest-value money pages. */
+function priorityMoneyLinks(
+  state: StateData,
+  cities: CityData[],
+  svcSlugs: string[],
+  maxCities = 4,
+): string {
+  const MONEY_SVCS = SERVICES.filter((s) => svcSlugs.includes(s.slug));
+  const cityBySlug = new Map(cities.filter((c) => c.stateSlug === state.slug && isReviewedCity(c)).map((c) => [c.slug, c]));
+  const links: string[] = [];
+  for (const p of CITY_PRIORITIES.filter((x) => x.stateSlug === state.slug).slice(0, maxCities)) {
+    const city = cityBySlug.get(p.citySlug);
+    if (!city) continue;
+    for (const svc of MONEY_SVCS) {
+      if (!isSupportedCityService(city, svc.slug)) continue;
+      links.push(
+        `<a href="/locations/${state.slug}/${city.slug}/${svc.slug}/">${esc(svc.shortName)} engineer in ${esc(city.name)}</a>`,
+      );
+    }
+  }
+  return links.join("");
+}
+
+function servicePage(state: StateData, svc: ServiceDef, allStates: StateData[], cities: CityData[]): string {
   const url = `/locations/${state.slug}/${svc.slug}/`;
   const crumbs = [
     { name: "Home", href: "/" },
@@ -2296,6 +2321,12 @@ ${peStampBlock({
     .join("")}</div>
 </div></section>
 
+<section class="block"><div class="container">
+  <h2>Top ${esc(svc.shortName)} Markets in <em>${esc(state.name)}</em></h2>
+  <p class="prose">Our highest-demand markets for ${esc(svc.shortName.toLowerCase())} engineering in ${esc(state.name)}.</p>
+  <div class="linkrow">${priorityMoneyLinks(state, cities, [svc.slug], 6)}</div>
+</div></section>
+
 <section class="ctaband"><div class="container">
   <h2>Start Your ${esc(state.name)} Project</h2>
   <p>For projects whose jurisdiction, discipline, and scope pass review, an available licensed PE and coordinated team can be identified. Send us your scope for a proposal; timing and fee depend on the project.</p>
@@ -2346,6 +2377,11 @@ ${breadcrumb(crumbs)}
   ).join("")}
   </div>
 </div></section>
+${priorityMoneyLinks(state, cities, ["mep-engineering", "structural-engineering"]) ? `<section class="block"><div class="container">
+  <h2>Priority ${esc(state.name)} <em>Engineering Markets</em></h2>
+  <p class="prose">Our most requested ${esc(state.name)} engineering markets.</p>
+  <div class="linkrow">${priorityMoneyLinks(state, cities, ["mep-engineering", "structural-engineering"])}</div>
+</div></section>` : ""}
 ${priorityMarkets.length ? `<section class="block"><div class="container">
   <h2>Priority ${esc(state.name)} <em>Markets</em></h2>
   <p class="prose">Use these regional and city hubs to organize jurisdiction, existing-condition, discipline, and project-scope questions before requesting engineering.</p>
@@ -5694,7 +5730,7 @@ async function main() {
     for (const svc of SERVICES) {
       const dir = path.join(sdir, svc.slug);
       fs.mkdirSync(dir, { recursive: true });
-      fs.writeFileSync(path.join(dir, "index.html"), servicePage(s, svc, states));
+      fs.writeFileSync(path.join(dir, "index.html"), servicePage(s, svc, states, cities));
       pages++;
     }
     for (const c of cities.filter((c) => c.stateSlug === s.slug)) {
@@ -10222,7 +10258,11 @@ function cityServicePage(state: StateData, city: CityData, svc: ServiceDef, sibl
     { name: svc.shortName },
   ];
   const otherSvcs = SERVICES.filter((x) => x.slug !== svc.slug);
-  const nearby = siblingCities.filter((c) => c.slug !== city.slug && isReviewedCity(c)).slice(0, 8);
+  const _prioritySlugs = new Set(CITY_PRIORITIES.filter((p) => p.stateSlug === state.slug).map((p) => p.citySlug));
+  const nearby = siblingCities
+    .filter((c) => c.slug !== city.slug && isReviewedCity(c))
+    .sort((a, b) => Number(_prioritySlugs.has(b.slug)) - Number(_prioritySlugs.has(a.slug)))
+    .slice(0, 8);
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
