@@ -1,5 +1,5 @@
 import { useParams } from "wouter";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 
 /**
  * Dynamic project type × city page: /projects/:project/:city/:state/
@@ -277,6 +277,18 @@ export default function ProjectCityPage() {
 
   const item = PROJECTS[itemSlug];
   const city = useMemo(() => slugToCity(citySlug || ''), [citySlug]);
+
+  // Thin programmatic page: noindexed to conserve crawl budget (2026-10-06).
+  // Page stays live for users; X-Robots-Tag is also set server-side.
+  useEffect(() => {
+    const meta = document.createElement("meta");
+    meta.name = "robots";
+    meta.content = "noindex,follow";
+    document.head.appendChild(meta);
+    return () => {
+      document.head.removeChild(meta);
+    };
+  }, []);
   const state = useMemo(() => slugToState(stateSlug || ''), [stateSlug]);
 
   if (!item || !city || !state) {
