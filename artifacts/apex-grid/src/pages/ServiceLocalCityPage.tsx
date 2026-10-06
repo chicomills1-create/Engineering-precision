@@ -1,5 +1,6 @@
 import { useParams } from "wouter";
 import { useMemo } from "react";
+import { usePageMeta, useJsonLd, SITE_URL } from "@/lib/seo";
 
 /**
  * Dynamic local service × city page: /services-local/:service/:city/:state/
@@ -277,6 +278,72 @@ export default function ServiceLocalCityPage() {
 
   const pageTitle = `${item.title} in ${city}, ${state} | Apex Grid`;
   const metaDescription = `${item.description} ${item.name} engineering services in ${city}, ${state} with 49-state PE licensure and 24-hour quotes.`;
+  const pagePath = `/services-local/${itemSlug}/${citySlug}/${stateSlug}/`;
+  const serviceLower = item.name.toLowerCase();
+
+  const faqs = [
+    {
+      question: `How much does ${serviceLower} engineering cost in ${city}?`,
+      answer: `Every project is scoped individually, so we quote in 24 hours based on your drawings, square footage, and deliverables. As a rule of thumb, ${serviceLower} engineering for commercial projects in ${city} typically runs a small fraction of construction cost. Send us your project for an exact number.`,
+    },
+    {
+      question: `Do I need a licensed engineer for my ${city} project?`,
+      answer: `Most commercial ${serviceLower} work in ${city}, ${state} requires drawings stamped by a licensed Professional Engineer for permit approval. Apex Grid's PEs are licensed in 49 states, so one firm can stamp your project no matter where your portfolio takes you.`,
+    },
+    {
+      question: `How fast can I get ${serviceLower} drawings in ${city}, ${state}?`,
+      answer: `Quotes come back in 24 hours. Drawing turnaround depends on project size and complexity, but our production team is built for speed — most commercial ${serviceLower} plan sets move from kickoff to permit-ready in weeks, not months.`,
+    },
+    {
+      question: `Which ${serviceLower} codes apply in ${city}, ${state}?`,
+      answer: `Your project must meet the editions of the national codes adopted by ${city} plus any ${state} amendments and local building department requirements. We engineer every plan set to the adopted codes for your jurisdiction, so plan-check corrections stay minimal.`,
+    },
+  ];
+
+  usePageMeta({ title: pageTitle, description: metaDescription, path: pagePath });
+
+  useJsonLd({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        name: "Apex Grid Engineering PLLC",
+        url: SITE_URL || "https://apexgrideng.com",
+        telephone: "+1-480-490-0064",
+        email: "info@apexgrideng.com",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "22475 E Quintero Rd",
+          addressLocality: "Queen Creek",
+          addressRegion: "AZ",
+          postalCode: "85142",
+          addressCountry: "US",
+        },
+        areaServed: {
+          "@type": "City",
+          name: city,
+          containedInPlace: { "@type": "State", name: state },
+        },
+        knowsAbout: [item.name, "PE stamping", "Permit-ready drawings"],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer },
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL || "https://apexgrideng.com"}/` },
+          { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL || "https://apexgrideng.com"}/services` },
+          { "@type": "ListItem", position: 3, name: item.name, item: `${SITE_URL || "https://apexgrideng.com"}${pagePath}` },
+        ],
+      },
+    ],
+  });
 
   return (
     <div className="min-h-screen bg-white">
@@ -333,6 +400,18 @@ export default function ServiceLocalCityPage() {
               <li key={i}>{s}</li>
             ))}
           </ul>
+
+          <h2 className="text-2xl font-semibold mb-4 mt-8">
+            {item.name} Engineering in {city}: Common Questions
+          </h2>
+          <div className="space-y-4 mb-6">
+            {faqs.map((f, i) => (
+              <details key={i} className="border border-gray-200 rounded-lg p-4">
+                <summary className="font-semibold cursor-pointer">{f.question}</summary>
+                <p className="mt-2 text-gray-700">{f.answer}</p>
+              </details>
+            ))}
+          </div>
 
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mt-8">
             <h3 className="text-xl font-semibold mb-3">Get Your {city} {item.name} Project Engineered</h3>
