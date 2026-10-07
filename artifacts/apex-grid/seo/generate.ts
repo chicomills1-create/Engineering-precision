@@ -3343,8 +3343,11 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
       name: "sitemap-general-contracting-locations.xml",
       urls: verticalLocationUrls.get("general-contracting") ?? [],
     },
-    ...citySitemapEntries,
-    ...wave1SitemapEntries,
+    // BASELINE V1 (2026-10-07): only the 12 approved sitemaps above are indexed.
+    // citySitemapEntries (sitemap-services-local-*, sitemap-specialties-*) and
+    // wave1SitemapEntries (sitemap-wave1-*) were cut by release-gate validation:
+    // 431,431 homepage-template duplicate URLs. Their static files remain in
+    // public/ as evidence but are no longer written or listed in the index.
   ];
   const seenUrls = new Set<string>();
   const duplicateUrls: string[] = [];
