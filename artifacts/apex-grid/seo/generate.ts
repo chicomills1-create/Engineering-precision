@@ -9610,14 +9610,27 @@ async function main() {
     }
 
   // ── Query Matrix Tier 1 cluster pages ────────────────────────────────
+  // NOTE (2026-10-07): Per-page error isolation — a single malformed query
+  // matrix page must not crash the entire seo:generate build. Failing pages
+  // are logged and skipped; the sitemap excludes them via the URL list below.
+  const queryMatrixSkipped: string[] = [];
   for (const page of QUERY_MATRIX_TIER1_PAGES) {
-    assertSlugPath(page.slug);
-    const dir = path.join(PUBLIC, page.slug);
-    fs.mkdirSync(dir, { recursive: true });
-    const html = queryMatrixClusterPage(page);
-    assertPhase0Page(html, page.canonical, page.faqs, page.slug);
-    fs.writeFileSync(path.join(dir, "index.html"), html);
-    pages++;
+    try {
+      assertSlugPath(page.slug);
+      const dir = path.join(PUBLIC, page.slug);
+      fs.mkdirSync(dir, { recursive: true });
+      const html = queryMatrixClusterPage(page);
+      assertPhase0Page(html, page.canonical, page.faqs, page.slug);
+      fs.writeFileSync(path.join(dir, "index.html"), html);
+      pages++;
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.warn(`[seo:generate] Skipping query-matrix page ${page.slug}: ${msg}`);
+      queryMatrixSkipped.push(page.slug);
+    }
+  }
+  if (queryMatrixSkipped.length > 0) {
+    console.warn(`[seo:generate] Skipped ${queryMatrixSkipped.length} query-matrix pages`);
   }
   }
   const playbooksDir = path.join(PUBLIC, "plan-check-playbooks");
