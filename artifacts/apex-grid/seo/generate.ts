@@ -1596,13 +1596,11 @@ function queryMatrixClusterPage(page: QueryMatrixPage): string {
 }
 
 // ── Query Matrix Tier 1: all cluster pages ─────────────────────────────
-const QUERY_MATRIX_TIER1_PAGES: QueryMatrixPage[] = [
-  ...WAVE_QM_TIER1_A,
-  ...WAVE_QM_TIER1_B,
-  ...WAVE_QM_TIER1_C,
-  ...WAVE_QM_TIER1_D,
-  ...WAVE_QM_TIER1_E,
-];
+// NOTE (2026-10-07): Query Matrix Tier 1 disabled — the 490-page merge
+// (eb5f646b) breaks `seo:generate` build (see build failures since 2026-10-06).
+// Re-enable after root-causing the crash. Sitemap cleanup (2.15M -> 469K)
+// takes priority for crawl budget.
+const QUERY_MATRIX_TIER1_PAGES: QueryMatrixPage[] = [];
 
 function stampingServiceHub(hub: StampingServiceHub): string {
   return phase0ArticleFrame({
