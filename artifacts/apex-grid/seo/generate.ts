@@ -723,6 +723,12 @@ function assertSlug(slug: string) {
   if (!/^[a-z0-9-]+$/.test(slug)) throw new Error(`Invalid slug: ${slug}`);
 }
 
+function assertSlugPath(slugPath: string) {
+  const segments = slugPath.split("/");
+  if (segments.length === 0 || segments.some((s) => !/^[a-z0-9-]+$/.test(s)))
+    throw new Error(`Invalid slug path: ${slugPath}`);
+}
+
 function validateDirectory(directory: CityDirectory, states: StateData[]): void {
   const knownStates = new Set(states.map((state) => state.slug));
   for (const [stateSlug, entries] of Object.entries(directory)) {
@@ -9605,7 +9611,7 @@ async function main() {
 
   // ── Query Matrix Tier 1 cluster pages ────────────────────────────────
   for (const page of QUERY_MATRIX_TIER1_PAGES) {
-    assertSlug(page.slug);
+    assertSlugPath(page.slug);
     const dir = path.join(PUBLIC, page.slug);
     fs.mkdirSync(dir, { recursive: true });
     const html = queryMatrixClusterPage(page);
