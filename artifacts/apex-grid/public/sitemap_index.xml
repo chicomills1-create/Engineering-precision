@@ -7,6 +7,12 @@
     <loc>https://apexgrideng.com/sitemap-services.xml</loc>
   </sitemap>
   <sitemap>
+    <loc>https://apexgrideng.com/sitemap-stamping.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://apexgrideng.com/sitemap-query-matrix.xml</loc>
+  </sitemap>
+  <sitemap>
     <loc>https://apexgrideng.com/sitemap-estimators.xml</loc>
   </sitemap>
   <sitemap>
@@ -31,90 +37,6 @@
     <loc>https://apexgrideng.com/sitemap-general-contracting-locations.xml</loc>
   </sitemap>
   <sitemap>
-    <loc>https://apexgrideng.com/sitemap-franchise-0.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-franchise-1.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-franchise-2.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-franchise-3.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-verticals-0.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-verticals-1.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-verticals-2.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-verticals-3.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-buildings-0.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-buildings-1.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-buildings-2.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-buildings-3.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-specialties-0.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-specialties-1.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-specialties-2.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-verticals-t2-0.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-verticals-t2-1.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-verticals-t2-2.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-verticals-t2-3.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-verticals-t2-4.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-verticals-t2-5.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-projects-0.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-projects-1.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-projects-2.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-projects-3.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-projects-4.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-projects-5.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-projects-6.xml</loc>
-  </sitemap>
-  <sitemap>
     <loc>https://apexgrideng.com/sitemap-services-local-0.xml</loc>
   </sitemap>
   <sitemap>
@@ -133,37 +55,13 @@
     <loc>https://apexgrideng.com/sitemap-services-local-5.xml</loc>
   </sitemap>
   <sitemap>
-    <loc>https://apexgrideng.com/sitemap-buildings-t2-0.xml</loc>
+    <loc>https://apexgrideng.com/sitemap-specialties-0.xml</loc>
   </sitemap>
   <sitemap>
-    <loc>https://apexgrideng.com/sitemap-buildings-t2-1.xml</loc>
+    <loc>https://apexgrideng.com/sitemap-specialties-1.xml</loc>
   </sitemap>
   <sitemap>
-    <loc>https://apexgrideng.com/sitemap-buildings-t2-2.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-buildings-t2-3.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-buildings-t2-4.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-buildings-t2-5.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-buildings-t2-6.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-specialties-t2-0.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-specialties-t2-1.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-specialties-t2-2.xml</loc>
-  </sitemap>
-  <sitemap>
-    <loc>https://apexgrideng.com/sitemap-specialties-t2-3.xml</loc>
+    <loc>https://apexgrideng.com/sitemap-specialties-2.xml</loc>
   </sitemap>
   <sitemap>
     <loc>https://apexgrideng.com/sitemap-wave1-civil-al.xml</loc>
