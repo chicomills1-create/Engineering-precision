@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Menu, X, ChevronDown, Phone } from "lucide-react";
+import { Menu, X, ChevronDown, Phone, Mail } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { useState, useEffect, useRef } from "react";
 import { FEATURED_INDUSTRIES } from "@/data/industries";
@@ -9,6 +9,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [year, setYear] = useState(2026);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -22,6 +23,10 @@ export function Shell({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location]);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
 
   useEffect(() => {
     if (!isMobileMenuOpen) return;
@@ -175,6 +180,14 @@ export function Shell({ children }: { children: React.ReactNode }) {
               );
             })}
             <a
+              href="mailto:info@apexgrideng.com"
+              className="h-10 px-2 text-primary hover:text-primary/80 font-bold text-sm tracking-wide flex items-center gap-2 rounded-sm transition-colors whitespace-nowrap focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+              aria-label="Email Apex Grid Engineering at info@apexgrideng.com"
+            >
+              <Mail className="w-4 h-4" />
+              Email us
+            </a>
+            <a
               href="tel:+14804900064"
               className="h-10 px-2 text-primary hover:text-primary/80 font-bold text-sm tracking-wide flex items-center gap-2 rounded-sm transition-colors whitespace-nowrap focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
               aria-label="Call Apex Grid Engineering at (480) 490-0064"
@@ -287,6 +300,14 @@ export function Shell({ children }: { children: React.ReactNode }) {
               </Link>
             </div>
             <div className="flex flex-col gap-2 mt-2">
+              <a
+                href="mailto:info@apexgrideng.com"
+                className="h-12 w-full border border-primary/30 text-primary hover:bg-primary/5 font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 rounded-sm transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <Mail className="w-4 h-4" />
+                Email info@apexgrideng.com
+              </a>
               <a
                 href="tel:+14804900064"
                 className="h-12 w-full border border-primary/30 text-primary hover:bg-primary/5 font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 rounded-sm transition-colors"
@@ -412,7 +433,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
             </div>
           </div>
           <div className="mt-20 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-            <p>© {new Date().getFullYear()} Apex Grid Engineering. All rights reserved.</p>
+            <p>© {year} Apex Grid Engineering. All rights reserved.</p>
             <div className="flex gap-6">
               <Link href="/privacy" className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:text-foreground">Privacy Policy</Link>
               <Link href="/terms" className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:text-foreground">Terms of Service</Link>

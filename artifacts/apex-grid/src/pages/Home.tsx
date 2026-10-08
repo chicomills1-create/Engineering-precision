@@ -4,6 +4,7 @@ import heroBg from "@assets/generated_images/hero-bg2.webp";
 import { useJsonLd, usePageMeta } from "@/lib/seo";
 import { APEX_GRID_BUSINESS_SCHEMA } from "@/lib/business-schema";
 import { LicensingCoverage } from "@/components/LicensingCoverage";
+import { PlanDropZone } from "@/components/PlanDropZone";
 
 /**
  * Homepage — problem-first. Visitor has a problem (needs a stamp, needs a
@@ -40,6 +41,7 @@ const FACTS = [
   { value: "15+ years", label: "Engineering experience" },
   { value: "20+ engineers", label: "On the team" },
   { value: "10+ PEs", label: "Licensed professionals" },
+  { value: "5.0★", label: "Google rating" },
 ];
 
 const SERVICES = [
@@ -105,10 +107,10 @@ export default function Home() {
               Apex Grid Engineering
             </span>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.95] tracking-tighter mb-6 text-white">
-              What do you need<br />fixed?
+              Permit-ready engineering.<br />Stamped in days, not months.
             </h1>
             <p className="text-lg md:text-2xl text-foreground/80 max-w-2xl mb-12 leading-relaxed font-light">
-              Best price. Fastest turnaround. Tap what you need — get your number in under a minute.
+              Plans stamped, designs engineered, permits cleared — best price, fastest turnaround. Tap what you need, or send your drawings and get your number in under a minute.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-4xl">
@@ -140,9 +142,29 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Send us your plans — the GC transaction */}
+      <section className="py-20 md:py-28 bg-background border-b border-border" aria-label="Send us your plans">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-10">
+              <span className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-primary uppercase font-bold">
+                Skip the form. Send the drawings.
+              </span>
+              <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mt-4 mb-4">
+                Send us your plans.
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Drop your drawings below — a licensed PE reviews them and your quote lands in 12–24 hours.
+              </p>
+            </div>
+            <PlanDropZone />
+          </div>
+        </div>
+      </section>
+
       {/* Trust facts — stated directly */}
       <section className="border-y border-white/10 bg-card" aria-label="Why Apex Grid">
-        <div className="grid grid-cols-2 lg:grid-cols-5 divide-x divide-y lg:divide-y-0 divide-white/10">
+        <div className="grid grid-cols-2 lg:grid-cols-6 divide-x divide-y lg:divide-y-0 divide-white/10">
           {FACTS.map((fact) => (
             <div key={fact.label} className="p-8 md:p-10 text-center">
               <div className="text-3xl md:text-4xl font-display font-bold text-white mb-2 tracking-tight">{fact.value}</div>
@@ -246,6 +268,10 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mb-6">
               What clients say
             </h2>
+            <div className="flex items-center justify-center gap-2 mb-6" aria-label="Rated 5.0 out of 5 on Google">
+              <span className="text-primary text-xl tracking-tight" aria-hidden="true">★★★★★</span>
+              <span className="text-sm text-muted-foreground font-medium">5.0 on Google</span>
+            </div>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Real projects. Real people. Here's what it's like working with us.
             </p>
@@ -274,7 +300,7 @@ export default function Home() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto flex flex-col items-center">
             <h2 className="text-5xl md:text-6xl font-display font-bold mb-6 tracking-tighter">
-              Got a project? Let's fix it.
+              Got a project? Let's build it.
             </h2>
             <p className="text-lg md:text-xl text-white/90 font-light mb-10 max-w-xl">
               Get your ballpark price in under a minute — or send us your plans and we'll take it from there.
@@ -306,4 +332,5 @@ const PAGE_META = {
   description: "Need plans stamped, engineering designed, or calculations run? Veteran-owned engineering firm licensed in 49 states. Best price, fastest turnaround — get your ballpark in under a minute.",
   path: "/",
 };
+
 
