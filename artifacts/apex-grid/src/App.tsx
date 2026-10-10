@@ -4,6 +4,7 @@ import NotFound from '@/pages/not-found';
 
 import { Shell } from '@/components/layout/Shell';
 import Home from '@/pages/Home';
+import Reviews from '@/pages/Reviews';
 import Services from '@/pages/Services';
 import ServiceDetail from '@/pages/ServiceDetail';
 import Legal from '@/pages/Legal';
@@ -101,6 +102,7 @@ function Router() {
     <Shell>
       <Switch>
         <Route path="/" component={Home} />
+          <Route path="/reviews" component={Reviews} />
         <Route path="/services" component={Services} />
         <Route path="/services/:id" component={ServiceDetail} />
         <Route path="/pe-stamp" component={PeStamp} />
