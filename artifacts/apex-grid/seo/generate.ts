@@ -1140,6 +1140,12 @@ function phase0ArticleFrame(
     dateModified: PHASE0_UPDATED_DATE,
     author: authorSchema,
     publisher: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
+    ...(opts.directAnswer ? {
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: [".direct-answer"],
+      },
+    } : {}),
   };
   const howToSchema = opts.howTo ? {
     "@context": "https://schema.org",
