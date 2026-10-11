@@ -177,6 +177,60 @@
     background-image: linear-gradient(to right, hsl(var(--primary) / 0.15) 1px, transparent 1px),
       linear-gradient(to bottom, hsl(var(--primary) / 0.15) 1px, transparent 1px);
   }
+
+  /* ---------- 3D typography + depth (Apex kill mode, 2026-10-11) ----------
+     Metallic crimson headline: highlight -> brand crimson -> deep crimson
+     anchor (#8B0000). Spec asked #8B0000 -> black; top pulled up for
+     legibility on the near-black background (readability first). */
+  .type-metallic {
+    background: linear-gradient(180deg, #FF7A88 0%, #E8384F 32%, #B01E32 62%, #8B0000 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(2px 3px 3px rgba(0, 0, 0, 0.6)) drop-shadow(0 10px 28px rgba(218, 27, 43, 0.22));
+  }
+  .type-accent-glow {
+    background: none;
+    color: hsl(var(--primary));
+    -webkit-text-fill-color: hsl(var(--primary));
+    filter: drop-shadow(0 2px 6px rgba(218, 27, 43, 0.55));
+  }
+  /* 3D depth for solid-white headlines */
+  .type-3d {
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.07),
+      2px 2px 3px rgba(0, 0, 0, 0.6),
+      0 10px 28px rgba(0, 0, 0, 0.5);
+  }
+  .type-3d-sm {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.45);
+  }
+  /* White headline on the crimson final-CTA band */
+  .type-3d-on-red {
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25), 0 6px 18px rgba(0, 0, 0, 0.4);
+  }
+  /* Floating cards — layered shadows so cards lift off the page */
+  .card-3d {
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.04),
+      0 4px 12px rgba(0, 0, 0, 0.45),
+      0 16px 40px rgba(0, 0, 0, 0.35);
+    transform: translateZ(0);
+  }
+  /* One subtle gloss highlight for primary CTAs */
+  .btn-gloss {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-gloss::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.20) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(255, 255, 255, 0) 60%);
+    pointer-events: none;
+  }
 }
 
 /* Reduced motion preference */

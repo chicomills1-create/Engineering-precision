@@ -114,8 +114,8 @@ export default function Home() {
             <span className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-primary uppercase font-bold mb-8">
               Apex Grid Engineering — PE-Stamped MEP · Structural · Civil
             </span>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.95] tracking-tighter mb-6 text-white">
-              100 Subway locations.<br />49 states. <span className="text-primary">One engineering firm.</span>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.95] tracking-tighter mb-6 type-metallic">
+              100 Subway locations.<br />49 states. <span className="type-accent-glow">One engineering firm.</span>
             </h1>
             <p className="text-lg md:text-2xl text-foreground/80 max-w-2xl mb-12 leading-relaxed font-light">
               Veteran-owned. Black-owned. Licensed PEs stamping drawings in days, not months —
@@ -125,7 +125,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <Link
                 href="/contact"
-                className="inline-flex h-16 px-10 bg-primary text-white font-bold text-sm uppercase tracking-[0.15em] items-center justify-center gap-3 rounded-sm hover:bg-primary/90 transition-colors focus-visible:ring-4 focus-visible:ring-primary/50"
+                className="inline-flex h-16 px-10 bg-primary text-white font-bold text-sm uppercase tracking-[0.15em] items-center justify-center gap-3 rounded-sm hover:bg-primary/90 transition-colors btn-gloss focus-visible:ring-4 focus-visible:ring-primary/50"
               >
                 Start Your Project
                 <ArrowRight className="w-5 h-5" />
@@ -147,7 +147,7 @@ export default function Home() {
         <div className="grid grid-cols-2 lg:grid-cols-6 divide-x divide-y lg:divide-y-0 divide-white/10">
           {STATS.map((stat) => (
             <div key={stat.label} className="p-8 md:p-10 text-center">
-              <div className="text-3xl md:text-4xl font-display font-bold text-white mb-2 tracking-tight">{stat.value}</div>
+              <div className="text-3xl md:text-4xl font-display font-bold text-white mb-2 tracking-tight type-3d-sm">{stat.value}</div>
               <div className="text-[10px] md:text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground">{stat.label}</div>
             </div>
           ))}
@@ -162,7 +162,7 @@ export default function Home() {
               <span className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-primary uppercase font-bold">
                 Skip the form. Send the drawings.
               </span>
-              <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mt-4 mb-4">
+              <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mt-4 mb-4 type-3d">
                 Send us your plans.
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
@@ -181,7 +181,7 @@ export default function Home() {
             <span className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-primary uppercase font-bold">
               Representative project types
             </span>
-            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mt-4 mb-6">
+            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mt-4 mb-6 type-3d">
               What we engineer.
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
@@ -191,7 +191,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {SHOWCASE.map((p) => (
-              <div key={p.sector} className="group bg-card border border-border hover:border-primary/60 rounded-sm overflow-hidden transition-colors">
+              <div key={p.sector} className="group bg-card border border-border hover:border-primary/60 rounded-sm overflow-hidden transition-colors card-3d">
                 <div className="aspect-[16/10] overflow-hidden">
                   <img
                     src={p.image}
@@ -228,7 +228,7 @@ export default function Home() {
       <section className="py-20 md:py-28 bg-secondary/20 border-b border-border">
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-3xl mx-auto text-center mb-14">
-            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mb-6 type-3d">
               What we do
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
@@ -242,7 +242,7 @@ export default function Home() {
               <Link
                 key={s.name}
                 href={s.href}
-                className="group flex items-center justify-between bg-card border border-border hover:border-primary/60 p-6 rounded-sm transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+                className="group flex items-center justify-between bg-card border border-border hover:border-primary/60 p-6 rounded-sm transition-colors card-3d focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
               >
                 <span className="text-foreground font-bold text-lg group-hover:text-white transition-colors">{s.name}</span>
                 <ArrowRight className="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform shrink-0" />
@@ -269,7 +269,7 @@ export default function Home() {
                 <span className="text-white font-bold">Fastest turnaround</span>
               </div>
             </div>
-            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mb-6 type-3d">
               Talk to a human. <span className="text-muted-foreground italic font-light">Get your number.</span>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-10">
@@ -279,7 +279,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
-                className="inline-flex h-16 px-10 bg-primary text-white font-bold text-sm uppercase tracking-[0.15em] items-center justify-center gap-3 rounded-sm hover:bg-primary/90 transition-colors focus-visible:ring-4 focus-visible:ring-primary/50"
+                className="inline-flex h-16 px-10 bg-primary text-white font-bold text-sm uppercase tracking-[0.15em] items-center justify-center gap-3 rounded-sm hover:bg-primary/90 transition-colors btn-gloss focus-visible:ring-4 focus-visible:ring-primary/50"
               >
                 Contact Us
                 <ArrowRight className="w-5 h-5" />
@@ -301,7 +301,7 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <ShieldCheck className="w-10 h-10 text-primary mx-auto mb-6" strokeWidth={1.5} />
-            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mb-6 type-3d">
               Veteran-owned. Mission-driven.
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-10">
@@ -331,7 +331,7 @@ export default function Home() {
                 <path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z"/>
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
               </svg>
-              <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white">
+              <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white type-3d">
                 Google Reviews
               </h2>
             </div>
@@ -347,7 +347,7 @@ export default function Home() {
             {REVIEWS.map((r) => (
               <figure
                 key={r.name}
-                className="bg-card border border-border hover:border-primary/60 p-8 rounded-sm flex flex-col transition-colors"
+                className="bg-card border border-border hover:border-primary/60 p-8 rounded-sm flex flex-col transition-colors card-3d"
               >
                 <div className="flex items-center gap-2 mb-4">
                   <span className="text-[#FBBC05] text-lg" aria-hidden="true">★★★★★</span>
@@ -388,7 +388,7 @@ export default function Home() {
       <section className="py-28 md:py-36 bg-primary relative overflow-hidden text-center text-white">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto flex flex-col items-center">
-            <h2 className="text-5xl md:text-6xl font-display font-bold mb-6 tracking-tighter">
+            <h2 className="text-5xl md:text-6xl font-display font-bold mb-6 tracking-tighter type-3d-on-red">
               Get out of the way.
             </h2>
             <p className="text-lg md:text-xl text-white/90 font-light mb-10 max-w-xl">
