@@ -11,16 +11,17 @@ import { PlanDropZone } from "@/components/PlanDropZone";
 
 /**
  * Homepage — KILL MODE. Proof, not promises.
- * Leads with what Apex has DONE (100 Subways, 49 states), not what it IS.
+ * Leads with what Apex has DONE (49 states, 10+ PEs), not what it IS.
+ * Franchise proof (100 Subways) lives in the "who we work with" context, not the hero.
  * Every CTA drives to CONTACT — quote form, email, or phone. No self-serve tools.
  */
 const STATS = [
-  { value: "100", label: "Subway locations engineered" },
   { value: "49", label: "States licensed" },
   { value: "10+", label: "Licensed PEs" },
   { value: "20+", label: "Engineers on the team" },
   { value: "12–24hr", label: "Quote turnaround" },
   { value: "5.0★", label: "Google rating" },
+  { value: "100", label: "Subway locations engineered" },
 ];
 
 const SERVICES = [
@@ -115,7 +116,7 @@ export default function Home() {
               Apex Grid Engineering — PE-Stamped MEP · Structural · Civil
             </span>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.95] tracking-tighter mb-6 type-metallic">
-              100 Subway locations.<br />49 states. <span className="type-accent-glow">One engineering firm.</span>
+              49 states. 10+ PEs.<br /><span className="type-accent-glow">One engineering firm.</span>
             </h1>
             <p className="text-lg md:text-2xl text-foreground/80 max-w-2xl mb-12 leading-relaxed font-light">
               Veteran-owned. Black-owned. Licensed PEs stamping drawings in days, not months —
@@ -249,6 +250,21 @@ export default function Home() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Who we work with — audience-aware proof. Franchise proof lives here, not the hero. */}
+      <section className="py-16 md:py-20 bg-background border-b border-border" aria-label="Who we work with">
+        <div className="container mx-auto px-4 md:px-8">
+          <p className="text-center text-sm md:text-base font-mono uppercase tracking-[0.2em] text-muted-foreground mb-8">
+            Home builders · General contractors · Developers · Architects · Franchise operators
+          </p>
+          <p className="text-center text-xl md:text-2xl font-display font-bold text-white tracking-tight">
+            Whoever you are — <span className="text-primary">we've stamped it.</span>
+          </p>
+          <p className="text-center text-muted-foreground mt-3 max-w-2xl mx-auto">
+            Franchise &amp; retail: 100 Subway locations engineered and counting.
+          </p>
         </div>
       </section>
 
@@ -418,7 +434,7 @@ export default function Home() {
 }
 
 const PAGE_META = {
-  title: "Apex Grid Engineering — 100 Subway Locations, 49 States | PE-Stamped MEP & Structural",
-  description: "Veteran-owned, Black-owned engineering firm. 100 Subway locations engineered, licensed in 49 states. PE-stamped MEP, structural, and civil — best price, 12–24 hour quotes. Talk to a human: (480) 490-0064.",
+  title: "Apex Grid Engineering — 49 States, 10+ PEs | PE-Stamped MEP & Structural",
+  description: "Veteran-owned, Black-owned engineering firm licensed in 49 states. PE-stamped MEP, structural, and civil — 10+ PEs, best price, 12–24 hour quotes. Franchise & retail: 100 Subway locations engineered. Talk to a human: (480) 490-0064.",
   path: "/",
 };
