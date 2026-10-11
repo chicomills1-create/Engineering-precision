@@ -1,46 +1,25 @@
 import { Link } from "wouter";
-import { ArrowRight, Stamp, PencilRuler, Calculator, BadgeCheck, Timer, ShieldCheck } from "lucide-react";
+import { ArrowRight, BadgeCheck, Timer, ShieldCheck, Phone } from "lucide-react";
 import heroBg from "@assets/generated_images/hero-bg2.webp";
+import project1 from "@assets/generated_images/project-1.webp";
+import project2 from "@assets/generated_images/project-2.webp";
+import project3 from "@assets/generated_images/project-3.webp";
 import { useJsonLd, usePageMeta } from "@/lib/seo";
 import { APEX_GRID_BUSINESS_SCHEMA } from "@/lib/business-schema";
 import { LicensingCoverage } from "@/components/LicensingCoverage";
 import { PlanDropZone } from "@/components/PlanDropZone";
 
 /**
- * Homepage — problem-first. Visitor has a problem (needs a stamp, needs a
- * design, needs numbers). Lead with the problem, offer the fix, give the
- * price. No methodology lessons.
+ * Homepage — KILL MODE. Proof, not promises.
+ * Leads with what Apex has DONE (100 Subways, 49 states), not what it IS.
+ * Every CTA drives to CONTACT — quote form, email, or phone. No self-serve tools.
  */
-const NEEDS = [
-  {
-    icon: Stamp,
-    title: "Plans need a PE stamp?",
-    body: "Send us your drawings. A licensed PE reviews and seals them.",
-    cta: "Stamp my plans",
-    need: "pe-review-sealing",
-  },
-  {
-    icon: PencilRuler,
-    title: "Need engineering design?",
-    body: "Structural, MEP, civil — designed from the ground up, ready for permit.",
-    cta: "Design my project",
-    need: "calculations-stamped-drawings",
-  },
-  {
-    icon: Calculator,
-    title: "Need calculations?",
-    body: "Load calcs, energy calcs, Title 24 — the numbers your permit needs.",
-    cta: "Run the numbers",
-    need: "engineering-calculations",
-  },
-];
-
-const FACTS = [
-  { value: "Veteran-owned", label: "U.S. Air Force veteran-led" },
-  { value: "49 states", label: "Licensed across the U.S." },
-  { value: "15+ years", label: "Engineering experience" },
-  { value: "20+ engineers", label: "On the team" },
-  { value: "10+ PEs", label: "Licensed professionals" },
+const STATS = [
+  { value: "100", label: "Subway locations engineered" },
+  { value: "49", label: "States licensed" },
+  { value: "10+", label: "Licensed PEs" },
+  { value: "20+", label: "Engineers on the team" },
+  { value: "12–24hr", label: "Quote turnaround" },
   { value: "5.0★", label: "Google rating" },
 ];
 
@@ -51,6 +30,33 @@ const SERVICES = [
   { name: "Civil Engineering", href: "/services/civil" },
   { name: "Building Assessments", href: "/services/assessments" },
   { name: "Architectural Design", href: "/services/architecture" },
+];
+
+const SHOWCASE = [
+  {
+    image: project1,
+    sector: "Mixed-Use High-Rise",
+    location: "Seattle, WA",
+    scale: "850K sq ft",
+    disciplines: ["Structural", "MEP"],
+    blurb: "Representative capability: seismic structural engineering and high-efficiency HVAC routing for high-rise mixed-use.",
+  },
+  {
+    image: project2,
+    sector: "Mission-Critical Data Campus",
+    location: "Ashburn, VA",
+    scale: "32 MW",
+    disciplines: ["MEP", "Fire Protection"],
+    blurb: "Representative capability: N+1 redundancy, advanced cooling distribution, and pre-action fire suppression.",
+  },
+  {
+    image: project3,
+    sector: "Healthcare Campus",
+    location: "Queen Creek, AZ",
+    scale: "120K sq ft",
+    disciplines: ["Civil", "Structural", "MEP"],
+    blurb: "Representative capability: full site and vertical engineering — retaining walls, stormwater detention, OSHPD-level MEP.",
+  },
 ];
 
 const GOOGLE_REVIEWS_URL = "https://www.google.com/maps/search/?api=1&query=Apex+Grid+Engineering+PLLC+Queen+Creek+AZ";
@@ -88,7 +94,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col overflow-x-hidden">
-      {/* Hero — the problem, the fix, the price */}
+      {/* Hero — proof, not promises */}
       <section className="relative min-h-[92dvh] flex items-center justify-center pt-24 pb-20 overflow-hidden bg-background">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-background/85 mix-blend-multiply z-10" />
@@ -106,41 +112,45 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-8 relative z-30">
           <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
             <span className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-primary uppercase font-bold mb-8">
-              Apex Grid Engineering
+              Apex Grid Engineering — PE-Stamped MEP · Structural · Civil
             </span>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.95] tracking-tighter mb-6 text-white">
-              Permit-ready engineering.<br />Stamped in days, not months.
+              100 Subway locations.<br />49 states. <span className="text-primary">One engineering firm.</span>
             </h1>
             <p className="text-lg md:text-2xl text-foreground/80 max-w-2xl mb-12 leading-relaxed font-light">
-              Plans stamped, designs engineered, permits cleared — best price, fastest turnaround. Tap what you need, or send your drawings and get your number in under a minute.
+              Veteran-owned. Black-owned. Licensed PEs stamping drawings in days, not months —
+              at the best price. Get out of the way — we're coming through.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-4xl">
-              {NEEDS.map((need) => (
-                <Link
-                  key={need.title}
-                  href={`/estimate?need=${need.need}`}
-                  className="group flex flex-col items-center bg-card/90 backdrop-blur border border-border hover:border-primary transition-colors p-8 rounded-sm focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none min-h-[220px] justify-center"
-                >
-                  <need.icon className="w-10 h-10 text-primary mb-5 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
-                  <div className="text-xl font-display font-bold text-white mb-2">{need.title}</div>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-5">{need.body}</p>
-                  <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-primary">
-                    {need.cta}
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </Link>
-              ))}
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <Link
+                href="/contact"
+                className="inline-flex h-16 px-10 bg-primary text-white font-bold text-sm uppercase tracking-[0.15em] items-center justify-center gap-3 rounded-sm hover:bg-primary/90 transition-colors focus-visible:ring-4 focus-visible:ring-primary/50"
+              >
+                Start Your Project
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <a
+                href="tel:+14804900064"
+                className="inline-flex h-16 px-10 border border-border text-white font-bold text-sm uppercase tracking-[0.15em] items-center justify-center gap-3 rounded-sm hover:border-primary/60 transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+              >
+                <Phone className="w-5 h-5 text-primary" />
+                (480) 490-0064
+              </a>
             </div>
-
-            <Link
-              href="/estimate"
-              className="mt-10 inline-flex h-16 px-10 bg-primary text-white font-bold text-sm uppercase tracking-[0.15em] items-center justify-center gap-3 rounded-sm hover:bg-primary/90 transition-colors focus-visible:ring-4 focus-visible:ring-primary/50"
-            >
-              Get My Price Now
-              <ArrowRight className="w-5 h-5" />
-            </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Stats bar — big numbers */}
+      <section className="border-y border-white/10 bg-card" aria-label="Apex Grid by the numbers">
+        <div className="grid grid-cols-2 lg:grid-cols-6 divide-x divide-y lg:divide-y-0 divide-white/10">
+          {STATS.map((stat) => (
+            <div key={stat.label} className="p-8 md:p-10 text-center">
+              <div className="text-3xl md:text-4xl font-display font-bold text-white mb-2 tracking-tight">{stat.value}</div>
+              <div className="text-[10px] md:text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -164,46 +174,51 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trust facts — stated directly */}
-      <section className="border-y border-white/10 bg-card" aria-label="Why Apex Grid">
-        <div className="grid grid-cols-2 lg:grid-cols-6 divide-x divide-y lg:divide-y-0 divide-white/10">
-          {FACTS.map((fact) => (
-            <div key={fact.label} className="p-8 md:p-10 text-center">
-              <div className="text-3xl md:text-4xl font-display font-bold text-white mb-2 tracking-tight">{fact.value}</div>
-              <div className="text-[10px] md:text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground">{fact.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Speed + price promise */}
-      <section className="py-20 md:py-28 bg-background border-b border-border">
+      {/* Portfolio showcase — representative types, honestly framed */}
+      <section className="py-20 md:py-28 bg-background border-b border-border" aria-label="Selected work">
         <div className="container mx-auto px-4 md:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="flex items-center justify-center gap-6 mb-8">
-              <div className="flex items-center gap-3">
-                <BadgeCheck className="w-6 h-6 text-primary" />
-                <span className="text-white font-bold">Best price</span>
-              </div>
-              <div className="w-px h-8 bg-border" />
-              <div className="flex items-center gap-3">
-                <Timer className="w-6 h-6 text-primary" />
-                <span className="text-white font-bold">Fastest turnaround</span>
-              </div>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mb-6">
-              Tap-tap-tap. <span className="text-muted-foreground italic font-light">There's your price.</span>
+          <div className="max-w-3xl mx-auto text-center mb-14">
+            <span className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-primary uppercase font-bold">
+              Representative project types
+            </span>
+            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mt-4 mb-6">
+              What we engineer.
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-10">
-              Answer a few quick questions about your project and get a ballpark range on the spot.
-              No sales call required. Quotes back within 12–24 hours.
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              The project types we stamp every week. Detailed case studies — including structural
+              plans, MEP layouts, and CAD details — available on request.
             </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {SHOWCASE.map((p) => (
+              <div key={p.sector} className="group bg-card border border-border hover:border-primary/60 rounded-sm overflow-hidden transition-colors">
+                <div className="aspect-[16/10] overflow-hidden">
+                  <img
+                    src={p.image}
+                    alt={`${p.sector} — ${p.location} (representative image)`}
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                  />
+                </div>
+                <div className="p-6">
+                  <div className="text-xs font-mono uppercase tracking-widest text-primary mb-2">{p.location} · {p.scale}</div>
+                  <h3 className="text-xl font-display font-bold text-white mb-2">{p.sector}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">{p.blurb}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {p.disciplines.map((d) => (
+                      <span key={d} className="px-2 py-1 bg-secondary text-[11px] font-bold uppercase tracking-wider text-foreground">{d}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-10">
             <Link
-              href="/estimate"
-              className="inline-flex h-16 px-10 bg-primary text-white font-bold text-sm uppercase tracking-[0.15em] items-center justify-center gap-3 rounded-sm hover:bg-primary/90 transition-colors focus-visible:ring-4 focus-visible:ring-primary/50"
+              href="/portfolio"
+              className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-bold text-sm uppercase tracking-[0.15em] transition-colors"
             >
-              Start My Estimate
-              <ArrowRight className="w-5 h-5" />
+              View Full Portfolio
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -238,6 +253,48 @@ export default function Home() {
       </section>
 
       <LicensingCoverage />
+
+      {/* Best price + fastest — stated, not self-served */}
+      <section className="py-20 md:py-28 bg-background border-b border-border">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="flex items-center justify-center gap-6 mb-8">
+              <div className="flex items-center gap-3">
+                <BadgeCheck className="w-6 h-6 text-primary" />
+                <span className="text-white font-bold">Best price</span>
+              </div>
+              <div className="w-px h-8 bg-border" />
+              <div className="flex items-center gap-3">
+                <Timer className="w-6 h-6 text-primary" />
+                <span className="text-white font-bold">Fastest turnaround</span>
+              </div>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mb-6">
+              Talk to a human. <span className="text-muted-foreground italic font-light">Get your number.</span>
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-10">
+              No calculators, no guesswork. Tell us about your project — by form, email, or phone —
+              and a real engineer prices it within 12–24 hours.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/contact"
+                className="inline-flex h-16 px-10 bg-primary text-white font-bold text-sm uppercase tracking-[0.15em] items-center justify-center gap-3 rounded-sm hover:bg-primary/90 transition-colors focus-visible:ring-4 focus-visible:ring-primary/50"
+              >
+                Contact Us
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <a
+                href="tel:+14804900064"
+                className="inline-flex h-16 px-10 border border-border text-white font-bold text-sm uppercase tracking-[0.15em] items-center justify-center gap-3 rounded-sm hover:border-primary/60 transition-colors"
+              >
+                <Phone className="w-5 h-5 text-primary" />
+                (480) 490-0064
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Veteran-led, plain spoken */}
       <section className="py-20 md:py-28 bg-background border-b border-border">
@@ -327,30 +384,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* Final CTA — kill mode */}
       <section className="py-28 md:py-36 bg-primary relative overflow-hidden text-center text-white">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto flex flex-col items-center">
             <h2 className="text-5xl md:text-6xl font-display font-bold mb-6 tracking-tighter">
-              Got a project? Let's build it.
+              Get out of the way.
             </h2>
             <p className="text-lg md:text-xl text-white/90 font-light mb-10 max-w-xl">
-              Get your ballpark price in under a minute — or send us your plans and we'll take it from there.
+              Your project. Our stamp. Talk to a human and get your number in 12–24 hours.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <Link
-                href="/estimate"
+                href="/contact"
                 className="h-16 px-10 bg-white text-primary font-bold text-sm uppercase tracking-[0.2em] flex items-center justify-center gap-3 rounded-sm hover:bg-white/90 transition-colors focus-visible:ring-4 focus-visible:ring-white/50 focus-visible:outline-none"
               >
-                Get My Price
+                Start Your Project
                 <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link
-                href="/contact"
+              <a
+                href="tel:+14804900064"
                 className="h-16 px-10 border-2 border-white/60 text-white font-bold text-sm uppercase tracking-[0.2em] flex items-center justify-center gap-3 rounded-sm hover:bg-white/10 transition-colors focus-visible:ring-4 focus-visible:ring-white/50 focus-visible:outline-none"
               >
-                Send Us Your Plans
-              </Link>
+                <Phone className="w-5 h-5" />
+                (480) 490-0064
+              </a>
             </div>
           </div>
         </div>
@@ -360,9 +418,7 @@ export default function Home() {
 }
 
 const PAGE_META = {
-  title: "PE-Stamped MEP & Structural Engineering | Apex Grid",
-  description: "Need plans stamped, engineering designed, or calculations run? Veteran-owned engineering firm licensed in 49 states. Best price, fastest turnaround — get your ballpark in under a minute.",
+  title: "Apex Grid Engineering — 100 Subway Locations, 49 States | PE-Stamped MEP & Structural",
+  description: "Veteran-owned, Black-owned engineering firm. 100 Subway locations engineered, licensed in 49 states. PE-stamped MEP, structural, and civil — best price, 12–24 hour quotes. Talk to a human: (480) 490-0064.",
   path: "/",
 };
-
-
