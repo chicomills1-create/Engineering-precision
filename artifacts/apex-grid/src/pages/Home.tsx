@@ -19,7 +19,7 @@ const STATS = [
   { value: "49", label: "States licensed" },
   { value: "10+", label: "Licensed PEs" },
   { value: "20+", label: "Engineers on the team" },
-  { value: "12–24hr", label: "Quote turnaround" },
+  { value: "Same-day", label: "Quote turnaround" },
   { value: "5.0★", label: "Google rating" },
   { value: "100", label: "Subway locations engineered" },
 ];
@@ -167,7 +167,7 @@ export default function Home() {
                 Send us your plans.
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Drop your drawings below — a licensed PE reviews them and your quote lands in 12–24 hours.
+                Drop your drawings below — a licensed PE reviews them and your quote lands the same day.
               </p>
             </div>
             <PlanDropZone />
@@ -435,6 +435,6 @@ export default function Home() {
 
 const PAGE_META = {
   title: "Apex Grid Engineering — 49 States, 10+ PEs | PE-Stamped MEP & Structural",
-  description: "Veteran-owned, Black-owned engineering firm licensed in 49 states. PE-stamped MEP, structural, and civil — 10+ PEs, best price, 12–24 hour quotes. Franchise & retail: 100 Subway locations engineered. Talk to a human: (480) 490-0064.",
+  description: "Veteran-owned, Black-owned engineering firm licensed in 49 states. PE-stamped MEP, structural, and civil — 10+ PEs, best price, same-day quotes. Franchise & retail: 100 Subway locations engineered. Talk to a human: (480) 490-0064.",
   path: "/",
 };
