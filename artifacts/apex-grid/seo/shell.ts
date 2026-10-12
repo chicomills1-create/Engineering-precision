@@ -106,6 +106,164 @@ function footer(): string {
 
 const e=(s:string)=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
 
+// ─── Strike 100 Week-1 CTR Blitz Overrides (2026-10-12) ───
+// ChatGPT-approved (2026-10-12T06:36:33Z): rewrite titles/descriptions for the
+// 10 highest-value commercial-intent keywords. Target: CTR 0% → 2%+.
+// Keyed by canonical URL path. Applied in htmlShell() before rendering.
+// Variant B titles/descriptions are staged for sequential A/B testing:
+// deploy variant A now, swap to B at Day 15, compare GSC CTR deltas.
+interface CtrOverride {
+  title: string;
+  description: string;
+  /** Variant B for sequential A/B test (swap at Day 15) */
+  titleB: string;
+  descriptionB: string;
+  /** UTM slug for CTA attribution (?src=seo-{utmSlug}) */
+  utmSlug: string;
+  /** Append LocalBusiness/ProfessionalService schema */
+  addLocalBusiness: boolean;
+  /** areaServed for the schema */
+  areaServed: string;
+}
+
+const CTR_OVERRIDES: Record<string, CtrOverride> = {
+  "/pe-stamp/texas/": {
+    title: "Texas PE Stamp in 24\u201348 Hours | Licensed Engineer Seal | Apex Grid Engineering",
+    description: "Need a PE stamp in Texas? Apex Grid Engineering provides licensed Texas engineer seals with 24\u201348 hour turnaround. Get a quote today \u2014 licensed in 49 states. Call (480) 490-0064.",
+    titleB: "PE Stamp Texas | Fast 24\u201348 Hr Turnaround | Licensed in 49 States",
+    descriptionB: "Get your Texas PE stamp fast. Licensed professional engineers, 24\u201348 hour turnaround, all disciplines. Apex Grid Engineering \u2014 trusted nationwide. Request a quote now.",
+    utmSlug: "pe-stamp-texas",
+    addLocalBusiness: true,
+    areaServed: "Texas",
+  },
+  "/industries/life-science/cleanroom-mep-engineering/": {
+    title: "Cleanroom MEP Engineering | ISO Class Design & Certification | Apex Grid",
+    description: "Cleanroom MEP engineering for ISO 5\u20138 facilities \u2014 HVAC, HEPA filtration, pressure control. $500K\u2013$5M+ project experience. Get a cleanroom MEP quote from Apex Grid Engineering today.",
+    titleB: "MEP Engineering for Cleanrooms | Pharma & Life Science Experts",
+    descriptionB: "Specialized cleanroom MEP design \u2014 ISO classification HVAC, HEPA/ULPA filtration, positive pressure cascades. Life science facility experts. Contact Apex Grid for a project quote.",
+    utmSlug: "cleanroom-mep-engineering",
+    addLocalBusiness: true,
+    areaServed: "United States",
+  },
+  "/locations/colorado/denver/mep-engineering/": {
+    title: "MEP Engineering Colorado | Denver-Based, Licensed Statewide | Apex Grid",
+    description: "MEP engineering in Colorado \u2014 Denver-based team, licensed statewide. Commercial HVAC, electrical, plumbing design with local code expertise. Get a Colorado MEP quote today. Call (480) 490-0064.",
+    titleB: "Denver MEP Engineering | Commercial HVAC, Electrical & Plumbing",
+    descriptionB: "Denver MEP engineering firm serving all of Colorado. Commercial mechanical, electrical, and plumbing design coordinated with local AHJs. Licensed in 49 states. Request a quote.",
+    utmSlug: "mep-engineering-colorado",
+    addLocalBusiness: true,
+    areaServed: "Colorado",
+  },
+  "/locations/ohio/cleveland/structural-engineering/": {
+    title: "Structural Engineer Cleveland, Ohio | Hire Licensed Experts | Apex Grid",
+    description: "Hire a structural engineer in Cleveland, Ohio. Industrial, commercial & residential structural design with Ohio PE stamps. Get a quote in 24 hours \u2014 call (480) 490-0064.",
+    titleB: "Cleveland Structural Engineering | Industrial & Commercial Design",
+    descriptionB: "Cleveland structural engineering for adaptive reuse, industrial, and commercial projects. Licensed Ohio PEs. Lake-region expertise. Contact Apex Grid Engineering for a structural quote.",
+    utmSlug: "structural-engineer-cleveland-ohio",
+    addLocalBusiness: true,
+    areaServed: "Cleveland, Ohio",
+  },
+  "/industries/multifamily/apartments/mep-engineering/": {
+    title: "Apartment MEP Engineering | Multifamily Design Experts | Apex Grid",
+    description: "MEP engineering for apartment buildings \u2014 unit HVAC, electrical, plumbing & energy compliance. Trusted by multifamily developers nationwide. Get an apartment MEP quote today.",
+    titleB: "Multifamily MEP Engineering | Apartment Design & Energy Compliance",
+    descriptionB: "Apartment MEP engineering from schematic to permit \u2014 HVAC loads, electrical distribution, plumbing risers, Title 24 / IECC compliance. Developer-trusted nationwide. Request a quote.",
+    utmSlug: "apartment-mep-engineering",
+    addLocalBusiness: true,
+    areaServed: "United States",
+  },
+  "/metros/kalamazoo-portage-mi/mep-engineering/": {
+    title: "MEP Design Kalamazoo | Licensed Michigan Engineers | Apex Grid",
+    description: "MEP design in Kalamazoo\u2013Portage, MI. Licensed Michigan engineers for commercial HVAC, electrical & plumbing. Local expertise, 24\u201348hr turnaround. Call (480) 490-0064.",
+    titleB: "Kalamazoo MEP Engineering | Commercial Design, Fast Turnaround",
+    descriptionB: "MEP engineering for the Kalamazoo\u2013Portage metro \u2014 commercial HVAC, electrical, plumbing with Michigan code expertise. Licensed in 49 states. Get a Kalamazoo MEP quote today.",
+    utmSlug: "mep-design-kalamazoo",
+    addLocalBusiness: true,
+    areaServed: "Kalamazoo-Portage, Michigan",
+  },
+  "/locations/oregon/salem/structural-engineering/": {
+    title: "Structural Engineer Salem, Oregon | Licensed PE | Apex Grid",
+    description: "Hire a structural engineer in Salem, Oregon. Residential & commercial structural design with Oregon PE stamps. Seismic, ADU & addition experts. Get a quote today \u2014 (480) 490-0064.",
+    titleB: "Salem Structural Engineering | Seismic, ADUs & Additions",
+    descriptionB: "Salem, Oregon structural engineering \u2014 ADUs, additions, commercial interiors, seismic retrofits. Licensed Oregon PE. Willamette Valley expertise. Request a structural quote.",
+    utmSlug: "structural-engineer-salem-oregon",
+    addLocalBusiness: true,
+    areaServed: "Salem, Oregon",
+  },
+  "/answers/garage-conversion-engineering/": {
+    title: "Garage Conversion Structural Engineer | Permit Drawings in 24\u201348 Hrs",
+    description: "Need a structural engineer for your garage conversion permit? We provide calculations, drawings & permit letters with 24\u201348 hour turnaround. Get a quote today \u2014 licensed in 49 states.",
+    titleB: "Garage Conversion Engineering | Structural Plans for Permits",
+    descriptionB: "Garage conversion structural engineering \u2014 slab analysis, new openings, shear walls, and the permit drawings proving the structure works as living space. Fast turnaround. Get a quote.",
+    utmSlug: "garage-conversion-structural-engineer",
+    addLocalBusiness: true,
+    areaServed: "United States",
+  },
+  "/answers/what-is-seismic-retrofit-engineering/": {
+    title: "Seismic Retrofit Engineer | Soft-Story & URM Specialists | Apex Grid",
+    description: "Hire a seismic retrofit engineer for soft-story, URM & mandated retrofits. LA, SF, Seattle ordinance expertise. Structural calculations & permit drawings. Get a quote today.",
+    titleB: "Seismic Retrofit Engineering | Earthquake Strengthening Experts",
+    descriptionB: "Seismic retrofit engineering strengthens existing buildings against earthquakes \u2014 soft-story, unreinforced masonry, non-ductile concrete. Mandated-program expertise. Request a quote.",
+    utmSlug: "seismic-retrofit-engineer",
+    addLocalBusiness: true,
+    areaServed: "California, Oregon, Washington",
+  },
+};
+
+function buildCtrLocalBusinessSchema(override: CtrOverride, canonical: string): object {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Apex Grid Engineering",
+    "url": "https://apexgrideng.com",
+    "telephone": "+1-480-490-0064",
+    "email": "info@apexgrideng.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "22475 E Quintero Rd",
+      "addressLocality": "Queen Creek",
+      "addressRegion": "AZ",
+      "postalCode": "85142",
+      "addressCountry": "US",
+    },
+    "areaServed": override.areaServed,
+    "priceRange": "$$",
+    "sameAs": ["https://apexgrideng.com"],
+  };
+}
+
+/** Apply CTR overrides. Returns possibly-modified {title, description, schemaJson, body}. */
+function applyCtrOverrides(
+  canonical: string,
+  title: string,
+  description: string,
+  schemaJson: object[],
+  body: string,
+): { title: string; description: string; schemaJson: object[]; body: string } {
+  let path: string;
+  try {
+    path = new URL(canonical).pathname;
+  } catch {
+    return { title, description, schemaJson, body };
+  }
+  // Normalize: ensure trailing slash for lookup
+  const key = path.endsWith("/") ? path : path + "/";
+  const override = CTR_OVERRIDES[key];
+  if (!override) return { title, description, schemaJson, body };
+
+  let newSchema = schemaJson;
+  if (override.addLocalBusiness) {
+    newSchema = [...schemaJson, buildCtrLocalBusinessSchema(override, canonical)];
+  }
+  // UTM-tag CTA links for attribution (?src=seo-{slug})
+  // Handles both bare /contact and /contact?existing=params
+  const newBody = body.replace(
+    /href="\/contact(\?[^"]*)?"/g,
+    (_m, q) => `href="/contact?src=seo-${override.utmSlug}${q ? "&" + q.slice(1) : ""}"`,
+  );
+  return { title: override.title, description: override.description, schemaJson: newSchema, body: newBody };
+}
+
 export function htmlShell(opts: {
   title: string;
   description: string;
@@ -114,23 +272,30 @@ export function htmlShell(opts: {
   body: string;
   robots?: string;
 }): string {
+  // Strike 100 Week-1 CTR Blitz (2026-10-12, ChatGPT-approved): apply
+  // title/description/schema/UTM overrides for the 10 target pages.
+  const _ctr = applyCtrOverrides(opts.canonical, opts.title, opts.description, opts.schemaJson, opts.body);
+  const _title = _ctr.title;
+  const _description = _ctr.description;
+  const _schemaJson = _ctr.schemaJson;
+  const _body = _ctr.body;
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>${e(opts.title)}</title>
-<meta name="description" content="${e(opts.description)}" />
+<title>${e(_title)}</title>
+<meta name="description" content="${e(_description)}" />
 <link rel="canonical" href="${e(opts.canonical)}" />
-<meta property="og:title" content="${e(opts.title)}" />
-<meta property="og:description" content="${e(opts.description)}" />
+<meta property="og:title" content="${e(_title)}" />
+<meta property="og:description" content="${e(_description)}" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="${e(opts.canonical)}" />
 <meta property="og:image" content="${e(`${SITE}/logo.png`)}" />
 <meta property="og:image:alt" content="Apex Grid Engineering logo" />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="${e(opts.title)}" />
-<meta name="twitter:description" content="${e(opts.description)}" />
+<meta name="twitter:title" content="${e(_title)}" />
+<meta name="twitter:description" content="${e(_description)}" />
 <meta name="twitter:image" content="${e(`${SITE}/logo.png`)}" />
 <meta name="twitter:image:alt" content="Apex Grid Engineering logo" />
 <meta name="robots" content="${e(opts.robots ?? "index,follow")}" />
@@ -138,12 +303,12 @@ export function htmlShell(opts: {
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-${opts.schemaJson.map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join("\n")}
+${_schemaJson.map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join("\n")}
 <style>${CSS}</style>
 </head>
 <body>
 ${header()}
-${opts.body}
+${_body}
 ${footer()}
 </body>
 </html>`;
