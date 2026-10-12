@@ -30,5 +30,10 @@
   "/metros/salt-lake-city-murray-ut/pe-stamp/": "/locations/utah/salt-lake-city/",
   "/mep-engineering/": "/services/mep",
   "/industries/healthcare/hospitals/mep-engineering/": "/industries/healthcare-engineering/",
-  "/industries/healthcare/mep-engineering/": "/industries/healthcare-engineering/"
+  "/industries/healthcare/mep-engineering/": "/industries/healthcare-engineering/",
+  "/answers/911-dispatch-center-design/": "/answers/911-center-design/",
+  "/answers/911-dispatch-design/": "/answers/911-center-design/",
+  "/answers/cold-storage-warehouse-engineering/": "/answers/cold-storage-design/",
+  "/answers/cold-storage-warehouse-design/": "/answers/cold-storage-design/",
+  "/answers/cold-storage-facility-design/": "/answers/cold-storage-design/"
 }
