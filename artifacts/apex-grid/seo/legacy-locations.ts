@@ -34,6 +34,13 @@ export const LEGACY_LOCATION_REDIRECTS: Readonly<Record<string, string>> = {
   "/locations/pennsylvania/murrysville/": "/locations/pennsylvania/murrysville-municipality/",
   "/locations/utah/kearns-metro-township/": "/locations/utah/kearns/",
   "/locations/utah/magna-metro-township/": "/locations/utah/magna/",
+  // CTR Phase 1 consolidation (2026-10-12): fragmented/duplicate URLs folded
+  // into their single canonical hubs (GSC-verified, ChatGPT-approved).
+  "/metros/salt-lake-city-murray-ut/": "/locations/utah/salt-lake-city/",
+  "/metros/salt-lake-city-murray-ut/pe-stamp/": "/locations/utah/salt-lake-city/",
+  "/mep-engineering/": "/services/mep",
+  "/industries/healthcare/hospitals/mep-engineering/": "/industries/healthcare-engineering/",
+  "/industries/healthcare/mep-engineering/": "/industries/healthcare-engineering/",
 };
 
 export const RETAINED_LEGACY_LOCATIONS: ReadonlyArray<{
