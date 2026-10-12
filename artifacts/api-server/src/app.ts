@@ -225,6 +225,28 @@ if (fs.existsSync(staticRoot)) {
 
 app.use("/api", router);
 
+// 410 Gone for removed orphan sitemap families (plan 2026-10-09,
+// APEX-TORCH-RECOVERY-20261009; ChatGPT re-verified 2026-10-12).
+// ~431K byte-identical homepage duplicates removed from sitemap 2026-10-07;
+// zero traffic, zero backlinks. 410 deindexes faster than 404.
+// Specialties pattern is restricted to the 6 t1 slugs on purpose — other
+// /specialties/ paths (t2 city pages, noindexed) must stay live.
+const ORPHAN_410_PATTERNS = [
+  /^\/services-local\//,
+  /^\/specialties\/(pe-stamping|plan-check-corrections|title-24-compliance|feasibility-study|permit-expediting|energy-code-compliance)\//,
+  /^\/wave1\//,
+];
+app.use((req, res, next) => {
+  if (ORPHAN_410_PATTERNS.some((p) => p.test(req.path))) {
+    return res.status(410).send(`<!DOCTYPE html>
+<html><head><title>410 Gone</title>
+<meta name="robots" content="noindex"></head>
+<body><h1>410 Gone</h1>
+<p>This page has been permanently removed.</p></body></html>`);
+  }
+  next();
+});
+
 // Serve the React shell for known client-side routes. Unknown paths still get
 // the same branded not-found screen, but with a real 404 status so crawlers do
 // not mistake arbitrary URLs for valid pages.
