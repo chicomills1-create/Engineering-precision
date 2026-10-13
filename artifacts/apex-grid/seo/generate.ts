@@ -1544,10 +1544,10 @@ function peStampStatePage(state: StateData, slug: string): string {
   return phase0ArticleFrame({
     canonical: `/pe-stamp/${slug}/`,
     title: `PE Stamp and License Lookup in ${stateName} | Apex Grid`,
-    description: `Official ${stateName} professional engineering board and license-verification resources, with project-specific PE responsibility guidance from Apex Grid Engineering.`,
+    description: `PE stamp services plus official ${stateName} engineering board and license-verification resources. Apex Grid is a veteran-owned firm with 10+ licensed PEs and 20+ engineers — same-day quotes on qualifying scopes.`,
     h1: `PE Stamp and License Verification in ${stateName}`,
     kicker: `${stateName} · Official Board Resources`,
-    answer: `For a ${stateName} project, use the state's official engineering board and license-verification resources before relying on a professional credential. A PE seal still requires independent engineering review, professional responsibility, and compliance with the project jurisdiction's submission rules.`,
+    answer: `For a ${stateName} project, use the state's official engineering board and license-verification resources before relying on a professional credential. Apex Grid's licensed PEs review and seal drawings nationwide — 10+ licensed PEs on a 20+ engineer team, with same-day quotes on qualifying scopes. A PE seal still requires independent engineering review, professional responsibility, and compliance with the project jurisdiction's submission rules.`,
     sections: [
       { heading: `Official ${stateName} board and lookup links`, body: "These links are provided as starting points to the official state sources. A board's current instructions and online record control; confirm the page, status, discipline, and authorization directly before a project submission.", bullets: [`${stateName} engineering licensing board`, "Official license verification or lookup", `Project code and AHJ requirements for ${stateName}`, "Responsible engineer and scope confirmation"] },
       { heading: "Project-specific engineering responsibility", body: `The ${stateName} board resource does not approve a design or transfer responsibility to a contractor, owner, or another engineer. The responsible professional reviews the project inputs, code basis, calculations, drawings, and existing conditions, then determines which documents can be signed or sealed. ${state.buildingCode.notes} ${state.licensure.notes}` },
@@ -2048,13 +2048,13 @@ function phase1MetroServicePage(metro: Phase1Metro, service: Phase1ServiceSlug):
   const details = serviceDetails[service];
   const body = `<main data-phase1="true">
 ${breadcrumb(crumbs)}
-<section class="hero"><div class="container"><p class="kicker">${esc(label)} · ${esc(metro.representativeCity)} metro</p><h1>${esc(label)} for the ${esc(metro.metroName)} Metro</h1><p class="lede">${esc(phase1ServiceSummaries[service])} This guide uses CBSA ${metro.cbsaCode} and the 2025 Census permit record only as transparent market context.</p><p class="note">By ${esc(PHASE1_AUTHOR)}</p></div></section>
+<section class="hero"><div class="container"><p class="kicker">${esc(label)} · ${esc(metro.representativeCity)} metro</p><h1>${esc(label)} for the ${esc(metro.metroName)} Metro</h1><p class="lede">${esc(phase1ServiceSummaries[service])} Apex Grid is a veteran-owned, Black-owned firm — 20+ engineers, 10+ licensed PEs, rated 5.0 stars on Google — delivering coordinated, PE-stamped documents for ${esc(metro.metroName)} projects, with same-day quotes on qualifying scopes.</p><p class="note">By ${esc(PHASE1_AUTHOR)}</p></div></section>
 <section class="block"><div class="container"><h2>${esc(details.heading)}</h2><div class="prose">${details.paragraphs.map((paragraph) => `<p>${esc(paragraph)}</p>`).join("")}</div></div></section>
 <section class="block"><div class="container"><h2>Scope and <em>intake evidence</em></h2><div class="prose"><p>${esc(metro.editorial.deliveryLens)}</p><ul class="scope">${details.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul></div></div></section>
 <section class="block"><div class="container"><h2>${esc(metro.representativeCity)} metro <em>context</em></h2><div class="prose"><p>${esc(metro.editorial.planningLens)}</p><p>${esc(metro.editorial.coordinationLens)}</p><p>${esc(metro.editorial.documentationLens)}</p></div></div></section>
-<section class="block"><div class="container"><h2>Professional <em>boundaries</em></h2><div class="prose"><p>Availability, scope, professional responsibility, applicable licensure, and filing requirements are confirmed per project. This guide does not invent an AHJ requirement, claim an office or project, promise approval, or publish a price. The authority having jurisdiction controls its review and decision.</p><p>The Census BPS final annual 2025 workbook reports ${metro.permitTotal2025.toLocaleString("en-US")} permitted housing units for this Metro Code 2 record, rank ${metro.rank} among the eligible records. <a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">Read the official source workbook</a>.</p></div></div></section>
 <section class="block"><div class="container"><h2>Related ${esc(metro.representativeCity)} <em>guides</em></h2><div class="linkrow">${related}</div></div></section>
 ${phase0FaqMarkup(faqs)}
+<section class="block"><div class="container"><h2>Professional <em>boundaries</em></h2><div class="prose"><p>Availability, scope, professional responsibility, applicable licensure, and filing requirements are confirmed per project. This guide does not invent an AHJ requirement, claim an office or project, promise approval, or publish a price. The authority having jurisdiction controls its review and decision.</p><p>The Census BPS final annual 2025 workbook reports ${metro.permitTotal2025.toLocaleString("en-US")} permitted housing units for this Metro Code 2 record, rank ${metro.rank} among the eligible records. <a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">Read the official source workbook</a>.</p></div></div></section>
 <section class="ctaband"><div class="container"><h2>Define the ${esc(label.toLowerCase())} scope</h2><p>Send the address, project scope, current documents, existing-condition evidence, comments, schedule dependencies, and requested deliverables.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
 </main>`;
   const serviceSchema = {
@@ -2068,8 +2068,8 @@ ${phase0FaqMarkup(faqs)}
     areaServed: { "@type": "Place", name: metro.metroName },
   };
   return phase1Html(htmlShell({
-    title: `${label} ${metro.representativeCity} Metro | Apex Grid`,
-    description: `${label} guidance for the ${metro.metroName} metro: scope, documents, coordination, and responsible project review.`,
+    title: `${label} ${metro.representativeCity} | PE-Stamped, Same-Day Quotes | Apex Grid`,
+    description: `${label} for the ${metro.metroName} metro — PE-stamped documents from a veteran-owned firm with 10+ licensed PEs and 20+ engineers. Same-day quotes on qualifying scopes.`,
     canonical: `${SITE}${url}`,
     schemaJson: [serviceSchema, phase0FaqSchema(faqs), breadcrumbSchema(crumbs)],
     body,
@@ -2578,7 +2578,7 @@ function cityLitePage(state: StateData, city: DirectoryCity, siblings: Directory
   const faqs = [
     {
       q: `Does Apex Grid provide engineering services in ${city.name}, ${state.abbrev}?`,
-      a: `Potentially, subject to project-specific review. For qualifying ${city.name} projects, Apex Grid confirms the responsible individual's current license, firm authorization, discipline, and AHJ requirements, along with local code editions, amendments, and permit requirements, before design begins.`,
+      a: `Yes — Apex Grid provides engineering services in ${city.name} and across ${state.name}. For qualifying ${city.name} projects, Apex Grid confirms the responsible individual's current license, firm authorization, discipline, and AHJ requirements, along with local code editions, amendments, and permit requirements, before design begins.`,
     },
     {
       q: `Which building code applies to a project in ${city.name}?`,
@@ -2687,7 +2687,7 @@ ${availableVerticals
 
   return htmlShell({
     title: `Engineering Services in ${city.name}, ${state.abbrev} | MEP, Structural, Civil | Apex Grid`,
-    description: `Licensed MEP, structural, civil, and energy-compliance engineering serving ${city.name}, ${state.abbrev} under the ${state.buildingCode.baseCode}. Fast quotes, permit-ready documents.`,
+    description: `Licensed MEP, structural, civil, and energy-compliance engineering serving ${city.name}, ${state.abbrev} under the ${state.buildingCode.baseCode}. PE-stamped, permit-ready documents from a veteran-owned firm with 10+ licensed PEs — same-day quotes on qualifying scopes.`,
     canonical: `${SITE}/locations/${state.slug}/${city.slug}/`,
     schemaJson: [orgSchema, svcSchema, faqSchema, breadcrumbSchema(crumbs)],
     body,
@@ -4118,7 +4118,7 @@ ${breadcrumb(crumbs)}
      <div class="card"><div class="label">Project-specific PE coverage review</div><p>We verify the engineer, discipline, jurisdiction, firm authorization, and AHJ requirements for each project before confirming available coverage.</p></div>
      <div class="card"><div class="label">Coordinated engineering disciplines</div><p>When the requested disciplines and project scope align, our available team can coordinate structural, MEP, civil, and geotechnical deliverables.</p></div>
     <div class="card"><div class="label">Responsive Intake</div><p>We review project requests for an initial proposal response and structure deliverable milestones around your permit or construction schedule when scope and records permit.</p></div>
-     <div class="card"><div class="label">Relevant project experience</div><p>We can discuss relevant commercial, industrial, healthcare, and government experience during project review; prior experience does not predict jurisdiction approval.</p></div>
+     <div class="card"><div class="label">The firm behind the work</div><p>Apex Grid is a veteran-owned, Black-owned firm with 20+ engineers and 10+ licensed PEs, rated 5.0 stars on Google — supporting commercial, industrial, healthcare, and government projects, with same-day quotes on qualifying scopes.</p></div>
   </div>
 </div></section>
 
@@ -10474,7 +10474,7 @@ ${specialtyLocationPages.length ? `<section class="block"><div class="container"
 
   return htmlShell({
     title: `Engineering Services in ${city.name}, ${state.abbrev} | MEP, Structural, Civil, Energy | Apex Grid`,
-    description: `Licensed MEP, structural, civil, and energy-compliance engineering in ${city.name}, ${state.abbrev}. Permitting through ${city.ahj.office} under the ${city.codes.building.split(",")[0].split("(")[0].trim()}.`,
+    description: `Licensed MEP, structural, civil, and energy-compliance engineering in ${city.name}, ${state.abbrev}. Permitting through ${city.ahj.office} under the ${city.codes.building.split(",")[0].split("(")[0].trim()}. PE-stamped documents from a veteran-owned firm with 10+ licensed PEs — same-day quotes on qualifying scopes.`,
     canonical: `${SITE}/locations/${state.slug}/${city.slug}/`,
     schemaJson: [orgSchema, serviceSchema, faqSchema, breadcrumbSchema(crumbs)],
     robots: isReviewedCity(city) ? "index,follow" : "noindex,follow",
