@@ -48,10 +48,10 @@ const PROJECT_TYPES = [
 ];
 
 const NAICS_CODES = [
-  { code: "541330", title: "Engineering Services" },
+  { code: "541330", title: "Engineering Services (Primary)" },
   { code: "541310", title: "Architectural Services" },
-  { code: "236220", title: "Commercial & Institutional Building Construction" },
-  { code: "237990", title: "Other Heavy Civil Engineering Construction" },
+  { code: "541340", title: "Drafting Services" },
+  { code: "541350", title: "Building Inspection Services" },
 ];
 
 export default function Capabilities() {
