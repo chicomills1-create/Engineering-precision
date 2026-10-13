@@ -117,11 +117,11 @@ export const WAVE_EC_ANSWER_PAGES: Phase0AeoPage[] = [
   },
   {
     slug: "ammonia-refrigeration-design",
-    title: "Why Does Ammonia Refrigeration Need Special Engineering Design?",
-    description: "Ammonia refrigeration design covers charge limits, machine-room ventilation, leak detection, emergency exhaust, and code compliance for ammonia systems.",
+    title: "Ammonia Refrigeration Design | Safety Engineering for Industrial Systems | Apex Grid",
+    description: "Ammonia refrigeration design, engineered safely: charge minimization, machine-room ventilation and detection, emergency exhaust, and ASHRAE 15 / IIAR compliance for industrial ammonia systems of every facility type.",
     h1: "Why Does Ammonia Refrigeration Need Special Engineering Design?",
     answer: "Ammonia refrigeration engineering is the design of industrial refrigeration systems using anhydrous ammonia — the most efficient common refrigerant and also a toxic, flammable gas that demands rigorous safety engineering. Ammonia dominates large cold storage, food processing, and distribution facilities because its thermodynamic performance beats synthetics at scale, but every design decision runs through safety codes: ASHRAE 15 for machinery rooms and occupancy limits, IIAR bulletins for best practice, and EPA and OSHA process safety rules when the charge crosses regulatory thresholds. The machine room gets dedicated ventilation sized for emergency exhaust, ammonia detection tied to alarms and ventilation, and equipment arranged so a leak can be isolated and the room evacuated. Piping design follows pressure and material rules specific to ammonia, and the charge is minimized through low-charge system architectures wherever possible. I've reviewed facilities where the ammonia system was designed like a big commercial HVAC job — no emergency ventilation sequence, detectors as an afterthought — and the authority having jurisdiction stopped the project cold until the safety engineering caught up.",
-    directAnswer: "Ammonia refrigeration engineering designs industrial refrigeration using anhydrous ammonia with rigorous safety systems. It covers machine room ventilation and emergency exhaust, ammonia detection tied to alarms, charge minimization, isolation valving, piping per ammonia-specific rules, and compliance with ASHRAE 15, IIAR bulletins, and EPA/OSHA process safety requirements.",
+    directAnswer: "Ammonia refrigeration design is the safety engineering of industrial ammonia systems for any facility type. It designs industrial refrigeration using anhydrous ammonia with rigorous safety systems. It covers machine room ventilation and emergency exhaust, ammonia detection tied to alarms, charge minimization, isolation valving, piping per ammonia-specific rules, and compliance with ASHRAE 15, IIAR bulletins, and EPA/OSHA process safety requirements.",
     topic: "Industrial",
     serviceHref: "/services/mep/",
     faqs: [
@@ -164,6 +164,7 @@ export const WAVE_EC_ANSWER_PAGES: Phase0AeoPage[] = [
       },
     ],
     extraLinks: [
+      { label: "How Are Ammonia Refrigeration Systems Designed for Cold Storage?", href: "/answers/cold-storage-ammonia-system-design/" },
       { label: "Industrial ventilation design guide", href: "/answers/industrial-ventilation-design/" },
       { label: "Backup vs standby vs emergency power", href: "/answers/backup-vs-standby-vs-emergency-power/" },
       { label: "Building commissioning explained", href: "/answers/building-commissioning-explained/" },
