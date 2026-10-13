@@ -137,8 +137,8 @@ const CTR_OVERRIDES: Record<string, CtrOverride> = {
     areaServed: "Texas",
   },
   "/industries/life-science/cleanroom-mep-engineering/": {
-    title: "Cleanroom MEP Engineering | ISO Class Design & Certification | Apex Grid",
-    description: "Cleanroom MEP engineering for ISO 5\u20138 facilities \u2014 HVAC, HEPA filtration, pressure control. $500K\u2013$5M+ project experience. Get a cleanroom MEP quote from Apex Grid Engineering today.",
+    title: "Cleanroom MEP Engineering | ISO 5\u20138 Design, 10+ Licensed PEs | Apex Grid",
+    description: "Cleanroom MEP engineering for ISO 5\u20138 environments \u2014 HEPA/ULPA filtration, pressure cascades, temperature and humidity control. PE-stamped design from a veteran-owned firm with 20+ engineers and 10+ licensed PEs. Same-day quotes on qualifying scopes.",
     titleB: "MEP Engineering for Cleanrooms | Pharma & Life Science Experts",
     descriptionB: "Specialized cleanroom MEP design \u2014 ISO classification HVAC, HEPA/ULPA filtration, positive pressure cascades. Life science facility experts. Contact Apex Grid for a project quote.",
     utmSlug: "cleanroom-mep-engineering",
@@ -173,8 +173,8 @@ const CTR_OVERRIDES: Record<string, CtrOverride> = {
     areaServed: "United States",
   },
   "/metros/kalamazoo-portage-mi/mep-engineering/": {
-    title: "MEP Design Kalamazoo | Licensed Michigan Engineers | Apex Grid",
-    description: "MEP design in Kalamazoo\u2013Portage, MI. Licensed Michigan engineers for commercial HVAC, electrical & plumbing. Local expertise, 24\u201348hr turnaround. Call (480) 490-0064.",
+    title: "MEP Engineering Kalamazoo | PE-Stamped, Same-Day Quotes | Apex Grid",
+    description: "MEP Engineering for the Kalamazoo-Portage, MI metro \u2014 PE-stamped documents from a veteran-owned firm with 10+ licensed PEs and 20+ engineers. Same-day quotes on qualifying scopes.",
     titleB: "Kalamazoo MEP Engineering | Commercial Design, Fast Turnaround",
     descriptionB: "MEP engineering for the Kalamazoo\u2013Portage metro \u2014 commercial HVAC, electrical, plumbing with Michigan code expertise. Licensed in 49 states. Get a Kalamazoo MEP quote today.",
     utmSlug: "mep-design-kalamazoo",
