@@ -2,7 +2,6 @@ import { useJsonLd, usePageMeta } from "@/lib/seo";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import jeremyImg from "@assets/generated_images/jeremy-mills.webp";
-import angelImg from "@assets/file_00000000b85c8230ad55cc8b03100eea_1788058580363.png";
 
 /**
  * Team — simple cards. Jeremy Mills = Founder & CEO (NOT a PE).
@@ -18,8 +17,20 @@ const LEADERS = [
   {
     name: "Angel Endres",
     role: "Chief People Officer",
-    image: angelImg,
+    image: "/images/team/angel-endres.webp",
     bio: "Leads the people and culture behind the firm — 15+ years of HR leadership.",
+  },
+  {
+    name: "Josh Gordon",
+    role: "Personal Assistant to the CEO",
+    image: "/images/team/josh-gordon.webp",
+    bio: "Personal Assistant to Jeremy Mills, Founder and CEO — manages executive communications, coordinates bid and proposal submissions across the firm's 49-state practice, and keeps fast-moving operations on schedule.",
+  },
+  {
+    name: "Hishan Fernando",
+    role: "Head of Engineering",
+    image: "/images/team/shan-fernando.webp",
+    bio: "Leads Apex Grid's engineering and drafting operations across structural, MEP, and civil scopes — with licensed Professional Engineers stamping and sealing every regulated deliverable.",
   },
 ];
 
@@ -30,7 +41,6 @@ const ENGINEERS = [
   { name: "Sevdalina Petkova", role: "Principal · Structural Engineer (PE)" },
   { name: "Jorge Fuentes", role: "Principal · Civil & Structural Engineer (PE)" },
   { name: "Eric Culver", role: "Principal · Professional Engineer (PE)" },
-  { name: "Shan Fernando", role: "Head of Engineering" },
 ];
 
 const PCM_TEAM = [
@@ -64,7 +74,7 @@ export default function Team() {
         <div className="container mx-auto px-4 md:px-8">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-12 text-white">Leadership</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {LEADERS.map((person) => (
                 <article key={person.name} className="bg-background border border-border rounded-sm overflow-hidden">
                   <div className="aspect-[4/5] bg-secondary overflow-hidden">
