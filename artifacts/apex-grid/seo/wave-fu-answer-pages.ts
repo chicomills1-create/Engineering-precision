@@ -5,11 +5,11 @@ const founderNote = "I'm Jeremy Mills, CEO & Founder of Apex Grid Engineering an
 export const WAVE_FU_ANSWER_PAGES: Phase0AeoPage[] = [
   {
     slug: "cold-storage-ammonia-system-design",
-    title: "How Are Ammonia Refrigeration Systems Designed for Cold Storage?",
-    description: "Ammonia cools large cold storage plants efficiently. How engineers design ammonia systems: compressors, evaporators, machinery rooms, and refrigerant safety.",
+    title: "Ammonia Refrigeration System Design for Cold Storage | Apex Grid",
+    description: "Cold storage ammonia system design: centralized plants with compressor staging by temperature zone, zone-matched evaporators and defrost, and code-driven machinery-room safety for refrigerated warehouses.",
     h1: "How Are Ammonia Refrigeration Systems Designed for Cold Storage?",
     answer: "Ammonia (R-717) is the workhorse refrigerant for large cold storage plants because it is thermodynamically efficient at industrial scale and carries no ozone-depletion or global-warming penalty, making it a durable choice for facilities that will run for decades. The direct answer is that the engineer designs a centralized ammonia plant — high-efficiency screw compressors, evaporative condensers, and evaporators matched to each temperature zone — governed by strict machinery-room safety, ventilation, and detection requirements.\n\nThe system architecture follows the temperature zones. A typical plant serves a -10°F freezer, a 35°F cooler, and a tempered dock from one central plant, with the compressor staging and suction pressures arranged so each zone gets its design capacity without the others starving. Low-charge packaged systems suit smaller plants and simplify the safety footprint, while pumped-recirculation designs serve large multi-evaporator plants efficiently. The evaporator selection — ceiling-hung unit coolers versus penthouse coils — follows the room geometry, the product stacking, and the defrost strategy, because airflow that short-circuits is capacity the compressors burn for nothing.\n\nSafety design is inseparable from the refrigeration design. The machinery room gets gas detection tied to ventilation and alarm, emergency ventilation rates per the mechanical code, pressure relief routed outdoors, and an emergency shutdown sequence the operators can trigger from multiple points. Refrigerant piping is designed, supported, and labeled for ammonia service, with isolation valves that let a leak be contained to one circuit. Commissioning proves the controls, the safety interlocks, and the capacity at design conditions before product ever enters the building — because an ammonia plant that is not verified is a liability, not an asset.",
-    directAnswer: "Cold storage ammonia plants are designed as centralized systems with staged screw compressors, zone-matched evaporators, and code-driven machinery-room safety, ventilation, and detection.",
+    directAnswer: "Cold storage ammonia systems are designed as centralized plants: staged screw compressors matched to each temperature zone, zone-specific evaporators and defrost, and code-driven machinery-room safety, ventilation, and detection — the plant architecture behind large refrigerated warehouses.",
     topic: "Refrigerated Warehouses & Cold Storage",
     serviceHref: "/services/mep/",
     sections: [
@@ -45,6 +45,7 @@ export const WAVE_FU_ANSWER_PAGES: Phase0AeoPage[] = [
       },
     ],
     extraLinks: [
+      { label: "Why Does Ammonia Refrigeration Need Special Engineering Design?", href: "/answers/ammonia-refrigeration-design/" },
       { label: "How Are Chemical Feed Systems Designed for Treatment Plants?", href: "/answers/chemical-feed-system-design/" },
       { label: "How Is Power Designed for Reefer Racks at Marine Terminals?", href: "/answers/reefer-rack-power-design/" },
       { label: "How Is Electrical Design Done for MRF Recycling Plants?", href: "/answers/mrf-electrical-design/" },
