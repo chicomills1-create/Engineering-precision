@@ -41,6 +41,15 @@ export const LEGACY_LOCATION_REDIRECTS: Readonly<Record<string, string>> = {
   "/mep-engineering/": "/services/mep",
   "/industries/healthcare/hospitals/mep-engineering/": "/industries/healthcare-engineering/",
   "/industries/healthcare/mep-engineering/": "/industries/healthcare-engineering/",
+  // Lane 4 answers consolidation (2026-10-12, ChatGPT-approved R1/R2/R3/R4/R6):
+  // duplicate /answers/ topics folded into their single canonical winners.
+  // R5 (cold-storage-warehouse-refrigeration) is deliberately NOT here — held
+  // pending a refrigeration-consultant content merge into the winner.
+  "/answers/911-dispatch-center-design/": "/answers/911-center-design/",
+  "/answers/911-dispatch-design/": "/answers/911-center-design/",
+  "/answers/cold-storage-warehouse-engineering/": "/answers/cold-storage-design/",
+  "/answers/cold-storage-warehouse-design/": "/answers/cold-storage-design/",
+  "/answers/cold-storage-facility-design/": "/answers/cold-storage-design/",
 };
 
 export const RETAINED_LEGACY_LOCATIONS: ReadonlyArray<{
