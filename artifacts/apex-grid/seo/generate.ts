@@ -3351,10 +3351,18 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
   ];
   const seenUrls = new Set<string>();
   const duplicateUrls: string[] = [];
+  const redirectSources = new Set(Object.keys(expandedLegacyLocationRedirects()));
   for (const sitemap of sitemaps) {
     sitemap.urls = sitemap.urls.filter((entry) => {
       const loc = entry.match(/<loc>([^<]+)<\/loc>/)?.[1];
       if (!loc) throw new Error(`Malformed sitemap URL entry in ${sitemap.name}`);
+      // A URL registered as a 301 source must never be advertised in a
+      // sitemap: seo/audit-corpus.ts ("sitemap URL is registered to
+      // redirect") and seo/validate-sitemap-http.ts (redirects are not
+      // followed; every listed URL must return 200) both fail the build
+      // otherwise. Consolidation redirects retire the source URL from
+      // discovery; the target stays listed under its own canonical.
+      if (redirectSources.has(loc.replace(SITE, ""))) return false;
       if (seenUrls.has(loc)) {
         duplicateUrls.push(loc);
         return false;
@@ -9984,6 +9992,24 @@ async function main() {
       engineeringCostEstimatorPage(state, cities, directory),
     );
     pages++;
+  }
+
+  // Redirect stubs are authoritative at their source paths. The early stub
+  // pass (near the top of main) is overwritten by later page writers — the
+  // industry-discipline writer and the discipline-hub writer (which rm -rf's
+  // the hub directory) — so re-apply the stubs here, after the LAST page
+  // writer and before writeSitemap. This deliberately deviates from the
+  // usual one-pass generation flow: a consolidated URL must ship the
+  // noindex redirect stub, never a full indexable page, because the corpus
+  // audit fails any indexable canonical that is absent from the sitemaps
+  // (and redirect sources are filtered out of the sitemaps above). Only the
+  // source path's own index.html is written; child pages beneath it
+  // (e.g. /mep-engineering/medical/) are untouched. The production server
+  // answers these paths with the registered 301 before static serving.
+  for (const [fromPath, toPath] of Object.entries(expandedLegacyLocationRedirects())) {
+    const legacyDir = path.join(PUBLIC, fromPath.replace(/^\/|\/$/g, ""));
+    fs.mkdirSync(legacyDir, { recursive: true });
+    fs.writeFileSync(path.join(legacyDir, "index.html"), legacyLocationRedirectPage(fromPath, toPath));
   }
 
   writeSitemap(states, cities, directory);
