@@ -3,7 +3,6 @@ import { ArrowRight } from "lucide-react";
 import { SITE_URL, useJsonLd, usePageMeta } from "@/lib/seo";
 import officeImg from "@assets/generated_images/office.webp";
 import jeremyImg from "@assets/generated_images/jeremy-mills.webp";
-import angelImg from "@assets/file_00000000b85c8230ad55cc8b03100eea_1788058580363.png";
 import { LICENSING_COVERAGE_STATEMENT } from "@/lib/licensing";
 
 /**
@@ -119,7 +118,7 @@ export default function About() {
               <div className="bg-card border border-border p-8 rounded-sm">
                 <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden rounded-sm">
                   <img
-                    src={angelImg}
+                    src="/images/team/angel-endres.webp"
                     alt="Angel Endres, Chief People Officer of Apex Grid Engineering"
                     className="w-full h-full object-cover object-top"
                     loading="lazy"
