@@ -212,7 +212,12 @@ export const PHASE9_INDUSTRY_SERVICE_PAGES = pages;
 export const PHASE9_INBOUND_TARGETS: Record<string, string> = {
   "/industries/healthcare/hospitals/structural-engineering/": "/industries/healthcare/structural-engineering/",
   "/industries/healthcare/medical-office-buildings/electrical-engineering/": "/industries/healthcare/electrical-engineering/",
-  "/industries/healthcare/surgery-centers/mep-engineering/": "/industries/healthcare/mep-engineering/",
+  // Donor re-pointed 2026-10-12 (CTR Phase 1): the original donor
+  // /industries/healthcare/mep-engineering/ was consolidated behind a 301
+  // into /industries/healthcare-engineering/, so the mechanical-engineering
+  // canonical page (MEP's closest sibling discipline) now provides the
+  // contextual inbound link.
+  "/industries/healthcare/surgery-centers/mep-engineering/": "/industries/healthcare/mechanical-engineering/",
   "/industries/multifamily/student-housing/structural-engineering/": "/industries/multifamily/structural-engineering/",
   "/industries/multifamily/apartments/geotechnical-engineering/": "/industries/multifamily/geotechnical-engineering/",
   "/industries/life-science/cleanroom-electrical-engineering/": "/industries/life-science/mep-engineering/",

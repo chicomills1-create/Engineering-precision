@@ -5190,7 +5190,18 @@ function disciplineSubpagePage(hub: DisciplineHub, sp: DisciplineSubpage): strin
     { name: hub.h1, href: `/${hub.slug}/` },
     { name: sp.h1 },
   ];
-  const otherSubpages = hub.subpages.filter((s) => s.slug !== sp.slug).slice(0, 4);
+  // Rotate through the sibling family (same pattern as
+  // industryDisciplinePage) so every subpage receives contextual inbound
+  // links from its siblings. Taking only the first four siblings left
+  // subpages at positions 6+ with zero sibling links, dependent on the hub
+  // page alone — when the /mep-engineering/ hub was consolidated behind a
+  // 301 (CTR Phase 1, 2026-10-12), four subpages dropped to zero inbound
+  // links and failed the prerender link-graph assertion.
+  const currentSubIndex = hub.subpages.indexOf(sp);
+  const otherSubpages = Array.from(
+    { length: Math.min(4, Math.max(0, hub.subpages.length - 1)) },
+    (_, offset) => hub.subpages[(currentSubIndex + offset + 1) % hub.subpages.length],
+  );
   const relatedLinks = otherSubpages
     .map((s) => `<a class="card" href="/${hub.slug}/${s.slug}/"><h3>${esc(s.h1)}</h3></a>`)
     .join("\n          ");
