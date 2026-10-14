@@ -16,6 +16,7 @@ export const leadsTable = pgTable("leads", {
   campaign: text("campaign"),
   landingPath: text("landing_path"),
   referrer: text("referrer"),
+  gclid: text("gclid"),
   referralPartnerId: integer("referral_partner_id"),
   status: text("status").notNull().default("new"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
