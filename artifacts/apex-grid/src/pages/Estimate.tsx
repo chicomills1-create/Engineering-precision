@@ -420,6 +420,8 @@ export default function Estimate() {
         ballpark: ballparkQuote,
       }));
       setProposal(response);
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({ event: "lead_submit_success" });
       dispatchEstimateAnalytics({ name: "proposal-submitted", payload: {} });
       goTo(6);
     } catch (submissionError) {
