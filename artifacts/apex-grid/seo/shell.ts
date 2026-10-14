@@ -289,6 +289,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-NZR5W46M');</script>
 <!-- End Google Tag Manager -->
+<!-- First-touch attribution capture: persist gclid/UTMs from the landing URL for the session -->
+<script>(function(){try{var k="apex:firstTouch";if(window.sessionStorage.getItem(k))return;var q=new URLSearchParams(window.location.search),o={},hit=false;["gclid","utm_source","utm_medium","utm_campaign"].forEach(function(p){var v=q.get(p);if(v){o[p]=v;hit=true;}});if(hit)window.sessionStorage.setItem(k,JSON.stringify(o));}catch(e){}})();</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>${e(_title)}</title>
