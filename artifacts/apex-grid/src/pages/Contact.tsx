@@ -8,6 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { usePageMeta, useJsonLd } from "@/lib/seo";
+import { getFirstTouchValue } from "@/lib/firstTouch";
 import { APEX_GRID_BUSINESS_SCHEMA } from "@/lib/business-schema";
 import { Check, Stamp, PencilRuler, Calculator } from "lucide-react";
 
@@ -71,9 +72,10 @@ export default function Contact() {
           services: data.need,
           message: data.message,
           attachments: [],
-          source: params.get("utm_source") || (document.referrer ? "referral" : "direct"),
-          medium: params.get("utm_medium") || undefined,
-          campaign: params.get("utm_campaign") || undefined,
+          source: getFirstTouchValue("utm_source") || (document.referrer ? "referral" : "direct"),
+          medium: getFirstTouchValue("utm_medium"),
+          campaign: getFirstTouchValue("utm_campaign"),
+          gclid: getFirstTouchValue("gclid"),
           landingPath: `${window.location.pathname}${window.location.search}`,
           referrer: document.referrer || undefined,
           referralPartnerCode: partnerCode,
