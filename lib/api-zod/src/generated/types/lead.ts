@@ -32,6 +32,8 @@ export interface Lead {
   /** @nullable */
   referrer?: string | null;
   /** @nullable */
+  gclid?: string | null;
+  /** @nullable */
   referralPartnerId?: number | null;
   status: LeadStatus;
   createdAt: string;
