@@ -258,6 +258,7 @@ export const ListLeadsResponseItem = zod.object({
   "campaign": zod.string().nullish(),
   "landingPath": zod.string().nullish(),
   "referrer": zod.string().nullish(),
+  "gclid": zod.string().nullish(),
   "referralPartnerId": zod.number().nullish(),
   "status": zod.enum(['new', 'contacted', 'closed']),
   "createdAt": zod.string()
@@ -282,6 +283,8 @@ export const createLeadBodyLandingPathMax = 500;
 
 export const createLeadBodyReferrerMax = 1000;
 
+export const createLeadBodyGclidMax = 500;
+
 export const createLeadBodyReferralPartnerCodeMin = 20;
 export const createLeadBodyReferralPartnerCodeMax = 64;
 
@@ -301,6 +304,7 @@ export const CreateLeadBody = zod.object({
   "campaign": zod.string().max(createLeadBodyCampaignMax).optional(),
   "landingPath": zod.string().max(createLeadBodyLandingPathMax).optional(),
   "referrer": zod.string().max(createLeadBodyReferrerMax).optional(),
+  "gclid": zod.string().max(createLeadBodyGclidMax).optional(),
   "referralPartnerCode": zod.string().min(createLeadBodyReferralPartnerCodeMin).max(createLeadBodyReferralPartnerCodeMax).optional()
 })
 
@@ -318,6 +322,7 @@ export const CreateLeadResponse = zod.object({
   "campaign": zod.string().nullish(),
   "landingPath": zod.string().nullish(),
   "referrer": zod.string().nullish(),
+  "gclid": zod.string().nullish(),
   "referralPartnerId": zod.number().nullish(),
   "status": zod.enum(['new', 'contacted', 'closed']),
   "createdAt": zod.string()
@@ -444,6 +449,7 @@ export const UpdateLeadResponse = zod.object({
   "campaign": zod.string().nullish(),
   "landingPath": zod.string().nullish(),
   "referrer": zod.string().nullish(),
+  "gclid": zod.string().nullish(),
   "referralPartnerId": zod.number().nullish(),
   "status": zod.enum(['new', 'contacted', 'closed']),
   "createdAt": zod.string()
