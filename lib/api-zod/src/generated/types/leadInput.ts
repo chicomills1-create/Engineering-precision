@@ -29,6 +29,8 @@ export interface LeadInput {
   landingPath?: string;
   /** @maxLength 1000 */
   referrer?: string;
+  /** @maxLength 500 */
+  gclid?: string;
   /**
      * @minLength 20
      * @maxLength 64
