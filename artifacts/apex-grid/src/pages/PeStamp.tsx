@@ -61,6 +61,39 @@ const faqs = [
   },
 ];
 
+const popularStates = [
+  {
+    name: "Texas",
+    href: "/pe-stamp/texas/",
+    blurb: "Registered with TBPELS (firm #7762). Structural sets reviewed against your city's adopted code and sealed by our Texas PE.",
+  },
+  {
+    name: "Florida",
+    href: "/pe-stamp/florida/",
+    blurb: "DBPR engineering business registry #40371 (Current). Florida Building Code review, with HVHZ wind and product-approval checks for Miami-Dade and Broward.",
+  },
+  {
+    name: "Pennsylvania",
+    href: "/pe-stamp/pennsylvania/",
+    blurb: "UCC projects across local, L&I, and third-party review paths — we confirm your town's process before the review starts.",
+  },
+  {
+    name: "Arizona",
+    href: "/pe-stamp/arizona/",
+    blurb: "Our home state. Headquartered in Queen Creek, with an Arizona-licensed structural PE and Valley AHJs we work with every week.",
+  },
+  {
+    name: "New Jersey",
+    href: "/pe-stamp/new-jersey/",
+    blurb: "One statewide Uniform Construction Code. Subcode-by-subcode review and sealing by our New Jersey PE.",
+  },
+  {
+    name: "Tennessee",
+    href: "/pe-stamp/tennessee/",
+    blurb: "Sealed by our Tennessee-licensed PE under the Board of Architectural and Engineering Examiners' disclosure structure.",
+  },
+];
+
 const title = "Need a PE Stamp? Fast PE Review & Seal in 49 States | Apex Grid Engineering"; // claims-audit: evidence-gated
 const description =
   "Fast, trusted PE review-and-seal for structural, MEP, and civil drawings. Licensed engineers, real review, sealed sets back in days. Send us your plans.";
@@ -174,6 +207,41 @@ export default function PeStamp() {
               </div>
             </aside>
           </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-background border-t border-border">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-4xl mb-12">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">PE stamps, state by state</h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Every state runs its own board, code cycle, and submittal rules — so each state page walks through how review-and-seal works where your project actually is. These are the states that send us the most plans:
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {popularStates.map((state) => (
+              <a
+                key={state.href}
+                href={state.href}
+                className="bg-card border border-border p-8 hover:border-primary/50 transition-colors group block"
+              >
+                <h3 className="text-xl font-display font-bold mb-3 group-hover:text-primary transition-colors">
+                  PE stamp in {state.name}
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6">{state.blurb}</p>
+                <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary">
+                  Start your {state.name} review <ArrowRight className="w-3 h-3" />
+                </span>
+              </a>
+            ))}
+          </div>
+          <p className="text-muted-foreground mt-10">
+            Working somewhere else? We seal in 49 states —{" "}
+            <a href="/locations/" className="text-primary hover:underline">
+              find your state's engineering service area
+            </a>{" "}
+            or send the plans and we'll match the right licensed engineer to your project.
+          </p>
         </div>
       </section>
 
