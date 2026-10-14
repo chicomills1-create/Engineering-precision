@@ -112,6 +112,31 @@ export default function Services() {
 
       <section className="pb-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="border border-border bg-card p-12 md:p-16 rounded-sm">
+            <p className="text-primary font-bold text-lg">Already have drawings?</p>
+            <h2 className="mt-2 font-display text-3xl md:text-4xl font-bold tracking-tight text-white">
+              Just need the stamp.
+            </h2>
+            <p className="mt-6 max-w-2xl text-foreground/70 leading-relaxed">
+              Send us your plans — a licensed PE reviews the set, verifies the calculations,
+              and seals what passes. Most complete packages come back in 12–24 hours.
+              Pick your state to see how it works there:
+            </p>
+            <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm text-foreground/80">
+              <li><a href="/pe-stamp/texas/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Need a PE stamp in Texas? We can help</a></li>
+              <li><a href="/pe-stamp/florida/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Efficient PE sealing for Florida projects</a></li>
+              <li><a href="/pe-stamp/pennsylvania/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">PE review &amp; seal in Pennsylvania</a></li>
+              <li><a href="/pe-stamp/arizona/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Arizona PE stamps — our home state</a></li>
+              <li><a href="/pe-stamp/new-jersey/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Get plans stamped in New Jersey</a></li>
+              <li><a href="/pe-stamp/tennessee/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Tennessee PE review &amp; seal</a></li>
+              <li><a href="/pe-stamp/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">How PE review &amp; seal works — all 49 states</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="border border-border bg-card p-12 md:p-16 text-center rounded-sm">
             <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-white">
               Not sure which one you need?
