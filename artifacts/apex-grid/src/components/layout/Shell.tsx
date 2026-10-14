@@ -432,6 +432,21 @@ export function Shell({ children }: { children: React.ReactNode }) {
               </ul>
             </div>
           </div>
+          <div className="mt-16 pt-10 border-t border-border">
+            <h4 className="font-display font-bold mb-2 text-sm uppercase tracking-widest text-muted-foreground">PE Stamp — Popular States</h4>
+            <p className="text-sm text-foreground/70 mb-6 max-w-2xl leading-relaxed">
+              Need a PE stamp? Send us your drawings — a licensed engineer reviews and seals them, fast. Start with your state:
+            </p>
+            <ul className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-foreground/80">
+              <li><a href="/pe-stamp/texas/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Fast PE stamping services in Texas</a></li>
+              <li><a href="/pe-stamp/florida/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Get your plans stamped in Florida</a></li>
+              <li><a href="/pe-stamp/pennsylvania/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Professional engineering stamps for Pennsylvania</a></li>
+              <li><a href="/pe-stamp/arizona/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Arizona PE stamps from our home-state team</a></li>
+              <li><a href="/pe-stamp/new-jersey/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Efficient PE sealing for New Jersey projects</a></li>
+              <li><a href="/pe-stamp/tennessee/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Tennessee PE stamp services</a></li>
+              <li><a href="/pe-stamp/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">PE stamp services — all 49 states</a></li>
+            </ul>
+          </div>
           <div className="mt-20 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
             <p>© {year} Apex Grid Engineering. All rights reserved.</p>
             <div className="flex gap-6">
