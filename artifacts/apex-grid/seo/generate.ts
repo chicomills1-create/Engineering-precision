@@ -1544,7 +1544,7 @@ function peStampStatePage(state: StateData, slug: string): string {
   return phase0ArticleFrame({
     canonical: `/pe-stamp/${slug}/`,
     title: `PE Stamp and License Lookup in ${stateName} | Apex Grid`,
-    description: `PE stamp services plus official ${stateName} engineering board and license-verification resources. Apex Grid is a veteran-owned firm with 10+ licensed PEs and 20+ engineers — same-day quotes on qualifying scopes.`,
+    description: `Verify a PE license in ${stateName} with the official board resources — plus PE stamp and review-and-seal services from Apex Grid, a veteran-owned firm with 10+ licensed PEs. Same-day quotes on qualifying scopes.`,
     h1: `PE Stamp and License Verification in ${stateName}`,
     kicker: `${stateName} · Official Board Resources`,
     answer: `For a ${stateName} project, use the state's official engineering board and license-verification resources before relying on a professional credential. Apex Grid's licensed PEs review and seal drawings nationwide — 10+ licensed PEs on a 20+ engineer team, with same-day quotes on qualifying scopes. A PE seal still requires independent engineering review, professional responsibility, and compliance with the project jurisdiction's submission rules.`,
@@ -2687,7 +2687,7 @@ ${availableVerticals
 
   return htmlShell({
     title: `Engineering Services in ${city.name}, ${state.abbrev} | MEP, Structural, Civil | Apex Grid`,
-    description: `Licensed MEP, structural, civil, and energy-compliance engineering serving ${city.name}, ${state.abbrev} under the ${state.buildingCode.baseCode}. PE-stamped, permit-ready documents from a veteran-owned firm with 10+ licensed PEs — same-day quotes on qualifying scopes.`,
+    description: `MEP, structural & civil engineering in ${city.name}, ${state.abbrev} — PE-stamped, permit-ready drawings designed to the ${state.buildingCode.baseCode}. Veteran-owned firm with 10+ licensed PEs; same-day quotes on qualifying scopes.`,
     canonical: `${SITE}/locations/${state.slug}/${city.slug}/`,
     schemaJson: [orgSchema, svcSchema, faqSchema, breadcrumbSchema(crumbs)],
     body,
