@@ -18,7 +18,7 @@ const outputTargets = process.env.SEO_OUTPUT_DIR
 const site = (process.env.VITE_SITE_URL ?? "https://apexgrideng.com").replace(/\/$/, "");
 
 const routeMeta: Record<string, [string, string]> = {
-  "/": ["PE-Stamped MEP & Structural Engineering | Apex Grid", "PE-stamped structural, commercial MEP, civil, and building-assessment engineering from Arizona, with Title 24 and municipal plan-check support."],
+  "/": ["PE-Stamped Structural, MEP & Civil Engineering | Apex Grid Engineering", "Apex Grid Engineering is a structural, MEP, and civil engineering firm offering PE-stamped, permit-ready drawings and plan-check support nationwide. Same-day quotes on qualifying scopes."],
   "/about": ["About Apex Grid Engineering | Integrated Engineering Firm", "Apex Grid Engineering coordinates engineering, architecture, and general contracting support, with regulated scope confirmed for each project jurisdiction."],
   "/contact": ["Contact Us | Request an Engineering Proposal | Apex Grid", "Start your project with Apex Grid Engineering. Request a proposal for architectural, MEP, structural, or civil design services — initial review response typically within 12-24 hours for most standard requests."],
   "/estimate": ["Instant Ballpark Estimator | Apex Grid Engineering", "Get an instant, non-binding ballpark estimate for your engineering project. Preconstruction intake for MEP, Structural, Civil, and more."],
@@ -65,6 +65,14 @@ function metadata(route: string): [string, string] {
   if (routeMeta[route]) return routeMeta[route];
   const industry = ALL_INDUSTRIES.find((item) => `/industries/${item.slug}/` === route);
   if (industry) return [industry.title, industry.meta];
+  const serviceMeta: Record<string, [string, string]> = {
+    "/services/mep": ["MEP Engineering Services | Mechanical, Electrical & Plumbing Design | Apex Grid", "MEP design services for commercial, restaurant, medical, multifamily, and industrial projects — HVAC, electrical, and plumbing engineered as one coordinated, PE-stamped permit package. Same-day quotes on qualifying scopes."],
+    "/services/structural": ["Structural Engineering Services | PE-Stamped Design & Calculations | Apex Grid", "Structural engineering for commercial, industrial, multifamily, and government projects — calculations, permit drawings, and seismic design, PE-stamped where required. Same-day quotes on qualifying scopes."],
+    "/services/civil": ["Civil Engineering Services | Site Design, Grading & Stormwater | Apex Grid", "Civil engineering for commercial sites — grading, drainage, stormwater, utilities, parking, and ADA improvements with PE-stamped permit drawings. Same-day quotes on qualifying scopes."],
+    "/services/assessments": ["Building Assessment Services | Condition Reports & Due Diligence | Apex Grid", "Building condition assessments and engineering evaluations for commercial properties — structural and MEP assessments that tell you what you're buying or renovating before you commit."],
+    "/services/architecture": ["Architectural Design Services | Apex Grid Engineering", "Architectural design coordinated with in-house structural, MEP, and civil engineering — one coordinated, permit-ready document set."],
+  };
+  if (serviceMeta[route]) return serviceMeta[route];
   const id = route.split("/").pop()!;
   const names: Record<string, string> = { mep: "MEP Design & Engineering", structural: "Structural Design & Engineering", civil: "Civil Engineering", assessments: "Building Assessments", architecture: "Architectural Design" };
   return [`${names[id] ?? "Engineering Service"} | Apex Grid`, `Apex Grid Engineering provides ${names[id]?.toLowerCase() ?? "commercial engineering"} with coordinated, permit-ready deliverables.`];
