@@ -175,6 +175,33 @@ export default function Home() {
         </div>
       </section>
 
+      {/* PE stamps by state — where the plans come from */}
+      <section className="py-16 md:py-20 bg-card border-b border-border" aria-label="PE stamps by state">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <span className="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-primary uppercase font-bold">
+              Review &amp; seal, nationwide
+            </span>
+            <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-white mt-4 mb-4 type-3d">
+              PE stamps in your state.
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">
+              Licensed in 49 states, with most review-and-seal packages back in 12–24 hours.
+              Start with the states that send us the most plans:
+            </p>
+          </div>
+          <ul className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm md:text-base text-foreground/80">
+            <li><a href="/pe-stamp/texas/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Texas PE stamp &amp; sealing</a></li>
+            <li><a href="/pe-stamp/florida/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Florida PE seal — permit-ready</a></li>
+            <li><a href="/pe-stamp/pennsylvania/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Pennsylvania plan stamping</a></li>
+            <li><a href="/pe-stamp/arizona/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Arizona PE stamp (our home state)</a></li>
+            <li><a href="/pe-stamp/new-jersey/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">New Jersey PE seal</a></li>
+            <li><a href="/pe-stamp/tennessee/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Tennessee PE review &amp; seal</a></li>
+            <li><a href="/pe-stamp/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">See PE stamp services in all 49 states</a></li>
+          </ul>
+        </div>
+      </section>
+
       {/* Portfolio showcase — representative types, honestly framed */}
       <section className="py-20 md:py-28 bg-background border-b border-border" aria-label="Selected work">
         <div className="container mx-auto px-4 md:px-8">
