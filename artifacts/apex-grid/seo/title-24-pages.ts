@@ -13,9 +13,9 @@ export interface Title24Page {
 }
 
 export const TITLE_24_HUB = {
-  title: "California Title 24 Energy Compliance | Apex Grid Engineering",
+  title: "Title 24 Energy Compliance | Reports, Calculations & Certificates | Apex Grid",
   description:
-    "California Title 24 energy compliance engineering for commercial, multifamily, and residential projects. PE-reviewed compliance documentation and permit packages.",
+    "California Title 24 energy compliance reports, calculations, and certificates (CF1R / NRCC) for residential and commercial permits — PE-reviewed documentation prepared for plan check.",
   h1: "California Title 24 Energy Compliance",
   kicker: "Energy Code Compliance",
   lede:
@@ -33,6 +33,9 @@ export const TITLE_24_HUB = {
     "CEPE (California Energy Permit Express) coordination",
     "Plan check response and comment resolution",
     "Coordination with architectural and MEP engineering",
+    "Title 24 compliance certificates — CF1R and NRCC forms",
+    "Energy compliance reports for permit submittal",
+    "Title 24 for additions, alterations, and ADUs",
   ],
 };
 
