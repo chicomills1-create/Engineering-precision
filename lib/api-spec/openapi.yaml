@@ -1348,6 +1348,7 @@ components:
         campaign: { type: [string, "null"] }
         landingPath: { type: [string, "null"] }
         referrer: { type: [string, "null"] }
+        gclid: { type: [string, "null"] }
         referralPartnerId: { type: [number, "null"] }
         status:
           $ref: "#/components/schemas/LeadStatus"
@@ -1476,6 +1477,7 @@ components:
         campaign: { type: string, maxLength: 200 }
         landingPath: { type: string, maxLength: 500 }
         referrer: { type: string, maxLength: 1000 }
+        gclid: { type: string, maxLength: 500 }
         referralPartnerCode: { type: string, minLength: 20, maxLength: 64 }
     ClientJobDocumentInput:
       type: object
