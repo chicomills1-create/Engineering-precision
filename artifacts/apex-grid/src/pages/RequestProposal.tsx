@@ -93,6 +93,8 @@ export default function RequestProposal() {
         },
       });
 
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({ event: "lead_submit_success" });
       setIsSuccess(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch {
