@@ -1532,14 +1532,174 @@ function peStampHubPage(): string {
   });
 }
 
+/** Money-term states for the PE-stamp pages (key-terms build 2026-10-14;
+ * ChatGPT consult chatcmpl-EZ2M9xifaZ9HCbOQX75cLNqia5hyu): the live PPC
+ * states and highest-demand stamping markets. Every state page cross-links
+ * to these, and each of these pages carries a state-specific deep-dive
+ * (process, turnaround, send/receive) written from verified firm records —
+ * no boilerplate duplication, no invented license claims. */
+const PE_STAMP_MONEY_STATES: Array<{ slug: string; label: string }> = [
+  { slug: "texas", label: "PE stamp in Texas — fast review & seal" },
+  { slug: "florida", label: "Florida PE seal for permit-ready plans" },
+  { slug: "pennsylvania", label: "Get plans stamped in Pennsylvania" },
+  { slug: "arizona", label: "Arizona PE stamping, from our home state" },
+  { slug: "new-jersey", label: "PE sealing for New Jersey projects" },
+  { slug: "tennessee", label: "Tennessee PE stamp & review" },
+];
+
+type PeStampDeepDive = {
+  sections: Array<{ heading: string; body: string; bullets?: string[] }>;
+  faqs: Array<{ question: string; answer: string }>;
+};
+
+const PE_STAMP_DEEP_DIVE: Record<string, PeStampDeepDive> = {
+  texas: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Texas, step by step",
+        body: "Send us the drawing set, your calculations, the project address and city, and your permit deadline. We confirm the scope and the locally adopted code edition for that city — Texas has no statewide commercial building code, so Houston, Dallas, Austin, and San Antonio each run their own IBC cycle and amendments — and you get a same-day quote on qualifying scopes. Our Texas-licensed engineer then reviews the set against that code basis, verifies or performs the calculations, and seals what is ready. The sealed package comes back digitally — the Texas Board of Professional Engineers and Land Surveyors (TBPELS) accepts digital and electronic seals on submittals — ready to upload to the city's portal.",
+        bullets: ["Send drawings, calculations, project address, and deadline", "Same-day quote on qualifying scopes", "Review against your city's adopted IBC edition and amendments", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Texas stamp work",
+        body: "Most complete Texas packages come back sealed within 12–24 hours, and rush handling is available when a permit deadline is driving the schedule. Two things most often slow a Texas job down, and both are worth flagging when you send the set: an unconfirmed code edition (the governing IBC edition must match the specific city, not the state), and coastal windstorm items — projects in the coastal counties can carry TDI/TWIA inspection and certification requirements that belong in the plan from the start. Tell us the city and the deadline up front and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and permitting city, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the Texas PE in responsible charge, with any required fixes clearly marked so a resubmittal goes in clean. Apex Grid Engineering is registered with TBPELS as an engineering firm (firm #7762), and Texas structural work is sealed by our Texas-licensed structural PE.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project address, permitting city, and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Can Apex Grid stamp structural drawings for a Texas permit?", answer: "Yes. Apex Grid Engineering is registered with the Texas Board of Professional Engineers and Land Surveyors (firm #7762), and Texas structural work is reviewed and sealed by our Texas-licensed structural PE. Send the set and we will confirm discipline fit and timeline the same day." },
+      { question: "Does Texas accept a digital PE seal?", answer: "Yes. TBPELS accepts digital and electronic seals on submittals under board rules, so your sealed drawings and calculations come back ready to upload to the city's permitting portal — no wet-signature mailing delay." },
+    ],
+  },
+  florida: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Florida, step by step",
+        body: "Send us the drawing set, your calculations, the project address and county, and your permit deadline. Florida runs a single mandatory statewide code — the Florida Building Code, 8th Edition (2023) — so the design basis is predictable, and our Florida-licensed engineer reviews your set against it plus any local amendments. Anything headed for Miami-Dade or Broward gets the High-Velocity Hurricane Zone treatment in review: wind design and product approvals (Notice of Acceptance or Florida Product Approval) are checked before sealing, not after a reviewer rejects the set. You get a same-day quote on qualifying scopes, and the sealed package comes back signed and ready for submittal.",
+        bullets: ["Send drawings, calculations, project address and county, and deadline", "Same-day quote on qualifying scopes", "Review against the Florida Building Code, 8th Edition (2023)", "HVHZ wind and product-approval check for Miami-Dade and Broward work"],
+      },
+      {
+        heading: "Turnaround on Florida stamp work",
+        body: "Most complete Florida packages come back sealed within 12–24 hours, with rush handling available when a permit date is driving. Florida reviewers are rigorous — especially in the HVHZ, where missing product approvals are a common rejection — and threshold buildings can trigger special-inspector requirements that are worth planning around early. A complete first package is what keeps the timeline short: send the product information with the drawings and we will give you a straight return date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and county, product-approval information (NOA or Florida Product Approval) for specified components, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by our Florida-licensed PE, with required fixes clearly marked. Apex Grid Engineering PLLC holds Florida DBPR engineering business registry #40371 (Current), qualified by our Florida PE.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and product approvals, if specified", "Project address, county, and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Is Apex Grid registered to offer engineering in Florida?", answer: "Yes. Apex Grid Engineering PLLC holds Florida DBPR engineering business registry #40371, status Current, and Florida work is qualified by our Florida-licensed professional engineer." },
+      { question: "Can you stamp work in the High-Velocity Hurricane Zone?", answer: "Yes — Miami-Dade and Broward work is reviewed against the HVHZ provisions of the Florida Building Code, including wind design and product approvals (Notice of Acceptance or Florida Product Approval). Send the set with the product information and we will mark anything missing before sealing, so the submittal goes in complete." },
+    ],
+  },
+  pennsylvania: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Pennsylvania, step by step",
+        body: "Send us the drawing set, your calculations, the project municipality, and your permit deadline. Pennsylvania's Uniform Construction Code (UCC) applies statewide on the 2018 I-Codes, but who reviews your permit depends on the town: municipalities either enforce the UCC locally or defer to the Department of Labor & Industry or a state-approved third-party agency, and Philadelphia (L&I) and Pittsburgh (PLI) run their own procedures. We confirm the AHJ path first, so the set is reviewed against the right checklist, then our Pennsylvania-licensed engineer reviews, verifies the calculations, and seals what is ready. Digital seals with authentication are accepted for electronic submittals, so the sealed package comes back ready to file.",
+        bullets: ["Send drawings, calculations, project municipality, and deadline", "Same-day quote on qualifying scopes", "AHJ path confirmed first — local, L&I, or third-party agency", "Sealed set returned digitally with authenticated seal"],
+      },
+      {
+        heading: "Turnaround on Pennsylvania stamp work",
+        body: "Most complete Pennsylvania packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. The variable in Pennsylvania is the reviewer, not the code: a third-party agency town, a local enforcement office, and Philadelphia L&I all move at different speeds, and a set prepared for the wrong checklist loses days. Tell us the municipality up front — we build the review around that AHJ's process and give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and municipality, any UCC permit application details already started, AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by our Pennsylvania-licensed PE, with required fixes clearly marked for a clean resubmittal if the reviewer comments.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project municipality and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Who reviews my permit set in Pennsylvania — the town or the state?", answer: "It depends on the municipality. Towns either enforce the Uniform Construction Code locally or defer to the Department of Labor & Industry or a state-approved third-party agency; Philadelphia and Pittsburgh run their own departments. Give us the project address and we will confirm the review path before the engineering review starts." },
+      { question: "Does Pennsylvania accept digital PE seals?", answer: "Yes. Pennsylvania accepts digital seals with authentication for electronic submittals, so your sealed set comes back ready for the portal or agency upload — no wet-signature delay." },
+    ],
+  },
+  arizona: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Arizona, step by step",
+        body: "Arizona is home turf: Apex Grid Engineering is headquartered in Queen Creek, and our principal PE is an Arizona-licensed structural engineer. Send us the drawing set, your calculations, the project address and city, and your permit deadline. Arizona is a home-rule state — Phoenix and Mesa run the 2018 IBC with local amendments while some counties enforce older editions — so we confirm the governing edition with your specific AHJ first, then review and seal against it. Electronic seals are accepted for digital plan submittals, and the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and city, and deadline", "Same-day quote on qualifying scopes", "Code edition confirmed with your specific Arizona AHJ", "Sealed set returned electronically, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Arizona stamp work",
+        body: "Most complete Arizona packages come back sealed within 12–24 hours, and being home-state work, coordination is as direct as it gets — the engineer sealing your set works in the same code environment your reviewer does. The fast-growth Valley cities (Queen Creek, Buckeye, Casa Grande) run comparatively fast plan review but enforce aggressively on drainage and dust control, so those items get attention in our review before the set goes in. Phoenix also offers a self-certification program for qualifying professionals that can cut weeks off permitting; tell us the scope and we will say honestly which lane fits your project.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and permitting city or county, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the Arizona PE in responsible charge, with required fixes clearly marked. Practice in Arizona is governed by the Arizona State Board of Technical Registration (BTR).",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project city or county and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Is Apex Grid based in Arizona?", answer: "Yes. Apex Grid Engineering PLLC is headquartered in Queen Creek, Arizona — Arizona is our home state, our principal PE is an Arizona-licensed structural engineer, and the Arizona State Board of Technical Registration (BTR) governs practice here." },
+      { question: "Can the Phoenix self-certification program speed up my permit?", answer: "For qualifying projects and professionals, Phoenix self-certification can cut weeks off the standard review timeline. Tell us the project scope and we will tell you honestly whether self-certification or the standard path is the faster lane for your set." },
+    ],
+  },
+  "new-jersey": {
+    sections: [
+      {
+        heading: "Getting a PE stamp in New Jersey, step by step",
+        body: "Send us the drawing set, your calculations, the project municipality, and your permit deadline. New Jersey enforces a single statewide Uniform Construction Code (N.J.A.C. 5:23) on the 2021 I-Codes, so the design basis does not change from town to town — what varies is local review capacity. Our New Jersey-licensed engineer reviews the set subcode by subcode, verifies the calculations, and seals what is ready; electronic and digital seals are recognized for permit submittals, so the sealed package comes back ready to file with the municipal construction office or a DCA-licensed private plan-review agency if you are using one to move faster. Same-day quotes on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project municipality, and deadline", "Same-day quote on qualifying scopes", "Review organized by UCC subcode against the 2021 I-Codes", "Sealed set returned digitally, ready for municipal or agency filing"],
+      },
+      {
+        heading: "Turnaround on New Jersey stamp work",
+        body: "Most complete New Jersey packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. The schedule risk in New Jersey usually sits outside the building permit: on coastal and wetlands-adjacent sites, NJDEP permits (CAFRA, Flood Hazard Area, Freshwater Wetlands) often drive the critical path more than the construction office does. Flag the site conditions when you send the set and we will call out those items in the review, before they surprise the schedule.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), organized by subcode if it already is, existing calculations, the project address and municipality, the status of any NJDEP permits the site needs, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by our New Jersey-licensed PE, with required fixes clearly marked. Practice is governed by the New Jersey State Board of Professional Engineers and Land Surveyors, and our New Jersey qualifier PE is on record with the board.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project municipality and AHJ checklist or correction notice", "NJDEP permit status, if the site needs one"],
+      },
+    ],
+    faqs: [
+      { question: "Does New Jersey's statewide code make the stamp process simpler?", answer: "The code side is simpler: one statewide Uniform Construction Code on the 2021 I-Codes means the design basis is the same in every town. What varies is review capacity — which is why many New Jersey projects route plan review through DCA-licensed private agencies. We coordinate with either path; the sealed set is the same." },
+      { question: "What most often delays a New Jersey permit?", answer: "On coastal and wetlands-adjacent sites, NJDEP permits — CAFRA, Flood Hazard Area, and Freshwater Wetlands — often drive the schedule more than the building permit itself. Tell us the site conditions up front and we will flag those items during the engineering review instead of after." },
+    ],
+  },
+  tennessee: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Tennessee, step by step",
+        body: "Send us the drawing set, your calculations, the project address and city, and your permit deadline. Tennessee's State Fire Marshal's Office sets a statewide commercial baseline on the 2018 IBC where local governments have not adopted their own code, while Nashville, Memphis, and Knoxville run active local departments with their own timelines and amendments — so we confirm which rules govern your project first. Our Tennessee-licensed engineer then reviews the set, verifies the calculations, and seals what is ready. Tennessee does not issue a separate firm license: engineering is offered under the responsible Tennessee-licensed PE, with the firm's disclosure made to the Tennessee Board of Architectural and Engineering Examiners — that is exactly how our Tennessee work is structured. Same-day quotes on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and city, and deadline", "Same-day quote on qualifying scopes", "Governing code confirmed — state baseline or local department rules", "Sealed set returned, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Tennessee stamp work",
+        body: "Most complete Tennessee packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Nashville's sustained growth has stretched local review capacity, which makes a clean first submittal worth real money — our review marks the items a reviewer is likely to comment on before the set is sealed, not after it bounces. Western Tennessee projects get one more pass in review: Memphis-area work sits in the New Madrid seismic zone, with Mississippi-corridor floodplain requirements close behind.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and permitting city, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by our Tennessee-licensed PE in responsible charge, with required fixes clearly marked for a clean resubmittal.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project city and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Tennessee license engineering firms?", answer: "No — Tennessee does not issue a separate firm license. Engineering practice runs through the licensed professional engineer in responsible charge, with firm disclosure to the Tennessee Board of Architectural and Engineering Examiners. Our Tennessee work is sealed by our Tennessee-licensed PE under exactly that structure." },
+      { question: "What should Memphis-area projects plan for?", answer: "Western Tennessee sits in the New Madrid seismic zone, so expect added seismic scrutiny, and Mississippi-corridor projects can carry floodplain requirements as well. Both are checked during our review, before the set is sealed and submitted." },
+    ],
+  },
+};
+
 function peStampStatePage(state: StateData, slug: string): string {
   const links = PE_STATE_SOURCE_LINKS[slug];
   if (!links) throw new Error(`Missing official PE board links for ${slug}`);
   const stateName = state.name;
+  const deepDive = PE_STAMP_DEEP_DIVE[slug];
+  const popularStateLinks = PE_STAMP_MONEY_STATES
+    .filter((entry) => entry.slug !== slug)
+    .map((entry) => ({ label: entry.label, href: `/pe-stamp/${entry.slug}/` }));
   const faqs = [
     { question: `How do I verify a PE license in ${stateName}?`, answer: `Start with the official ${stateName} board and license-verification links on this page. Confirm the record directly with the board and separately confirm that the engineer is authorized for the project's discipline and scope.` },
     { question: `Does a ${stateName} PE seal guarantee approval?`, answer: "No. A seal communicates professional responsibility for eligible engineering work. The authority having jurisdiction controls its review, comments, interpretation, and approval decision." },
     { question: `What should a ${stateName} project team confirm before sealing?`, answer: `Confirm the project location, discipline, adopted code, AHJ submission rules, existing-condition evidence, and the engineer's ability to accept responsible charge. ${state.licensure.notes}` },
+    ...(deepDive?.faqs ?? []),
   ];
   return phase0ArticleFrame({
     canonical: `/pe-stamp/${slug}/`,
@@ -1551,6 +1711,7 @@ function peStampStatePage(state: StateData, slug: string): string {
     sections: [
       { heading: `Official ${stateName} board and lookup links`, body: "These links are provided as starting points to the official state sources. A board's current instructions and online record control; confirm the page, status, discipline, and authorization directly before a project submission.", bullets: [`${stateName} engineering licensing board`, "Official license verification or lookup", `Project code and AHJ requirements for ${stateName}`, "Responsible engineer and scope confirmation"] },
       { heading: `How we handle your ${stateName} stamp`, body: `When your project comes in, the Apex Grid engineer assigned to it reviews the project inputs, code basis, calculations, drawings, and existing conditions, then signs and seals the documents that are ready for submittal. ${state.buildingCode.notes} ${state.licensure.notes}` },
+      ...(deepDive?.sections ?? []),
       { heading: "Useful project inputs", body: `A ${stateName} PE may need the project address, current architectural backgrounds, discipline scope, adopted code information, site and existing-condition evidence, equipment data, calculations, AHJ checklist, and any correction notice. ${state.permitting} ${state.climate.drivers.join("; ")} are examples of why project inputs must be confirmed rather than assumed.` },
     ],
     faqs,
@@ -1558,6 +1719,9 @@ function peStampStatePage(state: StateData, slug: string): string {
       { label: `${stateName} official board`, href: links.boardUrl },
       { label: `${stateName} official license lookup`, href: links.lookupUrl },
       { label: "PE stamp hub", href: "/pe-stamp/" },
+      ...popularStateLinks,
+      { label: `${stateName} engineering service area`, href: `/locations/${slug}/` },
+      { label: `Estimate a ${stateName} project`, href: `/engineering-cost-estimator/${slug}/` },
     ],
     schemaType: "WebPage",
   });
@@ -9606,7 +9770,7 @@ async function main() {
       { question: `Does a ${state.name} PE seal guarantee approval?`, answer: "No. A seal communicates professional responsibility for eligible engineering work. The authority having jurisdiction controls its review, comments, interpretation, and approval decision." },
       { question: `What should a ${state.name} project team confirm before sealing?`, answer: `Confirm the project location, discipline, adopted code, AHJ submission rules, existing-condition evidence, and the engineer's ability to accept responsible charge. ${state.licensure.notes}` },
     ];
-    assertPhase0Page(html, `/pe-stamp/${state.slug}/`, stateFaqs, `pe-stamp/${state.slug}`);
+    assertPhase0Page(html, `/pe-stamp/${state.slug}/`, [...stateFaqs, ...(PE_STAMP_DEEP_DIVE[state.slug]?.faqs ?? [])], `pe-stamp/${state.slug}`);
     fs.writeFileSync(path.join(dir, "index.html"), html);
     pages++;
   }
