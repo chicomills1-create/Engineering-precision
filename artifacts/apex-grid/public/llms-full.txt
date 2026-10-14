@@ -1,0 +1,126 @@
+# Apex Grid Engineering — Full Summary
+
+> Apex Grid Engineering PLLC is a professional engineering firm headquartered in Queen Creek, Arizona. It provides PE review-and-seal (PE stamp) services, structural engineering, MEP engineering, civil engineering, geotechnical engineering, building assessments, architectural design, energy-compliance services including California Title 24, and municipal plan-check support. The firm is licensed in 49 states — every U.S. state except Alaska — and staffs 10+ licensed professional engineers on a 20+ engineer team. It was founded and is led by Jeremy Mills, CEO & Founder and U.S. Air Force veteran.
+
+This file expands the summary in llms.txt with service descriptions, the PE-stamp process, frequently asked questions, and the full index of state PE-stamp pages. Scope, discipline, and project-jurisdiction requirements are confirmed with Apex Grid before work begins.
+
+## Services
+
+### PE review & seal (PE stamp)
+Apex Grid reviews production drawings under responsible charge and seals the sets that pass. Architects, contractors, and developers send drawings drawn in-house or by another engineer; a licensed PE checks code compliance and constructability, verifies or performs the calculations, marks required revisions clearly, and seals the final documents for permit submittal. Most complete packages are returned within 12–24 hours, and same-day quotes are available on qualifying scopes. Details: https://apexgrideng.com/pe-stamp/
+
+### Structural engineering
+Practical structural design for buildings, ADUs, additions, and retrofits — safe, buildable, clearly documented designs that pass plan check. Details: https://apexgrideng.com/structural-engineering/
+
+### MEP engineering
+Mechanical, electrical, and plumbing systems designed to work together, so nothing collides in the field. Includes Title 24 energy-compliance work for California projects. Details: https://apexgrideng.com/mep-engineering/
+
+### Civil engineering
+Grading, drainage, and utilities — site design that gets raw land ready to build on, with water draining and utilities running where they should. Details: https://apexgrideng.com/civil-engineering/
+
+### Building assessments
+Independent engineering judgment when conditions change, damage is suspected, or a project needs verification of existing conditions. Details: https://apexgrideng.com/services
+
+### Architectural design
+Full architectural design, concept through permit-ready documents, coordinated with the firm's engineers from day one. Details: https://apexgrideng.com/architecture/
+
+### Municipal plan check
+Plan-check and plan-review support for jurisdictions and project teams, including correction-cycle support. Details: https://apexgrideng.com/services
+
+## How PE review-and-seal works
+
+1. Send us your plans. Upload your drawing set, calculations, and project details through intake — PDF, plus CAD backgrounds if you have them. Include the project address, the permitting jurisdiction (AHJ), and your permit deadline.
+2. Licensed PE review. A licensed engineer reviews the set for code compliance and constructability, performs or independently verifies the calculations, and returns any required revisions marked clearly.
+3. Sealed and returned. Sealed drawings and calculations come back ready for permit submittal to your AHJ. Typical turnaround is 12–24 hours on a complete package, and rush review is available when a permit deadline drives the schedule.
+
+## Firm registrations of public record
+
+- Texas: Apex Grid Engineering is registered with the Texas Board of Professional Engineers and Land Surveyors (TBPELS), firm #7762. Texas structural work is sealed by the firm's Texas-licensed structural PE.
+- Florida: Apex Grid Engineering PLLC holds Florida DBPR engineering business registry #40371, status Current, qualified by the firm's Florida-licensed PE.
+- Arizona (home state): practice is governed by the Arizona State Board of Technical Registration (BTR); the firm's principal PE is an Arizona-licensed structural engineer.
+
+## Frequently asked questions
+
+Q: What does "review and seal" actually mean?
+A: A licensed Professional Engineer reviews your drawings under responsible charge — checking code compliance, verifying or performing the structural, mechanical, electrical, plumbing, or civil calculations, and requiring revisions where the design falls short. Only then does the PE seal the final documents, assuming professional responsibility for the engineering. That review is what makes the seal valid with the building department.
+
+Q: How fast is turnaround?
+A: Typical turnaround is 12–24 hours from the time we receive a complete package. Rush review is available when a permit deadline is driving the schedule — tell us the date and we will tell you honestly whether we can hit it.
+
+Q: Which states do you cover?
+A: Apex Grid Engineering is licensed in 49 states (all but Alaska). Our PEs seal wherever your project is being permitted, and we match your project to an engineer licensed in that state and discipline.
+
+Q: What do I need to send you?
+A: Your drawing set (PDF; CAD backgrounds if available), any existing calculations, the project address and permitting jurisdiction (AHJ), and your permit deadline. The more complete the package, the faster the review.
+
+Q: Will you seal drawings another engineer drew?
+A: Yes — that is the core of this service. Our PE performs a full independent review of the set and seals only what passes. Anything that needs correction comes back marked clearly, so the resubmittal is clean.
+
+Q: What does review-and-seal cost?
+A: Pricing is fixed-fee, scoped per project based on discipline, drawing-set size, and complexity. Send your plans and we deliver a proposal typically within 12–24 hours. No hourly meters running while you wait.
+
+Q: Does a PE stamp guarantee permit approval?
+A: No. A seal communicates professional responsibility for the engineering work. The authority having jurisdiction controls its own review, comments, interpretation, and approval decision — a clean, complete submittal is what keeps that process fast.
+
+## PE stamp pages by state
+
+Each state page explains how PE review-and-seal works in that state, with the governing board and official license-verification links:
+
+- Alabama: https://apexgrideng.com/pe-stamp/alabama/
+- Arizona: https://apexgrideng.com/pe-stamp/arizona/
+- Arkansas: https://apexgrideng.com/pe-stamp/arkansas/
+- California: https://apexgrideng.com/pe-stamp/california/
+- Colorado: https://apexgrideng.com/pe-stamp/colorado/
+- Connecticut: https://apexgrideng.com/pe-stamp/connecticut/
+- Delaware: https://apexgrideng.com/pe-stamp/delaware/
+- Florida: https://apexgrideng.com/pe-stamp/florida/
+- Georgia: https://apexgrideng.com/pe-stamp/georgia/
+- Hawaii: https://apexgrideng.com/pe-stamp/hawaii/
+- Idaho: https://apexgrideng.com/pe-stamp/idaho/
+- Illinois: https://apexgrideng.com/pe-stamp/illinois/
+- Indiana: https://apexgrideng.com/pe-stamp/indiana/
+- Iowa: https://apexgrideng.com/pe-stamp/iowa/
+- Kansas: https://apexgrideng.com/pe-stamp/kansas/
+- Kentucky: https://apexgrideng.com/pe-stamp/kentucky/
+- Louisiana: https://apexgrideng.com/pe-stamp/louisiana/
+- Maine: https://apexgrideng.com/pe-stamp/maine/
+- Maryland: https://apexgrideng.com/pe-stamp/maryland/
+- Massachusetts: https://apexgrideng.com/pe-stamp/massachusetts/
+- Michigan: https://apexgrideng.com/pe-stamp/michigan/
+- Minnesota: https://apexgrideng.com/pe-stamp/minnesota/
+- Mississippi: https://apexgrideng.com/pe-stamp/mississippi/
+- Missouri: https://apexgrideng.com/pe-stamp/missouri/
+- Montana: https://apexgrideng.com/pe-stamp/montana/
+- Nebraska: https://apexgrideng.com/pe-stamp/nebraska/
+- Nevada: https://apexgrideng.com/pe-stamp/nevada/
+- New Hampshire: https://apexgrideng.com/pe-stamp/new-hampshire/
+- New Jersey: https://apexgrideng.com/pe-stamp/new-jersey/
+- New Mexico: https://apexgrideng.com/pe-stamp/new-mexico/
+- New York: https://apexgrideng.com/pe-stamp/new-york/
+- North Carolina: https://apexgrideng.com/pe-stamp/north-carolina/
+- North Dakota: https://apexgrideng.com/pe-stamp/north-dakota/
+- Ohio: https://apexgrideng.com/pe-stamp/ohio/
+- Oklahoma: https://apexgrideng.com/pe-stamp/oklahoma/
+- Oregon: https://apexgrideng.com/pe-stamp/oregon/
+- Pennsylvania: https://apexgrideng.com/pe-stamp/pennsylvania/
+- Rhode Island: https://apexgrideng.com/pe-stamp/rhode-island/
+- South Carolina: https://apexgrideng.com/pe-stamp/south-carolina/
+- South Dakota: https://apexgrideng.com/pe-stamp/south-dakota/
+- Tennessee: https://apexgrideng.com/pe-stamp/tennessee/
+- Texas: https://apexgrideng.com/pe-stamp/texas/
+- Utah: https://apexgrideng.com/pe-stamp/utah/
+- Vermont: https://apexgrideng.com/pe-stamp/vermont/
+- Virginia: https://apexgrideng.com/pe-stamp/virginia/
+- Washington: https://apexgrideng.com/pe-stamp/washington/
+- West Virginia: https://apexgrideng.com/pe-stamp/west-virginia/
+- Wisconsin: https://apexgrideng.com/pe-stamp/wisconsin/
+- Wyoming: https://apexgrideng.com/pe-stamp/wyoming/
+
+## Contact
+
+- Email: info@apexgrideng.com
+- Phone: (480) 490-0064
+- Headquarters: 22475 E Quintero Rd, Queen Creek, AZ 85142
+- Contact page: https://apexgrideng.com/contact
+- Start an estimate: https://apexgrideng.com/estimate
+- Canonical summary: https://apexgrideng.com/llms.txt
