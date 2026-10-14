@@ -1,15 +1,39 @@
 # Apex Grid Engineering
 
-> Apex Grid Engineering is a professional engineering firm providing structural, MEP, civil, geotechnical, building-assessment, energy-compliance, and municipal plan-check support. The company also publishes information about architecture and construction delivery.
+> Apex Grid Engineering PLLC is a professional engineering firm headquartered in Queen Creek, Arizona, providing PE review-and-seal (PE stamp) services, structural, MEP, civil, and geotechnical engineering, building assessments, architectural design, energy-compliance (including California Title 24), and municipal plan-check support. The firm is led by Jeremy Mills, CEO & Founder and U.S. Air Force veteran, and staffs 10+ licensed professional engineers on a 20+ engineer team.
 
-This file is a concise map of canonical public information. It does not imply local offices, guaranteed coverage, or that every listed service is available for every project; scope and jurisdiction requirements should be confirmed with Apex Grid.
+This file is a concise map of canonical public information. Scope, discipline, and project-jurisdiction requirements are confirmed with Apex Grid before work begins.
 
-## Licensing
+## Licensing and coverage
+
 - Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska.
-- The responsible professional's current license, firm authorization, discipline, and project-jurisdiction requirements are confirmed before work begins.
+- PE review-and-seal work is performed under responsible charge by an engineer licensed in the project's state and discipline; the firm's state-by-state PE stamp pages are indexed in llms-full.txt.
+- Firm registrations of public record include Texas (TBPELS firm #7762) and Florida (DBPR engineering business registry #40371, Current).
+
+## PE stamp (review & seal)
+
+- PE stamp hub — how review-and-seal works, turnaround, and what to send: https://apexgrideng.com/pe-stamp/
+- PE stamp in Texas: https://apexgrideng.com/pe-stamp/texas/
+- PE stamp in Florida: https://apexgrideng.com/pe-stamp/florida/
+- PE stamp in Pennsylvania: https://apexgrideng.com/pe-stamp/pennsylvania/
+- PE stamp in Arizona: https://apexgrideng.com/pe-stamp/arizona/
+- PE stamp in New Jersey: https://apexgrideng.com/pe-stamp/new-jersey/
+- PE stamp in Tennessee: https://apexgrideng.com/pe-stamp/tennessee/
+- Most complete review-and-seal packages are returned within 12–24 hours; same-day quotes on qualifying scopes.
+- Start an estimate: https://apexgrideng.com/estimate
+
+## Services
+
+- Services overview: https://apexgrideng.com/services
+- MEP engineering: https://apexgrideng.com/mep-engineering/
+- Structural engineering: https://apexgrideng.com/structural-engineering/
+- Civil engineering: https://apexgrideng.com/civil-engineering/
+- Mechanical (HVAC) engineering: https://apexgrideng.com/mechanical-engineering/
+- Electrical engineering: https://apexgrideng.com/electrical-engineering/
+- Plumbing engineering: https://apexgrideng.com/plumbing-engineering/
 
 ## High-value sections
-- Services: https://apexgrideng.com/services
+
 - Commercial engineering search hub: https://apexgrideng.com/engineering-intent/engineering-near-me/
 - Industries: https://apexgrideng.com/industries
 - Resources: https://apexgrideng.com/resources/
@@ -19,6 +43,13 @@ This file is a concise map of canonical public information. It does not imply lo
 - Architecture information: https://apexgrideng.com/architecture/
 - General contracting information: https://apexgrideng.com/general-contracting/
 - About: https://apexgrideng.com/about
-- Contact: https://apexgrideng.com/contact
 - HTML sitemap: https://apexgrideng.com/sitemap/
 - XML sitemap index: https://apexgrideng.com/sitemap_index.xml
+- Full-text summary (services, PE-stamp process, FAQs, all state pages): https://apexgrideng.com/llms-full.txt
+
+## Contact
+
+- Email: info@apexgrideng.com
+- Phone: (480) 490-0064
+- Headquarters: 22475 E Quintero Rd, Queen Creek, AZ 85142
+- Contact page: https://apexgrideng.com/contact
