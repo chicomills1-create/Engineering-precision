@@ -1563,7 +1563,9 @@ function peStampHubPage(): string {
  * states and highest-demand stamping markets. Every state page cross-links
  * to these, and each of these pages carries a state-specific deep-dive
  * (process, turnaround, send/receive) written from verified firm records —
- * no boilerplate duplication, no invented license claims. */
+ * no boilerplate duplication, no invented license claims.
+ * Batch 2 (same day, ChatGPT consult chatcmpl-EZ3HDROUl9L1JKC6WWWLXH7zElHnm)
+ * added CA/GA/NC/VA/WA on the same terms. */
 const PE_STAMP_MONEY_STATES: Array<{ slug: string; label: string }> = [
   { slug: "texas", label: "PE stamp in Texas — fast review & seal" },
   { slug: "florida", label: "Florida PE seal for permit-ready plans" },
@@ -1571,6 +1573,11 @@ const PE_STAMP_MONEY_STATES: Array<{ slug: string; label: string }> = [
   { slug: "arizona", label: "Arizona PE stamping, from our home state" },
   { slug: "new-jersey", label: "PE sealing for New Jersey projects" },
   { slug: "tennessee", label: "Tennessee PE stamp & review" },
+  { slug: "california", label: "PE stamp in California — Title 24 review & seal" },
+  { slug: "georgia", label: "Georgia PE stamp — statewide code, fast seal" },
+  { slug: "north-carolina", label: "North Carolina PE stamp & review" },
+  { slug: "virginia", label: "Virginia PE stamp — USBC review & seal" },
+  { slug: "washington", label: "Washington PE stamp & seal" },
 ];
 
 type PeStampDeepDive = {
@@ -1709,6 +1716,116 @@ const PE_STAMP_DEEP_DIVE: Record<string, PeStampDeepDive> = {
     faqs: [
       { question: "Does Tennessee license engineering firms?", answer: "No — Tennessee does not issue a separate firm license. Engineering practice runs through the licensed professional engineer in responsible charge, with firm disclosure to the Tennessee Board of Architectural and Engineering Examiners. Our Tennessee work is sealed by our Tennessee-licensed PE under exactly that structure." },
       { question: "What should Memphis-area projects plan for?", answer: "Western Tennessee sits in the New Madrid seismic zone, so expect added seismic scrutiny, and Mississippi-corridor projects can carry floodplain requirements as well. Both are checked during our review, before the set is sealed and submitted." },
+    ],
+  },
+  california: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in California, step by step",
+        body: "Send us the drawing set, your calculations, the project address and city, and your permit deadline. California runs a single statewide code — the 2025 California Building Code (Title 24, Part 2, based on the 2024 IBC), effective statewide January 1, 2026 — but cities and counties can layer on more stringent local amendments, so we confirm the governing edition and amendments for your jurisdiction first, along with the Title 24, Part 6 energy documentation your scope needs (California runs its own energy code; there is no COMcheck shortcut). The California-licensed PE in responsible charge then reviews the set against that basis, verifies or performs the calculations — including the seismic design, where much of the state sits in Seismic Design Category D, E, or F and near-fault sites call for site-specific analysis under ASCE 7 — and seals what is ready. Electronic seals are accepted, so the sealed package comes back digitally, ready for the building department's portal. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and city, and deadline", "Same-day quote on qualifying scopes", "Governing Title 24 edition and local amendments confirmed first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on California stamp work",
+        body: "Most complete California packages come back sealed within 12–24 hours, with rush handling available when a permit date is driving. The honest variable in California is everything around the building department: CEQA environmental review and coastal, fire, and air-district tracks can run in parallel with plan check, and the large coastal cities run long queues while inland jurisdictions and third-party plan-check services often move faster. Two things keep a stamp job on schedule: confirming the local amendments before the review starts, and sending the geotechnical report with the set — liquefaction, landslide, and fault-rupture zones mapped under the Alquist-Priolo and Seismic Hazards Mapping Acts shape structural decisions early, not at correction time. Tell us the city and the deadline up front and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and permitting city or county, the geotechnical report if one exists, any Title 24, Part 6 compliance documentation already prepared, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the California PE in responsible charge, with any required fixes clearly marked so a resubmittal goes in clean. Practice in California is governed by the Board for Professional Engineers, Land Surveyors, and Geologists (BPELSG).",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project address, permitting jurisdiction, and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Which building code does a California PE stamp follow?", answer: "The 2025 California Building Code (Title 24, Part 2), effective statewide January 1, 2026, plus any more stringent amendments your city or county has adopted. We confirm the governing edition and amendments for your jurisdiction before the review starts, so the set is sealed against the right basis." },
+      { question: "Does California accept a digital PE seal?", answer: "Yes. California accepts electronic seals, so your sealed drawings and calculations come back digitally, ready to upload to the building department's portal — no wet-signature mailing delay." },
+    ],
+  },
+  georgia: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Georgia, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Georgia makes the design basis predictable: the Georgia State Minimum Standard Codes — the 2018 IBC with Georgia amendments, adopted by the Department of Community Affairs — apply statewide, and local governments enforce the code but cannot adopt a weaker edition. We confirm which jurisdiction reviews your permit (the Atlanta metro alone spans dozens of building departments), then our Georgia-licensed engineer reviews the set against the statewide code and the Georgia-amended energy code, verifies the calculations, and seals what is ready. Electronic seals are accepted per board rules, so the sealed package comes back digitally, ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "One statewide code basis — 2018 IBC with Georgia amendments", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Georgia stamp work",
+        body: "Most complete Georgia packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. The schedule variable in Georgia is review capacity, not the code: metro Atlanta's growth has stretched its many local departments, and a set prepared for the wrong jurisdiction's checklist loses days. On the coast, Savannah-area work adds hurricane wind design (120–140+ mph) and FEMA flood-elevation requirements that belong in the package from the start, and stormwater and tree-ordinance items are a recurring focus in local site review. Tell us the jurisdiction and the deadline up front and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and reviewing jurisdiction, wind and product information for coastal work, flood-elevation information if the site sits in a FEMA flood zone, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by our Georgia-licensed PE, with required fixes clearly marked for a clean resubmittal. Practice in Georgia is governed by the Georgia State Board of Registration for Professional Engineers and Land Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Georgia use the same building code everywhere?", answer: "Yes. The Georgia State Minimum Standard Codes — currently the 2018 IBC with Georgia amendments, adopted by the Department of Community Affairs — set one mandatory statewide baseline. Local governments enforce and administer the code but cannot adopt a weaker edition, so the design basis does not change from county to county." },
+      { question: "Can you stamp work on the Georgia coast?", answer: "Yes — Savannah and coastal work is reviewed for hurricane-influenced wind speeds of roughly 120–140+ mph and FEMA flood-elevation requirements alongside the statewide code. Send the set with any flood information you have and we will mark anything missing before sealing, so the submittal goes in complete." },
+    ],
+  },
+  "north-carolina": {
+    sections: [
+      {
+        heading: "Getting a PE stamp in North Carolina, step by step",
+        body: "Send us the drawing set, your calculations, the project address and county, and your permit deadline. North Carolina writes its own statewide building code through the NC Building Code Council — IBC-derived, but heavily amended and maintained on the state's own cycle rather than tracking a given IBC year — so the first step on any North Carolina job is confirming the currently effective edition and recent amendments for your project. With that basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. North Carolina accepts digital signatures and electronic seals on electronically submitted documents, so the sealed package comes back ready to file with the local inspections department. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and county, and deadline", "Same-day quote on qualifying scopes", "Currently effective NC edition confirmed for your project first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on North Carolina stamp work",
+        body: "Most complete North Carolina packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Review speed varies across the state: the booming Research Triangle and Charlotte metro departments run high volume, while smaller coastal and mountain jurisdictions move on their own timelines. The real schedule risk on the coast sits outside plan review itself — development in the coastal zone can require CAMA (Coastal Area Management Act) permitting, and projects draining to nutrient-sensitive waters carry tighter stormwater requirements that can reshape a package. Flag coastal or watershed conditions when you send the set and we will call them out in the review, before they surprise the schedule.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and county, the status of any CAMA permit a coastal site needs, stormwater information if the site drains to a nutrient-sensitive watershed, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with any required fixes clearly marked so a resubmittal goes in clean.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project county and AHJ checklist or correction notice", "CAMA permit status, if the site is in the coastal zone"],
+      },
+    ],
+    faqs: [
+      { question: "Which building code edition applies to my North Carolina project?", answer: "North Carolina maintains its own statewide code through the NC Building Code Council — IBC-derived, but heavily amended and updated on the state's own cycle, so it does not simply match a national IBC year. We confirm the currently effective edition and recent amendments for your project before the review starts." },
+      { question: "What most often delays a coastal North Carolina permit?", answer: "CAMA (Coastal Area Management Act) permitting for development in the coastal zone, layered on top of hurricane wind design — 140–150+ mph on the Outer Banks with wind-borne-debris requirements — and storm-surge flood considerations. Tell us the site conditions up front and we will flag those items during the review instead of after." },
+    ],
+  },
+  virginia: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Virginia, step by step",
+        body: "Send us the drawing set, your calculations, the project address and locality, and your permit deadline. Virginia enforces one uniform statewide code — the Virginia Uniform Statewide Building Code (USBC), 2021 edition, based on the 2021 IBC with Virginia amendments — and localities are barred from adopting their own stricter or looser versions, so the design basis is the same in Fairfax as it is in Virginia Beach. We confirm the effective edition (the state updates on a rolling cycle), then our Virginia-licensed engineer reviews the set, verifies the calculations, and seals what is ready. Virginia accepts digital signatures and seals on electronically submitted documents that meet the board's authentication requirements, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and locality, and deadline", "Same-day quote on qualifying scopes", "One uniform statewide code — the 2021 USBC", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Virginia stamp work",
+        body: "Most complete Virginia packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. What varies in Virginia is the reviewer, not the rules: the fast-moving Northern Virginia counties (Fairfax, Loudoun, Prince William) process high volume, while smaller Tidewater and Southwest localities move at their own pace. Sites in the eastern Tidewater watershed can add a Chesapeake Bay Preservation Act review layer, and Hampton Roads work carries tidal-flooding considerations worth planning around early. A complete first package is what keeps the timeline short — tell us the locality and the deadline and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and locality, Chesapeake Bay Preservation Act information if the site sits in the eastern Tidewater watershed, flood information for Hampton Roads sites, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by our Virginia-licensed PE, with required fixes clearly marked for a clean resubmittal. Practice in Virginia is governed by the Virginia Board for Architects, Professional Engineers, Land Surveyors, Certified Interior Designers and Landscape Architects (APELSCIDLA).",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project locality and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Virginia's building code vary by county or city?", answer: "No. The Virginia Uniform Statewide Building Code (USBC) — currently the 2021 edition, based on the 2021 IBC with Virginia amendments — applies uniformly statewide, and localities cannot adopt their own more- or less-stringent amendments. The code basis is the same everywhere in the Commonwealth." },
+      { question: "Does Virginia accept digital PE seals?", answer: "Yes. Virginia accepts digital signatures and seals on electronically submitted documents that meet the board's authentication requirements, so your sealed set comes back ready for the locality's submission process — no wet-signature delay." },
+    ],
+  },
+  washington: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Washington, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Washington adopts a mandatory statewide code through the State Building Code Council — the 2021 IBC with Washington amendments — and local jurisdictions enforce it without weakening it, so the base edition is consistent statewide. The review covers the two things that define Washington work: seismic design west of the Cascades, where the Cascadia Subduction Zone and crustal faults like the Seattle Fault put much of Puget Sound in Seismic Design Category D, and energy documentation against the Washington State Energy Code (WSEC-C), which is significantly more stringent than the base IECC. Our Washington-licensed engineer verifies the calculations and seals what is ready; Washington accepts electronic seals for digital plan submittals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "Review against the statewide code and the WSEC-C energy code", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Washington stamp work",
+        body: "Most complete Washington packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Seattle and the Puget Sound jurisdictions run rigorous, sustainability-focused review with strict stormwater and seismic expectations, while eastern Washington — Spokane and the Tri-Cities — often moves faster on the same statewide code. Two items most often shape a Washington schedule: WSEC-C energy documentation that was not built against the state code (a plain IECC run does not demonstrate compliance), and geotechnical input on Puget Sound's soft soils, where liquefaction evaluation belongs in the design early. For larger existing buildings, the Clean Buildings Performance Standard adds energy-performance obligations worth planning around from the start.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, the geotechnical report if one exists, any WSEC-C energy compliance documentation already prepared, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by our Washington-licensed PE, with required fixes clearly marked for a clean resubmittal. Practice in Washington is governed by the Washington State Board of Registration for Professional Engineers and Land Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Washington use the IECC for energy compliance?", answer: "Not directly. Washington enforces its own commercial energy code, the WSEC-C, which is significantly more stringent than the base IECC and adds efficiency-credit and emissions-reduction requirements. Compliance is documented against the WSEC-C — a plain IECC or COMcheck run does not demonstrate it." },
+      { question: "How much does seismic design drive a Seattle-area stamp?", answer: "A lot. Puget Sound faces the Cascadia Subduction Zone plus shallow crustal faults such as the Seattle Fault, putting much of the region in Seismic Design Category D, and soft river-delta soils and fill add liquefaction checks. Both are addressed during our review, before the set is sealed." },
     ],
   },
 };
