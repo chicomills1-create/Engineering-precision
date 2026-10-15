@@ -882,6 +882,21 @@ This file is a concise map of canonical public information. It does not imply lo
 - PE stamp in Arizona: ${SITE}/pe-stamp/arizona/
 - PE stamp in New Jersey: ${SITE}/pe-stamp/new-jersey/
 - PE stamp in Tennessee: ${SITE}/pe-stamp/tennessee/
+- PE stamp in California: ${SITE}/pe-stamp/california/
+- PE stamp in Georgia: ${SITE}/pe-stamp/georgia/
+- PE stamp in North Carolina: ${SITE}/pe-stamp/north-carolina/
+- PE stamp in Virginia: ${SITE}/pe-stamp/virginia/
+- PE stamp in Washington: ${SITE}/pe-stamp/washington/
+- PE stamp in Colorado: ${SITE}/pe-stamp/colorado/
+- PE stamp in Illinois: ${SITE}/pe-stamp/illinois/
+- PE stamp in Ohio: ${SITE}/pe-stamp/ohio/
+- PE stamp in South Carolina: ${SITE}/pe-stamp/south-carolina/
+- PE stamp in Massachusetts: ${SITE}/pe-stamp/massachusetts/
+- PE stamp in Alabama: ${SITE}/pe-stamp/alabama/
+- PE stamp in New York: ${SITE}/pe-stamp/new-york/
+- PE stamp in New Mexico: ${SITE}/pe-stamp/new-mexico/
+- PE stamp in Maryland: ${SITE}/pe-stamp/maryland/
+- PE stamp in Indiana: ${SITE}/pe-stamp/indiana/
 - Most complete review-and-seal packages are returned within 12–24 hours; same-day quotes on qualifying scopes.
 - Start an estimate: ${SITE}/estimate
 
@@ -1565,7 +1580,11 @@ function peStampHubPage(): string {
  * (process, turnaround, send/receive) written from verified firm records —
  * no boilerplate duplication, no invented license claims.
  * Batch 2 (same day, ChatGPT consult chatcmpl-EZ3HDROUl9L1JKC6WWWLXH7zElHnm)
- * added CA/GA/NC/VA/WA on the same terms. */
+ * added CA/GA/NC/VA/WA on the same terms.
+ * Batch 3, tranche A (ChatGPT consult chatcmpl-EZ5vWc0RrpbkBqyGNWEk9txzb0U0v,
+ * APPROVE WITH CHANGES) added CO/IL/OH/SC/MA/AL/NY/NM/MD/IN under stricter
+ * grounding: no licensure or firm-registration claims for the new states and
+ * sealing described only via the engineer in responsible charge. */
 const PE_STAMP_MONEY_STATES: Array<{ slug: string; label: string }> = [
   { slug: "texas", label: "PE stamp in Texas — fast review & seal" },
   { slug: "florida", label: "Florida PE seal for permit-ready plans" },
@@ -1578,6 +1597,16 @@ const PE_STAMP_MONEY_STATES: Array<{ slug: string; label: string }> = [
   { slug: "north-carolina", label: "North Carolina PE stamp & review" },
   { slug: "virginia", label: "Virginia PE stamp — USBC review & seal" },
   { slug: "washington", label: "Washington PE stamp & seal" },
+  { slug: "colorado", label: "PE stamp in Colorado — Front Range review & seal" },
+  { slug: "illinois", label: "PE stamp in Illinois — review & seal, Chicago to downstate" },
+  { slug: "ohio", label: "Ohio PE stamp — one statewide code, fast seal" },
+  { slug: "south-carolina", label: "South Carolina PE stamp & review" },
+  { slug: "massachusetts", label: "Massachusetts PE stamp — 780 CMR review & seal" },
+  { slug: "alabama", label: "Alabama PE stamp & review" },
+  { slug: "new-york", label: "New York PE stamp — state & NYC code review" },
+  { slug: "new-mexico", label: "New Mexico PE stamp & review" },
+  { slug: "maryland", label: "Maryland PE stamp — MBPS review & seal" },
+  { slug: "indiana", label: "Indiana PE stamp — state release & local review" },
 ];
 
 type PeStampDeepDive = {
@@ -1826,6 +1855,226 @@ const PE_STAMP_DEEP_DIVE: Record<string, PeStampDeepDive> = {
     faqs: [
       { question: "Does Washington use the IECC for energy compliance?", answer: "Not directly. Washington enforces its own commercial energy code, the WSEC-C, which is significantly more stringent than the base IECC and adds efficiency-credit and emissions-reduction requirements. Compliance is documented against the WSEC-C — a plain IECC or COMcheck run does not demonstrate it." },
       { question: "How much does seismic design drive a Seattle-area stamp?", answer: "A lot. Puget Sound faces the Cascadia Subduction Zone plus shallow crustal faults such as the Seattle Fault, putting much of the region in Seismic Design Category D, and soft river-delta soils and fill add liquefaction checks. Both are addressed during our review, before the set is sealed." },
+    ],
+  },
+  colorado: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Colorado, step by step",
+        body: "Send us the drawing set, your calculations, the project address and municipality, and your permit deadline. Colorado is a home-rule state with no statewide commercial building code — Denver, Boulder, Colorado Springs, and Fort Collins each adopt and amend their own IBC edition — so the first step on any Colorado job is confirming the governing edition and amendments with your specific building department; most of the Front Range runs the 2018 or 2021 IBC. With that basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Colorado accepts electronic seals for digital submittals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and municipality, and deadline", "Same-day quote on qualifying scopes", "Governing IBC edition confirmed with your specific AHJ first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Colorado stamp work",
+        body: "Most complete Colorado packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. What actually drives a Colorado schedule: the geotechnical report — expansive, swelling bentonite soils across the Front Range make soil documentation effectively standard, and the foundation scheme (drilled piers, structural slabs) hangs on it — plus edition surprises when a set was designed to a neighboring city's code. Denver and Boulder run rigorous, sustainability-focused review, and Denver's Energize Denver performance ordinance adds obligations for larger existing buildings; suburban and plains jurisdictions often move faster on the same scope. Send the geotech with the drawings, name the city up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and permitting municipality, the geotechnical report if one exists — on the Front Range it usually should — any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked so a resubmittal goes in clean. Practice in Colorado is governed by the Colorado State Board of Licensure for Architects, Professional Engineers, and Professional Land Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations, code basis, and geotechnical report, if available", "Project municipality and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Which building code applies to my Colorado project?", answer: "The one your city or county adopted. Colorado has no statewide commercial building code — each home-rule municipality adopts and amends its own IBC edition, and Denver, Boulder, Colorado Springs, and Fort Collins all differ. We confirm the governing edition with the specific building department before the review starts." },
+      { question: "Why does the geotechnical report matter so much on the Front Range?", answer: "Much of the Front Range sits on expansive, swelling bentonite and claystone soils that can heave conventional foundations and slabs. Foundation schemes — drilled piers, structural floor slabs, moisture control — are designed from the soil report, so having it travel with the drawing set keeps both the review and the schedule on track." },
+    ],
+  },
+  illinois: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Illinois, step by step",
+        body: "Send us the drawing set, your calculations, the project municipality, and your permit deadline. Illinois has no statewide commercial building code — municipalities adopt their own IBC editions — and Chicago is its own world, enforcing the Chicago Construction Codes, a heavily customized IBC-based system. So the first step is confirming which code book and edition your jurisdiction enforces. The one constant statewide is energy: the Illinois Energy Conservation Code, based on the 2021 IECC, applies everywhere. With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Illinois accepts electronic seals and digital signatures under IDFPR rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project municipality, and deadline", "Same-day quote on qualifying scopes", "Code book confirmed first — local IBC or the Chicago Construction Codes", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Illinois stamp work",
+        body: "Most complete Illinois packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Review speed is town by town: Chicago runs a rigorous review, with a self-certification-eligible path for qualifying work, while suburban and downstate departments each move on their own timelines and adopted editions. The items that most often shape an Illinois schedule sit in the site package — Cook County and the collar counties enforce Watershed Management Ordinances with demanding detention, volume-control, and water-quality requirements — and in far-southern Illinois, where proximity to the New Madrid and Wabash Valley seismic zones can push design to Seismic Design Category D. Flag the site and county conditions when you send the set, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and municipality, stormwater or detention information if the site falls under a county Watershed Management Ordinance, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Illinois is governed by the Illinois Department of Financial and Professional Regulation (IDFPR) and its Board of Professional Engineers.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project municipality and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Illinois have a statewide building code?", answer: "No — Illinois is home-rule for building codes: municipalities adopt their own IBC editions, and Chicago enforces its own Chicago Construction Codes. What is statewide is the energy code — the Illinois Energy Conservation Code, based on the 2021 IECC — which applies to commercial work everywhere in Illinois." },
+      { question: "What should I know about a project in southern Illinois?", answer: "Seismic design is real there. Far-southern Illinois sits near the New Madrid and Wabash Valley seismic zones and can reach Seismic Design Category D — among the highest in the Midwest — while the Chicago area is low-seismicity (Category A–B), where wind and snow govern. The site location sets the design basis, and it is confirmed at the start of the review." },
+    ],
+  },
+  ohio: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Ohio, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Ohio is the simple case on code: the Ohio Building Code — the 2024 edition, based on the 2021 IBC — is one mandatory statewide commercial code, and the energy requirements are folded into it (2021 IECC, with ASHRAE 90.1 as an alternate path), so the design basis does not change from Toledo to Cincinnati. We confirm the reviewing path — certified local building departments enforce the OBC, and the state's Industrial Compliance division reviews certain project types — then the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Ohio accepts digital signatures and electronic seals that meet board rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "One statewide code — the Ohio Building Code (2024, on the 2021 IBC)", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Ohio stamp work",
+        body: "Most complete Ohio packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. In Ohio the variable is the department, not the code: Columbus, Cleveland, and Cincinnati run structured commercial plan review on the same statewide baseline, while timelines differ by workload — and central Ohio's semiconductor and data-center corridor is running hot. Two site items are worth flagging early: projects disturbing an acre or more need Ohio EPA construction stormwater coverage with a SWPPP, and roof design in the Cleveland–Ashtabula snowbelt carries lake-effect snow loads well above the state norm. Name the jurisdiction and the deadline up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, stormwater information if the site disturbs an acre or more, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Ohio is governed by the Ohio State Board of Registration for Professional Engineers and Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Ohio's building code vary by city?", answer: "No. The Ohio Building Code (2024 edition, based on the 2021 IBC) is a single mandatory statewide code, enforced by certified local building departments — the design basis is the same in every jurisdiction, even though review timelines vary by department." },
+      { question: "How is energy compliance documented in Ohio?", answer: "Energy provisions are part of the Ohio Building Code itself, based on the 2021 IECC with ASHRAE 90.1 as an alternate compliance path. Compliance is documented through the IECC prescriptive or performance path — typically COMcheck or an energy model — against that single statewide baseline." },
+    ],
+  },
+  "south-carolina": {
+    sections: [
+      {
+        heading: "Getting a PE stamp in South Carolina, step by step",
+        body: "Send us the drawing set, your calculations, the project address and county, and your permit deadline. South Carolina sets a mandatory statewide minimum code through the SC Building Codes Council — based on the 2021 I-Codes — and every jurisdiction enforces at least that edition, though local governments may adopt newer editions and limited amendments, so we confirm the governing edition with your city or county first. One South Carolina detail worth knowing: the statewide energy standard trails the building code, so the effective energy edition is confirmed at the same time, never assumed. With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. South Carolina permits digital signatures and electronic seals meeting the board's authentication requirements, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and county, and deadline", "Same-day quote on qualifying scopes", "Statewide minimum edition and energy edition confirmed first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on South Carolina stamp work",
+        body: "Most complete South Carolina packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. What drives the schedule depends on where in the state you are: the booming Charleston and Upstate markets run high review volume, and coastal projects add gates outside the building department — OCRM/DHEC coastal-zone review and floodplain compliance are routine on Lowcountry sites. The engineering driver on the coast is Charleston's seismicity: the 1886 earthquake makes much of the Lowcountry Seismic Design Category D on soft, liquefiable soils, with hurricane wind of 140–150+ mph and wind-borne-debris rules on top — so the geotechnical report belongs in the package from day one. Send it with the set, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and county, the geotechnical report if one exists (essential on Lowcountry soils), flood-elevation information for coastal sites, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in South Carolina is governed by the South Carolina Board of Registration for Professional Engineers and Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project county and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Is seismic design really a factor in South Carolina?", answer: "Around Charleston, absolutely. The 1886 Charleston earthquake was among the largest in the eastern United States, and much of the Lowcountry's soft, liquefiable soil sits in Seismic Design Category D — a demanding regime. The Upstate and Midlands are typically Category B–C. The site location and soil class set the requirement, and both are confirmed during the review." },
+      { question: "Which energy code applies to a South Carolina project?", answer: "Not automatically the newest one. South Carolina's statewide energy standard has historically trailed its building code — the adopted standard is older than the 2021 I-Codes the building code follows, with ASHRAE 90.1 as a referenced alternate. We confirm the effective energy edition for your jurisdiction at the start, and the package is documented against it." },
+    ],
+  },
+  massachusetts: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Massachusetts, step by step",
+        body: "Send us the drawing set, your calculations, the project city or town, and your permit deadline. Massachusetts enforces a single statewide building code — the 9th Edition of 780 CMR, based on the 2015 IBC with extensive Massachusetts amendments — so the building-code basis is the same in Boston as in Springfield. The variable is energy: the base energy code sits in 780 CMR, but most municipalities have adopted the Stretch Energy Code, and a growing set — Boston among them — enforce the Specialized Stretch Code with net-zero-ready, electrification-forward requirements, so we confirm your town's energy tier before the review starts. The set is then reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Massachusetts permits digital signatures and seals for electronic submissions, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project city or town, and deadline", "Same-day quote on qualifying scopes", "Statewide 780 CMR basis — energy tier confirmed for your municipality", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Massachusetts stamp work",
+        body: "Most complete Massachusetts packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. The code is uniform; the review depth is not — Boston's Inspectional Services Department runs a thorough process and coordinates with BPDA large-project review on bigger jobs, while smaller towns move on lighter timelines. Two gates sit outside the building department and are worth surfacing early: work near wetlands or coastal resources triggers Conservation Commission review under the Wetlands Protection Act alongside MassDEP stormwater standards, and large projects can face MEPA environmental review. Boston adds its own layer for large existing buildings under BERDO 2.0's carbon limits. Flag the site conditions when you send the set, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and municipality, which energy tier your town enforces (base, Stretch, or Specialized) if you know it, the geotechnical report if one exists — Boston's filled land and Boston Blue Clay make it decisive there — any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Massachusetts is governed by the Massachusetts Board of Registration of Professional Engineers and Land Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project municipality and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Which energy code applies to my Massachusetts project?", answer: "It depends on the municipality. The base energy code is set in 780 CMR, but most cities and towns enforce the Stretch Energy Code, and a growing number — including Boston — have adopted the Specialized Stretch Code with net-zero-ready and electrification requirements. We confirm the tier your town enforces before choosing the compliance path." },
+      { question: "What drives foundation design around Boston?", answer: "Filled land and soft Boston Blue Clay. Much of Boston is built on historic fill over deep clay deposits, which routinely call for deep foundations and careful settlement control — and seismic detailing matters more in Massachusetts than elsewhere in New England. The geotechnical report drives the scheme, so it travels with the drawing set from the start." },
+    ],
+  },
+  alabama: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Alabama, step by step",
+        body: "Send us the drawing set, your calculations, the project municipality or county, and your permit deadline. Alabama has no fully mandatory statewide commercial building code — the state references an IBC edition (the 2015 IBC has been the longstanding baseline) and municipalities adopt and amend their own editions, many now on 2018 or 2021 — so the first step on any Alabama job is confirming the governing edition with the specific building department. Energy follows the same local pattern off the state-referenced IECC baseline, and that edition is confirmed at the same time. With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Alabama accepts electronic seals under board rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project municipality or county, and deadline", "Same-day quote on qualifying scopes", "Governing IBC edition confirmed with your specific AHJ first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Alabama stamp work",
+        body: "Most complete Alabama packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. The schedule drivers split by geography: Huntsville's aerospace-fueled growth keeps its review program busy, while on the Gulf Coast the engineering itself is heavier — Baldwin and Mobile counties enforce hurricane-grade wind design at roughly 130–150+ mph with windborne-debris protection, plus FEMA flood elevation on coastal sites. Inland, tornado exposure makes ICC 500 storm shelters a common scope item for schools and institutional work. Two soil conditions are worth flagging with the set: the Black Belt's expansive clays and northern Alabama's karst, both of which shape foundations from the geotechnical report. Tell us the jurisdiction and the deadline, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, flood-elevation and wind information for Gulf Coast sites, the geotechnical report if one exists, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Alabama is governed by the Alabama Board of Licensure for Professional Engineers and Land Surveyors (BELS).",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Alabama have a statewide building code?", answer: "Not a fully mandatory one for commercial construction. The state references an IBC edition — the 2015 IBC has been the baseline — but municipalities adopt and amend their own editions, and the coastal counties enforce stronger wind provisions. We confirm the governing code with the specific jurisdiction before the review starts." },
+      { question: "What wind design applies on the Alabama Gulf Coast?", answer: "Hurricane-grade. Baldwin and Mobile counties design for basic wind speeds of roughly 130–150+ mph with windborne-debris protection, and coastal sites add FEMA flood-elevation requirements. Inland Alabama designs to roughly 105–115 mph, where tornado exposure is the bigger conversation." },
+    ],
+  },
+  "new-york": {
+    sections: [
+      {
+        heading: "Getting a PE stamp in New York, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. New York runs two genuinely different code regimes, and confirming which one governs is step one: everywhere outside New York City, the statewide Uniform Code (the 2020 editions, based on the 2018 I-Codes) applies; inside the five boroughs, the separate NYC Construction Codes — derived from the 2015 IBC with extensive local modifications — govern instead. Energy splits the same way: the 2020 Energy Conservation Construction Code of New York State outside the city, the stricter NYC Energy Conservation Code inside it. With the regime and edition fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. New York permits digitally authenticated electronic seals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "Code regime confirmed first — Uniform Code or NYC Construction Codes", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on New York stamp work",
+        body: "Most complete New York packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. In New York City, the Department of Buildings runs a rigorous review, and special-inspection and filing-representative requirements add real schedule — the filing strategy matters as much as the engineering. Outside the city, hundreds of towns, villages, and cities enforce the same Uniform Code on widely varying timelines, and downstate SEQRA environmental review can gate larger site work. For large existing buildings in the city, Local Law 97's carbon caps shape retrofit scopes years ahead. Upstate, the engineering driver is snow: lake-effect belts around Buffalo and Syracuse carry ground snow loads of 40–70+ psf. Tell us the jurisdiction — borough or upstate — and the deadline, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction (for city work, the borough and any DOB filing already in motion), flood information for coastal and Long Island sites, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in New York is governed by the New York State Board for Engineering and Land Surveying, under the State Education Department's Office of the Professions.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Which building code applies to my New York project — the state's or the city's?", answer: "Location decides. Anywhere outside New York City, the statewide Uniform Code (2020 editions, based on the 2018 I-Codes) applies. Inside the five boroughs, the NYC Construction Codes govern — a separate code family derived from the 2015 IBC with extensive local modifications. We confirm the regime before the review starts." },
+      { question: "How does Local Law 97 affect a New York City project?", answer: "Local Law 97 sets carbon-emissions caps for large existing buildings in the city, with penalties for exceeding them — so for NYC retrofit and alteration work, the emissions trajectory is part of the engineering scope, alongside the NYC Energy Conservation Code. It is worth planning around from the first conversation, not at filing time." },
+    ],
+  },
+  "new-mexico": {
+    sections: [
+      {
+        heading: "Getting a PE stamp in New Mexico, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. New Mexico enforces a statewide code through the Construction Industries Division (CID) — the 2021 IBC with New Mexico amendments — and certified home-rule jurisdictions such as Albuquerque, Santa Fe, and Bernalillo County administer their own enforcement under that state framework, so we confirm the governing edition and the reviewing office first. The statewide energy code, based on the 2021 IECC with state amendments, is administered by CID on the same track. With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. New Mexico accepts electronic seals for digital plan submittals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "Reviewing office confirmed first — CID or a certified jurisdiction", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on New Mexico stamp work",
+        body: "Most complete New Mexico packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. The engineering driver most teams underestimate is the Rio Grande rift: the central corridor around Albuquerque and Socorro carries moderate seismicity — Seismic Design Category C is common — so lateral detailing is a real design input, not a desert afterthought. On site work, arroyo flash flooding shapes drainage in the Albuquerque metro under AMAFCA (Albuquerque Metropolitan Arroyo Flood Control Authority) criteria, and detention and floodplain decisions belong in the package early. Foundations across the Rio Grande valley contend with expansive and collapsible soils and caliche, set by the geotechnical report. Tell us the jurisdiction — CID or a certified city — and the deadline, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, the geotechnical report if one exists (expansive and collapsible soils make it central in the Rio Grande valley), drainage or AMAFCA information for Albuquerque-metro sites, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in New Mexico is governed by the New Mexico Board of Licensure for Professional Engineers and Professional Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Is seismic design a factor in New Mexico?", answer: "Yes — more than most teams expect. The Rio Grande rift gives the central corridor around Albuquerque and Socorro moderate seismicity, commonly Seismic Design Category C, so lateral systems are detailed for real seismic demand. The site location sets the category, and it is confirmed at the start of the review." },
+      { question: "Who reviews my permit set in New Mexico — the state or the city?", answer: "Either, depending on the jurisdiction. The state Construction Industries Division (CID) enforces the statewide code, and certified home-rule jurisdictions — Albuquerque, Santa Fe, and Bernalillo County among them — run their own enforcement under the state framework. We confirm the reviewing office and the governing edition before the engineering review begins." },
+    ],
+  },
+  maryland: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Maryland, step by step",
+        body: "Send us the drawing set, your calculations, the project county or city, and your permit deadline. Maryland sets a statewide baseline through the Maryland Building Performance Standards (MBPS) — based on the 2021 I-Codes — that every jurisdiction must adopt, but counties and Baltimore City may amend within limits, so we confirm the local amendments for your jurisdiction alongside the baseline. Energy is folded into the MBPS (2021 IECC, with ASHRAE 90.1-2019 as an alternate path), so the compliance basis is fixed at the same time. With the basis set, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Maryland accepts electronic and digital seals for permit submittals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project county or city, and deadline", "Same-day quote on qualifying scopes", "MBPS baseline plus your jurisdiction's local amendments confirmed", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Maryland stamp work",
+        body: "Most complete Maryland packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Review timelines differ notably by county — Montgomery County and Baltimore run deep programs while Eastern Shore jurisdictions move differently — and two Maryland-specific frameworks shape site work early: the Critical Area law, which sharply restricts impervious cover and development within 1,000 feet of Chesapeake and Atlantic Coastal Bays tidal waters, and the Maryland Department of the Environment's stormwater rules, which mandate environmental site design to the maximum extent practicable and are among the most demanding in the country. For large buildings, the state's Building Energy Performance Standard adds an emissions trajectory worth designing to now. Flag whether the site touches tidal water when you send the set, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and county, whether the site sits within the Critical Area (within 1,000 feet of tidal waters) if you know it, stormwater information if any exists, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Maryland is governed by the Maryland State Board for Professional Engineers.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project county and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "What is Maryland's Critical Area law, and does it affect my site?", answer: "If your site lies within 1,000 feet of Chesapeake Bay or Atlantic Coastal Bays tidal waters, yes — the Critical Area law strictly limits impervious cover and development in that zone, and it can reshape what is buildable and how stormwater is handled. It is a Maryland-specific gate, so it is checked at the earliest stage of the review." },
+      { question: "Does Maryland's building code vary by county?", answer: "The baseline does not — the Maryland Building Performance Standards, based on the 2021 I-Codes, are the statewide minimum every jurisdiction adopts. What varies is the layer on top: counties and Baltimore City may add local amendments within limits, and review depth and timelines differ. We confirm the local amendments for your jurisdiction at kickoff." },
+    ],
+  },
+  indiana: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Indiana, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Indiana enforces a mandatory statewide commercial code — the Indiana Building Code (675 IAC 13), based on the 2012 IBC with extensive Indiana amendments — and Indiana runs well behind the national model-code cycle, so the adopted edition and amendments are confirmed at the start rather than assumed from a newer IBC. Permitting is a two-step sequence for many commercial projects: the state Plan Review process, run through Indiana's Department of Homeland Security, issues a Construction Design Release before local permits proceed, and larger cities run their own commercial review as well. We build the review around that sequence, verify or perform the calculations, and what is ready is sealed by the engineer in responsible charge. Indiana accepts electronic seals and digital signatures under board rules, so the sealed package comes back ready for the state filing and the local set. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "Adopted Indiana edition confirmed — the state runs its own cycle", "Package aligned to the state release, then the local filing"],
+      },
+      {
+        heading: "Turnaround on Indiana stamp work",
+        body: "Most complete Indiana packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. The schedule in Indiana is a sequencing exercise: the state Construction Design Release gates local permitting, so a package built to the state review's expectations the first time saves a full cycle. Review volume follows the market — Indianapolis is a national logistics and warehouse hub, and distribution and advanced-manufacturing projects move in waves. Two regional items are worth flagging with the set: southwestern Indiana, near the Wabash Valley and New Madrid seismic zones, can reach Seismic Design Category C or higher where the rest of the state is low-seismicity, and site work runs through Rule 5 construction stormwater coverage with county drainage boards holding authority over regulated drains and legal outlets. Tell us the city and the deadline, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, any Construction Design Release or state Plan Review filing reference if the project has already entered state review, drainage-board or legal-drain information for site work if any exists, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, aligned to the state release and the local filing, with required fixes clearly marked. Practice in Indiana is governed by the State Board of Registration for Professional Engineers, under the Indiana Professional Licensing Agency.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "What is a Construction Design Release, and when does my Indiana project need one?", answer: "It is the state Plan Review approval issued by Indiana's Department of Homeland Security for many commercial projects — and local permitting generally waits on it. The sequence is state release first, then the local permit path, so the drawing set is prepared with the state review's requirements in view from the start." },
+      { question: "Which building code edition applies in Indiana?", answer: "The statewide Indiana Building Code (675 IAC 13), based on the 2012 IBC with extensive Indiana amendments. Indiana adopts on its own cycle and runs behind the national model codes, so we confirm the currently adopted edition and amendments with the state at project start — never assume a newer IBC governs." },
     ],
   },
 };
