@@ -33,7 +33,7 @@ export const tennessee: StateData = {
   },
   licensure: {
     board: "Tennessee Board of Architectural and Engineering Examiners",
-    notes: "Tennessee grants licensure by comity for qualified out-of-state PEs and requires a Certificate of Authorization for firms. Electronic seals are accepted per board rules.",
+    notes: "Tennessee grants licensure by comity for qualified out-of-state PEs. Tennessee does not issue a firm license or Certificate of Authorization — engineering practice runs through the licensed professional engineer in responsible charge, with the firm's disclosure made to the board. Electronic seals are accepted per board rules.",
   },
   metros: ["Nashville", "Memphis", "Knoxville", "Chattanooga", "Clarksville", "Murfreesboro"],
   permitting:
