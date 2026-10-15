@@ -897,6 +897,34 @@ This file is a concise map of canonical public information. It does not imply lo
 - PE stamp in New Mexico: ${SITE}/pe-stamp/new-mexico/
 - PE stamp in Maryland: ${SITE}/pe-stamp/maryland/
 - PE stamp in Indiana: ${SITE}/pe-stamp/indiana/
+- PE stamp in Arkansas: ${SITE}/pe-stamp/arkansas/
+- PE stamp in Connecticut: ${SITE}/pe-stamp/connecticut/
+- PE stamp in Delaware: ${SITE}/pe-stamp/delaware/
+- PE stamp in Hawaii: ${SITE}/pe-stamp/hawaii/
+- PE stamp in Idaho: ${SITE}/pe-stamp/idaho/
+- PE stamp in Iowa: ${SITE}/pe-stamp/iowa/
+- PE stamp in Kansas: ${SITE}/pe-stamp/kansas/
+- PE stamp in Kentucky: ${SITE}/pe-stamp/kentucky/
+- PE stamp in Louisiana: ${SITE}/pe-stamp/louisiana/
+- PE stamp in Maine: ${SITE}/pe-stamp/maine/
+- PE stamp in Michigan: ${SITE}/pe-stamp/michigan/
+- PE stamp in Minnesota: ${SITE}/pe-stamp/minnesota/
+- PE stamp in Mississippi: ${SITE}/pe-stamp/mississippi/
+- PE stamp in Missouri: ${SITE}/pe-stamp/missouri/
+- PE stamp in Montana: ${SITE}/pe-stamp/montana/
+- PE stamp in Nebraska: ${SITE}/pe-stamp/nebraska/
+- PE stamp in Nevada: ${SITE}/pe-stamp/nevada/
+- PE stamp in New Hampshire: ${SITE}/pe-stamp/new-hampshire/
+- PE stamp in North Dakota: ${SITE}/pe-stamp/north-dakota/
+- PE stamp in Oklahoma: ${SITE}/pe-stamp/oklahoma/
+- PE stamp in Oregon: ${SITE}/pe-stamp/oregon/
+- PE stamp in Rhode Island: ${SITE}/pe-stamp/rhode-island/
+- PE stamp in South Dakota: ${SITE}/pe-stamp/south-dakota/
+- PE stamp in Utah: ${SITE}/pe-stamp/utah/
+- PE stamp in Vermont: ${SITE}/pe-stamp/vermont/
+- PE stamp in West Virginia: ${SITE}/pe-stamp/west-virginia/
+- PE stamp in Wisconsin: ${SITE}/pe-stamp/wisconsin/
+- PE stamp in Wyoming: ${SITE}/pe-stamp/wyoming/
 - Most complete review-and-seal packages are returned within 12–24 hours; same-day quotes on qualifying scopes.
 - Start an estimate: ${SITE}/estimate
 
@@ -1584,7 +1612,10 @@ function peStampHubPage(): string {
  * Batch 3, tranche A (ChatGPT consult chatcmpl-EZ5vWc0RrpbkBqyGNWEk9txzb0U0v,
  * APPROVE WITH CHANGES) added CO/IL/OH/SC/MA/AL/NY/NM/MD/IN under stricter
  * grounding: no licensure or firm-registration claims for the new states and
- * sealing described only via the engineer in responsible charge. */
+ * sealing described only via the engineer in responsible charge.
+ * Batch 4, tranche B (ChatGPT consult chatcmpl-EZ6U6y3ZLz0vLKs0mHUp39KnN2ift,
+ * APPROVE WITH CHANGES) completed the set with the remaining 28 states
+ * under the same grounding, finishing all 49 published state pages. */
 const PE_STAMP_MONEY_STATES: Array<{ slug: string; label: string }> = [
   { slug: "texas", label: "PE stamp in Texas — fast review & seal" },
   { slug: "florida", label: "Florida PE seal for permit-ready plans" },
@@ -1607,6 +1638,34 @@ const PE_STAMP_MONEY_STATES: Array<{ slug: string; label: string }> = [
   { slug: "new-mexico", label: "New Mexico PE stamp & review" },
   { slug: "maryland", label: "Maryland PE stamp — MBPS review & seal" },
   { slug: "indiana", label: "Indiana PE stamp — state release & local review" },
+  { slug: "arkansas", label: "Arkansas PE stamp & review" },
+  { slug: "connecticut", label: "Connecticut PE stamp — one statewide code, fast seal" },
+  { slug: "delaware", label: "Delaware PE stamp & review" },
+  { slug: "hawaii", label: "Hawaii PE stamp — county review & seal" },
+  { slug: "idaho", label: "Idaho PE stamp & review" },
+  { slug: "iowa", label: "Iowa PE stamp & review" },
+  { slug: "kansas", label: "Kansas PE stamp & review" },
+  { slug: "kentucky", label: "Kentucky PE stamp — one statewide code, fast seal" },
+  { slug: "louisiana", label: "Louisiana PE stamp — uniform code review & seal" },
+  { slug: "maine", label: "Maine PE stamp & review" },
+  { slug: "michigan", label: "Michigan PE stamp & review" },
+  { slug: "minnesota", label: "Minnesota PE stamp — one statewide code, fast seal" },
+  { slug: "mississippi", label: "Mississippi PE stamp & review" },
+  { slug: "missouri", label: "Missouri PE stamp & review" },
+  { slug: "montana", label: "Montana PE stamp & review" },
+  { slug: "nebraska", label: "Nebraska PE stamp & review" },
+  { slug: "nevada", label: "Nevada PE stamp — county review & seal" },
+  { slug: "new-hampshire", label: "New Hampshire PE stamp & review" },
+  { slug: "north-dakota", label: "North Dakota PE stamp & review" },
+  { slug: "oklahoma", label: "Oklahoma PE stamp — statewide code review & seal" },
+  { slug: "oregon", label: "Oregon PE stamp — one statewide code, fast seal" },
+  { slug: "rhode-island", label: "Rhode Island PE stamp — one statewide code, fast seal" },
+  { slug: "south-dakota", label: "South Dakota PE stamp & review" },
+  { slug: "utah", label: "Utah PE stamp & review" },
+  { slug: "vermont", label: "Vermont PE stamp & review" },
+  { slug: "west-virginia", label: "West Virginia PE stamp & review" },
+  { slug: "wisconsin", label: "Wisconsin PE stamp — statewide review & seal" },
+  { slug: "wyoming", label: "Wyoming PE stamp & review" },
 ];
 
 type PeStampDeepDive = {
@@ -2075,6 +2134,622 @@ const PE_STAMP_DEEP_DIVE: Record<string, PeStampDeepDive> = {
     faqs: [
       { question: "What is a Construction Design Release, and when does my Indiana project need one?", answer: "It is the state Plan Review approval issued by Indiana's Department of Homeland Security for many commercial projects — and local permitting generally waits on it. The sequence is state release first, then the local permit path, so the drawing set is prepared with the state review's requirements in view from the start." },
       { question: "Which building code edition applies in Indiana?", answer: "The statewide Indiana Building Code (675 IAC 13), based on the 2012 IBC with extensive Indiana amendments. Indiana adopts on its own cycle and runs behind the national model codes, so we confirm the currently adopted edition and amendments with the state at project start — never assume a newer IBC governs." },
+    ],
+  },
+  arkansas: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Arkansas, step by step",
+        body: "Send us the drawing set, your calculations, the project address and city, and your permit deadline. Arkansas enforces commercial construction statewide through the Arkansas Fire Prevention Code, Volume II — the current edition is built on the 2021 IBC — administered by the State Fire Marshal, so the design basis is consistent across the state; larger cities like Little Rock and Fayetteville run their own building departments and plan review within that framework. We confirm the reviewing path for your jurisdiction, then the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Arkansas accepts electronic seals under board rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and city, and deadline", "Same-day quote on qualifying scopes", "Statewide Fire Prevention Code basis; reviewing department confirmed first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Arkansas stamp work",
+        body: "Most complete Arkansas packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. What drives an Arkansas schedule is location. In the northeast, the New Madrid Seismic Zone pushes design to Seismic Design Category C–D near the Mississippi River, and river-corridor sites add floodplain scrutiny. In the northwest, the Fayetteville–Springdale–Bentonville corporate corridor runs busy review queues. Tornado and straight-line wind exposure across the state also supports ICC 500 storm-shelter scope on school and public projects. Expansive soils in parts of the state make the geotechnical report a schedule item, not an afterthought — send it with the set, name the city up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and city, the geotechnical report if one exists, flood-elevation information for river-corridor sites, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked so a resubmittal goes in clean. Practice in Arkansas is governed by the Arkansas State Board of Licensure for Professional Engineers and Professional Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project city and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Arkansas have a statewide building code?", answer: "Yes — commercial construction is enforced statewide through the Arkansas Fire Prevention Code, Volume II, built on the 2021 IBC and administered by the State Fire Marshal. Larger cities run their own building departments and plan review within that statewide framework." },
+      { question: "What seismic design applies in northeast Arkansas?", answer: "Elevated. The New Madrid Seismic Zone drives Seismic Design Category C–D near the Mississippi River corner of the state, dropping toward A–B in the west and south. The site location sets the design basis, and it is confirmed at the start of the review." },
+    ],
+  },
+  connecticut: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Connecticut, step by step",
+        body: "Send us the drawing set, your calculations, the project address and town, and your permit deadline. Connecticut is the simple case on code: the 2022 Connecticut State Building Code — based on the 2021 I-Codes with state amendments — is administered by the Office of the State Building Inspector and is uniform in every town, so the edition never changes between jurisdictions; only local review capacity does. The energy code is adopted statewide in step (2021 IECC, or ASHRAE 90.1-2019 as an alternate path). With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Connecticut accepts digitally authenticated seals for electronic submittals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and town, and deadline", "Same-day quote on qualifying scopes", "One statewide code — the 2022 Connecticut State Building Code", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Connecticut stamp work",
+        body: "Most complete Connecticut packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. The variable in Connecticut is the reviewer, not the code: Stamford, Hartford, and New Haven run formal review, while small towns move at their own pace. Coastal work adds layers outside the building department — CT DEEP and Coastal Area Management review, and the inland-wetlands commissions that gate site development in most towns. Shoreline sites also carry 120–130 mph design wind and VE/AE flood zones. Flag coastal or wetland conditions when you send the set, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and town, coastal or wetlands status if the site sits near the shore or a watercourse, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Connecticut is governed by the Connecticut State Board of Examiners for Professional Engineers and Land Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and coastal/wetlands status, if applicable", "Project town and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Connecticut's building code vary by town?", answer: "No. The 2022 Connecticut State Building Code, based on the 2021 I-Codes, is a single statewide code administered by the Office of the State Building Inspector — the edition is the same in every town. What varies is local review capacity and timeline." },
+      { question: "What extra reviews apply to a coastal Connecticut project?", answer: "Shoreline work can trigger CT DEEP and Coastal Area Management review, plus the town's inland-wetlands commission, on top of the building department. Coastal sites also carry higher design wind speeds and flood-zone requirements, so those items belong in the package from day one." },
+    ],
+  },
+  delaware: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Delaware, step by step",
+        body: "Send us the drawing set, your calculations, the project address and county, and your permit deadline. Delaware has no single statewide building code: New Castle, Kent, and Sussex counties and the municipalities adopt and enforce their own I-Code editions — most are on the 2018 IBC — and the State Fire Marshal separately enforces the statewide fire code and reviews life-safety for many commercial projects. So the first step on any Delaware job is confirming the governing edition with your county or city. One thing is uniform: the statewide energy code (2018 IECC, with ASHRAE 90.1-2016 as an alternate path). With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Delaware accepts digital seals for electronic submittals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and county, and deadline", "Same-day quote on qualifying scopes", "County edition confirmed first; statewide energy code is the constant", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Delaware stamp work",
+        body: "Most complete Delaware packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. What drives a Delaware schedule: the county edition confirmation up front, the Fire Marshal's life-safety review running alongside the building permit, and DNREC stormwater, wetlands, and coastal programs on site work. Delaware's soft, high-water-table Coastal Plain soils push many projects to deep foundations with dewatering, so the geotechnical report matters early. Sussex County's coastal market is booming and its flood and stormwater review is strict. Name the county up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and county, the geotechnical report if one exists, flood-zone information for coastal sites, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Delaware is governed by the Delaware Association of Professional Engineers.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project county and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Delaware have a statewide building code?", answer: "Not a single one. Counties and municipalities adopt their own I-Code editions — most are on the 2018 IBC — while the State Fire Marshal enforces the fire code statewide. The governing edition is confirmed with your specific county or city at the start of the review." },
+      { question: "Which energy code applies in Delaware?", answer: "Energy is the uniform piece: Delaware adopts a statewide energy code based on the 2018 IECC, with ASHRAE 90.1-2016 as an alternate compliance path. Compliance is documented through COMcheck or whole-building modeling against that statewide baseline." },
+    ],
+  },
+  hawaii: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Hawaii, step by step",
+        body: "Send us the drawing set, your calculations, the project address and county, and your permit deadline. Hawaii sets a State Building Code built on the 2018 IBC through the State Building Code Council, but the four counties — Honolulu, Hawaii, Maui, and Kauai — adopt and enforce it with their own amendments and on their own schedules, so the effective edition varies by county. The first step on any Hawaii job is confirming the governing edition and amendments with your county building department. With that basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Hawaii accepts electronic seals and digital signatures meeting board authentication requirements, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and county, and deadline", "Same-day quote on qualifying scopes", "County edition and amendments confirmed with your county first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Hawaii stamp work",
+        body: "Most complete Hawaii packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Hawaii schedules are shaped by the county, not the stamp: Honolulu in particular is known for extended plan-review timelines, and coastal projects add Special Management Area review under the Coastal Zone Management program, with shoreline setback and tsunami-zone rules along the coasts. Big Island projects also sit in lava-flow hazard zoning, and island logistics add cost and schedule pressure to everything. Hawaii's uniquely high electricity costs make energy performance an economic driver well beyond code minimums, so the energy documentation is worth getting right the first time. Name the county and flag coastal conditions up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and county, Special Management Area or shoreline status for coastal sites, lava-flow zone information for Big Island projects, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Hawaii is governed by the Hawaii Board of Professional Engineers, Architects, Surveyors and Landscape Architects.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and county code basis, if known", "Project county and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Which building code edition applies to my Hawaii project?", answer: "The one your county adopted. Hawaii's State Building Code is built on the 2018 IBC, but Honolulu, Hawaii, Maui, and Kauai counties adopt and amend it on their own schedules, so the effective edition and amendments are confirmed with the specific county building department before the review starts." },
+      { question: "What is Special Management Area review in Hawaii?", answer: "Coastal projects fall under the Coastal Zone Management program's Special Management Area rules, which add a county-level approval layer on top of the building permit, along with shoreline setback and tsunami-zone requirements. It is a schedule item to flag at the start, not a surprise to find mid-review." },
+    ],
+  },
+  idaho: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Idaho, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Idaho adopts its building code statewide — the 2018 IBC with Idaho amendments, through the Division of Occupational and Professional Licenses and the Idaho Building Code Board — and local jurisdictions administer enforcement, so the design basis is consistent and the reviewing office is local. The energy provisions are adopted statewide with the code (2018 IECC with state amendments). With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Idaho accepts electronic seals for digital submittals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "State-adopted code (2018 IBC with Idaho amendments); local enforcement", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Idaho stamp work",
+        body: "Most complete Idaho packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Idaho's schedule story is growth: the Treasure Valley — Boise, Meridian, Nampa — runs busy plan review, and in the Boise metro the Ada County Highway District uniquely controls roads and much of the drainage, adding a site-review layer beside the building department. Snow loads climb steeply with elevation and govern mountain and resort-town roofs past 100 psf, and seismic demand rises near the central and eastern faults. Frost depth and freeze-thaw drive foundation embedment statewide, and expansive and collapsible soils in parts of the Snake River Plain make the soil report a design input, not a formality. Send the geotechnical information with the set, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, drainage or highway-district information for Boise-metro sites, the geotechnical report if one exists, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Idaho is governed by the Idaho Board of Licensure of Professional Engineers and Professional Land Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Is Idaho's building code the same statewide?", answer: "The code itself is adopted at the state level — the 2018 IBC with Idaho amendments — while cities and counties administer enforcement locally. The design basis stays consistent across the state even though review offices and timelines differ." },
+      { question: "What snow loads apply to Idaho projects?", answer: "They are elevation-driven. Valley projects carry meaningful loads, and mountain and resort towns such as Sun Valley, McCall, and the Panhandle can exceed 100 psf, where snow governs the roof design. The site elevation sets the number, and it is confirmed at the start of the review." },
+    ],
+  },
+  iowa: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Iowa, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Iowa's State Building Code — administered by the State Fire Marshal — is mandatory for state-owned buildings and certain occupancies and serves as the default where local governments have not adopted their own code; many cities and counties adopt the IBC locally. So the first step on an Iowa job is confirming which code and edition your jurisdiction enforces. The commercial energy code is adopted statewide, on an older IECC / ASHRAE 90.1 vintage than the current model codes. With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Iowa accepts electronic seals and digital signatures under board rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "Governing code and edition confirmed with your AHJ first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Iowa stamp work",
+        body: "Most complete Iowa packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Iowa's schedule drivers are confirmation and climate: getting the governing edition pinned down outside the larger metros, frost depths of 42–48 inches governing footings, and expansive clays and loess soils that make the geotechnical report a real input. Seismic design does not drive anything here — the state is Seismic Design Category A — but wind does; the 2020 derecho underscored what uplift and lateral robustness mean in open terrain. Des Moines and Cedar Rapids run structured commercial review. Name the jurisdiction up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, the geotechnical report if one exists, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Iowa is governed by the Iowa Engineering and Land Surveying Examining Board.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Which building code applies to my Iowa project?", answer: "It depends on the jurisdiction. The Iowa State Building Code is mandatory for state-owned buildings and certain occupancies and is the default elsewhere, but many cities and counties adopt the IBC locally — so the governing edition is confirmed with the specific building department before the review starts." },
+      { question: "Which energy code does Iowa enforce for commercial buildings?", answer: "A statewide one, based on an older IECC / ASHRAE 90.1 vintage than the current model codes. Compliance is uniform statewide, but the older baseline is worth confirming — and in Iowa's cold climate, designing above the minimum usually pays." },
+    ],
+  },
+  kansas: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Kansas, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Kansas has no statewide commercial building code and no statewide energy code: cities and counties adopt the IBC on their own cycles — Wichita and the Kansas City metros enforce recent editions with amendments, while some rural areas have limited or no adopted code. Confirming the governing code, edition, and energy requirements with your specific building department is the essential first step on any Kansas project. With that basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Kansas accepts electronic seals and digital signatures under board rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "Code, edition, and energy requirements confirmed with your AHJ first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Kansas stamp work",
+        body: "Most complete Kansas packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. What drives a Kansas schedule is confirmation, then weather loads: Kansas sits in the heart of Tornado Alley, so wind uplift and lateral robustness — at 105–120 mph design speeds — are primary design drivers, and expansive clays across much of the state make the geotechnical report a schedule item. Frost depths of roughly 30–36 inches govern footings statewide. Structured metros like Johnson County, Wichita, and Topeka run formal review; rural jurisdictions vary widely. Name the jurisdiction and the soil conditions up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, the local code and energy editions if you know them, the geotechnical report if one exists, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Kansas is governed by the Kansas State Board of Technical Professions.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations, local code/energy editions, and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Kansas have a statewide building code?", answer: "No. Kansas cities and counties adopt the IBC on their own cycles — the Wichita and Kansas City metros enforce recent editions with amendments, and some rural areas have limited or no adopted code. The governing edition is confirmed with the specific jurisdiction before design." },
+      { question: "How is energy compliance handled in Kansas?", answer: "City by city. There is no statewide energy code, so compliance runs are targeted to the exact IECC edition the permitting jurisdiction enforces — and some jurisdictions have none. That is confirmed alongside the building code at the start of the review." },
+    ],
+  },
+  kentucky: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Kentucky, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Kentucky is a mini/maxi state: the Kentucky Building Code — administered by the Department of Housing, Buildings and Construction — is a mandatory statewide code that local jurisdictions may not weaken or exceed beyond what the state permits, so the commercial baseline is unusually uniform. The current code is built on the 2015 IBC with Kentucky amendments, and the energy provisions travel with it. The state administers plan review for many project types alongside local departments in places like Louisville and Lexington. With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Kentucky accepts electronic seals under board rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "One mandatory statewide code — the Kentucky Building Code", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Kentucky stamp work",
+        body: "Most complete Kentucky packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. The uniform code removes edition surprises; the schedule drivers are site and region. Central Kentucky's karst terrain and sinkholes make the geotechnical report a first-order input, river-corridor sites along the Ohio and Mississippi add flood review, and far-western Kentucky — the Jackson Purchase — sits in the New Madrid Seismic Zone at Category C–D, a different structural conversation from the rest of the state. Send the geotech with the set, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, the geotechnical report if one exists (essential in karst country), flood information for river-corridor sites, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Kentucky is governed by the Kentucky State Board of Licensure for Professional Engineers and Land Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Kentucky's building code vary by city?", answer: "No. The Kentucky Building Code is a mandatory statewide minimum that local jurisdictions cannot weaken or exceed except as the state permits — the design basis is the same in Louisville, Lexington, and everywhere between, even though review offices differ." },
+      { question: "What site condition matters most in central Kentucky?", answer: "Karst. Extensive limestone terrain and sinkholes across central Kentucky shape foundation design and site review, so the geotechnical report belongs in the package from day one. River-corridor sites add floodplain considerations on top." },
+    ],
+  },
+  louisiana: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Louisiana, step by step",
+        body: "Send us the drawing set, your calculations, the project address and parish, and your permit deadline. Louisiana adopted a mandatory statewide code after Hurricanes Katrina and Rita — the Louisiana State Uniform Construction Code, administered by the LSUCC Council — and the current edition is based on the 2021 IBC with Louisiana amendments, so the governing code is comparatively uniform statewide while parishes and municipalities handle enforcement. The commercial energy provisions are part of the same code package (2021 IECC, with ASHRAE 90.1 as an alternate path). With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Louisiana accepts digital seals on electronic submittals under board rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and parish, and deadline", "Same-day quote on qualifying scopes", "One mandatory statewide code — the LSUCC (2021 IBC base)", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Louisiana stamp work",
+        body: "Most complete Louisiana packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. In Louisiana, wind and water set the schedule: coastal and southern parishes design for 130–150+ mph hurricane wind with strict windborne-debris rules, FEMA base-flood-elevation requirements reach across the state, and soft, compressible soils with high water tables drive deep foundations — so the geotechnical report and flood information belong in the package from the start. Parish reviewers shaped by hurricane recovery are demanding on wind and flood detailing, and New Orleans adds historic-district and drainage constraints. Send the site information with the set, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and parish, the geotechnical report if one exists, flood-elevation information for sites in mapped flood zones, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Louisiana is governed by the Louisiana Professional Engineering and Land Surveying Board.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations, geotechnical report, and flood information, if available", "Project parish and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Is Louisiana's building code the same statewide?", answer: "Yes — the Louisiana State Uniform Construction Code is mandatory statewide, with the current edition based on the 2021 IBC with Louisiana amendments. Parishes and municipalities administer enforcement and inspection within that uniform framework." },
+      { question: "What wind design applies on the Louisiana coast?", answer: "Hurricane design governs. Coastal and southern parishes see basic wind speeds of 130–150+ mph with strict windborne-debris protection requirements, and FEMA flood-elevation rules layer on top — both are addressed in the review from the first pass." },
+    ],
+  },
+  maine: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Maine, step by step",
+        body: "Send us the drawing set, your calculations, the project address and municipality, and your permit deadline. Maine works under a statewide framework — the Maine Uniform Building and Energy Code, based on the 2015 I-Codes and administered by the Bureau of Building Codes and Standards — but its mandatory enforcement has historically applied only above a municipal population threshold, so whether a local code officer reviews your project depends on the town. The first step on a Maine job is confirming who reviews: a full code office in places like Portland and Bangor, or a lighter local path in smaller towns. With that settled, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Maine accepts digital seals for electronic submittals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and municipality, and deadline", "Same-day quote on qualifying scopes", "Reviewing path confirmed first — MUBEC enforcement varies by town", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Maine stamp work",
+        body: "Most complete Maine packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Maine's schedule drivers are snow and shoreline: ground snow loads run 50–70+ psf across much of the state and past 90–100 psf in the far north, so snow governs roof design, and deep frost of 4–6 feet governs foundations. Near the water, statewide shoreland zoning constrains development, and larger projects add Maine DEP Site Law and Natural Resources Protection Act reviews. Coastal marine clay can be soft and push foundations deeper. Flag shoreland or wetland conditions up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and municipality, shoreland or wetlands status for sites near water, the geotechnical report if one exists, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Maine is governed by the Maine Board of Licensure for Professional Engineers.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project municipality and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Who reviews my Maine project — the town or the state?", answer: "It depends on the town. MUBEC is a statewide code, but mandatory local enforcement has historically applied above a municipal population threshold — Portland and Bangor run full code offices, while smaller towns may have little or no local review. The reviewing path is confirmed at the start of the engagement." },
+      { question: "What loads govern roof design in Maine?", answer: "Snow, almost everywhere. Ground snow loads commonly run 50–70+ psf and exceed 90–100 psf in far-northern and interior areas, with deep frost of 4–6 feet governing foundations — both are set by the site location and confirmed at the start of the review." },
+    ],
+  },
+  michigan: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Michigan, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Michigan enforces a statewide, mandatory commercial building code through the Bureau of Construction Codes under LARA — but the state runs a cycle or two behind the model code, and the current commercial code is based on the 2015 IBC with Michigan amendments. So the first step on a Michigan job is confirming the adopted edition currently in force. The Michigan Uniform Energy Code tracks the 2015 IECC statewide (ASHRAE 90.1-2013 as an alternate path) — uniform, on the same older vintage. With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Michigan accepts electronic seals and digital signatures under board rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "Adopted edition confirmed first — Michigan runs behind the model cycle", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Michigan stamp work",
+        body: "Most complete Michigan packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Michigan's schedule variable is alignment: submittals built to the wrong IBC vintage earn comment cycles, while the uniform statewide baseline keeps everything else predictable. Detroit and Grand Rapids run structured commercial review, and the state's automotive and EV-battery build-out keeps industrial review busy. Snow is the structural driver — ground loads of 30–50+ psf, higher in the lake-effect belts and the Upper Peninsula, with drift and unbalanced-load analysis on larger roofs. Name the jurisdiction and the edition basis up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, roof snow and drift information for larger roofs, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Michigan is governed by the Michigan Board of Professional Engineers.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Which IBC edition does Michigan enforce?", answer: "The Michigan Building Code is currently based on the 2015 IBC with Michigan amendments — the state historically runs a cycle or two behind the newest model code. The adopted edition in force is confirmed with the building department at the start of the review so the submittal matches it." },
+      { question: "How does Michigan snow affect roof design?", answer: "Ground snow loads are among the highest in the Midwest — commonly 30–50+ psf, and higher in the lake-effect belts and the Upper Peninsula — so drift and unbalanced-load analysis frequently governs roof framing on larger buildings." },
+    ],
+  },
+  minnesota: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Minnesota, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Minnesota enforces a mandatory statewide building code — the 2020 edition, based on the 2018 IBC with Minnesota amendments reflecting the severe cold climate — administered by the Department of Labor and Industry, so the design basis is uniform everywhere in the state. The commercial energy code is equally uniform and demanding: ASHRAE 90.1-2016 / 2018 IECC with state amendments, one of the stronger cold-climate baselines in the country. With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Minnesota accepts electronic signatures and seals under board rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "One mandatory statewide code, administered by the DLI", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Minnesota stamp work",
+        body: "Most complete Minnesota packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. The uniform code keeps requirements consistent; what varies is reviewer workload — the Twin Cities run structured commercial review, and Rochester's healthcare-driven market stays active. The engineering drivers are cold and snow: ground snow loads of 35–50+ psf with drift and unbalanced loading frequently governing roofs, frost past 60 inches in the north, and frost heave and expansive clays that make the geotechnical report a genuine schedule input. Send the geotech with the set, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, the geotechnical report if one exists, the energy-compliance approach (COMcheck or model) if already started, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Minnesota is governed by the Minnesota Board of Architecture, Engineering, Land Surveying, Landscape Architecture, Geoscience, and Interior Design.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Is Minnesota's building code the same statewide?", answer: "Yes. The Minnesota State Building Code is mandatory and uniform statewide, administered by the Department of Labor and Industry — the current edition is based on the 2018 IBC with Minnesota amendments. Local officials administer review and inspections within that single framework." },
+      { question: "What makes Minnesota's energy code demanding?", answer: "It pairs a recent ASHRAE 90.1 / IECC vintage with cold-climate state amendments, making it one of the more demanding commercial energy baselines in the country. Compliance is documented against that statewide standard — COMcheck or a whole-building model — with no local variation." },
+    ],
+  },
+  mississippi: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Mississippi, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Mississippi is historically a home-rule state for building codes: the strongest mandatory requirements — wind and flood provisions — are concentrated in the six coastal counties after Hurricane Katrina, while inland adoption and editions vary by municipality. So the first step on a Mississippi job is confirming the governing IBC edition with your specific jurisdiction. Energy provisions follow the same pattern — IECC-based where adopted locally. With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Mississippi accepts electronic seals under board rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "Governing edition confirmed with your jurisdiction first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Mississippi stamp work",
+        body: "Most complete Mississippi packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Mississippi permitting is two different worlds: the coastal counties run formal, Katrina-born plan review with FEMA elevation certificates and strict wind detailing, while many inland jurisdictions run lighter programs. The engineering drivers shift the same way — hurricane wind of 130–150+ mph on the coast, expansive Yazoo clay across the center driving foundation design, Delta flood exposure and soft alluvial soils in the northwest, and New Madrid influence raising seismic demand toward the river corner. Name the county and the site conditions up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, the geotechnical report if one exists (essential on Yazoo clay), flood-elevation information for coastal and Delta sites, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Mississippi is governed by the Mississippi Board of Licensure for Professional Engineers and Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations, geotechnical report, and flood information, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Which building code applies to my Mississippi project?", answer: "It depends on the jurisdiction. The six coastal counties enforce robust, mandatory wind and flood provisions, while inland municipalities adopt their own editions with varying programs — the governing edition is confirmed with the specific jurisdiction before the review starts." },
+      { question: "What wind design applies on the Mississippi Gulf Coast?", answer: "Hurricane design governs: basic wind speeds of 130–150+ mph with strict windborne-debris requirements in the coastal counties, layered with FEMA flood-elevation rules. Inland, design wind drops to roughly 105–115 mph." },
+    ],
+  },
+  missouri: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Missouri, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Missouri has no statewide commercial building code and no statewide energy code: Kansas City and St. Louis enforce recent IBC editions with local amendments and run structured commercial review, while many rural areas have limited or no adopted code. Confirming the governing code, edition, and energy requirements with your specific building department is the essential first step on any Missouri project. With that basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Missouri accepts electronic seals and digital signatures under board rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "Code, edition, and energy requirements confirmed with your AHJ first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Missouri stamp work",
+        body: "Most complete Missouri packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Missouri holds the region's sharpest in-state split: seismic demand is low across the north and west, but the southeastern Bootheel — on the New Madrid Seismic Zone — reaches Seismic Design Category D or higher, among the highest east of the Rockies, on soft, liquefiable alluvial soils. Tornado frequency statewide keeps uplift and load-path detailing in focus, and expansive clays make the geotechnical report a schedule item. Name the region when you send the set — Bootheel work is scoped differently from day one — and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, the local code and energy editions if you know them, the geotechnical report if one exists (essential in the Bootheel), any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Missouri is governed by the Missouri Board for Architects, Professional Engineers, Professional Land Surveyors and Professional Landscape Architects.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations, local code/energy editions, and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Missouri have a statewide building code?", answer: "No. Missouri cities and counties adopt the IBC locally — Kansas City and St. Louis enforce recent editions with their own amendments, while many rural areas have limited or no adopted code and there is no statewide energy code. Requirements are confirmed jurisdiction by jurisdiction." },
+      { question: "Is seismic design a factor in Missouri?", answer: "In the southeast, emphatically yes. The Bootheel sits on the New Madrid Seismic Zone and can reach Seismic Design Category D or higher — among the highest seismic demand east of the Rockies — while the north and west are low (Category A–B). The site location sets the design basis." },
+    ],
+  },
+  montana: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Montana, step by step",
+        body: "Send us the drawing set, your calculations, the project address and location, and your permit deadline. Montana adopts its building code statewide through the Building Codes Bureau of the Department of Labor & Industry — recent cycles are based on the 2021 IBC with Montana amendments — and the commercial energy code is adopted statewide with it. What varies is the reviewer: certified local jurisdictions administer enforcement in the cities, while many rural areas rely on the state program, so the reviewing authority is confirmed for your location first. With that settled, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Montana accepts electronic seals for digital submittals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and location, and deadline", "Same-day quote on qualifying scopes", "State-adopted code; reviewing authority confirmed for your location", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Montana stamp work",
+        body: "Most complete Montana packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Montana's drivers are terrain and growth: Bozeman, Missoula, and the Flathead Valley run active review in fast-growing markets; western Montana sits in the Intermountain Seismic Belt at Category C or higher; mountain and resort snow loads can far exceed 100 psf; and Rocky Mountain Front winds run 105–120+ mph with chinook events. Many rural sites also rely on on-site septic and wells, which adds state health-department coordination beside the building review. Name the location and the site services up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and location, the geotechnical report if one exists, on-site water and septic status for rural sites, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Montana is governed by the Montana Board of Professional Engineers and Professional Land Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project location and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Who reviews my Montana project — the city or the state?", answer: "It depends on the location. Certified local jurisdictions enforce the statewide code in the cities, while areas without a local program rely on the state's Building Codes Bureau. The reviewing authority is confirmed for your site at the start of the engagement." },
+      { question: "What loads govern design in western Montana?", answer: "Snow and seismic, together. Western Montana sits in the Intermountain Seismic Belt (Category C or higher around Bozeman and Missoula), mountain snow loads can far exceed 100 psf, and deep frost drives foundation embedment — all set by the specific site." },
+    ],
+  },
+  nebraska: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Nebraska, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Nebraska adopts a State Building Code based on the IBC as the statewide standard, but enforcement is largely local: Omaha and Lincoln enforce recent IBC editions with their own amendments, smaller jurisdictions administer and may amend the state code, and enforcement is limited in some unincorporated areas. So the governing edition and enforcement scope are confirmed with your building department first. One piece is broadly uniform: the statewide energy code, based on the IECC (historically a 2018 vintage, with ASHRAE 90.1 as an alternate path). With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Nebraska accepts electronic seals and digital signatures under board rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "Edition and enforcement scope confirmed with your AHJ first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Nebraska stamp work",
+        body: "Most complete Nebraska packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Nebraska schedules turn on where the project sits: Omaha and Lincoln run structured commercial review on their own editions and amendments, while rural sites may need the enforcement question answered before anything else. The engineering drivers are plains weather and soil — open-plains wind exposure, snow drift on larger roofs, frost around 42 inches, and expansive eastern clays with collapsible loess that make the geotechnical report a real input. Send the geotech with the set, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, the geotechnical report if one exists, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Nebraska is governed by the Nebraska Board of Engineers and Architects.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Is Nebraska's building code enforced everywhere?", answer: "The State Building Code sets the statewide standard, but enforcement is local — Omaha and Lincoln run full programs on recent IBC editions with amendments, while some unincorporated areas have limited enforcement. The edition and enforcement scope are confirmed with the jurisdiction at the start." },
+      { question: "Which energy code applies in Nebraska?", answer: "A statewide one, based on the IECC — historically a 2018 vintage — with ASHRAE 90.1 as an alternate compliance path. It applies broadly even where building-code enforcement is local, and compliance is documented against the adopted edition." },
+    ],
+  },
+  nevada: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Nevada, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Nevada has no single statewide building code: Clark County, the City of Las Vegas, Reno, and Washoe County adopt their own IBC editions and amendments — most jurisdictions are on the 2018 IBC — so the governing cycle is confirmed with your specific building department first. The State Office of Energy sets a statewide energy baseline (2018 IECC in the south), but enforcement and the exact edition run through the local department. With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Nevada accepts electronic seals for digital submittals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "Governing IBC cycle confirmed with your building department first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Nevada stamp work",
+        body: "Most complete Nevada packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Nevada's two markets drive schedules differently: the north runs on seismic — Reno and western Nevada sit in an active belt at Category D — while the south runs on site water, with Clark County enforcing aggressively on drainage and dust and the Regional Flood Control District imposing its own hydrology criteria. Collapsible and gypsiferous soils and caliche layers in the south make the geotechnical report an early input, and the Tahoe-Reno industrial corridor keeps northern review volume high. Send the drainage and geotech information with the set, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, drainage and hydrology information for southern Nevada sites, the geotechnical report if one exists, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Nevada is governed by the Nevada State Board of Professional Engineers and Land Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations, drainage information, and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Nevada have a statewide building code?", answer: "No single one. Nevada delegates code adoption to local governments — Clark County, Las Vegas, Reno, and Washoe County each adopt their own IBC editions and amendments, most currently on the 2018 IBC. The governing cycle is confirmed with the specific building department." },
+      { question: "What seismic design applies around Reno?", answer: "Reno and western Nevada sit in an active seismic belt where Seismic Design Category D is common, so seismic detailing is a first-order design input there. Las Vegas, in the south, is lower but not negligible — the basis is set by the site and confirmed at the start of the review." },
+    ],
+  },
+  "new-hampshire": {
+    sections: [
+      {
+        heading: "Getting a PE stamp in New Hampshire, step by step",
+        body: "Send us the drawing set, your calculations, the project address and municipality, and your permit deadline. New Hampshire has a statewide building code — RSA 155-A, based on the 2018 I-Codes with state amendments from the State Building Code Review Board — and the energy code is adopted statewide with it (2018 IECC, with ASHRAE 90.1-2016 as an alternate path). What varies is enforcement: Manchester, Nashua, and Portsmouth run full building departments, while many small towns have limited or no local inspection. So the first step is confirming who actually reviews your project. With that settled, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. New Hampshire permits authenticated digital seals on electronic filings, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and municipality, and deadline", "Same-day quote on qualifying scopes", "Statewide code (RSA 155-A); local enforcement confirmed first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on New Hampshire stamp work",
+        body: "Most complete New Hampshire packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. New Hampshire schedules are set by snow and state permits: ground snow loads of 50–70+ psf in populated areas — past 100 psf at elevation — govern roof design, deep frost of 4–5 feet governs foundations, and shallow granite bedrock can turn excavation into rock work. On the environmental side, NHDES shoreland, wetlands, and Alteration of Terrain permits gate site work beside the building review. Flag shoreland or wetland conditions up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and municipality, shoreland or wetlands status for sites near water, the geotechnical report if one exists (bedrock depth matters here), any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in New Hampshire is governed by the New Hampshire Board of Professional Engineers.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project municipality and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Who enforces the building code in New Hampshire?", answer: "The code is statewide (RSA 155-A, based on the 2018 I-Codes), but enforcement is local and uneven — larger cities run full building departments while many small towns have limited or no local inspection. Who reviews your project is confirmed at the start of the engagement." },
+      { question: "What state permits can gate a New Hampshire site?", answer: "NHDES permits are the usual gates: the Shoreland Water Quality Protection Act and wetlands rules near water, and the Alteration of Terrain stormwater permit for larger disturbances. They run beside the building review and belong on the schedule from day one." },
+    ],
+  },
+  "north-dakota": {
+    sections: [
+      {
+        heading: "Getting a PE stamp in North Dakota, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. North Dakota adopts a State Building Code — the 2018 IBC with state amendments — that sets the statewide baseline, and its energy provisions (2018 IECC, with ASHRAE 90.1-2016 as an alternate) travel with it. Enforcement, though, rests with local jurisdictions, and not every rural county or township runs an active permit office — so the reviewing authority and effective edition are confirmed for your project first. With that settled, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. North Dakota accepts digital signatures and electronic seals meeting board authentication rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "Statewide baseline code; local reviewing authority confirmed first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on North Dakota stamp work",
+        body: "Most complete North Dakota packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. North Dakota design is a cold-climate discipline: ground snow loads of 40–60+ psf with prairie drifting frequently govern roofs, frost of 4–5 feet or more governs foundations, and seismic design essentially never enters the conversation. In the Red River Valley, flooding is the defining constraint, and Fargo-area lakebed clays with high groundwater complicate foundations — the geotechnical report earns its place in the package. Permitting concentrates in the cities (Fargo, Bismarck, Grand Forks, Minot, Williston). Name the jurisdiction and the floodplain status up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, floodplain status for Red River Valley sites, the geotechnical report if one exists, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in North Dakota is governed by the North Dakota State Board of Registration for Professional Engineers and Land Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Who reviews my North Dakota project?", answer: "Usually the city. The State Building Code sets the baseline, but enforcement is local — Fargo, Bismarck, Grand Forks, and other cities run building departments, while many rural jurisdictions administer limited or no local code. The reviewing authority is confirmed per project." },
+      { question: "What drives foundation design in the Red River Valley?", answer: "Expansive lakebed clays and high groundwater around Fargo and Grand Forks, compounded by Red River flooding — foundations, floodplain elevation, and drainage are designed from the geotechnical report and the site's flood status together." },
+    ],
+  },
+  oklahoma: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Oklahoma, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Oklahoma is one of the states with a genuine statewide minimum: the Oklahoma Uniform Building Code Commission adopts the base codes — currently the 2018 IBC with Oklahoma amendments — and local jurisdictions may adopt the same edition or a newer one, never a weaker one. The commercial energy code is adopted in the same package (2018 IECC, with ASHRAE 90.1-2016 as an alternate path). Oklahoma City and Tulsa still run their own plan review and amendments, so the reviewing office is confirmed alongside the edition. With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Oklahoma accepts digital seals under board rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "A true statewide minimum — locals can match or exceed, never weaken", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Oklahoma stamp work",
+        body: "Most complete Oklahoma packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Oklahoma's schedule items are resilience items: storm-shelter and safe-room review under ICC 500 has become a routine part of commercial and institutional permitting in tornado country, and expansive clay soils across the center of the state make the geotechnical report a standard input. One more Oklahoma-specific watch item: induced seismicity has raised the hazard picture in central Oklahoma, so some sites warrant seismic attention beyond the traditional low baseline. Flag shelter scope and site soils when you send the set, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, storm-shelter scope if the project includes one, the geotechnical report if one exists, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Oklahoma is governed by the Oklahoma State Board of Licensure for Professional Engineers and Land Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Is Oklahoma's building code a true statewide minimum?", answer: "Yes. The Uniform Building Code Commission adopts the base codes statewide — currently the 2018 IBC with Oklahoma amendments — and local jurisdictions may match it or adopt a newer edition, but not a weaker one. Cities still administer their own plan review within that floor." },
+      { question: "Is storm-shelter review part of Oklahoma permitting?", answer: "Routinely, yes. In tornado-exposed jurisdictions, ICC 500 storm-shelter and safe-room review has become a standard part of commercial and institutional permitting, so shelter scope is worth flagging when the package is sent." },
+    ],
+  },
+  oregon: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Oregon, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Oregon is the uniform case: the Oregon Structural Specialty Code — the 2022 edition, built on the 2021 IBC with extensive Oregon amendments — is a mandatory statewide code administered through the Building Codes Division, and local jurisdictions cannot amend it. One detail that matters: Oregon runs its own commercial energy code, the Oregon Energy Efficiency Specialty Code, among the most stringent in the nation — compliance is documented against the OEESC, not a plain IECC run. With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Oregon accepts electronic seals for digital submittals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "One mandatory statewide code — the OSSC; locals cannot amend it", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Oregon stamp work",
+        body: "Most complete Oregon packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Oregon's schedule drivers are seismic and stormwater: west of the Cascades, the Cascadia Subduction Zone puts most projects at Seismic Design Category D, with liquefaction and deep soft soils across the Willamette Valley and Portland basin — the geotechnical report is a first-order input. Portland's on-site infiltration and green-infrastructure stormwater rules are among the strictest in the country and shape site design early. Metro Portland and Washington County review runs at high volume. Send the geotech and stormwater approach with the set, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, the geotechnical report if one exists (essential west of the Cascades), stormwater approach for Portland-metro sites, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Oregon is governed by the Oregon State Board of Examiners for Engineering and Land Surveying.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Oregon's building code vary by city?", answer: "No. The Oregon Structural Specialty Code is a single mandatory statewide code, and local jurisdictions cannot amend it — the design basis is the same in Portland, Bend, and everywhere between, which makes Oregon one of the most predictable code environments in the country." },
+      { question: "What energy code does Oregon enforce?", answer: "Its own: the Oregon Energy Efficiency Specialty Code, built on ASHRAE 90.1 / IECC foundations with aggressive state amendments, and among the most stringent commercial energy codes in the nation. Compliance is documented against the OEESC edition in force." },
+    ],
+  },
+  "rhode-island": {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Rhode Island, step by step",
+        body: "Send us the drawing set, your calculations, the project address and municipality, and your permit deadline. Rhode Island enforces a single statewide building code — SBC-1, based on the 2018 IBC with Rhode Island amendments, administered by the State Building Code Commission — so the governing edition is uniform in every city and town. The energy code is part of the same statewide series (SBC-8: 2018 IECC, with ASHRAE 90.1-2016 as an alternate path), documented through COMcheck or a whole-building model. With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Rhode Island accepts digital seals with authentication for electronic submittals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and municipality, and deadline", "Same-day quote on qualifying scopes", "One statewide code — SBC-1, uniform in every town", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Rhode Island stamp work",
+        body: "Most complete Rhode Island packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. The code is uniform; the schedule variable is the coast. Projects near the shore fall under the Coastal Resources Management Council — a significant, Rhode-Island-specific approval track that runs beside the building permit — with RIDEM covering wetlands and stormwater. Ocean and bay shoreline design wind runs 125–135 mph, flood zones are extensive, and soft bay-margin soils push foundations deeper near the water. The offset: Rhode Island is small, and agency coordination moves quickly. Flag coastal status up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and municipality, coastal (CRMC) status for shoreline sites, the geotechnical report if one exists, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Rhode Island is governed by the Rhode Island Board of Registration for Professional Engineers.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project municipality and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Rhode Island's building code vary by town?", answer: "No. The Rhode Island State Building Code (SBC-1) is a single statewide code based on the 2018 IBC, administered by the State Building Code Commission — the edition is the same in Providence, Newport, and every town between. Local officials administer review within that framework." },
+      { question: "What is CRMC review, and when does it apply?", answer: "The Coastal Resources Management Council holds jurisdiction over Rhode Island's coastal zone, so shoreline projects carry a CRMC approval track alongside the building permit, plus RIDEM wetlands and stormwater review. It is a schedule item to identify at the start, not mid-review." },
+    ],
+  },
+  "south-dakota": {
+    sections: [
+      {
+        heading: "Getting a PE stamp in South Dakota, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. South Dakota has no mandatory statewide building code: Sioux Falls, Rapid City, and other larger cities adopt and enforce their own IBC editions — commonly the 2015 or 2018 IBC with local amendments — while many rural areas have limited or no adopted code. So the first step on a South Dakota job is confirming both the reviewing authority and whether a code program applies at your site at all. Energy follows the same local pattern. With that settled, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. South Dakota accepts digital signatures and electronic seals meeting board authentication requirements, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "Reviewing authority and code program confirmed for your site first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on South Dakota stamp work",
+        body: "Most complete South Dakota packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. South Dakota design is governed by snow, wind, and soil: ground snow loads of 30–50+ psf — higher in the Black Hills — with drifting frequently governing roof design, open-terrain wind exposure, and expansive Pierre shale and swelling clays that often govern the foundations themselves. On rural and small-town sites, floodplain review and on-site wastewater rules can be the primary regulatory gates. Send the geotechnical report with the set, name the jurisdiction up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, the geotechnical report if one exists (essential on Pierre shale), floodplain and wastewater status for rural sites, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in South Dakota is governed by the South Dakota Board of Technical Professions.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does South Dakota have a statewide building code?", answer: "No mandatory one. Adoption and enforcement are local — Sioux Falls and Rapid City enforce recent IBC editions with amendments, while many rural areas have limited or no adopted building code. Whether a code program applies, and which edition, is confirmed with the jurisdiction first." },
+      { question: "What soil condition drives South Dakota foundations?", answer: "Expansive Pierre shale and swelling clays, which are widespread across the state and frequently govern foundation design. The geotechnical report sets the foundation approach, so it belongs in the package from day one." },
+    ],
+  },
+  utah: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Utah, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Utah adopts its building code statewide — the 2021 IBC with Utah amendments, through the Uniform Building Code Commission and the legislature — and local governments have limited amendment authority, so the base edition is consistent across jurisdictions. The commercial energy provisions are adopted statewide with it (2021 IECC, with ASHRAE 90.1-2019 as an alternate path). With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Utah accepts electronic seals for digital submittals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "State-adopted code (2021 IBC with Utah amendments)", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Utah stamp work",
+        body: "Most complete Utah packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Utah's schedule drivers are seismic documentation and growth: the Wasatch Fault puts the populous Wasatch Front at Seismic Design Category D, with liquefaction potential in the valley sediments near Great Salt Lake, so reviewers expect the geotechnical and seismic basis in the package early. Wasatch Front cities along the Silicon Slopes corridor run active but generally efficient review, and mountain-town snow loads above 100 psf govern roofs at elevation. In the south, St. George and Washington County administer the rapidly growing market under the same statewide code, so the basis does not change — only the reviewer does. Send the geotech with the set, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, the geotechnical report if one exists (essential along the Wasatch Front), any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Utah is governed by the Utah Division of Professional Licensing and its Professional Engineers and Land Surveyors Board.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "What seismic design applies along the Wasatch Front?", answer: "High. The Wasatch Fault puts the Salt Lake–Provo–Ogden corridor at Seismic Design Category D as a common condition, with liquefaction potential in valley sediments near Great Salt Lake — seismic and geotechnical documentation is expected in the package from the first pass." },
+      { question: "Is Utah's building code uniform statewide?", answer: "Largely, yes. The state adopts the code — currently the 2021 IBC with Utah amendments — and local amendment authority is limited, so the design basis stays consistent from St. George to Logan even though review offices differ." },
+    ],
+  },
+  vermont: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Vermont, step by step",
+        body: "Send us the drawing set, your calculations, the project address, and your permit deadline. Vermont is the centralized case: there is no statewide residential code, but commercial and public buildings are regulated statewide by the Division of Fire Safety through the Vermont Fire and Building Safety Code, which references the 2015 IBC and NFPA standards. Because most Vermont towns have no local building department, the state Division of Fire Safety is typically the reviewing and permitting authority for commercial work. Energy is handled the same way — the Vermont Commercial Building Energy Standards are a mandatory statewide standard, with compliance self-certified to the state. With the reviewer identified, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Vermont accepts digital seals for electronic submittals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address, and deadline", "Same-day quote on qualifying scopes", "State Division of Fire Safety is typically the reviewer", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Vermont stamp work",
+        body: "Most complete Vermont packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Vermont schedules turn on two state-level tracks: the Division of Fire Safety review itself, and — for larger projects — Act 250, Vermont's land-use and environmental permit, which can significantly affect schedule and runs on its own clock. Agency of Natural Resources stormwater and wetlands permits layer in beside them. The engineering drivers are snow (50–70+ psf in the valleys, past 100 at elevation), deep frost of 4–5 feet, and riverine flooding. Flag Act 250 exposure at the start, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address, Act 250 status if the project is large enough to trigger it, floodplain information for river-valley sites, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Vermont is governed by the Vermont Board of Professional Engineering.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and Act 250 status, if applicable", "Project address and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Who reviews a commercial project in Vermont?", answer: "Usually the state. Most Vermont towns have no local building department, so the Division of Fire Safety — under the Vermont Fire and Building Safety Code — is typically the plan-review and permitting authority for commercial and public buildings." },
+      { question: "What is Act 250, and does it affect my schedule?", answer: "Act 250 is Vermont's land-use and environmental review for larger developments, and yes — it runs on its own track beside the building permit and can significantly affect schedule. Whether your project triggers it is worth establishing before design, not during review." },
+    ],
+  },
+  "west-virginia": {
+    sections: [
+      {
+        heading: "Getting a PE stamp in West Virginia, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. West Virginia's State Fire Commission adopts a statewide State Building Code based on the 2015 I-Codes — but local adoption is not universal: municipalities and counties choose whether to adopt and enforce it, and many rural areas have limited or no local permit administration. The state has also run behind the model cycle, so the governing edition and whether a code is locally enforced are both confirmed with your jurisdiction first. Energy provisions travel with the state code where it is adopted. With that settled, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. West Virginia permits electronic seals and digital signatures meeting board authentication standards, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "Local enforcement and edition confirmed with your jurisdiction first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on West Virginia stamp work",
+        body: "Most complete West Virginia packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. West Virginia schedules are made in the terrain: steep slopes, landslide-prone colluvial soils, karst limestone in the east, and abandoned-mine subsidence are the dominant geotechnical risks, and floodplain management is a recurring gatekeeper in the state's steep, flash-flood-prone valleys. Charleston, Morgantown, and Huntington run active building departments; outside them, state fire-marshal review and floodplain rules may carry the process. Send the geotechnical information with the set, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, the geotechnical report if one exists, mine-subsidence or karst information if known for the site, floodplain status, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in West Virginia is governed by the West Virginia State Board of Registration for Professional Engineers.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Is West Virginia's building code enforced in every county?", answer: "No. The State Building Code is adopted at the state level, but municipalities and counties choose whether to adopt and enforce it — larger cities run active departments, while many rural areas have limited or no local permit administration. Enforcement at your site is confirmed first." },
+      { question: "What site risks matter most in West Virginia?", answer: "Ground conditions: steep terrain, landslide-prone soils, karst limestone in the eastern counties, and abandoned-mine subsidence — plus floodplain exposure in the valleys. The geotechnical report shapes both the design and the review path." },
+    ],
+  },
+  wisconsin: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Wisconsin, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Wisconsin enforces a mandatory statewide commercial building code — SPS 361–366, administered by the Department of Safety and Professional Services — based on the IBC with Wisconsin amendments. The state has historically run behind the model cycle, so the referenced IBC edition is confirmed with SPS at the start. The commercial energy provisions (SPS 363) are adopted statewide on the same uniform basis. Plan approval runs through SPS or a delegated municipality before local permits proceed, so the sequence is state-level plan approval, then local permit. With the basis fixed, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Wisconsin accepts electronic seals and digital signatures under board rules, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "One statewide code (SPS 361–366); SPS plan approval sequenced first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Wisconsin stamp work",
+        body: "Most complete Wisconsin packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Wisconsin's schedule variable is the approval sequence, not the code: the uniform statewide system keeps requirements consistent from Milwaukee to Eau Claire, but commercial projects typically need SPS or delegated-agency plan approval before local permits and inspections proceed, and that step belongs on the schedule from day one. The engineering drivers are northern-plains staples — ground snow of 30–40+ psf with drift and unbalanced-load analysis, and frost past 48 inches in the north governing footings. Name the jurisdiction and whether it is a delegated reviewer, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, whether the municipality is an SPS-delegated reviewer if you know it, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Wisconsin is governed by the Wisconsin Department of Safety and Professional Services and its Engineering Examining Board.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Who approves commercial plans in Wisconsin?", answer: "The state system: Wisconsin's Department of Safety and Professional Services (SPS) administers statewide commercial plan review, and larger municipalities are delegated to review under the same uniform code. Plan approval typically precedes local permits and inspections." },
+      { question: "Which IBC edition does Wisconsin use?", answer: "The Wisconsin Commercial Building Code (SPS 361–366) is based on the IBC with Wisconsin amendments and has historically run behind the newest model cycle — historically a 2015 IBC vintage. The referenced edition in force is confirmed with SPS at the start of the review." },
+    ],
+  },
+  wyoming: {
+    sections: [
+      {
+        heading: "Getting a PE stamp in Wyoming, step by step",
+        body: "Send us the drawing set, your calculations, the project address and jurisdiction, and your permit deadline. Wyoming has no statewide mandatory building code and no statewide energy code: Cheyenne, Casper, and other municipalities adopt and enforce their own IBC editions with local amendments, while some rural counties have limited or no adopted code. Confirming the governing edition — and whether a code program applies at your site — with the specific jurisdiction is the first step on any Wyoming project. With that settled, the set is reviewed discipline by discipline, the calculations are verified or performed, and what is ready is sealed by the engineer in responsible charge. Wyoming accepts electronic seals for digital submittals, so the sealed package comes back ready to file. You get a same-day quote on qualifying scopes.",
+        bullets: ["Send drawings, calculations, project address and jurisdiction, and deadline", "Same-day quote on qualifying scopes", "Governing edition and code program confirmed for your site first", "Sealed set returned digitally, ready for submittal"],
+      },
+      {
+        heading: "Turnaround on Wyoming stamp work",
+        body: "Most complete Wyoming packages come back sealed within 12–24 hours, with rush handling available against a permit deadline. Wyoming's headline driver is wind: among the strongest sustained winds in the country, with design speeds of 115–140+ mph in exposed corridors like I-80, and wind design documentation is a recurring plan-review focus. Snow is elevation-driven — Jackson and the Teton country can far exceed 100 psf — and expansive bentonite soils and deep frost shape foundations. Reviewing authority varies dramatically by location, and many rural sites coordinate on-site septic and wells with health authorities. Name the jurisdiction and the site exposure up front, and we will give you a straight date before you commit.",
+      },
+      {
+        heading: "What to send us — and what comes back",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and jurisdiction, site wind exposure if the project sits in an open corridor, on-site water and septic status for rural sites, the geotechnical report if one exists, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the engineer in responsible charge, with required fixes clearly marked for a clean resubmittal. Practice in Wyoming is governed by the Wyoming Board of Professional Engineers and Professional Land Surveyors.",
+        bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and geotechnical report, if available", "Project jurisdiction and AHJ checklist or correction notice", "Your permit deadline"],
+      },
+    ],
+    faqs: [
+      { question: "Does Wyoming have a statewide building code?", answer: "No. Wyoming leaves code adoption to cities and counties — Cheyenne and Casper enforce their own IBC editions with amendments, and some rural counties have limited or no adopted code and there is no statewide energy code. The applicable requirements are confirmed with the jurisdiction first." },
+      { question: "What wind speeds apply in Wyoming?", answer: "Among the highest in the country: design speeds frequently run 115–140+ mph in exposed corridors, notably along I-80, while sheltered sites run lower. Wind design documentation is a recurring plan-review focus, and the site exposure sets the number." },
     ],
   },
 };
