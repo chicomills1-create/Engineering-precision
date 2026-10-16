@@ -4559,7 +4559,6 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     { name: "sitemap-core.xml",       urls: coreUrls },
     { name: "sitemap-services.xml",   urls: servicesUrls },
     { name: "sitemap-stamping.xml",   urls: stampingUrls },
-    { name: "sitemap-query-matrix.xml", urls: queryMatrixUrls },
     { name: "sitemap-estimators.xml", urls: estimatorUrls },
     { name: "sitemap-industries.xml", urls: industriesUrls },
     { name: "sitemap-solutions.xml",  urls: solutionsUrls },
@@ -11482,7 +11481,7 @@ async function notifySearchEngines() {
   }
 
   // Submit all generated URLs to IndexNow in protocol-safe batches.
-  const INDEXNOW_KEY = "b3d4e5f6a7c8d9e0f1a2b3c4d5e6f7a8";
+  const INDEXNOW_KEY = "d8d22967e31aebe4cbafe2efd97631e33f2802e882e60505";
   const INDEXNOW_HOST = new URL(SITE).hostname;
   const indexXml = fs.readFileSync(sitemapIndexPath, "utf8");
   const sitemapNames = [...indexXml.matchAll(/<loc>[^<]*\/([^/<]+\.xml)<\/loc>/g)].map((m) => m[1]);
