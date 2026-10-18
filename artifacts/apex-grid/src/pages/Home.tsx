@@ -87,6 +87,12 @@ const REVIEWS = [
     quote:
       "Jeremy is a great communicator. I trust him on projects to be responsive until the job is done. I would definitely consider him for engineering projects!",
   },
+  {
+    name: "Jason Mitchell",
+    role: "Principal Architect, JL Mitchell Architects PC",
+    quote:
+      "Worked with Jeremy on a project — solid engineering and clear communication from start to finish.",
+  },
 ];
 
 export default function Home() {

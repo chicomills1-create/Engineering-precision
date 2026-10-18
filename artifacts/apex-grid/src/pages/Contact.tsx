@@ -291,7 +291,7 @@ export default function Contact() {
                   <span className="font-semibold text-white">Phone: </span>(480) 490-0064
                 </li>
                 <li>
-                  <span className="font-semibold text-white">Hours: </span>Monday–Friday, 7:00 AM – 6:00 PM MST
+                  <span className="font-semibold text-white">Hours: </span>Monday–Friday, 8:00 AM – 5:00 PM MST
                 </li>
                 <li>
                   <span className="font-semibold text-white">Service area: </span>All 49 licensed states — Arizona, California, Texas, Florida, and nationwide
