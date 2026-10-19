@@ -862,7 +862,48 @@ function writeCityQualityReport(states: StateData[], directory: CityDirectory, c
   return report;
 }
 
-function writeLlmsTxt() {
+function llmsLocationsSection(states: StateData[], cities: CityData[]): string {
+  // CURATION RULE (Wave A, 2026-10-19): the llms manifests list a curated
+  // subset of the location estate, not all ~36k URLs — for every licensed
+  // state: the state hub and one page per location service (the SERVICES
+  // table), plus the count of published city x service pages in the state
+  // (reviewed cities x their supported services, plus specialty
+  // location-service pages — the same inventory writeSitemap emits) with
+  // up to 4 example URLs. Every listed URL is a page this generator emits.
+  const lines: string[] = [
+    "## Locations (city \u00d7 service)",
+    "",
+    `Apex publishes location pages for every state it serves: a state hub, one page per service in the state, city pages, and city \u00d7 service pages, all under ${SITE}/locations/.`,
+    "",
+  ];
+  for (const state of states) {
+    const cityServiceUrls: string[] = [];
+    for (const city of cities.filter((c) => c.stateSlug === state.slug && isReviewedCity(c))) {
+      for (const svc of SERVICES) {
+        if (isSupportedCityService(city, svc.slug)) {
+          cityServiceUrls.push(`${SITE}/locations/${state.slug}/${city.slug}/${svc.slug}/`);
+        }
+      }
+    }
+    for (const lsp of LOCATION_SERVICE_PAGES.filter((page) => page.stateSlug === state.slug)) {
+      const url = `${SITE}/locations/${lsp.stateSlug}/${lsp.citySlug}/${lsp.serviceSlug}/`;
+      if (!cityServiceUrls.includes(url)) cityServiceUrls.push(url);
+    }
+    lines.push(`### ${state.name}`);
+    lines.push(`- State hub: ${SITE}/locations/${state.slug}/`);
+    for (const svc of SERVICES) {
+      lines.push(`- ${svc.name} in ${state.name}: ${SITE}/locations/${state.slug}/${svc.slug}/`);
+    }
+    if (cityServiceUrls.length) {
+      lines.push(`- City \u00d7 service pages in ${state.name}: ${cityServiceUrls.length} published; examples:`);
+      for (const url of cityServiceUrls.slice(0, 4)) lines.push(`  - ${url}`);
+    }
+    lines.push("");
+  }
+  return lines.join("\n");
+}
+
+function writeLlmsTxt(states: StateData[], cities: CityData[]) {
   const content = `# Apex Grid Engineering
 
 > Apex Grid Engineering PLLC is a professional engineering firm headquartered in Queen Creek, Arizona, providing PE review-and-seal (PE stamp) services, structural, MEP, civil, and geotechnical engineering, building assessments, architectural design, energy-compliance (including California Title 24), and municipal plan-check support. The firm is led by Jeremy Mills, CEO & Founder and U.S. Air Force veteran, and staffs 10+ licensed professional engineers on a 20+ engineer team.
@@ -937,6 +978,7 @@ This file is a concise map of canonical public information. It does not imply lo
 - Electrical engineering: ${SITE}/electrical-engineering/
 - Plumbing engineering: ${SITE}/plumbing-engineering/
 
+${llmsLocationsSection(states, cities)}
 ## High-value sections
 - Commercial engineering search hub: ${SITE}/engineering-intent/engineering-near-me/
 - Industries: ${SITE}/industries
@@ -1405,12 +1447,17 @@ function phase0ArticleFrame(
     author: authorSchema,
     publisher: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
   };
+  // Lede de-duplication guard: a body section that repeats the hero text
+  // (direct answer or lede) verbatim is dropped, so the opening paragraph
+  // is never reproduced as the first body section.
+  const heroText = opts.directAnswer ?? opts.answer;
+  const sections = opts.sections.filter((section) => section.body.trim() !== heroText.trim());
   const howToSchema = opts.howTo ? {
     "@context": "https://schema.org",
     "@type": "HowTo",
     name: opts.h1,
     description: opts.directAnswer ?? opts.answer,
-    step: opts.sections.map((section, index) => ({
+    step: sections.map((section, index) => ({
       "@type": "HowToStep",
       position: index + 1,
       name: section.heading,
@@ -1431,7 +1478,7 @@ function phase0ArticleFrame(
   ${breadcrumb(crumbs)}
   ${hero}
   ${opts.facts?.length ? `<section class="block"><div class="container"><h2>What facts should you use to plan this scope?</h2><div class="prose"><table><thead><tr><th>Planning fact</th><th>Project-specific value</th></tr></thead><tbody>${opts.facts.map((fact) => `<tr><th scope="row">${esc(fact.label)}</th><td>${esc(fact.value)}</td></tr>`).join("")}</tbody></table></div></div></section>` : ""}
-  ${opts.sections.map((section, index) => `<section class="block" id="step-${index + 1}"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p>${section.bullets ? `<ul class="scope">${section.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul>` : ""}</div></div></section>`).join("")}
+  ${sections.map((section, index) => `<section class="block" id="step-${index + 1}"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p>${section.bullets ? `<ul class="scope">${section.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul>` : ""}</div></div></section>`).join("")}
   ${opts.links?.length ? `<section class="block"><div class="container"><h2>${opts.directAnswer ? "Which related engineering resources can help?" : "Related Engineering Resources"}</h2><div class="linkrow">${opts.links.map((link) => `<a href="${esc(link.href)}"${/^https:\/\//.test(link.href) ? ' rel="noopener noreferrer"' : ""}>${esc(link.label)}</a>`).join("")}</div></div></section>` : ""}
   ${opts.directAnswer ? `<section class="block"><div class="container"><h2>What else do project teams ask?</h2><div class="faq">${opts.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></div></section>` : phase0FaqMarkup(opts.faqs)}
   <section class="ctaband"><div class="container"><h2>${opts.directAnswer ? "Ready to discuss your engineering scope?" : "Discuss your engineering scope"}</h2><p>Share the project address, current records, requested deliverable, authority information, and schedule. Apex Grid confirms professional responsibility, availability, and scope before work begins.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
@@ -1468,9 +1515,13 @@ function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
   ];
   const faqs = "cluster" in page ? phase7Faqs(page) : page.faqs;
   const customSections = "cluster" in page ? undefined : page.sections;
+  // The hero renders page.answer verbatim (as the lede, or as the direct
+  // answer when the two are identical), so the default first section must
+  // not repeat it word for word.
+  const heroText = "cluster" in page ? page.answer : (page.directAnswer ?? page.answer);
   const sections = !customSections?.length
     ? [
-      { heading: "The concise answer", body: page.answer },
+      ...(heroText === page.answer ? [] : [{ heading: "The concise answer", body: page.answer }]),
       { heading: "How the answer is applied", body: `The correct application of ${page.topic.toLowerCase()} starts with the actual project, not a generic promise. Confirm the jurisdiction, adopted code, design scope, existing conditions, required deliverables, and professional responsibility before relying on a conclusion. A responsible engineer documents assumptions and identifies information that still needs verification.` },
       { heading: "What can change the result", body: "Project type, occupancy, existing construction, site conditions, code edition, agency requirements, and changes made after the original design can change the work. A concise answer is useful for orientation, but the signed or sealed project record must reflect the current scope and the authority's process.", bullets: ["Confirm the authority having jurisdiction and current checklist", "Use current drawings, calculations, field evidence, and equipment information", "Separate engineering decisions from owner, architect, contractor, utility, and agency decisions", "Record assumptions, limitations, and questions requiring direct AHJ confirmation"] },
     ]
@@ -2754,6 +2805,17 @@ const PE_STAMP_DEEP_DIVE: Record<string, PeStampDeepDive> = {
   },
 };
 
+/** Indefinite article for a place name: "an" before a vowel sound, else "a".
+ * Initial U/Eu names pronounced with a leading "y" sound (Utah, Utica,
+ * Union, Eugene) take "a". */
+function aOrAn(name: string): string {
+  const n = name.trim();
+  if (/^eu/i.test(n)) return "a";
+  if (/^[aeio]/i.test(n)) return "an";
+  if (/^u/i.test(n)) return /^(utah|utica|union|university|use|usu)/i.test(n) ? "a" : "an";
+  return "a";
+}
+
 function peStampStatePage(state: StateData, slug: string): string {
   const links = PE_STATE_SOURCE_LINKS[slug];
   if (!links) throw new Error(`Missing official PE board links for ${slug}`);
@@ -2764,8 +2826,8 @@ function peStampStatePage(state: StateData, slug: string): string {
     .map((entry) => ({ label: entry.label, href: `/pe-stamp/${entry.slug}/` }));
   const faqs = [
     { question: `How do I verify a PE license in ${stateName}?`, answer: `Start with the official ${stateName} board and license-verification links on this page. Confirm the record directly with the board and separately confirm that the engineer is authorized for the project's discipline and scope.` },
-    { question: `Does a ${stateName} PE seal guarantee approval?`, answer: "No. A seal communicates professional responsibility for eligible engineering work. The authority having jurisdiction controls its review, comments, interpretation, and approval decision." },
-    { question: `What should a ${stateName} project team confirm before sealing?`, answer: `Confirm the project location, discipline, adopted code, AHJ submission rules, existing-condition evidence, and the engineer's ability to accept responsible charge. ${state.licensure.notes}` },
+    { question: `Does ${aOrAn(stateName)} ${stateName} PE seal guarantee approval?`, answer: "No. A seal communicates professional responsibility for eligible engineering work. The authority having jurisdiction controls its review, comments, interpretation, and approval decision." },
+    { question: `What should ${aOrAn(stateName)} ${stateName} project team confirm before sealing?`, answer: `Confirm the project location, discipline, adopted code, AHJ submission rules, existing-condition evidence, and the engineer's ability to accept responsible charge. ${state.licensure.notes}` },
     ...(deepDive?.faqs ?? []),
   ];
   return phase0ArticleFrame({
@@ -2774,7 +2836,7 @@ function peStampStatePage(state: StateData, slug: string): string {
     description: `Verify a PE license in ${stateName} with the official board resources — plus PE stamp and review-and-seal services from Apex Grid, a veteran-owned firm with 10+ licensed PEs. Same-day quotes on qualifying scopes.`,
     h1: `PE Stamp in ${stateName} — Fast Review & Seal`,
     kicker: `${stateName} · Fast PE Review & Seal`,
-    answer: `Need a PE stamp for a ${stateName} project? Send us your drawings — we'll handle the rest. Apex Grid's licensed PEs review and seal drawings nationwide: 10+ licensed PEs on a 20+ engineer team, with same-day quotes on qualifying scopes. Our engineers review your set, seal what passes, and clearly mark any required fixes, ensuring your permit submittal is clean. Every stamp is backed by our review, making it valid with the building department. Official ${stateName} board and license-verification links are included below for reference.`,
+    answer: `Need a PE stamp for ${aOrAn(stateName)} ${stateName} project? Send us your drawings — we'll handle the rest. Apex Grid's licensed PEs review and seal drawings nationwide: 10+ licensed PEs on a 20+ engineer team, with same-day quotes on qualifying scopes. Our engineers review your set, seal what passes, and clearly mark any required fixes, ensuring your permit submittal is clean. Every stamp is backed by our review, making it valid with the building department. Official ${stateName} board and license-verification links are included below for reference.`,
     sections: [
       { heading: `Official ${stateName} board and lookup links`, body: "These links are provided as starting points to the official state sources. A board's current instructions and online record control; confirm the page, status, discipline, and authorization directly before a project submission.", bullets: [`${stateName} engineering licensing board`, "Official license verification or lookup", `Project code and AHJ requirements for ${stateName}`, "Responsible engineer and scope confirmation"] },
       { heading: `How we handle your ${stateName} stamp`, body: `When your project comes in, the Apex Grid engineer assigned to it reviews the project inputs, code basis, calculations, drawings, and existing conditions, then signs and seals the documents that are ready for submittal. ${state.buildingCode.notes} ${state.licensure.notes}` },
@@ -2788,7 +2850,7 @@ function peStampStatePage(state: StateData, slug: string): string {
       { label: "PE stamp hub", href: "/pe-stamp/" },
       ...popularStateLinks,
       { label: `${stateName} engineering service area`, href: `/locations/${slug}/` },
-      { label: `Estimate a ${stateName} project`, href: `/engineering-cost-estimator/${slug}/` },
+      { label: `Estimate ${aOrAn(stateName)} ${stateName} project`, href: `/engineering-cost-estimator/${slug}/` },
     ],
     schemaType: "WebPage",
   });
@@ -2961,7 +3023,7 @@ ${breadcrumb(crumbs)}
   <div class="linkrow">${locationLinks.map((link) => `<a href="${esc(link.href)}">${esc(link.name)} engineering location guide</a>`).join("")}</div>
 </div></section>
 <section class="block"><div class="container">
-  <h2>What to send for a ${esc(state.name)} project estimate</h2>
+  <h2>What to send for ${aOrAn(state.name)} ${esc(state.name)} project estimate</h2>
   <div class="prose"><p>Start with the project address, plain-language scope, current drawings, photographs or measurements, equipment and utility information, survey or geotechnical records where relevant, adopted-code information, AHJ comments, desired deliverables, and schedule. The responsible engineer identifies gaps and confirms whether the requested work can be accepted.</p></div>
   <div class="linkrow"><a href="/pe-stamp/${esc(state.slug)}/">${esc(state.name)} PE stamp and license resources</a><a href="/answers/">Engineering answers library</a><a href="/answers/how-much-does-a-pe-stamp-cost/">PE stamp cost guidance</a></div>
 </div></section>
@@ -3179,7 +3241,7 @@ ${breadcrumb(crumbs)}
 <section class="block"><div class="container"><h2>Evidence before <em>design decisions</em></h2><div class="prose"><p>${esc(metro.editorial.documentationLens)}</p><p>${esc(metro.editorial.deliveryLens)}</p><p>For an initial review, gather the project address, scope narrative, current architectural backgrounds, existing-condition photographs or measurements, equipment information, site or geotechnical records where relevant, prior comments, and requested deliverables. The responsible professional identifies what is sufficient for the defined question.</p></div></div></section>
 <section class="block"><div class="container"><h2>2025 Census <em>source record</em></h2><div class="prose"><p>CBSA ${metro.cbsaCode} is ranked ${metro.rank} among the eligible Metro Code 2 records in the final annual 2025 BPS sheet, ordered by Total descending. “Total” is used as published by Census; it is not a forecast, project count, engineering volume, or promise of demand.</p><p><a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">View the official Census BPS workbook (${PHASE1_SERVICE_SLUGS.length ? "MSA Units Ann" : "source"})</a></p></div></div></section>
 ${phase0FaqMarkup(faqs)}
-<section class="ctaband"><div class="container"><h2>Discuss a ${esc(metro.representativeCity)} project</h2><p>Share the address, scope, drawings, existing records, authority information already available, and requested deliverables.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
+<section class="ctaband"><div class="container"><h2>Discuss ${aOrAn(metro.representativeCity)} ${esc(metro.representativeCity)} project</h2><p>Share the address, scope, drawings, existing records, authority information already available, and requested deliverables.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
 </main>`;
   const schema = {
     "@context": "https://schema.org",
@@ -5937,16 +5999,6 @@ function guidePage(page: GuidePage): string {
 
     ${breadcrumb(crumbs)}
 
-    <section class="section section--white faq">
-      <div class="container container--narrow">
-        <h2>Quick Answer</h2>
-        <details open>
-          <summary>${esc(page.h1)}</summary>
-          <div class="a">${esc(page.shortAnswer)}</div>
-        </details>
-      </div>
-    </section>
-
     ${sectionsHtml}
 
     <section class="section section--dark cta-band">
@@ -6934,7 +6986,7 @@ ${breadcrumb(crumbs)}
     `<p><strong>${esc(service.serviceSlug)}:</strong> ${esc(service.localConditions)} ${esc(service.projectTypes)}</p>`,
   ).join("")}</div></div></section>
 <section class="block"><div class="container faq"><h2>${esc(metro.name)} <em>FAQs</em></h2>${faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
-<section class="ctaband"><div class="container"><h2>Discuss a ${esc(metro.name)} project</h2><p>Send the address, scope, drawings, authority, and requested deliverable. Availability, responsible licensure, and timing are confirmed per project.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
+<section class="ctaband"><div class="container"><h2>Discuss ${aOrAn(metro.name)} ${esc(metro.name)} project</h2><p>Send the address, scope, drawings, authority, and requested deliverable. Availability, responsible licensure, and timing are confirmed per project.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
 </main>`;
   return htmlShell({
     title: `${metro.name} Engineering Services | ${expansion.stateName} | Apex Grid`,
@@ -6975,7 +7027,7 @@ ${expansion.hub.sections.map((section) => `<section class="block"><div class="co
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
 <section class="block"><div class="container faq"><h2>${esc(expansion.stateName)} <em>FAQs</em></h2>${expansion.hub.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
 <section class="block"><div class="container"><h2>Official <em>sources</em></h2><p class="note">Review the current authority, code, licensing, and environmental information before design or filing.</p><div class="linkrow">${batch2SourceLinks(expansion.hub.sources)}</div></div></section>
-<section class="ctaband"><div class="container"><h2>Start a ${esc(expansion.stateName)} project</h2><p>Send the project address, jurisdiction, scope, records, and desired deliverable. Code edition, responsible licensure, authority review, and schedule remain project-specific.</p><p><a href="/engineering-cost-estimator/${esc(expansion.stateSlug)}/">${esc(expansion.stateName)} engineering cost estimator</a></p><a class="cta" href="/contact">Request a Project Review</a></div></section>
+<section class="ctaband"><div class="container"><h2>Start ${aOrAn(expansion.stateName)} ${esc(expansion.stateName)} project</h2><p>Send the project address, jurisdiction, scope, records, and desired deliverable. Code edition, responsible licensure, authority review, and schedule remain project-specific.</p><p><a href="/engineering-cost-estimator/${esc(expansion.stateSlug)}/">${esc(expansion.stateName)} engineering cost estimator</a></p><a class="cta" href="/contact">Request a Project Review</a></div></section>
 </main>`;
   const html = htmlShell({
     title: expansion.hub.title,
@@ -7134,7 +7186,7 @@ async function main() {
   }
   const directory = loadDirectory();
   validateDirectory(directory, states);
-  writeLlmsTxt();
+  writeLlmsTxt(states, cities);
   const cityQuality = writeCityQualityReport(states, directory, cities);
   const serviceSlugs = new Set(SERVICES.map((s) => s.slug));
   for (const s of states) {
@@ -11012,8 +11064,8 @@ async function main() {
     const html = peStampStatePage(state, state.slug);
     const stateFaqs = [
       { question: `How do I verify a PE license in ${state.name}?`, answer: `Start with the official ${state.name} board and license-verification links on this page. Confirm the record directly with the board and separately confirm that the engineer is authorized for the project's discipline and scope.` },
-      { question: `Does a ${state.name} PE seal guarantee approval?`, answer: "No. A seal communicates professional responsibility for eligible engineering work. The authority having jurisdiction controls its review, comments, interpretation, and approval decision." },
-      { question: `What should a ${state.name} project team confirm before sealing?`, answer: `Confirm the project location, discipline, adopted code, AHJ submission rules, existing-condition evidence, and the engineer's ability to accept responsible charge. ${state.licensure.notes}` },
+      { question: `Does ${aOrAn(state.name)} ${state.name} PE seal guarantee approval?`, answer: "No. A seal communicates professional responsibility for eligible engineering work. The authority having jurisdiction controls its review, comments, interpretation, and approval decision." },
+      { question: `What should ${aOrAn(state.name)} ${state.name} project team confirm before sealing?`, answer: `Confirm the project location, discipline, adopted code, AHJ submission rules, existing-condition evidence, and the engineer's ability to accept responsible charge. ${state.licensure.notes}` },
     ];
     assertPhase0Page(html, `/pe-stamp/${state.slug}/`, [...stateFaqs, ...(PE_STAMP_DEEP_DIVE[state.slug]?.faqs ?? [])], `pe-stamp/${state.slug}`);
     fs.writeFileSync(path.join(dir, "index.html"), html);
@@ -12044,6 +12096,11 @@ function glossaryPage(term: GlossaryTerm): string {
     inDefinedTermSet: `${SITE}/engineering-glossary/`,
   };
 
+  // The term (H1) and its definition (lede) are real Q&A content: emit the
+  // FAQPage schema and the matching visible FAQ block, mirroring the
+  // answers template's proven pattern.
+  const termFaqs = [{ question: `What is ${term.term}?`, answer: term.definition }];
+
   const body = `
 ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
@@ -12073,6 +12130,8 @@ ${relatedTermLinks ? `<section class="block"><div class="container">
   <a class="cta" href="/engineering-glossary/" style="display:inline-block">View All Engineering Terms</a>
 </div></section>
 
+${phase0FaqMarkup(termFaqs)}
+
 <section class="ctaband"><div class="container">
   <h2>Have a Project That Involves ${esc(term.term)}?</h2>
   <p>${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}</p>
@@ -12083,7 +12142,7 @@ ${relatedTermLinks ? `<section class="block"><div class="container">
     title: `${term.term} | Engineering Glossary | Apex Grid`,
     description: `${term.definition.slice(0, 155)}`,
     canonical: `${SITE}${url}`,
-    schemaJson: [orgSchema, definitionSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [orgSchema, definitionSchema, phase0FaqSchema(termFaqs), breadcrumbSchema(crumbs)],
     body,
   });
 }
