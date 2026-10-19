@@ -3682,7 +3682,7 @@ ${breadcrumb(crumbs)}
 
 ${peStampBlock({
   placeName: state.name,
-  county: state.slug === "oregon" && svc.slug === "mep-engineering" ? "the state" : `${state.name} (statewide)`,
+  county: "the state",
   stateName: state.name,
   ahj: `the applicable ${state.name} permitting authority`,
   discipline: svc.shortName,
