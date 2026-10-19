@@ -9,6 +9,9 @@ export interface ExistingBuildingPage {
   lede: string;
   topics: string[];
   note?: string;
+  /** authored Q&A (Apex residuals 2026-10-19): visible section + FAQPage
+   *  JSON-LD are both built from this array — parity by construction. */
+  faqs?: Array<{ question: string; answer: string }>;
 }
 
 export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
@@ -28,6 +31,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Recommendations for follow-up design",
       "Pre-acquisition due diligence assessments",
       "Post-event assessments (seismic, storm, impact)",
+    ],
+    faqs: [
+      { question: "What does existing Building Condition Assessments include?", answer: "This scope covers visual assessment of structural and MEP systems, identification and documentation of deficiencies, repair priority classification, and cost guidance for capital planning." },
+      { question: "When is this service used?", answer: "A condition assessment documents the current state of a building's structural system or MEP systems — identifying deficiencies, prioritizing repairs, and providing the engineering data needed for capital planning, acquisition due diligence, or permit applications." },
+      { question: "How do I get started?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
     ],
   },
   {
