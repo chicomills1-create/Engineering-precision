@@ -5987,6 +5987,18 @@ function guidePage(page: GuidePage): string {
     )
     .join("");
 
+  // Corpus-audit parity rule: the visible FAQ answers must match the
+  // FAQPage JSON-LD exactly, so both use this condensed answer (the first
+  // sentence of the short answer). The hero lede keeps the full short
+  // answer, which is therefore no longer reproduced verbatim as the first
+  // body section.
+  const faqAnswer = (() => {
+    const text = page.shortAnswer.trim();
+    const match = text.match(/^.*?[.!?](?=\s|$)/);
+    const first = match ? match[0].trim() : text;
+    return first.length >= 40 && first.length < text.length ? first : text;
+  })();
+
   const body = `
     <div class="hero hero--page">
       <div class="hero-inner">
@@ -5998,6 +6010,16 @@ function guidePage(page: GuidePage): string {
     </div>
 
     ${breadcrumb(crumbs)}
+
+    <section class="section section--white faq">
+      <div class="container container--narrow">
+        <h2>Quick Answer</h2>
+        <details open>
+          <summary>${esc(page.h1)}</summary>
+          <div class="a">${esc(faqAnswer)}</div>
+        </details>
+      </div>
+    </section>
 
     ${sectionsHtml}
 
@@ -6016,7 +6038,7 @@ function guidePage(page: GuidePage): string {
     mainEntity: [{
       "@type": "Question",
       name: page.h1,
-      acceptedAnswer: { "@type": "Answer", text: page.shortAnswer },
+      acceptedAnswer: { "@type": "Answer", text: faqAnswer },
     }],
   };
 
