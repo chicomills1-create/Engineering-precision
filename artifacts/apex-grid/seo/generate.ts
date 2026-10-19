@@ -1421,6 +1421,36 @@ function assertPhase0Page(html: string, canonical: string, faqs: Array<{ questio
   }
 }
 
+
+type VisualMotif = "structural" | "mep" | "civil" | "stamping" | "location" | "guide";
+const VISUAL_MOTIFS: Record<VisualMotif, { file: string; alt: string }> = {
+  structural: { file: "diagram-structural.svg", alt: "Illustrative diagram of a structural load path: roof and floor loads travel through beams and columns down to the foundation footings." },
+  mep: { file: "diagram-mep.svg", alt: "Illustrative diagram of building MEP systems: ductwork with diffusers, an electrical panel with conduit, and piping runs." },
+  civil: { file: "diagram-civil.svg", alt: "Illustrative diagram of a civil site plan: grading contours around a building pad, a roadway, and storm drainage." },
+  stamping: { file: "diagram-stamping.svg", alt: "Illustrative diagram of the professional engineer review and seal workflow: drawings are reviewed against a checklist, sealed by a licensed PE, and issued as a permit set." },
+  location: { file: "diagram-location.svg", alt: "Illustrative map diagram marking an Apex Grid Engineering service location with a map pin over a street grid." },
+  guide: { file: "diagram-guide.svg", alt: "Illustrative engineering blueprint diagram with dimension lines, a framing elevation sketch, and a title block." },
+};
+function familyVisual(motif: VisualMotif, altSuffix?: string): string {
+  const m = VISUAL_MOTIFS[motif];
+  const alt = altSuffix ? `${m.alt} ${altSuffix}` : m.alt;
+  return `<figure class="family-visual"><img src="/images/diagrams/${m.file}" alt="${esc(alt)}" width="1200" height="520" loading="lazy" decoding="async"></figure>`;
+}
+function motifForText(text: string): VisualMotif {
+  const t = text.toLowerCase();
+  if (/(stamp|seal|plan check|permit set|pe review)/.test(t)) return "stamping";
+  if (/(beam|column|foundation|footing|framing|load path|seismic|retaining wall|truss|joist|structural|concrete|masonry|shear wall|moment frame|lintel|slab|pier|grade beam|steel design|wood design)/.test(t)) return "structural";
+  if (/(hvac|duct|electrical|panel|plumbing|piping|mechanical|lighting|conduit|fire protection|fire sprinkler|\bmep\b|energy code|title 24|comcheck|generator|switchgear|transformer|boiler|chiller|air handler|exhaust|ventilation|water heater|gas line|load calculation)/.test(t)) return "mep";
+  if (/(grading|drainage|stormwater|site plan|civil site|paving|sidewalk|retention pond|detention|erosion|topograph|subdivision|driveway|parking lot|septic|culvert)/.test(t)) return "civil";
+  return "guide";
+}
+function motifForDiscipline(slug: string): VisualMotif {
+  if (slug.startsWith("structural")) return "structural";
+  if (slug.startsWith("civil") || slug.startsWith("geotechnical")) return "civil";
+  if (slug.startsWith("mep") || slug.startsWith("mechanical") || slug.startsWith("electrical") || slug.startsWith("plumbing")) return "mep";
+  return "guide";
+}
+
 function phase0ArticleFrame(
   opts: {
     canonical: string;
@@ -1439,6 +1469,7 @@ function phase0ArticleFrame(
     directAnswer?: string;
     facts?: Array<{ label: string; value: string }>;
     howTo?: boolean;
+    visual?: VisualMotif;
   },
 ): string {
   const crumbs = [{ name: "Home", href: "/" }, { name: opts.h1 }];
@@ -1495,6 +1526,7 @@ function phase0ArticleFrame(
   const body = `<main ${opts.marker ? `data-${opts.marker}="true"` : 'data-phase0="true"'}>
   ${breadcrumb(crumbs)}
   ${hero}
+  ${opts.visual ? familyVisual(opts.visual) : ""}
   ${opts.facts?.length ? `<section class="block"><div class="container"><h2>What facts should you use to plan this scope?</h2><div class="prose"><table><thead><tr><th>Planning fact</th><th>Project-specific value</th></tr></thead><tbody>${opts.facts.map((fact) => `<tr><th scope="row">${esc(fact.label)}</th><td>${esc(fact.value)}</td></tr>`).join("")}</tbody></table></div></div></section>` : ""}
   ${sections.map((section, index) => `<section class="block" id="step-${index + 1}"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p>${section.bullets ? `<ul class="scope">${section.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul>` : ""}</div></div></section>`).join("")}
   ${opts.links?.length ? `<section class="block"><div class="container"><h2>${opts.directAnswer ? "Which related engineering resources can help?" : "Related Engineering Resources"}</h2><div class="linkrow">${opts.links.map((link) => `<a href="${esc(link.href)}"${/^https:\/\//.test(link.href) ? ' rel="noopener noreferrer"' : ""}>${esc(link.label)}</a>`).join("")}</div></div></section>` : ""}
@@ -1561,6 +1593,7 @@ function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
     directAnswer: "cluster" in page ? undefined : page.directAnswer,
     facts: "cluster" in page ? undefined : page.facts,
     howTo: "cluster" in page ? undefined : page.howTo,
+    visual: motifForText(`${"cluster" in page ? page.cluster : page.topic} ${page.h1}`),
   });
 }
 
