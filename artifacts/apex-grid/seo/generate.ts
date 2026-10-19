@@ -3465,6 +3465,15 @@ function priorityMoneyLinks(
   return links.join("");
 }
 
+/** Oregon MEP markets fallback — verified live 2026-10-18 (all five targets HTTP 200).
+ *  CITY_PRIORITIES carries no Oregon entries, so priorityMoneyLinks() returns ""
+ *  for Oregon and the Oregon MEP service page rendered an empty markets link row.
+ *  Eugene, Bend, and Medford are directory cities (no curated CityData), so they
+ *  can never be produced by priorityMoneyLinks(); Portland and Salem are curated.
+ *  This fallback mirrors the sibling-state pattern (same href shape and label
+ *  format: "MEP engineer in <City>") and is scoped to the Oregon MEP page only. */
+const OREGON_MEP_MARKET_LINKS = `<a href="/locations/oregon/portland/mep-engineering/">MEP engineer in Portland</a><a href="/locations/oregon/eugene/mep-engineering/">MEP engineer in Eugene</a><a href="/locations/oregon/salem/mep-engineering/">MEP engineer in Salem</a><a href="/locations/oregon/bend/mep-engineering/">MEP engineer in Bend</a><a href="/locations/oregon/medford/mep-engineering/">MEP engineer in Medford</a>`;
+
 function servicePage(state: StateData, svc: ServiceDef, allStates: StateData[], cities: CityData[]): string {
   const url = `/locations/${state.slug}/${svc.slug}/`;
   const crumbs = [
@@ -3475,6 +3484,8 @@ function servicePage(state: StateData, svc: ServiceDef, allStates: StateData[], 
   ];
   const otherSvcs = SERVICES.filter((x) => x.slug !== svc.slug);
   const nearby = allStates.filter((s) => s.slug !== state.slug).slice(0, 8);
+  const topMarketLinks = priorityMoneyLinks(state, cities, [svc.slug], 6)
+    || (state.slug === "oregon" && svc.slug === "mep-engineering" ? OREGON_MEP_MARKET_LINKS : "");
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -3503,7 +3514,7 @@ ${breadcrumb(crumbs)}
 
 ${peStampBlock({
   placeName: state.name,
-  county: `${state.name} (statewide)`,
+  county: state.slug === "oregon" && svc.slug === "mep-engineering" ? "the state" : `${state.name} (statewide)`,
   stateName: state.name,
   ahj: `the applicable ${state.name} permitting authority`,
   discipline: svc.shortName,
@@ -3559,7 +3570,7 @@ ${peStampBlock({
 <section class="block"><div class="container">
   <h2>Top ${esc(svc.shortName)} Markets in <em>${esc(state.name)}</em></h2>
   <p class="prose">Our highest-demand markets for ${esc(svc.shortName.toLowerCase())} engineering in ${esc(state.name)}.</p>
-  <div class="linkrow">${priorityMoneyLinks(state, cities, [svc.slug], 6)}</div>
+  <div class="linkrow">${topMarketLinks}</div>
 </div></section>
 
 <section class="ctaband"><div class="container">
