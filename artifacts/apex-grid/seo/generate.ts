@@ -3051,6 +3051,7 @@ ${breadcrumb(crumbs)}
   <h1>${esc(state.name)} Engineering Cost Estimator</h1>
   <p class="lede">Understand the project inputs that shape a responsible structural, MEP, civil, or energy engineering estimate in ${esc(state.name)}. This page explains scope, code, climate, permitting, and professional-review variables; it does not invent a rate or promise an outcome.</p>
 </div></section>
+${familyVisual("location", `Service location shown: ${state.name}.`)}
 <section class="block"><div class="container">
   <h2>How engineering estimates are scoped in ${esc(state.name)}</h2>
   <div class="prose"><p>${esc(state.narratives.mep)} ${esc(state.narratives.structural)}</p><p>A useful estimate starts with the engineering question and the records available to answer it. Cost inputs can include the disciplines requested, building size and occupancy, new versus existing conditions, drawing and calculation quality, field verification, equipment and utility information, site or geotechnical records, permit deliverables, coordination, revisions, and schedule. Apex Grid confirms those assumptions during intake instead of publishing a made-up ${esc(state.name)} rate.</p></div>
@@ -3797,6 +3798,7 @@ ${breadcrumb(crumbs)}
   <h1>${esc(svc.h1)} <span class="dim">in ${esc(state.name)}</span></h1>
   <p class="lede">${esc(svc.intro)}</p>
 </div></section>
+${familyVisual(motifForText(`${svc.name} ${svc.h1}`), `Service location shown: ${state.name}.`)}
 
 ${peStampBlock({
   placeName: state.name,
@@ -3901,6 +3903,7 @@ ${breadcrumb(crumbs)}
   <h1>Engineering Services <span class="dim">in ${esc(state.name)}</span></h1>
   <p class="lede">MEP, structural, civil, and energy-compliance engineering for ${esc(state.name)} projects — designed to the ${esc(state.buildingCode.baseCode)} and the realities of ${esc(state.metros.slice(0, 3).join(", "))} permitting.</p>
 </div></section>
+${familyVisual("location", `Service location shown: ${state.name}.`)}
 <section class="block"><div class="container">
   <h2>Services in <em>${esc(state.name)}</em></h2>
   <div class="grid2">
@@ -4001,6 +4004,7 @@ ${breadcrumb(crumbs)}
   <h1>Service <span class="dim">Areas</span></h1>
   <p class="lede">${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE}</p>
 </div></section>
+${familyVisual("location")}
 <section class="block"><div class="container">
   <h2>Complete <em>Licensing Coverage</em></h2>
   <p>${LICENSED_STATES_TEXT}.</p>
@@ -5754,6 +5758,8 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
 
     ${breadcrumb(crumbs)}
 
+    ${familyVisual("location", `Service location shown: ${page.cityName}, ${page.stateName}.`)}
+
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>What We Engineer</h2>
@@ -7193,6 +7199,7 @@ function batch2StatePage(expansion: Batch2StateExpansion, stateCities: CityData[
   const body = `<main>
 ${breadcrumb(crumbs)}
 <section class="hero"><div class="container"><p class="kicker">${esc(expansion.hub.kicker)}</p><h1>${esc(expansion.hub.h1)}</h1><p class="lede">${esc(expansion.hub.lede)}</p></div></section>
+${familyVisual("location", `Service location shown: ${expansion.stateName}.`)}
 ${expansion.hub.sections.map((section) => `<section class="block"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p></div></div></section>`).join("")}
 <section class="block"><div class="container"><h2>Five researched <em>local services</em></h2><p class="prose">Each linked service is organized around the selected metro’s permit authority, code context, local physical conditions, typical project types, permit steps, official references, and responsible-professional boundaries. These pages are information resources, not local-office claims or guarantees of licensure, approval, schedule, or construction outcome.</p><div class="linkrow">${serviceLinks}</div></div></section>
 <section class="block"><div class="container"><h2>${esc(expansion.stateName)} <em>metros and services</em></h2><div class="grid2">${metroLinks}</div></div></section>
@@ -11978,6 +11985,7 @@ ${breadcrumb(crumbs)}
   <h1>${esc(svc.h1)} <span class="dim">in ${esc(city.name)}</span></h1>
   <p class="lede">${esc(svc.intro)}</p>
 </div></section>
+${familyVisual("location", `Service location shown: ${city.name}, ${state.name}.`)}
 
 <section class="block"><div class="container">
   <h2>${esc(svc.shortName)} Engineering for <em>${esc(city.name)}</em> Projects</h2>
@@ -12089,6 +12097,7 @@ ${peStampBlock({
   stateName: state.name,
   ahj: city.ahj.office,
 })}
+${familyVisual("location", `Service location shown: ${city.name}, ${state.name}.`)}
 <section class="block"><div class="container">
   <h2>Services in <em>${esc(city.name)}</em></h2>
   <div class="grid2">
