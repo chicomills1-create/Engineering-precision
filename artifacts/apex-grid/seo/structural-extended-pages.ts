@@ -13,6 +13,9 @@ export interface StructuralExtendedPage {
   lede: string;
   topics: string[];
   ctaText: string;
+  /** authored Q&A (Apex residuals 2026-10-19): visible section + FAQPage
+   *  JSON-LD are both built from this array — parity by construction. */
+  faqs?: Array<{ question: string; answer: string }>;
 }
 
 export const STRUCTURAL_EXTENDED_PAGES: StructuralExtendedPage[] = [
@@ -38,6 +41,12 @@ export const STRUCTURAL_EXTENDED_PAGES: StructuralExtendedPage[] = [
       "Coordination with architectural and MEP engineers",
     ],
     ctaText: "Send Us Your Existing Building Plans",
+    faqs: [
+      { question: "What does seismic Retrofit Engineering for Existing Buildings include?", answer: "This scope covers existing condition review and seismic vulnerability assessment, wall bracing and shear wall additions, foundation upgrades and anchorage, and diaphragm strengthening and chord continuity." },
+      { question: "Is this a standalone service?", answer: "We provide seismic Retrofit Engineering for Existing Buildings as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get started?", answer: "Use the contact page to send Us Your Existing Building Plans — or send whatever project information you have and we'll identify what's needed." },
+    ],
   },
   {
     slug: "structural-repairs",
