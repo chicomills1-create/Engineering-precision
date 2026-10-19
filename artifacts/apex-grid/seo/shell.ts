@@ -368,7 +368,7 @@ function proofApplies(canonical: string, body: string): boolean {
     /* keep raw canonical */
   }
   if (PROOF_EXCLUDED_PREFIXES.some((p) => path.startsWith(p))) return false;
-  return body.includes('class="family-visual"');
+  return body.includes('class="family-visual"') || path.startsWith("/industries/");
 }
 
 export function htmlShell(opts: {
