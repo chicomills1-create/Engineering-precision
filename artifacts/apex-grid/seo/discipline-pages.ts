@@ -14,6 +14,9 @@ export interface DisciplineSubpage {
   lede: string;
   scope: string[];
   deliverables: string[];
+  /** authored Q&A (Apex residuals 2026-10-19): visible section + FAQPage
+   *  JSON-LD are both built from this array — parity by construction. */
+  faqs?: Array<{ question: string; answer: string }>;
 }
 
 export interface DisciplineHub {
@@ -26,6 +29,9 @@ export interface DisciplineHub {
   intro: string;
   capabilities: string[];
   subpages: DisciplineSubpage[];
+  /** authored Q&A (Apex residuals 2026-10-19): visible section + FAQPage
+   *  JSON-LD are both built from this array — parity by construction. */
+  faqs?: Array<{ question: string; answer: string }>;
 }
 
 export const DISCIPLINE_HUBS: DisciplineHub[] = [
@@ -80,6 +86,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Foundation and footing design",
           "Connection details and special inspection requirements",
           "Plan check comment response support",
+        ],
+        faqs: [
+          { question: "What does commercial Structural Engineering cover?", answer: "This scope covers commercial building structural system design — steel, concrete, wood, tenant improvement structural modifications and wall removals, rooftop HVAC and equipment structural support, and storefront and facade structural engineering." },
+          { question: "What deliverables come with commercial Structural Engineering?", answer: "Deliverables include pE-stamped structural drawings, structural engineering calculations, foundation and footing design, connection details and special inspection requirements, and plan check comment response support." },
+          { question: "Can this service stand alone?", answer: "Commercial Structural Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -434,6 +446,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
         ],
       },
     ],
+    faqs: [
+      { question: "What structural engineering services does Apex Grid provide?", answer: "Our structural engineering work includes new construction structural system design — steel, concrete, wood, masonry, tenant improvement and building modification structural engineering, load-bearing wall removal, openings, and header engineering, and rooftop equipment structural support and anchorage." },
+      { question: "Which focused structural engineering services are available?", answer: "Focused services include Commercial Structural Engineering, Industrial Structural Engineering, Multifamily Structural Engineering, Seismic Structural Engineering, and Foundation Structural Engineering — each with its own service page describing its scope and deliverables." },
+      { question: "Can structural engineering be provided on its own?", answer: "Yes — we provide structural engineering as a standalone service or as part of a coordinated multi-discipline package. Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get a fee proposal?", answer: "Send us your drawings or describe your project — we respond with a fee proposal within one business day." },
+    ],
   },
 
   // ─── MEP ENGINEERING ──────────────────────────────────────────────────────
@@ -513,6 +531,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Gas piping design and BTU load calculations",
           "Grease interceptor sizing documentation",
           "Complete restaurant MEP permit package",
+        ],
+        faqs: [
+          { question: "What does restaurant MEP Engineering cover?", answer: "This scope covers commercial kitchen exhaust hood engineering — Type I and Type II, make-up air system design and balancing, gas piping design for commercial cooking equipment, and grease interceptor sizing and plumbing coordination." },
+          { question: "What deliverables come with restaurant MEP Engineering?", answer: "Deliverables include pE-stamped restaurant MEP permit drawings, kitchen exhaust and make-up air calculations, gas piping design and BTU load calculations, grease interceptor sizing documentation, and complete restaurant MEP permit package." },
+          { question: "Can this service stand alone?", answer: "Restaurant MEP Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
