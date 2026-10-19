@@ -57,6 +57,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Permit submittals for buildings without original drawings",
     ],
     note: "Working without original drawings adds engineering time and sometimes cost — but it doesn't make a project impossible. Contact us with what you have and we'll tell you what additional information is needed.",
+    faqs: [
+      { question: "What does structural Engineering When Existing Drawings Aren't Available include?", answer: "This scope covers field verification process and documentation requirements, contractor-provided photos and measurements, exploratory openings to expose concealed framing, and city building department records requests." },
+      { question: "When is this service used?", answer: "A large percentage of existing building projects have no drawings on file." },
+      { question: "What else should I know about this service?", answer: "Working without original drawings adds engineering time and sometimes cost — but it doesn't make a project impossible. Contact us with what you have and we'll tell you what additional information is needed." },
+      { question: "What should I send to get a proposal?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+    ],
   },
   {
     slug: "field-verification",
@@ -73,6 +79,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Photographic documentation standards",
       "Coordinate with contractor for access and openings",
       "Field report production for engineering basis",
+    ],
+    faqs: [
+      { question: "What does engineering Field Verification for Existing Buildings include?", answer: "This scope covers framing exposure and member measurement, connection inspection and documentation, foundation type and condition verification, and MEP system identification and capacity assessment." },
+      { question: "When is this service used?", answer: "Field verification collects the physical data about an existing building that engineering design depends on — member sizes, connections, spans, and conditions — directly from the building itself." },
+      { question: "How does an engagement begin?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
     ],
   },
   {
@@ -92,6 +104,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "When a professional engineer site visit is required instead",
     ],
     note: "Contractor-provided field information supports engineering review and does not replace a licensed professional engineer's site visit in all circumstances. The engineer determines whether additional direct observation is required.",
+    faqs: [
+      { question: "What does contractor-Assisted Field Verification for Engineering include?", answer: "This scope covers what photos to take and how to label them, measuring framing members — steel, wood, concrete, documenting connections and bearing conditions, and recording floor plan dimensions and wall locations." },
+      { question: "When is this service used?", answer: "When contractors provide high-quality field documentation — photographs, measured dimensions, framing member sizes from exposed conditions — this information can support structural engineering remotely for many project types." },
+      { question: "What else should I know about this service?", answer: "Contractor-provided field information supports engineering review and does not replace a licensed professional engineer's site visit in all circumstances. The engineer determines whether additional direct observation is required." },
+      { question: "What happens after I reach out?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+    ],
   },
   {
     slug: "structural-cracks",
@@ -109,6 +127,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Monitoring cracks vs. repairing them",
       "When to call a structural engineer immediately",
       "Written engineering report for insurance or permit",
+    ],
+    faqs: [
+      { question: "What does structural Engineering Evaluation of Building Cracks include?", answer: "This scope covers crack pattern interpretation — structural vs. cosmetic, diagonal cracks at openings — what they mean, stair-step cracking in masonry and CMU, and horizontal cracks in foundation or retaining walls." },
+      { question: "When is this service used?", answer: "Building cracks range from cosmetic shrinkage cracking to indicators of significant structural movement." },
+      { question: "How do I get started?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
     ],
   },
   {
@@ -128,6 +152,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Foundation modification for added loads or additions",
       "Engineering report for insurance or due diligence",
     ],
+    faqs: [
+      { question: "What does structural Evaluation of Foundation Issues include?", answer: "This scope covers foundation settlement and differential settlement, expansive soil effects on foundations, lateral movement in basement and retaining walls, and foundation crack evaluation." },
+      { question: "When is this service used?", answer: "Foundation movement — settlement, heave, lateral movement, or deterioration — can manifest as building distress symptoms well above grade." },
+      { question: "What should I send to get a proposal?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
+    ],
   },
   {
     slug: "settlement",
@@ -146,6 +176,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Monitoring programs for progressive settlement",
       "Engineering report production",
     ],
+    faqs: [
+      { question: "What does building Settlement Evaluation and Structural Engineering include?", answer: "This scope covers differential vs. uniform settlement, settlement causes — poor soils, inadequate bearing, consolidation, visual indicators of settlement distress, and elevation survey data interpretation." },
+      { question: "When is this service used?", answer: "Building settlement — the gradual or sudden sinking of foundations into the soil — can cause structural damage, operational problems, and safety concerns." },
+      { question: "How does an engagement begin?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
+    ],
   },
   {
     slug: "roof-modifications",
@@ -162,6 +198,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Roofing system load change evaluation (added insulation, ballast)",
       "Structural repair design for damaged roof framing",
       "Snow load and drift evaluation for modified roofs",
+    ],
+    faqs: [
+      { question: "What does structural Engineering for Roof Modifications include?", answer: "This scope covers existing roof framing capacity evaluation, new rooftop equipment structural support, roof penetration structural design, and solar PV mounting structure design." },
+      { question: "When is this service used?", answer: "Modifying an existing roof — adding equipment, cutting new penetrations, installing solar, changing roofing systems, or adding a rooftop addition — requires structural engineering to verify the existing framing can handle the change." },
+      { question: "What happens after I reach out?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
     ],
   },
   {
@@ -181,6 +223,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Existing roof framing evaluation",
       "Permit calculations and detail drawings",
     ],
+    faqs: [
+      { question: "What does structural Evaluation for Rooftop Equipment include?", answer: "This scope covers RTU replacement and new installation engineering, generator and transformer rooftop structural support, solar PV mounting structure engineering, and telecom equipment and antenna structural support." },
+      { question: "When is this service used?", answer: "Adding or replacing equipment on an existing roof imposes loads on the structural framing below." },
+      { question: "How do I get started?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
+    ],
   },
   {
     slug: "wall-openings",
@@ -199,6 +247,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Permit drawings for wall removal scope",
       "Coordination with architectural intent",
     ],
+    faqs: [
+      { question: "What does structural Engineering for Existing Wall Openings include?", answer: "This scope covers load-bearing wall identification, beam and header sizing for new openings, post and column design at beam endpoints, and foundation capacity for concentrated loads." },
+      { question: "When is this service used?", answer: "Creating new openings or widening existing openings in load-bearing walls requires structural engineering — confirming the wall's structural role, sizing the replacement beam or header, and designing the load path through the structure below." },
+      { question: "What should I send to get a proposal?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
+    ],
   },
   {
     slug: "repair-design",
@@ -216,6 +270,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Connection repair and reinforcement",
       "Permit drawings for repair scope",
       "Construction observation during repair",
+    ],
+    faqs: [
+      { question: "What does engineering Design for Existing Building Repairs include?", answer: "This scope covers cracked concrete evaluation and repair design, wood framing repair for rot, damage, or overload, steel corrosion assessment and repair, and masonry repair and reinforcement." },
+      { question: "When is this service used?", answer: "Structural repairs in existing buildings require engineering design — not just contractor judgment." },
+      { question: "How does an engagement begin?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
     ],
   },
 
@@ -239,6 +299,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "When city records are sufficient vs. when field verification is required",
     ],
     note: "City records vary in completeness and may not reflect field-verified as-built conditions. Engineering based on city records is typically supplemented with field verification for critical structural elements.",
+    faqs: [
+      { question: "What does structural Engineering From City Building Department Records include?", answer: "This scope covers building department public records request process, types of records typically available — permits, plans, inspections, partial drawing recovery and engineering basis documentation, and limitations of city records — incomplete, damaged, or missing files." },
+      { question: "When is this service used?", answer: "City and county building departments maintain permit records, plan sets, and inspection histories for buildings constructed under their jurisdiction." },
+      { question: "What else should I know about this service?", answer: "City records vary in completeness and may not reflect field-verified as-built conditions. Engineering based on city records is typically supplemented with field verification for critical structural elements." },
+      { question: "What happens after I reach out?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+    ],
   },
   {
     slug: "from-contractor-photos",
@@ -258,6 +324,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "How photo packages are reviewed and used by the engineer",
     ],
     note: "Photo-based engineering review requires systematic, complete documentation. Incomplete photo sets may require supplemental field verification or a professional site visit before engineering can proceed.",
+    faqs: [
+      { question: "What does structural Engineering From Contractor Photos include?", answer: "This scope covers what photos to take and why — framing, connections, dimensions, how to measure and document framing member sizes, photographing connections — beam-to-column, beam-to-wall, holdowns, and documenting floor plan dimensions and wall locations." },
+      { question: "When is this service used?", answer: "When contractors open walls, ceilings, or floors to expose existing framing during demolition or rough-in, the information documented in photographs can support structural engineering decisions remotely — avoiding the cost and delay of a separate engineer site visit." },
+      { question: "What else should I know about this service?", answer: "Photo-based engineering review requires systematic, complete documentation. Incomplete photo sets may require supplemental field verification or a professional site visit before engineering can proceed." },
+      { question: "How do I get started?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+    ],
   },
   {
     slug: "site-visit-when-required",
@@ -275,6 +347,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Coordination with contractor to expose framing before visit",
       "Site visit report and engineering documentation",
       "Timing site visits relative to construction and permit schedules",
+    ],
+    faqs: [
+      { question: "What does when a Structural Engineer Needs a Site Visit include?", answer: "This scope covers conditions that typically require a site visit — complex framing, inaccessible areas, when contractor documentation is sufficient to avoid a site visit, AHJ requirements for field observation on specific project types, and what an engineer observes and documents during a site visit." },
+      { question: "When is this service used?", answer: "A structural engineer site visit may be required when existing conditions are complex, when contractor documentation is insufficient, when the AHJ requires direct observation, or when the engineering decision depends on directly observed conditions that cannot be reliably communicated through photos and measurements alone." },
+      { question: "What should I send to get a proposal?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
     ],
   },
   {
@@ -294,6 +372,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Cost and schedule implications of exploratory openings",
       "Engineering basis documentation from exploratory opening findings",
     ],
+    faqs: [
+      { question: "What does exploratory Openings for Existing Building Engineering include?", answer: "This scope covers when exploratory openings are required for structural engineering, how to coordinate exploratory opening scope with the contractor, location selection — where to open for maximum structural information, and documentation of exposed framing during exploratory openings." },
+      { question: "When is this service used?", answer: "When existing drawings are unavailable and visual observation from accessible areas is insufficient, exploratory openings — contractor-cut access holes in drywall, ceilings, or flooring — expose concealed framing and connections for engineering documentation." },
+      { question: "How does an engagement begin?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
+    ],
   },
   {
     slug: "existing-roof-framing-evaluation",
@@ -311,6 +395,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Framing damage and deficiency identification",
       "Reinforcement design for insufficient capacity",
       "Documentation of existing roof framing conditions",
+    ],
+    faqs: [
+      { question: "What does existing Roof Framing Engineering Evaluation include?", answer: "This scope covers roof framing type identification — wood joists, trusses, steel, concrete, framing capacity evaluation for added loads, rooftop equipment load compatibility assessment, and solar PV mounting load evaluation." },
+      { question: "When is this service used?", answer: "Existing roof framing must be evaluated before adding loads, cutting openings, or modifying the framing system." },
+      { question: "What happens after I reach out?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
     ],
   },
   {
@@ -330,6 +420,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Floor deflection evaluation for existing conditions",
       "Reinforcement design for insufficient floor capacity",
     ],
+    faqs: [
+      { question: "What does existing Floor Framing Engineering Evaluation include?", answer: "This scope covers floor framing type identification — wood, steel, concrete, allowable floor load capacity calculation, added equipment load compatibility evaluation, and mezzanine and elevated platform support evaluation." },
+      { question: "When is this service used?", answer: "Before adding heavy equipment, mezzanines, elevated storage, or occupancy changes, existing floor framing must be evaluated for structural capacity." },
+      { question: "How do I get started?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
+    ],
   },
   {
     slug: "existing-masonry-evaluation",
@@ -347,6 +443,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Masonry deterioration and moisture damage assessment",
       "Masonry repair and reinforcement design",
       "Seismic evaluation of unreinforced masonry walls",
+    ],
+    faqs: [
+      { question: "What does existing Masonry Wall Engineering Evaluation include?", answer: "This scope covers CMU and brick wall structural role identification, masonry wall opening and lintel engineering, masonry crack pattern evaluation and classification, and masonry wall out-of-plane and in-plane capacity." },
+      { question: "When is this service used?", answer: "Masonry walls — concrete masonry units (CMU), brick, and block — behave differently from wood and steel framing and require specific engineering expertise when being modified, assessed for new openings, or evaluated for structural condition." },
+      { question: "What should I send to get a proposal?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
     ],
   },
   {
@@ -366,6 +468,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Arc flash study update requirements for modifications",
       "Engineering documentation for permit and utility coordination",
     ],
+    faqs: [
+      { question: "What does existing Electrical Service Engineering Evaluation include?", answer: "This scope covers existing service capacity evaluation — amps, voltage, configuration, panel condition and code compliance review, available circuit and breaker capacity assessment, and load study for proposed electrical additions." },
+      { question: "When is this service used?", answer: "Before adding significant electrical loads — new equipment, EV charging, expanded tenant space, or system upgrades — the existing electrical service capacity must be evaluated." },
+      { question: "How does an engagement begin?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
+    ],
   },
   {
     slug: "existing-hvac-system-evaluation",
@@ -383,6 +491,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Energy performance baseline assessment",
       "Coordination with existing controls and automation systems",
       "Engineering basis for replacement or modification design",
+    ],
+    faqs: [
+      { question: "What does existing HVAC System Engineering Evaluation include?", answer: "This scope covers existing equipment inventory and capacity documentation, HVAC system age, condition, and remaining useful life assessment, capacity evaluation for new or expanded occupancy, and ductwork condition and distribution evaluation." },
+      { question: "When is this service used?", answer: "Understanding the existing HVAC system's capacity, condition, and limitations is essential before planning modifications, additions, or tenant changes." },
+      { question: "What happens after I reach out?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
     ],
   },
   {
@@ -402,6 +516,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Water heater capacity and condition assessment",
       "Engineering documentation for permit applications",
     ],
+    faqs: [
+      { question: "What does existing Plumbing System Engineering Evaluation include?", answer: "This scope covers existing domestic water service capacity and pressure assessment, sanitary drainage system capacity evaluation, gas service capacity review for added equipment, and plumbing fixture count and fixture unit calculation." },
+      { question: "When is this service used?", answer: "Modifying a commercial building's use, expanding the occupancy, or changing plumbing fixture counts requires evaluating whether the existing plumbing system can support the change." },
+      { question: "How do I get started?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
+    ],
   },
   {
     slug: "seismic-retrofit-engineering",
@@ -420,6 +540,12 @@ export const EXISTING_BUILDING_PAGES: ExistingBuildingPage[] = [
       "Non-structural component seismic anchorage design",
       "Seismic retrofit permit drawings and calculations",
     ],
+    faqs: [
+      { question: "What does seismic Retrofit Structural Engineering include?", answer: "This scope covers existing seismic system evaluation — shear walls, frames, diaphragms, seismic deficiency identification and classification, retrofit design — added shear walls, collectors, drag struts, and foundation upgrade engineering for seismic improvements." },
+      { question: "When is this service used?", answer: "Seismic retrofit improves the earthquake resistance of existing buildings that were designed to earlier, less stringent seismic codes." },
+      { question: "What should I send to get a proposal?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
+    ],
   },
 ];
 
@@ -428,4 +554,10 @@ export const EXISTING_BUILDING_HUB = {
   description: "Structural condition assessments, renovation engineering, field verification, repair design, and modification engineering for existing commercial buildings.",
   h1: "Engineering for Existing Buildings",
   lede: "Existing buildings are the majority of our work. We specialize in evaluating what's already there, engineering what needs to change, and producing the documentation to get it permitted and built.",
+  faqs: [
+    { question: "What existing-building services does Apex Grid provide?", answer: "Structural condition assessments, renovation engineering, field verification, repair design, and modification engineering for existing commercial buildings." },
+    { question: "I don't have drawings for my building. Can you still help?", answer: "No drawings? No problem. Send photos, measurements, and a project description. We'll review what you have and tell you what engineering is needed." },
+    { question: "What kind of work do these services cover?", answer: "Existing buildings are the majority of our work. We specialize in evaluating what's already there, engineering what needs to change, and producing the documentation to get it permitted and built." },
+    { question: "How do I get started?", answer: "Send us what you have — drawings, photos, or just a description — through the contact page." },
+  ],
 };
