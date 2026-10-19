@@ -35,5 +35,10 @@
   "/answers/911-dispatch-design/": "/answers/911-center-design/",
   "/answers/cold-storage-warehouse-engineering/": "/answers/cold-storage-design/",
   "/answers/cold-storage-warehouse-design/": "/answers/cold-storage-design/",
-  "/answers/cold-storage-facility-design/": "/answers/cold-storage-design/"
+  "/answers/cold-storage-facility-design/": "/answers/cold-storage-design/",
+  "/licensing/": "/licensing-service-coverage/",
+  "/services/energy-code-compliance/": "/services/energy-compliance/",
+  "/industries/agriculture/geotechnical-engineering/": "/industries/agriculture-cannabis-facility-engineering/",
+  "/industries/agriculture/structural-engineering/": "/industries/agriculture-cannabis-facility-engineering/",
+  "/locations/georgia/athens/": "/locations/georgia/"
 }
