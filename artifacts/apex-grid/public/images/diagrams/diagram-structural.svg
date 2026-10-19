@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-label="Structural load path diagram">
+<rect x="1" y="1" width="1198" height="518" fill="#0d0d0d" stroke="#2a2a2a" stroke-width="2"/>
+<g stroke="#3a3a3a" stroke-width="1"><path d="M0 65H1200M0 130H1200M0 195H1200M0 260H1200M0 325H1200M0 390H1200M0 455H1200M65 0V520M130 0V520M195 0V520M260 0V520M325 0V520M390 0V520M455 0V520M520 0V520M585 0V520M650 0V520M715 0V520M780 0V520M845 0V520M910 0V520M975 0V520M1040 0V520M1105 0V520"/></g>
+<text x="48" y="52" font-family="sans-serif" font-size="21" letter-spacing="4" fill="#8a8a8a">LOAD PATH</text>
+<g stroke="#d9d9d9" stroke-width="5" fill="none">
+<path d="M300 150H900"/>
+<path d="M300 300H900"/>
+<path d="M380 150V440M820 150V440"/>
+<path d="M380 300L820 440M820 300L380 440" stroke-width="2.5"/>
+</g>
+<g stroke="#d9d9d9" stroke-width="5"><path d="M340 440H420M780 440H860M300 440H900" /></g>
+<g fill="#d92323">
+<path d="M470 84l14 26h-28z"/><path d="M586 84l14 26h-28z"/><path d="M702 84l14 26h-28z"/>
+<path d="M366 356l14 26h-28z"/><path d="M806 356l14 26h-28z"/>
+</g>
+<g font-family="sans-serif" font-size="17" fill="#8a8a8a">
+<text x="916" y="144">ROOF BEAM</text>
+<text x="916" y="294">FLOOR BEAM</text>
+<text x="916" y="380">COLUMN</text>
+<text x="916" y="446">FOOTING</text>
+</g>
+<g stroke="#8a8a8a" stroke-width="1.5"><path d="M900 140h12M900 290h12M900 372h12M900 438h12"/></g>
+<text x="48" y="486" font-family="sans-serif" font-size="16" fill="#6f6f6f">Illustrative diagram — loads travel from roof framing through beams and columns to the foundation.</text>
+</svg>
