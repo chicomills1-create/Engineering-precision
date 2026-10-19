@@ -1387,6 +1387,24 @@ function phase0FaqMarkup(faqs: Array<{ question: string; answer: string }>): str
   </div></div></section>`;
 }
 
+/** Apex residuals (2026-10-19): section-style FAQ block for the solutions /
+ * discipline / structural-extended families. The visible markup and the
+ * FAQPage schema (residualsFaqSchemaList) are both built from the same
+ * data array, so visible/schema parity holds by construction. */
+function residualsFaqSection(faqs?: Array<{ question: string; answer: string }>): string {
+  return faqs?.length ? `
+    <section class="section section--white faq">
+      <div class="container container--narrow">
+        <h2>Frequently Asked Questions</h2>
+        ${faqs.map((f) => `<details><summary>${esc(f.question)}</summary><div class="a">${esc(f.answer)}</div></details>`).join("\n        ")}
+      </div>
+    </section>` : "";
+}
+
+function residualsFaqSchemaList(faqs?: Array<{ question: string; answer: string }>): unknown[] {
+  return faqs?.length ? [phase0FaqSchema(faqs)] : [];
+}
+
 function assertPhase0Page(html: string, canonical: string, faqs: Array<{ question: string; answer: string }>, label: string): void {
   const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
     .map((match) => JSON.parse(match[1]) as { "@type"?: string; mainEntity?: unknown[] });
@@ -5388,6 +5406,7 @@ ${contextualInbound}
   ${others.map((p) => `<a class="card" href="/existing-building-engineering/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 120))}…</p></a>`).join("")}
   </div>
 </div></section>
+${page.faqs?.length ? phase0FaqMarkup(page.faqs) : ""}
 <section class="ctaband"><div class="container">
   <h2>Tell Us About Your Building</h2>
   <p>Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs. Fast quotes, no runaround.</p>
@@ -5397,7 +5416,7 @@ ${contextualInbound}
     title: page.title,
     description: page.description,
     canonical: `${SITE}/existing-building-engineering/${page.slug}/`,
-    schemaJson: [orgSchema, svcSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [orgSchema, svcSchema, ...residualsFaqSchemaList(page.faqs), breadcrumbSchema(crumbs)],
     body,
   });
 }
@@ -5417,6 +5436,7 @@ ${breadcrumb(crumbs)}
   ${EXISTING_BUILDING_PAGES.map((p) => `<a class="card" href="/existing-building-engineering/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 130))}…</p></a>`).join("")}
   </div>
 </div></section>
+${hub.faqs?.length ? phase0FaqMarkup(hub.faqs) : ""}
 <section class="ctaband"><div class="container">
   <h2>Send Us What You Have</h2>
   <p>No drawings? No problem. Send photos, measurements, and a project description. We'll review what you have and tell you what engineering is needed.</p>
@@ -5426,7 +5446,7 @@ ${breadcrumb(crumbs)}
     title: hub.title,
     description: hub.description,
     canonical: `${SITE}/existing-building-engineering/`,
-    schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [orgSchema, ...residualsFaqSchemaList(hub.faqs), breadcrumbSchema(crumbs)],
     body,
   });
 }
@@ -5467,6 +5487,7 @@ ${contextualInbound}
   ${others.map((p) => `<a class="card" href="/permit-engineering/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 120))}…</p></a>`).join("")}
   </div>
 </div></section>
+${page.faqs?.length ? phase0FaqMarkup(page.faqs) : ""}
 <section class="ctaband"><div class="container">
   <h2>Ready to Submit for Permit?</h2>
   <p>We produce complete, PE-stamped permit packages and support the submittal through final approval. Fast turnaround, project-specific licensure and stamping.</p>
@@ -5476,7 +5497,7 @@ ${contextualInbound}
     title: page.title,
     description: page.description,
     canonical: `${SITE}/permit-engineering/${page.slug}/`,
-    schemaJson: [orgSchema, svcSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [orgSchema, svcSchema, ...residualsFaqSchemaList(page.faqs), breadcrumbSchema(crumbs)],
     body,
   });
 }
@@ -5496,6 +5517,7 @@ ${breadcrumb(crumbs)}
   ${PERMIT_PAGES.map((p) => `<a class="card" href="/permit-engineering/${p.slug}/"><div class="label">${esc(p.kicker)}</div><h3>${esc(p.h1)}</h3><p>${esc(p.lede.slice(0, 130))}…</p></a>`).join("")}
   </div>
 </div></section>
+${hub.faqs?.length ? phase0FaqMarkup(hub.faqs) : ""}
 <section class="ctaband"><div class="container">
   <h2>Need Engineering for a Permit?</h2>
   <p>For projects whose jurisdiction, discipline, and scope are confirmed during intake, we can coordinate PE-stamped structural, MEP, and civil engineering permit documents; schedule and approval remain subject to the project and authority.</p>
@@ -5505,7 +5527,7 @@ ${breadcrumb(crumbs)}
     title: hub.title,
     description: hub.description,
     canonical: `${SITE}/permit-engineering/`,
-    schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [orgSchema, ...residualsFaqSchemaList(hub.faqs), breadcrumbSchema(crumbs)],
     body,
   });
 }
@@ -5829,6 +5851,8 @@ function solutionPage(page: SolutionPage): string {
       </div>
     </section>
 
+    ${residualsFaqSection(page.faqs)}
+
     ${relatedLinks ? `
     <section class="section section--white">
       <div class="container">
@@ -5870,10 +5894,17 @@ function solutionPage(page: SolutionPage): string {
     title: page.title,
     description: page.lede,
     canonical: `${SITE}${url}`,
-    schemaJson: [spSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [spSchema, ...residualsFaqSchemaList(page.faqs), breadcrumbSchema(crumbs)],
     body,
   });
 }
+
+const SOLUTIONS_HUB_FAQS: Array<{ question: string; answer: string }> = [
+  { question: "What kinds of problems do these engineering solutions cover?", answer: "PE-stamped engineering for the structural, MEP, electrical, plumbing, civil, and geotechnical problems that come up on commercial, industrial, and residential projects — each problem described in plain terms on its own solution page." },
+  { question: "What do the solutions deliver?", answer: "PE-stamped drawings and calculations from licensed engineers, matched to the specific problem described on each solution page." },
+  { question: "What if my problem isn't listed here?", answer: "We engineer across all disciplines — describe your project and we'll tell you how we can help." },
+  { question: "How do I get started?", answer: "Talk to an engineer through the contact page — describe the problem, and we'll identify the engineering scope it needs." },
+];
 
 function solutionsHubPage(): string {
   const categories = [...new Set(SOLUTION_PAGES.filter((p) => p.dir === "solutions").map((p) => p.category))];
@@ -5902,6 +5933,8 @@ function solutionsHubPage(): string {
     </section>`;
     }).join("")}
 
+    ${residualsFaqSection(SOLUTIONS_HUB_FAQS)}
+
     <section class="section section--dark cta-band">
       <div class="container">
         <h2>Don't See Your Problem?</h2>
@@ -5922,7 +5955,7 @@ function solutionsHubPage(): string {
     title: "Engineering Solutions | Structural, MEP, Civil & Geotechnical | Apex Grid",
     description: "Engineering solutions for common construction problems — structural, MEP, electrical, plumbing, civil, and geotechnical. PE-stamped drawings and calculations from licensed engineers.",
     canonical: `${SITE}/solutions/`,
-    schemaJson: [schema, breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Solutions" }])],
+    schemaJson: [schema, ...residualsFaqSchemaList(SOLUTIONS_HUB_FAQS), breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Solutions" }])],
     body,
   });
 }
@@ -6175,6 +6208,7 @@ function structuralExtendedPage(page: StructuralExtendedPage): string {
         <a class="btn btn--primary" href="/contact/">${esc(page.ctaText)}</a>
       </div>
     </section>
+    ${residualsFaqSection(page.faqs)}
     <section class="section section--white"><div class="container">
       <h2>Related <em>Structural Engineering</em></h2>
       <div class="card-grid card-grid--3">
@@ -6198,7 +6232,7 @@ function structuralExtendedPage(page: StructuralExtendedPage): string {
     "url": `${SITE}${url}`,
     "serviceType": page.h1,
   };
-  return htmlShell({ title: page.title, description: page.description, canonical: `${SITE}${url}`, schemaJson: [schema, breadcrumbSchema(crumbs)], body });
+  return htmlShell({ title: page.title, description: page.description, canonical: `${SITE}${url}`, schemaJson: [schema, ...residualsFaqSchemaList(page.faqs), breadcrumbSchema(crumbs)], body });
 }
 
 // ─── Title 24 Renderers ───────────────────────────────────────────────────
@@ -6698,6 +6732,8 @@ function disciplineHubPage(hub: DisciplineHub): string {
     </section>
 ${extendedStructuralCards}
 
+    ${residualsFaqSection(hub.faqs)}
+
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
@@ -6729,7 +6765,7 @@ ${extendedStructuralCards}
     title: hub.title,
     description: hub.description,
     canonical: `${SITE}${url}`,
-    schemaJson: [schema, breadcrumbSchema(crumbs)],
+    schemaJson: [schema, ...residualsFaqSchemaList(hub.faqs), breadcrumbSchema(crumbs)],
     body,
   });
 }
@@ -6795,6 +6831,8 @@ function disciplineSubpagePage(hub: DisciplineHub, sp: DisciplineSubpage): strin
       </div>
     </section>
 
+    ${residualsFaqSection(sp.faqs)}
+
     ${relatedLinks ? `
     <section class="section section--light">
       <div class="container">
@@ -6827,7 +6865,7 @@ function disciplineSubpagePage(hub: DisciplineHub, sp: DisciplineSubpage): strin
     title: sp.title,
     description: sp.description,
     canonical: `${SITE}${url}`,
-    schemaJson: [svcSchema, breadcrumbSchema(crumbs)],
+    schemaJson: [svcSchema, ...residualsFaqSchemaList(sp.faqs), breadcrumbSchema(crumbs)],
     body,
   });
 }
