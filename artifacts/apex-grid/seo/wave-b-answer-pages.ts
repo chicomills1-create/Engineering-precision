@@ -95,8 +95,8 @@ export const WAVE_B_ANSWER_PAGES: Phase0AeoPage[] = [
   },
   {
     slug: "cleanroom-mep-engineering-requirements",
-    title: "Cleanroom MEP Engineering Requirements | Apex Grid",
-    description: "Cleanroom MEP requirements explained: ISO classification, air changes, pressure cascades, HEPA filtration, process utilities, controls, validation — and what the design costs.",
+    title: "What Cleanroom MEP Design Requires: ISO Classes, Air Changes, Pressure Cascades | Apex Grid",
+    description: "The requirements behind cleanroom MEP design — ISO classification, air-change rates, HEPA filtration, process utilities, validation — and what they mean for your project cost.",
     h1: "Cleanroom MEP Engineering: Requirements, Standards, and Costs",
     answer: "Cleanroom MEP engineering begins with the process and performance criteria: cleanliness classification, pressure relationships, temperature, humidity, filtration, occupancy, equipment loads, utility needs, and operating modes. The design can coordinate HVAC, exhaust, controls, monitoring, electrical power, plumbing, process utilities, life-safety interfaces, commissioning, and permit documentation. Cost depends on classification, risk, redundancy, renovation conditions, testing, and the defined deliverables.",
     topic: "Cleanroom MEP Engineering",
