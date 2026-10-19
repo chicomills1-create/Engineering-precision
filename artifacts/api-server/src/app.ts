@@ -196,6 +196,50 @@ if (fs.existsSync(staticRoot)) {
       app.get(from, (_req, res) => res.redirect(301, to));
     }
   }
+  // Trailing-slash canonicalization for core pages (census fix Wave B,
+  // 2026-10-19): each core URL exists in exactly one canonical form — React
+  // core routes are slash-less (their canonical tags point there), generated
+  // pages are slashed. Before this middleware both forms served a duplicate
+  // 200. The non-canonical form now 301s to the canonical one. Legacy
+  // redirect entries registered above run first and keep priority.
+  const SLASHLESS_CORE_PATHS = new Set([
+    "/about", "/contact", "/estimate", "/for-architects", "/for-contractors",
+    "/for-developers", "/for-property-managers", "/industries", "/services",
+    "/portfolio", "/military", "/resources", "/team", "/capabilities",
+    "/privacy", "/terms", "/request-proposal", "/submit-project",
+    "/client-portal", "/unsubscribe", "/admin", "/admin/seo",
+    "/admin/outreach", "/admin/linkedin", "/admin/growth", "/admin/reviews",
+    "/admin/payroll", "/sign-in", "/sign-up",
+    "/services/mep", "/services/structural", "/services/civil",
+    "/services/assessments", "/services/architecture",
+  ]);
+  app.use((req, res, next) => {
+    if (req.method !== "GET" && req.method !== "HEAD") return next();
+    const p = req.path;
+    if (p === "/" || path.extname(p) || p.startsWith("/api")) return next();
+    const qIndex = req.originalUrl.indexOf("?");
+    const query = qIndex >= 0 ? req.originalUrl.slice(qIndex) : "";
+    if (p.endsWith("/")) {
+      const bare = p.replace(/\/+$/, "");
+      if (SLASHLESS_CORE_PATHS.has(bare)) {
+        return res.redirect(301, `${bare}${query}`);
+      }
+      return next();
+    }
+    if (SLASHLESS_CORE_PATHS.has(p)) return next();
+    const directoryIndex = path.resolve(
+      staticRoot,
+      p.replace(/^\/+/, ""),
+      "index.html",
+    );
+    if (
+      directoryIndex.startsWith(`${staticRoot}${path.sep}`) &&
+      fs.existsSync(directoryIndex)
+    ) {
+      return res.redirect(301, `${p}/${query}`);
+    }
+    return next();
+  });
   // Keep canonical marketing URLs slashless while still serving their exact
   // prerendered directory index. express.static with redirects disabled only
   // resolves the trailing-slash form and would otherwise fall through to the
