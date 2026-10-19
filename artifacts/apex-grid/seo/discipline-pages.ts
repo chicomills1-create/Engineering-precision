@@ -89,7 +89,7 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
         ],
         faqs: [
           { question: "What does commercial Structural Engineering cover?", answer: "This scope covers commercial building structural system design — steel, concrete, wood, tenant improvement structural modifications and wall removals, rooftop HVAC and equipment structural support, and storefront and facade structural engineering." },
-          { question: "What deliverables come with commercial Structural Engineering?", answer: "Deliverables include pE-stamped structural drawings, structural engineering calculations, foundation and footing design, connection details and special inspection requirements, and plan check comment response support." },
+          { question: "What deliverables come with commercial Structural Engineering?", answer: "Deliverables include PE-stamped structural drawings, structural engineering calculations, foundation and footing design, connection details and special inspection requirements, and plan check comment response support." },
           { question: "Can this service stand alone?", answer: "Commercial Structural Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
           { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
@@ -120,6 +120,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Industrial building permit packages",
           "Special inspection requirements documentation",
         ],
+        faqs: [
+          { question: "What does industrial Structural Engineering cover?", answer: "This scope covers warehouse and distribution center structural design, manufacturing facility structural engineering, heavy equipment foundation and anchorage design, and process equipment support structures." },
+          { question: "What deliverables come with industrial Structural Engineering?", answer: "Deliverables include PE-stamped structural drawings for industrial projects, heavy load foundation and anchorage calculations, crane runway and equipment support engineering, industrial building permit packages, and special inspection requirements documentation." },
+          { question: "Can this service stand alone?", answer: "Industrial Structural Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "multifamily",
@@ -146,6 +152,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Foundation design coordinated with geotechnical report",
           "Multifamily permit drawing packages",
           "Structural engineering for each building or phase",
+        ],
+        faqs: [
+          { question: "What does multifamily Structural Engineering cover?", answer: "This scope covers multifamily new construction structural design — wood, concrete, steel, podium structure engineering for mixed-use multifamily, wood-frame apartment structural engineering, and mid-rise concrete or steel multifamily structural design." },
+          { question: "What deliverables come with multifamily Structural Engineering?", answer: "Deliverables include PE-stamped structural drawings for multifamily projects, multifamily structural calculations, foundation design coordinated with geotechnical report, multifamily permit drawing packages, and structural engineering for each building or phase." },
+          { question: "Can this service stand alone?", answer: "Multifamily Structural Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -174,6 +186,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Seismic retrofit design drawings",
           "ASCE 41 evaluation report for existing buildings",
         ],
+        faqs: [
+          { question: "What does seismic Structural Engineering cover?", answer: "This scope covers seismic design category determination per ASCE 7, lateral force-resisting system design — shear walls, moment frames, braced frames, diaphragm and collector element design, and seismic anchorage for mechanical, electrical, and plumbing equipment." },
+          { question: "What deliverables come with seismic Structural Engineering?", answer: "Deliverables include seismic design calculations and lateral analysis, shear wall and moment frame design drawings, PE-stamped seismic permit drawings, seismic retrofit design drawings, and ASCE 41 evaluation report for existing buildings." },
+          { question: "Can this service stand alone?", answer: "Seismic Structural Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "foundations",
@@ -200,6 +218,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Foundation permit package",
           "Special inspection requirements for foundation work",
           "Coordination with geotechnical engineer",
+        ],
+        faqs: [
+          { question: "What does foundation Structural Engineering cover?", answer: "This scope covers spread footing and isolated footing design, continuous and strip footing design, grade beam design for soil and seismic conditions, and mat or raft foundation design." },
+          { question: "What deliverables come with foundation Structural Engineering?", answer: "Deliverables include foundation design calculations based on geotechnical report, PE-stamped foundation drawings, foundation permit package, special inspection requirements for foundation work, and coordination with geotechnical engineer." },
+          { question: "Can this service stand alone?", answer: "Foundation Structural Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -228,6 +252,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Seismic and wind force calculations",
           "Calculations formatted for building department review",
         ],
+        faqs: [
+          { question: "What does structural Engineering Calculations cover?", answer: "This scope covers gravity load calculations — dead, live, roof, and snow loads, lateral analysis — seismic forces per ASCE 7 and local amendments, wind load analysis per ASCE 7 and local wind speed requirements, and beam and column design calculations with code citations." },
+          { question: "What deliverables come with structural Engineering Calculations?", answer: "Deliverables include PE-stamped structural calculation package, load calculations and structural analysis, member design and connection calculations, seismic and wind force calculations, and calculations formatted for building department review." },
+          { question: "Can this service stand alone?", answer: "Structural Engineering Calculations is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "inspections",
@@ -254,6 +284,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Deficiency list with recommendations",
           "Repair cost guidance for capital planning",
           "Expert opinion for insurance or legal support",
+        ],
+        faqs: [
+          { question: "What does structural Engineering Inspections and Reports cover?", answer: "This scope covers visual structural inspection of framing, connections, and foundations, deficiency identification and severity classification, damage assessment after seismic, impact, or weather events, and pre-purchase due diligence structural inspection." },
+          { question: "What deliverables come with structural Engineering Inspections and Reports?", answer: "Deliverables include PE-signed structural inspection report, photographic documentation of conditions, deficiency list with recommendations, repair cost guidance for capital planning, and expert opinion for insurance or legal support." },
+          { question: "Can this service stand alone?", answer: "Structural Engineering Inspections and Reports is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -282,6 +318,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Permit-ready structural package",
           "Structural detail drawings for contractor",
         ],
+        faqs: [
+          { question: "What does load-Bearing Wall Structural Engineering cover?", answer: "This scope covers load-bearing wall identification in existing buildings, structural load analysis above proposed wall opening, beam or header sizing for new or widened opening, and post and column design to carry beam reactions." },
+          { question: "What deliverables come with load-Bearing Wall Structural Engineering?", answer: "Deliverables include load-bearing wall engineering calculations, PE-stamped structural drawings for wall opening, beam, post, and connection design, permit-ready structural package, and structural detail drawings for contractor." },
+          { question: "Can this service stand alone?", answer: "Load-Bearing Wall Structural Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "beams-headers",
@@ -308,6 +350,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Connection and bearing details",
           "Permit drawings for beam scope",
           "Specifications for beam material and installation",
+        ],
+        faqs: [
+          { question: "What does beam and Header Structural Engineering cover?", answer: "This scope covers beam sizing for gravity loads — floor, roof, and concentrated loads, header design for door and window openings, steel, wood, and engineered lumber beam design, and beam deflection analysis and serviceability check." },
+          { question: "What deliverables come with beam and Header Structural Engineering?", answer: "Deliverables include beam and header design calculations, PE-stamped structural drawings, connection and bearing details, permit drawings for beam scope, and specifications for beam material and installation." },
+          { question: "Can this service stand alone?", answer: "Beam and Header Structural Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -336,6 +384,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Permit drawing package",
           "Specifications for fabrication and installation",
         ],
+        faqs: [
+          { question: "What does mezzanine and Equipment Platform Structural Engineering cover?", answer: "This scope covers mezzanine structural design for storage and office use, equipment platform structural engineering for industrial facilities, elevated storage structure engineering, and mezzanine connection to existing building structure." },
+          { question: "What deliverables come with mezzanine and Equipment Platform Structural Engineering?", answer: "Deliverables include mezzanine structural engineering calculations, PE-stamped mezzanine structural drawings, foundation and anchorage design, permit drawing package, and specifications for fabrication and installation." },
+          { question: "Can this service stand alone?", answer: "Mezzanine and Equipment Platform Structural Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "steel",
@@ -362,6 +416,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Connection schedules and details",
           "Steel specification and material requirements",
           "Fabrication and erection drawing review",
+        ],
+        faqs: [
+          { question: "What does steel Structure Engineering cover?", answer: "This scope covers structural steel frame design for new construction, steel column and beam design per AISC standards, welded and bolted connection design, and steel lateral force-resisting systems — moment frames, braced frames." },
+          { question: "What deliverables come with steel Structure Engineering?", answer: "Deliverables include steel structural engineering calculations, PE-stamped steel structural drawings, connection schedules and details, steel specification and material requirements, and fabrication and erection drawing review." },
+          { question: "Can this service stand alone?", answer: "Steel Structure Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -390,6 +450,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Framing plan with member sizes and connections",
           "Permit drawing package for wood-framed scope",
         ],
+        faqs: [
+          { question: "What does wood Framing Structural Engineering cover?", answer: "This scope covers wood-frame wall, floor, and roof structural design, conventional framing and engineered wood product design, lateral design — wood shear walls, hold-downs, diaphragms, and wood connection design — nails, screws, bolts, straps, hangers." },
+          { question: "What deliverables come with wood Framing Structural Engineering?", answer: "Deliverables include wood framing structural calculations, PE-stamped wood structural drawings, lateral design with shear wall and hold-down schedules, framing plan with member sizes and connections, and permit drawing package for wood-framed scope." },
+          { question: "Can this service stand alone?", answer: "Wood Framing Structural Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "concrete",
@@ -417,6 +483,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Concrete repair design details",
           "Permit drawing package for concrete scope",
         ],
+        faqs: [
+          { question: "What does concrete Structural Engineering cover?", answer: "This scope covers cast-in-place reinforced concrete frame design, concrete shear wall and core wall design, post-tensioned slab design for commercial buildings, and tilt-up concrete panel structural engineering." },
+          { question: "What deliverables come with concrete Structural Engineering?", answer: "Deliverables include reinforced concrete design calculations, PE-stamped concrete structural drawings, reinforcement schedules and details, concrete repair design details, and permit drawing package for concrete scope." },
+          { question: "Can this service stand alone?", answer: "Concrete Structural Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "peer-review",
@@ -443,6 +515,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Comment log with required revisions",
           "Coordination with engineer of record on revisions",
           "Final acceptance letter confirming resolution",
+        ],
+        faqs: [
+          { question: "What does structural Engineering Peer Review cover?", answer: "This scope covers independent review of structural engineering calculations, structural design methodology review, code compliance verification for structural systems, and foundation design review and coordination with geotechnical." },
+          { question: "What deliverables come with structural Engineering Peer Review?", answer: "Deliverables include written peer review report with findings, PE-signed peer review letter, comment log with required revisions, coordination with engineer of record on revisions, and final acceptance letter confirming resolution." },
+          { question: "Can this service stand alone?", answer: "Structural Engineering Peer Review is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
     ],
@@ -505,6 +583,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "MEP permit package ready for building department submittal",
           "Plan check comment response support",
         ],
+        faqs: [
+          { question: "What does commercial MEP Engineering cover?", answer: "This scope covers HVAC system design for commercial occupancy types, commercial electrical service and distribution engineering, commercial plumbing — restrooms, kitchen, specialty fixtures, and energy code compliance documentation per jurisdiction." },
+          { question: "What deliverables come with commercial MEP Engineering?", answer: "Deliverables include PE-stamped mechanical, electrical, and plumbing drawings, energy code compliance documentation, equipment schedules and specifications, MEP permit package ready for building department submittal, and plan check comment response support." },
+          { question: "Can this service stand alone?", answer: "Commercial MEP Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "restaurant",
@@ -534,7 +618,7 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
         ],
         faqs: [
           { question: "What does restaurant MEP Engineering cover?", answer: "This scope covers commercial kitchen exhaust hood engineering — Type I and Type II, make-up air system design and balancing, gas piping design for commercial cooking equipment, and grease interceptor sizing and plumbing coordination." },
-          { question: "What deliverables come with restaurant MEP Engineering?", answer: "Deliverables include pE-stamped restaurant MEP permit drawings, kitchen exhaust and make-up air calculations, gas piping design and BTU load calculations, grease interceptor sizing documentation, and complete restaurant MEP permit package." },
+          { question: "What deliverables come with restaurant MEP Engineering?", answer: "Deliverables include PE-stamped restaurant MEP permit drawings, kitchen exhaust and make-up air calculations, gas piping design and BTU load calculations, grease interceptor sizing documentation, and complete restaurant MEP permit package." },
           { question: "Can this service stand alone?", answer: "Restaurant MEP Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
           { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
@@ -565,6 +649,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "FGI and NFPA 99 compliance documentation",
           "Complete healthcare MEP permit package",
         ],
+        faqs: [
+          { question: "What does medical Facility MEP Engineering cover?", answer: "This scope covers medical HVAC — pressure relationships, filtration, and air change rates, medical gas system design — oxygen, vacuum, nitrous oxide, compressed air, medical electrical — essential electrical system, critical branch circuits, and generator and emergency power for healthcare occupancies." },
+          { question: "What deliverables come with medical Facility MEP Engineering?", answer: "Deliverables include PE-stamped medical MEP permit drawings, medical gas engineering calculations and drawings, essential electrical system design, FGI and NFPA 99 compliance documentation, and complete healthcare MEP permit package." },
+          { question: "Can this service stand alone?", answer: "Medical Facility MEP Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "tenant-improvement",
@@ -591,6 +681,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "MEP coordination with existing base-building systems",
           "Complete TI MEP permit package",
           "Fast-turnaround delivery for time-sensitive TI projects",
+        ],
+        faqs: [
+          { question: "What does tenant Improvement MEP Engineering cover?", answer: "This scope covers HVAC system modifications for TI scope, electrical distribution changes and new panel connections, lighting design for TI space, and plumbing modifications and new fixture connections." },
+          { question: "What deliverables come with tenant Improvement MEP Engineering?", answer: "Deliverables include PE-stamped TI MEP permit drawings, energy code compliance for TI scope, MEP coordination with existing base-building systems, complete TI MEP permit package, and fast-turnaround delivery for time-sensitive TI projects." },
+          { question: "Can this service stand alone?", answer: "Tenant Improvement MEP Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -619,6 +715,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "MEP coordination across all disciplines",
           "Plan check support for multifamily MEP",
         ],
+        faqs: [
+          { question: "What does multifamily MEP Engineering cover?", answer: "This scope covers unit HVAC design — split systems, PTAC, or central air, domestic water system design for multifamily occupancy, sanitary drainage design and vent riser coordination, and gas piping for unit and common area equipment." },
+          { question: "What deliverables come with multifamily MEP Engineering?", answer: "Deliverables include PE-stamped multifamily MEP drawings, unit and building MEP permit packages, energy code compliance documentation, MEP coordination across all disciplines, and plan check support for multifamily MEP." },
+          { question: "Can this service stand alone?", answer: "Multifamily MEP Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "industrial",
@@ -645,6 +747,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Process equipment MEP connections",
           "Industrial MEP permit package",
           "Plan check support for industrial MEP",
+        ],
+        faqs: [
+          { question: "What does industrial MEP Engineering cover?", answer: "This scope covers industrial electrical service sizing — high-amperage, three-phase, process equipment electrical connections and distribution, industrial HVAC — heating, ventilation, and spot cooling, and industrial exhaust and process ventilation." },
+          { question: "What deliverables come with industrial MEP Engineering?", answer: "Deliverables include PE-stamped industrial MEP permit drawings, industrial electrical distribution design, process equipment MEP connections, industrial MEP permit package, and plan check support for industrial MEP." },
+          { question: "Can this service stand alone?", answer: "Industrial MEP Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -673,6 +781,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Lighting power density calculations",
           "Energy code compliance for permit submittal",
         ],
+        faqs: [
+          { question: "What does energy Code Compliance Engineering cover?", answer: "This scope covers title 24 compliance documentation for California projects, ASHRAE 90.1 compliance for commercial buildings, IECC compliance for commercial and multifamily projects, and mechanical system compliance — HVAC efficiency and controls." },
+          { question: "What deliverables come with energy Code Compliance Engineering?", answer: "Deliverables include energy code compliance forms and documentation, title 24 compliance reports, ASHRAE 90.1 compliance documentation, lighting power density calculations, and energy code compliance for permit submittal." },
+          { question: "Can this service stand alone?", answer: "Energy Code Compliance Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "permit-packages",
@@ -699,6 +813,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Energy code compliance documentation",
           "Permit submittal-ready package in required format",
           "Response to plan check comments included in scope",
+        ],
+        faqs: [
+          { question: "What does MEP Permit Packages cover?", answer: "This scope covers mechanical drawings — HVAC plans, schedules, and details, electrical drawings — one-line diagram, panel schedules, lighting plan, plumbing drawings — plumbing plan, riser diagram, fixture schedule, and energy code compliance documentation." },
+          { question: "What deliverables come with MEP Permit Packages?", answer: "Deliverables include complete PE-stamped MEP permit drawing package, MEP calculations package, energy code compliance documentation, permit submittal-ready package in required format, and response to plan check comments included in scope." },
+          { question: "Can this service stand alone?", answer: "MEP Permit Packages is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -727,7 +847,19 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Coordinated permit package with minimal conflicts",
           "RFI support during construction for coordination issues",
         ],
+        faqs: [
+          { question: "What does MEP Engineering Coordination cover?", answer: "This scope covers internal MEP coordination — mechanical vs. electrical vs. plumbing conflict resolution, structural coordination — routing MEP around structural elements, architectural coordination — MEP routing within ceiling and wall constraints, and equipment location coordination — mechanical room, electrical room, plumbing chases." },
+          { question: "What deliverables come with MEP Engineering Coordination?", answer: "Deliverables include coordinated MEP drawing set across all disciplines, clash review documentation, coordination meeting support, coordinated permit package with minimal conflicts, and RFI support during construction for coordination issues." },
+          { question: "Can this service stand alone?", answer: "MEP Engineering Coordination is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
+    ],
+    faqs: [
+      { question: "What MEP engineering services does Apex Grid provide?", answer: "Our MEP engineering work includes mechanical HVAC system design and equipment selection, commercial kitchen exhaust and make-up air engineering, electrical service sizing, one-line diagrams, and panel schedules, and emergency power, generator, and UPS system engineering." },
+      { question: "Which focused MEP engineering services are available?", answer: "Focused services include Commercial MEP Engineering, Restaurant MEP Engineering, Medical Facility MEP Engineering, Tenant Improvement MEP Engineering, and Multifamily MEP Engineering — each with its own service page describing its scope and deliverables." },
+      { question: "Can MEP engineering be provided on its own?", answer: "Yes — we provide MEP engineering as a standalone service or as part of a coordinated multi-discipline package. Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get a fee proposal?", answer: "Send us your drawings or describe your project — we respond with a fee proposal within one business day." },
     ],
   },
 
@@ -782,6 +914,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Duct layout drawings",
           "Energy code compliance documentation",
         ],
+        faqs: [
+          { question: "What does commercial HVAC Engineering cover?", answer: "This scope covers heating and cooling load calculations per ACCA Manual J or commercial methods, equipment selection — RTUs, split systems, chillers, AHUs, duct system design and sizing, and outside air and ventilation system design per ASHRAE 62.1." },
+          { question: "What deliverables come with commercial HVAC Engineering?", answer: "Deliverables include HVAC load calculations, PE-stamped mechanical permit drawings, equipment schedules and specifications, duct layout drawings, and energy code compliance documentation." },
+          { question: "Can this service stand alone?", answer: "Commercial HVAC Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "kitchen-exhaust",
@@ -809,6 +947,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Exhaust fan schedule",
           "Fire suppression coordination documentation",
         ],
+        faqs: [
+          { question: "What does commercial Kitchen Exhaust Engineering cover?", answer: "This scope covers type I grease exhaust hood design — size, airflow, static pressure, type II heat and condensate hood design, exhaust fan selection and duct sizing, and grease exhaust duct routing — shaft and termination location." },
+          { question: "What deliverables come with commercial Kitchen Exhaust Engineering?", answer: "Deliverables include kitchen exhaust engineering calculations, PE-stamped kitchen exhaust permit drawings, hood schedule and specifications, exhaust fan schedule, and fire suppression coordination documentation." },
+          { question: "Can this service stand alone?", answer: "Commercial Kitchen Exhaust Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "makeup-air",
@@ -834,6 +978,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Make-up air unit schedule",
           "Air balance documentation",
           "Kitchen exhaust and make-up air coordinated permit package",
+        ],
+        faqs: [
+          { question: "What does make-Up Air System Engineering cover?", answer: "This scope covers make-up air volume calculation for kitchen and exhaust systems, make-up air unit selection — heated, tempered, or ambient, make-up air delivery method — short-circuit, perimeter, or ceiling supply, and make-up air integration with kitchen exhaust air balance." },
+          { question: "What deliverables come with make-Up Air System Engineering?", answer: "Deliverables include make-up air calculations, PE-stamped make-up air permit drawings, make-up air unit schedule, air balance documentation, and kitchen exhaust and make-up air coordinated permit package." },
+          { question: "Can this service stand alone?", answer: "Make-Up Air System Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -862,6 +1012,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "ACGIH compliance documentation",
           "Permit drawings for industrial exhaust systems",
         ],
+        faqs: [
+          { question: "What does industrial Ventilation Engineering cover?", answer: "This scope covers local exhaust ventilation (LEV) system design, hood design for contaminant capture at the source, ductwork design — static pressure and velocity calculations, and industrial exhaust fan selection." },
+          { question: "What deliverables come with industrial Ventilation Engineering?", answer: "Deliverables include industrial ventilation calculations, PE-stamped industrial ventilation permit drawings, fan and equipment schedules, ACGIH compliance documentation, and permit drawings for industrial exhaust systems." },
+          { question: "Can this service stand alone?", answer: "Industrial Ventilation Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "hvac-replacement",
@@ -888,6 +1044,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Equipment sizing calculations",
           "Energy code compliance for new equipment",
           "Structural coordination for rooftop equipment",
+        ],
+        faqs: [
+          { question: "What does HVAC Replacement Engineering cover?", answer: "This scope covers replacement equipment sizing verification — RTUs, split systems, AHUs, load calculation review for changed occupancy or building conditions, rooftop structural evaluation for new equipment weight, and duct system evaluation for replacement equipment compatibility." },
+          { question: "What deliverables come with HVAC Replacement Engineering?", answer: "Deliverables include HVAC replacement engineering documentation, PE-stamped mechanical permit drawings if required, equipment sizing calculations, energy code compliance for new equipment, and structural coordination for rooftop equipment." },
+          { question: "Can this service stand alone?", answer: "HVAC Replacement Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -916,6 +1078,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Coordinated mechanical and structural permit package",
           "Energy code compliance for RTU replacement or addition",
         ],
+        faqs: [
+          { question: "What does rooftop HVAC Unit Engineering cover?", answer: "This scope covers RTU sizing and selection engineering, duct connection design from RTU to building interior, economizer and outdoor air damper design, and structural evaluation of existing roof framing." },
+          { question: "What deliverables come with rooftop HVAC Unit Engineering?", answer: "Deliverables include RTU sizing calculations, PE-stamped mechanical drawings for RTU installation, structural drawings for RTU curb and anchorage, coordinated mechanical and structural permit package, and energy code compliance for RTU replacement or addition." },
+          { question: "Can this service stand alone?", answer: "Rooftop HVAC Unit Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "data-center-cooling",
@@ -942,6 +1110,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Cooling system redundancy design",
           "Data center permit package",
           "Coordination with electrical and structural engineering",
+        ],
+        faqs: [
+          { question: "What does data Center Cooling Engineering cover?", answer: "This scope covers IT load assessment and cooling load calculation, precision cooling unit selection — CRAC, CRAH, in-row cooling, hot aisle and cold aisle containment design, and raised floor vs. overhead airflow delivery design." },
+          { question: "What deliverables come with data Center Cooling Engineering?", answer: "Deliverables include data center cooling load calculations, PE-stamped data center mechanical permit drawings, cooling system redundancy design, data center permit package, and coordination with electrical and structural engineering." },
+          { question: "Can this service stand alone?", answer: "Data Center Cooling Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -970,6 +1144,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "VAV controls sequence of operation",
           "Laboratory MEP permit package",
         ],
+        faqs: [
+          { question: "What does laboratory Exhaust Engineering cover?", answer: "This scope covers fume hood exhaust system design and duct sizing, variable air volume (VAV) fume hood control integration, biosafety cabinet exhaust and hard-duct connection, and perchloric acid exhaust with wash-down system." },
+          { question: "What deliverables come with laboratory Exhaust Engineering?", answer: "Deliverables include laboratory exhaust calculations, PE-stamped lab exhaust permit drawings, fume hood and exhaust equipment schedules, VAV controls sequence of operation, and laboratory MEP permit package." },
+          { question: "Can this service stand alone?", answer: "Laboratory Exhaust Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "energy-modeling",
@@ -997,7 +1177,19 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Whole-building energy model outputs",
           "Energy compliance for permit submittal",
         ],
+        faqs: [
+          { question: "What does energy Modeling and Compliance Engineering cover?", answer: "This scope covers title 24 compliance calculations for California commercial projects, ASHRAE 90.1 prescriptive and performance path compliance, IECC commercial and multifamily energy code compliance, and whole-building energy model for performance compliance path." },
+          { question: "What deliverables come with energy Modeling and Compliance Engineering?", answer: "Deliverables include energy code compliance forms and calculations, title 24 compliance report, ASHRAE 90.1 compliance documentation, whole-building energy model outputs, and energy compliance for permit submittal." },
+          { question: "Can this service stand alone?", answer: "Energy Modeling and Compliance Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
+    ],
+    faqs: [
+      { question: "What mechanical engineering services does Apex Grid provide?", answer: "Our mechanical engineering work includes commercial HVAC system design and equipment selection, commercial kitchen exhaust and make-up air engineering, industrial ventilation and exhaust system design, and medical HVAC — pressure relationships, filtration, infection control." },
+      { question: "Which focused mechanical engineering services are available?", answer: "Focused services include Commercial HVAC Engineering, Commercial Kitchen Exhaust Engineering, Make-Up Air System Engineering, Industrial Ventilation Engineering, and HVAC Replacement Engineering — each with its own service page describing its scope and deliverables." },
+      { question: "Can mechanical engineering be provided on its own?", answer: "Yes — we provide mechanical engineering as a standalone service or as part of a coordinated multi-discipline package. Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get a fee proposal?", answer: "Send us your drawings or describe your project — we respond with a fee proposal within one business day." },
     ],
   },
 
@@ -1052,6 +1244,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Utility coordination documentation",
           "Panel schedules for new distribution",
         ],
+        faqs: [
+          { question: "What does electrical Service Upgrade Engineering cover?", answer: "This scope covers electrical load study for existing and proposed loads, service upgrade sizing — amps, voltage, and configuration, main switchgear and distribution panel design, and utility interconnection requirements and coordination." },
+          { question: "What deliverables come with electrical Service Upgrade Engineering?", answer: "Deliverables include electrical load calculations, PE-stamped service upgrade permit drawings, one-line diagram showing new service configuration, utility coordination documentation, and panel schedules for new distribution." },
+          { question: "Can this service stand alone?", answer: "Electrical Service Upgrade Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "load-studies",
@@ -1078,6 +1276,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Available capacity summary",
           "Service upgrade recommendation if warranted",
           "Load study for utility interconnection application",
+        ],
+        faqs: [
+          { question: "What does electrical Load Studies cover?", answer: "This scope covers existing electrical load inventory and demand calculation, available capacity analysis for current service, added load evaluation for proposed equipment, and demand factor and diversity factor analysis." },
+          { question: "What deliverables come with electrical Load Studies?", answer: "Deliverables include electrical load study calculations, PE-stamped load study document, available capacity summary, service upgrade recommendation if warranted, and load study for utility interconnection application." },
+          { question: "Can this service stand alone?", answer: "Electrical Load Studies is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -1106,6 +1310,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Utility interconnection application support",
           "Structural coordination for roof mounting",
         ],
+        faqs: [
+          { question: "What does solar PV Electrical Engineering cover?", answer: "This scope covers solar PV system electrical design — inverters, combiners, disconnects, grid-tied interconnection design, one-line diagram for solar system, and anti-islanding and protection relay design." },
+          { question: "What deliverables come with solar PV Electrical Engineering?", answer: "Deliverables include solar electrical calculations, PE-stamped solar one-line diagram, solar permit drawing package, utility interconnection application support, and structural coordination for roof mounting." },
+          { question: "Can this service stand alone?", answer: "Solar PV Electrical Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "ev-charging",
@@ -1132,6 +1342,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "One-line diagram for EV charging system",
           "Panel schedules for EV circuits",
           "Utility coordination for service upgrade",
+        ],
+        faqs: [
+          { question: "What does EV Charging Electrical Engineering cover?", answer: "This scope covers EV load study — existing service capacity and available headroom, level 2 EVSE electrical design, DC fast charging (DCFC) electrical design, and fleet charging electrical engineering for large deployments." },
+          { question: "What deliverables come with EV Charging Electrical Engineering?", answer: "Deliverables include EV charging load calculations, PE-stamped EV charging permit drawings, one-line diagram for EV charging system, panel schedules for EV circuits, and utility coordination for service upgrade." },
+          { question: "Can this service stand alone?", answer: "EV Charging Electrical Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -1160,6 +1376,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Generator pad and fuel system details",
           "NFPA 110 compliance documentation",
         ],
+        faqs: [
+          { question: "What does generator and Emergency Power Engineering cover?", answer: "This scope covers emergency power load calculation, generator sizing — standby and emergency loads, automatic transfer switch (ATS) design and specification, and essential electrical system design for healthcare facilities." },
+          { question: "What deliverables come with generator and Emergency Power Engineering?", answer: "Deliverables include emergency power load calculations, PE-stamped generator and emergency power permit drawings, one-line diagram for emergency power system, generator pad and fuel system details, and NFPA 110 compliance documentation." },
+          { question: "Can this service stand alone?", answer: "Generator and Emergency Power Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "power-distribution",
@@ -1186,6 +1408,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Panel schedules for all panels",
           "One-line diagram for distribution system",
           "Permit drawings for distribution scope",
+        ],
+        faqs: [
+          { question: "What does power Distribution Engineering cover?", answer: "This scope covers switchgear and distribution board design, panelboard selection and circuit layout, feeder sizing — conductors, conduit, and protective devices, and branch circuit design and load balancing." },
+          { question: "What deliverables come with power Distribution Engineering?", answer: "Deliverables include power distribution calculations, PE-stamped electrical distribution drawings, panel schedules for all panels, one-line diagram for distribution system, and permit drawings for distribution scope." },
+          { question: "Can this service stand alone?", answer: "Power Distribution Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -1214,6 +1442,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Fixture schedule and specifications",
           "Energy code compliance for lighting systems",
         ],
+        faqs: [
+          { question: "What does lighting Engineering cover?", answer: "This scope covers interior lighting design and illuminance calculations, exterior lighting design for parking, walkways, and facades, lighting power density calculations — Title 24, ASHRAE 90.1, IECC, and lighting control system design — occupancy sensors, daylight controls, dimmers." },
+          { question: "What deliverables come with lighting Engineering?", answer: "Deliverables include lighting calculations and illuminance analysis, PE-stamped lighting permit drawings, lighting power density compliance documentation, fixture schedule and specifications, and energy code compliance for lighting systems." },
+          { question: "Can this service stand alone?", answer: "Lighting Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "arc-flash",
@@ -1240,6 +1474,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Short-circuit and coordination study",
           "PPE requirements by equipment",
           "NFPA 70E compliance documentation",
+        ],
+        faqs: [
+          { question: "What does arc Flash Analysis Engineering cover?", answer: "This scope covers short-circuit analysis — fault current at each bus, protective device coordination study, arc flash incident energy calculation per IEEE 1584, and arc flash boundary determination." },
+          { question: "What deliverables come with arc Flash Analysis Engineering?", answer: "Deliverables include arc flash analysis report, arc flash labels for all equipment, short-circuit and coordination study, PPE requirements by equipment, and NFPA 70E compliance documentation." },
+          { question: "Can this service stand alone?", answer: "Arc Flash Analysis Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -1268,7 +1508,19 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Utility interconnection support",
           "Coordinated BESS permit package",
         ],
+        faqs: [
+          { question: "What does battery Energy Storage System (BESS) Engineering cover?", answer: "This scope covers BESS sizing — energy capacity, power rating, and discharge duration, BESS inverter and bidirectional charger design, grid interconnection design for BESS, and solar-plus-storage system integration." },
+          { question: "What deliverables come with battery Energy Storage System (BESS) Engineering?", answer: "Deliverables include BESS electrical engineering calculations, PE-stamped BESS permit drawings, NFPA 855 compliance documentation, utility interconnection support, and coordinated BESS permit package." },
+          { question: "Can this service stand alone?", answer: "Battery Energy Storage System (BESS) Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
+    ],
+    faqs: [
+      { question: "What electrical engineering services does Apex Grid provide?", answer: "Our electrical engineering work includes electrical service sizing and utility coordination, one-line diagrams and panel schedule design, electrical load studies and capacity analysis, and solar PV interconnection and switchgear engineering." },
+      { question: "Which focused electrical engineering services are available?", answer: "Focused services include Electrical Service Upgrade Engineering, Electrical Load Studies, Solar PV Electrical Engineering, EV Charging Electrical Engineering, and Generator and Emergency Power Engineering — each with its own service page describing its scope and deliverables." },
+      { question: "Can electrical engineering be provided on its own?", answer: "Yes — we provide electrical engineering as a standalone service or as part of a coordinated multi-discipline package. Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get a fee proposal?", answer: "Send us your drawings or describe your project — we respond with a fee proposal within one business day." },
     ],
   },
 
@@ -1321,6 +1573,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Gas piping diagram",
           "Complete plumbing permit package",
         ],
+        faqs: [
+          { question: "What does commercial Plumbing Engineering cover?", answer: "This scope covers domestic water service sizing and pressure analysis, fixture unit calculation for plumbing fixture count, water supply distribution design — hot and cold, and sanitary drainage and venting design." },
+          { question: "What deliverables come with commercial Plumbing Engineering?", answer: "Deliverables include plumbing calculations — fixture units, pipe sizing, PE-stamped commercial plumbing permit drawings, plumbing riser diagram, gas piping diagram, and complete plumbing permit package." },
+          { question: "Can this service stand alone?", answer: "Commercial Plumbing Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "grease-interceptors",
@@ -1347,6 +1605,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Interceptor specification",
           "Kitchen plumbing drainage plan",
           "Permit package including interceptor documentation",
+        ],
+        faqs: [
+          { question: "What does grease Interceptor Engineering cover?", answer: "This scope covers grease interceptor sizing calculations, gravity grease interceptor (GGI) design — underground vault type, hydromechanical grease interceptor (HGI) design — under-sink or in-line, and interceptor location and installation design." },
+          { question: "What deliverables come with grease Interceptor Engineering?", answer: "Deliverables include grease interceptor sizing calculations, PE-stamped grease interceptor permit drawings, interceptor specification, kitchen plumbing drainage plan, and permit package including interceptor documentation." },
+          { question: "Can this service stand alone?", answer: "Grease Interceptor Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -1375,6 +1639,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Medical gas zone plan and outlet schedule",
           "Medical gas permit package",
         ],
+        faqs: [
+          { question: "What does medical Gas Engineering cover?", answer: "This scope covers oxygen supply system design — manifold or liquid oxygen, vacuum system design for medical vacuum, nitrous oxide and carbon dioxide system design, and medical air compressor system design." },
+          { question: "What deliverables come with medical Gas Engineering?", answer: "Deliverables include medical gas engineering calculations, PE-stamped medical gas permit drawings, NFPA 99 compliance documentation, medical gas zone plan and outlet schedule, and medical gas permit package." },
+          { question: "Can this service stand alone?", answer: "Medical Gas Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "plumbing-risers",
@@ -1401,6 +1671,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "PE-stamped plumbing permit drawings",
           "Riser coordination with architectural shaft design",
           "Plumbing permit package including riser diagrams",
+        ],
+        faqs: [
+          { question: "What does plumbing Riser Design cover?", answer: "This scope covers domestic water supply riser design — hot and cold, sanitary drainage and waste riser design, vent riser design and termination, and gas piping riser design." },
+          { question: "What deliverables come with plumbing Riser Design?", answer: "Deliverables include plumbing riser diagrams for all systems, pipe sizing calculations for risers, PE-stamped plumbing permit drawings, riser coordination with architectural shaft design, and plumbing permit package including riser diagrams." },
+          { question: "Can this service stand alone?", answer: "Plumbing Riser Design is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -1429,6 +1705,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Equipment gas connection schedule",
           "Gas permit package",
         ],
+        faqs: [
+          { question: "What does gas Piping Engineering cover?", answer: "This scope covers gas load calculation — total BTU demand for all equipment, gas service pressure determination, gas piping distribution design and pipe sizing, and pressure drop calculations for gas distribution system." },
+          { question: "What deliverables come with gas Piping Engineering?", answer: "Deliverables include gas piping load calculations, PE-stamped gas piping permit drawings, gas isometric diagrams, equipment gas connection schedule, and gas permit package." },
+          { question: "Can this service stand alone?", answer: "Gas Piping Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "domestic-water",
@@ -1455,6 +1737,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Water heater sizing calculations",
           "Pressure analysis",
           "Domestic water permit package",
+        ],
+        faqs: [
+          { question: "What does domestic Water System Engineering cover?", answer: "This scope covers water service size determination — demand and peak flow analysis, pressure analysis from service point to highest fixture, pressure-reducing valve (PRV) design where pressure is excessive, and pressure booster pump design for high-rise and pressure-deficient buildings." },
+          { question: "What deliverables come with domestic Water System Engineering?", answer: "Deliverables include domestic water system calculations, PE-stamped domestic water permit drawings, water heater sizing calculations, pressure analysis, and domestic water permit package." },
+          { question: "Can this service stand alone?", answer: "Domestic Water System Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -1483,7 +1771,19 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Combined service permit package",
           "Backflow prevention design",
         ],
+        faqs: [
+          { question: "What does fire Protection Engineering Coordination cover?", answer: "This scope covers combined domestic and fire service demand analysis, water service sizing for combined domestic and fire demand, combined service entry and separation design, and backflow prevention design for combined service." },
+          { question: "What deliverables come with fire Protection Engineering Coordination?", answer: "Deliverables include combined service demand calculations, PE-stamped domestic plumbing permit drawings, coordination documentation with fire protection engineer, combined service permit package, and backflow prevention design." },
+          { question: "Can this service stand alone?", answer: "Fire Protection Engineering Coordination is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
+    ],
+    faqs: [
+      { question: "What plumbing engineering services does Apex Grid provide?", answer: "Our plumbing engineering work includes domestic water system sizing and design, sanitary drainage and vent system design, gas piping design for commercial cooking and heating, and grease interceptor sizing and design." },
+      { question: "Which focused plumbing engineering services are available?", answer: "Focused services include Commercial Plumbing Engineering, Grease Interceptor Engineering, Medical Gas Engineering, Plumbing Riser Design, and Gas Piping Engineering — each with its own service page describing its scope and deliverables." },
+      { question: "Can plumbing engineering be provided on its own?", answer: "Yes — we provide plumbing engineering as a standalone service or as part of a coordinated multi-discipline package. Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get a fee proposal?", answer: "Send us your drawings or describe your project — we respond with a fee proposal within one business day." },
     ],
   },
 
@@ -1538,6 +1838,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Civil permit package for building department",
           "Earthwork calculations",
         ],
+        faqs: [
+          { question: "What does commercial Site Development Engineering cover?", answer: "This scope covers site plan and grading design for commercial development, earthwork calculations and cut/fill balance, site drainage design and inlet/outlet layout, and utility connections — water, sanitary sewer, storm drainage." },
+          { question: "What deliverables come with commercial Site Development Engineering?", answer: "Deliverables include PE-stamped civil site development permit drawings, grading and drainage plan, utility plan, civil permit package for building department, and earthwork calculations." },
+          { question: "Can this service stand alone?", answer: "Commercial Site Development Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "grading-drainage",
@@ -1564,6 +1870,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "PE-stamped civil permit drawings",
           "Drainage compliance documentation",
           "Civil permit package",
+        ],
+        faqs: [
+          { question: "What does grading and Drainage Engineering cover?", answer: "This scope covers site grading design to direct drainage away from buildings, storm inlet sizing and layout, storm sewer pipe sizing and design, and surface drainage analysis — drainage areas and flow paths." },
+          { question: "What deliverables come with grading and Drainage Engineering?", answer: "Deliverables include grading and drainage plan, storm drainage calculations, PE-stamped civil permit drawings, drainage compliance documentation, and civil permit package." },
+          { question: "Can this service stand alone?", answer: "Grading and Drainage Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -1592,6 +1904,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Accessible parking documentation",
           "Civil permit package",
         ],
+        faqs: [
+          { question: "What does parking Lot Civil Engineering cover?", answer: "This scope covers parking lot layout design — stalls, drive aisles, and circulation, accessible parking stall design and accessible route connection, parking lot grading design for positive drainage, and parking lot storm drainage — inlets, pipes, and outlets." },
+          { question: "What deliverables come with parking Lot Civil Engineering?", answer: "Deliverables include parking lot grading and drainage plan, pavement design section, PE-stamped civil permit drawings, accessible parking documentation, and civil permit package." },
+          { question: "Can this service stand alone?", answer: "Parking Lot Civil Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "stormwater",
@@ -1618,6 +1936,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "SWPPP if required",
           "Stormwater management facility details",
           "Stormwater permit package",
+        ],
+        faqs: [
+          { question: "What does stormwater Management Engineering cover?", answer: "This scope covers pre- and post-development hydrology analysis, stormwater retention basin design, stormwater detention basin and vault design, and infiltration system design — dry wells, infiltration trenches." },
+          { question: "What deliverables come with stormwater Management Engineering?", answer: "Deliverables include stormwater management calculations, PE-stamped stormwater management drawings, SWPPP if required, stormwater management facility details, and stormwater permit package." },
+          { question: "Can this service stand alone?", answer: "Stormwater Management Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -1646,6 +1970,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Utility connection permit package",
           "Coordination with public utility agencies",
         ],
+        faqs: [
+          { question: "What does utility Engineering cover?", answer: "This scope covers water service connection design from main to building, water service sizing — meter, backflow preventer, and lateral, sanitary sewer lateral design and connection, and lift station design for buildings below sewer grade." },
+          { question: "What deliverables come with utility Engineering?", answer: "Deliverables include utility plan for permit, PE-stamped civil utility drawings, utility sizing calculations, utility connection permit package, and coordination with public utility agencies." },
+          { question: "Can this service stand alone?", answer: "Utility Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "driveways",
@@ -1672,6 +2002,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Sight distance analysis",
           "Driveway permit package for local agency",
           "Turn movement and access analysis",
+        ],
+        faqs: [
+          { question: "What does driveway and Access Engineering cover?", answer: "This scope covers driveway geometry design — width, radius, and approach grade, sight distance analysis at intersection with public street, driveway permit coordination with city or county, and turn lane design at commercial driveways." },
+          { question: "What deliverables come with driveway and Access Engineering?", answer: "Deliverables include driveway geometry design drawing, PE-stamped driveway permit drawings, sight distance analysis, driveway permit package for local agency, and turn movement and access analysis." },
+          { question: "Can this service stand alone?", answer: "Driveway and Access Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -1700,6 +2036,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Retaining wall details",
           "Civil permit package for retaining walls",
         ],
+        faqs: [
+          { question: "What does retaining Wall Civil Engineering cover?", answer: "This scope covers earth pressure analysis and retained height design, wall type selection — concrete, CMU, segmental, soldier pile, geotechnical coordination for soil parameters, and drainage design behind retaining wall." },
+          { question: "What deliverables come with retaining Wall Civil Engineering?", answer: "Deliverables include retaining wall engineering calculations, PE-stamped retaining wall permit drawings, geotechnical coordination documentation, retaining wall details, and civil permit package for retaining walls." },
+          { question: "Can this service stand alone?", answer: "Retaining Wall Civil Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "ada-site",
@@ -1726,6 +2068,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Cross-slope and grade analysis",
           "ADA compliance documentation",
           "Civil permit package including accessibility drawings",
+        ],
+        faqs: [
+          { question: "What does ADA Site Accessibility Engineering cover?", answer: "This scope covers accessible route design from parking to building entrance, accessible parking stall layout and marking, access aisle design for accessible parking, and curb ramp design at parking lot and street crossings." },
+          { question: "What deliverables come with ADA Site Accessibility Engineering?", answer: "Deliverables include ADA accessible route plan, PE-stamped civil permit drawings with accessibility features, cross-slope and grade analysis, ADA compliance documentation, and civil permit package including accessibility drawings." },
+          { question: "Can this service stand alone?", answer: "ADA Site Accessibility Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -1754,7 +2102,19 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Entitlement support documents",
           "Infrastructure phasing plan",
         ],
+        faqs: [
+          { question: "What does land Development Civil Engineering cover?", answer: "This scope covers site feasibility analysis — constraints, utilities, access, drainage, conceptual site plan civil engineering input, preliminary grading and drainage plan, and preliminary utility plan for development." },
+          { question: "What deliverables come with land Development Civil Engineering?", answer: "Deliverables include land development civil engineering drawings, PE-stamped civil permit package, public improvement plans, entitlement support documents, and infrastructure phasing plan." },
+          { question: "Can this service stand alone?", answer: "Land Development Civil Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
+    ],
+    faqs: [
+      { question: "What civil engineering services does Apex Grid provide?", answer: "Our civil engineering work includes commercial site grading and drainage engineering, stormwater management — retention, detention, and infiltration, parking lot layout and civil engineering, and commercial driveway and access engineering." },
+      { question: "Which focused civil engineering services are available?", answer: "Focused services include Commercial Site Development Engineering, Grading and Drainage Engineering, Parking Lot Civil Engineering, Stormwater Management Engineering, and Utility Engineering — each with its own service page describing its scope and deliverables." },
+      { question: "Can civil engineering be provided on its own?", answer: "Yes — we provide civil engineering as a standalone service or as part of a coordinated multi-discipline package. Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get a fee proposal?", answer: "Send us your drawings or describe your project — we respond with a fee proposal within one business day." },
     ],
   },
 
@@ -1809,6 +2169,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Foundation recommendations and parameters",
           "Earthwork specifications",
         ],
+        faqs: [
+          { question: "What does geotechnical Soil Investigations cover?", answer: "This scope covers soil boring program design and boring location layout, drilling and boring contractor management, split-spoon sampling and SPT blow count recording, and shelby tube sampling for undisturbed samples." },
+          { question: "What deliverables come with geotechnical Soil Investigations?", answer: "Deliverables include boring logs with field data, laboratory testing results, geotechnical investigation report, foundation recommendations and parameters, and earthwork specifications." },
+          { question: "Can this service stand alone?", answer: "Geotechnical Soil Investigations is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "foundation-recommendations",
@@ -1835,6 +2201,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Foundation type selection with supporting rationale",
           "Seismic site class determination",
           "Parameters for structural foundation design",
+        ],
+        faqs: [
+          { question: "What does foundation Type Recommendations cover?", answer: "This scope covers allowable bearing pressure determination at foundation depth, foundation type recommendation — spread footings, mat, piles, minimum foundation depth recommendation, and lateral earth pressure parameters for basement and retaining walls." },
+          { question: "What deliverables come with foundation Type Recommendations?", answer: "Deliverables include foundation recommendation section of geotechnical report, allowable bearing capacity at proposed foundation depth, foundation type selection with supporting rationale, seismic site class determination, and parameters for structural foundation design." },
+          { question: "Can this service stand alone?", answer: "Foundation Type Recommendations is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -1863,6 +2235,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Moisture control recommendations",
           "Geotechnical report section on expansive soils",
         ],
+        faqs: [
+          { question: "What does expansive Soil Engineering cover?", answer: "This scope covers expansion index testing per ASTM D4829, expansive soil classification — very low to very high, soil moisture and plasticity evaluation, and moisture-stable zone depth determination." },
+          { question: "What deliverables come with expansive Soil Engineering?", answer: "Deliverables include expansion index test results, expansive soil classification, foundation and slab recommendations for expansive conditions, moisture control recommendations, and geotechnical report section on expansive soils." },
+          { question: "Can this service stand alone?", answer: "Expansive Soil Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "settlement-analysis",
@@ -1889,6 +2267,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Mitigation recommendations",
           "Foundation recommendation to limit differential settlement",
           "Monitoring program recommendation if applicable",
+        ],
+        faqs: [
+          { question: "What does settlement Analysis and Mitigation cover?", answer: "This scope covers primary consolidation settlement calculation, secondary compression and long-term settlement estimates, differential settlement analysis between column locations, and settlement from adjacent construction or surcharge loading." },
+          { question: "What deliverables come with settlement Analysis and Mitigation?", answer: "Deliverables include settlement analysis calculations, geotechnical report section on settlement, mitigation recommendations, foundation recommendation to limit differential settlement, and monitoring program recommendation if applicable." },
+          { question: "Can this service stand alone?", answer: "Settlement Analysis and Mitigation is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -1917,6 +2301,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Drainage recommendations",
           "Parameters for structural retaining wall design",
         ],
+        faqs: [
+          { question: "What does retaining Wall Geotechnical Engineering cover?", answer: "This scope covers active and passive lateral earth pressure parameter determination, equivalent fluid pressure for wall design, allowable bearing capacity at wall footing depth, and sliding and overturning stability analysis." },
+          { question: "What deliverables come with retaining Wall Geotechnical Engineering?", answer: "Deliverables include retaining wall geotechnical parameters, geotechnical report section on retaining walls, lateral earth pressure coefficients, drainage recommendations, and parameters for structural retaining wall design." },
+          { question: "Can this service stand alone?", answer: "Retaining Wall Geotechnical Engineering is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
       {
         slug: "pavement-design",
@@ -1943,6 +2333,12 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Pavement section recommendation report",
           "Material specifications for base and asphalt",
           "Pavement design for permit and construction",
+        ],
+        faqs: [
+          { question: "What does pavement Geotechnical Design cover?", answer: "This scope covers subgrade soil sampling and R-value testing, california Bearing Ratio (CBR) testing, traffic loading analysis — vehicle types and projected volume, and asphalt pavement section design — Caltrans, AASHTO methods." },
+          { question: "What deliverables come with pavement Geotechnical Design?", answer: "Deliverables include r-value or CBR test results, pavement section design calculations, pavement section recommendation report, material specifications for base and asphalt, and pavement design for permit and construction." },
+          { question: "Can this service stand alone?", answer: "Pavement Geotechnical Design is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
         ],
       },
       {
@@ -1971,7 +2367,19 @@ export const DISCIPLINE_HUBS: DisciplineHub[] = [
           "Liquefaction screening or analysis results",
           "Seismic parameters section of geotechnical report",
         ],
+        faqs: [
+          { question: "What does seismic Site Classification cover?", answer: "This scope covers average shear wave velocity (Vs30) determination, SPT blow count average for seismic site class, site Class A through F determination per ASCE 7, and fa and Fv site amplification factor determination." },
+          { question: "What deliverables come with seismic Site Classification?", answer: "Deliverables include seismic site class determination, vs30 calculation supporting documentation, fa and Fv factors for structural seismic design, liquefaction screening or analysis results, and seismic parameters section of geotechnical report." },
+          { question: "Can this service stand alone?", answer: "Seismic Site Classification is provided as a standalone service or coordinated with structural, MEP, civil, and geotechnical engineering under one contract." },
+          { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+        ],
       },
+    ],
+    faqs: [
+      { question: "What geotechnical engineering services does Apex Grid provide?", answer: "Our geotechnical engineering work includes geotechnical soil investigation and boring program management, laboratory soil testing — Atterberg limits, compaction, expansion, allowable bearing pressure determination, and foundation type recommendation — spread footings, piles, deep foundations." },
+      { question: "Which focused geotechnical engineering services are available?", answer: "Focused services include Geotechnical Soil Investigations, Foundation Type Recommendations, Expansive Soil Engineering, Settlement Analysis and Mitigation, and Retaining Wall Geotechnical Engineering — each with its own service page describing its scope and deliverables." },
+      { question: "Can geotechnical engineering be provided on its own?", answer: "Yes — we provide geotechnical engineering as a standalone service or as part of a coordinated multi-discipline package. Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get a fee proposal?", answer: "Send us your drawings or describe your project — we respond with a fee proposal within one business day." },
     ],
   },
 ];
