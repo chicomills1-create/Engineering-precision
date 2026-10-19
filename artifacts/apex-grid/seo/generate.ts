@@ -5910,11 +5910,19 @@ function solutionsHubPage(): string {
       </div>
     </section>`;
 
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Engineering Solutions for Common Construction Problems",
+    description: "Engineering solutions for common construction problems — structural, MEP, electrical, plumbing, civil, and geotechnical. PE-stamped drawings and calculations from licensed engineers.",
+    url: `${SITE}/solutions/`,
+    publisher: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
+  };
   return htmlShell({
     title: "Engineering Solutions | Structural, MEP, Civil & Geotechnical | Apex Grid",
     description: "Engineering solutions for common construction problems — structural, MEP, electrical, plumbing, civil, and geotechnical. PE-stamped drawings and calculations from licensed engineers.",
     canonical: `${SITE}/solutions/`,
-    schemaJson: [],
+    schemaJson: [schema, breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Solutions" }])],
     body,
   });
 }
@@ -5941,6 +5949,23 @@ function governmentHubPage(): string {
       </div>
     </section>
 
+    <section class="section section--light">
+      <div class="container container--narrow">
+        <h2>How Government Engineering Engagements Run</h2>
+        <p>Government work is documentation-driven. The funding agency's standards govern the engineering before design starts: procurement rules, material standards — including Buy American Build America (BABA) awareness on federally funded work — and design certification requirements that differ from standard commercial construction. The two scopes linked above cover the work we support most: public works infrastructure for state, local, and federally funded programs, and engineering for federally funded projects delivered as prime or subconsultant.</p>
+        <p>The deliverable is a reviewable package: stamped drawings and calculations across structural, MEP, civil, and geotechnical, coordinated into one submittal set a government reviewer can check line by line. Federal facility work is designed against Unified Facilities Criteria (UFC) and GSA standards, and the criteria edition is confirmed at scoping, because it sets the format, the calculations required, and the review path the package will travel.</p>
+        <p>Engagements begin with the solicitation or the facility need: the disciplines in scope, the delivery method, and the schedule. We confirm the responsible licensed professionals for the project jurisdiction, then build the package around the agency's review process — including phasing for occupied federal buildings and active installations, where tie-ins, shutdown windows, and security review are designed in from the start rather than discovered during construction.</p>
+        <h3>What Public-Sector Clients Ask Us For</h3>
+        <ul class="check-list">
+          <li>Facility condition assessments before design money is committed</li>
+          <li>MEP system upgrades and replacements in occupied public buildings</li>
+          <li>Structural evaluation and repair design for aging facilities</li>
+          <li>Civil site, utility, and parking improvements for public works programs</li>
+          <li>Energy compliance documentation for federally funded construction</li>
+        </ul>
+      </div>
+    </section>
+
     <section class="section section--dark cta-band">
       <div class="container">
         <h2>Licensed Reach. Ready for Federal Work.</h2>
@@ -5949,11 +5974,19 @@ function governmentHubPage(): string {
       </div>
     </section>`;
 
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Engineering for Government and Federal Facilities",
+    description: "Structural, MEP, civil, and geotechnical engineering for federal facilities, military installations, and public works projects. UFC criteria, GSA standards, and EISA compliance.",
+    url: `${SITE}/government/`,
+    publisher: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
+  };
   return htmlShell({
     title: "Government & Federal Facility Engineering | Apex Grid Engineering",
     description: "Structural, MEP, civil, and geotechnical engineering for federal facilities, military installations, and public works projects. UFC criteria, GSA standards, and EISA compliance.",
     canonical: `${SITE}/government/`,
-    schemaJson: [],
+    schemaJson: [schema, breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Government Engineering" }])],
     body,
   });
 }
@@ -6088,11 +6121,19 @@ function guidesHubPage(): string {
       </div>
     </section>`;
 
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: GUIDES_HUB.h1,
+    description: GUIDES_HUB.lede,
+    url: `${SITE}/guides/`,
+    publisher: { "@type": "Organization", name: "Apex Grid Engineering", url: SITE },
+  };
   return htmlShell({
     title: GUIDES_HUB.title,
     description: GUIDES_HUB.description,
     canonical: `${SITE}/guides/`,
-    schemaJson: [],
+    schemaJson: [schema, breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Engineering Guides" }])],
     body,
   });
 }
@@ -6322,6 +6363,20 @@ function projectCategoryPage(cat: ProjectCategoryPage): string {
         <a class="btn btn--primary" href="/contact/">Send Us Your Project</a>
       </div>
     </section>
+    ${(cat.detailSections ?? []).map((s) => `
+    <section class="section section--white">
+      <div class="container container--narrow">
+        <h2>${esc(s.heading)}</h2>
+        <p>${esc(s.body)}</p>
+      </div>
+    </section>`).join("")}
+    ${cat.faqs?.length ? `
+    <section class="section section--white faq">
+      <div class="container container--narrow">
+        <h2>Common Questions</h2>
+        ${cat.faqs.map((f) => `<details><summary>${esc(f.question)}</summary><div class="a">${esc(f.answer)}</div></details>`).join("\n        ")}
+      </div>
+    </section>` : ""}
     <section class="section section--dark cta-band">
       <div class="container">
         <h2>Ready to Work Together?</h2>
@@ -6331,7 +6386,20 @@ function projectCategoryPage(cat: ProjectCategoryPage): string {
       </div>
     </section>`;
   const schema = { "@context": "https://schema.org", "@type": "Service", "name": cat.h1, "description": cat.lede, "url": `${SITE}${url}`, "provider": { "@id": `${SITE}/#business` }, "serviceType": cat.h1 };
-  return htmlShell({ title: cat.title, description: cat.description, canonical: `${SITE}${url}`, schemaJson: [schema, breadcrumbSchema(crumbs)], body });
+  // FAQPage schema is built from the same data as the visible FAQ section
+  // above, so the two can never drift (corpus-audit parity rule).
+  const faqSchema = cat.faqs?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: cat.faqs.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer },
+        })),
+      }
+    : null;
+  return htmlShell({ title: cat.title, description: cat.description, canonical: `${SITE}${url}`, schemaJson: faqSchema ? [schema, faqSchema, breadcrumbSchema(crumbs)] : [schema, breadcrumbSchema(crumbs)], body });
 }
 
 // ─── Static Standalone Page Renderer ─────────────────────────────────────
