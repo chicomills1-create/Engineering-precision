@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-label="Civil site plan diagram">
+<rect x="1" y="1" width="1198" height="518" fill="#0d0d0d" stroke="#2a2a2a" stroke-width="2"/>
+<g stroke="#3a3a3a" stroke-width="1"><path d="M0 65H1200M0 130H1200M0 195H1200M0 260H1200M0 325H1200M0 390H1200M0 455H1200M65 0V520M130 0V520M195 0V520M260 0V520M325 0V520M390 0V520M455 0V520M520 0V520M585 0V520M650 0V520M715 0V520M780 0V520M845 0V520M910 0V520M975 0V520M1040 0V520M1105 0V520"/></g>
+<text x="48" y="52" font-family="sans-serif" font-size="21" letter-spacing="4" fill="#8a8a8a">SITE PLAN</text>
+<g stroke="#8a8a8a" stroke-width="2" fill="none">
+<path d="M60 180C260 130 420 210 640 160S1020 120 1140 170"/>
+<path d="M60 235C260 185 430 265 650 215S1020 175 1140 225"/>
+<path d="M60 290C240 245 380 310 560 275"/>
+</g>
+<g stroke="#d9d9d9" stroke-width="4" fill="none">
+<rect x="620" y="255" width="300" height="120"/>
+<path d="M620 315h300M770 255v120"/>
+</g>
+<g stroke="#d9d9d9" stroke-width="3" fill="none" stroke-dasharray="12 9">
+<path d="M120 400C360 360 560 420 800 385S1060 350 1130 380"/>
+</g>
+<g fill="#d92323"><path d="M1052 342l26 10-24 12 4-10z"/></g>
+<g stroke="#d9d9d9" stroke-width="4"><path d="M60 470H1140M60 486h1080" stroke-width="2"/></g>
+<g stroke="#d9d9d9" stroke-width="2.5" fill="none"><circle cx="1078" cy="110" r="30"/><path d="M1078 88v44M1066 122l12-34 12 34" /></g>
+<text x="1066" y="80" font-family="sans-serif" font-size="17" fill="#8a8a8a">N</text>
+<g font-family="sans-serif" font-size="17" fill="#8a8a8a">
+<text x="120" y="150">GRADING CONTOURS</text>
+<text x="672" y="322">BUILDING PAD</text>
+<text x="120" y="376">STORM DRAIN (DASHED)</text>
+<text x="520" y="462">ROADWAY</text>
+</g>
+</svg>
