@@ -57,13 +57,22 @@ export const LEGACY_LOCATION_REDIRECTS: Readonly<Record<string, string>> = {
   "/industries/healthcare/mep-engineering/": "/industries/healthcare-engineering/",
   // Lane 4 answers consolidation (2026-10-12, ChatGPT-approved R1/R2/R3/R4/R6):
   // duplicate /answers/ topics folded into their single canonical winners.
-  // R5 (cold-storage-warehouse-refrigeration) is deliberately NOT here — held
-  // pending a refrigeration-consultant content merge into the winner.
+  // R5 (cold-storage-warehouse-refrigeration) was held here pending a
+  // refrigeration-consultant content merge into the winner — completed in
+  // CTR Stage 2 (2026-10-19); the fold ships in the Stage-2 block below.
   "/answers/911-dispatch-center-design/": "/answers/911-center-design/",
   "/answers/911-dispatch-design/": "/answers/911-center-design/",
   "/answers/cold-storage-warehouse-engineering/": "/answers/cold-storage-design/",
   "/answers/cold-storage-warehouse-design/": "/answers/cold-storage-design/",
   "/answers/cold-storage-facility-design/": "/answers/cold-storage-design/",
+  // CTR Stage 2 consolidation (2026-10-19): R5 completed — the zombie's
+  // refrigeration-differences content merged into cold-storage-design; the
+  // cold-storage ammonia page's application content (centralized plants,
+  // compressor staging by temperature zone, zone-matched evaporators and
+  // defrost, warehouse machinery-room safety) merged into the ammonia
+  // survivor. Both folded URLs land single-hop on their winners.
+  "/answers/cold-storage-warehouse-refrigeration/": "/answers/cold-storage-design/",
+  "/answers/cold-storage-ammonia-system-design/": "/answers/ammonia-refrigeration-design/",
   // Census fix Wave B (2026-10-19): internal links pointed at these URLs,
   // which 404'd. Each folds to its live canonical equivalent (targets
   // live-verified 200 before adding).
