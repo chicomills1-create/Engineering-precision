@@ -9,6 +9,9 @@ export interface PermitPage {
   lede: string;
   topics: string[];
   note?: string;
+  /** authored Q&A (Apex residuals 2026-10-19): visible section + FAQPage
+   *  JSON-LD are both built from this array — parity by construction. */
+  faqs?: Array<{ question: string; answer: string }>;
 }
 
 export const PERMIT_PAGES: PermitPage[] = [
@@ -30,6 +33,12 @@ export const PERMIT_PAGES: PermitPage[] = [
       "Digital and wet-stamped documents",
     ],
     note: "Apex Grid does not offer PE stamps as a stand-alone service. Where authorized for a project, the responsible licensed engineer designs, calculates, reviews, and seals work within the applicable scope and takes professional responsibility for those documents.",
+    faqs: [
+      { question: "What does this service include?", answer: "This scope covers structural PE-stamped drawings and calculations, mechanical PE-stamped drawings, electrical PE-stamped drawings, and plumbing PE-stamped drawings." },
+      { question: "When is this service needed?", answer: "A PE stamp represents an engineer's professional review and responsibility for the work — not a bureaucratic formality." },
+      { question: "What should I know about how this service works?", answer: "Apex Grid does not offer PE stamps as a stand-alone service. Where authorized for a project, the responsible licensed engineer designs, calculates, reviews, and seals work within the applicable scope and takes professional responsibility for those documents." },
+      { question: "What does Apex Grid produce?", answer: "We produce complete, PE-stamped permit packages and support the submittal through final approval." },
+    ],
   },
   {
     slug: "plan-check-responses",
