@@ -2885,8 +2885,8 @@ function peStampStatePage(state: StateData, slug: string): string {
   ];
   return phase0ArticleFrame({
     canonical: `/pe-stamp/${slug}/`,
-    title: `PE Stamp and License Lookup in ${stateName} | Apex Grid`,
-    description: `Verify a PE license in ${stateName} with the official board resources — plus PE stamp and review-and-seal services from Apex Grid, a veteran-owned firm with 10+ licensed PEs. Same-day quotes on qualifying scopes.`,
+    title: `PE Stamp Services in ${stateName} — Licensed PE Review & Seal | Apex Grid`,
+    description: `Need a PE stamp in ${stateName}? Licensed PEs review and seal drawings for permit — plus official ${stateName} board license-lookup resources. Veteran-owned, 10+ licensed PEs. Same-day quotes on qualifying scopes.`,
     h1: `PE Stamp in ${stateName} — Fast Review & Seal`,
     kicker: `${stateName} · Fast PE Review & Seal`,
     answer: `Need a PE stamp for ${aOrAn(stateName)} ${stateName} project? Send us your drawings — we'll handle the rest. Apex Grid's licensed PEs review and seal drawings nationwide: 10+ licensed PEs on a 20+ engineer team, with same-day quotes on qualifying scopes. Our engineers review your set, seal what passes, and clearly mark any required fixes, ensuring your permit submittal is clean. Every stamp is backed by our review, making it valid with the building department. Official ${stateName} board and license-verification links are included below for reference.`,
