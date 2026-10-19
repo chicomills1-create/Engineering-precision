@@ -124,6 +124,8 @@ interface CtrOverride {
   utmSlug: string;
   /** Append LocalBusiness/ProfessionalService schema */
   addLocalBusiness: boolean;
+  /** Append aggregateRating + review schema (CTR Stage 2 proof stack) */
+  addReviewSchema?: boolean;
   /** areaServed for the schema */
   areaServed: string;
 }
@@ -135,15 +137,17 @@ const CTR_OVERRIDES: Record<string, CtrOverride> = {
     titleB: "PE Stamp Texas | Fast 24\u201348 Hr Turnaround | Licensed in 49 States",
     descriptionB: "Get your Texas PE stamp fast. Licensed professional engineers, 24\u201348 hour turnaround, all disciplines. Apex Grid Engineering \u2014 trusted nationwide. Request a quote now.",
     utmSlug: "pe-stamp-texas",
+    addReviewSchema: true,
     addLocalBusiness: true,
     areaServed: "Texas",
   },
   "/industries/life-science/cleanroom-mep-engineering/": {
-    title: "Cleanroom MEP Engineering | ISO 5\u20138 Design, 10+ Licensed PEs | Apex Grid",
-    description: "Cleanroom MEP engineering for ISO 5\u20138 environments \u2014 HEPA/ULPA filtration, pressure cascades, temperature and humidity control. PE-stamped design from a veteran-owned firm with 20+ engineers and 10+ licensed PEs. Same-day quotes on qualifying scopes.",
+    title: "Cleanroom MEP Engineering Services \u2014 ISO 5\u20138, PE-Stamped Design | Apex Grid",
+    description: "PE-stamped cleanroom MEP design for ISO 5\u20138 facilities: HEPA/ULPA filtration, pressure cascades, temp & humidity control. Licensed PEs, veteran-owned. Get a same-day quote on qualifying scopes.",
     titleB: "MEP Engineering for Cleanrooms | Pharma & Life Science Experts",
     descriptionB: "Specialized cleanroom MEP design \u2014 ISO classification HVAC, HEPA/ULPA filtration, positive pressure cascades. Life science facility experts. Contact Apex Grid for a project quote.",
     utmSlug: "cleanroom-mep-engineering",
+    addReviewSchema: true,
     addLocalBusiness: true,
     areaServed: "United States",
   },
@@ -153,6 +157,7 @@ const CTR_OVERRIDES: Record<string, CtrOverride> = {
     titleB: "Denver MEP Engineering | Commercial HVAC, Electrical & Plumbing",
     descriptionB: "Denver MEP engineering firm serving all of Colorado. Commercial mechanical, electrical, and plumbing design coordinated with local AHJs. Licensed in 49 states. Request a quote.",
     utmSlug: "mep-engineering-colorado",
+    addReviewSchema: true,
     addLocalBusiness: true,
     areaServed: "Colorado",
   },
@@ -162,6 +167,7 @@ const CTR_OVERRIDES: Record<string, CtrOverride> = {
     titleB: "Cleveland Structural Engineering | Industrial & Commercial Design",
     descriptionB: "Cleveland structural engineering for adaptive reuse, industrial, and commercial projects. Licensed Ohio PEs. Lake-region expertise. Contact Apex Grid Engineering for a structural quote.",
     utmSlug: "structural-engineer-cleveland-ohio",
+    addReviewSchema: true,
     addLocalBusiness: true,
     areaServed: "Cleveland, Ohio",
   },
@@ -171,6 +177,7 @@ const CTR_OVERRIDES: Record<string, CtrOverride> = {
     titleB: "Multifamily MEP Engineering | Apartment Design & Energy Compliance",
     descriptionB: "Apartment MEP engineering from schematic to permit \u2014 HVAC loads, electrical distribution, plumbing risers, Title 24 / IECC compliance. Developer-trusted nationwide. Request a quote.",
     utmSlug: "apartment-mep-engineering",
+    addReviewSchema: true,
     addLocalBusiness: true,
     areaServed: "United States",
   },
@@ -180,6 +187,7 @@ const CTR_OVERRIDES: Record<string, CtrOverride> = {
     titleB: "Kalamazoo MEP Engineering | Commercial Design, Fast Turnaround",
     descriptionB: "MEP engineering for the Kalamazoo\u2013Portage metro \u2014 commercial HVAC, electrical, plumbing with Michigan code expertise. Licensed in 49 states. Get a Kalamazoo MEP quote today.",
     utmSlug: "mep-design-kalamazoo",
+    addReviewSchema: true,
     addLocalBusiness: true,
     areaServed: "Kalamazoo-Portage, Michigan",
   },
@@ -189,6 +197,7 @@ const CTR_OVERRIDES: Record<string, CtrOverride> = {
     titleB: "Salem Structural Engineering | Seismic, ADUs & Additions",
     descriptionB: "Salem, Oregon structural engineering \u2014 ADUs, additions, commercial interiors, seismic retrofits. Licensed Oregon PE. Willamette Valley expertise. Request a structural quote.",
     utmSlug: "structural-engineer-salem-oregon",
+    addReviewSchema: true,
     addLocalBusiness: true,
     areaServed: "Salem, Oregon",
   },
@@ -198,6 +207,7 @@ const CTR_OVERRIDES: Record<string, CtrOverride> = {
     titleB: "Garage Conversion Engineering | Structural Plans for Permits",
     descriptionB: "Garage conversion structural engineering \u2014 slab analysis, new openings, shear walls, and the permit drawings proving the structure works as living space. Fast turnaround. Get a quote.",
     utmSlug: "garage-conversion-structural-engineer",
+    addReviewSchema: true,
     addLocalBusiness: true,
     areaServed: "United States",
   },
@@ -207,8 +217,39 @@ const CTR_OVERRIDES: Record<string, CtrOverride> = {
     titleB: "Seismic Retrofit Engineering | Earthquake Strengthening Experts",
     descriptionB: "Seismic retrofit engineering strengthens existing buildings against earthquakes \u2014 soft-story, unreinforced masonry, non-ductile concrete. Mandated-program expertise. Request a quote.",
     utmSlug: "seismic-retrofit-engineer",
+    addReviewSchema: true,
     addLocalBusiness: true,
     areaServed: "California, Oregon, Washington",
+  },
+  "/locations/iowa/carroll/": {
+    title: "Structural, Civil & MEP Engineers in Carroll, IA \u2014 PE-Stamped Drawings | Apex Grid",
+    description: "PE-stamped structural, civil and MEP drawings for Carroll and Carroll County projects \u2014 permit-ready, designed to the IBC with Iowa amendments. Same-day quotes on qualifying scopes.",
+    titleB: "Engineering Services in Carroll, IA | MEP, Structural, Civil | Apex Grid",
+    descriptionB: "MEP, structural & civil engineering in Carroll, IA \u2014 PE-stamped, permit-ready drawings designed to the IBC with Iowa amendments; adoption reach varies by jurisdiction. Veteran-owned firm with 10+ licensed PEs; same-day quotes on qualifying scopes.",
+    utmSlug: "engineering-carroll-iowa",
+    addLocalBusiness: true,
+    areaServed: "Carroll, Iowa",
+    addReviewSchema: true,
+  },
+  "/locations/missouri/macon/": {
+    title: "Structural, Civil & MEP Engineers in Macon, MO \u2014 PE-Stamped Drawings | Apex Grid",
+    description: "PE-stamped structural, civil and MEP drawings for Macon and Macon County projects \u2014 permit-ready, designed to the IBC with Missouri amendments. Same-day quotes on qualifying scopes.",
+    titleB: "Engineering Services in Macon, MO | MEP, Structural, Civil | Apex Grid",
+    descriptionB: "MEP, structural & civil engineering in Macon, MO \u2014 PE-stamped, permit-ready drawings designed to the IBC with local amendments; editions vary widely by jurisdiction. Veteran-owned firm with 10+ licensed PEs; same-day quotes on qualifying scopes.",
+    utmSlug: "engineering-macon-missouri",
+    addLocalBusiness: true,
+    areaServed: "Macon, Missouri",
+    addReviewSchema: true,
+  },
+  "/locations/utah/salt-lake-city/": {
+    title: "MEP, Structural & Civil Engineers in Salt Lake City \u2014 PE-Stamped, Permit-Ready | Apex Grid",
+    description: "Licensed engineers serving Salt Lake City: MEP documentation, structural and civil design, energy-code compliance \u2014 permitted through Salt Lake City Building Services. PE-stamped drawings, same-day quotes on qualifying scopes.",
+    titleB: "Engineering Services in Salt Lake City, UT | MEP, Structural, Civil, Energy | Apex Grid",
+    descriptionB: "Licensed MEP, structural, civil, and energy-compliance engineering in Salt Lake City, UT. Permitting through Salt Lake City Building Services Division (within the Department of Community & Neighborhoods) under the 2021 IBC as adopted statewide under the Utah State Construction Code. PE-stamped documents from a veteran-owned firm with 10+ licensed PEs \u2014 same-day quotes on qualifying scopes.",
+    utmSlug: "engineering-salt-lake-city",
+    addLocalBusiness: true,
+    areaServed: "Salt Lake City, Utah",
+    addReviewSchema: true,
   },
 };
 
@@ -234,6 +275,39 @@ function buildCtrLocalBusinessSchema(override: CtrOverride, canonical: string): 
   };
 }
 
+// CTR Stage 2 proof stack (2026-10-19): the five Google reviews published
+// on the homepage (Home.tsx REVIEWS), verbatim. aggregateRating 5.0 / 5
+// matches the homepage's own published "5.0 on Google" presentation.
+const APEX_GOOGLE_REVIEWS: ReadonlyArray<{ author: string; jobTitle?: string; text: string }> = [
+  { author: "Ammad Riaz", text: "Jeremy is a great communicator. I trust him on projects to be responsive until the job is done. I would definitely consider him for engineering projects!" },
+  { author: "Jason Mitchell", jobTitle: "Principal Architect, JL Mitchell Architects PC", text: "Worked with Jeremy on a project \u2014 solid engineering and clear communication from start to finish." },
+  { author: "Griffin Phillips", text: "Apex was great to work with! We had a project that required both structural and MEP engineering and they got us taken care of promptly! They will definitely be getting our next projects." },
+  { author: "James Wadlund", text: "I had an issue at my home that required an engineer to draw plans and stamp them. Most firms turned me down, but not APEX Grid. Jeremy Mills was fantastic to work with. Honestly some of the best communication I've received from a business in years." },
+  { author: "Nayon Iovino", text: "Great costumer service. Speedy work with quality. I strongly recommend!" },
+];
+
+function buildApexReviewSchema(canonical: string): object {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${canonical}#reviews`,
+    "name": "Apex Grid Engineering",
+    "url": canonical,
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "5",
+      "bestRating": "5",
+    },
+    "review": APEX_GOOGLE_REVIEWS.map((r) => ({
+      "@type": "Review",
+      "author": { "@type": "Person", "name": r.author, ...(r.jobTitle ? { "jobTitle": r.jobTitle } : {}) },
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "reviewBody": r.text,
+    })),
+  };
+}
+
 /** Apply CTR overrides. Returns possibly-modified {title, description, schemaJson, body}. */
 function applyCtrOverrides(
   canonical: string,
@@ -251,11 +325,15 @@ function applyCtrOverrides(
   // Normalize: ensure trailing slash for lookup
   const key = path.endsWith("/") ? path : path + "/";
   const override = CTR_OVERRIDES[key];
-  if (!override) return { title, description, schemaJson, body };
-
+  // Proof stack: review schema on flagged money pages + the /pe-stamp/ family.
   let newSchema = schemaJson;
+  if ((override && override.addReviewSchema) || key.startsWith("/pe-stamp/")) {
+    newSchema = [...newSchema, buildApexReviewSchema(canonical)];
+  }
+  if (!override) return { title, description, schemaJson: newSchema, body };
+
   if (override.addLocalBusiness) {
-    newSchema = [...schemaJson, buildCtrLocalBusinessSchema(override, canonical)];
+    newSchema = [...newSchema, buildCtrLocalBusinessSchema(override, canonical)];
   }
   // UTM-tag CTA links for attribution (?src=seo-{slug})
   // Handles both bare /contact and /contact?existing=params
@@ -264,6 +342,33 @@ function applyCtrOverrides(
     (_m, q) => `href="/contact?src=seo-${override.utmSlug}${q ? "&" + q.slice(1) : ""}"`,
   );
   return { title: override.title, description: override.description, schemaJson: newSchema, body: newBody };
+}
+
+// CTR Stage 2 proof stack (2026-10-19): hero proof band + short quote form
+// injected on generator money pages -- identified by the family-visual
+// diagram the imagery pass placed on those families (answers, services,
+// PE-stamping, discipline hubs, locations, metros, industries). Class 1
+// families and owner-gated pages are hard-excluded. The form posts to the
+// site's existing lead pipeline (POST /api/leads, the same LeadInput
+// contract the contact form uses) and fires the same lead_submit_success
+// dataLayer event the estimator and contact form fire on success.
+const PROOF_BAND_HTML = `<aside class="proof-band" aria-label="Client proof"><p class="proof-stars" aria-hidden="true">★★★★★</p><p class="proof-line"><strong>5.0 on Google.</strong> “Solid engineering and clear communication from start to finish.” — Jason Mitchell, Principal Architect, JL Mitchell Architects PC</p><p class="proof-facts">20+ engineers · 10+ licensed PEs · Veteran-owned</p><a class="cta proof-cta" href="/estimate">Get an engineering estimate</a></aside>`;
+
+const QUOTE_FORM_HTML = `<section class="quote-form-band" id="apex-quote"><div id="apex-quote-wrap"><h2>Get a quote on your project</h2><p class="qf-proof">Reviewed and sealed by licensed PEs. <span aria-hidden="true">★★★★★</span> “Solid engineering and clear communication from start to finish.” — Jason Mitchell, Principal Architect</p><p>Tell us what you need and where the project is — quotes back within 12–24 hours on qualifying scopes.</p><form id="apex-quote-form"><div class="qf-grid"><label>Full name<input type="text" name="name" autocomplete="name" required /></label><label>Email<input type="email" name="email" autocomplete="email" required /></label><label>Project type<select name="projectType" required><option value="MEP">MEP</option><option value="Structural">Structural</option><option value="Civil">Civil</option><option value="PE stamp">PE stamp</option><option value="Other">Other</option></select></label><label>Project location<input type="text" name="location" placeholder="City, State" required /></label><label class="qf-full">Plans link (optional)<input type="url" name="plans" placeholder="https://…" /></label></div><button class="cta" type="submit">Request my quote</button><p id="apex-quote-error" style="display:none">Something went wrong sending your request. Please call (480) 490-0064 and we will take it from there.</p></form></div></section><script>(function(){var form=document.getElementById("apex-quote-form");if(!form)return;form.addEventListener("submit",function(e){e.preventDefault();var btn=form.querySelector("button[type=submit]");btn.disabled=true;var plans=form.elements["plans"].value.trim();var parts=["Project location: "+form.elements["location"].value.trim()];if(plans)parts.push("Plans: "+plans);parts.push("Quote requested from "+window.location.pathname);var data={name:form.elements["name"].value.trim(),email:form.elements["email"].value.trim(),projectType:form.elements["projectType"].value,services:"Quote request",message:parts.join(String.fromCharCode(10)),landingPath:window.location.pathname,source:"website-quote-form"};fetch("/api/leads",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)}).then(function(r){if(!r.ok)throw new Error("submit failed");window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:"lead_submit_success"});document.getElementById("apex-quote-wrap").innerHTML="<h2>Request received</h2><p>Thanks — your request is in. We will get back to you within 12–24 hours.</p>";}).catch(function(){btn.disabled=false;document.getElementById("apex-quote-error").style.display="block";});});})();</script>`;
+
+const PROOF_CSS = `.proof-band{max-width:1180px;margin:22px auto 0;padding:18px 22px;background:#0d1626;border:1px solid #24314d;border-radius:8px;color:#e5e7eb}.proof-band .proof-stars{color:#fbbf24;letter-spacing:2px;margin:0 0 6px;font-size:18px}.proof-band p{margin:0 0 6px}.proof-band .proof-facts{color:#94a3b8;font-size:14px}.proof-band .proof-cta{display:inline-block;margin-top:8px}.quote-form-band{max-width:1180px;margin:26px auto;padding:26px 22px;background:#0d1626;border:1px solid #24314d;border-radius:8px;color:#e5e7eb}.quote-form-band h2{margin:0 0 8px;font-size:26px}.quote-form-band .qf-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.quote-form-band label{display:block;font-size:13px;color:#cbd5e1}.quote-form-band input,.quote-form-band select{width:100%;margin-top:5px;padding:11px 12px;border-radius:6px;border:1px solid #334155;background:#0f172a;color:#f8fafc;font-size:15px;box-sizing:border-box}.quote-form-band .qf-full{grid-column:1/-1}.quote-form-band button{margin-top:14px}@media(max-width:700px){.quote-form-band .qf-grid{grid-template-columns:1fr}}`;
+
+const PROOF_EXCLUDED_PREFIXES = ["/architecture/", "/general-contracting/", "/portfolio/", "/jeremy-mills/"];
+
+function proofApplies(canonical: string, body: string): boolean {
+  let path = canonical;
+  try {
+    path = new URL(canonical, SITE).pathname;
+  } catch {
+    /* keep raw canonical */
+  }
+  if (PROOF_EXCLUDED_PREFIXES.some((p) => path.startsWith(p))) return false;
+  return body.includes('class="family-visual"');
 }
 
 export function htmlShell(opts: {
@@ -281,6 +386,15 @@ export function htmlShell(opts: {
   const _description = _ctr.description;
   const _schemaJson = _ctr.schemaJson;
   const _body = _ctr.body;
+  let _bodyOut = _body;
+  if (proofApplies(opts.canonical, _bodyOut)) {
+    const heroEnd = _bodyOut.indexOf("</section>");
+    if (heroEnd >= 0) {
+      const cut = heroEnd + "</section>".length;
+      _bodyOut = _bodyOut.slice(0, cut) + PROOF_BAND_HTML + _bodyOut.slice(cut);
+    }
+    if (!_bodyOut.includes("<form")) _bodyOut += QUOTE_FORM_HTML;
+  }
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -315,7 +429,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 ${_schemaJson.map((s) => `<script type="application/ld+json">${JSON.stringify(s)}</script>`).join("\n")}
-<style>${CSS}</style>
+<style>${CSS}${PROOF_CSS}</style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -323,7 +437,7 @@ ${_schemaJson.map((s) => `<script type="application/ld+json">${JSON.stringify(s)
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 ${header()}
-${_body}
+${_bodyOut}
 ${footer()}
 </body>
 </html>`;
