@@ -50,6 +50,14 @@ export const LEGACY_LOCATION_REDIRECTS: Readonly<Record<string, string>> = {
   "/answers/cold-storage-warehouse-engineering/": "/answers/cold-storage-design/",
   "/answers/cold-storage-warehouse-design/": "/answers/cold-storage-design/",
   "/answers/cold-storage-facility-design/": "/answers/cold-storage-design/",
+  // Census fix Wave B (2026-10-19): internal links pointed at these URLs,
+  // which 404'd. Each folds to its live canonical equivalent (targets
+  // live-verified 200 before adding).
+  "/licensing/": "/licensing-service-coverage/",
+  "/services/energy-code-compliance/": "/services/energy-compliance/",
+  "/industries/agriculture/geotechnical-engineering/": "/industries/agriculture-cannabis-facility-engineering/",
+  "/industries/agriculture/structural-engineering/": "/industries/agriculture-cannabis-facility-engineering/",
+  "/locations/georgia/athens/": "/locations/georgia/",
 };
 
 export const RETAINED_LEGACY_LOCATIONS: ReadonlyArray<{
