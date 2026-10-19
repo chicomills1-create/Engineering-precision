@@ -6115,6 +6115,8 @@ function guidePage(page: GuidePage): string {
 
     ${breadcrumb(crumbs)}
 
+    ${familyVisual(motifForText(`${page.h1} ${page.kicker}`))}
+
     <section class="section section--white faq">
       <div class="container container--narrow">
         <h2>Quick Answer</h2>
@@ -6750,6 +6752,8 @@ function disciplineHubPage(hub: DisciplineHub): string {
 
     ${breadcrumb(crumbs)}
 
+    ${familyVisual(motifForDiscipline(hub.slug))}
+
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>What We Engineer</h2>
@@ -6842,6 +6846,8 @@ function disciplineSubpagePage(hub: DisciplineHub, sp: DisciplineSubpage): strin
     </div>
 
     ${breadcrumb(crumbs)}
+
+    ${familyVisual(motifForDiscipline(hub.slug))}
 
     <section class="section section--white">
       <div class="container container--narrow">
