@@ -111,4 +111,47 @@ export const APEX_GRID_BUSINESS_SCHEMA = {
     })),
   },
   sameAs: ["https://www.linkedin.com/company/apex-grid-engineering"],
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    reviewCount: "5",
+    bestRating: "5",
+  },
+  review: [
+    {
+      "@type": "Review",
+      author: { "@type": "Person", name: "Ammad Riaz" },
+      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+      reviewBody:
+        "Jeremy is a great communicator. I trust him on projects to be responsive until the job is done. I would definitely consider him for engineering projects!",
+    },
+    {
+      "@type": "Review",
+      author: { "@type": "Person", name: "Jason Mitchell", jobTitle: "Principal Architect, JL Mitchell Architects PC" },
+      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+      reviewBody:
+        "Worked with Jeremy on a project — solid engineering and clear communication from start to finish.",
+    },
+    {
+      "@type": "Review",
+      author: { "@type": "Person", name: "Griffin Phillips" },
+      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+      reviewBody:
+        "Apex was great to work with! We had a project that required both structural and MEP engineering and they got us taken care of promptly! They will definitely be getting our next projects.",
+    },
+    {
+      "@type": "Review",
+      author: { "@type": "Person", name: "James Wadlund" },
+      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+      reviewBody:
+        "I had an issue at my home that required an engineer to draw plans and stamp them. Most firms turned me down, but not APEX Grid. Jeremy Mills was fantastic to work with. Honestly some of the best communication I've received from a business in years.",
+    },
+    {
+      "@type": "Review",
+      author: { "@type": "Person", name: "Nayon Iovino" },
+      reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5" },
+      reviewBody:
+        "Great costumer service. Speedy work with quality. I strongly recommend!",
+    },
+  ],
 } as const;
