@@ -448,7 +448,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
             </ul>
           </div>
           <div className="mt-20 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-            <p>© {year} Apex Grid Engineering. All rights reserved.</p>
+            <p>© {year} Apex Grid Engineering PLLC. All rights reserved.</p>
             <div className="flex gap-6">
               <Link href="/privacy" className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:text-foreground">Privacy Policy</Link>
               <Link href="/terms" className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:text-foreground">Terms of Service</Link>
