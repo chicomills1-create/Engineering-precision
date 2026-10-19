@@ -6,9 +6,9 @@ export const WAVE_CF_ANSWER_PAGES: Phase0AeoPage[] = [
 
   {
     slug: "adaptive-reuse-design",
-    title: "What Does Adaptive Reuse Engineering Involve for Old Buildings?",
+    title: "What Does Adaptive Reuse Design Involve for Old Buildings?",
     description: "Adaptive reuse engineering turns old buildings into new uses — feasibility, structural checks, code upgrades, and new MEP designed around existing bones.",
-    h1: "What Does Adaptive Reuse Engineering Involve for Old Buildings?",
+    h1: "What Does Adaptive Reuse Design Involve for Old Buildings?",
     answer: "Adaptive reuse engineering is the work of turning an existing building into something it was never designed to be — a warehouse into offices, a school into apartments, a church into a restaurant. The engineering starts with a feasibility question: can the existing structure safely carry the new use, and what does the code require when the occupancy changes? I walk these buildings with owners before they buy or lease, because the difference between a great reuse project and a money pit usually shows up in the first site visit — inadequate floor capacity, a lateral system that can't meet current seismic requirements, or MEP infrastructure so far gone that gutting it is the only option. The design work then covers structural evaluation and strengthening, bringing life safety and accessibility up to current code, and threading modern mechanical, electrical, and plumbing systems through a building that was never planned for them.",
     directAnswer: "Adaptive reuse engineering converts an existing building to a new occupancy. It starts with a structural feasibility and capacity assessment, then covers code compliance triggered by the occupancy change, structural strengthening where the existing frame can't carry new loads or meet seismic requirements, and new MEP systems routed through the existing structure — all while preserving the character that made the building worth saving.",
     topic: "Structural",
