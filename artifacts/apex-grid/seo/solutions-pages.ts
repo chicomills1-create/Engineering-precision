@@ -17,6 +17,9 @@ export interface SolutionPage {
   topics: string[];
   /** slugs of related solution pages for internal linking */
   relatedSlugs: string[];
+  /** authored Q&A (Apex residuals 2026-10-19): rendered visibly AND as
+   *  FAQPage JSON-LD from this same array — parity by construction. */
+  faqs?: Array<{ question: string; answer: string }>;
 }
 
 export const SOLUTION_PAGES: SolutionPage[] = [
@@ -39,6 +42,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Construction drawings for contractor installation",
     ],
     relatedSlugs: ["load-bearing-wall-removal", "masonry-wall-opening-engineering", "lintel-engineering"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers load-bearing wall identification and load path analysis, header and lintel design for new openings, post and jamb reinforcement design, and existing wood-frame, steel, masonry, and CMU wall analysis." },
+      { question: "When is this engineering needed?", answer: "Adding a new door, window, or pass-through to a commercial or residential building isn't simply a contractor decision — if the wall is structural, an engineer must design the header, verify the load path, and produce the calculations the building department requires." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "masonry-wall-opening-engineering", dir: "solutions",
@@ -715,6 +724,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Arc flash analysis for upgraded service",
     ],
     relatedSlugs: ["electrical-load-study", "generator-installation-engineering"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers electrical load calculations for service upgrade justification, new service entrance design — meter, CT cabinet, main disconnect, utility coordination — new service application and meter study, and panel and distribution design for upgraded service." },
+      { question: "When is this engineering needed?", answer: "Electrical service upgrades need an engineer when the load growth exceeds the existing service, when EV charging or solar requires a new service study, or when the utility requires a PE-stamped service entrance drawing for the upgrade." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer electrical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "electrical-load-study", dir: "solutions",
@@ -1039,6 +1054,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Turn lane civil permit drawings",
     ],
     relatedSlugs: ["commercial-driveway-engineering", "parking-lot-engineering"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers turn lane geometry design — deceleration length and taper, pavement widening civil design, right-of-way coordination with transportation agency, and stormwater management for turn lane area." },
+      { question: "When is this engineering needed?", answer: "Turn lane improvements — whether required by a traffic impact study or added to improve site access safety — require civil engineering that coordinates with the local transportation agency, meets state highway design standards, and manages the stormwater from new impervious area." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer civil engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "commercial-driveway-engineering", dir: "solutions",
