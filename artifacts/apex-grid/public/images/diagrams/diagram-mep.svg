@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-label="MEP systems diagram">
+<rect x="1" y="1" width="1198" height="518" fill="#0d0d0d" stroke="#2a2a2a" stroke-width="2"/>
+<g stroke="#3a3a3a" stroke-width="1"><path d="M0 65H1200M0 130H1200M0 195H1200M0 260H1200M0 325H1200M0 390H1200M0 455H1200M65 0V520M130 0V520M195 0V520M260 0V520M325 0V520M390 0V520M455 0V520M520 0V520M585 0V520M650 0V520M715 0V520M780 0V520M845 0V520M910 0V520M975 0V520M1040 0V520M1105 0V520"/></g>
+<text x="48" y="52" font-family="sans-serif" font-size="21" letter-spacing="4" fill="#8a8a8a">MEP SYSTEMS</text>
+<g stroke="#d9d9d9" stroke-width="4" fill="none">
+<rect x="110" y="105" width="560" height="58"/>
+<path d="M200 163v34M390 163v34M580 163v34"/>
+<path d="M182 197h36l-8 22h-20zM372 197h36l-8 22h-20zM562 197h36l-8 22h-20z"/>
+<rect x="880" y="100" width="150" height="215"/>
+<path d="M880 145h150M880 190h150M880 235h150M880 280h150"/>
+<path d="M955 315v60M955 375H240M240 375v40"/>
+<path d="M110 415H760M110 452H760"/>
+<path d="M620 415v-52h250"/>
+</g>
+<g stroke="#d92323" stroke-width="3.5" fill="none">
+<path d="M150 134h430M570 126l16 8-16 8z" fill="#d92323"/>
+<path d="M205 236v18M395 236v18M585 236v18M197 250l8 14 8-14M387 250l8 14 8-14M577 250l8 14 8-14"/>
+</g>
+<g fill="#d9d9d9"><circle cx="420" cy="415" r="13"/><path d="M420 402v26M407 415h26" stroke="#0d0d0d" stroke-width="3"/></g>
+<g font-family="sans-serif" font-size="17" fill="#8a8a8a">
+<text x="110" y="92">DUCTWORK + DIFFUSERS</text>
+<text x="862" y="92">ELECTRICAL PANEL</text>
+<text x="110" y="492">PIPING RUNS + VALVE</text>
+<text x="800" y="400">CONDUIT</text>
+</g>
+</svg>
