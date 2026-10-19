@@ -50,6 +50,8 @@ ul.scope li{background:var(--card);border:1px solid var(--border);padding:14px 1
 .linkrow{display:flex;flex-wrap:wrap;gap:10px}
 .linkrow a{border:1px solid var(--border);background:var(--card);padding:10px 16px;font-size:13px;color:hsl(0 0% 78%)}
 .linkrow a:hover{border-color:var(--primary);color:var(--primary)}
+.family-visual{max-width:1200px;margin:0 auto;padding:30px 24px 6px}
+.family-visual img{display:block;width:100%;height:auto;border:1px solid var(--border);background:hsl(0 0% 5%)}
 .ctaband{padding:72px 0;text-align:left}
 .ctaband h2{font-size:32px;margin-bottom:14px}
 .ctaband p{color:var(--muted);margin-bottom:28px;max-width:640px}
