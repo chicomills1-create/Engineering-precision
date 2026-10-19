@@ -29,6 +29,10 @@ export const WAVE_EC_ANSWER_PAGES: Phase0AeoPage[] = [
         question: "Does cold storage need backup power?",
         answer: "Absolutely — losing power in a freezer means losing inventory worth far more than the generator. Emergency and standby power design covers the refrigeration plant, controls, alarms, and critical lighting, with automatic transfer fast enough that product temperature never leaves its safe band.",
       },
+      {
+        question: "Ammonia or CO2 for cold storage refrigeration?",
+        answer: "Both are common in modern cold storage, often in cascade systems. Ammonia offers excellent efficiency for large plants but carries toxicity concerns that drive machinery-room and safety requirements. CO2 works well at low temperatures with lower toxicity but higher operating pressures. The selection depends on facility size, temperature requirements, safety planning, and the operator's experience with each refrigerant.",
+      },
     ],
     sections: [
       {
@@ -49,6 +53,10 @@ export const WAVE_EC_ANSWER_PAGES: Phase0AeoPage[] = [
           "Engineer freezer sprinkler protection as dry or preaction with strict antifreeze discipline",
           "Walk the fire marshal through the full freezer protection scheme before submitting for permit",
         ],
+      },
+      {
+        heading: "Refrigeration design: loads, refrigerant, and redundancy",
+        body: "The refrigeration load calculation is its own discipline, separate from comfort cooling. The engineer adds transmission through the envelope at the design temperature difference, infiltration modeled on actual door traffic, product load from goods entering above storage temperature, internal loads from lighting, forklifts, and people, and defrost energy \u2014 every evaporator ices up, and every defrost cycle adds heat the plant must then remove. Undersize any one of them and the plant cannot hold temperature on the worst day of the year.\n\nRefrigerant and architecture selection follows the facility: centralized ammonia plants for large warehouses, CO2 (often in cascade with ammonia) where low temperatures and lower toxicity win, or distributed units for smaller footprints. Redundancy is scaled to the value of what is inside \u2014 N+1 compression, backup power for critical refrigeration, and monitoring with alarming that reaches a human \u2014 because in cold storage a drift of a few degrees is not a complaint, it is spoiled product.",
       },
     ],
     extraLinks: [
@@ -117,7 +125,7 @@ export const WAVE_EC_ANSWER_PAGES: Phase0AeoPage[] = [
   },
   {
     slug: "ammonia-refrigeration-design",
-    title: "Ammonia Refrigeration Design | Safety Engineering for Industrial Systems | Apex Grid",
+    title: "Ammonia Refrigeration Design & Engineering \u2014 ASHRAE 15 / IIAR Compliant | Apex Grid",
     description: "Ammonia refrigeration design, engineered safely: charge minimization, machine-room ventilation and detection, emergency exhaust, and ASHRAE 15 / IIAR compliance for industrial ammonia systems of every facility type.",
     h1: "Why Does Ammonia Refrigeration Need Special Engineering Design?",
     answer: "Ammonia refrigeration engineering is the design of industrial refrigeration systems using anhydrous ammonia — the most efficient common refrigerant and also a toxic, flammable gas that demands rigorous safety engineering. Ammonia dominates large cold storage, food processing, and distribution facilities because its thermodynamic performance beats synthetics at scale, but every design decision runs through safety codes: ASHRAE 15 for machinery rooms and occupancy limits, IIAR bulletins for best practice, and EPA and OSHA process safety rules when the charge crosses regulatory thresholds. The machine room gets dedicated ventilation sized for emergency exhaust, ammonia detection tied to alarms and ventilation, and equipment arranged so a leak can be isolated and the room evacuated. Piping design follows pressure and material rules specific to ammonia, and the charge is minimized through low-charge system architectures wherever possible. I've reviewed facilities where the ammonia system was designed like a big commercial HVAC job — no emergency ventilation sequence, detectors as an afterthought — and the authority having jurisdiction stopped the project cold until the safety engineering caught up.",
@@ -141,6 +149,10 @@ export const WAVE_EC_ANSWER_PAGES: Phase0AeoPage[] = [
         question: "Can ammonia systems be retrofitted into existing buildings?",
         answer: "Sometimes, but the machine room, ventilation, detection, and egress requirements often drive the answer. Existing buildings rarely have a code-compliant machinery room location, and the structural work for equipment, piping, and ventilation can exceed the refrigeration equipment cost. An engineer evaluates the building before anyone buys compressors.",
       },
+      {
+        question: "How is defrost handled in an ammonia cold storage plant?",
+        answer: "Hot-gas defrost is the common choice \u2014 the system's own discharge gas melts coil frost quickly and efficiently \u2014 with water or electric defrost used where the application suits it. The design sequences defrost per temperature zone so product never warms, provides drainage that carries meltwater out of the refrigerated space, and terminates defrost on coil temperature so it runs only as long as needed.",
+      },
     ],
     sections: [
       {
@@ -162,9 +174,13 @@ export const WAVE_EC_ANSWER_PAGES: Phase0AeoPage[] = [
           "Reference IIAR bulletins throughout the design and keep them in the project record",
         ],
       },
+      {
+        heading: "Ammonia plants for cold storage warehouses",
+        body: "Cold storage is where ammonia earns its dominance, and the plant is designed around the building's temperature zones. One centralized plant typically serves a -10\u00b0F freezer, a 35\u00b0F cooler, and a tempered dock, with compressors staged by suction group so each zone holds its design capacity without starving the others. Screw compressors with slide-valve or variable-speed control follow the wide part-load hours a warehouse actually lives in, and the critical suction group is commonly N+1, because a compressor failure in a full freezer is a product-loss event. Heat reclaim from the condensers is free energy for dock heating, defrost, and domestic hot water.\n\nInside the rooms, evaporators are selected per zone \u2014 ceiling-hung unit coolers where service access matters, penthouse coils where product space does \u2014 and matched to the racking layout so airflow reaches the product instead of short-circuiting back to the coil. Defrost is designed per zone too: hot gas where it suits, water or electric where it doesn't, with drainage that carries meltwater out of the building. Plants split into two architectures: low-charge packaged systems that keep the ammonia inventory \u2014 and the safety footprint \u2014 small, and pumped-recirculation plants that serve large multi-evaporator warehouses efficiently. The machinery-room safety design from the sections above applies unchanged; in a refrigerated warehouse it is simply protecting more product value per hour.",
+      },
     ],
     extraLinks: [
-      { label: "How Are Ammonia Refrigeration Systems Designed for Cold Storage?", href: "/answers/cold-storage-ammonia-system-design/" },
+      { label: "What makes cold storage warehouse engineering so specialized?", href: "/answers/cold-storage-design/" },
       { label: "Industrial ventilation design guide", href: "/answers/industrial-ventilation-design/" },
       { label: "Backup vs standby vs emergency power", href: "/answers/backup-vs-standby-vs-emergency-power/" },
       { label: "Building commissioning explained", href: "/answers/building-commissioning-explained/" },
