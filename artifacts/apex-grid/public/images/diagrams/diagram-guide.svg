@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-label="Engineering blueprint diagram">
+<rect x="1" y="1" width="1198" height="518" fill="#0d0d0d" stroke="#2a2a2a" stroke-width="2"/>
+<rect x="60" y="60" width="1080" height="400" fill="none" stroke="#d9d9d9" stroke-width="3"/>
+<g stroke="#3a3a3a" stroke-width="1"><path d="M60 125H1140M60 190H1140M60 255H1140M60 320H1140M60 385H1140M125 60V460M190 60V460M255 60V460M320 60V460M385 60V460M450 60V460M515 60V460M580 60V460M645 60V460M710 60V460M775 60V460M840 60V460M905 60V460M970 60V460M1035 60V460M1100 60V460"/></g>
+<g stroke="#d9d9d9" stroke-width="4" fill="none">
+<path d="M150 330H560M150 330V210M560 330V210M150 210h410"/>
+<path d="M150 270h410" stroke-width="2.5"/>
+<path d="M215 330V248M300 330V248M385 330V248M470 330V248" stroke-width="2.5"/>
+</g>
+<g stroke="#d92323" stroke-width="3" fill="none">
+<path d="M150 160H560M150 148v24M560 148v24M162 160l14-6v12zM548 160l-14-6v12z"/>
+</g>
+<text x="318" y="140" font-family="sans-serif" font-size="19" fill="#8a8a8a">SPAN</text>
+<g stroke="#d9d9d9" stroke-width="2.5" fill="none">
+<circle cx="985" cy="150" r="42"/><path d="M985 116v68M951 150h68M961 126l24 24M1009 126l-24 24"/>
+</g>
+<text x="985" y="156" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#d9d9d9">N</text>
+<g stroke="#d9d9d9" stroke-width="2.5"><rect x="830" y="368" width="310" height="92"/><path d="M830 398h310M830 428h310M985 368v92"/></g>
+<g font-family="sans-serif" font-size="15" fill="#8a8a8a">
+<text x="842" y="390">APEX GRID ENGINEERING</text>
+<text x="842" y="420">ILLUSTRATIVE DIAGRAM</text>
+<text x="842" y="450">NOT TO SCALE</text>
+<text x="997" y="390">FAMILY</text>
+<text x="997" y="420">GUIDE</text>
+</g>
+<text x="84" y="52" font-family="sans-serif" font-size="21" letter-spacing="4" fill="#8a8a8a">ENGINEERING GUIDE</text>
+</svg>
