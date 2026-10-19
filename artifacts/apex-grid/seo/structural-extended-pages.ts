@@ -70,6 +70,12 @@ export const STRUCTURAL_EXTENDED_PAGES: StructuralExtendedPage[] = [
       "Post-repair structural certification",
     ],
     ctaText: "Describe the Structural Damage",
+    faqs: [
+      { question: "What does structural Repair Engineering include?", answer: "This scope covers concrete cracking and spalling repair design, foundation crack evaluation and repair, wood framing damage and rot repair, and steel corrosion and section loss evaluation." },
+      { question: "Is this a standalone service?", answer: "We provide structural Repair Engineering as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get started?", answer: "Use the contact page to describe the Structural Damage — or send whatever project information you have and we'll identify what's needed." },
+    ],
   },
   {
     slug: "existing-buildings",
@@ -93,6 +99,12 @@ export const STRUCTURAL_EXTENDED_PAGES: StructuralExtendedPage[] = [
       "Engineering when original drawings aren't available",
     ],
     ctaText: "Tell Us About Your Existing Building Project",
+    faqs: [
+      { question: "What does structural Engineering for Existing Buildings include?", answer: "This scope covers existing condition assessments and field review, structural renovations and additions, wall and ceiling openings, and roof framing modifications." },
+      { question: "Is this a standalone service?", answer: "We provide structural Engineering for Existing Buildings as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get started?", answer: "Use the contact page to tell Us About Your Existing Building Project — or send whatever project information you have and we'll identify what's needed." },
+    ],
   },
   {
     slug: "load-bearing-wall-removal",
@@ -116,6 +128,12 @@ export const STRUCTURAL_EXTENDED_PAGES: StructuralExtendedPage[] = [
       "RFI support during construction",
     ],
     ctaText: "Send Photos and Dimensions",
+    faqs: [
+      { question: "What does structural Engineering for Load-Bearing Wall Removal include?", answer: "This scope covers load path analysis and existing condition verification, field photo and measurement review, beam and header design, and post and column sizing." },
+      { question: "Is this a standalone service?", answer: "We provide structural Engineering for Load-Bearing Wall Removal as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get started?", answer: "Use the contact page to send Photos and Dimensions — or send whatever project information you have and we'll identify what's needed." },
+    ],
   },
   {
     slug: "condition-assessments",
@@ -139,6 +157,12 @@ export const STRUCTURAL_EXTENDED_PAGES: StructuralExtendedPage[] = [
       "Third-party peer review",
     ],
     ctaText: "Request a Structural Condition Assessment",
+    faqs: [
+      { question: "What does existing Building Condition Assessments include?", answer: "This scope covers visual assessment of structural and MEP systems, identification and documentation of deficiencies, repair priority classification, and cost guidance for capital planning." },
+      { question: "When is this service used?", answer: "A condition assessment documents the current state of a building's structural system or MEP systems — identifying deficiencies, prioritizing repairs, and providing the engineering data needed for capital planning, acquisition due diligence, or permit applications." },
+      { question: "How do I get started?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
+    ],
   },
   {
     slug: "tenant-improvements",
@@ -162,6 +186,12 @@ export const STRUCTURAL_EXTENDED_PAGES: StructuralExtendedPage[] = [
       "Plan check response support",
     ],
     ctaText: "Send Your TI Plans",
+    faqs: [
+      { question: "What does structural Engineering for Tenant Improvements include?", answer: "This scope covers new wall and ceiling openings, rooftop unit additions and replacements, kitchen equipment support, and mezzanine and platform additions." },
+      { question: "Is this a standalone service?", answer: "We provide structural Engineering for Tenant Improvements as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get started?", answer: "Use the contact page to send Your TI Plans — or send whatever project information you have and we'll identify what's needed." },
+    ],
   },
   {
     slug: "masonry-design",
@@ -185,6 +215,12 @@ export const STRUCTURAL_EXTENDED_PAGES: StructuralExtendedPage[] = [
       "Permit drawings and structural calculations",
     ],
     ctaText: "Send Your Masonry Project Details",
+    faqs: [
+      { question: "What does masonry Structural Engineering include?", answer: "This scope covers CMU (concrete masonry unit) wall design, brick and reinforced masonry, lintel and beam design, and reinforcement and grouting specifications." },
+      { question: "Is this a standalone service?", answer: "We provide masonry Structural Engineering as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get started?", answer: "Use the contact page to send Your Masonry Project Details — or send whatever project information you have and we'll identify what's needed." },
+    ],
   },
   {
     slug: "equipment-support",
@@ -208,6 +244,12 @@ export const STRUCTURAL_EXTENDED_PAGES: StructuralExtendedPage[] = [
       "PE-stamped drawings for permit and installation",
     ],
     ctaText: "Send Equipment Specifications",
+    faqs: [
+      { question: "What does structural Engineering for Equipment Support include?", answer: "This scope covers rooftop HVAC unit (RTU) structural support, generator pad and structural frame design, transformer pad and enclosure support, and battery energy storage (BESS) structural anchorage." },
+      { question: "Is this a standalone service?", answer: "We provide structural Engineering for Equipment Support as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get started?", answer: "Use the contact page to send Equipment Specifications — or send whatever project information you have and we'll identify what's needed." },
+    ],
   },
   {
     slug: "rooftop-equipment",
@@ -231,6 +273,12 @@ export const STRUCTURAL_EXTENDED_PAGES: StructuralExtendedPage[] = [
       "Permit-ready structural drawings",
     ],
     ctaText: "Send Existing Roof Plans and Equipment Specs",
+    faqs: [
+      { question: "What does structural Evaluation for Rooftop Equipment include?", answer: "This scope covers RTU replacement and new installation engineering, generator and transformer rooftop structural support, solar PV mounting structure engineering, and telecom equipment and antenna structural support." },
+      { question: "When is this service used?", answer: "Adding or replacing equipment on an existing roof imposes loads on the structural framing below." },
+      { question: "How do I get started?", answer: "Send us what you have — drawings, photos, or just a description. We'll tell you what engineering is needed and how much it costs." },
+      { question: "What happens after I send my building information?", answer: "We'll tell you what engineering is needed and how much it costs — that review is the starting point for the scope described on this page." },
+    ],
   },
   {
     slug: "canopies",
@@ -254,6 +302,12 @@ export const STRUCTURAL_EXTENDED_PAGES: StructuralExtendedPage[] = [
       "Permit drawings and structural calculations",
     ],
     ctaText: "Send Your Canopy Project Details",
+    faqs: [
+      { question: "What does structural Engineering for Canopies include?", answer: "This scope covers parking lot and garage entry canopies, solar carport canopy structural design, fuel station and car wash canopies, and pedestrian walkway and entry canopies." },
+      { question: "Is this a standalone service?", answer: "We provide structural Engineering for Canopies as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get started?", answer: "Use the contact page to send Your Canopy Project Details — or send whatever project information you have and we'll identify what's needed." },
+    ],
   },
   {
     slug: "retaining-walls",
@@ -277,5 +331,11 @@ export const STRUCTURAL_EXTENDED_PAGES: StructuralExtendedPage[] = [
       "Permit drawings and structural calculations",
     ],
     ctaText: "Send Your Retaining Wall Project",
+    faqs: [
+      { question: "What does retaining Wall Structural Engineering include?", answer: "This scope covers concrete cantilever retaining wall design, CMU (masonry) retaining wall design, gravity and semi-gravity retaining walls, and site grading and level change applications." },
+      { question: "Is this a standalone service?", answer: "We provide retaining Wall Structural Engineering as a standalone service or coordinated with MEP, civil, and geotechnical engineering under one contract." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+      { question: "How do I get started?", answer: "Use the contact page to send Your Retaining Wall Project — or send whatever project information you have and we'll identify what's needed." },
+    ],
   },
 ];
