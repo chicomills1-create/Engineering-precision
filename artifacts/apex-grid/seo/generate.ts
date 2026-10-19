@@ -4147,6 +4147,7 @@ ${breadcrumb(crumbs)}
   <h1>Engineering Services <span class="dim">in ${esc(city.name)}, ${esc(state.abbrev)}</span></h1>
   <p class="lede">Licensed MEP, structural, civil, and energy-compliance engineering for ${esc(city.name)} projects${esc(populationContext)} — designed to the ${esc(state.buildingCode.baseCode)} and permitted with the local jurisdiction. We confirm ${esc(city.name)}'s governing code editions and any local amendments with the permit office at project kickoff.</p>
 </div></section>
+${familyVisual("location", `Service location shown: ${city.name}, ${state.name}.`)}
 <section class="block"><div class="container">
   <h2>One Organization, <em>Connected Delivery</em></h2>
   <div class="grid3">
