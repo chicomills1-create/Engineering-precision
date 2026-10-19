@@ -1671,6 +1671,7 @@ function phase0ServicePage(page: Phase0ServicePage): string {
       { label: "Contact Apex Grid", href: "/contact/" },
     ],
     schemaType: "Service",
+    visual: motifForText(`${page.h1} ${page.title}`),
   });
 }
 
@@ -1700,6 +1701,7 @@ function peStampHubPage(): string {
     faqs,
     links: stateLinks,
     schemaType: "WebPage",
+    visual: "stamping",
   });
 }
 
@@ -2904,6 +2906,7 @@ function peStampStatePage(state: StateData, slug: string): string {
       { label: `Estimate ${aOrAn(stateName)} ${stateName} project`, href: `/engineering-cost-estimator/${slug}/` },
     ],
     schemaType: "WebPage",
+    visual: "stamping",
   });
 }
 
@@ -2919,6 +2922,7 @@ function stampingServicePage(page: StampingServicePage): string {
     faqs: page.faqs,
     links: page.links,
     schemaType: "Service",
+    visual: "stamping",
   });
 }
 
@@ -2958,6 +2962,7 @@ function stampingServiceHub(hub: StampingServiceHub): string {
     faqs: hub.faqs,
     links: hub.links,
     schemaType: "Service",
+    visual: "stamping",
   });
 }
 
