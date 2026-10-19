@@ -1266,6 +1266,44 @@ export const GUIDE_PAGES: GuidePage[] = [
           "Solar interconnection and battery storage require engineering",
         ],
       },
+      {
+        heading: "Who Does What, Task by Task",
+        points: [
+          "Service sizing: the engineer calculates the load and specifies the service; the electrician installs the service equipment the design calls for",
+          "Panel schedules and one-line diagrams: produced by the engineer as part of the stamped drawing set — they are design documents, not field paperwork",
+          "Conduit, wire, and device installation: the electrician's work, performed to the drawings and the electrical code",
+          "Load letters for the utility or the building department: written and sealed by the engineer when a service change needs justification",
+          "Field changes: when conditions differ from the drawings, the electrician flags it and the engineer revises the design — the stamp follows the revision",
+          "Final connections, terminations, and testing: the electrician completes the installation and schedules the inspections against the permit",
+        ],
+      },
+      {
+        heading: "Permit Scenarios: Who Signs, Who Pulls, Who Installs",
+        points: [
+          "Tenant improvement adding panels or new circuits: stamped engineering drawings for the permit set, then the electrician pulls the installation permit and builds to them",
+          "Like-for-like panel replacement with no load change: in many jurisdictions the licensed electrician can permit and perform this alone — the local rules decide, so verify before assuming",
+          "Service upgrade for added load — EV charging, a commercial kitchen, new HVAC: the engineer produces the load calculation and service design the utility and the jurisdiction require before the electrician's work is released",
+          "A failed inspection on a design question — conductor sizing, fault current, load calc: the engineer of record answers the correction notice, because the design is theirs",
+        ],
+      },
+      {
+        heading: "What Goes Wrong When the Roles Are Confused",
+        points: [
+          "Undersized service discovered at rough-in: equipment is already ordered, and the correction is a new service design plus re-inspection — weeks lost to a calculation that takes days up front",
+          "Equipment ordered against the wrong voltage or phase because no design fixed it first: restocking and re-specification land on the owner",
+          "Design changes made in the field without revised drawings: the as-built no longer matches the permitted set, and the final inspection fails on the mismatch",
+          "Permit applications rejected at intake because commercial electrical work was submitted without stamped drawings: the project restarts at the design step it tried to skip",
+        ],
+      },
+      {
+        heading: "How to Verify a License Before You Hire",
+        points: [
+          "For the engineer: search the state board of professional engineers' license lookup for the individual's PE license and confirm it is active — the stamp on your drawings must match that name and number",
+          "For the electrician: verify the electrical contractor's license (and journeyman or master credentials where the state issues them) with the state contractor licensing board",
+          "Ask which firm's name and license will appear on the permit set — that is the party legally responsible for the design",
+          "Confirm the engineer carries the project through plan check: a stamped set with no correction support leaves the corrections to you",
+        ],
+      },
     ],
     ctaText: "Get Electrical Engineering for Your Commercial Project",
     ctaHref: "/contact/",
