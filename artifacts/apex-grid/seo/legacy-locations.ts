@@ -38,6 +38,20 @@ export const LEGACY_LOCATION_REDIRECTS: Readonly<Record<string, string>> = {
   // into their single canonical hubs (GSC-verified, ChatGPT-approved).
   "/metros/salt-lake-city-murray-ut/": "/locations/utah/salt-lake-city/",
   "/metros/salt-lake-city-murray-ut/pe-stamp/": "/locations/utah/salt-lake-city/",
+  // CTR consolidation (2026-10-19): the remaining live subpages of the
+  // Salt Lake City metro — folded Oct 12 at hub level only — now fold to
+  // their canonical city counterparts (targets live-verified 200; city
+  // service pages verified; permit-guide / plan-check-corrections /
+  // engineering-calculations have no city counterpart and fold to the hub,
+  // matching the Oct-12 pe-stamp treatment). GSC 28d: the head query family
+  // ("mep documentation salt lake city" + misspelling) split 54/33/12/2
+  // across locations hub / metro hub / metro pe-stamp / resources hub.
+  "/metros/salt-lake-city-murray-ut/energy-compliance/": "/locations/utah/salt-lake-city/energy-code-compliance/",
+  "/metros/salt-lake-city-murray-ut/engineering-calculations/": "/locations/utah/salt-lake-city/",
+  "/metros/salt-lake-city-murray-ut/mep-engineering/": "/locations/utah/salt-lake-city/mep-engineering/",
+  "/metros/salt-lake-city-murray-ut/permit-guide/": "/locations/utah/salt-lake-city/",
+  "/metros/salt-lake-city-murray-ut/plan-check-corrections/": "/locations/utah/salt-lake-city/",
+  "/metros/salt-lake-city-murray-ut/structural-engineering/": "/locations/utah/salt-lake-city/structural-engineering/",
   "/mep-engineering/": "/services/mep",
   "/industries/healthcare/hospitals/mep-engineering/": "/industries/healthcare-engineering/",
   "/industries/healthcare/mep-engineering/": "/industries/healthcare-engineering/",
