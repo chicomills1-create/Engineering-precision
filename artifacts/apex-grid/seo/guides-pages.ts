@@ -881,6 +881,37 @@ export const GUIDE_PAGES: GuidePage[] = [
           "A brief project description is enough to start a fee proposal conversation",
         ],
       },
+      {
+        heading: "How a Structural Engineer Uses This Information",
+        points: [
+          "Load paths: the floor and roof plans show the engineer how gravity loads travel from the roof through beams, columns, and walls down to the foundation — and where the proposed work interrupts that path",
+          "Existing conditions: as-built drawings, photos, and field measurements establish what is actually in place, so the design works with the real structure instead of an assumed one",
+          "Foundation design: the geotechnical report's bearing capacity and soil conditions set footing sizes and foundation type — without it, foundation design rests on an assumption the building department will not accept",
+          "Code criteria: the project address fixes the jurisdiction, and with it the governing code edition, the wind and seismic design criteria, and any local amendments the calculations must follow",
+          "Equipment and special loads: manufacturer data for rooftop units, kitchen equipment, storage racking, or solar arrays replaces a generic allowance with the actual loads the structure gets checked against",
+        ],
+      },
+      {
+        heading: "What to Send, Project by Project",
+        points: [
+          "New building: architectural plans, a site plan, and the geotechnical report — plus the intended occupancy and construction type if the design team has set them",
+          "Tenant improvement or remodel: the proposed floor plan, the existing drawings if they exist, and photos of the areas being changed",
+          "Wall removal or new opening: a floor plan marking the wall, photos of both sides, and whatever is known about what the wall supports above it — roof, floor, or another wall",
+          "Addition: existing drawings, a site plan showing where the addition ties into the building, and the geotechnical report the new foundation design will rely on",
+          "Rooftop equipment or solar: the equipment layout, manufacturer data sheets with operating weights, and any roof framing information that is available",
+          "Not sure what applies: send what you have — part of the engineer's first pass is naming exactly what is missing and what can proceed without it",
+        ],
+      },
+      {
+        heading: "What Goes Wrong When Information Is Missing",
+        points: [
+          "Foundation design stalls: without a geotechnical report the engineer cannot size footings, and most building departments will not accept foundation drawings that guess at soil capacity",
+          "Concealed conditions surface mid-project: an opening cut into a wall that turns out to be load-bearing stops the work until the header and the load path around it are redesigned",
+          "Equipment arrives that the structure was never checked for: a heavier replacement rooftop unit can exceed the original design load and require reinforcement before it can be set",
+          "Permit corrections multiply: incomplete or superseded plans generate plan-check comments that a complete package would have avoided, and each correction cycle adds review time",
+          "Scope and fees get re-cut: engineering priced on one scope and designed on another has to be re-proposed — a complete package up front is what makes the first fee proposal accurate",
+        ],
+      },
     ],
     ctaText: "Send Your Project Information",
     ctaHref: "/contact/",
@@ -963,6 +994,35 @@ export const GUIDE_PAGES: GuidePage[] = [
           "We can receive Bluebeam markups and redlines",
           "If you only have paper drawings, we can often work from scanned PDFs",
           "Send us whatever you have — we'll confirm if anything additional is needed",
+        ],
+      },
+      {
+        heading: "What Engineers Actually Do With Each Format",
+        points: [
+          "PDF: the engineer reads dimensions and layouts, marks up the plans, and uses them as the geometric basis for calculations and for the engineering drawing set",
+          "DWG or DXF: the engineer references the architect's geometry directly, so backgrounds stay exact and revisions stay aligned with the architectural set as it changes",
+          "Revit: the engineer works inside or alongside the model, which lets structural and MEP elements be coordinated against the architecture in three dimensions before anything is built",
+          "Scanned paper drawings: workable for many existing-building projects — the engineer treats them as a record of what was intended and verifies the critical dimensions in the field",
+          "Photos and field notes: not a substitute for drawings, but often the deciding evidence for existing conditions that no drawing set records",
+        ],
+      },
+      {
+        heading: "How to Send Files So Nothing Gets Lost",
+        points: [
+          "Send the complete current set: partial or superseded sheets are the most common cause of scope errors, and an engineer cannot tell a sheet is missing from a set they have never seen complete",
+          "Name the version and date: when several plan sets are circulating, the engineer needs one clearly marked current set as the design basis — one marked set beats five loose attachments",
+          "Include the native files if you have them: DWG or Revit sent alongside the PDF costs nothing and can save a full redraw of the backgrounds",
+          "Flag what is still changing: if part of the layout is preliminary, say so — the engineer can stage the work so settled areas proceed and open areas follow",
+          "Use a link for large models: a cloud link to the current folder is more reliable than splitting a large Revit or CAD file across email attachments",
+        ],
+      },
+      {
+        heading: "What Goes Wrong With the Wrong Starting Files",
+        points: [
+          "Coordination errors: engineering backgrounds traced from an outdated PDF put beams and ducts where the current design no longer has them — found at plan check or, worse, in the field",
+          "Redraw time: a complex project supplied only as flat PDFs means the engineer rebuilds geometry that already exists in the architect's model, and that time lands in the fee",
+          "Scale and legibility failures: a low-resolution scan with no readable dimensions cannot support calculations — the engineer has to stop and request the originals or verify dimensions on site",
+          "Missed scope: sheets that never reached the engineer — a roof plan, a kitchen layout, an equipment schedule — surface later as revisions and permit corrections",
         ],
       },
     ],
