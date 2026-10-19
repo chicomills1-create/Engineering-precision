@@ -57,7 +57,9 @@ export const LEGACY_LOCATION_REDIRECTS: Readonly<Record<string, string>> = {
   "/services/energy-code-compliance/": "/services/energy-compliance/",
   "/industries/agriculture/geotechnical-engineering/": "/industries/agriculture-cannabis-facility-engineering/",
   "/industries/agriculture/structural-engineering/": "/industries/agriculture-cannabis-facility-engineering/",
-  "/locations/georgia/athens/": "/locations/georgia/",
+  // "/locations/georgia/athens/" removed 2026-10-19 (Apex residuals): Athens
+  // was restored to cities-directory.json, so the hub generates again and the
+  // redirect would overwrite it (legacy pages are written after the tree).
 };
 
 export const RETAINED_LEGACY_LOCATIONS: ReadonlyArray<{
