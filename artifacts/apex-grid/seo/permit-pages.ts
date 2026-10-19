@@ -57,6 +57,12 @@ export const PERMIT_PAGES: PermitPage[] = [
       "Jurisdiction-specific code interpretation",
       "Accelerated response for time-sensitive permits",
     ],
+    faqs: [
+      { question: "What does this service include?", answer: "This scope covers structural plan check comment responses, MEP plan check comment responses, civil plan check comment responses, and revised calculations with code citations." },
+      { question: "When is this service needed?", answer: "Plan check comment responses require the same engineering rigor as the original submittal." },
+      { question: "What does Apex Grid produce?", answer: "We produce complete, PE-stamped permit packages and support the submittal through final approval." },
+      { question: "How do I get started?", answer: "Request a proposal through the contact page with your project details." },
+    ],
   },
   {
     slug: "city-comments",
@@ -74,6 +80,12 @@ export const PERMIT_PAGES: PermitPage[] = [
       "Tracking comment status through the jurisdiction's review process",
       "Jurisdiction-specific requirements confirmed during intake",
     ],
+    faqs: [
+      { question: "What does this service include?", answer: "This scope covers formal written response to each plan check comment, supporting structural calculations, code section references and interpretations, and revised drawing sheets." },
+      { question: "When is this service needed?", answer: "City plan check comments are a normal part of the permitting process." },
+      { question: "What does Apex Grid produce?", answer: "We produce complete, PE-stamped permit packages and support the submittal through final approval." },
+      { question: "How do I get started?", answer: "Request a proposal through the contact page with your project details." },
+    ],
   },
   {
     slug: "permit-revisions",
@@ -90,6 +102,12 @@ export const PERMIT_PAGES: PermitPage[] = [
       "Revised calculations for scope changes",
       "Permit revision package preparation",
       "Coordination with building department on revision procedures",
+    ],
+    faqs: [
+      { question: "What does this service include?", answer: "This scope covers revised structural drawings for field condition changes, MEP revisions for equipment substitutions, as-built documentation for permit finalization, and engineer-of-record sign-off on contractor-proposed modifications." },
+      { question: "When is this service needed?", answer: "Construction rarely proceeds exactly as designed." },
+      { question: "What does Apex Grid produce?", answer: "We produce complete, PE-stamped permit packages and support the submittal through final approval." },
+      { question: "How do I get started?", answer: "Request a proposal through the contact page with your project details." },
     ],
   },
   {
@@ -109,6 +127,12 @@ export const PERMIT_PAGES: PermitPage[] = [
       "Hydraulic calculations for plumbing and fire protection coordination",
       "Jurisdiction-specific calculation formats",
     ],
+    faqs: [
+      { question: "What does this service include?", answer: "This scope covers structural calculations — gravity and lateral loads, seismic and wind load analysis, foundation design calculations, and mechanical load calculations for HVAC." },
+      { question: "When is this service needed?", answer: "Engineering calculations are the mathematical backbone of every permit submittal — they demonstrate to the plan reviewer that the proposed design complies with applicable codes and can handle the required loads and demands." },
+      { question: "What does Apex Grid produce?", answer: "We produce complete, PE-stamped permit packages and support the submittal through final approval." },
+      { question: "How do I get started?", answer: "Request a proposal through the contact page with your project details." },
+    ],
   },
 ];
 
@@ -117,4 +141,10 @@ export const PERMIT_HUB = {
   description: "Project-specific PE-stamped engineering drawings, calculations, plan check responses, and permit revisions for structural, MEP, and civil building permits, subject to jurisdiction and engineer review.",
   h1: "Permit-Ready Engineering Drawings and Calculations",
   lede: "Many commercial building permits require engineering documentation — drawings, calculations, and professional review by appropriately licensed engineers. After project scope, discipline, jurisdiction, and engineer availability are confirmed, we can produce a defined permit package and support jurisdiction review; approval remains with the authority.",
+  faqs: [
+    { question: "What permit engineering services does Apex Grid provide?", answer: "Project-specific PE-stamped engineering drawings, calculations, plan check responses, and permit revisions for structural, MEP, and civil building permits." },
+    { question: "Why do commercial permits need engineering documentation?", answer: "Many commercial building permits require engineering documentation — drawings, calculations, and professional review by appropriately licensed engineers." },
+    { question: "How is a permit package scoped?", answer: "After project scope, discipline, jurisdiction, and engineer availability are confirmed, we can produce a defined permit package and support jurisdiction review; approval remains with the authority." },
+    { question: "Which disciplines are covered?", answer: "For projects whose jurisdiction, discipline, and scope are confirmed during intake, we can coordinate PE-stamped structural, MEP, and civil engineering permit documents." },
+  ],
 };
