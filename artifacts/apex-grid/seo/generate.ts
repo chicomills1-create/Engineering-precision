@@ -3293,6 +3293,7 @@ function phase1MetroHubPage(metro: Phase1Metro): string {
   const body = `<main data-phase1="true">
 ${breadcrumb(crumbs)}
 <section class="hero"><div class="container"><p class="kicker">Census CBSA ${metro.cbsaCode} · 2025 permit context</p><h1>Engineering Guides for the ${esc(metro.metroName)} Metro</h1><p class="lede">A practical, jurisdiction-neutral engineering guide for the ${esc(metro.metroName)} metropolitan area, represented by ${esc(metro.representativeCity)}, ${esc(metro.representativeState)}. The 2025 Census BPS final annual record reports ${metro.permitTotal2025.toLocaleString("en-US")} permitted housing units for this ranked metro record.</p><p class="note">By ${esc(PHASE1_AUTHOR)}</p></div></section>
+${familyVisual("location", `Service location shown: ${metro.representativeCity}, ${metro.representativeState}.`)}
 <section class="block"><div class="container"><h2>How to use this <em>metro guide</em></h2><div class="prose"><p>${esc(metro.editorial.planningLens)}</p><p>${esc(metro.editorial.coordinationLens)}</p><p>This page uses the Census metro record for market context only. It does not invent a local permitting fact, identify an authority's current checklist, promise coverage, or substitute for a project intake and responsible professional review.</p></div></div></section>
 <section class="block"><div class="container"><h2>${esc(metro.representativeCity)} <em>engineering paths</em></h2><div class="grid2">${links}</div></div></section>
 <section class="block"><div class="container"><h2>Evidence before <em>design decisions</em></h2><div class="prose"><p>${esc(metro.editorial.documentationLens)}</p><p>${esc(metro.editorial.deliveryLens)}</p><p>For an initial review, gather the project address, scope narrative, current architectural backgrounds, existing-condition photographs or measurements, equipment information, site or geotechnical records where relevant, prior comments, and requested deliverables. The responsible professional identifies what is sufficient for the defined question.</p></div></div></section>
@@ -3399,6 +3400,7 @@ function phase1MetroServicePage(metro: Phase1Metro, service: Phase1ServiceSlug):
   const body = `<main data-phase1="true">
 ${breadcrumb(crumbs)}
 <section class="hero"><div class="container"><p class="kicker">${esc(label)} · ${esc(metro.representativeCity)} metro</p><h1>${esc(label)} for the ${esc(metro.metroName)} Metro</h1><p class="lede">${esc(phase1ServiceSummaries[service])} Apex Grid is a veteran-owned, Black-owned firm — 20+ engineers, 10+ licensed PEs, rated 5.0 stars on Google — delivering coordinated, PE-stamped documents for ${esc(metro.metroName)} projects, with same-day quotes on qualifying scopes.</p><p class="note">By ${esc(PHASE1_AUTHOR)}</p></div></section>
+${familyVisual(motifForText(label), `Service location shown: ${metro.representativeCity}, ${metro.representativeState}.`)}
 <section class="block"><div class="container"><h2>${esc(details.heading)}</h2><div class="prose">${details.paragraphs.map((paragraph) => `<p>${esc(paragraph)}</p>`).join("")}</div></div></section>
 <section class="block"><div class="container"><h2>Scope and <em>intake evidence</em></h2><div class="prose"><p>${esc(metro.editorial.deliveryLens)}</p><ul class="scope">${details.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul></div></div></section>
 <section class="block"><div class="container"><h2>${esc(metro.representativeCity)} metro <em>context</em></h2><div class="prose"><p>${esc(metro.editorial.planningLens)}</p><p>${esc(metro.editorial.coordinationLens)}</p><p>${esc(metro.editorial.documentationLens)}</p></div></div></section>
@@ -7158,6 +7160,7 @@ function batch2MetroPage(expansion: Batch2StateExpansion, metro: Batch2Metro): s
   const body = `<main>
 ${breadcrumb(crumbs)}
 <section class="hero"><div class="container"><p class="kicker">${esc(expansion.stateAbbrev)} • ${esc(metro.county)}</p><h1>Engineering Services in ${esc(metro.name)}</h1><p class="lede">Apex Grid’s five researched engineering services for ${esc(metro.name)}, ${esc(expansion.stateName)}. The responsible professional and local authority confirm project-specific scope, licensure, code edition, and filing requirements.</p></div></section>
+${familyVisual("location", `Service location shown: ${metro.name}, ${expansion.stateName}.`)}
 <section class="block"><div class="container"><h2>${esc(metro.name)} <em>Service Paths</em></h2><div class="grid2">${metro.services.map((service) =>
     `<a class="card" href="${esc(`${url}${service.serviceSlug}/`)}"><div class="label">${esc(service.kicker)}</div><h3>${esc(service.h1)}</h3><p>${esc(service.lede)}</p></a>`,
   ).join("")}</div></div></section>
@@ -7248,6 +7251,7 @@ function batch2ServicePage(
   const body = `<main>
 ${breadcrumb(crumbs)}
 <section class="hero"><div class="container"><p class="kicker">${esc(service.kicker)}</p><h1>${esc(service.h1)}</h1><p class="lede">${esc(service.lede)}</p></div></section>
+${familyVisual(motifForText(service.h1), `Service location shown: ${metro.name}, ${expansion.stateName}.`)}
 <section class="block"><div class="container"><h2>Permit <em>authority</em></h2><div class="prose"><p>${esc(service.permitAuthority)}</p></div></div></section>
 <section class="block"><div class="container"><h2>Code <em>context</em></h2><div class="prose"><p>${esc(service.codeContext)}</p></div></div></section>
 <section class="block"><div class="container"><h2>Local <em>conditions</em></h2><div class="prose"><p>${esc(service.localConditions)}</p></div></div></section>
