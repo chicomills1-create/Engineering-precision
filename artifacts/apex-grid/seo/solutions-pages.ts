@@ -64,6 +64,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Shoring requirements during construction",
     ],
     relatedSlugs: ["structural-engineering-wall-openings", "lintel-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers CMU and brick masonry wall structural evaluation, masonry lintel design — steel and CMU lintel types, bond beam and jamb reinforcement design, and existing masonry condition assessment before cutting." },
+      { question: "When is this engineering needed?", answer: "Cutting openings in concrete masonry unit (CMU) or brick walls requires engineering that goes beyond wood-frame analysis — masonry lintels, bond beam reinforcement, and existing masonry condition assessment are all part of a proper engineering scope." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "lintel-engineering", dir: "solutions",
@@ -80,6 +86,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Deflection analysis and limits for lintel systems",
     ],
     relatedSlugs: ["structural-engineering-wall-openings", "masonry-wall-opening-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers steel angle and channel lintel design, built-up lumber header design for wood-frame walls, LVL and engineered lumber header engineering, and masonry lintel design — precast and steel." },
+      { question: "When is this engineering needed?", answer: "A lintel or header carries the load from the structure above a wall opening — its design depends on the span, the load above, the wall type, and the bearing support on each side." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "load-bearing-wall-removal", dir: "solutions",
@@ -97,6 +109,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Structural drawings for contractor installation",
     ],
     relatedSlugs: ["structural-engineering-wall-openings", "beam-replacement-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers load path analysis for existing structural systems, replacement beam design — steel, LVL, glulam, post and column design for new beam support, and foundation evaluation for new point load transfer." },
+      { question: "When is this engineering needed?", answer: "Removing a load-bearing wall requires structural engineering — a beam must replace the wall's load-carrying function, posts must transfer loads to the foundation, and the floor and roof structure above must be verified to span the new clear opening." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "beam-replacement-engineering", dir: "solutions",
@@ -113,6 +131,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Permit-required structural calculations and drawings",
     ],
     relatedSlugs: ["load-bearing-wall-removal", "structural-engineering-wall-openings"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers existing beam capacity evaluation, replacement beam design — steel, LVL, glulam, timber, beam reinforcement and sister-beam design, and connection design — beam-to-post, beam-to-column." },
+      { question: "When is this engineering needed?", answer: "Deteriorated, undersized, or damaged beams need engineering — whether you're replacing a failing beam in an existing building, reinforcing an existing member, or upsizing a beam for a new load." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── STRUCTURAL — EQUIPMENT & ROOFTOP ───────────────────────────────────
@@ -133,6 +157,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Structural calculations and drawings for permit submittal",
     ],
     relatedSlugs: ["rtu-replacement-structural-engineering", "generator-structural-support"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers rooftop dead load and seismic/wind anchorage analysis, existing roof framing capacity evaluation, equipment curb and support frame structural design, and vibration isolation structural design." },
+      { question: "When is this engineering needed?", answer: "Every rooftop unit needs a structural analysis before installation — the engineer verifies the roof framing can support the equipment weight, designs the curb or support frame, and stamps the calculations the mechanical contractor needs for the permit." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "rtu-replacement-structural-engineering", dir: "solutions",
@@ -148,6 +178,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Structural letter or calculations for permit",
     ],
     relatedSlugs: ["rooftop-hvac-structural-analysis", "hvac-replacement-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers weight comparison — existing vs. replacement RTU, roof framing load capacity evaluation, new curb or mounting rail structural design, and seismic and wind anchorage for replacement equipment." },
+      { question: "When is this engineering needed?", answer: "RTU replacement often involves a heavier unit than the original — structural engineering verifies the roof can take the new load, designs new curbs or rails if needed, and produces the permit-required calculations." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "generator-structural-support", dir: "solutions",
@@ -164,6 +200,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Fuel tank and day tank structural coordination",
     ],
     relatedSlugs: ["transformer-pad-engineering", "bess-structural-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers concrete equipment pad structural design, seismic anchorage calculations for generators, vibration isolation system structural coordination, and rooftop generator structural analysis." },
+      { question: "When is this engineering needed?", answer: "Generator installations need engineered concrete pads, vibration isolation design, and seismic anchorage calculations — whether the generator is rooftop, grade-level, or in an equipment room." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "transformer-pad-engineering", dir: "solutions",
@@ -180,6 +222,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Permit-required structural drawings",
     ],
     relatedSlugs: ["generator-structural-support", "bess-structural-engineering"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers transformer concrete pad structural design, switchgear and MCC equipment foundation design, seismic anchorage for electrical equipment, and utility-compliant pad dimensions and reinforcement." },
+      { question: "When is this engineering needed?", answer: "Transformers, switchgear, and large electrical equipment need properly engineered concrete pads that account for equipment weight, seismic anchorage, and utility-required grounding provisions." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "bess-structural-engineering", dir: "solutions",
@@ -196,6 +244,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Permit-required structural calculations",
     ],
     relatedSlugs: ["generator-structural-support", "bess-electrical-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers BESS equipment pad and foundation structural design, container-mounted BESS foundation design, seismic anchorage engineering for battery cabinets, and rooftop BESS structural load evaluation." },
+      { question: "When is this engineering needed?", answer: "Battery energy storage systems are heavy, and the foundation or pad they sit on must be engineered for the equipment weight, seismic anchorage requirements, and thermal management system clearances." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── STRUCTURAL — SOLAR & RENEWABLES ────────────────────────────────────
@@ -215,6 +269,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "PE-stamped structural calculations for AHJ submittal",
     ],
     relatedSlugs: ["solar-carport-structural-engineering", "parking-canopy-structural-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers roof framing dead load capacity evaluation for PV panels, penetrating attachment design and structural calculations, ballast system design for non-penetrating installations, and wind uplift and seismic load analysis for PV systems." },
+      { question: "When is this engineering needed?", answer: "Every commercial rooftop solar installation needs a structural analysis — verifying the roof framing can handle the new dead load, designing the attachment or ballast system, and producing PE-stamped calculations for the permit." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "solar-carport-structural-engineering", dir: "solutions",
@@ -231,6 +291,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Foundation design coordinated with geotechnical conditions",
     ],
     relatedSlugs: ["solar-rooftop-structural-analysis", "parking-canopy-structural-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers solar carport structural frame design — steel and aluminum, column spacing and foundation design for carport systems, wind load design for canopy structures, and seismic design for solar carport installations." },
+      { question: "When is this engineering needed?", answer: "Solar carport structures are standalone canopies designed to support PV panels over parking — structural engineering designs the columns, beams, and foundations that must handle gravity, wind, and seismic loads reliably." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "parking-canopy-structural-engineering", dir: "solutions",
@@ -247,6 +313,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Permit-required structural drawings and calculations",
     ],
     relatedSlugs: ["solar-carport-structural-engineering", "solar-rooftop-structural-analysis"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers freestanding canopy structural frame design, foundation design for canopy column loads, wind uplift design for canopy roof systems, and seismic design for parking canopy structures." },
+      { question: "When is this engineering needed?", answer: "Parking canopies — whether shade structures, EV charging canopies, or solar carports — need structural engineering that accounts for wind, gravity, and seismic loads on freestanding canopy structures over occupied parking areas." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── STRUCTURAL — MEZZANINES & PLATFORMS ─────────────────────────────────
@@ -267,6 +339,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Permit-required structural drawings for mezzanine additions",
     ],
     relatedSlugs: ["equipment-platform-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers mezzanine floor framing structural design — steel, wood, or composite, column and foundation load analysis, stair structural engineering, and guardrail post anchorage engineering." },
+      { question: "When is this engineering needed?", answer: "Mezzanines in commercial and industrial buildings need structural engineering — floor framing design, column and foundation loads, stair structural design, and guardrail anchorage — all permitted separately from the original building in most jurisdictions." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "equipment-platform-engineering", dir: "solutions",
@@ -283,6 +361,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Existing structure capacity evaluation",
     ],
     relatedSlugs: ["mezzanine-structural-analysis", "rooftop-hvac-structural-analysis"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers equipment platform structural frame design, floor loading analysis for heavy mechanical or process equipment, vibration isolation structural coordination, and access stair and ladder structural engineering." },
+      { question: "When is this engineering needed?", answer: "Equipment platforms in industrial and mechanical rooms need structural engineering — supporting rooftop chillers, AHUs, pumps, or process equipment — with design that accounts for equipment weight, vibration, and maintenance access." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── STRUCTURAL — OCCUPANCY & REPORTING ─────────────────────────────────
@@ -302,6 +386,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Structural compliance letter for AHJ change-of-use review",
     ],
     relatedSlugs: ["existing-building-structural-report", "city-required-structural-report"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers existing building structural evaluation for new occupancy, load comparison — old vs. new occupancy design loads, floor live load evaluation for increased occupancy loads, and seismic evaluation for change-of-occupancy trigger." },
+      { question: "When is this engineering needed?", answer: "Change-of-occupancy projects often trigger structural review requirements — the new use may impose higher floor loads, different egress loads, or seismic requirements that the existing structure wasn't originally designed for." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "city-required-structural-report", dir: "solutions",
@@ -318,6 +408,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Structural calculations formatted for AHJ review",
     ],
     relatedSlugs: ["existing-building-structural-report", "change-of-occupancy-structural-engineering"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers PE-stamped structural letters for permit compliance, structural reports for renovation and addition permits, letters of structural compliance for CO requirements, and structural evaluation reports for stop-work order resolution." },
+      { question: "When is this engineering needed?", answer: "Building departments frequently require PE-stamped structural reports before they'll approve a renovation permit, issue a CO, or clear a stop-work order." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "existing-building-structural-report", dir: "solutions",
@@ -335,6 +431,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Reports suitable for permit, lender, or due diligence",
     ],
     relatedSlugs: ["city-required-structural-report", "foundation-crack-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers existing building structural condition assessment, field investigation and structural documentation, as-built structural sketches where original drawings are absent, and load path evaluation for existing structural systems." },
+      { question: "When is this engineering needed?", answer: "When a building was constructed without drawings, has unknown structural modifications, or shows signs of distress, an existing-building structural report documents the current condition and gives the project team the information needed to plan renovations safely." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "foundation-crack-engineering", dir: "solutions",
@@ -351,6 +453,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "PE-stamped report for seller disclosure or lender requirements",
     ],
     relatedSlugs: ["building-settlement-engineering", "existing-building-structural-report"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers foundation crack classification — structural vs. non-structural, crack pattern analysis and cause identification, settlement and differential movement evaluation, and expansive soil uplift analysis." },
+      { question: "When is this engineering needed?", answer: "Not every foundation crack is structural — but some are." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "building-settlement-engineering", dir: "solutions",
@@ -367,6 +475,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Monitoring recommendations for ongoing settlement",
     ],
     relatedSlugs: ["foundation-crack-engineering", "existing-building-structural-report"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers settlement pattern mapping and evaluation, differential vs. uniform settlement analysis, foundation type evaluation for settlement causes, and geotechnical coordination for soil-related settlement." },
+      { question: "When is this engineering needed?", answer: "Building settlement — whether from soil consolidation, inadequate foundations, or expansive soils — causes cracking, sticking doors, sloping floors, and in severe cases, structural distress." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── MEP — PERMIT PLAN PAGES ─────────────────────────────────────────────
@@ -386,6 +500,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Plan check comment response and revision",
     ],
     relatedSlugs: ["restaurant-mep-permit-plans", "tenant-improvement-mep-plans"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers mechanical HVAC permit drawings — floor plans, schedules, details, electrical one-line diagrams, panel schedules, and floor plans, plumbing isometrics, fixture schedules, and floor plans, and load calculations and equipment schedules." },
+      { question: "When is this engineering needed?", answer: "Commercial permit sets require stamped MEP drawings — mechanical, electrical, and plumbing plans that match the building department's submittal requirements and contain the specifications and calculations the plan reviewer needs to approve the project." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer MEP engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "restaurant-mep-permit-plans", dir: "solutions",
@@ -403,6 +523,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Coordinated restaurant MEP permit set",
     ],
     relatedSlugs: ["commercial-kitchen-exhaust-design", "commercial-mep-permit-plans"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers type I hood CFM calculations and exhaust permit drawings, make-up air permit drawings and calculations, natural gas piping drawings and BTU load summary, and grease interceptor sizing calculations." },
+      { question: "When is this engineering needed?", answer: "Restaurant permit packages are some of the most complex commercial MEP submittals — kitchen exhaust calculations, make-up air design, gas piping, grease interceptor sizing, and the electrical coordination for high-load cooking equipment all need to be engineered and documented together." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer MEP engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "tenant-improvement-mep-plans", dir: "solutions",
@@ -419,6 +545,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Coordinated TI MEP permit drawings and specifications",
     ],
     relatedSlugs: ["commercial-mep-permit-plans", "fitness-club-mep-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers existing MEP system review and capacity evaluation, HVAC modifications for new tenant layout, electrical load analysis and service capacity review, and plumbing modifications for new restrooms or fixtures." },
+      { question: "When is this engineering needed?", answer: "Tenant improvement MEP permit packages scope existing building systems, design modifications for the new use, and produce the stamped drawings the building department requires — coordinated to avoid surprises during plan check." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer MEP engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "multifamily-mep-permit-plans", dir: "solutions",
@@ -435,6 +567,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Plumbing permit drawings and calculations",
     ],
     relatedSlugs: ["commercial-mep-permit-plans", "multifamily-ev-charging-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers unit HVAC permit drawings — mechanical schedules and layouts, electrical service and distribution drawings — unit meters and mains, EV charging infrastructure permit drawings, and common area MEP permit drawings." },
+      { question: "When is this engineering needed?", answer: "Multifamily permit packages require coordinated MEP drawings for unit systems, common area MEP, EV charging, and energy code compliance — all stamped by licensed PEs and formatted for the specific building department's review process." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer MEP engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "medical-office-mep-plans", dir: "solutions",
@@ -451,6 +589,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Emergency power coordination for critical equipment",
     ],
     relatedSlugs: ["commercial-mep-permit-plans", "tenant-improvement-mep-plans"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers clinical HVAC — ventilation rates per ASHRAE 170 or FGI guidelines, medical gas rough-in coordination drawings, dedicated imaging and medical equipment circuits, and electrical load calculations for diagnostic equipment." },
+      { question: "When is this engineering needed?", answer: "Medical office MEP permit packages must address clinical ventilation requirements, dedicated equipment circuits, medical gas rough-in coordination, and accessibility-compliant plumbing — with stamped drawings for both the building department and state healthcare licensing where applicable." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer MEP engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "fitness-club-mep-engineering", dir: "solutions",
@@ -468,6 +612,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Fitness TI MEP permit package",
     ],
     relatedSlugs: ["gym-hvac-engineering", "tenant-improvement-mep-plans"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers gym HVAC — latent load and dehumidification design, group fitness studio zone control, weight room and cardio area ventilation, and pool and natatorium dehumidification engineering." },
+      { question: "When is this engineering needed?", answer: "Fitness club MEP engineering addresses one of commercial construction's highest latent load challenges — sweat, breath, and outdoor air in a climate-controlled space require dehumidification design that goes well beyond standard commercial HVAC." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer MEP engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── MEP — KITCHEN & FOOD SERVICE ────────────────────────────────────────
@@ -487,6 +637,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Mechanical permit drawings for kitchen exhaust system",
     ],
     relatedSlugs: ["commercial-kitchen-makeup-air", "grease-exhaust-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers type I exhaust hood CFM calculations per NFPA 96, grease exhaust duct sizing and velocity, exhaust fan selection and roof termination, and UL-listed duct enclosure and access requirements." },
+      { question: "When is this engineering needed?", answer: "Type I kitchen exhaust engineering starts with accurate CFM calculations per NFPA 96, then works through duct sizing, fan selection, grease filter requirements, and the roof termination — all of which must be stamped and submitted for permit approval." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer mechanical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "commercial-kitchen-makeup-air", dir: "solutions",
@@ -503,6 +659,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Integration with dining room HVAC for air balance",
     ],
     relatedSlugs: ["commercial-kitchen-exhaust-design", "grease-exhaust-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers make-up air CFM calculation matched to exhaust volume, short-circuit make-up air directly into the hood, tempered and heated make-up air unit selection, and kitchen pressurization and air balance analysis." },
+      { question: "When is this engineering needed?", answer: "Make-up air is the other half of the kitchen exhaust equation — for every CFM exhausted, make-up air must replace it, or the kitchen becomes negatively pressurized, doors slam shut, and the combustion appliances may fail to operate safely." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer mechanical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "grease-exhaust-engineering", dir: "solutions",
@@ -519,6 +681,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Grease exhaust permit drawings",
     ],
     relatedSlugs: ["commercial-kitchen-exhaust-design", "commercial-kitchen-makeup-air"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers grease exhaust duct sizing — velocity and cross-section, NFPA 96-compliant duct material and thickness, duct slope and drain provision requirements, and enclosure and clearance requirements." },
+      { question: "When is this engineering needed?", answer: "Grease exhaust duct design requires more than a correctly sized duct — NFPA 96 mandates specific materials, velocity minimums, access panel locations, clearances to combustibles, and roof termination requirements that all affect the permit package." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer mechanical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "commercial-kitchen-gas-engineering", dir: "solutions",
@@ -535,6 +703,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Gas permit drawings stamped by licensed PE",
     ],
     relatedSlugs: ["commercial-kitchen-exhaust-design", "restaurant-mep-permit-plans"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers total BTU demand calculation from kitchen equipment schedule, gas pipe sizing from meter to each appliance, low-pressure and medium-pressure gas system design, and emergency shutoff valve placement and accessibility." },
+      { question: "When is this engineering needed?", answer: "Commercial kitchen gas piping engineering calculates the total BTU load from every piece of cooking equipment, sizes the piping from the meter to each appliance, and produces stamped drawings for the gas permit — separately from the mechanical permit in most jurisdictions." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer mechanical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── MEP — HVAC SPECIALTY ────────────────────────────────────────────────
@@ -554,6 +728,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Mechanical permit drawings for HVAC replacement",
     ],
     relatedSlugs: ["rtu-replacement-structural-engineering", "rooftop-hvac-structural-analysis"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers existing building cooling and heating load recalculation, replacement equipment selection and sizing, structural analysis for new rooftop equipment weight, and electrical service evaluation for new equipment loads." },
+      { question: "When is this engineering needed?", answer: "Commercial HVAC replacement isn't always a like-for-like swap — if the existing system is undersized, the building use has changed, or the replacement is a different system type, engineering ensures the new equipment performs and the permit gets approved." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer mechanical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "warehouse-hvac-engineering", dir: "solutions",
@@ -570,6 +750,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Warehouse HVAC permit drawings",
     ],
     relatedSlugs: ["warehouse-ventilation-engineering", "industrial-mep-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers warehouse heating load calculations — unit heaters, radiant tubes, evaporative cooling for hot-dry and hot-humid warehouses, comfort cooling for warehouse office and break room areas, and ventilation — air changes for personnel safety." },
+      { question: "When is this engineering needed?", answer: "Warehouse HVAC engineering selects and sizes the system that best matches the use — from basic heat-only warehouse heating to evaporative cooling for hot climates, refrigerated storage systems, or comfort cooling for office and mezzanine areas within the warehouse." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer mechanical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "warehouse-ventilation-engineering", dir: "solutions",
@@ -586,6 +772,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Warehouse ventilation permit drawings",
     ],
     relatedSlugs: ["warehouse-hvac-engineering"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers minimum air changes for personnel occupancy per IMC, natural vs. mechanical ventilation analysis, exhaust fan selection and placement, and make-up air supply design." },
+      { question: "When is this engineering needed?", answer: "Warehouse ventilation engineering provides the air exchange calculations, fan selection, and permit drawings for mechanical ventilation — whether the goal is code compliance for personnel occupancy, heat removal, or process exhaust." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer mechanical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "gym-hvac-engineering", dir: "solutions",
@@ -603,6 +795,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Gym HVAC permit drawings",
     ],
     relatedSlugs: ["fitness-club-mep-engineering", "natatorium-dehumidification-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers exercise area latent load and total cooling calculations, dedicated dehumidification system design, ventilation rate calculation per ASHRAE 62.1, and group fitness studio individual zone design." },
+      { question: "When is this engineering needed?", answer: "Gym HVAC engineering is fundamentally a latent-load problem — occupants exercising generate enormous amounts of moisture, and the HVAC system must remove that moisture before it creates comfort problems, mold risks, and equipment corrosion." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer mechanical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "natatorium-dehumidification-engineering", dir: "solutions",
@@ -619,6 +817,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Pool HVAC permit drawings and specifications",
     ],
     relatedSlugs: ["gym-hvac-engineering", "fitness-club-mep-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers pool evaporation rate calculation, dedicated dehumidification unit selection and sizing, space temperature and humidity control design, and outside air introduction and filtration." },
+      { question: "When is this engineering needed?", answer: "Indoor pool and natatorium mechanical engineering centers on dehumidification — evaporation from the pool surface generates continuous moisture that must be removed to prevent condensation damage, mold, and respiratory hazards." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer mechanical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "negative-pressure-room-engineering", dir: "solutions",
@@ -635,6 +839,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Infection control ventilation design for healthcare",
     ],
     relatedSlugs: ["laboratory-exhaust-engineering", "fume-hood-exhaust-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers pressure relationship design — negative pressure vs. adjacent spaces, minimum air changes for contamination control, exhaust and makeup air system design, and pressure differential monitoring system design." },
+      { question: "When is this engineering needed?", answer: "Negative-pressure rooms protect adjacent spaces from airborne contaminants — whether in a healthcare setting, a paint booth, or a containment area — the mechanical engineer designs the pressure relationship, air changes, and monitoring to maintain containment." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer mechanical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── MEP — LABORATORY ────────────────────────────────────────────────────
@@ -654,6 +864,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "ASHRAE 62.1 and NFPA 45 compliance",
     ],
     relatedSlugs: ["fume-hood-exhaust-engineering", "negative-pressure-room-engineering"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers 100% outside air laboratory HVAC system design, exhaust CFM calculation from fume hood count and usage, make-up air system design for laboratory buildings, and laboratory pressure relationship matrix." },
+      { question: "When is this engineering needed?", answer: "Laboratory ventilation engineering designs the 100% exhaust air systems that dilute chemical vapors, remove biological hazards, and maintain safe fume concentrations — with make-up air design that balances laboratory pressure relationships." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer mechanical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "fume-hood-exhaust-engineering", dir: "solutions",
@@ -670,6 +886,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Fume hood exhaust permit drawings",
     ],
     relatedSlugs: ["laboratory-exhaust-engineering", "negative-pressure-room-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers fume hood face velocity design — typically 80–100 fpm, exhaust CFM at minimum and maximum sash, diversity factor calculation for multi-hood installations, and VAV fume hood control system design." },
+      { question: "When is this engineering needed?", answer: "Fume hood engineering goes beyond picking a duct size — face velocity requirements, minimum sash height design, diversity factors for multi-hood installations, and exhaust stack design to prevent re-entrainment all require engineering attention." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer mechanical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── MEP — DATA CENTER ───────────────────────────────────────────────────
@@ -689,6 +911,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Cooling capacity validation under loss-of-unit scenarios",
     ],
     relatedSlugs: ["server-room-cooling-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers cooling system selection — CRAC, CRAH, in-row cooling, liquid, n+1 and 2N redundancy configuration design, hot aisle and cold aisle containment design, and chilled water plant design for large data centers." },
+      { question: "When is this engineering needed?", answer: "Data center cooling engineering designs for continuous operation — selecting cooling systems with N+1 or 2N redundancy, designing hot/cold aisle containment, and ensuring the mechanical system can maintain the thermal envelope when any single component fails." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer mechanical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "server-room-cooling-engineering", dir: "solutions",
@@ -705,6 +933,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Emergency power coordination for cooling",
     ],
     relatedSlugs: ["data-center-cooling-redundancy"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers dedicated precision cooling unit selection and sizing, 24/7 operation design — independent from main building HVAC, temperature and humidity control design, and redundant cooling for critical server environments." },
+      { question: "When is this engineering needed?", answer: "Server rooms in commercial office buildings need dedicated cooling systems — standard building HVAC won't maintain the 65–75°F, 40–55% RH environment that servers require around the clock, and it certainly won't cool the room when the main HVAC is off nights and weekends." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer mechanical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── ELECTRICAL — SERVICE & POWER ────────────────────────────────────────
@@ -745,6 +979,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Recommendations for service upgrade if required",
     ],
     relatedSlugs: ["electrical-service-upgrade-engineering", "ev-charging-load-study"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers existing panel and service load tabulation, demand factor analysis for actual vs. connected loads, available capacity assessment for new loads, and load study report formatted for utility or AHJ." },
+      { question: "When is this engineering needed?", answer: "An electrical load study quantifies what your building's electrical system can handle before you add new equipment — avoiding the unpleasant surprise of exceeding panel capacity mid-project or overloading a transformer you thought had headroom." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer electrical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "ev-charging-load-study", dir: "solutions",
@@ -760,6 +1000,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "EV load study report for owner, utility, or AHJ",
     ],
     relatedSlugs: ["electrical-load-study", "fleet-ev-charging-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers existing service capacity evaluation for EV charging addition, level 2 and DCFC load demand calculations, load management system analysis — how many chargers without service upgrade, and service upgrade analysis if load management is insufficient." },
+      { question: "When is this engineering needed?", answer: "Adding EV charging to an existing building starts with a load study — determining how much charging the existing service can support without upgrade, and how a load management system can maximize the number of chargers on a given service." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer electrical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "fleet-ev-charging-engineering", dir: "solutions",
@@ -776,6 +1022,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Utility coordination for high-demand fleet service",
     ],
     relatedSlugs: ["ev-charging-load-study", "multifamily-ev-charging-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers fleet size analysis and charging window planning, total connected load vs. managed load demand calculations, smart charging system electrical design, and DCFC and Level 2 EVSE circuit design." },
+      { question: "When is this engineering needed?", answer: "Fleet EV charging engineering sizes the electrical service for a depot or garage where dozens to hundreds of vehicles charge simultaneously — designing smart charging strategies that minimize demand charges while ensuring every vehicle is charged for its next shift." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer electrical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "multifamily-ev-charging-engineering", dir: "solutions",
@@ -792,6 +1044,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Electrical permit drawings for multifamily EV charging",
     ],
     relatedSlugs: ["fleet-ev-charging-engineering", "ev-charging-load-study"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers multifamily parking EV charging count and circuit design, load management system design for multifamily, panel and feeder design for EV charging additions, and conduit and raceway design for future EV expansion." },
+      { question: "When is this engineering needed?", answer: "Multifamily EV charging presents a unique challenge — dozens to hundreds of residents want to charge at home, but the building's electrical service was designed long before EVs existed, requiring engineering that maximizes charger count through smart load management." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer electrical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "generator-installation-engineering", dir: "solutions",
@@ -808,6 +1066,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Generator electrical permit drawings",
     ],
     relatedSlugs: ["emergency-power-design", "ups-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers generator sizing analysis — critical load determination, automatic transfer switch selection and design, generator circuit and feeder design, and critical load panel design." },
+      { question: "When is this engineering needed?", answer: "Generator installation engineering designs the automatic transfer switch, generator wiring, critical load panel, and utility disconnect — producing permit-ready drawings that satisfy both the building department and the serving utility's interconnection requirements." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer electrical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "emergency-power-design", dir: "solutions",
@@ -824,6 +1088,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "NFPA 99 healthcare essential electrical system design",
     ],
     relatedSlugs: ["generator-installation-engineering", "ups-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers NEC Article 700 emergency system design, NEC Article 702 legally required standby system design, load shedding and priority sequence design, and transfer switch type selection — open, closed, soft." },
+      { question: "When is this engineering needed?", answer: "Emergency and standby power systems are designed to different standards — emergency systems (NEC Article 700) must transfer within 10 seconds for life safety, while standby systems (Article 702) have more flexibility, but both require careful engineering." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer electrical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "ups-engineering", dir: "solutions",
@@ -840,6 +1110,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Battery room ventilation and thermal management",
     ],
     relatedSlugs: ["emergency-power-design", "generator-installation-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers critical load inventory and UPS sizing, UPS runtime calculation for required backup duration, static transfer switch design, and UPS bypass design for maintenance access." },
+      { question: "When is this engineering needed?", answer: "UPS engineering goes beyond selecting a battery backup unit — runtime calculations, static transfer switch design, UPS bypass design, and downstream distribution must all be engineered for the loads that cannot tolerate even a brief power interruption." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer electrical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "switchgear-replacement-engineering", dir: "solutions",
@@ -856,6 +1132,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Electrical permit drawings for switchgear replacement",
     ],
     relatedSlugs: ["electrical-panel-replacement-engineering", "electrical-service-upgrade-engineering"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers existing switchgear evaluation and replacement justification, new switchgear specification and sizing, protective device coordination study, and arc flash hazard analysis for new switchgear." },
+      { question: "When is this engineering needed?", answer: "Switchgear replacement requires engineering that minimizes the duration of power outages, sequences protective devices correctly in the new gear, and produces permit drawings acceptable to both the building department and the utility." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer electrical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "electrical-panel-replacement-engineering", dir: "solutions",
@@ -872,6 +1154,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Electrical permit drawings for panel replacement",
     ],
     relatedSlugs: ["switchgear-replacement-engineering", "electrical-service-upgrade-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers existing panel load inventory and new panel sizing, feeder sizing evaluation for new panel ampacity, new panel schedule design, and circuit mapping and load documentation." },
+      { question: "When is this engineering needed?", answer: "Panel replacement — whether from age, inadequate capacity, or recalled equipment — requires engineering that verifies feeder sizing, documents the existing circuit directory, and produces permit drawings for the new panel installation." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer electrical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "solar-interconnection-engineering", dir: "solutions",
@@ -888,6 +1176,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Solar permit drawings for building department and utility",
     ],
     relatedSlugs: ["bess-electrical-engineering", "ev-charging-load-study"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers solar PV system one-line diagram design, inverter and AC disconnect electrical design, utility interconnection calculation and application support, and net metering and revenue-grade meter electrical design." },
+      { question: "When is this engineering needed?", answer: "Solar interconnection engineering produces the PE-stamped single-line diagrams, interconnection calculations, and utility application support that utilities require before approving a commercial PV system for grid connection." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer electrical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "bess-electrical-engineering", dir: "solutions",
@@ -904,6 +1198,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "BESS electrical permit drawings and specifications",
     ],
     relatedSlugs: ["solar-interconnection-engineering", "bess-structural-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers BESS inverter/charger electrical design, AC and DC protection and disconnecting means, utility interconnection for behind-the-meter storage, and solar-plus-storage combined system electrical design." },
+      { question: "When is this engineering needed?", answer: "Battery energy storage electrical engineering designs the bidirectional inverter connections, AC and DC protection, utility interconnection, and the fire detection electrical coordination that BESS installations require for permit approval." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer electrical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── PLUMBING SOLUTIONS ───────────────────────────────────────────────────
@@ -923,6 +1223,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Plumbing riser permit drawings",
     ],
     relatedSlugs: ["domestic-water-sizing", "commercial-water-heater-engineering"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers domestic water riser sizing for multi-story buildings, sanitary and vent riser design, pressure zone design for tall buildings, and thermal expansion and pipe movement accommodation." },
+      { question: "When is this engineering needed?", answer: "Multi-story building plumbing risers must be sized for peak simultaneous demand, routed to minimize noise and vibration transmission, and coordinated with structural penetrations — all documented in permit drawings that satisfy the building department." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer plumbing engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "domestic-water-sizing", dir: "solutions",
@@ -939,6 +1245,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Booster pump design where pressure is insufficient",
     ],
     relatedSlugs: ["plumbing-riser-design", "commercial-water-heater-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers fixture unit count and peak demand calculation, water service size determination, meter sizing coordination with the water utility, and distribution piping sizing for building peak demand." },
+      { question: "When is this engineering needed?", answer: "Undersized domestic water mains cause low pressure at the end of the run — the daily complaint that's expensive to fix after construction." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer plumbing engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "commercial-water-heater-engineering", dir: "solutions",
@@ -955,6 +1267,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Water heater permit drawings",
     ],
     relatedSlugs: ["domestic-water-sizing", "plumbing-riser-design"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers peak hot water demand calculation by occupancy type, water heater type selection — tank, tankless, heat pump, recovery rate and storage volume sizing, and hot water recirculation system design." },
+      { question: "When is this engineering needed?", answer: "Commercial water heater engineering sizes the recovery capacity and storage volume for the actual demand profile — restaurants, gyms, hotels, and healthcare facilities each have different peak demand patterns that affect the right system choice." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer plumbing engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "grease-interceptor-engineering", dir: "solutions",
@@ -971,6 +1289,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Grease interceptor permit drawings",
     ],
     relatedSlugs: ["commercial-kitchen-exhaust-design", "restaurant-mep-permit-plans"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers grease interceptor type selection — gravity tank vs. hydromechanical, interceptor sizing calculation per PDI G101 or local standard, fixture drainage routing to interceptor, and interceptor location and access requirements." },
+      { question: "When is this engineering needed?", answer: "Grease interceptors protect the municipal sewer from fats, oils, and grease — and the local authority having jurisdiction specifies the type and size based on kitchen equipment, fixture counts, and flow rates." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer plumbing engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "medical-gas-engineering", dir: "solutions",
@@ -987,6 +1311,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Medical gas rough-in coordination drawings for contractors",
     ],
     relatedSlugs: ["medical-office-mep-plans"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers NFPA 99 medical gas system design, oxygen, medical air, vacuum, and nitrous oxide piping design, zone valve and alarm panel location design, and medical gas permit drawings for building department." },
+      { question: "When is this engineering needed?", answer: "Medical gas systems — oxygen, medical air, vacuum, nitrous oxide — require NFPA 99-compliant engineering, licensed medical gas installers, and third-party inspection before use." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer plumbing engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── CIVIL SOLUTIONS ─────────────────────────────────────────────────────
@@ -1006,6 +1336,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Parking lot civil permit drawings",
     ],
     relatedSlugs: ["parking-lot-expansion-engineering", "stormwater-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers parking lot grading and drainage design, pavement section design — asphalt or concrete, ADA accessible parking space layout and accessible route design, and stormwater management — retention, detention, infiltration." },
+      { question: "When is this engineering needed?", answer: "A parking lot is a civil engineering project — grading for drainage, pavement design for vehicle loads, ADA accessible space layout, utility coordination, and stormwater management all require engineering before a shovel goes in the ground." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer civil engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "parking-lot-expansion-engineering", dir: "solutions",
@@ -1022,6 +1358,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Civil permit drawings for parking lot expansion",
     ],
     relatedSlugs: ["parking-lot-engineering", "stormwater-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers existing lot grading survey review, expansion grading tied to existing drainage pattern, pavement design for expansion area, and stormwater management for additional impervious area." },
+      { question: "When is this engineering needed?", answer: "Expanding an existing parking lot requires civil engineering that matches the existing grade and drainage pattern, ties into the existing pavement, and handles the additional stormwater runoff from new impervious area." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer civil engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "gravel-parking-lot-engineering", dir: "solutions",
@@ -1038,6 +1380,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Civil permit drawings for gravel parking areas",
     ],
     relatedSlugs: ["parking-lot-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers gravel parking area grading and drainage design, aggregate base depth and material specification, geotextile fabric design and specification, and stormwater analysis for gravel vs. paved surface." },
+      { question: "When is this engineering needed?", answer: "Gravel parking areas require civil engineering when a permit is required — grading for drainage, geotextile fabric specifications, aggregate depth design, and stormwater analysis for what is still considered an engineered surface by many jurisdictions." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer civil engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "turn-lane-engineering", dir: "solutions",
@@ -1076,6 +1424,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Civil permit drawings for commercial driveway",
     ],
     relatedSlugs: ["parking-lot-engineering", "turn-lane-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers driveway width and turning radius design, sight distance evaluation and AASHTO standards, curb cut geometry and ADA ramp design, and driveway drainage and grade design." },
+      { question: "When is this engineering needed?", answer: "Commercial driveways need civil engineering — access width, turning radius for delivery vehicles, sight distance requirements, curb-cut geometry, and stormwater drainage all need to be designed and permitted before construction." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer civil engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "site-drainage-engineering", dir: "solutions",
@@ -1092,6 +1446,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Civil permit drawings for drainage improvements",
     ],
     relatedSlugs: ["stormwater-engineering", "parking-lot-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers existing drainage pattern analysis, ponding and flooding cause identification, drainage solution design — grading, inlets, piping, and storm drain system design." },
+      { question: "When is this engineering needed?", answer: "Ponding water, flooding, and erosion on a commercial site are civil engineering problems — requiring analysis of the existing drainage pattern, identification of the cause, and a designed drainage solution that resolves the problem and gets a permit." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer civil engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "stormwater-engineering", dir: "solutions",
@@ -1108,6 +1468,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "SWPPP coordination for construction stormwater",
     ],
     relatedSlugs: ["site-drainage-engineering", "parking-lot-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers pre- and post-development stormwater runoff analysis, detention pond or underground detention design, retention basin and infiltration system design, and low-impact development (LID) stormwater design." },
+      { question: "When is this engineering needed?", answer: "Stormwater management is required on virtually every commercial development — controlling runoff rate, volume, and water quality from a developed site to meet local jurisdiction and state permit requirements." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer civil engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "utility-connection-engineering", dir: "solutions",
@@ -1124,6 +1490,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Civil permit drawings for utility connections",
     ],
     relatedSlugs: ["stormwater-engineering", "parking-lot-engineering"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers water service connection design and sizing, sewer lateral design and connection, gas line extension civil drawings, and electrical duct bank design." },
+      { question: "When is this engineering needed?", answer: "Commercial utility connections — new water and sewer services, electrical duct banks, gas line extensions — require civil engineering drawings for the permit package and utility company approval." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer civil engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── GEOTECHNICAL SOLUTIONS ───────────────────────────────────────────────
@@ -1143,6 +1515,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Geotechnical report formatted for building department submittal",
     ],
     relatedSlugs: ["multifamily-geotechnical-report", "foundation-soil-recommendations"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers soil boring program design and field execution, laboratory testing — moisture, Atterberg limits, gradation, foundation type recommendations and bearing capacity, and settlement analysis." },
+      { question: "When is this engineering needed?", answer: "Commercial building permits typically require a geotechnical report — soil borings, laboratory testing, and engineering analysis that tells the structural engineer how to design the foundation for the specific site conditions." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer geotechnical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "multifamily-geotechnical-report", dir: "solutions",
@@ -1159,6 +1537,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Geotechnical report for multifamily building permit",
     ],
     relatedSlugs: ["commercial-geotechnical-report", "foundation-soil-recommendations"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers soil boring program for multifamily site, foundation recommendations for multifamily building systems, parking area pavement design recommendations, and retaining wall geotechnical parameters." },
+      { question: "When is this engineering needed?", answer: "Multifamily geotechnical reports cover the full site — enough borings to characterize the soils under the building footprint and parking areas, with recommendations for the structural system and site earthwork." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer geotechnical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "parking-lot-geotechnical-report", dir: "solutions",
@@ -1174,6 +1558,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Geotechnical report for parking lot pavement design",
     ],
     relatedSlugs: ["commercial-geotechnical-report", "pavement-subgrade-evaluation"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers subgrade soil characterization — R-value or CBR testing, pavement design for light vehicle and truck traffic, subgrade preparation recommendations, and base course and surface course thickness design." },
+      { question: "When is this engineering needed?", answer: "Parking lot pavement fails prematurely when the subgrade isn't properly characterized — geotechnical engineering provides the R-value or CBR testing and pavement thickness recommendations that produce a pavement section designed to last." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer geotechnical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "commercial-soil-borings", dir: "solutions",
@@ -1190,6 +1580,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Soil boring data as the basis for foundation recommendations",
     ],
     relatedSlugs: ["commercial-geotechnical-report", "multifamily-soil-borings"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers boring location planning for commercial sites, standard penetration test (SPT) boring program, continuous sampling and specialty sampling boring methods, and laboratory testing of recovered soil samples." },
+      { question: "When is this engineering needed?", answer: "Soil borings are the foundation of geotechnical engineering — physically sampling the subsurface at key locations to understand what the soils are, how dense or soft they are, and how they're likely to behave under structural loads." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer geotechnical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "multifamily-soil-borings", dir: "solutions",
@@ -1205,6 +1601,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Soil boring data supporting full geotechnical report",
     ],
     relatedSlugs: ["multifamily-geotechnical-report", "commercial-soil-borings"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers boring program design for multifamily site coverage, building footprint boring locations, parking and site improvement borings, and laboratory testing coordinated with site variability." },
+      { question: "When is this engineering needed?", answer: "Multifamily soil boring programs are designed to characterize the full site — enough borings to capture variability across the building footprint, with additional borings for parking and retaining wall areas." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer geotechnical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "foundation-soil-recommendations", dir: "solutions",
@@ -1221,6 +1623,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Seismic ground motion and site class determination",
     ],
     relatedSlugs: ["commercial-geotechnical-report", "geotechnical-settlement-analysis"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers allowable bearing capacity for shallow foundations, minimum footing depth requirements, deep foundation recommendations — piles, piers, helicals, and settlement analysis and allowable limits." },
+      { question: "When is this engineering needed?", answer: "Foundation recommendations from a geotechnical report tell the structural engineer what they actually need to know — bearing capacity, minimum depth, allowable settlement, and whether the soil type is appropriate for the proposed foundation system." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer geotechnical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "pavement-subgrade-evaluation", dir: "solutions",
@@ -1237,6 +1645,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Subgrade improvement recommendations for weak soils",
     ],
     relatedSlugs: ["parking-lot-geotechnical-report", "commercial-geotechnical-report"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers subgrade soil classification and characterization, r-value testing for flexible pavement design, CBR testing for flexible and rigid pavement design, and pavement design calculations — AASHTO or mechanistic-empirical." },
+      { question: "When is this engineering needed?", answer: "Pavement subgrade evaluation characterizes the soil that the pavement structure will be built on — providing the design parameters needed to produce a pavement section that performs under the expected traffic loading." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer geotechnical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "expansive-soil-engineering", dir: "solutions",
@@ -1253,6 +1667,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Post-construction drainage recommendations to minimize heave",
     ],
     relatedSlugs: ["foundation-soil-recommendations", "geotechnical-settlement-analysis"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers atterberg limit testing to characterize expansive potential, plasticity index and linear shrinkage evaluation, swell pressure testing for foundation design, and foundation type recommendations for expansive soil sites." },
+      { question: "When is this engineering needed?", answer: "Expansive soils — particularly the clay soils common in Texas, Arizona, Colorado, and the Southeast — swell when wet and shrink when dry, causing more foundation damage nationally than earthquakes and floods combined." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer geotechnical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "geotechnical-settlement-analysis", dir: "solutions",
@@ -1269,6 +1689,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Recommendations to reduce settlement — ground improvement, deep foundations",
     ],
     relatedSlugs: ["foundation-soil-recommendations", "expansive-soil-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers total and differential settlement calculation, consolidation settlement analysis for soft clays, immediate elastic settlement analysis for granular soils, and allowable settlement limits for structural systems." },
+      { question: "When is this engineering needed?", answer: "Settlement analysis calculates how much a foundation will settle under load — both total settlement and differential settlement between adjacent columns or walls — informing the structural design of the foundation and superstructure." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer geotechnical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "retaining-wall-geotechnical-engineering", dir: "solutions",
@@ -1285,6 +1711,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Retaining wall geotechnical parameters report",
     ],
     relatedSlugs: ["foundation-soil-recommendations", "commercial-geotechnical-report"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers active and passive earth pressure calculations, retained soil characterization, global stability analysis for slope-supported walls, and foundation bearing capacity for wall footing." },
+      { question: "When is this engineering needed?", answer: "Retaining wall geotechnical engineering provides the lateral earth pressure parameters, foundation bearing capacity, and global stability analysis that the structural engineer needs to design a retaining wall that won't slide, overturn, or fail in bearing." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer geotechnical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── PERMIT / PROCESS SOLUTIONS ──────────────────────────────────────────
@@ -1304,6 +1736,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Coordination with building department for comment resolution",
     ],
     relatedSlugs: ["permit-correction-engineering", "pe-stamped-structural-plans"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers plan check comment review and engineering analysis, technical responses to structural plan check comments, MEP plan check comment resolution, and revised calculations responding to AHJ questions." },
+      { question: "When is this engineering needed?", answer: "Plan check comment letters are the building department's request for more information or design changes — engineering responses require technical accuracy, the right supporting calculations, and a revision that clears the comment without creating new ones." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer permit engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "pe-stamped-structural-plans", dir: "solutions",
@@ -1319,6 +1757,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Structural letters of compliance with PE signature",
     ],
     relatedSlugs: ["city-required-structural-report", "engineering-plan-check-comments"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers structural engineering design with PE stamp, PE review of contractor-produced structural drawings, structural calculations with PE stamp for permit, and jurisdiction-specific PE licensing verification." },
+      { question: "When is this engineering needed?", answer: "A PE stamp on structural plans means a licensed structural engineer designed or thoroughly reviewed the work, is responsible for its engineering correctness, and has authority to stamp in the jurisdiction of the project." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer permit engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "pe-stamped-mep-plans", dir: "solutions",
@@ -1334,6 +1778,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "PE-stamped MEP permit drawings for building department",
     ],
     relatedSlugs: ["commercial-mep-permit-plans", "engineering-plan-check-comments"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers mechanical engineering design and PE stamp, electrical engineering design and PE stamp, plumbing engineering design and PE stamp, and jurisdiction-specific PE licensing for MEP disciplines." },
+      { question: "When is this engineering needed?", answer: "PE-stamped MEP plans represent full professional engineering responsibility — mechanical, electrical, and plumbing systems designed by licensed engineers who stand behind the design with their license." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer permit engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "engineering-redlines-revisions", dir: "solutions",
@@ -1349,6 +1799,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Construction administration drawing revisions",
     ],
     relatedSlugs: ["engineering-plan-check-comments", "permit-correction-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers engineering redlines on contractor or architect-produced drawings, formal drawing revision to address permit corrections, revised calculations for changed scope, and ASI and RFI engineering response." },
+      { question: "When is this engineering needed?", answer: "Engineering redlines — marking up drawings with required corrections — and formal design revisions are a normal part of permit and construction processes, handled by our team to get the corrected documents back to you fast." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer permit engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "permit-correction-engineering", dir: "solutions",
@@ -1364,6 +1820,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Stop-work order engineering resolution",
     ],
     relatedSlugs: ["engineering-plan-check-comments", "engineering-redlines-revisions"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers analysis of permit correction notice, engineering design to resolve the deficiency, revised permit drawings and calculations, and building department coordination for correction clearance." },
+      { question: "When is this engineering needed?", answer: "Permit corrections — whether from plan check, a field inspection failure, or a stop-work order — need engineering that resolves the specific deficiency the inspector or plan reviewer identified, then gets the corrected documentation to the building department." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer permit engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "fast-track-engineering", dir: "solutions",
@@ -1379,6 +1841,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Construction administration aligned with fast-track schedule",
     ],
     relatedSlugs: ["commercial-mep-permit-plans", "pe-stamped-structural-plans"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers phased permit submittal — foundation first, full building to follow, deferred submittal packages for shop drawings, parallel structural and MEP design for schedule compression, and initial response planning for urgent calculations and letters; engineering timing depends on scope and availability." },
+      { question: "When is this engineering needed?", answer: "When a project is on a hard schedule — a lease commencement date, a franchise opening, or a contractor ready to start — fast-track engineering compresses design time through parallel work, early-release structural drawings, and deferred-submittal packages." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer permit engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "engineering-from-architectural-plans", dir: "solutions",
@@ -1395,6 +1863,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Coordinated permit package from architectural and engineering documents",
     ],
     relatedSlugs: ["engineering-without-cad-files", "matterport-engineering-coordination"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers engineering from architectural PDF sets, DWG/CAD file import and engineering overlay, revit model engineering coordination, and structural engineering from architectural floor plans and sections." },
+      { question: "When is this engineering needed?", answer: "The most common way Apex Grid starts a project: the architect sends us their drawings — PDF, CAD, or Revit — and we take it from there, producing our own engineering files from the architectural base rather than waiting for a BIM model coordination process." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer permit engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "engineering-without-cad-files", dir: "solutions",
@@ -1411,6 +1885,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Our process for starting without a full drawing set",
     ],
     relatedSlugs: ["engineering-from-architectural-plans", "engineering-from-field-photos"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers engineering from PDF architectural drawings, field measurement and sketch-based engineering, engineering from contractor-provided dimensions, and when CAD files are needed and when they're not." },
+      { question: "When is this engineering needed?", answer: "Yes — we can start engineering from PDF drawings, hand sketches, or even clear photos and field measurements." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer process scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "matterport-engineering-coordination", dir: "solutions",
@@ -1426,6 +1906,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "When scanning replaces vs. supplements site visits",
     ],
     relatedSlugs: ["engineering-without-cad-files", "engineering-from-field-photos"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers how we use Matterport scan data for as-built engineering, laser scan to BIM / CAD workflow for engineering, field verification coordination with scan data, and limitations of scan data for structural assessment." },
+      { question: "When is this engineering needed?", answer: "Matterport scans, 3D laser scans, and photogrammetry can significantly accelerate engineering for existing buildings — giving engineers a measurable, navigable record of the space without requiring multiple site visits." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer process scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "engineering-from-field-photos", dir: "solutions",
@@ -1442,6 +1928,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "How to submit field photos for engineering review",
     ],
     relatedSlugs: ["engineering-without-cad-files", "matterport-engineering-coordination"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers what photos to take for structural assessment, how to measure existing structural members for engineering review, documentation for load path verification, and photo documentation for MEP system review." },
+      { question: "When is this engineering needed?", answer: "For many existing-building engineering questions, clear contractor photos with dimensions can answer the engineering question without a costly site visit — here's what to photograph and measure so our review can be fast and accurate." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer process scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── PORTFOLIO / PROPERTY SOLUTIONS ──────────────────────────────────────
@@ -1461,6 +1953,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Long-term capital improvement plan engineering",
     ],
     relatedSlugs: ["portfolio-engineering-support", "capital-improvement-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers structural condition assessment for aging communities, MEP system condition assessment, capital improvement prioritization report, and repair design for structural deficiencies." },
+      { question: "When is this engineering needed?", answer: "Aging commercial and residential communities need engineering that diagnoses deferred maintenance, prioritizes capital improvements, and produces drawings for the repairs and upgrades that will extend the useful life of aging buildings." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer property engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "portfolio-engineering-support", dir: "solutions",
@@ -1476,6 +1974,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Consistent documentation and engineering standards across the portfolio",
     ],
     relatedSlugs: ["capital-improvement-engineering", "aging-community-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers portfolio-wide structural and MEP condition assessments, capital improvement planning across multiple properties, on-call engineering support for portfolio operators, and tenant improvement engineering for portfolio landlords." },
+      { question: "When is this engineering needed?", answer: "Property owners and managers with multiple commercial properties benefit from a consistent engineering partner who understands the portfolio, can prioritize capital spending across properties, and responds quickly when issues arise." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer property engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "capital-improvement-engineering", dir: "solutions",
@@ -1492,6 +1996,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Construction document production for capital improvements",
     ],
     relatedSlugs: ["portfolio-engineering-support", "building-system-upgrades"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers capital improvement needs assessment and prioritization, structural repair and upgrade engineering, MEP replacement and upgrade engineering, and civil site improvement engineering." },
+      { question: "When is this engineering needed?", answer: "Capital improvement engineering translates a building owner's investment priorities into engineered designs — whether replacing aging rooftop equipment, upgrading electrical service for EV charging, or repairing structural deficiencies." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer property engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "building-system-upgrades", dir: "solutions",
@@ -1507,6 +2017,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Permit drawings for building system upgrades",
     ],
     relatedSlugs: ["capital-improvement-engineering", "aging-hvac-system-engineering"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers HVAC system replacement engineering, electrical service upgrade engineering, plumbing system replacement and upgrade, and integration of new systems with existing building." },
+      { question: "When is this engineering needed?", answer: "Building system upgrades — new HVAC, upgraded electrical service, plumbing replacements — require engineering that integrates the new systems with existing building infrastructure and produces permit-ready drawings." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer property engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "aging-hvac-system-engineering", dir: "solutions",
@@ -1523,6 +2039,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "HVAC replacement permit drawings",
     ],
     relatedSlugs: ["hvac-replacement-engineering", "building-system-upgrades"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers existing HVAC system evaluation and end-of-life assessment, replacement system selection and sizing, refrigerant phase-out compliance (R-22, R-410A), and new equipment structural support evaluation." },
+      { question: "When is this engineering needed?", answer: "Aging HVAC systems — past their design life, running on refrigerants being phased out, or simply no longer performing — need engineering that determines the best replacement strategy, sizes the new equipment correctly, and handles the permit." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer property engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "aging-electrical-system-engineering", dir: "solutions",
@@ -1539,6 +2061,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Electrical modernization permit drawings",
     ],
     relatedSlugs: ["electrical-panel-replacement-engineering", "switchgear-replacement-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers existing electrical system condition assessment, recalled equipment identification and replacement design, service upgrade design for modernized electrical loads, and panel replacement and circuit modernization design." },
+      { question: "When is this engineering needed?", answer: "Aging electrical infrastructure — Federal Pacific Stab-Lok panels, fuse-based systems, undersized service for modern loads — creates both safety risks and operational limitations." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer property engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "parking-lot-rehabilitation-engineering", dir: "solutions",
@@ -1555,6 +2083,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Civil permit drawings for parking lot rehabilitation",
     ],
     relatedSlugs: ["parking-lot-engineering", "parking-lot-geotechnical-report"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers pavement condition assessment — PCI rating, subgrade investigation for failing pavement areas, rehabilitation strategy selection — mill/overlay, full-depth reclaim, reconstruct, and ADA accessible space compliance evaluation." },
+      { question: "When is this engineering needed?", answer: "Failed or failing parking lots need engineering before rehabilitation — pavement condition assessment, subgrade investigation if settlement is occurring, and rehabilitation design that addresses the root cause rather than simply overlaying a failing section." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer civil engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "structural-maintenance-engineering", dir: "solutions",
@@ -1571,6 +2105,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Structural maintenance repair permit drawings",
     ],
     relatedSlugs: ["existing-building-structural-report", "capital-improvement-engineering"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers structural condition assessment for existing buildings, concrete deterioration and spalling repair design, corroded steel member evaluation and repair design, and wood framing damage assessment and repair." },
+      { question: "When is this engineering needed?", answer: "Structural maintenance engineering addresses the repairs that keep existing buildings safe and code-compliant — concrete spalling, corroded steel, damaged framing, and deteriorating connections that accumulate in aging commercial buildings." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── GOVERNMENT / FEDERAL SOLUTIONS ──────────────────────────────────────
@@ -1590,6 +2130,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Sustainable design coordination for federal projects",
     ],
     relatedSlugs: ["military-dorm-renovation-engineering", "federal-switchgear-replacement-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers structural engineering for federal facility renovations under UFC, MEP engineering for federal facilities — EISA compliance, civil engineering for federal site improvements, and federal project documentation standards." },
+      { question: "When is this engineering needed?", answer: "Federal facility renovation engineering follows UFC design criteria, GSA design standards, and federal energy requirements — producing engineering documents that meet the specific format, content, and certification requirements of federal construction projects." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer government engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "military-dorm-renovation-engineering", dir: "solutions",
@@ -1606,6 +2152,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Federal project documentation for DoD renovation contracts",
     ],
     relatedSlugs: ["federal-facility-renovation-engineering", "military-parking-lot-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers UFC-compliant barracks renovation structural engineering, MEP upgrade engineering for military dormitories, HVAC modernization for barracks buildings, and electrical service and panel replacement design." },
+      { question: "When is this engineering needed?", answer: "Military dormitory (barracks) renovations are a recurring capital investment for DoD — replacing aging MEP systems, upgrading room layouts for compliance with current Unified Facilities Criteria, and addressing deferred structural maintenance." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer government engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "military-parking-lot-engineering", dir: "solutions",
@@ -1621,6 +2173,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Military site improvement permit and documentation package",
     ],
     relatedSlugs: ["military-dorm-renovation-engineering", "military-recreation-site-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers military installation parking lot civil engineering, UFC pavement design for military vehicle loads, military site stormwater management under UFC, and ADA site accessibility for federal facilities." },
+      { question: "When is this engineering needed?", answer: "Military installation parking lot and site improvement projects follow UFC site design criteria — pavement design for military vehicle loads, stormwater management under UFC requirements, and federal project documentation standards." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer government engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "military-recreation-site-engineering", dir: "solutions",
@@ -1637,6 +2195,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Federal project documentation for site improvement contracts",
     ],
     relatedSlugs: ["military-parking-lot-engineering", "federal-facility-renovation-engineering"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers structural engineering for recreation facility structures, civil engineering for athletic fields and outdoor amenities, UFC-compliant site design for recreation areas, and pavilion and shade structure structural engineering." },
+      { question: "When is this engineering needed?", answer: "Military recreation facility and site improvement projects — playgrounds, athletic fields, pavilions, and site amenity upgrades — follow UFC site design requirements and federal procurement standards." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer government engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "federal-switchgear-replacement-engineering", dir: "solutions",
@@ -1653,6 +2217,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Arc flash hazard analysis for updated switchgear",
     ],
     relatedSlugs: ["switchgear-replacement-engineering", "federal-facility-renovation-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers existing federal switchgear evaluation, replacement switchgear specification under UFC electrical criteria, protective device coordination study, and shutdown sequence planning for minimal facility impact." },
+      { question: "When is this engineering needed?", answer: "Federal facility switchgear replacement requires engineering that produces UFC-compliant electrical design documents, minimizes facility downtime through careful shutdown sequencing, and meets federal project documentation requirements." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer government engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── GOVERNMENT DIRECTORY PAGES (not at /solutions/) ────────────────────
@@ -1709,6 +2279,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "AHJ pre-submittal meeting support where beneficial",
     ],
     relatedSlugs: ["permit-correction-engineering", "pe-stamped-structural-plans", "structural-calculations-for-permit"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers technical response letters for each structural comment, revised structural drawings incorporating corrections, additional structural calculations where required, and coordination with the architect of record on plan revisions." },
+      { question: "When is this engineering needed?", answer: "Receiving structural plan check comments from a building department is a normal part of the permitting process — but the engineering response must be technical, specific, and submitted in the format the jurisdiction requires." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "city-mechanical-plan-check-comments", dir: "solutions",
@@ -1727,6 +2303,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Coordination with mechanical equipment suppliers for data sheets",
     ],
     relatedSlugs: ["hvac-replacement-engineering", "commercial-mep-permit-plans", "permit-correction-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers HVAC load calculation documentation, equipment specification and performance data responses, duct sizing verification and corrected drawings, and ventilation and outside air compliance documentation." },
+      { question: "When is this engineering needed?", answer: "Mechanical plan check comments frequently request additional calculations, equipment specifications, duct sizing documentation, or code clarifications." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer mechanical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "city-electrical-plan-check-comments", dir: "solutions",
@@ -1745,6 +2327,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "EV charging and emergency power system clarifications",
     ],
     relatedSlugs: ["electrical-service-upgrade-engineering", "electrical-load-study", "permit-correction-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers electrical load calculation documentation and response, one-line diagram corrections and additions, panel schedule revisions and service sizing justification, and NEC code section citations in formal response letter." },
+      { question: "When is this engineering needed?", answer: "Electrical plan check comments commonly request load calculation documentation, one-line diagram corrections, panel schedule revisions, or NEC code compliance clarification." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer electrical engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "city-plumbing-plan-check-comments", dir: "solutions",
@@ -1763,6 +2351,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Water efficiency compliance documentation",
     ],
     relatedSlugs: ["plumbing-riser-design", "grease-interceptor-engineering", "permit-correction-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers plumbing fixture unit calculation documentation, domestic water supply sizing justification, drainage system capacity and slope verification, and grease interceptor sizing calculations and documentation." },
+      { question: "When is this engineering needed?", answer: "Plumbing plan check comments often request fixture unit calculations, water sizing documentation, grease interceptor justification, or code compliance clarification." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer plumbing engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "city-civil-plan-check-comments", dir: "solutions",
@@ -1781,6 +2375,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Revised civil permit drawings with engineer stamp",
     ],
     relatedSlugs: ["site-drainage-engineering", "stormwater-engineering", "permit-correction-engineering"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers drainage and hydrology calculation documentation, grading plan revisions to meet department requirements, stormwater management plan compliance responses, and ADA accessible route technical clarification." },
+      { question: "When is this engineering needed?", answer: "Civil plan check comments often involve drainage calculations, grading revisions, stormwater compliance, utility connection documentation, or ADA site improvement clarifications." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer civil engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "engineering-resubmittal-support", dir: "solutions",
@@ -1799,6 +2399,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Expedited resubmittal support for time-sensitive projects",
     ],
     relatedSlugs: ["permit-correction-engineering", "engineering-redlines-revisions", "fast-track-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers review of city or county comment sheet in full, technical engineering response to each comment, revised permit drawings with cloud markups on changes, and supporting calculations for engineering responses." },
+      { question: "When is this engineering needed?", answer: "A permit resubmittal is only as effective as the technical engineering behind it." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer permit engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "structural-calculations-for-permit", dir: "solutions",
@@ -1817,6 +2423,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Engineer-stamped and signed calculation package",
     ],
     relatedSlugs: ["pe-stamped-structural-plans", "city-structural-comments", "permit-correction-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers gravity load calculations — dead, live, roof, floor, lateral analysis — seismic and wind per IBC and ASCE 7, shear wall and diaphragm design calculations, and beam and column design with code reference citations." },
+      { question: "When is this engineering needed?", answer: "Structural permit calculations document the engineering basis for the structural design — member sizes, connection details, load paths, seismic and wind forces — so the building department can verify the design meets code." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "mep-calculations-for-permit", dir: "solutions",
@@ -1835,6 +2447,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Engineer-stamped MEP calculation package",
     ],
     relatedSlugs: ["commercial-mep-permit-plans", "city-mechanical-plan-check-comments", "permit-correction-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers HVAC load calculations — heating, cooling, ventilation, electrical load calculations and service sizing, plumbing fixture unit calculations, and energy code compliance — Title 24, ASHRAE 90.1, IECC." },
+      { question: "When is this engineering needed?", answer: "MEP permit calculations document the engineering basis for mechanical, electrical, and plumbing designs — confirming code compliance, system sizing, and energy performance." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer MEP engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── COMMERCIAL ENGINEERING HUB ──────────────────────────────────────────
@@ -1856,6 +2474,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Structural permit drawings and calculations",
     ],
     relatedSlugs: ["commercial-renovation-engineering", "structural-engineering-wall-openings", "rooftop-hvac-structural-analysis"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers commercial building structural system design — steel, concrete, wood, tenant improvement structural modifications, load-bearing wall removal and header engineering, and rooftop equipment structural support." },
+      { question: "When is this engineering needed?", answer: "Commercial structural engineering covers new construction, additions, renovations, tenant improvements, and existing-building modifications for office buildings, retail, restaurants, medical, industrial, and mixed-use projects." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "commercial-mep-engineering", dir: "solutions",
@@ -1874,6 +2498,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Complete permit drawing package across all disciplines",
     ],
     relatedSlugs: ["restaurant-mep-permit-plans", "tenant-improvement-mep-plans", "medical-office-mep-plans"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers commercial HVAC system design and equipment selection, electrical service sizing, one-line diagrams, and panel schedules, plumbing system design — domestic water, sanitary, gas, and commercial kitchen MEP — exhaust, make-up air, gas, grease." },
+      { question: "When is this engineering needed?", answer: "Commercial MEP engineering covers mechanical, electrical, and plumbing design for office, retail, restaurant, medical, and mixed-use commercial buildings — new construction, tenant improvements, renovations, and equipment replacements." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer MEP engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "commercial-civil-engineering-services", dir: "solutions",
@@ -1892,6 +2522,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Civil permit drawing package for commercial projects",
     ],
     relatedSlugs: ["parking-lot-engineering", "site-drainage-engineering", "commercial-driveway-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers commercial site plan and grading design, parking lot design, layout, and civil engineering, drainage and stormwater management design, and commercial driveway and turn lane engineering." },
+      { question: "When is this engineering needed?", answer: "Commercial civil engineering covers site development, grading, drainage, utilities, parking, and access improvements for retail, office, restaurant, medical, industrial, and mixed-use commercial projects." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer civil engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "commercial-renovation-engineering", dir: "solutions",
@@ -1910,6 +2546,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Plan check response support",
     ],
     relatedSlugs: ["commercial-structural-engineering", "commercial-mep-engineering", "change-of-occupancy-structural-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers existing building structural evaluation before renovation, load path verification for floor plan changes, wall opening and removal engineering, and MEP system upgrades for renovated space." },
+      { question: "When is this engineering needed?", answer: "Commercial renovation projects — tenant improvements, building remodels, floor plan changes, and system upgrades — require engineering to verify the existing structure can handle proposed changes and to produce permit drawings." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "commercial-new-construction-engineering", dir: "solutions",
@@ -1928,6 +2570,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Plan check and AHJ coordination support",
     ],
     relatedSlugs: ["commercial-structural-engineering", "commercial-civil-engineering-services", "commercial-geotechnical-report"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers structural system selection — steel, concrete, masonry, wood, foundation design based on geotechnical report, MEP system design for new construction, and civil site development engineering." },
+      { question: "When is this engineering needed?", answer: "New commercial construction requires full engineering across structural, MEP, civil, and geotechnical disciplines — from feasibility and design development through permit-ready construction documents." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 
   // ─── SPECIALTY ACQUISITION PAGES ──────────────────────────────────────────
@@ -1949,6 +2597,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Scalable engagement — one project or ongoing capacity",
     ],
     relatedSlugs: ["revit-cad-engineering-coordination", "design-development-engineering-support", "repeat-project-engineering-partnerships"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers structural engineering for active architecture projects, MEP engineering across all three disciplines simultaneously, civil and geotechnical engineering coordination, and fast onboarding — minimal lead time required." },
+      { question: "When is this engineering needed?", answer: "Architecture firms regularly face peak capacity situations — more active projects than their current engineering partners can absorb, tight deadlines, or discipline gaps in their consultant roster." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer MEP engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "revit-cad-engineering-coordination", dir: "solutions",
@@ -1967,6 +2621,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "File format flexibility — DWG, RVT, PDF, Bluebeam",
     ],
     relatedSlugs: ["engineering-overflow-support", "design-development-engineering-support", "commercial-mep-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers revit structural model coordination with architectural model, MEP coordination in Revit or CAD formats, clash detection support — MEP vs. structural, and CAD engineering in DWG format for non-Revit projects." },
+      { question: "When is this engineering needed?", answer: "Engineering coordination in CAD and Revit environments keeps structural, MEP, and civil engineering aligned with the architectural model throughout design." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer MEP engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "design-development-engineering-support", dir: "solutions",
@@ -1985,6 +2645,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Preliminary engineering for owner and contractor cost planning",
     ],
     relatedSlugs: ["engineering-overflow-support", "revit-cad-engineering-coordination", "commercial-new-construction-engineering"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers structural system selection and preliminary sizing, preliminary MEP system concept and space requirements, coordination of mechanical equipment locations with structure, and preliminary structural analysis for long spans or special conditions." },
+      { question: "When is this engineering needed?", answer: "Engineering engaged during design development — before construction documents — catches structural and MEP conflicts early, informs architectural decisions, and reduces costly redesign at permit." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "repeat-project-engineering-partnerships", dir: "solutions",
@@ -2003,6 +2669,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Government and military contractor ongoing engineering support",
     ],
     relatedSlugs: ["engineering-overflow-support", "portfolio-engineering-support", "design-development-engineering-support"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers streamlined onboarding for repeat project types, preferred pricing structures for ongoing project volume, consistent engineering team assigned to partner account, and engineering template development for prototype projects." },
+      { question: "When is this engineering needed?", answer: "Engineering relationships built over multiple projects deliver compounding value — the engineer knows your standards, your project type preferences, your client base, and how you work." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer MEP engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "structural-field-change-engineering", dir: "solutions",
@@ -2021,6 +2693,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Fast turnaround for active construction schedules",
     ],
     relatedSlugs: ["construction-phase-engineering-support", "engineering-redlines-revisions", "permit-correction-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers structural RFI response and engineering interpretation, field condition evaluation — unexpected framing or structure, as-built deviation engineering review and approval, and substituted framing member engineering verification." },
+      { question: "When is this engineering needed?", answer: "Construction field conditions sometimes require real-time engineering decisions — unexpected framing, obstructions, changed loads, or contractor questions that weren't anticipated in the permit set." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "construction-phase-engineering-support", dir: "solutions",
@@ -2039,6 +2717,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Design clarification responses to contractor questions",
     ],
     relatedSlugs: ["structural-field-change-engineering", "engineering-redlines-revisions", "permit-correction-engineering"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers structural RFI responses during construction, MEP RFI and coordination support, material or equipment substitution engineering review, and supplemental calculation and detail production." },
+      { question: "When is this engineering needed?", answer: "Once a project is permitted and under construction, engineering questions, RFIs, and field conditions continue to arise." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "predevelopment-engineering", dir: "solutions",
@@ -2057,6 +2741,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Identification of engineering risks before land acquisition",
     ],
     relatedSlugs: ["structural-due-diligence-engineering", "mep-due-diligence-engineering", "commercial-geotechnical-report"],
+    faqs: [
+      { question: "What is included when I hire Apex Grid for this work?", answer: "This scope covers structural feasibility review of proposed building program, geotechnical report review and foundation cost implications, utility capacity assessment for proposed development, and MEP infrastructure feasibility for development program." },
+      { question: "When is this engineering needed?", answer: "Engineering input before development decisions are finalized can prevent costly surprises — structural constraints that affect layout, geotechnical conditions that affect foundation cost, utility capacity that affects MEP design, or civil conditions that affect site feasibility." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer civil engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Does Apex Grid confirm licensure for my jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "structural-due-diligence-engineering", dir: "solutions",
@@ -2075,6 +2765,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Portfolio-level structural assessment for multi-property acquisition",
     ],
     relatedSlugs: ["predevelopment-engineering", "capital-improvement-engineering", "aging-community-engineering"],
+    faqs: [
+      { question: "What does this engineering scope cover?", answer: "This scope covers existing structural system condition assessment, structural deficiency identification and documentation, seismic performance review for older buildings, and estimated structural repair and upgrade costs for investor planning." },
+      { question: "When is this engineering needed?", answer: "Before acquiring a commercial building, investors and developers need to understand structural conditions — existing deficiencies, seismic performance gaps, repair costs, and renovation constraints." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer structural engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Is Apex Grid licensed for my project's jurisdiction?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "mep-due-diligence-engineering", dir: "solutions",
@@ -2093,6 +2789,12 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Written MEP due diligence report for investor or lender",
     ],
     relatedSlugs: ["predevelopment-engineering", "aging-hvac-system-engineering", "aging-electrical-system-engineering"],
+    faqs: [
+      { question: "Which services are included in this scope?", answer: "This scope covers HVAC system condition and remaining useful life assessment, electrical service capacity review — amps, panels, distribution, plumbing system condition and code compliance review, and identification of MEP systems needing near-term replacement." },
+      { question: "When is this engineering needed?", answer: "MEP systems — HVAC, electrical service, plumbing infrastructure — are major cost drivers in commercial real estate acquisition and renovation." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer MEP engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "How is licensure handled for this project?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
   {
     slug: "permit-correction-engineering", dir: "solutions",
@@ -2110,5 +2812,11 @@ export const SOLUTION_PAGES: SolutionPage[] = [
       "Clarification of when revised permit documents are required",
     ],
     relatedSlugs: ["engineering-redlines-revisions", "fast-track-engineering", "existing-building-condition-assessment"],
+    faqs: [
+      { question: "What work does Apex Grid perform under this scope?", answer: "This scope covers failed inspection notice and approved-plan review, inspection discrepancy diagnosis before redesign, corrective details, calculations, and engineering letters, and responses to city comments and permit resubmittals." },
+      { question: "When is this engineering needed?", answer: "Permit correction engineering addresses plan-check comments, failed inspections, field discrepancies, and missing documentation through a defined review of approved documents and current conditions." },
+      { question: "What does Apex Grid deliver for this scope?", answer: "Stamped engineering documents, permit drawings, and calculations. We work from architectural PDFs, contractor sketches, or existing CAD files. We engineer permit engineering scopes as a standalone service or as part of a coordinated structural, MEP, civil, and geotechnical package." },
+      { question: "Who stamps the engineering for this scope?", answer: "Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska. Engineering stamping and licensure are confirmed for each project jurisdiction." },
+    ],
   },
 ];
