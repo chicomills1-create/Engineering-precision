@@ -26,6 +26,14 @@ const DISCIPLINE_SLUGS: Record<string, string> = {
   "geotechnical engineering": "geotechnical-engineering",
 };
 
+// Discipline subpages verified NOT to exist for a root (live-probed 404,
+// 2026-10-19 census fix Wave B). For these, the discipline heading renders
+// as plain text instead of a dead link; the discipline content still shows.
+const DISCIPLINE_LINK_EXCLUSIONS = new Set([
+  "agriculture/geotechnical-engineering",
+  "agriculture/structural-engineering",
+]);
+
 const INDUSTRY_SPECIALTY_LINKS: Record<string, { href: string; label: string }[]> = {
   "agriculture-cannabis-facility-engineering": [{ href: "/industries/cannabis/mep-engineering/", label: "Cannabis facility MEP engineering" }],
   "data-center-engineering": [
@@ -214,7 +222,7 @@ export default function IndustryDetail() {
             {industry.disciplines.map((d) => (
               <div key={d.name} className="border border-border p-8 bg-card/50">
                 <h3 className="text-2xl font-display font-bold mb-4">
-                  {disciplineRoot && DISCIPLINE_SLUGS[d.name.toLowerCase()] ? (
+                  {disciplineRoot && DISCIPLINE_SLUGS[d.name.toLowerCase()] && !DISCIPLINE_LINK_EXCLUSIONS.has(`${disciplineRoot}/${DISCIPLINE_SLUGS[d.name.toLowerCase()]}`) ? (
                     <Link href={`/industries/${disciplineRoot}/${DISCIPLINE_SLUGS[d.name.toLowerCase()]}/`} className="hover:text-primary transition-colors">{d.name}</Link>
                   ) : d.href ? (
                     <Link href={d.href} className="hover:text-primary transition-colors">{d.name}</Link>
