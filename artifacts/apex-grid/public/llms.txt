@@ -8,7 +8,7 @@ This file is a concise map of canonical public information. It does not imply lo
 
 - Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska.
 - PE review-and-seal work is performed under responsible charge by an engineer licensed in the project's state and discipline; the firm's state-by-state PE stamp pages are indexed in llms-full.txt.
-- Firm registrations of public record include Texas (TBPELS firm #7762) and Florida (DBPR engineering business registry #40371, Current).
+- Firm registrations of public record include Florida (DBPR engineering business registry #40371, Current).
 
 ## PE stamp (review & seal)
 
