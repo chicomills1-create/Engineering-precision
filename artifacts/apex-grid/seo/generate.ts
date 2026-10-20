@@ -913,7 +913,7 @@ This file is a concise map of canonical public information. It does not imply lo
 ## Licensing and coverage
 - Apex Grid Engineering is licensed in 49 states — every U.S. state except Alaska.
 - PE review-and-seal work is performed under responsible charge by an engineer licensed in the project's state and discipline; the firm's state-by-state PE stamp pages are indexed in llms-full.txt.
-- Firm registrations of public record include Texas (TBPELS firm #7762) and Florida (DBPR engineering business registry #40371, Current).
+- Firm registrations of public record include Florida (DBPR engineering business registry #40371, Current).
 
 ## PE stamp (review & seal)
 - PE stamp hub — how review-and-seal works, turnaround, and what to send: ${SITE}/pe-stamp/
@@ -1791,12 +1791,12 @@ const PE_STAMP_DEEP_DIVE: Record<string, PeStampDeepDive> = {
       },
       {
         heading: "What to send us — and what comes back",
-        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and permitting city, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the Texas PE in responsible charge, with any required fixes clearly marked so a resubmittal goes in clean. Apex Grid Engineering is registered with TBPELS as an engineering firm (firm #7762), and Texas structural work is sealed by our Texas-licensed structural PE.",
+        body: "Send the current drawing set (PDF, plus CAD backgrounds if you have them), existing calculations, the project address and permitting city, any AHJ checklist or correction notice, and your deadline. What comes back is a sealed drawing set and calculation package signed by the Texas PE in responsible charge, with any required fixes clearly marked so a resubmittal goes in clean. Texas structural work is sealed by our Texas-licensed structural PE.",
         bullets: ["Drawings (PDF; CAD backgrounds if available)", "Existing calculations and code basis, if known", "Project address, permitting city, and AHJ checklist or correction notice", "Your permit deadline"],
       },
     ],
     faqs: [
-      { question: "Can Apex Grid stamp structural drawings for a Texas permit?", answer: "Yes. Apex Grid Engineering is registered with the Texas Board of Professional Engineers and Land Surveyors (firm #7762), and Texas structural work is reviewed and sealed by our Texas-licensed structural PE. Send the set and we will confirm discipline fit and timeline the same day." },
+      { question: "Can Apex Grid stamp structural drawings for a Texas permit?", answer: "Yes. Texas structural work is reviewed and sealed by our Texas-licensed structural PE. Send the set and we will confirm discipline fit and timeline the same day." },
       { question: "Does Texas accept a digital PE seal?", answer: "Yes. TBPELS accepts digital and electronic seals on submittals under board rules, so your sealed drawings and calculations come back ready to upload to the city's permitting portal — no wet-signature mailing delay." },
     ],
   },
