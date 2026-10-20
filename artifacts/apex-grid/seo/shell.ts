@@ -28,7 +28,7 @@ header{border-bottom:1px solid var(--border);background:hsl(0 0% 3%/.95);positio
 .hero h1{font-size:clamp(34px,5vw,58px);font-weight:700;margin-bottom:24px}
 .hero h1 .dim{color:var(--muted)}
 .hero .lede{font-size:19px;color:hsl(0 0% 78%);max-width:760px;border-left:4px solid var(--primary);padding-left:22px}
-.breadcrumb{padding:20px 0 0;font-size:12px;font-family:'Space Grotesk';text-transform:uppercase;letter-spacing:.12em;color:var(--muted);overflow-wrap:anywhere}
+.breadcrumb{padding-top:20px;font-size:12px;font-family:'Space Grotesk';text-transform:uppercase;letter-spacing:.12em;color:var(--muted);overflow-wrap:anywhere}
 .breadcrumb a:hover{color:var(--primary)}
 .breadcrumb span{margin:0 8px;color:hsl(0 0% 30%)}
 section.block{padding:56px 0;border-bottom:1px solid var(--border)}
