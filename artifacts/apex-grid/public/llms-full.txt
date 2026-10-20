@@ -35,7 +35,7 @@ Plan-check and plan-review support for jurisdictions and project teams, includin
 
 ## Firm registrations of public record
 
-- Texas: Apex Grid Engineering is registered with the Texas Board of Professional Engineers and Land Surveyors (TBPELS), firm #7762. Texas structural work is sealed by the firm's Texas-licensed structural PE.
+- Texas: practice is governed by the Texas Board of Professional Engineers and Land Surveyors (TBPELS); Texas structural work is sealed by the firm's Texas-licensed structural PE.
 - Florida: Apex Grid Engineering PLLC holds Florida DBPR engineering business registry #40371, status Current, qualified by the firm's Florida-licensed PE.
 - Arizona (home state): practice is governed by the Arizona State Board of Technical Registration (BTR); the firm's principal PE is an Arizona-licensed structural engineer.
 
