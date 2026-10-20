@@ -65,7 +65,7 @@ const popularStates = [
   {
     name: "Texas",
     href: "/pe-stamp/texas/",
-    blurb: "Registered with TBPELS (firm #7762). Structural sets reviewed against your city's adopted code and sealed by our Texas PE.",
+    blurb: "Structural sets reviewed against your city's adopted code and sealed by our Texas PE.",
   },
   {
     name: "Florida",
