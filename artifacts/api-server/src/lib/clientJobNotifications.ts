@@ -1,10 +1,11 @@
-import { ReplitConnectors } from "@replit/connectors-sdk";
 import type {
   ClientJob,
   ClientJobDocument,
 } from "@workspace/db";
 import { signDownloadPath } from "./downloadToken";
 import { escapeEmailHtml } from "./emailMarkup";
+import { logger } from "./logger";
+import { postSendGridMail } from "./sendGridDirect";
 
 export const CLIENT_NOTIFICATION_STATUSES = ["needs_information", "quoted"] as const;
 export type ClientNotificationStatus = (typeof CLIENT_NOTIFICATION_STATUSES)[number];
@@ -224,24 +225,34 @@ export async function sendClientJobNotificationEmail(
 
   const { subject, body } = buildEstimateProposalNotificationContent(job, documents);
 
-  const connectors = new ReplitConnectors();
-  const response = await connectors.proxy("sendgrid", "/v3/mail/send", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      personalizations: [{ to: [{ email: to }] }],
-      from: { email: from, name: "Apex Grid Engineering Client Portal" },
-      reply_to: { email: job.submitterEmail, name: job.submitterName },
-      subject,
-      content: [{ type: "text/plain", value: body }],
-    }),
-  });
+  // Direct SendGrid API (see lib/sendGridDirect.ts) — the Replit Connectors
+  // proxy previously used here throws on Render, silently killing every
+  // estimate-proposal notification after the Render migration.
+  let response: Awaited<ReturnType<typeof postSendGridMail>>;
+  try {
+    response = await postSendGridMail(
+      JSON.stringify({
+        personalizations: [{ to: [{ email: to }] }],
+        from: { email: from, name: "Apex Grid Engineering Client Portal" },
+        reply_to: { email: job.submitterEmail, name: job.submitterName },
+        subject,
+        content: [{ type: "text/plain", value: body }],
+      }),
+    );
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Unknown SendGrid transport error";
+    logger.error(
+      { err: error, to, subject },
+      "Client job notification email failed",
+    );
+    return { ok: false, error: message };
+  }
   if (!response.ok) {
     const errorBody = await response.text().catch(() => "");
-    return {
-      ok: false,
-      error: `SendGrid responded ${response.status}: ${errorBody}`,
-    };
+    const error = `SendGrid responded ${response.status}: ${errorBody}`;
+    logger.error({ error, to, subject }, "Client job notification email failed");
+    return { ok: false, error };
   }
   return { ok: true };
 }
@@ -266,23 +277,28 @@ export async function sendClientJobStatusNotificationEmail(
     || process.env.OUTREACH_REPLY_TO_EMAIL?.trim()
     || from;
   try {
-    const response = await new ReplitConnectors().proxy("sendgrid", "/v3/mail/send", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(buildClientJobStatusNotificationPayload(preview, from, replyTo)),
-    });
+    // Direct SendGrid API (see lib/sendGridDirect.ts) — not the Replit
+    // Connectors proxy, which throws outside a Repl.
+    const response = await postSendGridMail(
+      JSON.stringify(buildClientJobStatusNotificationPayload(preview, from, replyTo)),
+    );
     if (!response.ok) {
       const errorBody = await response.text().catch(() => "");
-      return {
-        ok: false,
-        error: `SendGrid responded ${response.status}: ${errorBody}`,
-      };
+      const error = `SendGrid responded ${response.status}: ${errorBody}`;
+      logger.error(
+        { error, to: preview.recipient, subject: preview.subject },
+        "Client status notification email failed",
+      );
+      return { ok: false, error };
     }
   } catch (error) {
-    return {
-      ok: false,
-      error: error instanceof Error ? error.message : "Unable to send client status notification",
-    };
+    const message =
+      error instanceof Error ? error.message : "Unable to send client status notification";
+    logger.error(
+      { err: error, to: preview.recipient, subject: preview.subject },
+      "Client status notification email failed",
+    );
+    return { ok: false, error: message };
   }
 
   return { ok: true };

@@ -1,8 +1,9 @@
-import { ReplitConnectors } from "@replit/connectors-sdk";
 import type { LeadInput } from "@workspace/api-zod";
 import { signDownloadPath } from "./downloadToken";
+import { logger } from "./logger";
+import { postSendGridMail } from "./sendGridDirect";
 
-const ESTIMATE_NOTIFICATION_EMAIL = "Chicomills1@gmail.com";
+const ESTIMATE_NOTIFICATION_EMAIL = "info@apexgrideng.com";
 
 interface SendGridResponse {
   ok: boolean;
@@ -21,6 +22,16 @@ interface SendGridProxy {
     },
   ): Promise<SendGridResponse>;
 }
+
+/**
+ * Production transport: direct SendGrid API (see lib/sendGridDirect.ts).
+ * The Replit Connectors proxy previously used here throws on Render —
+ * it needs a Replit identity token that only exists inside a Repl — which
+ * silently killed every lead notification after the Render migration.
+ */
+const directSendGridProxy: SendGridProxy = {
+  proxy: (_connector, _path, options) => postSendGridMail(options.body),
+};
 
 /**
  * Sends a notification email about a new lead via the SendGrid connector.
@@ -78,29 +89,41 @@ export async function sendLeadNotificationEmail(
     ...attachmentLines,
   ].filter((line): line is string => line !== null);
 
-  const connectors = options.connectors ?? new ReplitConnectors();
-  const response = await connectors.proxy("sendgrid", "/v3/mail/send", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      personalizations: [{ to: [{ email: to }] }],
-      from: { email: from, name: "Apex Grid Engineering Website" },
-      reply_to: { email: lead.email, name: lead.name },
-      subject: isEstimateLead
-        ? "New RFQ lead — /estimate"
-        : `New inquiry from ${lead.name}${lead.company ? ` (${lead.company})` : ""}`,
-      content: [{ type: "text/plain", value: lines.join("\n") }],
-    }),
-  });
+  const subject = isEstimateLead
+    ? "New RFQ lead — /estimate"
+    : `New inquiry from ${lead.name}${lead.company ? ` (${lead.company})` : ""}`;
+
+  const connectors = options.connectors ?? directSendGridProxy;
+  let response: SendGridResponse;
+  try {
+    response = await connectors.proxy("sendgrid", "/v3/mail/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        personalizations: [{ to: [{ email: to }] }],
+        from: { email: from, name: "Apex Grid Engineering Website" },
+        reply_to: { email: lead.email, name: lead.name },
+        subject,
+        content: [{ type: "text/plain", value: lines.join("\n") }],
+      }),
+    });
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Unknown SendGrid transport error";
+    logger.error(
+      { err: error, to, subject },
+      "Lead notification email failed",
+    );
+    return { ok: false, error: message };
+  }
 
   // POST /v3/mail/send returns 202 with an empty body on success —
   // do not call .json() on it.
   if (!response.ok) {
     const errorBody = await response.text().catch(() => "");
-    return {
-      ok: false,
-      error: `SendGrid responded ${response.status}: ${errorBody}`,
-    };
+    const error = `SendGrid responded ${response.status}: ${errorBody}`;
+    logger.error({ error, to, subject }, "Lead notification email failed");
+    return { ok: false, error };
   }
 
   return { ok: true };

@@ -71,7 +71,7 @@ Estimate Range: $17,500 - $30,000`,
   };
   assert.equal(
     payload.personalizations[0]?.to[0]?.email,
-    "Chicomills1@gmail.com",
+    "info@apexgrideng.com",
   );
   assert.equal(payload.from.email, "info@apexgrideng.com");
   assert.deepEqual(payload.reply_to, {
