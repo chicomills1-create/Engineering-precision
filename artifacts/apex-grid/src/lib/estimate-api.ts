@@ -12,8 +12,10 @@ export type UploadResponse = {
 export type ProposalResponse = {
   estimateId: string;
   proposalId: number;
-  pricing: EstimateResult;
-  pdfUrl: string;
+  /** Present only on the partner-routing path; the direct path returns no pricing. */
+  pricing?: EstimateResult;
+  /** Present only on the partner-routing path; the direct path issues no PDF. */
+  pdfUrl?: string;
   notificationQueued: boolean;
 };
 
