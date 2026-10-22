@@ -20,6 +20,10 @@ export interface Lead {
   projectType?: string | null;
   /** @nullable */
   services?: string | null;
+  /** @nullable */
+  projectLocation?: string | null;
+  /** @nullable */
+  whenNeeded?: string | null;
   message: string;
   /** @nullable */
   source?: string | null;
