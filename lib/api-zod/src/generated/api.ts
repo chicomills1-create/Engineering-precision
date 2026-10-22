@@ -131,8 +131,8 @@ export const createEstimateProposalBodyBallparkSummaryMax = 500;export const Cre
 export const CreateEstimateProposalResponse = zod.object({
   "estimateId": zod.string(),
   "proposalId": zod.number(),
-  "pricing": zod.record(zod.string(), zod.unknown()),
-  "pdfUrl": zod.string(),
+  "pricing": zod.record(zod.string(), zod.unknown()).optional(),
+  "pdfUrl": zod.string().optional(),
   "notificationQueued": zod.boolean()
 })
 
@@ -252,6 +252,8 @@ export const ListLeadsResponseItem = zod.object({
   "phone": zod.string().nullish(),
   "projectType": zod.string().nullish(),
   "services": zod.string().nullish(),
+  "projectLocation": zod.string().nullish(),
+  "whenNeeded": zod.string().nullish(),
   "message": zod.string(),
   "source": zod.string().nullish(),
   "medium": zod.string().nullish(),
@@ -290,6 +292,12 @@ export const createLeadBodyReferralPartnerCodeMax = 64;
 
 
 
+export const createLeadBodyProjectLocationMax = 200;
+
+export const createLeadBodyWhenNeededMax = 200;
+
+
+
 export const CreateLeadBody = zod.object({
   "name": zod.string().min(1),
   "email": zod.string().min(createLeadBodyEmailMin),
@@ -297,6 +305,8 @@ export const CreateLeadBody = zod.object({
   "phone": zod.string().optional(),
   "projectType": zod.string().optional(),
   "services": zod.string().optional(),
+  "projectLocation": zod.string().max(createLeadBodyProjectLocationMax).optional(),
+  "whenNeeded": zod.string().max(createLeadBodyWhenNeededMax).optional(),
   "message": zod.string().min(1),
   "attachments": zod.array(zod.string()).optional().describe('Object paths of uploaded files attached to the inquiry.'),
   "source": zod.string().max(createLeadBodySourceMax).optional(),
@@ -316,6 +326,8 @@ export const CreateLeadResponse = zod.object({
   "phone": zod.string().nullish(),
   "projectType": zod.string().nullish(),
   "services": zod.string().nullish(),
+  "projectLocation": zod.string().nullish(),
+  "whenNeeded": zod.string().nullish(),
   "message": zod.string(),
   "source": zod.string().nullish(),
   "medium": zod.string().nullish(),
