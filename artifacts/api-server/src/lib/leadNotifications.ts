@@ -1,55 +1,52 @@
 import type { LeadInput } from "@workspace/api-zod";
 import { signDownloadPath } from "./downloadToken";
+import {
+  graphInternalSender,
+  sendGraphMail,
+  type GraphMailMessage,
+} from "./graphMail";
+import { humanizeServices } from "./clientJobNotifications";
 import { logger } from "./logger";
-import { postSendGridMail } from "./sendGridDirect";
 
 const ESTIMATE_NOTIFICATION_EMAIL = "info@apexgrideng.com";
 
-interface SendGridResponse {
-  ok: boolean;
-  status: number;
-  text(): Promise<string>;
-}
+type MailTransport = (
+  message: GraphMailMessage,
+) => Promise<{ ok: true } | { ok: false; error: string }>;
 
-interface SendGridProxy {
-  proxy(
-    connector: string,
-    path: string,
-    options: {
-      method: string;
-      headers: Record<string, string>;
-      body: string;
-    },
-  ): Promise<SendGridResponse>;
+function formatReceivedPhoenix(value: Date): string {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Phoenix",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(value);
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? "";
+  return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")} MST`;
 }
 
 /**
- * Production transport: direct SendGrid API (see lib/sendGridDirect.ts).
- * The Replit Connectors proxy previously used here throws on Render —
- * it needs a Replit identity token that only exists inside a Repl — which
- * silently killed every lead notification after the Render migration.
- */
-const directSendGridProxy: SendGridProxy = {
-  proxy: (_connector, _path, options) => postSendGridMail(options.body),
-};
-
-/**
- * Sends a notification email about a new lead via the SendGrid connector.
+ * The canonical internal notification (contact-simplification design §4):
+ * who sent it, how to reach them, where the project is, what they need
+ * done in their own words, when they need it, and their files. Transport
+ * is Microsoft Graph (the fleet standard — the SendGrid plan cancels
+ * 2026-11-01); internal mail sends as the fleet Graph identity.
  * Never throws — failures are logged by the caller and must not break
  * lead submission.
  */
 export async function sendLeadNotificationEmail(
   lead: LeadInput,
-  options: { connectors?: SendGridProxy } = {},
+  options: { transport?: MailTransport } = {},
 ): Promise<{ ok: true } | { ok: false; error: string }> {
   const isEstimateLead = lead.source === "estimate";
   const to = isEstimateLead
     ? ESTIMATE_NOTIFICATION_EMAIL
     : process.env.LEAD_NOTIFY_EMAIL;
-  const from =
-    process.env.LEAD_NOTIFY_FROM_EMAIL || process.env.LEAD_NOTIFY_EMAIL;
 
-  if (!to || !from) {
+  if (!to) {
     return {
       ok: false,
       error:
@@ -59,9 +56,8 @@ export async function sendLeadNotificationEmail(
 
   const baseUrl = process.env.PUBLIC_SITE_URL || "https://apexgrideng.com";
 
-  const attachmentLines: string[] = [];
+  const fileLines: string[] = [];
   if (lead.attachments && lead.attachments.length > 0) {
-    attachmentLines.push("", "Attachments:");
     for (const objectPath of lead.attachments) {
       try {
         const token = signDownloadPath(objectPath);
@@ -69,62 +65,69 @@ export async function sendLeadNotificationEmail(
         const wildcard = objectPath.replace(/^\/objects\//, "");
         const url = `${baseUrl}/api/storage/objects/${wildcard}?token=${token}`;
         const filename = objectPath.split("/").pop() ?? objectPath;
-        attachmentLines.push(`  ${filename}: ${url}`);
+        fileLines.push(`  - ${filename}: ${url}`);
       } catch {
-        attachmentLines.push(`  ${objectPath} (download link unavailable — SESSION_SECRET not configured)`);
+        fileLines.push(`  - ${objectPath} (download link unavailable — SESSION_SECRET not configured)`);
       }
     }
+  } else {
+    fileLines.push("  none uploaded");
   }
 
+  const need = humanizeServices(lead.services) || lead.projectType || "";
+  const needBlock: string[] = [];
+  if (need) needBlock.push(need);
+  if (lead.projectType && lead.projectType !== need) {
+    needBlock.push(lead.projectType);
+  }
+  needBlock.push(lead.message);
+
+  const location = lead.projectLocation?.trim() || "—";
   const lines = [
-    `Name: ${lead.name}`,
-    `Email: ${lead.email}`,
-    lead.company ? `Company: ${lead.company}` : null,
-    lead.phone ? `Phone: ${lead.phone}` : null,
-    lead.projectType ? `Project type: ${lead.projectType}` : null,
-    lead.services ? `Services: ${lead.services}` : null,
+    "New Apex project inquiry",
+    `Received: ${formatReceivedPhoenix(new Date())}`,
+    `Source: ${lead.landingPath || (isEstimateLead ? "/estimate" : "/contact")}`,
     "",
-    "Message:",
-    lead.message,
-    ...attachmentLines,
-  ].filter((line): line is string => line !== null);
+    `Name:    ${lead.name}`,
+    `Email:   ${lead.email}`,
+    `Phone:   ${lead.phone || "—"}`,
+    `Company: ${lead.company || "—"}`,
+    "",
+    `Project location: ${location}`,
+    "What they need done:",
+    ...needBlock,
+    "",
+    `When they need it: ${lead.whenNeeded?.trim() || "Not specified"}`,
+    "",
+    "Files:",
+    ...fileLines,
+  ];
 
-  const subject = isEstimateLead
-    ? "New RFQ lead — /estimate"
-    : `New inquiry from ${lead.name}${lead.company ? ` (${lead.company})` : ""}`;
+  const subject = [
+    "Apex intake",
+    need || "Project inquiry",
+    location !== "—" ? location : null,
+    lead.name,
+  ]
+    .filter((part): part is string => Boolean(part))
+    .join(" — ");
 
-  const connectors = options.connectors ?? directSendGridProxy;
-  let response: SendGridResponse;
-  try {
-    response = await connectors.proxy("sendgrid", "/v3/mail/send", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        personalizations: [{ to: [{ email: to }] }],
-        from: { email: from, name: "Apex Grid Engineering Website" },
-        reply_to: { email: lead.email, name: lead.name },
-        subject,
-        content: [{ type: "text/plain", value: lines.join("\n") }],
-      }),
-    });
-  } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Unknown SendGrid transport error";
+  const send = options.transport ?? sendGraphMail;
+  const result = await send({
+    from: graphInternalSender(),
+    fromName: "Apex Grid Engineering Website",
+    to,
+    replyTo: lead.email,
+    replyToName: lead.name,
+    subject,
+    text: lines.join("\n"),
+  });
+  if (!result.ok) {
     logger.error(
-      { err: error, to, subject },
+      { error: result.error, to, subject },
       "Lead notification email failed",
     );
-    return { ok: false, error: message };
+    return result;
   }
-
-  // POST /v3/mail/send returns 202 with an empty body on success —
-  // do not call .json() on it.
-  if (!response.ok) {
-    const errorBody = await response.text().catch(() => "");
-    const error = `SendGrid responded ${response.status}: ${errorBody}`;
-    logger.error({ error, to, subject }, "Lead notification email failed");
-    return { ok: false, error };
-  }
-
   return { ok: true };
 }
