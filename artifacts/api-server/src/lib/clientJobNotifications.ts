@@ -4,8 +4,13 @@ import type {
 } from "@workspace/db";
 import { signDownloadPath } from "./downloadToken";
 import { escapeEmailHtml } from "./emailMarkup";
+import {
+  graphCustomerSender,
+  graphInternalSender,
+  sendGraphMail,
+  type GraphMailMessage,
+} from "./graphMail";
 import { logger } from "./logger";
-import { postSendGridMail } from "./sendGridDirect";
 
 export const CLIENT_NOTIFICATION_STATUSES = ["needs_information", "quoted"] as const;
 export type ClientNotificationStatus = (typeof CLIENT_NOTIFICATION_STATUSES)[number];
@@ -81,142 +86,181 @@ ${paragraphs}
 </td></tr></table></td></tr></table></body></html>`;
 }
 
-export function buildClientJobStatusNotificationPayload(
-  preview: ReturnType<typeof buildClientJobNotificationPreview>,
-  from: string,
-  replyTo: string,
-) {
-  return {
-    personalizations: [{ to: [{ email: preview.recipient }] }],
-    from: { email: from, name: "Apex Grid Engineering Client Portal" },
-    reply_to: { email: replyTo, name: "Apex Grid Engineering" },
-    subject: preview.subject,
-    content: [
-      { type: "text/plain", value: preview.body },
-      { type: "text/html", value: buildClientJobNotificationHtml(preview) },
-    ],
-  };
+/**
+ * Canonical plain-words rendering of a services string.
+ *
+ * Legacy estimate rows store machine slugs ("permit-set",
+ * "calculations-stamped-drawings — Disciplines: mechanical, ...").
+ * Notifications are read by people, so known slugs become plain words
+ * and discipline lists are capitalized; free-text values pass through.
+ */
+const SERVICE_SLUG_LABELS: Record<string, string> = {
+  "permit-set": "Permit set",
+  "calculations-stamped-drawings": "Calculations + stamped drawings",
+  "stamped-drawings": "Stamped drawings",
+  "calculations": "Calculations",
+  "design": "Design",
+  "pe-stamp": "PE stamp",
+  "pe-review-sealing": "PE review + sealing",
+  "engineering-calculations": "Engineering calculations",
+  "partner-routing": "Partner routing",
+};
+
+export function humanizeServices(raw: string | null | undefined): string {
+  const value = (raw ?? "").trim();
+  if (!value) return "";
+  return value
+    .split(" — ")
+    .map((part) => {
+      const trimmed = part.trim();
+      const disciplineMatch = /^Disciplines:\s*(.+)$/i.exec(trimmed);
+      if (disciplineMatch) {
+        const list = disciplineMatch[1]
+          .split(",")
+          .map((d) => {
+            const word = d.trim();
+            return word ? word.charAt(0).toUpperCase() + word.slice(1) : word;
+          })
+          .filter(Boolean)
+          .join(", ");
+        return list;
+      }
+      const slug = trimmed.toLowerCase();
+      if (SERVICE_SLUG_LABELS[slug]) return SERVICE_SLUG_LABELS[slug];
+      if (/^[a-z0-9]+(-[a-z0-9]+)+$/.test(trimmed)) {
+        const words = trimmed.replace(/-/g, " ");
+        return words.charAt(0).toUpperCase() + words.slice(1);
+      }
+      return trimmed;
+    })
+    .filter(Boolean)
+    .join(" — ");
 }
 
+function formatReceivedPhoenix(value: Date | string | null | undefined): string {
+  const date = value ? new Date(value) : new Date();
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Phoenix",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).formatToParts(date);
+  const get = (type: string) => parts.find((p) => p.type === type)?.value ?? "";
+  return `${get("year")}-${get("month")}-${get("day")} ${get("hour")}:${get("minute")} MST`;
+}
+
+function estimateSnapshotOf(job: ClientJob): Record<string, unknown> | null {
+  return job.estimateSnapshot && typeof job.estimateSnapshot === "object"
+    ? (job.estimateSnapshot as Record<string, unknown>)
+    : null;
+}
+
+function jobLocation(job: ClientJob): string {
+  const base = (job.projectLocation ?? "").trim();
+  const snapshot = estimateSnapshotOf(job);
+  const intake =
+    snapshot?.intake && typeof snapshot.intake === "object"
+      ? (snapshot.intake as Record<string, unknown>)
+      : null;
+  const state = typeof intake?.state === "string" ? intake.state.trim() : "";
+  if (base && state && !base.includes(",")) {
+    return `${base}, ${state}`;
+  }
+  return base || state || "—";
+}
+
+function jobNeedLines(job: ClientJob): string[] {
+  const snapshot = estimateSnapshotOf(job);
+  const partnerRoute =
+    job.servicePath === "partner-routing" ||
+    job.routingMode === "partner" ||
+    Boolean(snapshot?.partnerProfile || snapshot?.partnerQualification);
+  if (partnerRoute) {
+    const profile =
+      snapshot?.partnerProfile && typeof snapshot.partnerProfile === "object"
+        ? (snapshot.partnerProfile as Record<string, unknown>)
+        : null;
+    const lines = ["Partner program intake."];
+    if (profile) {
+      const states = Array.isArray(profile.states) ? profile.states.map(String).join(", ") : "";
+      const disciplines = Array.isArray(profile.disciplines) ? profile.disciplines.map(String).join(", ") : "";
+      if (states) lines.push(`States: ${states}`);
+      if (disciplines) lines.push(`Disciplines: ${disciplines}`);
+      if (profile.volume) lines.push(`Volume: ${String(profile.volume)}`);
+      if (profile.workflow) lines.push(`Workflow: ${String(profile.workflow)}`);
+    }
+    return lines;
+  }
+  const lines: string[] = [];
+  const services = humanizeServices(job.services);
+  if (services) lines.push(services);
+  if (job.projectType) lines.push(job.projectType);
+  const scope = (job.scope ?? "").trim();
+  if (scope && scope !== "Estimate proposal intake" && scope !== job.projectType) {
+    lines.push(scope);
+  }
+  return lines.length > 0 ? lines : ["Engineering services to be confirmed"];
+}
+
+/**
+ * The canonical internal notification (contact-simplification design §4):
+ * who sent it, how to reach them, where the project is, what they need
+ * done in plain words, when they need it, and their files. No estimate
+ * IDs, no routing/schedule/coverage codes, no prices, no factor data.
+ */
 export function buildEstimateProposalNotificationContent(
   job: ClientJob,
   documents: ClientJobDocument[],
 ): { subject: string; body: string } {
-  const baseUrl = process.env.PUBLIC_SITE_URL || "https://apexgrideng.com";
-  const estimateSnapshot =
-    job.estimateSnapshot && typeof job.estimateSnapshot === "object"
-      ? (job.estimateSnapshot as Record<string, unknown>)
-      : null;
-  const estimateResult =
-    estimateSnapshot?.result && typeof estimateSnapshot.result === "object"
-      ? (estimateSnapshot.result as Record<string, unknown>)
-      : null;
-  const fee =
-    estimateResult?.fee && typeof estimateResult.fee === "object"
-      ? (estimateResult.fee as Record<string, unknown>)
-      : null;
-  const perDiscipline =
-    Array.isArray(estimateResult?.perDisciplinePrices)
-      ? estimateResult.perDisciplinePrices
-      : [];
-  const factors =
-    estimateResult?.factorBreakdown && typeof estimateResult.factorBreakdown === "object"
-      ? JSON.stringify(estimateResult.factorBreakdown)
-      : null;
-  const customerQuote =
-    estimateSnapshot?.customerQuote && typeof estimateSnapshot.customerQuote === "object"
-      ? (estimateSnapshot.customerQuote as Record<string, unknown>)
-      : null;
-  const quotedLine = customerQuote
-    ? typeof customerQuote.custom === "string" && customerQuote.custom
-      ? `Quoted ballpark (customer saw this): ${String(customerQuote.custom)}`
-      : Number.isFinite(Number(customerQuote.low)) && Number.isFinite(Number(customerQuote.high))
-        ? `Quoted ballpark (customer saw this): $${Number(customerQuote.low).toLocaleString("en-US")} – $${Number(customerQuote.high).toLocaleString("en-US")}`
-        : null
-    : null;
-  const partnerRoute =
-    job.servicePath === "partner-routing" ||
-    job.routingMode === "partner" ||
-    Boolean(estimateSnapshot?.partnerProfile || estimateSnapshot?.partnerQualification);
-  const partnerProfile =
-    estimateSnapshot?.partnerProfile && typeof estimateSnapshot.partnerProfile === "object"
-      ? (estimateSnapshot.partnerProfile as Record<string, unknown>)
-      : null;
-  const attachmentLines = documents.map((document) => {
-    const wildcard = document.objectPath.replace(/^\/objects\//, "");
-    const token = signDownloadPath(document.objectPath);
-    return `  ${document.name}: ${baseUrl}/api/storage/objects/${wildcard}?token=${encodeURIComponent(token)}`;
-  });
+  const baseUrl = publicSiteUrl();
+  const location = jobLocation(job);
+  const needLines = jobNeedLines(job);
+  const needSummary = needLines[0] ?? "Project inquiry";
+  const fileLines =
+    documents.length > 0
+      ? documents.map((document) => {
+          const wildcard = document.objectPath.replace(/^\/objects\//, "");
+          const token = signDownloadPath(document.objectPath);
+          return `  - ${document.name}: ${baseUrl}/api/storage/objects/${wildcard}?token=${encodeURIComponent(token)}`;
+        })
+      : ["  none uploaded"];
   const lines = [
-    `Contact: ${job.submitterName}`,
-    `Email: ${job.submitterEmail}`,
-    job.submitterPhone ? `Phone: ${job.submitterPhone}` : null,
-    job.companyName ? `Company: ${job.companyName}` : null,
-    `Project type: ${job.projectType}`,
-    `Location: ${job.projectLocation}`,
-    `Services: ${job.services}`,
-    job.timeline ? `Timeline: ${job.timeline}` : null,
-    job.budgetContext ? `Budget context: ${job.budgetContext}` : null,
-    job.estimateId ? `Estimate ID: ${job.estimateId}` : null,
-    job.servicePath ? `Service path: ${job.servicePath}` : null,
-    job.routingMode ? `Routing: ${job.routingMode}` : null,
-    job.schedule ? `Schedule: ${job.schedule}` : null,
-    job.requiredByDate ? `Required by: ${job.requiredByDate}` : null,
-    partnerProfile
-      ? `Partner profile: states=${JSON.stringify(partnerProfile.states ?? [])}; disciplines=${JSON.stringify(partnerProfile.disciplines ?? [])}; volume=${String(partnerProfile.volume ?? "")}; workflow=${String(partnerProfile.workflow ?? "")}`
-      : null,
-    estimateResult ? `Coverage: ${String(estimateResult.coverage ?? "unknown")}` : null,
-    estimateResult?.eligibilityLanguage
-      ? `Result summary: ${String(estimateResult.eligibilityLanguage)}`
-      : null,
-    quotedLine,
-    fee ? `Server-calculated fee (internal planning range): $${Number(fee.low).toLocaleString("en-US")} - $${Number(fee.high).toLocaleString("en-US")} (mid $${Number(fee.mid).toLocaleString("en-US")})` : null,
-    estimateResult?.turnaround && typeof estimateResult.turnaround === "object"
-      ? `Turnaround: ${String((estimateResult.turnaround as Record<string, unknown>).label ?? "To be confirmed")}`
-      : null,
-    perDiscipline.length > 0
-      ? `Per-discipline prices: ${perDiscipline.map((entry) => {
-          const item = entry as Record<string, unknown>;
-          const itemFee = item.fee as Record<string, unknown> | undefined;
-          return `${String(item.discipline)} $${Number(itemFee?.low).toLocaleString("en-US")}-$${Number(itemFee?.high).toLocaleString("en-US")} (mid $${Number(itemFee?.mid).toLocaleString("en-US")})`;
-        }).join("; ")}`
-      : null,
-    factors ? `Factor breakdown: ${factors}` : null,
-    Array.isArray(estimateResult?.assumptions)
-      ? `Assumptions: ${(estimateResult.assumptions as unknown[]).map(String).join(" | ")}`
-      : null,
-    Array.isArray(estimateResult?.missingItems) && estimateResult.missingItems.length > 0
-      ? `Missing items: ${(estimateResult.missingItems as unknown[]).map(String).join(" | ")}`
-      : null,
-    job.estimateId
-      ? "Planning range only; no acceptance, sealing, or permit approval is promised."
-      : null,
+    "New Apex project inquiry",
+    `Received: ${formatReceivedPhoenix(job.createdAt)}`,
+    `Source: ${job.estimateId ? "/estimate" : "/client-portal"}`,
     "",
-    "Scope:",
-    job.scope,
-    ...(attachmentLines.length > 0 ? ["", "Documents:", ...attachmentLines] : []),
+    `Name:    ${job.submitterName}`,
+    `Email:   ${job.submitterEmail}`,
+    `Phone:   ${job.submitterPhone || "—"}`,
+    `Company: ${job.companyName || "—"}`,
     "",
-    `Review: ${baseUrl}/admin`,
-  ].filter((line): line is string => line !== null);
-  const subject = job.estimateId
-    ? [
-        "New estimate proposal",
-        `[${job.estimateId}]`,
-        partnerRoute ? "[PARTNER ROUTE]" : null,
-        job.schedule === "rush" || job.schedule === "emergency" ? "[RUSH]" : null,
-        estimateResult?.highValue === true ? "[HIGH VALUE]" : null,
-      ].filter((part): part is string => Boolean(part)).join(" ")
-    : `New client project: ${job.projectType}${job.companyName ? ` — ${job.companyName}` : ""}`;
+    `Project location: ${location}`,
+    "What they need done:",
+    ...needLines,
+    "",
+    `When they need it: ${job.requiredByDate || "Not specified"}`,
+    "",
+    "Files:",
+    ...fileLines,
+  ];
+  const subject = `Apex intake — ${needSummary} — ${location} — ${job.submitterName}`;
   return { subject, body: lines.join("\n") };
 }
+
+type MailTransport = (
+  message: GraphMailMessage,
+) => Promise<{ ok: true } | { ok: false; error: string }>;
 
 export async function sendClientJobNotificationEmail(
   job: ClientJob,
   documents: ClientJobDocument[],
+  options: { transport?: MailTransport } = {},
 ): Promise<{ ok: true } | { ok: false; error: string }> {
   const to = process.env.LEAD_NOTIFY_EMAIL;
-  const from = process.env.LEAD_NOTIFY_FROM_EMAIL || to;
-  if (!to || !from) {
+  if (!to) {
     return {
       ok: false,
       error: "LEAD_NOTIFY_EMAIL is not configured; skipping client job notification",
@@ -224,35 +268,24 @@ export async function sendClientJobNotificationEmail(
   }
 
   const { subject, body } = buildEstimateProposalNotificationContent(job, documents);
-
-  // Direct SendGrid API (see lib/sendGridDirect.ts) — the Replit Connectors
-  // proxy previously used here throws on Render, silently killing every
-  // estimate-proposal notification after the Render migration.
-  let response: Awaited<ReturnType<typeof postSendGridMail>>;
-  try {
-    response = await postSendGridMail(
-      JSON.stringify({
-        personalizations: [{ to: [{ email: to }] }],
-        from: { email: from, name: "Apex Grid Engineering Client Portal" },
-        reply_to: { email: job.submitterEmail, name: job.submitterName },
-        subject,
-        content: [{ type: "text/plain", value: body }],
-      }),
-    );
-  } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Unknown SendGrid transport error";
+  const send = options.transport ?? sendGraphMail;
+  // Internal notification to the hub — the fleet Graph identity is the
+  // sanctioned sender for internal mail (invisible to customers).
+  const result = await send({
+    from: graphInternalSender(),
+    fromName: "Apex Grid Engineering Client Portal",
+    to,
+    replyTo: job.submitterEmail,
+    replyToName: job.submitterName,
+    subject,
+    text: body,
+  });
+  if (!result.ok) {
     logger.error(
-      { err: error, to, subject },
+      { error: result.error, to, subject },
       "Client job notification email failed",
     );
-    return { ok: false, error: message };
-  }
-  if (!response.ok) {
-    const errorBody = await response.text().catch(() => "");
-    const error = `SendGrid responded ${response.status}: ${errorBody}`;
-    logger.error({ error, to, subject }, "Client job notification email failed");
-    return { ok: false, error };
+    return result;
   }
   return { ok: true };
 }
@@ -260,46 +293,34 @@ export async function sendClientJobNotificationEmail(
 export async function sendClientJobStatusNotificationEmail(
   job: ClientJob,
   status: ClientNotificationStatus,
+  options: { transport?: MailTransport } = {},
 ): Promise<{ ok: true } | { ok: false; error: string }> {
-  const from =
-    process.env.STATUS_NOTIFICATION_FROM_EMAIL ||
-    process.env.LEAD_NOTIFY_FROM_EMAIL ||
-    process.env.LEAD_NOTIFY_EMAIL;
-  if (!from) {
-    return {
-      ok: false,
-      error: "STATUS_NOTIFICATION_FROM_EMAIL is not configured; skipping client status notification",
-    };
-  }
-
+  // Customer-facing mail sends ONLY as info@apexgrideng.com via Graph —
+  // the brand face. There is deliberately no other sender fallback: if
+  // Graph cannot send as that address, the send fails and is logged.
+  const from = graphCustomerSender();
   const preview = buildClientJobNotificationPreview(job, status);
-  const replyTo = process.env.STATUS_NOTIFICATION_REPLY_TO_EMAIL?.trim()
-    || process.env.OUTREACH_REPLY_TO_EMAIL?.trim()
-    || from;
-  try {
-    // Direct SendGrid API (see lib/sendGridDirect.ts) — not the Replit
-    // Connectors proxy, which throws outside a Repl.
-    const response = await postSendGridMail(
-      JSON.stringify(buildClientJobStatusNotificationPayload(preview, from, replyTo)),
-    );
-    if (!response.ok) {
-      const errorBody = await response.text().catch(() => "");
-      const error = `SendGrid responded ${response.status}: ${errorBody}`;
-      logger.error(
-        { error, to: preview.recipient, subject: preview.subject },
-        "Client status notification email failed",
-      );
-      return { ok: false, error };
-    }
-  } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Unable to send client status notification";
+  const replyTo =
+    process.env.STATUS_NOTIFICATION_REPLY_TO_EMAIL?.trim() ||
+    process.env.OUTREACH_REPLY_TO_EMAIL?.trim() ||
+    from;
+  const send = options.transport ?? sendGraphMail;
+  const result = await send({
+    from,
+    fromName: "Apex Grid Engineering Client Portal",
+    to: preview.recipient,
+    replyTo,
+    replyToName: "Apex Grid Engineering",
+    subject: preview.subject,
+    text: preview.body,
+    html: buildClientJobNotificationHtml(preview),
+  });
+  if (!result.ok) {
     logger.error(
-      { err: error, to: preview.recipient, subject: preview.subject },
+      { error: result.error, to: preview.recipient, subject: preview.subject },
       "Client status notification email failed",
     );
-    return { ok: false, error: message };
+    return result;
   }
-
   return { ok: true };
 }
