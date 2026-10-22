@@ -150,23 +150,33 @@ router.post("/estimates/proposals", express.json(), async (req: Request, res: Re
   const version = data.ruleVersion;
   const id = createEstimatePublicId();
   try {
-    // The only fee values used below are produced by the server-side engine.
     const intake = normalizedIntake({ intake: data.intake as Partial<EstimateIntake>, partner });
-    const result = calculateEstimate(intake, { ruleVersion: version });
+    // Partner-routing (J-1) keeps the full engine treatment: priced snapshot,
+    // proposal PDF, priced response. The direct path no longer prices
+    // anything — no ballpark is shown or stored (contact simplification,
+    // 2026-10-22): the job is saved from the intake alone and an engineer
+    // replies with a written scope and fee.
+    const result = partner ? calculateEstimate(intake, { ruleVersion: version }) : null;
     const userId = authUserId(req);
-    const snapshot = {
-      intake: result.inputSnapshot,
-      result,
-      ruleVersion: result.ruleVersion,
-      factorBreakdown: result.factorBreakdown,
-      perDisciplinePrices: result.perDisciplinePrices,
-      assumptions: result.assumptions,
-      attribution: data.attribution ?? null,
-      partnerProfile: data.partnerProfile ?? null,
-      // The customer-facing quoted ballpark the customer actually saw on
-      // screen. This is what the proposal PDF and notifications must show.
-      customerQuote: data.ballpark ?? null,
-    } as Record<string, unknown>;
+    const snapshot = (partner && result
+      ? {
+          intake: result.inputSnapshot,
+          result,
+          ruleVersion: result.ruleVersion,
+          factorBreakdown: result.factorBreakdown,
+          perDisciplinePrices: result.perDisciplinePrices,
+          assumptions: result.assumptions,
+          attribution: data.attribution ?? null,
+          partnerProfile: data.partnerProfile ?? null,
+          // The customer-facing quoted ballpark the customer actually saw on
+          // screen. This is what the proposal PDF and notifications must show.
+          customerQuote: data.ballpark ?? null,
+        }
+      : {
+          intake,
+          attribution: data.attribution ?? null,
+          partnerProfile: null,
+        }) as Record<string, unknown>;
     const legacy = legacyJobFields({
       intake,
       contact: data.contact,
@@ -181,10 +191,10 @@ router.post("/estimates/proposals", express.json(), async (req: Request, res: Re
         status: "submitted",
         estimateId: id,
         estimateSnapshot: snapshot,
-        pricingRuleVersion: result.ruleVersion,
-        routingMode: intake.routingMode ?? (result.servicePath === "partner-routing" ? "partner" : "direct"),
+        pricingRuleVersion: result?.ruleVersion ?? null,
+        routingMode: intake.routingMode ?? (partner ? "partner" : "direct"),
         requiredByDate: intake.requiredByDate ?? null,
-        servicePath: result.servicePath,
+        servicePath: result?.servicePath ?? intake.servicePath ?? intake.path,
         schedule: intake.schedule,
       }).returning();
       if (!job) throw new Error("proposal insert returned no row");
@@ -222,13 +232,19 @@ router.post("/estimates/proposals", express.json(), async (req: Request, res: Re
         "Estimate proposal notification dispatch",
       );
     })();
-    const response = {
-      estimateId: id,
-      proposalId: created.job.id,
-      pricing: result,
-      pdfUrl: `/api/estimates/${id}/pdf`,
-      notificationQueued: true,
-    };
+    const response = partner && result
+      ? {
+          estimateId: id,
+          proposalId: created.job.id,
+          pricing: result,
+          pdfUrl: `/api/estimates/${id}/pdf`,
+          notificationQueued: true,
+        }
+      : {
+          estimateId: id,
+          proposalId: created.job.id,
+          notificationQueued: true,
+        };
     res.status(201).json(CreateEstimateProposalResponse.parse(response));
   } catch (error) {
     req.log.error(
