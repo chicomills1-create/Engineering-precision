@@ -15,6 +15,10 @@ export interface LeadInput {
   phone?: string;
   projectType?: string;
   services?: string;
+  /** Project location as the customer states it (city, state). */
+  projectLocation?: string;
+  /** When the customer needs the work done, in their words or a date. */
+  whenNeeded?: string;
   /** @minLength 1 */
   message: string;
   /** Object paths of uploaded files attached to the inquiry. */
