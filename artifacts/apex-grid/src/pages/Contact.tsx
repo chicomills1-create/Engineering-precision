@@ -18,6 +18,8 @@ const leadSchema = z.object({
   company: z.string().optional(),
   phone: z.string().optional(),
   need: z.string().min(1, "Tell us what you need"),
+  projectLocation: z.string().optional(),
+  whenNeeded: z.string().optional(),
   message: z.string().min(1, "Project details are required"),
 });
 
@@ -53,6 +55,8 @@ export default function Contact() {
       company: "",
       phone: "",
       need: "",
+      projectLocation: "",
+      whenNeeded: "",
       message: "",
     },
   });
@@ -70,6 +74,8 @@ export default function Contact() {
           company: data.company,
           phone: data.phone,
           services: data.need,
+          projectLocation: data.projectLocation || undefined,
+          whenNeeded: data.whenNeeded || undefined,
           message: data.message,
           attachments: [],
           source: getFirstTouchValue("utm_source") || (document.referrer ? "referral" : "direct"),
@@ -220,12 +226,36 @@ export default function Contact() {
                       </FormItem>
                     )}
                   />
+                  <FormField
+                    control={form.control}
+                    name="projectLocation"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input placeholder="Project location (city, state)" className="h-14 bg-background border-border rounded-sm focus-visible:ring-primary text-base" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
               </div>
 
               {/* Step 3 — your message */}
               <div>
                 <div className="text-lg font-display font-bold text-white mb-5">3. Your message</div>
+                <FormField
+                  control={form.control}
+                  name="whenNeeded"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input placeholder="When do you need it? (optional)" className="h-14 bg-background border-border rounded-sm focus-visible:ring-primary text-base mb-4" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <FormField
                   control={form.control}
                   name="message"
