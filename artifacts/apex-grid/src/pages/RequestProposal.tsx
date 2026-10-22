@@ -18,6 +18,7 @@ const proposalSchema = z.object({
   phone: z.string().optional(),
   need: z.string().min(1, "Tell us what you need"),
   projectLocation: z.string().min(1, "Project location is required"),
+  whenNeeded: z.string().optional(),
   projectDetails: z.string().min(1, "Project details are required"),
 });
 
@@ -62,6 +63,7 @@ export default function RequestProposal() {
       phone: "",
       need: "",
       projectLocation: "",
+      whenNeeded: "",
       projectDetails: "",
     },
   });
@@ -73,7 +75,9 @@ export default function RequestProposal() {
       const params = new URLSearchParams(window.location.search);
       const partnerCode = params.get("partner") || undefined;
 
-      const message = `Location: ${data.projectLocation}\n\nDetails:\n${data.projectDetails}`;
+      // Location travels in its own field now (leads.project_location);
+      // the message is the project details, verbatim.
+      const message = data.projectDetails;
 
       await createLead.mutateAsync({
         data: {
@@ -82,6 +86,8 @@ export default function RequestProposal() {
           company: data.company,
           phone: data.phone,
           services: data.need,
+          projectLocation: data.projectLocation,
+          whenNeeded: data.whenNeeded || undefined,
           message,
           source: getFirstTouchValue("utm_source") || (document.referrer ? "referral" : "direct"),
           medium: getFirstTouchValue("utm_medium"),
@@ -242,6 +248,18 @@ export default function RequestProposal() {
                         <FormItem>
                           <FormControl>
                             <Input placeholder="Project location — city, state *" className="h-14 bg-background border-border rounded-sm focus-visible:ring-primary text-base" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="whenNeeded"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input placeholder="When do you need it? (optional)" className="h-14 bg-background border-border rounded-sm focus-visible:ring-primary text-base" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
