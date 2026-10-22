@@ -86,6 +86,10 @@ export interface Lead {
   projectType?: string | null;
   /** @nullable */
   services?: string | null;
+  /** @nullable */
+  projectLocation?: string | null;
+  /** @nullable */
+  whenNeeded?: string | null;
   message: string;
   /** @nullable */
   source?: string | null;
@@ -195,6 +199,10 @@ export interface LeadInput {
   phone?: string;
   projectType?: string;
   services?: string;
+  /** @maxLength 200 */
+  projectLocation?: string;
+  /** @maxLength 200 */
+  whenNeeded?: string;
   /** @minLength 1 */
   message: string;
   /** Object paths of uploaded files attached to the inquiry. */
