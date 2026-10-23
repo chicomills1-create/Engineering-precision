@@ -262,7 +262,7 @@ export const ListLeadsResponseItem = zod.object({
   "referrer": zod.string().nullish(),
   "gclid": zod.string().nullish(),
   "referralPartnerId": zod.number().nullish(),
-  "status": zod.enum(['new', 'contacted', 'closed']),
+  "status": zod.enum(['new', 'contacted', 'closed', 'vendor']),
   "createdAt": zod.string()
 })
 export const ListLeadsResponse = zod.array(ListLeadsResponseItem)
@@ -336,7 +336,7 @@ export const CreateLeadResponse = zod.object({
   "referrer": zod.string().nullish(),
   "gclid": zod.string().nullish(),
   "referralPartnerId": zod.number().nullish(),
-  "status": zod.enum(['new', 'contacted', 'closed']),
+  "status": zod.enum(['new', 'contacted', 'closed', 'vendor']),
   "createdAt": zod.string()
 })
 
@@ -444,7 +444,7 @@ export const UpdateLeadParams = zod.object({
 })
 
 export const UpdateLeadBody = zod.object({
-  "status": zod.enum(['new', 'contacted', 'closed'])
+  "status": zod.enum(['new', 'contacted', 'closed', 'vendor'])
 })
 
 export const UpdateLeadResponse = zod.object({
@@ -463,7 +463,7 @@ export const UpdateLeadResponse = zod.object({
   "referrer": zod.string().nullish(),
   "gclid": zod.string().nullish(),
   "referralPartnerId": zod.number().nullish(),
-  "status": zod.enum(['new', 'contacted', 'closed']),
+  "status": zod.enum(['new', 'contacted', 'closed', 'vendor']),
   "createdAt": zod.string()
 })
 
