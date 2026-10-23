@@ -91,6 +91,8 @@ export default function Estimate() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [company, setCompany] = useState("");
+  const [website, setWebsite] = useState("");
+  const formLoadedAt = useRef<number>(Date.now());
   const [documents, setDocuments] = useState<UploadedDocument[]>([]);
   const [uploading, setUploading] = useState<string[]>([]);
   const [uploadError, setUploadError] = useState<string | null>(null);
@@ -163,6 +165,8 @@ export default function Estimate() {
           landingPath: `${window.location.pathname}${window.location.search}`,
           referrer: document.referrer || undefined,
           gclid: getFirstTouchValue("gclid") || undefined,
+          website,
+          _ts: formLoadedAt.current,
         }),
       });
       if (!response.ok) {
@@ -343,6 +347,16 @@ export default function Estimate() {
             {uploadError && <p className="mt-3 text-sm text-red-500">{uploadError}</p>}
           </div>
         </div>
+      </div>
+
+      {/* Anti-spam honeypot (2026-10-22) — invisible to people,
+          filled by form scrapers; the server drops filled submissions. */}
+      <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+        <label>
+          Website (optional)
+          <input id="est-website" type="text" value={website} onChange={(e) => setWebsite(e.target.value)}
+            tabIndex={-1} autoComplete="off" />
+        </label>
       </div>
 
       {error && <p className="mt-6 text-sm text-red-500">{error}</p>}
