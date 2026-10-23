@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -44,6 +44,8 @@ export default function Contact() {
 
   const { toast } = useToast();
   const [isSuccess, setIsSuccess] = useState(false);
+  const websiteRef = useRef<HTMLInputElement>(null);
+  const formLoadedAt = useRef<number>(Date.now());
 
   const createLead = useCreateLead();
 
@@ -67,26 +69,31 @@ export default function Contact() {
     try {
       const params = new URLSearchParams(window.location.search);
       const partnerCode = params.get("partner") || undefined;
-      await createLead.mutateAsync({
-        data: {
-          name: data.name,
-          email: data.email,
-          company: data.company,
-          phone: data.phone,
-          services: data.need,
-          projectLocation: data.projectLocation || undefined,
-          whenNeeded: data.whenNeeded || undefined,
-          message: data.message,
-          attachments: [],
-          source: getFirstTouchValue("utm_source") || (document.referrer ? "referral" : "direct"),
-          medium: getFirstTouchValue("utm_medium"),
-          campaign: getFirstTouchValue("utm_campaign"),
-          gclid: getFirstTouchValue("gclid"),
-          landingPath: `${window.location.pathname}${window.location.search}`,
-          referrer: document.referrer || undefined,
-          referralPartnerCode: partnerCode,
-        },
+      const leadPayload = {
+        name: data.name,
+        email: data.email,
+        company: data.company,
+        phone: data.phone,
+        services: data.need,
+        projectLocation: data.projectLocation || undefined,
+        whenNeeded: data.whenNeeded || undefined,
+        message: data.message,
+        attachments: [],
+        source: getFirstTouchValue("utm_source") || (document.referrer ? "referral" : "direct"),
+        medium: getFirstTouchValue("utm_medium"),
+        campaign: getFirstTouchValue("utm_campaign"),
+        gclid: getFirstTouchValue("gclid"),
+        landingPath: `${window.location.pathname}${window.location.search}`,
+        referrer: document.referrer || undefined,
+        referralPartnerCode: partnerCode,
+      };
+      // Anti-spam shield fields (2026-10-22): honeypot value + form-load
+      // timestamp, read by the server route; not part of the lead shape.
+      Object.assign(leadPayload, {
+        website: websiteRef.current?.value ?? "",
+        _ts: formLoadedAt.current,
       });
+      await createLead.mutateAsync({ data: leadPayload });
       (window as any).dataLayer = (window as any).dataLayer || [];
       (window as any).dataLayer.push({ event: "lead_submit_success" });
       setIsSuccess(true);
@@ -142,6 +149,13 @@ export default function Contact() {
         <div className="container mx-auto px-4 md:px-8 max-w-3xl">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+            <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+              <label>
+                Website (optional)
+                <input ref={websiteRef} name="website" type="text" tabIndex={-1} autoComplete="off" />
+              </label>
+            </div>
+
 
               {/* Step 1 — what do you need (tap cards) */}
               <div>
