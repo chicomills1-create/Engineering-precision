@@ -201,6 +201,27 @@ export const GUIDE_PAGES: GuidePage[] = [
         ],
       },
       {
+        heading: "How Geotechnical Cost Varies by Project Type",
+        points: [
+          "The building decides the price: what is being built sets how many borings are drilled, how deep they go, and how much laboratory testing the design actually needs",
+          "Small commercial or retail pads sit at the low end — a compact footprint, shallow foundations, and a handful of borings with standard lab testing answer most design questions",
+          "Multifamily projects scale with the site — each additional building, parking field, and utility corridor adds borings, and pavement design for drives and courts is often scoped on top of the foundation report",
+          "Industrial and warehouse projects cost more because the loads are heavier — deeper borings, consolidation and shear-strength testing, and floor-slab design parameters take more field and lab time",
+          "Projects with basements, retaining walls, or sloped sites add lateral earth-pressure parameters and sometimes slope-stability analysis — separate engineering beyond a standard foundation report",
+        ],
+      },
+      {
+        heading: "What a Low Geotechnical Bid Usually Leaves Out",
+        points: [
+          "The cheapest proposal is often cheap because scope is missing — and missing scope surfaces later as a plan-review comment, a redesigned foundation, or a change order during construction",
+          "Too few borings for the building footprint is the most common gap; the structural engineer ends up designing on assumptions the building department may not accept",
+          "No expansion-index testing is a serious gap in regions with expansive soils — much of the Phoenix metro area has caliche and clay soils that move with moisture",
+          "No groundwater observation where seasonal water affects excavation and subgrade design",
+          "Reports not sealed by a licensed engineer where the jurisdiction requires a seal",
+          "Compare proposals on scope — boring count and depth, the lab tests included, and exactly what the report covers — not on the headline number alone",
+        ],
+      },
+      {
         heading: "How to Get a Geotechnical Proposal",
         points: [
           "Provide the site address and a site plan showing the building footprint",
@@ -567,6 +588,28 @@ export const GUIDE_PAGES: GuidePage[] = [
         ],
       },
       {
+        heading: "A Homeowner Checklist: What to Look at Before You Call",
+        points: [
+          "Look in the attic: if ceiling joists or roof trusses run perpendicular into the top of the wall, the wall is likely carrying them",
+          "Look below: in a basement or crawl space, beams, posts, or a foundation wall directly under the wall suggest it is part of the load path",
+          "Check what is stacked: walls on the floor above or below that line up with this wall often share the same structural role",
+          "Note the wall's position: walls near the center of the building frequently support the ridge or the mid-span of the roof framing",
+          "Inventory what is inside the wall: plumbing vents, ducts, wiring, or an electrical panel may need rerouting even when the wall is not structural",
+          "Measure the opening you want: the clear span you are asking for drives the beam size more than any other single factor",
+          "You do not need to diagnose the wall yourself — that is the engineer's job — but these observations make the first conversation faster and the proposal more accurate",
+        ],
+      },
+      {
+        heading: "What the Engineering Package Includes — and What Drives Its Cost",
+        points: [
+          "For a load-bearing wall, the deliverable is a permit-ready package: a beam or header sized for the loads the wall carried, posts or columns that carry the beam reactions down, and a foundation check where those posts land",
+          "Connection details at each bearing point, issued as sealed drawings and calculations for the building department",
+          "Cost follows the span and the structure above it — a short opening under a single story is straightforward",
+          "A wide open-concept span, a second story or roof loads above, or new foundation pads where posts land all add engineering time",
+          "Field verification is sometimes needed first, when the existing framing is concealed and no original drawings exist",
+        ],
+      },
+      {
         heading: "Next Steps for a Wall Removal Project",
         points: [
           "Contact us with the wall location and available floor plans",
@@ -648,6 +691,25 @@ export const GUIDE_PAGES: GuidePage[] = [
           "Grease interceptors must be sized based on fixture unit and trap counts",
           "Restaurant electrical loads are typically much higher than general commercial",
           "Health code and fire code requirements interact with MEP engineering",
+        ],
+      },
+      {
+        heading: "How Restaurant Type Changes the MEP Scope",
+        points: [
+          "Quick-service and fast-casual kitchens pack the most cooking load into the smallest footprint — fryer and grill lines drive large Type I hood exhaust, heavy gas trains, and make-up air that can exceed the dining room's own HVAC load",
+          "Full-service and fine-dining projects balance a serious kitchen against comfort expectations out front: zoned dining HVAC, larger restroom counts, water heating for dish operations, and often bar and patio systems on top of the kitchen scope",
+          "Coffee and drive-thru concepts look small but are electrically dense — espresso, ovens, refrigeration, and drive-thru equipment stack substantial load onto a modest service, and utility coordination often decides the schedule",
+          "Ghost kitchens and food halls multiply everything: several cooking tenants share grease exhaust, gas, and interceptor infrastructure, so the shared systems — not any single kitchen — become the engineering problem",
+        ],
+      },
+      {
+        heading: "Where Restaurant MEP Reviews Get Stuck",
+        points: [
+          "Hood exhaust and make-up air must balance — reviewers check capture and airflow numbers, not just equipment tags",
+          "Grease interceptor sizing is questioned when fixture counts or the menu change after the first submission",
+          "Gas piping gets flagged when the total connected BTU load is not documented appliance by appliance",
+          "Energy-code documentation draws late comments when it is treated as paperwork instead of part of the design",
+          "Settling the equipment schedule, the jurisdiction's adopted code editions, and the health-department path before design starts is what keeps a restaurant MEP set moving through review in one pass",
         ],
       },
       {
@@ -1440,6 +1502,25 @@ export const GUIDE_PAGES: GuidePage[] = [
           "Owner preferences or prior relationships with specific consultants",
           "Projects where only one discipline is needed",
           "Design-build projects where each trade selects its own engineer",
+        ],
+      },
+      {
+        heading: "The Long-Term Cost of Coordination Gaps",
+        points: [
+          "Separate consultants rarely fail on their own drawings — the cost shows up between them",
+          "A duct routed through a beam line, a plumbing stack that lands on a footing, or electrical gear that no longer fits its room are coordination failures, and each tends to surface as a plan-review comment, an RFI, or a field change order priced at construction rates rather than design rates",
+          "Permit comments multiply the effect: when a reviewer's question touches two disciplines, two firms answering independently can produce two corrections that conflict with each other, costing another full review cycle",
+          "Over a portfolio or a multi-phase project those frictions repeat on every building — inside one firm, the lesson from the first project is already in the room for the second",
+        ],
+      },
+      {
+        heading: "One Team Changes the Project Management Math",
+        points: [
+          "With a single firm, coordination is a meeting down the hall instead of a negotiation between companies",
+          "One kickoff aligns every discipline on the same survey, the same architectural background, and the same permit deadline",
+          "Structural and MEP engineers resolve penetrations, sleeves, and equipment loads against each other's live work before anything is issued, so the permit set arrives coordinated instead of merely complete",
+          "Revisions run in one cycle — a comment that affects structure and MEP is answered once, consistently",
+          "The owner or architect manages one contract, one schedule, and one point of accountability when dates move",
         ],
       },
       {
