@@ -90,6 +90,11 @@ This file is a concise map of canonical public information. It does not imply lo
 - XML sitemap index: https://apexgrideng.com/sitemap_index.xml
 - Full-text summary (services, PE-stamp process, FAQs, all state pages): https://apexgrideng.com/llms-full.txt
 
+## Apex Engineering Library
+
+Apex Engineering Library — Everything you need to know about the world of engineering. The Library is Apex Grid's free public reference: plain-language, reference-depth entries on engineering costs, codes, permits, and design questions, indexed A–Z at https://apexgrideng.com/answers/
+Topic of the Week — What is Title 24: https://apexgrideng.com/answers/what-is-title-24/
+
 ## Contact
 
 - Email: info@apexgrideng.com
