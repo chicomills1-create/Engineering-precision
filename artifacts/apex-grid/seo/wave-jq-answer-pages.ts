@@ -470,6 +470,18 @@ export const WAVE_JQ_ANSWER_PAGES: Phase0AeoPage[] = [
         question: "What should I ask a PE before hiring them to seal my drawings?",
         answer: "Ask four questions. One: are you licensed in the state where the project will be permitted? Two: will you review the complete set and verify the calculations before sealing — and can you describe that review? Three: what do you need from me (calculations, basis of design, geotech) to do it? Four: will required revisions be marked and confirmed before the seal goes on? A legitimate PE answers all four directly and without hesitation. Evasion on any of them — especially the review question — is your signal to keep looking.",
       },
+      {
+        question: "Is plan check the same thing as a PE review?",
+        answer: "No — they are different reviews by different parties asking different questions. Plan check is performed by the authority having jurisdiction (the building department or its contracted reviewer) after submittal; it tests the submission against the adopted code and local amendments and ends in a permit or a correction list. A PE review is performed by the sealing engineer before submittal; it verifies that the engineering itself is correct and establishes the responsible charge the seal certifies. One does not substitute for the other: a sealed set still goes through plan check, and plan-check approval does not retroactively make an unreviewed seal compliant.",
+      },
+      {
+        question: "Can a PE seal drawings that plan check has already approved?",
+        answer: "Only by performing the full review first — the approval changes nothing about the PE's obligation. Responsible charge cannot be borrowed from a plans examiner, who never took design responsibility for the work. The PE must still review the complete set, independently verify the engineering and calculations, mark and confirm any required revisions, and only then seal. In practice an already-approved set often reviews efficiently because obvious documentation gaps have been cleared, but the verification step itself is never waived.",
+      },
+      {
+        question: "What happens if the PE finds real errors during the review?",
+        answer: "The errors are marked as required revisions and the seal waits until they are fixed and re-verified. Depending on the scope, the originating designer makes the corrections, or — where the engagement is structured for it — the sealing firm's engineers make them under the PE's direction, which converts the work into the firm's own responsible-charge design. Minor findings are usually resolved in one revision cycle. Fundamental problems, such as a missing lateral system or calculations that do not support the drawings, take longer and cost more, and occasionally the honest answer is that the set needs redesign rather than review. A PE who seals over known errors has committed the exact violation the rule exists to prevent.",
+      },
     ],
     sections: [
       {
@@ -484,12 +496,28 @@ export const WAVE_JQ_ANSWER_PAGES: Phase0AeoPage[] = [
         heading: "Red flags when shopping for a seal",
         body: "Not every PE practices to the standard the rules require. Screen for these warning signs before you hire — each one indicates a practice that puts your project at risk.\n\n• Same-day or instant sealing promised with no mention of reviewing your drawings\n• No request for your calculations, basis of design, or supporting engineering data\n• A flat fee quoted with no questions about the project's size, discipline, or complexity\n• Sealing offered in a state where the PE is not licensed, or in a discipline outside their competence\n• Reluctance to describe the review process or put the review-and-seal scope in writing",
       },
+      {
+        heading: "Plan check is not PE review — and PE review is not plan check",
+        body: "These two reviews are routinely confused, and the confusion is expensive. Plan check is the review performed by the authority having jurisdiction — the city or county building department, or a third-party plan-review firm working for it — after a permit application is filed. A plans examiner checks the submission against the adopted building code, local amendments, zoning and life-safety requirements, and issues either a permit or a correction list. The examiner does not design the project, does not seal anything, and does not take professional responsibility for the engineering. A permit is the jurisdiction's permission to build; it is not a certification that the design is sound, and plan-check approval does not transfer design liability away from the engineer who sealed the drawings.\n\nThe PE's review-and-seal happens on the other side of that counter, before submittal. The sealing engineer asks a different question than the plans examiner asks. The examiner asks: does this submission demonstrate compliance well enough to issue a permit? The PE asks: is this engineering actually correct — loads, load paths, sizing, connections, code basis — and am I prepared to certify it as my own responsible-charge work? That is why the two reviews catch different things, why a properly sealed set can still receive plan-check corrections about documentation, local amendments, or presentation, and why plan-check approval can never cure a seal that was applied without review.",
+      },
+      {
+        heading: "Timeline and cost: what review-and-seal actually takes",
+        body: "For a clean, complete, single-discipline set — calculations provided, code basis documented, drawings internally consistent — review-and-seal commonly runs from several business days to about two weeks, most of that time being the PE's verification work rather than waiting. Multi-discipline commercial sets, sets with missing or thin calculations, and sets that need substantive revisions commonly run two to four weeks, because each round of marked corrections has to be drawn, returned, and re-verified before the seal can be applied. The drivers are completeness of the engineering basis, number of disciplines, recalculation required, and how fast the originating designer turns revisions around.\n\nFees follow the work, so treat any number quoted before the PE has seen the set as a guess. As a typical range, a small, clean single-discipline review-and-seal often falls in the high hundreds to a few thousand dollars; a multi-discipline commercial set more commonly falls in the several-thousand-dollar range and rises with size, complexity, and revision cycles. What a client is buying is not the seal impression — it is the hours of a licensed engineer verifying engineering and standing behind it. A quote dramatically below those ranges, offered sight unseen, is not a bargain signal. It is evidence the review is not going to happen.",
+      },
+      {
+        heading: "Worked example: out-of-state drawings that needed a local seal",
+        body: "A representative case: a restaurant group hired a designer in another state to prepare drawings for a tenant improvement in Texas, then discovered at the permit counter that the structural and MEP sheets needed a Texas-licensed PE's seal. The owner asked for a stamp on the finished set. What the engagement actually required was review-and-seal under Texas Rule 137.33. The sealing PE reviewed the full set and the designer's calculations, verified the gravity and lateral loads for the new rooftop equipment, and found two genuine problems: a header carrying the new unit load had been sized without the equipment's operating weight, and the gas and condensate routing on the mechanical sheets conflicted with the reflected ceiling plan.\n\nThose findings were marked, the originating designer revised the sheets, the PE re-verified the corrections, and the set was sealed, signed, and dated with the firm's Texas F-number. The review added days, not months, and cost a fraction of a redesign — but it caught a load error that plan check, which reviews for code compliance rather than re-performing the design, might well not have caught before construction. That is the practical difference the distinction makes: the owner did not buy a stamp. The owner bought a second, accountable engineering pass that made the permit set defensible.",
+      },
     ],
     extraLinks: [
       { label: "Need a PE stamp? We got you.", href: "/pe-stamp/" },
       { label: "Why a PE Won't Stamp Without Review", href: "/answers/why-pe-wont-stamp-without-review/" },
       { label: "Can a PE Stamp Drawings in Another State?", href: "/answers/can-a-pe-stamp-drawings-in-another-state/" },
       { label: "Get an engineering estimate", href: "/estimate" },
+      { label: "How Much Does a PE Stamp Cost?", href: "/answers/how-much-does-a-pe-stamp-cost/" },
+      { label: "How to Respond to Plan Check Corrections", href: "/answers/how-to-respond-to-plan-check-corrections/" },
+      { label: "Building Permit Expediting Guide", href: "/answers/building-permit-expediting-guide/" },
+      { label: "Browse the Apex Engineering Library", href: "/answers/" },
     ],
     founderNote,
   },
