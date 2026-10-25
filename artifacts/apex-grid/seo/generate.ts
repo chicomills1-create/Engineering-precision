@@ -1787,6 +1787,29 @@ function libraryIndexLinks(): Array<{ label: string; href: string }> {
   return libraryIndexEntries().map((entry) => ({ label: entry.name, href: entry.href }));
 }
 
+type LibraryCatalogEntry = { slug: string; name: string; href: string };
+
+// COMPLETENESS TIER — the curated A–Z index above is the Library's front
+// door, but it must never be the only path into the corpus: the internal-link
+// audit (writeNormalizedInternalLinkReport) fails the build when an indexable
+// sitemap page has zero contextual inbound links, and most answer pages are
+// reached only through this hub. The catalog tier therefore lists EVERY
+// answer record in ALL_AEO_PAGES exactly once. Dedupe is by slug and keeps
+// the LAST occurrence in ALL_AEO_PAGES order, so a deepened record always
+// wins over its starter tuple — the same rule the curated index uses.
+// Labels are the display override when one exists, else the record's h1.
+function libraryCatalogEntries(): LibraryCatalogEntry[] {
+  const bySlug = new Map<string, Phase0AeoPage | Phase7AeoSeed>();
+  for (const page of ALL_AEO_PAGES) bySlug.set(page.slug, page);
+  const entries = [...bySlug.values()].map((page) => {
+    const override = LIBRARY_DISPLAY_OVERRIDES[page.slug];
+    const name = (override?.name ?? page.h1).trim() || page.slug;
+    return { slug: page.slug, name, href: `/answers/${page.slug}/` };
+  });
+  entries.sort((a, b) => a.name.localeCompare(b.name) || a.slug.localeCompare(b.slug));
+  return entries;
+}
+
 function libraryHubBodyHtml(): string {
   const entries = libraryIndexEntries();
   const byLetter = new Map<string, LibraryIndexEntry[]>();
@@ -1800,7 +1823,17 @@ function libraryHubBodyHtml(): string {
   const topic = `<section class="block"><div class="container"><h2>Topic of the Week</h2><div class="prose"><p><strong><a href="${esc(LIBRARY_TOPIC_OF_THE_WEEK.href)}">${esc(LIBRARY_TOPIC_OF_THE_WEEK.name)}</a></strong></p><p>${esc(LIBRARY_TOPIC_OF_THE_WEEK.body)}</p><p><a href="${esc(LIBRARY_TOPIC_OF_THE_WEEK.href)}">Read the full Title 24 reference entry</a></p></div></div></section>`;
   const news = `<section class="block"><div class="container"><h2>What's Big in Engineering Today</h2><div class="prose">${LIBRARY_NEWS_ITEMS.map((item) => `<p><strong>${esc(item.date)} — ${esc(item.headline)}</strong><br>${esc(item.summary)}<br>Source: <a href="${esc(item.sourceUrl)}" rel="noopener noreferrer">${esc(item.sourceLabel)}</a>${item.related ? `<br>Related Library topic: <a href="/answers/${esc(item.related.slug)}/">${esc(item.related.label)}</a>` : ""}</p>`).join("")}<p>News updated ${esc(LIBRARY_NEWS_UPDATED)}.</p></div></div></section>`;
   const index = `<section class="block"><div class="container"><h2>Browse the Library A–Z</h2><div class="prose"><p>Every reference entry in the Apex Engineering Library, in alphabetical order. Each entry answers one engineering question in plain language, with the records, code basis, and professional boundaries a real project needs.</p></div>${letters.map((letter) => `<h3>${esc(letter)}</h3><div class="linkrow">${(byLetter.get(letter) ?? []).map((entry) => `<a href="${esc(entry.href)}">${esc(entry.name)}</a>`).join("")}</div>${(byLetter.get(letter) ?? []).map((entry) => `<p><strong>${esc(entry.name)}</strong> — ${esc(entry.blurb)}</p>`).join("")}`).join("")}</div></section>`;
-  return `${topic}\n  ${news}\n  ${index}`;
+  const catalogEntries = libraryCatalogEntries();
+  const catalogByLetter = new Map<string, LibraryCatalogEntry[]>();
+  for (const entry of catalogEntries) {
+    const letter = (entry.name.charAt(0) || "#").toUpperCase();
+    const list = catalogByLetter.get(letter) ?? [];
+    list.push(entry);
+    catalogByLetter.set(letter, list);
+  }
+  const catalogLetters = [...catalogByLetter.keys()].sort();
+  const catalog = `<section class="block"><div class="container"><h2>Browse the Full Library — Complete Catalog</h2><div class="prose"><p>The complete catalog of the Apex Engineering Library: every reference entry, in alphabetical order. Each link opens one entry answering one engineering question in plain language, with the records, code basis, and professional boundaries a real project needs.</p></div>${catalogLetters.map((letter) => `<h3>${esc(letter)}</h3><div class="linkrow">${(catalogByLetter.get(letter) ?? []).map((entry) => `<a href="${esc(entry.href)}">${esc(entry.name)}</a>`).join("")}</div>`).join("")}</div></section>`;
+  return `${topic}\n  ${news}\n  ${index}\n  ${catalog}`;
 }
 
 function phase0CollectionHub(
