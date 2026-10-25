@@ -458,6 +458,14 @@ export const WAVE_AA_ANSWER_PAGES: Phase0AeoPage[] = [
     h1: "What Engineering Goes Into a Commercial Swimming Pool Build?",
     answer: "The engineering behind a commercial swimming pool is mostly about water: recirculation that turns over the entire pool volume every few hours, filtration that removes what swimmers put in, chemical treatment that keeps the water sanitized without gassing the natatorium, and heating that holds temperature without bankrupting the owner. The health code sets hard numbers — turnover rates, disinfectant levels, safety equipment — and the design has to hit all of them while the structural engineer handles a vessel that holds tens of thousands of gallons. I spend a lot of time on the natatorium environment too, because an indoor pool is a dehumidification and corrosion problem wearing a swimming-pool costume: warm chlorinated air will destroy an unprotected building from the inside. Pool projects succeed when the pool designer, MEP engineers, and structural engineer coordinate from day one instead of bolting systems onto a hole in the ground.",
     directAnswer: "Commercial swimming pool engineering covers the pool vessel structure, recirculation and filtration systems, chemical disinfection and pH control, heating, and health-code compliance for turnover rates and safety. For indoor pools it also includes natatorium dehumidification, ventilation, and corrosion protection — because warm chlorinated air attacks the building itself.",
+    facts: [
+      { label: "Pool shell design codes", value: "ACI 318 for concrete design and ACI 350 for liquid-tightness and crack control in water-retaining structures" },
+      { label: "Typical turnover, swimming pool", value: "Full volume recirculated every 6 hours or less; spas and wading pools turn over much faster under health codes" },
+      { label: "Suction safety", value: "Federal Virginia Graeme Baker Act: certified anti-entrapment drain covers plus multiple, unblockable, or protected drains" },
+      { label: "Electrical safety at the water", value: "NEC Article 680 equipotential bonding of shell steel, deck, and equipment, with GFCI protection" },
+      { label: "Approvals required", value: "Building permit for structure and systems, plus a separate health-department review and operating permit in most states" },
+      { label: "Model pool code", value: "International Swimming Pool and Spa Code (ISPSC), adopted and amended locally; state and county health rules govern operation" },
+    ],
     topic: "Plumbing",
     serviceHref: "/services/mep/",
     faqs: [
@@ -476,6 +484,14 @@ export const WAVE_AA_ANSWER_PAGES: Phase0AeoPage[] = [
       {
         question: "What safety features do commercial pools require?",
         answer: "The health and building codes require items like main-drain anti-entrapment covers (Virginia Graeme Baker Act compliance), depth markings, lifesaving equipment, barriers and gates, and proper deck drainage. Suction entrapment prevention — compliant drain covers and often multiple drains or unblockable designs — is a federal requirement, not optional.",
+      },
+      {
+        question: "Does a commercial pool shell need a structural engineer's stamp?",
+        answer: "In most jurisdictions, yes. The shell drawings and calculations sit in the building-permit set and are stamped by a structural or civil engineer licensed in that state, because the vessel is a liquid-retaining structure designed under ACI 318 and ACI 350 principles. The recirculation and treatment drawings may be stamped by the pool or MEP engineer depending on the state, and some health departments want the full set — shell, piping, and equipment — stamped before they open their review.",
+      },
+      {
+        question: "How is a splash pad or wading pool different, engineering-wise?",
+        answer: "The water is shallower but the rules are stricter, not looser. Wading pools and interactive splash features turn over far faster than a swimming pool — commonly every one to two hours or faster under state health codes — because small children are the users and the water volume per bather is small. Splash pads recirculate through filtration and disinfection much like a pool, and the features, surfacing, drainage, and treatment all pass through the same health-department review as the main pool.",
       },
     ],
     sections: [
@@ -498,12 +514,50 @@ export const WAVE_AA_ANSWER_PAGES: Phase0AeoPage[] = [
           "Size the equipment room for maintenance access, not just equipment footprint",
         ],
       },
+      {
+        heading: "The shell is a water-retaining structure, not a hole with plaster",
+        body: "The vessel usually decides whether a commercial pool ages gracefully. Most commercial shells are shotcrete or gunite placed over a mat of reinforcing steel, and the governing mindset is ACI 350, the code for environmental engineering concrete structures, working alongside ACI 318: liquid-tightness matters as much as raw strength, so crack control, closer bar spacing, waterstops at construction joints, and disciplined curing carry more weight than they do in an ordinary footing. The structural engineer designs the floor and walls for two opposite conditions that both occur in the pool's life — full, when water weight and lateral earth pressure work against each other, and empty, when groundwater can float an unanchored shell out of the ground like a boat. That second case, hydrostatic uplift, is why pools in high-water-table ground get pressure-relief valves, thicker floors, or a drained layer beneath the shell, and why draining a commercial pool is a decision an engineer should make rather than a maintenance shortcut. Soil drives the remaining detail: a geotechnical report showing expansive clay pushes the design toward a stiffened shell section, moisture-conditioned subgrade, or overexcavation and replacement, because a vessel that heaves unevenly cracks — and a cracked vessel leaks chlorinated water into the ground, which is an environmental problem as well as a repair bill. ASCE 7 supplies the surrounding load framework, including fluid loads and the seismic treatment of the shell and its attached structures.",
+        bullets: [
+          "Design the shell to ACI 318 strength provisions with ACI 350 liquid-tightness and crack-control detailing",
+          "Check both the full condition and the empty condition, including hydrostatic uplift from groundwater",
+          "Let the geotechnical report set subgrade preparation where expansive or weak soils are present",
+          "Detail waterstops, joints, and curing so the vessel stays watertight, not merely strong",
+          "Coordinate shell penetrations with the recirculation layout before shotcrete, not after",
+        ],
+      },
+      {
+        heading: "Hydraulics, two approvals, and the rules that are not local",
+        body: "Once turnover is fixed, the hydraulics follow by arithmetic, and the health reviewer will redo that arithmetic. Divide the pool volume in gallons by the turnover time in minutes and that is the minimum flow the pump, filter, heater, and every pipe between them must deliver together — with the filter's rated capacity, not the pump's best day, usually the limiting number. Larger commercial pools draw from perimeter gutters and a surge tank rather than skimmers alone, because gutters skim the surface continuously, where most contamination floats, and absorb the water bathers displace. Suction piping is kept slow and discharge piping a little faster, within the velocity limits the adopted health code and the International Swimming Pool and Spa Code set. Approvals then split in two: the building department reviews structure, electrical, plumbing, barriers, and accessibility, while the health department — state in some places, county in others — reviews turnover, filtration, disinfection, and safety, and issues the operating permit the pool cannot legally open without. The rulebooks genuinely differ by state: Florida regulates public pools through its health rules and building code together, Texas applies state pool and spa standards, California counties enforce state pool law locally, and Arizona pools answer largely to county environmental services. Two requirements ignore state lines entirely: the federal Virginia Graeme Baker Act on suction entrapment, and NEC Article 680, which requires equipotential bonding of shell steel, deck, ladders, and equipment so stray voltage has nowhere dangerous to go.",
+        bullets: [
+          "Size recirculation from volume divided by code turnover time, and let the filter rating govern",
+          "Use gutters and surge capacity on larger pools instead of relying on skimmers alone",
+          "Keep suction velocities within health-code and ISPSC limits; route backwash to sewer through an air gap",
+          "Track building permit and health-department operating permit as two separate approvals on the schedule",
+          "Bond everything within reach of the water under NEC Article 680 and verify VGB-compliant drains",
+        ],
+      },
+      {
+        heading: "Worked scenario: a mid-size hotel pool, end to end",
+        body: "Picture an outdoor pool for a 120-room hotel: 20 feet by 40 feet, three and a half feet deep at the shallow end sloping to six feet, plus a raised round spa eight feet across. At an average depth of about four and a half feet, the pool holds roughly 27,000 gallons. At a six-hour turnover the recirculation system must move about 75 gallons per minute continuously; the spa, at the much faster turnover health codes demand for heated, jetted water, gets its own calculation and usually its own pump, even when it shares filtration and treatment with the pool. The geotechnical report finds expansive clay in the top few feet, so the structural engineer answers with a stiffened shotcrete shell over moisture-conditioned, compacted subgrade, and deck joints that let the surrounding deck move independently of the vessel instead of telegraphing soil movement into it as cracks. The plumbing and mechanical design sizes the filter to the 75-gallon-per-minute duty with backwash capacity, specifies automated chlorine and pH control with a secondary UV unit to keep chloramines down for guest comfort, and pitches the deck to drains that carry wash-down water to waste — never back into the pool. The drawing set then travels in two directions at once, building permit and health review, and construction ends with plaster, fill, start-up chemistry, and a health inspection that physically checks drain covers, flow, and safety equipment. The pool opens when that inspector signs, not when the contractor finishes.",
+        bullets: [
+          "Pool volume near 27,000 gallons sets a recirculation duty of about 75 gallons per minute at a six-hour turnover",
+          "The spa is calculated separately at its faster heated-water turnover, usually with a dedicated pump",
+          "Expansive clay drives a stiffened shell, conditioned subgrade, and deck joints isolated from the vessel",
+          "Automated chemical control plus secondary UV keeps guest-facing water quality stable between staff checks",
+          "Opening day is set by the health inspector's sign-off, so that review belongs on the critical path",
+        ],
+      },
     ],
     extraLinks: [
       { label: "Natatorium pool HVAC and dehumidification", href: "/answers/natatorium-pool-hvac-dehumidification/" },
       { label: "Commercial boiler plant design", href: "/answers/commercial-boiler-plant-design/" },
       { label: "Drainage study explained", href: "/answers/drainage-study-explained/" },
       { label: "Get an engineering estimate", href: "/estimate" },
+      { label: "How much does a PE stamp cost?", href: "/answers/how-much-does-a-pe-stamp-cost/" },
+      { label: "Geotechnical report explained", href: "/answers/geotechnical-report-explained/" },
+      { label: "ADU permit process guide", href: "/answers/adu-permit-process-guide/" },
+      { label: "Deck structural design", href: "/answers/deck-structural-design/" },
+      { label: "Browse the Apex Engineering Library", href: "/answers/" },
     ],
     founderNote,
   },
