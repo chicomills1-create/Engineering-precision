@@ -127,6 +127,9 @@ import { BATCH4_EXPANSIONS, BATCH4_EXPECTED_STATE_SLUGS } from "./batch4-expansi
 import {
   PE_STATE_SOURCE_LINKS,
   PHASE0_AEO_PAGES,
+  PHASE0_BATCH1_AEO_PAGES,
+  PHASE0_BATCH2_AEO_PAGES,
+  PHASE0_BATCH3_PROJECT_PAGES,
   PHASE0_PLAN_CHECK_PLAYBOOKS,
   PHASE0_RESOURCE_PAGES,
   PHASE0_SERVICE_PAGES,
@@ -986,6 +989,8 @@ ${llmsLocationsSection(states, cities)}
 - Industries: ${SITE}/industries
 - Resources: ${SITE}/resources/
 - Glossary: ${SITE}/glossary/
+- Apex Engineering Library — Everything you need to know about the world of engineering: ${SITE}/answers/
+- Library Topic of the Week — What is Title 24: ${SITE}/answers/what-is-title-24/
 - Service-area information: ${SITE}/locations/
 - Census metro engineering guides: ${SITE}/metros/
 - Architecture information: ${SITE}/architecture/
@@ -1472,6 +1477,7 @@ function phase0ArticleFrame(
     facts?: Array<{ label: string; value: string }>;
     howTo?: boolean;
     visual?: VisualMotif;
+    extraBodyHtml?: string;
   },
 ): string {
   const crumbs = [{ name: "Home", href: "/" }, { name: opts.h1 }];
@@ -1529,6 +1535,7 @@ function phase0ArticleFrame(
   ${breadcrumb(crumbs)}
   ${hero}
   ${opts.visual ? familyVisual(opts.visual) : ""}
+  ${opts.extraBodyHtml ?? ""}
   ${opts.facts?.length ? `<section class="block"><div class="container"><h2>What facts should you use to plan this scope?</h2><div class="prose"><table><thead><tr><th>Planning fact</th><th>Project-specific value</th></tr></thead><tbody>${opts.facts.map((fact) => `<tr><th scope="row">${esc(fact.label)}</th><td>${esc(fact.value)}</td></tr>`).join("")}</tbody></table></div></div></section>` : ""}
   ${sections.map((section, index) => `<section class="block" id="step-${index + 1}"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p>${section.bullets ? `<ul class="scope">${section.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul>` : ""}</div></div></section>`).join("")}
   ${opts.links?.length ? `<section class="block"><div class="container"><h2>${opts.directAnswer ? "Which related engineering resources can help?" : "Related Engineering Resources"}</h2><div class="linkrow">${opts.links.map((link) => `<a href="${esc(link.href)}"${/^https:\/\//.test(link.href) ? ' rel="noopener noreferrer"' : ""}>${esc(link.label)}</a>`).join("")}</div></div></section>` : ""}
@@ -1599,6 +1606,203 @@ function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
   });
 }
 
+// ============================================================================
+// APEX ENGINEERING LIBRARY — FRONT DOOR (/answers/)
+// The /answers/ hub is the Library front door: masthead, Topic of the Week,
+// a daily news strip, and an A–Z index of the Library's reference entries.
+// ============================================================================
+
+// --- DAILY NEWS DATA — "What's Big in Engineering Today" -------------------
+// DAILY REFRESH: replace the items in LIBRARY_NEWS_ITEMS below (and bump
+// LIBRARY_NEWS_UPDATED) — that small edit is the entire daily news update.
+// Each item: date label, headline, summary, source label, source URL, and an
+// optional related Library entry (slug + label) already in the A–Z index.
+const LIBRARY_NEWS_UPDATED = "2026-10-24";
+type LibraryNewsItem = {
+  date: string;
+  headline: string;
+  summary: string;
+  sourceLabel: string;
+  sourceUrl: string;
+  related?: { slug: string; label: string };
+};
+const LIBRARY_NEWS_ITEMS: LibraryNewsItem[] = [
+  {
+    date: "Oct 14, 2026",
+    headline: "Savannah Container Terminal wins federal permit after three-year review",
+    summary: "The U.S. Army Corps of Engineers approved the Georgia Ports Authority's permit for the $2.3 billion Savannah Container Terminal on Hutchinson Island; the 350-acre terminal adds 3.5 million TEU of annual capacity, with construction slated to begin January 2028.",
+    sourceLabel: "Railway Age",
+    sourceUrl: "https://www.railwayage.com/intermodal/georgia-pennsylvania-ports-announce-major-expansion-investments/",
+    related: { slug: "building-permit-expediting-guide", label: "Building Permit Expediting" },
+  },
+  {
+    date: "Oct 1, 2026",
+    headline: "DOT awards $426 million in INFRA grants across 12 states",
+    summary: "The U.S. Department of Transportation's INFRA round funds 12 freight and highway projects, led by $85.1 million for Kentucky's Somerset Northern Bypass and $85 million to widen Interstate 4 in Florida.",
+    sourceLabel: "Construction Dive",
+    sourceUrl: "https://www.constructiondive.com/news/dot-awards-critical-infrastructure-projects/832265/",
+  },
+  {
+    date: "Oct 23, 2026",
+    headline: "E-Space headquarters tops out in Arlington, Texas",
+    summary: "The 480,000-square-foot manufacturing and office campus, with hangar and airport works at Arlington Municipal Airport, reached its topping-out milestone on October 23; completion is estimated for summer 2027.",
+    sourceLabel: "ArchUp",
+    sourceUrl: "https://archup.net/e-space-headquarters-topping-out-airport-infrastructure/",
+  },
+];
+
+// --- TOPIC OF THE WEEK -------------------------------------------------------
+const LIBRARY_TOPIC_OF_THE_WEEK = {
+  name: "What is Title 24",
+  href: "/answers/what-is-title-24/",
+  body: "Title 24 is California's building standards code — the California Code of Regulations title that collects the state's building, residential, electrical, mechanical, plumbing, energy, and green-building standards into one rulebook. Its Part 6 is the California Energy Code, the part that decides how a building's envelope, lighting, and mechanical systems must perform and what compliance paperwork has to prove it. Why it matters now: California's current Title 24 cycle is the live compliance question behind permit work across the state, and energy-code practice nationally is watched through it — architects, engineers, and owners working anywhere use the California framework to see where codes are heading. The Library's reference entry breaks down every part of Title 24, the compliance paths a project can take, and the paperwork trail a submittal has to carry, in plain language.",
+};
+
+// --- A–Z INDEX ---------------------------------------------------------------
+// Display names + one-line plain-language descriptions for the Library's
+// launch entries. Records not listed here fall back to their topic/title
+// fields (see libraryIndexEntries), so the index stays readable as it grows.
+const LIBRARY_DISPLAY_OVERRIDES: Record<string, { name: string; blurb: string }> = {
+  "how-much-does-a-pe-stamp-cost": { name: "PE Stamp Cost", blurb: "What review-and-seal actually costs, what drives the fee, and why a stamp is never sold on its own." },
+  "how-much-does-mep-engineering-cost": { name: "MEP Engineering Cost", blurb: "What MEP design fees depend on — scope, building complexity, and deliverables — and how to read a quote." },
+  "how-long-does-plan-check-take": { name: "Plan Check Timelines", blurb: "How long plan check really takes, step by step, and what speeds up or stalls a review." },
+  "what-is-title-24": { name: "Title 24 (California Building Standards Code)", blurb: "California's building standards code explained — every part, the Part 6 energy code, and the compliance paperwork." },
+  "pe-stamp-only-vs-review-and-seal": { name: "PE Stamp vs. Review-and-Seal", blurb: "The difference between a bare stamp and real review-and-seal, and why only one of them is legitimate." },
+  "geotechnical-report-explained": { name: "Geotechnical Reports, Explained", blurb: "What a geotechnical (soils) report contains, how engineers use it, and when your project needs one." },
+  "adu-permit-process-guide": { name: "ADU Permit Process", blurb: "The ADU permit process from first sketch to final approval — drawings, engineering, and submittal steps." },
+  "building-permit-expediting-guide": { name: "Building Permit Expediting", blurb: "How permit expediting works, what an expediter can and cannot do, and how to keep a submittal moving." },
+  "ammonia-refrigeration-design": { name: "Ammonia Refrigeration Design", blurb: "How ammonia refrigeration systems are designed — charges, safety codes, machinery rooms, and PSM thresholds." },
+  "ferris-wheel-structural-design": { name: "Ferris Wheel Structural Design", blurb: "How Ferris wheels are engineered — rotating structures, fatigue, foundations, and rider safety." },
+  "deck-structural-design": { name: "Deck Structural Design", blurb: "How decks are engineered — ledgers, beams, footings, guards, and the load path to the ground." },
+  "energy-code-compliance-paths-explained": { name: "Energy Code Compliance Paths", blurb: "The energy code compliance paths — prescriptive, performance, and COMcheck — and how to choose one." },
+  "cleanroom-mep-engineering-requirements": { name: "Cleanroom MEP Engineering Requirements", blurb: "What cleanroom MEP design requires — air changes, pressurization, filtration, and ISO classifications." },
+  "how-much-does-structural-engineering-cost": { name: "Structural Engineering Cost", blurb: "What structural engineering costs, what moves the fee, and how residential and commercial pricing differ." },
+  "commercial-swimming-pool-engineering": { name: "Commercial Swimming Pool Engineering", blurb: "How commercial pools are engineered — shells, circulation, equipment, and health-code requirements." },
+  "cold-storage-design": { name: "Cold Storage Design", blurb: "Why cold storage warehouses need specialized engineering — vapor control, refrigeration loads, and frost protection." },
+  "load-bearing-wall-removal": { name: "Load-Bearing Wall Removal", blurb: "Whether you need an engineer to remove a load-bearing wall — load paths, replacement beams, and permit documents." },
+  "home-addition-second-story": { name: "Home Addition and Second Story Engineering", blurb: "Engineering for home additions and second stories — existing foundations, framing, and the new load path." },
+  "engineered-deck-drawings": { name: "Engineered Deck Drawings", blurb: "What engineered deck drawings must show — load paths, connections, ledger or freestanding support, and stairs." },
+  "pe-stamp-adu-plans": { name: "PE Stamp for ADU Plans", blurb: "When ADU plans need a PE stamp — structural scope, independent review, and authority requirements." },
+  "garage-conversion": { name: "Garage Conversion Engineering", blurb: "Engineering a garage conversion — openings, floor elevation, foundations, and lateral walls." },
+  "retaining-wall": { name: "Retaining Wall Engineering", blurb: "When a retaining wall needs engineering — soil, water, drainage, stability, and foundation support." },
+  "structural-letter-solar-panels": { name: "Structural Solar Panel Letters", blurb: "Structural letters for rooftop solar — equipment loads, attachments, and roof framing documentation." },
+  "structural-home-inspection": { name: "Structural Home Inspection", blurb: "How a structural home inspection works — what the engineer documents, its limits, and useful next steps." },
+  "architect-stamp-vs-pe-stamp": { name: "Architect Stamp vs. PE Stamp", blurb: "How discipline, scope, and authorization decide whether a project needs an architect stamp or a PE stamp." },
+  "engineer-stamping-someone-elses-drawings": { name: "Engineer Review of Another Person's Drawings", blurb: "Why an engineer cannot simply stamp someone else's drawings — independent review and responsible charge." },
+  "load-bearing-wall-removal-cost": { name: "Load-Bearing Wall Removal Cost", blurb: "What wall-removal engineering costs depend on — framing, supports, shoring, access, and permit coordination." },
+  "residential-structural-engineering-fees": { name: "Residential Structural Engineering Fees", blurb: "How residential structural fees are set — scope, conditions, field work, calculations, and deliverables." },
+  "pe-stamp-cost-for-house-plans": { name: "PE Stamp Cost for House Plans", blurb: "What a PE stamp for house plans costs — and why the price follows the review behind the seal." },
+  "engineered-deck-drawing-cost": { name: "Engineered Deck Drawing Cost", blurb: "What engineered deck drawings cost — geometry, loads, ledger and footing conditions, and permit sheets." },
+  "adu-plan-engineering-cost": { name: "ADU Plan Engineering Cost", blurb: "What ADU plan engineering costs — structure, foundation, site, utilities, and permit coordination." },
+  "retaining-wall-engineering-cost": { name: "Retaining Wall Engineering Cost", blurb: "What retaining wall engineering costs — geometry, soil, drainage, stability, and drawing scope." },
+  "foundation-assessment-cost": { name: "Foundation Assessment Cost", blurb: "What a foundation assessment costs — the question, distress, access, field work, testing, and report depth." },
+  "new-custom-home-engineering": { name: "New Custom Home Engineering", blurb: "What engineering a new custom home needs — drawings, calculations, and team coordination for permit." },
+  "adu-engineering-plans": { name: "ADU Engineering and Plans", blurb: "ADU engineering plans explained — how attached, detached, and converted units change the structure." },
+  "basement-finish-structural-plans": { name: "Basement Finish Structural Plans", blurb: "When a basement finish needs structural plans — beams, posts, stairs, openings, and foundations." },
+  "deck-patio-cover-pergola-engineering": { name: "Deck, Patio Cover and Pergola Engineering", blurb: "Engineering decks, patio covers, and pergolas — uplift, posts, footings, attachments, and drainage." },
+  "retaining-wall-design-process": { name: "Retaining Wall Design Process", blurb: "The retaining wall design process — site geometry and soil inputs through drainage and stability checks." },
+  "kitchen-remodel-structural-engineering": { name: "Kitchen Remodel Structural Engineering", blurb: "When a kitchen remodel needs structural engineering — wall openings, beams, supports, and new loads." },
+  "church-school-engineering-projects": { name: "Church and School Engineering Projects", blurb: "Engineering for churches and schools — occupied assembly spaces, phasing, and existing conditions." },
+  "swimming-pool-structural-engineering": { name: "Swimming Pool Structural Engineering", blurb: "Structural engineering for swimming pools — the shell, soil, water, and retaining conditions." },
+  "guest-house-casita-engineering": { name: "Guest House and Casita Engineering", blurb: "Engineering a guest house or casita — detached foundations, framing, utilities, and additions." },
+  "manufactured-modular-home-engineering": { name: "Manufactured and Modular Home Engineering", blurb: "Engineering for manufactured and modular homes — foundations, anchorage, transport, and site work." },
+};
+
+// The Library's first deepened batch (the four WAVE_LIBRARY records are also
+// named here so a missing registration fails the build loudly, not silently).
+const LIBRARY_FEATURED_SLUGS: string[] = [
+  "how-much-does-a-pe-stamp-cost",
+  "how-much-does-mep-engineering-cost",
+  "how-long-does-plan-check-take",
+  "what-is-title-24",
+  "pe-stamp-only-vs-review-and-seal",
+  "geotechnical-report-explained",
+  "adu-permit-process-guide",
+  "building-permit-expediting-guide",
+  "ammonia-refrigeration-design",
+  "ferris-wheel-structural-design",
+  "deck-structural-design",
+  "energy-code-compliance-paths-explained",
+  "cleanroom-mep-engineering-requirements",
+  "how-much-does-structural-engineering-cost",
+  "commercial-swimming-pool-engineering",
+];
+
+type LibraryIndexEntry = { slug: string; name: string; blurb: string; href: string };
+
+function libraryDerivedName(page: Phase0AeoPage): string {
+  const topic = (page.topic ?? "").trim();
+  if (topic && !/\?$/.test(topic)) return topic;
+  return page.title.replace(/\s*\|\s*Apex Grid.*$/i, "").replace(/\?\s*$/, "").trim();
+}
+
+function libraryDerivedBlurb(page: Phase0AeoPage): string {
+  const raw = (page.directAnswer ?? page.description ?? "").replace(/\s+/g, " ").trim();
+  if (raw.length <= 140) return raw;
+  const cut = raw.slice(0, 140);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${(lastSpace > 60 ? cut.slice(0, lastSpace) : cut).replace(/[\s,;:—-]+$/, "")}…`;
+}
+
+// GROWTH RULE (program law): the A–Z index is built from the corpus arrays
+// themselves. Future deepened pages join the Library by being added to
+// WAVE_LIBRARY_ANSWER_PAGES — any record added there appears in this index
+// automatically in the same deploy, with no further hub edit. Seed records
+// come from the Phase 0 batch arrays; the featured batch-1 slugs and the
+// wave-ec cold-storage record are named explicitly. Dedupe is by slug and
+// keeps the LAST occurrence in ALL_AEO_PAGES order, so a deepened record
+// always wins over its starter tuple and no slug is ever listed twice.
+function libraryIndexEntries(): LibraryIndexEntry[] {
+  const included = new Set<string>();
+  for (const page of PHASE0_BATCH1_AEO_PAGES) included.add(page.slug);
+  for (const page of PHASE0_BATCH2_AEO_PAGES) included.add(page.slug);
+  for (const page of PHASE0_BATCH3_PROJECT_PAGES) included.add(page.slug);
+  for (const slug of LIBRARY_FEATURED_SLUGS) included.add(slug);
+  for (const page of WAVE_LIBRARY_ANSWER_PAGES) included.add(page.slug);
+  included.add("cold-storage-design");
+  const bySlug = new Map<string, Phase0AeoPage>();
+  for (const page of ALL_AEO_PAGES) {
+    if (!included.has(page.slug)) continue;
+    if ("cluster" in page) continue;
+    bySlug.set(page.slug, page as Phase0AeoPage);
+  }
+  const missing = [...included].filter((slug) => !bySlug.has(slug));
+  if (missing.length) {
+    throw new Error(`SEO assertion failed: Apex Engineering Library index is missing corpus records: ${missing.join(", ")}`);
+  }
+  const entries = [...bySlug.values()].map((page) => {
+    const override = LIBRARY_DISPLAY_OVERRIDES[page.slug];
+    return {
+      slug: page.slug,
+      name: override?.name ?? libraryDerivedName(page),
+      blurb: override?.blurb ?? libraryDerivedBlurb(page),
+      href: `/answers/${page.slug}/`,
+    };
+  });
+  entries.sort((a, b) => a.name.localeCompare(b.name));
+  return entries;
+}
+
+function libraryIndexLinks(): Array<{ label: string; href: string }> {
+  return libraryIndexEntries().map((entry) => ({ label: entry.name, href: entry.href }));
+}
+
+function libraryHubBodyHtml(): string {
+  const entries = libraryIndexEntries();
+  const byLetter = new Map<string, LibraryIndexEntry[]>();
+  for (const entry of entries) {
+    const letter = (entry.name.charAt(0) || "#").toUpperCase();
+    const list = byLetter.get(letter) ?? [];
+    list.push(entry);
+    byLetter.set(letter, list);
+  }
+  const letters = [...byLetter.keys()].sort();
+  const topic = `<section class="block"><div class="container"><h2>Topic of the Week</h2><div class="prose"><p><strong><a href="${esc(LIBRARY_TOPIC_OF_THE_WEEK.href)}">${esc(LIBRARY_TOPIC_OF_THE_WEEK.name)}</a></strong></p><p>${esc(LIBRARY_TOPIC_OF_THE_WEEK.body)}</p><p><a href="${esc(LIBRARY_TOPIC_OF_THE_WEEK.href)}">Read the full Title 24 reference entry</a></p></div></div></section>`;
+  const news = `<section class="block"><div class="container"><h2>What's Big in Engineering Today</h2><div class="prose">${LIBRARY_NEWS_ITEMS.map((item) => `<p><strong>${esc(item.date)} — ${esc(item.headline)}</strong><br>${esc(item.summary)}<br>Source: <a href="${esc(item.sourceUrl)}" rel="noopener noreferrer">${esc(item.sourceLabel)}</a>${item.related ? `<br>Related Library topic: <a href="/answers/${esc(item.related.slug)}/">${esc(item.related.label)}</a>` : ""}</p>`).join("")}<p>News updated ${esc(LIBRARY_NEWS_UPDATED)}.</p></div></div></section>`;
+  const index = `<section class="block"><div class="container"><h2>Browse the Library A–Z</h2><div class="prose"><p>Every reference entry in the Apex Engineering Library, in alphabetical order. Each entry answers one engineering question in plain language, with the records, code basis, and professional boundaries a real project needs.</p></div>${letters.map((letter) => `<h3>${esc(letter)}</h3><div class="linkrow">${(byLetter.get(letter) ?? []).map((entry) => `<a href="${esc(entry.href)}">${esc(entry.name)}</a>`).join("")}</div>${(byLetter.get(letter) ?? []).map((entry) => `<p><strong>${esc(entry.name)}</strong> — ${esc(entry.blurb)}</p>`).join("")}`).join("")}</div></section>`;
+  return `${topic}\n  ${news}\n  ${index}`;
+}
+
 function phase0CollectionHub(
   canonical: string,
   title: string,
@@ -1607,6 +1811,7 @@ function phase0CollectionHub(
   kicker: string,
   answer: string,
   links: Array<{ label: string; href: string }>,
+  extraBodyHtml?: string,
 ): string {
   return phase0ArticleFrame({
     canonical,
@@ -1625,6 +1830,7 @@ function phase0CollectionHub(
     ],
     links,
     schemaType: "WebPage",
+    extraBodyHtml,
   });
 }
 
@@ -7880,12 +8086,13 @@ async function main() {
   const phase0AnswersDir = path.join(PUBLIC, "answers");
   const answerHubHtml = phase0CollectionHub(
     "/answers/",
-    "Engineering Answers for Permit and Design Questions | Apex Grid",
-    "Concise, national engineering answers with FAQ schema and professional-engineering context for permit, PE, structural, MEP, and energy questions.",
-    "Engineering Answers for Permit and Design Questions",
-    "Phase 0 National AEO Collection",
-    "These concise answers address recurring engineering and permit questions, then point to the project inputs and professional boundaries that matter in a real submission.",
-    ALL_AEO_PAGES.map((page) => ({ label: page.h1, href: `/answers/${page.slug}/` })),
+    "Apex Engineering Library — Everything You Need to Know About the World of Engineering | Apex Grid",
+    "The Apex Engineering Library by Apex Grid Engineering PLLC: plain-language, reference-depth answers to engineering cost, code, permit, and design questions, indexed A–Z with a Topic of the Week and daily engineering news. Questions? Call 480-490-0064.",
+    "Apex Engineering Library",
+    "Apex Engineering Library · Apex Grid Engineering PLLC",
+    "Everything you need to know about the world of engineering. The Apex Engineering Library is the free public reference library of Apex Grid Engineering PLLC — plain-language, reference-depth entries on the questions engineers, architects, contractors, and owners actually ask: what the work costs, what the codes require, how permits move, and how designs are checked. Start with the Topic of the Week, scan what is big in engineering today, or browse the A–Z index below. Working on a live project and need the engineering itself? Call Apex Grid Engineering PLLC at 480-490-0064.",
+    libraryIndexLinks(),
+    libraryHubBodyHtml(),
   );
   fs.rmSync(phase0AnswersDir, { recursive: true, force: true });
   fs.mkdirSync(phase0AnswersDir, { recursive: true });
