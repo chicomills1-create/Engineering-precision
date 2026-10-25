@@ -232,8 +232,10 @@ export const WAVE_AQ_ANSWER_PAGES: Phase0AeoPage[] = [
     title: "How Do You Engineer a Deck That Won't Sag, Sway, or Fail?",
     description: "Deck structural design covers ledger connections, posts, beams, footings, and bracing — the details separating a solid deck from a future collapse risk.",
     h1: "How Do You Engineer a Deck That Won't Sag, Sway, or Fail?",
-    answer: "Engineering a deck means designing every load path from the walking surface to the ground: joists sized for the span, beams and posts sized for the tributary loads, footings sized for the soil, and — the detail that fails most — a ledger connection to the house that can actually carry the deck. Then lateral bracing so the deck doesn't rack or sway. Deck collapses make the news every year, and they're almost always a connection or ledger failure, not a mystery. A properly engineered deck is boring in the best way: it just stands there, solid, for decades.",
-    directAnswer: "Deck structural design sizes the joists, beams, posts, and footings for code loads and details the ledger connection and lateral bracing — the two details behind nearly all deck failures.",
+    answer: "Engineering a deck means designing every load path from the walking surface to the ground: joists sized for the span, beams and posts sized for the tributary loads, footings sized for the soil, and — the detail that fails most — a ledger connection to the house that can actually carry the deck. Then lateral bracing so the deck doesn't rack or sway. Deck collapses make the news every year, and they're almost always a connection or ledger failure, not a mystery. A properly engineered deck is boring in the best way: it just stands there, solid, for decades.
+
+Two routes deliver that result. The prescriptive route follows the IRC's Section R507 span tables, fastener schedules, and footing provisions directly — fast to design and easy to review for a standard rectangular deck in conventional lumber. The engineered route calculates members and connections one by one, and it becomes the required route when the deck stands tall, carries a hot tub or masonry feature, cantilevers past the table limits, mixes in steel or proprietary framing, or attaches to a house whose rim construction cannot honestly take a ledger. The failures that show up in forensic reviews usually trace to a prescriptive detail used outside its limits: a ledger bolted through brick veneer, footings poured at grade in frost country, a guard post screwed to a rim board with nothing behind it.",
+    directAnswer: "Deck structural design sizes the joists, beams, posts, and footings for code loads — typically 40 psf live plus 10 psf dead for residential decks under IRC Section R507 — and details the ledger connection, the lateral-load path, and the guard connections. Decks rarely fail in the middle of a member; they fail at the ledger, at a footing, or at a guard post, which is why those connections carry the engineering.",
     topic: "Structural",
     serviceHref: "/services/structural/",
     faqs: [
@@ -253,6 +255,18 @@ export const WAVE_AQ_ANSWER_PAGES: Phase0AeoPage[] = [
         question: "How do you stop a tall deck from swaying?",
         answer: "With diagonal bracing or knee bracing between posts and beams, designed as a lateral system. Tall decks act like little towers in the wind, and the code requires a defined bracing method. Sway is a serviceability problem that becomes a safety problem if the connections work loose over time.",
       },
+      {
+        question: "Can a standard deck framing layout support a hot tub?",
+        answer: "Almost never as drawn. A filled six-person spa with occupants can impose 80 to 110 psf over its footprint — two to nearly three times the 40 psf live load the tables assume — concentrated exactly where the framing is least able to share it. The engineered fix is a dedicated beam line and posts under the tub footprint with their own footings, joists tightened or doubled in the bay, and the rest of the deck left at standard design. Setting the tub over the beam-and-post line is usually the cheapest structural decision on the project.",
+      },
+      {
+        question: "When is a permit — and engineered drawings — actually required for a deck?",
+        answer: "Rules vary by jurisdiction, but the pattern is consistent: attached decks, decks more than about 30 inches above grade, decks serving a door used for exit, and decks carrying a roof, spa, or masonry feature almost always need a permit, and many jurisdictions ask for engineered drawings when the design leaves the prescriptive tables — tall posts, long cantilevers, unusual materials, or weak soils. Freestanding low decks sometimes qualify for the IRC's small-deck permit exemption, but local amendments decide.",
+      },
+      {
+        question: "How much does deck structural engineering cost?",
+        answer: "For planning purposes, a straightforward residential deck plan set built on the prescriptive tables commonly runs about $600 to $1,800 in engineering fees. Tall decks, hot tub support, rooftop or commercial decks, difficult soils, and jurisdictions with heavy calculation-package expectations commonly run $2,000 to $5,000 or more. The drivers are height, concentrated loads, material system, and how much of the design the span tables can carry versus how much must be calculated member by member.",
+      },
     ],
     sections: [
       {
@@ -262,6 +276,30 @@ export const WAVE_AQ_ANSWER_PAGES: Phase0AeoPage[] = [
       {
         heading: "The ledger: where decks live or die",
         body: "The ledger board is the most failure-prone element in residential construction. Proper ledger design specifies the fastener type, size, and spacing for the actual loads; requires attachment through the house's rim joist or solid framing — never just into siding, veneer, or sheathing; and details flashing that keeps water out of the connection for the life of the deck.\n\nCorrosion deserves its own mention. Pressure-treated lumber is corrosive to standard fasteners, so the hardware has to be rated for treated wood. I've investigated ledger failures where the bolts were sized right on day one and eaten away ten years later — the wrong metal in a wet connection.",
+      },
+      {
+        heading: "Loads first: the arithmetic every member answers to",
+        body: "Residential deck design under IRC Section R507 starts from a 40 psf live load plus a 10 psf dead load, and in snow country the ground snow load can replace the 40 psf figure when it is higher. Each member then answers for its tributary area — the slice of deck whose load it carries, multiplied by the design load. A post with 40 square feet of tributary area at 50 psf delivers about 2,000 lb to its footing, and the footing spreads that load at the soil's bearing capacity — the IRC's presumptive values run 1,500 psf for clay and silt, 2,000 psf for sand and sandy gravel, and 3,000 psf for sedimentary rock, absent a soils report. Footing area is therefore a division problem, not a habit: 2,000 lb on 1,500 psf soil needs about 1.33 square feet of bearing, roughly a 16-inch-diameter footing, at a depth below the local frost line.",
+        bullets: ["40 psf live plus 10 psf dead typical; snow governs where it exceeds the live load", "Footing area = post load divided by allowable soil bearing; depth = below frost", "Concentrated loads — hot tubs, kitchens — are checked separately, never averaged away"],
+      },
+      {
+        heading: "Sizing joists, beams, and posts without guessing",
+        body: "Joist sizing is a span-table exercise bounded by feel as much as by strength. The IRC tables set maximum spans by species, grade, size, and spacing, and they cap joist cantilevers at roughly one-quarter of the backspan — an over-cantilevered joist pries upward at the beam and dumps load where nobody checked it. A joist can pass the strength check and still bounce underfoot, so designers often tighten spacing under tile, stone, or a spa surround. Beams are sized from the span between posts and the tributary width they collect, and posts are checked for height as well as load: a 4x4 that is perfectly adequate at four feet tall is the wrong post at ten feet, where tall decks step up to 6x6 posts with notched beam seats or rated post-to-beam connectors. Stairs belong in the same calculation set — stringer span, landing support, and tread loads — not in field improvisation after the framing inspection.",
+      },
+      {
+        heading: "Guards, stairs, and the lateral load path",
+        body: "The guard is a structural system wearing trim's clothing. Residential guards are required where the walking surface sits more than 30 inches above the surface below, must reach at least 36 inches high (42 inches for commercial guards under the IBC), and must reject a 4-inch sphere through any opening. What sizes the guard post connection is a single number: a 200 lb concentrated load applied in any direction at the top rail. That load turns the post into a lever, which is why posts need blocking and through-bolts or rated tension hardware tying them into the rim and joists — lag screws into the edge of a rim board alone are behind a steady share of guard failures. The deck's lateral path closes the system: recent IRC editions carry a prescriptive detail using hold-down tension devices rated for a combined 1,500 lb in at least two locations, tying deck joists back to the house floor framing, while a freestanding deck earns its stability from diagonal bracing in both directions. Commercial decks move to the IBC and ASCE 7, where 100 psf assembly live loads in some occupancies and site wind and seismic values replace the residential tables.",
+        bullets: ["Guard design load: 200 lb concentrated at the top, in any direction — the connection must develop it", "Stair handrails must be graspable and continuous for the full run of the stair", "Attached decks need a defined lateral path into the house diaphragm or a bracing system of their own", "Wind uplift at beam and post connections matters on tall and coastal decks, not just gravity"],
+      },
+      {
+        heading: "How the same deck changes by jurisdiction",
+        body: "The identical 12x16 deck is four different designs in four different places. In Minnesota the design conversation starts with frost depth — footings may sit 42 inches or more below grade — and a snow load that can govern over the 40 psf live load. In Arizona the frost question nearly vanishes, but post bases and hardware are detailed against irrigation moisture and termite exposure instead. On the Gulf and Atlantic coasts, uplift connectors and corrosion-resistant hardware rated for salt air move from optional to essential. In high-seismic regions out west, the lateral system and its anchorage get the scrutiny that frost gets up north. Permitting varies just as much: the IRC exempts small decks — not over 200 square feet, not more than 30 inches above grade at any point, and not serving a required exit door — from a building permit in many adopted versions, but local amendments frequently narrow or remove that exemption, and zoning, HOA, and floodplain rules apply either way. Confirming the local rule set is step one of the design, not an afterthought at submittal.",
+        bullets: ["Frost depth ranges from near zero to five feet by climate — it sets footing depth", "Permit exemptions for small low decks are local-amendment territory — verify first"],
+      },
+      {
+        heading: "Worked example: a 12 by 16 attached deck, end to end",
+        body: "Take a deck projecting 12 feet from the house and running 16 feet along it, in pressure-treated southern pine, walking surface about three feet above grade. Loads: 40 psf live plus 10 psf dead. Joists: 2x8 at 16 inches on center spanning from the ledger to a beam about 10 feet out, leaving a 2-foot cantilever inside the prescriptive quarter-backspan limit. The beam collects a tributary width of about 7 feet — half the joist span plus the cantilever — and runs on three posts at roughly 8-foot spacing. The middle post's tributary area is about 8 by 7 feet, 56 square feet, so it carries about 2,800 lb at 50 psf. On presumptive 1,500 psf soil it needs about 1.9 square feet of footing — a 20-inch-diameter footing gives margin — poured below the local frost depth, with a rated post base holding the 6x6 clear of standing water. A double 2x10 beam checks for that span and tributary width. The ledger is a 2x8 fastened through the sheathing into the house rim — never into siding or veneer — with half-inch lag screws or through-bolts spaced from IRC Table R507.9.1.3(1) for the 12-foot joist span, over self-adhered membrane with metal flashing lapped under the wall covering. Two 750 lb hold-down tension devices tie the deck laterally into the floor framing, and guard posts are blocked and through-bolted at the rim so each develops the 200 lb top load.",
+        bullets: ["Joists 2x8 at 16 inches o.c., 10-foot span plus 2-foot cantilever — inside the tables", "Middle post: about 2,800 lb, landing on a 20-inch footing at 1,500 psf presumptive soil", "Ledger fasteners spaced from Table R507.9.1.3(1) for the actual joist span and rim construction", "Lateral: two hold-down devices totaling 1,500 lb; guards: blocked, bolted posts at the rim"],
       },
       {
         heading: "What a complete deck engineering package shows",
@@ -280,6 +318,7 @@ export const WAVE_AQ_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "Engineered deck drawings", href: "/answers/engineered-deck-drawings/" },
       { label: "Engineered deck drawing cost", href: "/answers/engineered-deck-drawing-cost/" },
       { label: "Get an engineering estimate", href: "/estimate" },
+      { label: "Apex Engineering Library — browse all answers", href: "/answers/" },
     ],
     founderNote,
   },
