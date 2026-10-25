@@ -27,6 +27,11 @@ Full architectural design, concept through permit-ready documents, coordinated w
 ### Municipal plan check
 Plan-check and plan-review support for jurisdictions and project teams, including correction-cycle support. Details: https://apexgrideng.com/services
 
+## Apex Engineering Library
+
+Apex Engineering Library — Everything you need to know about the world of engineering. The Library is Apex Grid's free public reference: plain-language, reference-depth entries on engineering costs, codes, permits, and design questions, indexed A–Z at https://apexgrideng.com/answers/
+Topic of the Week — What is Title 24: https://apexgrideng.com/answers/what-is-title-24/
+
 ## How PE review-and-seal works
 
 1. Send us your plans. Upload your drawing set, calculations, and project details through intake — PDF, plus CAD backgrounds if you have them. Include the project address, the permitting jurisdiction (AHJ), and your permit deadline.
