@@ -1466,7 +1466,7 @@ function phase0ArticleFrame(
     h1: string;
     kicker: string;
     answer: string;
-    sections: Array<{ heading: string; body: string; bullets?: string[] }>;
+    sections: Array<{ heading: string; body: string; bullets?: string[]; bulletsHtml?: string[] }>;
     faqs: Array<{ question: string; answer: string }>;
     links?: Array<{ label: string; href: string }>;
     schemaType?: "Article" | "Service" | "WebPage";
@@ -1537,7 +1537,7 @@ function phase0ArticleFrame(
   ${opts.visual ? familyVisual(opts.visual) : ""}
   ${opts.extraBodyHtml ?? ""}
   ${opts.facts?.length ? `<section class="block"><div class="container"><h2>What facts should you use to plan this scope?</h2><div class="prose"><table><thead><tr><th>Planning fact</th><th>Project-specific value</th></tr></thead><tbody>${opts.facts.map((fact) => `<tr><th scope="row">${esc(fact.label)}</th><td>${esc(fact.value)}</td></tr>`).join("")}</tbody></table></div></div></section>` : ""}
-  ${sections.map((section, index) => `<section class="block" id="step-${index + 1}"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p>${section.bullets ? `<ul class="scope">${section.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul>` : ""}</div></div></section>`).join("")}
+  ${sections.map((section, index) => `<section class="block" id="step-${index + 1}"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p>${section.bulletsHtml ? `<ul class="scope">${section.bulletsHtml.map((bullet) => `<li>${bullet}</li>`).join("")}</ul>` : section.bullets ? `<ul class="scope">${section.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul>` : ""}</div></div></section>`).join("")}
   ${opts.links?.length ? `<section class="block"><div class="container"><h2>${opts.directAnswer ? "Which related engineering resources can help?" : "Related Engineering Resources"}</h2><div class="linkrow">${opts.links.map((link) => `<a href="${esc(link.href)}"${/^https:\/\//.test(link.href) ? ' rel="noopener noreferrer"' : ""}>${esc(link.label)}</a>`).join("")}</div></div></section>` : ""}
   ${opts.directAnswer ? `<section class="block"><div class="container"><h2>What else do project teams ask?</h2><div class="faq">${opts.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></div></section>` : phase0FaqMarkup(opts.faqs)}
   <section class="ctaband"><div class="container"><h2>${opts.directAnswer ? "Ready to discuss your engineering scope?" : "Discuss your engineering scope"}</h2><p>Share the project address, current records, requested deliverable, authority information, and schedule. Apex Grid confirms professional responsibility, availability, and scope before work begins.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
@@ -1822,7 +1822,7 @@ function libraryHubBodyHtml(): string {
   const letters = [...byLetter.keys()].sort();
   const topic = `<section class="block"><div class="container"><h2>Topic of the Week</h2><div class="prose"><p><strong><a href="${esc(LIBRARY_TOPIC_OF_THE_WEEK.href)}">${esc(LIBRARY_TOPIC_OF_THE_WEEK.name)}</a></strong></p><p>${esc(LIBRARY_TOPIC_OF_THE_WEEK.body)}</p><p><a href="${esc(LIBRARY_TOPIC_OF_THE_WEEK.href)}">Read the full Title 24 reference entry</a></p></div></div></section>`;
   const news = `<section class="block"><div class="container"><h2>What's Big in Engineering Today</h2><div class="prose">${LIBRARY_NEWS_ITEMS.map((item) => `<p><strong>${esc(item.date)} — ${esc(item.headline)}</strong><br>${esc(item.summary)}<br>Source: <a href="${esc(item.sourceUrl)}" rel="noopener noreferrer">${esc(item.sourceLabel)}</a>${item.related ? `<br>Related Library topic: <a href="/answers/${esc(item.related.slug)}/">${esc(item.related.label)}</a>` : ""}</p>`).join("")}<p>News updated ${esc(LIBRARY_NEWS_UPDATED)}.</p></div></div></section>`;
-  const index = `<section class="block"><div class="container"><h2>Browse the Library A–Z</h2><div class="prose"><p>Every reference entry in the Apex Engineering Library, in alphabetical order. Each entry answers one engineering question in plain language, with the records, code basis, and professional boundaries a real project needs.</p></div>${letters.map((letter) => `<h3>${esc(letter)}</h3><div class="linkrow">${(byLetter.get(letter) ?? []).map((entry) => `<a href="${esc(entry.href)}">${esc(entry.name)}</a>`).join("")}</div>${(byLetter.get(letter) ?? []).map((entry) => `<p><strong>${esc(entry.name)}</strong> — ${esc(entry.blurb)}</p>`).join("")}`).join("")}</div></section>`;
+  const index = `<section class="block"><div class="container"><h2>Browse the Library A–Z</h2><div class="prose"><p>Every reference entry in the Apex Engineering Library, in alphabetical order. Each entry answers one engineering question in plain language, with the records, code basis, and professional boundaries a real project needs.</p></div>${letters.map((letter) => `<h3>${esc(letter)}</h3><div class="linkrow">${(byLetter.get(letter) ?? []).map((entry) => `<a href="${esc(entry.href)}">${esc(entry.name)}</a>`).join("")}</div>${(byLetter.get(letter) ?? []).map((entry) => `<p><strong><a href="${esc(entry.href)}">${esc(entry.name)}</a></strong> — ${esc(entry.blurb)}</p>`).join("")}`).join("")}</div></section>`;
   const catalogEntries = libraryCatalogEntries();
   const catalogByLetter = new Map<string, LibraryCatalogEntry[]>();
   for (const entry of catalogEntries) {
@@ -3132,7 +3132,7 @@ function peStampStatePage(state: StateData, slug: string): string {
     kicker: `${stateName} · Fast PE Review & Seal`,
     answer: `Need a PE stamp for ${aOrAn(stateName)} ${stateName} project? Send us your drawings — we'll handle the rest. Apex Grid's licensed PEs review and seal drawings nationwide: 10+ licensed PEs on a 20+ engineer team, with same-day quotes on qualifying scopes. Our engineers review your set, seal what passes, and clearly mark any required fixes, ensuring your permit submittal is clean. Every stamp is backed by our review, making it valid with the building department. Official ${stateName} board and license-verification links are included below for reference.`,
     sections: [
-      { heading: `Official ${stateName} board and lookup links`, body: "These links are provided as starting points to the official state sources. A board's current instructions and online record control; confirm the page, status, discipline, and authorization directly before a project submission.", bullets: [`${stateName} engineering licensing board`, "Official license verification or lookup", `Project code and AHJ requirements for ${stateName}`, "Responsible engineer and scope confirmation"] },
+      { heading: `Official ${stateName} board and lookup links`, body: "These links are provided as starting points to the official state sources. A board's current instructions and online record control; confirm the page, status, discipline, and authorization directly before a project submission.", bulletsHtml: [`<a href="${esc(links.boardUrl)}" rel="noopener noreferrer">${esc(stateName)} engineering licensing board</a>`, `<a href="${esc(links.lookupUrl)}" rel="noopener noreferrer">Official license verification or lookup</a>`, `Project code and AHJ requirements for ${stateName}`, "Responsible engineer and scope confirmation"] },
       { heading: `How we handle your ${stateName} stamp`, body: `When your project comes in, the Apex Grid engineer assigned to it reviews the project inputs, code basis, calculations, drawings, and existing conditions, then signs and seals the documents that are ready for submittal. ${state.buildingCode.notes} ${state.licensure.notes}` },
       ...(deepDive?.sections ?? []),
       { heading: "Useful project inputs", body: `A ${stateName} PE may need the project address, current architectural backgrounds, discipline scope, adopted code information, site and existing-condition evidence, equipment data, calculations, AHJ checklist, and any correction notice. ${state.permitting} ${state.climate.drivers.join("; ")} are examples of why project inputs must be confirmed rather than assumed.` },
@@ -11744,6 +11744,13 @@ async function main() {
     fs.writeFileSync(path.join(dir, "index.html"), glossaryPage(gt));
     pages++;
   }
+  // Legacy /glossary path: redirect stub to the canonical Engineering
+  // Glossary hub (same moved-path stub pattern used throughout this file).
+  const legacyGlossaryDir = path.join(PUBLIC, "glossary");
+  fs.rmSync(legacyGlossaryDir, { recursive: true, force: true });
+  fs.mkdirSync(legacyGlossaryDir, { recursive: true });
+  fs.writeFileSync(path.join(legacyGlossaryDir, "index.html"), redirectPage("/engineering-glossary/", "Engineering Glossary"));
+  pages++;
 
   // Title 24 hub + subpages
   const title24Dir = path.join(PUBLIC, "title-24");
