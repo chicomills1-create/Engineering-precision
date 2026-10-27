@@ -598,7 +598,7 @@ export default function RfpRfqSubmission() {
                     { label: "Firm Capabilities", path: "/capabilities" },
                     { label: "Licensing & Coverage", path: "/licensing-service-coverage/" },
                     { label: "Prime Contractor Teaming", path: "/for-contractors" },
-                    { label: "Engineering Estimator", path: "/estimate/" },
+                    { label: "Contact the Engineering Team", path: "/contact" },
                   ].map((link, idx) => (
                     <li key={idx}>
                       <Link href={link.path} className="group flex items-center text-sm text-foreground/80 hover:text-primary transition-colors">
@@ -649,16 +649,16 @@ export default function RfpRfqSubmission() {
       <section className="py-20 bg-card border-t border-border text-center">
         <div className="container mx-auto px-4 md:px-8 max-w-3xl">
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-5">
-            Need Budgetary Pricing Before the Solicitation?
+            Questions Before You Submit?
           </h2>
           <p className="text-muted-foreground leading-relaxed mb-8">
-            Use the engineering estimator for a non-binding planning range. Active RFP and RFQ packages should be submitted through the form above.
+            Tell us what you need through the contact form — an engineer reviews every request and replies with a written scope and fee. Active RFP and RFQ packages should be submitted through the form above.
           </p>
           <Link
-            href="/estimate/"
+            href="/contact"
             className="inline-flex h-14 px-8 bg-primary text-primary-foreground font-bold text-sm uppercase tracking-wider items-center justify-center hover:bg-primary/90 transition-colors"
           >
-            Open the Engineering Estimator
+            Contact Our Engineering Team
             <ChevronRight className="w-4 h-4 ml-2" />
           </Link>
         </div>
