@@ -83,6 +83,18 @@ export default function About() {
         </div>
       </section>
 
+      {/* Family of firms — one short factual line (Jeremy, 2026-10-26) */}
+      <section className="py-10 bg-background border-b border-border">
+        <div className="container mx-auto px-4 md:px-8">
+          <p className="text-center text-muted-foreground max-w-2xl mx-auto">
+            Apex Grid Engineering is part of a family of firms that includes{" "}
+            <a href="https://engides.com" className="text-primary hover:underline">Engides</a>{" "}
+            and{" "}
+            <a href="https://torchengineering.com" className="text-primary hover:underline">Torch Engineering</a>.
+          </p>
+        </div>
+      </section>
+
       {/* Leadership — simple cards */}
       <section className="py-24 bg-background border-b border-border">
         <div className="container mx-auto px-4 md:px-8">
