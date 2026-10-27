@@ -3642,7 +3642,7 @@ function phase1MetroServicePage(metro: Phase1Metro, service: Phase1ServiceSlug):
   const details = serviceDetails[service];
   const body = `<main data-phase1="true">
 ${breadcrumb(crumbs)}
-<section class="hero"><div class="container"><p class="kicker">${esc(label)} · ${esc(metro.representativeCity)} metro</p><h1>${esc(label)} for the ${esc(metro.metroName)} Metro</h1><p class="lede">${esc(phase1ServiceSummaries[service])} Apex Grid is a veteran-owned, Black-owned firm — 20+ engineers, 10+ licensed PEs, rated 5.0 stars on Google — delivering coordinated, PE-stamped documents for ${esc(metro.metroName)} projects, with same-day quotes on qualifying scopes.</p><p class="note">By ${esc(PHASE1_AUTHOR)}</p></div></section>
+<section class="hero"><div class="container"><p class="kicker">${esc(label)} · ${esc(metro.representativeCity)} metro</p><h1>${esc(label)} for the ${esc(metro.metroName)} Metro</h1><p class="lede">${esc(phase1ServiceSummaries[service])} Apex Grid is a veteran-owned firm — 20+ engineers, 10+ licensed PEs, rated 5.0 stars on Google — delivering coordinated, PE-stamped documents for ${esc(metro.metroName)} projects, with same-day quotes on qualifying scopes.</p><p class="note">By ${esc(PHASE1_AUTHOR)}</p></div></section>
 ${familyVisual(motifForText(label), `Service location shown: ${metro.representativeCity}, ${metro.representativeState}.`)}
 <section class="block"><div class="container"><h2>${esc(details.heading)}</h2><div class="prose">${details.paragraphs.map((paragraph) => `<p>${esc(paragraph)}</p>`).join("")}</div></div></section>
 <section class="block"><div class="container"><h2>Scope and <em>intake evidence</em></h2><div class="prose"><p>${esc(metro.editorial.deliveryLens)}</p><ul class="scope">${details.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul></div></div></section>
@@ -4175,13 +4175,6 @@ ${state.slug === "hawaii" ? `<section class="block"><div class="container">
     <a class="card" href="/locations/hawaii/honolulu/"><div class="label">Honolulu, HI</div><h3>Engineering Services in Honolulu</h3><p>Review the Honolulu service-area page for local project and permitting context.</p></a>
   </div>
 </div></section>` : ""}
-${directoryCities.length ? `<section class="block"><div class="container">
-  <h2>More ${esc(state.name)} <em>City Coverage</em></h2>
-  <p class="prose">Explore consolidated engineering hubs for Census-verified incorporated places across ${esc(state.name)}. Each hub covers the major discipline, facility, permit, assessment, renovation, and buyer-intent clusters under one canonical city URL.</p>
-  <div class="linkrow">${directoryCities
-    .map((city) => `<a href="/locations/${state.slug}/${city.slug}/">${esc(city.name)} engineering services</a>`)
-    .join("")}</div>
-</div></section>` : ""}
 ${availableVerticals.length ? `<section class="block"><div class="container">
   <h2>Architecture &amp; Construction <em>Coverage</em></h2>
   <div class="grid2">${availableVerticals
@@ -4201,6 +4194,13 @@ ${availableVerticals.length ? `<section class="block"><div class="container">
   </div>
   <div class="prose" style="margin-top:24px"><p>${esc(state.buildingCode.notes)}</p><p>${esc(state.marketNotes)}</p></div>
 </div></section>
+${directoryCities.length ? `<section class="block"><div class="container">
+  <h2>More ${esc(state.name)} <em>City Coverage</em></h2>
+  <p class="prose">Explore consolidated engineering hubs for Census-verified incorporated places across ${esc(state.name)}. Each hub covers the major discipline, facility, permit, assessment, renovation, and buyer-intent clusters under one canonical city URL.</p>
+  <div class="linkrow linkrow--quiet">${directoryCities
+    .map((city) => `<a href="/locations/${state.slug}/${city.slug}/">${esc(city.name)} engineering services</a>`)
+    .join("")}</div>
+</div></section>` : ""}
 ${
   stateCities.length
     ? `<section class="block"><div class="container">
@@ -4217,10 +4217,10 @@ ${
 }
 ${specialtyLocationPages.length ? `<section class="block"><div class="container">
   <h2>${esc(state.name)} <em>Specialty Location Services</em></h2>
-  ${specialtyCityRoots.length ? `<div class="linkrow">${specialtyCityRoots.map((slug) =>
+  ${specialtyCityRoots.length ? `<div class="linkrow linkrow--quiet">${specialtyCityRoots.map((slug) =>
     `<a href="/locations/${state.slug}/${slug}/">${esc(slug.replace(/-/g, " "))} service area</a>`
   ).join("")}</div>` : ""}
-  <div class="linkrow">${specialtyLocationPages.map((p) =>
+  <div class="linkrow linkrow--quiet">${specialtyLocationPages.map((p) =>
     `<a href="/locations/${p.stateSlug}/${p.citySlug}/${p.serviceSlug}/">${esc(p.title)}</a>`
   ).join("")}</div>
 </div></section>` : ""}
@@ -5906,7 +5906,7 @@ ${breadcrumb(crumbs)}
      <div class="card"><div class="label">Project-specific PE coverage review</div><p>We verify the engineer, discipline, jurisdiction, firm authorization, and AHJ requirements for each project before confirming available coverage.</p></div>
      <div class="card"><div class="label">Coordinated engineering disciplines</div><p>When the requested disciplines and project scope align, our available team can coordinate structural, MEP, civil, and geotechnical deliverables.</p></div>
     <div class="card"><div class="label">Responsive Intake</div><p>We review project requests for an initial proposal response and structure deliverable milestones around your permit or construction schedule when scope and records permit.</p></div>
-     <div class="card"><div class="label">The firm behind the work</div><p>Apex Grid is a veteran-owned, Black-owned firm with 20+ engineers and 10+ licensed PEs, rated 5.0 stars on Google — supporting commercial, industrial, healthcare, and government projects, with same-day quotes on qualifying scopes.</p></div>
+     <div class="card"><div class="label">The firm behind the work</div><p>Apex Grid is a veteran-owned firm with 20+ engineers and 10+ licensed PEs, rated 5.0 stars on Google — supporting commercial, industrial, healthcare, and government projects, with same-day quotes on qualifying scopes.</p></div>
   </div>
 </div></section>
 
@@ -6136,7 +6136,7 @@ function solutionPage(page: SolutionPage): string {
         <p>We work from architectural PDFs, contractor sketches, or existing CAD files and produce stamped engineering documents, permit drawings, and calculations that building departments accept the first time.</p>
         <h3>Get Started</h3>
         <p>Send us a brief description of your project or attach your drawings. We'll review the scope and respond with a proposal within one business day.</p>
-        <a class="btn btn--primary" href="/contact/">Send Project Details</a>
+        <a class="text-link" href="/contact/">Send Project Details</a>
       </div>
     </section>
 
@@ -6165,8 +6165,8 @@ function solutionPage(page: SolutionPage): string {
       <div class="container">
         <h2>Ready to Move Forward?</h2>
         <p>PE-stamped engineering documents, delivered on your schedule, from engineers who've solved this problem before.</p>
-        <a class="btn btn--primary" href="/contact/">Get a Proposal</a>
-        <a class="btn btn--secondary" href="tel:+14804900064">480-490-0064</a>
+        <a class="text-link" href="/contact/">Get a Proposal</a>
+        <a class="text-link" href="tel:+14804900064">480-490-0064</a>
       </div>
     </section>`;
 
