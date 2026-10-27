@@ -39,11 +39,11 @@ export const PRIORITY_MARKET_HUBS: PriorityMarketHub[] = [
       { label: "Orange County structural engineering", href: "/locations/california/orange-county/structural-engineering/" },
       { label: "Orange County MEP engineering", href: "/locations/california/orange-county/mep-engineering/" },
       { label: "Engineering resources for developers", href: "/resources/developers/" },
-      { label: "Request an engineering estimate", href: "/estimate/" },
+      { label: "Request a project review", href: "/contact" },
     ],
     faqs: [
       { question: "Does Orange County have one engineering permit authority?", answer: "No. Incorporated cities generally administer their own reviews, while county agencies may serve unincorporated areas or specific functions. I confirm the project address and responsible authority before defining permit-document requirements." },
-      { question: "What should I send for an Orange County engineering estimate?", answer: "Send the address, current drawings, intended use, scope narrative, requested disciplines, schedule, existing reports, and any comments already issued. I use those records to identify missing inputs instead of filling gaps with assumptions." },
+      { question: "What should I send for an Orange County engineering project review?", answer: "Send the address, current drawings, intended use, scope narrative, requested disciplines, schedule, existing reports, and any comments already issued. I use those records to identify missing inputs instead of filling gaps with assumptions." },
       { question: "Can Apex Grid support structural and MEP coordination together?", answer: "Yes, when those disciplines are part of the agreed scope. I define interfaces such as equipment support, penetrations, shafts, ceiling space, utilities, and existing-system capacity so responsibilities are clear." },
       { question: "Are coastal requirements the same throughout Orange County?", answer: "No. Coastal exposure, flood mapping, soils, local overlays, and review procedures depend on the parcel and jurisdiction. Those conditions require project-specific verification rather than a countywide conclusion." },
       { question: "Who decides whether an Orange County project is approved?", answer: "The applicable authority having jurisdiction controls its requirements, interpretation, review, and approval. Engineering documents address the agreed scope but cannot promise a particular permit outcome." },
@@ -70,7 +70,7 @@ export const PRIORITY_MARKET_HUBS: PriorityMarketHub[] = [
       { label: "San Francisco structural engineering", href: "/locations/california/san-francisco/structural-engineering/" },
       { label: "San Jose engineering", href: "/locations/california/san-jose/" },
       { label: "Oakland engineering", href: "/locations/california/oakland/" },
-      { label: "Request an engineering estimate", href: "/estimate/" },
+      { label: "Request a project review", href: "/contact" },
     ],
     faqs: [
       { question: "Is the Bay Area one permitting jurisdiction?", answer: "No. Each project must be tied to its actual city, county, and reviewing agencies. I confirm that authority structure before relying on a submittal procedure or local requirement." },
@@ -101,7 +101,7 @@ export const PRIORITY_MARKET_HUBS: PriorityMarketHub[] = [
       { label: "Riverside engineering", href: "/locations/california/riverside/" },
       { label: "San Bernardino engineering", href: "/locations/california/san-bernardino/" },
       { label: "Industrial engineering services", href: "/industries/industrial/" },
-      { label: "Request an engineering estimate", href: "/estimate/" },
+      { label: "Request a project review", href: "/contact" },
     ],
     faqs: [
       { question: "Which authority reviews an Inland Empire project?", answer: "It depends on the address. A city may lead the review, while county, fire, utility, flood-control, or other agencies may also have roles. I identify those interfaces for the actual site." },
@@ -132,7 +132,7 @@ export const PRIORITY_MARKET_HUBS: PriorityMarketHub[] = [
       { label: "Alexandria engineering", href: "/locations/virginia/alexandria/" },
       { label: "Manassas engineering", href: "/locations/virginia/manassas/" },
       { label: "Federal engineering services", href: "/industries/federal/" },
-      { label: "Request an engineering estimate", href: "/estimate/" },
+      { label: "Request a project review", href: "/contact" },
     ],
     faqs: [
       { question: "Is Northern Virginia one permit jurisdiction?", answer: "No. Counties and independent cities administer their own processes, and other agencies may participate. I confirm the project address and authority structure before defining submittal requirements." },
@@ -163,10 +163,10 @@ export const PRIORITY_MARKET_HUBS: PriorityMarketHub[] = [
       { label: "Northern Virginia engineering", href: "/locations/virginia/northern-virginia/" },
       { label: "Alexandria engineering", href: "/locations/virginia/alexandria/" },
       { label: "Engineering resources for architects", href: "/resources/architects/" },
-      { label: "Request an engineering estimate", href: "/estimate/" },
+      { label: "Request a project review", href: "/contact" },
     ],
     faqs: [
-      { question: "What should I send for an Arlington engineering estimate?", answer: "Send the property address, current and existing drawings, proposed use and scope, requested disciplines, target milestone, site photos, available reports, and any Arlington County comments already issued." },
+      { question: "What should I send for an Arlington engineering project review?", answer: "Send the property address, current and existing drawings, proposed use and scope, requested disciplines, target milestone, site photos, available reports, and any Arlington County comments already issued." },
       { question: "Can engineering proceed when existing drawings are incomplete?", answer: "Sometimes, but missing records must be addressed through stated assumptions, field verification, selective investigation, or other evidence appropriate to the requested conclusion. I will not represent an unknown condition as verified." },
       { question: "How are structural and MEP changes coordinated in a tenant improvement?", answer: "I identify interfaces such as openings, equipment loads, curbs, shafts, ceiling space, utility capacity, and routing. The final coordination responsibilities depend on the agreed disciplines and project team." },
       { question: "Does a prior Arlington permit establish current approval?", answer: "No. Prior records are useful evidence, but the current project must follow the requirements and review decisions applicable to its own scope and submittal." },
@@ -199,12 +199,12 @@ export function priorityMarketHubPage(page: PriorityMarketHub): string {
   const body = `
 <nav class="breadcrumbs">${crumbs.map((crumb, index) => index === crumbs.length - 1 ? `<span>${crumb.name}</span>` : `<a href="${crumb.href}">${crumb.name}</a>`).join(" / ")}</nav>
 <section class="hero"><div class="container"><p class="kicker">Priority market engineering</p><h1>${page.market} Engineering Services</h1><p class="lede">${page.intro}</p><p class="byline">By ${PRIORITY_MARKET_AUTHOR}</p></div></section>
-<section class="block"><div class="container"><h2>Plan for the actual project and jurisdiction</h2><p>${page.context}</p><p>I do not use a regional page to claim that every service is available under every condition. Professional engineering services depend on the project jurisdiction, discipline, applicable licensure, scope, and team. The estimate process is where I confirm what Apex Grid can responsibly support.</p></div></section>
+<section class="block"><div class="container"><h2>Plan for the actual project and jurisdiction</h2><p>${page.context}</p><p>I do not use a regional page to claim that every service is available under every condition. Professional engineering services depend on the project jurisdiction, discipline, applicable licensure, scope, and team. The intake process is where I confirm what Apex Grid can responsibly support.</p></div></section>
 <section class="block"><div class="container"><h2>Information to organize before engineering begins</h2><ul>${page.planningNotes.map((note) => `<li>${note}</li>`).join("")}</ul><p>Clear source documents make uncertainty easier to manage. When records conflict, I keep the conflict visible and identify the verification needed instead of selecting the most convenient assumption.</p></div></section>
 <section class="block"><div class="container"><h2>Coordinate scope, records, and review</h2><p>I recommend one current drawing set, a written scope matrix, and a record of open decisions. Permit comments should be tracked to the sheet, calculation, or response that resolves them. Field changes should return to the responsible design team before they are treated as approved work.</p><p>Engineering is most useful when each deliverable supports a defined decision: feasibility, design development, permit review, pricing, construction, or an existing-condition response. I will help identify the next appropriate step without inventing a universal fee, schedule, or approval promise.</p></div></section>
 <section class="block recommended-resources"><div class="container"><h2>Related engineering pages</h2><ul>${page.relatedLinks.map((link) => `<li><a href="${link.href}">${link.label}</a></li>`).join("")}</ul></div></section>
 <section class="block faq"><div class="container"><h2>Frequently Asked Questions</h2>${page.faqs.map((faq) => `<details><summary>${faq.question}</summary><div class="a">${faq.answer}</div></details>`).join("")}</div></section>
-<section class="ctaband"><div class="container"><h2>Need an engineering scope for a project in ${page.market}?</h2><p>Share the address, current documents, requested disciplines, and the decision your team needs to make.</p><a class="cta" href="/estimate/">Request an Estimate</a></div></section>`;
+<section class="ctaband"><div class="container"><h2>Need an engineering scope for a project in ${page.market}?</h2><p>Share the address, current documents, requested disciplines, and the decision your team needs to make.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>`;
   return htmlShell({
     title: page.title,
     description: page.description,
