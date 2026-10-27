@@ -167,7 +167,7 @@ export function phase11Page(p: Project): string {
       </div>
       <div class="statgrid">${p.stats.map(s => `<div class="cell"><div class="k">${esc(s.label)}</div><strong>${esc(s.value)}</strong></div>`).join("")}</div>
       <div class="prose" style="margin-top:24px"><p>Disciplines: ${p.disciplines.map(d => esc(d)).join(", ")}.</p></div>
-      <div class="linkrow">${p.links.map(l => `<a href="${l.href}">${esc(l.label)}</a>`).join("")}<a href="/estimate/">Request an engineering estimate</a></div>
+      <div class="linkrow">${p.links.map(l => `<a href="${l.href}">${esc(l.label)}</a>`).join("")}<a href="/contact">Request a project review</a></div>
     </div></section>
     <section class="block"><div class="container">
       <h2>Frequently Asked Questions</h2>
