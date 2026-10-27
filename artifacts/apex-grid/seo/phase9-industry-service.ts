@@ -279,6 +279,6 @@ export function phase9Page(page: Phase9IndustryServicePage): string {
 <section class="block"><div class="container"><h2>Typical <em>engineering questions</em></h2><ul class="scope">${page.topics.map((topic) => `<li>${esc(topic)}</li>`).join("")}</ul></div></section>
 <section class="block recommended-resources"><div class="container"><h2>Related <em>resources and services</em></h2><ul>${page.links.map((link) => `<li><a href="${link.href}">${esc(link.label)}</a></li>`).join("")}</ul></div></section>
 <section class="block faq"><div class="container"><h2>Frequently Asked <em>Questions</em></h2>${page.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
-<section class="ctaband"><div class="container"><h2>Define the next engineering decision</h2><p>Share the address, existing records, project use, requested discipline, and the decision your team needs to make.</p><a class="cta" href="/estimate/">Request an Estimate</a></div></section>`;
+<section class="ctaband"><div class="container"><h2>Define the next engineering decision</h2><p>Share the address, existing records, project use, requested discipline, and the decision your team needs to make.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>`;
   return htmlShell({ title: page.title, description: page.description, canonical: `${SITE}${url}`, schemaJson: [serviceSchema, breadcrumbSchema, faqSchema], body });
 }
