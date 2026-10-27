@@ -76,6 +76,57 @@ footer a:hover{color:var(--primary)}
 .statgrid .cell{background:var(--bg);padding:22px}
 .statgrid .cell .k{font-family:'Space Grotesk';font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);margin-bottom:8px;font-weight:600}
 .statgrid .cell .v{font-size:14.5px;color:hsl(0 0% 80%)}
+/* ─── Render repair (2026-10-26): component classes used by the generate.ts page
+   families (solutions, government, industry×discipline, project-type, permit,
+   existing-building, structural-extended) that were never defined in this
+   stylesheet. Without them the families rendered unstyled: .card-grid children
+   are inline <a class="card"> elements whose block <h3> children fragment the
+   inline box, painting over the section heading and each other (the clipped /
+   overlapped "Related Engineering Solutions" defect), .hero-inner content ran
+   flush to the viewport edges, and section.faq was capped at 860px hard-left. */
+.section{padding:56px 0;border-bottom:1px solid var(--border)}
+.section h2{font-size:28px;margin-bottom:20px}
+.section h2 em{color:var(--primary);font-style:normal}
+.section h3{font-size:19px;margin:24px 0 10px}
+.section p{color:hsl(0 0% 74%);margin-bottom:18px}
+.container--narrow{max-width:860px}
+.hero-inner{max-width:1200px;margin:0 auto;padding:0 24px}
+.hero .btn{margin-top:28px}
+.btn{display:inline-block;background:transparent;border:1px solid var(--border);color:var(--fg);font-weight:700;font-size:14px;padding:12px 24px;border-radius:2px}
+.btn--primary{background:var(--primary);border-color:var(--primary);color:var(--primary-fg)}
+.btn--primary:hover{background:hsl(0 72% 42%)}
+.btn--secondary{margin-left:12px}
+.section .btn{margin-top:20px}
+.card-grid{display:grid;gap:16px}
+.card-grid--2{grid-template-columns:repeat(2,1fr)}
+.card-grid--3{grid-template-columns:repeat(3,1fr)}
+.card-grid--4{grid-template-columns:repeat(4,1fr)}
+a.card{display:block}
+.card-grid .card h3{font-size:16px;margin-top:0;margin-bottom:6px}
+.card-grid .card p{color:var(--muted)}
+.check-list{list-style:none;display:grid;gap:12px;max-width:900px}
+.check-list li{background:var(--card);border:1px solid var(--border);padding:14px 18px;font-size:14.5px;color:hsl(0 0% 78%);border-left:3px solid var(--primary)}
+.cta-band{padding:72px 0}
+.cta-band h2{font-size:32px;margin-bottom:14px}
+.cta-band p{color:var(--muted);margin-bottom:28px;max-width:640px}
+section.faq{max-width:none}
+.faq-list{max-width:860px}
+.faq-list details{border:1px solid var(--border);background:var(--card);margin-bottom:10px}
+.faq-list summary{cursor:pointer;padding:18px 22px;font-family:'Space Grotesk';font-weight:600;font-size:15px}
+.faq-list .a{padding:0 22px 18px;color:var(--muted);font-size:14.5px}
+.detail-list{display:grid;gap:10px}
+.detail-list dt{font-family:'Space Grotesk';font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--primary);font-weight:600}
+.detail-list dd{color:hsl(0 0% 78%);font-size:14.5px;margin-bottom:8px}
+.direct-answer{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--primary);padding:18px 22px;margin-bottom:18px}
+.direct-answer p{margin-bottom:0;color:var(--fg)}
+.byline{font-size:13px;color:var(--muted)}
+.founder-note{font-size:13.5px;color:var(--muted);font-style:italic}
+.sitemap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+.sitemap-col h3{font-size:16px;margin-bottom:12px}
+.sitemap-col ul{list-style:none}
+.sitemap-col li{margin-bottom:8px;font-size:14px;color:hsl(0 0% 78%)}
+@media(max-width:1000px){.card-grid--3,.card-grid--4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.card-grid--2,.card-grid--3,.card-grid--4{grid-template-columns:1fr}.btn--secondary{margin-left:0;margin-top:12px}}
 `;
 
 function header(): string {
