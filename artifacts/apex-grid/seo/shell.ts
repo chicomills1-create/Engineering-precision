@@ -127,6 +127,19 @@ section.faq{max-width:none}
 .sitemap-col li{margin-bottom:8px;font-size:14px;color:hsl(0 0% 78%)}
 @media(max-width:1000px){.card-grid--3,.card-grid--4{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.card-grid--2,.card-grid--3,.card-grid--4{grid-template-columns:1fr}.btn--secondary{margin-left:0;margin-top:12px}}
+/* ─── Cleanup Phase 2 tail (2026-10-27): quiet tier for demoted asks + chip walls.
+   .text-link replaces button styling on the repeated asks of the solutions /
+   government family (mid-page band + closing band): same words, same targets,
+   no button box — the hero CTA stays the family's one loud ask.
+   .linkrow--quiet renders long auto-generated link lists (locations city
+   coverage wall + specialty rows) as small muted text links: every link stays
+   (SEO asset); only the presentation drops a tier. */
+.text-link{color:var(--primary);font-weight:600;font-size:15px}
+.text-link:hover{text-decoration:underline}
+.text-link + .text-link{margin-left:24px}
+.linkrow--quiet{gap:2px 4px}
+.linkrow--quiet a{border:none;background:transparent;padding:2px 8px 2px 0;font-size:12px;color:var(--muted)}
+.linkrow--quiet a:hover{border-color:transparent;color:var(--primary);text-decoration:underline}
 `;
 
 function header(): string {
