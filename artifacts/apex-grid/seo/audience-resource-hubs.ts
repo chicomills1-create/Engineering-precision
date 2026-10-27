@@ -28,7 +28,7 @@ export const AUDIENCE_RESOURCE_HUBS: AudienceResourceHub[] = [
       { label: "When do you need a structural engineer?", href: "/resources/structural/when-do-you-need-a-structural-engineer/" },
       { label: "Engineering answers library", href: "/answers/" },
       { label: "Engineering for architects", href: "/for-architects/" },
-      { label: "Request an estimate", href: "/estimate/" },
+      { label: "Request a project review", href: "/contact" },
     ],
     sections: [
       { heading: "Start with a shared scope", paragraphs: [
@@ -37,7 +37,7 @@ export const AUDIENCE_RESOURCE_HUBS: AudienceResourceHub[] = [
       ], bullets: ["Name the deliverable and review milestone", "Mark existing conditions that still need verification", "Record who owns unresolved design decisions"] },
       { heading: "Coordinate the handoff", paragraphs: [
         "I look for interfaces: ceiling zones, shafts, equipment clearances, structure-to-envelope details, site utilities, and energy or accessibility documentation. Early interface notes reduce the chance that a late engineering change quietly becomes an architectural redesign.",
-        `See how Apex Grid supports ${link("/for-architects/", "architects")} and send the project context through the ${link("/estimate/", "estimate request")} when you are ready for a scoped conversation.`,
+        `See how Apex Grid supports ${link("/for-architects/", "architects")} and send the project context through the ${link("/contact", "project request")} when you are ready for a scoped conversation.`,
       ] },
     ],
     faqs: [
@@ -59,7 +59,7 @@ export const AUDIENCE_RESOURCE_HUBS: AudienceResourceHub[] = [
       { label: "How to respond to plan-check comments", href: "/resources/permit/responding-to-city-comments/" },
       { label: "Engineering answers library", href: "/answers/" },
       { label: "Engineering for contractors", href: "/for-contractors/" },
-      { label: "Request an estimate", href: "/estimate/" },
+      { label: "Request a project review", href: "/contact" },
     ],
     sections: [
       { heading: "Turn field conditions into usable inputs", paragraphs: [
@@ -68,7 +68,7 @@ export const AUDIENCE_RESOURCE_HUBS: AudienceResourceHub[] = [
       ], bullets: ["Reference the sheet, detail, gridline, or area", "Separate observed facts from proposed fixes", "Identify schedule and sequencing constraints"] },
       { heading: "Keep responses coordinated", paragraphs: [
         "A structural change can affect MEP routing, fire protection, architecture, or civil work. I recommend routing the proposed solution through the responsible design team before installation and keeping superseded sketches out of the active field set.",
-        `Review the support available for ${link("/for-contractors/", "contractors")} and use the ${link("/estimate/", "estimate CTA")} to describe an upcoming response, correction, or design-assist need.`,
+        `Review the support available for ${link("/for-contractors/", "contractors")} and use the ${link("/contact", "contact form")} to describe an upcoming response, correction, or design-assist need.`,
       ] },
     ],
     faqs: [
@@ -76,7 +76,7 @@ export const AUDIENCE_RESOURCE_HUBS: AudienceResourceHub[] = [
       { question: "Can Apex Grid approve a field change immediately?", answer: "A field change requires review of the actual condition, design intent, affected disciplines, and professional responsibility. I will not treat an informal message as approval or direct installation without the appropriate documented response." },
       { question: "Should a contractor send the full drawing set?", answer: "Send the current set and identify the relevant sheets, details, and revisions. Providing the complete context is helpful when interfaces may be affected, but a focused index makes review faster." },
       { question: "Does an engineering response guarantee inspection approval?", answer: "No. The inspector and authority having jurisdiction control inspection and approval. A response addresses the reviewed engineering question within its stated scope and does not promise a particular outcome." },
-      { question: "How do I request help with a plan-check correction?", answer: "Send the complete comment notice, current and prior submittals, relevant calculations or drawings, project address, and your proposed response context through the estimate request. I will help define what engineering review is needed." },
+      { question: "How do I request help with a plan-check correction?", answer: "Send the complete comment notice, current and prior submittals, relevant calculations or drawings, project address, and your proposed response context through the contact form. I will help define what engineering review is needed." },
     ],
   },
   {
@@ -90,7 +90,7 @@ export const AUDIENCE_RESOURCE_HUBS: AudienceResourceHub[] = [
       { label: "How much does structural engineering cost?", href: "/resources/structural/structural-engineering-cost/" },
       { label: "Engineering answers library", href: "/answers/" },
       { label: "Engineering for developers", href: "/for-developers/" },
-      { label: "Request an estimate", href: "/estimate/" },
+      { label: "Request a project review", href: "/contact" },
     ],
     sections: [
       { heading: "Use engineering to de-risk decisions", paragraphs: [
@@ -99,7 +99,7 @@ export const AUDIENCE_RESOURCE_HUBS: AudienceResourceHub[] = [
       ], bullets: ["Define the decision the investigation must support", "Identify missing surveys, reports, and as-builts", "Keep jurisdictional questions with the authority that decides them"] },
       { heading: "Plan the design handoff", paragraphs: [
         "A useful engineering engagement defines deliverables, assumptions, coordination boundaries, review milestones, and the information the team must provide. That makes proposals comparable without inventing a universal rate or schedule.",
-        `See the development perspective on ${link("/for-developers/", "Apex Grid for developers")} and use the ${link("/estimate/", "estimate request")} to share the site and program context.`,
+        `See the development perspective on ${link("/for-developers/", "Apex Grid for developers")} and use the ${link("/contact", "project request")} to share the site and program context.`,
       ] },
     ],
     faqs: [
@@ -107,7 +107,7 @@ export const AUDIENCE_RESOURCE_HUBS: AudienceResourceHub[] = [
       { question: "Can an early review confirm that a site is buildable?", answer: "An early review can identify constraints and investigation needs, but it cannot guarantee feasibility or entitlement. Buildability depends on the actual site, program, records, design, and decisions by applicable authorities." },
       { question: "How should a developer compare engineering proposals?", answer: "Compare the defined deliverables, assumptions, exclusions, coordination responsibilities, review milestones, site-visit needs, and requested inputs—not just a headline fee or a generic unit rate." },
       { question: "Does Apex Grid provide local permitting guarantees?", answer: "No. I can help organize engineering documentation and identify questions for the authority having jurisdiction, but the authority controls its current requirements, interpretation, review, and approval." },
-      { question: "What should I include in an estimate request?", answer: "Include the project location, program, current documents, desired milestone, known constraints, requested disciplines, and a practical description of the decision or deliverable you need next." },
+      { question: "What should I include in a project request?", answer: "Include the project location, program, current documents, desired milestone, known constraints, requested disciplines, and a practical description of the decision or deliverable you need next." },
     ],
   },
   {
@@ -121,7 +121,7 @@ export const AUDIENCE_RESOURCE_HUBS: AudienceResourceHub[] = [
       { label: "When do you need a structural engineer?", href: "/resources/structural/when-do-you-need-a-structural-engineer/" },
       { label: "Engineering answers library", href: "/answers/" },
       { label: "Engineering for property managers", href: "/for-property-managers/" },
-      { label: "Request an estimate", href: "/estimate/" },
+      { label: "Request a project review", href: "/contact" },
     ],
     sections: [
       { heading: "Document the building before the decision", paragraphs: [
@@ -130,7 +130,7 @@ export const AUDIENCE_RESOURCE_HUBS: AudienceResourceHub[] = [
       ], bullets: ["Record when and where the condition was observed", "Preserve reports, photos, and prior repair records", "Separate temporary controls from permanent design work"] },
       { heading: "Coordinate tenant and capital work", paragraphs: [
         "Tenant improvements often touch structure, electrical capacity, HVAC, plumbing, life safety, accessibility, and civil interfaces. I recommend defining the affected systems and review milestone before promising a tenant a particular layout, date, or approval.",
-        `Learn about ${link("/for-property-managers/", "Apex Grid for property managers")} and send the building context through the ${link("/estimate/", "estimate CTA")} for a scoped review.`,
+        `Learn about ${link("/for-property-managers/", "Apex Grid for property managers")} and send the building context through the ${link("/contact", "contact form")} for a scoped review.`,
       ] },
     ],
     faqs: [
@@ -138,7 +138,7 @@ export const AUDIENCE_RESOURCE_HUBS: AudienceResourceHub[] = [
       { question: "Can a photo review replace a site visit?", answer: "Sometimes photos and records are enough for an initial triage, but uncertain or concealed existing conditions may require field verification. I will identify what evidence is needed for the requested conclusion." },
       { question: "Can a property manager promise a tenant that work will be approved?", answer: "No. Approval depends on the final scope, documents, responsible professionals, and the authority having jurisdiction. Keep tenant commitments conditional until those reviews are complete." },
       { question: "How should urgent building concerns be handled?", answer: "Follow the property's emergency, safety, and facility procedures first, including contacting appropriate emergency or maintenance personnel. Engineering review supports decisions but is not an emergency-response replacement." },
-      { question: "What does an estimate request need for tenant improvement work?", answer: "Share the building address, tenant use, proposed layout or scope, available plans, affected systems, desired milestone, and known landlord or jurisdictional requirements. I can then help define the engineering scope." },
+      { question: "What does a project request need for tenant improvement work?", answer: "Share the building address, tenant use, proposed layout or scope, available plans, affected systems, desired milestone, and known landlord or jurisdictional requirements. I can then help define the engineering scope." },
     ],
   },
 ];
@@ -153,7 +153,7 @@ ${crumbs.map((crumb, i) => i === crumbs.length - 1 ? `<span>${crumb.name}</span>
 ${page.sections.map((section) => `<section class="block"><div class="container"><h2>${section.heading}</h2>${section.paragraphs.map((p) => `<p>${p}</p>`).join("")}${section.bullets ? `<ul>${section.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>` : ""}</div></section>`).join("")}
 <section class="block recommended-resources"><div class="container"><h2>Recommended resources</h2><ul>${page.relatedResources.map((resource) => `<li><a href="${resource.href}">${resource.label}</a></li>`).join("")}</ul></div></section>
 <section class="block faq"><div class="container"><h2>Frequently Asked Questions</h2>${page.faqs.map((faq) => `<details><summary>${faq.question}</summary><div class="a">${faq.answer}</div></details>`).join("")}</div></section>
-<section class="ctaband"><div class="container"><h2>Need a scoped engineering conversation?</h2><p>Share the project context and I will help identify the next useful engineering step.</p><a class="cta" href="/estimate/">Request an Estimate</a></div></section>`;
+<section class="ctaband"><div class="container"><h2>Need a scoped engineering conversation?</h2><p>Share the project context and I will help identify the next useful engineering step.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>`;
   return htmlShell({
     title: page.title,
     description: page.description,
