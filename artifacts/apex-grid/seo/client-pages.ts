@@ -394,13 +394,13 @@ export const CLIENT_PAGES: ClientPage[] = [
       { label: "Who Apex Grid works with", href: "/who-we-work-with/" },
     ],
     faqs: [
-      { question: "What should a builder provide for an engineering estimate?", answer: "Share the project location, intended use, current drawings, site records, requested disciplines, delivery method, target milestone, and known jurisdictional requirements. I will identify missing inputs rather than price from unsupported assumptions." },
+      { question: "What should a builder provide for an engineering project review?", answer: "Share the project location, intended use, current drawings, site records, requested disciplines, delivery method, target milestone, and known jurisdictional requirements. I will identify missing inputs rather than price from unsupported assumptions." },
       { question: "Can one engineering package be reused on multiple building sites?", answer: "Some design standards may be repeatable, but each site can have different loads, soils, utilities, codes, amendments, and authorization requirements. Reuse must be evaluated for the actual location and scope." },
       { question: "Who controls permit approval for a builder's project?", answer: "The authority having jurisdiction controls its interpretation, review, and approval. I prepare the agreed engineering scope from available project information and respond to review comments within that scope." },
       { question: "When should a builder involve engineering?", answer: "Early involvement is useful when structural systems, site constraints, utilities, equipment, or permit requirements affect layout and cost. The appropriate timing depends on which decision the engineering work must support." },
     ],
-    cta: "Request a Builder Project Estimate",
-    ctaHref: "/estimate/",
+    cta: "Request a Builder Project Review",
+    ctaHref: "/contact",
   },
   {
     slug: "owner-representatives",
@@ -439,8 +439,8 @@ export const CLIENT_PAGES: ClientPage[] = [
       { question: "Does owner-side engineering review replace the engineer of record?", answer: "No. Advisory or scope review does not transfer the professional responsibility assigned to the engineer of record or other project participants. Responsibilities must be stated for the specific engagement." },
       { question: "How are jurisdictional requirements handled?", answer: "The authority having jurisdiction controls its current requirements and approval decisions. I identify known questions and verify project-specific professional authorization before committing to regulated work." },
     ],
-    cta: "Request an Owner-Side Engineering Estimate",
-    ctaHref: "/estimate/",
+    cta: "Request an Owner-Side Engineering Review",
+    ctaHref: "/contact",
   },
   {
     slug: "construction-managers",
@@ -479,8 +479,8 @@ export const CLIENT_PAGES: ClientPage[] = [
       { question: "When does a field response require revised permit documents?", answer: "That depends on the nature of the change and the authority having jurisdiction. The design team should evaluate whether calculations, drawings, deferred-submittal records, or a formal permit revision are required." },
       { question: "Does Apex Grid promise a fixed RFI turnaround?", answer: "No. Timing depends on complete inputs, issue complexity, affected disciplines, field verification, professional review, and current workload. I will identify missing information and the practical review path." },
     ],
-    cta: "Request a Construction Support Estimate",
-    ctaHref: "/estimate/",
+    cta: "Request a Construction Support Review",
+    ctaHref: "/contact",
   },
   {
     slug: "portfolio-clients",
@@ -519,8 +519,8 @@ export const CLIENT_PAGES: ClientPage[] = [
       { question: "Can Apex Grid rank portfolio repairs by urgency?", answer: "Engineering observations can help identify condition significance and investigation needs within the agreed scope. Owners must combine that information with operations, occupancy, budget, and other professional advice." },
       { question: "Are engineering standards identical in every portfolio market?", answer: "No. Codes, amendments, climate loads, site conditions, utilities, and professional authorization vary. Shared standards still require project-specific review." },
     ],
-    cta: "Request a Portfolio Engineering Estimate",
-    ctaHref: "/estimate/",
+    cta: "Request a Portfolio Engineering Review",
+    ctaHref: "/contact",
   },
   {
     slug: "national-accounts",
@@ -559,8 +559,8 @@ export const CLIENT_PAGES: ClientPage[] = [
       { question: "How should a national account start an engineering program?", answer: "Start with representative project types, expected annual volume, locations, current standards, source documents, participating vendors, desired deliverables, and the internal decisions the engineering process must support." },
       { question: "Does a national program guarantee availability in every market?", answer: "No. I confirm capacity, discipline, responsible-professional licensure, firm authorization, and jurisdictional requirements for each assignment before Apex Grid commits." },
     ],
-    cta: "Request a National Program Estimate",
-    ctaHref: "/estimate/",
+    cta: "Request a National Program Review",
+    ctaHref: "/contact",
   },
 ];
 
