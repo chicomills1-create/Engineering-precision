@@ -20,7 +20,6 @@ import RequestProposal from '@/pages/RequestProposal';
 import RfpRfqSubmission from '@/pages/RfpRfqSubmission';
 import Unsubscribe from '@/pages/Unsubscribe';
 import Audience from '@/pages/Audience';
-import Estimate from '@/pages/Estimate';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Route, Switch, Router as WouterRouter, useLocation } from 'wouter';
 import { lazy, Suspense, useEffect } from 'react';
@@ -133,7 +132,6 @@ function Router() {
         <Route path="/contact" component={Contact} />
         <Route path="/request-proposal" component={RequestProposal} />
         <Route path="/procurement/submit-rfp-rfq/" component={RfpRfqSubmission} />
-        <Route path="/estimate" component={Estimate} />
         <Route path="/submit-project">
           <LazyClient page="submit" />
         </Route>
