@@ -69,6 +69,14 @@ export default function Contact() {
     try {
       const params = new URLSearchParams(window.location.search);
       const partnerCode = params.get("partner") || undefined;
+      // Fleet attribution (2026-10-27): review-fleet properties link here
+      // as /contact?ref=<property-slug>. Capture it into the lead's source
+      // ("fleet:<slug>") so fleet inquiries are distinguishable from direct
+      // traffic in the leads table and the SEO status rollup, which groups
+      // by source. utm_source, when present, still wins; the raw query
+      // string is also preserved verbatim in landingPath below.
+      const refParam = params.get("ref");
+      const fleetRef = refParam && /^[a-z0-9-]{1,60}$/.test(refParam) ? refParam : undefined;
       const leadPayload = {
         name: data.name,
         email: data.email,
@@ -79,7 +87,7 @@ export default function Contact() {
         whenNeeded: data.whenNeeded || undefined,
         message: data.message,
         attachments: [],
-        source: getFirstTouchValue("utm_source") || (document.referrer ? "referral" : "direct"),
+        source: getFirstTouchValue("utm_source") || (fleetRef ? `fleet:${fleetRef}` : (document.referrer ? "referral" : "direct")),
         medium: getFirstTouchValue("utm_medium"),
         campaign: getFirstTouchValue("utm_campaign"),
         gclid: getFirstTouchValue("gclid"),
