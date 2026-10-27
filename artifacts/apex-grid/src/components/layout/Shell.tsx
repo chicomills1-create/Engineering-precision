@@ -196,10 +196,10 @@ export function Shell({ children }: { children: React.ReactNode }) {
               (480) 490-0064
             </a>
             <Link
-              href="/estimate"
+              href="/contact"
               className="h-10 px-5 whitespace-nowrap border border-primary/30 text-primary hover:bg-primary/5 font-bold text-xs uppercase tracking-wider flex items-center justify-center rounded-sm transition-colors"
             >
-              Estimate
+              Contact Us
             </Link>
             <Link
               href="/request-proposal?utm_source=website&utm_medium=organic&utm_campaign=site_header"
@@ -317,11 +317,11 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 Call (480) 490-0064
               </a>
               <Link
-                href="/estimate"
+                href="/contact"
                 className="h-12 w-full border border-primary/30 text-primary hover:bg-primary/5 font-bold text-sm uppercase tracking-wider flex items-center justify-center rounded-sm transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Instant Estimate
+                Contact Us
               </Link>
               <Link
                 href="/request-proposal?utm_source=website&utm_medium=organic&utm_campaign=mobile_nav"
@@ -368,7 +368,6 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 <li><Link href="/capabilities" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Capabilities</Link></li>
                 <li><a href="/blog/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Blog</a></li>
                 <li><a href="/locations/" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Service Areas</a></li>
-                <li><Link href="/estimate" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Instant Estimate</Link></li>
                 <li><Link href="/contact" className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary">Contact</Link></li>
                 <li className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-6">
                   <Link href="/client-portal" className="text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none">Client Portal</Link>
