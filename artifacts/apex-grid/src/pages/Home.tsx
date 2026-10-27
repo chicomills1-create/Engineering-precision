@@ -125,7 +125,7 @@ export default function Home() {
               49 states. 10+ PEs.<br /><span className="type-accent-glow">One engineering firm.</span>
             </h1>
             <p className="text-lg md:text-2xl text-foreground/80 max-w-2xl mb-12 leading-relaxed font-light">
-              Veteran-owned. Black-owned. Licensed PEs stamping drawings in days, not months —
+              Veteran-owned. Licensed PEs stamping drawings in days, not months —
               at the best price. Get out of the way — we're coming through.
             </p>
 
@@ -468,6 +468,6 @@ export default function Home() {
 
 const PAGE_META = {
   title: "Apex Grid Engineering — 49 States, 10+ PEs | PE-Stamped MEP & Structural",
-  description: "Veteran-owned, Black-owned engineering firm licensed in 49 states. PE-stamped MEP, structural, and civil — 10+ PEs, best price, same-day quotes. Franchise & retail: 100 Subway locations engineered. Talk to a human: (480) 490-0064.",
+  description: "Veteran-owned engineering firm licensed in 49 states. PE-stamped MEP, structural, and civil — 10+ PEs, best price, same-day quotes. Franchise & retail: 100 Subway locations engineered. Talk to a human: (480) 490-0064.",
   path: "/",
 };
