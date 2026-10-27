@@ -152,10 +152,10 @@ export default function Team() {
             Send us your scope. Clear proposal, fast turnaround.
           </p>
           <Link
-            href="/estimate"
+            href="/contact"
             className="inline-flex h-14 px-10 bg-primary text-white font-bold text-sm uppercase tracking-wider items-center justify-center gap-3 rounded-sm hover:bg-primary/90 transition-colors"
           >
-            Get My Price <ArrowRight className="w-4 h-4" />
+            Start Your Project <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </section>
