@@ -11758,6 +11758,13 @@ async function main() {
   fs.rmSync(legacyEstimateDir, { recursive: true, force: true });
   fs.mkdirSync(legacyEstimateDir, { recursive: true });
   fs.writeFileSync(path.join(legacyEstimateDir, "index.html"), redirectPage("/contact", "Contact Apex Grid Engineering"));
+  // Legacy /mep-engineering alias (render-strike D-2, 2026-10-27): the React
+  // prerender document served at this path flips to the app 404 on hydration;
+  // the canonical home of this content is /services/mep. Stub it like /estimate.
+  const legacyMepDir = path.join(PUBLIC, "mep-engineering");
+  fs.rmSync(legacyMepDir, { recursive: true, force: true });
+  fs.mkdirSync(legacyMepDir, { recursive: true });
+  fs.writeFileSync(path.join(legacyMepDir, "index.html"), redirectPage("/services/mep", "MEP Engineering Services"));
   pages++;
 
   // Title 24 hub + subpages
