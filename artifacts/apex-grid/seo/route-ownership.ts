@@ -7,7 +7,6 @@ export const REACT_PRERENDER_ROUTES = [
   "/",
   "/about",
   "/contact",
-  "/estimate",
   "/for-architects",
   "/for-contractors",
   "/for-developers",
