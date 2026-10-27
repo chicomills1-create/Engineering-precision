@@ -197,7 +197,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
             </a>
             <Link
               href="/contact"
-              className="h-10 px-5 whitespace-nowrap border border-primary/30 text-primary hover:bg-primary/5 font-bold text-xs uppercase tracking-wider flex items-center justify-center rounded-sm transition-colors"
+              className="h-10 px-2 whitespace-nowrap text-primary hover:text-primary/80 font-bold text-sm tracking-wide flex items-center rounded-sm transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
             >
               Contact Us
             </Link>
