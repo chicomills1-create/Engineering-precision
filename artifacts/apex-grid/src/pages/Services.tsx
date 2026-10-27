@@ -101,7 +101,7 @@ export default function Services() {
                   {s.fix}
                 </p>
                 <span className="mt-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-primary">
-                  Get my price
+                  Explore the service
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
               </div>
