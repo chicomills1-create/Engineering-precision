@@ -972,7 +972,7 @@ This file is a concise map of canonical public information. It does not imply lo
 - PE stamp in Wisconsin: ${SITE}/pe-stamp/wisconsin/
 - PE stamp in Wyoming: ${SITE}/pe-stamp/wyoming/
 - Most complete review-and-seal packages are returned within 12–24 hours; same-day quotes on qualifying scopes.
-- Start an estimate: ${SITE}/estimate
+- Start a project: ${SITE}/contact
 
 ## Services
 - Services overview: ${SITE}/services
@@ -1540,7 +1540,7 @@ function phase0ArticleFrame(
   ${sections.map((section, index) => `<section class="block" id="step-${index + 1}"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p>${section.bulletsHtml ? `<ul class="scope">${section.bulletsHtml.map((bullet) => `<li>${bullet}</li>`).join("")}</ul>` : section.bullets ? `<ul class="scope">${section.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul>` : ""}</div></div></section>`).join("")}
   ${opts.links?.length ? `<section class="block"><div class="container"><h2>${opts.directAnswer ? "Which related engineering resources can help?" : "Related Engineering Resources"}</h2><div class="linkrow">${opts.links.map((link) => `<a href="${esc(link.href)}"${/^https:\/\//.test(link.href) ? ' rel="noopener noreferrer"' : ""}>${esc(link.label)}</a>`).join("")}</div></div></section>` : ""}
   ${opts.directAnswer ? `<section class="block"><div class="container"><h2>What else do project teams ask?</h2><div class="faq">${opts.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></div></section>` : phase0FaqMarkup(opts.faqs)}
-  <section class="ctaband"><div class="container"><h2>${opts.directAnswer ? "Ready to discuss your engineering scope?" : "Discuss your engineering scope"}</h2><p>Share the project address, current records, requested deliverable, authority information, and schedule. Apex Grid confirms professional responsibility, availability, and scope before work begins.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
+  <section class="ctaband"><div class="container"><h2>${opts.directAnswer ? "Ready to discuss your engineering scope?" : "Discuss your engineering scope"}</h2><p>Share the project address, current records, requested deliverable, authority information, and schedule. Apex Grid confirms professional responsibility, availability, and scope before work begins.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
   </main>`;
   return htmlShell({
     title: opts.title,
@@ -1562,12 +1562,14 @@ function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
       .filter((candidate) => candidate.slug !== page.slug).slice(0, 3)
       .map((candidate) => ({ label: candidate.h1, href: `/answers/${candidate.slug}/` }));
   const serviceHref = "cluster" in page ? page.serviceHref : (page.serviceHref ?? "/services/");
+  // /estimate retired 2026-10-26 (Jeremy: estimates are given personally) —
+  // corpus extraLinks that still point at it render as the contact intake.
   const links = [
     ...related,
     ...("cluster" in page && page.cluster === "Cost and pricing"
-      ? [{ label: "Use our instant estimator", href: "/estimate" }]
+      ? [{ label: "Request a project review", href: "/contact" }]
       : []),
-    ...("cluster" in page ? [] : (page.extraLinks ?? [])),
+    ...("cluster" in page ? [] : (page.extraLinks ?? []).map((link) => (link.href === "/estimate" || link.href === "/estimate/" ? { label: "Request a project review", href: "/contact" } : link))),
     { label: "Engineering service for this question", href: serviceHref },
     { label: "Metro engineering guides", href: "/metros/" },
     { label: "Verified service areas", href: "/locations/" },
@@ -3263,7 +3265,7 @@ function engineeringCostEstimatorPage(
   if (!officialPeSources) throw new Error(`Missing official PE board links for estimator page: ${state.slug}`);
   const crumbs = [
     { name: "Home", href: "/" },
-    { name: "Engineering Cost Estimator", href: "/estimate" },
+    { name: "Engineering Project Scoping", href: "/contact" },
     { name: `${state.name} estimator` },
   ];
   const locationLinks = estimatorLocationLinks(state, cities, directory);
@@ -3277,7 +3279,7 @@ function engineeringCostEstimatorPage(
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: `Engineering Cost Estimator for ${state.name} Projects`,
+    name: `Engineering Project Scoping for ${state.name} Projects`,
     description: `Project-input guidance for scoping structural, MEP, civil, and energy engineering costs in ${state.name} without publishing invented rates.`,
     provider: { "@type": "ProfessionalService", name: "Apex Grid Engineering", url: SITE },
     areaServed: { "@type": "State", name: state.name },
@@ -3289,7 +3291,7 @@ function engineeringCostEstimatorPage(
 ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
   <p class="kicker">${esc(state.name)} · Engineering Intake</p>
-  <h1>${esc(state.name)} Engineering Cost Estimator</h1>
+  <h1>${esc(state.name)} Engineering Project Scoping</h1>
   <p class="lede">Understand the project inputs that shape a responsible structural, MEP, civil, or energy engineering estimate in ${esc(state.name)}. This page explains scope, code, climate, permitting, and professional-review variables; it does not invent a rate or promise an outcome.</p>
 </div></section>
 ${familyVisual("location", `Service location shown: ${state.name}.`)}
@@ -3321,16 +3323,16 @@ ${familyVisual("location", `Service location shown: ${state.name}.`)}
   <div class="linkrow">${locationLinks.map((link) => `<a href="${esc(link.href)}">${esc(link.name)} engineering location guide</a>`).join("")}</div>
 </div></section>
 <section class="block"><div class="container">
-  <h2>What to send for ${aOrAn(state.name)} ${esc(state.name)} project estimate</h2>
+  <h2>What to send for ${aOrAn(state.name)} ${esc(state.name)} project</h2>
   <div class="prose"><p>Start with the project address, plain-language scope, current drawings, photographs or measurements, equipment and utility information, survey or geotechnical records where relevant, adopted-code information, AHJ comments, desired deliverables, and schedule. The responsible engineer identifies gaps and confirms whether the requested work can be accepted.</p></div>
   <div class="linkrow"><a href="/pe-stamp/${esc(state.slug)}/">${esc(state.name)} PE stamp and license resources</a><a href="/answers/">Engineering answers library</a><a href="/answers/how-much-does-a-pe-stamp-cost/">PE stamp cost guidance</a></div>
 </div></section>
-<section class="block"><div class="container"><h2>${esc(state.name)} estimator FAQs</h2><div class="faq">${faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></div></section>
-<section class="ctaband"><div class="container"><h2>Start your ${esc(state.name)} project estimate</h2><p>Share the project address, records, requested engineering scope, authority information, and schedule through the estimate intake. Scope, professional responsibility, availability, and any fee proposal are confirmed after review.</p><a class="cta" href="/estimate">Open the Engineering Estimate</a></div></section>
+<section class="block"><div class="container"><h2>${esc(state.name)} project scoping FAQs</h2><div class="faq">${faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></div></section>
+<section class="ctaband"><div class="container"><h2>Start your ${esc(state.name)} project</h2><p>Share the project address, records, requested engineering scope, authority information, and schedule. Scope, professional responsibility, availability, and any fee proposal are confirmed after review.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
 </main>`;
   return htmlShell({
-    title: `${state.name} Engineering Cost Estimator | PE, Structural, MEP & Civil | Apex Grid`,
-    description: `${state.name} engineering cost estimator guidance: understand scope, code, climate, permitting, PE review, and project inputs without invented rates.`,
+    title: `${state.name} Engineering Project Scoping | PE, Structural, MEP & Civil | Apex Grid`,
+    description: `${state.name} engineering project scoping guidance: understand scope, code, climate, permitting, PE review, and project inputs without invented rates.`,
     canonical: `${SITE}${canonicalPath}`,
     schemaJson: [serviceSchema, faqSchema, breadcrumbSchema(crumbs)],
     body,
@@ -3540,7 +3542,7 @@ ${familyVisual("location", `Service location shown: ${metro.representativeCity},
 <section class="block"><div class="container"><h2>Evidence before <em>design decisions</em></h2><div class="prose"><p>${esc(metro.editorial.documentationLens)}</p><p>${esc(metro.editorial.deliveryLens)}</p><p>For an initial review, gather the project address, scope narrative, current architectural backgrounds, existing-condition photographs or measurements, equipment information, site or geotechnical records where relevant, prior comments, and requested deliverables. The responsible professional identifies what is sufficient for the defined question.</p></div></div></section>
 <section class="block"><div class="container"><h2>2025 Census <em>source record</em></h2><div class="prose"><p>CBSA ${metro.cbsaCode} is ranked ${metro.rank} among the eligible Metro Code 2 records in the final annual 2025 BPS sheet, ordered by Total descending. “Total” is used as published by Census; it is not a forecast, project count, engineering volume, or promise of demand.</p><p><a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">View the official Census BPS workbook (${PHASE1_SERVICE_SLUGS.length ? "MSA Units Ann" : "source"})</a></p></div></div></section>
 ${phase0FaqMarkup(faqs)}
-<section class="ctaband"><div class="container"><h2>Discuss ${aOrAn(metro.representativeCity)} ${esc(metro.representativeCity)} project</h2><p>Share the address, scope, drawings, existing records, authority information already available, and requested deliverables.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
+<section class="ctaband"><div class="container"><h2>Discuss ${aOrAn(metro.representativeCity)} ${esc(metro.representativeCity)} project</h2><p>Share the address, scope, drawings, existing records, authority information already available, and requested deliverables.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
 </main>`;
   const schema = {
     "@context": "https://schema.org",
@@ -3648,7 +3650,7 @@ ${familyVisual(motifForText(label), `Service location shown: ${metro.representat
 <section class="block"><div class="container"><h2>Related ${esc(metro.representativeCity)} <em>guides</em></h2><div class="linkrow">${related}</div></div></section>
 ${phase0FaqMarkup(faqs)}
 <section class="block"><div class="container"><h2>Professional <em>boundaries</em></h2><div class="prose"><p>Availability, scope, professional responsibility, applicable licensure, and filing requirements are confirmed per project. This guide does not invent an AHJ requirement, claim an office or project, promise approval, or publish a price. The authority having jurisdiction controls its review and decision.</p><p>The Census BPS final annual 2025 workbook reports ${metro.permitTotal2025.toLocaleString("en-US")} permitted housing units for this Metro Code 2 record, rank ${metro.rank} among the eligible records. <a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">Read the official source workbook</a>.</p></div></div></section>
-<section class="ctaband"><div class="container"><h2>Define the ${esc(label.toLowerCase())} scope</h2><p>Send the address, project scope, current documents, existing-condition evidence, comments, schedule dependencies, and requested deliverables.</p><a class="cta" href="/estimate">Start an Engineering Estimate</a></div></section>
+<section class="ctaband"><div class="container"><h2>Define the ${esc(label.toLowerCase())} scope</h2><p>Send the address, project scope, current documents, existing-condition evidence, comments, schedule dependencies, and requested deliverables.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
 </main>`;
   const serviceSchema = {
     "@context": "https://schema.org",
@@ -4225,7 +4227,7 @@ ${specialtyLocationPages.length ? `<section class="block"><div class="container"
 <section class="ctaband"><div class="container">
   <h2>Build in ${esc(state.name)} with Apex Grid</h2>
   <p>${esc(state.permitting)}</p>
-  <p><a href="/engineering-cost-estimator/${esc(state.slug)}/">${esc(state.name)} engineering cost estimator</a></p>
+  <p><a href="/engineering-cost-estimator/${esc(state.slug)}/">${esc(state.name)} engineering project scoping</a></p>
   <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
 
@@ -4763,7 +4765,6 @@ function writeSitemap(states: StateData[], cities: CityData[], directory: CityDi
     u(`${SITE}/about`, today, "monthly", "0.6"),
     u(`${SITE}/team`, today, "monthly", "0.6"),
     u(`${SITE}/contact`, today, "monthly", "0.7"),
-    u(`${SITE}/estimate`, today, "monthly", "0.8"),
     u(`${SITE}/for-architects`, today, "monthly", "0.8"),
     u(`${SITE}/for-contractors`, today, "monthly", "0.8"),
     u(`${SITE}/for-developers`, today, "monthly", "0.8"),
@@ -5609,7 +5610,7 @@ ${page.faqs ? `<section class="block"><div class="container">
 <section class="ctaband"><div class="container">
   <h2>Start Your Project</h2>
   <p>${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} Send us your scope and get a clear proposal.</p>
-  <a class="cta" href="${page.founderPerspective ? "/estimate/" : "/contact"}">Request a Proposal</a>
+  <a class="cta" href="/contact">Request a Proposal</a>
 </div></section>`;
   return htmlShell({
     title: page.title,
@@ -6805,7 +6806,7 @@ function staticStandalonePage(page: StaticPageDef): string {
         <h2>${esc(page.ctaHeading)}</h2>
         <p>${esc(page.ctaText)}</p>
         <div class="linkrow">
-          <a href="${esc(ctaHref)}">${page.ctaHref ? "Request an Estimate" : "Get in Touch"}</a>
+          <a href="${esc(ctaHref)}">${page.ctaHref ? "Request a Project Review" : "Get in Touch"}</a>
           <a href="tel:+14804900064">480-490-0064</a>
         </div>
       </div>
@@ -7451,7 +7452,7 @@ ${expansion.hub.sections.map((section) => `<section class="block"><div class="co
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
 <section class="block"><div class="container faq"><h2>${esc(expansion.stateName)} <em>FAQs</em></h2>${expansion.hub.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
 <section class="block"><div class="container"><h2>Official <em>sources</em></h2><p class="note">Review the current authority, code, licensing, and environmental information before design or filing.</p><div class="linkrow">${batch2SourceLinks(expansion.hub.sources)}</div></div></section>
-<section class="ctaband"><div class="container"><h2>Start ${aOrAn(expansion.stateName)} ${esc(expansion.stateName)} project</h2><p>Send the project address, jurisdiction, scope, records, and desired deliverable. Code edition, responsible licensure, authority review, and schedule remain project-specific.</p><p><a href="/engineering-cost-estimator/${esc(expansion.stateSlug)}/">${esc(expansion.stateName)} engineering cost estimator</a></p><a class="cta" href="/contact">Request a Project Review</a></div></section>
+<section class="ctaband"><div class="container"><h2>Start ${aOrAn(expansion.stateName)} ${esc(expansion.stateName)} project</h2><p>Send the project address, jurisdiction, scope, records, and desired deliverable. Code edition, responsible licensure, authority review, and schedule remain project-specific.</p><p><a href="/engineering-cost-estimator/${esc(expansion.stateSlug)}/">${esc(expansion.stateName)} engineering project scoping</a></p><a class="cta" href="/contact">Request a Project Review</a></div></section>
 </main>`;
   const html = htmlShell({
     title: expansion.hub.title,
@@ -7884,7 +7885,7 @@ async function main() {
     fs.mkdirSync(audienceDir, { recursive: true });
     const html = audienceResourceHubPage(audiencePage);
     if (!html.includes(`By ${AUDIENCE_RESOURCE_AUTHOR}`) || !html.includes(`rel="canonical" href="${SITE}/resources/${audiencePage.slug}/"`)
-      || !html.includes('"@type":"FAQPage"') || !html.includes('href="/estimate/"')) {
+      || !html.includes('"@type":"FAQPage"') || !html.includes('href="/contact"')) {
       throw new Error(`SEO assertion failed: malformed audience resource hub ${audiencePage.slug}`);
     }
     fs.writeFileSync(path.join(audienceDir, "index.html"), html);
@@ -7986,7 +7987,7 @@ async function main() {
       || (html.match(/<details><summary>/g) ?? []).length !== 5
       || !html.includes('"@type":"Service"')
       || !html.includes('"@type":"BreadcrumbList"')
-      || !html.includes('href="/estimate/"')
+      || !html.includes('href="/contact"')
     ) {
       throw new Error(`SEO assertion failed: incomplete Phase 9 industry-service page ${route}`);
     }
@@ -8034,7 +8035,7 @@ async function main() {
       || !html.includes(`rel="canonical" href="${SITE}${route}"`)
       || !html.includes('"@type":"FAQPage"')
       || !html.includes('"@type":"CollectionPage"')
-      || !html.includes('href="/estimate/"')
+      || !html.includes('href="/contact"')
     ) {
       throw new Error(`SEO assertion failed: incomplete priority market hub ${route}`);
     }
@@ -11368,7 +11369,7 @@ async function main() {
     const html = phase0AeoPage(answerPage);
     assertPhase0Page(html, `/answers/${answerPage.slug}/`, phase7Faqs(answerPage), answerPage.slug);
     if (!html.includes(`By ${esc(PHASE0_JEREMY_AUTHOR)}`)
-      || !html.includes('href="/estimate"')
+      || !html.includes('href="/contact"')
       || !html.includes(`href="${esc(answerPage.serviceHref)}"`)) {
       throw new Error(`SEO assertion failed: incomplete Phase 7 answer page ${answerPage.slug}`);
     }
@@ -11750,6 +11751,13 @@ async function main() {
   fs.rmSync(legacyGlossaryDir, { recursive: true, force: true });
   fs.mkdirSync(legacyGlossaryDir, { recursive: true });
   fs.writeFileSync(path.join(legacyGlossaryDir, "index.html"), redirectPage("/engineering-glossary/", "Engineering Glossary"));
+  // Retired /estimate path (Jeremy, 2026-10-26): estimates are given
+  // personally; the site takes inquiries only. Redirect stub to the
+  // contact intake, same moved-path stub pattern as /glossary above.
+  const legacyEstimateDir = path.join(PUBLIC, "estimate");
+  fs.rmSync(legacyEstimateDir, { recursive: true, force: true });
+  fs.mkdirSync(legacyEstimateDir, { recursive: true });
+  fs.writeFileSync(path.join(legacyEstimateDir, "index.html"), redirectPage("/contact", "Contact Apex Grid Engineering"));
   pages++;
 
   // Title 24 hub + subpages
@@ -11800,7 +11808,7 @@ async function main() {
       || (html.match(/"@type":"FAQPage"/g) ?? []).length !== 1
       || !html.includes('"@type":"Article"')
       || !html.includes('"@type":"BreadcrumbList"')
-      || !html.includes('href="/estimate/"')
+      || !html.includes('href="/contact"')
       || !html.includes("<img ")) {
       throw new Error(`SEO assertion failed: incomplete Phase 11 project case study ${route}`);
     }
