@@ -159,10 +159,10 @@ export default function Military() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/estimate"
+              href="/contact"
               className="inline-flex h-14 px-8 bg-primary text-white font-bold text-sm uppercase tracking-wider items-center justify-center gap-3 rounded-sm hover:bg-primary/90 transition-colors"
             >
-              Get My Price <ArrowRight className="w-4 h-4" />
+              Start Your Project <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/contact"
