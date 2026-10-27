@@ -190,16 +190,16 @@ export default function ServiceDetail() {
             <div className="relative">
               <div className="sticky top-32 bg-background border border-border p-8 rounded-sm">
                 <div className="w-12 h-1 bg-primary mb-6"></div>
-                <h3 className="font-display font-bold text-2xl mb-4 text-white">Get your price</h3>
+                <h3 className="font-display font-bold text-2xl mb-4 text-white">Start your project</h3>
                 <p className="text-muted-foreground mb-8 text-sm leading-relaxed">
-                  Answer a few quick questions and get a ballpark range in under a minute.
-                  Quote back within 12–24 hours.
+                  Tell us what you need and where the project is. An engineer reviews
+                  every request — written scope and fee back within 12–24 hours.
                 </p>
                 <Link
-                  href="/estimate"
+                  href="/contact"
                   className="flex h-14 bg-primary text-white font-bold text-sm uppercase tracking-wider items-center justify-center w-full hover:bg-primary/90 transition-colors rounded-sm focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
                 >
-                  Start My Estimate
+                  Start Your Project
                 </Link>
                 <Link
                   href="/contact"
