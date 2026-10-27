@@ -142,14 +142,14 @@ export default function Services() {
               Not sure which one you need?
             </h2>
             <p className="mt-6 max-w-2xl mx-auto text-foreground/70">
-              Tap through the estimator — it figures out what you need and gives you
-              a ballpark price in under a minute.
+              Tell us what you need and where the project is — an engineer reviews
+              every request and replies with a written scope and fee.
             </p>
             <Link
-              href="/estimate"
+              href="/contact"
               className="mt-10 inline-flex h-16 items-center gap-3 bg-primary text-white px-10 font-bold text-sm uppercase tracking-[0.15em] hover:bg-primary/90 transition-colors rounded-sm focus-visible:ring-4 focus-visible:ring-primary/50 focus-visible:outline-none"
             >
-              Start My Estimate
+              Start Your Project
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
