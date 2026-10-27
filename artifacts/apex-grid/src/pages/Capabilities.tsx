@@ -164,16 +164,16 @@ export default function Capabilities() {
       {/* CTA */}
       <section className="py-24 bg-background text-center">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-display font-bold mb-6 text-white">Need a price?</h2>
+          <h2 className="text-4xl font-display font-bold mb-6 text-white">Start your project</h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-10">
-            Get a ballpark in under a minute — or send your scope for a formal proposal.
+            Tell us what you need and where the project is — an engineer reviews every request and replies with a written scope and fee.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/estimate"
+              href="/contact"
               className="inline-flex h-14 px-8 bg-primary text-white font-bold text-sm uppercase tracking-wider items-center justify-center gap-3 rounded-sm hover:bg-primary/90 transition-colors"
             >
-              Get My Price <ArrowRight className="w-4 h-4" />
+              Start Your Project <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/request-proposal"
