@@ -30,6 +30,8 @@ export interface LocationServicePage {
   topics: string[];
   /** Service slugs to link to on the same city page */
   relatedServiceSlugs: string[];
+  /** Same-service pages in nearby cities to link to (cross-city sibling links) */
+  nearbyCityServiceLinks?: { href: string; label: string }[];
 }
 
 export const LOCATION_SERVICE_PAGES: LocationServicePage[] = [
@@ -206,6 +208,7 @@ export const LOCATION_SERVICE_PAGES: LocationServicePage[] = [
       "MEP permit packages submitted through the City of Scottsdale for plan review",
     ],
     relatedServiceSlugs: ["structural-engineering", "civil-engineering"],
+    nearbyCityServiceLinks: [{ href: "/locations/arizona/tempe/mep-engineering/", label: "MEP engineer in Tempe" }],
   },
 
   // ─── ARIZONA — PARADISE VALLEY ──────────────────────────────────────────
@@ -366,6 +369,7 @@ export const LOCATION_SERVICE_PAGES: LocationServicePage[] = [
       "Energy code compliance — Mesa IECC 2018",
     ],
     relatedServiceSlugs: ["structural-engineering", "civil-engineering"],
+    nearbyCityServiceLinks: [{ href: "/locations/arizona/tempe/mep-engineering/", label: "MEP engineer in Tempe" }],
   },
 
   {

@@ -5994,6 +5994,9 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     .slice(0, 3)
     .map((s) => `<a href="/locations/${page.stateSlug}/${page.citySlug}/${s}/">${toTitle(s)}</a>`)
     .join(" · ");
+  const nearbyCityLinks = (page.nearbyCityServiceLinks ?? [])
+    .map((l) => `<a href="${esc(l.href)}">${esc(l.label)}</a>`)
+    .join(" · ");
   const faqs = [
     {
       q: `What does ${toTitle(page.serviceSlug)} in ${page.cityName} include?`,
@@ -6060,6 +6063,7 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
         <p>${LICENSING_COVERAGE_STATEMENT} ${PROJECT_JURISDICTION_NOTE} We provide structural, MEP, civil, and geotechnical engineering for commercial, industrial, multifamily, and government clients.</p>
         <p>We work from architectural PDFs, CAD files, or field measurements, and we're set up to turn projects around on compressed schedules when the situation calls for it.</p>
 ${relatedLinks ? `        <p>Related services in ${esc(page.cityName)}: ${relatedLinks}</p>` : ""}
+${nearbyCityLinks ? `        <p>${esc(toTitle(page.serviceSlug))} in nearby cities: ${nearbyCityLinks}</p>` : ""}
       </div>
     </section>
 
