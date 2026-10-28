@@ -4004,6 +4004,31 @@ const MARKET_ROW_FALLBACK_LINKS: Record<string, string> = {
   "wyoming/structural-engineering": `<a href="/locations/wyoming/cheyenne/structural-engineering/">Structural engineer in Cheyenne</a>`,
 };
 
+/**
+ * AI-Intensify A-3 (2026-10-28): direct-answer hero lede for service pages.
+ * The old lede was the generic per-service intro — no firm, no place — which
+ * gave AI engines nothing quotable to cite. This leads with the answer:
+ * firm + service + place + licensed PEs + the permitting authority, then the
+ * standing proof line. Every claim mirrors copy already live elsewhere on
+ * the site (homepage, PE-stamp pages, location quote blocks).
+ */
+function answerLede(svc: ServiceDef, place: string, abbrev: string, ahj: string): string {
+  const tail =
+    "A veteran-owned firm licensed in 49 states, with 10+ licensed PEs on a 20+ engineer team — quotes within 12–24 hours on qualifying scopes.";
+  switch (svc.slug) {
+    case "mep-engineering":
+      return `Apex Grid Engineering provides MEP engineering for commercial projects in ${place}, ${abbrev} — mechanical, electrical, and plumbing systems designed as one coordinated package by licensed PEs and sealed for permit through ${ahj}. ${tail}`;
+    case "structural-engineering":
+      return `Apex Grid Engineering provides structural engineering for commercial projects in ${place}, ${abbrev} — gravity, lateral, and foundation systems designed by licensed PEs for the loads the adopted code actually imposes, and sealed for permit through ${ahj}. ${tail}`;
+    case "civil-engineering":
+      return `Apex Grid Engineering provides civil and site engineering for commercial projects in ${place}, ${abbrev} — grading, drainage, stormwater, and utility design by licensed PEs, sealed for permit through ${ahj}. ${tail}`;
+    case "energy-code-compliance":
+      return `Apex Grid Engineering provides energy code compliance for commercial projects in ${place}, ${abbrev} — compliance documentation and whole-building modeling matched to the exact code edition enforced by ${ahj}, prepared by licensed PEs. ${tail}`;
+    default:
+      return `Apex Grid Engineering provides ${svc.name} for commercial projects in ${place}, ${abbrev} — designed and sealed by licensed PEs for permit through ${ahj}. ${tail}`;
+  }
+}
+
 function servicePage(state: StateData, svc: ServiceDef, allStates: StateData[], cities: CityData[]): string {
   const url = `/locations/${state.slug}/${svc.slug}/`;
   const crumbs = [
@@ -4041,7 +4066,7 @@ ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
   <p class="kicker">${esc(state.name)} · Licensed Professional Engineering</p>
   <h1>${esc(svc.h1)} <span class="dim">in ${esc(state.name)}</span></h1>
-  <p class="lede">${esc(svc.intro)}</p>
+  <p class="lede">${esc(answerLede(svc, state.name, state.abbrev, `the applicable ${state.name} permitting authority`))}</p>
 </div></section>
 ${familyVisual(motifForText(`${svc.name} ${svc.h1}`), `Service location shown: ${state.name}.`)}
 
@@ -4146,7 +4171,7 @@ ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
   <p class="kicker">Service Area</p>
   <h1>Engineering Services <span class="dim">in ${esc(state.name)}</span></h1>
-  <p class="lede">MEP, structural, civil, and energy-compliance engineering for ${esc(state.name)} projects — designed to the ${esc(state.buildingCode.baseCode)} and the realities of ${esc(state.metros.slice(0, 3).join(", "))} permitting.</p>
+  <p class="lede">Apex Grid Engineering provides MEP, structural, civil, and energy-compliance engineering for ${esc(state.name)} projects — designed to the ${esc(state.buildingCode.baseCode)} and the realities of ${esc(state.metros.slice(0, 3).join(", "))} permitting.</p>
 </div></section>
 ${familyVisual("location", `Service location shown: ${state.name}.`)}
 <section class="block"><div class="container">
@@ -5890,7 +5915,7 @@ ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
   <p class="kicker">${esc(page.kicker)}</p>
   <h1>${esc(page.h1)}</h1>
-  <p class="lede">${esc(page.lede)}</p>
+  <p class="lede">Apex Grid Engineering provides ${esc(page.disciplineLabel)} for ${esc(toTitle(page.industrySlug))} projects — a veteran-owned firm with 20+ engineers and 10+ licensed PEs, rated 5.0 stars on Google, with same-day quotes on qualifying scopes. ${esc(page.lede)}</p>
 </div></section>
 
 <section class="block"><div class="container">
@@ -5988,7 +6013,7 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
       <div class="hero-inner">
         <div class="kicker">${esc(page.kicker)}</div>
         <h1>${esc(page.h1)}</h1>
-        <p class="lede">${esc(page.lede)}</p>
+        <p class="lede">Apex Grid Engineering provides ${esc(toTitle(page.serviceSlug))} in ${esc(page.cityName)}, ${esc(page.stateName)} — a veteran-owned firm with 10+ licensed PEs; quotes land within 12–24 hours on qualifying scopes. ${esc(page.lede)}</p>
         <a class="btn btn--primary" href="/contact/">Request a Proposal</a>
       </div>
     </div>
@@ -12252,7 +12277,7 @@ ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
   <p class="kicker">${esc(city.name)}, ${esc(state.abbrev)} · Licensed Professional Engineering</p>
   <h1>${esc(svc.h1)} <span class="dim">in ${esc(city.name)}</span></h1>
-  <p class="lede">${esc(svc.intro)}</p>
+  <p class="lede">${esc(answerLede(svc, city.name, state.abbrev, city.ahj.office))}</p>
 </div></section>
 ${familyVisual("location", `Service location shown: ${city.name}, ${state.name}.`)}
 
@@ -12358,7 +12383,7 @@ ${breadcrumb(crumbs)}
 <section class="hero"><div class="container">
   <p class="kicker">${esc(city.county)} · ${esc(state.name)}</p>
   <h1>Engineering Services <span class="dim">in ${esc(city.name)}</span></h1>
-  <p class="lede">MEP, structural, civil, and energy-compliance engineering for ${esc(city.name)} projects — permitted through ${esc(city.ahj.office)} and designed to the city's adopted codes and amendments.</p>
+  <p class="lede">Apex Grid Engineering provides MEP, structural, civil, and energy-compliance engineering for commercial projects in ${esc(city.name)}, ${esc(state.abbrev)} — a veteran-owned firm with 10+ licensed PEs, permitted through ${esc(city.ahj.office)} and designed to the city's adopted codes and amendments.</p>
 </div></section>
 ${peStampBlock({
   placeName: city.name,
