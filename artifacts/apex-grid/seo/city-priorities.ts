@@ -35,6 +35,7 @@ export const CITY_PRIORITIES: CityPriority[] = [
   { stateSlug: "washington", citySlug: "spokane", commercialOpportunity: 82, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable", rationale: "Regional healthcare, higher-education, industrial, and infill market with a distinct municipal code and permitting environment." },
   { stateSlug: "tennessee", citySlug: "knoxville", commercialOpportunity: 80, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable", rationale: "Growing East Tennessee commercial market supported by research, manufacturing, healthcare, and regional logistics." },
   { stateSlug: "georgia", citySlug: "savannah", commercialOpportunity: 79, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable", rationale: "Port-driven industrial and logistics growth plus hospitality, institutional, and coastal-resilience design demand." },
+  { stateSlug: "georgia", citySlug: "augusta", commercialOpportunity: 76, searchConsoleImpressions: 0, searchConsolePeriod: "unavailable", rationale: "Richmond County institutional core — medical district, Fort Eisenhower cyber missions, and Savannah River Site workforce demand under consolidated city-county permitting." },
 ].sort((a, b) =>
   b.commercialOpportunity - a.commercialOpportunity ||
   b.searchConsoleImpressions - a.searchConsoleImpressions ||

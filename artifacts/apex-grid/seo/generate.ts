@@ -1666,6 +1666,7 @@ const LIBRARY_TOPIC_OF_THE_WEEK = {
 // fields (see libraryIndexEntries), so the index stays readable as it grows.
 const LIBRARY_DISPLAY_OVERRIDES: Record<string, { name: string; blurb: string }> = {
   "how-much-does-a-pe-stamp-cost": { name: "PE Stamp Cost", blurb: "What review-and-seal actually costs, what drives the fee, and why a stamp is never sold on its own." },
+  "michigan-professional-engineer-license-lookup": { name: "Michigan PE License Lookup", blurb: "How to verify a Michigan professional engineer's license in LARA's official lookup — and what to do when no record appears." },
   "how-much-does-mep-engineering-cost": { name: "MEP Engineering Cost", blurb: "What MEP design fees depend on — scope, building complexity, and deliverables — and how to read a quote." },
   "how-long-does-plan-check-take": { name: "Plan Check Timelines", blurb: "How long plan check really takes, step by step, and what speeds up or stalls a review." },
   "what-is-title-24": { name: "Title 24 (California Building Standards Code)", blurb: "California's building standards code explained — every part, the Part 6 energy code, and the compliance paperwork." },
@@ -3144,6 +3145,7 @@ function peStampStatePage(state: StateData, slug: string): string {
       { label: `${stateName} official board`, href: links.boardUrl },
       { label: `${stateName} official license lookup`, href: links.lookupUrl },
       { label: "PE stamp hub", href: "/pe-stamp/" },
+      ...(slug === "michigan" ? [{ label: "Michigan PE license lookup \u2014 Library guide", href: "/answers/michigan-professional-engineer-license-lookup/" }] : []),
       ...popularStateLinks,
       { label: `${stateName} engineering service area`, href: `/locations/${slug}/` },
       { label: `Estimate ${aOrAn(stateName)} ${stateName} project`, href: `/engineering-cost-estimator/${slug}/` },

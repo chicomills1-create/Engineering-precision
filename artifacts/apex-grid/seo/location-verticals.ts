@@ -261,6 +261,21 @@ function assertVerticalHtml(html: string, canonical: string, requiresFaq = false
   }
 }
 
+/** City-specific deepening for vertical city pages whose ranked terms need
+ *  real local substance beyond the shared template (rank-recovery lane,
+ *  2026-10-28). Keyed by "<vertical>/<state>/<city>"; pages without an entry
+ *  render exactly as before. */
+const CITY_VERTICAL_DEEP_DIVES: Record<string, string> = {
+  "architecture/florida/sebastian": `
+<section class="block"><div class="container">
+  <h2>Designing in <em>Sebastian</em>: Coastal, County-Reviewed, Storm-Season Aware</h2>
+  <div class="prose">
+    <p>Sebastian sits on the Indian River Lagoon in northern Indian River County, and its commercial work \u2014 medical and professional offices along the US-1 corridor, retail and restaurant build-outs, marina and hospitality projects near the riverfront \u2014 is permitted through the City of Sebastian under the Florida Building Code, with Indian River County reviews touching fire protection, utilities, and site work. The lagoon-front setting drives the design brief: buildings here are detailed for high coastal wind speeds and wind-borne debris exposure, corrosion-resistant materials and fasteners, and flood-zone conditions that put finished-floor elevations and equipment placement under FEMA map and local ordinance scrutiny.</p>
+    <p>Renovations and tenant improvements make up most of Sebastian's commercial pipeline, and their recurring scope is consistent: change-of-occupancy review, storefront and envelope hardening, rooftop equipment replacement with current wind-uplift detailing, and accessibility upgrades coordinated across the architectural, structural, and MEP sets. Projects move fastest when the team confirms the parcel's flood zone, wind exposure category, and county utility capacity before schematic design, because each of those can change the documents the City expects at submittal \u2014 and discovering one of them at plan check costs a full review cycle.</p>
+  </div>
+</div></section>`,
+};
+
 export function verticalCityPage(
   vertical: LocationVertical,
   state: StateData,
@@ -342,6 +357,8 @@ ${breadcrumb(crumbs)}
   <div class="prose" style="margin-top:24px"><p>${esc(localContext)}</p></div>
   <p class="note">Local codes, amendments, zoning rules, contractor requirements, and permit processes change. Apex Grid verifies the governing requirements for the exact site and scope before work begins.</p>
 </div></section>
+
+${CITY_VERTICAL_DEEP_DIVES[`${vertical.slug}/${state.slug}/${city.slug}`] ?? ""}
 
 <section class="block"><div class="container">
   <h2>${esc(vertical.shortName)} <em>Services</em></h2>

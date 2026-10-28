@@ -474,4 +474,102 @@ export const WAVE_LIBRARY_ANSWER_PAGES: Phase0AeoPage[] = [
     ],
     founderNote,
   },
+  {
+    slug: "michigan-professional-engineer-license-lookup",
+    title: "Michigan Professional Engineer License Lookup: How to Verify a PE License | Apex Grid",
+    description: "How to verify a Michigan PE license in LARA's official lookup: what the record shows, how to check the firm behind the seal, and what to do when no record appears.",
+    h1: "Michigan professional engineer license lookup",
+    answer: "Michigan professional engineer licenses are issued and verified by the Michigan Department of Licensing and Regulatory Affairs (LARA), through its Bureau of Professional Licensing and the Board of Professional Engineers, under Article 20 of the Michigan Occupational Code. The verification itself is a free public search — LARA's official license lookup, run on the state's Accela portal at https://aca-prod.accela.com/MILARA/GeneralProperty/PropertyLookUp.aspx — and it takes a few minutes: enter the engineer's name or license number, open the record, and confirm that the license type is Professional Engineer, the status is Active, and the expiration date is in the future. Only an engineer licensed in Michigan may sign and seal engineering documents for a Michigan project — a seal from an engineer whose Michigan license is expired, lapsed, or nonexistent is a plan-check problem waiting to be found by someone less friendly than you.\n\nWhat the lookup proves is narrow and important: on the day you check, the state shows this person holding this license in this status. It does not prove the engineer is the right specialist for your building type, that they were in responsible charge of the set you were handed, or that a firm using their seal is organized the way Michigan expects. The sections below walk the lookup step by step, show how to read the record and check the firm behind the engineer, and what to do when the search comes back empty.",
+    directAnswer: "Verify a Michigan PE license free in LARA's official Accela lookup: search the engineer's name or license number and confirm Professional Engineer type, Active status, and a future expiration date.",
+    facts: [
+      { label: "Who issues Michigan PE licenses", value: "Michigan Department of Licensing and Regulatory Affairs (LARA), Bureau of Professional Licensing, under the Board of Professional Engineers" },
+      { label: "Governing law", value: "Michigan Occupational Code (Act 299 of 1980), Article 20" },
+      { label: "Where to verify", value: "LARA's official license lookup on the state Accela portal — free, no account required" },
+      { label: "Search by", value: "The engineer's last name or Michigan license number" },
+      { label: "What the record shows", value: "Licensee name, license type and number, status, and expiration date" },
+      { label: "What to confirm", value: "Type: Professional Engineer · Status: Active · Expiration date in the future" },
+    ],
+    topic: "Michigan PE License Lookup",
+    serviceHref: "/pe-stamp/",
+    sections: [
+      {
+        heading: "How to run the lookup, step by step",
+        body: "Start from the official source, not a search engine's first result — license data is republished by third-party directories that lag the state's record and sometimes invent details to fill gaps. LARA's own lookup is the Accela license search at https://aca-prod.accela.com/MILARA/GeneralProperty/PropertyLookUp.aspx , the same portal Michigan's licensing pages point to. From there the search is deliberately plain: no account, no fee, no application.",
+        bullets: [
+          "Open LARA's official license lookup (the Accela portal linked above)",
+          "Search by the engineer's last name; if you have it, the license number is the sharper tool",
+          "Pick the record whose license type reads Professional Engineer — one person can hold several Michigan licenses",
+          "Open the full record and read the status and expiration date, not just the search-results line",
+        ],
+      },
+      {
+        heading: "What the record shows — and how to read it",
+        body: "A Michigan PE record shows the licensee's name, the license type and number, the license status, and the expiration date. Three of those fields do the real work. The type must be Professional Engineer — Michigan licenses many professions through the same portal, and a similarly named credential is not this one. The status must be Active: an expired or lapsed license means the engineer is not currently authorized to practice or seal in Michigan, whatever their history. And the expiration date must be ahead of the work — Michigan PE licenses renew on a two-year cycle with continuing-education requirements, and a license that lapses between a proposal and a submittal is a common, preventable failure. One limit to keep in view: the portal shows license facts, not a practice history — public disciplinary outcomes are published by the Bureau separately, in its disciplinary action reports.",
+        bullets: [
+          "Type: Professional Engineer — not a related trade or technician credential",
+          "Status: Active — expired or lapsed means not currently authorized to seal Michigan work",
+          "Expiration in the future — and re-check if the project runs past it",
+          "License number on the record should match the number in the seal on your drawings",
+        ],
+      },
+      {
+        heading: "How to check the firm behind the engineer",
+        body: "Michigan licenses engineers as individuals, so the firm check runs through a person, not a company registry entry. When a firm proposes to seal Michigan work, ask it to name — in writing — the Michigan-licensed professional engineer who will be in responsible charge of your project, then run that person through the lookup exactly as above. The seal that lands on your drawings carries the sealing engineer's name and license number; match both against the state record before the set goes to the authority having jurisdiction. A firm that treats the question as an insult, or offers a seal without naming who stands behind it, has answered a different question than the one you asked — believe that answer too.",
+        bullets: [
+          "Ask the firm to name its Michigan PE in responsible charge for your project",
+          "Verify that named person in the LARA lookup — type, status, expiration",
+          "Match the name and license number in the drawing seal to the state record",
+          "Repeat the check for each discipline being sealed, not just the lead",
+        ],
+      },
+      {
+        heading: "If the lookup finds nothing",
+        body: "An empty result is a finding, not a verdict. Work the innocent causes first: name spellings (hyphenated and maiden names, initials filed as first names), a mistyped license number, a license issued or renewed so recently the public record has not caught up, and a license that exists under a different credential type. Search on the last name alone before concluding anything. If the record still does not appear, contact the Bureau of Professional Licensing and ask them to confirm the person's status directly. What not to do: do not submit drawings on an unverifiable seal, and do not accuse an engineer of practicing without a license on the strength of one failed search. Both errors are expensive; the phone call is not.",
+        bullets: [
+          "Re-search on last name only, and try alternate spellings before concluding",
+          "Confirm the license number digit by digit against the seal or the firm's letterhead",
+          "Escalate to the Bureau of Professional Licensing for a direct confirmation",
+          "Hold the submittal, not the accusation, until the bureau answers",
+        ],
+      },
+      {
+        heading: "What verification does not prove",
+        body: "A verified license establishes that the state authorizes this engineer to practice. It does not establish that the engineer is a good fit for your building type, that the set you hold was actually produced or reviewed under their responsible charge, or that the authority having jurisdiction will accept the documents — the AHJ's review is its own gate. Verification is the floor, not the ceiling: it removes the one risk that can be removed in five minutes, so your remaining diligence — references, relevant project history, and the quality of the firm's questions about your project — goes to risks that actually require judgment. The fastest way to confirm any firm's Michigan coverage — including ours — is the same lookup described on this page.",
+        bullets: [
+          "Licensed is not the same as experienced in your building type",
+          "A firm is not verified because one of its engineers is",
+          "The seal must still reflect responsible charge over the actual set",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is the Michigan PE license lookup free?",
+        answer: "Yes. LARA's license search is a public record check on the state's Accela portal — no account, no fee, and no permission from the engineer is needed. If a website offers to sell you the same verification, it is selling you a copy of a free record, usually a staler one.",
+      },
+      {
+        question: "Can I verify a Michigan engineering firm the same way?",
+        answer: "Not directly — Michigan licenses professional engineers as individuals, so the lookup verifies people. For a firm, get the name of the Michigan-licensed PE who will be in responsible charge of your project, verify that person, and match the name and license number in the seal on your drawings to the state record.",
+      },
+      {
+        question: "What does it mean if an engineer's status is not Active?",
+        answer: "It means the engineer is not currently authorized to practice professional engineering or seal documents in Michigan. Work sealed while a license is lapsed can be rejected at plan check; ask the engineer to resolve the status with the Bureau of Professional Licensing before relying on the seal.",
+      },
+      {
+        question: "How long does a Michigan PE license last?",
+        answer: "Michigan PE licenses run on a two-year renewal cycle, with continuing-education requirements attached to renewal. The controlling fact for any project is the expiration date on the engineer's own record — check it when you engage the engineer, and again if the project schedule runs past it.",
+      },
+      {
+        question: "The engineer who sealed my drawings is not in the lookup. What now?",
+        answer: "First, rule out the innocent causes: search on the last name alone, try alternate spellings, and confirm the license number in the seal digit by digit. If the record still does not appear, ask the Bureau of Professional Licensing to confirm the person's status directly — and hold the submittal until it does.",
+      },
+    ],
+    extraLinks: [
+      { label: "PE stamp services in Michigan", href: "/pe-stamp/michigan/" },
+      { label: "What is a PE stamp?", href: "/answers/what-is-a-pe-stamp/" },
+      { label: "How much does a PE stamp cost?", href: "/answers/how-much-does-a-pe-stamp-cost/" },
+      { label: "\"Stamp only\" vs review-and-seal: what the difference means", href: "/answers/pe-stamp-only-vs-review-and-seal/" },
+    ],
+    founderNote,
+  },
 ];
