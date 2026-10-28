@@ -7490,6 +7490,42 @@ ${expansion.hub.sections.map((section) => `<section class="block"><div class="co
   return html;
 }
 
+/**
+ * AI-Intensify follow-on (2026-10-28): direct-answer hero lede for the
+ * researched-expansion (directory-city) service pages — batch2ServicePage
+ * covers Batch 2/3/4, ~200 metros x 5 services. These heroes opened with the
+ * researched city narrative and never named the firm, giving AI engines no
+ * quotable answer to cite. This prepends the answer — firm + service +
+ * city/state + scope + the standing proof line — ahead of that lede,
+ * mirroring answerLede() for the curated city x service family. Every claim
+ * mirrors copy already live on the site (homepage, PE-stamp pages, location
+ * quote blocks). The batch data carries no discrete AHJ field, so the permit
+ * clause uses this family's own term, "the local authority having
+ * jurisdiction" (batch2MetroPage FAQs).
+ */
+function batch2AnswerLede(
+  expansion: Batch2StateExpansion,
+  metro: Batch2Metro,
+  service: Batch2CoreServicePage,
+): string {
+  const tail =
+    "A veteran-owned firm licensed in 49 states, with 10+ licensed PEs on a 20+ engineer team — quotes within 12–24 hours on qualifying scopes.";
+  const place = `${metro.name}, ${expansion.stateAbbrev}`;
+  const ahj = "the local authority having jurisdiction";
+  switch (service.serviceSlug) {
+    case "mep-engineering":
+      return `Apex Grid Engineering provides MEP engineering for commercial projects in ${place} — mechanical, electrical, and plumbing systems designed as one coordinated package by licensed PEs and sealed for permit through ${ahj}. ${tail}`;
+    case "structural-engineering":
+      return `Apex Grid Engineering provides structural engineering for commercial projects in ${place} — gravity, lateral, and foundation systems designed by licensed PEs for the loads the adopted code actually imposes, and sealed for permit through ${ahj}. ${tail}`;
+    case "civil-engineering":
+      return `Apex Grid Engineering provides civil and site engineering for commercial projects in ${place} — grading, drainage, stormwater, and utility design by licensed PEs, sealed for permit through ${ahj}. ${tail}`;
+    case "energy-compliance":
+      return `Apex Grid Engineering provides energy code compliance for commercial projects in ${place} — compliance documentation and whole-building modeling matched to the exact code edition enforced by ${ahj}, prepared by licensed PEs. ${tail}`;
+    case "pe-stamped-drawings":
+      return `Apex Grid Engineering provides PE-stamped drawings for commercial projects in ${place} — drawings and calculations developed under the responsible licensed PE, signed and sealed for the defined scope, and submitted through ${ahj}. ${tail}`;
+  }
+}
+
 function batch2ServicePage(
   expansion: Batch2StateExpansion,
   metro: Batch2Metro,
@@ -7517,7 +7553,7 @@ function batch2ServicePage(
   const sourceLinks = batch2SourceLinks(sources);
   const body = `<main>
 ${breadcrumb(crumbs)}
-<section class="hero"><div class="container"><p class="kicker">${esc(service.kicker)}</p><h1>${esc(service.h1)}</h1><p class="lede">${esc(service.lede)}</p></div></section>
+<section class="hero"><div class="container"><p class="kicker">${esc(service.kicker)}</p><h1>${esc(service.h1)}</h1><p class="lede">${esc(batch2AnswerLede(expansion, metro, service))} ${esc(service.lede)}</p></div></section>
 ${familyVisual(motifForText(service.h1), `Service location shown: ${metro.name}, ${expansion.stateName}.`)}
 <section class="block"><div class="container"><h2>Permit <em>authority</em></h2><div class="prose"><p>${esc(service.permitAuthority)}</p></div></div></section>
 <section class="block"><div class="container"><h2>Code <em>context</em></h2><div class="prose"><p>${esc(service.codeContext)}</p></div></div></section>
