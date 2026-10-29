@@ -148,7 +148,7 @@ export function audienceResourceHubPage(page: AudienceResourceHub): string {
   const crumbs = [{ name: "Home", href: "/" }, { name: "Resources", href: "/resources/" }, { name: page.audience }];
   const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: page.faqs.map((faq) => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })) };
   const body = `
-${crumbs.map((crumb, i) => i === crumbs.length - 1 ? `<span>${crumb.name}</span>` : `<a href="${crumb.href}">${crumb.name}</a>`).join(" / ")}
+<nav class="breadcrumb container">${crumbs.map((crumb) => crumb.href ? `<a href="${crumb.href}">${crumb.name}</a>` : crumb.name).join(`<span>/</span>`)}</nav>
 <section class="hero"><div class="container"><p class="kicker">${page.audience} resource hub</p><h1>${page.audience} Engineering Resources</h1><p class="lede">${page.intro}</p><p class="byline">By ${AUDIENCE_RESOURCE_AUTHOR}</p></div></section>
 ${page.sections.map((section) => `<section class="block"><div class="container"><h2>${section.heading}</h2>${section.paragraphs.map((p) => `<p>${p}</p>`).join("")}${section.bullets ? `<ul>${section.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>` : ""}</div></section>`).join("")}
 <section class="block recommended-resources"><div class="container"><h2>Recommended resources</h2><ul>${page.relatedResources.map((resource) => `<li><a href="${resource.href}">${resource.label}</a></li>`).join("")}</ul></div></section>
