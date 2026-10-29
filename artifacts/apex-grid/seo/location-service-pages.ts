@@ -447,6 +447,35 @@ export const LOCATION_SERVICE_PAGES: LocationServicePage[] = [
     relatedServiceSlugs: ["mep-engineering", "civil-engineering"],
   },
 
+  {
+    stateSlug: "arizona", stateName: "Arizona", stateAbbrev: "AZ",
+    citySlug: "queen-creek", cityName: "Queen Creek", county: "Maricopa County",
+    serviceSlug: "mep-engineering",
+    title: "MEP Engineering Queen Creek, AZ | Apex Grid Engineering",
+    h1: "MEP Engineering in Queen Creek",
+    kicker: "Queen Creek, AZ · MEP Engineering",
+    lede: "Queen Creek MEP engineering serves one of the Valley's fastest-growing communities — new residential subdivisions, the retail and restaurant corridors following the rooftops, and the schools and civic buildings a fast-growing town adds every year — with mechanical, electrical, and plumbing systems designed for Zone 2B cooling loads and the Town of Queen Creek's permit process.",
+    ahj: "Town of Queen Creek Community Development Department",
+    buildingCode: "2018 IBC with Town of Queen Creek amendments",
+    energyCode: "2018 IECC",
+    marketNote: "Queen Creek is Apex Grid's home market — our Queen Creek AZ base means fast turnaround and direct familiarity with the Town's development services process. The Town runs comparatively fast plan review, and Southeast Valley residential growth plus the commercial corridors following it keep MEP demand high.",
+    climateNote: "Zone 2B; cooling-dominated loads demand right-sized HVAC selection with accurate ambient derating. Queen Creek's rural-to-suburban character means many projects sit on larger lots, with longer electrical and water service runs and dust-control enforcement during construction.",
+    topics: [
+      "Residential MEP engineering — new subdivisions, custom homes, additions",
+      "Retail and restaurant TI MEP along Queen Creek's growth corridors",
+      "School, municipal, and civic facility MEP design",
+      "Multifamily and build-to-rent MEP engineering",
+      "Agricultural and equestrian facility electrical and plumbing design",
+      "EV charging infrastructure and solar PV electrical integration",
+      "Town of Queen Creek MEP permit documents",
+    ],
+    relatedServiceSlugs: ["structural-engineering", "civil-engineering"],
+    nearbyCityServiceLinks: [
+      { href: "/locations/arizona/gilbert/mep-engineering/", label: "MEP engineer in Gilbert" },
+      { href: "/locations/arizona/mesa/mep-engineering/", label: "MEP engineer in Mesa" },
+    ],
+  },
+
   // ─── ARIZONA — MICRO-MARKET PAGES ───────────────────────────────────────
 
   {
