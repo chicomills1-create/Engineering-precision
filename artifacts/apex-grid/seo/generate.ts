@@ -3840,6 +3840,17 @@ function priorityMoneyLinks(
  *  format: "MEP engineer in <City>") and is scoped to the Oregon MEP page only. */
 const OREGON_MEP_MARKET_LINKS = `<a href="/locations/oregon/portland/mep-engineering/">MEP engineer in Portland</a><a href="/locations/oregon/eugene/mep-engineering/">MEP engineer in Eugene</a><a href="/locations/oregon/salem/mep-engineering/">MEP engineer in Salem</a><a href="/locations/oregon/bend/mep-engineering/">MEP engineer in Bend</a><a href="/locations/oregon/medford/mep-engineering/">MEP engineer in Medford</a>`;
 
+/** Arlington MEP markets append — rank-recovery strike 2026-10-30.
+ *  "mep engineering firm arlington" held #1, exited to null, and stayed null
+ *  through its judge window (snapshots -05/-07) -> graduated; the audit's
+ *  pre-named cure is additive internal-link support for the Arlington MEP
+ *  cluster (ARLINGTON-AUDIT-2026-10-30.md). Arlington is a specialty
+ *  location-service page and not a CITY_PRIORITIES market, so
+ *  priorityMoneyLinks() can never surface it in this row. This append
+ *  mirrors the Oregon fallback pattern (same href shape and label format:
+ *  "MEP engineer in <City>") and is scoped to the Texas MEP page only. */
+const TEXAS_MEP_MARKET_EXTRA_LINKS = `<a href="/locations/texas/arlington/mep-engineering/">MEP engineer in Arlington</a>`;
+
 /** Markets-row fallbacks — sweep of the Oregon defect class, 2026-10-19.
  *  priorityMoneyLinks() returns "" for every state with no CITY_PRIORITIES
  *  entries (and for Oregon's non-MEP services), so those state service pages
@@ -4045,6 +4056,9 @@ function servicePage(state: StateData, svc: ServiceDef, allStates: StateData[], 
     || (state.slug === "oregon" && svc.slug === "mep-engineering" ? OREGON_MEP_MARKET_LINKS : "")
     || MARKET_ROW_FALLBACK_LINKS[`${state.slug}/${svc.slug}`]
     || "";
+  const topMarketLinksRendered = state.slug === "texas" && svc.slug === "mep-engineering"
+    ? topMarketLinks + TEXAS_MEP_MARKET_EXTRA_LINKS
+    : topMarketLinks;
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -4130,7 +4144,7 @@ ${peStampBlock({
 <section class="block"><div class="container">
   <h2>Top ${esc(svc.shortName)} Markets in <em>${esc(state.name)}</em></h2>
   <p class="prose">Our highest-demand markets for ${esc(svc.shortName.toLowerCase())} engineering in ${esc(state.name)}.</p>
-  <div class="linkrow">${topMarketLinks}</div>
+  <div class="linkrow">${topMarketLinksRendered}</div>
 </div></section>
 
 <section class="ctaband"><div class="container">
