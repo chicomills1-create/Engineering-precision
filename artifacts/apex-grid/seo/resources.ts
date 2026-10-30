@@ -498,6 +498,8 @@ const BASE_RESOURCE_ARTICLES: ResourceArticle[] = [
 
 <h2>When Do You Need MEP Engineering?</h2>
 <p>Projects that modify building systems may require MEP engineering for permit, depending on scope and jurisdiction. Commercial renovations, tenant improvements, restaurants, clinics, multifamily work, industrial changes, and equipment upgrades commonly need coordinated documents. Review <a href="/answers/mep-permit-drawings-requirements/">what MEP permit drawings may need to include</a> before setting the submission scope.</p>
+
+<p>Tenant improvements are the most common case in practice. Our guide to <a href="/resources/mep/mep-tenant-improvement/">MEP engineering for tenant improvements</a> walks through the mechanical, electrical, plumbing, structural, and civil scope a build-out typically requires, and what the permit set includes.</p>
     `,
   },
 
@@ -580,6 +582,8 @@ const BASE_RESOURCE_ARTICLES: ResourceArticle[] = [
 
 <h2>Tenant Improvements Are the Most Common Trigger</h2>
 <p>Commercial tenant improvement projects are the most frequent driver of MEP permits. Even "simple" TIs — a new coffee shop, a medical suite, an office renovation — typically touch all three MEP disciplines and require a full engineering package. Starting the engineering process as soon as the architectural design is underway keeps permitting on schedule.</p>
+
+<p>For the discipline-by-discipline breakdown of what a build-out requires — including the structural and civil scope a TI can trigger — see <a href="/resources/mep/mep-tenant-improvement/">what MEP engineering is required for a tenant improvement</a>.</p>
     `,
   },
 
@@ -619,6 +623,8 @@ const BASE_RESOURCE_ARTICLES: ResourceArticle[] = [
 
 <h2>Coordination Is Critical</h2>
 <p>Restaurant MEP is highly interdependent. The kitchen exhaust location drives the structural opening through the roof. The make-up air unit connects to the exhaust and needs rooftop structural clearance. The gas appliance locations drive both gas piping and the exhaust hood. Starting MEP engineering early — with a coordinated kitchen equipment plan — avoids expensive redesign later.</p>
+
+<p>Restaurant build-outs are one tenant improvement type among several. For the full picture across office, retail, medical, and food-service projects, see <a href="/resources/mep/mep-tenant-improvement/">what MEP engineering is required for a tenant improvement</a>.</p>
     `,
   },
 
@@ -755,7 +761,7 @@ const BASE_RESOURCE_ARTICLES: ResourceArticle[] = [
     description: "Tenant improvements almost always require MEP engineering. Here's what disciplines are typically involved, what documents are needed, and how to keep the permit on schedule.",
     h1: "What MEP Engineering Is Required for a Tenant Improvement?",
     tag: "MEP Engineering",
-    minutes: 5,
+    minutes: 8,
     html: `
 <h2>TIs Are the Most Common MEP Project Type</h2>
 <p>Commercial tenant improvement projects — new tenants moving into existing space, business expansions, building renovations — represent the most common category of commercial construction. And nearly all of them require MEP engineering. Here's how to understand what's needed for your TI.</p>
@@ -791,6 +797,62 @@ const BASE_RESOURCE_ARTICLES: ResourceArticle[] = [
 
 <h2>When to Start MEP Engineering</h2>
 <p>Start MEP engineering as early as the architectural layout is established — you don't need final drawings to begin. Waiting until architectural documents are complete before engaging MEP engineers is the most common cause of permit delays on TI projects. Early engagement allows the MEP engineers to identify conflicts, flag equipment room requirements, and coordinate systems before the architectural layout is locked.</p>
+
+<h2>Structural Scope for Tenant Improvements</h2>
+<p>Most tenant improvements are MEP-led, but structural scope appears whenever the build-out changes how the building carries load. Common TI structural scope includes:</p>
+<ul>
+  <li>New or relocated openings in load-bearing walls, and wall changes that alter the load path</li>
+  <li>Support checks and design for new rooftop equipment — rooftop unit installation is a permit trigger, and the structure under it has to carry it</li>
+  <li>Added floor loads from mezzanines, heavy equipment, or high-density storage beyond the original design</li>
+  <li>Seismic and wind analysis where the alteration triggers it</li>
+</ul>
+<p>Structural and MEP scope also meet at the roof: plumbing engineers coordinate roof drain locations with structural, and mechanical equipment placement drives structural support. On TI projects that need it, the structural package is prepared coordinated with the MEP and civil documents, sealed by a licensed PE where required.</p>
+
+<h2>Civil Scope for Tenant Improvements</h2>
+<p>An interior build-out that changes nothing outside the walls rarely needs civil engineering. Civil scope joins a TI when the project changes the site or its utility connections:</p>
+<ul>
+  <li>Utility sizing and routing changes — a new or upsized water or sewer service for added fixtures</li>
+  <li>Grading and drainage work where exterior alterations disturb the site</li>
+  <li>Stormwater management tied to exterior changes</li>
+  <li>Permit-ready site documents where the jurisdiction requires them for the change of use or occupancy</li>
+</ul>
+<p>Where civil scope does apply, it is usually driven by the plumbing scope inside the space: added restrooms, kitchens, or process fixtures can outgrow the existing service long before the interior layout becomes a problem.</p>
+
+<h2>How MEP Scope Changes by Tenant Improvement Type</h2>
+<p>The same three disciplines appear on almost every TI, but the weight of each shifts with the incoming use:</p>
+<ul>
+  <li><strong>Office</strong> — usually the lightest scope: HVAC rebalancing or new zones for the new layout, lighting design, and panel schedule updates. Plumbing is limited unless restrooms or break rooms change.</li>
+  <li><strong>Retail</strong> — lighting design for the sales floor, dedicated circuits for tenant equipment, and HVAC modifications sized to the new occupancy load.</li>
+  <li><strong>Restaurant and food service</strong> — the heaviest common TI scope: exhaust systems for the new occupancy, commercial kitchen exhaust and make-up air, grease interceptors, gas piping modifications, and dedicated circuits for kitchen equipment.</li>
+  <li><strong>Medical and clinic</strong> — a higher-ventilation use that can require a full mechanical redesign, healthcare pressure relationship systems, medical gas, and emergency power systems.</li>
+  <li><strong>Gym and fitness</strong> — also a higher-ventilation use: outside air calculations for the new occupancy load drive the mechanical scope, and a full redesign may be required.</li>
+</ul>
+<p>Even "simple" TIs — a new coffee shop, a medical suite, an office renovation — typically touch all three MEP disciplines and require a full engineering package. The type of tenant moving in, more than the size of the space, decides how much engineering the permit will require.</p>
+
+<h2>What the TI Permit Set Includes</h2>
+<p>A permit-ready MEP package for a tenant improvement includes the documents the plan reviewer needs to verify every altered system:</p>
+<ul>
+  <li>Plans showing equipment locations, duct and pipe routing, and fixture layouts</li>
+  <li>Schedules listing equipment sizes and specifications</li>
+  <li>One-line diagrams for the electrical design</li>
+  <li>Calculations demonstrating code compliance — load calculations, ventilation calculations, and energy compliance</li>
+  <li>PE stamps from the engineer of record for each discipline involved</li>
+</ul>
+<p>Some jurisdictions also require a separate energy compliance package (Title 24, IECC compliance forms). These documents — signed and sealed by licensed professional engineers — tell the plan reviewer and the building inspector exactly what systems are being installed and how they comply with the applicable codes.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Does every tenant improvement need MEP engineering?</h3>
+<p>Almost always. Tenant improvements almost always require MEP engineering, because any project that modifies or installs mechanical, electrical, or plumbing systems in a commercial building requires MEP engineering documents for the building permit. Even a light office renovation typically touches lighting, HVAC distribution, or fixtures.</p>
+<h3>Which engineering disciplines does a TI typically involve?</h3>
+<p>Mechanical, electrical, and plumbing on almost every project — even simple TIs typically touch all three. Structural engineering joins when the build-out changes load paths, adds openings in load-bearing walls, or sets new equipment on the roof, and civil engineering joins when site utilities, grading, or drainage change.</p>
+<h3>What documents are included in a TI permit package?</h3>
+<p>Plans showing equipment locations, duct and pipe routing, and fixture layouts; schedules listing equipment sizes and specifications; one-line diagrams for electrical; and calculations demonstrating code compliance, including load calculations, ventilation calculations, and energy compliance. Each discipline's documents carry the PE stamp of its engineer of record, and some jurisdictions require a separate energy compliance package as well.</p>
+<h3>If the existing HVAC is reused, is mechanical engineering still needed?</h3>
+<p>Often, yes — but the scope may be limited. If the existing HVAC is being reused and the occupancy load doesn't change significantly, the mechanical scope may be limited to rebalancing and documentation. If the space is being changed to a higher-ventilation use (dining, clinic, gym), a full mechanical redesign may be required.</p>
+<h3>When should MEP engineering start on a tenant improvement?</h3>
+<p>As early as the architectural layout is established — you don't need final drawings to begin. Waiting until architectural documents are complete before engaging MEP engineers is the most common cause of permit delays on TI projects. Early engagement lets the engineers identify conflicts, flag equipment room requirements, and coordinate systems before the layout is locked.</p>
+<h3>Does a tenant improvement need energy compliance documentation?</h3>
+<p>Where systems are altered, yes. Title 24 or ASHRAE 90.1 energy compliance applies to altered systems, and some jurisdictions require a separate energy compliance package (Title 24, IECC compliance forms) as part of the permit submission.</p>
     `,
   },
 ];
