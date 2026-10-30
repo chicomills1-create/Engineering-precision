@@ -2215,6 +2215,7 @@ export const LOCATION_SERVICE_PAGES: LocationServicePage[] = [
       "IECC 2021 energy compliance for Texas commercial",
     ],
     relatedServiceSlugs: ["structural-engineering", "civil-engineering"],
+    nearbyCityServiceLinks: [{ href: "/locations/texas/arlington/mep-engineering/", label: "MEP engineer in Arlington" }],
   },
 
   {
@@ -2321,6 +2322,7 @@ export const LOCATION_SERVICE_PAGES: LocationServicePage[] = [
       "City of Plano MEP permit package preparation",
     ],
     relatedServiceSlugs: ["structural-engineering", "civil-engineering"],
+    nearbyCityServiceLinks: [{ href: "/locations/texas/arlington/mep-engineering/", label: "MEP engineer in Arlington" }],
   },
 
   {
