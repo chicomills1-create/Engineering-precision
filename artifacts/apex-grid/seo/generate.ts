@@ -1551,6 +1551,16 @@ function phase0ArticleFrame(
   });
 }
 
+// Rank-recovery strike 2026-10-30 (fuel-tank cure): additive in-content link
+// support INTO /answers/airport-fuel-storage-facility-design/ from its closest
+// sibling answers. Keyed by answer slug; every other answers page passes
+// undefined and renders byte-identical output.
+const ANSWER_EXTRA_SECTIONS: Record<string, string> = {
+  "airport-fuel-farm-design": `<section class="block"><div class="container"><h2>The storage facility behind the <em>fuel farm</em></h2><div class="prose"><p>The fuel farm tanks sit inside a storage facility engineered as its own scope — tank foundations and anchorage, secondary containment, leak detection, hazardous-location electrical, fire protection, and piping, with fire code, environmental regulations, and airport standards reconciled into one buildable facility. That facility-level scope is covered in our guide to <a href="/answers/airport-fuel-storage-facility-design/">airport fuel storage facility design</a>.</p></div></div></section>`,
+  "industrial-fuel-storage-design": `<section class="block"><div class="container"><h2>Fuel storage at the <em>airport</em></h2><div class="prose"><p>Aviation fuel storage runs the same containment-first discipline — tank selection and sizing, secondary containment, leak detection, and fire protection — under an added overlay of airport standards, with the tank farm tied into hydrant and truck distribution. See how the scopes compare in our guide to <a href="/answers/airport-fuel-storage-facility-design/">aviation fuel tank design</a> for airport facilities.</p></div></div></section>`,
+  "tank-farm-design": `<section class="block"><div class="container"><h2>Tank farms for <em>aviation fuel</em></h2><div class="prose"><p>An airport tank farm applies the same fundamentals — foundations designed for the full fuel load, secondary containment, fire protection, and distribution piping — to aviation fuel, where hazardous-location electrical and airport standards join the design. Our guide to <a href="/answers/airport-fuel-storage-facility-design/">airport fuel storage facility design</a> covers the aviation case in detail.</p></div></div></section>`,
+};
+
 function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
   const phase7 = "cluster" in page;
   const related = phase7
@@ -1605,6 +1615,7 @@ function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
     facts: "cluster" in page ? undefined : page.facts,
     howTo: "cluster" in page ? undefined : page.howTo,
     visual: motifForText(`${"cluster" in page ? page.cluster : page.topic} ${page.h1}`),
+    extraBodyHtml: ANSWER_EXTRA_SECTIONS[page.slug],
   });
 }
 
