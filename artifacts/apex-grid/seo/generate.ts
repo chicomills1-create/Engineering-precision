@@ -3564,6 +3564,12 @@ ${phase0FaqMarkup(faqs)}
   }));
 }
 
+const METRO_SERVICE_EXTRA_SECTIONS: Record<string, string> = {
+  "omaha-ne-ia/mep-engineering": `<section class="block"><div class="container"><h2>MEP engineering in <em>Sioux City</em></h2><div class="prose"><p>The Omaha, NE-IA metro and the Sioux City, IA-NE-SD metro share the Iowa-Nebraska border region, and project teams regularly coordinate work in both. See <a href="/metros/sioux-city-ia-ne-sd/mep-engineering/">MEP engineering in Sioux City</a> for coordinated mechanical, electrical, and plumbing documents in the tri-state metro.</p></div></div></section>`,
+  "des-moines-west-des-moines-ia/mep-engineering": `<section class="block"><div class="container"><h2>MEP engineering in <em>Sioux City</em></h2><div class="prose"><p>Iowa project teams working across the state's metros can use the companion guide for the tri-state metro. See <a href="/metros/sioux-city-ia-ne-sd/mep-engineering/">MEP engineering in Sioux City</a> for coordinated mechanical, electrical, and plumbing documents in the Sioux City, IA-NE-SD metro.</p></div></div></section>`,
+  "cedar-rapids-ia/mep-engineering": `<section class="block"><div class="container"><h2>MEP engineering in <em>Sioux City</em></h2><div class="prose"><p>Iowa project teams working across the state's metros can use the companion guide for the tri-state metro. See <a href="/metros/sioux-city-ia-ne-sd/mep-engineering/">MEP engineering in Sioux City</a> for coordinated mechanical, electrical, and plumbing documents in the Sioux City, IA-NE-SD metro.</p></div></div></section>`,
+};
+
 function phase1MetroServicePage(metro: Phase1Metro, service: Phase1ServiceSlug): string {
   const url = `/metros/${metro.slug}/${service}/`;
   const label = phase1ServiceLabels[service];
@@ -3650,6 +3656,7 @@ ${familyVisual(motifForText(label), `Service location shown: ${metro.representat
 <section class="block"><div class="container"><h2>Scope and <em>intake evidence</em></h2><div class="prose"><p>${esc(metro.editorial.deliveryLens)}</p><ul class="scope">${details.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul></div></div></section>
 <section class="block"><div class="container"><h2>${esc(metro.representativeCity)} metro <em>context</em></h2><div class="prose"><p>${esc(metro.editorial.planningLens)}</p><p>${esc(metro.editorial.coordinationLens)}</p><p>${esc(metro.editorial.documentationLens)}</p></div></div></section>
 <section class="block"><div class="container"><h2>Related ${esc(metro.representativeCity)} <em>guides</em></h2><div class="linkrow">${related}</div></div></section>
+${METRO_SERVICE_EXTRA_SECTIONS[`${metro.slug}/${service}`] ?? ""}
 ${phase0FaqMarkup(faqs)}
 <section class="block"><div class="container"><h2>Professional <em>boundaries</em></h2><div class="prose"><p>Availability, scope, professional responsibility, applicable licensure, and filing requirements are confirmed per project. This guide does not invent an AHJ requirement, claim an office or project, promise approval, or publish a price. The authority having jurisdiction controls its review and decision.</p><p>The Census BPS final annual 2025 workbook reports ${metro.permitTotal2025.toLocaleString("en-US")} permitted housing units for this Metro Code 2 record, rank ${metro.rank} among the eligible records. <a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">Read the official source workbook</a>.</p></div></div></section>
 <section class="ctaband"><div class="container"><h2>Define the ${esc(label.toLowerCase())} scope</h2><p>Send the address, project scope, current documents, existing-condition evidence, comments, schedule dependencies, and requested deliverables.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
