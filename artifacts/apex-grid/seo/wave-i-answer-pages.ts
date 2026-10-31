@@ -433,6 +433,14 @@ export const WAVE_I_ANSWER_PAGES: Phase0AeoPage[] = [
         question: "What should I send for an initial review?",
         answer: "Send the project address or parcel information, the unit mix and building layout you have in mind, any site survey or geotechnical information, current drawings if they exist, your target schedule, and the jurisdiction. If you are deciding between single-story drive-up and multi-story climate-controlled, say so — that one decision shapes the entire engineering scope. I will map the gaps and tell you what the proposal needs to include.",
       },
+      {
+        question: "Can an existing building be converted to self-storage?",
+        answer: "Yes — adaptive reuse of retail or industrial buildings is a standard storage project type, and it starts with a change of occupancy. The conversion review checks the existing floor structure against real storage loads, then works through the egress, fire separation, sprinkler, and accessibility upgrades the new occupancy triggers. Buildings whose frames and floor plates suit the unit mix convert cleanly; buildings that fight the layout get expensive. A structural assessment of the existing building, done early, tells you which kind you have before design money is spent.",
+      },
+      {
+        question: "What codes and standards govern self-storage design?",
+        answer: "The IBC governs occupancy classification, construction type, and fire-resistance requirements for storage buildings. ASCE 7 supplies the storage live loads and the seismic, wind, and snow provisions. The IFC and NFPA 13 govern fire access, hydrant coverage, and sprinkler requirements, and the ADA with ANSI A117.1 sets accessibility for parking, routes, restrooms, and units. Conditioned space is framed by the IECC and ASHRAE 90.1 efficiency limits, and load-bearing light-gauge framing is designed to AISI S100. Adopted editions and local amendments are confirmed with the jurisdiction on each project.",
+      },
     ],
     sections: [
       {
@@ -454,6 +462,18 @@ export const WAVE_I_ANSWER_PAGES: Phase0AeoPage[] = [
           "Phasing: building the site in stages without cutting off access or utilities to operating phases",
           "Security infrastructure: site lighting, gate power, and conduit pathways coordinated before paving, not trenched in later",
         ],
+      },
+      {
+        heading: "How the structure is engineered, in depth",
+        body: "Storage floors carry unpredictable, densely packed loads, so the framing is designed to realistic storage occupancy loading under the IBC and ASCE 7 rather than generic office values. The framing comparison — load-bearing light-gauge steel designed to AISI S100, structural steel, or concrete — is made against the unit mix, because column spacing decides how floor plates divide into leasable units. For multi-story buildings, the lateral force-resisting system, gravity framing, and floor assemblies are balanced for strength, deflection, and fire rating, and roof framing is checked for wind uplift and snow.\n\nOn single-story drive-up buildings, the same discipline runs through the metal building coordination: the manufacturer's frame reactions land on foundations designed for the actual soils, and the slab is detailed as the working surface tenants drive on. Foundations and slabs follow the geotechnical picture everywhere — subsurface conditions set footing bearing, slab support, and settlement expectations, which matter more as buildings stack floors. Fire-rated floor and roof assemblies are detailed with the demising separations between units, so the rating story is consistent from the walls to the structure above them. The goal throughout is the lightest efficient system that carries the real loads — structure that supports the leasing plan instead of taxing it.",
+      },
+      {
+        heading: "Climate-controlled buildings, in depth",
+        body: "Climate-controlled space commands higher rents, but only if it is conditioned economically. The mechanical design zones HVAC by floor and orientation and maintains the temperature and humidity ranges tenants expect, with load calculations following ACCA Manual N and ASHRAE fundamentals that account for the low internal gains and high envelope influence typical of storage buildings. Dehumidification is prioritized, because moisture control — more than temperature alone — protects stored goods and the building itself.\n\nVentilation is designed to code minimums so the building is not over-conditioned, equipment is sized to actual loads rather than rules of thumb, and controls stay simple and robust for unattended operation. The envelope is coordinated with the mechanical design to reduce load, and the IECC and ASHRAE 90.1 efficiency limits for envelope, lighting, and mechanical systems frame the design. Corridor lighting runs LED with occupancy controls, and multi-story buildings add elevator power, egress lighting, and emergency systems to the electrical scope. Plumbing stays deliberately lean — restrooms and drainage, detailed for code compliance — because the mechanical budget belongs in the conditioned space.",
+      },
+      {
+        heading: "Site, civil, and phasing, in depth",
+        body: "Single-story drive-up facilities are largely a civil exercise, and multi-story sites still depend on efficient site design. Grading, drive aisles sized for truck and vehicle circulation, stormwater detention and water-quality treatment, utilities, and ADA-compliant access are designed as one system, with fire access and hydrant coverage per the IFC and sprinkler requirements under the IFC and NFPA 13 resolved against building size and occupancy. Pavement sections are sized for the light-to-moderate traffic the use generates, and accessibility runs through the site design — the ADA and ANSI A117.1 requirements govern parking, routes, restrooms, and units. Site lighting for security, gate power, and conduit pathways are coordinated with the electrical scope before paving, not trenched in afterward.\n\nBecause many storage developments are built in phases to match lease-up, grading, drainage, and utility infrastructure are planned so later phases connect without rework and without disturbing operating buildings — the phasing plan is an engineering document, not an afterthought. Coordinated civil and structural documents keep the site, the building pads, and the utilities aligned across every phase.",
       },
     ],
     extraLinks: [
