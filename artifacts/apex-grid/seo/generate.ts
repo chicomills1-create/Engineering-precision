@@ -1548,6 +1548,12 @@ function phase0ArticleFrame(
     canonical: `${SITE}${opts.canonical}`,
     schemaJson: [schema, phase0FaqSchema(opts.faqs), ...(howToSchema ? [howToSchema] : []), breadcrumbSchema(crumbs)],
     body,
+    // Phone-format cure (2026-11-01): money families rendered through this
+    // frame carry the hyphenated phone in the footer contact block.
+    money:
+      opts.canonical.startsWith("/answers/") ||
+      opts.canonical.startsWith("/pe-stamp/") ||
+      opts.canonical.startsWith("/resources/"),
   });
 }
 
@@ -4060,6 +4066,27 @@ function answerLede(svc: ServiceDef, place: string, abbrev: string, ahj: string)
   }
 }
 
+// Phone-format cure (2026-11-01): the hourly's money-page service set —
+// state service pages for these core services carry the hyphenated phone
+// in the footer contact block; all other generated pages are unchanged.
+const MONEY_PAGE_SERVICE_SLUGS = new Set([
+  "structural-engineering",
+  "mep-engineering",
+  "civil-engineering",
+  "electrical-engineering",
+  "geotechnical-engineering",
+  "mechanical-engineering",
+  "plumbing-engineering",
+  "fire-protection-engineering",
+  "energy-engineering",
+]);
+// The hourly's FIXED money discipline hubs.
+const MONEY_DISCIPLINE_SLUGS = new Set([
+  "structural-engineering",
+  "mep-engineering",
+  "civil-engineering",
+]);
+
 function servicePage(state: StateData, svc: ServiceDef, allStates: StateData[], cities: CityData[]): string {
   const url = `/locations/${state.slug}/${svc.slug}/`;
   const crumbs = [
@@ -4177,6 +4204,7 @@ ${peStampBlock({
     canonical: `${SITE}${url}`,
     schemaJson: [orgSchema, svcSchema, faqSchema, breadcrumbSchema(crumbs)],
     body: body.replace(/[ \t]+$/gm, ""),
+    money: MONEY_PAGE_SERVICE_SLUGS.has(svc.slug),
   });
 }
 
@@ -4731,6 +4759,7 @@ ${d.sections
     canonical: `${SITE}${url}`,
     schemaJson: [orgSchema, svcSchema, faqSchema, breadcrumbSchema(crumbs)],
     body,
+    money: MONEY_DISCIPLINE_SLUGS.has(d.slug),
   });
 }
 function u(loc: string, _lastmod: string, changefreq: string, priority: string): string {
@@ -5307,6 +5336,7 @@ ${related.length ? `<section class="block"><div class="container">
     canonical: `${SITE}${url}`,
     schemaJson: [orgSchema, articleSchema, ...(faqSchema ? [faqSchema] : []), breadcrumbSchema(crumbs)],
     body,
+    money: true,
   });
 }
 
@@ -5346,6 +5376,7 @@ ${breadcrumb(crumbs)}
     canonical: `${SITE}/resources/${disc.slug}/`,
     schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
     body,
+    money: true,
   });
 }
 function resourcesHubPage(): string {
@@ -5392,6 +5423,7 @@ ${RESOURCE_DISCIPLINES.map((disc) => {
     canonical: `${SITE}/resources/`,
     schemaJson: [orgSchema, breadcrumbSchema(crumbs)],
     body,
+    money: true,
   });
 }
 
@@ -6248,6 +6280,7 @@ function solutionPage(page: SolutionPage): string {
     canonical: `${SITE}${url}`,
     schemaJson: [spSchema, ...residualsFaqSchemaList(page.faqs), breadcrumbSchema(crumbs)],
     body,
+    money: page.dir === "solutions",
   });
 }
 
@@ -6309,6 +6342,7 @@ function solutionsHubPage(): string {
     canonical: `${SITE}/solutions/`,
     schemaJson: [schema, ...residualsFaqSchemaList(SOLUTIONS_HUB_FAQS), breadcrumbSchema([{ name: "Home", href: "/" }, { name: "Solutions" }])],
     body,
+    money: true,
   });
 }
 
