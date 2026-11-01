@@ -7157,6 +7157,7 @@ ${extendedStructuralCards}
     canonical: `${SITE}${url}`,
     schemaJson: [schema, ...residualsFaqSchemaList(hub.faqs), breadcrumbSchema(crumbs)],
     body,
+    money: MONEY_DISCIPLINE_SLUGS.has(hub.slug),
   });
 }
 
