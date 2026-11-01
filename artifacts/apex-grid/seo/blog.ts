@@ -1,4 +1,5 @@
 /** Static blog posts for SEO topical authority. Rendered by generate.ts into public/blog/. */
+import { SOUTH_AFRICA_BLOG_POSTS } from "./south-africa-blog";
 
 export interface BlogPost {
   slug: string;
@@ -469,4 +470,5 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
   },
+  ...SOUTH_AFRICA_BLOG_POSTS,
 ];
