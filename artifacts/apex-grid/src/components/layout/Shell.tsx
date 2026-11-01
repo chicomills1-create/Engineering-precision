@@ -7,6 +7,26 @@ import { LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "@/lib/l
 
 export function Shell({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
+  // Phone-format cure (2026-11-01): on money routes the CTA/contact phone
+  // renders in the machine-canonical hyphenated form (NAP / tel parsing).
+  // Every other route keeps the display format, and display-format
+  // instances elsewhere on money pages are untouched.
+  const path = location.length > 1 ? location.replace(/\/$/, "") : location;
+  const moneyPage =
+    path === "/" ||
+    path === "/contact" ||
+    path === "/request-proposal" ||
+    path === "/submit-project" ||
+    path === "/procurement/submit-rfp-rfq" ||
+    path === "/pe-stamp" ||
+    path === "/resources" ||
+    path === "/services" ||
+    path.startsWith("/services/") ||
+    path.startsWith("/solutions/") ||
+    path.startsWith("/pe-stamp/") ||
+    path.startsWith("/resources/") ||
+    /^\/[a-z-]+-engineering$/.test(path);
+  const phoneDisplay = moneyPage ? "480-490-0064" : "(480) 490-0064";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [year, setYear] = useState(2026);
@@ -193,7 +213,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
               aria-label="Call Apex Grid Engineering at (480) 490-0064"
             >
               <Phone className="w-4 h-4" />
-              (480) 490-0064
+              {phoneDisplay}
             </a>
             <Link
               href="/contact"
@@ -314,7 +334,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <Phone className="w-4 h-4" />
-                Call (480) 490-0064
+                Call {phoneDisplay}
               </a>
               <Link
                 href="/contact"
@@ -425,7 +445,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 </li>
                 <li className="pt-4 border-t border-border/50">
                   <a href="tel:+14804900064" className="text-xl font-display font-bold hover:text-primary transition-colors focus-visible:outline-none focus-visible:text-primary block mt-1">
-                    (480) 490-0064
+                    {phoneDisplay}
                   </a>
                 </li>
               </ul>
