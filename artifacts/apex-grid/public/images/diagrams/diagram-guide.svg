@@ -15,13 +15,13 @@
 <circle cx="985" cy="150" r="42"/><path d="M985 116v68M951 150h68M961 126l24 24M1009 126l-24 24"/>
 </g>
 <text x="985" y="156" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#d9d9d9">N</text>
-<g stroke="#d9d9d9" stroke-width="2.5"><rect x="830" y="368" width="310" height="92"/><path d="M830 398h310M830 428h310M985 368v92"/></g>
+<g stroke="#d9d9d9" stroke-width="2.5"><rect x="770" y="368" width="370" height="92"/><path d="M770 398h370M770 428h370M1025 368v92"/></g>
 <g font-family="sans-serif" font-size="15" fill="#8a8a8a">
-<text x="842" y="390">APEX GRID ENGINEERING</text>
-<text x="842" y="420">ILLUSTRATIVE DIAGRAM</text>
-<text x="842" y="450">NOT TO SCALE</text>
-<text x="997" y="390">FAMILY</text>
-<text x="997" y="420">GUIDE</text>
+<text x="782" y="390">APEX GRID ENGINEERING</text>
+<text x="782" y="420">ILLUSTRATIVE DIAGRAM</text>
+<text x="782" y="450">NOT TO SCALE</text>
+<text x="1037" y="390">FAMILY</text>
+<text x="1037" y="420">GUIDE</text>
 </g>
 <text x="84" y="52" font-family="sans-serif" font-size="21" letter-spacing="4" fill="#8a8a8a">ENGINEERING GUIDE</text>
 </svg>
