@@ -152,7 +152,7 @@ function header(): string {
 </div></header>`;
 }
 
-function footer(): string {
+function footer(money: boolean = false): string {
   const year = PROJECT_YEAR;
   return `<footer><div class="container">
    <div class="fgrid">
@@ -164,7 +164,7 @@ function footer(): string {
      <div><h4>Firm</h4><ul><li><a href="/about">About Us</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/resources">Resources</a></li><li><a href="/blog/">Blog</a></li><li><a href="/south-africa/">South Africa Insights</a></li><li><a href="/locations/">Service Areas</a></li><li><a href="/licensing-service-coverage/">Licensing &amp; Coverage</a></li><li><a href="/contact">Contact</a></li></ul></div>
     <div><h4>Services</h4><ul><li><a href="/services/mep">MEP Engineering</a></li><li><a href="/services/structural">Structural Design</a></li><li><a href="/services/civil">Civil Engineering</a></li><li><a href="/architecture/">Architectural Design</a></li><li><a href="/general-contracting/">General Contracting</a></li></ul></div>
     <div><h4>Disciplines</h4><ul><li><a href="/structural-engineering/">Structural Engineering</a></li><li><a href="/mep-engineering/">MEP Engineering</a></li><li><a href="/civil-engineering/">Civil Engineering</a></li><li><a href="/mechanical-engineering/">Mechanical (HVAC)</a></li><li><a href="/electrical-engineering/">Electrical Engineering</a></li><li><a href="/plumbing-engineering/">Plumbing Engineering</a></li></ul></div>
-     <div><h4>Business-provided contact</h4><ul><li>Operating / contact address<br/>22475 E Quintero Rd<br/>Queen Creek, AZ 85142</li><li><a href="mailto:info@apexgrideng.com">info@apexgrideng.com</a></li><li><a href="tel:+14804900064">(480) 490-0064</a></li></ul></div>
+     <div><h4>Business-provided contact</h4><ul><li>Operating / contact address<br/>22475 E Quintero Rd<br/>Queen Creek, AZ 85142</li><li><a href="mailto:info@apexgrideng.com">info@apexgrideng.com</a></li><li><a href="tel:+14804900064">${money ? "480-490-0064" : "(480) 490-0064"}</a></li></ul></div>
   </div>
   <div class="fbottom"><p>© ${year} Apex Grid Engineering PLLC. All rights reserved.</p><p><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></p></div>
 </div></footer>`;
@@ -442,6 +442,7 @@ export function htmlShell(opts: {
   schemaJson: object[];
   body: string;
   robots?: string;
+  money?: boolean;
 }): string {
   // Strike 100 Week-1 CTR Blitz (2026-10-12, ChatGPT-approved): apply
   // title/description/schema/UTM overrides for the 10 target pages.
@@ -502,7 +503,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 ${header()}
 ${_bodyOut}
-${footer()}
+${footer(opts.money === true)}
 </body>
 </html>`;
 }
