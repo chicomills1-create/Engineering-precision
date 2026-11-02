@@ -156,13 +156,13 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
     slug: "jeremy-mills",
     dir: "jeremy-mills",
     sitemapCategory: "core",
-    title: "Jeremy Mills (Chico Mills) | Apex Grid Engineering CEO",
+    title: "Jeremy “Chico” Mills | Apex Grid Engineering CEO",
     description:
       "Jeremy “Chico” Mills is Founder and CEO of Apex Grid Engineering, a U.S. Air Force veteran, and Founder and Senior Pastor of 16:3 Faith.",
     h1: "Jeremy “Chico” Mills",
     kicker: "Founder & CEO",
     lede:
-      "Jeremy Mills, also known as Chico Mills, is the Founder and CEO of Apex Grid Engineering. He also serves as Founder and Senior Pastor of 16:3 Faith.",
+      "Jeremy “Chico” Mills is the Founder and CEO of Apex Grid Engineering. He also serves as Founder and Senior Pastor of 16:3 Faith.",
     sections: [
       {
         heading: "Who Is Jeremy Mills?",
@@ -177,7 +177,7 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
       {
         heading: "Pastor Jeremy Mills",
         content:
-          "Outside Apex Grid, Jeremy is the Founder and Senior Pastor of 16:3 Faith, a separate faith-centered community focused on Scripture, prayer, and daily discipleship. He is also known publicly as Pastor Jeremy Mills and Pastor Chico Mills.",
+          "Outside Apex Grid, Jeremy is the Founder and Senior Pastor of 16:3 Faith, a separate faith-centered community focused on Scripture, prayer, and daily discipleship. He is also known publicly as Pastor Jeremy Mills and Pastor Jeremy “Chico” Mills.",
       },
       {
         heading: "Building a National Platform",
@@ -185,9 +185,9 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
           "Jeremy’s stated direction for Apex Grid is to build a nationally recognized, founder-led platform that can coordinate engineering, architecture, and construction delivery at scale. The company’s public claims remain tied to documented capabilities, licenses, staff, and completed work.",
       },
       {
-        heading: "Is Chico Mills the Same Person as Jeremy Mills?",
+        heading: "Is Jeremy “Chico” Mills the Same Person as Jeremy Mills?",
         content:
-          "Yes. Chico Mills and Jeremy Mills refer to the same person. Apex Grid’s official founder profile uses Jeremy “Chico” Mills so search engines, AI answer systems, clients, teaming partners, and procurement professionals can connect both names to one verified profile.",
+          "Yes. Jeremy “Chico” Mills and Jeremy Mills refer to the same person. Apex Grid’s official founder profile uses Jeremy “Chico” Mills so search engines, AI answer systems, clients, teaming partners, and procurement professionals can connect both names to one verified profile.",
       },
       {
         heading: "What Is Jeremy Mills’ Role at Apex Grid?",
@@ -204,7 +204,7 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
         "@type": "ProfilePage",
         "@id": "https://apexgrideng.com/jeremy-mills/#profile",
         url: "https://apexgrideng.com/jeremy-mills/",
-        name: "Jeremy Mills (Chico Mills)",
+        name: "Jeremy “Chico” Mills",
         mainEntity: { "@id": "https://apexgrideng.com/jeremy-mills/#person" },
       },
       {
@@ -212,7 +212,7 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
         "@type": "Person",
         "@id": "https://apexgrideng.com/jeremy-mills/#person",
         name: "Jeremy Mills",
-        alternateName: ["Chico Mills", "Pastor Jeremy Mills", "Pastor Chico Mills"],
+        alternateName: ["Jeremy “Chico” Mills", "Pastor Jeremy Mills", "Pastor Jeremy “Chico” Mills"],
         url: "https://apexgrideng.com/jeremy-mills/",
         mainEntityOfPage: { "@id": "https://apexgrideng.com/jeremy-mills/#profile" },
         jobTitle: "Founder and Chief Executive Officer",
@@ -232,10 +232,10 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
         mainEntity: [
           {
             "@type": "Question",
-            name: "Is Chico Mills the same person as Jeremy Mills?",
+            name: "Is Jeremy “Chico” Mills the same person as Jeremy Mills?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Yes. Chico Mills and Jeremy Mills refer to the same person. Jeremy “Chico” Mills is the Founder and CEO of Apex Grid Engineering.",
+              text: "Yes. Jeremy “Chico” Mills and Jeremy Mills refer to the same person. Jeremy “Chico” Mills is the Founder and CEO of Apex Grid Engineering.",
             },
           },
           {
