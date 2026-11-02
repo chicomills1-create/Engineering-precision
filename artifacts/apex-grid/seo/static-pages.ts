@@ -347,13 +347,13 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
     h1: "Our Companies",
     kicker: "Apex Grid Engineering PLLC",
     lede:
-      "One founder, one operating family. Apex Grid Engineering PLLC is the flagship engineering firm and the parent of the operating brands below; alongside it stand the affiliated companies Jeremy Mills founded under their own names and entities.",
+      "One founder, one operating family. Apex Grid Engineering PLLC is the flagship engineering firm and the parent of the operating brands below; alongside it stand the affiliated companies Jeremy Mills founded under their own names.",
     showFounderByline: true,
     sections: [
       {
         heading: "How the Family Is Organized",
         content:
-          "Apex Grid Engineering PLLC operates its service brands directly: DraftSignal Digital, Seal Anvil, Stamp Forge, DueFluent, SpecReady, CatalogIQ, RuleCurrent, and RingAnvil trade under the flagship. Torch Engineering, Engides, 163 Faith, Kairobot, and Paired are separate affiliated companies under the same founder ownership — each runs under its own name and entity, and each is linked below so clients, partners, and search systems can connect the family accurately.",
+          "Apex Grid Engineering PLLC operates its service brands directly: DraftSignal Digital, Seal Anvil, Stamp Forge, DueFluent, SpecReady, CatalogIQ, RuleCurrent, and RingAnvil trade under the flagship. Torch Engineering, Engides, 163 Faith, Kairobot, and Paired are separate affiliated companies under the same founder ownership — each runs under its own name, and each is linked below so clients, partners, and search systems can connect the family accurately.",
       },
     ],
     groups: [
@@ -408,7 +408,7 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
       {
         heading: "Affiliated Companies",
         intro:
-          "Separate companies founded by Jeremy Mills and operated alongside the flagship — each under its own name and entity, sharing one founder.",
+          "Separate companies founded by Jeremy Mills and operated alongside the flagship — each under its own name, sharing one founder.",
         entries: [
           {
             name: "Torch Engineering",
