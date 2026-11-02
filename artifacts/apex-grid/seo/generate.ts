@@ -6875,6 +6875,36 @@ function staticStandalonePage(page: StaticPageDef): string {
     </section>`,
     )
     .join("");
+  const groupsHtml = (page.groups ?? [])
+    .map((g) => {
+      const cards = g.entries
+        .map((entry) => {
+          let host = entry.href;
+          try {
+            host = new URL(entry.href).hostname.replace(/^www\./, "");
+          } catch {
+            /* keep raw href as the card label */
+          }
+          return `<a class="card" href="${esc(entry.href)}"><div class="label">${esc(host)}</div><h3>${esc(entry.name)}</h3><p>${esc(entry.blurb)}</p>${entry.note ? `<p style="margin-top:10px">${esc(entry.note)}</p>` : ""}</a>`;
+        })
+        .join("");
+      const inner = `<h2>${esc(g.heading)}</h2>${g.intro ? `<p style="color:hsl(0 0% 74%);max-width:820px;margin-bottom:18px">${esc(g.intro)}</p>` : ""}<div class="grid2">${cards}</div>`;
+      return enhanced
+        ? `
+    <section class="block">
+      <div class="container">
+        ${inner}
+      </div>
+    </section>`
+        : `
+    <section class="section section--white">
+      <div class="container">
+        ${inner}
+      </div>
+    </section>`;
+    })
+    .join("");
+  const sectionsAndGroups = sectionsHtml + groupsHtml;
   const relatedHtml = page.relatedLinks?.length
     ? `<section class="block">
       <div class="container">
@@ -6895,7 +6925,7 @@ function staticStandalonePage(page: StaticPageDef): string {
       </div>
     </div>
     ${breadcrumb(crumbs)}
-    ${sectionsHtml}
+    ${sectionsAndGroups}
      ${relatedHtml}
     ${faqHtml}
     <section class="ctaband">
@@ -6917,7 +6947,7 @@ function staticStandalonePage(page: StaticPageDef): string {
       </div>
     </div>
     ${breadcrumb(crumbs)}
-    ${sectionsHtml}
+    ${sectionsAndGroups}
     ${faqHtml}
     <section class="section section--dark cta-band">
       <div class="container">
@@ -7051,6 +7081,7 @@ function htmlSitemapPage(): string {
             <h2>About &amp; Company</h2>
             <ul>
               <li><a href="/about/">About Apex Grid</a></li>
+              <li><a href="/companies/">Our Companies</a></li>
               <li><a href="/military/">Military &amp; Veterans</a></li>
               <li><a href="/capabilities/">Capabilities</a></li>
               <li><a href="/government-contracting/">Government Contracting</a></li>
