@@ -38,6 +38,11 @@ export default function About() {
               Engineering drawings should solve problems in the field, not create them.
               That's why we exist.
             </p>
+            <p className="mt-10 font-display text-2xl md:text-3xl font-bold leading-snug text-white">
+              Show power, proof, and a new direction for the future — we work harder
+              than others, fully operational, same day quotes, same day stamps, and a
+              strong team to back the success.
+            </p>
           </div>
         </div>
       </section>
@@ -113,13 +118,21 @@ export default function About() {
                     loading="lazy"
                   />
                 </div>
-                <h3 className="text-2xl font-display font-bold mb-1 text-white">Jeremy Mills</h3>
-                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Founder &amp; CEO · U.S. Air Force Veteran</div>
+                <h3 className="text-2xl font-display font-bold mb-1 text-white">
+                  <a href="/companies" className="hover:text-primary transition-colors">
+                    Jeremy “Chico” Mills — Founder &amp; CEO
+                  </a>
+                </h3>
+                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Serial entrepreneur · USAF veteran</div>
                 <p className="text-muted-foreground leading-relaxed">
                   Jeremy founded Apex Grid on mission-first discipline: accountability,
                   clear communication, and delivering for clients the way you deliver
                   for your unit — no excuses, no surprises.
                 </p>
+                <p className="text-muted-foreground leading-relaxed mt-4">
+                  Jeremy Mills is the founder and owner of 10+ companies, led by Apex Grid Engineering.
+                </p>
+                <p className="mt-4 text-sm text-muted-foreground">An Apex Grid Engineering PLLC company.</p>
                 <Link
                   href="/military"
                   className="inline-flex items-center gap-2 mt-6 text-sm font-bold text-primary hover:underline underline-offset-4"
@@ -177,6 +190,17 @@ export default function About() {
                 </p>
               </div>
             </div>
+            <div className="mt-16 flex flex-col items-center justify-center gap-4 text-center sm:flex-row sm:text-left">
+              <div
+                aria-hidden="true"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border border-primary/60 bg-card font-display text-lg font-bold text-primary"
+              >
+                M
+              </div>
+              <p className="font-mono text-xs tracking-widest text-muted-foreground">
+                Operations directed by Muse — AI Director of Operations
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -213,7 +237,7 @@ const JEREMY_PERSON_SCHEMA = {
   "@type": "Person",
   "@id": `${SITE_URL}/military#jeremy`,
   name: "Jeremy Mills",
-  alternateName: ["Chico Mills", "Pastor Jeremy Mills", "Pastor Chico Mills"],
+  alternateName: ["Jeremy “Chico” Mills", "Pastor Jeremy Mills", "Pastor Chico Mills"],
   url: `${SITE_URL}/military`,
   mainEntityOfPage: { "@id": `${SITE_URL}/military#jeremy` },
   jobTitle: "Founder and Chief Executive Officer",
