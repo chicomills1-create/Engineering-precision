@@ -66,6 +66,11 @@ export default function About() {
                 One firm, one point of contact. You tell us the problem — we design it,
                 stamp it, or run the numbers, and get you a price fast.
               </p>
+              <p>
+                Operations are coordinated on Muse, our AI operations system, directed
+                by Jeremy Mills — so quotes go out same-day and nothing falls through
+                the cracks.
+              </p>
             </div>
 
             <div className="border border-border bg-background p-6 sm:p-10 rounded-sm h-fit">
@@ -189,17 +194,6 @@ export default function About() {
                   He heads design across structural, MEP, and civil scopes — the engineering engine behind the firm&apos;s coverage model, with licensed Professional Engineers stamping and sealing every regulated deliverable.
                 </p>
               </div>
-            </div>
-            <div className="mt-16 flex flex-col items-center justify-center gap-4 text-center sm:flex-row sm:text-left">
-              <div
-                aria-hidden="true"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border border-primary/60 bg-card font-display text-lg font-bold text-primary"
-              >
-                M
-              </div>
-              <p className="font-mono text-xs tracking-widest text-muted-foreground">
-                Operations directed by Muse — AI Director of Operations
-              </p>
             </div>
           </div>
         </div>
