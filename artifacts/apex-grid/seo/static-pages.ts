@@ -16,6 +16,12 @@ export interface StaticPageDef {
   showFounderByline?: boolean;
   relatedLinks?: { href: string; label: string }[];
   ctaHref?: string;
+  /** Optional card groups rendered after the sections (companies hub). */
+  groups?: {
+    heading: string;
+    intro?: string;
+    entries: { name: string; href: string; blurb: string; note?: string }[];
+  }[];
 }
 
 export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
@@ -330,5 +336,197 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
     ctaHeading: "Request an Engineering Report",
     ctaText:
       "Send us your project details and we'll provide a fee proposal within one business day. Most engineering reports are completed within 5–10 business days of receiving the required information.",
+  },
+  {
+    slug: "companies",
+    dir: "companies",
+    sitemapCategory: "core",
+    title: "Our Companies | Apex Grid Engineering",
+    description:
+      "The family of companies founded by Jeremy Mills: the operating brands of Apex Grid Engineering PLLC — engineering, PE stamping, and software services — plus affiliated companies under common founder ownership.",
+    h1: "Our Companies",
+    kicker: "Apex Grid Engineering PLLC",
+    lede:
+      "One founder, one operating family. Apex Grid Engineering PLLC is the flagship engineering firm and the parent of the operating brands below; alongside it stand the affiliated companies Jeremy Mills founded under their own names and entities.",
+    showFounderByline: true,
+    sections: [
+      {
+        heading: "How the Family Is Organized",
+        content:
+          "Apex Grid Engineering PLLC operates its service brands directly: DraftSignal Digital, Seal Anvil, Stamp Forge, DueFluent, SpecReady, CatalogIQ, RuleCurrent, and RingAnvil trade under the flagship. Torch Engineering, Engides, 163 Faith, Kairobot, and Paired are separate affiliated companies under the same founder ownership — each runs under its own name and entity, and each is linked below so clients, partners, and search systems can connect the family accurately.",
+      },
+    ],
+    groups: [
+      {
+        heading: "Operating Brands of Apex Grid Engineering PLLC",
+        intro:
+          "These brands trade under Apex Grid Engineering PLLC, the flagship engineering firm founded by Jeremy Mills.",
+        entries: [
+          {
+            name: "DraftSignal Digital",
+            href: "https://draftsignaldigital.com/",
+            blurb: "Search visibility and SEO/AEO programs for engineering firms.",
+            note: "SiteWatch, DraftSignal's website-monitoring service, is a DraftSignal product line.",
+          },
+          {
+            name: "Seal Anvil",
+            href: "https://sealanvil.com/",
+            blurb: "PE stamp and seal service for engineering plans — send drawings, get them stamped.",
+          },
+          {
+            name: "Stamp Forge",
+            href: "https://stampforgeeng.com/",
+            blurb: "PE stamp guides and answers — how sealing works, state by state.",
+          },
+          {
+            name: "DueFluent",
+            href: "https://duefluent.com/",
+            blurb: "Invoice follow-up subscriptions for small businesses — your invoices, our follow-through.",
+          },
+          {
+            name: "SpecReady",
+            href: "https://specreadyhq.com/",
+            blurb: "Capability statements and SOQ packages prepared for firms pursuing public and private work.",
+          },
+          {
+            name: "CatalogIQ",
+            href: "https://catalogiqhq.com/",
+            blurb: "E-commerce catalog software and product-listing services.",
+          },
+          {
+            name: "RuleCurrent",
+            href: "https://rulecurrent.com/",
+            blurb: "Permit and code-currency services that keep project requirements current.",
+          },
+          {
+            name: "RingAnvil",
+            href: "https://ringanvil.com/",
+            blurb: "AI call answering and lead follow-up for trades businesses.",
+          },
+        ],
+      },
+      {
+        heading: "Affiliated Companies",
+        intro:
+          "Separate companies founded by Jeremy Mills and operated alongside the flagship — each under its own name and entity, sharing one founder.",
+        entries: [
+          {
+            name: "Torch Engineering",
+            href: "https://torchengineering.com/",
+            blurb: "Engineering firm — structural, MEP, and civil design with PE stamping.",
+          },
+          {
+            name: "Engides",
+            href: "https://engides.com/",
+            blurb: "Engineering firm — agile MEP, structural, and civil design.",
+          },
+          {
+            name: "163 Faith",
+            href: "https://163faith.com/",
+            blurb: "Faith-centered community and music platform.",
+          },
+          {
+            name: "Kairobot",
+            href: "https://kairobot.ai/",
+            blurb: "AI search engine.",
+          },
+          {
+            name: "Paired",
+            href: "https://pairedart.com/",
+            blurb: "Artist marketplace connecting artists and buyers of original art.",
+          },
+        ],
+      },
+    ],
+    relatedLinks: [
+      { href: "/about", label: "About Apex Grid Engineering" },
+      { href: "/jeremy-mills/", label: "Jeremy Mills — Founder & CEO" },
+      { href: "/team", label: "Meet the Team" },
+    ],
+    ctaHeading: "Work With the Flagship",
+    ctaText:
+      "Engineering, architecture, and construction-delivery work starts with Apex Grid Engineering. Send the project and we will route it to the right team.",
+    schemaJson: [
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://apexgrideng.com/#business",
+            name: "Apex Grid Engineering",
+            legalName: "Apex Grid Engineering PLLC",
+            url: "https://apexgrideng.com/",
+            founder: { "@id": "https://apexgrideng.com/jeremy-mills/#person" },
+            subOrganization: [
+              {
+                "@type": "Organization",
+                name: "DraftSignal Digital",
+                url: "https://draftsignaldigital.com/",
+                description: "Search visibility and SEO/AEO programs for engineering firms.",
+              },
+              {
+                "@type": "Organization",
+                name: "Seal Anvil",
+                url: "https://sealanvil.com/",
+                description: "PE stamp and seal service for engineering plans.",
+              },
+              {
+                "@type": "Organization",
+                name: "Stamp Forge",
+                url: "https://stampforgeeng.com/",
+                description: "PE stamp guides and answers — how sealing works, state by state.",
+              },
+              {
+                "@type": "Organization",
+                name: "DueFluent",
+                url: "https://duefluent.com/",
+                description: "Invoice follow-up subscriptions for small businesses.",
+              },
+              {
+                "@type": "Organization",
+                name: "SpecReady",
+                url: "https://specreadyhq.com/",
+                description: "Capability statements and SOQ packages for firms pursuing public and private work.",
+              },
+              {
+                "@type": "Organization",
+                name: "CatalogIQ",
+                url: "https://catalogiqhq.com/",
+                description: "E-commerce catalog software and product-listing services.",
+              },
+              {
+                "@type": "Organization",
+                name: "RuleCurrent",
+                url: "https://rulecurrent.com/",
+                description: "Permit and code-currency services that keep project requirements current.",
+              },
+              {
+                "@type": "Organization",
+                name: "RingAnvil",
+                url: "https://ringanvil.com/",
+                description: "AI call answering and lead follow-up for trades businesses.",
+              },
+            ],
+          },
+          {
+            "@type": "Person",
+            "@id": "https://apexgrideng.com/jeremy-mills/#person",
+            name: "Jeremy Mills",
+            alternateName: "Jeremy “Chico” Mills",
+            jobTitle: "Founder & CEO",
+            url: "https://apexgrideng.com/jeremy-mills/",
+            worksFor: { "@id": "https://apexgrideng.com/#business" },
+            founderOf: [
+              { "@id": "https://apexgrideng.com/#business" },
+              { "@type": "Organization", name: "Torch Engineering", url: "https://torchengineering.com/" },
+              { "@type": "Organization", name: "Engides", url: "https://engides.com/" },
+              { "@type": "Organization", name: "163 Faith", url: "https://163faith.com/" },
+              { "@type": "Organization", name: "Kairobot", url: "https://kairobot.ai/" },
+              { "@type": "Organization", name: "Paired", url: "https://pairedart.com/" },
+            ],
+          },
+        ],
+      },
+    ],
   },
 ];
