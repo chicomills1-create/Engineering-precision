@@ -7,6 +7,7 @@ import NotFound from "./not-found";
 const INDUSTRY_DISCIPLINE_ROOTS: Record<string, string> = {
   "healthcare-engineering": "healthcare",
   "agriculture-cannabis-facility-engineering": "agriculture",
+  "cold-storage-food-processing-engineering": "cold-storage",
   "industrial-warehouse-engineering": "industrial-warehouse",
   "multifamily-residential-engineering": "multifamily",
   "data-center-engineering": "data-centers",
@@ -32,6 +33,8 @@ const DISCIPLINE_SLUGS: Record<string, string> = {
 const DISCIPLINE_LINK_EXCLUSIONS = new Set([
   "agriculture/geotechnical-engineering",
   "agriculture/structural-engineering",
+  "cold-storage/civil-engineering",
+  "cold-storage/geotechnical-engineering",
 ]);
 
 const INDUSTRY_SPECIALTY_LINKS: Record<string, { href: string; label: string }[]> = {
@@ -52,6 +55,10 @@ const INDUSTRY_SPECIALTY_LINKS: Record<string, { href: string; label: string }[]
     { href: "/industries/industrial-warehouse/warehouse-structural-engineering/", label: "Warehouse structural engineering" },
     { href: "/industries/manufacturing/mep-engineering/", label: "Manufacturing MEP engineering" },
     { href: "/industries/manufacturing/structural-engineering/", label: "Manufacturing structural engineering" },
+  ],
+  "cold-storage-food-processing-engineering": [
+    { href: "/industries/cold-storage/mep-engineering/", label: "Cold storage MEP engineering" },
+    { href: "/industries/cold-storage/structural-engineering/", label: "Cold storage structural engineering" },
   ],
   "life-science-cleanroom-engineering": [{ href: "/industries/life-science/cleanroom-mep-engineering/", label: "Cleanroom MEP engineering" }],
   "military-defense-engineering": [{ href: "/industries/military-defense/mechanical-engineering/", label: "Military mechanical engineering" }],
@@ -265,6 +272,15 @@ export default function IndustryDetail() {
                 </Link>
               ))}
             </div>
+            {industry.slug === "cold-storage-food-processing-engineering" && (
+              <p className="mt-8 max-w-3xl text-foreground/80 leading-relaxed">
+                Inside a refrigerated facility, the box holds temperature only as well as its systems do. Engaging an{" "}
+                <Link href="/industries/cold-storage/mep-engineering/" className="font-semibold text-primary hover:underline">
+                  MEP engineer for cold storage
+                </Link>{" "}
+                covers the plant behind the refrigeration — compressor and defrost electrical loads, freezer floor heating, dock heating, low-temperature lighting, and temperature monitoring — engineered as one package with the envelope and slab work above.
+              </p>
+            )}
             {industry.slug === "life-science-cleanroom-engineering" && (
               <p className="mt-8 max-w-3xl text-foreground/80 leading-relaxed">
                 Within life-science work, classified spaces carry their own design rules. Our{" "}
