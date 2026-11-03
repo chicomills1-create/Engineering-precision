@@ -14,6 +14,8 @@ export interface StaticPageDef {
   sitemapCategory?: "core" | "solutions";
   schemaJson?: Record<string, unknown>[];
   showFounderByline?: boolean;
+  /** Optional raw-HTML support paragraph rendered after the sections (added 2026-11-03, own-name carrier cure). */
+  supportHtml?: string;
   relatedLinks?: { href: string; label: string }[];
   ctaHref?: string;
   /** Optional card groups rendered after the sections (companies hub). */
@@ -357,6 +359,8 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
           "Apex Grid Engineering PLLC operates its service brands directly: DraftSignal Digital, Seal Anvil, Stamp Forge, DueFluent, SpecReady, CatalogIQ, RuleCurrent, and RingAnvil trade under the flagship. Torch Engineering, Engides, 163 Faith, Kairobot, and Paired are separate affiliated companies under the same founder ownership — each runs under its own name, and each is linked below so clients, partners, and search systems can connect the family accurately.",
       },
     ],
+    supportHtml:
+      'Learn about the network that powers <a href="/">the Apex Grid Engineering platform</a>.',
     groups: [
       {
         heading: "Operating Brands of Apex Grid Engineering PLLC",
