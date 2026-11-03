@@ -4666,6 +4666,74 @@ function cleanroomDefenseForIndustryPage(page: IndustryDisciplinePage): string {
   return cleanroomLinkSection(key);
 }
 
+
+/** Cold-storage defense (Tier-B Strike 2, 2026-11-03): the term
+ *  "mep engineer for cold storage" fell #5 -> unranked on the newest Apex
+ *  vintage. Measured gap (live, raw HTML): carrier 705 visible words with
+ *  the exact phrase ZERO times and editorial prose inbound links ZERO —
+ *  its only inbound was the structural sibling's rotation card; the
+ *  canonical family hub linked neither discipline child. This block adds
+ *  a carrier deepening (exact-intent answer block + refrigeration
+ *  electrical depth, all inside the carrier's published electrical-led
+ *  scope — refrigeration coordination, never process-design claims) plus
+ *  prose link support INTO the carrier from the same-family structural
+ *  sibling, warehouse MEP, manufacturing MEP, commercial-kitchen MEP, and
+ *  life-science MEP pages. Anchors per ChatGPT consult 2026-11-03
+ *  (APPROVE WITH CHANGES — varied anchors; the single exact-match anchor
+ *  sits in the React hub's prose paragraph, IndustryDetail.tsx). Prose
+ *  links only. */
+const COLD_STORAGE_CARRIER_PATH = "/industries/cold-storage/mep-engineering/";
+
+function coldStorageCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>MEP Engineering for Cold Storage, <em>Answered Directly</em></h2>
+  <div class="prose"><p>An MEP engineer for cold storage designs the systems that let a refrigerated facility hold temperature around the clock — and in this practice that scope is led from the electrical side. The refrigeration plant is the facility's critical process load: the MEP design sizes the electrical service and distribution that feed it, the lighting that has to work at freezer temperatures, and the heating systems that keep floors, docks, and doorways from freezing. The refrigeration equipment itself is coordinated with the owner's refrigeration contractor; the engineering covers everything that powers, controls, and supports it.</p>
+  <p><strong>The refrigeration load drives the electrical design.</strong> Compressor motors are usually the largest single load in the building, and they do not run like ordinary HVAC equipment — evaporator and condenser fans, liquid pumps, and control systems run long hours at high load factors, so minimum-circuit-ampacity and overcurrent sizing, VFD and soft-start decisions, and demand management all start from the refrigeration schedule. Around ammonia plants, the electrical scope extends to the machinery room: ammonia detection and emergency-ventilation interlocks coordinated with IIAR machinery-room requirements, and the controls power that keeps those safety systems live. CO<sub>2</sub> transcritical booster plants put the same burden on the electrical design — rack compressors, gas-cooler fans, and high-side controls that cannot ride through sloppy power.</p>
+  <p><strong>Defrost, floor heat, and the dock are one design problem.</strong> Electric defrost puts large intermittent heater loads on evaporator coils, and defrost sequencing is an electrical design decision — stagger the cycles and the service stays reasonable; stack them and the demand peak prices the whole plant. Under the slab, electric or glycol floor-heating systems hold the ground beneath a freezer above freezing so frost heave cannot lift the floor; at the dock, heaters, air curtains, and heated door frames fight the condensation and ice that form wherever warm, wet air meets the cold box. A cold storage MEP engineer treats those three fronts — coil, slab, and dock — as a single coordinated package, because a failure at any one of them shows up as ice, product loss, or a closed dock door.</p>
+  <p><strong>Blast cells, humidity, and monitoring.</strong> Blast-freezer cells cycle hard and fast: high-velocity evaporator fans, defrost, and door heaters on short, heavy rotations that the electrical design has to absorb without nuisance trips. Humidity is the quieter load — dehumidification at docks and anterooms keeps infiltration moisture from becoming frost on coils and ice on floors. Over all of it sits monitoring: temperature sensors, alarm panels, and recording that food-safety and pharmaceutical cold-chain programs depend on, wired and powered as part of the MEP scope rather than left to chance.</p>
+  <p><strong>Light and energy code at low temperature.</strong> Refrigerated-space lighting has to strike and survive at temperature — low-temperature-rated LED fixtures, occupancy sensing that does not leave a freezer dark or a cooler lit around the clock — and the whole design is documented against the energy code provisions that apply to refrigerated buildings, from envelope and lighting to refrigeration-system efficiency. None of it is glamorous, and all of it is load-driven — which is exactly what an MEP engineer for cold storage is hired to get right before the first compressor ever starts.</p></div>
+</div></section>`;
+}
+
+function coldStorageLinkSection(sourceKey: string): string {
+  const link = (anchor: string) => `<a href="${COLD_STORAGE_CARRIER_PATH}">${anchor}</a>`;
+  switch (sourceKey) {
+    case "cold-storage/structural-engineering":
+      return `<section class="block"><div class="container">
+  <h2>The Systems the <em>Structure Carries</em></h2>
+  <div class="prose"><p>Refrigeration equipment is some of the heaviest plant a structure supports in this sector — compressors, vessels, and evaporators concentrated over the cold box. The systems counterpart to that structural work is ${link("cold storage MEP engineering")}, where the refrigeration electrical loads, defrost sequencing, and floor-heating decisions that drive those equipment loads are engineered.</p></div>
+</div></section>`;
+    case "industrial-warehouse/mep-engineering":
+      return `<section class="block"><div class="container">
+  <h2>The Low-Temperature <em>Warehouse Class</em></h2>
+  <div class="prose"><p>One class of warehouse sits apart from the ambient distribution work above: the refrigerated box, where the refrigeration plant is the building's critical load and the dock fights condensation year-round. That low-temperature work is covered as ${link("MEP design for cold storage facilities")} — compressor and defrost electrical design, freezer floor heating, and low-temperature lighting engineered as one package.</p></div>
+</div></section>`;
+    case "manufacturing/mep-engineering":
+      return `<section class="block"><div class="container">
+  <h2>Cold Rooms Inside <em>the Plant</em></h2>
+  <div class="prose"><p>Food and beverage plants carry refrigeration of their own — process cold rooms, ingredient freezers, and finished-goods cold storage that run on the plant's electrical backbone. Where a manufacturing project centers on those low-temperature spaces, the scope narrows to ${link("refrigerated facility MEP engineering")}: refrigeration electrical coordination, defrost and floor-heat design, and the monitoring those rooms are audited against.</p></div>
+</div></section>`;
+    case "restaurants/commercial-kitchen-mep":
+      return `<section class="block"><div class="container">
+  <h2>Bigger Than a <em>Walk-In</em></h2>
+  <div class="prose"><p>Commercial kitchens scale their refrigeration from walk-ins up to commissary and distribution cold rooms, and at that scale the work stops being an appliance specification. ${link("Cold storage refrigeration MEP design")} covers the larger end — compressor electrical loads, defrost sequencing, and dock and floor-heating design for food-service facilities that hold real inventory at temperature.</p></div>
+</div></section>`;
+    case "life-science/mep-engineering":
+      return `<section class="block"><div class="container">
+  <h2>Cold Chain and <em>Low-Temp Storage</em></h2>
+  <div class="prose"><p>Life-science facilities depend on the cold chain — pharmaceutical and biologics storage, low-temperature freezers, and the monitored rooms an audit trail runs through. The refrigerated-facility counterpart to this page's laboratory work is ${link("cold storage MEP engineering")}, where refrigeration electrical design, defrost and floor heating, and temperature monitoring and alarming are engineered as one system.</p></div>
+</div></section>`;
+    default:
+      return "";
+  }
+}
+
+function coldStorageDefenseForIndustryPage(page: IndustryDisciplinePage): string {
+  const key = page.segments.join("/");
+  if (key === "cold-storage/mep-engineering") return coldStorageCarrierSection();
+  return coldStorageLinkSection(key);
+}
+
 function statePage(state: StateData, cities: CityData[], directory: CityDirectory): string {
   const stateCities = cities.filter((c) => c.stateSlug === state.slug && isReviewedCity(c));
   const directoryCities = eligibleDirectoryCities(state, directory, cities);
@@ -6456,6 +6524,8 @@ ${breadcrumb(crumbs)}
 </div></section>
 
 ${cleanroomDefenseForIndustryPage(page)}
+
+${coldStorageDefenseForIndustryPage(page)}
 
 <section class="block"><div class="container">
   <h2>Why Apex Grid for <em>${esc(page.disciplineLabel)}</em>?</h2>
