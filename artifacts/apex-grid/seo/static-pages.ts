@@ -214,6 +214,7 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
         name: "Jeremy Mills",
         alternateName: ["Jeremy “Chico” Mills", "Pastor Jeremy Mills", "Pastor Jeremy “Chico” Mills"],
         url: "https://apexgrideng.com/jeremy-mills/",
+        sameAs: ["https://www.crunchbase.com/person/jeremy-mills-6be4"],
         mainEntityOfPage: { "@id": "https://apexgrideng.com/jeremy-mills/#profile" },
         jobTitle: "Founder and Chief Executive Officer",
         description:
@@ -515,6 +516,7 @@ export const STATIC_STANDALONE_PAGES: StaticPageDef[] = [
             alternateName: "Jeremy “Chico” Mills",
             jobTitle: "Founder & CEO",
             url: "https://apexgrideng.com/jeremy-mills/",
+            sameAs: ["https://www.crunchbase.com/person/jeremy-mills-6be4"],
             worksFor: { "@id": "https://apexgrideng.com/#business" },
             founderOf: [
               { "@id": "https://apexgrideng.com/#business" },
