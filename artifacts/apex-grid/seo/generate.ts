@@ -4262,9 +4262,12 @@ function georgiaDefenseSection(currentSlug: string): string {
  *  carrier deepening (exact-intent answer block + ISO/pressurization/
  *  contamination-control/validation depth, all figures framed as typical
  *  design ranges) plus prose link support INTO the carrier from the
- *  life-science hub, the sibling life-science MEP and structural pages, the
- *  healthcare MEP page, the MEP engineering service hub (exact-match anchor,
- *  per the consult), and the cleanroom answers page. Prose links only. */
+ *  sibling life-science MEP and structural pages, the healthcare mechanical
+ *  page (canonical sibling of the consolidated healthcare MEP page), and
+ *  the cleanroom answers page. The life-science hub link and the MEP
+ *  service page link (exact-match anchor, per the consult) ship in the
+ *  React components that own those pages (src/pages/IndustryDetail.tsx,
+ *  src/pages/ServiceDetail.tsx). Prose links only. */
 const CLEANROOM_CARRIER_PATH = "/industries/life-science/cleanroom-mep-engineering/";
 
 function cleanroomCarrierSection(): string {
@@ -4290,7 +4293,7 @@ function cleanroomLinkSection(sourceKey: string): string {
   <h2>The Systems Inside the <em>Structure</em></h2>
   <div class="prose"><p>Cleanroom structures carry unusual loads — air handlers, ductwork, and filtration housings concentrated over the classified space. The mechanical counterpart to that structural work is ${link("MEP design for cleanroom facilities")}, where the air-change, pressurization, and filtration decisions that drive those loads are made.</p></div>
 </div></section>`;
-    case "healthcare/mep-engineering":
+    case "healthcare/mechanical-engineering":
       return `<section class="block"><div class="container">
   <h2>Classified Spaces in <em>Healthcare</em></h2>
   <div class="prose"><p>Healthcare projects increasingly include classified spaces of their own — USP &lt;797&gt; and &lt;800&gt; compounding pharmacies, sterile processing, and isolation support spaces. Those rooms are engineered under the same discipline as ${link("MEP design for cleanroom facilities")}: ISO classification, pressure relationships, and filtration designed and documented as one system.</p></div>
@@ -4304,13 +4307,6 @@ function cleanroomDefenseForIndustryPage(page: IndustryDisciplinePage): string {
   const key = page.segments.join("/");
   if (key === "life-science/cleanroom-mep-engineering") return cleanroomCarrierSection();
   return cleanroomLinkSection(key);
-}
-
-function cleanroomMepServiceSection(): string {
-  return `<section class="section section--light"><div class="container">
-        <h2>MEP Engineering for <em>Cleanrooms</em></h2>
-        <p>One MEP specialty sits inside this discipline with its own design rules: <a href="${CLEANROOM_CARRIER_PATH}">MEP engineering for cleanrooms</a> — ISO 5 through ISO 8 classified spaces where air changes, HEPA or ULPA filtration, pressure cascades, and environmental monitoring are engineered as a single system and documented for certification and validation.</p>
-      </div></section>`;
 }
 
 function statePage(state: StateData, cities: CityData[], directory: CityDirectory): string {
@@ -7254,7 +7250,6 @@ function disciplineHubPage(hub: DisciplineHub): string {
       </div>
     </section>
 ${extendedStructuralCards}
-${hub.slug === "mep-engineering" ? cleanroomMepServiceSection() : ""}
 
     ${residualsFaqSection(hub.faqs)}
 
