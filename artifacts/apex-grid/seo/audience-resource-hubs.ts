@@ -39,6 +39,10 @@ export const AUDIENCE_RESOURCE_HUBS: AudienceResourceHub[] = [
         "I look for interfaces: ceiling zones, shafts, equipment clearances, structure-to-envelope details, site utilities, and energy or accessibility documentation. Early interface notes reduce the chance that a late engineering change quietly becomes an architectural redesign.",
         `See how Apex Grid supports ${link("/for-architects/", "architects")} and send the project context through the ${link("/contact", "project request")} when you are ready for a scoped conversation.`,
       ] },
+      { heading: "Keep the record straight as the design moves", paragraphs: [
+        "Drawings change between schematic design and the permit set, and engineering conclusions are only as current as the background they were built on. When your team issues a revised background, flag what moved — a shifted core, a resized shaft, a changed ceiling height — so we can confirm whether the earlier engineering still holds or needs to be revisited before it is built into the set.",
+        "The same discipline applies to field information. When an existing condition turns out to differ from the record drawings — a beam where none was shown, a utility in the planned shaft — send a photograph and a dimension rather than a description alone. A verified condition is something I can design around; an assumption carried silently into the permit set becomes a correction comment later, when it costs more to fix.",
+      ], bullets: ["Issue revised backgrounds with the changes flagged", "Report field conditions with photographs and dimensions", "Confirm which earlier conclusions a change reopens"] },
     ],
     faqs: [
       { question: "What should an architect send for an initial engineering review?", answer: "Send the current drawings, project address and jurisdiction, building use, proposed scope, schedule, known existing-condition information, and any owner or authority comments already received. I will identify gaps rather than assume them." },
