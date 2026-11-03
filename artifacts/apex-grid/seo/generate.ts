@@ -4306,6 +4306,56 @@ function mesaDefenseSection(currentSlug: string): string {
 </div></section>`;
 }
 
+/** Broomfield Defense Cure (2026-11-02): editorial support INTO the
+ *  fallen carrier for "mep engineer broomfield" (8→null, rank-drop
+ *  guard flag 21:53 MST). Measured live before build: carrier 1,174
+ *  visible words (template-level), the exact phrase ZERO times in
+ *  visible copy; inbound = Colorado hub ZERO, Denver/Aurora/Lakewood/
+ *  Thornton/Arvada ZERO, Boulder + Westminster one bare-name template
+ *  link each; sitemap presence confirmed (sitemap-locations.xml).
+ *  ChatGPT consult 2026-11-02 (APPROVE WITH CHANGES; record
+ *  broomfield-defense-cure-2026-11-02): carrier deepening approved
+ *  (the Alpharetta fork), and the anchor set VARIED in place of a
+ *  repeated exact-match anchor — rotating "MEP engineering in
+ *  Broomfield", "Broomfield MEP engineering", and "MEP services in
+ *  Broomfield" across source pages. Permitting copy kept to civic
+ *  fact (consolidated city-and-county review path); no licensure or
+ *  jurisdictional claims added. Prose links only. */
+const BROOMFIELD_DEFENSE_SOURCE_SLUGS = new Set([
+  "denver", "boulder", "aurora", "lakewood", "westminster", "thornton", "arvada",
+]);
+
+const BROOMFIELD_ANCHOR_PAIRS: Record<string, readonly [string, string]> = {
+  "": ["MEP engineering in Broomfield", "Broomfield MEP engineering"],
+  denver: ["MEP engineering in Broomfield", "MEP services in Broomfield"],
+  boulder: ["Broomfield MEP engineering", "MEP services in Broomfield"],
+  aurora: ["MEP engineering in Broomfield", "Broomfield MEP engineering"],
+  lakewood: ["MEP engineering in Broomfield", "MEP services in Broomfield"],
+  westminster: ["Broomfield MEP engineering", "MEP services in Broomfield"],
+  thornton: ["MEP engineering in Broomfield", "Broomfield MEP engineering"],
+  arvada: ["MEP engineering in Broomfield", "MEP services in Broomfield"],
+};
+
+function broomfieldDefenseSection(currentSlug: string): string {
+  if (currentSlug === "broomfield") return "";
+  const [a1, a2] = BROOMFIELD_ANCHOR_PAIRS[currentSlug] ?? BROOMFIELD_ANCHOR_PAIRS[""];
+  const link = (anchor: string) =>
+    `<a href="/locations/colorado/broomfield/">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>US-36 Corridor <em>MEP Coverage</em></h2>
+  <div class="prose"><p>Between Denver and Boulder on the US-36 corridor sits Broomfield — the Interlocken business park's office and technology stock, the Flatiron Crossing retail district, and the medical, hospitality, and flex-industrial space around them keep mechanical, electrical, and plumbing scopes in steady rotation, from tenant improvements to ground-up support systems. Our ${link(a1)} coverage is built for that mid-corridor stock, with the city's own building picture set out on its page.</p>
+  <p>Broomfield reviews its own way: as a consolidated city and county, it runs a single local review path rather than separate city and county tracks, and it differs from both Denver's process and Boulder County's. The adopted editions, local amendments, and project types an ${link(a2)} scope designs to are spelled out on the Broomfield page.</p></div>
+</div></section>`;
+}
+
+function broomfieldCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>What an MEP Engineer Scopes in <em>Broomfield</em></h2>
+  <div class="prose"><p>An MEP scope in Broomfield starts from the building stock: multi-tenant office and technology space at Interlocken along the US-36 corridor, retail and restaurant space at Flatiron Crossing, medical and dental fit-outs, and the flex and light-industrial buildings that support the corridor's employers. The mechanical design centers on the heating and cooling loads a high-elevation Front Range climate swings through, plus the ventilation and exhaust each occupancy requires; the electrical design covers service sizing, distribution, and lighting and controls to the adopted energy code; the plumbing design covers water, waste, and specialty systems sized to the use. The three disciplines are coordinated as one set — the same coordination an MEP engineer Broomfield tenants and owners rely on when a suite turns over or a building changes use — because a tenant-improvement schedule rarely leaves room to reconcile the systems in the field.</p>
+  <p>Permitting runs through the City and County of Broomfield's own review path — a consolidated city-and-county process, on the code editions and local amendments in force at submittal. The engineering work is sequenced to that path: existing-condition verification where a space is being re-tenanted, load calculations matched to the actual fit-out, and drawings coordinated across the mechanical, electrical, and plumbing sheets before the set is sealed and submitted, so the review sees one consistent package.</p></div>
+</div></section>`;
+}
+
 /** Cleanrooms Defense Cure Q1 (2026-11-02): the fallen #1 carrier for
  *  "mep engineering for cleanrooms" — /industries/life-science/cleanroom-mep-engineering/
  *  — held #1 on two structural card links and zero editorial prose support,
@@ -4404,6 +4454,7 @@ ${priorityMarkets.length ? `<section class="block"><div class="container">
 </div></section>` : ""}
 ${state.slug === "georgia" ? georgiaDefenseSection("") : ""}
 ${state.slug === "arizona" ? mesaDefenseSection("") : ""}
+${state.slug === "colorado" ? broomfieldDefenseSection("") : ""}
 ${state.slug === "hawaii" ? `<section class="block"><div class="container">
   <h2>Engineering Coverage in <em>Honolulu</em></h2>
   <div class="grid2">
@@ -4688,6 +4739,8 @@ ${state.slug === "georgia" && GA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? georgiaDe
 ${state.slug === "georgia" && ALPHA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? alpharettaDefenseSection(city.slug) : ""}
 ${state.slug === "georgia" && city.slug === "alpharetta" ? alpharettaCarrierSection() : ""}
 ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
+${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
+${state.slug === "colorado" && city.slug === "broomfield" ? broomfieldCarrierSection() : ""}
 <section class="block"><div class="container">
   <h2>More <em>${esc(state.name)} Locations</em></h2>
   <div class="linkrow">${curatedInState
@@ -12738,6 +12791,7 @@ ${specialtyLocationPages.length ? `<section class="block"><div class="container"
 ${state.slug === "georgia" && GA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? georgiaDefenseSection(city.slug) : ""}
 ${state.slug === "georgia" && ALPHA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? alpharettaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
+${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 <section class="block"><div class="container">
   <h2>More <em>Locations</em></h2>
   <div class="linkrow">${nearby
