@@ -3408,6 +3408,13 @@ function phase0ResourcePage(page: Phase0ResourcePage): string {
         { heading: "Manage changes after issue", body: `Changes to ${page.category} information can be triggered by a substitution, field condition, correction notice, owner decision, or authority comment. Compare the change with the issued basis before replacing a file. Mark affected documents, update the index, explain the reason for revision, and have the responsible professional determine whether the change requires a new calculation, seal, site verification, or AHJ submission.` },
         { heading: "Closeout is evidence, not a promise", body: "A complete delivery record helps a project team locate what was issued and what remains open; it does not certify concealed construction, guarantee inspection results, or transfer responsibility for work outside the defined scope. Retain the accepted transmittal, response, field evidence, and final revision according to the project record requirements, and identify any deferred or delegated work plainly." },
       ];
+  if (page.slug === "rooftop-equipment-structural-review-review") {
+    sections.push({
+      heading: "What the structural check traces, unit to foundation",
+      body: "For rooftop equipment, the review follows one continuous load path. Start at the unit: the operating weight from the submittal — not the shipping weight — plus curb, rail, and isolation hardware. From there we confirm how that weight lands: spread across how many joists or beams, at what spacing, and whether the supporting members were sized for a concentrated load at that location or only for the uniform roof load. Anchorage is checked separately from gravity support: wind uplift and seismic forces try to move or overturn the unit, and the connection at the curb — not the unit's own weight — resists them. The review stops when any link in that chain is undocumented: an unknown unit weight, framing that cannot be identified from the drawings or field evidence, or a deteriorated deck that changes what the connections can hold.",
+      bullets: ["Operating weight, curb, and isolation hardware from the current submittal", "Joist and beam capacity under the actual point-load pattern", "Check uplift and seismic anchorage at the curb connection", "Deck and framing condition where the unit lands"],
+    });
+  }
   const faqs = design
     ? [
       { question: `What must be decided before ${page.title.toLowerCase()} begins?`, answer: `Define the design question, intended use, applicable authority, and evidence needed. For this topic, start with ${page.checklist}.` },
