@@ -214,6 +214,21 @@ export default function ServiceDetail() {
         </div>
       </section>
 
+      {serviceId === "mep" && (
+        <section className="py-16 bg-card border-t border-border">
+          <div className="container mx-auto px-4 md:px-8 max-w-6xl">
+            <h2 className="text-2xl font-display font-bold mb-4 text-white">MEP Engineering for Cleanrooms</h2>
+            <p className="text-muted-foreground max-w-2xl leading-relaxed">
+              One MEP specialty carries its own design rules:{" "}
+              <Link href="/industries/life-science/cleanroom-mep-engineering/" className="font-semibold text-primary hover:underline">
+                MEP engineering for cleanrooms
+              </Link>{" "}
+              — ISO 5 through ISO 8 classified spaces where air changes, HEPA or ULPA filtration, pressure cascades, and environmental monitoring are engineered as a single system and documented for certification and validation.
+            </p>
+          </div>
+        </section>
+      )}
+
       {/* Industries we serve */}
       <section className="py-16 bg-background border-t border-border">
         <div className="container mx-auto px-4 md:px-8 max-w-6xl">
