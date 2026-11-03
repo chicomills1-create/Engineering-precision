@@ -8280,19 +8280,11 @@ async function main() {
     }
   }
 
-  // Cleanrooms Defense Cure Q1 (2026-11-02): prose link support INTO the
-  // cleanroom carrier from the life-science hub page (a Phase 9 page,
-  // generated above). Anchor per the ChatGPT consult of 2026-11-02.
-  {
-    const hubFile = path.join(PUBLIC, "industries/life-science-cleanroom-engineering", "index.html");
-    if (!fs.existsSync(hubFile)) throw new Error("SEO assertion failed: missing life-science hub for cleanrooms defense cure");
-    const hubHtml = fs.readFileSync(hubFile, "utf8");
-    const marker = "cleanrooms-defense-hub-link";
-    if (!hubHtml.includes(marker)) {
-      const inbound = `<section class="block" id="${marker}"><div class="container"><h2>Cleanroom MEP, <em>as its own scope</em></h2><p>Within life-science work, classified spaces carry their own design rules. Our <a href="${CLEANROOM_CARRIER_PATH}">cleanroom MEP design for ISO-classified spaces</a> covers ISO 5 through ISO 8 rooms — air changes, terminal filtration, pressure cascades, and environmental monitoring engineered as one system.</p></div></section>`;
-      fs.writeFileSync(hubFile, hubHtml.replace("</body>", `${inbound}</body>`));
-    }
-  }
+  // Cleanrooms Defense Cure Q1 (2026-11-02): the life-science hub prose
+  // link into the cleanroom carrier ships in the React hub component
+  // (src/pages/IndustryDetail.tsx — the hub is an SSR React page, not a
+  // generator page; a generator-side injection here failed the 01:31Z
+  // build because no generator file exists at the hub path).
 
   // Location × Service pages (non-curated cities + new service slugs)
   for (const lsp of LOCATION_SERVICE_PAGES) {
