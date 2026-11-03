@@ -3588,21 +3588,11 @@ function siouxCityHubSection(): string {
 function siouxCityCitySupportSection(): string {
   const link = (anchor: string) =>
     `<a href="${SIOUX_CITY_MEP_CARRIER_PATH}">${anchor}</a>`;
-  return `<section class="section section--white">
-      <div class="container container--narrow">
-        <h2>The Metro-Wide MEP Picture</h2>
-        <p>This page covers MEP engineering inside Sioux City's city limits; the same scopes run metro-wide, across the Missouri River into South Sioux City and Dakota City, Nebraska, and North Sioux City and Dakota Dunes, South Dakota. ${link("Sioux City metro MEP engineering")} lays out the full tri-state scope — the food-processing and cold-storage corridor's process utilities and refrigeration support, the riverfront commercial stock, and the healthcare and I-29 logistics work — and ${link("MEP engineering in the tri-state metro")} is where the three-state code and review framing is set out. Project teams working both the city and the wider metro use the two pages together: city facts here, metro scope there.</p>
-      </div>
-    </section>`;
+  return `<section class="block"><div class="container"><h2>The Metro-Wide <em>MEP</em> Picture</h2><div class="prose"><p>This page covers MEP engineering inside Sioux City's city limits; the same scopes run metro-wide, across the Missouri River into South Sioux City and Dakota City, Nebraska, and North Sioux City and Dakota Dunes, South Dakota. ${link("Sioux City metro MEP engineering")} lays out the full tri-state scope — the food-processing and cold-storage corridor's process utilities and refrigeration support, the riverfront commercial stock, and the healthcare and I-29 logistics work — and ${link("MEP engineering in the tri-state metro")} is where the three-state code and review framing is set out. Project teams working both the city and the wider metro use the two pages together: city facts here, metro scope there.</p></div></div></section>`;
 }
 
 function siouxFallsCitySupportSection(): string {
-  return `<section class="section section--white">
-      <div class="container container--narrow">
-        <h2>South to the Other Anchor Metro</h2>
-        <p>Sioux Falls anchors the northern end of the I-29 corridor; ninety miles south, Sioux City anchors the other end, and project teams in this region regularly work both metros. Where a Sioux Falls project team's scope extends into the tri-state metro — or a Sioux City plant or riverfront project needs the same bench — <a href="${SIOUX_CITY_MEP_CARRIER_PATH}">the Sioux City metro's MEP engineering guide</a> sets out the discipline scope for that metro: its food-processing corridor, its riverfront stock, and the three-state coordination its projects design within.</p>
-      </div>
-    </section>`;
+  return `<section class="block"><div class="container"><h2>South to the Other <em>Anchor Metro</em></h2><div class="prose"><p>Sioux Falls anchors the northern end of the I-29 corridor; ninety miles south, Sioux City anchors the other end, and project teams in this region regularly work both metros. Where a Sioux Falls project team's scope extends into the tri-state metro — or a Sioux City plant or riverfront project needs the same bench — <a href="${SIOUX_CITY_MEP_CARRIER_PATH}">the Sioux City metro's MEP engineering guide</a> sets out the discipline scope for that metro: its food-processing corridor, its riverfront stock, and the three-state coordination its projects design within.</p></div></div></section>`;
 }
 
 function phase1MetroHubPage(metro: Phase1Metro): string {
@@ -6660,8 +6650,6 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     </section>
 
     ${page.stateSlug === "arizona" && page.citySlug === "queen-creek" && page.serviceSlug === "mep-engineering" ? queenCreekCarrierSection() : ""}
-    ${page.stateSlug === "iowa" && page.citySlug === "sioux-city" && page.serviceSlug === "mep-engineering" ? siouxCityCitySupportSection() : ""}
-    ${page.stateSlug === "south-dakota" && page.citySlug === "sioux-falls" && page.serviceSlug === "mep-engineering" ? siouxFallsCitySupportSection() : ""}
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
@@ -8219,6 +8207,8 @@ ${familyVisual(motifForText(service.h1), `Service location shown: ${metro.name},
 <section class="block"><div class="container"><h2>Local <em>conditions</em></h2><div class="prose"><p>${esc(service.localConditions)}</p></div></div></section>
 <section class="block"><div class="container"><h2>Typical <em>project types</em></h2><div class="prose"><p>${esc(service.projectTypes)}</p></div></div></section>
 ${service.sections.map((section) => `<section class="block"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p></div></div></section>`).join("")}
+${expansion.stateSlug === "iowa" && metro.slug === "sioux-city" && service.serviceSlug === "mep-engineering" ? siouxCityCitySupportSection() : ""}
+${expansion.stateSlug === "south-dakota" && metro.slug === "sioux-falls" && service.serviceSlug === "mep-engineering" ? siouxFallsCitySupportSection() : ""}
 ${expansion.stateSlug === "south-dakota" && service.serviceSlug === "mep-engineering" ? (metro.slug === "brookings" ? brookingsCarrierSection() : brookingsDefenseSection(metro.slug)) : ""}
 <section class="block"><div class="container"><h2>Permit and engineering <em>steps</em></h2><ol class="scope">${service.permitSteps.map((step) => `<li>${esc(step)}</li>`).join("")}</ol></div></section>
 <section class="block"><div class="container faq"><h2>${esc(service.h1)} <em>FAQs</em></h2>${service.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
