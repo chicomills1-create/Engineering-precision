@@ -5018,6 +5018,7 @@ ${availableVerticals
   ).join("")}
   </div>
 </div></section>
+${state.slug === "south-dakota" && city.slug === "brookings" ? brookingsHubSection() : ""}
 <section class="block"><div class="container">
   <h2>${esc(city.name)} Engineering <em>Capabilities</em></h2>
   <p class="prose">Apex Grid organizes related search intents under this single canonical ${esc(city.name)} engineering hub so owners, architects, contractors, developers, facility managers, and public agencies can find the relevant discipline without duplicate location pages.</p>
