@@ -1562,6 +1562,7 @@ function phase0ArticleFrame(
 // sibling answers. Keyed by answer slug; every other answers page passes
 // undefined and renders byte-identical output.
 const ANSWER_EXTRA_SECTIONS: Record<string, string> = {
+  "cleanroom-mep-engineering-requirements": `<section class="block"><div class="container"><h2>From requirements to a <em>stamped design</em></h2><div class="prose"><p>The requirements on this page — classification, air changes, pressurization, filtration — become a permit-ready set through <a href="/industries/life-science/cleanroom-mep-engineering/">cleanroom MEP engineering</a>: the dedicated scope where Apex Grid designs ISO 5 through ISO 8 cleanroom mechanical and electrical systems and documents them for certification and validation.</p></div></div></section>`,
   "airport-fuel-farm-design": `<section class="block"><div class="container"><h2>The storage facility behind the <em>fuel farm</em></h2><div class="prose"><p>The fuel farm tanks sit inside a storage facility engineered as its own scope — tank foundations and anchorage, secondary containment, leak detection, hazardous-location electrical, fire protection, and piping, with fire code, environmental regulations, and airport standards reconciled into one buildable facility. That facility-level scope is covered in our guide to <a href="/answers/airport-fuel-storage-facility-design/">airport fuel storage facility design</a>.</p></div></div></section>`,
   "industrial-fuel-storage-design": `<section class="block"><div class="container"><h2>Fuel storage at the <em>airport</em></h2><div class="prose"><p>Aviation fuel storage runs the same containment-first discipline — tank selection and sizing, secondary containment, leak detection, and fire protection — under an added overlay of airport standards, with the tank farm tied into hydrant and truck distribution. See how the scopes compare in our guide to <a href="/answers/airport-fuel-storage-facility-design/">aviation fuel tank design</a> for airport facilities.</p></div></div></section>`,
   "tank-farm-design": `<section class="block"><div class="container"><h2>Tank farms for <em>aviation fuel</em></h2><div class="prose"><p>An airport tank farm applies the same fundamentals — foundations designed for the full fuel load, secondary containment, fire protection, and distribution piping — to aviation fuel, where hazardous-location electrical and airport standards join the design. Our guide to <a href="/answers/airport-fuel-storage-facility-design/">airport fuel storage facility design</a> covers the aviation case in detail.</p></div></div></section>`,
@@ -4253,6 +4254,65 @@ function georgiaDefenseSection(currentSlug: string): string {
 </div></section>`;
 }
 
+/** Cleanrooms Defense Cure Q1 (2026-11-02): the fallen #1 carrier for
+ *  "mep engineering for cleanrooms" — /industries/life-science/cleanroom-mep-engineering/
+ *  — held #1 on two structural card links and zero editorial prose support,
+ *  at ~820 words of total page text. Cure per the ChatGPT consult of
+ *  2026-11-02 (APPROVE WITH CHANGES; record cleanrooms-defense-cure-2026-11-02):
+ *  carrier deepening (exact-intent answer block + ISO/pressurization/
+ *  contamination-control/validation depth, all figures framed as typical
+ *  design ranges) plus prose link support INTO the carrier from the
+ *  life-science hub, the sibling life-science MEP and structural pages, the
+ *  healthcare MEP page, the MEP engineering service hub (exact-match anchor,
+ *  per the consult), and the cleanroom answers page. Prose links only. */
+const CLEANROOM_CARRIER_PATH = "/industries/life-science/cleanroom-mep-engineering/";
+
+function cleanroomCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>MEP Engineering for Cleanrooms, <em>Answered Directly</em></h2>
+  <div class="prose"><p>MEP engineering for cleanrooms is the design of the mechanical, electrical, and plumbing systems that hold an ISO-classified space at its cleanliness, pressure, temperature, and humidity targets while work happens inside it. In practice that scope covers the air side first — air handling, air distribution, and HEPA or ULPA filtration sized to the classification — then pressurization control, temperature and humidity control, cleanroom-compatible electrical systems, specialty gas and process utility distribution, and the monitoring and controls that prove the room is performing. The MEP design is coordinated with the architectural cleanroom envelope — wall and ceiling systems, gowning rooms, and air locks — because the room only classifies when the systems and the enclosure work as one assembly.</p>
+  <p><strong>ISO classes drive the design.</strong> Cleanrooms are classified under ISO 14644-1 from ISO Class 5 through ISO Class 8 for most life-science and advanced-manufacturing work, and each step tighter multiplies the particle-control burden. Typical design responses scale with the class: air-change rates commonly run in the range of 20–30 air changes per hour for ISO 8, roughly 30–60 for ISO 7, 90–180 for ISO 6, and 240 or more — often with unidirectional (laminar) flow — for ISO 5. Final values are set by the process, occupancy, equipment heat load, and recovery requirements of the specific room, not by the class label alone; filtration follows the same logic, with terminal HEPA filtration standard and ULPA filtration reserved for the tightest classifications.</p>
+  <p><strong>Pressurization is a cascade, not a single number.</strong> Cleaner spaces are held positive to the spaces around them so air always flows from clean to less clean when a door opens. Differentials between adjacent grades are typically designed in the range of 0.02 to 0.05 inches of water gauge (about 5 to 12.5 pascals) per step, with gowning rooms and air locks acting as buffer stages in the cascade. The engineering lives in the details — door hardware and interlocks that protect the cascade, controls that hold differentials as filters load, and alarms that announce a lost differential before it becomes a lost batch.</p>
+  <p><strong>Contamination control and validation support.</strong> Good cleanroom MEP design works with the contamination-control strategy instead of around it: separated personnel and material flows, gowning capacity matched to shift size, pass-throughs that keep raw materials out of gowning paths, and particle and environmental monitoring coordinated with the electrical and controls design. On the back end, the design package is built to support qualification — sequences of operation, setpoints and tolerances, and coordination with testing, adjusting, and balancing — so the room can be certified and validated (IQ/OQ/PQ) against its design intent once built.</p></div>
+</div></section>`;
+}
+
+function cleanroomLinkSection(sourceKey: string): string {
+  const link = (anchor: string) => `<a href="${CLEANROOM_CARRIER_PATH}">${anchor}</a>`;
+  switch (sourceKey) {
+    case "life-science/mep-engineering":
+      return `<section class="block"><div class="container">
+  <h2>Cleanroom <em>Scopes</em></h2>
+  <div class="prose"><p>Where a life-science project centers on a classified space rather than the laboratory around it, the work narrows to ${link("cleanroom MEP engineering")} — ISO 5 through ISO 8 HVAC, terminal HEPA or ULPA filtration, pressure cascades, and the monitoring that proves the room performs. That dedicated scope is covered on its own page.</p></div>
+</div></section>`;
+    case "life-science/structural-engineering":
+      return `<section class="block"><div class="container">
+  <h2>The Systems Inside the <em>Structure</em></h2>
+  <div class="prose"><p>Cleanroom structures carry unusual loads — air handlers, ductwork, and filtration housings concentrated over the classified space. The mechanical counterpart to that structural work is ${link("MEP design for cleanroom facilities")}, where the air-change, pressurization, and filtration decisions that drive those loads are made.</p></div>
+</div></section>`;
+    case "healthcare/mep-engineering":
+      return `<section class="block"><div class="container">
+  <h2>Classified Spaces in <em>Healthcare</em></h2>
+  <div class="prose"><p>Healthcare projects increasingly include classified spaces of their own — USP &lt;797&gt; and &lt;800&gt; compounding pharmacies, sterile processing, and isolation support spaces. Those rooms are engineered under the same discipline as ${link("MEP design for cleanroom facilities")}: ISO classification, pressure relationships, and filtration designed and documented as one system.</p></div>
+</div></section>`;
+    default:
+      return "";
+  }
+}
+
+function cleanroomDefenseForIndustryPage(page: IndustryDisciplinePage): string {
+  const key = page.segments.join("/");
+  if (key === "life-science/cleanroom-mep-engineering") return cleanroomCarrierSection();
+  return cleanroomLinkSection(key);
+}
+
+function cleanroomMepServiceSection(): string {
+  return `<section class="section section--light"><div class="container">
+        <h2>MEP Engineering for <em>Cleanrooms</em></h2>
+        <p>One MEP specialty sits inside this discipline with its own design rules: <a href="${CLEANROOM_CARRIER_PATH}">MEP engineering for cleanrooms</a> — ISO 5 through ISO 8 classified spaces where air changes, HEPA or ULPA filtration, pressure cascades, and environmental monitoring are engineered as a single system and documented for certification and validation.</p>
+      </div></section>`;
+}
+
 function statePage(state: StateData, cities: CityData[], directory: CityDirectory): string {
   const stateCities = cities.filter((c) => c.stateSlug === state.slug && isReviewedCity(c));
   const directoryCities = eligibleDirectoryCities(state, directory, cities);
@@ -6031,6 +6091,8 @@ ${breadcrumb(crumbs)}
   </ul>
 </div></section>
 
+${cleanroomDefenseForIndustryPage(page)}
+
 <section class="block"><div class="container">
   <h2>Why Apex Grid for <em>${esc(page.disciplineLabel)}</em>?</h2>
   <div class="grid2">
@@ -7192,6 +7254,7 @@ function disciplineHubPage(hub: DisciplineHub): string {
       </div>
     </section>
 ${extendedStructuralCards}
+${hub.slug === "mep-engineering" ? cleanroomMepServiceSection() : ""}
 
     ${residualsFaqSection(hub.faqs)}
 
@@ -8214,6 +8277,20 @@ async function main() {
     if (!parentHtml.includes(marker)) {
       const inbound = `<section class="block phase9-inbound" id="${marker}"><div class="container"><h2>Specialty <em>industry scopes</em></h2><p>For a narrower facility or operating condition, I also maintain a focused engineering scope:</p><p><a href="${route}">${page.h1}</a></p></div></section>`;
       fs.writeFileSync(parentFile, parentHtml.replace("</body>", `${inbound}</body>`));
+    }
+  }
+
+  // Cleanrooms Defense Cure Q1 (2026-11-02): prose link support INTO the
+  // cleanroom carrier from the life-science hub page (a Phase 9 page,
+  // generated above). Anchor per the ChatGPT consult of 2026-11-02.
+  {
+    const hubFile = path.join(PUBLIC, "industries/life-science-cleanroom-engineering", "index.html");
+    if (!fs.existsSync(hubFile)) throw new Error("SEO assertion failed: missing life-science hub for cleanrooms defense cure");
+    const hubHtml = fs.readFileSync(hubFile, "utf8");
+    const marker = "cleanrooms-defense-hub-link";
+    if (!hubHtml.includes(marker)) {
+      const inbound = `<section class="block" id="${marker}"><div class="container"><h2>Cleanroom MEP, <em>as its own scope</em></h2><p>Within life-science work, classified spaces carry their own design rules. Our <a href="${CLEANROOM_CARRIER_PATH}">cleanroom MEP design for ISO-classified spaces</a> covers ISO 5 through ISO 8 rooms — air changes, terminal filtration, pressure cascades, and environmental monitoring engineered as one system.</p></div></section>`;
+      fs.writeFileSync(hubFile, hubHtml.replace("</body>", `${inbound}</body>`));
     }
   }
 
