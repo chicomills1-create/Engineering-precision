@@ -265,6 +265,15 @@ export default function IndustryDetail() {
                 </Link>
               ))}
             </div>
+            {industry.slug === "life-science-cleanroom-engineering" && (
+              <p className="mt-8 max-w-3xl text-foreground/80 leading-relaxed">
+                Within life-science work, classified spaces carry their own design rules. Our{" "}
+                <Link href="/industries/life-science/cleanroom-mep-engineering/" className="font-semibold text-primary hover:underline">
+                  cleanroom MEP design for ISO-classified spaces
+                </Link>{" "}
+                covers ISO 5 through ISO 8 rooms — air changes, terminal HEPA or ULPA filtration, pressure cascades, and environmental monitoring engineered as one system and documented for certification and validation.
+              </p>
+            )}
           </div>
         </section>
       )}
