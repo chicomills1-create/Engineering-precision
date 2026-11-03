@@ -138,6 +138,28 @@ export default function About() {
                   Jeremy Mills is the founder and owner of 10+ companies, led by Apex Grid Engineering.
                 </p>
                 <p className="mt-4 text-sm text-muted-foreground">An Apex Grid Engineering PLLC company.</p>
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Founder &amp; CEO Jeremy Mills — Crunchbase Rank #7,768, top 1% of the 2M+ founders and executives tracked worldwide. (as of Nov 2026)
+                </p>
+                <div className="mt-3 flex items-center gap-3 text-sm font-bold">
+                  <a
+                    href="https://www.linkedin.com/in/chicomills"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-primary hover:underline underline-offset-4"
+                  >
+                    LinkedIn
+                  </a>
+                  <span className="text-muted-foreground" aria-hidden="true">·</span>
+                  <a
+                    href="https://www.crunchbase.com/person/jeremy-mills-6be4"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-primary hover:underline underline-offset-4"
+                  >
+                    Crunchbase
+                  </a>
+                </div>
                 <Link
                   href="/military"
                   className="inline-flex items-center gap-2 mt-6 text-sm font-bold text-primary hover:underline underline-offset-4"
