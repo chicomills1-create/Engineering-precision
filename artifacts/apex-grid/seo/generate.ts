@@ -4200,6 +4200,7 @@ ${peStampBlock({
   <div class="linkrow">${topMarketLinksRendered}</div>
 </div></section>
 
+${state.slug === "arizona" && svc.slug === "mep-engineering" ? queenCreekDefenseSection("state-mep") : ""}
 <section class="ctaband"><div class="container">
   <h2>Start Your ${esc(state.name)} Project</h2>
   <p>For projects whose jurisdiction, discipline, and scope pass review, an available licensed PE and coordinated team can be identified. Send us your scope for a proposal; timing and fee depend on the project.</p>
@@ -4363,6 +4364,70 @@ function broomfieldCarrierSection(): string {
 </div></section>`;
 }
 
+
+/** Queen Creek MEP Consolidation — Tier-B Strike 1 (2026-11-03):
+ *  "mep engineer queen creek" 1→9 ranking on the Arizona state MEP hub
+ *  and "mep engineering firm queen creek" 1→22→10 ranking on
+ *  Scottsdale's page, while the intent owner — the Queen Creek MEP
+ *  child — ranked for neither. Measured live 2026-11-03 (raw HTML):
+ *  child 869 visible words with BOTH exact phrases x0 ("queen creek"
+ *  x28), zero editorial inbound anchors from every Phoenix-metro page
+ *  checked, Queen Creek's own city hub linking its MEP child x0, and
+ *  the state MEP hub's Top Markets linkrow omitting Queen Creek.
+ *  ChatGPT consult 2026-11-03 (APPROVE WITH CHANGES; record
+ *  queen-creek-mep-consolidation-2026-11-03): varied per-source anchor
+ *  pairs as assigned below; the state MEP hub included as a source
+ *  (the direct consolidation signal); Scottsdale NOT touched; Phoenix
+ *  added as a sixth source (home metro, former #1s); the B-row phrase
+ *  "commercial structural engineer queen creek" carried once on the
+ *  QC city-hub block into the QC structural child; "fastest-growing"
+ *  hype avoided; home-office fact kept proportionate; San Tan Valley
+ *  framed as geographic reach only. The S3 Mesa pattern, inverted:
+ *  there the carrier already ranked; here the support must move the
+ *  ranking onto the child. Prose links only, additions only. */
+const QC_MEP_CHILD_PATH = "/locations/arizona/queen-creek/mep-engineering/";
+
+const QC_DEFENSE_SOURCE_SLUGS = new Set([
+  "tempe", "gilbert", "chandler", "phoenix",
+]);
+
+const QC_ANCHOR_PAIRS: Record<string, readonly [string, string]> = {
+  "": ["MEP engineering in Queen Creek", "Queen Creek MEP engineering"],
+  "state-mep": ["MEP engineer Queen Creek", "MEP engineering firm in Queen Creek"],
+  tempe: ["MEP engineering firm Queen Creek", "MEP services in Queen Creek"],
+  gilbert: ["Queen Creek MEP engineering", "MEP engineering firm Queen Creek"],
+  chandler: ["MEP engineer Queen Creek", "MEP engineering in Queen Creek"],
+  phoenix: ["MEP services in Queen Creek", "MEP engineering firm in Queen Creek"],
+};
+
+function queenCreekDefenseSection(currentSlug: string): string {
+  const [a1, a2] = QC_ANCHOR_PAIRS[currentSlug] ?? QC_ANCHOR_PAIRS[""];
+  const link = (anchor: string) =>
+    `<a href="${QC_MEP_CHILD_PATH}">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>Queen Creek <em>MEP Coverage</em></h2>
+  <div class="prose"><p>The East Valley's growth edge is Queen Creek — production subdivisions and custom homes, retail and restaurant build-outs along the Ellsworth Road and Queen Creek Road corridors, and the school, civic, and equestrian work that follows the rooftops. It is also home turf for Apex Grid Engineering: our office is in Queen Creek, and our ${link(a1)} practice is the firm's home bench — the mechanical, electrical, and plumbing scopes for the town's building stock are handled here directly.</p>
+  <p>Queen Creek reviews on its own track: the Town of Queen Creek Community Development Department, under the 2018 IBC with Town of Queen Creek amendments and the 2018 IECC, and the same bench reaches San Tan Valley just across the Pinal County line. The adopted editions, local amendments, and project types an ${link(a2)} scope designs to are set out on the Queen Creek page.</p></div>
+</div></section>`;
+}
+
+function queenCreekCarrierSection(): string {
+  return `<section class="section section--white">
+      <div class="container container--narrow">
+        <h2>What an MEP Engineer Scopes in Queen Creek</h2>
+        <p>An MEP scope in Queen Creek starts from the building stock: production subdivisions and custom homes across the town's growth corridors, retail and restaurant tenant improvements along Ellsworth Road and Queen Creek Road, multifamily and build-to-rent communities, school and civic facilities, and the agricultural and equestrian properties that still ring the town. The mechanical design is cooling-led — Queen Creek sits in Climate Zone 2B, so equipment selection turns on right-sized capacity with accurate high-ambient derating; the electrical design covers service sizing, distribution, lighting and controls, EV charging, and solar PV integration, often across the longer service runs the town's larger lots require; the plumbing design sizes water, waste, and gas to the use, with the same longer-run reality. The three disciplines are coordinated as one sealed set — the coordination an MEP engineer Queen Creek owners, builders, and architects rely on when a subdivision phase, a tenant space, or a civic building has to open on schedule.</p>
+        <p>Permitting runs through the Town of Queen Creek Community Development Department, on the 2018 IBC with Town of Queen Creek amendments and the 2018 IECC. Apex Grid Engineering is an MEP engineering firm in Queen Creek — our office is at 22475 E Quintero Rd — so the local picture is the firm's working baseline: the Town's development services process, its amendment package, and its review sequencing are what the set is built against from the first load calculation. The same bench serves San Tan Valley immediately south, in Pinal County, where the building stock mirrors Queen Creek's and the permitting path runs through the county instead of the Town.</p>
+      </div>
+    </section>`;
+}
+
+function queenCreekHubSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Queen Creek Is <em>Home Base</em></h2>
+  <div class="prose"><p>Queen Creek is Apex Grid Engineering's home market — the firm's office is at 22475 E Quintero Rd — and the town's discipline pages carry the local detail its projects design to. <a href="${QC_MEP_CHILD_PATH}">MEP engineering in Queen Creek</a> sets out the mechanical, electrical, and plumbing scopes for the town's subdivisions, commercial corridors, and civic work, permitted through the Town of Queen Creek Community Development Department. For the structural side, the <a href="/locations/arizona/queen-creek/structural-engineering/">commercial structural engineer Queen Creek</a> page covers structural design for the same building stock — homes, retail, and light industrial across the town and into San Tan Valley.</p></div>
+</div></section>`;
+}
+
 /** Cleanrooms Defense Cure Q1 (2026-11-02): the fallen #1 carrier for
  *  "mep engineering for cleanrooms" — /industries/life-science/cleanroom-mep-engineering/
  *  — held #1 on two structural card links and zero editorial prose support,
@@ -4461,6 +4526,7 @@ ${priorityMarkets.length ? `<section class="block"><div class="container">
 </div></section>` : ""}
 ${state.slug === "georgia" ? georgiaDefenseSection("") : ""}
 ${state.slug === "arizona" ? mesaDefenseSection("") : ""}
+${state.slug === "arizona" ? queenCreekDefenseSection("") : ""}
 ${state.slug === "colorado" ? broomfieldDefenseSection("") : ""}
 ${state.slug === "hawaii" ? `<section class="block"><div class="container">
   <h2>Engineering Coverage in <em>Honolulu</em></h2>
@@ -4746,6 +4812,7 @@ ${state.slug === "georgia" && GA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? georgiaDe
 ${state.slug === "georgia" && ALPHA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? alpharettaDefenseSection(city.slug) : ""}
 ${state.slug === "georgia" && city.slug === "alpharetta" ? alpharettaCarrierSection() : ""}
 ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
+${state.slug === "arizona" && city.slug === "queen-creek" ? queenCreekHubSection() : ""}
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && city.slug === "broomfield" ? broomfieldCarrierSection() : ""}
 <section class="block"><div class="container">
@@ -6337,6 +6404,7 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
       </div>
     </section>
 
+    ${page.stateSlug === "arizona" && page.citySlug === "queen-creek" && page.serviceSlug === "mep-engineering" ? queenCreekCarrierSection() : ""}
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
@@ -12810,6 +12878,7 @@ ${specialtyLocationPages.length ? `<section class="block"><div class="container"
 ${state.slug === "georgia" && GA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? georgiaDefenseSection(city.slug) : ""}
 ${state.slug === "georgia" && ALPHA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? alpharettaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
+${state.slug === "arizona" && QC_DEFENSE_SOURCE_SLUGS.has(city.slug) ? queenCreekDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 <section class="block"><div class="container">
   <h2>More <em>Locations</em></h2>
