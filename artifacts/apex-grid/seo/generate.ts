@@ -4179,7 +4179,7 @@ ${peStampBlock({
   <div style="margin-top:20px" class="card"><div class="label">Market Context</div><p>${esc(state.marketNotes)}</p><p style="margin-top:10px">Key markets: ${esc(state.metros.join(", "))}.</p></div>
 </div></section>
 
-${state.slug === "arizona" && svc.slug === "mep-engineering" ? maricopaCarrierSection() : ""}<section class="block"><div class="container faq">
+<section class="block"><div class="container faq">
   <h2>${esc(state.name)} <em>FAQs</em></h2>
   ${state.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="a">${esc(f.a)}</div></details>`).join("")}
 </div></section>
@@ -4363,69 +4363,6 @@ function broomfieldCarrierSection(): string {
 </div></section>`;
 }
 
-/** Maricopa Defense Cure (2026-11-03): editorial support INTO the
- *  fallen carrier for "mep engineering firm maricopa" (10→null,
- *  rank-drop guard pair nw_keywords_20261103-00 → -01). Carrier is
- *  the Arizona state MEP page, /locations/arizona/mep-engineering/
- *  (servicePage). Measured live before build: 1,100 visible words
- *  (template-level); the exact phrase ZERO times, the stem "mep
- *  engineering firm" ZERO times, "Maricopa" named only twice on the
- *  whole page — the page leads with state intent and never addresses
- *  the county intent the term carries. Inbound: Arizona hub, Peoria,
- *  and Queen Creek carry one service-card template link each;
- *  Phoenix, Scottsdale, Tempe, Mesa, Chandler, Gilbert, and
- *  Glendale link ZERO times; editorial prose anchors ZERO anywhere.
- *  Sitemap presence confirmed (sitemap-locations.xml, 20,990 locs).
- *  ChatGPT consult 2026-11-03 (APPROVE; record
- *  maricopa-defense-cure-2026-11-03): deepening approved (the
- *  Alpharetta fork — thin AND intent-absent), placement hub + 8
- *  Maricopa County siblings approved, anchors VARIED per the
- *  Broomfield discipline — rotating "MEP engineering in Maricopa
- *  County", "Maricopa County MEP engineering", and "MEP engineering
- *  firm in Maricopa County" in per-page pairs. Geography held
- *  exact: Maricopa County is the Phoenix metro (Phoenix, Scottsdale,
- *  Tempe, Mesa, Chandler, Gilbert, Glendale, Peoria); Tucson is NOT
- *  in Maricopa County and is never named as county stock; Queen
- *  Creek straddles the county line and is not a source page.
- *  Permitting copy kept to civic fact (incorporated cities permit
- *  through their own development departments; Maricopa County
- *  Planning & Development reviews unincorporated areas). Prose
- *  links only. */
-const MARICOPA_DEFENSE_SOURCE_SLUGS = new Set([
-  "phoenix", "scottsdale", "tempe", "mesa", "chandler", "gilbert", "glendale", "peoria",
-]);
-
-const MARICOPA_ANCHOR_PAIRS: Record<string, readonly [string, string]> = {
-  "": ["MEP engineering in Maricopa County", "MEP engineering firm in Maricopa County"],
-  phoenix: ["MEP engineering in Maricopa County", "Maricopa County MEP engineering"],
-  scottsdale: ["Maricopa County MEP engineering", "MEP engineering firm in Maricopa County"],
-  tempe: ["MEP engineering firm in Maricopa County", "MEP engineering in Maricopa County"],
-  mesa: ["Maricopa County MEP engineering", "MEP engineering in Maricopa County"],
-  chandler: ["MEP engineering firm in Maricopa County", "Maricopa County MEP engineering"],
-  gilbert: ["MEP engineering in Maricopa County", "Maricopa County MEP engineering"],
-  glendale: ["Maricopa County MEP engineering", "MEP engineering firm in Maricopa County"],
-  peoria: ["MEP engineering firm in Maricopa County", "MEP engineering in Maricopa County"],
-};
-
-function maricopaDefenseSection(currentSlug: string): string {
-  const [a1, a2] = MARICOPA_ANCHOR_PAIRS[currentSlug] ?? MARICOPA_ANCHOR_PAIRS[""];
-  const link = (anchor: string) =>
-    `<a href="/locations/arizona/mep-engineering/">${anchor}</a>`;
-  return `<section class="block"><div class="container">
-  <h2>Maricopa County <em>MEP Coverage</em></h2>
-  <div class="prose"><p>Maricopa County is one shared design and permitting market: the Phoenix metro's office, medical, retail, hospitality, and light-industrial stock runs across Phoenix, Scottsdale, Tempe, Mesa, Chandler, Gilbert, Glendale, and Peoria, and the mechanical, electrical, and plumbing scopes follow the buildings across city lines. Our ${link(a1)} coverage sets out that shared scope in one place — the county-level picture behind the city pages, from desert cooling loads to the way each city's review path differs.</p>
-  <p>Projects inside the incorporated cities permit through those cities' own development departments, while Maricopa County Planning &amp; Development reviews work in the county's unincorporated areas — so the county frame comes first, and the city detail follows it. The adopted code editions, review sequencing, and project types covered by ${link(a2)} are laid out on the county page.</p></div>
-</div></section>`;
-}
-
-function maricopaCarrierSection(): string {
-  return `<section class="block"><div class="container">
-  <h2>An MEP Engineering Firm for <em>Maricopa County</em> Work</h2>
-  <div class="prose"><p>Most of Arizona's commercial construction sits inside one county. Maricopa County holds Phoenix and the metro around it — Scottsdale, Tempe, Mesa, Chandler, Gilbert, Glendale, and Peoria — and the MEP scopes follow the buildings: multi-tenant office along the Camelback corridor and in downtown Phoenix, medical and dental fit-outs across Scottsdale and Tempe, retail and restaurant space in the master-planned districts, hospitality, and the flex and light-industrial stock filling in along the freeways. The mechanical design is cooling-dominated — rooftop and split systems sized for desert summer design temperatures, with the ventilation and exhaust each occupancy requires; the electrical design covers service sizing, distribution, and lighting and controls to the adopted energy code; the plumbing design covers water, waste, and specialty systems sized to the use. An MEP engineering firm in Maricopa County coordinates the three disciplines as one sealed set — the same coordination an MEP engineering firm Maricopa County owners and tenants rely on when a suite turns over or a building changes use — because a tenant-improvement schedule rarely leaves room to reconcile the systems in the field.</p>
-  <p>Permitting in the county runs on two tracks, and the design work is sequenced to the one that applies. Projects inside the incorporated cities are reviewed by those cities' own development departments, each on its adopted code editions and local amendments; projects in unincorporated areas are reviewed by Maricopa County Planning &amp; Development. Either way the engineering follows the same order: existing-condition verification where a space is being re-tenanted, load calculations matched to the actual fit-out, and drawings coordinated across the mechanical, electrical, and plumbing sheets before the set is sealed and submitted — so the review, city or county, sees one consistent package.</p></div>
-</div></section>`;
-}
-
 /** Cleanrooms Defense Cure Q1 (2026-11-02): the fallen #1 carrier for
  *  "mep engineering for cleanrooms" — /industries/life-science/cleanroom-mep-engineering/
  *  — held #1 on two structural card links and zero editorial prose support,
@@ -4524,7 +4461,6 @@ ${priorityMarkets.length ? `<section class="block"><div class="container">
 </div></section>` : ""}
 ${state.slug === "georgia" ? georgiaDefenseSection("") : ""}
 ${state.slug === "arizona" ? mesaDefenseSection("") : ""}
-${state.slug === "arizona" ? maricopaDefenseSection("") : ""}
 ${state.slug === "colorado" ? broomfieldDefenseSection("") : ""}
 ${state.slug === "hawaii" ? `<section class="block"><div class="container">
   <h2>Engineering Coverage in <em>Honolulu</em></h2>
@@ -4810,7 +4746,6 @@ ${state.slug === "georgia" && GA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? georgiaDe
 ${state.slug === "georgia" && ALPHA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? alpharettaDefenseSection(city.slug) : ""}
 ${state.slug === "georgia" && city.slug === "alpharetta" ? alpharettaCarrierSection() : ""}
 ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
-${state.slug === "arizona" && MARICOPA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && city.slug === "broomfield" ? broomfieldCarrierSection() : ""}
 <section class="block"><div class="container">
@@ -7184,6 +7119,11 @@ function staticStandalonePage(page: StaticPageDef): string {
     })
     .join("");
   const sectionsAndGroups = sectionsHtml + groupsHtml;
+  const supportHtml = page.supportHtml
+    ? enhanced
+      ? `\n    <section class="block">\n      <div class="container prose">\n        <p>${page.supportHtml}</p>\n      </div>\n    </section>`
+      : `\n    <section class="section section--white">\n      <div class="container container--narrow">\n        <p>${page.supportHtml}</p>\n      </div>\n    </section>`
+    : "";
   const relatedHtml = page.relatedLinks?.length
     ? `<section class="block">
       <div class="container">
@@ -7204,7 +7144,7 @@ function staticStandalonePage(page: StaticPageDef): string {
       </div>
     </div>
     ${breadcrumb(crumbs)}
-    ${sectionsAndGroups}
+    ${sectionsAndGroups}${supportHtml}
      ${relatedHtml}
     ${faqHtml}
     <section class="ctaband">
@@ -7226,7 +7166,7 @@ function staticStandalonePage(page: StaticPageDef): string {
       </div>
     </div>
     ${breadcrumb(crumbs)}
-    ${sectionsAndGroups}
+    ${sectionsAndGroups}${supportHtml}
     ${faqHtml}
     <section class="section section--dark cta-band">
       <div class="container">
@@ -7397,6 +7337,11 @@ function disciplineHubPage(hub: DisciplineHub): string {
         ).join("\n")}</div>
       </div></section>`
     : "";
+  const structuralSupport = hub.slug === "structural-engineering"
+    ? `<section class="section section--light"><div class="container container--narrow">
+        <p>Explore <a href="/">Apex Grid Engineering's structural solutions</a> — and the coordinated MEP and civil teams behind them — from the firm's homepage.</p>
+      </div></section>`
+    : "";
 
   const body = `
     <div class="hero hero--page">
@@ -7431,6 +7376,7 @@ function disciplineHubPage(hub: DisciplineHub): string {
       </div>
     </section>
 ${extendedStructuralCards}
+${structuralSupport}
 
     ${residualsFaqSection(hub.faqs)}
 
@@ -12864,7 +12810,6 @@ ${specialtyLocationPages.length ? `<section class="block"><div class="container"
 ${state.slug === "georgia" && GA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? georgiaDefenseSection(city.slug) : ""}
 ${state.slug === "georgia" && ALPHA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? alpharettaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
-${state.slug === "arizona" && MARICOPA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 <section class="block"><div class="container">
   <h2>More <em>Locations</em></h2>
