@@ -74,6 +74,10 @@ export const AUDIENCE_RESOURCE_HUBS: AudienceResourceHub[] = [
         "A structural change can affect MEP routing, fire protection, architecture, or civil work. I recommend routing the proposed solution through the responsible design team before installation and keeping superseded sketches out of the active field set.",
         `Review the support available for ${link("/for-contractors/", "contractors")} and use the ${link("/contact", "contact form")} to describe an upcoming response, correction, or design-assist need.`,
       ] },
+      { heading: "Know what a delegated design item needs from you", paragraphs: [
+        "Some details in a permit set are deliberately left to your side of the line. Connection design, shoring, equipment anchorage, and similar deferred submittals are assigned to the contractor's team as they rely on the specific products, fabricators, and methods under your control. When one of those items lands with you, send the inputs the review actually checks: the product data or fabricator information, the loads the item has to carry, and the calculations or drawings prepared for it.",
+        "We ensure each submittal aligns with the design intent and the criteria stated in the issued documents; it does not take over means and methods, which stay with you. If a submittal comes back with comments, answer them point by point, revise the calculation or detail instead of annotating around it, and file the approved version in the active field set so what gets installed matches what was reviewed.",
+      ], bullets: ["Flag every deferred submittal in the set at buyout, not at installation", "Send product data, design loads, and calculations as one package", "Keep the approved submittal in the active field set"] },
     ],
     faqs: [
       { question: "What makes a contractor RFI useful to an engineer?", answer: "Include the exact location, relevant issued sheets, the observed condition, clear photos and dimensions, the conflict or question, and the requested decision date. Distinguish what is verified from what is proposed." },
