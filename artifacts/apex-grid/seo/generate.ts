@@ -3549,6 +3549,62 @@ const phase1ServiceSummaries: Record<Phase1ServiceSlug, string> = {
   "engineering-calculations": "Calculations make design decisions traceable by documenting inputs, assumptions, methods, checks, and conclusions for the defined scope.",
 };
 
+/** Sioux City Defense Cure (Tier-B Strike 4, 2026-11-03): editorial
+ *  support INTO the metro MEP carrier for "mep engineering sioux city ia"
+ *  (#8, snapshot pair nw_keywords_20261103-00/-01) and Tier A case F-P6
+ *  "mep engineering company sioux city" (2→12, URL-consolidation
+ *  churn-watch — this strike is the first lever fired on that case, on
+ *  the shared carrier). Measured live before build: carrier 801 visible
+ *  words, both exact phrases ZERO times; hub and structural sibling link
+ *  the carrier only through furniture (service-card grid, related-guides
+ *  linkrow); Omaha / Des Moines / Cedar Rapids MEP pages already carry a
+ *  short prose cross-link each (F-P6 consolidation residue, left
+ *  untouched). ChatGPT consult 2026-11-03 (APPROVE WITH CHANGES; record
+ *  sioux-city-defense-cure-2026-11-03): placement weight approved
+ *  (carrier deepening + hub + sibling + 2 city pages), one strengthened
+ *  carrier answers both F-P6 terms, Sioux Falls anchor set to "the Sioux
+ *  City metro's MEP engineering guide". Anchors VARIED per source per
+ *  the Broomfield discipline. Geography held exact: the metro is
+ *  tri-state (Sioux City + Sergeant Bluff IA; South Sioux City + Dakota
+ *  City NE; North Sioux City + Dakota Dunes SD); Sioux Falls is a
+ *  SEPARATE metro ~90 miles north, framed as regional reach only. Code
+ *  copy held to civic fact (IA + NE state-level codes; SD local
+ *  adoption; governing edition confirmed per project address). Prose
+ *  links only. Carrier deepening + structural-sibling support ride the
+ *  METRO_SERVICE_EXTRA_SECTIONS map; city support rides
+ *  locationServicePage gates below. */
+const SIOUX_CITY_MEP_CARRIER_PATH = "/metros/sioux-city-ia-ne-sd/mep-engineering/";
+
+function siouxCityHubSection(): string {
+  const link = (anchor: string) =>
+    `<a href="${SIOUX_CITY_MEP_CARRIER_PATH}">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>The Metro's <em>MEP</em> Work</h2>
+  <div class="prose"><p>MEP is this metro's heaviest discipline load: the food-processing and cold-storage corridor runs on refrigeration, ventilation, and electrical service that dwarf a typical commercial fit-out, and the riverfront, healthcare, and logistics stock each bring their own systems scopes. ${link("MEP engineering for the Sioux City metro")} sets out that discipline scope in one place — process utilities and washdown ventilation, service and distribution sizing, plumbing and gas — coordinated across the three states the metro spans.</p>
+  <p>Because the metro crosses state lines at the river, the guide also carries the coordination frame: which code basis a project designs to depends on which side of the Missouri it sits. Start from ${link("the tri-state MEP engineering guide")} when a project's systems scope is the question; the structural, civil, and energy paths above cover the rest of the building.</p></div>
+</div></section>`;
+}
+
+function siouxCityCitySupportSection(): string {
+  const link = (anchor: string) =>
+    `<a href="${SIOUX_CITY_MEP_CARRIER_PATH}">${anchor}</a>`;
+  return `<section class="section section--white">
+      <div class="container container--narrow">
+        <h2>The Metro-Wide MEP Picture</h2>
+        <p>This page covers MEP engineering inside Sioux City's city limits; the same scopes run metro-wide, across the Missouri River into South Sioux City and Dakota City, Nebraska, and North Sioux City and Dakota Dunes, South Dakota. ${link("Sioux City metro MEP engineering")} lays out the full tri-state scope — the food-processing and cold-storage corridor's process utilities and refrigeration support, the riverfront commercial stock, and the healthcare and I-29 logistics work — and ${link("MEP engineering in the tri-state metro")} is where the three-state code and review framing is set out. Project teams working both the city and the wider metro use the two pages together: city facts here, metro scope there.</p>
+      </div>
+    </section>`;
+}
+
+function siouxFallsCitySupportSection(): string {
+  return `<section class="section section--white">
+      <div class="container container--narrow">
+        <h2>South to the Other Anchor Metro</h2>
+        <p>Sioux Falls anchors the northern end of the I-29 corridor; ninety miles south, Sioux City anchors the other end, and project teams in this region regularly work both metros. Where a Sioux Falls project team's scope extends into the tri-state metro — or a Sioux City plant or riverfront project needs the same bench — <a href="${SIOUX_CITY_MEP_CARRIER_PATH}">the Sioux City metro's MEP engineering guide</a> sets out the discipline scope for that metro: its food-processing corridor, its riverfront stock, and the three-state coordination its projects design within.</p>
+      </div>
+    </section>`;
+}
+
 function phase1MetroHubPage(metro: Phase1Metro): string {
   const url = `/metros/${metro.slug}/`;
   const faqs = phase1MetroFaqs(metro);
@@ -3566,6 +3622,7 @@ ${breadcrumb(crumbs)}
 ${familyVisual("location", `Service location shown: ${metro.representativeCity}, ${metro.representativeState}.`)}
 <section class="block"><div class="container"><h2>How to use this <em>metro guide</em></h2><div class="prose"><p>${esc(metro.editorial.planningLens)}</p><p>${esc(metro.editorial.coordinationLens)}</p><p>This page uses the Census metro record for market context only. It does not invent a local permitting fact, identify an authority's current checklist, promise coverage, or substitute for a project intake and responsible professional review.</p></div></div></section>
 <section class="block"><div class="container"><h2>${esc(metro.representativeCity)} <em>engineering paths</em></h2><div class="grid2">${links}</div></div></section>
+${metro.slug === "sioux-city-ia-ne-sd" ? siouxCityHubSection() : ""}
 <section class="block"><div class="container"><h2>Evidence before <em>design decisions</em></h2><div class="prose"><p>${esc(metro.editorial.documentationLens)}</p><p>${esc(metro.editorial.deliveryLens)}</p><p>For an initial review, gather the project address, scope narrative, current architectural backgrounds, existing-condition photographs or measurements, equipment information, site or geotechnical records where relevant, prior comments, and requested deliverables. The responsible professional identifies what is sufficient for the defined question.</p></div></div></section>
 <section class="block"><div class="container"><h2>2025 Census <em>source record</em></h2><div class="prose"><p>CBSA ${metro.cbsaCode} is ranked ${metro.rank} among the eligible Metro Code 2 records in the final annual 2025 BPS sheet, ordered by Total descending. “Total” is used as published by Census; it is not a forecast, project count, engineering volume, or promise of demand.</p><p><a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">View the official Census BPS workbook (${PHASE1_SERVICE_SLUGS.length ? "MSA Units Ann" : "source"})</a></p></div></div></section>
 ${phase0FaqMarkup(faqs)}
@@ -3593,6 +3650,8 @@ const METRO_SERVICE_EXTRA_SECTIONS: Record<string, string> = {
   "omaha-ne-ia/mep-engineering": `<section class="block"><div class="container"><h2>MEP engineering in <em>Sioux City</em></h2><div class="prose"><p>The Omaha, NE-IA metro and the Sioux City, IA-NE-SD metro share the Iowa-Nebraska border region, and project teams regularly coordinate work in both. See <a href="/metros/sioux-city-ia-ne-sd/mep-engineering/">MEP engineering in Sioux City</a> for coordinated mechanical, electrical, and plumbing documents in the tri-state metro.</p></div></div></section>`,
   "des-moines-west-des-moines-ia/mep-engineering": `<section class="block"><div class="container"><h2>MEP engineering in <em>Sioux City</em></h2><div class="prose"><p>Iowa project teams working across the state's metros can use the companion guide for the tri-state metro. See <a href="/metros/sioux-city-ia-ne-sd/mep-engineering/">MEP engineering in Sioux City</a> for coordinated mechanical, electrical, and plumbing documents in the Sioux City, IA-NE-SD metro.</p></div></div></section>`,
   "cedar-rapids-ia/mep-engineering": `<section class="block"><div class="container"><h2>MEP engineering in <em>Sioux City</em></h2><div class="prose"><p>Iowa project teams working across the state's metros can use the companion guide for the tri-state metro. See <a href="/metros/sioux-city-ia-ne-sd/mep-engineering/">MEP engineering in Sioux City</a> for coordinated mechanical, electrical, and plumbing documents in the Sioux City, IA-NE-SD metro.</p></div></div></section>`,
+  "sioux-city-ia-ne-sd/mep-engineering": `<section class="block"><div class="container"><h2>What MEP Engineering Scopes in <em>Sioux City</em></h2><div class="prose"><p>For MEP engineering, Sioux City, IA is three markets in one metro — Iowa, Nebraska, and South Dakota meet at the Missouri River, and the building stock follows the river. Downtown and the riverfront carry the commercial core: offices, civic buildings, hospitality, and historic warehouse stock converting to new uses. Along the river and the I-29 corridor sits the metro's industrial signature — food-processing and cold-storage plants in Sioux City, South Sioux City, and Dakota City, where the MEP scope is process-heavy: refrigeration support, ventilation and exhaust for washdown environments, heavy electrical service and motor loads, and utility coordination that starts from the process line rather than the floor plan. Hospitals and clinics, schools, and the warehousing and logistics stock filling in along I-29 round out the work. Existing-building work runs through all of it — plant expansions that cannot stop the line, warehouse conversions, hospital renovations phased around occupied floors.</p><p>The design itself is continental-climate work: heating-led through cold winters with deep frost, real cooling and dehumidification loads through humid summers, and snow and wind that bear on the rooftop equipment and its curbs. When a project team hires an MEP engineering company, Sioux City work also means settling which state's frame the project sits in before the first calculation — Iowa and Nebraska maintain state-level building and energy codes, while South Dakota leaves adoption to its local jurisdictions, so the governing edition, the energy path, and the review sequence are confirmed for the project address, across the river as readily as across the street. Apex Grid coordinates the mechanical, electrical, and plumbing scopes as one sealed set built against that confirmed basis — loads, services, and process demands reconciled on the drawings before the set is sealed, whichever state's reviewers will check it.</p></div></div></section>`,
+  "sioux-city-ia-ne-sd/structural-engineering": `<section class="block"><div class="container"><h2>Systems the Structure <em>Carries</em></h2><div class="prose"><p>Sioux City's structural work carries unusual systems loads — refrigeration and process equipment over the food-processing floors, rooftop units set for snow country, and the utility runs an industrial corridor depends on. Those loads are decided in the mechanical and electrical design, which is why the structural set is coordinated against <a href="/metros/sioux-city-ia-ne-sd/mep-engineering/">MEP engineering in the Sioux City metro</a> from the first framing pass. The discipline scope itself — process utilities, washdown ventilation, service sizing, and controls for the same building stock — is set out in <a href="/metros/sioux-city-ia-ne-sd/mep-engineering/">Sioux City MEP engineering</a>.</p></div></div></section>`,
   "charlotte-concord-gastonia-nc-sc/structural-engineering": `<section class="block"><div class="container"><h2>Structural engineering for a <em>Charlotte</em> building permit</h2><div class="prose"><p>Structural engineering for a Charlotte building permit starts with the question the project must answer: a new gravity load, a lateral change, an opening, a foundation condition, an equipment support, a repair, or another defined scope. The permit set has to show the complete load path, gravity and lateral, the foundation decisions behind it, and the details and design criteria the reviewer will check.</p><p>Send the project address, scope, current drawings, existing-condition evidence, prior comments, applicable authority information, and requested deliverables. The engineer confirms the existing evidence and design criteria before accepting responsibility for conclusions, and revisions are answered inside the same record when the review returns comments.</p><p>The authority having jurisdiction controls its checklist, interpretation, inspections, review, and approval — a metro guide cannot promise a local outcome. What Apex Grid Engineering controls is the engineering: licensed engineers review and stamp the structural work they are responsible for, so the Charlotte submission goes in complete, coordinated, and ready to be checked.</p></div></div></section>`,
 };
 
@@ -6470,6 +6529,8 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     </section>
 
     ${page.stateSlug === "arizona" && page.citySlug === "queen-creek" && page.serviceSlug === "mep-engineering" ? queenCreekCarrierSection() : ""}
+    ${page.stateSlug === "iowa" && page.citySlug === "sioux-city" && page.serviceSlug === "mep-engineering" ? siouxCityCitySupportSection() : ""}
+    ${page.stateSlug === "south-dakota" && page.citySlug === "sioux-falls" && page.serviceSlug === "mep-engineering" ? siouxFallsCitySupportSection() : ""}
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
