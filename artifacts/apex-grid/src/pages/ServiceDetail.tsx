@@ -215,6 +215,51 @@ export default function ServiceDetail() {
       </section>
 
       {serviceId === "mep" && (
+        <section className="py-16 bg-background border-t border-border">
+          <div className="container mx-auto px-4 md:px-8 max-w-6xl">
+            <h2 className="text-2xl font-display font-bold mb-4 text-white">How a Coordinated MEP Package Comes Together</h2>
+            <p className="text-muted-foreground max-w-3xl leading-relaxed mb-10">
+              Mechanical, electrical, and plumbing systems share the same ceilings, shafts, and walls. We design them
+              as one package — each discipline sized from the same basis, routed against the same structure, and
+              checked against the others before the set goes out.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+              <div>
+                <h3 className="font-display font-bold text-xl mb-3 text-white">Mechanical</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  HVAC design starts with heating and cooling load calculations for the building's actual envelope,
+                  occupancy, and use. Equipment selection, duct layout, and ventilation rates are then built from
+                  those numbers — not rules of thumb.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display font-bold text-xl mb-3 text-white">Electrical</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Electrical design covers service sizing and load calculations, distribution and panel schedules,
+                  and lighting layouts, ensuring alignment with mechanical equipment to maintain consistency in
+                  nameplate loads and circuiting across the set.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-display font-bold text-xl mb-3 text-white">Plumbing</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Plumbing design includes water and sanitary sizing from fixture-unit calculations, venting, and gas
+                  piping where the project needs it — routed to clear the structure and the other trades, not drawn
+                  over them.
+                </p>
+              </div>
+            </div>
+            <p className="text-muted-foreground max-w-3xl leading-relaxed mt-10">
+              Before delivery, the three disciplines are checked against the structure and against each other; that
+              coordination pass is what keeps RFIs and field conflicts down. California projects can include Title 24
+              energy compliance documentation, and plan-review corrections are handled by the same team that produced
+              the set. Where a project requires it, drawings can be sealed by a licensed PE.
+            </p>
+          </div>
+        </section>
+      )}
+
+      {serviceId === "mep" && (
         <section className="py-16 bg-card border-t border-border">
           <div className="container mx-auto px-4 md:px-8 max-w-6xl">
             <h2 className="text-2xl font-display font-bold mb-4 text-white">MEP Engineering for Cleanrooms</h2>
