@@ -71,6 +71,10 @@ export default function About() {
                 by Jeremy Mills — so quotes go out same-day and nothing falls through
                 the cracks.
               </p>
+              <p>
+                Discover how <Link href="/">Apex Grid Engineering</Link> optimizes its
+                engineering projects.
+              </p>
             </div>
 
             <div className="border border-border bg-background p-6 sm:p-10 rounded-sm h-fit">
