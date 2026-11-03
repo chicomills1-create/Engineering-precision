@@ -286,6 +286,54 @@ export default function Home() {
         </div>
       </section>
 
+      {/* The firm behind the stamp — branded introduction (own-name carrier cure, 2026-11-03) */}
+      <section className="py-20 md:py-28 bg-card border-b border-border" aria-label="About Apex Grid Engineering">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-white mb-8 type-3d text-center">
+              Discover Apex Grid Engineering: The Firm Behind the Stamp
+            </h2>
+            <div className="text-lg text-muted-foreground leading-relaxed space-y-6">
+              <p>
+                Apex Grid Engineering stands as a leader in providing PE-stamped, permit-ready
+                drawings for structural, MEP, and civil projects.
+              </p>
+              <p>
+                Apex Grid Engineering is a veteran-owned engineering firm based in Queen Creek,
+                Arizona. Its licensed professional engineers stamp drawings in 49 states — every
+                U.S. state except Alaska — so a builder, architect, or developer working across
+                state lines deals with one accountable firm instead of a new engineer in every
+                jurisdiction.
+              </p>
+              <p>
+                The practice runs on speed and a single point of responsibility. Send plans
+                through the contact page and Apex Grid Engineering returns a same-day quote on
+                qualifying scopes; review-and-seal packages move in days, not months, with
+                plan-check support through approval. Structural design, MEP coordination, and
+                civil work sit under one roof, so the disciplines arrive coordinated instead of
+                pieced together.
+              </p>
+              <p>
+                Most engagements start with a set of plans and a deadline: a contractor mid-bid,
+                an architect whose engineer went quiet, a developer opening in a new state. The
+                intake is the same — send the drawings, get a number the same day, and know
+                exactly who is responsible for the stamp.
+              </p>
+              <p>
+                That standard carries across the family the firm leads: Seal Anvil and Stamp
+                Forge for PE stamping, DraftSignal Digital for search visibility — service
+                brands of Apex Grid Engineering PLLC, each run to the same bar of licensed
+                engineers, honest timelines, and work that clears review.
+              </p>
+              <p>
+                Leading our sister-brand family, we remain committed to delivering rapid,
+                reliable engineering solutions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Who we work with — audience-aware proof. Franchise proof lives here, not the hero. */}
       <section className="py-16 md:py-20 bg-background border-b border-border" aria-label="Who we work with">
         <div className="container mx-auto px-4 md:px-8">
