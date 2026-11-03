@@ -4215,6 +4215,44 @@ function assertNoMarkupCity(city: CityData) {
     throw new Error(`City ${city.slug} contains disallowed markup`);
   }
 }
+/** Georgia Defense Cure (2026-11-02): editorial link support INTO the two
+ *  fallen #1 MEP carriers — the Sandy Springs and Roswell city hubs — from
+ *  the Georgia hub, north-metro sibling city pages (curated + directory),
+ *  and the carriers themselves (cross-support). Anchors per the ChatGPT
+ *  consult of 2026-11-02 (APPROVE WITH CHANGES): the natural form
+ *  "MEP engineering in <City>" plus one exact-match "MEP engineer <City>"
+ *  per source page. Prose links only — no linkrows, no stuffing. */
+const GA_DEFENSE_TARGETS = [
+  { slug: "sandy-springs", name: "Sandy Springs" },
+  { slug: "roswell", name: "Roswell" },
+] as const;
+const GA_DEFENSE_SOURCE_SLUGS = new Set([
+  "sandy-springs", "roswell",
+  "atlanta", "marietta", "alpharetta", "dunwoody", "brookhaven",
+  "johns-creek", "decatur", "norcross", "peachtree-corners", "milton",
+]);
+
+function georgiaDefenseSection(currentSlug: string): string {
+  const targets = GA_DEFENSE_TARGETS.filter((t) => t.slug !== currentSlug);
+  if (!targets.length) return "";
+  const link = (t: (typeof GA_DEFENSE_TARGETS)[number], anchor: string) =>
+    `<a href="/locations/georgia/${t.slug}/">${anchor}</a>`;
+  if (targets.length === 2) {
+    const [a, b] = targets;
+    return `<section class="block"><div class="container">
+  <h2>North Metro Atlanta <em>MEP Coverage</em></h2>
+  <div class="prose"><p>North Fulton and the Perimeter corridor carry some of metro Atlanta's densest office, medical, and mixed-use stock, and the MEP work follows it — tenant improvements, medical-office build-outs, and building-system replacements on both sides of the city line. Our ${link(a, `MEP engineering in ${a.name}`)} coverage handles the Perimeter Center district and its medical campuses, and our ${link(b, `MEP engineering in ${b.name}`)} coverage handles the GA-400 corridor to the north.</p>
+  <p>Each city's review habits differ, so the local picture comes first: the amendments and permitting context an ${link(a, `MEP engineer ${a.name}`)} project designs to are spelled out on its page, and the same is true for an ${link(b, `MEP engineer ${b.name}`)} project up the corridor.</p></div>
+</div></section>`;
+  }
+  const t = targets[0];
+  const toward = t.slug === "roswell" ? "the GA-400 corridor" : "Perimeter Center";
+  return `<section class="block"><div class="container">
+  <h2>North Metro Atlanta <em>MEP Coverage</em></h2>
+  <div class="prose"><p>North-metro projects rarely stop at one city line. For scopes toward ${toward}, our ${link(t, `MEP engineering in ${t.name}`)} coverage handles the same tenant-improvement, medical-office, and mixed-use work under ${t.name}'s own code amendments and review process — the local picture an ${link(t, `MEP engineer ${t.name}`)} team designs to from day one.</p></div>
+</div></section>`;
+}
+
 function statePage(state: StateData, cities: CityData[], directory: CityDirectory): string {
   const stateCities = cities.filter((c) => c.stateSlug === state.slug && isReviewedCity(c));
   const directoryCities = eligibleDirectoryCities(state, directory, cities);
@@ -4256,6 +4294,7 @@ ${priorityMarkets.length ? `<section class="block"><div class="container">
     `<a class="card" href="${priorityMarketHubUrl(market)}"><div class="label">${esc(market.market)}</div><h3>${esc(market.market)} Engineering Services</h3><p>${esc(market.description)}</p></a>`
   ).join("")}</div>
 </div></section>` : ""}
+${state.slug === "georgia" ? georgiaDefenseSection("") : ""}
 ${state.slug === "hawaii" ? `<section class="block"><div class="container">
   <h2>Engineering Coverage in <em>Honolulu</em></h2>
   <div class="grid2">
@@ -4536,6 +4575,7 @@ ${availableVerticals
     <div class="card"><div class="label">PE Licensure — ${esc(state.licensure.board)}</div><p>${esc(state.licensure.notes)}</p></div>
   </div>
 </div></section>
+${state.slug === "georgia" && GA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? georgiaDefenseSection(city.slug) : ""}
 <section class="block"><div class="container">
   <h2>More <em>${esc(state.name)} Locations</em></h2>
   <div class="linkrow">${curatedInState
@@ -12573,6 +12613,7 @@ ${specialtyLocationPages.length ? `<section class="block"><div class="container"
     `<a href="/locations/${p.stateSlug}/${p.citySlug}/${p.serviceSlug}/">${esc(p.title)}</a>`
   ).join("")}</div>
 </div></section>` : ""}
+${state.slug === "georgia" && GA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? georgiaDefenseSection(city.slug) : ""}
 <section class="block"><div class="container">
   <h2>More <em>Locations</em></h2>
   <div class="linkrow">${nearby
