@@ -155,6 +155,9 @@ export default function PeStamp() {
             <p className="text-xl text-muted-foreground leading-relaxed">
               A permit stuck waiting on a seal is a project bleeding money. Apex Grid Engineering gives architects, contractors, and developers a single trusted partner for PE review-and-seal: our licensed engineers take your production drawings through a real engineering review, verify or perform the calculations, mark the revisions the AHJ will demand, and seal the final set. Our PEs seal in any state we serve, and firms send us plans every week because we move fast without cutting the review that makes the seal valid.
             </p>
+            <p className="text-xl text-muted-foreground leading-relaxed mt-6">
+              Understand the value of <Link href="/">Apex Grid Engineering</Link> in stamping services.
+            </p>
           </div>
         </div>
       </section>
