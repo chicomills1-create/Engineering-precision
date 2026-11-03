@@ -366,6 +366,9 @@ const BASE_RESOURCE_ARTICLES: ResourceArticle[] = [
 
 <h2>Permit and Inspection Requirements</h2>
 <p>Load-bearing wall removal requires a building permit in virtually every jurisdiction. The permit requires PE-stamped structural drawings and calculations. The work is then inspected before finishes are closed — the inspector verifies that the beam, posts, and connections were installed per the approved plans. Unpermitted wall removal is a liability that follows the property through every future sale.</p>
+
+<h2>Shoring Comes Before Demolition</h2>
+<p>The approved design assumes the new beam and posts are already in place. Getting there safely is a construction sequence the engineer addresses on the drawings: the loads the wall carries must be temporarily supported before any stud is cut. Shoring — temporary posts and beams on both sides of the wall, carried down to structure that can take the load — holds the building while the wall comes out and the new beam, posts, and connections go in. Only after the permanent system is installed and connected is the shoring released, in the sequence the drawings specify. Skipping or improvising this step is where wall-removal projects get into trouble: the structure above does not wait for the beam to arrive. Ask your engineer to show the shoring and sequencing notes on the permit set before demolition is scheduled.</p>
     `,
   },
 
