@@ -4250,6 +4250,7 @@ ${state.slug === "arizona" && svc.slug === "mep-engineering" ? maricopaCarrierSe
 </div></section>
 
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? queenCreekDefenseSection("state-mep") : ""}
+${state.slug === "arizona" && svc.slug === "mep-engineering" ? scottsdaleDefenseSection("state-mep") : ""}
 <section class="ctaband"><div class="container">
   <h2>Start Your ${esc(state.name)} Project</h2>
   <p>For projects whose jurisdiction, discipline, and scope pass review, an available licensed PE and coordinated team can be identified. Send us your scope for a proposal; timing and fee depend on the project.</p>
@@ -4456,7 +4457,7 @@ function queenCreekDefenseSection(currentSlug: string): string {
   return `<section class="block"><div class="container">
   <h2>Queen Creek <em>MEP Coverage</em></h2>
   <div class="prose"><p>The East Valley's growth edge is Queen Creek — production subdivisions and custom homes, retail and restaurant build-outs along the Ellsworth Road and Queen Creek Road corridors, and the school, civic, and equestrian work that follows the rooftops. It is also home turf for Apex Grid Engineering: our office is in Queen Creek, and our ${link(a1)} practice is the firm's home bench — the mechanical, electrical, and plumbing scopes for the town's building stock are handled here directly.</p>
-  <p>Queen Creek reviews on its own track: the Town of Queen Creek Community Development Department, under the 2018 IBC with Town of Queen Creek amendments and the 2018 IECC, and the same bench reaches San Tan Valley just across the Pinal County line. The adopted editions, local amendments, and project types an ${link(a2)} scope designs to are set out on the Queen Creek page.</p></div>
+  <p>Queen Creek reviews on its own track: the Town of Queen Creek Community Development Department, under the 2018 IBC with Town of Queen Creek amendments and the 2018 IECC, and the same bench reaches San Tan Valley just across the Pinal County line. The adopted editions, local amendments, and project types an ${link(a2)} scope designs to are set out on the Queen Creek page.</p>${currentSlug === "state-mep" ? `<p>That home bench is also the comparison point for the southeast Valley: teams shortlisting an <a href="${QC_MEP_CHILD_PATH}">MEP engineering firm in Queen Creek</a> are looking at the practice that designs the town's subdivisions, its Ellsworth Road and Queen Creek Road commercial corridors, and its school and civic facilities — permitted through the Town of Queen Creek Community Development Department, from the firm's office on Quintero Rd.</p>` : ""}</div>
 </div></section>`;
 }
 
@@ -4475,6 +4476,63 @@ function queenCreekHubSection(): string {
   <h2>Queen Creek Is <em>Home Base</em></h2>
   <div class="prose"><p>Queen Creek is Apex Grid Engineering's home market — the firm's office is at 22475 E Quintero Rd — and the town's discipline pages carry the local detail its projects design to. <a href="${QC_MEP_CHILD_PATH}">MEP engineering in Queen Creek</a> sets out the mechanical, electrical, and plumbing scopes for the town's subdivisions, commercial corridors, and civic work, permitted through the Town of Queen Creek Community Development Department. For the structural side, the <a href="/locations/arizona/queen-creek/structural-engineering/">commercial structural engineer Queen Creek</a> page covers structural design for the same building stock — homes, retail, and light industrial across the town and into San Tan Valley.</p></div>
 </div></section>`;
+}
+
+/** Scottsdale Defense Cure (2026-11-03): editorial deepening +
+ *  support INTO the fallen carrier for "mep engineering company
+ *  scottsdale" (#2 -> null, rank-drop guard pair
+ *  nw_keywords_20261103-06 -> -09). Carrier is the Scottsdale MEP
+ *  child, /locations/arizona/scottsdale/mep-engineering/. Measured
+ *  live 2026-11-03 (raw HTML): 1,069 visible words with the exact
+ *  phrase x0 and "mep engineering firm" x0; inbound hrefs all
+ *  linkrow/card furniture (Arizona hub x2, state MEP hub x1,
+ *  Phoenix/Tempe/Gilbert x1 each; Mesa and Chandler x0); editorial
+ *  prose anchors ZERO anywhere — the shallow-template pattern.
+ *  Cluster held ("mep engineer scottsdale" #6), so the loss is
+ *  phrase-level. ChatGPT consult 2026-11-03 (APPROVE WITH CHANGES;
+ *  record scottsdale-defense-cure-2026-11-03): carrier H2 set to
+ *  "MEP Engineering Scope in Scottsdale"; varied per-source anchor
+ *  pairs approved (Broomfield/T5 discipline); Mesa excluded so the
+ *  S3 source set stays distinct. The same consult ruled the Queen
+ *  Creek T5 follow-up lever (1) to RIDE, relocated: the added Queen
+ *  Creek support lands on the Arizona state MEP hub (the state-mep
+ *  variant of queenCreekDefenseSection gains one prose paragraph
+ *  carrying the exact anchor "MEP engineering firm in Queen Creek"),
+ *  NOT on Scottsdale's page. Prose links only, additions only. */
+const SCOTTSDALE_MEP_CHILD_PATH = "/locations/arizona/scottsdale/mep-engineering/";
+
+const SCOTTSDALE_DEFENSE_SOURCE_SLUGS = new Set([
+  "phoenix", "tempe", "gilbert", "chandler",
+]);
+
+const SCOTTSDALE_ANCHOR_PAIRS: Record<string, readonly [string, string]> = {
+  "": ["MEP engineering in Scottsdale", "Scottsdale MEP engineering"],
+  "state-mep": ["MEP engineering company in Scottsdale", "MEP services in Scottsdale"],
+  phoenix: ["Scottsdale MEP engineering", "MEP engineering company in Scottsdale"],
+  tempe: ["MEP engineering company in Scottsdale", "MEP engineering in Scottsdale"],
+  gilbert: ["MEP services in Scottsdale", "Scottsdale MEP engineering"],
+  chandler: ["MEP engineer in Scottsdale", "MEP engineering company in Scottsdale"],
+};
+
+function scottsdaleDefenseSection(currentSlug: string): string {
+  const [a1, a2] = SCOTTSDALE_ANCHOR_PAIRS[currentSlug] ?? SCOTTSDALE_ANCHOR_PAIRS[""];
+  const link = (anchor: string) =>
+    `<a href="${SCOTTSDALE_MEP_CHILD_PATH}">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>Scottsdale <em>MEP Coverage</em></h2>
+  <div class="prose"><p>Scottsdale is the East Valley's hospitality and medical market — resort and hotel renovations around Old Town and the resort corridor, medical office build-outs in the Scottsdale Health Care District, and the retail and restaurant centers at Kierland and Scottsdale Quarter — and its MEP scopes carry the city's high-ambient design conditions into every one of those building types. Our ${link(a1)} practice covers that stock directly: cooling-led mechanical design with monsoon-season filtration, electrical service and distribution sized to the use, and plumbing systems — pool and spa work included — coordinated as one sealed set.</p>
+  <p>Scottsdale permitting runs through the City of Scottsdale Development Services Department, on the 2021 IBC with Scottsdale amendments and the 2021 IECC with Scottsdale amendments — a review track of its own inside the metro, with its own amendment package and energy-code path. The adopted editions, local amendments, and project types an ${link(a2)} scope designs to are set out on the Scottsdale page.</p></div>
+</div></section>`;
+}
+
+function scottsdaleCarrierSection(): string {
+  return `<section class="section section--white">
+      <div class="container container--narrow">
+        <h2>MEP Engineering Scope in Scottsdale</h2>
+        <p>An MEP scope in Scottsdale starts from the building stock: hospitality and resort renovations around Old Town and the resort corridor, medical office build-outs in the Health Care District, fast-cycle retail and restaurant tenant improvements in centers such as Kierland and Scottsdale Quarter, and the custom homes, casitas, and large additions that anchor the residential market. The mechanical design is cooling-led — Scottsdale sits in Climate Zone 2B, so equipment is selected and derated for sustained high-ambient operation, with outdoor-air filtration that holds up through monsoon dust events; the electrical design covers service sizing, distribution, lighting and controls, and the solar PV integration that is common on the city's commercial and high-end residential roofs; the plumbing design sizes water, waste, and gas to the use, including the pool and spa systems that are standard in the luxury residential stock. The three disciplines are coordinated as one sealed set — the coordination owners, architects, and tenants rely on from an MEP engineering company in Scottsdale when a resort renovation, a medical suite, or a restaurant space has to open on schedule.</p>
+        <p>Permitting runs through the City of Scottsdale Development Services Department, on the 2021 IBC with Scottsdale amendments and the 2021 IECC with Scottsdale amendments. Apex Grid Engineering works as an MEP engineering firm in Scottsdale from its Queen Creek office in the same metro — the City's review sequencing, its amendment package, and its energy-code path are the working baseline the set is built against from the first load calculation. The same bench covers the surrounding East Valley and the wider Phoenix metro, where the building stock changes but the desert design conditions do not.</p>
+      </div>
+    </section>`;
 }
 
 /** Maricopa Defense Cure (2026-11-03): editorial support INTO the
@@ -4769,6 +4827,7 @@ ${state.slug === "georgia" ? georgiaDefenseSection("") : ""}
 ${state.slug === "arizona" ? mesaDefenseSection("") : ""}
 ${state.slug === "arizona" ? maricopaDefenseSection("") : ""}
 ${state.slug === "arizona" ? queenCreekDefenseSection("") : ""}
+${state.slug === "arizona" ? scottsdaleDefenseSection("") : ""}
 ${state.slug === "colorado" ? broomfieldDefenseSection("") : ""}
 ${state.slug === "hawaii" ? `<section class="block"><div class="container">
   <h2>Engineering Coverage in <em>Honolulu</em></h2>
@@ -6651,6 +6710,7 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     </section>
 
     ${page.stateSlug === "arizona" && page.citySlug === "queen-creek" && page.serviceSlug === "mep-engineering" ? queenCreekCarrierSection() : ""}
+    ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleCarrierSection() : ""}
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
@@ -13131,6 +13191,7 @@ ${state.slug === "georgia" && ALPHA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? alphar
 ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && QC_DEFENSE_SOURCE_SLUGS.has(city.slug) ? queenCreekDefenseSection(city.slug) : ""}
+${state.slug === "arizona" && SCOTTSDALE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? scottsdaleDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 <section class="block"><div class="container">
   <h2>More <em>Locations</em></h2>
