@@ -4254,6 +4254,58 @@ function georgiaDefenseSection(currentSlug: string): string {
 </div></section>`;
 }
 
+/** Alpharetta + Mesa Defense Cure Train S2+S3 (2026-11-02): editorial link
+ *  support INTO two more fallen carriers — "mep engineer alpharetta"
+ *  (3→null) and "mep engineer mesa" (6→null), rank-drop guard pair
+ *  -17→-18. Measured live before build: Alpharetta (993 visible words,
+ *  template-level) receives ZERO links of any kind from the Georgia hub
+ *  and every checked sibling — it was a SOURCE in the Georgia cure above
+ *  (links out, nothing links in). Mesa (5,460 visible words, deep curated
+ *  carrier) receives zero editorial links and only two bare-name template
+ *  links (Gilbert, Queen Creek linkrows). Anchors per the ChatGPT consult
+ *  of 2026-11-02 (APPROVE; record alpharetta-mesa-defense-cure-2026-11-02):
+ *  natural "MEP engineering in <City>" plus one exact-match
+ *  "MEP engineer <City>" per source page — the Georgia discipline.
+ *  Prose links only. Mesa gets support only (no carrier deepening);
+ *  Alpharetta also gets an on-page exact-intent block (no self-links). */
+const ALPHA_DEFENSE_SOURCE_SLUGS = new Set([
+  "roswell", "sandy-springs", "dunwoody", "brookhaven", "johns-creek", "milton",
+]);
+
+function alpharettaDefenseSection(currentSlug: string): string {
+  if (currentSlug === "alpharetta") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/georgia/alpharetta/">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>North Fulton <em>MEP Coverage</em></h2>
+  <div class="prose"><p>North Fulton's corporate corridor runs through Alpharetta — the Windward Parkway office campuses, the technology stock along GA-400, and mixed-use districts such as Avalon keep mechanical, electrical, and plumbing scopes in steady rotation: tenant improvements, office build-outs, healthcare fit-outs, and building-system replacements. Our ${link("MEP engineering in Alpharetta")} coverage is built for that stock, with the city's own amendments and review path worked out on its page.</p>
+  <p>Each North Fulton city reviews differently, so the local picture comes first: the code editions, local amendments, and permit sequencing an ${link("MEP engineer Alpharetta")} project designs to are spelled out on the Alpharetta page, alongside the office, healthcare, and mixed-use scopes most common there.</p></div>
+</div></section>`;
+}
+
+function alpharettaCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>What an MEP Engineer Scopes in <em>Alpharetta</em></h2>
+  <div class="prose"><p>An MEP scope in Alpharetta starts from the building stock: multi-tenant office along Windward Parkway and the GA-400 corridor, medical and dental fit-outs, mixed-use retail and restaurant space, and the support systems behind the city's technology campuses. The mechanical design centers on cooling-dominant loads and the ventilation and exhaust each use requires; the electrical design covers service sizing, backup-power distribution where a tenant's operations demand it, and lighting and controls to the adopted energy code; the plumbing design covers water, waste, and specialty systems sized to the occupancy. Each discipline is coordinated as one set, because a tenant-improvement schedule rarely leaves room for the systems to be reconciled in the field.</p>
+  <p>Permitting runs through the City of Alpharetta and Fulton County review paths, on the code editions and local amendments in force at submittal. The engineering work is sequenced to that path — existing-condition verification where a space is being re-tenanted, load calculations that match the actual fit-out, and drawings coordinated across the mechanical, electrical, and plumbing sheets before the set is sealed and submitted — so the review sees one consistent package rather than three separate ones.</p></div>
+</div></section>`;
+}
+
+const MESA_DEFENSE_SOURCE_SLUGS = new Set([
+  "phoenix", "tempe", "scottsdale", "chandler", "gilbert", "queen-creek",
+]);
+
+function mesaDefenseSection(currentSlug: string): string {
+  if (currentSlug === "mesa") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/arizona/mesa/">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>East Valley <em>MEP Coverage</em></h2>
+  <div class="prose"><p>The East Valley's project load concentrates in Mesa — downtown redevelopment, the Eastmark master-planned build-out, and the industrial and logistics stock around Phoenix-Mesa Gateway Airport all carry mechanical, electrical, and plumbing scopes, from tenant improvements to ground-up distribution and manufacturing space. Our ${link("MEP engineering in Mesa")} coverage handles that work under the City of Mesa's own permitting path, with the local code picture set out on the Mesa page.</p>
+  <p>Mesa reviews on its own track, separate from Phoenix and the other Valley cities, so the local requirements come first: the adopted editions and amendments an ${link("MEP engineer Mesa")} project designs to, plus the healthcare, hospitality, and industrial scopes most common in the city, are spelled out on its page.</p></div>
+</div></section>`;
+}
+
 /** Cleanrooms Defense Cure Q1 (2026-11-02): the fallen #1 carrier for
  *  "mep engineering for cleanrooms" — /industries/life-science/cleanroom-mep-engineering/
  *  — held #1 on two structural card links and zero editorial prose support,
@@ -4351,6 +4403,7 @@ ${priorityMarkets.length ? `<section class="block"><div class="container">
   ).join("")}</div>
 </div></section>` : ""}
 ${state.slug === "georgia" ? georgiaDefenseSection("") : ""}
+${state.slug === "arizona" ? mesaDefenseSection("") : ""}
 ${state.slug === "hawaii" ? `<section class="block"><div class="container">
   <h2>Engineering Coverage in <em>Honolulu</em></h2>
   <div class="grid2">
@@ -4632,6 +4685,9 @@ ${availableVerticals
   </div>
 </div></section>
 ${state.slug === "georgia" && GA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? georgiaDefenseSection(city.slug) : ""}
+${state.slug === "georgia" && ALPHA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? alpharettaDefenseSection(city.slug) : ""}
+${state.slug === "georgia" && city.slug === "alpharetta" ? alpharettaCarrierSection() : ""}
+${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
 <section class="block"><div class="container">
   <h2>More <em>${esc(state.name)} Locations</em></h2>
   <div class="linkrow">${curatedInState
@@ -7675,6 +7731,7 @@ ${breadcrumb(crumbs)}
 ${familyVisual("location", `Service location shown: ${expansion.stateName}.`)}
 ${expansion.hub.sections.map((section) => `<section class="block"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p></div></div></section>`).join("")}
 ${expansion.stateSlug === "georgia" ? georgiaDefenseSection("") : ""}
+${expansion.stateSlug === "georgia" ? alpharettaDefenseSection("") : ""}
 <section class="block"><div class="container"><h2>Five researched <em>local services</em></h2><p class="prose">Each linked service is organized around the selected metro’s permit authority, code context, local physical conditions, typical project types, permit steps, official references, and responsible-professional boundaries. These pages are information resources, not local-office claims or guarantees of licensure, approval, schedule, or construction outcome.</p><div class="linkrow">${serviceLinks}</div></div></section>
 <section class="block"><div class="container"><h2>${esc(expansion.stateName)} <em>metros and services</em></h2><div class="grid2">${metroLinks}</div></div></section>
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
@@ -12679,6 +12736,8 @@ ${specialtyLocationPages.length ? `<section class="block"><div class="container"
   ).join("")}</div>
 </div></section>` : ""}
 ${state.slug === "georgia" && GA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? georgiaDefenseSection(city.slug) : ""}
+${state.slug === "georgia" && ALPHA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? alpharettaDefenseSection(city.slug) : ""}
+${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
 <section class="block"><div class="container">
   <h2>More <em>Locations</em></h2>
   <div class="linkrow">${nearby
