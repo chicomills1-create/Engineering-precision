@@ -4550,6 +4550,67 @@ function maricopaCarrierSection(): string {
 </div></section>`;
 }
 
+/** Brookings MEP — Tier-B Strike 3 (2026-11-03), also advancing
+ *  Tier A case L1: "mep engineering brookings sd" best #1, now #5 on
+ *  the right carrier with shallow support; L1's "mep engineering
+ *  company brookings" fell 1 -> 14. Measured live 2026-11-03 (raw
+ *  HTML): carrier 934 visible words with BOTH exact phrases x0
+ *  ("brookings" x24), editorial inbound anchors ZERO (one slug-text
+ *  furniture href on the SD state hub, one service-switcher href on
+ *  two sibling pages), the Brookings city hub linking its MEP child
+ *  x0 (the measured correction to L1's "hub already links both
+ *  carriers" note), and the four sibling SD metro MEP pages (Sioux
+ *  Falls, Rapid City, Aberdeen, Watertown) carrying "brookings" x0.
+ *  South Dakota is a Batch4 researched-expansion state: the carrier
+ *  renders via batch2ServicePage, the city hub via batch2MetroPage,
+ *  the state hub via batch2StatePage — the Georgia / Alpharetta /
+ *  Broomfield gated-section machinery. ChatGPT consult 2026-11-03
+ *  (APPROVE WITH CHANGES; record brookings-defense-cure-2026-11-03):
+ *  natural "in Brookings, SD" anchor forms throughout (the bare
+ *  exact-match anchor was dropped on the consult); five sources at
+ *  two links each approved; L1 advanced by the hub -> child link
+ *  plus the child deepening carrying the "company" phrase, with NO
+ *  discipline-child links this ship; SDSU / Daktronics /
+ *  no-statewide-code / Brookings Municipal Utilities naming all
+ *  confirmed as civic fact (the carrier's own authored lede already
+ *  names them). Prose links only, additions only. */
+const BROOKINGS_MEP_CHILD_PATH = "/locations/south-dakota/brookings/mep-engineering/";
+
+const BROOKINGS_ANCHOR_PAIRS: Record<string, readonly [string, string]> = {
+  "": ["MEP engineering in Brookings, SD", "Brookings MEP engineering"],
+  "sioux-falls": ["MEP engineering in Brookings, SD", "MEP services in Brookings, SD"],
+  "rapid-city": ["Brookings MEP engineering", "MEP engineering in Brookings, South Dakota"],
+  aberdeen: ["MEP engineering company in Brookings", "Brookings MEP engineer"],
+  watertown: ["MEP services in Brookings", "MEP engineering in Brookings, SD"],
+};
+
+function brookingsDefenseSection(currentSlug: string): string {
+  if (currentSlug === "brookings") return "";
+  const [a1, a2] = BROOKINGS_ANCHOR_PAIRS[currentSlug] ?? BROOKINGS_ANCHOR_PAIRS[""];
+  const link = (anchor: string) =>
+    `<a href="${BROOKINGS_MEP_CHILD_PATH}">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>South Dakota <em>MEP Coverage</em></h2>
+  <div class="prose"><p>South Dakota's MEP scopes split three ways — the Sioux Falls metro, the Black Hills, and the I-29 corridor towns — and the corridor's center of engineering gravity is Brookings: South Dakota State University's laboratories, animal and food-science facilities, and student housing, the process exhaust and washdown drainage of its food-processing and display-manufacturing plants, and the school, retail, and civic work that follows them. Our ${link(a1)} coverage is built for that campus-and-processing stock, with the city's own building picture set out on its page.</p>
+  <p>Brookings reviews its own way: Brookings Community Development takes the local record, Brookings Municipal Utilities holds the service evidence behind campus and plant loads, and — with no statewide building code — the locally adopted editions in force at submittal are the design basis, confirmed address by address. The project types, utility picture, and permit steps an ${link(a2)} scope designs to are spelled out on the Brookings page.</p></div>
+</div></section>`;
+}
+
+function brookingsCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>What an MEP Engineer Scopes in <em>Brookings</em></h2>
+  <div class="prose"><p>An MEP scope in Brookings starts from the building stock: South Dakota State University's laboratories, animal and food-science facilities, and student housing; the process exhaust, washdown drainage, and utility peaks of the city's food-processing and display-manufacturing plants; and the retail, restaurant, school, and civic work along its commercial corridors. The mechanical design centers on freeze protection, snow-managed intake and exhaust placement, heat recovery, and condensate routes that survive an eastern South Dakota January; the electrical design sizes services and distribution against Brookings Municipal Utilities' confirmed capacity rather than assumed headroom; the plumbing design protects water and waste lines against deep frost and answers process drainage where a plant requires it. The three disciplines are coordinated as one set — the coordination behind MEP engineering Brookings SD work that has to open on an academic calendar or a production schedule, not just a permit date.</p>
+  <p>Permitting runs through Brookings Community Development, with Brookings Municipal Utilities, fire, floodplain, and public-works reviews running their own tracks on service changes — South Dakota has no statewide building code, so the locally adopted editions and amendments in force at submittal are the design basis, confirmed address by address. Apex Grid Engineering works as an MEP engineering company Brookings owners, plant managers, and campus teams can scope against that local picture: utility letters and load assumptions documented up front, corrections answered against one coordinated riser and sequence, and the sealed set sequenced to the review tracks the project actually faces.</p></div>
+</div></section>`;
+}
+
+function brookingsHubSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The Brookings <em>MEP picture</em></h2>
+  <div class="prose"><p>Of Brookings' five service paths, MEP carries the city's heaviest coordination load: university laboratories and student housing, food-processing and manufacturing systems, and occupied commercial buildings all run on utility evidence that has to be confirmed before equipment is selected. The <a href="${BROOKINGS_MEP_CHILD_PATH}">MEP engineering in Brookings</a> page sets out that picture in full — Brookings Municipal Utilities' service basis, freeze protection and snow-managed intakes, process exhaust and washdown drainage, and the Brookings Community Development review track the sealed set is sequenced to.</p></div>
+</div></section>`;
+}
+
 /** Cleanrooms Defense Cure Q1 (2026-11-02): the fallen #1 carrier for
  *  "mep engineering for cleanrooms" — /industries/life-science/cleanroom-mep-engineering/
  *  — held #1 on two structural card links and zero editorial prose support,
@@ -7957,6 +8018,7 @@ ${familyVisual("location", `Service location shown: ${metro.name}, ${expansion.s
 <section class="block"><div class="container"><h2>Local <em>project context</em></h2><div class="prose">${metro.services.slice(0, 3).map((service) =>
     `<p><strong>${esc(service.serviceSlug)}:</strong> ${esc(service.localConditions)} ${esc(service.projectTypes)}</p>`,
   ).join("")}</div></div></section>
+${expansion.stateSlug === "south-dakota" && metro.slug === "brookings" ? brookingsHubSection() : ""}
 <section class="block"><div class="container faq"><h2>${esc(metro.name)} <em>FAQs</em></h2>${faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
 <section class="ctaband"><div class="container"><h2>Discuss ${aOrAn(metro.name)} ${esc(metro.name)} project</h2><p>Send the address, scope, drawings, authority, and requested deliverable. Availability, responsible licensure, and timing are confirmed per project.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
 </main>`;
@@ -7998,6 +8060,7 @@ ${expansion.hub.sections.map((section) => `<section class="block"><div class="co
 ${expansion.stateSlug === "georgia" ? georgiaDefenseSection("") : ""}
 ${expansion.stateSlug === "georgia" ? alpharettaDefenseSection("") : ""}
 ${expansion.stateSlug === "colorado" ? broomfieldDefenseSection("") : ""}
+${expansion.stateSlug === "south-dakota" ? brookingsDefenseSection("") : ""}
 <section class="block"><div class="container"><h2>Five researched <em>local services</em></h2><p class="prose">Each linked service is organized around the selected metro’s permit authority, code context, local physical conditions, typical project types, permit steps, official references, and responsible-professional boundaries. These pages are information resources, not local-office claims or guarantees of licensure, approval, schedule, or construction outcome.</p><div class="linkrow">${serviceLinks}</div></div></section>
 <section class="block"><div class="container"><h2>${esc(expansion.stateName)} <em>metros and services</em></h2><div class="grid2">${metroLinks}</div></div></section>
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
@@ -8086,6 +8149,7 @@ ${familyVisual(motifForText(service.h1), `Service location shown: ${metro.name},
 <section class="block"><div class="container"><h2>Local <em>conditions</em></h2><div class="prose"><p>${esc(service.localConditions)}</p></div></div></section>
 <section class="block"><div class="container"><h2>Typical <em>project types</em></h2><div class="prose"><p>${esc(service.projectTypes)}</p></div></div></section>
 ${service.sections.map((section) => `<section class="block"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p></div></div></section>`).join("")}
+${expansion.stateSlug === "south-dakota" && service.serviceSlug === "mep-engineering" ? (metro.slug === "brookings" ? brookingsCarrierSection() : brookingsDefenseSection(metro.slug)) : ""}
 <section class="block"><div class="container"><h2>Permit and engineering <em>steps</em></h2><ol class="scope">${service.permitSteps.map((step) => `<li>${esc(step)}</li>`).join("")}</ol></div></section>
 <section class="block"><div class="container faq"><h2>${esc(service.h1)} <em>FAQs</em></h2>${service.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
 <section class="block"><div class="container"><h2>All five ${esc(metro.name)} <em>services</em></h2><div class="linkrow">${localServiceLinks}</div></div></section>
