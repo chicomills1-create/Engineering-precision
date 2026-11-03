@@ -7616,6 +7616,7 @@ ${breadcrumb(crumbs)}
 <section class="hero"><div class="container"><p class="kicker">${esc(expansion.hub.kicker)}</p><h1>${esc(expansion.hub.h1)}</h1><p class="lede">${esc(expansion.hub.lede)}</p></div></section>
 ${familyVisual("location", `Service location shown: ${expansion.stateName}.`)}
 ${expansion.hub.sections.map((section) => `<section class="block"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p></div></div></section>`).join("")}
+${expansion.stateSlug === "georgia" ? georgiaDefenseSection("") : ""}
 <section class="block"><div class="container"><h2>Five researched <em>local services</em></h2><p class="prose">Each linked service is organized around the selected metro’s permit authority, code context, local physical conditions, typical project types, permit steps, official references, and responsible-professional boundaries. These pages are information resources, not local-office claims or guarantees of licensure, approval, schedule, or construction outcome.</p><div class="linkrow">${serviceLinks}</div></div></section>
 <section class="block"><div class="container"><h2>${esc(expansion.stateName)} <em>metros and services</em></h2><div class="grid2">${metroLinks}</div></div></section>
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
