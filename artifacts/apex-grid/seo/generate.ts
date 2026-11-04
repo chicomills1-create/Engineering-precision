@@ -4263,6 +4263,7 @@ ${peStampBlock({
 
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? maricopaCarrierSection() : ""}
 ${state.slug === "texas" && svc.slug === "mep-engineering" ? texasCelinaStateSvcSection() : ""}
+${state.slug === "texas" && svc.slug === "mep-engineering" ? texasProsperStateSvcSection() : ""}
 ${state.slug === "california" && svc.slug === "mep-engineering" ? californiaFresnoStateSvcSection() : ""}<section class="block"><div class="container faq">
   <h2>${esc(state.name)} <em>FAQs</em></h2>
   ${state.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="a">${esc(f.a)}</div></details>`).join("")}
@@ -4779,6 +4780,66 @@ function texasCelinaStateSvcSection(): string {
 </div></section>`;
 }
 
+/** Prosper Defense Cure (2026-11-04, Strike 8): editorial support INTO
+ *  the fallen carrier for "mep engineer prosper" (#1 → unranked,
+ *  Nightwatch pair 20261104-03 → -04; the term also fell 2026-10-29).
+ *  Measured live before build (raw HTML): carrier 1,292 visible words,
+ *  the exact phrase ZERO times in visible copy; inbound = Texas hub ONE
+ *  bare-name list link, zero editorial anchors anywhere; no MEP child
+ *  page exists (404) — the city hub page is the only carrier. Sitemap
+ *  presence confirmed (sitemap-locations.xml); canonical clean. The
+ *  carrier is a net DONOR: the Strike-1 cure put an editorial section
+ *  ON this page supporting Celina; it receives none. Cure mirrors the
+ *  Celina playbook (ChatGPT consult 2026-11-04: APPROVE WITH CHANGES —
+ *  exact phrase in the carrier's own scope section, hub paragraph
+ *  places Prosper in the service geography, sibling links ONLY where
+ *  the neighboring page genuinely helps: Celina shares the Preston
+ *  Road border; McKinney is the county seat for the same builder
+ *  market). No artificial link network. Copy traces to the carrier's
+ *  published facts (IBC with local amendments; no mandatory statewide
+ *  commercial code; Town of Prosper review) + civic geography only. */
+const PROSPER_DEFENSE_SOURCE_SLUGS = new Set([
+  "celina", "mckinney",
+]);
+
+function prosperCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>What an <em>MEP Engineer</em> Scopes in Prosper</h2>
+  <div class="prose"><p>Apex Grid Engineering works as an MEP engineer Prosper owners, developers, and general contractors can scope against one coordinated set. The MEP services available to Prosper projects cover the full building-systems package: mechanical design sized to the building's actual loads, electrical design from the service entrance through distribution and lighting, and plumbing design for water, waste, and gas — engineered together, so the three disciplines are reconciled on paper before they can collide in the field. Prosper's building stock drives the specifics: master-planned residential growth along the Preston Road corridor brings amenity centers, Prosper ISD campuses, and civic buildings; the Preston and US-380 frontage brings retail, restaurant, and medical fit-outs; and the commercial and flex space following the rooftops brings its own ventilation, power, and plumbing loads.</p>
+  <p>Permitting runs through the Town of Prosper on the IBC with local amendments — Texas carries no mandatory statewide commercial building code, so the governing editions and amendments are the town's own, confirmed with the permit office at project kickoff. The engineering is sequenced to that review: load calculations matched to the real fit-out, energy-code compliance documented with the set, and drawings coordinated across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted, so the Prosper review sees one consistent set.</p></div>
+</div></section>`;
+}
+
+function prosperDefenseSection(currentSlug: string): string {
+  if (currentSlug === "prosper") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/texas/prosper/">${anchor}</a>`;
+  if (currentSlug === "celina") {
+    return `<section class="block"><div class="container">
+  <h2>Across the Line: <em>Prosper</em></h2>
+  <div class="prose"><p>Celina and Prosper share more than a border on Preston Road: subdivisions, school campuses, and commercial projects routinely span the two city limits, and a set drawn for one side is permitted against the other city's amendments as often as not. When the southern half of a project lands in Prosper, the systems scope — mechanical, electrical, and plumbing designed as one coordinated set — is covered by our ${link("MEP engineering in Prosper")} page, where the services available to Prosper projects and the Town of Prosper permit picture are set out in full.</p></div>
+</div></section>`;
+  }
+  if (currentSlug === "mckinney") {
+    return `<section class="block"><div class="container">
+  <h2>Collin County's Northern Tier: <em>Prosper</em></h2>
+  <div class="prose"><p>McKinney is the Collin County seat, and the builders who work out of it run the county's northern tier as one market. Prosper — west along the US-380 corridor — is where a large share of that growth now lands: residential support commercial, schools, and civic buildings whose mechanical, electrical, and plumbing systems have to be designed as one package. The MEP services available to those projects are set out on our ${link("MEP engineering in Prosper")} page, together with the Town of Prosper review path they permit through — the same coordinated-set standard a team uses at the county seat, applied down the corridor.</p></div>
+</div></section>`;
+  }
+  return `<section class="block"><div class="container">
+  <h2>The Northern <em>DFW Corridor</em>: Prosper</h2>
+  <div class="prose"><p>Texas growth runs north, and Prosper — on the Collin and Denton county line at the top of the Dallas–Fort Worth metroplex — is one of the fastest-growing towns in the state: master-planned communities rising along Preston Road, Prosper ISD campuses, and civic buildings, with retail, medical, and commercial projects following the rooftops along the Preston and US-380 frontage. Our ${link("MEP engineering in Prosper")} coverage is set out on the town's page: the MEP, structural, and civil services available to Prosper projects, the project types the town is building, and its own permit picture under the IBC with local amendments.</p>
+  <p>Prosper sits in a working corridor, not on an island: Celina directly north on Preston Road, Frisco to the south, and McKinney — the Collin County seat — to the east share its builders, its trades, and its review culture. Teams scoping the northern corridor start from ${link("Prosper MEP engineering")} for the systems side of that work — mechanical, electrical, and plumbing designed as one coordinated set — and use the city pages along the corridor for the rest of the board.</p></div>
+</div></section>`;
+}
+
+function texasProsperStateSvcSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The Northern Corridor: <em>Prosper</em></h2>
+  <div class="prose"><p>Texas MEP demand is heaviest where the growth is, and the growth is running north out of Dallas–Fort Worth. Prosper anchors the metroplex's Preston Road corridor — master-planned residential, Prosper ISD schools and civic buildings, Preston and US-380 retail and medical, and the commercial space that follows the rooftops — and each of those project types carries the full mechanical, electrical, and plumbing scope this page describes. The complete Prosper picture, including the services available there and the town's own permit path, is on our <a href="/locations/texas/prosper/">MEP engineering in Prosper</a> page; this page carries the statewide MEP scope it draws on.</p></div>
+</div></section>`;
+}
+
 function brookingsCarrierSection(): string {
   return `<section class="block"><div class="container">
   <h2>What an MEP Engineer Scopes in <em>Brookings</em></h2>
@@ -4965,6 +5026,7 @@ ${state.slug === "arizona" ? queenCreekDefenseSection("") : ""}
 ${state.slug === "arizona" ? scottsdaleDefenseSection("") : ""}
 ${state.slug === "colorado" ? broomfieldDefenseSection("") : ""}
 ${state.slug === "texas" ? celinaDefenseSection("") : ""}
+${state.slug === "texas" ? prosperDefenseSection("") : ""}
 ${state.slug === "california" ? fresnoDefenseSection("") : ""}
 ${state.slug === "hawaii" ? `<section class="block"><div class="container">
   <h2>Engineering Coverage in <em>Honolulu</em></h2>
@@ -5255,8 +5317,10 @@ ${state.slug === "arizona" && MARICOPA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mar
 ${state.slug === "arizona" && city.slug === "queen-creek" ? queenCreekHubSection() : ""}
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && CELINA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? celinaDefenseSection(city.slug) : ""}
+${state.slug === "texas" && PROSPER_DEFENSE_SOURCE_SLUGS.has(city.slug) ? prosperDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && city.slug === "broomfield" ? broomfieldCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "celina" ? celinaCarrierSection() : ""}
+${state.slug === "texas" && city.slug === "prosper" ? prosperCarrierSection() : ""}
 <section class="block"><div class="container">
   <h2>More <em>${esc(state.name)} Locations</em></h2>
   <div class="linkrow">${curatedInState
@@ -13335,6 +13399,7 @@ ${state.slug === "arizona" && QC_DEFENSE_SOURCE_SLUGS.has(city.slug) ? queenCree
 ${state.slug === "arizona" && SCOTTSDALE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? scottsdaleDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && CELINA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? celinaDefenseSection(city.slug) : ""}
+${state.slug === "texas" && PROSPER_DEFENSE_SOURCE_SLUGS.has(city.slug) ? prosperDefenseSection(city.slug) : ""}
 <section class="block"><div class="container">
   <h2>More <em>Locations</em></h2>
   <div class="linkrow">${nearby
