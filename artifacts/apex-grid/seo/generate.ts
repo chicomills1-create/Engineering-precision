@@ -4746,7 +4746,7 @@ const CELINA_DEFENSE_SOURCE_SLUGS = new Set([
  *  on file). Bakersfield is the only Central Valley MEP sibling that
  *  exists; the other valley MEP pages are 404. */
 function fresnoCarrierSection(): string {
-  return `<section class="section section--white"><div class="container container--narrow">
+  return `<section class="block"><div class="container">
   <h2>MEP Engineering in Fresno, From <em>One Firm</em></h2>
   <p>Apex Grid Engineering works as an MEP engineering firm Fresno owners, developers, and contractors can scope against one coordinated set: mechanical, electrical, and plumbing designed together and documented as a single package. The Fresno scope is Central Valley scope — cooling-dominant mechanical design for long, hot summers; electrical distribution sized for the Valley's commercial, healthcare, and logistics loads as well as its industrial and food-processing stock; and plumbing coordinated inside the same set — across the project types Fresno builds: healthcare and medical offices, retail and restaurant space, multifamily, and the warehouse and distribution buildings along the Highway 99 corridor.</p>
   <p>Permitting runs through the City of Fresno's Building and Safety Services Division, under California's Title 24 energy standards and the state code cycle in force at submittal. The engineering is sequenced to that review: load calculations matched to the real building, energy compliance documented with the set, and the three disciplines reconciled across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted, so Fresno reviewers see one consistent set instead of three separate ones.</p>
@@ -7032,8 +7032,6 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     ${page.stateSlug === "arizona" && page.citySlug === "queen-creek" && page.serviceSlug === "mep-engineering" ? queenCreekCarrierSection() : ""}
     ${guard1409LocSvcSection(page)}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleCarrierSection() : ""}
-    ${page.stateSlug === "california" && page.citySlug === "fresno" && page.serviceSlug === "mep-engineering" ? fresnoCarrierSection() : ""}
-    ${page.stateSlug === "california" && page.citySlug === "bakersfield" && page.serviceSlug === "mep-engineering" ? fresnoDefenseSection("bakersfield") : ""}
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
@@ -13362,6 +13360,8 @@ ${familyVisual("location", `Service location shown: ${city.name}, ${state.name}.
   <div class="prose"><p>${esc(city.narratives[svc.narrativeKey])}</p></div>
 </div></section>
 
+${state.slug === "california" && city.slug === "fresno" && svc.slug === "mep-engineering" ? fresnoCarrierSection() : ""}
+${state.slug === "california" && city.slug === "bakersfield" && svc.slug === "mep-engineering" ? fresnoDefenseSection("bakersfield") : ""}
 <section class="block"><div class="container">
   <h2>${esc(city.name)} <em>Permitting &amp; Code</em> Snapshot</h2>
   <div class="statgrid">
