@@ -1,16 +1,17 @@
-/* Apex dynamic variation routes — Express integration.
+/* Apex dynamic variation routes — RETIRED by R6 (2026-11-04).
  *
- * Serves NEW keyword-variation URLs: /{service}/{state}/{city}/{variation}/
- *   3 services × 49 states × 19,346 cities × 82 intent families = 4,759,116 URLs
- *   Every page carries FAQPage schema for AEO (AI engine citations).
- * Rendered server-side on demand. No per-page files.
+ * The /{service}/{state}/{city}/{variation}/ family (3 services x 150
+ * intents x 19,346 cities = 8,705,700 URLs) is permanently retired. The
+ * mount below answers every pattern-shaped URL with a genuine HTTP 410.
+ * Authority: R6-VARIATIONS-EVIDENCE-PACK-2026-11-04.md + ChatGPT verdict
+ * (Option A, full-family 410, one pass). Record:
+ * R6-RELEASE-RECORD-2026-11-04.md (defense-strikes-2026-11-03).
  *
- * Mount BEFORE the static/prerendered middleware in app.ts so dynamic routes
- * take precedence. Unknown cities or invalid patterns fall through via next().
- *
- * SEO SAFETY: existing static URLs are never intercepted — this handler only
- * matches the /{service}/{state}/{city}/{variation}/ pattern, which has no
- * static equivalent.
+ * DO NOT restore the 200 renderer response without a Director-level
+ * reversal of R6. The renderer (apex-variations.ts), shell, DEPS and city
+ * data are retained in this repo ONLY for reversibility; they are
+ * unreachable. A second 410 layer for the same pattern lives in app.ts
+ * (ORPHAN_410_PATTERNS) in case this mount is ever removed.
  */
 
 import type { Express, Request, Response, NextFunction } from "express";
@@ -100,39 +101,43 @@ const DEPS: VariationDeps = {
   SITE,
 };
 
-// Import variationPage after DEPS (circular-safe: variations module has no deps on this file)
-import { variationPage } from "./apex-variations.js";
+// R6: the variationPage renderer import is REMOVED on purpose — the family
+// is retired (see header). apex-variations.ts stays in the repo for
+// reversibility only; nothing may import its renderer from here again
+// without a Director-level reversal of R6.
 
 const VARIATION_RE =
   /^\/(mep-engineering|structural-engineering|civil-engineering)\/([a-z-]+)\/([a-z0-9-]+)\/(best|cost|commercial|residential|firm|services|hire|permit|near-me|emergency|repair-vs-replace|questions|adu|restaurant|office|warehouse|retail|hotel|school|church|medical|multifamily|single-family|mixed-use|industrial|storage|gym|daycare|senior-living|student-housing|car-wash|gas-station|hvac-design|electrical-design|plumbing-design|lighting-design|foundation-design|seismic-retrofit|structural-calculations|energy-modeling|drainage-design|grading-design|utility-design|fire-protection|building-envelope|retaining-wall|pavement-design|solar-design|ev-charging|low-voltage|septic-design|commissioning|timeline|process|consultation|quote|inspection|design-build|plan-check-corrections|permit-expediting|feasibility-study|site-assessment|peer-review|as-built|due-diligence|pre-design|value-engineering|historic-building|flood-zone|hillside|high-wind|snow-load|expansive-soil|infill|tenant-improvement|change-of-use|addition|remodel|new-construction|shell-building|brownfield|coastal|brewery|data-center|greenhouse|hangar|stadium|theater|museum|library|fire-station|bank|parking-garage|rooftop|acoustic-design|waterproofing|elevator|generator|kitchen-design|cleanroom|home-builder|distribution-center|manufacturing-plant|cold-storage|self-storage|car-dealership|fast-food|coffee-shop|bar-nightclub|casino|airport-terminal|train-station|golf-course|recreation-center|swimming-pool|convention-center|movie-theater|funeral-home|veterinary-clinic|dental-office|urgent-care|assisted-living|memory-care|charter-school|logistics-hub|public-parks|community-center|courthouse|city-hall|police-station|post-office|winery|distillery|food-processing|pharmaceutical-plant|research-lab|semiconductor-fab|solar-farm|battery-storage|water-treatment|high-rise|condominium|townhouse|rv-park|marina|equestrian-facility|aquarium|amusement-park|pickleball-courts|strip-mall)\/?$/;
 
-/** Mount the dynamic variation routes on the Express app. Call before static middleware. */
+// House 410 body — byte-identical to the ORPHAN_410 response in app.ts:
+// no links, no navigation, no schema markup.
+const GONE_HTML = `<!DOCTYPE html>
+<html><head><title>410 Gone</title>
+<meta name="robots" content="noindex"></head>
+<body><h1>410 Gone</h1>
+<p>This page has been permanently removed.</p></body></html>`;
+
+/** R6 retirement gate. Mounted before the static middleware in app.ts, so
+ * this handler is the first layer that can match a variation URL. Every
+ * pattern-shaped URL returns a genuine 410 — including unknown-state /
+ * unknown-city shapes, which were never valid content (they previously
+ * fell through to a 404). The gate is pattern-level on purpose:
+ * VARIATION_RE has no static equivalent, so no legitimate route can
+ * match it. */
 export function mountApexDynamicRoutes(app: Express): void {
   app.use((req: Request, res: Response, next: NextFunction) => {
     if (req.method !== "GET" && req.method !== "HEAD") return next();
     // Skip anything with a file extension (assets, sitemaps, etc.)
     if (path.extname(req.path)) return next();
 
-    const m = req.path.match(VARIATION_RE);
-    if (!m) return next();
+    if (!VARIATION_RE.test(req.path)) return next();
 
-    const [, svc, state, city, variation] = m;
-    // Alaska is excluded (49 licensed states only)
-    if (state === "alaska") return next();
-    // Unknown state slug → not our route
-    if (!STATE_META[state]) return next();
-
-    const html = variationPage(DEPS, svc, state, city, variation);
-    if (!html) return next(); // unknown city → fall through to static/404 handling
-
-    res.status(200);
+    res.status(410);
     res.setHeader("Content-Type", "text/html; charset=utf-8");
-    res.setHeader("Cache-Control", "public, max-age=3600");
-    res.setHeader("X-Renderer", "apex-dynamic");
-    res.send(html);
+    return res.send(GONE_HTML);
   });
 
   console.log(
-    `[apex-dynamic] mounted: ${VARIATION_SERVICES.length} services × ${Object.keys(STATE_META).length} states × ${PLACE_LOOKUP.size} cities × ${Object.keys(VARIATIONS).length} variations`
+    `[apex-dynamic] R6 RETIRED — serving 410 for the variation family (${VARIATION_SERVICES.length} services x ${Object.keys(VARIATIONS).length} intents x ${PLACE_LOOKUP.size} cities); renderer retained in-repo, route disabled`
   );
 }
