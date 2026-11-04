@@ -1589,6 +1589,8 @@ const ANSWER_EXTRA_SECTIONS: Record<string, string> = {
   "hurricane-retrofit-existing-buildings": `<section class="block"><div class="container"><h2>When the existing building is a <em>condominium</em></h2><div class="prose"><p>The retrofit sequence on this page applies to existing buildings generally; a condominium tower adds three complications of its own — association approval and special-assessment funding, unit-by-unit access negotiated with owners, and work phased around residents in place. Those constraints change how the same systems are scoped and sequenced. The condo case is worked through end to end — assessment, load path, opening protection, and the balcony envelope treated as one system — in our answer on <a href=\"/answers/beachfront-condo-retrofit-engineering/\">beachfront condo retrofit engineering</a>.</p></div></div></section>`,
   "florida-hurricane-wind-design-requirements": `<section class="block"><div class="container"><h2>These requirements, applied to an <em>existing condo</em></h2><div class="prose"><p>Florida's wind requirements are written around new design; an existing beachfront condominium meets them through a retrofit — openings and roof connections brought up to the current component-and-cladding pressures and impact ratings, verified against a structure that has already spent decades in salt air. How that scope is assembled for an occupied tower, from the milestone-inspection report forward, is covered in our guide to <a href=\"/answers/beachfront-condo-retrofit-engineering/\">retrofit hurricane protection for condos</a>.</p></div></div></section>`,
   "pe-stamp-only-vs-review-and-seal": `<section class="block"><div class="container"><h2>The check behind the <em>seal</em></h2><div class="prose"><p>Review-and-seal is only worth anything when the engineer behind the seal is licensed in the project's state and in responsible charge of the work — which is why the verification step matters as much as the stamp itself. Owners who want to run that check the way a reviewer would can follow the record field by field: our guide to the <a href=\"/answers/michigan-professional-engineer-license-lookup/\">Michigan professional engineer license lookup</a> works through LARA's system in detail, including how to check the firm behind the individual engineer and what a missing record actually means.</p></div></div></section>`,
+  "airport-jet-blast-fence-design": `<section class="block"><div class="container"><h2>The noise question: <em>deadening</em> a jet blast fence</h2><div class="prose"><p>A jet blast fence does two jobs that are easy to confuse. The first is deflection — turning the exhaust stream up and away from people, vehicles, and buildings behind the run-up area. The second is quieter work, literally: a noise deadening jet blast fence is built to absorb and scatter the sound of engines at takeoff power before it reaches the neighborhoods, hangars, and terminal areas beyond the fence line. The two jobs share a structure but not a specification, and a fence engineered only for deflection can leave the noise problem untouched.</p><p>The acoustic version — specified in procurement language variously as a sound-deadening jet blast fence or an acoustical jet blast fence — adds an absorptive build-up to the deflector panel: a perforated metal face sheet on the airfield side, a sound-absorptive core behind it, and a solid back sheet, so engine noise striking the panel is partly absorbed instead of reflected whole at the community. Panel height, length, and placement do the rest of the work: the fence has to interrupt the line of sight between the exhaust source and the receiver, which is why acoustic blast fences are sited with the run-up pad geometry and the nearest noise-sensitive areas in view, not just the blast envelope. None of the acoustic layer is allowed to compromise the first job — the panel and its foundations still take the full jet blast velocity and temperature loads, and louvers, perforations, and joints are detailed so the exhaust stream cannot exploit them.</p><p>Airports ask the noise question because run-up and maintenance areas sit close to the fence line of the community: engine run-ups at full power, often at night, are among the most common sources of airport noise complaints, and federal airport-noise compatibility planning treats that ground noise as part of the airport's footprint. A fence that answers both questions — deflection for safety, absorption for the neighbors — is the complete scope. The structural engineering of the deflector itself, panel framing, foundations, and blast loads, is covered in our companion answer on <a href=\"/answers/jet-blast-deflector-design/\">jet blast deflector design</a>.</p></div></div></section>`,
+  "jet-blast-deflector-design": `<section class="block"><div class="container"><h2>When the question is <em>noise</em>, not blast</h2><div class="prose"><p>This page covers the deflector as a structure. Some projects start from the other end: the fence is wanted because run-up noise reaches a neighborhood, a hangar row, or a terminal area, and the deflection is secondary. That scope — absorptive panel construction, siting against the noise receiver, and how the acoustic layer is layered onto a fence that still has to take full blast loads — is a different specification, and it is worked through in our answer on the <a href=\"/answers/airport-jet-blast-fence-design/\">airport jet blast fence</a>, which covers the noise-deadening design in full.</p></div></div></section>`,
 };
 
 function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
@@ -4990,6 +4992,22 @@ function peoriaCivilPermitSupportSection(): string {
 </div></section>`;
 }
 
+/** Strike 28 (2026-11-04): support INTO the jet-blast answers carrier
+ *  from the aviation MEP industry page. The carrier owned the acoustic
+ *  cluster's terms with zero editorial inbound; the aviation family linked
+ *  it x0. This section ties the airfield-electrical scope (vaults, run-up
+ *  pad lighting, signage power) to the blast-fence line those facilities
+ *  sit behind, and anchors into the carrier. The canonical aviation hub
+ *  is React-served and is handled outside this file. */
+function jetBlastIndustrySupport(page: IndustryDisciplinePage): string {
+  const key = page.segments.join("/");
+  if (key !== "aviation/mep-engineering") return "";
+  return `<section class="block"><div class="container">
+  <h2>At the Run-Up Pad: <em>Blast Fences and Airfield Power</em></h2>
+  <div class="prose"><p>The MEP scope on an airfield keeps meeting the blast fence. Run-up pads and maintenance aprons concentrate the airport's heaviest ground noise and its exhaust stream in the same few acres where airfield electrical vaults, pad lighting, and signage circuits have to live — and the fence line is what separates that work from the public side. Where the fence is also asked to quiet the run-ups, the design becomes an acoustic specification as well as a structural one; our answer on <a href="/answers/airport-jet-blast-fence-design/">jet blast fence noise and deflection design</a> works through the noise-deadening construction and how it is layered onto a fence that still takes full blast loads.</p></div>
+</div></section>`;
+}
+
 /** Wave-2 Defense Cures (2026-11-04, Strikes 17-19): editorial support
  *  INTO three fallen Apex carriers — "mep engineer bismarck" #2 -> 23,
  *  "mep engineer billings" #6 -> 27, "mep engineer maricopa" #9 ->
@@ -7131,6 +7149,7 @@ ${cleanroomDefenseForIndustryPage(page)}
 
 ${coldStorageDefenseForIndustryPage(page)}
     ${guard1409IndustrySection(page)}
+    ${jetBlastIndustrySupport(page)}
 
 <section class="block"><div class="container">
   <h2>Why Apex Grid for <em>${esc(page.disciplineLabel)}</em>?</h2>
