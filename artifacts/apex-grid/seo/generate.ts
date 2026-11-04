@@ -1591,6 +1591,9 @@ const ANSWER_EXTRA_SECTIONS: Record<string, string> = {
   "pe-stamp-only-vs-review-and-seal": `<section class="block"><div class="container"><h2>The check behind the <em>seal</em></h2><div class="prose"><p>Review-and-seal is only worth anything when the engineer behind the seal is licensed in the project's state and in responsible charge of the work — which is why the verification step matters as much as the stamp itself. Owners who want to run that check the way a reviewer would can follow the record field by field: our guide to the <a href=\"/answers/michigan-professional-engineer-license-lookup/\">Michigan professional engineer license lookup</a> works through LARA's system in detail, including how to check the firm behind the individual engineer and what a missing record actually means.</p></div></div></section>`,
   "airport-jet-blast-fence-design": `<section class="block"><div class="container"><h2>The noise question: <em>deadening</em> a jet blast fence</h2><div class="prose"><p>A jet blast fence does two jobs that are easy to confuse. The first is deflection — turning the exhaust stream up and away from people, vehicles, and buildings behind the run-up area. The second is quieter work, literally: a noise deadening jet blast fence is built to absorb and scatter the sound of engines at takeoff power before it reaches the neighborhoods, hangars, and terminal areas beyond the fence line. The two jobs share a structure but not a specification, and a fence engineered only for deflection can leave the noise problem untouched.</p><p>The acoustic version — specified in procurement language variously as a sound-deadening jet blast fence or an acoustical jet blast fence — adds an absorptive build-up to the deflector panel: a perforated metal face sheet on the airfield side, a sound-absorptive core behind it, and a solid back sheet, so engine noise striking the panel is partly absorbed instead of reflected whole at the community. Panel height, length, and placement do the rest of the work: the fence has to interrupt the line of sight between the exhaust source and the receiver, which is why acoustic blast fences are sited with the run-up pad geometry and the nearest noise-sensitive areas in view, not just the blast envelope. None of the acoustic layer is allowed to compromise the first job — the panel and its foundations still take the full jet blast velocity and temperature loads, and louvers, perforations, and joints are detailed so the exhaust stream cannot exploit them.</p><p>Airports ask the noise question because run-up and maintenance areas sit close to the fence line of the community: engine run-ups at full power, often at night, are among the most common sources of airport noise complaints, and federal airport-noise compatibility planning treats that ground noise as part of the airport's footprint. A fence that answers both questions — deflection for safety, absorption for the neighbors — is the complete scope. The structural engineering of the deflector itself, panel framing, foundations, and blast loads, is covered in our companion answer on <a href=\"/answers/jet-blast-deflector-design/\">jet blast deflector design</a>.</p></div></div></section>`,
   "jet-blast-deflector-design": `<section class="block"><div class="container"><h2>When the question is <em>noise</em>, not blast</h2><div class="prose"><p>This page covers the deflector as a structure. Some projects start from the other end: the fence is wanted because run-up noise reaches a neighborhood, a hangar row, or a terminal area, and the deflection is secondary. That scope — absorptive panel construction, siting against the noise receiver, and how the acoustic layer is layered onto a fence that still has to take full blast loads — is a different specification, and it is worked through in our answer on the <a href=\"/answers/airport-jet-blast-fence-design/\">airport jet blast fence</a>, which covers the noise-deadening design in full.</p></div></div></section>`,
+  "grain-weigh-scale-design": `<section class="block"><div class="container"><h2>Truck scale integration for <em>grain elevators</em>: the systems around the scale</h2><div class="prose"><p>A weigh scale earns its keep as part of a system, and truck scale integration for grain elevators is the engineering that connects the scale to everything around it: the receiving line it meters, the traffic pattern that keeps loaded and empty trucks from crossing, and the data path that turns each weighing into a settlement ticket. The scale itself — type, capacity, foundation, and approaches — is covered above; the integration layer is what makes it the elevator's metering point rather than a platform trucks happen to cross.</p><p><strong>Traffic and layout.</strong> Integration starts with geometry: separate inbound and outbound lanes where the site allows, a scale length matched to the longest truck-and-trailer combination the facility receives, queuing room that keeps waiting trucks off the public road, and a probe and sampling station positioned so a load is sampled before it is weighed and dumped. The pit, the dump shed, and the scale are laid out as one sequence — probe, weigh, dump, weigh out — and the civil and structural design has to serve that sequence, not fight it.</p><p><strong>Data and controls.</strong> The modern scale house is a data node: digital load cells and a weight indicator tied to the scale-management software that issues tickets, tracks inventory by commodity and bin, and feeds the accounting system; RFID or card readers and intercoms where the facility runs unattended weighing outside office hours; and remote displays positioned so the driver never leaves the cab to read a weight. Specifying that layer means coordinating the scale vendor, the electrician, and the software provider against one set of drawings — conduit, power, and data runs designed with the foundations, not trenched in afterward.</p><p><strong>Certification as the endpoint.</strong> Integration ends at legal-for-trade: the completed installation is tested and certified to NTEP standards and placed in service under the state weights-and-measures program, and it stays accurate only if the foundations and approaches the certification stands on were built to hold it. That is why the integration scope belongs in the engineering set from the start — the facility our <a href="/answers/grain-elevator-design/">grain elevator design</a> answer covers is metered, ticketed, and settled through this scale.</p></div></div></section>`,
+  "grain-elevator-design": `<section class="block"><div class="container"><h2>The weigh scale: the elevator's <em>metering point</em></h2><div class="prose"><p>Every bushel this facility receives or ships crosses one instrument: the truck scale at its gate. Inbound loads are probed, weighed, dumped, and weighed out; outbound loads are settled on the same platform — which makes the scale's foundations, approaches, and traffic layout part of the elevator's structure, and its indicator and ticketing system part of the facility's books. How that scale is selected, founded, and tied into the receiving line and the scale house is worked through in our answer on <a href="/answers/grain-weigh-scale-design/">grain weigh scale design</a>.</p></div></div></section>`,
+  "grain-terminal-design": `<section class="block"><div class="container"><h2>Weighing at the terminal: <em>trucks in, rail out</em></h2><div class="prose"><p>A surge terminal lives on throughput accounting: every truck that dumps and every railcar that loads has to be weighed accurately enough to settle against, at the pace the surge demands. That is the same discipline as truck scale integration for grain elevators — platform and rail scales founded to hold calibration, lanes sequenced probe, weigh, dump, and ticketing data feeding inventory — scaled to terminal volumes and worked through in our answer on <a href="/answers/grain-weigh-scale-design/">grain weigh scale design for truck and rail</a>.</p></div></div></section>`,
 };
 
 function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
@@ -4280,7 +4283,8 @@ ${state.slug === "montana" && svc.slug === "mep-engineering" ? montanaBillingsSt
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? arizonaMaricopaCityStateSvcSection() : ""}
 ${state.slug === "california" && svc.slug === "mep-engineering" ? californiaFresnoStateSvcSection() : ""}
 ${state.slug === "nebraska" && svc.slug === "mep-engineering" ? nebraskaMepfOwnerSection() : ""}
-${state.slug === "illinois" && svc.slug === "civil-engineering" ? illinoisCivilPermitOwnerSection() : ""}<section class="block"><div class="container faq">
+${state.slug === "illinois" && svc.slug === "civil-engineering" ? illinoisCivilPermitOwnerSection() : ""}
+${state.slug === "missouri" && svc.slug === "mep-engineering" ? missouriMaconStateSvcSection() : ""}<section class="block"><div class="container faq">
   <h2>${esc(state.name)} <em>FAQs</em></h2>
   ${state.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="a">${esc(f.a)}</div></details>`).join("")}
 </div></section>
@@ -5109,6 +5113,57 @@ function fargoGrandForksSupportSection(): string {
 </div></section>`;
 }
 
+
+/** Wave-4 Defense Cures (2026-11-04, Strikes 34-35): editorial support
+ *  INTO two fallen Apex carriers — "truck scale integration for grain
+ *  elevators" #7 -> unranked (answers carrier; cure rides
+ *  ANSWER_EXTRA_SECTIONS above) and "macon missouri engineer" #9 ->
+ *  unranked (cityLitePage city hub). Macon census (raw HTML): carrier
+ *  1,182w, exact phrase x0, "macon county" x0, editorial inbound ZERO —
+ *  the MO state hub and the MO MEP state page do not mention Macon at
+ *  all. The Rockwall / Bismarck-city shallow-template pattern on every
+ *  axis. Copy traces to the carrier's published facts (county seat,
+ *  US-36/US-63 junction, ACS population ~5,466) + Missouri civic facts. */
+function maconCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Macon's Engineering Workload: <em>County Seat, Ag Belt, Two Highways</em></h2>
+  <div class="prose"><p>A Macon Missouri engineer designs for a specific place: the Macon County seat, a city of roughly 5,500 at the junction of US-36 and US-63 in north-central Missouri, ringed by some of the most productive farm ground in the state. The workload follows that geography — grain handling and ag-processing facilities, implement dealers and farm-supply buildings along the highway corridors, the county's schools and its hospital, storefronts in the historic downtown, and light industrial stock near the rail line — each sitting on north-Missouri conditions: expansive clay soils that move with moisture, frost depth that drives footing design, and wind and snow loads off open farm country.</p>
+  <p>Permitting runs through the City of Macon for in-town work and Macon County for the rest, and the sets that clear review fastest are the ones scoped to the actual building: MEP, structural, and civil designed together, sealed by the Missouri-licensed engineer in responsible charge, with the governing code editions confirmed at kickoff rather than assumed. That is the package this page represents — one coordinated set for Macon projects, from the first site question to the stamped drawings.</p></div>
+</div></section>`;
+}
+
+function missouriMaconStateSvcSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>North-Central Missouri: <em>Macon</em></h2>
+  <div class="prose"><p>Statewide MEP scope lands differently in the north-central tier, where Macon — the Macon County seat on the US-36/US-63 junction — generates a steady run of school, hospital, ag-processing, and highway-commercial systems work for a city of its size. The city-level picture, including the services available there and the city's own review path, is set out on our <a href="/locations/missouri/macon/">Macon engineering</a> page; the mechanical, electrical, and plumbing scope behind it is the statewide scope carried on this page.</p></div>
+</div></section>`;
+}
+
+function missouriMaconHubSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Macon: <em>the North-Central Anchor</em></h2>
+  <div class="prose"><p>Missouri's metros carry the volume, but the state's north-central tier runs through Macon — a county seat whose ag economy, schools, and hospital produce engineering work well beyond its population. How that work is scoped, designed, and permitted is covered on our <a href="/locations/missouri/macon/">engineering services in Macon</a> page.</p></div>
+</div></section>`;
+}
+
+const MACON_DEFENSE_SOURCE_SLUGS = new Set(["la-plata", "kirksville"]);
+
+function maconDefenseSection(sourceSlug: string): string {
+  if (sourceSlug === "la-plata") {
+    return `<section class="block"><div class="container">
+  <h2>South on US-63: <em>Macon</em></h2>
+  <div class="prose"><p>La Plata and Macon are Macon County neighbors, thirteen miles apart on US-63 — the same clay soils, the same ag economy, the same county review doors. The county seat's fuller statement of services, project types, and permitting is on our <a href="/locations/missouri/macon/">Macon, Missouri engineering</a> page.</p></div>
+</div></section>`;
+  }
+  if (sourceSlug === "kirksville") {
+    return `<section class="block"><div class="container">
+  <h2>The Regional Hub and Its <em>County Seat</em></h2>
+  <div class="prose"><p>Kirksville is the north-central region's hub; thirty-five miles south, Macon anchors Macon County with its own schools, hospital, and ag-processing workload. Owners working in both markets will find the county seat's scope set out on our <a href="/locations/missouri/macon/">engineering services in Macon, Missouri</a> page.</p></div>
+</div></section>`;
+  }
+  return "";
+}
+
 /** Wave-2 Defense Cures (2026-11-04, Strikes 17-19): editorial support
  *  INTO three fallen Apex carriers — "mep engineer bismarck" #2 -> 23,
  *  "mep engineer billings" #6 -> 27, "mep engineer maricopa" #9 ->
@@ -5788,12 +5843,14 @@ ${state.slug === "texas" && PROSPER_DEFENSE_SOURCE_SLUGS.has(city.slug) ? prospe
 ${state.slug === "texas" && ROCKWALL_DEFENSE_SOURCE_SLUGS.has(city.slug) ? rockwallDefenseSection(city.slug) : ""}
 ${state.slug === "north-dakota" && BISMARCK_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? bismarckCityDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaCityDefenseSection(city.slug) : ""}
+${state.slug === "missouri" && MACON_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maconDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && city.slug === "broomfield" ? broomfieldCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "celina" ? celinaCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "prosper" ? prosperCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "rockwall" ? rockwallCarrierSection() : ""}
 ${state.slug === "north-dakota" && city.slug === "bismarck" ? bismarckCityCarrierSection() : ""}
 ${state.slug === "arizona" && city.slug === "maricopa" ? maricopaCityCarrierSection() : ""}
+${state.slug === "missouri" && city.slug === "macon" ? maconCarrierSection() : ""}
 <section class="block"><div class="container">
   <h2>More <em>${esc(state.name)} Locations</em></h2>
   <div class="linkrow">${curatedInState
@@ -8891,6 +8948,7 @@ ${expansion.stateSlug === "michigan" ? michiganGuideSupportSection() : ""}
 ${expansion.stateSlug === "nebraska" ? nebraskaMepfHubSection() : ""}
 ${expansion.stateSlug === "illinois" ? illinoisCivilPermitHubSection() : ""}
 ${expansion.stateSlug === "north-dakota" ? grandForksHubSupportSection() : ""}
+${expansion.stateSlug === "missouri" ? missouriMaconHubSection() : ""}
 <section class="block"><div class="container"><h2>Five researched <em>local services</em></h2><p class="prose">Each linked service is organized around the selected metro’s permit authority, code context, local physical conditions, typical project types, permit steps, official references, and responsible-professional boundaries. These pages are information resources, not local-office claims or guarantees of licensure, approval, schedule, or construction outcome.</p><div class="linkrow">${serviceLinks}</div></div></section>
 <section class="block"><div class="container"><h2>${esc(expansion.stateName)} <em>metros and services</em></h2><div class="grid2">${metroLinks}</div></div></section>
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
