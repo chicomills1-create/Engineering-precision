@@ -4266,6 +4266,9 @@ ${state.slug === "arizona" && svc.slug === "mep-engineering" ? maricopaCarrierSe
 ${state.slug === "north-dakota" && svc.slug === "mep-engineering" ? bismarckCarrierSection() : ""}
 ${state.slug === "texas" && svc.slug === "mep-engineering" ? texasCelinaStateSvcSection() : ""}
 ${state.slug === "texas" && svc.slug === "mep-engineering" ? texasProsperStateSvcSection() : ""}
+${state.slug === "north-dakota" && svc.slug === "mep-engineering" ? northDakotaBismarckStateSvcSection() : ""}
+${state.slug === "montana" && svc.slug === "mep-engineering" ? montanaBillingsStateSvcSection() : ""}
+${state.slug === "arizona" && svc.slug === "mep-engineering" ? arizonaMaricopaCityStateSvcSection() : ""}
 ${state.slug === "california" && svc.slug === "mep-engineering" ? californiaFresnoStateSvcSection() : ""}<section class="block"><div class="container faq">
   <h2>${esc(state.name)} <em>FAQs</em></h2>
   ${state.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="a">${esc(f.a)}</div></details>`).join("")}
@@ -4875,6 +4878,147 @@ function texasProsperStateSvcSection(): string {
 </div></section>`;
 }
 
+/** Wave-2 Defense Cures (2026-11-04, Strikes 17-19): editorial support
+ *  INTO three fallen Apex carriers — "mep engineer bismarck" #2 -> 23,
+ *  "mep engineer billings" #6 -> 27, "mep engineer maricopa" #9 ->
+ *  unranked (Nightwatch merge analysis 20261104-06, base snapshot -03).
+ *  Measured live before build (raw HTML, canonical strip-count):
+ *  Bismarck city hub 1,193w / Billings MEP child 817w / Maricopa city
+ *  hub 1,152w — none word-thin against their families; the exact phrase
+ *  ZERO times in visible copy on all three; editorial inbound anchors
+ *  ZERO on all three (hub list links and one service-card link only);
+ *  canonicals/robots/sitemap presence clean on all three. The Celina /
+ *  Prosper shallow-template pattern on every axis. Bismarck note: the
+ *  guard finisher's bismarckCarrierSection already deepens the ND MEP
+ *  state page for "mep engineering company bismarck" but never links
+ *  this carrier — the state-service component below adds the missing
+ *  prose anchor INTO the city page. Maricopa note: the 2026-11-03 T4
+ *  cure's 18 editorial anchors all serve the AZ MEP state page for a
+ *  different term; this city carrier's support was never built — the
+ *  cure builds the city side, including the city-vs-county
+ *  disambiguation. Copy traces to each carrier's published facts +
+ *  civic geography only; sibling links ONLY where genuinely helpful
+ *  (Fargo: ND's anchor-metro pair; Bozeman/Missoula: the I-90 corridor
+ *  MEP markets; Casa Grande: same county; Phoenix: the county-seat page
+ *  readers confuse with the city). ChatGPT consult 2026-11-04: APPROVE
+ *  WITH CHANGES pattern, applied (see CHATGPT-CONSULT.md wave-2 note).
+ */
+const BISMARCK_CITY_DEFENSE_SOURCE_SLUGS = new Set([
+  "fargo",
+]);
+
+function bismarckCityCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>What an <em>MEP Engineer</em> Scopes in Bismarck</h2>
+  <div class="prose"><p>Apex Grid Engineering works as an MEP engineer Bismarck owners, agencies, and contractors can scope against one coordinated set. The MEP services available to Bismarck projects cover the full building-systems package: mechanical design sized to northern-plains reality — deep winter heating loads and snow and wind exposure above the Missouri River — electrical design from the service entrance through distribution, and plumbing design protected against freeze risk, engineered together so the three disciplines are reconciled on paper before they can collide in the field. Bismarck's building stock drives the specifics: as North Dakota's capital it carries state-government offices and agency buildings; the Sanford Health and CHI St. Alexius corridor carries medical work with its own ventilation and emergency-power demands; and the energy sector plus the commercial stock serving a city of roughly 75,000 round out the load.</p>
+  <p>Permitting runs through the City of Bismarck on the 2018 IBC with North Dakota amendments — the governing editions and any local amendments are confirmed with the permit office at project kickoff. The engineering is sequenced to that review: load calculations matched to the real fit-out, energy-code compliance documented with the set, and drawings coordinated across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted, so the Bismarck review sees one consistent set.</p></div>
+</div></section>`;
+}
+
+function bismarckCityDefenseSection(currentSlug: string): string {
+  if (currentSlug === "bismarck") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/north-dakota/bismarck/">${anchor}</a>`;
+  if (currentSlug === "fargo") {
+    return `<section class="block"><div class="container">
+  <h2>The Other End of the Corridor: <em>Bismarck</em></h2>
+  <div class="prose"><p>Fargo and Bismarck are North Dakota's two anchor markets, and the builders who work one routinely work the other — the state's largest city on the Red River, its capital on the Missouri. When a project lands at the western end of that corridor, the systems scope is covered by our ${link("MEP engineering in Bismarck")} page: mechanical, electrical, and plumbing designed as one coordinated set for the capital's state-government, medical, and energy-sector stock, permitted under the 2018 IBC with North Dakota amendments — the same coordinated-set standard a team uses in Fargo, applied at the capital.</p></div>
+</div></section>`;
+  }
+  return `<section class="block"><div class="container">
+  <h2>The Capital: <em>Bismarck</em></h2>
+  <div class="prose"><p>Bismarck is North Dakota's capital and its state-government center — agency buildings and offices around the Capitol grounds, the Sanford Health and CHI St. Alexius medical corridor, and the energy-sector commercial stock of a Missouri River city. The MEP services available to those projects are set out on our ${link("MEP engineering in Bismarck")} page: the systems scope Bismarck projects draw on, the project types the capital is building, and its permit picture under the 2018 IBC with North Dakota amendments.</p></div>
+</div></section>`;
+}
+
+function northDakotaBismarckStateSvcSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The Capital Market: <em>Bismarck</em></h2>
+  <div class="prose"><p>The deepest single pool of North Dakota MEP work sits in Bismarck: state-government buildings, the Sanford Health and CHI St. Alexius medical corridor, and energy-sector commercial projects, all designed against northern-plains heating loads and permitted by the city on the state-amended IBC. The complete Bismarck picture — the services available there and the city's own permit path — is on our <a href="/locations/north-dakota/bismarck/">MEP engineering in Bismarck</a> city page; this page carries the statewide MEP scope it draws on.</p></div>
+</div></section>`;
+}
+
+function billingsCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>What an <em>MEP Engineer</em> Scopes in Billings</h2>
+  <div class="prose"><p>Apex Grid Engineering works as an MEP engineer Billings owners, developers, and contractors can scope against one coordinated set. The MEP services available to Billings projects cover the full building-systems package: mechanical design for a climate that swings from deep cold to chinook thaws, electrical design from the NorthWestern Energy service entrance through distribution, and plumbing design with freeze protection carried through every riser — engineered together, so the three disciplines are reconciled on paper before they can collide in the field. Billings is Montana's largest city and the Yellowstone County seat, and its stock drives the specifics: medical and commercial interiors, tenant improvements across the retail and office base, service upgrades, and the additions and detached ADUs that follow its growth.</p>
+  <p>Review runs through Billings Community Development for building systems inside the city, with fire, utilities, public works, and Yellowstone County reviewing related work separately — the submittal is sequenced to that split: load calculations matched to the real fit-out, winter design conditions and smoke-aware ventilation documented with the set, and the mechanical, electrical, and plumbing sheets coordinated before the package is sealed and submitted.</p></div>
+</div></section>`;
+}
+
+function billingsDefenseSection(currentSlug: string): string {
+  const link = (anchor: string) =>
+    `<a href="/locations/montana/billings/mep-engineering/">${anchor}</a>`;
+  if (currentSlug === "bozeman") {
+    return `<section class="block"><div class="container">
+  <h2>Montana's Largest Market: <em>Billings</em></h2>
+  <div class="prose"><p>Bozeman and Billings anchor Montana's I-90 corridor, and the teams who build in the Gallatin Valley regularly take work in the state's largest city. When a project lands down the corridor, the systems scope is covered by our ${link("MEP engineering in Billings")} page: mechanical, electrical, and plumbing designed as one coordinated set for Billings' medical, commercial, and tenant-improvement stock, reviewed through Billings Community Development under Montana's code provisions.</p></div>
+</div></section>`;
+  }
+  if (currentSlug === "missoula") {
+    return `<section class="block"><div class="container">
+  <h2>The Corridor's Eastern Anchor: <em>Billings</em></h2>
+  <div class="prose"><p>Missoula teams working the I-90 corridor east meet Montana's largest market at Billings — a bigger commercial and medical base under the same cold-climate design discipline. The MEP services available to those projects are set out on our ${link("MEP engineering in Billings")} page, together with the Billings Community Development review path they permit through — mechanical, electrical, and plumbing coordinated as one sealed set.</p></div>
+</div></section>`;
+  }
+  return "";
+}
+
+function montanaBillingsStateSvcSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The Yellowstone County Market: <em>Billings</em></h2>
+  <div class="prose"><p>Montana's MEP demand concentrates in Billings — the state's largest city, its Yellowstone County seat, and its eastern commercial and medical hub. Tenant improvements, medical interiors, service upgrades, and additions there are reviewed by Billings Community Development against the state's mechanical, plumbing, electrical, and energy provisions. The complete Billings picture, including the services available there and the review path they permit through, is on our <a href="/locations/montana/billings/mep-engineering/">MEP engineering in Billings</a> page; this page carries the statewide MEP scope it draws on.</p></div>
+</div></section>`;
+}
+
+function billingsCityHubSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>MEP Engineering in <em>Billings</em>, Up Close</h2>
+  <div class="prose"><p>Of the services on this page, MEP is the one Billings projects feel first: heating and ventilation sized for chinook swings and deep cold, NorthWestern Energy service coordination, and plumbing protected against freeze — across the city's medical interiors, tenant improvements, and commercial stock. The full systems picture, including the Billings Community Development review path, is on our <a href="/locations/montana/billings/mep-engineering/">MEP engineering in Billings</a> page.</p></div>
+</div></section>`;
+}
+
+const MARICOPA_CITY_DEFENSE_SOURCE_SLUGS = new Set([
+  "casa-grande", "phoenix",
+]);
+
+function maricopaCityCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>What an <em>MEP Engineer</em> Scopes in Maricopa</h2>
+  <div class="prose"><p>Apex Grid Engineering works as an MEP engineer Maricopa owners, builders, and contractors can scope against one coordinated set — and Maricopa here is the CITY in Pinal County, not Maricopa County: a fast-growing master-planned community of roughly 67,000 on the SR-347 corridor south of Phoenix, with its own permit office and its own building stock. The MEP services available to Maricopa projects cover the full building-systems package: mechanical design for desert cooling loads, electrical design from the service entrance through distribution and lighting, and plumbing design for water, waste, and gas — engineered together, so the three disciplines are reconciled on paper before they can collide in the field. The stock drives the specifics: amenity centers and community facilities inside the master plans, retail and restaurant space along the John Wayne Parkway frontage, medical and office fit-outs, and the civic buildings a young city is still adding.</p>
+  <p>Permitting runs through the City of Maricopa on the IBC with local amendments — Arizona carries no mandatory statewide commercial building code, so the governing editions and amendments are the city's own, confirmed with the permit office at project kickoff. The engineering is sequenced to that review: load calculations matched to the real fit-out, energy-code compliance documented with the set, and drawings coordinated across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted.</p></div>
+</div></section>`;
+}
+
+function maricopaCityDefenseSection(currentSlug: string): string {
+  if (currentSlug === "maricopa") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/arizona/maricopa/">${anchor}</a>`;
+  if (currentSlug === "casa-grande") {
+    return `<section class="block"><div class="container">
+  <h2>North on the Corridor: <em>Maricopa</em></h2>
+  <div class="prose"><p>Casa Grande and Maricopa are Pinal County's two cities, a short drive apart on the same growth corridor, and the builders who work one routinely work the other. When the northern half of a project lands in Maricopa, the systems scope is covered by our ${link("MEP engineering in Maricopa")} page: mechanical, electrical, and plumbing designed as one coordinated set for the city's master-planned, retail, and civic stock, permitted through the City of Maricopa under the IBC with local amendments.</p></div>
+</div></section>`;
+  }
+  if (currentSlug === "phoenix") {
+    return `<section class="block"><div class="container">
+  <h2>Looking for the City of <em>Maricopa</em>?</h2>
+  <div class="prose"><p>Phoenix sits in Maricopa County — but the city of Maricopa is a different place: a Pinal County community south of the metro on the SR-347 corridor, with its own permit office and its own fast-growing master-planned stock. If your project is in the city rather than the county, our ${link("MEP engineering in Maricopa")} page covers it: the MEP services available there and the City of Maricopa's own review path, distinct from the county coverage on this page.</p></div>
+</div></section>`;
+  }
+  return `<section class="block"><div class="container">
+  <h2>The City of <em>Maricopa</em> — Not the County</h2>
+  <div class="prose"><p>One Arizona name does double duty: Maricopa County is the Phoenix metro's county, but the CITY of Maricopa is a separate, fast-growing Pinal County community on the SR-347 corridor, permitting through its own office. Projects in the city itself — master-planned amenity and community buildings, parkway retail, medical and civic work — are covered on our ${link("MEP engineering in Maricopa")} page: the services available there and the city's own permit picture under the IBC with local amendments. County-wide coverage is the separate material above.</p></div>
+</div></section>`;
+}
+
+function arizonaMaricopaCityStateSvcSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The City of <em>Maricopa</em>: Its Own Market</h2>
+  <div class="prose"><p>This page's Maricopa County coverage is about the Phoenix metro. The CITY of Maricopa — Pinal County, on the SR-347 corridor — is a separate market with its own permit office: master-planned amenity buildings, parkway retail and restaurants, medical fit-outs, and civic work for a city of roughly 67,000. Its full picture is on our <a href="/locations/arizona/maricopa/">MEP engineering in Maricopa</a> city page; the statewide MEP scope on this page is what that work draws on.</p></div>
+</div></section>`;
+}
+
 function brookingsCarrierSection(): string {
   return `<section class="block"><div class="container">
   <h2>What an MEP Engineer Scopes in <em>Brookings</em></h2>
@@ -5115,6 +5259,8 @@ ${state.slug === "arizona" ? scottsdaleDefenseSection("") : ""}
 ${state.slug === "colorado" ? broomfieldDefenseSection("") : ""}
 ${state.slug === "texas" ? celinaDefenseSection("") : ""}
 ${state.slug === "texas" ? prosperDefenseSection("") : ""}
+${state.slug === "north-dakota" ? bismarckCityDefenseSection("") : ""}
+${state.slug === "arizona" ? maricopaCityDefenseSection("") : ""}
 ${state.slug === "california" ? fresnoDefenseSection("") : ""}
 ${state.slug === "hawaii" ? `<section class="block"><div class="container">
   <h2>Engineering Coverage in <em>Honolulu</em></h2>
@@ -5407,9 +5553,13 @@ ${state.slug === "arizona" && city.slug === "queen-creek" ? queenCreekHubSection
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && CELINA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? celinaDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && PROSPER_DEFENSE_SOURCE_SLUGS.has(city.slug) ? prosperDefenseSection(city.slug) : ""}
+${state.slug === "north-dakota" && BISMARCK_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? bismarckCityDefenseSection(city.slug) : ""}
+${state.slug === "arizona" && MARICOPA_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaCityDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && city.slug === "broomfield" ? broomfieldCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "celina" ? celinaCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "prosper" ? prosperCarrierSection() : ""}
+${state.slug === "north-dakota" && city.slug === "bismarck" ? bismarckCityCarrierSection() : ""}
+${state.slug === "arizona" && city.slug === "maricopa" ? maricopaCityCarrierSection() : ""}
 <section class="block"><div class="container">
   <h2>More <em>${esc(state.name)} Locations</em></h2>
   <div class="linkrow">${curatedInState
@@ -8592,6 +8742,7 @@ ${service.sections.map((section) => `<section class="block"><div class="containe
 ${expansion.stateSlug === "iowa" && metro.slug === "sioux-city" && service.serviceSlug === "mep-engineering" ? siouxCityCitySupportSection() : ""}
 ${expansion.stateSlug === "south-dakota" && metro.slug === "sioux-falls" && service.serviceSlug === "mep-engineering" ? siouxFallsCitySupportSection() : ""}
 ${expansion.stateSlug === "south-dakota" && service.serviceSlug === "mep-engineering" ? (metro.slug === "brookings" ? brookingsCarrierSection() : brookingsDefenseSection(metro.slug)) : ""}
+${expansion.stateSlug === "montana" && service.serviceSlug === "mep-engineering" ? (metro.slug === "billings" ? billingsCarrierSection() : billingsDefenseSection(metro.slug)) : ""}
 <section class="block"><div class="container"><h2>Permit and engineering <em>steps</em></h2><ol class="scope">${service.permitSteps.map((step) => `<li>${esc(step)}</li>`).join("")}</ol></div></section>
 <section class="block"><div class="container faq"><h2>${esc(service.h1)} <em>FAQs</em></h2>${service.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
 <section class="block"><div class="container"><h2>All five ${esc(metro.name)} <em>services</em></h2><div class="linkrow">${localServiceLinks}</div></div></section>
@@ -13518,6 +13669,9 @@ ${state.slug === "arizona" && SCOTTSDALE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? s
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && CELINA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? celinaDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && PROSPER_DEFENSE_SOURCE_SLUGS.has(city.slug) ? prosperDefenseSection(city.slug) : ""}
+${state.slug === "north-dakota" && BISMARCK_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? bismarckCityDefenseSection(city.slug) : ""}
+${state.slug === "arizona" && MARICOPA_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaCityDefenseSection(city.slug) : ""}
+${state.slug === "montana" && city.slug === "billings" ? billingsCityHubSection() : ""}
 <section class="block"><div class="container">
   <h2>More <em>Locations</em></h2>
   <div class="linkrow">${nearby
