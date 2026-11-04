@@ -4275,7 +4275,8 @@ ${state.slug === "north-dakota" && svc.slug === "mep-engineering" ? northDakotaB
 ${state.slug === "montana" && svc.slug === "mep-engineering" ? montanaBillingsStateSvcSection() : ""}
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? arizonaMaricopaCityStateSvcSection() : ""}
 ${state.slug === "california" && svc.slug === "mep-engineering" ? californiaFresnoStateSvcSection() : ""}
-${state.slug === "nebraska" && svc.slug === "mep-engineering" ? nebraskaMepfOwnerSection() : ""}<section class="block"><div class="container faq">
+${state.slug === "nebraska" && svc.slug === "mep-engineering" ? nebraskaMepfOwnerSection() : ""}
+${state.slug === "illinois" && svc.slug === "civil-engineering" ? illinoisCivilPermitOwnerSection() : ""}<section class="block"><div class="container faq">
   <h2>${esc(state.name)} <em>FAQs</em></h2>
   ${state.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="a">${esc(f.a)}</div></details>`).join("")}
 </div></section>
@@ -4947,6 +4948,45 @@ function lincolnMepfSupportSection(): string {
   return `<section class="block"><div class="container">
   <h2>One Set for the <em>Capital City</em></h2>
   <div class="prose"><p>Lincoln's institutional and university-adjacent stock runs on the same coordinated basis as the rest of the state: mechanical, electrical, and plumbing designed together, with the fire-protection scope engineered into the set rather than permitted after it. How that package is assembled at the state level — and how it is adjusted for the reviewing authority on a given project — is set out under <a href="/locations/nebraska/mep-engineering/">Nebraska's MEPF services</a>; the sections below carry Lincoln's own permit picture.</p></div>
+</div></section>`;
+}
+
+/** Strike 27 (2026-11-04): "civil engineering permitting services
+ *  illinois" #7 -> #12 — ranking-URL instability + intent mismatch. No page
+ *  owned the term: Google rotated a generalist city hub (Northbrook) and a
+ *  structural child with zero permitting content (Peoria). The natural
+ *  owner — the Illinois civil state page — had the scope and the stems but
+ *  not the exact phrase, and no editorial support. Cure designates the
+ *  owner (this section), adds an IL-hub editorial paragraph
+ *  (batch2StatePage gate) and Chicago + Peoria civil-child support
+ *  (batch2ServicePage gates): inbound anchors into the owner 0 -> 3.
+ *  Neither claimant is thinned — designation, not demotion. */
+function illinoisCivilPermitOwnerSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Civil Permitting in <em>Illinois</em>: the Design Behind the Approval</h2>
+  <div class="prose"><p>Civil engineering permitting services Illinois project teams can actually build from means one scope carried from first grading plan to final approval: the site civil design and the permit path that gates it, engineered together instead of handed off between firms. The design half is the grading, drainage, utility, and access work this page scopes. The permitting half is the sequence those drawings have to survive — county stormwater review, state touchpoints where the scope triggers them, and the municipal authority's own submittal and comment cycle.</p>
+  <p>The Illinois path has its own shape. Stormwater is the usual long pole: county stormwater ordinances — the Metropolitan Water Reclamation District's ordinance in Cook County, the county ordinances downstate — set detention, release-rate, and floodplain rules the grading plan has to satisfy before anything else is reviewed. State doors open on specific triggers: IDOT where access or utility work touches a state route, Illinois EPA where construction stormwater coverage or a sanitary extension is required. The municipal reviewer then reads the set against its own checklist and amendments. A permitting set that names those doors in order — and designs to the strictest of them first — is what keeps an Illinois civil project out of the resubmittal loop; that sequencing is part of the engineering scope on this page, not an expediting afterthought.</p></div>
+</div></section>`;
+}
+
+function illinoisCivilPermitHubSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Permitting Is Part of the <em>Civil Scope</em></h2>
+  <div class="prose"><p>Illinois civil projects rarely stall on the drawing board; they stall in review — a county stormwater comment, a state permit trigger found late, a municipal checklist item the set never answered. That is why the permitting path is engineered with the design rather than chased after it. Our <a href="/locations/illinois/civil-engineering/">civil engineering permitting services in Illinois</a> page sets out that combined scope at the state level: site civil design sequenced against county stormwater review, IDOT and Illinois EPA touchpoints, and the municipal authority's own cycle. The metro pages below carry the local application.</p></div>
+</div></section>`;
+}
+
+function chicagoCivilPermitSupportSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The Statewide <em>Permitting Path</em></h2>
+  <div class="prose"><p>Chicago work adds the MWRD's stormwater ordinance and the city's own review machinery on top of the state frame — the densest version of a path every Illinois civil project walks in some form. The statewide statement of that path, and how the design is sequenced against it county by county, is on our <a href="/locations/illinois/civil-engineering/">civil engineering permitting services in Illinois</a> page; this page carries the Chicago application.</p></div>
+</div></section>`;
+}
+
+function peoriaCivilPermitSupportSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Downstate Review, <em>Same Discipline</em></h2>
+  <div class="prose"><p>Peoria's civil review runs through the city and Peoria County's stormwater rules rather than a metropolitan district — a lighter door count, but the same discipline: detention and drainage designed to the governing ordinance first, state triggers checked before submittal, the set sequenced to the reviewer's checklist. That statewide approach is set out on our <a href="/locations/illinois/civil-engineering/">Illinois civil engineering and permitting services</a> page; the sections below carry Peoria's own permit picture.</p></div>
 </div></section>`;
 }
 
@@ -8726,6 +8766,7 @@ ${expansion.stateSlug === "south-dakota" ? brookingsDefenseSection("") : ""}
 ${expansion.stateSlug === "north-dakota" ? bismarckCityDefenseSection("") : ""}
 ${expansion.stateSlug === "michigan" ? michiganGuideSupportSection() : ""}
 ${expansion.stateSlug === "nebraska" ? nebraskaMepfHubSection() : ""}
+${expansion.stateSlug === "illinois" ? illinoisCivilPermitHubSection() : ""}
 <section class="block"><div class="container"><h2>Five researched <em>local services</em></h2><p class="prose">Each linked service is organized around the selected metro’s permit authority, code context, local physical conditions, typical project types, permit steps, official references, and responsible-professional boundaries. These pages are information resources, not local-office claims or guarantees of licensure, approval, schedule, or construction outcome.</p><div class="linkrow">${serviceLinks}</div></div></section>
 <section class="block"><div class="container"><h2>${esc(expansion.stateName)} <em>metros and services</em></h2><div class="grid2">${metroLinks}</div></div></section>
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
@@ -8820,6 +8861,8 @@ ${expansion.stateSlug === "south-dakota" && service.serviceSlug === "mep-enginee
 ${expansion.stateSlug === "montana" && service.serviceSlug === "mep-engineering" ? (metro.slug === "billings" ? billingsCarrierSection() : billingsDefenseSection(metro.slug)) : ""}
 ${expansion.stateSlug === "nebraska" && metro.slug === "omaha" && service.serviceSlug === "mep-engineering" ? omahaMepfSupportSection() : ""}
 ${expansion.stateSlug === "nebraska" && metro.slug === "lincoln" && service.serviceSlug === "mep-engineering" ? lincolnMepfSupportSection() : ""}
+${expansion.stateSlug === "illinois" && metro.slug === "chicago" && service.serviceSlug === "civil-engineering" ? chicagoCivilPermitSupportSection() : ""}
+${expansion.stateSlug === "illinois" && metro.slug === "peoria" && service.serviceSlug === "civil-engineering" ? peoriaCivilPermitSupportSection() : ""}
 <section class="block"><div class="container"><h2>Permit and engineering <em>steps</em></h2><ol class="scope">${service.permitSteps.map((step) => `<li>${esc(step)}</li>`).join("")}</ol></div></section>
 <section class="block"><div class="container faq"><h2>${esc(service.h1)} <em>FAQs</em></h2>${service.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
 <section class="block"><div class="container"><h2>All five ${esc(metro.name)} <em>services</em></h2><div class="linkrow">${localServiceLinks}</div></div></section>
