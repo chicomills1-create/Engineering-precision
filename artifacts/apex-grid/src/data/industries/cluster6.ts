@@ -202,7 +202,7 @@ export const CLUSTER6_INDUSTRIES: Industry[] = [
         name: "Civil Engineering",
         href: "/services/civil",
         body: [
-          "Civil engineering covers apron pavement, hangar floor slabs, spill containment, and stormwater conveyance for large impervious areas. We design trench drains, oil/water separators, and detention, coordinate taxilane geometry and grading, and follow FAA advisory circulars for pavement subject to aircraft gear loads.",
+          "Civil engineering covers apron pavement, hangar floor slabs, spill containment, and stormwater conveyance for large impervious areas. The same apron scope reaches the run-up pads at the pavement's edge, where we engineer jet blast fences — including the absorptive, noise-deadening panel construction specified where run-up noise carries to neighboring hangars and communities. We design trench drains, oil/water separators, and detention, coordinate taxilane geometry and grading, and follow FAA advisory circulars for pavement subject to aircraft gear loads.",
         ],
         highlights: [
           "Apron and taxilane pavement design to FAA advisory circulars",
