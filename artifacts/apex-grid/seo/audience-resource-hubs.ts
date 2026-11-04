@@ -140,6 +140,10 @@ export const AUDIENCE_RESOURCE_HUBS: AudienceResourceHub[] = [
         "Tenant improvements often touch structure, electrical capacity, HVAC, plumbing, life safety, accessibility, and civil interfaces. I recommend defining the affected systems and review milestone before promising a tenant a particular layout, date, or approval.",
         `Learn about ${link("/for-property-managers/", "Apex Grid for property managers")} and send the building context through the ${link("/contact", "contact form")} for a scoped review.`,
       ] },
+      { heading: "When an insurer, lender, or inspector asks for an engineer's letter", paragraphs: [
+        "Property managers often become the mail drop for third-party requests: an insurer asking about a repaired condition, a lender wanting confirmation before a refinance, or an inspector closing a notice with an engineer's letter. Send me the request itself, not a summary of it — the exact wording decides what can responsibly be said, because a letter can only speak to what was reviewed, observed, or designed under our scope.",
+        "A useful letter states the property, the date and basis of the review, the condition evaluated, and the conclusion the evidence supports. It cannot certify work we did not design or observe, and it cannot promise how the requesting party will decide. If the request reaches past the record — asking about concealed conditions or another firm's repair — I will name the additional review the question needs rather than stretch the letter beyond its evidence.",
+      ], bullets: ["Forward the original request letter or notice, not a summary", "Identify the deadline and who the letter must be addressed to", "Keep the issued letter with the building record for the next request"] },
     ],
     faqs: [
       { question: "What records should a property manager gather first?", answer: "Gather the property address, affected location, dated photos, observed symptoms, maintenance or incident history, available as-builts, prior reports, tenant scope, and any notices or comments from the authority or insurer." },
