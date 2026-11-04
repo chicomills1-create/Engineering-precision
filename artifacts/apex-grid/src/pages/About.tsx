@@ -143,7 +143,7 @@ export default function About() {
                 </p>
                 <p className="mt-4 text-sm text-muted-foreground">An Apex Grid Engineering PLLC company.</p>
                 <p className="mt-4 text-sm text-muted-foreground">
-                  Founder &amp; CEO Jeremy Mills — Crunchbase Rank #7,768, top 1% of the 2M+ founders and executives tracked worldwide. (as of Nov 2026)
+                  Founder &amp; CEO Jeremy Mills — ranked among the top 1% of the 2M+ founders and executives tracked on Crunchbase worldwide.
                 </p>
                 <div className="mt-3 flex items-center gap-3 text-sm font-bold">
                   <a
