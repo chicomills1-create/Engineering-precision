@@ -4274,7 +4274,8 @@ ${state.slug === "texas" && svc.slug === "mep-engineering" ? texasProsperStateSv
 ${state.slug === "north-dakota" && svc.slug === "mep-engineering" ? northDakotaBismarckStateSvcSection() : ""}
 ${state.slug === "montana" && svc.slug === "mep-engineering" ? montanaBillingsStateSvcSection() : ""}
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? arizonaMaricopaCityStateSvcSection() : ""}
-${state.slug === "california" && svc.slug === "mep-engineering" ? californiaFresnoStateSvcSection() : ""}<section class="block"><div class="container faq">
+${state.slug === "california" && svc.slug === "mep-engineering" ? californiaFresnoStateSvcSection() : ""}
+${state.slug === "nebraska" && svc.slug === "mep-engineering" ? nebraskaMepfOwnerSection() : ""}<section class="block"><div class="container faq">
   <h2>${esc(state.name)} <em>FAQs</em></h2>
   ${state.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="a">${esc(f.a)}</div></details>`).join("")}
 </div></section>
@@ -4906,6 +4907,46 @@ function michiganLookupDeferralSection(): string {
   return `<section class="block"><div class="container">
   <h2>Here to <em>Check a License</em>?</h2>
   <div class="prose"><p>If you landed here to verify an engineer rather than to order a stamp: the board links below reach LARA's official record, and the complete walkthrough — the <a href="/answers/michigan-professional-engineer-license-lookup/">michigan professional engineer license lookup</a>, what the record shows, and how to check the firm behind the engineer — lives in our library guide. This page stays what it is: the review-and-seal service for teams whose drawings are ready.</p></div>
+</div></section>`;
+}
+
+/** Strike 26 (2026-11-04): "mepf services in nebraska" #9 -> #27 —
+ *  owner-designation case (Buckeye idiom). The word-form "mepf" was x0 on
+ *  the entire Nebraska family; the term rode an accidental carrier
+ *  (Columbus, a small-city page the state hub does not even list) while the
+ *  natural owner — this state MEP page — carried the strongest
+ *  phrase-adjacent copy in the family and zero editorial support. Cure:
+ *  designate the owner (this section), an editorial paragraph on the NE
+ *  state hub (batch2StatePage gate), and support sections on the Omaha and
+ *  Lincoln MEP children (batch2ServicePage gates) — inbound anchors into
+ *  the owner 0 -> 3. Columbus is not thinned or demoted; it keeps its city
+ *  intent and simply stops being the accidental carrier. */
+function nebraskaMepfOwnerSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>MEPF in Nebraska: <em>Four Systems, One Sealed Set</em></h2>
+  <div class="prose"><p>MEPF services in Nebraska means the four building systems engineered together rather than traded off against each other: mechanical, electrical, plumbing, and fire protection, designed as one coordinated set and sealed by the licensed engineer in responsible charge. The fire-protection scope is what the F adds — sprinkler and standpipe design coordinated with the water supply actually available at the site, fire alarm interfaces carried through the electrical set, and the life-safety drawings reviewed as part of the same package instead of a separate afterthought permit.</p>
+  <p>The Nebraska frame is local. The state sets the baseline — the Nebraska Energy Code for the energy path, the State Fire Marshal's adopted fire code for the protection scope — but plan review runs through the authority having jurisdiction: Omaha and Lincoln administer their own amendments and review doors, and the county and municipal reviewers outside the two metros work from their own adopted editions. A coordinated MEPF set is what survives that review cleanly: loads, services, sprinkler hydraulics, and alarm zoning reconciled on the drawings, so a correction in one discipline does not reopen the other three. That is the standard this page's scope is delivered to — one team, one set, sealed for the jurisdiction the project actually sits in.</p></div>
+</div></section>`;
+}
+
+function nebraskaMepfHubSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Building Systems Across <em>Nebraska</em></h2>
+  <div class="prose"><p>Most Nebraska commercial work — the Omaha and Lincoln corridor stock, the Platte Valley industrial and food-processing buildings, the hospital and school programs in the county seats — is bought as one systems package, not four separate scopes. Our <a href="/locations/nebraska/mep-engineering/">MEPF services in Nebraska</a> page sets out that package at the state level: mechanical, electrical, plumbing, and fire protection engineered as one sealed set, against the state baseline and the local amendments each reviewing authority applies. The metro pages below carry the same scope city by city.</p></div>
+</div></section>`;
+}
+
+function omahaMepfSupportSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The Statewide <em>Systems Package</em></h2>
+  <div class="prose"><p>Omaha projects are usually the state's largest systems scopes — hospital and campus work, the downtown commercial core, industrial buildings along the river — and they are permitted as coordinated sets, fire protection included. The statewide statement of that scope, including how the four disciplines are reconciled before sealing and how Nebraska's local-amendment review is handled jurisdiction by jurisdiction, is on our <a href="/locations/nebraska/mep-engineering/">MEPF services in Nebraska</a> page; this page carries the Omaha application of it.</p></div>
+</div></section>`;
+}
+
+function lincolnMepfSupportSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>One Set for the <em>Capital City</em></h2>
+  <div class="prose"><p>Lincoln's institutional and university-adjacent stock runs on the same coordinated basis as the rest of the state: mechanical, electrical, and plumbing designed together, with the fire-protection scope engineered into the set rather than permitted after it. How that package is assembled at the state level — and how it is adjusted for the reviewing authority on a given project — is set out under <a href="/locations/nebraska/mep-engineering/">Nebraska's MEPF services</a>; the sections below carry Lincoln's own permit picture.</p></div>
 </div></section>`;
 }
 
@@ -8684,6 +8725,7 @@ ${expansion.stateSlug === "colorado" ? broomfieldDefenseSection("") : ""}
 ${expansion.stateSlug === "south-dakota" ? brookingsDefenseSection("") : ""}
 ${expansion.stateSlug === "north-dakota" ? bismarckCityDefenseSection("") : ""}
 ${expansion.stateSlug === "michigan" ? michiganGuideSupportSection() : ""}
+${expansion.stateSlug === "nebraska" ? nebraskaMepfHubSection() : ""}
 <section class="block"><div class="container"><h2>Five researched <em>local services</em></h2><p class="prose">Each linked service is organized around the selected metro’s permit authority, code context, local physical conditions, typical project types, permit steps, official references, and responsible-professional boundaries. These pages are information resources, not local-office claims or guarantees of licensure, approval, schedule, or construction outcome.</p><div class="linkrow">${serviceLinks}</div></div></section>
 <section class="block"><div class="container"><h2>${esc(expansion.stateName)} <em>metros and services</em></h2><div class="grid2">${metroLinks}</div></div></section>
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
@@ -8776,6 +8818,8 @@ ${expansion.stateSlug === "iowa" && metro.slug === "sioux-city" && service.servi
 ${expansion.stateSlug === "south-dakota" && metro.slug === "sioux-falls" && service.serviceSlug === "mep-engineering" ? siouxFallsCitySupportSection() : ""}
 ${expansion.stateSlug === "south-dakota" && service.serviceSlug === "mep-engineering" ? (metro.slug === "brookings" ? brookingsCarrierSection() : brookingsDefenseSection(metro.slug)) : ""}
 ${expansion.stateSlug === "montana" && service.serviceSlug === "mep-engineering" ? (metro.slug === "billings" ? billingsCarrierSection() : billingsDefenseSection(metro.slug)) : ""}
+${expansion.stateSlug === "nebraska" && metro.slug === "omaha" && service.serviceSlug === "mep-engineering" ? omahaMepfSupportSection() : ""}
+${expansion.stateSlug === "nebraska" && metro.slug === "lincoln" && service.serviceSlug === "mep-engineering" ? lincolnMepfSupportSection() : ""}
 <section class="block"><div class="container"><h2>Permit and engineering <em>steps</em></h2><ol class="scope">${service.permitSteps.map((step) => `<li>${esc(step)}</li>`).join("")}</ol></div></section>
 <section class="block"><div class="container faq"><h2>${esc(service.h1)} <em>FAQs</em></h2>${service.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
 <section class="block"><div class="container"><h2>All five ${esc(metro.name)} <em>services</em></h2><div class="linkrow">${localServiceLinks}</div></div></section>
