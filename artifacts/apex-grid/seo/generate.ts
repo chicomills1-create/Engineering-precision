@@ -8651,6 +8651,7 @@ ${expansion.stateSlug === "georgia" ? georgiaDefenseSection("") : ""}
 ${expansion.stateSlug === "georgia" ? alpharettaDefenseSection("") : ""}
 ${expansion.stateSlug === "colorado" ? broomfieldDefenseSection("") : ""}
 ${expansion.stateSlug === "south-dakota" ? brookingsDefenseSection("") : ""}
+${expansion.stateSlug === "north-dakota" ? bismarckCityDefenseSection("") : ""}
 <section class="block"><div class="container"><h2>Five researched <em>local services</em></h2><p class="prose">Each linked service is organized around the selected metro’s permit authority, code context, local physical conditions, typical project types, permit steps, official references, and responsible-professional boundaries. These pages are information resources, not local-office claims or guarantees of licensure, approval, schedule, or construction outcome.</p><div class="linkrow">${serviceLinks}</div></div></section>
 <section class="block"><div class="container"><h2>${esc(expansion.stateName)} <em>metros and services</em></h2><div class="grid2">${metroLinks}</div></div></section>
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
