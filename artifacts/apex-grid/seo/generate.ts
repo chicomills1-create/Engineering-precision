@@ -4257,7 +4257,8 @@ ${peStampBlock({
   <div style="margin-top:20px" class="card"><div class="label">Market Context</div><p>${esc(state.marketNotes)}</p><p style="margin-top:10px">Key markets: ${esc(state.metros.join(", "))}.</p></div>
 </div></section>
 
-${state.slug === "arizona" && svc.slug === "mep-engineering" ? maricopaCarrierSection() : ""}<section class="block"><div class="container faq">
+${state.slug === "arizona" && svc.slug === "mep-engineering" ? maricopaCarrierSection() : ""}
+${state.slug === "texas" && svc.slug === "mep-engineering" ? texasCelinaStateSvcSection() : ""}<section class="block"><div class="container faq">
   <h2>${esc(state.name)} <em>FAQs</em></h2>
   ${state.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="a">${esc(f.a)}</div></details>`).join("")}
 </div></section>
@@ -4673,6 +4674,63 @@ function brookingsDefenseSection(currentSlug: string): string {
 </div></section>`;
 }
 
+/** Celina Defense Cure (2026-11-04): editorial support INTO the fallen
+ *  carrier for "mep engineer celina" (#1 → unranked, Nightwatch pair
+ *  -16 → -23). Measured live before build (raw HTML): carrier 1,195
+ *  visible words, the exact phrase ZERO times in visible copy; inbound =
+ *  Texas hub ONE bare-name list link, zero editorial anchors anywhere;
+ *  no MEP child page exists (404) — the city hub is the only carrier.
+ *  Sitemap presence confirmed (sitemap-locations.xml); canonical clean.
+ *  ChatGPT consult 2026-11-04: APPROVE WITH CHANGES — exact phrase in
+ *  the carrier's own scope section, hub paragraph places Celina in the
+ *  service geography, sibling links ONLY where the neighboring page
+ *  genuinely helps the reader (Prosper shares the Preston corridor and
+ *  a city limit; McKinney is the county seat for the same builder
+ *  market). No artificial link network. Copy traces to the carrier's
+ *  published facts (IBC with local amendments; no mandatory statewide
+ *  commercial code; City of Celina review) + civic geography only. */
+const CELINA_DEFENSE_SOURCE_SLUGS = new Set([
+  "prosper", "mckinney",
+]);
+
+function celinaCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>What an <em>MEP Engineer</em> Scopes in Celina</h2>
+  <div class="prose"><p>Apex Grid Engineering works as an MEP engineer Celina owners, developers, and general contractors can scope against one coordinated set. The MEP services available to Celina projects cover the full building-systems package: mechanical design sized to the building's actual loads, electrical design from the service entrance through distribution and lighting, and plumbing design for water, waste, and gas — engineered together, so the three disciplines are reconciled on paper before they can collide in the field. Celina's building stock drives the specifics: master-planned residential growth brings amenity centers, schools, and civic buildings; the Preston Road corridor brings retail, restaurant, and medical fit-outs; and the light-industrial and flex space following the rooftops brings its own ventilation, power, and plumbing loads.</p>
+  <p>Permitting runs through the City of Celina on the IBC with local amendments — Texas carries no mandatory statewide commercial building code, so the governing editions and amendments are the city's own, confirmed with the permit office at project kickoff. The engineering is sequenced to that review: load calculations matched to the real fit-out, energy-code compliance documented with the set, and drawings coordinated across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted, so the Celina review sees one consistent set.</p></div>
+</div></section>`;
+}
+
+function celinaDefenseSection(currentSlug: string): string {
+  if (currentSlug === "celina") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/texas/celina/">${anchor}</a>`;
+  if (currentSlug === "prosper") {
+    return `<section class="block"><div class="container">
+  <h2>Across the Line: <em>Celina</em></h2>
+  <div class="prose"><p>Prosper and Celina share more than a border on Preston Road: subdivisions, school campuses, and commercial projects routinely span the two city limits, and a set drawn for one side is permitted against the other city's amendments as often as not. When the northern half of a project lands in Celina, the systems scope — mechanical, electrical, and plumbing designed as one coordinated set — is covered by our ${link("MEP engineering in Celina")} page, where the services available to Celina projects and the City of Celina permit picture are set out in full.</p></div>
+</div></section>`;
+  }
+  if (currentSlug === "mckinney") {
+    return `<section class="block"><div class="container">
+  <h2>Collin County's Northern Tier: <em>Celina</em></h2>
+  <div class="prose"><p>McKinney is the Collin County seat, and the builders who work out of it run the county's northern tier as one market. Celina — up the Preston Road corridor — is where much of that growth now lands: residential support commercial, schools, and civic buildings whose mechanical, electrical, and plumbing systems have to be designed as one package. The MEP services available to those projects are set out on our ${link("MEP engineering in Celina")} page, together with the City of Celina review path they permit through — the same coordinated-set standard a team uses at the county seat, applied at the corridor's northern end.</p></div>
+</div></section>`;
+  }
+  return `<section class="block"><div class="container">
+  <h2>The Northern <em>DFW Corridor</em></h2>
+  <div class="prose"><p>Texas growth runs north. Celina, at the top of the Dallas–Fort Worth metroplex in Collin County, is one of the fastest-growing cities in the state — master-planned communities, schools, and civic buildings rising along the Preston Road corridor, with retail, medical, and light-industrial projects following the rooftops. Our ${link("MEP engineering in Celina")} coverage is set out on the city's page: the MEP, structural, and civil services available to Celina projects, the project types the city is building, and its own permit picture under the IBC with local amendments.</p>
+  <p>Celina sits in a working corridor, not on an island: Prosper directly south on Preston Road, Frisco to the southwest, and McKinney — the Collin County seat — to the southeast share its builders, its trades, and its review culture. Teams scoping the northern corridor start from ${link("Celina MEP engineering")} for the systems side of that work — mechanical, electrical, and plumbing designed as one coordinated set — and use the city pages along the corridor for the rest of the board.</p></div>
+</div></section>`;
+}
+
+function texasCelinaStateSvcSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The Northern Corridor: <em>Celina</em></h2>
+  <div class="prose"><p>Texas MEP demand is heaviest where the growth is, and the growth is running north out of Dallas–Fort Worth. Celina anchors the metroplex's northern corridor — master-planned residential, schools and civic buildings, Preston Road retail and medical, and the light-industrial space that follows the rooftops — and each of those project types carries the full mechanical, electrical, and plumbing scope this page describes. The complete Celina picture, including the services available there and the city's own permit path, is on our <a href="/locations/texas/celina/">MEP engineering in Celina</a> page; this page carries the statewide MEP scope it draws on.</p></div>
+</div></section>`;
+}
+
 function brookingsCarrierSection(): string {
   return `<section class="block"><div class="container">
   <h2>What an MEP Engineer Scopes in <em>Brookings</em></h2>
@@ -4858,6 +4916,7 @@ ${state.slug === "arizona" ? maricopaDefenseSection("") : ""}
 ${state.slug === "arizona" ? queenCreekDefenseSection("") : ""}
 ${state.slug === "arizona" ? scottsdaleDefenseSection("") : ""}
 ${state.slug === "colorado" ? broomfieldDefenseSection("") : ""}
+${state.slug === "texas" ? celinaDefenseSection("") : ""}
 ${state.slug === "hawaii" ? `<section class="block"><div class="container">
   <h2>Engineering Coverage in <em>Honolulu</em></h2>
   <div class="grid2">
@@ -5146,7 +5205,9 @@ ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDef
 ${state.slug === "arizona" && MARICOPA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && city.slug === "queen-creek" ? queenCreekHubSection() : ""}
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
+${state.slug === "texas" && CELINA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? celinaDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && city.slug === "broomfield" ? broomfieldCarrierSection() : ""}
+${state.slug === "texas" && city.slug === "celina" ? celinaCarrierSection() : ""}
 <section class="block"><div class="container">
   <h2>More <em>${esc(state.name)} Locations</em></h2>
   <div class="linkrow">${curatedInState
@@ -13222,6 +13283,7 @@ ${state.slug === "arizona" && MARICOPA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mar
 ${state.slug === "arizona" && QC_DEFENSE_SOURCE_SLUGS.has(city.slug) ? queenCreekDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && SCOTTSDALE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? scottsdaleDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
+${state.slug === "texas" && CELINA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? celinaDefenseSection(city.slug) : ""}
 <section class="block"><div class="container">
   <h2>More <em>Locations</em></h2>
   <div class="linkrow">${nearby
