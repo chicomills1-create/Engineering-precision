@@ -1588,6 +1588,7 @@ const ANSWER_EXTRA_SECTIONS: Record<string, string> = {
   "beachfront-condo-retrofit-engineering": `<section class="block"><div class="container"><h2>Retrofit hurricane protection for <em>condos</em>: the scope, system by system</h2><div class="prose"><p>Retrofit hurricane protection for condos is not a product you bolt on; it is a sequenced scope worked through the existing tower — load path, openings, envelope — and on a beachfront condominium it is set by the condition assessment, not by a catalog. The assessment combines document review, field survey, and testing into the structural condition report the whole retrofit stands on, and in Florida it also satisfies the milestone inspection obligations now imposed on aging coastal condominiums.</p><p><strong>Load path first.</strong> Where the investigation finds inadequate roof-to-wall or wall-to-floor connections, the engineer details supplemental steel straps, angles, and through-bolts, installed from inside or outside with localized demolition. Added shear walls or braced frames go where they stiffen the tower without taking units offline, and balcony slabs with corroded cantilever reinforcement get supplemental supports or carbon-fiber strengthening where the analysis supports it.</p><p><strong>Openings and envelope.</strong> Replacement windows and doors are specified for the calculated component-and-cladding pressures and the impact rating — with anchor pull-testing on the existing substrate, because the best impact window is worthless if its anchors pull out of deteriorated concrete. Balcony waterproofing membranes, railings, and sliding-door tracks are replaced as one system per balcony; a leak at any one element defeats the others.</p><p><strong>Occupied phasing.</strong> The work proceeds stack by stack, every opening weather-protected the same day it is opened and temporary barriers inspected nightly during hurricane season. The phasing plan is an engineering deliverable in its own right — work zones, material staging, crane and hoist locations, and vibration and noise limits set for the residents living under the work.</p></div></div></section>`,
   "hurricane-retrofit-existing-buildings": `<section class="block"><div class="container"><h2>When the existing building is a <em>condominium</em></h2><div class="prose"><p>The retrofit sequence on this page applies to existing buildings generally; a condominium tower adds three complications of its own — association approval and special-assessment funding, unit-by-unit access negotiated with owners, and work phased around residents in place. Those constraints change how the same systems are scoped and sequenced. The condo case is worked through end to end — assessment, load path, opening protection, and the balcony envelope treated as one system — in our answer on <a href=\"/answers/beachfront-condo-retrofit-engineering/\">beachfront condo retrofit engineering</a>.</p></div></div></section>`,
   "florida-hurricane-wind-design-requirements": `<section class="block"><div class="container"><h2>These requirements, applied to an <em>existing condo</em></h2><div class="prose"><p>Florida's wind requirements are written around new design; an existing beachfront condominium meets them through a retrofit — openings and roof connections brought up to the current component-and-cladding pressures and impact ratings, verified against a structure that has already spent decades in salt air. How that scope is assembled for an occupied tower, from the milestone-inspection report forward, is covered in our guide to <a href=\"/answers/beachfront-condo-retrofit-engineering/\">retrofit hurricane protection for condos</a>.</p></div></div></section>`,
+  "pe-stamp-only-vs-review-and-seal": `<section class="block"><div class="container"><h2>The check behind the <em>seal</em></h2><div class="prose"><p>Review-and-seal is only worth anything when the engineer behind the seal is licensed in the project's state and in responsible charge of the work — which is why the verification step matters as much as the stamp itself. Owners who want to run that check the way a reviewer would can follow the record field by field: our guide to the <a href=\"/answers/michigan-professional-engineer-license-lookup/\">Michigan professional engineer license lookup</a> works through LARA's system in detail, including how to check the firm behind the individual engineer and what a missing record actually means.</p></div></div></section>`,
 };
 
 function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
@@ -3193,6 +3194,7 @@ function peStampStatePage(state: StateData, slug: string): string {
     ],
     schemaType: "WebPage",
     visual: "stamping",
+    extraBodyHtml: slug === "michigan" ? michiganLookupDeferralSection() : undefined,
   });
 }
 
@@ -4878,6 +4880,32 @@ function texasProsperStateSvcSection(): string {
   return `<section class="block"><div class="container">
   <h2>The Northern Corridor: <em>Prosper</em></h2>
   <div class="prose"><p>Texas MEP demand is heaviest where the growth is, and the growth is running north out of Dallas–Fort Worth. Prosper anchors the metroplex's Preston Road corridor — master-planned residential, Prosper ISD schools and civic buildings, Preston and US-380 retail and medical, and the commercial space that follows the rooftops — and each of those project types carries the full mechanical, electrical, and plumbing scope this page describes. The complete Prosper picture, including the services available there and the town's own permit path, is on our <a href="/locations/texas/prosper/">MEP engineering in Prosper</a> page; this page carries the statewide MEP scope it draws on.</p></div>
+</div></section>`;
+}
+
+/** Strike 22 (2026-11-04): "michigan professional engineer license lookup"
+ *  #10 -> unranked — OPTION C hybrid (parent ruling). The designated owner
+ *  already exists: /answers/michigan-professional-engineer-license-lookup/
+ *  (1,713w, exact phrase x3, purpose-built) but authority-starved (topical
+ *  prose inbound 0). The tracked carrier /pe-stamp/michigan/ held the seat
+ *  on cluster authority, then the seat vanished instead of transferring.
+ *  Cure builds authority INTO the guide: an editorial paragraph on the
+ *  Michigan state hub (this function), one answers-sibling prose link
+ *  (ANSWER_EXTRA_SECTIONS), and ONE short deferral paragraph on the
+ *  carrier itself via extraBodyHtml (michiganLookupDeferralSection). The
+ *  carrier gets NO lookup treatment — a second exact-phrase lookup page
+ *  would be the Rogers cannibalization shape, created deliberately. */
+function michiganGuideSupportSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Verifying the Engineer: <em>the Michigan Lookup</em></h2>
+  <div class="prose"><p>Every engineering engagement in Michigan starts with the same check: the person who will seal the work holds a current Michigan professional engineer license, in the discipline the project needs. The state runs that check through LARA — the Department of Licensing and Regulatory Affairs — whose online lookup returns the licensee's status, discipline, and expiration from the board's own record. How to run the <a href="/answers/michigan-professional-engineer-license-lookup/">Michigan professional engineer license lookup</a> — what each field in the record means, how to confirm the firm behind the individual license, and what to do when a search comes back empty — is set out step by step in our library guide, written for owners and project teams doing this verification before they sign.</p></div>
+</div></section>`;
+}
+
+function michiganLookupDeferralSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Here to <em>Check a License</em>?</h2>
+  <div class="prose"><p>If you landed here to verify an engineer rather than to order a stamp: the board links below reach LARA's official record, and the complete walkthrough — the <a href="/answers/michigan-professional-engineer-license-lookup/">michigan professional engineer license lookup</a>, what the record shows, and how to check the firm behind the engineer — lives in our library guide. This page stays what it is: the review-and-seal service for teams whose drawings are ready.</p></div>
 </div></section>`;
 }
 
@@ -8655,6 +8683,7 @@ ${expansion.stateSlug === "georgia" ? alpharettaDefenseSection("") : ""}
 ${expansion.stateSlug === "colorado" ? broomfieldDefenseSection("") : ""}
 ${expansion.stateSlug === "south-dakota" ? brookingsDefenseSection("") : ""}
 ${expansion.stateSlug === "north-dakota" ? bismarckCityDefenseSection("") : ""}
+${expansion.stateSlug === "michigan" ? michiganGuideSupportSection() : ""}
 <section class="block"><div class="container"><h2>Five researched <em>local services</em></h2><p class="prose">Each linked service is organized around the selected metro’s permit authority, code context, local physical conditions, typical project types, permit steps, official references, and responsible-professional boundaries. These pages are information resources, not local-office claims or guarantees of licensure, approval, schedule, or construction outcome.</p><div class="linkrow">${serviceLinks}</div></div></section>
 <section class="block"><div class="container"><h2>${esc(expansion.stateName)} <em>metros and services</em></h2><div class="grid2">${metroLinks}</div></div></section>
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
