@@ -1376,6 +1376,19 @@ function assertPhase7Corpus(): void {
   }, null, 2)}\n`);
 }
 
+/** Placeholder-FAQ guard (2026-11-03): some AEO records carry literal scaffold
+ * pairs ({ question: "question", answer: "answer" }) in their faqs data. Those
+ * pairs are not content and must never render visibly or into the FAQPage
+ * schema. The rule is deliberately narrow: it drops only the literal
+ * placeholder pair (and empty pairs); it never judges substantive content. */
+function substantiveFaqs(faqs: Array<{ question: string; answer: string }>): Array<{ question: string; answer: string }> {
+  return faqs.filter((faq) => {
+    const q = faq.question.trim().toLowerCase();
+    const a = faq.answer.trim().toLowerCase();
+    return q !== "" && a !== "" && !(q === "question" && a === "answer");
+  });
+}
+
 function phase0FaqSchema(faqs: Array<{ question: string; answer: string }>) {
   return {
     "@context": "https://schema.org",
@@ -1422,7 +1435,7 @@ function assertPhase0Page(html: string, canonical: string, faqs: Array<{ questio
     || !html.includes("By ")
     || html.includes("Apex Grid Engineering PE Team")
     || !html.includes(`Updated ${PHASE0_UPDATED_DATE}`)
-    || schemas.find((schema) => schema["@type"] === "FAQPage")?.mainEntity?.length !== faqs.length
+    || (schemas.find((schema) => schema["@type"] === "FAQPage")?.mainEntity?.length ?? 0) !== substantiveFaqs(faqs).length
   ) {
     throw new Error(`SEO assertion failed: malformed Phase 0 page ${label}`);
   }
@@ -1474,6 +1487,7 @@ function phase0ArticleFrame(
     founderNote?: string;
     marker?: string;
     directAnswer?: string;
+    suppressEmptyFaq?: boolean;
     facts?: Array<{ label: string; value: string }>;
     howTo?: boolean;
     visual?: VisualMotif;
@@ -1539,14 +1553,14 @@ function phase0ArticleFrame(
   ${opts.facts?.length ? `<section class="block"><div class="container"><h2>What facts should you use to plan this scope?</h2><div class="prose"><table><thead><tr><th>Planning fact</th><th>Project-specific value</th></tr></thead><tbody>${opts.facts.map((fact) => `<tr><th scope="row">${esc(fact.label)}</th><td>${esc(fact.value)}</td></tr>`).join("")}</tbody></table></div></div></section>` : ""}
   ${sections.map((section, index) => `<section class="block" id="step-${index + 1}"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p>${section.bulletsHtml ? `<ul class="scope">${section.bulletsHtml.map((bullet) => `<li>${bullet}</li>`).join("")}</ul>` : section.bullets ? `<ul class="scope">${section.bullets.map((bullet) => `<li>${esc(bullet)}</li>`).join("")}</ul>` : ""}</div></div></section>`).join("")}
   ${opts.links?.length ? `<section class="block"><div class="container"><h2>${opts.directAnswer ? "Which related engineering resources can help?" : "Related Engineering Resources"}</h2><div class="linkrow">${opts.links.map((link) => `<a href="${esc(link.href)}"${/^https:\/\//.test(link.href) ? ' rel="noopener noreferrer"' : ""}>${esc(link.label)}</a>`).join("")}</div></div></section>` : ""}
-  ${opts.directAnswer ? `<section class="block"><div class="container"><h2>What else do project teams ask?</h2><div class="faq">${opts.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></div></section>` : phase0FaqMarkup(opts.faqs)}
+  ${opts.suppressEmptyFaq && opts.faqs.length === 0 ? "" : opts.directAnswer ? `<section class="block"><div class="container"><h2>What else do project teams ask?</h2><div class="faq">${opts.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></div></section>` : phase0FaqMarkup(opts.faqs)}
   <section class="ctaband"><div class="container"><h2>${opts.directAnswer ? "Ready to discuss your engineering scope?" : "Discuss your engineering scope"}</h2><p>Share the project address, current records, requested deliverable, authority information, and schedule. Apex Grid confirms professional responsibility, availability, and scope before work begins.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
   </main>`;
   return htmlShell({
     title: opts.title,
     description: opts.description,
     canonical: `${SITE}${opts.canonical}`,
-    schemaJson: [schema, phase0FaqSchema(opts.faqs), ...(howToSchema ? [howToSchema] : []), breadcrumbSchema(crumbs)],
+    schemaJson: [schema, ...(opts.suppressEmptyFaq && opts.faqs.length === 0 ? [] : [phase0FaqSchema(opts.faqs)]), ...(howToSchema ? [howToSchema] : []), breadcrumbSchema(crumbs)],
     body,
     // Phone-format cure (2026-11-01): money families rendered through this
     // frame carry the hyphenated phone in the footer contact block.
@@ -1591,7 +1605,7 @@ function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
     { label: "Metro engineering guides", href: "/metros/" },
     { label: "Verified service areas", href: "/locations/" },
   ];
-  const faqs = "cluster" in page ? phase7Faqs(page) : page.faqs;
+  const faqs = substantiveFaqs("cluster" in page ? phase7Faqs(page) : page.faqs);
   const customSections = "cluster" in page ? undefined : page.sections;
   // The hero renders page.answer verbatim (as the lede, or as the direct
   // answer when the two are identical), so the default first section must
@@ -1619,6 +1633,7 @@ function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
     founderNote: "cluster" in page ? undefined : page.founderNote,
     marker: "cluster" in page ? "phase7" : undefined,
     directAnswer: "cluster" in page ? undefined : page.directAnswer,
+    suppressEmptyFaq: true,
     facts: "cluster" in page ? undefined : page.facts,
     howTo: "cluster" in page ? undefined : page.howTo,
     visual: motifForText(`${"cluster" in page ? page.cluster : page.topic} ${page.h1}`),
@@ -3413,6 +3428,20 @@ function phase0ResourcePage(page: Phase0ResourcePage): string {
       heading: "What the structural check traces, unit to foundation",
       body: "For rooftop equipment, the review follows one continuous load path. Start at the unit: the operating weight from the submittal — not the shipping weight — plus curb, rail, and isolation hardware. From there we confirm how that weight lands: spread across how many joists or beams, at what spacing, and whether the supporting members were sized for a concentrated load at that location or only for the uniform roof load. Anchorage is checked separately from gravity support: wind uplift and seismic forces try to move or overturn the unit, and the connection at the curb — not the unit's own weight — resists them. The review stops when any link in that chain is undocumented: an unknown unit weight, framing that cannot be identified from the drawings or field evidence, or a deteriorated deck that changes what the connections can hold.",
       bullets: ["Operating weight, curb, and isolation hardware from the current submittal", "Joist and beam capacity under the actual point-load pattern", "Check uplift and seismic anchorage at the curb connection", "Deck and framing condition where the unit lands"],
+    });
+  }
+  if (page.slug === "energy-model-quality-control-review") {
+    sections.push({
+      heading: "Reconcile the model against the documents, input by input",
+      body: "A quality-control review earns its keep in the inputs, not the outputs. Start with geometry: the modeled floor area, zone layout, and window-to-wall ratio should trace to the current architectural set, because a model built on a superseded background can pass every internal check and still describe a different building. Next compare schedules and loads — occupancy, lighting power, and plug loads in the model against the values the design documents and the code baseline require; a schedule copied from a template project is one of the most common silent errors in a compliance model. Then map the systems: each modeled HVAC system should correspond to the equipment, zoning, and controls the mechanical drawings actually show, with fan, pump, and efficiency inputs taken from the current schedules rather than library defaults. Finally, read the outputs as a reviewer, not a modeler. Unmet load hours concentrated in one zone usually point to a zoning or airflow mapping mistake; unmet hours spread across the building point to capacity or control assumptions that need a design answer, not a modeling tweak.",
+      bullets: ["Modeled area, zoning, and glazing ratio traced to the current architectural set", "Schedules and internal loads checked against the documents and the code baseline", "Each modeled system mapped to the equipment and controls on the mechanical drawings", "Unmet load hours located by zone before they are explained"],
+    });
+  }
+  if (page.slug === "responsible-engineer-transition-delivery") {
+    sections.push({
+      heading: "Draw the reliance line before the record changes hands",
+      body: "A transition delivery is judged by what the incoming engineer can responsibly stand behind. The record should separate three classes of material: work the incoming engineer has independently checked and can adopt; record information received from the outgoing team and held as background only — prior calculations, correspondence, and submittal reviews whose conclusions remain the original author's; and open items nobody has closed, listed with their owners. Sealed documents need their own inventory: which sheets and calculations carry the outgoing engineer's seal, which remain in force for the permit record, and which the successor must reissue under a new seal if the design changes. Where the authority requires notice of a change in the engineer of record, the delivery record names who notifies the authority and what letter or form carries the change, so the permit file never points at a professional who has left the project. The handoff is complete when the incoming engineer's acceptance is written against that inventory — scope accepted, reliance stated, exclusions visible — not when the files merely change folders.",
+      bullets: ["Inventory of sealed sheets and calculations, and whose seal each carries", "Prior work classed as adopted, background only, or still open", "Authority notice of the engineer-of-record change: owner and instrument named", "Written acceptance stating the reliance boundary and exclusions"],
     });
   }
   const faqs = design
