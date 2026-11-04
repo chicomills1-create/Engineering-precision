@@ -274,6 +274,15 @@ const CITY_VERTICAL_DEEP_DIVES: Record<string, string> = {
     <p>Renovations and tenant improvements make up most of Sebastian's commercial pipeline, and their recurring scope is consistent: change-of-occupancy review, storefront and envelope hardening, rooftop equipment replacement with current wind-uplift detailing, and accessibility upgrades coordinated across the architectural, structural, and MEP sets. Projects move fastest when the team confirms the parcel's flood zone, wind exposure category, and county utility capacity before schematic design, because each of those can change the documents the City expects at submittal \u2014 and discovering one of them at plan check costs a full review cycle.</p>
   </div>
 </div></section>`,
+  "architecture/texas/rowlett": `
+<section class="block"><div class="container">
+  <h2>An architect in Rowlett, Texas, designs for <em>the lake, the clay, and the county</em></h2>
+  <div class="prose">
+    <p>Rowlett sits on the Lake Ray Hubbard peninsula in Dallas County, and its architecture carries the address. Waterfront and near-water homes in neighborhoods like Dalrock and the Bayside district are designed for views, wind exposure off the lake, and the storm patterns that cross North Texas every spring. An architect in Rowlett, Texas, spends as much time on structure and envelope as on floor plans: expansive Blackland clay moves foundations seasonally, so slab and pier decisions are made with the soils report open, and roof and glazing choices are checked against wind-driven rain off the water.</p>
+    <p>The project types that fill a Rowlett practice are consistent: custom single-family homes and lake houses; additions and whole-house renovations in the established neighborhoods along Miller Road and Rowlett Road; small commercial and restaurant work on the Lakeview Parkway corridor; and civic and worship facilities serving one of the fastest-growing suburbs in the Dallas\u2013Fort Worth metroplex. Each type passes through Dallas County and City of Rowlett permitting, where a complete, coordinated set \u2014 architecture, structural, and MEP drawn to the same grid \u2014 is what keeps a review on schedule.</p>
+    <p>That coordination is the pattern behind this firm's Rowlett work: the architect, the structural engineer, and the MEP designer work from one model, so the lake house's window wall is engineered as it is drawn, the restaurant's rooftop units land on structure that was designed for them, and the permit set goes in once. Buyers comparing an architect in Rowlett, Texas, should ask who engineers the design, how foundations are handled on local clay, and whether the same team carries the project from first sketch to sealed construction documents.</p>
+  </div>
+</div></section>`,
 };
 
 export function verticalCityPage(
