@@ -854,20 +854,20 @@ export const WAVE_CT_ANSWER_PAGES: Phase0AeoPage[] = [
     serviceHref: "/services/structural/",
     faqs: [
       {
-        question: "question",
-        answer: "answer",
+        question: "What load governs the structural design of a helipad?",
+        answer: "The dynamic touchdown of the design helicopter, under the FAA load cases with their prescribed factors. The pad, its supports, and the connections are all designed for that event, together with the helicopter's parked loads; rooftop pads additionally need the building structure verified for the loads and the vibration.",
       },
       {
-        question: "question",
-        answer: "answer",
+        question: "Why is rotor wash a structural design consideration?",
+        answer: "The downwash from a landing helicopter is a powerful, turbulent wind that acts on everything nearby — the building facade, rooftop equipment, pedestrians, and parked vehicles. The wash footprint has to be analyzed and everything inside it designed or protected; loose rooftop equipment near a helipad can become projectiles.",
       },
       {
-        question: "question",
-        answer: "answer",
+        question: "What makes the route from the pad to the emergency department an engineering concern?",
+        answer: "The helipad exists to collapse the time between the scene and definitive care, so the route is designed with the pad: the shortest practical path to the trauma bay, weather-protected and secured from public access; an elevator sized for the stretcher plus the flight and receiving teams — not assumed, verified; lighting and wayfinding for night operations; communication between the pad, the elevator, and the ED; and a documented backup route for when the primary path is blocked.",
       },
       {
-        question: "question",
-        answer: "answer",
+        question: "Can helicopter noise and vibration at a hospital helipad be eliminated?",
+        answer: "No — and a design that promises otherwise is not being honest. The structural design isolates vibration from critical areas, and operational planning chooses flight paths that minimize noise impact on patient areas. Complete elimination is not possible; intelligent management is.",
       },
     ],
     sections: [
@@ -1302,20 +1302,20 @@ export const WAVE_CT_ANSWER_PAGES: Phase0AeoPage[] = [
     serviceHref: "/services/structural/",
     faqs: [
       {
-        question: "question",
-        answer: "answer",
+        question: "What loads does an emergency communications tower have to be designed for?",
+        answer: "The design wind load under the governing standard, with the importance factor for essential facilities, the ice loads for the site's climate zone, and the full antenna inventory — every dish, panel, feed line, and mount, present and planned. The analysis covers the tower, the mounts, and the connections, because a mount failure drops the antenna just as surely as a tower failure.",
       },
       {
-        question: "question",
-        answer: "answer",
+        question: "Why does the foundation design start with a geotechnical investigation?",
+        answer: "Foundations are designed specifically for the project site. The geotechnical investigation defines the soil capacity, and the foundation — drilled piers, spread footings, or a mat, depending on the soils and loads — is designed for the overturning moments these tall structures generate. On sites with poor soils or a high water table, the foundation becomes a significant part of the project cost and cannot be value-engineered.",
       },
       {
-        question: "question",
-        answer: "answer",
+        question: "How is an emergency tower site kept operational when utility power fails?",
+        answer: "The site systems are designed with backups: utility power plus a generator with honest multi-day fuel autonomy, battery bridging between them, diverse backhaul paths, and remote monitoring that reports problems before users notice them. All-weather access for maintenance and refueling is part of the same design, because a tower nobody can reach will eventually fail.",
       },
       {
-        question: "question",
-        answer: "answer",
+        question: "What has to be planned beyond the tower structure itself?",
+        answer: "The compound and its service life: all-weather access, security against unauthorized climbing, grounding and lightning protection for the tower and the equipment shelter, and a layout that keeps the generator, fuel, and equipment maintainable across the tower's full service life.",
       },
     ],
     sections: [
