@@ -39,7 +39,7 @@ const DISCIPLINE_LINK_EXCLUSIONS = new Set([
 
 const INDUSTRY_SPECIALTY_LINKS: Record<string, { href: string; label: string }[]> = {
   "agriculture-cannabis-facility-engineering": [{ href: "/industries/cannabis/mep-engineering/", label: "Cannabis facility MEP engineering" }],
-  "aviation-hangar-engineering": [{ href: "/answers/airport-fuel-storage-facility-design/", label: "Airport fuel storage facility design" }],
+  "aviation-hangar-engineering": [{ href: "/answers/airport-fuel-storage-facility-design/", label: "Airport fuel storage facility design" }, { href: "/answers/airport-jet-blast-fence-design/", label: "Jet blast fence design — noise & deflection" }],
   "data-center-engineering": [
     { href: "/industries/distribution-centers/engineering/", label: "Distribution center engineering" },
     { href: "/industries/mission-critical/electrical-engineering/", label: "Mission-critical electrical engineering" },
