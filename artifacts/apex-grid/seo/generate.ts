@@ -4274,6 +4274,7 @@ ${state.slug === "north-dakota" && svc.slug === "mep-engineering" ? bismarckCarr
 ${state.slug === "north-dakota" && svc.slug === "mep-engineering" ? grandForksStateSvcSection() : ""}
 ${state.slug === "texas" && svc.slug === "mep-engineering" ? texasCelinaStateSvcSection() : ""}
 ${state.slug === "texas" && svc.slug === "mep-engineering" ? texasProsperStateSvcSection() : ""}
+${state.slug === "texas" && svc.slug === "mep-engineering" ? texasRockwallStateSvcSection() : ""}
 ${state.slug === "north-dakota" && svc.slug === "mep-engineering" ? northDakotaBismarckStateSvcSection() : ""}
 ${state.slug === "montana" && svc.slug === "mep-engineering" ? montanaBillingsStateSvcSection() : ""}
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? arizonaMaricopaCityStateSvcSection() : ""}
@@ -4888,6 +4889,64 @@ function texasProsperStateSvcSection(): string {
 </div></section>`;
 }
 
+/** Strike 31 (2026-11-04): "mep engineering firm rockwall" #3 ->
+ *  unranked (guard pair nw-10 -> nw-11); "mep engineer rockwall" rides
+ *  the same carrier. Census-first: the ORPHAN-CENSUS graded the Rockwall
+ *  city hub the one true Prosper-shape (4/5) in the TX MEP slice, and the
+ *  live census confirmed it — carrier 1,194w, both exact phrases x0,
+ *  prose inbound 0, TX hub support list-only, TX MEP state page carries
+ *  the city x0, sitemap present. Producer: cityLitePage. Cure mirrors
+ *  the Prosper idiom gate-for-gate: carrier deepening in cityLitePage,
+ *  a Rockwall paragraph on the TX MEP state page beside the Celina /
+ *  Prosper sections, sibling defense sections (Rowlett — the SH-66
+ *  lake-shore neighbor; McKinney — the northern-arc builder market),
+ *  and the generic defense section on the TX state hub via statePage.
+ *  Copy traces to the carrier's published scope + civic geography only
+ *  (Lake Ray Hubbard shore, SH-66 / I-30 corridors, Rockwall ISD, City
+ *  of Rockwall review on the IBC with local amendments; Texas carries
+ *  no mandatory statewide commercial code). */
+const ROCKWALL_DEFENSE_SOURCE_SLUGS = new Set([
+  "rowlett", "mckinney",
+]);
+
+function rockwallCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>What an <em>MEP Engineering Firm</em> Scopes in Rockwall</h2>
+  <div class="prose"><p>Apex Grid Engineering works as the MEP engineering firm Rockwall owners, developers, and general contractors scope against one coordinated set. The MEP services available to Rockwall projects cover the full building-systems package: mechanical design sized to the building's actual loads, electrical design from the service entrance through distribution and lighting, and plumbing design for water, waste, and gas — engineered together, so the three disciplines are reconciled on paper before they can collide in the field. Rockwall's building stock drives the specifics: the city's growth runs along the eastern shore of Lake Ray Hubbard on the SH-66 and I-30 corridors — Rockwall ISD campuses, medical and professional space following the hospital district, The Harbor and lakefront retail and restaurant fit-outs, and the office and flex space that follows the rooftops of one of the metroplex's fastest-growing counties.</p>
+  <p>Permitting runs through the City of Rockwall on the IBC with local amendments — Texas carries no mandatory statewide commercial building code, so the governing editions and amendments are the city's own, confirmed with the permit office at project kickoff. The engineering is sequenced to that review: load calculations matched to the real fit-out, energy-code compliance documented with the set, and drawings coordinated across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted, so the Rockwall review sees one consistent set.</p></div>
+</div></section>`;
+}
+
+function texasRockwallStateSvcSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The Lake Ray Hubbard Shore: <em>Rockwall</em></h2>
+  <div class="prose"><p>Texas MEP demand follows the growth, and on the metroplex's eastern side the growth is Rockwall — the county seat of Texas's smallest county, building along the Lake Ray Hubbard shore and the I-30 corridor: schools, medical space, lakefront retail, and the commercial work that follows its rooftops. Each of those project types carries the full mechanical, electrical, and plumbing scope this page describes. The complete Rockwall picture, including the services available there and the city's own permit path, is on our <a href="/locations/texas/rockwall/">MEP engineering in Rockwall</a> page; this page carries the statewide MEP scope it draws on.</p></div>
+</div></section>`;
+}
+
+function rockwallDefenseSection(currentSlug: string): string {
+  if (currentSlug === "rockwall") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/texas/rockwall/">${anchor}</a>`;
+  if (currentSlug === "rowlett") {
+    return `<section class="block"><div class="container">
+  <h2>Across the Lake: <em>Rockwall</em></h2>
+  <div class="prose"><p>Rowlett and Rockwall face each other across Lake Ray Hubbard on the same SH-66 corridor: subdivisions, school campuses, and commercial projects routinely draw teams from both shores, and a set permitted on one side is as often built on the other. When a project lands on the lake's eastern shore, the systems scope — mechanical, electrical, and plumbing designed as one coordinated set — is covered by our ${link("MEP engineering in Rockwall")} page, where the services available to Rockwall projects and the City of Rockwall permit picture are set out in full.</p></div>
+</div></section>`;
+  }
+  if (currentSlug === "mckinney") {
+    return `<section class="block"><div class="container">
+  <h2>The Northern Arc: <em>Rockwall</em></h2>
+  <div class="prose"><p>McKinney is the Collin County seat, and the builders who work out of it run the metroplex's northern and eastern arc as one market. Rockwall — southeast on the Lake Ray Hubbard shore, in the state's smallest and one of its fastest-growing counties — is where a growing share of that work lands: schools, medical space, and commercial projects whose mechanical, electrical, and plumbing systems have to be designed as one package. The MEP services available to those projects are set out on our ${link("MEP engineering in Rockwall")} page, together with the City of Rockwall review path they permit through — the same coordinated-set standard a team uses at the county seat, applied on the lake shore.</p></div>
+</div></section>`;
+  }
+  return `<section class="block"><div class="container">
+  <h2>The Lake Ray Hubbard Shore: <em>Rockwall</em></h2>
+  <div class="prose"><p>On the Dallas–Fort Worth metroplex's eastern side, Rockwall is the growth pole: the county seat of Texas's smallest county, building along the eastern shore of Lake Ray Hubbard and the I-30 corridor — Rockwall ISD campuses, a growing medical district, lakefront retail at The Harbor, and commercial space following some of the fastest rooftop growth in the state. Our ${link("MEP engineering in Rockwall")} coverage is set out on the city's page: the MEP, structural, and civil services available to Rockwall projects, the project types the city is building, and its own permit picture under the IBC with local amendments.</p>
+  <p>Rockwall sits in a working corridor, not on an island: Rowlett directly west across the lake on SH-66, Garland and the Dallas side beyond it, and McKinney — the Collin County seat — up the northern arc share its builders, its trades, and its review culture. Teams scoping the eastern metroplex start from ${link("Rockwall MEP engineering")} for the systems side of that work — mechanical, electrical, and plumbing designed as one coordinated set — and use the city pages along the corridor for the rest of the board.</p></div>
+</div></section>`;
+}
+
 /** Strike 22 (2026-11-04): "michigan professional engineer license lookup"
  *  #10 -> unranked — OPTION C hybrid (parent ruling). The designated owner
  *  already exists: /answers/michigan-professional-engineer-license-lookup/
@@ -5431,6 +5490,7 @@ ${state.slug === "arizona" ? scottsdaleDefenseSection("") : ""}
 ${state.slug === "colorado" ? broomfieldDefenseSection("") : ""}
 ${state.slug === "texas" ? celinaDefenseSection("") : ""}
 ${state.slug === "texas" ? prosperDefenseSection("") : ""}
+${state.slug === "texas" ? rockwallDefenseSection("") : ""}
 ${state.slug === "north-dakota" ? bismarckCityDefenseSection("") : ""}
 ${state.slug === "arizona" ? maricopaCityDefenseSection("") : ""}
 ${state.slug === "california" ? fresnoDefenseSection("") : ""}
@@ -5725,11 +5785,13 @@ ${state.slug === "arizona" && city.slug === "queen-creek" ? queenCreekHubSection
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && CELINA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? celinaDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && PROSPER_DEFENSE_SOURCE_SLUGS.has(city.slug) ? prosperDefenseSection(city.slug) : ""}
+${state.slug === "texas" && ROCKWALL_DEFENSE_SOURCE_SLUGS.has(city.slug) ? rockwallDefenseSection(city.slug) : ""}
 ${state.slug === "north-dakota" && BISMARCK_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? bismarckCityDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaCityDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && city.slug === "broomfield" ? broomfieldCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "celina" ? celinaCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "prosper" ? prosperCarrierSection() : ""}
+${state.slug === "texas" && city.slug === "rockwall" ? rockwallCarrierSection() : ""}
 ${state.slug === "north-dakota" && city.slug === "bismarck" ? bismarckCityCarrierSection() : ""}
 ${state.slug === "arizona" && city.slug === "maricopa" ? maricopaCityCarrierSection() : ""}
 <section class="block"><div class="container">
@@ -13853,6 +13915,7 @@ ${state.slug === "arizona" && SCOTTSDALE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? s
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && CELINA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? celinaDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && PROSPER_DEFENSE_SOURCE_SLUGS.has(city.slug) ? prosperDefenseSection(city.slug) : ""}
+${state.slug === "texas" && ROCKWALL_DEFENSE_SOURCE_SLUGS.has(city.slug) ? rockwallDefenseSection(city.slug) : ""}
 ${state.slug === "north-dakota" && BISMARCK_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? bismarckCityDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaCityDefenseSection(city.slug) : ""}
 ${state.slug === "montana" && city.slug === "billings" ? billingsCityHubSection() : ""}
