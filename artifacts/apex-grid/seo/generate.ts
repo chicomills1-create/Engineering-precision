@@ -4262,7 +4262,8 @@ ${peStampBlock({
 </div></section>
 
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? maricopaCarrierSection() : ""}
-${state.slug === "texas" && svc.slug === "mep-engineering" ? texasCelinaStateSvcSection() : ""}<section class="block"><div class="container faq">
+${state.slug === "texas" && svc.slug === "mep-engineering" ? texasCelinaStateSvcSection() : ""}
+${state.slug === "california" && svc.slug === "mep-engineering" ? californiaFresnoStateSvcSection() : ""}<section class="block"><div class="container faq">
   <h2>${esc(state.name)} <em>FAQs</em></h2>
   ${state.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="a">${esc(f.a)}</div></details>`).join("")}
 </div></section>
@@ -4697,6 +4698,49 @@ const CELINA_DEFENSE_SOURCE_SLUGS = new Set([
   "prosper", "mckinney",
 ]);
 
+/** Fresno MEP Defense Cure (2026-11-04): support INTO the fallen carrier
+ *  for "mep engineering firm fresno" (#8 → unranked, Nightwatch pair
+ *  -16 → -23). Measured live before build (raw HTML): carrier 1,162
+ *  visible words with "mep engineering firm" ZERO times; the California
+ *  hub carried ZERO links to the carrier. Sibling Fresno discipline
+ *  pages checked: no broad-MEP competition. ChatGPT consult 2026-11-04:
+ *  APPROVE WITH CHANGES — hub support contextual (Fresno's place in the
+ *  coverage structure), carrier explicitly about MEP engineering, and no
+ *  CA licensure claims beyond the record (no BPELSG Organization Record
+ *  on file). Bakersfield is the only Central Valley MEP sibling that
+ *  exists; the other valley MEP pages are 404. */
+function fresnoCarrierSection(): string {
+  return `<section class="section section--white"><div class="container container--narrow">
+  <h2>MEP Engineering in Fresno, From <em>One Firm</em></h2>
+  <p>Apex Grid Engineering works as an MEP engineering firm Fresno owners, developers, and contractors can scope against one coordinated set: mechanical, electrical, and plumbing designed together and documented as a single package. The Fresno scope is Central Valley scope — cooling-dominant mechanical design for long, hot summers; electrical distribution sized for the Valley's commercial, healthcare, and logistics loads as well as its industrial and food-processing stock; and plumbing coordinated inside the same set — across the project types Fresno builds: healthcare and medical offices, retail and restaurant space, multifamily, and the warehouse and distribution buildings along the Highway 99 corridor.</p>
+  <p>Permitting runs through the City of Fresno's Building and Safety Services Division, under California's Title 24 energy standards and the state code cycle in force at submittal. The engineering is sequenced to that review: load calculations matched to the real building, energy compliance documented with the set, and the three disciplines reconciled across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted, so Fresno reviewers see one consistent set instead of three separate ones.</p>
+</div></section>`;
+}
+
+function fresnoDefenseSection(currentSlug: string): string {
+  if (currentSlug === "fresno") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/california/fresno/mep-engineering/">${anchor}</a>`;
+  if (currentSlug === "bakersfield") {
+    return `<section class="section section--white"><div class="container container--narrow">
+  <h2>The Valley's Other Anchor: <em>Fresno</em></h2>
+  <p>Bakersfield anchors the southern end of the Central Valley; Fresno anchors its center, and the Highway 99 corridor's project teams work both markets as one run. The Fresno scope runs on the standard this page documents for Bakersfield — mechanical, electrical, and plumbing engineered together and submitted as one set, cooling-dominant for the same Valley summers. Our ${link("Fresno MEP engineering")} page carries that scope in full, including the City of Fresno review path its projects permit through.</p>
+</div></section>`;
+  }
+  return `<section class="block"><div class="container">
+  <h2>The Central Valley Anchor: <em>Fresno</em></h2>
+  <div class="prose"><p>California's coverage structure turns on its regions, and the Central Valley is the one that runs on Fresno. The Valley's healthcare systems, its food-processing and logistics stock along Highway 99, and its commercial growth all permit through the City of Fresno's review — which is why Fresno is not one more city on this board but its Valley anchor: the market the surrounding valley cities' work is measured against. Our ${link("MEP engineering in Fresno")} coverage is set out on the Fresno MEP page: the mechanical, electrical, and plumbing services available there, the project types the Valley builds, and the Fresno review path they permit through.</p>
+  <p>Teams working the Valley end to end use the two anchors together — Fresno at the center, Bakersfield at the southern end — with the coastal and Southern California boards carrying the rest of the state. The Fresno page is where the Valley's MEP picture is documented in full.</p></div>
+</div></section>`;
+}
+
+function californiaFresnoStateSvcSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The Central Valley: <em>Fresno</em></h2>
+  <div class="prose"><p>California MEP demand splits by region, and the Central Valley's share runs through Fresno — the Valley's healthcare, logistics, and food-processing projects carry the same full mechanical, electrical, and plumbing scope this page describes, under cooling-dominant design conditions the coastal boards never see. The complete Fresno picture, including the project types and the City of Fresno review path, is on our <a href="/locations/california/fresno/mep-engineering/">Fresno MEP engineering</a> page; this page carries the statewide MEP scope it draws on.</p></div>
+</div></section>`;
+}
+
 function celinaCarrierSection(): string {
   return `<section class="block"><div class="container">
   <h2>What an <em>MEP Engineer</em> Scopes in Celina</h2>
@@ -4921,6 +4965,7 @@ ${state.slug === "arizona" ? queenCreekDefenseSection("") : ""}
 ${state.slug === "arizona" ? scottsdaleDefenseSection("") : ""}
 ${state.slug === "colorado" ? broomfieldDefenseSection("") : ""}
 ${state.slug === "texas" ? celinaDefenseSection("") : ""}
+${state.slug === "california" ? fresnoDefenseSection("") : ""}
 ${state.slug === "hawaii" ? `<section class="block"><div class="container">
   <h2>Engineering Coverage in <em>Honolulu</em></h2>
   <div class="grid2">
@@ -6805,6 +6850,8 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
 
     ${page.stateSlug === "arizona" && page.citySlug === "queen-creek" && page.serviceSlug === "mep-engineering" ? queenCreekCarrierSection() : ""}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleCarrierSection() : ""}
+    ${page.stateSlug === "california" && page.citySlug === "fresno" && page.serviceSlug === "mep-engineering" ? fresnoCarrierSection() : ""}
+    ${page.stateSlug === "california" && page.citySlug === "bakersfield" && page.serviceSlug === "mep-engineering" ? fresnoDefenseSection("bakersfield") : ""}
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
