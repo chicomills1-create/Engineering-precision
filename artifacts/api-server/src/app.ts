@@ -179,10 +179,12 @@ app.use(
   })),
 );
 
-// Apex dynamic variation routes: /{service}/{state}/{city}/{variation}/
-// 696,456 URLs rendered server-side on demand (no per-page files).
-// Mounted BEFORE static — only matches the 4-segment variation pattern,
-// so existing static URLs are never intercepted.
+// Apex dynamic variation routes — RETIRED by R6 (2026-11-04).
+// mountApexDynamicRoutes now serves a genuine HTTP 410 for the whole
+// /{service}/{state}/{city}/{variation}/ family (8,705,700 URLs). The
+// renderer code stays in the repo, unreachable, for reversibility only.
+// Record: R6-RELEASE-RECORD-2026-11-04.md. Do not restore the 200
+// renderer without a Director-level reversal of R6.
 mountApexDynamicRoutes(app);
 
 // Serve pre-rendered SEO pages with proper directory-index resolution.
@@ -279,6 +281,12 @@ const ORPHAN_410_PATTERNS = [
   /^\/services-local\//,
   /^\/specialties\/(pe-stamping|plan-check-corrections|title-24-compliance|feasibility-study|permit-expediting|energy-code-compliance)\//,
   /^\/wave1\//,
+  // R6 second layer (2026-11-04): verbatim mirror of VARIATION_RE in
+  // dynamic/index.ts. The dynamic mount (registered above, before this
+  // middleware) already 410s the family; if that mount is ever removed,
+  // pattern URLs fall through static (no files exist) into this layer
+  // instead of the SPA fallback.
+  /^\/(mep-engineering|structural-engineering|civil-engineering)\/([a-z-]+)\/([a-z0-9-]+)\/(best|cost|commercial|residential|firm|services|hire|permit|near-me|emergency|repair-vs-replace|questions|adu|restaurant|office|warehouse|retail|hotel|school|church|medical|multifamily|single-family|mixed-use|industrial|storage|gym|daycare|senior-living|student-housing|car-wash|gas-station|hvac-design|electrical-design|plumbing-design|lighting-design|foundation-design|seismic-retrofit|structural-calculations|energy-modeling|drainage-design|grading-design|utility-design|fire-protection|building-envelope|retaining-wall|pavement-design|solar-design|ev-charging|low-voltage|septic-design|commissioning|timeline|process|consultation|quote|inspection|design-build|plan-check-corrections|permit-expediting|feasibility-study|site-assessment|peer-review|as-built|due-diligence|pre-design|value-engineering|historic-building|flood-zone|hillside|high-wind|snow-load|expansive-soil|infill|tenant-improvement|change-of-use|addition|remodel|new-construction|shell-building|brownfield|coastal|brewery|data-center|greenhouse|hangar|stadium|theater|museum|library|fire-station|bank|parking-garage|rooftop|acoustic-design|waterproofing|elevator|generator|kitchen-design|cleanroom|home-builder|distribution-center|manufacturing-plant|cold-storage|self-storage|car-dealership|fast-food|coffee-shop|bar-nightclub|casino|airport-terminal|train-station|golf-course|recreation-center|swimming-pool|convention-center|movie-theater|funeral-home|veterinary-clinic|dental-office|urgent-care|assisted-living|memory-care|charter-school|logistics-hub|public-parks|community-center|courthouse|city-hall|police-station|post-office|winery|distillery|food-processing|pharmaceutical-plant|research-lab|semiconductor-fab|solar-farm|battery-storage|water-treatment|high-rise|condominium|townhouse|rv-park|marina|equestrian-facility|aquarium|amusement-park|pickleball-courts|strip-mall)\/?$/,
 ];
 app.use((req, res, next) => {
   if (ORPHAN_410_PATTERNS.some((p) => p.test(req.path))) {
