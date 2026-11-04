@@ -1576,6 +1576,7 @@ function phase0ArticleFrame(
 // sibling answers. Keyed by answer slug; every other answers page passes
 // undefined and renders byte-identical output.
 const ANSWER_EXTRA_SECTIONS: Record<string, string> = {
+  "student-housing-structural": `<section class="block"><div class="container"><h2>Who Designs the <em>Structure</em></h2><div class="prose"><p>The costs above are set by the structural system — podium, timber frame, and the amenity stack — long before finishes are discussed. The engineering behind those decisions is covered in this firm's guide to <a href="/industries/multifamily/student-housing/structural-engineering/">student housing structural engineer</a> services: podium transfer design, wood-over-concrete framing, and the schedule discipline a leased-up opening date demands.</p></div></div></section>`,
   "cleanroom-mep-engineering-requirements": `<section class="block"><div class="container"><h2>From requirements to a <em>stamped design</em></h2><div class="prose"><p>The requirements on this page — classification, air changes, pressurization, filtration — become a permit-ready set through <a href="/industries/life-science/cleanroom-mep-engineering/">cleanroom MEP engineering</a>: the dedicated scope where Apex Grid designs ISO 5 through ISO 8 cleanroom mechanical and electrical systems and documents them for certification and validation.</p></div></div></section>`,
   "airport-fuel-farm-design": `<section class="block"><div class="container"><h2>The storage facility behind the <em>fuel farm</em></h2><div class="prose"><p>The fuel farm tanks sit inside a storage facility engineered as its own scope — tank foundations and anchorage, secondary containment, leak detection, hazardous-location electrical, fire protection, and piping, with fire code, environmental regulations, and airport standards reconciled into one buildable facility. That facility-level scope is covered in our guide to <a href="/answers/airport-fuel-storage-facility-design/">airport fuel storage facility design</a>.</p></div></div></section>`,
   "industrial-fuel-storage-design": `<section class="block"><div class="container"><h2>Fuel storage at the <em>airport</em></h2><div class="prose"><p>Aviation fuel storage runs the same containment-first discipline — tank selection and sizing, secondary containment, leak detection, and fire protection — under an added overlay of airport standards, with the tank farm tied into hydrant and truck distribution. See how the scopes compare in our guide to <a href="/answers/airport-fuel-storage-facility-design/">aviation fuel tank design</a> for airport facilities.</p></div></div></section>`,
@@ -4262,6 +4263,7 @@ ${peStampBlock({
 </div></section>
 
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? maricopaCarrierSection() : ""}
+${state.slug === "north-dakota" && svc.slug === "mep-engineering" ? bismarckCarrierSection() : ""}
 ${state.slug === "texas" && svc.slug === "mep-engineering" ? texasCelinaStateSvcSection() : ""}
 ${state.slug === "texas" && svc.slug === "mep-engineering" ? texasProsperStateSvcSection() : ""}
 ${state.slug === "california" && svc.slug === "mep-engineering" ? californiaFresnoStateSvcSection() : ""}<section class="block"><div class="container faq">
@@ -4374,6 +4376,21 @@ function alpharettaDefenseSection(currentSlug: string): string {
   <h2>North Fulton <em>MEP Coverage</em></h2>
   <div class="prose"><p>North Fulton's corporate corridor runs through Alpharetta — the Windward Parkway office campuses, the technology stock along GA-400, and mixed-use districts such as Avalon keep mechanical, electrical, and plumbing scopes in steady rotation: tenant improvements, office build-outs, healthcare fit-outs, and building-system replacements. Our ${link("MEP engineering in Alpharetta")} coverage is built for that stock, with the city's own amendments and review path worked out on its page.</p>
   <p>Each North Fulton city reviews differently, so the local picture comes first: the code editions, local amendments, and permit sequencing an ${link("MEP engineer Alpharetta")} project designs to are spelled out on the Alpharetta page, alongside the office, healthcare, and mixed-use scopes most common there.</p></div>
+</div></section>`;
+}
+
+
+/** Goodyear structural-permit defense (guard batch 2026-11-03-1409):
+ *  "structural engineer for permit in goodyear" fell 8 -> null on the
+ *  Goodyear city page (1,151 words; the intent phrase family thin).
+ *  ChatGPT consult 2026-11-03: APPROVE. City-page carrier block in the
+ *  alpharettaCarrierSection idiom, gated on state/city slugs. */
+function goodyearCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>A Structural Engineer for Permit in Goodyear: <em>What the Submittal Actually Needs</em></h2>
+  <div class="prose"><p>Goodyear is building at a desert-city pace — Civic Square, the GSQ district, Estrella, and the logistics corridor along I-10 — and every one of those projects passes through the same gate: a structural set the city's reviewers can approve without a second cycle. A structural engineer for permit in Goodyear work starts before the first calculation: footing design on Sonoran soils (caliche, expansive pockets, and the drainage patterns that cross desert lots), lateral design for the building's actual occupancy, and details drawn the way Maricopa County-area framers build them.</p>
+  <p>The permit pattern that succeeds here is consistent. Calculations arrive complete and indexed to the drawings. Deferred submittals — trusses, steel stairs, specialty connections — are listed and tracked, not discovered by the reviewer. And the engineer who seals the set is reachable when the plan reviewer calls, because a same-day answer to a structural comment is worth a week of queue time. Proximity to Luke Air Force Base adds height and noise considerations on the city's north side, and the warehouse and data-support buildings along the I-10 corridor add tilt-panel and high-pile storage questions that a generalist set often misses.</p>
+  <p>This firm's Goodyear service is delivered from inside the market: structural engineering for Goodyear permits is sealed by an Arizona-licensed PE, coordinated with the project's MEP and civil sets, and supported through the comment cycle until the permit issues.</p></div>
 </div></section>`;
 }
 
@@ -4623,6 +4640,24 @@ function maricopaDefenseSection(currentSlug: string): string {
   <h2>Maricopa County <em>MEP Coverage</em></h2>
   <div class="prose"><p>Maricopa County is one shared design and permitting market: the Phoenix metro's office, medical, retail, hospitality, and light-industrial stock runs across Phoenix, Scottsdale, Tempe, Mesa, Chandler, Gilbert, Glendale, and Peoria, and the mechanical, electrical, and plumbing scopes follow the buildings across city lines. Our ${link(a1)} coverage sets out that shared scope in one place — the county-level picture behind the city pages, from desert cooling loads to the way each city's review path differs.</p>
   <p>Projects inside the incorporated cities permit through those cities' own development departments, while Maricopa County Planning &amp; Development reviews work in the county's unincorporated areas — so the county frame comes first, and the city detail follows it. The adopted code editions, review sequencing, and project types covered by ${link(a2)} are laid out on the county page.</p></div>
+</div></section>`;
+}
+
+
+/** Bismarck ND hub defense (guard batch 2026-11-03-1409):
+ *  "mep engineering company bismarck" fell 9 -> null on the North Dakota
+ *  state MEP hub (steady 9 across snapshots -04/-06/-09/-14, null at -15;
+ *  best_position 2). Measured gap (live, raw HTML): hub 1,271 visible words
+ *  with the "mep engineering company" phrase family x0 and "Bismarck" only
+ *  x4 against Fargo x10 — the hub under-serves its own capital city. ND
+ *  renders via this statePage/servicePage template (live markers verified),
+ *  NOT batch2StatePage. ChatGPT consult 2026-11-03 (APPROVE; record
+ *  guard-batch-1409-addendum-consult). Section in the Maricopa T4 idiom. */
+function bismarckCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The MEP Engineering Company Bismarck Owners and Agencies <em>Actually Call</em></h2>
+  <div class="prose"><p>Bismarck is the capital city, and its engineering demand follows the seat of government: state agency buildings and renovations around the Capitol grounds, the Sanford and CHI St. Alexius medical corridor, energy-sector offices and support facilities for the Bakken economy, and Missouri River corridor commercial growth across south Bismarck and Mandan. An MEP engineering company Bismarck project teams can hold accountable has to be licensed in North Dakota, fluent in state procurement and review, and built for the northern plains — design temperatures that punish marginal mechanical selections, snow and wind loads that drive every roof decision, and standby power sized for outages that arrive with the weather.</p>
+  <p>The work pattern is steady rather than speculative: hospital and clinic expansions, school and university facilities for Bismarck State College and the University of Mary, civic buildings, and the warehouses and shops that serve the energy field. This MEP engineering company in Bismarck delivers mechanical, electrical, and plumbing as one sealed set — coordinated with the structural design, priced from complete documents, and supported through the state's review process by the engineers who drew it.</p></div>
 </div></section>`;
 }
 
@@ -4972,6 +5007,59 @@ function coldStorageLinkSection(sourceKey: string): string {
   }
 }
 
+
+/** Guard batch 2026-11-03-1409 industry sections:
+ *  "aviation engineering mep" fell 6 -> null (carrier 699 words, exact
+ *  phrase x0, "aviation engineering" x1) — carrier deepening plus a
+ *  same-family support anchor from the aviation structural sibling.
+ *  "student housing structural engineer" fell 1 -> 17 with an attribution
+ *  flip (industry carrier in -09, answers page ranking in -14; the two
+ *  pages carried ZERO cross-links) — carrier deepening plus mutual
+ *  cross-links (the answers-side link rides ANSWER_EXTRA_SECTIONS).
+ *  "tire plant engineering" fell 6 -> null on a healthy answers carrier
+ *  (1,108 words, phrase x3, best_position 2) — SUPPORT only: descriptive
+ *  anchors from the two manufacturing discipline pages, no carrier change.
+ *  ChatGPT consult 2026-11-03: APPROVE (aviation, student housing),
+ *  SUPPORT approved (tire). Idiom: coldStorageDefenseForIndustryPage. */
+function guard1409IndustrySection(page: IndustryDisciplinePage): string {
+  const key = page.segments.join("/");
+  if (key === "aviation/mep-engineering") {
+    return `<section class="block"><div class="container">
+  <h2>Aviation Engineering MEP: <em>Hangars, Terminals, and the Facilities Between</em></h2>
+  <div class="prose"><p>Aviation engineering MEP is building-services engineering where the building is only half the project. A hangar's mechanical design turns on door size and infiltration: a 200-foot clear-span door changes the heating, ventilation, and freeze-protection calculation every time it opens, and the fire-protection design follows NFPA 409 foam and drainage requirements that ordinary commercial work never meets. Terminal and concourse work runs the other way — high occupant loads, concession kitchens, and baggage systems on a 24-hour operating cycle, renovated in phases while flights continue.</p>
+  <p>Between the two sits the support estate: FBO terminals, flight schools, maintenance and repair hangars, cargo and logistics buildings, fuel farms, and airfield electrical vaults. Each carries its own code stack — FAA advisory circulars on the airfield side, state and local amendments on the building side, and Part 139 obligations where a certificated airport is involved. The MEP engineer's job is to hold both stacks at once: airfield lighting and signage power coordinated with the civil design, hangar ventilation interlocked with fuel-system safety, and standby power sized for the loads that cannot go dark.</p>
+  <p>This firm's aviation engineering MEP work is delivered the way airports buy it: one team for mechanical, electrical, and plumbing, sealed in the state where the airfield sits, and scheduled around operations — night and phased work planned into the documents, not improvised in the field.</p></div>
+</div></section>`;
+  }
+  if (key === "aviation/structural-engineering") {
+    return `<section class="block"><div class="container">
+  <h2>The Systems Inside <em>the Structure</em></h2>
+  <div class="prose"><p>A hangar frame is designed around the systems it carries — door machinery, crane rails, ventilation, and fire protection all hang from the structure. The services counterpart to this page's structural work is <a href="/industries/aviation/mep-engineering/">aviation engineering MEP</a>: hangar ventilation and freeze protection, terminal mechanical and electrical design, and airfield support facilities engineered as one sealed set.</p></div>
+</div></section>`;
+  }
+  if (key === "multifamily/student-housing/structural-engineering") {
+    return `<section class="block"><div class="container">
+  <h2>Structural Engineering for Student Housing: <em>Podium, Timber, and the Amenity Stack</em></h2>
+  <div class="prose"><p>Student housing is a structural balancing act. The market standard — four or five stories of wood framing over a concrete podium — is chosen for cost per bed, and it concentrates every hard problem in one building: transfer conditions at the podium, corridor and shaft walls that must align across five different unit plans, and amenity and leasing levels whose column-free spans fight the residential grid above. A student housing structural engineer designs that stack as one system, because a late change to the unit mix moves shear walls on every floor.</p>
+  <p>The second problem is time. Student housing is leased a full academic year before it opens, so the structural schedule is immovable in a way ordinary multifamily is not: foundations release early, the podium pour sequence drives the frame, and every RFI delay is measured against a move-in date printed in leasing brochures. The third is durability — buildings full of first-time renters are maintained hard, and the structural details that survive are the ones with water managed at every balcony, corridor, and parking interface.</p>
+  <p>This firm's student housing structural engineering is sealed in the state where the project sits and coordinated with the architectural and MEP sets from the first schematic pass — the podium is priced with the frame, not after it. The cost and scoping questions behind that work are answered in our <a href="/answers/student-housing-structural/">student housing structural questions, answered</a> guide.</p></div>
+</div></section>`;
+  }
+  if (key === "manufacturing/mep-engineering") {
+    return `<section class="block"><div class="container">
+  <h2>Process Plants: <em>the Tire and Rubber Case</em></h2>
+  <div class="prose"><p>One manufacturing class concentrates every process-utility problem on this page into a single building: the tire plant, where mixing, curing presses, and inspection lines drive steam, hydraulics, ventilation, and heavy electrical demand in one footprint. That specialty is covered in depth in our <a href="/answers/tire-manufacturing-plant-design/">tire plant engineering</a> guide — plant layout, press foundations, and the utility systems a tire facility is permitted around.</p></div>
+</div></section>`;
+  }
+  if (key === "manufacturing/structural-engineering") {
+    return `<section class="block"><div class="container">
+  <h2>Heavy Process <em>Structures</em></h2>
+  <div class="prose"><p>The heaviest structural problems in manufacturing sit under process equipment — curing presses, mixers, and monorail systems whose loads and vibration decide the foundation design. Our guide to <a href="/answers/tire-manufacturing-plant-design/">engineering for tire manufacturing plants</a> works through that case in full: press pits, equipment foundations, and the building frame a tire plant is designed around.</p></div>
+</div></section>`;
+  }
+  return "";
+}
+
 function coldStorageDefenseForIndustryPage(page: IndustryDisciplinePage): string {
   const key = page.segments.join("/");
   if (key === "cold-storage/mep-engineering") return coldStorageCarrierSection();
@@ -5312,6 +5400,7 @@ ${state.slug === "south-dakota" && city.slug === "brookings" ? brookingsHubSecti
 ${state.slug === "georgia" && GA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? georgiaDefenseSection(city.slug) : ""}
 ${state.slug === "georgia" && ALPHA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? alpharettaDefenseSection(city.slug) : ""}
 ${state.slug === "georgia" && city.slug === "alpharetta" ? alpharettaCarrierSection() : ""}
+${state.slug === "arizona" && city.slug === "goodyear" ? goodyearCarrierSection() : ""}
 ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && city.slug === "queen-creek" ? queenCreekHubSection() : ""}
@@ -6779,6 +6868,7 @@ ${breadcrumb(crumbs)}
 ${cleanroomDefenseForIndustryPage(page)}
 
 ${coldStorageDefenseForIndustryPage(page)}
+    ${guard1409IndustrySection(page)}
 
 <section class="block"><div class="container">
   <h2>Why Apex Grid for <em>${esc(page.disciplineLabel)}</em>?</h2>
@@ -6830,6 +6920,33 @@ function toTitle(slug: string): string {
 }
 
 // ─── Location × Service Pages ─────────────────────────────────────────────
+
+
+/** Guard batch 2026-11-03-1409 location-service carriers:
+ *  "mep engineer evansville" fell 2 -> 38 (carrier /locations/indiana/
+ *  evansville/mep-engineering/: 1,171 words, exact phrase x0) and
+ *  "mep engineering firm arlington" fell 2 -> 24 (carrier 801 words,
+ *  "mep engineering firm" x0; the 2026-10-30 link append is already in
+ *  place — this is the carrier-deepening second lever). ChatGPT consult
+ *  2026-11-03: APPROVE both. Gated on the locationServicePage triple. */
+function guard1409LocSvcSection(page: LocationServicePage): string {
+  const key = `${page.stateSlug}/${page.citySlug}/${page.serviceSlug}`;
+  if (key === "indiana/evansville/mep-engineering") {
+    return `<section class="block"><div class="container">
+  <h2>An MEP Engineer in Evansville Who <em>Seals in Indiana</em></h2>
+  <div class="prose"><p>Evansville's building stock runs from the riverfront to the medical district to the industrial east side, and each zone asks different things of its MEP design. Hospital and clinic work around the Deaconess campuses is ventilation- and redundancy-led: air changes, pressure relationships, and standby power that cannot blink. The manufacturing base — plastics, automotive supply, and food processing along the Ohio River corridor — asks for process utilities, compressed air, and electrical capacity that can grow a line at a time. Downtown and university work adds renovation of older buildings whose existing systems have to be surveyed before they can be extended.</p>
+  <p>An MEP engineer Evansville owners can use end-to-end has to cover all three patterns from one office, because the same client often owns in two zones at once. This firm's Evansville work is mechanical, electrical, and plumbing under one roof, sealed by an Indiana-licensed PE, and coordinated with the structural set so a rooftop unit never lands on a beam that was not designed for it.</p></div>
+</div></section>`;
+  }
+  if (key === "texas/arlington/mep-engineering") {
+    return `<section class="block"><div class="container">
+  <h2>An MEP Engineering Firm in Arlington Built for the <em>Entertainment District's Pace</em></h2>
+  <div class="prose"><p>Arlington builds big and on deadlines: the entertainment district's venues and hospitality, the stadium-adjacent restaurant and retail work, the University of Texas at Arlington's growth, and the industrial base anchored by the GM assembly plant all run on opening dates that do not move. An MEP engineering firm Arlington owners call for that work is judged on two things — whether the documents are complete enough to price and permit in one pass, and whether the firm can staff a revision at the speed a venue schedule demands.</p>
+  <p>The technical pattern is just as specific. Assembly occupancies drive smoke control, emergency power, and kitchen exhaust design. Hospitality adds 24-hour domestic water and laundry loads. Industrial work adds process power and ventilation. This MEP engineering firm in Arlington delivers mechanical, electrical, and plumbing as one coordinated set, sealed in Texas, with the capacity to run a stadium-district restaurant and a warehouse expansion in the same week without either waiting on the other.</p></div>
+</div></section>`;
+  }
+  return "";
+}
 
 function locationServicePage(page: LocationServicePage, city?: CityData): string {
   const url = `/locations/${page.stateSlug}/${page.citySlug}/${page.serviceSlug}/`;
@@ -6913,6 +7030,7 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     </section>
 
     ${page.stateSlug === "arizona" && page.citySlug === "queen-creek" && page.serviceSlug === "mep-engineering" ? queenCreekCarrierSection() : ""}
+    ${guard1409LocSvcSection(page)}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleCarrierSection() : ""}
     ${page.stateSlug === "california" && page.citySlug === "fresno" && page.serviceSlug === "mep-engineering" ? fresnoCarrierSection() : ""}
     ${page.stateSlug === "california" && page.citySlug === "bakersfield" && page.serviceSlug === "mep-engineering" ? fresnoDefenseSection("bakersfield") : ""}
