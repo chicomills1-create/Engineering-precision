@@ -4284,7 +4284,7 @@ ${state.slug === "arizona" && svc.slug === "mep-engineering" ? arizonaMaricopaCi
 ${state.slug === "california" && svc.slug === "mep-engineering" ? californiaFresnoStateSvcSection() : ""}
 ${state.slug === "nebraska" && svc.slug === "mep-engineering" ? nebraskaMepfOwnerSection() : ""}
 ${state.slug === "illinois" && svc.slug === "civil-engineering" ? illinoisCivilPermitOwnerSection() : ""}
-${state.slug === "missouri" && svc.slug === "mep-engineering" ? missouriMaconStateSvcSection() : ""}<section class="block"><div class="container faq">
+${state.slug === "missouri" && svc.slug === "mep-engineering" ? missouriMaconStateSvcSection() : ""}${state.slug === "colorado" && svc.slug === "civil-engineering" ? coloradoMontroseStateSvcSection() : ""}<section class="block"><div class="container faq">
   <h2>${esc(state.name)} <em>FAQs</em></h2>
   ${state.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="a">${esc(f.a)}</div></details>`).join("")}
 </div></section>
@@ -5164,6 +5164,56 @@ function maconDefenseSection(sourceSlug: string): string {
   return "";
 }
 
+/** Wave-5 Defense Cures (2026-11-05, Strike 44): editorial support INTO
+ *  the fallen Apex carrier "civil engineering in montrose" #9 ->
+ *  unranked (cityLitePage city hub). Census (raw HTML): carrier 1,174w,
+ *  exact phrase x0, "montrose county" x0, "uncompahgre" x0, editorial
+ *  inbound ZERO — the CO state hub lists the city as furniture only,
+ *  the CO civil state page and both Western Slope siblings never
+ *  mention Montrose. The Macon shallow-template pattern on every axis.
+ *  Copy traces to the carrier's published facts (ACS population
+ *  ~21,044, Montrose County seat, US-50/US-550 junction, Uncompahgre
+ *  River valley) + Colorado civic facts. */
+function montroseCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Civil Engineering in Montrose: <em>Valley Floor, Working Water</em></h2>
+  <div class="prose"><p>Civil engineering in Montrose starts with the valley. The city sits on the floor of the Uncompahgre River valley in Montrose County, where irrigated farmland is converting to subdivisions, highway commercial, and light industrial ground — and where the canals and laterals of the valley's irrigation system cross parcels that look empty on a plat. Site civil here is water first: grading that respects live irrigation, drainage that handles high-desert cloudbursts on dry soils, and stormwater design that meets City of Montrose standards and Colorado water-quality expectations.</p>
+  <p>Apex Grid Engineering delivers that scope as part of one PE-stamped set — subdivision infrastructure and lot grading, commercial site plans at the US 50 and US 550 junction, drainage reports and detention design, floodplain coordination along the Uncompahgre River, and utility extensions tied to the city's systems — sealed by the Colorado-licensed engineer in responsible charge and coordinated with the structural and MEP design of the buildings the site serves. Work outside city limits runs through Montrose County review on the same set. The conditions are the valley's own: expansive soils, intense summer storms, and freeze-thaw winters at 5,800 feet.</p></div>
+</div></section>`;
+}
+
+function coloradoMontroseStateSvcSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Civil Depth on the Western Slope: <em>Montrose</em></h2>
+  <div class="prose"><p>Statewide civil scope lands differently on the Western Slope, where Montrose — the Montrose County seat at the US 50 and US 550 junction — generates a steady run of subdivision, highway-commercial, and site-development work for the Uncompahgre Valley. The city-level picture, including its irrigation-country grading and drainage conditions and the city's own review path, is set out on our <a href="/locations/colorado/montrose/">civil engineering in Montrose</a> page; the site-civil scope behind it is the statewide scope carried on this page.</p></div>
+</div></section>`;
+}
+
+function coloradoMontroseHubSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Montrose: <em>the Uncompahgre Valley Anchor</em></h2>
+  <div class="prose"><p>Colorado's Front Range carries the volume, but the Western Slope's southern tier runs through Montrose — a county seat whose valley agriculture, highway junction, and steady growth produce site-civil work well beyond its population. How that work is scoped, designed, and permitted is covered on our <a href="/locations/colorado/montrose/">civil engineering in Montrose</a> page.</p></div>
+</div></section>`;
+}
+
+const MONTROSE_DEFENSE_SOURCE_SLUGS = new Set(["grand-junction", "durango"]);
+
+function montroseDefenseSection(sourceSlug: string): string {
+  if (sourceSlug === "grand-junction") {
+    return `<section class="block"><div class="container">
+  <h2>South on US 50: <em>Montrose</em></h2>
+  <div class="prose"><p>Grand Junction anchors the Grand Valley; sixty miles southeast on US 50, Montrose anchors the Uncompahgre — and the two valleys share builders, soils questions, and high-desert drainage conditions. The county seat's fuller statement of site-civil scope, project types, and permitting is on our <a href="/locations/colorado/montrose/">civil engineering in Montrose</a> page.</p></div>
+</div></section>`;
+  }
+  if (sourceSlug === "durango") {
+    return `<section class="block"><div class="container">
+  <h2>North on US 550: <em>Montrose</em></h2>
+  <div class="prose"><p>Durango and Montrose sit on the same corridor — US 550 over the Million Dollar Highway — and projects move between the two markets with the same teams. North of the passes, our <a href="/locations/colorado/montrose/">civil engineering in Montrose</a> page carries the Uncompahgre Valley's scope: subdivision infrastructure, drainage and detention, and floodplain work, sealed on the same one-set basis as this page.</p></div>
+</div></section>`;
+  }
+  return "";
+}
+
 /** Wave-2 Defense Cures (2026-11-04, Strikes 17-19): editorial support
  *  INTO three fallen Apex carriers — "mep engineer bismarck" #2 -> 23,
  *  "mep engineer billings" #6 -> 27, "mep engineer maricopa" #9 ->
@@ -5844,6 +5894,7 @@ ${state.slug === "texas" && ROCKWALL_DEFENSE_SOURCE_SLUGS.has(city.slug) ? rockw
 ${state.slug === "north-dakota" && BISMARCK_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? bismarckCityDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaCityDefenseSection(city.slug) : ""}
 ${state.slug === "missouri" && MACON_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maconDefenseSection(city.slug) : ""}
+${state.slug === "colorado" && MONTROSE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? montroseDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && city.slug === "broomfield" ? broomfieldCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "celina" ? celinaCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "prosper" ? prosperCarrierSection() : ""}
@@ -5851,6 +5902,7 @@ ${state.slug === "texas" && city.slug === "rockwall" ? rockwallCarrierSection() 
 ${state.slug === "north-dakota" && city.slug === "bismarck" ? bismarckCityCarrierSection() : ""}
 ${state.slug === "arizona" && city.slug === "maricopa" ? maricopaCityCarrierSection() : ""}
 ${state.slug === "missouri" && city.slug === "macon" ? maconCarrierSection() : ""}
+${state.slug === "colorado" && city.slug === "montrose" ? montroseCarrierSection() : ""}
 <section class="block"><div class="container">
   <h2>More <em>${esc(state.name)} Locations</em></h2>
   <div class="linkrow">${curatedInState
@@ -8949,6 +9001,7 @@ ${expansion.stateSlug === "nebraska" ? nebraskaMepfHubSection() : ""}
 ${expansion.stateSlug === "illinois" ? illinoisCivilPermitHubSection() : ""}
 ${expansion.stateSlug === "north-dakota" ? grandForksHubSupportSection() : ""}
 ${expansion.stateSlug === "missouri" ? missouriMaconHubSection() : ""}
+${expansion.stateSlug === "colorado" ? coloradoMontroseHubSection() : ""}
 <section class="block"><div class="container"><h2>Five researched <em>local services</em></h2><p class="prose">Each linked service is organized around the selected metro’s permit authority, code context, local physical conditions, typical project types, permit steps, official references, and responsible-professional boundaries. These pages are information resources, not local-office claims or guarantees of licensure, approval, schedule, or construction outcome.</p><div class="linkrow">${serviceLinks}</div></div></section>
 <section class="block"><div class="container"><h2>${esc(expansion.stateName)} <em>metros and services</em></h2><div class="grid2">${metroLinks}</div></div></section>
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
