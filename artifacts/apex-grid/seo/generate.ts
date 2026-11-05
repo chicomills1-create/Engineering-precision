@@ -7586,14 +7586,18 @@ function guard1409LocSvcSection(page: LocationServicePage): string {
 /** Drop-Verify Cure Train (2026-11-05): carrier deepening for the
  *  McKinney MEP child page — see the cure-train comment at
  *  mesaCarrierSection. Gated on the locationServicePage triple. */
-function mckinneyCarrierLocSvcSection(page: LocationServicePage): string {
-  const key = `${page.stateSlug}/${page.citySlug}/${page.serviceSlug}`;
-  if (key !== "texas/mckinney/mep-engineering") return "";
+function mckinneyCarrierHtml(): string {
   return `<section class="block"><div class="container">
   <h2>An <em>MEP Engineer</em> McKinney Project Teams Can Scope in One Pass</h2>
   <div class="prose"><p>Apex Grid Engineering works as an MEP engineer McKinney owners, developers, and general contractors can scope against one coordinated set: mechanical, electrical, and plumbing designed together and documented as a single package. McKinney's stock drives the specifics — Craig Ranch and the US-75 corridor's office, medical, and retail growth, the historic downtown core and Adriatica, and the logistics and light-industrial buildings following the rooftops across the county seat. Each pattern asks the same thing of its systems: mechanical sized to the real load, electrical from the service entrance through distribution and lighting, and plumbing for water, waste, and gas — engineered as one set, not three.</p>
   <p>Permitting runs through the City of McKinney on the IBC with local amendments — Texas carries no mandatory statewide commercial building code, so the governing editions are the city's own, confirmed with the permit office at project kickoff. The engineering is sequenced to that review: load calculations matched to the real fit-out, energy-code compliance documented with the set, and drawings reconciled across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted — the standard an MEP engineer McKinney reviewers can check as one submission instead of three partial ones.</p></div>
 </div></section>`;
+}
+
+function mckinneyCarrierLocSvcSection(page: LocationServicePage): string {
+  const key = `${page.stateSlug}/${page.citySlug}/${page.serviceSlug}`;
+  if (key !== "texas/mckinney/mep-engineering") return "";
+  return mckinneyCarrierHtml();
 }
 
 function locationServicePage(page: LocationServicePage, city?: CityData): string {
@@ -14028,6 +14032,7 @@ ${familyVisual("location", `Service location shown: ${city.name}, ${state.name}.
 
 ${state.slug === "california" && city.slug === "fresno" && svc.slug === "mep-engineering" ? fresnoCarrierSection() : ""}
 ${state.slug === "california" && city.slug === "bakersfield" && svc.slug === "mep-engineering" ? fresnoDefenseSection("bakersfield") : ""}
+${state.slug === "texas" && city.slug === "mckinney" && svc.slug === "mep-engineering" ? mckinneyCarrierHtml() : ""}
 <section class="block"><div class="container">
   <h2>${esc(city.name)} <em>Permitting &amp; Code</em> Snapshot</h2>
   <div class="statgrid">
@@ -14181,6 +14186,8 @@ ${state.slug === "georgia" && MARIETTA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mar
 ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && QC_DEFENSE_SOURCE_SLUGS.has(city.slug) ? queenCreekDefenseSection(city.slug) : ""}
+${state.slug === "georgia" && city.slug === "marietta" ? mariettaCarrierSection() : ""}
+${state.slug === "arizona" && city.slug === "mesa" ? mesaCarrierSection() : ""}
 ${state.slug === "arizona" && SCOTTSDALE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? scottsdaleDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && CELINA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? celinaDefenseSection(city.slug) : ""}
