@@ -3660,6 +3660,7 @@ ${familyVisual("location", `Service location shown: ${metro.representativeCity},
 <section class="block"><div class="container"><h2>How to use this <em>metro guide</em></h2><div class="prose"><p>${esc(metro.editorial.planningLens)}</p><p>${esc(metro.editorial.coordinationLens)}</p><p>This page uses the Census metro record for market context only. It does not invent a local permitting fact, identify an authority's current checklist, promise coverage, or substitute for a project intake and responsible professional review.</p></div></div></section>
 <section class="block"><div class="container"><h2>${esc(metro.representativeCity)} <em>engineering paths</em></h2><div class="grid2">${links}</div></div></section>
 ${metro.slug === "sioux-city-ia-ne-sd" ? siouxCityHubSection() : ""}
+${metro.slug === "charlotte-concord-gastonia-nc-sc" ? charlotteHubSection() : ""}
 <section class="block"><div class="container"><h2>Evidence before <em>design decisions</em></h2><div class="prose"><p>${esc(metro.editorial.documentationLens)}</p><p>${esc(metro.editorial.deliveryLens)}</p><p>For an initial review, gather the project address, scope narrative, current architectural backgrounds, existing-condition photographs or measurements, equipment information, site or geotechnical records where relevant, prior comments, and requested deliverables. The responsible professional identifies what is sufficient for the defined question.</p></div></div></section>
 <section class="block"><div class="container"><h2>2025 Census <em>source record</em></h2><div class="prose"><p>CBSA ${metro.cbsaCode} is ranked ${metro.rank} among the eligible Metro Code 2 records in the final annual 2025 BPS sheet, ordered by Total descending. “Total” is used as published by Census; it is not a forecast, project count, engineering volume, or promise of demand.</p><p><a href="${PHASE1_SOURCE_URL}" rel="noopener noreferrer">View the official Census BPS workbook (${PHASE1_SERVICE_SLUGS.length ? "MSA Units Ann" : "source"})</a></p></div></div></section>
 ${phase0FaqMarkup(faqs)}
@@ -3689,7 +3690,8 @@ const METRO_SERVICE_EXTRA_SECTIONS: Record<string, string> = {
   "cedar-rapids-ia/mep-engineering": `<section class="block"><div class="container"><h2>MEP engineering in <em>Sioux City</em></h2><div class="prose"><p>Iowa project teams working across the state's metros can use the companion guide for the tri-state metro. See <a href="/metros/sioux-city-ia-ne-sd/mep-engineering/">MEP engineering in Sioux City</a> for coordinated mechanical, electrical, and plumbing documents in the Sioux City, IA-NE-SD metro.</p></div></div></section>`,
   "sioux-city-ia-ne-sd/mep-engineering": `<section class="block"><div class="container"><h2>What MEP Engineering Scopes in <em>Sioux City</em></h2><div class="prose"><p>For MEP engineering, Sioux City, IA is three markets in one metro — Iowa, Nebraska, and South Dakota meet at the Missouri River, and the building stock follows the river. Downtown and the riverfront carry the commercial core: offices, civic buildings, hospitality, and historic warehouse stock converting to new uses. Along the river and the I-29 corridor sits the metro's industrial signature — food-processing and cold-storage plants in Sioux City, South Sioux City, and Dakota City, where the MEP scope is process-heavy: refrigeration support, ventilation and exhaust for washdown environments, heavy electrical service and motor loads, and utility coordination that starts from the process line rather than the floor plan. Hospitals and clinics, schools, and the warehousing and logistics stock filling in along I-29 round out the work. Existing-building work runs through all of it — plant expansions that cannot stop the line, warehouse conversions, hospital renovations phased around occupied floors.</p><p>The design itself is continental-climate work: heating-led through cold winters with deep frost, real cooling and dehumidification loads through humid summers, and snow and wind that bear on the rooftop equipment and its curbs. When a project team hires an MEP engineering company, Sioux City work also means settling which state's frame the project sits in before the first calculation — Iowa and Nebraska maintain state-level building and energy codes, while South Dakota leaves adoption to its local jurisdictions, so the governing edition, the energy path, and the review sequence are confirmed for the project address, across the river as readily as across the street. Apex Grid coordinates the mechanical, electrical, and plumbing scopes as one sealed set built against that confirmed basis — loads, services, and process demands reconciled on the drawings before the set is sealed, whichever state's reviewers will check it.</p></div></div></section>`,
   "sioux-city-ia-ne-sd/structural-engineering": `<section class="block"><div class="container"><h2>Systems the Structure <em>Carries</em></h2><div class="prose"><p>Sioux City's structural work carries unusual systems loads — refrigeration and process equipment over the food-processing floors, rooftop units set for snow country, and the utility runs an industrial corridor depends on. Those loads are decided in the mechanical and electrical design, which is why the structural set is coordinated against <a href="/metros/sioux-city-ia-ne-sd/mep-engineering/">MEP engineering in the Sioux City metro</a> from the first framing pass. The discipline scope itself — process utilities, washdown ventilation, service sizing, and controls for the same building stock — is set out in <a href="/metros/sioux-city-ia-ne-sd/mep-engineering/">Sioux City MEP engineering</a>.</p></div></div></section>`,
-  "charlotte-concord-gastonia-nc-sc/structural-engineering": `<section class="block"><div class="container"><h2>Structural engineering for a <em>Charlotte</em> building permit</h2><div class="prose"><p>Structural engineering for a Charlotte building permit starts with the question the project must answer: a new gravity load, a lateral change, an opening, a foundation condition, an equipment support, a repair, or another defined scope. The permit set has to show the complete load path, gravity and lateral, the foundation decisions behind it, and the details and design criteria the reviewer will check.</p><p>Send the project address, scope, current drawings, existing-condition evidence, prior comments, applicable authority information, and requested deliverables. The engineer confirms the existing evidence and design criteria before accepting responsibility for conclusions, and revisions are answered inside the same record when the review returns comments.</p><p>The authority having jurisdiction controls its checklist, interpretation, inspections, review, and approval — a metro guide cannot promise a local outcome. What Apex Grid Engineering controls is the engineering: licensed engineers review and stamp the structural work they are responsible for, so the Charlotte submission goes in complete, coordinated, and ready to be checked.</p></div></div></section>`,
+  "charlotte-concord-gastonia-nc-sc/structural-engineering": `<section class="block"><div class="container"><h2>A structural engineer for permit in <em>Charlotte</em>: what the set must show</h2><div class="prose"><p>Structural engineering for a Charlotte building permit starts with the question the project must answer: a new gravity load, a lateral change, an opening, a foundation condition, an equipment support, a repair, or another defined scope. The permit set has to show the complete load path, gravity and lateral, the foundation decisions behind it, and the details and design criteria the reviewer will check.</p><p>Send the project address, scope, current drawings, existing-condition evidence, prior comments, applicable authority information, and requested deliverables. The engineer confirms the existing evidence and design criteria before accepting responsibility for conclusions, and revisions are answered inside the same record when the review returns comments.</p><p>The authority having jurisdiction controls its checklist, interpretation, inspections, review, and approval — a metro guide cannot promise a local outcome. What Apex Grid Engineering controls is the engineering: licensed engineers review and stamp the structural work they are responsible for, so the Charlotte submission goes in complete, coordinated, and ready to be checked.</p><p>For project teams, the search for a structural engineer for permit in Charlotte usually starts after the design is already moving — an architect's set that needs its structural half, a tenant improvement whose loads changed, a repair that has to be documented before it can be priced. What a structural engineer for permit in Charlotte is hired to deliver in each case is the same thing: a sealed set whose load path, foundations, and details a Mecklenburg County or City of Charlotte reviewer can check without sending the project back for its engineering basis.</p></div></div></section>`,
+  "charlotte-concord-gastonia-nc-sc/mep-engineering": `<section class="block"><div class="container"><h2>The structural half of a <em>Charlotte</em> permit set</h2><div class="prose"><p>MEP documents and structural documents permit as one set: the rooftop unit lands on a frame, the electrical room hangs off a slab, and the reviewer checks the two halves against each other. The structural side of that set — load path, foundations, equipment support, and the details behind them — is set out on the companion guide for a <a href="/metros/charlotte-concord-gastonia-nc-sc/structural-engineering/">structural engineer for permit in Charlotte</a>, which also lays out the intake evidence the structural review starts from. Project teams scoping both halves use the two guides together: this page for the mechanical, electrical, and plumbing scope, and <a href="/metros/charlotte-concord-gastonia-nc-sc/structural-engineering/">Charlotte structural engineering</a> for the frame that carries it.</p></div></div></section>`
 };
 
 function phase1MetroServicePage(metro: Phase1Metro, service: Phase1ServiceSlug): string {
@@ -4280,6 +4282,7 @@ ${state.slug === "north-dakota" && svc.slug === "mep-engineering" ? bismarckCarr
 ${state.slug === "north-dakota" && svc.slug === "mep-engineering" ? grandForksStateSvcSection() : ""}
 ${state.slug === "texas" && svc.slug === "mep-engineering" ? texasCelinaStateSvcSection() : ""}
 ${state.slug === "texas" && svc.slug === "mep-engineering" ? texasProsperStateSvcSection() : ""}
+${state.slug === "texas" && svc.slug === "mep-engineering" ? texasMckinneyStateSvcSection() : ""}
 ${state.slug === "texas" && svc.slug === "mep-engineering" ? texasRockwallStateSvcSection() : ""}
 ${state.slug === "north-dakota" && svc.slug === "mep-engineering" ? northDakotaBismarckStateSvcSection() : ""}
 ${state.slug === "montana" && svc.slug === "mep-engineering" ? montanaBillingsStateSvcSection() : ""}
@@ -4435,6 +4438,103 @@ function mesaDefenseSection(currentSlug: string): string {
   <h2>East Valley <em>MEP Coverage</em></h2>
   <div class="prose"><p>The East Valley's project load concentrates in Mesa — downtown redevelopment, the Eastmark master-planned build-out, and the industrial and logistics stock around Phoenix-Mesa Gateway Airport all carry mechanical, electrical, and plumbing scopes, from tenant improvements to ground-up distribution and manufacturing space. Our ${link("MEP engineering in Mesa")} coverage handles that work under the City of Mesa's own permitting path, with the local code picture set out on the Mesa page.</p>
   <p>Mesa reviews on its own track, separate from Phoenix and the other Valley cities, so the local requirements come first: the adopted editions and amendments an ${link("MEP engineer Mesa")} project designs to, plus the healthcare, hospitality, and industrial scopes most common in the city, are spelled out on its page.</p></div>
+</div></section>`;
+}
+
+/** Drop-Verify Cure Train (2026-11-05): shallow-template cure for four
+ *  carriers confirmed dropped on live evidence (Nightwatch pair
+ *  20261105-04 -> -11; verification record DROP-VERIFY-2026-11-05.md).
+ *  MESA "mep engineer mesa" 5 -> null (REPEAT fall): the Strike-3
+ *  support cure persists live (7 source pages, 14 anchors incl. exact),
+ *  but the carrier itself carries the exact phrase ZERO times — the
+ *  on-carrier half of the cure set was never built. MARIETTA "mep
+ *  engineer marietta" 6 -> null: phrase x0 on carrier, ZERO editorial
+ *  inbound (orphan census: LIST-ONLY, net donor). MCKINNEY "mep
+ *  engineer mckinney" 10 -> null (PARTIAL: sibling terms still rank
+ *  #27/#36): the MEP child carrier is the thinnest Apex carrier
+ *  measured (899 visible words), every phrase form x0, and hub/sibling
+ *  support targets the city page, never the child. CHARLOTTE
+ *  "structural engineer for permit in charlotte" 7 -> null: phrase x0
+ *  on the metro structural carrier; one furniture cross-link only.
+ *  Cure set per carrier: exact phrase in visible copy >=3 natural
+ *  placements incl. one H2 (Goodyear reduced-clause craft), editorial
+ *  inbound from hub + siblings with varied anchors (Georgia-train
+ *  discipline: at most one exact-match anchor per source page), hub
+ *  support section. Copy traces to each carrier's own published facts
+ *  + civic geography only; no licensure claims added. Prose links
+ *  only; no self-links on carriers. */
+function mesaCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>An <em>MEP Engineer</em> Mesa Project Teams Can Scope in One Pass</h2>
+  <div class="prose"><p>Apex Grid Engineering works as an MEP engineer Mesa owners, developers, and general contractors can scope against one coordinated set: mechanical, electrical, and plumbing designed together and documented as a single package. Mesa's building stock drives the specifics — downtown and Main Street corridor redevelopment, the Eastmark master-planned growth on the city's east side, the industrial and logistics buildings around Phoenix-Mesa Gateway Airport, and the healthcare and education stock in between. Each pattern carries the same desert design basis: cooling-dominant mechanical loads, electrical service sized for rooftop plant and process power, and plumbing coordinated inside the same set rather than reconciled in the field.</p>
+  <p>Permitting runs through the City of Mesa's development review, with utility service in Salt River Project territory across most of the city. The engineering is sequenced to that review: load calculations matched to the real building, energy compliance documented with the set, and the three disciplines reconciled across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted. That is the working test an MEP engineer Mesa projects are judged by — one consistent set a reviewer can check without sending the disciplines back to be coordinated.</p></div>
+</div></section>`;
+}
+
+const MARIETTA_DEFENSE_SOURCE_SLUGS = new Set([
+  "atlanta", "roswell", "sandy-springs", "alpharetta", "dunwoody", "brookhaven",
+]);
+
+function mariettaCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>An <em>MEP Engineer</em> Marietta Project Teams Can Scope in One Pass</h2>
+  <div class="prose"><p>Apex Grid Engineering works as an MEP engineer Marietta owners, developers, and general contractors can scope against one coordinated set: mechanical, electrical, and plumbing designed together and documented as a single package. Marietta's stock drives the specifics — the Cumberland district's office and medical buildings at the county's commercial center, the Marietta Square and historic-district corridors, the Wellstar Kennestone medical campus area, and the contractor and light-industrial base that serves Dobbins Air Reserve Base and the I-75 corridor. Each pattern asks the same thing of its systems: mechanical sized to the real load, electrical from the service entrance through distribution and lighting, and plumbing for water, waste, and gas — reconciled on paper before they can collide in the field.</p>
+  <p>Permitting runs through the City of Marietta inside the city limits and Cobb County outside them, under the Georgia state minimum standard codes with the local amendments in force at submittal. The engineering is sequenced to that review: load calculations matched to the real fit-out, energy-code compliance documented with the set, and drawings coordinated across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted — the standard an MEP engineer Marietta reviewers expect, and the reason the set goes in as one package instead of three.</p></div>
+</div></section>`;
+}
+
+function mariettaDefenseSection(currentSlug: string): string {
+  if (currentSlug === "marietta") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/georgia/marietta/">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>Cobb County's Seat: <em>Marietta</em></h2>
+  <div class="prose"><p>Marietta anchors the western half of the North Metro board: it is the Cobb County seat, home to the Cumberland district's office and medical stock, the Wellstar Kennestone corridor, and the contractor base along I-75 — and its mechanical, electrical, and plumbing scope runs on the same coordinated-set standard this page documents. Our ${link("MEP engineering in Marietta")} page sets out that scope in full: the services available to Marietta projects, the building stock they serve, and the city and county review paths they permit through.</p>
+  <p>Teams working Cobb County end to end start from the county seat: the Marietta page documents the ${link("MEP engineer Marietta")} scope — systems designed together, sealed as one set, and sequenced to the review the project will actually face.</p></div>
+</div></section>`;
+}
+
+const MCKINNEY_DEFENSE_SOURCE_SLUGS = new Set([
+  "prosper", "celina",
+]);
+
+function mckinneyDefenseSection(currentSlug: string): string {
+  if (currentSlug === "mckinney") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/texas/mckinney/mep-engineering/">${anchor}</a>`;
+  if (currentSlug === "prosper") {
+    return `<section class="block"><div class="container">
+  <h2>East on US-380: <em>McKinney</em></h2>
+  <div class="prose"><p>Prosper's builders work the US-380 corridor in both directions, and the county seat at its eastern end is where the corridor's largest commercial scopes land — Craig Ranch, the US-75 corridor, and the medical and office stock around them. The systems scope for that work is set out on our ${link("MEP engineering in McKinney")} page: mechanical, electrical, and plumbing designed as one coordinated set for the project types the county seat builds, and the City of McKinney review path they permit through.</p></div>
+</div></section>`;
+  }
+  if (currentSlug === "celina") {
+    return `<section class="block"><div class="container">
+  <h2>The County Seat: <em>McKinney</em></h2>
+  <div class="prose"><p>Celina's growth permits against the same Collin County market McKinney anchors, and the builders running the northern tier scope the two cities as one run. When a project lands at the county seat, its systems scope — mechanical, electrical, and plumbing engineered together and submitted as one set — is covered by the ${link("MEP engineer McKinney")} page, where the services available to McKinney projects and the city's own permit picture are set out in full.</p></div>
+</div></section>`;
+  }
+  return `<section class="block"><div class="container">
+  <h2>The County Seat: <em>McKinney</em></h2>
+  <div class="prose"><p>McKinney is the Collin County seat and the northern DFW corridor's commercial anchor — Craig Ranch and the US-75 corridor, the historic downtown core, Adriatica, and the medical and logistics stock the rooftops keep pulling east. Our ${link("MEP engineering in McKinney")} coverage is set out on the city's MEP page: the mechanical, electrical, and plumbing services available to McKinney projects, the project types the city is building, and its own permit picture under the IBC with local amendments.</p>
+  <p>The corridor's teams scope from the county seat outward — Celina at the northern end, Prosper west on US-380, Frisco to the southwest. The ${link("MEP engineer McKinney")} page carries the systems side of that work: one coordinated set, sealed and sequenced to the City of McKinney review.</p></div>
+</div></section>`;
+}
+
+function texasMckinneyStateSvcSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The County Seat: <em>McKinney</em></h2>
+  <div class="prose"><p>Statewide MEP scope lands locally in the county seats, and Collin County's is McKinney — the northern metroplex's commercial anchor, where Craig Ranch, the US-75 corridor, and the county's medical and office stock each carry the full mechanical, electrical, and plumbing scope this page describes. The complete McKinney picture, including the services available there and the city's own permit path, is on our <a href="/locations/texas/mckinney/mep-engineering/">MEP engineering in McKinney</a> page; this page carries the statewide MEP scope it draws on.</p></div>
+</div></section>`;
+}
+
+function charlotteHubSection(): string {
+  const link = (anchor: string) =>
+    `<a href="/metros/charlotte-concord-gastonia-nc-sc/structural-engineering/">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>Charlotte's Structural <em>Permit Path</em></h2>
+  <div class="prose"><p>Structural questions decide more Charlotte permits than any other single scope: a new load path, a foundation condition, an equipment support, a repair that has to be engineered before it can be permitted. The metro's structural scope — what the set must show, the intake evidence the review starts from, and how the Charlotte and Mecklenburg County review paths divide the work — is set out in ${link("structural engineering for a Charlotte building permit")}, the hub's structural companion for this metro.</p>
+  <p>Teams coordinating the full set start from ${link("the Charlotte structural engineering guide")} for the frame and use this hub's service pages for the MEP, civil, and remaining scopes that permit alongside it — one coordinated package, checked as one set.</p></div>
 </div></section>`;
 }
 
@@ -5623,6 +5723,7 @@ ${priorityMarkets.length ? `<section class="block"><div class="container">
   ).join("")}</div>
 </div></section>` : ""}
 ${state.slug === "georgia" ? georgiaDefenseSection("") : ""}
+${state.slug === "georgia" ? mariettaDefenseSection("") : ""}
 ${state.slug === "arizona" ? mesaDefenseSection("") : ""}
 ${state.slug === "arizona" ? maricopaDefenseSection("") : ""}
 ${state.slug === "arizona" ? queenCreekDefenseSection("") : ""}
@@ -5630,6 +5731,7 @@ ${state.slug === "arizona" ? scottsdaleDefenseSection("") : ""}
 ${state.slug === "colorado" ? broomfieldDefenseSection("") : ""}
 ${state.slug === "texas" ? celinaDefenseSection("") : ""}
 ${state.slug === "texas" ? prosperDefenseSection("") : ""}
+${state.slug === "texas" ? mckinneyDefenseSection("") : ""}
 ${state.slug === "texas" ? rockwallDefenseSection("") : ""}
 ${state.slug === "north-dakota" ? bismarckCityDefenseSection("") : ""}
 ${state.slug === "arizona" ? maricopaCityDefenseSection("") : ""}
@@ -5917,14 +6019,18 @@ ${state.slug === "south-dakota" && city.slug === "brookings" ? brookingsHubSecti
 </div></section>
 ${state.slug === "georgia" && GA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? georgiaDefenseSection(city.slug) : ""}
 ${state.slug === "georgia" && ALPHA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? alpharettaDefenseSection(city.slug) : ""}
+${state.slug === "georgia" && MARIETTA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mariettaDefenseSection(city.slug) : ""}
 ${state.slug === "georgia" && city.slug === "alpharetta" ? alpharettaCarrierSection() : ""}
+${state.slug === "georgia" && city.slug === "marietta" ? mariettaCarrierSection() : ""}
 ${state.slug === "arizona" && city.slug === "goodyear" ? goodyearCarrierSection() : ""}
+${state.slug === "arizona" && city.slug === "mesa" ? mesaCarrierSection() : ""}
 ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && city.slug === "queen-creek" ? queenCreekHubSection() : ""}
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && CELINA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? celinaDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && PROSPER_DEFENSE_SOURCE_SLUGS.has(city.slug) ? prosperDefenseSection(city.slug) : ""}
+${state.slug === "texas" && MCKINNEY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mckinneyDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && ROCKWALL_DEFENSE_SOURCE_SLUGS.has(city.slug) ? rockwallDefenseSection(city.slug) : ""}
 ${state.slug === "north-dakota" && BISMARCK_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? bismarckCityDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaCityDefenseSection(city.slug) : ""}
@@ -7477,6 +7583,19 @@ function guard1409LocSvcSection(page: LocationServicePage): string {
   return "";
 }
 
+/** Drop-Verify Cure Train (2026-11-05): carrier deepening for the
+ *  McKinney MEP child page — see the cure-train comment at
+ *  mesaCarrierSection. Gated on the locationServicePage triple. */
+function mckinneyCarrierLocSvcSection(page: LocationServicePage): string {
+  const key = `${page.stateSlug}/${page.citySlug}/${page.serviceSlug}`;
+  if (key !== "texas/mckinney/mep-engineering") return "";
+  return `<section class="block"><div class="container">
+  <h2>An <em>MEP Engineer</em> McKinney Project Teams Can Scope in One Pass</h2>
+  <div class="prose"><p>Apex Grid Engineering works as an MEP engineer McKinney owners, developers, and general contractors can scope against one coordinated set: mechanical, electrical, and plumbing designed together and documented as a single package. McKinney's stock drives the specifics — Craig Ranch and the US-75 corridor's office, medical, and retail growth, the historic downtown core and Adriatica, and the logistics and light-industrial buildings following the rooftops across the county seat. Each pattern asks the same thing of its systems: mechanical sized to the real load, electrical from the service entrance through distribution and lighting, and plumbing for water, waste, and gas — engineered as one set, not three.</p>
+  <p>Permitting runs through the City of McKinney on the IBC with local amendments — Texas carries no mandatory statewide commercial building code, so the governing editions are the city's own, confirmed with the permit office at project kickoff. The engineering is sequenced to that review: load calculations matched to the real fit-out, energy-code compliance documented with the set, and drawings reconciled across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted — the standard an MEP engineer McKinney reviewers can check as one submission instead of three partial ones.</p></div>
+</div></section>`;
+}
+
 function locationServicePage(page: LocationServicePage, city?: CityData): string {
   const url = `/locations/${page.stateSlug}/${page.citySlug}/${page.serviceSlug}/`;
   const cityUrl = `/locations/${page.stateSlug}/${page.citySlug}/`;
@@ -7560,6 +7679,7 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
 
     ${page.stateSlug === "arizona" && page.citySlug === "queen-creek" && page.serviceSlug === "mep-engineering" ? queenCreekCarrierSection() : ""}
     ${guard1409LocSvcSection(page)}
+    ${mckinneyCarrierLocSvcSection(page)}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleCarrierSection() : ""}
     <section class="section section--white">
       <div class="container container--narrow">
@@ -9027,6 +9147,7 @@ ${breadcrumb(crumbs)}
 ${familyVisual("location", `Service location shown: ${expansion.stateName}.`)}
 ${expansion.hub.sections.map((section) => `<section class="block"><div class="container"><h2>${esc(section.heading)}</h2><div class="prose"><p>${esc(section.body)}</p></div></div></section>`).join("")}
 ${expansion.stateSlug === "georgia" ? georgiaDefenseSection("") : ""}
+${expansion.stateSlug === "georgia" ? mariettaDefenseSection("") : ""}
 ${expansion.stateSlug === "georgia" ? alpharettaDefenseSection("") : ""}
 ${expansion.stateSlug === "colorado" ? broomfieldDefenseSection("") : ""}
 ${expansion.stateSlug === "south-dakota" ? brookingsDefenseSection("") : ""}
@@ -14056,6 +14177,7 @@ ${specialtyLocationPages.length ? `<section class="block"><div class="container"
 </div></section>` : ""}
 ${state.slug === "georgia" && GA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? georgiaDefenseSection(city.slug) : ""}
 ${state.slug === "georgia" && ALPHA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? alpharettaDefenseSection(city.slug) : ""}
+${state.slug === "georgia" && MARIETTA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mariettaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && QC_DEFENSE_SOURCE_SLUGS.has(city.slug) ? queenCreekDefenseSection(city.slug) : ""}
@@ -14063,6 +14185,7 @@ ${state.slug === "arizona" && SCOTTSDALE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? s
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && CELINA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? celinaDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && PROSPER_DEFENSE_SOURCE_SLUGS.has(city.slug) ? prosperDefenseSection(city.slug) : ""}
+${state.slug === "texas" && MCKINNEY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mckinneyDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && ROCKWALL_DEFENSE_SOURCE_SLUGS.has(city.slug) ? rockwallDefenseSection(city.slug) : ""}
 ${state.slug === "north-dakota" && BISMARCK_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? bismarckCityDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaCityDefenseSection(city.slug) : ""}
