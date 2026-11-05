@@ -4287,7 +4287,7 @@ ${state.slug === "arizona" && svc.slug === "mep-engineering" ? arizonaMaricopaCi
 ${state.slug === "california" && svc.slug === "mep-engineering" ? californiaFresnoStateSvcSection() : ""}
 ${state.slug === "nebraska" && svc.slug === "mep-engineering" ? nebraskaMepfOwnerSection() : ""}
 ${state.slug === "illinois" && svc.slug === "civil-engineering" ? illinoisCivilPermitOwnerSection() : ""}
-${state.slug === "missouri" && svc.slug === "mep-engineering" ? missouriMaconStateSvcSection() : ""}${state.slug === "colorado" && svc.slug === "civil-engineering" ? coloradoMontroseStateSvcSection() : ""}<section class="block"><div class="container faq">
+${state.slug === "missouri" && svc.slug === "mep-engineering" ? missouriMaconStateSvcSection() : ""}${state.slug === "colorado" && svc.slug === "civil-engineering" ? coloradoMontroseStateSvcSection() : ""}${state.slug === "new-mexico" && svc.slug === "mep-engineering" ? newMexicoMepfOwnerSection() : ""}<section class="block"><div class="container faq">
   <h2>${esc(state.name)} <em>FAQs</em></h2>
   ${state.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="a">${esc(f.a)}</div></details>`).join("")}
 </div></section>
@@ -5165,6 +5165,38 @@ function maconDefenseSection(sourceSlug: string): string {
 </div></section>`;
   }
   return "";
+}
+
+/** Wave-5 Defense Cures (2026-11-05, Strike 46): editorial support INTO
+ *  the proven owner of "mepf services in new mexico" — #8 at nw-11/-15 on
+ *  /locations/new-mexico/santa-fe/, flipped at nw-16 to the cost-estimator
+ *  page at #24. Census (raw HTML): Santa Fe city page 1,088w, state MEP
+ *  page 1,232w, estimator 1,976w — the phrase and the word "mepf" appear
+ *  on NONE of them. Per the Strike 26 Nebraska precedent the owner is
+ *  the state MEP page; the estimator page is an intake surface and is
+ *  NOT built on. Copy traces to New Mexico civic facts (Construction
+ *  Industries Division review, Albuquerque/Santa Fe local doors, high-
+ *  desert altitude derating) in the Nebraska section's own structure. */
+function newMexicoMepfOwnerSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>MEPF in New Mexico: <em>Four Systems, One Sealed Set</em></h2>
+  <div class="prose"><p>MEPF services in New Mexico means the four building systems engineered together rather than traded off against each other: mechanical, electrical, plumbing, and fire protection, designed as one coordinated set and sealed by the licensed engineer in responsible charge. The fire-protection scope is what the F adds — sprinkler and standpipe design coordinated with the water supply actually available at the site, fire alarm interfaces carried through the electrical set, and the life-safety drawings reviewed as part of the same package instead of a separate afterthought permit.</p>
+  <p>The New Mexico frame has its own conditions. The state baseline runs through the Construction Industries Division, but plan review sits with the authority having jurisdiction: Albuquerque and Santa Fe administer their own review doors, and county and municipal reviewers elsewhere in the state work from their own adopted editions. The buildings add their own physics — high-desert altitude derates combustion and cooling equipment from Albuquerque to Santa Fe, water scarcity makes conservation a first-order plumbing requirement, and historic-district and adobe construction in Santa Fe constrains where systems can run. A coordinated MEPF set is what survives that review cleanly: loads, services, sprinkler hydraulics, and alarm zoning reconciled on the drawings, so a correction in one discipline does not reopen the other three. That is the standard this page's scope is delivered to — one team, one set, sealed for the jurisdiction the project actually sits in.</p></div>
+</div></section>`;
+}
+
+function newMexicoMepfHubSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Building Systems Across <em>New Mexico</em></h2>
+  <div class="prose"><p>Most New Mexico commercial work — the Albuquerque metro stock, Santa Fe's hospitality and institutional buildings, the industrial facilities of the southeast — is bought as one systems package, not four separate scopes. Our <a href="/locations/new-mexico/mep-engineering/">MEPF services in New Mexico</a> page sets out that package at the state level: mechanical, electrical, plumbing, and fire protection engineered as one sealed set, against the state baseline and the local amendments each reviewing authority applies. The metro pages below carry the same scope city by city.</p></div>
+</div></section>`;
+}
+
+function albuquerqueMepfSupportSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The Statewide <em>Systems Package</em></h2>
+  <div class="prose"><p>Albuquerque projects are usually the state's largest systems scopes — hospital and campus work, the metro's commercial core, industrial buildings along the river and the interstate corridors — and they are permitted as coordinated sets, fire protection included. The statewide statement of that scope, including how the four disciplines are reconciled before sealing and how altitude and local-amendment review are handled jurisdiction by jurisdiction, is on our <a href="/locations/new-mexico/mep-engineering/">MEPF services in New Mexico</a> page; this page carries the Albuquerque application of it.</p></div>
+</div></section>`;
 }
 
 /** Wave-5 Defense Cures (2026-11-05, Strike 44): editorial support INTO
@@ -9005,6 +9037,7 @@ ${expansion.stateSlug === "illinois" ? illinoisCivilPermitHubSection() : ""}
 ${expansion.stateSlug === "north-dakota" ? grandForksHubSupportSection() : ""}
 ${expansion.stateSlug === "missouri" ? missouriMaconHubSection() : ""}
 ${expansion.stateSlug === "colorado" ? coloradoMontroseHubSection() : ""}
+${expansion.stateSlug === "new-mexico" ? newMexicoMepfHubSection() : ""}
 <section class="block"><div class="container"><h2>Five researched <em>local services</em></h2><p class="prose">Each linked service is organized around the selected metro’s permit authority, code context, local physical conditions, typical project types, permit steps, official references, and responsible-professional boundaries. These pages are information resources, not local-office claims or guarantees of licensure, approval, schedule, or construction outcome.</p><div class="linkrow">${serviceLinks}</div></div></section>
 <section class="block"><div class="container"><h2>${esc(expansion.stateName)} <em>metros and services</em></h2><div class="grid2">${metroLinks}</div></div></section>
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
@@ -9098,6 +9131,7 @@ ${expansion.stateSlug === "south-dakota" && metro.slug === "sioux-falls" && serv
 ${expansion.stateSlug === "south-dakota" && service.serviceSlug === "mep-engineering" ? (metro.slug === "brookings" ? brookingsCarrierSection() : brookingsDefenseSection(metro.slug)) : ""}
 ${expansion.stateSlug === "montana" && service.serviceSlug === "mep-engineering" ? (metro.slug === "billings" ? billingsCarrierSection() : billingsDefenseSection(metro.slug)) : ""}
 ${expansion.stateSlug === "nebraska" && metro.slug === "omaha" && service.serviceSlug === "mep-engineering" ? omahaMepfSupportSection() : ""}
+${expansion.stateSlug === "new-mexico" && metro.slug === "albuquerque" && service.serviceSlug === "mep-engineering" ? albuquerqueMepfSupportSection() : ""}
 ${expansion.stateSlug === "nebraska" && metro.slug === "lincoln" && service.serviceSlug === "mep-engineering" ? lincolnMepfSupportSection() : ""}
 ${expansion.stateSlug === "illinois" && metro.slug === "chicago" && service.serviceSlug === "civil-engineering" ? chicagoCivilPermitSupportSection() : ""}
 ${expansion.stateSlug === "illinois" && metro.slug === "peoria" && service.serviceSlug === "civil-engineering" ? peoriaCivilPermitSupportSection() : ""}
