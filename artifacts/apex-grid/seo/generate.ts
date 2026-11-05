@@ -5024,6 +5024,31 @@ function rockwallCarrierSection(): string {
 </div></section>`;
 }
 
+/** Defense follow-up (2026-11-05): "mep engineer rockwall" #7 ->
+ *  unranked (guard pair nw-14 -> nw-15) — a REPEAT fall with the
+ *  Strike 31 cure fully live: carrier 1,424w, TX hub anchors 3,
+ *  TX MEP state-page paragraph, Rowlett + McKinney sibling anchors
+ *  all verified in place on raw HTML, but the exact contiguous
+ *  phrase was left x0 by Strike 31 design ("rides the carrier
+ *  topically") — and the firm-form term fell on the same carrier
+ *  between the census and nw-14 despite its x1 placement. The Mesa
+ *  cure of the same morning closed the identical profile (fall with
+ *  support live; missing half = on-carrier exact phrase) with H2 +
+ *  prose placement; this section mirrors it in cityLitePage beside
+ *  the Strike 31 gate: exact form x0 -> x3 (H2 + prose x2), firm
+ *  form x1 -> x2. Copy traces to the carrier's published facts only
+ *  (county seat of the state's smallest county, Lake Ray Hubbard
+ *  eastern shore, SH-66 / I-30 corridors, Rockwall ISD, hospital
+ *  district, The Harbor, City of Rockwall review on the IBC with
+ *  local amendments). */
+function rockwallExactPhraseSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>An <em>MEP Engineer</em> Rockwall Project Teams Can Scope in One Pass</h2>
+  <div class="prose"><p>Apex Grid Engineering works as an MEP engineer Rockwall owners, developers, and general contractors can scope against one coordinated set: mechanical, electrical, and plumbing designed together and documented as a single package. The demand is the growth itself — Rockwall is the county seat of the state's smallest county and one of its fastest-growing, and the work follows the rooftops along the eastern shore of Lake Ray Hubbard: Rockwall ISD campuses, medical and professional space following the hospital district, The Harbor's lakefront retail and restaurant fit-outs, and the office and flex space building out along the SH-66 and I-30 corridors. Each of those patterns asks the same thing of its systems: mechanical sized to the real load, electrical from the service entrance through distribution and lighting, and plumbing for water, waste, and gas.</p>
+  <p>The review those systems answer to is the City of Rockwall's, run on the IBC with the city's own local amendments. The engineering is sequenced to it: load calculations matched to the real fit-out, energy-code compliance documented with the set, and the three disciplines reconciled across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted. That is the working test an MEP engineer Rockwall projects are judged by — one consistent set the reviewer can check without sending the disciplines back to be coordinated, and the standard an MEP engineering firm Rockwall teams scope against when the set has to go in whole.</p></div>
+</div></section>`;
+}
+
 function texasRockwallStateSvcSection(): string {
   return `<section class="block"><div class="container">
   <h2>The Lake Ray Hubbard Shore: <em>Rockwall</em></h2>
@@ -6040,6 +6065,7 @@ ${state.slug === "colorado" && city.slug === "broomfield" ? broomfieldCarrierSec
 ${state.slug === "texas" && city.slug === "celina" ? celinaCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "prosper" ? prosperCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "rockwall" ? rockwallCarrierSection() : ""}
+${state.slug === "texas" && city.slug === "rockwall" ? rockwallExactPhraseSection() : ""}
 ${state.slug === "north-dakota" && city.slug === "bismarck" ? bismarckCityCarrierSection() : ""}
 ${state.slug === "arizona" && city.slug === "maricopa" ? maricopaCityCarrierSection() : ""}
 ${state.slug === "missouri" && city.slug === "macon" ? maconCarrierSection() : ""}
