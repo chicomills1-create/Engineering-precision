@@ -7564,14 +7564,25 @@ function toTitle(slug: string): string {
  *  "mep engineering firm" x0; the 2026-10-30 link append is already in
  *  place — this is the carrier-deepening second lever). ChatGPT consult
  *  2026-11-03: APPROVE both. Gated on the locationServicePage triple. */
-function guard1409LocSvcSection(page: LocationServicePage): string {
-  const key = `${page.stateSlug}/${page.citySlug}/${page.serviceSlug}`;
-  if (key === "indiana/evansville/mep-engineering") {
-    return `<section class="block"><div class="container">
+/** Evansville carrier section (guard batch 2026-11-03-1409) as a shared
+ *  helper, 2026-11-05 producer correction: the Evansville MEP carrier
+ *  (/locations/indiana/evansville/mep-engineering/) renders via
+ *  batch2ServicePage (batch3-indiana data), NOT locationServicePage, so the
+ *  guard's LSP gate never fired on it (live grep x0 while its Arlington
+ *  sibling rendered). Same pattern as mckinneyCarrierHtml: one helper,
+ *  gated from both producers. */
+function evansvilleCarrierHtml(): string {
+  return `<section class="block"><div class="container">
   <h2>An MEP Engineer in Evansville Who <em>Seals in Indiana</em></h2>
   <div class="prose"><p>Evansville's building stock runs from the riverfront to the medical district to the industrial east side, and each zone asks different things of its MEP design. Hospital and clinic work around the Deaconess campuses is ventilation- and redundancy-led: air changes, pressure relationships, and standby power that cannot blink. The manufacturing base — plastics, automotive supply, and food processing along the Ohio River corridor — asks for process utilities, compressed air, and electrical capacity that can grow a line at a time. Downtown and university work adds renovation of older buildings whose existing systems have to be surveyed before they can be extended.</p>
   <p>An MEP engineer Evansville owners can use end-to-end has to cover all three patterns from one office, because the same client often owns in two zones at once. This firm's Evansville work is mechanical, electrical, and plumbing under one roof, sealed by an Indiana-licensed PE, and coordinated with the structural set so a rooftop unit never lands on a beam that was not designed for it.</p></div>
 </div></section>`;
+}
+
+function guard1409LocSvcSection(page: LocationServicePage): string {
+  const key = `${page.stateSlug}/${page.citySlug}/${page.serviceSlug}`;
+  if (key === "indiana/evansville/mep-engineering") {
+    return evansvilleCarrierHtml();
   }
   if (key === "texas/arlington/mep-engineering") {
     return `<section class="block"><div class="container">
@@ -9262,6 +9273,7 @@ ${expansion.stateSlug === "illinois" && metro.slug === "chicago" && service.serv
 ${expansion.stateSlug === "illinois" && metro.slug === "peoria" && service.serviceSlug === "civil-engineering" ? peoriaCivilPermitSupportSection() : ""}
 ${expansion.stateSlug === "north-dakota" && metro.slug === "grand-forks" && service.serviceSlug === "mep-engineering" ? grandForksMepCarrierSection() : ""}
 ${expansion.stateSlug === "north-dakota" && metro.slug === "fargo" && service.serviceSlug === "mep-engineering" ? fargoGrandForksSupportSection() : ""}
+${expansion.stateSlug === "indiana" && metro.slug === "evansville" && service.serviceSlug === "mep-engineering" ? evansvilleCarrierHtml() : ""}
 <section class="block"><div class="container"><h2>Permit and engineering <em>steps</em></h2><ol class="scope">${service.permitSteps.map((step) => `<li>${esc(step)}</li>`).join("")}</ol></div></section>
 <section class="block"><div class="container faq"><h2>${esc(service.h1)} <em>FAQs</em></h2>${service.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
 <section class="block"><div class="container"><h2>All five ${esc(metro.name)} <em>services</em></h2><div class="linkrow">${localServiceLinks}</div></div></section>
