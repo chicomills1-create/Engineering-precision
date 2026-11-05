@@ -147,6 +147,8 @@ export const CIVIL_RESOURCE_ARTICLES: ResourceArticle[] = [
 <h3>Can a drainage plan reduce flooding on my property?</h3>
 <p>A well-designed system manages runoff to protect the site and neighbors, but it must be based on accurate survey and site data to perform as intended.</p>
 
+<p>The runoff calculations behind that system — hydrology, detention sizing, and treatment — belong to a discipline of their own: <a href="/resources/civil/what-is-stormwater-engineering/">storm water drainage engineering</a>, which our stormwater guide covers from the design storm to the drainage report.</p>
+
 <h2>Related Services</h2>
 <ul>
 <li><a href="/services/civil">Civil Engineering</a></li>
@@ -201,6 +203,8 @@ export const CIVIL_RESOURCE_ARTICLES: ResourceArticle[] = [
 
 <h3>How do I know if my project needs one?</h3>
 <p>Send us your project address and scope. We check the local thresholds and tell you whether a report is required and what it must include.</p>
+
+<p>What the report documents, end to end, is <a href="/resources/civil/what-is-stormwater-engineering/">storm water drainage engineering</a> — the hydrology, storage, and treatment design that keeps a developed site's runoff within its pre-development limits.</p>
 
 <h2>Related Services</h2>
 <ul>
@@ -456,6 +460,9 @@ export const CIVIL_RESOURCE_ARTICLES: ResourceArticle[] = [
 
 <h2>When Does Stormwater Engineering Apply?</h2>
 <p>It applies whenever development adds impervious area or disturbs land beyond local thresholds — new buildings, parking, additions, and redevelopment. Sites near sensitive waters or within regulated MS4 areas often face more stringent requirements. Because standards vary substantially between jurisdictions, we confirm which programs apply to your specific site early in design.</p>
+<h2>Storm Water Drainage Engineering in Practice</h2>
+<p>In practice, storm water drainage engineering is where the concepts on this page become a drainage design: the hydrology that sizes the system, the conveyance that moves runoff to it, and the facilities that hold and treat it. Drainage engineering starts with the storm — a design rainfall depth and duration from the local standard — and the watershed it falls on: areas, slopes, surfaces, and times of concentration resolved into peak flows by the rational method or a hydrograph model. Every inlet, pipe, and channel in the drainage plan is sized against those flows.</p>
+<p>The drainage report is the discipline's deliverable: it documents the hydrology, the detention sizing that keeps post-development discharge at or below pre-development rates, the water-quality treatment train, and the outlet works that release the stored storm water safely downstream. Where a site drains to a constrained system — an undersized storm sewer, a regulated watercourse, a combined MS4 outfall — the drainage design, not the building design, often sets the site plan: pond footprints, finished-floor elevations, and overflow paths are fixed before architecture begins. That is why storm water drainage engineering is scoped with the grading plan from the first site sketch rather than added at permitting.</p>
 
 <h2>Frequently Asked Questions</h2>
 <h3>What is the difference between detention and water quality?</h3>
