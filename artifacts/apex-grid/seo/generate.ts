@@ -5530,6 +5530,136 @@ function brookingsHubSection(): string {
 </div></section>`;
 }
 
+/** Hardening Wave 1 (2026-11-05): prevention cures for CRITICAL
+ *  full-signature carriers from the fragility register — city hub
+ *  family (cityLitePage). Register facts (raw HTML, canonical
+ *  counter): Carroll IA hub 1,165w with all five attached phrases
+ *  x0 and editorial inbound 0; Kenton Vale KY hub 1,192w, inbound 0
+ *  (its registered keyword is a quoted mismatch query — see the
+ *  Kenton Vale note below); Northbrook IL hub 1,180w with
+ *  "civil engineering permitting services illinois" x0 and inbound
+ *  0; Brookings SD hub 1,278w with "mep engineer brookings" x0
+ *  (the existing brookingsCarrierSection covers the MEP CHILD's
+ *  phrases, not the hub's). Copy traces to each carrier's own
+ *  published facts only. Anchor discipline per the Maricopa /
+ *  Marietta precedents: varied anchors, prose links only, support
+ *  flows within the hierarchy (state hub + sibling hubs). */
+function carrollCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The <em>Carroll IA Civil Engineer</em> Scope, in One Pass</h2>
+  <div class="prose"><p>Apex Grid Engineering works as the Carroll IA civil engineer of record on the scopes this market actually builds: site planning, grading, drainage, stormwater, and utility coordination for the commercial, institutional, and agricultural-industrial projects a market of roughly 10,200 people produces. The civil work does not stand alone: the same bench carries the structural and MEP sets behind it, so the Carroll IA engineer scope a project team hires here is one coordinated package — site, structure, and systems reconciled before submittal instead of in the field. Carroll IA environmental engineering rides the same package — stormwater documentation, energy documentation under the Iowa Energy Code, and the site record a reviewer checks against the jurisdiction's published standards — and Carroll Iowa environmental engineering questions, from drainage to floodplain, are answered from that same record.</p>
+  <p>Permitting in Iowa is largely local, and Carroll is no exception: cities and counties that have adopted the IBC run their own review, the State Fire Marshal reviews certain occupancies, and licensure runs through the Iowa Engineering and Land Surveying Examining Board. The design basis is just as specific — Climate Zone 5A, Seismic Design Category A, basic wind speeds around 105–115 mph with the 2020 derecho as the standing lesson in uplift and lateral robustness across open terrain, and ground snow loads around 25–30 psf. A Carroll Iowa engineer designs to those numbers, not to a template from another state, and a Carroll Iowa engineer who works this market carries its environmental record too: Carroll Iowa environmental engineering — drainage, stormwater, and energy documentation under the Iowa Energy Code — is checked against the local record before the set is sealed. Project teams hire the Carroll IA engineer scope as one package because the alternative — separate firms reconciling in the field — is where Iowa projects lose their schedule; the Carroll IA environmental engineering scope rides inside that package, with the Carroll IA civil engineer of record answering for the whole set in review.</p></div>
+</div></section>`;
+}
+
+const CARROLL_DEFENSE_SOURCE_SLUGS = new Set([
+  "lidderdale", "willey", "halbur", "glidden",
+]);
+
+function carrollDefenseSection(currentSlug: string): string {
+  if (currentSlug === "carroll") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/iowa/carroll/">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>Western Iowa's Anchor: <em>Carroll</em></h2>
+  <div class="prose"><p>Carroll is the anchor market of this part of western Iowa: a full-service county market whose commercial, institutional, and agricultural-industrial projects draw their engineering from one hub. Our ${link("Carroll IA civil engineer")} page sets out that hub in full — the disciplines available to Carroll projects, the Iowa design environment they are engineered against, and the local review path they permit through.</p>
+  <p>Teams working western Iowa end to end start from Carroll: the hub documents the ${link("civil engineering in Carroll")} scope — site, structural, and MEP sets designed together and sequenced to the review the project will actually face.</p></div>
+</div></section>`;
+}
+
+/** Kenton Vale note: the registered keyword is the quoted query
+ *  '"vale engineering" madrid' — a mismatch artifact (the page's
+ *  single "Madrid" occurrence is the New Madrid Seismic Zone in
+ *  the Kentucky design environment). No honest copy can carry
+ *  that string, so the phrase element is NOT built for this row;
+ *  the buildable half of the signature — editorial inbound 0 —
+ *  is cured here (carrier deepening on the city's own facts plus
+ *  prose support from its northern-Kentucky siblings). */
+function kentonValeCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Engineering in <em>Kenton Vale</em>, at Metro Standard</h2>
+  <div class="prose"><p>A city of roughly 158 people generates the same questions the metro around it asks, at village scale: additions and renovations to an older housing stock, small commercial work, and the code questions that come with both. Kenton Vale engineering runs on the Kentucky Building Code as a mandatory statewide minimum, in Climate Zone 4A, with basic wind speeds around 105–115 mph, tornado and severe-storm exposure, and moderate ground snow loads of 10–20 psf — the design basis is the metro's, even when the project is a single building.</p>
+  <p>Because Kentucky administers plan review for many project types alongside local departments, a Kenton Vale set has to be right at submittal: governing editions and amendments verified with the permitting authority at kickoff, energy provisions documented under the IECC / ASHRAE 90.1 edition the Kentucky Building Code incorporates, and every discipline reconciled across the set before it is sealed. That is the standard this hub documents — the full discipline picture, the state design environment, and the review path, in one place.</p></div>
+</div></section>`;
+}
+
+const KENTON_VALE_DEFENSE_SOURCE_SLUGS = new Set([
+  "fort-wright", "park-hills", "ludlow", "taylor-mill",
+]);
+
+function kentonValeDefenseSection(currentSlug: string): string {
+  if (currentSlug === "kenton-vale") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/kentucky/kenton-vale/">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>Northern Kentucky's Smallest Market: <em>Kenton Vale</em></h2>
+  <div class="prose"><p>Kenton Vale is one of Kentucky's smallest incorporated cities — roughly 158 residents — sitting inside the northern-Kentucky side of the Cincinnati metro, and its projects permit under the same mandatory Kentucky Building Code as the metro around it. Our ${link("Kenton Vale engineering")} page sets out the full hub: the disciplines available to Kenton Vale projects, the Kentucky design environment, and the state and local review paths a small-city project follows.</p>
+  <p>Small market, same standard: the Kenton Vale hub documents ${link("engineering services in Kenton Vale")} — MEP, structural, civil, and energy-code work designed to the governing edition and verified against the permitting authority before design begins.</p></div>
+</div></section>`;
+}
+
+function northbrookCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2><em>Civil Engineering &amp; Permitting</em> in Northbrook, Run as One Scope</h2>
+  <div class="prose"><p>In Illinois, the civil set and the permit set are the same battle. Apex Grid delivers civil engineering permitting services Illinois project teams can scope in one pass from Northbrook: site planning, grading, drainage and stormwater design, utility coordination, accessibility, and paving — engineered against the standards of the jurisdiction that will actually review them. Illinois has no single statewide commercial building code; municipalities adopt and amend the IBC locally, the Illinois Energy Conservation Code runs statewide on the 2021 IECC, and a Northbrook project is checked against Northbrook's own adopted editions and amendments, verified with the permitting authority before design begins.</p>
+  <p>That local discipline is what the service is. Civil engineering permitting services Illinois owners are actually buying are won in the details a template misses: ground snow loads of 20–25 psf that run higher near Lake Michigan with drift, basic wind speeds around 105–115 mph, and a review culture where suburban municipalities each set their own expectations. The Northbrook civil scope is documented to those numbers — drainage and stormwater matched to the site, utility coordination closed before submittal, and corrections returned as one reconciled set. Run from a Northbrook base of roughly 34,600 residents, the same permitting discipline extends across the suburban municipalities whose local amendments decide whether a set passes. That is the civil engineering permitting services Illinois projects are judged by — a set the reviewer can approve without a second coordination cycle.</p></div>
+</div></section>`;
+}
+
+const NORTHBROOK_DEFENSE_SOURCE_SLUGS = new Set([
+  "bannockburn", "riverwoods", "highwood", "golf",
+]);
+
+function northbrookDefenseSection(currentSlug: string): string {
+  if (currentSlug === "northbrook") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/illinois/northbrook/">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>The Suburban Review Standard: <em>Northbrook</em></h2>
+  <div class="prose"><p>Northbrook is where this part of the suburbs' commercial and institutional work meets a municipal review that expects a complete set: local IBC adoption and amendments, statewide energy documentation, and civil work that answers the drainage and utility questions before they are asked. Our ${link("Northbrook engineering")} page sets out that hub in full — the disciplines available to Northbrook projects and the Illinois design environment they are engineered against.</p>
+  <p>Teams working the northern suburbs start from Northbrook: the hub documents the ${link("civil engineering and permitting in Northbrook")} scope — site, structural, and MEP sets designed together and sequenced to the local review each project will actually face.</p></div>
+</div></section>`;
+}
+
+/** Brookings hub exact-phrase section: the hub holds #1 for
+ *  "mep engineer brookings" with the phrase x0 — the existing
+ *  brookingsCarrierSection serves the MEP CHILD's phrases
+ *  ("mep engineering brookings sd", "mep engineering company
+ *  brookings") and brookingsHubSection links down to the child;
+ *  neither places the hub's own head phrase on the hub. */
+function brookingsExactPhraseSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>An <em>MEP Engineer</em> Brookings Project Teams Can Scope in One Pass</h2>
+  <div class="prose"><p>Apex Grid Engineering works as an MEP engineer Brookings owners, developers, and general contractors can scope against one coordinated set: mechanical, electrical, and plumbing designed together and documented as a single package. Brookings' building stock drives the specifics — a university market of roughly 23,900 people whose laboratories and student housing run beside food-processing and manufacturing plants and the occupied commercial buildings of a regional center. Each pattern asks the same thing of its systems: utility evidence confirmed before equipment is selected, freeze protection and snow-managed intakes treated as design inputs, and process exhaust and washdown drainage coordinated with the architectural set rather than reconciled in the field.</p>
+  <p>South Dakota has no mandatory statewide building code and no statewide commercial energy code — adoption is local, commonly the 2015 or 2018 IBC with the matching IECC or ASHRAE 90.1 as the energy path — so the engineering is sequenced to the Brookings Community Development review and to Brookings Municipal Utilities' service basis, verified parcel by parcel. The design numbers are northern-plains numbers: Climate Zone 6A, ground snow loads of 30–50+ psf where drift frequently governs the roof, and open-terrain wind around 105–120 mph. That is the working test an MEP engineer Brookings projects are judged by — one consistent set, built for the climate it will actually stand in.</p></div>
+</div></section>`;
+}
+
+const BROOKINGS_HUB_DEFENSE_SOURCE_SLUGS = new Set([
+  "aurora", "volga", "estelline", "elkton",
+]);
+
+function brookingsHubDefenseSection(currentSlug: string): string {
+  if (currentSlug === "brookings") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/south-dakota/brookings/">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>Eastern South Dakota's Anchor: <em>Brookings</em></h2>
+  <div class="prose"><p>Brookings anchors the eastern side of the state: a university and food-processing market whose laboratories, student housing, and manufacturing buildings all run on confirmed utility evidence and northern-plains design numbers. Our ${link("MEP engineer Brookings")} hub sets out that picture in full — the disciplines available to Brookings projects, the local-adoption code environment, and the Brookings Community Development review the sealed set is sequenced to.</p>
+  <p>Teams working South Dakota end to end start from Brookings: the hub documents the ${link("engineering in Brookings")} scope — MEP, structural, and civil sets designed together, for the snow, wind, and freeze conditions the plains actually deliver.</p></div>
+</div></section>`;
+}
+
+/** Roswell hub -> MEP child prose support (the child holds #1 for
+ *  "mep engineer roswell" at phrase x0 / inbound 0; the hub is
+ *  its natural parent in the hierarchy). */
+function roswellHubMepSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The <em>MEP picture</em> in Roswell</h2>
+  <div class="prose"><p>Of Roswell's five service paths, MEP carries the heaviest coordination load: intense heat, cold nights, wind-blown dust, and the city-versus-rural utility split decide equipment before finishes do. The <a href="/locations/new-mexico/roswell/mep-engineering/">MEP engineering in Roswell</a> page sets out that picture in full — the City of Roswell Building Department's review, Xcel Energy and New Mexico Gas service, Roswell Utilities inside the city against wells and septic systems outside it, and the flood and freeze details the sealed set is sequenced to. Project teams scoping an <a href="/locations/new-mexico/roswell/mep-engineering/">MEP engineer Roswell</a> engagement start there.</p></div>
+</div></section>`;
+}
+
 /** Cleanrooms Defense Cure Q1 (2026-11-02): the fallen #1 carrier for
  *  "mep engineering for cleanrooms" — /industries/life-science/cleanroom-mep-engineering/
  *  — held #1 on two structural card links and zero editorial prose support,
@@ -6066,6 +6196,15 @@ ${state.slug === "texas" && city.slug === "celina" ? celinaCarrierSection() : ""
 ${state.slug === "texas" && city.slug === "prosper" ? prosperCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "rockwall" ? rockwallCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "rockwall" ? rockwallExactPhraseSection() : ""}
+${state.slug === "iowa" && city.slug === "carroll" ? carrollCarrierSection() : ""}
+${state.slug === "iowa" && CARROLL_DEFENSE_SOURCE_SLUGS.has(city.slug) ? carrollDefenseSection(city.slug) : ""}
+${state.slug === "kentucky" && city.slug === "kenton-vale" ? kentonValeCarrierSection() : ""}
+${state.slug === "kentucky" && KENTON_VALE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? kentonValeDefenseSection(city.slug) : ""}
+${state.slug === "illinois" && city.slug === "northbrook" ? northbrookCarrierSection() : ""}
+${state.slug === "illinois" && NORTHBROOK_DEFENSE_SOURCE_SLUGS.has(city.slug) ? northbrookDefenseSection(city.slug) : ""}
+${state.slug === "south-dakota" && city.slug === "brookings" ? brookingsExactPhraseSection() : ""}
+${state.slug === "south-dakota" && BROOKINGS_HUB_DEFENSE_SOURCE_SLUGS.has(city.slug) ? brookingsHubDefenseSection(city.slug) : ""}
+${state.slug === "new-mexico" && city.slug === "roswell" ? roswellHubMepSection() : ""}
 ${state.slug === "north-dakota" && city.slug === "bismarck" ? bismarckCityCarrierSection() : ""}
 ${state.slug === "arizona" && city.slug === "maricopa" ? maricopaCityCarrierSection() : ""}
 ${state.slug === "missouri" && city.slug === "macon" ? maconCarrierSection() : ""}
