@@ -8091,8 +8091,6 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     ${mckinneyCarrierLocSvcSection(page)}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleCarrierSection() : ""}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleExactPhraseSection() : ""}
-    ${page.stateSlug === "south-carolina" && page.citySlug === "rock-hill" && page.serviceSlug === "mep-engineering" ? rockHillExactPhraseSection() : ""}
-    ${page.stateSlug === "arizona" && page.citySlug === "tempe" && page.serviceSlug === "mep-engineering" ? tempeExactPhraseSection() : ""}
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
@@ -14447,6 +14445,8 @@ ${familyVisual("location", `Service location shown: ${city.name}, ${state.name}.
 ${state.slug === "california" && city.slug === "fresno" && svc.slug === "mep-engineering" ? fresnoCarrierSection() : ""}
 ${state.slug === "california" && city.slug === "bakersfield" && svc.slug === "mep-engineering" ? fresnoDefenseSection("bakersfield") : ""}
 ${state.slug === "texas" && city.slug === "mckinney" && svc.slug === "mep-engineering" ? mckinneyCarrierHtml() : ""}
+${state.slug === "south-carolina" && city.slug === "rock-hill" && svc.slug === "mep-engineering" ? rockHillExactPhraseSection() : ""}
+${state.slug === "arizona" && city.slug === "tempe" && svc.slug === "mep-engineering" ? tempeExactPhraseSection() : ""}
 <section class="block"><div class="container">
   <h2>${esc(city.name)} <em>Permitting &amp; Code</em> Snapshot</h2>
   <div class="statgrid">
