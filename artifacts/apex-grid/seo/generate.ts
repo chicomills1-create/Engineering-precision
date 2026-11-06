@@ -5324,6 +5324,37 @@ function albuquerqueMepfSupportSection(): string {
 </div></section>`;
 }
 
+/** Hardening Wave 1 (2026-11-05): Roswell NM MEP child — the
+ *  register's #1 CRITICAL row ("the next Rockwall"): #1 for
+ *  "mep engineer roswell" with the exact phrase x0 and editorial
+ *  inbound 0, on batch2ServicePage output (the Evansville
+ *  family). Carrier section in the Mesa/Marietta idiom plus the
+ *  Brookings/Billings-pattern defense gate: every other New
+ *  Mexico MEP metro page and the NM state hub carry prose support
+ *  into the carrier. Copy traces to the carrier's own published
+ *  facts (City of Roswell Building Department review; Xcel
+ *  Energy / New Mexico Gas / Roswell Utilities; city-vs-rural
+ *  service split; heat, dust, monsoon, freeze, flat-site
+ *  drainage). */
+function roswellCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>An <em>MEP Engineer</em> Roswell Project Teams Can Scope in One Pass</h2>
+  <div class="prose"><p>Apex Grid Engineering works as an MEP engineer Roswell owners, developers, and general contractors can scope against one coordinated set: mechanical, electrical, and plumbing designed together and documented as a single package. Roswell's building stock drives the specifics — downtown tenant improvements, ranch additions and agricultural conversions on the city's edge, warehouses, ADUs, and the small commercial buildings with mixed existing systems that make up most of the local workload. Each pattern carries the same Chaves County design basis: intense heat and cold nights, wind-blown dust and low humidity, monsoon moisture and freeze events, and flat sites where drainage and equipment placement have to be settled on paper first.</p>
+  <p>Permitting runs through the City of Roswell Building Department, with utility facts that change by parcel — Xcel Energy for power, New Mexico Gas for gas, and Roswell Utilities inside the city against wells and septic systems outside it, and an MEP engineer Roswell reviewers can check in one pass never mixes rural and city service assumptions. The engineering is sequenced to that reality: existing panels, feeders, and equipment field-traced before final schedules, load calculations matched to the real occupancy, and flood elevation, condensate routing, and filtration coordinated across the mechanical, electrical, and plumbing sheets before the package is sealed. That is the working test these projects are judged by — one consistent set, correct for the parcel it serves.</p></div>
+</div></section>`;
+}
+
+function roswellDefenseSection(currentSlug: string): string {
+  if (currentSlug === "roswell") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/new-mexico/roswell/mep-engineering/">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>Southeastern New Mexico's Anchor: <em>Roswell</em></h2>
+  <div class="prose"><p>Roswell anchors southeastern New Mexico — the Chaves County market where downtown tenant improvements, ranch additions, agricultural conversions, and warehouse work all permit through the same building department. Our ${link("MEP engineering in Roswell")} page sets out that scope in full: the services available to Roswell projects, the utility split between city and rural parcels, and the review path each project type follows.</p>
+  <p>Teams working the southeast end to end start from Roswell: the page documents the ${link("MEP engineer Roswell")} scope — systems designed together, sealed as one set, and sequenced to the review the project will actually face.</p></div>
+</div></section>`;
+}
+
 /** Wave-5 Defense Cures (2026-11-05, Strike 44): editorial support INTO
  *  the fallen Apex carrier "civil engineering in montrose" #9 ->
  *  unranked (cityLitePage city hub). Census (raw HTML): carrier 1,174w,
@@ -9339,6 +9370,10 @@ ${expansion.stateSlug === "north-dakota" ? grandForksHubSupportSection() : ""}
 ${expansion.stateSlug === "missouri" ? missouriMaconHubSection() : ""}
 ${expansion.stateSlug === "colorado" ? coloradoMontroseHubSection() : ""}
 ${expansion.stateSlug === "new-mexico" ? newMexicoMepfHubSection() : ""}
+${expansion.stateSlug === "iowa" ? carrollDefenseSection("") : ""}
+${expansion.stateSlug === "illinois" ? northbrookDefenseSection("") : ""}
+${expansion.stateSlug === "south-dakota" ? brookingsHubDefenseSection("") : ""}
+${expansion.stateSlug === "new-mexico" ? roswellDefenseSection("") : ""}
 <section class="block"><div class="container"><h2>Five researched <em>local services</em></h2><p class="prose">Each linked service is organized around the selected metro’s permit authority, code context, local physical conditions, typical project types, permit steps, official references, and responsible-professional boundaries. These pages are information resources, not local-office claims or guarantees of licensure, approval, schedule, or construction outcome.</p><div class="linkrow">${serviceLinks}</div></div></section>
 <section class="block"><div class="container"><h2>${esc(expansion.stateName)} <em>metros and services</em></h2><div class="grid2">${metroLinks}</div></div></section>
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
@@ -9439,6 +9474,7 @@ ${expansion.stateSlug === "illinois" && metro.slug === "peoria" && service.servi
 ${expansion.stateSlug === "north-dakota" && metro.slug === "grand-forks" && service.serviceSlug === "mep-engineering" ? grandForksMepCarrierSection() : ""}
 ${expansion.stateSlug === "north-dakota" && metro.slug === "fargo" && service.serviceSlug === "mep-engineering" ? fargoGrandForksSupportSection() : ""}
 ${expansion.stateSlug === "indiana" && metro.slug === "evansville" && service.serviceSlug === "mep-engineering" ? evansvilleCarrierHtml() : ""}
+${expansion.stateSlug === "new-mexico" && service.serviceSlug === "mep-engineering" ? (metro.slug === "roswell" ? roswellCarrierSection() : roswellDefenseSection(metro.slug)) : ""}
 <section class="block"><div class="container"><h2>Permit and engineering <em>steps</em></h2><ol class="scope">${service.permitSteps.map((step) => `<li>${esc(step)}</li>`).join("")}</ol></div></section>
 <section class="block"><div class="container faq"><h2>${esc(service.h1)} <em>FAQs</em></h2>${service.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
 <section class="block"><div class="container"><h2>All five ${esc(metro.name)} <em>services</em></h2><div class="linkrow">${localServiceLinks}</div></div></section>
