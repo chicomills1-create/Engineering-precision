@@ -9673,6 +9673,7 @@ ${expansion.stateSlug === "illinois" && metro.slug === "peoria" && service.servi
 ${expansion.stateSlug === "north-dakota" && metro.slug === "grand-forks" && service.serviceSlug === "mep-engineering" ? grandForksMepCarrierSection() : ""}
 ${expansion.stateSlug === "north-dakota" && metro.slug === "fargo" && service.serviceSlug === "mep-engineering" ? fargoGrandForksSupportSection() : ""}
 ${expansion.stateSlug === "indiana" && metro.slug === "evansville" && service.serviceSlug === "mep-engineering" ? evansvilleCarrierHtml() : ""}
+${expansion.stateSlug === "south-carolina" && metro.slug === "rock-hill" && service.serviceSlug === "mep-engineering" ? rockHillExactPhraseSection() : ""}
 ${expansion.stateSlug === "new-mexico" && service.serviceSlug === "mep-engineering" ? (metro.slug === "roswell" ? roswellCarrierSection() : roswellDefenseSection(metro.slug)) : ""}
 <section class="block"><div class="container"><h2>Permit and engineering <em>steps</em></h2><ol class="scope">${service.permitSteps.map((step) => `<li>${esc(step)}</li>`).join("")}</ol></div></section>
 <section class="block"><div class="container faq"><h2>${esc(service.h1)} <em>FAQs</em></h2>${service.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
