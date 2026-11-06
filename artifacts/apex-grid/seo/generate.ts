@@ -4705,6 +4705,31 @@ function scottsdaleDefenseSection(currentSlug: string): string {
 </div></section>`;
 }
 
+/** Hardening Wave 1 (2026-11-05): Scottsdale MEP child —
+ *  CRITICAL S2 carrier holding #3 for "mep engineering company
+ *  scottsdale" and "mep engineering firm scottsdale" (plus
+ *  "mep engineering firm queen creek" #11 and "mep engineer
+ *  scottsdale" #15) with all four exact forms x0; anchors are
+ *  already strong (4 sources), so this is the phrase element
+ *  only. The existing scottsdaleCarrierSection carries the
+ *  interrupted "in Scottsdale" forms; this section sits beside
+ *  it in the same locationServicePage markup idiom and places
+ *  the contiguous forms. Copy traces to the carrier's own
+ *  published facts (City of Scottsdale Development Services;
+ *  2021 IBC / 2021 IECC with Scottsdale amendments; APS
+ *  coordination; Climate Zone 2B; Health Care District, Kierland,
+ *  Scottsdale Quarter; the firm's Queen Creek office in the same
+ *  metro). */
+function scottsdaleExactPhraseSection(): string {
+  return `<section class="section section--white">
+      <div class="container container--narrow">
+        <h2>The MEP Engineer Scottsdale Teams Scope Against</h2>
+        <p>Read as a buyer reads it, the question behind most Scottsdale searches is which firm actually works this market. Apex Grid Engineering is the MEP engineering company Scottsdale owners, architects, and tenants scope first when a resort renovation, a medical suite in the Health Care District, or a restaurant space in Kierland or Scottsdale Quarter has to open on schedule — and it works to the standard of an MEP engineering firm Scottsdale reviewers respect: one sealed set, all three disciplines reconciled before submittal. The design basis is the desert one this page documents — cooling-led mechanical selection derated for sustained high-ambient operation in Climate Zone 2B, electrical service and distribution sized with APS coordination, and plumbing, including the pool and spa systems standard in the luxury residential stock, carried in the same set an MEP engineer Scottsdale contractors can build from without a coordination cycle in the field.</p>
+        <p>The permitting half is just as specific, and it is where an MEP engineering firm Scottsdale reviewers will check earns its fee: submittals run through the City of Scottsdale Development Services Department on the 2021 IBC with Scottsdale amendments and the 2021 IECC with Scottsdale amendments, and the set is built to those editions from the first load calculation. The same bench works as the MEP engineering firm Queen Creek clients on the metro's southeast side use — and an MEP engineering firm Scottsdale owners can hold to one standard is, in practice, the MEP engineering firm Queen Creek and Scottsdale project teams share when a portfolio crosses the East Valley: one office in the same metro, one standard on both sides of it. Scoped that way, an MEP engineering company Scottsdale teams can rely on is not a directory claim: it is the MEP engineering company Scottsdale sets are actually permitted under — priced cleanly, sealed once, and readable when the installer opens it in the field. That is the record the MEP engineer Scottsdale market keeps coming back to, and it is documented, scope by scope, in the sections above.</p>
+      </div>
+    </section>`;
+}
+
 function scottsdaleCarrierSection(): string {
   return `<section class="section section--white">
       <div class="container container--narrow">
@@ -7930,6 +7955,7 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     ${guard1409LocSvcSection(page)}
     ${mckinneyCarrierLocSvcSection(page)}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleCarrierSection() : ""}
+    ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleExactPhraseSection() : ""}
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
