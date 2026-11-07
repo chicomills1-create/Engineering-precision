@@ -342,6 +342,7 @@ export const WAVE_GU_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "How is a pub designed?", href: "/answers/pub-design/" },
       { label: "How is a rooftop bar designed?", href: "/answers/rooftop-bar-design/" },
       { label: "How is a nail salon designed?", href: "/answers/nail-salon-design/" },
+      { label: "What does a pressure bar roof system need?", href: "/answers/rooftop-bar-plumbing-design/" },
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
@@ -636,6 +637,7 @@ export const WAVE_GU_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "How is a rooftop bar designed?", href: "/answers/rooftop-bar-design/" },
       { label: "How is a cocktail bar designed?", href: "/answers/cocktail-bar-design/" },
       { label: "How is a recording studio designed?", href: "/answers/recording-studio-design/" },
+      { label: "How is rooftop bar plumbing designed?", href: "/answers/rooftop-bar-plumbing-design/" },
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
@@ -657,6 +659,10 @@ export const WAVE_GU_ANSWER_PAGES: Phase0AeoPage[] = [
       {
         heading: "Drainage, Noise, and Freeze Protection",
         body: "The drainage design maps every rooftop fixture to its path down: bar sinks and ice machines to indirect waste receptors, restroom fixtures to soil stacks, floor drains to the storm or sanitary system as the code directs. Long vertical stacks get proper venting to prevent trap seal loss, cleanouts at code-required locations for maintenance access, and noise treatment — heavy-wall pipe or insulation — wherever the stack passes noise-sensitive spaces below.\n\nFreeze protection covers everything water touches on the roof. Heat-trace cable with thermostatic controls wraps exposed piping, insulation jackets hold the heat in, and the control sequence drains or recirculates vulnerable lines when temperatures drop. Hose bibs get freeze-proof wall hydrants with interior shutoffs, planter irrigation gets seasonal drain-down valves, and the engineer specifies monitoring that reports a heat-trace failure before the pipe freezes — because the alarm must come before the burst, not after.",
+      },
+      {
+        heading: "Pressure Bar Roof System: Zones, Backflow, and the Residual Number",
+        body: "A pressure bar roof system is designed backwards from a single number: the residual pressure at the highest, most remote fixture at the moment of peak demand. The engineer works backward from that requirement, accounting for elevation, friction losses, fixture demand, and available supply pressure. Each foot of elevation gain reduces static pressure by approximately 0.433 psi, while piping, fittings, valves, and backflow assemblies introduce additional pressure losses under flow. Required residual pressure varies by fixture and equipment manufacturer; flush valves, glass washers, and other commercial bar equipment must be checked against their specific operating requirements. The engineer adds elevation, friction, and fixture minimums into one required discharge pressure, then selects booster equipment that holds that number across the whole demand curve of a working bar, not just at design flow.\n\nIn taller buildings, pressure zones may be necessary to maintain adequate pressure at upper fixtures without exceeding allowable pressures at lower levels. Booster systems, pressure-reducing valves, and zone boundaries are selected based on building height, available supply pressure, fixture requirements, and applicable plumbing codes. Required backflow protection is selected according to the service configuration and degree of hazard. Water-hammer arrestors are specified where rapid valve closure creates a risk of damaging pressure transients. Thermal expansion control is evaluated where water heating and closed-system conditions can cause pressure buildup; an expansion tank is provided where required. The finished system is verified against the design criteria: pressure readings at the booster discharge and critical fixtures, taken under representative flow conditions, help confirm that the required residual pressure is available. In practice, a pressure bar roof system is the domestic water pressure design that serves a rooftop bar — the booster, the zones, and the protection sized and commissioned as one system.",
       },
       {
         heading: "Rooftop Bar Plumbing Design Checklist",
