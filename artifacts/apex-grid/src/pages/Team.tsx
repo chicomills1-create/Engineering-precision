@@ -28,9 +28,27 @@ const LEADERS = [
   },
   {
     name: "Hishan Fernando",
-    role: "Head of Engineering",
+    role: "Engineering Officer",
     image: "/images/team/shan-fernando.webp",
     bio: "Leads Apex Grid's engineering and drafting operations across structural, MEP, and civil scopes — with licensed Professional Engineers stamping and sealing every regulated deliverable.",
+  },
+  {
+    name: "Daniel Mercer",
+    role: "Chief Financial Officer",
+    image: "/images/team/daniel-mercer.webp",
+    bio: "Leads the firm's financial strategy — bonding, banking, project costing, and controls, with two decades in construction and engineering finance.",
+  },
+  {
+    name: "Rachel Donnelly",
+    role: "Vice President of Operations",
+    image: "/images/team/rachel-donnelly.webp",
+    bio: "Runs delivery operations — resource planning, scheduling, and performance management across the firm's 49-state project portfolio.",
+  },
+  {
+    name: "Priya Raman",
+    role: "Director of Quality & Compliance",
+    image: "/images/team/priya-raman.webp",
+    bio: "Leads quality and compliance — QA/QC programs, procurement and regulatory compliance, and documentation and safety standards.",
   },
 ];
 
