@@ -4604,6 +4604,35 @@ function broomfieldCarrierSection(): string {
 </div></section>`;
 }
 
+/** Broomfield Cure 2 — FULL HARDENING (2026-11-06): REPEAT FALL of
+ *  the carrier for "mep engineer broomfield" (#9 → null, rank-drop
+ *  guard pair nw-11 → nw-15). The 2026-11-02 defense cure deepened
+ *  the carrier with the exact phrase x1 only — below the x3
+ *  hardening bar — and built the anchor layer (hub + 7 sibling
+ *  sources, varied pairs). It recovered to #9 and fell again.
+ *  Hardening Wave 2 (2026-11-06) carried the sibling "mep
+ *  engineering firm broomfield" to x3 on the carrier and set the
+ *  hub defense variant's second anchor to that exact phrase; the
+ *  primary phrase itself was never brought to the bar — that is
+ *  the element built here, in the Rockwall/Scottsdale
+ *  exact-phrase idiom: H2 + prose placements on the carrier
+ *  (new x4 → carrier x5). The anchor layer (hub + 7 siblings,
+ *  varied pairs) and the hub's 2 links into the carrier are
+ *  confirmed-and-kept, not rebuilt (Defense Watch steer
+ *  2026-11-06 18:05 MST); the sibling firm phrase stands at x3
+ *  on the carrier as a regression guard. Copy traces to the carrier's own
+ *  published facts only (Interlocken / US-36 stock, Flatiron
+ *  Crossing, consolidated city-and-county review, Front Range
+ *  high-elevation swings, medical/dental fit-outs). */
+function broomfieldExactPhraseSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>An MEP Engineer Broomfield Project Teams Can Scope in <em>One Pass</em></h2>
+  <div class="prose"><p>Most Broomfield scopes arrive with a date already attached: a suite at Interlocken turning over, a restaurant bay at Flatiron Crossing fitting out, a medical or dental office that has to open on its licensing schedule. What those teams are shortlisting is an MEP engineer Broomfield buildings can actually be permitted from — one sealed set in which the mechanical loads reflect the Front Range's high-elevation heating and cooling swings, the electrical service is sized to the real fit-out rather than the shell, and the plumbing runs coordinated with both before the set goes in. Apex Grid Engineering works that way across the corridor's stock: existing conditions verified where a space is being re-tenanted, load calculations matched to the occupancy, and the three disciplines reconciled on paper instead of in the ceiling.</p>
+  <p>The review path rewards that sequencing: Broomfield's consolidated city-and-county review reads the set as one package, and a coordinated package is what an MEP engineer Broomfield reviewers can clear without a correction cycle spent reconciling sheets against each other. That is the standard an MEP engineer Broomfield owners and tenants are buying in practice — drawings that permit in one pass, an installer building from one consistent set, and the opening date the scope arrived with still standing at the end of it.</p></div>
+</div></section>`;
+}
+
+
 
 /** Queen Creek MEP Consolidation — Tier-B Strike 1 (2026-11-03):
  *  "mep engineer queen creek" 1→9 ranking on the Arizona state MEP hub
@@ -6428,6 +6457,7 @@ ${state.slug === "arizona" && MARICOPA_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) 
 ${state.slug === "missouri" && MACON_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maconDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && MONTROSE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? montroseDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && city.slug === "broomfield" ? broomfieldCarrierSection() : ""}
+${state.slug === "colorado" && city.slug === "broomfield" ? broomfieldExactPhraseSection() : ""}
 ${state.slug === "texas" && city.slug === "celina" ? celinaCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "prosper" ? prosperCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "rockwall" ? rockwallCarrierSection() : ""}
