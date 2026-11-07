@@ -5396,6 +5396,60 @@ function roswellDefenseSection(currentSlug: string): string {
 </div></section>`;
 }
 
+
+/** Augusta MEP Hardening Cure (2026-11-06): the carrier
+ *  "mep engineering company augusta" fell #4 -> unranked (Nightwatch pair
+ *  nw-11 -> nw-15). Fragility register (2026-11-05, raw HTML): carrier
+ *  1,182 words, exact phrase x0, editorial inbound anchors 1 (template
+ *  linkrows only), sitemap Y — HIGH S5, never hardened. Cure: carrier
+ *  deepening in the roswellCarrierSection idiom with the contiguous
+ *  literal phrase x4, a defense section on every other Georgia MEP metro
+ *  page (roswellDefenseSection idiom; one exact-phrase anchor per source),
+ *  an editorial support section on the Georgia state hub, and one on the
+ *  Augusta metro hub. Copy traces only to facts the carrier itself
+ *  publishes — the medical district, Fort Eisenhower's cyber and training
+ *  floors, Masters-week hospitality, Augusta-Richmond County Planning and
+ *  Development, the Georgia Power / Augusta Utilities split, 3A humidity
+ *  and dedicated outdoor air, Georgia state minimum codes. */
+const AUGUSTA_MEP_CARRIER_PATH = "/locations/georgia/augusta/mep-engineering/";
+
+function augustaCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>An <em>MEP Engineering Company</em> Augusta Project Teams Can Scope in One Pass</h2>
+  <div class="prose"><p>Apex Grid Engineering works as an MEP engineering company Augusta owners, developers, and general contractors can scope against one coordinated set: mechanical, electrical, and plumbing designed together and documented as a single package. Augusta's stock drives the specifics — a medical district that never fully closes, Fort Eisenhower's cyber and training floors west of the city, the Savannah River Site workforce across the river, and a hospitality stock that sizes up every spring for Masters week. Each pattern asks the same thing of its systems: mechanical sized to the real load, electrical from the service entrance through distribution and emergency power, and plumbing for water, waste, and gas — engineered as one set, not three.</p>
+  <p>Permitting runs through Augusta-Richmond County Planning and Development, while Georgia Power, Augusta Utilities, and the fire and health reviewers each answer different service and shutdown questions — and an MEP engineering company Augusta facilities teams can rely on never blends those answers into one assumption. The engineering is sequenced to that reality: medical gases, emergency feeders, and shutdown windows traced with the facility team before the sheets are issued, load density and heat rejection settled with the mission owner on secure floors, and dedicated outdoor air and active dehumidification treated as working systems through the city's hot, humid summers. That is the standard an MEP engineering company Augusta reviewers can check as one submission instead of three partial ones.</p></div>
+</div></section>`;
+}
+
+function augustaDefenseSection(): string {
+  const link = (anchor: string) =>
+    `<a href="${AUGUSTA_MEP_CARRIER_PATH}">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>The River Corridor's Anchor: <em>Augusta</em></h2>
+  <div class="prose"><p>Augusta anchors the Central Savannah River Area — a medical district that never fully closes, Fort Eisenhower's cyber and training missions west of the city, and a hospitality stock that sizes up every spring for Masters week. Our ${link("MEP engineering in Augusta")} page sets out that scope in full: the services available to Augusta projects, the building stock they serve, and the consolidated city-county review path each project type follows.</p>
+  <p>Teams working the corridor end to end start from Augusta: the page documents what an ${link("MEP engineering company Augusta")} delivers — systems designed together, sealed as one set, and sequenced to the reviews the project will actually face, from Planning and Development and Augusta Utilities to Georgia Power and the facility's own reviewers.</p></div>
+</div></section>`;
+}
+
+function augustaHubSection(): string {
+  const link = (anchor: string) =>
+    `<a href="${AUGUSTA_MEP_CARRIER_PATH}">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>The CSRA's Anchor: <em>Augusta</em></h2>
+  <div class="prose"><p>Augusta anchors the Central Savannah River Area: it is the Richmond County seat, home to a medical district that never fully closes, the Fort Eisenhower cyber and training missions, and the hospitality stock that sizes up every spring for Masters week — and its mechanical, electrical, and plumbing scope runs on the same coordinated-set standard this page documents. Our ${link("MEP engineering company Augusta")} page sets out that scope in full: the services available to Augusta projects, the building stock they serve, and the review paths they permit through.</p>
+  <p>Teams working the river corridor end to end start from Augusta: the page documents the ${link("MEP engineering in Augusta")} scope — systems designed together, sealed as one set, and sequenced to the separate Planning and Development, Augusta Utilities, Georgia Power, and facility reviews the project will actually face.</p></div>
+</div></section>`;
+}
+
+function augustaMetroHubSection(): string {
+  const link = (anchor: string) =>
+    `<a href="${AUGUSTA_MEP_CARRIER_PATH}">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>Where Augusta Teams <em>Start</em></h2>
+  <div class="prose"><p>Of the five service paths above, MEP carries Augusta's heaviest load — the medical district's occupied renovations, Fort Eisenhower's cooling-dense training floors, and the Masters-week hospitality stock all turn on mechanical, electrical, and plumbing coordination. Our ${link("MEP engineering company Augusta")} guide is the working document for that scope: the permit authority, the utility and facility handoffs, the climate conditions the systems are designed against, and the project types that recur across the city, set out before a scope is priced.</p></div>
+</div></section>`;
+}
+
 /** Wave-5 Defense Cures (2026-11-05, Strike 44): editorial support INTO
  *  the fallen Apex carrier "civil engineering in montrose" #9 ->
  *  unranked (cityLitePage city hub). Census (raw HTML): carrier 1,174w,
@@ -9519,6 +9573,7 @@ ${familyVisual("location", `Service location shown: ${metro.name}, ${expansion.s
     `<p><strong>${esc(service.serviceSlug)}:</strong> ${esc(service.localConditions)} ${esc(service.projectTypes)}</p>`,
   ).join("")}</div></div></section>
 ${expansion.stateSlug === "south-dakota" && metro.slug === "brookings" ? brookingsHubSection() : ""}
+${expansion.stateSlug === "georgia" && metro.slug === "augusta" ? augustaMetroHubSection() : ""}
 <section class="block"><div class="container faq"><h2>${esc(metro.name)} <em>FAQs</em></h2>${faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
 <section class="ctaband"><div class="container"><h2>Discuss ${aOrAn(metro.name)} ${esc(metro.name)} project</h2><p>Send the address, scope, drawings, authority, and requested deliverable. Availability, responsible licensure, and timing are confirmed per project.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
 </main>`;
@@ -9560,6 +9615,7 @@ ${expansion.hub.sections.map((section) => `<section class="block"><div class="co
 ${expansion.stateSlug === "georgia" ? georgiaDefenseSection("") : ""}
 ${expansion.stateSlug === "georgia" ? mariettaDefenseSection("") : ""}
 ${expansion.stateSlug === "georgia" ? alpharettaDefenseSection("") : ""}
+${expansion.stateSlug === "georgia" ? augustaHubSection() : ""}
 ${expansion.stateSlug === "colorado" ? broomfieldDefenseSection("") : ""}
 ${expansion.stateSlug === "south-dakota" ? brookingsDefenseSection("") : ""}
 ${expansion.stateSlug === "north-dakota" ? bismarckCityDefenseSection("") : ""}
@@ -9676,6 +9732,7 @@ ${expansion.stateSlug === "north-dakota" && metro.slug === "fargo" && service.se
 ${expansion.stateSlug === "indiana" && metro.slug === "evansville" && service.serviceSlug === "mep-engineering" ? evansvilleCarrierHtml() : ""}
 ${expansion.stateSlug === "south-carolina" && metro.slug === "rock-hill" && service.serviceSlug === "mep-engineering" ? rockHillExactPhraseSection() : ""}
 ${expansion.stateSlug === "new-mexico" && service.serviceSlug === "mep-engineering" ? (metro.slug === "roswell" ? roswellCarrierSection() : roswellDefenseSection(metro.slug)) : ""}
+${expansion.stateSlug === "georgia" && service.serviceSlug === "mep-engineering" ? (metro.slug === "augusta" ? augustaCarrierSection() : augustaDefenseSection()) : ""}
 <section class="block"><div class="container"><h2>Permit and engineering <em>steps</em></h2><ol class="scope">${service.permitSteps.map((step) => `<li>${esc(step)}</li>`).join("")}</ol></div></section>
 <section class="block"><div class="container faq"><h2>${esc(service.h1)} <em>FAQs</em></h2>${service.faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
 <section class="block"><div class="container"><h2>All five ${esc(metro.name)} <em>services</em></h2><div class="linkrow">${localServiceLinks}</div></div></section>
