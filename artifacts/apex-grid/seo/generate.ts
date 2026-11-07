@@ -14397,6 +14397,28 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   });
 }
 
+/** Dallas top-firms phrase support (2026-11-06 cure, top-firms absence class):
+ * the Dallas hub and its MEP carrier carried zero body support for the
+ * "best engineering firms in Dallas" query class (audit 2026-11-06: phrase
+ * x0, "best" x0, "engineering firm" x0 on both pages). Methodology-framed
+ * comparison copy only — no rankings, ratings, or endorsements are claimed.
+ * Hub half gated in cityPage; carrier half gated in cityServicePage. */
+function dallasHubSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>How Buyers Compare the <em>Best Engineering Firms in Dallas</em></h2>
+  <div class="prose"><p>Search results for the best engineering firms in Dallas tend to reward directory size over permit outcomes. Read as a buyer reads it, the comparison that matters is narrower: which engineering firm designs to the Dallas Building Code as the city actually enforces it — the 2021 IBC under City Code Chapter 53, with Dallas's own mechanical, plumbing, and electrical amendment packages — and seals the set under a Texas-licensed PE carrying responsible charge for it. That is the standard the best engineering firms in Dallas are bought against, whether the project is a data center along the metroplex logistics corridors, a healthcare build-out, or multifamily in the urban core.</p>
+  <p>Apex Grid Engineering works to that standard from one bench: MEP, structural, civil, and energy-code compliance designed as one coordinated set and permitted through the City of Dallas Development Services Department, with quotes back within 12–24 hours on qualifying scopes. The discipline detail sits on the service pages — starting with <a href="/locations/texas/dallas/mep-engineering/">MEP engineering in Dallas</a>, where the mechanical, electrical, and plumbing scope for Dallas's climate zone 3A design days is set out in full — and this page carries the citywide picture: the code basis, the review path through ProjectDox, and the market the work lands in.</p></div>
+</div></section>`;
+}
+
+function dallasCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The MEP Half of the <em>Best Engineering Firms in Dallas</em> Standard</h2>
+  <div class="prose"><p>When owners compare the best engineering firms in Dallas, the MEP half of the set is where coordination either holds or fails: load calculations, equipment schedules, and gas-piping details checked against the Dallas amendment packages rather than a generic IBC set, sized for a roughly 100°F cooling design day in climate zone 3A, and freeze-protected with the lesson of Winter Storm Uri priced in. An engineering firm in Dallas earns that comparison when the mechanical, electrical, and plumbing scopes arrive as one sealed set a reviewer can check in a single pass.</p>
+  <p>That is how Apex Grid builds the MEP scope — and the citywide comparison, code basis, and review path sit on our <a href="/locations/texas/dallas/">Dallas engineering services</a> page, which carries the full picture this page's systems design draws on.</p></div>
+</div></section>`;
+}
+
 function cityServicePage(state: StateData, city: CityData, svc: ServiceDef, siblingCities: CityData[]): string {
   const url = `/locations/${state.slug}/${city.slug}/${svc.slug}/`;
   const crumbs = [
@@ -14447,6 +14469,7 @@ ${familyVisual("location", `Service location shown: ${city.name}, ${state.name}.
 ${state.slug === "california" && city.slug === "fresno" && svc.slug === "mep-engineering" ? fresnoCarrierSection() : ""}
 ${state.slug === "california" && city.slug === "bakersfield" && svc.slug === "mep-engineering" ? fresnoDefenseSection("bakersfield") : ""}
 ${state.slug === "texas" && city.slug === "mckinney" && svc.slug === "mep-engineering" ? mckinneyCarrierHtml() : ""}
+${state.slug === "texas" && city.slug === "dallas" && svc.slug === "mep-engineering" ? dallasCarrierSection() : ""}
 ${state.slug === "south-carolina" && city.slug === "rock-hill" && svc.slug === "mep-engineering" ? rockHillExactPhraseSection() : ""}
 ${state.slug === "arizona" && city.slug === "tempe" && svc.slug === "mep-engineering" ? tempeExactPhraseSection() : ""}
 <section class="block"><div class="container">
@@ -14610,6 +14633,7 @@ ${state.slug === "texas" && CELINA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? celinaD
 ${state.slug === "texas" && PROSPER_DEFENSE_SOURCE_SLUGS.has(city.slug) ? prosperDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && MCKINNEY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mckinneyDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && ROCKWALL_DEFENSE_SOURCE_SLUGS.has(city.slug) ? rockwallDefenseSection(city.slug) : ""}
+${state.slug === "texas" && city.slug === "dallas" ? dallasHubSection() : ""}
 ${state.slug === "north-dakota" && BISMARCK_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? bismarckCityDefenseSection(city.slug) : ""}
 ${state.slug === "north-dakota" ? bismarckMepStateSupportSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaCityDefenseSection(city.slug) : ""}
