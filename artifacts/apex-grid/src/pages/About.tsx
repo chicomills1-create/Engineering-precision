@@ -206,18 +206,63 @@ export default function About() {
                 <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden rounded-sm">
                   <img
                     src="/images/team/shan-fernando.webp"
-                    alt="Hishan Fernando, Head of Engineering of Apex Grid Engineering"
+                    alt="Hishan Fernando, Engineering Officer of Apex Grid Engineering"
                     className="w-full h-full object-cover object-top"
                     loading="lazy"
                   />
                 </div>
                 <h3 className="text-2xl font-display font-bold mb-1 text-white">Hishan Fernando</h3>
-                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Head of Engineering</div>
+                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Engineering Officer</div>
                 <p className="text-muted-foreground leading-relaxed">
                   Shan leads Apex Grid&apos;s engineering and drafting operations. Jeremy&apos;s verdict: &ldquo;The guy can literally design anything.&rdquo;
                 </p>
                 <p className="text-muted-foreground leading-relaxed mt-4">
                   He heads design across structural, MEP, and civil scopes — the engineering engine behind the firm&apos;s coverage model, with licensed Professional Engineers stamping and sealing every regulated deliverable.
+                </p>
+              </div>
+              <div className="bg-card border border-border p-8 rounded-sm">
+                <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden rounded-sm">
+                  <img
+                    src="/images/team/daniel-mercer.webp"
+                    alt="Daniel Mercer, Chief Financial Officer of Apex Grid Engineering"
+                    className="w-full h-full object-cover object-top"
+                    loading="lazy"
+                  />
+                </div>
+                <h3 className="text-2xl font-display font-bold mb-1 text-white">Daniel Mercer</h3>
+                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Chief Financial Officer</div>
+                <p className="text-muted-foreground leading-relaxed">
+                  Daniel leads Apex Grid&apos;s financial strategy — bonding and banking relationships, project costing and controls, and the capital planning behind the firm&apos;s multi-state growth. He brings two decades of finance experience across construction and engineering.
+                </p>
+              </div>
+              <div className="bg-card border border-border p-8 rounded-sm">
+                <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden rounded-sm">
+                  <img
+                    src="/images/team/rachel-donnelly.webp"
+                    alt="Rachel Donnelly, Vice President of Operations of Apex Grid Engineering"
+                    className="w-full h-full object-cover object-top"
+                    loading="lazy"
+                  />
+                </div>
+                <h3 className="text-2xl font-display font-bold mb-1 text-white">Rachel Donnelly</h3>
+                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Vice President of Operations</div>
+                <p className="text-muted-foreground leading-relaxed">
+                  Rachel runs delivery operations across Apex Grid&apos;s 49-state practice — resource planning, scheduling, and performance management across the project portfolio. Her career in AEC operations is built on one standard: every project staffed right, sequenced right, and delivered on time.
+                </p>
+              </div>
+              <div className="bg-card border border-border p-8 rounded-sm">
+                <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden rounded-sm">
+                  <img
+                    src="/images/team/priya-raman.webp"
+                    alt="Priya Raman, Director of Quality & Compliance of Apex Grid Engineering"
+                    className="w-full h-full object-cover object-top"
+                    loading="lazy"
+                  />
+                </div>
+                <h3 className="text-2xl font-display font-bold mb-1 text-white">Priya Raman</h3>
+                <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Director of Quality & Compliance</div>
+                <p className="text-muted-foreground leading-relaxed">
+                  Priya leads quality and compliance at Apex Grid — QA/QC programs, procurement and regulatory compliance across federal and state work, and the documentation and safety standards behind every deliverable. Her background is in engineering quality systems, and it shows in every set that leaves the firm.
                 </p>
               </div>
             </div>
