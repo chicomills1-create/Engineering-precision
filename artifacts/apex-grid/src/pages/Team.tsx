@@ -15,9 +15,9 @@ const LEADERS = [
     bio: "Founded Apex Grid on mission-first discipline — accountability, clear communication, no excuses.",
   },
   {
-    name: "Angel Endres",
+    name: "Leslie Johnson",
     role: "Chief People Officer",
-    image: "/images/team/angel-endres.webp",
+    image: "/images/team/leslie-johnson.webp",
     bio: "Leads the people and culture behind the firm — 15+ years of HR leadership.",
   },
   {

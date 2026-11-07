@@ -174,16 +174,16 @@ export default function About() {
               <div className="bg-card border border-border p-8 rounded-sm">
                 <div className="aspect-[4/5] bg-secondary border border-border mb-8 overflow-hidden rounded-sm">
                   <img
-                    src="/images/team/angel-endres.webp"
-                    alt="Angel Endres, Chief People Officer of Apex Grid Engineering"
+                    src="/images/team/leslie-johnson.webp"
+                    alt="Leslie Johnson, Chief People Officer of Apex Grid Engineering"
                     className="w-full h-full object-cover object-top"
                     loading="lazy"
                   />
                 </div>
-                <h3 className="text-2xl font-display font-bold mb-1 text-white">Angel Endres</h3>
+                <h3 className="text-2xl font-display font-bold mb-1 text-white">Leslie Johnson</h3>
                 <div className="font-mono text-xs uppercase tracking-widest text-primary mb-6">Chief People Officer</div>
                 <p className="text-muted-foreground leading-relaxed">
-                  Angel leads the people and culture behind the firm — 15+ years of HR
+                  Leslie leads the people and culture behind the firm — 15+ years of HR
                   leadership, including deep experience in the engineering industry.
                 </p>
               </div>
