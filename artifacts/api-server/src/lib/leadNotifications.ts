@@ -5,6 +5,7 @@ import {
   sendGraphMail,
   type GraphMailMessage,
 } from "./graphMail";
+import { sendSesMail, sesFallbackConfigured } from "./sesMail";
 import { humanizeServices } from "./clientJobNotifications";
 import { logger } from "./logger";
 
@@ -33,7 +34,12 @@ function formatReceivedPhoenix(value: Date): string {
  * who sent it, how to reach them, where the project is, what they need
  * done in their own words, when they need it, and their files. Transport
  * is Microsoft Graph (the fleet standard — the SendGrid plan cancels
- * 2026-11-01); internal mail sends as the fleet Graph identity.
+ * 2026-11-01); internal mail sends as the fleet Graph identity. If the
+ * Graph send fails and the SES fallback is armed (NOTIFY_SES_FALLBACK=1
+ * plus AWS keys — the fleet end state, proven by the Torch/Engides
+ * intake backends), the same notification is sent via SES from
+ * info@apexgridarc.com with a "[via SES fallback]" subject marker, so a
+ * Graph-side outage can never silently swallow a client inquiry.
  * Never throws — failures are logged by the caller and must not break
  * lead submission.
  */
@@ -112,8 +118,7 @@ export async function sendLeadNotificationEmail(
     .filter((part): part is string => Boolean(part))
     .join(" — ");
 
-  const send = options.transport ?? sendGraphMail;
-  const result = await send({
+  const message: GraphMailMessage = {
     from: graphInternalSender(),
     fromName: "Apex Grid Engineering Website",
     to,
@@ -121,13 +126,53 @@ export async function sendLeadNotificationEmail(
     replyToName: lead.name,
     subject,
     text: lines.join("\n"),
-  });
-  if (!result.ok) {
+  };
+
+  if (options.transport) {
+    const result = await options.transport(message);
+    if (!result.ok) {
+      logger.error(
+        { error: result.error, to, subject },
+        "Lead notification email failed",
+      );
+      return result;
+    }
+    return { ok: true };
+  }
+
+  const graphResult = await sendGraphMail(message);
+  if (graphResult.ok) {
+    return { ok: true };
+  }
+
+  if (!sesFallbackConfigured()) {
     logger.error(
-      { error: result.error, to, subject },
+      { error: graphResult.error, to, subject },
       "Lead notification email failed",
     );
-    return result;
+    return graphResult;
   }
+
+  logger.warn(
+    { error: graphResult.error, to, subject },
+    "Lead notification via Graph failed; sending via SES fallback",
+  );
+  const sesResult = await sendSesMail({
+    ...message,
+    subject: `${subject} [via SES fallback]`,
+  });
+  if (!sesResult.ok) {
+    const combined =
+      `Graph: ${graphResult.error} | SES fallback: ${sesResult.error}`;
+    logger.error(
+      { error: combined, to, subject },
+      "Lead notification email failed",
+    );
+    return { ok: false, error: combined };
+  }
+  logger.info(
+    { to, subject },
+    "Lead notification email sent via SES fallback",
+  );
   return { ok: true };
 }
