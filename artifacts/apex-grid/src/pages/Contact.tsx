@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState, type DragEvent } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { usePageMeta, useJsonLd } from "@/lib/seo";
 import { getFirstTouchValue } from "@/lib/firstTouch";
 import { APEX_GRID_BUSINESS_SCHEMA } from "@/lib/business-schema";
-import { Check, Stamp, PencilRuler, Calculator } from "lucide-react";
+import { Check, Stamp, PencilRuler, Calculator, UploadCloud, FileUp, X, Loader2 } from "lucide-react";
 
 const leadSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -38,6 +38,19 @@ const NEEDS = [
   { value: "calculations", icon: Calculator, label: "Run the numbers" },
 ];
 
+const MAX_FILE_BYTES = 20 * 1024 * 1024;
+
+const ALLOWED_FILE_EXTENSIONS = new Set([
+  "pdf", "dwg", "dxf", "rvt", "doc", "docx", "xls", "xlsx", "ppt", "pptx",
+  "zip", "jpg", "jpeg", "png", "tif", "tiff",
+]);
+
+type UploadedFile = {
+  objectPath: string;
+  name: string;
+  size: number;
+};
+
 export default function Contact() {
   usePageMeta(PAGE_META);
   useJsonLd(APEX_GRID_BUSINESS_SCHEMA);
@@ -48,6 +61,74 @@ export default function Contact() {
   const formLoadedAt = useRef<number>(Date.now());
 
   const createLead = useCreateLead();
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [dragging, setDragging] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
+
+  // Drawing uploads — the exact mechanism the homepage PlanDropZone uses:
+  // each file goes straight to /api/client/uploads as a raw-body POST with
+  // the x-file-name header, and the returned object paths ride the lead's
+  // attachments field (the FAQ below promises exactly this).
+  const uploadFiles = useCallback(async (files: FileList | File[] | null) => {
+    if (!files?.length) return;
+    setUploading(true);
+    setUploadError("");
+    try {
+      const uploaded: UploadedFile[] = [];
+      for (const file of Array.from(files)) {
+        const extension = file.name.split(".").pop()?.toLowerCase() || "";
+        if (!ALLOWED_FILE_EXTENSIONS.has(extension)) {
+          throw new Error(
+            `${file.name} is not supported. Use PDF, DWG, DXF, Revit, image, Office, or ZIP files.`
+          );
+        }
+        if (file.size > MAX_FILE_BYTES) {
+          throw new Error(`${file.name} exceeds the 20 MB per-file limit.`);
+        }
+        const response = await fetch("/api/client/uploads", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/octet-stream",
+            "x-file-name": encodeURIComponent(file.name),
+          },
+          body: file,
+        });
+        const result = (await response.json()) as {
+          objectPath?: string;
+          name?: string;
+          uploadToken?: string;
+          error?: string;
+        };
+        if (!response.ok || !result.objectPath || !result.uploadToken) {
+          throw new Error(result.error || `Could not upload ${file.name}`);
+        }
+        uploaded.push({
+          objectPath: result.objectPath,
+          name: result.name || file.name,
+          size: file.size,
+        });
+      }
+      setUploadedFiles((current) => [...current, ...uploaded].slice(0, 20));
+    } catch (error) {
+      setUploadError(error instanceof Error ? error.message : "File upload failed.");
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  }, []);
+
+  const onDrop = (event: DragEvent) => {
+    event.preventDefault();
+    setDragging(false);
+    void uploadFiles(event.dataTransfer.files);
+  };
+
+  const removeFile = (objectPath: string) => {
+    setUploadedFiles((current) => current.filter((f) => f.objectPath !== objectPath));
+  };
 
   const form = useForm<LeadFormValues>({
     resolver: zodResolver(leadSchema),
@@ -86,7 +167,7 @@ export default function Contact() {
         projectLocation: data.projectLocation || undefined,
         whenNeeded: data.whenNeeded || undefined,
         message: data.message,
-        attachments: [],
+        attachments: uploadedFiles.map((f) => f.objectPath),
         source: getFirstTouchValue("utm_source") || (fleetRef ? `fleet:${fleetRef}` : (document.referrer ? "referral" : "direct")),
         medium: getFirstTouchValue("utm_medium"),
         campaign: getFirstTouchValue("utm_campaign"),
@@ -129,6 +210,8 @@ export default function Contact() {
           <button
             onClick={() => {
               form.reset();
+              setUploadedFiles([]);
+              setUploadError("");
               setIsSuccess(false);
             }}
             className="h-14 px-8 border border-border text-foreground font-bold text-sm uppercase tracking-wider hover:bg-card transition-colors rounded-sm"
@@ -163,7 +246,6 @@ export default function Contact() {
                 <input ref={websiteRef} name="website" type="text" tabIndex={-1} autoComplete="off" />
               </label>
             </div>
-
 
               {/* Step 1 — what do you need (tap cards) */}
               <div>
@@ -296,9 +378,78 @@ export default function Contact() {
                 />
               </div>
 
+              {/* Step 4 — attach your drawings (optional) */}
+              <div>
+                <div className="text-lg font-display font-bold text-white mb-5">
+                  4. Attach your drawings <span className="text-sm font-normal text-muted-foreground">(optional)</span>
+                </div>
+                <div
+                  onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
+                  onDragLeave={() => setDragging(false)}
+                  onDrop={onDrop}
+                  onClick={() => fileInputRef.current?.click()}
+                  className={`border-2 border-dashed rounded-sm p-8 text-center cursor-pointer transition-colors ${
+                    dragging
+                      ? "border-primary bg-primary/10"
+                      : "border-border hover:border-primary/60 bg-background"
+                  }`}
+                  role="button"
+                  aria-label="Drop your drawings here or click to browse"
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") fileInputRef.current?.click(); }}
+                >
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    multiple
+                    accept=".pdf,.dwg,.dxf,.rvt,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.jpg,.jpeg,.png,.tif,.tiff"
+                    className="hidden"
+                    onChange={(e) => void uploadFiles(e.target.files)}
+                  />
+                  <UploadCloud className="w-10 h-10 text-primary mx-auto mb-3" strokeWidth={1.5} />
+                  <p className="text-lg font-display font-bold text-white mb-1">
+                    Drop your drawings here
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    PDF, DWG, DXF, Revit, images, Office, or ZIP — up to 20 MB each.
+                  </p>
+                  {uploading && (
+                    <p className="mt-3 text-sm text-muted-foreground flex items-center justify-center gap-2">
+                      <Loader2 className="w-4 h-4 animate-spin" /> Uploading…
+                    </p>
+                  )}
+                </div>
+                {uploadError && (
+                  <p className="mt-3 text-sm text-destructive" role="alert">{uploadError}</p>
+                )}
+                {uploadedFiles.length > 0 && (
+                  <ul className="mt-4 border border-border rounded-sm divide-y divide-border bg-background">
+                    {uploadedFiles.map((file) => (
+                      <li key={file.objectPath} className="flex items-center justify-between gap-3 px-4 py-3">
+                        <span className="flex items-center gap-3 min-w-0">
+                          <FileUp className="w-5 h-5 text-primary shrink-0" />
+                          <span className="text-sm text-foreground truncate">{file.name}</span>
+                          <span className="text-xs text-muted-foreground shrink-0">
+                            {(file.size / 1024 / 1024).toFixed(1)} MB
+                          </span>
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => removeFile(file.objectPath)}
+                          className="p-1 text-muted-foreground hover:text-white rounded-sm"
+                          aria-label={`Remove ${file.name}`}
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
               <button
                 type="submit"
-                disabled={createLead.isPending}
+                disabled={createLead.isPending || uploading}
                 className="h-16 w-full bg-primary text-white font-bold text-base uppercase tracking-wider flex items-center justify-center hover:bg-primary/90 transition-colors disabled:opacity-50 rounded-sm focus-visible:ring-4 focus-visible:ring-primary/50 focus-visible:outline-none"
               >
                 {createLead.isPending ? "Sending..." : "Send Message"}
