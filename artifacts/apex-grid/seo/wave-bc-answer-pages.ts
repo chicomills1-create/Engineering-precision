@@ -615,6 +615,7 @@ export const WAVE_BC_ANSWER_PAGES: Phase0AeoPage[] = [
       { label: "What is structural connection design?", href: "/answers/what-is-structural-connection-design/" },
       { label: "Fire alarm system design explained", href: "/answers/fire-alarm-system-design-explained/" },
       { label: "Our structural engineering services", href: "/services/structural/" },
+      { label: "How is a pressure bar roof system designed?", href: "/answers/rooftop-bar-plumbing-design/" },
       { label: "Get an engineering estimate", href: "/estimate" },
     ],
     founderNote,
