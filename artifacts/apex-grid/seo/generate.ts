@@ -5341,6 +5341,14 @@ function jetBlastIndustrySupport(page: IndustryDisciplinePage): string {
  *  ND hub (batch2StatePage path — the Strike 17 fork), and a Fargo
  *  sibling support section. Anchors into the carrier 0 -> 3. Bismarck's
  *  sections are untouched. */
+function grandForksPhraseTopUpSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Shortlisting an MEP Engineer <em>Grand Forks</em> Programs Can Phase</h2>
+  <div class="prose"><p>Most Grand Forks MEP work is renovation inside buildings that cannot close — a hospital floor that stays in service, a campus hall that teaches through the semester, a hangar that keeps its mission schedule. The MEP engineer Grand Forks owners shortlist for that work is the one whose set is drawn in phases from the first sheet: temporary heating and ventilation carrying the building through each construction window, shutdowns sequenced to the hours the program can actually give up, and systems isolated in sections so one wing's rough-in never darkens the next. Apex Grid scopes that phasing into the sealed set itself, so the contractor prices the sequence the permit shows instead of improvising it in the field.</p>
+  <p>The second test is winter. An MEP engineer Grand Forks facilities teams rely on designs for the weeks the thermometer sits below zero: heat-recovery ventilation that does not frost-lock, coils and piping protected where a single freeze event would close a floor, and commissioning scheduled so functional testing proves the plant at real load rather than in the mild week the project happened to finish. The set is submitted against the North Dakota state building code framework the City of Grand Forks enforces, with energy-code compliance documented on the drawings — one coordinated mechanical, electrical, and plumbing package, sealed by licensed PEs, from first phase to final turnover.</p></div>
+</div></section>`;
+}
+
 function grandForksMepCarrierSection(): string {
   return `<section class="block"><div class="container">
   <h2>An MEP Engineering Company for <em>Grand Forks</em> Projects</h2>
@@ -5352,21 +5360,21 @@ function grandForksMepCarrierSection(): string {
 function grandForksStateSvcSection(): string {
   return `<section class="block"><div class="container">
   <h2>The Red River Valley's Second City: <em>Grand Forks</em></h2>
-  <div class="prose"><p>Grand Forks carries the valley's institutional weight — the University of North Dakota, the Altru Health system, and the air base and UAS facilities west of the city — and its MEP demand follows that stock: campus and clinical buildings whose systems are designed as one package and phased around occupied operations. The complete Grand Forks picture, including the services available there and the city's own review path, is on our <a href="/locations/north-dakota/grand-forks/mep-engineering/">MEP engineering company in Grand Forks</a> page; this page carries the statewide MEP scope it draws on.</p></div>
+  <div class="prose"><p>Grand Forks carries the valley's institutional weight — the University of North Dakota, the Altru Health system, and the air base and UAS facilities west of the city — and its MEP demand follows that stock: campus and clinical buildings whose systems are designed as one package and phased around occupied operations. The complete Grand Forks picture, including the services available there and the city's own review path, is on our <a href="/locations/north-dakota/grand-forks/mep-engineering/">MEP engineer Grand Forks</a> page; this page carries the statewide MEP scope it draws on.</p></div>
 </div></section>`;
 }
 
 function grandForksHubSupportSection(): string {
   return `<section class="block"><div class="container">
   <h2>Grand Forks: <em>the Valley's Institutional Market</em></h2>
-  <div class="prose"><p>North Dakota's MEP demand splits between the capital's state-government stock and the Red River Valley's institutional corridor — and Grand Forks is the corridor's northern anchor, where the university, the regional health system, and the air base generate the state's steadiest commercial project flow. The systems scope for that market, engineered as one coordinated set against the floodplain and cold-climate conditions the valley imposes, is set out on our <a href="/locations/north-dakota/grand-forks/mep-engineering/">Grand Forks MEP engineering</a> page.</p></div>
+  <div class="prose"><p>North Dakota's MEP demand splits between the capital's state-government stock and the Red River Valley's institutional corridor — and Grand Forks is the corridor's northern anchor, where the university, the regional health system, and the air base generate the state's steadiest commercial project flow. The systems scope for that market, engineered as one coordinated set against the floodplain and cold-climate conditions the valley imposes, is set out on our <a href="/locations/north-dakota/grand-forks/mep-engineering/">Grand Forks MEP engineering</a> page. Teams shortlisting an <a href="/locations/north-dakota/grand-forks/mep-engineering/">MEP engineer Grand Forks</a> owners can scope, phase, and permit against start on that page — it carries the city's services, its review path, and the statewide bench behind both.</p></div>
 </div></section>`;
 }
 
 function fargoGrandForksSupportSection(): string {
   return `<section class="block"><div class="container">
   <h2>Up the Valley: <em>Grand Forks</em></h2>
-  <div class="prose"><p>Fargo and Grand Forks are one working corridor — the same builders, the same lakebed clays and floodplain questions, eighty miles of I-29 apart. Where a Fargo team's program extends up the valley, the systems scope is carried on the same basis: mechanical, electrical, and plumbing as one sealed set, designed for the valley's groundwater and cold. The Grand Forks statement of that scope is on our <a href="/locations/north-dakota/grand-forks/mep-engineering/">MEP engineering in Grand Forks</a> page.</p></div>
+  <div class="prose"><p>Fargo and Grand Forks are one working corridor — the same builders, the same lakebed clays and floodplain questions, eighty miles of I-29 apart. Where a Fargo team's program extends up the valley, the systems scope is carried on the same basis: mechanical, electrical, and plumbing as one sealed set, designed for the valley's groundwater and cold. The Grand Forks statement of that scope is on our <a href="/locations/north-dakota/grand-forks/mep-engineering/">MEP engineer Grand Forks</a> page.</p></div>
 </div></section>`;
 }
 
@@ -6215,6 +6223,7 @@ ${state.slug === "texas" ? mckinneyDefenseSection("") : ""}
 ${state.slug === "texas" ? rockwallDefenseSection("") : ""}
 ${state.slug === "north-dakota" ? bismarckCityDefenseSection("") : ""}
 ${state.slug === "north-dakota" ? bismarckStateHubSection() : ""}
+${state.slug === "north-dakota" ? grandForksHubSupportSection() : ""}
 ${state.slug === "iowa" ? siouxCityStateHubSection("iowa") : ""}
 ${state.slug === "nebraska" ? siouxCityStateHubSection("nebraska") : ""}
 ${state.slug === "south-dakota" ? siouxCityStateHubSection("south-dakota") : ""}
@@ -9830,6 +9839,7 @@ ${expansion.stateSlug === "nebraska" && metro.slug === "lincoln" && service.serv
 ${expansion.stateSlug === "illinois" && metro.slug === "chicago" && service.serviceSlug === "civil-engineering" ? chicagoCivilPermitSupportSection() : ""}
 ${expansion.stateSlug === "illinois" && metro.slug === "peoria" && service.serviceSlug === "civil-engineering" ? peoriaCivilPermitSupportSection() : ""}
 ${expansion.stateSlug === "north-dakota" && metro.slug === "grand-forks" && service.serviceSlug === "mep-engineering" ? grandForksMepCarrierSection() : ""}
+${expansion.stateSlug === "north-dakota" && metro.slug === "grand-forks" && service.serviceSlug === "mep-engineering" ? grandForksPhraseTopUpSection() : ""}
 ${expansion.stateSlug === "north-dakota" && metro.slug === "bismarck" && service.serviceSlug === "mep-engineering" ? bismarckCityStateLinkSection() : ""}
 ${expansion.stateSlug === "north-dakota" && metro.slug === "fargo" && service.serviceSlug === "mep-engineering" ? fargoGrandForksSupportSection() : ""}
 ${expansion.stateSlug === "indiana" && metro.slug === "evansville" && service.serviceSlug === "mep-engineering" ? evansvilleCarrierHtml() : ""}
