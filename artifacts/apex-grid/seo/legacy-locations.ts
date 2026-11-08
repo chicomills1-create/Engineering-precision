@@ -73,6 +73,10 @@ export const LEGACY_LOCATION_REDIRECTS: Readonly<Record<string, string>> = {
   // survivor. Both folded URLs land single-hop on their winners.
   "/answers/cold-storage-warehouse-refrigeration/": "/answers/cold-storage-design/",
   "/answers/cold-storage-ammonia-system-design/": "/answers/ammonia-refrigeration-design/",
+  // B2 fold (2026-11-07, Director decision): the ranked -engineering URL
+  // was lost from the answers build (live 404); the cure content lives on
+  // the -design winner, so the dead URL folds to it permanently.
+  "/answers/coffee-shop-engineering/": "/answers/coffee-shop-design/",
   // Census fix Wave B (2026-10-19): internal links pointed at these URLs,
   // which 404'd. Each folds to its live canonical equivalent (targets
   // live-verified 200 before adding).
