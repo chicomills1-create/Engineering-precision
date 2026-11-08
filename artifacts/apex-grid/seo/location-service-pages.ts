@@ -475,6 +475,37 @@ export const LOCATION_SERVICE_PAGES: LocationServicePage[] = [
       { href: "/locations/arizona/mesa/mep-engineering/", label: "MEP engineer in Mesa" },
     ],
   },
+  {
+    stateSlug: "arizona", stateName: "Arizona", stateAbbrev: "AZ",
+    citySlug: "yuma", cityName: "Yuma", county: "Yuma County",
+    serviceSlug: "mep-engineering",
+    title: "MEP Engineering Firm Yuma, AZ | MEP Engineer Yuma | Apex Grid Engineering",
+    h1: "MEP Engineering in Yuma",
+    kicker: "Yuma, AZ \u00b7 MEP Engineering",
+    lede: "MEP engineering in Yuma is a cooling problem before it is anything else: summer design temperatures here are among the highest in the United States, Yuma is regularly counted the sunniest city in the country, and every rooftop unit, chiller, and air handler is selected against that heat rather than a Phoenix-metro average. Apex Grid Engineering works as the MEP engineering firm Yuma owners, architects, and general contractors scope when the three disciplines have to arrive as one coordinated set \u2014 mechanical systems derated honestly for high-ambient operation, electrical distribution sized for refrigeration and process loads, and plumbing designed for a desert city\u2019s water discipline \u2014 permitted through the City of Yuma and built for the building stock Yuma actually has.",
+    ahj: "City of Yuma Community Development Department",
+    buildingCode: "2018 IBC with City of Yuma amendments",
+    energyCode: "2018 IECC",
+    marketNote: "Yuma\u2019s economy runs on agriculture \u2014 the Yuma Valley grows the overwhelming share of the nation\u2019s winter leafy greens \u2014 and the construction follows it: cold-storage and produce-cooling plants, food-processing buildings, and the logistics and warehouse stock along Interstate 8 and the US-95 corridor toward San Luis. Healthcare expands steadily around Yuma Regional Medical Center, Arizona Western College anchors institutional work, and Marine Corps Air Station Yuma and the Yuma Proving Ground pull defense-support and contractor facilities into the local market. Retail tenant improvements, multifamily, and school work round out the pipeline. Each segment keeps an MEP engineering firm Yuma teams can reach on a fast turnaround in steady demand \u2014 refrigeration-heavy industrial scopes and healthcare fit-outs especially punish slow, fragmented design.",
+    climateNote: "Yuma sits in ASHRAE Climate Zone 2B \u2014 hot and dry \u2014 with summer highs routinely above 110\u00b0F, a monsoon season that brings humidity spikes and dust storms off the surrounding farmland and desert, and some of the strongest solar resource in North America. Mechanical design is cooling-dominant with strict high-ambient derating; dust filtration and coil protection are operating-cost decisions, not details; rooftop equipment is specified for sustained extreme heat; and the solar resource makes commercial rooftop PV a standard part of the electrical conversation. These are the conditions MEP engineering Yuma buildings are designed against, project after project.",
+    topics: [
+      "Mechanical design for extreme heat \u2014 high-ambient derating, rooftop and split systems, chillers, and ventilation sized for Zone 2B design days",
+      "Cold storage and produce-cooling MEP \u2014 refrigeration coordination, washdown-rated plumbing, and process utilities for Yuma Valley cooling and packing plants",
+      "Food processing and agricultural industrial \u2014 process power, ventilation, grease and waste systems, and sanitation-driven plumbing design",
+      "Healthcare MEP \u2014 clinic and medical-office fit-outs, ventilation and medical-gas coordination, and essential electrical systems",
+      "Electrical service and distribution \u2014 APS service coordination, switchgear, panels, and lighting and controls to the adopted energy code",
+      "Solar PV integration \u2014 commercial rooftop PV design and interconnection support under Yuma\u2019s solar resource",
+      "Logistics and warehouse MEP \u2014 high-bay ventilation, dock equipment power, and sprinkler and fire-alarm coordination",
+      "Retail, restaurant, and tenant-improvement MEP \u2014 kitchen exhaust and grease systems, rooftop changeouts, and fast-turn permit sets",
+      "Multifamily and hospitality systems \u2014 water-conserving plumbing design for a desert system, waste and vent, and gas distribution",
+      "MEP engineering Yuma permit support \u2014 City of Yuma submittals, review responses, and sealed MEP sets delivered on compressed schedules",
+    ],
+    relatedServiceSlugs: ["structural-engineering", "civil-engineering"],
+    nearbyCityServiceLinks: [
+      { href: "/locations/arizona/queen-creek/mep-engineering/", label: "MEP engineer in Queen Creek" },
+      { href: "/locations/arizona/phoenix/mep-engineering/", label: "MEP engineer in Phoenix" },
+    ],
+  },
 
   // ─── ARIZONA — MICRO-MARKET PAGES ───────────────────────────────────────
 
