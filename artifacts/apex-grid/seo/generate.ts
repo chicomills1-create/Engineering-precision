@@ -4701,6 +4701,17 @@ function queenCreekHubSection(): string {
 </div></section>`;
 }
 
+/** Yuma MEP carrier support (2026-11-07, E8 cure): the Yuma city page
+ * carries the editorial link DOWN to its new MEP child so the page is
+ * not an orphan. The Arizona state hub picks the child up through the
+ * specialty linkrow automatically once the matrix entry exists. */
+function yumaHubSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Yuma's <em>Systems Scope</em></h2>
+  <div class="prose"><p>Yuma's building stock \u2014 the cold-storage and produce-cooling plants behind the winter lettuce harvest, the logistics buildings along Interstate 8, the medical campus around Yuma Regional Medical Center, and the retail and multifamily growth across the city toward San Luis and Somerton \u2014 runs on systems designed for the most extreme cooling climate in Arizona. <a href="/locations/arizona/yuma/mep-engineering/">MEP engineering in Yuma</a> sets out the mechanical, electrical, and plumbing scopes for that stock: high-ambient mechanical design, refrigeration and process coordination for food facilities, and permit sets built for the City of Yuma's review path. The firm's Queen Creek bench serves Yuma on the same turnaround it gives the Phoenix metro.</p></div>
+</div></section>`;
+}
+
 /** Scottsdale Defense Cure (2026-11-03): editorial deepening +
  *  support INTO the fallen carrier for "mep engineering company
  *  scottsdale" (#2 -> null, rank-drop guard pair
@@ -6483,6 +6494,7 @@ ${state.slug === "arizona" && city.slug === "mesa" ? mesaCarrierSection() : ""}
 ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && city.slug === "queen-creek" ? queenCreekHubSection() : ""}
+${state.slug === "arizona" && city.slug === "yuma" ? yumaHubSection() : ""}
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && CELINA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? celinaDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && PROSPER_DEFENSE_SOURCE_SLUGS.has(city.slug) ? prosperDefenseSection(city.slug) : ""}
