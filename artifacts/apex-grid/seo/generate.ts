@@ -4454,6 +4454,71 @@ function goodyearCarrierSection(): string {
 </div></section>`;
 }
 
+/** Fragility Sweep hardening (2026-11-09, installment 1): five Apex
+ *  crown-jewel carriers holding #1 with the exact ranking phrase x0
+ *  (register snapshot -14; sweep record
+ *  FRAGILITY-SWEEP-EXPOSED-2026-11-09.md). Additive only per the prime
+ *  directive — no template, heading, or URL change on any winning
+ *  page. Each carrier gains its exact contiguous query phrase x3 in
+ *  natural body prose (the Broomfield/Mesa carrier-block idiom);
+ *  Salt Lake City additionally gains a real MEP-documentation section
+ *  toward sibling-hub depth. The Arizona state hub gains one editorial
+ *  section carrying one exact-phrase anchor to each of the three
+ *  Arizona carriers (predictor-2 fix: before this build the hub's only
+ *  hrefs to them were the directory linkrow's "<City> engineering
+ *  services" entries — no editorial link). Kenton Vale is excluded by
+ *  the sweep (artifact asset, no build). Copy traces to each page's
+ *  own published facts + civic geography only; no licensure claims
+ *  added. */
+function prescottCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>An <em>MEP Engineer</em> Prescott Project Teams Can Scope in One Pass</h2>
+  <div class="prose"><p>Prescott's building stock asks for a different desert discipline than the Valley floor: the historic downtown and Whiskey Row corridors, the medical campus around the regional hospital, Yavapai College and the institutional work it anchors, and the commercial growth running out toward the airport and Prescott Valley. Apex Grid Engineering works as an MEP engineer Prescott owners, developers, and general contractors can scope against one coordinated set — mechanical, electrical, and plumbing designed together and documented as a single package. The mile-high elevation changes the design basis: heating loads the Phoenix metro never sees, snow on roofs and intakes, and freeze protection on every water line, with the cooling season still real in July. Each pattern is carried inside one set rather than reconciled in the field.</p>
+  <p>Permitting runs through the City of Prescott under the IBC with local amendments — Arizona carries no mandatory statewide commercial building code, so the governing editions are the city's own, confirmed with the permit office at project kickoff. The engineering is sequenced to that review: load calculations matched to the real altitude and the real fit-out, energy-code compliance documented with the set, and drawings coordinated across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted. That is the working test an MEP engineer Prescott projects are judged by — one consistent set a reviewer can clear without sending the disciplines back to be coordinated, sealed by the MEP engineer Prescott teams can reach when a plan-review comment lands.</p></div>
+</div></section>`;
+}
+
+function casaGrandeCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>An <em>MEP Engineering Firm</em> Casa Grande Project Teams Can Scope in One Pass</h2>
+  <div class="prose"><p>Casa Grande sits at the junction of I-8 and I-10, halfway between the Phoenix and Tucson metros, and its building stock follows the freight: logistics and warehouse buildings along the interstate corridors, the industrial and manufacturing plants the rail lines serve, a growing medical campus, and the retail and civic work filling in behind the master-planned rooftops. Apex Grid Engineering works as an MEP engineering firm Casa Grande owners, developers, and general contractors can scope against one coordinated set — mechanical, electrical, and plumbing designed together and documented as a single package. The desert basis governs every pattern: cooling-dominant mechanical loads, electrical service sized for rooftop plant and process power, and plumbing coordinated inside the same set rather than reconciled in the field.</p>
+  <p>Permitting runs through the City of Casa Grande under the IBC with local amendments — Arizona carries no mandatory statewide commercial building code, so the governing editions are the city's own, confirmed with the permit office at project kickoff. The engineering is sequenced to that review: load calculations matched to the real building, energy-code compliance documented with the set, and drawings coordinated across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted. That is the standard an MEP engineering firm Casa Grande reviewers expect — one consistent package instead of three separate ones — and the reason an MEP engineering firm Casa Grande project teams return to is the set that clears review without a coordination cycle.</p></div>
+</div></section>`;
+}
+
+function goodyearFirmSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>An <em>MEP Engineering Firm</em> Goodyear Project Teams Can Scope in One Pass</h2>
+  <div class="prose"><p>The structural block above covers one discipline; the systems scope on a Goodyear project is its own discipline set. Apex Grid Engineering works as an MEP engineering firm Goodyear owners, developers, and general contractors can scope against one coordinated set — mechanical, electrical, and plumbing designed together and documented as a single package. The city's stock drives the specifics: the warehouse and data-support buildings along the I-10 corridor, the retail and civic buildings rising at Civic Square and the GSQ district, the Estrella master plan's amenity and commercial work, and the medical offices following the rooftops. Each pattern carries the same desert design basis: cooling-dominant mechanical loads, electrical service sized for rooftop plant and process power, and plumbing coordinated inside the same set rather than reconciled in the field.</p>
+  <p>Permitting runs through the City of Goodyear under the IBC with local amendments — Arizona carries no mandatory statewide commercial building code, so the governing editions are the city's own, confirmed with the permit office at project kickoff. The engineering is sequenced to that review: load calculations matched to the real building, energy-code compliance documented with the set, and drawings coordinated across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted. That is the standard an MEP engineering firm Goodyear reviewers expect — and it is why an MEP engineering firm Goodyear project teams can hold to one sealed set keeps the comment cycle short: the three disciplines arrive already reconciled.</p></div>
+</div></section>`;
+}
+
+function sandySpringsCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>An <em>MEP Engineer</em> Sandy Springs Project Teams Can Scope in One Pass</h2>
+  <div class="prose"><p>The coverage sections above follow Sandy Springs projects outward — to Roswell, Alpharetta, and Marietta. The home market is its own scope. Apex Grid Engineering works as an MEP engineer Sandy Springs owners, developers, and general contractors can scope against one coordinated set — mechanical, electrical, and plumbing designed together and documented as a single package. The city's stock drives the specifics: the Perimeter Center office towers and the medical campus around them — Northside Hospital, Saint Joseph's, and Children's Healthcare of Atlanta anchor one of the Southeast's densest hospital districts — the City Springs civic and mixed-use district, and the corporate corridor running up GA-400. Each pattern asks the same thing of its systems: mechanical sized to the real load, electrical from the service entrance through distribution and lighting, and plumbing for water, waste, and specialty medical systems — reconciled on paper before they can collide in the field.</p>
+  <p>Permitting runs through the City of Sandy Springs under the Georgia State Minimum Standard Codes — the IBC with Georgia amendments adopted statewide by DCA — with the city's own review path and local amendments in force at submittal. The engineering is sequenced to that review: existing-condition verification where a suite is being re-tenanted, load calculations matched to the actual fit-out, and drawings coordinated across the mechanical, electrical, and plumbing sheets before the package is sealed and submitted. That is the standard an MEP engineer Sandy Springs reviewers expect, and the reason an MEP engineer Sandy Springs teams scope first is the set that goes in as one package instead of three.</p></div>
+</div></section>`;
+}
+
+function saltLakeCityDocumentationSection(): string {
+  return `<section class="block"><div class="container">
+  <h2><em>MEP Documentation</em> in Salt Lake City: What the Permit Set Carries</h2>
+  <div class="prose"><p>Documentation is where an MEP design becomes a permit. The MEP documentation Salt Lake City reviewers work from is a coordinated record, not three discipline sets stapled together: mechanical schedules, load calculations, and equipment data; electrical one-line diagrams, panel schedules, and lighting-compliance forms; plumbing riser diagrams, fixture counts, and sizing calculations — each sheet cross-referenced to the others, and the whole package checked against the state-adopted 2021 IBC and 2021 IECC with Utah amendments before it is sealed. Apex Grid assembles that record as one set, because Salt Lake City Building Services reviews it as one set: a duct size on the mechanical sheet, a circuit on the electrical sheet, and a drain on the plumbing sheet that disagree with each other are three correction comments, not one.</p>
+  <p>The local record carries requirements a generic set misses. Seismic bracing and anchorage documentation for MEP components is scrutinized along the Wasatch Front — most projects sit in Seismic Design Category D, and the drawings have to show how ducts, piping, conduit, and equipment are restrained, not just note that they will be. Snow-melt systems, freeze protection, and roof-drainage details are documented against the valley's ground snow load; heating plant and combustion documentation answers the winter-inversion air-quality rules the valley enforces; and the energy documentation — COMcheck output matched to the mechanical and lighting sheets it certifies — has to agree with the city's sustainability and electrification overlays. Deferred submittals, equipment substitutions, and record drawings stay inside the same documentation chain, so the set that was permitted is the set the contractor builds from and the owner keeps.</p>
+  <p>That chain is the product. Owners and architects who scope MEP documentation Salt Lake City projects can rely on are buying the review cycle it prevents: calculations indexed to the drawings they support, schedules that match the equipment actually specified, and a sealed package Salt Lake City Building Services can clear without sending the disciplines back to be reconciled. Apex Grid's MEP documentation Salt Lake City practice runs on that standard — one coordinated record, sealed once, and supported through corrections, submittals, and construction until the permit closes.</p></div>
+</div></section>`;
+}
+
+function arizonaCrownJewelHubSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Three Arizona Markets, <em>Documented in Full</em></h2>
+  <div class="prose"><p>Three of this state's hardest-working markets sit outside the Phoenix metro editorial sections above, and each carries its full picture on its own page. High-country work runs through Prescott — the historic downtown corridors, the regional medical campus, and growth toward the airport — where the systems scope is set out by our <a href="/locations/arizona/prescott/">MEP engineer Prescott</a> page: heating-led design at a mile of elevation, freeze protection, and the City of Prescott's own review path under the IBC with local amendments.</p>
+  <p>Pinal County's interstate junction is Casa Grande, where logistics, industrial, and medical stock follows the I-8 and I-10 corridors; the systems picture there is documented by our <a href="/locations/arizona/casa-grande/">MEP engineering firm Casa Grande</a> page, including the city's own permitting track. And on the metro's west side, Goodyear's warehouse corridor, Civic Square growth, and Estrella build-out are covered by our <a href="/locations/arizona/goodyear/">MEP engineering firm Goodyear</a> page — mechanical, electrical, and plumbing documented as one sealed set for the city's review. Three markets, three review paths, one standard: the set arrives coordinated.</p></div>
+</div></section>`;
+}
+
 function alpharettaCarrierSection(): string {
   return `<section class="block"><div class="container">
   <h2>What an MEP Engineer Scopes in <em>Alpharetta</em></h2>
@@ -6216,6 +6281,7 @@ ${state.slug === "georgia" ? mariettaDefenseSection("") : ""}
 ${state.slug === "arizona" ? mesaDefenseSection("") : ""}
 ${state.slug === "arizona" ? maricopaDefenseSection("") : ""}
 ${state.slug === "arizona" ? queenCreekDefenseSection("") : ""}
+${state.slug === "arizona" ? arizonaCrownJewelHubSection() : ""}
 ${state.slug === "arizona" ? scottsdaleDefenseSection("") : ""}
 ${state.slug === "colorado" ? broomfieldDefenseSection("") : ""}
 ${state.slug === "texas" ? celinaDefenseSection("") : ""}
@@ -6518,6 +6584,10 @@ ${state.slug === "georgia" && MARIETTA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mar
 ${state.slug === "georgia" && city.slug === "alpharetta" ? alpharettaCarrierSection() : ""}
 ${state.slug === "georgia" && city.slug === "marietta" ? mariettaCarrierSection() : ""}
 ${state.slug === "arizona" && city.slug === "goodyear" ? goodyearCarrierSection() : ""}
+${state.slug === "arizona" && city.slug === "goodyear" ? goodyearFirmSection() : ""}
+${state.slug === "arizona" && city.slug === "prescott" ? prescottCarrierSection() : ""}
+${state.slug === "arizona" && city.slug === "casa-grande" ? casaGrandeCarrierSection() : ""}
+${state.slug === "georgia" && city.slug === "sandy-springs" ? sandySpringsCarrierSection() : ""}
 ${state.slug === "arizona" && city.slug === "mesa" ? mesaCarrierSection() : ""}
 ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaDefenseSection(city.slug) : ""}
@@ -14802,6 +14872,7 @@ ${state.slug === "arizona" && city.slug === "mesa" ? mesaCarrierSection() : ""}
 ${state.slug === "arizona" && SCOTTSDALE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? scottsdaleDefenseSection(city.slug) : ""}
 ${state.slug === "colorado" && BROOMFIELD_DEFENSE_SOURCE_SLUGS.has(city.slug) ? broomfieldDefenseSection(city.slug) : ""}
 ${state.slug === "georgia" && city.slug === "augusta" ? augustaMetroHubSection() : ""}
+${state.slug === "utah" && city.slug === "salt-lake-city" ? saltLakeCityDocumentationSection() : ""}
 ${state.slug === "texas" && CELINA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? celinaDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && PROSPER_DEFENSE_SOURCE_SLUGS.has(city.slug) ? prosperDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && MCKINNEY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mckinneyDefenseSection(city.slug) : ""}
