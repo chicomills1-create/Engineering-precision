@@ -803,9 +803,9 @@ export const WAVE_BQ_ANSWER_PAGES: Phase0AeoPage[] = [
   },
   {
     slug: "mechanical-parking-design",
-    title: "What Should You Know About Mechanical Parking System Design?",
+    title: "What Should You Know About Mechanical Parking System Design? Designing Mechanical Parking Systems, Explained",
     description: "Mechanical parking design integrates stackers, puzzle systems, and lifts, with vendor loads, power, clearances, and maintenance access fully designed.",
-    h1: "What Should You Know About Mechanical Parking System Design?",
+    h1: "What Should You Know About Mechanical Parking System Design? Designing Mechanical Parking Systems, Explained",
     answer: "Mechanical parking design covers the family of equipment-based systems — two- and three-level stackers, puzzle systems, and turntable or lift assists — that multiply parking capacity without full automation. The engineering is more approachable than fully automated parking: the equipment vendor provides loads, power requirements, and clearances, and the design team integrates them into the building. Structural design handles the concentrated equipment and vehicle loads plus dynamic forces; electrical design provides power and controls; and the layout preserves maintenance access to every unit. Mechanical systems are the workhorses of constrained sites — residential buildings, small commercial lots, dealerships — where doubling or tripling capacity in the same footprint solves the problem. The caution I give owners: mechanical parking is only as good as its maintenance contract, so reliability and service access belong in the design conversation from day one.",
     directAnswer: "Mechanical parking uses stackers, puzzle systems, and lifts to multiply capacity in a fixed footprint. The design integrates vendor-specified loads, power, and clearances into the structure, provides maintenance access to every unit, and addresses user operation and safety. It is simpler than full automation but still demands early vendor coordination and a real maintenance plan.",
     topic: "Structural",
@@ -831,7 +831,7 @@ export const WAVE_BQ_ANSWER_PAGES: Phase0AeoPage[] = [
     sections: [
       {
         heading: "The concise answer",
-        body: "Mechanical parking uses stackers, puzzle systems, and lifts to multiply capacity in a fixed footprint. The design integrates vendor-specified loads, power, and clearances into the structure, provides maintenance access to every unit, and addresses user operation and safety. It is simpler than full automation but still demands early vendor coordination and a real maintenance plan.\n\nFor many constrained sites, mechanical parking is the pragmatic answer — meaningful capacity gains without the complexity and cost of full automation. The engineering is straightforward as long as the vendor is engaged early and maintenance is treated as a design requirement.",
+        body: "Mechanical parking uses stackers, puzzle systems, and lifts to multiply capacity in a fixed footprint. The design integrates vendor-specified loads, power, and clearances into the structure, provides maintenance access to every unit, and addresses user operation and safety. It is simpler than full automation but still demands early vendor coordination and a real maintenance plan.\n\nFor many constrained sites, mechanical parking is the pragmatic answer — meaningful capacity gains without the complexity and cost of full automation. The engineering is straightforward as long as the vendor is engaged early and maintenance is treated as a design requirement. That coordination — structure, power, clearances, and service access resolved as one problem — is what designing mechanical parking systems actually involves.",
       },
       {
         heading: "Where the engineering actually lives",
