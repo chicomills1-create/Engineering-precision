@@ -6235,6 +6235,39 @@ function coldStorageDefenseForIndustryPage(page: IndustryDisciplinePage): string
   return coldStorageLinkSection(key);
 }
 
+/** Multifamily MEP hardening (Defense Watch cure, 2026-11-09): the carrier
+ *  for "multifamily mep engineer" — /industries/multifamily/mep-engineering/
+ *  — fell #9 -> #15 on the rank-drop guard pair nw -04 -> -20. Census
+ *  (Defense Watch, 2026-11-09): the exact phrase appeared x0 (only
+ *  "Multifamily MEP engineering" forms) on ~450 words of industries-template
+ *  boilerplate. The Engides carrier for the same query (#5 -> #8) was
+ *  adjudicated NO BUILD — phrase x3 inside ~1,600 words of deep prose — so
+ *  this is an Apex-carrier content defect, not a market move. Cure: this
+ *  carrier section in the coldStorageDefenseForIndustryPage idiom, exact
+ *  phrase x3 in body prose: unit-system repetition (repeated unit types
+ *  engineered once, verified per stack), riser discipline (vertical
+ *  distribution, shaft coordination, pressure zoning), and podium
+ *  coordination (parking/podium interface, amenity and retail shells below
+ *  residential). Copy is practice substance only — no invented projects,
+ *  clients, or figures. Additions only; nothing existing removed. */
+const MULTIFAMILY_CARRIER_PATH = "/industries/multifamily/mep-engineering/";
+
+function multifamilyCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>How a Multifamily MEP Engineer <em>Actually Works</em></h2>
+  <div class="prose"><p>A multifamily MEP engineer designs around repetition. A garden community or a mid-rise tower is not three hundred different homes — it is a handful of unit types repeated floor over floor, and the engineering follows that logic: each unit type is designed once, completely — its HVAC load and equipment, its electrical panel schedule and circuiting, its water, waste, and vent connections — and that design is then placed, stacked, and verified everywhere the type repeats. The repetition is the efficiency, and it is also the risk: an error inside a unit type is not one error, it is an error in every home built from that type, so the unit designs get the deepest checking on the project before a single riser is drawn.</p>
+  <p><strong>Unit systems repeat; risers discipline the building.</strong> What makes a repeated-unit building work is the vertical distribution behind the walls. Domestic water, sanitary, and vent piping, refrigerant and condensate runs, ducted or ductless HVAC distribution, and electrical feeders all rise through aligned shafts, and a multifamily MEP engineer holds that alignment as a discipline: wet walls stacked, shafts coordinated with the structure and the corridor plan, and no jog introduced on one floor that every floor above it then has to absorb. Water pressure is zoned as the building climbs — pressure-reducing stations and booster pumping where height demands them — so a top-floor shower and a ground-floor hose bib both land inside their working ranges, and riser diagrams document every vertical system so the field installs what the model assumed.</p>
+  <p><strong>Podium coordination is where the disciplines collide.</strong> Where residences sit over a parking podium, the systems change character at the slab: garage ventilation and carbon-monoxide control below, residential distribution above, and the transfer level itself carrying the horizontal runs that connect the towers to the site. The amenity and retail shells at the podium — clubroom, fitness, leasing, pool support, ground-floor commercial bays — are engineered in the same set, with their own ventilation, grease and waste paths, and metering, because a shell delivered without coordinated MEP is a tenant improvement that starts by reopening finished work. Fire protection and life-safety coordination cross the same interface, so the podium is treated as one system, not a line where one set of drawings stops and another starts.</p>
+  <p><strong>Verification runs per stack, not per hope.</strong> Repetition only pays when it is verified: typical floors are checked as types, then the exceptions — top floors under roof loads, ground floors at the podium interface, accessible and adaptable units, corner conditions — are checked as themselves, because those are the units that do not repeat. That is the working method a multifamily MEP engineer brings to apartments, condominiums, build-to-rent communities, and mixed-use residential alike: engineer the type once, discipline the risers, coordinate the podium, and verify every stack against the building as drawn — a sealed set a reviewer can follow and a contractor can build floor after identical floor.</p></div>
+</div></section>`;
+}
+
+function multifamilyDefenseForIndustryPage(page: IndustryDisciplinePage): string {
+  const key = page.segments.join("/");
+  if (key === "multifamily/mep-engineering") return multifamilyCarrierSection();
+  return "";
+}
+
 function statePage(state: StateData, cities: CityData[], directory: CityDirectory): string {
   const stateCities = cities.filter((c) => c.stateSlug === state.slug && isReviewedCity(c));
   const directoryCities = eligibleDirectoryCities(state, directory, cities);
@@ -8095,6 +8128,7 @@ ${breadcrumb(crumbs)}
 ${cleanroomDefenseForIndustryPage(page)}
 
 ${coldStorageDefenseForIndustryPage(page)}
+${multifamilyDefenseForIndustryPage(page)}
     ${industrialWarehouseIndustrySection(page)}
     ${guard1409IndustrySection(page)}
     ${jetBlastIndustrySupport(page)}
