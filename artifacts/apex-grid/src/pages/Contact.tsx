@@ -225,7 +225,19 @@ export default function Contact() {
 
   return (
     <div className="flex flex-col">
-      <section className="pt-32 pb-16 bg-background border-b border-border">
+      <section className="relative pt-32 pb-16 bg-background border-b border-border">
+        {/* SEASONAL — Christmas accent, added 2026-11-10, REMOVE by 2027-01-02 */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 h-24"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgba(255,255,255,0.55) 0 2px, transparent 3px), radial-gradient(circle, rgba(255,255,255,0.35) 0 1.5px, transparent 2.5px), radial-gradient(circle, rgba(218,27,43,0.55) 0 2px, transparent 3px), radial-gradient(circle, rgba(255,255,255,0.45) 0 1.5px, transparent 2.5px), radial-gradient(circle, rgba(255,255,255,0.30) 0 2px, transparent 3px)",
+            backgroundSize: "260px 96px",
+            backgroundPosition: "12px 18px, 84px 52px, 148px 26px, 196px 64px, 232px 38px",
+            backgroundRepeat: "repeat-x",
+          }}
+        />
         <div className="container mx-auto px-4 md:px-8 max-w-3xl text-center">
           <h1 className="text-5xl md:text-6xl font-display font-bold leading-tight mb-6 text-white">
             Get in touch
