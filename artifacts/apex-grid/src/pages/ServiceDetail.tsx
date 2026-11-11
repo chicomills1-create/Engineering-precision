@@ -51,7 +51,7 @@ const servicesData = {
     ],
   },
   "assessments": {
-    title: "Building Assessments",
+    title: "Desktop Building Assessment — based on the drawings, surveys, and photos you provide",
     bg: assessmentBg,
     problem: "Buying, renovating, or troubleshooting a building? You need facts, not assumptions.",
     fix: "Independent engineering judgment — plain-English reporting on condition, capacity, and what it will cost to fix.",
@@ -163,6 +163,14 @@ export default function ServiceDetail() {
             <p className="text-lg text-foreground/80 leading-relaxed max-w-2xl mt-4">
               <strong className="text-white">Turnaround:</strong> most standard scopes move from kickoff to sealed drawings in weeks, not months — and your quote lands within 12–24 hours.
             </p>
+            <p className="mt-6 border border-primary/40 bg-primary/10 px-5 py-4 text-base md:text-lg font-bold text-white leading-relaxed">
+              Design + PE stamping only — no site visits. Send your drawings; we start from there.
+            </p>
+            {serviceId === "assessments" && (
+              <p className="mt-4 text-lg text-foreground/80 leading-relaxed max-w-2xl">
+                This is a design review based on client-provided records. It is not a site inspection, condition survey, or forensic investigation.
+              </p>
+            )}
           </div>
         </div>
       </section>
