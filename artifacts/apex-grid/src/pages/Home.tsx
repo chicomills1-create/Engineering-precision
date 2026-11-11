@@ -8,6 +8,7 @@ import { useJsonLd, usePageMeta } from "@/lib/seo";
 import { APEX_GRID_BUSINESS_SCHEMA } from "@/lib/business-schema";
 import { LicensingCoverage } from "@/components/LicensingCoverage";
 import { PlanDropZone } from "@/components/PlanDropZone";
+import { SantaHat } from "@/components/SantaHat";
 
 /**
  * Homepage — KILL MODE. Proof, not promises.
@@ -122,7 +123,8 @@ export default function Home() {
               Apex Grid Engineering — PE-Stamped MEP · Structural · Civil
             </span>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.95] tracking-tighter mb-6 type-metallic">
-              49 states. 10+ PEs.<br /><span className="type-accent-glow">One engineering firm.</span>
+              {/* SEASONAL — Christmas hat, added 2026-11-10, REMOVE by 2027-01-02 */}
+              <span className="relative">4<SantaHat className="pointer-events-none absolute" style={{ width: "0.62em", left: "0.02em", top: "-0.30em", transform: "rotate(18deg)", transformOrigin: "50% 85%", filter: "drop-shadow(0 0.035em 0.045em rgba(0,0,0,0.5))" }} /></span>9 states. 10+ PEs.<br /><span className="type-accent-glow">One engineering firm.</span>
             </h1>
             <p className="text-lg md:text-2xl text-foreground/80 max-w-2xl mb-12 leading-relaxed font-light">
               Veteran-owned. Licensed PEs, same-day stamps —
