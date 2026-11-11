@@ -40,7 +40,7 @@ const services = [
     id: "assessments",
     num: "04",
     problem: "Not sure what you're dealing with?",
-    title: "Building Assessments",
+    title: "Desktop Building Assessment — based on the drawings, surveys, and photos you provide",
     fix: "Independent engineering judgment when conditions change, damage is suspected, or you need verification.",
     bg: assessmentBg,
   },
