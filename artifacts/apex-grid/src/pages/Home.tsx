@@ -176,7 +176,11 @@ export default function Home() {
                 Drop your drawings below — a licensed PE reviews them and your quote lands the same day.
               </p>
             </div>
-            <PlanDropZone />
+                        <p className="mt-8 text-lg md:text-xl font-bold text-white leading-relaxed">
+              We don't do site visits. We handle design work and PE stamping — our licensed PEs design and stamp your project from the drawings, surveys, photos, and records you send us, so work can start fast, in your state, without waiting for a trip to the site.
+            </p>
+
+        <PlanDropZone />
           </div>
         </div>
       </section>
