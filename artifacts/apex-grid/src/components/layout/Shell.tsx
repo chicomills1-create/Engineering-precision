@@ -1,6 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { Menu, X, ChevronDown, Phone, Mail } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { SantaHat } from "@/components/SantaHat";
 import { useState, useEffect, useRef } from "react";
 import { FEATURED_INDUSTRIES } from "@/data/industries";
 import { LICENSING_COVERAGE_STATEMENT, PROJECT_JURISDICTION_NOTE } from "@/lib/licensing";
@@ -97,7 +98,11 @@ export function Shell({ children }: { children: React.ReactNode }) {
         <div className="mx-auto px-4 md:px-8 max-w-[1720px] flex items-center justify-between">
           <div className="flex items-center gap-2 shrink-0">
             <Link href="/" className="group flex items-center gap-3">
-              <Logo className="w-8 h-8 text-primary group-hover:scale-105 transition-transform" />
+              {/* SEASONAL — Christmas hat, added 2026-11-10, REMOVE by 2027-01-02 */}
+              <span className="relative inline-flex shrink-0 group-hover:scale-105 transition-transform">
+                <Logo className="w-8 h-8 text-primary" />
+                <SantaHat className="pointer-events-none absolute" style={{ width: 20, left: 7, top: -7, transform: "rotate(16deg)", transformOrigin: "50% 85%", filter: "drop-shadow(0 1px 1.5px rgba(0,0,0,0.5))" }} />
+              </span>
               <div className="flex flex-col">
                 <span className="font-display font-bold text-lg leading-none tracking-tight group-hover:text-primary transition-colors">
                   APEX GRID
