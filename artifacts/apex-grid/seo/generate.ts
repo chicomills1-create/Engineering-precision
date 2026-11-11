@@ -1953,6 +1953,10 @@ function phase1MetroFaqs(metro: Phase1Metro, serviceLabel?: string): Array<{ que
   ];
 }
 
+/** No-site-visits banner (founder order, 2026-11-10): the firm's work is
+ *  design + PE stamping from client-provided records — no site visits.
+ *  Carried at the top of every generator-emitted /services/* page. */
+const NO_SITE_VISITS_BANNER_HTML = `<section class="block"><div class="container"><p class="lede"><strong>Design + PE stamping only — no site visits. Send your drawings; we start from there.</strong></p></div></section>`;
 function phase0ServicePage(page: Phase0ServicePage): string {
   return phase0ArticleFrame({
     canonical: page.path,
@@ -1978,7 +1982,8 @@ function phase0ServicePage(page: Phase0ServicePage): string {
       { label: "Contact Apex Grid", href: "/contact/" },
     ],
     schemaType: "Service",
-    visual: motifForText(`${page.h1} ${page.title}`),
+    visual: motifForText(`${page.h1} ${page.title}`\),
+    extraBodyHtml: NO_SITE_VISITS_BANNER_HTML,
   });
 }
 
@@ -10517,7 +10522,7 @@ async function main() {
   const aduState = normalizeCaliforniaAduPage(CALIFORNIA_ADU_STATE_PAGE);
   const aduStateDir = path.join(PUBLIC, "services", "california-adu-structural-engineering");
   fs.mkdirSync(aduStateDir, { recursive: true });
-  const aduStateHtml = californiaAduPage(aduState);
+  const aduStateHtml = californiaAduPage(aduState).replace('<section class="block"', NO_SITE_VISITS_BANNER_HTML + '<section class="block"');
   assertIndexableFaqPage(aduStateHtml, aduState.faqs, CALIFORNIA_ADU_STATE_URL);
   fs.writeFileSync(path.join(aduStateDir, "index.html"), aduStateHtml);
   pages++;
@@ -10540,7 +10545,7 @@ async function main() {
   // its own canonical intent.
   const planCheckDir = path.join(PUBLIC, "services", PLAN_CHECK_CORRECTIONS_PAGE.slug);
   fs.mkdirSync(planCheckDir, { recursive: true });
-  const planCheckHtml = planCheckCorrectionsPage(PLAN_CHECK_CORRECTIONS_PAGE);
+  const planCheckHtml = planCheckCorrectionsPage(PLAN_CHECK_CORRECTIONS_PAGE).replace('<section class="block"', NO_SITE_VISITS_BANNER_HTML + '<section class="block"');
   assertIndexableFaqPage(
     planCheckHtml,
     PLAN_CHECK_CORRECTIONS_PAGE.faqs.map((faq) => ({
