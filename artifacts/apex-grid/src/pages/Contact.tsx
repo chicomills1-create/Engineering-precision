@@ -238,7 +238,11 @@ export default function Contact() {
 
       <section className="py-16 bg-card">
         <div className="container mx-auto px-4 md:px-8 max-w-3xl">
-          <Form {...form}>
+            <p className="mb-10 text-lg md:text-xl font-bold text-white leading-relaxed">
+            We don't do site visits. We handle design work and PE stamping — our licensed PEs design and stamp your project from the drawings, surveys, photos, and records you send us, so work can start fast, in your state, without waiting for a trip to the site.
+          </p>
+
+        <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
             <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
               <label>
@@ -413,7 +417,10 @@ export default function Contact() {
                   <p className="text-sm text-muted-foreground">
                     PDF, DWG, DXF, Revit, images, Office, or ZIP — up to 20 MB each.
                   </p>
-                  {uploading && (
+                      <p className="mt-3 text-sm text-foreground/80">
+                    Upload your drawings, survey, photos, and records. No site visit will be scheduled.
+                  </p>
+              {uploading && (
                     <p className="mt-3 text-sm text-muted-foreground flex items-center justify-center gap-2">
                       <Loader2 className="w-4 h-4 animate-spin" /> Uploading…
                     </p>
@@ -550,6 +557,13 @@ export default function Contact() {
                 state-by-state stamping, code variations, and permit coordination under one roof.
               </p>
             </div>
+            <div>
+              <h4 className="text-lg font-bold text-white mb-2">Do you do site visits or inspections?</h4>
+              <p className="text-foreground/80 leading-relaxed">
+                No — we don't do site visits or on-site inspections. We handle design work and PE stamping only. Send us your drawings, survey, photos, and any existing records, and our licensed PEs will design and stamp your project from those. If something is missing or unclear, we'll tell you exactly what to send — we won't hold your project up waiting for a site trip.
+              </p>
+            </div>
+
           </div>
         </div>
       </section>
