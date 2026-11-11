@@ -8,6 +8,7 @@ import { useJsonLd, usePageMeta } from "@/lib/seo";
 import { APEX_GRID_BUSINESS_SCHEMA } from "@/lib/business-schema";
 import { LicensingCoverage } from "@/components/LicensingCoverage";
 import { PlanDropZone } from "@/components/PlanDropZone";
+import { HeroSnow } from "@/components/HeroSnow";
 import { SantaHat } from "@/components/SantaHat";
 
 /**
@@ -116,6 +117,9 @@ export default function Home() {
             />
           )}
         </div>
+
+        {/* SEASONAL — Christmas snow, added 2026-11-10, REMOVE by 2027-01-02 */}
+        <HeroSnow />
 
         <div className="container mx-auto px-4 md:px-8 relative z-30">
           <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
