@@ -1982,7 +1982,7 @@ function phase0ServicePage(page: Phase0ServicePage): string {
       { label: "Contact Apex Grid", href: "/contact/" },
     ],
     schemaType: "Service",
-    visual: motifForText(`${page.h1} ${page.title}`\),
+    visual: motifForText(`${page.h1} ${page.title}`),
     extraBodyHtml: NO_SITE_VISITS_BANNER_HTML,
   });
 }
