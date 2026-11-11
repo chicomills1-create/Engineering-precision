@@ -250,6 +250,15 @@ export default function IndustryDetail() {
                     </li>
                   ))}
                 </ul>
+                {industry.slug === "religious-worship-facility-engineering" && d.name === "Structural Engineering" && (
+                  <p className="mt-6 max-w-3xl text-foreground/80 leading-relaxed">
+                    For a deeper look at the structure behind the sanctuary — long-span roof framing, balcony and steeple design, and assembly live loads — see our page dedicated to{" "}
+                    <Link href="/industries/religious-worship/structural-engineering/" className="font-semibold text-primary hover:underline">
+                      Structural Engineering for Churches
+                    </Link>
+                    .
+                  </p>
+                )}
                 {d.href && (
                   <Link href={d.href} className="inline-flex items-center gap-2 text-sm font-semibold text-primary mt-6 hover:gap-3 transition-all">
                     Explore {d.name} <ArrowRight className="w-4 h-4" />
