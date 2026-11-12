@@ -4354,6 +4354,7 @@ ${state.slug === "missouri" && svc.slug === "mep-engineering" ? missouriMaconSta
 
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? queenCreekDefenseSection("state-mep") : ""}
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? scottsdaleDefenseSection("state-mep") : ""}
+${state.slug === "arizona" && svc.slug === "mep-engineering" ? buckeyeCarrierSection() : ""}
 <section class="ctaband"><div class="container">
   <h2>Start Your ${esc(state.name)} Project</h2>
   <p>For projects whose jurisdiction, discipline, and scope pass review, an available licensed PE and coordinated team can be identified. Send us your scope for a proposal; timing and fee depend on the project.</p>
@@ -4521,6 +4522,37 @@ function arizonaCrownJewelHubSection(): string {
   <h2>Three Arizona Markets, <em>Documented in Full</em></h2>
   <div class="prose"><p>Three of this state's hardest-working markets sit outside the Phoenix metro editorial sections above, and each carries its full picture on its own page. High-country work runs through Prescott — the historic downtown corridors, the regional medical campus, and growth toward the airport — where the systems scope is set out by our <a href="/locations/arizona/prescott/">MEP engineer Prescott</a> page: heating-led design at a mile of elevation, freeze protection, and the City of Prescott's own review path under the IBC with local amendments.</p>
   <p>Pinal County's interstate junction is Casa Grande, where logistics, industrial, and medical stock follows the I-8 and I-10 corridors; the systems picture there is documented by our <a href="/locations/arizona/casa-grande/">MEP engineering firm Casa Grande</a> page, including the city's own permitting track. And on the metro's west side, Goodyear's warehouse corridor, Civic Square growth, and Estrella build-out are covered by our <a href="/locations/arizona/goodyear/">MEP engineering firm Goodyear</a> page — mechanical, electrical, and plumbing documented as one sealed set for the city's review. Three markets, three review paths, one standard: the set arrives coordinated.</p></div>
+</div></section>`;
+}
+
+
+/** Buckeye Defense Cure (2026-11-09): the Arizona state MEP page is
+ *  itself the ranked carrier for "mep engineering firm buckeye"
+ *  (rank-drop guard pair nw_keywords_20261109-04 -> -20: #3 -> null).
+ *  Census (Defense Watch, 2026-11-09): the carrier carried the exact
+ *  phrase x0 and named Buckeye ONCE, inside the permitting card's
+ *  fast-growth list; editorial sections existed for Maricopa County,
+ *  the City of Maricopa, Queen Creek, and Scottsdale \u2014 no Buckeye
+ *  section, and no Buckeye MEP child page exists (the city hub
+ *  consolidates the discipline intents under one canonical hub), so
+ *  the state MEP page is the owner the term needs. Carrier crawl
+ *  Aug 24 \u2014 the stalest carrier crawl in the program. Cure: this
+ *  carrier section on the state MEP page in the maricopaCarrierSection
+ *  idiom, exact phrase x3 (H2 + prose x2), one prose link to the
+ *  Buckeye city hub. Copy traces to published fact: the hub's own
+ *  permitting card (fast review, aggressive drainage and dust-control
+ *  enforcement), the state design snapshot (Climate Zone 2B,
+ *  115\u00b0F+ design days), and the Buckeye city hub (population
+ *  ~104,923, 2024 ACS; IBC with local amendments, editions confirmed
+ *  with the permit office at kickoff). Additions only. */
+const BUCKEYE_CITY_HUB_PATH = "/locations/arizona/buckeye/";
+
+function buckeyeCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The <em>MEP Engineering Firm Buckeye</em> Projects Scope First</h2>
+  <div class="prose"><p>The far West Valley's growth edge is Buckeye \u2014 one of the fastest-growing cities in the country, and a building stock that shows it: master-planned communities at Verrado, Tartesso, and Festival Ranch still building out, the schools, fire stations, and civic work that follows the rooftops, retail and restaurant space along the Watson Road and Miller Road corridors, and logistics and light-industrial buildings filling in along the I-10 and SR-85 corridors. The MEP scopes follow that stock. The mechanical design is cooling-led \u2014 rooftop and split systems selected and derated for 115-degree design days in Climate Zone 2B, with filtration that holds up through monsoon dust; the electrical design covers service sizing, distribution, and the utility coordination a greenfield corridor building has to start early; the plumbing design answers the city's water picture, where supply review makes water and waste a permit question from the first site plan rather than an afterthought. Those discipline scopes sit under one roof on the city's <a href="${BUCKEYE_CITY_HUB_PATH}">engineering services in Buckeye</a> hub.</p>
+  <p>That is the standard an MEP engineering firm Buckeye owners and developers are actually buying: the three disciplines coordinated as one sealed set, sized to the building as it will be occupied, and drawn to be priced cleanly and reviewed once. Buckeye plan review runs comparatively fast for a Valley city, but the city enforces aggressively on drainage and dust control, and the MEP set has to sit inside a site package that answers both \u2014 retention, grading, and building systems resolved together before submittal, not reconciled across correction cycles. Apex Grid works from inside that picture: the governing code editions and local amendments are confirmed with the City of Buckeye at project kickoff, the loads and services are calculated against that confirmed basis, and the sealed set arrives as one consistent package the review can check in a single pass.</p>
+  <p>For teams comparing firms, the practical test is the record in this market: sets that price cleanly, permits held through review without a second coordination cycle, and drawings that still read correctly when the installer opens them in the field. An MEP engineering firm Buckeye project teams can hold to that record \u2014 across the master-planned build-out, the corridor industrial work, and the school and civic stock in between \u2014 is what this bench is built to be.</p></div>
 </div></section>`;
 }
 
