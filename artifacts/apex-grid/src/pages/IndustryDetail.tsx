@@ -66,6 +66,7 @@ const INDUSTRY_SPECIALTY_LINKS: Record<string, { href: string; label: string }[]
     { href: "/industries/multifamily/apartments/mep-engineering/", label: "Apartment MEP engineering" },
     { href: "/industries/multifamily/apartments/structural-engineering/", label: "Apartment structural engineering" },
     { href: "/industries/student-housing/mep-engineering/", label: "Student housing MEP engineering" },
+    { href: "/industries/multifamily/student-housing/structural-engineering/", label: "student housing structural engineer" },
   ],
   "restaurant-food-service-engineering": [{ href: "/industries/restaurants/commercial-kitchen-mep/", label: "Commercial kitchen MEP engineering" }],
   "self-storage-facility-engineering": [{ href: "/answers/self-storage-facility-engineering/", label: "Self-storage facility engineering answers" }],
