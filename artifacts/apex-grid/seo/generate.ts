@@ -1953,10 +1953,6 @@ function phase1MetroFaqs(metro: Phase1Metro, serviceLabel?: string): Array<{ que
   ];
 }
 
-/** No-site-visits banner (founder order, 2026-11-10): the firm's work is
- *  design + PE stamping from client-provided records — no site visits.
- *  Carried at the top of every generator-emitted /services/* page. */
-const NO_SITE_VISITS_BANNER_HTML = `<section class="block"><div class="container"><p class="lede"><strong>Design + PE stamping only — no site visits. Send your drawings; we start from there.</strong></p></div></section>`;
 function phase0ServicePage(page: Phase0ServicePage): string {
   return phase0ArticleFrame({
     canonical: page.path,
@@ -1983,7 +1979,6 @@ function phase0ServicePage(page: Phase0ServicePage): string {
     ],
     schemaType: "Service",
     visual: motifForText(`${page.h1} ${page.title}`),
-    extraBodyHtml: NO_SITE_VISITS_BANNER_HTML,
   });
 }
 
@@ -3579,7 +3574,7 @@ function engineeringIntentHubPage(): string {
 <section class="hero"><div class="container"><p class="kicker">Commercial Engineering Support</p><h1>Engineering Support by Problem and Project Stage</h1><p class="lede">A practical starting point for owners, contractors, architects, and developers who need a defined engineering deliverable. Choose the project problem or stage below; scope, records, jurisdiction, site access, licensure, and engineer availability determine the appropriate path.</p></div></section>
 <section class="block"><div class="container"><h2>Retained <em>Commercial Support</em></h2><div class="grid2">${cards}</div></div></section>
 <section class="block"><div class="container"><h2>Existing canonical <em>services</em></h2><p>Several high-intent searches are already covered by stronger canonical pages. These links consolidate fast-track scheduling, permit corrections and stamped plans, acquisition diligence, post-event assessment, and existing-condition documentation without creating duplicate URLs.</p><div class="linkrow">${existing.map(([href, label]) => `<a href="${href}">${label}</a>`).join("")}</div></div></section>
-<section class="block"><div class="container"><h2>Start with a <em>complete intake</em></h2><p>Send the project address and jurisdiction, requested outcome, drawings or photographs, relevant permit or construction correspondence, site-access conditions, desired deliverable, and schedule constraint. A proposal or initial response is not a guarantee of engineering completion or permit approval.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>`;
+<section class="block"><div class="container"><h2>Start with a <em>complete intake</em></h2><p>Send the project address and jurisdiction, requested outcome, drawings or photographs, relevant permit or construction correspondence, site-access conditions, desired deliverable, and schedule constraint. A proposal or initial response is not a guarantee of engineering completion, site-visit availability, or permit approval.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>`;
   return htmlShell({
     title: "Commercial Engineering Support by Project Stage",
     description: "Find commercial engineering support by project problem or stage, with links to permit, existing-building, structural, MEP, civil, and construction services.",
@@ -4354,7 +4349,6 @@ ${state.slug === "missouri" && svc.slug === "mep-engineering" ? missouriMaconSta
 
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? queenCreekDefenseSection("state-mep") : ""}
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? scottsdaleDefenseSection("state-mep") : ""}
-${state.slug === "arizona" && svc.slug === "mep-engineering" ? buckeyeCarrierSection() : ""}
 <section class="ctaband"><div class="container">
   <h2>Start Your ${esc(state.name)} Project</h2>
   <p>For projects whose jurisdiction, discipline, and scope pass review, an available licensed PE and coordinated team can be identified. Send us your scope for a proposal; timing and fee depend on the project.</p>
@@ -4522,37 +4516,6 @@ function arizonaCrownJewelHubSection(): string {
   <h2>Three Arizona Markets, <em>Documented in Full</em></h2>
   <div class="prose"><p>Three of this state's hardest-working markets sit outside the Phoenix metro editorial sections above, and each carries its full picture on its own page. High-country work runs through Prescott — the historic downtown corridors, the regional medical campus, and growth toward the airport — where the systems scope is set out by our <a href="/locations/arizona/prescott/">MEP engineer Prescott</a> page: heating-led design at a mile of elevation, freeze protection, and the City of Prescott's own review path under the IBC with local amendments.</p>
   <p>Pinal County's interstate junction is Casa Grande, where logistics, industrial, and medical stock follows the I-8 and I-10 corridors; the systems picture there is documented by our <a href="/locations/arizona/casa-grande/">MEP engineering firm Casa Grande</a> page, including the city's own permitting track. And on the metro's west side, Goodyear's warehouse corridor, Civic Square growth, and Estrella build-out are covered by our <a href="/locations/arizona/goodyear/">MEP engineering firm Goodyear</a> page — mechanical, electrical, and plumbing documented as one sealed set for the city's review. Three markets, three review paths, one standard: the set arrives coordinated.</p></div>
-</div></section>`;
-}
-
-
-/** Buckeye Defense Cure (2026-11-09): the Arizona state MEP page is
- *  itself the ranked carrier for "mep engineering firm buckeye"
- *  (rank-drop guard pair nw_keywords_20261109-04 -> -20: #3 -> null).
- *  Census (Defense Watch, 2026-11-09): the carrier carried the exact
- *  phrase x0 and named Buckeye ONCE, inside the permitting card's
- *  fast-growth list; editorial sections existed for Maricopa County,
- *  the City of Maricopa, Queen Creek, and Scottsdale \u2014 no Buckeye
- *  section, and no Buckeye MEP child page exists (the city hub
- *  consolidates the discipline intents under one canonical hub), so
- *  the state MEP page is the owner the term needs. Carrier crawl
- *  Aug 24 \u2014 the stalest carrier crawl in the program. Cure: this
- *  carrier section on the state MEP page in the maricopaCarrierSection
- *  idiom, exact phrase x3 (H2 + prose x2), one prose link to the
- *  Buckeye city hub. Copy traces to published fact: the hub's own
- *  permitting card (fast review, aggressive drainage and dust-control
- *  enforcement), the state design snapshot (Climate Zone 2B,
- *  115\u00b0F+ design days), and the Buckeye city hub (population
- *  ~104,923, 2024 ACS; IBC with local amendments, editions confirmed
- *  with the permit office at kickoff). Additions only. */
-const BUCKEYE_CITY_HUB_PATH = "/locations/arizona/buckeye/";
-
-function buckeyeCarrierSection(): string {
-  return `<section class="block"><div class="container">
-  <h2>The <em>MEP Engineering Firm Buckeye</em> Projects Scope First</h2>
-  <div class="prose"><p>The far West Valley's growth edge is Buckeye \u2014 one of the fastest-growing cities in the country, and a building stock that shows it: master-planned communities at Verrado, Tartesso, and Festival Ranch still building out, the schools, fire stations, and civic work that follows the rooftops, retail and restaurant space along the Watson Road and Miller Road corridors, and logistics and light-industrial buildings filling in along the I-10 and SR-85 corridors. The MEP scopes follow that stock. The mechanical design is cooling-led \u2014 rooftop and split systems selected and derated for 115-degree design days in Climate Zone 2B, with filtration that holds up through monsoon dust; the electrical design covers service sizing, distribution, and the utility coordination a greenfield corridor building has to start early; the plumbing design answers the city's water picture, where supply review makes water and waste a permit question from the first site plan rather than an afterthought. Those discipline scopes sit under one roof on the city's <a href="${BUCKEYE_CITY_HUB_PATH}">engineering services in Buckeye</a> hub.</p>
-  <p>That is the standard an MEP engineering firm Buckeye owners and developers are actually buying: the three disciplines coordinated as one sealed set, sized to the building as it will be occupied, and drawn to be priced cleanly and reviewed once. Buckeye plan review runs comparatively fast for a Valley city, but the city enforces aggressively on drainage and dust control, and the MEP set has to sit inside a site package that answers both \u2014 retention, grading, and building systems resolved together before submittal, not reconciled across correction cycles. Apex Grid works from inside that picture: the governing code editions and local amendments are confirmed with the City of Buckeye at project kickoff, the loads and services are calculated against that confirmed basis, and the sealed set arrives as one consistent package the review can check in a single pass.</p>
-  <p>For teams comparing firms, the practical test is the record in this market: sets that price cleanly, permits held through review without a second coordination cycle, and drawings that still read correctly when the installer opens them in the field. An MEP engineering firm Buckeye project teams can hold to that record \u2014 across the master-planned build-out, the corridor industrial work, and the school and civic stock in between \u2014 is what this bench is built to be.</p></div>
 </div></section>`;
 }
 
@@ -5820,11 +5783,20 @@ function northDakotaBismarckStateSvcSection(): string {
 
 function billingsCarrierSection(): string {
   return `<section class="block"><div class="container">
-  <h2>What an <em>MEP Engineer</em> Scopes in Billings</h2>
+  <h2>MEP Engineering in <em>Billings MT</em>, Scoped in One Pass</h2>
   <div class="prose"><p>Apex Grid Engineering works as an MEP engineer Billings owners, developers, and contractors can scope against one coordinated set. The MEP services available to Billings projects cover the full building-systems package: mechanical design for a climate that swings from deep cold to chinook thaws, electrical design from the NorthWestern Energy service entrance through distribution, and plumbing design with freeze protection carried through every riser — engineered together, so the three disciplines are reconciled on paper before they can collide in the field. Billings is Montana's largest city and the Yellowstone County seat, and its stock drives the specifics: medical and commercial interiors, tenant improvements across the retail and office base, service upgrades, and the additions and detached ADUs that follow its growth.</p>
-  <p>Review runs through Billings Community Development for building systems inside the city, with fire, utilities, public works, and Yellowstone County reviewing related work separately — the submittal is sequenced to that split: load calculations matched to the real fit-out, winter design conditions and smoke-aware ventilation documented with the set, and the mechanical, electrical, and plumbing sheets coordinated before the package is sealed and submitted.</p></div>
+  <p>Review runs through Billings Community Development for building systems inside the city, with fire, utilities, public works, and Yellowstone County reviewing related work separately — the submittal is sequenced to that split: load calculations matched to the real fit-out, winter design conditions and smoke-aware ventilation documented with the set, and the mechanical, electrical, and plumbing sheets coordinated before the package is sealed and submitted.</p>
+  <p>Buyers searching for MEP engineering Billings MT are usually holding a specific project: a clinic expansion on the medical campuses, a warehouse or plant building in the industrial districts, a school or civic set moving through Yellowstone County review. The name for that search is the scope this page carries — mechanical, electrical, and plumbing designed as one coordinated set, sized to Billings' real conditions: Climate Zone 6B design with winter temperatures well below zero, freeze protection on every water-bearing line, heating-led load profiles through the chinook swings, and energy compliance documented under the 2021 Montana Energy Code. Permitting for work inside the city runs through the Billings Community Development Division on the 2021 Montana Building Code, with the governing editions confirmed at kickoff; county work answers to Yellowstone County's own review. That is why MEP engineering Billings MT scopes are won or lost on coordination rather than on any single discipline: the service entrance, the rooftop plant, and the plumbing distribution have to agree on paper before NorthWestern Energy will schedule the service and before the city reviewer can clear the set. Apex Grid Engineering delivers that package under responsible charge — one sealed set for the Billings submittal, with the engineer of record reachable through the comment cycle. Teams comparing MEP engineering Billings MT options are comparing exactly that: whether the three disciplines arrive as one building or as three arguments.</p></div>
 </div></section>`;
 }
+
+function billingsStateHubSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The State's Largest Market: <em>Billings</em></h2>
+  <div class="prose"><p>Statewide coverage runs through many jurisdictions, but Montana's deepest project base sits in Billings — the largest city, the Yellowstone County seat, and the eastern hub for medical, commercial, and industrial work. The systems side of that work is set out on our <a href="/locations/montana/billings/mep-engineering/">MEP engineering in Billings</a> page: mechanical, electrical, and plumbing designed as one coordinated set for Billings' stock, sequenced to Billings Community Development review and NorthWestern Energy service.</p></div>
+</div></section>`;
+}
+
 
 function billingsDefenseSection(currentSlug: string): string {
   const link = (anchor: string) =>
@@ -6270,39 +6242,6 @@ function coldStorageDefenseForIndustryPage(page: IndustryDisciplinePage): string
   const key = page.segments.join("/");
   if (key === "cold-storage/mep-engineering") return coldStorageCarrierSection();
   return coldStorageLinkSection(key);
-}
-
-/** Multifamily MEP hardening (Defense Watch cure, 2026-11-09): the carrier
- *  for "multifamily mep engineer" — /industries/multifamily/mep-engineering/
- *  — fell #9 -> #15 on the rank-drop guard pair nw -04 -> -20. Census
- *  (Defense Watch, 2026-11-09): the exact phrase appeared x0 (only
- *  "Multifamily MEP engineering" forms) on ~450 words of industries-template
- *  boilerplate. The Engides carrier for the same query (#5 -> #8) was
- *  adjudicated NO BUILD — phrase x3 inside ~1,600 words of deep prose — so
- *  this is an Apex-carrier content defect, not a market move. Cure: this
- *  carrier section in the coldStorageDefenseForIndustryPage idiom, exact
- *  phrase x3 in body prose: unit-system repetition (repeated unit types
- *  engineered once, verified per stack), riser discipline (vertical
- *  distribution, shaft coordination, pressure zoning), and podium
- *  coordination (parking/podium interface, amenity and retail shells below
- *  residential). Copy is practice substance only — no invented projects,
- *  clients, or figures. Additions only; nothing existing removed. */
-const MULTIFAMILY_CARRIER_PATH = "/industries/multifamily/mep-engineering/";
-
-function multifamilyCarrierSection(): string {
-  return `<section class="block"><div class="container">
-  <h2>How a Multifamily MEP Engineer <em>Actually Works</em></h2>
-  <div class="prose"><p>A multifamily MEP engineer designs around repetition. A garden community or a mid-rise tower is not three hundred different homes — it is a handful of unit types repeated floor over floor, and the engineering follows that logic: each unit type is designed once, completely — its HVAC load and equipment, its electrical panel schedule and circuiting, its water, waste, and vent connections — and that design is then placed, stacked, and verified everywhere the type repeats. The repetition is the efficiency, and it is also the risk: an error inside a unit type is not one error, it is an error in every home built from that type, so the unit designs get the deepest checking on the project before a single riser is drawn.</p>
-  <p><strong>Unit systems repeat; risers discipline the building.</strong> What makes a repeated-unit building work is the vertical distribution behind the walls. Domestic water, sanitary, and vent piping, refrigerant and condensate runs, ducted or ductless HVAC distribution, and electrical feeders all rise through aligned shafts, and a multifamily MEP engineer holds that alignment as a discipline: wet walls stacked, shafts coordinated with the structure and the corridor plan, and no jog introduced on one floor that every floor above it then has to absorb. Water pressure is zoned as the building climbs — pressure-reducing stations and booster pumping where height demands them — so a top-floor shower and a ground-floor hose bib both land inside their working ranges, and riser diagrams document every vertical system so the field installs what the model assumed.</p>
-  <p><strong>Podium coordination is where the disciplines collide.</strong> Where residences sit over a parking podium, the systems change character at the slab: garage ventilation and carbon-monoxide control below, residential distribution above, and the transfer level itself carrying the horizontal runs that connect the towers to the site. The amenity and retail shells at the podium — clubroom, fitness, leasing, pool support, ground-floor commercial bays — are engineered in the same set, with their own ventilation, grease and waste paths, and metering, because a shell delivered without coordinated MEP is a tenant improvement that starts by reopening finished work. Fire protection and life-safety coordination cross the same interface, so the podium is treated as one system, not a line where one set of drawings stops and another starts.</p>
-  <p><strong>Verification runs per stack, not per hope.</strong> Repetition only pays when it is verified: typical floors are checked as types, then the exceptions — top floors under roof loads, ground floors at the podium interface, accessible and adaptable units, corner conditions — are checked as themselves, because those are the units that do not repeat. That is the working method a multifamily MEP engineer brings to apartments, condominiums, build-to-rent communities, and mixed-use residential alike: engineer the type once, discipline the risers, coordinate the podium, and verify every stack against the building as drawn — a sealed set a reviewer can follow and a contractor can build floor after identical floor.</p></div>
-</div></section>`;
-}
-
-function multifamilyDefenseForIndustryPage(page: IndustryDisciplinePage): string {
-  const key = page.segments.join("/");
-  if (key === "multifamily/mep-engineering") return multifamilyCarrierSection();
-  return "";
 }
 
 function statePage(state: StateData, cities: CityData[], directory: CityDirectory): string {
@@ -8165,7 +8104,6 @@ ${breadcrumb(crumbs)}
 ${cleanroomDefenseForIndustryPage(page)}
 
 ${coldStorageDefenseForIndustryPage(page)}
-${multifamilyDefenseForIndustryPage(page)}
     ${industrialWarehouseIndustrySection(page)}
     ${guard1409IndustrySection(page)}
     ${jetBlastIndustrySupport(page)}
@@ -9883,6 +9821,7 @@ ${expansion.stateSlug === "iowa" ? carrollDefenseSection("") : ""}
 ${expansion.stateSlug === "illinois" ? northbrookDefenseSection("") : ""}
 ${expansion.stateSlug === "south-dakota" ? brookingsHubDefenseSection("") : ""}
 ${expansion.stateSlug === "new-mexico" ? roswellDefenseSection("") : ""}
+${expansion.stateSlug === "montana" ? billingsStateHubSection() : ""}
 <section class="block"><div class="container"><h2>Five researched <em>local services</em></h2><p class="prose">Each linked service is organized around the selected metro’s permit authority, code context, local physical conditions, typical project types, permit steps, official references, and responsible-professional boundaries. These pages are information resources, not local-office claims or guarantees of licensure, approval, schedule, or construction outcome.</p><div class="linkrow">${serviceLinks}</div></div></section>
 <section class="block"><div class="container"><h2>${esc(expansion.stateName)} <em>metros and services</em></h2><div class="grid2">${metroLinks}</div></div></section>
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
@@ -10554,7 +10493,7 @@ async function main() {
   const aduState = normalizeCaliforniaAduPage(CALIFORNIA_ADU_STATE_PAGE);
   const aduStateDir = path.join(PUBLIC, "services", "california-adu-structural-engineering");
   fs.mkdirSync(aduStateDir, { recursive: true });
-  const aduStateHtml = californiaAduPage(aduState).replace('<section class="block"', NO_SITE_VISITS_BANNER_HTML + '<section class="block"');
+  const aduStateHtml = californiaAduPage(aduState);
   assertIndexableFaqPage(aduStateHtml, aduState.faqs, CALIFORNIA_ADU_STATE_URL);
   fs.writeFileSync(path.join(aduStateDir, "index.html"), aduStateHtml);
   pages++;
@@ -10577,7 +10516,7 @@ async function main() {
   // its own canonical intent.
   const planCheckDir = path.join(PUBLIC, "services", PLAN_CHECK_CORRECTIONS_PAGE.slug);
   fs.mkdirSync(planCheckDir, { recursive: true });
-  const planCheckHtml = planCheckCorrectionsPage(PLAN_CHECK_CORRECTIONS_PAGE).replace('<section class="block"', NO_SITE_VISITS_BANNER_HTML + '<section class="block"');
+  const planCheckHtml = planCheckCorrectionsPage(PLAN_CHECK_CORRECTIONS_PAGE);
   assertIndexableFaqPage(
     planCheckHtml,
     PLAN_CHECK_CORRECTIONS_PAGE.faqs.map((faq) => ({
