@@ -10505,7 +10505,16 @@ async function main() {
     const parentHtml = fs.readFileSync(parentFile, "utf8");
     const marker = `phase9-inbound-${route}`;
     if (!parentHtml.includes(marker)) {
-      const inbound = `<section class="block phase9-inbound" id="${marker}"><div class="container"><h2>Specialty <em>industry scopes</em></h2><p>For a narrower facility or operating condition, I also maintain a focused engineering scope:</p><p><a href="${route}">${page.h1}</a></p></div></section>`;
+      // Student-housing cure (rank-drop guard pair 2026-11-14 -03 -> -04,
+      // "student housing structural engineer" #1 -> #18): the carrier's
+      // family donor anchor carries the tracked exact phrase instead of
+      // the H1 form. The multifamily hub itself is the React
+      // IndustryDetail page, so no hub-side anchor can ship from here
+      // (see the Cleanrooms Q1 note below).
+      const anchorText = route === "/industries/multifamily/student-housing/structural-engineering/"
+        ? "student housing structural engineer"
+        : page.h1;
+      const inbound = `<section class="block phase9-inbound" id="${marker}"><div class="container"><h2>Specialty <em>industry scopes</em></h2><p>For a narrower facility or operating condition, I also maintain a focused engineering scope:</p><p><a href="${route}">${anchorText}</a></p></div></section>`;
       fs.writeFileSync(parentFile, parentHtml.replace("</body>", `${inbound}</body>`));
     }
   }
