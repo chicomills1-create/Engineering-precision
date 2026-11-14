@@ -21,6 +21,8 @@ header{border-bottom:1px solid var(--border);background:hsl(0 0% 3%/.95);positio
 .brand small{display:block;font-size:9px;letter-spacing:.3em;color:var(--muted);font-weight:500}
 .navlinks{display:flex;gap:18px;font-size:13px;color:hsl(0 0% 80%);align-items:center}
 .navlinks a:hover{color:var(--primary)}
+.navtoggle{position:absolute;opacity:0;pointer-events:none}
+.navbtn{display:none}
 .cta{background:var(--primary);color:var(--primary-fg);font-weight:700;font-size:14px;padding:12px 24px;border-radius:2px}
 .cta:hover{background:hsl(0 72% 42%)}
 .hero{padding:96px 0 64px;border-bottom:1px solid var(--border);position:relative}
@@ -57,7 +59,16 @@ ul.scope li{background:var(--card);border:1px solid var(--border);padding:14px 1
 .ctaband p{color:var(--muted);margin-bottom:28px;max-width:640px}
 footer{border-top:1px solid var(--border);background:var(--card);padding:64px 0 32px;font-size:14px}
 .fgrid{display:grid;grid-template-columns:2fr 1fr 1.2fr 1fr 1fr;gap:32px}
-@media(max-width:1000px){.navlinks>a:not(.cta){display:none}}
+@media(max-width:1000px){
+  .navlinks>a:not(.cta){display:none}
+  .navbtn{display:inline-flex;align-items:center;justify-content:center;margin-left:auto;margin-right:12px;min-width:44px;height:44px;border:1px solid var(--border);border-radius:2px;color:var(--fg);font-size:20px;line-height:1;cursor:pointer}
+  .navbtn::before{content:"☰"}
+  .navtoggle:checked~.navbtn::before{content:"✕"}
+  .navtoggle:focus-visible~.navbtn{outline:2px solid var(--primary);outline-offset:2px}
+  .navtoggle:checked~.navlinks{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:hsl(0 0% 3%);border-bottom:1px solid var(--border);padding:8px 24px 16px;z-index:60}
+  .navtoggle:checked~.navlinks>a:not(.cta){display:block;padding:12px 0;border-top:1px solid var(--border);font-size:14px}
+  .navtoggle:checked~.navlinks .cta{margin-top:12px;text-align:center}
+}
 @media(max-width:600px){
   .topbar .container{width:calc(100% - 24px)}
   .brand small{display:none}
@@ -145,6 +156,8 @@ section.faq{max-width:none}
 function header(): string {
   return `<header><div class="container nav">
   <a class="brand" href="/">${LOGO_SVG}<span>APEX GRID<small>ENGINEERING · ARCHITECTURE · GC</small></span></a>
+  <input class="navtoggle" type="checkbox" id="navtoggle" aria-label="Menu">
+  <label class="navbtn" for="navtoggle"></label>
   <nav class="navlinks">
     <a href="/services">Engineering</a><a href="/architecture/">Architecture</a><a href="/general-contracting/">General Contracting</a><a href="/industries">Industries</a><a href="/resources">Resources</a><a href="/locations/">Service Areas</a>
     <a class="cta" href="/contact">Contact Us</a>
