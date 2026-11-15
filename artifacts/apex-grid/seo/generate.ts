@@ -5500,6 +5500,15 @@ function maconCarrierSection(): string {
 </div></section>`;
 }
 
+/* Tier 1 Roswell (GA) carrier - 2026-11-15: the Georgia Roswell city hub carries the tracked phrase zero times; this section gives the hub the phrase x3, gated to georgia/roswell in cityLitePage between Services and Capabilities. */
+function roswellGaCarrierSection(): string {
+  return `<section class="block"><div class="container">
+    <h2>What an <em>MEP Engineer</em> Scopes in Roswell</h2>
+    <div class="prose"><p>Roswell's North Fulton commercial and medical-office work along the GA-400 corridor asks for an mep engineer roswell owners can brief in one meeting: HVAC loads that match the envelope, electrical service sized to the actual tenant mix, and plumbing risers that do not fight the structure.</p>
+    <p>Historic-district retail and restaurant retrofits add the constraint that new systems must fit existing buildings without erasing them, with kitchen exhaust and make-up air, grease waste, and panel capacity threaded through tight ceiling and shaft space. That is the coordination an mep engineer roswell project teams rely on: loads sequenced first, then routed through the space the building actually has.</p>
+    <p>For the work along the GA-400 corridor and in the historic district, that sequencing is what keeps a tenant improvement on schedule: equipment that fits the roof or the mechanical room, panels that clear the service, and a submittal package the reviewer can follow without a phone call. It is the standard an mep engineer roswell reviewers expect, and the reason to scope the MEP work first.</p></div></div></section>`;
+}
+
 function missouriMaconStateSvcSection(): string {
   return `<section class="block"><div class="container">
   <h2>North-Central Missouri: <em>Macon</em></h2>
@@ -6625,6 +6634,7 @@ ${availableVerticals
   </div>
 </div></section>
 ${state.slug === "south-dakota" && city.slug === "brookings" ? brookingsHubSection() : ""}
+${state.slug === "georgia" && city.slug === "roswell" ? roswellGaCarrierSection() : ""}
 <section class="block"><div class="container">
   <h2>${esc(city.name)} Engineering <em>Capabilities</em></h2>
   <p class="prose">Apex Grid organizes related search intents under this single canonical ${esc(city.name)} engineering hub so owners, architects, contractors, developers, facility managers, and public agencies can find the relevant discipline without duplicate location pages.</p>
