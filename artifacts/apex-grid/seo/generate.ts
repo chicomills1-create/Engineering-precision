@@ -1899,7 +1899,7 @@ function libraryHubBodyHtml(): string {
   }
   const catalogLetters = [...catalogByLetter.keys()].sort();
   const catalog = `<section class="block"><div class="container"><h2>Browse the Full Library — Complete Catalog</h2><div class="prose"><p>The complete catalog of the Apex Engineering Library: every reference entry, in alphabetical order. Each link opens one entry answering one engineering question in plain language, with the records, code basis, and professional boundaries a real project needs.</p></div>${catalogLetters.map((letter) => `<h3>${esc(letter)}</h3><div class="linkrow">${(catalogByLetter.get(letter) ?? []).map((entry) => `<a href="${esc(entry.href)}">${esc(entry.name)}</a>`).join("")}</div>`).join("")}</div></section>`;
-  return `${topic}\n  ${news}\n  ${index}\n  ${catalog}`;
+  return `${topic}\n  ${news}\n  ${index}\n  <section class="block"><div class="container"><h2>Related guides</h2><div class="prose"><p>For the temporary works behind a tower crane, see <a href="/answers/tower-crane-foundation-design/">temporary crane foundation</a>.</p></div></div></section>${catalog}`;
 }
 
 function phase0CollectionHub(
