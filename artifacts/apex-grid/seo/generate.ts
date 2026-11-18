@@ -5138,6 +5138,20 @@ function celinaCarrierSection(): string {
 </div></section>`;
 }
 
+
+/** Celina OHIO structural cure (2026-11-17): carriage for "structural
+ *  engineering firm celina" (#3 -> unranked) on /locations/ohio/celina/.
+ *  NOT the Texas Celina carrier above. Consult 2026-11-17: GO WITH
+ *  EDITS; copy of record in apex-batch-drafts-2026-11-17.md. */
+function celinaOhioCarrierSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The <em>Structural Engineering Firm Celina</em> Projects File With, in One Pass</h2>
+  <div class="prose"><p>A structural engineering firm Celina owners, architects, and contractors consider must address the framing, foundations, and load paths behind commercial, industrial, institutional, and residential projects. Apex Grid provides structural engineering for new building systems, renovations, additions, adaptive reuse, equipment supports, and repair work as part of its broader MEP, structural, civil, and energy-compliance services in Celina.</p>
+  <p>A structural engineering firm Celina project teams engage begins with the available drawings, surveys, and project records. Apex evaluates the structural scope against the applicable Ohio Building Code requirements, documented existing conditions, and project-specific gravity, wind, snow, and seismic design criteria. The page's published Ohio code and environmental references provide planning context; governing editions, local amendments, and required design values are confirmed for the specific project before engineering proceeds.</p>
+  <p>Send the project drawings and supporting information, and Apex Grid can establish the structural review or design scope, required documentation, and professional sealing requirements. For a structural engineering firm Celina project teams need, Apex offers quotes within 12\u201324 hours on qualifying scopes, with engineering performed under the responsible charge of appropriately licensed Ohio professional engineers.</p></div>
+</div></section>`;
+}
+
 function celinaDefenseSection(currentSlug: string): string {
   if (currentSlug === "celina") return "";
   const link = (anchor: string) =>
@@ -5956,6 +5970,20 @@ function carrollCarrierSection(): string {
 </div></section>`;
 }
 
+
+/** Carroll IA structural cure (2026-11-17): carriage for "carroll ia
+ *  structural engineering" (#7 -> unranked, pair -18->-20) on the same
+ *  carrier the civil section already serves. Consult 2026-11-17: GO
+ *  WITH EDITS; copy of record in carroll-cure-2026-11-16/DRAFT.md. */
+function carrollStructuralSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The <em>Carroll IA Structural Engineering</em> Scope, in One Pass</h2>
+  <div class="prose"><p>Carroll IA structural engineering covers the frames, foundations, and load paths behind commercial, institutional, and agricultural-industrial buildings. It is the structural portion of the MEP, structural, civil, and energy-code services Apex Grid provides for Carroll projects.</p>
+  <p>A Carroll IA structural engineering review begins with the available drawings, surveys, and project records. Apex evaluates the proposed structural work, documented existing conditions, applicable design loads, and permitting requirements to establish what engineering is needed. Design and professional sealing are performed from the project information supplied, without Apex conducting site visits or field inspections.</p>
+  <p>Send the project drawings and supporting information, and Apex can scope the Carroll IA structural engineering work against the submitted materials \u2014 identifying what may be ready for professional review and sealing, what requires additional design or documentation, and the proposed fee and schedule.</p></div>
+</div></section>`;
+}
+
 const CARROLL_DEFENSE_SOURCE_SLUGS = new Set([
   "lidderdale", "willey", "halbur", "glidden",
 ]);
@@ -6700,6 +6728,8 @@ ${state.slug === "texas" && city.slug === "prosper" ? prosperCarrierSection() : 
 ${state.slug === "texas" && city.slug === "rockwall" ? rockwallCarrierSection() : ""}
 ${state.slug === "texas" && city.slug === "rockwall" ? rockwallExactPhraseSection() : ""}
 ${state.slug === "iowa" && city.slug === "carroll" ? carrollCarrierSection() : ""}
+${state.slug === "iowa" && city.slug === "carroll" ? carrollStructuralSection() : ""}
+${state.slug === "ohio" && city.slug === "celina" ? celinaOhioCarrierSection() : ""}
 ${state.slug === "iowa" && CARROLL_DEFENSE_SOURCE_SLUGS.has(city.slug) ? carrollDefenseSection(city.slug) : ""}
 ${state.slug === "kentucky" && city.slug === "kenton-vale" ? kentonValeCarrierSection() : ""}
 ${state.slug === "kentucky" && KENTON_VALE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? kentonValeDefenseSection(city.slug) : ""}
@@ -8328,6 +8358,23 @@ function mckinneyCarrierLocSvcSection(page: LocationServicePage): string {
   return mckinneyCarrierHtml();
 }
 
+
+/** Arlington MEP batch cure (2026-11-17): "mep engineering firm
+ *  arlington" fell #1 -> #26 on a PHRASE-THIN carrier (x1). This block
+ *  adds +2 (H2 + P1) for a page total of x3. Consult 2026-11-17: GO
+ *  WITH EDITS; copy of record in apex-batch-drafts-2026-11-17.md. The
+ *  3-5-day statement stands only as qualified review-and-seal
+ *  turnaround, as written. */
+function arlingtonBatchSection(page: LocationServicePage): string {
+  const key = `${page.stateSlug}/${page.citySlug}/${page.serviceSlug}`;
+  if (key !== "texas/arlington/mep-engineering") return "";
+  return `<section class="block"><div class="container">
+  <h2>What an <em>MEP Engineering Firm Arlington</em> Projects Need Should Cover</h2>
+  <div class="prose"><p>An MEP engineering firm Arlington owners and contractors consider must account for a varied local market: hospitality and entertainment-area projects near AT&amp;T Stadium and Globe Life Field, restaurant and retail tenant improvements, healthcare facilities, university-related work, and industrial and manufacturing projects across the Arlington area. Apex Grid provides coordinated mechanical, electrical, and plumbing engineering for these project types, with Texas professional review and sealing as required. The design basis includes applicable City of Arlington Development Services requirements, adopted building and energy codes, and project-specific electrical and mechanical demands.</p>
+  <p>Apex Grid is a veteran-owned engineering firm with more than 10 licensed professional engineers on its team. For qualifying scopes, the firm provides quotes within 12\u201324 hours and offers a 3\u20135-business-day review-and-seal turnaround after receiving a complete, reviewable package. Projects may require cooling-load calculations suited to Climate Zone 3A, electrical coordination within Oncor service territory, kitchen exhaust, hospitality plumbing loads, emergency power, or industrial ventilation. Each requirement is evaluated against the actual project scope, applicable code provisions, and available drawings rather than assumed to apply to every building.</p></div>
+</div></section>`;
+}
+
 function locationServicePage(page: LocationServicePage, city?: CityData): string {
   const url = `/locations/${page.stateSlug}/${page.citySlug}/${page.serviceSlug}/`;
   const cityUrl = `/locations/${page.stateSlug}/${page.citySlug}/`;
@@ -8412,6 +8459,7 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     ${page.stateSlug === "arizona" && page.citySlug === "queen-creek" && page.serviceSlug === "mep-engineering" ? queenCreekCarrierSection() : ""}
     ${guard1409LocSvcSection(page)}
     ${mckinneyCarrierLocSvcSection(page)}
+    ${arlingtonBatchSection(page)}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleCarrierSection() : ""}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleExactPhraseSection() : ""}
     <section class="section section--white">
@@ -8472,6 +8520,39 @@ ${nearbyCityLinks ? `        <p>${esc(toTitle(page.serviceSlug))} in nearby citi
 
 // ─── Solution Pages ────────────────────────────────────────────────────────
 
+
+/** Utility Capacity cure (2026-11-17): carriage for "utility capacity
+ *  studies engineering" (was #7, now unranked) on the phrase-absent
+ *  /solutions/electrical-load-study/ carrier. Consult 2026-11-17: GO
+ *  WITH SUBSTANTIAL EDITS; copy of record in
+ *  apex-batch-drafts-2026-11-17.md. The shorter page is deliberate
+ *  (consult rejected padding to the family word band). */
+function utilityCapacitySection(): string {
+  return `<section class="section section--white">
+      <div class="container container--narrow">
+        <h2>Utility Capacity Studies: Engineering the Answer Before Equipment Is Added</h2>
+        <p>Utility capacity studies engineering begins with a practical question: can an existing electrical service support the loads a project proposes to add? An electrical load study evaluates the building's documented electrical demand, service and panel information, and proposed equipment requirements before the project commits to a design that may exceed available capacity.</p>
+        <h3>What the Study Examines</h3>
+        <p>The study begins with the available electrical drawings, panel schedules, service information, and proposed equipment loads. Apex Grid reviews the connected loads and performs applicable demand-factor calculations to evaluate the electrical demand relevant to the project.</p>
+        <p>The available capacity assessment compares the calculated demand and proposed additional loads with the documented ratings and configuration of the building's electrical distribution equipment. Where information is incomplete, the study identifies what additional documentation or verification is needed before a reliable conclusion can be reached.</p>
+        <h3>How the Study Informs a Service Upgrade</h3>
+        <p>Utility capacity studies engineering helps determine whether proposed equipment can be accommodated by the documented existing electrical system or whether changes should be evaluated.</p>
+        <p>Where the analysis identifies a capacity limitation, Apex can recommend further engineering for panel modifications, load redistribution, or a service upgrade, as appropriate to the project. Recommendations are based on the available system information and applicable electrical requirements rather than an assumed amount of unused capacity.</p>
+        <p>The building-side assessment does not, by itself, establish available capacity on the utility's upstream distribution system. Utility confirmation may be required when additional service capacity or infrastructure changes are proposed.</p>
+        <h3>What the Report Shows</h3>
+        <p>Apex prepares the load study report for the applicable utility or authority-having-jurisdiction review process, based on the scope requested. Supporting information may include panel and service load tabulations, applicable demand-factor calculations, an available-capacity assessment, and recommendations where existing equipment or service capacity may be insufficient.</p>
+        <p>The report documents the engineering basis for its conclusions and identifies any assumptions or information gaps affecting the assessment. Additional drawings, calculations, or professional sealing requirements are established according to the project and jurisdiction.</p>
+        <h3>Who Orders the Study</h3>
+        <p>Owners, architects, and contractors request electrical load studies when adding equipment, renovating an existing building, or evaluating whether an electrical service requires modification.</p>
+        <p>Apex Grid works from supplied architectural PDFs, electrical drawings, contractor sketches, or CAD files. The engineering scope is confirmed from the available documents and project requirements, with additional information requested when needed.</p>
+        <p>Apex Grid provides engineering services across 49 states, excluding Alaska, with the appropriate professional licensure and sealing requirements confirmed for each project.</p>
+        <h3>Starting the Review</h3>
+        <p>Send a brief description of the proposed equipment or electrical changes, along with available drawings and service information. Apex Grid reviews the request and responds with a proposal within one business day.</p>
+        <p>Utility capacity studies engineering provides a documented basis for evaluating new electrical loads, identifying potential service limitations, and determining the next engineering steps before equipment installation proceeds.</p>
+      </div>
+    </section>`;
+}
+
 function solutionPage(page: SolutionPage): string {
   const url = `/${page.dir}/${page.slug}/`;
   const dirLabel = page.dir === "solutions" ? "Solutions" : "Government Engineering";
@@ -8525,6 +8606,8 @@ function solutionPage(page: SolutionPage): string {
         <a class="text-link" href="/contact/">Send Project Details</a>
       </div>
     </section>
+
+    ${page.slug === "electrical-load-study" ? utilityCapacitySection() : ""}
 
     ${residualsFaqSection(page.faqs)}
 
