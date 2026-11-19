@@ -5975,6 +5975,50 @@ function carrollCarrierSection(): string {
  *  structural engineering" (#7 -> unranked, pair -18->-20) on the same
  *  carrier the civil section already serves. Consult 2026-11-17: GO
  *  WITH EDITS; copy of record in carroll-cure-2026-11-16/DRAFT.md. */
+function casaGrandeMepSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>MEP engineering in Casa Grande, one coordinated set</h2>
+  <div class="prose"><p>A mep engineer casa grande project team can request through Apex Grid provides mechanical, electrical, and plumbing design services coordinated according to the project's actual scope. The work may support offices, retail spaces, restaurants, and tenant improvements; manufacturing, warehouse, and logistics facilities; healthcare, educational, and civic buildings; and multifamily or hospitality properties. Depending on the building, the engineering may address HVAC systems, electrical power and lighting, plumbing, equipment coordination, controls, and multidisciplinary design documentation.</p>
+  <p>Depending on the project, a mep engineer casa grande engagement may include load calculations, equipment selection support, and coordination with architectural and structural documents. Engineering work requiring professional sealing is reviewed and sealed by appropriately licensed professional engineers exercising responsible charge within their respective disciplines. Arizona has no mandatory statewide building code for all construction; the applicable code editions, local amendments, and permitting requirements are established for the project's jurisdiction. For qualifying work, Apex Grid also confirms the responsible professional's current license, applicable firm authorization, and discipline.</p>
+  <p>To request a mep engineer casa grande engagement, send the available drawings, existing survey information, and relevant project records. Apex Grid evaluates the applicable codes, local permitting requirements, and supporting design information before determining whether drawings are ready for sealing. Services are limited to engineering design and PE stamping from client-provided documentation, without site visits, field inspections, or construction observation.</p></div>
+</div></section>`;
+}
+
+function bismarckMepSection(): string {
+  return `<section class="block"><div class="container">
+  <div class="prose"><p>MEP engineering Bismarck ND projects can request through Apex Grid Engineering include mechanical and HVAC design, electrical power and lighting, and plumbing services as applicable to the building and engagement. Engineering documentation is developed from client-provided drawings, existing surveys, photographs, and project records, with coordination among the required disciplines according to the actual scope.</p>
+  <p>Depending on the building and its systems, MEP engineering Bismarck ND work may address deep winter heating demands, equipment considerations associated with snow and wind exposure, plumbing protection against freezing, and electrical service and distribution requirements. Bismarck's state-government, institutional, commercial, and healthcare buildings present different occupancy and equipment needs, so the applicable design criteria and system selections are established for each project.</p>
+  <p>For MEP engineering Bismarck ND engagements, the page's published 2018 International Building Code basis with North Dakota amendments is a starting reference, not a substitute for verifying the governing editions, locally adopted amendments, and applicable mechanical, electrical, plumbing, and energy requirements with the permitting authority. Engineering documents requiring professional sealing are reviewed and sealed by appropriately licensed professional engineers exercising responsible charge within their respective disciplines. Services are limited to engineering design and PE stamping from client-provided documentation, without site visits, field inspections, or construction observation.</p></div>
+</div></section>`;
+}
+
+function hartfordMepSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Choosing an MEP engineering company in Hartford</h2>
+  <div class="prose"><p>Owners seeking an mep engineering company Hartford projects can engage may need mechanical, electrical, and plumbing design coordinated according to the building's actual scope. Apex Grid Engineering provides MEP design services for insurance and financial-services office modernization, healthcare properties, state and municipal facilities, higher education, multifamily development, and adaptive reuse of downtown and industrial buildings. Depending on the project, the required engineering disciplines are coordinated into documentation for review by the City of Hartford Department of Development Services, Licenses and Inspections.</p>
+  <p>For an mep engineering company Hartford project teams consider, the applicable code basis is an important qualification. The page identifies the 2022 Connecticut State Building Code, based on the 2021 International Building Code with Connecticut amendments, along with commercial energy-compliance provisions referencing the 2021 IECC or ASHRAE 90.1-2019. The governing editions, state amendments, and project-specific requirements must be verified with the reviewing authority. Depending on the site and scope, design considerations may also include available Eversource electrical-service information, Metropolitan District Commission water and wastewater requirements, Connecticut River floodplain conditions, and constrained utility corridors. These are evaluated from client-provided records and applicable jurisdictional information rather than assumed to affect every Hartford project.</p>
+  <p>When selecting an mep engineering company Hartford clients can request through Apex Grid, professional review and sealing responsibilities are established for the actual disciplines involved. Engineering documents requiring a seal are reviewed and sealed, where appropriate, by properly licensed professional engineers exercising responsible charge within their respective disciplines. Additional design information, calculations, or revisions may be necessary before sealing. Services are limited to engineering design and PE stamping from client-provided documentation, without site visits, field inspections, or construction observation.</p></div>
+</div></section>`;
+}
+
+function maconEngineerSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>An engineer in Macon, confirmed before design begins</h2>
+  <div class="prose"><p>Owners seeking a macon missouri engineer may need mechanical, electrical, plumbing, structural, civil, or energy-compliance engineering for a building project. Apex Grid Engineering provides these services according to the project's actual scope, with applicable disciplines coordinated using the drawings and supporting records supplied by the client.</p>
+  <p>Missouri's building-code requirements depend on the applicable jurisdiction rather than a single mandatory statewide IBC edition for all construction. The page identifies the International Building Code as a researched reference, but the governing editions, local amendments, and permitting requirements must be verified with the appropriate authority before establishing the design basis. Those requirements determine which engineering provisions apply to the project.</p>
+  <p>For a macon missouri engineer engagement, Apex Grid confirms the responsible professional's current license, applicable firm authorization, discipline, and authority-having-jurisdiction requirements before proceeding. Engineering documents requiring professional sealing are reviewed and sealed, where appropriate, by appropriately licensed professional engineers exercising responsible charge within their respective disciplines. Services are limited to engineering design and PE stamping from client-provided documentation, without site visits, field inspections, or construction observation.</p></div>
+</div></section>`;
+}
+
+function pearlandMepSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>MEP engineering support in Pearland, discipline by discipline</h2>
+  <div class="prose"><p>Pearland serves a mix of offices, retail spaces, tenant improvements, warehouses, light industrial buildings, clinics, schools, multifamily properties, and hotels, with an approximately 127,514-person population reported in the page's 2024 American Community Survey reference. For a mep engineer pearland project teams engage through Apex Grid Engineering, the applicable scope may include mechanical and HVAC design, electrical power and lighting, plumbing systems, equipment coordination, and controls. These disciplines are coordinated with one another and with other project documents where required by the building's actual systems and engineering scope.</p>
+  <p>For mep engineer pearland engagements, the Houston-area hot-humid Climate Zone 2A may affect cooling loads, humidity control, condensate management, and equipment selection. Depending on the building, site, and applicable design criteria, exterior equipment coordination may also address wind exposure. Commercial energy-compliance documentation is evaluated against the governing requirements for the project. The page identifies the 2021 IECC as the Texas state minimum, but applicable editions, local adoption, amendments, and permitted compliance pathways must be confirmed for the jurisdiction and project. Apex Grid provides COMcheck support and coordination of relevant envelope, lighting, and mechanical-efficiency information where required by the selected compliance pathway.</p>
+  <p>Before a mep engineer pearland engagement proceeds, Apex Grid confirms the applicable building-code editions, local amendments, and permitting requirements with the appropriate jurisdiction. Texas does not impose one mandatory statewide commercial building-code edition for all projects, so the adopted requirements must be established for the specific work. Engineering documents requiring professional sealing are reviewed and sealed, where appropriate, by appropriately Texas-licensed professional engineers exercising responsible charge within their respective disciplines. Applicable firm registration with the Texas Board of Professional Engineers and Land Surveyors is verified, and electronic or digital seals are used only where permitted by the governing professional and submission requirements. Additional design information or revisions may be necessary before documents are ready for permit submission.</p></div>
+</div></section>`;
+}
+
 function carrollStructuralSection(): string {
   return `<section class="block"><div class="container">
   <h2>The <em>Carroll IA Structural Engineering</em> Scope, in One Pass</h2>
@@ -6272,6 +6316,16 @@ function industrialWarehouseIndustrySection(page: IndustryDisciplinePage): strin
 </div></section>`;
   }
   return "";
+}
+
+function schoolsMepSection(page: IndustryDisciplinePage): string {
+  if (page.segments.join("/") !== "education/mep-engineering") return "";
+  return `<section class="block"><div class="container">
+  <h2>An MEP engineer for schools, confirmed project by project</h2>
+  <div class="prose"><p>A mep engineer for schools may provide mechanical, electrical, and plumbing design for classrooms, gymnasiums, auditoriums, and other educational facilities. Depending on the building and scope, engineering may address classroom HVAC zone controls and ventilation, larger assembly-space systems, and plumbing requirements for high-use restrooms and athletic facilities. The applicable systems are coordinated according to the project's occupancy, design requirements, and available documentation.</p>
+  <p>Depending on the facility, a mep engineer for schools may also evaluate science laboratory fume hood and ventilation requirements, kitchen and cafeteria systems, electrical service for technology-intensive educational buildings, and EV charging provisions for school parking areas. The governing code editions, local amendments, energy requirements, and permitting procedures are established for each project. California projects may require review through the Division of the State Architect where that authority applies.</p>
+  <p>Apex Grid provides mep engineer for schools support subject to a project-specific coverage review confirming the responsible engineer, applicable discipline, jurisdiction, firm authorization, and authority-having-jurisdiction requirements. Engineering documents requiring professional sealing are reviewed and sealed, where appropriate, by appropriately licensed professional engineers exercising responsible charge within their respective disciplines. Services are limited to engineering design and PE stamping from client-provided documentation, without site visits, field inspections, or construction observation.</p></div>
+</div></section>`;
 }
 
 function guard1409IndustrySection(page: IndustryDisciplinePage): string {
@@ -6730,6 +6784,11 @@ ${state.slug === "texas" && city.slug === "rockwall" ? rockwallExactPhraseSectio
 ${state.slug === "iowa" && city.slug === "carroll" ? carrollCarrierSection() : ""}
 ${state.slug === "iowa" && city.slug === "carroll" ? carrollStructuralSection() : ""}
 ${state.slug === "ohio" && city.slug === "celina" ? celinaOhioCarrierSection() : ""}
+${state.slug === "arizona" && city.slug === "casa-grande" ? casaGrandeMepSection() : ""}
+${state.slug === "north-dakota" && city.slug === "bismarck" ? bismarckMepSection() : ""}
+${state.slug === "connecticut" && city.slug === "hartford" ? hartfordMepSection() : ""}
+${state.slug === "missouri" && city.slug === "macon" ? maconEngineerSection() : ""}
+${state.slug === "texas" && city.slug === "pearland" ? pearlandMepSection() : ""}
 ${state.slug === "iowa" && CARROLL_DEFENSE_SOURCE_SLUGS.has(city.slug) ? carrollDefenseSection(city.slug) : ""}
 ${state.slug === "kentucky" && city.slug === "kenton-vale" ? kentonValeCarrierSection() : ""}
 ${state.slug === "kentucky" && KENTON_VALE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? kentonValeDefenseSection(city.slug) : ""}
@@ -8218,6 +8277,7 @@ ${coldStorageDefenseForIndustryPage(page)}
 ${multifamilyDefenseForIndustryPage(page)}
     ${industrialWarehouseIndustrySection(page)}
     ${guard1409IndustrySection(page)}
+    ${schoolsMepSection(page)}
     ${jetBlastIndustrySupport(page)}
     ${religiousWorshipIndustrySection(page)}
 
@@ -8375,6 +8435,17 @@ function arlingtonBatchSection(page: LocationServicePage): string {
 </div></section>`;
 }
 
+function tempeMepSection(page: LocationServicePage): string {
+  const key = `${page.stateSlug}/${page.citySlug}/${page.serviceSlug}`;
+  if (key !== "arizona/tempe/mep-engineering") return "";
+  return `<section class="block"><div class="container">
+  <h2>Choosing an MEP engineering firm in Tempe</h2>
+  <div class="prose"><p>Buyers evaluating an mep engineering firm tempe project teams can engage should start with scope: HVAC load calculations and system design, electrical power distribution and one-line diagrams, lighting design and controls, plumbing and gas piping, and energy modeling with code-compliance documentation — coordinated as one package rather than traded between separate consultants.</p>
+  <p>For an mep engineering firm tempe projects require, local design conditions and code adoption both matter. Depending on the building, equipment, and project design conditions, equipment selection may account for high-ambient design days, Tempe's 2B peak cooling conditions, and solar gain, including applicable equipment derating. The governing code edition and submission requirements are confirmed with the City of Tempe Community Development Department: the 2024 ICC codes and 2023 NEC took effect July 1, 2026, with 2018 or 2024 submittals allowed during the published transition through December 31, 2026. SRP electric service is confirmed for the actual parcel before design.</p>
+  <p>Apex Grid Engineering's role as an mep engineering firm tempe clients can engage begins with the available drawings, equipment information, and project records. The applicable codes, local permitting requirements, and supporting design information are evaluated before determining whether the drawings are ready for sealing. Engineering work requiring professional sealing is reviewed and sealed by appropriately licensed professional engineers exercising responsible charge within their respective disciplines. Services are limited to engineering design and PE stamping from client-provided documentation, without site visits, field inspections, or construction observation.</p></div>
+</div></section>`;
+}
+
 function locationServicePage(page: LocationServicePage, city?: CityData): string {
   const url = `/locations/${page.stateSlug}/${page.citySlug}/${page.serviceSlug}/`;
   const cityUrl = `/locations/${page.stateSlug}/${page.citySlug}/`;
@@ -8460,6 +8531,7 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     ${guard1409LocSvcSection(page)}
     ${mckinneyCarrierLocSvcSection(page)}
     ${arlingtonBatchSection(page)}
+    ${tempeMepSection(page)}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleCarrierSection() : ""}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleExactPhraseSection() : ""}
     <section class="section section--white">
