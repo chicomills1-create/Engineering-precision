@@ -8376,6 +8376,15 @@ function rockHillExactPhraseSection(): string {
     </section>`;
 }
 
+function tempeMepCureSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Choosing an MEP engineering firm in Tempe</h2>
+  <div class="prose"><p>Buyers evaluating an mep engineering firm tempe project teams can engage should start with scope: HVAC load calculations and system design, electrical power distribution and one-line diagrams, lighting design and controls, plumbing and gas piping, and energy modeling with code-compliance documentation — coordinated as one package rather than traded between separate consultants.</p>
+  <p>For an mep engineering firm tempe projects require, local design conditions and code adoption both matter. Depending on the building, equipment, and project design conditions, equipment selection may account for high-ambient design days, Tempe's 2B peak cooling conditions, and solar gain, including applicable equipment derating. The governing code edition and submission requirements are confirmed with the City of Tempe Community Development Department: the 2024 ICC codes and 2023 NEC took effect July 1, 2026, with 2018 or 2024 submittals allowed during the published transition through December 31, 2026. SRP electric service is confirmed for the actual parcel before design.</p>
+  <p>Apex Grid Engineering's role as an mep engineering firm tempe clients can engage begins with the available drawings, equipment information, and project records. The applicable codes, local permitting requirements, and supporting design information are evaluated before determining whether the drawings are ready for sealing. Engineering work requiring professional sealing is reviewed and sealed by appropriately licensed professional engineers exercising responsible charge within their respective disciplines. Services are limited to engineering design and PE stamping from client-provided documentation, without site visits, field inspections, or construction observation.</p></div>
+</div></section>`;
+}
+
 function tempeExactPhraseSection(): string {
   return `<section class="section section--white">
       <div class="container container--narrow">
@@ -8432,17 +8441,6 @@ function arlingtonBatchSection(page: LocationServicePage): string {
   <h2>What an <em>MEP Engineering Firm Arlington</em> Projects Need Should Cover</h2>
   <div class="prose"><p>An MEP engineering firm Arlington owners and contractors consider must account for a varied local market: hospitality and entertainment-area projects near AT&amp;T Stadium and Globe Life Field, restaurant and retail tenant improvements, healthcare facilities, university-related work, and industrial and manufacturing projects across the Arlington area. Apex Grid provides coordinated mechanical, electrical, and plumbing engineering for these project types, with Texas professional review and sealing as required. The design basis includes applicable City of Arlington Development Services requirements, adopted building and energy codes, and project-specific electrical and mechanical demands.</p>
   <p>Apex Grid is a veteran-owned engineering firm with more than 10 licensed professional engineers on its team. For qualifying scopes, the firm provides quotes within 12\u201324 hours and offers a 3\u20135-business-day review-and-seal turnaround after receiving a complete, reviewable package. Projects may require cooling-load calculations suited to Climate Zone 3A, electrical coordination within Oncor service territory, kitchen exhaust, hospitality plumbing loads, emergency power, or industrial ventilation. Each requirement is evaluated against the actual project scope, applicable code provisions, and available drawings rather than assumed to apply to every building.</p></div>
-</div></section>`;
-}
-
-function tempeMepSection(page: LocationServicePage): string {
-  const key = `${page.stateSlug}/${page.citySlug}/${page.serviceSlug}`;
-  if (key !== "arizona/tempe/mep-engineering") return "";
-  return `<section class="block"><div class="container">
-  <h2>Choosing an MEP engineering firm in Tempe</h2>
-  <div class="prose"><p>Buyers evaluating an mep engineering firm tempe project teams can engage should start with scope: HVAC load calculations and system design, electrical power distribution and one-line diagrams, lighting design and controls, plumbing and gas piping, and energy modeling with code-compliance documentation — coordinated as one package rather than traded between separate consultants.</p>
-  <p>For an mep engineering firm tempe projects require, local design conditions and code adoption both matter. Depending on the building, equipment, and project design conditions, equipment selection may account for high-ambient design days, Tempe's 2B peak cooling conditions, and solar gain, including applicable equipment derating. The governing code edition and submission requirements are confirmed with the City of Tempe Community Development Department: the 2024 ICC codes and 2023 NEC took effect July 1, 2026, with 2018 or 2024 submittals allowed during the published transition through December 31, 2026. SRP electric service is confirmed for the actual parcel before design.</p>
-  <p>Apex Grid Engineering's role as an mep engineering firm tempe clients can engage begins with the available drawings, equipment information, and project records. The applicable codes, local permitting requirements, and supporting design information are evaluated before determining whether the drawings are ready for sealing. Engineering work requiring professional sealing is reviewed and sealed by appropriately licensed professional engineers exercising responsible charge within their respective disciplines. Services are limited to engineering design and PE stamping from client-provided documentation, without site visits, field inspections, or construction observation.</p></div>
 </div></section>`;
 }
 
@@ -8531,7 +8529,6 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     ${guard1409LocSvcSection(page)}
     ${mckinneyCarrierLocSvcSection(page)}
     ${arlingtonBatchSection(page)}
-    ${tempeMepSection(page)}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleCarrierSection() : ""}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleExactPhraseSection() : ""}
     <section class="section section--white">
@@ -14970,6 +14967,7 @@ ${state.slug === "texas" && city.slug === "mckinney" && svc.slug === "mep-engine
 ${state.slug === "texas" && city.slug === "dallas" && svc.slug === "mep-engineering" ? dallasCarrierSection() : ""}
 ${state.slug === "south-carolina" && city.slug === "rock-hill" && svc.slug === "mep-engineering" ? rockHillExactPhraseSection() : ""}
 ${state.slug === "arizona" && city.slug === "tempe" && svc.slug === "mep-engineering" ? tempeExactPhraseSection() : ""}
+${state.slug === "arizona" && city.slug === "tempe" && svc.slug === "mep-engineering" ? tempeMepCureSection() : ""}
 <section class="block"><div class="container">
   <h2>${esc(city.name)} <em>Permitting &amp; Code</em> Snapshot</h2>
   <div class="statgrid">
@@ -15094,6 +15092,7 @@ ${familyVisual("location", `Service location shown: ${city.name}, ${state.name}.
   </div>
   <div class="prose" style="margin-top:24px"><p>${esc(city.codes.amendments)}</p><p>${esc(city.marketNotes)}</p></div>
 </div></section>
+${state.slug === "connecticut" && city.slug === "hartford" ? hartfordMepSection() : ""}
 <section class="block"><div class="container">
   <h2>One Organization, <em>Connected Delivery</em></h2>
   <div class="grid3">
