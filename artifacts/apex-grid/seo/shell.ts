@@ -328,6 +328,16 @@ const CTR_OVERRIDES: Record<string, CtrOverride> = {
     areaServed: "Salt Lake City, Utah",
     addReviewSchema: true,
   },
+"/locations/arizona/casa-grande/": {
+    title: "Engineering Services in Casa Grande, AZ | MEP Engineering Firm Casa Grande | Apex Grid",
+  description: "Apex Grid provides MEP, structural, civil, and energy engineering for Casa Grande projects. Owners, developers, and general contractors can review coordinated design scopes, applicable code requirements, and discipline-specific PE review and sealing where required.",
+  titleB: "Engineering Services in Casa Grande, AZ | MEP Engineering Firm Casa Grande | Apex Grid",
+  descriptionB: "Apex Grid provides MEP, structural, civil, and energy engineering for Casa Grande projects. Owners, developers, and general contractors can review coordinated design scopes, applicable code requirements, and discipline-specific PE review and sealing where required.",
+  utmSlug: "engineering-casa-grande",
+  addLocalBusiness: false,
+  areaServed: "Casa Grande, Arizona",
+  addReviewSchema: false,
+},
 };
 
 function buildCtrLocalBusinessSchema(override: CtrOverride, canonical: string): object {
