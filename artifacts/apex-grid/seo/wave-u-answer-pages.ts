@@ -1069,8 +1069,8 @@ export const WAVE_U_ANSWER_PAGES: Phase0AeoPage[] = [
   },
   {
     slug: "waffle-slab-design-explained",
-    title: "What Is Waffle Slab Design and When Is It the Right Choice?",
-    description: "Waffle slabs are ribbed concrete floors spanning long distances with less weight. Design covers rib sizing, solid column heads, and deflection control.",
+    title: "Waffle Slab Design: 30–45 Ft Spans, Rib Sizing & When It Beats Flat Plate",
+    description: "Waffle slabs span 30–45 ft, with deeper systems reaching 50+ ft. Explore rib sizing, column heads, deflection control, and when waffle slabs can cost less than flat plate.",
     h1: "What Is Waffle Slab Design and When Is It the Right Choice?",
     answer: "Waffle slab design is the engineering of ribbed concrete floor systems — a thin top slab stiffened by a grid of concrete ribs below, formed with reusable dome pans, creating the distinctive waffle pattern on the ceiling. It's the long-span concrete floor system: by putting concrete only where it works (the ribs in tension-zone steel, the top slab in compression), waffle slabs span 30 to 50 feet or more with less concrete and less weight than a solid slab. The ribs act as a grid of small beams, giving two-way action and excellent stiffness per pound. I specify waffle slabs for parking structures, auditoriums, and commercial floors where long clear spans matter and the exposed ribbed ceiling is architecturally acceptable — or even celebrated. The design details that matter are the solid concrete heads around columns (where punching shear governs and ribs stop), the rib dimensions for the span, and deflection control across those long spans.",
     directAnswer: "Waffle slab design engineers two-way ribbed concrete floors. A thin slab spans between a grid of ribs formed by dome pans; solid heads at columns resist punching shear. Design sizes ribs and slab for flexure and shear, checks long-term deflection, and coordinates the rib layout with MEP and architectural demands.",
