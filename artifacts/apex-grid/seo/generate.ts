@@ -4902,6 +4902,37 @@ function scottsdaleExactPhraseSection(): string {
     </section>`;
 }
 
+function scottsdaleAzFormSection(): string {
+  return `<section class="section section--white">
+      <div class="container container--narrow">
+        <h2>MEP Engineering in Scottsdale, AZ, Scoped as One Set</h2>
+        <p>Buyers who search the statewide form are usually holding a project that sits in Scottsdale but answers to an Arizona-wide portfolio. MEP engineering Scottsdale AZ scopes are addressed here through coordinated mechanical, electrical, and plumbing design for resort renovations, medical suites, and restaurant tenant improvements. The design basis follows the desert conditions documented on this page: cooling-led mechanical selection evaluated for sustained high-ambient operation in Climate Zone 2B, electrical service and distribution coordinated with APS, and plumbing designed for the building's intended use, including pool and spa systems where applicable.</p>
+        <p>The permitting frame for MEP engineering Scottsdale AZ work is the City of Scottsdale's own: submittals run through the City of Scottsdale Development Services Department under the 2021 IBC with Scottsdale amendments and the 2021 IECC with Scottsdale amendments. The applicable editions and amendment package are confirmed for the project before design begins. Each discipline is designed and, where professional sealing is required, reviewed and sealed under the responsible charge of an appropriately licensed professional engineer within that discipline. Plan-review comments or additional documentation may still be required.</p>
+        <p>Apex Grid Engineering provides MEP engineering Scottsdale AZ project teams can scope from its Queen Creek office in the same metropolitan area. The Scottsdale project record identifies the local building stock, design environment, and permitting authority so that each engagement can be evaluated against the requirements applicable to its own location and scope.</p>
+      </div>
+    </section>`;
+}
+
+function scottsdaleDocumentationSection(): string {
+  return `<section class="section section--white">
+      <div class="container container--narrow">
+        <h2>MEP Documentation for Scottsdale Submittals</h2>
+        <p>A permit set is only as useful as the documentation supporting it. MEP documentation Scottsdale reviewers can evaluate starts with coordinated drawings, load calculations, and equipment schedules that agree with one another and reflect the project's actual systems. Each discipline's documents are prepared and, where sealing is required, reviewed under the responsible charge of an appropriately licensed professional engineer for that discipline. The documentation follows the editions the City of Scottsdale applies, including the 2021 IBC and 2021 IECC with Scottsdale amendments, with the applicable amendment package confirmed for the project.</p>
+        <p>What the MEP documentation Scottsdale submittals carry depends on the engagement: coordinated mechanical, electrical, and plumbing drawings; the load and sizing calculations supporting equipment selections; and the schedules and specifications relevant to the project's systems. Where the adopted energy code requires supporting studies or compliance documentation, those requirements are identified for the project and incorporated into the appropriate design documentation.</p>
+        <p>Apex Grid Engineering prepares the MEP documentation Scottsdale owners, architects, and tenants need as part of the coordinated engineering package. The drawings, calculations, and equipment schedules are developed together so that the supporting documentation reflects the design decisions made across the project's mechanical, electrical, and plumbing disciplines.</p>
+      </div>
+    </section>`;
+}
+
+function scottsdaleStructuralCivilSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Structural and Civil Engineering in Scottsdale</h2>
+  <div class="prose"><p>A structural engineer Scottsdale owners and architects scope against works from the design environment established on this page: the 2021 IBC with City of Scottsdale amendments and the City's published amendment package, applied to hospitality and resort buildings, healthcare and medical offices, technology and corporate offices, retail, mixed-use, and multifamily tenant improvements. Structural design evaluates the gravity, wind, and seismic loads applicable to the project's actual conditions, with the governing requirements confirmed for the specific jurisdiction.</p>
+  <p>The civil half of a Scottsdale project answers to the site. A civil engineer Scottsdale reviewers can evaluate designs grading, drainage, and utilities against the jurisdiction's published standards, with municipal water and sewer coordination through Scottsdale Water confirmed for the actual parcel before the civil layout is finalized. A civil engineer Scottsdale project teams engage must also account for the applicable site and utility requirements before documentation proceeds. Submittals run through the City's SPUR portal to Planning & Development Services / Permit Services, and the applicable code package and amendment requirements are confirmed with Permit Services for the individual project.</p>
+  <p>The structural engineer Scottsdale scope and civil engineering scope are coordinated with the MEP design so the project's drawings address the same building and site conditions. A civil engineer Scottsdale owners and architects can engage through Apex Grid Engineering works from the parcel-specific information and the jurisdiction's published requirements, while structural documentation addresses the applicable gravity, wind, and seismic design conditions. Each discipline remains independently scoped and reviewed according to its applicable professional requirements.</p></div>
+</div></section>`;
+}
+
 function scottsdaleCarrierSection(): string {
   return `<section class="section section--white">
       <div class="container container--narrow">
@@ -8531,6 +8562,8 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     ${arlingtonBatchSection(page)}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleCarrierSection() : ""}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleExactPhraseSection() : ""}
+    ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleAzFormSection() : ""}
+    ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleDocumentationSection() : ""}
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
@@ -15093,6 +15126,7 @@ ${familyVisual("location", `Service location shown: ${city.name}, ${state.name}.
   <div class="prose" style="margin-top:24px"><p>${esc(city.codes.amendments)}</p><p>${esc(city.marketNotes)}</p></div>
 </div></section>
 ${state.slug === "connecticut" && city.slug === "hartford" ? hartfordMepSection() : ""}
+${state.slug === "arizona" && city.slug === "scottsdale" ? scottsdaleStructuralCivilSection() : ""}
 <section class="block"><div class="container">
   <h2>One Organization, <em>Connected Delivery</em></h2>
   <div class="grid3">
