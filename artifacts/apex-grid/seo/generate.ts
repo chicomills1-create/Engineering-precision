@@ -4902,7 +4902,18 @@ function scottsdaleExactPhraseSection(): string {
     </section>`;
 }
 
-function scottsdaleAzFormSection(): string {
+function phoenixExactPhraseSection(): string {
+  return `<section class="section section--white">
+  <div class="container container--narrow">
+  <h2>MEP Engineering Scope in Phoenix</h2>
+  <p>A mep engineering phoenix engagement may cover coordinated mechanical, electrical, and plumbing design for Phoenix projects; an mep engineer phoenix reviews each discipline under the responsible charge of an appropriately licensed professional engineer where professional sealing is required.
+  <p>Depending on the building and its systems, mep engineering phoenix may include the mechanical, electrical, and plumbing documentation required for the defined project scope; an mep engineer phoenix confirms the applicable code edition and jurisdictional requirements for that project before sealing.
+  <p>Apex Grid provides coordinated mechanical, electrical, and plumbing design for Phoenix projects; each mep engineering phoenix engagement is reviewed by an appropriately licensed professional engineer, and an mep engineer phoenix seals only work within that engineer's discipline and responsible charge, where sealing is required.
+    </div>
+  </section>`;
+}
+
+  function scottsdaleAzFormSection(): string {
   return `<section class="section section--white">
       <div class="container container--narrow">
         <h2>MEP Engineering in Scottsdale, AZ, Scoped as One Set</h2>
@@ -8564,6 +8575,7 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleExactPhraseSection() : ""}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleAzFormSection() : ""}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleDocumentationSection() : ""}
+${page.stateSlug === "arizona" && page.citySlug === "phoenix" && page.serviceSlug === "mep-engineering" ? phoenixExactPhraseSection() : ""}
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
