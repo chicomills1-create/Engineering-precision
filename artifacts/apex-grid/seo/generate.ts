@@ -15013,6 +15013,7 @@ ${state.slug === "texas" && city.slug === "dallas" && svc.slug === "mep-engineer
 ${state.slug === "south-carolina" && city.slug === "rock-hill" && svc.slug === "mep-engineering" ? rockHillExactPhraseSection() : ""}
 ${state.slug === "arizona" && city.slug === "tempe" && svc.slug === "mep-engineering" ? tempeExactPhraseSection() : ""}
 ${state.slug === "arizona" && city.slug === "tempe" && svc.slug === "mep-engineering" ? tempeMepCureSection() : ""}
+${state.slug === "arizona" && city.slug === "phoenix" && svc.slug === "mep-engineering" ?  phoenixExactPhraseSection() : ""}
 <section class="block"><div class="container">
   <h2>${esc(city.name)} <em>Permitting &amp; Code</em> Snapshot</h2>
   <div class="statgrid">
