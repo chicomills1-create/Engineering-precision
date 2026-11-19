@@ -4913,7 +4913,18 @@ function phoenixExactPhraseSection(): string {
   </section>`;
 }
 
-  function scottsdaleAzFormSection(): string {
+  function phoenixStructuralExactPhraseSection(): string {
+  return `<section class="section section--white">
+    <div class="container container--narrow">
+      <h2>Structural Engineering Scope in Phoenix</h2>
+      <p>A structural engineering phoenix engagement may cover the framing, foundation, and lateral-system design for a Phoenix project; a structural engineer phoenix reviews the design under the responsible charge of an appropriately licensed professional engineer where professional sealing is required.</p>
+      <p>Depending on the building's materials and loads, structural engineering phoenix may include the calculations and connection details required for the defined project scope; a structural engineer phoenix confirms the applicable code edition and jurisdictional requirements for that project before sealing.</p>
+      <p>Apex Grid provides structural design for Phoenix projects from client-provided drawings and records; where professional engineering review or sealing is required, each structural engineering phoenix engagement is reviewed by an appropriately licensed professional engineer, and a structural engineer phoenix seals only work within that engineer's discipline and responsible charge.</p>
+    </div>
+  </section>`;
+}
+
+function scottsdaleAzFormSection(): string {
   return `<section class="section section--white">
       <div class="container container--narrow">
         <h2>MEP Engineering in Scottsdale, AZ, Scoped as One Set</h2>
@@ -15013,7 +15024,8 @@ ${state.slug === "texas" && city.slug === "dallas" && svc.slug === "mep-engineer
 ${state.slug === "south-carolina" && city.slug === "rock-hill" && svc.slug === "mep-engineering" ? rockHillExactPhraseSection() : ""}
 ${state.slug === "arizona" && city.slug === "tempe" && svc.slug === "mep-engineering" ? tempeExactPhraseSection() : ""}
 ${state.slug === "arizona" && city.slug === "tempe" && svc.slug === "mep-engineering" ? tempeMepCureSection() : ""}
-${state.slug === "arizona" && city.slug === "phoenix" && svc.slug === "mep-engineering" ?  phoenixExactPhraseSection() : ""}
+${state.slug === "arizona" && city.slug === "phoenix" && svc.slug === "mep-engineering" ? phoenixExactPhraseSection() : ""}
+${state.slug === "arizona" && city.slug === "phoenix" && svc.slug === "structural-engineering" ? phoenixStructuralExactPhraseSection() : ""} 
 <section class="block"><div class="container">
   <h2>${esc(city.name)} <em>Permitting &amp; Code</em> Snapshot</h2>
   <div class="statgrid">
