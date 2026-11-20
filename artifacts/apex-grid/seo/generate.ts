@@ -4933,6 +4933,16 @@ function mesaExactPhraseSection(): string {
     </div>
   </section>`;
 }
+function mesaStructuralExactPhraseSection(): string {
+    return `<section class="section section--white">
+        <div class="container container--narrow">
+              <h2>Structural Engineering Scope in Mesa</h2>
+                    <p>A structural engineering mesa engagement may cover the framing, foundation, and lateral-system design for a Mesa project; a structural engineer mesa reviews the design under the responsible charge of an appropriately licensed professional engineer where professional sealing is required.</p>
+                          <p>Depending on the building's materials and loads, structural engineering mesa may include the calculations and connection details required for the defined project scope; a structural engineer mesa confirms the applicable code edition and jurisdictional requirements for that project before sealing, where sealing is required.</p>
+                                <p>Apex Grid provides structural design for Mesa projects from client-provided drawings and records; where professional engineering review or sealing is required, each structural engineering mesa engagement is reviewed by an appropriately licensed professional engineer, and a structural engineer mesa seals only work within that engineer's discipline and responsible charge.</p>
+                                    </div>
+                                      </section>`;
+}
 
 function phoenixCivilExactPhraseSection(): string {
   return `<section class="section section--white">
@@ -8609,6 +8619,7 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleDocumentationSection() : ""}
 ${page.stateSlug === "arizona" && page.citySlug === "phoenix" && page.serviceSlug === "mep-engineering" ? phoenixExactPhraseSection() : ""}
 ${page.stateSlug === "arizona" && page.citySlug === "mesa" && page.serviceSlug === "mep-engineering" ? mesaExactPhraseSection() : ""}
+${page.stateSlug === "arizona" && page.citySlug === "mesa" && page.serviceSlug === "structural-engineering" ? mesaStructuralExactPhraseSection() : ""}
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
