@@ -378,6 +378,16 @@ const CTR_OVERRIDES: Record<string, CtrOverride> = {
     areaServed: "Tempe, Arizona",
     addReviewSchema: false,
   },
+    "/locations/arizona/gilbert/": {
+          title: "Engineering Services in Gilbert, AZ | MEP Engineering Firm Gilbert | Apex Grid",
+          description: "Apex Grid provides MEP, structural, civil, and energy engineering for Gilbert projects. Owners, developers, and general contractors can review coordinated design scopes, applicable code requirements, and discipline-specific professional engineer review and sealing where required.",
+          titleB: "Engineering Services in Gilbert, AZ | MEP Engineering Firm Gilbert | Apex Grid",
+          descriptionB: "Apex Grid provides MEP, structural, civil, and energy engineering for Gilbert projects. Owners, developers, and general contractors can review coordinated design scopes, applicable code requirements, and discipline-specific professional engineer review and sealing where required.",
+          utmSlug: "engineering-gilbert",
+          addLocalBusiness: false,
+          areaServed: "Gilbert, Arizona",
+          addReviewSchema: false,
+    },
   };
 
 function buildCtrLocalBusinessSchema(override: CtrOverride, canonical: string): object {
