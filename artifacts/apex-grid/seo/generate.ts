@@ -4935,7 +4935,18 @@ function chandlerExactPhraseSection(): string {
 }
 
 
-  function phoenixStructuralExactPhraseSection(): string {
+  function chandlerSemiconductorExactPhraseSection(): string {
+  return `<section class="section section--white">`
+    <div class="container container--narrow">
+      <h2>MEP Engineering Scope in Chandler</h2>
+      <p>For Chandler semiconductor and advanced-manufacturing facilities, a mep engineering firm chandler engagement may cover process utilities, clean manufacturing environments, and high-capacity power, cooling, exhaust, and water systems; an mep engineer chandler reviews each discipline under the responsible charge of an appropriately licensed professional engineer where professional sealing is required.</p>
+      <p>Depending on the facility's processes and utility demands, a mep engineering firm chandler scope may include process exhaust and make-up air, process cooling and chilled water, and specialty gas and compressed-air routing for the defined project scope; an mep engineer chandler confirms the applicable code edition and jurisdictional requirements for that project before sealing, where sealing is required.</p>
+      <p>Apex Grid provides semiconductor and advanced-manufacturing MEP design for Chandler projects; where professional engineering review or sealing is required, each discipline within a mep engineering firm chandler engagement is reviewed under the responsible charge of an appropriately licensed professional engineer for that discipline, and an mep engineer chandler seals only work within that engineer's discipline and responsible charge.</p>
+    </div>
+  </section>`;
+}
+
+function phoenixStructuralExactPhraseSection(): string {
   return `<section class="section section--white">
     <div class="container container--narrow">
       <h2>Structural Engineering Scope in Phoenix</h2>
@@ -8664,6 +8675,7 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
 ${page.stateSlug === "arizona" && page.citySlug === "phoenix" && page.serviceSlug === "mep-engineering" ? phoenixExactPhraseSection() : ""}
 ${page.stateSlug === "arizona" && page.citySlug === "mesa" && page.serviceSlug === "mep-engineering" ? mesaExactPhraseSection() : ""}
 ${page.stateSlug === "arizona" && page.citySlug === "chandler" && page.serviceSlug === "mep-engineering" ? chandlerExactPhraseSection() : ""}
+      ${page.stateSlug === "arizona" && page.citySlug === "chandler" && page.serviceSlug === "semiconductor-advanced-manufacturing-mep-engineering" ? chandlerSemiconductorExactPhraseSection() : ""}
 ${page.stateSlug === "arizona" && page.citySlug === "mesa" && page.serviceSlug === "structural-engineering" ? mesaStructuralExactPhraseSection() : ""}
       ${page.stateSlug === "arizona" && page.citySlug === "chandler" && page.serviceSlug === "structural-engineering" ? chandlerStructuralExactPhraseSection() : ""}
     <section class="section section--white">
