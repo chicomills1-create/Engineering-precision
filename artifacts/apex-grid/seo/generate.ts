@@ -4995,7 +4995,7 @@ function tempeStructuralExactPhraseSection(): string {
             <h2>Structural Engineering Scope in Tempe</h2>
                   <p>A structural engineering tempe engagement may cover the framing, foundation, and lateral-system design for a Tempe project; a structural engineer tempe reviews the design under the responsible charge of an appropriately licensed professional engineer where professional sealing is required.</p>
       <p>Depending on the building's materials and loads, structural engineering tempe may include the calculations and connection details required for the defined project scope; a structural engineer tempe confirms the applicable code edition and jurisdictional requirements for that project before sealing, where sealing is required.</p>
-            <p>Apex Grid provides structural design for Tempe projects from client-provided drawings and records; where professional engineering review or sealing is required, each discipline within a structural engineering tempe engagement is reviewed under the responsible charge of an appropriately licensed professional engineer for that discipline, and a structural engineer tempe seals only work within that engineer's discipline and responsible charge is sealed.</p>
+            <p>Apex Grid provides structural design for Tempe projects from client-provided drawings and records; where professional engineering review or sealing is required, each discipline within a structural engineering tempe engagement is reviewed under the responsible charge of an appropriately licensed professional engineer for that discipline, and a structural engineer tempe seals only work within that engineer's discipline and responsible charge.</p>
                 </div>
                   </section>`;
 }
