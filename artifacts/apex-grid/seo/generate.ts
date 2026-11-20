@@ -4912,6 +4912,16 @@ function phoenixExactPhraseSection(): string {
     </div>
   </section>`;
 }
+function mesaExactPhraseSection(): string {
+  return `<section class="section section--white">
+  <div class="container container--narrow">
+  <h2>MEP Engineering Scope in Mesa</h2>
+  <p>A mep engineering mesa engagement may cover coordinated mechanical, electrical, and plumbing design for Mesa projects; an mep engineer mesa reviews each discipline under the responsible charge of an appropriately licensed professional engineer where professional sealing is required.</p>
+  <p>Depending on the building and its systems, mep engineering mesa may include the mechanical, electrical, and plumbing documentation required for the defined project scope; an mep engineer mesa confirms the applicable code edition and jurisdictional requirements for that project before sealing, where sealing is required.</p>
+  <p>Apex Grid provides coordinated mechanical, electrical, and plumbing design for Mesa projects; where professional engineering review or sealing is required, each mep engineering mesa engagement is reviewed by an appropriately licensed professional engineer, and an mep engineer mesa seals only work within that engineers discipline and responsible charge.</p>
+  </div>
+  </section>`;
+}
 
   function phoenixStructuralExactPhraseSection(): string {
   return `<section class="section section--white">
@@ -8598,6 +8608,7 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleAzFormSection() : ""}
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleDocumentationSection() : ""}
 ${page.stateSlug === "arizona" && page.citySlug === "phoenix" && page.serviceSlug === "mep-engineering" ? phoenixExactPhraseSection() : ""}
+${page.stateSlug === "arizona" && page.citySlug === "mesa" && page.serviceSlug === "mep-engineering" ? mesaExactPhraseSection() : ""}
     <section class="section section--white">
       <div class="container container--narrow">
         <h2>About Apex Grid Engineering</h2>
