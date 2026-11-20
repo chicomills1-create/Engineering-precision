@@ -4936,7 +4936,7 @@ function chandlerExactPhraseSection(): string {
 
 
   function chandlerSemiconductorExactPhraseSection(): string {
-  return `<section class="section section--white">`
+  return `<section class="section section--white">
     <div class="container container--narrow">
       <h2>MEP Engineering Scope in Chandler</h2>
       <p>For Chandler semiconductor and advanced-manufacturing facilities, a mep engineering firm chandler engagement may cover process utilities, clean manufacturing environments, and high-capacity power, cooling, exhaust, and water systems; an mep engineer chandler reviews each discipline under the responsible charge of an appropriately licensed professional engineer where professional sealing is required.</p>
@@ -4968,7 +4968,7 @@ function mesaStructuralExactPhraseSection(): string {
 }
 
 function chandlerStructuralExactPhraseSection(): string {
-  return `<section class="section section--white">`
+  return `<section class="section section--white">
     <div class="container container--narrow">
       <h2>Structural Engineering Scope in Chandler</h2>
       <p>A structural engineering chandler engagement may cover the framing, foundation, and lateral-system design for a Chandler project; a structural engineer chandler reviews the design under the responsible charge of an appropriately licensed professional engineer where professional sealing is required.</p>
@@ -5000,7 +5000,7 @@ function mesaCivilExactPhraseSection(): string {
 }
 
 function chandlerCivilExactPhraseSection(): string {
-  return `<section class="section section--white">`
+  return `<section class="section section--white">
     <div class="container container--narrow">
       <h2>Civil Engineering Scope in Chandler</h2>
       <p>A civil engineering chandler engagement may cover site grading, drainage, and utility design for a Chandler project; a civil engineer chandler reviews the design under the responsible charge of an appropriately licensed professional engineer where professional sealing is required.</p>
