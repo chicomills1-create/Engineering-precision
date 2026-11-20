@@ -4923,6 +4923,18 @@ function mesaExactPhraseSection(): string {
   </section>`;
 }
 
+function chandlerExactPhraseSection(): string {
+    return `<section class="section section--white">
+        <div class="container container--narrow">
+              <h2>MEP Engineering Scope in Chandler</h2>
+                    <p>A mep engineering chandler engagement may cover coordinated mechanical, electrical, and plumbing design for Chandler projects; an mep engineer chandler reviews each discipline under the responsible charge of an appropriately licensed professional engineer where professional sealing is required.</p>
+                          <p>Depending on the building and its systems, mep engineering chandler may include the mechanical, electrical, and plumbing documentation required for the defined project scope; an mep engineer chandler confirms the applicable code edition and jurisdictional requirements for that project before sealing, where sealing is required.</p>
+                                <p>Apex Grid provides coordinated mechanical, electrical, and plumbing design for Chandler projects; where professional engineering review or sealing is required, each discipline within a mep engineering chandler engagement is reviewed under the responsible charge of an appropriately licensed professional engineer for that discipline, and an mep engineer chandler seals only work within that engineer's discipline and responsible charge.</p>
+                                    </div>
+                                      </section>`;
+}
+
+
   function phoenixStructuralExactPhraseSection(): string {
   return `<section class="section section--white">
     <div class="container container--narrow">
@@ -8629,6 +8641,7 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     ${page.stateSlug === "arizona" && page.citySlug === "scottsdale" && page.serviceSlug === "mep-engineering" ? scottsdaleDocumentationSection() : ""}
 ${page.stateSlug === "arizona" && page.citySlug === "phoenix" && page.serviceSlug === "mep-engineering" ? phoenixExactPhraseSection() : ""}
 ${page.stateSlug === "arizona" && page.citySlug === "mesa" && page.serviceSlug === "mep-engineering" ? mesaExactPhraseSection() : ""}
+${page.stateSlug === "arizona" && page.citySlug === "chandler" && page.serviceSlug === "mep-engineering" ? chandlerExactPhraseSection() : ""}
 ${page.stateSlug === "arizona" && page.citySlug === "mesa" && page.serviceSlug === "structural-engineering" ? mesaStructuralExactPhraseSection() : ""}
     <section class="section section--white">
       <div class="container container--narrow">
