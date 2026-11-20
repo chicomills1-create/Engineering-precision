@@ -5032,6 +5032,17 @@ function chandlerCivilExactPhraseSection(): string {
   </section>`;
 }
 
+function tempeCivilExactPhraseSection(): string {
+  return `<section class="section section--white">
+      <div class="container container--narrow">
+            <h2>Civil Engineering Scope in Tempe</h2>
+                  <p>A civil engineering tempe engagement may cover site grading, drainage, and utility design for a Tempe project; a civil engineer tempe reviews the design under the responsible charge of an appropriately licensed professional engineer where professional sealing is required.</p>
+                        <p>Depending on the site's conditions and the project's scope, civil engineering tempe may include the grading and drainage documentation required for the defined project scope; a civil engineer tempe confirms the applicable code provisions, adopted standards, and jurisdictional requirements for that project before sealing, where sealing is required.</p>
+                              <p>Apex Grid provides civil site design for Tempe projects from client-provided surveys, drawings, and records; where professional engineering review or sealing is required, each discipline within a civil engineering tempe engagement is reviewed under the responsible charge of an appropriately licensed professional engineer for that discipline, and a civil engineer tempe seals only work within that engineer's discipline and responsible charge is sealed.</p>
+                                  </div>
+                                    </section>`;
+}
+
 function scottsdaleAzFormSection(): string {
   return `<section class="section section--white">
       <div class="container container--narrow">
@@ -15144,6 +15155,7 @@ ${state.slug === "arizona" && city.slug === "tempe" && svc.slug === "structural-
 ${state.slug === "arizona" && city.slug === "phoenix" && svc.slug === "civil-engineering" ? phoenixCivilExactPhraseSection() : ""} 
 ${state.slug === "arizona" && city.slug === "mesa" && svc.slug === "civil-engineering" ? mesaCivilExactPhraseSection() : ""}
       ${state.slug === "arizona" && city.slug === "chandler" && svc.slug === "civil-engineering" ? chandlerCivilExactPhraseSection() : ""}
+      ${state.slug === "arizona" && city.slug === "tempe" && svc.slug === "civil-engineering" ? tempeCivilExactPhraseSection() : ""}
 <section class="block"><div class="container">
   <h2>${esc(city.name)} <em>Permitting &amp; Code</em> Snapshot</h2>
   <div class="statgrid">
