@@ -358,7 +358,17 @@ const CTR_OVERRIDES: Record<string, CtrOverride> = {
     areaServed: "Mesa, Arizona",
     addReviewSchema: false,
   },  
-};
+  "/locations/arizona/chandler/": {
+        title: "Engineering Services in Chandler, AZ | MEP Engineering Firm Chandler | Apex Grid",
+        description: "Apex Grid provides MEP, structural, civil, and energy engineering for Chandler projects. Owners, developers, and general contractors can review coordinated design scopes, applicable code requirements, and discipline-specific professional engineer review and sealing where required.",
+        titleB: "Engineering Services in Chandler, AZ | MEP Engineering Firm Chandler | Apex Grid",
+        descriptionB: "Apex Grid provides MEP, structural, civil, and energy engineering for Chandler projects. Owners, developers, and general contractors can review coordinated design scopes, applicable code requirements, and discipline-specific professional engineer review and sealing where required.",
+        utmSlug: "engineering-chandler",
+        addLocalBusiness: false,
+        areaServed: "Chandler, Arizona",
+        addReviewSchema: false,
+  },
+  };
 
 function buildCtrLocalBusinessSchema(override: CtrOverride, canonical: string): object {
   return {
