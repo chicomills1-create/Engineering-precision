@@ -5009,6 +5009,16 @@ function tempeStructuralExactPhraseSection(): string {
                 </div>
                   </section>`;
 }
+function gilbertStructuralExactPhraseSection(): string {
+    return `<section class="section section--white">`
+      <div class="container container--narrow">
+            <h2>Structural Engineering Scope in Gilbert</h2>
+      <p>A structural engineering gilbert engagement may cover the framing, foundation, and lateral-system design for a Gilbert project; a structural engineer gilbert reviews the design under the responsible charge of an appropriately licensed professional engineer where professional sealing is required.</p>
+      <p>Depending on the building's materials and loads, structural engineering gilbert may include the calculations and connection details required for the defined project scope; a structural engineer gilbert confirms the applicable code edition and jurisdictional requirements for that project before sealing, where sealing is required.</p>
+      <p>Apex Grid provides structural design for Gilbert projects from client-provided drawings and records; where professional engineering review or sealing is required, each discipline within a structural engineering gilbert engagement is reviewed under the responsible charge of an appropriately licensed professional engineer for that discipline, and a structural engineer gilbert seals only work within that engineer's discipline and responsible charge.</p>
+      </div>
+      </section>`;
+}
 
 function phoenixCivilExactPhraseSection(): string {
   return `<section class="section section--white">
@@ -15163,6 +15173,7 @@ ${state.slug === "arizona" && city.slug === "gilbert" && svc.slug === "mep-engin
 ${state.slug === "arizona" && city.slug === "phoenix" && svc.slug === "mep-engineering" ? phoenixExactPhraseSection() : ""}
 ${state.slug === "arizona" && city.slug === "phoenix" && svc.slug === "structural-engineering" ? phoenixStructuralExactPhraseSection() : ""}
 ${state.slug === "arizona" && city.slug === "tempe" && svc.slug === "structural-engineering" ? tempeStructuralExactPhraseSection() : ""}
+${state.slug === "arizona" && city.slug === "gilbert" && svc.slug === "structural-engineering" ? gilbertStructuralExactPhraseSection() : ""}
 ${state.slug === "arizona" && city.slug === "phoenix" && svc.slug === "civil-engineering" ? phoenixCivilExactPhraseSection() : ""} 
 ${state.slug === "arizona" && city.slug === "mesa" && svc.slug === "civil-engineering" ? mesaCivilExactPhraseSection() : ""}
       ${state.slug === "arizona" && city.slug === "chandler" && svc.slug === "civil-engineering" ? chandlerCivilExactPhraseSection() : ""}
