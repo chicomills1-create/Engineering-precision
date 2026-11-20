@@ -5010,7 +5010,7 @@ function tempeStructuralExactPhraseSection(): string {
                   </section>`;
 }
 function gilbertStructuralExactPhraseSection(): string {
-    return `<section class="section section--white">`
+    return `<section class="section section--white">
       <div class="container container--narrow">
             <h2>Structural Engineering Scope in Gilbert</h2>
       <p>A structural engineering gilbert engagement may cover the framing, foundation, and lateral-system design for a Gilbert project; a structural engineer gilbert reviews the design under the responsible charge of an appropriately licensed professional engineer where professional sealing is required.</p>
@@ -5063,7 +5063,7 @@ function tempeCivilExactPhraseSection(): string {
                                     </section>`;
 }
 function gilbertCivilExactPhraseSection(): string {
-    return `<section class="section section--white">`
+    return `<section class="section section--white">
       <div class="container container--narrow">
             <h2>Civil Engineering Scope in Gilbert</h2>
       <p>A civil engineering gilbert engagement may cover site grading, drainage, and utility design for a Gilbert project; a civil engineer gilbert reviews the design under the responsible charge of an appropriately licensed professional engineer where professional sealing is required.</p>
