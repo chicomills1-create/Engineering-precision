@@ -4934,7 +4934,6 @@ function chandlerExactPhraseSection(): string {
                                       </section>`;
 }
 
-
   function chandlerSemiconductorExactPhraseSection(): string {
   return `<section class="section section--white">
     <div class="container container--narrow">
@@ -4945,6 +4944,18 @@ function chandlerExactPhraseSection(): string {
     </div>
   </section>`;
 }
+
+function tempeMepExactPhraseSection(): string {
+  return `<section class="section section--white">
+      <div class="container container--narrow">
+            <h2>MEP Engineering Scope in Tempe</h2>
+                  <p>A mep engineering tempe engagement may cover coordinated mechanical, electrical, and plumbing design for Tempe projects, with each discipline reviewed under the responsible charge of an appropriately licensed professional engineer where professional sealing is required.</p>
+                        <p>Depending on the building and its systems, mep engineering tempe may include the mechanical, electrical, and plumbing documentation required for the defined project scope; the applicable code edition and jurisdictional requirements for that project are confirmed before sealing, where sealing is required.</p>
+                              <p>Apex Grid provides coordinated mechanical, electrical, and plumbing design for Tempe projects; where professional engineering review or sealing is required, each discipline within a mep engineering tempe engagement is reviewed under the responsible charge of an appropriately licensed professional engineer for that discipline, and only work within that engineer's discipline and responsible charge is sealed.</p>
+                                  </div>
+                                    </section>`;
+}
+
 
 function phoenixStructuralExactPhraseSection(): string {
   return `<section class="section section--white">
@@ -15089,6 +15100,7 @@ function cityServicePage(state: StateData, city: CityData, svc: ServiceDef, sibl
     "@type": "Service",
     name: `${svc.name} in ${city.name}, ${state.abbrev}`,
     provider: { "@id": `${SITE}/#business` },
+  
     areaServed: { "@type": "City", name: `${city.name}, ${state.abbrev}` },
     serviceType: svc.name,
   };
@@ -15106,7 +15118,6 @@ ${familyVisual("location", `Service location shown: ${city.name}, ${state.name}.
   <h2>${esc(svc.shortName)} Engineering for <em>${esc(city.name)}</em> Projects</h2>
   <div class="prose"><p>${esc(city.narratives[svc.narrativeKey])}</p></div>
 </div></section>
-
 ${state.slug === "california" && city.slug === "fresno" && svc.slug === "mep-engineering" ? fresnoCarrierSection() : ""}
 ${state.slug === "north-dakota" && city.slug === "bismarck" && svc.slug === "mep-engineering" ? bismarckCityStateLinkSection() : ""}
 ${state.slug === "california" && city.slug === "bakersfield" && svc.slug === "mep-engineering" ? fresnoDefenseSection("bakersfield") : ""}
@@ -15115,6 +15126,7 @@ ${state.slug === "texas" && city.slug === "dallas" && svc.slug === "mep-engineer
 ${state.slug === "south-carolina" && city.slug === "rock-hill" && svc.slug === "mep-engineering" ? rockHillExactPhraseSection() : ""}
 ${state.slug === "arizona" && city.slug === "tempe" && svc.slug === "mep-engineering" ? tempeExactPhraseSection() : ""}
 ${state.slug === "arizona" && city.slug === "tempe" && svc.slug === "mep-engineering" ? tempeMepCureSection() : ""}
+${state.slug === "arizona" && city.slug === "tempe" && svc.slug === "mep-engineering" ? tempeMepExactPhraseSection() : ""}
 ${state.slug === "arizona" && city.slug === "phoenix" && svc.slug === "mep-engineering" ? phoenixExactPhraseSection() : ""}
 ${state.slug === "arizona" && city.slug === "phoenix" && svc.slug === "structural-engineering" ? phoenixStructuralExactPhraseSection() : ""}
 ${state.slug === "arizona" && city.slug === "phoenix" && svc.slug === "civil-engineering" ? phoenixCivilExactPhraseSection() : ""} 
