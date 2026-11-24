@@ -103,6 +103,7 @@ const pages: Phase9IndustryServicePage[] = [
       { label: "Student housing MEP engineering", href: "/industries/student-housing/mep-engineering/" },
       { label: "Apartment structural engineering", href: "/industries/multifamily/apartments/structural-engineering/" },
       { label: "Structural engineering services", href: "/structural-engineering/" },
+      { label: "Student housing structural design", href: "/answers/student-housing-structural/" },
     ],
     faqs: [
       { question: "How is student housing different from ordinary apartments?", answer: "The structural scope may be shaped by higher occupancy, repetitive room modules, shared amenities, concentrated circulation, balconies, and academic-calendar phasing. I confirm those project facts before selecting design priorities. It is also leased a full academic year ahead, so a student housing structural engineer sequences the foundation release and the podium pour against a move-in date that is already printed in leasing material — the schedule is a design input, not an afterthought." },
