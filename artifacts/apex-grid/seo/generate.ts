@@ -4484,6 +4484,30 @@ function prescottCarrierSection(): string {
 </div></section>`;
 }
 
+/** Cure 4 G.1 (2026-11-25): support INTO the Casa Grande carrier for
+ *  "mep engineering firm casa grande" (carrier phrase x5 FULL, inbound 1
+ *  at board time) — Mesa-protocol support leg: editorial prose anchors
+ *  from the four named AZ sibling city pages (Phoenix, Tucson, Chandler,
+ *  Mesa), at most one exact-match anchor per source page. Copy traces to
+ *  the carrier's own published facts (I-8/I-10 junction, logistics and
+ *  industrial stock, medical campus, City of Casa Grande permitting
+ *  under the IBC with local amendments) + civic geography only; no
+ *  licensure claims added. Prose links only. */
+const CASA_GRANDE_DEFENSE_SOURCE_SLUGS = new Set([
+  "phoenix", "tucson", "chandler", "mesa",
+]);
+
+function casaGrandeDefenseSection(currentSlug: string): string {
+  if (currentSlug === "casa-grande") return "";
+  const link = (anchor: string) =>
+    `<a href="/locations/arizona/casa-grande/">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>Pinal County <em>MEP Coverage</em></h2>
+  <div class="prose"><p>South of the metro, Casa Grande sits at the junction of I-8 and I-10, halfway between the Phoenix and Tucson metros, and its project load follows the freight: logistics and warehouse buildings along the interstate corridors, the industrial and manufacturing plants the rail lines serve, a growing medical campus, and the retail and civic work filling in behind the master-planned rooftops. Our ${link("MEP engineering firm Casa Grande")} coverage handles that work under the City of Casa Grande's own permitting track, with the local code picture set out on the Casa Grande page.</p>
+  <p>Casa Grande reviews on its own track, separate from Phoenix, Tucson, and the Valley cities — Arizona carries no mandatory statewide commercial building code, so the governing editions are the city's own, under the IBC with local amendments. The adopted editions and the logistics, industrial, healthcare, and retail scopes an ${link("MEP engineering in Casa Grande")} project designs to are spelled out on its page.</p></div>
+</div></section>`;
+}
+
 function casaGrandeCarrierSection(): string {
   return `<section class="block"><div class="container">
   <h2>An <em>MEP Engineering Firm</em> Casa Grande Project Teams Can Scope in One Pass</h2>
@@ -6964,6 +6988,7 @@ ${state.slug === "arizona" && city.slug === "casa-grande" ? casaGrandeCarrierSec
 ${state.slug === "georgia" && city.slug === "sandy-springs" ? sandySpringsCarrierSection() : ""}
 ${state.slug === "arizona" && city.slug === "mesa" ? mesaCarrierSection() : ""}
 ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
+${state.slug === "arizona" && CASA_GRANDE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? casaGrandeDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && city.slug === "queen-creek" ? queenCreekHubSection() : ""}
 ${state.slug === "arizona" && city.slug === "yuma" ? yumaHubSection() : ""}
@@ -15342,6 +15367,7 @@ ${state.slug === "georgia" && GA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? georgiaDe
 ${state.slug === "georgia" && ALPHA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? alpharettaDefenseSection(city.slug) : ""}
 ${state.slug === "georgia" && MARIETTA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mariettaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MESA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mesaDefenseSection(city.slug) : ""}
+${state.slug === "arizona" && CASA_GRANDE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? casaGrandeDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaDefenseSection(city.slug) : ""}
 ${state.slug === "arizona" && QC_DEFENSE_SOURCE_SLUGS.has(city.slug) ? queenCreekDefenseSection(city.slug) : ""}
 ${state.slug === "georgia" && city.slug === "marietta" ? mariettaCarrierSection() : ""}
