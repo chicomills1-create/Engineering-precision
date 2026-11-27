@@ -582,6 +582,7 @@ const BASE_RESOURCE_ARTICLES: ResourceArticle[] = [
 
 <h2>What's in a Permit-Ready MEP Set</h2>
 <p>A complete MEP permit package includes: plans showing equipment locations, duct and pipe routing, and fixture layouts; schedules listing equipment sizes and specifications; one-line diagrams for electrical; calculations demonstrating code compliance (load calculations, ventilation calculations, energy compliance); and PE stamps from the engineer of record for each discipline. Some jurisdictions also require a separate energy compliance package (Title 24, IECC compliance forms).</p>
+<p>What that seal means for the systems set — the <a href="/resources/permit/what-is-a-pe-stamp/">mep pe stamp</a> and the professional responsibility behind it — is set out in our guide to what a PE stamp means.</p>
 
 <h2>Tenant Improvements Are the Most Common Trigger</h2>
 <p>Commercial tenant improvement projects are the most frequent driver of MEP permits. Even "simple" TIs — a new coffee shop, a medical suite, an office renovation — typically touch all three MEP disciplines and require a full engineering package. Starting the engineering process as soon as the architectural design is underway keeps permitting on schedule.</p>
@@ -744,17 +745,17 @@ const BASE_RESOURCE_ARTICLES: ResourceArticle[] = [
     minutes: 4,
     html: `
 <h2>What a PE Stamp Represents</h2>
-<p>A PE stamp — the embossed or printed seal of a licensed Professional Engineer — is a statement of professional responsibility. When an engineer stamps drawings or calculations, they are certifying that the documents were prepared or reviewed under their supervision and that, to the best of their professional knowledge and judgment, the work complies with applicable codes and standards and is technically sound.</p>
+<p>A PE stamp — the embossed or printed seal of a licensed Professional Engineer — is a statement of professional responsibility. When an engineer stamps drawings or calculations, they are certifying that the documents were prepared or reviewed under their supervision and that, to the best of their professional knowledge and judgment, the work complies with applicable codes and standards and is technically sound. For building-systems work, the MEP PE stamp is that statement applied to the mechanical, electrical, and plumbing documents — a licensed engineer answerable for each discipline's set.</p>
 <p>This isn't a rubber stamp — it's professional liability. Engineers who stamp work incorrectly face disciplinary action from their state licensing board, civil liability, and potential loss of their license.</p>
 
 <h2>What a PE Stamp Is Not</h2>
 <p>A PE stamp is not a guarantee of perfection — engineering involves judgment, and engineering documents are based on the information available at the time. It is also not simply a service that can be purchased. Engineers are legally prohibited from stamping work they didn't prepare or adequately review. Any firm that offers to "provide stamps" for work they haven't engineered should be avoided — this practice is both illegal and dangerous.</p>
 
 <h2>When PE-Stamped Documents Are Required</h2>
-<p>Most jurisdictions require PE-stamped structural, mechanical, electrical, and plumbing engineering documents for commercial projects above certain thresholds. The specific requirements vary by state and locality — some states have stricter exemption thresholds than others. Generally speaking, any commercial project with structural scope, complex building systems, or new construction requires PE-stamped engineering documents as part of the permit submittal.</p>
+<p>Most jurisdictions require PE-stamped structural, mechanical, electrical, and plumbing engineering documents for commercial projects above certain thresholds. For the building-systems disciplines, that requirement is the MEP PE stamp on the mechanical, electrical, and plumbing documents in the set. The specific requirements vary by state and locality — some states have stricter exemption thresholds than others. Generally speaking, any commercial project with structural scope, complex building systems, or new construction requires PE-stamped engineering documents as part of the permit submittal.</p>
 
 <h2>Which PE for Which Scope</h2>
-<p>Engineers are licensed by discipline — a structural PE is licensed for structural work, a mechanical PE for mechanical, an electrical PE for electrical, and so on. The same engineer can hold licenses in multiple disciplines, but the stamp must be from a PE licensed in the discipline being covered. State licensure is also specific — an Arizona PE must be licensed in California to stamp California projects. Most engineering firms carry multi-state licensure for the markets they serve.</p>
+<p>Engineers are licensed by discipline — a structural PE is licensed for structural work, a mechanical PE for mechanical, an electrical PE for electrical, and so on. The same engineer can hold licenses in multiple disciplines, but the stamp must be from a PE licensed in the discipline being covered. State licensure is also specific — an Arizona PE must be licensed in California to stamp California projects. Most engineering firms carry multi-state licensure for the markets they serve. The MEP PE stamp follows the same rule discipline by discipline: the mechanical documents carry the stamp of a PE licensed for mechanical work, the electrical documents an electrical PE's, and the plumbing documents a plumbing PE's.</p>
     `,
   },
 
