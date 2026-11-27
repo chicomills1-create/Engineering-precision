@@ -5695,8 +5695,8 @@ function grandForksPhraseTopUpSection(): string {
 function grandForksMepCarrierSection(): string {
   return `<section class="block"><div class="container">
   <h2>An MEP Engineering Company for <em>Grand Forks</em> Projects</h2>
-  <div class="prose"><p>Teams hiring an MEP engineering company Grand Forks owners and contractors can scope against one set get the full building-systems package from this page: mechanical, electrical, and plumbing designed together, sealed by the licensed engineer in responsible charge, and coordinated before the set goes to the city. For the University of North Dakota corridor, an MEP engineering company Grand Forks owners hire coordinates laboratory, classroom, and housing scopes with campus utility interfaces, with mechanical, electrical, and plumbing designed together and each discipline sealed under the responsible charge of the appropriately licensed engineer for that discipline. For the Altru Health corridor, an MEP engineering company Grand Forks owners hire may provide coordinated mechanical and medical-gas design support for clinical renovations where maintaining building operations is a project requirement, with the applicable systems and phasing evaluated against the facility's project-specific conditions before submission. Grand Forks' stock sets the specifics. The University of North Dakota corridor brings laboratory, classroom, and housing work with campus utility interfaces; the Altru Health corridor brings clinical renovations where the mechanical and medical-gas scopes cannot take the building offline; Grand Forks Air Force Base and the Grand Sky UAS park bring federal and aviation-support facilities at the city's edge; and the Red River floodplain underneath all of it brings lakebed clays, high groundwater, and flood-elevation conditions the plumbing and below-grade design has to answer.</p>
-  <p>The mechanical design is cold-climate work first: design temperatures far below zero, freeze protection on every water-bearing system, snow and ice loads on rooftop equipment and its curbs, and heating-led load profiles through a long winter. Permitting runs through the City of Grand Forks on the state building code framework, with the governing editions confirmed at kickoff. The scope is sequenced to that review — loads matched to the real program, systems reconciled across the three disciplines on paper, and one sealed set submitted, so the Grand Forks reviewer sees the same building on every sheet.</p></div>
+  <div class="prose"><p>Scoped as mep engineering grand forks nd work, the package on this page is one sealed set for the valley's institutional stock. Teams hiring an MEP engineering company Grand Forks owners and contractors can scope against one set get the full building-systems package from this page: mechanical, electrical, and plumbing designed together, sealed by the licensed engineer in responsible charge, and coordinated before the set goes to the city. It is the work mep engineering grand forks nd programs are scoped around — campus, clinical, and federal facilities whose systems cannot be designed in pieces. For the University of North Dakota corridor, an MEP engineering company Grand Forks owners hire coordinates laboratory, classroom, and housing scopes with campus utility interfaces, with mechanical, electrical, and plumbing designed together and each discipline sealed under the responsible charge of the appropriately licensed engineer for that discipline. For the Altru Health corridor, an MEP engineering company Grand Forks owners hire may provide coordinated mechanical and medical-gas design support for clinical renovations where maintaining building operations is a project requirement, with the applicable systems and phasing evaluated against the facility's project-specific conditions before submission. Grand Forks' stock sets the specifics. The University of North Dakota corridor brings laboratory, classroom, and housing work with campus utility interfaces; the Altru Health corridor brings clinical renovations where the mechanical and medical-gas scopes cannot take the building offline; Grand Forks Air Force Base and the Grand Sky UAS park bring federal and aviation-support facilities at the city's edge; and the Red River floodplain underneath all of it brings lakebed clays, high groundwater, and flood-elevation conditions the plumbing and below-grade design has to answer.</p>
+  <p>The mechanical design is cold-climate work first: design temperatures far below zero, freeze protection on every water-bearing system, snow and ice loads on rooftop equipment and its curbs, and heating-led load profiles through a long winter. Permitting runs through the City of Grand Forks on the state building code framework, with the governing editions confirmed at kickoff. The scope is sequenced to that review — loads matched to the real program, systems reconciled across the three disciplines on paper, and one sealed set submitted, so the Grand Forks reviewer sees the same building on every sheet. That is the basis on which mep engineering grand forks nd scopes are priced, phased, and permitted from this page.</p></div>
 </div></section>`;
 }
 
@@ -5710,14 +5710,14 @@ function grandForksStateSvcSection(): string {
 function grandForksHubSupportSection(): string {
   return `<section class="block"><div class="container">
   <h2>Grand Forks: <em>the Valley's Institutional Market</em></h2>
-  <div class="prose"><p>North Dakota's MEP demand splits between the capital's state-government stock and the Red River Valley's institutional corridor — and Grand Forks is the corridor's northern anchor, where the university, the regional health system, and the air base generate the state's steadiest commercial project flow. The systems scope for that market, engineered as one coordinated set against the floodplain and cold-climate conditions the valley imposes, is set out on our <a href="/locations/north-dakota/grand-forks/mep-engineering/">Grand Forks MEP engineering</a> page. Teams shortlisting an <a href="/locations/north-dakota/grand-forks/mep-engineering/">MEP engineer Grand Forks</a> owners can scope, phase, and permit against start on that page — it carries the city's services, its review path, and the statewide bench behind both.</p></div>
+  <div class="prose"><p>North Dakota's MEP demand splits between the capital's state-government stock and the Red River Valley's institutional corridor — and Grand Forks is the corridor's northern anchor, where the university, the regional health system, and the air base generate the state's steadiest commercial project flow. The systems scope for that market, engineered as one coordinated set against the floodplain and cold-climate conditions the valley imposes, is set out on our <a href="/locations/north-dakota/grand-forks/mep-engineering/">Grand Forks MEP engineering</a> page. Teams shortlisting an <a href="/locations/north-dakota/grand-forks/mep-engineering/">MEP engineer Grand Forks</a> owners can scope, phase, and permit against start on that page — it carries the city's services, its review path, and the statewide bench behind both. The full statement of that scope is the <a href="/locations/north-dakota/grand-forks/mep-engineering/">mep engineering grand forks nd</a> service page.</p></div>
 </div></section>`;
 }
 
 function fargoGrandForksSupportSection(): string {
   return `<section class="block"><div class="container">
   <h2>Up the Valley: <em>Grand Forks</em></h2>
-  <div class="prose"><p>Fargo and Grand Forks are one working corridor — the same builders, the same lakebed clays and floodplain questions, eighty miles of I-29 apart. Where a Fargo team's program extends up the valley, the systems scope is carried on the same basis: mechanical, electrical, and plumbing as one sealed set, designed for the valley's groundwater and cold. The Grand Forks statement of that scope is on our <a href="/locations/north-dakota/grand-forks/mep-engineering/">MEP engineer Grand Forks</a> page.</p></div>
+  <div class="prose"><p>Fargo and Grand Forks are one working corridor — the same builders, the same lakebed clays and floodplain questions, eighty miles of I-29 apart. Where a Fargo team's program extends up the valley, the systems scope is carried on the same basis: mechanical, electrical, and plumbing as one sealed set, designed for the valley's groundwater and cold. The Grand Forks statement of that scope is on our <a href="/locations/north-dakota/grand-forks/mep-engineering/">MEP engineer Grand Forks</a> page. Teams running both ends of I-29 scope the northern end as <a href="/locations/north-dakota/grand-forks/mep-engineering/">mep engineering grand forks nd</a> work, carried on the same sealed-set basis.</p></div>
 </div></section>`;
 }
 
@@ -5735,8 +5735,8 @@ function fargoGrandForksSupportSection(): string {
 function maconCarrierSection(): string {
   return `<section class="block"><div class="container">
   <h2>Macon's Engineering Workload: <em>County Seat, Ag Belt, Two Highways</em></h2>
-  <div class="prose"><p>A Macon Missouri engineer designs for a specific place: the Macon County seat, a city of roughly 5,500 at the junction of US-36 and US-63 in north-central Missouri, ringed by some of the most productive farm ground in the state. The workload follows that geography — grain handling and ag-processing facilities, implement dealers and farm-supply buildings along the highway corridors, the county's schools and its hospital, storefronts in the historic downtown, and light industrial stock near the rail line — each sitting on north-Missouri conditions: expansive clay soils that move with moisture, frost depth that drives footing design, and wind and snow loads off open farm country.</p>
-  <p>Permitting runs through the City of Macon for in-town work and Macon County for the rest, and the sets that clear review fastest are the ones scoped to the actual building: MEP, structural, and civil designed together, sealed by the Missouri-licensed engineer in responsible charge, with the governing code editions confirmed at kickoff rather than assumed. That is the package this page represents — one coordinated set for Macon projects, from the first site question to the stamped drawings.</p></div>
+  <div class="prose"><p>A Macon Missouri engineer designs for a specific place: the Macon County seat, a city of roughly 5,500 at the junction of US-36 and US-63 in north-central Missouri, ringed by some of the most productive farm ground in the state. The workload follows that geography — grain handling and ag-processing facilities, implement dealers and farm-supply buildings along the highway corridors, the county's schools and its hospital, storefronts in the historic downtown, and light industrial stock near the rail line — each sitting on north-Missouri conditions: expansive clay soils that move with moisture, frost depth that drives footing design, and wind and snow loads off open farm country. For that workload, a Macon MO engineer scopes the county's schools, its hospital, and the ag-processing stock as one coordinated set, sealed for the clay soils, frost depth, and highway-corridor loads the buildings actually sit on.</p>
+  <p>Permitting runs through the City of Macon for in-town work and Macon County for the rest, and the sets that clear review fastest are the ones scoped to the actual building: MEP, structural, and civil designed together, sealed by the Missouri-licensed engineer in responsible charge, with the governing code editions confirmed at kickoff rather than assumed. A Macon MO engineer works both review doors the same way — the City of Macon for in-town work and Macon County for the rest — with the governing editions settled before the first sheet is drawn. That is the package this page represents — one coordinated set for Macon projects, from the first site question to the stamped drawings. That is the standard a Macon MO engineer is hired to hold: one accountable seal on a set drawn for Macon itself.</p></div>
 </div></section>`;
 }
 
@@ -5759,7 +5759,7 @@ function missouriMaconStateSvcSection(): string {
 function missouriMaconHubSection(): string {
   return `<section class="block"><div class="container">
   <h2>Macon: <em>the North-Central Anchor</em></h2>
-  <div class="prose"><p>Missouri's metros carry the volume, but the state's north-central tier runs through Macon — a county seat whose ag economy, schools, and hospital produce engineering work well beyond its population. How that work is scoped, designed, and permitted is covered on our <a href="/locations/missouri/macon/">engineering services in Macon</a> page.</p></div>
+  <div class="prose"><p>Missouri's metros carry the volume, but the state's north-central tier runs through Macon — a county seat whose ag economy, schools, and hospital produce engineering work well beyond its population. How that work is scoped, designed, and permitted is covered on our <a href="/locations/missouri/macon/">engineering services in Macon</a> page. For the county seat itself, the <a href="/locations/missouri/macon/">Macon MO engineer</a> page sets out the scope, the services, and the permitting path in one place.</p></div>
 </div></section>`;
 }
 
@@ -5775,7 +5775,7 @@ function maconDefenseSection(sourceSlug: string): string {
   if (sourceSlug === "kirksville") {
     return `<section class="block"><div class="container">
   <h2>The Regional Hub and Its <em>County Seat</em></h2>
-  <div class="prose"><p>Kirksville is the north-central region's hub; thirty-five miles south, Macon anchors Macon County with its own schools, hospital, and ag-processing workload. Owners working in both markets will find the county seat's scope set out on our <a href="/locations/missouri/macon/">engineering services in Macon, Missouri</a> page.</p></div>
+  <div class="prose"><p>Kirksville is the north-central region's hub; thirty-five miles south, Macon anchors Macon County with its own schools, hospital, and ag-processing workload. Owners working in both markets will find the county seat's scope set out on our <a href="/locations/missouri/macon/">engineering services in Macon, Missouri</a> page. Teams running the US-63 corridor in both directions scope the southern end through the <a href="/locations/missouri/macon/">Macon MO engineer</a> page.</p></div>
 </div></section>`;
   }
   return "";
@@ -9807,6 +9807,13 @@ function disciplineHubPage(hub: DisciplineHub): string {
       </div></section>`
     : "";
 
+  const structuralChurches = hub.slug === "structural-engineering"
+    ? `<section class="section section--white"><div class="container container--narrow">
+        <h2>Structural Engineering for <em>Houses of Worship</em></h2>
+        <p>Sanctuaries, fellowship halls, and worship campuses carry long-span roofs, tall volumes, and assembly loads that set them apart from ordinary commercial work. Our <a href="/industries/religious-worship/structural-engineering/">structural engineer for churches</a> page sets out the framing, foundation, and retrofit scope for those buildings.</p>
+      </div></section>`
+    : "";
+
   const body = `
     <div class="hero hero--page">
       <div class="hero-inner">
@@ -9841,6 +9848,7 @@ function disciplineHubPage(hub: DisciplineHub): string {
     </section>
 ${extendedStructuralCards}
 ${structuralSupport}
+${structuralChurches}
 
     ${residualsFaqSection(hub.faqs)}
 
