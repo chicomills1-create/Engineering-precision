@@ -260,6 +260,15 @@ export default function IndustryDetail() {
                     .
                   </p>
                 )}
+                {industry.slug === "religious-worship-facility-engineering" && d.name === "MEP Engineering" && (
+                  <p className="mt-6 max-w-3xl text-foreground/80 leading-relaxed">
+                    Chapels and prayer halls carry the same systems questions at a smaller scale — quiet HVAC, assembly ventilation, and lighting that serves both worship and recording. Our{" "}
+                    <Link href="/answers/chapel-design/" className="font-semibold text-primary hover:underline">
+                      chapel engineer
+                    </Link>{" "}
+                    page sets out how those scopes are designed and sealed.
+                  </p>
+                )}
                 {d.href && (
                   <Link href={d.href} className="inline-flex items-center gap-2 text-sm font-semibold text-primary mt-6 hover:gap-3 transition-all">
                     Explore {d.name} <ArrowRight className="w-4 h-4" />
