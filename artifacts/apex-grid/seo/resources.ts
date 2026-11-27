@@ -768,7 +768,7 @@ const BASE_RESOURCE_ARTICLES: ResourceArticle[] = [
     minutes: 8,
     html: `
 <h2>TIs Are the Most Common MEP Project Type</h2>
-<p>Commercial tenant improvement projects — new tenants moving into existing space, business expansions, building renovations — represent the most common category of commercial construction. And nearly all of them require MEP engineering. Here's how to understand what's needed for your TI.</p>
+<p>Commercial tenant improvement projects — new tenants moving into existing space, business expansions, building renovations — represent the most common category of commercial construction. And nearly all of them require a tenant improvement mep engineer to scope what changes. Here's how to understand what's needed for your TI.</p>
 
 <h2>Mechanical Engineering for TIs</h2>
 <p>The mechanical scope depends on what's changing. Common TI mechanical scope includes:</p>
@@ -800,7 +800,7 @@ const BASE_RESOURCE_ARTICLES: ResourceArticle[] = [
 </ul>
 
 <h2>When to Start MEP Engineering</h2>
-<p>Start MEP engineering as early as the architectural layout is established — you don't need final drawings to begin. Waiting until architectural documents are complete before engaging MEP engineers is the most common cause of permit delays on TI projects. Early engagement allows the MEP engineers to identify conflicts, flag equipment room requirements, and coordinate systems before the architectural layout is locked.</p>
+<p>Start MEP engineering as early as the architectural layout is established — you don't need final drawings to begin. Waiting until architectural documents are complete before engaging MEP engineers is the most common cause of permit delays on TI projects. Early engagement allows the MEP engineers to identify conflicts, flag equipment room requirements, and coordinate systems before the architectural layout is locked. Bringing in the tenant improvement mep engineer at that layout stage is what keeps system conflicts from surfacing for the first time at plan review.</p>
 
 <h2>Structural Scope for Tenant Improvements</h2>
 <p>Most tenant improvements are MEP-led, but structural scope appears whenever the build-out changes how the building carries load. Common TI structural scope includes:</p>
@@ -846,7 +846,7 @@ const BASE_RESOURCE_ARTICLES: ResourceArticle[] = [
 
 <h2>Frequently Asked Questions</h2>
 <h3>Does every tenant improvement need MEP engineering?</h3>
-<p>Almost always. Tenant improvements almost always require MEP engineering, because any project that modifies or installs mechanical, electrical, or plumbing systems in a commercial building requires MEP engineering documents for the building permit. Even a light office renovation typically touches lighting, HVAC distribution, or fixtures.</p>
+<p>Almost always. A tenant improvement mep engineer is needed on nearly every build-out, because any project that modifies or installs mechanical, electrical, or plumbing systems in a commercial building requires MEP engineering documents for the building permit. Even a light office renovation typically touches lighting, HVAC distribution, or fixtures.</p>
 <h3>Which engineering disciplines does a TI typically involve?</h3>
 <p>Mechanical, electrical, and plumbing on almost every project — even simple TIs typically touch all three. Structural engineering joins when the build-out changes load paths, adds openings in load-bearing walls, or sets new equipment on the roof, and civil engineering joins when site utilities, grading, or drainage change.</p>
 <h3>What documents are included in a TI permit package?</h3>
