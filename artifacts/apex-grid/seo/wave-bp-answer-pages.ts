@@ -478,11 +478,15 @@ export const WAVE_BP_ANSWER_PAGES: Phase0AeoPage[] = [
         question: "What makes car wash site circulation different?",
         answer: "The continuous flow: vehicles enter, queue, pass through the wash, and exit to vacuum or drying areas without stopping the line. The site needs stacking lanes for the queue, a bypass or exit path that doesn't cross the entry, and vacuum stalls positioned so parked cars don't block the wash exit. On a tight lot, fitting all of this with proper turning radii is the central site-planning challenge.",
       },
+      {
+        question: "Who designs the wash tunnel and canopy structure?",
+        answer: "A structural engineer for car wash projects designs the wash tunnel and canopy structure — the framing, its foundations, and the anchorage of brushes, arches, and conveyor equipment against vibration and vehicle impact. That structural scope sits alongside the civil water, drainage, reclaim, and circulation design in the same coordinated permit set.",
+      },
     ],
     sections: [
       {
         heading: "The concise answer",
-        body: "Car wash civil engineering includes water service sized for wash demand, high-flow drainage with oil/grit separation and water reclaim, sanitary sewer pretreatment, stormwater detention for the paved site, and grading and circulation design for continuous vehicle throughput.\n\nWater is the thread that runs through everything. Supply, drainage, treatment, reclaim, and stormwater are all water problems wearing different hats, and the civil engineer is the one who has to make them all work on the same site at the same time.",
+        body: "Car wash civil engineering includes water service sized for wash demand, high-flow drainage with oil/grit separation and water reclaim, sanitary sewer pretreatment, stormwater detention for the paved site, and grading and circulation design for continuous vehicle throughput.\n\nWater is the thread that runs through everything. Supply, drainage, treatment, reclaim, and stormwater are all water problems wearing different hats, and the civil engineer is the one who has to make them all work on the same site at the same time.\n\nThe civil scope is only half the project, though: a structural engineer for car wash projects designs the wash tunnel and canopy framing, the foundations under them, and the anchorage of the wash equipment — the parts that stand up and hold on while the civil work moves the water.",
       },
       {
         heading: "The water systems, end to end",
