@@ -1,4 +1,5 @@
 import type { StateData } from "./types";
+import { ELECTRICAL_SCOPE, STAMPING_SCOPE } from "./city-depth-pages";
 
 export interface ServiceDef {
   slug: string;
@@ -97,5 +98,37 @@ export const SERVICES: ServiceDef[] = [
     ],
     intro:
       "Energy compliance handled as engineering, not paperwork — documentation matched to the exact code edition your permitting jurisdiction enforces.",
+  },
+  {
+    // Depth-wave service (Wave 1): no hand-written narratives exist for this
+    // slug — generate.ts composes city/state editorial from the researched
+    // records via city-depth-pages.ts (utility, energy code, AHJ, climate).
+    slug: "electrical-engineering",
+    name: "Electrical Engineering",
+    shortName: "Electrical",
+    h1: "Electrical Engineering",
+    metaTitle: (s) => `Best Electrical Engineer in ${s.name} | Fast Turnaround | Apex Grid Engineering`,
+    metaDescription: (s) =>
+      `Licensed electrical engineering for ${s.name} commercial projects: service sizing, power distribution, and lighting design documented for ${s.energyCode.commercial.split(";")[0]} compliance and local utility requirements.`,
+    narrativeKey: "electrical",
+    scope: ELECTRICAL_SCOPE,
+    intro:
+      "Electrical systems sized and documented for the utility territory and energy code your project actually sits in — load calculations, distribution, and lighting engineered as one coordinated set.",
+  },
+  {
+    // Depth-wave service (Wave 1): city/state editorial composed from the
+    // licensure record + city AHJ record via city-depth-pages.ts. Review in
+    // responsible charge before sealing is the standing house position.
+    slug: "pe-stamping",
+    name: "PE Stamping & Sealing",
+    shortName: "PE Stamping",
+    h1: "PE Stamping & Sealing",
+    metaTitle: (s) => `PE Stamping & Sealing in ${s.name} | Licensed Review & Seal | Apex Grid Engineering`,
+    metaDescription: (s) =>
+      `PE stamping and sealing for ${s.name} projects: drawings and calculations reviewed in responsible charge by licensed engineers and sealed for submittal under ${s.licensure.board}.`,
+    narrativeKey: "stamping",
+    scope: STAMPING_SCOPE,
+    intro:
+      "Review-and-seal by the licensed engineer of record — scope defined, design basis reviewed, and engineering verified in responsible charge before any seal is applied.",
   },
 ];
