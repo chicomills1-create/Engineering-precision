@@ -1576,6 +1576,10 @@ function phase0ArticleFrame(
 // sibling answers. Keyed by answer slug; every other answers page passes
 // undefined and renders byte-identical output.
 const ANSWER_EXTRA_SECTIONS: Record<string, string> = {
+  "car-wash-design": `<section class="block"><div class="container"><h2>The Structural Scope: <em>Tunnel, Canopy, and Anchorage</em></h2><div class="prose"><p>The civil scope above is only half the project. A structural engineer for car wash projects covers the parts that stand up and hold on: the wash tunnel framing and its equipment loads, the vacuum and payment canopies and their foundations, and the anchorage of brushes, arches, and conveyor equipment against vibration and vehicle impact. Those decisions sit outside the water, drainage, reclaim, and circulation scope — they are structural design, sealed by the engineer responsible for the frame and its foundations, and they belong in the same coordinated permit set as the civil work.</p></div></div></section>`,
+  "car-wash-equipment-room-mep": `<section class="block"><div class="container"><div class="prose"><p>The structural pads and housekeeping pads under the heavy and vibrating equipment in this room are part of a wider structural scope: the <a href="/answers/car-wash-design/">structural engineer for car wash</a> page covers the tunnel and canopy framing, foundations, and equipment anchorage that the MEP design seats on.</p></div></div></section>`,
+  "car-wash-solar-hot-water": `<section class="block"><div class="container"><div class="prose"><p>The collectors and storage tanks weighed on this page sit on the building itself: the <a href="/answers/car-wash-design/">structural engineer for car wash</a> page covers the roof framing checks, equipment anchorage, and foundations that carry them, alongside the tunnel and canopy structure.</p></div></div></section>`,
+
   "student-housing-structural": `<section class="block"><div class="container"><h2>Who Designs the <em>Structure</em></h2><div class="prose"><p>The costs above are set by the structural system — podium, timber frame, and the amenity stack — long before finishes are discussed. The engineering behind those decisions is covered in this firm's guide to <a href="/industries/multifamily/student-housing/structural-engineering/">student housing structural engineer</a> services: podium transfer design, wood-over-concrete framing, and the schedule discipline a leased-up opening date demands.</p></div></div></section>`,
   "cleanroom-mep-engineering-requirements": `<section class="block"><div class="container"><h2>From requirements to a <em>stamped design</em></h2><div class="prose"><p>The requirements on this page — classification, air changes, pressurization, filtration — become a permit-ready set through <a href="/industries/life-science/cleanroom-mep-engineering/">cleanroom MEP engineering</a>: the dedicated scope where Apex Grid designs ISO 5 through ISO 8 cleanroom mechanical and electrical systems and documents them for certification and validation.</p></div></div></section>`,
   "airport-fuel-farm-design": `<section class="block"><div class="container"><h2>The storage facility behind the <em>fuel farm</em></h2><div class="prose"><p>The fuel farm tanks sit inside a storage facility engineered as its own scope — tank foundations and anchorage, secondary containment, leak detection, hazardous-location electrical, fire protection, and piping, with fire code, environmental regulations, and airport standards reconciled into one buildable facility. That facility-level scope is covered in our guide to <a href="/answers/airport-fuel-storage-facility-design/">airport fuel storage facility design</a>.</p></div></div></section>`,
@@ -7987,6 +7991,7 @@ ${breadcrumb(crumbs)}
   </div>
 </div></section>
 <section class="block"><div class="container">
+${disc.slug === "mep" ? `<section class="block"><div class="container"><p>Tenant improvements are the most common MEP project type we support. Our <a href="/resources/mep/mep-tenant-improvement/">tenant improvement mep engineer</a> guide sets out what a build-out requires, discipline by discipline, and when to bring the engineer in.</p></div></section>` : ""}
   <h2>Browse Other <em>Topics</em></h2>
   <div class="linkrow">${otherDiscs.map((d) => `<a href="/resources/${d.slug}/">${esc(d.name)} Resources</a>`).join("")}<a href="/resources/">All Resources</a></div>
 </div></section>
@@ -8026,6 +8031,7 @@ ${RESOURCE_DISCIPLINES.map((disc) => {
 </div></section>`;
 }).join("")}
 <section class="block"><div class="container">
+<section class="block"><div class="container"><p>Property managers and tenants planning a build-out can start with our <a href="/resources/mep/mep-tenant-improvement/">tenant improvement mep engineer</a> guide — the mechanical, electrical, and plumbing scope a tenant improvement typically requires, and what the permit set includes.</p></div></section>
   <h2>More <em>Reference Tools</em></h2>
   <div class="grid2">
     <a class="card" href="/engineering-glossary/"><div class="label">Glossary</div><h3>Engineering Glossary</h3><p>Definitions for 80+ structural, MEP, civil, and geotechnical engineering terms — written for architects, contractors, and owners who encounter unfamiliar language on drawings and specs.</p></a>
