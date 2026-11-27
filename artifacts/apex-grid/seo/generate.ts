@@ -5242,6 +5242,7 @@ function bismarckCityStateLinkSection(): string {
   return `<section class="block"><div class="container">
   <h2>City Scopes, <em>Statewide</em> Bench</h2>
   <div class="prose"><p>A Bismarck building's MEP set is scoped here, but it is stamped inside a statewide practice. The <a href="/locations/north-dakota/mep-engineering/">MEP engineering company Bismarck</a> page sets out the state-level bench behind this city's page \u2014 the same engineers of record, the same one-set coordination, and the service depth that covers North Dakota work well beyond the capital.</p></div>
+  <div class="prose"><p>The citywide picture — every service available to a Bismarck project and the capital’s own permit path — is set out on our <a href="/locations/north-dakota/bismarck/">MEP engineering Bismarck ND</a> page, the hub this city’s MEP scope hangs from.</p></div>
 </div></section>`;
 }
 
@@ -6179,7 +6180,7 @@ function bismarckCityDefenseSection(currentSlug: string): string {
 function northDakotaBismarckStateSvcSection(): string {
   return `<section class="block"><div class="container">
   <h2>The Capital Market: <em>Bismarck</em></h2>
-  <div class="prose"><p>The deepest single pool of North Dakota MEP work sits in Bismarck: state-government buildings, the Sanford Health and CHI St. Alexius medical corridor, and energy-sector commercial projects, all designed against northern-plains heating loads and permitted by the city on the state-amended IBC. The complete Bismarck picture — the services available there and the city's own permit path — is on our <a href="/locations/north-dakota/bismarck/">MEP engineering in Bismarck</a> city page; this page carries the statewide MEP scope it draws on.</p></div>
+  <div class="prose"><p>The deepest single pool of North Dakota MEP work sits in Bismarck: state-government buildings, the Sanford Health and CHI St. Alexius medical corridor, and energy-sector commercial projects, all designed against northern-plains heating loads and permitted by the city on the state-amended IBC. The complete Bismarck picture — the services available there and the city's own permit path — is on our <a href="/locations/north-dakota/bismarck/">MEP engineering Bismarck ND</a> city page; this page carries the statewide MEP scope it draws on.</p></div>
 </div></section>`;
 }
 
