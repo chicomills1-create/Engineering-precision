@@ -263,6 +263,7 @@ export default function ServiceDetail() {
               energy compliance documentation, and plan-review corrections are handled by the same team that produced
               the set. Where a project requires it, drawings can be sealed by a licensed PE.
             </p>
+            <p className="text-muted-foreground max-w-3xl leading-relaxed mt-6">Tenant improvements are the most common MEP project type we handle. Our <Link href="/resources/mep/mep-tenant-improvement/" className="font-semibold text-primary hover:underline">tenant improvement mep engineer</Link> guide walks through the mechanical, electrical, and plumbing scope a build-out requires, and what the permit set includes.</p>
           </div>
         </section>
       )}
