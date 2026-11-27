@@ -8,6 +8,12 @@ import type { StateData, CityData } from "./types";
 import { CITY_PRIORITIES } from "./city-priorities";
 import { LEGACY_CURATED_CITY_KEYS } from "./legacy-curated-cities";
 import { SERVICES, type ServiceDef } from "./services";
+import {
+  DEPTH_SERVICE_SLUGS,
+  depthFaqsFor,
+  depthNarrativeFor,
+  stateDepthNarrativeFor,
+} from "./city-depth-pages";
 import { htmlShell, SITE } from "./shell";
 import { BLOG_POSTS, type BlogPost } from "./blog";
 import { verifyBlogPostAuthorship } from "./check-blog-authorship";
@@ -672,6 +678,11 @@ function isReviewedCity(city: CityData): boolean {
 
 function isSupportedCityService(city: CityData, serviceSlug: string): boolean {
   if (!isReviewedCity(city)) return false;
+  // Depth-wave services (Wave 1): no per-city supportedServiceSlugs entries
+  // exist for the new slugs; the city record itself passed the research gate
+  // and the pages' facts derive from that record + the state record, so a
+  // reviewed city supports them. Existing slugs keep the rule below.
+  if (DEPTH_SERVICE_SLUGS.has(serviceSlug)) return true;
   const supported = city.research?.supportedServiceSlugs;
   return !city.research
     || !supported
@@ -4242,6 +4253,9 @@ const MONEY_DISCIPLINE_SLUGS = new Set([
 
 function servicePage(state: StateData, svc: ServiceDef, allStates: StateData[], cities: CityData[]): string {
   const url = `/locations/${state.slug}/${svc.slug}/`;
+  // Depth-wave services: composed state narrative (null for the original
+  // four services, which keep their hand-written state.narratives text).
+  const depthStateNarrative = stateDepthNarrativeFor(svc.slug, state);
   const crumbs = [
     { name: "Home", href: "/" },
     { name: "Service Areas", href: "/locations/" },
@@ -4294,7 +4308,7 @@ ${peStampBlock({
 
 <section class="block"><div class="container">
   <h2>${esc(svc.shortName)} Engineering for <em>${esc(state.name)}</em> Conditions</h2>
-  <div class="prose"><p>${esc(state.narratives[svc.narrativeKey])}</p></div>
+  <div class="prose">${depthStateNarrative !== null ? depthStateNarrative.split("\n\n").map((p) => `<p>${esc(p)}</p>`).join("") : `<p>${esc(state.narratives[svc.narrativeKey] ?? "")}</p>`}</div>
 </div></section>
 
 <section class="block"><div class="container">
@@ -10827,6 +10841,13 @@ async function main() {
       fs.writeFileSync(path.join(cdir, "index.html"), cityPage(s, c, cities));
       pages++;
       for (const svc of SERVICES) {
+        // Depth-wave services: skip when the composed narrative is empty
+        // (record fails the census sufficiency thresholds) or when a
+        // LOCATION_SERVICE_PAGES entry already owns this exact route.
+        if (DEPTH_SERVICE_SLUGS.has(svc.slug)) {
+          if (!depthNarrativeFor(svc.slug, s, c)) continue;
+          if (LOCATION_SERVICE_PAGES.some((p) => p.stateSlug === s.slug && p.citySlug === c.slug && p.serviceSlug === svc.slug)) continue;
+        }
         const dir = path.join(cdir, svc.slug);
         fs.mkdirSync(dir, { recursive: true });
         fs.writeFileSync(path.join(dir, "index.html"), cityServicePage(s, c, svc, cities));
@@ -15428,6 +15449,10 @@ function dallasCarrierSection(): string {
 
 function cityServicePage(state: StateData, city: CityData, svc: ServiceDef, siblingCities: CityData[]): string {
   const url = `/locations/${state.slug}/${city.slug}/${svc.slug}/`;
+  // Depth-wave services: editorial + FAQs composed from the researched
+  // record via city-depth-pages.ts (null for the original four services).
+  const depthNarrative = depthNarrativeFor(svc.slug, state, city);
+  const pageFaqs = depthFaqsFor(svc.slug, state, city) ?? city.faqs;
   const crumbs = [
     { name: "Home", href: "/" },
     { name: "Service Areas", href: "/locations/" },
@@ -15444,7 +15469,7 @@ function cityServicePage(state: StateData, city: CityData, svc: ServiceDef, sibl
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: city.faqs.map((f) => ({
+    mainEntity: pageFaqs.map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -15470,8 +15495,8 @@ ${breadcrumb(crumbs)}
 ${familyVisual("location", `Service location shown: ${city.name}, ${state.name}.`)}
 
 <section class="block"><div class="container">
-  <h2>${esc(svc.shortName)} Engineering for <em>${esc(city.name)}</em> Projects</h2>
-  <div class="prose"><p>${esc(city.narratives[svc.narrativeKey])}</p></div>
+  <h2>${svc.slug === "pe-stamping" ? `PE Stamping &amp; Sealing for <em>${esc(city.name)}</em> Projects` : `${esc(svc.shortName)} Engineering for <em>${esc(city.name)}</em> Projects`}</h2>
+  <div class="prose">${depthNarrative !== null ? depthNarrative.split("\n\n").map((p) => `<p>${esc(p)}</p>`).join("") : `<p>${esc(city.narratives[svc.narrativeKey] ?? "")}</p>`}</div>
 </div></section>
 ${state.slug === "california" && city.slug === "fresno" && svc.slug === "mep-engineering" ? fresnoCarrierSection() : ""}
 ${state.slug === "north-dakota" && city.slug === "bismarck" && svc.slug === "mep-engineering" ? bismarckCityStateLinkSection() : ""}
@@ -15525,7 +15550,7 @@ ${citySourceList(city)}
 
 <section class="block"><div class="container faq">
   <h2>${esc(city.name)} <em>FAQs</em></h2>
-  ${city.faqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="a">${esc(f.a)}</div></details>`).join("")}
+  ${pageFaqs.map((f) => `<details><summary>${esc(f.q)}</summary><div class="a">${esc(f.a)}</div></details>`).join("")}
 </div></section>
 
 <section class="block"><div class="container">
