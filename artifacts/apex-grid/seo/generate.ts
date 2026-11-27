@@ -1602,9 +1602,10 @@ const ANSWER_EXTRA_SECTIONS: Record<string, string> = {
   "marine-berth-structural-design": `<section class="block"><div class="container"><h2>From berth design to <em>fabricated steel</em></h2><div class="prose"><p>Every load this page works through — berthing energy, mooring forces, deck and pile reactions — lands in fabricated steel: fender panels and their support frames, mooring hardware assemblies, and the catwalks and platforms crews work from. The fabrication standard behind those assemblies, from shop-drawing review to marine coating systems, is set out in our answer on <a href="/answers/marine-cargo-terminal-design/">marine terminal fabrication</a>.</p></div></div></section>`,
 "broadcast-tower-engineering": `<section class="block"><div class="container"><h2>Broadcast towers and <em>TV towers</em>: one discipline, two names</h2><div class="prose"><p>Broadcast tower engineering and TV tower engineering are the same discipline read from two directions: the broadcast name describes the service the structure carries, and the TV name describes the antenna at its top. TV tower engineering starts from the load case that separates it from every other tower class — a high-power television antenna with its radome, feed lines, and mounting steel, an order of magnitude heavier than a cellular panel array, cantilevered at the very top of a mast that may run 1,000 to 1,500 feet, where every pound carries maximum leverage. The structural standard behind that work is TIA-222 at the higher structural classes broadcast service demands, with candelabra top configurations, rigid or semi-flexible waveguide runs, FAA obstruction lighting and marking, and RF safety coordination for the high-power environment designed in from the first calculation.</p><p>What TV tower engineering adds to the generic tower brief is the broadcaster's operating reality: the station cannot go dark for a structural project, so antenna replacements, reinforcement, and mount modifications are engineered around live operation — interim antennas, phased changeouts, and rigging sequences that keep the signal on air. The guyed mast and the self-supporting tower answer that brief differently, and choosing between them is a TV tower engineering decision made from the site, the height, and the antenna load — not from habit. That full scope, from foundation and guy anchors to the candelabra steel at the top, is the work this page documents.</p></div></div></section><section class="block"><div class="container"><h2>The distinction drawn, the <em>design work</em> itself</h2><div class="prose"><p>Everything above is the distinction — broadcast set against cellular, at the top of the structure. The design work that follows from it — the dynamic and fatigue analysis at full height, the antenna array engineered as one integrated assembly, and the ice, lighting, and RF cases carried in a single model — is treated whole in our answer on <a href="/answers/broadcast-tower-design/">broadcast tower engineering</a>, which takes the discipline from the load cases to the sealed design package. Read together, the two pages are the practice: this one names what makes the work different, that one shows the engineering done at full height.</p></div></div></section>`,
   "broadcast-tower-design": `<section class="block"><div class="container"><h2>The design engagement, <em>start to sealed set</em></h2><div class="prose"><p>Read as a project rather than a problem, broadcast tower engineering runs in a sequence that this page's height-first treatment sits inside. It opens with the record: the original design drawings where they survive, the modification history, the last structural audit, and a climb-verified inventory of everything the mast actually carries — because the governing load case is the tower as it stands today, not the tower as it was drawn. The analysis model is built from that inventory, antenna by antenna and line by line, and only then is the design question asked: what changes, what reinforces, what comes off.</p><p>The deliverable that closes the sequence is a sealed design package — calculations showing the tower's reserve under the new loading, modification drawings a rigging crew can build at height, and a changeout sequence that respects the broadcaster's one hard constraint, staying on air. That is the sense in which broadcast tower engineering is a design discipline and not only an analysis: the engineering is finished when a crew can execute it safely at full height and a station engineer can file the record. Apex Grid scopes broadcast tower engineering in that full sequence — audit, model, design, sealed set — so the analysis and the buildable answer arrive as one document.</p></div></div></section>`,
-  "self-storage-facility-engineering": `<section class="block"><div class="container"><h2>The disciplines behind a <em>storage facility</em>, scope by scope</h2><div class="prose"><p>Self storage engineering is the coordination of three disciplines around one simple product: durable, leasable units on a site that drains, permits, and operates cleanly. The structural half designs the single-story drive-up and multi-story climate-controlled buildings — slabs designed as working surfaces for the vehicles, moving trucks, and pallet traffic that cross them daily, fire separations between units, and frames sized for the real storage loads plus the dynamic loads of dollies and carts. The civil engineer for self storage work carries the other half of the site: grading and stormwater that keep drive aisles dry, circulation geometry the trucks tenants actually bring can navigate, and utility coordination sequenced with the building pad. A civil engineer for self storage projects is judged on exactly that fit — a beautiful building on a site that floods or turns badly is a failed facility.</p><p>The self storage engineer holds the two halves together: the MEP and envelope design that keeps climate-controlled interiors at temperature, the egress and accessibility a multi-story building requires, and storage facility engineering design that treats the office and retail front, the gate and access systems, and the unit buildings as one permitted set. Read whole, storage facility engineering design is why two facilities with identical unit counts perform differently for thirty years — one was engineered as a system, the other was assembled from parts. The self storage engineer Apex Grid assigns scopes that system end to end, from the first site sketch to the sealed construction set.</p><p>Self storage facility engineering is where those disciplines are priced as one job. A team pricing self storage facility engineering against a single-discipline bid is comparing a coordinated set to a partial one: the self storage engineering has to land on the civil engineer's grading, and the storage facility engineering design has to carry the gate, access, and life-safety systems the site plan promises. Sound self storage engineering reads the site, the buildings, and the access systems as one product. That is why a civil engineer for self storage work is engaged at the first sketch rather than at the permit counter — and why self storage facility engineering, scoped whole, is the version of this product that opens on schedule.</p></div></div></section>`,
+  "self-storage-facility-engineering": `<section class="block"><div class="container"><h2>The disciplines behind a <em>storage facility</em>, scope by scope</h2><div class="prose"><p>Self storage engineering is the coordination of three disciplines around one simple product: durable, leasable units on a site that drains, permits, and operates cleanly. The structural half designs the single-story drive-up and multi-story climate-controlled buildings — slabs designed as working surfaces for the vehicles, moving trucks, and pallet traffic that cross them daily, fire separations between units, and frames sized for the real storage loads plus the dynamic loads of dollies and carts. The civil engineer for self storage work carries the other half of the site: grading and stormwater that keep drive aisles dry, circulation geometry the trucks tenants actually bring can navigate, and utility coordination sequenced with the building pad. A civil engineer for self storage projects is judged on exactly that fit — a beautiful building on a site that floods or turns badly is a failed facility.</p><p>The self storage engineer holds the two halves together: the MEP and envelope design that keeps climate-controlled interiors at temperature, the egress and accessibility a multi-story building requires, and storage facility engineering design that treats the office and retail front, the gate and access systems, and the unit buildings as one permitted set. Read whole, storage facility engineering design is why two facilities with identical unit counts perform differently for thirty years — one was engineered as a system, the other was assembled from parts. The self storage engineer Apex Grid assigns scopes that system end to end, from the first site sketch to the sealed construction set.</p><p>Self storage facility engineering is where those disciplines are priced as one job. A team pricing self storage facility engineering against a single-discipline bid is comparing a coordinated set to a partial one: the self storage engineering has to land on the civil engineer's grading, and the storage facility engineering design has to carry the gate, access, and life-safety systems the site plan promises. Sound self storage engineering reads the site, the buildings, and the access systems as one product. That is why a civil engineer for self storage work is engaged at the first sketch rather than at the permit counter — and why self storage facility engineering, scoped whole, is the version of this product that opens on schedule.</p><p>On a conversion or a change of occupancy, a self storage engineer starts with the building that is already there — its structure read against storage loads, its egress re-proved for the new use, and its site re-graded for drive-up access. That sequence is why a self storage engineer is engaged at the first sketch rather than at the permit counter: the conversion questions are structural and civil at once, and they are cheapest before the unit layout is drawn.</p></div></div></section>`,
+  "precast-parking-structure-design": `<section class="block"><div class="container"><h2>Where precast <em>meets the rest of the practice</em></h2><div class="prose"><p>Precast parking work is read alongside the storage work in this practice for a practical reason: both products are repetitive concrete bays, honest load paths, and durability detailing, priced as one coordinated set. Owners scoping a deck alongside a storage project can read how the same system discipline is documented on our <a href="/answers/self-storage-facility-engineering/">self storage engineer</a> page, where the unit buildings, the site civil, and the access systems are scoped whole.</p></div></div></section>`,
   "facade-retention-engineering": `<section class="block"><div class="container"><h2>The <em>façade</em> spelling, the retention system, and the permanent condition</h2><div class="prose"><p>The discipline travels under two spellings — facade retention engineering in American practice, façade retention engineering in the British and Commonwealth literature where the technique matured — and one system: the temporary steel frame that holds a historic street wall while everything behind it is demolished and rebuilt. Façade retention engineering and its American-spelled twin describe the same scope this page works through: analysis of the wall as it actually stands, a retention frame designed for its geometry, height, and exposure, monitoring through the construction zone, and a defined permanent condition at the end. A project team searching either spelling is asking for the same engineer.</p><p>The facade retention system design is where that scope becomes steel. A facade retention system design starts from the survey — the wall's materials, its existing ties and failures, the party walls it shares — and sizes the frame for wind on a wall that no longer has a building behind it, for the demolition sequence that will load it unevenly, and for the new structure that must eventually take the wall back. The best facade retention system design is the one nobody notices: the frame reads as scaffolding from the street, the monitoring catches movement in millimeters, and the wall comes through the project in the condition the preservation approval promised. Whichever spelling the permit set uses, façade retention engineering is judged the same way — the wall stands, the record shows why, and the new building takes it back on the date the sequence promised.</p></div></div></section>`,
-"synagogue-structural-design": `<section class="block"><div class="container"><h2>The <em>Engineer</em> Synagogue Committees Actually Hire</h2><div class="prose"><p>When a congregation builds, the brief arrives in a specific order: the sanctuary's clear span and sightlines to the bimah and ark first; then the separation problem — a social hall in full use while a service runs next door; then the kosher kitchen, which is really two kitchens with separate MEP zones for meat and dairy; and the security posture the congregation has chosen, carried through site standoff, controlled entries, and glazing. Apex Grid works as an engineer synagogue congregations can scope against that whole brief at once, because the structure is what each part hangs from: spans set the frame, wall mass and floor assemblies set the acoustics, floor loading carries the kitchen equipment, and the envelope carries the security design.</p><p>That is the standard an engineer synagogue projects — new builds, additions, and renovations alike — are judged by: the existing frame, read honestly, decides what a new span, a larger hall, or an enlarged kitchen can ask of it, and the durable answer is the one the community is still using a generation later. The discipline-by-discipline picture — long-span sanctuary roofs, bell towers and steeples, seating balconies, and historic renovation — is set out on our page for a <a href="/industries/religious-worship/structural-engineering/">structural engineer for churches</a> and worship facilities generally, which documents the worship-sector structural scope this answer draws on.</p></div></div></section>`,
+"synagogue-structural-design": `<section class="block"><div class="container"><h2>The <em>Engineer</em> Synagogue Committees Actually Hire</h2><div class="prose"><p>When a congregation builds, the brief arrives in a specific order: the sanctuary's clear span and sightlines to the bimah and ark first; then the separation problem — a social hall in full use while a service runs next door; then the kosher kitchen, which is really two kitchens with separate MEP zones for meat and dairy; and the security posture the congregation has chosen, carried through site standoff, controlled entries, and glazing. Apex Grid works as an engineer synagogue congregations can scope against that whole brief at once, because the structure is what each part hangs from: spans set the frame, wall mass and floor assemblies set the acoustics, floor loading carries the kitchen equipment, and the envelope carries the security design.</p><p>That is the standard an engineer synagogue projects — new builds, additions, and renovations alike — are judged by: the existing frame, read honestly, decides what a new span, a larger hall, or an enlarged kitchen can ask of it, and the durable answer is the one the community is still using a generation later. The discipline-by-discipline picture — long-span sanctuary roofs, bell towers and steeples, seating balconies, and historic renovation — is set out on our page for a <a href="/industries/religious-worship/structural-engineering/">structural engineer for churches</a> and worship facilities generally, which documents the worship-sector structural scope this answer draws on.</p><p>The smaller room on the same brief — the chapel, with its clear span and its silence engineered as one system — is worked through in our answer on the <a href="/answers/chapel-design/">chapel engineer</a>: the small worship space read as one system of span, silence, and services.</p></div></div></section>`,
   "chapel-design": `<section class="block"><div class="container"><h2>The chapel's closest cousin: the <em>synagogue</em></h2><div class="prose"><p>A chapel and a synagogue share the worship-space fundamentals — clear spans, sightlines, acoustics tuned for speech and chant — and diverge on program: the synagogue adds a social hall in simultaneous use, classrooms, and a kosher kitchen engineered as two kitchens. How that fuller brief is structured, from acoustic separation to the security-driven envelope, is worked through in our answer on <a href="/answers/synagogue-structural-design/">synagogue structural design</a>.</p><p>The professional behind that structure is the chapel engineer: the licensed engineer who reads a small worship space as one system — the clear span the sightlines demand, the structure-borne silence the acoustics depend on, and the MEP that has to disappear into both. A chapel engineer scopes the sanctuary's frame and its services together, because in a room built for chant and spoken word, a duct rumble or a visible diffuser is a design failure, not a detail. That is the standard a chapel engineer is hired to hold: structure, silence, and services reconciled in one sealed set before the first service is ever scheduled.</p></div></div></section>`,
   "church-design": `<section class="block"><div class="container"><h2>The synagogue case: <em>same structure, harder program</em></h2><div class="prose"><p>Church design and synagogue design start from the same sanctuary engineering — spans, sightlines, assembly loads — but the synagogue's program runs harder: simultaneous uses separated acoustically, a kosher kitchen doubled into meat and dairy zones, and security designed into the site and envelope. Our answer on <a href="/answers/synagogue-structural-design/">synagogue structural design</a> works through that case in full, and it is the closest reference for any worship building whose program mixes worship, education, and social functions under one roof.</p></div></div></section>`,
   "high-altitude-observatory-hvac-design": `<section class="block"><div class="container"><h2><em>HVAC Observatory</em> Design: Where the Checklist Comes From</h2><div class="prose"><p>Every item on the checklist above exists because a high-altitude project failed without it, usually in the first winter. Observatory HVAC design inverts the commercial order of operations: instead of sizing equipment from a catalog and checking the site afterward, the engineer starts from the summit — actual air density at elevation, the manufacturer's published derating tables, and a design day set by survival rather than comfort — and only then selects equipment. Fans are chosen for the mass flow the building needs at thin-air density, combustion plant is derated and still required to meet the load with margin, and refrigerant systems are charged and relieved for the site's atmospheric pressure. On an HVAC observatory project, the observatory HVAC engineer's first document is the derating table, not the last check.</p><p>The second inversion is operational. An observatory HVAC system is designed to fail toward safety: heat stays on through sensor or power failure, hydronic loops exposed to risk carry antifreeze, low-temperature alarms report remotely, and the winterization manual is an engineering deliverable, not an afterthought. That is what HVAC observatory work finally is — ordinary building services engineered for a building that cannot be allowed to freeze, on a site where a service call can wait out a blizzard.</p></div></div></section>`,
@@ -4324,6 +4325,8 @@ ${state.slug === "north-dakota" && svc.slug === "mep-engineering" ? grandForksSt
 ${state.slug === "texas" && svc.slug === "mep-engineering" ? texasCelinaStateSvcSection() : ""}
 ${state.slug === "texas" && svc.slug === "mep-engineering" ? texasProsperStateSvcSection() : ""}
 ${state.slug === "texas" && svc.slug === "mep-engineering" ? texasMckinneyStateSvcSection() : ""}
+${state.slug === "south-carolina" && svc.slug === "mep-engineering" ? southCarolinaRockHillStateSvcSection() : ""}
+${state.slug === "south-dakota" && svc.slug === "mep-engineering" ? southDakotaBrookingsStateSvcSection() : ""}
 ${state.slug === "texas" && svc.slug === "mep-engineering" ? texasRockwallStateSvcSection() : ""}
 ${state.slug === "north-dakota" && svc.slug === "mep-engineering" ? northDakotaBismarckStateSvcSection() : ""}
 ${state.slug === "montana" && svc.slug === "mep-engineering" ? montanaBillingsStateSvcSection() : ""}
@@ -4716,18 +4719,22 @@ function charlotteHubSection(): string {
  *  fact (consolidated city-and-county review path); no licensure or
  *  jurisdictional claims added. Prose links only. */
 const BROOMFIELD_DEFENSE_SOURCE_SLUGS = new Set([
-  "denver", "boulder", "aurora", "lakewood", "westminster", "thornton", "arvada",
+  "denver", "boulder", "aurora", "lakewood", "westminster", "thornton", "arvada", "fort-collins", "colorado-springs", "longmont", "littleton",
 ]);
 
 const BROOMFIELD_ANCHOR_PAIRS: Record<string, readonly [string, string]> = {
   "": ["MEP engineering in Broomfield", "MEP engineering firm Broomfield"],
-  denver: ["MEP engineering in Broomfield", "MEP services in Broomfield"],
-  boulder: ["Broomfield MEP engineering", "MEP services in Broomfield"],
-  aurora: ["MEP engineering in Broomfield", "Broomfield MEP engineering"],
-  lakewood: ["MEP engineering in Broomfield", "MEP services in Broomfield"],
-  westminster: ["Broomfield MEP engineering", "MEP services in Broomfield"],
-  thornton: ["MEP engineering in Broomfield", "Broomfield MEP engineering"],
-  arvada: ["MEP engineering in Broomfield", "MEP services in Broomfield"],
+  denver: ["MEP engineering in Broomfield", "MEP engineering firm Broomfield"],
+  boulder: ["Broomfield MEP engineering", "MEP engineering firm Broomfield"],
+  aurora: ["MEP engineering in Broomfield", "MEP engineering firm Broomfield"],
+  lakewood: ["MEP engineering in Broomfield", "MEP engineering firm Broomfield"],
+  westminster: ["Broomfield MEP engineering", "MEP engineering firm Broomfield"],
+  thornton: ["MEP engineering in Broomfield", "MEP engineering firm Broomfield"],
+  arvada: ["MEP engineering in Broomfield", "MEP engineering firm Broomfield"],
+  "fort-collins": ["MEP engineering in Broomfield", "MEP engineering firm Broomfield"],
+  "colorado-springs": ["MEP engineering in Broomfield", "MEP engineering firm Broomfield"],
+  longmont: ["MEP engineering in Broomfield", "MEP engineering firm Broomfield"],
+  littleton: ["MEP engineering in Broomfield", "MEP engineering firm Broomfield"],
 };
 
 function broomfieldDefenseSection(currentSlug: string): string {
@@ -5275,9 +5282,9 @@ function maricopaCarrierSection(): string {
 const BROOKINGS_MEP_CHILD_PATH = "/locations/south-dakota/brookings/mep-engineering/";
 
 const BROOKINGS_ANCHOR_PAIRS: Record<string, readonly [string, string]> = {
-  "": ["MEP engineering in Brookings, SD", "Brookings MEP engineering"],
-  "sioux-falls": ["MEP engineering in Brookings, SD", "MEP services in Brookings, SD"],
-  "rapid-city": ["Brookings MEP engineering", "MEP engineering in Brookings, South Dakota"],
+  "": ["MEP engineering Brookings SD", "Brookings MEP engineering"],
+  "sioux-falls": ["MEP engineering Brookings SD", "MEP services in Brookings, SD"],
+  "rapid-city": ["Brookings MEP engineering", "MEP engineering Brookings SD"],
   aberdeen: ["MEP engineering company in Brookings", "Brookings MEP engineer"],
   watertown: ["MEP services in Brookings", "MEP engineering in Brookings, SD"],
 };
@@ -5291,6 +5298,109 @@ function brookingsDefenseSection(currentSlug: string): string {
   <h2>South Dakota <em>MEP Coverage</em></h2>
   <div class="prose"><p>South Dakota's MEP scopes split three ways — the Sioux Falls metro, the Black Hills, and the I-29 corridor towns — and the corridor's center of engineering gravity is Brookings: South Dakota State University's laboratories, animal and food-science facilities, and student housing, the process exhaust and washdown drainage of its food-processing and display-manufacturing plants, and the school, retail, and civic work that follows them. Our ${link(a1)} coverage is built for that campus-and-processing stock, with the city's own building picture set out on its page.</p>
   <p>Brookings reviews its own way: Brookings Community Development takes the local record, Brookings Municipal Utilities holds the service evidence behind campus and plant loads, and — with no statewide building code — the locally adopted editions in force at submittal are the design basis, confirmed address by address. The project types, utility picture, and permit steps an ${link(a2)} scope designs to are spelled out on the Brookings page.</p></div>
+</div></section>`;
+}
+
+/* CLIMB LANDING WAVE (2026-11-26) — staged sections for generate.ts.
+   Splice into the live generate.ts at the marked wiring points.
+   Anchors byte-checked against the Wave 2/Wave 3 audit files.
+   ADD-only idiom: no existing anchor is re-texted except the four
+   Brookings near-miss re-texts the Wave 2 spec itself orders and the
+   Broomfield conversions the Cure 5 spec itself orders. */
+
+/** Climb Landing Wave (2026-11-26): Rock Hill hub support — ONE edit
+ *  window serving three tracked strings on the shared carrier
+ *  /locations/south-carolina/rock-hill/mep-engineering/:
+ *  "mep engineer rock hill" (#5, pos5 audit), "mep engineering rock
+ *  hill sc" (#6, pos6 audit), "mep engineering company rock hill"
+ *  (#8, pos8-a audit). Each string gets its OWN sentence and its OWN
+ *  exact anchor; no anchor is stretched across strings. Phrase legs
+ *  on the carrier are already FULL for all three — inbound only. */
+function rockHillHubSupportSection(): string {
+  const link = (anchor: string) =>
+    `<a href="/locations/south-carolina/rock-hill/mep-engineering/">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>MEP in Rock Hill: <em>One Coordinated Set</em></h2>
+  <div class="prose"><p>The capability picture on this page is the brief; the delivery behind it is the ${link("MEP engineer Rock Hill")} reviewers can check in one pass — mechanical, electrical, and plumbing drawn as one set and answered for as one set through the city's own review.</p>
+  <p>Read corridor-wide, ${link("MEP engineering Rock Hill SC")} work is priced against Charlotte schedules and permitted through Rock Hill's own path, and the scopes on this page are written against both facts at once: corridor expectations, local review.</p>
+  <p>Owners weighing an ${link("MEP engineering company Rock Hill")} outfits offer against a Charlotte firm are buying that same combination — corridor-grade coordination, permitted locally, with the local record carried into the drawings rather than left at the state line.</p></div>
+</div></section>`;
+}
+
+/** Climb Landing Wave (2026-11-26): SC state MEP page support for the
+ *  Rock Hill carrier — the pos6 + pos8-a state-page sentences (the
+ *  pos5 state-page sentence rides the state HUB section below). */
+function southCarolinaRockHillStateSvcSection(): string {
+  const link = (anchor: string) =>
+    `<a href="/locations/south-carolina/rock-hill/mep-engineering/">${anchor}</a>`;
+  return `<section class="block"><div class="container">
+  <h2>The Charlotte Corridor: <em>Rock Hill</em></h2>
+  <div class="prose"><p>The corridor's South Carolina anchor is ${link("MEP engineering Rock Hill SC")} work: commercial, medical, and industrial sets permitted through Rock Hill Planning and Development and the York County reviews that run beside it, held to the Charlotte-grade standard the corridor prices against.</p>
+  <p>That is the standard an ${link("MEP engineering company Rock Hill")} teams are held to on this board — one coordinated set, reconciled sheet to sheet before it is sealed, and answered for whole in review rather than discipline by discipline.</p></div>
+</div></section>`;
+}
+
+/** Climb Landing Wave (2026-11-26): SC state hub support — the pos5
+ *  audit's researched-local-services sentence for "mep engineer
+ *  rock hill" (the hub's own service linkrow stays untouched). */
+function southCarolinaRockHillHubSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Rock Hill: <em>the Corridor Anchor</em></h2>
+  <div class="prose"><p>Rock Hill's researched local services start with the <a href="/locations/south-carolina/rock-hill/mep-engineering/">MEP engineer Rock Hill</a> developers and reviewers already scope against — the corridor anchor set this state's MEP coverage is built around, permitted through the city's own path at a Charlotte-grade standard.</p></div>
+</div></section>`;
+}
+
+/** Climb Landing Wave (2026-11-26): Iowa state hub support for
+ *  "carroll ia civil engineer" (#9, pos9 audit) — carrier is the
+ *  Carroll city HUB; phrase leg already FULL x3 on the carrier.
+ *  Inbound only: ADD a prose exact anchor (the hub's current Carroll
+ *  anchor was UNPROVEN at audit; nothing here re-texts it). */
+function iowaCarrollStateHubSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Western Iowa: <em>Carroll</em></h2>
+  <div class="prose"><p>Western Iowa's county-seat work runs through Carroll: the <a href="/locations/iowa/carroll/">Carroll IA civil engineer</a> scope — site planning, grading, drainage, and stormwater for the commercial, institutional, and agricultural-industrial projects the market builds — is set out in full on the Carroll hub, with the structural and MEP sets behind it carried as one package.</p></div>
+</div></section>`;
+}
+
+/** Climb Landing Wave (2026-11-26): Sioux City hub cross-reference
+ *  for "carroll ia civil engineer" — the pos9 audit's PROVEN
+ *  substitute supporter (Sioux City fetched in full: "Carroll" x0,
+ *  no link of any kind). Direction: city hub -> city hub. */
+function siouxCityCarrollSupportSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>Western Iowa: <em>the Carroll Scope</em></h2>
+  <div class="prose"><p>Sioux City anchors Iowa's western edge; the county-seat market to the east runs on the same western-Iowa record — Climate Zone 5A, derecho-taught wind design, and local review. The <a href="/locations/iowa/carroll/">Carroll IA civil engineer</a> scope — site civil for Carroll's commercial, institutional, and agricultural-industrial work — is documented on the Carroll hub.</p></div>
+</div></section>`;
+}
+
+/** Climb Landing Wave (2026-11-26): "mep engineer brookings" (#8,
+ *  pos8-a audit) — carrier-split gate RESOLVED by served SERP pass
+ *  2026-11-26: the MEP CHILD /locations/south-dakota/brookings/
+ *  mep-engineering/ is the ranking URL (position 1 on the query),
+ *  so the child cure lands as specced (no hub conversion). Phrase
+ *  +3 on the child, written against the child's own facts (SDSU
+ *  laboratories and student housing, food-processing plants,
+ *  Brookings Municipal Utilities, Brookings Community Development,
+ *  locally adopted code editions). The child's "mep engineering
+ *  brookings sd" and "mep engineering company brookings" carriage
+ *  in brookingsCarrierSection is untouched. */
+function brookingsEngineerSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The Brookings <em>Standard</em></h2>
+  <div class="prose"><p>Read as a hiring decision, the question behind this page is who works as the MEP engineer Brookings owners, developers, and general contractors can scope in one pass — and the answer is a bench that starts from the utility evidence: Brookings Municipal Utilities' confirmed capacity, the freeze protection and snow management the building stock demands, and the locally adopted code editions in force at the project address.</p>
+  <p>That is the working test an MEP engineer Brookings project teams actually apply: laboratories and student housing that have to open on an academic calendar, food-processing and display-manufacturing plants that cannot stop a line for a correction cycle, and civic work sequenced through Brookings Community Development — all carried on one coordinated set rather than three partial ones.</p>
+  <p>Apex Grid Engineering works to that test as the MEP engineer Brookings scopes are priced against: loads matched to the real building, corrections answered against one riser and one sequence, and the sealed set documented so the next engineer can read exactly what the systems are doing.</p></div>
+</div></section>`;
+}
+
+/** Climb Landing Wave (2026-11-26): SD state MEP page support for
+ *  "mep engineer brookings" — prose exact anchor ADDED alongside the
+ *  state page's existing "MEP engineer in Brookings" cross-link
+ *  (near-miss stays; it serves the state cross-link family). */
+function southDakotaBrookingsStateSvcSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>The I-29 Corridor: <em>Brookings</em></h2>
+  <div class="prose"><p>The corridor's campus-and-processing center is Brookings, where the <a href="/locations/south-dakota/brookings/mep-engineering/">MEP engineer Brookings</a> scope — university laboratories, student housing, and food-processing systems run on confirmed utility evidence — is documented in full on the Brookings MEP page.</p></div>
 </div></section>`;
 }
 
@@ -5912,7 +6022,7 @@ function montroseCarrierSection(): string {
   return `<section class="block"><div class="container">
   <h2>Civil Engineering in Montrose: <em>Valley Floor, Working Water</em></h2>
   <div class="prose"><p>Civil engineering in Montrose starts with the valley. The city sits on the floor of the Uncompahgre River valley in Montrose County, where irrigated farmland is converting to subdivisions, highway commercial, and light industrial ground — and where the canals and laterals of the valley's irrigation system cross parcels that look empty on a plat. Site civil here is water first: grading that respects live irrigation, drainage that handles high-desert cloudbursts on dry soils, and stormwater design that meets City of Montrose standards and Colorado water-quality expectations.</p>
-  <p>Apex Grid Engineering delivers that scope as part of one PE-stamped set — subdivision infrastructure and lot grading, commercial site plans at the US 50 and US 550 junction, drainage reports and detention design, floodplain coordination along the Uncompahgre River, and utility extensions tied to the city's systems — sealed by the Colorado-licensed engineer in responsible charge and coordinated with the structural and MEP design of the buildings the site serves. Work outside city limits runs through Montrose County review on the same set. The conditions are the valley's own: expansive soils, intense summer storms, and freeze-thaw winters at 5,800 feet.</p></div>
+  <p>Apex Grid Engineering delivers that scope as part of one PE-stamped set — subdivision infrastructure and lot grading, commercial site plans at the US 50 and US 550 junction, drainage reports and detention design, floodplain coordination along the Uncompahgre River, and utility extensions tied to the city's systems — sealed by the Colorado-licensed engineer in responsible charge and coordinated with the structural and MEP design of the buildings the site serves. Work outside city limits runs through Montrose County review on the same set. The conditions are the valley's own: expansive soils, intense summer storms, and freeze-thaw winters at 5,800 feet. That is the standard civil engineering in Montrose is judged against at the permit counter: the water carried honestly, the grading buildable, and the review answered from one sealed set.</p></div>
 </div></section>`;
 }
 
@@ -6169,7 +6279,8 @@ function brookingsCarrierSection(): string {
 function brookingsHubSection(): string {
   return `<section class="block"><div class="container">
   <h2>The Brookings <em>MEP picture</em></h2>
-  <div class="prose"><p>Of Brookings' five service paths, MEP carries the city's heaviest coordination load: university laboratories and student housing, food-processing and manufacturing systems, and occupied commercial buildings all run on utility evidence that has to be confirmed before equipment is selected. The <a href="${BROOKINGS_MEP_CHILD_PATH}">MEP engineering in Brookings</a> page sets out that picture in full — Brookings Municipal Utilities' service basis, freeze protection and snow-managed intakes, process exhaust and washdown drainage, and the Brookings Community Development review track the sealed set is sequenced to.</p></div>
+  <div class="prose"><p>Of Brookings' five service paths, MEP carries the city's heaviest coordination load: university laboratories and student housing, food-processing and manufacturing systems, and occupied commercial buildings all run on utility evidence that has to be confirmed before equipment is selected. The <a href="${BROOKINGS_MEP_CHILD_PATH}">MEP engineering Brookings SD</a> page sets out that picture in full — Brookings Municipal Utilities' service basis, freeze protection and snow-managed intakes, process exhaust and washdown drainage, and the Brookings Community Development review track the sealed set is sequenced to.</p>
+  <p>The engineers behind that picture are documented the same way: <a href="${BROOKINGS_MEP_CHILD_PATH}">MEP engineer Brookings</a> scopes — the SDSU laboratory and student-housing work, the food-processing plants, and the utility-coordinated municipal projects — are set out on the Brookings MEP page, system by system.</p></div>
 </div></section>`;
 }
 
@@ -6538,7 +6649,8 @@ function industrialWarehouseIndustrySection(page: IndustryDisciplinePage): strin
     return `<section class="block"><div class="container">
   <h2>What <em>Structural Engineering of Industrial Facilities</em> Actually Carries</h2>
   <div class="prose"><p>Structural engineering of industrial facilities is structural design where the building is the smaller half of the load case. The frame carries the roof and the wind, but the work is decided by what operations put on and under it: heavy floor loads from racking and process lines, crane runway beams and the columns that take their surge and sway, mezzanines and equipment platforms hung inside existing warehouses, machinery anchorage that has to hold alignment under vibration, and foundations — mat slabs, piers, spread footings — sized for equipment rather than architecture. That is the scope structural engineering of industrial facilities is hired for, and it is documented on this page topic by topic: high-bay structural systems, crane and platform design, industrial foundation engineering, and renovation and addition work inside operating plants.</p>
-  <p>The standard structural engineering of industrial facilities is judged by is uptime. The plant cannot stop for its structure: additions tie into frames that stay in production, equipment foundations are sequenced around the line they serve, and the sealed set has to read correctly to the fabricator and the erector the first time, because a field fix inside a running facility costs more than the engineering ever did. Apex Grid's industrial structural work is delivered to that standard — coordinated with the MEP and process scopes the structure carries, and sealed in the state where the facility sits.</p></div>
+  <p>The standard structural engineering of industrial facilities is judged by is uptime. The plant cannot stop for its structure: additions tie into frames that stay in production, equipment foundations are sequenced around the line they serve, and the sealed set has to read correctly to the fabricator and the erector the first time, because a field fix inside a running facility costs more than the engineering ever did. Apex Grid's industrial structural work is delivered to that standard — coordinated with the MEP and process scopes the structure carries, and sealed in the state where the facility sits.</p>
+  <p>Storage facilities sit inside that same industrial brief — unit buildings, access systems, and site civil carried as one permitted set — and are documented on our <a href="/answers/self-storage-facility-engineering/">self storage engineer</a> page, where the structural, civil, and MEP scopes behind a storage project are set out scope by scope.</p></div>
 </div></section>`;
   }
   return "";
@@ -6692,6 +6804,8 @@ ${state.slug === "iowa" ? siouxCityStateHubSection("iowa") : ""}
 ${state.slug === "nebraska" ? siouxCityStateHubSection("nebraska") : ""}
 ${state.slug === "south-dakota" ? siouxCityStateHubSection("south-dakota") : ""}
 ${state.slug === "colorado" ? coloradoEnergyHubSection() : ""}
+${state.slug === "iowa" ? iowaCarrollStateHubSection() : ""}
+${state.slug === "south-carolina" ? southCarolinaRockHillHubSection() : ""}
 ${state.slug === "arizona" ? maricopaCityDefenseSection("") : ""}
 ${state.slug === "california" ? fresnoDefenseSection("") : ""}
 ${state.slug === "hawaii" ? `<section class="block"><div class="container">
@@ -6943,6 +7057,8 @@ ${availableVerticals
   </div>
 </div></section>
 ${state.slug === "south-dakota" && city.slug === "brookings" ? brookingsHubSection() : ""}
+${state.slug === "south-carolina" && city.slug === "rock-hill" ? rockHillHubSupportSection() : ""}
+${state.slug === "iowa" && city.slug === "sioux-city" ? siouxCityCarrollSupportSection() : ""}
 ${state.slug === "georgia" && city.slug === "roswell" ? roswellGaCarrierSection() : ""}
 <section class="block"><div class="container">
   <h2>${esc(city.name)} Engineering <em>Capabilities</em></h2>
@@ -10236,6 +10352,8 @@ ${familyVisual("location", `Service location shown: ${metro.name}, ${expansion.s
     `<p><strong>${esc(service.serviceSlug)}:</strong> ${esc(service.localConditions)} ${esc(service.projectTypes)}</p>`,
   ).join("")}</div></div></section>
 ${expansion.stateSlug === "south-dakota" && metro.slug === "brookings" ? brookingsHubSection() : ""}
+${expansion.stateSlug === "south-carolina" && metro.slug === "rock-hill" ? rockHillHubSupportSection() : ""}
+${expansion.stateSlug === "iowa" && metro.slug === "sioux-city" ? siouxCityCarrollSupportSection() : ""}
 ${expansion.stateSlug === "georgia" && metro.slug === "augusta" ? augustaMetroHubSection() : ""}
 <section class="block"><div class="container faq"><h2>${esc(metro.name)} <em>FAQs</em></h2>${faqs.map((faq) => `<details><summary>${esc(faq.question)}</summary><div class="a">${esc(faq.answer)}</div></details>`).join("")}</div></section>
 <section class="ctaband"><div class="container"><h2>Discuss ${aOrAn(metro.name)} ${esc(metro.name)} project</h2><p>Send the address, scope, drawings, authority, and requested deliverable. Availability, responsible licensure, and timing are confirmed per project.</p><a class="cta" href="/contact">Request a Project Review</a></div></section>
@@ -10293,6 +10411,8 @@ ${expansion.stateSlug === "south-dakota" ? siouxCityStateHubSection("south-dakot
 ${expansion.stateSlug === "colorado" ? coloradoEnergyHubSection() : ""}
 ${expansion.stateSlug === "missouri" ? missouriMaconHubSection() : ""}
 ${expansion.stateSlug === "colorado" ? coloradoMontroseHubSection() : ""}
+${expansion.stateSlug === "iowa" ? iowaCarrollStateHubSection() : ""}
+${expansion.stateSlug === "south-carolina" ? southCarolinaRockHillHubSection() : ""}
 ${expansion.stateSlug === "new-mexico" ? newMexicoMepfHubSection() : ""}
 ${expansion.stateSlug === "iowa" ? carrollDefenseSection("") : ""}
 ${expansion.stateSlug === "illinois" ? northbrookDefenseSection("") : ""}
@@ -10390,6 +10510,7 @@ ${service.sections.map((section) => `<section class="block"><div class="containe
 ${expansion.stateSlug === "iowa" && metro.slug === "sioux-city" && service.serviceSlug === "mep-engineering" ? siouxCityCitySupportSection() : ""}
 ${expansion.stateSlug === "south-dakota" && metro.slug === "sioux-falls" && service.serviceSlug === "mep-engineering" ? siouxFallsCitySupportSection() : ""}
 ${expansion.stateSlug === "south-dakota" && service.serviceSlug === "mep-engineering" ? (metro.slug === "brookings" ? brookingsCarrierSection() : brookingsDefenseSection(metro.slug)) : ""}
+${expansion.stateSlug === "south-dakota" && metro.slug === "brookings" && service.serviceSlug === "mep-engineering" ? brookingsEngineerSection() : ""}
 ${expansion.stateSlug === "montana" && service.serviceSlug === "mep-engineering" ? (metro.slug === "billings" ? billingsCarrierSection() : billingsDefenseSection(metro.slug)) : ""}
 ${expansion.stateSlug === "nebraska" && metro.slug === "omaha" && service.serviceSlug === "mep-engineering" ? omahaMepfSupportSection() : ""}
 ${expansion.stateSlug === "new-mexico" && metro.slug === "albuquerque" && service.serviceSlug === "mep-engineering" ? albuquerqueMepfSupportSection() : ""}
@@ -15389,6 +15510,8 @@ ${state.slug === "texas" && PROSPER_DEFENSE_SOURCE_SLUGS.has(city.slug) ? prospe
 ${state.slug === "texas" && MCKINNEY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mckinneyDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && ROCKWALL_DEFENSE_SOURCE_SLUGS.has(city.slug) ? rockwallDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && city.slug === "dallas" ? dallasHubSection() : ""}
+${state.slug === "south-carolina" && city.slug === "rock-hill" ? rockHillHubSupportSection() : ""}
+${state.slug === "iowa" && city.slug === "sioux-city" ? siouxCityCarrollSupportSection() : ""}
 ${state.slug === "north-dakota" && BISMARCK_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? bismarckCityDefenseSection(city.slug) : ""}
 ${state.slug === "north-dakota" ? bismarckMepStateSupportSection(city.slug) : ""}
 ${state.slug === "arizona" && MARICOPA_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? maricopaCityDefenseSection(city.slug) : ""}
