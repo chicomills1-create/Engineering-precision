@@ -249,10 +249,15 @@ function makeServices(metro: LouisianaMetro): Batch2CoreServicePage[] {
     codeContext: profile.code,
     localConditions: metro.conditions,
     projectTypes: profile.projectTypes,
-    sections: profile.sections.map(([heading, body], index) => ({
-      heading: `${metro.name}: ${heading}`,
-      body: `${body} ${index === 0 ? metro.localReview : index === 1 ? `The relevant utility is ${metro.utility}; coastal context is provided by ${louisianaCoastal.label}.` : `Comments should be returned through ${metro.authority}, with DEQ, flood, coastal, and utility decisions preserved separately.`}`,
-    })),
+    sections: [
+      ...profile.sections.map(([heading, body], index) => ({
+        heading: `${metro.name}: ${heading}`,
+        body: `${body} ${index === 0 ? metro.localReview : index === 1 ? `The relevant utility is ${metro.utility}; coastal context is provided by ${louisianaCoastal.label}.` : `Comments should be returned through ${metro.authority}, with DEQ, flood, coastal, and utility decisions preserved separately.`}`,
+      })),
+      ...(metro.slug === "lake-charles" && profile.serviceSlug === "mep-engineering"
+        ? [{ heading: "Lake Charles: MEP engineering for the ship-channel corridor", body: "The industrial weight of southwest Louisiana sits in Lake Charles \u2014 the Calcasieu Ship Channel plants, the Port of Lake Charles, and the fabrication yards behind them \u2014 and an MEP engineer Lake Charles LA owners and plant engineers can scope against one set designs the mechanical, electrical, and plumbing systems for that mix together: utilities and ventilation coordination for industrial buildings, full MEP design for clinics and classrooms, and coordinated tenant work for the commercial corridors. The design basis is Gulf Coast: hot-humid Climate Zone 2A cooling and dehumidification loads, and wind design that has carried a different weight in Calcasieu Parish since Hurricane Laura \u2014 an MEP engineer Lake Charles LA project teams engage has to place and protect exterior equipment, generators, and intakes against the storm case, not just the operating case. Each discipline is designed and, where professional sealing is required, reviewed and sealed under the responsible charge of an appropriately licensed professional engineer within that discipline \u2014 the standard an MEP engineer Lake Charles LA submittals are judged by at review: one coordinated set, calculations and schedules that agree, and documents a reviewer can clear without sending the disciplines back to be reconciled." }]
+        : []),
+    ],
     permitSteps: profile.steps.map((step) => `${step} For this ${metro.name} parcel, coordinate the handoff with ${metro.authority}.`),
     faqs: profile.faqs.map(([question, answer]) => ({
       question: `${metro.name}: ${question}`,
