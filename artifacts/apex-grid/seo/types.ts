@@ -44,6 +44,10 @@ export interface StateData {
     structural: string;
     civil: string;
     energy: string;
+    /** Depth-wave services (Wave 1): no hand-written state narratives exist;
+     * generate.ts falls back to the composers in city-depth-pages.ts. */
+    electrical?: string;
+    stamping?: string;
   };
   faqs: { q: string; a: string }[]; // 3-4 state-specific engineering FAQs with substantive answers
 }
@@ -80,6 +84,10 @@ export interface CityData {
     structural: string;
     civil: string;
     energy: string;
+    /** Depth-wave services (Wave 1): composed at generation time from this
+     * record's researched fields by city-depth-pages.ts; never hand-filled. */
+    electrical?: string;
+    stamping?: string;
   };
   faqs: { q: string; a: string }[]; // 3 city-specific FAQs with substantive answers
   /** Required for newly promoted cities. Older curated records are grandfathered
@@ -91,7 +99,7 @@ export interface CityData {
     reviewedBy: string;
     /** City/service canonical owners approved for indexation. Other generated
      * city/service combinations remain live but noindex,follow. */
-    supportedServiceSlugs?: Array<"mep-engineering" | "structural-engineering" | "civil-engineering" | "energy-code-compliance" | "energy-compliance">;
+    supportedServiceSlugs?: Array<"mep-engineering" | "structural-engineering" | "civil-engineering" | "energy-code-compliance" | "energy-compliance" | "electrical-engineering" | "pe-stamping">;
     priority: {
       commercialOpportunity: number; // 0-100, documented market-opportunity score
       searchConsoleImpressions: number; // latest available page impressions; 0 is valid
