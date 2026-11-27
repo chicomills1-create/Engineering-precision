@@ -95,6 +95,20 @@ export default function Industries() {
               ))}
             </div>
           </details>
+
+          <div className="border border-border bg-background p-6">
+            <div className="font-mono text-xs uppercase tracking-widest text-primary mb-4">Houses of Worship</div>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Churches, synagogues, and worship campuses are engineered under our Religious Worship practice —{" "}
+              <Link
+                href="/industries/religious-worship/structural-engineering/"
+                className="text-primary hover:underline"
+              >
+                structural engineer for churches
+              </Link>{" "}
+              covers the long-span sanctuary framing, foundations, and retrofit scope those buildings need.
+            </p>
+          </div>
         </div>
       </section>
 
