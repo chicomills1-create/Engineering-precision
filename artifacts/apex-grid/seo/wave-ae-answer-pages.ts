@@ -790,42 +790,74 @@ export const WAVE_AE_ANSWER_PAGES: Phase0AeoPage[] = [
   },
   {
     slug: "facade-retention-engineering",
-    title: "How Does Facade Retention Engineering Work in Practice?",
-    description: "Facade retention keeps the historic street wall while rebuilding behind it, using a steel retention frame, movement monitoring, and engineered connections.",
-    h1: "How Does Facade Retention Engineering Work in Practice?",
-    answer: "Facade retention — keeping a building's historic street-facing wall while demolishing and rebuilding everything behind it — is one of the most technically demanding operations in adaptive reuse. The retained facade, often unreinforced masonry a century old, has to stand freestanding through demolition and new construction, which means an engineered retention system: typically a steel frame erected outside or inside the facade, tied to the wall at engineered intervals, founded on its own temporary or permanent foundations, and designed for wind loads on the full height of the exposed wall plus construction loads. The engineering covers the retention frame design, the connection details between frame and historic masonry — connections that must grip without destroying — the demolition sequence that progressively exposes the facade, monitoring of wall movement throughout, and finally the connection of the new building's floors and lateral system to the retained wall. I've engineered facade retentions where the wall stood for eighteen months behind its steel corset, and the projects that succeed treat the facade as a structure under construction, with all the analysis that implies, rather than as scenery to be protected.",
-    directAnswer: "Facade retention engineering designs a temporary steel retention frame tied to the historic wall, engineers the demolition sequence that exposes it, monitors wall movement throughout construction, and designs the permanent connection between the retained facade and the new building's floors and lateral system.",
+    title: "How Does Façade Retention Engineering Work in Practice?",
+    description: "Façade retention keeps the historic street wall while rebuilding behind it, using a steel retention frame, movement monitoring, and engineered connections.",
+    h1: "How Does Façade Retention Engineering Work in Practice?",
+    answer: "Façade retention engineering is the design of the temporary support system that keeps a building's historic street-facing wall standing while everything behind it is demolished and rebuilt. The wall was braced by the floors, roof, and cross-walls of the building it fronted; once those go, the retention system has to do that bracing — against wind on the full exposed height, at every demolition stage — until the new structure ties in and takes the wall back. The engineering covers the retention frame, the connections between frame and historic masonry, which must grip without destroying, the demolition sequence that progressively exposes the façade, the monitoring specified for wall movement throughout, and the permanent connection of the new building's floors and lateral system to the retained wall. In American practice the same scope is spelled facade retention engineering, and it is designed and stamped by a licensed Professional Engineer. Apex Grid Engineering provides that design and PE stamping only — no site visits, no field inspection, no construction observation — working from the drawings, surveys, and photographs the project team supplies.",
+    directAnswer: "Façade retention engineering designs a temporary steel retention frame tied to the historic wall, engineers the demolition sequence that exposes it, specifies monitoring of wall movement throughout construction, and designs the permanent connection between the retained façade and the new building's floors and lateral system.",
     topic: "Structural",
     serviceHref: "/services/structural/",
     faqs: [
       {
-        question: "Why retain a facade instead of the whole building?",
-        answer: "Usually because the historic designation or the streetscape value is in the facade while the building behind it is structurally or functionally obsolete — or because the development needs more floor area than the existing building provides. Facade retention preserves the public face of the historic resource while allowing a fully modern building behind it.",
+        question: "Why retain a façade instead of the whole building?",
+        answer: "Usually because the historic designation or the streetscape value is in the facade while the building behind it is structurally or functionally obsolete — or because the development needs more floor area than the existing building provides. Façade retention preserves the public face of the historic resource while allowing a fully modern building behind it.",
       },
       {
-        question: "How is the facade held up during construction?",
+        question: "How is the façade held up during construction?",
         answer: "With an engineered steel retention frame — typically external, founded on temporary foundations or piles — connected to the masonry at regular intervals with through-ties or needle beams. The frame is designed for wind on the exposed wall height plus construction loads, and the connections are detailed to distribute load without cracking the historic masonry.",
       },
       {
-        question: "What can go wrong with facade retention?",
+        question: "What can go wrong with façade retention?",
         answer: "The classic failures are inadequate bracing for wind on the exposed wall, connections that damage the masonry they're meant to protect, differential movement between the retention frame and the wall, and demolition vibration cracking the facade. Every one of these is preventable with proper engineering and monitoring — and every one has happened on projects that skimped.",
       },
       {
-        question: "How does the new building connect to the old facade?",
+        question: "How does the new building connect to the old façade?",
         answer: "Through engineered connections that tie the new floors into the historic wall for lateral support while accommodating differential movement between old and new construction. The connection design considers the masonry's limited capacity, moisture management at the interface, and the thermal break between the historic wall and the new insulated envelope.",
+      },
+      {
+        question: "What is façade retention?",
+        answer: "Façade retention is keeping a building's existing street-facing wall in place while the building behind it is demolished and rebuilt. The wall stays as the public face of the finished project; everything structural behind it is new. Because the wall was never designed to stand on its own, a temporary retention system holds it until the new building ties in.",
+      },
+      {
+        question: "Who designs a façade retention system — and does it need a PE stamp?",
+        answer: "A licensed Professional Engineer designs the retention system: the frame, its connections to the wall, its foundations, and the demolition-stage stability checks. The design is stamped by a PE licensed in the project's state, and the stamped calculations and scheme drawings are what the building department and any preservation reviewer examine. Apex Grid Engineering provides exactly that design and stamp.",
+      },
+      {
+        question: "What does the engineer need from us to design the retention system?",
+        answer: "The existing drawings and survey if you have them, clear photographs of the wall, its openings, and its current condition, the project location and jurisdiction, and the demolition and new-frame programme. Apex works from client-provided drawings, surveys, photos, and records — we do not visit the site — so the package you send is what the design is built on.",
+      },
+      {
+        question: "Internal or external retention frame — how do we know which one our site needs?",
+        answer: "It turns on footprint and sequence. An external frame keeps the interior clear for demolition and new construction but occupies sidewalk or street and needs its own foundations clear of utilities. An internal frame suits a tight lot line but shares space with the new work. Wall height, condition, and any basement excavation behind the wall settle the choice, and the stamped scheme states it with its reasons.",
+      },
+      {
+        question: "Can a façade be retained while a basement is excavated behind it?",
+        answer: "Yes, and it is one of the conditions the design has to answer explicitly: digging behind or below a retained wall on shallow footings changes its support while it is at its most exposed. The retention design coordinates with the excavation and any underpinning shown in the package you provide, and stages the dig so the wall is braced at every stage.",
+      },
+      {
+        question: "How long does the façade retention design take?",
+        answer: "Apex works in days, not months: once the complete input package — drawings, survey, photographs, programme — is in hand, the retention design and stamped package move on the firm's standard turnaround rather than a months-long queue. Send the package to info@apexgrideng.com or call 480-490-0064 and the review starts from what you send.",
+      },
+      {
+        question: "What happens to the temporary retention once the new building is up?",
+        answer: "It comes out in stages, in the reverse logic of its installation: as each new floor and the permanent lateral system tie into the retained wall and take over its support, the corresponding part of the temporary system is released. The stamped design includes that strike sequence, so the wall is never left relying on a frame that has already been removed.",
+      },
+      {
+        question: "How do scanning and building models help a façade retention design?",
+        answer: "A laser scan or model supplied by your team gives the design an accurate record of the wall as it stands — its lean, its openings, its existing movement — which sharpens connection locations and monitoring baselines. The record improves the inputs; the design responsibility stays with the stamping engineer, and Apex works from the scan or model files your team provides.",
       },
     ],
     sections: [
       {
         heading: "The concise answer",
-        body: "Facade retention engineering designs a temporary steel retention frame tied to the historic wall, engineers the demolition sequence that exposes it, monitors wall movement throughout construction, and designs the permanent connection between the retained facade and the new building's floors and lateral system.\n\nThe retained facade is a structure, not scenery. From the moment demolition begins, that century-old masonry wall is a freestanding element in a construction zone, and it gets the full structural treatment: analysis, bracing design, monitoring, and a defined permanent condition.",
+        body: "Façade retention engineering designs a temporary steel retention frame tied to the historic wall, engineers the demolition sequence that exposes it, specifies monitoring of wall movement throughout construction, and designs the permanent connection between the retained façade and the new building's floors and lateral system.\n\nThe retained facade is a structure, not scenery. From the moment demolition begins, that century-old masonry wall is a freestanding element in a construction zone, and it gets the full structural treatment: analysis, bracing design, monitoring, and a defined permanent condition.",
       },
       {
         heading: "The retention system design",
-        body: "The retention frame is the primary engineered system — a steel structure designed specifically for the facade's geometry, height, and exposure. External frames are most common: they leave the interior clear for demolition and new construction, but they occupy the sidewalk or street, which means permits, protection of the public, and foundations that don't conflict with utilities. The frame analysis considers wind on the full exposed wall, construction loads, and the staged condition as demolition progressively removes the building's bracing contribution.\n\nThe facade-to-frame connections are the most delicate design work. Historic masonry has limited and variable capacity, so connections spread load across multiple wythes and multiple points — through-ties with bearing plates, needle beams through window openings, grouted anchors where the masonry condition allows. Every connection is a compromise between grip and preservation, and the details get reviewed with the preservation authorities.\n\nMonitoring runs throughout: survey points on the facade read regularly, with trigger levels that halt work if movement exceeds the engineered thresholds. I've stopped demolition on monitoring triggers twice in my career, and both times the wall was fine — but the monitoring is what let us know that with confidence rather than hope.",
+        body: "The retention frame is the primary engineered system — a steel structure designed specifically for the facade's geometry, height, and exposure. External frames are most common: they leave the interior clear for demolition and new construction, but they occupy the sidewalk or street, which means permits, protection of the public, and foundations that don't conflict with utilities. The frame analysis considers wind on the full exposed wall, construction loads, and the staged condition as demolition progressively removes the building's bracing contribution.\n\nThe facade-to-frame connections are the most delicate design work. Historic masonry has limited and variable capacity, so connections spread load across multiple wythes and multiple points — through-ties with bearing plates, needle beams through window openings, grouted anchors where the masonry condition allows. Every connection is a compromise between grip and preservation, and the details get reviewed with the preservation authorities.\n\nMonitoring is specified in the design: survey points on the façade, crack gauges where the wall is already distressed, a reading frequency, and trigger levels that halt work if movement exceeds the engineered thresholds. Apex specifies that monitoring in the stamped design; the readings themselves are taken, and acted on, by the project team on site — Apex performs no site visits and no construction observation.",
       },
       {
-        heading: "Facade retention checklist",
+        heading: "Façade retention checklist",
         body: "Treat the wall as a structure under construction from day one.\n\nThe monitoring triggers are as important as the steel.",
         bullets: [
           "Survey the facade's condition: masonry strength, existing distress, and capacity at connection points",
@@ -834,6 +866,39 @@ export const WAVE_AE_ANSWER_PAGES: Phase0AeoPage[] = [
           "Engineer the demolition sequence so the facade is never unbraced, even temporarily",
           "Establish monitoring with trigger levels, and design the permanent new-building-to-facade connections",
         ],
+      },
+      {
+        heading: "Who designs a façade retention scheme?",
+        body: "A licensed Professional Engineer designs the temporary works — not the scaffold supplier, not the demolition contractor, and not a set of standard details. The design covers the load cases of the exposed condition, starting with wind on a wall that has lost the building that braced it; the selection of the retention system; the connections between system and wall; the foundations or kentledge that carry the system; stability at every demolition stage; and the staged transfer of the wall to the new permanent frame. The finished design is stamped by a PE licensed in the project's state.\n\nThat is the service Apex Grid Engineering provides under the name facade retention engineering: design and PE stamping only. Apex does not erect steel, does not visit the site, and does not observe construction — the firm's engineers work from the drawings, surveys, and photographs the project team supplies, and the stamped package is the deliverable the team builds from.",
+      },
+      {
+        heading: "Retention systems compared: scaffold, proprietary props, fabricated steel",
+        body: "Three system families cover nearly every retained wall, and the choice among them is an engineering decision driven by the wall and the site — not by what a hire yard has in stock.\n\nTower schemes concentrate the restraint in one or two stiff towers tied back to the wall; frame schemes spread it along the wall's length in a continuous frame. Towers suit long walls and open ground; frames suit constrained frontages where the restraint has to thread between openings, party walls, and the street.",
+        bullets: [
+          "Scaffold tube and shores — restraint scaffolds, raking shores, flying shores, and dead shores: fast and adaptable for lower walls and shorter durations, with the wall's height and exposure setting the practical limit",
+          "Proprietary modular propping — engineered soldier and prop systems with known capacities and fast adjustment: strong where hire economics and programme flexibility matter",
+          "Fabricated steel — a bespoke frame designed for the wall's exact geometry: the usual answer for taller walls, longer durations, and tight footprints where a standard system cannot fit",
+          "Internal versus external placement — external frames clear the interior for demolition and new work but take street or sidewalk; internal frames protect the frontage but share space with the new structure",
+          "Selection drivers — wall height and condition, duration on site, available footprint, basement excavation behind the wall, and where ties can land on the wall",
+        ],
+      },
+      {
+        heading: "What the façade retention design must cover",
+        body: "A retention design is complete when every way the wall can get into trouble has a designed answer. The checklist below is the scope Apex designs and stamps against, working from the records the project team provides.",
+        bullets: [
+          "Existing condition from supplied records — wall construction and wythes, mortar condition, existing cracks, lean, openings, and lintels",
+          "Wind in the exposed condition — the freestanding wall checked under the building code as adopted by the project's jurisdiction",
+          "Staged demolition — the wall braced at every stage of the sequence, never left freestanding and unbraced between stages",
+          "Ties through existing openings wherever the wall allows — in preference to drilling historic fabric — with padded, load-spreading contact details",
+          "Kentledge and ground bearing — the restraint's own foundations checked so the cure cannot tilt or slide under load",
+          "Excavation behind the wall — basement digs and underpinning interaction evaluated from the provided drawings and geotechnical information",
+          "Monitoring specified in the design — survey targets, crack gauges, reading frequency, and trigger levels; the readings and site observation are by others, because Apex makes no site visits",
+          "Staged handover — the sequence by which the new frame picks the wall up and the temporary system is struck",
+        ],
+      },
+      {
+        heading: "What you send us — and what you get back",
+        body: "Send the project package: the existing drawings and survey, clear photographs of the wall and its openings, the project location and jurisdiction, the demolition and new-frame programme, and any geotechnical information if excavation runs behind the wall. Email it to info@apexgrideng.com or call 480-490-0064 to open the review.\n\nYou get back a written quote before work starts, then the stamped facade retention engineering package: retention scheme calculations, general arrangement drawings, connection details, foundation and kentledge design, erection and demolition sequence notes, and the monitoring specification. Apex Grid Engineering PLLC is a veteran-owned firm of licensed PEs working at the house standard — stamped design packages in days, not months — and the package is drawn so the building department and any preservation reviewer can check it without sending it back for its basis.",
       },
     ],
     extraLinks: [
