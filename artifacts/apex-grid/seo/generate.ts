@@ -4362,6 +4362,9 @@ ${state.slug === "missouri" && svc.slug === "mep-engineering" ? missouriMaconSta
 </div></section>
 
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? queenCreekDefenseSection("state-mep") : ""}
+${state.slug === "arizona" && svc.slug === "mep-engineering" ? prescottStateMepSection() : ""}
+${state.slug === "texas" && svc.slug === "mep-engineering" ? pearlandSupportSection("state") : ""}
+${state.slug === "texas" && svc.slug === "mep-engineering" ? fortWorthSupportSection("state") : ""}
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? scottsdaleDefenseSection("state-mep") : ""}
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? buckeyeCarrierSection() : ""}
 <section class="ctaband"><div class="container">
@@ -4845,6 +4848,7 @@ function queenCreekCarrierSection(): string {
         <h2>What an MEP Engineer Scopes in Queen Creek</h2>
         <p>An MEP scope in Queen Creek starts from the building stock: production subdivisions and custom homes across the town's growth corridors, retail and restaurant tenant improvements along Ellsworth Road and Queen Creek Road, multifamily and build-to-rent communities, school and civic facilities, and the agricultural and equestrian properties that still ring the town. The mechanical design is cooling-led — Queen Creek sits in Climate Zone 2B, so equipment selection turns on right-sized capacity with accurate high-ambient derating; the electrical design covers service sizing, distribution, lighting and controls, EV charging, and solar PV integration, often across the longer service runs the town's larger lots require; the plumbing design sizes water, waste, and gas to the use, with the same longer-run reality. The three disciplines are coordinated as one sealed set — the coordination an MEP engineer Queen Creek owners, builders, and architects rely on when a subdivision phase, a tenant space, or a civic building has to open on schedule.</p>
         <p>Permitting runs through the Town of Queen Creek Community Development Department, on the 2018 IBC with Town of Queen Creek amendments and the 2018 IECC. Apex Grid Engineering is an MEP engineering firm in Queen Creek — our office is at 22475 E Quintero Rd — so the local picture is the firm's working baseline: the Town's development services process, its amendment package, and its review sequencing are what the set is built against from the first load calculation. The same bench serves San Tan Valley immediately south, in Pinal County, where the building stock mirrors Queen Creek's and the permitting path runs through the county instead of the Town.</p>
+        <p>Shortlists for an MEP engineering firm Queen Creek owners can hold to one standard usually turn on the same evidence: a local office, a set built against the Town's own amendment package from the first load calculation, and one bench coordinating all three disciplines. As the MEP engineering firm Queen Creek subdivisions, retail corridors, and civic projects are permitted through, Apex Grid documents that standard on this page — and as an MEP engineering firm Queen Creek teams can reach in the same town, it answers plan-review comments from the office that sealed the set.</p>
       </div>
     </section>`;
 }
@@ -4853,6 +4857,121 @@ function queenCreekHubSection(): string {
   return `<section class="block"><div class="container">
   <h2>Queen Creek Is <em>Home Base</em></h2>
   <div class="prose"><p>Queen Creek is Apex Grid Engineering's home market — the firm's office is at 22475 E Quintero Rd — and the town's discipline pages carry the local detail its projects design to. <a href="${QC_MEP_CHILD_PATH}">MEP engineering in Queen Creek</a> sets out the mechanical, electrical, and plumbing scopes for the town's subdivisions, commercial corridors, and civic work, permitted through the Town of Queen Creek Community Development Department. For the structural side, the <a href="/locations/arizona/queen-creek/structural-engineering/">commercial structural engineer Queen Creek</a> page covers structural design for the same building stock — homes, retail, and light industrial across the town and into San Tan Valley.</p></div>
+</div></section>`;
+}
+
+
+/** Wave C (2026-11-27): Prescott state-MEP support — second exact inbound
+ *  anchor for "mep engineer prescott" (Wave C candidate, pos 20.3). The
+ *  Arizona state hub prose carries the first; the carrier section on the
+ *  Prescott hub already carries the phrase x3. Additions only. */
+function prescottStateMepSection(): string {
+  return `<section class="block"><div class="container">
+  <h2>High-Country <em>MEP Coverage</em></h2>
+  <div class="prose"><p>Arizona's MEP map is not only the Valley floor. The state's high country runs through Prescott — a mile of elevation, heating-led design, and freeze protection on every water line — where our <a href="/locations/arizona/prescott/">MEP engineer Prescott</a> page sets out the scopes for the historic downtown corridors, the regional medical campus, and the growth toward the airport and Prescott Valley, permitted through the City of Prescott under the IBC with local amendments.</p></div>
+</div></section>`;
+}
+
+/** Wave C (2026-11-27): Pearland inbound support for "mep engineer
+ *  pearland" (pos 14.7). The Pearland hub already carries the phrase x3
+ *  in pearlandMepSection; these are the first editorial exact anchors
+ *  into the hub, from the Texas state MEP page and the Houston hub.
+ *  Additions only, prose links only. */
+function pearlandSupportSection(variant: string): string {
+  if (variant === "houston") {
+    return `<section class="block"><div class="container">
+  <h2>The South Metro, <em>Same Bench</em></h2>
+  <div class="prose"><p>Houston project teams holding work on the metro's south side scope it from the same bench: our <a href="/locations/texas/pearland/">MEP engineer Pearland</a> page sets out the mechanical, electrical, and plumbing scopes for Pearland's clinics, schools, retail, and light industrial stock along the SH 288 corridor — hot-humid design conditions, COMcheck documentation, and the project-by-project code confirmation Texas work requires.</p></div>
+</div></section>`;
+  }
+  return `<section class="block"><div class="container">
+  <h2>Pearland, <em>South of Houston</em></h2>
+  <div class="prose"><p>South of Houston, Pearland has grown from a bedroom community into a market of its own — clinics, schools, retail and restaurant build-outs, and light industrial stock along the SH 288 corridor. Our <a href="/locations/texas/pearland/">MEP engineer Pearland</a> page carries the full picture for that market: the building stock, the Climate Zone 2A design basis, and the permitting confirmation each project runs through before design begins.</p></div>
+</div></section>`;
+}
+
+/** Wave C (2026-11-27): Lake Charles MEP carrier section for "mep
+ *  engineer lake charles la" (pos 8.6) — the query ranks on the city
+ *  hub while the MEP child carries only the generic template. This
+ *  section gives the child its own editorial carrier; support sections
+ *  below carry the exact anchors in. Additions only. */
+function lakeCharlesMepCarrierSection(): string {
+  return `<section class="section section--white">
+      <div class="container container--narrow">
+        <h2>MEP Engineering in Lake Charles, Scoped for the Industrial Corridor</h2>
+        <p>Lake Charles runs on process industry — the refineries and chemical plants along the Calcasieu Ship Channel, the Port of Lake Charles, and the contractor and fabrication yards that support them — backed by the hospitals, schools, and retail stock a growing parish seat carries. An MEP engineer Lake Charles LA owners and plant engineers can scope against one set designs the mechanical, electrical, and plumbing systems for that mix together: utilities and ventilation coordination for industrial buildings, full MEP design for clinics and classrooms, and coordinated tenant work for the commercial corridors.</p>
+        <p>The design basis is Gulf Coast: hot-humid Climate Zone 2A cooling and dehumidification loads, and wind design that has carried a different weight in Calcasieu Parish since Hurricane Laura — an MEP engineer Lake Charles LA project teams engage has to place and protect exterior equipment, generators, and intakes against the storm case, not just the operating case. Apex Grid Engineering designs to the Louisiana State Uniform Construction Code, with the adopted editions and the City of Lake Charles and Calcasieu Parish permitting path confirmed for the project address before design begins.</p>
+        <p>Each discipline is designed and, where professional sealing is required, reviewed and sealed under the responsible charge of an appropriately licensed professional engineer within that discipline — the standard an MEP engineer Lake Charles LA submittals are judged by at review: one coordinated set, calculations and schedules that agree, and documents a reviewer can clear without sending the disciplines back to be reconciled.</p>
+      </div>
+    </section>`;
+}
+
+function lakeCharlesSupportSection(variant: string): string {
+  if (variant === "baton-rouge") {
+    return `<section class="block"><div class="container">
+  <h2>West Along I-10, <em>Lake Charles</em></h2>
+  <div class="prose"><p>The industrial corridor does not stop at the capital: two hours west, Lake Charles carries the ship-channel plants and the Port of Lake Charles. Our <a href="/locations/louisiana/lake-charles/mep-engineering/">MEP engineer Lake Charles LA</a> page sets out the scopes for that market — process-adjacent industrial MEP, post-Laura wind design, and the City of Lake Charles and Calcasieu Parish review path each project confirms at kickoff.</p></div>
+</div></section>`;
+  }
+  return `<section class="block"><div class="container">
+  <h2>Lake Charles and the <em>Industrial Corridor</em></h2>
+  <div class="prose"><p>Southwest Louisiana's industrial weight sits in Lake Charles — the Calcasieu Ship Channel plants, the port, and the fabrication yards behind them. The systems scope for that stock is set out by our <a href="/locations/louisiana/lake-charles/mep-engineering/">MEP engineer Lake Charles LA</a> page: mechanical, electrical, and plumbing design for industrial, healthcare, and commercial buildings, on a Gulf Coast design basis that prices the storm case into every exterior system.</p></div>
+</div></section>`;
+}
+
+/** Wave C (2026-11-27): Nashville MEP carrier section — "mep design
+ *  nashville" (pos 13.0, phrase class) plus same-carrier siblings "mep
+ *  engineer nashville" and "mep engineering firm nashville". The child
+ *  carried only the generic template. Additions only. */
+function nashvilleMepCarrierSection(): string {
+  return `<section class="section section--white">
+      <div class="container container--narrow">
+        <h2>MEP Design in Nashville, Scoped as One Set</h2>
+        <p>Nashville's building stock is healthcare, hospitality, and multifamily at growth pace — the hospital and medical-office corridors, the downtown hotel and entertainment districts, and the apartment and mixed-use projects filling in around them. MEP design Nashville owners and architects scope first has to hold those programs to one coordinated set: mechanical, electrical, and plumbing designed together, with the documentation a Metro review can clear without a coordination cycle in the field.</p>
+        <p>Permitting runs through Metro Nashville's own department, on the city's adopted editions and amendment package — a local track distinct from the statewide State Fire Marshal baseline that applies where Tennessee local governments have not adopted their own code. An MEP design Nashville engagement confirms the governing editions for the project address at kickoff, then sequences load calculations, equipment selection, and energy-code documentation to that review. That is the working shape of MEP design Nashville project teams can plan against: one set, built to the editions the project will actually be reviewed under.</p>
+        <p>The same bench works as the MEP engineer Nashville medical and hospitality projects are sealed by, and the MEP engineering firm Nashville developers shortlist for repeat work — one office standard across the design, the calculations, and the sealed submittal. An MEP engineer Nashville teams can reach when a plan-review comment lands, and an MEP engineering firm Nashville owners can hold to one standard across a portfolio, are the same practice this page documents.</p>
+      </div>
+    </section>`;
+}
+
+function nashvilleSupportSection(variant: string): string {
+  if (variant === "memphis") {
+    return `<section class="block"><div class="container">
+  <h2>Middle Tennessee, <em>Same Standard</em></h2>
+  <div class="prose"><p>Memphis teams holding Middle Tennessee work scope it against the same standard: our <a href="/locations/tennessee/nashville/mep-engineering/">MEP design Nashville</a> page sets out the capital market's scopes, and the <a href="/locations/tennessee/nashville/mep-engineering/">MEP engineering firm Nashville</a> developers shortlist there is the same bench that seals West Tennessee work — one coordinated set, built to Metro Nashville's own adopted editions.</p></div>
+</div></section>`;
+  }
+  return `<section class="block"><div class="container">
+  <h2>Nashville, <em>the Capital Market</em></h2>
+  <div class="prose"><p>Tennessee's steadiest MEP demand sits in the capital: healthcare corridors, downtown hospitality, and multifamily at growth pace. Our <a href="/locations/tennessee/nashville/mep-engineering/">MEP design Nashville</a> page carries that market's full picture, and the <a href="/locations/tennessee/nashville/mep-engineering/">MEP engineer Nashville</a> projects are sealed by works to the Metro department's own editions and amendment package — confirmed for the project address before design begins.</p></div>
+</div></section>`;
+}
+
+/** Wave C (2026-11-27): Fort Worth MEP carrier section — "healthcare
+ *  mep engineering fort worth tx" (pos 14.8, phrase class) plus
+ *  same-carrier sibling "mep engineering firm fort worth" (pos 24.0).
+ *  The child carried only the generic template. Additions only. */
+function fortWorthMepCarrierSection(): string {
+  return `<section class="section section--white">
+      <div class="container container--narrow">
+        <h2>Healthcare MEP Engineering in Fort Worth, Scoped as One Set</h2>
+        <p>Fort Worth's steadiest MEP demand is healthcare — the Near Southside medical district's hospitals, clinics, and medical offices, and the outpatient and specialty facilities following the city's growth corridors. Healthcare MEP engineering Fort Worth TX scopes turn on systems that cannot drift apart: ventilation and medical-facility coordination, essential electrical systems, and plumbing designed to the facility's actual clinical program, documented as one sealed set — the deliverable healthcare MEP engineering Fort Worth TX submittals are judged by at review.</p>
+        <p>A healthcare MEP engineering Fort Worth TX engagement confirms the governing code editions and the City of Fort Worth permitting path for the project address before design begins — Texas carries no single mandatory statewide commercial edition, so the adopted requirements are established project by project. The design is then sequenced to that review: load calculations and equipment selections matched to the clinical fit-out, energy documentation carried with the set, and each discipline reviewed under the responsible charge of an appropriately licensed professional engineer.</p>
+        <p>That healthcare record sits inside a general practice: Apex Grid Engineering is the MEP engineering firm Fort Worth owners and architects scope for medical, office, retail, and multifamily work across Tarrant County — the MEP engineering firm Fort Worth project teams return to because the set arrives coordinated, and the MEP engineering firm Fort Worth reviewers can clear without sending the disciplines back to be reconciled.</p>
+      </div>
+    </section>`;
+}
+
+function fortWorthSupportSection(variant: string): string {
+  if (variant === "dallas") {
+    return `<section class="block"><div class="container">
+  <h2>Across the Metroplex, <em>Fort Worth</em></h2>
+  <div class="prose"><p>Dallas teams holding Tarrant County work scope the west side of the Metroplex from the same bench: the <a href="/locations/texas/fort-worth/mep-engineering/">healthcare MEP engineering Fort Worth TX</a> scopes run out of the Near Southside medical district, and the <a href="/locations/texas/fort-worth/mep-engineering/">MEP engineering firm Fort Worth</a> owners shortlist for office, retail, and multifamily work there is the practice this site documents — one coordinated set, with the City of Fort Worth's adopted editions confirmed per project.</p></div>
+</div></section>`;
+  }
+  return `<section class="block"><div class="container">
+  <h2>Fort Worth and the <em>Medical District</em></h2>
+  <div class="prose"><p>Tarrant County's MEP center of gravity is healthcare: the Near Southside medical district and the outpatient growth behind it. Our <a href="/locations/texas/fort-worth/mep-engineering/">healthcare MEP engineering Fort Worth TX</a> page sets out those scopes, and the wider practice — the <a href="/locations/texas/fort-worth/mep-engineering/">MEP engineering firm Fort Worth</a> project teams scope for medical, office, retail, and multifamily work — is documented on the same page.</p></div>
 </div></section>`;
 }
 
@@ -4903,14 +5022,25 @@ const SCOTTSDALE_ANCHOR_PAIRS: Record<string, readonly [string, string]> = {
   chandler: ["MEP engineer in Scottsdale", "MEP engineering company in Scottsdale"],
 };
 
+const SCOTTSDALE_WAVEC_ANCHORS: Record<string, string> = {
+  "": "MEP engineer Scottsdale",
+  "state-mep": "MEP engineering Scottsdale AZ",
+  phoenix: "MEP engineering Scottsdale AZ",
+  tempe: "MEP engineer Scottsdale",
+  gilbert: "MEP engineer Scottsdale",
+  chandler: "MEP engineering Scottsdale AZ",
+};
+
 function scottsdaleDefenseSection(currentSlug: string): string {
   const [a1, a2] = SCOTTSDALE_ANCHOR_PAIRS[currentSlug] ?? SCOTTSDALE_ANCHOR_PAIRS[""];
+  const a3 = SCOTTSDALE_WAVEC_ANCHORS[currentSlug] ?? SCOTTSDALE_WAVEC_ANCHORS[""];
   const link = (anchor: string) =>
     `<a href="${SCOTTSDALE_MEP_CHILD_PATH}">${anchor}</a>`;
   return `<section class="block"><div class="container">
   <h2>Scottsdale <em>MEP Coverage</em></h2>
   <div class="prose"><p>Scottsdale is the East Valley's hospitality and medical market — resort and hotel renovations around Old Town and the resort corridor, medical office build-outs in the Scottsdale Health Care District, and the retail and restaurant centers at Kierland and Scottsdale Quarter — and its MEP scopes carry the city's high-ambient design conditions into every one of those building types. Our ${link(a1)} practice covers that stock directly: cooling-led mechanical design with monsoon-season filtration, electrical service and distribution sized to the use, and plumbing systems — pool and spa work included — coordinated as one sealed set.</p>
-  <p>Scottsdale permitting runs through the City of Scottsdale Development Services Department, on the 2021 IBC with Scottsdale amendments and the 2021 IECC with Scottsdale amendments — a review track of its own inside the metro, with its own amendment package and energy-code path. The adopted editions, local amendments, and project types an ${link(a2)} scope designs to are set out on the Scottsdale page.</p></div>
+  <p>Scottsdale permitting runs through the City of Scottsdale Development Services Department, on the 2021 IBC with Scottsdale amendments and the 2021 IECC with Scottsdale amendments — a review track of its own inside the metro, with its own amendment package and energy-code path. The adopted editions, local amendments, and project types an ${link(a2)} scope designs to are set out on the Scottsdale page.</p>
+  <p>Teams holding a project anywhere in the East Valley can measure that same standard through our ${link(a3)} practice — one bench, one sealed set, and the City of Scottsdale's own review track documented before design begins.</p></div>
 </div></section>`;
 }
 
@@ -4935,6 +5065,7 @@ function scottsdaleExactPhraseSection(): string {
         <h2>The MEP Engineer Scottsdale Teams Scope Against</h2>
         <p>Read as a buyer reads it, the question behind most Scottsdale searches is which firm actually works this market. Apex Grid Engineering is the MEP engineering company Scottsdale owners, architects, and tenants scope first when a resort renovation, a medical suite in the Health Care District, or a restaurant space in Kierland or Scottsdale Quarter has to open on schedule — and it works to the standard of an MEP engineering firm Scottsdale reviewers respect: one sealed set, all three disciplines reconciled before submittal. The design basis is the desert one this page documents — cooling-led mechanical selection derated for sustained high-ambient operation in Climate Zone 2B, electrical service and distribution sized with APS coordination, and plumbing, including the pool and spa systems standard in the luxury residential stock, carried in the same set an MEP engineer Scottsdale contractors can build from without a coordination cycle in the field.</p>
         <p>The permitting half is just as specific, and it is where an MEP engineering firm Scottsdale reviewers will check earns its fee: submittals run through the City of Scottsdale Development Services Department on the 2021 IBC with Scottsdale amendments and the 2021 IECC with Scottsdale amendments, and the set is built to those editions from the first load calculation. The same bench works as the MEP engineering firm Queen Creek clients on the metro's southeast side use — and an MEP engineering firm Scottsdale owners can hold to one standard is, in practice, the MEP engineering firm Queen Creek and Scottsdale project teams share when a portfolio crosses the East Valley: one office in the same metro, one standard on both sides of it. Scoped that way, an MEP engineering company Scottsdale teams can rely on is not a directory claim: it is the MEP engineering company Scottsdale sets are actually permitted under — priced cleanly, sealed once, and readable when the installer opens it in the field. That is the record the MEP engineer Scottsdale market keeps coming back to, and it is documented, scope by scope, in the sections above.</p>
+        <p>That record is why the MEP engineer Scottsdale owners shortlist first is the one whose sets clear review without a coordination cycle in the field — the standard documented, scope by scope, in the sections above.</p>
       </div>
     </section>`;
 }
@@ -6797,6 +6928,8 @@ ${state.slug === "georgia" ? mariettaDefenseSection("") : ""}
 ${state.slug === "arizona" ? mesaDefenseSection("") : ""}
 ${state.slug === "arizona" ? maricopaDefenseSection("") : ""}
 ${state.slug === "arizona" ? queenCreekDefenseSection("") : ""}
+${state.slug === "louisiana" ? lakeCharlesSupportSection("state") : ""}
+${state.slug === "tennessee" ? nashvilleSupportSection("state") : ""}
 ${state.slug === "arizona" ? arizonaCrownJewelHubSection() : ""}
 ${state.slug === "arizona" ? scottsdaleDefenseSection("") : ""}
 ${state.slug === "colorado" ? broomfieldDefenseSection("") : ""}
@@ -7139,6 +7272,10 @@ ${state.slug === "north-dakota" && city.slug === "bismarck" ? bismarckMepSection
 ${state.slug === "connecticut" && city.slug === "hartford" ? hartfordMepSection() : ""}
 ${state.slug === "missouri" && city.slug === "macon" ? maconEngineerSection() : ""}
 ${state.slug === "texas" && city.slug === "pearland" ? pearlandMepSection() : ""}
+${state.slug === "texas" && city.slug === "houston" ? pearlandSupportSection("houston") : ""}
+${state.slug === "texas" && city.slug === "dallas" ? fortWorthSupportSection("dallas") : ""}
+${state.slug === "louisiana" && city.slug === "baton-rouge" ? lakeCharlesSupportSection("baton-rouge") : ""}
+${state.slug === "tennessee" && city.slug === "memphis" ? nashvilleSupportSection("memphis") : ""}
 ${state.slug === "iowa" && CARROLL_DEFENSE_SOURCE_SLUGS.has(city.slug) ? carrollDefenseSection(city.slug) : ""}
 ${state.slug === "kentucky" && city.slug === "kenton-vale" ? kentonValeCarrierSection() : ""}
 ${state.slug === "kentucky" && KENTON_VALE_DEFENSE_SOURCE_SLUGS.has(city.slug) ? kentonValeDefenseSection(city.slug) : ""}
@@ -8878,6 +9015,9 @@ function locationServicePage(page: LocationServicePage, city?: CityData): string
     </section>
 
     ${page.stateSlug === "arizona" && page.citySlug === "queen-creek" && page.serviceSlug === "mep-engineering" ? queenCreekCarrierSection() : ""}
+    ${page.stateSlug === "louisiana" && page.citySlug === "lake-charles" && page.serviceSlug === "mep-engineering" ? lakeCharlesMepCarrierSection() : ""}
+    ${page.stateSlug === "tennessee" && page.citySlug === "nashville" && page.serviceSlug === "mep-engineering" ? nashvilleMepCarrierSection() : ""}
+    ${page.stateSlug === "texas" && page.citySlug === "fort-worth" && page.serviceSlug === "mep-engineering" ? fortWorthMepCarrierSection() : ""}
     ${guard1409LocSvcSection(page)}
     ${mckinneyCarrierLocSvcSection(page)}
     ${arlingtonBatchSection(page)}
