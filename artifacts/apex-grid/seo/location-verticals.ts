@@ -293,6 +293,13 @@ const CITY_VERTICAL_DEEP_DIVES: Record<string, string> = {
     <p>Choosing an architect Rowlett Texas owners can hold to one standard \u2014 a permit set that clears the City of Rowlett and Dallas County in one coordinated pass \u2014 is the decision this page exists to support. The architect Rowlett Texas projects are bought against is the one who designs with the soils report, the wind exposure, and the review calendar open at the same time: architecture, structural, and MEP in one model, sealed construction documents that answer the reviewer before the comment letter is written. That is the working definition of an architect Rowlett Texas teams scope against here \u2014 lake, clay, and county handled inside the design, not discovered after it.</p>
   </div>
 </div></section>`,
+  "architecture/florida/vero-beach": `
+<section class="block"><div class="container">
+  <h2>Sebastian &amp; <em>the Northern County</em></h2>
+  <div class="prose">
+    <p>Vero Beach's commercial work runs county-wide in practice: owners and tenants with space on both sides of the Indian River County map draw on the same design team, and the northern county's lagoon-front scopes are documented in our <a href="/architecture/locations/florida/sebastian/">architecture services Sebastian FL</a> page \u2014 one coordinated pattern of architectural, structural, MEP, civil, and energy-code documents, confirmed against the permitting jurisdiction before submittal.</p>
+  </div>
+</div></section>`,
 };
 
 export function verticalCityPage(
@@ -465,6 +472,10 @@ ${breadcrumb(crumbs)}
     )
     .join("")}</div>
 </div></section>
+${vertical.slug === "architecture" && state.slug === "florida" ? `<section class="block"><div class="container">
+  <h2>The Treasure Coast &amp; <em>Indian River County</em></h2>
+  <div class="prose"><p>Florida's Atlantic side splits its commercial work between the Treasure Coast's growth corridors and the established coastal towns, and Indian River County is where the two meet: medical and professional offices along the US-1 corridor, retail and restaurant build-outs, marina and hospitality projects near the riverfront, and the renovations that keep older coastal stock in service. The lagoon-front city at the county's north end is documented on our page for <a href="/architecture/locations/florida/sebastian/">architecture services Sebastian FL</a> projects \u2014 the Florida Building Code picture, the coastal wind and flood-zone conditions, and the City of Sebastian and Indian River County review tracks a permit set has to satisfy there.</p></div>
+</div></section>` : ""}
 <section class="ctaband"><div class="container">
   <h2>Start a ${esc(state.name)} Project</h2>
   <p>Send the location and scope. Apex Grid will confirm service fit, jurisdictional requirements, schedule, and fee.</p>
