@@ -3753,6 +3753,15 @@ const METRO_SERVICE_EXTRA_SECTIONS: Record<string, string> = {
   "charlotte-concord-gastonia-nc-sc/mep-engineering": `<section class="block"><div class="container"><h2>The structural half of a <em>Charlotte</em> permit set</h2><div class="prose"><p>MEP documents and structural documents permit as one set: the rooftop unit lands on a frame, the electrical room hangs off a slab, and the reviewer checks the two halves against each other. The structural side of that set — load path, foundations, equipment support, and the details behind them — is set out on the companion guide for a <a href="/metros/charlotte-concord-gastonia-nc-sc/structural-engineering/">structural engineer for permit in Charlotte</a>, which also lays out the intake evidence the structural review starts from. Project teams scoping both halves use the two guides together: this page for the mechanical, electrical, and plumbing scope, and <a href="/metros/charlotte-concord-gastonia-nc-sc/structural-engineering/">Charlotte structural engineering</a> for the frame that carries it.</p></div></div></section>`
 };
 
+/** State-service extra sections (Wave D gen 8): keyed exactly
+ *  "<stateSlug>/<serviceSlug>", rendered by servicePage() only on the
+ *  one state service page named — the state narratives above are shared
+ *  by every service page in a state, so city-specific prose for a state
+ *  carrier lives here, never in the shared state record. */
+const STATE_SERVICE_EXTRA_SECTIONS: Record<string, string> = {
+  "oklahoma/mep-engineering": `<section class="block"><div class="container"><h2>One MEP set for <em>Oklahoma City</em> permits</h2><div class="prose"><p>Most Oklahoma City commercial projects do not need three separate firms — they need one MEP engineer Oklahoma City reviewers can read as a single coordinated set: mechanical, electrical, and plumbing designed together, load calculations that match the equipment schedules, and sheets that agree with each other at every revision.</p><p>Permits run through the City of Oklahoma City Development Services Department, under state codes adopted through the Oklahoma Uniform Building Code Commission. An MEP engineer Oklahoma City owners engage early designs to that review path from the first calculation — ventilation and pressure relationships for the healthcare stock, process and standby loads for the industrial corridors, and electric service coordination with Oklahoma Gas and Electric settled before the set is sealed.</p><p>That is the standard this page's Oklahoma scope is worked to: when an MEP engineer Oklahoma City project teams hire scopes the whole set under one roof, the set prices cleanly, permits in a single pass, and still reads correctly when the installer opens it in the field.</p></div></div></section>`,
+};
+
 function phase1MetroServicePage(metro: Phase1Metro, service: Phase1ServiceSlug): string {
   const url = `/metros/${metro.slug}/${service}/`;
   const label = phase1ServiceLabels[service];
@@ -4339,6 +4348,7 @@ ${peStampBlock({
   <div style="margin-top:20px" class="card"><div class="label">Market Context</div><p>${esc(state.marketNotes)}</p><p style="margin-top:10px">Key markets: ${esc(state.metros.join(", "))}.</p></div>
 </div></section>
 
+${STATE_SERVICE_EXTRA_SECTIONS[`${state.slug}/${svc.slug}`] ?? ""}
 ${state.slug === "arizona" && svc.slug === "mep-engineering" ? maricopaCarrierSection() : ""}
 ${state.slug === "north-dakota" && svc.slug === "mep-engineering" ? bismarckCarrierSection() : ""}
 ${state.slug === "north-dakota" && svc.slug === "mep-engineering" ? bismarckCompanyTopUpSection() : ""}
