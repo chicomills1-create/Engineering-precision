@@ -10583,6 +10583,7 @@ ${expansion.stateSlug === "illinois" ? northbrookDefenseSection("") : ""}
 ${expansion.stateSlug === "south-dakota" ? brookingsHubDefenseSection("") : ""}
 ${expansion.stateSlug === "new-mexico" ? roswellDefenseSection("") : ""}
 ${expansion.stateSlug === "montana" ? billingsStateHubSection() : ""}
+${expansion.stateSlug === "louisiana" ? lakeCharlesSupportSection("state") : ""}
 <section class="block"><div class="container"><h2>Five researched <em>local services</em></h2><p class="prose">Each linked service is organized around the selected metro’s permit authority, code context, local physical conditions, typical project types, permit steps, official references, and responsible-professional boundaries. These pages are information resources, not local-office claims or guarantees of licensure, approval, schedule, or construction outcome.</p><div class="linkrow">${serviceLinks}</div></div></section>
 <section class="block"><div class="container"><h2>${esc(expansion.stateName)} <em>metros and services</em></h2><div class="grid2">${metroLinks}</div></div></section>
 <section class="block"><div class="container"><h2>Established ${esc(expansion.stateName)} <em>city guides</em></h2><div class="linkrow">${establishedCityLinks}</div></div></section>
@@ -15685,6 +15686,9 @@ ${state.slug === "texas" && PROSPER_DEFENSE_SOURCE_SLUGS.has(city.slug) ? prospe
 ${state.slug === "texas" && MCKINNEY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? mckinneyDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && ROCKWALL_DEFENSE_SOURCE_SLUGS.has(city.slug) ? rockwallDefenseSection(city.slug) : ""}
 ${state.slug === "texas" && city.slug === "dallas" ? dallasHubSection() : ""}
+${state.slug === "texas" && city.slug === "houston" ? pearlandSupportSection("houston") : ""}
+${state.slug === "texas" && city.slug === "dallas" ? fortWorthSupportSection("dallas") : ""}
+${state.slug === "louisiana" && city.slug === "baton-rouge" ? lakeCharlesSupportSection("baton-rouge") : ""}
 ${state.slug === "south-carolina" && city.slug === "rock-hill" ? rockHillHubSupportSection() : ""}
 ${state.slug === "iowa" && city.slug === "sioux-city" ? siouxCityCarrollSupportSection() : ""}
 ${state.slug === "north-dakota" && BISMARCK_CITY_DEFENSE_SOURCE_SLUGS.has(city.slug) ? bismarckCityDefenseSection(city.slug) : ""}
