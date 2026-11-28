@@ -87,7 +87,7 @@ export const SOUTH_AFRICA_BLOG_POSTS: BlogPost[] = [
     tag: "South Africa",
     minutes: 7,
     html: `
-<p>Energy performance is a whole-building coordination problem. In South Africa, commercial design teams commonly need to consider the energy-use provisions associated with the National Building Regulations and SANS 10400-XA, together with referenced standards and current local submission expectations. A successful approach connects the envelope, glazing, mechanical systems, lighting, controls, hot water, metering, and operating profile.</p>
+<p>Energy performance is a whole-building coordination problem. In South Africa, commercial design teams commonly need to consider the energy-use provisions associated with the National Building Regulations and SANS 10400-XA, together with referenced standards and current local submission expectations. A successful approach connects the envelope, glazing, mechanical systems, lighting, controls, hot water, metering, and operating profile. That coordination is the subject of this guide: how a South Africa building energy compliance glazing shading standards review ties the envelope, glazing, and shading decisions to the SANS 10400-XA route before the set is submitted.</p>
 <h2>Start with climate and use</h2>
 <p>A prototype should not carry one envelope and HVAC assumption across Johannesburg, Cape Town, Durban, Gqeberha, and Pretoria without analysis. Temperature, humidity, solar exposure, wind, elevation, operating hours, internal loads, and occupancy patterns affect the appropriate solution. The basis-of-design should state the climate data and operating assumptions used.</p>
 <h2>Coordinate envelope and systems</h2>
