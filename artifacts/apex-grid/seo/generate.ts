@@ -1327,10 +1327,9 @@ const PHASE7_COMMON_FAQ = {
 
 function phase7Faqs(page: Phase7AeoSeed): Array<{ question: string; answer: string }> {
   return [
-    { question: `What is the short answer about ${page.topic.toLowerCase()}?`, answer: page.answer },
     {
       question: `What does ${page.topic.toLowerCase()} depend on?`,
-      answer: `The answer depends on the project scope, governing jurisdiction, current records, design inputs, and the responsible professional's independent review. ${page.answer}`,
+      answer: `The answer depends on the project scope, governing jurisdiction, current records, design inputs, and the responsible professional's independent review.`,
     },
     PHASE7_COMMON_FAQ,
     {
@@ -1393,10 +1392,18 @@ function assertPhase7Corpus(): void {
  * schema. The rule is deliberately narrow: it drops only the literal
  * placeholder pair (and empty pairs); it never judges substantive content. */
 function substantiveFaqs(faqs: Array<{ question: string; answer: string }>): Array<{ question: string; answer: string }> {
+  const seenAnswers = new Set<string>();
   return faqs.filter((faq) => {
     const q = faq.question.trim().toLowerCase();
     const a = faq.answer.trim().toLowerCase();
-    return q !== "" && a !== "" && !(q === "question" && a === "answer");
+    if (q === "" || a === "" || (q === "question" && a === "answer")) return false;
+    // Intra-list dedupe (AEO answers-estate cure, 2026-11-27): an FAQ whose
+    // normalized answer repeats an earlier FAQ's answer in the same list
+    // renders the same text twice on one page; keep the first occurrence.
+    const key = a.replace(/\s+/g, " ");
+    if (seenAnswers.has(key)) return false;
+    seenAnswers.add(key);
+    return true;
   });
 }
 
@@ -1549,8 +1556,8 @@ function phase0ArticleFrame(
   } : undefined;
   const hero = opts.directAnswer
     ? `<section class="hero"><div class="container"><p class="kicker">${esc(opts.kicker)}</p><h1>${esc(opts.h1)}</h1>
-      <p class="note">${byline} · Updated ${PHASE0_UPDATED_DATE}</p>
       <div class="direct-answer" aria-label="Direct answer"><p>${esc(opts.directAnswer)}</p></div>
+      <p class="note">${byline} · Updated ${PHASE0_UPDATED_DATE}</p>
       ${opts.founderNote ? `<p class="founder-note">${esc(opts.founderNote)}</p>` : ""}
     </div></section>`
     : `<section class="hero"><div class="container"><p class="kicker">${esc(opts.kicker)}</p><h1>${esc(opts.h1)}</h1><p class="lede">${esc(opts.answer)}</p>
@@ -1613,6 +1620,8 @@ const ANSWER_EXTRA_SECTIONS: Record<string, string> = {
   "grain-elevator-design": `<section class="block"><div class="container"><h2>The weigh scale: the elevator's <em>metering point</em></h2><div class="prose"><p>Every bushel this facility receives or ships crosses one instrument: the truck scale at its gate. Inbound loads are probed, weighed, dumped, and weighed out; outbound loads are settled on the same platform — which makes the scale's foundations, approaches, and traffic layout part of the elevator's structure, and its indicator and ticketing system part of the facility's books. How that scale is selected, founded, and tied into the receiving line and the scale house is worked through in our answer on <a href="/answers/grain-weigh-scale-design/">grain weigh scale design</a>. The integration layer above the platform — traffic, data, and certification worked as one scope — is its own answer: <a href="/answers/grain-weigh-scale-design/">truck scale integration for grain elevators</a>.</p></div></div></section>`,
   "grain-terminal-design": `<section class="block"><div class="container"><h2>Weighing at the terminal: <em>trucks in, rail out</em></h2><div class="prose"><p>A surge terminal lives on throughput accounting: every truck that dumps and every railcar that loads has to be weighed accurately enough to settle against, at the pace the surge demands. That is the same discipline as truck scale integration for grain elevators — platform and rail scales founded to hold calibration, lanes sequenced probe, weigh, dump, and ticketing data feeding inventory — scaled to terminal volumes and worked through in our answer on <a href="/answers/grain-weigh-scale-design/">grain weigh scale design for truck and rail</a>. The elevator-side scope behind it — platform, approaches, and settlement data engineered as one metering point — is <a href="/answers/grain-weigh-scale-design/">truck scale integration for grain elevators</a>.</p></div></div></section>`,
   "marine-cargo-terminal-design": `<section class="block"><div class="container"><h2>Marine terminal fabrication: <em>the steel between the drawings and the berth</em></h2><div class="prose"><p>Design decides what a terminal is; marine terminal fabrication decides whether it gets built as drawn. The fabricated scope of a cargo terminal is the engineered steel the operation runs on: ship-loader and conveyor-gallery structures, transfer towers, berth and mooring hardware, catwalks and access platforms, and the pipe and utility racks that cross the wharf. Each assembly is fabricated in the shop from the sealed design drawings, and the shop drawings that translate those designs into cut lengths, welds, and bolted connections are reviewed as part of the engineering scope — an error caught at the shop-drawing stage costs hours; the same error caught at erection costs weeks.</p><p><strong>Fit and tolerance.</strong> Marine structures are erected over water, often against existing wharf and dolphin structures that have settled, shifted, or corroded since they were surveyed. Fabrication tolerances are set for that reality: field-verified dimensions before steel is cut, slotted and adjustable connections where the existing structure cannot be trusted to the drawing, and splice points located where a crane on a barge can actually make the lift.</p><p><strong>Materials and protection.</strong> Terminal steel lives in the splash zone and the marine atmosphere, the most corrosive environment in structural practice. Fabrication specification covers steel grade and toughness for the service temperature, welding to AWS D1.1 with procedures qualified for the joint types the design uses, and coating systems — surface preparation, galvanizing or metallizing where specified, and multi-coat marine paint systems — applied in the shop where they can be inspected, not over water where they cannot.</p><p><strong>Modules and delivery.</strong> Where the berth allows it, assemblies are fabricated as modules — gallery sections, tower frames, platform units — trial-fitted in the shop and delivered by barge for a short erection window inside terminal operations. That sequencing is an engineering decision made with the fabricator, and it is why the fabrication scope belongs in the design set from the start rather than after it.</p></div></div></section>`,
+  "curtain-wall-facade-structural-design": `<section class="block"><div class="container"><h2>When the curtain wall stays and the building <em>behind it goes</em></h2><div class="prose"><p>A curtain-wall project on an existing tower often turns into a retention problem: the street wall has to stand on its own while the structure behind it is demolished and rebuilt. That scope — the survey of the wall as it stands, the temporary frame that holds it, and the monitoring that proves it has not moved — is <a href="/answers/facade-retention-engineering/">facade retention engineering</a>, worked through on our dedicated answer page, where the retention frame, the demolition sequence, and the permanent condition are set out as one sealed scope.</p></div></div></section>`,
+  "facade-access-davits-engineering": `<section class="block"><div class="container"><h2>Davits on a wall that is being <em>retained</em></h2><div class="prose"><p>Facade access planning changes when the wall itself is the preserved element: davit bases, tie-back anchors, and rigging loads have to land on a wall that a temporary frame is holding while the building behind it is rebuilt. The retention side of that problem is <a href="/answers/facade-retention-engineering/">facade retention engineering</a> — the survey, the retention frame, and the monitoring regime that keeps the historic wall standing through demolition and reconstruction, set out on our dedicated answer page.</p></div></div></section>`,
   "cocktail-bar-plumbing-design": `<section class="block"><div class="container"><h2>Where the cocktail bar meets the <em>roof</em></h2><div class="prose"><p>A cocktail bar at grade draws its pressure from the street; the same bar on a roof has to manufacture it. How that supply is built — booster sizing, pressure zones, backflow protection, and the residual pressure held at the highest fixture — is worked through in our answer on the <a href="/answers/rooftop-bar-plumbing-design/">pressure bar roof system</a> that serves a rooftop bar.</p></div></div></section>`,
   "rooftop-bar-design": `<section class="block"><div class="container"><h2>The MEP run to the <em>roof</em></h2><div class="prose"><p>Routing MEP to the roof is this page's structural and waterproofing problem; keeping water pressure alive once it gets there is the plumbing problem. The booster, zone, and backflow design that holds pressure at the top-floor fixtures is set out in our answer on the <a href="/answers/rooftop-bar-plumbing-design/">pressure bar roof system</a> behind every rooftop bar.</p></div></div></section>`,
   "port-arthur-marine-terminal-design": `<section class="block"><div class="container"><h2>Fabrication at the berth: <em>where this terminal gets built</em></h2><div class="prose"><p>A terminal design at Port Arthur is only as buildable as its fabricated steel: the loader and gallery structures, berth hardware, and access steel are shop-fabricated from the sealed drawings and erected over water against existing structures. How that scope is specified — tolerances for field-verified fit, AWS D1.1 welding, and coating systems for the splash zone — is worked through in our answer on <a href="/answers/marine-cargo-terminal-design/">marine terminal fabrication</a>.</p></div></div></section>`,
@@ -1659,7 +1668,7 @@ function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
   // The hero renders page.answer verbatim (as the lede, or as the direct
   // answer when the two are identical), so the default first section must
   // not repeat it word for word.
-  const heroText = "cluster" in page ? page.answer : (page.directAnswer ?? page.answer);
+  const heroText = page.answer;
   const sections = !customSections?.length
     ? [
       ...(heroText === page.answer ? [] : [{ heading: "The concise answer", body: page.answer }]),
@@ -1681,7 +1690,7 @@ function phase0AeoPage(page: Phase0AeoPage | Phase7AeoSeed): string {
     author: PHASE0_JEREMY_AUTHOR,
     founderNote: "cluster" in page ? undefined : page.founderNote,
     marker: "cluster" in page ? "phase7" : undefined,
-    directAnswer: "cluster" in page ? undefined : page.directAnswer,
+    directAnswer: "cluster" in page ? undefined : (page.directAnswer ? page.answer : undefined),
     suppressEmptyFaq: true,
     facts: "cluster" in page ? undefined : page.facts,
     howTo: "cluster" in page ? undefined : page.howTo,
@@ -10026,6 +10035,7 @@ function htmlSitemapPage(): string {
             <h2>Resources</h2>
             <ul>
               <li><a href="/resources/">Engineering Resources</a></li>
+              <li><a href="/answers/">Engineering Library - Answers</a></li>
               <li><a href="/blog/">Blog</a></li>
               <li><a href="/guides/">Engineering Guides</a></li>
               <li><a href="/engineering-glossary/">Engineering Glossary</a></li>
@@ -10066,6 +10076,13 @@ function htmlSitemapPage(): string {
           </div>
         </div>
       </div>
+    </section>
+    <section class="section section--white">
+      <div class="container">
+        <h2>Engineering Library - Answers</h2>
+        <p class="lede">Every answer in the Apex Engineering Library, listed A-Z. Start at the <a href="/answers/">Engineering Library</a> front door, or jump straight to an entry below.</p>
+        <ul>${libraryCatalogEntries().map((entry) => `<li><a href="${esc(entry.href)}">${esc(entry.name)}</a></li>`).join("")}</ul>
+      </div>
     </section>`;
   const schema = { "@context": "https://schema.org", "@type": "WebPage", "name": "Site Map | Apex Grid Engineering", "url": `${SITE}${url}`, "publisher": { "@type": "Organization", "name": "Apex Grid Engineering", "url": SITE } };
   return htmlShell({ title: "Site Map | Apex Grid Engineering", description: "Complete index of Apex Grid Engineering pages — engineering services, industries, locations, resources, and company information.", canonical: `${SITE}${url}`, schemaJson: [schema], body });
@@ -10094,6 +10111,13 @@ function disciplineHubPage(hub: DisciplineHub): string {
   const structuralSupport = hub.slug === "structural-engineering"
     ? `<section class="section section--light"><div class="container container--narrow">
         <p>Explore <a href="/">Apex Grid Engineering's structural solutions</a> — and the coordinated MEP and civil teams behind them — from the firm's homepage.</p>
+      </div></section>`
+    : "";
+
+  const structuralFacade = hub.slug === "structural-engineering"
+    ? `<section class="section section--light"><div class="container container--narrow">
+        <h2>Keeping a Historic Facade <em>Standing</em></h2>
+        <p>Some structural projects keep the street wall and replace everything behind it. Our <a href="/answers/facade-retention-engineering/">facade retention engineering</a> answer sets out that scope: the survey of the wall as it stands, the temporary retention frame designed for its geometry and exposure, monitoring through demolition, and the permanent condition where the new structure takes the wall back.</p>
       </div></section>`
     : "";
 
@@ -10139,6 +10163,7 @@ function disciplineHubPage(hub: DisciplineHub): string {
 ${extendedStructuralCards}
 ${structuralSupport}
 ${structuralChurches}
+${structuralFacade}
 
     ${residualsFaqSection(hub.faqs)}
 
